@@ -1,5 +1,3 @@
-import Footer from "../../layout/Footer";
-import Gnb from "../../layout/Gnb";
 import Cta from "../../sections/Cta";
 import ClientSection from "../../sections/ClientSection";
 import ContentListSection from "../../sections/ContentListSection";
@@ -41,6 +39,7 @@ type NewsItem = {
 
 type ContentListItem = {
   category: string;
+  href: string;
   imageSrc: string;
   title: string;
 };
@@ -51,12 +50,9 @@ export type HomePageProps = {
   contentListItems: ContentListItem[];
   contentListLinks: string[];
   contentListTitle: string;
-  ctaActionLabel: string;
   ctaDescription: string;
   ctaEyebrow: string;
   ctaTitle: string;
-  footerLegalLinks: string[];
-  footerSections: FooterSection[];
   featureItems: FeatureItem[];
   heroHeadingMuted: string;
   heroHeadingPrimary: string;
@@ -64,7 +60,6 @@ export type HomePageProps = {
   mcpDescription: string[];
   mcpItems: McpItem[];
   mcpTitle: string;
-  navItems: string[];
   newsItems: NewsItem[];
   newsTitle: string;
   reviewItems: ReviewItem[];
@@ -77,12 +72,9 @@ export default function HomePage({
   contentListItems,
   contentListLinks,
   contentListTitle,
-  ctaActionLabel,
   ctaDescription,
   ctaEyebrow,
   ctaTitle,
-  footerLegalLinks,
-  footerSections,
   featureItems,
   heroHeadingMuted,
   heroHeadingPrimary,
@@ -90,42 +82,52 @@ export default function HomePage({
   mcpDescription,
   mcpItems,
   mcpTitle,
-  navItems,
   newsItems,
   newsTitle,
   reviewItems,
   reviewTitle,
 }: HomePageProps) {
   return (
-    <main className="flex min-h-screen flex-col gap-[120px] bg-bg pt-[120px] text-fg">
-      <Gnb actionLabel={ctaActionLabel} items={navItems} />
-      <Hero
-        headingMuted={heroHeadingMuted}
-        headingPrimary={heroHeadingPrimary}
-        promptRotatingTexts={heroPromptRotatingTexts}
-      />
-      <ClientSection caption={clientCaption} />
-      <FeatureSection items={featureItems} />
-      <McpSection
-        description={mcpDescription}
-        items={mcpItems}
-        title={mcpTitle}
-      />
-      <ReviewSection items={reviewItems} title={reviewTitle} />
-      <ContentListSection
-        description={contentListDescription}
-        items={contentListItems}
-        links={contentListLinks}
-        title={contentListTitle}
-      />
-      <NewsListSection items={newsItems} title={newsTitle} />
-      <Cta
-        actionLabel={ctaActionLabel}
-        description={ctaDescription}
-        eyebrow={ctaEyebrow}
-        title={ctaTitle}
-      />
-      <Footer legalLinks={footerLegalLinks} sections={footerSections} />
-    </main>
+    <div className="flex flex-col gap-16 overflow-x-hidden px-5 pb-10 text-fg md:gap-[120px] md:px-10">
+        <Hero
+          headingMuted={heroHeadingMuted}
+          headingPrimary={heroHeadingPrimary}
+          promptRotatingTexts={heroPromptRotatingTexts}
+        />
+        {/* 고객사 로고 영역 */}
+        <div data-reveal><ClientSection caption={clientCaption} /></div>
+        {/* 기능 소개 섹션 */}
+        <div data-reveal><FeatureSection items={featureItems} /></div>
+        {/* MCP 호환/지원 섹션 */}
+        <div data-reveal>
+          <McpSection
+            description={mcpDescription}
+            items={mcpItems}
+            title={mcpTitle}
+          />
+        </div>
+        {/* 사용자 후기 카드 */}
+        <div data-reveal><ReviewSection items={reviewItems} title={reviewTitle} /></div>
+        {/* 가이드/콘텐츠 리스트 섹션 */}
+        <div data-reveal className="-mx-5 md:-mx-10">
+          <ContentListSection
+            description={contentListDescription}
+            items={contentListItems}
+            links={contentListLinks}
+            title={contentListTitle}
+          />
+        </div>
+        {/* 뉴스 리스트 */}
+        <div data-reveal><NewsListSection items={newsItems} title={newsTitle} /></div>
+        {/* 하단 CTA */}
+        <div data-reveal>
+          <Cta
+            actionLabel="Get Start!"
+            description={ctaDescription}
+            eyebrow={ctaEyebrow}
+            title={ctaTitle}
+          />
+        </div>
+    </div>
   );
 }

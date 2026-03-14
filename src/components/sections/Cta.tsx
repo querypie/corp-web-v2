@@ -21,16 +21,17 @@ export default function Cta({
   title = "Start Transforming.",
 }: CtaProps) {
   return (
-    <section className={cx("flex w-full justify-center pt-20", className)}>
+    /* 페이지 하단 전환 유도용 CTA 섹션 */
+    <section className={cx("mt-5 flex w-full justify-center pb-5 pt-20", className)}>
       <div className="flex w-full max-w-[1200px] flex-col items-center gap-[30px] text-center">
         <div className="min-w-full type-h1">
           <p className="mb-0 text-mute-fg">{eyebrow}</p>
           <p className="mb-0 text-fg">{title}</p>
         </div>
-        <p className="m-0 min-w-full font-pretendard type-body-md text-mute-fg">
+        <p className="m-0 min-w-full type-body-md text-mute-fg">
           {description}
         </p>
-        <Button arrow={false} size="large" variant="secondary">
+        <Button size="large" variant="secondary">
           {actionLabel}
         </Button>
       </div>

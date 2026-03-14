@@ -2,9 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* 전역 폰트 변수: 기본/한글/일본어/모노 */
 :root {
-  --font-sans: "Pretendard Variable", -apple-system, "Segoe UI", sans-serif;
-  --font-sans-ja: "Pretendard JP", -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Pretendard Variable", "SF Pro Display", -apple-system, system-ui, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
+  --font-sans-ko: "Pretendard Variable";
+  --font-sans-ja: "Pretendard JP";
   --font-mono: var(--font-jetbrains-mono), monospace;
 }
 
@@ -12,8 +14,13 @@
   box-sizing: border-box;
 }
 
-html {
+html,
+:lang(en) {
   font-family: var(--font-sans);
+}
+
+:lang(ko) {
+  font-family: var(--font-sans-ko);
 }
 
 :lang(ja) {
@@ -37,53 +44,54 @@ select {
 }
 
 @layer utilities {
+  /* 타이포 유틸리티: 모바일 기본값 */
   .type-h1 {
-    font-size: 36px;
-    line-height: 40px;
+    font-size: 26px;
+    line-height: 32px;
     letter-spacing: -0.6px;
     font-weight: 300;
   }
 
   .type-h2 {
-    font-size: 24px;
-    line-height: 28px;
-    letter-spacing: -0.3px;
+    font-size: 20px;
+    line-height: 26px;
+    letter-spacing: -0.2px;
     font-weight: 400;
   }
 
   .type-h3 {
-    font-size: 18px;
-    line-height: 24px;
-    letter-spacing: -0.2px;
+    font-size: 16px;
+    line-height: 22px;
+    letter-spacing: -0.1px;
     font-weight: 500;
   }
 
   .type-body-lg {
-    font-size: 16px;
-    line-height: 24px;
+    font-size: 15px;
+    line-height: 22px;
     letter-spacing: 0;
     font-weight: 300;
   }
 
   .type-body-md {
-    font-size: 14px;
-    line-height: 20px;
+    font-size: 13px;
+    line-height: 18px;
     letter-spacing: 0;
     font-weight: 300;
   }
 
   .type-body-sm {
     font-size: 12px;
-    line-height: 20px;
+    line-height: 18px;
     letter-spacing: 0;
     font-weight: 300;
   }
 
   .type-button {
-    font-size: 15px;
+    font-size: 14px;
     line-height: 20px;
-    letter-spacing: -0.2px;
-    font-weight: 500;
+    letter-spacing: -0.1px;
+    font-weight: 400;
   }
 
   .type-mono {
@@ -92,8 +100,51 @@ select {
     letter-spacing: 0;
     font-weight: 400;
   }
+
+  /* 타이포 유틸리티: 데스크탑 오버라이드 */
+  @media (min-width: 768px) {
+    .type-h1 {
+      font-size: 36px;
+      line-height: 44px;
+      letter-spacing: -0.6px;
+    }
+
+    .type-h2 {
+      font-size: 24px;
+      line-height: 30px;
+      letter-spacing: -0.2px;
+    }
+
+    .type-h3 {
+      font-size: 18px;
+      line-height: 24px;
+      letter-spacing: -0.2px;
+    }
+
+    .type-body-lg {
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .type-body-md {
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    .type-body-sm {
+      font-size: 12px;
+      line-height: 20px;
+    }
+
+    .type-button {
+      font-size: 15px;
+      line-height: 20px;
+      letter-spacing: -0.1px;
+    }
+  }
 }
 
+/* 홈/섹션에서 쓰는 공통 marquee 애니메이션 */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -103,6 +154,7 @@ select {
   }
 }
 
+/* 히어로 배경 별 반짝임 */
 @keyframes hero-star-twinkle {
   0%,
   100% {
@@ -116,15 +168,95 @@ select {
   }
 }
 
+/* 히어로 장식 아이콘 부유 효과 */
+@keyframes hero-icon-float {
+  0%, 100% {
+    transform: translateY(0px) translateX(-50%);
+  }
+  50% {
+    transform: translateY(-8px) translateX(-50%);
+  }
+}
+
+/* 스크롤 reveal: 뷰포트 진입 시 opacity 0 → 1 */
+[data-reveal] {
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+[data-reveal].is-visible {
+  opacity: 1;
+}
+
+/* 히어로 카피 등장 애니메이션: 아래에서 페이드업 */
+@keyframes hero-copy-enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 히어로 프롬프트 뒤 그라데이션 흐름 */
 @keyframes hero-gradient-flow {
-  0%,
+  0% {
+    background-position: 0% 50%;
+  }
+  33% {
+    background-position: 100% 0%;
+  }
+  66% {
+    background-position: 50% 100%;
+  }
   100% {
     background-position: 0% 50%;
-    opacity: 0.68;
+  }
+}
+
+/* 버튼 hover 시 화살표가 살짝 이동하는 효과 */
+@keyframes button-arrow-nudge {
+  0% {
+    transform: translateX(0);
+  }
+  60% {
+    transform: translateX(4px);
+  }
+  100% {
+    transform: translateX(3px);
+  }
+}
+
+/* 404 bot 눈 깜빡임 */
+@keyframes bowBlink {
+  0%, 25%, 95%, 100% {
+    transform: scaleY(1);
   }
 
-  50% {
-    background-position: 100% 50%;
-    opacity: 0.84;
+  45%, 80% {
+    transform: scaleY(0.1);
+  }
+}
+
+/* 404 bot 몸통 보잉 */
+@keyframes bowBody {
+  0%, 25%, 100% {
+    transform: translateY(0) scaleY(1);
+  }
+
+  50%, 80% {
+    transform: translateY(2px) scaleY(0.96);
+  }
+}
+
+/* 404 bot 얼굴 보잉 */
+@keyframes bowFace {
+  0%, 25%, 100% {
+    transform: translateY(0) scaleY(1);
+  }
+
+  50%, 80% {
+    transform: translateY(3px) scaleY(0.9);
   }
 }

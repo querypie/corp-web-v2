@@ -7,6 +7,7 @@ type FooterProps = {
   addressLines?: string[];
   className?: string;
   legalLinks?: string[];
+  locale?: string;
   sections?: FooterSection[];
 };
 
@@ -45,6 +46,7 @@ export default function Footer({
   ],
   className,
   legalLinks = ["Cookie Preference", "Terms of Use", "Privacy Policy", "EULA"],
+  locale = "en",
   sections = [
     { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
     { title: "Features", items: ["Demo", "Documentation"] },
@@ -53,15 +55,58 @@ export default function Footer({
 }: FooterProps) {
   const [copyright, ...officeLines] = addressLines;
 
+  /* 푸터 내부 링크가 현재 locale 기준으로 이동할 경로를 결정 */
+  function getFooterHref(item: string) {
+    if (item === "AI Platform (AIP)") {
+      return `/${locale}/aip-not-found`;
+    }
+
+    if (item === "Access Control Platform (ACP)") {
+      return `/${locale}/acp-not-found`;
+    }
+
+    if (item === "About Us" || item === "회사 소개") {
+      return `/${locale}/about-us-not-found`;
+    }
+
+    if (item === "Certifications" || item === "인증") {
+      return `/${locale}/certifications-not-found`;
+    }
+
+    if (item === "Demo" || item === "데모") {
+      return `/${locale}/demo`;
+    }
+
+    if (
+      item === "Contact Us" ||
+      item === "문의하기"
+    ) {
+      return `/${locale}/contact-us`;
+    }
+
+    if (item === "News" || item === "뉴스") {
+      return `/${locale}/news`;
+    }
+
+    if (item === "Documentation" || item === "문서") {
+      return `/${locale}/docs`;
+    }
+
+    return "/";
+  }
+
   return (
-    <footer className={cx("relative flex w-full justify-center overflow-hidden bg-bg pt-10", className)}>
+    <footer className={cx("relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10", className)}>
+      {/* 하단 오렌지 광원 효과 */}
       <div className="pointer-events-none absolute bottom-0 left-0 h-[800px] w-full opacity-50">
         <div className="h-full w-full bg-[radial-gradient(120%_80%_at_50%_100%,#FF7759_0%,rgba(255,119,89,0.60)_30%,rgba(255,119,89,0.00)_60%)]" />
       </div>
 
+      {/* 실제 푸터 콘텐츠 래퍼 */}
       <div className="relative flex w-full max-w-[1200px] flex-col gap-[60px] border-t border-border py-[60px]">
-        <div className="flex items-start justify-between gap-8">
-          <a aria-label="QueryPie AI" className="inline-flex h-5 w-[116px] shrink-0 items-center" href="/">
+        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
+          {/* 좌측 로고 */}
+          <a aria-label="QueryPie AI" className="inline-flex h-5 w-[116px] shrink-0 items-center" href={`/${locale}`}>
             <img
               alt="QueryPie AI"
               className="block h-5 w-[116px]"
@@ -69,12 +114,13 @@ export default function Footer({
             />
           </a>
 
-          <div className="flex items-start gap-[60px] px-5">
+          {/* 우측 섹션 링크 묶음 */}
+          <div className="flex flex-wrap items-start gap-8 md:gap-[60px] md:px-5">
             {sections.map((section) => (
               <div
                 key={section.title}
                 className={cx(
-                  "flex flex-col gap-5 font-pretendard type-body-md leading-5",
+                  "flex flex-col gap-5 type-body-md leading-5",
                   section.title === "Solutions" && "w-[191px]",
                   section.title === "Features" && "w-[96px]",
                   section.title === "Company" && "w-[84px]",
@@ -83,7 +129,7 @@ export default function Footer({
                 <p className="m-0 text-mute-fg">{section.title}</p>
                 <div className="flex flex-col gap-2 text-fg">
                   {section.items.map((item) => (
-                    <a key={item} className="transition-colors hover:text-mute-fg" href="/">
+                    <a key={item} className="transition-colors hover:text-mute-fg" href={getFooterHref(item)}>
                       {item}
                     </a>
                   ))}
@@ -93,8 +139,10 @@ export default function Footer({
           </div>
         </div>
 
+        {/* 하단 메타 영역: SNS / 법적 링크 / 주소 */}
         <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-5">
+              {/* SNS 링크 */}
               <div className="flex items-center gap-[14px]">
                 {socialLinks.map((link) => (
                   <a
@@ -113,7 +161,8 @@ export default function Footer({
                 ))}
               </div>
 
-            <div className="flex w-full flex-wrap items-center gap-x-5 gap-y-[10px] whitespace-nowrap font-pretendard type-body-md leading-5 text-fg">
+            {/* 법적 링크 */}
+            <div className="flex w-full flex-wrap items-center gap-x-5 gap-y-[10px] whitespace-nowrap type-body-md leading-5 text-fg">
               {legalLinks.map((item) => (
                 <a key={item} className="transition-colors hover:text-mute-fg" href="/">
                   {item}
@@ -122,9 +171,10 @@ export default function Footer({
             </div>
           </div>
 
+          {/* 회사 주소 및 카피라이트 */}
           <div className="flex flex-col gap-[10px] leading-5">
-            <p className="m-0 font-pretendard type-body-md text-fg">{copyright}</p>
-            <div className="font-pretendard type-body-sm text-fg">
+            <p className="m-0 type-body-md text-fg">{copyright}</p>
+            <div className="type-body-sm text-fg">
               {officeLines.map((line) => (
                 <p key={line} className="m-0">
                   {line}

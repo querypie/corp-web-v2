@@ -4,6 +4,7 @@ import Tab from "./Tab";
 
 export default function CommonComponentsGuide() {
   return (
+    // 공통 원자 컴포넌트(Button/Input/Tab) 샘플 가이드
     <section className="space-y-6">
       <h2>Common Components</h2>
       <p>

@@ -1,12 +1,14 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  // Tailwind가 클래스 사용 여부를 스캔할 경로
   content: [
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/constants/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    // 전역 spacing 토큰: 숫자 단위 + semantic spacing 포함
     spacing: {
       0: "0px",
       px: "1px",
@@ -34,8 +36,11 @@ const config: Config = {
       20: "80px",
       24: "96px",
       30: "120px",
+      "footer-gap": "120px",
+      "page-top": "120px",
     },
     extend: {
+      // 컬러 토큰: UI 전반에서 공통으로 사용하는 의미 기반 색상
       colors: {
         fg: "#F2F3F5",
         "mute-fg": "#7D8187",
@@ -47,18 +52,19 @@ const config: Config = {
         primary: "#DDDDDD",
         secondary: "#2E2E30",
         white: "#FFFFFF",
-        point: "#FF892F",
+        point: "#C0E136",
         success: "#22C55E",
         warning: "#CA8A04",
         destructive: "#EF4444",
-        special: "#C0E136",
-        brand: "#2F94E5",
+        brand: "#FF892F",
       },
+      // 라운드 토큰
       borderRadius: {
         thumb: "10px",
         box: "10px",
         button: "8px",
       },
+      // 공통 애니메이션 정의
       keyframes: {
         marquee: {
           "0%": { transform: "translateX(0)" },
@@ -68,10 +74,24 @@ const config: Config = {
       animation: {
         marquee: "marquee 20s linear infinite",
       },
+      // 폰트 패밀리 토큰
       fontFamily: {
-        sans: ["Pretendard Variable", "-apple-system", "Segoe UI", "sans-serif"],
-        pretendard: ["Pretendard Variable", "-apple-system", "Segoe UI", "sans-serif"],
-        "pretendard-ja": ["Pretendard JP", "-apple-system", "Segoe UI", "sans-serif"],
+        sans: [
+          "Pretendard Variable",
+          "SF Pro Display",
+          "-apple-system",
+          "system-ui",
+          "Segoe UI",
+          "Roboto",
+          "Oxygen",
+          "Ubuntu",
+          "Cantarell",
+          "Open Sans",
+          "Helvetica Neue",
+          "sans-serif",
+        ],
+        pretendard: ["Pretendard Variable"],
+        "pretendard-ja": ["Pretendard JP"],
         mono: ["var(--font-jetbrains-mono)", "monospace"],
       },
     },

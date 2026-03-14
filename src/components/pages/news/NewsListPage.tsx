@@ -1,0 +1,61 @@
+type NewsListItem = {
+  date: string;
+  href: string;
+  imageSrc: string;
+  summary: string;
+  title: string;
+};
+
+type NewsListPageProps = {
+  items: NewsListItem[];
+  title: string;
+};
+
+function cx(...values: Array<string | false | null | undefined>) {
+  return values.filter(Boolean).join(" ");
+}
+
+function NewsListCard({ date, href, imageSrc, summary, title }: NewsListItem) {
+  return (
+    <a
+      className="group flex w-full flex-col gap-4 md:flex-row md:items-start md:gap-[30px]"
+      href={href}
+      rel="noreferrer noopener"
+      target="_blank"
+    >
+      <div className="order-2 flex min-w-0 flex-1 flex-col gap-[10px] md:order-1">
+        <p className="m-0 type-body-md text-mute-fg">{date}</p>
+        <h2 className="m-0 type-h2 text-fg transition-colors group-hover:text-mute-fg">{title}</h2>
+        <p className="m-0 type-body-md text-mute-fg">{summary}</p>
+      </div>
+      <div className="order-1 h-[180px] w-full shrink-0 overflow-hidden rounded-thumb bg-bg-content md:order-2 md:h-[200px] md:w-[380px]">
+        <img
+          alt={title}
+          className="block h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          src={imageSrc}
+        />
+      </div>
+    </a>
+  );
+}
+
+export default function NewsListPage({
+  items,
+  title,
+}: NewsListPageProps) {
+  return (
+    <div className="flex w-full justify-center px-5 pb-10 md:px-10">
+      <section className="flex w-full max-w-[1200px] flex-col gap-10">
+        <header className="flex items-center justify-center">
+          <h1 className="m-0 flex-1 type-h1 text-fg">{title}</h1>
+        </header>
+
+        <div className="flex min-w-0 w-full flex-col gap-10">
+          {items.map((item, index) => (
+            <NewsListCard key={`${item.title}-${index}`} {...item} />
+          ))}
+        </div>
+      </section>
+    </div>
+  );
+}

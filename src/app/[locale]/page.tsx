@@ -25,7 +25,6 @@ const mcpIconSources = [
   "/icons/Apple.svg",
   "/icons/Gmail.svg",
   "/icons/Figma.svg",
-  "/icons/Facebook.svg",
 ] as const;
 
 const mcpItems = mcpIconSources.map((src) => ({
@@ -47,6 +46,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     notFound();
   }
 
+  // 홈 화면에서 사용하는 locale별 카피/데이터
   const copy = {
     en: {
       nav: ["Solutions", "Features", "Company", "Plans"],
@@ -62,19 +62,22 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       contentListItems: [
         {
           category: "DEMO",
-          imageSrc: "/images/home/content-list/article-01.png",
+          href: `/${locale}/docs/seo-analysis-aip-agent`,
+          imageSrc: "/images/content/article-01.png",
           title:
             "SEO analysis, once considered the domain of specialists, can now be handled by an AIP agent.",
         },
         {
           category: "White Papers",
-          imageSrc: "/images/home/content-list/article-02.png",
+          href: `/${locale}/docs/guardrail-design-2026`,
+          imageSrc: "/images/content/article-02.png",
           title:
             "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
         },
         {
           category: "Blogs",
-          imageSrc: "/images/home/content-list/article-03.png",
+          href: `/${locale}/docs/ai-security-threat-map-2026`,
+          imageSrc: "/images/content/article-03.png",
           title:
             "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
         },
@@ -149,15 +152,15 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       reviewTitle: "Trusted by the world's best developers",
       newsItems: [
         {
-          imageSrc: "/images/home/news-list/news-01.png",
+          imageSrc: "/images/content/news-01.png",
           title: "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
         },
         {
-          imageSrc: "/images/home/news-list/news-02.png",
+          imageSrc: "/images/content/news-02.png",
           title: "Payroll Partners with QueryPie on AI Security Solutions",
         },
         {
-          imageSrc: "/images/home/news-list/news-03.png",
+          imageSrc: "/images/content/news-03.png",
           title:
             "Security Solution Playing the Role of a “Door Lock” in the Cloud — Expanding to Japan and Europe",
         },
@@ -190,19 +193,22 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       contentListItems: [
         {
           category: "DEMO",
-          imageSrc: "/images/home/content-list/article-01.png",
+          href: `/${locale}/docs/seo-analysis-aip-agent`,
+          imageSrc: "/images/content/article-01.png",
           title:
             "전문가의 영역으로 여겨지던 SEO 분석도 이제는 AIP 에이전트가 처리할 수 있습니다.",
         },
         {
           category: "White Papers",
-          imageSrc: "/images/home/content-list/article-02.png",
+          href: `/${locale}/docs/guardrail-design-2026`,
+          imageSrc: "/images/content/article-02.png",
           title:
             "AI 에이전트 시대의 가드레일 설계 (2026 에디션) — Part 1: 철학과 설계",
         },
         {
           category: "Blogs",
-          imageSrc: "/images/home/content-list/article-03.png",
+          href: `/${locale}/docs/ai-security-threat-map-2026`,
+          imageSrc: "/images/content/article-03.png",
           title:
             "AI 보안 위협 맵 2026 | 7가지 공격 벡터와 CxO를 위한 실전 방어 프레임워크",
         },
@@ -277,15 +283,15 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       reviewTitle: "최고의 개발자들이 신뢰합니다",
       newsItems: [
         {
-          imageSrc: "/images/home/news-list/news-01.png",
+          imageSrc: "/images/content/news-01.png",
           title: "TerraSky의 MCP 호환 AI 플랫폼 ‘mitoco Buddy’ 공식 출시",
         },
         {
-          imageSrc: "/images/home/news-list/news-02.png",
+          imageSrc: "/images/content/news-02.png",
           title: "Payroll, QueryPie와 AI 보안 솔루션 협력",
         },
         {
-          imageSrc: "/images/home/news-list/news-03.png",
+          imageSrc: "/images/content/news-03.png",
           title:
             "클라우드의 ‘도어락’ 역할을 하는 보안 솔루션 — 일본과 유럽으로 확장",
         },
@@ -318,19 +324,22 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       contentListItems: [
         {
           category: "DEMO",
-          imageSrc: "/images/home/content-list/article-01.png",
+          href: `/${locale}/docs/seo-analysis-aip-agent`,
+          imageSrc: "/images/content/article-01.png",
           title:
             "専門家の領域だった SEO 分析も、いまでは AIP エージェントで実行できます。",
         },
         {
           category: "White Papers",
-          imageSrc: "/images/home/content-list/article-02.png",
+          href: `/${locale}/docs/guardrail-design-2026`,
+          imageSrc: "/images/content/article-02.png",
           title:
             "AI エージェント時代のガードレール設計 (2026 Edition) — Part 1: Philosophy & Design",
         },
         {
           category: "Blogs",
-          imageSrc: "/images/home/content-list/article-03.png",
+          href: `/${locale}/docs/ai-security-threat-map-2026`,
+          imageSrc: "/images/content/article-03.png",
           title:
             "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
         },
@@ -405,15 +414,15 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       reviewTitle: "世界最高の開発者たちに信頼されています",
       newsItems: [
         {
-          imageSrc: "/images/home/news-list/news-01.png",
+          imageSrc: "/images/content/news-01.png",
           title: "TerraSky の MCP 対応 AI プラットフォーム『mitoco Buddy』が正式リリース",
         },
         {
-          imageSrc: "/images/home/news-list/news-02.png",
+          imageSrc: "/images/content/news-02.png",
           title: "Payroll が QueryPie と AI セキュリティソリューションで提携",
         },
         {
-          imageSrc: "/images/home/news-list/news-03.png",
+          imageSrc: "/images/content/news-03.png",
           title:
             "クラウドの“ドアロック”として機能するセキュリティソリューション — 日本とヨーロッパへ拡大",
         },
@@ -434,6 +443,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     },
   }[locale];
 
+  /* locale별 데이터를 HomePage 조립 컴포넌트에 전달 */
   return (
     <HomePage
       clientCaption={copy.clientCaption}
@@ -441,12 +451,9 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       contentListItems={copy.contentListItems}
       contentListLinks={copy.contentListLinks}
       contentListTitle={copy.contentListTitle}
-      ctaActionLabel={copy.ctaActionLabel}
       ctaDescription={copy.ctaSection[2]}
       ctaEyebrow={copy.ctaSection[0]}
       ctaTitle={copy.ctaSection[1]}
-      footerLegalLinks={copy.legal}
-      footerSections={copy.footerSections}
       featureItems={copy.featureItems}
       heroHeadingMuted={copy.hero[0]}
       heroHeadingPrimary={copy.hero[1]}
@@ -454,7 +461,6 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       mcpDescription={copy.mcpDescription}
       mcpItems={copy.mcpItems}
       mcpTitle={copy.mcpTitle}
-      navItems={copy.nav}
       newsItems={copy.newsItems}
       newsTitle={copy.newsTitle}
       reviewItems={copy.reviewItems}

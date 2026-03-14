@@ -23,11 +23,13 @@ export default function ClientSection({
   className,
 }: ClientSectionProps) {
   return (
+    /* 고객사 로고와 짧은 설명을 보여주는 섹션 */
     <section className={cx("flex w-full flex-col items-center", className)}>
       <div className="flex w-full max-w-[1200px] flex-col items-center gap-5">
-        <p className="m-0 w-full text-center font-pretendard type-body-lg text-mute-fg">
+        <p className="m-0 w-full text-center type-body-lg text-mute-fg">
           {caption}
         </p>
+        {/* 로고를 좌우로 반복 이동시키는 marquee 영역 */}
         <div className="relative h-10 w-full overflow-hidden">
           <div className="flex w-max items-center" style={{ animation: "marquee 20s linear infinite" }}>
             {[...clientLogos, ...clientLogos].map((logo, index) => (
@@ -39,6 +41,7 @@ export default function ClientSection({
               />
             ))}
           </div>
+          {/* 양 끝 fade 처리로 루프 경계가 덜 보이게 함 */}
           <div className="pointer-events-none absolute inset-y-0 right-0 w-[120px] bg-gradient-to-r from-[rgba(8,9,10,0)] to-bg" />
           <div className="pointer-events-none absolute inset-y-0 left-0 w-[120px] bg-gradient-to-r from-bg to-[rgba(8,9,10,0)]" />
         </div>

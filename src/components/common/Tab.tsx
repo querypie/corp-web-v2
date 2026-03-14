@@ -19,15 +19,20 @@ export default function Tab({
   type = "button",
   ...props
 }: TabProps) {
+  // disabled면 항상 off 스타일로 처리
   const resolvedState = disabled ? "off" : state;
 
   return (
     <button
       className={cx(
-        "inline-flex items-center justify-center rounded-button px-5 py-2.5 font-pretendard type-button transition-colors",
+        "inline-flex items-center justify-center rounded-full px-5 py-2 text-center transition-colors duration-200",
+        "text-[14px] leading-5 font-normal",
+        // 활성 탭
         resolvedState === "on" && "bg-secondary text-fg",
+        // 호버 상태 미리보기
         resolvedState === "hover" && "bg-transparent text-fg",
-        resolvedState === "off" && "bg-transparent text-mute-fg",
+        // 비활성 탭
+        resolvedState === "off" && "bg-transparent text-mute-fg hover:text-fg",
         "cursor-pointer disabled:cursor-not-allowed",
         className,
       )}

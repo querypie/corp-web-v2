@@ -2,6 +2,7 @@ import Button from "../common/Button";
 
 type ContentListItem = {
   category: string;
+  href: string;
   imageSrc: string;
   title: string;
 };
@@ -18,17 +19,18 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function ContentListCard({ category, imageSrc, title }: ContentListItem) {
+function ContentListCard({ category, href, imageSrc, title }: ContentListItem) {
   return (
-    <article className="group flex w-full cursor-pointer items-start gap-5">
-      <div className="h-[120px] w-[213px] shrink-0 overflow-hidden rounded-box bg-bg-content">
+    /* 홈 전용 콘텐츠 리스트 카드 1개 */
+    <a className="group flex w-full cursor-pointer items-start gap-5" href={href}>
+      <div className="h-[80px] w-[120px] shrink-0 overflow-hidden rounded-box bg-bg-content md:h-[120px] md:w-[213px]">
         <img alt={title} className="block h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" src={imageSrc} />
       </div>
-      <div className="flex min-w-0 flex-1 flex-col gap-[10px] font-pretendard">
+      <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
         <p className="m-0 type-body-md text-mute-fg">{category}</p>
-        <p className="m-0 type-body-lg leading-6 text-fg transition-colors group-hover:text-mute-fg">{title}</p>
+        <p className="m-0 type-body-lg text-fg transition-colors group-hover:text-mute-fg">{title}</p>
       </div>
-    </article>
+    </a>
   );
 }
 
@@ -40,12 +42,16 @@ export default function ContentListSection({
   title,
 }: ContentListSectionProps) {
   return (
-    <section className={cx("flex w-full justify-center bg-bg-deep py-[100px]", className)}>
-      <div className="flex w-full max-w-[1200px] items-start gap-[60px]">
-        <div className="flex min-w-0 flex-1 flex-col gap-5">
-          <h2 className="m-0 font-pretendard type-h2 text-fg">{title}</h2>
-          <p className="m-0 font-pretendard type-body-lg text-mute-fg">{description}</p>
-          <div className="flex flex-col items-start gap-3">
+    /* 홈 하단용 콘텐츠 리스트 섹션 */
+    <section className={cx("flex w-full justify-center overflow-hidden bg-bg-deep py-12 md:py-[100px]", className)}>
+      <div
+        className="flex w-full max-w-[1280px] flex-col gap-8 px-5 md:flex-row md:items-start md:gap-[60px] md:px-10"
+      >
+        {/* 좌측 제목/설명/필터 버튼 영역 */}
+        <div className="flex w-full flex-col gap-5 md:w-[350px] md:min-w-[160px]">
+          <h2 className="m-0 type-h2 text-fg">{title}</h2>
+          <p className="m-0 type-body-lg text-mute-fg">{description}</p>
+          <div className="flex flex-row flex-wrap items-start gap-3 md:flex-col">
             {links.map((link) => (
               <Button key={link} variant="text">
                 {link}
@@ -54,7 +60,8 @@ export default function ContentListSection({
           </div>
         </div>
 
-        <div className="flex w-[790px] shrink-0 flex-col justify-center gap-[30px]">
+        {/* 우측 카드 리스트 */}
+        <div className="flex min-w-0 flex-1 flex-col justify-center gap-5 md:min-w-[460px] md:gap-[30px]">
           {items.map((item) => (
             <ContentListCard key={`${item.category}-${item.title}`} {...item} />
           ))}

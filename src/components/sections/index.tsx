@@ -9,6 +9,7 @@ import ReviewSection from "./ReviewSection";
 
 export default function SectionComponentsGuide() {
   return (
+    // 섹션 레벨 컴포넌트 샘플 프리뷰 가이드
     <section className="space-y-6">
       <h2>Section Components</h2>
       <p>
@@ -67,15 +68,15 @@ export default function SectionComponentsGuide() {
         <NewsListSection
           items={[
             {
-              imageSrc: "/images/home/news-list/news-01.png",
+              imageSrc: "/images/content/news-01.png",
               title: "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
             },
             {
-              imageSrc: "/images/home/news-list/news-02.png",
+              imageSrc: "/images/content/news-02.png",
               title: "Payroll Partners with QueryPie on AI Security Solutions",
             },
             {
-              imageSrc: "/images/home/news-list/news-03.png",
+              imageSrc: "/images/content/news-03.png",
               title: "Security Solution Playing the Role of a “Door Lock” in the Cloud — Expanding to Japan and Europe",
             },
           ]}
@@ -88,19 +89,22 @@ export default function SectionComponentsGuide() {
           items={[
             {
               category: "DEMO",
-              imageSrc: "/images/home/content-list/article-01.png",
+              href: "/en/docs/seo-analysis-aip-agent",
+              imageSrc: "/images/content/article-01.png",
               title:
                 "SEO analysis, once considered the domain of specialists, can now be handled by an AIP agent.",
             },
             {
               category: "White Papers",
-              imageSrc: "/images/home/content-list/article-02.png",
+              href: "/en/docs/guardrail-design-2026",
+              imageSrc: "/images/content/article-02.png",
               title:
                 "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
             },
             {
               category: "Blogs",
-              imageSrc: "/images/home/content-list/article-03.png",
+              href: "/en/docs/ai-security-threat-map-2026",
+              imageSrc: "/images/content/article-03.png",
               title:
                 "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
             },

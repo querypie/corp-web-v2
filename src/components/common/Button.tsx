@@ -22,11 +22,13 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
+// variant / size / state 조합에 따라 버튼의 배경/텍스트/아이콘 크기를 계산
 function getButtonStyle(
   variant: ButtonVariant,
   size: ButtonSize,
   state: ButtonState,
 ): ButtonStyleConfig {
+  // 텍스트 링크형 버튼
   if (variant === "text") {
     return {
       container: cx(
@@ -34,23 +36,26 @@ function getButtonStyle(
         state === "disable" && "opacity-40",
       ),
       text: cx(
-        "font-pretendard type-body-md hover:text-mute-fg transition-colors",
+        "type-body-md hover:text-mute-fg transition-colors",
         state === "hover" ? "text-mute-fg" : "text-fg",
       ),
       iconSize: "h-4 w-4",
     };
   }
 
+  // GNB 전용 버튼
   if (variant === "gnb") {
     return {
       container: cx(
-        "inline-flex items-center justify-center gap-1.5 rounded-button px-4 py-2 transition-colors hover:bg-primary",
-        state === "hover" ? "bg-primary" : "bg-secondary",
+        "inline-flex items-center justify-center gap-1.5 rounded-button px-4 py-2 transition-colors",
+        state === "hover" ? "bg-[#434346]" : "bg-secondary",
+        "hover:bg-[#434346]",
         state === "disable" && "opacity-40",
       ),
       text: cx(
-        "font-pretendard type-body-md hover:text-bg transition-colors",
-        state === "hover" ? "text-bg" : "text-fg",
+        "type-body-md transition-colors",
+        state === "hover" ? "text-fg" : "text-fg",
+        "hover:text-fg",
       ),
       iconSize: "h-4 w-4",
     };
@@ -59,6 +64,7 @@ function getButtonStyle(
   const isLarge = size === "large";
 
   return {
+    // 일반 버튼 (primary / secondary / outline)
     container: cx(
       "inline-flex items-center justify-center rounded-button transition-colors",
       isLarge ? "gap-2 px-7 py-3" : "gap-1.5 px-5 py-2.5",
@@ -68,17 +74,22 @@ function getButtonStyle(
           "hover:border-primary",
         ),
       variant === "primary" &&
-        cx(state === "hover" ? "bg-secondary" : "bg-primary", "hover:bg-secondary"),
+        cx(state === "hover" ? "bg-brand" : "bg-primary", "hover:bg-brand"),
       variant === "secondary" &&
-        cx(state === "hover" ? "bg-primary" : "bg-secondary", "hover:bg-primary"),
+        cx(state === "hover" ? "bg-[#434346]" : "bg-secondary", "hover:bg-[#434346]"),
       state === "disable" && "opacity-40",
     ),
     text: cx(
-      "font-pretendard type-button transition-colors",
-      variant === "primary" || (variant === "secondary" && state === "hover")
-        ? "text-bg"
-        : "text-fg",
-      variant === "secondary" && "hover:text-bg",
+      "type-button transition-colors",
+      variant === "primary"
+        ? state === "hover"
+          ? "text-bg"
+          : "text-bg"
+        : variant === "secondary" && state === "hover"
+          ? "text-fg"
+          : "text-fg",
+      variant === "secondary" && "hover:text-fg",
+      variant === "primary" && "hover:text-bg",
     ),
     iconSize: "h-4 w-4",
   };
@@ -86,6 +97,7 @@ function getButtonStyle(
 
 function ArrowRightIcon({ className }: { className?: string }) {
   return (
+    // 공통 버튼 화살표 아이콘
     <svg
       aria-hidden="true"
       className={className}
@@ -96,6 +108,7 @@ function ArrowRightIcon({ className }: { className?: string }) {
       <path
         d="M15.5 6.5L21.5 12.5M21.5 12.5L15.5 18.5M21.5 12.5H3.5"
         stroke="currentColor"
+        strokeWidth="1.5"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -114,6 +127,7 @@ export default function Button({
   variant = "gnb",
   ...props
 }: ButtonProps) {
+  // disabled가 true면 외부 state와 관계없이 disable 우선 적용
   const resolvedState = disabled ? "disable" : state;
   const styles = getButtonStyle(variant, size, resolvedState);
 
@@ -122,15 +136,24 @@ export default function Button({
       className={cx(
         styles.container,
         styles.text,
-        "cursor-pointer disabled:cursor-not-allowed",
+        "group cursor-pointer disabled:cursor-not-allowed",
         className,
       )}
       disabled={resolvedState === "disable"}
       type={type}
       {...props}
     >
+      {/* 버튼 텍스트 */}
       <span>{children}</span>
-      {arrow ? <ArrowRightIcon className={styles.iconSize} /> : null}
+      {/* arrow가 켜진 경우만 아이콘 노출 */}
+      {arrow ? (
+        <ArrowRightIcon
+          className={cx(
+            styles.iconSize,
+            "group-hover:animate-[button-arrow-nudge_220ms_ease-out_forwards]",
+          )}
+        />
+      ) : null}
     </button>
   );
 }
