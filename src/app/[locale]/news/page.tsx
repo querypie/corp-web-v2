@@ -123,52 +123,52 @@ export default async function NewsPage({ params }: NewsPageProps) {
     ja: {
       items: [
         {
-          date: "December 23, 2025",
+          date: "2025年12月23日",
           href: externalNewsHref,
           imageSrc: "/images/content/news-01.png",
           summary:
-            "QueryPie AI G.K. announced that TerraSky’s enterprise MCP-compatible AI platform, “mitoco Buddy,” has officially launched.",
-          title: "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
+            "QueryPie AI G.K. は、TerraSky のエンタープライズ向け MCP 対応 AI プラットフォーム「mitoco Buddy」が正式リリースされたことを発表しました。",
+          title: "TerraSky の MCP 対応 AI プラットフォーム「mitoco Buddy」が正式リリース",
         },
         {
-          date: "December 23, 2025",
+          date: "2025年12月23日",
           href: externalNewsHref,
           imageSrc: "/images/content/news-02.png",
           summary:
-            "QueryPie AI G.K. announced a collaboration with TerraSky around AI agent services through the release of “mitoco Buddy” for work.",
-          title: "TerraSky and QueryPie AI Unveil ‘mitoco Buddy’ for Work",
+            "QueryPie AI G.K. は、TerraSky と連携し、業務向け「mitoco Buddy」を通じた AI エージェントサービスの協業を発表しました。",
+          title: "TerraSky と QueryPie AI、業務向け「mitoco Buddy」を公開",
         },
         {
-          date: "December 23, 2025",
+          date: "2025年12月23日",
           href: externalNewsHref,
           imageSrc: "/images/content/news-03.png",
           summary:
-            "Payroll and QueryPie announced a technology partnership focused on AI and security solutions for enterprise operations.",
-          title: "Payroll Partners with QueryPie on AI Security Solutions",
+            "Payroll と QueryPie は、企業運用向けの AI およびセキュリティソリューションに関する技術提携を発表しました。",
+          title: "Payroll、QueryPie と AI セキュリティソリューションで提携",
         },
         {
-          date: "December 23, 2025",
+          date: "2025年12月23日",
           href: externalNewsHref,
           imageSrc: "/images/content/news-01.png",
           summary:
-            "QueryPie AI G.K. announced that TerraSky’s enterprise MCP-compatible AI platform, “mitoco Buddy,” has officially launched.",
-          title: "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
+            "QueryPie AI G.K. は、TerraSky のエンタープライズ向け MCP 対応 AI プラットフォーム「mitoco Buddy」が正式リリースされたことを発表しました。",
+          title: "TerraSky の MCP 対応 AI プラットフォーム「mitoco Buddy」が正式リリース",
         },
         {
-          date: "December 23, 2025",
+          date: "2025年12月23日",
           href: externalNewsHref,
           imageSrc: "/images/content/news-02.png",
           summary:
-            "QueryPie AI G.K. announced a collaboration with TerraSky around AI agent services through the release of “mitoco Buddy” for work.",
-          title: "TerraSky and QueryPie AI Unveil ‘mitoco Buddy’ for Work",
+            "QueryPie AI G.K. は、TerraSky と連携し、業務向け「mitoco Buddy」を通じた AI エージェントサービスの協業を発表しました。",
+          title: "TerraSky と QueryPie AI、業務向け「mitoco Buddy」を公開",
         },
         {
-          date: "December 23, 2025",
+          date: "2025年12月23日",
           href: externalNewsHref,
           imageSrc: "/images/content/news-03.png",
           summary:
-            "Payroll and QueryPie announced a technology partnership focused on AI and security solutions for enterprise operations.",
-          title: "Payroll Partners with QueryPie on AI Security Solutions",
+            "Payroll と QueryPie は、企業運用向けの AI およびセキュリティソリューションに関する技術提携を発表しました。",
+          title: "Payroll、QueryPie と AI セキュリティソリューションで提携",
         },
       ],
       title: "News",

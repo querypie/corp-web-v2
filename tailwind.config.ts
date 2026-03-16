@@ -45,10 +45,9 @@ const config: Config = {
         fg: "#F2F3F5",
         "mute-fg": "#7D8187",
         "bg-content": "#1F1F1F",
-        "bg-deep": "#191A1B",
+        "bg-deep": "#181819",
         bg: "#08090A",
         border: "#2A2A2C",
-        divider: "#454547",
         primary: "#DDDDDD",
         secondary: "#2E2E30",
         white: "#FFFFFF",
@@ -63,6 +62,7 @@ const config: Config = {
         thumb: "10px",
         box: "10px",
         button: "8px",
+        modal: "20px",
       },
       // 공통 애니메이션 정의
       keyframes: {

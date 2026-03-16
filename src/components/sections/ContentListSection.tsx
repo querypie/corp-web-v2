@@ -44,9 +44,10 @@ export default function ContentListSection({
   return (
     /* 홈 하단용 콘텐츠 리스트 섹션 */
     <section className={cx("flex w-full justify-center overflow-hidden bg-bg-deep py-12 md:py-[100px]", className)}>
-      <div
-        className="flex w-full max-w-[1280px] flex-col gap-8 px-5 md:flex-row md:items-start md:gap-[60px] md:px-10"
-      >
+      <div className="flex w-full justify-center px-5 md:px-10">
+        <div
+          className="flex w-full max-w-[1200px] flex-col gap-8 md:flex-row md:items-start md:gap-[60px]"
+        >
         {/* 좌측 제목/설명/필터 버튼 영역 */}
         <div className="flex w-full flex-col gap-5 md:w-[350px] md:min-w-[160px]">
           <h2 className="m-0 type-h2 text-fg">{title}</h2>
@@ -65,6 +66,7 @@ export default function ContentListSection({
           {items.map((item) => (
             <ContentListCard key={`${item.category}-${item.title}`} {...item} />
           ))}
+        </div>
         </div>
       </div>
     </section>

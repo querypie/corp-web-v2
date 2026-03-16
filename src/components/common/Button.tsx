@@ -67,11 +67,11 @@ function getButtonStyle(
     // 일반 버튼 (primary / secondary / outline)
     container: cx(
       "inline-flex items-center justify-center rounded-button transition-colors",
-      isLarge ? "gap-2 px-7 py-3" : "gap-1.5 px-5 py-2.5",
+      isLarge ? "gap-2 px-6 py-3" : "gap-1.5 px-5 py-2.5",
       variant === "outline" &&
         cx(
-          state === "hover" ? "border border-primary bg-transparent" : "border border-secondary bg-transparent",
-          "hover:border-primary",
+          state === "hover" ? "border border-primary bg-white/10" : "border border-secondary bg-transparent",
+          "hover:bg-white/10",
         ),
       variant === "primary" &&
         cx(state === "hover" ? "bg-brand" : "bg-primary", "hover:bg-brand"),
@@ -80,7 +80,7 @@ function getButtonStyle(
       state === "disable" && "opacity-40",
     ),
     text: cx(
-      "type-button transition-colors",
+      "type-body-md transition-colors",
       variant === "primary"
         ? state === "hover"
           ? "text-bg"

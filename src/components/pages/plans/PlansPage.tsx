@@ -3,10 +3,11 @@
 import { useMemo, useState } from "react";
 import Button from "../../common/Button";
 import Tab from "../../common/Tab";
-import { pricingProducts, type ComparisonGroup, type ComparisonValue, type PlanCard, type PricingProduct } from "../../../constants/plans";
+import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PricingProduct } from "../../../constants/plans";
+import type { Locale } from "../../../constants/i18n";
 
 type PlansPageProps = {
-  locale: string;
+  locale: Locale;
 };
 
 function cx(...values: Array<string | false | null | undefined>) {
@@ -32,7 +33,7 @@ function PlanSummaryCard({
 }: PlanCard) {
   return (
     /* 상단 플랜 카드 한 장 */
-    <article className="flex min-h-[420px] flex-col justify-between rounded-box bg-bg-content p-[30px] transition-colors duration-200 hover:bg-[#242425]">
+    <article className="card-hover flex min-h-[420px] flex-col justify-between rounded-box bg-bg-content p-[30px]">
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-1">
           <h2 className={cx("m-0 type-h2", tone === "primary" ? "text-brand" : "text-fg")}>{name}</h2>
@@ -137,6 +138,7 @@ function ComparisonTable({
 export default function PlansPage({
   locale,
 }: PlansPageProps) {
+  const pricingProducts = pricingProductsByLocale[locale];
   const [activeProductKey, setActiveProductKey] = useState<keyof typeof pricingProducts>("aip");
   const activeProduct = useMemo(
     () => pricingProducts[activeProductKey],
@@ -144,7 +146,8 @@ export default function PlansPage({
   );
 
   return (
-    <section className="mx-auto flex w-full max-w-[1200px] flex-col gap-[80px] px-5 pb-10 md:px-10">
+    <div className="flex w-full justify-center px-5 pb-10 md:px-10">
+      <section className="flex w-full max-w-[1200px] flex-col gap-[80px]">
           <div className="flex flex-col items-center gap-5">
             <h1 className="m-0 type-h1 text-center text-fg">Pricing</h1>
 
@@ -185,5 +188,6 @@ export default function PlansPage({
             />
           </div>
         </section>
+    </div>
   );
 }
