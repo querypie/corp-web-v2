@@ -5,9 +5,17 @@ type DemoListItem = {
   title: string;
 };
 
+type DemoMenuItem = {
+  href: string;
+  isActive: boolean;
+  label: string;
+};
+
 type DemoListPageProps = {
+  emptyMessage?: string;
   items: DemoListItem[];
-  menu: string[];
+  menu: DemoMenuItem[];
+  showCategory?: boolean;
   title: string;
 };
 
@@ -15,9 +23,21 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function DemoListCard({ category, href, imageSrc, title }: DemoListItem) {
+function DemoListCard({
+  category,
+  href,
+  imageSrc,
+  index,
+  showCategory,
+  title,
+}: DemoListItem & { index: number; showCategory: boolean }) {
   return (
-    <a className="group flex w-full cursor-pointer flex-col gap-5" href={href}>
+    <a
+      className="group flex w-full cursor-pointer flex-col gap-5"
+      data-reveal
+      href={href}
+      style={{ transitionDelay: `${index * 70}ms` }}
+    >
       <div className="h-[180px] w-full overflow-hidden rounded-thumb bg-bg-content md:h-[200px]">
         <img
           alt={title}
@@ -26,7 +46,7 @@ function DemoListCard({ category, href, imageSrc, title }: DemoListItem) {
         />
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
-        <p className="m-0 type-body-md text-mute-fg">{category}</p>
+        {showCategory ? <p className="m-0 type-body-md text-mute-fg">{category}</p> : null}
         <p className="m-0 type-body-lg text-fg transition-colors group-hover:text-mute-fg">{title}</p>
       </div>
     </a>
@@ -34,8 +54,10 @@ function DemoListCard({ category, href, imageSrc, title }: DemoListItem) {
 }
 
 export default function DemoListPage({
+  emptyMessage = "게시물이 없습니다",
   items,
   menu,
+  showCategory = true,
   title,
 }: DemoListPageProps) {
   return (
@@ -49,24 +71,30 @@ export default function DemoListPage({
         {/* 좌측 메뉴 + 우측 데모 리스트 */}
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-[60px]">
           <nav className="flex w-full flex-row flex-wrap gap-[10px] type-body-md md:w-[118px] md:shrink-0 md:flex-col md:sticky md:top-[80px]">
-            {menu.map((item, index) => (
+            {menu.map((item) => (
               <a
-                key={item}
+                key={item.href}
                 className={cx(
                   "transition-colors hover:text-fg",
-                  index === 0 ? "text-fg" : "text-mute-fg",
+                  item.isActive ? "text-fg" : "text-mute-fg",
                 )}
-                href="#"
+                href={item.href}
               >
-                {item}
+                {item.label}
               </a>
             ))}
           </nav>
 
           <div className="grid min-w-0 w-full grid-cols-1 gap-x-[30px] gap-y-10 md:max-w-[790px] md:grid-cols-2">
-            {items.map((item, index) => (
-              <DemoListCard key={`${item.title}-${index}`} {...item} />
-            ))}
+            {items.length > 0 ? (
+              items.map((item, index) => (
+                <DemoListCard key={`${item.title}-${index}`} {...item} index={index} showCategory={showCategory} />
+              ))
+            ) : (
+              <div className="col-span-full flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
+                <p className="m-0 type-body-md text-mute-fg">{emptyMessage}</p>
+              </div>
+            )}
           </div>
         </div>
       </section>

@@ -53,7 +53,7 @@ export default function Input({
   return (
     <div
       className={cx(
-        "inline-flex w-[240px] items-center overflow-hidden rounded-button bg-bg-content px-3 py-2.5",
+        "ui-field-shell inline-flex w-[240px] items-center overflow-hidden rounded-button bg-bg-content px-3 py-2.5",
         hasBorder && "border border-border",
         resolvedState === "disable" && "opacity-50",
         isDropdown && "gap-1.5",

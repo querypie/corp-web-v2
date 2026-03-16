@@ -68,7 +68,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
             "SEO analysis, once considered the domain of specialists, can now be handled by an AIP agent.",
         },
         {
-          category: "White Papers",
+          category: "Use Cases",
           href: `/${locale}/docs/guardrail-design-2026`,
           imageSrc: "/images/content/article-02.png",
           title:
@@ -82,7 +82,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
             "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
         },
       ],
-      contentListLinks: ["DEMO", "White Papers", "Blogs"],
+      contentListLinks: ["DEMO", "Use Cases", "Blogs"],
       contentListTitle: "Guides and Best Practices",
       featureItems: [
         {
@@ -181,7 +181,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     },
     ko: {
       nav: ["솔루션", "기능", "회사", "요금제"],
-      hero: ["새로운 AI 비즈니스를 경험하세요,", "QueryPie AI가 가장 좋은 방법입니다."],
+      hero: ["Experience a new AI business,", "QueryPie AI is the best way."],
       heroPromptRotatingTexts: [
         "새로운 AI 비즈니스를 경험해볼까요?",
         "적절한 에이전트에 작업을 자동으로 연결하세요.",
@@ -199,7 +199,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
             "전문가의 영역으로 여겨지던 SEO 분석도 이제는 AIP 에이전트가 처리할 수 있습니다.",
         },
         {
-          category: "White Papers",
+          category: "Use Cases",
           href: `/${locale}/docs/guardrail-design-2026`,
           imageSrc: "/images/content/article-02.png",
           title:
@@ -213,7 +213,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
             "AI 보안 위협 맵 2026 | 7가지 공격 벡터와 CxO를 위한 실전 방어 프레임워크",
         },
       ],
-      contentListLinks: ["DEMO", "White Papers", "Blogs"],
+      contentListLinks: ["DEMO", "Use Cases", "Blogs"],
       contentListTitle: "가이드와 베스트 프랙티스",
       featureItems: [
         {
@@ -312,9 +312,9 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     },
     ja: {
       nav: ["ソリューション", "機能", "会社", "プラン"],
-      hero: ["新しいAIビジネスを体験しよう。", "QueryPie AIが最適な方法です。"],
+      hero: ["Experience a new AI business,", "QueryPie AI is the best way."],
       heroPromptRotatingTexts: [
-        "新しいAIビジネスを始めませんか？",
+        "Experience a new AI business?",
         "最適なエージェントへ自動でルーティング。",
         "プロダクト運用をセルフドライブ化する。",
       ],
@@ -330,7 +330,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
             "専門家の領域だった SEO 分析も、いまでは AIP エージェントで実行できます。",
         },
         {
-          category: "White Papers",
+          category: "Use Cases",
           href: `/${locale}/docs/guardrail-design-2026`,
           imageSrc: "/images/content/article-02.png",
           title:
@@ -344,7 +344,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
             "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
         },
       ],
-      contentListLinks: ["DEMO", "White Papers", "Blogs"],
+      contentListLinks: ["DEMO", "Use Cases", "Blogs"],
       contentListTitle: "ガイドとベストプラクティス",
       featureItems: [
         {

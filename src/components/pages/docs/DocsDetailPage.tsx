@@ -27,14 +27,89 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
+function renderInlineMarkdown(text: string) {
+  const tokens = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_|`[^`]+`)/g);
+
+  return tokens.filter(Boolean).map((token, index) => {
+    if (/^\[[^\]]+\]\([^)]+\)$/.test(token)) {
+      const match = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+
+      if (!match) return token;
+
+      return (
+        <a
+          key={`inline-link-${index}`}
+          className="text-fg underline decoration-border underline-offset-4 transition-colors hover:text-mute-fg"
+          href={match[2]}
+          rel="noreferrer"
+          target="_blank"
+        >
+          {match[1]}
+        </a>
+      );
+    }
+
+    if (/^`[^`]+`$/.test(token)) {
+      return (
+        <code
+          key={`inline-code-${index}`}
+          className="rounded-[8px] bg-bg-content px-2 py-1 type-body-lg text-fg"
+        >
+          {token.slice(1, -1)}
+        </code>
+      );
+    }
+
+    if (/^(\*\*|__)[\s\S]+(\*\*|__)$/.test(token)) {
+      return (
+        <strong key={`inline-strong-${index}`} className="font-semibold text-fg">
+          {token.slice(2, -2)}
+        </strong>
+      );
+    }
+
+    if (/^(\*|_)[\s\S]+(\*|_)$/.test(token)) {
+      return (
+        <em key={`inline-em-${index}`} className="italic text-fg">
+          {token.slice(1, -1)}
+        </em>
+      );
+    }
+
+    return token;
+  });
+}
+
 function MarkdownContent({ markdown }: { markdown: string }) {
-  const blocks = markdown.trim().split(/\n{2,}/).filter(Boolean);
+  const blocks = markdown
+    .trim()
+    .split(/\n{2,}/)
+    .map((block) => block.trim())
+    .filter(Boolean);
 
   return (
     /* 마크다운 본문을 제목/문단/리스트로 가볍게 렌더링 */
     <div className="flex flex-col gap-5 text-fg">
       {blocks.map((block, blockIndex) => {
         const lines = block.split("\n");
+        const firstLine = lines[0] ?? "";
+
+        if (/^```/.test(firstLine) && /^```$/.test(lines[lines.length - 1] ?? "")) {
+          const codeLines = lines.slice(1, -1);
+
+          return (
+            <pre
+              key={`pre-${blockIndex}`}
+              className="m-0 overflow-x-auto rounded-[20px] bg-bg-content px-4 py-4 type-body-lg text-fg"
+            >
+              <code>{codeLines.join("\n")}</code>
+            </pre>
+          );
+        }
+
+        if (/^---+$/.test(block) || /^\*\*\*+$/.test(block)) {
+          return <hr key={`hr-${blockIndex}`} className="border-0 border-t border-border" />;
+        }
 
         if (block.startsWith("# ")) {
           return (
@@ -45,7 +120,7 @@ function MarkdownContent({ markdown }: { markdown: string }) {
                 blockIndex > 0 && "pt-10",
               )}
             >
-              {block.replace(/^#\s+/, "")}
+              {renderInlineMarkdown(block.replace(/^#\s+/, ""))}
             </h1>
           );
         }
@@ -59,7 +134,7 @@ function MarkdownContent({ markdown }: { markdown: string }) {
                 blockIndex > 0 && "pt-10",
               )}
             >
-              {block.replace(/^##\s+/, "")}
+              {renderInlineMarkdown(block.replace(/^##\s+/, ""))}
             </h2>
           );
         }
@@ -73,8 +148,23 @@ function MarkdownContent({ markdown }: { markdown: string }) {
                 blockIndex > 0 && "pt-5",
               )}
             >
-              {block.replace(/^###\s+/, "")}
+              {renderInlineMarkdown(block.replace(/^###\s+/, ""))}
             </h3>
+          );
+        }
+
+        if (lines.every((line) => /^>\s?/.test(line))) {
+          return (
+            <blockquote
+              key={`blockquote-${blockIndex}`}
+              className="m-0 border-l-2 border-border pl-4 type-body-lg italic text-fg"
+            >
+              {lines.map((line, lineIndex) => (
+                <p key={`blockquote-line-${blockIndex}-${lineIndex}`} className="m-0">
+                  {renderInlineMarkdown(line.replace(/^>\s?/, ""))}
+                </p>
+              ))}
+            </blockquote>
           );
         }
 
@@ -83,7 +173,7 @@ function MarkdownContent({ markdown }: { markdown: string }) {
             <ol key={`ol-${blockIndex}`} className="m-0 flex list-decimal flex-col gap-0 pl-6 type-body-lg text-fg">
               {lines.map((line, lineIndex) => (
                 <li key={`ol-item-${blockIndex}-${lineIndex}`}>
-                  {line.replace(/^\d+\.\s+/, "")}
+                  {renderInlineMarkdown(line.replace(/^\d+\.\s+/, ""))}
                 </li>
               ))}
             </ol>
@@ -95,7 +185,7 @@ function MarkdownContent({ markdown }: { markdown: string }) {
             <ul key={`ul-${blockIndex}`} className="m-0 flex list-disc flex-col gap-0 pl-6 type-body-lg text-fg">
               {lines.map((line, lineIndex) => (
                 <li key={`ul-item-${blockIndex}-${lineIndex}`}>
-                  {line.replace(/^-\s+/, "")}
+                  {renderInlineMarkdown(line.replace(/^-\s+/, ""))}
                 </li>
               ))}
             </ul>
@@ -104,7 +194,12 @@ function MarkdownContent({ markdown }: { markdown: string }) {
 
         return (
           <p key={`p-${blockIndex}`} className="m-0 type-body-lg whitespace-pre-wrap text-fg">
-            {block}
+            {lines.map((line, lineIndex) => (
+              <span key={`paragraph-line-${blockIndex}-${lineIndex}`}>
+                {renderInlineMarkdown(line)}
+                {lineIndex < lines.length - 1 ? <br /> : null}
+              </span>
+            ))}
           </p>
         );
       })}

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import PlansPage from "../../../components/pages/plans/PlansPage";
-import { isLocale } from "../../../constants/i18n";
+import { isLocale, type Locale } from "../../../constants/i18n";
 
 type PlansRouteProps = {
   params: Promise<{ locale: string }>;
@@ -11,5 +11,5 @@ export default async function PlansRoute({ params }: PlansRouteProps) {
 
   if (!isLocale(locale)) notFound();
 
-  return <PlansPage locale={locale} />;
+  return <PlansPage locale={locale as Locale} />;
 }

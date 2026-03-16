@@ -66,7 +66,7 @@ function TextField({
       <FieldLabel label={field.label} required={field.required} />
       <input
         aria-label={field.label}
-        className="h-10 w-full rounded-button border-0 bg-bg-content px-3 type-body-md text-fg outline-none placeholder:text-mute-fg"
+        className="ui-field h-10 w-full rounded-button bg-bg-content px-3 type-body-md text-fg outline-none placeholder:text-mute-fg"
         name={field.name}
         type="text"
       />
@@ -85,7 +85,7 @@ function TextAreaField({
       <FieldLabel label={field.label} required={field.required} />
       <textarea
         aria-label={field.label}
-        className="min-h-[120px] w-full resize-none rounded-button border-0 bg-bg-content px-3 py-2.5 type-body-md text-fg outline-none placeholder:text-mute-fg"
+        className="ui-field min-h-[120px] w-full resize-none rounded-button bg-bg-content px-3 py-2.5 type-body-md text-fg outline-none placeholder:text-mute-fg"
         name={field.name}
       />
     </div>

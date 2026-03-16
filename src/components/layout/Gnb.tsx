@@ -45,7 +45,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 
 function getNavHref(item: string, locale: string) {
   /* 최상위 메뉴 중 Plans만 별도 라우트로 연결 */
-  if (item === "Plans") {
+  if (item === "Plans" || item === "요금제" || item === "プラン") {
     return `/${locale}/plans`;
   }
 
@@ -87,11 +87,11 @@ export default function Gnb({
   return (
     <header
       className={cx(
-        "fixed inset-x-0 top-0 z-50 flex w-full items-center justify-center bg-[rgba(8,9,10,0.5)] backdrop-blur-[12px]",
+        "fixed inset-x-0 top-0 z-50 flex w-full items-center justify-center bg-[rgba(8,9,10,0.5)] px-5 backdrop-blur-[12px] md:px-10",
         className,
       )}
     >
-      <div className="flex h-[60px] w-full max-w-[1280px] items-center justify-between gap-6 px-5 text-fg md:px-10">
+      <div className="flex h-[60px] w-full max-w-[1200px] items-center justify-between gap-6 text-fg">
         <a aria-label="QueryPie AI" className="inline-flex h-5 w-[116px] shrink-0 items-center text-fg" href={`/${locale}`}>
           <img
             alt="QueryPie AI"
@@ -102,8 +102,10 @@ export default function Gnb({
         <div className="flex items-center gap-[30px]">
           {/* 데스크톱 전용 글로벌 네비게이션 */}
           <nav aria-label="Global" className="hidden items-center gap-[30px] md:flex">
-            {items.map((item) => {
-              if (item === "Solutions") {
+            {items.map((item, index) => {
+              const navSlot = index;
+
+              if (navSlot === 0) {
                 return (
                   <div
                     key={item}
@@ -144,7 +146,7 @@ export default function Gnb({
                 );
               }
 
-              if (item === "Features") {
+              if (navSlot === 1) {
                 return (
                   <div
                     key={item}
@@ -185,7 +187,7 @@ export default function Gnb({
                 );
               }
 
-              if (item === "Company") {
+              if (navSlot === 2) {
                 return (
                   <div
                     key={item}
@@ -277,9 +279,11 @@ export default function Gnb({
               </div>
             </div>
           </div>
-          <Button arrow={false} variant="gnb">
-            {actionLabel}
-          </Button>
+          <a href="/admin">
+            <Button arrow={false} variant="gnb">
+              {actionLabel}
+            </Button>
+          </a>
         </div>
       </div>
     </header>
