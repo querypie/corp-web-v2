@@ -253,13 +253,15 @@ export default function DocsDetailPage({
                 <p className="m-0 type-body-md text-mute-fg">{date}</p>
               </div>
 
-              <div className="h-[220px] w-full overflow-hidden rounded-box bg-bg-content md:h-[380px]">
-                <img
-                  alt={heroImageAlt}
-                  className="block h-full w-full object-cover"
-                  src={heroImageSrc}
-                />
-              </div>
+              {heroImageSrc ? (
+                <div className="h-[220px] w-full overflow-hidden rounded-box bg-bg-content md:h-[380px]">
+                  <img
+                    alt={heroImageAlt}
+                    className="block h-full w-full object-cover"
+                    src={heroImageSrc}
+                  />
+                </div>
+              ) : null}
 
               <MarkdownContent markdown={bodyMarkdown} />
             </div>

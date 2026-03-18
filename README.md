@@ -8,7 +8,8 @@ Next.js 기반의 퍼블릭 웹사이트와 관리자 CMS를 함께 관리하는
 
 - Public site
   - 다국어(`en`, `ko`, `ja`) 기반 퍼블릭 페이지
-  - Demo / Documentation / News / Plans / Contact Us
+  - Home / Demo / Documentation / News / Plans
+  - About Us / Certifications / Contact Us
 - Admin CMS
   - 콘텐츠 생성, 수정, 임시저장, 게시 상태 관리
   - Demo / Documentation / News 관리
@@ -38,10 +39,15 @@ npm run typecheck
 
 - `src/app/[locale]`
   - 퍼블릭 라우트
+  - `about-us`, `certifications`, `contact-us`, `demo`, `docs`, `news`, `plans`
 - `src/app/admin`
   - 관리자 라우트
+  - `demo`, `documentation`, `news`, `seo`
+  - 공통 리스트/상세 기반의 관리 화면 사용
+- `src/app/api/admin/seo`
+  - SEO 관리용 보조 API
 - `src/components/common`
-  - 버튼, 입력, 탭 등 공통 UI
+  - 버튼, 입력, 셀렉트, 탭, reveal 등 공통 UI
 - `src/components/layout`
   - GNB, Footer, AdminShell 등 공통 레이아웃
 - `src/components/sections`
@@ -60,7 +66,14 @@ npm run typecheck
 - 스타일은 기존 디자인 토큰과 Tailwind 유틸리티를 우선 사용합니다.
 - 임의의 px 값은 꼭 필요한 경우에만 사용하고, 가능하면 기존 spacing / radius / color 토큰에 맞춥니다.
 - 타이포는 `src/styles/globals.css`의 `type-*` 유틸리티를 우선 사용합니다.
+- 색상 토큰은 `src/styles/globals.css`의 CSS 변수와 `tailwind.config.ts` 토큰을 함께 기준으로 사용합니다.
 - 반복되는 hover / focus / card 스타일은 공용 유틸리티 또는 공용 컴포넌트로 정리합니다.
+
+### Shared UI Patterns
+
+- 카드 hover 배경은 `card-hover` 유틸리티를 우선 사용합니다.
+- 퍼블릭 컨텐츠 카드 제목 hover 색상은 `content-hover-title` 유틸리티를 우선 사용합니다.
+- 입력 계열 포커스 스타일은 `ui-field`, `ui-field-shell` 유틸리티를 우선 사용합니다.
 
 ## Icons
 
@@ -79,6 +92,15 @@ npm run typecheck
 - 한 파일 내부에서만 사용하는 데이터는 해당 파일 안에 둡니다.
 - 여러 컴포넌트/페이지에서 공유되는 정적 데이터만 `src/constants/`로 분리합니다.
 - 도메인 로직과 저장 구조는 가능하면 `src/features/` 아래에 둡니다.
+- 콘텐츠 관리 로직은 `src/features/content`를 단일 소스로 유지합니다.
+- SEO 관리 로직은 `src/features/seo` 아래에 둡니다.
+
+## Content Architecture
+
+- 퍼블릭 Demo / Documentation / News는 공통 콘텐츠 모델을 사용합니다.
+- 어드민 Demo / Documentation / News도 공통 리스트/상세 페이지를 재사용합니다.
+- 카테고리별 제목, 설명, 경로 메타는 가능한 한 `src/features/content/config.ts`에서 관리합니다.
+- 다국어 콘텐츠는 locale별 필드를 저장하고 퍼블릭에서 현재 locale 기준으로 읽습니다.
 
 ## Comment Rules
 
@@ -96,3 +118,4 @@ npm run typecheck
 
 - 현재 관리자 콘텐츠와 SEO 설정 중 일부는 브라우저 저장소(`localStorage`) 기반으로 동작합니다.
 - SEO는 현재 런타임 메타 반영 방식으로 연결되어 있습니다.
+- 새 퍼블릭 페이지가 추가되면 SEO 메뉴의 `미등록 페이지 탐색` 또는 `고급 정의 편집` 흐름도 함께 점검합니다.

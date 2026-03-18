@@ -48,8 +48,8 @@ function getButtonStyle(
     return {
       container: cx(
         "inline-flex items-center justify-center gap-1.5 rounded-button px-4 py-2 transition-colors",
-        state === "hover" ? "bg-[#434346]" : "bg-secondary",
-        "hover:bg-[#434346]",
+        state === "hover" ? "bg-[#343439]" : "bg-secondary",
+        "hover:bg-[#343439]",
         state === "disable" && "opacity-40",
       ),
       text: cx(
@@ -74,9 +74,9 @@ function getButtonStyle(
           "hover:bg-white/10",
         ),
       variant === "primary" &&
-        cx(state === "hover" ? "bg-brand" : "bg-primary", "hover:bg-brand"),
+        cx(state === "hover" ? "bg-[#ABABAB]" : "bg-primary", "hover:bg-[#ABABAB]"),
       variant === "secondary" &&
-        cx(state === "hover" ? "bg-[#434346]" : "bg-secondary", "hover:bg-[#434346]"),
+        cx(state === "hover" ? "bg-[#343439]" : "bg-secondary", "hover:bg-[#343439]"),
       state === "disable" && "opacity-40",
     ),
     text: cx(

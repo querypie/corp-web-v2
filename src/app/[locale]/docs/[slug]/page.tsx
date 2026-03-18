@@ -4,6 +4,7 @@ import DocsDetailClientPage from "../../../../components/pages/docs/DocsDetailCl
 import type { DocsDetailPageProps } from "../../../../components/pages/docs/DocsDetailPage";
 import {
   getManagedCategoryLabel,
+  getContentThumbnailSrc,
   getLocalizedContent,
   getPublicDetailHref,
   getSeedManagedContents,
@@ -17,16 +18,40 @@ export default async function DocsDetailRoute({ params }: DocsDetailRouteProps) 
   const { locale, slug } = await params;
 
   if (!isLocale(locale)) notFound();
-  const currentEntry = getSeedManagedContents("documentation").find((item) => item.id === slug);
+  const docsItems = getSeedManagedContents("documentation").filter((item) => item.status === "published");
+  const currentIndex = docsItems.findIndex((item) => item.id === slug);
+  const currentEntry = currentIndex >= 0 ? docsItems[currentIndex] : null;
+  const categoryItems = currentEntry
+    ? docsItems.filter((item) => item.categorySlug === currentEntry.categorySlug)
+    : [];
+  const categoryIndex = currentEntry
+    ? categoryItems.findIndex((item) => item.id === slug)
+    : -1;
 
-  const relatedItems = getSeedManagedContents("documentation")
-    .filter((entry) => entry.id !== slug && entry.status === "published")
-    .map((entry) => ({
-      category: getManagedCategoryLabel("documentation", entry.categorySlug, locale),
-      href: getPublicDetailHref("documentation", locale, entry.id),
-      imageSrc: entry.imageSrc,
-      title: getLocalizedContent(entry.title, locale),
-    }));
+  const previousItem = categoryIndex > 0 ? categoryItems[categoryIndex - 1] : null;
+  const nextItem = categoryIndex < categoryItems.length - 1 ? categoryItems[categoryIndex + 1] : null;
+
+  const previousLabel = "Previous Post";
+  const nextLabel = "Next post";
+
+  const relatedItems = [
+    previousItem
+      ? {
+          category: previousLabel,
+          href: getPublicDetailHref("documentation", locale, previousItem.id),
+          imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
+          title: getLocalizedContent(previousItem.title, locale),
+        }
+      : null,
+    nextItem
+      ? {
+          category: nextLabel,
+          href: getPublicDetailHref("documentation", locale, nextItem.id),
+          imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
+          title: getLocalizedContent(nextItem.title, locale),
+        }
+      : null,
+  ].filter((item): item is NonNullable<typeof item> => !!item);
 
   return (
     <DocsDetailClientPage

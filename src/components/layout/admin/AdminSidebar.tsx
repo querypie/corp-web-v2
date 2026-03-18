@@ -25,7 +25,7 @@ export default function AdminSidebar({
     /* 어드민 전용 좌측 네비게이션 */
     <aside
       className={cx(
-        "group relative flex w-full flex-col border-b border-border bg-bg-deep px-5 py-5 transition-[width,padding] duration-200 md:border-b-0 md:border-r md:py-6",
+        "group relative flex w-full flex-col border-b border-border bg-bg-deep px-4 py-4 transition-[width,padding] duration-200 md:border-b-0 md:border-r md:px-4 md:py-6",
         isCollapsed ? "md:w-[64px] md:px-2" : "md:w-[240px] md:px-4",
       )}
       onMouseMove={(event) => {
@@ -132,7 +132,13 @@ export default function AdminSidebar({
           <div key={group.label} className="flex flex-col gap-1.5">
             <p className="m-0 type-body-sm text-fg">{group.label}</p>
             <div className="flex flex-col gap-px">
-              {group.items.map((item) => {
+              {group.items
+                .filter(
+                  (item) =>
+                    item.href !== "/admin/demo" &&
+                    item.href !== "/admin/documentation",
+                )
+                .map((item) => {
                 const isActive =
                   pathname === item.href ||
                   (item.href !== "/admin/demo" &&
@@ -162,7 +168,7 @@ export default function AdminSidebar({
       </nav>
 
       {!isCollapsed ? (
-        <div className="mt-auto hidden pt-6 md:block">
+        <div className="mt-5 pt-5 md:mt-auto md:block">
           <Button
             arrow={false}
             className="w-full justify-center"

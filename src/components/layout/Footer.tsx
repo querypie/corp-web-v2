@@ -48,9 +48,9 @@ export default function Footer({
   legalLinks = ["Cookie Preference", "Terms of Use", "Privacy Policy", "EULA"],
   locale = "en",
   sections = [
-    { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
+    { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer Service (FDES)"] },
     { title: "Features", items: ["Demo", "Documentation"] },
-    { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
+    { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us", "Plans"] },
   ],
 }: FooterProps) {
   const [copyright, ...officeLines] = addressLines;
@@ -65,12 +65,16 @@ export default function Footer({
       return `/${locale}/acp-not-found`;
     }
 
+    if (item === "Forward Deployed Engineer Service (FDES)") {
+      return `/${locale}/fdes-not-found`;
+    }
+
     if (item === "About Us" || item === "회사 소개") {
-      return `/${locale}/about-us-not-found`;
+      return `/${locale}/about-us`;
     }
 
     if (item === "Certifications" || item === "인증") {
-      return `/${locale}/certifications-not-found`;
+      return `/${locale}/certifications`;
     }
 
     if (item === "Demo" || item === "데모") {
@@ -90,6 +94,10 @@ export default function Footer({
 
     if (item === "Documentation" || item === "문서") {
       return `/${locale}/docs`;
+    }
+
+    if (item === "Plans" || item === "요금제" || item === "プラン") {
+      return `/${locale}/plans`;
     }
 
     return "/";

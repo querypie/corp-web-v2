@@ -4,7 +4,7 @@ import NewsListPage from "./NewsListPage";
 import type { Locale } from "@/constants/i18n";
 import { useManagedContents } from "@/features/content/clientStore";
 import useHydrated from "@/hooks/useHydrated";
-import { formatPublicDate, getLocalizedContent } from "@/features/content/data";
+import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent } from "@/features/content/data";
 
 export default function NewsListClientPage({
   locale,
@@ -27,7 +27,7 @@ export default function NewsListClientPage({
         .map((item) => ({
           date: formatPublicDate(locale, item.dateIso),
           href: item.externalUrl,
-          imageSrc: item.imageSrc,
+          imageSrc: getContentThumbnailSrc(item.imageSrc),
           summary: getLocalizedContent(item.summary, locale),
           title: getLocalizedContent(item.title, locale),
         }))}

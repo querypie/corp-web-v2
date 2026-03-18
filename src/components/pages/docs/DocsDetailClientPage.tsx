@@ -3,8 +3,9 @@
 import DocsDetailPage, { type DocsDetailPageProps } from "./DocsDetailPage";
 import type { Locale } from "@/constants/i18n";
 import { useManagedContents } from "@/features/content/clientStore";
+import useHydrated from "@/hooks/useHydrated";
 import { docsCategoryConfigs, getCategoryLabel } from "@/features/content/config";
-import { formatPublicDate, getLocalizedContent, getPublicDetailHref, getWriterLabel } from "@/features/content/data";
+import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel } from "@/features/content/data";
 
 type DocsDetailClientPageProps = {
   fallbackProps: DocsDetailPageProps;
@@ -17,22 +18,49 @@ export default function DocsDetailClientPage({
   locale,
   slug,
 }: DocsDetailClientPageProps) {
-  const items = useManagedContents("documentation");
+  const items = useManagedContents("documentation").filter((item) => item.status === "published");
+  const isHydrated = useHydrated();
 
-  const currentItem = items.find((item) => item.id === slug && item.status === "published");
+  const currentIndex = items.findIndex((item) => item.id === slug);
+  const currentItem = currentIndex >= 0 ? items[currentIndex] : null;
+
+  if (!isHydrated) {
+    return <DocsDetailPage {...fallbackProps} category="" date="" heroImageSrc="" />;
+  }
 
   if (!currentItem) {
     return <DocsDetailPage {...fallbackProps} />;
   }
 
-  const relatedItems = items
-    .filter((item) => item.status === "published" && item.id !== slug)
-    .map((item) => ({
-      category: getCategoryLabel(docsCategoryConfigs, item.categorySlug, locale),
-      href: getPublicDetailHref("documentation", locale, item.id),
-      imageSrc: item.imageSrc,
-      title: getLocalizedContent(item.title, locale),
-    }));
+  const categoryItems = items.filter(
+    (item) => item.categorySlug === currentItem.categorySlug,
+  );
+  const categoryIndex = categoryItems.findIndex((item) => item.id === slug);
+
+  const previousItem = categoryIndex > 0 ? categoryItems[categoryIndex - 1] : null;
+  const nextItem = categoryIndex < categoryItems.length - 1 ? categoryItems[categoryIndex + 1] : null;
+
+  const previousLabel = "Previous Post";
+  const nextLabel = "Next post";
+
+  const relatedItems = [
+    previousItem
+      ? {
+          category: previousLabel,
+          href: getPublicDetailHref("documentation", locale, previousItem.id),
+          imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
+          title: getLocalizedContent(previousItem.title, locale),
+        }
+      : null,
+    nextItem
+      ? {
+          category: nextLabel,
+          href: getPublicDetailHref("documentation", locale, nextItem.id),
+          imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
+          title: getLocalizedContent(nextItem.title, locale),
+        }
+      : null,
+  ].filter((item): item is NonNullable<typeof item> => !!item);
 
   return (
     <DocsDetailPage

@@ -8,74 +8,20 @@ type HeroProps = {
   promptRotatingTexts: string[];
 };
 
-const heroStars = [
-  { left: "4.5%", size: 1.5, top: "9%", twinkle: true },
-  { left: "8.5%", size: 2, top: "27%" },
-  { left: "13%", size: 1.5, top: "61%" },
-  { left: "17.4%", size: 2, top: "19%", twinkle: true },
-  { left: "21.8%", size: 2.5, top: "11%" },
-  { left: "24.5%", size: 1.5, top: "76%" },
-  { left: "29.3%", size: 1.5, top: "23%" },
-  { left: "31.4%", size: 2.5, top: "51%", twinkle: true },
-  { left: "34.6%", size: 1.5, top: "68%" },
-  { left: "38.8%", size: 2, top: "37%", twinkle: true },
-  { left: "42.3%", size: 1.5, top: "83%" },
-  { left: "46%", size: 1.5, top: "6%" },
-  { left: "50.5%", size: 1.5, top: "58%" },
-  { left: "54.2%", size: 2.5, top: "16%", twinkle: true },
-  { left: "56.8%", size: 2, top: "28%" },
-  { left: "60.4%", size: 1.5, top: "74%", twinkle: true },
-  { left: "64.1%", size: 2, top: "43%" },
-  { left: "67.7%", size: 1.5, top: "12%" },
-  { left: "71.6%", size: 2, top: "60%" },
-  { left: "74.8%", size: 2.5, top: "7%", twinkle: true },
-  { left: "78.5%", size: 1.5, top: "31%" },
-  { left: "82.1%", size: 1.5, top: "70%", twinkle: true },
-  { left: "85.6%", size: 2.5, top: "50%" },
-  { left: "88.9%", size: 2, top: "17%" },
-  { left: "91.5%", size: 1.5, top: "46%" },
-  { left: "94.2%", size: 2, top: "73%", twinkle: true },
-  { left: "96.3%", size: 1.5, top: "35%" },
-  { left: "10.9%", size: 2.5, top: "88%", twinkle: true },
-  { left: "36.2%", size: 2, top: "9%" },
-  { left: "58.6%", size: 2, top: "87%" },
-];
-
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
 function PlusIcon() {
-  return (
-    <img
-      alt=""
-      aria-hidden="true"
-      className="h-6 w-6 object-contain"
-      src="/icons/Plus.svg"
-    />
-  );
+  return <img alt="" aria-hidden="true" className="h-6 w-6 object-contain" src="/icons/Plus.svg" />;
 }
 
 function ChevronDownIcon() {
-  return (
-    <img
-      alt=""
-      aria-hidden="true"
-      className="h-[14px] w-[14px] object-contain"
-      src="/icons/chevron-down.svg"
-    />
-  );
+  return <img alt="" aria-hidden="true" className="h-[14px] w-[14px] object-contain" src="/icons/chevron-down.svg" />;
 }
 
 function ArrowUpIcon() {
-  return (
-    <img
-      alt=""
-      aria-hidden="true"
-      className="h-6 w-6 object-contain"
-      src="/icons/ArrowUp.svg"
-    />
-  );
+  return <img alt="" aria-hidden="true" className="h-6 w-6 object-contain" src="/icons/ArrowUp.svg" />;
 }
 
 export default function Hero({
@@ -106,56 +52,8 @@ export default function Hero({
           </p>
         </div>
 
-        {/* 중앙 비주얼 영역: 별 배경 + 장식 아이콘 + 프롬프트 카드 */}
+        {/* 중앙 비주얼 영역: 장식 아이콘 + 프롬프트 카드 */}
         <div className="relative h-[220px] w-full max-w-[1200px] md:h-[520px]">
-          {/* 우주 느낌의 별 배경 */}
-          <div className="pointer-events-none absolute inset-0">
-            {heroStars.map((star, index) => (
-              <span
-                key={`${star.left}-${star.top}-${index}`}
-                className="absolute rounded-full bg-white/80"
-                style={{
-                  animation: star.twinkle
-                    ? `hero-star-twinkle ${2 + (index % 5) * 0.55}s ease-in-out ${index * 0.19}s infinite`
-                    : undefined,
-                  boxShadow: star.twinkle
-                    ? `0 0 ${6 + star.size * 2}px rgba(255,255,255,0.38)`
-                    : "none",
-                  height: `${star.size}px`,
-                  left: star.left,
-                  opacity: star.twinkle ? 0.18 : 0.09,
-                  top: star.top,
-                  width: `${star.size}px`,
-                }}
-              />
-            ))}
-          </div>
-          {/* 데스크톱 전용 장식 아이콘 3종 */}
-          <div className="absolute hidden left-[calc(50%-191px)] top-[40px] h-[120px] w-[120px] -translate-x-1/2 md:block" style={{ animation: "hero-icon-float 4s ease-in-out infinite" }}>
-            <img
-              alt=""
-              aria-hidden="true"
-              className="block h-[120px] w-[120px] shrink-0"
-              src="/icons/Gemini.svg"
-            />
-          </div>
-          <div className="absolute hidden left-[calc(50%+70px)] top-[160px] z-20 h-[120px] w-[120px] -translate-x-1/2 md:block" style={{ animation: "hero-icon-float 4s ease-in-out 1.3s infinite" }}>
-            <img
-              alt=""
-              aria-hidden="true"
-              className="block h-[120px] w-[120px] shrink-0"
-              src="/icons/Claude.svg"
-            />
-          </div>
-          <div className="absolute hidden left-[calc(50%+244px)] top-[70px] h-[120px] w-[120px] -translate-x-1/2 md:block" style={{ animation: "hero-icon-float 4s ease-in-out 0.7s infinite" }}>
-            <img
-              alt=""
-              aria-hidden="true"
-              className="block h-[120px] w-[120px] shrink-0"
-              src="/icons/ChatGPT.svg"
-            />
-          </div>
-
           {/* 프롬프트 카드 뒤에서 흐르는 그라데이션 글로우 */}
           <div className="pointer-events-none absolute hidden left-1/2 top-[255px] h-[110px] w-[800px] -translate-x-1/2 overflow-visible md:block">
             <div

@@ -8,6 +8,20 @@
   --font-sans-ko: "Pretendard Variable";
   --font-sans-ja: "Pretendard JP";
   --font-mono: var(--font-jetbrains-mono), monospace;
+  --color-fg: #F7F7F8;
+  --color-mute-fg: #8C9099;
+  --color-bg-content: #1B1B1D;
+  --color-bg-deep: #181819;
+  --color-bg: #08090A;
+  --color-border: #2A2A2C;
+  --color-primary: #E6E6E6;
+  --color-secondary: #2A2A2E;
+  --color-white: #FFFFFF;
+  --color-point: #C0E136;
+  --color-success: #22C55E;
+  --color-warning: #CA8A04;
+  --color-destructive: #EF4444;
+  --color-brand: #EF612E;
 }
 
 * {
@@ -73,7 +87,18 @@ select {
 
   .card-hover:hover,
   .card-hover:focus-visible {
-    background-color: #282829;
+    background-color: #242426;
+  }
+
+  /* 퍼블릭 컨텐츠 카드 제목 hover/focus 가이드:
+     컨텐츠 리스트, 뉴스, 이전/다음글 카드 제목은 동일한 brand hover 패턴을 사용한다. */
+  .content-hover-title {
+    transition: color 200ms ease;
+  }
+
+  .group:hover .content-hover-title,
+  .group:focus-visible .content-hover-title {
+    @apply text-brand;
   }
 
   /* 타이포 유틸리티: 모바일 기본값 */
@@ -106,7 +131,7 @@ select {
   }
 
   .type-body-md {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 18px;
     letter-spacing: 0;
     font-weight: 300;
@@ -158,7 +183,7 @@ select {
 
     .type-body-sm {
       font-size: 12px;
-      line-height: 20px;
+      line-height: 18px;
     }
 
   }

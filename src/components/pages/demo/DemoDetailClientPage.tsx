@@ -4,8 +4,9 @@ import DemoDetailPage from "./DemoDetailPage";
 import type { Locale } from "@/constants/i18n";
 import type { DocsDetailPageProps } from "../docs/DocsDetailPage";
 import { useManagedContents } from "@/features/content/clientStore";
+import useHydrated from "@/hooks/useHydrated";
 import { demoCategoryConfigs, getCategoryLabel } from "@/features/content/config";
-import { formatPublicDate, getLocalizedContent, getPublicDetailHref, getWriterLabel } from "@/features/content/data";
+import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel } from "@/features/content/data";
 
 type DemoDetailClientPageProps = {
   fallbackProps: DocsDetailPageProps;
@@ -18,25 +19,49 @@ export default function DemoDetailClientPage({
   locale,
   slug,
 }: DemoDetailClientPageProps) {
-  const items = useManagedContents("demo");
+  const items = useManagedContents("demo").filter((item) => item.status === "published");
+  const isHydrated = useHydrated();
 
-  const currentUseCase = items.find(
-    (item) => item.id === slug && item.status === "published",
-  );
+  const currentIndex = items.findIndex((item) => item.id === slug);
+  const currentUseCase = currentIndex >= 0 ? items[currentIndex] : null;
+
+  if (!isHydrated) {
+    return <DemoDetailPage {...fallbackProps} category="" date="" heroImageSrc="" />;
+  }
 
   if (!currentUseCase) {
     return <DemoDetailPage {...fallbackProps} />;
   }
 
-  const relatedPublishedItems = items
-    .filter((item) => item.section === "demo")
-    .filter((item) => item.status === "published" && item.id !== slug)
-    .map((item) => ({
-      category: getCategoryLabel(demoCategoryConfigs, item.categorySlug, locale),
-      href: getPublicDetailHref("demo", locale, item.id),
-      imageSrc: item.imageSrc,
-      title: getLocalizedContent(item.title, locale),
-    }));
+  const categoryItems = items.filter(
+    (item) => item.categorySlug === currentUseCase.categorySlug,
+  );
+  const categoryIndex = categoryItems.findIndex((item) => item.id === slug);
+
+  const previousItem = categoryIndex > 0 ? categoryItems[categoryIndex - 1] : null;
+  const nextItem = categoryIndex < categoryItems.length - 1 ? categoryItems[categoryIndex + 1] : null;
+
+  const previousLabel = "Previous Post";
+  const nextLabel = "Next post";
+
+  const relatedPublishedItems = [
+    previousItem
+      ? {
+          category: previousLabel,
+          href: getPublicDetailHref("demo", locale, previousItem.id),
+          imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
+          title: getLocalizedContent(previousItem.title, locale),
+        }
+      : null,
+    nextItem
+      ? {
+          category: nextLabel,
+          href: getPublicDetailHref("demo", locale, nextItem.id),
+          imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
+          title: getLocalizedContent(nextItem.title, locale),
+        }
+      : null,
+  ].filter((item): item is NonNullable<typeof item> => !!item);
 
   return (
     <DemoDetailPage

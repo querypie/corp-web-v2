@@ -1,4 +1,5 @@
 import Button from "../../common/Button";
+import Select from "../../common/Select";
 
 type ContactLink = {
   href: string;
@@ -9,8 +10,10 @@ type ContactLink = {
 type ContactField = {
   label: string;
   name: string;
-  placeholder: string;
+  options?: string[];
+  placeholder?: string;
   required?: boolean;
+  type?: "select" | "text";
 };
 
 type ContactUsPageProps = {
@@ -57,18 +60,41 @@ function FieldLabel({
 
 function TextField({
   field,
+  index,
 }: {
   field: ContactField;
+  index: number;
 }) {
   return (
     /* 단일 줄 입력 필드 */
-    <div className="flex w-full flex-col gap-[10px]">
+    <div className="flex w-full flex-col gap-[10px]" data-reveal style={{ transitionDelay: `${index * 70}ms` }}>
       <FieldLabel label={field.label} required={field.required} />
       <input
         aria-label={field.label}
         className="ui-field h-10 w-full rounded-button bg-bg-content px-3 type-body-md text-fg outline-none placeholder:text-mute-fg"
         name={field.name}
+        placeholder={field.placeholder}
         type="text"
+      />
+    </div>
+  );
+}
+
+function SelectField({
+  field,
+  index,
+}: {
+  field: ContactField;
+  index: number;
+}) {
+  return (
+    <div className="flex w-full flex-col gap-[10px]" data-reveal style={{ transitionDelay: `${index * 70}ms` }}>
+      <FieldLabel label={field.label} required={field.required} />
+      <Select
+        aria-label={field.label}
+        options={(field.options ?? []).map((option) => ({ label: option, value: option }))}
+        placeholder={field.placeholder ?? field.label}
+        name={field.name}
       />
     </div>
   );
@@ -76,17 +102,20 @@ function TextField({
 
 function TextAreaField({
   field,
+  index,
 }: {
   field: ContactField;
+  index: number;
 }) {
   return (
     /* 여러 줄 추가 정보 입력 */
-    <div className="flex w-full flex-col gap-[10px]">
+    <div className="flex w-full flex-col gap-[10px]" data-reveal style={{ transitionDelay: `${index * 70}ms` }}>
       <FieldLabel label={field.label} required={field.required} />
       <textarea
         aria-label={field.label}
         className="ui-field min-h-[120px] w-full resize-none rounded-button bg-bg-content px-3 py-2.5 type-body-md text-fg outline-none placeholder:text-mute-fg"
         name={field.name}
+        placeholder={field.placeholder}
       />
     </div>
   );
@@ -129,9 +158,10 @@ export default function ContactUsPage({
   titleLines,
 }: ContactUsPageProps) {
   return (
-    <section className="mx-auto flex w-full max-w-[1000px] flex-col gap-12 px-5 pb-10 md:flex-row md:items-start md:gap-[60px] md:px-10">
+    <div className="flex w-full justify-center px-5 md:px-10">
+      <section className="mx-auto flex w-full max-w-[900px] flex-col gap-20 pb-10 md:flex-row md:items-start md:gap-[60px]">
           {/* 좌측 히어로/안내 카피 */}
-          <div className="flex min-w-0 flex-1 basis-1/2 flex-col gap-5">
+          <div className="flex min-w-0 flex-1 basis-1/2 flex-col gap-5" data-reveal>
             <h1 className="m-0 type-h2 text-fg">
               {titleLines.map((line, index) => (
                 <span key={`${line}-${index}`} className="block">
@@ -157,11 +187,15 @@ export default function ContactUsPage({
 
           {/* 우측 실제 문의 폼 */}
           <form className="flex min-w-0 flex-1 basis-1/2 flex-col gap-5">
-            {formFields.map((field) => (
-              <TextField key={field.name} field={field} />
+            {formFields.map((field, index) => (
+              field.type === "select" ? (
+                <SelectField key={field.name} field={field} index={index} />
+              ) : (
+                <TextField key={field.name} field={field} index={index} />
+              )
             ))}
 
-            <div className="flex w-full flex-col gap-[10px]">
+            <div className="flex w-full flex-col gap-[10px]" data-reveal style={{ transitionDelay: `${formFields.length * 70}ms` }}>
               <FieldLabel label={productFieldLabel} required />
               <div className="flex flex-col gap-[10px]">
                 {productOptions.map((option) => (
@@ -170,11 +204,13 @@ export default function ContactUsPage({
               </div>
             </div>
 
-            <TextAreaField field={messageField} />
+            <TextAreaField field={messageField} index={formFields.length + 1} />
 
-            <CheckboxRow label={consentLabel} name="updates" />
+            <div data-reveal style={{ transitionDelay: `${(formFields.length + 2) * 70}ms` }}>
+              <CheckboxRow label={consentLabel} name="updates" />
+            </div>
 
-            <p className="m-0 type-body-md leading-5 text-fg">
+            <p className="m-0 type-body-md leading-5 text-fg" data-reveal style={{ transitionDelay: `${(formFields.length + 3) * 70}ms` }}>
               {privacyText}{" "}
               <a className="text-mute-fg underline decoration-solid transition-colors hover:text-fg" href={privacyTermsHref}>
                 {privacyTermsLabel}
@@ -186,12 +222,13 @@ export default function ContactUsPage({
               .
             </p>
 
-            <div className="flex">
+            <div className="flex" data-reveal style={{ transitionDelay: `${(formFields.length + 4) * 70}ms` }}>
               <Button arrow={false} variant="secondary">
                 {submitLabel}
               </Button>
             </div>
           </form>
-        </section>
+      </section>
+    </div>
   );
 }

@@ -15,7 +15,9 @@ import {
   ensureUniqueSlug,
   formatPublicDate,
   getAdminCategoryHref,
+  getContentThumbnailSrc,
   getManagedCategoryLabel,
+  getNextSortOrder,
   getLocalizedContent,
   getPublicListHref,
   getWriterLabel,
@@ -49,7 +51,7 @@ function ConfirmDialog({
   return (
     /* 취소/검증 경고에 공통으로 쓰는 확인 모달 */
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-5" onClick={onCancel}>
-      <div className="w-full max-w-[300px] rounded-modal bg-bg-content px-5 py-8" onClick={(event) => event.stopPropagation()}>
+      <div className="w-full max-w-[320px] rounded-modal bg-bg-content px-5 py-8" onClick={(event) => event.stopPropagation()}>
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="flex flex-col items-center gap-2 text-center">
             <h2 className="m-0 type-h3 text-fg">{title}</h2>
@@ -87,7 +89,6 @@ function TextField({
       <input
         className="ui-field h-11 w-full rounded-button bg-bg-content px-3 type-body-md text-fg outline-none placeholder:text-mute-fg"
         onChange={(event) => onChange(event.target.value)}
-        placeholder={placeholder}
         type="text"
         value={value}
       />
@@ -120,7 +121,6 @@ function TextAreaField({
       <textarea
         className={cx("ui-field w-full resize-y rounded-button bg-bg-content px-4 py-4 type-body-md text-fg outline-none placeholder:text-mute-fg", rowsClassName ?? "min-h-[320px]")}
         onChange={(event) => onChange(event.target.value)}
-        placeholder={placeholder ?? "# 도입 배경\n\n## 해결한 문제\n\n- 문제를 적어주세요\n\n## 적용 방식\n\n1. 실행 흐름을 설명해주세요"}
         value={value}
       />
     </div>
@@ -147,9 +147,11 @@ function NewsPreviewCard({
         <h2 className="m-0 type-h2 text-fg">{title}</h2>
         <p className="m-0 type-body-md text-mute-fg">{summary}</p>
       </div>
-      <div className="order-1 h-[180px] w-full shrink-0 overflow-hidden rounded-thumb bg-bg-content md:order-2 md:h-[200px] md:w-[380px]">
-        <img alt={title} className="block h-full w-full object-cover" src={imageSrc} />
-      </div>
+      {imageSrc ? (
+        <div className="order-1 h-[180px] w-full shrink-0 overflow-hidden rounded-thumb bg-bg-content md:order-2 md:h-[200px] md:w-[380px]">
+          <img alt={title} className="block h-full w-full object-cover" src={imageSrc} />
+        </div>
+      ) : null}
     </a>
   );
 }
@@ -272,9 +274,11 @@ function ContentPreview({
         <div className="type-body-md text-fg">{writer}</div>
         <p className="m-0 type-body-md text-mute-fg">{date}</p>
       </div>
-      <div className="h-[220px] w-full overflow-hidden rounded-box bg-bg-content md:h-[380px]">
-        <img alt={heroImageAlt} className="block h-full w-full object-cover" src={heroImageSrc} />
-      </div>
+      {heroImageSrc ? (
+        <div className="h-[220px] w-full overflow-hidden rounded-box bg-bg-content md:h-[380px]">
+          <img alt={heroImageAlt} className="block h-full w-full object-cover" src={heroImageSrc} />
+        </div>
+      ) : null}
       <PreviewMarkdown markdown={bodyMarkdown} />
     </div>
   );
@@ -315,7 +319,7 @@ export default function AdminManagedContentDetailPage({
     /* 수정 화면이면 기존 데이터를 채우고, 신규면 빈 초안을 준비한다 */
     if (currentItem) {
       setForm(currentItem);
-      setThumbnailName(currentItem.imageSrc.split("/").pop() ?? "");
+      setThumbnailName(currentItem.imageSrc);
       return;
     }
     setForm(createEmptyManagedContentDraft(section, categorySlug));
@@ -383,11 +387,19 @@ export default function AdminManagedContentDetailPage({
     reader.readAsDataURL(file);
   }
 
+  function clearThumbnail() {
+    updateForm("imageSrc", "");
+    setThumbnailName("");
+
+    if (fileInputRef.current) {
+      fileInputRef.current.value = "";
+    }
+  }
+
   function validateForm() {
     /* 게시 전 필수 입력값만 간단히 검증한다 */
     const missing: string[] = [];
     if (!getLocalizedContent(form.title, activeLocale).trim()) missing.push("제목");
-    if (!form.imageSrc.trim()) missing.push("썸네일");
     if (section === "news") {
       if (!getLocalizedContent(form.summary, activeLocale).trim()) missing.push("요약");
       if (!form.externalUrl.trim()) missing.push("URL");
@@ -423,6 +435,10 @@ export default function AdminManagedContentDetailPage({
         categorySlug,
         id: nextId,
         section,
+        sortOrder:
+          itemId === "new"
+            ? getNextSortOrder(items, section, categorySlug)
+            : form.sortOrder,
         status,
       },
       itemId === "new" ? undefined : itemId,
@@ -436,7 +452,7 @@ export default function AdminManagedContentDetailPage({
     bodyMarkdown: getLocalizedContent(form.bodyMarkdown, activeLocale) || "작성한 본문이 이 영역에 실시간 표시됩니다.",
     date: formatPublicDate("ko", form.dateIso),
     heroImageAlt: getLocalizedContent(form.title, activeLocale) || "Content thumbnail preview",
-    heroImageSrc: form.imageSrc || "/images/content/article-01.png",
+    heroImageSrc: form.imageSrc,
     summary: getLocalizedContent(form.summary, activeLocale) || "뉴스 요약을 입력하면 여기에 반영됩니다.",
     title: getLocalizedContent(form.title, activeLocale) || "제목을 입력하면 여기에 반영됩니다.",
     url: form.externalUrl,
@@ -450,16 +466,16 @@ export default function AdminManagedContentDetailPage({
     <section className="flex flex-col gap-8">
       {/* 페이지 상단 설명과 현재 작업 상태를 표시 */}
       <AdminHeader
-        description={`Create and manage ${section} content for ${categorySlug}.`}
+        description="콘텐츠 작성, 수정, 임시저장, 게시 전 미리보기를 이 화면에서 관리합니다."
         title={itemId === "new" ? `${categoryLabel} > Create Content` : "Modify Content"}
       />
 
       {/* 미리보기 on/off에 따라 2단 또는 단일 컬럼으로 전환 */}
-      <div className={cx("grid gap-6", showPreview ? "xl:grid-cols-[minmax(0,740px)_minmax(0,1fr)]" : "mx-auto w-full max-w-[740px]")}>
+      <div className={cx("grid gap-5 md:gap-6", showPreview ? "xl:grid-cols-[minmax(0,740px)_minmax(0,1fr)]" : "mx-auto w-full max-w-[740px]")}>
         <div className="flex min-w-0 w-full max-w-[740px] flex-col gap-5 overflow-hidden rounded-[28px] border border-border bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]">
           <PanelHeader
             trailing={
-              <div className="flex w-full items-center gap-4">
+              <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center">
                 <div className="rounded-full bg-bg-deep p-1">
                   <div className="flex items-center rounded-full">
                     {(["en", "ko", "ja"] as const).map((locale) => (
@@ -473,7 +489,7 @@ export default function AdminManagedContentDetailPage({
                     ))}
                   </div>
                 </div>
-                <div className="flex flex-1 justify-end">
+                <div className="flex justify-end sm:flex-1">
                   <ToggleSwitch checked={showPreview} label="미리보기" onChange={() => setShowPreview((current) => !current)} />
                 </div>
               </div>
@@ -483,13 +499,13 @@ export default function AdminManagedContentDetailPage({
           {/* 좌측 작성 폼 본문 */}
           <div className="grid gap-5 px-5 pt-5 md:px-6 md:pt-6">
             {section === "news" ? (
-              <TextField label="연결 URL" onChange={(value) => updateForm("externalUrl", value)} placeholder="https://example.com/news" value={form.externalUrl} />
+              <TextField label="연결 URL" onChange={(value) => updateForm("externalUrl", value)} value={form.externalUrl} />
             ) : null}
-            <TextField label="제목" onChange={(value) => updateLocalizedField("title", activeLocale, value)} placeholder="퍼블릭 상세 제목을 입력하세요" value={getLocalizedContent(form.title, activeLocale)} />
+            <TextField label="제목" onChange={(value) => updateLocalizedField("title", activeLocale, value)} value={getLocalizedContent(form.title, activeLocale)} />
             {section !== "news" ? (
               <div className="grid gap-5 md:grid-cols-2">
-                <TextField label="작성자 이름" onChange={(value) => updateForm("authorName", value)} placeholder="예: 김서연" value={form.authorName} />
-                <TextField label="직책" onChange={(value) => updateForm("authorRole", value)} placeholder="예: Product Marketing Lead" value={form.authorRole} />
+                <TextField label="작성자 이름" onChange={(value) => updateForm("authorName", value)} value={form.authorName} />
+                <TextField label="직책" onChange={(value) => updateForm("authorRole", value)} value={form.authorRole} />
               </div>
             ) : null}
             <div className="flex flex-col gap-[10px]">
@@ -503,19 +519,34 @@ export default function AdminManagedContentDetailPage({
             <div className="flex flex-col gap-[10px]">
               <label className="type-body-md text-fg">썸네일</label>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <div className="flex min-w-0 h-11 flex-1 items-center rounded-button border border-transparent bg-bg-content px-3">
-                  <span className="truncate type-body-md text-mute-fg">{thumbnailName || "선택된 파일이 없습니다."}</span>
+                <div className="flex min-w-0 h-11 flex-1 items-center justify-between gap-3 rounded-button border border-transparent bg-bg-content px-3">
+                  <input
+                    className="w-full border-0 bg-transparent type-body-md text-fg outline-none"
+                    onChange={(event) => {
+                      updateForm("imageSrc", event.target.value);
+                      setThumbnailName(event.target.value);
+                    }}
+                    type="text"
+                    value={form.imageSrc}
+                  />
+                  {thumbnailName ? (
+                    <button
+                      className="shrink-0 bg-transparent p-0 type-body-md text-mute-fg transition-colors hover:text-fg"
+                      onClick={clearThumbnail}
+                      type="button"
+                    >
+                      삭제
+                    </button>
+                  ) : null}
                 </div>
                 <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} variant="outline">썸네일 추가</Button>
               </div>
-              <p className="m-0 type-body-sm text-mute-fg">JPG, PNG 권장. 퍼블릭 카드와 상세 상단에 동일하게 사용됩니다.</p>
               <input accept="image/png,image/jpeg,image/webp" className="sr-only" onChange={handleThumbnailChange} ref={fileInputRef} type="file" />
             </div>
             {section === "news" ? (
               <TextAreaField
                 label="요약"
                 onChange={(value) => updateLocalizedField("summary", activeLocale, value)}
-                placeholder="뉴스 요약을 입력하세요"
                 rowsClassName="min-h-[160px]"
                 value={getLocalizedContent(form.summary, activeLocale)}
               />
@@ -535,7 +566,7 @@ export default function AdminManagedContentDetailPage({
 
         {/* 우측 퍼블릭 상세 미리보기 */}
         {showPreview ? (
-          <div className="min-w-0 overflow-hidden rounded-[28px] border border-border bg-bg-content/40">
+          <div className="min-w-0 overflow-hidden rounded-[20px] border border-border bg-bg-content/40">
             <div className="max-h-[calc(100vh-180px)] overflow-auto px-4 py-5 sm:px-5 sm:py-6 md:px-6">
               {section === "news" ? (
                 <NewsPreviewCard

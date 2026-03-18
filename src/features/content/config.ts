@@ -22,6 +22,14 @@ type CategoryConfig<TSlug extends string> = {
   slug: TSlug;
 };
 
+type AdminCategoryConfig<TSlug extends string> = {
+  description: string;
+  href: string;
+  label: string;
+  slug: TSlug;
+  title: string;
+};
+
 export const demoCategoryConfigs: CategoryConfig<DemoCategorySlug>[] = [
   {
     href: (locale) => `/${locale}/demo`,
@@ -78,6 +86,86 @@ export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
   },
 ];
 
+const demoAdminCategoryConfigs: AdminCategoryConfig<DemoCategorySlug>[] = [
+  {
+    description: "데모 콘텐츠를 생성하고 순서, 노출 상태, 게시 흐름을 관리합니다.",
+    href: "/admin/demo",
+    label: "All",
+    slug: "all",
+    title: "Demo",
+  },
+  {
+    description: "홈페이지 활용 사례 콘텐츠의 노출 상태와 게시 흐름을 관리합니다.",
+    href: "/admin/demo/use-cases",
+    label: "Use Cases",
+    slug: "use-cases",
+    title: "Use Cases",
+  },
+  {
+    description: "AIP 기능 데모 콘텐츠와 문구, 노출 순서를 관리합니다.",
+    href: "/admin/demo/aip-features",
+    label: "AIP Features",
+    slug: "aip-features",
+    title: "AIP Features",
+  },
+  {
+    description: "ACP 기능 데모 콘텐츠와 문구, 노출 순서를 관리합니다.",
+    href: "/admin/demo/acp-features",
+    label: "ACP Features",
+    slug: "acp-features",
+    title: "ACP Features",
+  },
+  {
+    description: "웨비나 데모, 다시보기 링크, 후속 안내 콘텐츠를 관리합니다.",
+    href: "/admin/demo/webinars",
+    label: "Webinars",
+    slug: "webinars",
+    title: "Webinars",
+  },
+];
+
+const docsAdminCategoryConfigs: AdminCategoryConfig<DocsCategorySlug>[] = [
+  {
+    description: "문서 콘텐츠 목록과 상세 페이지, 관련 콘텐츠 흐름을 관리합니다.",
+    href: "/admin/documentation",
+    label: "All",
+    slug: "all",
+    title: "Documentation",
+  },
+  {
+    description: "소개 덱 콘텐츠와 노출 순서를 관리합니다.",
+    href: "/admin/documentation/introduction-decks",
+    label: "Introduction Decks",
+    slug: "introduction-decks",
+    title: "Introduction Decks",
+  },
+  {
+    description: "용어집 콘텐츠와 게시 노출 상태를 관리합니다.",
+    href: "/admin/documentation/glossary",
+    label: "Glossary",
+    slug: "glossary",
+    title: "Glossary",
+  },
+  {
+    description: "매뉴얼 문서와 정렬 순서, 관련 콘텐츠 흐름을 관리합니다.",
+    href: "/admin/documentation/manuals",
+    label: "Manuals",
+    slug: "manuals",
+    title: "Manuals",
+  },
+  {
+    description: "블로그 문서의 게시 상태와 노출 순서를 관리합니다.",
+    href: "/admin/documentation/blogs",
+    label: "Blogs",
+    slug: "blogs",
+    title: "Blogs",
+  },
+];
+
+function getAdminCategoryConfigs(section: "demo" | "documentation") {
+  return section === "demo" ? demoAdminCategoryConfigs : docsAdminCategoryConfigs;
+}
+
 export function getCategoryLabel<TSlug extends string>(
   configs: CategoryConfig<TSlug>[],
   slug: TSlug,
@@ -108,21 +196,44 @@ export function getPublicMenuItems<TSlug extends string>(
 }
 
 export function getAdminSectionMenuItems(section: "demo" | "documentation") {
-  if (section === "demo") {
-    return [
-      { href: "/admin/demo", label: "All" },
-      { href: "/admin/demo/use-cases", label: "Use Cases" },
-      { href: "/admin/demo/aip-features", label: "AIP Features" },
-      { href: "/admin/demo/acp-features", label: "ACP Features" },
-      { href: "/admin/demo/webinars", label: "Webinars" },
-    ];
-  }
+  return getAdminCategoryConfigs(section).map(({ href, label, slug }) => ({
+    href,
+    label,
+    slug,
+  }));
+}
 
-  return [
-    { href: "/admin/documentation", label: "All" },
-    { href: "/admin/documentation/introduction-decks", label: "Introduction Decks" },
-    { href: "/admin/documentation/glossary", label: "Glossary" },
-    { href: "/admin/documentation/manuals", label: "Manuals" },
-    { href: "/admin/documentation/blogs", label: "Blogs" },
-  ];
+export function getAdminCategoryPageMeta(
+  section: "demo",
+  categorySlug: DemoCategorySlug,
+): Pick<AdminCategoryConfig<DemoCategorySlug>, "description" | "title">;
+export function getAdminCategoryPageMeta(
+  section: "documentation",
+  categorySlug: DocsCategorySlug,
+): Pick<AdminCategoryConfig<DocsCategorySlug>, "description" | "title">;
+export function getAdminCategoryPageMeta(
+  section: "demo" | "documentation",
+  categorySlug: DemoCategorySlug | DocsCategorySlug,
+) {
+  const config = getAdminCategoryConfigs(section).find((item) => item.slug === categorySlug);
+
+  return {
+    description: config?.description ?? "",
+    title: config?.title ?? "",
+  };
+}
+
+export function isAdminSectionCategory(
+  section: "demo",
+  categorySlug: string,
+): categorySlug is DemoCategorySlug;
+export function isAdminSectionCategory(
+  section: "documentation",
+  categorySlug: string,
+): categorySlug is DocsCategorySlug;
+export function isAdminSectionCategory(
+  section: "demo" | "documentation",
+  categorySlug: string,
+) {
+  return getAdminCategoryConfigs(section).some((item) => item.slug === categorySlug);
 }
