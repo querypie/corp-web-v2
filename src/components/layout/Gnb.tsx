@@ -10,6 +10,7 @@ function getSolutionsSubItems(locale: string) {
   return [
     { label: "AI Platform (AIP)", href: `/${locale}/aip-not-found` },
     { label: "Access Control Platform (ACP)", href: `/${locale}/acp-not-found` },
+    { label: "Forward Deployed Engineer Service (FDES)", href: `/${locale}/fdes-not-found` },
   ];
 }
 
@@ -24,8 +25,8 @@ function getFeaturesSubItems(locale: string) {
 /* 컴퍼니 서브메뉴 */
 function getCompanySubItems(locale: string) {
   return [
-    { label: "About Us", href: `/${locale}/about-us-not-found` },
-    { label: "Certifications", href: `/${locale}/certifications-not-found` },
+    { label: "About Us", href: `/${locale}/about-us` },
+    { label: "Certifications", href: `/${locale}/certifications` },
     { label: "News", href: `/${locale}/news` },
     { label: "Contact Us", href: `/${locale}/contact-us` },
   ];
@@ -116,7 +117,7 @@ export default function Gnb({
                     <button
                       className={cx(
                         "type-body-md transition-colors",
-                        solutionsOpen ? "text-mute-fg" : "text-fg",
+                        solutionsOpen ? "text-fg" : "text-mute-fg hover:text-fg",
                       )}
                       type="button"
                     >
@@ -130,7 +131,7 @@ export default function Gnb({
                         solutionsOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                       )}
                     >
-                      <div className="overflow-hidden rounded-[8px] border border-white/10 bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
+                      <div className="overflow-hidden rounded-[8px] border border-border bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
                         {getSolutionsSubItems(locale).map((sub) => (
                           <a
                             key={sub.label}
@@ -157,7 +158,7 @@ export default function Gnb({
                     <button
                       className={cx(
                         "type-body-md transition-colors",
-                        featuresOpen ? "text-mute-fg" : "text-fg",
+                        featuresOpen ? "text-fg" : "text-mute-fg hover:text-fg",
                       )}
                       type="button"
                     >
@@ -171,7 +172,7 @@ export default function Gnb({
                         featuresOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                       )}
                     >
-                      <div className="overflow-hidden rounded-[8px] border border-white/10 bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
+                      <div className="overflow-hidden rounded-[8px] border border-border bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
                         {getFeaturesSubItems(locale).map((sub) => (
                           <a
                             key={sub.label}
@@ -198,7 +199,7 @@ export default function Gnb({
                     <button
                       className={cx(
                         "type-body-md transition-colors",
-                        companyOpen ? "text-mute-fg" : "text-fg",
+                        companyOpen ? "text-fg" : "text-mute-fg hover:text-fg",
                       )}
                       type="button"
                     >
@@ -212,7 +213,7 @@ export default function Gnb({
                         companyOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                       )}
                     >
-                      <div className="overflow-hidden rounded-[8px] border border-white/10 bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
+                      <div className="overflow-hidden rounded-[8px] border border-border bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
                         {getCompanySubItems(locale).map((sub) => (
                           <a
                             key={sub.label}
@@ -231,7 +232,7 @@ export default function Gnb({
               return (
                 <a
                   key={item}
-                  className="type-body-md text-fg transition-colors hover:text-mute-fg"
+                  className="type-body-md text-mute-fg transition-colors hover:text-fg"
                   href={getNavHref(item, locale)}
                 >
                   {item}
@@ -247,7 +248,7 @@ export default function Gnb({
           >
             <button
               aria-label="Change language"
-              className="transition-opacity hover:opacity-50"
+              className="opacity-60 transition-opacity hover:opacity-100"
               type="button"
             >
               {localeIcon ?? (
@@ -266,7 +267,7 @@ export default function Gnb({
                 localeOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
               )}
             >
-              <div className="overflow-hidden rounded-[8px] border border-white/10 bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
+              <div className="overflow-hidden rounded-[8px] border border-border bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
                 {localeSubItems.map((sub) => (
                   <a
                     key={sub.label}

@@ -27,13 +27,18 @@ function PlanSummaryCard({
   description,
   features,
   href,
+  index,
   name,
   priceLabel,
   tone = "secondary",
-}: PlanCard) {
+}: PlanCard & { index: number }) {
   return (
     /* 상단 플랜 카드 한 장 */
-    <article className="card-hover flex min-h-[420px] flex-col justify-between rounded-box bg-bg-content p-[30px]">
+    <article
+      className="card-hover flex min-h-[420px] flex-col justify-between rounded-box bg-bg-content p-[30px]"
+      data-reveal
+      style={{ transitionDelay: `${index * 70}ms` }}
+    >
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-1">
           <h2 className={cx("m-0 type-h2", tone === "primary" ? "text-brand" : "text-fg")}>{name}</h2>
@@ -83,7 +88,7 @@ function ComparisonTable({
 }) {
   return (
     /* 하단 플랜 비교표 */
-    <div className="w-full">
+    <div className="w-full" data-reveal style={{ transitionDelay: "220ms" }}>
       <div className="hidden w-full grid-cols-4 items-center py-4 md:grid">
         <div />
         {plans.map((plan) => (
@@ -148,7 +153,7 @@ export default function PlansPage({
   return (
     <div className="flex w-full justify-center px-5 pb-10 md:px-10">
       <section className="flex w-full max-w-[1200px] flex-col gap-[80px]">
-          <div className="flex flex-col items-center gap-5">
+          <div className="flex flex-col items-center gap-5" data-reveal>
             <h1 className="m-0 type-h1 text-center text-fg">Pricing</h1>
 
             {/* 제품군 전환 탭 */}
@@ -173,11 +178,12 @@ export default function PlansPage({
           {/* 선택된 제품군에 맞는 카드/비교표 렌더링 */}
           <div className="flex flex-col items-center gap-[80px]">
             <div className="grid w-full gap-5 md:grid-cols-3">
-              {activeProduct.cards.map((plan) => (
+              {activeProduct.cards.map((plan, index) => (
                 <PlanSummaryCard
                   key={plan.name}
                   {...plan}
                   href={withLocaleHref(locale, plan.href)}
+                  index={index}
                 />
               ))}
             </div>

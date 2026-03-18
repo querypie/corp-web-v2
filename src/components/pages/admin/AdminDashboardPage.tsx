@@ -49,12 +49,12 @@ function MiniLineChart() {
   return (
     /* 구독자 추이를 보여주는 라인 차트 */
     <svg className="h-[140px] w-full" viewBox="0 0 300 140" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M10 98C36 74 60 80 82 62C104 44 120 40 146 54C168 66 184 102 212 94C236 86 252 28 290 36" stroke="#FF892F" strokeWidth="2.5" strokeLinecap="round" />
+      <path d="M10 98C36 74 60 80 82 62C104 44 120 40 146 54C168 66 184 102 212 94C236 86 252 28 290 36" stroke="#EF612E" strokeWidth="2.5" strokeLinecap="round" />
       <path d="M10 98C36 74 60 80 82 62C104 44 120 40 146 54C168 66 184 102 212 94C236 86 252 28 290 36V140H10V98Z" fill="url(#subscribers-fill)" fillOpacity="0.18" />
       <defs>
         <linearGradient id="subscribers-fill" x1="150" y1="24" x2="150" y2="140" gradientUnits="userSpaceOnUse">
-          <stop stopColor="#FF892F" />
-          <stop offset="1" stopColor="#FF892F" stopOpacity="0" />
+          <stop stopColor="#EF612E" />
+          <stop offset="1" stopColor="#EF612E" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>
@@ -102,7 +102,7 @@ export default function AdminDashboardPage() {
     <section className="flex flex-col gap-8">
       {/* 관리자 첫 화면 요약 헤더 */}
       <AdminHeader
-        description="Manage homepage publishing, monitor traffic, and keep an eye on content health."
+        description="홈페이지 운영 현황과 주요 지표를 한눈에 확인합니다."
         title="Dashboard"
       />
 
@@ -165,7 +165,7 @@ export default function AdminDashboardPage() {
         <StatCard title="Visitor Region">
           <PieChart
             items={[
-              { color: "#FF892F", label: "KR", percent: 42, value: "42%" },
+              { color: "#EF612E", label: "KR", percent: 42, value: "42%" },
               { color: "#2F94E5", label: "JP", percent: 27, value: "27%" },
               { color: "#C0E136", label: "US", percent: 19, value: "19%" },
               { color: "#7D8187", label: "ETC", percent: 12, value: "12%" },

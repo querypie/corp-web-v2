@@ -15,7 +15,14 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function NewsListCard({ date, href, imageSrc, summary, title }: NewsListItem) {
+function NewsListCard({
+  date,
+  href,
+  imageSrc,
+  index,
+  summary,
+  title,
+}: NewsListItem & { index: number }) {
   return (
     /* 뉴스 카드 1개: 모바일은 세로, 데스크톱은 텍스트/썸네일 2열 */
     <a
@@ -23,12 +30,13 @@ function NewsListCard({ date, href, imageSrc, summary, title }: NewsListItem) {
       data-reveal
       href={href}
       rel="noreferrer noopener"
+      style={{ transitionDelay: `${index * 70}ms` }}
       target="_blank"
     >
       {/* 날짜 / 제목 / 요약 텍스트 영역 */}
       <div className="order-2 flex min-w-0 flex-1 flex-col gap-[10px] md:order-1">
         <p className="m-0 type-body-md text-mute-fg">{date}</p>
-        <h2 className="m-0 type-h2 text-fg transition-colors group-hover:text-mute-fg">{title}</h2>
+        <h2 className="content-hover-title m-0 type-h2 text-fg">{title}</h2>
         <p className="m-0 type-body-md text-mute-fg">{summary}</p>
       </div>
       {/* 우측 썸네일 영역 */}
@@ -49,16 +57,11 @@ export default function NewsListPage({
 }: NewsListPageProps) {
   return (
     <div className="flex w-full justify-center px-5 pb-10 md:px-10">
-      <section className="flex w-full max-w-[1200px] flex-col gap-10">
-        {/* 페이지 제목 */}
-        <header className="flex items-center justify-center">
-          <h1 className="m-0 flex-1 type-h1 text-fg">{title}</h1>
-        </header>
-
+      <section className="flex w-full max-w-[900px] flex-col gap-20">
         {/* 뉴스 카드 목록 */}
         <div className="flex min-w-0 w-full flex-col gap-10">
           {items.map((item, index) => (
-            <NewsListCard key={`${item.title}-${index}`} {...item} />
+            <NewsListCard key={`${item.title}-${index}`} {...item} index={index} />
           ))}
         </div>
       </section>

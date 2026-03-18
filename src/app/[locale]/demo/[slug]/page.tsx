@@ -4,6 +4,7 @@ import DemoDetailClientPage from "../../../../components/pages/demo/DemoDetailCl
 import type { DocsDetailPageProps } from "../../../../components/pages/docs/DocsDetailPage";
 import {
   getManagedCategoryLabel,
+  getContentThumbnailSrc,
   getLocalizedContent,
   getPublicDetailHref,
   getSeedManagedContents,
@@ -18,16 +19,40 @@ export default async function DemoDetailRoute({ params }: DemoDetailRouteProps) 
 
   if (!isLocale(locale)) notFound();
 
-  const currentEntry = getSeedManagedContents("demo").find((item) => item.id === slug);
+  const demoItems = getSeedManagedContents("demo").filter((item) => item.status === "published");
+  const currentIndex = demoItems.findIndex((item) => item.id === slug);
+  const currentEntry = currentIndex >= 0 ? demoItems[currentIndex] : null;
+  const categoryItems = currentEntry
+    ? demoItems.filter((item) => item.categorySlug === currentEntry.categorySlug)
+    : [];
+  const categoryIndex = currentEntry
+    ? categoryItems.findIndex((item) => item.id === slug)
+    : -1;
 
-  const relatedItems = getSeedManagedContents("demo")
-    .filter((entry) => entry.id !== slug && entry.status === "published")
-    .map((entry) => ({
-      category: getManagedCategoryLabel("demo", entry.categorySlug, locale),
-      href: getPublicDetailHref("demo", locale, entry.id),
-      imageSrc: entry.imageSrc,
-      title: getLocalizedContent(entry.title, locale),
-    }));
+  const previousItem = categoryIndex > 0 ? categoryItems[categoryIndex - 1] : null;
+  const nextItem = categoryIndex < categoryItems.length - 1 ? categoryItems[categoryIndex + 1] : null;
+
+  const previousLabel = "Previous Post";
+  const nextLabel = "Next post";
+
+  const relatedItems = [
+    previousItem
+      ? {
+          category: previousLabel,
+          href: getPublicDetailHref("demo", locale, previousItem.id),
+          imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
+          title: getLocalizedContent(previousItem.title, locale),
+        }
+      : null,
+    nextItem
+      ? {
+          category: nextLabel,
+          href: getPublicDetailHref("demo", locale, nextItem.id),
+          imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
+          title: getLocalizedContent(nextItem.title, locale),
+        }
+      : null,
+  ].filter((item): item is NonNullable<typeof item> => !!item);
 
   return (
     <DemoDetailClientPage

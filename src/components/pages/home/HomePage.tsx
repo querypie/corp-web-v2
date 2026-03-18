@@ -88,7 +88,7 @@ export default function HomePage({
   reviewTitle,
 }: HomePageProps) {
   return (
-    <div className="flex flex-col gap-16 overflow-x-hidden px-5 pb-10 text-fg md:gap-[120px] md:px-10">
+    <div className="flex flex-col gap-20 overflow-x-hidden px-5 pb-10 text-fg md:gap-[120px] md:px-10">
         <Hero
           headingMuted={heroHeadingMuted}
           headingPrimary={heroHeadingPrimary}

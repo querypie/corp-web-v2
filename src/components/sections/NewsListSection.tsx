@@ -24,7 +24,7 @@ function NewsCard({ imageSrc, title }: NewsItem) {
           src={imageSrc}
         />
       </div>
-      <p className="m-0 type-body-lg text-fg transition-colors group-hover:text-mute-fg">{title}</p>
+      <p className="content-hover-title m-0 type-body-lg text-fg">{title}</p>
     </article>
   );
 }
@@ -39,7 +39,7 @@ export default function NewsListSection({
     <section className={cx("flex w-full justify-center", className)}>
       <div className="flex w-full max-w-[1200px] flex-col gap-[30px]">
         <h2 className="m-0 type-h2 text-fg">{title}</h2>
-        <div className="flex flex-col gap-6 md:flex-row md:items-start md:gap-[30px]">
+        <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-[30px]">
           {items.map((item) => (
             <NewsCard key={item.title} {...item} />
           ))}

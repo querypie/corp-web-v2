@@ -47,7 +47,7 @@ function DemoListCard({
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
         {showCategory ? <p className="m-0 type-body-md text-mute-fg">{category}</p> : null}
-        <p className="m-0 type-body-lg text-fg transition-colors group-hover:text-mute-fg">{title}</p>
+        <p className="content-hover-title m-0 type-body-lg text-fg">{title}</p>
       </div>
     </a>
   );

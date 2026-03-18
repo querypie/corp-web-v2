@@ -159,11 +159,11 @@ export default function AdminSeoPage() {
   return (
     <section className="flex flex-col gap-8">
       <AdminHeader
-        description="퍼블릭 주요 페이지의 메타데이터와 검색 노출 요소를 페이지 단위로 관리합니다."
+        description="퍼블릭 주요 페이지의 메타데이터와 검색 노출 요소를 페이지별로 관리합니다."
         title="SEO"
       />
 
-      <div className="grid gap-6 xl:grid-cols-[260px_minmax(0,1fr)]">
+      <div className="grid gap-6 xl:grid-cols-[220px_minmax(0,1fr)]">
         <div>
           <div className="flex flex-col gap-2">
             {definitions.map((item) => (
@@ -199,8 +199,8 @@ export default function AdminSeoPage() {
         </div>
 
         {currentEntry ? (
-          <div className="flex flex-col gap-5 rounded-[24px] border border-border bg-bg-content p-5 xl:pl-6 md:p-6">
-            <div className="flex items-center justify-between gap-4">
+          <div className="flex flex-col gap-5 rounded-[20px] border border-border bg-bg-content p-5 md:p-6 xl:pl-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h2 className="m-0 type-h3 text-fg">{currentDefinition?.label}</h2>
                 <p className="m-0 mt-2 type-body-md text-mute-fg">{currentDefinition?.description}</p>
@@ -308,9 +308,9 @@ export default function AdminSeoPage() {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between gap-4">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <p className="m-0 type-body-sm text-mute-fg">실시간 적용</p>
-                <div className="flex gap-3">
+                <div className="flex flex-col gap-3 sm:flex-row">
                   <Button arrow={false} onClick={() => resetSeoEntry(currentEntry.key)} variant="outline">
                     SEO 기본값으로 초기화
                   </Button>
@@ -325,8 +325,8 @@ export default function AdminSeoPage() {
       </div>
 
       {showDefinitionsModal ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-5">
-          <div className="flex w-full max-w-[880px] flex-col gap-4 rounded-[20px] border border-border bg-bg-content p-5 md:p-6" onClick={(event) => event.stopPropagation()}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-4 sm:px-5">
+          <div className="flex max-h-[calc(100vh-32px)] w-full max-w-[880px] flex-col gap-4 overflow-auto rounded-[20px] border border-border bg-bg-content p-5 md:p-6" onClick={(event) => event.stopPropagation()}>
             <div>
               <div>
                 <h2 className="m-0 type-h3 text-fg">고급 정의 편집</h2>
@@ -352,8 +352,8 @@ export default function AdminSeoPage() {
       ) : null}
 
       {showCancelDefinitionsConfirm ? (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-5" onClick={() => setShowCancelDefinitionsConfirm(false)}>
-          <div className="w-full max-w-[300px] rounded-modal bg-bg-content px-5 py-8" onClick={(event) => event.stopPropagation()}>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-4 sm:px-5" onClick={() => setShowCancelDefinitionsConfirm(false)}>
+          <div className="w-full max-w-[320px] rounded-modal bg-bg-content px-5 py-8" onClick={(event) => event.stopPropagation()}>
             <div className="flex flex-col items-center gap-5 text-center">
               <div className="flex flex-col items-center gap-2 text-center">
                 <h2 className="m-0 type-h3 text-fg">편집을 취소하시겠습니까?</h2>
@@ -382,7 +382,7 @@ export default function AdminSeoPage() {
       ) : null}
 
       {showDiscoveryModal ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-4 sm:px-5">
           <div
             className="flex w-full max-w-[520px] flex-col gap-4 rounded-[20px] border border-border bg-bg-content p-5 md:p-6"
             onClick={(event) => event.stopPropagation()}

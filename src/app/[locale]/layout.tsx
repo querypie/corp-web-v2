@@ -28,9 +28,9 @@ export default async function LocaleLayout({
   const shellCopy = {
     en: {
       footerSections: [
-        { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
+        { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer Service (FDES)"] },
         { title: "Features", items: ["Demo", "Documentation"] },
-        { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
+        { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us", "Plans"] },
       ],
       legal: ["Cookie Preference", "Terms of Use", "Privacy Policy", "EULA"],
       navActionLabel: "Free start!",
@@ -38,9 +38,9 @@ export default async function LocaleLayout({
     },
     ko: {
       footerSections: [
-        { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근제어 플랫폼 (ACP)"] },
+        { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근제어 플랫폼 (ACP)", "Forward Deployed Engineer Service (FDES)"] },
         { title: "기능", items: ["데모", "문서"] },
-        { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
+        { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기", "요금제"] },
       ],
       legal: ["쿠키 설정", "이용약관", "개인정보처리방침", "EULA"],
       navActionLabel: "시작하기",
@@ -48,9 +48,9 @@ export default async function LocaleLayout({
     },
     ja: {
       footerSections: [
-        { title: "ソリューション", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
+        { title: "ソリューション", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer Service (FDES)"] },
         { title: "機能", items: ["Demo", "Documentation"] },
-        { title: "会社", items: ["About Us", "Certifications", "News", "Contact Us"] },
+        { title: "会社", items: ["About Us", "Certifications", "News", "Contact Us", "プラン"] },
       ],
       legal: ["Cookie Preference", "Terms of Use", "Privacy Policy", "EULA"],
       navActionLabel: "始める",

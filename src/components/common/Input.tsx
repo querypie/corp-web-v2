@@ -13,26 +13,11 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function ChevronDownIcon({ className }: { className?: string }) {
-  return (
-    // 드롭다운용 화살표 아이콘
-    <svg
-      aria-hidden="true"
-      className={className}
-      viewBox="0 0 24 24"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M5 8.5L12 15.5L19 8.5"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+const fieldShellClassName =
+  "ui-field-shell inline-flex h-10 w-[240px] items-center overflow-hidden rounded-button bg-bg-content px-3";
+
+const fieldTextClassName =
+  "min-w-0 flex-1 border-0 bg-transparent type-body-md outline-none";
 
 export default function Input({
   className,
@@ -53,7 +38,7 @@ export default function Input({
   return (
     <div
       className={cx(
-        "ui-field-shell inline-flex w-[240px] items-center overflow-hidden rounded-button bg-bg-content px-3 py-2.5",
+        fieldShellClassName,
         hasBorder && "border border-border",
         resolvedState === "disable" && "opacity-50",
         isDropdown && "gap-1.5",
@@ -68,14 +53,18 @@ export default function Input({
           <span className="min-w-0 flex-1 type-body-md text-fg">
             {label ?? "dropdown"}
           </span>
-          <ChevronDownIcon className="h-4 w-4 shrink-0 text-mute-fg" />
+          <img
+            alt=""
+            aria-hidden="true"
+            className="h-[14px] w-[14px] shrink-0 object-contain"
+            src="/icons/chevron-down.svg"
+          />
         </>
       ) : (
         /* 일반 input은 실제 input 요소를 렌더 */
         <input
           className={cx(
-            "min-w-0 flex-1 border-0 bg-transparent type-body-md outline-none",
-            "type-body-md",
+            fieldTextClassName,
             resolvedState === "default" ? "text-mute-fg" : "text-fg",
             "placeholder:text-mute-fg",
           )}
