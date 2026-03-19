@@ -65,7 +65,10 @@ export default function Hero({
               </p>
             </div>
 
-            <a href={`/${locale}/contact-us`}>
+            <a
+              href={`/${locale}/contact-us`}
+              style={{ animation: "hero-copy-enter 0.7s ease-out 0.3s both" }}
+            >
               <Button arrow={false} size="small" variant="secondary">
                 Free start!
               </Button>
@@ -74,7 +77,7 @@ export default function Hero({
 
           <div
             className="relative w-full md:-mt-1 xl:-mt-2"
-            style={{ animation: "hero-copy-enter 0.9s ease-out 0.25s both" }}
+            style={{ animation: "hero-copy-enter 0.9s ease-out 0.45s both" }}
           >
             <img
               alt="QueryPie AI workspace preview"
@@ -82,15 +85,19 @@ export default function Hero({
               src={heroPreviewImageSrc}
             />
 
-            <div className="absolute left-1/2 top-1/2 z-10 w-[calc(100%-32px)] max-w-[800px] -translate-x-1/2 -translate-y-1/2 sm:w-[calc(100%-48px)]">
-              <div className="pointer-events-none absolute left-1/2 top-1/2 h-[96px] w-[calc(100%+12px)] -translate-x-1/2 -translate-y-1/2 rounded-[32px] sm:h-[110px] sm:w-[calc(100%+16px)] md:h-[126px] md:w-[812px] md:rounded-[40px]">
+            <div
+              className="absolute inset-0 z-10 flex items-center justify-center px-4 sm:px-6"
+              style={{ animation: "hero-copy-enter 0.85s ease-out 0.65s both" }}
+            >
+              <div className="relative w-full max-w-[800px]">
+              <div className="pointer-events-none absolute inset-[-6px] rounded-[26px] sm:inset-[-8px] sm:rounded-[30px] md:inset-[-10px] md:rounded-[34px]">
                 <div
-                  className="absolute inset-0 rounded-[32px] md:rounded-[40px]"
+                  className="absolute inset-0 rounded-[inherit]"
                   style={{
                     animation: "hero-gradient-flow 3s ease-in-out infinite",
                     background: "linear-gradient(90deg, #FF7051 0%, #BA709F 30%, #456BF0 100%)",
                     backgroundSize: "250% 250%",
-                    filter: "blur(10px)",
+                    filter: "blur(14px)",
                     opacity: 0.5,
                   }}
                 />
@@ -122,7 +129,7 @@ export default function Hero({
                         <span className="type-body-md text-fg">Agent</span>
                         <ChevronDownIcon />
                       </div>
-                      <div className="hidden h-9 items-center gap-2 rounded-full bg-secondary pl-4 pr-3 sm:inline-flex">
+                      <div className="inline-flex h-9 items-center gap-2 rounded-full bg-secondary pl-3 pr-3 md:pl-4">
                         <span className="type-body-md text-fg">Skills</span>
                         <ChevronDownIcon />
                       </div>
@@ -135,6 +142,7 @@ export default function Hero({
                     </button>
                   </div>
                 </div>
+              </div>
               </div>
             </div>
           </div>
