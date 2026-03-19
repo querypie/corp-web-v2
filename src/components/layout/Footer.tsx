@@ -2,6 +2,7 @@ type FooterSection = {
   items: string[];
   title: string;
 };
+import { getFooterHref } from "../../constants/navigation";
 
 type FooterProps = {
   addressLines?: string[];
@@ -55,59 +56,11 @@ export default function Footer({
 }: FooterProps) {
   const [copyright, ...officeLines] = addressLines;
 
-  /* 푸터 내부 링크가 현재 locale 기준으로 이동할 경로를 결정 */
-  function getFooterHref(item: string) {
-    if (item === "AI Platform (AIP)") {
-      return `/${locale}/aip-not-found`;
-    }
-
-    if (item === "Access Control Platform (ACP)") {
-      return `/${locale}/acp-not-found`;
-    }
-
-    if (item === "Forward Deployed Engineer Service (FDES)") {
-      return `/${locale}/fdes-not-found`;
-    }
-
-    if (item === "About Us" || item === "회사 소개") {
-      return `/${locale}/about-us`;
-    }
-
-    if (item === "Certifications" || item === "인증") {
-      return `/${locale}/certifications`;
-    }
-
-    if (item === "Demo" || item === "데모") {
-      return `/${locale}/demo`;
-    }
-
-    if (
-      item === "Contact Us" ||
-      item === "문의하기"
-    ) {
-      return `/${locale}/contact-us`;
-    }
-
-    if (item === "News" || item === "뉴스") {
-      return `/${locale}/news`;
-    }
-
-    if (item === "Documentation" || item === "문서") {
-      return `/${locale}/docs`;
-    }
-
-    if (item === "Plans" || item === "요금제" || item === "プラン") {
-      return `/${locale}/plans`;
-    }
-
-    return "/";
-  }
-
   return (
     <footer className={cx("relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10", className)}>
       {/* 하단 오렌지 광원 효과 */}
-      <div className="pointer-events-none absolute bottom-0 left-0 h-[800px] w-full opacity-50">
-        <div className="h-full w-full bg-[radial-gradient(120%_80%_at_50%_100%,#FF7759_0%,rgba(255,119,89,0.60)_30%,rgba(255,119,89,0.00)_60%)]" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-[420px] w-full opacity-50 md:h-[520px]">
+        <div className="h-full w-full bg-[radial-gradient(145%_100%_at_50%_100%,rgba(255,119,89,0.60)_0%,rgba(255,119,89,0.00)_100%)] md:bg-[radial-gradient(71.78%_100%_at_50%_100%,rgba(255,119,89,0.60)_0%,rgba(255,119,89,0.00)_100%)]" />
       </div>
 
       {/* 실제 푸터 콘텐츠 래퍼 */}
@@ -131,13 +84,13 @@ export default function Footer({
                   "flex flex-col gap-5 type-body-md leading-5",
                   section.title === "Solutions" && "w-[191px]",
                   section.title === "Features" && "w-[96px]",
-                  section.title === "Company" && "w-[84px]",
+                  (section.title === "Company" || section.title === "회사") && "w-[84px]",
                 )}
               >
                 <p className="m-0 text-mute-fg">{section.title}</p>
                 <div className="flex flex-col gap-2 text-fg">
                   {section.items.map((item) => (
-                    <a key={item} className="transition-colors hover:text-mute-fg" href={getFooterHref(item)}>
+                    <a key={item} className="transition-colors hover:text-mute-fg" href={getFooterHref(item, locale)}>
                       {item}
                     </a>
                   ))}

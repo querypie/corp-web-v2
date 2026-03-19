@@ -68,14 +68,17 @@ export default function SectionComponentsGuide() {
         <NewsListSection
           items={[
             {
+              href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
               imageSrc: "/images/content/news-01.png",
               title: "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
             },
             {
+              href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
               imageSrc: "/images/content/news-02.png",
               title: "Payroll Partners with QueryPie on AI Security Solutions",
             },
             {
+              href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
               imageSrc: "/images/content/news-03.png",
               title: "Security Solution Playing the Role of a “Door Lock” in the Cloud — Expanding to Japan and Europe",
             },

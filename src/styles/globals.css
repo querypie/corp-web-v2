@@ -12,7 +12,7 @@
   --color-mute-fg: #8C9099;
   --color-bg-content: #1B1B1D;
   --color-bg-deep: #181819;
-  --color-bg-feather: #313133;
+  --color-bg-feather: #2C2D2F;
   --color-bg: #08090A;
   --color-border: #2A2A2C;
   --color-primary: #E6E6E6;
@@ -120,12 +120,18 @@ select {
   }
 
   @media (hover: none), (pointer: coarse) {
-    .card-hover:active {
-      transform: scale(0.985);
+    a[href],
+    button,
+    [role="button"] {
+      -webkit-tap-highlight-color: transparent;
+      transform: translateZ(0);
+      transition: transform 160ms ease;
     }
 
-    .group:active .card-media-motion {
-      transform: scale(1.03);
+    a[href]:active,
+    button:active,
+    [role="button"]:active {
+      transform: translateZ(0) scale(0.98);
     }
   }
 

@@ -3,8 +3,8 @@ import ClientSection from "../../sections/ClientSection";
 import ContentListSection from "../../sections/ContentListSection";
 import FeatureSection from "../../sections/FeatureSection";
 import Hero from "../../sections/Hero";
+import HomeNewsListClientSection from "../../sections/HomeNewsListClientSection";
 import McpSection from "../../sections/McpSection";
-import NewsListSection from "../../sections/NewsListSection";
 import ReviewSection from "../../sections/ReviewSection";
 import type { Locale } from "../../../constants/i18n";
 
@@ -34,6 +34,7 @@ type ReviewItem = {
 };
 
 type NewsItem = {
+  href: string;
   imageSrc: string;
   title: string;
 };
@@ -124,7 +125,9 @@ export default function HomePage({
           />
         </div>
         {/* 뉴스 리스트 */}
-        <div data-reveal><NewsListSection items={newsItems} title={newsTitle} /></div>
+        <div data-reveal>
+          <HomeNewsListClientSection fallbackItems={newsItems} locale={locale} title={newsTitle} />
+        </div>
         {/* 하단 CTA */}
         <div data-reveal>
           <Cta

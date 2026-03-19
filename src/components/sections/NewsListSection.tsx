@@ -1,4 +1,5 @@
 type NewsItem = {
+  href: string;
   imageSrc: string;
   title: string;
 };
@@ -13,10 +14,10 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function NewsCard({ imageSrc, title }: NewsItem) {
+function NewsCard({ href, imageSrc, title }: NewsItem) {
   return (
     /* 뉴스 카드 1개 */
-    <article className="group flex w-full cursor-pointer flex-col gap-5 md:flex-1">
+    <a className="group flex w-full cursor-pointer flex-col gap-5 md:flex-1" href={href} rel="noreferrer noopener" target="_blank">
       <div className="h-[200px] w-full overflow-hidden rounded-box bg-bg-content">
         <img
           alt={title}
@@ -25,7 +26,7 @@ function NewsCard({ imageSrc, title }: NewsItem) {
         />
       </div>
       <p className="content-hover-title m-0 type-body-lg text-fg">{title}</p>
-    </article>
+    </a>
   );
 }
 

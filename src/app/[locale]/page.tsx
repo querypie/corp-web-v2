@@ -152,14 +152,17 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       reviewTitle: "Trusted by the world's best developers",
       newsItems: [
         {
+          href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
           imageSrc: "/images/content/news-01.png",
           title: "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
         },
         {
+          href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
           imageSrc: "/images/content/news-02.png",
           title: "Payroll Partners with QueryPie on AI Security Solutions",
         },
         {
+          href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
           imageSrc: "/images/content/news-03.png",
           title:
             "Security Solution Playing the Role of a “Door Lock” in the Cloud — Expanding to Japan and Europe",
@@ -283,14 +286,17 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       reviewTitle: "최고의 개발자들이 신뢰합니다",
       newsItems: [
         {
+          href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
           imageSrc: "/images/content/news-01.png",
           title: "TerraSky의 MCP 호환 AI 플랫폼 ‘mitoco Buddy’ 공식 출시",
         },
         {
+          href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
           imageSrc: "/images/content/news-02.png",
           title: "Payroll, QueryPie와 AI 보안 솔루션 협력",
         },
         {
+          href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
           imageSrc: "/images/content/news-03.png",
           title:
             "클라우드의 ‘도어락’ 역할을 하는 보안 솔루션 — 일본과 유럽으로 확장",
@@ -414,14 +420,17 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       reviewTitle: "世界最高の開発者たちに信頼されています",
       newsItems: [
         {
+          href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
           imageSrc: "/images/content/news-01.png",
           title: "TerraSky の MCP 対応 AI プラットフォーム『mitoco Buddy』が正式リリース",
         },
         {
+          href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
           imageSrc: "/images/content/news-02.png",
           title: "Payroll が QueryPie と AI セキュリティソリューションで提携",
         },
         {
+          href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
           imageSrc: "/images/content/news-03.png",
           title:
             "クラウドの“ドアロック”として機能するセキュリティソリューション — 日本とヨーロッパへ拡大",
