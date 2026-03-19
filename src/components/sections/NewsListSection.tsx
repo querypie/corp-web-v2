@@ -20,7 +20,7 @@ function NewsCard({ imageSrc, title }: NewsItem) {
       <div className="h-[200px] w-full overflow-hidden rounded-box bg-bg-content">
         <img
           alt={title}
-          className="block h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          className="card-media-motion block h-full w-full object-cover"
           src={imageSrc}
         />
       </div>

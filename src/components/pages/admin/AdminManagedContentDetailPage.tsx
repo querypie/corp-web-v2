@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import AdminHeader from "../../layout/admin/AdminHeader";
 import Button from "../../common/Button";
+import Switch from "../../common/Switch";
 import Tab from "../../common/Tab";
 import { useAdminNavigationGuard } from "../../layout/admin/AdminNavigationGuard";
 import {
@@ -219,25 +220,6 @@ function StatusBadge({ children }: { children: React.ReactNode }) {
   return <div className="rounded-full border border-border bg-bg-content px-3 py-1 type-body-sm leading-4 text-mute-fg">{children}</div>;
 }
 
-function ToggleSwitch({
-  checked,
-  label,
-  onChange,
-}: {
-  checked: boolean;
-  label: string;
-  onChange: () => void;
-}) {
-  return (
-    <button aria-label={label} aria-pressed={checked} className="inline-flex items-center gap-3 self-start sm:self-auto" onClick={onChange} type="button">
-      <span className="type-body-sm text-mute-fg">{label}</span>
-      <span className={cx("relative inline-flex h-6 w-11 items-center rounded-full transition-colors", checked ? "bg-success/30" : "bg-bg-content")}>
-        <span className={cx("inline-block h-4 w-4 rounded-full transition-transform", checked ? "translate-x-6 bg-success" : "translate-x-[4px] bg-mute-fg")} />
-      </span>
-    </button>
-  );
-}
-
 function PanelHeader({
   trailing,
 }: {
@@ -245,7 +227,7 @@ function PanelHeader({
 }) {
   return (
     /* 작성 폼/미리보기 상단 공통 헤더 */
-    <div className="flex items-center justify-between gap-4 border-b border-border/80 px-5 py-4 md:px-6">
+    <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-4 md:px-6">
       {trailing}
     </div>
   );
@@ -467,12 +449,12 @@ export default function AdminManagedContentDetailPage({
       {/* 페이지 상단 설명과 현재 작업 상태를 표시 */}
       <AdminHeader
         description="콘텐츠 작성, 수정, 임시저장, 게시 전 미리보기를 이 화면에서 관리합니다."
-        title={itemId === "new" ? `${categoryLabel} > Create Content` : "Modify Content"}
+        title={itemId === "new" ? `${categoryLabel} > Create Content` : `${categoryLabel} > Modify Content`}
       />
 
       {/* 미리보기 on/off에 따라 2단 또는 단일 컬럼으로 전환 */}
       <div className={cx("grid gap-5 md:gap-6", showPreview ? "xl:grid-cols-[minmax(0,740px)_minmax(0,1fr)]" : "mx-auto w-full max-w-[740px]")}>
-        <div className="flex min-w-0 w-full max-w-[740px] flex-col gap-5 overflow-hidden rounded-[28px] border border-border bg-[linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0.01))]">
+        <div className="flex min-w-0 w-full max-w-[740px] flex-col gap-5 overflow-hidden rounded-[28px] border border-border bg-bg">
           <PanelHeader
             trailing={
               <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center">
@@ -490,7 +472,7 @@ export default function AdminManagedContentDetailPage({
                   </div>
                 </div>
                 <div className="flex justify-end sm:flex-1">
-                  <ToggleSwitch checked={showPreview} label="미리보기" onChange={() => setShowPreview((current) => !current)} />
+                  <Switch checked={showPreview} label="미리보기" onChange={() => setShowPreview((current) => !current)} />
                 </div>
               </div>
             }

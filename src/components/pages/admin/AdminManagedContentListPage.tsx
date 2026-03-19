@@ -3,6 +3,7 @@
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import AdminHeader from "../../layout/admin/AdminHeader";
 import Button from "../../common/Button";
+import Switch from "../../common/Switch";
 import Tab from "../../common/Tab";
 import {
   deleteManagedContent,
@@ -46,38 +47,6 @@ function SearchField({
         value={value}
       />
     </div>
-  );
-}
-
-function VisibilitySwitch({
-  checked,
-  disabled,
-  onChange,
-}: {
-  checked: boolean;
-  disabled?: boolean;
-  onChange: () => void;
-}) {
-  return (
-    /* 게시 상태 토글 스위치 */
-    <button
-      aria-label={checked ? "노출 중" : "비노출"}
-      className={cx(
-        "relative inline-flex h-7 w-[50px] items-center rounded-full transition-colors",
-        disabled && "cursor-not-allowed opacity-40",
-        checked ? "bg-success/30" : "bg-bg-deep",
-      )}
-      disabled={disabled}
-      onClick={onChange}
-      type="button"
-    >
-      <span
-        className={cx(
-          "inline-block h-5 w-5 rounded-full transition-transform",
-          checked ? "translate-x-[26px] bg-success" : "translate-x-[3px] bg-mute-fg",
-        )}
-      />
-    </button>
   );
 }
 
@@ -223,7 +192,7 @@ function PreviewModal({
         className="flex max-h-[calc(100vh-48px)] w-full max-w-[980px] flex-col overflow-hidden rounded-[28px] border border-border bg-bg"
         onClick={(event) => event.stopPropagation()}
       >
-        <div className="border-b border-border/80 px-5 py-4 md:px-6">
+        <div className="border-b border-border px-5 py-4 md:px-6">
           <div className="flex justify-center">
             <div className="rounded-full bg-bg-deep p-1">
             <div className="flex items-center rounded-full">
@@ -276,7 +245,7 @@ function PreviewModal({
           )}
         </div>
 
-        <div className="flex flex-col gap-3 border-t border-border/80 px-5 py-4 sm:flex-row sm:items-center sm:justify-between md:px-6">
+        <div className="flex flex-col gap-3 border-t border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between md:px-6">
           <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onClose} variant="outline">
             Close
           </Button>
@@ -390,7 +359,7 @@ function ContentRow({
                 if (!isDraft) onTogglePublished();
               }}
             >
-              <VisibilitySwitch checked={isPublished} disabled={isDraft} onChange={() => {}} />
+              <Switch checked={isPublished} disabled={isDraft} onChange={() => {}} size="compact" />
             </div>
             <span className={cx("type-body-md", isPublished ? "text-fg" : "text-mute-fg")}>
               {statusLabel}

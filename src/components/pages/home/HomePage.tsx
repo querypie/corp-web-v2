@@ -6,6 +6,7 @@ import Hero from "../../sections/Hero";
 import McpSection from "../../sections/McpSection";
 import NewsListSection from "../../sections/NewsListSection";
 import ReviewSection from "../../sections/ReviewSection";
+import type { Locale } from "../../../constants/i18n";
 
 type FooterSection = {
   items: string[];
@@ -56,6 +57,7 @@ export type HomePageProps = {
   featureItems: FeatureItem[];
   heroHeadingMuted: string;
   heroHeadingPrimary: string;
+  locale: Locale;
   heroPromptRotatingTexts: string[];
   mcpDescription: string[];
   mcpItems: McpItem[];
@@ -78,6 +80,7 @@ export default function HomePage({
   featureItems,
   heroHeadingMuted,
   heroHeadingPrimary,
+  locale,
   heroPromptRotatingTexts,
   mcpDescription,
   mcpItems,
@@ -89,11 +92,14 @@ export default function HomePage({
 }: HomePageProps) {
   return (
     <div className="flex flex-col gap-20 overflow-x-hidden px-5 pb-10 text-fg md:gap-[120px] md:px-10">
-        <Hero
-          headingMuted={heroHeadingMuted}
-          headingPrimary={heroHeadingPrimary}
-          promptRotatingTexts={heroPromptRotatingTexts}
-        />
+        <div className="-mx-5 md:-mx-10">
+          <Hero
+            headingMuted={heroHeadingMuted}
+            headingPrimary={heroHeadingPrimary}
+            locale={locale}
+            promptRotatingTexts={heroPromptRotatingTexts}
+          />
+        </div>
         {/* 고객사 로고 영역 */}
         <div data-reveal><ClientSection caption={clientCaption} /></div>
         {/* 기능 소개 섹션 */}

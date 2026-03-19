@@ -21,7 +21,7 @@ function DocsContentListCard({ category, href, imageSrc, title }: DocsContentLis
       <div className="h-[80px] w-[120px] shrink-0 overflow-hidden rounded-box bg-bg-content md:h-[120px] md:w-[213px]">
         <img
           alt={title}
-          className="block h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          className="card-media-motion block h-full w-full object-cover"
           src={imageSrc}
         />
       </div>

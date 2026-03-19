@@ -41,7 +41,7 @@ function DemoListCard({
       <div className="h-[180px] w-full overflow-hidden rounded-thumb bg-bg-content md:h-[200px]">
         <img
           alt={title}
-          className="block h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          className="card-media-motion block h-full w-full object-cover"
           src={imageSrc}
         />
       </div>

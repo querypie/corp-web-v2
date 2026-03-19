@@ -35,7 +35,7 @@ function PlanSummaryCard({
   return (
     /* 상단 플랜 카드 한 장 */
     <article
-      className="card-hover flex min-h-[420px] flex-col justify-between rounded-box bg-bg-content p-[30px]"
+      className="flex min-h-[420px] flex-col justify-between rounded-box bg-bg-content p-[30px]"
       data-reveal
       style={{ transitionDelay: `${index * 70}ms` }}
     >

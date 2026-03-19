@@ -85,7 +85,7 @@ function FeatureCopy({ body, title }: Pick<FeatureItem, "body" | "title">) {
 function FeatureImage({ imageAlt, imageSrc }: Pick<FeatureItem, "imageAlt" | "imageSrc">) {
   return (
     /* 기능 소개용 비주얼 패널 */
-    <div className="h-[220px] w-full overflow-hidden rounded-box bg-[linear-gradient(116.854deg,#303131_0%,#232323_100%)] md:h-[400px] md:w-[790px] md:max-w-[65%]">
+    <div className="h-[220px] w-full overflow-hidden rounded-box bg-bg-feather md:h-[400px] md:w-[790px] md:max-w-[65%]">
       <img alt={imageAlt} className="block h-full w-full object-cover" src={imageSrc} />
     </div>
   );

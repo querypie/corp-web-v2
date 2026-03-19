@@ -16,7 +16,7 @@ export default function SectionComponentsGuide() {
         Place page-level sections here, such as hero banners, feature grids, and CTA blocks.
       </p>
       <div className="overflow-hidden rounded-box border border-border bg-bg">
-        <Hero promptRotatingTexts={["How can I help you today?", "Ask me anything..."]} />
+        <Hero locale="en" promptRotatingTexts={["How can I help you today?", "Ask me anything..."]} />
       </div>
       <div className="overflow-hidden rounded-box border border-border bg-bg">
         <ClientSection />

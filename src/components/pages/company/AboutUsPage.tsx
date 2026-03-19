@@ -24,7 +24,6 @@ type LocationItem = {
 
 type AboutUsPageProps = {
   companyDescription: string[];
-  companyImageSrc: string;
   investors: Investor[];
   investorsTitle: string;
   journeyDescription: string;
@@ -71,12 +70,16 @@ function TeamCard({ imageSrc, index, linkedinHref, name, role }: TeamMember & { 
           <p className="m-0 type-body-lg text-fg">{name}</p>
           <p className="m-0 type-body-md text-mute-fg">{role}</p>
         </div>
-        <span className="inline-flex h-6 w-6 opacity-50 transition-opacity group-hover:opacity-100">
+        <span className="inline-flex h-6 w-6 opacity-30 transition-opacity group-hover:opacity-100">
           <img alt="LinkedIn" className="h-6 w-6 object-contain" src="/icons/linkedin.svg" />
         </span>
       </div>
       <div className="h-[88px] w-[88px] overflow-hidden rounded-thumb bg-bg-deep md:h-[100px] md:w-[100px]">
-        <img alt={name} className="block h-full w-full object-cover" src={imageSrc} />
+        <img
+          alt={name}
+          className="card-media-motion block h-full w-full object-cover"
+          src={imageSrc}
+        />
       </div>
     </a>
   );
@@ -104,7 +107,6 @@ function LocationCard({ addressLines, city, country, iconSrc, index }: LocationI
 
 export default function AboutUsPage({
   companyDescription,
-  companyImageSrc,
   investors,
   investorsTitle,
   journeyDescription,
@@ -133,9 +135,6 @@ export default function AboutUsPage({
                 {paragraph}
               </p>
             ))}
-            <div className="aspect-[2000/1125] overflow-hidden rounded-box">
-              <img alt="About QueryPie AI" className="block h-full w-full object-cover" src={companyImageSrc} />
-            </div>
           </div>
         </div>
 

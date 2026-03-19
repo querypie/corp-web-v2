@@ -40,7 +40,7 @@ export default function AdminShell({ children }: AdminShellProps) {
           onToggleCollapse={() => setIsSidebarCollapsed((current) => !current)}
         />
         {/* 실제 각 관리자 페이지가 렌더링되는 본문 영역 */}
-        <main className="flex-1 px-5 py-6 md:px-10 md:py-8">{children}</main>
+        <main className="flex-1 px-5 pb-6 pt-0 md:px-10 md:pb-8 md:pt-0">{children}</main>
       </div>
 
       {pendingHref ? (

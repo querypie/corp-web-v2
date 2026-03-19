@@ -25,7 +25,7 @@ export default function AdminSidebar({
     /* 어드민 전용 좌측 네비게이션 */
     <aside
       className={cx(
-        "group relative flex w-full flex-col border-b border-border bg-bg-deep px-4 py-4 transition-[width,padding] duration-200 md:border-b-0 md:border-r md:px-4 md:py-6",
+        "group relative flex w-full flex-col bg-bg-deep px-4 py-4 transition-[width,padding] duration-200 md:px-4 md:py-6",
         isCollapsed ? "md:w-[64px] md:px-2" : "md:w-[240px] md:px-4",
       )}
       onMouseMove={(event) => {

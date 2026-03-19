@@ -457,6 +457,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       featureItems={copy.featureItems}
       heroHeadingMuted={copy.hero[0]}
       heroHeadingPrimary={copy.hero[1]}
+      locale={locale}
       heroPromptRotatingTexts={copy.heroPromptRotatingTexts}
       mcpDescription={copy.mcpDescription}
       mcpItems={copy.mcpItems}

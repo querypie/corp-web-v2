@@ -40,7 +40,7 @@ function DocsListCard({
       style={{ transitionDelay: `${index * 70}ms` }}
     >
       <div className="h-[80px] w-[120px] shrink-0 overflow-hidden rounded-box bg-bg-content md:h-[120px] md:w-[213px]">
-        <img alt={title} className="block h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" src={imageSrc} />
+        <img alt={title} className="card-media-motion block h-full w-full object-cover" src={imageSrc} />
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
         {showCategory ? <p className="m-0 type-body-md text-mute-fg">{category}</p> : null}

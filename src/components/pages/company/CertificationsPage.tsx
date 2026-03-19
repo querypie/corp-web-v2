@@ -28,7 +28,7 @@ function CertificationCard({
 }: CertificationItem & { index: number }) {
   return (
     <article
-      className="flex min-h-[260px] flex-col items-center justify-center gap-6 rounded-box bg-bg-content px-5 py-7 text-center transition-colors hover:bg-[#242426] sm:min-h-[280px] sm:gap-7 sm:py-8 md:min-h-[300px] md:gap-8"
+      className="flex min-h-[260px] flex-col items-center justify-center gap-6 rounded-box bg-bg-content px-5 py-7 text-center sm:min-h-[280px] sm:gap-7 sm:py-8 md:min-h-[300px] md:gap-8"
       data-reveal
       style={{ transitionDelay: `${index * 70}ms` }}
     >

@@ -43,7 +43,7 @@ function NewsListCard({
       <div className="order-1 h-[180px] w-full shrink-0 overflow-hidden rounded-thumb bg-bg-content md:order-2 md:h-[200px] md:w-[380px]">
         <img
           alt={title}
-          className="block h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          className="card-media-motion block h-full w-full object-cover"
           src={imageSrc}
         />
       </div>

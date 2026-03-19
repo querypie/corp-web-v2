@@ -1,16 +1,21 @@
 import type { ReactNode } from "react";
+import Button from "../common/Button";
+import type { Locale } from "../../constants/i18n";
 import PromptTyper from "./PromptTyper";
 
 type HeroProps = {
   className?: string;
   headingMuted?: ReactNode;
   headingPrimary?: ReactNode;
+  locale: Locale;
   promptRotatingTexts: string[];
 };
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
+
+const heroPreviewImageSrc = "/images/home/hero/home-hero.png";
 
 function PlusIcon() {
   return <img alt="" aria-hidden="true" className="h-6 w-6 object-contain" src="/icons/Plus.svg" />;
@@ -28,87 +33,108 @@ export default function Hero({
   className,
   headingMuted = "Experience a new AI business,",
   headingPrimary = "QueryPie AI is the best way.",
+  locale,
   promptRotatingTexts,
 }: HeroProps) {
   return (
-    <section className={cx("flex w-full flex-col items-center", className)}>
-      {/* 콘텐츠 최대 폭 컨테이너 */}
-      <div className="flex w-full max-w-[1200px] flex-col items-center gap-8 md:gap-[120px]">
-        {/* 상단 헤드라인 카피 영역 */}
-        <div className="w-full type-h1">
-          {/* 첫 번째 줄: 즉시 등장 */}
-          <p
-            className="mb-0 text-mute-fg"
-            style={{ animation: "hero-copy-enter 0.7s ease-out both" }}
-          >
-            {headingMuted}
-          </p>
-          {/* 두 번째 줄: 0.15s 딜레이로 stagger */}
-          <p
-            className="mb-0 text-fg"
-            style={{ animation: "hero-copy-enter 0.7s ease-out 0.15s both" }}
-          >
-            {headingPrimary}
-          </p>
-        </div>
+    <section className={cx("relative flex w-full justify-center overflow-hidden", className)}>
+      <div
+        className="absolute inset-0"
+        aria-hidden="true"
+        style={{
+          backgroundImage:
+            "radial-gradient(57.5% 52.53% at 50% 100%, rgba(8, 9, 10, 0) 0%, rgba(8, 9, 10, 0.5) 100%), linear-gradient(180deg, rgba(15, 16, 16, 0.5) 10%, rgba(210, 214, 220, 0.5) 100%)",
+        }}
+      />
 
-        {/* 중앙 비주얼 영역: 장식 아이콘 + 프롬프트 카드 */}
-        <div className="relative h-[220px] w-full max-w-[1200px] md:h-[520px]">
-          {/* 프롬프트 카드 뒤에서 흐르는 그라데이션 글로우 */}
-          <div className="pointer-events-none absolute hidden left-1/2 top-[255px] h-[110px] w-[800px] -translate-x-1/2 overflow-visible md:block">
-            <div
-              className="absolute left-1/2 top-1/2 h-[126px] w-[812px] -translate-x-1/2 -translate-y-1/2 rounded-[40px]"
-              style={{
-                animation: "hero-gradient-flow 3s ease-in-out infinite",
-                background:
-                  "linear-gradient(90deg, #FF7051 0%, #BA709F 30%, #456BF0 100%)",
-                backgroundSize: "250% 250%",
-                filter: "blur(10px)",
-              opacity: 0.5,
-            }}
-          />
+      <div className="relative flex w-full justify-center px-5 pb-5 pt-0 sm:pb-6 md:px-10 md:pb-8 xl:pb-[36px]">
+        <div className="flex w-full max-w-[1200px] flex-col items-start gap-8 sm:gap-10 md:gap-12 xl:gap-[60px]">
+          <div className="mb-5 flex w-full max-w-[320px] flex-col items-start gap-4 sm:max-w-[420px] sm:gap-5 md:max-w-[560px]">
+            <div className="w-full">
+              <p
+                className="mb-0 type-h2 text-mute-fg"
+                style={{ animation: "hero-copy-enter 0.7s ease-out both" }}
+              >
+                {headingMuted}
+              </p>
+              <p
+                className="mb-0 type-h2 text-fg"
+                style={{ animation: "hero-copy-enter 0.7s ease-out 0.15s both" }}
+              >
+                {headingPrimary}
+              </p>
+            </div>
+
+            <a href={`/${locale}/contact-us`}>
+              <Button arrow={false} size="small" variant="secondary">
+                Free start!
+              </Button>
+            </a>
           </div>
-          {/* 실제 프롬프트 입력 카드 */}
+
           <div
-            className="absolute left-1/2 top-[30px] h-[110px] w-full -translate-x-1/2 rounded-[24px] p-[1px] md:top-[255px] md:w-[800px]"
-            style={{
-              animation: "hero-gradient-flow 3s ease-in-out infinite",
-              background: "linear-gradient(90deg, rgba(255,112,81,0.3) 0%, rgba(186,112,159,0.3) 30%, rgba(69,107,240,0.3) 100%)",
-              backgroundSize: "250% 250%",
-            }}
+            className="relative w-full md:-mt-1 xl:-mt-2"
+            style={{ animation: "hero-copy-enter 0.9s ease-out 0.25s both" }}
           >
-            {/* 카드 내부: 타이핑 텍스트 + 액션 버튼 그룹 */}
-            <div className="h-full w-full overflow-hidden rounded-[23px] bg-bg-content">
-              <div className="flex h-[62px] items-center px-5">
-                <p className="m-0 flex-1 type-body-lg leading-6 text-fg">
-                  {promptRotatingTexts.length > 0 ? (
-                    <PromptTyper prompts={promptRotatingTexts} />
-                  ) : null}
-                </p>
+            <img
+              alt="QueryPie AI workspace preview"
+              className="relative z-[1] block h-auto w-full"
+              src={heroPreviewImageSrc}
+            />
+
+            <div className="absolute left-1/2 top-1/2 z-10 w-[calc(100%-32px)] max-w-[800px] -translate-x-1/2 -translate-y-1/2 sm:w-[calc(100%-48px)]">
+              <div className="pointer-events-none absolute left-1/2 top-1/2 h-[96px] w-[calc(100%+12px)] -translate-x-1/2 -translate-y-1/2 rounded-[32px] sm:h-[110px] sm:w-[calc(100%+16px)] md:h-[126px] md:w-[812px] md:rounded-[40px]">
+                <div
+                  className="absolute inset-0 rounded-[32px] md:rounded-[40px]"
+                  style={{
+                    animation: "hero-gradient-flow 3s ease-in-out infinite",
+                    background: "linear-gradient(90deg, #FF7051 0%, #BA709F 30%, #456BF0 100%)",
+                    backgroundSize: "250% 250%",
+                    filter: "blur(10px)",
+                    opacity: 0.5,
+                  }}
+                />
               </div>
-              <div className="flex items-center justify-between px-3 pb-3">
-                <div className="flex items-center gap-1">
-                  <button
-                    className="inline-flex h-9 w-9 items-center justify-center rounded-full text-mute-fg"
-                    type="button"
-                  >
-                    <PlusIcon />
-                  </button>
-                  <div className="inline-flex h-9 items-center gap-2 rounded-full bg-secondary pl-4 pr-3">
-                    <span className="type-body-md text-fg">Agent</span>
-                    <ChevronDownIcon />
+
+              <div
+                className="relative rounded-[20px] p-[1px] md:rounded-[24px]"
+                style={{
+                  animation: "hero-gradient-flow 3s ease-in-out infinite",
+                  background: "linear-gradient(90deg, rgba(255,112,81,0.3) 0%, rgba(186,112,159,0.3) 30%, rgba(69,107,240,0.3) 100%)",
+                  backgroundSize: "250% 250%",
+                }}
+              >
+                <div className="h-full w-full overflow-hidden rounded-[19px] bg-bg-content md:rounded-[23px]">
+                  <div className="flex min-h-[56px] items-center px-4 md:h-[62px] md:px-5">
+                    <p className="m-0 flex-1 type-body-md text-fg md:type-body-lg">
+                      {promptRotatingTexts.length > 0 ? <PromptTyper prompts={promptRotatingTexts} /> : null}
+                    </p>
                   </div>
-                  <div className="inline-flex h-9 items-center gap-2 rounded-full bg-secondary pl-4 pr-3">
-                    <span className="type-body-md text-fg">Skills</span>
-                    <ChevronDownIcon />
+                  <div className="flex items-center justify-between px-3 pb-3">
+                    <div className="flex min-w-0 items-center gap-1">
+                      <button
+                        className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-mute-fg"
+                        type="button"
+                      >
+                        <PlusIcon />
+                      </button>
+                      <div className="inline-flex h-9 items-center gap-2 rounded-full bg-secondary pl-3 pr-3 md:pl-4">
+                        <span className="type-body-md text-fg">Agent</span>
+                        <ChevronDownIcon />
+                      </div>
+                      <div className="hidden h-9 items-center gap-2 rounded-full bg-secondary pl-4 pr-3 sm:inline-flex">
+                        <span className="type-body-md text-fg">Skills</span>
+                        <ChevronDownIcon />
+                      </div>
+                    </div>
+                    <button
+                      className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-secondary text-mute-fg"
+                      type="button"
+                    >
+                      <ArrowUpIcon />
+                    </button>
                   </div>
                 </div>
-                <button
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-secondary text-mute-fg"
-                  type="button"
-                >
-                  <ArrowUpIcon />
-                </button>
               </div>
             </div>
           </div>

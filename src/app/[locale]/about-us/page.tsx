@@ -19,7 +19,6 @@ export default async function AboutUsRoute({ params }: AboutUsRouteProps) {
         "You can now execute cutting-edge AI strategies without a Fortune 500-level budget and realize all innovations at previously impossible costs.",
         "Starting in Silicon Valley in 2017 as a data protection specialist, QueryPie AI sets a new standard for enterprise AI.",
       ],
-      companyImageSrc: "/images/about-us/company-introduction.jpg",
       investors: [
         { alt: "Salesforce Ventures", imageSrc: "/images/about-us/logo-salesforce.svg" },
         { alt: "Y Combinator", imageSrc: "/images/about-us/logo-ycombinator.svg" },
@@ -120,7 +119,6 @@ export default async function AboutUsRoute({ params }: AboutUsRouteProps) {
         "이제 포춘 500 수준의 예산 없이도 최첨단 AI 전략을 실행하고, 이전에는 불가능했던 비용 구조로 모든 혁신을 현실화할 수 있습니다.",
         "2017년 실리콘밸리에서 데이터 보호 전문 기업으로 출발한 QueryPie AI는 엔터프라이즈 AI의 새로운 기준을 만들어가고 있습니다.",
       ],
-      companyImageSrc: "/images/about-us/company-introduction.jpg",
       investors: [
         { alt: "Salesforce Ventures", imageSrc: "/images/about-us/logo-salesforce.svg" },
         { alt: "Y Combinator", imageSrc: "/images/about-us/logo-ycombinator.svg" },
@@ -210,7 +208,6 @@ export default async function AboutUsRoute({ params }: AboutUsRouteProps) {
         "Fortune 500 レベルの予算がなくても最先端のAI戦略を実行でき、これまで不可能だったコスト構造であらゆるイノベーションを実現できます。",
         "2017年にシリコンバレーでデータ保護の専門企業としてスタートした QueryPie AI は、エンタープライズAIの新しい基準を築いています。",
       ],
-      companyImageSrc: "/images/about-us/company-introduction.jpg",
       investors: [
         { alt: "Salesforce Ventures", imageSrc: "/images/about-us/logo-salesforce.svg" },
         { alt: "Y Combinator", imageSrc: "/images/about-us/logo-ycombinator.svg" },

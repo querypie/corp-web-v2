@@ -46,6 +46,7 @@ const config: Config = {
         "mute-fg": "var(--color-mute-fg)",
         "bg-content": "var(--color-bg-content)",
         "bg-deep": "var(--color-bg-deep)",
+        "bg-feather": "var(--color-bg-feather)",
         bg: "var(--color-bg)",
         border: "var(--color-border)",
         primary: "var(--color-primary)",
