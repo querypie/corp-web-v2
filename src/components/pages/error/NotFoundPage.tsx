@@ -5,11 +5,7 @@ import Button from "../../common/Button";
 import Footer from "../../layout/Footer";
 import Gnb from "../../layout/Gnb";
 import { defaultLocale, isLocale, type Locale } from "../../../constants/i18n";
-
-type FooterSection = {
-  items: string[];
-  title: string;
-};
+import { getShellMenuCopy } from "../../../constants/navigation";
 
 type NotFoundPageProps = {};
 
@@ -69,52 +65,31 @@ export default function NotFoundPage({}: NotFoundPageProps) {
     en: {
       ctaHref: "/en",
       ctaLabel: "Back to home",
-      footerSections: [
-        { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
-        { title: "Features", items: ["Demo", "Documentation"] },
-        { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
-      ],
-      footerLegalLinks: ["Cookie Preference", "Terms of Use", "Privacy Policy", "EULA"],
-      navActionLabel: "Free start!",
+      ...getShellMenuCopy("en"),
       messageLines: [
         "The page you’re looking for has wandered off, but don’t worry!",
         "Let’s get you back on track.",
       ],
-      navItems: ["Solutions", "Features", "Company", "Plans"],
       title: "404",
     },
     ko: {
       ctaHref: "/ko",
       ctaLabel: "홈으로 돌아가기",
-      footerSections: [
-        { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근제어 플랫폼 (ACP)"] },
-        { title: "기능", items: ["데모", "문서"] },
-        { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
-      ],
-      footerLegalLinks: ["쿠키 설정", "이용약관", "개인정보처리방침", "EULA"],
-      navActionLabel: "시작하기",
+      ...getShellMenuCopy("ko"),
       messageLines: [
         "찾으시는 페이지가 다른 곳으로 이동했거나 사라졌습니다.",
         "홈으로 돌아가 다시 시작해 보세요.",
       ],
-      navItems: ["솔루션", "기능", "회사", "요금제"],
       title: "404",
     },
     ja: {
       ctaHref: "/ja",
       ctaLabel: "ホームへ戻る",
-      footerSections: [
-        { title: "ソリューション", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
-        { title: "機能", items: ["Demo", "Documentation"] },
-        { title: "会社", items: ["About Us", "Certifications", "News", "Contact Us"] },
-      ],
-      footerLegalLinks: ["Cookie Preference", "Terms of Use", "Privacy Policy", "EULA"],
-      navActionLabel: "始める",
+      ...getShellMenuCopy("ja"),
       messageLines: [
         "お探しのページは移動したか、見つかりませんでした。",
         "ホームに戻ってもう一度お試しください。",
       ],
-      navItems: ["ソリューション", "機能", "会社", "プラン"],
       title: "404",
     },
   }[locale];

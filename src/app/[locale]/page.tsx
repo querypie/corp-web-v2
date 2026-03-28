@@ -310,7 +310,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         "지금 가입하고 14일 무료 체험을 바로 시작하세요.",
       ],
       footerSections: [
-        { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근제어 플랫폼 (ACP)", "Forward Deployed Engineer Service (FDES)"] },
+        { title: "솔루션", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer 서비스 (FDES)"] },
         { title: "기능", items: ["데모", "문서"] },
         { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기", "요금제"] },
       ],
@@ -444,11 +444,11 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         "今すぐ登録して、14日間の無料トライアルを始めましょう。",
       ],
       footerSections: [
-        { title: "ソリューション", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer Service (FDES)"] },
+        { title: "ソリューション", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer サービス (FDES)"] },
         { title: "機能", items: ["デモ", "ドキュメント"] },
         { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ", "プラン"] },
       ],
-      legal: ["Cookie Preference", "利用規約", "プライバシーポリシー", "EULA"],
+      legal: ["クッキー設定", "利用規約", "プライバシーポリシー", "EULA"],
     },
   }[locale];
 

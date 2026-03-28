@@ -10,7 +10,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CMS Renewal",
+  title: "CMS",
   description: "Next.js App Router project scaffold.",
 };
 

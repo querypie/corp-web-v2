@@ -27,14 +27,14 @@ const switchSizeStyles: Record<
     knob: "h-5 w-5",
     knobOffsetOff: "translate-x-[3px]",
     knobOffsetOn: "translate-x-[22px]",
-    shell: "h-7 w-[46px]",
+    shell: "h-[26px] w-[46px]",
     text: "type-body-sm",
   },
   default: {
     knob: "h-4 w-4",
     knobOffsetOff: "translate-x-[4px]",
     knobOffsetOn: "translate-x-5",
-    shell: "h-6 w-10",
+    shell: "h-[22px] w-10",
     text: "type-body-sm",
   },
 };
@@ -69,8 +69,9 @@ export default function Switch({
       {label ? <span className={cx(styles.text, "text-mute-fg")}>{label}</span> : null}
       <span
         className={cx(
-          "relative inline-flex items-center rounded-full border border-border bg-bg transition-colors",
+          "relative inline-flex items-center rounded-full transition-colors",
           styles.shell,
+          checked ? "bg-brand" : "bg-secondary",
         )}
       >
         <span
@@ -78,7 +79,7 @@ export default function Switch({
             "inline-block rounded-full transition-transform",
             styles.knob,
             checked ? styles.knobOffsetOn : styles.knobOffsetOff,
-            checked ? "bg-success" : "bg-mute-fg",
+            "bg-white",
           )}
         />
       </span>

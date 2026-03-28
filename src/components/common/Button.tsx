@@ -70,8 +70,9 @@ function getButtonStyle(
       isLarge ? "gap-2 px-6 py-3" : "gap-1.5 px-5 py-2.5",
       variant === "outline" &&
         cx(
-          state === "hover" ? "border border-primary bg-white/10" : "border border-secondary bg-transparent",
-          "hover:bg-white/10",
+          "border border-secondary",
+          state === "hover" ? "bg-[#242426]" : "bg-transparent",
+          "hover:bg-[#242426]",
         ),
       variant === "primary" &&
         cx(state === "hover" ? "bg-[#ABABAB]" : "bg-primary", "hover:bg-[#ABABAB]"),

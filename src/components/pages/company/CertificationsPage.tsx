@@ -66,7 +66,7 @@ export default function CertificationsPage({
 }: CertificationsPageProps) {
   return (
     <div className="flex w-full justify-center px-5 pb-10 md:px-10">
-      <section className="flex w-full max-w-[900px] flex-col gap-20 sm:gap-16 md:gap-20 lg:gap-[120px]">
+      <section className="flex w-full max-w-[900px] flex-col gap-10 sm:gap-8 md:gap-10 lg:gap-[60px]">
         {/* Figma 기준으로 좌측 제목 / 우측 소개 문구 2열 헤더를 구성 */}
         <header className="grid gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]" data-reveal>
           <h1 className="m-0 type-h1 text-fg">{title}</h1>

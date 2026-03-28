@@ -114,8 +114,50 @@ npm run typecheck
 - 공통으로 쓰일 가능성이 있는 UI/로직은 먼저 재사용 가능한 구조인지 검토합니다.
 - 새로운 페이지나 관리 기능을 추가할 때는 퍼블릭/어드민/데이터 구조가 함께 맞물리는지 확인합니다.
 
+## Menu Updates
+
+- GNB 상단 메뉴명과 실제 Footer 메뉴명은 `src/constants/navigation.ts`의 `getShellMenuCopy()`에서 공통으로 관리합니다.
+- 따라서 다음 항목을 수정하려면 `getShellMenuCopy()`를 먼저 봅니다.
+  - 상단 GNB 1차 메뉴명
+  - Footer 섹션 제목
+  - Footer 섹션 하위 메뉴명
+  - 404 페이지에서 사용하는 GNB / Footer 메뉴명
+- GNB 드롭다운 하위 메뉴명은 같은 파일의 아래 함수에서 관리합니다.
+  - `getSolutionsSubItems()`
+  - `getFeaturesSubItems()`
+  - `getCompanySubItems()`
+- 메뉴 링크 경로는 같은 파일의 아래 함수에서 관리합니다.
+  - `getPrimaryNavHref()`
+  - `getFooterHref()`
+  - `getLegalHref()`
+- 메뉴명을 수정할 때는 아래를 함께 확인합니다.
+  - `en`, `ko`, `ja` 라벨이 모두 맞는지
+  - GNB 1차 메뉴와 Footer 메뉴가 같은 용어를 쓰는지
+  - 드롭다운 하위 메뉴명과 Footer 하위 메뉴명이 의도적으로 다른지, 아니면 통일해야 하는지
+  - 라벨 변경 후 링크 매핑 조건도 함께 수정해야 하는지
+
 ## Notes
 
 - 현재 관리자 콘텐츠와 SEO 설정 중 일부는 브라우저 저장소(`localStorage`) 기반으로 동작합니다.
 - SEO는 현재 런타임 메타 반영 방식으로 연결되어 있습니다.
 - 새 퍼블릭 페이지가 추가되면 SEO 메뉴의 `미등록 페이지 탐색` 또는 `고급 정의 편집` 흐름도 함께 점검합니다.
+
+## Legal Pages
+
+### Privacy Policy Versioning
+
+- 개인정보처리방침 원본은 `src/content/legal/privacy-policy/` 아래에서 버전별 HTML 파일로 관리합니다.
+  - 영어 원본: `src/content/legal/privacy-policy/en`
+  - 한국어 원본: `src/content/legal/privacy-policy/ko`
+- 앱은 각 버전의 `.html` 파일을 직접 읽어 렌더링합니다.
+  - 예: `src/content/legal/privacy-policy/en/26-01-15.html`
+  - 예: `src/content/legal/privacy-policy/ko/26-01-15.html`
+- 일본어(`ja`) 로케일은 별도 원문을 두지 않고 영어 버전을 fallback으로 사용합니다.
+- 새 버전 추가 방법:
+  - 가장 최근 버전 파일을 복사해 새 날짜 파일을 만듭니다.
+  - 변경된 문구만 수정합니다.
+  - 예: `26-01-15.html`을 복사해 `26-03-01.html` 생성
+- 새 `.html` 파일이 추가되면 아래가 자동으로 갱신됩니다.
+  - 최신 개인정보처리방침 페이지: `/[locale]/privacy-policy`
+  - 과거 버전 페이지: `/[locale]/privacy-policy/[version]`
+  - 헤더 우측 버전 셀렉트 옵션

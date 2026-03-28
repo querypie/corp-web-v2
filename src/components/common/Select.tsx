@@ -17,7 +17,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 const fieldShellClassName =
-  "ui-field-shell inline-flex h-10 w-full items-center overflow-hidden rounded-button bg-bg-content px-3";
+  "ui-field-shell inline-flex h-10 w-full items-center overflow-hidden rounded-button bg-bg-content px-3 transition-colors hover:bg-[#242426]";
 
 const fieldTextClassName =
   "min-w-0 flex-1 border-0 bg-transparent type-body-md text-fg outline-none";

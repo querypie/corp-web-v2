@@ -63,15 +63,15 @@ function cx(...values: Array<string | false | null | undefined>) {
 function FeatureCopy({ body, title }: Pick<FeatureItem, "body" | "title">) {
   return (
     /* 기능 설명 텍스트 블록 */
-    <div className="flex flex-1 flex-col gap-5 not-italic md:min-w-[200px]">
-      <div className="w-full type-h2 leading-7 tracking-[-0.3px] text-fg">
+    <div className="flex flex-1 flex-col gap-2 not-italic md:min-w-[200px] md:gap-5">
+      <div className="order-1 w-full type-h2 leading-7 tracking-[-0.3px] text-fg md:order-none">
         {title.map((line) => (
           <p key={line} className="m-0">
             {line}
           </p>
         ))}
       </div>
-      <div className="w-full type-body-lg leading-6 text-mute-fg">
+      <div className="order-2 w-full type-body-lg leading-6 text-mute-fg md:order-none">
         {body.map((line) => (
           <p key={line} className="m-0">
             {line}
@@ -85,8 +85,8 @@ function FeatureCopy({ body, title }: Pick<FeatureItem, "body" | "title">) {
 function FeatureImage({ imageAlt, imageSrc }: Pick<FeatureItem, "imageAlt" | "imageSrc">) {
   return (
     /* 기능 소개용 비주얼 패널 */
-    <div className="h-[220px] w-full overflow-hidden rounded-box bg-bg-feather md:h-[400px] md:w-[790px] md:max-w-[65%]">
-      <img alt={imageAlt} className="block h-full w-full object-cover" src={imageSrc} />
+    <div className="aspect-[79/40] w-full overflow-hidden rounded-box bg-bg-feather md:w-[790px] md:max-w-[65%]">
+      <img alt={imageAlt} className="block h-full w-full object-contain" src={imageSrc} />
     </div>
   );
 }
@@ -104,12 +104,12 @@ export default function FeatureSection({
           <div
             key={`${item.imageSrc}-${index}`}
             className={cx(
-              "flex flex-col items-start gap-8 md:flex-row md:gap-[60px]",
+              "flex flex-col items-start gap-5 md:flex-row md:gap-[60px]",
               item.reverse && "md:flex-row-reverse",
             )}
           >
-            <FeatureCopy body={item.body} title={item.title} />
             <FeatureImage imageAlt={item.imageAlt} imageSrc={item.imageSrc} />
+            <FeatureCopy body={item.body} title={item.title} />
           </div>
         ))}
       </div>

@@ -135,16 +135,13 @@ export default function AboutUsPage({
                 {paragraph}
               </p>
             ))}
-          </div>
-        </div>
-
-        {/* 투자사 */}
-        <div className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-[30px]" data-reveal>
-          <h2 className="m-0 type-h1 text-fg">{investorsTitle}</h2>
-          <div className="flex flex-col gap-8 sm:gap-10 md:gap-[40px]">
-            {[investors[2], investors[0], investors[1]].filter(Boolean).map((item, index) => (
-              <InvestorLogo key={item.alt} {...item} index={index} />
-            ))}
+            <div className="w-full overflow-hidden rounded-box">
+              <img
+                alt="Company introduction"
+                className="block h-auto w-full object-cover"
+                src="/images/about-us/company-introduction.jpg"
+              />
+            </div>
           </div>
         </div>
 
@@ -168,6 +165,16 @@ export default function AboutUsPage({
                   ))}
                 </ul>
               </div>
+            ))}
+          </div>
+        </div>
+
+        {/* 투자사 */}
+        <div className="grid gap-6 sm:gap-8 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] md:gap-[30px]" data-reveal>
+          <h2 className="m-0 type-h1 text-fg">{investorsTitle}</h2>
+          <div className="flex flex-col gap-8 sm:gap-10 md:gap-[40px]">
+            {[investors[2], investors[0], investors[1]].filter(Boolean).map((item, index) => (
+              <InvestorLogo key={item.alt} {...item} index={index} />
             ))}
           </div>
         </div>

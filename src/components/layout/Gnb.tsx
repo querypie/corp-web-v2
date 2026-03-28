@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Button from "../common/Button";
 import {
@@ -22,6 +22,8 @@ type GnbProps = {
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
+
+const mobileMenuBackdropClassName = "bg-[rgba(8,9,10,0.9)]";
 
 function getLocaleHref(pathname: string, locale: string) {
   /* 현재 경로의 첫 세그먼트(locale)만 바꿔 같은 페이지에서 언어 전환 */
@@ -46,8 +48,10 @@ export default function Gnb({
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
-  const [localeOpen, setLocaleOpen] = useState(false);
+  const [desktopLocaleOpen, setDesktopLocaleOpen] = useState(false);
+  const [mobileLocaleOpen, setMobileLocaleOpen] = useState(false);
   const pathname = usePathname();
+  const mobileLocaleRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
@@ -58,7 +62,37 @@ export default function Gnb({
 
   useEffect(() => {
     setMobileMenuOpen(false);
+    setDesktopLocaleOpen(false);
+    setMobileLocaleOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    if (!mobileLocaleOpen) {
+      return;
+    }
+
+    const handlePointerDown = (event: MouseEvent | TouchEvent) => {
+      const target = event.target;
+
+      if (!(target instanceof Node)) {
+        return;
+      }
+
+      if (mobileLocaleRef.current?.contains(target)) {
+        return;
+      }
+
+      setMobileLocaleOpen(false);
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("touchstart", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("touchstart", handlePointerDown);
+    };
+  }, [mobileLocaleOpen]);
 
   /* 언어 드롭다운은 현재 페이지를 유지한 채 locale만 변경 */
   const localeSubItems = [
@@ -77,7 +111,8 @@ export default function Gnb({
     <>
       <header
         className={cx(
-          "fixed inset-x-0 top-0 z-50 flex w-full items-center justify-center bg-[rgba(8,9,10,0.5)] px-5 backdrop-blur-[12px] md:px-10",
+          "fixed inset-x-0 top-0 z-50 flex w-full items-center justify-center px-5 backdrop-blur-[12px] md:px-10",
+          mobileMenuOpen ? mobileMenuBackdropClassName : "bg-[rgba(8,9,10,0.5)]",
           className,
         )}
       >
@@ -89,7 +124,7 @@ export default function Gnb({
               src="/icons/querypie-ai-logo.svg"
             />
           </a>
-          <div className="flex items-center gap-[30px]">
+          <div className="flex items-center gap-[10px] md:gap-[30px]">
             {/* 데스크톱 전용 글로벌 네비게이션 */}
             <nav aria-label="Global" className="hidden items-center gap-[30px] md:flex">
               {items.map((item, index) => {
@@ -228,8 +263,8 @@ export default function Gnb({
             </nav>
             <div
               className="relative hidden md:inline-flex"
-              onMouseEnter={() => setLocaleOpen(true)}
-              onMouseLeave={() => setLocaleOpen(false)}
+              onMouseEnter={() => setDesktopLocaleOpen(true)}
+              onMouseLeave={() => setDesktopLocaleOpen(false)}
             >
               <button
                 aria-label="Change language"
@@ -249,7 +284,7 @@ export default function Gnb({
               <div
                 className={cx(
                   "absolute left-1/2 top-full pt-3 -translate-x-1/2 transition-all duration-200",
-                  localeOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
+                  desktopLocaleOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                 )}
               >
                 <div className="overflow-hidden rounded-[8px] border border-border bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
@@ -258,6 +293,44 @@ export default function Gnb({
                       key={sub.label}
                       className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute-fg"
                       href={sub.href}
+                    >
+                      {sub.label}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div className="relative z-50 md:hidden" ref={mobileLocaleRef}>
+              <button
+                aria-expanded={mobileLocaleOpen}
+                aria-label="Change language"
+                className="inline-flex h-10 w-10 items-center justify-center"
+                onClick={() => setMobileLocaleOpen((current) => !current)}
+                type="button"
+              >
+                {localeIcon ?? (
+                  <img
+                    alt=""
+                    aria-hidden="true"
+                    className="h-6 w-6"
+                    src="/icons/global.svg"
+                  />
+                )}
+              </button>
+
+              <div
+                className={cx(
+                  "absolute right-0 top-full z-50 pt-3 transition-all duration-200",
+                  mobileLocaleOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
+                )}
+              >
+                <div className="overflow-hidden rounded-[8px] border border-border bg-[rgba(18,19,20,0.96)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
+                  {localeSubItems.map((sub) => (
+                    <a
+                      key={sub.label}
+                      className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute-fg"
+                      href={sub.href}
+                      onClick={() => setMobileLocaleOpen(false)}
                     >
                       {sub.label}
                     </a>
@@ -279,7 +352,7 @@ export default function Gnb({
                 src={mobileMenuOpen ? "/icons/m-Close.svg" : "/icons/m-Menu.svg"}
               />
             </button>
-            <a className="hidden md:inline-flex" href="/admin">
+            <a className="hidden md:inline-flex" href="/admin" rel="noreferrer noopener" target="_blank">
               <Button arrow={false} variant="gnb">
                 {actionLabel}
               </Button>
@@ -289,7 +362,7 @@ export default function Gnb({
       </header>
 
       {mobileMenuOpen ? (
-        <div className="fixed inset-x-0 bottom-0 top-[60px] z-40 overflow-y-auto bg-[rgba(8,9,10,0.9)] backdrop-blur-[10px] md:hidden">
+        <div className={cx("fixed inset-x-0 bottom-0 top-[60px] z-40 overflow-y-auto backdrop-blur-[10px] md:hidden", mobileMenuBackdropClassName)}>
           <nav className="flex w-full flex-col gap-[30px] px-5 py-[30px]" aria-label="Mobile global">
             {mobileSections.map((section, index) => (
               <div

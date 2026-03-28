@@ -4,14 +4,14 @@ type ClientSectionProps = {
 };
 
 const clientLogos = [
-  { alt: "Client logo 01", className: "h-10", src: "/images/home/clients/01.svg" },
-  { alt: "Client logo 02", className: "h-10", src: "/images/home/clients/02.svg" },
-  { alt: "Client logo 03", className: "h-10", src: "/images/home/clients/03.svg" },
-  { alt: "Client logo 04", className: "h-10", src: "/images/home/clients/04.svg" },
-  { alt: "Client logo 05", className: "h-10", src: "/images/home/clients/05.svg" },
-  { alt: "Client logo 06", className: "h-10", src: "/images/home/clients/06.svg" },
-  { alt: "Client logo 07", className: "h-10", src: "/images/home/clients/07.svg" },
-  { alt: "Client logo 08", className: "h-10", src: "/images/home/clients/08.svg" },
+  { alt: "Client logo 01", className: "h-10", src: "/images/home/clients/01.png" },
+  { alt: "Client logo 02", className: "h-10", src: "/images/home/clients/02.png" },
+  { alt: "Client logo 03", className: "h-10", src: "/images/home/clients/03.png" },
+  { alt: "Client logo 04", className: "h-10", src: "/images/home/clients/04.png" },
+  { alt: "Client logo 05", className: "h-10", src: "/images/home/clients/05.png" },
+  { alt: "Client logo 06", className: "h-10", src: "/images/home/clients/06.png" },
+  { alt: "Client logo 07", className: "h-10", src: "/images/home/clients/07.png" },
+  { alt: "Client logo 08", className: "h-10", src: "/images/home/clients/08.png" },
 ] as const;
 
 function cx(...values: Array<string | false | null | undefined>) {
@@ -31,14 +31,25 @@ export default function ClientSection({
         </p>
         {/* 로고를 좌우로 반복 이동시키는 marquee 영역 */}
         <div className="relative h-10 w-full overflow-hidden">
-          <div className="flex w-max items-center" style={{ animation: "marquee 20s linear infinite" }}>
-            {[...clientLogos, ...clientLogos].map((logo, index) => (
-              <img
-                key={`${logo.alt}-${index}`}
-                alt={logo.alt}
-                className={`${logo.className} mr-[60px]`}
-                src={logo.src}
-              />
+          <div
+            className="flex w-max items-center will-change-transform"
+            style={{ animation: "marquee 20s linear infinite" }}
+          >
+            {[0, 1].map((groupIndex) => (
+              <div
+                key={groupIndex}
+                aria-hidden={groupIndex === 1}
+                className="flex shrink-0 items-center gap-[60px] pr-[60px]"
+              >
+                {clientLogos.map((logo) => (
+                  <img
+                    key={`${groupIndex}-${logo.alt}`}
+                    alt={logo.alt}
+                    className={`${logo.className} block w-auto shrink-0`}
+                    src={logo.src}
+                  />
+                ))}
+              </div>
             ))}
           </div>
           {/* 양 끝 fade 처리로 루프 경계가 덜 보이게 함 */}

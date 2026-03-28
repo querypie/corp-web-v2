@@ -157,7 +157,7 @@ export default async function AboutUsRoute({ params }: AboutUsRouteProps) {
           year: "2024",
         },
       ],
-      journeyTitle: "Our Journey",
+      journeyTitle: "연혁",
       locations: [
         {
           addressLines: ["3003 North 1st Street, Suite 221, San Jose, CA 95134"],
@@ -184,7 +184,7 @@ export default async function AboutUsRoute({ params }: AboutUsRouteProps) {
           iconSrc: "/images/about-us/icon-id.svg",
         },
       ],
-      locationsTitle: "Our Locations",
+      locationsTitle: "거점",
       mapImageSrc: "/images/about-us/world-location.svg",
       teamDescription: [
         "우리의 리더들은 엔터프라이즈 AI가 복잡하고 비싸야 한다는 통념을 거부합니다.",
@@ -198,7 +198,7 @@ export default async function AboutUsRoute({ params }: AboutUsRouteProps) {
         { imageSrc: "/images/about-us/kris.png", linkedinHref: "https://www.linkedin.com/in/kris-park-89a83b19/", name: "Kris Park", role: "CSO" },
         { imageSrc: "/images/about-us/keizo.png", linkedinHref: "https://www.linkedin.com/in/keizo-arinobu-b40769/", name: "Keizo Arinobu", role: "CGO & Japan Country Manager" },
       ],
-      teamTitle: "Our Team",
+      teamTitle: "팀",
       title: ["엔터프라이즈 AI를 위한", "새로운 기준"],
     },
     ja: {
@@ -213,19 +213,19 @@ export default async function AboutUsRoute({ params }: AboutUsRouteProps) {
         { alt: "Y Combinator", imageSrc: "/images/about-us/logo-ycombinator.svg" },
         { alt: "Z Venture Capital", imageSrc: "/images/about-us/logo-zventurecapital.svg" },
       ],
-      investorsTitle: "Our Investors",
+      investorsTitle: "主要投資家",
       journeyDescription:
         "AI が次世代の中核技術として浮上し、企業が高コストと複雑な導入に直面する中、QueryPie は誰もが扱える AI 変革基盤へと進化してきました。",
       journeyItems: [
-        { details: ["Founded"], year: "2016" },
-        { details: ["Funding from Kakao Investment", "Development started QueryPie SQL Client"], year: "2018" },
-        { details: ["Launched QueryPie SQL Client", "Participated in TechCrunch SF 2019", "Won LG Startup Competition 2019"], year: "2019" },
-        { details: ["Funding from Y-Combinator", "Pivoted to Data Protection Platform", "Delivered QueryPie to Yanolja, KakaoPay, Dunamu"], year: "2020" },
-        { details: ["Fundraised $17.75M in Preferred Seed Round"], year: "2021" },
-        { details: ["Secured $5.81M funding by Korea Credit Guarantee Fund"], year: "2023" },
-        { details: ["Launched QueryPie Japan (Tokyo, Japan)", "Strategic Investment from Salesforce Ventures, Z Venture Capital, Murex Partners and Shinhan Venture Investment"], year: "2024" },
+        { details: ["会社設立"], year: "2016" },
+        { details: ["Kakao Investment より資金調達", "QueryPie SQL Client の開発開始"], year: "2018" },
+        { details: ["QueryPie SQL Client をリリース", "TechCrunch SF 2019 に参加", "LG Startup Competition 2019 を受賞"], year: "2019" },
+        { details: ["Y-Combinator より資金調達", "Data Protection Platform へピボット", "Yanolja、KakaoPay、Dunamu に QueryPie を提供"], year: "2020" },
+        { details: ["Preferred Seed Round で 1,775 万ドルを調達"], year: "2021" },
+        { details: ["韓国信用保証基金から 581 万ドルを確保"], year: "2023" },
+        { details: ["QueryPie Japan を設立（東京）", "Salesforce Ventures、Z Venture Capital、Murex Partners、Shinhan Venture Investment から戦略的投資を獲得"], year: "2024" },
       ],
-      journeyTitle: "Our Journey",
+      journeyTitle: "歩み",
       locations: [
         {
           addressLines: ["3003 North 1st Street, Suite 221, San Jose, CA 95134"],
@@ -252,7 +252,7 @@ export default async function AboutUsRoute({ params }: AboutUsRouteProps) {
           iconSrc: "/images/about-us/icon-id.svg",
         },
       ],
-      locationsTitle: "Our Locations",
+      locationsTitle: "拠点",
       mapImageSrc: "/images/about-us/world-location.svg",
       teamDescription: [
         "私たちのリーダーは、エンタープライズ AI は複雑で高価であるべきだという前提を受け入れません。",
@@ -266,7 +266,7 @@ export default async function AboutUsRoute({ params }: AboutUsRouteProps) {
         { imageSrc: "/images/about-us/kris.png", linkedinHref: "https://www.linkedin.com/in/kris-park-89a83b19/", name: "Kris Park", role: "CSO" },
         { imageSrc: "/images/about-us/keizo.png", linkedinHref: "https://www.linkedin.com/in/keizo-arinobu-b40769/", name: "Keizo Arinobu", role: "CGO & Japan Country Manager" },
       ],
-      teamTitle: "Our Team",
+      teamTitle: "チーム",
       title: ["The Smart Standard", "for Enterprise AI"],
     },
   }[locale];

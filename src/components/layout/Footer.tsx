@@ -2,7 +2,7 @@ type FooterSection = {
   items: string[];
   title: string;
 };
-import { getFooterHref } from "../../constants/navigation";
+import { getFooterHref, getLegalHref } from "../../constants/navigation";
 
 type FooterProps = {
   addressLines?: string[];
@@ -82,9 +82,9 @@ export default function Footer({
                 key={section.title}
                 className={cx(
                   "flex flex-col gap-5 type-body-md leading-5",
-                  section.title === "Solutions" && "w-[191px]",
-                  section.title === "Features" && "w-[96px]",
-                  (section.title === "Company" || section.title === "회사") && "w-[84px]",
+                  (section.title === "Solutions" || section.title === "ソリューション" || section.title === "솔루션") && "w-[191px]",
+                  (section.title === "Features" || section.title === "機能" || section.title === "기능") && "w-[96px]",
+                  (section.title === "Company" || section.title === "회사" || section.title === "会社") && "w-[84px]",
                 )}
               >
                 <p className="m-0 text-mute-fg">{section.title}</p>
@@ -122,10 +122,10 @@ export default function Footer({
                 ))}
               </div>
 
-            {/* 법적 링크 */}
+              {/* 법적 링크 */}
             <div className="flex w-full flex-wrap items-center gap-x-5 gap-y-[10px] whitespace-nowrap type-body-md leading-5 text-fg">
               {legalLinks.map((item) => (
-                <a key={item} className="transition-colors hover:text-mute-fg" href="/">
+                <a key={item} className="transition-colors hover:text-mute-fg" href={getLegalHref(item, locale)}>
                   {item}
                 </a>
               ))}
