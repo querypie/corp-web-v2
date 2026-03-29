@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import Button from "../common/Button";
 import {
   getCompanySubItems,
@@ -25,16 +25,17 @@ function cx(...values: Array<string | false | null | undefined>) {
 
 const mobileMenuBackdropClassName = "bg-[rgba(8,9,10,0.9)]";
 
-function getLocaleHref(pathname: string, locale: string) {
+function getLocaleHref(pathname: string, locale: string, search: string) {
   /* 현재 경로의 첫 세그먼트(locale)만 바꿔 같은 페이지에서 언어 전환 */
   const segments = pathname.split("/").filter(Boolean);
 
   if (segments.length === 0) {
-    return `/${locale}`;
+    return search ? `/${locale}?${search}` : `/${locale}`;
   }
 
   segments[0] = locale;
-  return `/${segments.join("/")}`;
+  const nextPathname = `/${segments.join("/")}`;
+  return search ? `${nextPathname}?${search}` : nextPathname;
 }
 
 export default function Gnb({
@@ -51,7 +52,9 @@ export default function Gnb({
   const [desktopLocaleOpen, setDesktopLocaleOpen] = useState(false);
   const [mobileLocaleOpen, setMobileLocaleOpen] = useState(false);
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const mobileLocaleRef = useRef<HTMLDivElement | null>(null);
+  const currentSearch = searchParams.toString();
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
@@ -96,9 +99,9 @@ export default function Gnb({
 
   /* 언어 드롭다운은 현재 페이지를 유지한 채 locale만 변경 */
   const localeSubItems = [
-    { label: "English", href: getLocaleHref(pathname, "en") },
-    { label: "日本語", href: getLocaleHref(pathname, "ja") },
-    { label: "한국어", href: getLocaleHref(pathname, "ko") },
+    { label: "English", href: getLocaleHref(pathname, "en", currentSearch) },
+    { label: "日本語", href: getLocaleHref(pathname, "ja", currentSearch) },
+    { label: "한국어", href: getLocaleHref(pathname, "ko", currentSearch) },
   ];
   const mobileSections = [
     { title: items[0], items: getSolutionsSubItems(locale) },
