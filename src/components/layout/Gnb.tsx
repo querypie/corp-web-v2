@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Button from "../common/Button";
 import {
   getCompanySubItems,
@@ -51,10 +51,17 @@ export default function Gnb({
   const [companyOpen, setCompanyOpen] = useState(false);
   const [desktopLocaleOpen, setDesktopLocaleOpen] = useState(false);
   const [mobileLocaleOpen, setMobileLocaleOpen] = useState(false);
+  const [currentSearch, setCurrentSearch] = useState("");
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const mobileLocaleRef = useRef<HTMLDivElement | null>(null);
-  const currentSearch = searchParams.toString();
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    setCurrentSearch(window.location.search.replace(/^\?/, ""));
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";

@@ -1,13 +1,14 @@
 "use client";
 
-import { useMemo } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import Button from "../../common/Button";
 import Tab from "../../common/Tab";
 import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PricingProduct } from "../../../constants/plans";
 import type { Locale } from "../../../constants/i18n";
 
 type PlansPageProps = {
+  initialProductKey?: string;
   locale: Locale;
 };
 
@@ -168,26 +169,30 @@ function ComparisonTable({
 }
 
 export default function PlansPage({
+  initialProductKey,
   locale,
 }: PlansPageProps) {
   const pricingProducts = pricingProductsByLocale[locale];
   const router = useRouter();
   const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const requestedProductKey = searchParams.get("product");
-  const activeProductKey =
-    requestedProductKey && requestedProductKey in pricingProducts
-      ? (requestedProductKey as keyof typeof pricingProducts)
+  const resolvedInitialProductKey =
+    initialProductKey && initialProductKey in pricingProducts
+      ? (initialProductKey as keyof typeof pricingProducts)
       : "aip";
+  const [activeProductKey, setActiveProductKey] = useState<keyof typeof pricingProducts>(resolvedInitialProductKey);
   const activeProduct = useMemo(
     () => pricingProducts[activeProductKey],
-    [activeProductKey],
+    [activeProductKey, pricingProducts],
   );
   const activeProductCaption =
     activeProductKey === "aip" ? "AI Platform" : "Access Control Platform";
 
+  useEffect(() => {
+    setActiveProductKey(resolvedInitialProductKey);
+  }, [resolvedInitialProductKey]);
+
   function handleProductChange(nextKey: keyof typeof pricingProducts) {
-    const nextParams = new URLSearchParams(searchParams.toString());
+    const nextParams = new URLSearchParams();
 
     if (nextKey === "aip") {
       nextParams.delete("product");
@@ -196,6 +201,7 @@ export default function PlansPage({
     }
 
     const nextQuery = nextParams.toString();
+    setActiveProductKey(nextKey);
     router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
   }
 
