@@ -1,0 +1,204 @@
+{
+  "category": "white-papers",
+  "contentKind": "video",
+  "entryId": "preventing-command-bypass--5",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "5",
+    "sourceCategory": "white-paper",
+    "sourceGroupPath": "documentation/white-paper/5/preventing-command-bypass",
+    "sourceUrl": "/features/documentation/white-paper/5/preventing-command-bypass"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-5.webp",
+          "webPath": "/white-paper/wp-thumb-5.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp5-1-issues-to-solve.webp",
+          "webPath": "/white-paper/wp5-1-issues-to-solve.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp5-2-idea.webp",
+          "webPath": "/white-paper/wp5-2-idea.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/preventing-command-bypass--5/en.mdx",
+      "contentKind": "video",
+      "description": "Prevent command bypass threats at the source with QueryPie's innovative process-tracking methods.",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "command bypass prevention",
+        "process tracking",
+        "cybersecurity",
+        "threat detection"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-5.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Preventing Command Bypass at the Source with Process-Tracking Methods\"\ndescription: \"Prevent command bypass threats at the source with QueryPie's innovative process-tracking methods.\"\ndate: \"2024-11-22\"\nauthor: \"logan\"\nogImage: \"public/white-paper/wp-thumb-5.webp\"\nkeywords: [\"QueryPie\", \"command bypass prevention\", \"process tracking\", \"cybersecurity\", \"threat detection\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/6/kubernetes-access-control\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+        "/features/documentation/white-paper/7/pac-policy-as-code",
+        "/features/documentation/white-paper/6/kubernetes-access-control"
+      ],
+      "sourcePath": "documentation/white-paper/5/preventing-command-bypass/en/content.mdx",
+      "title": "Preventing Command Bypass at the Source with Process-Tracking Methods",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "Preventing Command Bypass at the Source with Process-Tracking Methods",
+        "description": "Prevent command bypass threats at the source with QueryPie's innovative process-tracking methods.",
+        "date": "2024-11-22",
+        "author": "logan",
+        "ogImage": "public/white-paper/wp-thumb-5.webp",
+        "keywords": [
+          "QueryPie",
+          "command bypass prevention",
+          "process tracking",
+          "cybersecurity",
+          "threat detection"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+          "/features/documentation/white-paper/7/pac-policy-as-code",
+          "/features/documentation/white-paper/6/kubernetes-access-control"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-5.webp",
+          "webPath": "/white-paper/wp-thumb-5.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp5-1-issues-to-solve.webp",
+          "webPath": "/white-paper/wp5-1-issues-to-solve.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp5-2-idea.webp",
+          "webPath": "/white-paper/wp5-2-idea.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/preventing-command-bypass--5/ko.mdx",
+      "contentKind": "video",
+      "description": "본 백서에서는 Linux 커널 레벨의 저수준에서 프로세스를 모니터링하고 제어하는 솔루션을 소개합니다.",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "쿼리파이",
+        "명령 우회 방지",
+        "프로세스 추적",
+        "사이버 보안",
+        "위협 탐지"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-5.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"실행 프로세스 추적 방식을 통한 명령어 우회 원천 차단\"\ndescription: \"본 백서에서는 Linux 커널 레벨의 저수준에서 프로세스를 모니터링하고 제어하는 솔루션을 소개합니다.\"\ndate: \"2024-11-22\"\nauthor: \"logan\"\nogImage: \"public/white-paper/wp-thumb-5.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"명령 우회 방지\", \"프로세스 추적\", \"사이버 보안\", \"위협 탐지\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/6/kubernetes-access-control\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+        "/features/documentation/white-paper/7/pac-policy-as-code",
+        "/features/documentation/white-paper/6/kubernetes-access-control"
+      ],
+      "sourcePath": "documentation/white-paper/5/preventing-command-bypass/ko/content.mdx",
+      "title": "실행 프로세스 추적 방식을 통한 명령어 우회 원천 차단",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "실행 프로세스 추적 방식을 통한 명령어 우회 원천 차단",
+        "description": "본 백서에서는 Linux 커널 레벨의 저수준에서 프로세스를 모니터링하고 제어하는 솔루션을 소개합니다.",
+        "date": "2024-11-22",
+        "author": "logan",
+        "ogImage": "public/white-paper/wp-thumb-5.webp",
+        "keywords": [
+          "QueryPie",
+          "쿼리파이",
+          "명령 우회 방지",
+          "프로세스 추적",
+          "사이버 보안",
+          "위협 탐지"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+          "/features/documentation/white-paper/7/pac-policy-as-code",
+          "/features/documentation/white-paper/6/kubernetes-access-control"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-5.webp",
+          "webPath": "/white-paper/wp-thumb-5.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp5-1-issues-to-solve.webp",
+          "webPath": "/white-paper/wp5-1-issues-to-solve.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp5-2-idea.webp",
+          "webPath": "/white-paper/wp5-2-idea.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/preventing-command-bypass--5/ja.mdx",
+      "contentKind": "video",
+      "description": "QueryPie の革新的なプロセス追跡方式により、ソースでのコマンドバイパスの脅威を防止します。",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "コマンドバイパス防止",
+        "プロセス追跡",
+        "サイバーセキュリティ",
+        "脅威検出"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-5.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"実行プロセス追跡方式によるコマンド回避の根本的なブロック\"\ndescription: \"QueryPie の革新的なプロセス追跡方式により、ソースでのコマンドバイパスの脅威を防止します。\"\ndate: \"2024-11-22\"\nauthor: \"logan\"\nogImage: \"public/white-paper/wp-thumb-5.webp\"\nkeywords: [\"QueryPie\", \"コマンドバイパス防止\", \"プロセス追跡\", \"サイバーセキュリティ\", \"脅威検出\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/6/kubernetes-access-control\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+        "/features/documentation/white-paper/7/pac-policy-as-code",
+        "/features/documentation/white-paper/6/kubernetes-access-control"
+      ],
+      "sourcePath": "documentation/white-paper/5/preventing-command-bypass/ja/content.mdx",
+      "title": "実行プロセス追跡方式によるコマンド回避の根本的なブロック",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "実行プロセス追跡方式によるコマンド回避の根本的なブロック",
+        "description": "QueryPie の革新的なプロセス追跡方式により、ソースでのコマンドバイパスの脅威を防止します。",
+        "date": "2024-11-22",
+        "author": "logan",
+        "ogImage": "public/white-paper/wp-thumb-5.webp",
+        "keywords": [
+          "QueryPie",
+          "コマンドバイパス防止",
+          "プロセス追跡",
+          "サイバーセキュリティ",
+          "脅威検出"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+          "/features/documentation/white-paper/7/pac-policy-as-code",
+          "/features/documentation/white-paper/6/kubernetes-access-control"
+        ]
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "preventing-command-bypass"
+}

@@ -1,0 +1,96 @@
+{
+  "category": "use-cases",
+  "contentKind": "video",
+  "entryId": "quotation-ai-agent--27",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "27",
+    "sourceCategory": "use-cases",
+    "sourceGroupPath": "demo/use-cases/27/quotation-ai-agent",
+    "sourceUrl": "/features/demo/use-cases/27/quotation-ai-agent"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-27-en.webp",
+          "webPath": "/demo/aip-use-case-thumb-27-en.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/quotation-ai-agent--27/en.mdx",
+      "contentKind": "video",
+      "description": "No matter how complex your quotation logic is, AIP structures it as a Skill and delivers error-free quotes instantly.",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-27-en.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Quotation AI Agent\"\ndescription: \"No matter how complex your quotation logic is, AIP structures it as a Skill and delivers error-free quotes instantly.\"\ndate: \"2026-02-26\"\nogImage: \"public/demo/aip-use-case-thumb-27-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/24/aws-solutions-architect-ai-agent\"\n  - \"/features/demo/use-cases/25/portfolio-insight-ai-agent\"\n  - \"/features/demo/use-cases/26/investment-analyst-ai-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/24/aws-solutions-architect-ai-agent",
+        "/features/demo/use-cases/25/portfolio-insight-ai-agent",
+        "/features/demo/use-cases/26/investment-analyst-ai-agent"
+      ],
+      "sourcePath": "demo/use-cases/27/quotation-ai-agent/en/content.mdx",
+      "title": "AIP Use Case: Quotation AI Agent",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP Use Case: Quotation AI Agent",
+        "description": "No matter how complex your quotation logic is, AIP structures it as a Skill and delivers error-free quotes instantly.",
+        "date": "2026-02-26",
+        "ogImage": "public/demo/aip-use-case-thumb-27-en.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/24/aws-solutions-architect-ai-agent",
+          "/features/demo/use-cases/25/portfolio-insight-ai-agent",
+          "/features/demo/use-cases/26/investment-analyst-ai-agent"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-27-ja.webp",
+          "webPath": "/demo/aip-use-case-thumb-27-ja.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/quotation-ai-agent--27/ja.mdx",
+      "contentKind": "video",
+      "description": "どれほど複雑な見積ロジックでも、AIPがスキルとして構造化し、正確な見積書を即時出力します。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-27-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 見積AIエージェント\"\ndescription: \"どれほど複雑な見積ロジックでも、AIPがスキルとして構造化し、正確な見積書を即時出力します。\"\ndate: \"2026-02-26\"\nogImage: \"public/demo/aip-use-case-thumb-27-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/24/aws-solutions-architect-ai-agent\"\n  - \"/features/demo/use-cases/25/portfolio-insight-ai-agent\"\n  - \"/features/demo/use-cases/26/investment-analyst-ai-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/24/aws-solutions-architect-ai-agent",
+        "/features/demo/use-cases/25/portfolio-insight-ai-agent",
+        "/features/demo/use-cases/26/investment-analyst-ai-agent"
+      ],
+      "sourcePath": "demo/use-cases/27/quotation-ai-agent/ja/content.mdx",
+      "title": "AIP活用事例： 見積AIエージェント",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP活用事例： 見積AIエージェント",
+        "description": "どれほど複雑な見積ロジックでも、AIPがスキルとして構造化し、正確な見積書を即時出力します。",
+        "date": "2026-02-26",
+        "ogImage": "public/demo/aip-use-case-thumb-27-ja.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/24/aws-solutions-architect-ai-agent",
+          "/features/demo/use-cases/25/portfolio-insight-ai-agent",
+          "/features/demo/use-cases/26/investment-analyst-ai-agent"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "quotation-ai-agent"
+}

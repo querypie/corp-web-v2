@@ -1,0 +1,136 @@
+{
+  "category": "webinars",
+  "contentKind": "webinar",
+  "entryId": "ztna-security-prisma-access--5",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "5",
+    "sourceCategory": "webinars",
+    "sourceGroupPath": "demo/webinars/5/ztna-security-prisma-access",
+    "sourceUrl": "/features/demo/webinars/5/ztna-security-prisma-access"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/wb-thumb-5.webp",
+          "webPath": "/webinar/wb-thumb-5.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/ztna-security-prisma-access--5/en.mdx",
+      "contentKind": "webinar",
+      "description": "Why Did QueryPie Choose Prisma Access? Dive into the details of how QueryPie identified Prisma Access as the ultimate choice for their security needs.",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/wb-thumb-5.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Achieve Perfect ZTNA Security with Prisma Access!\"\ndescription: \"Why Did QueryPie Choose Prisma Access? Dive into the details of how QueryPie identified Prisma Access as the ultimate choice for their security needs.\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/4/flex-querypie-secrets\"",
+      "relatedPosts": [
+        "/features/demo/webinars/1/cloud-certification-shortest-path",
+        "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+        "/features/demo/webinars/4/flex-querypie-secrets"
+      ],
+      "sourcePath": "demo/webinars/5/ztna-security-prisma-access/en/content.mdx",
+      "title": "Achieve Perfect ZTNA Security with Prisma Access!",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "Achieve Perfect ZTNA Security with Prisma Access!",
+        "description": "Why Did QueryPie Choose Prisma Access? Dive into the details of how QueryPie identified Prisma Access as the ultimate choice for their security needs.",
+        "date": "2024-11-29",
+        "ogImage": "public/webinar/wb-thumb-5.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/1/cloud-certification-shortest-path",
+          "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+          "/features/demo/webinars/4/flex-querypie-secrets"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/wb-thumb-5.webp",
+          "webPath": "/webinar/wb-thumb-5.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/ztna-security-prisma-access--5/ko.mdx",
+      "contentKind": "webinar",
+      "description": "제로트러스트 노하우 공개! 왜 QueryPie는 프리즈마 액세스(Prisma Access)를 선택했을까? 간단하지만 중요한 핵심 비밀을 공유합니다!",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/wb-thumb-5.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"ZTNA보안, Prisma Access로 완벽하게!\"\ndescription: \"제로트러스트 노하우 공개! 왜 QueryPie는 프리즈마 액세스(Prisma Access)를 선택했을까? 간단하지만 중요한 핵심 비밀을 공유합니다!\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/4/flex-querypie-secrets\"",
+      "relatedPosts": [
+        "/features/demo/webinars/1/cloud-certification-shortest-path",
+        "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+        "/features/demo/webinars/4/flex-querypie-secrets"
+      ],
+      "sourcePath": "demo/webinars/5/ztna-security-prisma-access/ko/content.mdx",
+      "title": "ZTNA보안, Prisma Access로 완벽하게!",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "ZTNA보안, Prisma Access로 완벽하게!",
+        "description": "제로트러스트 노하우 공개! 왜 QueryPie는 프리즈마 액세스(Prisma Access)를 선택했을까? 간단하지만 중요한 핵심 비밀을 공유합니다!",
+        "date": "2024-11-29",
+        "ogImage": "public/webinar/wb-thumb-5.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/1/cloud-certification-shortest-path",
+          "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+          "/features/demo/webinars/4/flex-querypie-secrets"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/wb-thumb-5.webp",
+          "webPath": "/webinar/wb-thumb-5.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/ztna-security-prisma-access--5/ja.mdx",
+      "contentKind": "webinar",
+      "description": "QueryPieがPrismaアクセスを選択した理由？ QueryPieがPrisma Accessをセキュリティニーズのための最終的な選択肢として特定した方法の詳細をご覧ください。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/wb-thumb-5.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Prisma Accessで完璧なZTNAセキュリティを実現！\"\ndescription: \"QueryPieがPrismaアクセスを選択した理由？ QueryPieがPrisma Accessをセキュリティニーズのための最終的な選択肢として特定した方法の詳細をご覧ください。\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/4/flex-querypie-secrets\"",
+      "relatedPosts": [
+        "/features/demo/webinars/1/cloud-certification-shortest-path",
+        "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+        "/features/demo/webinars/4/flex-querypie-secrets"
+      ],
+      "sourcePath": "demo/webinars/5/ztna-security-prisma-access/ja/content.mdx",
+      "title": "Prisma Accessで完璧なZTNAセキュリティを実現！",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "Prisma Accessで完璧なZTNAセキュリティを実現！",
+        "description": "QueryPieがPrismaアクセスを選択した理由？ QueryPieがPrisma Accessをセキュリティニーズのための最終的な選択肢として特定した方法の詳細をご覧ください。",
+        "date": "2024-11-29",
+        "ogImage": "public/webinar/wb-thumb-5.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/1/cloud-certification-shortest-path",
+          "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+          "/features/demo/webinars/4/flex-querypie-secrets"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "ztna-security-prisma-access"
+}

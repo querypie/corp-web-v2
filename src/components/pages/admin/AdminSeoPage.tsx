@@ -23,14 +23,10 @@ export default function AdminSeoPage() {
   const [selectedKey, setSelectedKey] = useState<SeoPageKey>("home");
   const [activeLocale, setActiveLocale] = useState<"en" | "ko" | "ja">("en");
   const [ogImageName, setOgImageName] = useState("");
-  const [showDefinitionsModal, setShowDefinitionsModal] = useState(false);
-  const [definitionsDraft, setDefinitionsDraft] = useState("");
-  const [initialDefinitionsDraft, setInitialDefinitionsDraft] = useState("");
   const [showDiscoveryModal, setShowDiscoveryModal] = useState(false);
   const [definitionsError, setDefinitionsError] = useState("");
   const [discoveryCandidates, setDiscoveryCandidates] = useState<SeoDiscoveryCandidate[]>([]);
   const [isDiscovering, setIsDiscovering] = useState(false);
-  const [showCancelDefinitionsConfirm, setShowCancelDefinitionsConfirm] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const currentEntry = useMemo(
@@ -80,32 +76,6 @@ export default function AdminSeoPage() {
     reader.readAsDataURL(file);
   }
 
-  function openDefinitionsEditor() {
-    const draft = JSON.stringify(definitions, null, 2);
-    setDefinitionsDraft(draft);
-    setInitialDefinitionsDraft(draft);
-    setDefinitionsError("");
-    setShowDefinitionsModal(true);
-  }
-
-  function saveDefinitions() {
-    try {
-      const parsed = JSON.parse(definitionsDraft) as SeoPageDefinition[];
-      if (!Array.isArray(parsed)) {
-        throw new Error("배열 형식이어야 합니다.");
-      }
-
-      persistSeoPageDefinitions(parsed);
-      setShowDefinitionsModal(false);
-      setShowCancelDefinitionsConfirm(false);
-      if (!parsed.find((item) => item.key === selectedKey)) {
-        setSelectedKey((parsed[0]?.key as SeoPageKey) ?? "home");
-      }
-    } catch (error) {
-      setDefinitionsError(error instanceof Error ? error.message : "정의 저장에 실패했습니다.");
-    }
-  }
-
   async function discoverPages() {
     setIsDiscovering(true);
     setDefinitionsError("");
@@ -147,15 +117,6 @@ export default function AdminSeoPage() {
     }
   }
 
-  function closeDefinitionsEditor() {
-    if (definitionsDraft !== initialDefinitionsDraft) {
-      setShowCancelDefinitionsConfirm(true);
-      return;
-    }
-
-    setShowDefinitionsModal(false);
-  }
-
   return (
     <section className="flex flex-col gap-8">
       <AdminHeader
@@ -165,21 +126,20 @@ export default function AdminSeoPage() {
 
       <div className="grid gap-6 xl:grid-cols-[220px_minmax(0,1fr)]">
         <div>
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-wrap gap-2 md:flex-col md:gap-px">
             {definitions.map((item) => (
               <button
                 key={item.key}
                 className={cx(
-                  "w-full rounded-button px-3 py-2 text-left type-body-md transition-colors",
+                  "inline-flex w-full items-center rounded-button px-3 py-2 text-left type-body-md transition-colors",
                   item.key === selectedKey
                     ? "bg-secondary text-fg"
-                    : "text-mute-fg hover:bg-bg-content hover:text-fg",
+                    : "text-mute-fg hover:bg-[#242426] hover:text-fg",
                 )}
                 onClick={() => setSelectedKey(item.key)}
                 type="button"
               >
                 <div className="text-inherit">{item.label}</div>
-                <p className="m-0 mt-1 type-body-sm text-inherit/70">{item.description}</p>
               </button>
             ))}
           </div>
@@ -188,12 +148,10 @@ export default function AdminSeoPage() {
               arrow={false}
               className="w-full justify-center"
               onClick={discoverPages}
+              style="round"
               variant="outline"
             >
               {isDiscovering ? "탐색 중..." : "미등록 페이지 탐색"}
-            </Button>
-            <Button arrow={false} className="mt-3 w-full justify-center" onClick={openDefinitionsEditor} variant="outline">
-              고급 정의 편집
             </Button>
           </div>
         </div>
@@ -261,8 +219,8 @@ export default function AdminSeoPage() {
                         {ogImageDisplayValue}
                       </span>
                     </div>
-                    <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} variant="outline">
-                      이미지 업로드
+                    <Button size="default" arrow={false} className="w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} style="round" variant="outline">
+                      추가
                     </Button>
                   </div>
                   <input
@@ -311,10 +269,10 @@ export default function AdminSeoPage() {
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <p className="m-0 type-body-sm text-mute-fg">실시간 적용</p>
                 <div className="flex flex-col gap-3 sm:flex-row">
-                  <Button arrow={false} onClick={() => resetSeoEntry(currentEntry.key)} variant="outline">
+                  <Button size="default" arrow={false} onClick={() => resetSeoEntry(currentEntry.key)} style="round" variant="outline">
                     SEO 기본값으로 초기화
                   </Button>
-                  <Button arrow={false} onClick={() => removeDefinition(currentEntry.key)} variant="secondary">
+                  <Button size="default" arrow={false} onClick={() => removeDefinition(currentEntry.key)} style="round" variant="secondary">
                     SEO 관리 목록에서 제외
                   </Button>
                 </div>
@@ -323,63 +281,6 @@ export default function AdminSeoPage() {
           </div>
         ) : null}
       </div>
-
-      {showDefinitionsModal ? (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-4 sm:px-5">
-          <div className="flex max-h-[calc(100vh-32px)] w-full max-w-[880px] flex-col gap-4 overflow-auto rounded-[20px] border border-border bg-bg-content p-5 md:p-6" onClick={(event) => event.stopPropagation()}>
-            <div>
-              <div>
-                <h2 className="m-0 type-h3 text-fg">고급 정의 편집</h2>
-                <p className="m-0 mt-2 type-body-md text-mute-fg">퍼블릭 주요 페이지 정의를 JSON 형태로 직접 수정합니다.</p>
-              </div>
-            </div>
-            <textarea
-              className="ui-field min-h-[420px] resize-y rounded-button bg-bg px-4 py-4 type-body-md text-fg outline-none"
-              onChange={(event) => setDefinitionsDraft(event.target.value)}
-              value={definitionsDraft}
-            />
-            {definitionsError ? <p className="m-0 type-body-md text-destructive">{definitionsError}</p> : null}
-            <div className="flex justify-end gap-3">
-              <Button arrow={false} onClick={closeDefinitionsEditor} variant="outline">
-                취소
-              </Button>
-              <Button arrow={false} onClick={saveDefinitions} variant="primary">
-                저장
-              </Button>
-            </div>
-          </div>
-        </div>
-      ) : null}
-
-      {showCancelDefinitionsConfirm ? (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-4 sm:px-5" onClick={() => setShowCancelDefinitionsConfirm(false)}>
-          <div className="w-full max-w-[320px] rounded-modal bg-bg-content px-5 py-8" onClick={(event) => event.stopPropagation()}>
-            <div className="flex flex-col items-center gap-5 text-center">
-              <div className="flex flex-col items-center gap-2 text-center">
-                <h2 className="m-0 type-h3 text-fg">편집을 취소하시겠습니까?</h2>
-                <p className="m-0 whitespace-pre-line type-body-md text-mute-fg">
-                  저장하지 않은 페이지 정의 변경사항은 사라집니다.
-                </p>
-              </div>
-              <div className="flex justify-center gap-3">
-                <Button arrow={false} onClick={() => setShowCancelDefinitionsConfirm(false)} variant="outline">
-                  계속 편집
-                </Button>
-                <Button
-                  arrow={false}
-                  onClick={() => {
-                    setShowCancelDefinitionsConfirm(false);
-                    setShowDefinitionsModal(false);
-                  }}
-                  variant="secondary"
-                >
-                  취소하기
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : null}
 
       {showDiscoveryModal ? (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-4 sm:px-5">
@@ -405,7 +306,7 @@ export default function AdminSeoPage() {
                           {candidate.routePattern || "/"} · {candidate.matchMode}
                         </p>
                       </div>
-                      <Button arrow={false} onClick={() => addDiscoveredDefinition(candidate)} variant="outline">
+                      <Button size="default" arrow={false} onClick={() => addDiscoveredDefinition(candidate)} style="round" variant="outline">
                         추가
                       </Button>
                     </div>
@@ -418,7 +319,7 @@ export default function AdminSeoPage() {
               )}
             </div>
             <div className="flex justify-end">
-              <Button arrow={false} onClick={() => setShowDiscoveryModal(false)} variant="outline">
+              <Button size="default" arrow={false} onClick={() => setShowDiscoveryModal(false)} style="round" variant="outline">
                 닫기
               </Button>
             </div>

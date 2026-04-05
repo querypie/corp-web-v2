@@ -1,0 +1,57 @@
+---
+layout: "Article"
+category: "acp-features"
+title: "How to Submit a Workflow for Servers Access Requests"
+description: ""
+date: "2024-11-29"
+ogImage: "public/tutorial/tu-thumb-sac-5.png"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/acp-features/11/use-web-terminal"
+  - "/features/demo/acp-features/9/submit-role-access-workflow"
+  - "/features/demo/acp-features/8/connect-servers-agent"
+---
+
+<Youtube
+    src="https://www.youtube.com/embed/WYiWd8OBrzI?si=lWmupNbnnYD3H-0Y"
+/>
+
+# Overview
+
+Follow the steps below to request Direct Permission for the server you need access to. Upon approval, the Server Access Request grants immediate access, and you can connect to the server via the web terminal or Proxy.
+
+# Submitting a Server Access Request
+
+<BlueState>STEP 1</BlueState> Access the **Server Access Request** page through the following paths:
+- Servers > Top-left Button
+- Workflow > Submit Request > Server Access Request
+
+<BlueState>STEP 2</BlueState> Select approval rules and assign approvers.
+- **Approval Rule:** Choose an approval rule from the list created by the administrator in **General > Approval Rules**.
+  - Approval rules determine who must approve the request. If the rule specifies approvers, they will be automatically assigned.
+- **Approver:** Use the `+` button to add approvers at each stage of the approval workflow.
+  - **A single assignee can complete the approval request:** Any one approver in a group can approve the request.
+  - **All assignees must approve this request:** All assigned approvers must approve the request for it to proceed.
+
+<BlueState>STEP 3</BlueState> Click `Add Servers` to add the target servers for the request.
+- From the Server Group list on the left, choose the group containing the servers you need access to.
+- Select the target servers from the Servers list on the right (multiple selections are allowed; the number of selected servers is displayed in the upper right corner).
+- Choose the accounts you need access for in the Accounts section (multiple selections are allowed).
+
+<BlueState>STEP 4</BlueState> After entering all details, click the `Submit` button to send the request for approval.
+- **Title:** Provide a title for the request.
+- **Expiration Date:** Specify the expiration date for the requested privileges (default: 1 year).
+- **Reason for Request:** State the reason for requesting access.
+
+# Approving a Request
+
+<BlueState>STEP 1</BlueState> Assigned approvers can navigate to **Workflow > Received Requests > To Do** to view pending requests.
+
+<BlueState>STEP 2</BlueState> Open the details page for the request and click the `Approve` button to complete the approval process.
+
+<InfoNote>
+Permissions granted through a Server Access Request are subject to the policies defined in **Security > Server Default Settings**.
+
+Permissions granted through Direct Permission will apply when you select **Default Role** in the server list.
+</InfoNote>

@@ -2,20 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 전역 폰트 변수: 기본/한글/일본어/모노 */
+/* 전역 디자인 토큰.
+   Tailwind 토큰도 여기 CSS 변수를 참조하므로, 빠른 시각 테스트는 이 값만 바꿔도 된다. */
 :root {
-  --font-sans: "Pretendard Variable", "SF Pro Display", -apple-system, system-ui, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
+  /* 폰트 토큰: 기본 / 한글 / 일본어 / 모노 */
+  --font-sans: var(--font-mona-sans), "SF Pro Display", -apple-system, system-ui, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
   --font-sans-ko: "Pretendard Variable";
   --font-sans-ja: "Pretendard JP";
   --font-mono: var(--font-jetbrains-mono), monospace;
-  --color-fg: #F7F7F8;
+
+  /* 라운드 토큰: rounded-* 유틸리티가 이 값을 사용한다. */
+  --radius-thumb: 10px;
+  --radius-box: 10px;
+  --radius-round: 8px;
+  --radius-modal: 20px;
+  --radius-full: 9999px;
+
+  /* 색상 토큰: fg/bg/border 등 공통 의미 기반 색상 */
+  --color-fg: #F1F1F2;
   --color-mute-fg: #8C9099;
   --color-bg-content: #1B1B1D;
   --color-bg-deep: #181819;
   --color-bg-feather: #2C2D2F;
-  --color-bg: #08090A;
+  --color-bg: #000000;
   --color-border: #2A2A2C;
-  --color-primary: #E6E6E6;
+  --color-primary: #FAFAFA;
   --color-secondary: #2A2A2E;
   --color-white: #FFFFFF;
   --color-point: #C0E136;
@@ -23,6 +34,9 @@
   --color-warning: #CA8A04;
   --color-destructive: #EF4444;
   --color-brand: #EF612E;
+
+  /* 썸네일 공통 비율: 카드/리스트 이미지에서 재사용 */
+  --content-thumbnail-aspect: 16 / 9;
 }
 
 * {
@@ -32,6 +46,17 @@
 html,
 :lang(en) {
   font-family: var(--font-sans);
+  font-feature-settings:
+    "ss01" on,
+    "ss02" off,
+    "ss03" off,
+    "ss04" off,
+    "ss05" off,
+    "ss06" off,
+    "ss07" off,
+    "ss08" off,
+    "ss09" on,
+    "ss10" off;
 }
 
 html {
@@ -50,6 +75,34 @@ body {
   margin: 0;
 }
 
+/* 스크롤바는 전역 다크 톤 기준으로 통일한다. */
+html {
+  scrollbar-color: #4a4c50 #141516;
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #141516;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #4a4c50;
+  border: 2px solid #141516;
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: #5a5d62;
+}
+
+*::-webkit-scrollbar-corner {
+  background: #141516;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -63,6 +116,8 @@ select {
 }
 
 @layer utilities {
+  /* 입력 필드 공통 스타일.
+     실제 input/textarea/select에 직접 붙이는 기본 포커스 링 유틸리티. */
   .ui-field {
     border: 1px solid transparent;
     transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
@@ -74,6 +129,8 @@ select {
     box-shadow: 0 0 0 3px rgba(255, 137, 47, 0.12);
   }
 
+  /* 래퍼형 입력 필드 공통 스타일.
+     내부에 input이 들어가는 셸 컴포넌트에 붙이고 focus-within으로 반응시킨다. */
   .ui-field-shell {
     border: 1px solid transparent;
     transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
@@ -94,14 +151,10 @@ select {
     background-color: #242426;
   }
 
-  /* 퍼블릭 컨텐츠 카드 제목 hover/focus 가이드:
-     컨텐츠 리스트, 뉴스, 이전/다음글 카드 제목은 동일한 mute-fg hover 패턴을 사용한다. */
+  /* 퍼블릭 컨텐츠 카드 제목 공통 스타일:
+     hover 시 색은 유지하고, 필요한 경우 개별 컴포넌트에서 별도 색 변화를 추가한다. */
   .content-hover-title {
     transition: color 200ms ease;
-  }
-
-  .group:focus-visible .content-hover-title {
-    @apply text-mute-fg;
   }
 
   /* 카드 내부 미디어는 데스크톱 hover 시 확대되고, 터치 환경에서는 active 상태에서만 약하게 반응한다. */
@@ -109,13 +162,14 @@ select {
     transition: transform 300ms ease;
   }
 
+  .content-thumbnail-frame {
+    aspect-ratio: var(--content-thumbnail-aspect);
+  }
+
+  /* 마우스가 있는 환경에서만 hover 반응을 강하게 준다. */
   @media (hover: hover) and (pointer: fine) {
     .card-hover:hover {
       background-color: #242426;
-    }
-
-    .group:hover .content-hover-title {
-      @apply text-mute-fg;
     }
 
     .group:hover .card-media-motion {
@@ -123,6 +177,7 @@ select {
     }
   }
 
+  /* 터치 환경에서는 hover 대신 active 눌림만 약하게 준다. */
   @media (hover: none), (pointer: coarse) {
     a[href],
     button,
@@ -139,11 +194,19 @@ select {
     }
   }
 
-  /* 타이포 유틸리티: 모바일 기본값 */
+  /* 공용 타이포 토큰: 모바일 기본값.
+     페이지에서 임의 text-[...]보다 이 토큰을 우선 사용한다. */
+  .type-h0 {
+    font-size: 32px;
+    line-height: 38px;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+
   .type-h1 {
     font-size: 26px;
     line-height: 32px;
-    letter-spacing: -0.6px;
+    letter-spacing: 0;
     font-weight: 300;
   }
 
@@ -151,14 +214,14 @@ select {
     font-size: 20px;
     line-height: 26px;
     letter-spacing: -0.2px;
-    font-weight: 300;
+    font-weight: 400;
   }
 
   .type-h3 {
     font-size: 16px;
     line-height: 22px;
-    letter-spacing: -0.1px;
-    font-weight: 500;
+    letter-spacing: 0;
+    font-weight: 400;
   }
 
   .type-body-lg {
@@ -182,31 +245,165 @@ select {
     font-weight: 300;
   }
 
+
+  /* 퍼블릭/공용 모노 타이포 */
   .type-mono {
-    font-size: 12px;
+    font-family: var(--font-mono) !important;
+    font-size: 14px;
     line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 300;
+  }
+
+  /* 콘텐츠 본문 전용 타이포 */
+  .type-content-h1 {
+    font-size: 24px;
+    line-height: 34px;
     letter-spacing: 0;
     font-weight: 400;
   }
 
-  /* 타이포 유틸리티: 데스크탑 오버라이드 */
+  .type-content-h2 {
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 0;
+    font-weight: 500;
+  }
+
+  .type-content-h3 {
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: 0;
+    font-weight: 500;
+  }
+
+  .type-content-body {
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: 0;
+    font-weight: 300;
+  }
+
+  .type-content-mono {
+    font-family: var(--font-mono) !important;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 300;
+  }
+
+  /* 코드 하이라이트 토큰 색상.
+     Prism/rehype가 아니라 수동 렌더링 결과에 맞춰 사용한다. */
+  .code-token-tag {
+    color: #56b6c2;
+  }
+
+  .code-token-attr {
+    color: #d19a66;
+  }
+
+  .code-token-string {
+    color: #98c379;
+  }
+
+  .code-token-keyword {
+    color: #c678dd;
+  }
+
+  .code-token-number {
+    color: #d19a66;
+  }
+
+  .code-token-comment {
+    color: #7f848e;
+  }
+
+  .code-token-variable {
+    color: #61afef;
+  }
+
+  .code-token-punctuation {
+    color: #abb2bf;
+  }
+
+  /* 줄번호 포함 코드블록 레이아웃 */
+  .code-block-shell {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr);
+    overflow: hidden;
+    border-radius: 10px;
+    background: var(--color-bg-content);
+    column-gap: 0;
+  }
+
+  .code-block-gutter {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0;
+    background: transparent;
+    padding: 16px 8px;
+    font-family: var(--font-mono) !important;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 300;
+    color: var(--color-mute-fg);
+    user-select: none;
+    font-variant-ligatures: none;
+  }
+
+  .code-line-number {
+    display: block;
+    min-height: 20px;
+    line-height: 20px;
+  }
+
+  .code-line {
+    display: block;
+    min-height: 20px;
+    line-height: 20px;
+  }
+
+  .code-block-shell pre,
+  .code-block-shell code,
+  .code-block-shell .code-line {
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 300;
+    font-variant-ligatures: none;
+  }
+
+  .code-block-shell code {
+    display: block;
+    white-space: pre;
+  }
+
+  .code-block-shell pre {
+    background: transparent !important;
+  }
+
+  /* 데스크톱 이상에서만 타이포 스케일을 한 단계 키운다. */
   @media (min-width: 768px) {
+    .type-h0 {
+      font-size: 48px;
+      line-height: 48px;
+    }
+
     .type-h1 {
       font-size: 36px;
       line-height: 44px;
-      letter-spacing: -0.6px;
     }
 
     .type-h2 {
       font-size: 24px;
       line-height: 30px;
-      letter-spacing: -0.2px;
     }
 
     .type-h3 {
       font-size: 18px;
       line-height: 24px;
-      letter-spacing: -0.2px;
     }
 
     .type-body-lg {
@@ -224,10 +421,40 @@ select {
       line-height: 18px;
     }
 
+    .type-mono {
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    .type-content-h1 {
+      font-size: 28px;
+      line-height: 38px;
+    }
+
+    .type-content-h2 {
+      font-size: 22px;
+      line-height: 32px;
+    }
+
+    .type-content-h3 {
+      font-size: 16px;
+      line-height: 28px;
+    }
+
+    .type-content-body {
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    .type-content-mono {
+      font-size: 13px;
+      line-height: 20px;
+    }
+
   }
 }
 
-/* 홈/섹션에서 쓰는 공통 marquee 애니메이션 */
+/* 홈/섹션 공용 애니메이션: 무한 좌우 흐름 */
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -237,7 +464,7 @@ select {
   }
 }
 
-/* 히어로 배경 별 반짝임 */
+/* 메인 히어로 장식 별 점멸 */
 @keyframes hero-star-twinkle {
   0%,
   100% {
@@ -251,7 +478,7 @@ select {
   }
 }
 
-/* 히어로 장식 아이콘 부유 효과 */
+/* 히어로 장식 아이콘 부유 */
 @keyframes hero-icon-float {
   0%, 100% {
     transform: translateY(0px) translateX(-50%);
@@ -261,7 +488,7 @@ select {
   }
 }
 
-/* 스크롤 reveal: 뷰포트 진입 시 opacity 0 → 1 */
+/* reveal 공통 패턴: 뷰포트 진입 전에는 약간 아래 + 투명 상태 */
 [data-reveal] {
   opacity: 0;
   transform: translateY(18px);
@@ -274,7 +501,7 @@ select {
   transform: translateY(0);
 }
 
-/* 히어로 카피 등장 애니메이션: 아래에서 페이드업 */
+/* 히어로 카피 전용 등장 애니메이션 */
 @keyframes hero-copy-enter {
   from {
     opacity: 0;
@@ -286,7 +513,26 @@ select {
   }
 }
 
-/* 히어로 프롬프트 뒤 그라데이션 흐름 */
+/* 모바일 GNB 시트가 헤더 아래에서 아래로 펼쳐진다. */
+@keyframes mobile-menu-sheet-enter {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes mobile-menu-sheet-exit {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 100% 0);
+  }
+}
+
+/* 기존 홈 히어로 프롬프트 뒤 배경 흐름 */
 @keyframes hero-gradient-flow {
   0% {
     background-position: 0% 50%;
@@ -302,7 +548,7 @@ select {
   }
 }
 
-/* 버튼 hover 시 화살표가 살짝 이동하는 효과 */
+/* 버튼 hover 시 화살표가 살짝 앞으로 밀린다. */
 @keyframes button-arrow-nudge {
   0% {
     transform: translateX(0);
@@ -315,7 +561,18 @@ select {
   }
 }
 
-/* 404 bot 눈 깜빡임 */
+/* 홈B 실제 루프 비디오 레이어 */
+.homeb-hero-video {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center center;
+  opacity: 1;
+}
+
+/* 404 페이지 전용: bot 눈 깜빡임 */
 @keyframes bowBlink {
   0%, 25%, 95%, 100% {
     transform: scaleY(1);
@@ -326,7 +583,7 @@ select {
   }
 }
 
-/* 404 bot 몸통 보잉 */
+/* 404 페이지 전용: bot 몸통 탄성 */
 @keyframes bowBody {
   0%, 25%, 100% {
     transform: translateY(0) scaleY(1);
@@ -337,7 +594,7 @@ select {
   }
 }
 
-/* 404 bot 얼굴 보잉 */
+/* 404 페이지 전용: bot 얼굴 탄성 */
 @keyframes bowFace {
   0%, 25%, 100% {
     transform: translateY(0) scaleY(1);

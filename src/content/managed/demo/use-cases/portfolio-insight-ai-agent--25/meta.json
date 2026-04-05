@@ -1,0 +1,96 @@
+{
+  "category": "use-cases",
+  "contentKind": "video",
+  "entryId": "portfolio-insight-ai-agent--25",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "25",
+    "sourceCategory": "use-cases",
+    "sourceGroupPath": "demo/use-cases/25/portfolio-insight-ai-agent",
+    "sourceUrl": "/features/demo/use-cases/25/portfolio-insight-ai-agent"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-19-en.webp",
+          "webPath": "/demo/aip-use-case-thumb-19-en.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/portfolio-insight-ai-agent--25/en.mdx",
+      "contentKind": "video",
+      "description": "An AI agent that turns market and account data into portfolio insights—performance, allocation, and risk—delivered through natural language with actionable next steps.",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-19-en.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Portfolio Insight AI Agent\"\ndescription: \"An AI agent that turns market and account data into portfolio insights—performance, allocation, and risk—delivered through natural language with actionable next steps.\"\ndate: \"2025-11-11\"\nogImage: \"public/demo/aip-use-case-thumb-19-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/23/aws-inspector-ai-agent\"\n  - “/features/demo/use-cases/24/aws-solutions-architect-ai-agent”\n  - \"/features/demo/use-cases/26/investment-analyst-ai-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/23/aws-inspector-ai-agent",
+        "“/features/demo/use-cases/24/aws-solutions-architect-ai-agent”",
+        "/features/demo/use-cases/26/investment-analyst-ai-agent"
+      ],
+      "sourcePath": "demo/use-cases/25/portfolio-insight-ai-agent/en/content.mdx",
+      "title": "AIP Use Case: Portfolio Insight AI Agent",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP Use Case: Portfolio Insight AI Agent",
+        "description": "An AI agent that turns market and account data into portfolio insights—performance, allocation, and risk—delivered through natural language with actionable next steps.",
+        "date": "2025-11-11",
+        "ogImage": "public/demo/aip-use-case-thumb-19-en.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/23/aws-inspector-ai-agent",
+          "“/features/demo/use-cases/24/aws-solutions-architect-ai-agent”",
+          "/features/demo/use-cases/26/investment-analyst-ai-agent"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-19-ja.webp",
+          "webPath": "/demo/aip-use-case-thumb-19-ja.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/portfolio-insight-ai-agent--25/ja.mdx",
+      "contentKind": "video",
+      "description": "市場データと口座データを自然言語での会話を通じて、パフォーマンス、アロケーション、リスクのポートフォリオインサイトに変換し、行動可能な次の一手まで提示するAIエージェント。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-19-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 投資ポートフォリオ・インサイトAIエージェント\"\ndescription: \"市場データと口座データを自然言語での会話を通じて、パフォーマンス、アロケーション、リスクのポートフォリオインサイトに変換し、行動可能な次の一手まで提示するAIエージェント。\"\ndate: \"2025-11-11\"\nogImage: \"public/demo/aip-use-case-thumb-19-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/23/aws-inspector-ai-agent\"\n  - “/features/demo/use-cases/24/aws-solutions-architect-ai-agent”\n  - \"/features/demo/use-cases/26/investment-analyst-ai-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/23/aws-inspector-ai-agent",
+        "“/features/demo/use-cases/24/aws-solutions-architect-ai-agent”",
+        "/features/demo/use-cases/26/investment-analyst-ai-agent"
+      ],
+      "sourcePath": "demo/use-cases/25/portfolio-insight-ai-agent/ja/content.mdx",
+      "title": "AIP活用事例： 投資ポートフォリオ・インサイトAIエージェント",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP活用事例： 投資ポートフォリオ・インサイトAIエージェント",
+        "description": "市場データと口座データを自然言語での会話を通じて、パフォーマンス、アロケーション、リスクのポートフォリオインサイトに変換し、行動可能な次の一手まで提示するAIエージェント。",
+        "date": "2025-11-11",
+        "ogImage": "public/demo/aip-use-case-thumb-19-ja.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/23/aws-inspector-ai-agent",
+          "“/features/demo/use-cases/24/aws-solutions-architect-ai-agent”",
+          "/features/demo/use-cases/26/investment-analyst-ai-agent"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "portfolio-insight-ai-agent"
+}

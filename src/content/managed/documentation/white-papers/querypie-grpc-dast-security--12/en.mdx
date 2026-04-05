@@ -1,0 +1,135 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "QueryPie gRPC DAST Security: ZAP Custom Script Example"
+description: "Learn how QueryPie leverages gRPC communication for high performance and stability in web applications."
+date: "2025-02-06"
+author: "noah"
+ogImage: "public/white-paper/wp-thumb-12.webp"
+keywords: ["QueryPie", "gRPC security", "OWASP ZAP", "vulnerability scanning", "security automation", "web application security"]
+relatedPosts:
+  - "/features/documentation/white-paper/10/querypie-devsecops-pipeline"
+  - "/features/documentation/white-paper/9/penetration-testing-standard"
+  - "/features/documentation/white-paper/1/personal-data-identification-analysis-ai"
+---
+
+# QueryPie gRPC Security: ZAP Script Application Case
+
+QueryPie has adopted the gRPC communication method for high performance and stability. gRPC, based on HTTP/2, is an efficient communication protocol that uses protocol buffers to transmit data in a fast and lightweight format, optimizing network resources. It supports bidirectional streaming between client and server for real-time data processing and offers excellent compatibility with various languages and platforms. This whitepaper examines the key issues encountered during vulnerability scanning of web applications implemented with gRPC and proposes solutions.
+
+# Why is gRPC Vulnerability Scanning Challenging?
+
+Unlike the text-based HTTP/1.1, the binary format of HTTP/2 makes it difficult to read or modify requests and responses with typical proxy tools (e.g., Burp Suite, ZAP). gRPC uses Protocol Buffers (Protobuf) for data serialization, which, unlike JSON or XML, is a binary format and more difficult to analyze.
+
+For example, when examining a packet from a web application implemented with gRPC, the POST request data may appear to simply be the string "cat" encoded in Base64 at first glance.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-1-decoding-grpc-request.webp"
+        alt="Base64 Decoding of gRPC Request POST Data"
+        caption="Base64 Decoding of gRPC Request POST Data"
+    />
+</Box>
+<br />
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-2-verifying-grpc-request.webp"
+        alt="Verifying gRPC Request POST Data"
+        caption="Verifying gRPC Request POST Data"
+    />
+</Box>
+<br />
+
+However, if the string "cat" is re-encoded in Base64, it becomes clear that the resulting POST data differs from the original. The server also fails to process the request correctly.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-3-original-grpc-request.webp"
+        alt="The original gRPC request POST data is different."
+        caption="The original gRPC request POST data is different."
+    />
+</Box>
+<br />
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-4-cat-string.webp"
+        alt="ZAP’s custom scripts support three different engines"
+        caption="ZAP’s custom scripts support three different engines"
+    />
+</Box>
+<br />
+
+gRPC data requires analyzing the message structure through the .proto file and performing additional encoding/decoding tasks. However, most proxy and DAST tools either do not natively support gRPC encoding/decoding or offer limited support. Furthermore, manually repeating these tasks during vulnerability scanning is time-consuming. To address this issue, it’s essential to automate the gRPC encoding/decoding process and vulnerability identification during DAST scans to improve productivity.
+
+# Efficient gRPC Vulnerability Scanning Using ZAP
+
+ZAP is a widely used proxy and DAST (Dynamic Application Security Testing) tool for web application vulnerability scanning. Its custom script feature allows for running local files or performing other tasks during automated scans. This enables the decoding of gRPC POST request data, insertion of attack payloads, and re-encoding for transmission. Additionally, decoding and analyzing gRPC server responses can automate the vulnerability detection process.
+
+ZAP’s custom scripts support three different engines, and the ECMAScript (Graal.js) engine, in particular, provides flexibility in coding, offering testers a high degree of freedom. It allows testers to write code and execute shell commands locally, enabling a wide range of tasks.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-5-owasp-zap-custom-scripts.webp"
+        alt="OWASP ZAP’s custom scripts support three different engines"
+        caption="OWASP ZAP’s custom scripts support three different engines"
+    />
+</Box>
+<br />
+
+<ArticleGatingForm>
+
+# gRPC Encoding/Decoding Automation
+
+You can use the gRPC encoding/decoding commands provided in the grpc-pentest-suite script file linked below, and write custom scripts to execute these commands at appropriate times via a local shell.
+
+- **grpc-pentest-suite script**: [GitHub - nxenon/grpc-pentest-suite: gRPC-Web Pentesting Suite + Burp Suite Extension](https://github.com/nxenon/grpc-pentest-suite)
+- **gRPC Encoding Command**: `/Users/noah/go/bin/protoscope -s plain.txt | python3 ./grpc-coder.py --encode --type grpc-web-text`
+- **gRPC Decoding Command**: `echo "AAAAAAUKA2NhdA==" | python3 grpc-coder.py --decode --type grpc-web-text | /Users/noah/go/bin/protoscope`
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-6-grpc-encoding-decoding.webp"
+        alt="gRPC Encoding/Decoding through grpc-pentest-suite Script Execution"
+        caption="gRPC Encoding/Decoding through grpc-pentest-suite Script Execution"
+    />
+</Box>
+<br />
+
+Afterward, you can define vulnerability detection conditions based on the items you wish to detect. If a vulnerability is found according to these conditions, an alert notification will be triggered in the ZAP "Alerts" tab.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-7-sql-injection-vulnerability-criteria.webp"
+        alt="SQL Injection Vulnerability Criteria and Detection Alert Definition"
+        caption="SQL Injection Vulnerability Criteria and Detection Alert Definition"
+    />
+</Box>
+<br />
+
+
+# Vulnerability Detection Example
+
+The following video demonstrates how ZAP custom scripts can automatically identify a SQL Injection vulnerability in a gRPC web application and trigger an alert notification in the "Alerts" tab.
+
+<br />
+<Youtube center src="https://www.youtube.com/embed/IZsx5tfFRuE?si=_BiLFnLxWsxO3kxP" />
+<br />
+
+# Conclusion and Recommendations
+gRPC provides an efficient and high-performance communication method, enabling fast and reliable data transfer between clients and servers. However, accurately assessing and resolving the security issues that can arise from these features remains a significant challenge. In particular, the binary format and serialized data used by gRPC make it difficult for traditional security diagnostic tools to intuitively analyze the data. While many organizations apply DAST tools in their CI/CD pipelines for vulnerability scanning, they often fail to consider serialization, encoding, and encryption environments, leading to superficial scans. As a result, actual vulnerabilities that could occur may go undetected.
+
+QueryPie utilizes ZAP custom scripts to automate the encoding and decoding of gRPC, enabling automatic identification, analysis, and management of security vulnerabilities in gRPC-based products. This allows security professionals to automate previously manual tasks, making security audits and vulnerability analysis more efficient.
+
+The solution presented in this whitepaper offers effective method to prevent and continuously manage security issues in web applications using gRPC. Moving forward, QueryPie will continue to evolve as a powerful tool that enhances the accuracy of security assessments and significantly improves security management efficiency, ultimately strengthening the trustworthiness of businesses.
+
+
+</ArticleGatingForm>

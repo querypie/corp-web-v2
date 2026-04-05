@@ -9,7 +9,7 @@ export const demoItems: DemoListItem[] = [
   {
     category: "Demo",
     href: "/en/demo",
-    imageSrc: "/images/content/article-01.png",
+    imageSrc: "/uploads/article-01.png",
     title: "Sample demo item",
   },
 ];

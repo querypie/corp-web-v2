@@ -4,14 +4,14 @@ type ClientSectionProps = {
 };
 
 const clientLogos = [
-  { alt: "Client logo 01", className: "h-10", src: "/images/home/clients/01.png" },
-  { alt: "Client logo 02", className: "h-10", src: "/images/home/clients/02.png" },
-  { alt: "Client logo 03", className: "h-10", src: "/images/home/clients/03.png" },
-  { alt: "Client logo 04", className: "h-10", src: "/images/home/clients/04.png" },
-  { alt: "Client logo 05", className: "h-10", src: "/images/home/clients/05.png" },
-  { alt: "Client logo 06", className: "h-10", src: "/images/home/clients/06.png" },
-  { alt: "Client logo 07", className: "h-10", src: "/images/home/clients/07.png" },
-  { alt: "Client logo 08", className: "h-10", src: "/images/home/clients/08.png" },
+  { alt: "Client logo 01", className: "h-8 md:h-10", src: "/images/home/clients/01.png" },
+  { alt: "Client logo 02", className: "h-8 md:h-10", src: "/images/home/clients/02.png" },
+  { alt: "Client logo 03", className: "h-8 md:h-10", src: "/images/home/clients/03.png" },
+  { alt: "Client logo 04", className: "h-8 md:h-10", src: "/images/home/clients/04.png" },
+  { alt: "Client logo 05", className: "h-8 md:h-10", src: "/images/home/clients/05.png" },
+  { alt: "Client logo 06", className: "h-8 md:h-10", src: "/images/home/clients/06.png" },
+  { alt: "Client logo 07", className: "h-8 md:h-10", src: "/images/home/clients/07.png" },
+  { alt: "Client logo 08", className: "h-8 md:h-10", src: "/images/home/clients/08.png" },
 ] as const;
 
 function cx(...values: Array<string | false | null | undefined>) {
@@ -33,13 +33,13 @@ export default function ClientSection({
         <div className="relative h-10 w-full overflow-hidden">
           <div
             className="flex w-max items-center will-change-transform"
-            style={{ animation: "marquee 20s linear infinite" }}
+            style={{ animation: "marquee 30s linear infinite" }}
           >
             {[0, 1].map((groupIndex) => (
               <div
                 key={groupIndex}
                 aria-hidden={groupIndex === 1}
-                className="flex shrink-0 items-center gap-[60px] pr-[60px]"
+                className="flex shrink-0 items-center gap-8 pr-8 md:gap-[60px] md:pr-[60px]"
               >
                 {clientLogos.map((logo) => (
                   <img

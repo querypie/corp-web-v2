@@ -1,0 +1,163 @@
+---
+layout: "Article"
+category: "blog"
+title: "Next.js Server Action and Frontend Security"
+description: "Next.js Server Actions' high-level abstractions may lead developers to make security mistakes. This article analyzes these risks and presents development strategies to prevent security errors. Enhance your security awareness when developing server-side code in the frontend to build safer and more efficient web applications!"
+date: "2025-03-20"
+author: "teddy"
+ogImage: "public/blog/b-thumb-20.png"
+keywords: ["Next.js", "Frontend", "Security", "Server Action", "Frontend AI", "Web Security", "AI", "Server-side Security"]
+relatedPosts:
+  - "/features/documentation/blog/8/secure-login-token-management"
+  - "/features/documentation/blog/9/penetration-testing-standard"
+  - "/features/documentation/blog/4/multi-cloud-kubernetes-access-control"
+---
+
+# Basic Concepts and Usage of Next.js Server Action
+
+Next.js Server Actions, officially introduced in Next.js 13.4 along with the App Router, is a feature that allows you to easily call server-side functions from within React components. By defining a function with the `use server` directive, you can conveniently call server logic from the client.
+
+With Server Actions, there is no need to manually manage separate API endpoints. Developers can invoke server-side logic **as naturally as calling local functions**, without worrying about endpoints, interfaces, or other backend details. This abstraction simplifies client-server communication.
+
+There are two ways to define Server Actions: within React components or in separate files. The following example demonstrates defining them in a separate file:
+
+```typescript
+'use server';
+
+export default async function createAction({ name, age, email }: { name: string; age: number; email: string; }) {
+    await connection.query(
+        'INSERT INTO users (name, age, email) VALUES (?, ?, ?)',
+        [name, age, email]
+    );
+}
+```
+
+```typescript
+'use client';
+
+import createAction from './create-action.ts';
+
+export default function CreateForm() {
+    return (
+        <form action={createAction}>
+            <input type="text" name="name" />
+            <input type="number" name="age" />
+            <input type="email" name="email" />
+        </form>
+    )
+}
+```
+
+## How Server Actions Work Internally
+
+The `CreateForm` component shown above is transformed at build time into a structure like this: (Note: The following code is a conceptual representation and may differ from the actual compiled output.)
+
+```typescript
+'use client';
+
+import { startTransition } from 'react'
+import { callServer } from 'next/client/app-call-server';
+
+// Converted to Server Action ID
+const createAction = '$$action_1234567890';
+
+export default function CreateForm() {
+  return (
+    <form 
+      onSubmit={async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const data = {
+          name: formData.get('name'),
+          age: Number(formData.get('age')),
+          email: formData.get('email')
+        };
+        
+        // Prevent UI blocking with startTransition
+        startTransition(() => {
+          callServer(createAction, [data]);
+        });
+      }}
+    >
+      <input type="text" name="name" />
+      <input type="number" name="age" />
+      <input type="email" name="email" />
+    </form>
+  )
+}
+```
+
+In other words, the direct import and usage of the the server action function as a local function is replaced. Instead, when the `onSubmit` event occurs, the code processes the `formData` and invokes the `callServer` function provided by Next.js.
+
+The `callServer` function internally utilizes the `fetch` API to send HTTP requests. The request method is set to `POST`, and the headers include the generated server action ID, among other  relevant data. This enables the server to identify which action was invoked. You can examine this behavior in the <Link href="https://github.com/vercel/next.js/blob/canary/packages/next/src/client/app-call-server.ts" external markdown>app-call-server.ts</Link> file in the Next.js Repository.
+
+On the server side, requests from `callServer` are processed by the <Link href="https://github.com/vercel/next.js/blob/canary/packages/next/src/server/app-render/action-handler.ts" external markdown>action-handler.ts</Link> file. This handler performs verification steps such as CSRF protection, analyzes the request headers to determine the appropriate action, executes the logic, and returns a response.
+
+# Impact of Server Actions on the Development Environment
+
+Since the 2010s, web development has maintained clear distinctions between the server and client, often making cross-boundary interactions cumbersome. Next.js Server Actions have significantly blurred these boundaries, creating a more seamless and efficient development experience.
+
+PTraditionally, developers needed to build REST API endpoints and have clients interact with them via HTTP requests. However, **Server Actions simplify this process by enabling server-side logic to be invoked as naturally as calling a local function**, making development more intuitive and streamlined.
+
+In the past, "Full Stack" development was sometimes mockingly referred to as "Poor Stack." However, as we enter the AI era, the capabilities of individual developers have expanded significantly, raising the status of Full Stack development. With technologies like Server Actions, building full-stack applications has become more accessible and efficient than ever before.
+
+# Security Risks of Server Actions That Should Not Be Overlooked
+
+Next.js Server Actions may seem to create a seamless connection between the server and client, but **this convenience comes with significant security risks** that developers must carefully consider. In reality, these interactions still rely on HTTP requests and responses, requiring proper security measures.
+
+**The Next.js official documentation  explicitly warns about security concerns related to Server Actions**.  Developers who overlook these warnings risk unintentionally exposing critical backend logic, leading to **critical security vulnerabilities**. (Unfortunately, the Security section is placed at the end of the documentation, making it easy to miss.)
+
+> By default, when a Server Action is created and exported, it creates a public HTTP endpoint and should be treated with the same security assumptions and authorization checks. This means, even if a Server Action or utility function is not imported elsewhere in your code, it's still publicly accessible.
+
+Developers who become too reliant on the "magic" of Server Actions without reading the Security section may unknowingly expose sensitive server functions to the public. This is particularly dangerous when authentication and authorization checks are required but not properly implemented.
+
+# Built-in Security Measures in Next.js Server Actions and Developer Responsibilities
+
+Despite the risks, Server Actions are not entirely unprotected. According to the official documentation, Next.js includes several built-in security mechanisms to help safeguard applications:
+
+- **Secure Action IDs**: Ensures secure communication between the client and server using internally generated action identifiers.
+- **[CSRF(Cross-Site Request Forgery)](/resources/discover/white-paper/8/secure-login-token-management#types-of-threats) Prevention**: Restricts Server Action calls to POST requests and enforces same-origin policies.
+- **Closure Variable Protection**: Encrypts and signs state values passed between the server and client to prevent tampering.
+- **Code Isolation**: Ensures that server-only logic is not bundled into client-side JavaScript, reducing the risk of accidental exposure.
+- **Error Message Protection**: Prevents the display of sensitive error details in production environments.
+- **Unused Action Removal**: Automatically eliminates unused Server Actions to minimize the attack surface.
+
+However, developers must also take additional security measures, as built-in protections alone are not sufficient. Key considerations include:
+
+- **Runtime Input Validation**: TypeScript only provides compile-time type checking, making runtime validation essential. Use libraries like Zod to enforce strict input validation.
+- **Authentication and Authorization**: Always re-verify user permissions within each Server Action to prevent unauthorized access.
+- **SSRF(Server Side Request Forgery) Prevention**: Never trust user-supplied URLs; implement a whitelist-based access policy.
+- **Critical Security Practices for Server Logic**
+  - **Environment Variable Protection**: Store sensitive data (e.g., database credentials) in .env files to prevent configuration leaks.
+  - **Injection Prevention**:
+    - **SQL Injection**: Use ORM(Object-Relational Mapping) tools like Prisma to safely construct database queries.
+    - **XSS Prevention**: Sanitize user input with libraries like sanitize-html to prevent Cross-Site Scripting attacks.
+  - **Security Updates and Patch Management**: Regularly update dependencies to mitigate known vulnerabilities.
+  - **Logging and Monitoring**: Maintain structured logs for critical server events and errors, and implement real-time monitoring to detect security threats.
+
+For enhanced security, consider using libraries like <InlineLink href="https://www.npmjs.com/package/next-safe-action">next-safe-action</InlineLink> and <InlineLink href="https://www.npmjs.com/package/zsa">zsa</InlineLink>. These tools provide a declarative API for handling authentication and authorization while offering Server Action-related hooks for the client side, making them both secure and convenient.
+
+# The Growing Importance of Frontend Security
+
+Personally, I see the resurgence of server-side functionality in frontend development as a positive shift.
+
+In the early days of web development,  the boundaries between server and client were less distinct. However, with the rise of SPA(Single Page Application) and mobile-first development, much of the logic moved to the client side, reducing the server’s role in frontend applications. As a result, many developers came to equate frontend development solely with client-side logic, influenced by mobile app patterns being adapted to the web.
+
+However, the web is fundamentally different from mobile applications and **unlocks its full potential when tightly integrated with server-side capabilities**. The adoption of Server-Side Rendering (SSR) in frameworks like Next.js helped address the limitations of client-heavy SPAs. Now, server components and Server Actions take this a step further, reinforcing a **shift toward leveraging server functionality directly within the frontend**.
+
+With Next.js’s App Router and Server Actions, frontend developers can now manage not just the UI but also data processing and server logic more comprehensively. For many applications, this reduces the need for a dedicated backend while still enabling robust data operations. However, this convenience also introduces **greater complexity and increased security responsibilitiess**, requiring developers to be more vigilant in safeguarding their applications.
+
+<Box marginTopSize="sm" center>
+  <ArticleFileImage
+    filepath="public/blog/blog20-image-1.png"
+    alt="Next.js Server Action and Frontend Security"
+  />
+</Box>
+
+# Security and Next.js in the AI Era
+
+As AI continues to gain prominence, the stability and security of major frameworks are becoming increasingly critical. Since AI systems often rely on frontend server-side tools, security vulnerabilities introduced by high-level abstractions in frameworks could be amplified by AI-driven processes, leading to greater risks.
+
+The future web environment will only grow more complex as AI and other emerging technologies become further integrated. In this landscape, widely used frontend frameworks like Next.js must continuously evolve to enhance security and stability.
+
+Most importantly, as AI integration deepens, **developers’ understanding of security principles becomes more crucial than ever**. Security cannot be an afterthought—it requires constant vigilance and proactive measures to ensure that modern applications remain both functional and secure.

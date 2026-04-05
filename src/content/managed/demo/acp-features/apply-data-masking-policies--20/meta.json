@@ -1,0 +1,136 @@
+{
+  "category": "acp-features",
+  "contentKind": "video",
+  "entryId": "apply-data-masking-policies--20",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "20",
+    "sourceCategory": "acp-features",
+    "sourceGroupPath": "demo/acp-features/20/apply-data-masking-policies",
+    "sourceUrl": "/features/demo/acp-features/20/apply-data-masking-policies"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-5.webp",
+          "webPath": "/tutorial/tu-thumb-dac-5.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/apply-data-masking-policies--20/en.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-5.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Apply Data Masking Policies\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"\n  - \"/features/demo/acp-features/18/submit-sql-request-workflow\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/21/apply-data-access-policies",
+        "/features/demo/acp-features/19/submit-db-access-workflow",
+        "/features/demo/acp-features/18/submit-sql-request-workflow"
+      ],
+      "sourcePath": "demo/acp-features/20/apply-data-masking-policies/en/content.mdx",
+      "title": "How to Apply Data Masking Policies",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "How to Apply Data Masking Policies",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-5.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/21/apply-data-access-policies",
+          "/features/demo/acp-features/19/submit-db-access-workflow",
+          "/features/demo/acp-features/18/submit-sql-request-workflow"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-5.webp",
+          "webPath": "/tutorial/tu-thumb-dac-5.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/apply-data-masking-policies--20/ko.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-5.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"데이터 마스킹 정책 설정하기\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"\n  - \"/features/demo/acp-features/18/submit-sql-request-workflow\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/21/apply-data-access-policies",
+        "/features/demo/acp-features/19/submit-db-access-workflow",
+        "/features/demo/acp-features/18/submit-sql-request-workflow"
+      ],
+      "sourcePath": "demo/acp-features/20/apply-data-masking-policies/ko/content.mdx",
+      "title": "데이터 마스킹 정책 설정하기",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "데이터 마스킹 정책 설정하기",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-5.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/21/apply-data-access-policies",
+          "/features/demo/acp-features/19/submit-db-access-workflow",
+          "/features/demo/acp-features/18/submit-sql-request-workflow"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-5.webp",
+          "webPath": "/tutorial/tu-thumb-dac-5.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/apply-data-masking-policies--20/ja.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-5.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"データマスキングポリシーを適用する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"\n  - \"/features/demo/acp-features/18/submit-sql-request-workflow\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/21/apply-data-access-policies",
+        "/features/demo/acp-features/19/submit-db-access-workflow",
+        "/features/demo/acp-features/18/submit-sql-request-workflow"
+      ],
+      "sourcePath": "demo/acp-features/20/apply-data-masking-policies/ja/content.mdx",
+      "title": "データマスキングポリシーを適用する方法",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "データマスキングポリシーを適用する方法",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-5.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/21/apply-data-access-policies",
+          "/features/demo/acp-features/19/submit-db-access-workflow",
+          "/features/demo/acp-features/18/submit-sql-request-workflow"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "apply-data-masking-policies"
+}

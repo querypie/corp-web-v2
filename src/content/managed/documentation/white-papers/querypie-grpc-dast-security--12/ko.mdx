@@ -1,0 +1,135 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "QueryPie gRPC 통신을 위한 DAST 보안 전략 : ZAP 커스텀 스크립트 적용 사례"
+description: "QueryPie가 웹 애플리케이션에서 높은 성능과 안정성을 위해 gRPC 통신을 어떻게 활용하는지 알아보세요."
+date: "2025-02-06"
+author: "noah"
+ogImage: "public/white-paper/wp-thumb-12.webp"
+keywords: ["QueryPie", "gRPC 보안", "OWASP ZAP", "취약점 스캔", "보안 자동화", "웹 애플리케이션 보안"]
+relatedPosts:
+  - "/features/documentation/white-paper/10/querypie-devsecops-pipeline"
+  - "/features/documentation/white-paper/9/penetration-testing-standard"
+  - "/features/documentation/white-paper/1/personal-data-identification-analysis-ai"
+---
+
+# QueryPie의 gRPC 보안: ZAP 스크립트 적용 사례
+
+QueryPie는 높은 성능과 안정성을 위해 gRPC 통신 방식을 채택했습니다. gRPC는 HTTP/2 기반의 고효율 통신 프로토콜로, 프로토콜 버퍼를 사용해 데이터를 빠르고 경량화된 형태로 전송함으로써 네트워크 자원을 효율적으로 활용합니다. 또한, 클라이언트와 서버 간 양방향 스트리밍을 지원하여 실시간 데이터 처리가 가능하며, 다양한 언어와 플랫폼과의 호환성도 뛰어납니다. 이 화이트페이퍼에서는 gRPC로 구현된 웹 애플리케이션을 대상으로 취약점 진단하는 과정에서 발생하는 주요 이슈를 살펴보고, 이에 대한 해결 방안을 제안합니다.
+
+# gRPC 취약점 진단, 왜 어려울까?
+
+HTTP/2의 바이너리 포맷은 텍스트 기반의 HTTP/1.1과 달리, 요청 및 응답의 내용을 일반적인 프록시 도구(예: Burp Suite, ZAP)로 쉽게 읽거나 수정할 수 없게 만듭니다. gRPC는 데이터 직렬화 포맷으로 Protocol Buffers (Protobuf)를 사용하는데, 이는 JSON이나 XML과 달리 바이너리 포맷이므로 분석이 까다롭습니다.
+
+다음은 gRPC로 구현된 웹 애플리케이션 패킷의 예시를 살펴보면, POST 요청 데이터는 언뜻 보면 ‘cat’이라는 문자가 Base64로 인코딩되어 있을 뿐으로 보입니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-1-decoding-grpc-request.webp"
+        alt="gRPC 요청 POST 데이터에 대하여 Base64 디코딩"
+        caption="gRPC 요청 POST 데이터에 대하여 Base64 디코딩"
+    />
+</Box>
+<br />
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-2-verifying-grpc-request.webp"
+        alt="gRPC 요청 POST 데이터 확인"
+        caption="gRPC 요청 POST 데이터 확인"
+    />
+</Box>
+<br />
+
+하지만 'cat'이라는 문자를 다시 base64로 인코딩해 보면 기존 POST 데이터와 다르다는 것을 알 수 있으며, 서버에서는 해당 요청을 정상적으로 처리하지 못하는 것을 확인할 수 있습니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-3-original-grpc-request.webp"
+        alt="기존 gRPC 요청 POST 데이터와 상이함"
+        caption="기존 gRPC 요청 POST 데이터와 상이함"
+    />
+</Box>
+<br />
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-4-cat-string.webp"
+        alt="단순 Base64로 인코딩된 ‘cat’ 문자는 서버에서 정상적으로 처리 불가함"
+        caption="단순 Base64로 인코딩된 ‘cat’ 문자는 서버에서 정상적으로 처리 불가함"
+    />
+</Box>
+<br />
+
+gRPC 데이터는 .proto 파일을 통해 메시지 구조를 파악하고 인코딩/디코딩 작업을 추가로 수행이 필요하지만, 대부분의 프록시 및 DAST 도구는 gRPC 인코딩/디코딩을 기본적으로 지원하지 않거나 제한적으로만 지원합니다. 또한 이러한 작업을 수동으로 반복 수행하면서 취약점 진단을 하려면 너무 많은 시간을 투자해야하는 문제점이 있습니다. 이러한 문제점으로 DAST 스캔 시 gRPC 인코딩/디코딩 작업과 취약점 식별을 자동으로 수행하여 생산성을 증가시킬 필요가 있습니다.
+
+# 효율적인 gRPC 취약점 진단을 위한 ZAP 활용법
+
+ZAP은 웹 애플리케이션 취약점 진단에 자주 사용되는 프록시 및 DAST 도구입니다. 커스텀 스크립트 기능을 통하여 자동 스캔 과정에서 로컬의 파일을 실행하거나 다른 작업에 활용할 수 있습니다. 이를 통해 gRPC POST 요청 데이터를 디코딩한 후 공격 페이로드를 삽입하고 다시 인코딩하여 전송할 수 있습니다. 또한, gRPC 서버 응답 데이터를 디코딩하여 분석함으로써 취약점을 확인하는 과정을 자동화할 수 있습니다.
+
+ECMAScript(Graal.js) 엔진은 코딩이라는 수단을 제공한다는 점에서 진단자에게 높은 자유도를 제공하며, 로컬에서 쉘 명령어를 실행하고 그 결과를 활용해 다양한 작업을 정의하는 것도 가능합니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-5-owasp-zap-custom-scripts.webp"
+        alt="grpc-pentest-suite 스크립트 실행을 통한 gRPC 인코딩/디코딩"
+        caption="grpc-pentest-suite 스크립트 실행을 통한 gRPC 인코딩/디코딩"
+    />
+</Box>
+<br />
+
+<ArticleGatingForm>
+
+# gRPC 인코딩/디코딩 자동화
+
+아래 링크의 grpc-pentest-suite 스크립트에서는 gRPC 인코딩/디코딩 자동화에 필요한 명령어를 제공하는데, ZAP 커스텀 스크립트를 사용하면 해당 명령어를 패킷 변조 과정의 적절한 시점에 실행되도록 구성할 수 있습니다.
+
+- **grpc-pentest-suite 스크립트**: [GitHub - nxenon/grpc-pentest-suite: gRPC-Web Pentesting Suite + Burp Suite Extension](https://github.com/nxenon/grpc-pentest-suite)
+- **gRPC 인코딩 명령어**: `/Users/noah/go/bin/protoscope -s plain.txt | python3 ./grpc-coder.py --encode --type grpc-web-text`
+- **gRPC 디코딩 명령어**: `echo "AAAAAAUKA2NhdA==" | python3 grpc-coder.py --decode --type grpc-web-text | /Users/noah/go/bin/protoscope`
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-6-grpc-encoding-decoding.webp"
+        alt="grpc-pentest-suite 스크립트 실행을 통한 gRPC 인코딩/디코딩"
+        caption="grpc-pentest-suite 스크립트 실행을 통한 gRPC 인코딩/디코딩"
+    />
+</Box>
+<br />
+
+이후에 탐지하고자 하는 항목에 따라 취약점 탐지 조건을 정의하고, 해당 탐지 조건에 따라서 취약점이 발견되면 ZAP 경고 탭에서 탐지 알림을 발생시킬 수 있습니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp12-7-sql-injection-vulnerability-criteria.webp"
+        alt="SQL Injection 취약점 판단 기준 및 탐지 알림 정의"
+        caption="SQL Injection 취약점 판단 기준 및 탐지 알림 정의"
+    />
+</Box>
+<br />
+
+
+# 취약점 탐지 사례
+
+아래 동영상은 SQL Injection 취약점이 존재하는 gRPC 웹 애플리케이션에서 ZAP 커스텀 스크립트를 통하여 취약점을 자동으로 식별하고 경고 탭에서 탐지 알림을 발생시키는 모습을 보여줍니다.
+
+<br />
+<Youtube center src="https://www.youtube.com/embed/IZsx5tfFRuE?si=_BiLFnLxWsxO3kxP" />
+<br />
+
+# 결론 및 제안
+gRPC는 효율적이고 고성능의 통신 방식을 제공하며, 클라이언트와 서버 간에 빠르고 안정적인 데이터 전송을 가능하게 합니다. 그러나 이러한 특성으로 발생할 수 있는 보안 문제를 정확하게 점검하고 해결하는 일은 여전히 큰 도전 과제입니다. 특히, gRPC의 바이너리 형식과 직렬화된 데이터로 인해 기존의 보안 진단 도구들이 직관적으로 데이터를 분석하기 어려운 경우가 많습니다. 많은 기업들이 DAST 도구를 CI/CD 파이프라인에 적용해 취약점 스캔을 수행하고 있지만, 시리얼라이징, 인코딩, 암호화 환경을 고려하지 않거나 형식적으로만 스캔을 진행하는 경우가 많습니다. 이러한 한계로 인해 실제로 발생할 수 있는 취약점을 충분히 탐지하지 못하는 상황이 발생할 수 있습니다.
+
+QueryPie는 ZAP 커스텀 스크립트를 활용하여 gRPC의 인코딩과 디코딩을 자동화하고, 자사 gRPC 기반 제품의 보안 취약점을 자동으로 식별, 분석 및 관리합니다. 이를 통해 보안 담당자는 수동으로 진행되던 번거로운 작업들을 자동화하여, 보안 감사와 취약점 분석을 더욱 효율적으로 수행할 수 있게 됩니다.
+
+이 화이트페이퍼에서 제시된 해결책은 gRPC를 사용하는 웹 애플리케이션에서 발생할 수 있는 보안 문제를 미리 예방하고, 지속적으로 관리할 수 있는 효과적인 방법을 제공합니다. 앞으로도 QueryPie는 보안 진단의 정확도를 높이고, 보안 관리의 효율성을 크게 향상시킬 수 있는 강력한 도구로서 지속적으로 발전하여, 기업들의 신뢰성을 강화할 것입니다.
+
+
+</ArticleGatingForm>

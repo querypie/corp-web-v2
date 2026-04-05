@@ -1,0 +1,61 @@
+---
+layout: "Article"
+category: "acp-features"
+title: "How to Submit a Workflow for SQL Export Requests"
+description: ""
+date: "2024-11-29"
+ogImage: "public/tutorial/tu-thumb-dac-8.png"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/acp-features/18/submit-sql-request-workflow"
+  - "/features/demo/acp-features/16/connect-database-querypie-agent"
+  - "/features/demo/acp-features/15/review-audit-logs"
+---
+
+<Youtube
+    src="https://www.youtube.com/embed/ue8CZVl6cgo?si=4b53f_a7as1GAyhB"
+/>
+
+# Overview
+
+Follow the steps below to submit an SQL Export Request. This allows you to request permission to export data from a specific DB connection for which you do not have access rights. After approval, the executor can perform the data export once and download the results.
+
+# Submitting an SQL Export Request
+
+<BlueState>STEP 1</BlueState> Access the **SQL Export Request** page through the following paths:
+- Workflow > Submit Request > SQL Export Request
+
+<BlueState>STEP 2</BlueState> Select approval rules and assign approvers.
+- **Approval Rule:** Choose an approval rule from the list created by the administrator in **General > Approval Rules**.
+  - Approval rules determine who must approve the request. If the rule specifies approvers, they will be automatically assigned.
+- **Approver:** Use the `+` button to add approvers at each stage of the approval workflow.
+  - **A single assignee can complete the approval request:** Any one approver in a group can approve the request.
+  - **All assignees must approve this request:** All assigned approvers must approve the request for it to proceed.
+
+<BlueState>STEP 3</BlueState> After entering all details, click the `Submit` button to send the request for approval.
+- **Title:** Enter the title of the request.
+- **Connection:** Select the target connection for which you are requesting SQL execution. Only connections you have access to can be selected.
+- **Database:** Choose the database within the selected connection from which the data will be exported.
+- **Content Type:** Select the method for querying the data to be downloaded.
+  - **Query Result:** Write the query directly under the Queries section of the request page. Up to 10 queries can be written and exported.
+  - **Table:** Export the entire selected table.
+- **Target Date:** Select the desired execution date for the query (default is the current date).
+- **Due Date:** Set the expiration date for the export (default is the request date).
+- **Reason for Request:** Provide a reason for requesting SQL export permissions.
+
+# Approving an SQL Export Request
+
+<BlueState>STEP 1</BlueState> Assigned approvers can navigate to **Workflow > Received Requests > To Do** to view pending requests.
+
+<BlueState>STEP 2</BlueState> Open the details page for the request and click the `Approve` button to complete the approval process.
+
+# Downloading Approved Data
+
+<BlueState>STEP 1</BlueState> The requester can go to **Workflow > Executions > To Do** to view pending executions.
+
+<BlueState>STEP 2</BlueState> Open the request, review its details, and click the `Execute` button in the top-right corner to run the query.
+
+<BlueState>STEP 3</BlueState> In the Export Option modal, set the export options, then click `Export`.
+- The result (success or failure) will be displayed under the Results tab in the details page.
+- You can review the history of the requests you have downloaded under **Workflow > Executions > Done**.

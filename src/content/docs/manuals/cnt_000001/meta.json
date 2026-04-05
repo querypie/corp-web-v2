@@ -1,0 +1,40 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "manuals",
+  "contentType": "content",
+  "dateIso": "",
+  "externalUrl": "",
+  "hideHeroImage": false,
+  "id": "querypie-install-guide",
+  "imageSrc": "/documentation/docu-thumb-community-install-guide.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000001",
+  "summary": {
+    "en": "QueryPie ACP Community Edition is a free version that lets you experience all the core features of QueryPie ACP Enterprise — including Database, System, Kubernetes, and Web Access Controllers — with a maximum limit of 5 users. Get started quickly with a simple installation.",
+    "ko": "QueryPie 커뮤니티 버전은 QueryPie Enterprise의 핵심 기능인 Database, System, Kubernetes, Web Access Controller를 모두 체험할 수 있는 무료 버전입니다. 간편한 설치로 지금 바로 시작해보세요.",
+    "ja": "QueryPie ACP Community Edition」は、Database・System・Kubernetes・Webアクセスコントローラーなど、QueryPie Enterpriseの主要機能をすべて体験できる無償バージョンです。簡単なインストールですぐに始められます。"
+  },
+  "title": {
+    "en": "QueryPie ACP Community Edition Installation Guide",
+    "ko": "QueryPie 커뮤니티 버전 설치 가이드",
+    "ja": "QueryPie ACP コミュニティ版のインストールガイド"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/docs/manuals/cnt_000001/en.html",
+      "jsonPath": "src/content/docs/manuals/cnt_000001/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/docs/manuals/cnt_000001/ko.html",
+      "jsonPath": "src/content/docs/manuals/cnt_000001/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/docs/manuals/cnt_000001/ja.html",
+      "jsonPath": "src/content/docs/manuals/cnt_000001/ja.tiptap.json"
+    }
+  }
+}

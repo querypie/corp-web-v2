@@ -1,0 +1,79 @@
+---
+layout: "Article"
+category: "acp-features"
+title: "How to Integrate SSO with Okta"
+description: ""
+date: "2024-11-29"
+ogImage: "public/tutorial/tu-thumb-general-1.webp"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/acp-features/25/review-audit-logs"
+---
+
+<Youtube
+    src="https://www.youtube.com/embed/HPH5vSu99v8?si=iHV-kg68_0Yl2v_O"
+/>
+
+# Overview
+
+QueryPie supports Okta integration, allowing you to synchronize users and groups from Okta to grant access and enforce policies. This integration provides a streamlined and convenient experience for your users while maintaining strict security policies. By integrating with Okta, QueryPie enhances the security, operational efficiency, and user experience of your databases and systems management ecosystem.
+
+# Setting Up Okta Integration and Synchronization in QueryPie
+
+<State color="blue">STEP 1</State> In QueryPie, go to **Administrator > General > User Management > Authentication.**
+
+<State color="blue">STEP 2</State> Enter the following information.
+- **Type:** Okta
+- **Identity Provider Metadata:** Access the URL specified in the Metadata URL in a separate tab, copy the displayed XML information, and paste it here.
+
+<State color="blue">STEP 3</State> If you want to set up automatic synchronization, check **"Use Synchronization with the Authentication System"** and enter the following details.
+- **API URL:** Click your profile in the top right corner of the Okta admin page to find the URL in the format `{domain}.okta.com`.
+- **API Token:** Enter the Okta Admin API token.
+- **Application ID:** Enter this only if you use more than one QueryPie App in Okta.
+  - Go to Okta **Admin > Applications**, and check the URL in the top bar, where the Application ID is displayed (as shown in the provided screenshot).
+
+<State color="blue">STEP 4</State> Configure the **Scheduling** option under the **Replication Frequency** field.
+
+<State color="blue">STEP 5</State> Click the `Dry Run` button to verify that the integration details have been entered correctly, and then click `Save Changes` to save.
+
+<State color="blue">STEP 6</State> Finally, click the `Synchronize` button to sync users from Okta.
+
+# Preparation for Okta Integration
+<InfoNote>
+    **Before registering Okta in QueryPie, you must first register QueryPie in the Okta service.**
+
+    (This step is required only once.)
+</InfoNote>
+
+ <State color="blue">STEP 1</State> Adding QueryPie as an Application in Okta.
+1. Log in to the Okta admin console using an administrator account.
+2. Go to **Applications > Applications**, click the `Browse App Catalog` button, and search for **QueryPie**.
+3. On the QueryPie application page, click the `Add Integration` button.
+4. Confirm that **QueryPie** is entered in **the Application Label** field, then click the `Done` button to add the application.
+
+<State color="blue">STEP 2</State> Setting Up a Profile Editor.
+1. Go to **Directory > Profile Editor** and click on **QueryPie User** from the list of profiles.
+2. In the **Attributes** settings, click the **Add Attribute** button and enter the following four items in order, then save:
+- Display name : firstName / Variable name : firstName
+- Display name : lastName / Variable name : lastName
+- Display name : email / Variable name : email
+- Display name : loginId / Variable name : loginId
+3. After confirming that the four attributes have been added, click the `Mappings` button.
+4. Associate the **Okta User Profile Attribute** entries with the corresponding attributes in your **QueryPie User Profile** as follows:
+- user.firstName ↔︎ firstName
+- user.lastName ↔︎ lastName
+- user.email ↔︎ email
+- user.email ↔︎ loginId (Use Okta's email entry as the Login ID for QueryPie.)
+5. Click the `Save Mappings` button to save.
+
+<State color="blue">STEP 3</State> Assigning Users to QueryPie Applications.
+1. Go to the **Applications > Applications** menu and click on the **QueryPie** application.
+2. Go to the **Assignments** tab and click the `Assign` button to choose either `Assign to People` or `Assign to Group`.
+3. Assign the users or groups you want to grant access to QueryPie using their Okta accounts, and then click the `Done` button.
+- When assigning to **People**, verify the user information and click the `Save and Go Back` button.
+- When assigning to **Group**, leave the **loginId** field blank and click the `Save and Go Back` button.
+
+<State color="blue">STEP 4</State> Setting Up QueryPie Application Integration Information in Okta.
+1. Go to the **Applications > Applications** menu and then go to the **Sign On** tab.
+2. In the **Settings** area, click the `Edit` button, enter the domain address where QueryPie is installed in the **Base URL** field, and save it.

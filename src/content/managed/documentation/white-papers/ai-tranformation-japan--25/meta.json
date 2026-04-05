@@ -1,0 +1,160 @@
+{
+  "category": "white-papers",
+  "contentKind": "article",
+  "entryId": "ai-tranformation-japan--25",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "25",
+    "sourceCategory": "white-paper",
+    "sourceGroupPath": "documentation/white-paper/25/ai-tranformation-japan",
+    "sourceUrl": "/features/documentation/white-paper/25/ai-tranformation-japan"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-24.webp",
+          "webPath": "/white-paper/wp-thumb-24.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp24-graph1.webp",
+          "webPath": "/white-paper/wp24-graph1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp24-graph2.webp",
+          "webPath": "/white-paper/wp24-graph2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/ai-tranformation-japan--25/en.mdx",
+      "contentKind": "article",
+      "description": "본 백서는 사업책임자용으로 기술 상세나 트렌드 소개가 아니라 세계와 일본의 AI 활용의 온도차와 일본 기업의 과제를 근거로, 지금 경영에 통합하기 위한 실무적 프로세스와 전사 최적의 변혁 지침을 보여주는 내용입니다.",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "쿼리파이",
+        "쿼리파이 AI",
+        "AI adoption in enterprises",
+        "Japanese enterprise AI challenges",
+        "AI-driven business transformation",
+        "AI roadmap for executives",
+        "Global AI best practices",
+        "Productivity gains with AI",
+        "AI implementation process"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-24.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"왜 지금 일본 기업이 AI 트랜스포메이션에 나서야 하는가\"\ndescription: \"본 백서는 사업책임자용으로 기술 상세나 트렌드 소개가 아니라 세계와 일본의 AI 활용의 온도차와 일본 기업의 과제를 근거로, 지금 경영에 통합하기 위한 실무적 프로세스와 전사 최적의 변혁 지침을 보여주는 내용입니다.\"\ndate: \"2025-11-17\"\nauthor: \"terazawa-ko\"\nogImage: \"public/white-paper/wp-thumb-24.webp\"\nkeywords: [\"쿼리파이\", \"쿼리파이 AI\", \"AI adoption in enterprises\", \"Japanese enterprise AI challenges\", \"AI-driven business transformation\", \"AI roadmap for executives\", \"Global AI best practices\", \"Productivity gains with AI\", \"AI implementation process\"]\nrelatedPosts:\n  - \"/features/documentation/aip-introduction-download\"\n  - \"/features/documentation/acp-introduction-download\"\n  - \"/features/documentation/querypie-install-guide\"",
+      "relatedPosts": [
+        "/features/documentation/aip-introduction-download",
+        "/features/documentation/acp-introduction-download",
+        "/features/documentation/querypie-install-guide"
+      ],
+      "sourcePath": "documentation/white-paper/25/ai-tranformation-japan/en/content.mdx",
+      "title": "왜 지금 일본 기업이 AI 트랜스포메이션에 나서야 하는가",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "왜 지금 일본 기업이 AI 트랜스포메이션에 나서야 하는가",
+        "description": "본 백서는 사업책임자용으로 기술 상세나 트렌드 소개가 아니라 세계와 일본의 AI 활용의 온도차와 일본 기업의 과제를 근거로, 지금 경영에 통합하기 위한 실무적 프로세스와 전사 최적의 변혁 지침을 보여주는 내용입니다.",
+        "date": "2025-11-17",
+        "author": "terazawa-ko",
+        "ogImage": "public/white-paper/wp-thumb-24.webp",
+        "keywords": [
+          "쿼리파이",
+          "쿼리파이 AI",
+          "AI adoption in enterprises",
+          "Japanese enterprise AI challenges",
+          "AI-driven business transformation",
+          "AI roadmap for executives",
+          "Global AI best practices",
+          "Productivity gains with AI",
+          "AI implementation process"
+        ],
+        "relatedPosts": [
+          "/features/documentation/aip-introduction-download",
+          "/features/documentation/acp-introduction-download",
+          "/features/documentation/querypie-install-guide"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-24-jp.webp",
+          "webPath": "/white-paper/wp-thumb-24-jp.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp24-graph1.webp",
+          "webPath": "/white-paper/wp24-graph1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp24-graph2.webp",
+          "webPath": "/white-paper/wp24-graph2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/ai-tranformation-japan--25/ja.mdx",
+      "contentKind": "article",
+      "description": "本ホワイトペーパーは事業責任者向けに、技術詳細やトレンド紹介ではなく、世界と日本のAI活用の温度差と日本企業の課題を踏まえ、今すぐ経営に組み込むための実務的プロセスと全社最適の変革指針を示す内容です。",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "クエリパイ",
+        "クエリーパイ",
+        "クエリパイ AI",
+        "クエリーパイ AI",
+        "企業におけるAIの導入",
+        "日本企業のAIに関する課題",
+        "AI主導のビジネス変革",
+        "経営層のためのAIロードマップ",
+        "グローバルなAIのベストプラクティス",
+        "AIによる生産性向上",
+        "AI導入プロセス"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-24-jp.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか\"\ndescription: \"本ホワイトペーパーは事業責任者向けに、技術詳細やトレンド紹介ではなく、世界と日本のAI活用の温度差と日本企業の課題を踏まえ、今すぐ経営に組み込むための実務的プロセスと全社最適の変革指針を示す内容です。\"\ndate: \"2025-11-17\"\nauthor: \"terazawa\"\nogImage: \"public/white-paper/wp-thumb-24-jp.webp\"\nkeywords: [\"クエリパイ\", \"クエリーパイ\", \"クエリパイ AI\", \"クエリーパイ AI\", \"企業におけるAIの導入\", \"日本企業のAIに関する課題\", \"AI主導のビジネス変革\", \"経営層のためのAIロードマップ\", \"グローバルなAIのベストプラクティス\", \"AIによる生産性向上\", \"AI導入プロセス\"]\nrelatedPosts:\n  - \"/features/documentation/aip-introduction-download\"\n  - \"/features/documentation/acp-introduction-download\"\n  - \"/features/documentation/querypie-install-guide\"",
+      "relatedPosts": [
+        "/features/documentation/aip-introduction-download",
+        "/features/documentation/acp-introduction-download",
+        "/features/documentation/querypie-install-guide"
+      ],
+      "sourcePath": "documentation/white-paper/25/ai-tranformation-japan/ja/content.mdx",
+      "title": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか",
+        "description": "本ホワイトペーパーは事業責任者向けに、技術詳細やトレンド紹介ではなく、世界と日本のAI活用の温度差と日本企業の課題を踏まえ、今すぐ経営に組み込むための実務的プロセスと全社最適の変革指針を示す内容です。",
+        "date": "2025-11-17",
+        "author": "terazawa",
+        "ogImage": "public/white-paper/wp-thumb-24-jp.webp",
+        "keywords": [
+          "クエリパイ",
+          "クエリーパイ",
+          "クエリパイ AI",
+          "クエリーパイ AI",
+          "企業におけるAIの導入",
+          "日本企業のAIに関する課題",
+          "AI主導のビジネス変革",
+          "経営層のためのAIロードマップ",
+          "グローバルなAIのベストプラクティス",
+          "AIによる生産性向上",
+          "AI導入プロセス"
+        ],
+        "relatedPosts": [
+          "/features/documentation/aip-introduction-download",
+          "/features/documentation/acp-introduction-download",
+          "/features/documentation/querypie-install-guide"
+        ]
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "ai-tranformation-japan"
+}

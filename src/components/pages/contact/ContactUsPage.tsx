@@ -223,7 +223,7 @@ export default function ContactUsPage({
             </p>
 
             <div className="flex" data-reveal style={{ transitionDelay: `${(formFields.length + 4) * 70}ms` }}>
-              <Button arrow={false} variant="secondary">
+              <Button arrow={false} style="round" variant="secondary">
                 {submitLabel}
               </Button>
             </div>

@@ -1,0 +1,78 @@
+{
+  "category": "webinars",
+  "contentKind": "gated-download",
+  "entryId": "querypie-japan-webinar-security--15",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "15",
+    "sourceCategory": "webinars",
+    "sourceGroupPath": "demo/webinars/15/querypie-japan-webinar-security",
+    "sourceUrl": "/features/demo/webinars/15/querypie-japan-webinar-security"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/wb-thumb-15.webp",
+          "webPath": "/webinar/wb-thumb-15.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/querypie-japan-webinar-security--15/en.mdx",
+      "contentKind": "gated-download",
+      "description": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [],
+      "layout": "ArticleType2",
+      "ogImage": "/webinar/wb-thumb-15.webp",
+      "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"webinars\"\ntitle: \"ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー\"\nhtmlTitle: \"[QueryPie Japan] ウェビナー参加申し込み<br />内部セキュリティ対策セミナー<br />2024年12月18日<br />\"\ndescription: \"情報漏洩対策は十分にされていますか？事故が起きてからは遅い！\"\ndate: \"2024-12-05\"\nogImage: \"public/webinar/wb-thumb-15.webp\"\ngatingForm:\n  title: \"ウェビナー登録のための情報を入力してください。\"\n  useMobilePhoneItem: true\n  submitButtonLabel: \"登録する\"\n  submitAction: \"apply-participant\"\n  afterSubmitUI:\n    title:\n      - \"QueryPieのウェビナーにご登録いただき誠に\"\n      - \"ありがとうございます！\"\n    description:\n      - \"ご登録いただいたメールアドレスにセミナー事務局よりzoom URLなどを記載した確認メールをお送りします。\"\n      - \"しばらくお待ちください。\"",
+      "relatedPosts": [],
+      "sourcePath": "demo/webinars/15/querypie-japan-webinar-security/en/content.mdx",
+      "title": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
+      "frontmatter": {
+        "layout": "ArticleType2",
+        "category": "webinars",
+        "title": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
+        "htmlTitle": "[QueryPie Japan] ウェビナー参加申し込み<br />内部セキュリティ対策セミナー<br />2024年12月18日<br />",
+        "description": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！",
+        "date": "2024-12-05",
+        "ogImage": "public/webinar/wb-thumb-15.webp",
+        "gatingForm": "  title: \"ウェビナー登録のための情報を入力してください。\"\n  useMobilePhoneItem: true\n  submitButtonLabel: \"登録する\"\n  submitAction: \"apply-participant\"\n  afterSubmitUI:\n    title:\n      - \"QueryPieのウェビナーにご登録いただき誠に\"\n      - \"ありがとうございます！\"\n    description:\n      - \"ご登録いただいたメールアドレスにセミナー事務局よりzoom URLなどを記載した確認メールをお送りします。\"\n      - \"しばらくお待ちください。\""
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/wb-thumb-15.webp",
+          "webPath": "/webinar/wb-thumb-15.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/querypie-japan-webinar-security--15/ja.mdx",
+      "contentKind": "gated-download",
+      "description": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [],
+      "layout": "ArticleType2",
+      "ogImage": "/webinar/wb-thumb-15.webp",
+      "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"webinars\"\ntitle: \"ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー\"\nhtmlTitle: \"[QueryPie Japan] ウェビナー参加申し込み<br />内部セキュリティ対策セミナー<br />2024年12月18日<br />\"\ndescription: \"情報漏洩対策は十分にされていますか？事故が起きてからは遅い！\"\ndate: \"2024-12-05\"\nogImage: \"public/webinar/wb-thumb-15.webp\"\ngatingForm:\n  title: \"ウェビナー登録のための情報を入力してください。\"\n  useMobilePhoneItem: true\n  submitButtonLabel: \"登録する\"\n  submitAction: \"apply-participant\"\n  afterSubmitUI:\n    title:\n      - \"QueryPieのウェビナーにご登録いただき誠に\"\n      - \"ありがとうございます！\"\n    description:\n      - \"ご登録いただいたメールアドレスにセミナー事務局よりzoom URLなどを記載した確認メールをお送りします。\"\n      - \"しばらくお待ちください。\"",
+      "relatedPosts": [],
+      "sourcePath": "demo/webinars/15/querypie-japan-webinar-security/ja/content.mdx",
+      "title": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
+      "frontmatter": {
+        "layout": "ArticleType2",
+        "category": "webinars",
+        "title": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
+        "htmlTitle": "[QueryPie Japan] ウェビナー参加申し込み<br />内部セキュリティ対策セミナー<br />2024年12月18日<br />",
+        "description": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！",
+        "date": "2024-12-05",
+        "ogImage": "public/webinar/wb-thumb-15.webp",
+        "gatingForm": "  title: \"ウェビナー登録のための情報を入力してください。\"\n  useMobilePhoneItem: true\n  submitButtonLabel: \"登録する\"\n  submitAction: \"apply-participant\"\n  afterSubmitUI:\n    title:\n      - \"QueryPieのウェビナーにご登録いただき誠に\"\n      - \"ありがとうございます！\"\n    description:\n      - \"ご登録いただいたメールアドレスにセミナー事務局よりzoom URLなどを記載した確認メールをお送りします。\"\n      - \"しばらくお待ちください。\""
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "querypie-japan-webinar-security"
+}

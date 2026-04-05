@@ -1,0 +1,199 @@
+{
+  "category": "introduction-decks",
+  "contentKind": "gated-download",
+  "entryId": "acp-introduction-download",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": null,
+    "sourceCategory": "introduction-decks",
+    "sourceGroupPath": "documentation/introduction-decks/acp-introduction-download",
+    "sourceUrl": "/features/documentation/introduction-decks/acp-introduction-download"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-acp-introduction.webp",
+          "webPath": "/documentation/docu-thumb-acp-introduction.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/introduction-decks/acp-introduction-download/en.mdx",
+      "contentKind": "gated-download",
+      "description": "Everything You Need to Know About QueryPie ACP",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie ACP Introduction",
+        "QueryPie ACP Overview",
+        "Data Access Control",
+        "System Access Control",
+        "Kubernetes Access Control",
+        "Web Access Control",
+        "GDPR",
+        "HIPAA",
+        "CCPA",
+        "AIDD",
+        "personal information",
+        "privacy protection"
+      ],
+      "layout": "ArticleType2",
+      "ogImage": "/documentation/docu-thumb-acp-introduction.webp",
+      "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"introduction-deck\"\ntitle: \"QueryPie ACP Introduction\"\ndescription: \"Everything You Need to Know About QueryPie ACP\"\nogImage: \"public/documentation/docu-thumb-acp-introduction.webp\"\nkeywords:\n - \"QueryPie ACP Introduction\"\n - \"QueryPie ACP Overview\"\n - \"Data Access Control\"\n - \"System Access Control\"\n - \"Kubernetes Access Control\"\n - \"Web Access Control\"\n - \"GDPR\"\n - \"HIPAA\"\n - \"CCPA\"\n - \"AIDD\"\n - \"personal information\"\n - \"privacy protection\"\ngatingForm:\n  title: \"Please fill out the form to unlock your exclusive content!\"\n  submitButtonLabel: \"Download Now\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/intro-decks/QueryPie_ACP_Intro_EN.pdf\"",
+      "relatedPosts": [],
+      "sourcePath": "documentation/introduction-decks/acp-introduction-download/en/content.mdx",
+      "title": "QueryPie ACP Introduction",
+      "frontmatter": {
+        "layout": "ArticleType2",
+        "category": "introduction-deck",
+        "title": "QueryPie ACP Introduction",
+        "description": "Everything You Need to Know About QueryPie ACP",
+        "ogImage": "public/documentation/docu-thumb-acp-introduction.webp",
+        "keywords": [
+          "QueryPie ACP Introduction",
+          "QueryPie ACP Overview",
+          "Data Access Control",
+          "System Access Control",
+          "Kubernetes Access Control",
+          "Web Access Control",
+          "GDPR",
+          "HIPAA",
+          "CCPA",
+          "AIDD",
+          "personal information",
+          "privacy protection"
+        ],
+        "gatingForm": {
+          "title": "Please fill out the form to unlock your exclusive content!",
+          "submitButtonLabel": "Download Now",
+          "submitAction": "read-document",
+          "afterSubmitOpenPageHref": "https://www.querypie.com/public/downloads/intro-decks/QueryPie_ACP_Intro_EN.pdf"
+        }
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-acp-introduction.webp",
+          "webPath": "/documentation/docu-thumb-acp-introduction.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/introduction-decks/acp-introduction-download/ko.mdx",
+      "contentKind": "gated-download",
+      "description": "QueryPie ACP에 대한 모든 것을 알아보세요!",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie ACP 소개",
+        "QueryPie ACP 개요",
+        "데이터 접근 제어",
+        "시스템 접근 제어",
+        "쿠버네티스 접근 제어",
+        "웹 접근 제어",
+        "GDPR",
+        "HIPAA",
+        "CCPA",
+        "AIDD",
+        "개인정보",
+        "개인정보보호"
+      ],
+      "layout": "ArticleType2",
+      "ogImage": "/documentation/docu-thumb-acp-introduction.webp",
+      "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"introduction-deck\"\ntitle: \"QueryPie ACP 제품 소개서\"\ndescription: \"QueryPie ACP에 대한 모든 것을 알아보세요!\"\nogImage: \"public/documentation/docu-thumb-acp-introduction.webp\"\nkeywords:\n  - \"QueryPie ACP 소개\"\n  - \"QueryPie ACP 개요\"\n  - \"데이터 접근 제어\"\n  - \"시스템 접근 제어\"\n  - \"쿠버네티스 접근 제어\"\n  - \"웹 접근 제어\"\n  - \"GDPR\"\n  - \"HIPAA\"\n  - \"CCPA\"\n  - \"AIDD\"\n  - \"개인정보\"\n  - \"개인정보보호\"\ngatingForm:\n  title: \"아래 양식을 제출하면 바로 다운로드 받으실 수 있습니다.\"\n  submitButtonLabel: \"다운로드\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/intro-decks/QueryPie_ACP_Intro_KO.pdf\"",
+      "relatedPosts": [],
+      "sourcePath": "documentation/introduction-decks/acp-introduction-download/ko/content.mdx",
+      "title": "QueryPie ACP 제품 소개서",
+      "frontmatter": {
+        "layout": "ArticleType2",
+        "category": "introduction-deck",
+        "title": "QueryPie ACP 제품 소개서",
+        "description": "QueryPie ACP에 대한 모든 것을 알아보세요!",
+        "ogImage": "public/documentation/docu-thumb-acp-introduction.webp",
+        "keywords": [
+          "QueryPie ACP 소개",
+          "QueryPie ACP 개요",
+          "데이터 접근 제어",
+          "시스템 접근 제어",
+          "쿠버네티스 접근 제어",
+          "웹 접근 제어",
+          "GDPR",
+          "HIPAA",
+          "CCPA",
+          "AIDD",
+          "개인정보",
+          "개인정보보호"
+        ],
+        "gatingForm": {
+          "title": "아래 양식을 제출하면 바로 다운로드 받으실 수 있습니다.",
+          "submitButtonLabel": "다운로드",
+          "submitAction": "read-document",
+          "afterSubmitOpenPageHref": "https://www.querypie.com/public/downloads/intro-decks/QueryPie_ACP_Intro_KO.pdf"
+        }
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-acp-introduction.webp",
+          "webPath": "/documentation/docu-thumb-acp-introduction.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/introduction-decks/acp-introduction-download/ja.mdx",
+      "contentKind": "gated-download",
+      "description": "QueryPieについて知っておくべきこと",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie ACP イントロダクション",
+        "QueryPie ACP 概要",
+        "データアクセス制御",
+        "システムアクセス制御",
+        "Kubernetesアクセス制御",
+        "Webアクセス制御",
+        "GDPR",
+        "HIPAA",
+        "CCPA",
+        "AIDD",
+        "個人情報",
+        "プライバシー保護"
+      ],
+      "layout": "ArticleType2",
+      "ogImage": "/documentation/docu-thumb-acp-introduction.webp",
+      "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"introduction-deck\"\ntitle: \"QueryPie製品紹介\"\ndescription: \"QueryPieについて知っておくべきこと\"\nogImage: \"public/documentation/docu-thumb-acp-introduction.webp\"\nkeywords:\n  - \"QueryPie ACP イントロダクション\"\n  - \"QueryPie ACP 概要\"\n  - \"データアクセス制御\"\n  - \"システムアクセス制御\"\n  - \"Kubernetesアクセス制御\"\n  - \"Webアクセス制御\"\n  - \"GDPR\"\n  - \"HIPAA\"\n  - \"CCPA\"\n  - \"AIDD\"\n  - \"個人情報\"\n  - \"プライバシー保護\"\ngatingForm:\n  title: \"コンテンツをダウンロードするには、フォームにご入力ください。\"\n  submitButtonLabel: \"今すぐ見る\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/intro-decks/QueryPie_ACP_Intro_JP.pdf\"",
+      "relatedPosts": [],
+      "sourcePath": "documentation/introduction-decks/acp-introduction-download/ja/content.mdx",
+      "title": "QueryPie製品紹介",
+      "frontmatter": {
+        "layout": "ArticleType2",
+        "category": "introduction-deck",
+        "title": "QueryPie製品紹介",
+        "description": "QueryPieについて知っておくべきこと",
+        "ogImage": "public/documentation/docu-thumb-acp-introduction.webp",
+        "keywords": [
+          "QueryPie ACP イントロダクション",
+          "QueryPie ACP 概要",
+          "データアクセス制御",
+          "システムアクセス制御",
+          "Kubernetesアクセス制御",
+          "Webアクセス制御",
+          "GDPR",
+          "HIPAA",
+          "CCPA",
+          "AIDD",
+          "個人情報",
+          "プライバシー保護"
+        ],
+        "gatingForm": {
+          "title": "コンテンツをダウンロードするには、フォームにご入力ください。",
+          "submitButtonLabel": "今すぐ見る",
+          "submitAction": "read-document",
+          "afterSubmitOpenPageHref": "https://www.querypie.com/public/downloads/intro-decks/QueryPie_ACP_Intro_JP.pdf"
+        }
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "acp-introduction-download"
+}

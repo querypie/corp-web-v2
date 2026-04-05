@@ -1,0 +1,136 @@
+{
+  "category": "webinars",
+  "contentKind": "webinar",
+  "entryId": "okta-paloalto-querypie-webinar--2",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "2",
+    "sourceCategory": "webinars",
+    "sourceGroupPath": "demo/webinars/2/okta-paloalto-querypie-webinar",
+    "sourceUrl": "/features/demo/webinars/2/okta-paloalto-querypie-webinar"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/wb-thumb-2.webp",
+          "webPath": "/webinar/wb-thumb-2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/okta-paloalto-querypie-webinar--2/en.mdx",
+      "contentKind": "webinar",
+      "description": "Going beyond cloud security to cloud-native security, the OPQ Alliance (Okta x Palo Alto Networks x QueryPie) will show you the way. Watch this three-part webinar to learn more!",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/wb-thumb-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Okta x PaloAlto Networks x QueryPie: The OPQ Webinar\"\ndescription: \"Going beyond cloud security to cloud-native security, the OPQ Alliance (Okta x Palo Alto Networks x QueryPie) will show you the way. Watch this three-part webinar to learn more!\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/3/device-security-mdm-kandji\"\n  - \"/features/demo/webinars/5/ztna-security-prisma-access\"",
+      "relatedPosts": [
+        "/features/demo/webinars/1/cloud-certification-shortest-path",
+        "/features/demo/webinars/3/device-security-mdm-kandji",
+        "/features/demo/webinars/5/ztna-security-prisma-access"
+      ],
+      "sourcePath": "demo/webinars/2/okta-paloalto-querypie-webinar/en/content.mdx",
+      "title": "Okta x PaloAlto Networks x QueryPie: The OPQ Webinar",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "Okta x PaloAlto Networks x QueryPie: The OPQ Webinar",
+        "description": "Going beyond cloud security to cloud-native security, the OPQ Alliance (Okta x Palo Alto Networks x QueryPie) will show you the way. Watch this three-part webinar to learn more!",
+        "date": "2024-11-29",
+        "ogImage": "public/webinar/wb-thumb-2.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/1/cloud-certification-shortest-path",
+          "/features/demo/webinars/3/device-security-mdm-kandji",
+          "/features/demo/webinars/5/ztna-security-prisma-access"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/wb-thumb-2.webp",
+          "webPath": "/webinar/wb-thumb-2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/okta-paloalto-querypie-webinar--2/ko.mdx",
+      "contentKind": "webinar",
+      "description": "클라우드 보안을 넘어 클라우드 네이티브 보안으로, OPQ 얼라이언스(Okta x Palo Alto Networks x QueryPie)가 그 길을 안내합니다. 이 3부작 웨비나를 시청하고 더 많은 정보를 확인하세요!",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/wb-thumb-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Okta x PaloAlto Networks x QueryPie: The OPQ Webinar\"\ndescription: \"클라우드 보안을 넘어 클라우드 네이티브 보안으로, OPQ 얼라이언스(Okta x Palo Alto Networks x QueryPie)가 그 길을 안내합니다. 이 3부작 웨비나를 시청하고 더 많은 정보를 확인하세요!\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/3/device-security-mdm-kandji\"\n  - \"/features/demo/webinars/5/ztna-security-prisma-access\"",
+      "relatedPosts": [
+        "/features/demo/webinars/1/cloud-certification-shortest-path",
+        "/features/demo/webinars/3/device-security-mdm-kandji",
+        "/features/demo/webinars/5/ztna-security-prisma-access"
+      ],
+      "sourcePath": "demo/webinars/2/okta-paloalto-querypie-webinar/ko/content.mdx",
+      "title": "Okta x PaloAlto Networks x QueryPie: The OPQ Webinar",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "Okta x PaloAlto Networks x QueryPie: The OPQ Webinar",
+        "description": "클라우드 보안을 넘어 클라우드 네이티브 보안으로, OPQ 얼라이언스(Okta x Palo Alto Networks x QueryPie)가 그 길을 안내합니다. 이 3부작 웨비나를 시청하고 더 많은 정보를 확인하세요!",
+        "date": "2024-11-29",
+        "ogImage": "public/webinar/wb-thumb-2.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/1/cloud-certification-shortest-path",
+          "/features/demo/webinars/3/device-security-mdm-kandji",
+          "/features/demo/webinars/5/ztna-security-prisma-access"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/wb-thumb-2.webp",
+          "webPath": "/webinar/wb-thumb-2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/okta-paloalto-querypie-webinar--2/ja.mdx",
+      "contentKind": "webinar",
+      "description": "技術が高度化するにつれて、ハッカーの攻撃方法もまた精巧になり、複雑になっています。このような状況の中で、新しいセキュリティ標準を設けるために、Okta、Palo Alto Networks、そしてQueryPieが力を合わせてOPQアライアンスを結成しました。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/wb-thumb-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Okta x Palo Alto Networks x QueryPie: OPQ ウェビナー\"\ndescription: \"技術が高度化するにつれて、ハッカーの攻撃方法もまた精巧になり、複雑になっています。このような状況の中で、新しいセキュリティ標準を設けるために、Okta、Palo Alto Networks、そしてQueryPieが力を合わせてOPQアライアンスを結成しました。\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/3/device-security-mdm-kandji\"\n  - \"/features/demo/webinars/5/ztna-security-prisma-access\"",
+      "relatedPosts": [
+        "/features/demo/webinars/1/cloud-certification-shortest-path",
+        "/features/demo/webinars/3/device-security-mdm-kandji",
+        "/features/demo/webinars/5/ztna-security-prisma-access"
+      ],
+      "sourcePath": "demo/webinars/2/okta-paloalto-querypie-webinar/ja/content.mdx",
+      "title": "Okta x Palo Alto Networks x QueryPie: OPQ ウェビナー",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "Okta x Palo Alto Networks x QueryPie: OPQ ウェビナー",
+        "description": "技術が高度化するにつれて、ハッカーの攻撃方法もまた精巧になり、複雑になっています。このような状況の中で、新しいセキュリティ標準を設けるために、Okta、Palo Alto Networks、そしてQueryPieが力を合わせてOPQアライアンスを結成しました。",
+        "date": "2024-11-29",
+        "ogImage": "public/webinar/wb-thumb-2.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/1/cloud-certification-shortest-path",
+          "/features/demo/webinars/3/device-security-mdm-kandji",
+          "/features/demo/webinars/5/ztna-security-prisma-access"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "okta-paloalto-querypie-webinar"
+}

@@ -1,0 +1,154 @@
+{
+  "category": "white-papers",
+  "contentKind": "gated-download",
+  "entryId": "ai-tranformation-japan-download--24",
+  "legacy": {
+    "extraSegments": [
+      "download"
+    ],
+    "legacyId": "24",
+    "sourceCategory": "white-paper",
+    "sourceGroupPath": "documentation/white-paper/24/ai-tranformation-japan/download",
+    "sourceUrl": "/features/documentation/white-paper/24/ai-tranformation-japan/download"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp24-download-en.webp",
+          "webPath": "/white-paper/wp24-download-en.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/ai-tranformation-japan-download--24/en.mdx",
+      "contentKind": "gated-download",
+      "description": "",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "QueryPie AI",
+        "AI adoption in enterprises",
+        "Japanese enterprise AI challenges",
+        "AI-driven business transformation",
+        "AI roadmap for executives",
+        "Global AI best practices",
+        "Productivity gains with AI",
+        "AI implementation process"
+      ],
+      "layout": "ArticleType2",
+      "ogImage": "/white-paper/wp24-download-en.webp",
+      "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"whitepaper\"\ntitle: \"Why Japanese Enterprises Are Accelerating Their AI Transformation Now\"\ndescription: \"\"\nogImage: \"public/white-paper/wp24-download-en.webp\"\nkeywords:\n - \"QueryPie\"\n - \"QueryPie AI\"\n - \"AI adoption in enterprises\"\n - \"Japanese enterprise AI challenges\"\n - \"AI-driven business transformation\"\n - \"AI roadmap for executives\"\n - \"Global AI best practices\"\n - \"Productivity gains with AI\"\n - \"AI implementation process\"\ngatingForm:\n  title: \"Please fill out the form to unlock your exclusive content!\"\n  submitButtonLabel: \"Download Now\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/documents/QP_Whitepaper_AI_Transformation_EN.pdf\"",
+      "relatedPosts": [],
+      "sourcePath": "documentation/white-paper/24/ai-tranformation-japan/download/en/content.mdx",
+      "title": "Why Japanese Enterprises Are Accelerating Their AI Transformation Now",
+      "frontmatter": {
+        "layout": "ArticleType2",
+        "category": "whitepaper",
+        "title": "Why Japanese Enterprises Are Accelerating Their AI Transformation Now",
+        "description": "",
+        "ogImage": "public/white-paper/wp24-download-en.webp",
+        "keywords": [
+          "QueryPie",
+          "QueryPie AI",
+          "AI adoption in enterprises",
+          "Japanese enterprise AI challenges",
+          "AI-driven business transformation",
+          "AI roadmap for executives",
+          "Global AI best practices",
+          "Productivity gains with AI",
+          "AI implementation process"
+        ],
+        "gatingForm": {
+          "title": "Please fill out the form to unlock your exclusive content!",
+          "submitButtonLabel": "Download Now",
+          "submitAction": "read-document",
+          "afterSubmitOpenPageHref": "https://www.querypie.com/public/downloads/documents/QP_Whitepaper_AI_Transformation_EN.pdf"
+        }
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp24-download-ko.webp",
+          "webPath": "/white-paper/wp24-download-ko.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/ai-tranformation-japan-download--24/ko.mdx",
+      "contentKind": "gated-download",
+      "description": "",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [],
+      "layout": "",
+      "ogImage": "",
+      "rawFrontmatter": null,
+      "relatedPosts": [],
+      "sourcePath": "documentation/white-paper/24/ai-tranformation-japan/download/ko/content.mdx",
+      "title": "",
+      "frontmatter": ""
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp24-download-jp.webp",
+          "webPath": "/white-paper/wp24-download-jp.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/ai-tranformation-japan-download--24/ja.mdx",
+      "contentKind": "gated-download",
+      "description": "",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "クエリパイ",
+        "クエリーパイ",
+        "クエリパイ AI",
+        "クエリーパイ AI",
+        "企業におけるAIの導入",
+        "日本企業のAIに関する課題",
+        "AI主導のビジネス変革",
+        "経営層のためのAIロードマップ",
+        "グローバルなAIのベストプラクティス",
+        "AIによる生産性向上",
+        "AI導入プロセス"
+      ],
+      "layout": "ArticleType2",
+      "ogImage": "/white-paper/wp24-download-jp.webp",
+      "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"whitepaper\"\ntitle: \"なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか\"\ndescription: \"\"\nogImage: \"public/white-paper/wp24-download-jp.webp\"\nkeywords:\n - \"クエリパイ\"\n - \"クエリーパイ\"\n - \"クエリパイ AI\"\n - \"クエリーパイ AI\"\n - \"企業におけるAIの導入\"\n - \"日本企業のAIに関する課題\"\n - \"AI主導のビジネス変革\"\n - \"経営層のためのAIロードマップ\"\n - \"グローバルなAIのベストプラクティス\"\n - \"AIによる生産性向上\"\n - \"AI導入プロセス\"\ngatingForm:\n  title: \"限定コンテンツの入手には、フォームのご記入をお願いいたします。\"\n  submitButtonLabel: \"ダウンロードする\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/documents/QP_Whitepaper_AI_Transformation_JP.pdf\"",
+      "relatedPosts": [],
+      "sourcePath": "documentation/white-paper/24/ai-tranformation-japan/download/ja/content.mdx",
+      "title": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか",
+      "frontmatter": {
+        "layout": "ArticleType2",
+        "category": "whitepaper",
+        "title": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか",
+        "description": "",
+        "ogImage": "public/white-paper/wp24-download-jp.webp",
+        "keywords": [
+          "クエリパイ",
+          "クエリーパイ",
+          "クエリパイ AI",
+          "クエリーパイ AI",
+          "企業におけるAIの導入",
+          "日本企業のAIに関する課題",
+          "AI主導のビジネス変革",
+          "経営層のためのAIロードマップ",
+          "グローバルなAIのベストプラクティス",
+          "AIによる生産性向上",
+          "AI導入プロセス"
+        ],
+        "gatingForm": {
+          "title": "限定コンテンツの入手には、フォームのご記入をお願いいたします。",
+          "submitButtonLabel": "ダウンロードする",
+          "submitAction": "read-document",
+          "afterSubmitOpenPageHref": "https://www.querypie.com/public/downloads/documents/QP_Whitepaper_AI_Transformation_JP.pdf"
+        }
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "ai-tranformation-japan"
+}

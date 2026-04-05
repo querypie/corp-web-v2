@@ -1,11 +1,14 @@
+"use client";
+
+import { useState } from "react";
 import Cta from "../../sections/Cta";
 import ClientSection from "../../sections/ClientSection";
 import ContentListSection from "../../sections/ContentListSection";
 import FeatureSection from "../../sections/FeatureSection";
-import Hero from "../../sections/Hero";
 import HomeNewsListClientSection from "../../sections/HomeNewsListClientSection";
 import McpSection from "../../sections/McpSection";
 import ReviewSection from "../../sections/ReviewSection";
+import HomePageHero from "./HomePageHero";
 import type { Locale } from "../../../constants/i18n";
 
 type FooterSection = {
@@ -36,6 +39,7 @@ type ReviewItem = {
 type NewsItem = {
   href: string;
   imageSrc: string;
+  isExternal?: boolean;
   title: string;
 };
 
@@ -69,6 +73,17 @@ export type HomePageProps = {
   reviewTitle: string;
 };
 
+const heroVideos = [
+  { id: 1, src: "/videos/bg-01.mp4" },
+  { id: 2, src: "/videos/bg-02.mp4" },
+  { id: 3, src: "/videos/bg-03.mp4" },
+  { id: 4, src: "/videos/bg-04.mp4" },
+] as const;
+
+function cx(...values: Array<string | false | null | undefined>) {
+  return values.filter(Boolean).join(" ");
+}
+
 export default function HomePage({
   clientCaption,
   contentListDescription,
@@ -91,52 +106,70 @@ export default function HomePage({
   reviewItems,
   reviewTitle,
 }: HomePageProps) {
+  const [activeVideoIndex, setActiveVideoIndex] = useState(0);
+  const activeVideo = heroVideos[activeVideoIndex];
+
   return (
-    <div className="flex flex-col gap-20 overflow-x-hidden px-5 pb-10 text-fg md:gap-[120px] md:px-10">
-        <div className="-mx-5 md:-mx-10">
-          <Hero
-            headingMuted={heroHeadingMuted}
-            headingPrimary={heroHeadingPrimary}
-            locale={locale}
-            promptRotatingTexts={heroPromptRotatingTexts}
+    <div className="-mt-[120px] flex flex-col gap-20 overflow-x-hidden bg-bg px-5 pb-10 text-fg md:-mt-[160px] md:gap-[120px] md:px-10">
+      <div className="relative -mx-5 md:-mx-10">
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <video
+            key={activeVideo.src}
+            aria-hidden="true"
+            autoPlay
+            className={cx("homeb-hero-video", (activeVideo.id === 2 || activeVideo.id === 3) && "-scale-x-100")}
+            loop
+            muted
+            playsInline
+          >
+            <source src={activeVideo.src} type="video/mp4" />
+          </video>
+          <div
+            aria-hidden="true"
+            className="absolute -left-[320px] -top-[220px] h-[560px] w-[980px] rounded-full opacity-100 blur-[80px]"
+            style={{ background: "radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.56) 34%, rgba(255,255,255,0.18) 54%, rgba(255,255,255,0) 76%)" }}
           />
+          <div className="absolute inset-x-0 bottom-0 -top-[160px] bg-gradient-to-b from-transparent via-[rgba(197,211,231,0.28)] to-bg md:-top-[180px] xl:-top-[120px]" />
         </div>
-        {/* 고객사 로고 영역 */}
-        <div data-reveal><ClientSection caption={clientCaption} /></div>
-        {/* 기능 소개 섹션 */}
-        <div data-reveal><FeatureSection items={featureItems} /></div>
-        {/* MCP 호환/지원 섹션 */}
-        <div data-reveal>
-          <McpSection
-            description={mcpDescription}
-            items={mcpItems}
-            title={mcpTitle}
-          />
-        </div>
-        {/* 사용자 후기 카드 */}
-        <div data-reveal><ReviewSection items={reviewItems} title={reviewTitle} /></div>
-        {/* 가이드/콘텐츠 리스트 섹션 */}
-        <div data-reveal className="-mx-5 md:-mx-10">
-          <ContentListSection
-            description={contentListDescription}
-            items={contentListItems}
-            links={contentListLinks}
-            title={contentListTitle}
-          />
-        </div>
-        {/* 뉴스 리스트 */}
-        <div data-reveal>
-          <HomeNewsListClientSection fallbackItems={newsItems} locale={locale} title={newsTitle} />
-        </div>
-        {/* 하단 CTA */}
-        <div data-reveal>
-          <Cta
-            actionLabel="Get Start!"
-            description={ctaDescription}
-            eyebrow={ctaEyebrow}
-            title={ctaTitle}
-          />
-        </div>
+
+        <HomePageHero
+          activeVideoIndex={activeVideoIndex}
+          heroHeadingMuted={heroHeadingMuted}
+          heroHeadingPrimary={heroHeadingPrimary}
+          locale={locale}
+          onSelectVideo={setActiveVideoIndex}
+        />
+      </div>
+
+      <div data-reveal><ClientSection caption={clientCaption} /></div>
+      <div data-reveal><FeatureSection items={featureItems} /></div>
+      <div data-reveal>
+        <McpSection
+          description={mcpDescription}
+          items={mcpItems}
+          title={mcpTitle}
+        />
+      </div>
+      <div data-reveal><ReviewSection items={reviewItems} title={reviewTitle} /></div>
+      <div data-reveal className="-mx-5 md:-mx-10">
+        <ContentListSection
+          description={contentListDescription}
+          items={contentListItems}
+          links={contentListLinks}
+          title={contentListTitle}
+        />
+      </div>
+      <div data-reveal>
+        <HomeNewsListClientSection fallbackItems={newsItems} locale={locale} title={newsTitle} />
+      </div>
+      <div data-reveal>
+        <Cta
+          actionLabel="Get Start!"
+          description={ctaDescription}
+          eyebrow={ctaEyebrow}
+          title={ctaTitle}
+        />
+      </div>
     </div>
   );
 }

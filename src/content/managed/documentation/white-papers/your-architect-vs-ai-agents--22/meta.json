@@ -1,0 +1,359 @@
+{
+  "category": "white-papers",
+  "contentKind": "article",
+  "entryId": "your-architect-vs-ai-agents--22",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "22",
+    "sourceCategory": "white-paper",
+    "sourceGroupPath": "documentation/white-paper/22/your-architect-vs-ai-agents",
+    "sourceUrl": "/features/documentation/white-paper/22/your-architect-vs-ai-agents"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-22.webp",
+          "webPath": "/white-paper/wp-thumb-22.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-1-rakesh-gohel-ai-agents.webp",
+          "webPath": "/white-paper/wp22-1-rakesh-gohel-ai-agents.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-2-mcp-server-structure.webp",
+          "webPath": "/white-paper/wp22-2-mcp-server-structure.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-3-ai-agent-flow.webp",
+          "webPath": "/white-paper/wp22-3-ai-agent-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-4-summary-of-role-separation.webp",
+          "webPath": "/white-paper/wp22-4-summary-of-role-separation.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-5-functional-separation-between-ai-agent-and-mcp-server.webp",
+          "webPath": "/white-paper/wp22-5-functional-separation-between-ai-agent-and-mcp-server.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-6-structural-differences-in-interface-design.webp",
+          "webPath": "/white-paper/wp22-6-structural-differences-in-interface-design.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-7-interactions-within-the-overall-system.webp",
+          "webPath": "/white-paper/wp22-7-interactions-within-the-overall-system.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-8-structured-api-calls-to-the-mcp-server.webp",
+          "webPath": "/white-paper/wp22-8-structured-api-calls-to-the-mcp-server.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-9-clearly-separated-roles-for-each-component.webp",
+          "webPath": "/white-paper/wp22-9-clearly-separated-roles-for-each-component.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-10-structural-gap-between-what-people-think-and-what-they-are.webp",
+          "webPath": "/white-paper/wp22-10-structural-gap-between-what-people-think-and-what-they-are.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/your-architect-vs-ai-agents--22/en.mdx",
+      "contentKind": "article",
+      "description": "In this article, we clearly distinguish the roles of the MCP server and AI agents, providing a structured explanation of their respective responsibilities and limitations to prevent misunderstandings.",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "AI Agent",
+        "MCP",
+        "MCP Server",
+        "MCP",
+        "Model Context Protocol",
+        "Enterprise AI Security",
+        "MCP PAM",
+        "Build Safe AI Foundation",
+        "enterprise AI security",
+        "Cloud Audit Logs",
+        "AI Action Control",
+        "AI Compliance"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-22.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Your Architecture vs. AI Agents: Can MCP Hold the Line?\"\ndescription: \"In this article, we clearly distinguish the roles of the MCP server and AI agents, providing a structured explanation of their respective responsibilities and limitations to prevent misunderstandings.\"\ndate: \"2025-05-21\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-22.webp\"\nkeywords: [\"AI Agent\",\"MCP\", \"MCP Server\",\"MCP\",\"Model Context Protocol\",\"Enterprise AI Security\",\"MCP PAM\",\"Build Safe AI Foundation\",\"enterprise AI security\",\"Cloud Audit Logs\",\"AI Action Control\",\"AI Compliance\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam\"\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam",
+        "/features/documentation/white-paper/20/beyond-mcp-to-mcps",
+        "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops"
+      ],
+      "sourcePath": "documentation/white-paper/22/your-architect-vs-ai-agents/en/content.mdx",
+      "title": "Your Architecture vs. AI Agents: Can MCP Hold the Line?",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "Your Architecture vs. AI Agents: Can MCP Hold the Line?",
+        "description": "In this article, we clearly distinguish the roles of the MCP server and AI agents, providing a structured explanation of their respective responsibilities and limitations to prevent misunderstandings.",
+        "date": "2025-05-21",
+        "author": "kenny",
+        "ogImage": "public/white-paper/wp-thumb-22.webp",
+        "keywords": [
+          "AI Agent",
+          "MCP",
+          "MCP Server",
+          "MCP",
+          "Model Context Protocol",
+          "Enterprise AI Security",
+          "MCP PAM",
+          "Build Safe AI Foundation",
+          "enterprise AI security",
+          "Cloud Audit Logs",
+          "AI Action Control",
+          "AI Compliance"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam",
+          "/features/documentation/white-paper/20/beyond-mcp-to-mcps",
+          "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-22.webp",
+          "webPath": "/white-paper/wp-thumb-22.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-1-rakesh-gohel-ai-agents.webp",
+          "webPath": "/white-paper/wp22-1-rakesh-gohel-ai-agents.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-2-mcp-server-structure.webp",
+          "webPath": "/white-paper/wp22-2-mcp-server-structure.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-3-ai-agent-flow.webp",
+          "webPath": "/white-paper/wp22-3-ai-agent-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-4-summary-of-role-separation.webp",
+          "webPath": "/white-paper/wp22-4-summary-of-role-separation.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-5-functional-separation-between-ai-agent-and-mcp-server.webp",
+          "webPath": "/white-paper/wp22-5-functional-separation-between-ai-agent-and-mcp-server.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-6-structural-differences-in-interface-design.webp",
+          "webPath": "/white-paper/wp22-6-structural-differences-in-interface-design.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-7-interactions-within-the-overall-system.webp",
+          "webPath": "/white-paper/wp22-7-interactions-within-the-overall-system.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-8-structured-api-calls-to-the-mcp-server.webp",
+          "webPath": "/white-paper/wp22-8-structured-api-calls-to-the-mcp-server.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-9-clearly-separated-roles-for-each-component.webp",
+          "webPath": "/white-paper/wp22-9-clearly-separated-roles-for-each-component.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-10-structural-gap-between-what-people-think-and-what-they-are.webp",
+          "webPath": "/white-paper/wp22-10-structural-gap-between-what-people-think-and-what-they-are.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/your-architect-vs-ai-agents--22/ko.mdx",
+      "contentKind": "article",
+      "description": "이 글에서는 MCP 서버와 AI 에이전트의 역할을 명확히 구분하여, 오해를 방지하기 위해 각각의 책임과 한계에 대한 체계적인 설명을 제공합니다.",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "AI Agent",
+        "MCP",
+        "MCP Server",
+        "MCP",
+        "Model Context Protocol",
+        "Enterprise AI Security",
+        "MCP PAM",
+        "Build Safe AI Foundation",
+        "enterprise AI security",
+        "Cloud Audit Logs",
+        "AI Action Control",
+        "AI Compliance"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-22.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"MCP와 AI Agent가 싸운다: 당신의 설계는 안전한가?\"\ndescription: \"이 글에서는 MCP 서버와 AI 에이전트의 역할을 명확히 구분하여, 오해를 방지하기 위해 각각의 책임과 한계에 대한 체계적인 설명을 제공합니다.\"\ndate: \"2025-05-21\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-22.webp\"\nkeywords: [\"AI Agent\",\"MCP\", \"MCP Server\",\"MCP\",\"Model Context Protocol\",\"Enterprise AI Security\",\"MCP PAM\",\"Build Safe AI Foundation\",\"enterprise AI security\",\"Cloud Audit Logs\",\"AI Action Control\",\"AI Compliance\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam\"\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam",
+        "/features/documentation/white-paper/20/beyond-mcp-to-mcps",
+        "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops"
+      ],
+      "sourcePath": "documentation/white-paper/22/your-architect-vs-ai-agents/ko/content.mdx",
+      "title": "MCP와 AI Agent가 싸운다: 당신의 설계는 안전한가?",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "MCP와 AI Agent가 싸운다: 당신의 설계는 안전한가?",
+        "description": "이 글에서는 MCP 서버와 AI 에이전트의 역할을 명확히 구분하여, 오해를 방지하기 위해 각각의 책임과 한계에 대한 체계적인 설명을 제공합니다.",
+        "date": "2025-05-21",
+        "author": "kenny",
+        "ogImage": "public/white-paper/wp-thumb-22.webp",
+        "keywords": [
+          "AI Agent",
+          "MCP",
+          "MCP Server",
+          "MCP",
+          "Model Context Protocol",
+          "Enterprise AI Security",
+          "MCP PAM",
+          "Build Safe AI Foundation",
+          "enterprise AI security",
+          "Cloud Audit Logs",
+          "AI Action Control",
+          "AI Compliance"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam",
+          "/features/documentation/white-paper/20/beyond-mcp-to-mcps",
+          "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-22.webp",
+          "webPath": "/white-paper/wp-thumb-22.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-1-rakesh-gohel-ai-agents.webp",
+          "webPath": "/white-paper/wp22-1-rakesh-gohel-ai-agents.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-3-ai-agent-flow.webp",
+          "webPath": "/white-paper/wp22-3-ai-agent-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-4-summary-of-role-separation.webp",
+          "webPath": "/white-paper/wp22-4-summary-of-role-separation.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-5-functional-separation-between-ai-agent-and-mcp-server.webp",
+          "webPath": "/white-paper/wp22-5-functional-separation-between-ai-agent-and-mcp-server.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-6-structural-differences-in-interface-design.webp",
+          "webPath": "/white-paper/wp22-6-structural-differences-in-interface-design.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-7-interactions-within-the-overall-system.webp",
+          "webPath": "/white-paper/wp22-7-interactions-within-the-overall-system.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-8-structured-api-calls-to-the-mcp-server.webp",
+          "webPath": "/white-paper/wp22-8-structured-api-calls-to-the-mcp-server.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-9-clearly-separated-roles-for-each-component.webp",
+          "webPath": "/white-paper/wp22-9-clearly-separated-roles-for-each-component.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp22-10-structural-gap-between-what-people-think-and-what-they-are.webp",
+          "webPath": "/white-paper/wp22-10-structural-gap-between-what-people-think-and-what-they-are.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/your-architect-vs-ai-agents--22/ja.mdx",
+      "contentKind": "article",
+      "description": "この文章では、誤解を防ぐためにMCPサーバーとAIエージェントの役割を明確に区別し、それぞれの責任と限界について体系的に説明します。",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "AIエージェント",
+        "MCP",
+        "MCPサーバー",
+        "MCP",
+        "モデルコンテキストプロトコル",
+        "エンタープライズAIセキュリティ",
+        "MCP PAM",
+        "安全なAI基盤の構築",
+        "エンタープライズAIセキュリティ",
+        "クラウド監査ログ",
+        "AIアクションコントロール",
+        "AIコンプライアンス"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-22.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"MCPとAIエージェントが対決：あなたの設計は安全か？\"\ndescription: \"この文章では、誤解を防ぐためにMCPサーバーとAIエージェントの役割を明確に区別し、それぞれの責任と限界について体系的に説明します。\"\ndate: \"2025-05-21\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-22.webp\"\nkeywords: [\"AIエージェント\", \"MCP\", \"MCPサーバー\", \"MCP\", \"モデルコンテキストプロトコル\", \"エンタープライズAIセキュリティ\", \"MCP PAM\", \"安全なAI基盤の構築\", \"エンタープライズAIセキュリティ\", \"クラウド監査ログ\", \"AIアクションコントロール\", \"AIコンプライアンス\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam\"\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam",
+        "/features/documentation/white-paper/20/beyond-mcp-to-mcps",
+        "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops"
+      ],
+      "sourcePath": "documentation/white-paper/22/your-architect-vs-ai-agents/ja/content.mdx",
+      "title": "MCPとAIエージェントが対決：あなたの設計は安全か？",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "MCPとAIエージェントが対決：あなたの設計は安全か？",
+        "description": "この文章では、誤解を防ぐためにMCPサーバーとAIエージェントの役割を明確に区別し、それぞれの責任と限界について体系的に説明します。",
+        "date": "2025-05-21",
+        "author": "kenny",
+        "ogImage": "public/white-paper/wp-thumb-22.webp",
+        "keywords": [
+          "AIエージェント",
+          "MCP",
+          "MCPサーバー",
+          "MCP",
+          "モデルコンテキストプロトコル",
+          "エンタープライズAIセキュリティ",
+          "MCP PAM",
+          "安全なAI基盤の構築",
+          "エンタープライズAIセキュリティ",
+          "クラウド監査ログ",
+          "AIアクションコントロール",
+          "AIコンプライアンス"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam",
+          "/features/documentation/white-paper/20/beyond-mcp-to-mcps",
+          "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops"
+        ]
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "your-architect-vs-ai-agents"
+}

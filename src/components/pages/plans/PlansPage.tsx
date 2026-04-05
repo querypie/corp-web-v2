@@ -70,6 +70,7 @@ function PlanSummaryCard({
             arrow
             className="min-w-[126px]"
             size="large"
+            style="round"
             variant="secondary"
           >
             {ctaLabel}

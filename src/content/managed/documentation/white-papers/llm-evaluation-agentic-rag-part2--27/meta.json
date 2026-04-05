@@ -1,0 +1,203 @@
+{
+  "category": "white-papers",
+  "contentKind": "article",
+  "entryId": "llm-evaluation-agentic-rag-part2--27",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "27",
+    "sourceCategory": "white-paper",
+    "sourceGroupPath": "documentation/white-paper/27/llm-evaluation-agentic-rag-part2",
+    "sourceUrl": "/features/documentation/white-paper/27/llm-evaluation-agentic-rag-part2"
+  },
+  "locales": {
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-27.webp",
+          "webPath": "/white-paper/wp-thumb-27.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table13-codegen-text-metrics.webp",
+          "webPath": "/white-paper/wp27/table13-codegen-text-metrics.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig5-text-similarity.webp",
+          "webPath": "/white-paper/wp27/fig5-text-similarity.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table14-codegen-llm-judge.webp",
+          "webPath": "/white-paper/wp27/table14-codegen-llm-judge.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig6-llm-judge-score.webp",
+          "webPath": "/white-paper/wp27/fig6-llm-judge-score.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table15-codegen-think-effect.webp",
+          "webPath": "/white-paper/wp27/table15-codegen-think-effect.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig7-thinking-mode-impact.webp",
+          "webPath": "/white-paper/wp27/fig7-thinking-mode-impact.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table16-codegen-empty-rate.webp",
+          "webPath": "/white-paper/wp27/table16-codegen-empty-rate.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig8-empty-response-rate.webp",
+          "webPath": "/white-paper/wp27/fig8-empty-response-rate.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table17-codegen-cost.webp",
+          "webPath": "/white-paper/wp27/table17-codegen-cost.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig9-codegen-cost-performance.webp",
+          "webPath": "/white-paper/wp27/fig9-codegen-cost-performance.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig10-codegen-cost-summary.webp",
+          "webPath": "/white-paper/wp27/fig10-codegen-cost-summary.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table18-codegen-recommend.webp",
+          "webPath": "/white-paper/wp27/table18-codegen-recommend.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table19-rag-recall-mrr.webp",
+          "webPath": "/white-paper/wp27/table19-rag-recall-mrr.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig11-agentic-rag-performance.webp",
+          "webPath": "/white-paper/wp27/fig11-agentic-rag-performance.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table20-rag-tool-calls.webp",
+          "webPath": "/white-paper/wp27/table20-rag-tool-calls.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig12a-rag-eval-summary1.webp",
+          "webPath": "/white-paper/wp27/fig12a-rag-eval-summary1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig12b-rag-eval-summary2.webp",
+          "webPath": "/white-paper/wp27/fig12b-rag-eval-summary2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table21-rag-think-effect.webp",
+          "webPath": "/white-paper/wp27/table21-rag-think-effect.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table22-think-comparison.webp",
+          "webPath": "/white-paper/wp27/table22-think-comparison.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table23-rag-cost.webp",
+          "webPath": "/white-paper/wp27/table23-rag-cost.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table24-task-rank-comparison.webp",
+          "webPath": "/white-paper/wp27/table24-task-rank-comparison.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table25-rag-recommend.webp",
+          "webPath": "/white-paper/wp27/table25-rag-recommend.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table26-pipeline-analysis.webp",
+          "webPath": "/white-paper/wp27/table26-pipeline-analysis.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig13-pipeline-comparison.webp",
+          "webPath": "/white-paper/wp27/fig13-pipeline-comparison.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table27-think-summary.webp",
+          "webPath": "/white-paper/wp27/table27-think-summary.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/table28-pipeline-recommend.webp",
+          "webPath": "/white-paper/wp27/table28-pipeline-recommend.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig14-pipeline-optimization.webp",
+          "webPath": "/white-paper/wp27/fig14-pipeline-optimization.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig15-single-model-guide.webp",
+          "webPath": "/white-paper/wp27/fig15-single-model-guide.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp27/fig16-hetero-pipeline-guide.webp",
+          "webPath": "/white-paper/wp27/fig16-hetero-pipeline-guide.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/llm-evaluation-agentic-rag-part2--27/ja.mdx",
+      "contentKind": "article",
+      "description": "13のLLM構成による実験結果を徹底分析。Thinkingモードの意外な落とし穴、GPTの安定性問題、そして60%のコスト削減を実現する最適パイプライン構成を明らかにします。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-27.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【後編】\"\ndescription: \"13のLLM構成による実験結果を徹底分析。Thinkingモードの意外な落とし穴、GPTの安定性問題、そして60%のコスト削減を実現する最適パイプライン構成を明らかにします。\"\ndate: \"2026-02-13\"\nauthor: \"edwin\"\nogImage: \"public/white-paper/wp-thumb-27.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\n  \"LLM比較評価\",\n  \"コード生成\",\n  \"Agentic RAG\",\n  \"給与システム\",\n  \"Claude\",\n  \"Gemini\",\n  \"GPT\",\n  \"Thinkingモード\",\n  \"パイプライン最適化\",\n  \"QueryPie AI\",\n  \"LLM-as-a-Judge\",\n  \"ドメイン特化\",\n  \"RAG\",\n  \"コスト効率性\",\n  \"空応答率\"\n]\nrelatedPosts:\n  - \"/features/documentation/white-paper/26/llm-evaluation-agentic-rag-part1\"\n  - \"/features/documentation/white-paper/24/ai-tranformation-japan\"\n  - \"/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/26/llm-evaluation-agentic-rag-part1",
+        "/features/documentation/white-paper/24/ai-tranformation-japan",
+        "/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge"
+      ],
+      "sourcePath": "documentation/white-paper/27/llm-evaluation-agentic-rag-part2/ja/content.mdx",
+      "title": "コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【後編】",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【後編】",
+        "description": "13のLLM構成による実験結果を徹底分析。Thinkingモードの意外な落とし穴、GPTの安定性問題、そして60%のコスト削減を実現する最適パイプライン構成を明らかにします。",
+        "date": "2026-02-13",
+        "author": "edwin",
+        "ogImage": "public/white-paper/wp-thumb-27.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "keywords": "[",
+        "relatedPosts": [
+          "/features/documentation/white-paper/26/llm-evaluation-agentic-rag-part1",
+          "/features/documentation/white-paper/24/ai-tranformation-japan",
+          "/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge"
+        ]
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "llm-evaluation-agentic-rag-part2"
+}

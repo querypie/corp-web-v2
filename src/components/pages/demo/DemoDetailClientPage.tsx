@@ -6,27 +6,30 @@ import type { DocsDetailPageProps } from "../docs/DocsDetailPage";
 import { useManagedContents } from "@/features/content/clientStore";
 import useHydrated from "@/hooks/useHydrated";
 import { demoCategoryConfigs, getCategoryLabel } from "@/features/content/config";
-import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel } from "@/features/content/data";
+import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, type ManagedContentEntry } from "@/features/content/data";
 
 type DemoDetailClientPageProps = {
   fallbackProps: DocsDetailPageProps;
+  initialItems: ManagedContentEntry[];
   locale: Locale;
   slug: string;
 };
 
 export default function DemoDetailClientPage({
   fallbackProps,
+  initialItems,
   locale,
   slug,
 }: DemoDetailClientPageProps) {
-  const items = useManagedContents("demo").filter((item) => item.status === "published");
+  const resolvedSlug = decodeURIComponent(slug);
+  const items = useManagedContents("demo", initialItems).filter((item) => item.status === "published");
   const isHydrated = useHydrated();
 
-  const currentIndex = items.findIndex((item) => item.id === slug);
+  const currentIndex = items.findIndex((item) => item.id === resolvedSlug);
   const currentUseCase = currentIndex >= 0 ? items[currentIndex] : null;
 
   if (!isHydrated) {
-    return <DemoDetailPage {...fallbackProps} category="" date="" heroImageSrc="" />;
+    return <DemoDetailPage {...fallbackProps} />;
   }
 
   if (!currentUseCase) {
@@ -36,7 +39,7 @@ export default function DemoDetailClientPage({
   const categoryItems = items.filter(
     (item) => item.categorySlug === currentUseCase.categorySlug,
   );
-  const categoryIndex = categoryItems.findIndex((item) => item.id === slug);
+  const categoryIndex = categoryItems.findIndex((item) => item.id === resolvedSlug);
 
   const previousItem = categoryIndex > 0 ? categoryItems[categoryIndex - 1] : null;
   const nextItem = categoryIndex < categoryItems.length - 1 ? categoryItems[categoryIndex + 1] : null;
@@ -66,10 +69,13 @@ export default function DemoDetailClientPage({
   return (
     <DemoDetailPage
       {...fallbackProps}
+      bodyHtml={getLocalizedContent(currentUseCase.bodyHtml, locale)}
       bodyMarkdown={getLocalizedContent(currentUseCase.bodyMarkdown, locale)}
       category={getCategoryLabel(demoCategoryConfigs, currentUseCase.categorySlug, locale)}
+      contentFormat={currentUseCase.contentFormat}
       contentListItems={relatedPublishedItems}
       date={formatPublicDate(locale, currentUseCase.dateIso)}
+      hideHeroImage={currentUseCase.hideHeroImage}
       heroImageAlt={getLocalizedContent(currentUseCase.title, locale)}
       heroImageSrc={currentUseCase.imageSrc}
       title={getLocalizedContent(currentUseCase.title, locale)}

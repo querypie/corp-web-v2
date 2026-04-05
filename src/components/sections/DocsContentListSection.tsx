@@ -18,7 +18,7 @@ function DocsContentListCard({ category, href, imageSrc, title }: DocsContentLis
   return (
     /* docs 상세 하단용 콘텐츠 카드 1개 */
     <a className="group flex w-full cursor-pointer items-start gap-5" href={href}>
-      <div className="h-[80px] w-[120px] shrink-0 overflow-hidden rounded-box bg-bg-content md:h-[120px] md:w-[213px]">
+      <div className="content-thumbnail-frame w-[120px] shrink-0 overflow-hidden rounded-box bg-bg-content md:w-[213px]">
         <img
           alt={title}
           className="card-media-motion block h-full w-full object-cover"

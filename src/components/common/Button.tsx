@@ -1,13 +1,15 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "outline" | "gnb" | "text";
+type ButtonVariant = "primary" | "secondary" | "outline";
+type ButtonStyle = "round" | "full";
 type ButtonSize = "small" | "default" | "large";
 type ButtonState = "default" | "hover" | "disable";
 
-export type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> & {
+export type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "style"> & {
   arrow?: boolean;
   children?: ReactNode;
   size?: ButtonSize;
+  style?: ButtonStyle;
   state?: ButtonState;
   variant?: ButtonVariant;
 };
@@ -25,49 +27,17 @@ function cx(...values: Array<string | false | null | undefined>) {
 // variant / size / state 조합에 따라 버튼의 배경/텍스트/아이콘 크기를 계산
 function getButtonStyle(
   variant: ButtonVariant,
+  shape: ButtonStyle,
   size: ButtonSize,
   state: ButtonState,
 ): ButtonStyleConfig {
-  // 텍스트 링크형 버튼
-  if (variant === "text") {
-    return {
-      container: cx(
-        "inline-flex items-center justify-center gap-1.5 rounded-button bg-transparent p-0 transition-colors",
-        state === "disable" && "opacity-40",
-      ),
-      text: cx(
-        "type-body-md hover:text-mute-fg transition-colors",
-        state === "hover" ? "text-mute-fg" : "text-fg",
-      ),
-      iconSize: "h-4 w-4",
-    };
-  }
-
-  // GNB 전용 버튼
-  if (variant === "gnb") {
-    return {
-      container: cx(
-        "inline-flex items-center justify-center gap-1.5 rounded-button px-4 py-2 transition-colors",
-        state === "hover" ? "bg-[#343439]" : "bg-secondary",
-        "hover:bg-[#343439]",
-        state === "disable" && "opacity-40",
-      ),
-      text: cx(
-        "type-body-md transition-colors",
-        state === "hover" ? "text-fg" : "text-fg",
-        "hover:text-fg",
-      ),
-      iconSize: "h-4 w-4",
-    };
-  }
-
-  const isLarge = size === "large";
-
   return {
-    // 일반 버튼 (primary / secondary / outline)
     container: cx(
       "inline-flex items-center justify-center rounded-button transition-colors",
-      isLarge ? "gap-2 px-6 py-3" : "gap-1.5 px-5 py-2.5",
+      shape === "full" ? "rounded-full" : "rounded-button",
+      size === "small" && "gap-1.5 px-4 py-[6px]",
+      size === "default" && "gap-1.5 px-5 py-2.5",
+      size === "large" && "gap-2 px-6 py-3",
       variant === "outline" &&
         cx(
           "border border-secondary",
@@ -75,7 +45,7 @@ function getButtonStyle(
           "hover:bg-[#242426]",
         ),
       variant === "primary" &&
-        cx(state === "hover" ? "bg-[#ABABAB]" : "bg-primary", "hover:bg-[#ABABAB]"),
+        cx(state === "hover" ? "bg-[#EDEDED]" : "bg-primary", "hover:bg-[#EDEDED]"),
       variant === "secondary" &&
         cx(state === "hover" ? "bg-[#343439]" : "bg-secondary", "hover:bg-[#343439]"),
       state === "disable" && "opacity-40",
@@ -123,14 +93,15 @@ export default function Button({
   className,
   disabled,
   size = "small",
+  style = "round",
   state = "default",
   type = "button",
-  variant = "gnb",
+  variant = "secondary",
   ...props
 }: ButtonProps) {
   // disabled가 true면 외부 state와 관계없이 disable 우선 적용
   const resolvedState = disabled ? "disable" : state;
-  const styles = getButtonStyle(variant, size, resolvedState);
+  const styles = getButtonStyle(variant, style, size, resolvedState);
 
   return (
     <button

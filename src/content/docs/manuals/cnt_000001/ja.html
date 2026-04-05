@@ -1,0 +1,24 @@
+<h1>🧭 始める前に
+<strong>QueryPie ACP Community Edition</strong>は、<strong>QueryPie Enterprise</strong>で提供される主要な機能を体験できるバージョンです。
+- データベースアクセスコントローラー
+- システムアクセスコントローラー
+- Kubernetesアクセスコントローラー
+- Webアクセスコントローラー</h1><p>ただし、Communityバージョンではユーザーの登録数に制限はありませんが、同時にアクティベートできるユーザーは<strong>最大5人まで</strong>となります。</p><p>(5名以上のユーザー登録が必要な場合は、Enterpriseプランへのアップグレードをご検討ください。)</p><p>QueryPie ACPは一般的なWebアプリケーションとして動作し、プロキシベースのネットワークサーバー機能も含まれています。</p><h1>🖥️ 推奨サーバー構成</h1><p>QueryPie ACP Communityを円滑にインストールして運用するために、以下の環境を推奨します。<br />| タイプ | 仕様 |<br />| --- | --- |<br />| 基本仕様 | - Hardware : AMD64 Architecture, CPU 4 vCPUs, Memory 16 GiB, Disk 100 GiB+ - AWS EC2 : m6i.xlarge, m7i.xlarge - GCP Compute Engine : c4-standard-4, n4-standard-4 (or AMD64 architecture -standard-4 models) |<br />| 試験使用 | - Hardware: ARM64 Architecture, 4 vCPUs, Memory 16 GiB, Disk 30 GiB+ - AWS EC2 : t4g.xlarge, m7g.xlarge - OS: Linux or macOS with Docker |<br />| 多数ユーザー運用環境の推奨仕様 | - Hardware: AMD64 Architecture, 8 vCPUs, Memory 32 GiB, Disk 100 GiB+ - AWS EC2 : m6i.2xlarge, m7i.2xlarge - GCP Compute Engine : c4-standard-8, n4-standard-8 (or AMD64 architecture -standard-8 models) |<br />| OS | Linux with Docker or Podman |</p><p>ARM64アーキテクチャCPU環境またはmacOS環境は、開発者向けの試用・テスト用途として推奨します。<br />詳細な要件については、以下のドキュメントをご参照ください：</p><p>📄 Prerequisites for Installation - Single Machine (Japanese)<br /># 🐳 インストール方法<br />インストールはDockerイメージを基にしており、ワンライナーコマンドで自動的に行えます。</p><h2>1. ターミナルでコマンドを実行</h2><p>Linuxサーバーのターミナルにアクセスし、ホームディレクトリで以下のコマンドを入力してください：<br />```code<br />bash &lt;(curl https://dl.querypie.com/setup.v2.sh)<br />```</p><p>⏱️ インストールには約<strong>7～10分</strong>かかります。</p><img src="/documentation/install-guide-1.webp" alt="インストールを開始しました。" /><img src="/documentation/install-guide-2.webp" alt="インストールが完了しました。" /><h2>2. インストール中にライセンスを取得</h2><p>QueryPie ACP Community Editionのご利用にはライセンス登録が必要です。<br />インストール中に ライセンス申請フォーム から申請すると、入力したメールアドレス宛に .crt 形式のテキストファイルが送信されます。</p><h2>3. インストール後にアクセス
+インストールが完了したら、ブラウザで以下のアドレスにアクセスします：
+``<code>code
+http://&lt;サーバーIPアドレス&gt;
+または
+https://&lt;サーバーIPアドレス&gt;
+</code>``</h2><p>インストールしたLinuxサーバーのIPアドレスは、ユーザーのPCからアクセス可能なIPアドレスを使用する必要があります。</p><h2>4. ライセンスを登録
+メールで受け取った.crtファイルをアップロードするか、PEM形式のテキスト内容をコピー＆ペーストしてください。</h2><img src="/documentation/install-guide-3.webp" alt="PEM形式のライセンスを入力します。" /><h2>5. ログイン
+以下のデフォルトアカウントでログインします。
+初回ログイン時にはパスワード変更が求められますので、安全な新しいパスワードを設定してご利用ください。
+- ID: <code>qp-admin</code>
+- Password: <code>querypie</code></h2><img src="/documentation/install-guide-4.webp" alt="初回ログイン画面です。" /><h2>6. インストール完了 🎉
+インストールが完了しました。おめでとうございます！ あとは 管理者マニュアル を参考に、環境設定を進めてください。</h2><img src="/documentation/install-guide-5.webp" alt="初回ログイン画面です。" /><h1>🔑 ライセンスについて
+- QueryPie ACPを利用するには、製品インストール後に別途提供されるライセンスを登録する必要があります。
+- ライセンスは.crt拡張子のテキストファイルとして提供されます。
+- ライセンスは申請時に入力したメールアドレスに送信されます。
+- 発行されたライセンスは申請日から1年間有効です。
+- ライセンスは申請者個人に発行され、第三者に譲渡することはできません。</h1><h1>💬 お問い合わせとサポート
+QueryPie公式Discordチャンネルでも、ユーザー同士で自由にQ&amp;Aや情報交換を行うことができます。ぜひご参加ください。</h1>

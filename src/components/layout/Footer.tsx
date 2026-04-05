@@ -57,12 +57,12 @@ export default function Footer({
   const [copyright, ...officeLines] = addressLines;
 
   return (
-    <footer className={cx("relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10", className)}>
-      {/* 하단 오렌지 광원 효과 */}
-      <div className="pointer-events-none absolute bottom-0 left-0 h-[420px] w-full opacity-50 md:h-[520px]">
-        <div className="h-full w-full bg-[radial-gradient(145%_100%_at_50%_100%,rgba(255,119,89,0.60)_0%,rgba(255,119,89,0.00)_100%)] md:bg-[radial-gradient(71.78%_100%_at_50%_100%,rgba(255,119,89,0.60)_0%,rgba(255,119,89,0.00)_100%)]" />
-      </div>
-
+    <footer
+      className={cx(
+        "relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10 md:bg-[radial-gradient(93.31%_130%_at_50%_100%,rgba(255,179,133,0.50)_0%,rgba(255,143,102,0.28)_30%,rgba(255,109,71,0.14)_52%,rgba(255,109,71,0.00)_72%)]",
+        className,
+      )}
+    >
       {/* 실제 푸터 콘텐츠 래퍼 */}
       <div className="relative flex w-full max-w-[1200px] flex-col gap-[60px] border-t border-border py-[60px]">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">

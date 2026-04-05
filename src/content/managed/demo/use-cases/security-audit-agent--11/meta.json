@@ -1,0 +1,96 @@
+{
+  "category": "use-cases",
+  "contentKind": "video",
+  "entryId": "security-audit-agent--11",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "11",
+    "sourceCategory": "use-cases",
+    "sourceGroupPath": "demo/use-cases/11/security-audit-agent",
+    "sourceUrl": "/features/demo/use-cases/11/security-audit-agent"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-5-en.webp",
+          "webPath": "/demo/aip-use-case-thumb-5-en.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/security-audit-agent--11/en.mdx",
+      "contentKind": "video",
+      "description": "An AI agent that transforms security audit analysis through natural language queries, enabling teams to investigate access patterns, detect anomalies, and generate compliance reports instantly.",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-5-en.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Security Audit Agent\"\ndescription: \"An AI agent that transforms security audit analysis through natural language queries, enabling teams to investigate access patterns, detect anomalies, and generate compliance reports instantly.\"\ndate: \"2025-05-18\"\nogImage: \"public/demo/aip-use-case-thumb-5-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/9/server-access-agent\"\n  - \"/features/demo/use-cases/10/kubernetes-manager-agent\"\n  - \"/features/demo/use-cases/12/work-collaboration-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/9/server-access-agent",
+        "/features/demo/use-cases/10/kubernetes-manager-agent",
+        "/features/demo/use-cases/12/work-collaboration-agent"
+      ],
+      "sourcePath": "demo/use-cases/11/security-audit-agent/en/content.mdx",
+      "title": "AIP Use Case: Security Audit Agent",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP Use Case: Security Audit Agent",
+        "description": "An AI agent that transforms security audit analysis through natural language queries, enabling teams to investigate access patterns, detect anomalies, and generate compliance reports instantly.",
+        "date": "2025-05-18",
+        "ogImage": "public/demo/aip-use-case-thumb-5-en.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/9/server-access-agent",
+          "/features/demo/use-cases/10/kubernetes-manager-agent",
+          "/features/demo/use-cases/12/work-collaboration-agent"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-5-ja.webp",
+          "webPath": "/demo/aip-use-case-thumb-5-ja.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/security-audit-agent--11/ja.mdx",
+      "contentKind": "video",
+      "description": "自然言語クエリを通じてセキュリティ監査分析を変革するAIエージェント。チームがアクセスパターンの調査、異常検知、コンプライアンスレポートの生成を即座に実行できるようにします。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-5-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例：セキュリティ監査エージェント\"\ndescription: \"自然言語クエリを通じてセキュリティ監査分析を変革するAIエージェント。チームがアクセスパターンの調査、異常検知、コンプライアンスレポートの生成を即座に実行できるようにします。\"\ndate: \"2025-05-18\"\nogImage: \"public/demo/aip-use-case-thumb-5-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/9/server-access-agent\"\n  - \"/features/demo/use-cases/10/kubernetes-manager-agent\"\n  - \"/features/demo/use-cases/12/work-collaboration-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/9/server-access-agent",
+        "/features/demo/use-cases/10/kubernetes-manager-agent",
+        "/features/demo/use-cases/12/work-collaboration-agent"
+      ],
+      "sourcePath": "demo/use-cases/11/security-audit-agent/ja/content.mdx",
+      "title": "AIP活用事例：セキュリティ監査エージェント",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP活用事例：セキュリティ監査エージェント",
+        "description": "自然言語クエリを通じてセキュリティ監査分析を変革するAIエージェント。チームがアクセスパターンの調査、異常検知、コンプライアンスレポートの生成を即座に実行できるようにします。",
+        "date": "2025-05-18",
+        "ogImage": "public/demo/aip-use-case-thumb-5-ja.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/9/server-access-agent",
+          "/features/demo/use-cases/10/kubernetes-manager-agent",
+          "/features/demo/use-cases/12/work-collaboration-agent"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "security-audit-agent"
+}

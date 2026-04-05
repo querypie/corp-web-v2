@@ -1,0 +1,288 @@
+{
+  "category": "blogs",
+  "contentKind": "article",
+  "entryId": "querypie-team-success-secrets--3",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "3",
+    "sourceCategory": "blog",
+    "sourceGroupPath": "documentation/blog/3/querypie-team-success-secrets",
+    "sourceUrl": "/features/documentation/blog/3/querypie-team-success-secrets"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/blog/b-thumb-3.webp",
+          "webPath": "/blog/b-thumb-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-1.webp",
+          "webPath": "/blog/blog3-image-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-2.webp",
+          "webPath": "/blog/blog3-image-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-3.webp",
+          "webPath": "/blog/blog3-image-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-4.webp",
+          "webPath": "/blog/blog3-image-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-5.webp",
+          "webPath": "/blog/blog3-image-5.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-6.webp",
+          "webPath": "/blog/blog3-image-6.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-7.webp",
+          "webPath": "/blog/blog3-image-7.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/blogs/querypie-team-success-secrets--3/en.mdx",
+      "contentKind": "article",
+      "description": "Explore QueryPie's secrets to building successful teams through collaboration and shared values.",
+      "hideOgImage": true,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "team success strategies",
+        "effective collaboration",
+        "shared goals",
+        "high-performance teams"
+      ],
+      "layout": "Article",
+      "ogImage": "/blog/b-thumb-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Secrets of Successful Teams? Work Like QueryPie!\"\ndescription: \"Explore QueryPie's secrets to building successful teams through collaboration and shared values.\"\ndate: \"2024-11-22\"\nauthor: \"candice\"\nogImage: \"public/blog/b-thumb-3.webp\"\nhideOgImage: true\nkeywords: [\"QueryPie\", \"team success strategies\", \"effective collaboration\", \"shared goals\", \"high-performance teams\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/2/querypie-cracking-global-markets\"",
+      "relatedPosts": [
+        "/features/documentation/blog/8/querypie-product-managers",
+        "/features/documentation/blog/10/customer-centric-tpm-life",
+        "/features/documentation/blog/2/querypie-cracking-global-markets"
+      ],
+      "sourcePath": "documentation/blog/3/querypie-team-success-secrets/en/content.mdx",
+      "title": "Secrets of Successful Teams? Work Like QueryPie!",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "blog",
+        "title": "Secrets of Successful Teams? Work Like QueryPie!",
+        "description": "Explore QueryPie's secrets to building successful teams through collaboration and shared values.",
+        "date": "2024-11-22",
+        "author": "candice",
+        "ogImage": "public/blog/b-thumb-3.webp",
+        "hideOgImage": true,
+        "keywords": [
+          "QueryPie",
+          "team success strategies",
+          "effective collaboration",
+          "shared goals",
+          "high-performance teams"
+        ],
+        "relatedPosts": [
+          "/features/documentation/blog/8/querypie-product-managers",
+          "/features/documentation/blog/10/customer-centric-tpm-life",
+          "/features/documentation/blog/2/querypie-cracking-global-markets"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/blog/b-thumb-3.webp",
+          "webPath": "/blog/b-thumb-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-1.webp",
+          "webPath": "/blog/blog3-image-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-2.webp",
+          "webPath": "/blog/blog3-image-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-3.webp",
+          "webPath": "/blog/blog3-image-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-4.webp",
+          "webPath": "/blog/blog3-image-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-5.webp",
+          "webPath": "/blog/blog3-image-5.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-6.webp",
+          "webPath": "/blog/blog3-image-6.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-7.webp",
+          "webPath": "/blog/blog3-image-7.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/blogs/querypie-team-success-secrets--3/ko.mdx",
+      "contentKind": "article",
+      "description": "쿼리파이는 빠르게 변화하는 환경 속에서 어떻게 서로를 지원하며, 혁신을 이끌어 나가는지 그 여정을 함께 공유하고자 합니다.",
+      "hideOgImage": true,
+      "hideTableOfContents": false,
+      "keywords": [
+        "쿼리파이",
+        "QueryPie",
+        "쿼리파이 복지",
+        "스타트업 복지",
+        "스타트업 HR",
+        "조직 관리",
+        "재택근무",
+        "자율 근무제",
+        "가족친화인증기업"
+      ],
+      "layout": "Article",
+      "ogImage": "/blog/b-thumb-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"잘 나가는 조직의 비결? QueryPie처럼 일하라!\"\ndescription: \"쿼리파이는 빠르게 변화하는 환경 속에서 어떻게 서로를 지원하며, 혁신을 이끌어 나가는지 그 여정을 함께 공유하고자 합니다.\"\ndate: \"2024-11-22\"\nauthor: \"candice\"\nogImage: \"public/blog/b-thumb-3.webp\"\nhideOgImage: true\nkeywords: [\"쿼리파이\", \"QueryPie\", \"쿼리파이 복지\", \"스타트업 복지\", \"스타트업 HR\", \"조직 관리\", \"재택근무\", \"자율 근무제\", \"가족친화인증기업\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/2/querypie-cracking-global-markets\"",
+      "relatedPosts": [
+        "/features/documentation/blog/8/querypie-product-managers",
+        "/features/documentation/blog/10/customer-centric-tpm-life",
+        "/features/documentation/blog/2/querypie-cracking-global-markets"
+      ],
+      "sourcePath": "documentation/blog/3/querypie-team-success-secrets/ko/content.mdx",
+      "title": "잘 나가는 조직의 비결? QueryPie처럼 일하라!",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "blog",
+        "title": "잘 나가는 조직의 비결? QueryPie처럼 일하라!",
+        "description": "쿼리파이는 빠르게 변화하는 환경 속에서 어떻게 서로를 지원하며, 혁신을 이끌어 나가는지 그 여정을 함께 공유하고자 합니다.",
+        "date": "2024-11-22",
+        "author": "candice",
+        "ogImage": "public/blog/b-thumb-3.webp",
+        "hideOgImage": true,
+        "keywords": [
+          "쿼리파이",
+          "QueryPie",
+          "쿼리파이 복지",
+          "스타트업 복지",
+          "스타트업 HR",
+          "조직 관리",
+          "재택근무",
+          "자율 근무제",
+          "가족친화인증기업"
+        ],
+        "relatedPosts": [
+          "/features/documentation/blog/8/querypie-product-managers",
+          "/features/documentation/blog/10/customer-centric-tpm-life",
+          "/features/documentation/blog/2/querypie-cracking-global-markets"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/blog/b-thumb-3.webp",
+          "webPath": "/blog/b-thumb-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-1.webp",
+          "webPath": "/blog/blog3-image-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-2.webp",
+          "webPath": "/blog/blog3-image-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-3.webp",
+          "webPath": "/blog/blog3-image-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-4.webp",
+          "webPath": "/blog/blog3-image-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-5.webp",
+          "webPath": "/blog/blog3-image-5.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-6.webp",
+          "webPath": "/blog/blog3-image-6.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog3-image-7.webp",
+          "webPath": "/blog/blog3-image-7.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/blogs/querypie-team-success-secrets--3/ja.mdx",
+      "contentKind": "article",
+      "description": "QueryPie のコラボレーションと価値観の共有を通じて、成功するチームを作る秘訣を紹介します。",
+      "hideOgImage": true,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "チームの成功戦略",
+        "効果的なコラボレーション",
+        "共有された目標",
+        "ハイパフォーマンスチーム"
+      ],
+      "layout": "Article",
+      "ogImage": "/blog/b-thumb-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"成功している組織の秘訣？QueryPieのように働こう！\"\ndescription: \"QueryPie のコラボレーションと価値観の共有を通じて、成功するチームを作る秘訣を紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"candice\"\nogImage: \"public/blog/b-thumb-3.webp\"\nhideOgImage: true\nkeywords: [\"QueryPie\", \"チームの成功戦略\", \"効果的なコラボレーション\", \"共有された目標\", \"ハイパフォーマンスチーム\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/2/querypie-cracking-global-markets\"",
+      "relatedPosts": [
+        "/features/documentation/blog/8/querypie-product-managers",
+        "/features/documentation/blog/10/customer-centric-tpm-life",
+        "/features/documentation/blog/2/querypie-cracking-global-markets"
+      ],
+      "sourcePath": "documentation/blog/3/querypie-team-success-secrets/ja/content.mdx",
+      "title": "成功している組織の秘訣？QueryPieのように働こう！",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "blog",
+        "title": "成功している組織の秘訣？QueryPieのように働こう！",
+        "description": "QueryPie のコラボレーションと価値観の共有を通じて、成功するチームを作る秘訣を紹介します。",
+        "date": "2024-11-22",
+        "author": "candice",
+        "ogImage": "public/blog/b-thumb-3.webp",
+        "hideOgImage": true,
+        "keywords": [
+          "QueryPie",
+          "チームの成功戦略",
+          "効果的なコラボレーション",
+          "共有された目標",
+          "ハイパフォーマンスチーム"
+        ],
+        "relatedPosts": [
+          "/features/documentation/blog/8/querypie-product-managers",
+          "/features/documentation/blog/10/customer-centric-tpm-life",
+          "/features/documentation/blog/2/querypie-cracking-global-markets"
+        ]
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "querypie-team-success-secrets"
+}

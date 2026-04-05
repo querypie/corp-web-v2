@@ -1,0 +1,130 @@
+{
+  "category": "acp-features",
+  "contentKind": "video",
+  "entryId": "integrating-querypie-with-redash--1",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "1",
+    "sourceCategory": "acp-features",
+    "sourceGroupPath": "demo/acp-features/1/integrating-querypie-with-redash",
+    "sourceUrl": "/features/demo/acp-features/1/integrating-querypie-with-redash"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/de-thumb-redash.webp",
+          "webPath": "/demo/de-thumb-redash.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-redash--1/en.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/de-thumb-redash.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x Redash\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-redash.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/2/integrating-querypie-with-metabase",
+        "/features/demo/acp-features/3/integrating-querypie-with-tableau"
+      ],
+      "sourcePath": "demo/acp-features/1/integrating-querypie-with-redash/en/content.mdx",
+      "title": "QueryPie x Redash",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "QueryPie x Redash",
+        "description": "",
+        "date": "2025-02-01",
+        "ogImage": "public/demo/de-thumb-redash.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/2/integrating-querypie-with-metabase",
+          "/features/demo/acp-features/3/integrating-querypie-with-tableau"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/de-thumb-redash.webp",
+          "webPath": "/demo/de-thumb-redash.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-redash--1/ko.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/de-thumb-redash.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x Redash\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-redash.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/2/integrating-querypie-with-metabase",
+        "/features/demo/acp-features/3/integrating-querypie-with-tableau"
+      ],
+      "sourcePath": "demo/acp-features/1/integrating-querypie-with-redash/ko/content.mdx",
+      "title": "QueryPie x Redash",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "QueryPie x Redash",
+        "description": "",
+        "date": "2025-02-01",
+        "ogImage": "public/demo/de-thumb-redash.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/2/integrating-querypie-with-metabase",
+          "/features/demo/acp-features/3/integrating-querypie-with-tableau"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/de-thumb-redash.webp",
+          "webPath": "/demo/de-thumb-redash.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-redash--1/ja.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/de-thumb-redash.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x Redash\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-redash.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/2/integrating-querypie-with-metabase",
+        "/features/demo/acp-features/3/integrating-querypie-with-tableau"
+      ],
+      "sourcePath": "demo/acp-features/1/integrating-querypie-with-redash/ja/content.mdx",
+      "title": "QueryPie x Redash",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "QueryPie x Redash",
+        "description": "",
+        "date": "2025-02-01",
+        "ogImage": "public/demo/de-thumb-redash.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/2/integrating-querypie-with-metabase",
+          "/features/demo/acp-features/3/integrating-querypie-with-tableau"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "integrating-querypie-with-redash"
+}

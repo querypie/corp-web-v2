@@ -1,178 +1,125 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
-  createLocalizedContent,
   getSeedManagedContents,
-  initialManagedContents,
-  LEGACY_USE_CASE_STORAGE_KEY,
-  MANAGED_CONTENT_STORAGE_KEY,
-  MANAGED_CONTENT_STORE_EVENT,
-  sortManagedContents,
-  type LocalizedContent,
   type ManagedContentEntry,
   type ManagedContentSection,
   type ManagedContentStatus,
 } from "./data";
 
-function canUseStorage() {
-  return typeof window !== "undefined";
-}
-
-function normalizeLocalizedContent(value: Partial<LocalizedContent> | string | undefined) {
-  if (typeof value === "string") {
-    return createLocalizedContent(value);
-  }
-
-  return {
-    en: value?.en ?? "",
-    ko: value?.ko ?? value?.en ?? "",
-    ja: value?.ja ?? value?.en ?? "",
-  };
-}
-
-function normalizeEntry(item: Partial<ManagedContentEntry>): ManagedContentEntry {
-  return {
-    authorName: item.authorName ?? "",
-    authorRole: item.authorRole ?? "",
-    bodyMarkdown: normalizeLocalizedContent(item.bodyMarkdown),
-    categorySlug: item.categorySlug ?? "use-cases",
-    dateIso: item.dateIso ?? "",
-    externalUrl: item.externalUrl ?? "",
-    id: item.id ?? "",
-    imageSrc: item.imageSrc ?? "",
-    section: item.section ?? "demo",
-    sortOrder: item.sortOrder ?? Number.MAX_SAFE_INTEGER,
-    status: item.status ?? "draft",
-    summary: normalizeLocalizedContent(item.summary),
-    title: normalizeLocalizedContent(item.title),
-  };
-}
-
-function readLegacyUseCases() {
-  if (!canUseStorage()) return [];
-
-  const raw = window.localStorage.getItem(LEGACY_USE_CASE_STORAGE_KEY);
-
-  if (!raw) return [];
-
-  try {
-    const parsed = JSON.parse(raw) as Array<{
-      authorName?: string;
-      authorRole?: string;
-      bodyMarkdown?: string;
-      dateIso?: string;
-      id?: string;
-      imageSrc?: string;
-      status?: ManagedContentStatus;
-      title?: string;
-    }>;
-    if (!Array.isArray(parsed)) return [];
-
-    return parsed.map((item) =>
-      normalizeEntry({
-        authorName: item.authorName,
-        authorRole: item.authorRole,
-        bodyMarkdown: createLocalizedContent(item.bodyMarkdown),
-        categorySlug: "use-cases",
-        dateIso: item.dateIso,
-        externalUrl: "",
-        id: item.id,
-        imageSrc: item.imageSrc,
-        section: "demo",
-        status: item.status,
-        summary: createLocalizedContent(),
-        title: createLocalizedContent(item.title),
-      }),
-    );
-  } catch {
-    return [];
-  }
-}
-
-function mergeEntries(baseItems: ManagedContentEntry[], nextItems: ManagedContentEntry[]) {
-  const map = new Map(baseItems.map((item) => [item.id, item]));
-  nextItems.forEach((item) => {
-    map.set(item.id, item);
-  });
-  return sortManagedContents([...map.values()]);
-}
-
-function readStoredItems() {
-  if (!canUseStorage()) {
-    return sortManagedContents(initialManagedContents);
-  }
-
-  const raw = window.localStorage.getItem(MANAGED_CONTENT_STORAGE_KEY);
-  const legacyItems = readLegacyUseCases();
-
-  if (!raw) {
-    return mergeEntries(initialManagedContents, legacyItems);
-  }
-
-  try {
-    const parsed = JSON.parse(raw) as Array<Partial<ManagedContentEntry>>;
-
-    if (!Array.isArray(parsed)) {
-      return mergeEntries(initialManagedContents, legacyItems);
-    }
-
-    return mergeEntries(
-      initialManagedContents,
-      mergeEntries(legacyItems, parsed.map(normalizeEntry)),
-    );
-  } catch {
-    return mergeEntries(initialManagedContents, legacyItems);
-  }
-}
+export const MANAGED_CONTENT_STORE_EVENT = "querypie:managed-content:changed";
 
 function emitChange() {
-  if (!canUseStorage()) return;
+  if (typeof window === "undefined") return;
   window.dispatchEvent(new Event(MANAGED_CONTENT_STORE_EVENT));
 }
 
-export function getManagedContentsSnapshot(section?: ManagedContentSection) {
-  const items = readStoredItems();
-  return section ? items.filter((item) => item.section === section) : items;
+async function readState(section?: ManagedContentSection) {
+  const search = section ? `?section=${section}` : "";
+  const response = await fetch(`/api/admin/content/state${search}`, {
+    cache: "no-store",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to read content state.");
+  }
+
+  const payload = (await response.json()) as { items?: ManagedContentEntry[] };
+  return payload.items ?? [];
 }
 
-export function persistManagedContents(items: ManagedContentEntry[]) {
-  if (!canUseStorage()) return;
-  window.localStorage.setItem(
-    MANAGED_CONTENT_STORAGE_KEY,
-    JSON.stringify(sortManagedContents(items)),
-  );
+export async function getManagedContentsSnapshot(section?: ManagedContentSection) {
+  return readState(section);
+}
+
+export async function persistManagedContents(items: ManagedContentEntry[]) {
+  const response = await fetch("/api/admin/content/state", {
+    body: JSON.stringify({ items }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to persist content state.");
+  }
+
   emitChange();
 }
 
-export function upsertManagedContent(item: ManagedContentEntry, currentId?: string) {
-  const items = readStoredItems();
-  const nextItems = items.filter((entry) => entry.id !== currentId && entry.id !== item.id);
-  persistManagedContents([item, ...nextItems]);
+export async function upsertManagedContent(item: ManagedContentEntry, currentId?: string) {
+  const response = await fetch("/api/admin/content/state", {
+    body: JSON.stringify({ currentId, item }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "PUT",
+  });
+
+  const payload = (await response.json()) as { error?: string; item?: ManagedContentEntry };
+
+  if (!response.ok || !payload.item) {
+    throw new Error(payload.error ?? "Failed to save content.");
+  }
+
+  emitChange();
+  return payload.item;
 }
 
-export function deleteManagedContent(id: string) {
-  const items = readStoredItems();
-  persistManagedContents(items.filter((item) => item.id !== id));
+export async function deleteManagedContent(id: string, item?: ManagedContentEntry) {
+  const response = await fetch("/api/admin/content/state", {
+    body: JSON.stringify({ id, item }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "DELETE",
+  });
+
+  const payload = (await response.json()) as { error?: string };
+
+  if (!response.ok) {
+    throw new Error(payload.error ?? "Failed to delete content.");
+  }
+
+  emitChange();
 }
 
-export function updateManagedContentStatus(id: string, status: ManagedContentStatus) {
-  const items = readStoredItems();
-  persistManagedContents(items.map((item) => (item.id === id ? { ...item, status } : item)));
+export async function updateManagedContentStatus(
+  id: string,
+  status: ManagedContentStatus,
+  item?: ManagedContentEntry,
+) {
+  const response = await fetch("/api/admin/content/state", {
+    body: JSON.stringify({ id, item, status }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "PATCH",
+  });
+
+  const payload = (await response.json()) as { error?: string };
+
+  if (!response.ok) {
+    throw new Error(payload.error ?? "Failed to update content status.");
+  }
+
+  emitChange();
 }
 
-export function reorderManagedContents(orderedItems: ManagedContentEntry[]) {
-  const normalizedItems = orderedItems.map((item, index) => ({
-    ...item,
-    sortOrder: index + 1,
-  }));
-
-  const currentItems = readStoredItems();
-  const firstItem = normalizedItems[0];
+export async function reorderManagedContents(orderedItems: ManagedContentEntry[]) {
+  const currentItems = await readState();
+  const firstItem = orderedItems[0];
 
   if (!firstItem) {
     return;
   }
+
+  const normalizedItems = orderedItems.map((item, index) => ({
+    ...item,
+    sortOrder: index + 1,
+  }));
 
   const otherItems = currentItems.filter(
     (item) =>
@@ -182,26 +129,39 @@ export function reorderManagedContents(orderedItems: ManagedContentEntry[]) {
       ),
   );
 
-  persistManagedContents([...normalizedItems, ...otherItems]);
+  await persistManagedContents([...normalizedItems, ...otherItems]);
 }
 
-export function useManagedContents(section?: ManagedContentSection) {
+export function useManagedContents(
+  section?: ManagedContentSection,
+  initialItems?: ManagedContentEntry[],
+) {
+  const initialItemsRef = useRef(initialItems);
   const [items, setItems] = useState<ManagedContentEntry[]>(() =>
-    section ? getSeedManagedContents(section) : getSeedManagedContents(),
+    initialItemsRef.current ?? (section ? getSeedManagedContents(section) : getSeedManagedContents()),
   );
 
   useEffect(() => {
+    let active = true;
+
     const sync = () => {
-      setItems(section ? getManagedContentsSnapshot(section) : getManagedContentsSnapshot());
+      void getManagedContentsSnapshot(section)
+        .then((nextItems) => {
+          if (!active) return;
+          setItems(nextItems);
+        })
+        .catch(() => {
+          if (!active) return;
+          setItems(initialItemsRef.current ?? (section ? getSeedManagedContents(section) : getSeedManagedContents()));
+        });
     };
 
     sync();
     window.addEventListener(MANAGED_CONTENT_STORE_EVENT, sync);
-    window.addEventListener("storage", sync);
 
     return () => {
+      active = false;
       window.removeEventListener(MANAGED_CONTENT_STORE_EVENT, sync);
-      window.removeEventListener("storage", sync);
     };
   }, [section]);
 

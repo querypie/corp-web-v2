@@ -1,0 +1,136 @@
+{
+  "category": "acp-features",
+  "contentKind": "video",
+  "entryId": "apply-data-access-policies--21",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "21",
+    "sourceCategory": "acp-features",
+    "sourceGroupPath": "demo/acp-features/21/apply-data-access-policies",
+    "sourceUrl": "/features/demo/acp-features/21/apply-data-access-policies"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-4.webp",
+          "webPath": "/tutorial/tu-thumb-dac-4.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/apply-data-access-policies--21/en.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-4.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Apply Data Access Policies\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-4.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/22/use-web-editor",
+        "/features/demo/acp-features/20/apply-data-masking-policies",
+        "/features/demo/acp-features/19/submit-db-access-workflow"
+      ],
+      "sourcePath": "demo/acp-features/21/apply-data-access-policies/en/content.mdx",
+      "title": "How to Apply Data Access Policies",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "How to Apply Data Access Policies",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-4.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/22/use-web-editor",
+          "/features/demo/acp-features/20/apply-data-masking-policies",
+          "/features/demo/acp-features/19/submit-db-access-workflow"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-4.webp",
+          "webPath": "/tutorial/tu-thumb-dac-4.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/apply-data-access-policies--21/ko.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-4.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"데이터 접근 제한 정책 설정하기\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-4.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/22/use-web-editor",
+        "/features/demo/acp-features/20/apply-data-masking-policies",
+        "/features/demo/acp-features/19/submit-db-access-workflow"
+      ],
+      "sourcePath": "demo/acp-features/21/apply-data-access-policies/ko/content.mdx",
+      "title": "데이터 접근 제한 정책 설정하기",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "데이터 접근 제한 정책 설정하기",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-4.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/22/use-web-editor",
+          "/features/demo/acp-features/20/apply-data-masking-policies",
+          "/features/demo/acp-features/19/submit-db-access-workflow"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-4.webp",
+          "webPath": "/tutorial/tu-thumb-dac-4.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/apply-data-access-policies--21/ja.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-4.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"データアクセスポリシーを適用する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-4.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/22/use-web-editor",
+        "/features/demo/acp-features/20/apply-data-masking-policies",
+        "/features/demo/acp-features/19/submit-db-access-workflow"
+      ],
+      "sourcePath": "demo/acp-features/21/apply-data-access-policies/ja/content.mdx",
+      "title": "データアクセスポリシーを適用する方法",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "データアクセスポリシーを適用する方法",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-4.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/22/use-web-editor",
+          "/features/demo/acp-features/20/apply-data-masking-policies",
+          "/features/demo/acp-features/19/submit-db-access-workflow"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "apply-data-access-policies"
+}

@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Button from "../common/Button";
 import {
   getCompanySubItems,
@@ -23,7 +23,7 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-const mobileMenuBackdropClassName = "bg-[rgba(8,9,10,0.9)]";
+const mobileMenuBackdropClassName = "bg-bg";
 
 function getLocaleHref(pathname: string, locale: string, search: string) {
   /* 현재 경로의 첫 세그먼트(locale)만 바꿔 같은 페이지에서 언어 전환 */
@@ -45,15 +45,53 @@ export default function Gnb({
   locale = "en",
   localeIcon,
 }: GnbProps) {
+  const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [featuresOpen, setFeaturesOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
+  const [plansOpen, setPlansOpen] = useState(false);
   const [desktopLocaleOpen, setDesktopLocaleOpen] = useState(false);
   const [mobileLocaleOpen, setMobileLocaleOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [currentSearch, setCurrentSearch] = useState("");
   const pathname = usePathname();
   const mobileLocaleRef = useRef<HTMLDivElement | null>(null);
+  const isHomePage = pathname === `/${locale}`;
+  const isHomeTop = isHomePage && !mobileMenuOpen && !isScrolled;
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobileMenuOpen]);
+
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      setMobileMenuVisible(true);
+      return;
+    }
+
+    if (!mobileMenuVisible) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      setMobileMenuVisible(false);
+    }, 300);
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [mobileMenuOpen, mobileMenuVisible]);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setDesktopLocaleOpen(false);
+    setMobileLocaleOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -64,17 +102,17 @@ export default function Gnb({
   }, [pathname]);
 
   useEffect(() => {
-    document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
     };
-  }, [mobileMenuOpen]);
 
-  useEffect(() => {
-    setMobileMenuOpen(false);
-    setDesktopLocaleOpen(false);
-    setMobileLocaleOpen(false);
-  }, [pathname]);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     if (!mobileLocaleOpen) {
@@ -121,16 +159,27 @@ export default function Gnb({
     <>
       <header
         className={cx(
-          "fixed inset-x-0 top-0 z-50 flex w-full items-center justify-center px-5 backdrop-blur-[12px] md:px-10",
-          mobileMenuOpen ? mobileMenuBackdropClassName : "bg-[rgba(8,9,10,0.5)]",
+          "fixed inset-x-0 top-0 z-50 flex w-full items-center justify-center pl-5 pr-4 transition-[background-color,backdrop-filter] duration-300 md:px-10",
+          mobileMenuOpen
+            ? mobileMenuBackdropClassName
+            : isHomeTop
+              ? "bg-transparent"
+              : "bg-bg",
           className,
         )}
       >
-        <div className="flex h-[60px] w-full max-w-[1200px] items-center justify-between gap-6 text-fg">
-          <a aria-label="QueryPie AI" className="inline-flex h-5 w-[116px] shrink-0 items-center text-fg" href={`/${locale}`}>
+        <div className={cx("flex h-[56px] w-full max-w-[1200px] items-center justify-between gap-6 transition-colors duration-300 md:h-[60px]", isHomeTop ? "text-bg" : "text-fg")}>
+          <a
+            aria-label="QueryPie AI"
+            className={cx("inline-flex h-[18px] shrink-0 items-center transition-colors duration-300 md:h-5 md:w-[116px]", isHomeTop ? "text-bg" : "text-fg")}
+            href={`/${locale}`}
+            onClick={() => {
+              setMobileMenuOpen(false);
+            }}
+          >
             <img
               alt="QueryPie AI"
-              className="block h-5 w-[116px]"
+              className={cx("block h-[18px] w-auto transition-[filter,opacity] duration-300 md:h-5 md:w-[116px]", isHomeTop && "brightness-0")}
               src="/icons/querypie-ai-logo.svg"
             />
           </a>
@@ -151,7 +200,13 @@ export default function Gnb({
                       <button
                         className={cx(
                           "type-body-md transition-colors",
-                          solutionsOpen ? "text-fg" : "text-mute-fg hover:text-fg",
+                          isHomeTop
+                            ? solutionsOpen
+                              ? "text-bg"
+                              : "text-bg/70 hover:text-bg"
+                            : solutionsOpen
+                              ? "text-mute-fg"
+                              : "text-fg hover:text-mute-fg",
                         )}
                         type="button"
                       >
@@ -164,7 +219,7 @@ export default function Gnb({
                           solutionsOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                         )}
                       >
-                        <div className="overflow-hidden rounded-[8px] border border-border bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
+                        <div className="overflow-hidden rounded-[8px] border border-border bg-bg px-[14px] pb-[10px] pt-2">
                           {getSolutionsSubItems(locale).map((sub) => (
                             <a
                               key={sub.label}
@@ -191,7 +246,13 @@ export default function Gnb({
                       <button
                         className={cx(
                           "type-body-md transition-colors",
-                          featuresOpen ? "text-fg" : "text-mute-fg hover:text-fg",
+                          isHomeTop
+                            ? featuresOpen
+                              ? "text-bg"
+                              : "text-bg/70 hover:text-bg"
+                            : featuresOpen
+                              ? "text-mute-fg"
+                              : "text-fg hover:text-mute-fg",
                         )}
                         type="button"
                       >
@@ -204,7 +265,7 @@ export default function Gnb({
                           featuresOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                         )}
                       >
-                        <div className="overflow-hidden rounded-[8px] border border-border bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
+                        <div className="overflow-hidden rounded-[8px] border border-border bg-bg px-[14px] pb-[10px] pt-2">
                           {getFeaturesSubItems(locale).map((sub) => (
                             <a
                               key={sub.label}
@@ -231,7 +292,13 @@ export default function Gnb({
                       <button
                         className={cx(
                           "type-body-md transition-colors",
-                          companyOpen ? "text-fg" : "text-mute-fg hover:text-fg",
+                          isHomeTop
+                            ? companyOpen
+                              ? "text-bg"
+                              : "text-bg/70 hover:text-bg"
+                            : companyOpen
+                              ? "text-mute-fg"
+                              : "text-fg hover:text-mute-fg",
                         )}
                         type="button"
                       >
@@ -244,7 +311,7 @@ export default function Gnb({
                           companyOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                         )}
                       >
-                        <div className="overflow-hidden rounded-[8px] border border-border bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
+                        <div className="overflow-hidden rounded-[8px] border border-border bg-bg px-[14px] pb-[10px] pt-2">
                           {getCompanySubItems(locale).map((sub) => (
                             <a
                               key={sub.label}
@@ -261,13 +328,31 @@ export default function Gnb({
                 }
 
                 return (
-                  <a
+                  <div
                     key={item}
-                    className="type-body-md text-mute-fg transition-colors hover:text-fg"
-                    href={getPrimaryNavHref(item, locale)}
+                    className="relative"
+                    onMouseEnter={() => setPlansOpen(true)}
+                    onMouseLeave={() => setPlansOpen(false)}
                   >
-                    {item}
-                  </a>
+                    <button
+                      className={cx(
+                        "type-body-md transition-colors",
+                        isHomeTop
+                          ? plansOpen
+                            ? "text-bg"
+                            : "text-bg/70 hover:text-bg"
+                          : plansOpen
+                            ? "text-mute-fg"
+                            : "text-fg hover:text-mute-fg",
+                      )}
+                      onClick={() => {
+                        router.push(getPrimaryNavHref(item, locale));
+                      }}
+                      type="button"
+                    >
+                      {item}
+                    </button>
+                  </div>
                 );
               })}
             </nav>
@@ -278,14 +363,17 @@ export default function Gnb({
             >
               <button
                 aria-label="Change language"
-                className="opacity-60 transition-opacity hover:opacity-100"
+                className="group transition-colors duration-300"
                 type="button"
               >
                 {localeIcon ?? (
                   <img
                     alt=""
                     aria-hidden="true"
-                    className="h-6 w-6"
+                    className={cx(
+                      "h-6 w-6 object-contain transition-[filter,opacity] duration-300",
+                      isHomeTop ? "brightness-0" : "group-hover:opacity-50",
+                    )}
                     src="/icons/global.svg"
                   />
                 )}
@@ -297,7 +385,7 @@ export default function Gnb({
                   desktopLocaleOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                 )}
               >
-                <div className="overflow-hidden rounded-[8px] border border-border bg-[rgba(18,19,20,0.9)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
+                <div className="overflow-hidden rounded-[8px] border border-border bg-bg px-[14px] pb-[10px] pt-2">
                   {localeSubItems.map((sub) => (
                     <a
                       key={sub.label}
@@ -314,7 +402,7 @@ export default function Gnb({
               <button
                 aria-expanded={mobileLocaleOpen}
                 aria-label="Change language"
-                className="inline-flex h-10 w-10 items-center justify-center"
+                className="group inline-flex h-10 w-10 items-center justify-center transition-colors duration-300"
                 onClick={() => setMobileLocaleOpen((current) => !current)}
                 type="button"
               >
@@ -322,7 +410,10 @@ export default function Gnb({
                   <img
                     alt=""
                     aria-hidden="true"
-                    className="h-6 w-6"
+                    className={cx(
+                      "h-6 w-6 object-contain transition-[filter,opacity] duration-300",
+                      isHomeTop ? "brightness-0" : "group-hover:opacity-50",
+                    )}
                     src="/icons/global.svg"
                   />
                 )}
@@ -334,7 +425,7 @@ export default function Gnb({
                   mobileLocaleOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                 )}
               >
-                <div className="overflow-hidden rounded-[8px] border border-border bg-[rgba(18,19,20,0.96)] px-[14px] pb-[10px] pt-2 shadow-xl backdrop-blur-[16px]">
+                <div className="overflow-hidden rounded-[8px] border border-border bg-bg px-[14px] pb-[10px] pt-2">
                   {localeSubItems.map((sub) => (
                     <a
                       key={sub.label}
@@ -351,19 +442,25 @@ export default function Gnb({
             <button
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className="inline-flex h-10 w-10 items-center justify-center md:hidden"
+              className={cx("inline-flex h-8 w-8 items-center justify-center md:hidden", isHomeTop && "text-bg")}
               onClick={() => setMobileMenuOpen((current) => !current)}
               type="button"
             >
               <img
                 alt=""
                 aria-hidden="true"
-                className="h-10 w-10 object-contain"
+                className={cx("h-8 w-8 object-contain", isHomeTop && "brightness-0")}
                 src={mobileMenuOpen ? "/icons/m-Close.svg" : "/icons/m-Menu.svg"}
               />
             </button>
             <a className="hidden md:inline-flex" href="/admin" rel="noreferrer noopener" target="_blank">
-              <Button arrow={false} variant="gnb">
+              <Button
+                arrow={false}
+                className={cx(isHomeTop && "bg-[#111827] text-white hover:bg-[#1f2937]")}
+                size="small"
+                style="full"
+                variant="secondary"
+              >
                 {actionLabel}
               </Button>
             </a>
@@ -371,14 +468,19 @@ export default function Gnb({
         </div>
       </header>
 
-      {mobileMenuOpen ? (
-        <div className={cx("fixed inset-x-0 bottom-0 top-[60px] z-40 overflow-y-auto backdrop-blur-[10px] md:hidden", mobileMenuBackdropClassName)}>
+      {mobileMenuVisible ? (
+        <div className={cx(
+          "fixed inset-x-0 bottom-0 top-[56px] z-40 overflow-y-auto md:hidden",
+          mobileMenuOpen
+            ? "animate-[mobile-menu-sheet-enter_320ms_cubic-bezier(0.22,1,0.36,1)_both]"
+            : "animate-[mobile-menu-sheet-exit_280ms_cubic-bezier(0.4,0,0.2,1)_both]",
+          mobileMenuBackdropClassName,
+        )}>
           <nav className="flex w-full flex-col gap-[30px] px-5 py-[30px]" aria-label="Mobile global">
-            {mobileSections.map((section, index) => (
+            {mobileSections.map((section) => (
               <div
                 key={section.title}
                 className="flex w-full flex-col gap-[10px]"
-                style={{ animation: `hero-copy-enter 0.45s ease-out ${index * 80}ms both` }}
               >
                 <p className="m-0 type-body-sm text-mute-fg">{section.title}</p>
                 <div className="flex w-full flex-col gap-[10px]">
@@ -400,7 +502,6 @@ export default function Gnb({
               className="type-body-lg text-fg transition-transform active:scale-[0.98]"
               href={getPrimaryNavHref(plansLabel, locale)}
               onClick={() => setMobileMenuOpen(false)}
-              style={{ animation: "hero-copy-enter 0.45s ease-out 240ms both" }}
             >
               {plansLabel}
             </a>

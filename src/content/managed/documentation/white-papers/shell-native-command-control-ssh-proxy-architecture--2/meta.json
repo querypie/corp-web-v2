@@ -1,0 +1,208 @@
+{
+  "category": "white-papers",
+  "contentKind": "video",
+  "entryId": "shell-native-command-control-ssh-proxy-architecture--2",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "2",
+    "sourceCategory": "white-paper",
+    "sourceGroupPath": "documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+    "sourceUrl": "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-2.webp",
+          "webPath": "/white-paper/wp-thumb-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp2-1-issue-to-solve.webp",
+          "webPath": "/white-paper/wp2-1-issue-to-solve.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/shell-native-command-control-ssh-proxy-architecture--2/en.mdx",
+      "contentKind": "video",
+      "description": "Enhance system security with QueryPie's native command control through an advanced SSH proxy architecture.",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "SSH proxy architecture",
+        "native command control",
+        "system security",
+        "secure operations"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Shell Native Command Control through SSH Proxy Architecture\"\ndescription: \"Enhance system security with QueryPie's native command control through an advanced SSH proxy architecture.\"\ndate: \"2024-11-22\"\nauthor: [\"ryan\", \"kevin\"]\nogImage: \"public/white-paper/wp-thumb-2.webp\"\nkeywords: [\"QueryPie\", \"SSH proxy architecture\", \"native command control\", \"system security\", \"secure operations\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/6/kubernetes-access-control\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/7/pac-policy-as-code",
+        "/features/documentation/white-paper/6/kubernetes-access-control",
+        "/features/documentation/white-paper/8/secure-login-token-management"
+      ],
+      "sourcePath": "documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture/en/content.mdx",
+      "title": "Shell Native Command Control through SSH Proxy Architecture",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "Shell Native Command Control through SSH Proxy Architecture",
+        "description": "Enhance system security with QueryPie's native command control through an advanced SSH proxy architecture.",
+        "date": "2024-11-22",
+        "author": [
+          "ryan",
+          "kevin"
+        ],
+        "ogImage": "public/white-paper/wp-thumb-2.webp",
+        "keywords": [
+          "QueryPie",
+          "SSH proxy architecture",
+          "native command control",
+          "system security",
+          "secure operations"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/7/pac-policy-as-code",
+          "/features/documentation/white-paper/6/kubernetes-access-control",
+          "/features/documentation/white-paper/8/secure-login-token-management"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-2.webp",
+          "webPath": "/white-paper/wp-thumb-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp2-1-issue-to-solve.webp",
+          "webPath": "/white-paper/wp2-1-issue-to-solve.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/shell-native-command-control-ssh-proxy-architecture--2/ko.mdx",
+      "contentKind": "video",
+      "description": "진보된 SSH 프록시 아키텍처를 통한 쿼리파이의 네이티브 명령 제어로 시스템 보안을 강화하세요.",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "쿼리파이",
+        "SSH 프록시 아키텍처",
+        "네이티브 명령 제어",
+        "시스템 보안",
+        "안전한 운영",
+        "SSH",
+        "서버 접근 제어",
+        "Shell Script",
+        "명령어 제어",
+        "명령어 제한"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"SSH 프록시 구조를 통한 Shell Native 명령어 제어\"\ndescription: \"진보된 SSH 프록시 아키텍처를 통한 쿼리파이의 네이티브 명령 제어로 시스템 보안을 강화하세요.\"\ndate: \"2024-11-22\"\nauthor: [\"ryan\", \"kevin\"]\nogImage: \"public/white-paper/wp-thumb-2.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"SSH 프록시 아키텍처\", \"네이티브 명령 제어\", \"시스템 보안\", \"안전한 운영\", \"SSH\", \"서버 접근 제어\", \"Shell Script\", \"명령어 제어\", \"명령어 제한\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/6/kubernetes-access-control\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/7/pac-policy-as-code",
+        "/features/documentation/white-paper/6/kubernetes-access-control",
+        "/features/documentation/white-paper/8/secure-login-token-management"
+      ],
+      "sourcePath": "documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture/ko/content.mdx",
+      "title": "SSH 프록시 구조를 통한 Shell Native 명령어 제어",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "SSH 프록시 구조를 통한 Shell Native 명령어 제어",
+        "description": "진보된 SSH 프록시 아키텍처를 통한 쿼리파이의 네이티브 명령 제어로 시스템 보안을 강화하세요.",
+        "date": "2024-11-22",
+        "author": [
+          "ryan",
+          "kevin"
+        ],
+        "ogImage": "public/white-paper/wp-thumb-2.webp",
+        "keywords": [
+          "QueryPie",
+          "쿼리파이",
+          "SSH 프록시 아키텍처",
+          "네이티브 명령 제어",
+          "시스템 보안",
+          "안전한 운영",
+          "SSH",
+          "서버 접근 제어",
+          "Shell Script",
+          "명령어 제어",
+          "명령어 제한"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/7/pac-policy-as-code",
+          "/features/documentation/white-paper/6/kubernetes-access-control",
+          "/features/documentation/white-paper/8/secure-login-token-management"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-2.webp",
+          "webPath": "/white-paper/wp-thumb-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp2-1-issue-to-solve.webp",
+          "webPath": "/white-paper/wp2-1-issue-to-solve.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/shell-native-command-control-ssh-proxy-architecture--2/ja.mdx",
+      "contentKind": "video",
+      "description": "高度な SSH プロキシアーキテクチャにより、QueryPie のネイティブコマンド制御でシステムセキュリティを強化します。",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "SSH プロキシアーキテクチャ",
+        "ネイティブコマンド制御",
+        "システムセキュリティ",
+        "安全な操作"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"SSHプロキシ構造によるシェルネイティブコマンド制御\"\ndescription: \"高度な SSH プロキシアーキテクチャにより、QueryPie のネイティブコマンド制御でシステムセキュリティを強化します。\"\ndate: \"2024-11-22\"\nauthor: [\"ryan\", \"kevin\"]\nogImage: \"public/white-paper/wp-thumb-2.webp\"\nkeywords: [\"QueryPie\", \"SSH プロキシアーキテクチャ\", \"ネイティブコマンド制御\", \"システムセキュリティ\", \"安全な操作\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/6/kubernetes-access-control\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/7/pac-policy-as-code",
+        "/features/documentation/white-paper/6/kubernetes-access-control",
+        "/features/documentation/white-paper/8/secure-login-token-management"
+      ],
+      "sourcePath": "documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture/ja/content.mdx",
+      "title": "SSHプロキシ構造によるシェルネイティブコマンド制御",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "SSHプロキシ構造によるシェルネイティブコマンド制御",
+        "description": "高度な SSH プロキシアーキテクチャにより、QueryPie のネイティブコマンド制御でシステムセキュリティを強化します。",
+        "date": "2024-11-22",
+        "author": [
+          "ryan",
+          "kevin"
+        ],
+        "ogImage": "public/white-paper/wp-thumb-2.webp",
+        "keywords": [
+          "QueryPie",
+          "SSH プロキシアーキテクチャ",
+          "ネイティブコマンド制御",
+          "システムセキュリティ",
+          "安全な操作"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/7/pac-policy-as-code",
+          "/features/documentation/white-paper/6/kubernetes-access-control",
+          "/features/documentation/white-paper/8/secure-login-token-management"
+        ]
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "shell-native-command-control-ssh-proxy-architecture"
+}

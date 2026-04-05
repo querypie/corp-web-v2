@@ -85,7 +85,7 @@ function FeatureCopy({ body, title }: Pick<FeatureItem, "body" | "title">) {
 function FeatureImage({ imageAlt, imageSrc }: Pick<FeatureItem, "imageAlt" | "imageSrc">) {
   return (
     /* 기능 소개용 비주얼 패널 */
-    <div className="aspect-[79/40] w-full overflow-hidden rounded-box bg-bg-feather md:w-[790px] md:max-w-[65%]">
+    <div className="aspect-[2/1] w-full overflow-hidden rounded-box md:w-[790px] md:max-w-[65%]">
       <img alt={imageAlt} className="block h-full w-full object-contain" src={imageSrc} />
     </div>
   );
@@ -107,6 +107,8 @@ export default function FeatureSection({
               "flex flex-col items-start gap-5 md:flex-row md:gap-[60px]",
               item.reverse && "md:flex-row-reverse",
             )}
+            data-reveal
+            style={{ transitionDelay: `${index * 90}ms` }}
           >
             <FeatureImage imageAlt={item.imageAlt} imageSrc={item.imageSrc} />
             <FeatureCopy body={item.body} title={item.title} />

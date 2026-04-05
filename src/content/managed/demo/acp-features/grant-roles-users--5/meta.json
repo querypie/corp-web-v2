@@ -1,0 +1,136 @@
+{
+  "category": "acp-features",
+  "contentKind": "video",
+  "entryId": "grant-roles-users--5",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "5",
+    "sourceCategory": "acp-features",
+    "sourceGroupPath": "demo/acp-features/5/grant-roles-users",
+    "sourceUrl": "/features/demo/acp-features/5/grant-roles-users"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-kac-2.webp",
+          "webPath": "/tutorial/tu-thumb-kac-2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/grant-roles-users--5/en.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-kac-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Grant Roles to Users\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-kac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/6/register-kubernetes-protect\"\n  - \"/features/demo/acp-features/4/connect-kubernetes-agent\"\n  - \"/features/demo/acp-features/7/review-audit-logs\"   ",
+      "relatedPosts": [
+        "/features/demo/acp-features/6/register-kubernetes-protect",
+        "/features/demo/acp-features/4/connect-kubernetes-agent",
+        "/features/demo/acp-features/7/review-audit-logs"
+      ],
+      "sourcePath": "demo/acp-features/5/grant-roles-users/en/content.mdx",
+      "title": "How to Grant Roles to Users",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "How to Grant Roles to Users",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-kac-2.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/6/register-kubernetes-protect",
+          "/features/demo/acp-features/4/connect-kubernetes-agent",
+          "/features/demo/acp-features/7/review-audit-logs"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-kac-2.webp",
+          "webPath": "/tutorial/tu-thumb-kac-2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/grant-roles-users--5/ko.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-kac-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Grant Roles to Users\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-kac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/6/register-kubernetes-protect\"\n  - \"/features/demo/acp-features/4/connect-kubernetes-agent\"\n  - \"/features/demo/acp-features/7/review-audit-logs\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/6/register-kubernetes-protect",
+        "/features/demo/acp-features/4/connect-kubernetes-agent",
+        "/features/demo/acp-features/7/review-audit-logs"
+      ],
+      "sourcePath": "demo/acp-features/5/grant-roles-users/ko/content.mdx",
+      "title": "How to Grant Roles to Users",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "How to Grant Roles to Users",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-kac-2.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/6/register-kubernetes-protect",
+          "/features/demo/acp-features/4/connect-kubernetes-agent",
+          "/features/demo/acp-features/7/review-audit-logs"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-kac-2.webp",
+          "webPath": "/tutorial/tu-thumb-kac-2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/grant-roles-users--5/ja.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-kac-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Grant Roles to Users\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-kac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/6/register-kubernetes-protect\"\n  - \"/features/demo/acp-features/4/connect-kubernetes-agent\"\n  - \"/features/demo/acp-features/7/review-audit-logs\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/6/register-kubernetes-protect",
+        "/features/demo/acp-features/4/connect-kubernetes-agent",
+        "/features/demo/acp-features/7/review-audit-logs"
+      ],
+      "sourcePath": "demo/acp-features/5/grant-roles-users/ja/content.mdx",
+      "title": "How to Grant Roles to Users",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "How to Grant Roles to Users",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-kac-2.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/6/register-kubernetes-protect",
+          "/features/demo/acp-features/4/connect-kubernetes-agent",
+          "/features/demo/acp-features/7/review-audit-logs"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "grant-roles-users"
+}

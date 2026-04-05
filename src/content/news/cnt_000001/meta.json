@@ -1,0 +1,27 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2021-07-16",
+  "externalUrl": "https://www.frontier-enterprise.com/yanolja-taps-querypie-to-firm-up-data-governance/",
+  "hideHeroImage": false,
+  "id": "yanolja-taps-querypie-to-firm-up-data-governance",
+  "imageSrc": "/uploads/news-8-1774977580176.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 2,
+  "status": "published",
+  "storageId": "cnt_000001",
+  "summary": {
+    "en": "Cloud-based PMS provider Yanolja chose QueryPie’s data governance platform to enable them to offering all kinds of leisure services without compromising data privacy.",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "Yanolja taps QueryPie to firm up data governance",
+    "ko": "",
+    "ja": ""
+  },
+  "locales": {}
+}

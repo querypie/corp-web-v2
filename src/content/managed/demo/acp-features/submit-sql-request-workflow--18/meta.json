@@ -1,0 +1,136 @@
+{
+  "category": "acp-features",
+  "contentKind": "video",
+  "entryId": "submit-sql-request-workflow--18",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "18",
+    "sourceCategory": "acp-features",
+    "sourceGroupPath": "demo/acp-features/18/submit-sql-request-workflow",
+    "sourceUrl": "/features/demo/acp-features/18/submit-sql-request-workflow"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-7.webp",
+          "webPath": "/tutorial/tu-thumb-dac-7.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/submit-sql-request-workflow--18/en.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-7.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Submit a Workflow for SQL Requests\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-7.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"\n  - \"/features/demo/acp-features/17/submit-sql-export-workflow\"\n  - \"/features/demo/acp-features/16/connect-database-querypie-agent\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/19/submit-db-access-workflow",
+        "/features/demo/acp-features/17/submit-sql-export-workflow",
+        "/features/demo/acp-features/16/connect-database-querypie-agent"
+      ],
+      "sourcePath": "demo/acp-features/18/submit-sql-request-workflow/en/content.mdx",
+      "title": "How to Submit a Workflow for SQL Requests",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "How to Submit a Workflow for SQL Requests",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-7.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/19/submit-db-access-workflow",
+          "/features/demo/acp-features/17/submit-sql-export-workflow",
+          "/features/demo/acp-features/16/connect-database-querypie-agent"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-7.webp",
+          "webPath": "/tutorial/tu-thumb-dac-7.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/submit-sql-request-workflow--18/ko.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-7.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"쿼리 실행 요청하기\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-7.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"\n  - \"/features/demo/acp-features/17/submit-sql-export-workflow\"\n  - \"/features/demo/acp-features/16/connect-database-querypie-agent\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/19/submit-db-access-workflow",
+        "/features/demo/acp-features/17/submit-sql-export-workflow",
+        "/features/demo/acp-features/16/connect-database-querypie-agent"
+      ],
+      "sourcePath": "demo/acp-features/18/submit-sql-request-workflow/ko/content.mdx",
+      "title": "쿼리 실행 요청하기",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "쿼리 실행 요청하기",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-7.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/19/submit-db-access-workflow",
+          "/features/demo/acp-features/17/submit-sql-export-workflow",
+          "/features/demo/acp-features/16/connect-database-querypie-agent"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-7.webp",
+          "webPath": "/tutorial/tu-thumb-dac-7.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/submit-sql-request-workflow--18/ja.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-7.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"SQLリクエストのワークフローを提出する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-7.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"\n  - \"/features/demo/acp-features/17/submit-sql-export-workflow\"\n  - \"/features/demo/acp-features/16/connect-database-querypie-agent\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/19/submit-db-access-workflow",
+        "/features/demo/acp-features/17/submit-sql-export-workflow",
+        "/features/demo/acp-features/16/connect-database-querypie-agent"
+      ],
+      "sourcePath": "demo/acp-features/18/submit-sql-request-workflow/ja/content.mdx",
+      "title": "SQLリクエストのワークフローを提出する方法",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "SQLリクエストのワークフローを提出する方法",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-7.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/19/submit-db-access-workflow",
+          "/features/demo/acp-features/17/submit-sql-export-workflow",
+          "/features/demo/acp-features/16/connect-database-querypie-agent"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "submit-sql-request-workflow"
+}

@@ -1,0 +1,27 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2021-07-13",
+  "externalUrl": "https://robotic-process-automation.cioapplications.com/news/querypie-becomes-okta-integration-network-partner-in-korea-nid-8103.html",
+  "hideHeroImage": false,
+  "id": "querypie-becomes-okta-integration-network-partner-in-korea",
+  "imageSrc": "/uploads/news-4-1774976116233.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 3,
+  "status": "published",
+  "storageId": "cnt_000012",
+  "summary": {
+    "en": "QueryPie is a powerful data governance solution developed by a team of database specialists at CHEQUER that makes it simple to manage disparaate data sources and security standards in one location.",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "QueryPie becomes Okta Integration Network Partner in Korea",
+    "ko": "",
+    "ja": ""
+  },
+  "locales": {}
+}

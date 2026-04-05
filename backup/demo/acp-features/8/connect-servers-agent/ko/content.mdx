@@ -1,0 +1,49 @@
+---
+layout: "Article"
+category: "acp-features"
+title: "에이전트를 통해 서버 접속하기"
+description: ""
+date: "2024-11-29"
+ogImage: "public/tutorial/tu-thumb-sac-7.png"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/acp-features/10/submit-server-access-workflow"
+  - "/features/demo/acp-features/9/submit-role-access-workflow"
+  - "/features/demo/acp-features/7/review-audit-logs"
+---
+
+<Youtube
+    src="https://www.youtube.com/embed/Tmrm0seAGV0?si=gQQKODM7GcsWJOXO"
+/>
+
+# Overview
+
+QueryPie Agent를 설치하면, iTerm/SecureCRT와 같은 3rd Party 애플리케이션을 사용할 수 있습니다. 기본적으로 QueryPie 에서 제공하는 웹 터미널을 통해 서버에 접속할 수 있고, 프록시 연결을 지원하여 다양한 사용자 환경에서도 문제없이 서버 접근을 제어하고, 정책을 적용할 수 있으며, 로그를 남길 수 있습니다.
+
+# 에이전트 앱 다운로드
+
+<InfoNote>
+    QueryPie Agent는 Mac, Windows, Linux OS를 지원합니다.
+</InfoNote>
+
+<BlueState>STEP 1</BlueState> QueryPie 로그인 후 우측 상단 프로필을 클릭하여 `Agent Download` 버튼을 클릭합니다.
+
+<BlueState>STEP 2</BlueState> PC 운영체제에 맞는 설치 파일을 다운로드합니다.
+
+# 에이전트를 실행하여 서버에 접속하기
+<InfoNote>
+    **사전 조건:**  해당 서버의 Policy의 useProxy 옵션이 활성화되어있어야 합니다.
+</InfoNote>
+
+<BlueState>STEP 1</BlueState> QueryPie Host 입력란에 QueryPie URL을 입력하고 `Next` 버튼을 클릭합니다.
+
+<BlueState>STEP 2</BlueState> 웹 브라우저가 열리면, 로그인 페이지에서 인증정보를 입력하고, `Continue` 버튼을 클릭합니다.
+
+<BlueState>STEP 3</BlueState> 로그인을 성공하면 아래와 같이 로그인 성공 화면이 표시되며 이후 Agent로 돌아갑니다.
+
+<BlueState>STEP 4</BlueState> Role이 두 개 이상이라면, Agent 로그인 후 사용할 Role을 먼저 선택합니다.
+
+<BlueState>STEP 5</BlueState> 접속할 서버를 우클릭하여 `Open Connection with` 메뉴를 선택한 후, 사용하려는 터미널 툴을 선택합니다.
+
+<BlueState>STEP 6</BlueState> 사용하려는 접속 계정을 선택하고, 필요 시 비밀번호를 입력한 뒤 `OK` 버튼을 클릭합니다.

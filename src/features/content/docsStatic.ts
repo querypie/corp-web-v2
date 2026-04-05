@@ -32,7 +32,7 @@ const docsStaticSources: DocsStaticSource[] = [
     },
     categorySlug: "introduction-decks",
     date: "2026-02-20",
-    imageSrc: "/images/content/article-01.png",
+    imageSrc: "/uploads/article-01.png",
     slug: "seo-analysis-aip-agent",
     title: {
       en: "SEO analysis, once considered the domain of specialists, can now be handled by an AIP agent.",
@@ -49,7 +49,7 @@ const docsStaticSources: DocsStaticSource[] = [
     },
     categorySlug: "manuals",
     date: "2026-02-18",
-    imageSrc: "/images/content/article-02.png",
+    imageSrc: "/uploads/article-02.png",
     slug: "guardrail-design-2026",
     title: {
       en: "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
@@ -66,7 +66,7 @@ const docsStaticSources: DocsStaticSource[] = [
     },
     categorySlug: "blogs",
     date: "2026-02-16",
-    imageSrc: "/images/content/article-03.png",
+    imageSrc: "/uploads/article-03.png",
     slug: "ai-security-threat-map-2026",
     title: {
       en: "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",

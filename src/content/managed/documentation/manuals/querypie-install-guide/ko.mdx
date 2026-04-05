@@ -1,0 +1,175 @@
+---
+layout: "Article"
+category: "manual"
+title: "QueryPie 커뮤니티 버전 설치 가이드"
+description: "QueryPie 커뮤니티 버전은 QueryPie Enterprise의 핵심 기능인 Database, System, Kubernetes, Web Access Controller를 모두 체험할 수 있는 무료 버전입니다. 간편한 설치로 지금 바로 시작해보세요."
+ogImage: "public/documentation/docu-thumb-community-install-guide.webp"
+keywords: ["QueryPie"]
+relatedPosts:
+  - image:
+        filepath: "public/documentation/docu-thumb-acp-manual.webp"
+        alt: "QueryPie ACP 매뉴얼"
+    href: "https://docs.querypie.com/ko"
+    external: true
+    label: "QueryPie ACP 매뉴얼"
+  - image:
+        filepath: "public/documentation/docu-thumb-aip-manual.webp"
+        alt: "QueryPie AIP 매뉴얼"
+    href: "https://aihub-docs.app.querypie.com/ko"
+    external: true
+    label: "QueryPie AIP 매뉴얼"
+---
+
+# 🧭 시작하기 전에
+**QueryPie ACP Community 버전**은 **QueryPie Enterprise**에서 제공하는 핵심 기능을 체험해 볼 수 있는 버전입니다.
+- Database Access Controller
+- System Access Controller
+- Kubernetes Access Controller
+- Web Access Controller
+<br />
+
+단, Community 버전은 **최대 5명의 사용자 계정이 활성화 가능**합니다.
+
+(5명 이상 사용자 등록이 필요하다면, <Link href="/plans" markdown external>Enterprise 플랜</Link>으로 확장해보세요.)
+
+QueryPie ACP는 일반적인 Web Application 방식으로 작동하며, Proxy 기반의 Network Server 기능도 포함되어 있습니다.
+
+# 🖥️ 서버 권장 사양
+
+QueryPie ACP 커뮤니티 버전을 원활하게 설치하고 운영하기 위해 아래 환경을 권장합니다.
+<Table center width="100%" marginTopSize="xs">
+  <Table.Thead>
+    <Table.Tr>
+      <Table.Th cellBackgroundColor="gray">구분</Table.Th>
+      <Table.Th cellBackgroundColor="gray">사양</Table.Th>
+    </Table.Tr>
+  </Table.Thead>
+  <Table.Tbody>
+    <Table.Tr>
+      <Table.Td>기본 사양</Table.Td>
+      <Table.Td>
+        - Hardware : AMD64 Architecture, CPU 4 vCPUs, Memory 16 GiB, Disk 100 GiB+
+        - AWS EC2 : m6i.xlarge, m7i.xlarge
+        - GCP Compute Engine : c4-standard-4, n4-standard-4 (or AMD64 architecture -standard-4 models)
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>시험 사용</Table.Td>
+      <Table.Td>
+        - Hardware: ARM64 Architecture, 4 vCPUs, Memory 16 GiB, Disk 30 GiB+
+        - AWS EC2 : t4g.xlarge, m7g.xlarge
+        - OS: Linux or macOS with Docker
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>다수 이용자 운영환경의 권장 사양</Table.Td>
+      <Table.Td>
+        - Hardware: AMD64 Architecture, 8 vCPUs,  Memory 32 GiB, Disk 100 GiB+
+        - AWS EC2 : m6i.2xlarge, m7i.2xlarge
+        - GCP Compute Engine : c4-standard-8, n4-standard-8 (or AMD64 architecture -standard-8 models)
+      </Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>OS</Table.Td>
+      <Table.Td>
+        Linux with Docker or Podman
+      </Table.Td>
+    </Table.Tr>
+  </Table.Tbody>
+</Table>
+<br />
+ARM64 Architecture CPU 환경 또는 macOS 환경은 개발자를 위한 시험사용, 테스트 용도로 권장합니다.
+자세한 요구사항은 아래 문서를 참고해주세요:
+
+📄 <Link href="https://querypie.atlassian.net/wiki/spaces/QCP/pages/862126081/Prerequisites+for+Installation+-+Single+Machine+KO" markdown external>Prerequisites for Installation - Single Machine (Korean)</Link>
+
+# 🐳 설치 방법
+설치는 Docker Image 기반이며, 한 줄 명령어로 자동 설치가 가능합니다.
+
+## 1. 터미널에서 명령 실행하기
+
+Linux 서버의 터미널에 접속한 뒤, 홈 디렉토리에서 아래 명령을 입력하세요:
+```code
+bash <(curl https://dl.querypie.com/setup.v2.sh)
+```
+⏱️ 설치에는 약 **7~10분** 정도 소요됩니다.
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/documentation/install-guide-1.webp"
+        alt="설치를 시작하였습니다."
+        caption="설치를 시작하였습니다."
+    />
+</Box>
+<br />
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/documentation/install-guide-2.webp"
+        alt="설치가 완료되었습니다."
+        caption="설치가 완료되었습니다."
+    />
+</Box>
+<br />
+## 2. 설치되는 동안 라이선스 발급 받기
+
+QueryPie ACP Community Edition은 라이선스 등록이 필요합니다.
+설치 되는 동안 <Link href="/querypie/license/community/apply" markdown external>라이선스 발급 신청서</Link>를 통해 신청하면, 입력한 이메일로 .crt 형식의 텍스트 파일이 발송됩니다.
+
+## 3. 설치 후 접속하기
+설치가 완료되면 브라우저에서 다음 주소로 접속합니다:
+```code
+http://<서버 IP 주소>
+또는
+https://<서버 IP 주소>
+```
+설치한 리눅스 서버의 IP 주소는 이용자의 PC 에서 접근 가능한 IP 주소를 사용하여야 합니다.
+
+## 4. 라이선스 등록하기
+이메일로 받은 .crt 파일을 업로드하거나 PEM 형식 텍스트 내용을 복사/붙여넣기 하세요.
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/documentation/install-guide-3.webp"
+        alt="PEM 형식의 라이선스를 입력합니다."
+        caption="PEM 형식의 라이선스를 입력합니다."
+    />
+</Box>
+<br />
+
+## 5. 로그인하기
+아래 기본 계정으로 로그인을 합니다.
+최초 로그인 시, 자동으로 비밀번호 변경 절차가 시작되니 안전하게 새 비밀번호를 설정하고 사용을 시작하세요.
+- ID: `qp-admin`
+- Password: `querypie`
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/documentation/install-guide-4.webp"
+        alt="최초 로그인 화면입니다."
+        caption="최초 로그인 화면입니다."
+    />
+</Box>
+<br />
+## 6. 설치 완료 🎉
+축하합니다! 설치가 완료되었습니다. 이제 <Link href="https://docs.querypie.com/ko/administrator-manual" markdown external>관리자 매뉴얼</Link>을 참고해 환경 설정을 진행하시면 됩니다.
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/documentation/install-guide-5.webp"
+        alt="최초 로그인 화면입니다."
+        caption="최초 로그인 화면입니다."
+    />
+</Box>
+<br />
+
+# 🔑 라이선스에 대한 안내
+- QueryPie ACP를 사용하려면, 제품 설치 후 별도로 제공되는 라이선스를 등록하여야 합니다.
+- 라이선스는 .crt 확장자의 텍스트 파일 형태로 제공됩니다.
+- 라이선스는 신청 시 입력한 이메일 주소로 발송됩니다.
+- 발급되는 라이선스는 신청일로부터 1년간 유효합니다.
+- 라이선스는 신청자 개인에게 발급되며, 제3자에게 양도할 수 없습니다.
+
+
+# 💬 문의 및 지원
+<Link href="https://discord.gg/Cu39M55gMk" markdown external>QueryPie 공식 디스코드 채널</Link>에서 자유롭게 사용자 간 Q&A와 정보 공유를 할 수 있으니 많은 참여 부탁드립니다.

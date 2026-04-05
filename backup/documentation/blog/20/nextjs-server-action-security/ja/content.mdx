@@ -1,0 +1,163 @@
+---
+layout: "Article"
+category: "blog"
+title: "Next.js Server Actionとフロントエンドセキュリティ"
+description: "Next.jsのServer Actionが提供する高レベルの抽象化により、開発者がセキュリティ上のミスを犯す可能性があります。このようなリスクを詳細に分析し、セキュリティエラーを防ぐための開発戦略を提示します。フロントエンドでサーバーサイドコードを開発する際のセキュリティ意識を高め、より安全で効率的なウェブアプリケーションを構築しましょう！"
+date: "2025-03-20"
+author: "teddy"
+ogImage: "public/blog/b-thumb-20.png"
+keywords: ["Next.js", "Frontend", "Security", "Server Action", "Frontend AI", "フロントエンド", "フロントエンドセキュリティ", "AI", "サーバーアクション", "セキュリティ", "ウェブセキュリティ"]
+relatedPosts:
+  - "/features/documentation/blog/8/secure-login-token-management"
+  - "/features/documentation/blog/9/penetration-testing-standard"
+  - "/features/documentation/blog/4/multi-cloud-kubernetes-access-control"
+---
+
+# Next.js Server Actionの基本概念と使用法
+
+Next.jsのServer Actionは、Next.js 13.4バージョンでApp Routerと共に正式に導入された機能です。これはReactコンポーネント内からサーバーサイドの関数を簡単に呼び出すことができるようにするものです。`use server`ディレクティブを持つ関数を定義することで、クライアントから簡単にサーバーロジックを呼び出すことができます。
+
+Server Actionを活用することで、従来のように別々のAPIエンドポイントを手動で管理する必要がなくなります。開発者はサーバーロジックのエンドポイント、インターフェースなどを気にする必要がなく、**ローカル関数を使用するかのように自然にサーバーロジックを使用**できます。これはServer Actionがクライアントとサーバー間の通信を抽象化してくれるためです。
+
+Server Actionを定義する方法には、Reactコンポーネント内に定義する方法と、別のファイルに独立して定義する方法があります。以下は別のファイルに定義する方法です:
+
+```typescript
+'use server';
+
+export default async function createAction({ name, age, email }: { name: string; age: number; email: string; }) {
+    await connection.query(
+        'INSERT INTO users (name, age, email) VALUES (?, ?, ?)',
+        [name, age, email]
+    );
+}
+```
+
+```typescript
+'use client';
+
+import createAction from './create-action.ts';
+
+export default function CreateForm() {
+    return (
+        <form action={createAction}>
+            <input type="text" name="name" />
+            <input type="number" name="age" />
+            <input type="email" name="email" />
+        </form>
+    )
+}
+```
+
+## Server Actionの内部動作方式
+
+上記の`CreateForm`コンポーネントは、ビルド時に以下のような形に変換されます。（注：これは理解を助けるためのコードであり、実際のビルドされたコードとは異なる可能性があります。）
+
+```typescript
+'use client';
+
+import { startTransition } from 'react'
+import { callServer } from 'next/client/app-call-server';
+
+// Server Action IDに変換
+const createAction = '$$action_1234567890';
+
+export default function CreateForm() {
+  return (
+    <form 
+      onSubmit={async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        const data = {
+          name: formData.get('name'),
+          age: Number(formData.get('age')),
+          email: formData.get('email')
+        };
+        
+        // startTransitionでUIブロッキングを防止
+        startTransition(() => {
+          callServer(createAction, [data]);
+        });
+      }}
+    >
+      <input type="text" name="name" />
+      <input type="number" name="age" />
+      <input type="email" name="email" />
+    </form>
+  )
+}
+```
+
+つまり、Server Action関数をローカル関数のように`import`して使用する部分が消え、代わりに`onSubmit`イベントが発生したときに`formData`が処理され、Next.jsが提供する`callServer`関数が呼び出されるようになります。
+
+`callServer`関数は内部で`fetch` APIを使用してHTTPリクエストを実行します。リクエストメソッドは`POST`に設定され、ヘッダーには生成されたServer Action IDなどが含まれます。これにより、サーバー側でどのアクションが呼び出されたかを識別できます。Next.jsのRepositoryの<Link href="https://github.com/vercel/next.js/blob/canary/packages/next/src/client/app-call-server.ts" external markdown>app-call-server.ts</Link>ファイルを参照すると、このような動作方式を確認できます。
+
+サーバーサイドでは、`callServer`からのリクエストを<Link href="https://github.com/vercel/next.js/blob/canary/packages/next/src/server/app-render/action-handler.ts" external markdown>action-handler.ts</Link>ファイルが処理します。このハンドラーはCSRF保護などの検証プロセスを経て、リクエストヘッダーを分析して適切なアクションを識別し、ロジックを実行した後レスポンスを返す流れで構成されています。
+
+# Server Actionが開発環境にもたらした変化
+
+2010年代以降のWeb開発環境では、サーバーとクライアントの境界が明確で、これを超える作業はしばしば面倒でした。Next.jsのServer Actionは、この境界をかなりの部分取り除き、開発者に非常に便利な環境を提供します。
+
+以前は、REST APIエンドポイントを作成し、クライアントがHTTPリクエストを通じて呼び出す方式が一般的でした。しかし、**Server Actionはローカル関数を呼び出すかのように直感的でシンプルな形で使用でき**、利便性が高いです。
+
+以前は「Full Stack」が「Poor Stack」と揶揄されることもありましたが、AI時代に入り、1人の開発者ができることが大きく増え、**Full Stack**の地位が高まりました。今ではServer Actionのような技術のおかげで、より簡単で効率的なフルスタック開発が可能になっています。
+
+# 便利だが見落としてはいけないServer Actionのセキュリティ問題
+
+Next.jsのServer Actionは、サーバーとクライアントが魔法のように接続されているような印象を与えます。しかし、**この魔法のような利便性の裏には、必ずセキュリティという問題を考慮**する必要があります。実際にはHTTPリクエストとレスポンスが存在し、この過程で様々なセキュリティ上の考慮事項が存在します。
+
+**Next.jsの公式ドキュメントでも、Server Actionのセキュリティに関する注意を促し**ています。この点を見落とした開発者は、意図せず重要なロジックを無防備に公開してしまう可能性があり、これは**非常に致命的なセキュリティ問題**につながる可能性が高いです。（残念ながら、Securityセクションは最後のセクションです。）
+
+> By default, when a Server Action is created and exported, it creates a public HTTP endpoint and should be treated with the same security assumptions and authorization checks. This means, even if a Server Action or utility function is not imported elsewhere in your code, it's still publicly accessible.
+
+ドキュメントの冒頭でServer Actionの魔法に魅了され、最後のSecurityセクションまで読まなかった残念な開発者たちは、何のロックもかけていないサーバー関数を世界中に公開してしまう可能性があります。認証、認可が必要なのに検証プロセスを設けなかった場合は、さらに危険です。
+
+# Next.js Server Actionが提供する基本的なセキュリティと開発者の役割
+
+しかし、完全に無防備というわけではありません。公式ドキュメントによると、Next.jsはServer Actionに関して以下のような基本的なセキュリティメカニズムを提供します：
+
+- **Secure Action IDs**: サーバーとクライアント間の通信の有効性を内部生成されたIDで検証します。
+- **[CSRF(Cross-Site Request Forgery)](/resources/discover/white-paper/8/secure-login-token-management#脅威の種類)防止**: Server Action呼び出し時にPOSTリクエストのみを許可し、同一オリジンリクエストのみを許可します。
+- **クロージャ変数の保護**: クライアントに渡される状態値を暗号化および署名して保護します。
+- **コードの分離**: サーバー専用コードがクライアントバンドルに含まれないように処理します。
+- **エラーメッセージの保護**: 本番環境では機密性の高い詳細なエラーメッセージを公開しません。
+- **未使用アクションの削除**: 使用されていないServer Actionを自動的に削除して攻撃対象を最小限に抑えます。
+
+しかし、開発者が必ず注意を払うべき部分もあります：
+
+- **ランタイム入力値の検証**: TypeScriptはコンパイル時の型チェックのみを提供するため、ランタイム検証が必須です。Zodなどのライブラリを使用して徹底的な検証を行う必要があります。
+- **認証と認可**: アクション内でユーザー権限を毎回再確認する必要があります。
+- **SSRF(Server Side Request Forgery)防止**: ユーザー入力のURLなどを信頼せず、必ずホワイトリストベースのアクセスのみを許可します。
+- **サーバーロジックで必須的に考慮すべき要素**
+  - **環境変数の保護**: データベース接続情報などの資産情報を.envファイルに保存して設定値の漏洩を防ぎます。
+  - **インジェクション防止**:
+    - **SQLインジェクション**: SQLインジェクションを防ぐために、ORM(Object-Relational Mapping)などのツールを使用してデータベースクエリを安全に記述します。
+    - **XSS防止**: sanitize-htmlなどのライブラリを使用して入力値を検証し、潜在的なCross-Site Scripting攻撃に備えます。
+  - **セキュリティアップデートとパッチ管理**: 使用中のライブラリやフレームワークに対する定期的なセキュリティチェックとアップデートを通じて、脆弱性を事前に防止します。
+  - **ログとモニタリング**: 重要なサーバーイベントとエラーに対するログを体系的に管理し、モニタリングシステムを通じてリアルタイムでセキュリティ脅威を検出できるように設定します。
+
+ランタイム入力値の検証と認証・認可には、<InlineLink href="https://www.npmjs.com/package/next-safe-action">next-safe-action</InlineLink>や<InlineLink href="https://www.npmjs.com/package/zsa">zsa</InlineLink>などのライブラリの使用を推奨します。これらのライブラリを使用することで、抽象化されたAPIを宣言的に記述でき、提供されるミドルウェアを通じて認証・認可を簡単に処理できます。また、クライアントサイドのServer Action関連Hooksも提供されており、さらに便利に活用できます。
+
+# より重要になるフロントエンドセキュリティ
+
+個人的には、フロントエンド領域でサーバーサイド機能が再び台頭する流れを肯定的に捉えています。
+
+Web開発の初期には、サーバーとクライアントの区別が明確ではありませんでした。しかし、SPA(Single Page Application)とモバイルアプリの時代に、フロントエンドでのサーバーの存在感が薄れ、クライアント側で多くのロジックを処理するようになりました。中にはWebフロントエンドをクライアントと同義で理解する人も現れました。これはモバイルアプリ環境のパターンがWeb環境に移行したためです。
+
+しかし、Webはモバイルアプリとは根本的に異なり、**サーバーと密接に連携するときに最も強力な機能を発揮**します。クライアント中心のSPAの限界を克服しようと、SEOに有利なNext.jsなどのSSR(Server Side Rendering)をサポートするフレームワークが人気を集め始めました。今ではSSRを超えてサーバーコンポーネントが登場するなど、**フロントエンドでもサーバー機能を再び積極的に活用する流れ**が現れています。
+
+Next.jsのApp RouterとServer Actionは、フロントエンド開発者がUIだけでなくデータ処理やサーバーロジックまで幅広く担当できる基盤を作りました。複雑すぎないWebアプリケーションの場合、データベースが存在しても、独立したバックエンドアプリケーションなしで開発が可能になりました。これは開発者に効率的な開発体験を提供しますが、同時に**より多くの複雑さとセキュリティに関する責任**も伴います。
+
+<Box marginTopSize="sm" center>
+  <ArticleFileImage
+    filepath="public/blog/blog20-image-1.png"
+    alt="Next.js Server Actionとフロントエンドセキュリティ"
+  />
+</Box>
+
+# AI時代のセキュリティとNext.js
+
+AIが注目を集める時代に入り、主要フレームワークの安定性とセキュリティはますます重要になっています。AIもフロントエンドサーバーサイドツールを基盤に動作する可能性が高いため、フレームワークの高レベルの抽象化によるセキュリティ上のミスは、AIを通じてより大きなリスクを引き起こす可能性があります。
+
+今後のWeb環境は、AIなどの様々な技術との統合により複雑さを増していくでしょう。この過程で、Next.jsのような広く使用されるフロントエンドフレームワークは、セキュリティと安定性の面で継続的に発展する必要があります。
+
+そして何より、AI技術との統合が深まるにつれ、**開発者自身のセキュリティ知識と概念が非常に重要**になり、常に注意を払う必要があることを忘れてはなりません。 

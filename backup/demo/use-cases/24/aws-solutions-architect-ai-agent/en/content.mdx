@@ -1,0 +1,37 @@
+---
+layout: "Article"
+category: "use-cases"
+title: "AIP Use Case: AWS Solutions Architect AI Agent"
+description: "An AI agent that designs and validates AWS architectures—proposing patterns, estimating cost, and checking best practices through natural language."
+date: "2025-11-05"
+ogImage: "public/demo/aip-use-case-thumb-18-en.png"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/use-cases/16/dev-insight-ai-agent"
+  - "/features/demo/use-cases/22/aws-log-analytics-agent"
+  - "/features/demo/use-cases/23/aws-inspector-ai-agent"
+---
+
+<Youtube
+  src="https://www.youtube.com/embed/lPP_0W5vCpg?si=bpalAVPXU1w8VNPZ"
+/>
+
+**AWS Solutions Architect AI Agent** brings conversational design assistance to cloud solutioning. Architects and developers can describe requirements—scalability targets, data residency, RPO/RTO, compliance needs, latency constraints—and receive recommended AWS architectures with trade-offs, diagrams, and cost estimates. The agent cross-checks against AWS Well-Architected best practices and service limits, highlighting risks and optimizations.
+
+Built on QueryPie AI’s AI Platform (AIP) with Model Context Protocol (MCP) integrations, the agent connects to AWS pricing APIs, Trusted Advisor/Compute Optimizer, CloudWatch metrics, and IaC repositories (Terraform/CloudFormation). It can generate architecture diagrams, IaC templates, and change proposals; validate designs against organizational guardrails; and route reviews for approval with full audit trails.
+
+**Key capabilities include:**
+
+- **Requirement-to-architecture proposals**
+  - Translate business and technical constraints into reference architectures and deployment options
+- **Cost modeling and optimization**
+  - Estimate monthly costs, compare service choices, and suggest rightsizing and savings plans
+- **Best-practice validation**
+  - Check designs against Well-Architected pillars and org-specific guardrails; flag anti-patterns
+- **IaC and diagram generation**
+  - Produce Terraform/CloudFormation snippets and system diagrams for rapid iteration
+- **Review workflow**
+  - Package design docs, collect feedback, and submit for approvals; track decisions and changes
+
+This use case accelerates cloud design cycles, reduces errors, and standardizes solution quality. Teams gain faster path-to-architecture with transparent trade-offs and governance, while platform and security teams retain oversight through QueryPie AIP’s policy enforcement and auditable execution.

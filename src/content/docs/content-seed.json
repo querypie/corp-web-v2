@@ -1,0 +1,254 @@
+[
+  {
+    "authorName": "QueryPie Team",
+    "authorRole": "QA",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "blogs",
+    "contentFormat": "markdown",
+    "contentType": "content",
+    "dateIso": "2026-03-31",
+    "externalUrl": "",
+    "hideHeroImage": false,
+    "id": "authored-save-smoke-test",
+    "imageSrc": "/uploads/article-01.png",
+    "relatedIds": [],
+    "section": "documentation",
+    "sortOrder": 3,
+    "status": "hidden",
+    "storageId": "cnt_000001",
+    "summary": {
+      "en": "Smoke test summary",
+      "ko": "스모크 테스트 요약",
+      "ja": "スモークテスト要約"
+    },
+    "title": {
+      "en": "Authored Save Smoke Test",
+      "ko": "Authored 저장 스모크 테스트",
+      "ja": "Authored 保存スモークテスト"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "blogs",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2026-03-09",
+    "externalUrl": "",
+    "hideHeroImage": false,
+    "id": "ai-attack-tools-breach-600-firewalls-across-55-countries-how-to-protect-the-data-beyond-the-firewall-copy",
+    "imageSrc": "/blog/b-thumb-29.webp",
+    "relatedIds": [],
+    "section": "documentation",
+    "sortOrder": 1,
+    "status": "hidden",
+    "storageId": "cnt_000007",
+    "summary": {
+      "en": "An AI-powered open-source attack platform breached 600+ FortiGate firewalls across 55 countries. An unskilled threat actor leveraged AI to execute attacks at scale. This article analyzes the CyberStrikeAI incident and presents a defense-in-depth framework for CxOs to protect data beyond the firewall.",
+      "ko": "An AI-powered open-source attack platform breached 600+ FortiGate firewalls across 55 countries. An unskilled threat actor leveraged AI to execute attacks at scale. This article analyzes the CyberStrikeAI incident and presents a defense-in-depth framework for CxOs to protect data beyond the firewall.",
+      "ja": "AI攻撃ツールCyberStrikeAIが55カ国のファイアウォール600台を突破。技術的に未熟な攻撃者がAIで大規模攻撃を実行した事件を分析し、ファイアウォールの先にあるデータを守る多層防御フレームワークをCxO向けに解説します。"
+    },
+    "title": {
+      "en": "AI Attack Tools Breach 600 Firewalls Across 55 Countries: How to Protect the Data Beyond the Firewall",
+      "ko": "AI Attack Tools Breach 600 Firewalls Across 55 Countries: How to Protect the Data Beyond the Firewall",
+      "ja": "AI攻撃ツールが55カ国のファイアウォール600台を突破──ファイアウォールの先にある\\\"データ\\\"をどう守るか"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "introduction-decks",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "",
+    "externalUrl": "",
+    "hideHeroImage": false,
+    "id": "querypie-acp-introduction-tiptap",
+    "imageSrc": "/documentation/docu-thumb-acp-introduction.webp",
+    "relatedIds": [],
+    "section": "documentation",
+    "sortOrder": 1,
+    "status": "hidden",
+    "storageId": "cnt_000001",
+    "summary": {
+      "en": "Everything You Need to Know About QueryPie ACP",
+      "ko": "QueryPie ACP에 대한 모든 것을 알아보세요!",
+      "ja": "QueryPieについて知っておくべきこと"
+    },
+    "title": {
+      "en": "QueryPie ACP Introduction",
+      "ko": "QueryPie ACP 제품 소개서",
+      "ja": "QueryPie製品紹介"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "manuals",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "",
+    "externalUrl": "",
+    "hideHeroImage": false,
+    "id": "querypie-install-guide",
+    "imageSrc": "/documentation/docu-thumb-community-install-guide.webp",
+    "relatedIds": [],
+    "section": "documentation",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000001",
+    "summary": {
+      "en": "QueryPie ACP Community Edition is a free version that lets you experience all the core features of QueryPie ACP Enterprise — including Database, System, Kubernetes, and Web Access Controllers — with a maximum limit of 5 users. Get started quickly with a simple installation.",
+      "ko": "QueryPie 커뮤니티 버전은 QueryPie Enterprise의 핵심 기능인 Database, System, Kubernetes, Web Access Controller를 모두 체험할 수 있는 무료 버전입니다. 간편한 설치로 지금 바로 시작해보세요.",
+      "ja": "QueryPie ACP Community Edition」は、Database・System・Kubernetes・Webアクセスコントローラーなど、QueryPie Enterpriseの主要機能をすべて体験できる無償バージョンです。簡単なインストールですぐに始められます。"
+    },
+    "title": {
+      "en": "QueryPie ACP Community Edition Installation Guide",
+      "ko": "QueryPie 커뮤니티 버전 설치 가이드",
+      "ja": "QueryPie ACP コミュニティ版のインストールガイド"
+    }
+  },
+  {
+    "authorName": "asdf",
+    "authorRole": "asdf",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "white-papers",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2026-04-01",
+    "externalUrl": "",
+    "hideHeroImage": false,
+    "id": "asdfasdf",
+    "imageSrc": "",
+    "relatedIds": [],
+    "section": "documentation",
+    "sortOrder": 1,
+    "status": "hidden",
+    "storageId": "cnt_000001",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "asdfasdf",
+      "ko": "",
+      "ja": ""
+    }
+  },
+  {
+    "authorName": "kenny",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "white-papers",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-05-28",
+    "externalUrl": "",
+    "hideHeroImage": false,
+    "id": "rag-security-querypie-builds-the-bridge--23",
+    "imageSrc": "/white-paper/wp-thumb-23.webp",
+    "relatedIds": [],
+    "section": "documentation",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000008",
+    "summary": {
+      "en": "This article introduces the background and security architecture of RAG 2.0 and emphasizes the importance of execution flow control through various corporate cases. RAG 2.0 is differentiated from existing RAGs in that it goes beyond simple document search and applies policies in real time to prevent sensitive information from being delivered to the wrong users.",
+      "ko": "이 글에서는 RAG 2.0의 등장 배경과 보안 아키텍처를 소개하고, 다양한 기업 사례를 통해 실행 흐름 제어의 중요성을 강조합니다. RAG 2.0은 단순한 문서 검색을 넘어 실시간으로 정책을 적용하여 민감한 정보가 잘못된 사용자에게 전달되지 않도록 한다는 점에서 기존 RAG와 차별화됩니다.",
+      "ja": "本稿では、RAG 2.0の登場背景とセキュリティアーキテクチャを紹介し、さまざまな企業の事例を通じて実行フロー制御の重要性を強調します。RAG 2.0は単なるドキュメント検索を超え、リアルタイムでポリシーを適用し、機密情報が誤って不適切なユーザーに渡るのを防ぐ点で、従来のRAGとは一線を画します。"
+    },
+    "title": {
+      "en": "RAG 2.0 Security: Microsoft and Meta’s Groundwork, QueryPie Builds the Bridge",
+      "ko": "RAG 2.0 보안 – Microsoft·Meta의 전략, QueryPie가 연결한다",
+      "ja": "RAG 2.0 セキュリティ – Microsoft・Metaの戦略、QueryPieが繋ぐ"
+    }
+  }
+]

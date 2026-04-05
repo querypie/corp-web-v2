@@ -1,0 +1,177 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "Preventing Command Bypass at the Source with Process-Tracking Methods"
+description: "Prevent command bypass threats at the source with QueryPie's innovative process-tracking methods."
+date: "2024-11-22"
+author: "logan"
+ogImage: "public/white-paper/wp-thumb-5.webp"
+keywords: ["QueryPie", "command bypass prevention", "process tracking", "cybersecurity", "threat detection"]
+relatedPosts:
+  - "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture"
+  - "/features/documentation/white-paper/7/pac-policy-as-code"
+  - "/features/documentation/white-paper/6/kubernetes-access-control"
+---
+
+# Linux Process Execution Control and Security Enhancement Solution
+
+In Linux systems, users with execution privileges can freely run programs within an SSH session.
+However, for the sake of system security and stability, there are situations where the execution of specific programs must be restricted.
+While the system inherently distinguishes between root and regular users and controls execution privileges, this level of control may not be sufficient in certain scenarios.
+To address this, there is a need for a technological foundation that allows real-time monitoring and blocking of process creation and execution.
+
+This whitepaper introduces a solution that monitors and controls processes at the Linux kernel level.
+Our solution implements the following key features:
+
+- Real-time child process monitoring
+- Detection of unauthorized programs
+- Immediate blocking of attempts to execute restricted programs
+
+These features serve as the technical foundation for implementing advanced security solutions in the future, including user-specific permission control, detailed audit logging, and policy management.
+
+# Issues to Solve
+
+Many organizations, particularly in sectors such as finance, healthcare, and government, are subject to regulatory requirements that mandate the recording of all system access and activities.
+Security certifications like ISMS-P, ISO/IEC 27001, PCI DSS, and SOC require the ability to track who performed which action, when, and on what system.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp5-1-issues-to-solve.webp"
+        width={391} height={384}
+        alt="Issues to Solve"
+    />
+</Box>
+<br />
+
+These activity logs play a crucial role in both preventing and investigating incidents.
+They help prevent system failures caused by administrative errors or malicious insider data breach attempts by blocking them in advance.
+In case of an issue, the work history can help quickly identify the root cause and, if necessary, restore the system to its previous state.
+
+By recording and controlling system administrators' activities, accountability can be strengthened.
+Unauthorized actions or access to sensitive information can be effectively controlled, leading to improved system stability and efficiency.
+
+However, these requirements cannot be fully met with just the basic user privilege system or system logs in Linux.
+Therefore, an additional security framework that can monitor and control user activities is necessary.
+
+# Idea
+
+In our **SAC** solution, we provide auditing and control functionalities for commands executed by system users. The command control feature, in particular, uses a low-level system approach to verify commands based on predefined security policies before the executable file is loaded.
+This method is simple yet effective, as it eliminates the need to consider various cases such as hiding commands within shell scripts or using aliases.
+
+<ArticleGatingForm>
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp5-2-idea.webp"
+        alt="Idea"
+    />
+</Box>
+<br />
+
+The advantages of this structure are as follows:
+
+- By utilizing system call hooking techniques, we intervene at the point of command execution, effectively blocking bypass attempts at their source.
+No matter how the user tries to execute a command, they cannot avoid the validation of our solution.
+- Since it operates at the system level rather than the application level, it is not dependent on specific environments or shells.
+- Because there is no need to consider various cases, the code remains simple and stable.
+
+With this approach, we were able to implement a blocking solution that is much more robust and effective compared to our competitors. In the next section, we will demonstrate how the blocking program works.
+
+# Demo
+
+We conducted a test by setting up a block on the execution of /usr/bin/df.
+
+**Blocking Symbolic Links**
+
+```sh
+logan@ip-xxx-xxx-xxx-xxx:~$ ls -l hello
+lrwxrwxrwx 1 logan logan 11 Nov  6 11:35 hello -> /usr/bin/df
+logan@ip-xxx-xxx-xxx-xxx:~$ ./hello
+[963713:./hello] ./hello blocked!
+Killed
+```
+
+**Blocking Aliases**
+```
+logan@ip-xxx-xxx-xxx-xxx:~$ alias hi=df
+logan@ip-xxx-xxx-xxx-xxx:~$ hi
+[963927:/usr/bin/df] /usr/bin/df blocked!
+Killed
+```
+
+**Blocking Execution Through Scripts**
+- **test1.sh** runs the `df` command.
+- **test2.sh** calls `test1.sh`, and `test1.sh` executes `df`.
+```sh
+$ cat test1.sh
+#!/bin/bash
+
+df
+$ ./test1.sh
+[964362:/usr/bin/df] /usr/bin/df blocked!
+./test1.sh: line 3: 964362 Killed                  df
+
+$ cat test2.sh
+#!/bin/bash
+
+./test1.sh
+$ ./test2.sh
+[964480:/usr/bin/df] /usr/bin/df blocked!
+./test1.sh: line 3: 964480 Killed                  df
+```
+
+**Blocking Attempts to Hide Executables**
+
+We created a playful script that combines the first letters of parameters to form a command, hiding the name of the executable `df`.
+When you combine the first letters of "delta" and "foxtrot," you get "df."
+```sh
+$ cat test3.sh
+#!/bin/bash
+
+# make command with first characters of arguments
+command=""
+for arg in "$@"; do
+command+="${arg:0:1}"
+done
+
+# execute command
+$command
+$ ./test3.sh delta foxtrot
+[964891:/usr/bin/df] /usr/bin/df blocked!
+./test3.sh: line 10: 964891 Killed
+$command
+```
+
+This is a demo video testing the various scenarios mentioned above.
+
+<br />
+<Youtube center src="https://www.youtube.com/embed/tBHxREGfI8s?si=5DlLAz_iV35pMQBP" />
+<br />
+<Youtube center src="https://www.youtube.com/embed/7fwY6rrc6aU?si=GlNclCHPo71gShYI" />
+<br />
+
+While the various demos show different methods of execution, the actual path of execution is not the key factor.
+Since the solution blocks the execution of unauthorized commands the moment the process is executed, it can almost certainly prevent the running of unauthorized programs.
+
+# Proactive Security Enhancement Solution with Real-Time Command Blocking
+
+Traditional log-based monitoring focused on post-event analysis, but this solution blocks the execution of dangerous commands in real-time.
+System administrators no longer need to worry about malicious or accidental execution of dangerous commands, as risks are blocked before they can cause harm.
+
+This document explains how to block the execution of specific executables by monitoring system calls, but this technology can enable broader security controls.
+For instance, instead of blocking the `/usr/bin/rm` command, blocking the `unlink()` system call itself can allow for more fundamental control over file deletion attempts.
+
+Adding detailed audit logs to such system call-level controls can evolve the solution into a robust security framework.
+In addition to blocking commands or system calls, information such as the user who attempted the execution, the time of the attempt, and the execution environment can be recorded for security audits and incident analysis.
+
+Furthermore, this technology can be expanded with additional features such as:
+- Applying different security policies per user or group
+- Setting flexible control rules based on specific times or conditions
+- Integrating with security monitoring systems for real-time alerts
+- Using machine learning for anomaly behavior detection
+
+These extended features can be gradually implemented as organizational security requirements grow.
+QueryPie will continue to discover and develop new security features tailored to customer needs, becoming a trusted partner in creating safer system environments.
+If you need assistance or have any suggestions for collaboration, feel free to reach out at any time.
+
+</ArticleGatingForm>

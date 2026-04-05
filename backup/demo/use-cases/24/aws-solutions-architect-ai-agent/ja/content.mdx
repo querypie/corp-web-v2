@@ -1,0 +1,37 @@
+---
+layout: "Article"
+category: "use-cases"
+title: "AIP活用事例： AWSソリューションアーキテクトAIエージェント"
+description: "自然言語でパターン提案、コスト見積もり、ベストプラクティス検証を行い、AWSアーキテクチャを設計・妥当性確認するAIエージェント。"
+date: "2025-11-10"
+ogImage: "public/demo/aip-use-case-thumb-18-ja.png"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/use-cases/16/dev-insight-ai-agent"
+  - "/features/demo/use-cases/22/aws-log-analytics-agent"
+  - "/features/demo/use-cases/23/aws-inspector-ai-agent"
+---
+
+<Youtube
+  src="https://www.youtube.com/embed/Yl5CzBns27k?si=OaVjB10Mv78NRWC1"
+/>
+
+**AWSソリューションアーキテクトAIエージェント**は、クラウドソリューション設計に会話型の設計支援をもたらします。アーキテクトや開発者は、スケーラビリティ目標、データ所在地、RPO/RTO、コンプライアンス要件、レイテンシ制約などの要件を記述するだけで、トレードオフ、ダイアグラム、コスト見積もり付きの推奨AWSアーキテクチャを受け取れます。エージェントはAWS Well-Architectedのベストプラクティスとサービス制限に照らして設計をクロスチェックし、リスクや最適化ポイントをハイライトします。
+
+QueryPie AIのAIプラットフォーム（AIP）上でModel Context Protocol（MCP）連携により構築され、AWSの料金API、Trusted Advisor／Compute Optimizer、CloudWatchメトリクス、IaCリポジトリ（Terraform／CloudFormation）に接続します。アーキテクチャ図、IaCテンプレート、変更提案を生成し、組織のガードレールに対する設計の妥当性を検証、承認フローに回して監査証跡を完全に残せます。
+
+**主な機能 :**
+
+- **要件からアーキテクチャ提案へ**
+  - ビジネス／技術制約を参照アーキテクチャとデプロイオプションに変換
+- **コストモデリングと最適化**
+  - 月次コストを見積もり、サービス選択を比較し、適正化やSavings Plansを提案
+- **ベストプラクティス検証**
+  - Well-Architectedの柱および組織固有のガードレールに対して設計をチェックし、アンチパターンを警告
+- **IaCとダイアグラム生成**
+  - 迅速な反復のためにTerraform／CloudFormationスニペットやシステム図を生成
+- **レビュー・ワークフロー**
+  - 設計文書をパッケージ化し、フィードバック収集と承認申請を実施。決定と変更履歴を追跡
+
+このユースケースは、クラウド設計サイクルを加速し、エラーを減らし、ソリューション品質を標準化します。チームは、透明なトレードオフとガバナンスの下で、迅速にアーキテクチャに到達できます。一方で、プラットフォーム／セキュリティチームは、QueryPie AIPのポリシー適用と監査可能な実行により監督を維持できます。

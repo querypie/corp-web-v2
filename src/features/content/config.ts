@@ -12,6 +12,7 @@ export type DocsCategorySlug =
   | "introduction-decks"
   | "glossary"
   | "manuals"
+  | "white-papers"
   | "blogs";
 
 export type NewsCategorySlug = "news";
@@ -78,6 +79,11 @@ export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
     href: (locale) => `/${locale}/docs?category=manuals`,
     label: { en: "Manuals", ko: "매뉴얼", ja: "Manuals" },
     slug: "manuals",
+  },
+  {
+    href: (locale) => `/${locale}/docs?category=white-papers`,
+    label: { en: "White Papers", ko: "화이트페이퍼", ja: "White Papers" },
+    slug: "white-papers",
   },
   {
     href: (locale) => `/${locale}/docs?category=blogs`,
@@ -152,6 +158,13 @@ const docsAdminCategoryConfigs: AdminCategoryConfig<DocsCategorySlug>[] = [
     label: "Manuals",
     slug: "manuals",
     title: "Manuals",
+  },
+  {
+    description: "화이트페이퍼 문서와 게시 상태, 노출 순서를 관리합니다.",
+    href: "/admin/documentation/white-papers",
+    label: "White Papers",
+    slug: "white-papers",
+    title: "White Papers",
   },
   {
     description: "블로그 문서의 게시 상태와 노출 순서를 관리합니다.",

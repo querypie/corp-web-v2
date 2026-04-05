@@ -1,4 +1,8 @@
 import type { Locale } from "@/constants/i18n";
+import demoContentSeed from "../../content/demo/content-seed.json";
+import docsContentSeed from "../../content/docs/content-seed.json";
+import newsAuthoredContentSeed from "../../content/news/content-seed.json";
+import managedContentSeed from "../../content/managed/content-seed.json";
 import {
   demoCategoryConfigs,
   docsCategoryConfigs,
@@ -6,26 +10,31 @@ import {
   type DocsCategorySlug,
   type NewsCategorySlug,
 } from "./config";
-import { getStaticDemoEntries } from "./demoStatic";
-import { getStaticDocsEntries } from "./docsStatic";
-import { getStaticNewsEntries } from "./newsStatic";
 
 export type ManagedContentSection = "demo" | "documentation" | "news";
-export type ManagedContentStatus = "draft" | "hidden" | "published";
+export type ManagedContentStatus = "hidden" | "published";
 export type ManagedContentCategorySlug = Exclude<DemoCategorySlug | DocsCategorySlug, "all"> | NewsCategorySlug;
+export type ManagedContentType = "content" | "outlink";
 export type LocalizedContent = Record<Locale, string>;
 
 export type ManagedContentEntry = {
   authorName: string;
   authorRole: string;
+  bodyHtml: LocalizedContent;
   bodyMarkdown: LocalizedContent;
+  bodyRichText: LocalizedContent;
   categorySlug: ManagedContentCategorySlug;
+  contentFormat: "markdown" | "tiptap";
+  contentType: ManagedContentType;
   dateIso: string;
   externalUrl: string;
+  hideHeroImage: boolean;
   id: string;
   imageSrc: string;
+  relatedIds: string[];
   section: ManagedContentSection;
   sortOrder: number;
+  storageId?: string;
   status: ManagedContentStatus;
   summary: LocalizedContent;
   title: LocalizedContent;
@@ -41,6 +50,7 @@ type LegacyUseCaseSeed = {
   bodyMarkdown: string;
   categorySlug: "use-cases";
   dateIso: string;
+  hideHeroImage?: boolean;
   id: string;
   imageSrc: string;
   status: ManagedContentStatus;
@@ -73,7 +83,7 @@ const initialUseCaseSeeds: LegacyUseCaseSeed[] = [
     categorySlug: "use-cases",
     dateIso: "2026-03-15",
     id: "seo-analysis",
-    imageSrc: "/images/content/article-01.png",
+    imageSrc: "/uploads/article-01.png",
     status: "published",
     title:
       "SEO analysis, once considered the domain of specialists, can now be handled by an AIP agent.",
@@ -97,7 +107,7 @@ const initialUseCaseSeeds: LegacyUseCaseSeed[] = [
     categorySlug: "use-cases",
     dateIso: "2026-03-12",
     id: "guardrail-design",
-    imageSrc: "/images/content/article-02.png",
+    imageSrc: "/uploads/article-02.png",
     status: "published",
     title:
       "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
@@ -109,7 +119,7 @@ const initialUseCaseSeeds: LegacyUseCaseSeed[] = [
     categorySlug: "use-cases",
     dateIso: "2026-03-08",
     id: "ai-security-map",
-    imageSrc: "/images/content/article-03.png",
+    imageSrc: "/uploads/article-03.png",
     status: "hidden",
     title:
       "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
@@ -121,7 +131,7 @@ const initialUseCaseSeeds: LegacyUseCaseSeed[] = [
     categorySlug: "use-cases",
     dateIso: "2026-03-05",
     id: "workflow-blueprint",
-    imageSrc: "/images/content/article-01.png",
+    imageSrc: "/uploads/article-01.png",
     status: "published",
     title:
       "Operational AI readiness checklist for teams moving from prototype to production.",
@@ -136,18 +146,26 @@ export function createEmptyManagedContentDraft(
   section: ManagedContentSection,
   categorySlug: ManagedContentCategorySlug,
 ): ManagedContentEntry {
+  const useRichEditor = section !== "news";
+
   return {
     authorName: "",
     authorRole: "",
+    bodyHtml: createLocalizedContent(useRichEditor ? createEmptyTiptapHtml() : ""),
     bodyMarkdown: createLocalizedContent(),
+    bodyRichText: createLocalizedContent(useRichEditor ? createEmptyTiptapJson() : ""),
     categorySlug,
+    contentFormat: section === "news" ? "markdown" : "tiptap",
+    contentType: section === "news" ? "outlink" : "content",
     dateIso: getTodayIsoDate(),
     externalUrl: "",
+    hideHeroImage: false,
     id: "new",
     imageSrc: "",
+    relatedIds: [],
     section,
     sortOrder: 0,
-    status: "draft",
+    status: "hidden",
     summary: createLocalizedContent(),
     title: createLocalizedContent(),
   };
@@ -161,12 +179,33 @@ export function createLocalizedContent(value = ""): LocalizedContent {
   };
 }
 
+function createEmptyTiptapJson() {
+  return JSON.stringify({
+    content: [{ type: "paragraph" }],
+    type: "doc",
+  });
+}
+
+function createEmptyTiptapHtml() {
+  return "<p></p>";
+}
+
 export function getLocalizedContent(content: LocalizedContent, locale: Locale) {
   return content[locale] || content.en || content.ko || content.ja || "";
 }
 
 export function getContentThumbnailSrc(imageSrc: string) {
-  return imageSrc.trim() || "/images/common/fallback-contents.jpg";
+  const trimmedImageSrc = imageSrc.trim();
+
+  if (!trimmedImageSrc) {
+    return "/images/common/fallback-contents.jpg";
+  }
+
+  if (trimmedImageSrc.startsWith("/images/content/")) {
+    return trimmedImageSrc.replace("/images/content/", "/uploads/");
+  }
+
+  return trimmedImageSrc;
 }
 
 export function slugifyTitle(title: string) {
@@ -294,119 +333,70 @@ export function getPublicDetailHref(
   return section === "demo" ? `/${locale}/demo/${slug}` : `/${locale}/docs/${slug}`;
 }
 
-export const initialManagedContents: ManagedContentEntry[] = sortManagedContents([
-  ...initialUseCaseSeeds.map((item, index) => ({
-    authorName: item.authorName,
-    authorRole: item.authorRole,
-    bodyMarkdown: createLocalizedContent(item.bodyMarkdown),
-    categorySlug: item.categorySlug,
-    dateIso: item.dateIso,
-    externalUrl: "",
-    id: item.id,
-    imageSrc: item.imageSrc,
-    section: "demo" as const,
-    sortOrder: index + 1,
-    status: item.status,
-    summary: createLocalizedContent(),
-    title: createLocalizedContent(item.title),
-  })),
-  ...buildLocalizedDemoSeedEntries(),
-  ...buildLocalizedDocsSeedEntries(),
-  ...buildLocalizedNewsSeedEntries(),
-]);
+function normalizeManagedSeedEntry(entry: Partial<ManagedContentEntry>): ManagedContentEntry {
+  return {
+    authorName: entry.authorName ?? "",
+    authorRole: entry.authorRole ?? "",
+    bodyHtml: {
+      en: entry.bodyHtml?.en ?? "",
+      ko: entry.bodyHtml?.ko ?? entry.bodyHtml?.en ?? "",
+      ja: entry.bodyHtml?.ja ?? entry.bodyHtml?.en ?? "",
+    },
+    bodyMarkdown: {
+      en: entry.bodyMarkdown?.en ?? "",
+      ko: entry.bodyMarkdown?.ko ?? entry.bodyMarkdown?.en ?? "",
+      ja: entry.bodyMarkdown?.ja ?? entry.bodyMarkdown?.en ?? "",
+    },
+    bodyRichText: {
+      en: entry.bodyRichText?.en ?? "",
+      ko: entry.bodyRichText?.ko ?? entry.bodyRichText?.en ?? "",
+      ja: entry.bodyRichText?.ja ?? entry.bodyRichText?.en ?? "",
+    },
+    categorySlug: entry.categorySlug ?? "use-cases",
+    contentFormat: entry.contentFormat ?? "markdown",
+    contentType: entry.contentType ?? (entry.section === "news" ? "outlink" : "content"),
+    dateIso: entry.dateIso ?? "",
+    externalUrl: entry.externalUrl ?? "",
+    hideHeroImage: entry.hideHeroImage ?? false,
+    id: entry.id ?? "",
+    imageSrc: entry.imageSrc ?? "",
+    relatedIds: entry.relatedIds ?? [],
+    section: entry.section ?? "demo",
+    sortOrder: entry.sortOrder ?? 0,
+    storageId: entry.storageId,
+    status: entry.status ?? "published",
+    summary: {
+      en: entry.summary?.en ?? "",
+      ko: entry.summary?.ko ?? entry.summary?.en ?? "",
+      ja: entry.summary?.ja ?? entry.summary?.en ?? "",
+    },
+    title: {
+      en: entry.title?.en ?? "",
+      ko: entry.title?.ko ?? entry.title?.en ?? "",
+      ja: entry.title?.ja ?? entry.title?.en ?? "",
+    },
+  };
+}
+
+function mergeManagedSeedEntries(...groups: ManagedContentEntry[][]) {
+  const map = new Map<string, ManagedContentEntry>();
+
+  groups.flat().forEach((item) => {
+    map.set(item.id, item);
+  });
+
+  return sortManagedContents([...map.values()]);
+}
+
+export const initialManagedContents: ManagedContentEntry[] = mergeManagedSeedEntries(
+  (managedContentSeed as Partial<ManagedContentEntry>[]).map(normalizeManagedSeedEntry),
+  (demoContentSeed as Partial<ManagedContentEntry>[]).map(normalizeManagedSeedEntry),
+  (docsContentSeed as Partial<ManagedContentEntry>[]).map(normalizeManagedSeedEntry),
+  (newsAuthoredContentSeed as Partial<ManagedContentEntry>[]).map(normalizeManagedSeedEntry),
+);
 
 export function getSeedManagedContents(section?: ManagedContentSection) {
   return section
     ? initialManagedContents.filter((item) => item.section === section)
     : initialManagedContents;
-}
-
-function buildLocalizedDemoSeedEntries(): ManagedContentEntry[] {
-  const enItems = getStaticDemoEntries("en");
-  const koItems = getStaticDemoEntries("ko");
-  const jaItems = getStaticDemoEntries("ja");
-
-  return enItems.map((item, index) => ({
-    authorName: item.writer,
-    authorRole: "",
-    bodyMarkdown: {
-      en: item.bodyMarkdown,
-      ko: koItems[index]?.bodyMarkdown ?? item.bodyMarkdown,
-      ja: jaItems[index]?.bodyMarkdown ?? item.bodyMarkdown,
-    },
-    categorySlug: item.categorySlug,
-    dateIso: item.date,
-    externalUrl: "",
-    id: item.slug,
-    imageSrc: item.imageSrc,
-    section: "demo" as const,
-    sortOrder: index + 1,
-    status: "published" as const,
-    summary: createLocalizedContent(),
-    title: {
-      en: item.title,
-      ko: koItems[index]?.title ?? item.title,
-      ja: jaItems[index]?.title ?? item.title,
-    },
-  }));
-}
-
-function buildLocalizedDocsSeedEntries(): ManagedContentEntry[] {
-  const enItems = getStaticDocsEntries("en");
-  const koItems = getStaticDocsEntries("ko");
-  const jaItems = getStaticDocsEntries("ja");
-
-  return enItems.map((item, index) => ({
-    authorName: item.writer,
-    authorRole: "",
-    bodyMarkdown: {
-      en: item.bodyMarkdown,
-      ko: koItems[index]?.bodyMarkdown ?? item.bodyMarkdown,
-      ja: jaItems[index]?.bodyMarkdown ?? item.bodyMarkdown,
-    },
-    categorySlug: item.categorySlug,
-    dateIso: item.date,
-    externalUrl: "",
-    id: item.slug,
-    imageSrc: item.imageSrc,
-    section: "documentation" as const,
-    sortOrder: index + 1,
-    status: "published" as const,
-    summary: createLocalizedContent(),
-    title: {
-      en: item.title,
-      ko: koItems[index]?.title ?? item.title,
-      ja: jaItems[index]?.title ?? item.title,
-    },
-  }));
-}
-
-function buildLocalizedNewsSeedEntries(): ManagedContentEntry[] {
-  const enItems = getStaticNewsEntries("en");
-  const koItems = getStaticNewsEntries("ko");
-  const jaItems = getStaticNewsEntries("ja");
-
-  return enItems.map((item, index) => ({
-    authorName: "QueryPie Team",
-    authorRole: "PR",
-    bodyMarkdown: createLocalizedContent(),
-    categorySlug: "news" as const,
-    dateIso: item.dateIso,
-    externalUrl: item.externalUrl,
-    id: item.slug,
-    imageSrc: item.imageSrc,
-    section: "news" as const,
-    sortOrder: index + 1,
-    status: "published" as const,
-    summary: {
-      en: item.summary,
-      ko: koItems[index]?.summary ?? item.summary,
-      ja: jaItems[index]?.summary ?? item.summary,
-    },
-    title: {
-      en: item.title,
-      ko: koItems[index]?.title ?? item.title,
-      ja: jaItems[index]?.title ?? item.title,
-    },
-  }));
 }

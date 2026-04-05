@@ -25,8 +25,8 @@ export default function AdminSidebar({
     /* 어드민 전용 좌측 네비게이션 */
     <aside
       className={cx(
-        "group relative flex w-full flex-col bg-bg-deep px-4 py-4 transition-[width,padding] duration-200 md:px-4 md:py-6",
-        isCollapsed ? "md:w-[64px] md:px-2" : "md:w-[240px] md:px-4",
+        "group relative hidden w-full flex-col bg-bg-deep px-3 py-2 transition-[width,padding] duration-200 md:flex md:px-3 md:py-3",
+        isCollapsed ? "md:w-[52px] md:px-2" : "md:w-[220px] md:px-3",
       )}
       onMouseMove={(event) => {
         if (!isCollapsed) return;
@@ -57,7 +57,7 @@ export default function AdminSidebar({
         <button
           className={cx(
             "group relative flex h-8 items-center gap-2 rounded-button transition-opacity",
-            isCollapsed ? "w-8 justify-center gap-0" : "justify-start",
+            isCollapsed ? "w-8 justify-center gap-0" : "justify-start pl-1",
           )}
           onClick={() => {
             if (isCollapsed) {
@@ -99,7 +99,7 @@ export default function AdminSidebar({
       {/* 현재 경로를 기준으로 활성 메뉴를 표시 */}
       <nav
         className={cx(
-          "mt-5 flex flex-col gap-5 transition-[opacity,transform,max-height] duration-200 md:origin-top",
+          "mt-5 flex flex-col gap-0 transition-[opacity,transform,max-height] duration-200 md:origin-top",
           isCollapsed
             ? "pointer-events-none md:max-h-0 md:-translate-y-1 md:overflow-hidden md:opacity-0"
             : "md:max-h-[1200px] md:translate-y-0 md:opacity-100",
@@ -114,7 +114,7 @@ export default function AdminSidebar({
                 key={item.href}
                 className={cx(
                   "inline-flex items-center rounded-button px-3 py-2 type-body-md transition-colors",
-                  isActive ? "bg-secondary text-fg" : "text-mute-fg hover:bg-bg-content hover:text-fg",
+                  isActive ? "bg-secondary text-fg" : "text-mute-fg hover:bg-[#242426] hover:text-fg",
                 )}
                 href={item.href}
                 onClick={(event) => {
@@ -129,8 +129,8 @@ export default function AdminSidebar({
         </div>
 
         {adminNavGroups.map((group) => (
-          <div key={group.label} className="flex flex-col gap-1.5">
-            <p className="m-0 type-body-sm text-fg">{group.label}</p>
+          <div key={group.label} className="flex flex-col gap-px">
+            <div aria-hidden="true" className="mx-3 my-1.5 h-px bg-border" />
             <div className="flex flex-col gap-px">
               {group.items
                 .filter(
@@ -150,7 +150,7 @@ export default function AdminSidebar({
                     key={item.href}
                     className={cx(
                       "inline-flex items-center rounded-button px-3 py-2 type-body-md transition-colors",
-                      isActive ? "bg-secondary text-fg" : "text-mute-fg hover:bg-bg-content hover:text-fg",
+                      isActive ? "bg-secondary text-fg" : "text-mute-fg hover:bg-[#242426] hover:text-fg",
                     )}
                     href={item.href}
                     onClick={(event) => {
@@ -173,6 +173,7 @@ export default function AdminSidebar({
             arrow={false}
             className="w-full justify-center"
             onClick={() => window.open("/en", "_blank", "noopener,noreferrer")}
+            style="round"
             variant="secondary"
           >
             Go Homepage

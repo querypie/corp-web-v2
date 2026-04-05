@@ -1,0 +1,96 @@
+{
+  "category": "webinars",
+  "contentKind": "webinar",
+  "entryId": "querypie-integrations-scim-slack-vault-ja--8",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "8",
+    "sourceCategory": "webinars",
+    "sourceGroupPath": "demo/webinars/8/querypie-integrations-scim-slack-vault-ja",
+    "sourceUrl": "/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/3dk-ep1-ja.webp",
+          "webPath": "/webinar/3dk-ep1-ja.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/querypie-integrations-scim-slack-vault-ja--8/en.mdx",
+      "contentKind": "webinar",
+      "description": "QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/3dk-ep1-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携\"\ndescription: \"QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/3dk-ep1-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/12/querypie-server-management-ja\"\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
+      "relatedPosts": [
+        "/features/demo/webinars/12/querypie-server-management-ja",
+        "/features/demo/webinars/10/querypie-databases-nosql-ledger-ja",
+        "/features/demo/webinars/14/querypie-kubernetes-management-ja"
+      ],
+      "sourcePath": "demo/webinars/8/querypie-integrations-scim-slack-vault-ja/en/content.mdx",
+      "title": "エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携",
+        "description": "QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。",
+        "date": "2024-11-29",
+        "ogImage": "public/webinar/3dk-ep1-ja.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/12/querypie-server-management-ja",
+          "/features/demo/webinars/10/querypie-databases-nosql-ledger-ja",
+          "/features/demo/webinars/14/querypie-kubernetes-management-ja"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/3dk-ep1-ja.webp",
+          "webPath": "/webinar/3dk-ep1-ja.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/querypie-integrations-scim-slack-vault-ja--8/ja.mdx",
+      "contentKind": "webinar",
+      "description": "QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/3dk-ep1-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携\"\ndescription: \"QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/3dk-ep1-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/12/querypie-server-management-ja\"\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
+      "relatedPosts": [
+        "/features/demo/webinars/12/querypie-server-management-ja",
+        "/features/demo/webinars/10/querypie-databases-nosql-ledger-ja",
+        "/features/demo/webinars/14/querypie-kubernetes-management-ja"
+      ],
+      "sourcePath": "demo/webinars/8/querypie-integrations-scim-slack-vault-ja/ja/content.mdx",
+      "title": "エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携",
+        "description": "QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。",
+        "date": "2024-11-29",
+        "ogImage": "public/webinar/3dk-ep1-ja.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/12/querypie-server-management-ja",
+          "/features/demo/webinars/10/querypie-databases-nosql-ledger-ja",
+          "/features/demo/webinars/14/querypie-kubernetes-management-ja"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "querypie-integrations-scim-slack-vault-ja"
+}

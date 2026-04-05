@@ -1,0 +1,96 @@
+{
+  "category": "use-cases",
+  "contentKind": "video",
+  "entryId": "kubernetes-manager-agent--10",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "10",
+    "sourceCategory": "use-cases",
+    "sourceGroupPath": "demo/use-cases/10/kubernetes-manager-agent",
+    "sourceUrl": "/features/demo/use-cases/10/kubernetes-manager-agent"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-4-en.webp",
+          "webPath": "/demo/aip-use-case-thumb-4-en.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/kubernetes-manager-agent--10/en.mdx",
+      "contentKind": "video",
+      "description": "An AI agent that simplifies Kubernetes cluster management through conversational commands, enabling teams to deploy, monitor, and troubleshoot without complex kubectl syntax.",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-4-en.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Kubernetes Manager Agent\"\ndescription: \"An AI agent that simplifies Kubernetes cluster management through conversational commands, enabling teams to deploy, monitor, and troubleshoot without complex kubectl syntax.\"\ndate: \"2025-05-18\"\nogImage: \"public/demo/aip-use-case-thumb-4-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/8/data-analytics-agent-2\"\n  - \"/features/demo/use-cases/9/server-access-agent\"\n  - \"/features/demo/use-cases/11/security-audit-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/8/data-analytics-agent-2",
+        "/features/demo/use-cases/9/server-access-agent",
+        "/features/demo/use-cases/11/security-audit-agent"
+      ],
+      "sourcePath": "demo/use-cases/10/kubernetes-manager-agent/en/content.mdx",
+      "title": "AIP Use Case: Kubernetes Manager Agent",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP Use Case: Kubernetes Manager Agent",
+        "description": "An AI agent that simplifies Kubernetes cluster management through conversational commands, enabling teams to deploy, monitor, and troubleshoot without complex kubectl syntax.",
+        "date": "2025-05-18",
+        "ogImage": "public/demo/aip-use-case-thumb-4-en.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/8/data-analytics-agent-2",
+          "/features/demo/use-cases/9/server-access-agent",
+          "/features/demo/use-cases/11/security-audit-agent"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-4-ja.webp",
+          "webPath": "/demo/aip-use-case-thumb-4-ja.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/kubernetes-manager-agent--10/ja.mdx",
+      "contentKind": "video",
+      "description": "会話形式のコマンドを通じてKubernetesクラスター管理を簡素化するAIエージェント。複雑なkubectl構文を使わずに、チームがデプロイ、監視、トラブルシューティングを実行できるようにします。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-4-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例：Kubernetes管理エージェント\"\ndescription: \"会話形式のコマンドを通じてKubernetesクラスター管理を簡素化するAIエージェント。複雑なkubectl構文を使わずに、チームがデプロイ、監視、トラブルシューティングを実行できるようにします。\"\ndate: \"2025-05-18\"\nogImage: \"public/demo/aip-use-case-thumb-4-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/8/data-analytics-agent-2\"\n  - \"/features/demo/use-cases/9/server-access-agent\"\n  - \"/features/demo/use-cases/11/security-audit-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/8/data-analytics-agent-2",
+        "/features/demo/use-cases/9/server-access-agent",
+        "/features/demo/use-cases/11/security-audit-agent"
+      ],
+      "sourcePath": "demo/use-cases/10/kubernetes-manager-agent/ja/content.mdx",
+      "title": "AIP活用事例：Kubernetes管理エージェント",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP活用事例：Kubernetes管理エージェント",
+        "description": "会話形式のコマンドを通じてKubernetesクラスター管理を簡素化するAIエージェント。複雑なkubectl構文を使わずに、チームがデプロイ、監視、トラブルシューティングを実行できるようにします。",
+        "date": "2025-05-18",
+        "ogImage": "public/demo/aip-use-case-thumb-4-ja.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/8/data-analytics-agent-2",
+          "/features/demo/use-cases/9/server-access-agent",
+          "/features/demo/use-cases/11/security-audit-agent"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "kubernetes-manager-agent"
+}

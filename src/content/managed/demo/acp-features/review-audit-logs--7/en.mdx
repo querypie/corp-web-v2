@@ -1,0 +1,55 @@
+---
+layout: "Article"
+category: "acp-features"
+title: "How to Review Audit Logs"
+description: ""
+date: "2024-11-29"
+ogImage: "public/tutorial/tu-thumb-sac-8.webp"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/acp-features/9/submit-role-access-workflow"
+  - "/features/demo/acp-features/8/connect-servers-agent"
+  - "/features/demo/acp-features/25/review-audit-logs"
+---
+
+<Youtube
+    src="https://www.youtube.com/embed/zOziHp4znzE?si=XpOMwBEqRikrXxBk"
+/>
+
+# Overview
+
+You can view logs related to System Access Control in the Servers section of QueryPie Audit. This includes information on granted and revoked server access permissions, server login/logout events, and command execution history. Additionally, you can view the list of sessions connected through QueryPie and forcefully terminate sessions if needed.
+
+# Logs provided by QueryPie SAC
+
+## Server Access History
+- This section records the **history of server attempts** and disconnections.
+
+## Command Audit
+- Command Audit records the **commands executed on servers accessed** through QueryPie.
+
+## Session Logs
+<InfoNote>
+    **The file exceeds 700MB, and the session cannot be replayed directly. To view this session, download the file and play it locally.**
+    - Click the `Download` button to begin the download, creating a file on your local machine.
+</InfoNote>
+- Session Logs record the sessions of server access managed by your organization. Administrators can monitor user activities within the server by replaying recorded sessions.
+
+## Session Monitoring
+- You can monitor existing server sessions made through QueryPie and forcibly terminate active sessions if necessary.
+
+## Access Control Logs
+- This page logs the history of **granting and revoking direct server access permissions** assigned to QueryPie users or groups.
+- Direct Permission is managed in the Servers tab of the Access Control menu.
+
+## Server Role History
+- This page records the history of **role grants and revocations for server access roles assigned to users and groups** within QueryPie.
+- The granting and revocation of Roles are managed in the Roles tab of the Access Control menu.
+
+## Account Lock History
+<InfoNote>
+    **Precondition:** It follows the **Maximum OS Account Login Failures before Lockout** policies for the connection.
+</InfoNote>
+- All failed login attempts, including incorrect password entries and unauthorized IP access attempts, are counted. Once the failed attempts reach the threshold set by the administrator, the user’s account will be locked.
+- You can reactivate locked accounts in the **Blocked Accounts** menu.

@@ -135,10 +135,10 @@ export default function AboutUsPage({
                 {paragraph}
               </p>
             ))}
-            <div className="w-full overflow-hidden rounded-box">
+            <div className="content-thumbnail-frame w-full overflow-hidden rounded-box">
               <img
                 alt="Company introduction"
-                className="block h-auto w-full object-cover"
+                className="block h-full w-full object-contain"
                 src="/images/about-us/company-introduction.jpg"
               />
             </div>

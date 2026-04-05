@@ -1,0 +1,93 @@
+---
+layout: "Article"
+category: "acp-features"
+title: "How to Register the Servers You Need to Protect"
+description: ""
+date: "2024-11-29"
+ogImage: "public/tutorial/tu-thumb-sac-1.webp"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/acp-features/13/grant-permissions-users"
+  - "/features/demo/acp-features/12/grant-permissions-users-2"
+  - "/features/demo/acp-features/11/use-web-terminal"
+---
+
+<Youtube
+    src="https://www.youtube.com/embed/fzdHHwI4mik?si=0qJ9IsfaHLd2iZK1"
+/>
+
+# Overview
+
+The cloud synchronization feature enables you to synchronize servers from multiple cloud platforms at once or manually register them. This tutorial provides instructions for syncing AWS resources to register them in QueryPie and for manually registering on-premises servers. Also, You can group multiple servers to apply accessible accounts and policies at once. By creating server groups according to specific purposes, you can conveniently manage policies in bulk and grant the permissions for these grouped servers to individual users or user groups all at once.
+
+# Syncing and Managing Servers via AWS Integration
+
+<InfoNote>
+    **Precondition:** Specific policies are required for server synchronization
+    - AmazonEC2ReadOnlyAccess
+</InfoNote>
+
+<BlueState>STEP 1</BlueState> Navigate to the **Cloud Provider** menu and click `Create Provider`. Enter the following details:
+- **Name:** A unique name to identify the provider.
+- **Cloud Provider:** : Select "Amazon Web Services".
+- **Region:** Specify the region of the resources to synchronize.
+- **Credential:** Choose one of the following options:
+  - **Default Credential:** Assign a policy to the IAM role of the EC2 instance where QueryPie is installed to synchronize resources within the same AWS account.
+  - **Cross Account Role:** Create an IAM role to synchronize resources from another AWS account.
+  - **Access Key:** Enter the AWS account's access key to synchronize resources.
+- **Search Filter:** A list of specific types of resources you want to synchronize.
+  - The search filter operates similarly to AWS search methods, allowing you to use values such as names and tags for filtering.
+  `Enter the Key value → Select the search condition → Enter the Value`
+- **Replication Frequency:** How synchronization should occur.
+  - **Manual:** A method where synchronization is performed manually only when desired.
+  - **Scheduling:** A method that synchronizes resources through periodic scheduling. Cron expressions are provided.
+- **Port:** Allow you to specify the default ports of the servers to be synchronized when importing servers. This applies only during the initial synchronization.
+
+<BlueState>STEP 2</BlueState> Select the provider created in the **Cloud Provider** menu.
+
+<BlueState>STEP 3</BlueState> Click the `Synchronize` button to sync AWS resources.
+
+<BlueState>STEP 4</BlueState> Check the synchronized resources in the **Servers** menu.
+
+# Manually register individual servers and manage them as server groups.
+
+<BlueState>STEP 1</BlueState> Go to the **Servers** menu and click `Create Server`. Enter the following details:
+- **Name:** Enter a name to identify the server.
+- **Host:** Enter the server's host, which can be in the form of a domain or IP address.
+- **Server OS:** Select the server's operating system.
+- **OS Version:** Enter detailed information about the server's OS.
+- **Port:** Enter the port for the connection.
+  - **TELNET/FTP:** This option is only displayed if TELNET is enabled under the **"Using insecure protocols"** section in the **Security** menu.
+
+<BlueState>STEP 2</BlueState> If needed, you can manually add **tags** to individual servers.
+- These tags can be used for filtering when viewing the server list or adding servers to a server group.
+- **Key:** Enter a key to identify the tag (up to 512 characters). The key is mandatory and must be unique, with duplicates checked in a case-sensitive manner.
+- **Value:** Enter a value for filtering purposes (up to 256 characters).
+
+<BlueState>STEP 3</BlueState> Click the `Save` button to save, and check the created individual servers in the **Servers** menu.
+
+<BlueState>STEP 4</BlueState> Go to the **Server groups** menu and click `Create Group`. Enter the following details:
+- **Name:** Enter a name to distinguish the server group on the screen.
+- **Description:** Enter additional information about the server group.
+
+<BlueState>STEP 5</BlueState> Select servers to include in the server group using the following two methods:
+1. Specify the tags of servers in **Server Tags** to retrieve the servers matching those tags.
+- This allows for dynamic management of server group targets.
+- Servers added through tags cannot be manually removed from the server table; you must modify the tags in **Server Tags**.
+2. Click the `Add Servers` button to manually add servers.
+
+<BlueState>STEP 6</BlueState> Enter the accounts required for server access.
+- **Account:** Enter a name to distinguish the individual account.
+- **Auto Login:** You can set auto-login. If set to Off, only password authentication can be used.
+- **Provisioning:** Allows you to designate server accounts for automated password changes.
+  - This option is available only when Password Provisioning is enabled under **Administrator > General > Company Management > Security > Server Connection Security**.
+  - It will only appear when Secret Store is set to QueryPie.
+- **Auth Type:** Select the authentication method for the individual account.
+- **Authority**
+  - If the authentication method is Password, enter the password for authentication.
+  - If it is an SSH Key, select a key already registered in SSH Key Configurations.
+- **Protocols:** Set whether to allow SSH or SFTP access with the account.
+
+<BlueState>STEP 7</BlueState> Register the Server Group Owner and click the `Save` button to save the server group.
+- The **Server Group Owner** can be designated as an approver in Workflow.

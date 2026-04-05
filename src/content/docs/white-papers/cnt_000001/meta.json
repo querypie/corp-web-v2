@@ -1,0 +1,40 @@
+{
+  "authorName": "asdf",
+  "authorRole": "asdf",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2026-04-01",
+  "externalUrl": "",
+  "hideHeroImage": false,
+  "id": "asdfasdf",
+  "imageSrc": "",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 1,
+  "status": "hidden",
+  "storageId": "cnt_000001",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "asdfasdf",
+    "ko": "",
+    "ja": ""
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/docs/white-papers/cnt_000001/en.html",
+      "jsonPath": "src/content/docs/white-papers/cnt_000001/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/docs/white-papers/cnt_000001/ko.html",
+      "jsonPath": "src/content/docs/white-papers/cnt_000001/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/docs/white-papers/cnt_000001/ja.html",
+      "jsonPath": "src/content/docs/white-papers/cnt_000001/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,367 @@
+{
+  "category": "white-papers",
+  "contentKind": "article",
+  "entryId": "parsing-sql-query-structural-interface--3",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "3",
+    "sourceCategory": "white-paper",
+    "sourceGroupPath": "documentation/white-paper/3/parsing-sql-query-structural-interface",
+    "sourceUrl": "/features/documentation/white-paper/3/parsing-sql-query-structural-interface"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-3.webp",
+          "webPath": "/white-paper/wp-thumb-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-1-execution-phases.webp",
+          "webPath": "/white-paper/wp3-1-execution-phases.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-2-MySQL-ANTLR4.webp",
+          "webPath": "/white-paper/wp3-2-MySQL-ANTLR4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-3-Oracle-ANTLR4.webp",
+          "webPath": "/white-paper/wp3-3-Oracle-ANTLR4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-4-PostgreSQL-YACC.webp",
+          "webPath": "/white-paper/wp3-4-PostgreSQL-YACC.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-5-qsi-ast-Data-Reference.webp",
+          "webPath": "/white-paper/wp3-5-qsi-ast-Data-Reference.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-6-qsi-ast-Derived-Table.webp",
+          "webPath": "/white-paper/wp3-6-qsi-ast-Derived-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-7-qsi-ast-Joined-Table.webp",
+          "webPath": "/white-paper/wp3-7-qsi-ast-Joined-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-8-qsi-ast-Compound-Table-Combination.webp",
+          "webPath": "/white-paper/wp3-8-qsi-ast-Compound-Table-Combination.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-9-qsi-ast-Inline-Derived-Table.webp",
+          "webPath": "/white-paper/wp3-9-qsi-ast-Inline-Derived-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-10-qsi-ast-Table-Function-Call.webp",
+          "webPath": "/white-paper/wp3-10-qsi-ast-Table-Function-Call.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-11-analysis-result.webp",
+          "webPath": "/white-paper/wp3-11-analysis-result.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-12-analysis-result-2.webp",
+          "webPath": "/white-paper/wp3-12-analysis-result-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-13-analysis-result-3.webp",
+          "webPath": "/white-paper/wp3-13-analysis-result-3.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/parsing-sql-query-structural-interface--3/en.mdx",
+      "contentKind": "article",
+      "description": "Enhance system security with QueryPie's native command control through an advanced SSH proxy architecture.",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "QSI technology",
+        "SQL parsing",
+        "cross-vendor compatibility",
+        "database efficiency"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Core Technology for Parsing SQL Across Multiple Vendors: QSI (Query Structural Interface)\"\ndescription: \"Enhance system security with QueryPie's native command control through an advanced SSH proxy architecture.\"\ndate: \"2024-11-22\"\nauthor: \"evan\"\nogImage: \"public/white-paper/wp-thumb-3.webp\"\nkeywords: [\"QueryPie\", \"QSI technology\", \"SQL parsing\", \"cross-vendor compatibility\", \"database efficiency\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/4/transaction-free-change-data-capture-system\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/4/transaction-free-change-data-capture-system",
+        "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+        "/features/documentation/white-paper/1/personal-data-identification-analysis-ai"
+      ],
+      "sourcePath": "documentation/white-paper/3/parsing-sql-query-structural-interface/en/content.mdx",
+      "title": "Core Technology for Parsing SQL Across Multiple Vendors: QSI (Query Structural Interface)",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "Core Technology for Parsing SQL Across Multiple Vendors: QSI (Query Structural Interface)",
+        "description": "Enhance system security with QueryPie's native command control through an advanced SSH proxy architecture.",
+        "date": "2024-11-22",
+        "author": "evan",
+        "ogImage": "public/white-paper/wp-thumb-3.webp",
+        "keywords": [
+          "QueryPie",
+          "QSI technology",
+          "SQL parsing",
+          "cross-vendor compatibility",
+          "database efficiency"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/4/transaction-free-change-data-capture-system",
+          "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+          "/features/documentation/white-paper/1/personal-data-identification-analysis-ai"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-3.webp",
+          "webPath": "/white-paper/wp-thumb-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-1-execution-phases.webp",
+          "webPath": "/white-paper/wp3-1-execution-phases.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-2-MySQL-ANTLR4.webp",
+          "webPath": "/white-paper/wp3-2-MySQL-ANTLR4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-3-Oracle-ANTLR4.webp",
+          "webPath": "/white-paper/wp3-3-Oracle-ANTLR4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-4-PostgreSQL-YACC.webp",
+          "webPath": "/white-paper/wp3-4-PostgreSQL-YACC.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-5-qsi-ast-Data-Reference.webp",
+          "webPath": "/white-paper/wp3-5-qsi-ast-Data-Reference.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-6-qsi-ast-Derived-Table.webp",
+          "webPath": "/white-paper/wp3-6-qsi-ast-Derived-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-7-qsi-ast-Joined-Table.webp",
+          "webPath": "/white-paper/wp3-7-qsi-ast-Joined-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-8-qsi-ast-Compound-Table-Combination.webp",
+          "webPath": "/white-paper/wp3-8-qsi-ast-Compound-Table-Combination.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-9-qsi-ast-Inline-Derived-Table.webp",
+          "webPath": "/white-paper/wp3-9-qsi-ast-Inline-Derived-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-10-qsi-ast-Table-Function-Call.webp",
+          "webPath": "/white-paper/wp3-10-qsi-ast-Table-Function-Call.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-11-analysis-result.webp",
+          "webPath": "/white-paper/wp3-11-analysis-result.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-12-analysis-result-2.webp",
+          "webPath": "/white-paper/wp3-12-analysis-result-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-13-analysis-result-3.webp",
+          "webPath": "/white-paper/wp3-13-analysis-result-3.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/parsing-sql-query-structural-interface--3/ko.mdx",
+      "contentKind": "article",
+      "description": "다양한 데이터베이스 쿼리 언어와 문법 차이로 일관된 접근 제어와 모니터링이 어려운 상황에서, 여러 데이터베이스 쿼리를 통합하고 실시간 분석을 통해 보안을 강화하는 솔루션을 확인해보세요!",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "QSI technology",
+        "SQL parsing",
+        "cross-vendor compatibility",
+        "database efficiency"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"다양한 벤더의 SQL 파싱하는 핵심 기술, QSI(Query Structural Interface)\"\ndescription: \"다양한 데이터베이스 쿼리 언어와 문법 차이로 일관된 접근 제어와 모니터링이 어려운 상황에서, 여러 데이터베이스 쿼리를 통합하고 실시간 분석을 통해 보안을 강화하는 솔루션을 확인해보세요!\"\ndate: \"2024-11-22\"\nauthor: \"evan\"\nogImage: \"public/white-paper/wp-thumb-3.webp\"\nkeywords: [\"QueryPie\", \"QSI technology\", \"SQL parsing\", \"cross-vendor compatibility\", \"database efficiency\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/4/transaction-free-change-data-capture-system\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/4/transaction-free-change-data-capture-system",
+        "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+        "/features/documentation/white-paper/1/personal-data-identification-analysis-ai"
+      ],
+      "sourcePath": "documentation/white-paper/3/parsing-sql-query-structural-interface/ko/content.mdx",
+      "title": "다양한 벤더의 SQL 파싱하는 핵심 기술, QSI(Query Structural Interface)",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "다양한 벤더의 SQL 파싱하는 핵심 기술, QSI(Query Structural Interface)",
+        "description": "다양한 데이터베이스 쿼리 언어와 문법 차이로 일관된 접근 제어와 모니터링이 어려운 상황에서, 여러 데이터베이스 쿼리를 통합하고 실시간 분석을 통해 보안을 강화하는 솔루션을 확인해보세요!",
+        "date": "2024-11-22",
+        "author": "evan",
+        "ogImage": "public/white-paper/wp-thumb-3.webp",
+        "keywords": [
+          "QueryPie",
+          "QSI technology",
+          "SQL parsing",
+          "cross-vendor compatibility",
+          "database efficiency"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/4/transaction-free-change-data-capture-system",
+          "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+          "/features/documentation/white-paper/1/personal-data-identification-analysis-ai"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-3.webp",
+          "webPath": "/white-paper/wp-thumb-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-1-execution-phases.webp",
+          "webPath": "/white-paper/wp3-1-execution-phases.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-2-MySQL-ANTLR4.webp",
+          "webPath": "/white-paper/wp3-2-MySQL-ANTLR4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-3-Oracle-ANTLR4.webp",
+          "webPath": "/white-paper/wp3-3-Oracle-ANTLR4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-4-PostgreSQL-YACC.webp",
+          "webPath": "/white-paper/wp3-4-PostgreSQL-YACC.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-5-qsi-ast-Data-Reference.webp",
+          "webPath": "/white-paper/wp3-5-qsi-ast-Data-Reference.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-6-qsi-ast-Derived-Table.webp",
+          "webPath": "/white-paper/wp3-6-qsi-ast-Derived-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-7-qsi-ast-Joined-Table.webp",
+          "webPath": "/white-paper/wp3-7-qsi-ast-Joined-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-8-qsi-ast-Compound-Table-Combination.webp",
+          "webPath": "/white-paper/wp3-8-qsi-ast-Compound-Table-Combination.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-9-qsi-ast-Inline-Derived-Table.webp",
+          "webPath": "/white-paper/wp3-9-qsi-ast-Inline-Derived-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-10-qsi-ast-Table-Function-Call.webp",
+          "webPath": "/white-paper/wp3-10-qsi-ast-Table-Function-Call.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-11-analysis-result.webp",
+          "webPath": "/white-paper/wp3-11-analysis-result.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-12-analysis-result-2.webp",
+          "webPath": "/white-paper/wp3-12-analysis-result-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp3-13-analysis-result-3.webp",
+          "webPath": "/white-paper/wp3-13-analysis-result-3.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/parsing-sql-query-structural-interface--3/ja.mdx",
+      "contentKind": "article",
+      "description": "QueryPie の QSI テクノロジーにより、様々なベンダーの SQL を簡単かつ互換性をもって効率的に解析することが可能です。",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "QSI テクノロジ",
+        "SQL 解析",
+        "ベンダー間の互換性",
+        "データベースの効率化"
+      ],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"さまざまなベンダーのSQL解析のためのコア技術、QSI（Query Structural Interface）\"\ndescription: \"QueryPie の QSI テクノロジーにより、様々なベンダーの SQL を簡単かつ互換性をもって効率的に解析することが可能です。\"\ndate: \"2024-11-22\"\nauthor: \"evan\"\nogImage: \"public/white-paper/wp-thumb-3.webp\"\nkeywords: [\"QueryPie\", \"QSI テクノロジ\", \"SQL 解析\", \"ベンダー間の互換性\", \"データベースの効率化\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/4/transaction-free-change-data-capture-system\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/4/transaction-free-change-data-capture-system",
+        "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+        "/features/documentation/white-paper/1/personal-data-identification-analysis-ai"
+      ],
+      "sourcePath": "documentation/white-paper/3/parsing-sql-query-structural-interface/ja/content.mdx",
+      "title": "さまざまなベンダーのSQL解析のためのコア技術、QSI（Query Structural Interface）",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "さまざまなベンダーのSQL解析のためのコア技術、QSI（Query Structural Interface）",
+        "description": "QueryPie の QSI テクノロジーにより、様々なベンダーの SQL を簡単かつ互換性をもって効率的に解析することが可能です。",
+        "date": "2024-11-22",
+        "author": "evan",
+        "ogImage": "public/white-paper/wp-thumb-3.webp",
+        "keywords": [
+          "QueryPie",
+          "QSI テクノロジ",
+          "SQL 解析",
+          "ベンダー間の互換性",
+          "データベースの効率化"
+        ],
+        "relatedPosts": [
+          "/features/documentation/white-paper/4/transaction-free-change-data-capture-system",
+          "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+          "/features/documentation/white-paper/1/personal-data-identification-analysis-ai"
+        ]
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "parsing-sql-query-structural-interface"
+}

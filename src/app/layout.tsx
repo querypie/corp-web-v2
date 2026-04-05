@@ -1,12 +1,21 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "../styles/globals.css";
 
 const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-jetbrains-mono",
+});
+
+const monaSans = localFont({
+  src: "../../public/fonts/MonaSansVF.woff2",
+  display: "swap",
+  variable: "--font-mona-sans",
+  weight: "200 900",
+  style: "normal",
 });
 
 export const metadata: Metadata = {
@@ -20,7 +29,7 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html className={jetBrainsMono.variable} lang="en">
+    <html className={`${jetBrainsMono.variable} ${monaSans.variable}`} lang="en">
       <head>
         <link crossOrigin="anonymous" href="https://cdn.jsdelivr.net" rel="preconnect" />
         <link

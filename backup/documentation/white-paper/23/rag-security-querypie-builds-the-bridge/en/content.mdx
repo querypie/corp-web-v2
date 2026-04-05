@@ -1,0 +1,1467 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "RAG 2.0 Security: Microsoft and Meta’s Groundwork, QueryPie Builds the Bridge"
+description: "This article introduces the background and security architecture of RAG 2.0 and emphasizes the importance of execution flow control through various corporate cases. RAG 2.0 is differentiated from existing RAGs in that it goes beyond simple document search and applies policies in real time to prevent sensitive information from being delivered to the wrong users."
+date: "2025-05-28"
+author: "kenny"
+ogImage: "public/white-paper/wp-thumb-23.png"
+keywords: ["AI","RAG 2.0", "PBAC","CBAC","RAG Architectures","Enterprise AI Security","Secure RAG","Build Safe AI Foundation","enterprise AI security","Cloud Audit Logs","AI Action Control","AI Compliance"]
+relatedPosts:
+  - "/features/documentation/aip-introduction-download"
+  - "/features/documentation/acp-introduction-download"
+  - "/features/documentation/querypie-install-guide"
+---
+# 1. Introduction: Why RAG 2.0, and What Has Changed?
+
+## 1.1 The Rise of RAG—and Its Structural Gaps
+
+Retrieval-Augmented Generation (RAG) has rapidly emerged as a powerful architecture in the evolution of generative AI. By augmenting LLMs with external data, RAG helps overcome the inherent limitations of relying solely on pre-trained knowledge. Instead, it injects real-time, retrieved documents or database records directly into the prompt—dramatically improving both accuracy and recency of responses. As a result, even sophisticated models like GPT-4, Claude, or Gemini can now generate highly relevant answers to enterprise-specific questions that would otherwise be beyond their static training corpus.
+
+However, this architectural leap introduces new classes of security threats. In multi-tenant environments, where multiple users share the same vector infrastructure or prompt chain, documents retrieved beyond a user’s access rights may be injected into the prompt—exposing sensitive data to unauthorized parties. This is not simply a prompt design issue; it is a structural failure in how the retrieval and injection pipeline is controlled prior to the LLM itself[1].
+
+* Vector Infrastructure
+    - A system that stores unstructured data (documents, logs, knowledge) in vector form through embedding
+    - In RAG, user queries are matched against this vector space to retrieve semantically similar content
+    - Common tools include Pinecone, Weaviate, Qdrant, and FAISS
+
+* Prompt Chain
+    - The end-to-end pipeline that feeds retrieved content into an LLM
+    - This includes the full flow: user query → document retrieval → prompt injection → response generation
+    - It is often managed by frameworks such as LangChain, LlamaIndex, and AutoGen
+
+Traditional Identity and Access Management (IAM) and Role-Based Access Control (RBAC) systems are not sufficient to control this flow. Vector search is based on semantic similarity rather than structured queries, making results inherently unpredictable. If metadata filtering is incomplete, documents that are otherwise access-controlled (via ACLs) may still be surfaced and injected—resulting in unintended data exposure. This has led to growing calls for runtime security controls in
+RAG—beyond basic document isolation—to mitigate these structural risks[2].
+
+
+## 1.2 Threat Scenario from Internal Testing: Kenny Case
+
+QueryPie conducted internal experiments to validate the structural security vulnerabilities in RAG pipelines. The most representative threat scenario that emerged is known as the "Kenny Case."
+
+***Experimental Scenario: Salary Data Leak Between Kenny and Brant***
+
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp23-1-threat-scenario-kenny-case.png"
+        alt="[Figure 1] Experiment-Based Scenario: Kenny Case"
+        caption="[Figure 1] Experiment-Based Scenario: Kenny Case"
+    />
+</Box>
+
+1. Scenario Setup
+    - Kenny: A member of the security team who uploaded internal Confluence documents containing project meeting notes and salary details.
+    - Brant: A developer who queried the company’s RAG-based internal agent with, "What’s the salary range for recent hires?"
+    - System Context: Authentication was in place, but the vector search layer lacked user_id-based metadata filtering.
+
+2. Threat Path
+    a. Brant’s question triggered a semantic search in the vector database.
+    b. One of Kenny’s documents was selected based on similarity, despite being outside Brant’s access scope.
+    c. That document’s content—including summarized salary data—was injected into the prompt.
+    d. The LLM generated a response, which was returned to Brant—revealing sensitive information.
+
+3. Root Cause Analysis
+    - Although user_id metadata existed, it was not applied as a filter at the API level during vector search.
+    - Session-based access control was not implemented.
+    - There was no context validation or filtering before prompt injection.
+
+**How Information Is Stored in Vector Databases: Indexing and Embedding Flow**
+
+**1. Document Chunking:** Long documents are split into smaller, semantically coherent chunks (e.g., 500–1000 tokens). In this case, Kenny’s Confluence file was divided into multiple fragments.
+
+**2. Embedding Generation:** Each chunk is converted into a high-dimensional vector using an embedding model such as OpenAI, Cohere, or BGE.
+Example: vector = embed("content of the document chunk")
+
+**3. Metadata Attachment and Storage:** 
+
+Each vector is stored with associated metadata in JSON format:
+
+```json
+{
+  "vector": [0.12, -0.45, ..., 0.33],
+  "metadata": {
+    "doc_id": "CONF-2024-001",
+    "user_id": "kenny",
+    "department": "security",
+    "upload_time": "2024-03-11T08:15:00Z",
+    "sensitivity": "confidential"
+  }
+}
+```
+
+**4. Vector Database Storage**
+    - These combined vectors and metadata are stored in vector databases such as Pinecone, Weaviate, Qdrant, or FAISS.
+
+
+**How Metadata Is Linked: A Combined Structure**
+
+Most vector databases treat vectors and metadata as a single combined object.
+
+For example:
+    - Weaviate uses an Object
+    - Pinecone uses an Item
+    - Qdrant uses a Point
+
+This means metadata is not stored separately—it can be directly leveraged in **filter conditions** during retrieval.
+
+Example – Kenny’s Document Record Structure
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Field </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Value </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> `vector` </Table.Td>
+            <Table.Td>[0.12, -0.45, ...]</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `user_id` </Table.Td>
+            <Table.Td>"kenny"</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `doc_id` </Table.Td>
+            <Table.Td>"CONF-2024-001"</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `department` </Table.Td>
+            <Table.Td> "security" </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `sensitivity` </Table.Td>
+            <Table.Td> "confidential" </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+**How Search Works – Processing Brant’s Query**
+
+1. User Input → "What is the salary range for recent hires?"
+2. Embedding Generation → Query vector is created
+3. Vector Similarity Search
+4. Filtering Not Applied → Kenny’s document is included in results
+5. Top-K Documents Selected → Injected into prompt
+6. LLM Response Generated → Sensitive data returned to Brant
+
+
+**Core Issue: Missing Filter Conditions**
+In an ideal design, the query would apply **session-based dynamic filters** like this:
+
+```python
+results = vector_db.search(
+    vector=query_vector,
+    top_k=5,  # Top 5 most similar vectors
+    filter={
+        "user_id": {"$eq": "brant"},
+        "sensitivity": {"$ne": "confidential"}
+    }
+)
+```
+
+Instead, Brant receives Kenny’s document solely based on vector similarity, without any access control filtering.
+
+This scenario clearly demonstrates that the security failure occurs not at the LLM response stage, but earlier—during vector search and document injection. The model didn’t hallucinate sensitive data—the system permitted unauthorized content into the prompt[2].
+
+
+## 1.3 The Rise of RAG 2.0: From Static Retrieval to Runtime Security Control
+
+This emerging security challenge has led to the evolution of **RAG 2.0.** While **RAG 1.0** followed a fixed four-stage pipeline—**embedding → retrieval → injection → response—RAG 2.0** introduces a new execution-aware, security-centered flow, designed to mitigate structural risks.
+
+Key components of the RAG 2.0 security model include:
+
+* Session-Based Policy Evaluation
+* Metadata Filtering Before Prompt Injection
+* Mid-Flow Permission Branching and Blocking
+* Explainable Provenance Tracking
+* Unified ACL Management Across Users, Documents, and Contexts
+
+These controls are not implemented externally to the LLM stack. Instead, they must operate in real time—immediately before and after LLM invocation—enabling true data security and content isolation. The core idea behind RAG 2.0 is the integration of policy logic between retrieval and response, moving beyond traditional access control to include branching logic and prompt construction authorization[3].
+
+
+## 1.4 Why Runtime Security Control Is Essential: Who Can Access What, and When?
+
+As outlined earlier, traditional static filtering and user authentication are not sufficient for securing RAG 2.0 environments. It's not just about what the user is asking, but also which documents are injected into the prompt, when they are retrieved, and by whom. This is precisely why runtime security control has become essential. 
+
+Leading organizations—including Microsoft, Meta, and QueryPie—are each approaching this problem from different architectural angles, but with a shared philosophy: 
+
+**"Before the model generates a response, the system must evaluate which information is eligible to be included."**
+
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Company </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Where Policy Evaluation Happens </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Summary of Application Method </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **Microsoft** </Table.Td>
+            <Table.Td> Copilot API layer (acts as PDP) </Table.Td>
+            <Table.Td> Checks document permissions via Microsoft Graph before allowing prompt injection </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Meta** </Table.Td>
+            <Table.Td> Within the orchestrator layer </Table.Td>
+            <Table.Td> Applies injection rules based on document metadata + session context </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **QueryPie** </Table.Td>
+            <Table.Td> Full-flow evaluation at MCP Agent </Table.Td>
+            <Table.Td> Executes OPA-based policy checks using user, document, time, and risk context; applies runtime execution control </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+These strategic directions and implementation differences will be analyzed in detail in Section 5. In the latter half of this white paper, we will present a technical approach to building a unified policy control layer, along with concrete policy constructs required to govern real-time execution flows.
+
+
+# 2. Implementing Secure RAG Architectures in Multi-Tenant Environments
+
+## 2.1 Execution-Based Security Failures: Isolation Breakdown in Multi-Tenant RAG
+
+The standard RAG pipeline typically follows these steps: document embedding → vector search → prompt injection → response generation. Among these, the vector search and prompt injection stages pose the highest risk for data leakage—especially when they involve documents retrieved from external sources.
+
+This risk is particularly severe in multi-tenant SaaS environments, where documents from multiple organizations or users coexist within the same vector database and infrastructure. If runtime authorization is not enforced during vector search, unauthorized documents may be retrieved and injected into a prompt for the wrong user session.
+
+The core issue in this architecture is the lack of user-level authorization. When document selection is driven solely by vector similarity—without enforcing session-based access filters—the prompt may include data the user is not allowed to access. As a result, RAG security must shift its focus from LLM response generation to pre-response enforcement—specifically at the retrieval and document injection layers. Achieving this requires session-based user isolation, which is not possible through static filters or identity validation alone.
+
+The following are architectural approaches that show how real-world companies and open-source projects are structurally addressing this challenge.
+
+
+## 2.2 Microsoft: Tenant-Aware Routing and Metadata Filtering via API Gateway
+
+Microsoft’s multi-tenant RAG architecture, built on Azure OpenAI, incorporates authentication and document access control directly into the API Gateway layer. This architecture goes beyond simply relaying queries. It dynamically filters vector search targets and results based on session context at runtime.
+
+When a user sends a RAG request, the API Gateway first validates the user’s OAuth token, identifies the associated tenant, and routes the request to that tenant’s dedicated vector store. Even when accessing a shared vector store, the system applies metadata filters (e.g., `user_id`, `tenant_id`, `access_scope`) to ensure that sensitive documents are excluded from prompt injection. All selected documents and generated responses are logged to enable security monitoring and auditability[7].
+
+This architecture—spanning API Gateway → Orchestrator → Vector DB → LLM → Logging—represents a strong example of runtime policy enforcement in a production RAG environment.
+
+**Diagram: Microsoft RAG Security Flow**
+
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp23-2-microsoft-rag-security-flow.png"
+        alt="[Figure 2] Microsoft RAG Security Flow"
+        caption="[Figure 2] Microsoft RAG Security Flow"
+    />
+</Box>
+
+
+**Key Control Functions**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Control Item </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Implementation Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **User Authentication** </Table.Td>
+            <Table.Td> OAuth-based authentication and session extraction </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Tenant Isolation** </Table.Td>
+            <Table.Td> Tenant-level routing performed at API Gateway </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Document Access Control** </Table.Td>
+            <Table.Td> Metadata filtering using `user_id`, `tenant_id`, etc. </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Runtime Policy Evaluation** </Table.Td>
+            <Table.Td> Dynamic filters applied at each vector query </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Auditability** </Table.Td>
+            <Table.Td> Selected documents, generated responses, and query logs are recorded in the audit system </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+## 2.3 AWS: Metadata Filtering and Logical Partitioning in an S3-Based Knowledge Base
+
+In AWS environments, multi-tenant RAG systems are often built around a centralized Knowledge Base on S3, with metadata-based filtering and logical partitioning defining tenant-specific security boundaries.
+
+Documents stored in S3 are tagged using custom metadata in the `x-amz-meta-*` format, including attributes like `tenant_id`, `access_level`, and `classification`.
+
+When a RAG query is submitted, the **orchestration layer**—powered by **SageMaker** or **Bedrock**—extracts **IAM credentials or JWTs** and evaluates them against document metadata to restrict retrieval to only authorized records.
+
+Even if a shared vector store (e.g., Amazon OpenSearch or Amazon Kendra) is used, access is still dynamically filtered based on metadata. This allows for logical tenant separation within a shared infrastructure—meaning users or organizations can only query and inject content they are permitted to access[8].
+
+This approach is considered a form of **Label-Based Access Control (LBAC)**, which achieves multi-tenancy security without physically separating infrastructure.
+
+**Diagram: AWS Multi-Tenant RAG Architecture with S3**
+
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp23-3-aws-multi-tenant-rag-architecture-with-s3.png"
+        alt="[Figure 3] AWS Multi-Tenant RAG Architecture with S3"
+        caption="[Figure 3] AWS Multi-Tenant RAG Architecture with S3"
+    />
+</Box>
+
+
+**Key Control Functions**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Control Item </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Implementation Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **Authentication Transfer** </Table.Td>
+            <Table.Td> User identified via IAM role or JWT </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Document Metadata Classification** </Table.Td>
+            <Table.Td> Tagged with `x-amz-meta.tenant_id`, `access_level`, etc. </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Vector Query Filtering** </Table.Td>
+            <Table.Td> Filters applied dynamically based on metadata </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Logical Tenant Separation** </Table.Td>
+            <Table.Td> Metadata + vector store filtering creates effective isolation </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Response Security** </Table.Td>
+            <Table.Td> Only allowed document fragments are injected into the prompt </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+## 2.4 LlamaIndex: A Lightweight Approach to Metadata-Based Filtering
+
+LlamaIndex implements metadata-driven access control through a simple and intuitive design, built atop a Search-to-Generate architecture. Each document chunk is indexed using a key-value metadata structure like: `metadata={"user_id": ..., "department": ..., "access_level": ...}`. During retrieval, these fields are used to construct dynamic filter conditions.
+
+This structure allows for effective runtime access control within a single Python application—without needing complex IAM systems or external policy engines. Filters are generated on-the-fly based on the current session’s user_id or role, and only chunks matching those conditions are passed to the LLM.
+
+LlamaIndex also integrates flexibly with vector search engines like FAISS, Weaviate, or Qdrant, returning search results already coupled with their associated metadata. This enables a clean, compact filtering logic.
+
+In the official demo, users issuing the same prompt will receive different responses—limited to documents they uploaded—with unauthorized content excluded during the vector search phase. This model enforces access controls before prompt injection, representing a clean and minimal implementation of runtime security enforcement[9].
+
+**Diagram: Metadata-Based Filtering in LlamaIndex**
+
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp23-4-metadata-based-filtering-in-llamaindex.png"
+        alt="[Figure 4] Metadata-Based Filtering in LlamaIndex"
+        caption="[Figure 4] Metadata-Based Filtering in LlamaIndex"
+    />
+</Box>
+
+**Key Control Functions**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Control Item </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Implementation Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **Document Indexing** </Table.Td>
+            <Table.Td> Each chunk stored with associated `metadata` fields </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Session-Based Evaluation** </Table.Td>
+            <Table.Td> Filters generated using `user_id`, `department`, `access_level` </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Search Filtering** </Table.Td>
+            <Table.Td> Vector search combined with metadata filtering at runtime </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Logical Tenant Separation** </Table.Td>
+            <Table.Td> Metadata + vector store filtering creates effective isolation </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Structural Simplicity** </Table.Td>
+            <Table.Td> Fully managed within Python, no external auth system required </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Backend Flexibility** </Table.Td>
+            <Table.Td> Compatible with FAISS, Weaviate, Qdrant, and more </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+## 2.5 Pinecone & Weaviate: Structural Isolation at the Vector Infrastructure Layer
+
+Commercial vector databases such as Pinecone and Weaviate adopt a structural isolation strategy at the vector infrastructure layer to ensure multi-tenant security. This architecture enables pre-emptive data separation, even without explicit policy enforcement during vector search.
+
+Pinecone achieves this by defining namespace within a single index—each acting as a logically isolated space for a specific customer or organization. During a vector search, the client must specify the target namespace, and access to any other namespace is strictly denied. This provides hard isolation at the storage level.
+
+Weaviate takes a similar approach using shard-based storage. Each tenant's data is placed into a separate shard, and queries are routed exclusively to that shard. This creates logical separation equivalent to physical isolation, without requiring centralized security settings[10].
+
+These infrastructure-level isolation models allow providers to enforce data boundaries without needing a separate policy engine, making them highly scalable for SaaS environments with thousands of concurrent tenants.
+
+**Diagram: Vector-Based Multi-Tenancy in Pinecone & Weaviate**
+
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp23-5-vector-based-multi-tenancy-in-pinecone-and-weaviate.png"
+        alt="[Figure 5] Vector-Based Multi-Tenancy in Pinecone & Weaviate"
+        caption="[Figure 5] Vector-Based Multi-Tenancy in Pinecone & Weaviate"
+    />
+</Box>
+
+**Key Control Functions**
+
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Control Item </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Implementation Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **Storage Separation** </Table.Td>
+            <Table.Td> Pinecone uses `namespaces`; Weaviate uses `shards` to isolate tenant data </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **External Access Isolation** </Table.Td>
+            <Table.Td> Requests cannot access data outside the assigned namespace or shard </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **No Runtime Enforcement Needed** </Table.Td>
+            <Table.Td> Isolation is enforced at the search layer without a policy engine </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Operational Scalability** </Table.Td>
+            <Table.Td> Logical separation maintains performance even with thousands of tenants </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Infrastructure-Level Security** </Table.Td>
+            <Table.Td> Tenant isolation achieved through index or shard configuration—without multi-layered security systems </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+## 2.6 Meta: Context-Aware Filtering Before Prompt Injection
+
+Meta, through its internal LLM experiments and open research, has actively explored runtime policy enforcement during the prompt injection phase. This approach goes beyond basic vector similarity retrieval by evaluating both session metadata and document context, closely resembling a **Purpose-Based Access Control (PBAC)** model. 
+
+Although Meta has not publicly disclosed the full implementation, presentations and published research suggest the following architecture:
+
+1. During document storage, metadata fields such as `access_scope`, `confidentiality`, and `created_at` are applied.
+2. Before generating the LLM prompt, the system compares session information (user, role, query context) against these metadata conditions to determine which documents may be injected.
+3. The LLM response includes references to document IDs or summary hashes, enabling post-execution auditing. 
+
+This architecture shares conceptual similarities with Microsoft’s and QueryPie’s RAG security designs. In particular, Meta reinforces pre-execution filtering to prevent sensitive data exposure—evaluating policy before the LLM generates a response. This preemptive design avoids the need for post-response filtering, reducing risk and ensuring higher policy compliance[11].
+
+**Diagram: Meta's Context-Based PBAC Flow**
+
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp23-6-meta-context-based-pbac-flow.png"
+        alt="[Figure 6] Meta's Context-Based PBAC Flow"
+        caption="[Figure 6] Meta's Context-Based PBAC Flow"
+    />
+</Box>
+
+**Key Control Functions**
+
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Control Item </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Implementation Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **Context-Based Policy Fields** </Table.Td>
+            <Table.Td> Documents tagged with `access_scope`, `confidentiality`, `created_at`, etc. </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **User Session Evaluation** </Table.Td>
+            <Table.Td> Access determined by `user.role`, `session.purpose`, and `query.context` </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Pre-Prompt Filtering** </Table.Td>
+            <Table.Td> Policy rules enforced before any document is passed to the LLM </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Response Traceability** </Table.Td>
+            <Table.Td> LLM responses include document IDs or hash references for auditing </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **PBAC Enforcement Structure** </Table.Td>
+            <Table.Td> Combines purpose, user attributes, and document context in a unified policy filter </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+## 2.7 Practical Implications and Technical Challenges
+
+The case studies from Microsoft, AWS, Meta, LlamaIndex, Pinecone, and Weaviate highlight a consistent strategic direction: RAG security depends on controlling the execution flow before prompt injection. While their infrastructures differ, all emphasize runtime enforcement, recognizing that traditional access controls alone are not sufficient in RAG 2.0 environments.
+
+In these architectures, security policies must be applied in real time across the dynamic flow from query to document to response.
+
+**Practical Implications**
+
+* **Prompt Injection Is the Final Security Barrier:** Most LLMs generate responses based solely on the documents they are given. Therefore, controlling which documents are injected into the prompt is the final and most critical defense layer. Microsoft and Meta implement PBAC (Purpose- Based Access Control) at this stage—evaluating user intent, session metadata, and document attributes before prompt construction.
+
+* **Execution Flow Requires Multi-Layered Enforcement:** A typical RAG system follows a flow of query embedding → vector search → document filtering → prompt composition → response generation. Each step operates at a different system layer, meaning security enforcement must be distributed and cumulative. For example, LlamaIndex filters at retrieval, while Meta enforces policy just before prompt assembly.
+
+* **Vector Infrastructure-Level Isolation Is Also Effective:** Platforms like Pinecone and Weaviate isolate tenant data using namespaces or shards, achieving logical separation without runtime policy engines. This is especially useful in large-scale SaaS environments where dynamic policy enforcement is complex.
+
+* **Policy Expression Must Extend Beyond ACLs:** Simple ACLs (Access Control Lists) are not enough to secure execution flows. CBAC (Context-Based Access Control) and PBAC models are needed to evaluate user session attributes, query intent, request timing, and document state—as seen in Meta’s architecture.
+
+* **Policy Reflection, Not Just Definition, Is What Matters:** Many organizations have formal security policies, but fail to embed those policies into actual execution flows. True enforcement is not about documentation—it’s about live policy reflection at runtime.
+
+
+**Technical Challenges**
+
+To implement secure execution-based workflows, several technical hurdles must be addressed:
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Challenge </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **Distributed Policy Enforcement** </Table.Td>
+            <Table.Td> Policies must remain consistent across dispersed layers: search, filter, injection, response. </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Missing Filter Conditions** </Table.Td>
+            <Table.Td> Omitting filters like `user_id` or `access_scope` can expose sensitive content. </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Session Context Decoupling** </Table.Td>
+            <Table.Td> If session metadata doesn’t reach the policy engine, enforcement fails. </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Lack of Auditability** </Table.Td>
+            <Table.Td> Systems that can't track which documents were injected for which prompts lack accountability. </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+**Strategic Takeaways**
+
+From this analysis, several strategic insights emerge:
+
+* Prompt-level control is the critical chokepoint for RAG execution security.
+* Real-time policy enforcement must consider both session metadata and document attributes.
+* PBAC, CBAC, and ACL models should be integrated—not treated as alternatives.
+* Policies must be reflected dynamically in execution, not just documented statically.
+
+
+# 3. Designing Security Strategies for Execution Flow Control
+
+## 3.1 Foundational Premise: Without Execution Flow Control, Security Is Ineffective
+
+As demonstrated by diverse implementations from Microsoft, Meta, AWS, LlamaIndex, and QueryPie, organizations take varying architectural approaches to securing multi-tenant RAG systems. However, they all converge on one critical insight: security must be enforced throughout the entire execution flow—before the model generates a response.
+
+In RAG, the execution path spans embedding → retrieval → prompt construction → model invocation → response generation. If any single stage is left uncontrolled, ACLs and access policies become meaningless. Since LLMs can implicitly incorporate unintended content into responses, the prompt injection stage is the final opportunity to enforce control.
+
+Thus, a flow-aware security strategy must answer three essential questions in real time:
+
+* **Who is asking?** (Session-based user context)
+* **What is the purpose and context?** (Query intent, time, and resource scope)
+* **Which documents may be injected?** (Metadata-based constraints)
+
+
+## 3.2 Five Core Principles for Execution Flow Security
+
+To secure the RAG execution pipeline, regardless of the underlying platform or framework, the following five principles form the baseline for RAG 2.0 security architecture.
+
+### Principle 1: Session-Based Policy Evaluation
+
+Authentication tokens or session IDs must not be used solely for access—they must serve as core context inputs for policy evaluation. Before prompt construction, a user's role, privileges, and attributes must be evaluated to determine, in real time, which documents are eligible for injection. This model has been implemented or adopted by Microsoft, Meta, and QueryPie[9].
+
+### Principle 2: Metadata-Based Document Filtering
+All embedded documents must include rich metadata (e.g., `user_id`, `tenant_id`, `security_level`, `document_type`) and vector search must apply these fields as filter criteria. Because this step is often easy to overlook during development, it should be enforced through policy abstraction layers or wrapped with API proxies to ensure compliance[10].
+
+### Principle 3: Mid-Pipeline Branching and Control
+Before documents are injected into prompts, runtime policies must enable conditional branching or blocking. For example, if a user queries a sensitive category (e.g., “performance reviews”) or submits the request outside an authorized time window, the system should deny document injection dynamically. This supports flexible and context-aware enforcement.
+
+### Principle 4: Traceable Execution Path
+The entire flow must be logged as a traceable session, not just raw logs. Security logs should visualize which documents were injected into which queries under which policy conditions—pass or fail. This is critical for audits and explainability, particularly in finance, healthcare, and public sectors[11].
+
+### Principle 5: Provenance Binding Between Input and Output
+The LLM response must explicitly reference which documents it was based on, typically by embedding document IDs or cryptographic signatures within the output. This enhances trust, transparency, and post-hoc auditability, making it easier to investigate unintentional disclosure or policy violations.
+
+
+## 3.3 Architectural Summary of Execution Flow Security
+
+The following diagram summarizes the conceptual architecture of runtime security control, built upon the five core principles outlined earlier:
+
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp23-7-architectural-summary-of-execution-flow-security.png"
+        alt="[Figure 7] Execution Flow Security Architecture"
+        caption="[Figure 7] Execution Flow Security Architecture"
+    />
+</Box>
+
+
+## 3.4 Feasibility of Security Architecture Bypass
+
+While the five principles above provide a solid foundation for RAG security design, real-world systems are not only prone to design flaws—but are actively exposed to bypass attempts. 
+
+These threats are not merely technical vulnerabilities—they exploit the disconnection between prompt injection architecture and policy evaluation flow. As such, security design must go beyond declaring "what is allowed" and instead focus on proving "whether those allowances are actually being enforced." 
+
+The next section of this white paper explores realistic attack scenarios that can compromise security architectures. In addition to the Kenny case, we will examine five feasible attack paths:
+
+* Exposure of HR data, such as salary information
+* Inclusion of unauthorized document summaries in LLM responses
+* Fabricated answers based on documents outside the user's team
+* Privilege escalation through shared sessions
+* Disclosure of expired or deprecated content due to missing policy checks
+
+
+# 4. Analyzing Threat Scenarios That Bypass Security Architecture
+
+## 4.1 Why Scenario-Based Threat Modeling Matters
+
+While the execution flow–based security strategies discussed earlier offer a strong foundation in principle, gaps between design and implementation—or unhandled edge cases—can turn those strategies into incomplete safeguards in real-world deployments. RAG systems operate through a pipeline of vector search → document injection → prompt construction → response generation. These are often managed as separate components, increasing the risk of security blind spots
+between policy enforcement layers.
+
+This section outlines five threat scenarios that demonstrate how attackers or misconfigurations can bypass otherwise well-designed architectures. These scenarios are drawn from internal enterprise tests, real-world operations, and structural weaknesses raised by the security community. Rather than stemming from purely technical flaws, these risks reflect policy blind spots—highlighting how information leakage can occur even when infrastructure appears secure on the surface.
+
+
+## 4.2 Scenario 1: Salary Data Exposure Due to Missing Metadata Filters
+
+**Summary**
+
+* A user queries the internal RAG agent: “What is the salary range for recent hires?”
+* Although the user’s session was authenticated, the vector search omitted the user_id filter, resulting in a confidential document from another department being injected into the prompt.
+* The model returns a summarized response containing sensitive salary information.
+
+**Violated Principles**
+
+* Principle 2: Missing metadata-based filtering
+* Principle 3: No mid-pipeline branching
+
+**Feasibility**
+* If vector DB filters are applied manually at the code level, they are prone to human error.
+* Without a policy engine or API-level enforcement, such omissions are difficult to detect or recover from[12].
+
+
+## 4.3 Scenario 2: Quoting Documents from Another Team Without Authorization
+
+**Summary**
+* A developer queries: “What was the design philosophy behind the new product?”
+* The LLM includes excerpts from a document authored by the design team.
+* While the document is technically public, the querying user does not have contextual access rights to that document based on session attributes.
+
+**Violated Principles**
+* Principle 1: Session-based policy evaluation missing
+* Principle 5: No response-to-source traceability
+
+**Feasibility**
+* Many systems grant access solely based on a document’s “public” status.
+* In RAG, however, contextual session evaluation must govern injection eligibility—even for public documents[13].
+
+
+## 4.4 Scenario 3: Privilege Escalation via Session Sharing or Agent Cloning
+
+**Summary**
+* User A shares an approved session token with user B, or clones an internal RAG agent into a personal workspace.
+* The cloned agent lacks integrated policy enforcement (e.g., PDP), but still performs searches using the original configuration—accessing documents outside B’s scope.
+
+**Violated Principles**
+* Principle 1: No session-based control
+* Principle 4: No execution path audit
+
+**Feasibility**
+* If PDP modules are not transferred with cloned workflows, all security logic is bypassed.
+* Agent frameworks like LangChain or LlamaIndex are especially susceptible due to their modular and easily replicated structures[14].
+
+
+## 4.5 Scenario 4: Expired or Sensitive Documents Not Enforced
+
+**Summary**
+* An executive offboarding document from 3 years ago remains in the vector DB.
+* It is retrieved due to high semantic similarity with a new query—despite being marked for deprecation.
+* Since the vector embedding was not assigned a TTL or expiration policy, the model generates an outdated, misleading response.
+
+**Violated Principles**
+* Principle 2: Metadata filters for expiration/classification not applied
+* Principle 3: No policy-based filtering before injection
+
+**Feasibility**
+* Most vector DBs do not natively support TTL (Time-to-Live) or expiration enforcement for embeddings. Without lifecycle-aware embeddings, stale content is silently reintroduced[15].
+
+## 4.6 Scenario Summary
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Scenario </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Threat Type </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Violated Principles </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Primary Vulnerability Point </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> 4.2 </Table.Td>
+            <Table.Td> Info leakage via filter omission </Table.Td>
+            <Table.Td> 2, 3 </Table.Td>
+            <Table.Td> Pre-vector search </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> 4.3 </Table.Td>
+            <Table.Td> Context-blind response injection </Table.Td>
+            <Table.Td> 1, 5 </Table.Td>
+            <Table.Td> Prompt construction phase </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> 4.4 </Table.Td>
+            <Table.Td> Clone-based access escalation </Table.Td>
+            <Table.Td> 1, 4 </Table.Td>
+            <Table.Td> Missing auth / audit in clones </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> 4.5 </Table.Td>
+            <Table.Td> Exposure of expired or sensitive docs </Table.Td>
+            <Table.Td> 2, 3 </Table.Td>
+            <Table.Td> No expiration control on embeddings </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+## 4.7 Challenges Revealed by Execution Flow Bypass Threats
+
+The scenarios above clearly demonstrate that security cannot be ensured through policy declarations or authentication mechanisms alone. In each case, threats emerged when security policies were either not applied to the actual execution flow or were not correctly integrated into the prompt construction path.
+
+These findings point to a critical requirement: organizations must embed policy enforcement directly into each stage of the RAG execution pipeline. It's no longer sufficient to simply define “who can access what.” Instead, policy logic must operate within the runtime context, determining in real time which content is injected, filtered, or rejected.
+
+Leading platforms such as Microsoft, Meta, and QueryPie are already moving in this direction. Rather than relying solely on declarative security models, they integrate PBAC (Purpose-Based Access Control), CBAC (Context-Based Access Control), ACLs (Access Control Lists), and PDPs (Policy Decision Points) into their operational architecture—aligning policy with execution.
+
+The following section presents a comparative analysis of how these three companies have approached RAG 2.0 security at both the architectural and enforcement levels.
+
+
+# 5. Comparing Execution Flow Control Strategies: Microsoft, Meta, QueryPie
+
+## 5.1 Objective: From Declarative Policies to Execution-Integrated Enforcement
+
+The threat scenarios described earlier highlight a key insight: security failures do not stem from the absence of policies, but from a failure to integrate defined policies into the actual execution flow. In a RAG (Retrieval-Augmented Generation) environment, the critical security point is not simply who has access to a document, but when, under what context, and by whom the document is injected into the prompt. Traditional RBAC alone is insufficient to enforce this.
+
+Microsoft, Meta, and QueryPie each approach this challenge differently:
+
+* **Microsoft** applies policy evaluation at the API level via the Graph API and Copilot Gateway[16].
+* **Meta** evaluates document injection immediately before prompt construction, using Context-Based Access Control (CBAC) tied to the session context[11].
+* **QueryPie**, while not providing its own RAG system, offers a policy enforcement layer (MCP Agent PAM) that sits in front of any external LLM or RAG system and governs execution flow[17]. 
+
+QueryPie’s model differs from Microsoft and Meta in that it provides a modular and extendable security architecture that is not bound to any specific vector DB or agent framework. It offers policy evaluation (PDP; Policy Decision Point), enforcement (PEP; Policy Enforcement Point), and context sourcing (PIP; Policy Information Point)—allowing for security layering across a variety of multi-tenant execution flows.
+
+This chapter compares their strategies across five key dimensions:
+
+* PBAC Policy Application Layer
+* CBAC Implementation Model
+* ACL Integration Scope and Flexibility
+* PDP/PIP/PEP Architectural Placement
+* Scalability and Breadth of Execution Flow Control
+
+The goal is not to compare features, but to assess how and where policy is embedded into the runtime flow. A policy’s value lies not in documentation, but in whether it is evaluated and enforced within the actual execution path.
+
+## 5.2 Microsoft: Graph-Based Policy Conditions with API-Level PDP
+
+In a multi-tenant Azure OpenAI environment, Microsoft uses its Graph API to centrally manage user permissions, document metadata, and collaboration context. These elements are evaluated in real time by a PDP module embedded in the Copilot API Gateway, which governs whether specific documents may be injected into a prompt[18].
+
+This architecture follows the following execution flow control process:
+
+* When a user submits a query through the Copilot API, the system uses Microsoft Graph to retrieve contextual information such as the user’s organizational role, collaborators, and task-related intent.
+* The API Gateway leverages this context to infer the purpose of the query, then evaluates whether related documents are eligible for access. 
+* Only authorized documents are injected into the prompt, and both the injection details and resulting LLM response are logged into the audit system.
+
+Microsoft’s approach offers one of the most clearly implemented **PBAC (Purpose-Based Access Control)** models—adjusting document exposure dynamically based on organizational roles and task objectives. For **CBAC (Context-Based Access Control)**, Microsoft includes session attributes such as device, time, and location into policy evaluation.
+
+For ACL integration, Microsoft ties directly into its existing M365 ecosystem, using native permission structures from SharePoint, OneDrive, and Teams. 
+
+Its PDP architecture is centralized within the API Gateway, making it effective for internal systems, but less flexible for integrating third-party RAG agents or LLM pipelines outside the Microsoft environment.
+
+**Microsoft’s Execution Flow Control Summary**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Dimension </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **PBAC Application Layer** </Table.Td>
+            <Table.Td> Microsoft Graph + API Gateway evaluate query purpose before prompt construction </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **CBAC Implementation** </Table.Td>
+            <Table.Td> Session context-based (user, device, time, caller identity) </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **ACL Integration** </Table.Td>
+            <Table.Td> Seamless with M365 permissions (SharePoint, OneDrive, Teams) </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **PDP Architecture** </Table.Td>
+            <Table.Td> Centralized PDP inside Copilot API Gateway </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Control Scope** </Table.Td>
+            <Table.Td> Effective within Copilot; limited for heterogeneous external workflows </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+Microsoft’s architecture provides tight alignment between enterprise assets and policy enforcement, making it highly effective within an M365-centric organization. However, its integration with third-party RAG/LLM workflows requires additional customization and cannot be applied directly out-of-the-box[19].
+
+
+## 5.3 Meta: Embedded CBAC in Document Injection Prior to LLM Prompting
+
+Meta’s LLM infrastructure emphasizes policy evaluation at the document injection stage, immediately before prompt construction. Unlike simple authentication-based access control, Meta integrates session context (Session Metadata) and document attributes (Context Metadata) to dynamically determine whether a document may be included in a prompt at runtime[11].
+
+Meta typically follows this execution flow:
+
+1. When a user submits a query, session-level metadata such as session ID, user role, and purpose is passed to an internal policy evaluation engine.
+2. Retrieved documents carry metadata such as `access_scope`, `confidentiality`, and `created_at`, which are compared against session attributes.
+3. Only documents that satisfy the policy conditions—based on this comparison—are forwarded to the prompt.
+4. The LLM-generated response includes a reference hash or document ID, enabling post-hoc auditing and traceability.
+
+This represents a textbook implementation of Context-Based Access Control (CBAC), dynamically determining document eligibility based on runtime execution context. If documents contain purpose tags or classification fields, Meta also supports PBAC (Purpose-Based Access Control) extensions.
+
+The system uses a proprietary ACL model to predefine user-document access mappings. At runtime, the CBAC policy engine re-evaluates document injection conditions, ensuring they are consistent with the current execution context. While Meta’s approach shares conceptual similarities with Microsoft’s architecture, it differs in that policy evaluation occurs at the orchestration layer just prior to prompt assembly, offering more granular real-time control.
+
+However, Meta’s policy engine is deeply embedded within its proprietary infrastructure, and it does not expose general-purpose APIs for integration with external SaaS tools or heterogeneous RAG components. This limits its flexibility and interoperability.
+
+**Meta’s Execution Flow Control Summary**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Dimension </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **PBAC Application Layer** </Table.Td>
+            <Table.Td> Based on document-purpose field in metadata </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **CBAC Implementation** </Table.Td>
+            <Table.Td> Runtime evaluation: session context vs. document metadata </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **ACL Integration** </Table.Td>
+            <Table.Td> Proprietary internal ACL model for user-document mapping </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **PDP Architecture** </Table.Td>
+            <Table.Td> Embedded in orchestrator, directly before prompt construction </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Control Scope** </Table.Td>
+            <Table.Td> Tight runtime control within Meta’s internal LLM; limited external integration </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+Meta’s strategy offers strong pre-prompt enforcement, significantly reducing the risk of document misuse by controlling injection before the model generates a response. However, this architecture is optimized for internal use, and may be difficult to replicate in external agent platforms or multi-cloud environments without substantial adaptation[20].
+
+
+## 5.4 QueryPie: Full Execution Path Control via Layered OPA-Based Policy Model
+
+Unlike Microsoft or Meta, QueryPie does not offer its own RAG (Retrieval-Augmented Generation) engine, but instead provides **a security enforcement layer—MCP Agent PAM—that sits upstream of various LLMs, vector DBs, and prompt orchestration chains.** This distinguishes QueryPie as not just an identity or access tool, but **a full-stack policy-based execution security architecture**[21].
+
+At its core, QueryPie is built around the **Open Policy Agent (OPA)** framework, implementing **PDP (Policy Decision Point)**, **PEP (Policy Enforcement Point)**, and **PIP (Policy Information Point)** as modular, layered components.
+
+**Execution Flow Control Model**
+
+1. User queries are intercepted by the **MCP Agent PAM proxy (PEP)** layer.
+2. The proxy extracts session details—user role, query purpose, timestamp, risk score—and sends them to the PDP.
+3. The PDP evaluates the request based on policy files (e.g., ai-policy.yaml, JSON), which combine **PBAC, CBAC, and ACL rules** in a composite object model.
+4. If a request fails policy validation, the document is blocked from injection. **All execution paths are logged as structured traces.**
+
+QueryPie supports **a unified security model**, integrating various access control types:
+
+* **ABAC (Attribute-Based Access Control)**: Based on document/user metadata
+* **ReBAC (Relationship-Based Access Control)**: Based on org-level mappings
+* **RiskBAC (Risk-Based Access Control)**: Dynamic conditions like time, location, session risk
+
+Importantly, QueryPie not only evaluates policy—but **ensures those policies are actively enforced within execution flow**, making it a policy-aware runtime control system. 
+
+Unlike Meta or Microsoft, QueryPie is **not bound to a single agent or backend**, and functions as a **universal control layer across many RAG systems.** Whether your stack includes LangChain, LlamaIndex, or AutoGen, QueryPie can enforce consistent policy via its proxy model.
+
+**QueryPie’s Execution Flow Control Summary**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Dimension </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **PBAC Application Layer** </Table.Td>
+            <Table.Td> Purpose field in `ai-policy.yaml` evaluated at runtime </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **CBAC Implementation** </Table.Td>
+            <Table.Td> Composite evaluation: user/resource/time/risk/metadata </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **ACL Integration** </Table.Td>
+            <Table.Td> OPA-based support for ABAC, ReBAC, and RiskBAC </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **PDP Architecture** </Table.Td>
+            <Table.Td> Distributed PDP/PEP/PIP structure within the proxy layer </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Control Scope** </Table.Td>
+            <Table.Td> Vendor-neutral RAG support; full-stack execution path control </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+QueryPie delivers the most robust combination of enforcement depth and architectural flexibility, functioning as the **central runtime control layer across multi-agent, multi-backend environments.** It also includes advanced capabilities such as **policy conflict detection, admin approval injection**, and **governance-driven version management**, enabling organizations to construct a fully independent policy stack that is not tied to any single RAG vendor[22].
+
+**Execution Flow Comparison: Microsoft vs. Meta vs. QueryPie**
+
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp23-8-execution-flow-comparison-microsoft-vs-meta-vs-querypie.png"
+        alt="[Figure 8] Execution Flow Comparison"
+        caption="[Figure 8] Execution Flow Comparison"
+    />
+</Box>
+
+
+## 5.5 Comparative Summary: Execution Flow Control Strategy Matrix
+
+The table below compares how Microsoft, Meta, and QueryPie enforce security policies across the RAG execution flow. Key criteria include the positioning of PBAC, CBAC, and ACL enforcement, the architectural location of the policy decision logic (PDP/PEP/PIP), prompt-level control granularity, and cross-system extensibility.
+
+**Execution Flow Control Strategy Comparison: Microsoft vs. Meta vs. QueryPie**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Category </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Microsoft </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Meta </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> QueryPie </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **PBAC Enforcement Point** </Table.Td>
+            <Table.Td> Microsoft Graph–based permission evaluation </Table.Td>
+            <Table.Td> Purpose tag evaluation in document metadata </Table.Td>
+            <Table.Td> `ai-policy.yaml`–driven query-purpose evaluation </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **CBAC Implementation** </Table.Td>
+            <Table.Td> Partial session context (API caller, timestamp) </Table.Td>
+            <Table.Td> Full session context + document metadata comparison </Table.Td>
+            <Table.Td> Composite context: user, resource, time, risk, metadata </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **ACL Integration** </Table.Td>
+            <Table.Td> Integrated with Microsoft 365 ACL system </Table.Td>
+            <Table.Td> Internal ACL mapping model </Table.Td>
+            <Table.Td> OPA-based; supports ABAC, ReBAC, and RiskBAC </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **PDP Architecture** </Table.Td>
+            <Table.Td> Centralized at Copilot API Gateway </Table.Td>
+            <Table.Td> Embedded in Orchestrator (pre-prompt layer) </Table.Td>
+            <Table.Td> External proxy layer with modular PDP/PEP/PIP separation </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Policy Flexibility** </Table.Td>
+            <Table.Td> Limited extension via Graph policies </Table.Td>
+            <Table.Td> Closed system, internally scoped </Table.Td>
+            <Table.Td> Extensible via JSON/YAML object policies, API-ready </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Prompt Insertion Control** </Table.Td>
+            <Table.Td> Post-filter injection only </Table.Td>
+            <Table.Td> Post-policy injection only </Table.Td>
+            <Table.Td> Dynamic allow/deny with hard gating based on policy results </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Scalability** </Table.Td>
+            <Table.Td> Tightly coupled to Microsoft ecosystem </Table.Td>
+            <Table.Td> Enterprise-internal optimization </Table.Td>
+            <Table.Td> Broad applicability across diverse LLM/RAG environments </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Execution Control Strength** </Table.Td>
+            <Table.Td> Moderate (static enforcement focus) </Table.Td>
+            <Table.Td> High (pre-prompt enforcement) </Table.Td>
+            <Table.Td> Very high (comprehensive real-time flow control) </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+QueryPie provides the strongest architectural independence and policy integration flexibility within the execution pipeline. By supporting PBAC, CBAC, and ACL as a unified policy schema, and enabling full lifecycle control—from request evaluation to audit logging and version governance—QueryPie addresses the most critical requirements for runtime security in multi-agent RAG systems[23].
+
+
+## 5.6 QueryPie’s Role: Not a RAG System, But a Unified Control Solution for Securing RAG
+
+QueryPie does not provide its own Retrieval-Augmented Generation (RAG) engine, but is instead designed as an execution-layer control platform purpose-built to secure LLM-based RAG environments. For this reason, this white paper positions QueryPie not as a RAG provider, but as a universal policy enforcement solution applicable to multi-RAG infrastructures, and compares its strategy alongside Microsoft and Meta. 
+
+Through its **MCP Agent PAM**, QueryPie implements a structured **PDP (Policy Decision Point), PEP (Policy Enforcement Point), and PIP (Policy Information Point)** architecture that controls every step **prior to prompt injection.** Its policy execution is based on the following mechanisms: 
+
+* **Policy as Code (PaC):** Execution conditions are defined through ai-policy.yaml or JSON-based policy files. 
+* **PBAC (Purpose-Based Access Control):** Document injection is allowed or denied based on the declared purpose of the user's request. 
+* **CBAC (Context-Based Access Control):** Policies are dynamically evaluated based on session attributes, device type, timestamp, and risk context.
+
+A key structural requirement is that QueryPie MCP Agent PAM relies on external RAG solutions to pass metadata such as `user_id`, `doc_type`, `access_scope`, or `confidentiality`. Frameworks like LangChain, LlamaIndex, and AutoGen must be capable of forwarding such metadata, enabling QueryPie to evaluate policies independently through its ACL policy layer.
+
+Thus, **QueryPie functions as a decoupled policy enforcement layer** that is agnostic to the underlying RAG vendor or architecture. It wraps the flow between vector databases and prompt construction, blocking unauthorized document injection or data leaks at the execution layer.
+
+Additionally, QueryPie guarantees the following capabilities through policy-driven enforcement:
+
+* **Multitenancy Isolation:** Logical partitioning of vector data via policies using `namespace`, `user_id`, `role`, `doc_type`, and `confidentiality` fields.
+* **Conflict Detection & Dynamic Approvals:** Identification of conflicting policies and insertion of admin approval flows for high-risk actions.
+* **Policy Traceability & Audit-Ready Logging:** Full request context and policy outcomes are logged at execution time for post-event forensics and compliance.
+
+Ultimately, QueryPie is not just a policy definition utility—it is a platform-independent security layer that enforces ACL,
+PBAC, and CBAC policies over heterogeneous RAG environments and agent architectures[24].
+
+
+## 5.7 Unified Execution Flow Visibility: The Need for Structural Control Beyond Simple Guardrails
+
+Modern AI-driven information systems are no longer built around a single language model (LLM) invocation. In most enterprise settings, the LLM is part of a larger ecosystem—operating alongside AI agents, vector search engines, external APIs, document preprocessors, and MCP (Model Context Protocol) servers. This architecture constitutes a distributed policy flow, where multiple execution components collaborate to generate a response.
+
+Within such architectures, traditional guardrails—like prompt input restrictions or output filtering—are insufficient. The following scenarios clearly illustrate these limitations:
+
+* An AI Agent delivers incompletely filtered documents to the LLM for response generation.
+* An MCP Server rewrites or redirects a request, bypassing the expected policy logic.
+* An unauthorized agent triggers execution within an Agent-to-Agent (A2A) communication flow.
+
+In these complex, multi-layered call structures, true security can only be achieved by enforcing policies at runtime across the entire execution path. This requires more than static declarations—it calls for execution-time policy enforcement.
+
+**QueryPie’s MCP Agent PAM is designed precisely to meet this challenge.** Rather than merely supervising a single LLM, it wraps the entire call chain—from the AI Agent to the MCP Server to the LLM—within a unified policy-aware proxy layer, delivering the following functionality:
+
+* **PDP (Policy Decision Point):** Evaluates policies based on session attributes, execution purpose, and request metadata.
+* **PEP (Policy Enforcement Point):** Enforces outcomes by allowing, modifying, or rejecting prompt assembly and document injection.
+* **PIP (Policy Information Point):** Dynamically retrieves external context (e.g., user roles, document classification) required for accurate policy evaluation.
+
+This design moves beyond access control at the document level (ACL) and **restructures the entire AI system into a "policy-first architecture."**
+
+As outlined in its official white papers, QueryPie articulates the following principles:
+
+* **"Policy must not merely exist outside the prompt, but be applied inside the execution path."** — Execution-first philosophy[25]
+* **"Even flows initiated by AI Agents must be subject to policy evaluation, with real-time insertion of approvals or intervention when necessary."** — Execution-layer control strategy[26]
+* **"MCP PAM is not just an access controller, but the central policy enforcement layer for securing and visualizing the entire AI architecture."** — Architectural security mission[27]
+
+This structural control model is not only about enhancing security—it also **supports explainability, regulatory compliance, and user trust.**
+
+In summary, the future of AI security strategy lies not in static guardrails but in dynamic, **policy-enforced orchestration of execution paths.** QueryPie’s architecture offers one of the most **realistic and forward-compatible models for securing the next generation of AI systems.**
+
+
+# 6. Conclusion – Why Execution Flow Control Is Central to RAG 2.0 Security
+
+## 6.1 Static Policy Declarations Are No Longer Enough
+
+In the RAG (Retrieval-Augmented Generation) 2.0 paradigm, AI systems no longer rely solely on static datasets—they dynamically retrieve and incorporate external knowledge at runtime to generate responses. The documents inserted into the prompt are selected based on vector similarity search. If security conditions such as user access rights or document sensitivity are not properly enforced during this process, unauthorized information can be exposed through the LLM’s response[28].
+
+As a result, traditional binary security questions like:
+
+> "Can user X access resource Y?"
+
+must evolve into context-aware evaluations, such as:
+
+> "Is it appropriate for user X, under session T and purpose Z, to inject document Y into the prompt and use it for an LLM-generated response?"
+
+Security evaluations that consider the context and timing of document usage cannot be adequately handled by traditional models like ACL (Access Control List) or RBAC (Role-Based Access Control) alone. Instead, a combination of PBAC (Purpose-Based Access Control), CBAC (Context-Based Access Control), and RiskBAC (Risk-Based Access Control) must be applied holistically[29].
+
+A typical RAG system involves the following sequential execution stages:
+
+1. Receiving the user request
+2. Performing vector-based retrieval
+3. Filtering and selecting documents
+4. Composing the prompt
+5. Calling the LLM and returning a response
+
+If policy evaluation is omitted at any point in this multi-step execution flow, the system may generate unauthorized execution paths that bypass predefined access controls. For this reason, security policies must go beyond static declarations and preconfigured rules—they must be enforced dynamically at the point of prompt composition, marking the need for execution-based security architectures.
+
+
+## 6.2 Three Pillars of a Runtime-Aware Security Architecture
+
+To implement effective RAG security, policy evaluation must occur within the execution flow itself. This requires a coordinated framework of three critical components:
+
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Component </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Role </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **PDP (Policy Decision Point)** </Table.Td>
+            <Table.Td> Evaluates whether a user’s request should be allowed, based on session context and defined policies </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **PIP (Policy Information Point)** </Table.Td>
+            <Table.Td> Provides contextual metadata—such as user attributes, document tags, timestamps, or risk levels—for use in policy evaluation </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **PEP (Policy Enforcement Point)** </Table.Td>
+            <Table.Td> Enforces the policy decision by controlling the runtime flow (e.g., document injection, request blocking, or triggering approval processes) </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+This architecture enables organizations to embed the entire policy lifecycle—from declaration to enforcement—within live data flows.
+
+Currently, leading platforms adopt this structure in distinct ways:
+
+* **Microsoft** evaluates access rights via Microsoft Graph at the Copilot API Gateway. While it applies role-based access before prompt construction, the policy control is static, offering limited influence over runtime flow[30].
+* **Meta** implements runtime context-aware CBAC/PBAC evaluation within its orchestration layer. Just before prompt construction, documents are filtered based on user session attributes and document context. Although this model ensures runtime enforcement, its extensibility and external interoperability are limited[31].
+* **QueryPie**, by contrast, separates and externally deploys PDP, PIP, and PEP through its MCP Agent PAM structure. This design wraps the entire execution path—from vector retrieval to document injection and model invocation—allowing policy logic to be applied at every critical junction. Execution paths can be dynamically rerouted, blocked, or escalated based on the results of policy evaluation[32].
+
+Notably, QueryPie supports session-wide policy governance, enabling traceable control across the full interaction sequence: prompt → model call → response → audit.
+
+In essence, execution-based security is not about declaring policies—it’s about ensuring policies are actively enforced at runtime. The following sections will explore how these runtime controls are structured and harmonized through models like PBAC, CBAC, and ACL.
+
+
+## 6.3 PBAC, CBAC, and ACL Only Work When Integrated
+
+To implement meaningful security in RAG environments, Purpose-Based Access Control (PBAC), Context-Based Access Control (CBAC), and Access Control Lists (ACL) cannot operate in silos. These models must function as a unified, integrated evaluation layer. Each model plays a critical role—but also has specific limitations:
+
+* **PBAC (Purpose-Based Access Control)**
+    - Evaluates policy based on the purpose of the request (e.g., whether the user is requesting access for performance evaluation)
+    - On its own, it doesn’t account for full execution context
+* **CBAC (Context-Based Access Control)**
+    - Assesses dynamic runtime context like session time, user role, device, and risk score
+    - Does not evaluate document-level permissions
+* **ACL (Access Control List)**
+    - Applies predefined, static document/resource permissions
+    - Ignores runtime context and is easily bypassed during execution
+
+These models are complementary, and in flow-based systems like RAG, separating them leads to problems like policy conflicts, blind spots, and audit gaps[33].
+
+To address this, a unified policy strategy must include:
+
+* **PBAC**: Determines document injection eligibility based on request purpose, department, and business intent
+* **CBAC**: Dynamically assesses session metadata (e.g., device, time, risk score) to allow or block policy execution
+* **ACL**: Validates access using document attributes (e.g., owner, sensitivity, creation date)
+
+These are not competing models, but rather distinct dimensions of runtime policy logic that must be evaluated together.
+
+**QueryPie's Runtime Policy Integration Architecture**
+
+QueryPie’s MCP Agent PAM is architected to unify and enforce these access models at runtime. Its approach includes:
+
+1. **Policy Model Convergence**: Policy definitions in `ai-policy.yaml` or JSON allow PBAC, CBAC, and ACL logic to be expressed together. For example:
+
+```yaml
+allow_if:
+    purpose: "hr.audit"
+    session.role: "manager"
+    doc.confidentiality: "low"
+    session.risk_score: < 3
+```
+
+2. **Object-Centric Evaluation (OPA-Based)**: Leveraging the Open Policy Agent (OPA), QueryPie structures all policy evaluations around unified object models—users, documents, sessions—enabling complex multi-dimensional logic and nested conditions.
+3. **Expandable to ReBAC and RiskBAC**: Beyond simple user-document mappings, QueryPie also supports ReBAC (Relationship-Based Access Control) and RiskBAC (Risk-Based Access Control). This allows for policies that consider organizational relationships—such as reporting lines or team affiliations—as well as session-level risk factors, including login location and threat indicators[34].
+4. **Multi-Framework Integration**: QueryPie does not operate as a RAG engine itself—it functions as a control layer across external systems. This enables metadata-driven policy enforcement across LangChain, LlamaIndex, AutoGen, Weaviate, Pinecone, and more. This unified enforcement layer enables ACL + PBAC + CBAC + ReBAC + RiskBAC to operate in concert within the same policy stream, ensuring real-time, context-rich access control.
+
+QueryPie doesn’t just integrate policy models conceptually—it evaluates them dynamically at runtime, applying decisions to document insertion, rejection, escalation, or audit logging as needed. This shifts access control from policy declaration to policy enforcement, making security actionable and observable[35].
+
+
+## 6.4 Architectural Recommendations for Execution-Time Security
+
+Security strategy in the era of RAG 2.0 cannot rely solely on declarative policies or static permissions. Policies must be tightly integrated into the actual execution flow, with system components—such as prompts, agents, and LLM calls—embedded within the policy enforcement architecture. To support this, we propose the following four architectural principles for secure RAG deployments:
+
+1. **Design Policy-Based Branching Before Prompt Injection**
+    - Before vector search results are injected into a prompt, the system must evaluate them against session context and document attributes. This policy check should determine whether a document is permitted for use in that specific request.
+    - Example: If a document's `confidentiality` is marked as `high` and the requester's `risk_score` is 4 or higher, block the document from being injected.
+2. **Turn Declarative Policies into Execution-Aware Enforcement**
+    - Policies written in JSON or YAML must not remain static declarations. They need to be evaluated dynamically at execution time. To achieve this, the system must link the policy engine to runtime operations.
+    - Policy frameworks such as OPA (Open Policy Agent), Cedar, and Rego support this execution-based policy integration[36].
+3. **PDP / PIP / PEP 구조의 분리와 계층 구성**
+    - The architecture must decouple policy evaluation (PDP), information provisioning (PIP), and policy enforcement (PEP) into separate, independent layers. These components should operate as intermediary controls at the front or middle of the execution flow to ensure real-time policy mediation. 
+    - QueryPie separates these layers through a proxy-based implementation, while Meta combines PDP and PEP functions within its internal orchestration layer.
+4. **Visualize Policy Flows and Structure Execution Logs**
+    - For both security teams and system users, it must be clear how each policy was applied to a given request. Execution traces should include the request, policy conditions, decision results, and document injection status. These should be stored in a structured log format. 
+    - This approach satisfies key requirements for auditability, explainability, and compliance readiness[37]. 
+    
+These strategies represent more than just applying access control—they reflect a **paradigm shift** in security architecture: from resource-centric rules to **flow-centric policy enforcement** that governs how data and logic traverse AI systems.
+
+
+## 6.5 Closing Remarks
+
+In the RAG 2.0 era, security can no longer rely on simply restricting or concealing documents. Instead, organizations must now be able to answer a more critical and nuanced question:
+
+> Who accessed which document, under what context and purpose, and when was it used in an AI response?
+
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp23-9-from-declaration-to-execution.png"
+        alt="[Figure 9] From Declaration to Execution"
+        caption="[Figure 9] From Declaration to Execution"
+    />
+</Box>
+
+The answer to this is no longer found in static permission lists, but in **policy evaluations embedded within the execution flow.** The focus of security must shift—from declarative controls to real-time enforcement, and from static access management to integrated policy orchestration. The architectures that can lead this transformation must go beyond access control engines. They must offer comprehensive, execution-aware control—from policy injection and evaluation to enforcement and traceability. QueryPie’s MCP Agent PAM stands out as a practical and robust implementation of this model.
+
+This white paper proposes a strategic paradigm shift: to move beyond isolated LLM guardrails and adopt a **fully integrated execution flow architecture** that spans **MCP, AI Agents, and LLMs**—placing policy enforcement at the very heart of AI security.
+
+
+# Appendix. Advanced Concepts for Execution-Flow-Based Policy Design: PBAC and CBAC
+
+## A.1 Purpose-Based Access Control (PBAC)
+
+PBAC expands access control by considering not only who is requesting access to what resource, but also why the access is being requested. It centers policy logic around the user’s intent and the declared purpose of the request, rather than simply the identity or role of the requester[38].
+
+**Core Components**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Component </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> `subject.purpose` </Table.Td>
+            <Table.Td> The reason or intent behind the user’s request (e.g., `"hr.audit"`, `"incident.response"`) </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `resource.usage_context` </Table.Td>
+            <Table.Td> Permitted usage context defined for the resource (e.g., `"training only"`) </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `session.intent_type` </Table.Td>
+            <Table.Td> Type of session flow triggering the request (e.g., manual request vs. agent-chained execution) </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+PBAC evaluates whether these purpose-related fields match or align within allowable bounds before granting access.
+
+**Implementation Characteristics**
+
+* PBAC typically represents the purpose as a recognizable string or tag within the policy definition.
+* Evaluation occurs at the pre-prompt or pre-API stage via a Policy Decision Point (PDP).
+* For example, using OPA (Rego), a policy could be defined as:
+
+```rego
+allow {
+    input.subject.purpose == "hr.audit"
+    input.resource.purpose == "hr.audit"
+}
+```
+
+**Limitations and Extensions**
+* PBAC alone does **not account for session risk levels or contextual state.** If the purpose is misrepresented or falsely declared, PBAC lacks built-in cross-verification mechanisms.
+* To mitigate this, PBAC should be **combined with CBAC (Context-Based Access Control) or RiskBAC** to form a more robust decision-making model within real-time execution flows[39].
+
+
+## A.2 Context-Based Access Control (CBAC)
+
+CBAC dynamically evaluates the execution context in which a request occurs to determine access eligibility. Rather than relying on static rules, CBAC applies real-time session-level conditions such as time, location, device, and dynamic risk scores—making it a foundational component of execution-flow security[35].
+
+**Key Contextual Elements**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Attribute </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> `session.time` </Table.Td>
+            <Table.Td> Timestamp or time zone of the request (e.g., working hours vs. off-hours) </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `session.risk_score` </Table.Td>
+            <Table.Td> Real-time risk score (e.g., derived from MFA failure, anomalous geolocation) </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `device.type`, `ip.geo_location` </Table.Td>
+            <Table.Td> Physical properties of the device and access location </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `user.role` </Table.Td>
+            <Table.Td> Role-based functional limits (e.g., view-only access, editing restricted) </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+**Policy Evaluation Logic**
+
+CBAC functions by having the PEP (Policy Enforcement Point) forward real-time session context to the PDP (Policy Decision Point), which evaluates the access policy accordingly. In OPA, Cedar, or Rego-based systems, a CBAC policy might look like:
+
+```rego
+allow {
+    input.session.risk_score < 3
+    input.session.time >= "09:00:00"
+    input.device.type == "trusted"
+}
+```
+
+**Architectural Scalability and Flow-Aware Control**
+
+CBAC offers several structural advantages in execution-flow security:
+
+* It enables dynamic decisions about prompt injection by evaluating the session context and document attributes together.
+* Because CBAC operates before LLM invocation, at the retrieval or document injection stage, it supports preventive controls rather than relying solely on post-response filtering.
+* It is inherently designed for multi-factor evaluation and can be combined with PBAC, ACL, and RiskBAC to create unified, composite security policies.
+
+
+## A.3 Considerations for Integrated Design
+
+PBAC and CBAC play complementary roles and should be designed in combination—especially in environments where RAG pipelines and AI Agents operate concurrently. The following design strategies illustrate how to achieve unified policy enforcement:
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Integration Focus </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Design Strategy </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> **Purpose + Context Integration** </Table.Td>
+            <Table.Td> `input.purpose == "incident.response" AND input.session.risk_score < 3` </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Resource Metadata + Execution Context** </Table.Td>
+            <Table.Td> `doc.confidentiality == "low" AND device.type == "trusted"` </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> **Execution Flow Conflict Mapping** </Table.Td>
+            <Table.Td> `Block document injection if user purpose conflicts with document usage tag (purpose mismatch)` </Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+QueryPie MCP Agent PAM supports this integrated logic through an object-based policy evaluation structure, ensuring that all policy conditions are enforced at runtime. The proxy layer handles routing, policy enforcement, and logging in a unified execution path.
+
+
+## A.4 Conclusion
+
+PBAC and CBAC go beyond mere conceptual models—they serve as core design frameworks for constructing enforceable security logic within AI execution pipelines. To shift from declarative policy models to runtime-enforceable policy architectures, these models must be integrated into a multi-condition, object-based policy structure, supported by an execution engine capable of tracing the full policy lifecycle.
+
+QueryPie is architected to support all critical requirements for runtime policy enforcement, including OPA-based policy modeling, proxy-level routing, execution branching and denial, approval insertion, and structured audit logging. Together, these capabilities form the structural foundation required to implement security in a RAG 2.0 architecture[27].
+
+<br />
+<br />
+
+<ButtonLink href="https://app.querypie.com" variant="black" size="lg">🚀 Get a glimpse of tomorrow’s secure MCP operations — start with AI Hub.</ButtonLink>
+
+# References
+
+[1] [Microsoft, “Design a Secure Multitenant RAG Inferencing Solution – Azure Architecture Center,” Microsoft Learn, 2025.](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/secure-multitenant-rag)
+
+[2] [Polymer, “Introducing Polymer’s SecureRAG,” Polymer Blog, 2025.](https://www.polymerhq.io/blog/introducing-polymers-securerag-ai-powered-data-security)
+
+[3] [Weaviate, “Multi-Tenancy Vector Search with millions of tenants,” Weaviate Blog, 2023.](https://weaviate.io/blog/multi-tenancy-vector-search)
+
+[4] [Amazon Web Services, “Multi-tenancy in RAG applications in a single Amazon Bedrock knowledge base,” AWS ML Blog, 2024.](https://aws.amazon.com/blogs/machine-learning/multi-tenancy-in-rag-applications-in-a-single-amazon-bedrock-knowledge-base-with-metadata-filtering)
+
+[5] [R. Theja, “Building Multi-Tenancy RAG System with LlamaIndex,” Medium, 2024.](https://medium.com/llamaindex-blog/building-multi-tenancy-rag-system-with-llamaindex-0d6ab4e0c44b)
+
+[6] [QueryPie, “Redefining PAM for the MCP Era,” White Paper, 2025.](https://www.querypie.com/resources/discover/white-paper/15/redefining-pam-for-the-mcp-era)
+
+[7] [QueryPie, “MCP PAM as the Next Step Beyond Guardrails,” White Paper, 2025.](https://www.querypie.com/resources/discover/white-paper/16/next-step-mcp-pam)
+
+[8] [Amazon Web Services, “Multi-tenancy in RAG applications in a single Amazon Bedrock knowledge base,” AWS ML Blog, 2024.](https://aws.amazon.com/blogs/machine-learning/multi-tenancy-in-rag-applications-in-a-single-amazon-bedrock-knowledge-base-with-metadata-filtering)
+
+[9] [QueryPie, “Uncovering MCP Security,” White Paper, 2025.](https://www.querypie.com/resources/discover/white-paper/18/uncovering-mcp-security)
+
+[10] [QueryPie, “Google Agentspace Gets Things Done—QueryPie MCP PAM Keeps Them Safe,” White Paper, 2025.](https://www.querypie.com/resources/discover/white-paper/19/google-agentspace-vs-querypie-mcp-pam)
+
+[11] [Meta Engineering, “Privacy-aware infrastructure and purpose limitation at Meta,” Meta Engineering Blog, Aug. 27, 2024.](https://engineering.fb.com/2024/08/27/security/privacy-aware-infrastructure-purpose-limitation-meta/)
+
+[12] [Polymer, “Generative AI Security: Preparing for 2025,” Polymer Blog, 2023.](https://www.polymerhq.io/blog/generative-ai-security-preparing-for-2025)
+
+[13] [Microsoft, “Multitenant RAG Security Model,” Azure Architecture Center, 2024.](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/secure-multitenant-rag)
+
+[14] [LangChain, “Agent and Workflow Cloning Scenarios,” GitHub Docs, 2024.](https://github.com/langchain-ai/langchain)
+
+[15] [Weaviate, “Document Expiry and Vector TTL Policies,” Weaviate Docs, 2023.](https://weaviate.io/developers/weaviate)
+
+[16] [Microsoft Graph Team, “Data, Privacy, and Security for Microsoft 365 Copilot,” Microsoft Learn, 2023.](https://learn.microsoft.com/en-us/copilot/microsoft-365/microsoft-365-copilot-privacy)
+ 
+[17] [Amazon Web Services, “Create a Generative AI Gateway to allow secure and compliant consumption of foundation models,” AWS Machine Learning Blog, 2023.]( https://aws.amazon.com/blogs/machine-learning/create-a-generative-ai-gateway-to-allow-secure-and-compliant-consumption-of-foundation-models/)
+ 
+[18] [AWS, “Implementing a PDP,” AWS Prescriptive Guidance, 2023.](https://docs.aws.amazon.com/prescriptive-guidance/latest/saas-multitenant-api-access-authorization/pdp.html)
+ 
+[19] [Microsoft, “Build Microsoft Graph Connectors for 365 Copilot,” Microsoft Learn, 2023.](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-graph-connector)
+
+[20] [Amazon Web Services, “Metadata-based document filtering in OpenSearch,” AWS Docs, 2024.](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/document-level-security.html)
+
+[21] [Kong Inc., “How to Manage Your API Policies with OPA (Open Policy Agent),” Kong Blog, 2024.](https://konghq.com/blog/engineering/how-to-manage-your-api-policies-with-opa-open-policy-agent)
+
+[22] [Open Policy Agent, “OPA Philosophy – Offload Policy Decisions,” OPA Docs, 2023.](https://www.openpolicyagent.org/docs/latest/philosophy/)
+
+[23] [NIST, “Zero Trust Architecture,” Special Publication 800-207, 2020.](https://doi.org/10.6028/NIST.SP.800-207)
+
+[24] [Microsoft, “Tutorial: Build a RAG app with the Copilot SDK,” Microsoft Learn, 2024.](https://learn.microsoft.com/en-us/azure/ai-foundry/tutorials/copilot-sdk-build-rag)
+
+[25] [Cloudflare, “Take Control of Public AI Application Security with Firewall for AI,” Cloudflare Blog, 2023.](https://blog.cloudflare.com/take-control-of-public-ai-application-security-with-cloudflare-firewall-for-ai/)
+
+[26] [PwC, “Unlocking value with AI agents: A responsible approach,” PwC Tech Effect, 2023.](https://www.pwc.com/us/en/tech-effect/ai-analytics/responsible-ai-agents.html)
+
+[27] [Open Policy Agent, “OPA: Policy Engine for Cloud Native Environments,” CNCF, 2021.](https://www.openpolicyagent.org)
+
+[28] [Business Insider, “Samsung bans employees from using AI tools like ChatGPT after an accidental data leak,” Business Insider, May 2023.](https://www.businessinsider.com/samsung-chatgpt-bard-data-leak-bans-employee-use-report-2023-5)
+
+[29] [H.F. Atlam et al., “Risk-Based Access Control Model: A Systematic Literature Review,” Future Internet, vol. 12, no. 6, p. 103, Jun. 2020.](https://doi.org/10.3390/fi12060103)
+
+[30] [Microsoft, “Azure OpenAI content filtering,” Microsoft Learn, 2025.](https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/content-filter)
+
+[31] [OWASP, “LLM01: Prompt Injection,” OWASP Top 10 for LLM Applications, 2024.](https://genai.owasp.org/llmrisk/llm01-prompt-injection/)
+
+[32] [Open Policy Agent, “OPA Use Cases – Approval Workflow,” OPA Docs, 2023.](https://www.openpolicyagent.org/docs/latest/policy-reference/#approval-workflow)
+
+[33] [European Commission, “Proposal for a Regulation on AI (AI Act),” Article 12 – Record Keeping, 2021.](https://artificialintelligenceact.eu/the-act/)
+
+[34] [Aserto, “OPA vs. Zanzibar: Relationship-Based Access Control,” Aserto Blog, 2022.](https://www.aserto.com/blog/opa-zanzibar-soap-rest)
+
+[35] [NIST, “Guide to Attribute Based Access Control (ABAC),” NIST SP 800-162, Jan. 2014.](https://doi.org/10.6028/NIST.SP.800-162)
+
+[36] [CNCF, “Love, Hate, and Policy Languages: An Introduction to Decision-Making Engines,” CNCF Blog, May 2024.](https://www.cncf.io/blog/2024/05/21/love-hate-and-policy-languages-an-introduction-to-decision-making-engines/)
+
+[37] [NIST, “AI Risk Management Framework 1.0,” NIST, Jan. 2023.](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf)
+
+[38] [J. Byun and N. Li, “Purpose based access control for privacy protection in relational database systems,” VLDB J., vol. 17, no. 4, pp. 603–619, 2008.](https://doi.org/10.1007/s00778-006-0023-0)
+
+[39] [SSH Communications Security, “What is CARTA (Continuous Adaptive Risk and Trust Assessment)?,” SSH Academy, 2024.](https://www.ssh.com/academy/iam/carta)

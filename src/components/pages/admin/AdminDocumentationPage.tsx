@@ -1,3 +1,4 @@
+import { readContentState } from "@/features/content/contentState.server";
 import { getAdminCategoryPageMeta, type DocsCategorySlug } from "@/features/content/config";
 import AdminManagedContentListPage from "./AdminManagedContentListPage";
 
@@ -5,9 +6,10 @@ type AdminDocumentationPageProps = {
   categorySlug?: DocsCategorySlug;
 };
 
-export default function AdminDocumentationPage({
+export default async function AdminDocumentationPage({
   categorySlug = "all",
 }: AdminDocumentationPageProps) {
+  const initialItems = await readContentState("documentation");
   const { description, title } = getAdminCategoryPageMeta("documentation", categorySlug);
 
   return (
@@ -15,6 +17,8 @@ export default function AdminDocumentationPage({
     <AdminManagedContentListPage
       categorySlug={categorySlug}
       description={description}
+      initialItems={initialItems}
+      key={`documentation:${categorySlug}`}
       section="documentation"
       title={title}
     />

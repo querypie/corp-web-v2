@@ -115,7 +115,7 @@ export default function NotFoundPage({}: NotFoundPageProps) {
                 ))}
               </div>
               <a href={copy.ctaHref}>
-                <Button variant="secondary">
+                <Button style="round" variant="secondary">
                   {copy.ctaLabel}
                 </Button>
               </a>

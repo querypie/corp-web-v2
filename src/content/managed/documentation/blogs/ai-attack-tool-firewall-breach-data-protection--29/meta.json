@@ -1,0 +1,92 @@
+{
+  "category": "blogs",
+  "contentKind": "article",
+  "entryId": "ai-attack-tool-firewall-breach-data-protection--29",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "29",
+    "sourceCategory": "blog",
+    "sourceGroupPath": "documentation/blog/29/ai-attack-tool-firewall-breach-data-protection",
+    "sourceUrl": "/features/documentation/blog/29/ai-attack-tool-firewall-breach-data-protection"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/blog/b-thumb-29.webp",
+          "webPath": "/blog/b-thumb-29.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/blogs/ai-attack-tool-firewall-breach-data-protection--29/en.mdx",
+      "contentKind": "article",
+      "description": "An AI-powered open-source attack platform breached 600+ FortiGate firewalls across 55 countries. An unskilled threat actor leveraged AI to execute attacks at scale. This article analyzes the CyberStrikeAI incident and presents a defense-in-depth framework for CxOs to protect data beyond the firewall.",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/blog/b-thumb-29.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"AI Attack Tools Breach 600 Firewalls Across 55 Countries: How to Protect the Data Beyond the Firewall\"\ndescription: \"An AI-powered open-source attack platform breached 600+ FortiGate firewalls across 55 countries. An unskilled threat actor leveraged AI to execute attacks at scale. This article analyzes the CyberStrikeAI incident and presents a defense-in-depth framework for CxOs to protect data beyond the firewall.\"\ndate: \"2026-03-09\"\nogImage: \"public/blog/b-thumb-29.webp\"\nrelatedPosts:\n  - \"/features/documentation/blog/28/ai-security-threat-map-2026-cxo\"\n  - \"/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures\"\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"",
+      "relatedPosts": [
+        "/features/documentation/blog/28/ai-security-threat-map-2026-cxo",
+        "/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures",
+        "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026"
+      ],
+      "sourcePath": "documentation/blog/29/ai-attack-tool-firewall-breach-data-protection/en/content.mdx",
+      "title": "AI Attack Tools Breach 600 Firewalls Across 55 Countries: How to Protect the Data Beyond the Firewall",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "blog",
+        "title": "AI Attack Tools Breach 600 Firewalls Across 55 Countries: How to Protect the Data Beyond the Firewall",
+        "description": "An AI-powered open-source attack platform breached 600+ FortiGate firewalls across 55 countries. An unskilled threat actor leveraged AI to execute attacks at scale. This article analyzes the CyberStrikeAI incident and presents a defense-in-depth framework for CxOs to protect data beyond the firewall.",
+        "date": "2026-03-09",
+        "ogImage": "public/blog/b-thumb-29.webp",
+        "relatedPosts": [
+          "/features/documentation/blog/28/ai-security-threat-map-2026-cxo",
+          "/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures",
+          "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/blog/b-thumb-29.webp",
+          "webPath": "/blog/b-thumb-29.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/blogs/ai-attack-tool-firewall-breach-data-protection--29/ja.mdx",
+      "contentKind": "article",
+      "description": "AI攻撃ツールCyberStrikeAIが55カ国のファイアウォール600台を突破。技術的に未熟な攻撃者がAIで大規模攻撃を実行した事件を分析し、ファイアウォールの先にあるデータを守る多層防御フレームワークをCxO向けに解説します。",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/blog/b-thumb-29.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"AI攻撃ツールが55カ国のファイアウォール600台を突破──ファイアウォールの先にある\\\"データ\\\"をどう守るか\"\ndescription: \"AI攻撃ツールCyberStrikeAIが55カ国のファイアウォール600台を突破。技術的に未熟な攻撃者がAIで大規模攻撃を実行した事件を分析し、ファイアウォールの先にあるデータを守る多層防御フレームワークをCxO向けに解説します。\"\ndate: \"2026-03-09\"\nogImage: \"public/blog/b-thumb-29.webp\"\nrelatedPosts:\n  - \"/features/documentation/blog/28/ai-security-threat-map-2026-cxo\"\n  - \"/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures\"\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"",
+      "relatedPosts": [
+        "/features/documentation/blog/28/ai-security-threat-map-2026-cxo",
+        "/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures",
+        "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026"
+      ],
+      "sourcePath": "documentation/blog/29/ai-attack-tool-firewall-breach-data-protection/ja/content.mdx",
+      "title": "AI攻撃ツールが55カ国のファイアウォール600台を突破──ファイアウォールの先にある\\\"データ\\\"をどう守るか",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "blog",
+        "title": "AI攻撃ツールが55カ国のファイアウォール600台を突破──ファイアウォールの先にある\\\"データ\\\"をどう守るか",
+        "description": "AI攻撃ツールCyberStrikeAIが55カ国のファイアウォール600台を突破。技術的に未熟な攻撃者がAIで大規模攻撃を実行した事件を分析し、ファイアウォールの先にあるデータを守る多層防御フレームワークをCxO向けに解説します。",
+        "date": "2026-03-09",
+        "ogImage": "public/blog/b-thumb-29.webp",
+        "relatedPosts": [
+          "/features/documentation/blog/28/ai-security-threat-map-2026-cxo",
+          "/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures",
+          "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026"
+        ]
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "ai-attack-tool-firewall-breach-data-protection"
+}

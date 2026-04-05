@@ -1,0 +1,137 @@
+{
+  "category": "webinars",
+  "contentKind": "webinar",
+  "entryId": "cloud-certification-shortest-path--1",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "1",
+    "sourceCategory": "webinars",
+    "sourceGroupPath": "demo/webinars/1/cloud-certification-shortest-path",
+    "sourceUrl": "/features/demo/webinars/1/cloud-certification-shortest-path"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/wb-thumb-1.webp",
+          "webPath": "/webinar/wb-thumb-1.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/cloud-certification-shortest-path--1/en.mdx",
+      "contentKind": "webinar",
+      "description": "Are you going round in circles trying to get certified? Discover the shortest path to getting certified in the cloud era with our best practices.",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/wb-thumb-1.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Discover the shortest path to getting certified in the cloud era with our best practices\"\ndescription: \"Are you going round in circles trying to get certified? Discover the shortest path to getting certified in the cloud era with our best practices.\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/3/device-security-mdm-kandji\"\n  - \"/features/demo/webinars/4/flex-querypie-secrets\"",
+      "relatedPosts": [
+        "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+        "/features/demo/webinars/3/device-security-mdm-kandji",
+        "/features/demo/webinars/4/flex-querypie-secrets"
+      ],
+      "sourcePath": "demo/webinars/1/cloud-certification-shortest-path/en/content.mdx",
+      "title": "Discover the shortest path to getting certified in the cloud era with our best practices",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "Discover the shortest path to getting certified in the cloud era with our best practices",
+        "description": "Are you going round in circles trying to get certified? Discover the shortest path to getting certified in the cloud era with our best practices.",
+        "date": "2024-11-29",
+        "ogImage": "public/webinar/wb-thumb-1.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+          "/features/demo/webinars/3/device-security-mdm-kandji",
+          "/features/demo/webinars/4/flex-querypie-secrets"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/wb-thumb-1.webp",
+          "webPath": "/webinar/wb-thumb-1.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/cloud-certification-shortest-path--1/ko.mdx",
+      "contentKind": "webinar",
+      "description": "ISMS 인증을 받기 위해 계속 방황하고 계신가요? 우리의 베스트 프랙티스로 클라우드 시대에서 인증을 빠르게 취득할 수 있는 최단 경로를 확인하세요.",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/wb-thumb-1.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"클라우드 시대에서 ISMS 인증을 빠르게 취득할 수 있는 최단 경로를 알아보세요!\"\ndescription: \"ISMS 인증을 받기 위해 계속 방황하고 계신가요? 우리의 베스트 프랙티스로 클라우드 시대에서 인증을 빠르게 취득할 수 있는 최단 경로를 확인하세요.\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/3/device-security-mdm-kandji\"\n  - \"/features/demo/webinars/4/flex-querypie-secrets\"",
+      "relatedPosts": [
+        "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+        "/features/demo/webinars/3/device-security-mdm-kandji",
+        "/features/demo/webinars/4/flex-querypie-secrets"
+      ],
+      "sourcePath": "demo/webinars/1/cloud-certification-shortest-path/ko/content.mdx",
+      "title": "클라우드 시대에서 ISMS 인증을 빠르게 취득할 수 있는 최단 경로를 알아보세요!",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "클라우드 시대에서 ISMS 인증을 빠르게 취득할 수 있는 최단 경로를 알아보세요!",
+        "description": "ISMS 인증을 받기 위해 계속 방황하고 계신가요? 우리의 베스트 프랙티스로 클라우드 시대에서 인증을 빠르게 취득할 수 있는 최단 경로를 확인하세요.",
+        "date": "2024-11-29",
+        "ogImage": "public/webinar/wb-thumb-1.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+          "/features/demo/webinars/3/device-security-mdm-kandji",
+          "/features/demo/webinars/4/flex-querypie-secrets"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/wb-thumb-1.webp",
+          "webPath": "/webinar/wb-thumb-1.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/cloud-certification-shortest-path--1/ja.mdx",
+      "contentKind": "webinar",
+      "description": "ISMS悪夢をご覧になっていますか？ 認証を受けるためにぐるぐる回っているなら、ここAWSウェビナーの核心整理内容を確認してみてください！",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/wb-thumb-1.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"ベストプラクティスで探るクラウド時代における認定資格を取得する最善の方法\"\nhtmlTitle: \"ベストプラクティスで探る<br />クラウド時代における認定資格を取得する最善の方法\"\ndescription: \"ISMS悪夢をご覧になっていますか？ 認証を受けるためにぐるぐる回っているなら、ここAWSウェビナーの核心整理内容を確認してみてください！\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/3/device-security-mdm-kandji\"\n  - \"/features/demo/webinars/4/flex-querypie-secrets\"",
+      "relatedPosts": [
+        "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+        "/features/demo/webinars/3/device-security-mdm-kandji",
+        "/features/demo/webinars/4/flex-querypie-secrets"
+      ],
+      "sourcePath": "demo/webinars/1/cloud-certification-shortest-path/ja/content.mdx",
+      "title": "ベストプラクティスで探るクラウド時代における認定資格を取得する最善の方法",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "ベストプラクティスで探るクラウド時代における認定資格を取得する最善の方法",
+        "htmlTitle": "ベストプラクティスで探る<br />クラウド時代における認定資格を取得する最善の方法",
+        "description": "ISMS悪夢をご覧になっていますか？ 認証を受けるためにぐるぐる回っているなら、ここAWSウェビナーの核心整理内容を確認してみてください！",
+        "date": "2024-11-29",
+        "ogImage": "public/webinar/wb-thumb-1.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
+          "/features/demo/webinars/3/device-security-mdm-kandji",
+          "/features/demo/webinars/4/flex-querypie-secrets"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "cloud-certification-shortest-path"
+}

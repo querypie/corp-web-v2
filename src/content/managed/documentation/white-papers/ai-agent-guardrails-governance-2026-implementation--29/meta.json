@@ -1,0 +1,100 @@
+{
+  "category": "white-papers",
+  "contentKind": "article",
+  "entryId": "ai-agent-guardrails-governance-2026-implementation--29",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "29",
+    "sourceCategory": "white-paper",
+    "sourceGroupPath": "documentation/white-paper/29/ai-agent-guardrails-governance-2026-implementation",
+    "sourceUrl": "/features/documentation/white-paper/29/ai-agent-guardrails-governance-2026-implementation"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-29.webp",
+          "webPath": "/white-paper/wp-thumb-29.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/ai-agent-guardrails-governance-2026-implementation--29/en.mdx",
+      "contentKind": "article",
+      "description": "A practical implementation guide for AI-agent guardrails. Includes three case studies (PC-operation agents, development AI vulnerabilities, and autonomous 5G operations), a reusable checklist, and a 90-day rollout roadmap.",
+      "hideOgImage": true,
+      "hideTableOfContents": false,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-29.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Guardrail Design in the AI Agent Era (2026 Edition) — Part 2: Practice & Implementation\"\ndescription: \"A practical implementation guide for AI-agent guardrails. Includes three case studies (PC-operation agents, development AI vulnerabilities, and autonomous 5G operations), a reusable checklist, and a 90-day rollout roadmap.\"\ndate: \"2026-02-27\"\nauthor: \"querypie\"\nogImage: \"public/white-paper/wp-thumb-29.webp\"\nhideOgImage: true\nhideTableOfContents: false\nkeywords: [\n  \"AI Agents\",\n  \"Guardrail Design\",\n  \"Case Study\",\n  \"Checklist\",\n  \"Implementation Roadmap\",\n  \"Claude Code\",\n  \"MCP\",\n  \"Autonomous 5G Operations\",\n  \"Kill Switch\",\n  \"AI Governance\",\n  \"Supply Chain Risk\"\n]\nrelatedPosts:\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"\n  - \"/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026",
+        "/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge",
+        "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops"
+      ],
+      "sourcePath": "documentation/white-paper/29/ai-agent-guardrails-governance-2026-implementation/en/content.mdx",
+      "title": "Guardrail Design in the AI Agent Era (2026 Edition) — Part 2: Practice & Implementation",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "Guardrail Design in the AI Agent Era (2026 Edition) — Part 2: Practice & Implementation",
+        "description": "A practical implementation guide for AI-agent guardrails. Includes three case studies (PC-operation agents, development AI vulnerabilities, and autonomous 5G operations), a reusable checklist, and a 90-day rollout roadmap.",
+        "date": "2026-02-27",
+        "author": "querypie",
+        "ogImage": "public/white-paper/wp-thumb-29.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": false,
+        "keywords": "[",
+        "relatedPosts": [
+          "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026",
+          "/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge",
+          "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/white-paper/wp-thumb-29.webp",
+          "webPath": "/white-paper/wp-thumb-29.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/white-papers/ai-agent-guardrails-governance-2026-implementation--29/ja.mdx",
+      "contentKind": "article",
+      "description": "AIエージェントのガードレール設計を実務に落とし込む。PC操作エージェント・開発AI脆弱性・5G自律運用の3つのケーススタディ、保存版チェックリスト、90日導入ロードマップを提供する2026年版実践ガイド。",
+      "hideOgImage": true,
+      "hideTableOfContents": false,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/white-paper/wp-thumb-29.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AIエージェント時代のガードレール設計（2026年版）── 後編：実践・導入編\"\ndescription: \"AIエージェントのガードレール設計を実務に落とし込む。PC操作エージェント・開発AI脆弱性・5G自律運用の3つのケーススタディ、保存版チェックリスト、90日導入ロードマップを提供する2026年版実践ガイド。\"\ndate: \"2026-02-27\"\nauthor: \"querypie\"\nogImage: \"public/white-paper/wp-thumb-29.webp\"\nhideOgImage: true\nhideTableOfContents: false\nkeywords: [\n  \"AIエージェント\",\n  \"ガードレール設計\",\n  \"ケーススタディ\",\n  \"チェックリスト\",\n  \"導入ロードマップ\",\n  \"Claude Code\",\n  \"MCP\",\n  \"5G自律運用\",\n  \"Kill Switch\",\n  \"AIガバナンス\",\n  \"サプライチェーンリスク\"\n]\nrelatedPosts:\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"\n  - \"/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"",
+      "relatedPosts": [
+        "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026",
+        "/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge",
+        "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops"
+      ],
+      "sourcePath": "documentation/white-paper/29/ai-agent-guardrails-governance-2026-implementation/ja/content.mdx",
+      "title": "AIエージェント時代のガードレール設計（2026年版）── 後編：実践・導入編",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "whitepaper",
+        "title": "AIエージェント時代のガードレール設計（2026年版）── 後編：実践・導入編",
+        "description": "AIエージェントのガードレール設計を実務に落とし込む。PC操作エージェント・開発AI脆弱性・5G自律運用の3つのケーススタディ、保存版チェックリスト、90日導入ロードマップを提供する2026年版実践ガイド。",
+        "date": "2026-02-27",
+        "author": "querypie",
+        "ogImage": "public/white-paper/wp-thumb-29.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": false,
+        "keywords": "[",
+        "relatedPosts": [
+          "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026",
+          "/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge",
+          "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops"
+        ]
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "ai-agent-guardrails-governance-2026-implementation"
+}

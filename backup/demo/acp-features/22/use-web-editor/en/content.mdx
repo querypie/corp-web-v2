@@ -1,0 +1,62 @@
+---
+layout: "Article"
+category: "acp-features"
+title: "How to Use the Web Editor"
+description: ""
+date: "2024-11-29"
+ogImage: "public/tutorial/tu-thumb-dac-3.png"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/acp-features/23/grant-permissions-users"
+  - "/features/demo/acp-features/21/apply-data-access-policies"
+  - "/features/demo/acp-features/20/apply-data-masking-policies"
+---
+
+<Youtube
+    src="https://www.youtube.com/embed/yrGb8C7ltf4?si=UEHztCB_Iz8OTQXh"
+/>
+
+# Overview
+
+QueryPie offers a web SQL editor that allows users to execute queries and retrieve data directly through a web browser. The QueryPie Web SQL Editor enables users to quickly and easily access authorized connections after logging in.
+
+# Access DB via Web SQL Editor
+
+<BlueState>STEP 1</BlueState> After logging in to QueryPie, click `Database` on the top navigation bar.
+
+<BlueState>STEP 2</BlueState> Select a **DB Connection** and click the `Connect` button on the right to establish a connection.
+- The left panel displays all accessible DB connections.
+- Click the desired connection to view its details on the right panel.
+
+# Panel Descriptions
+The web editor consists of the left **Object Panel**, **top Toolbar**, central **SQL Editor**, and right **Object Info** Panel.
+
+- `Change connection` : Use the arrow button in the **Object Panel** to view or switch between active connections.
+- `Disconnect` : Click the disconnect button to terminate the current connection.
+- **Change database:** Change the currently connected database.
+※ Default database is connected initially.
+- **Search object information:** Search for schemas, tables, views, events, functions, procedures, and triggers in the database.
+- **View object information:** View schemas, tables, views, events, functions, procedures, and triggers in the database.
+- **Refresh object information:** Click the `refresh` button on the right when an object is selected to update the object information. (For individual objects, right-click and click `Reload Object` button to refresh.)
+- `Run SQL` : Execute the written query. By default, the entire written query is executed.
+- `Stop` : Stop the currently executing query.
+- `Object Panel` : Option to toggle the left object panel.
+- `Open` : Load an SQL file.
+- `Undo` : Undo actions within the query.
+- `Redo` : Redo previously undone actions.
+- `Format` : Format the written query.
+- `Import` : Import data from SQL/CSV/Excel files and store it in the database.
+- `Export` : Download data as SQL/CSV/JSON/Excel files.
+- `SQL Request` : Send the query written in the editor to the SQL Request workflow page.
+- Supports autocomplete while writing queries, and you can use context menus and shortcuts.
+- `Limit` : Limit the number of rows output when executing a query (default is 1000).
+- `Expand` : View query execution results in full screen.
+- `Stack/Column View` : View results in horizontally or vertically split grids when multiple queries are executed.
+- `Data` : View data of table/view objects.
+- `Structure` : View structure of table/view objects.
+- `Index` : View index information of tables.
+- `Relation` : View the relationship of tables.
+- `Trigger` : View trigger information.
+- `Script` : View script information of objects.
+- `Info` : View detailed information of objects.

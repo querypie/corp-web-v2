@@ -1,0 +1,56 @@
+{
+  "category": "webinars",
+  "contentKind": "webinar",
+  "entryId": "air-company-querypie-mcp-webinar--18",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "18",
+    "sourceCategory": "webinars",
+    "sourceGroupPath": "demo/webinars/18/air-company-querypie-mcp-webinar",
+    "sourceUrl": "/features/demo/webinars/18/air-company-querypie-mcp-webinar"
+  },
+  "locales": {
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/webinar/air-company-mcp.webp",
+          "webPath": "/webinar/air-company-mcp.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/webinars/air-company-querypie-mcp-webinar--18/ja.mdx",
+      "contentKind": "webinar",
+      "description": "AIが世界を動かす時代が、いよいよ現実に。その中心にあるのが、革新的なプロトコル「MCP」です。従来の常識を覆し、AI活用を一気に加速させました。今こそ、AI時代の必須スキル「MCP」を、しっかり学んでみませんか？ 生成AI / MCPをフル活用し、自律型セキュリティ運用を実現する 「QueryPie Secure Enterprise AI Hub」の最新情報をお届けします。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/webinar/air-company-mcp.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"【7/3（木）開催】ウェビナー「「MCP」の基礎がわかる”超”入門講座 」\"\ndescription: \"AIが世界を動かす時代が、いよいよ現実に。その中心にあるのが、革新的なプロトコル「MCP」です。従来の常識を覆し、AI活用を一気に加速させました。今こそ、AI時代の必須スキル「MCP」を、しっかり学んでみませんか？ 生成AI / MCPをフル活用し、自律型セキュリティ運用を実現する 「QueryPie Secure Enterprise AI Hub」の最新情報をお届けします。\"\ndate: \"2025-06-05\"\nogImage: \"public/webinar/air-company-mcp.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/16/air-company-querypie-zerotrust-webinar\"\n  - \"/features/demo/webinars/17/findy-querypie-mcp-webinar\"\n  - \"/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja\"",
+      "relatedPosts": [
+        "/features/demo/webinars/16/air-company-querypie-zerotrust-webinar",
+        "/features/demo/webinars/17/findy-querypie-mcp-webinar",
+        "/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja"
+      ],
+      "sourcePath": "demo/webinars/18/air-company-querypie-mcp-webinar/ja/content.mdx",
+      "title": "【7/3（木）開催】ウェビナー「「MCP」の基礎がわかる”超”入門講座 」",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "webinars",
+        "title": "【7/3（木）開催】ウェビナー「「MCP」の基礎がわかる”超”入門講座 」",
+        "description": "AIが世界を動かす時代が、いよいよ現実に。その中心にあるのが、革新的なプロトコル「MCP」です。従来の常識を覆し、AI活用を一気に加速させました。今こそ、AI時代の必須スキル「MCP」を、しっかり学んでみませんか？ 生成AI / MCPをフル活用し、自律型セキュリティ運用を実現する 「QueryPie Secure Enterprise AI Hub」の最新情報をお届けします。",
+        "date": "2025-06-05",
+        "ogImage": "public/webinar/air-company-mcp.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/webinars/16/air-company-querypie-zerotrust-webinar",
+          "/features/demo/webinars/17/findy-querypie-mcp-webinar",
+          "/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "air-company-querypie-mcp-webinar"
+}

@@ -1,0 +1,79 @@
+{
+  "category": "blogs",
+  "contentKind": "article",
+  "entryId": "what-businesses-can-learn-from-sentiment-analysis--13",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "13",
+    "sourceCategory": "blog",
+    "sourceGroupPath": "documentation/blog/13/what-businesses-can-learn-from-sentiment-analysis",
+    "sourceUrl": "/features/documentation/blog/13/what-businesses-can-learn-from-sentiment-analysis"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/blog/b-thumb-13.webp",
+          "webPath": "/blog/b-thumb-13.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog13-image-1.webp",
+          "webPath": "/blog/blog13-image-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/blog/blog13-image-2.webp",
+          "webPath": "/blog/blog13-image-2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/blogs/what-businesses-can-learn-from-sentiment-analysis--13/en.mdx",
+      "contentKind": "article",
+      "description": "Learn how sentiment analysis can boost your business by understanding customer emotions, refining strategies, and enhancing satisfaction. Explore its power today!",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie",
+        "data breaches",
+        "small breaches",
+        "data leak risks",
+        "risk mitigation",
+        "internal security"
+      ],
+      "layout": "Article",
+      "ogImage": "/blog/b-thumb-13.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"What businesses can learn from Sentiment Analysis\"\ndescription: \"Learn how sentiment analysis can boost your business by understanding customer emotions, refining strategies, and enhancing satisfaction. Explore its power today!\"\ndate: \"2022-04-26\"\nogImage: \"public/blog/b-thumb-13.webp\"\nkeywords: [\"QueryPie\", \"data breaches\", \"small breaches\", \"data leak risks\", \"risk mitigation\", \"internal security\"]\nrelatedPosts:\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
+      "relatedPosts": [
+        "/features/documentation/blog/9/data-discovery-privacy-management",
+        "/features/documentation/blog/7/command-bypass-prevention-control",
+        "/features/documentation/blog/4/multi-cloud-kubernetes-access-control"
+      ],
+      "sourcePath": "documentation/blog/13/what-businesses-can-learn-from-sentiment-analysis/en/content.mdx",
+      "title": "What businesses can learn from Sentiment Analysis",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "blog",
+        "title": "What businesses can learn from Sentiment Analysis",
+        "description": "Learn how sentiment analysis can boost your business by understanding customer emotions, refining strategies, and enhancing satisfaction. Explore its power today!",
+        "date": "2022-04-26",
+        "ogImage": "public/blog/b-thumb-13.webp",
+        "keywords": [
+          "QueryPie",
+          "data breaches",
+          "small breaches",
+          "data leak risks",
+          "risk mitigation",
+          "internal security"
+        ],
+        "relatedPosts": [
+          "/features/documentation/blog/9/data-discovery-privacy-management",
+          "/features/documentation/blog/7/command-bypass-prevention-control",
+          "/features/documentation/blog/4/multi-cloud-kubernetes-access-control"
+        ]
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "what-businesses-can-learn-from-sentiment-analysis"
+}

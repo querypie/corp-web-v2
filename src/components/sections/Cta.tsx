@@ -31,7 +31,7 @@ export default function Cta({
         <p className="m-0 min-w-full type-body-md text-mute-fg">
           {description}
         </p>
-        <Button size="large" variant="secondary">
+        <Button size="large" style="round" variant="secondary">
           {actionLabel}
         </Button>
       </div>

@@ -1,0 +1,490 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "MCP를 넘어 MCPS로: 엔터프라이즈 AI를 위한 보안 프로토콜의 필요성"
+description: "MCP(Model Context Protocol)는 혁신적이지만, 엔터프라이즈 환경에서 사용하기에는 치명적인 약점이 존재합니다. 이 글에서는 MCP의 기본 개념과 현재 상황을 살펴보고, 엔터프라이즈 환경에서 발생하는 보안 문제점을 심층 분석합니다."
+date: "2025-04-30"
+author: "brant"
+ogImage: "public/white-paper/wp-thumb-20.png"
+keywords: ["MCP","QueryPie MCPS","MCPS","Model Context Protocol","엔터프라이즈 AI 보안","Secured Model Context Protocol","안전한 AI 기반 구축","AI 정책 적용","클라우드 감사 로그","AI 액션 제어","AI 컴플라이언스"]
+relatedPosts:
+  - "/features/documentation/white-paper/17/ai-autonomous-access-control"
+  - "/features/documentation/white-paper/18/uncovering-mcp-security"
+  - "/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam"
+---
+# 서론: 혁신적인 MCP, 그러나 엔터프라이즈에는 부족하다
+
+최근 인공지능(AI) 분야에서 모델 컨텍스트 프로토콜(Model Context Protocol, MCP)이 큰 주목을 받고 있습니다.[1] MCP는 AI 어시스턴트와 데이터가 존재하는 시스템(콘텐츠 저장소, 비즈니스 도구, 개발 환경 등)을 연결하는 새로운 개방형 표준으로, AI 모델이 더 정확하고 관련성 높은 응답을 생성하도록 돕는 것을 목표로 합니다.[1] 마치 다양한 주변기기를 표준화된 방식으로 연결하는 USB-C 포트처럼, MCP는 AI 모델을 다양한 데이터 소스 및 도구에 연결하는 표준화된 방법을 제공하여 "AI를 위한 USB-C"로 비유되기도 합니다.[4] 이미 Block, Apollo, Zapier, Cursor 등 많은 기업과 개발 도구들이 MCP를 도입하며 생태계를 확장하고 있습니다.[1]
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp20-1-what-is-mcp-and-mcp-server.png"
+        alt="MCP 아키텍처 개요"
+        caption="MCP 아키텍처 개요"
+    />
+</Box>
+
+하지만 이 혁신적인 MCP에는 엔터프라이즈 환경에서 사용하기에는 치명적인 약점이 존재합니다. 바로 보안 기능의 부재입니다. 현재 MCP는 마치 초창기의 HTTP처럼 인증, 권한 부여, 데이터 암호화, 감사 로깅 등 기업 환경에서 필수적인 보안 메커니즘을 프로토콜 수준에서 전혀 제공하지 않습니다. 이는 민감한 데이터를 다루고 엄격한 규제 준수가 요구되는 엔터프라이즈 환경에서 MCP 도입을 망설이게 하는 가장 큰 장벽입니다.
+
+이 글에서는 MCP의 기본 개념과 현재 상황을 살펴보고, 엔터프라이즈 환경에서 발생하는 보안 문제점을 심층 분석합니다. 그리고 웹 통신의 표준이 된 HTTPS의 발전 과정을 교훈 삼아, MCP의 보안 강화를 위한 가상의 프로토콜, MCPS(Secured Model Context Protocol)의 필요성과 구현 방안, 그리고 예상되는 효과와 과제에 대해 논의하고자 합니다.
+
+# MCP 심층 분석: 개념, 구조, 현황
+
+MCP는 AI 애플리케이션(챗봇, IDE 어시스턴트, 커스텀 에이전트 등)이 외부 도구, 데이터 소스, 시스템과 상호작용하는 방식을 표준화하기 위해 Anthropic이 제안한 개방형 표준입니다.[1] 기존의 파편화된 연동 방식을 단일 프로토콜로 대체하여, 개발자들이 각 데이터 소스마다 별도의 커넥터를 유지보수할 필요 없이 표준 프로토콜에 맞춰 개발할 수 있도록 합니다.[1]
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp20-2-how-does-mcp-work.png"
+        alt="MCP의 작동 방식"
+        caption="MCP의 작동 방식"
+    />
+</Box>
+
+MCP는 클라이언트-서버 아키텍처를 따릅니다.[2]
+* **호스트(Host):** 사용자가 상호작용하는 애플리케이션 (예: Claude Desktop, Cursor IDE, 커스텀 에이전트).[2] 여러 클라이언트 인스턴스를 관리하고 보안 정책(권한, 사용자 동의)을 담당합니다.[3]
+* **클라이언트(Client):** 호스트 애플리케이션 내부에 존재하며 특정 MCP 서버와의 1:1 연결을 관리합니다.[2]
+* **서버(Server):** 특정 외부 시스템(API, 데이터베이스, 로컬 파일 등)의 기능을 MCP 사양에 따라 노출하는 경량 프로그램입니다. [2] Python, TypeScript 등 다양한 언어로 구현 가능합니다.[1]
+
+
+MCP 서버는 클라이언트와 주로 두 가지 전송 방식(Transport)을 통해 통신합니다[2]:
+* **stdio (Standard Input/Output):** 클라이언트와 서버가 동일한 머신에서 실행될 때 사용됩니다. 로컬 통합(예: 로컬 파일 접근)에 간단하고 효과적입니다.[2]
+* **HTTP + SSE (Server-Sent Events):** 클라이언트가 HTTP를 통해 서버에 연결합니다. 초기 설정 후 서버는 SSE 표준을 사용하여 지속적인 연결을 통해 클라이언트에게 메시지(이벤트)를 푸시할 수 있습니다.[2]
+
+
+MCP는 세 가지 핵심 기능(Primitives)을 정의합니다[2]:
+* **도구(Tools):** LLM이 특정 작업을 수행하기 위해 호출할 수 있는 함수 (모델 제어). 날씨 API 호출 등 함수 호출과 유사합니다.[2]
+* **리소스(Resources):** LLM이 접근할 수 있는 데이터 소스 (애플리케이션 제어). REST API의 GET 엔드포인트와 유사하며, 부작용 없이 데이터를 제공합니다.[2]
+* **프롬프트(Prompts):** 도구나 리소스를 최적으로 사용하기 위한 사전 정의된 템플릿 (사용자 제어).[2]
+
+
+MCP는 언어 서버 프로토콜(LSP)과 JSON-RPC 2.0과 같은 검증된 기술을 기반으로 구축되었으며, 상세한 사양을 제공하는 개방형 표준입니다.[1] Block, Apollo, Zed, Replit, Codeium, Sourcegraph, Zapier, Cursor, Claude Desktop 등 다양한 기업과 도구들이 MCP를 채택하며 생태계를 확장하고 있습니다.[1] 하지만 아직 개발 초기 단계이며 일부 기능(예: Cursor에서의 리소스 미지원)은 완전하게 구현되지 않았고, 프로토콜 자체가 활발히 개발 중인 상태입니다.[12]
+
+이러한 MCP의 설계는 보안 관점에서 중요한 시사점을 가집니다.
+
+**첫째, 기능(Primitives)에 대한 제어 주체가 다르다는 점입니다.**[2] 모델이 제어하는 '도구'는 예측 불가능한 LLM에 의해 실행될 수 있으므로 가장 높은 보안 위험을 가지며 엄격한 통제가 필요합니다.[13] 반면 애플리케이션이 제어하는 '리소스'는 주로 데이터 제공에 목적이 있어 상대적으로 위험은 낮지만 데이터 프라이버시 문제를 야기할 수 있습니다.[13] 사용자가 제어하는 '프롬프트'는 또 다른 신뢰 수준을 가집니다. 따라서 안전한 MCPS는 이러한 기능 간의 차이를 인식하고 각기 다른 보안 정책(예: 도구에 대한 엄격한 인가, 리소스에 대한 데이터 마스킹/필터링)을 적용해야 합니다.
+
+**둘째, 전송 방식(stdio vs. SSE) 선택은 프로토콜 자체에서 완전히 다루지 않는 직접적인 보안 영향을 미칩니다.** stdio는 로컬 환경 내에서의 통신을 의미하므로 비교적 신뢰 경계가 명확하지만[2], HTTP+SSE는 네트워크 경계를 넘나들기 때문에 본질적으로 더 강력한 보안이 요구됩니다.[2] 현재 MCP 사양은 메시징 형식(JSON-RPC)만 정의할 뿐 전송 계층별 보안을 강제하지 않으므로[13], HTTP+SSE 서버는 외부 보안 조치(예: TLS를 지원하는 리버스 프록시[14]) 없이는 네트워크 상에 암호화나 인증 없이 노출될 위험이 있습니다. MCPS는 특히 HTTP+SSE 전송 보안을 우선적으로 해결해야 합니다.
+
+**셋째, MCP가 표준화를 목표로 하지만[1], 아직 개발 중이고 일부 기능 지원이 미비하다는 점[12]은 보안 표준화를 고려하기 전에 이미 잠재적인 파편화 및 상호 운용성 문제를 내포하고 있음을 시사합니다.** "AI를 위한 USB-C"라는 비전[4]을 달성하기 위해서는 보안 표준화뿐만 아니라 모든 핵심 프로토콜 기능의 일관된 구현과 지원이 생태계 전반에 걸쳐 필요합니다. MCPS는 이러한 진화하는 환경을 고려하여 설계되어야 합니다.
+
+# 엔터프라이즈 환경에서의 MCP 보안 취약점
+
+MCP 사양 자체도 임의의 데이터 접근 및 코드 실행으로 인한 보안 문제를 인지하고 있습니다.[13] 하지만 명시적으로 프로토콜 수준에서 보안 원칙을 강제하지 않고, 호스트, 클라이언트, 서버 개발자 등 구현자(implementor)가 안전한 애플리케이션을 구축할 책임이 있다고 명시합니다.[13]
+
+사양에서 권장하는 주요 보안 원칙은 다음과 같습니다.[13] 하지만 이는 강제 사항(MUST)이 아닌 권장 사항(SHOULD) 수준입니다.
+* **사용자 동의 및 제어:** 사용자는 모든 데이터 접근 및 작업에 대해 명시적으로 동의하고 이해해야 하며, 공유되는 데이터와 수행되는 작업에 대한 통제권을 유지해야 합니다. 명확한 UI 제공이 권장됩니다.
+* **데이터 프라이버시:** 호스트는 서버에 사용자 데이터를 노출하기 전에 명시적인 사용자 동의를 받아야 하며, 동의 없이 리소스 데이터를 다른 곳으로 전송해서는 안 됩니다. 적절한 접근 제어가 필요합니다.
+* **도구 안전성:** 도구는 임의 코드 실행을 나타내므로 신중하게 취급해야 합니다. 신뢰할 수 없는 서버에서 얻은 도구 설명은 신뢰할 수 없는 것으로 간주해야 합니다. 호스트는 도구를 호출하기 전에 명시적인 사용자 동의를 받아야 합니다.
+* **LLM 샘플링 제어:** 사용자는 모든 LLM 샘플링 요청을 명시적으로 승인해야 하며, 프롬프트 및 결과 가시성을 제어해야 합니다.
+이러한 권장 사항에도 불구하고, 엔터프라이즈 환경에서 필수적인 다음과 같은 보안 기능들이 프로토콜 수준에서 누락되어 있습니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp20-3-mcp-without-security.png"
+        alt="MCP 보안 미구현 시 발생하는 주요 취약점"
+        caption="MCP 보안 미구현 시 발생하는 주요 취약점"
+    />
+</Box>
+
+* **인증(Authentication):** 클라이언트가 서버에 연결하거나 서버가 클라이언트에 연결할 때(특히 네트워크 연결 시) 서로의 신원을 확인할 강제적인 메커니즘이 없습니다. 서버는 합법적인 클라이언트가 연결되었는지, 클라이언트는 합법적인 서버에 연결되었는지 어떻게 알 수 있을까요?
+* **인가(Authorization):** 도구 실행에 대한 사용자 동의는 권장되지만[13] (일부 호스트에서 구현됨[12]), 특정 사용자/클라이언트가 어떤 리소스에 접근하거나 어떤 도구를 어떤 매개변수로 사용할 수 있는지에 대한 세분화된 접근 제어를 위한 표준화된 프로토콜 메커니즘이 없습니다.
+* **데이터 암호화(기밀성 및 무결성):** 특히 네트워크(HTTP+SSE 전송)를 통해 전송 중인 데이터에 대한 내장 암호화 기능이 없습니다. MCP를 통해 전송되는 데이터는 가로채거나 변조될 수 있습니다 (HTTP의 위험과 유사[15]).
+* **로깅/감사(Logging/Auditing):** 보안 관련 이벤트(연결 시도, 인증 성공/실패, 인가 결정, 도구 호출, 오류 등)를 모니터링, 포렌식, 규정 준수를 위해 표준화된 방식으로 로깅하는 메커니즘이 없습니다.
+
+이러한 프로토콜 수준의 표준 부재는 다양한 구현 수준의 보안으로 이어집니다. 예를 들어, Cursor는 환경 변수(env)를 사용하여 API 키를 관리하고, 도구 실행 전 사용자 승인을 받는 워크플로우를 제공합니다.[12] 하지만 이는 구현 수준의 통제일 뿐 프로토콜 보장은 아닙니다. 다른 호스트가 이를 구현하지 않을 수도 있고, 심지어 Cursor의 "Yolo 모드"[12]처럼 권장 제어를 우회하는 기능이 존재할 수도 있습니다. Phil Schmid가 언급한 OAuth 2.0 흐름 [8] 역시 MCP 핵심 요구사항이 아닌 일부 구현 패턴일 뿐입니다.
+
+
+이러한 기술적 격차는 다음과 같은 구체적인 비즈니스 위험으로 이어집니다:
+* **데이터 노출:** 민감한 기업 데이터(리소스 또는 도구 매개변수/응답 내)가 암호화되지 않은 상태로 전송될 위험.[15]
+* **무단 접근/작업:** 악의적인 클라이언트가 서버에 연결하거나, 인증되지 않은 서버가 악성 도구/데이터를 제공할 가능성. LLM이 손상된 도구를 통해 무단 작업을 수행하도록 속을 수 있음.
+* **규정 준수 실패:** 암호화, 인증, 감사 기능 부족으로 GDPR, HIPAA, PCI-DSS 등 규제 요구사항 충족 불가.[19]
+* **책임 추적 및 포렌식 불가:** 표준화되고 신뢰할 수 있는 로그 없이는 보안 사고 조사 어려움.
+* **평판 손상:** 보안 침해로 인한 신뢰도 및 브랜드 이미지 하락.[21]
+
+
+MCP 사양의 '사용자 동의'[13] 강조는 주로 최종 사용자와 호스트 애플리케이션 간의 상호작용에 초점을 맞추고 있습니다. 이는 중요한 사용자 중심 보안이지만, 클라이언트와 서버 구성 요소 간, 특히 네트워크를 통한 기계 간(machine-to-machine) 보안 요구 사항은 간과하고 있습니다. 서버가 합법적인 클라이언트와 통신하고 있는지(또는 그 반대) 확인하고 그들 사이의 트래픽을 암호화하는 것과 같은 기본적인 네트워크 보안 문제는 이러한 원칙이나 프로토콜 자체에서 직접적으로 다루어지지 않습니다. 이 격차는 특히 HTTP+SSE 전송 방식에서 두드러집니다. 엔터프라이즈 보안은 사용자 수준의 보안과 시스템/네트워크 수준의 보안 모두를 요구합니다.
+
+또한, 도구 설명은 "신뢰할 수 있는 서버에서 얻지 않는 한 신뢰할 수 없는 것으로 간주해야 한다"[13]는 지침은 중요한 부트스트랩 문제를 야기합니다. 프로토콜 수준의 인증 없이는 애초에 서버에 대한 신뢰를 어떻게 구축할 수 있을까요? 이 지침은 서버가 신뢰할 수 있는지 판단하는 메커니즘이 존재한다고 암묵적으로 가정하지만, 강제적인 서버 인증(HTTPS 인증서와 같은) 없이는 클라이언트가 서버의 신원이나 제공하는 도구 설명의 무결성을 신뢰할 수 있는 방법이 없습니다. 이는 신뢰를 얻기 위해 신뢰가 필요하지만, 프로토콜이 그 초기 신뢰의 기반을 제공하지 않는 순환 의존성을 만듭니다.
+
+결정적으로, 보안을 구현자에게 의존하는 방식[13]은 초기 인터넷 프로토콜의 문제점을 답습하며 필연적으로 일관성 없는 보안 상태를 초래합니다. 이는 진정으로 상호 운용 가능하고 신뢰할 수 있는 생태계를 구축하려는 MCP의 목표[1]를 저해합니다. 역사는 보안을 구현자의 모범 사례에만 의존하는 것이 종종 실패한다는 것을 보여줍니다 (예: 초기 HTTP, 다양한 IoT 프로토콜[21]). HTTPS와 같은 표준화는 기준선을 제공합니다. 현재 MCP 접근 방식은 A 벤더의 클라이언트를 B 벤더의 서버에 연결할 때 양쪽 모두 충분하고 호환 가능한 보안 조치를 구현했기를 바라는 수밖에 없음을 의미하며, 이는 플러그 앤 플레이 비전[6]을 약화시킵니다. 이러한 불일치는 예측 가능한 보안을 필요로 하는 기업에게 주요 장벽입니다.
+
+
+# 역사로부터의 교훈: 웹은 어떻게 스스로를 보호했는가 (HTTP → HTTPS)
+
+월드 와이드 웹(WWW)과 HTTP는 1989년에서 1991년 사이에 CERN의 팀 버너스리에 의해 발명되었습니다.[25] 초기 목적은 연구자들 간의 정보(하이퍼텍스트 문서) 공유였습니다.[26] HTTP/0.9와 같은 초기 버전은 매우 단순했습니다.[25]
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp20-4-http-to-https.png"
+        alt="HTTP vs HTTPS: 전송 계층 보안의 기본"
+        caption="HTTP vs HTTPS: 전송 계층 보안의 기본 (출처: https://sslinsights.com/http-vs-https/)"
+    />
+</Box>
+
+하지만 초기의 HTTP는 평문(plaintext) 프로토콜이었습니다.[15] 웹이 단순한 문서 공유를 넘어 확장되면서 이는 심각한 위험을 초래했습니다:
+* **도청 (기밀성 침해):** 네트워크를 모니터링하는 사람은 누구나 전송되는 데이터(비밀번호, 양식 데이터, 민감 정보)를 읽을 수 있었습니다.[15]
+* **변조 (무결성 침해):** 데이터가 전송 중에 변경될 수 있었습니다 (예: 악성코드나 광고 삽입).[16]
+* **인증 부재:** 웹 서버의 신원을 확인할 방법이 없어 스푸핑(spoofing), 중간자 공격(Man-in-the-Middle, MitM) 등의 위험에 노출되었습니다.[16] 인증 부재로 인해 경로상 공격, DNS 하이재킹, BGP 하이재킹, 도메인 스푸핑 등이 가능했습니다.[16]
+
+웹이 전자상거래 영역으로 확장되고 민감한 사용자 데이터를 처리하게 되면서 HTTP의 불안전성은 더 이상 용납될 수 없게 되었습니다.[17] 안전하고 신뢰할 수 있는 통신에 대한 필요성이 절실해진 것입니다.
+이 문제에 대한 해결책으로 SSL/TLS와 HTTPS가 등장했습니다. 넷스케이프는 1994-1995년경 SSL(Secure Sockets Layer)을 개발했고[31], 이는 이후 IETF에 의해 표준화되어 TLS(Transport Layer Security)로 발전했습니다.[31] HTTPS는 본질적으로 HTTP를 SSL/TLS 위에 계층화한 것입니다.[15] 이들은 서로 다른 포트(HTTP: 80, HTTPS: 443)를 사용합니다.[18]
+
+
+SSL/TLS는 다음과 같은 방식으로 연결을 보호합니다:
+* **암호화 (기밀성):** 핸드셰이크 과정에서 비대칭 암호화(공개키/개인키)를 사용하여 공유 대칭 세션 키를 설정하고, 이후 모든 HTTP 데이터를 이 세션 키로 암호화합니다.[15] 가로챈 데이터는 무작위 문자열처럼 보입니다.[16]
+* **인증 (서버 신원):** 서버는 신뢰할 수 있는 인증 기관(Certificate Authority, CA)에서 발급한 SSL/TLS 인증서를 제시합니다.[15] 브라우저는 이 인증서를 검증하여 서버의 신원과 도메인 소유권을 확인합니다.[15] 브라우저 주소창의 자물쇠 아이콘이 이를 나타냅니다.[15]
+* **무결성:** TLS 암호화 프로세스 내에서 사용되는 메시지 인증 코드(MAC)를 통해 데이터가 변조되지 않았음을 보장합니다.[36]
+
+결과적으로 HTTPS는 웹 통신의 표준이 되었고[30], 사용자 신뢰를 구축했으며[15], 안전한 온라인 거래 및 데이터 교환을 가능하게 했고, 심지어 SEO 순위에도 영향을 미쳤습니다.[15] HTTP 자체도 HTTP/1.1, HTTP/2, HTTP/3로 발전했지만, HTTPS는 이러한 모든 버전에 적용됩니다.[15]
+
+HTTP에서 HTTPS로의 전환은 즉각적이거나 어려움 없이 이루어진 것이 아닙니다. 기반 프로토콜(SSL/TLS) 개발, 인증 기관(CA) 인프라 구축, 브라우저 및 서버 업데이트, 그리고 초기 비용 및 복잡성에 대한 우려 극복 등이 필요했습니다.[31] 이는 MCPS로 가는 길 역시 순전히 기술적인 문제 외의 장애물에 직면할 것임을 시사합니다.
+
+HTTPS의 핵심 가치는 단순히 암호화에만 있는 것이 아니라, 암호화와 신뢰할 수 있는 제3자(CA) 시스템을 통한 서버 인증의 결합에 있었습니다. 이것이 민감한 상호작용에 필요한 신뢰를 구축했습니다.[15] 성공적인 MCPS는 클라이언트와 서버 간의 신뢰를 구축하기 위해 유사한 메커니즘이 필요할 가능성이 높습니다. 단순히 MCP에 암호화를 추가하는 것만으로는 충분하지 않을 수 있으며, 참여자를 인증하는 강력한 메커니즘(아마도 상호 TLS, 섹션 V 참조)이 MCPS에 대한 기업의 신뢰를 구축하는 데 중요할 것입니다.
+
+표준화 과정 자체(SSL을 IETF로 이전하여 TLS로 발전시킨 것)는 광범위한 채택과 상호 운용성에 매우 중요했습니다.[31] MCPS가 특정 구현을 넘어 성공하기 위해서는 유사한 개방적이고 협력적인 표준화 노력이 필수적입니다. 이러한 역사적 선례는 MCPS가 MCP가 목표로 하는 상호 운용성과 광범위한 채택 1을 달성하기 위해 공식적이고 커뮤니티 중심의 표준화 프로세스가 필요함을 강력히 시사합니다.
+
+
+# MCPS 구상: 엔터프라이즈 AI를 위한 보안 프로토콜
+
+이제 MCP의 필수적인 진화로서 MCPS(Secured Model Context Protocol)를 공식적으로 제안합니다. MCPS는 HTTPS 모델에서 교훈을 얻어 엔터프라이즈 보안 요구사항을 처음부터 내장하도록 설계되어야 합니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp20-5-https-and-mcps.png"
+        alt="MCP에서 MCPS로: 필연적인 보안 진화"
+        caption="MCP에서 MCPS로: 필연적인 보안 진화"
+    />
+</Box>
+
+**MCPS의 목표:** 모든 MCP 통신에 대해 기밀성, 무결성, 강력한 인증을 제공하여 엔터프라이즈 환경에 적합한 신뢰 기준선을 구축하는 것입니다.
+
+MCPS가 프로토콜 수준에서 반드시 통합해야 하는 필수 보안 요소는 다음과 같습니다.
+
+**1. 상호 인증 (클라이언트 & 서버):** 
+  - **중요성:** 주로 서버 신원이 중요한 웹 브라우징과 달리, MCP는 잠재적으로 민감한 기업 시스템(서버)과 강력한 AI 클라이언트 간의 양방향 상호작용을 포함합니다. 양측 모두 상대방의 신원을 확인하여 무단 접근, 스푸핑, 악성 도구/리소스 주입을 방지해야 합니다. 이는 B2B 또는 내부 기업 시나리오에 매우 중요합니다.[20]
+  - **제안 메커니즘 - 상호 TLS (mTLS):** 클라이언트와 서버가 모두 검증을 위해 인증서를 제시하는 mTLS를 제안합니다.[19] 표준 TLS와의 핸드셰이크 차이점을 간략히 설명하고[50], MitM, 스푸핑, 크리덴셜 스터핑 방지 및 API 보안 강화 등 mTLS의 이점을 강조합니다.[19] 클라이언트 인증서 및 잠재적인 내부 CA 또는 신뢰 저장소 관리의 필요성을 논의합니다.[20]
+
+**2. 필수 전송 암호화 (기밀성 및 무결성):**
+  - **필수성:** 모든 MCP 데이터(요청, 응답, 도구 매개변수, 리소스 콘텐츠)는 특히 네트워크(HTTP+SSE 전송)를 통과할 때 도청 및 변조로부터 보호되어야 합니다.
+  - **제안 메커니즘 - TLS (최신 보안 버전):** 모든 네트워크 기반 MCPS 통신에 최신 보안 TLS 버전(예: TLS 1.2, TLS 1.3[31]) 사용을 의무화합니다. 이는 잘 확립된 TLS의 보안을 활용합니다.[15] 강력한 암호화 스위트 및 잠재적으로 전방향 비밀성(Forward Secrecy)의 필요성을 명시합니다.[35]
+
+**3. 강력한 인가 및 접근 제어:**
+  - **인증 이상의 필요성:** 누가 연결하는지 아는 것(인증)만으로는 충분하지 않습니다. MCPS는 그들이 무엇을 할 수 있는지 제어해야 합니다. 이는 MCP 도구를 통한 AI 작업의 잠재적 영향을 고려할 때 매우 중요합니다.
+  - **제안 메커니즘 (통합 지점):** MCPS가 인가 컨텍스트를 전달하거나 기존 엔터프라이즈 인가 시스템과 통합할 수 있는 표준 방법을 정의할 것을 제안합니다. 가능성에는 다음이 포함됩니다:
+    + 보안 MCPS 채널 내에서 표준화된 토큰(예: OAuth 2.0 Bearer 토큰, JWT) 전달 (RPC 보안을 위해 OAuth/JWT를 언급하는 53에서 영감). mTLS 연결은 토큰 전송을 보호합니다.
+    + 인가 결정을 위해 클라이언트 인증서(mTLS에서)의 속성 사용.
+    + 연결/도구/리소스와 관련된 프로토콜 수준 역할 또는 권한 정의 (더 복잡함).
+
+**4. 포괄적인 감사 로깅:**
+   - **필수성:** 보안 모니터링, 사고 대응, 규정 준수 보고 및 책임 추적을 위해 필수적입니다.
+   - **제안 요구사항:** MCPS 사양은 감사 가능한 이벤트의 표준 집합과 최소 필수 로그 데이터 필드(예: 타임스탬프, 소스/대상 식별자, 이벤트 유형(연결, 인증 성공/실패, 도구 호출, 리소스 접근), 상태, 관련 매개변수)를 정의해야 합니다. 로깅은 MCPS 연결의 수명 주기와 그 안의 중요한 작업을 포괄해야 합니다. 로깅 실패에 관한 OWASP Top 10을 참조하십시오.[56]
+
+MCPS에 mTLS를 의무화하는 것은 현재의 "구현자 주의" 접근 방식[13]에서 프로토콜에 의해 강제되고 검증 가능한 신원 모델로 신뢰 모델을 근본적으로 전환하며, 이는 기업 채택에 필수적입니다. 현재 MCP는 구현자에게 의존합니다.[13] HTTPS는 서버 인증서에 의존합니다.[16] mTLS[20]는 클라이언트 인증서를 추가하여 양방향 인증을 제공합니다. MCP를 통해 상호 작용하는 기업 시스템(클라이언트 AI와 서버 데이터 소스 모두 민감하거나 중요할 수 있음)의 경우 양쪽 끝을 확인하는 것이 가장 중요합니다. MCPS 내에서 mTLS를 의무화하면 섹션 III에서 확인된 인증 격차를 직접 해결하고 후속 인가에 필요한 강력한 신원 기반을 제공합니다.
+
+MCPS에 인가를 통합하는 것은 복잡합니다. 인가 로직은 종종 매우 상황에 따라 다르며 기존 기업 ID 및 접근 관리(IAM) 시스템과 연결되어 있기 때문입니다. RPC 호출 보안을 위해 TLS와 함께 OAuth/JWT를 사용하는 것에 대한 논의[53]는 전송 보안(TLS)과 애플리케이션 수준 인가(토큰)를 분리하는 패턴을 보여줍니다. 기업 인가 요구사항의 다양성을 고려할 때, MCPS가 TLS/mTLS를 의무화하여 보안 채널을 제공하고, 해당 채널 내에서 기존 토큰(예: JWT)이 전달되는 방식을 표준화하는 것이 새로운 프로토콜별 인가 체계를 만드는 것보다 더 실현 가능하고 유연해 보입니다. MCPS는 자체적으로 보편적인 인가 모델을 정의하기보다는 인가 토큰/컨텍스트를 안전하게 전송하는 데 집중해야 할 것입니다.
+
+MCPS 프로토콜 사양 내에서 표준화된 감사 로깅을 정의하는 것은 이기종 클라이언트 및 서버 생태계 전반에 걸쳐 일관된 가시성을 확보하는 데 중요합니다. "보안 로깅 및 모니터링 실패"는 OWASP Top 10 위험 중 하나로 등재되어 있으며[56], 민감한 애플리케이션에는 상세한 로깅이 필요하다는 점이 강조됩니다.[57] 로깅을 개별 구현에 의존하면 일관성 없는 데이터와 형식이 발생하여 효과적인 보안 모니터링을 방해합니다. MCPS가 엔터프라이즈급 프로토콜을 목표로 한다면, 프로토콜 사양 자체 내에서 최소 필수 로그 이벤트 및 데이터 필드를 표준화하면 벤더에 관계없이 모든 규격 준수 구현이 기준 수준의 감사 가능성을 제공하도록 보장합니다. 이는 기능적 상호 운용성뿐만 아니라 보안 운영 관점에서도 상호 운용성을 지원합니다.
+
+
+# 경로 설정: 잠재적인 MCPS 구현 전략
+
+핵심 과제는 필수 보안 요소(mTLS, TLS 암호화, 인가 컨텍스트, 로깅)를 MCP에 통합하거나 그 옆에 배치하는 방법입니다.
+
+## 접근 방식 1: TLS/mTLS 위에 MCP 계층화 ("HTTPS" 모델)
+
+* **설명:** 기존 MCP 프로토콜(stdio/SSE를 통한 JSON-RPC 메시지)을 애플리케이션 계층 페이로드로 취급합니다. 네트워크 통신(HTTP+SSE)의 경우, 기본 HTTP 연결이 TLS(서버 인증) 또는 이상적으로는 mTLS(상호 인증)를 사용하여 반드시 보호되어야 한다고 규정합니다. 이는 HTTPS가 HTTP를 TLS로 감싸는 방식과 유사합니다.
+* **작동 방식:** 표준 TLS/mTLS 핸드셰이크는 네트워크 전송을 통해 MCP 메시지가 교환되기 전에 보안 채널을 설정합니다.[36] stdio의 경우 이 접근 방식은 덜 관련성이 있거나 다른 처리 방식(아마도 OS 수준 보안에 의존)이 필요할 수 있습니다.
+* **기존 기술 활용:** 검증된 TLS/mTLS 라이브러리 및 인프라를 활용합니다.[55] 기존 MCP 서버 앞에 TLS/mTLS 종료를 처리하기 위해 리버스 프록시(예: [14]에서 언급된 Nginx)를 사용할 수 있습니다.
+* **인가/로깅:** 인가 토큰은 TLS 터널 내의 HTTP 헤더(예: Authorization: Bearer...)로 전달될 수 있습니다.[53] 로깅은 TLS/mTLS 계층(연결/인증 이벤트용)과 MCP 애플리케이션 계층(도구/리소스 이벤트용)에 의존하며 상관관계 분석이 필요합니다.
+
+## 접근 방식 2: MCP 프로토콜 사양 강화 (보안 통합)
+
+* **설명:** MCP 기본 프로토콜(JSON-RPC 메시지 및 상태 머신) 자체를 수정하여 보안 메커니즘을 직접 포함합니다.
+* **작동 방식(예상):** 인증 핸드셰이크(잠재적으로 인증서 정보 또는 챌린지 포함), MCP 세션 내 암호화 매개변수 협상 명령, 인가 토큰 및 로그 이벤트에 대한 표준화된 메시지 형식을 위한 새로운 MCP 메시지를 정의합니다. 이는 다른 RPC 프로토콜의 보안 기능에서 영감을 얻을 수 있지만 MCP의 JSON-RPC 구조에 통합됩니다.
+* **잠재적 이점:** 프로토콜 로직과 보안의 긴밀한 통합, 잠재적으로 최적화된 핸드셰이크, stdio 및 네트워크 전송 모두에서 보안의 통합 처리.
+* **과제:** 상당한 표준화 노력 필요, 기존 MCP 구현과의 하위 호환성 중단, 기존 TLS/mTLS 사용에 비해 "바퀴를 재발명"할 가능성.
+
+## 접근 방식 3: 하이브리드 모델
+* **설명:** 두 접근 방식의 요소를 결합합니다. 예를 들어, 전송 계층에 TLS/mTLS를 의무화하고(접근 방식 1), 표준화된 인가 토큰 또는 더 풍부한 로깅 정보를 전달하기 위한 특정 MCP 메시지를 정의합니다(접근 방식 2의 요소).
+* **근거:** 기존 전송 보안(TLS/mTLS)을 활용하면서 인가 및 감사와 같은 애플리케이션 수준 보안 문제의 더 나은 통합을 위해 프로토콜을 향상시킵니다.
+
+## 구현 전략 비교
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> 기능 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 접근 방식 1: 계층화 (MCP over TLS/mTLS) </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 접근 방식 2: 프로토콜 강화 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 접근 방식 3: 하이브리드 </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **설명** </Table.Td>
+            <Table.Td>MCP를 표준 TLS/mTLS로 감싸기</Table.Td>
+            <Table.Td>보안을 MCP 사양에 통합</Table.Td>
+            <Table.Td>TLS/mTLS 전송 + MCP 인가/로그 메시지</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **암호화** </Table.Td>
+            <Table.Td>표준 TLS</Table.Td>
+            <Table.Td>맞춤형/통합</Table.Td>
+            <Table.Td>표준 TLS</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **인증** </Table.Td>
+            <Table.Td>표준 TLS/mTLS 인증서</Table.Td>
+            <Table.Td>프로토콜 정의 메커니즘</Table.Td>
+            <Table.Td>표준 TLS/mTLS 인증서</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **인가** </Table.Td>
+            <Table.Td>외부 (예: HTTP 헤더의 토큰)</Table.Td>
+            <Table.Td>프로토콜 정의 메커니즘</Table.Td>
+            <Table.Td>MCP 내 표준화된 토큰 전달</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **로깅** </Table.Td>
+            <Table.Td>별도 TLS 및 앱 로그, 상관관계 필요</Table.Td>
+            <Table.Td>통합 프로토콜 로깅</Table.Td>
+            <Table.Td>TLS 로그 + 표준화된 MCP 로그 메시지</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **장점** </Table.Td>
+            <Table.Td>기존 기술/인프라 활용, 빠른 표준화</Table.Td>
+            <Table.Td>긴밀한 통합, 통합 전송 처리</Table.Td>
+            <Table.Td>양쪽 장점 활용, 균형 잡힌 노력</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **단점** </Table.Td>
+            <Table.Td>"덧붙인" 느낌, stdio 처리 불명확</Table.Td>
+            <Table.Td>호환성 중단, 높은 노력, 설계 위험</Table.Td>
+            <Table.Td>복잡성 증가, 여전히 노력 필요</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **생태계 영향** </Table.Td>
+            <Table.Td>기존 인프라 진입 장벽 낮음, 라이브러리 TLS/mTLS 지원 필요</Table.Td>
+            <Table.Td>전체 클라이언트/서버 재작성 필요</Table.Td>
+            <Table.Td>TLS/mTLS + 부분 재작성 필요</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **주요 관련 자료** </Table.Td>
+            <Table.Td>[14]</Table.Td>
+            <Table.Td>(개념적 - 직접 지원 적음)</Table.Td>
+            <Table.Td>(개념적 조합)</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+
+"계층화" 접근 방식(MCP over TLS/mTLS)은 가장 실용적이며 기존 인터넷 보안 관행(HTTPS)과 가장 잘 부합하며, 잠재적인 비우아함에도 불구하고 안전한 솔루션으로 가는 가장 빠른 경로를 제공할 가능성이 높습니다. HTTPS는 HTTP를 TLS 위에 계층화하며[15], 많은 기존 RPC 보안 논의는 TLS 추가에 중점을 둡니다.[14] 이는 수십 년간의 TLS/PKI 개발 및 인프라를 활용합니다. 프로토콜을 강화하는 것(접근 방식 2)이 더 깔끔해 보일 수 있지만, MCP 자체 내에서 새로운 보안 메커니즘을 설계, 표준화 및 구현하는 데 드는 노력, 위험 및 시간은 막대하여 안전한 솔루션의 가용성을 지연시킬 것입니다. 실용주의는 검증된 기반 위에 구축할 것을 제안합니다.
+
+접근 방식에 관계없이, mTLS에 필요한 키와 인증서를 관리하는 것[20]은 MCPS를 채택하는 조직에게 프로토콜 구현 자체보다 더 중요한 운영상의 과제가 될 수 있습니다. mTLS는 클라이언트와 서버 모두 인증서를 가질 것을 요구하며[44], 인증서 생성, 관리, 유효성 검사, 갱신 및 폐기는 주요 단계이자 잠재적 과제로 명시되어 있습니다.[51] OpenSSL을 사용한 단계도 자세히 설명되어 있습니다.[20] 이러한 인프라(잠재적으로 내부 CA 포함)와 특히 많은 AI 에이전트 또는 IoT와 유사한 시나리오에서 클라이언트 인증서를 대규모로 배포하고 관리하는 프로세스는 프로토콜 설계와 함께 고려해야 할 상당한 운영 오버헤드를 나타냅니다.
+
+구현 전략의 선택은 표준화 프로세스 및 일정에 직접적인 영향을 미칩니다. 계층화는 기존 TLS/mTLS 표준을 참조하여 더 빠른 표준화를 가능하게 할 수 있는 반면, 프로토콜 강화는 MCP 사양 내에서 완전히 새로운 보안 메커니즘을 정의해야 합니다. 하이브리드 접근 방식은 그 사이에 있습니다. 커뮤니티 합의(IoT 프로토콜 보안 표준화의 어려움으로 언급됨[21])에 도달하는 속도와 실현 가능성은 가능한 경우 기존 표준을 활용하는 것을 선호할 가능성이 높습니다.
+
+
+# 보상: MCPS 도입의 이점
+
+MCPS는 내장된 보안 기능을 통해 섹션 III에서 확인된 중요한 격차를 해소하고, 신뢰, 보안 및 규정 준수가 가장 중요한 민감한 엔터프라이즈 환경에서 MCP 배포를 가능하게 합니다.[3]
+
+필수적인 암호화 및 인증(특히 mTLS)은 데이터 기밀성, 무결성 및 참여자 신원에 대한 검증 가능한 보증을 제공하여 상호 작용하는 시스템과 이를 운영하는 조직 간의 신뢰를 조성합니다.(HTTPS 신뢰 신호와 유사[15])
+MCPS 기능은 강력한 인증, 암호화 및 감사 추적을 요구하는 규제 및 산업 규정 준수 요구 사항(예: HIPAA, GDPR, PCI-DSS [19])을 직접적으로 지원합니다. 이는 위험을 줄이고 감사를 단순화합니다.
+
+MCPS는 현재의 불안전한 MCP로는 너무 위험한 기밀 데이터(예: 금융 기록, 고객 PII, 독점 코드) 또는 중요한 운영(예: 금융 거래 트리거, 프로덕션 시스템 수정)을 포함하는 애플리케이션에 MCP를 사용할 수 있게 합니다.
+표준화된 보안 계층(MCPS)은 다양한 구현 전반에 걸쳐 일관된 보안 기준선을 보장하여, 현재의 파편화된 접근 방식(보안이 개별 구현자의 선택에 따라 달라짐 - 섹션 III 참조)에 비해 더 안전하고 신뢰할 수 있는 상호 운용성을 촉진합니다. 이는 더 광범위하고 확신 있는 채택을 장려합니다.
+초기 구현에는 노력이 필요하지만, 표준 MCPS는 각 개발자/조직이 MCP 위에 자체 맞춤형 보안 계층을 개발하고 구현할 필요성을 제거하여 장기적으로 중복된 노력과 오류 가능성을 줄입니다.(개발자가 모든 HTTPS 애플리케이션에 대해 TLS를 재구현하지 않는 것과 유사)
+
+MCPS의 주요 이점은 단순히 보안 기능을 추가하는 것이 아니라 이를 표준화하는 데 있습니다. 이 표준화는 MCP의 원래 약속인 신뢰할 수 있고 상호 운용 가능한 생태계를 대규모로 실현하는 데 핵심입니다.[1] MCP의 목표는 표준화이며[1], 섹션 III에서는 보안 표준화 부족이 어떻게 파편화와 위험으로 이어지는지 강조했습니다. MCPS는 필수 보안 기준선을 정의함으로써 모든 규격 준수 클라이언트가 모든 규격 준수 서버와 안전하게 상호 작용할 수 있도록 보장하여, 기업이 신뢰할 수 있는 방식으로 상호 운용성 약속을 이행합니다. 이는 점대점 보안 솔루션을 넘어 생태계 전체의 보안으로 나아갑니다.
+
+또한 MCPS는 기업에서 더 발전되고 자율적인 AI 에이전트를 위한 가능 요인 역할을 할 수 있습니다. 현재 신뢰 부족은 에이전트가 MCP를 통해 수행할 수 있는 작업 범위를 제한합니다. MCP가 에이전트 행동을 가능하게 한다는 논의가 있지만[7], 섹션 III에서 설명한 보안 위험(무단 작업, 데이터 노출)은 기업이 불안전한 MCP를 사용하는 에이전트에게 부여할 자율성을 심각하게 제한합니다. MCPS는 강력한 인증 및 인가 제어를 제공함으로써 기업이 AI 에이전트가 프로토콜을 통해 더 복잡하고 위험도가 높은 작업을 수행하도록 허용할 수 있는 확신을 줄 수 있으며, 따라서 더 발전된 사용 사례를 열 수 있습니다.
+
+
+# 장애물 헤쳐나가기: MCPS가 직면한 과제
+
+MCPS 구현에는 여러 가지 과제가 예상됩니다.
+* **기술적 복잡성 및 성능 오버헤드:**
+  - 강력한 보안 구현은 간단하지 않으며 암호화, TLS/mTLS, 인증서 관리 등에 대한 전문 지식이 필요합니다.[56]
+  - 암호화/복호화 및 핸드셰이크 프로세스(특히 mTLS)는 지연 시간과 계산 오버헤드를 발생시킵니다.[22] 이는 성능에 민감한 AI 애플리케이션이나 리소스 제약 환경(예: 일부 잠재적 MCP 클라이언트/서버 시나리오, IoT 과제와 유사[21])에서 신중하게 고려되어야 합니다.
+* **표준화 프로세스 및 커뮤니티 합의:**
+  - MCPS 정의는 주요 이해관계자(Anthropic, OpenAI, 도구 벤더, 기업 사용자) 간의 보안 요구사항 및 기술적 접근 방식에 대한 합의가 필요합니다.[21]
+  - 보안 엄격성, 구현 용이성, 하위 호환성(있다면) 간의 균형을 맞추는 것은 논쟁의 여지가 있을 것입니다. 빠르게 진화하는 분야에서 합의를 도출하는 것은 어렵습니다.[31]
+* **생태계 채택 및 마이그레이션:**
+  - 기존 MCP 호스트, 클라이언트, 서버를 MCPS를 지원하도록 업데이트하려면 생태계 전반에 걸쳐 상당한 노력이 필요합니다.
+  - 마이그레이션 처리 방법(전환 기간? 비보안 MCP 공존?)에 대한 계획이 필요합니다.[59]
+  - 라이브러리 및 SDK[1]가 사용하기 쉬운 MCPS 지원을 제공하는 것이 채택에 중요합니다.
+* **운영상의 과제 (특히 mTLS 관련):**
+  - **인증서 관리:** 대규모 클라이언트 인증서의 프로비저닝, 배포, 갱신 및 폐기는 복잡하고 비용이 많이 들 수 있습니다.[44] 강력한 PKI 인프라(잠재적으로 내부 CA) 및 프로세스가 필요합니다.
+  - **신뢰 저장소 관리:** 서버는 신뢰할 수 있는 클라이언트 CA 또는 개별 클라이언트 인증서가 포함된 신뢰 저장소를 유지 관리하고 업데이트해야 합니다.[44]
+  - **통합:** MCPS(특히 mTLS 클라이언트 ID)를 기존 엔터프라이즈 IAM 및 보안 모니터링 도구와 통합해야 합니다.
+* **정책 및 거버넌스:**
+  - 신뢰 모델 정의: 누가 인증서를 발급하는가? MCPS를 사용하는 다른 조직 간의 신뢰는 어떻게 구축되는가?
+  - MCPS를 구현하고 사용하는 개발자 및 관리자를 위한 명확한 사용 정책 및 보안 모범 사례 개발.[23]
+  - 잘못된 구성 가능성: 보안 기능이 잘못 구성되면 취약점을 만들 수 있습니다.[22]
+
+대규모 mTLS 인증서 관리의 운영 복잡성[44]은 광범위한 MCPS 채택에 있어 프로토콜 설계 과제를 능가하는 가장 큰 실질적인 장벽이 될 수 있습니다. 프로토콜 설계 [섹션 VI] 및 표준화는 복잡하지만 일회성(또는 드문) 노력입니다. 잠재적으로 수백만 개의 AI 클라이언트/에이전트에 대한 인증서 수명 주기 관리는 지속적인 운영 부담입니다. 관련 단계들이 자세히 설명되어 있습니다.[20] 기업은 이를 위해 확장 가능한 솔루션이 필요하며, 이는 PKI 인프라 및 자동화에 상당한 투자를 요구할 수 있으며, 도구 및 모범 사례로 적절히 해결되지 않으면 채택 속도를 늦출 수 있습니다.
+
+IoT 보안 프로토콜에서 자주 언급되는 "제한된 장치" 문제[21]는 일부 MCP 배포 시나리오(예: 경량 클라이언트 또는 서버)에도 적용될 수 있으며, 이는 MCPS의 암호화 알고리즘 또는 구현 전략 선택에 영향을 미칠 수 있습니다. 제한된 장치 기능(CPU, 메모리, 대역폭)은 IoT에서 TLS와 같은 강력한 보안 구현의 어려움과 명시적으로 연결됩니다.[21] 일반적인 MCP 호스트/서버는 강력한 시스템에서 실행될 수 있지만, 프로토콜의 유연성[2]은 특정 도구/리소스 제공자 역할을 하는 덜 강력한 장치에서의 구현을 허용할 수 있습니다. MCPS 설계는 이러한 시나리오에서 성능 오버헤드[32]가 금지적일 수 있는지 고려해야 하며, 아마도 암호화 스위트의 신중한 선택[35]이나 최적화된 구현이 필요할 수 있습니다.
+
+MCPS 표준화 및 채택을 달성하려면 Anthropic 및 OpenAI와 같은 주요 주체가 주도하고 도구 빌더 및 기업 소비자의 광범위한 커뮤니티의 동의가 필요한 강력한 리더십과 협업이 필요합니다. MCP 자체는 Anthropic에 의해 시작되었고[1] OpenAI와 같은 다른 기업들에 의해 수용되었습니다.[7] HTTPS/TLS의 역사는 주요 산업 플레이어 및 표준화 기구와 관련이 있습니다.[27] MCPS가 표준이 되려면 표준화의 기술적, 정치적 과제를 탐색하고 생태계 채택을 주도하기 위해 유사한 협력적 리더십이 필요합니다. 이것이 없으면 MCPS는 틈새 솔루션으로 남거나 경쟁적인 "보안 MCP" 변형으로 이어져 표준화의 목적을 무너뜨릴 수 있습니다.
+
+
+# 결론: AI 미래를 위한 안전한 기반 구축
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp20-6-build-safety-for-AI-future.png"
+        alt="AI 시대 고도화된 보안은 필수"
+        caption=""
+    />
+</Box>
+
+MCP는 AI 통합을 위한 혁신적인 잠재력을 가지고 있지만, 현재 상태로는 엔터프라이즈 환경에서 사용하기에는 중요한 보안 격차가 존재합니다. 웹 통신을 안전하게 만든 HTTPS의 역사는 표준화된 보안의 중요성을 명확히 보여줍니다.
+
+이에 우리는 엔터프라이즈 요구사항을 충족하기 위해 상호 인증(mTLS), 필수 전송 암호화(TLS), 강력한 인가 메커니즘 통합, 포괄적인 감사 로깅을 핵심 요소로 하는 MCPS의 필요성을 제안했습니다. MCPS는 단순히 보안 기능을 추가하는 것을 넘어, 표준화된 보안을 통해 신뢰할 수 있고 상호 운용 가능한 AI 생태계를 구축하는 데 필수적입니다.
+
+물론 MCPS의 개발, 표준화, 도입 과정에는 기술적 복잡성, 성능 오버헤드, 생태계 합의 도출, 운영상의 어려움 등 해결해야 할 과제들이 산적해 있습니다. 특히 mTLS를 위한 인증서 관리는 중요한 운영 부담이 될 수 있습니다.
+
+하지만 이러한 어려움에도 불구하고, 강력하고 표준화된 보안은 MCP가 엔터프라이즈 환경에서 잠재력을 최대한 발휘하고 책임감 있게 사용되기 위한 필수 전제 조건입니다. 보안은 더 이상 선택이 아닌 필수입니다.
+따라서 AI 및 보안 커뮤니티(개발자, 벤더, 표준화 기구, 기업)가 MCPS 정의, 표준화 및 구현을 위한 논의와 협력 노력에 적극적으로 참여할 것을 촉구합니다. 오픈소스 프로젝트에 기여하거나 잠재적인 워킹 그룹에 참여하는 것이 좋은 시작점이 될 수 있습니다.
+
+AI 인프라의 기초가 되는 MCP와 같은 프로토콜에 보안을 처음부터 내장하는 것은 매우 중요합니다. 이를 통해 차세대 AI 통합이 강력할 뿐만 아니라 안전하게 이루어질 수 있도록 보장해야 합니다. MCPS는 이러한 안전한 미래를 위한 중요한 발걸음이 될 것입니다.
+
+<br />
+<br />
+
+<ButtonLink href="https://app.querypie.com/" variant="black" size="lg">🚀 AI Hub로 안전한 MCP와 AI Agent 운영, 지금 직접 체험해보세요. </ButtonLink>
+
+# 참고 자료
+[1] [Anthropic, “Introducing the Model Context Protocol,” News, Apr. 2025.](https://www.anthropic.com/news/model-context-protocol)
+
+[2] [Philschmid, “Model Context Protocol (MCP) an overview,” Blog, Apr. 2025.](https://www.philschmid.de/mcp-introduction) 
+
+[3] [OpenCV, “A beginners Guide on Model Context Protocol (MCP),” Blog, Apr. 2025.](https://opencv.org/blog/model-context-protocol/)
+
+[4] [Anthropic, “Model Context Protocol (MCP),” Documents, Apr. 2025.](https://docs.anthropic.com/en/docs/agents-and-tools/mcp) 
+
+[5] [Model Context Protocol, “Model Context Protocol: Introduction,” User Guide, Apr. 2025.](https://modelcontextprotocol.io/introduction) 
+
+[6] [Composio, “What is Model Context Protocol (MCP): Explained,” Blog, Mar. 2025.](https://composio.dev/blog/what-is-model-context-protocol-mcp-explained/) 
+
+[7] [Zapier, “What is MCP (Model Context Protocol)?,” Blog, Apr. 2025.](https://zapier.com/blog/mcp/) 
+
+[8] [Builder.io, “What is the Model Context Protocol (MCP)?,” Blog, Apr. 2025.](https://www.builder.io/blog/model-context-protocol) 
+
+[9] [Descope, “What Is the Model Context Protocol (MCP) and How It Works,” Blog, Apr. 2025.](https://www.descope.com/learn/post/mcp)
+
+[10] [OpenAI, “Model context protocol (MCP),” OpenAI Agent SDK, Apr. 2025.](https://openai.github.io/openai-agents-python/mcp/)
+
+[11] [.NET, “Build a Model Context Protocol (MCP) server in C#,” Blog, Apr. 2025.](https://devblogs.microsoft.com/dotnet/build-a-model-context-protocol-mcp-server-in-csharp/)
+
+[12] [Cursor, “Model Context Protocol,” Documents, Apr. 2025.](https://docs.cursor.com/context/model-context-protocol)
+
+[13] [Model Context Protocol, “Specification,” Specification, Mar. 2025.](https://modelcontextprotocol.io/specification/2025-03-26/index)
+
+[14] [Ethereum, “supports SSL (https) JSON-RPC connections,” Ethereum Stack Exchange, Jan. 2017.](https://ethereum.stackexchange.com/questions/10639/supports-ssl-https-json-rpc-connections)
+
+[15] [AWS, “HTTP vs HTTPS - Difference Between Transfer Protocols,” AWS Compute Blog, Apr. 2025.](https://aws.amazon.com/compare/the-difference-between-https-and-http/)
+
+[16] [Cloudflare, “Why is HTTP not secure? | HTTP vs. HTTPS,” Cloudflare Learning, Apr. 2025.](https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/)
+
+[17] [Sectigo, “HTTP vs HTTPS: What Are The Differences?,” Blog, Jan. 2022.](https://www.sectigo.com/resource-library/http-vs-https)
+
+[18] [Keyfactor, “HTTP vs HTTPS: What's the Difference?,” Blog, Sep. 2022.](https://www.keyfactor.com/blog/http-vs-https-whats-the-difference/)
+
+[19] [Keysight, “Mutual TLS: A Secure Way to Authenticate and Encrypt Network Communication,” Blog, Apr. 2023.](https://www.keysight.com/blogs/en/tech/nwvs/2023/04/25/mutual-tls-authentication)
+
+[20] [AWS, “Introducing mutual TLS authentication for Amazon API Gateway,” AWS Compute Blog, Sep. 2020.](https://aws.amazon.com/blogs/compute/introducing-mutual-tls-authentication-for-amazon-api-gateway/)
+
+[21] [IDEAS, “Security of IoT Application Layer Protocols: Challenges and Findings,” Papers, Mar. 2020.](https://ideas.repec.org/a/gam/jftint/v12y2020i3p55-d333464.html)
+
+[22] [ResearchGate, “Security of IoT Application Layer Protocols: Challenges and Findings,” Papers, Mar. 2020.](https://www.researchgate.net/publication/340007148_Security_of_IoT_Application_Layer_Protocols_Challenges_and_Findings)
+
+[23] [ISACA, “2019 Volume 1 Security Issues in IoT Challenges and Countermeasures,” ISACA Journal, Jan. 2019.](https://www.isaca.org/resources/isaca-journal/issues/2019/volume-1/security-issues-in-iot-challenges-and-countermeasures)
+
+[24] [MDPI, “Security of IoT Application Layer Protocols: Challenges and Findings,” Papers, Jan. 2020.](https://www.mdpi.com/1999-5903/12/3/55)
+
+[25] [Wikipedia, “HTTP,” Article, Aug. 2010.](https://en.wikipedia.org/wiki/HTTP)
+
+[26] [CERN, “A short history of the Web,” About, Apr. 2025.](https://home.cern/science/computing/birth-web/short-history-web)
+
+[27] [Wikipedia, “World Wide Web,” About, Apr. 2025.](https://en.wikipedia.org/wiki/World_Wide_Web_Foundation)
+
+[28] [Ijstr.org, “Development History Of The World Wide Web,” Ijstr.org, Sep. 2019.](https://www.ijstr.org/final-print/sep2019/Development-History-Of-The-World-Wide-Web.pdf)
+
+[29] [MDN Web Docs, “Evolution of HTTP,” Documents, Apr. 2025.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Evolution_of_HTTP)
+
+[30] [Hostinger, “HTTP vs HTTPS: Key Differences and Which One to Choose for Your Site,” Tutorials, May. 2024.](https://www.hostinger.com/tutorials/http-vs-https)
+
+[31] [DEV Community, “The history of HTTPS,” DEV Community, May. 2023.](https://dev.to/smitterhane/how-tls-was-born-to-secure-modern-age-internet-45jb)
+
+[32] [UpGuard, “What's the Difference Between HTTP vs HTTPS?,” Blog, Nov. 2024.](https://www.upguard.com/blog/http-vs-https)
+
+[33] [GlobalSign, “History of the Internet: The Development of PKI,” Blog, Dec. 2021.](https://www.globalsign.com/en/blog/sg/history-internet-development-pki)
+
+[34] [Wikipedia, “HTTPS,” Article, Apr. 2025.](https://en.wikipedia.org/wiki/HTTPS)
+
+[35] [The HTTPS-Only Standard, “Technical Guidelines,” The HTTPS-Only Standard, Apr. 2025.](https://https.cio.gov/technical-guidelines/)
+
+[36] [F5, “What is SSL/TLS Encryption?,” F5 Glossary, Apr. 2025.](https://www.f5.com/glossary/ssl-tls-encryption)
+
+[37] [AWS, “What is SSL/TLS Certificate?,” AWS Compute Blog, Apr. 2025.](https://aws.amazon.com/what-is/ssl-certificate/)
+
+[38] [DigiCert, “How TLS/SSL Certificates Work,” DigiCert, Apr. 2025.](https://www.digicert.com/how-tls-ssl-certificates-work)
+
+[39] [SSL.com, “SSL/TLS Handshake: Ensuring Secure Online Interactions,” Blog, Sep. 2023.](https://www.ssl.com/article/ssl-tls-handshake-ensuring-secure-online-interactions/)
+
+[40] [Cloudflare, “What is SSL (Secure Sockets Layer)?,” Cloudflare Learning, Apr. 2025.](https://www.cloudflare.com/learning/ssl/what-is-ssl/)
+
+[41] [DreamHost, “Your Complete Guide to SSL/TLS and HTTPS,” Blog, Feb. 2025.](https://www.dreamhost.com/blog/ultimate-guide-ssl-tls/)
+
+[42] [Okta, “HTTP vs. HTTPS: Definition, Comparison & Security Implications,” Okta Identity 101, Aug. 2024.](https://www.okta.com/identity-101/http-vs-https/)
+
+[43] [Skip2 Networks, “A Brief History of HTTP,” Blog, Feb. 2024.](https://www.skip2.net/blog/legacy/a-brief-history-of-the-http-protocol)
+
+[44] [AWS, “How to turn on mutual TLS authentication for your REST APIs in API Gateway,” AWS Documentation, Apr. 2025.](https://docs.aws.amazon.com/apigateway/latest/developerguide/rest-api-mutual-tls.html)
+
+[45] [WaveMaker, “Mutual TLS Support in REST APIs,” Blog, Aug. 2022.](https://www.wavemaker.com/learn/blog/2022/08/23/Support-for-mutual-tls-in-rest-apis/)
+
+[46] [SocketXP, “Mutual TLS Authentication - Everything you need to know,” SocketXP, Nov. 2024.](https://www.socketxp.com/iot/mutual-tls-authentication/)
+
+[47] [Cloudflare, “Mutual TLS (mTLS) - API Shield,” Cloudflare Docs, Apr. 2025.](https://developers.cloudflare.com/api-shield/security/mtls/)
+
+[48] [SecureW2, “Understanding Mutual TLS (MTLS) Authentication: How It Works,” Blog, Apr. 2025.](https://www.securew2.com/blog/mutual-tls-mtls-authentication)
+
+[49] [BuiltIn, “Mutual TLS: A Tutorial,” Article, Apr. 2025.](https://builtin.com/software-engineering-perspectives/mutual-tls-tutorial)
+
+[50] [Cloudflare, “What is mTLS? | Mutual TLS,” Cloudflare Learning, Apr. 2025.](https://www.cloudflare.com/learning/access-management/what-is-mutual-tls/)
+
+[51] [SSL.com, “Authenticating Users and IoT Devices with Mutual TLS,” Blog, Nov. 2024.](https://www.ssl.com/article/authenticating-users-and-iot-devices-with-mutual-tls/)
+
+[52] [Cloudflare, “What happens in a TLS handshake? | SSL handshake,” Cloudflare Learning, Apr. 2025.](https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/)
+
+[53] [Quorum, “Securing JSON RPC,” Quorum Documentation, Apr. 2025.](https://goquorum.readthedocs.io/Quorum%20Features/rpc-security/)
+
+[54] [GoQuorum, “JSON-RPC API security,” ConsenSys GoQuorum Docs, Nov. 2023.](https://docs.goquorum.consensys.io/configure-and-manage/manage/json-rpc-api-security)
+
+[55] [gRPC, “Authentication,” gRPC Docs, Jan. 2024.](https://grpc.io/docs/guides/auth/)
+
+[56] [CrowdStrike, “Application Security: Challenges, Tools & Best Practices,” CYBERSECURITY 101, Dec. 2024.](https://www.crowdstrike.com/en-us/cybersecurity-101/application-security/)
+
+[57] [ijcset, “Application Layer Security Issues and Its Solutions,” ijcset, Jun. 2012.](http://ijcset.net/docs/Volumes/volume2issue6/ijcset2012020605.pdf)
+
+[58] [Hyperledger Besu, “Configure client and server TLS,” Hyperledger Besu Documentation, Mar. 2025.](https://besu.hyperledger.org/private-networks/how-to/configure/tls/client-and-server)
+
+[59] [GoldRush, “RPC Communication Protocols in Blockchain: JSON-RPC vs. gRPC,” GoldRush Guides, Apr. 2025.](https://goldrush.dev/guides/understanding-rpc-communication-protocols-in-blockchain-json-rpc-vs-grpc/)
+
+[60] [Stack Overflow, “Is JSON RPC over TLS secure enough?,” Stack Overflow, Jan. 2013.](https://stackoverflow.com/questions/14069580/is-json-rpc-over-tls-secure-enough)
+
+[61] [Information Security Stack Exchange, “Securing JSON data - tls,” Information Security Stack Exchange, Apr. 2015.](https://security.stackexchange.com/questions/58965/securing-json-data)
+
+[62] [Performance Evaluation Group (UniPV), “Security of IoT application layer protocols: challenges and findings,” Performance Evaluation Group (UniPV), Feb. 2020.](https://peg.unipv.it/publications/PDF/future-internet_preprint.pdf)
+
+[63] [Pathlock, “7 Application Security Vulnerabilities and Defensive Strategies,” Blog, Feb. 2025.](https://pathlock.com/learn/7-application-security-vulnerabilities-and-defensive-strategies/)

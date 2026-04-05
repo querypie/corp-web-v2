@@ -1,0 +1,96 @@
+{
+  "category": "use-cases",
+  "contentKind": "video",
+  "entryId": "data-analytics-agent--7",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "7",
+    "sourceCategory": "use-cases",
+    "sourceGroupPath": "demo/use-cases/7/data-analytics-agent",
+    "sourceUrl": "/features/demo/use-cases/7/data-analytics-agent"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-1-en.webp",
+          "webPath": "/demo/aip-use-case-thumb-1-en.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/data-analytics-agent--7/en.mdx",
+      "contentKind": "video",
+      "description": "An AI agent that turns natural language questions into instant data insights and visualizations, empowering teams to analyze data without writing SQL.",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-1-en.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Data Analytics Agent\"\ndescription: \"An AI agent that turns natural language questions into instant data insights and visualizations, empowering teams to analyze data without writing SQL.\"\ndate: \"2025-05-18\"\nogImage: \"public/demo/aip-use-case-thumb-1-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/8/data-analytics-agent-2\"\n  - \"/features/demo/use-cases/9/server-access-agent\"\n  - \"/features/demo/use-cases/10/kubernetes-manager-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/8/data-analytics-agent-2",
+        "/features/demo/use-cases/9/server-access-agent",
+        "/features/demo/use-cases/10/kubernetes-manager-agent"
+      ],
+      "sourcePath": "demo/use-cases/7/data-analytics-agent/en/content.mdx",
+      "title": "AIP Use Case: Data Analytics Agent",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP Use Case: Data Analytics Agent",
+        "description": "An AI agent that turns natural language questions into instant data insights and visualizations, empowering teams to analyze data without writing SQL.",
+        "date": "2025-05-18",
+        "ogImage": "public/demo/aip-use-case-thumb-1-en.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/8/data-analytics-agent-2",
+          "/features/demo/use-cases/9/server-access-agent",
+          "/features/demo/use-cases/10/kubernetes-manager-agent"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-1-ja.webp",
+          "webPath": "/demo/aip-use-case-thumb-1-ja.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/data-analytics-agent--7/ja.mdx",
+      "contentKind": "video",
+      "description": "自然言語による質問を瞬時にデータインサイトと可視化に変換するAIエージェント。SQLを書くことなく、チームがデータ分析を行えるようサポートします。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-1-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例：データ分析エージェント\"\ndescription: \"自然言語による質問を瞬時にデータインサイトと可視化に変換するAIエージェント。SQLを書くことなく、チームがデータ分析を行えるようサポートします。\"\ndate: \"2025-05-18\"\nogImage: \"public/demo/aip-use-case-thumb-1-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/8/data-analytics-agent-2\"\n  - \"/features/demo/use-cases/9/server-access-agent\"\n  - \"/features/demo/use-cases/10/kubernetes-manager-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/8/data-analytics-agent-2",
+        "/features/demo/use-cases/9/server-access-agent",
+        "/features/demo/use-cases/10/kubernetes-manager-agent"
+      ],
+      "sourcePath": "demo/use-cases/7/data-analytics-agent/ja/content.mdx",
+      "title": "AIP活用事例：データ分析エージェント",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP活用事例：データ分析エージェント",
+        "description": "自然言語による質問を瞬時にデータインサイトと可視化に変換するAIエージェント。SQLを書くことなく、チームがデータ分析を行えるようサポートします。",
+        "date": "2025-05-18",
+        "ogImage": "public/demo/aip-use-case-thumb-1-ja.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/8/data-analytics-agent-2",
+          "/features/demo/use-cases/9/server-access-agent",
+          "/features/demo/use-cases/10/kubernetes-manager-agent"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "data-analytics-agent"
+}

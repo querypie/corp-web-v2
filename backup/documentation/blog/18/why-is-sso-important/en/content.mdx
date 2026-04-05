@@ -1,0 +1,169 @@
+---
+layout: "Article"
+category: "blog"
+title: "Why is SSO important?"
+description: "Understand why Single Sign-On (SSO) is crucial for enhancing user experience, streamlining access, and improving security across multiple platforms. See the benefits today!"
+date: "2025-02-04"
+author: "jk"
+ogImage: "public/blog/b-thumb-18.png"
+keywords: ["Single Sign-On", "SSO benefits", "SSO security", "SSO authentication"]
+relatedPosts:
+  - "/features/documentation/blog/17/privileged-access-management-pam"
+  - "/features/documentation/blog/16/healthcare-data-security"
+  - "/features/documentation/blog/15/zero-trust-security"
+---
+
+# Why is SSO so important?
+
+Single sign-on (SSO) is an essential infrastructure feature for many companies and organizations. SSO allows members of an organization to access information systems using a single password or credential. The ability to use a single credential is incredibly important for two key reasons: **improved productivity** and **efficiency**, and **enhanced security**.
+
+If your company hasn’t adopted SSO yet, I sincerely recommend considering it and exploring ways to implement it. Truly, it’s worth it!
+
+# Benefits of SSO
+
+The benefits of SSO are referenced in numerous articles and reports. To keep it simple, I searched Google for “Why is SSO important?” and summarized the key benefits mentioned in a few articles. Let me share them with you!
+
+## Benefits of SSO by Ping Identity
+
+Here are the benefits highlighted in an article by Ping Identity [(Top Benefits of SSO and Why It’s Important for Your Business)](https://www.pingidentity.com/en/resources/blog/post/top-benefits-sso.html).
+
+>1. Increased Productivity
+>2. Improved Security
+>3. Strengthened with MFA
+>4. Enhanced with Risk-Based Authentication (RBA)
+>5. Decreased IT Costs
+>6. Improved Job Satisfaction for Employees
+>7. Enhanced Customer Experience
+>8. Increased Adoption Rates
+>9. Tighter B2B Collaboration
+>10. Regulatory Compliance
+
+The article outlines 10 detailed benefits, which can be broadly summarized into two main aspects: **Productivity** and **Efficiency** on one hand, and **Security** on the other.
+
+## Benefits of SSO by Onelogin
+
+Here are the benefits highlighted in an article by Onelogin [(Why Is Single Sign-On (SSO) Important? | OneLogin )](https://www.onelogin.com/learn/why-sso-important).
+
+>1. Greater security and compliance.
+>2. Improved usability and employee satisfaction.
+>3. Lower IT costs.
+
+The article presents three simple points, which can also be summarized into two key aspects: **Productivity** and **Efficiency** and **Security**.
+
+## Benefits of SSO by Okta
+
+Here are the benefits highlighted in an article by Okta [(The Advantages and Benefits of Single Sign-On (SSO))](https://www.okta.com/uk/blog/2022/04/benefits-of-single-sign-on/).
+
+>1. Makes your systems more secure, and decreases attack surface
+>2. Saves your IT team time and money from automation, integration, and password resets
+>3. Improves end-user experience, for both employees and customers
+>4. Increases productivity, even when working remotely
+>5. Simplifies integration with B2B partners
+
+The article outlines five key points, which can also be summarized into two main aspects: **Productivity** and **Efficiency** and **Security**.
+
+Summarizing the presented points, they can be organized into the following table:
+
+<Table center width="100%">
+<Table.Thead>
+    <Table.Tr>
+        <Table.Th cellBackgroundColor="gray">**Productivity and Efficiency**</Table.Th>
+        <Table.Th cellBackgroundColor="gray">**Security**</Table.Th>
+    </Table.Tr>
+</Table.Thead>
+<Table.Tbody>
+    <Table.Tr>
+        <Table.Td width="50%">
+            **Improved usability and employee satisfaction**
+            - Improved Job Satisfaction for Employees
+            - Improves end-user experience, for both employees and customers
+            - Increases productivity, even when working remotely
+
+            **Decreased IT Costs**
+            - Saves your IT team time and money from automation, integration, and password resets
+            - Simplifies integration with B2B partners
+        </Table.Td>
+        <Table.Td width="50%">
+            **Greater security and compliance**
+            - Makes your systems more secure, and decreases attack surface
+            - Regulatory Compliance
+            - Strengthened with MFA
+            - Enhanced with Risk-Based Authentication (RBA)
+        </Table.Td>
+    </Table.Tr>
+</Table.Tbody>
+</Table>
+
+
+# How can SSO be implemented?
+
+There are several types of SSO solutions available. If your organization lacks sufficient experience and expertise in implementing SSO, it is recommended to adopt a SaaS-based SSO solution. Alternatively, if SaaS is not an option, you can deploy an on-premises SSO solution, which, while adding operational and management burdens to your internal IT systems, can help build a secure system that does not rely on external SaaS services.
+
+I believe there are two types of SaaS-based SSO.
+1. Integrated with Essential Email Services
+2. Specialized SSO Independent of Email Services
+
+## 1. Integrated with Essential Email Services
+
+<Box marginTopSize="sm" center>
+    <ArticleFileImage
+      filepath="public/blog/blog18-image-1.png"
+      alt="Integrated with Essential Email Services"
+    />
+</Box>
+
+This type of SSO integrates primarily with email services and seamlessly connects with other business tools like calendars, document management, and video conferencing. These services are essential for building a company’s basic work environment. Let’s take a look at a few representative services.
+
+**Google Workspace (G Suite)**
+Google Workspace supports SAML-based SSO, allowing users to access not only Gmail but also various Google services like Google Drive and Google Meet with a single Google account.
+Administrators can easily configure SSO settings in the Google Workspace Admin Console and integrate with external applications.
+
+**Microsoft Entra ID (Azure AD) and Office 365**
+Microsoft Office 365 offers SSO capabilities integrated with Outlook for email, as well as Word, Excel, Teams, and other Microsoft tools.
+Microsoft Entra ID supports authentication protocols like SAML, OAuth, and OpenID Connect, enabling seamless integration based on Office 365 accounts.
+
+**Features of SSO Integrated with Essential Email Services**
+It comes with email services, making initial setup and management simple.
+Since tools like Google Workspace or Microsoft Office are already essential for work, SSO can be naturally integrated and utilized.
+It is commonly used by small to medium-sized businesses or organizations that prefer an environment integrated around email services.
+
+## 2. Specialized SSO Independent of Email Services
+This type of SSO operates independently of email services and provides advanced SSO functionality for integration with a variety of applications. It is ideal for large organizations that require integration with multiple SaaS applications or have complex authentication requirements. Additionally, it allows for the setup and operation of automated workflows. Let’s take a look at a few representative services.
+
+**Okta**
+Okta offers an independent SSO solution, supporting integration with over 7,000 SaaS applications.
+It provides advanced security features such as Multi-Factor Authentication (MFA) and user provisioning, making it widely used in enterprise environments.
+
+**Ping Identity**
+Ping Identity is a professional SSO solution that supports various authentication standards, including SAML and OpenID Connect.
+It is specifically designed to meet the authentication and access management needs of complex enterprise environments.
+
+**OneLogin**
+OneLogin offers easy setup and an intuitive management console, supporting integration with over 6,000 applications.
+It enhances user experience by providing a Universal Directory along with robust security options.
+
+**Features of Specialized SSO**
+It is designed independently of email services, enabling customized integration with a wide range of SaaS applications.
+It is preferred by large organizations requiring complex security policies and user authentication.
+It enhances security with advanced features such as MFA and risk-based authentication.
+
+# What types of SSO does the QueryPie product support?
+
+QueryPie supports two main types of SSO:
+
+1. SAML 2.0-based SSO
+2. LDAP
+
+The services I mentioned earlier—Google Workspace, Microsoft Entra ID, Okta, Ping Identity, and OneLogin—all support SAML 2.0-based SSO. Another set of technical standards for implementing SSO includes OAuth2 and OpenID Connect. However, QueryPie does not currently support OAuth2 or OpenID Connect. For enterprise-level SSO, SAML 2.0 is often more appropriate than OAuth2 or OpenID Connect. 
+
+In traditional enterprise environments, SaaS-based SSO is often not used. Instead, LDAP is commonly employed to manage employee accounts and credentials within the company. QueryPie integrates with directories that support standard LDAP protocols, including Microsoft Active Directory, to manage user accounts and provide authentication.
+
+If there are additional SSO methods requested by customers, please contact our Sales team. For enterprise clients, we can develop and provide custom SSO features tailored to their needs.
+
+# What type of SSO does the QueryPie team use?
+
+At QueryPie, the provider of Data Governance Solutions and Privileged Access Management Solutions, we use Okta as our SSO solution. Okta not only provides SAML 2.0-based SSO but also offers flexible and powerful workflow creation and management features, making it highly useful for automating tasks for HR, IT administration, security, and DevOps teams.
+
+If you were to learn about the detailed use cases of how QueryPie leverages Okta, you’d likely be pleasantly surprised!
+
+Oh, and we also make good use of Google Workspace for email and shared drives. Okta integrates seamlessly with Google Workspace, allowing users to experience these tools as if they were part of a single unified service.

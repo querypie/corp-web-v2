@@ -1,14 +1,15 @@
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { isLocale } from "../../../../constants/i18n";
 import DocsDetailClientPage from "../../../../components/pages/docs/DocsDetailClientPage";
 import type { DocsDetailPageProps } from "../../../../components/pages/docs/DocsDetailPage";
 import {
+  formatPublicDate,
   getManagedCategoryLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
   getPublicDetailHref,
-  getSeedManagedContents,
 } from "@/features/content/data";
+import { readContentState } from "@/features/content/contentState.server";
 
 type DocsDetailRouteProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -16,16 +17,21 @@ type DocsDetailRouteProps = {
 
 export default async function DocsDetailRoute({ params }: DocsDetailRouteProps) {
   const { locale, slug } = await params;
+  const resolvedSlug = decodeURIComponent(slug);
 
   if (!isLocale(locale)) notFound();
-  const docsItems = getSeedManagedContents("documentation").filter((item) => item.status === "published");
-  const currentIndex = docsItems.findIndex((item) => item.id === slug);
+  const docsItems = (await readContentState("documentation")).filter((item) => item.status === "published");
+  const currentIndex = docsItems.findIndex((item) => item.id === resolvedSlug);
   const currentEntry = currentIndex >= 0 ? docsItems[currentIndex] : null;
+
+  if (currentEntry?.contentType === "outlink") {
+    redirect(currentEntry.externalUrl);
+  }
   const categoryItems = currentEntry
     ? docsItems.filter((item) => item.categorySlug === currentEntry.categorySlug)
     : [];
   const categoryIndex = currentEntry
-    ? categoryItems.findIndex((item) => item.id === slug)
+    ? categoryItems.findIndex((item) => item.id === resolvedSlug)
     : -1;
 
   const previousItem = categoryIndex > 0 ? categoryItems[categoryIndex - 1] : null;
@@ -57,18 +63,21 @@ export default async function DocsDetailRoute({ params }: DocsDetailRouteProps) 
     <DocsDetailClientPage
       fallbackProps={{
         docsHref: `/${locale}/docs`,
-        slug,
+        slug: resolvedSlug,
+        bodyHtml: currentEntry ? getLocalizedContent(currentEntry.bodyHtml, locale) : "",
         bodyMarkdown: currentEntry ? getLocalizedContent(currentEntry.bodyMarkdown, locale) : "",
         category: currentEntry
           ? getManagedCategoryLabel("documentation", currentEntry.categorySlug, locale)
           : "",
+        contentFormat: currentEntry?.contentFormat ?? "markdown",
         contentListDescription: "",
         contentListItems: relatedItems,
         contentListLinks: [],
         contentListTitle: "Contents List",
-        date: currentEntry?.dateIso ?? "",
+        date: currentEntry ? formatPublicDate(locale, currentEntry.dateIso) : "",
+        hideHeroImage: currentEntry?.hideHeroImage ?? false,
         heroImageAlt: currentEntry ? getLocalizedContent(currentEntry.title, locale) : "",
-        heroImageSrc: currentEntry?.imageSrc ?? "/images/content/article-01.png",
+        heroImageSrc: currentEntry?.imageSrc ?? "/uploads/article-01.png",
         title: currentEntry ? getLocalizedContent(currentEntry.title, locale) : "",
         writer: currentEntry
           ? currentEntry.authorRole
@@ -76,8 +85,9 @@ export default async function DocsDetailRoute({ params }: DocsDetailRouteProps) 
             : currentEntry.authorName
           : "",
       } satisfies DocsDetailPageProps}
+      initialItems={docsItems}
       locale={locale}
-      slug={slug}
+      slug={resolvedSlug}
     />
   );
 }

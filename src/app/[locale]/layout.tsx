@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { isLocale, locales, type Locale } from "../../constants/i18n";
 import { getShellMenuCopy } from "../../constants/navigation";
@@ -32,8 +32,10 @@ export default async function LocaleLayout({
     <div className="flex min-h-screen flex-col bg-bg" data-locale={locale as Locale}>
       <RevealObserver />
       <SeoRuntime locale={locale as Locale} />
-      <Gnb actionLabel={shellCopy.navActionLabel} items={shellCopy.navItems} locale={locale} />
-      <main className="flex-1 pt-[100px] text-fg md:pt-30">
+      <Suspense fallback={null}>
+        <Gnb actionLabel={shellCopy.navActionLabel} items={shellCopy.navItems} locale={locale} />
+      </Suspense>
+      <main className="flex-1 pt-[120px] text-fg md:pt-[160px]">
         {children}
       </main>
       <Footer className="mt-20 md:mt-footer-gap" legalLinks={shellCopy.footerLegalLinks} locale={locale} sections={shellCopy.footerSections} />

@@ -1,0 +1,136 @@
+{
+  "category": "acp-features",
+  "contentKind": "video",
+  "entryId": "grant-permissions-users--23",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "23",
+    "sourceCategory": "acp-features",
+    "sourceGroupPath": "demo/acp-features/23/grant-permissions-users",
+    "sourceUrl": "/features/demo/acp-features/23/grant-permissions-users"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-2.webp",
+          "webPath": "/tutorial/tu-thumb-dac-2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/grant-permissions-users--23/en.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Grant Permissions to Users\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/24/register-databases\"\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/24/register-databases",
+        "/features/demo/acp-features/22/use-web-editor",
+        "/features/demo/acp-features/21/apply-data-access-policies"
+      ],
+      "sourcePath": "demo/acp-features/23/grant-permissions-users/en/content.mdx",
+      "title": "How to Grant Permissions to Users",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "How to Grant Permissions to Users",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-2.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/24/register-databases",
+          "/features/demo/acp-features/22/use-web-editor",
+          "/features/demo/acp-features/21/apply-data-access-policies"
+        ]
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-2.webp",
+          "webPath": "/tutorial/tu-thumb-dac-2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/grant-permissions-users--23/ko.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"권한 생성 및 부여 방법\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/24/register-databases\"\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/24/register-databases",
+        "/features/demo/acp-features/22/use-web-editor",
+        "/features/demo/acp-features/21/apply-data-access-policies"
+      ],
+      "sourcePath": "demo/acp-features/23/grant-permissions-users/ko/content.mdx",
+      "title": "권한 생성 및 부여 방법",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "권한 생성 및 부여 방법",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-2.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/24/register-databases",
+          "/features/demo/acp-features/22/use-web-editor",
+          "/features/demo/acp-features/21/apply-data-access-policies"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/tutorial/tu-thumb-dac-2.webp",
+          "webPath": "/tutorial/tu-thumb-dac-2.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/acp-features/grant-permissions-users--23/ja.mdx",
+      "contentKind": "video",
+      "description": "",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/tutorial/tu-thumb-dac-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"ユーザーに権限を付与する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/24/register-databases\"\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"",
+      "relatedPosts": [
+        "/features/demo/acp-features/24/register-databases",
+        "/features/demo/acp-features/22/use-web-editor",
+        "/features/demo/acp-features/21/apply-data-access-policies"
+      ],
+      "sourcePath": "demo/acp-features/23/grant-permissions-users/ja/content.mdx",
+      "title": "ユーザーに権限を付与する方法",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "acp-features",
+        "title": "ユーザーに権限を付与する方法",
+        "description": "",
+        "date": "2024-11-29",
+        "ogImage": "public/tutorial/tu-thumb-dac-2.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/acp-features/24/register-databases",
+          "/features/demo/acp-features/22/use-web-editor",
+          "/features/demo/acp-features/21/apply-data-access-policies"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "grant-permissions-users"
+}

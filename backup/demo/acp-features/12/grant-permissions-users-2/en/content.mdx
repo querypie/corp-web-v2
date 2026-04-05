@@ -1,0 +1,57 @@
+---
+layout: "Article"
+category: "acp-features"
+title: "How to Grant Permissions to Users (2)"
+description: ""
+date: "2024-11-29"
+ogImage: "public/tutorial/tu-thumb-sac-3.png"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/acp-features/13/grant-permissions-users"
+  - "/features/demo/acp-features/11/use-web-terminal"
+  - "/features/demo/acp-features/10/submit-server-access-workflow"
+---
+
+<Youtube
+    src="https://www.youtube.com/embed/ouChaeaVu98?si=X5XIJb94QV6Q-bdy"
+/>
+
+# Overview
+
+Access policies for servers operate based on YAML code, similar to Infrastructure as Code (IaC). You can configure the allowed days and times for access, set the allowable IP addresses, enable auditing, specify whether agents can be used, and define the maximum number of sessions per user. Role-Based Access Control (RBAC) is used to allow or restrict user access to servers based on roles within your organization. A role combines multiple policies into a single, unified entity, and administrators can assign or revoke roles for users or user groups.
+
+# Configure Server Policies
+
+<BlueState>STEP 1</BlueState> Go to the **Policies** menu and click `Create Policy`. Enter the following details:
+- **Name:** Enter a name to identify the policy.
+- **Description:** Enter additional information about the policy.
+
+<BlueState>STEP 2</BlueState> Select the created policy and click the `Go to Editor Mode` button to modify the policy content using the following method.
+- Use the buttons on the right to insert or modify content in the code.
+  - **Add Resource:** Select server groups and accounts.
+  - **Add Actions:** Select the protocols and command templates to allow.
+- Directly modify the code in the Code Editor screen.
+  - Use the Errors tab at the bottom to debug any errors in the code you’ve edited.
+
+<BlueState>STEP 3</BlueState> Once the access policy is defined, click the `Save` button in the upper right corner to save the policy.
+
+# Creating a Role
+
+<BlueState>STEP 1</BlueState> Go to the **Roles** menu and click `Create Role`. Enter the following details:
+- **Name:** Enter a name to identify the role.
+- **Description:** Enter additional information about the role.
+
+<BlueState>STEP 2</BlueState> Select the created Role, click the `Assign Policies` button, and add one or more Policies.
+- **Users/Groups:** This tab lists the users or groups assigned to the role.
+- **Servers:** This tab lists the servers accessible through the role.
+
+# Grant Server Roles
+
+<BlueState>STEP 1</BlueState> Go to the **Access Control** menu and select the user or group to whom you want to grant the privilege.
+
+<BlueState>STEP 2</BlueState> Go to the **Roles** tab and click the `Grant Roles` button on the right.
+
+<BlueState>STEP 3</BlueState> Select the checkbox for one or more Roles to grant and specify the expiration date.
+
+<BlueState>STEP 4</BlueState> Click the `Grant` button to finalize the Role assignment.

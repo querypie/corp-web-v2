@@ -1,0 +1,37 @@
+---
+layout: "Article"
+category: "use-cases"
+title: "AIP Use Case: AWS Inspector Insight AI Agent"
+description: "An AI agent that turns AWS Inspector findings into prioritized remediation plans—summarizing risk, owners, and fixes with one conversational request."
+date: "2025-11-03"
+ogImage: "public/demo/aip-use-case-thumb-17-en.webp"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/use-cases/21/incident-mgmt-ai-agent"
+  - "/features/demo/use-cases/22/aws-log-analytics-agent"
+  - "/features/demo/use-cases/24/aws-solutions-architect-ai-agent"
+---
+
+<Youtube
+  src="https://www.youtube.com/embed/9rj7uT8lDho?si=oiGr9bS3bjjSDLn8"
+/>
+
+**AWS Inspector Insight AI Agent** helps security and DevSecOps teams move from raw findings to action. Instead of manually triaging CVEs across EC2, ECR, and Lambda, teams can ask natural language questions—“what are our highest-risk vulnerabilities in prod?”, “which images are exposed to Log4Shell?”, or “generate a fix plan for criticals older than 14 days”—and receive prioritized, owner-mapped remediation guidance.
+
+Operating on QueryPie AI’s AI Platform (AIP) with Model Context Protocol (MCP) integrations, the agent connects to Amazon Inspector, AWS Organizations, ECR, EC2/ASG, Lambda, Patch Manager, and ticketing/chat tools. It enriches findings with asset context (environment, tags, owner), exploit intelligence, and compensating controls. The agent can open tickets with pre-filled tasks, create patch windows, coordinate canary rollouts, and post progress updates to Slack/Teams—enforcing approvals and preserving a complete audit trail.
+
+**Key capabilities include:**
+
+- **Prioritized vulnerability summaries**
+  - Consolidate findings by severity, environment, service, and exposure; highlight actively exploited CVEs
+- **Ownership and blast radius mapping**
+  - Map resources to owners via tags/IaC; quantify affected services and customer impact
+- **Remediation planning**
+  - Recommend concrete fixes: image rebuilds, package upgrades, AMI patches, Lambda layer updates, or WAF rules
+- **Workflow automation**
+  - Open Jira tickets, schedule patch waves, and orchestrate rollouts with change management hooks
+- **Compliance reporting**
+  - Generate dashboards and attestations for SLAs (e.g., remediate criticals within 7/14 days) with exception tracking
+
+This use case accelerates vulnerability management by converting findings into clear plans and automated actions. Security teams gain consistent prioritization and communication, while platform teams receive targeted, actionable tasks—all governed and auditable within QueryPie AIP.

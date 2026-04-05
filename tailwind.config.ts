@@ -6,6 +6,7 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/constants/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     // 전역 spacing 토큰: 숫자 단위 + semantic spacing 포함
@@ -60,10 +61,11 @@ const config: Config = {
       },
       // 라운드 토큰
       borderRadius: {
-        thumb: "10px",
-        box: "10px",
-        button: "8px",
-        modal: "20px",
+        thumb: "var(--radius-thumb)",
+        box: "var(--radius-box)",
+        button: "var(--radius-round)",
+        modal: "var(--radius-modal)",
+        full: "var(--radius-full)",
       },
       // 공통 애니메이션 정의
       keyframes: {
@@ -78,7 +80,7 @@ const config: Config = {
       // 폰트 패밀리 토큰
       fontFamily: {
         sans: [
-          "Pretendard Variable",
+          "Mona Sans VF",
           "SF Pro Display",
           "-apple-system",
           "system-ui",

@@ -1,6 +1,7 @@
 type NewsItem = {
   href: string;
   imageSrc: string;
+  isExternal?: boolean;
   title: string;
 };
 
@@ -14,14 +15,16 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function NewsCard({ href, imageSrc, title }: NewsItem) {
+function NewsCard({ href, imageSrc, isExternal = true, title }: NewsItem) {
   return (
     /* 뉴스 카드 1개 */
-    <a className="group flex w-full cursor-pointer flex-col gap-5 md:flex-1" href={href} rel="noreferrer noopener" target="_blank">
-      <div className="h-[200px] w-full overflow-hidden rounded-box bg-bg-content">
+    <a className="group flex w-full cursor-pointer flex-col gap-5 md:flex-1" href={href} rel={isExternal ? "noreferrer noopener" : undefined} target={isExternal ? "_blank" : undefined}>
+      <div className="content-thumbnail-frame w-full overflow-hidden rounded-box bg-bg-content">
         <img
           alt={title}
           className="card-media-motion block h-full w-full object-cover"
+          decoding="async"
+          loading="lazy"
           src={imageSrc}
         />
       </div>

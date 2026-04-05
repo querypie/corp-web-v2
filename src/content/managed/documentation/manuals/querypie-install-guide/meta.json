@@ -1,0 +1,223 @@
+{
+  "category": "manuals",
+  "contentKind": "article",
+  "entryId": "querypie-install-guide",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": null,
+    "sourceCategory": "manual",
+    "sourceGroupPath": "documentation/manual/querypie-install-guide",
+    "sourceUrl": "/features/documentation/manual/querypie-install-guide"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-community-install-guide.webp",
+          "webPath": "/documentation/docu-thumb-community-install-guide.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-acp-manual.webp",
+          "webPath": "/documentation/docu-thumb-acp-manual.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-aip-manual.webp",
+          "webPath": "/documentation/docu-thumb-aip-manual.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-1.webp",
+          "webPath": "/documentation/install-guide-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-2.webp",
+          "webPath": "/documentation/install-guide-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-3.webp",
+          "webPath": "/documentation/install-guide-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-4.webp",
+          "webPath": "/documentation/install-guide-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-5.webp",
+          "webPath": "/documentation/install-guide-5.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/manuals/querypie-install-guide/en.mdx",
+      "contentKind": "article",
+      "description": "QueryPie ACP Community Edition is a free version that lets you experience all the core features of QueryPie ACP Enterprise — including Database, System, Kubernetes, and Web Access Controllers — with a maximum limit of 5 users. Get started quickly with a simple installation.",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie ACP"
+      ],
+      "layout": "Article",
+      "ogImage": "/documentation/docu-thumb-community-install-guide.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"manual\"\ntitle: \"QueryPie ACP Community Edition Installation Guide\"\ndescription: \"QueryPie ACP Community Edition is a free version that lets you experience all the core features of QueryPie ACP Enterprise — including Database, System, Kubernetes, and Web Access Controllers — with a maximum limit of 5 users. Get started quickly with a simple installation.\"\nogImage: \"public/documentation/docu-thumb-community-install-guide.webp\"\nkeywords: [\"QueryPie ACP\"]\nrelatedPosts:\n  - image:\n        filepath: \"public/documentation/docu-thumb-acp-manual.webp\"\n        alt: \"QueryPie ACP Manual\"\n    href: \"https://docs.querypie.com/en\"\n    external: true\n    label: \"QueryPie ACP Manual\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-aip-manual.webp\"\n        alt: \"QueryPie AIP Manual\"\n    href: \"https://aihub-docs.app.querypie.com\"\n    external: true\n    label: \"QueryPie AIP Manual\"",
+      "relatedPosts": [],
+      "sourcePath": "documentation/manual/querypie-install-guide/en/content.mdx",
+      "title": "QueryPie ACP Community Edition Installation Guide",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "manual",
+        "title": "QueryPie ACP Community Edition Installation Guide",
+        "description": "QueryPie ACP Community Edition is a free version that lets you experience all the core features of QueryPie ACP Enterprise — including Database, System, Kubernetes, and Web Access Controllers — with a maximum limit of 5 users. Get started quickly with a simple installation.",
+        "ogImage": "public/documentation/docu-thumb-community-install-guide.webp",
+        "keywords": [
+          "QueryPie ACP"
+        ],
+        "relatedPosts": "  - image:\n        filepath: \"public/documentation/docu-thumb-acp-manual.webp\"\n        alt: \"QueryPie ACP Manual\"\n    href: \"https://docs.querypie.com/en\"\n    external: true\n    label: \"QueryPie ACP Manual\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-aip-manual.webp\"\n        alt: \"QueryPie AIP Manual\"\n    href: \"https://aihub-docs.app.querypie.com\"\n    external: true\n    label: \"QueryPie AIP Manual\""
+      }
+    },
+    "ko": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-community-install-guide.webp",
+          "webPath": "/documentation/docu-thumb-community-install-guide.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-acp-manual.webp",
+          "webPath": "/documentation/docu-thumb-acp-manual.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-aip-manual.webp",
+          "webPath": "/documentation/docu-thumb-aip-manual.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-1.webp",
+          "webPath": "/documentation/install-guide-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-2.webp",
+          "webPath": "/documentation/install-guide-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-3.webp",
+          "webPath": "/documentation/install-guide-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-4.webp",
+          "webPath": "/documentation/install-guide-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-5.webp",
+          "webPath": "/documentation/install-guide-5.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/manuals/querypie-install-guide/ko.mdx",
+      "contentKind": "article",
+      "description": "QueryPie 커뮤니티 버전은 QueryPie Enterprise의 핵심 기능인 Database, System, Kubernetes, Web Access Controller를 모두 체험할 수 있는 무료 버전입니다. 간편한 설치로 지금 바로 시작해보세요.",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie"
+      ],
+      "layout": "Article",
+      "ogImage": "/documentation/docu-thumb-community-install-guide.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"manual\"\ntitle: \"QueryPie 커뮤니티 버전 설치 가이드\"\ndescription: \"QueryPie 커뮤니티 버전은 QueryPie Enterprise의 핵심 기능인 Database, System, Kubernetes, Web Access Controller를 모두 체험할 수 있는 무료 버전입니다. 간편한 설치로 지금 바로 시작해보세요.\"\nogImage: \"public/documentation/docu-thumb-community-install-guide.webp\"\nkeywords: [\"QueryPie\"]\nrelatedPosts:\n  - image:\n        filepath: \"public/documentation/docu-thumb-acp-manual.webp\"\n        alt: \"QueryPie ACP 매뉴얼\"\n    href: \"https://docs.querypie.com/ko\"\n    external: true\n    label: \"QueryPie ACP 매뉴얼\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-aip-manual.webp\"\n        alt: \"QueryPie AIP 매뉴얼\"\n    href: \"https://aihub-docs.app.querypie.com/ko\"\n    external: true\n    label: \"QueryPie AIP 매뉴얼\"",
+      "relatedPosts": [],
+      "sourcePath": "documentation/manual/querypie-install-guide/ko/content.mdx",
+      "title": "QueryPie 커뮤니티 버전 설치 가이드",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "manual",
+        "title": "QueryPie 커뮤니티 버전 설치 가이드",
+        "description": "QueryPie 커뮤니티 버전은 QueryPie Enterprise의 핵심 기능인 Database, System, Kubernetes, Web Access Controller를 모두 체험할 수 있는 무료 버전입니다. 간편한 설치로 지금 바로 시작해보세요.",
+        "ogImage": "public/documentation/docu-thumb-community-install-guide.webp",
+        "keywords": [
+          "QueryPie"
+        ],
+        "relatedPosts": "  - image:\n        filepath: \"public/documentation/docu-thumb-acp-manual.webp\"\n        alt: \"QueryPie ACP 매뉴얼\"\n    href: \"https://docs.querypie.com/ko\"\n    external: true\n    label: \"QueryPie ACP 매뉴얼\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-aip-manual.webp\"\n        alt: \"QueryPie AIP 매뉴얼\"\n    href: \"https://aihub-docs.app.querypie.com/ko\"\n    external: true\n    label: \"QueryPie AIP 매뉴얼\""
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-community-install-guide.webp",
+          "webPath": "/documentation/docu-thumb-community-install-guide.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-acp-manual.webp",
+          "webPath": "/documentation/docu-thumb-acp-manual.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/docu-thumb-aip-manual.webp",
+          "webPath": "/documentation/docu-thumb-aip-manual.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-1.webp",
+          "webPath": "/documentation/install-guide-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-2.webp",
+          "webPath": "/documentation/install-guide-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-3.webp",
+          "webPath": "/documentation/install-guide-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-4.webp",
+          "webPath": "/documentation/install-guide-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/install-guide-5.webp",
+          "webPath": "/documentation/install-guide-5.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/documentation/manuals/querypie-install-guide/ja.mdx",
+      "contentKind": "article",
+      "description": "QueryPie ACP Community Edition」は、Database・System・Kubernetes・Webアクセスコントローラーなど、QueryPie Enterpriseの主要機能をすべて体験できる無償バージョンです。簡単なインストールですぐに始められます。",
+      "hideOgImage": false,
+      "hideTableOfContents": false,
+      "keywords": [
+        "QueryPie"
+      ],
+      "layout": "Article",
+      "ogImage": "/documentation/docu-thumb-community-install-guide.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"manual\"\ntitle: \"QueryPie ACP コミュニティ版のインストールガイド\"\ndescription: \"QueryPie ACP Community Edition」は、Database・System・Kubernetes・Webアクセスコントローラーなど、QueryPie Enterpriseの主要機能をすべて体験できる無償バージョンです。簡単なインストールですぐに始められます。\"\nogImage: \"public/documentation/docu-thumb-community-install-guide.webp\"\nkeywords: [\"QueryPie\"]\nrelatedPosts:\n  - image:\n        filepath: \"public/documentation/docu-thumb-acp-manual.webp\"\n        alt: \"QueryPie ACP マニュアル\"\n    href: \"https://docs.querypie.com/ja\"\n    external: true\n    label: \"QueryPie ACP マニュアル\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-aip-manual.webp\"\n        alt: \"QueryPie AIP マニュアル\"\n    href: \"https://aihub-docs.app.querypie.com/ja/user-guide\"\n    external: true\n    label: \"QueryPie AIP マニュアル\"",
+      "relatedPosts": [],
+      "sourcePath": "documentation/manual/querypie-install-guide/ja/content.mdx",
+      "title": "QueryPie ACP コミュニティ版のインストールガイド",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "manual",
+        "title": "QueryPie ACP コミュニティ版のインストールガイド",
+        "description": "QueryPie ACP Community Edition」は、Database・System・Kubernetes・Webアクセスコントローラーなど、QueryPie Enterpriseの主要機能をすべて体験できる無償バージョンです。簡単なインストールですぐに始められます。",
+        "ogImage": "public/documentation/docu-thumb-community-install-guide.webp",
+        "keywords": [
+          "QueryPie"
+        ],
+        "relatedPosts": "  - image:\n        filepath: \"public/documentation/docu-thumb-acp-manual.webp\"\n        alt: \"QueryPie ACP マニュアル\"\n    href: \"https://docs.querypie.com/ja\"\n    external: true\n    label: \"QueryPie ACP マニュアル\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-aip-manual.webp\"\n        alt: \"QueryPie AIP マニュアル\"\n    href: \"https://aihub-docs.app.querypie.com/ja/user-guide\"\n    external: true\n    label: \"QueryPie AIP マニュアル\""
+      }
+    }
+  },
+  "section": "documentation",
+  "slug": "querypie-install-guide"
+}

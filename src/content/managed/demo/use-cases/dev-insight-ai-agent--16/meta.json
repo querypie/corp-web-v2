@@ -1,0 +1,96 @@
+{
+  "category": "use-cases",
+  "contentKind": "video",
+  "entryId": "dev-insight-ai-agent--16",
+  "legacy": {
+    "extraSegments": [],
+    "legacyId": "16",
+    "sourceCategory": "use-cases",
+    "sourceGroupPath": "demo/use-cases/16/dev-insight-ai-agent",
+    "sourceUrl": "/features/demo/use-cases/16/dev-insight-ai-agent"
+  },
+  "locales": {
+    "en": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-10-en.webp",
+          "webPath": "/demo/aip-use-case-thumb-10-en.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/dev-insight-ai-agent--16/en.mdx",
+      "contentKind": "video",
+      "description": "An AI agent that turns engineering exhaust—code, PRs, issues, builds, and incidents—into actionable insights and summaries through natural language.",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-10-en.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Development Insight AI Agent\"\ndescription: \"An AI agent that turns engineering exhaust—code, PRs, issues, builds, and incidents—into actionable insights and summaries through natural language.\"\ndate: \"2025-10-14\"\nogImage: \"public/demo/aip-use-case-thumb-10-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/14/credit-check-ai-agent\"\n  - \"/features/demo/use-cases/15/factory-iot-ai-agent\"\n  - \"/features/demo/use-cases/17/aircraft-maintenance-ai-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/14/credit-check-ai-agent",
+        "/features/demo/use-cases/15/factory-iot-ai-agent",
+        "/features/demo/use-cases/17/aircraft-maintenance-ai-agent"
+      ],
+      "sourcePath": "demo/use-cases/16/dev-insight-ai-agent/en/content.mdx",
+      "title": "AIP Use Case: Development Insight AI Agent",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP Use Case: Development Insight AI Agent",
+        "description": "An AI agent that turns engineering exhaust—code, PRs, issues, builds, and incidents—into actionable insights and summaries through natural language.",
+        "date": "2025-10-14",
+        "ogImage": "public/demo/aip-use-case-thumb-10-en.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/14/credit-check-ai-agent",
+          "/features/demo/use-cases/15/factory-iot-ai-agent",
+          "/features/demo/use-cases/17/aircraft-maintenance-ai-agent"
+        ]
+      }
+    },
+    "ja": {
+      "assetRefs": [
+        {
+          "exists": true,
+          "sourcePath": "public/demo/aip-use-case-thumb-10-ja.webp",
+          "webPath": "/demo/aip-use-case-thumb-10-ja.webp"
+        }
+      ],
+      "bodyPath": "src/content/managed/demo/use-cases/dev-insight-ai-agent--16/ja.mdx",
+      "contentKind": "video",
+      "description": "コード、PR、課題、ビルド、インシデントといったエンジニアリングのエグゾーストを、自然言語で行動可能なインサイトとサマリーに変換するAIエージェント。",
+      "hideOgImage": true,
+      "hideTableOfContents": true,
+      "keywords": [],
+      "layout": "Article",
+      "ogImage": "/demo/aip-use-case-thumb-10-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 開発インサイトAIエージェント\"\ndescription: \"コード、PR、課題、ビルド、インシデントといったエンジニアリングのエグゾーストを、自然言語で行動可能なインサイトとサマリーに変換するAIエージェント。\"\ndate: \"2025-10-14\"\nogImage: \"public/demo/aip-use-case-thumb-10-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/14/credit-check-ai-agent\"\n  - \"/features/demo/use-cases/15/factory-iot-ai-agent\"\n  - \"/features/demo/use-cases/17/aircraft-maintenance-ai-agent\"",
+      "relatedPosts": [
+        "/features/demo/use-cases/14/credit-check-ai-agent",
+        "/features/demo/use-cases/15/factory-iot-ai-agent",
+        "/features/demo/use-cases/17/aircraft-maintenance-ai-agent"
+      ],
+      "sourcePath": "demo/use-cases/16/dev-insight-ai-agent/ja/content.mdx",
+      "title": "AIP活用事例： 開発インサイトAIエージェント",
+      "frontmatter": {
+        "layout": "Article",
+        "category": "use-cases",
+        "title": "AIP活用事例： 開発インサイトAIエージェント",
+        "description": "コード、PR、課題、ビルド、インシデントといったエンジニアリングのエグゾーストを、自然言語で行動可能なインサイトとサマリーに変換するAIエージェント。",
+        "date": "2025-10-14",
+        "ogImage": "public/demo/aip-use-case-thumb-10-ja.webp",
+        "hideOgImage": true,
+        "hideTableOfContents": true,
+        "relatedPosts": [
+          "/features/demo/use-cases/14/credit-check-ai-agent",
+          "/features/demo/use-cases/15/factory-iot-ai-agent",
+          "/features/demo/use-cases/17/aircraft-maintenance-ai-agent"
+        ]
+      }
+    }
+  },
+  "section": "demo",
+  "slug": "dev-insight-ai-agent"
+}

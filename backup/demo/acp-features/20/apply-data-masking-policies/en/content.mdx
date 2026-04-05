@@ -1,0 +1,40 @@
+---
+layout: "Article"
+category: "acp-features"
+title: "How to Apply Data Masking Policies"
+description: ""
+date: "2024-11-29"
+ogImage: "public/tutorial/tu-thumb-dac-5.png"
+hideOgImage: true
+hideTableOfContents: true
+relatedPosts:
+  - "/features/demo/acp-features/21/apply-data-access-policies"
+  - "/features/demo/acp-features/19/submit-db-access-workflow"
+  - "/features/demo/acp-features/18/submit-sql-request-workflow"
+---
+
+<Youtube
+    src="https://www.youtube.com/embed/5sHErWERHsw?si=fdW4n-V15fc7kA-Z"
+/>
+
+# Overview
+
+In an organization, sensitive data like personal or confidential information can be protected by configuring policies that mask such data upon retrieval. Using the **Data Masking** menu, you can create and manage policies by selecting the target connection and defining rules to apply masking patterns to specific columns.
+
+# Creating a Data Masking Policy
+
+<BlueState>STEP 1</BlueState> Navigate to the **Data Masking** menu and click the `Create Policy` button. Enter the following details:
+- **Policy Name:** A unique name to identify the policy.
+- **Target Connection:** The database connection to which the policy will apply.
+
+<BlueState>STEP 2</BlueState> After saving the policy, select the created policy and click the `Add Rule List` button to define rules. Provide the following details for each rule:
+- **Database Name:** Specify the database. This is required.
+- **Table Name:** Specify the table. This is required.
+- **Column Name:** Specify the column. This is required.
+- **Masking Pattern:** Add one or more masking patterns to be applied to the specified column.
+  - Use the **Masking Pattern** menu to create masking patterns via regular expressions. This menu also provides over 20 predefined patterns for masking personal and sensitive data.
+- Use the **Allowed Users** field to specify users or groups exempt from the masking rule.
+  - Users or groups added to **Allowed Users** will be able to view unmasked data for the specified columns.
+<br/>
+※ If a user who is not listed in **Allowed Users** queries data covered by a **Data Masking Policy**, the data will appear masked based on the applied pattern.
+- For example, email addresses might appear as `*****@gmail.com` depending on the masking pattern applied.
