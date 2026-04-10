@@ -71,7 +71,7 @@ export default function Switch({
         className={cx(
           "relative inline-flex items-center rounded-full transition-colors",
           styles.shell,
-          checked ? "bg-success" : "bg-secondary",
+          checked ? "bg-success" : "bg-[#3A3A3A]",
         )}
       >
         <span

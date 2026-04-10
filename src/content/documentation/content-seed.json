@@ -1410,53 +1410,6 @@
     }
   },
   {
-    "authorName": "QueryPie Team",
-    "authorRole": "QA",
-    "bodyHtml": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyMarkdown": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyRichText": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "categorySlug": "blogs",
-    "contentFormat": "tiptap",
-    "contentType": "content",
-    "dateIso": "2026-03-31",
-    "downloadCoverImageSrc": "",
-    "downloadPdfFileName": "",
-    "downloadPdfSrc": "",
-    "enableDownloadButton": false,
-    "externalUrl": "",
-    "gatingLevel": "none",
-    "hideHeroImage": false,
-    "id": "authored-save-smoke-test-2",
-    "imageSrc": "/images/common/fallback-contents.jpg",
-    "relatedIds": [],
-    "section": "documentation",
-    "sortOrder": 7,
-    "status": "hidden",
-    "storageId": "cnt_000159",
-    "summary": {
-      "en": "Smoke test summary",
-      "ko": "스모크 테스트 요약",
-      "ja": "スモークテスト要約"
-    },
-    "title": {
-      "en": "Authored Save Smoke Test",
-      "ko": "Authored 저장 스모크 테스트",
-      "ja": "Authored 保存スモークテスト"
-    }
-  },
-  {
     "authorName": "",
     "authorRole": "",
     "bodyHtml": {
@@ -1478,6 +1431,53 @@
     "contentFormat": "tiptap",
     "contentType": "content",
     "dateIso": "",
+    "downloadCoverImageSrc": "/documentation/glossary/docu-thumb-glossary.webp",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": false,
+    "id": "querypie-ai-glossary-key-terms-and-definitions",
+    "imageSrc": "/documentation/glossary/docu-thumb-glossary.webp",
+    "relatedIds": [],
+    "section": "documentation",
+    "sortOrder": 2,
+    "status": "published",
+    "storageId": "cnt_000170",
+    "summary": {
+      "en": "Access QueryPie AI's glossary of key terms related to data governance and security. Learn essential terminology for understanding our platform and the industry.",
+      "ko": "Access QueryPie AI's glossary of key terms related to data governance and security. Learn essential terminology for understanding our platform and the industry.",
+      "ja": "Access QueryPie AI's glossary of key terms related to data governance and security. Learn essential terminology for understanding our platform and the industry."
+    },
+    "title": {
+      "en": "QueryPie AI Glossary - Key Terms and Definitions",
+      "ko": "QueryPie AI Glossary - Key Terms and Definitions",
+      "ja": "QueryPie AI Glossary - Key Terms and Definitions"
+    }
+  },
+  {
+    "authorName": "asdfasdf",
+    "authorRole": "asdfasdf",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "glossary",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2026-04-08",
     "downloadCoverImageSrc": "",
     "downloadPdfFileName": "",
     "downloadPdfSrc": "",
@@ -1485,22 +1485,22 @@
     "externalUrl": "",
     "gatingLevel": "none",
     "hideHeroImage": false,
-    "id": "querypie-ai-2",
-    "imageSrc": "/documentation/glossary/docu-thumb-glossary.webp",
+    "id": "fadfasd",
+    "imageSrc": "",
     "relatedIds": [],
     "section": "documentation",
-    "sortOrder": 0,
+    "sortOrder": 1,
     "status": "hidden",
-    "storageId": "cnt_000067",
+    "storageId": "cnt_000171",
     "summary": {
-      "en": "Access QueryPie AI's glossary of key terms related to data governance and security. Learn essential terminology for understanding our platform and the industry.",
-      "ko": "QueryPie의 데이터 거버넌스 및 보안과 관련된 주요 용어를 살펴보세요. 우리 플랫폼과 보안 업계를 이해하는 데 중요한 용어들을 한눈에 확인할 수 있습니다.",
-      "ja": "QueryPie AIのデータガバナンスおよびセキュリティに関連する主要な用語を確認してください。プラットフォームと業界を理解するために重要な用語を学びましょう。"
+      "en": "asdfasdf",
+      "ko": "asdfasdf",
+      "ja": "asdfasdf"
     },
     "title": {
-      "en": "QueryPie AI Glossary - Key Terms and Definitions",
-      "ko": "QueryPie Glossary - 주요 용어 및 정의",
-      "ja": "QueryPie AI 用語集 - 主要な用語と定義"
+      "en": "fadfasd",
+      "ko": "ㄹㅎ호ㅓㅓ",
+      "ja": "fadfasd"
     }
   },
   {
@@ -1568,53 +1568,6 @@
       "ko": "",
       "ja": ""
     },
-    "categorySlug": "introduction",
-    "contentFormat": "tiptap",
-    "contentType": "content",
-    "dateIso": "",
-    "downloadCoverImageSrc": "",
-    "downloadPdfFileName": "",
-    "downloadPdfSrc": "",
-    "enableDownloadButton": false,
-    "externalUrl": "",
-    "gatingLevel": "none",
-    "hideHeroImage": false,
-    "id": "acp-introduction-download-2",
-    "imageSrc": "/documentation/introduction/docu-thumb-acp-introduction.webp",
-    "relatedIds": [],
-    "section": "documentation",
-    "sortOrder": 0,
-    "status": "hidden",
-    "storageId": "cnt_000066",
-    "summary": {
-      "en": "Everything You Need to Know About QueryPie ACP",
-      "ko": "QueryPie ACP에 대한 모든 것을 알아보세요!",
-      "ja": "QueryPieについて知っておくべきこと"
-    },
-    "title": {
-      "en": "QueryPie ACP Introduction",
-      "ko": "QueryPie ACP 제품 소개서",
-      "ja": "QueryPie製品紹介"
-    }
-  },
-  {
-    "authorName": "",
-    "authorRole": "",
-    "bodyHtml": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyMarkdown": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyRichText": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
     "categorySlug": "manuals",
     "contentFormat": "tiptap",
     "contentType": "content",
@@ -1642,53 +1595,6 @@
       "en": "QueryPie ACP Community Edition Installation Guide",
       "ko": "QueryPie 커뮤니티 버전 설치 가이드",
       "ja": "QueryPie ACP コミュニティ版のインストールガイド"
-    }
-  },
-  {
-    "authorName": "asdf",
-    "authorRole": "asdf",
-    "bodyHtml": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyMarkdown": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyRichText": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "categorySlug": "white-papers",
-    "contentFormat": "tiptap",
-    "contentType": "content",
-    "dateIso": "2026-04-01",
-    "downloadCoverImageSrc": "",
-    "downloadPdfFileName": "",
-    "downloadPdfSrc": "",
-    "enableDownloadButton": false,
-    "externalUrl": "",
-    "gatingLevel": "none",
-    "hideHeroImage": false,
-    "id": "asdfasdf",
-    "imageSrc": "",
-    "relatedIds": [],
-    "section": "documentation",
-    "sortOrder": 10,
-    "status": "hidden",
-    "storageId": "cnt_000001",
-    "summary": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "title": {
-      "en": "asdfasdf",
-      "ko": "",
-      "ja": ""
     }
   },
   {
@@ -2016,53 +1922,6 @@
     },
     "title": {
       "en": "Why Japanese Enterprises Are Accelerating Their AI Transformation Now",
-      "ko": "왜 지금 일본 기업이 AI 트랜스포메이션에 나서야 하는가",
-      "ja": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか"
-    }
-  },
-  {
-    "authorName": "terazawa-ko",
-    "authorRole": "",
-    "bodyHtml": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyMarkdown": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyRichText": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "categorySlug": "white-papers",
-    "contentFormat": "tiptap",
-    "contentType": "content",
-    "dateIso": "2025-11-17",
-    "downloadCoverImageSrc": "",
-    "downloadPdfFileName": "",
-    "downloadPdfSrc": "",
-    "enableDownloadButton": false,
-    "externalUrl": "",
-    "gatingLevel": "none",
-    "hideHeroImage": false,
-    "id": "ai-tranformation-japan-2",
-    "imageSrc": "/documentation/white-papers/wp-thumb-24.webp",
-    "relatedIds": [],
-    "section": "documentation",
-    "sortOrder": 9,
-    "status": "hidden",
-    "storageId": "cnt_000133",
-    "summary": {
-      "en": "본 백서는 사업책임자용으로 기술 상세나 트렌드 소개가 아니라 세계와 일본의 AI 활용의 온도차와 일본 기업의 과제를 근거로, 지금 경영에 통합하기 위한 실무적 프로세스와 전사 최적의 변혁 지침을 보여주는 내용입니다.",
-      "ko": "본 백서는 사업책임자용으로 기술 상세나 트렌드 소개가 아니라 세계와 일본의 AI 활용의 온도차와 일본 기업의 과제를 근거로, 지금 경영에 통합하기 위한 실무적 프로세스와 전사 최적의 변혁 지침을 보여주는 내용입니다.",
-      "ja": "本ホワイトペーパーは事業責任者向けに、技術詳細やトレンド紹介ではなく、世界と日本のAI活用の温度差と日本企業の課題を踏まえ、今すぐ経営に組み込むための実務的プロセスと全社最適の変革指針を示す内容です。"
-    },
-    "title": {
-      "en": "왜 지금 일본 기업이 AI 트랜스포메이션에 나서야 하는가",
       "ko": "왜 지금 일본 기업이 AI 트랜스포메이션에 나서야 하는가",
       "ja": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか"
     }
@@ -2935,7 +2794,7 @@
     "contentFormat": "tiptap",
     "contentType": "content",
     "dateIso": "2024-11-22",
-    "downloadCoverImageSrc": "",
+    "downloadCoverImageSrc": "/documentation/white-papers/wp-thumb-10.webp",
     "downloadPdfFileName": "",
     "downloadPdfSrc": "",
     "enableDownloadButton": false,
@@ -3076,7 +2935,7 @@
     "contentFormat": "tiptap",
     "contentType": "content",
     "dateIso": "2024-11-22",
-    "downloadCoverImageSrc": "",
+    "downloadCoverImageSrc": "/documentation/white-papers/wp-thumb-4.webp",
     "downloadPdfFileName": "",
     "downloadPdfSrc": "",
     "enableDownloadButton": false,
@@ -3099,147 +2958,6 @@
       "en": "Building a Transaction-Free, Flawless CDC (Change Data Capture) System",
       "ko": "트랜잭션리스, 완벽한 CDC(Change Data Capture) 시스템 구축법",
       "ja": "トランザクションレス、完璧なCDC（Change Data Capture）システム構築法"
-    }
-  },
-  {
-    "authorName": "",
-    "authorRole": "",
-    "bodyHtml": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyMarkdown": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyRichText": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "categorySlug": "white-papers",
-    "contentFormat": "tiptap",
-    "contentType": "content",
-    "dateIso": "",
-    "downloadCoverImageSrc": "",
-    "downloadPdfFileName": "",
-    "downloadPdfSrc": "",
-    "enableDownloadButton": false,
-    "externalUrl": "",
-    "gatingLevel": "none",
-    "hideHeroImage": false,
-    "id": "ai-tranformation-japan-download",
-    "imageSrc": "/documentation/white-papers/wp24-download-en.webp",
-    "relatedIds": [],
-    "section": "documentation",
-    "sortOrder": 9,
-    "status": "hidden",
-    "storageId": "cnt_000156",
-    "summary": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "title": {
-      "en": "Why Japanese Enterprises Are Accelerating Their AI Transformation Now",
-      "ko": "",
-      "ja": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか"
-    }
-  },
-  {
-    "authorName": "",
-    "authorRole": "",
-    "bodyHtml": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyMarkdown": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyRichText": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "categorySlug": "white-papers",
-    "contentFormat": "tiptap",
-    "contentType": "content",
-    "dateIso": "",
-    "downloadCoverImageSrc": "",
-    "downloadPdfFileName": "",
-    "downloadPdfSrc": "",
-    "enableDownloadButton": false,
-    "externalUrl": "",
-    "gatingLevel": "none",
-    "hideHeroImage": false,
-    "id": "ai-tranformation-japan-download-2",
-    "imageSrc": "/documentation/white-papers/wp24-download-ko.webp",
-    "relatedIds": [],
-    "section": "documentation",
-    "sortOrder": 9,
-    "status": "hidden",
-    "storageId": "cnt_000157",
-    "summary": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "title": {
-      "en": "",
-      "ko": "",
-      "ja": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか"
-    }
-  },
-  {
-    "authorName": "",
-    "authorRole": "",
-    "bodyHtml": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyMarkdown": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyRichText": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "categorySlug": "white-papers",
-    "contentFormat": "tiptap",
-    "contentType": "content",
-    "dateIso": "",
-    "downloadCoverImageSrc": "",
-    "downloadPdfFileName": "",
-    "downloadPdfSrc": "",
-    "enableDownloadButton": false,
-    "externalUrl": "",
-    "gatingLevel": "none",
-    "hideHeroImage": false,
-    "id": "saas-end-or-evolution-download",
-    "imageSrc": "/documentation/white-papers/wp30-download-en.webp",
-    "relatedIds": [],
-    "section": "documentation",
-    "sortOrder": 9,
-    "status": "hidden",
-    "storageId": "cnt_000158",
-    "summary": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "title": {
-      "en": "The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents",
-      "ko": "The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents",
-      "ja": "SaaSの終焉か、進化か 〜AIエージェント時代にSaaS企業が取るべき戦略〜"
     }
   },
   {
@@ -3513,53 +3231,6 @@
     "sortOrder": 6,
     "status": "hidden",
     "storageId": "cnt_000169",
-    "summary": {
-      "en": "This white paper analyzes the impact of AI agents on the SaaS business, outlines the strategies SaaS companies should adopt, and shares the real story of QueryPie AI's transformation from a SaaS vendor to an AI-native company.",
-      "ko": "This white paper analyzes the impact of AI agents on the SaaS business, outlines the strategies SaaS companies should adopt, and shares the real story of QueryPie AI's transformation from a SaaS vendor to an AI-native company.",
-      "ja": "本ホワイトペーパーは、AIエージェントがSaaSビジネスに与える影響を分析し、SaaS企業が取るべき戦略と、QueryPie AI自身のSaaSベンダーからAI Native企業への変革の実録をお伝えします。"
-    },
-    "title": {
-      "en": "The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents",
-      "ko": "The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents",
-      "ja": "SaaSの終焉か、進化か 〜AIエージェント時代にSaaS企業が取るべき戦略〜"
-    }
-  },
-  {
-    "authorName": "terazawa",
-    "authorRole": "",
-    "bodyHtml": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyMarkdown": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "bodyRichText": {
-      "en": "",
-      "ko": "",
-      "ja": ""
-    },
-    "categorySlug": "white-papers",
-    "contentFormat": "tiptap",
-    "contentType": "content",
-    "dateIso": "2026-03-12",
-    "downloadCoverImageSrc": "/documentation/white-papers/qp-whitepaper-the-evolution-of-saas-en-cover.webp",
-    "downloadPdfFileName": "qp-whitepaper-the-evolution-of-saas-en.pdf",
-    "downloadPdfSrc": "/documentation/white-papers/qp-whitepaper-the-evolution-of-saas-en.pdf",
-    "enableDownloadButton": true,
-    "externalUrl": "",
-    "gatingLevel": "10",
-    "hideHeroImage": false,
-    "id": "saas-end-or-evolution-2",
-    "imageSrc": "/documentation/white-papers/wp-thumb-30-en.webp",
-    "relatedIds": [],
-    "section": "documentation",
-    "sortOrder": 8,
-    "status": "published",
-    "storageId": "cnt_000170",
     "summary": {
       "en": "This white paper analyzes the impact of AI agents on the SaaS business, outlines the strategies SaaS companies should adopt, and shares the real story of QueryPie AI's transformation from a SaaS vendor to an AI-native company.",
       "ko": "This white paper analyzes the impact of AI agents on the SaaS business, outlines the strategies SaaS companies should adopt, and shares the real story of QueryPie AI's transformation from a SaaS vendor to an AI-native company.",

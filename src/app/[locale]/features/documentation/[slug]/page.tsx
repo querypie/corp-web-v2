@@ -15,10 +15,10 @@ import {
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
 import {
-  buildWhitePaperPreviewHtml,
-  hasUnlockedWhitePaperAccess,
-  isWhitePaperGatingEnabled,
-  WHITE_PAPER_UNLOCK_COOKIE,
+  buildContentPreviewHtml,
+  getContentUnlockCookieName,
+  hasUnlockedContentAccess,
+  isContentGatingEnabled,
 } from "@/features/content/gating";
 
 type DocsDetailRouteProps = {
@@ -32,13 +32,13 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
   if (!isLocale(locale)) notFound();
 
   const cookieStore = await cookies();
-  const isWhitePaperUnlocked = hasUnlockedWhitePaperAccess(
-    cookieStore.get(WHITE_PAPER_UNLOCK_COOKIE)?.value,
-  );
-
   const docsItems = (await readContentState("documentation")).filter((item) => item.status === "published");
   const currentIndex = docsItems.findIndex((item) => item.id === resolvedSlug);
   const currentEntry = currentIndex >= 0 ? docsItems[currentIndex] : null;
+
+  const isContentUnlocked = currentEntry
+    ? hasUnlockedContentAccess(cookieStore.get(getContentUnlockCookieName(currentEntry.id))?.value)
+    : false;
 
   if (currentEntry?.contentType === "outlink") {
     redirect(currentEntry.externalUrl);
@@ -74,12 +74,12 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
   ].filter((item): item is NonNullable<typeof item> => !!item);
 
   const isGateActive = currentEntry
-    ? isWhitePaperGatingEnabled(currentEntry) && !isWhitePaperUnlocked
+    ? isContentGatingEnabled(currentEntry) && !isContentUnlocked
     : false;
   const localizedBodyHtml = currentEntry ? getLocalizedContent(currentEntry.bodyHtml, locale) : "";
   const previewBodyHtml =
     currentEntry && isGateActive
-      ? buildWhitePaperPreviewHtml(localizedBodyHtml, currentEntry.gatingLevel)
+      ? buildContentPreviewHtml(localizedBodyHtml, currentEntry.gatingLevel)
       : localizedBodyHtml;
 
   return (
@@ -100,9 +100,7 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
         contentListTitle: "Contents List",
         date: currentEntry ? formatPublicDate(locale, currentEntry.dateIso) : "",
         downloadHref:
-          currentEntry?.categorySlug === "white-papers" &&
-          currentEntry.enableDownloadButton &&
-          currentEntry.downloadPdfSrc
+          currentEntry?.enableDownloadButton && currentEntry.downloadPdfSrc
             ? getLocalePath(locale, `/features/documentation/${resolvedSlug}/download`)
             : undefined,
         hideHeroImage: currentEntry?.hideHeroImage ?? false,
@@ -115,7 +113,7 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
             : currentEntry.authorName
           : "",
       } satisfies DocsDetailPageProps}
-      initialWhitePaperUnlocked={isWhitePaperUnlocked}
+      initialContentUnlocked={isContentUnlocked}
       initialItems={docsItems}
       locale={locale}
       slug={resolvedSlug}

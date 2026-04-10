@@ -23,9 +23,9 @@ import {
   getAdminCategoryHref,
   getAdminDetailHref,
   getContentThumbnailSrc,
+  getDownloadPreviewProps,
   getManagedCategoryLabel,
   getLocalizedContent,
-  getWhitePaperDownloadPreviewProps,
   getWriterLabel,
   type ManagedContentCategorySlug,
   type ManagedContentEntry,
@@ -47,6 +47,11 @@ import {
   CONTENT_PREVIEW_H3_TOP_PADDING,
   CONTENT_PREVIEW_OL_CLASS,
   CONTENT_PREVIEW_RICH_CLASS,
+  CONTENT_PREVIEW_TABLE_CELL_CLASS,
+  CONTENT_PREVIEW_TABLE_CLASS,
+  CONTENT_PREVIEW_TABLE_HEADER_CELL_CLASS,
+  CONTENT_PREVIEW_TABLE_ROW_CLASS,
+  CONTENT_PREVIEW_TABLE_WRAPPER_CLASS,
   CONTENT_PREVIEW_UL_CLASS,
 } from "@/features/content/previewStyles";
 import { highlightCodeBlocksInHtml, renderLineNumberedCodeBlock } from "@/features/content/codeHighlight";
@@ -138,6 +143,30 @@ function DuplicateConfirmDialog({
         </div>
       </div>
     </div>
+  );
+}
+
+function MenuIcon({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center text-mute-fg">
+      {children}
+    </span>
+  );
+}
+
+function ActionIcon({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center">
+      {children}
+    </span>
   );
 }
 
@@ -309,12 +338,12 @@ function PreviewMarkdown({ markdown }: { markdown: string }) {
           const { bodyRows, headerRow } = table;
 
           return (
-            <div key={blockIndex} className="overflow-x-auto border border-border">
-              <table className="w-full min-w-[520px] border-collapse text-left">
+            <div key={blockIndex} className={CONTENT_PREVIEW_TABLE_WRAPPER_CLASS}>
+              <table className={CONTENT_PREVIEW_TABLE_CLASS}>
                 <thead>
-                  <tr className="border-b border-border bg-bg-deep">
+                  <tr className={CONTENT_PREVIEW_TABLE_ROW_CLASS}>
                     {headerRow.map((cell, cellIndex) => (
-                      <th key={cellIndex} className="px-4 py-3 type-content-body text-fg">
+                      <th key={cellIndex} className={CONTENT_PREVIEW_TABLE_HEADER_CELL_CLASS}>
                         {renderInlineMarkdown(cell)}
                       </th>
                     ))}
@@ -322,9 +351,9 @@ function PreviewMarkdown({ markdown }: { markdown: string }) {
                 </thead>
                 <tbody>
                   {bodyRows.map((row, rowIndex) => (
-                    <tr key={rowIndex} className="border-b border-border last:border-b-0">
+                    <tr key={rowIndex} className={CONTENT_PREVIEW_TABLE_ROW_CLASS}>
                       {row.map((cell, cellIndex) => (
-                        <td key={cellIndex} className="px-4 py-3 align-top type-content-body text-mute-fg">
+                        <td key={cellIndex} className={CONTENT_PREVIEW_TABLE_CELL_CLASS}>
                           {renderInlineMarkdown(cell)}
                         </td>
                       ))}
@@ -403,7 +432,7 @@ function PreviewModal({
             bodyMarkdown={localizedBodyMarkdown}
             contentFormat={item.contentFormat}
             date={formatPublicDate(activeLocale, item.dateIso)}
-            {...getWhitePaperDownloadPreviewProps(item)}
+            {...getDownloadPreviewProps(item)}
             heroImageAlt={getLocalizedContent(item.title, activeLocale)}
             heroImageSrc={getContentThumbnailSrc(item.imageSrc)}
             hideHeroImage={item.hideHeroImage}
@@ -568,29 +597,50 @@ function ContentRow({
 
               {menuOpen ? (
                 <div
-                  className="absolute right-0 top-full z-10 mt-2 flex w-max flex-col gap-[2px] overflow-hidden rounded-[8px] bg-[var(--color-bg-modal)] px-[30px] pb-[14px] pt-3 shadow-[0_12px_32px_rgba(0,0,0,0.32)]"
+                  className="absolute right-0 top-full z-10 mt-2 flex w-max flex-col gap-2 overflow-hidden rounded-[8px] bg-[var(--color-bg-modal)] px-[30px] pb-[14px] pt-3 shadow-[0_12px_32px_rgba(0,0,0,0.32)]"
                   onClick={(event) => {
                     event.stopPropagation();
                   }}
                 >
                   <a
-                    className="flex items-center justify-center whitespace-nowrap py-1 text-center type-body-md text-fg transition-colors hover:text-mute-fg"
+                    className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute-fg"
                     href={getAdminDetailHref(item.section, item.categorySlug, item.id)}
                   >
+                    <MenuIcon>
+                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 20h9" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                        <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                      </svg>
+                    </MenuIcon>
                     수정
                   </a>
                   <button
-                    className="flex items-center justify-center whitespace-nowrap py-1 text-center type-body-md text-fg transition-colors hover:text-mute-fg"
+                    className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute-fg"
                     onClick={onDuplicate}
                     type="button"
                   >
+                    <MenuIcon>
+                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                        <rect x="9" y="9" width="10" height="10" rx="2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                        <rect x="5" y="5" width="10" height="10" rx="2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                      </svg>
+                    </MenuIcon>
                     복제
                   </button>
                   <button
-                    className="flex items-center justify-center whitespace-nowrap py-1 text-center type-body-md text-fg transition-colors hover:text-mute-fg"
+                    className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute-fg"
                     onClick={onDelete}
                     type="button"
                   >
+                    <MenuIcon>
+                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                        <path d="M4 7h16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                        <path d="M10 11v6" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                        <path d="M14 11v6" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                        <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                      </svg>
+                    </MenuIcon>
                     삭제
                   </button>
                 </div>
@@ -797,10 +847,24 @@ export default function AdminManagedContentListPage({
                     style="round"
                     variant="outline"
                   >
+                    <ActionIcon>
+                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                        <path d="M6.5 8.5 9.5 5.5l3 3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                        <path d="M9.5 6v12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                        <path d="M14.5 15.5 17.5 18.5l3-3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                        <path d="M17.5 6v12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                      </svg>
+                    </ActionIcon>
                     순서변경
                   </Button>
                   <a className="w-full md:w-auto" href={writeHref}>
                     <Button arrow={false} className="w-full justify-center md:w-auto" style="round" variant="secondary">
+                      <ActionIcon>
+                        <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                          <path d="M12 5v14" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
+                          <path d="M5 12h14" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
+                        </svg>
+                      </ActionIcon>
                       글 작성
                     </Button>
                   </a>

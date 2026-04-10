@@ -2,37 +2,39 @@
 
 import { useState } from "react";
 import DocsDetailPage, { type DocsDetailPageProps } from "./DocumentationDetailPage";
-import WhitePaperGateOverlay from "./WhitePaperGateOverlay";
+import ContentGateOverlay from "./ContentGateOverlay";
 import type { Locale } from "@/constants/i18n";
 import { useManagedContents } from "@/features/content/clientStore";
 import type { ContactPageCopy } from "@/features/contact/copy";
 import useHydrated from "@/hooks/useHydrated";
 import { docsCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/features/content/config";
 import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, type ManagedContentEntry } from "@/features/content/data";
-import { isWhitePaperGatingEnabled } from "@/features/content/gating";
+import { getContentUnlockCookieName, isContentGatingEnabled } from "@/features/content/gating";
 
 type DocsDetailClientPageProps = {
   contactCopy: ContactPageCopy;
   fallbackProps: DocsDetailPageProps;
-  initialWhitePaperUnlocked: boolean;
+  initialContentUnlocked: boolean;
   initialItems: ManagedContentEntry[];
   locale: Locale;
   slug: string;
+  section?: "demo" | "documentation";
 };
 
 export default function DocsDetailClientPage({
   contactCopy,
   fallbackProps,
-  initialWhitePaperUnlocked,
+  initialContentUnlocked,
   initialItems,
   locale,
   slug,
+  section = "documentation",
 }: DocsDetailClientPageProps) {
   const resolvedSlug = decodeURIComponent(slug);
-  const managedItems = useManagedContents("documentation", initialItems) ?? [];
+  const managedItems = useManagedContents(section, initialItems) ?? [];
   const items = managedItems.filter((item) => item.status === "published");
   const isHydrated = useHydrated();
-  const [isUnlocked, setIsUnlocked] = useState(initialWhitePaperUnlocked);
+  const [isUnlocked, setIsUnlocked] = useState(initialContentUnlocked);
 
   const currentIndex = items.findIndex((item) => item.id === resolvedSlug);
   const currentItem = currentIndex >= 0 ? items[currentIndex] : null;
@@ -45,7 +47,7 @@ export default function DocsDetailClientPage({
     return <DocsDetailPage {...fallbackProps} />;
   }
 
-  const isGateActive = isWhitePaperGatingEnabled(currentItem) && !isUnlocked;
+  const isGateActive = isContentGatingEnabled(currentItem) && !isUnlocked;
 
   const categoryItems = items.filter(
     (item) => item.categorySlug === currentItem.categorySlug,
@@ -62,7 +64,7 @@ export default function DocsDetailClientPage({
     previousItem
       ? {
           category: previousLabel,
-          href: getPublicDetailHref("documentation", locale, previousItem.id),
+          href: getPublicDetailHref(section, locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
           title: getLocalizedContent(previousItem.title, locale),
         }
@@ -70,7 +72,7 @@ export default function DocsDetailClientPage({
     nextItem
       ? {
           category: nextLabel,
-          href: getPublicDetailHref("documentation", locale, nextItem.id),
+          href: getPublicDetailHref(section, locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
           title: getLocalizedContent(nextItem.title, locale),
         }
@@ -84,20 +86,21 @@ export default function DocsDetailClientPage({
       bodyMarkdown={isGateActive ? fallbackProps.bodyMarkdown : getLocalizedContent(currentItem.bodyMarkdown, locale)}
       category={getCategoryLabel(docsCategoryConfigs, currentItem.categorySlug, locale)}
       contentOverlay={isGateActive ? (
-        <WhitePaperGateOverlay
+        <ContentGateOverlay
           contactCopy={contactCopy}
           locale={locale}
           onUnlock={() => setIsUnlocked(true)}
           title={getLocalizedContent(currentItem.title, locale)}
+          unlockCookieName={getContentUnlockCookieName(currentItem.id)}
         />
       ) : undefined}
       contentFormat={currentItem.contentFormat}
       contentListItems={relatedItems}
       downloadHref={
-        currentItem.categorySlug === "white-papers" &&
+        currentItem.section !== "news" &&
         currentItem.enableDownloadButton &&
         currentItem.downloadPdfSrc
-          ? getPublicDetailHref("documentation", locale, `${currentItem.id}/download`)
+          ? getPublicDetailHref(section, locale, `${currentItem.id}/download`)
           : undefined
       }
       docsHref={getCategoryHref(docsCategoryConfigs, currentItem.categorySlug, locale)}

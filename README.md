@@ -101,9 +101,8 @@ npm run typecheck
 - 어드민 Demo / Documentation / News도 공통 리스트/상세 페이지를 재사용합니다.
 - 카테고리별 제목, 설명, 경로 메타는 가능한 한 `src/features/content/config.ts`에서 관리합니다.
 - 다국어 콘텐츠는 locale별 필드를 저장하고 퍼블릭에서 현재 locale 기준으로 읽습니다.
-- 레거시 MDX import 결과물은 `src/content/managed/` 아래 파일 기반 저장소로 관리합니다.
-- `npm run import:legacy`는 `backup/`의 상세 MDX를 `src/content/managed/`로 복사-import합니다.
-- import 후 앱이 `src/content/managed/`만 읽도록 연결되면 `backup/`은 삭제할 수 있습니다.
+- 최종 콘텐츠 source of truth는 `src/content/state/content-state.json` 입니다.
+- 파일 기반 authored 콘텐츠는 `src/content/{demo,documentation,news}` 아래에서 관리합니다.
 
 ## Comment Rules
 

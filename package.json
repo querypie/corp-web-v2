@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "import:legacy": "node scripts/import-legacy-content.mjs",
-    "migrate:legacy-slugs": "node scripts/migrate-legacy-slugs.mjs"
+    "audit:public-assets": "node scripts/find-unused-public-assets.mjs"
   },
   "dependencies": {
     "@tiptap/extension-image": "^3.21.0",

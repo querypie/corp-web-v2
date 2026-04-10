@@ -116,7 +116,7 @@ export default function Button({
       {...props}
     >
       {/* 버튼 텍스트 */}
-      <span>{children}</span>
+      <span className="inline-flex items-center justify-center gap-2 text-center">{children}</span>
       {/* arrow가 켜진 경우만 아이콘 노출 */}
       {arrow ? (
         <ArrowRightIcon

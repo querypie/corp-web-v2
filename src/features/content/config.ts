@@ -203,12 +203,6 @@ export function isDocsCategorySlug(value: string | undefined): value is DocsCate
   return !!value && docsCategoryConfigs.some((config) => config.slug === value);
 }
 
-export function normalizeDocsCategoryParam(value: string | undefined): DocsCategorySlug | null {
-  if (!value) return null;
-  if (value === "introduction-decks") return "introduction";
-  return isDocsCategorySlug(value) ? value : null;
-}
-
 export function getPublicMenuItems<TSlug extends string>(
   configs: CategoryConfig<TSlug>[],
   locale: Locale,

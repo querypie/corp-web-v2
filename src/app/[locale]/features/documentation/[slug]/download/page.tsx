@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import WhitePaperDownloadPage from "../../../../../../components/pages/documentation/WhitePaperDownloadPage";
+import ContentDownloadPage from "../../../../../../components/pages/documentation/ContentDownloadPage";
 import { isLocale, getLocalePath } from "../../../../../../constants/i18n";
 import { getContactPageCopy } from "@/features/contact/copy";
 import { getLocalizedContent } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
+import { getContentUnlockCookieName } from "@/features/content/gating";
 
 type WhitePaperDownloadRouteProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -21,7 +22,6 @@ export default async function WhitePaperDownloadRoute({ params }: WhitePaperDown
 
   if (
     !currentEntry ||
-    currentEntry.categorySlug !== "white-papers" ||
     !currentEntry.enableDownloadButton ||
     !currentEntry.downloadPdfSrc
   ) {
@@ -29,7 +29,7 @@ export default async function WhitePaperDownloadRoute({ params }: WhitePaperDown
   }
 
   return (
-    <WhitePaperDownloadPage
+    <ContentDownloadPage
       attachmentFileName={currentEntry.downloadPdfFileName || `${currentEntry.id}.pdf`}
       attachmentUrl={currentEntry.downloadPdfSrc}
       contactCopy={getContactPageCopy(locale)}
@@ -38,6 +38,7 @@ export default async function WhitePaperDownloadRoute({ params }: WhitePaperDown
       pdfPreviewUrl={currentEntry.downloadPdfSrc}
       returnUrl={getLocalePath(locale, `/features/documentation/${resolvedSlug}`)}
       title={getLocalizedContent(currentEntry.title, locale)}
+      unlockCookieName={getContentUnlockCookieName(currentEntry.id)}
     />
   );
 }

@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  getSeedManagedContents,
   type ManagedContentEntry,
   type ManagedContentSection,
   type ManagedContentStatus,
@@ -187,9 +186,7 @@ export function useManagedContents(
 ) {
   const initialItemsRef = useRef(initialItems);
   const [items, setItems] = useState<ManagedContentEntry[]>(() =>
-    readSnapshotCache(section) ??
-      initialItemsRef.current ??
-      (section ? getSeedManagedContents(section) : getSeedManagedContents()),
+    readSnapshotCache(section) ?? initialItemsRef.current ?? [],
   );
 
   useEffect(() => {
@@ -203,7 +200,7 @@ export function useManagedContents(
         })
         .catch(() => {
           if (!active) return;
-          setItems(initialItemsRef.current ?? (section ? getSeedManagedContents(section) : getSeedManagedContents()));
+          setItems(initialItemsRef.current ?? []);
         });
     };
 

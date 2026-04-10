@@ -41,7 +41,7 @@ const socialLinks = [
 export default function Footer({
   addressLines = [
     "© 2017-2024 QueryPie, Inc. All rights reserved.",
-    "Headquarter : 3003 North 1st Street, Suite 221, San Jose, CA 95134",
+    "Headquarter : 2525 West 8th Street, Suite 300, Los Angeles, CA 90057",
     "Seoul Magok Office : 7F, 26, Magokjungang 1-ro, Gangseo-gu, Seoul, Republic of Korea",
     "Seoul Gangnam Office : 3F, 464, Gangnam-daero, Gangnam-gu, Seoul, Republic of Korea",
     "Japan Office : 15F, 1 Chome-17-1 Toranomon, Minato City, Tokyo 105-6490",

@@ -1,11 +1,10 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "../../../../constants/i18n";
 import DocsListClientPage from "../../../../components/pages/documentation/DocumentationListClientPage";
 import {
   docsCategoryConfigs,
   getCategoryLabel,
-  normalizeDocsCategoryParam,
   type DocsCategorySlug,
 } from "@/features/content/config";
 import {
@@ -27,17 +26,11 @@ export default async function DocumentationPage({ params, searchParams }: DocsPa
 
   if (!isLocale(locale)) notFound();
 
-  if (category === "introduction-decks") {
-    redirect(
-      locale === "en"
-        ? "/features/documentation?category=introduction"
-        : `/${locale}/features/documentation?category=introduction`,
-    );
-  }
-
-  const normalizedCategory = normalizeDocsCategoryParam(category);
+  const normalizedCategory = category;
   const selectedCategory: DocsCategorySlug =
-    normalizedCategory && normalizedCategory !== "all" ? normalizedCategory : "all";
+    normalizedCategory && normalizedCategory !== "all" && docsCategoryConfigs.some((config) => config.slug === normalizedCategory)
+      ? normalizedCategory as DocsCategorySlug
+      : "all";
 
   const docsItems = (await readContentState("documentation")).filter((item) => item.status === "published");
 

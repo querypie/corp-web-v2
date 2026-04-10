@@ -34,7 +34,7 @@ import ContentBodyPreview from "../../common/ContentBodyPreview";
 import Button from "../../common/Button";
 import MermaidDiagram from "../../common/MermaidDiagram";
 import DocumentationContentListSection from "../../sections/DocumentationContentListSection";
-import { WHITE_PAPER_DOWNLOAD_BUTTON_LABEL } from "@/features/content/data";
+import { CONTENT_DOWNLOAD_BUTTON_LABEL } from "@/features/content/data";
 import {
   CONTENT_PREVIEW_BLOCKQUOTE_CLASS,
   CONTENT_PREVIEW_BODY_CLASS,
@@ -47,6 +47,11 @@ import {
   CONTENT_PREVIEW_H3_TOP_PADDING,
   CONTENT_PREVIEW_OL_CLASS,
   CONTENT_PREVIEW_RICH_CLASS,
+  CONTENT_PREVIEW_TABLE_CELL_CLASS,
+  CONTENT_PREVIEW_TABLE_CLASS,
+  CONTENT_PREVIEW_TABLE_HEADER_CELL_CLASS,
+  CONTENT_PREVIEW_TABLE_ROW_CLASS,
+  CONTENT_PREVIEW_TABLE_WRAPPER_CLASS,
   CONTENT_PREVIEW_UL_CLASS,
 } from "@/features/content/previewStyles";
 import { highlightCodeBlocksInHtml, renderLineNumberedCodeBlock } from "@/features/content/codeHighlight";
@@ -382,14 +387,14 @@ function MarkdownContent({ markdown }: { markdown: string }) {
           const { bodyRows, headerRow } = table;
 
           return (
-            <div key={`table-${blockIndex}`} className="overflow-x-auto border border-border">
-              <table className="w-full min-w-[520px] border-collapse text-left">
+            <div key={`table-${blockIndex}`} className={CONTENT_PREVIEW_TABLE_WRAPPER_CLASS}>
+              <table className={CONTENT_PREVIEW_TABLE_CLASS}>
                 <thead>
-                  <tr className="border-b border-border bg-bg-deep">
+                  <tr className={CONTENT_PREVIEW_TABLE_ROW_CLASS}>
                     {headerRow.map((cell, cellIndex) => (
                       <th
                         key={`table-header-${blockIndex}-${cellIndex}`}
-                        className="px-4 py-3 type-content-body text-fg"
+                        className={CONTENT_PREVIEW_TABLE_HEADER_CELL_CLASS}
                       >
                         {renderInlineMarkdown(cell)}
                       </th>
@@ -398,14 +403,11 @@ function MarkdownContent({ markdown }: { markdown: string }) {
                 </thead>
                 <tbody>
                   {bodyRows.map((row, rowIndex) => (
-                    <tr
-                      key={`table-row-${blockIndex}-${rowIndex}`}
-                      className="border-b border-border last:border-b-0"
-                    >
+                    <tr key={`table-row-${blockIndex}-${rowIndex}`} className={CONTENT_PREVIEW_TABLE_ROW_CLASS}>
                       {row.map((cell, cellIndex) => (
                         <td
                           key={`table-cell-${blockIndex}-${rowIndex}-${cellIndex}`}
-                          className="px-4 py-3 align-top type-content-body text-mute-fg"
+                          className={CONTENT_PREVIEW_TABLE_CELL_CLASS}
                         >
                           {renderInlineMarkdown(cell)}
                         </td>
@@ -454,7 +456,7 @@ export default function DocsDetailPage({
   contentListTitle,
   date,
   downloadHref,
-  downloadLabel = WHITE_PAPER_DOWNLOAD_BUTTON_LABEL,
+  downloadLabel = CONTENT_DOWNLOAD_BUTTON_LABEL,
   docsHref,
   hideHeroImage = false,
   heroImageAlt,

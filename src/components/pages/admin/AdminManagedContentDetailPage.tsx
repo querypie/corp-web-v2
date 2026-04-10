@@ -21,26 +21,20 @@ import {
 import {
   createEmptyManagedContentDraft,
   ensureUniqueSlug,
-  getAdminDetailHref,
   formatPublicDate,
   getAdminCategoryHref,
   getContentThumbnailSrc,
-  getNextSortOrder,
+  getDownloadPreviewProps,
   getManagedCategoryLabel,
   getLocalizedContent,
-  getPublicListHref,
-  getWhitePaperDownloadPreviewProps,
   getWriterLabel,
   slugifyTitle,
-  WHITE_PAPER_DOWNLOAD_BUTTON_LABEL,
+  type ContentGatingLevel,
   type ManagedContentCategorySlug,
   type ManagedContentEntry,
   type ManagedContentSection,
   type ManagedContentType,
-  type WhitePaperGatingLevel,
 } from "@/features/content/data";
-import { cloneAsAuthoredContent } from "@/features/content/cloneToAuthored";
-import { convertMarkdownToTiptap } from "@/features/content/markdownToTiptap";
 import { splitLegacyQuotedListLine } from "@/features/content/legacyQuoteList";
 import { shouldRenderMermaid } from "@/features/content/mermaid";
 import { parseMarkdownTable } from "@/features/content/markdownTable";
@@ -56,6 +50,11 @@ import {
   CONTENT_PREVIEW_H3_TOP_PADDING,
   CONTENT_PREVIEW_OL_CLASS,
   CONTENT_PREVIEW_RICH_CLASS,
+  CONTENT_PREVIEW_TABLE_CELL_CLASS,
+  CONTENT_PREVIEW_TABLE_CLASS,
+  CONTENT_PREVIEW_TABLE_HEADER_CELL_CLASS,
+  CONTENT_PREVIEW_TABLE_ROW_CLASS,
+  CONTENT_PREVIEW_TABLE_WRAPPER_CLASS,
   CONTENT_PREVIEW_UL_CLASS,
 } from "@/features/content/previewStyles";
 import { highlightCodeBlocksInHtml, renderLineNumberedCodeBlock } from "@/features/content/codeHighlight";
@@ -64,12 +63,6 @@ import { normalizeFencedCodeLines, splitMarkdownBlocks } from "@/features/conten
 type DialogState =
   | { type: "cancel" }
   | { description: string; highlightedLines?: string[]; title: string; type: "alert" };
-
-const AI_INSTRUCTION_DEFAULT =
-  "다음 규칙을 지켜 마크다운 초안을 작성해 주세요.\n- 결과는 마크다운만 사용합니다.\n- 제목 구조를 포함합니다.\n- 필요한 경우 리스트를 사용합니다.\n- 시작 부분에 짧은 요약 문단을 넣습니다.\n- HTML은 사용하지 않습니다.\n- 과도한 수식, 이모지, 장식적 문구는 사용하지 않습니다.";
-
-const AI_SETUP_HELPER_TEXT =
-  "작동하지 않으면 루트의 .env.local에 OPENAI_API_KEY를 추가하고 개발 서버를 다시 시작하세요.";
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -80,7 +73,7 @@ function pathSafeBaseName(value: string) {
   return segments[segments.length - 1] ?? value;
 }
 
-const WHITE_PAPER_GATING_OPTIONS: Array<{ label: string; value: WhitePaperGatingLevel }> = [
+const CONTENT_GATING_OPTIONS: Array<{ label: string; value: ContentGatingLevel }> = [
   { label: "Gating 없음", value: "none" },
   { label: "Gating 10%", value: "10" },
   { label: "Gating 30%", value: "30" },
@@ -134,6 +127,31 @@ function serializeDirtyCheckTarget(form: ManagedContentEntry) {
   });
 }
 
+function fillMissingLocalesFromEnglish(form: ManagedContentEntry): ManagedContentEntry {
+  const fillLocalized = (content: { en: string; ko: string; ja: string }) => {
+    const english = content.en.trim();
+
+    if (!english) {
+      return content;
+    }
+
+    return {
+      en: content.en,
+      ko: content.ko.trim() ? content.ko : content.en,
+      ja: content.ja.trim() ? content.ja : content.en,
+    };
+  };
+
+  return {
+    ...form,
+    bodyHtml: fillLocalized(form.bodyHtml),
+    bodyMarkdown: fillLocalized(form.bodyMarkdown),
+    bodyRichText: fillLocalized(form.bodyRichText),
+    summary: fillLocalized(form.summary),
+    title: fillLocalized(form.title),
+  };
+}
+
 function ConfirmDialog({
   className,
   cancelLabel = "닫기",
@@ -179,82 +197,6 @@ function ConfirmDialog({
               {confirmLabel}
             </Button>
           </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function AiDraftDialog({
-  bodyValue,
-  inputValue,
-  instructionValue,
-  isGenerating,
-  onApply,
-  onBodyChange,
-  onCancel,
-  onGenerate,
-  onInputChange,
-  onInstructionChange,
-}: {
-  bodyValue: string;
-  inputValue: string;
-  instructionValue: string;
-  isGenerating: boolean;
-  onApply: () => void;
-  onBodyChange: (value: string) => void;
-  onCancel: () => void;
-  onGenerate: () => void;
-  onInputChange: (value: string) => void;
-  onInstructionChange: (value: string) => void;
-}) {
-  return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.68)] px-5 py-6">
-      <div
-        className="flex max-h-[min(760px,calc(100vh-48px))] w-full max-w-[760px] flex-col overflow-hidden rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-5 md:px-6"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto pr-1">
-          <TextField
-            label="제목"
-            onChange={onInputChange}
-            value={inputValue}
-          />
-          <TextAreaField
-            helperText="추가로 지시하고 싶은 사항을 넣으세요."
-            label="보조 지시문"
-            onChange={onInstructionChange}
-            rowsClassName="min-h-[140px]"
-            value={instructionValue}
-          />
-          <p className="m-0 type-body-sm text-mute-fg">{AI_SETUP_HELPER_TEXT}</p>
-          <div className="flex justify-center">
-            <Button
-              arrow={false}
-              className="justify-center"
-              onClick={onGenerate}
-              style="round"
-              variant="secondary"
-            >
-              {isGenerating ? <LoadingText text="생성 중..." /> : "AI로 생성"}
-            </Button>
-          </div>
-          <TextAreaField
-            helperText="Markdown"
-            label="내용"
-            onChange={onBodyChange}
-            rowsClassName="min-h-[260px]"
-            value={bodyValue}
-          />
-        </div>
-
-        <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-end">
-          <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
-            취소
-          </Button>
-          <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onApply} style="round" variant="primary">
-            적용
-          </Button>
         </div>
       </div>
     </div>
@@ -493,12 +435,12 @@ function PreviewMarkdown({ markdown }: { markdown: string }) {
           const { bodyRows, headerRow } = table;
 
           return (
-            <div key={blockIndex} className="overflow-x-auto border border-border">
-              <table className="w-full min-w-[520px] border-collapse text-left">
+            <div key={blockIndex} className={CONTENT_PREVIEW_TABLE_WRAPPER_CLASS}>
+              <table className={CONTENT_PREVIEW_TABLE_CLASS}>
                 <thead>
-                  <tr className="border-b border-border bg-bg-deep">
+                  <tr className={CONTENT_PREVIEW_TABLE_ROW_CLASS}>
                     {headerRow.map((cell, cellIndex) => (
-                      <th key={cellIndex} className="px-4 py-3 type-content-body text-fg">
+                      <th key={cellIndex} className={CONTENT_PREVIEW_TABLE_HEADER_CELL_CLASS}>
                         {renderInlineMarkdown(cell)}
                       </th>
                     ))}
@@ -506,9 +448,9 @@ function PreviewMarkdown({ markdown }: { markdown: string }) {
                 </thead>
                 <tbody>
                   {bodyRows.map((row, rowIndex) => (
-                    <tr key={rowIndex} className="border-b border-border last:border-b-0">
+                    <tr key={rowIndex} className={CONTENT_PREVIEW_TABLE_ROW_CLASS}>
                       {row.map((cell, cellIndex) => (
-                        <td key={cellIndex} className="px-4 py-3 align-top type-content-body text-mute-fg">
+                        <td key={cellIndex} className={CONTENT_PREVIEW_TABLE_CELL_CLASS}>
                           {renderInlineMarkdown(cell)}
                         </td>
                       ))}
@@ -591,16 +533,7 @@ export default function AdminManagedContentDetailPage({
   const [thumbnailName, setThumbnailName] = useState("");
   const [pdfName, setPdfName] = useState("");
   const [activeLocale, setActiveLocale] = useState<"en" | "ko" | "ja">("en");
-  const [aiDialogOpen, setAiDialogOpen] = useState(false);
-  const [aiInputValue, setAiInputValue] = useState("");
-  const [aiInstructionValue, setAiInstructionValue] = useState(AI_INSTRUCTION_DEFAULT);
-  const [aiBodyValue, setAiBodyValue] = useState("");
-  const [aiPendingBodyValue, setAiPendingBodyValue] = useState<string | null>(null);
-  const [aiConfirmType, setAiConfirmType] = useState<"discard" | "replace" | null>(null);
-  const [copyConfirmLocale, setCopyConfirmLocale] = useState<"ko" | "ja" | null>(null);
-  const [showConvertConfirm, setShowConvertConfirm] = useState(false);
-  const [isAiGenerating, setIsAiGenerating] = useState(false);
-  const [isSaving, setIsSaving] = useState(false);
+const [isSaving, setIsSaving] = useState(false);
   const categoryLabel = getManagedCategoryLabel(section, categorySlug, "en");
   const [initialFormSnapshot, setInitialFormSnapshot] = useState(() =>
     serializeDirtyCheckTarget(createEmptyManagedContentDraft(section, categorySlug)),
@@ -612,7 +545,7 @@ export default function AdminManagedContentDetailPage({
   const showPreview = true;
   const isContentType = form.contentType === "content";
   const isOutlinkType = form.contentType === "outlink";
-  const isWhitePaper = section === "documentation" && categorySlug === "white-papers";
+  const supportsLeadGate = section !== "news" && isContentType;
   const useRichEditor = isContentType && form.contentFormat === "tiptap";
 
   useEffect(() => {
@@ -720,179 +653,6 @@ export default function AdminManagedContentDetailPage({
     }));
   }
 
-  function applyCopyLocaleFromEn(targetLocale: "ko" | "ja") {
-    setForm((current) => ({
-      ...current,
-      bodyHtml: {
-        ...current.bodyHtml,
-        [targetLocale]: current.bodyHtml.en,
-      },
-      bodyMarkdown: {
-        ...current.bodyMarkdown,
-        [targetLocale]: current.bodyMarkdown.en,
-      },
-      bodyRichText: {
-        ...current.bodyRichText,
-        [targetLocale]: current.bodyRichText.en,
-      },
-      summary: {
-        ...current.summary,
-        [targetLocale]: current.summary.en,
-      },
-      title: {
-        ...current.title,
-        [targetLocale]: current.title.en,
-      },
-    }));
-  }
-
-  function copyLocaleFromEn(targetLocale: "ko" | "ja") {
-    const hasExistingContent = [
-      getEditingLocalizedValue(form.title, targetLocale),
-      getEditingLocalizedValue(form.summary, targetLocale),
-      getEditingLocalizedValue(form.bodyMarkdown, targetLocale),
-      getEditingLocalizedValue(form.bodyRichText, targetLocale),
-      getEditingLocalizedValue(form.bodyHtml, targetLocale),
-    ].some((value) => value.trim().length > 0 && value.trim() !== "<p></p>");
-
-    if (hasExistingContent) {
-      setCopyConfirmLocale(targetLocale);
-      return;
-    }
-
-    applyCopyLocaleFromEn(targetLocale);
-  }
-
-  function openAiDialog() {
-    setAiInputValue(getEditingLocalizedValue(form.title, activeLocale));
-    setAiInstructionValue(AI_INSTRUCTION_DEFAULT);
-    setAiBodyValue("");
-    setAiPendingBodyValue(null);
-    setAiConfirmType(null);
-    setAiDialogOpen(true);
-  }
-
-  function closeAiDialog() {
-    setAiDialogOpen(false);
-    setAiPendingBodyValue(null);
-    setAiConfirmType(null);
-    setIsAiGenerating(false);
-  }
-
-  function buildAiDraft(title: string, instruction: string) {
-    const normalizedTitle = title.trim() || "Untitled";
-    const instructionLines = instruction
-      .split("\n")
-      .map((line) => line.trim())
-      .filter(Boolean);
-
-    return [
-      `# ${normalizedTitle}`,
-      "",
-      `## Summary`,
-      `${normalizedTitle}에 대한 핵심 내용을 짧게 정리한 초안입니다. 실제 AI 연결 전까지는 편집 흐름을 검증하기 위한 기본 생성 결과를 제공합니다.`,
-      "",
-      `## Key Points`,
-      "- 핵심 메시지를 한눈에 이해할 수 있도록 정리합니다.",
-      "- 필요 시 목록과 소제목으로 내용을 구조화합니다.",
-      "- 최종 게시 전 문맥과 사실관계를 직접 검토합니다.",
-      "",
-      `## Notes`,
-      ...instructionLines.map((line) => `- ${line}`),
-    ].join("\n");
-  }
-
-  function handleAiGenerate() {
-    if (!aiInputValue.trim()) {
-      setDialog({
-        description: "제목을 입력한 뒤 AI 생성을 시도해 주세요.",
-        title: "제목이 비어 있습니다.",
-        type: "alert",
-      });
-      return;
-    }
-
-    setIsAiGenerating(true);
-    void fetch("/api/admin/content/generate", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        instruction: aiInstructionValue,
-        locale: activeLocale,
-        title: aiInputValue,
-      }),
-    })
-      .then(async (response) => {
-        const payload = (await response.json()) as { error?: string; markdown?: string; status?: number };
-
-        if (!response.ok || !payload.markdown) {
-          const status = payload.status ?? response.status;
-
-          if (status === 429) {
-            throw new Error("OpenAI API 사용량 한도를 초과했습니다. OpenAI Billing/Usage에서 quota와 결제 상태를 확인해 주세요.");
-          }
-
-          if (status === 401 || status === 403) {
-            throw new Error("OpenAI API 인증에 실패했습니다. API 키가 올바른지, 현재 프로젝트에서 사용할 수 있는 키인지 확인해 주세요.");
-          }
-
-          if (status === 500 && payload.error?.includes("OPENAI_API_KEY")) {
-            throw new Error("OPENAI_API_KEY가 설정되지 않았습니다. 루트의 .env.local에 OPENAI_API_KEY를 추가하고 개발 서버를 다시 시작해 주세요.");
-          }
-
-          throw new Error(payload.error ?? "AI 초안을 생성하지 못했습니다.");
-        }
-
-        setAiBodyValue(payload.markdown);
-      })
-      .catch((error: unknown) => {
-        setDialog({
-          description:
-            error instanceof Error
-              ? error.message
-              : "AI 초안을 생성하지 못했습니다. 잠시 후 다시 시도해 주세요.",
-          title: "AI 생성에 실패했습니다.",
-          type: "alert",
-        });
-      })
-      .finally(() => {
-        setIsAiGenerating(false);
-      });
-  }
-
-  function handleAiCancel() {
-    if (aiBodyValue.trim()) {
-      setAiConfirmType("discard");
-      return;
-    }
-
-    closeAiDialog();
-  }
-
-  function handleAiApply() {
-    if (!aiBodyValue.trim()) {
-      setDialog({
-        description: "적용할 AI 초안이 없습니다. 먼저 내용을 생성하거나 직접 입력해 주세요.",
-        title: "적용할 내용이 없습니다.",
-        type: "alert",
-      });
-      return;
-    }
-
-    const currentBody = getEditingLocalizedValue(form.bodyMarkdown, activeLocale).trim();
-
-    if (currentBody) {
-      setAiPendingBodyValue(aiBodyValue);
-      setAiConfirmType("replace");
-      return;
-    }
-
-    updateLocalizedField("bodyMarkdown", activeLocale, aiBodyValue);
-    closeAiDialog();
-  }
-
   function handleDateButtonClick() {
     /* 브라우저 기본 날짜 피커를 버튼으로 연다 */
     const dateInput = dateInputRef.current as (HTMLInputElement & { showPicker?: () => void }) | null;
@@ -902,6 +662,10 @@ export default function AdminManagedContentDetailPage({
       return;
     }
     dateInput.click();
+  }
+
+  function clearDate() {
+    updateForm("dateIso", "");
   }
 
   function handleThumbnailChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -966,7 +730,7 @@ export default function AdminManagedContentDetailPage({
     formData.append("section", section);
     formData.append("categorySlug", categorySlug);
 
-    const response = await fetch("/api/admin/uploads/document", {
+    const response = await fetch("/api/admin/uploads/content-document", {
       body: formData,
       method: "POST",
     });
@@ -1023,7 +787,7 @@ export default function AdminManagedContentDetailPage({
     /* 저장/게시 전 필수 입력값만 간단히 검증한다 */
     const missing: string[] = [];
     if (!form.title.en.trim()) missing.push("제목 (EN)");
-    if (isWhitePaper && form.enableDownloadButton && !form.downloadPdfSrc.trim() && !pendingPdfFile) {
+    if (supportsLeadGate && form.enableDownloadButton && !form.downloadPdfSrc.trim() && !pendingPdfFile) {
       missing.push("PDF");
     }
     if (isOutlinkType) {
@@ -1041,7 +805,7 @@ export default function AdminManagedContentDetailPage({
 
     setIsSaving(true);
 
-    const currentForm = overrideForm ?? form;
+    const currentForm = fillMissingLocalesFromEnglish(overrideForm ?? form);
     const missing = validateForm();
     if (status === "published" && missing.length > 0) {
       setDialog({
@@ -1123,9 +887,7 @@ export default function AdminManagedContentDetailPage({
       downloadPdfFileName: nextDownloadPdfFileName,
       downloadPdfSrc: nextDownloadPdfSrc,
       gatingLevel:
-        section === "documentation" &&
-        categorySlug === "white-papers" &&
-        currentForm.contentType === "content"
+        section !== "news" && currentForm.contentType === "content"
           ? currentForm.gatingLevel
           : "none",
       imageSrc: nextImageSrc,
@@ -1165,55 +927,12 @@ export default function AdminManagedContentDetailPage({
     router.push(getAdminCategoryHref(section, categorySlug));
   }
 
-  async function handleConvertToTiptap() {
-    const currentForm: ManagedContentEntry = {
-      ...form,
-      categorySlug,
-      section,
-    };
-
-    let nextImageSrc = currentForm.imageSrc;
-
-    if (pendingThumbnailFile) {
-      nextImageSrc = await uploadThumbnail(pendingThumbnailFile);
-    }
-
-    const siblingItems = items.filter(
-      (entry) => entry.section === section && entry.categorySlug === categorySlug,
-    );
-    const duplicatedItem = cloneAsAuthoredContent(
-      {
-        ...currentForm,
-        imageSrc: nextImageSrc,
-      },
-      siblingItems,
-      { slugSuffix: "-tiptap" },
-    );
-
-    const nextItem: ManagedContentEntry = {
-      ...duplicatedItem,
-      sortOrder: getNextSortOrder(items, section, categorySlug),
-      status: "hidden",
-    };
-
-    const savedItem = await upsertManagedContent(nextItem);
-
-    if (pendingThumbnailPreviewSrc) {
-      URL.revokeObjectURL(pendingThumbnailPreviewSrc);
-    }
-
-    setPendingThumbnailFile(null);
-    setPendingThumbnailPreviewSrc("");
-    setHasUnsavedChanges(false);
-    router.push(getAdminDetailHref(section, categorySlug, savedItem.id));
-  }
-
   const previewData = {
     bodyHtml: getEditingLocalizedValue(form.bodyHtml, activeLocale),
     bodyMarkdown: getEditingLocalizedValue(form.bodyMarkdown, activeLocale) || "작성한 본문이 이 영역에 실시간 표시됩니다.",
     contentFormat: form.contentFormat,
     date: formatPublicDate("ko", form.dateIso),
-    ...getWhitePaperDownloadPreviewProps(form),
+    ...getDownloadPreviewProps(form),
     hideHeroImage: form.hideHeroImage,
     heroImageAlt: getEditingLocalizedValue(form.title, activeLocale) || "Content thumbnail preview",
     heroImageSrc: pendingThumbnailPreviewSrc || form.imageSrc,
@@ -1241,7 +960,7 @@ export default function AdminManagedContentDetailPage({
               <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 {section !== "news" ? (
                   <div className="flex w-full flex-col gap-3 sm:max-w-[500px] sm:flex-row">
-                    <div className="w-full sm:max-w-[220px]">
+                    <div className="w-full sm:max-w-[180px]">
                       <Select
                         defaultValue={form.contentType}
                         onChange={(event) => handleContentTypeChange(event.target.value as ManagedContentType)}
@@ -1251,11 +970,11 @@ export default function AdminManagedContentDetailPage({
                         ]}
                       />
                     </div>
-                    {isWhitePaper && isContentType ? (
-                      <div className="w-full sm:max-w-[220px]">
+                    {supportsLeadGate ? (
+                      <div className="w-full sm:max-w-[180px]">
                         <Select
-                          onChange={(event) => updateForm("gatingLevel", event.target.value as WhitePaperGatingLevel)}
-                          options={WHITE_PAPER_GATING_OPTIONS}
+                          onChange={(event) => updateForm("gatingLevel", event.target.value as ContentGatingLevel)}
+                          options={CONTENT_GATING_OPTIONS}
                           value={form.gatingLevel}
                         />
                       </div>
@@ -1263,17 +982,6 @@ export default function AdminManagedContentDetailPage({
                   </div>
                 ) : <div />}
                 <div className="flex items-center gap-3 sm:justify-end">
-                  {activeLocale !== "en" ? (
-                    <Button
-                      arrow={false}
-                      className="justify-center"
-                      onClick={() => copyLocaleFromEn(activeLocale)}
-                      style="round"
-                      variant="outline"
-                    >
-                      EN 내용 복제
-                    </Button>
-                  ) : null}
                   <TabGroup className="self-start">
                     {(["en", "ko", "ja"] as const).map((locale) => (
                       <Tab
@@ -1301,11 +1009,6 @@ export default function AdminManagedContentDetailPage({
                   type="text"
                   value={getEditingLocalizedValue(form.title, activeLocale)}
                 />
-                {isContentType && !useRichEditor && itemId === "new" ? (
-                  <Button arrow={false} className="shrink-0 justify-center" onClick={openAiDialog} style="round" variant="outline">
-                    AI 작성
-                  </Button>
-                ) : null}
               </div>
             </InlineField>
             {isContentType ? (
@@ -1348,10 +1051,21 @@ export default function AdminManagedContentDetailPage({
               </div>
             ) : null}
             <InlineField label="날짜">
-              <div className="flex flex-col gap-3 sm:flex-row">
-                <Input className="flex-1 bg-bg-content" inputClassName="text-mute-fg" readOnly type="text" value={form.dateIso} />
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                <div className="flex min-w-0 flex-1 items-center gap-3">
+                  <Input className="w-full bg-bg-content" inputClassName="text-mute-fg" readOnly type="text" value={form.dateIso} />
+                  {form.dateIso ? (
+                    <button
+                      className="shrink-0 bg-transparent p-0 type-body-md text-mute-fg transition-colors hover:text-fg"
+                      onClick={clearDate}
+                      type="button"
+                    >
+                      삭제
+                    </button>
+                  ) : null}
+                </div>
                 <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={handleDateButtonClick} style="round" variant="outline">선택</Button>
-                {isWhitePaper ? (
+                {supportsLeadGate ? (
                   <label className="flex items-center gap-2 type-body-sm text-mute-fg sm:ml-5">
                     <input
                       checked={form.enableDownloadButton}
@@ -1365,7 +1079,7 @@ export default function AdminManagedContentDetailPage({
                 <input className="sr-only" onChange={(event) => updateForm("dateIso", event.target.value)} ref={dateInputRef} type="date" value={form.dateIso} />
               </div>
             </InlineField>
-            {isWhitePaper && form.enableDownloadButton ? (
+            {supportsLeadGate && form.enableDownloadButton ? (
               <InlineField label="PDF">
                 <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
                   <div className="flex min-w-0 flex-1 items-center gap-3">
@@ -1517,17 +1231,6 @@ export default function AdminManagedContentDetailPage({
             >
               {isSaving ? <LoadingText text="저장 중..." tone="dark" /> : "저장"}
             </Button>
-            {isContentType && itemId !== "new" && form.contentFormat === "markdown" ? (
-              <Button
-                arrow={false}
-                className="w-full justify-center sm:w-auto"
-                onClick={() => setShowConvertConfirm(true)}
-                style="round"
-                variant="outline"
-              >
-                Convert to TipTap
-              </Button>
-            ) : null}
           </div>
         </div>
 
@@ -1576,91 +1279,6 @@ export default function AdminManagedContentDetailPage({
           onCancel={() => setDialog(null)}
           onConfirm={() => setDialog(null)}
           title={dialog.title}
-        />
-      ) : null}
-
-      {aiDialogOpen ? (
-        <AiDraftDialog
-          bodyValue={aiBodyValue}
-          inputValue={aiInputValue}
-          instructionValue={aiInstructionValue}
-          isGenerating={isAiGenerating}
-          onApply={handleAiApply}
-          onBodyChange={setAiBodyValue}
-          onCancel={handleAiCancel}
-          onGenerate={handleAiGenerate}
-          onInputChange={setAiInputValue}
-          onInstructionChange={setAiInstructionValue}
-        />
-      ) : null}
-
-      {aiConfirmType === "discard" ? (
-        <ConfirmDialog
-          className="z-[80]"
-          cancelLabel="계속 작성하기"
-          confirmLabel="취소하기"
-          description="AI 작성 모달에서 작성 중인 내용이 사라집니다."
-          onCancel={() => setAiConfirmType(null)}
-          onConfirm={closeAiDialog}
-          title="취소하겠습니까?"
-        />
-      ) : null}
-
-      {aiConfirmType === "replace" ? (
-        <ConfirmDialog
-          className="z-[80]"
-          confirmLabel="대체하기"
-          description="현재 내용 필드에 작성된 내용을 AI 초안으로 대체합니다."
-          onCancel={() => {
-            setAiConfirmType(null);
-            setAiPendingBodyValue(null);
-          }}
-          onConfirm={() => {
-            if (aiPendingBodyValue) {
-              updateLocalizedField("bodyMarkdown", activeLocale, aiPendingBodyValue);
-            }
-            closeAiDialog();
-          }}
-          title="기존 내용을 대체할까요?"
-        />
-      ) : null}
-
-      {copyConfirmLocale ? (
-        <ConfirmDialog
-          className="z-[80]"
-          cancelLabel="취소"
-          confirmLabel="대체하기"
-          description={`${copyConfirmLocale.toUpperCase()}에 작성 중인 내용이 EN 내용으로 대체됩니다.`}
-          onCancel={() => setCopyConfirmLocale(null)}
-          onConfirm={() => {
-            applyCopyLocaleFromEn(copyConfirmLocale);
-            setCopyConfirmLocale(null);
-          }}
-          title="기존 내용을 대체할까요?"
-        />
-      ) : null}
-
-      {showConvertConfirm ? (
-        <ConfirmDialog
-          className="z-[80]"
-          cancelLabel="취소"
-          confirmLabel="새 버전 만들기"
-          description="현재 레거시 markdown 콘텐츠를 보존한 채, TipTap 편집용 새 버전을 hidden 상태로 생성합니다."
-          onCancel={() => setShowConvertConfirm(false)}
-          onConfirm={() => {
-            setShowConvertConfirm(false);
-            void handleConvertToTiptap().catch((error: unknown) => {
-              setDialog({
-                description:
-                  error instanceof Error
-                    ? error.message
-                    : "TipTap 변환에 실패했습니다. 다시 시도해 주세요.",
-                title: "변환에 실패했습니다.",
-                type: "alert",
-              });
-            });
-          }}
-          title="새 TipTap 버전으로 변환할까요?"
         />
       ) : null}
     </section>

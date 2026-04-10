@@ -1,7 +1,7 @@
-import type { ManagedContentEntry, WhitePaperGatingLevel } from "./data";
+import type { ContentGatingLevel, ManagedContentEntry } from "./data";
 
-export const WHITE_PAPER_UNLOCK_COOKIE = "querypie_white_paper_unlocked";
-export const WHITE_PAPER_UNLOCK_COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
+export const CONTENT_UNLOCK_COOKIE_PREFIX = "querypie_content_unlocked";
+export const CONTENT_UNLOCK_COOKIE_MAX_AGE = 60 * 60 * 24 * 30;
 
 const VOID_TAGS = new Set([
   "area",
@@ -20,18 +20,21 @@ const VOID_TAGS = new Set([
   "wbr",
 ]);
 
-export function isWhitePaperGatingEnabled(
-  item: Pick<ManagedContentEntry, "categorySlug" | "contentType" | "gatingLevel" | "section">,
+export function getContentUnlockCookieName(id: string) {
+  return `${CONTENT_UNLOCK_COOKIE_PREFIX}_${id.replace(/[^a-zA-Z0-9_-]/g, "_")}`;
+}
+
+export function isContentGatingEnabled(
+  item: Pick<ManagedContentEntry, "contentType" | "gatingLevel" | "section">,
 ) {
   return (
-    item.section === "documentation" &&
-    item.categorySlug === "white-papers" &&
+    item.section !== "news" &&
     item.contentType === "content" &&
     item.gatingLevel !== "none"
   );
 }
 
-export function getWhitePaperGatingRatio(level: WhitePaperGatingLevel) {
+export function getContentGatingRatio(level: ContentGatingLevel) {
   switch (level) {
     case "10":
       return 0.1;
@@ -123,8 +126,8 @@ function collectRootBlocks(html: string) {
   return blocks;
 }
 
-export function buildWhitePaperPreviewHtml(html: string, level: WhitePaperGatingLevel) {
-  const ratio = getWhitePaperGatingRatio(level);
+export function buildContentPreviewHtml(html: string, level: ContentGatingLevel) {
+  const ratio = getContentGatingRatio(level);
 
   if (ratio >= 1 || !html.trim()) {
     return html;
@@ -158,6 +161,6 @@ export function buildWhitePaperPreviewHtml(html: string, level: WhitePaperGating
   return selectedBlocks.join("");
 }
 
-export function hasUnlockedWhitePaperAccess(value: string | undefined) {
+export function hasUnlockedContentAccess(value: string | undefined) {
   return value === "true";
 }
