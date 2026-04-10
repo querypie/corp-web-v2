@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-15.webp",
           "webPath": "/documentation/blogs/b-thumb-15.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-15.webp",
-          "webPath": "/blog/b-thumb-15.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/zero-trust-security--15/en.mdx",
@@ -34,13 +29,8 @@
         "Zero Trust Security"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-15.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Zero Trust Security: Redefining Cybersecurity in a Hyper-Connected World\"\ndescription: \"Understand how Zero Trust Security can protect your business by continuously verifying users, devices, and networks, ensuring stronger defense against threats. Explore it now!\"\ndate: \"2025-01-16\"\nogImage: \"public/documentation/blogs/b-thumb-15.webp\"\nkeywords: [\"QueryPie\", \"Zero Trust\", \"Zero Trust Security\"]\nrelatedPosts:\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
-=======
-      "ogImage": "/blog/b-thumb-15.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Zero Trust Security: Redefining Cybersecurity in a Hyper-Connected World\"\ndescription: \"Understand how Zero Trust Security can protect your business by continuously verifying users, devices, and networks, ensuring stronger defense against threats. Explore it now!\"\ndate: \"2025-01-16\"\nogImage: \"public/blog/b-thumb-15.webp\"\nkeywords: [\"QueryPie\", \"Zero Trust\", \"Zero Trust Security\"]\nrelatedPosts:\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/1/agentless-philosophy",
         "/features/documentation/blog/7/command-bypass-prevention-control",
@@ -54,11 +44,7 @@
         "title": "Zero Trust Security: Redefining Cybersecurity in a Hyper-Connected World",
         "description": "Understand how Zero Trust Security can protect your business by continuously verifying users, devices, and networks, ensuring stronger defense against threats. Explore it now!",
         "date": "2025-01-16",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-15.webp",
-=======
-        "ogImage": "public/blog/b-thumb-15.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "Zero Trust",

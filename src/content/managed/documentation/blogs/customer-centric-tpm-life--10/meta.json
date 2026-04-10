@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-10.webp",
           "webPath": "/documentation/blogs/b-thumb-10.webp"
         },
@@ -37,30 +36,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog10-image-4.webp",
           "webPath": "/documentation/blogs/blog10-image-4.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-10.webp",
-          "webPath": "/blog/b-thumb-10.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-1.webp",
-          "webPath": "/blog/blog10-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-2.webp",
-          "webPath": "/blog/blog10-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-3.webp",
-          "webPath": "/blog/blog10-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-4.webp",
-          "webPath": "/blog/blog10-image-4.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/customer-centric-tpm-life--10/en.mdx",
@@ -76,13 +51,8 @@
         "team success"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-10.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"A Peek Into a Day in the Life of QueryPie TPM Team: The Secret to Winning Over Customers\"\ndescription: \"A glimpse into QueryPie TPM's daily efforts to win customer trust and deliver exceptional results with effective strategies.\"\ndate: \"2024-11-22\"\nauthor: \"skipper\"\nogImage: \"public/documentation/blogs/b-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"TPM strategies\", \"customer trust\", \"effective daily management\", \"team success\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
-=======
-      "ogImage": "/blog/b-thumb-10.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"A Peek Into a Day in the Life of QueryPie TPM Team: The Secret to Winning Over Customers\"\ndescription: \"A glimpse into QueryPie TPM's daily efforts to win customer trust and deliver exceptional results with effective strategies.\"\ndate: \"2024-11-22\"\nauthor: \"skipper\"\nogImage: \"public/blog/b-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"TPM strategies\", \"customer trust\", \"effective daily management\", \"team success\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/8/querypie-product-managers",
         "/features/documentation/blog/3/querypie-team-success-secrets",
@@ -97,11 +67,7 @@
         "description": "A glimpse into QueryPie TPM's daily efforts to win customer trust and deliver exceptional results with effective strategies.",
         "date": "2024-11-22",
         "author": "skipper",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-10.webp",
-=======
-        "ogImage": "public/blog/b-thumb-10.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "TPM strategies",
@@ -120,7 +86,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-10.webp",
           "webPath": "/documentation/blogs/b-thumb-10.webp"
         },
@@ -143,30 +108,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog10-image-4.webp",
           "webPath": "/documentation/blogs/blog10-image-4.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-10.webp",
-          "webPath": "/blog/b-thumb-10.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-1.webp",
-          "webPath": "/blog/blog10-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-2.webp",
-          "webPath": "/blog/blog10-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-3.webp",
-          "webPath": "/blog/blog10-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-4.webp",
-          "webPath": "/blog/blog10-image-4.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/customer-centric-tpm-life--10/ko.mdx",
@@ -185,13 +126,8 @@
         "Technical Project Management"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-10.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie TPM 팀의 하루 엿보기: 고객을 사로잡는 비법 공개\"\ndescription: \"TPM팀은 QueryPie 솔루션을 사용하는 모든 고객과 파트너사가 예기치 않은 문제로 인해 비즈니스가 멈추는 일이 없도록 항상 준비된 태도로 지원을 아끼지 않고 있어요. 그렇다면, TPM팀의 하루는 어떤 모습일까요? 함께 살펴보시죠!\"\ndate: \"2024-11-22\"\nauthor: \"skipper\"\nogImage: \"public/documentation/blogs/b-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"TPM 전략\", \"고객 신뢰\", \"효과적인 업무 관리\", \"고객 응대 전략\", \"TPM\", \"Technical Project Management\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
-=======
-      "ogImage": "/blog/b-thumb-10.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie TPM 팀의 하루 엿보기: 고객을 사로잡는 비법 공개\"\ndescription: \"TPM팀은 QueryPie 솔루션을 사용하는 모든 고객과 파트너사가 예기치 않은 문제로 인해 비즈니스가 멈추는 일이 없도록 항상 준비된 태도로 지원을 아끼지 않고 있어요. 그렇다면, TPM팀의 하루는 어떤 모습일까요? 함께 살펴보시죠!\"\ndate: \"2024-11-22\"\nauthor: \"skipper\"\nogImage: \"public/blog/b-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"TPM 전략\", \"고객 신뢰\", \"효과적인 업무 관리\", \"고객 응대 전략\", \"TPM\", \"Technical Project Management\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/8/querypie-product-managers",
         "/features/documentation/blog/3/querypie-team-success-secrets",
@@ -206,11 +142,7 @@
         "description": "TPM팀은 QueryPie 솔루션을 사용하는 모든 고객과 파트너사가 예기치 않은 문제로 인해 비즈니스가 멈추는 일이 없도록 항상 준비된 태도로 지원을 아끼지 않고 있어요. 그렇다면, TPM팀의 하루는 어떤 모습일까요? 함께 살펴보시죠!",
         "date": "2024-11-22",
         "author": "skipper",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-10.webp",
-=======
-        "ogImage": "public/blog/b-thumb-10.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -232,7 +164,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-10.webp",
           "webPath": "/documentation/blogs/b-thumb-10.webp"
         },
@@ -255,30 +186,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog10-image-4.webp",
           "webPath": "/documentation/blogs/blog10-image-4.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-10.webp",
-          "webPath": "/blog/b-thumb-10.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-1.webp",
-          "webPath": "/blog/blog10-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-2.webp",
-          "webPath": "/blog/blog10-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-3.webp",
-          "webPath": "/blog/blog10-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog10-image-4.webp",
-          "webPath": "/blog/blog10-image-4.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/customer-centric-tpm-life--10/ja.mdx",
@@ -294,13 +201,8 @@
         "チームの成功"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-10.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie TPM チームの一日を覗いてみよう: 顧客獲得の秘訣公開\"\ndescription: \"お客様の信頼を勝ち取り、効果的な戦略で優れた結果を出す QueryPie TPM チームの日々の取り組みを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"skipper\"\nogImage: \"public/documentation/blogs/b-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"TPM戦略\", \"お客様の信頼\", \"効果的な日常管理\", \"チームの成功\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
-=======
-      "ogImage": "/blog/b-thumb-10.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie TPM チームの一日を覗いてみよう: 顧客獲得の秘訣公開\"\ndescription: \"お客様の信頼を勝ち取り、効果的な戦略で優れた結果を出す QueryPie TPM チームの日々の取り組みを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"skipper\"\nogImage: \"public/blog/b-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"TPM戦略\", \"お客様の信頼\", \"効果的な日常管理\", \"チームの成功\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/8/querypie-product-managers",
         "/features/documentation/blog/3/querypie-team-success-secrets",
@@ -315,11 +217,7 @@
         "description": "お客様の信頼を勝ち取り、効果的な戦略で優れた結果を出す QueryPie TPM チームの日々の取り組みを紹介します。",
         "date": "2024-11-22",
         "author": "skipper",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-10.webp",
-=======
-        "ogImage": "public/blog/b-thumb-10.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "TPM戦略",

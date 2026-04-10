@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-11-en.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-11-en.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-11-en.webp",
-          "webPath": "/demo/aip-use-case-thumb-11-en.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/aircraft-maintenance-ai-agent--17/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-11-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Aircraft Maintenance AI Agent\"\ndescription: \"An AI agent that accelerates aircraft maintenance by turning logs, manuals, and sensor data into diagnostic insights and work orders—improving safety, uptime, and compliance.\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-11-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/15/factory-iot-ai-agent\"\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-11-en.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Aircraft Maintenance AI Agent\"\ndescription: \"An AI agent that accelerates aircraft maintenance by turning logs, manuals, and sensor data into diagnostic insights and work orders—improving safety, uptime, and compliance.\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/aip-use-case-thumb-11-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/15/factory-iot-ai-agent\"\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/15/factory-iot-ai-agent",
         "/features/demo/use-cases/16/dev-insight-ai-agent",
@@ -50,11 +40,7 @@
         "title": "AIP Use Case: Aircraft Maintenance AI Agent",
         "description": "An AI agent that accelerates aircraft maintenance by turning logs, manuals, and sensor data into diagnostic insights and work orders—improving safety, uptime, and compliance.",
         "date": "2025-10-15",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-11-en.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-11-en.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -68,13 +54,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-11-ja.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-11-ja.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-11-ja.webp",
-          "webPath": "/demo/aip-use-case-thumb-11-ja.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/aircraft-maintenance-ai-agent--17/ja.mdx",
@@ -84,13 +65,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-11-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 航空機整備AIエージェント\"\ndescription: \"ログ、マニュアル、センサーデータを診断インサイトと作業指示（ワークオーダー）に変換し、航空機の安全性、稼働率、コンプライアンスを向上させるAIエージェント。\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-11-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/15/factory-iot-ai-agent\"\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-11-ja.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 航空機整備AIエージェント\"\ndescription: \"ログ、マニュアル、センサーデータを診断インサイトと作業指示（ワークオーダー）に変換し、航空機の安全性、稼働率、コンプライアンスを向上させるAIエージェント。\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/aip-use-case-thumb-11-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/15/factory-iot-ai-agent\"\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/15/factory-iot-ai-agent",
         "/features/demo/use-cases/16/dev-insight-ai-agent",
@@ -104,11 +80,7 @@
         "title": "AIP活用事例： 航空機整備AIエージェント",
         "description": "ログ、マニュアル、センサーデータを診断インサイトと作業指示（ワークオーダー）に変換し、航空機の安全性、稼働率、コンプライアンスを向上させるAIエージェント。",
         "date": "2025-10-15",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-11-ja.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-11-ja.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

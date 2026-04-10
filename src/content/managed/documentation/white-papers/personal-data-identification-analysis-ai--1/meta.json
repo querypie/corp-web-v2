@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-1.webp",
           "webPath": "/documentation/white-papers/wp-thumb-1.webp"
         },
@@ -32,25 +31,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp1-3-data-collection-and-refinement.webp",
           "webPath": "/documentation/white-papers/wp1-3-data-collection-and-refinement.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-1.webp",
-          "webPath": "/white-paper/wp-thumb-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp1-1-regex-analysis-challenge.webp",
-          "webPath": "/white-paper/wp1-1-regex-analysis-challenge.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp1-2-solution-components-overview.webp",
-          "webPath": "/white-paper/wp1-2-solution-components-overview.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp1-3-data-collection-and-refinement.webp",
-          "webPath": "/white-paper/wp1-3-data-collection-and-refinement.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/personal-data-identification-analysis-ai--1/en.mdx",
@@ -66,13 +46,8 @@
         "privacy management"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Improving Personal Data Identification and Analysis with AI\"\ndescription: \"Utilize QueryPie's AI to analyze personal data, ensuring better privacy management and regulatory compliance.\"\ndate: \"2024-11-22\"\nauthor: \"kurt\"\nogImage: \"public/documentation/white-papers/wp-thumb-1.webp\"\nkeywords: [\"QueryPie\", \"AI-powered data analysis\", \"personal data analysis\", \"compliance\", \"privacy management\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-1.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Improving Personal Data Identification and Analysis with AI\"\ndescription: \"Utilize QueryPie's AI to analyze personal data, ensuring better privacy management and regulatory compliance.\"\ndate: \"2024-11-22\"\nauthor: \"kurt\"\nogImage: \"public/white-paper/wp-thumb-1.webp\"\nkeywords: [\"QueryPie\", \"AI-powered data analysis\", \"personal data analysis\", \"compliance\", \"privacy management\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/3/parsing-sql-query-structural-interface",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -87,11 +62,7 @@
         "description": "Utilize QueryPie's AI to analyze personal data, ensuring better privacy management and regulatory compliance.",
         "date": "2024-11-22",
         "author": "kurt",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-1.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-1.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "AI-powered data analysis",
@@ -110,7 +81,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-1.webp",
           "webPath": "/documentation/white-papers/wp-thumb-1.webp"
         },
@@ -128,25 +98,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp1-3-data-collection-and-refinement.webp",
           "webPath": "/documentation/white-papers/wp1-3-data-collection-and-refinement.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-1.webp",
-          "webPath": "/white-paper/wp-thumb-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp1-1-regex-analysis-challenge.webp",
-          "webPath": "/white-paper/wp1-1-regex-analysis-challenge.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp1-2-solution-components-overview.webp",
-          "webPath": "/white-paper/wp1-2-solution-components-overview.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp1-3-data-collection-and-refinement.webp",
-          "webPath": "/white-paper/wp1-3-data-collection-and-refinement.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/personal-data-identification-analysis-ai--1/ko.mdx",
@@ -163,13 +114,8 @@
         "프라이버시 관리"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"databases\"\ntitle: \"AI를 통한 개인정보 식별 및 분석 개선\"\ndescription: \"쿼리파이의 AI를 활용하여 개인 데이터를 분석하고, 더 나은 프라이버시 관리와 규제 준수를 보장하는 방법을 알아보세요.\"\ndate: \"2024-11-22\"\nauthor: \"kurt\"\nogImage: \"public/documentation/white-papers/wp-thumb-1.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"AI 기반 데이터 분석\", \"개인 데이터 분석\", \"규제 준수\", \"프라이버시 관리\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-1.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"databases\"\ntitle: \"AI를 통한 개인정보 식별 및 분석 개선\"\ndescription: \"쿼리파이의 AI를 활용하여 개인 데이터를 분석하고, 더 나은 프라이버시 관리와 규제 준수를 보장하는 방법을 알아보세요.\"\ndate: \"2024-11-22\"\nauthor: \"kurt\"\nogImage: \"public/white-paper/wp-thumb-1.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"AI 기반 데이터 분석\", \"개인 데이터 분석\", \"규제 준수\", \"프라이버시 관리\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/3/parsing-sql-query-structural-interface",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -184,11 +130,7 @@
         "description": "쿼리파이의 AI를 활용하여 개인 데이터를 분석하고, 더 나은 프라이버시 관리와 규제 준수를 보장하는 방법을 알아보세요.",
         "date": "2024-11-22",
         "author": "kurt",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-1.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-1.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -208,7 +150,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-1.webp",
           "webPath": "/documentation/white-papers/wp-thumb-1.webp"
         },
@@ -226,25 +167,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp1-3-data-collection-and-refinement.webp",
           "webPath": "/documentation/white-papers/wp1-3-data-collection-and-refinement.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-1.webp",
-          "webPath": "/white-paper/wp-thumb-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp1-1-regex-analysis-challenge.webp",
-          "webPath": "/white-paper/wp1-1-regex-analysis-challenge.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp1-2-solution-components-overview.webp",
-          "webPath": "/white-paper/wp1-2-solution-components-overview.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp1-3-data-collection-and-refinement.webp",
-          "webPath": "/white-paper/wp1-3-data-collection-and-refinement.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/personal-data-identification-analysis-ai--1/ja.mdx",
@@ -260,13 +182,8 @@
         "プライバシー管理"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"databases\"\ntitle: \"AI による個人情報の識別と分析改善\"\ndescription: \"QueryPie の AI を活用して個人データを分析し、より優れたプライバシー管理と規制遵守を実現します。\"\ndate: \"2024-11-22\"\nauthor: \"kurt\"\nogImage: \"public/documentation/white-papers/wp-thumb-1.webp\"\nkeywords: [\"QueryPie\", \"AIによるデータ分析\", \"個人データのプライバシー\", \"コンプライアンス\", \"プライバシー管理\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-1.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"databases\"\ntitle: \"AI による個人情報の識別と分析改善\"\ndescription: \"QueryPie の AI を活用して個人データを分析し、より優れたプライバシー管理と規制遵守を実現します。\"\ndate: \"2024-11-22\"\nauthor: \"kurt\"\nogImage: \"public/white-paper/wp-thumb-1.webp\"\nkeywords: [\"QueryPie\", \"AIによるデータ分析\", \"個人データのプライバシー\", \"コンプライアンス\", \"プライバシー管理\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/3/parsing-sql-query-structural-interface",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -281,11 +198,7 @@
         "description": "QueryPie の AI を活用して個人データを分析し、より優れたプライバシー管理と規制遵守を実現します。",
         "date": "2024-11-22",
         "author": "kurt",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-1.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-1.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "AIによるデータ分析",

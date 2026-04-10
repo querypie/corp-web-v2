@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/tu-thumb-dac-4.webp",
           "webPath": "/demo/acp-features/tu-thumb-dac-4.webp"
-=======
-          "sourcePath": "public/tutorial/tu-thumb-dac-4.webp",
-          "webPath": "/tutorial/tu-thumb-dac-4.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/apply-data-access-policies--21/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/tu-thumb-dac-4.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Apply Data Access Policies\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-4.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"",
-=======
-      "ogImage": "/tutorial/tu-thumb-dac-4.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Apply Data Access Policies\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-4.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/22/use-web-editor",
         "/features/demo/acp-features/20/apply-data-masking-policies",
@@ -50,11 +40,7 @@
         "title": "How to Apply Data Access Policies",
         "description": "",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/tu-thumb-dac-4.webp",
-=======
-        "ogImage": "public/tutorial/tu-thumb-dac-4.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -68,13 +54,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/tu-thumb-dac-4.webp",
           "webPath": "/demo/acp-features/tu-thumb-dac-4.webp"
-=======
-          "sourcePath": "public/tutorial/tu-thumb-dac-4.webp",
-          "webPath": "/tutorial/tu-thumb-dac-4.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/apply-data-access-policies--21/ko.mdx",
@@ -84,13 +65,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/tu-thumb-dac-4.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"데이터 접근 제한 정책 설정하기\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-4.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"",
-=======
-      "ogImage": "/tutorial/tu-thumb-dac-4.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"데이터 접근 제한 정책 설정하기\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-4.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/22/use-web-editor",
         "/features/demo/acp-features/20/apply-data-masking-policies",
@@ -104,11 +80,7 @@
         "title": "데이터 접근 제한 정책 설정하기",
         "description": "",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/tu-thumb-dac-4.webp",
-=======
-        "ogImage": "public/tutorial/tu-thumb-dac-4.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -122,13 +94,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/tu-thumb-dac-4.webp",
           "webPath": "/demo/acp-features/tu-thumb-dac-4.webp"
-=======
-          "sourcePath": "public/tutorial/tu-thumb-dac-4.webp",
-          "webPath": "/tutorial/tu-thumb-dac-4.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/apply-data-access-policies--21/ja.mdx",
@@ -138,13 +105,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/tu-thumb-dac-4.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"データアクセスポリシーを適用する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-4.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"",
-=======
-      "ogImage": "/tutorial/tu-thumb-dac-4.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"データアクセスポリシーを適用する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-4.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/19/submit-db-access-workflow\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/22/use-web-editor",
         "/features/demo/acp-features/20/apply-data-masking-policies",
@@ -158,11 +120,7 @@
         "title": "データアクセスポリシーを適用する方法",
         "description": "",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/tu-thumb-dac-4.webp",
-=======
-        "ogImage": "public/tutorial/tu-thumb-dac-4.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

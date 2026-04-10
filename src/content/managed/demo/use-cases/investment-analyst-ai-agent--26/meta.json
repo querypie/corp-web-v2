@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-20-en.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-20-en.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-20-en.webp",
-          "webPath": "/demo/aip-use-case-thumb-20-en.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/investment-analyst-ai-agent--26/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-20-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Investment Analyst AI Agent\"\ndescription: \"An AI agent that accelerates investment research—screening, modeling, and coverage updates—by turning natural language into analyst-grade insights and artifacts.\"\ndate: \"2025-11-11\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-20-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/23/aws-inspector-ai-agent\"\n  - “/features/demo/use-cases/24/aws-solutions-architect-ai-agent”\n  - \"/features/demo/use-cases/25/portfolio-insight-ai-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-20-en.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Investment Analyst AI Agent\"\ndescription: \"An AI agent that accelerates investment research—screening, modeling, and coverage updates—by turning natural language into analyst-grade insights and artifacts.\"\ndate: \"2025-11-11\"\nogImage: \"public/demo/aip-use-case-thumb-20-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/23/aws-inspector-ai-agent\"\n  - “/features/demo/use-cases/24/aws-solutions-architect-ai-agent”\n  - \"/features/demo/use-cases/25/portfolio-insight-ai-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/23/aws-inspector-ai-agent",
         "“/features/demo/use-cases/24/aws-solutions-architect-ai-agent”",
@@ -50,11 +40,7 @@
         "title": "AIP Use Case: Investment Analyst AI Agent",
         "description": "An AI agent that accelerates investment research—screening, modeling, and coverage updates—by turning natural language into analyst-grade insights and artifacts.",
         "date": "2025-11-11",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-20-en.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-20-en.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -68,13 +54,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-20-ja.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-20-ja.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-20-ja.webp",
-          "webPath": "/demo/aip-use-case-thumb-20-ja.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/investment-analyst-ai-agent--26/ja.mdx",
@@ -84,13 +65,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-20-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 投資アナリストAIエージェント\"\ndescription: \"自然言語で指示するだけで、スクリーニングからモデル更新、決算要約、レポート作成までを自動化する投資リサーチ向けAIエージェント。\"\ndate: \"2025-11-11\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-20-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/23/aws-inspector-ai-agent\"\n  - “/features/demo/use-cases/24/aws-solutions-architect-ai-agent”\n  - \"/features/demo/use-cases/25/portfolio-insight-ai-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-20-ja.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 投資アナリストAIエージェント\"\ndescription: \"自然言語で指示するだけで、スクリーニングからモデル更新、決算要約、レポート作成までを自動化する投資リサーチ向けAIエージェント。\"\ndate: \"2025-11-11\"\nogImage: \"public/demo/aip-use-case-thumb-20-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/23/aws-inspector-ai-agent\"\n  - “/features/demo/use-cases/24/aws-solutions-architect-ai-agent”\n  - \"/features/demo/use-cases/25/portfolio-insight-ai-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/23/aws-inspector-ai-agent",
         "“/features/demo/use-cases/24/aws-solutions-architect-ai-agent”",
@@ -104,11 +80,7 @@
         "title": "AIP活用事例： 投資アナリストAIエージェント",
         "description": "自然言語で指示するだけで、スクリーニングからモデル更新、決算要約、レポート作成までを自動化する投資リサーチ向けAIエージェント。",
         "date": "2025-11-11",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-20-ja.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-20-ja.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

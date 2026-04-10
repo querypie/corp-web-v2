@@ -4,7 +4,6 @@
   "categorySlug": "news",
   "contentType": "outlink",
   "dateIso": "2021-07-13",
-<<<<<<< HEAD
   "downloadCoverImageSrc": "",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
@@ -17,15 +16,6 @@
   "relatedIds": [],
   "section": "news",
   "sortOrder": 5,
-=======
-  "externalUrl": "https://robotic-process-automation.cioapplications.com/news/querypie-becomes-okta-integration-network-partner-in-korea-nid-8103.html",
-  "hideHeroImage": false,
-  "id": "querypie-becomes-okta-integration-network-partner-in-korea",
-  "imageSrc": "/uploads/news-4-1774976116233.webp",
-  "relatedIds": [],
-  "section": "news",
-  "sortOrder": 3,
->>>>>>> origin/main
   "status": "published",
   "storageId": "cnt_000012",
   "summary": {

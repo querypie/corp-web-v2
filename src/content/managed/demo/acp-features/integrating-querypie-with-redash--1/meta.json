@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/de-thumb-redash.webp",
           "webPath": "/demo/acp-features/de-thumb-redash.webp"
-=======
-          "sourcePath": "public/demo/de-thumb-redash.webp",
-          "webPath": "/demo/de-thumb-redash.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-redash--1/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/de-thumb-redash.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x Redash\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/acp-features/de-thumb-redash.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
-=======
-      "ogImage": "/demo/de-thumb-redash.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x Redash\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-redash.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/2/integrating-querypie-with-metabase",
         "/features/demo/acp-features/3/integrating-querypie-with-tableau"
@@ -49,11 +39,7 @@
         "title": "QueryPie x Redash",
         "description": "",
         "date": "2025-02-01",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/de-thumb-redash.webp",
-=======
-        "ogImage": "public/demo/de-thumb-redash.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -66,13 +52,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/de-thumb-redash.webp",
           "webPath": "/demo/acp-features/de-thumb-redash.webp"
-=======
-          "sourcePath": "public/demo/de-thumb-redash.webp",
-          "webPath": "/demo/de-thumb-redash.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-redash--1/ko.mdx",
@@ -82,13 +63,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/de-thumb-redash.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x Redash\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/acp-features/de-thumb-redash.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
-=======
-      "ogImage": "/demo/de-thumb-redash.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x Redash\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-redash.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/2/integrating-querypie-with-metabase",
         "/features/demo/acp-features/3/integrating-querypie-with-tableau"
@@ -101,11 +77,7 @@
         "title": "QueryPie x Redash",
         "description": "",
         "date": "2025-02-01",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/de-thumb-redash.webp",
-=======
-        "ogImage": "public/demo/de-thumb-redash.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -118,13 +90,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/de-thumb-redash.webp",
           "webPath": "/demo/acp-features/de-thumb-redash.webp"
-=======
-          "sourcePath": "public/demo/de-thumb-redash.webp",
-          "webPath": "/demo/de-thumb-redash.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-redash--1/ja.mdx",
@@ -134,13 +101,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/de-thumb-redash.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x Redash\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/acp-features/de-thumb-redash.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
-=======
-      "ogImage": "/demo/de-thumb-redash.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x Redash\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-redash.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/2/integrating-querypie-with-metabase",
         "/features/demo/acp-features/3/integrating-querypie-with-tableau"
@@ -153,11 +115,7 @@
         "title": "QueryPie x Redash",
         "description": "",
         "date": "2025-02-01",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/de-thumb-redash.webp",
-=======
-        "ogImage": "public/demo/de-thumb-redash.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

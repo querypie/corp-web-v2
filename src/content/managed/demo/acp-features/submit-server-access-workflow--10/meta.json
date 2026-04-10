@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/tu-thumb-sac-5.webp",
           "webPath": "/demo/acp-features/tu-thumb-sac-5.webp"
-=======
-          "sourcePath": "public/tutorial/tu-thumb-sac-5.webp",
-          "webPath": "/tutorial/tu-thumb-sac-5.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/submit-server-access-workflow--10/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/tu-thumb-sac-5.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Submit a Workflow for Servers Access Requests\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-sac-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"",
-=======
-      "ogImage": "/tutorial/tu-thumb-sac-5.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Submit a Workflow for Servers Access Requests\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-sac-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/11/use-web-terminal",
         "/features/demo/acp-features/9/submit-role-access-workflow",
@@ -50,11 +40,7 @@
         "title": "How to Submit a Workflow for Servers Access Requests",
         "description": "",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/tu-thumb-sac-5.webp",
-=======
-        "ogImage": "public/tutorial/tu-thumb-sac-5.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -68,13 +54,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/tu-thumb-sac-5.webp",
           "webPath": "/demo/acp-features/tu-thumb-sac-5.webp"
-=======
-          "sourcePath": "public/tutorial/tu-thumb-sac-5.webp",
-          "webPath": "/tutorial/tu-thumb-sac-5.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/submit-server-access-workflow--10/ko.mdx",
@@ -84,13 +65,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/tu-thumb-sac-5.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"서버 접근 권한 요청하기\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-sac-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"",
-=======
-      "ogImage": "/tutorial/tu-thumb-sac-5.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"서버 접근 권한 요청하기\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-sac-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/11/use-web-terminal",
         "/features/demo/acp-features/9/submit-role-access-workflow",
@@ -104,11 +80,7 @@
         "title": "서버 접근 권한 요청하기",
         "description": "",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/tu-thumb-sac-5.webp",
-=======
-        "ogImage": "public/tutorial/tu-thumb-sac-5.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -122,13 +94,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/tu-thumb-sac-5.webp",
           "webPath": "/demo/acp-features/tu-thumb-sac-5.webp"
-=======
-          "sourcePath": "public/tutorial/tu-thumb-sac-5.webp",
-          "webPath": "/tutorial/tu-thumb-sac-5.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/submit-server-access-workflow--10/ja.mdx",
@@ -138,13 +105,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/tu-thumb-sac-5.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"サーバーアクセスリクエストのワークフローを提出する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-sac-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"",
-=======
-      "ogImage": "/tutorial/tu-thumb-sac-5.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"サーバーアクセスリクエストのワークフローを提出する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-sac-5.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/11/use-web-terminal",
         "/features/demo/acp-features/9/submit-role-access-workflow",
@@ -158,11 +120,7 @@
         "title": "サーバーアクセスリクエストのワークフローを提出する方法",
         "description": "",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/tu-thumb-sac-5.webp",
-=======
-        "ogImage": "public/tutorial/tu-thumb-sac-5.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

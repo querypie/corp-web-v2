@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 import { getLocalePath, type Locale } from "@/constants/i18n";
 import demoContentSeed from "../../content/demo/content-seed.json";
 import docsContentSeed from "../../content/documentation/content-seed.json";
-=======
-import type { Locale } from "@/constants/i18n";
-import demoContentSeed from "../../content/demo/content-seed.json";
-import docsContentSeed from "../../content/docs/content-seed.json";
->>>>>>> origin/main
 import newsAuthoredContentSeed from "../../content/news/content-seed.json";
 import managedContentSeed from "../../content/managed/content-seed.json";
 import {
@@ -21,10 +15,7 @@ export type ManagedContentSection = "demo" | "documentation" | "news";
 export type ManagedContentStatus = "hidden" | "published";
 export type ManagedContentCategorySlug = Exclude<DemoCategorySlug | DocsCategorySlug, "all"> | NewsCategorySlug;
 export type ManagedContentType = "content" | "outlink";
-<<<<<<< HEAD
 export type WhitePaperGatingLevel = "none" | "10" | "30" | "50";
-=======
->>>>>>> origin/main
 export type LocalizedContent = Record<Locale, string>;
 
 export type ManagedContentEntry = {
@@ -42,10 +33,7 @@ export type ManagedContentEntry = {
   downloadPdfSrc: string;
   enableDownloadButton: boolean;
   externalUrl: string;
-<<<<<<< HEAD
   gatingLevel: WhitePaperGatingLevel;
-=======
->>>>>>> origin/main
   hideHeroImage: boolean;
   id: string;
   imageSrc: string;
@@ -103,11 +91,7 @@ const initialUseCaseSeeds: LegacyUseCaseSeed[] = [
     categorySlug: "use-cases",
     dateIso: "2026-03-15",
     id: "seo-analysis",
-<<<<<<< HEAD
     imageSrc: "/images/common/fallback-contents.jpg",
-=======
-    imageSrc: "/uploads/article-01.png",
->>>>>>> origin/main
     status: "published",
     title:
       "SEO analysis, once considered the domain of specialists, can now be handled by an AIP agent.",
@@ -131,11 +115,7 @@ const initialUseCaseSeeds: LegacyUseCaseSeed[] = [
     categorySlug: "use-cases",
     dateIso: "2026-03-12",
     id: "guardrail-design",
-<<<<<<< HEAD
     imageSrc: "/images/common/fallback-contents.jpg",
-=======
-    imageSrc: "/uploads/article-02.png",
->>>>>>> origin/main
     status: "published",
     title:
       "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
@@ -147,11 +127,7 @@ const initialUseCaseSeeds: LegacyUseCaseSeed[] = [
     categorySlug: "use-cases",
     dateIso: "2026-03-08",
     id: "ai-security-map",
-<<<<<<< HEAD
     imageSrc: "/images/common/fallback-contents.jpg",
-=======
-    imageSrc: "/uploads/article-03.png",
->>>>>>> origin/main
     status: "hidden",
     title:
       "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
@@ -163,11 +139,7 @@ const initialUseCaseSeeds: LegacyUseCaseSeed[] = [
     categorySlug: "use-cases",
     dateIso: "2026-03-05",
     id: "workflow-blueprint",
-<<<<<<< HEAD
     imageSrc: "/images/common/fallback-contents.jpg",
-=======
-    imageSrc: "/uploads/article-01.png",
->>>>>>> origin/main
     status: "published",
     title:
       "Operational AI readiness checklist for teams moving from prototype to production.",
@@ -199,10 +171,7 @@ export function createEmptyManagedContentDraft(
     downloadPdfSrc: "",
     enableDownloadButton: false,
     externalUrl: "",
-<<<<<<< HEAD
     gatingLevel: "none",
-=======
->>>>>>> origin/main
     hideHeroImage: false,
     id: "new",
     imageSrc: "",
@@ -429,16 +398,12 @@ function normalizeManagedSeedEntry(entry: Partial<ManagedContentEntry>): Managed
     contentFormat: entry.contentFormat ?? "markdown",
     contentType: entry.contentType ?? (entry.section === "news" ? "outlink" : "content"),
     dateIso: entry.dateIso ?? "",
-<<<<<<< HEAD
     downloadCoverImageSrc: entry.downloadCoverImageSrc ?? "",
     downloadPdfFileName: entry.downloadPdfFileName ?? "",
     downloadPdfSrc: entry.downloadPdfSrc ?? "",
     enableDownloadButton: entry.enableDownloadButton ?? false,
     externalUrl: entry.externalUrl ?? "",
     gatingLevel: entry.gatingLevel ?? "none",
-=======
-    externalUrl: entry.externalUrl ?? "",
->>>>>>> origin/main
     hideHeroImage: entry.hideHeroImage ?? false,
     id: entry.id ?? "",
     imageSrc: entry.imageSrc ?? "",

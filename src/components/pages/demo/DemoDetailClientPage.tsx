@@ -5,11 +5,7 @@ import type { Locale } from "@/constants/i18n";
 import type { DocsDetailPageProps } from "../documentation/DocumentationDetailPage";
 import { useManagedContents } from "@/features/content/clientStore";
 import useHydrated from "@/hooks/useHydrated";
-<<<<<<< HEAD
 import { demoCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/features/content/config";
-=======
-import { demoCategoryConfigs, getCategoryLabel } from "@/features/content/config";
->>>>>>> origin/main
 import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, type ManagedContentEntry } from "@/features/content/data";
 
 type DemoDetailClientPageProps = {
@@ -26,12 +22,8 @@ export default function DemoDetailClientPage({
   slug,
 }: DemoDetailClientPageProps) {
   const resolvedSlug = decodeURIComponent(slug);
-<<<<<<< HEAD
   const managedItems = useManagedContents("demo", initialItems) ?? [];
   const items = managedItems.filter((item) => item.status === "published");
-=======
-  const items = useManagedContents("demo", initialItems).filter((item) => item.status === "published");
->>>>>>> origin/main
   const isHydrated = useHydrated();
 
   const currentIndex = items.findIndex((item) => item.id === resolvedSlug);

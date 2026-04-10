@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-18-en.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-18-en.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-18-en.webp",
-          "webPath": "/demo/aip-use-case-thumb-18-en.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/aws-solutions-architect-ai-agent--24/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-18-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: AWS Solutions Architect AI Agent\"\ndescription: \"An AI agent that designs and validates AWS architectures—proposing patterns, estimating cost, and checking best practices through natural language.\"\ndate: \"2025-11-05\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-18-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/22/aws-log-analytics-agent\"\n  - \"/features/demo/use-cases/23/aws-inspector-ai-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-18-en.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: AWS Solutions Architect AI Agent\"\ndescription: \"An AI agent that designs and validates AWS architectures—proposing patterns, estimating cost, and checking best practices through natural language.\"\ndate: \"2025-11-05\"\nogImage: \"public/demo/aip-use-case-thumb-18-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/22/aws-log-analytics-agent\"\n  - \"/features/demo/use-cases/23/aws-inspector-ai-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/16/dev-insight-ai-agent",
         "/features/demo/use-cases/22/aws-log-analytics-agent",
@@ -50,11 +40,7 @@
         "title": "AIP Use Case: AWS Solutions Architect AI Agent",
         "description": "An AI agent that designs and validates AWS architectures—proposing patterns, estimating cost, and checking best practices through natural language.",
         "date": "2025-11-05",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-18-en.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-18-en.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -68,13 +54,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-18-ja.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-18-ja.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-18-ja.webp",
-          "webPath": "/demo/aip-use-case-thumb-18-ja.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/aws-solutions-architect-ai-agent--24/ja.mdx",
@@ -84,13 +65,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-18-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： AWSソリューションアーキテクトAIエージェント\"\ndescription: \"自然言語でパターン提案、コスト見積もり、ベストプラクティス検証を行い、AWSアーキテクチャを設計・妥当性確認するAIエージェント。\"\ndate: \"2025-11-10\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-18-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/22/aws-log-analytics-agent\"\n  - \"/features/demo/use-cases/23/aws-inspector-ai-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-18-ja.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： AWSソリューションアーキテクトAIエージェント\"\ndescription: \"自然言語でパターン提案、コスト見積もり、ベストプラクティス検証を行い、AWSアーキテクチャを設計・妥当性確認するAIエージェント。\"\ndate: \"2025-11-10\"\nogImage: \"public/demo/aip-use-case-thumb-18-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/22/aws-log-analytics-agent\"\n  - \"/features/demo/use-cases/23/aws-inspector-ai-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/16/dev-insight-ai-agent",
         "/features/demo/use-cases/22/aws-log-analytics-agent",
@@ -104,11 +80,7 @@
         "title": "AIP活用事例： AWSソリューションアーキテクトAIエージェント",
         "description": "自然言語でパターン提案、コスト見積もり、ベストプラクティス検証を行い、AWSアーキテクチャを設計・妥当性確認するAIエージェント。",
         "date": "2025-11-10",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-18-ja.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-18-ja.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

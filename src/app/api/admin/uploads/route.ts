@@ -20,7 +20,6 @@ function sanitizeBaseName(fileName: string) {
   return sanitized || "upload";
 }
 
-<<<<<<< HEAD
 async function createUniqueFilePath(dirPath: string, baseName: string) {
   let index = 1;
   let nextName = `${baseName}.webp`;
@@ -70,11 +69,6 @@ export async function POST(request: Request) {
   const rawCategorySlug = formData.get("categorySlug");
   const section = typeof rawSection === "string" ? rawSection : null;
   const categorySlug = typeof rawCategorySlug === "string" ? rawCategorySlug : null;
-=======
-export async function POST(request: Request) {
-  const formData = await request.formData();
-  const file = formData.get("file");
->>>>>>> origin/main
 
   if (!(file instanceof File)) {
     return NextResponse.json({ error: "File is required." }, { status: 400 });
@@ -84,29 +78,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unsupported file type." }, { status: 400 });
   }
 
-<<<<<<< HEAD
   const dirName = resolveUploadDirName(section, categorySlug);
   const uploadsDir = path.join(process.cwd(), "public", dirName);
   const baseName = sanitizeBaseName(file.name);
-=======
-  const uploadsDir = path.join(process.cwd(), "public", "uploads");
-  const fileName = `${sanitizeBaseName(file.name)}-${Date.now()}.webp`;
-  const filePath = path.join(uploadsDir, fileName);
->>>>>>> origin/main
   const bytes = Buffer.from(await file.arrayBuffer());
   const optimizedImage = await sharp(bytes)
     .webp({ effort: 4, quality: 80 })
     .toBuffer();
 
   await fs.mkdir(uploadsDir, { recursive: true });
-<<<<<<< HEAD
   const { fileName, filePath } = await createUniqueFilePath(uploadsDir, baseName);
   await fs.writeFile(filePath, optimizedImage);
 
   return NextResponse.json({ src: `/${dirName}/${fileName}` });
-=======
-  await fs.writeFile(filePath, optimizedImage);
-
-  return NextResponse.json({ src: `/uploads/${fileName}` });
->>>>>>> origin/main
 }

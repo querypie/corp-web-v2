@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/webinars/wb-thumb-3.webp",
           "webPath": "/demo/webinars/wb-thumb-3.webp"
-=======
-          "sourcePath": "public/webinar/wb-thumb-3.webp",
-          "webPath": "/webinar/wb-thumb-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/device-security-mdm-kandji--3/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/webinars/wb-thumb-3.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Achieving device security through MDM: Kandji x QueryPie\"\ndescription: \"In this webinar, our security experts Brant Hwang (CEO, QueryPie) and Kenny Park (CISO, QueryPie) discuss how to secure your Apple devices and utilize Kandji’s powerful, purpose-built tools to create an intuitive, streamlined experience for admins and users alike.\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/webinars/wb-thumb-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/5/ztna-security-prisma-access\"",
-=======
-      "ogImage": "/webinar/wb-thumb-3.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Achieving device security through MDM: Kandji x QueryPie\"\ndescription: \"In this webinar, our security experts Brant Hwang (CEO, QueryPie) and Kenny Park (CISO, QueryPie) discuss how to secure your Apple devices and utilize Kandji’s powerful, purpose-built tools to create an intuitive, streamlined experience for admins and users alike.\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/5/ztna-security-prisma-access\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/1/cloud-certification-shortest-path",
         "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
@@ -50,11 +40,7 @@
         "title": "Achieving device security through MDM: Kandji x QueryPie",
         "description": "In this webinar, our security experts Brant Hwang (CEO, QueryPie) and Kenny Park (CISO, QueryPie) discuss how to secure your Apple devices and utilize Kandji’s powerful, purpose-built tools to create an intuitive, streamlined experience for admins and users alike.",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/webinars/wb-thumb-3.webp",
-=======
-        "ogImage": "public/webinar/wb-thumb-3.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -68,13 +54,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/webinars/wb-thumb-3.webp",
           "webPath": "/demo/webinars/wb-thumb-3.webp"
-=======
-          "sourcePath": "public/webinar/wb-thumb-3.webp",
-          "webPath": "/webinar/wb-thumb-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/device-security-mdm-kandji--3/ko.mdx",
@@ -84,13 +65,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/webinars/wb-thumb-3.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"MDM을 통한 디바이스 보안의 완성: Kandji x QueryPie\"\ndescription: \"이번 웨비나에서는 보안 전문가인 Brant(CEO, QueryPie)와 Kenny(CISO, QueryPie)가 Apple 디바이스를 보안하는 방법과 Kandji의 강력한 맞춤형 도구를 활용해 관리자가 사용자에게 직관적이고 효율적인 경험을 제공하는 방법을 다룹니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/webinars/wb-thumb-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/5/ztna-security-prisma-access\"",
-=======
-      "ogImage": "/webinar/wb-thumb-3.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"MDM을 통한 디바이스 보안의 완성: Kandji x QueryPie\"\ndescription: \"이번 웨비나에서는 보안 전문가인 Brant(CEO, QueryPie)와 Kenny(CISO, QueryPie)가 Apple 디바이스를 보안하는 방법과 Kandji의 강력한 맞춤형 도구를 활용해 관리자가 사용자에게 직관적이고 효율적인 경험을 제공하는 방법을 다룹니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/5/ztna-security-prisma-access\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/1/cloud-certification-shortest-path",
         "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
@@ -104,11 +80,7 @@
         "title": "MDM을 통한 디바이스 보안의 완성: Kandji x QueryPie",
         "description": "이번 웨비나에서는 보안 전문가인 Brant(CEO, QueryPie)와 Kenny(CISO, QueryPie)가 Apple 디바이스를 보안하는 방법과 Kandji의 강력한 맞춤형 도구를 활용해 관리자가 사용자에게 직관적이고 효율적인 경험을 제공하는 방법을 다룹니다.",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/webinars/wb-thumb-3.webp",
-=======
-        "ogImage": "public/webinar/wb-thumb-3.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -122,13 +94,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/webinars/wb-thumb-3.webp",
           "webPath": "/demo/webinars/wb-thumb-3.webp"
-=======
-          "sourcePath": "public/webinar/wb-thumb-3.webp",
-          "webPath": "/webinar/wb-thumb-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/device-security-mdm-kandji--3/ja.mdx",
@@ -138,13 +105,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/webinars/wb-thumb-3.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"MDM によるデバイスセキュリティの実現: Kandji x QueryPie\"\nhtmlTitle: \"MDM によるデバイスセキュリティの実現:<br />Kandji x QueryPie\"\ndescription: \"Iこのウェビナーでは、QueryPieのセキュリティ専門家であるBrant Hwang(CEO)とKenny Park(CISO)がApple機器のセキュリティ強化方法とKandjiの強力で特化されたツールを活用して管理者とユーザーの両方に直観的で簡素化された経験を提供する方法について議論します。\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/webinars/wb-thumb-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/5/ztna-security-prisma-access\"",
-=======
-      "ogImage": "/webinar/wb-thumb-3.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"MDM によるデバイスセキュリティの実現: Kandji x QueryPie\"\nhtmlTitle: \"MDM によるデバイスセキュリティの実現:<br />Kandji x QueryPie\"\ndescription: \"Iこのウェビナーでは、QueryPieのセキュリティ専門家であるBrant Hwang(CEO)とKenny Park(CISO)がApple機器のセキュリティ強化方法とKandjiの強力で特化されたツールを活用して管理者とユーザーの両方に直観的で簡素化された経験を提供する方法について議論します。\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/wb-thumb-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/1/cloud-certification-shortest-path\"\n  - \"/features/demo/webinars/2/okta-paloalto-querypie-webinar\"\n  - \"/features/demo/webinars/5/ztna-security-prisma-access\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/1/cloud-certification-shortest-path",
         "/features/demo/webinars/2/okta-paloalto-querypie-webinar",
@@ -159,11 +121,7 @@
         "htmlTitle": "MDM によるデバイスセキュリティの実現:<br />Kandji x QueryPie",
         "description": "Iこのウェビナーでは、QueryPieのセキュリティ専門家であるBrant Hwang(CEO)とKenny Park(CISO)がApple機器のセキュリティ強化方法とKandjiの強力で特化されたツールを活用して管理者とユーザーの両方に直観的で簡素化された経験を提供する方法について議論します。",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/webinars/wb-thumb-3.webp",
-=======
-        "ogImage": "public/webinar/wb-thumb-3.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

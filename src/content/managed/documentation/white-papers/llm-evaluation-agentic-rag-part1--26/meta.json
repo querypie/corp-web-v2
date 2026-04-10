@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-26.webp",
           "webPath": "/documentation/white-papers/wp-thumb-26.webp"
         },
@@ -97,90 +96,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp26/table12-model-settings.webp",
           "webPath": "/documentation/white-papers/wp26/table12-model-settings.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-26.webp",
-          "webPath": "/white-paper/wp-thumb-26.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/fig1-pipeline-structure.webp",
-          "webPath": "/white-paper/wp26/fig1-pipeline-structure.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/fig2-nl-to-pseudocode-flow.webp",
-          "webPath": "/white-paper/wp26/fig2-nl-to-pseudocode-flow.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table1-nl-pseudocode-io-example.webp",
-          "webPath": "/white-paper/wp26/table1-nl-pseudocode-io-example.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table2-mfid-metadata-structure.webp",
-          "webPath": "/white-paper/wp26/table2-mfid-metadata-structure.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/fig3-embedding-model-eval.webp",
-          "webPath": "/white-paper/wp26/fig3-embedding-model-eval.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/fig4-mfid-mapping-flow.webp",
-          "webPath": "/white-paper/wp26/fig4-mfid-mapping-flow.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table3-task-comparison.webp",
-          "webPath": "/white-paper/wp26/table3-task-comparison.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table4-claude-family.webp",
-          "webPath": "/white-paper/wp26/table4-claude-family.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table5-gemini-family.webp",
-          "webPath": "/white-paper/wp26/table5-gemini-family.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table6-gpt-family.webp",
-          "webPath": "/white-paper/wp26/table6-gpt-family.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table7-model-summary.webp",
-          "webPath": "/white-paper/wp26/table7-model-summary.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table8-codegen-dataset.webp",
-          "webPath": "/white-paper/wp26/table8-codegen-dataset.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table9-rag-dataset.webp",
-          "webPath": "/white-paper/wp26/table9-rag-dataset.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table10-llm-judge-criteria.webp",
-          "webPath": "/white-paper/wp26/table10-llm-judge-criteria.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table11-token-pricing.webp",
-          "webPath": "/white-paper/wp26/table11-token-pricing.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp26/table12-model-settings.webp",
-          "webPath": "/white-paper/wp26/table12-model-settings.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/llm-evaluation-agentic-rag-part1--26/ja.mdx",
@@ -190,13 +105,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-26.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【前編】\"\ndescription: \"LLMのベンチマークを信じないでください。ドメインに最適化されたLLMを自ら評価・選定しましょう。日本の給与システムの実パイプラインを対象に、13のLLM構成を体系的に比較評価した研究の前編です。\"\ndate: \"2026-02-13\"\nauthor: \"edwin\"\nogImage: \"public/documentation/white-papers/wp-thumb-26.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\n  \"LLM比較評価\",\n  \"コード生成\",\n  \"Agentic RAG\",\n  \"給与システム\",\n  \"Claude\",\n  \"Gemini\",\n  \"GPT\",\n  \"Thinkingモード\",\n  \"パイプライン最適化\",\n  \"QueryPie AI\",\n  \"LLM-as-a-Judge\",\n  \"ドメイン特化\",\n  \"RAG\",\n  \"コスト効率性\"\n]\nrelatedPosts:\n  - \"/features/documentation/white-paper/27/llm-evaluation-agentic-rag-part2\"\n  - \"/features/documentation/white-paper/24/ai-tranformation-japan\"\n  - \"/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-26.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【前編】\"\ndescription: \"LLMのベンチマークを信じないでください。ドメインに最適化されたLLMを自ら評価・選定しましょう。日本の給与システムの実パイプラインを対象に、13のLLM構成を体系的に比較評価した研究の前編です。\"\ndate: \"2026-02-13\"\nauthor: \"edwin\"\nogImage: \"public/white-paper/wp-thumb-26.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\n  \"LLM比較評価\",\n  \"コード生成\",\n  \"Agentic RAG\",\n  \"給与システム\",\n  \"Claude\",\n  \"Gemini\",\n  \"GPT\",\n  \"Thinkingモード\",\n  \"パイプライン最適化\",\n  \"QueryPie AI\",\n  \"LLM-as-a-Judge\",\n  \"ドメイン特化\",\n  \"RAG\",\n  \"コスト効率性\"\n]\nrelatedPosts:\n  - \"/features/documentation/white-paper/27/llm-evaluation-agentic-rag-part2\"\n  - \"/features/documentation/white-paper/24/ai-tranformation-japan\"\n  - \"/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/27/llm-evaluation-agentic-rag-part2",
         "/features/documentation/white-paper/24/ai-tranformation-japan",
@@ -211,11 +121,7 @@
         "description": "LLMのベンチマークを信じないでください。ドメインに最適化されたLLMを自ら評価・選定しましょう。日本の給与システムの実パイプラインを対象に、13のLLM構成を体系的に比較評価した研究の前編です。",
         "date": "2026-02-13",
         "author": "edwin",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-26.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-26.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "keywords": "[",

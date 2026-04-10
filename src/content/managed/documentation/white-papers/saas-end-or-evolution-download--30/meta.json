@@ -16,13 +16,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp30-download-en.webp",
           "webPath": "/documentation/white-papers/wp30-download-en.webp"
-=======
-          "sourcePath": "public/white-paper/wp30-download-en.webp",
-          "webPath": "/white-paper/wp30-download-en.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/saas-end-or-evolution-download--30/en.mdx",
@@ -42,13 +37,8 @@
         "MCP"
       ],
       "layout": "ArticleType2",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp30-download-en.webp",
       "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"whitepaper\"\ntitle: \"The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents\"\ndescription: \"\"\nogImage: \"public/documentation/white-papers/wp30-download-en.webp\"\nkeywords:\n - \"QueryPie\"\n - \"QueryPie AI\"\n - \"Death of SaaS\"\n - \"AI agents\"\n - \"SaaS strategy\"\n - \"AI-native company\"\n - \"AI transformation\"\n - \"AI platform\"\n - \"MCP\"\ngatingForm:\n  title: \"Please fill out the form to unlock your exclusive content!\"\n  submitButtonLabel: \"Download Now\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/documents/QP_Whitepaper_The_Evolution_of_SaaS_EN.pdf\"",
-=======
-      "ogImage": "/white-paper/wp30-download-en.webp",
-      "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"whitepaper\"\ntitle: \"The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents\"\ndescription: \"\"\nogImage: \"public/white-paper/wp30-download-en.webp\"\nkeywords:\n - \"QueryPie\"\n - \"QueryPie AI\"\n - \"Death of SaaS\"\n - \"AI agents\"\n - \"SaaS strategy\"\n - \"AI-native company\"\n - \"AI transformation\"\n - \"AI platform\"\n - \"MCP\"\ngatingForm:\n  title: \"Please fill out the form to unlock your exclusive content!\"\n  submitButtonLabel: \"Download Now\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/documents/QP_Whitepaper_The_Evolution_of_SaaS_EN.pdf\"",
->>>>>>> origin/main
       "relatedPosts": [],
       "sourcePath": "documentation/white-paper/30/saas-end-or-evolution/download/en/content.mdx",
       "title": "The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents",
@@ -57,11 +47,7 @@
         "category": "whitepaper",
         "title": "The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents",
         "description": "",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp30-download-en.webp",
-=======
-        "ogImage": "public/white-paper/wp30-download-en.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "QueryPie AI",
@@ -85,13 +71,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp30-download-jp.webp",
           "webPath": "/documentation/white-papers/wp30-download-jp.webp"
-=======
-          "sourcePath": "public/white-paper/wp30-download-jp.webp",
-          "webPath": "/white-paper/wp30-download-jp.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/saas-end-or-evolution-download--30/ja.mdx",
@@ -113,13 +94,8 @@
         "MCP"
       ],
       "layout": "ArticleType2",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp30-download-jp.webp",
       "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"whitepaper\"\ntitle: \"SaaSの終焉か、進化か 〜AIエージェント時代にSaaS企業が取るべき戦略〜\"\ndescription: \"\"\nogImage: \"public/documentation/white-papers/wp30-download-jp.webp\"\nkeywords:\n - \"クエリパイ\"\n - \"クエリーパイ\"\n - \"クエリパイ AI\"\n - \"クエリーパイ AI\"\n - \"SaaSの終焉\"\n - \"AIエージェント\"\n - \"SaaS企業戦略\"\n - \"AI Native企業\"\n - \"AIトランスフォーメーション\"\n - \"AIプラットフォーム\"\n - \"MCP\"\ngatingForm:\n  title: \"限定コンテンツの入手には、フォームのご記入をお願いいたします。\"\n  submitButtonLabel: \"ダウンロードする\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/documents/QP_Whitepaper_SaaS_End_Or_Evolution_JP.pdf\"",
-=======
-      "ogImage": "/white-paper/wp30-download-jp.webp",
-      "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"whitepaper\"\ntitle: \"SaaSの終焉か、進化か 〜AIエージェント時代にSaaS企業が取るべき戦略〜\"\ndescription: \"\"\nogImage: \"public/white-paper/wp30-download-jp.webp\"\nkeywords:\n - \"クエリパイ\"\n - \"クエリーパイ\"\n - \"クエリパイ AI\"\n - \"クエリーパイ AI\"\n - \"SaaSの終焉\"\n - \"AIエージェント\"\n - \"SaaS企業戦略\"\n - \"AI Native企業\"\n - \"AIトランスフォーメーション\"\n - \"AIプラットフォーム\"\n - \"MCP\"\ngatingForm:\n  title: \"限定コンテンツの入手には、フォームのご記入をお願いいたします。\"\n  submitButtonLabel: \"ダウンロードする\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/documents/QP_Whitepaper_SaaS_End_Or_Evolution_JP.pdf\"",
->>>>>>> origin/main
       "relatedPosts": [],
       "sourcePath": "documentation/white-paper/30/saas-end-or-evolution/download/ja/content.mdx",
       "title": "SaaSの終焉か、進化か 〜AIエージェント時代にSaaS企業が取るべき戦略〜",
@@ -128,11 +104,7 @@
         "category": "whitepaper",
         "title": "SaaSの終焉か、進化か 〜AIエージェント時代にSaaS企業が取るべき戦略〜",
         "description": "",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp30-download-jp.webp",
-=======
-        "ogImage": "public/white-paper/wp30-download-jp.webp",
->>>>>>> origin/main
         "keywords": [
           "クエリパイ",
           "クエリーパイ",

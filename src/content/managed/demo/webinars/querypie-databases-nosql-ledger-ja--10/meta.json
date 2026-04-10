@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/webinars/3dk-ep2-ja.webp",
           "webPath": "/demo/webinars/3dk-ep2-ja.webp"
-=======
-          "sourcePath": "public/webinar/3dk-ep2-ja.webp",
-          "webPath": "/webinar/3dk-ep2-ja.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/querypie-databases-nosql-ledger-ja--10/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/webinars/3dk-ep2-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ\"\ndescription: \"蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/webinars/3dk-ep2-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja\"\n  - \"/features/demo/webinars/12/querypie-server-management-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
-=======
-      "ogImage": "/webinar/3dk-ep2-ja.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ\"\ndescription: \"蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/3dk-ep2-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja\"\n  - \"/features/demo/webinars/12/querypie-server-management-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja",
         "/features/demo/webinars/12/querypie-server-management-ja",
@@ -50,11 +40,7 @@
         "title": "エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ",
         "description": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/webinars/3dk-ep2-ja.webp",
-=======
-        "ogImage": "public/webinar/3dk-ep2-ja.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -68,13 +54,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/webinars/3dk-ep2-ja.webp",
           "webPath": "/demo/webinars/3dk-ep2-ja.webp"
-=======
-          "sourcePath": "public/webinar/3dk-ep2-ja.webp",
-          "webPath": "/webinar/3dk-ep2-ja.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/querypie-databases-nosql-ledger-ja--10/ja.mdx",
@@ -84,13 +65,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/webinars/3dk-ep2-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ\"\nhtmlTitle: \"エピソード 2 QueryPie DAC: データベースの悩みを解決！<br /> データベース統合管理、NoSQL、元帳データ\"\ndescription: \"蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/webinars/3dk-ep2-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja\"\n  - \"/features/demo/webinars/12/querypie-server-management-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
-=======
-      "ogImage": "/webinar/3dk-ep2-ja.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ\"\nhtmlTitle: \"エピソード 2 QueryPie DAC: データベースの悩みを解決！<br /> データベース統合管理、NoSQL、元帳データ\"\ndescription: \"蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/3dk-ep2-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja\"\n  - \"/features/demo/webinars/12/querypie-server-management-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja",
         "/features/demo/webinars/12/querypie-server-management-ja",
@@ -105,11 +81,7 @@
         "htmlTitle": "エピソード 2 QueryPie DAC: データベースの悩みを解決！<br /> データベース統合管理、NoSQL、元帳データ",
         "description": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/webinars/3dk-ep2-ja.webp",
-=======
-        "ogImage": "public/webinar/3dk-ep2-ja.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

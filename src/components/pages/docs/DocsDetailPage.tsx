@@ -24,7 +24,7 @@ export type DocsDetailPageProps = {
   writer: string;
 };
 
-import DocsContentListSection from "../../sections/DocsContentListSection";
+import DocumentationContentListSection from "../../sections/DocumentationContentListSection";
 import {
   CONTENT_PREVIEW_BLOCKQUOTE_CLASS,
   CONTENT_PREVIEW_BODY_CLASS,
@@ -460,7 +460,7 @@ export default function DocsDetailPage({
             </div>
 
             {/* 상세 하단에 고정으로 붙는 콘텐츠 리스트 */}
-            <DocsContentListSection className="pt-2" items={contentListItems} />
+            <DocumentationContentListSection className="pt-2" items={contentListItems} />
           </div>
         </div>
       </article>

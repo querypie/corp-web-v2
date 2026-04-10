@@ -25,11 +25,7 @@ const newsStaticSources: NewsStaticSource[] = [
   {
     dateIso: "2025-12-23",
     externalUrl: externalNewsHref,
-<<<<<<< HEAD
     imageSrc: "/images/common/fallback-contents.jpg",
-=======
-    imageSrc: "/uploads/news-01.png",
->>>>>>> origin/main
     slug: "mitoco-buddy-launch",
     summary: {
       en: "QueryPie AI G.K. announces that TerraSky Co., Ltd.’s enterprise MCP-compatible AI platform, “mitoco Buddy,” has been officially launched.",
@@ -45,11 +41,7 @@ const newsStaticSources: NewsStaticSource[] = [
   {
     dateIso: "2025-12-23",
     externalUrl: externalNewsHref,
-<<<<<<< HEAD
     imageSrc: "/images/common/fallback-contents.jpg",
-=======
-    imageSrc: "/uploads/news-02.png",
->>>>>>> origin/main
     slug: "mitoco-buddy-work",
     summary: {
       en: "QueryPie AI G.K. announced a collaboration with TerraSky Co., Ltd. in the field of AI agent services through the launch of “mitoco Buddy” for enterprise work.",
@@ -65,11 +57,7 @@ const newsStaticSources: NewsStaticSource[] = [
   {
     dateIso: "2025-12-23",
     externalUrl: externalNewsHref,
-<<<<<<< HEAD
     imageSrc: "/images/common/fallback-contents.jpg",
-=======
-    imageSrc: "/uploads/news-03.png",
->>>>>>> origin/main
     slug: "payroll-querypie-partnership",
     summary: {
       en: "Payroll Co., Ltd. and QueryPie announced a technology partnership focused on AI and security for enterprise payroll operations.",

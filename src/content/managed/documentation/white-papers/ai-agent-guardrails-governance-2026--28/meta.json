@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-28.webp",
           "webPath": "/documentation/white-papers/wp-thumb-28.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-28.webp",
-          "webPath": "/white-paper/wp-thumb-28.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/ai-agent-guardrails-governance-2026--28/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": false,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-28.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design\"\ndescription: \"As AI agents move from conversational assistants to autonomous executors, enterprises need stronger control systems. This 2026 guide explains a four-element guardrail framework—Permission, Approval, Audit Trail, and Kill Switch—for CxOs and operational leaders.\"\ndate: \"2026-02-27\"\nauthor: \"querypie\"\nogImage: \"public/documentation/white-papers/wp-thumb-28.webp\"\nhideOgImage: true\nhideTableOfContents: false\nkeywords: [\n  \"AI Agents\",\n  \"Guardrail Design\",\n  \"AI Governance\",\n  \"Audit Trail\",\n  \"Permission Design\",\n  \"Accountability\",\n  \"Least Privilege\",\n  \"RACI\",\n  \"Shadow AI\",\n  \"Kill Switch\"\n]\nrelatedPosts:\n  - \"/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge\"\n  - \"/features/documentation/white-paper/22/your-architect-vs-ai-agents\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-28.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design\"\ndescription: \"As AI agents move from conversational assistants to autonomous executors, enterprises need stronger control systems. This 2026 guide explains a four-element guardrail framework—Permission, Approval, Audit Trail, and Kill Switch—for CxOs and operational leaders.\"\ndate: \"2026-02-27\"\nauthor: \"querypie\"\nogImage: \"public/white-paper/wp-thumb-28.webp\"\nhideOgImage: true\nhideTableOfContents: false\nkeywords: [\n  \"AI Agents\",\n  \"Guardrail Design\",\n  \"AI Governance\",\n  \"Audit Trail\",\n  \"Permission Design\",\n  \"Accountability\",\n  \"Least Privilege\",\n  \"RACI\",\n  \"Shadow AI\",\n  \"Kill Switch\"\n]\nrelatedPosts:\n  - \"/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge\"\n  - \"/features/documentation/white-paper/22/your-architect-vs-ai-agents\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge",
         "/features/documentation/white-paper/22/your-architect-vs-ai-agents",
@@ -51,11 +41,7 @@
         "description": "As AI agents move from conversational assistants to autonomous executors, enterprises need stronger control systems. This 2026 guide explains a four-element guardrail framework—Permission, Approval, Audit Trail, and Kill Switch—for CxOs and operational leaders.",
         "date": "2026-02-27",
         "author": "querypie",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-28.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-28.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": false,
         "keywords": "[",
@@ -70,7 +56,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-28.webp",
           "webPath": "/documentation/white-papers/wp-thumb-28.webp"
         },
@@ -103,40 +88,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp28/06.webp",
           "webPath": "/documentation/white-papers/wp28/06.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-28.webp",
-          "webPath": "/white-paper/wp-thumb-28.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp28/01.webp",
-          "webPath": "/white-paper/wp28/01.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp28/02.webp",
-          "webPath": "/white-paper/wp28/02.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp28/03.webp",
-          "webPath": "/white-paper/wp28/03.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp28/04.webp",
-          "webPath": "/white-paper/wp28/04.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp28/05.webp",
-          "webPath": "/white-paper/wp28/05.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp28/06.webp",
-          "webPath": "/white-paper/wp28/06.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/ai-agent-guardrails-governance-2026--28/ja.mdx",
@@ -146,13 +97,8 @@
       "hideTableOfContents": false,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-28.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AIエージェント時代のガードレール設計（2026年版）── 前編：思想・設計編\"\ndescription: \"AIエージェントが自律的に業務を遂行する時代、企業はどう統制すべきか。権限設計・承認フロー・監査ログ・Kill Switchの4要素を体系化し、CxO・実務リーダー向けに解説する2026年版ガードレール設計ガイド。\"\ndate: \"2026-02-27\"\nauthor: \"querypie\"\nogImage: \"public/documentation/white-papers/wp-thumb-28.webp\"\nhideOgImage: true\nhideTableOfContents: false\nkeywords: [\n  \"AIエージェント\",\n  \"ガードレール設計\",\n  \"AIガバナンス\",\n  \"監査ログ\",\n  \"権限設計\",\n  \"説明責任\",\n  \"アカウンタビリティ\",\n  \"最小権限\",\n  \"RACI\",\n  \"シャドーAI\",\n  \"Kill Switch\"\n]\nrelatedPosts:\n  - \"/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge\"\n  - \"/features/documentation/white-paper/22/your-architect-vs-ai-agents\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-28.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AIエージェント時代のガードレール設計（2026年版）── 前編：思想・設計編\"\ndescription: \"AIエージェントが自律的に業務を遂行する時代、企業はどう統制すべきか。権限設計・承認フロー・監査ログ・Kill Switchの4要素を体系化し、CxO・実務リーダー向けに解説する2026年版ガードレール設計ガイド。\"\ndate: \"2026-02-27\"\nauthor: \"querypie\"\nogImage: \"public/white-paper/wp-thumb-28.webp\"\nhideOgImage: true\nhideTableOfContents: false\nkeywords: [\n  \"AIエージェント\",\n  \"ガードレール設計\",\n  \"AIガバナンス\",\n  \"監査ログ\",\n  \"権限設計\",\n  \"説明責任\",\n  \"アカウンタビリティ\",\n  \"最小権限\",\n  \"RACI\",\n  \"シャドーAI\",\n  \"Kill Switch\"\n]\nrelatedPosts:\n  - \"/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge\"\n  - \"/features/documentation/white-paper/22/your-architect-vs-ai-agents\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/23/rag-security-querypie-builds-the-bridge",
         "/features/documentation/white-paper/22/your-architect-vs-ai-agents",
@@ -167,11 +113,7 @@
         "description": "AIエージェントが自律的に業務を遂行する時代、企業はどう統制すべきか。権限設計・承認フロー・監査ログ・Kill Switchの4要素を体系化し、CxO・実務リーダー向けに解説する2026年版ガードレール設計ガイド。",
         "date": "2026-02-27",
         "author": "querypie",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-28.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-28.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": false,
         "keywords": "[",

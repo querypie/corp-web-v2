@@ -4,7 +4,6 @@
   "categorySlug": "news",
   "contentType": "outlink",
   "dateIso": "2021-07-16",
-<<<<<<< HEAD
   "downloadCoverImageSrc": "",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
@@ -17,15 +16,6 @@
   "relatedIds": [],
   "section": "news",
   "sortOrder": 4,
-=======
-  "externalUrl": "https://www.frontier-enterprise.com/yanolja-taps-querypie-to-firm-up-data-governance/",
-  "hideHeroImage": false,
-  "id": "yanolja-taps-querypie-to-firm-up-data-governance",
-  "imageSrc": "/uploads/news-8-1774977580176.webp",
-  "relatedIds": [],
-  "section": "news",
-  "sortOrder": 2,
->>>>>>> origin/main
   "status": "published",
   "storageId": "cnt_000001",
   "summary": {

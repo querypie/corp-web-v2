@@ -9,7 +9,6 @@ import {
 } from "./data";
 
 export const MANAGED_CONTENT_STORE_EVENT = "querypie:managed-content:changed";
-<<<<<<< HEAD
 
 type ManagedContentChangeDetail = {
   section?: ManagedContentSection;
@@ -158,107 +157,6 @@ export async function updateManagedContentStatus(
   emitChange({ section: cacheSection, shouldRefetch: false });
 }
 
-=======
-
-function emitChange() {
-  if (typeof window === "undefined") return;
-  window.dispatchEvent(new Event(MANAGED_CONTENT_STORE_EVENT));
-}
-
-async function readState(section?: ManagedContentSection) {
-  const search = section ? `?section=${section}` : "";
-  const response = await fetch(`/api/admin/content/state${search}`, {
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to read content state.");
-  }
-
-  const payload = (await response.json()) as { items?: ManagedContentEntry[] };
-  return payload.items ?? [];
-}
-
-export async function getManagedContentsSnapshot(section?: ManagedContentSection) {
-  return readState(section);
-}
-
-export async function persistManagedContents(items: ManagedContentEntry[]) {
-  const response = await fetch("/api/admin/content/state", {
-    body: JSON.stringify({ items }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "POST",
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to persist content state.");
-  }
-
-  emitChange();
-}
-
-export async function upsertManagedContent(item: ManagedContentEntry, currentId?: string) {
-  const response = await fetch("/api/admin/content/state", {
-    body: JSON.stringify({ currentId, item }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "PUT",
-  });
-
-  const payload = (await response.json()) as { error?: string; item?: ManagedContentEntry };
-
-  if (!response.ok || !payload.item) {
-    throw new Error(payload.error ?? "Failed to save content.");
-  }
-
-  emitChange();
-  return payload.item;
-}
-
-export async function deleteManagedContent(id: string, item?: ManagedContentEntry) {
-  const response = await fetch("/api/admin/content/state", {
-    body: JSON.stringify({ id, item }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "DELETE",
-  });
-
-  const payload = (await response.json()) as { error?: string };
-
-  if (!response.ok) {
-    throw new Error(payload.error ?? "Failed to delete content.");
-  }
-
-  emitChange();
-}
-
-export async function updateManagedContentStatus(
-  id: string,
-  status: ManagedContentStatus,
-  item?: ManagedContentEntry,
-) {
-  const response = await fetch("/api/admin/content/state", {
-    body: JSON.stringify({ id, item, status }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-    method: "PATCH",
-  });
-
-  const payload = (await response.json()) as { error?: string };
-
-  if (!response.ok) {
-    throw new Error(payload.error ?? "Failed to update content status.");
-  }
-
-  emitChange();
-}
-
->>>>>>> origin/main
 export async function reorderManagedContents(orderedItems: ManagedContentEntry[]) {
   const currentItems = await readState();
   const firstItem = orderedItems[0];
@@ -289,13 +187,9 @@ export function useManagedContents(
 ) {
   const initialItemsRef = useRef(initialItems);
   const [items, setItems] = useState<ManagedContentEntry[]>(() =>
-<<<<<<< HEAD
     readSnapshotCache(section) ??
       initialItemsRef.current ??
       (section ? getSeedManagedContents(section) : getSeedManagedContents()),
-=======
-    initialItemsRef.current ?? (section ? getSeedManagedContents(section) : getSeedManagedContents()),
->>>>>>> origin/main
   );
 
   useEffect(() => {
@@ -311,7 +205,6 @@ export function useManagedContents(
           if (!active) return;
           setItems(initialItemsRef.current ?? (section ? getSeedManagedContents(section) : getSeedManagedContents()));
         });
-<<<<<<< HEAD
     };
 
     const handleChange = (event: Event) => {
@@ -341,16 +234,6 @@ export function useManagedContents(
     return () => {
       active = false;
       window.removeEventListener(MANAGED_CONTENT_STORE_EVENT, handleChange as EventListener);
-=======
-    };
-
-    sync();
-    window.addEventListener(MANAGED_CONTENT_STORE_EVENT, sync);
-
-    return () => {
-      active = false;
-      window.removeEventListener(MANAGED_CONTENT_STORE_EVENT, sync);
->>>>>>> origin/main
     };
   }, [section]);
 

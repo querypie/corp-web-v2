@@ -81,7 +81,6 @@ export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
     slug: "manuals",
   },
   {
-<<<<<<< HEAD
     href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=white-papers`,
     label: { en: "White Papers", ko: "White Papers", ja: "White Papers" },
     slug: "white-papers",
@@ -89,15 +88,6 @@ export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
   {
     href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=blogs`,
     label: { en: "Blogs", ko: "Blogs", ja: "Blogs" },
-=======
-    href: (locale) => `/${locale}/docs?category=white-papers`,
-    label: { en: "White Papers", ko: "화이트페이퍼", ja: "White Papers" },
-    slug: "white-papers",
-  },
-  {
-    href: (locale) => `/${locale}/docs?category=blogs`,
-    label: { en: "Blogs", ko: "블로그", ja: "Blogs" },
->>>>>>> origin/main
     slug: "blogs",
   },
 ];

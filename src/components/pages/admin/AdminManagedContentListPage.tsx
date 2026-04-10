@@ -32,12 +32,9 @@ import {
   type ManagedContentSection,
 } from "@/features/content/data";
 import { cloneAsAuthoredContent } from "@/features/content/cloneToAuthored";
-<<<<<<< HEAD
 import { splitLegacyQuotedListLine } from "@/features/content/legacyQuoteList";
 import { shouldRenderMermaid } from "@/features/content/mermaid";
 import { parseMarkdownTable } from "@/features/content/markdownTable";
-=======
->>>>>>> origin/main
 import {
   CONTENT_PREVIEW_BLOCKQUOTE_CLASS,
   CONTENT_PREVIEW_BODY_CLASS,
@@ -88,30 +85,18 @@ function DeleteConfirmDialog({
 }) {
   return (
     /* 리스트/미리보기에서 공통으로 쓰는 삭제 확인 모달 */
-<<<<<<< HEAD
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5" onClick={onCancel}>
       <div className="w-full max-w-[300px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-8" onClick={(event) => event.stopPropagation()}>
-=======
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-5" onClick={onCancel}>
-      <div className="w-full max-w-[300px] rounded-modal bg-bg-content px-5 py-8" onClick={(event) => event.stopPropagation()}>
->>>>>>> origin/main
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="flex flex-col items-center gap-2 text-center">
             <h2 className="m-0 type-h3 text-fg">삭제하시겠습니까?</h2>
             <p className="m-0 type-body-md text-mute-fg">이 작업은 되돌릴 수 없습니다.</p>
           </div>
           <div className="flex justify-center gap-3">
-<<<<<<< HEAD
             <Button arrow={false} onClick={onCancel} style="round" variant="outline">
               취소
             </Button>
             <Button arrow={false} onClick={onConfirm} style="round" variant="secondary">
-=======
-            <Button size="default" arrow={false} onClick={onCancel} style="round" variant="outline">
-              취소
-            </Button>
-            <Button size="default" arrow={false} onClick={onConfirm} style="round" variant="secondary">
->>>>>>> origin/main
               확인
             </Button>
           </div>
@@ -122,22 +107,15 @@ function DeleteConfirmDialog({
 }
 
 function DuplicateConfirmDialog({
-<<<<<<< HEAD
   isSubmitting = false,
   onCancel,
   onConfirm,
 }: {
   isSubmitting?: boolean;
-=======
-  onCancel,
-  onConfirm,
-}: {
->>>>>>> origin/main
   onCancel: () => void;
   onConfirm: () => void;
 }) {
   return (
-<<<<<<< HEAD
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5" onClick={onCancel}>
       <div className="w-full max-w-[320px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-8" onClick={(event) => event.stopPropagation()}>
         <div className="flex flex-col items-center gap-5 text-center">
@@ -155,21 +133,6 @@ function DuplicateConfirmDialog({
             </Button>
             <Button arrow={false} disabled={isSubmitting} onClick={onConfirm} style="round" variant="secondary">
               {isSubmitting ? <LoadingText text="복제 중..." /> : "복제하기"}
-=======
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-5" onClick={onCancel}>
-      <div className="w-full max-w-[320px] rounded-modal bg-bg-content px-5 py-8" onClick={(event) => event.stopPropagation()}>
-        <div className="flex flex-col items-center gap-5 text-center">
-          <div className="flex flex-col items-center gap-2 text-center">
-            <h2 className="m-0 type-h3 text-fg">게시물을 복제할까요?</h2>
-            <p className="m-0 type-body-md text-mute-fg">복사된 게시물은 비노출 상태로 저장됩니다.</p>
-          </div>
-          <div className="flex justify-center gap-3">
-            <Button size="default" arrow={false} onClick={onCancel} style="round" variant="outline">
-              취소
-            </Button>
-            <Button size="default" arrow={false} onClick={onConfirm} style="round" variant="secondary">
-              복제하기
->>>>>>> origin/main
             </Button>
           </div>
         </div>
@@ -233,7 +196,6 @@ function normalizeContentAssetSrc(src: string) {
 }
 
 function parseMarkdownImage(block: string) {
-<<<<<<< HEAD
   const legacyFigureLabelMatch = block.match(/^!\[\[([^\]]+)\]\s*([^\]]+)\]\(([^)]+)\)$/);
 
   if (legacyFigureLabelMatch) {
@@ -245,8 +207,6 @@ function parseMarkdownImage(block: string) {
     };
   }
 
-=======
->>>>>>> origin/main
   const legacyBracketMatch = block.match(/^!\[\[(.+)\]\(([^)]+)\)$/);
 
   if (legacyBracketMatch) {
@@ -290,25 +250,18 @@ function PreviewMarkdown({ markdown }: { markdown: string }) {
         const imageMatch = parseMarkdownImage(trimmedBlock);
 
         if (imageMatch) {
-<<<<<<< HEAD
           const caption = imageMatch.caption ?? imageMatch.alt;
           return <figure key={blockIndex} className="m-0 flex flex-col gap-3"><div className="overflow-hidden rounded-box bg-bg-content"><img alt={imageMatch.alt} className="block h-full w-full object-cover" src={imageMatch.src} /></div>{caption ? <figcaption className="m-0 text-center type-content-caption text-mute-fg">{caption}</figcaption> : null}</figure>;
-=======
-          return <figure key={blockIndex} className="m-0 overflow-hidden rounded-box bg-bg-content"><img alt={imageMatch.alt} className="block h-full w-full object-cover" src={imageMatch.src} /></figure>;
->>>>>>> origin/main
         }
 
         if (/^\s*```/.test(firstLine) && /^\s*```\s*$/.test(lines[lines.length - 1] ?? "")) {
           const language = firstLine.replace(/^```/, "").trim();
           const code = normalizeFencedCodeLines(firstLine, lines.slice(1, -1)).join("\n");
-<<<<<<< HEAD
 
           if (shouldRenderMermaid(code, language)) {
             return <MermaidDiagram key={blockIndex} code={code} />;
           }
 
-=======
->>>>>>> origin/main
           return <div key={blockIndex} className={CONTENT_PREVIEW_CODEBLOCK_CLASS} dangerouslySetInnerHTML={{ __html: renderLineNumberedCodeBlock(code, language) }} />;
         }
 
@@ -329,7 +282,6 @@ function PreviewMarkdown({ markdown }: { markdown: string }) {
         }
 
         if (lines.every((line) => /^>\s?/.test(line))) {
-<<<<<<< HEAD
           const quoteLines = lines.flatMap((line) => splitLegacyQuotedListLine(line.replace(/^>\s?/, "")));
 
           if (
@@ -343,16 +295,12 @@ function PreviewMarkdown({ markdown }: { markdown: string }) {
           }
 
           return <blockquote key={blockIndex} className={CONTENT_PREVIEW_BLOCKQUOTE_CLASS}>{quoteLines.map((line, idx) => <p key={idx} className="m-0">{renderInlineMarkdown(line)}</p>)}</blockquote>;
-=======
-          return <blockquote key={blockIndex} className={CONTENT_PREVIEW_BLOCKQUOTE_CLASS}>{lines.map((line, idx) => <p key={idx} className="m-0">{renderInlineMarkdown(line.replace(/^>\s?/, ""))}</p>)}</blockquote>;
->>>>>>> origin/main
         }
 
         if (lines.every((line) => /^\d+\.\s+/.test(line))) {
           return <ol key={blockIndex} className={CONTENT_PREVIEW_OL_CLASS}>{lines.map((line, idx) => <li key={idx}>{renderInlineMarkdown(line.replace(/^\d+\.\s+/, ""))}</li>)}</ol>;
         }
 
-<<<<<<< HEAD
         if (lines.every((line) => /^\s*[-*]\s+/.test(line))) {
           return <ul key={blockIndex} className={CONTENT_PREVIEW_UL_CLASS}>{lines.map((line, idx) => <li key={idx} className="type-content-body text-fg">{renderInlineMarkdown(line.replace(/^\s*[-*]\s+/, ""))}</li>)}</ul>;
         }
@@ -365,30 +313,6 @@ function PreviewMarkdown({ markdown }: { markdown: string }) {
               <table className="w-full min-w-[520px] border-collapse text-left">
                 <thead>
                   <tr className="border-b border-border bg-bg-deep">
-=======
-        if (lines.every((line) => /^-\s+/.test(line))) {
-          return <ul key={blockIndex} className={CONTENT_PREVIEW_UL_CLASS}>{lines.map((line, idx) => <li key={idx}>{renderInlineMarkdown(line.replace(/^-\s+/, ""))}</li>)}</ul>;
-        }
-        if (
-          lines.length >= 2 &&
-          lines.every((line) => /^\|.*\|$/.test(line.trim())) &&
-          /^\|(\s*:?-{3,}:?\s*\|)+$/.test(lines[1].trim())
-        ) {
-          const rows = lines.map((line) =>
-            line
-              .trim()
-              .slice(1, -1)
-              .split("|")
-              .map((cell) => cell.trim()),
-          );
-          const [headerRow, , ...bodyRows] = rows;
-
-          return (
-            <div key={blockIndex} className="overflow-x-auto rounded-[20px] border border-border bg-bg-content">
-              <table className="w-full min-w-[520px] border-collapse text-left">
-                <thead>
-                  <tr className="border-b border-border">
->>>>>>> origin/main
                     {headerRow.map((cell, cellIndex) => (
                       <th key={cellIndex} className="px-4 py-3 type-content-body text-fg">
                         {renderInlineMarkdown(cell)}
@@ -437,11 +361,9 @@ function PreviewHtml({ html }: { html: string }) {
 }
 
 function PreviewModal({
-  onDuplicate,
   item,
   onClose,
 }: {
-  onDuplicate: () => void;
   item: ManagedContentEntry;
   onClose: () => void;
 }) {
@@ -476,7 +398,6 @@ function PreviewModal({
           </div>
         </div>
         <div className="overflow-auto px-5 py-5 md:px-6">
-<<<<<<< HEAD
           <AdminContentPreview
             bodyHtml={localizedBodyHtml}
             bodyMarkdown={localizedBodyMarkdown}
@@ -492,64 +413,6 @@ function PreviewModal({
             url={item.externalUrl || "#"}
             writer={item.section === "news" ? "" : getWriterLabel(item)}
           />
-=======
-          {item.section === "news" ? (
-            <a
-              className="mx-auto flex w-full max-w-[760px] flex-col gap-4 py-5 md:flex-row md:items-start md:gap-[30px]"
-              href={item.externalUrl || "#"}
-              rel="noreferrer noopener"
-              target="_blank"
-            >
-              <div className="order-2 flex min-w-0 flex-1 flex-col gap-[10px] md:order-1">
-                <p className="m-0 type-body-md text-mute-fg">{formatPublicDate(activeLocale, item.dateIso)}</p>
-                <h2 className="m-0 type-h2 text-fg">{getLocalizedContent(item.title, activeLocale)}</h2>
-                <p className="m-0 type-body-md text-mute-fg">{getLocalizedContent(item.summary, activeLocale)}</p>
-              </div>
-              {item.imageSrc ? (
-                <div className="content-thumbnail-frame order-1 w-full shrink-0 overflow-hidden rounded-thumb bg-bg-content md:order-2 md:w-[380px]">
-                  <img alt={getLocalizedContent(item.title, activeLocale)} className="block h-full w-full object-cover" src={getContentThumbnailSrc(item.imageSrc)} />
-                </div>
-              ) : null}
-            </a>
-          ) : (
-            <div className="mx-auto flex w-full max-w-[680px] flex-col gap-[80px] py-5">
-              <div className="flex flex-col gap-[10px]">
-                <h1 className="m-0 type-h1 leading-[42px] text-fg">{getLocalizedContent(item.title, activeLocale)}</h1>
-                <div className="type-body-md text-fg">{getWriterLabel(item)}</div>
-                <p className="m-0 type-body-md text-mute-fg">{formatPublicDate(activeLocale, item.dateIso)}</p>
-              </div>
-              {item.imageSrc && !item.hideHeroImage ? (
-                <div className="content-thumbnail-frame w-full overflow-hidden rounded-box bg-bg-content">
-                  <img alt={getLocalizedContent(item.title, activeLocale)} className="block h-full w-full object-cover" src={getContentThumbnailSrc(item.imageSrc)} />
-                </div>
-              ) : null}
-              {useRichHtmlPreview ? (
-                <PreviewHtml html={localizedBodyHtml} />
-              ) : (
-                <PreviewMarkdown markdown={localizedBodyMarkdown} />
-              )}
-            </div>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-3 border-t border-border px-5 py-4 sm:flex-row sm:items-center sm:justify-between md:px-6">
-          <Button size="default" arrow={false} className="w-full justify-center sm:w-auto" onClick={onClose} style="round" variant="outline">
-            닫기
-          </Button>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <Button size="default" arrow={false} className="w-full justify-center sm:w-auto" onClick={onDuplicate} style="round" variant="outline">
-              복제
-            </Button>
-            <a className="w-full sm:w-auto" href={getAdminDetailHref(item.section, item.categorySlug, item.id)}>
-              <Button size="default" arrow={false} className="w-full justify-center sm:w-auto" style="round" variant="outline">
-                수정
-              </Button>
-            </a>
-            <Button size="default" arrow={false} className="w-full justify-center sm:w-auto" onClick={onDelete} style="round" variant="secondary">
-              삭제
-            </Button>
-          </div>
->>>>>>> origin/main
         </div>
       </div>
     </div>
@@ -584,7 +447,6 @@ function ContentRow({
   const isPublished = item.status === "published";
   const isLegacyContent = item.section !== "news" && item.contentFormat === "markdown";
   const statusLabel = isPublished ? "게시중" : "비노출";
-<<<<<<< HEAD
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -605,8 +467,6 @@ function ContentRow({
       document.removeEventListener("mousedown", handlePointerDown);
     };
   }, [menuOpen]);
-=======
->>>>>>> origin/main
 
   return (
     /* 관리자 콘텐츠 리스트의 개별 카드 row */
@@ -616,13 +476,8 @@ function ContentRow({
         !isReorderMode && "card-hover",
         isReorderMode ? "cursor-default" : "cursor-pointer",
         isReorderMode
-<<<<<<< HEAD
           ? "md:grid-cols-[28px_132px_minmax(0,1.9fr)_128px_76px] md:items-center"
           : "md:grid-cols-[132px_minmax(0,1.8fr)_144px_116px] md:items-center",
-=======
-          ? "md:grid-cols-[28px_120px_minmax(0,1fr)_132px_120px]"
-          : "md:grid-cols-[120px_minmax(0,1fr)_132px_120px]",
->>>>>>> origin/main
       )}
       ref={rowRef}
       onClick={() => {
@@ -656,7 +511,6 @@ function ContentRow({
         </div>
       ) : null}
 
-<<<<<<< HEAD
       <div className="content-thumbnail-frame w-full overflow-hidden rounded-thumb bg-bg-deep md:w-[132px]">
         <img alt={getLocalizedContent(item.title, "en")} className="block h-full w-full object-cover" src={getContentThumbnailSrc(item.imageSrc)} />
       </div>
@@ -664,15 +518,6 @@ function ContentRow({
       <div className="min-w-0 self-center pr-0 md:pr-2">
         {isLegacyContent ? (
           <p className="mb-2 mt-0 type-body-sm text-[var(--color-destructive)]">Legacy</p>
-=======
-      <div className="content-thumbnail-frame w-full overflow-hidden rounded-thumb bg-bg-deep md:w-[120px]">
-        <img alt={getLocalizedContent(item.title, "en")} className="block h-full w-full object-cover" src={getContentThumbnailSrc(item.imageSrc)} />
-      </div>
-
-      <div className="min-w-0">
-        {isLegacyContent ? (
-          <p className="mb-2 mt-0 type-body-sm text-warning">Legacy</p>
->>>>>>> origin/main
         ) : null}
         {showCategory ? (
           <p className="mb-2 mt-0 type-body-sm text-mute-fg">
@@ -774,10 +619,7 @@ export default function AdminManagedContentListPage({
   title,
 }: Props) {
   const items = useManagedContents(section, initialItems);
-<<<<<<< HEAD
   const isLoading = useManagedContentsLoading(section);
-=======
->>>>>>> origin/main
   const isHydrated = useHydrated();
   const [query, setQuery] = useState("");
   const [pendingDuplicateItem, setPendingDuplicateItem] = useState<ManagedContentEntry | null>(null);
@@ -840,11 +682,8 @@ export default function AdminManagedContentListPage({
   const displayedItems = isReorderMode ? draftItems : filteredItems;
 
   function handleDuplicateItem(item: ManagedContentEntry) {
-<<<<<<< HEAD
     setIsDuplicating(true);
 
-=======
->>>>>>> origin/main
     const siblingItems = items.filter(
       (entry) => entry.section === item.section && entry.categorySlug === item.categorySlug,
     );
@@ -868,12 +707,9 @@ export default function AdminManagedContentListPage({
             ? error.message
             : "콘텐츠를 복제하지 못했습니다. 다시 시도해 주세요.",
         );
-<<<<<<< HEAD
       })
       .finally(() => {
         setIsDuplicating(false);
-=======
->>>>>>> origin/main
       });
   }
 
@@ -920,7 +756,6 @@ export default function AdminManagedContentListPage({
       {/* 리스트 페이지 헤더 */}
       <AdminHeader description={description} title={title} />
 
-<<<<<<< HEAD
       <div className="mx-auto flex w-full max-w-[1000px] flex-col gap-4">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <SearchField onChange={setQuery} value={query} />
@@ -933,53 +768,6 @@ export default function AdminManagedContentListPage({
                     setIsReorderMode(false);
                   }} style="round" variant="outline">
                     취소
-=======
-      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-        <SearchField onChange={setQuery} value={query} />
-        {categorySlug !== "all" ? (
-          <div className="flex w-full flex-col gap-3 md:w-auto md:flex-row">
-            {isReorderMode ? (
-              <>
-                <Button size="default" arrow={false} className="w-full justify-center md:w-auto" onClick={() => {
-                  setDraftItems(categoryItems);
-                  setIsReorderMode(false);
-                }} style="round" variant="outline">
-                  취소
-                </Button>
-                <Button size="default" arrow={false} className="w-full justify-center md:w-auto" onClick={() => {
-                  void reorderManagedContents(draftItems)
-                    .then(() => {
-                      setIsReorderMode(false);
-                    })
-                    .catch((error: unknown) => {
-                      window.alert(
-                        error instanceof Error
-                          ? error.message
-                          : "순서를 저장하지 못했습니다. 다시 시도해 주세요.",
-                      );
-                    });
-                }} style="round" variant="secondary">
-                  확인
-                </Button>
-              </>
-            ) : (
-              <>
-                <Button
-                  arrow={false}
-                  className="w-full justify-center md:w-auto"
-                  onClick={() => {
-                    setDraftItems(categoryItems);
-                    setIsReorderMode(true);
-                  }}
-                  style="round"
-                  variant="outline"
-                >
-                  순서변경
-                </Button>
-                <a className="w-full md:w-auto" href={writeHref}>
-                  <Button size="default" arrow={false} className="w-full justify-center md:w-auto" style="round" variant="secondary">
-                    글 작성
->>>>>>> origin/main
                   </Button>
                   <Button arrow={false} className="w-full justify-center md:w-auto" onClick={() => {
                     void reorderManagedContents(draftItems)
@@ -1022,7 +810,6 @@ export default function AdminManagedContentListPage({
           ) : null}
         </div>
 
-<<<<<<< HEAD
         {/* 실제 콘텐츠 리스트 / 빈 상태 영역 */}
         <div className="flex flex-col gap-3">
           {!isHydrated ? (
@@ -1068,46 +855,6 @@ export default function AdminManagedContentListPage({
             </div>
           )}
         </div>
-=======
-      {/* 실제 콘텐츠 리스트 / 빈 상태 영역 */}
-      <div className="flex flex-col gap-3">
-        {!isHydrated ? (
-          <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center" />
-        ) : displayedItems.length > 0 ? (
-          displayedItems.map((item, index) => (
-            <ContentRow
-              isReorderMode={isReorderMode}
-              key={item.id}
-              index={index}
-              item={item}
-              rowRef={(node) => {
-                if (node) {
-                  rowRefs.current.set(item.id, node);
-                } else {
-                  rowRefs.current.delete(item.id);
-                }
-              }}
-              onMoveDown={() => moveItem(item.id, "down")}
-              onMoveUp={() => moveItem(item.id, "up")}
-              onOpenPreview={() => setPreviewItem(item)}
-              onTogglePublished={() => {
-                void handleTogglePublished(item).catch((error: unknown) => {
-                  window.alert(
-                    error instanceof Error
-                      ? error.message
-                      : "게시 상태를 변경하지 못했습니다. 다시 시도해 주세요.",
-                  );
-                });
-              }}
-              showCategory={categorySlug === "all"}
-            />
-          ))
-        ) : (
-          <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
-            <p className="m-0 type-body-md text-mute-fg">게시물이 없습니다.</p>
-          </div>
-        )}
->>>>>>> origin/main
       </div>
 
       {/* 삭제 확인 모달 */}
@@ -1133,10 +880,7 @@ export default function AdminManagedContentListPage({
 
       {pendingDuplicateItem ? (
         <DuplicateConfirmDialog
-<<<<<<< HEAD
           isSubmitting={isDuplicating}
-=======
->>>>>>> origin/main
           onCancel={() => setPendingDuplicateItem(null)}
           onConfirm={() => handleDuplicateItem(pendingDuplicateItem)}
         />
@@ -1146,12 +890,7 @@ export default function AdminManagedContentListPage({
       {previewItem ? (
         <PreviewModal
           item={previewItem}
-          onDuplicate={() => setPendingDuplicateItem(previewItem)}
           onClose={() => setPreviewItem(null)}
-<<<<<<< HEAD
-=======
-          onDelete={() => setPendingDeleteItem(previewItem)}
->>>>>>> origin/main
         />
       ) : null}
     </section>

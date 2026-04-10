@@ -7,22 +7,14 @@ import type { Locale } from "@/constants/i18n";
 import { useManagedContents } from "@/features/content/clientStore";
 import type { ContactPageCopy } from "@/features/contact/copy";
 import useHydrated from "@/hooks/useHydrated";
-<<<<<<< HEAD:src/components/pages/documentation/DocumentationDetailClientPage.tsx
 import { docsCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/features/content/config";
 import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, type ManagedContentEntry } from "@/features/content/data";
 import { isWhitePaperGatingEnabled } from "@/features/content/gating";
-=======
-import { docsCategoryConfigs, getCategoryLabel } from "@/features/content/config";
-import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, type ManagedContentEntry } from "@/features/content/data";
->>>>>>> origin/main:src/components/pages/docs/DocsDetailClientPage.tsx
 
 type DocsDetailClientPageProps = {
   contactCopy: ContactPageCopy;
   fallbackProps: DocsDetailPageProps;
-<<<<<<< HEAD:src/components/pages/documentation/DocumentationDetailClientPage.tsx
   initialWhitePaperUnlocked: boolean;
-=======
->>>>>>> origin/main:src/components/pages/docs/DocsDetailClientPage.tsx
   initialItems: ManagedContentEntry[];
   locale: Locale;
   slug: string;
@@ -31,21 +23,14 @@ type DocsDetailClientPageProps = {
 export default function DocsDetailClientPage({
   contactCopy,
   fallbackProps,
-<<<<<<< HEAD:src/components/pages/documentation/DocumentationDetailClientPage.tsx
   initialWhitePaperUnlocked,
-=======
->>>>>>> origin/main:src/components/pages/docs/DocsDetailClientPage.tsx
   initialItems,
   locale,
   slug,
 }: DocsDetailClientPageProps) {
   const resolvedSlug = decodeURIComponent(slug);
-<<<<<<< HEAD:src/components/pages/documentation/DocumentationDetailClientPage.tsx
   const managedItems = useManagedContents("documentation", initialItems) ?? [];
   const items = managedItems.filter((item) => item.status === "published");
-=======
-  const items = useManagedContents("documentation", initialItems).filter((item) => item.status === "published");
->>>>>>> origin/main:src/components/pages/docs/DocsDetailClientPage.tsx
   const isHydrated = useHydrated();
   const [isUnlocked, setIsUnlocked] = useState(initialWhitePaperUnlocked);
 
@@ -95,7 +80,6 @@ export default function DocsDetailClientPage({
   return (
     <DocsDetailPage
       {...fallbackProps}
-<<<<<<< HEAD:src/components/pages/documentation/DocumentationDetailClientPage.tsx
       bodyHtml={isGateActive ? fallbackProps.bodyHtml : getLocalizedContent(currentItem.bodyHtml, locale)}
       bodyMarkdown={isGateActive ? fallbackProps.bodyMarkdown : getLocalizedContent(currentItem.bodyMarkdown, locale)}
       category={getCategoryLabel(docsCategoryConfigs, currentItem.categorySlug, locale)}
@@ -107,11 +91,6 @@ export default function DocsDetailClientPage({
           title={getLocalizedContent(currentItem.title, locale)}
         />
       ) : undefined}
-=======
-      bodyHtml={getLocalizedContent(currentItem.bodyHtml, locale)}
-      bodyMarkdown={getLocalizedContent(currentItem.bodyMarkdown, locale)}
-      category={getCategoryLabel(docsCategoryConfigs, currentItem.categorySlug, locale)}
->>>>>>> origin/main:src/components/pages/docs/DocsDetailClientPage.tsx
       contentFormat={currentItem.contentFormat}
       contentListItems={relatedItems}
       downloadHref={

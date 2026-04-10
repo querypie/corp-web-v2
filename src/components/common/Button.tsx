@@ -33,19 +33,11 @@ function getButtonStyle(
 ): ButtonStyleConfig {
   return {
     container: cx(
-<<<<<<< HEAD
       "inline-flex items-center justify-center rounded-button transition-colors duration-300",
       shape === "full" ? "rounded-full" : "rounded-button",
       size === "small" && "h-8 gap-1.5 px-4",
       size === "default" && "h-10 gap-1.5 px-5",
       size === "large" && "h-14 gap-2 px-6",
-=======
-      "inline-flex items-center justify-center rounded-button transition-colors",
-      shape === "full" ? "rounded-full" : "rounded-button",
-      size === "small" && "gap-1.5 px-4 py-[6px]",
-      size === "default" && "gap-1.5 px-5 py-2.5",
-      size === "large" && "gap-2 px-6 py-3",
->>>>>>> origin/main
       variant === "outline" &&
         cx(
           "border border-secondary",
@@ -53,7 +45,7 @@ function getButtonStyle(
           "hover:bg-[#242426]",
         ),
       variant === "primary" &&
-        cx(state === "hover" ? "bg-[#EDEDED]" : "bg-primary", "hover:bg-[#EDEDED]"),
+        cx(state === "hover" ? "bg-[#ABABAB]" : "bg-primary", "hover:bg-[#ABABAB]"),
       variant === "secondary" &&
         cx(state === "hover" ? "bg-[#343434]" : "bg-secondary", "hover:bg-[#343434]"),
       state === "disable" && "opacity-40",
@@ -100,11 +92,7 @@ export default function Button({
   children = "Button",
   className,
   disabled,
-<<<<<<< HEAD
   size = "default",
-=======
-  size = "small",
->>>>>>> origin/main
   style = "round",
   state = "default",
   type = "button",

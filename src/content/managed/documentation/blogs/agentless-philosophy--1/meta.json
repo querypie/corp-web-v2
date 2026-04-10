@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-1.webp",
           "webPath": "/documentation/blogs/b-thumb-1.webp"
         },
@@ -32,25 +31,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog1-image-3.webp",
           "webPath": "/documentation/blogs/blog1-image-3.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-1.webp",
-          "webPath": "/blog/b-thumb-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog1-image-1.webp",
-          "webPath": "/blog/blog1-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog1-image-2.webp",
-          "webPath": "/blog/blog1-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog1-image-3.webp",
-          "webPath": "/blog/blog1-image-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/agentless-philosophy--1/en.mdx",
@@ -66,13 +46,8 @@
         "innovative approach"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Why QueryPie Stands Firm on Its Agentless Philosophy\"\ndescription: \"Understand QueryPie's commitment to an agentless approach for streamlined and secure system management.\"\ndate: \"2024-11-22\"\nauthor: \"brant\"\nogImage: \"public/documentation/blogs/b-thumb-1.webp\"\nkeywords: [\"QueryPie\", \"agentless management\", \"streamlined systems\", \"secure operations\", \"innovative approach\"]\nrelatedPosts:\n  - \"/features/documentation/blog/5/technology-humanity-convergence\"\n  - \"/features/documentation/blog/2/querypie-cracking-global-markets\"\n  - \"/features/documentation/blog/6/integration-connection-paradigm\"",
-=======
-      "ogImage": "/blog/b-thumb-1.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Why QueryPie Stands Firm on Its Agentless Philosophy\"\ndescription: \"Understand QueryPie's commitment to an agentless approach for streamlined and secure system management.\"\ndate: \"2024-11-22\"\nauthor: \"brant\"\nogImage: \"public/blog/b-thumb-1.webp\"\nkeywords: [\"QueryPie\", \"agentless management\", \"streamlined systems\", \"secure operations\", \"innovative approach\"]\nrelatedPosts:\n  - \"/features/documentation/blog/5/technology-humanity-convergence\"\n  - \"/features/documentation/blog/2/querypie-cracking-global-markets\"\n  - \"/features/documentation/blog/6/integration-connection-paradigm\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/5/technology-humanity-convergence",
         "/features/documentation/blog/2/querypie-cracking-global-markets",
@@ -87,11 +62,7 @@
         "description": "Understand QueryPie's commitment to an agentless approach for streamlined and secure system management.",
         "date": "2024-11-22",
         "author": "brant",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-1.webp",
-=======
-        "ogImage": "public/blog/b-thumb-1.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "agentless management",
@@ -110,7 +81,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-1.webp",
           "webPath": "/documentation/blogs/b-thumb-1.webp"
         },
@@ -128,25 +98,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog1-image-3.webp",
           "webPath": "/documentation/blogs/blog1-image-3.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-1.webp",
-          "webPath": "/blog/b-thumb-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog1-image-1.webp",
-          "webPath": "/blog/blog1-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog1-image-2.webp",
-          "webPath": "/blog/blog1-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog1-image-3.webp",
-          "webPath": "/blog/blog1-image-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/agentless-philosophy--1/ko.mdx",
@@ -164,13 +115,8 @@
         "에이전트리스 기반 솔루션"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"쿼리파이가 Agentless 철학을 고집하는 이유\"\ndescription: \"급변하는 IT 인프라 환경에서 ZeroTrust 보안 모델의 필요성을 강조하며, 클라우드와 하이브리드 인프라에 적합한 효과적인 보안 체계 구축 방법을 탐구합니다.\"\ndate: \"2024-11-22\"\nauthor: \"brant\"\nogImage: \"public/documentation/blogs/b-thumb-1.webp\"\nkeywords: [\"쿼리파이\",\"QueryPie\", \"에이전트리스\", \"제로트러스트\", \"하이브리드 인프라\", \"동적 IT 자산\", \"에이전트리스 기반 솔루션\"]\nrelatedPosts:\n  - \"/features/documentation/5/technology-humanity-convergence\"\n  - \"/features/documentation/2/querypie-cracking-global-markets\"\n  - \"/features/documentation/6/integration-connection-paradigm\"",
-=======
-      "ogImage": "/blog/b-thumb-1.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"쿼리파이가 Agentless 철학을 고집하는 이유\"\ndescription: \"급변하는 IT 인프라 환경에서 ZeroTrust 보안 모델의 필요성을 강조하며, 클라우드와 하이브리드 인프라에 적합한 효과적인 보안 체계 구축 방법을 탐구합니다.\"\ndate: \"2024-11-22\"\nauthor: \"brant\"\nogImage: \"public/blog/b-thumb-1.webp\"\nkeywords: [\"쿼리파이\",\"QueryPie\", \"에이전트리스\", \"제로트러스트\", \"하이브리드 인프라\", \"동적 IT 자산\", \"에이전트리스 기반 솔루션\"]\nrelatedPosts:\n  - \"/features/documentation/5/technology-humanity-convergence\"\n  - \"/features/documentation/2/querypie-cracking-global-markets\"\n  - \"/features/documentation/6/integration-connection-paradigm\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/5/technology-humanity-convergence",
         "/features/documentation/2/querypie-cracking-global-markets",
@@ -185,11 +131,7 @@
         "description": "급변하는 IT 인프라 환경에서 ZeroTrust 보안 모델의 필요성을 강조하며, 클라우드와 하이브리드 인프라에 적합한 효과적인 보안 체계 구축 방법을 탐구합니다.",
         "date": "2024-11-22",
         "author": "brant",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-1.webp",
-=======
-        "ogImage": "public/blog/b-thumb-1.webp",
->>>>>>> origin/main
         "keywords": [
           "쿼리파이",
           "QueryPie",
@@ -210,7 +152,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-1.webp",
           "webPath": "/documentation/blogs/b-thumb-1.webp"
         },
@@ -228,25 +169,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog1-image-3.webp",
           "webPath": "/documentation/blogs/blog1-image-3.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-1.webp",
-          "webPath": "/blog/b-thumb-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog1-image-1.webp",
-          "webPath": "/blog/blog1-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog1-image-2.webp",
-          "webPath": "/blog/blog1-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog1-image-3.webp",
-          "webPath": "/blog/blog1-image-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/agentless-philosophy--1/ja.mdx",
@@ -262,13 +184,8 @@
         "革新的なアプローチ"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPieがAgentless哲学にこだわる理由\"\ndescription: \"合理的で安全なシステム管理のためのエージェントレスなアプローチに対する QueryPie の取り組みを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"brant\"\nogImage: \"public/documentation/blogs/b-thumb-1.webp\"\nkeywords: [\"QueryPie\", \"エージェントレス管理\", \"合理化されたシステム\", \"安全な運用\", \"革新的なアプローチ\"]\nrelatedPosts:\n  - \"/features/documentation/blog/5/technology-humanity-convergence\"\n  - \"/features/documentation/blog/2/querypie-cracking-global-markets\"\n  - \"/features/documentation/blog/6/integration-connection-paradigm\"",
-=======
-      "ogImage": "/blog/b-thumb-1.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPieがAgentless哲学にこだわる理由\"\ndescription: \"合理的で安全なシステム管理のためのエージェントレスなアプローチに対する QueryPie の取り組みを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"brant\"\nogImage: \"public/blog/b-thumb-1.webp\"\nkeywords: [\"QueryPie\", \"エージェントレス管理\", \"合理化されたシステム\", \"安全な運用\", \"革新的なアプローチ\"]\nrelatedPosts:\n  - \"/features/documentation/blog/5/technology-humanity-convergence\"\n  - \"/features/documentation/blog/2/querypie-cracking-global-markets\"\n  - \"/features/documentation/blog/6/integration-connection-paradigm\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/5/technology-humanity-convergence",
         "/features/documentation/blog/2/querypie-cracking-global-markets",
@@ -283,11 +200,7 @@
         "description": "合理的で安全なシステム管理のためのエージェントレスなアプローチに対する QueryPie の取り組みを紹介します。",
         "date": "2024-11-22",
         "author": "brant",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-1.webp",
-=======
-        "ogImage": "public/blog/b-thumb-1.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "エージェントレス管理",

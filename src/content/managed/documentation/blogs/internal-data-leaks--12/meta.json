@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-12.webp",
           "webPath": "/documentation/blogs/b-thumb-12.webp"
         },
@@ -22,15 +21,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog12-image-1.webp",
           "webPath": "/documentation/blogs/blog12-image-1.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-12.webp",
-          "webPath": "/blog/b-thumb-12.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog12-image-1.webp",
-          "webPath": "/blog/blog12-image-1.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/internal-data-leaks--12/en.mdx",
@@ -47,13 +37,8 @@
         "internal security"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-12.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Data Leaks: How a Small Internal Breach Can Turn into a Disaster\"\ndescription: \"Explore how small internal breaches can escalate into major data leaks and how QueryPie helps mitigate risks effectively.\"\ndate: \"2024-11-22\"\nauthor: \"regan\"\nogImage: \"public/documentation/blogs/b-thumb-12.webp\"\nkeywords: [\"QueryPie\", \"data breaches\", \"small breaches\", \"data leak risks\", \"risk mitigation\", \"internal security\"]\nrelatedPosts:\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
-=======
-      "ogImage": "/blog/b-thumb-12.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Data Leaks: How a Small Internal Breach Can Turn into a Disaster\"\ndescription: \"Explore how small internal breaches can escalate into major data leaks and how QueryPie helps mitigate risks effectively.\"\ndate: \"2024-11-22\"\nauthor: \"regan\"\nogImage: \"public/blog/b-thumb-12.webp\"\nkeywords: [\"QueryPie\", \"data breaches\", \"small breaches\", \"data leak risks\", \"risk mitigation\", \"internal security\"]\nrelatedPosts:\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/9/data-discovery-privacy-management",
         "/features/documentation/blog/7/command-bypass-prevention-control",
@@ -68,11 +53,7 @@
         "description": "Explore how small internal breaches can escalate into major data leaks and how QueryPie helps mitigate risks effectively.",
         "date": "2024-11-22",
         "author": "regan",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-12.webp",
-=======
-        "ogImage": "public/blog/b-thumb-12.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "data breaches",
@@ -92,7 +73,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-12.webp",
           "webPath": "/documentation/blogs/b-thumb-12.webp"
         },
@@ -100,15 +80,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog12-image-1.webp",
           "webPath": "/documentation/blogs/blog12-image-1.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-12.webp",
-          "webPath": "/blog/b-thumb-12.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog12-image-1.webp",
-          "webPath": "/blog/blog12-image-1.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/internal-data-leaks--12/ko.mdx",
@@ -126,13 +97,8 @@
         "내부 보안"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-12.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"개인정보 유출: 내부에서 시작된 작은 틈, 데이터 재앙으로 번지다\"\ndescription: \"데이터 유출 사고는 조직이 직면할 수 있는 치명적인 위협 중 하나로, 기업의 평판, 고객 신뢰, 그리고 재정적 안정성을 흔들 수 있습니다. 어떻게 대응해야할까요?\"\ndate: \"2024-11-22\"\nauthor: \"regan\"\nogImage: \"public/documentation/blogs/b-thumb-12.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"데이터 유출\", \"개인정보유출\", \"데이터 유출 위험\", \"위험 관리\", \"내부 보안\"]\nrelatedPosts:\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
-=======
-      "ogImage": "/blog/b-thumb-12.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"개인정보 유출: 내부에서 시작된 작은 틈, 데이터 재앙으로 번지다\"\ndescription: \"데이터 유출 사고는 조직이 직면할 수 있는 치명적인 위협 중 하나로, 기업의 평판, 고객 신뢰, 그리고 재정적 안정성을 흔들 수 있습니다. 어떻게 대응해야할까요?\"\ndate: \"2024-11-22\"\nauthor: \"regan\"\nogImage: \"public/blog/b-thumb-12.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"데이터 유출\", \"개인정보유출\", \"데이터 유출 위험\", \"위험 관리\", \"내부 보안\"]\nrelatedPosts:\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/9/data-discovery-privacy-management",
         "/features/documentation/blog/7/command-bypass-prevention-control",
@@ -147,11 +113,7 @@
         "description": "데이터 유출 사고는 조직이 직면할 수 있는 치명적인 위협 중 하나로, 기업의 평판, 고객 신뢰, 그리고 재정적 안정성을 흔들 수 있습니다. 어떻게 대응해야할까요?",
         "date": "2024-11-22",
         "author": "regan",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-12.webp",
-=======
-        "ogImage": "public/blog/b-thumb-12.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -172,7 +134,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-12.webp",
           "webPath": "/documentation/blogs/b-thumb-12.webp"
         },
@@ -180,15 +141,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog12-image-1.webp",
           "webPath": "/documentation/blogs/blog12-image-1.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-12.webp",
-          "webPath": "/blog/b-thumb-12.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog12-image-1.webp",
-          "webPath": "/blog/blog12-image-1.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/internal-data-leaks--12/ja.mdx",
@@ -205,13 +157,8 @@
         "内部セキュリティ"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-12.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"個人情報漏洩: 小さな内部違反が大惨事に発展するまで\"\ndescription: \"小さな内部違反がどのように重大なデータ漏えいに発展しうるか、また QueryPie がどのようにリスクを効果的に軽減するのに役立つかを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"regan\"\nogImage: \"public/documentation/blogs/b-thumb-12.webp\"\nkeywords: [\"QueryPie\", \"データ侵害\", \"小規模な侵害\", \"データ漏洩のリスク\", \"リスク軽減\", \"内部セキュリティ\"]\nrelatedPosts:\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
-=======
-      "ogImage": "/blog/b-thumb-12.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"個人情報漏洩: 小さな内部違反が大惨事に発展するまで\"\ndescription: \"小さな内部違反がどのように重大なデータ漏えいに発展しうるか、また QueryPie がどのようにリスクを効果的に軽減するのに役立つかを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"regan\"\nogImage: \"public/blog/b-thumb-12.webp\"\nkeywords: [\"QueryPie\", \"データ侵害\", \"小規模な侵害\", \"データ漏洩のリスク\", \"リスク軽減\", \"内部セキュリティ\"]\nrelatedPosts:\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/9/data-discovery-privacy-management",
         "/features/documentation/blog/7/command-bypass-prevention-control",
@@ -226,11 +173,7 @@
         "description": "小さな内部違反がどのように重大なデータ漏えいに発展しうるか、また QueryPie がどのようにリスクを効果的に軽減するのに役立つかを紹介します。",
         "date": "2024-11-22",
         "author": "regan",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-12.webp",
-=======
-        "ogImage": "public/blog/b-thumb-12.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "データ侵害",

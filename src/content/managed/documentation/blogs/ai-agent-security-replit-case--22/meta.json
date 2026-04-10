@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-22.webp",
           "webPath": "/documentation/blogs/b-thumb-22.webp"
         },
@@ -27,20 +26,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog22-image-3.webp",
           "webPath": "/documentation/blogs/blog22-image-3.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-22.webp",
-          "webPath": "/blog/b-thumb-22.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog22-image-2.webp",
-          "webPath": "/blog/blog22-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog22-image-3.webp",
-          "webPath": "/blog/blog22-image-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/ai-agent-security-replit-case--22/en.mdx",
@@ -71,13 +56,8 @@
         "SaaS Security"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-22.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"How Much Can We Trust AI? The Naked Truth of AI Agent Security Through the Replit Incident\"\ndescription: \"The incident where Replit AI Agent deleted a production DB is not just a technical mistake, but highlights the importance of security architecture when deploying AI agents in real environments. This case summarizes a security checklist including AI hallucination detection, least privilege design, and execution log retention.\"\ndate: \"2025-07-29\"\nauthor: \"brant\"\nogImage: \"public/documentation/blogs/b-thumb-22.webp\"\nkeywords: [\"AI Security\", \"AI Agent\", \"Replit Incident\", \"Executable AI\", \"AI Incident\", \"Prompt Hallucination\", \"AI Governance\", \"Execution Log\", \"Database Deletion\", \"AI Privilege Management\", \"AI Responsibility Structure\", \"AI Risk Detection\", \"LLM Risk\", \"QueryPie\", \"MCP Access Controller\", \"Security Checklist\", \"AI Reliability\", \"AI Red Teaming\", \"AI Vulnerability\", \"SaaS Security\"]\nrelatedPosts:\n  - \"/features/documentation/blog/20/nextjs-server-action-security\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"",
-=======
-      "ogImage": "/blog/b-thumb-22.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"How Much Can We Trust AI? The Naked Truth of AI Agent Security Through the Replit Incident\"\ndescription: \"The incident where Replit AI Agent deleted a production DB is not just a technical mistake, but highlights the importance of security architecture when deploying AI agents in real environments. This case summarizes a security checklist including AI hallucination detection, least privilege design, and execution log retention.\"\ndate: \"2025-07-29\"\nauthor: \"brant\"\nogImage: \"public/blog/b-thumb-22.webp\"\nkeywords: [\"AI Security\", \"AI Agent\", \"Replit Incident\", \"Executable AI\", \"AI Incident\", \"Prompt Hallucination\", \"AI Governance\", \"Execution Log\", \"Database Deletion\", \"AI Privilege Management\", \"AI Responsibility Structure\", \"AI Risk Detection\", \"LLM Risk\", \"QueryPie\", \"MCP Access Controller\", \"Security Checklist\", \"AI Reliability\", \"AI Red Teaming\", \"AI Vulnerability\", \"SaaS Security\"]\nrelatedPosts:\n  - \"/features/documentation/blog/20/nextjs-server-action-security\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/20/nextjs-server-action-security",
         "/features/documentation/blog/21/why-we-need-ai-red-teaming",
@@ -92,11 +72,7 @@
         "description": "The incident where Replit AI Agent deleted a production DB is not just a technical mistake, but highlights the importance of security architecture when deploying AI agents in real environments. This case summarizes a security checklist including AI hallucination detection, least privilege design, and execution log retention.",
         "date": "2025-07-29",
         "author": "brant",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-22.webp",
-=======
-        "ogImage": "public/blog/b-thumb-22.webp",
->>>>>>> origin/main
         "keywords": [
           "AI Security",
           "AI Agent",
@@ -130,7 +106,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-22.webp",
           "webPath": "/documentation/blogs/b-thumb-22.webp"
         },
@@ -143,20 +118,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog22-image-3.webp",
           "webPath": "/documentation/blogs/blog22-image-3.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-22.webp",
-          "webPath": "/blog/b-thumb-22.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog22-image-2.webp",
-          "webPath": "/blog/blog22-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog22-image-3.webp",
-          "webPath": "/blog/blog22-image-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/ai-agent-security-replit-case--22/ko.mdx",
@@ -187,13 +148,8 @@
         "SaaS 보안"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-22.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"AI는 어디까지 믿어도 될까? Replit 사고로 돌아본 AI Agent 보안의 민낯\"\ndescription: \"Replit AI Agent가 프로덕션 DB를 삭제한 사고는 단순한 기술적 실수가 아니라, AI 에이전트를 실환경에 도입할 때 반드시 고민해야 할 보안 구조의 중요성을 보여줍니다. 이번 사례를 통해 AI 거짓 응답 탐지, 최소 권한 설계, 실행 기록 확보 등 보안 체크리스트를 정리합니다.\"\ndate: \"2025-07-29\"\nauthor: \"brant\"\nogImage: \"public/documentation/blogs/b-thumb-22.webp\"\nkeywords: [\"AI 보안\", \"AI 에이전트\", \"Replit 사고\", \"실행형 AI\", \"AI 사고\", \"프롬프트 거짓 응답\", \"AI 거버넌스\", \"실행 로그\", \"데이터베이스 삭제\", \"AI 권한 관리\", \"AI 책임 구조\", \"AI 위험 탐지\", \"LLM 리스크\", \"QueryPie\", \"MCP Access Controller\", \"보안 체크리스트\", \"AI 신뢰성\", \"AI Red Teaming\", \"AI 취약점\", \"SaaS 보안\"]\nrelatedPosts:\n  - \"/features/documentation/blog/20/nextjs-server-action-security\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"",
-=======
-      "ogImage": "/blog/b-thumb-22.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"AI는 어디까지 믿어도 될까? Replit 사고로 돌아본 AI Agent 보안의 민낯\"\ndescription: \"Replit AI Agent가 프로덕션 DB를 삭제한 사고는 단순한 기술적 실수가 아니라, AI 에이전트를 실환경에 도입할 때 반드시 고민해야 할 보안 구조의 중요성을 보여줍니다. 이번 사례를 통해 AI 거짓 응답 탐지, 최소 권한 설계, 실행 기록 확보 등 보안 체크리스트를 정리합니다.\"\ndate: \"2025-07-29\"\nauthor: \"brant\"\nogImage: \"public/blog/b-thumb-22.webp\"\nkeywords: [\"AI 보안\", \"AI 에이전트\", \"Replit 사고\", \"실행형 AI\", \"AI 사고\", \"프롬프트 거짓 응답\", \"AI 거버넌스\", \"실행 로그\", \"데이터베이스 삭제\", \"AI 권한 관리\", \"AI 책임 구조\", \"AI 위험 탐지\", \"LLM 리스크\", \"QueryPie\", \"MCP Access Controller\", \"보안 체크리스트\", \"AI 신뢰성\", \"AI Red Teaming\", \"AI 취약점\", \"SaaS 보안\"]\nrelatedPosts:\n  - \"/features/documentation/blog/20/nextjs-server-action-security\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/20/nextjs-server-action-security",
         "/features/documentation/blog/21/why-we-need-ai-red-teaming",
@@ -208,11 +164,7 @@
         "description": "Replit AI Agent가 프로덕션 DB를 삭제한 사고는 단순한 기술적 실수가 아니라, AI 에이전트를 실환경에 도입할 때 반드시 고민해야 할 보안 구조의 중요성을 보여줍니다. 이번 사례를 통해 AI 거짓 응답 탐지, 최소 권한 설계, 실행 기록 확보 등 보안 체크리스트를 정리합니다.",
         "date": "2025-07-29",
         "author": "brant",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-22.webp",
-=======
-        "ogImage": "public/blog/b-thumb-22.webp",
->>>>>>> origin/main
         "keywords": [
           "AI 보안",
           "AI 에이전트",
@@ -246,7 +198,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-22.webp",
           "webPath": "/documentation/blogs/b-thumb-22.webp"
         },
@@ -259,20 +210,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog22-image-3.webp",
           "webPath": "/documentation/blogs/blog22-image-3.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-22.webp",
-          "webPath": "/blog/b-thumb-22.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog22-image-2.webp",
-          "webPath": "/blog/blog22-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog22-image-3.webp",
-          "webPath": "/blog/blog22-image-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/ai-agent-security-replit-case--22/ja.mdx",
@@ -303,13 +240,8 @@
         "SaaSセキュリティ"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-22.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"AIはどこまで信じていいのか？Replit事件から振り返るAIエージェントセキュリティの現実\"\ndescription: \"Replit AIエージェントがプロダクションDBを削除した事件は、単なる技術的ミスではなく、AIエージェントを実環境に導入する際に必ず考慮すべきセキュリティ構造の重要性を示しています。本事例を通じて、AIの虚偽応答検知、最小権限設計、実行記録の確保など、セキュリティチェックリストを整理します。\"\ndate: \"2025-07-29\"\nauthor: \"brant\"\nogImage: \"public/documentation/blogs/b-thumb-22.webp\"\nkeywords: [\"AIセキュリティ\", \"AIエージェント\", \"Replit事件\", \"実行型AI\", \"AI事故\", \"プロンプト虚偽応答\", \"AIガバナンス\", \"実行ログ\", \"データベース削除\", \"AI権限管理\", \"AI責任構造\", \"AIリスク検知\", \"LLMリスク\", \"QueryPie\", \"MCP Access Controller\", \"セキュリティチェックリスト\", \"AI信頼性\", \"AIレッドチーミング\", \"AI脆弱性\", \"SaaSセキュリティ\"]\nrelatedPosts:\n  - \"/features/documentation/blog/20/nextjs-server-action-security\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"",
-=======
-      "ogImage": "/blog/b-thumb-22.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"AIはどこまで信じていいのか？Replit事件から振り返るAIエージェントセキュリティの現実\"\ndescription: \"Replit AIエージェントがプロダクションDBを削除した事件は、単なる技術的ミスではなく、AIエージェントを実環境に導入する際に必ず考慮すべきセキュリティ構造の重要性を示しています。本事例を通じて、AIの虚偽応答検知、最小権限設計、実行記録の確保など、セキュリティチェックリストを整理します。\"\ndate: \"2025-07-29\"\nauthor: \"brant\"\nogImage: \"public/blog/b-thumb-22.webp\"\nkeywords: [\"AIセキュリティ\", \"AIエージェント\", \"Replit事件\", \"実行型AI\", \"AI事故\", \"プロンプト虚偽応答\", \"AIガバナンス\", \"実行ログ\", \"データベース削除\", \"AI権限管理\", \"AI責任構造\", \"AIリスク検知\", \"LLMリスク\", \"QueryPie\", \"MCP Access Controller\", \"セキュリティチェックリスト\", \"AI信頼性\", \"AIレッドチーミング\", \"AI脆弱性\", \"SaaSセキュリティ\"]\nrelatedPosts:\n  - \"/features/documentation/blog/20/nextjs-server-action-security\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/20/nextjs-server-action-security",
         "/features/documentation/blog/21/why-we-need-ai-red-teaming",
@@ -324,11 +256,7 @@
         "description": "Replit AIエージェントがプロダクションDBを削除した事件は、単なる技術的ミスではなく、AIエージェントを実環境に導入する際に必ず考慮すべきセキュリティ構造の重要性を示しています。本事例を通じて、AIの虚偽応答検知、最小権限設計、実行記録の確保など、セキュリティチェックリストを整理します。",
         "date": "2025-07-29",
         "author": "brant",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-22.webp",
-=======
-        "ogImage": "public/blog/b-thumb-22.webp",
->>>>>>> origin/main
         "keywords": [
           "AIセキュリティ",
           "AIエージェント",

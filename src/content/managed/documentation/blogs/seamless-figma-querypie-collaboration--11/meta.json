@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-11.webp",
           "webPath": "/documentation/blogs/b-thumb-11.webp"
         },
@@ -37,30 +36,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog11-image-5.webp",
           "webPath": "/documentation/blogs/blog11-image-5.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-11.webp",
-          "webPath": "/blog/b-thumb-11.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-2.webp",
-          "webPath": "/blog/blog11-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-3.webp",
-          "webPath": "/blog/blog11-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-4.webp",
-          "webPath": "/blog/blog11-image-4.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-5.webp",
-          "webPath": "/blog/blog11-image-5.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/seamless-figma-querypie-collaboration--11/en.mdx",
@@ -77,13 +52,8 @@
         "productivity boost"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-11.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie x Figma: The Ultimate Guide to Seamless Collaboration\"\ndescription: \"Discover how QueryPie and Figma ensure seamless collaboration for design and development teams, boosting productivity.\"\ndate: \"2024-11-22\"\nauthor: \"vin\"\nogImage: \"public/documentation/blogs/b-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"Figma\", \"collaboration tools\", \"seamless teamwork\", \"design integration\", \"productivity boost\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"",
-=======
-      "ogImage": "/blog/b-thumb-11.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie x Figma: The Ultimate Guide to Seamless Collaboration\"\ndescription: \"Discover how QueryPie and Figma ensure seamless collaboration for design and development teams, boosting productivity.\"\ndate: \"2024-11-22\"\nauthor: \"vin\"\nogImage: \"public/blog/b-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"Figma\", \"collaboration tools\", \"seamless teamwork\", \"design integration\", \"productivity boost\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/8/querypie-product-managers",
         "/features/documentation/blog/10/customer-centric-tpm-life",
@@ -98,11 +68,7 @@
         "description": "Discover how QueryPie and Figma ensure seamless collaboration for design and development teams, boosting productivity.",
         "date": "2024-11-22",
         "author": "vin",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-11.webp",
-=======
-        "ogImage": "public/blog/b-thumb-11.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "Figma",
@@ -122,7 +88,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-11.webp",
           "webPath": "/documentation/blogs/b-thumb-11.webp"
         },
@@ -145,30 +110,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog11-image-5.webp",
           "webPath": "/documentation/blogs/blog11-image-5.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-11.webp",
-          "webPath": "/blog/b-thumb-11.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-2.webp",
-          "webPath": "/blog/blog11-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-3.webp",
-          "webPath": "/blog/blog11-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-4.webp",
-          "webPath": "/blog/blog11-image-4.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-5.webp",
-          "webPath": "/blog/blog11-image-5.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/seamless-figma-querypie-collaboration--11/ko.mdx",
@@ -186,13 +127,8 @@
         "생산성 향상"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-11.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie와 Figma, 딱 맞아떨어지는 협업의 정석\"\ndescription: \"소프트웨어의 발전과 함께 디자이너의 업무 영역이 확장되어 왔는데요, 예전에는 어떻게 일했고, 현재 쿼리파이 협업의 모습부터 예전의 디자인작업에 이르는 그 혁신의 변천사를 알아볼까요?\"\ndate: \"2024-11-22\"\nauthor: \"vin\"\nogImage: \"public/documentation/blogs/b-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"Figma\", \"협업 도구\", \"원활한 팀워크\", \"디자인 통합\", \"생산성 향상\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"",
-=======
-      "ogImage": "/blog/b-thumb-11.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie와 Figma, 딱 맞아떨어지는 협업의 정석\"\ndescription: \"소프트웨어의 발전과 함께 디자이너의 업무 영역이 확장되어 왔는데요, 예전에는 어떻게 일했고, 현재 쿼리파이 협업의 모습부터 예전의 디자인작업에 이르는 그 혁신의 변천사를 알아볼까요?\"\ndate: \"2024-11-22\"\nauthor: \"vin\"\nogImage: \"public/blog/b-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"Figma\", \"협업 도구\", \"원활한 팀워크\", \"디자인 통합\", \"생산성 향상\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/8/querypie-product-managers",
         "/features/documentation/blog/10/customer-centric-tpm-life",
@@ -207,11 +143,7 @@
         "description": "소프트웨어의 발전과 함께 디자이너의 업무 영역이 확장되어 왔는데요, 예전에는 어떻게 일했고, 현재 쿼리파이 협업의 모습부터 예전의 디자인작업에 이르는 그 혁신의 변천사를 알아볼까요?",
         "date": "2024-11-22",
         "author": "vin",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-11.webp",
-=======
-        "ogImage": "public/blog/b-thumb-11.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -232,7 +164,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-11.webp",
           "webPath": "/documentation/blogs/b-thumb-11.webp"
         },
@@ -255,30 +186,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog11-image-5.webp",
           "webPath": "/documentation/blogs/blog11-image-5.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-11.webp",
-          "webPath": "/blog/b-thumb-11.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-2.webp",
-          "webPath": "/blog/blog11-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-3.webp",
-          "webPath": "/blog/blog11-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-4.webp",
-          "webPath": "/blog/blog11-image-4.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog11-image-5.webp",
-          "webPath": "/blog/blog11-image-5.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/seamless-figma-querypie-collaboration--11/ja.mdx",
@@ -295,13 +202,8 @@
         "生産性の向上"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-11.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie と Figma、ぴったりと合った協力の極意\"\ndescription: \"QueryPie と Figma がどのように設計チームと開発チームのシームレスなコラボレーションを実現し、生産性を向上させているのかをご紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"vin\"\nogImage: \"public/documentation/blogs/b-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"Figma\", \"コラボレーションツール\", \"シームレスなチームワーク\", \"設計の統合\", \"生産性の向上\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"",
-=======
-      "ogImage": "/blog/b-thumb-11.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie と Figma、ぴったりと合った協力の極意\"\ndescription: \"QueryPie と Figma がどのように設計チームと開発チームのシームレスなコラボレーションを実現し、生産性を向上させているのかをご紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"vin\"\nogImage: \"public/blog/b-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"Figma\", \"コラボレーションツール\", \"シームレスなチームワーク\", \"設計の統合\", \"生産性の向上\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/querypie-product-managers\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/8/querypie-product-managers",
         "/features/documentation/blog/10/customer-centric-tpm-life",
@@ -316,11 +218,7 @@
         "description": "QueryPie と Figma がどのように設計チームと開発チームのシームレスなコラボレーションを実現し、生産性を向上させているのかをご紹介します。",
         "date": "2024-11-22",
         "author": "vin",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-11.webp",
-=======
-        "ogImage": "public/blog/b-thumb-11.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "Figma",

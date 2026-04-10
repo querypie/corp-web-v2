@@ -114,13 +114,8 @@ export default function ContactUsPage({
               privacyText={privacyText}
             />
 
-<<<<<<< HEAD
             <div className="flex">
               <Button arrow={false} style="full" variant="secondary">
-=======
-            <div className="flex" data-reveal style={{ transitionDelay: `${(formFields.length + 4) * 70}ms` }}>
-              <Button arrow={false} style="round" variant="secondary">
->>>>>>> origin/main
                 {submitLabel}
               </Button>
             </div>

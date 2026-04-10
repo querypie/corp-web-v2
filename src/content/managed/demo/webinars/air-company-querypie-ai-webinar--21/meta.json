@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/webinars/air-company-ai-webinar20251023.webp",
           "webPath": "/demo/webinars/air-company-ai-webinar20251023.webp"
-=======
-          "sourcePath": "public/webinar/air-company-ai-webinar20251023.webp",
-          "webPath": "/webinar/air-company-ai-webinar20251023.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/air-company-querypie-ai-webinar--21/ja.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/webinars/air-company-ai-webinar20251023.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"AIエージェントってウチの会社でも使えるの？30分でわかる入門編 【10/23(木)開催｜参加費無料】\"\ndescription: \"AI活用は競争力の鍵。今や企業にとって避けて通れないテーマとなっています。​しかし「どの業務に取り入れればよいのか分からない」「人材やノウハウが足りない」「セキュリティやガバナンスが不安」といった理由から、導入が進まない企業も少なくありません。​本セミナーでは、こうした課題を整理し、実際にAIを業務へ取り込み成果を上げている実例を紹介します。​​\"\ndate: \"2025-10-08\"\nogImage: \"public/demo/webinars/air-company-ai-webinar20251023.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/20/air-company-querypie-mcp-webinar\"\n  - \"/features/demo/webinars/19/air-company-querypie-mcp-webinar\"\n  - \"/features/demo/webinars/18/air-company-querypie-mcp-webinar\"",
-=======
-      "ogImage": "/webinar/air-company-ai-webinar20251023.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"AIエージェントってウチの会社でも使えるの？30分でわかる入門編 【10/23(木)開催｜参加費無料】\"\ndescription: \"AI活用は競争力の鍵。今や企業にとって避けて通れないテーマとなっています。​しかし「どの業務に取り入れればよいのか分からない」「人材やノウハウが足りない」「セキュリティやガバナンスが不安」といった理由から、導入が進まない企業も少なくありません。​本セミナーでは、こうした課題を整理し、実際にAIを業務へ取り込み成果を上げている実例を紹介します。​​\"\ndate: \"2025-10-08\"\nogImage: \"public/webinar/air-company-ai-webinar20251023.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/20/air-company-querypie-mcp-webinar\"\n  - \"/features/demo/webinars/19/air-company-querypie-mcp-webinar\"\n  - \"/features/demo/webinars/18/air-company-querypie-mcp-webinar\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/20/air-company-querypie-mcp-webinar",
         "/features/demo/webinars/19/air-company-querypie-mcp-webinar",
@@ -50,11 +40,7 @@
         "title": "AIエージェントってウチの会社でも使えるの？30分でわかる入門編 【10/23(木)開催｜参加費無料】",
         "description": "AI活用は競争力の鍵。今や企業にとって避けて通れないテーマとなっています。​しかし「どの業務に取り入れればよいのか分からない」「人材やノウハウが足りない」「セキュリティやガバナンスが不安」といった理由から、導入が進まない企業も少なくありません。​本セミナーでは、こうした課題を整理し、実際にAIを業務へ取り込み成果を上げている実例を紹介します。​​",
         "date": "2025-10-08",
-<<<<<<< HEAD
         "ogImage": "public/demo/webinars/air-company-ai-webinar20251023.webp",
-=======
-        "ogImage": "public/webinar/air-company-ai-webinar20251023.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

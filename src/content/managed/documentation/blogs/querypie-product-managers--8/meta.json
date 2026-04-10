@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-8.webp",
           "webPath": "/documentation/blogs/b-thumb-8.webp"
         },
@@ -42,35 +41,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog8-image-5.webp",
           "webPath": "/documentation/blogs/blog8-image-5.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-8.webp",
-          "webPath": "/blog/b-thumb-8.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-1.webp",
-          "webPath": "/blog/blog8-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-2.webp",
-          "webPath": "/blog/blog8-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-3.webp",
-          "webPath": "/blog/blog8-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-4.webp",
-          "webPath": "/blog/blog8-image-4.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-5.webp",
-          "webPath": "/blog/blog8-image-5.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/querypie-product-managers--8/en.mdx",
@@ -86,13 +56,8 @@
         "all-rounder skills"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-8.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie PM’s Work Smarts: Transforming into a True All-Rounder\"\ndescription: \"QueryPie PM insights on becoming an all-rounder through effective work strategies and cross-functional collaboration.\"\ndate: \"2024-11-22\"\nauthor: \"keira\"\nogImage: \"public/documentation/blogs/b-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"PM work strategies\", \"cross-functional collaboration\", \"productivity\", \"all-rounder skills\"]\nrelatedPosts:\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"",
-=======
-      "ogImage": "/blog/b-thumb-8.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie PM’s Work Smarts: Transforming into a True All-Rounder\"\ndescription: \"QueryPie PM insights on becoming an all-rounder through effective work strategies and cross-functional collaboration.\"\ndate: \"2024-11-22\"\nauthor: \"keira\"\nogImage: \"public/blog/b-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"PM work strategies\", \"cross-functional collaboration\", \"productivity\", \"all-rounder skills\"]\nrelatedPosts:\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/11/seamless-figma-querypie-collaboration",
         "/features/documentation/blog/3/querypie-team-success-secrets",
@@ -107,11 +72,7 @@
         "description": "QueryPie PM insights on becoming an all-rounder through effective work strategies and cross-functional collaboration.",
         "date": "2024-11-22",
         "author": "keira",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-8.webp",
-=======
-        "ogImage": "public/blog/b-thumb-8.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "PM work strategies",
@@ -130,7 +91,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-8.webp",
           "webPath": "/documentation/blogs/b-thumb-8.webp"
         },
@@ -158,35 +118,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog8-image-5.webp",
           "webPath": "/documentation/blogs/blog8-image-5.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-8.webp",
-          "webPath": "/blog/b-thumb-8.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-1.webp",
-          "webPath": "/blog/blog8-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-2.webp",
-          "webPath": "/blog/blog8-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-3.webp",
-          "webPath": "/blog/blog8-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-4.webp",
-          "webPath": "/blog/blog8-image-4.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-5.webp",
-          "webPath": "/blog/blog8-image-5.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/querypie-product-managers--8/ko.mdx",
@@ -205,13 +136,8 @@
         "PM"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-8.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie PM의 일잘러 스킬셋, 올라운더로 거듭나기\"\ndescription: \"올라운더 PM으로 거듭나기 위한 QueryPie PM만의 효율적인 업무 방식과 전략을 공개하며, 다양한 프로젝트를 효과적으로 관리하고, 팀과 협업을 극대화하는 방법을 알려드립니다.\"\ndate: \"2024-11-22\"\nauthor: \"keira\"\nogImage: \"public/documentation/blogs/b-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"프로덕트 오너\", \"프로젝트 매니저\", \"Product Manager\", \"생산성\", \"올라운더 스킬\", \"PM\"]\nrelatedPosts:\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"",
-=======
-      "ogImage": "/blog/b-thumb-8.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie PM의 일잘러 스킬셋, 올라운더로 거듭나기\"\ndescription: \"올라운더 PM으로 거듭나기 위한 QueryPie PM만의 효율적인 업무 방식과 전략을 공개하며, 다양한 프로젝트를 효과적으로 관리하고, 팀과 협업을 극대화하는 방법을 알려드립니다.\"\ndate: \"2024-11-22\"\nauthor: \"keira\"\nogImage: \"public/blog/b-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"프로덕트 오너\", \"프로젝트 매니저\", \"Product Manager\", \"생산성\", \"올라운더 스킬\", \"PM\"]\nrelatedPosts:\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/11/seamless-figma-querypie-collaboration",
         "/features/documentation/blog/3/querypie-team-success-secrets",
@@ -226,11 +152,7 @@
         "description": "올라운더 PM으로 거듭나기 위한 QueryPie PM만의 효율적인 업무 방식과 전략을 공개하며, 다양한 프로젝트를 효과적으로 관리하고, 팀과 협업을 극대화하는 방법을 알려드립니다.",
         "date": "2024-11-22",
         "author": "keira",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-8.webp",
-=======
-        "ogImage": "public/blog/b-thumb-8.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -252,7 +174,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-8.webp",
           "webPath": "/documentation/blogs/b-thumb-8.webp"
         },
@@ -280,35 +201,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog8-image-5.webp",
           "webPath": "/documentation/blogs/blog8-image-5.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-8.webp",
-          "webPath": "/blog/b-thumb-8.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-1.webp",
-          "webPath": "/blog/blog8-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-2.webp",
-          "webPath": "/blog/blog8-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-3.webp",
-          "webPath": "/blog/blog8-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-4.webp",
-          "webPath": "/blog/blog8-image-4.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog8-image-5.webp",
-          "webPath": "/blog/blog8-image-5.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/querypie-product-managers--8/ja.mdx",
@@ -324,13 +216,8 @@
         "オールラウンドスキル"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-8.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie PMの仕事力スキルセット、オールラウンダーとして成長する方法\"\ndescription: \"効果的な作業戦略と部門を横断した協業を通じて、オールラウンダーとして成長する QueryPie PM の働き方を紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"keira\"\nogImage: \"public/documentation/blogs/b-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"PMの作業戦略\", \"機能横断的なコラボレーション\", \"生産性\", \"オールラウンドスキル\"]\nrelatedPosts:\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"",
-=======
-      "ogImage": "/blog/b-thumb-8.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie PMの仕事力スキルセット、オールラウンダーとして成長する方法\"\ndescription: \"効果的な作業戦略と部門を横断した協業を通じて、オールラウンダーとして成長する QueryPie PM の働き方を紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"keira\"\nogImage: \"public/blog/b-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"PMの作業戦略\", \"機能横断的なコラボレーション\", \"生産性\", \"オールラウンドスキル\"]\nrelatedPosts:\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/11/seamless-figma-querypie-collaboration",
         "/features/documentation/blog/3/querypie-team-success-secrets",
@@ -345,11 +232,7 @@
         "description": "効果的な作業戦略と部門を横断した協業を通じて、オールラウンダーとして成長する QueryPie PM の働き方を紹介します。",
         "date": "2024-11-22",
         "author": "keira",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-8.webp",
-=======
-        "ogImage": "public/blog/b-thumb-8.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "PMの作業戦略",

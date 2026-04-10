@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-10.webp",
           "webPath": "/documentation/white-papers/wp-thumb-10.webp"
         },
@@ -72,65 +71,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp10-11-fuzzing.webp",
           "webPath": "/documentation/white-papers/wp10-11-fuzzing.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-10.webp",
-          "webPath": "/white-paper/wp-thumb-10.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-1-querypie-cicd-pipeline.webp",
-          "webPath": "/white-paper/wp10-1-querypie-cicd-pipeline.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-2-types-of-vulns-to-check.webp",
-          "webPath": "/white-paper/wp10-2-types-of-vulns-to-check.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-3-vulnerability-scanning-tools.webp",
-          "webPath": "/white-paper/wp10-3-vulnerability-scanning-tools.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-4-vulnerability-scan-report.webp",
-          "webPath": "/white-paper/wp10-4-vulnerability-scan-report.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-5-hardening-process.webp",
-          "webPath": "/white-paper/wp10-5-hardening-process.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-6-vulnerability-detection-snyk.webp",
-          "webPath": "/white-paper/wp10-6-vulnerability-detection-snyk.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-7-vulnerability-detection-github.webp",
-          "webPath": "/white-paper/wp10-7-vulnerability-detection-github.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-8-cicd-migration-control-process.webp",
-          "webPath": "/white-paper/wp10-8-cicd-migration-control-process.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-9-iac-scan.webp",
-          "webPath": "/white-paper/wp10-9-iac-scan.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-10-dast.webp",
-          "webPath": "/white-paper/wp10-10-dast.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-11-fuzzing.webp",
-          "webPath": "/white-paper/wp10-11-fuzzing.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/querypie-devsecops-pipeline--10/en.mdx",
@@ -147,13 +87,8 @@
         "enhanced delivery"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-10.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie’s DevSecOps Pipeline: Proven to Enhance Development Speed and Stability\"\ndescription: \"Streamline development with QueryPie's DevSecOps pipeline for enhanced speed, stability, and security.\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/documentation/white-papers/wp-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"DevSecOps pipeline\", \"development speed\", \"stability\", \"software security\", \"enhanced delivery\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-10.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie’s DevSecOps Pipeline: Proven to Enhance Development Speed and Stability\"\ndescription: \"Streamline development with QueryPie's DevSecOps pipeline for enhanced speed, stability, and security.\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/white-paper/wp-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"DevSecOps pipeline\", \"development speed\", \"stability\", \"software security\", \"enhanced delivery\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/9/penetration-testing-standard",
         "/features/documentation/white-paper/8/secure-login-token-management",
@@ -172,11 +107,7 @@
           "ravi",
           "noah"
         ],
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-10.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-10.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "DevSecOps pipeline",
@@ -196,7 +127,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-10.webp",
           "webPath": "/documentation/white-papers/wp-thumb-10.webp"
         },
@@ -254,65 +184,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp10-11-fuzzing.webp",
           "webPath": "/documentation/white-papers/wp10-11-fuzzing.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-10.webp",
-          "webPath": "/white-paper/wp-thumb-10.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-1-querypie-cicd-pipeline.webp",
-          "webPath": "/white-paper/wp10-1-querypie-cicd-pipeline.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-2-types-of-vulns-to-check.webp",
-          "webPath": "/white-paper/wp10-2-types-of-vulns-to-check.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-3-vulnerability-scanning-tools.webp",
-          "webPath": "/white-paper/wp10-3-vulnerability-scanning-tools.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-4-vulnerability-scan-report.webp",
-          "webPath": "/white-paper/wp10-4-vulnerability-scan-report.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-5-hardening-process.webp",
-          "webPath": "/white-paper/wp10-5-hardening-process.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-6-vulnerability-detection-snyk.webp",
-          "webPath": "/white-paper/wp10-6-vulnerability-detection-snyk.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-7-vulnerability-detection-github.webp",
-          "webPath": "/white-paper/wp10-7-vulnerability-detection-github.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-8-cicd-migration-control-process.webp",
-          "webPath": "/white-paper/wp10-8-cicd-migration-control-process.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-9-iac-scan.webp",
-          "webPath": "/white-paper/wp10-9-iac-scan.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-10-dast.webp",
-          "webPath": "/white-paper/wp10-10-dast.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-11-fuzzing.webp",
-          "webPath": "/white-paper/wp10-11-fuzzing.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/querypie-devsecops-pipeline--10/ko.mdx",
@@ -330,13 +201,8 @@
         "자동화"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-10.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"개발 속도와 안정성 향상이 검증된 QueryPie의 DevSecOps 파이프라인\"\ndescription: \"개발 초기부터 운영 단계까지 보안을 자동화하고 표준화된 방식으로 구축 운영하고 있는 QueryPie의 파이프라인을 소개합니다.\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/documentation/white-papers/wp-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"DevSecOps 파이프라인\", \"개발 속도\", \"안정성\", \"소프트웨어 보안\", \"자동화\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-10.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"개발 속도와 안정성 향상이 검증된 QueryPie의 DevSecOps 파이프라인\"\ndescription: \"개발 초기부터 운영 단계까지 보안을 자동화하고 표준화된 방식으로 구축 운영하고 있는 QueryPie의 파이프라인을 소개합니다.\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/white-paper/wp-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"DevSecOps 파이프라인\", \"개발 속도\", \"안정성\", \"소프트웨어 보안\", \"자동화\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/9/penetration-testing-standard",
         "/features/documentation/white-paper/8/secure-login-token-management",
@@ -355,11 +221,7 @@
           "ravi",
           "noah"
         ],
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-10.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-10.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -380,7 +242,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-10.webp",
           "webPath": "/documentation/white-papers/wp-thumb-10.webp"
         },
@@ -438,65 +299,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp10-11-fuzzing.webp",
           "webPath": "/documentation/white-papers/wp10-11-fuzzing.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-10.webp",
-          "webPath": "/white-paper/wp-thumb-10.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-1-querypie-cicd-pipeline.webp",
-          "webPath": "/white-paper/wp10-1-querypie-cicd-pipeline.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-2-types-of-vulns-to-check.webp",
-          "webPath": "/white-paper/wp10-2-types-of-vulns-to-check.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-3-vulnerability-scanning-tools.webp",
-          "webPath": "/white-paper/wp10-3-vulnerability-scanning-tools.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-4-vulnerability-scan-report.webp",
-          "webPath": "/white-paper/wp10-4-vulnerability-scan-report.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-5-hardening-process.webp",
-          "webPath": "/white-paper/wp10-5-hardening-process.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-6-vulnerability-detection-snyk.webp",
-          "webPath": "/white-paper/wp10-6-vulnerability-detection-snyk.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-7-vulnerability-detection-github.webp",
-          "webPath": "/white-paper/wp10-7-vulnerability-detection-github.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-8-cicd-migration-control-process.webp",
-          "webPath": "/white-paper/wp10-8-cicd-migration-control-process.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-9-iac-scan.webp",
-          "webPath": "/white-paper/wp10-9-iac-scan.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-10-dast.webp",
-          "webPath": "/white-paper/wp10-10-dast.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp10-11-fuzzing.webp",
-          "webPath": "/white-paper/wp10-11-fuzzing.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/querypie-devsecops-pipeline--10/ja.mdx",
@@ -513,13 +315,8 @@
         "強化されたデリバリー"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-10.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"開発速度と安定性の向上が証明されたQueryPieのDevSecOpsパイプライン\"\ndescription: \"QueryPie の DevSecOps パイプラインを使用して開発を合理化し、速度、安定性、セキュリティを強化します。\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/documentation/white-papers/wp-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"DevSecOps パイプライン\", \"開発速度\", \"安定性\", \"ソフトウェアセキュリティ\", \"強化されたデリバリー\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-10.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"開発速度と安定性の向上が証明されたQueryPieのDevSecOpsパイプライン\"\ndescription: \"QueryPie の DevSecOps パイプラインを使用して開発を合理化し、速度、安定性、セキュリティを強化します。\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/white-paper/wp-thumb-10.webp\"\nkeywords: [\"QueryPie\", \"DevSecOps パイプライン\", \"開発速度\", \"安定性\", \"ソフトウェアセキュリティ\", \"強化されたデリバリー\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/9/penetration-testing-standard",
         "/features/documentation/white-paper/8/secure-login-token-management",
@@ -538,11 +335,7 @@
           "ravi",
           "noah"
         ],
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-10.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-10.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "DevSecOps パイプライン",

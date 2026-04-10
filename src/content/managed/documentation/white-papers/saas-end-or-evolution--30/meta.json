@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-30-en.webp",
           "webPath": "/documentation/white-papers/wp-thumb-30-en.webp"
         },
@@ -37,30 +36,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp30-graph2-en.webp",
           "webPath": "/documentation/white-papers/wp30-graph2-en.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-30-en.webp",
-          "webPath": "/white-paper/wp-thumb-30-en.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp30-graph1-en.webp",
-          "webPath": "/white-paper/wp30-graph1-en.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp30-before-after-en.webp",
-          "webPath": "/white-paper/wp30-before-after-en.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp30-crm-en.webp",
-          "webPath": "/white-paper/wp30-crm-en.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp30-graph2-en.webp",
-          "webPath": "/white-paper/wp30-graph2-en.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/saas-end-or-evolution--30/en.mdx",
@@ -80,13 +55,8 @@
         "MCP"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-30-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents\"\ndescription: \"This white paper analyzes the impact of AI agents on the SaaS business, outlines the strategies SaaS companies should adopt, and shares the real story of QueryPie AI's transformation from a SaaS vendor to an AI-native company.\"\ndate: \"2026-03-12\"\nauthor: \"terazawa\"\nogImage: \"public/documentation/white-papers/wp-thumb-30-en.webp\"\nkeywords: [\"QueryPie\", \"QueryPie AI\", \"Death of SaaS\", \"AI agents\", \"SaaS strategy\", \"AI-native company\", \"AI transformation\", \"AI platform\", \"MCP\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"\n  - \"/features/documentation/white-paper/26/llm-evaluation-agentic-rag-part1\"\n  - \"/features/documentation/white-paper/24/ai-tranformation-japan\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-30-en.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents\"\ndescription: \"This white paper analyzes the impact of AI agents on the SaaS business, outlines the strategies SaaS companies should adopt, and shares the real story of QueryPie AI's transformation from a SaaS vendor to an AI-native company.\"\ndate: \"2026-03-12\"\nauthor: \"terazawa\"\nogImage: \"public/white-paper/wp-thumb-30-en.webp\"\nkeywords: [\"QueryPie\", \"QueryPie AI\", \"Death of SaaS\", \"AI agents\", \"SaaS strategy\", \"AI-native company\", \"AI transformation\", \"AI platform\", \"MCP\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"\n  - \"/features/documentation/white-paper/26/llm-evaluation-agentic-rag-part1\"\n  - \"/features/documentation/white-paper/24/ai-tranformation-japan\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026",
         "/features/documentation/white-paper/26/llm-evaluation-agentic-rag-part1",
@@ -101,11 +71,7 @@
         "description": "This white paper analyzes the impact of AI agents on the SaaS business, outlines the strategies SaaS companies should adopt, and shares the real story of QueryPie AI's transformation from a SaaS vendor to an AI-native company.",
         "date": "2026-03-12",
         "author": "terazawa",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-30-en.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-30-en.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "QueryPie AI",
@@ -128,7 +94,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-30-jp.webp",
           "webPath": "/documentation/white-papers/wp-thumb-30-jp.webp"
         },
@@ -151,30 +116,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp30-graph2-jp.webp",
           "webPath": "/documentation/white-papers/wp30-graph2-jp.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-30-jp.webp",
-          "webPath": "/white-paper/wp-thumb-30-jp.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp30-graph1-jp.webp",
-          "webPath": "/white-paper/wp30-graph1-jp.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp30-before-after-jp.webp",
-          "webPath": "/white-paper/wp30-before-after-jp.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp30-crm-jp.webp",
-          "webPath": "/white-paper/wp30-crm-jp.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp30-graph2-jp.webp",
-          "webPath": "/white-paper/wp30-graph2-jp.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/saas-end-or-evolution--30/ja.mdx",
@@ -196,13 +137,8 @@
         "MCP"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-30-jp.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"SaaSの終焉か、進化か 〜AIエージェント時代にSaaS企業が取るべき戦略〜\"\ndescription: \"本ホワイトペーパーは、AIエージェントがSaaSビジネスに与える影響を分析し、SaaS企業が取るべき戦略と、QueryPie AI自身のSaaSベンダーからAI Native企業への変革の実録をお伝えします。\"\ndate: \"2026-03-12\"\nauthor: \"terazawa\"\nogImage: \"public/documentation/white-papers/wp-thumb-30-jp.webp\"\nkeywords: [\"クエリパイ\", \"クエリーパイ\", \"クエリパイ AI\", \"クエリーパイ AI\", \"SaaSの終焉\", \"AIエージェント\", \"SaaS企業戦略\", \"AI Native企業\", \"AIトランスフォーメーション\", \"AIプラットフォーム\", \"MCP\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"\n  - \"/features/documentation/white-paper/26/llm-evaluation-agentic-rag-part1\"\n  - \"/features/documentation/white-paper/24/ai-tranformation-japan\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-30-jp.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"SaaSの終焉か、進化か 〜AIエージェント時代にSaaS企業が取るべき戦略〜\"\ndescription: \"本ホワイトペーパーは、AIエージェントがSaaSビジネスに与える影響を分析し、SaaS企業が取るべき戦略と、QueryPie AI自身のSaaSベンダーからAI Native企業への変革の実録をお伝えします。\"\ndate: \"2026-03-12\"\nauthor: \"terazawa\"\nogImage: \"public/white-paper/wp-thumb-30-jp.webp\"\nkeywords: [\"クエリパイ\", \"クエリーパイ\", \"クエリパイ AI\", \"クエリーパイ AI\", \"SaaSの終焉\", \"AIエージェント\", \"SaaS企業戦略\", \"AI Native企業\", \"AIトランスフォーメーション\", \"AIプラットフォーム\", \"MCP\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"\n  - \"/features/documentation/white-paper/26/llm-evaluation-agentic-rag-part1\"\n  - \"/features/documentation/white-paper/24/ai-tranformation-japan\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026",
         "/features/documentation/white-paper/26/llm-evaluation-agentic-rag-part1",
@@ -217,11 +153,7 @@
         "description": "本ホワイトペーパーは、AIエージェントがSaaSビジネスに与える影響を分析し、SaaS企業が取るべき戦略と、QueryPie AI自身のSaaSベンダーからAI Native企業への変革の実録をお伝えします。",
         "date": "2026-03-12",
         "author": "terazawa",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-30-jp.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-30-jp.webp",
->>>>>>> origin/main
         "keywords": [
           "クエリパイ",
           "クエリーパイ",

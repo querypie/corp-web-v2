@@ -54,17 +54,11 @@ export default function ContentListSection({
           <p className="m-0 type-body-lg text-mute-fg">{description}</p>
           <div className="flex flex-row flex-wrap items-start gap-3 md:flex-col">
             {links.map((link) => (
-<<<<<<< HEAD
               <a key={link.href} href={link.href}>
                 <TextButton>
                   {link.label}
                 </TextButton>
               </a>
-=======
-              <TextButton key={link}>
-                {link}
-              </TextButton>
->>>>>>> origin/main
             ))}
           </div>
         </div>

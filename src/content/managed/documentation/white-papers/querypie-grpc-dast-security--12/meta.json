@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-12.webp",
           "webPath": "/documentation/white-papers/wp-thumb-12.webp"
         },
@@ -52,45 +51,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp12-7-sql-injection-vulnerability-criteria.webp",
           "webPath": "/documentation/white-papers/wp12-7-sql-injection-vulnerability-criteria.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-12.webp",
-          "webPath": "/white-paper/wp-thumb-12.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-1-decoding-grpc-request.webp",
-          "webPath": "/white-paper/wp12-1-decoding-grpc-request.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-2-verifying-grpc-request.webp",
-          "webPath": "/white-paper/wp12-2-verifying-grpc-request.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-3-original-grpc-request.webp",
-          "webPath": "/white-paper/wp12-3-original-grpc-request.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-4-cat-string.webp",
-          "webPath": "/white-paper/wp12-4-cat-string.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-5-owasp-zap-custom-scripts.webp",
-          "webPath": "/white-paper/wp12-5-owasp-zap-custom-scripts.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-6-grpc-encoding-decoding.webp",
-          "webPath": "/white-paper/wp12-6-grpc-encoding-decoding.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-7-sql-injection-vulnerability-criteria.webp",
-          "webPath": "/white-paper/wp12-7-sql-injection-vulnerability-criteria.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/querypie-grpc-dast-security--12/en.mdx",
@@ -107,13 +67,8 @@
         "web application security"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-12.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie gRPC DAST Security: ZAP Custom Script Example\"\ndescription: \"Learn how QueryPie leverages gRPC communication for high performance and stability in web applications.\"\ndate: \"2025-02-06\"\nauthor: \"noah\"\nogImage: \"public/documentation/white-papers/wp-thumb-12.webp\"\nkeywords: [\"QueryPie\", \"gRPC security\", \"OWASP ZAP\", \"vulnerability scanning\", \"security automation\", \"web application security\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-12.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie gRPC DAST Security: ZAP Custom Script Example\"\ndescription: \"Learn how QueryPie leverages gRPC communication for high performance and stability in web applications.\"\ndate: \"2025-02-06\"\nauthor: \"noah\"\nogImage: \"public/white-paper/wp-thumb-12.webp\"\nkeywords: [\"QueryPie\", \"gRPC security\", \"OWASP ZAP\", \"vulnerability scanning\", \"security automation\", \"web application security\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/10/querypie-devsecops-pipeline",
         "/features/documentation/white-paper/9/penetration-testing-standard",
@@ -128,11 +83,7 @@
         "description": "Learn how QueryPie leverages gRPC communication for high performance and stability in web applications.",
         "date": "2025-02-06",
         "author": "noah",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-12.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-12.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "gRPC security",
@@ -152,7 +103,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-12.webp",
           "webPath": "/documentation/white-papers/wp-thumb-12.webp"
         },
@@ -190,45 +140,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp12-7-sql-injection-vulnerability-criteria.webp",
           "webPath": "/documentation/white-papers/wp12-7-sql-injection-vulnerability-criteria.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-12.webp",
-          "webPath": "/white-paper/wp-thumb-12.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-1-decoding-grpc-request.webp",
-          "webPath": "/white-paper/wp12-1-decoding-grpc-request.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-2-verifying-grpc-request.webp",
-          "webPath": "/white-paper/wp12-2-verifying-grpc-request.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-3-original-grpc-request.webp",
-          "webPath": "/white-paper/wp12-3-original-grpc-request.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-4-cat-string.webp",
-          "webPath": "/white-paper/wp12-4-cat-string.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-5-owasp-zap-custom-scripts.webp",
-          "webPath": "/white-paper/wp12-5-owasp-zap-custom-scripts.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-6-grpc-encoding-decoding.webp",
-          "webPath": "/white-paper/wp12-6-grpc-encoding-decoding.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-7-sql-injection-vulnerability-criteria.webp",
-          "webPath": "/white-paper/wp12-7-sql-injection-vulnerability-criteria.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/querypie-grpc-dast-security--12/ko.mdx",
@@ -245,13 +156,8 @@
         "웹 애플리케이션 보안"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-12.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie gRPC 통신을 위한 DAST 보안 전략 : ZAP 커스텀 스크립트 적용 사례\"\ndescription: \"QueryPie가 웹 애플리케이션에서 높은 성능과 안정성을 위해 gRPC 통신을 어떻게 활용하는지 알아보세요.\"\ndate: \"2025-02-06\"\nauthor: \"noah\"\nogImage: \"public/documentation/white-papers/wp-thumb-12.webp\"\nkeywords: [\"QueryPie\", \"gRPC 보안\", \"OWASP ZAP\", \"취약점 스캔\", \"보안 자동화\", \"웹 애플리케이션 보안\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-12.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie gRPC 통신을 위한 DAST 보안 전략 : ZAP 커스텀 스크립트 적용 사례\"\ndescription: \"QueryPie가 웹 애플리케이션에서 높은 성능과 안정성을 위해 gRPC 통신을 어떻게 활용하는지 알아보세요.\"\ndate: \"2025-02-06\"\nauthor: \"noah\"\nogImage: \"public/white-paper/wp-thumb-12.webp\"\nkeywords: [\"QueryPie\", \"gRPC 보안\", \"OWASP ZAP\", \"취약점 스캔\", \"보안 자동화\", \"웹 애플리케이션 보안\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/10/querypie-devsecops-pipeline",
         "/features/documentation/white-paper/9/penetration-testing-standard",
@@ -266,11 +172,7 @@
         "description": "QueryPie가 웹 애플리케이션에서 높은 성능과 안정성을 위해 gRPC 통신을 어떻게 활용하는지 알아보세요.",
         "date": "2025-02-06",
         "author": "noah",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-12.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-12.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "gRPC 보안",
@@ -290,7 +192,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-12.webp",
           "webPath": "/documentation/white-papers/wp-thumb-12.webp"
         },
@@ -328,45 +229,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp12-7-sql-injection-vulnerability-criteria.webp",
           "webPath": "/documentation/white-papers/wp12-7-sql-injection-vulnerability-criteria.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-12.webp",
-          "webPath": "/white-paper/wp-thumb-12.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-1-decoding-grpc-request.webp",
-          "webPath": "/white-paper/wp12-1-decoding-grpc-request.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-2-verifying-grpc-request.webp",
-          "webPath": "/white-paper/wp12-2-verifying-grpc-request.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-3-original-grpc-request.webp",
-          "webPath": "/white-paper/wp12-3-original-grpc-request.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-4-cat-string.webp",
-          "webPath": "/white-paper/wp12-4-cat-string.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-5-owasp-zap-custom-scripts.webp",
-          "webPath": "/white-paper/wp12-5-owasp-zap-custom-scripts.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-6-grpc-encoding-decoding.webp",
-          "webPath": "/white-paper/wp12-6-grpc-encoding-decoding.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp12-7-sql-injection-vulnerability-criteria.webp",
-          "webPath": "/white-paper/wp12-7-sql-injection-vulnerability-criteria.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/querypie-grpc-dast-security--12/ja.mdx",
@@ -376,13 +238,8 @@
       "hideTableOfContents": false,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-12.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie gRPC DAST セキュリティ: ZAP カスタムスクリプトの例\"\ndescription: \"QueryPieがウェブアプリケーションで高いパフォーマンスと安定性を実現するために、gRPC通信をどのように活用しているかを確認してください。\"\ndate: \"2025-02-06\"\nauthor: \"noah\"\nogImage: \"public/documentation/white-papers/wp-thumb-12.webp\"\nkeywords: [“QueryPie”, “gRPCセキュリティ”, “ZAP”, “脆弱性スキャン”, “セキュリティ自動化”, “ウェブアプリケーションセキュリティ”]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-12.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie gRPC DAST セキュリティ: ZAP カスタムスクリプトの例\"\ndescription: \"QueryPieがウェブアプリケーションで高いパフォーマンスと安定性を実現するために、gRPC通信をどのように活用しているかを確認してください。\"\ndate: \"2025-02-06\"\nauthor: \"noah\"\nogImage: \"public/white-paper/wp-thumb-12.webp\"\nkeywords: [“QueryPie”, “gRPCセキュリティ”, “ZAP”, “脆弱性スキャン”, “セキュリティ自動化”, “ウェブアプリケーションセキュリティ”]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/10/querypie-devsecops-pipeline",
         "/features/documentation/white-paper/9/penetration-testing-standard",
@@ -397,11 +254,7 @@
         "description": "QueryPieがウェブアプリケーションで高いパフォーマンスと安定性を実現するために、gRPC通信をどのように活用しているかを確認してください。",
         "date": "2025-02-06",
         "author": "noah",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-12.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-12.webp",
->>>>>>> origin/main
         "keywords": "[“QueryPie”, “gRPCセキュリティ”, “ZAP”, “脆弱性スキャン”, “セキュリティ自動化”, “ウェブアプリケーションセキュリティ”]",
         "relatedPosts": [
           "/features/documentation/white-paper/10/querypie-devsecops-pipeline",

@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-13.webp",
           "webPath": "/documentation/white-papers/wp-thumb-13.webp"
         },
@@ -42,35 +41,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp13-1-main.webp",
           "webPath": "/documentation/white-papers/wp13-1-main.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-13.webp",
-          "webPath": "/white-paper/wp-thumb-13.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp13-2-shell-command.webp",
-          "webPath": "/white-paper/wp13-2-shell-command.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp13-3-architecture.webp",
-          "webPath": "/white-paper/wp13-3-architecture.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp13-4-iterm2.webp",
-          "webPath": "/white-paper/wp13-4-iterm2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp13-5-tmux.webp",
-          "webPath": "/white-paper/wp13-5-tmux.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp13-1-main.webp",
-          "webPath": "/white-paper/wp13-1-main.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/seamless-ssh-connection--13/en.mdx",
@@ -89,13 +59,8 @@
         "developer productivity"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-13.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Optimal Method for Using a Terminal with Seamless SSH Connection\"\ndescription: \"Discover an optimal method for seamless SSH connections that enhances security without disrupting the CLI workflow. Learn how QueryPie’s approach eliminates the need for additional agents while maintaining robust access control.\"\ndate: \"2025-03-10\"\nauthor: \"ryan\"\nogImage: \"public/documentation/white-papers/wp-thumb-13.webp\"\nkeywords: [\"QueryPie\", \"SSH connection\", \"seamless SSH\", \"terminal access control\", \"CLI workflow\", \"QueryPie SSH\", \"SSH security\", \"developer productivity\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/6/kubernetes-access-control\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-13.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Optimal Method for Using a Terminal with Seamless SSH Connection\"\ndescription: \"Discover an optimal method for seamless SSH connections that enhances security without disrupting the CLI workflow. Learn how QueryPie’s approach eliminates the need for additional agents while maintaining robust access control.\"\ndate: \"2025-03-10\"\nauthor: \"ryan\"\nogImage: \"public/white-paper/wp-thumb-13.webp\"\nkeywords: [\"QueryPie\", \"SSH connection\", \"seamless SSH\", \"terminal access control\", \"CLI workflow\", \"QueryPie SSH\", \"SSH security\", \"developer productivity\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/6/kubernetes-access-control\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -110,11 +75,7 @@
         "description": "Discover an optimal method for seamless SSH connections that enhances security without disrupting the CLI workflow. Learn how QueryPie’s approach eliminates the need for additional agents while maintaining robust access control.",
         "date": "2025-03-10",
         "author": "ryan",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-13.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-13.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "SSH connection",
@@ -136,7 +97,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-13.webp",
           "webPath": "/documentation/white-papers/wp-thumb-13.webp"
         },
@@ -164,35 +124,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp13-1-main.webp",
           "webPath": "/documentation/white-papers/wp13-1-main.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-13.webp",
-          "webPath": "/white-paper/wp-thumb-13.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp13-2-shell-command.webp",
-          "webPath": "/white-paper/wp13-2-shell-command.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp13-3-architecture.webp",
-          "webPath": "/white-paper/wp13-3-architecture.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp13-4-iterm2.webp",
-          "webPath": "/white-paper/wp13-4-iterm2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp13-5-tmux.webp",
-          "webPath": "/white-paper/wp13-5-tmux.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp13-1-main.webp",
-          "webPath": "/white-paper/wp13-1-main.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/seamless-ssh-connection--13/ko.mdx",
@@ -211,13 +142,8 @@
         "개발자 생산성"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-13.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"보안성과 업무 효율성을 동시에 높이는 Seamless SSH Connection 전략\"\ndescription: \"CLI 워크플로우를 방해하지 않으면서도 보안을 강화하는 매끄러운 SSH 연결을 위한 최적의 방법을 알아보세요. 추가 에이전트 없이 강력한 접근 제어를 유지하는 QueryPie의 접근 방법을 설명합니다.\"\ndate: \"2025-03-10\"\nauthor: \"ryan\"\nogImage: \"public/documentation/white-papers/wp-thumb-13.webp\"\nkeywords: [\"QueryPie\", \"SSH 연결\", \"쿼리파이\", \"터미널 접근 제어\", \"CLI 워크플로우\", \"QueryPie SSH\", \"SSH 보안\", \"개발자 생산성\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/6/kubernetes-access-control\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-13.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"보안성과 업무 효율성을 동시에 높이는 Seamless SSH Connection 전략\"\ndescription: \"CLI 워크플로우를 방해하지 않으면서도 보안을 강화하는 매끄러운 SSH 연결을 위한 최적의 방법을 알아보세요. 추가 에이전트 없이 강력한 접근 제어를 유지하는 QueryPie의 접근 방법을 설명합니다.\"\ndate: \"2025-03-10\"\nauthor: \"ryan\"\nogImage: \"public/white-paper/wp-thumb-13.webp\"\nkeywords: [\"QueryPie\", \"SSH 연결\", \"쿼리파이\", \"터미널 접근 제어\", \"CLI 워크플로우\", \"QueryPie SSH\", \"SSH 보안\", \"개발자 생산성\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/6/kubernetes-access-control\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -232,11 +158,7 @@
         "description": "CLI 워크플로우를 방해하지 않으면서도 보안을 강화하는 매끄러운 SSH 연결을 위한 최적의 방법을 알아보세요. 추가 에이전트 없이 강력한 접근 제어를 유지하는 QueryPie의 접근 방법을 설명합니다.",
         "date": "2025-03-10",
         "author": "ryan",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-13.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-13.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "SSH 연결",

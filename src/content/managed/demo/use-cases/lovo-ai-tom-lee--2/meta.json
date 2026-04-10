@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/cs-thumb-lovo.webp",
           "webPath": "/demo/use-cases/cs-thumb-lovo.webp"
-=======
-          "sourcePath": "public/customer-success-cases/cs-thumb-lovo.webp",
-          "webPath": "/customer-success-cases/cs-thumb-lovo.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/lovo-ai-tom-lee--2/en.mdx",
@@ -36,13 +31,8 @@
         "best practice"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/cs-thumb-lovo.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"\\\"QueryPie' s like a tailor shop almost for security.\\\"\"\ndescription: \"Today, we have a special guest with us: Tom Lee, the CEO and Co-founder of LOVO AI.\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/use-cases/cs-thumb-lovo.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"LOVE AI\", \"AI\", \"customer success story\", \"best practice\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/1/allganize-changsu-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/4/superb-ai-hyun-kim\"",
-=======
-      "ogImage": "/customer-success-cases/cs-thumb-lovo.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"\\\"QueryPie' s like a tailor shop almost for security.\\\"\"\ndescription: \"Today, we have a special guest with us: Tom Lee, the CEO and Co-founder of LOVO AI.\"\ndate: \"2024-11-29\"\nogImage: \"public/customer-success-cases/cs-thumb-lovo.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"LOVE AI\", \"AI\", \"customer success story\", \"best practice\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/1/allganize-changsu-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/4/superb-ai-hyun-kim\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/1/allganize-changsu-lee",
         "/features/demo/use-cases/3/air-company-mori-takeshi",
@@ -56,11 +46,7 @@
         "title": "\\\"QueryPie' s like a tailor shop almost for security.\\\"",
         "description": "Today, we have a special guest with us: Tom Lee, the CEO and Co-founder of LOVO AI.",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/cs-thumb-lovo.webp",
-=======
-        "ogImage": "public/customer-success-cases/cs-thumb-lovo.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "keywords": [
@@ -81,13 +67,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/cs-thumb-lovo.webp",
           "webPath": "/demo/use-cases/cs-thumb-lovo.webp"
-=======
-          "sourcePath": "public/customer-success-cases/cs-thumb-lovo.webp",
-          "webPath": "/customer-success-cases/cs-thumb-lovo.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/lovo-ai-tom-lee--2/ko.mdx",
@@ -103,13 +84,8 @@
         "best practice"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/cs-thumb-lovo.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"\\\"QueryPie는 마치 보안을 위한 맞춤 테일러샵 같아요.\\\"\"\ndescription: \"이 영상에서 Tom은 통합 사이버보안 솔루션으로서 QueryPie가 기업에 제공하는 중요한 가치를 공유합니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/use-cases/cs-thumb-lovo.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"LOVE AI\", \"AI\", \"customer success story\", \"best practice\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/1/allganize-changsu-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/4/superb-ai-hyun-kim\"",
-=======
-      "ogImage": "/customer-success-cases/cs-thumb-lovo.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"\\\"QueryPie는 마치 보안을 위한 맞춤 테일러샵 같아요.\\\"\"\ndescription: \"이 영상에서 Tom은 통합 사이버보안 솔루션으로서 QueryPie가 기업에 제공하는 중요한 가치를 공유합니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/customer-success-cases/cs-thumb-lovo.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"LOVE AI\", \"AI\", \"customer success story\", \"best practice\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/1/allganize-changsu-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/4/superb-ai-hyun-kim\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/1/allganize-changsu-lee",
         "/features/demo/use-cases/3/air-company-mori-takeshi",
@@ -123,11 +99,7 @@
         "title": "\\\"QueryPie는 마치 보안을 위한 맞춤 테일러샵 같아요.\\\"",
         "description": "이 영상에서 Tom은 통합 사이버보안 솔루션으로서 QueryPie가 기업에 제공하는 중요한 가치를 공유합니다.",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/cs-thumb-lovo.webp",
-=======
-        "ogImage": "public/customer-success-cases/cs-thumb-lovo.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "keywords": [
@@ -148,13 +120,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/cs-thumb-lovo.webp",
           "webPath": "/demo/use-cases/cs-thumb-lovo.webp"
-=======
-          "sourcePath": "public/customer-success-cases/cs-thumb-lovo.webp",
-          "webPath": "/customer-success-cases/cs-thumb-lovo.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/lovo-ai-tom-lee--2/ja.mdx",
@@ -170,13 +137,8 @@
         "best practice"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/cs-thumb-lovo.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"「QueryPieはまるでセキュリティのためのオーダーメードテイラーショップのようです。」\"\ndescription: \"LOVO AIのCEO兼共同創設者であるTom Lee氏をご招待します。\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/use-cases/cs-thumb-lovo.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"LOVE AI\", \"AI\", \"customer success story\", \"best practice\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/1/allganize-changsu-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/4/superb-ai-hyun-kim\"",
-=======
-      "ogImage": "/customer-success-cases/cs-thumb-lovo.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"「QueryPieはまるでセキュリティのためのオーダーメードテイラーショップのようです。」\"\ndescription: \"LOVO AIのCEO兼共同創設者であるTom Lee氏をご招待します。\"\ndate: \"2024-11-29\"\nogImage: \"public/customer-success-cases/cs-thumb-lovo.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"LOVE AI\", \"AI\", \"customer success story\", \"best practice\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/1/allganize-changsu-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/4/superb-ai-hyun-kim\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/1/allganize-changsu-lee",
         "/features/demo/use-cases/3/air-company-mori-takeshi",
@@ -190,11 +152,7 @@
         "title": "「QueryPieはまるでセキュリティのためのオーダーメードテイラーショップのようです。」",
         "description": "LOVO AIのCEO兼共同創設者であるTom Lee氏をご招待します。",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/cs-thumb-lovo.webp",
-=======
-        "ogImage": "public/customer-success-cases/cs-thumb-lovo.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "keywords": [

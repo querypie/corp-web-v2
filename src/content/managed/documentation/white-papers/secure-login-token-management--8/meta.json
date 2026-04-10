@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-8.webp",
           "webPath": "/documentation/white-papers/wp-thumb-8.webp"
         },
@@ -27,20 +26,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp8-2-what-happens-behind-the-scene-2.webp",
           "webPath": "/documentation/white-papers/wp8-2-what-happens-behind-the-scene-2.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-8.webp",
-          "webPath": "/white-paper/wp-thumb-8.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp8-1-what-happens-behind-the-scene-1.webp",
-          "webPath": "/white-paper/wp8-1-what-happens-behind-the-scene-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp8-2-what-happens-behind-the-scene-2.webp",
-          "webPath": "/white-paper/wp8-2-what-happens-behind-the-scene-2.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/secure-login-token-management--8/en.mdx",
@@ -56,13 +41,8 @@
         "data protection"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-8.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Secure Login Token Management: An Essential Frontend Strategy\"\ndescription: \"Secure user authentication with QueryPie's login token management, enhancing frontend security and data protection.\"\ndate: \"2024-11-22\"\nauthor: \"zac\"\nogImage: \"public/documentation/white-papers/wp-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"login token management\", \"secure authentication\", \"frontend security\", \"data protection\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-8.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Secure Login Token Management: An Essential Frontend Strategy\"\ndescription: \"Secure user authentication with QueryPie's login token management, enhancing frontend security and data protection.\"\ndate: \"2024-11-22\"\nauthor: \"zac\"\nogImage: \"public/white-paper/wp-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"login token management\", \"secure authentication\", \"frontend security\", \"data protection\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/7/pac-policy-as-code",
         "/features/documentation/white-paper/9/penetration-testing-standard",
@@ -77,11 +57,7 @@
         "description": "Secure user authentication with QueryPie's login token management, enhancing frontend security and data protection.",
         "date": "2024-11-22",
         "author": "zac",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-8.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-8.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "login token management",
@@ -100,7 +76,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-8.webp",
           "webPath": "/documentation/white-papers/wp-thumb-8.webp"
         },
@@ -113,20 +88,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp8-2-what-happens-behind-the-scene-2.webp",
           "webPath": "/documentation/white-papers/wp8-2-what-happens-behind-the-scene-2.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-8.webp",
-          "webPath": "/white-paper/wp-thumb-8.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp8-1-what-happens-behind-the-scene-1.webp",
-          "webPath": "/white-paper/wp8-1-what-happens-behind-the-scene-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp8-2-what-happens-behind-the-scene-2.webp",
-          "webPath": "/white-paper/wp8-2-what-happens-behind-the-scene-2.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/secure-login-token-management--8/ko.mdx",
@@ -143,13 +104,8 @@
         "데이터 보호"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-8.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"안전한 로그인 토큰 관리, 프론트엔드의 필수 전략\"\ndescription: \"쿼리파이의 로그인 토큰 관리로 사용자 인증을 안전하게 처리하며, 프론트엔드 보안과 데이터 보호를 강화하는 방법을 소개합니다.\"\ndate: \"2024-11-22\"\nauthor: \"zac\"\nogImage: \"public/documentation/white-papers/wp-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"로그인 토큰 관리\", \"안전한 인증\", \"프론트엔드 보안\", \"데이터 보호\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-8.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"안전한 로그인 토큰 관리, 프론트엔드의 필수 전략\"\ndescription: \"쿼리파이의 로그인 토큰 관리로 사용자 인증을 안전하게 처리하며, 프론트엔드 보안과 데이터 보호를 강화하는 방법을 소개합니다.\"\ndate: \"2024-11-22\"\nauthor: \"zac\"\nogImage: \"public/white-paper/wp-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"로그인 토큰 관리\", \"안전한 인증\", \"프론트엔드 보안\", \"데이터 보호\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/7/pac-policy-as-code",
         "/features/documentation/white-paper/9/penetration-testing-standard",
@@ -164,11 +120,7 @@
         "description": "쿼리파이의 로그인 토큰 관리로 사용자 인증을 안전하게 처리하며, 프론트엔드 보안과 데이터 보호를 강화하는 방법을 소개합니다.",
         "date": "2024-11-22",
         "author": "zac",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-8.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-8.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -188,7 +140,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-8.webp",
           "webPath": "/documentation/white-papers/wp-thumb-8.webp"
         },
@@ -201,20 +152,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp8-2-what-happens-behind-the-scene-2.webp",
           "webPath": "/documentation/white-papers/wp8-2-what-happens-behind-the-scene-2.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-8.webp",
-          "webPath": "/white-paper/wp-thumb-8.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp8-1-what-happens-behind-the-scene-1.webp",
-          "webPath": "/white-paper/wp8-1-what-happens-behind-the-scene-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp8-2-what-happens-behind-the-scene-2.webp",
-          "webPath": "/white-paper/wp8-2-what-happens-behind-the-scene-2.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/secure-login-token-management--8/ja.mdx",
@@ -230,13 +167,8 @@
         "データ保護"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-8.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"安全なログイントークン管理、フロントエンドの必須戦略\"\ndescription: \"QueryPieのログイントークン管理による安全なユーザー認証により、フロントエンドのセキュリティとデータ保護が強化されます。\"\ndate: \"2024-11-22\"\nauthor: \"zac\"\nogImage: \"public/documentation/white-papers/wp-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"ログイントークン管理\", \"安全な認証\", \"フロントエンドセキュリティ\", \"データ保護\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-8.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"安全なログイントークン管理、フロントエンドの必須戦略\"\ndescription: \"QueryPieのログイントークン管理による安全なユーザー認証により、フロントエンドのセキュリティとデータ保護が強化されます。\"\ndate: \"2024-11-22\"\nauthor: \"zac\"\nogImage: \"public/white-paper/wp-thumb-8.webp\"\nkeywords: [\"QueryPie\", \"ログイントークン管理\", \"安全な認証\", \"フロントエンドセキュリティ\", \"データ保護\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/7/pac-policy-as-code",
         "/features/documentation/white-paper/9/penetration-testing-standard",
@@ -251,11 +183,7 @@
         "description": "QueryPieのログイントークン管理による安全なユーザー認証により、フロントエンドのセキュリティとデータ保護が強化されます。",
         "date": "2024-11-22",
         "author": "zac",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-8.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-8.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "ログイントークン管理",

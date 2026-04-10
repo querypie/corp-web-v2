@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/de-thumb-tableau.webp",
           "webPath": "/demo/acp-features/de-thumb-tableau.webp"
-=======
-          "sourcePath": "public/demo/de-thumb-tableau.webp",
-          "webPath": "/demo/de-thumb-tableau.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-tableau--3/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/de-thumb-tableau.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x tableau\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/acp-features/de-thumb-tableau.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"",
-=======
-      "ogImage": "/demo/de-thumb-tableau.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x tableau\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-tableau.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/1/integrating-querypie-with-redash",
         "/features/demo/acp-features/2/integrating-querypie-with-metabase"
@@ -49,11 +39,7 @@
         "title": "QueryPie x tableau",
         "description": "",
         "date": "2025-02-01",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/de-thumb-tableau.webp",
-=======
-        "ogImage": "public/demo/de-thumb-tableau.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -66,13 +52,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/de-thumb-tableau.webp",
           "webPath": "/demo/acp-features/de-thumb-tableau.webp"
-=======
-          "sourcePath": "public/demo/de-thumb-tableau.webp",
-          "webPath": "/demo/de-thumb-tableau.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-tableau--3/ko.mdx",
@@ -82,13 +63,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/de-thumb-tableau.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x tableau\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/acp-features/de-thumb-tableau.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"",
-=======
-      "ogImage": "/demo/de-thumb-tableau.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x tableau\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-tableau.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/1/integrating-querypie-with-redash",
         "/features/demo/acp-features/2/integrating-querypie-with-metabase"
@@ -101,11 +77,7 @@
         "title": "QueryPie x tableau",
         "description": "",
         "date": "2025-02-01",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/de-thumb-tableau.webp",
-=======
-        "ogImage": "public/demo/de-thumb-tableau.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -118,13 +90,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/de-thumb-tableau.webp",
           "webPath": "/demo/acp-features/de-thumb-tableau.webp"
-=======
-          "sourcePath": "public/demo/de-thumb-tableau.webp",
-          "webPath": "/demo/de-thumb-tableau.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-tableau--3/ja.mdx",
@@ -134,13 +101,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/de-thumb-tableau.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x tableau\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/acp-features/de-thumb-tableau.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"",
-=======
-      "ogImage": "/demo/de-thumb-tableau.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x tableau\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-tableau.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/2/integrating-querypie-with-metabase\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/1/integrating-querypie-with-redash",
         "/features/demo/acp-features/2/integrating-querypie-with-metabase"
@@ -153,11 +115,7 @@
         "title": "QueryPie x tableau",
         "description": "",
         "date": "2025-02-01",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/de-thumb-tableau.webp",
-=======
-        "ogImage": "public/demo/de-thumb-tableau.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

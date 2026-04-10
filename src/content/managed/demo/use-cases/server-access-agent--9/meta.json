@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-3-en.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-3-en.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-3-en.webp",
-          "webPath": "/demo/aip-use-case-thumb-3-en.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/server-access-agent--9/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-3-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Server Access Agent\"\ndescription: \"An AI agent that automates server access requests and management through natural language, streamlining privileged access while maintaining strict security controls.\"\ndate: \"2025-05-18\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-3-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/7/data-analytics-agent\"\n  - \"/features/demo/use-cases/8/data-analytics-agent-2\"\n  - \"/features/demo/use-cases/10/kubernetes-manager-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-3-en.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Server Access Agent\"\ndescription: \"An AI agent that automates server access requests and management through natural language, streamlining privileged access while maintaining strict security controls.\"\ndate: \"2025-05-18\"\nogImage: \"public/demo/aip-use-case-thumb-3-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/7/data-analytics-agent\"\n  - \"/features/demo/use-cases/8/data-analytics-agent-2\"\n  - \"/features/demo/use-cases/10/kubernetes-manager-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/7/data-analytics-agent",
         "/features/demo/use-cases/8/data-analytics-agent-2",
@@ -50,11 +40,7 @@
         "title": "AIP Use Case: Server Access Agent",
         "description": "An AI agent that automates server access requests and management through natural language, streamlining privileged access while maintaining strict security controls.",
         "date": "2025-05-18",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-3-en.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-3-en.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -68,13 +54,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-3-ja.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-3-ja.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-3-ja.webp",
-          "webPath": "/demo/aip-use-case-thumb-3-ja.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/server-access-agent--9/ja.mdx",
@@ -84,13 +65,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-3-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例：サーバーアクセスエージェント\"\ndescription: \"自然言語を通じてサーバーアクセスリクエストと管理を自動化するAIエージェント。厳格なセキュリティ管理を維持しながら、特権アクセスを効率化します。\"\ndate: \"2025-05-18\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-3-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/7/data-analytics-agent\"\n  - \"/features/demo/use-cases/8/data-analytics-agent-2\"\n  - \"/features/demo/use-cases/10/kubernetes-manager-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-3-ja.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例：サーバーアクセスエージェント\"\ndescription: \"自然言語を通じてサーバーアクセスリクエストと管理を自動化するAIエージェント。厳格なセキュリティ管理を維持しながら、特権アクセスを効率化します。\"\ndate: \"2025-05-18\"\nogImage: \"public/demo/aip-use-case-thumb-3-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/7/data-analytics-agent\"\n  - \"/features/demo/use-cases/8/data-analytics-agent-2\"\n  - \"/features/demo/use-cases/10/kubernetes-manager-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/7/data-analytics-agent",
         "/features/demo/use-cases/8/data-analytics-agent-2",
@@ -104,11 +80,7 @@
         "title": "AIP活用事例：サーバーアクセスエージェント",
         "description": "自然言語を通じてサーバーアクセスリクエストと管理を自動化するAIエージェント。厳格なセキュリティ管理を維持しながら、特権アクセスを効率化します。",
         "date": "2025-05-18",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-3-ja.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-3-ja.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

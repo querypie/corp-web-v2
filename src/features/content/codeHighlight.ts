@@ -55,7 +55,6 @@ function highlightScriptLike(code: string) {
     );
 }
 
-<<<<<<< HEAD
 function highlightSql(code: string) {
   const escaped = escapeHtml(code);
 
@@ -107,8 +106,6 @@ function highlightRego(code: string) {
     .replace(/\b(\d+(?:\.\d+)?)\b/g, (match) => wrapToken("code-token-number", match));
 }
 
-=======
->>>>>>> origin/main
 function highlightShell(code: string) {
   const escaped = escapeHtml(code);
 
@@ -129,7 +126,6 @@ export function highlightCodeToHtml(code: string, language?: string) {
     return highlightScriptLike(code);
   }
 
-<<<<<<< HEAD
   if (["sql"].includes(normalizedLanguage)) {
     return highlightSql(code);
   }
@@ -146,8 +142,6 @@ export function highlightCodeToHtml(code: string, language?: string) {
     return highlightRego(code);
   }
 
-=======
->>>>>>> origin/main
   if (["sh", "bash", "shell", "zsh"].includes(normalizedLanguage)) {
     return highlightShell(code);
   }

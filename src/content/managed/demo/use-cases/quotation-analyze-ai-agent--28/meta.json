@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-28-en.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-28-en.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-28-en.webp",
-          "webPath": "/demo/aip-use-case-thumb-28-en.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/quotation-analyze-ai-agent--28/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-28-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Quotation Analysis AI Agent\"\ndescription: \"Are you spending valuable time opening and organizing hundreds of local files and password-protected quotations one by one? With AIP, analysis is completed on the spot — without uploads and without data exposure.\"\ndate: \"2026-03-02\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-28-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/25/portfolio-insight-ai-agent\"\n  - \"/features/demo/use-cases/26/investment-analyst-ai-agent\"\n  - \"/features/demo/use-cases/27/quotation-ai-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-28-en.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Quotation Analysis AI Agent\"\ndescription: \"Are you spending valuable time opening and organizing hundreds of local files and password-protected quotations one by one? With AIP, analysis is completed on the spot — without uploads and without data exposure.\"\ndate: \"2026-03-02\"\nogImage: \"public/demo/aip-use-case-thumb-28-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/25/portfolio-insight-ai-agent\"\n  - \"/features/demo/use-cases/26/investment-analyst-ai-agent\"\n  - \"/features/demo/use-cases/27/quotation-ai-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/25/portfolio-insight-ai-agent",
         "/features/demo/use-cases/26/investment-analyst-ai-agent",
@@ -50,11 +40,7 @@
         "title": "AIP Use Case: Quotation Analysis AI Agent",
         "description": "Are you spending valuable time opening and organizing hundreds of local files and password-protected quotations one by one? With AIP, analysis is completed on the spot — without uploads and without data exposure.",
         "date": "2026-03-02",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-28-en.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-28-en.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -68,13 +54,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-28-ja.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-28-ja.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-28-ja.webp",
-          "webPath": "/demo/aip-use-case-thumb-28-ja.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/quotation-analyze-ai-agent--28/ja.mdx",
@@ -84,13 +65,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-28-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 見積分析AIエージェント\"\ndescription: \"数百におよぶローカルファイルや、パスワード付きの見積書を一つひとつ開いて整理する作業に、貴重な時間を費やしていませんか？AIPなら、アップロード不要・データ流出なしで、その場で分析を完了します。\"\ndate: \"2026-03-02\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-28-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/25/portfolio-insight-ai-agent\"\n  - \"/features/demo/use-cases/26/investment-analyst-ai-agent\"\n  - \"/features/demo/use-cases/27/quotation-ai-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-28-ja.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 見積分析AIエージェント\"\ndescription: \"数百におよぶローカルファイルや、パスワード付きの見積書を一つひとつ開いて整理する作業に、貴重な時間を費やしていませんか？AIPなら、アップロード不要・データ流出なしで、その場で分析を完了します。\"\ndate: \"2026-03-02\"\nogImage: \"public/demo/aip-use-case-thumb-28-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/25/portfolio-insight-ai-agent\"\n  - \"/features/demo/use-cases/26/investment-analyst-ai-agent\"\n  - \"/features/demo/use-cases/27/quotation-ai-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/25/portfolio-insight-ai-agent",
         "/features/demo/use-cases/26/investment-analyst-ai-agent",
@@ -104,11 +80,7 @@
         "title": "AIP活用事例： 見積分析AIエージェント",
         "description": "数百におよぶローカルファイルや、パスワード付きの見積書を一つひとつ開いて整理する作業に、貴重な時間を費やしていませんか？AIPなら、アップロード不要・データ流出なしで、その場で分析を完了します。",
         "date": "2026-03-02",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-28-ja.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-28-ja.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

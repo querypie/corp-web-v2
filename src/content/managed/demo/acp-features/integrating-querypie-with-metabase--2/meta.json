@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/de-thumb-metabase.webp",
           "webPath": "/demo/acp-features/de-thumb-metabase.webp"
-=======
-          "sourcePath": "public/demo/de-thumb-metabase.webp",
-          "webPath": "/demo/de-thumb-metabase.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-metabase--2/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/de-thumb-metabase.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x metabase\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/acp-features/de-thumb-metabase.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
-=======
-      "ogImage": "/demo/de-thumb-metabase.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x metabase\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-metabase.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/1/integrating-querypie-with-redash",
         "/features/demo/acp-features/3/integrating-querypie-with-tableau"
@@ -49,11 +39,7 @@
         "title": "QueryPie x metabase",
         "description": "",
         "date": "2025-02-01",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/de-thumb-metabase.webp",
-=======
-        "ogImage": "public/demo/de-thumb-metabase.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -66,13 +52,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/de-thumb-metabase.webp",
           "webPath": "/demo/acp-features/de-thumb-metabase.webp"
-=======
-          "sourcePath": "public/demo/de-thumb-metabase.webp",
-          "webPath": "/demo/de-thumb-metabase.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-metabase--2/ko.mdx",
@@ -82,13 +63,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/de-thumb-metabase.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x metabase\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/acp-features/de-thumb-metabase.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
-=======
-      "ogImage": "/demo/de-thumb-metabase.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x metabase\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-metabase.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/1/integrating-querypie-with-redash",
         "/features/demo/acp-features/3/integrating-querypie-with-tableau"
@@ -101,11 +77,7 @@
         "title": "QueryPie x metabase",
         "description": "",
         "date": "2025-02-01",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/de-thumb-metabase.webp",
-=======
-        "ogImage": "public/demo/de-thumb-metabase.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -118,13 +90,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/de-thumb-metabase.webp",
           "webPath": "/demo/acp-features/de-thumb-metabase.webp"
-=======
-          "sourcePath": "public/demo/de-thumb-metabase.webp",
-          "webPath": "/demo/de-thumb-metabase.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrating-querypie-with-metabase--2/ja.mdx",
@@ -134,13 +101,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/de-thumb-metabase.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x metabase\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/acp-features/de-thumb-metabase.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
-=======
-      "ogImage": "/demo/de-thumb-metabase.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"QueryPie x metabase\"\ndescription: \"\"\ndate: \"2025-02-01\"\nogImage: \"public/demo/de-thumb-metabase.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/1/integrating-querypie-with-redash\"\n  - \"/features/demo/acp-features/3/integrating-querypie-with-tableau\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/1/integrating-querypie-with-redash",
         "/features/demo/acp-features/3/integrating-querypie-with-tableau"
@@ -153,11 +115,7 @@
         "title": "QueryPie x metabase",
         "description": "",
         "date": "2025-02-01",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/de-thumb-metabase.webp",
-=======
-        "ogImage": "public/demo/de-thumb-metabase.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

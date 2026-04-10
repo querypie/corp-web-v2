@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-21.webp",
           "webPath": "/documentation/white-papers/wp-thumb-21.webp"
         },
@@ -62,55 +61,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp",
           "webPath": "/documentation/white-papers/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-21.webp",
-          "webPath": "/white-paper/wp-thumb-21.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-1-comparison-of-agentops-execution-models.webp",
-          "webPath": "/white-paper/wp21-1-comparison-of-agentops-execution-models.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-2-example-of-devsecops-pipeline.webp",
-          "webPath": "/white-paper/wp21-2-example-of-devsecops-pipeline.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-3-vulnerability-management-across-the-cloud-devsecops-pipeline.webp",
-          "webPath": "/white-paper/wp21-3-vulnerability-management-across-the-cloud-devsecops-pipeline.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-4-application-vulnerability-management.webp",
-          "webPath": "/white-paper/wp21-4-application-vulnerability-management.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-5-timeline-based-comparison-of-control-flow.webp",
-          "webPath": "/white-paper/wp21-5-timeline-based-comparison-of-control-flow.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-6-agentsecops-component-architecture.webp",
-          "webPath": "/white-paper/wp21-6-agentsecops-component-architecture.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-7-architecture-with-mcp-pam.webp",
-          "webPath": "/white-paper/wp21-7-architecture-with-mcp-pam.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-8-iac-security-flow.webp",
-          "webPath": "/white-paper/wp21-8-iac-security-flow.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp",
-          "webPath": "/white-paper/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/welcome-to-the-age-of-agentsecops--21/en.mdx",
@@ -133,13 +83,8 @@
         "AI Compliance"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-21.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Welcome to the Age of AgentSecOps—Code Stands Still, Agents Take Over\"\ndescription: \"As AI agent–based automation systems continue to proliferate, we’ve moved beyond simple task automation to a new paradigm: AgentOps, where autonomous agents make decisions and interact with external systems on their own. In this article, we explore the emerging concept of AgentSecOps—security operations tailored for agent-driven environments—and take a deep dive into how its structure and role compare to traditional DevSecOps frameworks.\"\ndate: \"2025-05-13\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-21.webp\"\nkeywords: [\"AgentSecOps\",\"AgentSecOps Framework\", \"QueryPie MCPS\",\"MCP\",\"Model Context Protocol\",\"Enterprise AI Security\",\"MCP PAM\",\"Build Safe AI Foundation\",\"enterprise AI security\",\"Cloud Audit Logs\",\"AI Action Control\",\"AI Compliance\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/18/uncovering-mcp-security\"\n  - \"/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam\"\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-21.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Welcome to the Age of AgentSecOps—Code Stands Still, Agents Take Over\"\ndescription: \"As AI agent–based automation systems continue to proliferate, we’ve moved beyond simple task automation to a new paradigm: AgentOps, where autonomous agents make decisions and interact with external systems on their own. In this article, we explore the emerging concept of AgentSecOps—security operations tailored for agent-driven environments—and take a deep dive into how its structure and role compare to traditional DevSecOps frameworks.\"\ndate: \"2025-05-13\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-21.webp\"\nkeywords: [\"AgentSecOps\",\"AgentSecOps Framework\", \"QueryPie MCPS\",\"MCP\",\"Model Context Protocol\",\"Enterprise AI Security\",\"MCP PAM\",\"Build Safe AI Foundation\",\"enterprise AI security\",\"Cloud Audit Logs\",\"AI Action Control\",\"AI Compliance\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/18/uncovering-mcp-security\"\n  - \"/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam\"\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/18/uncovering-mcp-security",
         "/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam",
@@ -154,11 +99,7 @@
         "description": "As AI agent–based automation systems continue to proliferate, we’ve moved beyond simple task automation to a new paradigm: AgentOps, where autonomous agents make decisions and interact with external systems on their own. In this article, we explore the emerging concept of AgentSecOps—security operations tailored for agent-driven environments—and take a deep dive into how its structure and role compare to traditional DevSecOps frameworks.",
         "date": "2025-05-13",
         "author": "kenny",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-21.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-21.webp",
->>>>>>> origin/main
         "keywords": [
           "AgentSecOps",
           "AgentSecOps Framework",
@@ -184,7 +125,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-21.webp",
           "webPath": "/documentation/white-papers/wp-thumb-21.webp"
         },
@@ -232,55 +172,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp",
           "webPath": "/documentation/white-papers/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-21.webp",
-          "webPath": "/white-paper/wp-thumb-21.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-1-comparison-of-agentops-execution-models.webp",
-          "webPath": "/white-paper/wp21-1-comparison-of-agentops-execution-models.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-2-example-of-devsecops-pipeline.webp",
-          "webPath": "/white-paper/wp21-2-example-of-devsecops-pipeline.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-3-vulnerability-management-across-the-cloud-devsecops-pipeline.webp",
-          "webPath": "/white-paper/wp21-3-vulnerability-management-across-the-cloud-devsecops-pipeline.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-4-application-vulnerability-management.webp",
-          "webPath": "/white-paper/wp21-4-application-vulnerability-management.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-5-timeline-based-comparison-of-control-flow.webp",
-          "webPath": "/white-paper/wp21-5-timeline-based-comparison-of-control-flow.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-6-agentsecops-component-architecture.webp",
-          "webPath": "/white-paper/wp21-6-agentsecops-component-architecture.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-7-architecture-with-mcp-pam.webp",
-          "webPath": "/white-paper/wp21-7-architecture-with-mcp-pam.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-8-iac-security-flow.webp",
-          "webPath": "/white-paper/wp21-8-iac-security-flow.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp",
-          "webPath": "/white-paper/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/welcome-to-the-age-of-agentsecops--21/ko.mdx",
@@ -303,13 +194,8 @@
         "AI 컴플라이언스"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-21.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"코드는 멈췄고, 에이전트가 움직인다 – AgentSecOps의 시대로\"\ndescription: \"AI 에이전트 기반의 자동화 시스템이 확산되면서, 단순한 자동화 수준을 넘어, 실행 주체(agent)가 독립적으로 의사결정을 내리고 외부 시스템을 호출하는 AgentOps가 등장했습니다. 이 글에서는 AgentOps와 함께 등장하게 된 AgentSecOps에 대해 살펴보고, 기존 DevSecOps 체계 대비 어떤 구조와 역할을 수행하게 될지 심층 분석합니다.\"\ndate: \"2025-05-13\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-21.webp\"\nkeywords: [\"AgentSecOps\",\"AgentSecOps Framework\", \"QueryPie MCPS\",\"MCP\",\"Model Context Protocol\",\"엔터프라이즈 AI 보안\",\"MCP PAM\",\"안전한 AI 기반 구축\",\"AI 정책 적용\",\"클라우드 감사 로그\",\"AI 액션 제어\",\"AI 컴플라이언스\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/18/uncovering-mcp-security\"\n  - \"/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam\"\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-21.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"코드는 멈췄고, 에이전트가 움직인다 – AgentSecOps의 시대로\"\ndescription: \"AI 에이전트 기반의 자동화 시스템이 확산되면서, 단순한 자동화 수준을 넘어, 실행 주체(agent)가 독립적으로 의사결정을 내리고 외부 시스템을 호출하는 AgentOps가 등장했습니다. 이 글에서는 AgentOps와 함께 등장하게 된 AgentSecOps에 대해 살펴보고, 기존 DevSecOps 체계 대비 어떤 구조와 역할을 수행하게 될지 심층 분석합니다.\"\ndate: \"2025-05-13\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-21.webp\"\nkeywords: [\"AgentSecOps\",\"AgentSecOps Framework\", \"QueryPie MCPS\",\"MCP\",\"Model Context Protocol\",\"엔터프라이즈 AI 보안\",\"MCP PAM\",\"안전한 AI 기반 구축\",\"AI 정책 적용\",\"클라우드 감사 로그\",\"AI 액션 제어\",\"AI 컴플라이언스\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/18/uncovering-mcp-security\"\n  - \"/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam\"\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/18/uncovering-mcp-security",
         "/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam",
@@ -324,11 +210,7 @@
         "description": "AI 에이전트 기반의 자동화 시스템이 확산되면서, 단순한 자동화 수준을 넘어, 실행 주체(agent)가 독립적으로 의사결정을 내리고 외부 시스템을 호출하는 AgentOps가 등장했습니다. 이 글에서는 AgentOps와 함께 등장하게 된 AgentSecOps에 대해 살펴보고, 기존 DevSecOps 체계 대비 어떤 구조와 역할을 수행하게 될지 심층 분석합니다.",
         "date": "2025-05-13",
         "author": "kenny",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-21.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-21.webp",
->>>>>>> origin/main
         "keywords": [
           "AgentSecOps",
           "AgentSecOps Framework",
@@ -354,7 +236,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-21.webp",
           "webPath": "/documentation/white-papers/wp-thumb-21.webp"
         },
@@ -402,55 +283,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp",
           "webPath": "/documentation/white-papers/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-21.webp",
-          "webPath": "/white-paper/wp-thumb-21.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-1-comparison-of-agentops-execution-models.webp",
-          "webPath": "/white-paper/wp21-1-comparison-of-agentops-execution-models.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-2-example-of-devsecops-pipeline.webp",
-          "webPath": "/white-paper/wp21-2-example-of-devsecops-pipeline.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-3-vulnerability-management-across-the-cloud-devsecops-pipeline.webp",
-          "webPath": "/white-paper/wp21-3-vulnerability-management-across-the-cloud-devsecops-pipeline.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-4-application-vulnerability-management.webp",
-          "webPath": "/white-paper/wp21-4-application-vulnerability-management.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-5-timeline-based-comparison-of-control-flow.webp",
-          "webPath": "/white-paper/wp21-5-timeline-based-comparison-of-control-flow.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-6-agentsecops-component-architecture.webp",
-          "webPath": "/white-paper/wp21-6-agentsecops-component-architecture.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-7-architecture-with-mcp-pam.webp",
-          "webPath": "/white-paper/wp21-7-architecture-with-mcp-pam.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-8-iac-security-flow.webp",
-          "webPath": "/white-paper/wp21-8-iac-security-flow.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp",
-          "webPath": "/white-paper/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/welcome-to-the-age-of-agentsecops--21/ja.mdx",
@@ -473,13 +305,8 @@
         "AIコンプライアンス"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-21.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"コードは止まり、エージェントが動く – AgentSecOpsの時代へ\"\ndescription: \"AIエージェントベースの自動化システムが拡大し、単なる自動化レベルを超えて、実行主体（エージェント）が独立して意思決定し外部システムを呼び出すAgentOpsが登場しました。本稿ではAgentOpsとともに登場したAgentSecOpsについて考察し、従来のDevSecOps体制と比べてどのような構造と役割を担うのかを深く分析します。\"\ndate: \"2025-05-13\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-21.webp\"\nkeywords: [\"AgentSecOps\",\"AgentSecOps Framework\", \"QueryPie MCPS\",\"MCP\",\"Model Context Protocol\",\"エンタープライズAIセキュリティ\",\"MCP PAM\",\"安全なAI基盤構築\",\"AIポリシー適用\",\"クラウド監査ログ\",\"AIアクション制御\",\"AIコンプライアンス\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/18/uncovering-mcp-security\"\n  - \"/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam\"\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-21.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"コードは止まり、エージェントが動く – AgentSecOpsの時代へ\"\ndescription: \"AIエージェントベースの自動化システムが拡大し、単なる自動化レベルを超えて、実行主体（エージェント）が独立して意思決定し外部システムを呼び出すAgentOpsが登場しました。本稿ではAgentOpsとともに登場したAgentSecOpsについて考察し、従来のDevSecOps体制と比べてどのような構造と役割を担うのかを深く分析します。\"\ndate: \"2025-05-13\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-21.webp\"\nkeywords: [\"AgentSecOps\",\"AgentSecOps Framework\", \"QueryPie MCPS\",\"MCP\",\"Model Context Protocol\",\"エンタープライズAIセキュリティ\",\"MCP PAM\",\"安全なAI基盤構築\",\"AIポリシー適用\",\"クラウド監査ログ\",\"AIアクション制御\",\"AIコンプライアンス\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/18/uncovering-mcp-security\"\n  - \"/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam\"\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/18/uncovering-mcp-security",
         "/features/documentation/white-paper/19/google-agentspace-vs-querypie-mcp-pam",
@@ -494,11 +321,7 @@
         "description": "AIエージェントベースの自動化システムが拡大し、単なる自動化レベルを超えて、実行主体（エージェント）が独立して意思決定し外部システムを呼び出すAgentOpsが登場しました。本稿ではAgentOpsとともに登場したAgentSecOpsについて考察し、従来のDevSecOps体制と比べてどのような構造と役割を担うのかを深く分析します。",
         "date": "2025-05-13",
         "author": "kenny",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-21.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-21.webp",
->>>>>>> origin/main
         "keywords": [
           "AgentSecOps",
           "AgentSecOps Framework",

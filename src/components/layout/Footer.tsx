@@ -60,11 +60,7 @@ export default function Footer({
   return (
     <footer
       className={cx(
-<<<<<<< HEAD
         "relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10 md:bg-[radial-gradient(93.31%_130%_at_50%_100%,rgba(255,132,64,0.58)_0%,rgba(255,112,48,0.34)_24%,rgba(255,94,38,0.18)_48%,rgba(255,94,38,0.00)_72%)]",
-=======
-        "relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10 md:bg-[radial-gradient(93.31%_130%_at_50%_100%,rgba(255,179,133,0.50)_0%,rgba(255,143,102,0.28)_30%,rgba(255,109,71,0.14)_52%,rgba(255,109,71,0.00)_72%)]",
->>>>>>> origin/main
         className,
       )}
     >

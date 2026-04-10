@@ -16,16 +16,12 @@ type AuthoredContentMeta = {
   categorySlug: ManagedContentCategorySlug;
   contentType: "content" | "outlink";
   dateIso: string;
-<<<<<<< HEAD
   downloadCoverImageSrc?: string;
   downloadPdfFileName?: string;
   downloadPdfSrc?: string;
   enableDownloadButton: boolean;
   externalUrl: string;
   gatingLevel?: ManagedContentEntry["gatingLevel"];
-=======
-  externalUrl: string;
->>>>>>> origin/main
   hideHeroImage: boolean;
   id: string;
   imageSrc: string;
@@ -49,16 +45,12 @@ type SaveAuthoredContentInput = Pick<
   | "contentFormat"
   | "contentType"
   | "dateIso"
-<<<<<<< HEAD
   | "downloadCoverImageSrc"
   | "downloadPdfFileName"
   | "downloadPdfSrc"
   | "enableDownloadButton"
   | "externalUrl"
   | "gatingLevel"
-=======
-  | "externalUrl"
->>>>>>> origin/main
   | "hideHeroImage"
   | "id"
   | "imageSrc"
@@ -75,11 +67,7 @@ const contentRoot = path.join(process.cwd(), "src", "content");
 
 function getAuthoredSectionRoot(section: ManagedContentSection) {
   if (section === "documentation") {
-<<<<<<< HEAD
     return path.join(contentRoot, "documentation");
-=======
-    return path.join(contentRoot, "docs");
->>>>>>> origin/main
   }
 
   return path.join(contentRoot, section);
@@ -134,7 +122,6 @@ async function ensureDir(dirPath: string) {
   await fs.mkdir(dirPath, { recursive: true });
 }
 
-<<<<<<< HEAD
 async function writeFileAtomic(filePath: string, contents: string) {
   const tempPath = `${filePath}.tmp-${process.pid}-${Date.now()}`;
   await fs.writeFile(tempPath, contents, "utf8");
@@ -145,12 +132,6 @@ async function listStorageIds() {
   const storageIds: string[] = [];
 
   async function walk(currentDir: string) {
-=======
-async function listStorageIds() {
-  const storageIds: string[] = [];
-
-  async function walk(currentDir: string, depth: number) {
->>>>>>> origin/main
     if (!existsSync(currentDir)) {
       return;
     }
@@ -164,30 +145,18 @@ async function listStorageIds() {
         continue;
       }
 
-<<<<<<< HEAD
       if (/^cnt_\d+$/.test(entry.name)) {
-=======
-      if (depth === 2) {
->>>>>>> origin/main
         storageIds.push(entry.name);
         continue;
       }
 
-<<<<<<< HEAD
       await walk(fullPath);
-=======
-      await walk(fullPath, depth + 1);
->>>>>>> origin/main
     }
   }
 
   await Promise.all(
     (["demo", "documentation", "news"] as const).map((section) =>
-<<<<<<< HEAD
       walk(getAuthoredSectionRoot(section)),
-=======
-      walk(getAuthoredSectionRoot(section), 0),
->>>>>>> origin/main
     ),
   );
 
@@ -237,7 +206,6 @@ async function readAuthoredMetaFiles() {
   return metaFiles.sort();
 }
 
-<<<<<<< HEAD
 async function readMetaFile(metaPath: string) {
   const rawMeta = await fs.readFile(metaPath, "utf8");
 
@@ -248,8 +216,6 @@ async function readMetaFile(metaPath: string) {
   }
 }
 
-=======
->>>>>>> origin/main
 async function findAuthoredEntryDir({
   categorySlug,
   id,
@@ -268,12 +234,7 @@ async function findAuthoredEntryDir({
   const metaFiles = await readAuthoredMetaFiles();
 
   for (const metaFile of metaFiles) {
-<<<<<<< HEAD
     const meta = await readMetaFile(metaFile);
-=======
-    const rawMeta = await fs.readFile(metaFile, "utf8");
-    const meta = JSON.parse(rawMeta) as AuthoredContentMeta;
->>>>>>> origin/main
 
     if (meta.id === id && meta.section === section && meta.categorySlug === categorySlug) {
       return path.dirname(metaFile);
@@ -298,12 +259,7 @@ export async function readAuthoredManagedContents() {
   };
 
   for (const metaFile of metaFiles) {
-<<<<<<< HEAD
     const meta = await readMetaFile(metaFile);
-=======
-    const rawMeta = await fs.readFile(metaFile, "utf8");
-    const meta = JSON.parse(rawMeta) as AuthoredContentMeta;
->>>>>>> origin/main
     const bodyHtml = createEmptyLocalizedContent();
     const bodyRichText = createEmptyLocalizedContent();
     const entryDir = path.dirname(metaFile);
@@ -331,11 +287,7 @@ export async function readAuthoredManagedContents() {
       locales: nextLocales,
     };
 
-<<<<<<< HEAD
     await writeFileAtomic(metaFile, `${JSON.stringify(normalizedMeta, null, 2)}\n`);
-=======
-    await fs.writeFile(metaFile, `${JSON.stringify(normalizedMeta, null, 2)}\n`, "utf8");
->>>>>>> origin/main
 
     seedEntriesBySection[meta.section].push({
       authorName: meta.authorName,
@@ -347,16 +299,12 @@ export async function readAuthoredManagedContents() {
       contentFormat: meta.contentType === "content" ? "tiptap" : "markdown",
       contentType: meta.contentType ?? "content",
       dateIso: meta.dateIso,
-<<<<<<< HEAD
       downloadCoverImageSrc: meta.downloadCoverImageSrc ?? "",
       downloadPdfFileName: meta.downloadPdfFileName ?? "",
       downloadPdfSrc: meta.downloadPdfSrc ?? "",
       enableDownloadButton: meta.enableDownloadButton ?? false,
       externalUrl: meta.externalUrl,
       gatingLevel: meta.gatingLevel ?? "none",
-=======
-      externalUrl: meta.externalUrl,
->>>>>>> origin/main
       hideHeroImage: meta.hideHeroImage,
       id: meta.id,
       imageSrc: meta.imageSrc,
@@ -392,16 +340,9 @@ export async function regenerateAuthoredContentSeed() {
   await Promise.all(
     (Object.entries(entriesBySection) as Array<[ManagedContentSection, ManagedContentEntry[]]>).map(
       async ([section, sectionEntries]) => {
-<<<<<<< HEAD
         await writeFileAtomic(
           getAuthoredSeedPath(section),
           `${JSON.stringify(sectionEntries, null, 2)}\n`,
-=======
-        await fs.writeFile(
-          getAuthoredSeedPath(section),
-          `${JSON.stringify(sectionEntries, null, 2)}\n`,
-          "utf8",
->>>>>>> origin/main
         );
       },
     ),
@@ -410,14 +351,10 @@ export async function regenerateAuthoredContentSeed() {
   return entries;
 }
 
-<<<<<<< HEAD
 export async function saveAuthoredContent(
   input: SaveAuthoredContentInput,
   options?: { regenerateSeed?: boolean },
 ) {
-=======
-export async function saveAuthoredContent(input: SaveAuthoredContentInput) {
->>>>>>> origin/main
   if (input.contentType === "content" && input.contentFormat !== "tiptap") {
     throw new Error("Content-type authored entries must be saved as TipTap content.");
   }
@@ -448,13 +385,8 @@ export async function saveAuthoredContent(input: SaveAuthoredContentInput) {
       path.relative(process.cwd(), path.join(entryDir, `${locale}.html`)),
     );
 
-<<<<<<< HEAD
     await writeFileAtomic(path.join(entryDir, `${locale}.tiptap.json`), richText);
     await writeFileAtomic(path.join(entryDir, `${locale}.html`), html);
-=======
-    await fs.writeFile(path.join(entryDir, `${locale}.tiptap.json`), richText, "utf8");
-    await fs.writeFile(path.join(entryDir, `${locale}.html`), html, "utf8");
->>>>>>> origin/main
 
     localesMap[locale] = {
       htmlPath: htmlRelativePath,
@@ -468,16 +400,12 @@ export async function saveAuthoredContent(input: SaveAuthoredContentInput) {
     categorySlug: input.categorySlug,
     contentType: input.contentType,
     dateIso: input.dateIso,
-<<<<<<< HEAD
     downloadCoverImageSrc: input.downloadCoverImageSrc,
     downloadPdfFileName: input.downloadPdfFileName,
     downloadPdfSrc: input.downloadPdfSrc,
     enableDownloadButton: input.enableDownloadButton,
     externalUrl: input.externalUrl,
     gatingLevel: input.gatingLevel,
-=======
-    externalUrl: input.externalUrl,
->>>>>>> origin/main
     hideHeroImage: input.hideHeroImage,
     id: input.id,
     imageSrc: input.imageSrc,
@@ -491,16 +419,11 @@ export async function saveAuthoredContent(input: SaveAuthoredContentInput) {
     locales: localesMap,
   };
 
-<<<<<<< HEAD
   await writeFileAtomic(path.join(entryDir, "meta.json"), `${JSON.stringify(meta, null, 2)}\n`);
 
   if (options?.regenerateSeed !== false) {
     await regenerateAuthoredContentSeed();
   }
-=======
-  await fs.writeFile(path.join(entryDir, "meta.json"), `${JSON.stringify(meta, null, 2)}\n`, "utf8");
-  await regenerateAuthoredContentSeed();
->>>>>>> origin/main
 
   return {
     ...input,
@@ -553,22 +476,13 @@ export async function updateAuthoredContentMeta({
   }
 
   const metaPath = path.join(entryDir, "meta.json");
-<<<<<<< HEAD
   const currentMeta = await readMetaFile(metaPath);
-=======
-  const rawMeta = await fs.readFile(metaPath, "utf8");
-  const currentMeta = JSON.parse(rawMeta) as AuthoredContentMeta;
->>>>>>> origin/main
   const nextMeta: AuthoredContentMeta = {
     ...currentMeta,
     ...updates,
   };
 
-<<<<<<< HEAD
   await writeFileAtomic(metaPath, `${JSON.stringify(nextMeta, null, 2)}\n`);
-=======
-  await fs.writeFile(metaPath, `${JSON.stringify(nextMeta, null, 2)}\n`, "utf8");
->>>>>>> origin/main
   await regenerateAuthoredContentSeed();
 
   return nextMeta;

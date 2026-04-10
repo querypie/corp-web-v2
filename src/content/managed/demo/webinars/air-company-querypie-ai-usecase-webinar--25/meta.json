@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/webinars/air-company-querypie-ai-usecase-webinar-20260219.webp",
           "webPath": "/demo/webinars/air-company-querypie-ai-usecase-webinar-20260219.webp"
-=======
-          "sourcePath": "public/webinar/air-company-querypie-ai-usecase-webinar-20260219.webp",
-          "webPath": "/webinar/air-company-querypie-ai-usecase-webinar-20260219.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/air-company-querypie-ai-usecase-webinar--25/ja.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/webinars/air-company-querypie-ai-usecase-webinar-20260219.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"AI、社内で使ってみた。活用事例を30分で｜2/19(木)開催\"\ndescription: \"AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。\"\ndate: \"2026-02-13\"\nogImage: \"public/demo/webinars/air-company-querypie-ai-usecase-webinar-20260219.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/24/air-company-querypie-ai-webinar\"\n  - \"/features/demo/webinars/23/air-company-querypie-ai-webinar\"\n  - \"/features/demo/webinars/22/air-company-querypie-mcp-webinar\"",
-=======
-      "ogImage": "/webinar/air-company-querypie-ai-usecase-webinar-20260219.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"AI、社内で使ってみた。活用事例を30分で｜2/19(木)開催\"\ndescription: \"AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。\"\ndate: \"2026-02-13\"\nogImage: \"public/webinar/air-company-querypie-ai-usecase-webinar-20260219.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/24/air-company-querypie-ai-webinar\"\n  - \"/features/demo/webinars/23/air-company-querypie-ai-webinar\"\n  - \"/features/demo/webinars/22/air-company-querypie-mcp-webinar\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/24/air-company-querypie-ai-webinar",
         "/features/demo/webinars/23/air-company-querypie-ai-webinar",
@@ -50,11 +40,7 @@
         "title": "AI、社内で使ってみた。活用事例を30分で｜2/19(木)開催",
         "description": "AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。",
         "date": "2026-02-13",
-<<<<<<< HEAD
         "ogImage": "public/demo/webinars/air-company-querypie-ai-usecase-webinar-20260219.webp",
-=======
-        "ogImage": "public/webinar/air-company-querypie-ai-usecase-webinar-20260219.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

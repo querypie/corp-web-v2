@@ -1,10 +1,6 @@
 "use client";
 
-<<<<<<< HEAD
 import { useEffect, useState } from "react";
-=======
-import { useState } from "react";
->>>>>>> origin/main
 import Cta from "../../sections/Cta";
 import ClientSection from "../../sections/ClientSection";
 import ContentListSection from "../../sections/ContentListSection";
@@ -118,7 +114,6 @@ export default function HomePage({
   reviewTitle,
 }: HomePageProps) {
   const [activeVideoIndex, setActiveVideoIndex] = useState(0);
-<<<<<<< HEAD
   const [isHeroVideoVisible, setIsHeroVideoVisible] = useState(false);
   const [isHeroOverlayVisible, setIsHeroOverlayVisible] = useState(false);
   const activeVideo = heroVideos[activeVideoIndex];
@@ -157,19 +152,10 @@ export default function HomePage({
       <div className="relative -mx-5 md:-mx-10">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute inset-0 bg-[#D9E1EC]" />
-=======
-  const activeVideo = heroVideos[activeVideoIndex];
-
-  return (
-    <div className="-mt-[120px] flex flex-col gap-20 overflow-x-hidden bg-bg px-5 pb-10 text-fg md:-mt-[160px] md:gap-[120px] md:px-10">
-      <div className="relative -mx-5 md:-mx-10">
-        <div className="pointer-events-none absolute inset-0 overflow-hidden">
->>>>>>> origin/main
           <video
             key={activeVideo.src}
             aria-hidden="true"
             autoPlay
-<<<<<<< HEAD
             className={cx(
               "homeb-hero-video transition-opacity duration-[500ms] ease-out",
               isHeroVideoVisible ? "opacity-100" : "opacity-0",
@@ -179,18 +165,11 @@ export default function HomePage({
             muted
             playsInline
             preload="auto"
-=======
-            className={cx("homeb-hero-video", (activeVideo.id === 2 || activeVideo.id === 3) && "-scale-x-100")}
-            loop
-            muted
-            playsInline
->>>>>>> origin/main
           >
             <source src={activeVideo.src} type="video/mp4" />
           </video>
           <div
             aria-hidden="true"
-<<<<<<< HEAD
             className={cx(
               "absolute -left-[320px] -top-[220px] h-[560px] w-[980px] rounded-full blur-[80px] transition-opacity duration-[900ms] ease-out delay-75",
               isHeroOverlayVisible ? "opacity-100" : "opacity-0",
@@ -203,51 +182,30 @@ export default function HomePage({
               "absolute inset-x-0 bottom-0 -top-[160px] bg-gradient-to-b from-transparent via-[rgba(197,211,231,0.28)] to-transparent transition-opacity duration-[900ms] ease-out delay-100 md:-top-[180px] xl:-top-[120px]",
               isHeroOverlayVisible ? "opacity-100" : "opacity-0",
             )}
-=======
-            className="absolute -left-[320px] -top-[220px] h-[560px] w-[980px] rounded-full opacity-100 blur-[80px]"
-            style={{ background: "radial-gradient(ellipse at center, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.56) 34%, rgba(255,255,255,0.18) 54%, rgba(255,255,255,0) 76%)" }}
->>>>>>> origin/main
           />
-          <div className="absolute inset-x-0 bottom-0 -top-[160px] bg-gradient-to-b from-transparent via-[rgba(197,211,231,0.28)] to-bg md:-top-[180px] xl:-top-[120px]" />
         </div>
 
         <HomePageHero
           activeVideoIndex={activeVideoIndex}
-<<<<<<< HEAD
           ctaLabel={heroPrimaryCtaLabel}
           description={heroDescription}
           heroHeading={heroHeading}
-=======
-          heroHeadingMuted={heroHeadingMuted}
-          heroHeadingPrimary={heroHeadingPrimary}
->>>>>>> origin/main
           locale={locale}
           onSelectVideo={setActiveVideoIndex}
         />
       </div>
 
-<<<<<<< HEAD
       <div><ClientSection caption={clientCaption} /></div>
       <div><FeatureSection items={featureItems} /></div>
       <div>
-=======
-      <div data-reveal><ClientSection caption={clientCaption} /></div>
-      <div data-reveal><FeatureSection items={featureItems} /></div>
-      <div data-reveal>
->>>>>>> origin/main
         <McpSection
           description={mcpDescription}
           items={mcpItems}
           title={mcpTitle}
         />
       </div>
-<<<<<<< HEAD
       <div><ReviewSection items={reviewItems} title={reviewTitle} /></div>
       <div className="-mx-5 md:-mx-10">
-=======
-      <div data-reveal><ReviewSection items={reviewItems} title={reviewTitle} /></div>
-      <div data-reveal className="-mx-5 md:-mx-10">
->>>>>>> origin/main
         <ContentListSection
           description={contentListDescription}
           items={contentListItems}
@@ -255,17 +213,10 @@ export default function HomePage({
           title={contentListTitle}
         />
       </div>
-<<<<<<< HEAD
       <div>
         <HomeNewsListClientSection fallbackItems={newsItems} locale={locale} title={newsTitle} />
       </div>
       <div>
-=======
-      <div data-reveal>
-        <HomeNewsListClientSection fallbackItems={newsItems} locale={locale} title={newsTitle} />
-      </div>
-      <div data-reveal>
->>>>>>> origin/main
         <Cta
           actionLabel="Get Start!"
           description={ctaDescription}

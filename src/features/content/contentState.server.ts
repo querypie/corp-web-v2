@@ -43,16 +43,12 @@ function normalizeStateEntry(item: Partial<ManagedContentEntry>): ManagedContent
     contentFormat: item.contentFormat ?? "markdown",
     contentType: item.contentType ?? (item.section === "news" ? "outlink" : "content"),
     dateIso: item.dateIso ?? "",
-<<<<<<< HEAD
     downloadCoverImageSrc: item.downloadCoverImageSrc ?? "",
     downloadPdfFileName: item.downloadPdfFileName ?? "",
     downloadPdfSrc: item.downloadPdfSrc ?? "",
     enableDownloadButton: item.enableDownloadButton ?? false,
     externalUrl: item.externalUrl ?? "",
     gatingLevel: item.gatingLevel ?? "none",
-=======
-    externalUrl: item.externalUrl ?? "",
->>>>>>> origin/main
     hideHeroImage: item.hideHeroImage ?? false,
     id: item.id ?? "",
     imageSrc: item.imageSrc ?? "",

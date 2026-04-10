@@ -66,14 +66,8 @@ function PlanSummaryCard({
           <Button
             arrow
             className="min-w-[126px]"
-<<<<<<< HEAD
             style="full"
             variant="primary"
-=======
-            size="large"
-            style="round"
-            variant="secondary"
->>>>>>> origin/main
           >
             {ctaLabel}
           </Button>

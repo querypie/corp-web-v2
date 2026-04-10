@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-8-en.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-8-en.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-8-en.webp",
-          "webPath": "/demo/aip-use-case-thumb-8-en.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/credit-check-ai-agent--14/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-8-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Credit Check AI Agent\"\ndescription: \"An AI agent that automates creditworthiness checks by retrieving applicant data, scoring risk, and generating decision-ready summaries—faster approvals with consistent policy enforcement.\"\ndate: \"2025-10-03\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-8-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/12/work-collaboration-agent\"\n  - \"/features/demo/use-cases/13/m365-ai-agent\"\n  - \"/features/demo/use-cases/15/factory-iot-ai-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-8-en.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Credit Check AI Agent\"\ndescription: \"An AI agent that automates creditworthiness checks by retrieving applicant data, scoring risk, and generating decision-ready summaries—faster approvals with consistent policy enforcement.\"\ndate: \"2025-10-03\"\nogImage: \"public/demo/aip-use-case-thumb-8-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/12/work-collaboration-agent\"\n  - \"/features/demo/use-cases/13/m365-ai-agent\"\n  - \"/features/demo/use-cases/15/factory-iot-ai-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/12/work-collaboration-agent",
         "/features/demo/use-cases/13/m365-ai-agent",
@@ -50,11 +40,7 @@
         "title": "AIP Use Case: Credit Check AI Agent",
         "description": "An AI agent that automates creditworthiness checks by retrieving applicant data, scoring risk, and generating decision-ready summaries—faster approvals with consistent policy enforcement.",
         "date": "2025-10-03",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-8-en.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-8-en.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -68,13 +54,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/use-cases/aip-use-case-thumb-8-ja.webp",
           "webPath": "/demo/use-cases/aip-use-case-thumb-8-ja.webp"
-=======
-          "sourcePath": "public/demo/aip-use-case-thumb-8-ja.webp",
-          "webPath": "/demo/aip-use-case-thumb-8-ja.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/credit-check-ai-agent--14/ja.mdx",
@@ -84,13 +65,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/use-cases/aip-use-case-thumb-8-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： クレジット審査AIエージェント\"\ndescription: \"申込者データの取得、リスクスコアリング、意思決定用サマリーの生成を自動化し、ポリシーを一貫適用しながら審査の迅速化を実現するAIエージェント。\"\ndate: \"2025-10-03\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-8-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/12/work-collaboration-agent\"\n  - \"/features/demo/use-cases/13/m365-ai-agent\"\n  - \"/features/demo/use-cases/15/factory-iot-ai-agent\"",
-=======
-      "ogImage": "/demo/aip-use-case-thumb-8-ja.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： クレジット審査AIエージェント\"\ndescription: \"申込者データの取得、リスクスコアリング、意思決定用サマリーの生成を自動化し、ポリシーを一貫適用しながら審査の迅速化を実現するAIエージェント。\"\ndate: \"2025-10-03\"\nogImage: \"public/demo/aip-use-case-thumb-8-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/12/work-collaboration-agent\"\n  - \"/features/demo/use-cases/13/m365-ai-agent\"\n  - \"/features/demo/use-cases/15/factory-iot-ai-agent\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/12/work-collaboration-agent",
         "/features/demo/use-cases/13/m365-ai-agent",
@@ -104,11 +80,7 @@
         "title": "AIP活用事例： クレジット審査AIエージェント",
         "description": "申込者データの取得、リスクスコアリング、意思決定用サマリーの生成を自動化し、ポリシーを一貫適用しながら審査の迅速化を実現するAIエージェント。",
         "date": "2025-10-03",
-<<<<<<< HEAD
         "ogImage": "public/demo/use-cases/aip-use-case-thumb-8-ja.webp",
-=======
-        "ogImage": "public/demo/aip-use-case-thumb-8-ja.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

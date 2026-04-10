@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/webinars/findy-querypie-mcp-webinar.webp",
           "webPath": "/demo/webinars/findy-querypie-mcp-webinar.webp"
-=======
-          "sourcePath": "public/webinar/findy-querypie-mcp-webinar.webp",
-          "webPath": "/webinar/findy-querypie-mcp-webinar.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/findy-querypie-mcp-webinar--17/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/webinars/findy-querypie-mcp-webinar.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Join FINDY's CTO and QueryPie for an AI & MCP Online Seminar\"\ndescription: \"Learn how to build an MCP server in just 10 minutes! We'll walk you through it with a live coding session in Korean. If you're curious about AI or MCP, don't miss out!\"\ndate: \"2025-05-19\"\nogImage: \"public/demo/webinars/findy-querypie-mcp-webinar.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/16/air-company-querypie-zerotrust-webinar\"\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
-=======
-      "ogImage": "/webinar/findy-querypie-mcp-webinar.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Join FINDY's CTO and QueryPie for an AI & MCP Online Seminar\"\ndescription: \"Learn how to build an MCP server in just 10 minutes! We'll walk you through it with a live coding session in Korean. If you're curious about AI or MCP, don't miss out!\"\ndate: \"2025-05-19\"\nogImage: \"public/webinar/findy-querypie-mcp-webinar.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/16/air-company-querypie-zerotrust-webinar\"\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/16/air-company-querypie-zerotrust-webinar",
         "/features/demo/webinars/10/querypie-databases-nosql-ledger-ja",
@@ -50,11 +40,7 @@
         "title": "Join FINDY's CTO and QueryPie for an AI & MCP Online Seminar",
         "description": "Learn how to build an MCP server in just 10 minutes! We'll walk you through it with a live coding session in Korean. If you're curious about AI or MCP, don't miss out!",
         "date": "2025-05-19",
-<<<<<<< HEAD
         "ogImage": "public/demo/webinars/findy-querypie-mcp-webinar.webp",
-=======
-        "ogImage": "public/webinar/findy-querypie-mcp-webinar.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -68,13 +54,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/webinars/findy-querypie-mcp-webinar.webp",
           "webPath": "/demo/webinars/findy-querypie-mcp-webinar.webp"
-=======
-          "sourcePath": "public/webinar/findy-querypie-mcp-webinar.webp",
-          "webPath": "/webinar/findy-querypie-mcp-webinar.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/findy-querypie-mcp-webinar--17/ko.mdx",
@@ -84,13 +65,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/webinars/findy-querypie-mcp-webinar.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Findy의 CTO와 QueryPie가 함께하는 AI & MCP 온라인 세미나에 초대합니다.\"\ndescription: \"단 10분 만에 MCP 서버를 구현하는 방법! 당일 라이브 코딩으로 보여드립니다. 라이브 코딩은 한국어로 진행되니 AI와 MCP에 대해 궁금하셨던 분들, 이번 기회를 절대 놓치지 마세요!\"\ndate: \"2025-05-19\"\nogImage: \"public/demo/webinars/findy-querypie-mcp-webinar.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/16/air-company-querypie-zerotrust-webinar\"\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
-=======
-      "ogImage": "/webinar/findy-querypie-mcp-webinar.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Findy의 CTO와 QueryPie가 함께하는 AI & MCP 온라인 세미나에 초대합니다.\"\ndescription: \"단 10분 만에 MCP 서버를 구현하는 방법! 당일 라이브 코딩으로 보여드립니다. 라이브 코딩은 한국어로 진행되니 AI와 MCP에 대해 궁금하셨던 분들, 이번 기회를 절대 놓치지 마세요!\"\ndate: \"2025-05-19\"\nogImage: \"public/webinar/findy-querypie-mcp-webinar.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/16/air-company-querypie-zerotrust-webinar\"\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/16/air-company-querypie-zerotrust-webinar",
         "/features/demo/webinars/10/querypie-databases-nosql-ledger-ja",
@@ -104,11 +80,7 @@
         "title": "Findy의 CTO와 QueryPie가 함께하는 AI & MCP 온라인 세미나에 초대합니다.",
         "description": "단 10분 만에 MCP 서버를 구현하는 방법! 당일 라이브 코딩으로 보여드립니다. 라이브 코딩은 한국어로 진행되니 AI와 MCP에 대해 궁금하셨던 분들, 이번 기회를 절대 놓치지 마세요!",
         "date": "2025-05-19",
-<<<<<<< HEAD
         "ogImage": "public/demo/webinars/findy-querypie-mcp-webinar.webp",
-=======
-        "ogImage": "public/webinar/findy-querypie-mcp-webinar.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -122,13 +94,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/webinars/findy-querypie-mcp-webinar.webp",
           "webPath": "/demo/webinars/findy-querypie-mcp-webinar.webp"
-=======
-          "sourcePath": "public/webinar/findy-querypie-mcp-webinar.webp",
-          "webPath": "/webinar/findy-querypie-mcp-webinar.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/findy-querypie-mcp-webinar--17/ja.mdx",
@@ -138,13 +105,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/webinars/findy-querypie-mcp-webinar.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"FindyのCTOとQueryPieが共演！AI & MCP オンラインセミナー開催のお知らせ\"\ndescription: \"たった10分でMCPサーバーを構築する方法を、当日のライブコーディングでご紹介します。ライブコーディングは韓国語で実施されます。AIやMCPにご興味のある方は、ぜひこの機会をお見逃しなく！\"\ndate: \"2025-05-19\"\nogImage: \"public/demo/webinars/findy-querypie-mcp-webinar.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/16/air-company-querypie-zerotrust-webinar\"\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
-=======
-      "ogImage": "/webinar/findy-querypie-mcp-webinar.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"FindyのCTOとQueryPieが共演！AI & MCP オンラインセミナー開催のお知らせ\"\ndescription: \"たった10分でMCPサーバーを構築する方法を、当日のライブコーディングでご紹介します。ライブコーディングは韓国語で実施されます。AIやMCPにご興味のある方は、ぜひこの機会をお見逃しなく！\"\ndate: \"2025-05-19\"\nogImage: \"public/webinar/findy-querypie-mcp-webinar.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/16/air-company-querypie-zerotrust-webinar\"\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/16/air-company-querypie-zerotrust-webinar",
         "/features/demo/webinars/10/querypie-databases-nosql-ledger-ja",
@@ -158,11 +120,7 @@
         "title": "FindyのCTOとQueryPieが共演！AI & MCP オンラインセミナー開催のお知らせ",
         "description": "たった10分でMCPサーバーを構築する方法を、当日のライブコーディングでご紹介します。ライブコーディングは韓国語で実施されます。AIやMCPにご興味のある方は、ぜひこの機会をお見逃しなく！",
         "date": "2025-05-19",
-<<<<<<< HEAD
         "ogImage": "public/demo/webinars/findy-querypie-mcp-webinar.webp",
-=======
-        "ogImage": "public/webinar/findy-querypie-mcp-webinar.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

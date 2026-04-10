@@ -1,40 +1,28 @@
 "use client";
 
-<<<<<<< HEAD
 import { useEffect, useMemo, useRef, useState } from "react";
 import { mergeAttributes } from "@tiptap/core";
 import { EditorContent, ReactNodeViewRenderer, useEditor } from "@tiptap/react";
 import CodeBlock from "@tiptap/extension-code-block";
-=======
-import { useEffect, useMemo, useRef } from "react";
-import { EditorContent, useEditor } from "@tiptap/react";
->>>>>>> origin/main
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import Youtube from "@tiptap/extension-youtube";
 import { TableKit } from "@tiptap/extension-table";
-<<<<<<< HEAD
 import Input from "./Input";
 import Tab from "./Tab";
 import TabGroup from "./TabGroup";
 import TiptapCodeBlockView from "./TiptapCodeBlockView";
 import { CONTENT_PREVIEW_RICH_CLASS } from "@/features/content/previewStyles";
-=======
->>>>>>> origin/main
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
 function parseContent(value: string) {
-<<<<<<< HEAD
   const trimmedValue = value.trim();
 
   if (!trimmedValue) {
-=======
-  if (!value.trim()) {
->>>>>>> origin/main
     return {
       content: [{ type: "paragraph" }],
       type: "doc",
@@ -42,17 +30,12 @@ function parseContent(value: string) {
   }
 
   try {
-<<<<<<< HEAD
     return JSON.parse(trimmedValue);
   } catch {
     if (trimmedValue.startsWith("<")) {
       return trimmedValue;
     }
 
-=======
-    return JSON.parse(value);
-  } catch {
->>>>>>> origin/main
     return {
       content: [{ type: "paragraph" }],
       type: "doc",
@@ -60,7 +43,6 @@ function parseContent(value: string) {
   }
 }
 
-<<<<<<< HEAD
 const ResizableImage = Image.extend({
   addAttributes() {
     return {
@@ -169,25 +151,17 @@ const StyledCodeBlock = CodeBlock.extend({
 function ToolButton({
   children,
   className,
-=======
-function ToolButton({
-  children,
->>>>>>> origin/main
   isActive = false,
   onClick,
 }: {
   children: React.ReactNode;
-<<<<<<< HEAD
   className?: string;
-=======
->>>>>>> origin/main
   isActive?: boolean;
   onClick: () => void;
 }) {
   return (
     <button
       className={cx(
-<<<<<<< HEAD
         "inline-flex h-9 items-center justify-center rounded-button px-3 text-center type-body-sm transition-colors whitespace-nowrap",
         isActive
           ? "bg-fg text-bg"
@@ -214,18 +188,6 @@ function ToolbarIcon({
     <span className="inline-flex h-4 w-4 items-center justify-center">
       {children}
     </span>
-=======
-        "rounded-button px-3.5 py-2 type-body-sm transition-colors whitespace-nowrap",
-        isActive
-          ? "bg-fg text-bg"
-          : "bg-transparent text-fg hover:bg-secondary hover:text-fg",
-      )}
-      onClick={onClick}
-      type="button"
-    >
-      {children}
-    </button>
->>>>>>> origin/main
   );
 }
 
@@ -243,7 +205,6 @@ export default function TiptapEditor({
   value,
 }: Props) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-<<<<<<< HEAD
   const editorShellRef = useRef<HTMLDivElement | null>(null);
   const baselineContentRef = useRef("");
   const lastAppliedValueRef = useRef(value);
@@ -262,9 +223,6 @@ export default function TiptapEditor({
     visible: false,
     width: "100%",
   });
-=======
-  const lastAppliedValueRef = useRef(value);
->>>>>>> origin/main
   const content = useMemo(() => parseContent(value), [value]);
 
   const editor = useEditor({
@@ -272,7 +230,6 @@ export default function TiptapEditor({
     editorProps: {
       attributes: {
         class:
-<<<<<<< HEAD
           `${CONTENT_PREVIEW_RICH_CLASS} min-h-[320px] outline-none [&_p.is-editor-empty:first-child::before]:pointer-events-none [&_p.is-editor-empty:first-child::before]:float-left [&_p.is-editor-empty:first-child::before]:h-0 [&_p.is-editor-empty:first-child::before]:text-mute-fg [&_p.is-editor-empty:first-child::before]:content-[attr(data-placeholder)]`,
       },
       handleKeyDown(view, event) {
@@ -290,14 +247,10 @@ export default function TiptapEditor({
         }
 
         return false;
-=======
-          "min-h-[320px] outline-none type-content-body text-fg [&_a]:text-fg [&_a]:underline [&_blockquote]:border-l-2 [&_blockquote]:border-border [&_blockquote]:pl-4 [&_blockquote]:italic [&_code]:rounded-[8px] [&_code]:bg-bg-content [&_code]:px-2 [&_code]:py-1 [&_code]:type-content-mono [&_h1]:type-content-h1 [&_h2]:type-content-h2 [&_h3]:type-content-h3 [&_img]:w-full [&_img]:rounded-box [&_p.is-editor-empty:first-child::before]:pointer-events-none [&_p.is-editor-empty:first-child::before]:float-left [&_p.is-editor-empty:first-child::before]:h-0 [&_p.is-editor-empty:first-child::before]:text-mute-fg [&_p.is-editor-empty:first-child::before]:content-[attr(data-placeholder)] [&_pre]:overflow-x-auto [&_pre]:rounded-[10px] [&_pre]:bg-bg-content [&_pre]:px-2 [&_pre]:py-4 [&_pre]:type-content-mono [&_table]:w-full [&_table]:border-collapse [&_td]:border [&_td]:border-border [&_td]:px-3 [&_td]:py-2 [&_th]:border [&_th]:border-border [&_th]:bg-bg-content [&_th]:px-3 [&_th]:py-2 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:list-decimal [&_ol]:pl-6",
->>>>>>> origin/main
       },
     },
     extensions: [
       StarterKit.configure({
-<<<<<<< HEAD
         codeBlock: false,
         heading: { levels: [1, 2, 3] },
       }),
@@ -306,14 +259,6 @@ export default function TiptapEditor({
         openOnClick: false,
       }),
       ResizableImage,
-=======
-        heading: { levels: [1, 2, 3] },
-      }),
-      Link.configure({
-        openOnClick: false,
-      }),
-      Image,
->>>>>>> origin/main
       Youtube.configure({
         allowFullscreen: true,
         controls: true,
@@ -323,7 +268,6 @@ export default function TiptapEditor({
     ],
     immediatelyRender: false,
     onCreate({ editor: currentEditor }) {
-<<<<<<< HEAD
       baselineContentRef.current = JSON.stringify(currentEditor.getJSON());
       lastAppliedValueRef.current = baselineContentRef.current;
       onChange({
@@ -337,14 +281,6 @@ export default function TiptapEditor({
         return;
       }
 
-=======
-      onChange({
-        html: currentEditor.getHTML(),
-        json: JSON.stringify(currentEditor.getJSON()),
-      });
-    },
-    onUpdate({ editor: currentEditor }) {
->>>>>>> origin/main
       const nextJson = JSON.stringify(currentEditor.getJSON());
       lastAppliedValueRef.current = nextJson;
       onChange({
@@ -364,7 +300,6 @@ export default function TiptapEditor({
     }
 
     lastAppliedValueRef.current = value;
-<<<<<<< HEAD
     suppressNextUpdateRef.current = true;
     editor.commands.setContent(parseContent(value));
     baselineContentRef.current = JSON.stringify(editor.getJSON());
@@ -418,11 +353,6 @@ export default function TiptapEditor({
     };
   }, [editor, isImagePopoverPinned]);
 
-=======
-    editor.commands.setContent(parseContent(value));
-  }, [editor, value]);
-
->>>>>>> origin/main
   async function handleImageSelection(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
 
@@ -469,7 +399,6 @@ export default function TiptapEditor({
     editor.chain().focus().setYoutubeVideo({ src: url.trim() }).run();
   }
 
-<<<<<<< HEAD
   function setSelectedImageWidth(width: string) {
     if (!editor) {
       return;
@@ -488,8 +417,6 @@ export default function TiptapEditor({
     setImagePopover((current) => ({ ...current, caption }));
   }
 
-=======
->>>>>>> origin/main
   if (!editor) {
     return null;
   }
@@ -497,7 +424,6 @@ export default function TiptapEditor({
   return (
     <div className={cx("flex flex-col gap-3 pt-2", className)}>
       <div className="sticky top-4 z-20 -mx-1 overflow-x-auto rounded-button bg-transparent px-1 py-1">
-<<<<<<< HEAD
         <div className="flex w-full justify-center">
           <div className="flex w-full items-center justify-center gap-0 rounded-button border border-border bg-bg-content px-2 py-1">
             <ToolButton isActive={editor.isActive("heading", { level: 1 })} onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}>
@@ -661,49 +587,6 @@ export default function TiptapEditor({
             </label>
           </div>
         ) : null}
-=======
-        <div className="inline-flex min-w-full items-center gap-1 rounded-button border border-border bg-bg-content px-2 py-1.5">
-          <ToolButton isActive={editor.isActive("heading", { level: 1 })} onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}>
-            H1
-          </ToolButton>
-          <ToolButton isActive={editor.isActive("heading", { level: 2 })} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}>
-            H2
-          </ToolButton>
-          <ToolButton isActive={editor.isActive("heading", { level: 3 })} onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}>
-            H3
-          </ToolButton>
-          <ToolButton isActive={editor.isActive("bold")} onClick={() => editor.chain().focus().toggleBold().run()}>
-            Bold
-          </ToolButton>
-          <ToolButton isActive={editor.isActive("code")} onClick={() => editor.chain().focus().toggleCode().run()}>
-            In Code
-          </ToolButton>
-          <ToolButton isActive={editor.isActive("codeBlock")} onClick={() => editor.chain().focus().toggleCodeBlock().run()}>
-            Code
-          </ToolButton>
-          <ToolButton isActive={editor.isActive("bulletList")} onClick={() => editor.chain().focus().toggleBulletList().run()}>
-            List
-          </ToolButton>
-          <ToolButton isActive={editor.isActive("blockquote")} onClick={() => editor.chain().focus().toggleBlockquote().run()}>
-            Quote
-          </ToolButton>
-          <ToolButton isActive={editor.isActive("link")} onClick={promptLink}>
-            Link
-          </ToolButton>
-          <ToolButton onClick={() => fileInputRef.current?.click()}>
-            Image
-          </ToolButton>
-          <ToolButton onClick={promptYoutube}>
-            YouTube
-          </ToolButton>
-          <ToolButton onClick={() => editor.chain().focus().insertTable({ cols: 3, rows: 3, withHeaderRow: true }).run()}>
-            Table
-          </ToolButton>
-        </div>
-      </div>
-
-      <div className="rounded-button border border-border bg-transparent px-5 py-4">
->>>>>>> origin/main
         <EditorContent editor={editor} />
       </div>
 

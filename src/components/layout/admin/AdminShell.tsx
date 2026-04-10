@@ -80,11 +80,7 @@ export default function AdminShell({ children }: AdminShellProps) {
     >
       {/* 어드민 공통 셸: 좌측 사이드바 + 우측 본문 */}
       <div className="flex min-h-screen flex-col bg-bg text-fg md:flex-row">
-<<<<<<< HEAD
         <header className="fixed inset-x-0 top-0 z-40 flex h-[60px] items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.9)] px-5 backdrop-blur-[10px] md:hidden">
-=======
-        <header className="fixed inset-x-0 top-0 z-40 flex h-[60px] items-center justify-center bg-[rgba(8,9,10,0.9)] px-5 backdrop-blur-[10px] md:hidden">
->>>>>>> origin/main
           <div className="flex w-full items-center justify-between">
             <button
               className="inline-flex items-center gap-2"
@@ -119,11 +115,7 @@ export default function AdminShell({ children }: AdminShellProps) {
       </div>
 
       {mobileMenuOpen ? (
-<<<<<<< HEAD
         <div className="fixed inset-x-0 bottom-0 top-[60px] z-30 overflow-y-auto bg-[rgb(var(--color-overlay-rgb)/0.9)] backdrop-blur-[10px] md:hidden">
-=======
-        <div className="fixed inset-x-0 bottom-0 top-[60px] z-30 overflow-y-auto bg-[rgba(8,9,10,0.9)] backdrop-blur-[10px] md:hidden">
->>>>>>> origin/main
           <nav className="flex w-full flex-col gap-[30px] px-5 py-[30px]" aria-label="Mobile admin">
             <div className="flex flex-col gap-[10px]">
               {adminPrimaryNavItems.map((item) => (
@@ -166,21 +158,13 @@ export default function AdminShell({ children }: AdminShellProps) {
 
       {pendingHref || pendingBackNavigation ? (
         <div
-<<<<<<< HEAD
           className="fixed inset-0 z-50 flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5"
-=======
-          className="fixed inset-0 z-50 flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-5"
->>>>>>> origin/main
           onClick={() => {
             setPendingHref(null);
             setPendingBackNavigation(false);
           }}
         >
-<<<<<<< HEAD
           <div className="w-full max-w-[300px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-8" onClick={(event) => event.stopPropagation()}>
-=======
-          <div className="w-full max-w-[300px] rounded-modal bg-bg-content px-5 py-8" onClick={(event) => event.stopPropagation()}>
->>>>>>> origin/main
             <div className="flex flex-col items-center gap-5 text-center">
               <div className="flex flex-col items-center gap-2 text-center">
                 <h2 className="m-0 type-h3 text-fg">페이지를 벗어나시겠습니까?</h2>

@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-14.webp",
           "webPath": "/documentation/blogs/b-thumb-14.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-14.webp",
-          "webPath": "/blog/b-thumb-14.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/data-observability--14/en.mdx",
@@ -36,13 +31,8 @@
         "innovative approach"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-14.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Mastering Data Observability: Insights, Techniques, and Best Practices\"\ndescription: \"Understand QueryPie's commitment to an agentless approach for streamlined and secure system management.\"\ndate: \"2025-01-09\"\nauthor: \"brant\"\nogImage: \"public/documentation/blogs/b-thumb-14.webp\"\nkeywords: [\"QueryPie\", \"agentless management\", \"streamlined systems\", \"secure operations\", \"innovative approach\"]\nrelatedPosts:\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"\n  - \"/features/documentation/blog/6/integration-connection-paradigm\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
-=======
-      "ogImage": "/blog/b-thumb-14.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Mastering Data Observability: Insights, Techniques, and Best Practices\"\ndescription: \"Understand QueryPie's commitment to an agentless approach for streamlined and secure system management.\"\ndate: \"2025-01-09\"\nauthor: \"brant\"\nogImage: \"public/blog/b-thumb-14.webp\"\nkeywords: [\"QueryPie\", \"agentless management\", \"streamlined systems\", \"secure operations\", \"innovative approach\"]\nrelatedPosts:\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"\n  - \"/features/documentation/blog/6/integration-connection-paradigm\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/9/data-discovery-privacy-management",
         "/features/documentation/blog/6/integration-connection-paradigm",
@@ -57,11 +47,7 @@
         "description": "Understand QueryPie's commitment to an agentless approach for streamlined and secure system management.",
         "date": "2025-01-09",
         "author": "brant",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-14.webp",
-=======
-        "ogImage": "public/blog/b-thumb-14.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "agentless management",

@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-14.webp",
           "webPath": "/documentation/white-papers/wp-thumb-14.webp"
         },
@@ -37,30 +36,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp14-4-ssh-tunneling.webp",
           "webPath": "/documentation/white-papers/wp14-4-ssh-tunneling.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-14.webp",
-          "webPath": "/white-paper/wp-thumb-14.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp14-1-ssh-tunneling.webp",
-          "webPath": "/white-paper/wp14-1-ssh-tunneling.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp14-2-ssh-tunneling.webp",
-          "webPath": "/white-paper/wp14-2-ssh-tunneling.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp14-3-ssh-tunneling.webp",
-          "webPath": "/white-paper/wp14-3-ssh-tunneling.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp14-4-ssh-tunneling.webp",
-          "webPath": "/white-paper/wp14-4-ssh-tunneling.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/reverse-tunneling-jumphost-solution--14/en.mdx",
@@ -91,13 +66,8 @@
         "Developer productivity"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-14.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Secure Server Access in an Era of Network Isolation: Multi-hop Bidirectional Tunneling via the SSH Protocol\"\ndescription: \"As enterprises adopt network isolation, secure access to internal servers becomes more complex. This white paper outlines the limitations of traditional SSH methods and explains how QueryPie enables seamless, scalable server access through multi-hop tunneling and centralized control—without exposing intermediate credentials.\"\ndate: \"2025-04-08\"\nauthor: \"greg\"\nogImage: \"public/documentation/white-papers/wp-thumb-14.webp\"\nkeywords: [\"QueryPie\", \"SSH connection\", \"Secure Shell\", \"JumpHost\", \"Reverse Tunneling\", \"Multi-hop SSH\", \"Network isolation\", \"Server access control\", \"Centralized SSH management\", \"Terminal access\", \"SSH security\", \"SSH key management\", \"CLI workflow\", \"Agent-based access\", \"Infrastructure security\", \"Zero trust SSH\", \"Scalable SSH access\", \"User-centric security\", \"Tag-based routing\", \"Developer productivity\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/13/seamless-ssh-connection\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-14.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Secure Server Access in an Era of Network Isolation: Multi-hop Bidirectional Tunneling via the SSH Protocol\"\ndescription: \"As enterprises adopt network isolation, secure access to internal servers becomes more complex. This white paper outlines the limitations of traditional SSH methods and explains how QueryPie enables seamless, scalable server access through multi-hop tunneling and centralized control—without exposing intermediate credentials.\"\ndate: \"2025-04-08\"\nauthor: \"greg\"\nogImage: \"public/white-paper/wp-thumb-14.webp\"\nkeywords: [\"QueryPie\", \"SSH connection\", \"Secure Shell\", \"JumpHost\", \"Reverse Tunneling\", \"Multi-hop SSH\", \"Network isolation\", \"Server access control\", \"Centralized SSH management\", \"Terminal access\", \"SSH security\", \"SSH key management\", \"CLI workflow\", \"Agent-based access\", \"Infrastructure security\", \"Zero trust SSH\", \"Scalable SSH access\", \"User-centric security\", \"Tag-based routing\", \"Developer productivity\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/13/seamless-ssh-connection\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/13/seamless-ssh-connection",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -112,11 +82,7 @@
         "description": "As enterprises adopt network isolation, secure access to internal servers becomes more complex. This white paper outlines the limitations of traditional SSH methods and explains how QueryPie enables seamless, scalable server access through multi-hop tunneling and centralized control—without exposing intermediate credentials.",
         "date": "2025-04-08",
         "author": "greg",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-14.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-14.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "SSH connection",
@@ -150,7 +116,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-14.webp",
           "webPath": "/documentation/white-papers/wp-thumb-14.webp"
         },
@@ -173,30 +138,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp14-4-ssh-tunneling.webp",
           "webPath": "/documentation/white-papers/wp14-4-ssh-tunneling.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-14.webp",
-          "webPath": "/white-paper/wp-thumb-14.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp14-1-ssh-tunneling.webp",
-          "webPath": "/white-paper/wp14-1-ssh-tunneling.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp14-2-ssh-tunneling.webp",
-          "webPath": "/white-paper/wp14-2-ssh-tunneling.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp14-3-ssh-tunneling.webp",
-          "webPath": "/white-paper/wp14-3-ssh-tunneling.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp14-4-ssh-tunneling.webp",
-          "webPath": "/white-paper/wp14-4-ssh-tunneling.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/reverse-tunneling-jumphost-solution--14/ko.mdx",
@@ -227,13 +168,8 @@
         "보안 강화와 사용자 경험"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-14.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"망분리 시대의 안전한 서버 접근: SSH 프로토콜을 이용한 멀티홉 양방향 터널링 기술\"\ndescription: \"기업의 망분리 환경에서 안전하고 효율적인 서버 접근을 가능하게 하는 QueryPie의 접근 제어 전략. Reverse Tunneling, JumpHost, 태그 기반 라우팅까지 – 복잡한 네트워크 환경을 단순화하고, 보안과 사용자 경험을 동시에 만족시킵니다.\"\ndate: \"2025-04-08\"\nauthor: \"greg\"\nogImage: \"public/documentation/white-papers/wp-thumb-14.webp\"\nkeywords: [\"QueryPie\", \"SSH 연결\", \"쿼리파이\", \"터미널 접근 제어\", \"CLI 워크플로우\", \"QueryPie SSH\", \"SSH 보안\", \"개발자 생산성\", \"망분리 환경\", \"JumpHost\", \"Reverse Tunneling\", \"다중 홉 접속\", \"중앙 집중형 접근 제어\", \"네트워크 보안\", \"서버 접근 제어\", \"보안 터널링\", \"에이전트 기반 접속\", \"접근 제어 솔루션\", \"태그 기반 라우팅\", \"보안 강화와 사용자 경험\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/13/seamless-ssh-connection\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-14.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"망분리 시대의 안전한 서버 접근: SSH 프로토콜을 이용한 멀티홉 양방향 터널링 기술\"\ndescription: \"기업의 망분리 환경에서 안전하고 효율적인 서버 접근을 가능하게 하는 QueryPie의 접근 제어 전략. Reverse Tunneling, JumpHost, 태그 기반 라우팅까지 – 복잡한 네트워크 환경을 단순화하고, 보안과 사용자 경험을 동시에 만족시킵니다.\"\ndate: \"2025-04-08\"\nauthor: \"greg\"\nogImage: \"public/white-paper/wp-thumb-14.webp\"\nkeywords: [\"QueryPie\", \"SSH 연결\", \"쿼리파이\", \"터미널 접근 제어\", \"CLI 워크플로우\", \"QueryPie SSH\", \"SSH 보안\", \"개발자 생산성\", \"망분리 환경\", \"JumpHost\", \"Reverse Tunneling\", \"다중 홉 접속\", \"중앙 집중형 접근 제어\", \"네트워크 보안\", \"서버 접근 제어\", \"보안 터널링\", \"에이전트 기반 접속\", \"접근 제어 솔루션\", \"태그 기반 라우팅\", \"보안 강화와 사용자 경험\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/13/seamless-ssh-connection\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/13/seamless-ssh-connection",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -248,11 +184,7 @@
         "description": "기업의 망분리 환경에서 안전하고 효율적인 서버 접근을 가능하게 하는 QueryPie의 접근 제어 전략. Reverse Tunneling, JumpHost, 태그 기반 라우팅까지 – 복잡한 네트워크 환경을 단순화하고, 보안과 사용자 경험을 동시에 만족시킵니다.",
         "date": "2025-04-08",
         "author": "greg",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-14.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-14.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "SSH 연결",

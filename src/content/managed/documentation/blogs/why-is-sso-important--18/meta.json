@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-18.webp",
           "webPath": "/documentation/blogs/b-thumb-18.webp"
         },
@@ -22,15 +21,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog18-image-1.webp",
           "webPath": "/documentation/blogs/blog18-image-1.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-18.webp",
-          "webPath": "/blog/b-thumb-18.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog18-image-1.webp",
-          "webPath": "/blog/blog18-image-1.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/why-is-sso-important--18/en.mdx",
@@ -45,13 +35,8 @@
         "SSO authentication"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-18.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Why is SSO important?\"\ndescription: \"Understand why Single Sign-On (SSO) is crucial for enhancing user experience, streamlining access, and improving security across multiple platforms. See the benefits today!\"\ndate: \"2025-02-04\"\nauthor: \"jk\"\nogImage: \"public/documentation/blogs/b-thumb-18.webp\"\nkeywords: [\"Single Sign-On\", \"SSO benefits\", \"SSO security\", \"SSO authentication\"]\nrelatedPosts:\n  - \"/features/documentation/blog/17/privileged-access-management-pam\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"\n  - \"/features/documentation/blog/15/zero-trust-security\"",
-=======
-      "ogImage": "/blog/b-thumb-18.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Why is SSO important?\"\ndescription: \"Understand why Single Sign-On (SSO) is crucial for enhancing user experience, streamlining access, and improving security across multiple platforms. See the benefits today!\"\ndate: \"2025-02-04\"\nauthor: \"jk\"\nogImage: \"public/blog/b-thumb-18.webp\"\nkeywords: [\"Single Sign-On\", \"SSO benefits\", \"SSO security\", \"SSO authentication\"]\nrelatedPosts:\n  - \"/features/documentation/blog/17/privileged-access-management-pam\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"\n  - \"/features/documentation/blog/15/zero-trust-security\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/17/privileged-access-management-pam",
         "/features/documentation/blog/16/healthcare-data-security",
@@ -66,11 +51,7 @@
         "description": "Understand why Single Sign-On (SSO) is crucial for enhancing user experience, streamlining access, and improving security across multiple platforms. See the benefits today!",
         "date": "2025-02-04",
         "author": "jk",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-18.webp",
-=======
-        "ogImage": "public/blog/b-thumb-18.webp",
->>>>>>> origin/main
         "keywords": [
           "Single Sign-On",
           "SSO benefits",
@@ -88,7 +69,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-18.webp",
           "webPath": "/documentation/blogs/b-thumb-18.webp"
         },
@@ -96,15 +76,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog18-image-1.webp",
           "webPath": "/documentation/blogs/blog18-image-1.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-18.webp",
-          "webPath": "/blog/b-thumb-18.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog18-image-1.webp",
-          "webPath": "/blog/blog18-image-1.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/why-is-sso-important--18/ko.mdx",
@@ -119,13 +90,8 @@
         "SSO 인증"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-18.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"SSO, 왜 그렇게 중요할까요?\"\ndescription: \"SSO(Single Sign-On)가 사용자 경험을 향상시키고, 여러 플랫폼에 대한 접근을 간소화하며, 보안을 어떻게 강화할 수 있는지 지금 그 방법을 알아보세요!\"\ndate: \"2025-02-04\"\nauthor: \"jk\"\nogImage: \"public/documentation/blogs/b-thumb-18.webp\"\nkeywords: [\"싱글 사인온\", \"SSO의 장점\", \"SSO 보안\", \"SSO 인증\"]\nrelatedPosts:\n  - \"/features/documentation/blog/19/optimize-ec2-costs\"\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
-=======
-      "ogImage": "/blog/b-thumb-18.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"SSO, 왜 그렇게 중요할까요?\"\ndescription: \"SSO(Single Sign-On)가 사용자 경험을 향상시키고, 여러 플랫폼에 대한 접근을 간소화하며, 보안을 어떻게 강화할 수 있는지 지금 그 방법을 알아보세요!\"\ndate: \"2025-02-04\"\nauthor: \"jk\"\nogImage: \"public/blog/b-thumb-18.webp\"\nkeywords: [\"싱글 사인온\", \"SSO의 장점\", \"SSO 보안\", \"SSO 인증\"]\nrelatedPosts:\n  - \"/features/documentation/blog/19/optimize-ec2-costs\"\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/19/optimize-ec2-costs",
         "/features/documentation/blog/1/agentless-philosophy",
@@ -140,11 +106,7 @@
         "description": "SSO(Single Sign-On)가 사용자 경험을 향상시키고, 여러 플랫폼에 대한 접근을 간소화하며, 보안을 어떻게 강화할 수 있는지 지금 그 방법을 알아보세요!",
         "date": "2025-02-04",
         "author": "jk",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-18.webp",
-=======
-        "ogImage": "public/blog/b-thumb-18.webp",
->>>>>>> origin/main
         "keywords": [
           "싱글 사인온",
           "SSO의 장점",
@@ -162,7 +124,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-18.webp",
           "webPath": "/documentation/blogs/b-thumb-18.webp"
         },
@@ -170,15 +131,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog18-image-1.webp",
           "webPath": "/documentation/blogs/blog18-image-1.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-18.webp",
-          "webPath": "/blog/b-thumb-18.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog18-image-1.webp",
-          "webPath": "/blog/blog18-image-1.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/why-is-sso-important--18/ja.mdx",
@@ -193,13 +145,8 @@
         "SSO認証"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-18.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"SSOはなぜ重要なのか？\"\ndescription: \"SSO（シングルサインオン）がどのようにユーザー体験を向上させ、複数のプラットフォームへのアクセスを簡素化し、セキュリティを強化する方法を今すぐ確認してください！\"\ndate: \"2025-02-04\"\nauthor: \"jk\"\nogImage: \"public/documentation/blogs/b-thumb-18.webp\"\nkeywords: [\"シングルサインオン\", \"SSOの利点\", \"SSOセキュリティ\", \"SSO認証\"]\nrelatedPosts:\n  - \"/features/documentation/blog/19/optimize-ec2-costs\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/2/querypie-cracking-global-markets\"",
-=======
-      "ogImage": "/blog/b-thumb-18.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"SSOはなぜ重要なのか？\"\ndescription: \"SSO（シングルサインオン）がどのようにユーザー体験を向上させ、複数のプラットフォームへのアクセスを簡素化し、セキュリティを強化する方法を今すぐ確認してください！\"\ndate: \"2025-02-04\"\nauthor: \"jk\"\nogImage: \"public/blog/b-thumb-18.webp\"\nkeywords: [\"シングルサインオン\", \"SSOの利点\", \"SSOセキュリティ\", \"SSO認証\"]\nrelatedPosts:\n  - \"/features/documentation/blog/19/optimize-ec2-costs\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/2/querypie-cracking-global-markets\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/19/optimize-ec2-costs",
         "/features/documentation/blog/10/customer-centric-tpm-life",
@@ -214,11 +161,7 @@
         "description": "SSO（シングルサインオン）がどのようにユーザー体験を向上させ、複数のプラットフォームへのアクセスを簡素化し、セキュリティを強化する方法を今すぐ確認してください！",
         "date": "2025-02-04",
         "author": "jk",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-18.webp",
-=======
-        "ogImage": "public/blog/b-thumb-18.webp",
->>>>>>> origin/main
         "keywords": [
           "シングルサインオン",
           "SSOの利点",

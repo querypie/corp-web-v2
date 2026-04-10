@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-28.webp",
           "webPath": "/documentation/blogs/b-thumb-28.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-28.webp",
-          "webPath": "/blog/b-thumb-28.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/ai-security-threat-map-2026-cxo--28/en.mdx",
@@ -46,13 +41,8 @@
         "Output Filtering"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-28.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs\"\ndescription: \"AI security is not an extension of traditional cybersecurity—it requires an additional defense layer. Explore 7 AI-specific attack vectors including prompt injection and model supply chain threats, with an OWASP and NIST-aligned governance framework for CxOs.\"\ndate: \"2026-03-03\"\nauthor: \"\"\nogImage: \"public/documentation/blogs/b-thumb-28.webp\"\nkeywords: [\"AI Agents\", \"AI Security\", \"Prompt Injection\", \"AI Governance\", \"Cyberattacks\", \"Data Poisoning\", \"Training Data Poisoning\", \"AI Agent Privilege Abuse\", \"Model Supply Chain Attacks\", \"NIST AI RMF\", \"Supply Chain Risks\", \"Sensitive Information Leakage\", \"PII Protection\", \"Input Validation\", \"Output Filtering\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"\n  - \"/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n",
-=======
-      "ogImage": "/blog/b-thumb-28.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs\"\ndescription: \"AI security is not an extension of traditional cybersecurity—it requires an additional defense layer. Explore 7 AI-specific attack vectors including prompt injection and model supply chain threats, with an OWASP and NIST-aligned governance framework for CxOs.\"\ndate: \"2026-03-03\"\nauthor: \"\"\nogImage: \"public/blog/b-thumb-28.webp\"\nkeywords: [\"AI Agents\", \"AI Security\", \"Prompt Injection\", \"AI Governance\", \"Cyberattacks\", \"Data Poisoning\", \"Training Data Poisoning\", \"AI Agent Privilege Abuse\", \"Model Supply Chain Attacks\", \"NIST AI RMF\", \"Supply Chain Risks\", \"Sensitive Information Leakage\", \"PII Protection\", \"Input Validation\", \"Output Filtering\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"\n  - \"/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026",
         "/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures",
@@ -67,11 +57,7 @@
         "description": "AI security is not an extension of traditional cybersecurity—it requires an additional defense layer. Explore 7 AI-specific attack vectors including prompt injection and model supply chain threats, with an OWASP and NIST-aligned governance framework for CxOs.",
         "date": "2026-03-03",
         "author": "",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-28.webp",
-=======
-        "ogImage": "public/blog/b-thumb-28.webp",
->>>>>>> origin/main
         "keywords": [
           "AI Agents",
           "AI Security",
@@ -100,13 +86,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-28.webp",
           "webPath": "/documentation/blogs/b-thumb-28.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-28.webp",
-          "webPath": "/blog/b-thumb-28.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/ai-security-threat-map-2026-cxo--28/ja.mdx",
@@ -129,13 +110,8 @@
         "AIコンプライアンス"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-28.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"AIセキュリティ脅威マップ2026｜CxOが備えるべき7つの攻撃ベクトルと実務対策フレームワーク\"\ndescription: \"AIセキュリティは従来のサイバー対策の延長ではなく「追加層」です。プロンプトインジェクション、データポイズニング、モデルサプライチェーン攻撃など7つの攻撃ベクトルと、OWASP・NIST準拠の実務対策フレームワークをCxO向けに体系解説します。\"\ndate: \"2026-03-03\"\nauthor: \"\"\nogImage: \"public/documentation/blogs/b-thumb-28.webp\"\nkeywords: [\"AgentSecOps\",\"AgentSecOps Framework\", \"QueryPie MCPS\",\"MCP\",\"Model Context Protocol\",\"エンタープライズAIセキュリティ\",\"MCP PAM\",\"安全なAI基盤構築\",\"AIポリシー適用\",\"クラウド監査ログ\",\"AIアクション制御\",\"AIコンプライアンス\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"\n  - \"/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n",
-=======
-      "ogImage": "/blog/b-thumb-28.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"AIセキュリティ脅威マップ2026｜CxOが備えるべき7つの攻撃ベクトルと実務対策フレームワーク\"\ndescription: \"AIセキュリティは従来のサイバー対策の延長ではなく「追加層」です。プロンプトインジェクション、データポイズニング、モデルサプライチェーン攻撃など7つの攻撃ベクトルと、OWASP・NIST準拠の実務対策フレームワークをCxO向けに体系解説します。\"\ndate: \"2026-03-03\"\nauthor: \"\"\nogImage: \"public/blog/b-thumb-28.webp\"\nkeywords: [\"AgentSecOps\",\"AgentSecOps Framework\", \"QueryPie MCPS\",\"MCP\",\"Model Context Protocol\",\"エンタープライズAIセキュリティ\",\"MCP PAM\",\"安全なAI基盤構築\",\"AIポリシー適用\",\"クラウド監査ログ\",\"AIアクション制御\",\"AIコンプライアンス\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026\"\n  - \"/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026",
         "/features/documentation/blog/27/shadow-ai-risk-cxo-countermeasures",
@@ -150,11 +126,7 @@
         "description": "AIセキュリティは従来のサイバー対策の延長ではなく「追加層」です。プロンプトインジェクション、データポイズニング、モデルサプライチェーン攻撃など7つの攻撃ベクトルと、OWASP・NIST準拠の実務対策フレームワークをCxO向けに体系解説します。",
         "date": "2026-03-03",
         "author": "",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-28.webp",
-=======
-        "ogImage": "public/blog/b-thumb-28.webp",
->>>>>>> origin/main
         "keywords": [
           "AgentSecOps",
           "AgentSecOps Framework",

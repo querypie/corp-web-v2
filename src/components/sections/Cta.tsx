@@ -31,11 +31,7 @@ export default function Cta({
         <p className="m-0 min-w-full type-body-md text-mute-fg">
           {description}
         </p>
-<<<<<<< HEAD
         <Button arrow={false} style="full" variant="secondary">
-=======
-        <Button size="large" style="round" variant="secondary">
->>>>>>> origin/main
           {actionLabel}
         </Button>
       </div>

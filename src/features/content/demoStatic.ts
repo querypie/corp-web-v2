@@ -52,11 +52,7 @@ Put review, escalation, and execution evidence into the same workflow.`,
     },
     categorySlug: "aip-features",
     date: "2026-03-12",
-<<<<<<< HEAD
     imageSrc: "/images/common/fallback-contents.jpg",
-=======
-    imageSrc: "/uploads/article-02.png",
->>>>>>> origin/main
     slug: "guardrail-design",
     title: {
       en: "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
@@ -85,11 +81,7 @@ Put review, escalation, and execution evidence into the same workflow.`,
     },
     categorySlug: "acp-features",
     date: "2026-03-08",
-<<<<<<< HEAD
     imageSrc: "/images/common/fallback-contents.jpg",
-=======
-    imageSrc: "/uploads/article-03.png",
->>>>>>> origin/main
     slug: "ai-security-map",
     title: {
       en: "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",

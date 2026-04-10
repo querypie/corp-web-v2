@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { getLocalePath, isLocale } from "../../constants/i18n";
 import HomePage from "../../components/pages/home/HomePage";
-<<<<<<< HEAD
 import {
   demoCategoryConfigs,
   docsCategoryConfigs,
@@ -12,9 +11,6 @@ import {
   getLocalizedContent,
   getPublicDetailHref,
 } from "@/features/content/data";
-=======
-import { getContentThumbnailSrc, getLocalizedContent } from "@/features/content/data";
->>>>>>> origin/main
 import { readContentState } from "@/features/content/contentState.server";
 
 type LocalePageProps = {
@@ -151,35 +147,8 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       clientCaption: "Trusted every day by teams that build world-class software",
       contentListDescription:
         "Explore real-world guidance, strategies, and insights from a community of experts shaping the future of data access.",
-<<<<<<< HEAD
       contentListItems,
       contentListLinks,
-=======
-      contentListItems: [
-        {
-          category: "DEMO",
-          href: `/${locale}/docs/seo-analysis-aip-agent`,
-          imageSrc: "/uploads/article-01.png",
-          title:
-            "SEO analysis, once considered the domain of specialists, can now be handled by an AIP agent.",
-        },
-        {
-          category: "Use Cases",
-          href: `/${locale}/docs/guardrail-design-2026`,
-          imageSrc: "/uploads/article-02.png",
-          title:
-            "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
-        },
-        {
-          category: "Blogs",
-          href: `/${locale}/docs/ai-security-threat-map-2026`,
-          imageSrc: "/uploads/article-03.png",
-          title:
-            "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
-        },
-      ],
-      contentListLinks: ["DEMO", "Use Cases", "Blogs"],
->>>>>>> origin/main
       contentListTitle: "Guides and Best Practices",
       featureItems: [
         {
@@ -250,29 +219,17 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       newsItems: [
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-<<<<<<< HEAD
           imageSrc: "/images/common/fallback-contents.jpg",
-=======
-          imageSrc: "/uploads/news-01.png",
->>>>>>> origin/main
           title: "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-<<<<<<< HEAD
           imageSrc: "/images/common/fallback-contents.jpg",
-=======
-          imageSrc: "/uploads/news-02.png",
->>>>>>> origin/main
           title: "Payroll Partners with QueryPie on AI Security Solutions",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-<<<<<<< HEAD
           imageSrc: "/images/common/fallback-contents.jpg",
-=======
-          imageSrc: "/uploads/news-03.png",
->>>>>>> origin/main
           title:
             "Security Solution Playing the Role of a “Door Lock” in the Cloud — Expanding to Japan and Europe",
         },
@@ -305,35 +262,8 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       clientCaption: "세계적인 소프트웨어 팀이 매일 신뢰하는 플랫폼",
       contentListDescription:
         "데이터 접근의 미래를 만드는 전문가 커뮤니티의 실제 가이드, 전략, 인사이트를 살펴보세요.",
-<<<<<<< HEAD
       contentListItems,
       contentListLinks,
-=======
-      contentListItems: [
-        {
-          category: "DEMO",
-          href: `/${locale}/docs/seo-analysis-aip-agent`,
-          imageSrc: "/uploads/article-01.png",
-          title:
-            "전문가의 영역으로 여겨지던 SEO 분석도 이제는 AIP 에이전트가 처리할 수 있습니다.",
-        },
-        {
-          category: "Use Cases",
-          href: `/${locale}/docs/guardrail-design-2026`,
-          imageSrc: "/uploads/article-02.png",
-          title:
-            "AI 에이전트 시대의 가드레일 설계 (2026 에디션) — Part 1: 철학과 설계",
-        },
-        {
-          category: "Blogs",
-          href: `/${locale}/docs/ai-security-threat-map-2026`,
-          imageSrc: "/uploads/article-03.png",
-          title:
-            "AI 보안 위협 맵 2026 | 7가지 공격 벡터와 CxO를 위한 실전 방어 프레임워크",
-        },
-      ],
-      contentListLinks: ["DEMO", "Use Cases", "Blogs"],
->>>>>>> origin/main
       contentListTitle: "가이드와 베스트 프랙티스",
       featureItems: [
         {
@@ -404,29 +334,17 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       newsItems: [
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-<<<<<<< HEAD
           imageSrc: "/images/common/fallback-contents.jpg",
-=======
-          imageSrc: "/uploads/news-01.png",
->>>>>>> origin/main
           title: "TerraSky의 MCP 호환 AI 플랫폼 ‘mitoco Buddy’ 공식 출시",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-<<<<<<< HEAD
           imageSrc: "/images/common/fallback-contents.jpg",
-=======
-          imageSrc: "/uploads/news-02.png",
->>>>>>> origin/main
           title: "Payroll, QueryPie와 AI 보안 솔루션 협력",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-<<<<<<< HEAD
           imageSrc: "/images/common/fallback-contents.jpg",
-=======
-          imageSrc: "/uploads/news-03.png",
->>>>>>> origin/main
           title:
             "클라우드의 ‘도어락’ 역할을 하는 보안 솔루션 — 일본과 유럽으로 확장",
         },
@@ -459,35 +377,8 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       clientCaption: "世界最高水準のソフトウェアチームが毎日信頼するプラットフォーム",
       contentListDescription:
         "データアクセスの未来を形づくる専門家コミュニティによる、実践的なガイド、戦略、インサイトをご覧ください。",
-<<<<<<< HEAD
       contentListItems,
       contentListLinks,
-=======
-      contentListItems: [
-        {
-          category: "DEMO",
-          href: `/${locale}/docs/seo-analysis-aip-agent`,
-          imageSrc: "/uploads/article-01.png",
-          title:
-            "専門家の領域だった SEO 分析も、いまでは AIP エージェントで実行できます。",
-        },
-        {
-          category: "Use Cases",
-          href: `/${locale}/docs/guardrail-design-2026`,
-          imageSrc: "/uploads/article-02.png",
-          title:
-            "AI エージェント時代のガードレール設計 (2026 Edition) — Part 1: Philosophy & Design",
-        },
-        {
-          category: "Blogs",
-          href: `/${locale}/docs/ai-security-threat-map-2026`,
-          imageSrc: "/uploads/article-03.png",
-          title:
-            "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
-        },
-      ],
-      contentListLinks: ["DEMO", "Use Cases", "Blogs"],
->>>>>>> origin/main
       contentListTitle: "ガイドとベストプラクティス",
       featureItems: [
         {
@@ -558,29 +449,17 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       newsItems: [
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-<<<<<<< HEAD
           imageSrc: "/images/common/fallback-contents.jpg",
-=======
-          imageSrc: "/uploads/news-01.png",
->>>>>>> origin/main
           title: "TerraSky の MCP 対応 AI プラットフォーム『mitoco Buddy』が正式リリース",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-<<<<<<< HEAD
           imageSrc: "/images/common/fallback-contents.jpg",
-=======
-          imageSrc: "/uploads/news-02.png",
->>>>>>> origin/main
           title: "Payroll が QueryPie と AI セキュリティソリューションで提携",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-<<<<<<< HEAD
           imageSrc: "/images/common/fallback-contents.jpg",
-=======
-          imageSrc: "/uploads/news-03.png",
->>>>>>> origin/main
           title:
             "クラウドの“ドアロック”として機能するセキュリティソリューション — 日本とヨーロッパへ拡大",
         },
@@ -605,11 +484,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     .filter((item) => item.status === "published")
     .slice(0, 3)
     .map((item) => ({
-<<<<<<< HEAD
       href: item.contentType === "outlink" ? item.externalUrl : getLocalePath(locale, `/news/${item.id}`),
-=======
-      href: item.contentType === "outlink" ? item.externalUrl : `/${locale}/news/${item.id}`,
->>>>>>> origin/main
       imageSrc: getContentThumbnailSrc(item.imageSrc),
       isExternal: item.contentType === "outlink",
       title: getLocalizedContent(item.title, locale),

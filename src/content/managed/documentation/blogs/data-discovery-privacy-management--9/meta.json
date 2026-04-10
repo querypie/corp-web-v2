@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-9.webp",
           "webPath": "/documentation/blogs/b-thumb-9.webp"
         },
@@ -37,30 +36,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog9-image-4.webp",
           "webPath": "/documentation/blogs/blog9-image-4.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-9.webp",
-          "webPath": "/blog/b-thumb-9.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-1.webp",
-          "webPath": "/blog/blog9-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-2.webp",
-          "webPath": "/blog/blog9-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-3.webp",
-          "webPath": "/blog/blog9-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-4.webp",
-          "webPath": "/blog/blog9-image-4.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/data-discovery-privacy-management--9/en.mdx",
@@ -77,13 +52,8 @@
         "risk control"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-9.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Your New Ally in Data Privacy and Management: Data Discovery\"\ndescription: \"Learn how QueryPie's data discovery tools enhance privacy management and ensure compliance with global data regulations.\"\ndate: \"2024-11-22\"\nauthor: \"brendon\"\nogImage: \"public/documentation/blogs/b-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"data discovery tools\", \"privacy management\", \"global compliance\", \"data regulations\", \"risk control\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/1/agentless-philosophy\"",
-=======
-      "ogImage": "/blog/b-thumb-9.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Your New Ally in Data Privacy and Management: Data Discovery\"\ndescription: \"Learn how QueryPie's data discovery tools enhance privacy management and ensure compliance with global data regulations.\"\ndate: \"2024-11-22\"\nauthor: \"brendon\"\nogImage: \"public/blog/b-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"data discovery tools\", \"privacy management\", \"global compliance\", \"data regulations\", \"risk control\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/1/agentless-philosophy\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/7/command-bypass-prevention-control",
         "/features/documentation/blog/12/internal-data-leaks",
@@ -98,11 +68,7 @@
         "description": "Learn how QueryPie's data discovery tools enhance privacy management and ensure compliance with global data regulations.",
         "date": "2024-11-22",
         "author": "brendon",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-9.webp",
-=======
-        "ogImage": "public/blog/b-thumb-9.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "data discovery tools",
@@ -122,7 +88,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-9.webp",
           "webPath": "/documentation/blogs/b-thumb-9.webp"
         },
@@ -145,30 +110,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog9-image-4.webp",
           "webPath": "/documentation/blogs/blog9-image-4.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-9.webp",
-          "webPath": "/blog/b-thumb-9.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-1.webp",
-          "webPath": "/blog/blog9-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-2.webp",
-          "webPath": "/blog/blog9-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-3.webp",
-          "webPath": "/blog/blog9-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-4.webp",
-          "webPath": "/blog/blog9-image-4.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/data-discovery-privacy-management--9/ko.mdx",
@@ -186,13 +127,8 @@
         "위험 관리"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-9.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"개인정보 보호·관리의 新 조력자: Data Discovery\"\ndescription: \"개인정보 보호의 중요성과 기업이 취할 수 있는 실질적인 보안 조치에 대해 깊이 있게 탐구해보며, 개인정보 유출을 방지하고 신뢰를 구축할 수 있는 방법을 자세히 알아봅니다.\"\ndate: \"2024-11-22\"\nauthor: \"brendon\"\nogImage: \"public/documentation/blogs/b-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"데이터 디스커버리\", \"개인정보보호\", \"글로벌 규정 준수\", \"데이터 규제\", \"위험 관리\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/1/agentless-philosophy\"",
-=======
-      "ogImage": "/blog/b-thumb-9.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"개인정보 보호·관리의 新 조력자: Data Discovery\"\ndescription: \"개인정보 보호의 중요성과 기업이 취할 수 있는 실질적인 보안 조치에 대해 깊이 있게 탐구해보며, 개인정보 유출을 방지하고 신뢰를 구축할 수 있는 방법을 자세히 알아봅니다.\"\ndate: \"2024-11-22\"\nauthor: \"brendon\"\nogImage: \"public/blog/b-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"데이터 디스커버리\", \"개인정보보호\", \"글로벌 규정 준수\", \"데이터 규제\", \"위험 관리\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/1/agentless-philosophy\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/7/command-bypass-prevention-control",
         "/features/documentation/blog/12/internal-data-leaks",
@@ -207,11 +143,7 @@
         "description": "개인정보 보호의 중요성과 기업이 취할 수 있는 실질적인 보안 조치에 대해 깊이 있게 탐구해보며, 개인정보 유출을 방지하고 신뢰를 구축할 수 있는 방법을 자세히 알아봅니다.",
         "date": "2024-11-22",
         "author": "brendon",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-9.webp",
-=======
-        "ogImage": "public/blog/b-thumb-9.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -232,7 +164,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-9.webp",
           "webPath": "/documentation/blogs/b-thumb-9.webp"
         },
@@ -255,30 +186,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog9-image-4.webp",
           "webPath": "/documentation/blogs/blog9-image-4.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-9.webp",
-          "webPath": "/blog/b-thumb-9.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-1.webp",
-          "webPath": "/blog/blog9-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-2.webp",
-          "webPath": "/blog/blog9-image-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-3.webp",
-          "webPath": "/blog/blog9-image-3.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog9-image-4.webp",
-          "webPath": "/blog/blog9-image-4.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/data-discovery-privacy-management--9/ja.mdx",
@@ -295,13 +202,8 @@
         "リスク管理"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-9.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"個人情報保護・管理の新しい助っ人: データディスカバリー\"\ndescription: \"QueryPie のデータディスカバリツールによってプライバシー管理が強化され、グローバルなデータ規制に準拠させる仕組みについて紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"brendon\"\nogImage: \"public/documentation/blogs/b-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"データ検出ツール\", \"プライバシー管理\", \"グローバルコンプライアンス\", \"データ規制\", \"リスク管理\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/1/agentless-philosophy\"",
-=======
-      "ogImage": "/blog/b-thumb-9.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"個人情報保護・管理の新しい助っ人: データディスカバリー\"\ndescription: \"QueryPie のデータディスカバリツールによってプライバシー管理が強化され、グローバルなデータ規制に準拠させる仕組みについて紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"brendon\"\nogImage: \"public/blog/b-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"データ検出ツール\", \"プライバシー管理\", \"グローバルコンプライアンス\", \"データ規制\", \"リスク管理\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/1/agentless-philosophy\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/7/command-bypass-prevention-control",
         "/features/documentation/blog/12/internal-data-leaks",
@@ -316,11 +218,7 @@
         "description": "QueryPie のデータディスカバリツールによってプライバシー管理が強化され、グローバルなデータ規制に準拠させる仕組みについて紹介します。",
         "date": "2024-11-22",
         "author": "brendon",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-9.webp",
-=======
-        "ogImage": "public/blog/b-thumb-9.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "データ検出ツール",

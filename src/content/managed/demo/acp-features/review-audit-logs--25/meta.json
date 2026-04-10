@@ -14,13 +14,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/tu-thumb-general-2.webp",
           "webPath": "/demo/acp-features/tu-thumb-general-2.webp"
-=======
-          "sourcePath": "public/tutorial/tu-thumb-general-2.webp",
-          "webPath": "/tutorial/tu-thumb-general-2.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/review-audit-logs--25/en.mdx",
@@ -30,13 +25,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/tu-thumb-general-2.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Review Audit Logs\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-general-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/26/integrate-sso-with-okta\"",
-=======
-      "ogImage": "/tutorial/tu-thumb-general-2.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Review Audit Logs\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-general-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/26/integrate-sso-with-okta\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/26/integrate-sso-with-okta"
       ],
@@ -48,11 +38,7 @@
         "title": "How to Review Audit Logs",
         "description": "",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/tu-thumb-general-2.webp",
-=======
-        "ogImage": "public/tutorial/tu-thumb-general-2.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -64,13 +50,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/tu-thumb-general-2.webp",
           "webPath": "/demo/acp-features/tu-thumb-general-2.webp"
-=======
-          "sourcePath": "public/tutorial/tu-thumb-general-2.webp",
-          "webPath": "/tutorial/tu-thumb-general-2.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/review-audit-logs--25/ko.mdx",
@@ -80,13 +61,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/tu-thumb-general-2.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"공통 영역의 감사 로그를 확인하는 방법\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-general-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/26/integrate-sso-with-okta\"",
-=======
-      "ogImage": "/tutorial/tu-thumb-general-2.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"공통 영역의 감사 로그를 확인하는 방법\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-general-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/26/integrate-sso-with-okta\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/26/integrate-sso-with-okta"
       ],
@@ -98,11 +74,7 @@
         "title": "공통 영역의 감사 로그를 확인하는 방법",
         "description": "",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/tu-thumb-general-2.webp",
-=======
-        "ogImage": "public/tutorial/tu-thumb-general-2.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -114,13 +86,8 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/demo/acp-features/tu-thumb-general-2.webp",
           "webPath": "/demo/acp-features/tu-thumb-general-2.webp"
-=======
-          "sourcePath": "public/tutorial/tu-thumb-general-2.webp",
-          "webPath": "/tutorial/tu-thumb-general-2.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/review-audit-logs--25/ja.mdx",
@@ -130,13 +97,8 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/demo/acp-features/tu-thumb-general-2.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"監査ログを確認する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-general-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/26/integrate-sso-with-okta\"",
-=======
-      "ogImage": "/tutorial/tu-thumb-general-2.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"監査ログを確認する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-general-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/26/integrate-sso-with-okta\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/26/integrate-sso-with-okta"
       ],
@@ -148,11 +110,7 @@
         "title": "監査ログを確認する方法",
         "description": "",
         "date": "2024-11-29",
-<<<<<<< HEAD
         "ogImage": "public/demo/acp-features/tu-thumb-general-2.webp",
-=======
-        "ogImage": "public/tutorial/tu-thumb-general-2.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

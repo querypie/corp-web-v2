@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-4.webp",
           "webPath": "/documentation/white-papers/wp-thumb-4.webp"
         },
@@ -32,25 +31,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp4-3-diagram-3.webp",
           "webPath": "/documentation/white-papers/wp4-3-diagram-3.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-4.webp",
-          "webPath": "/white-paper/wp-thumb-4.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp4-1-diagram-1.webp",
-          "webPath": "/white-paper/wp4-1-diagram-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp4-2-diagram-2.webp",
-          "webPath": "/white-paper/wp4-2-diagram-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp4-3-diagram-3.webp",
-          "webPath": "/white-paper/wp4-3-diagram-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/transaction-free-change-data-capture-system--4/en.mdx",
@@ -66,13 +46,8 @@
         "transaction-less operation"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-4.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Building a Transaction-Free, Flawless CDC (Change Data Capture) System\"\ndescription: \"Sync data seamlessly with QueryPie's CDC system, ensuring conflict-free updates without transactions.\"\ndate: \"2024-11-22\"\nauthor: \"mason\"\nogImage: \"public/documentation/white-papers/wp-thumb-4.webp\"\nkeywords: [\"QueryPie\", \"CDC system\", \"data synchronization\", \"conflict-free updates\", \"transaction-less operation\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-4.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Building a Transaction-Free, Flawless CDC (Change Data Capture) System\"\ndescription: \"Sync data seamlessly with QueryPie's CDC system, ensuring conflict-free updates without transactions.\"\ndate: \"2024-11-22\"\nauthor: \"mason\"\nogImage: \"public/white-paper/wp-thumb-4.webp\"\nkeywords: [\"QueryPie\", \"CDC system\", \"data synchronization\", \"conflict-free updates\", \"transaction-less operation\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/3/parsing-sql-query-structural-interface",
         "/features/documentation/white-paper/1/personal-data-identification-analysis-ai",
@@ -87,11 +62,7 @@
         "description": "Sync data seamlessly with QueryPie's CDC system, ensuring conflict-free updates without transactions.",
         "date": "2024-11-22",
         "author": "mason",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-4.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-4.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "CDC system",
@@ -110,7 +81,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-4.webp",
           "webPath": "/documentation/white-papers/wp-thumb-4.webp"
         },
@@ -128,25 +98,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp4-3-diagram-3.webp",
           "webPath": "/documentation/white-papers/wp4-3-diagram-3.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-4.webp",
-          "webPath": "/white-paper/wp-thumb-4.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp4-1-diagram-1.webp",
-          "webPath": "/white-paper/wp4-1-diagram-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp4-2-diagram-2.webp",
-          "webPath": "/white-paper/wp4-2-diagram-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp4-3-diagram-3.webp",
-          "webPath": "/white-paper/wp4-3-diagram-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/transaction-free-change-data-capture-system--4/ko.mdx",
@@ -164,13 +115,8 @@
         "트랜잭션프리"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-4.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"트랜잭션리스, 완벽한 CDC(Change Data Capture) 시스템 구축법\"\ndescription: \"쿼리파이의 CDC 시스템으로 데이터를 원활하게 동기화하여 트랜잭션 없이 충돌 없는 업데이트를 보장하는 방법을 알아보세요.\"\ndate: \"2024-11-22\"\nauthor: \"mason\"\nogImage: \"public/documentation/white-papers/wp-thumb-4.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"CDC 시스템\", \"데이터 동기화\", \"무중단 업데이트\", \"트랜잭션리스\", \"트랜잭션프리\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-4.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"트랜잭션리스, 완벽한 CDC(Change Data Capture) 시스템 구축법\"\ndescription: \"쿼리파이의 CDC 시스템으로 데이터를 원활하게 동기화하여 트랜잭션 없이 충돌 없는 업데이트를 보장하는 방법을 알아보세요.\"\ndate: \"2024-11-22\"\nauthor: \"mason\"\nogImage: \"public/white-paper/wp-thumb-4.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"CDC 시스템\", \"데이터 동기화\", \"무중단 업데이트\", \"트랜잭션리스\", \"트랜잭션프리\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/3/parsing-sql-query-structural-interface",
         "/features/documentation/white-paper/1/personal-data-identification-analysis-ai",
@@ -185,11 +131,7 @@
         "description": "쿼리파이의 CDC 시스템으로 데이터를 원활하게 동기화하여 트랜잭션 없이 충돌 없는 업데이트를 보장하는 방법을 알아보세요.",
         "date": "2024-11-22",
         "author": "mason",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-4.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-4.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -210,7 +152,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/white-papers/wp-thumb-4.webp",
           "webPath": "/documentation/white-papers/wp-thumb-4.webp"
         },
@@ -228,25 +169,6 @@
           "exists": true,
           "sourcePath": "public/documentation/white-papers/wp4-3-diagram-3.webp",
           "webPath": "/documentation/white-papers/wp4-3-diagram-3.webp"
-=======
-          "sourcePath": "public/white-paper/wp-thumb-4.webp",
-          "webPath": "/white-paper/wp-thumb-4.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp4-1-diagram-1.webp",
-          "webPath": "/white-paper/wp4-1-diagram-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp4-2-diagram-2.webp",
-          "webPath": "/white-paper/wp4-2-diagram-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/white-paper/wp4-3-diagram-3.webp",
-          "webPath": "/white-paper/wp4-3-diagram-3.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/transaction-free-change-data-capture-system--4/ja.mdx",
@@ -262,13 +184,8 @@
         "トランザクションレス操作"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/white-papers/wp-thumb-4.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"トランザクションレス、完璧なCDC（Change Data Capture）システム構築法\"\ndescription: \"QueryPie の CDC (Change Data Capture) システムとデータをシームレスに同期することで、トランザクションなしでコンフリクトのないアップデートを実現します。\"\ndate: \"2024-11-22\"\nauthor: \"mason\"\nogImage: \"public/documentation/white-papers/wp-thumb-4.webp\"\nkeywords: [\"QueryPie\", \"CDC システム\", \"データ同期\", \"コンフリクトのないアップデート\", \"トランザクションレス操作\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
-=======
-      "ogImage": "/white-paper/wp-thumb-4.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"トランザクションレス、完璧なCDC（Change Data Capture）システム構築法\"\ndescription: \"QueryPie の CDC (Change Data Capture) システムとデータをシームレスに同期することで、トランザクションなしでコンフリクトのないアップデートを実現します。\"\ndate: \"2024-11-22\"\nauthor: \"mason\"\nogImage: \"public/white-paper/wp-thumb-4.webp\"\nkeywords: [\"QueryPie\", \"CDC システム\", \"データ同期\", \"コンフリクトのないアップデート\", \"トランザクションレス操作\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/3/parsing-sql-query-structural-interface",
         "/features/documentation/white-paper/1/personal-data-identification-analysis-ai",
@@ -283,11 +200,7 @@
         "description": "QueryPie の CDC (Change Data Capture) システムとデータをシームレスに同期することで、トランザクションなしでコンフリクトのないアップデートを実現します。",
         "date": "2024-11-22",
         "author": "mason",
-<<<<<<< HEAD
         "ogImage": "public/documentation/white-papers/wp-thumb-4.webp",
-=======
-        "ogImage": "public/white-paper/wp-thumb-4.webp",
->>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "CDC システム",

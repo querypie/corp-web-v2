@@ -14,7 +14,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-2.webp",
           "webPath": "/documentation/blogs/b-thumb-2.webp"
         },
@@ -27,20 +26,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog2-image-2.webp",
           "webPath": "/documentation/blogs/blog2-image-2.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-2.webp",
-          "webPath": "/blog/b-thumb-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog2-image-1.webp",
-          "webPath": "/blog/blog2-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog2-image-2.webp",
-          "webPath": "/blog/blog2-image-2.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/querypie-cracking-global-markets--2/en.mdx",
@@ -56,13 +41,8 @@
         "competitive edge"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-2.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Cracking the Toughest Global Markets: What Makes QueryPie So Confident?\"\ndescription: \"How QueryPie confidently tackles global market challenges with innovative solutions and strategic expertise.\"\ndate: \"2024-11-22\"\nauthor: \"kris\"\nogImage: \"public/documentation/blogs/b-thumb-2.webp\"\nhideOgImage: true\nkeywords: [\"QueryPie\", \"global market expansion\", \"strategic expertise\", \"innovative solutions\", \"competitive edge\"]\nrelatedPosts:\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
-=======
-      "ogImage": "/blog/b-thumb-2.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Cracking the Toughest Global Markets: What Makes QueryPie So Confident?\"\ndescription: \"How QueryPie confidently tackles global market challenges with innovative solutions and strategic expertise.\"\ndate: \"2024-11-22\"\nauthor: \"kris\"\nogImage: \"public/blog/b-thumb-2.webp\"\nhideOgImage: true\nkeywords: [\"QueryPie\", \"global market expansion\", \"strategic expertise\", \"innovative solutions\", \"competitive edge\"]\nrelatedPosts:\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/3/querypie-team-success-secrets",
         "/features/documentation/blog/10/customer-centric-tpm-life",
@@ -77,11 +57,7 @@
         "description": "How QueryPie confidently tackles global market challenges with innovative solutions and strategic expertise.",
         "date": "2024-11-22",
         "author": "kris",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-2.webp",
-=======
-        "ogImage": "public/blog/b-thumb-2.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "keywords": [
           "QueryPie",
@@ -101,7 +77,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-2.webp",
           "webPath": "/documentation/blogs/b-thumb-2.webp"
         },
@@ -114,20 +89,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog2-image-2.webp",
           "webPath": "/documentation/blogs/blog2-image-2.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-2.webp",
-          "webPath": "/blog/b-thumb-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog2-image-1.webp",
-          "webPath": "/blog/blog2-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog2-image-2.webp",
-          "webPath": "/blog/blog2-image-2.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/querypie-cracking-global-markets--2/ko.mdx",
@@ -146,13 +107,8 @@
         "해외 진출 스타트업"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-2.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"가장 어렵다는 글로벌 진출, QueryPie는 왜 확신하나?\"\ndescription: \"글로벌 성공을 위한 핵심 요건과 성공 요소를 모두 갖춘 QueryPie의 전략을 자세히 이야기해보며, 글로벌에서의 확장성과 경쟁력을 높이기 위한 비전과 실행 방안을 공유합니다.\"\ndate: \"2024-11-22\"\nauthor: \"kris\"\nogImage: \"public/documentation/blogs/b-thumb-2.webp\"\nhideOgImage: true\nkeywords: [\"쿼리파이\", \"QueryPie\", \"글로벌 시장 확장\", \"전략적 전문성\", \"혁신적인 솔루션\", \"경쟁 우위\", \"글로벌 스타트업\", \"해외 진출 스타트업\"]\nrelatedPosts:\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
-=======
-      "ogImage": "/blog/b-thumb-2.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"가장 어렵다는 글로벌 진출, QueryPie는 왜 확신하나?\"\ndescription: \"글로벌 성공을 위한 핵심 요건과 성공 요소를 모두 갖춘 QueryPie의 전략을 자세히 이야기해보며, 글로벌에서의 확장성과 경쟁력을 높이기 위한 비전과 실행 방안을 공유합니다.\"\ndate: \"2024-11-22\"\nauthor: \"kris\"\nogImage: \"public/blog/b-thumb-2.webp\"\nhideOgImage: true\nkeywords: [\"쿼리파이\", \"QueryPie\", \"글로벌 시장 확장\", \"전략적 전문성\", \"혁신적인 솔루션\", \"경쟁 우위\", \"글로벌 스타트업\", \"해외 진출 스타트업\"]\nrelatedPosts:\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/3/querypie-team-success-secrets",
         "/features/documentation/blog/10/customer-centric-tpm-life",
@@ -167,11 +123,7 @@
         "description": "글로벌 성공을 위한 핵심 요건과 성공 요소를 모두 갖춘 QueryPie의 전략을 자세히 이야기해보며, 글로벌에서의 확장성과 경쟁력을 높이기 위한 비전과 실행 방안을 공유합니다.",
         "date": "2024-11-22",
         "author": "kris",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-2.webp",
-=======
-        "ogImage": "public/blog/b-thumb-2.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "keywords": [
           "쿼리파이",
@@ -194,7 +146,6 @@
       "assetRefs": [
         {
           "exists": true,
-<<<<<<< HEAD
           "sourcePath": "public/documentation/blogs/b-thumb-2.webp",
           "webPath": "/documentation/blogs/b-thumb-2.webp"
         },
@@ -207,20 +158,6 @@
           "exists": true,
           "sourcePath": "public/documentation/blogs/blog2-image-2.webp",
           "webPath": "/documentation/blogs/blog2-image-2.webp"
-=======
-          "sourcePath": "public/blog/b-thumb-2.webp",
-          "webPath": "/blog/b-thumb-2.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog2-image-1.webp",
-          "webPath": "/blog/blog2-image-1.webp"
-        },
-        {
-          "exists": true,
-          "sourcePath": "public/blog/blog2-image-2.webp",
-          "webPath": "/blog/blog2-image-2.webp"
->>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/querypie-cracking-global-markets--2/ja.mdx",
@@ -236,13 +173,8 @@
         "競争力"
       ],
       "layout": "Article",
-<<<<<<< HEAD
       "ogImage": "/documentation/blogs/b-thumb-2.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"最も難しいと言われるグローバル展開、QueryPieはなぜ確信しているのか？\"\ndescription: \"QueryPie が、革新的なソリューションと戦略的な専門知識で、いかに自信を持ってグローバル市場の課題に取り組んでいるのかを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"kris\"\nogImage: \"public/documentation/blogs/b-thumb-2.webp\"\nhideOgImage: true\nkeywords: [\"QueryPie\", \"グローバル市場の拡大\", \"戦略的な専門知識\", \"革新的なソリューション\", \"競争力\"]\nrelatedPosts:\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
-=======
-      "ogImage": "/blog/b-thumb-2.webp",
-      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"最も難しいと言われるグローバル展開、QueryPieはなぜ確信しているのか？\"\ndescription: \"QueryPie が、革新的なソリューションと戦略的な専門知識で、いかに自信を持ってグローバル市場の課題に取り組んでいるのかを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"kris\"\nogImage: \"public/blog/b-thumb-2.webp\"\nhideOgImage: true\nkeywords: [\"QueryPie\", \"グローバル市場の拡大\", \"戦略的な専門知識\", \"革新的なソリューション\", \"競争力\"]\nrelatedPosts:\n  - \"/features/documentation/blog/3/querypie-team-success-secrets\"\n  - \"/features/documentation/blog/10/customer-centric-tpm-life\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
->>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/3/querypie-team-success-secrets",
         "/features/documentation/blog/10/customer-centric-tpm-life",
@@ -257,11 +189,7 @@
         "description": "QueryPie が、革新的なソリューションと戦略的な専門知識で、いかに自信を持ってグローバル市場の課題に取り組んでいるのかを紹介します。",
         "date": "2024-11-22",
         "author": "kris",
-<<<<<<< HEAD
         "ogImage": "public/documentation/blogs/b-thumb-2.webp",
-=======
-        "ogImage": "public/blog/b-thumb-2.webp",
->>>>>>> origin/main
         "hideOgImage": true,
         "keywords": [
           "QueryPie",
