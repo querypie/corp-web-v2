@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/aip-use-case-thumb-14-en.webp",
+          "webPath": "/demo/use-cases/aip-use-case-thumb-14-en.webp"
+=======
           "sourcePath": "public/demo/aip-use-case-thumb-14-en.webp",
           "webPath": "/demo/aip-use-case-thumb-14-en.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/military-hr-ai-agent--20/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/aip-use-case-thumb-14-en.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Military Service & HR AI Agent\"\ndescription: \"An AI agent that streamlines military personnel management—assignments, leave, evaluations, and records—through natural language, ensuring faster administration with full oversight.\"\ndate: \"2025-10-29\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-14-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"\n  - \"/features/demo/use-cases/19/aircrew-scheduler-ai-agent\"\n  - \"/features/demo/use-cases/21/incident-mgmt-ai-agent\"",
+=======
       "ogImage": "/demo/aip-use-case-thumb-14-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Military Service & HR AI Agent\"\ndescription: \"An AI agent that streamlines military personnel management—assignments, leave, evaluations, and records—through natural language, ensuring faster administration with full oversight.\"\ndate: \"2025-10-29\"\nogImage: \"public/demo/aip-use-case-thumb-14-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"\n  - \"/features/demo/use-cases/19/aircrew-scheduler-ai-agent\"\n  - \"/features/demo/use-cases/21/incident-mgmt-ai-agent\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/18/baggage-operations-ai-agent",
         "/features/demo/use-cases/19/aircrew-scheduler-ai-agent",
@@ -40,7 +50,11 @@
         "title": "AIP Use Case: Military Service & HR AI Agent",
         "description": "An AI agent that streamlines military personnel management—assignments, leave, evaluations, and records—through natural language, ensuring faster administration with full oversight.",
         "date": "2025-10-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/aip-use-case-thumb-14-en.webp",
+=======
         "ogImage": "public/demo/aip-use-case-thumb-14-en.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/aip-use-case-thumb-14-ja.webp",
+          "webPath": "/demo/use-cases/aip-use-case-thumb-14-ja.webp"
+=======
           "sourcePath": "public/demo/aip-use-case-thumb-14-ja.webp",
           "webPath": "/demo/aip-use-case-thumb-14-ja.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/military-hr-ai-agent--20/ja.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/aip-use-case-thumb-14-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 兵役・人事AIエージェント\"\ndescription: \"配置、休暇、評価、記録管理を自然言語で効率化し、完全な監督体制のもとで軍人事業務を迅速化するAIエージェント。\"\ndate: \"2025-10-29\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-14-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"\n  - \"/features/demo/use-cases/19/aircrew-scheduler-ai-agent\"\n  - \"/features/demo/use-cases/21/incident-mgmt-ai-agent\"",
+=======
       "ogImage": "/demo/aip-use-case-thumb-14-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 兵役・人事AIエージェント\"\ndescription: \"配置、休暇、評価、記録管理を自然言語で効率化し、完全な監督体制のもとで軍人事業務を迅速化するAIエージェント。\"\ndate: \"2025-10-29\"\nogImage: \"public/demo/aip-use-case-thumb-14-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"\n  - \"/features/demo/use-cases/19/aircrew-scheduler-ai-agent\"\n  - \"/features/demo/use-cases/21/incident-mgmt-ai-agent\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/18/baggage-operations-ai-agent",
         "/features/demo/use-cases/19/aircrew-scheduler-ai-agent",
@@ -80,7 +104,11 @@
         "title": "AIP活用事例： 兵役・人事AIエージェント",
         "description": "配置、休暇、評価、記録管理を自然言語で効率化し、完全な監督体制のもとで軍人事業務を迅速化するAIエージェント。",
         "date": "2025-10-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/aip-use-case-thumb-14-ja.webp",
+=======
         "ogImage": "public/demo/aip-use-case-thumb-14-ja.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

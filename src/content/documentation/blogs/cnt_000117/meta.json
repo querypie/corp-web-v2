@@ -1,0 +1,45 @@
+{
+  "authorName": "brendon",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "data-discovery-privacy-management",
+  "imageSrc": "/documentation/blogs/b-thumb-9.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000117",
+  "summary": {
+    "en": "Learn how QueryPie's data discovery tools enhance privacy management and ensure compliance with global data regulations.",
+    "ko": "개인정보 보호의 중요성과 기업이 취할 수 있는 실질적인 보안 조치에 대해 깊이 있게 탐구해보며, 개인정보 유출을 방지하고 신뢰를 구축할 수 있는 방법을 자세히 알아봅니다.",
+    "ja": "QueryPie のデータディスカバリツールによってプライバシー管理が強化され、グローバルなデータ規制に準拠させる仕組みについて紹介します。"
+  },
+  "title": {
+    "en": "Your New Ally in Data Privacy and Management: Data Discovery",
+    "ko": "개인정보 보호·관리의 新 조력자: Data Discovery",
+    "ja": "個人情報保護・管理の新しい助っ人: データディスカバリー"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000117/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000117/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000117/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000117/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000117/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000117/ja.tiptap.json"
+    }
+  }
+}

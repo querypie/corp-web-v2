@@ -5,7 +5,11 @@ title: "Efficient Storage and Management of Large-Scale Audit Logs (OVEN)"
 description: "Guiding efficient storage and management of large-scale audit logs while meeting security and compliance requirements."
 date: "2025-01-23"
 author: "fabian"
+<<<<<<< HEAD
+ogImage: "public/documentation/white-papers/wp-thumb-11.webp"
+=======
 ogImage: "public/white-paper/wp-thumb-11.webp"
+>>>>>>> origin/main
 keywords: ["QueryPie", "large-scale audit logs", "audit log management", "data security", "compliance Requirements", "efficient storage solutions"]
 relatedPosts:
   - "/features/documentation/white-paper/4/transaction-free-change-data-capture-system"
@@ -55,7 +59,11 @@ QueryPie has developed a streamlined approach to storing, querying, and managing
 <br />
 <Box center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp11-1-diary-overview.webp"
+=======
         filepath="public/white-paper/wp11-1-diary-overview.webp"
+>>>>>>> origin/main
         alt="Diary Overview"
         caption="Diary Overview"
     />
@@ -179,7 +187,11 @@ For audit logs, **the log group name** and chronological **time** information ar
     <br />
     <Box center>
         <ArticleFileImage
+<<<<<<< HEAD
+            filepath="public/documentation/white-papers/wp11-2-results-table.webp"
+=======
             filepath="public/white-paper/wp11-2-results-table.webp"
+>>>>>>> origin/main
             alt="result"
         />
     </Box>
@@ -194,7 +206,11 @@ For audit logs, **the log group name** and chronological **time** information ar
     <br />
     <Box center>
         <ArticleFileImage
+<<<<<<< HEAD
+            filepath="public/documentation/white-papers/wp11-3-bloom-filter.webp"
+=======
             filepath="public/white-paper/wp11-3-bloom-filter.webp"
+>>>>>>> origin/main
             alt="Bloom Filter"
             caption="Performance improvement by skipping unnecessary access using Bloom Filter and an example of false positives – Source: https://en.wikipedia.org/wiki/Bloom_filter"
         />
@@ -213,7 +229,11 @@ For audit logs, **the log group name** and chronological **time** information ar
     <br />
     <Box center>
         <ArticleFileImage
+<<<<<<< HEAD
+            filepath="public/documentation/white-papers/wp11-4-querypie-oven.webp"
+=======
             filepath="public/white-paper/wp11-4-querypie-oven.webp"
+>>>>>>> origin/main
             alt="QueryPie OVEN"
         />
     </Box>
@@ -230,6 +250,28 @@ For audit logs, **the log group name** and chronological **time** information ar
     - `OVEN`’s standardized data structure ensures seamless integration with tools like Athena and Hive, simplifying large-scale data analysis.
     - Its design supports flexible integration with various analytics and visualization tools, making it adaptable to diverse use cases.
 
+<<<<<<< HEAD
+# Future Plans
+Currently, `OVEN` provides official support for S3 and S3-compatible storage solutions, including MinIO. Looking ahead, the system aims to expand compatibility by integrating with additional large-scale storage solutions.
+
+> **S3-Compatible Storage Support**
+> - AWS S3 (Officially supported)
+> - MinIO (Officially supported)
+> - Google Cloud Storage (Under Testing)
+>
+> **Planned Support for S3-Non-Compatible Storage**
+> - Azure Blob Storage
+> - Ceph
+> - Swift
+
+To enhance usability, `OVEN` will offer comprehensive guidelines and examples for external integration. These resources will simplify connections with various analytics and visualization tools.
+
+> **External Integration Guide and Examples**
+> 1. **Real-Time Data Visualization Integration:**
+> Example: Integration with OpenSearch through Lambda for real-time data visualization, using Kibana as the visualization layer.
+> 2. **Data Warehouse ETL Guide:**
+> Guide for creating a data analysis pipeline with Athena and EMR (Spark) for efficient Data Warehouse ETL operations.
+=======
     # Future Plans
     Currently, `OVEN` provides official support for S3 and S3-compatible storage solutions, including MinIO. Looking ahead, the system aims to expand compatibility by integrating with additional large-scale storage solutions.
 
@@ -251,5 +293,6 @@ For audit logs, **the log group name** and chronological **time** information ar
        > Example: Integration with OpenSearch through Lambda for real-time data visualization, using Kibana as the visualization layer.
     >2. **Data Warehouse ETL Guide:**
        > Guide for creating a data analysis pipeline with Athena and EMR (Spark) for efficient Data Warehouse ETL operations.
+>>>>>>> origin/main
 
 </ArticleGatingForm>

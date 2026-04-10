@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2025-10-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "military-hr-ai-agent",
+  "imageSrc": "/demo/use-cases/aip-use-case-thumb-14-en.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000076",
+  "summary": {
+    "en": "An AI agent that streamlines military personnel management—assignments, leave, evaluations, and records—through natural language, ensuring faster administration with full oversight.",
+    "ko": "An AI agent that streamlines military personnel management—assignments, leave, evaluations, and records—through natural language, ensuring faster administration with full oversight.",
+    "ja": "配置、休暇、評価、記録管理を自然言語で効率化し、完全な監督体制のもとで軍人事業務を迅速化するAIエージェント。"
+  },
+  "title": {
+    "en": "AIP Use Case: Military Service & HR AI Agent",
+    "ko": "AIP Use Case: Military Service & HR AI Agent",
+    "ja": "AIP活用事例： 兵役・人事AIエージェント"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000076/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000076/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000076/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000076/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000076/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000076/ja.tiptap.json"
+    }
+  }
+}

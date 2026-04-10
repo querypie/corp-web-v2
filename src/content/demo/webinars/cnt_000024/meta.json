@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2025-05-15",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "air-company-querypie-zerotrust-webinar",
+  "imageSrc": "/demo/webinars/air-company-zerotrust.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000024",
+  "summary": {
+    "en": "近年クラウド環境の普及に伴い、企業内部からの情報漏えいのリスクが高まっています。クラウドは簡単に構築が可能な性質上、リソース管理が煩雑になってしまうことが多いのが現状です。本ウェビナーでは、そうした企業が持つクラウドセキュリティの関する課題に対して効率的にアプローチする方法についてご紹介いたします！",
+    "ko": "近年クラウド環境の普及に伴い、企業内部からの情報漏えいのリスクが高まっています。クラウドは簡単に構築が可能な性質上、リソース管理が煩雑になってしまうことが多いのが現状です。本ウェビナーでは、そうした企業が持つクラウドセキュリティの関する課題に対して効率的にアプローチする方法についてご紹介いたします！",
+    "ja": "近年クラウド環境の普及に伴い、企業内部からの情報漏えいのリスクが高まっています。クラウドは簡単に構築が可能な性質上、リソース管理が煩雑になってしまうことが多いのが現状です。本ウェビナーでは、そうした企業が持つクラウドセキュリティの関する課題に対して効率的にアプローチする方法についてご紹介いたします！"
+  },
+  "title": {
+    "en": "【5/29（木）開催】ウェビナー「今さら聞けないゼロトラストのはじめかた」",
+    "ko": "【5/29（木）開催】ウェビナー「今さら聞けないゼロトラストのはじめかた」",
+    "ja": "【5/29（木）開催】ウェビナー「今さら聞けないゼロトラストのはじめかた」"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000024/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000024/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000024/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000024/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000024/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000024/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "authorName": "kenny",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2025-04-16",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "uncovering-mcp-security",
+  "imageSrc": "/documentation/white-papers/wp-thumb-18.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000138",
+  "summary": {
+    "en": "As AI systems become increasingly interconnected, context sharing between models is critical to ensure reliable reasoning and secure execution. This white paper analyzes recent research on the Model Context Protocol (MCP), identifies key security threats, and proposes a next-generation architecture—MCP PAM—for context-aware access control and autonomous policy enforcement.",
+    "ko": "AI 시스템 간 협업과 문맥 공유를 위한 새로운 표준, Model Context Protocol(MCP). 본 화이트페이퍼는 MCP 기반 시스템의 구조와 보안 위협을 분석하고, Zero Trust 대응 전략과 새로운 보안 아키텍처 ‘MCP PAM’을 제안합니다.",
+    "ja": "AIシステムがますます相互接続される中で、モデル間のコンテキスト共有は、信頼性の高い推論と安全な実行を確保するために不可欠となっています。本ホワイトペーパーでは、Model Context Protocol（MCP）に関する最新の研究を分析し、主要なセキュリティ脅威を特定するとともに、文脈認識型アクセス制御と自律的なポリシー施行を実現する次世代アーキテクチャ — MCP PAM を提案します。"
+  },
+  "title": {
+    "en": "Uncovering MCP Security: Threat Mapping and Vulnerability Analysis through Literature-based Investigation",
+    "ko": "MCP 보안성 평가: 문헌 조사를 통한 MCP 보안 위협 식별 및 취약점 분석",
+    "ja": "MCPセキュリティ評価：文献調査によるMCPセキュリティ脅威の特定と脆弱性分析"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000138/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000138/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000138/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000138/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000138/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000138/ja.tiptap.json"
+    }
+  }
+}

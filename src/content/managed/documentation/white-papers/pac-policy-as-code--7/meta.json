@@ -14,6 +14,70 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-7.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-7.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-1-screenshot-1.webp",
+          "webPath": "/documentation/white-papers/wp7-1-screenshot-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-2-screenshot-2.webp",
+          "webPath": "/documentation/white-papers/wp7-2-screenshot-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-3-screenshot-3.webp",
+          "webPath": "/documentation/white-papers/wp7-3-screenshot-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-4-screenshot-4.webp",
+          "webPath": "/documentation/white-papers/wp7-4-screenshot-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-5-json-schema.webp",
+          "webPath": "/documentation/white-papers/wp7-5-json-schema.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-6-screenshot-5.webp",
+          "webPath": "/documentation/white-papers/wp7-6-screenshot-5.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-7-screenshot-6.webp",
+          "webPath": "/documentation/white-papers/wp7-7-screenshot-6.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-8-screenshot-7.webp",
+          "webPath": "/documentation/white-papers/wp7-8-screenshot-7.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-9-screenshot-8.webp",
+          "webPath": "/documentation/white-papers/wp7-9-screenshot-8.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-10-screenshot-9.webp",
+          "webPath": "/documentation/white-papers/wp7-10-screenshot-9.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-11-screenshot-10.webp",
+          "webPath": "/documentation/white-papers/wp7-11-screenshot-10.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-12-screenshot-11.webp",
+          "webPath": "/documentation/white-papers/wp7-12-screenshot-11.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-7.webp",
           "webPath": "/white-paper/wp-thumb-7.webp"
         },
@@ -76,6 +140,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp7-12-screenshot-11.webp",
           "webPath": "/white-paper/wp7-12-screenshot-11.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/pac-policy-as-code--7/en.mdx",
@@ -92,8 +157,13 @@
         "optimized protocols"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-7.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Revolutionizing Security Management with Policy as Code (PaC)\"\ndescription: \"Automate and optimize security protocols using QueryPie's Policy as Code, ensuring compliance and reducing risks.\"\ndate: \"2024-11-22\"\nauthor: \"eddy\"\nogImage: \"public/documentation/white-papers/wp-thumb-7.webp\"\nkeywords: [\"QueryPie\", \"Policy as Code\", \"security automation\", \"compliance\", \"risk reduction\", \"optimized protocols\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"",
+=======
       "ogImage": "/white-paper/wp-thumb-7.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Revolutionizing Security Management with Policy as Code (PaC)\"\ndescription: \"Automate and optimize security protocols using QueryPie's Policy as Code, ensuring compliance and reducing risks.\"\ndate: \"2024-11-22\"\nauthor: \"eddy\"\nogImage: \"public/white-paper/wp-thumb-7.webp\"\nkeywords: [\"QueryPie\", \"Policy as Code\", \"security automation\", \"compliance\", \"risk reduction\", \"optimized protocols\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/8/secure-login-token-management",
         "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
@@ -108,7 +178,11 @@
         "description": "Automate and optimize security protocols using QueryPie's Policy as Code, ensuring compliance and reducing risks.",
         "date": "2024-11-22",
         "author": "eddy",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-7.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-7.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "Policy as Code",
@@ -128,6 +202,70 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-7.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-7.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-1-screenshot-1.webp",
+          "webPath": "/documentation/white-papers/wp7-1-screenshot-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-2-screenshot-2.webp",
+          "webPath": "/documentation/white-papers/wp7-2-screenshot-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-3-screenshot-3.webp",
+          "webPath": "/documentation/white-papers/wp7-3-screenshot-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-4-screenshot-4.webp",
+          "webPath": "/documentation/white-papers/wp7-4-screenshot-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-5-json-schema.webp",
+          "webPath": "/documentation/white-papers/wp7-5-json-schema.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-6-screenshot-5.webp",
+          "webPath": "/documentation/white-papers/wp7-6-screenshot-5.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-7-screenshot-6.webp",
+          "webPath": "/documentation/white-papers/wp7-7-screenshot-6.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-8-screenshot-7.webp",
+          "webPath": "/documentation/white-papers/wp7-8-screenshot-7.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-9-screenshot-8.webp",
+          "webPath": "/documentation/white-papers/wp7-9-screenshot-8.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-10-screenshot-9.webp",
+          "webPath": "/documentation/white-papers/wp7-10-screenshot-9.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-11-screenshot-10.webp",
+          "webPath": "/documentation/white-papers/wp7-11-screenshot-10.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-12-screenshot-11.webp",
+          "webPath": "/documentation/white-papers/wp7-12-screenshot-11.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-7.webp",
           "webPath": "/white-paper/wp-thumb-7.webp"
         },
@@ -190,6 +328,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp7-12-screenshot-11.webp",
           "webPath": "/white-paper/wp7-12-screenshot-11.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/pac-policy-as-code--7/ko.mdx",
@@ -207,8 +346,13 @@
         "최적화된 프로토콜"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-7.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Policy as Code(PaC) 접근을 통한 보안 관리 혁신\"\ndescription: \"PaC의 도입이 어떻게 보안 관리의 사각지대를 해소하고, 정책 설정과 관리를 보다 쉽고 안정적으로 만들어주는지 그 비결을 소개합니다.\"\ndate: \"2024-11-22\"\nauthor: \"eddy\"\nogImage: \"public/documentation/white-papers/wp-thumb-7.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"Policy as Code\", \"보안 자동화\", \"규정 준수\", \"위험 감소\", \"최적화된 프로토콜\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"",
+=======
       "ogImage": "/white-paper/wp-thumb-7.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Policy as Code(PaC) 접근을 통한 보안 관리 혁신\"\ndescription: \"PaC의 도입이 어떻게 보안 관리의 사각지대를 해소하고, 정책 설정과 관리를 보다 쉽고 안정적으로 만들어주는지 그 비결을 소개합니다.\"\ndate: \"2024-11-22\"\nauthor: \"eddy\"\nogImage: \"public/white-paper/wp-thumb-7.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"Policy as Code\", \"보안 자동화\", \"규정 준수\", \"위험 감소\", \"최적화된 프로토콜\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/8/secure-login-token-management",
         "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
@@ -223,7 +367,11 @@
         "description": "PaC의 도입이 어떻게 보안 관리의 사각지대를 해소하고, 정책 설정과 관리를 보다 쉽고 안정적으로 만들어주는지 그 비결을 소개합니다.",
         "date": "2024-11-22",
         "author": "eddy",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-7.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-7.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -244,6 +392,70 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-7.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-7.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-1-screenshot-1.webp",
+          "webPath": "/documentation/white-papers/wp7-1-screenshot-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-2-screenshot-2.webp",
+          "webPath": "/documentation/white-papers/wp7-2-screenshot-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-3-screenshot-3.webp",
+          "webPath": "/documentation/white-papers/wp7-3-screenshot-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-4-screenshot-4.webp",
+          "webPath": "/documentation/white-papers/wp7-4-screenshot-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-5-json-schema.webp",
+          "webPath": "/documentation/white-papers/wp7-5-json-schema.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-6-screenshot-5.webp",
+          "webPath": "/documentation/white-papers/wp7-6-screenshot-5.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-7-screenshot-6.webp",
+          "webPath": "/documentation/white-papers/wp7-7-screenshot-6.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-8-screenshot-7.webp",
+          "webPath": "/documentation/white-papers/wp7-8-screenshot-7.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-9-screenshot-8.webp",
+          "webPath": "/documentation/white-papers/wp7-9-screenshot-8.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-10-screenshot-9.webp",
+          "webPath": "/documentation/white-papers/wp7-10-screenshot-9.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-11-screenshot-10.webp",
+          "webPath": "/documentation/white-papers/wp7-11-screenshot-10.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp7-12-screenshot-11.webp",
+          "webPath": "/documentation/white-papers/wp7-12-screenshot-11.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-7.webp",
           "webPath": "/white-paper/wp-thumb-7.webp"
         },
@@ -306,6 +518,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp7-12-screenshot-11.webp",
           "webPath": "/white-paper/wp7-12-screenshot-11.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/pac-policy-as-code--7/ja.mdx",
@@ -322,8 +535,13 @@
         "最適化されたプロトコル"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-7.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Policy as Code（PaC）アプローチによるセキュリティ管理の革新\"\ndescription: \"QueryPie の Policy as Code を使用してセキュリティプロトコルを自動化および最適化し、コンプライアンスを確保し、リスクを軽減します。\"\ndate: \"2024-11-22\"\nauthor: \"eddy\"\nogImage: \"public/documentation/white-papers/wp-thumb-7.webp\"\nkeywords: [\"QueryPie\", \"Policy as Code\", \"セキュリティの自動化\", \"コンプライアンス\", \"リスク低減\", \"最適化されたプロトコル\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"",
+=======
       "ogImage": "/white-paper/wp-thumb-7.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Policy as Code（PaC）アプローチによるセキュリティ管理の革新\"\ndescription: \"QueryPie の Policy as Code を使用してセキュリティプロトコルを自動化および最適化し、コンプライアンスを確保し、リスクを軽減します。\"\ndate: \"2024-11-22\"\nauthor: \"eddy\"\nogImage: \"public/white-paper/wp-thumb-7.webp\"\nkeywords: [\"QueryPie\", \"Policy as Code\", \"セキュリティの自動化\", \"コンプライアンス\", \"リスク低減\", \"最適化されたプロトコル\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/8/secure-login-token-management",
         "/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
@@ -338,7 +556,11 @@
         "description": "QueryPie の Policy as Code を使用してセキュリティプロトコルを自動化および最適化し、コンプライアンスを確保し、リスクを軽減します。",
         "date": "2024-11-22",
         "author": "eddy",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-7.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-7.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "Policy as Code",

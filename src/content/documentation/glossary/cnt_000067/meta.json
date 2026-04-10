@@ -1,0 +1,45 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "glossary",
+  "contentType": "content",
+  "dateIso": "",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-ai-2",
+  "imageSrc": "/documentation/glossary/docu-thumb-glossary.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 0,
+  "status": "hidden",
+  "storageId": "cnt_000067",
+  "summary": {
+    "en": "Access QueryPie AI's glossary of key terms related to data governance and security. Learn essential terminology for understanding our platform and the industry.",
+    "ko": "QueryPie의 데이터 거버넌스 및 보안과 관련된 주요 용어를 살펴보세요. 우리 플랫폼과 보안 업계를 이해하는 데 중요한 용어들을 한눈에 확인할 수 있습니다.",
+    "ja": "QueryPie AIのデータガバナンスおよびセキュリティに関連する主要な用語を確認してください。プラットフォームと業界を理解するために重要な用語を学びましょう。"
+  },
+  "title": {
+    "en": "QueryPie AI Glossary - Key Terms and Definitions",
+    "ko": "QueryPie Glossary - 주요 용어 및 정의",
+    "ja": "QueryPie AI 用語集 - 主要な用語と定義"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/glossary/cnt_000067/en.html",
+      "jsonPath": "src/content/documentation/glossary/cnt_000067/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/glossary/cnt_000067/ko.html",
+      "jsonPath": "src/content/documentation/glossary/cnt_000067/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/glossary/cnt_000067/ja.html",
+      "jsonPath": "src/content/documentation/glossary/cnt_000067/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "authorName": "kenny",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2025-04-08",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "redefining-pam-for-the-mcp-era",
+  "imageSrc": "/documentation/white-papers/wp-thumb-15.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000141",
+  "summary": {
+    "en": "Learn how integrating Privileged Access Management (PAM) into the Model Context Protocol (MCP) framework strengthens AI governance, enhances visibility, and mitigates emerging security risks in enterprise environments.",
+    "ko": "AI 에이전트가 기업 인프라에 안전하게 접근하려면, 이제는 MCP와 PAM의 결합이 필수입니다. 본 화이트페이퍼에서는 QueryPie가 제안하는 MCP-PAM 통합 전략을 통해 SSH 연결, 터미널 제어, AI 거버넌스까지 아우르는 새로운 보안 아키텍처를 소개합니다.",
+    "ja": "AIエージェントが企業インフラに安全にアクセスするためには、これからはMCPとPAMの結合が必須です。 このホワイトペーパーでは、QueryPieが提案するMCP-PAM統合戦略を通じて、SSH接続、ターミナル制御、AIガバナンスまで含めた新しいセキュリティアーキテクチャを紹介します。"
+  },
+  "title": {
+    "en": "Security Governance and Integrated PAM Strategy for AI Agents in the Age of the Model Context Protocol (MCP)",
+    "ko": "MCP(Model Context Protocol) 시대의 PAM(Privileged Access Management)을 재정의 하다.",
+    "ja": "MCP(Model Context Protocol)時代のPAM(Privileged Access Management)を再定義する。"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000141/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000141/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000141/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000141/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000141/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000141/ja.tiptap.json"
+    }
+  }
+}

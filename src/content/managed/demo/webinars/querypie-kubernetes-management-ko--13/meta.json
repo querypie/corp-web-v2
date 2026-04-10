@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/webinars/3dk-ep4-ko.webp",
+          "webPath": "/demo/webinars/3dk-ep4-ko.webp"
+=======
           "sourcePath": "public/webinar/3dk-ep4-ko.webp",
           "webPath": "/webinar/3dk-ep4-ko.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/querypie-kubernetes-management-ko--13/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/webinars/3dk-ep4-ko.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!\"\ndescription: \"4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/webinars/3dk-ep4-ko.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko\"\n  - \"/features/demo/webinars/9/querypie-databases-nosql-ledger-ko\"\n  - \"/features/demo/webinars/11/querypie-server-management-ko\"",
+=======
       "ogImage": "/webinar/3dk-ep4-ko.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!\"\ndescription: \"4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/3dk-ep4-ko.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko\"\n  - \"/features/demo/webinars/9/querypie-databases-nosql-ledger-ko\"\n  - \"/features/demo/webinars/11/querypie-server-management-ko\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko",
         "/features/demo/webinars/9/querypie-databases-nosql-ledger-ko",
@@ -40,7 +50,11 @@
         "title": "Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!",
         "description": "4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다.",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/webinars/3dk-ep4-ko.webp",
+=======
         "ogImage": "public/webinar/3dk-ep4-ko.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/webinars/3dk-ep4-ko.webp",
+          "webPath": "/demo/webinars/3dk-ep4-ko.webp"
+=======
           "sourcePath": "public/webinar/3dk-ep4-ko.webp",
           "webPath": "/webinar/3dk-ep4-ko.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/querypie-kubernetes-management-ko--13/ko.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/webinars/3dk-ep4-ko.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!\"\ndescription: \"4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/webinars/3dk-ep4-ko.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko\"\n  - \"/features/demo/webinars/9/querypie-databases-nosql-ledger-ko\"\n  - \"/features/demo/webinars/11/querypie-server-management-ko\"",
+=======
       "ogImage": "/webinar/3dk-ep4-ko.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!\"\ndescription: \"4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/3dk-ep4-ko.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko\"\n  - \"/features/demo/webinars/9/querypie-databases-nosql-ledger-ko\"\n  - \"/features/demo/webinars/11/querypie-server-management-ko\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko",
         "/features/demo/webinars/9/querypie-databases-nosql-ledger-ko",
@@ -80,7 +104,11 @@
         "title": "Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!",
         "description": "4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다.",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/webinars/3dk-ep4-ko.webp",
+=======
         "ogImage": "public/webinar/3dk-ep4-ko.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

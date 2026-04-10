@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2025-02-01",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "integrating-querypie-with-metabase",
+  "imageSrc": "/demo/acp-features/de-thumb-metabase.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000025",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "QueryPie x metabase",
+    "ko": "QueryPie x metabase",
+    "ja": "QueryPie x metabase"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000025/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000025/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000025/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000025/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000025/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000025/ja.tiptap.json"
+    }
+  }
+}

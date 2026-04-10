@@ -14,6 +14,25 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-4.webp",
+          "webPath": "/documentation/blogs/b-thumb-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog4-image-1.webp",
+          "webPath": "/documentation/blogs/blog4-image-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog4-image-2.webp",
+          "webPath": "/documentation/blogs/blog4-image-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog4-image-3.webp",
+          "webPath": "/documentation/blogs/blog4-image-3.webp"
+=======
           "sourcePath": "public/blog/b-thumb-4.webp",
           "webPath": "/blog/b-thumb-4.webp"
         },
@@ -31,6 +50,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog4-image-3.webp",
           "webPath": "/blog/blog4-image-3.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/multi-cloud-kubernetes-access-control--4/en.mdx",
@@ -46,8 +66,13 @@
         "cloud systems"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-4.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"From Chaos to Order: Revolutionizing Multi-Cloud Kubernetes Access Control\"\ndescription: \"QueryPie's approach to streamlining multi-cloud Kubernetes access control for enhanced security and operational efficiency.\"\ndate: \"2024-11-22\"\nauthor: \"sam\"\nogImage: \"public/documentation/blogs/b-thumb-4.webp\"\nkeywords: [\"QueryPie\", \"multi-cloud security\", \"Kubernetes access control\", \"operational efficiency\", \"cloud systems\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"",
+=======
       "ogImage": "/blog/b-thumb-4.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"From Chaos to Order: Revolutionizing Multi-Cloud Kubernetes Access Control\"\ndescription: \"QueryPie's approach to streamlining multi-cloud Kubernetes access control for enhanced security and operational efficiency.\"\ndate: \"2024-11-22\"\nauthor: \"sam\"\nogImage: \"public/blog/b-thumb-4.webp\"\nkeywords: [\"QueryPie\", \"multi-cloud security\", \"Kubernetes access control\", \"operational efficiency\", \"cloud systems\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/7/command-bypass-prevention-control",
         "/features/documentation/blog/12/internal-data-leaks",
@@ -62,7 +87,11 @@
         "description": "QueryPie's approach to streamlining multi-cloud Kubernetes access control for enhanced security and operational efficiency.",
         "date": "2024-11-22",
         "author": "sam",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-4.webp",
+=======
         "ogImage": "public/blog/b-thumb-4.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "multi-cloud security",
@@ -81,6 +110,25 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-4.webp",
+          "webPath": "/documentation/blogs/b-thumb-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog4-image-1.webp",
+          "webPath": "/documentation/blogs/blog4-image-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog4-image-2.webp",
+          "webPath": "/documentation/blogs/blog4-image-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog4-image-3.webp",
+          "webPath": "/documentation/blogs/blog4-image-3.webp"
+=======
           "sourcePath": "public/blog/b-thumb-4.webp",
           "webPath": "/blog/b-thumb-4.webp"
         },
@@ -98,6 +146,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog4-image-3.webp",
           "webPath": "/blog/blog4-image-3.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/multi-cloud-kubernetes-access-control--4/ko.mdx",
@@ -114,8 +163,13 @@
         "쿠버네티스 접근제어"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-4.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"혼돈에서 질서로: 멀티클라우드 Kubernetes 접근제어 혁신\"\ndescription: \"다수의 쿠버네티스 클러스터를 운영하며 겪었던 문제점들과 이를 해결하기 위한 효과적인 방안들을 공유하며, 클러스터 관리의 복잡성을 줄이고 안정성을 높이는 방법을 제시합니다.\"\ndate: \"2024-11-22\"\nauthor: \"sam\"\nogImage: \"public/documentation/blogs/b-thumb-4.webp\"\nkeywords: [\"쿼리파이\", \"멀티클라우드 보안\", \"Kubernetes 접근 제어\", \"운영 효율성\", \"클라우드 시스템\", \"쿠버네티스 접근제어\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"",
+=======
       "ogImage": "/blog/b-thumb-4.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"혼돈에서 질서로: 멀티클라우드 Kubernetes 접근제어 혁신\"\ndescription: \"다수의 쿠버네티스 클러스터를 운영하며 겪었던 문제점들과 이를 해결하기 위한 효과적인 방안들을 공유하며, 클러스터 관리의 복잡성을 줄이고 안정성을 높이는 방법을 제시합니다.\"\ndate: \"2024-11-22\"\nauthor: \"sam\"\nogImage: \"public/blog/b-thumb-4.webp\"\nkeywords: [\"쿼리파이\", \"멀티클라우드 보안\", \"Kubernetes 접근 제어\", \"운영 효율성\", \"클라우드 시스템\", \"쿠버네티스 접근제어\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/7/command-bypass-prevention-control",
         "/features/documentation/blog/12/internal-data-leaks",
@@ -130,7 +184,11 @@
         "description": "다수의 쿠버네티스 클러스터를 운영하며 겪었던 문제점들과 이를 해결하기 위한 효과적인 방안들을 공유하며, 클러스터 관리의 복잡성을 줄이고 안정성을 높이는 방법을 제시합니다.",
         "date": "2024-11-22",
         "author": "sam",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-4.webp",
+=======
         "ogImage": "public/blog/b-thumb-4.webp",
+>>>>>>> origin/main
         "keywords": [
           "쿼리파이",
           "멀티클라우드 보안",
@@ -150,6 +208,25 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-4.webp",
+          "webPath": "/documentation/blogs/b-thumb-4.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog4-image-1.webp",
+          "webPath": "/documentation/blogs/blog4-image-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog4-image-2.webp",
+          "webPath": "/documentation/blogs/blog4-image-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog4-image-3.webp",
+          "webPath": "/documentation/blogs/blog4-image-3.webp"
+=======
           "sourcePath": "public/blog/b-thumb-4.webp",
           "webPath": "/blog/b-thumb-4.webp"
         },
@@ -167,6 +244,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog4-image-3.webp",
           "webPath": "/blog/blog4-image-3.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/multi-cloud-kubernetes-access-control--4/ja.mdx",
@@ -182,8 +260,13 @@
         "クラウドシステム"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-4.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"混沌から秩序へ: マルチクラウドKubernetesアクセス制御の革新\"\ndescription: \"マルチクラウド Kubernetes アクセス制御を合理化し、セキュリティと運用効率を向上させる QueryPie のアプローチを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"sam\"\nogImage: \"public/documentation/blogs/b-thumb-4.webp\"\nkeywords: [\"QueryPie\", \"マルチクラウドセキュリティ\", \"Kubernetesアクセス制御\", \"運用効率\", \"クラウドシステム\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"",
+=======
       "ogImage": "/blog/b-thumb-4.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"混沌から秩序へ: マルチクラウドKubernetesアクセス制御の革新\"\ndescription: \"マルチクラウド Kubernetes アクセス制御を合理化し、セキュリティと運用効率を向上させる QueryPie のアプローチを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"sam\"\nogImage: \"public/blog/b-thumb-4.webp\"\nkeywords: [\"QueryPie\", \"マルチクラウドセキュリティ\", \"Kubernetesアクセス制御\", \"運用効率\", \"クラウドシステム\"]\nrelatedPosts:\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/7/command-bypass-prevention-control",
         "/features/documentation/blog/12/internal-data-leaks",
@@ -198,7 +281,11 @@
         "description": "マルチクラウド Kubernetes アクセス制御を合理化し、セキュリティと運用効率を向上させる QueryPie のアプローチを紹介します。",
         "date": "2024-11-22",
         "author": "sam",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-4.webp",
+=======
         "ogImage": "public/blog/b-thumb-4.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "マルチクラウドセキュリティ",

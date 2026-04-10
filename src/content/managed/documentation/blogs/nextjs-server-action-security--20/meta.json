@@ -14,6 +14,15 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-20.webp",
+          "webPath": "/documentation/blogs/b-thumb-20.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog20-image-1.webp",
+          "webPath": "/documentation/blogs/blog20-image-1.webp"
+=======
           "sourcePath": "public/blog/b-thumb-20.webp",
           "webPath": "/blog/b-thumb-20.webp"
         },
@@ -21,6 +30,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog20-image-1.webp",
           "webPath": "/blog/blog20-image-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/nextjs-server-action-security--20/en.mdx",
@@ -39,8 +49,13 @@
         "Server-side Security"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-20.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Next.js Server Action and Frontend Security\"\ndescription: \"Next.js Server Actions' high-level abstractions may lead developers to make security mistakes. This article analyzes these risks and presents development strategies to prevent security errors. Enhance your security awareness when developing server-side code in the frontend to build safer and more efficient web applications!\"\ndate: \"2025-03-20\"\nauthor: \"teddy\"\nogImage: \"public/documentation/blogs/b-thumb-20.webp\"\nkeywords: [\"Next.js\", \"Frontend\", \"Security\", \"Server Action\", \"Frontend AI\", \"Web Security\", \"AI\", \"Server-side Security\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/secure-login-token-management\"\n  - \"/features/documentation/blog/9/penetration-testing-standard\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
+=======
       "ogImage": "/blog/b-thumb-20.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Next.js Server Action and Frontend Security\"\ndescription: \"Next.js Server Actions' high-level abstractions may lead developers to make security mistakes. This article analyzes these risks and presents development strategies to prevent security errors. Enhance your security awareness when developing server-side code in the frontend to build safer and more efficient web applications!\"\ndate: \"2025-03-20\"\nauthor: \"teddy\"\nogImage: \"public/blog/b-thumb-20.webp\"\nkeywords: [\"Next.js\", \"Frontend\", \"Security\", \"Server Action\", \"Frontend AI\", \"Web Security\", \"AI\", \"Server-side Security\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/secure-login-token-management\"\n  - \"/features/documentation/blog/9/penetration-testing-standard\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/8/secure-login-token-management",
         "/features/documentation/blog/9/penetration-testing-standard",
@@ -55,7 +70,11 @@
         "description": "Next.js Server Actions' high-level abstractions may lead developers to make security mistakes. This article analyzes these risks and presents development strategies to prevent security errors. Enhance your security awareness when developing server-side code in the frontend to build safer and more efficient web applications!",
         "date": "2025-03-20",
         "author": "teddy",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-20.webp",
+=======
         "ogImage": "public/blog/b-thumb-20.webp",
+>>>>>>> origin/main
         "keywords": [
           "Next.js",
           "Frontend",
@@ -77,6 +96,15 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-20.webp",
+          "webPath": "/documentation/blogs/b-thumb-20.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog20-image-1.webp",
+          "webPath": "/documentation/blogs/blog20-image-1.webp"
+=======
           "sourcePath": "public/blog/b-thumb-20.webp",
           "webPath": "/blog/b-thumb-20.webp"
         },
@@ -84,6 +112,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog20-image-1.webp",
           "webPath": "/blog/blog20-image-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/nextjs-server-action-security--20/ko.mdx",
@@ -105,8 +134,13 @@
         "웹 보안"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-20.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Next.js Server Action과 프론트엔드 보안\"\ndescription: \"Next.js의 서버 액션(Server Action)이 제공하는 고수준 추상화로 인해 개발자가 보안상의 실수를 범할 위험이 있습니다. 이러한 위험을 면밀히 분석하고, 보안 실수를 예방할 수 있는 개발 전략을 제시합니다. 프론트엔드에서 서버 사이드를 개발할 때 보안 인식을 높여 보다 안전하고 효율적인 웹 애플리케이션을 구축해보세요!\"\ndate: \"2025-03-20\"\nauthor: \"teddy\"\nogImage: \"public/documentation/blogs/b-thumb-20.webp\"\nkeywords: [\"Next.js\", \"Frontend\", \"Security\", \"Server Action\", \"Frontend AI\", \"프론트엔드\", \"프론트엔드 보안\", \"AI\", \"서버 액션\", \"보안\", \"웹 보안\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/secure-login-token-management\"\n  - \"/features/documentation/blog/9/penetration-testing-standard\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
+=======
       "ogImage": "/blog/b-thumb-20.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Next.js Server Action과 프론트엔드 보안\"\ndescription: \"Next.js의 서버 액션(Server Action)이 제공하는 고수준 추상화로 인해 개발자가 보안상의 실수를 범할 위험이 있습니다. 이러한 위험을 면밀히 분석하고, 보안 실수를 예방할 수 있는 개발 전략을 제시합니다. 프론트엔드에서 서버 사이드를 개발할 때 보안 인식을 높여 보다 안전하고 효율적인 웹 애플리케이션을 구축해보세요!\"\ndate: \"2025-03-20\"\nauthor: \"teddy\"\nogImage: \"public/blog/b-thumb-20.webp\"\nkeywords: [\"Next.js\", \"Frontend\", \"Security\", \"Server Action\", \"Frontend AI\", \"프론트엔드\", \"프론트엔드 보안\", \"AI\", \"서버 액션\", \"보안\", \"웹 보안\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/secure-login-token-management\"\n  - \"/features/documentation/blog/9/penetration-testing-standard\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/8/secure-login-token-management",
         "/features/documentation/blog/9/penetration-testing-standard",
@@ -121,7 +155,11 @@
         "description": "Next.js의 서버 액션(Server Action)이 제공하는 고수준 추상화로 인해 개발자가 보안상의 실수를 범할 위험이 있습니다. 이러한 위험을 면밀히 분석하고, 보안 실수를 예방할 수 있는 개발 전략을 제시합니다. 프론트엔드에서 서버 사이드를 개발할 때 보안 인식을 높여 보다 안전하고 효율적인 웹 애플리케이션을 구축해보세요!",
         "date": "2025-03-20",
         "author": "teddy",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-20.webp",
+=======
         "ogImage": "public/blog/b-thumb-20.webp",
+>>>>>>> origin/main
         "keywords": [
           "Next.js",
           "Frontend",
@@ -146,6 +184,15 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-20.webp",
+          "webPath": "/documentation/blogs/b-thumb-20.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog20-image-1.webp",
+          "webPath": "/documentation/blogs/blog20-image-1.webp"
+=======
           "sourcePath": "public/blog/b-thumb-20.webp",
           "webPath": "/blog/b-thumb-20.webp"
         },
@@ -153,6 +200,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog20-image-1.webp",
           "webPath": "/blog/blog20-image-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/nextjs-server-action-security--20/ja.mdx",
@@ -174,8 +222,13 @@
         "ウェブセキュリティ"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-20.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Next.js Server Actionとフロントエンドセキュリティ\"\ndescription: \"Next.jsのServer Actionが提供する高レベルの抽象化により、開発者がセキュリティ上のミスを犯す可能性があります。このようなリスクを詳細に分析し、セキュリティエラーを防ぐための開発戦略を提示します。フロントエンドでサーバーサイドコードを開発する際のセキュリティ意識を高め、より安全で効率的なウェブアプリケーションを構築しましょう！\"\ndate: \"2025-03-20\"\nauthor: \"teddy\"\nogImage: \"public/documentation/blogs/b-thumb-20.webp\"\nkeywords: [\"Next.js\", \"Frontend\", \"Security\", \"Server Action\", \"Frontend AI\", \"フロントエンド\", \"フロントエンドセキュリティ\", \"AI\", \"サーバーアクション\", \"セキュリティ\", \"ウェブセキュリティ\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/secure-login-token-management\"\n  - \"/features/documentation/blog/9/penetration-testing-standard\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
+=======
       "ogImage": "/blog/b-thumb-20.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Next.js Server Actionとフロントエンドセキュリティ\"\ndescription: \"Next.jsのServer Actionが提供する高レベルの抽象化により、開発者がセキュリティ上のミスを犯す可能性があります。このようなリスクを詳細に分析し、セキュリティエラーを防ぐための開発戦略を提示します。フロントエンドでサーバーサイドコードを開発する際のセキュリティ意識を高め、より安全で効率的なウェブアプリケーションを構築しましょう！\"\ndate: \"2025-03-20\"\nauthor: \"teddy\"\nogImage: \"public/blog/b-thumb-20.webp\"\nkeywords: [\"Next.js\", \"Frontend\", \"Security\", \"Server Action\", \"Frontend AI\", \"フロントエンド\", \"フロントエンドセキュリティ\", \"AI\", \"サーバーアクション\", \"セキュリティ\", \"ウェブセキュリティ\"]\nrelatedPosts:\n  - \"/features/documentation/blog/8/secure-login-token-management\"\n  - \"/features/documentation/blog/9/penetration-testing-standard\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/8/secure-login-token-management",
         "/features/documentation/blog/9/penetration-testing-standard",
@@ -190,7 +243,11 @@
         "description": "Next.jsのServer Actionが提供する高レベルの抽象化により、開発者がセキュリティ上のミスを犯す可能性があります。このようなリスクを詳細に分析し、セキュリティエラーを防ぐための開発戦略を提示します。フロントエンドでサーバーサイドコードを開発する際のセキュリティ意識を高め、より安全で効率的なウェブアプリケーションを構築しましょう！",
         "date": "2025-03-20",
         "author": "teddy",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-20.webp",
+=======
         "ogImage": "public/blog/b-thumb-20.webp",
+>>>>>>> origin/main
         "keywords": [
           "Next.js",
           "Frontend",

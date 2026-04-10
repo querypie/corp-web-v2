@@ -14,6 +14,25 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-16.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-16.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp16-1-core-mcp-components.webp",
+          "webPath": "/documentation/white-papers/wp16-1-core-mcp-components.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp16-2-aws-guardrails-and-mcp.webp",
+          "webPath": "/documentation/white-papers/wp16-2-aws-guardrails-and-mcp.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp16-3-potential-threats-in-ai-systems.webp",
+          "webPath": "/documentation/white-papers/wp16-3-potential-threats-in-ai-systems.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-16.webp",
           "webPath": "/white-paper/wp-thumb-16.webp"
         },
@@ -31,6 +50,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp16-3-potential-threats-in-ai-systems.webp",
           "webPath": "/white-paper/wp16-3-potential-threats-in-ai-systems.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/next-step-mcp-pam--16/en.mdx",
@@ -57,8 +77,13 @@
         "Context-Aware AI Control"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-16.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"MCP PAM as the Next Step Beyond Guardrails\"\ndescription: \"As generative AI adoption accelerates, traditional guardrails fall short in securing real-world LLM integrations. This whitepaper explores how MCP-based Privileged Access Management (PAM) complements existing safeguards to enforce user-intent-aware, context-driven control over AI operations—addressing threats like prompt injection, insider abuse, and sensitive data leakage.\"\ndate: \"2025-04-10\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-16.webp\"\nkeywords: [\"Generative AI\", \"Large Language Models\", \"AI Security\", \"Prompt Injection\", \"Privileged Access Management\", \"MCP Protocol\", \"Guardrails\", \"AI Threat Scenarios\", \"LLM Abuse\", \"Sensitive Data Leakage\", \"API Abuse\", \"AI Governance\", \"AI Access Control\", \"Anthropic MCP\", \"AWS Bedrock\", \"Context-Aware AI Control\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+=======
       "ogImage": "/white-paper/wp-thumb-16.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"MCP PAM as the Next Step Beyond Guardrails\"\ndescription: \"As generative AI adoption accelerates, traditional guardrails fall short in securing real-world LLM integrations. This whitepaper explores how MCP-based Privileged Access Management (PAM) complements existing safeguards to enforce user-intent-aware, context-driven control over AI operations—addressing threats like prompt injection, insider abuse, and sensitive data leakage.\"\ndate: \"2025-04-10\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-16.webp\"\nkeywords: [\"Generative AI\", \"Large Language Models\", \"AI Security\", \"Prompt Injection\", \"Privileged Access Management\", \"MCP Protocol\", \"Guardrails\", \"AI Threat Scenarios\", \"LLM Abuse\", \"Sensitive Data Leakage\", \"API Abuse\", \"AI Governance\", \"AI Access Control\", \"Anthropic MCP\", \"AWS Bedrock\", \"Context-Aware AI Control\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -73,7 +98,11 @@
         "description": "As generative AI adoption accelerates, traditional guardrails fall short in securing real-world LLM integrations. This whitepaper explores how MCP-based Privileged Access Management (PAM) complements existing safeguards to enforce user-intent-aware, context-driven control over AI operations—addressing threats like prompt injection, insider abuse, and sensitive data leakage.",
         "date": "2025-04-10",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-16.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-16.webp",
+>>>>>>> origin/main
         "keywords": [
           "Generative AI",
           "Large Language Models",
@@ -103,6 +132,25 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-16.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-16.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp16-1-core-mcp-components.webp",
+          "webPath": "/documentation/white-papers/wp16-1-core-mcp-components.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp16-2-aws-guardrails-and-mcp.webp",
+          "webPath": "/documentation/white-papers/wp16-2-aws-guardrails-and-mcp.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp16-3-potential-threats-in-ai-systems.webp",
+          "webPath": "/documentation/white-papers/wp16-3-potential-threats-in-ai-systems.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-16.webp",
           "webPath": "/white-paper/wp-thumb-16.webp"
         },
@@ -120,6 +168,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp16-3-potential-threats-in-ai-systems.webp",
           "webPath": "/white-paper/wp16-3-potential-threats-in-ai-systems.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/next-step-mcp-pam--16/ko.mdx",
@@ -146,8 +195,13 @@
         "맥락 기반 AI 통제"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-16.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AI 접근제어의 대전환: Guardrails를 넘어서 MCP-PAM으로!\"\ndescription: \"생성형 AI의 확산 속에서 기존의 Guardrails만으로는 실제 LLM 활용의 보안을 담보하기 어렵습니다. 본 문서는 MCP 기반 PAM을 통해 프롬프트 주입, 민감정보 유출 등 위협에 대응하는 맥락 인지형 통제 전략을 제시합니다.\"\ndate: \"2025-04-10\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-16.webp\"\nkeywords: [\"생성형 AI\", \"대규모 언어 모델\", \"AI 보안\", \"프롬프트 인젝션\", \"권한 관리\", \"MCP 프로토콜\", \"Guardrails\", \"AI 위협 시나리오\", \"LLM 오남용\", \"민감 정보 유출\", \"API 남용\", \"AI 거버넌스\", \"AI 접근 제어\", \"Anthropic MCP\", \"AWS Bedrock\", \"맥락 기반 AI 통제\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+=======
       "ogImage": "/white-paper/wp-thumb-16.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AI 접근제어의 대전환: Guardrails를 넘어서 MCP-PAM으로!\"\ndescription: \"생성형 AI의 확산 속에서 기존의 Guardrails만으로는 실제 LLM 활용의 보안을 담보하기 어렵습니다. 본 문서는 MCP 기반 PAM을 통해 프롬프트 주입, 민감정보 유출 등 위협에 대응하는 맥락 인지형 통제 전략을 제시합니다.\"\ndate: \"2025-04-10\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-16.webp\"\nkeywords: [\"생성형 AI\", \"대규모 언어 모델\", \"AI 보안\", \"프롬프트 인젝션\", \"권한 관리\", \"MCP 프로토콜\", \"Guardrails\", \"AI 위협 시나리오\", \"LLM 오남용\", \"민감 정보 유출\", \"API 남용\", \"AI 거버넌스\", \"AI 접근 제어\", \"Anthropic MCP\", \"AWS Bedrock\", \"맥락 기반 AI 통제\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -162,7 +216,11 @@
         "description": "생성형 AI의 확산 속에서 기존의 Guardrails만으로는 실제 LLM 활용의 보안을 담보하기 어렵습니다. 본 문서는 MCP 기반 PAM을 통해 프롬프트 주입, 민감정보 유출 등 위협에 대응하는 맥락 인지형 통제 전략을 제시합니다.",
         "date": "2025-04-10",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-16.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-16.webp",
+>>>>>>> origin/main
         "keywords": [
           "생성형 AI",
           "대규모 언어 모델",
@@ -192,6 +250,25 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-16.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-16.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp16-1-core-mcp-components.webp",
+          "webPath": "/documentation/white-papers/wp16-1-core-mcp-components.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp16-2-aws-guardrails-and-mcp.webp",
+          "webPath": "/documentation/white-papers/wp16-2-aws-guardrails-and-mcp.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp16-3-potential-threats-in-ai-systems.webp",
+          "webPath": "/documentation/white-papers/wp16-3-potential-threats-in-ai-systems.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-16.webp",
           "webPath": "/white-paper/wp-thumb-16.webp"
         },
@@ -209,6 +286,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp16-3-potential-threats-in-ai-systems.webp",
           "webPath": "/white-paper/wp16-3-potential-threats-in-ai-systems.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/next-step-mcp-pam--16/ja.mdx",
@@ -235,8 +313,13 @@
         "脈絡基盤AI統制"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-16.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AIアクセス制御の大転換:Guardrailsを越えてMCP-PAMへ！\"\ndescription: \"生成 AIの拡散の中で、既存のGuardrailsだけでは実際のLLM活用のセキュリティを担保することは困難です。本文書はMCPベースのPAMを通じてプロンプト注入、敏感情報流出などの脅威に対応する脈絡認知型統制戦略を提示します。\"\ndate: \"2025-04-10\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-16.webp\"\nkeywords: [\"生成型AI\", \"大規模言語モデル\", \"AIセキュリティ\", \"プロムフトインジェクション\", \"権限管理\", \"MCPプロトコル\", \"Guardrails\", \"AI脅威シナリオ\", \"LLM誤用·乱用\", \"敏感情報流出\", \"API乱用\", \"AIガバナンス\", \"AIアクセス制御\", \"Anthropic MCP\", \"AWS Bedrock\", \"脈絡基盤AI統制\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+=======
       "ogImage": "/white-paper/wp-thumb-16.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AIアクセス制御の大転換:Guardrailsを越えてMCP-PAMへ！\"\ndescription: \"生成 AIの拡散の中で、既存のGuardrailsだけでは実際のLLM活用のセキュリティを担保することは困難です。本文書はMCPベースのPAMを通じてプロンプト注入、敏感情報流出などの脅威に対応する脈絡認知型統制戦略を提示します。\"\ndate: \"2025-04-10\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-16.webp\"\nkeywords: [\"生成型AI\", \"大規模言語モデル\", \"AIセキュリティ\", \"プロムフトインジェクション\", \"権限管理\", \"MCPプロトコル\", \"Guardrails\", \"AI脅威シナリオ\", \"LLM誤用·乱用\", \"敏感情報流出\", \"API乱用\", \"AIガバナンス\", \"AIアクセス制御\", \"Anthropic MCP\", \"AWS Bedrock\", \"脈絡基盤AI統制\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -251,7 +334,11 @@
         "description": "生成 AIの拡散の中で、既存のGuardrailsだけでは実際のLLM活用のセキュリティを担保することは困難です。本文書はMCPベースのPAMを通じてプロンプト注入、敏感情報流出などの脅威に対応する脈絡認知型統制戦略を提示します。",
         "date": "2025-04-10",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-16.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-16.webp",
+>>>>>>> origin/main
         "keywords": [
           "生成型AI",
           "大規模言語モデル",

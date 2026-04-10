@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-sac-8.webp",
+          "webPath": "/demo/acp-features/tu-thumb-sac-8.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-sac-8.webp",
           "webPath": "/tutorial/tu-thumb-sac-8.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/review-audit-logs--7/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-sac-8.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Review Audit Logs\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-sac-8.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+=======
       "ogImage": "/tutorial/tu-thumb-sac-8.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Review Audit Logs\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-sac-8.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/9/submit-role-access-workflow",
         "/features/demo/acp-features/8/connect-servers-agent",
@@ -40,7 +50,11 @@
         "title": "How to Review Audit Logs",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-sac-8.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-sac-8.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-sac-8.webp",
+          "webPath": "/demo/acp-features/tu-thumb-sac-8.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-sac-8.webp",
           "webPath": "/tutorial/tu-thumb-sac-8.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/review-audit-logs--7/ko.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-sac-8.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"시스템 영역의 감사 로그를 확인하는 방법\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-sac-8.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+=======
       "ogImage": "/tutorial/tu-thumb-sac-8.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"시스템 영역의 감사 로그를 확인하는 방법\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-sac-8.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/9/submit-role-access-workflow",
         "/features/demo/acp-features/8/connect-servers-agent",
@@ -80,7 +104,11 @@
         "title": "시스템 영역의 감사 로그를 확인하는 방법",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-sac-8.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-sac-8.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -94,8 +122,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-sac-8.webp",
+          "webPath": "/demo/acp-features/tu-thumb-sac-8.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-sac-8.webp",
           "webPath": "/tutorial/tu-thumb-sac-8.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/review-audit-logs--7/ja.mdx",
@@ -105,8 +138,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-sac-8.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"監査ログを確認する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-sac-8.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+=======
       "ogImage": "/tutorial/tu-thumb-sac-8.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"監査ログを確認する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-sac-8.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/9/submit-role-access-workflow\"\n  - \"/features/demo/acp-features/8/connect-servers-agent\"\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/9/submit-role-access-workflow",
         "/features/demo/acp-features/8/connect-servers-agent",
@@ -120,7 +158,11 @@
         "title": "監査ログを確認する方法",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-sac-8.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-sac-8.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

@@ -1,0 +1,45 @@
+{
+  "authorName": "candice",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "querypie-team-success-secrets",
+  "imageSrc": "/documentation/blogs/b-thumb-3.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000123",
+  "summary": {
+    "en": "Explore QueryPie's secrets to building successful teams through collaboration and shared values.",
+    "ko": "쿼리파이는 빠르게 변화하는 환경 속에서 어떻게 서로를 지원하며, 혁신을 이끌어 나가는지 그 여정을 함께 공유하고자 합니다.",
+    "ja": "QueryPie のコラボレーションと価値観の共有を通じて、成功するチームを作る秘訣を紹介します。"
+  },
+  "title": {
+    "en": "Secrets of Successful Teams? Work Like QueryPie!",
+    "ko": "잘 나가는 조직의 비결? QueryPie처럼 일하라!",
+    "ja": "成功している組織の秘訣？QueryPieのように働こう！"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000123/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000123/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000123/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000123/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000123/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000123/ja.tiptap.json"
+    }
+  }
+}

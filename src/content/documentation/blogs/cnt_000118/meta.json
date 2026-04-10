@@ -1,0 +1,45 @@
+{
+  "authorName": "ella",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "integration-connection-paradigm",
+  "imageSrc": "/documentation/blogs/b-thumb-6.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000118",
+  "summary": {
+    "en": "QueryPie introduces a new paradigm, emphasizing true connectivity beyond mere system integration for better collaboration.",
+    "ko": "QueryPie는 폐쇄적이고 엄격한 보안 환경에서 벗어나, 통합과 연결을 기반으로 한 혁신적인 보안 환경으로 패러다임을 전환하고자 합니다. 더 나은 협업과 효율성을 어떤 방식으로 만들어나가고 있는지 함께 확인해 보시죠!",
+    "ja": "QueryPie が新しいパラダイムを導入し、より良いコラボレーションのために単なるシステム統合以上の真の接続性を重視している取り組みを紹介します。"
+  },
+  "title": {
+    "en": "QueryPie’s New Paradigm: Beyond Integration, Toward True Connectivity",
+    "ko": "QueryPie가 제시하는 새로운 패러다임, 연동을 넘어선 연결로",
+    "ja": "QueryPieが示す新しいパラダイム、連携を超えた接続へ"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000118/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000118/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000118/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000118/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000118/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000118/ja.tiptap.json"
+    }
+  }
+}

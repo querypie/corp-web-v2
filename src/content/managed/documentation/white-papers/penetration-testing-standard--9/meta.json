@@ -14,6 +14,55 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-9.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-9.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-1-SDLC-process.webp",
+          "webPath": "/documentation/white-papers/wp9-1-SDLC-process.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-2-QueryPie-Penetration-Framework-V1.webp",
+          "webPath": "/documentation/white-papers/wp9-2-QueryPie-Penetration-Framework-V1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-3-level-of-security.webp",
+          "webPath": "/documentation/white-papers/wp9-3-level-of-security.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-4-Diagnostic-Tools.webp",
+          "webPath": "/documentation/white-papers/wp9-4-Diagnostic-Tools.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-5-CIA-Scale-Table.webp",
+          "webPath": "/documentation/white-papers/wp9-5-CIA-Scale-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-6-2024-pentest-result.webp",
+          "webPath": "/documentation/white-papers/wp9-6-2024-pentest-result.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-7-Bug-Bounty-Process.webp",
+          "webPath": "/documentation/white-papers/wp9-7-Bug-Bounty-Process.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-8-Hall-of-Fame.webp",
+          "webPath": "/documentation/white-papers/wp9-8-Hall-of-Fame.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-9-2024-security-assessment-result.webp",
+          "webPath": "/documentation/white-papers/wp9-9-2024-security-assessment-result.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-9.webp",
           "webPath": "/white-paper/wp-thumb-9.webp"
         },
@@ -61,6 +110,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp9-9-2024-security-assessment-result.webp",
           "webPath": "/white-paper/wp9-9-2024-security-assessment-result.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/penetration-testing-standard--9/en.mdx",
@@ -76,8 +126,13 @@
         "secure systems"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-9.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie’s New Standard for Penetration Testing\"\ndescription: \"QueryPie sets a new benchmark in penetration testing to prevent vulnerabilities and secure systems effectively.\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/documentation/white-papers/wp-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"penetration testing\", \"cybersecurity\", \"vulnerability prevention\", \"secure systems\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
+=======
       "ogImage": "/white-paper/wp-thumb-9.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie’s New Standard for Penetration Testing\"\ndescription: \"QueryPie sets a new benchmark in penetration testing to prevent vulnerabilities and secure systems effectively.\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/white-paper/wp-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"penetration testing\", \"cybersecurity\", \"vulnerability prevention\", \"secure systems\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/10/querypie-devsecops-pipeline",
         "/features/documentation/white-paper/8/secure-login-token-management",
@@ -96,7 +151,11 @@
           "ravi",
           "noah"
         ],
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-9.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-9.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "penetration testing",
@@ -115,6 +174,55 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-9.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-9.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-1-SDLC-process.webp",
+          "webPath": "/documentation/white-papers/wp9-1-SDLC-process.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-2-QueryPie-Penetration-Framework-V1.webp",
+          "webPath": "/documentation/white-papers/wp9-2-QueryPie-Penetration-Framework-V1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-3-level-of-security.webp",
+          "webPath": "/documentation/white-papers/wp9-3-level-of-security.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-4-Diagnostic-Tools.webp",
+          "webPath": "/documentation/white-papers/wp9-4-Diagnostic-Tools.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-5-CIA-Scale-Table.webp",
+          "webPath": "/documentation/white-papers/wp9-5-CIA-Scale-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-6-2024-pentest-result.webp",
+          "webPath": "/documentation/white-papers/wp9-6-2024-pentest-result.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-7-Bug-Bounty-Process.webp",
+          "webPath": "/documentation/white-papers/wp9-7-Bug-Bounty-Process.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-8-Hall-of-Fame.webp",
+          "webPath": "/documentation/white-papers/wp9-8-Hall-of-Fame.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-9-2024-security-assessment-result.webp",
+          "webPath": "/documentation/white-papers/wp9-9-2024-security-assessment-result.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-9.webp",
           "webPath": "/white-paper/wp-thumb-9.webp"
         },
@@ -162,6 +270,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp9-9-2024-security-assessment-result.webp",
           "webPath": "/white-paper/wp9-9-2024-security-assessment-result.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/penetration-testing-standard--9/ko.mdx",
@@ -178,8 +287,13 @@
         "보안 시스템"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-9.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie가 제시하는 모의해킹의 새로운 기준\"\ndescription: \"QueryPie의 모의해킹 프로세스와 그 중요성에 대해 자세히 알려드립니다.\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/documentation/white-papers/wp-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"침투 테스트\", \"사이버 보안\", \"취약점 방지\", \"보안 시스템\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
+=======
       "ogImage": "/white-paper/wp-thumb-9.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPie가 제시하는 모의해킹의 새로운 기준\"\ndescription: \"QueryPie의 모의해킹 프로세스와 그 중요성에 대해 자세히 알려드립니다.\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/white-paper/wp-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"침투 테스트\", \"사이버 보안\", \"취약점 방지\", \"보안 시스템\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/10/querypie-devsecops-pipeline",
         "/features/documentation/white-paper/8/secure-login-token-management",
@@ -198,7 +312,11 @@
           "ravi",
           "noah"
         ],
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-9.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-9.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -218,6 +336,55 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-9.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-9.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-1-SDLC-process.webp",
+          "webPath": "/documentation/white-papers/wp9-1-SDLC-process.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-2-QueryPie-Penetration-Framework-V1.webp",
+          "webPath": "/documentation/white-papers/wp9-2-QueryPie-Penetration-Framework-V1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-3-level-of-security.webp",
+          "webPath": "/documentation/white-papers/wp9-3-level-of-security.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-4-Diagnostic-Tools.webp",
+          "webPath": "/documentation/white-papers/wp9-4-Diagnostic-Tools.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-5-CIA-Scale-Table.webp",
+          "webPath": "/documentation/white-papers/wp9-5-CIA-Scale-Table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-6-2024-pentest-result.webp",
+          "webPath": "/documentation/white-papers/wp9-6-2024-pentest-result.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-7-Bug-Bounty-Process.webp",
+          "webPath": "/documentation/white-papers/wp9-7-Bug-Bounty-Process.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-8-Hall-of-Fame.webp",
+          "webPath": "/documentation/white-papers/wp9-8-Hall-of-Fame.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp9-9-2024-security-assessment-result.webp",
+          "webPath": "/documentation/white-papers/wp9-9-2024-security-assessment-result.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-9.webp",
           "webPath": "/white-paper/wp-thumb-9.webp"
         },
@@ -265,6 +432,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp9-9-2024-security-assessment-result.webp",
           "webPath": "/white-paper/wp9-9-2024-security-assessment-result.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/penetration-testing-standard--9/ja.mdx",
@@ -280,8 +448,13 @@
         "セキュリティシステム"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-9.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPieが示す新しいペネトレーションテスト基準\"\ndescription: \"QueryPie は、脆弱性を防止し、システムを効果的に保護するために、侵入テストの新しいベンチマークを設定します。\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/documentation/white-papers/wp-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"浸透テスト\", \"サイバーセキュリティ\", \"脆弱性防止\", \"セキュリティシステム\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
+=======
       "ogImage": "/white-paper/wp-thumb-9.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"QueryPieが示す新しいペネトレーションテスト基準\"\ndescription: \"QueryPie は、脆弱性を防止し、システムを効果的に保護するために、侵入テストの新しいベンチマークを設定します。\"\ndate: \"2024-11-22\"\nauthor: [\"jake\", \"ravi\", \"noah\"]\nogImage: \"public/white-paper/wp-thumb-9.webp\"\nkeywords: [\"QueryPie\", \"浸透テスト\", \"サイバーセキュリティ\", \"脆弱性防止\", \"セキュリティシステム\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/10/querypie-devsecops-pipeline\"\n  - \"/features/documentation/white-paper/8/secure-login-token-management\"\n  - \"/features/documentation/white-paper/7/pac-policy-as-code\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/10/querypie-devsecops-pipeline",
         "/features/documentation/white-paper/8/secure-login-token-management",
@@ -300,7 +473,11 @@
           "ravi",
           "noah"
         ],
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-9.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-9.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "浸透テスト",

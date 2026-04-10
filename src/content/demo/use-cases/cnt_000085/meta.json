@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2025-05-18",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "work-collaboration-agent",
+  "imageSrc": "/demo/use-cases/aip-use-case-thumb-6-en.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000085",
+  "summary": {
+    "en": "An AI agent that streamlines team workflows by integrating with collaboration tools like Slack, Jira, and Confluence, automating routine tasks and information sharing across platforms.",
+    "ko": "An AI agent that streamlines team workflows by integrating with collaboration tools like Slack, Jira, and Confluence, automating routine tasks and information sharing across platforms.",
+    "ja": "複数のプラットフォームにまたがるチームの業務調整を変革するAIエージェント。自然言語でのやり取りを通じて、ワークフローの自動化、情報共有、タスク実行をアプリケーション間の切り替えなしで実現します。"
+  },
+  "title": {
+    "en": "AIP Use Case: Work Collaboration Agent",
+    "ko": "AIP Use Case: Work Collaboration Agent",
+    "ja": "AIP活用事例：ワークコラボレーションエージェント"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000085/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000085/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000085/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000085/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000085/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000085/ja.tiptap.json"
+    }
+  }
+}

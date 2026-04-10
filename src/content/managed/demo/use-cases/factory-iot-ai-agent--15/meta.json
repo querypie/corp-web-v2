@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/aip-use-case-thumb-9-en.webp",
+          "webPath": "/demo/use-cases/aip-use-case-thumb-9-en.webp"
+=======
           "sourcePath": "public/demo/aip-use-case-thumb-9-en.webp",
           "webPath": "/demo/aip-use-case-thumb-9-en.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/factory-iot-ai-agent--15/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/aip-use-case-thumb-9-en.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Factory IoT AI Agent\"\ndescription: \"An AI agent that monitors factory IoT signals, detects anomalies, and orchestrates maintenance workflows through natural language—bridging OT data with IT systems for faster, safer operations.\"\ndate: \"2025-10-03\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-9-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/13/m365-ai-agent\"\n  - \"/features/demo/use-cases/14/credit-check-ai-agent\"\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"",
+=======
       "ogImage": "/demo/aip-use-case-thumb-9-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Factory IoT AI Agent\"\ndescription: \"An AI agent that monitors factory IoT signals, detects anomalies, and orchestrates maintenance workflows through natural language—bridging OT data with IT systems for faster, safer operations.\"\ndate: \"2025-10-03\"\nogImage: \"public/demo/aip-use-case-thumb-9-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/13/m365-ai-agent\"\n  - \"/features/demo/use-cases/14/credit-check-ai-agent\"\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/13/m365-ai-agent",
         "/features/demo/use-cases/14/credit-check-ai-agent",
@@ -40,7 +50,11 @@
         "title": "AIP Use Case: Factory IoT AI Agent",
         "description": "An AI agent that monitors factory IoT signals, detects anomalies, and orchestrates maintenance workflows through natural language—bridging OT data with IT systems for faster, safer operations.",
         "date": "2025-10-03",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/aip-use-case-thumb-9-en.webp",
+=======
         "ogImage": "public/demo/aip-use-case-thumb-9-en.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/aip-use-case-thumb-9-ja.webp",
+          "webPath": "/demo/use-cases/aip-use-case-thumb-9-ja.webp"
+=======
           "sourcePath": "public/demo/aip-use-case-thumb-9-ja.webp",
           "webPath": "/demo/aip-use-case-thumb-9-ja.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/factory-iot-ai-agent--15/ja.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/aip-use-case-thumb-9-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： ファクトリーIoT AIエージェント\"\ndescription: \"ファクトリーIoTシグナルを監視し、異常を検知し、自然言語でメンテナンスワークフローをオーケストレーションするAIエージェント。OTデータとITシステムを橋渡しし、より迅速で安全なオペレーションを実現します。\"\ndate: \"2025-10-03\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-9-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/13/m365-ai-agent\"\n  - \"/features/demo/use-cases/14/credit-check-ai-agent\"\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"",
+=======
       "ogImage": "/demo/aip-use-case-thumb-9-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： ファクトリーIoT AIエージェント\"\ndescription: \"ファクトリーIoTシグナルを監視し、異常を検知し、自然言語でメンテナンスワークフローをオーケストレーションするAIエージェント。OTデータとITシステムを橋渡しし、より迅速で安全なオペレーションを実現します。\"\ndate: \"2025-10-03\"\nogImage: \"public/demo/aip-use-case-thumb-9-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/13/m365-ai-agent\"\n  - \"/features/demo/use-cases/14/credit-check-ai-agent\"\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/13/m365-ai-agent",
         "/features/demo/use-cases/14/credit-check-ai-agent",
@@ -80,7 +104,11 @@
         "title": "AIP活用事例： ファクトリーIoT AIエージェント",
         "description": "ファクトリーIoTシグナルを監視し、異常を検知し、自然言語でメンテナンスワークフローをオーケストレーションするAIエージェント。OTデータとITシステムを橋渡しし、より迅速で安全なオペレーションを実現します。",
         "date": "2025-10-03",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/aip-use-case-thumb-9-ja.webp",
+=======
         "ogImage": "public/demo/aip-use-case-thumb-9-ja.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

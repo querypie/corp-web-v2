@@ -44,7 +44,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Starter",
           description: "Build your first AI workflow",
           priceLabel: "$20/mo",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "Subscribe",
           features: [
             "800 monthly credits",
@@ -58,7 +58,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Team",
           description: "Collaborate and innovate together",
           priceLabel: "$500/mo",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "Subscribe",
           features: [
             "20,000 monthly credits",
@@ -73,7 +73,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "Enterprise power unleashed",
           priceLabel: "Let's Talk",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "Try Now",
           tone: "primary",
           features: [
@@ -325,7 +325,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Community",
           description: "Download and secure a free license for the Community edition with the same quality",
           priceLabel: "Free",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "Install Now",
           features: [
             "Limited to 5 Users",
@@ -340,7 +340,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Standard",
           description: "Offered exclusively to users who are satisfied with the Community edition; billed annually",
           priceLabel: "$50/mo/user",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "Contact Us",
           features: [
             "At least 10 users",
@@ -358,7 +358,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "Recommended for teams seeking professional deployment support and services",
           priceLabel: "Let's Talk",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "Contact Us",
           tone: "primary",
           features: [
@@ -469,7 +469,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Starter",
           description: "첫 AI 워크플로우를 구축하세요",
           priceLabel: "$20/월",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "구독하기",
           features: [
             "월간 800 크레딧",
@@ -483,7 +483,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Team",
           description: "함께 협업하고 혁신하세요",
           priceLabel: "$500/월",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "구독하기",
           features: [
             "월간 20,000 크레딧",
@@ -498,7 +498,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "대규모 조직을 위한 맞춤 플랜",
           priceLabel: "별도 문의",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "지금 시작하기",
           tone: "primary",
           features: [
@@ -617,7 +617,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "커뮤니티",
           description: "동일한 품질의 Community 에디션 무료 라이선스를 다운로드하세요",
           priceLabel: "무료",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "지금 설치하기",
           features: [
             "최대 5명 사용자",
@@ -632,7 +632,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "스탠다드",
           description: "Community 에디션에 만족하신 사용자에게만 제공되며, 연간 결제만 가능합니다",
           priceLabel: "$50/월/사용자",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "구매하기",
           features: [
             "최소 10명 사용자",
@@ -650,7 +650,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "전문적인 도입 지원과 서비스를 원하는 팀에 추천합니다",
           priceLabel: "별도 문의",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "문의하기",
           tone: "primary",
           features: [
@@ -726,7 +726,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Starter",
           description: "はじめての利用に最適",
           priceLabel: "$20/月",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "利用を開始する",
           features: [
             "月間800クレジット",
@@ -740,7 +740,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Team",
           description: "チームでの協働作業に最適",
           priceLabel: "$500/月",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "利用を開始する",
           features: [
             "月間20,000クレジット",
@@ -755,7 +755,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "大規模組織向けの包括的プラン",
           priceLabel: "個別見積もり",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "今すぐ試す",
           tone: "primary",
           features: [
@@ -874,7 +874,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "コミュニティ",
           description: "同じ品質のCommunity版の無料ライセンスをダウンロードして取得",
           priceLabel: "$0/月",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "今すぐダウンロード",
           features: [
             "最大5ユーザーまで利用可能",
@@ -889,7 +889,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "スタンダード",
           description: "コミュニティ版にご満足の利用者に限定して提供。年間契約のみ。",
           priceLabel: "$50/人・月",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "お問い合わせ",
           features: [
             "10ユーザー以上",
@@ -907,7 +907,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "プロフェッショナルな導入サポートとサービスを求めるチームにおすすめ",
           priceLabel: "個別見積もり",
-          href: "/docs",
+          href: "/features/documentation",
           ctaLabel: "お問い合わせ",
           tone: "primary",
           features: [

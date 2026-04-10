@@ -29,11 +29,7 @@ export default async function DemoPage({ params, searchParams }: DemoPageProps) 
   const selectedCategory: DemoCategorySlug =
     isDemoCategorySlug(category) && category !== "all" ? category : "all";
 
-  const copy = {
-    en: { title: "Demo" },
-    ko: { title: "데모" },
-    ja: { title: "Demo" },
-  }[locale];
+  const copy = { title: "Demo" };
 
   const demoItems = (await readContentState("demo"))
     .filter((item) => item.status === "published");

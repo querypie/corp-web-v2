@@ -1,4 +1,4 @@
-import type { Locale } from "@/constants/i18n";
+import { getLocalePath, type Locale } from "@/constants/i18n";
 import { demoCategoryConfigs, getCategoryLabel, type DemoCategorySlug } from "./config";
 
 type DemoStaticSource = {
@@ -52,7 +52,11 @@ Put review, escalation, and execution evidence into the same workflow.`,
     },
     categorySlug: "aip-features",
     date: "2026-03-12",
+<<<<<<< HEAD
+    imageSrc: "/images/common/fallback-contents.jpg",
+=======
     imageSrc: "/uploads/article-02.png",
+>>>>>>> origin/main
     slug: "guardrail-design",
     title: {
       en: "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
@@ -81,7 +85,11 @@ Put review, escalation, and execution evidence into the same workflow.`,
     },
     categorySlug: "acp-features",
     date: "2026-03-08",
+<<<<<<< HEAD
+    imageSrc: "/images/common/fallback-contents.jpg",
+=======
     imageSrc: "/uploads/article-03.png",
+>>>>>>> origin/main
     slug: "ai-security-map",
     title: {
       en: "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
@@ -98,7 +106,7 @@ export function getStaticDemoEntries(locale: Locale): DemoStaticEntry[] {
     category: getCategoryLabel(demoCategoryConfigs, source.categorySlug, locale),
     categorySlug: source.categorySlug,
     date: source.date,
-    href: `/${locale}/demo/${source.slug}`,
+    href: getLocalePath(locale, `/demo/${source.slug}`),
     imageSrc: source.imageSrc,
     slug: source.slug,
     title: source.title[locale],

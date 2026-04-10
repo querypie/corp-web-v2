@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
-import type { Locale } from "./i18n";
+import { getLocalePath, type Locale } from "./i18n";
 
 type PrivacyPolicySourceLocale = "en" | "ko";
 
@@ -43,7 +43,9 @@ export async function getPrivacyPolicyVersionOptions(locale: Locale) {
   const versions = await getPrivacyPolicyVersions(locale);
 
   return versions.map((version, index) => ({
-    href: index === 0 ? `/${locale}/privacy-policy` : `/${locale}/privacy-policy/${version}`,
+    href: index === 0
+      ? getLocalePath(locale, "/privacy-policy")
+      : getLocalePath(locale, `/privacy-policy/${version}`),
     label: version,
     value: version,
   }));

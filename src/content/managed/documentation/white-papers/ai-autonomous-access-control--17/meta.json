@@ -14,6 +14,20 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-17.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-17.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp17-1-ai-execution-flow.webp",
+          "webPath": "/documentation/white-papers/wp17-1-ai-execution-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp17-2-key-components-of-querypie-mcp-pam.webp",
+          "webPath": "/documentation/white-papers/wp17-2-key-components-of-querypie-mcp-pam.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-17.webp",
           "webPath": "/white-paper/wp-thumb-17.webp"
         },
@@ -26,6 +40,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp17-2-key-components-of-querypie-mcp-pam.webp",
           "webPath": "/white-paper/wp17-2-key-components-of-querypie-mcp-pam.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/ai-autonomous-access-control--17/en.mdx",
@@ -57,8 +72,13 @@
         "AI Infrastructure Security"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-17.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AI Can Drive Itself—Why Not Secure Itself? Introducing Autonomous Access Control\"\ndescription: \"In an era where AI directly executes system operations, traditional security models are no longer enough. This white paper introduces a new security paradigm for MCP-based AI execution environments—QueryPie MCP PAM—and outlines strategic approaches to achieving Autonomous Access Control.\"\ndate: \"2025-04-14\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-17.webp\"\nkeywords: [\"AI Security\", \"Executional AI\", \"MCP\", \"Model Context Protocol\", \"Autonomous Access Control\", \"Agentic AI\", \"AI Execution Control\", \"AI-PAM\", \"QueryPie\", \"MCP PAM\", \"AI-SPM\", \"CNAPP\", \"Just-In-Time Privileges\", \"Real-Time Execution Enforcement\", \"AI Governance\", \"OPA\", \"Cedar\", \"AI Agent Security\", \"Prompt Injection Mitigation\", \"Principle of Least Privilege\", \"AI Infrastructure Security\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/16/next-step-mcp-pam\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
+=======
       "ogImage": "/white-paper/wp-thumb-17.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AI Can Drive Itself—Why Not Secure Itself? Introducing Autonomous Access Control\"\ndescription: \"In an era where AI directly executes system operations, traditional security models are no longer enough. This white paper introduces a new security paradigm for MCP-based AI execution environments—QueryPie MCP PAM—and outlines strategic approaches to achieving Autonomous Access Control.\"\ndate: \"2025-04-14\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-17.webp\"\nkeywords: [\"AI Security\", \"Executional AI\", \"MCP\", \"Model Context Protocol\", \"Autonomous Access Control\", \"Agentic AI\", \"AI Execution Control\", \"AI-PAM\", \"QueryPie\", \"MCP PAM\", \"AI-SPM\", \"CNAPP\", \"Just-In-Time Privileges\", \"Real-Time Execution Enforcement\", \"AI Governance\", \"OPA\", \"Cedar\", \"AI Agent Security\", \"Prompt Injection Mitigation\", \"Principle of Least Privilege\", \"AI Infrastructure Security\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/16/next-step-mcp-pam\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era",
         "/features/documentation/white-paper/16/next-step-mcp-pam",
@@ -73,7 +93,11 @@
         "description": "In an era where AI directly executes system operations, traditional security models are no longer enough. This white paper introduces a new security paradigm for MCP-based AI execution environments—QueryPie MCP PAM—and outlines strategic approaches to achieving Autonomous Access Control.",
         "date": "2025-04-14",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-17.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-17.webp",
+>>>>>>> origin/main
         "keywords": [
           "AI Security",
           "Executional AI",
@@ -108,6 +132,20 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-17.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-17.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp17-1-ai-execution-flow.webp",
+          "webPath": "/documentation/white-papers/wp17-1-ai-execution-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp17-2-key-components-of-querypie-mcp-pam.webp",
+          "webPath": "/documentation/white-papers/wp17-2-key-components-of-querypie-mcp-pam.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-17.webp",
           "webPath": "/white-paper/wp-thumb-17.webp"
         },
@@ -120,6 +158,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp17-2-key-components-of-querypie-mcp-pam.webp",
           "webPath": "/white-paper/wp17-2-key-components-of-querypie-mcp-pam.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/ai-autonomous-access-control--17/ko.mdx",
@@ -151,8 +190,13 @@
         "AI 인프라 보안"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-17.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AI 자율주행? 자율보안! 그리고 자율접근제어(Autonomous Access Control) \"\ndescription: \"AI가 직접 시스템을 실행하는 시대, 기존 보안 체계로는 부족합니다. 본 화이트페이퍼는 MCP 기반 AI 실행 환경에서의 새로운 보안 패러다임—QueryPie MCP PAM—을 소개하며, 자율 접근제어(Autonomous Access Control)의 실현을 위한 전략을 제시합니다.\"\ndate: \"2025-04-14\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-17.webp\"\nkeywords: [\"AI 보안\", \"실행형 AI\", \"MCP\", \"Model Context Protocol\", \"Autonomous Access Control\", \"Agentic AI\", \"AI 실행 통제\", \"AI-PAM\", \"QueryPie\", \"MCP PAM\", \"AI-SPM\", \"CNAPP\", \"Just-In-Time 권한\", \"실행 시점 통제\", \"AI 거버넌스\", \"OPA\", \"Cedar\", \"AI 에이전트 보안\", \"프롬프트 인젝션 대응\", \"최소 권한 원칙\", \"AI 인프라 보안\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/16/next-step-mcp-pam\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
+=======
       "ogImage": "/white-paper/wp-thumb-17.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AI 자율주행? 자율보안! 그리고 자율접근제어(Autonomous Access Control) \"\ndescription: \"AI가 직접 시스템을 실행하는 시대, 기존 보안 체계로는 부족합니다. 본 화이트페이퍼는 MCP 기반 AI 실행 환경에서의 새로운 보안 패러다임—QueryPie MCP PAM—을 소개하며, 자율 접근제어(Autonomous Access Control)의 실현을 위한 전략을 제시합니다.\"\ndate: \"2025-04-14\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-17.webp\"\nkeywords: [\"AI 보안\", \"실행형 AI\", \"MCP\", \"Model Context Protocol\", \"Autonomous Access Control\", \"Agentic AI\", \"AI 실행 통제\", \"AI-PAM\", \"QueryPie\", \"MCP PAM\", \"AI-SPM\", \"CNAPP\", \"Just-In-Time 권한\", \"실행 시점 통제\", \"AI 거버넌스\", \"OPA\", \"Cedar\", \"AI 에이전트 보안\", \"프롬프트 인젝션 대응\", \"최소 권한 원칙\", \"AI 인프라 보안\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/16/next-step-mcp-pam\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era",
         "/features/documentation/white-paper/16/next-step-mcp-pam",
@@ -167,7 +211,11 @@
         "description": "AI가 직접 시스템을 실행하는 시대, 기존 보안 체계로는 부족합니다. 본 화이트페이퍼는 MCP 기반 AI 실행 환경에서의 새로운 보안 패러다임—QueryPie MCP PAM—을 소개하며, 자율 접근제어(Autonomous Access Control)의 실현을 위한 전략을 제시합니다.",
         "date": "2025-04-14",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-17.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-17.webp",
+>>>>>>> origin/main
         "keywords": [
           "AI 보안",
           "실행형 AI",
@@ -202,6 +250,20 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-17.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-17.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp17-1-ai-execution-flow.webp",
+          "webPath": "/documentation/white-papers/wp17-1-ai-execution-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp17-2-key-components-of-querypie-mcp-pam.webp",
+          "webPath": "/documentation/white-papers/wp17-2-key-components-of-querypie-mcp-pam.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-17.webp",
           "webPath": "/white-paper/wp-thumb-17.webp"
         },
@@ -214,6 +276,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp17-2-key-components-of-querypie-mcp-pam.webp",
           "webPath": "/white-paper/wp17-2-key-components-of-querypie-mcp-pam.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/ai-autonomous-access-control--17/ja.mdx",
@@ -223,8 +286,13 @@
       "hideTableOfContents": false,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-17.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AIは自動運転が可能に - であれば、AIが自らを保護できないのか？自律型アクセス制御のご紹介\"\ndescription: \"AIは今や単なる言語生成を超え、実行主体として進化しています。Model Context Protocol（MCP）は、AIエージェントが安全にAPIやSaaSツールと連携し、実世界の操作を実行できるようにする新しいインターフェースです。QueryPie MCP PAMは、従来のアクセス制御を超え、AI時代のためのリアルタイムかつポリシー駆動のセキュリティを実現します。\"\ndate: \"2025-04-14\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-17.webp\"\nkeywords: [\n  \"AIセキュリティ\",\n  \"実行型AI\",\n  \"MCP\",\n  \"モデルコンテキストプロトコル\",\n  \"自律的アクセス制御\",\n  \"エージェント型AI\",\n  \"AI実行制御\",\n  \"AI-PAM\",\n  \"QueryPie\",\n  \"MCP PAM\",\n  \"AI-SPM\",\n  \"CNAPP\",\n  \"ジャストインタイム特権\",\n  \"リアルタイム実行制御\",\n  \"AIガバナンス\",\n  \"OPA\",\n  \"Cedar\",\n  \"AIエージェントセキュリティ\",\n  \"プロンプトインジェクション対策\",\n  \"最小権限の原則\",\n  \"AIインフラセキュリティ\"\n]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/16/next-step-mcp-pam\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
+=======
       "ogImage": "/white-paper/wp-thumb-17.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"AIは自動運転が可能に - であれば、AIが自らを保護できないのか？自律型アクセス制御のご紹介\"\ndescription: \"AIは今や単なる言語生成を超え、実行主体として進化しています。Model Context Protocol（MCP）は、AIエージェントが安全にAPIやSaaSツールと連携し、実世界の操作を実行できるようにする新しいインターフェースです。QueryPie MCP PAMは、従来のアクセス制御を超え、AI時代のためのリアルタイムかつポリシー駆動のセキュリティを実現します。\"\ndate: \"2025-04-14\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-17.webp\"\nkeywords: [\n  \"AIセキュリティ\",\n  \"実行型AI\",\n  \"MCP\",\n  \"モデルコンテキストプロトコル\",\n  \"自律的アクセス制御\",\n  \"エージェント型AI\",\n  \"AI実行制御\",\n  \"AI-PAM\",\n  \"QueryPie\",\n  \"MCP PAM\",\n  \"AI-SPM\",\n  \"CNAPP\",\n  \"ジャストインタイム特権\",\n  \"リアルタイム実行制御\",\n  \"AIガバナンス\",\n  \"OPA\",\n  \"Cedar\",\n  \"AIエージェントセキュリティ\",\n  \"プロンプトインジェクション対策\",\n  \"最小権限の原則\",\n  \"AIインフラセキュリティ\"\n]\nrelatedPosts:\n  - \"/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era\"\n  - \"/features/documentation/white-paper/16/next-step-mcp-pam\"\n  - \"/features/documentation/white-paper/9/penetration-testing-standard\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era",
         "/features/documentation/white-paper/16/next-step-mcp-pam",
@@ -239,7 +307,11 @@
         "description": "AIは今や単なる言語生成を超え、実行主体として進化しています。Model Context Protocol（MCP）は、AIエージェントが安全にAPIやSaaSツールと連携し、実世界の操作を実行できるようにする新しいインターフェースです。QueryPie MCP PAMは、従来のアクセス制御を超え、AI時代のためのリアルタイムかつポリシー駆動のセキュリティを実現します。",
         "date": "2025-04-14",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-17.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-17.webp",
+>>>>>>> origin/main
         "keywords": "[",
         "relatedPosts": [
           "/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era",

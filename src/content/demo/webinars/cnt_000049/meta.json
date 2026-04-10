@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "querypie-server-management-ja",
+  "imageSrc": "/demo/webinars/3dk-ep3-ja.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000049",
+  "summary": {
+    "en": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。",
+    "ko": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。",
+    "ja": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。"
+  },
+  "title": {
+    "en": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー",
+    "ko": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー",
+    "ja": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000049/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000049/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000049/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000049/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000049/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000049/ja.tiptap.json"
+    }
+  }
+}

@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-general-1.webp",
+          "webPath": "/demo/acp-features/tu-thumb-general-1.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-general-1.webp",
           "webPath": "/tutorial/tu-thumb-general-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrate-sso-with-okta--26/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-general-1.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Integrate SSO with Okta\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-general-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+=======
       "ogImage": "/tutorial/tu-thumb-general-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Integrate SSO with Okta\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-general-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/25/review-audit-logs"
       ],
@@ -38,7 +48,11 @@
         "title": "How to Integrate SSO with Okta",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-general-1.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-general-1.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -50,8 +64,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-general-1.webp",
+          "webPath": "/demo/acp-features/tu-thumb-general-1.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-general-1.webp",
           "webPath": "/tutorial/tu-thumb-general-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrate-sso-with-okta--26/ko.mdx",
@@ -61,8 +80,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-general-1.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"SSO 통합 환경을 위한 Okta 연동 가이드\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-general-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+=======
       "ogImage": "/tutorial/tu-thumb-general-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"SSO 통합 환경을 위한 Okta 연동 가이드\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-general-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/25/review-audit-logs"
       ],
@@ -74,7 +98,11 @@
         "title": "SSO 통합 환경을 위한 Okta 연동 가이드",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-general-1.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-general-1.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -86,8 +114,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-general-1.webp",
+          "webPath": "/demo/acp-features/tu-thumb-general-1.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-general-1.webp",
           "webPath": "/tutorial/tu-thumb-general-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/integrate-sso-with-okta--26/ja.mdx",
@@ -97,8 +130,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-general-1.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"OktaでSSOを統合する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-general-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+=======
       "ogImage": "/tutorial/tu-thumb-general-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"OktaでSSOを統合する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-general-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/25/review-audit-logs\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/25/review-audit-logs"
       ],
@@ -110,7 +148,11 @@
         "title": "OktaでSSOを統合する方法",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-general-1.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-general-1.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

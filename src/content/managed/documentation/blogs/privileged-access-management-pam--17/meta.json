@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-17.webp",
+          "webPath": "/documentation/blogs/b-thumb-17.webp"
+=======
           "sourcePath": "public/blog/b-thumb-17.webp",
           "webPath": "/blog/b-thumb-17.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/privileged-access-management-pam--17/en.mdx",
@@ -29,8 +34,13 @@
         "AI-pam"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-17.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Demystifying Privileged Access Management: Insights, Comparisons, and Practical Applications\"\ndescription: \"Discover how PAM strengthens security by managing and monitoring privileged access, reducing risks to critical data.\"\ndate: \"2025-01-23\"\nogImage: \"public/documentation/blogs/b-thumb-17.webp\"\nkeywords: [\"Privileged access management\", \"pam\", \"AI-pam\"]\nrelatedPosts:\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
+=======
       "ogImage": "/blog/b-thumb-17.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Demystifying Privileged Access Management: Insights, Comparisons, and Practical Applications\"\ndescription: \"Discover how PAM strengthens security by managing and monitoring privileged access, reducing risks to critical data.\"\ndate: \"2025-01-23\"\nogImage: \"public/blog/b-thumb-17.webp\"\nkeywords: [\"Privileged access management\", \"pam\", \"AI-pam\"]\nrelatedPosts:\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/4/multi-cloud-kubernetes-access-control",
         "/features/documentation/blog/7/command-bypass-prevention-control",
@@ -44,7 +54,11 @@
         "title": "Demystifying Privileged Access Management: Insights, Comparisons, and Practical Applications",
         "description": "Discover how PAM strengthens security by managing and monitoring privileged access, reducing risks to critical data.",
         "date": "2025-01-23",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-17.webp",
+=======
         "ogImage": "public/blog/b-thumb-17.webp",
+>>>>>>> origin/main
         "keywords": [
           "Privileged access management",
           "pam",

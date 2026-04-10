@@ -10,6 +10,33 @@ export function splitMarkdownBlocks(markdown: string) {
   let buffer: string[] = [];
   let inCodeBlock = false;
 
+<<<<<<< HEAD
+  function getListType(line: string) {
+    if (/^\s*[-*]\s+/.test(line)) {
+      return "bullet";
+    }
+
+    if (/^\s*\d+\.\s+/.test(line)) {
+      return "ordered";
+    }
+
+    return null;
+  }
+
+  function isTableLine(line: string) {
+    return /^\s*\|.*\|\s*$/.test(line);
+  }
+
+  function isBlockquoteLine(line: string) {
+    return /^\s*>\s?/.test(line);
+  }
+
+  function isHeadingLine(line: string) {
+    return /^\s{0,3}#{1,6}\s+/.test(line);
+  }
+
+=======
+>>>>>>> origin/main
   function flush() {
     const nextBlock = buffer.join("\n").trim();
 
@@ -22,6 +49,13 @@ export function splitMarkdownBlocks(markdown: string) {
 
   for (const line of lines) {
     if (/^```/.test(line.trim())) {
+<<<<<<< HEAD
+      if (!inCodeBlock && buffer.length > 0) {
+        flush();
+      }
+
+=======
+>>>>>>> origin/main
       buffer.push(line);
       inCodeBlock = !inCodeBlock;
 
@@ -41,7 +75,46 @@ export function splitMarkdownBlocks(markdown: string) {
       continue;
     }
 
+<<<<<<< HEAD
+    const currentListType = getListType(line);
+    const previousListType = getListType(buffer[buffer.length - 1] ?? "");
+    const currentIsTable = isTableLine(line);
+    const previousIsTable = isTableLine(buffer[buffer.length - 1] ?? "");
+    const currentIsBlockquote = isBlockquoteLine(line);
+    const previousIsBlockquote = isBlockquoteLine(buffer[buffer.length - 1] ?? "");
+    const currentIsHeading = isHeadingLine(line);
+    const previousIsHeading = isHeadingLine(buffer[buffer.length - 1] ?? "");
+
+    if (buffer.length > 0) {
+      if (currentIsHeading || previousIsHeading) {
+        flush();
+      }
+
+      if (currentIsBlockquote !== previousIsBlockquote) {
+        flush();
+      }
+
+      if (currentIsTable !== previousIsTable) {
+        flush();
+      }
+
+      if (currentListType && currentListType !== previousListType) {
+        flush();
+      }
+
+      if (!currentListType && previousListType) {
+        flush();
+      }
+    }
+
     buffer.push(line);
+
+    if (currentIsHeading) {
+      flush();
+    }
+=======
+    buffer.push(line);
+>>>>>>> origin/main
   }
 
   flush();

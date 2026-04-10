@@ -3,6 +3,7 @@ type FooterSection = {
   title: string;
 };
 import { getFooterHref, getLegalHref } from "../../constants/navigation";
+import { getLocalePath, type Locale } from "../../constants/i18n";
 
 type FooterProps = {
   addressLines?: string[];
@@ -59,7 +60,11 @@ export default function Footer({
   return (
     <footer
       className={cx(
+<<<<<<< HEAD
+        "relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10 md:bg-[radial-gradient(93.31%_130%_at_50%_100%,rgba(255,132,64,0.58)_0%,rgba(255,112,48,0.34)_24%,rgba(255,94,38,0.18)_48%,rgba(255,94,38,0.00)_72%)]",
+=======
         "relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10 md:bg-[radial-gradient(93.31%_130%_at_50%_100%,rgba(255,179,133,0.50)_0%,rgba(255,143,102,0.28)_30%,rgba(255,109,71,0.14)_52%,rgba(255,109,71,0.00)_72%)]",
+>>>>>>> origin/main
         className,
       )}
     >
@@ -67,7 +72,7 @@ export default function Footer({
       <div className="relative flex w-full max-w-[1200px] flex-col gap-[60px] border-t border-border py-[60px]">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
           {/* 좌측 로고 */}
-          <a aria-label="QueryPie AI" className="inline-flex h-5 w-[116px] shrink-0 items-center" href={`/${locale}`}>
+          <a aria-label="QueryPie AI" className="inline-flex h-5 w-[116px] shrink-0 items-center" href={getLocalePath(locale as Locale, "/")}>
             <img
               alt="QueryPie AI"
               className="block h-5 w-[116px]"

@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "apply-data-access-policies",
+  "imageSrc": "/demo/acp-features/tu-thumb-dac-4.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000029",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "How to Apply Data Access Policies",
+    "ko": "데이터 접근 제한 정책 설정하기",
+    "ja": "データアクセスポリシーを適用する方法"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000029/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000029/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000029/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000029/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000029/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000029/ja.tiptap.json"
+    }
+  }
+}

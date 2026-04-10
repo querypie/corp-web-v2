@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2025-01-06",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "superb-ai-hyun-kim",
+  "imageSrc": "/demo/use-cases/cs-thumb-superb.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000093",
+  "summary": {
+    "en": "In this video, we have the privilege of featuring Hyun Kim, the CEO and Founder of Superb AI.",
+    "ko": "MLOps 솔루션을 제공하는 Superb AI의 CEO Hyun Kim은 AI와 컴플라이언스 관계를 재차 강조했습니다. 그 이유는 무엇일까요? 지금 바로 만나보세요!",
+    "ja": "このビデオでは、Superb AIのCEO兼創設者であるHyun Kim氏をお迎えし、彼のインサイトをお届けします。"
+  },
+  "title": {
+    "en": "\\\"The adoption of AI in traditional industries hinges on data and security as the keys to success.\\\"",
+    "ko": "\\\"전통 산업에서의 AI 도입은 데이터와 보안이 성공의 핵심 요소입니다.\\\"",
+    "ja": "「伝統産業のAI導入、データとセキュリティが成功の核心要素です。」"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000093/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000093/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000093/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000093/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000093/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000093/ja.tiptap.json"
+    }
+  }
+}

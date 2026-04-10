@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "cloud-certification-shortest-path",
+  "imageSrc": "/demo/webinars/wb-thumb-1.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000031",
+  "summary": {
+    "en": "Are you going round in circles trying to get certified? Discover the shortest path to getting certified in the cloud era with our best practices.",
+    "ko": "ISMS 인증을 받기 위해 계속 방황하고 계신가요? 우리의 베스트 프랙티스로 클라우드 시대에서 인증을 빠르게 취득할 수 있는 최단 경로를 확인하세요.",
+    "ja": "ISMS悪夢をご覧になっていますか？ 認証を受けるためにぐるぐる回っているなら、ここAWSウェビナーの核心整理内容を確認してみてください！"
+  },
+  "title": {
+    "en": "Discover the shortest path to getting certified in the cloud era with our best practices",
+    "ko": "클라우드 시대에서 ISMS 인증을 빠르게 취득할 수 있는 최단 경로를 알아보세요!",
+    "ja": "ベストプラクティスで探るクラウド時代における認定資格を取得する最善の方法"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000031/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000031/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000031/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000031/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000031/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000031/ja.tiptap.json"
+    }
+  }
+}

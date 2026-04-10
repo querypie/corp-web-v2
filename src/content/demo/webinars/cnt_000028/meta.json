@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2024-12-05",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": false,
+  "id": "querypie-japan-webinar-security",
+  "imageSrc": "/demo/webinars/wb-thumb-15.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000028",
+  "summary": {
+    "en": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！",
+    "ko": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！",
+    "ja": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！"
+  },
+  "title": {
+    "en": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
+    "ko": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
+    "ja": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000028/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000028/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000028/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000028/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000028/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000028/ja.tiptap.json"
+    }
+  }
+}

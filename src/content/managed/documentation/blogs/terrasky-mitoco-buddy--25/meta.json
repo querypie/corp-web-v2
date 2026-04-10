@@ -14,6 +14,25 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/company/news/news-21.webp",
+          "webPath": "/company/news/news-21.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog25-image-1.webp",
+          "webPath": "/documentation/blogs/blog25-image-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog25-image-2.webp",
+          "webPath": "/documentation/blogs/blog25-image-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog25-image-3.webp",
+          "webPath": "/documentation/blogs/blog25-image-3.webp"
+=======
           "sourcePath": "public/news/news-21.webp",
           "webPath": "/news/news-21.webp"
         },
@@ -31,6 +50,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog25-image-3.webp",
           "webPath": "/blog/blog25-image-3.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/terrasky-mitoco-buddy--25/ja.mdx",
@@ -61,8 +81,13 @@
         "AI効率化"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/company/news/news-21.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie AI、株式会社テラスカイと協業しAIエージェント「mitoco Buddy」を発表\"\ndescription: \"QueryPie AI合同会社（本社：東京都港区、共同代表：Brant Hwang、以下「QueryPie AI」）は、株式会社テラスカイ（本社：東京都中央区、代表取締役CEO 社長執行役員：佐藤 秀哉、以下「テラスカイ」）と、AIエージェント事業分野において協業することを発表しました。本協業により、QueryPie AIのエンタープライズ向けAIプラットフォーム「QueryPie AI Platform（AIP）」が、テラスカイの新サービス「mitoco Buddy」に採用され、企業内に乱立するクラウドサービスを統合し、情報連携およびデータ活用を促進することで、意思決定の加速化と業務自動化を支援します。\"\ndate: \"2025-11-07\"\nauthor: \"\"\nogImage: \"public/company/news/news-21.webp\"\nkeywords: [\"AIエージェント\", \"QueryPie AI\", \"テラスカイ\", \"mitoco Buddy\", \"MCP\", \"Model Context Protocol\", \"AIプラットフォーム\", \"クラウド統合\", \"業務自動化\", \"DX推進\", \"エンタープライズAI\", \"データ活用\", \"意思決定支援\", \"戦略的パートナーシップ\", \"日本進出\", \"韓国スタートアップ\", \"AI統合\", \"クラウドサービス\", \"情報連携\", \"AI効率化\"]\nrelatedPosts:\n  - \"/features/documentation/blog/23/querypie-payroll-partnership\"\n  - \"/features/documentation/blog/22/ai-agent-security-replit-case\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"",
+=======
       "ogImage": "/news/news-21.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie AI、株式会社テラスカイと協業しAIエージェント「mitoco Buddy」を発表\"\ndescription: \"QueryPie AI合同会社（本社：東京都港区、共同代表：Brant Hwang、以下「QueryPie AI」）は、株式会社テラスカイ（本社：東京都中央区、代表取締役CEO 社長執行役員：佐藤 秀哉、以下「テラスカイ」）と、AIエージェント事業分野において協業することを発表しました。本協業により、QueryPie AIのエンタープライズ向けAIプラットフォーム「QueryPie AI Platform（AIP）」が、テラスカイの新サービス「mitoco Buddy」に採用され、企業内に乱立するクラウドサービスを統合し、情報連携およびデータ活用を促進することで、意思決定の加速化と業務自動化を支援します。\"\ndate: \"2025-11-07\"\nauthor: \"\"\nogImage: \"public/news/news-21.webp\"\nkeywords: [\"AIエージェント\", \"QueryPie AI\", \"テラスカイ\", \"mitoco Buddy\", \"MCP\", \"Model Context Protocol\", \"AIプラットフォーム\", \"クラウド統合\", \"業務自動化\", \"DX推進\", \"エンタープライズAI\", \"データ活用\", \"意思決定支援\", \"戦略的パートナーシップ\", \"日本進出\", \"韓国スタートアップ\", \"AI統合\", \"クラウドサービス\", \"情報連携\", \"AI効率化\"]\nrelatedPosts:\n  - \"/features/documentation/blog/23/querypie-payroll-partnership\"\n  - \"/features/documentation/blog/22/ai-agent-security-replit-case\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/23/querypie-payroll-partnership",
         "/features/documentation/blog/22/ai-agent-security-replit-case",
@@ -77,7 +102,11 @@
         "description": "QueryPie AI合同会社（本社：東京都港区、共同代表：Brant Hwang、以下「QueryPie AI」）は、株式会社テラスカイ（本社：東京都中央区、代表取締役CEO 社長執行役員：佐藤 秀哉、以下「テラスカイ」）と、AIエージェント事業分野において協業することを発表しました。本協業により、QueryPie AIのエンタープライズ向けAIプラットフォーム「QueryPie AI Platform（AIP）」が、テラスカイの新サービス「mitoco Buddy」に採用され、企業内に乱立するクラウドサービスを統合し、情報連携およびデータ活用を促進することで、意思決定の加速化と業務自動化を支援します。",
         "date": "2025-11-07",
         "author": "",
+<<<<<<< HEAD
+        "ogImage": "public/company/news/news-21.webp",
+=======
         "ogImage": "public/news/news-21.webp",
+>>>>>>> origin/main
         "keywords": [
           "AIエージェント",
           "QueryPie AI",

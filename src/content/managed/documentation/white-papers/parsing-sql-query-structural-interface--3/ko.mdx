@@ -5,7 +5,11 @@ title: "다양한 벤더의 SQL 파싱하는 핵심 기술, QSI(Query Structural
 description: "다양한 데이터베이스 쿼리 언어와 문법 차이로 일관된 접근 제어와 모니터링이 어려운 상황에서, 여러 데이터베이스 쿼리를 통합하고 실시간 분석을 통해 보안을 강화하는 솔루션을 확인해보세요!"
 date: "2024-11-22"
 author: "evan"
+<<<<<<< HEAD
+ogImage: "public/documentation/white-papers/wp-thumb-3.webp"
+=======
 ogImage: "public/white-paper/wp-thumb-3.webp"
+>>>>>>> origin/main
 keywords: ["QueryPie", "QSI technology", "SQL parsing", "cross-vendor compatibility", "database efficiency"]
 relatedPosts:
   - "/features/documentation/white-paper/4/transaction-free-change-data-capture-system"
@@ -55,7 +59,11 @@ relatedPosts:
 
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-1-execution-phases.webp"
+=======
         filepath="public/white-paper/wp3-1-execution-phases.webp"
+>>>>>>> origin/main
         alt="Execution Phases"
     />
 </Box>
@@ -86,7 +94,11 @@ RAW AST 는 입력된 데이터베이스 쿼리를 파싱하는 원시 파서가
 **MySQL (ANTLR4)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-2-MySQL-ANTLR4.webp"
+=======
         filepath="public/white-paper/wp3-2-MySQL-ANTLR4.webp"
+>>>>>>> origin/main
         alt="MySQL (ANTLR4)"
     />
 </Box>
@@ -94,7 +106,11 @@ RAW AST 는 입력된 데이터베이스 쿼리를 파싱하는 원시 파서가
 **Oracle (ANTLR4)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-3-Oracle-ANTLR4.webp"
+=======
         filepath="public/white-paper/wp3-3-Oracle-ANTLR4.webp"
+>>>>>>> origin/main
         alt="Oracle (ANTLR4)"
     />
 </Box>
@@ -102,7 +118,11 @@ RAW AST 는 입력된 데이터베이스 쿼리를 파싱하는 원시 파서가
 **PostgreSQL (YACC)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-4-PostgreSQL-YACC.webp"
+=======
         filepath="public/white-paper/wp3-4-PostgreSQL-YACC.webp"
+>>>>>>> origin/main
         alt="PostgreSQL (YACC)"
     />
 </Box>
@@ -116,7 +136,11 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `actor` 라는 식별자는 데이터베이스에 저장된 특정 테이블을 참조하여 데이터를 가져오는 연산을 수행합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-5-qsi-ast-Data-Reference.webp"
+=======
         filepath="public/white-paper/wp3-5-qsi-ast-Data-Reference.webp"
+>>>>>>> origin/main
         alt="Data Reference"
     />
 </Box>
@@ -126,7 +150,11 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `SELECT name AS n FROM actor`, 쿼리에서는 `actor` 테이블의 `name` 컬럼에 `n`이라는 별칭을 부여하여, 이를 새로운 형태로 제공합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-6-qsi-ast-Derived-Table.webp"
+=======
         filepath="public/white-paper/wp3-6-qsi-ast-Derived-Table.webp"
+>>>>>>> origin/main
         alt="Derived Table"
     />
 </Box>
@@ -136,7 +164,11 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `SELECT * FROM address JOIN city USING (city_id)`는 `address`와 `city` 테이블을 `city_id`를 기준으로 결합하여, 두 테이블에서 연관된 모든 데이터를 조회합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-7-qsi-ast-Joined-Table.webp"
+=======
         filepath="public/white-paper/wp3-7-qsi-ast-Joined-Table.webp"
+>>>>>>> origin/main
         alt="Joined Table"
     />
 </Box>
@@ -146,7 +178,11 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `SELECT 1 UNION ALL SELECT 2`와 같은 쿼리에서는 두 개의 `SELECT` 결과를 하나의 테이블로 결합하여 반환합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-8-qsi-ast-Compound-Table-Combination.webp"
+=======
         filepath="public/white-paper/wp3-8-qsi-ast-Compound-Table-Combination.webp"
+>>>>>>> origin/main
         alt="Compound Table Combination"
     />
 </Box>
@@ -156,7 +192,11 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `VALUES (1,2), (3,4)`는 두 개의 행과 두 개의 열을 가진 작은 테이블을 생성하여 즉시 사용할 수 있습니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-9-qsi-ast-Inline-Derived-Table.webp"
+=======
         filepath="public/white-paper/wp3-9-qsi-ast-Inline-Derived-Table.webp"
+>>>>>>> origin/main
         alt="Inline Derived Table"
     />
 </Box>
@@ -166,7 +206,11 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `SELECT * FROM table_function()`는 `table_function()`이라는 함수가 반환하는 테이블 형식의 데이터를 조회합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-10-qsi-ast-Table-Function-Call.webp"
+=======
         filepath="public/white-paper/wp3-10-qsi-ast-Table-Function-Call.webp"
+>>>>>>> origin/main
         alt="Table Function Call"
     />
 </Box>
@@ -186,7 +230,11 @@ SELECT 쿼리와 같이 테이블 형식으로 출력되는 쿼리의 분석 결
 - 컬럼 결과에 영향을 주지 않는 WHERE, HAVING 등에 사용된 컬럼을 의미합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-11-analysis-result.webp"
+=======
         filepath="public/white-paper/wp3-11-analysis-result.webp"
+>>>>>>> origin/main
         alt="Analysis Result"
     />
 </Box>
@@ -203,7 +251,11 @@ WHERE a.city_id = c.city_id
 분석 결과
 <Box center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-12-analysis-result-2.webp"
+=======
         filepath="public/white-paper/wp3-12-analysis-result-2.webp"
+>>>>>>> origin/main
         alt="Analysis Result"
     />
 </Box>
@@ -233,7 +285,11 @@ SELECT * FROM actor_view
 분석 결과
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-13-analysis-result-3.webp"
+=======
         filepath="public/white-paper/wp3-13-analysis-result-3.webp"
+>>>>>>> origin/main
         alt="Analysis Result"
     />
 </Box>

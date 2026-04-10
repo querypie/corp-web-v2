@@ -1,0 +1,45 @@
+{
+  "authorName": "evan",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "parsing-sql-query-structural-interface",
+  "imageSrc": "/documentation/white-papers/wp-thumb-3.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000148",
+  "summary": {
+    "en": "Enhance system security with QueryPie's native command control through an advanced SSH proxy architecture.",
+    "ko": "다양한 데이터베이스 쿼리 언어와 문법 차이로 일관된 접근 제어와 모니터링이 어려운 상황에서, 여러 데이터베이스 쿼리를 통합하고 실시간 분석을 통해 보안을 강화하는 솔루션을 확인해보세요!",
+    "ja": "QueryPie の QSI テクノロジーにより、様々なベンダーの SQL を簡単かつ互換性をもって効率的に解析することが可能です。"
+  },
+  "title": {
+    "en": "Core Technology for Parsing SQL Across Multiple Vendors: QSI (Query Structural Interface)",
+    "ko": "다양한 벤더의 SQL 파싱하는 핵심 기술, QSI(Query Structural Interface)",
+    "ja": "さまざまなベンダーのSQL解析のためのコア技術、QSI（Query Structural Interface）"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000148/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000148/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000148/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000148/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000148/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000148/ja.tiptap.json"
+    }
+  }
+}

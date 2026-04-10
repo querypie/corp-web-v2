@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "flex-querypie-secrets",
+  "imageSrc": "/demo/webinars/wb-thumb-4.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000036",
+  "summary": {
+    "en": "Flex, Korea's top HR platform, unveils the surprising revelations they discovered after integrating QueryPie into their system. What hidden magic in QueryPie completely captivated the Flex team and transformed the way they work?",
+    "ko": "Flex, 한국 최고의 HR 플랫폼, QueryPie를 도입한 후 발견한 놀라운 비밀을 공개합니다. QueryPie 속 숨겨진 마법이 어떻게 Flex 팀을 사로잡아 업무 방식을 완전히 변화시켰을까요?",
+    "ja": "韓国最高のHRプラットフォームであるFlexがQueryPieをシステムに導入した後に発見した驚くべき事実を公開します。 果たしてFlexチームを魅了し、業務方式を革新的に変化させたQueryPieの隠された魔法は何でしょうか？"
+  },
+  "title": {
+    "en": "Flex Unveils the Secrets of QueryPie",
+    "ko": "flex가 찾아낸 QueryPie의 비밀을 폭로합니다!",
+    "ja": "Flexが公開するQueryPieの秘密！"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000036/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000036/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000036/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000036/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000036/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000036/ja.tiptap.json"
+    }
+  }
+}

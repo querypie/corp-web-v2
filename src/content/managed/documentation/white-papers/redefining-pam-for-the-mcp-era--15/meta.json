@@ -14,6 +14,35 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-15.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-15.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-1-how-does-mcp-work.webp",
+          "webPath": "/documentation/white-papers/wp15-1-how-does-mcp-work.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-2-security-risks-in-mcp-environments.webp",
+          "webPath": "/documentation/white-papers/wp15-2-security-risks-in-mcp-environments.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-4-core-functions-of-pam.webp",
+          "webPath": "/documentation/white-papers/wp15-4-core-functions-of-pam.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-3-mcp-pam-integration-strategy.webp",
+          "webPath": "/documentation/white-papers/wp15-3-mcp-pam-integration-strategy.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-5-mcp-steps-to-mcp-pam-strategy.webp",
+          "webPath": "/documentation/white-papers/wp15-5-mcp-steps-to-mcp-pam-strategy.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-15.webp",
           "webPath": "/white-paper/wp-thumb-15.webp"
         },
@@ -41,6 +70,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp15-5-mcp-steps-to-mcp-pam-strategy.webp",
           "webPath": "/white-paper/wp15-5-mcp-steps-to-mcp-pam-strategy.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/redefining-pam-for-the-mcp-era--15/en.mdx",
@@ -66,8 +96,13 @@
         "AI infrastructure"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-15.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Security Governance and Integrated PAM Strategy for AI Agents in the Age of the Model Context Protocol (MCP)\"\ndescription: \"Learn how integrating Privileged Access Management (PAM) into the Model Context Protocol (MCP) framework strengthens AI governance, enhances visibility, and mitigates emerging security risks in enterprise environments.\"\ndate: \"2025-04-08\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-15.webp\"\nkeywords: [\"MCP\", \"PAM\", \"Privileged Access Management\", \"Model Context Protocol\", \"MCP PAM\", \"MCP-PAM integration\", \"AI security\", \"AI governance\", \"Zero Trust AI\", \"AI access control\", \"PAM for AI\", \"secure AI agent\", \"enterprise AI security\", \"AI IAM\", \"AI infrastructure\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+=======
       "ogImage": "/white-paper/wp-thumb-15.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Security Governance and Integrated PAM Strategy for AI Agents in the Age of the Model Context Protocol (MCP)\"\ndescription: \"Learn how integrating Privileged Access Management (PAM) into the Model Context Protocol (MCP) framework strengthens AI governance, enhances visibility, and mitigates emerging security risks in enterprise environments.\"\ndate: \"2025-04-08\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-15.webp\"\nkeywords: [\"MCP\", \"PAM\", \"Privileged Access Management\", \"Model Context Protocol\", \"MCP PAM\", \"MCP-PAM integration\", \"AI security\", \"AI governance\", \"Zero Trust AI\", \"AI access control\", \"PAM for AI\", \"secure AI agent\", \"enterprise AI security\", \"AI IAM\", \"AI infrastructure\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/1/personal-data-identification-analysis-ai",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -82,7 +117,11 @@
         "description": "Learn how integrating Privileged Access Management (PAM) into the Model Context Protocol (MCP) framework strengthens AI governance, enhances visibility, and mitigates emerging security risks in enterprise environments.",
         "date": "2025-04-08",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-15.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-15.webp",
+>>>>>>> origin/main
         "keywords": [
           "MCP",
           "PAM",
@@ -111,6 +150,35 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-15.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-15.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-1-how-does-mcp-work.webp",
+          "webPath": "/documentation/white-papers/wp15-1-how-does-mcp-work.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-2-security-risks-in-mcp-environments.webp",
+          "webPath": "/documentation/white-papers/wp15-2-security-risks-in-mcp-environments.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-4-core-functions-of-pam.webp",
+          "webPath": "/documentation/white-papers/wp15-4-core-functions-of-pam.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-3-mcp-pam-integration-strategy.webp",
+          "webPath": "/documentation/white-papers/wp15-3-mcp-pam-integration-strategy.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-5-mcp-steps-to-mcp-pam-strategy.webp",
+          "webPath": "/documentation/white-papers/wp15-5-mcp-steps-to-mcp-pam-strategy.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-15.webp",
           "webPath": "/white-paper/wp-thumb-15.webp"
         },
@@ -138,6 +206,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp15-5-mcp-steps-to-mcp-pam-strategy.webp",
           "webPath": "/white-paper/wp15-5-mcp-steps-to-mcp-pam-strategy.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/redefining-pam-for-the-mcp-era--15/ko.mdx",
@@ -164,8 +233,13 @@
         "AI 통합 전략"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-15.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"MCP(Model Context Protocol) 시대의 PAM(Privileged Access Management)을 재정의 하다.\"\ndescription: \"AI 에이전트가 기업 인프라에 안전하게 접근하려면, 이제는 MCP와 PAM의 결합이 필수입니다. 본 화이트페이퍼에서는 QueryPie가 제안하는 MCP-PAM 통합 전략을 통해 SSH 연결, 터미널 제어, AI 거버넌스까지 아우르는 새로운 보안 아키텍처를 소개합니다.\"\ndate: \"2025-04-08\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-15.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"SSH 연결\", \"QueryPie SSH\", \"SSH 보안\", \"터미널 접근 제어\", \"CLI 워크플로우\", \"MCP PAM\", \"AI 보안\", \"AI 거버넌스\", \"개발자 생산성\", \"특권 접근 관리\", \"엔터프라이즈 보안\", \"AI 인프라\", \"Zero Trust 보안\", \"AI 통합 전략\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+=======
       "ogImage": "/white-paper/wp-thumb-15.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"MCP(Model Context Protocol) 시대의 PAM(Privileged Access Management)을 재정의 하다.\"\ndescription: \"AI 에이전트가 기업 인프라에 안전하게 접근하려면, 이제는 MCP와 PAM의 결합이 필수입니다. 본 화이트페이퍼에서는 QueryPie가 제안하는 MCP-PAM 통합 전략을 통해 SSH 연결, 터미널 제어, AI 거버넌스까지 아우르는 새로운 보안 아키텍처를 소개합니다.\"\ndate: \"2025-04-08\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-15.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"SSH 연결\", \"QueryPie SSH\", \"SSH 보안\", \"터미널 접근 제어\", \"CLI 워크플로우\", \"MCP PAM\", \"AI 보안\", \"AI 거버넌스\", \"개발자 생산성\", \"특권 접근 관리\", \"엔터프라이즈 보안\", \"AI 인프라\", \"Zero Trust 보안\", \"AI 통합 전략\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/1/personal-data-identification-analysis-ai",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -180,7 +254,11 @@
         "description": "AI 에이전트가 기업 인프라에 안전하게 접근하려면, 이제는 MCP와 PAM의 결합이 필수입니다. 본 화이트페이퍼에서는 QueryPie가 제안하는 MCP-PAM 통합 전략을 통해 SSH 연결, 터미널 제어, AI 거버넌스까지 아우르는 새로운 보안 아키텍처를 소개합니다.",
         "date": "2025-04-08",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-15.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-15.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -210,6 +288,35 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-15.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-15.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-1-how-does-mcp-work.webp",
+          "webPath": "/documentation/white-papers/wp15-1-how-does-mcp-work.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-2-security-risks-in-mcp-environments.webp",
+          "webPath": "/documentation/white-papers/wp15-2-security-risks-in-mcp-environments.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-4-core-functions-of-pam.webp",
+          "webPath": "/documentation/white-papers/wp15-4-core-functions-of-pam.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-3-mcp-pam-integration-strategy.webp",
+          "webPath": "/documentation/white-papers/wp15-3-mcp-pam-integration-strategy.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp15-5-mcp-steps-to-mcp-pam-strategy.webp",
+          "webPath": "/documentation/white-papers/wp15-5-mcp-steps-to-mcp-pam-strategy.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-15.webp",
           "webPath": "/white-paper/wp-thumb-15.webp"
         },
@@ -237,6 +344,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp15-5-mcp-steps-to-mcp-pam-strategy.webp",
           "webPath": "/white-paper/wp15-5-mcp-steps-to-mcp-pam-strategy.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/redefining-pam-for-the-mcp-era--15/ja.mdx",
@@ -263,8 +371,13 @@
         "AI統合戦略"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-15.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"MCP(Model Context Protocol)時代のPAM(Privileged Access Management)を再定義する。\"\ndescription: \"AIエージェントが企業インフラに安全にアクセスするためには、これからはMCPとPAMの結合が必須です。 このホワイトペーパーでは、QueryPieが提案するMCP-PAM統合戦略を通じて、SSH接続、ターミナル制御、AIガバナンスまで含めた新しいセキュリティアーキテクチャを紹介します。\"\ndate: \"2025-04-08\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-15.webp\"\nkeywords: [\"QueryPie\", \"クエリーパイ\", \"SSH接続\", \"QueryPie SSH\", \"SSHセキュリティ\", \"ターミナルアクセス制御\", \"CLIワークフロー\", \"MCP PAM\", \"AIセキュリティ\", \"AIガバナンス\", \"開発者の生産性\", \"特権アクセス管理\", \"エンタープライズセキュリティ\", \"AIインフラ\", \"Zero Trustセキュリティ\", \"AI統合戦略\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+=======
       "ogImage": "/white-paper/wp-thumb-15.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"MCP(Model Context Protocol)時代のPAM(Privileged Access Management)を再定義する。\"\ndescription: \"AIエージェントが企業インフラに安全にアクセスするためには、これからはMCPとPAMの結合が必須です。 このホワイトペーパーでは、QueryPieが提案するMCP-PAM統合戦略を通じて、SSH接続、ターミナル制御、AIガバナンスまで含めた新しいセキュリティアーキテクチャを紹介します。\"\ndate: \"2025-04-08\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-15.webp\"\nkeywords: [\"QueryPie\", \"クエリーパイ\", \"SSH接続\", \"QueryPie SSH\", \"SSHセキュリティ\", \"ターミナルアクセス制御\", \"CLIワークフロー\", \"MCP PAM\", \"AIセキュリティ\", \"AIガバナンス\", \"開発者の生産性\", \"特権アクセス管理\", \"エンタープライズセキュリティ\", \"AIインフラ\", \"Zero Trustセキュリティ\", \"AI統合戦略\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"\n  - \"/features/documentation/white-paper/5/preventing-command-bypass\"\n  - \"/features/documentation/white-paper/2/shell-native-command-control-ssh-proxy-architecture\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/1/personal-data-identification-analysis-ai",
         "/features/documentation/white-paper/5/preventing-command-bypass",
@@ -279,7 +392,11 @@
         "description": "AIエージェントが企業インフラに安全にアクセスするためには、これからはMCPとPAMの結合が必須です。 このホワイトペーパーでは、QueryPieが提案するMCP-PAM統合戦略を通じて、SSH接続、ターミナル制御、AIガバナンスまで含めた新しいセキュリティアーキテクチャを紹介します。",
         "date": "2025-04-08",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-15.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-15.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "クエリーパイ",

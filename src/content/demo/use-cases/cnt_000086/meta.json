@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2025-05-18",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "server-access-agent",
+  "imageSrc": "/demo/use-cases/aip-use-case-thumb-3-en.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000086",
+  "summary": {
+    "en": "An AI agent that automates server access requests and management through natural language, streamlining privileged access while maintaining strict security controls.",
+    "ko": "An AI agent that automates server access requests and management through natural language, streamlining privileged access while maintaining strict security controls.",
+    "ja": "自然言語を通じてサーバーアクセスリクエストと管理を自動化するAIエージェント。厳格なセキュリティ管理を維持しながら、特権アクセスを効率化します。"
+  },
+  "title": {
+    "en": "AIP Use Case: Server Access Agent",
+    "ko": "AIP Use Case: Server Access Agent",
+    "ja": "AIP活用事例：サーバーアクセスエージェント"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000086/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000086/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000086/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000086/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000086/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000086/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "apply-data-masking-policies",
+  "imageSrc": "/demo/acp-features/tu-thumb-dac-5.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000030",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "How to Apply Data Masking Policies",
+    "ko": "데이터 마스킹 정책 설정하기",
+    "ja": "データマスキングポリシーを適用する方法"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000030/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000030/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000030/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000030/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000030/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000030/ja.tiptap.json"
+    }
+  }
+}

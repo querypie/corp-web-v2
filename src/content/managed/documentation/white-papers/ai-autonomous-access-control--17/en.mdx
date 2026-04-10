@@ -5,7 +5,11 @@ title: "AI Can Drive Itself—Why Not Secure Itself? Introducing Autonomous Acce
 description: "In an era where AI directly executes system operations, traditional security models are no longer enough. This white paper introduces a new security paradigm for MCP-based AI execution environments—QueryPie MCP PAM—and outlines strategic approaches to achieving Autonomous Access Control."
 date: "2025-04-14"
 author: "kenny"
+<<<<<<< HEAD
+ogImage: "public/documentation/white-papers/wp-thumb-17.webp"
+=======
 ogImage: "public/white-paper/wp-thumb-17.webp"
+>>>>>>> origin/main
 keywords: ["AI Security", "Executional AI", "MCP", "Model Context Protocol", "Autonomous Access Control", "Agentic AI", "AI Execution Control", "AI-PAM", "QueryPie", "MCP PAM", "AI-SPM", "CNAPP", "Just-In-Time Privileges", "Real-Time Execution Enforcement", "AI Governance", "OPA", "Cedar", "AI Agent Security", "Prompt Injection Mitigation", "Principle of Least Privilege", "AI Infrastructure Security"]
 relatedPosts:
   - "/features/documentation/white-paper/15/redefining-pam-for-the-mcp-era"
@@ -26,12 +30,44 @@ While this instruction is phrased in natural language, an AI agent powered by Mo
 ## [AI Execution Flow]
 <Box center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp17-1-ai-execution-flow.webp"
+=======
         filepath="public/white-paper/wp17-1-ai-execution-flow.webp"
+>>>>>>> origin/main
         alt=""
         caption=""
     />
 </Box>
 
+<<<<<<< HEAD
+> [사용자 입력]
+> → “Create a customer analysis table in AWS Aurora MySQL”
+>
+> ↓
+>
+> [Command Interpretation]
+> → Suggest table name: `customer_segmentation_q2_2025`
+> → Identify engine and region: `aurora-mysql`, `us-east-1`
+>
+> ↓
+>
+> [Tool Selection]
+> → Choose AWS SDK / RDS API
+> → Check IAM context for required permissions
+>
+> ↓
+>
+> [API Call Preparation]
+> → Compose `CreateTable` API request
+> → Set owner: `Sam`, Permission: Grant `SELECT` permission to `marketing_team@corp`
+>
+> ↓
+>
+> [Pre-execution Policy Evaluation]
+> → QueryPie MCP PAM analyzes the request context
+> → Evaluate policies
+=======
         <InfoNote hideIcon>
         [사용자 입력]  
         → “Create a customer analysis table in AWS Aurora MySQL”  
@@ -56,6 +92,7 @@ While this instruction is phrased in natural language, an AI agent powered by Mo
         → QueryPie MCP PAM analyzes the request context 
         → Evaluate policies
         </InfoNote>
+>>>>>>> origin/main
 
 ## [Policy Evaluation]
 - The MCP server checks whether the request satisfies the policy conditions defined in the QueryPie MCP PAM engine.
@@ -241,7 +278,11 @@ The architecture of QueryPie MCP PAM is composed of the following key components
 
 <Box center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp17-2-key-components-of-querypie-mcp-pam.webp"
+=======
         filepath="public/white-paper/wp17-2-key-components-of-querypie-mcp-pam.webp"
+>>>>>>> origin/main
         alt=""
         caption=""
     />
@@ -319,7 +360,11 @@ The AI attempts to query a CRM or database and generate a response. QueryPie MCP
 
 <Box center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp17-3-prevention-of-sensitive-information-exposure.webp"
+=======
         filepath="/public/white-paper/wp17-3-prevention-of-sensitive-information-exposure.webp"
+>>>>>>> origin/main
         alt=""
         caption=""
     />

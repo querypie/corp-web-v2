@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2025-04-10",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "querypie-ai-agent-demo",
+  "imageSrc": "/demo/use-cases/querypie-ai-agent-en.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000091",
+  "summary": {
+    "en": "See how QueryPie AI transforms cloud operations in our exclusive demo.",
+    "ko": "LLM 기반 프로토콜 MCP를 통해, AWS에 직접 접속하지 않고도 인프라를 제어하는 모습을 확인해보세요!",
+    "ja": "QueryPie AIがクラウド運用をどう変えるのか、デモ動画でご覧ください。"
+  },
+  "title": {
+    "en": "Control Your AWS Infrastructure with Just One Prompt!",
+    "ko": "말 한마디로 AWS 인프라 제어! 🤖 QueryPie AI 실전 데모 최초 공개!",
+    "ja": "たった一言でAWSインフラを操作！"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000091/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000091/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000091/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000091/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000091/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000091/ja.tiptap.json"
+    }
+  }
+}

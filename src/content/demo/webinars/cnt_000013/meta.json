@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2026-1-15",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "air-company-querypie-ai-webinar",
+  "imageSrc": "/demo/webinars/air-company-ai-webinar20260122.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000013",
+  "summary": {
+    "en": "AIは今、驚異的なスピードで進化を続けています。しかし、その情報量の多さに圧倒され、「結局、何を押さえればいいのか分からない」「情報が散らばっていて追いきれない」と感じていませんか？本ウェビナーでは、AIに関する様々な情報を体系的に整理することにフォーカスし、押さえるべきAIの本質／情報収集先の候補／ビジネスや業務にどう活かすかの視点をまとめてお届けします。",
+    "ko": "AIは今、驚異的なスピードで進化を続けています。しかし、その情報量の多さに圧倒され、「結局、何を押さえればいいのか分からない」「情報が散らばっていて追いきれない」と感じていませんか？本ウェビナーでは、AIに関する様々な情報を体系的に整理することにフォーカスし、押さえるべきAIの本質／情報収集先の候補／ビジネスや業務にどう活かすかの視点をまとめてお届けします。",
+    "ja": "AIは今、驚異的なスピードで進化を続けています。しかし、その情報量の多さに圧倒され、「結局、何を押さえればいいのか分からない」「情報が散らばっていて追いきれない」と感じていませんか？本ウェビナーでは、AIに関する様々な情報を体系的に整理することにフォーカスし、押さえるべきAIの本質／情報収集先の候補／ビジネスや業務にどう活かすかの視点をまとめてお届けします。"
+  },
+  "title": {
+    "en": "2026年を迷わず走るための「AIの教科書」｜1/22(木)開催",
+    "ko": "2026年を迷わず走るための「AIの教科書」｜1/22(木)開催",
+    "ja": "2026年を迷わず走るための「AIの教科書」｜1/22(木)開催"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000013/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000013/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000013/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000013/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000013/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000013/ja.tiptap.json"
+    }
+  }
+}

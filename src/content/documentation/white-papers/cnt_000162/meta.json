@@ -1,0 +1,45 @@
+{
+  "authorName": "terazawa",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2026-03-12",
+  "downloadCoverImageSrc": "/documentation/white-papers/qp-whitepaper-the-evolution-of-saas-en-cover.webp",
+  "downloadPdfFileName": "qp-whitepaper-the-evolution-of-saas-en.pdf",
+  "downloadPdfSrc": "/documentation/white-papers/qp-whitepaper-the-evolution-of-saas-en.pdf",
+  "enableDownloadButton": true,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "the-end-of-saas-or-its-evolution-strategies-saas-companies-must-adopt-in-the-age-of-ai-agents-copy-2",
+  "imageSrc": "/documentation/white-papers/wp-thumb-30-en.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 7,
+  "status": "hidden",
+  "storageId": "cnt_000162",
+  "summary": {
+    "en": "This white paper analyzes the impact of AI agents on the SaaS business, outlines the strategies SaaS companies should adopt, and shares the real story of QueryPie AI's transformation from a SaaS vendor to an AI-native company.",
+    "ko": "This white paper analyzes the impact of AI agents on the SaaS business, outlines the strategies SaaS companies should adopt, and shares the real story of QueryPie AI's transformation from a SaaS vendor to an AI-native company.",
+    "ja": "本ホワイトペーパーは、AIエージェントがSaaSビジネスに与える影響を分析し、SaaS企業が取るべき戦略と、QueryPie AI自身のSaaSベンダーからAI Native企業への変革の実録をお伝えします。"
+  },
+  "title": {
+    "en": "The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents",
+    "ko": "The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents",
+    "ja": "SaaSの終焉か、進化か 〜AIエージェント時代にSaaS企業が取るべき戦略〜"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000162/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000162/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000162/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000162/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000162/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000162/ja.tiptap.json"
+    }
+  }
+}

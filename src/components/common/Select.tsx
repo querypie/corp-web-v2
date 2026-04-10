@@ -17,7 +17,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 const fieldShellClassName =
-  "ui-field-shell inline-flex h-10 w-full items-center overflow-hidden rounded-button bg-bg-content px-3 transition-colors hover:bg-[#242426]";
+  "ui-field-shell inline-flex h-10 w-full items-center overflow-hidden rounded-button bg-bg-content px-4 transition-colors hover:bg-[#242426]";
 
 const fieldTextClassName =
   "min-w-0 flex-1 border-0 bg-transparent type-body-md text-fg outline-none";
@@ -28,23 +28,25 @@ export default function Select({
   options,
   placeholder,
   onChange,
+  value,
   ...props
 }: SelectProps) {
-  const [selectedValue, setSelectedValue] = useState(String(defaultValue));
+  const [selectedValue, setSelectedValue] = useState(String(value ?? defaultValue));
+  const resolvedValue = value ?? selectedValue;
 
   return (
     <div className={cx(fieldShellClassName, "relative", className)}>
       <select
         className={cx(
           fieldTextClassName,
-          "h-full w-full appearance-none px-0 pr-7",
-          selectedValue ? "text-fg" : "text-mute-fg",
+          "h-10 w-full appearance-none px-0 pr-7 leading-[40px]",
+          resolvedValue ? "text-fg" : "text-placeholder",
         )}
-        defaultValue={defaultValue}
         onChange={(event) => {
           setSelectedValue(event.target.value);
           onChange?.(event);
         }}
+        value={resolvedValue}
         {...props}
       >
         {placeholder ? (
@@ -61,7 +63,7 @@ export default function Select({
       <img
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute right-3 top-1/2 h-[14px] w-[14px] -translate-y-1/2 object-contain"
+        className="pointer-events-none absolute right-4 top-1/2 h-[14px] w-[14px] -translate-y-1/2 object-contain"
         src="/icons/chevron-down.svg"
       />
     </div>

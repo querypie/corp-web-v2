@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "ztna-security-prisma-access",
+  "imageSrc": "/demo/webinars/wb-thumb-5.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000065",
+  "summary": {
+    "en": "Why Did QueryPie Choose Prisma Access? Dive into the details of how QueryPie identified Prisma Access as the ultimate choice for their security needs.",
+    "ko": "제로트러스트 노하우 공개! 왜 QueryPie는 프리즈마 액세스(Prisma Access)를 선택했을까? 간단하지만 중요한 핵심 비밀을 공유합니다!",
+    "ja": "QueryPieがPrismaアクセスを選択した理由？ QueryPieがPrisma Accessをセキュリティニーズのための最終的な選択肢として特定した方法の詳細をご覧ください。"
+  },
+  "title": {
+    "en": "Achieve Perfect ZTNA Security with Prisma Access!",
+    "ko": "ZTNA보안, Prisma Access로 완벽하게!",
+    "ja": "Prisma Accessで完璧なZTNAセキュリティを実現！"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000065/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000065/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000065/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000065/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000065/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000065/ja.tiptap.json"
+    }
+  }
+}

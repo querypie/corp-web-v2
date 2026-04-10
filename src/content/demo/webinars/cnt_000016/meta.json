@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2025-12-1",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "air-company-querypie-ai-webinar-2",
+  "imageSrc": "/demo/webinars/air-company-ai-webinar20251218.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "hidden",
+  "storageId": "cnt_000016",
+  "summary": {
+    "en": "「AIで成果を出す」これは、多くの企業にとって新しい課題ではないでしょうか？他社より一歩抜け出す鍵となるのは、“AIエージェント”をいかに活用するかです。それには、AIエージェントが日常業務を自律的に実行できるような仕組みを、構築していく必要があります。本ウェビナーでは、構成図で全体像をわかりやすく解説。企業でも安心してAIを使えるセキュリティの実現策についてもご紹介します。​",
+    "ko": "「AIで成果を出す」これは、多くの企業にとって新しい課題ではないでしょうか？他社より一歩抜け出す鍵となるのは、“AIエージェント”をいかに活用するかです。それには、AIエージェントが日常業務を自律的に実行できるような仕組みを、構築していく必要があります。本ウェビナーでは、構成図で全体像をわかりやすく解説。企業でも安心してAIを使えるセキュリティの実現策についてもご紹介します。​",
+    "ja": "「AIで成果を出す」これは、多くの企業にとって新しい課題ではないでしょうか？他社より一歩抜け出す鍵となるのは、“AIエージェント”をいかに活用するかです。それには、AIエージェントが日常業務を自律的に実行できるような仕組みを、構築していく必要があります。本ウェビナーでは、構成図で全体像をわかりやすく解説。企業でも安心してAIを使えるセキュリティの実現策についてもご紹介します。​"
+  },
+  "title": {
+    "en": "AIエージェント活用事例 -使えないAIからの脱却-｜12/18(木)開催",
+    "ko": "AIエージェント活用事例 -使えないAIからの脱却-｜12/18(木)開催",
+    "ja": "AIエージェント活用事例 -使えないAIからの脱却-｜12/18(木)開催"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000016/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000016/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000016/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000016/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000016/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000016/ja.tiptap.json"
+    }
+  }
+}

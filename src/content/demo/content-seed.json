@@ -1,5 +1,2640 @@
 [
   {
+<<<<<<< HEAD
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-02-01",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "integrating-querypie-with-metabase",
+    "imageSrc": "/demo/acp-features/de-thumb-metabase.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000025",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "QueryPie x metabase",
+      "ko": "QueryPie x metabase",
+      "ja": "QueryPie x metabase"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-02-01",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "integrating-querypie-with-redash",
+    "imageSrc": "/demo/acp-features/de-thumb-redash.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000026",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "QueryPie x Redash",
+      "ko": "QueryPie x Redash",
+      "ja": "QueryPie x Redash"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-02-01",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "integrating-querypie-with-tableau",
+    "imageSrc": "/demo/acp-features/de-thumb-tableau.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000027",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "QueryPie x tableau",
+      "ko": "QueryPie x tableau",
+      "ja": "QueryPie x tableau"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "apply-data-access-policies",
+    "imageSrc": "/demo/acp-features/tu-thumb-dac-4.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000029",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Apply Data Access Policies",
+      "ko": "데이터 접근 제한 정책 설정하기",
+      "ja": "データアクセスポリシーを適用する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "apply-data-masking-policies",
+    "imageSrc": "/demo/acp-features/tu-thumb-dac-5.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000030",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Apply Data Masking Policies",
+      "ko": "데이터 마스킹 정책 설정하기",
+      "ja": "データマスキングポリシーを適用する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "connect-database-querypie-agent",
+    "imageSrc": "/demo/acp-features/tu-thumb-dac-9.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000032",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Connect to Database via the QueryPie Agent",
+      "ko": "에이전트를 통해 데이터베이스 접속하기",
+      "ja": "QueryPieエージェントを使用してデータベースに接続する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "connect-kubernetes-agent",
+    "imageSrc": "/demo/acp-features/tu-thumb-kac-3.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000033",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Connect to Kubernetes via the QueryPie Agent",
+      "ko": "How to Connect to Kubernetes via the QueryPie Agent",
+      "ja": "How to Connect to Kubernetes via the QueryPie Agent"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "connect-servers-agent",
+    "imageSrc": "/demo/acp-features/tu-thumb-sac-7.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000034",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Connect to Servers via the QueryPie Agent",
+      "ko": "에이전트를 통해 서버 접속하기",
+      "ja": "QueryPieエージェントを使用してサーバーに接続する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "grant-permissions-users",
+    "imageSrc": "/demo/acp-features/tu-thumb-sac-2.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000037",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Grant Permissions to Users",
+      "ko": "서버 접근 권한을 직접 부여하는 방법",
+      "ja": "ユーザーに権限を付与する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "grant-permissions-users-2",
+    "imageSrc": "/demo/acp-features/tu-thumb-dac-2.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000038",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Grant Permissions to Users",
+      "ko": "권한 생성 및 부여 방법",
+      "ja": "ユーザーに権限を付与する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "grant-permissions-users-2-2",
+    "imageSrc": "/demo/acp-features/tu-thumb-sac-3.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "hidden",
+    "storageId": "cnt_000039",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Grant Permissions to Users (2)",
+      "ko": "사용자 역할 기반의 권한을 부여하는 방법",
+      "ja": "ユーザーに権限を付与する方法 (2)"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "grant-roles-users",
+    "imageSrc": "/demo/acp-features/tu-thumb-kac-2.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000040",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Grant Roles to Users",
+      "ko": "How to Grant Roles to Users",
+      "ja": "How to Grant Roles to Users"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "integrate-sso-with-okta",
+    "imageSrc": "/demo/acp-features/tu-thumb-general-1.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000041",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Integrate SSO with Okta",
+      "ko": "SSO 통합 환경을 위한 Okta 연동 가이드",
+      "ja": "OktaでSSOを統合する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "register-databases",
+    "imageSrc": "/demo/acp-features/tu-thumb-dac-1.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000052",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Register the Databases You Need to Protect",
+      "ko": "관리 대상의 데이터베이스 등록 및 AWS 동기화하기",
+      "ja": "保護する必要があるデータベースを登録する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "register-kubernetes-protect",
+    "imageSrc": "/demo/acp-features/tu-thumb-kac-1.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000053",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Register the Kubernetes You Need to Protect",
+      "ko": "How to Register the Kubernetes You Need to Protect",
+      "ja": "How to Register the Kubernetes You Need to Protect"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "register-servers",
+    "imageSrc": "/demo/acp-features/tu-thumb-sac-1.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000054",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Register the Servers You Need to Protect",
+      "ko": "관리 대상의 서버 등록 및 AWS 동기화하기",
+      "ja": "保護する必要があるサーバーを登録する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "review-audit-logs",
+    "imageSrc": "/demo/acp-features/tu-thumb-dac-10.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000055",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Review Audit Logs",
+      "ko": "데이터 영역의 감사 로그를 확인하는 방법",
+      "ja": "監査ログを確認する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "review-audit-logs-2",
+    "imageSrc": "/demo/acp-features/tu-thumb-general-2.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "hidden",
+    "storageId": "cnt_000056",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Review Audit Logs",
+      "ko": "공통 영역의 감사 로그를 확인하는 방법",
+      "ja": "監査ログを確認する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "review-audit-logs-3",
+    "imageSrc": "/demo/acp-features/tu-thumb-sac-8.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "hidden",
+    "storageId": "cnt_000057",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Review Audit Logs",
+      "ko": "시스템 영역의 감사 로그를 확인하는 방법",
+      "ja": "監査ログを確認する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "submit-db-access-workflow",
+    "imageSrc": "/demo/acp-features/tu-thumb-dac-6.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000058",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Submit a Workflow for DB Access Requests",
+      "ko": "데이터베이스 접근 권한 요청하기",
+      "ja": "DBアクセスリクエストのワークフローを提出する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "submit-role-access-workflow",
+    "imageSrc": "/demo/acp-features/tu-thumb-sac-6.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000059",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Submit a Workflow for Role Access Request",
+      "ko": "사용자 역할 기반의 권한 요청하기",
+      "ja": "ロールアクセスリクエストのワークフローを提出する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "submit-server-access-workflow",
+    "imageSrc": "/demo/acp-features/tu-thumb-sac-5.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000060",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Submit a Workflow for Servers Access Requests",
+      "ko": "서버 접근 권한 요청하기",
+      "ja": "サーバーアクセスリクエストのワークフローを提出する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "submit-sql-export-workflow",
+    "imageSrc": "/demo/acp-features/tu-thumb-dac-8.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000061",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Submit a Workflow for SQL Export Requests",
+      "ko": "쿼리 결과 및 특정 데이터 다운로드 요청하기",
+      "ja": "SQLエクスポートリクエストのワークフローを提出する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "submit-sql-request-workflow",
+    "imageSrc": "/demo/acp-features/tu-thumb-dac-7.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000062",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Submit a Workflow for SQL Requests",
+      "ko": "쿼리 실행 요청하기",
+      "ja": "SQLリクエストのワークフローを提出する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "use-web-editor",
+    "imageSrc": "/demo/acp-features/tu-thumb-dac-3.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000063",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Use the Web Editor",
+      "ko": "웹 SQL 에디터 사용 방법",
+      "ja": "Webエディターを使用する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "acp-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "use-web-terminal",
+    "imageSrc": "/demo/acp-features/tu-thumb-sac-4.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000064",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "How to Use the Web Terminal",
+      "ko": "웹 터미널 사용 방법",
+      "ja": "Webターミナルを使用する方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "aip-features",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-09-23",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "google-oauth-demo",
+    "imageSrc": "/demo/aip-features/de-thumb-google-oauth.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000020",
+    "summary": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "title": {
+      "en": "AIP Google OAuth Demo",
+      "ko": "AIP Google OAuth Demo",
+      "ja": "AIP Google OAuth デモ"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2026-03-02",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "seo-analyst",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-29-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000068",
+    "summary": {
+      "en": "High-cost SEO tools are no longer a requirement. With QueryPie AIP, you can perform in-depth website analysis, identify actionable improvement points, and generate intuitive visual dashboards — all within minutes.",
+      "ko": "High-cost SEO tools are no longer a requirement. With QueryPie AIP, you can perform in-depth website analysis, identify actionable improvement points, and generate intuitive visual dashboards — all within minutes.",
+      "ja": "高額なSEOツールに頼ることなく、QueryPie AIPを活用することでWebサイトの詳細な分析と改善ポイントの整理、そして視覚的に分かりやすいダッシュボード作成までを短時間で実現できます。"
+    },
+    "title": {
+      "en": "AIP Use Case: SEO Analysis AI Agent",
+      "ko": "AIP Use Case: SEO Analysis AI Agent",
+      "ja": "AIP活用事例： SEO分析AIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2026-03-02",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "quotation-analyze-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-28-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000069",
+    "summary": {
+      "en": "Are you spending valuable time opening and organizing hundreds of local files and password-protected quotations one by one? With AIP, analysis is completed on the spot — without uploads and without data exposure.",
+      "ko": "Are you spending valuable time opening and organizing hundreds of local files and password-protected quotations one by one? With AIP, analysis is completed on the spot — without uploads and without data exposure.",
+      "ja": "数百におよぶローカルファイルや、パスワード付きの見積書を一つひとつ開いて整理する作業に、貴重な時間を費やしていませんか？AIPなら、アップロード不要・データ流出なしで、その場で分析を完了します。"
+    },
+    "title": {
+      "en": "AIP Use Case: Quotation Analysis AI Agent",
+      "ko": "AIP Use Case: Quotation Analysis AI Agent",
+      "ja": "AIP活用事例： 見積分析AIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2026-02-26",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "quotation-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-27-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000070",
+    "summary": {
+      "en": "No matter how complex your quotation logic is, AIP structures it as a Skill and delivers error-free quotes instantly.",
+      "ko": "No matter how complex your quotation logic is, AIP structures it as a Skill and delivers error-free quotes instantly.",
+      "ja": "どれほど複雑な見積ロジックでも、AIPがスキルとして構造化し、正確な見積書を即時出力します。"
+    },
+    "title": {
+      "en": "AIP Use Case: Quotation AI Agent",
+      "ko": "AIP Use Case: Quotation AI Agent",
+      "ja": "AIP活用事例： 見積AIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-11-11",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "portfolio-insight-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-19-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000071",
+    "summary": {
+      "en": "An AI agent that turns market and account data into portfolio insights—performance, allocation, and risk—delivered through natural language with actionable next steps.",
+      "ko": "An AI agent that turns market and account data into portfolio insights—performance, allocation, and risk—delivered through natural language with actionable next steps.",
+      "ja": "市場データと口座データを自然言語での会話を通じて、パフォーマンス、アロケーション、リスクのポートフォリオインサイトに変換し、行動可能な次の一手まで提示するAIエージェント。"
+    },
+    "title": {
+      "en": "AIP Use Case: Portfolio Insight AI Agent",
+      "ko": "AIP Use Case: Portfolio Insight AI Agent",
+      "ja": "AIP活用事例： 投資ポートフォリオ・インサイトAIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-11-11",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "investment-analyst-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-20-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000072",
+    "summary": {
+      "en": "An AI agent that accelerates investment research—screening, modeling, and coverage updates—by turning natural language into analyst-grade insights and artifacts.",
+      "ko": "An AI agent that accelerates investment research—screening, modeling, and coverage updates—by turning natural language into analyst-grade insights and artifacts.",
+      "ja": "自然言語で指示するだけで、スクリーニングからモデル更新、決算要約、レポート作成までを自動化する投資リサーチ向けAIエージェント。"
+    },
+    "title": {
+      "en": "AIP Use Case: Investment Analyst AI Agent",
+      "ko": "AIP Use Case: Investment Analyst AI Agent",
+      "ja": "AIP活用事例： 投資アナリストAIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-11-05",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "aws-solutions-architect-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-18-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000073",
+    "summary": {
+      "en": "An AI agent that designs and validates AWS architectures—proposing patterns, estimating cost, and checking best practices through natural language.",
+      "ko": "An AI agent that designs and validates AWS architectures—proposing patterns, estimating cost, and checking best practices through natural language.",
+      "ja": "自然言語でパターン提案、コスト見積もり、ベストプラクティス検証を行い、AWSアーキテクチャを設計・妥当性確認するAIエージェント。"
+    },
+    "title": {
+      "en": "AIP Use Case: AWS Solutions Architect AI Agent",
+      "ko": "AIP Use Case: AWS Solutions Architect AI Agent",
+      "ja": "AIP活用事例： AWSソリューションアーキテクトAIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-11-03",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "aws-log-analytics-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-16-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000074",
+    "summary": {
+      "en": "An AI agent that investigates AWS logs with natural language—correlating CloudWatch, CloudTrail, and service logs to speed up incident triage and root-cause analysis.",
+      "ko": "An AI agent that investigates AWS logs with natural language—correlating CloudWatch, CloudTrail, and service logs to speed up incident triage and root-cause analysis.",
+      "ja": "自然言語でAWSログを調査し、CloudWatch、CloudTrail、各種サービスログを相関して、インシデントのトリアージと根本原因分析を加速するAIエージェント。"
+    },
+    "title": {
+      "en": "AIP Use Case: AWS Log Analytics AI Agent",
+      "ko": "AIP Use Case: AWS Log Analytics AI Agent",
+      "ja": "AIP活用事例： AWSログ分析AIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-11-03",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "aws-inspector-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-17-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000075",
+    "summary": {
+      "en": "An AI agent that turns AWS Inspector findings into prioritized remediation plans—summarizing risk, owners, and fixes with one conversational request.",
+      "ko": "An AI agent that turns AWS Inspector findings into prioritized remediation plans—summarizing risk, owners, and fixes with one conversational request.",
+      "ja": "AWS Inspectorの検出結果を、優先度付きの是正計画へ変換するAIエージェント。リスク、担当者、修正内容を、1回の会話型リクエストで要約します。"
+    },
+    "title": {
+      "en": "AIP Use Case: AWS Inspector Insight AI Agent",
+      "ko": "AIP Use Case: AWS Inspector Insight AI Agent",
+      "ja": "AIP活用事例： AWSインサイトAIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-10-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "military-hr-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-14-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000076",
+    "summary": {
+      "en": "An AI agent that streamlines military personnel management—assignments, leave, evaluations, and records—through natural language, ensuring faster administration with full oversight.",
+      "ko": "An AI agent that streamlines military personnel management—assignments, leave, evaluations, and records—through natural language, ensuring faster administration with full oversight.",
+      "ja": "配置、休暇、評価、記録管理を自然言語で効率化し、完全な監督体制のもとで軍人事業務を迅速化するAIエージェント。"
+    },
+    "title": {
+      "en": "AIP Use Case: Military Service & HR AI Agent",
+      "ko": "AIP Use Case: Military Service & HR AI Agent",
+      "ja": "AIP活用事例： 兵役・人事AIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-10-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "incident-mgmt-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-15-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000077",
+    "summary": {
+      "en": "An AI agent that consolidates operational status, generates standard reports, and orchestrates alerts and actions—streamlining situation management through natural language.",
+      "ko": "An AI agent that consolidates operational status, generates standard reports, and orchestrates alerts and actions—streamlining situation management through natural language.",
+      "ja": "運用ステータスを統合し、標準レポートを生成し、アラートとアクションをオーケストレーションするAIエージェント。自然言語で状況管理を効率化します。"
+    },
+    "title": {
+      "en": "AIP Use Case: Reporting & Incident Management AI Agent",
+      "ko": "AIP Use Case: Reporting & Incident Management AI Agent",
+      "ja": "AIP活用事例： 報告・インシデント管理AIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-10-15",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "baggage-operations-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-12-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000078",
+    "summary": {
+      "en": "An AI agent that delivers real-time baggage visibility, predicts disruptions, and automates recovery workflows across airlines, airports, and ground handling teams.",
+      "ko": "An AI agent that delivers real-time baggage visibility, predicts disruptions, and automates recovery workflows across airlines, airports, and ground handling teams.",
+      "ja": "リアルタイムの手荷物可視化を提供し、混乱を予測し、航空会社・空港・グランドハンドリング間のリカバリーワークフローを自動化するAIエージェント。"
+    },
+    "title": {
+      "en": "AIP Use Case: Baggage Operations AI Agent",
+      "ko": "AIP Use Case: Baggage Operations AI Agent",
+      "ja": "AIP活用事例： 手荷物業務AIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-10-15",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "aircrew-scheduler-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-13-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000079",
+    "summary": {
+      "en": "An AI agent that optimizes crew pairing, rostering, and recovery from disruptions—turning policies, qualifications, and schedules into fast, compliant decisions through natural language.",
+      "ko": "An AI agent that optimizes crew pairing, rostering, and recovery from disruptions—turning policies, qualifications, and schedules into fast, compliant decisions through natural language.",
+      "ja": "ポリシー、資格、スケジュールを自然言語で迅速かつ準拠した意思決定に変換し、クルーペアリング、ロスタリング、ディスラプションからの復旧を最適化するAIエージェント。"
+    },
+    "title": {
+      "en": "AIP Use Case: AirCrew Scheduler AI Agent",
+      "ko": "AIP Use Case: AirCrew Scheduler AI Agent",
+      "ja": "AIP活用事例： 乗務員スケジューリングAIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-10-15",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "aircraft-maintenance-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-11-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000080",
+    "summary": {
+      "en": "An AI agent that accelerates aircraft maintenance by turning logs, manuals, and sensor data into diagnostic insights and work orders—improving safety, uptime, and compliance.",
+      "ko": "An AI agent that accelerates aircraft maintenance by turning logs, manuals, and sensor data into diagnostic insights and work orders—improving safety, uptime, and compliance.",
+      "ja": "ログ、マニュアル、センサーデータを診断インサイトと作業指示（ワークオーダー）に変換し、航空機の安全性、稼働率、コンプライアンスを向上させるAIエージェント。"
+    },
+    "title": {
+      "en": "AIP Use Case: Aircraft Maintenance AI Agent",
+      "ko": "AIP Use Case: Aircraft Maintenance AI Agent",
+      "ja": "AIP活用事例： 航空機整備AIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-10-14",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "dev-insight-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-10-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000081",
+    "summary": {
+      "en": "An AI agent that turns engineering exhaust—code, PRs, issues, builds, and incidents—into actionable insights and summaries through natural language.",
+      "ko": "An AI agent that turns engineering exhaust—code, PRs, issues, builds, and incidents—into actionable insights and summaries through natural language.",
+      "ja": "コード、PR、課題、ビルド、インシデントといったエンジニアリングのエグゾーストを、自然言語で行動可能なインサイトとサマリーに変換するAIエージェント。"
+    },
+    "title": {
+      "en": "AIP Use Case: Development Insight AI Agent",
+      "ko": "AIP Use Case: Development Insight AI Agent",
+      "ja": "AIP活用事例： 開発インサイトAIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-10-03",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "factory-iot-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-9-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000082",
+    "summary": {
+      "en": "An AI agent that monitors factory IoT signals, detects anomalies, and orchestrates maintenance workflows through natural language—bridging OT data with IT systems for faster, safer operations.",
+      "ko": "An AI agent that monitors factory IoT signals, detects anomalies, and orchestrates maintenance workflows through natural language—bridging OT data with IT systems for faster, safer operations.",
+      "ja": "ファクトリーIoTシグナルを監視し、異常を検知し、自然言語でメンテナンスワークフローをオーケストレーションするAIエージェント。OTデータとITシステムを橋渡しし、より迅速で安全なオペレーションを実現します。"
+    },
+    "title": {
+      "en": "AIP Use Case: Factory IoT AI Agent",
+      "ko": "AIP Use Case: Factory IoT AI Agent",
+      "ja": "AIP活用事例： ファクトリーIoT AIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-10-03",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "credit-check-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-8-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000083",
+    "summary": {
+      "en": "An AI agent that automates creditworthiness checks by retrieving applicant data, scoring risk, and generating decision-ready summaries—faster approvals with consistent policy enforcement.",
+      "ko": "An AI agent that automates creditworthiness checks by retrieving applicant data, scoring risk, and generating decision-ready summaries—faster approvals with consistent policy enforcement.",
+      "ja": "申込者データの取得、リスクスコアリング、意思決定用サマリーの生成を自動化し、ポリシーを一貫適用しながら審査の迅速化を実現するAIエージェント。"
+    },
+    "title": {
+      "en": "AIP Use Case: Credit Check AI Agent",
+      "ko": "AIP Use Case: Credit Check AI Agent",
+      "ja": "AIP活用事例： クレジット審査AIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-10-02",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "m365-ai-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-7-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000084",
+    "summary": {
+      "en": "An AI agent that automates everyday Microsoft 365 work—emails, documents, schedules, and reports—through natural language, streamlining productivity across Outlook, Teams, SharePoint, and more.",
+      "ko": "An AI agent that automates everyday Microsoft 365 work—emails, documents, schedules, and reports—through natural language, streamlining productivity across Outlook, Teams, SharePoint, and more.",
+      "ja": "Outlook、Teams、SharePoint、OneDrive、Excelに会話型オートメーションをもたらし、複数のインターフェイスを行き来することなく、社員がより速く業務を進められるようにします。自然言語で、メールの下書き・整理、会議のスケジュール・要約、ドキュメントの整理、スプレッドシートの更新、ステータスレポートの作成を、日々の業務フローの中で直接行えます。"
+    },
+    "title": {
+      "en": "AIP Use Case: M365 AI Agent",
+      "ko": "AIP Use Case: M365 AI Agent",
+      "ja": "AIP活用事例： M365 AIエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-05-18",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "work-collaboration-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-6-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000085",
+    "summary": {
+      "en": "An AI agent that streamlines team workflows by integrating with collaboration tools like Slack, Jira, and Confluence, automating routine tasks and information sharing across platforms.",
+      "ko": "An AI agent that streamlines team workflows by integrating with collaboration tools like Slack, Jira, and Confluence, automating routine tasks and information sharing across platforms.",
+      "ja": "複数のプラットフォームにまたがるチームの業務調整を変革するAIエージェント。自然言語でのやり取りを通じて、ワークフローの自動化、情報共有、タスク実行をアプリケーション間の切り替えなしで実現します。"
+    },
+    "title": {
+      "en": "AIP Use Case: Work Collaboration Agent",
+      "ko": "AIP Use Case: Work Collaboration Agent",
+      "ja": "AIP活用事例：ワークコラボレーションエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-05-18",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "server-access-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-3-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000086",
+    "summary": {
+      "en": "An AI agent that automates server access requests and management through natural language, streamlining privileged access while maintaining strict security controls.",
+      "ko": "An AI agent that automates server access requests and management through natural language, streamlining privileged access while maintaining strict security controls.",
+      "ja": "自然言語を通じてサーバーアクセスリクエストと管理を自動化するAIエージェント。厳格なセキュリティ管理を維持しながら、特権アクセスを効率化します。"
+    },
+    "title": {
+      "en": "AIP Use Case: Server Access Agent",
+      "ko": "AIP Use Case: Server Access Agent",
+      "ja": "AIP活用事例：サーバーアクセスエージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-05-18",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "security-audit-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-5-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000087",
+    "summary": {
+      "en": "An AI agent that transforms security audit analysis through natural language queries, enabling teams to investigate access patterns, detect anomalies, and generate compliance reports instantly.",
+      "ko": "An AI agent that transforms security audit analysis through natural language queries, enabling teams to investigate access patterns, detect anomalies, and generate compliance reports instantly.",
+      "ja": "自然言語クエリを通じてセキュリティ監査分析を変革するAIエージェント。チームがアクセスパターンの調査、異常検知、コンプライアンスレポートの生成を即座に実行できるようにします。"
+    },
+    "title": {
+      "en": "AIP Use Case: Security Audit Agent",
+      "ko": "AIP Use Case: Security Audit Agent",
+      "ja": "AIP活用事例：セキュリティ監査エージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-05-18",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "kubernetes-manager-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-4-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000088",
+    "summary": {
+      "en": "An AI agent that simplifies Kubernetes cluster management through conversational commands, enabling teams to deploy, monitor, and troubleshoot without complex kubectl syntax.",
+      "ko": "An AI agent that simplifies Kubernetes cluster management through conversational commands, enabling teams to deploy, monitor, and troubleshoot without complex kubectl syntax.",
+      "ja": "会話形式のコマンドを通じてKubernetesクラスター管理を簡素化するAIエージェント。複雑なkubectl構文を使わずに、チームがデプロイ、監視、トラブルシューティングを実行できるようにします。"
+    },
+    "title": {
+      "en": "AIP Use Case: Kubernetes Manager Agent",
+      "ko": "AIP Use Case: Kubernetes Manager Agent",
+      "ja": "AIP活用事例：Kubernetes管理エージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-05-18",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "data-analytics-agent-2",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-2-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000089",
+    "summary": {
+      "en": "An AI agent that turns natural language questions into instant data insights and visualizations, empowering teams to analyze data without writing SQL.",
+      "ko": "An AI agent that turns natural language questions into instant data insights and visualizations, empowering teams to analyze data without writing SQL.",
+      "ja": "自然言語での質問を瞬時にデータインサイトと可視化に変換するAIエージェント。SQLを書くことなく、チームがデータ分析を行えるよう支援します。"
+    },
+    "title": {
+      "en": "AIP Use Case: Data Analytics Agent 2",
+      "ko": "AIP Use Case: Data Analytics Agent 2",
+      "ja": "AIP活用事例：データ分析エージェント2"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-05-18",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "data-analytics-agent",
+    "imageSrc": "/demo/use-cases/aip-use-case-thumb-1-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000090",
+    "summary": {
+      "en": "An AI agent that turns natural language questions into instant data insights and visualizations, empowering teams to analyze data without writing SQL.",
+      "ko": "An AI agent that turns natural language questions into instant data insights and visualizations, empowering teams to analyze data without writing SQL.",
+      "ja": "自然言語による質問を瞬時にデータインサイトと可視化に変換するAIエージェント。SQLを書くことなく、チームがデータ分析を行えるようサポートします。"
+    },
+    "title": {
+      "en": "AIP Use Case: Data Analytics Agent",
+      "ko": "AIP Use Case: Data Analytics Agent",
+      "ja": "AIP活用事例：データ分析エージェント"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-04-10",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "querypie-ai-agent-demo",
+    "imageSrc": "/demo/use-cases/querypie-ai-agent-en.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000091",
+    "summary": {
+      "en": "See how QueryPie AI transforms cloud operations in our exclusive demo.",
+      "ko": "LLM 기반 프로토콜 MCP를 통해, AWS에 직접 접속하지 않고도 인프라를 제어하는 모습을 확인해보세요!",
+      "ja": "QueryPie AIがクラウド運用をどう変えるのか、デモ動画でご覧ください。"
+    },
+    "title": {
+      "en": "Control Your AWS Infrastructure with Just One Prompt!",
+      "ko": "말 한마디로 AWS 인프라 제어! 🤖 QueryPie AI 실전 데모 최초 공개!",
+      "ja": "たった一言でAWSインフラを操作！"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-03-24",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "lg-uplus-daniel-ku",
+    "imageSrc": "/demo/use-cases/cs-thumb-lguplus.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000092",
+    "summary": {
+      "en": "How did LG U+ implement Zero Trust in a public cloud environment? Discover how QueryPie helped automate security & access control!",
+      "ko": "LG U+는 어떻게 퍼블릭 클라우드 환경에서 Zero Trust를 구현했을까요? QueryPie를 활용한 보안 자동화 & 접근 제어 성공사례를 지금 확인하세요!",
+      "ja": "LG U+はどのようにパブリッククラウド環境でゼロトラストを実現したのか？ QueryPieを活用したセキュリティ自動化 & アクセス制御の成功事例をご紹介！"
+    },
+    "title": {
+      "en": "\\\"The solution that best fit our automation strategy was undoubtedly QueryPie!\\\"",
+      "ko": "“검토했던 솔루션 중 저희의 자동화 계획과 가장 일치했던 솔루션은 단연 QueryPie였습니다!”",
+      "ja": "「私たちの自動化計画と最も一致したソリューションは間違いなくQueryPieでした！」"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-01-06",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "superb-ai-hyun-kim",
+    "imageSrc": "/demo/use-cases/cs-thumb-superb.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000093",
+    "summary": {
+      "en": "In this video, we have the privilege of featuring Hyun Kim, the CEO and Founder of Superb AI.",
+      "ko": "MLOps 솔루션을 제공하는 Superb AI의 CEO Hyun Kim은 AI와 컴플라이언스 관계를 재차 강조했습니다. 그 이유는 무엇일까요? 지금 바로 만나보세요!",
+      "ja": "このビデオでは、Superb AIのCEO兼創設者であるHyun Kim氏をお迎えし、彼のインサイトをお届けします。"
+    },
+    "title": {
+      "en": "\\\"The adoption of AI in traditional industries hinges on data and security as the keys to success.\\\"",
+      "ko": "\\\"전통 산업에서의 AI 도입은 데이터와 보안이 성공의 핵심 요소입니다.\\\"",
+      "ja": "「伝統産業のAI導入、データとセキュリティが成功の核心要素です。」"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "lovo-ai-tom-lee",
+    "imageSrc": "/demo/use-cases/cs-thumb-lovo.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000094",
+    "summary": {
+      "en": "Today, we have a special guest with us: Tom Lee, the CEO and Co-founder of LOVO AI.",
+      "ko": "이 영상에서 Tom은 통합 사이버보안 솔루션으로서 QueryPie가 기업에 제공하는 중요한 가치를 공유합니다.",
+      "ja": "LOVO AIのCEO兼共同創設者であるTom Lee氏をご招待します。"
+    },
+    "title": {
+      "en": "\\\"QueryPie' s like a tailor shop almost for security.\\\"",
+      "ko": "\\\"QueryPie는 마치 보안을 위한 맞춤 테일러샵 같아요.\\\"",
+      "ja": "「QueryPieはまるでセキュリティのためのオーダーメードテイラーショップのようです。」"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "allganize-changsu-lee",
+    "imageSrc": "/demo/use-cases/cs-thumb-allganize.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000095",
+    "summary": {
+      "en": "In today's video, we have the privilege of featuring Changsu Lee, the CEO and Founder of Allganize.",
+      "ko": "이번 영상에서 이창수 대표는 기업들을 위한 종합적인 사이버 보안 솔루션으로서 QueryPie가 제공하는 중요한 가치를 나눕니다.",
+      "ja": "AllganizeのCEO兼創設者であるChangsu Lee氏を特集することができます。"
+    },
+    "title": {
+      "en": "\\\"I envision a bright future, similar to the global business outcomes of QueryPie.\\\"",
+      "ko": "\\\"QueryPie처럼 글로벌 비즈니스 성과를 내는 미래를 상상합니다.\\\"",
+      "ja": "「QueryPie のようにグローバルビジネスでの成果を出す未来を描いています。」"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "use-cases",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "air-company-mori-takeshi",
+    "imageSrc": "/demo/use-cases/cs-thumb-air.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 1,
+    "status": "published",
+    "storageId": "cnt_000096",
+    "summary": {
+      "en": "In today's video, we have the privilege of featuring Mori Takeshi, the CEO of AIR Company Limited in Japan. AIR, also as one of QueryPie Japan's partners, they have been lead IT & software market in Japan for last decades.",
+      "ko": "이번 영상에서 Mori 대표님은 AIR가 QueryPie Japan을 전 세계 솔루션 파트너로 선택한 이유와, QueryPie가 일본 기업들에게 제공하는 종합적인 사이버 보안 솔루션으로서의 가치를 공유합니다.",
+      "ja": "AIRがQueryPie Japanを世界中のソリューションパートナーの1つに選んだ理由について、森氏はこう語っています。"
+    },
+    "title": {
+      "en": "\\\"Beyond monitoring, it’s true governance.\\\"",
+      "ko": "\\\"단순 모니터링을 넘어선, 진정한 거버넌스입니다.\\\"",
+      "ja": "「監視を超えて、それは真の統治です。」"
+    }
+  },
+  {
+=======
+>>>>>>> origin/main
     "authorName": "ㅁㄴㅇㄹ",
     "authorRole": "ㅁㄴㅇㄹ",
     "bodyHtml": {
@@ -18,6 +2653,25 @@
       "ja": ""
     },
     "categorySlug": "use-cases",
+<<<<<<< HEAD
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2026-03-31",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": false,
+    "id": "content-1775675006546-tiptap",
+    "imageSrc": "",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 2,
+    "status": "hidden",
+    "storageId": "cnt_000098",
+=======
     "contentFormat": "markdown",
     "contentType": "content",
     "dateIso": "2026-03-31",
@@ -30,6 +2684,7 @@
     "sortOrder": 1,
     "status": "published",
     "storageId": "cnt_000003",
+>>>>>>> origin/main
     "summary": {
       "en": "",
       "ko": "",
@@ -42,8 +2697,13 @@
     }
   },
   {
+<<<<<<< HEAD
+    "authorName": "",
+    "authorRole": "",
+=======
     "authorName": "vin정연재",
     "authorRole": "design",
+>>>>>>> origin/main
     "bodyHtml": {
       "en": "",
       "ko": "",
@@ -59,6 +2719,557 @@
       "ko": "",
       "ja": ""
     },
+<<<<<<< HEAD
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2026-1-15",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "air-company-querypie-ai-webinar",
+    "imageSrc": "/demo/webinars/air-company-ai-webinar20260122.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000013",
+    "summary": {
+      "en": "AIは今、驚異的なスピードで進化を続けています。しかし、その情報量の多さに圧倒され、「結局、何を押さえればいいのか分からない」「情報が散らばっていて追いきれない」と感じていませんか？本ウェビナーでは、AIに関する様々な情報を体系的に整理することにフォーカスし、押さえるべきAIの本質／情報収集先の候補／ビジネスや業務にどう活かすかの視点をまとめてお届けします。",
+      "ko": "AIは今、驚異的なスピードで進化を続けています。しかし、その情報量の多さに圧倒され、「結局、何を押さえればいいのか分からない」「情報が散らばっていて追いきれない」と感じていませんか？本ウェビナーでは、AIに関する様々な情報を体系的に整理することにフォーカスし、押さえるべきAIの本質／情報収集先の候補／ビジネスや業務にどう活かすかの視点をまとめてお届けします。",
+      "ja": "AIは今、驚異的なスピードで進化を続けています。しかし、その情報量の多さに圧倒され、「結局、何を押さえればいいのか分からない」「情報が散らばっていて追いきれない」と感じていませんか？本ウェビナーでは、AIに関する様々な情報を体系的に整理することにフォーカスし、押さえるべきAIの本質／情報収集先の候補／ビジネスや業務にどう活かすかの視点をまとめてお届けします。"
+    },
+    "title": {
+      "en": "2026年を迷わず走るための「AIの教科書」｜1/22(木)開催",
+      "ko": "2026年を迷わず走るための「AIの教科書」｜1/22(木)開催",
+      "ja": "2026年を迷わず走るための「AIの教科書」｜1/22(木)開催"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2026-03-02",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "air-company-querypie-ai-usecase-webinar",
+    "imageSrc": "/demo/webinars/air-company-querypie-ai-usecase-webinar-20260319.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000014",
+    "summary": {
+      "en": "好評につき、再放送決定！AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。",
+      "ko": "好評につき、再放送決定！AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。",
+      "ja": "好評につき、再放送決定！AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。"
+    },
+    "title": {
+      "en": "AI、社内で使ってみた。活用事例を30分で｜3/19(木)開催",
+      "ko": "AI、社内で使ってみた。活用事例を30分で｜3/19(木)開催",
+      "ja": "AI、社内で使ってみた。活用事例を30分で｜3/19(木)開催"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2026-02-13",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "air-company-querypie-ai-usecase-webinar-2",
+    "imageSrc": "/demo/webinars/air-company-querypie-ai-usecase-webinar-20260219.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "hidden",
+    "storageId": "cnt_000015",
+    "summary": {
+      "en": "AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。",
+      "ko": "AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。",
+      "ja": "AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。"
+    },
+    "title": {
+      "en": "AI、社内で使ってみた。活用事例を30分で｜2/19(木)開催",
+      "ko": "AI、社内で使ってみた。活用事例を30分で｜2/19(木)開催",
+      "ja": "AI、社内で使ってみた。活用事例を30分で｜2/19(木)開催"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-12-1",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "air-company-querypie-ai-webinar-2",
+    "imageSrc": "/demo/webinars/air-company-ai-webinar20251218.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "hidden",
+    "storageId": "cnt_000016",
+    "summary": {
+      "en": "「AIで成果を出す」これは、多くの企業にとって新しい課題ではないでしょうか？他社より一歩抜け出す鍵となるのは、“AIエージェント”をいかに活用するかです。それには、AIエージェントが日常業務を自律的に実行できるような仕組みを、構築していく必要があります。本ウェビナーでは、構成図で全体像をわかりやすく解説。企業でも安心してAIを使えるセキュリティの実現策についてもご紹介します。​",
+      "ko": "「AIで成果を出す」これは、多くの企業にとって新しい課題ではないでしょうか？他社より一歩抜け出す鍵となるのは、“AIエージェント”をいかに活用するかです。それには、AIエージェントが日常業務を自律的に実行できるような仕組みを、構築していく必要があります。本ウェビナーでは、構成図で全体像をわかりやすく解説。企業でも安心してAIを使えるセキュリティの実現策についてもご紹介します。​",
+      "ja": "「AIで成果を出す」これは、多くの企業にとって新しい課題ではないでしょうか？他社より一歩抜け出す鍵となるのは、“AIエージェント”をいかに活用するかです。それには、AIエージェントが日常業務を自律的に実行できるような仕組みを、構築していく必要があります。本ウェビナーでは、構成図で全体像をわかりやすく解説。企業でも安心してAIを使えるセキュリティの実現策についてもご紹介します。​"
+    },
+    "title": {
+      "en": "AIエージェント活用事例 -使えないAIからの脱却-｜12/18(木)開催",
+      "ko": "AIエージェント活用事例 -使えないAIからの脱却-｜12/18(木)開催",
+      "ja": "AIエージェント活用事例 -使えないAIからの脱却-｜12/18(木)開催"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-11-10",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "air-company-querypie-mcp-webinar",
+    "imageSrc": "/demo/webinars/air-company-mcp-20251120.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000017",
+    "summary": {
+      "en": "「AIを活用したいけれど、何から始めればいいかわからない」「生成AIを導入したのに、思ったような成果が出ない」「ChatGPTやCopilot、Geminiを使いこなせていない」そんなふうに課題を感じている方は多いのではないでしょうか？その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。本ウェビナーでは、MCPを活用事例をもとに、なぜMCPが成果につながるのか、実際にどのように活用されているのかを具体的かつわかりやすくご紹介します。​​",
+      "ko": "「AIを活用したいけれど、何から始めればいいかわからない」「生成AIを導入したのに、思ったような成果が出ない」「ChatGPTやCopilot、Geminiを使いこなせていない」そんなふうに課題を感じている方は多いのではないでしょうか？その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。本ウェビナーでは、MCPを活用事例をもとに、なぜMCPが成果につながるのか、実際にどのように活用されているのかを具体的かつわかりやすくご紹介します。​​",
+      "ja": "「AIを活用したいけれど、何から始めればいいかわからない」「生成AIを導入したのに、思ったような成果が出ない」「ChatGPTやCopilot、Geminiを使いこなせていない」そんなふうに課題を感じている方は多いのではないでしょうか？その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。本ウェビナーでは、MCPを活用事例をもとに、なぜMCPが成果につながるのか、実際にどのように活用されているのかを具体的かつわかりやすくご紹介します。​​"
+    },
+    "title": {
+      "en": "成果に直結！MCP活用事例｜11/20(木)開催",
+      "ko": "成果に直結！MCP活用事例｜11/20(木)開催",
+      "ja": "成果に直結！MCP活用事例｜11/20(木)開催"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-10-08",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "air-company-querypie-ai-webinar-3",
+    "imageSrc": "/demo/webinars/air-company-ai-webinar20251023.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "hidden",
+    "storageId": "cnt_000018",
+    "summary": {
+      "en": "AI活用は競争力の鍵。今や企業にとって避けて通れないテーマとなっています。​しかし「どの業務に取り入れればよいのか分からない」「人材やノウハウが足りない」「セキュリティやガバナンスが不安」といった理由から、導入が進まない企業も少なくありません。​本セミナーでは、こうした課題を整理し、実際にAIを業務へ取り込み成果を上げている実例を紹介します。​​",
+      "ko": "AI活用は競争力の鍵。今や企業にとって避けて通れないテーマとなっています。​しかし「どの業務に取り入れればよいのか分からない」「人材やノウハウが足りない」「セキュリティやガバナンスが不安」といった理由から、導入が進まない企業も少なくありません。​本セミナーでは、こうした課題を整理し、実際にAIを業務へ取り込み成果を上げている実例を紹介します。​​",
+      "ja": "AI活用は競争力の鍵。今や企業にとって避けて通れないテーマとなっています。​しかし「どの業務に取り入れればよいのか分からない」「人材やノウハウが足りない」「セキュリティやガバナンスが不安」といった理由から、導入が進まない企業も少なくありません。​本セミナーでは、こうした課題を整理し、実際にAIを業務へ取り込み成果を上げている実例を紹介します。​​"
+    },
+    "title": {
+      "en": "AIエージェントってウチの会社でも使えるの？30分でわかる入門編 【10/23(木)開催｜参加費無料】",
+      "ko": "AIエージェントってウチの会社でも使えるの？30分でわかる入門編 【10/23(木)開催｜参加費無料】",
+      "ja": "AIエージェントってウチの会社でも使えるの？30分でわかる入門編 【10/23(木)開催｜参加費無料】"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-09-25",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "air-company-querypie-mcp-webinar-2",
+    "imageSrc": "/demo/webinars/air-company-mcp-20250925.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "hidden",
+    "storageId": "cnt_000019",
+    "summary": {
+      "en": "「AIを活用したいけれど、何から始めればいいかわからない」「AIを導入したのに、思ったような成果が出ない」その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。なぜMCPが成果につながるのか、実際にどのように活用されているのか、活用事例をもとにわかりやすくご紹介します。AI活用の次の一手として、ぜひこの機会にご参加ください。",
+      "ko": "「AIを活用したいけれど、何から始めればいいかわからない」「AIを導入したのに、思ったような成果が出ない」その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。なぜMCPが成果につながるのか、実際にどのように活用されているのか、活用事例をもとにわかりやすくご紹介します。AI活用の次の一手として、ぜひこの機会にご参加ください。",
+      "ja": "「AIを活用したいけれど、何から始めればいいかわからない」「AIを導入したのに、思ったような成果が出ない」その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。なぜMCPが成果につながるのか、実際にどのように活用されているのか、活用事例をもとにわかりやすくご紹介します。AI活用の次の一手として、ぜひこの機会にご参加ください。"
+    },
+    "title": {
+      "en": "【9/25(木)ウェビナー】「成果に直結！MCP活用事例」",
+      "ko": "【9/25(木)ウェビナー】「成果に直結！MCP活用事例」",
+      "ja": "【9/25(木)ウェビナー】「成果に直結！MCP活用事例」"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-07-08",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "air-company-querypie-mcp-webinar-3",
+    "imageSrc": "/demo/webinars/air-company-mcp2.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "hidden",
+    "storageId": "cnt_000021",
+    "summary": {
+      "en": "AIが世界を動かす時代が、いよいよ現実に。その中心にあるのが、革新的なプロトコル「MCP」です。従来の常識を覆し、AI活用を一気に加速させました。今こそ、AI時代の必須スキル「MCP」を、しっかり学んでみませんか？",
+      "ko": "AIが世界を動かす時代が、いよいよ現実に。その中心にあるのが、革新的なプロトコル「MCP」です。従来の常識を覆し、AI活用を一気に加速させました。今こそ、AI時代の必須スキル「MCP」を、しっかり学んでみませんか？",
+      "ja": "AIが世界を動かす時代が、いよいよ現実に。その中心にあるのが、革新的なプロトコル「MCP」です。従来の常識を覆し、AI活用を一気に加速させました。今こそ、AI時代の必須スキル「MCP」を、しっかり学んでみませんか？"
+    },
+    "title": {
+      "en": "【8/5（火）開催】ウェビナー「「MCP」の基礎がわかる”超”入門講座 」",
+      "ko": "【8/5（火）開催】ウェビナー「「MCP」の基礎がわかる”超”入門講座 」",
+      "ja": "【8/5（火）開催】ウェビナー「「MCP」の基礎がわかる”超”入門講座 」"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-06-05",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "air-company-querypie-mcp-webinar-4",
+    "imageSrc": "/demo/webinars/air-company-mcp.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "hidden",
+    "storageId": "cnt_000022",
+    "summary": {
+      "en": "AIが世界を動かす時代が、いよいよ現実に。その中心にあるのが、革新的なプロトコル「MCP」です。従来の常識を覆し、AI活用を一気に加速させました。今こそ、AI時代の必須スキル「MCP」を、しっかり学んでみませんか？ 生成AI / MCPをフル活用し、自律型セキュリティ運用を実現する 「QueryPie Secure Enterprise AI Hub」の最新情報をお届けします。",
+      "ko": "AIが世界を動かす時代が、いよいよ現実に。その中心にあるのが、革新的なプロトコル「MCP」です。従来の常識を覆し、AI活用を一気に加速させました。今こそ、AI時代の必須スキル「MCP」を、しっかり学んでみませんか？ 生成AI / MCPをフル活用し、自律型セキュリティ運用を実現する 「QueryPie Secure Enterprise AI Hub」の最新情報をお届けします。",
+      "ja": "AIが世界を動かす時代が、いよいよ現実に。その中心にあるのが、革新的なプロトコル「MCP」です。従来の常識を覆し、AI活用を一気に加速させました。今こそ、AI時代の必須スキル「MCP」を、しっかり学んでみませんか？ 生成AI / MCPをフル活用し、自律型セキュリティ運用を実現する 「QueryPie Secure Enterprise AI Hub」の最新情報をお届けします。"
+    },
+    "title": {
+      "en": "【7/3（木）開催】ウェビナー「「MCP」の基礎がわかる”超”入門講座 」",
+      "ko": "【7/3（木）開催】ウェビナー「「MCP」の基礎がわかる”超”入門講座 」",
+      "ja": "【7/3（木）開催】ウェビナー「「MCP」の基礎がわかる”超”入門講座 」"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-05-19",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "findy-querypie-mcp-webinar",
+    "imageSrc": "/demo/webinars/findy-querypie-mcp-webinar.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000023",
+    "summary": {
+      "en": "Learn how to build an MCP server in just 10 minutes! We'll walk you through it with a live coding session in Korean. If you're curious about AI or MCP, don't miss out!",
+      "ko": "단 10분 만에 MCP 서버를 구현하는 방법! 당일 라이브 코딩으로 보여드립니다. 라이브 코딩은 한국어로 진행되니 AI와 MCP에 대해 궁금하셨던 분들, 이번 기회를 절대 놓치지 마세요!",
+      "ja": "たった10分でMCPサーバーを構築する方法を、当日のライブコーディングでご紹介します。ライブコーディングは韓国語で実施されます。AIやMCPにご興味のある方は、ぜひこの機会をお見逃しなく！"
+    },
+    "title": {
+      "en": "Join FINDY's CTO and QueryPie for an AI & MCP Online Seminar",
+      "ko": "Findy의 CTO와 QueryPie가 함께하는 AI & MCP 온라인 세미나에 초대합니다.",
+      "ja": "FindyのCTOとQueryPieが共演！AI & MCP オンラインセミナー開催のお知らせ"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2025-05-15",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "air-company-querypie-zerotrust-webinar",
+    "imageSrc": "/demo/webinars/air-company-zerotrust.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000024",
+    "summary": {
+      "en": "近年クラウド環境の普及に伴い、企業内部からの情報漏えいのリスクが高まっています。クラウドは簡単に構築が可能な性質上、リソース管理が煩雑になってしまうことが多いのが現状です。本ウェビナーでは、そうした企業が持つクラウドセキュリティの関する課題に対して効率的にアプローチする方法についてご紹介いたします！",
+      "ko": "近年クラウド環境の普及に伴い、企業内部からの情報漏えいのリスクが高まっています。クラウドは簡単に構築が可能な性質上、リソース管理が煩雑になってしまうことが多いのが現状です。本ウェビナーでは、そうした企業が持つクラウドセキュリティの関する課題に対して効率的にアプローチする方法についてご紹介いたします！",
+      "ja": "近年クラウド環境の普及に伴い、企業内部からの情報漏えいのリスクが高まっています。クラウドは簡単に構築が可能な性質上、リソース管理が煩雑になってしまうことが多いのが現状です。本ウェビナーでは、そうした企業が持つクラウドセキュリティの関する課題に対して効率的にアプローチする方法についてご紹介いたします！"
+    },
+    "title": {
+      "en": "【5/29（木）開催】ウェビナー「今さら聞けないゼロトラストのはじめかた」",
+      "ko": "【5/29（木）開催】ウェビナー「今さら聞けないゼロトラストのはじめかた」",
+      "ja": "【5/29（木）開催】ウェビナー「今さら聞けないゼロトラストのはじめかた」"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-12-05",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": false,
+    "id": "querypie-japan-webinar-security",
+    "imageSrc": "/demo/webinars/wb-thumb-15.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000028",
+    "summary": {
+      "en": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！",
+      "ko": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！",
+      "ja": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！"
+    },
+    "title": {
+      "en": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
+      "ko": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
+      "ja": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+=======
     "categorySlug": "use-cases",
     "contentFormat": "markdown",
     "contentType": "content",
@@ -86,6 +3297,7 @@
   {
     "authorName": "vin",
     "authorRole": "tester",
+>>>>>>> origin/main
     "bodyHtml": {
       "en": "",
       "ko": "",
@@ -101,6 +3313,21 @@
       "ko": "",
       "ja": ""
     },
+<<<<<<< HEAD
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "cloud-certification-shortest-path",
+    "imageSrc": "/demo/webinars/wb-thumb-1.webp",
+=======
     "categorySlug": "use-cases",
     "contentFormat": "tiptap",
     "contentType": "content",
@@ -109,10 +3336,634 @@
     "hideHeroImage": true,
     "id": "Training Composer for longer horizons",
     "imageSrc": "/uploads/thumbnail-container-1774961898406.webp",
+>>>>>>> origin/main
     "relatedIds": [],
     "section": "demo",
     "sortOrder": 0,
     "status": "published",
+<<<<<<< HEAD
+    "storageId": "cnt_000031",
+    "summary": {
+      "en": "Are you going round in circles trying to get certified? Discover the shortest path to getting certified in the cloud era with our best practices.",
+      "ko": "ISMS 인증을 받기 위해 계속 방황하고 계신가요? 우리의 베스트 프랙티스로 클라우드 시대에서 인증을 빠르게 취득할 수 있는 최단 경로를 확인하세요.",
+      "ja": "ISMS悪夢をご覧になっていますか？ 認証を受けるためにぐるぐる回っているなら、ここAWSウェビナーの核心整理内容を確認してみてください！"
+    },
+    "title": {
+      "en": "Discover the shortest path to getting certified in the cloud era with our best practices",
+      "ko": "클라우드 시대에서 ISMS 인증을 빠르게 취득할 수 있는 최단 경로를 알아보세요!",
+      "ja": "ベストプラクティスで探るクラウド時代における認定資格を取得する最善の方法"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "device-security-mdm-kandji",
+    "imageSrc": "/demo/webinars/wb-thumb-3.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000035",
+    "summary": {
+      "en": "In this webinar, our security experts Brant Hwang (CEO, QueryPie) and Kenny Park (CISO, QueryPie) discuss how to secure your Apple devices and utilize Kandji’s powerful, purpose-built tools to create an intuitive, streamlined experience for admins and users alike.",
+      "ko": "이번 웨비나에서는 보안 전문가인 Brant(CEO, QueryPie)와 Kenny(CISO, QueryPie)가 Apple 디바이스를 보안하는 방법과 Kandji의 강력한 맞춤형 도구를 활용해 관리자가 사용자에게 직관적이고 효율적인 경험을 제공하는 방법을 다룹니다.",
+      "ja": "Iこのウェビナーでは、QueryPieのセキュリティ専門家であるBrant Hwang(CEO)とKenny Park(CISO)がApple機器のセキュリティ強化方法とKandjiの強力で特化されたツールを活用して管理者とユーザーの両方に直観的で簡素化された経験を提供する方法について議論します。"
+    },
+    "title": {
+      "en": "Achieving device security through MDM: Kandji x QueryPie",
+      "ko": "MDM을 통한 디바이스 보안의 완성: Kandji x QueryPie",
+      "ja": "MDM によるデバイスセキュリティの実現: Kandji x QueryPie"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "flex-querypie-secrets",
+    "imageSrc": "/demo/webinars/wb-thumb-4.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000036",
+    "summary": {
+      "en": "Flex, Korea's top HR platform, unveils the surprising revelations they discovered after integrating QueryPie into their system. What hidden magic in QueryPie completely captivated the Flex team and transformed the way they work?",
+      "ko": "Flex, 한국 최고의 HR 플랫폼, QueryPie를 도입한 후 발견한 놀라운 비밀을 공개합니다. QueryPie 속 숨겨진 마법이 어떻게 Flex 팀을 사로잡아 업무 방식을 완전히 변화시켰을까요?",
+      "ja": "韓国最高のHRプラットフォームであるFlexがQueryPieをシステムに導入した後に発見した驚くべき事実を公開します。 果たしてFlexチームを魅了し、業務方式を革新的に変化させたQueryPieの隠された魔法は何でしょうか？"
+    },
+    "title": {
+      "en": "Flex Unveils the Secrets of QueryPie",
+      "ko": "flex가 찾아낸 QueryPie의 비밀을 폭로합니다!",
+      "ja": "Flexが公開するQueryPieの秘密！"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "okta-paloalto-querypie-webinar",
+    "imageSrc": "/demo/webinars/wb-thumb-2.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000042",
+    "summary": {
+      "en": "Going beyond cloud security to cloud-native security, the OPQ Alliance (Okta x Palo Alto Networks x QueryPie) will show you the way. Watch this three-part webinar to learn more!",
+      "ko": "클라우드 보안을 넘어 클라우드 네이티브 보안으로, OPQ 얼라이언스(Okta x Palo Alto Networks x QueryPie)가 그 길을 안내합니다. 이 3부작 웨비나를 시청하고 더 많은 정보를 확인하세요!",
+      "ja": "技術が高度化するにつれて、ハッカーの攻撃方法もまた精巧になり、複雑になっています。このような状況の中で、新しいセキュリティ標準を設けるために、Okta、Palo Alto Networks、そしてQueryPieが力を合わせてOPQアライアンスを結成しました。"
+    },
+    "title": {
+      "en": "Okta x PaloAlto Networks x QueryPie: The OPQ Webinar",
+      "ko": "Okta x PaloAlto Networks x QueryPie: The OPQ Webinar",
+      "ja": "Okta x Palo Alto Networks x QueryPie: OPQ ウェビナー"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "querypie-databases-nosql-ledger-ja",
+    "imageSrc": "/demo/webinars/3dk-ep2-ja.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000043",
+    "summary": {
+      "en": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。",
+      "ko": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。",
+      "ja": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。"
+    },
+    "title": {
+      "en": "エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ",
+      "ko": "エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ",
+      "ja": "エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "querypie-databases-nosql-ledger-ko",
+    "imageSrc": "/demo/webinars/3dk-ep2-ko.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000044",
+    "summary": {
+      "en": "축적된 민감정보에 대해 보안은 강화하고, 접근 제어와 관리를 편리하게 하여 보안 안정성을 확보할 수 있도록 쿼리파이의 DB접근제어(쿼리파이 DAC)가 중추적 역할을 해 주고 있는데요,  멀티 클라우드 환경 속에서 방대한 민감정보와 데이터를 안정적으로 관리할 수 있는 방법에 대해 살펴보았습니다.",
+      "ko": "축적된 민감정보에 대해 보안은 강화하고, 접근 제어와 관리를 편리하게 하여 보안 안정성을 확보할 수 있도록 쿼리파이의 DB접근제어(쿼리파이 DAC)가 중추적 역할을 해 주고 있는데요,  멀티 클라우드 환경 속에서 방대한 민감정보와 데이터를 안정적으로 관리할 수 있는 방법에 대해 살펴보았습니다.",
+      "ja": "축적된 민감정보에 대해 보안은 강화하고, 접근 제어와 관리를 편리하게 하여 보안 안정성을 확보할 수 있도록 쿼리파이의 DB접근제어(쿼리파이 DAC)가 중추적 역할을 해 주고 있는데요,  멀티 클라우드 환경 속에서 방대한 민감정보와 데이터를 안정적으로 관리할 수 있는 방법에 대해 살펴보았습니다."
+    },
+    "title": {
+      "en": "Ep. 2 쿼리파이 DAC: DB 고민 뿌시기!—DB 통합 관리, 얍! NoSQL, 얍! 원장 데이터, 얍!",
+      "ko": "Ep. 2 쿼리파이 DAC: DB 고민 뿌시기!—DB 통합 관리, 얍! NoSQL, 얍! 원장 데이터, 얍!",
+      "ja": "Ep. 2 쿼리파이 DAC: DB 고민 뿌시기!—DB 통합 관리, 얍! NoSQL, 얍! 원장 데이터, 얍!"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "querypie-integrations-scim-slack-vault-ja",
+    "imageSrc": "/demo/webinars/3dk-ep1-ja.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000045",
+    "summary": {
+      "en": "QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。",
+      "ko": "QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。",
+      "ja": "QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。"
+    },
+    "title": {
+      "en": "エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携",
+      "ko": "エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携",
+      "ja": "エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "querypie-integrations-scim-slack-vault-ko",
+    "imageSrc": "/demo/webinars/3dk-ep1-ko.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000046",
+    "summary": {
+      "en": "쿼리파이 제품에는 어떤 기능들이 있고 해당 기능들은 각기 어떤 역할을 하는지 궁금하시죠? Ep. 1에서는 고객을 대변하여 쿼리파이 제품의 주요 기능들에 대해 파헤쳐 보았습니다.",
+      "ko": "쿼리파이 제품에는 어떤 기능들이 있고 해당 기능들은 각기 어떤 역할을 하는지 궁금하시죠? Ep. 1에서는 고객을 대변하여 쿼리파이 제품의 주요 기능들에 대해 파헤쳐 보았습니다.",
+      "ja": "쿼리파이 제품에는 어떤 기능들이 있고 해당 기능들은 각기 어떤 역할을 하는지 궁금하시죠? Ep. 1에서는 고객을 대변하여 쿼리파이 제품의 주요 기능들에 대해 파헤쳐 보았습니다."
+    },
+    "title": {
+      "en": "Ep.1 QueryPie Integrations: 자동화 핵심만 찌르기!—SCIM, 얍! Vault, 얍! Slack 결재 워크플로 연동, 얍!",
+      "ko": "Ep.1 QueryPie Integrations: 자동화 핵심만 찌르기!—SCIM, 얍! Vault, 얍! Slack 결재 워크플로 연동, 얍!",
+      "ja": "Ep.1 QueryPie Integrations: 자동화 핵심만 찌르기!—SCIM, 얍! Vault, 얍! Slack 결재 워크플로 연동, 얍!"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "querypie-kubernetes-management-ja",
+    "imageSrc": "/demo/webinars/3dk-ep4-ja.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000047",
+    "summary": {
+      "en": "エピソード 4では、QueryPie のクーバネティスアクセス制御ソリューションである “QueryPie KAC (Kubernetes Access Controller)” を活用して、クーバネティス環境でも堅固なセキュリティ環境を維持する方法について掘り下げてみました。",
+      "ko": "エピソード 4では、QueryPie のクーバネティスアクセス制御ソリューションである “QueryPie KAC (Kubernetes Access Controller)” を活用して、クーバネティス環境でも堅固なセキュリティ環境を維持する方法について掘り下げてみました。",
+      "ja": "エピソード 4では、QueryPie のクーバネティスアクセス制御ソリューションである “QueryPie KAC (Kubernetes Access Controller)” を活用して、クーバネティス環境でも堅固なセキュリティ環境を維持する方法について掘り下げてみました。"
+    },
+    "title": {
+      "en": "エピソード 4 QueryPie KAC: クーバネティスをノックアウト！ - マルチ クーバネティス クラスタ、クーバネティス リソース、Podアクセス履歴",
+      "ko": "エピソード 4 QueryPie KAC: クーバネティスをノックアウト！ - マルチ クーバネティス クラスタ、クーバネティス リソース、Podアクセス履歴",
+      "ja": "エピソード 4 QueryPie KAC: クーバネティスをノックアウト！ - マルチ クーバネティス クラスタ、クーバネティス リソース、Podアクセス履歴"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "querypie-kubernetes-management-ko",
+    "imageSrc": "/demo/webinars/3dk-ep4-ko.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000048",
+    "summary": {
+      "en": "4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다.",
+      "ko": "4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다.",
+      "ja": "4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다."
+    },
+    "title": {
+      "en": "Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!",
+      "ko": "Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!",
+      "ja": "Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "querypie-server-management-ja",
+    "imageSrc": "/demo/webinars/3dk-ep3-ja.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000049",
+    "summary": {
+      "en": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。",
+      "ko": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。",
+      "ja": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。"
+    },
+    "title": {
+      "en": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー",
+      "ko": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー",
+      "ja": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "querypie-server-management-ko",
+    "imageSrc": "/demo/webinars/3dk-ep3-ko.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000050",
+    "summary": {
+      "en": "3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다.",
+      "ko": "3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다.",
+      "ja": "3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다."
+    },
+    "title": {
+      "en": "Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!",
+      "ko": "Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!",
+      "ja": "Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "querypie-side-kick-teaser-ko",
+    "imageSrc": "/demo/webinars/3dk-intro-ko.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000051",
+    "summary": {
+      "en": "쿼리파이에 대해 알고 싶고 궁금한 것이 많은 분들을 위해 준비하였습니다. DB접근제어, 시스템 접근제어, 쿠버네티스 접근제어, 웹 어플리케이션 접근제어, 그리고 데이터 디스커버리에 이르기까지....클라우드와 온프레미스에서 기업의 인프라를 아우르는 접근제어와 감사 솔루션을 아우르는 쿼리파이의 핵심만 쏙쏙 뽑았습니다.",
+      "ko": "쿼리파이에 대해 알고 싶고 궁금한 것이 많은 분들을 위해 준비하였습니다. DB접근제어, 시스템 접근제어, 쿠버네티스 접근제어, 웹 어플리케이션 접근제어, 그리고 데이터 디스커버리에 이르기까지....클라우드와 온프레미스에서 기업의 인프라를 아우르는 접근제어와 감사 솔루션을 아우르는 쿼리파이의 핵심만 쏙쏙 뽑았습니다.",
+      "ja": "쿼리파이에 대해 알고 싶고 궁금한 것이 많은 분들을 위해 준비하였습니다. DB접근제어, 시스템 접근제어, 쿠버네티스 접근제어, 웹 어플리케이션 접근제어, 그리고 데이터 디스커버리에 이르기까지....클라우드와 온프레미스에서 기업의 인프라를 아우르는 접근제어와 감사 솔루션을 아우르는 쿼리파이의 핵심만 쏙쏙 뽑았습니다."
+    },
+    "title": {
+      "en": "본격 고객 소통 콘텐츠 [Ch.쿼리파이: 3단 옆차기]가 찾아옵니다!",
+      "ko": "본격 고객 소통 콘텐츠 [Ch.쿼리파이: 3단 옆차기]가 찾아옵니다!",
+      "ja": "본격 고객 소통 콘텐츠 [Ch.쿼리파이: 3단 옆차기]가 찾아옵니다!"
+    }
+  },
+  {
+    "authorName": "",
+    "authorRole": "",
+    "bodyHtml": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyMarkdown": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "bodyRichText": {
+      "en": "",
+      "ko": "",
+      "ja": ""
+    },
+    "categorySlug": "webinars",
+    "contentFormat": "tiptap",
+    "contentType": "content",
+    "dateIso": "2024-11-29",
+    "downloadCoverImageSrc": "",
+    "downloadPdfFileName": "",
+    "downloadPdfSrc": "",
+    "enableDownloadButton": false,
+    "externalUrl": "",
+    "gatingLevel": "none",
+    "hideHeroImage": true,
+    "id": "ztna-security-prisma-access",
+    "imageSrc": "/demo/webinars/wb-thumb-5.webp",
+    "relatedIds": [],
+    "section": "demo",
+    "sortOrder": 0,
+    "status": "published",
+    "storageId": "cnt_000065",
+    "summary": {
+      "en": "Why Did QueryPie Choose Prisma Access? Dive into the details of how QueryPie identified Prisma Access as the ultimate choice for their security needs.",
+      "ko": "제로트러스트 노하우 공개! 왜 QueryPie는 프리즈마 액세스(Prisma Access)를 선택했을까? 간단하지만 중요한 핵심 비밀을 공유합니다!",
+      "ja": "QueryPieがPrismaアクセスを選択した理由？ QueryPieがPrisma Accessをセキュリティニーズのための最終的な選択肢として特定した方法の詳細をご覧ください。"
+    },
+    "title": {
+      "en": "Achieve Perfect ZTNA Security with Prisma Access!",
+      "ko": "ZTNA보안, Prisma Access로 완벽하게!",
+      "ja": "Prisma Accessで完璧なZTNAセキュリティを実現！"
+=======
     "storageId": "cnt_000006",
     "summary": {
       "en": "",
@@ -123,6 +3974,7 @@
       "en": "Training Composer for longer horizons",
       "ko": "",
       "ja": ""
+>>>>>>> origin/main
     }
   }
 ]

@@ -1,0 +1,45 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2025-11-07",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "terrasky-mitoco-buddy",
+  "imageSrc": "/company/news/news-21.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000102",
+  "summary": {
+    "en": "QueryPie AI合同会社（本社：東京都港区、共同代表：Brant Hwang、以下「QueryPie AI」）は、株式会社テラスカイ（本社：東京都中央区、代表取締役CEO 社長執行役員：佐藤 秀哉、以下「テラスカイ」）と、AIエージェント事業分野において協業することを発表しました。本協業により、QueryPie AIのエンタープライズ向けAIプラットフォーム「QueryPie AI Platform（AIP）」が、テラスカイの新サービス「mitoco Buddy」に採用され、企業内に乱立するクラウドサービスを統合し、情報連携およびデータ活用を促進することで、意思決定の加速化と業務自動化を支援します。",
+    "ko": "QueryPie AI合同会社（本社：東京都港区、共同代表：Brant Hwang、以下「QueryPie AI」）は、株式会社テラスカイ（本社：東京都中央区、代表取締役CEO 社長執行役員：佐藤 秀哉、以下「テラスカイ」）と、AIエージェント事業分野において協業することを発表しました。本協業により、QueryPie AIのエンタープライズ向けAIプラットフォーム「QueryPie AI Platform（AIP）」が、テラスカイの新サービス「mitoco Buddy」に採用され、企業内に乱立するクラウドサービスを統合し、情報連携およびデータ活用を促進することで、意思決定の加速化と業務自動化を支援します。",
+    "ja": "QueryPie AI合同会社（本社：東京都港区、共同代表：Brant Hwang、以下「QueryPie AI」）は、株式会社テラスカイ（本社：東京都中央区、代表取締役CEO 社長執行役員：佐藤 秀哉、以下「テラスカイ」）と、AIエージェント事業分野において協業することを発表しました。本協業により、QueryPie AIのエンタープライズ向けAIプラットフォーム「QueryPie AI Platform（AIP）」が、テラスカイの新サービス「mitoco Buddy」に採用され、企業内に乱立するクラウドサービスを統合し、情報連携およびデータ活用を促進することで、意思決定の加速化と業務自動化を支援します。"
+  },
+  "title": {
+    "en": "QueryPie AI、株式会社テラスカイと協業しAIエージェント「mitoco Buddy」を発表",
+    "ko": "QueryPie AI、株式会社テラスカイと協業しAIエージェント「mitoco Buddy」を発表",
+    "ja": "QueryPie AI、株式会社テラスカイと協業しAIエージェント「mitoco Buddy」を発表"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000102/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000102/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000102/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000102/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000102/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000102/ja.tiptap.json"
+    }
+  }
+}

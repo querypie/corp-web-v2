@@ -1,0 +1,45 @@
+{
+  "authorName": "noah",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2025-02-06",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-grpc-dast-security",
+  "imageSrc": "/documentation/white-papers/wp-thumb-12.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000144",
+  "summary": {
+    "en": "Learn how QueryPie leverages gRPC communication for high performance and stability in web applications.",
+    "ko": "QueryPie가 웹 애플리케이션에서 높은 성능과 안정성을 위해 gRPC 통신을 어떻게 활용하는지 알아보세요.",
+    "ja": "QueryPieがウェブアプリケーションで高いパフォーマンスと安定性を実現するために、gRPC通信をどのように活用しているかを確認してください。"
+  },
+  "title": {
+    "en": "QueryPie gRPC DAST Security: ZAP Custom Script Example",
+    "ko": "QueryPie gRPC 통신을 위한 DAST 보안 전략 : ZAP 커스텀 스크립트 적용 사례",
+    "ja": "QueryPie gRPC DAST セキュリティ: ZAP カスタムスクリプトの例"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000144/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000144/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000144/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000144/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000144/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000144/ja.tiptap.json"
+    }
+  }
+}

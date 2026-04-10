@@ -1,7 +1,20 @@
 import { notFound } from "next/navigation";
-import { isLocale } from "../../constants/i18n";
+import { getLocalePath, isLocale } from "../../constants/i18n";
 import HomePage from "../../components/pages/home/HomePage";
+<<<<<<< HEAD
+import {
+  demoCategoryConfigs,
+  docsCategoryConfigs,
+  getCategoryLabel,
+} from "@/features/content/config";
+import {
+  getContentThumbnailSrc,
+  getLocalizedContent,
+  getPublicDetailHref,
+} from "@/features/content/data";
+=======
 import { getContentThumbnailSrc, getLocalizedContent } from "@/features/content/data";
+>>>>>>> origin/main
 import { readContentState } from "@/features/content/contentState.server";
 
 type LocalePageProps = {
@@ -48,11 +61,88 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     notFound();
   }
 
+  const publishedItems = await readContentState();
+  const latestByCategory = (
+    section: "demo" | "documentation",
+    categorySlug: string,
+  ) =>
+    publishedItems
+      .filter(
+        (item) =>
+          item.section === section &&
+          item.categorySlug === categorySlug &&
+          item.status === "published",
+      )
+      .sort((left, right) => (right.dateIso || "").localeCompare(left.dateIso || ""))[0];
+
+  const latestUseCase = latestByCategory("demo", "use-cases");
+  const latestWhitePaper = latestByCategory("documentation", "white-papers");
+  const latestBlog = latestByCategory("documentation", "blogs");
+
+  const contentListItems: Array<{
+    category: string;
+    href: string;
+    imageSrc: string;
+    title: string;
+  }> = [
+    latestUseCase
+      ? {
+          category: getCategoryLabel(demoCategoryConfigs, "use-cases", locale),
+          href:
+            latestUseCase.contentType === "outlink"
+              ? latestUseCase.externalUrl
+              : getPublicDetailHref("demo", locale, latestUseCase.id),
+          imageSrc: getContentThumbnailSrc(latestUseCase.imageSrc),
+          title: getLocalizedContent(latestUseCase.title, locale),
+        }
+      : null,
+    latestWhitePaper
+      ? {
+          category: getCategoryLabel(docsCategoryConfigs, "white-papers", locale),
+          href:
+            latestWhitePaper.contentType === "outlink"
+              ? latestWhitePaper.externalUrl
+              : getPublicDetailHref("documentation", locale, latestWhitePaper.id),
+          imageSrc: getContentThumbnailSrc(latestWhitePaper.imageSrc),
+          title: getLocalizedContent(latestWhitePaper.title, locale),
+        }
+      : null,
+    latestBlog
+      ? {
+          category: getCategoryLabel(docsCategoryConfigs, "blogs", locale),
+          href:
+            latestBlog.contentType === "outlink"
+              ? latestBlog.externalUrl
+              : getPublicDetailHref("documentation", locale, latestBlog.id),
+          imageSrc: getContentThumbnailSrc(latestBlog.imageSrc),
+          title: getLocalizedContent(latestBlog.title, locale),
+        }
+      : null,
+  ].filter((item): item is NonNullable<typeof item> => !!item);
+
+  const contentListLinks = [
+    {
+      href: getLocalePath(locale, "/features/demo?category=use-cases"),
+      label: getCategoryLabel(demoCategoryConfigs, "use-cases", locale),
+    },
+    {
+      href: getLocalePath(locale, "/features/documentation?category=white-papers"),
+      label: getCategoryLabel(docsCategoryConfigs, "white-papers", locale),
+    },
+    {
+      href: getLocalePath(locale, "/features/documentation?category=blogs"),
+      label: getCategoryLabel(docsCategoryConfigs, "blogs", locale),
+    },
+  ];
+
   // 홈 화면에서 사용하는 locale별 카피/데이터
   const copy = {
     en: {
       nav: ["Solutions", "Features", "Company", "Plans"],
-      hero: ["Experience a new AI business,", "QueryPie AI is the best way."],
+      heroHeading: "AI That Gets How You Work",
+      heroDescription:
+        "QueryPie AI is here to help you achieve successful AI transformation in your life and business.",
+      heroPrimaryCtaLabel: "Experience it now",
       heroPromptRotatingTexts: [
         "Experience a new AI business?",
         "Route the right task to the right agent.",
@@ -61,6 +151,10 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       clientCaption: "Trusted every day by teams that build world-class software",
       contentListDescription:
         "Explore real-world guidance, strategies, and insights from a community of experts shaping the future of data access.",
+<<<<<<< HEAD
+      contentListItems,
+      contentListLinks,
+=======
       contentListItems: [
         {
           category: "DEMO",
@@ -85,6 +179,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         },
       ],
       contentListLinks: ["DEMO", "Use Cases", "Blogs"],
+>>>>>>> origin/main
       contentListTitle: "Guides and Best Practices",
       featureItems: [
         {
@@ -155,17 +250,29 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       newsItems: [
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
+<<<<<<< HEAD
+          imageSrc: "/images/common/fallback-contents.jpg",
+=======
           imageSrc: "/uploads/news-01.png",
+>>>>>>> origin/main
           title: "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
+<<<<<<< HEAD
+          imageSrc: "/images/common/fallback-contents.jpg",
+=======
           imageSrc: "/uploads/news-02.png",
+>>>>>>> origin/main
           title: "Payroll Partners with QueryPie on AI Security Solutions",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
+<<<<<<< HEAD
+          imageSrc: "/images/common/fallback-contents.jpg",
+=======
           imageSrc: "/uploads/news-03.png",
+>>>>>>> origin/main
           title:
             "Security Solution Playing the Role of a “Door Lock” in the Cloud — Expanding to Japan and Europe",
         },
@@ -186,7 +293,10 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     },
     ko: {
       nav: ["솔루션", "기능", "회사", "요금제"],
-      hero: ["Experience a new AI business,", "QueryPie AI is the best way."],
+      heroHeading: "당신의 일하는 방식을 이해하는 AI",
+      heroDescription:
+        "QueryPie AI는 당신의 일과 비즈니스 전반에서 성공적인 AI 전환을 이룰 수 있도록 돕습니다.",
+      heroPrimaryCtaLabel: "지금 체험하기",
       heroPromptRotatingTexts: [
         "새로운 AI 비즈니스를 경험해볼까요?",
         "적절한 에이전트에 작업을 자동으로 연결하세요.",
@@ -195,6 +305,10 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       clientCaption: "세계적인 소프트웨어 팀이 매일 신뢰하는 플랫폼",
       contentListDescription:
         "데이터 접근의 미래를 만드는 전문가 커뮤니티의 실제 가이드, 전략, 인사이트를 살펴보세요.",
+<<<<<<< HEAD
+      contentListItems,
+      contentListLinks,
+=======
       contentListItems: [
         {
           category: "DEMO",
@@ -219,6 +333,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         },
       ],
       contentListLinks: ["DEMO", "Use Cases", "Blogs"],
+>>>>>>> origin/main
       contentListTitle: "가이드와 베스트 프랙티스",
       featureItems: [
         {
@@ -289,17 +404,29 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       newsItems: [
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
+<<<<<<< HEAD
+          imageSrc: "/images/common/fallback-contents.jpg",
+=======
           imageSrc: "/uploads/news-01.png",
+>>>>>>> origin/main
           title: "TerraSky의 MCP 호환 AI 플랫폼 ‘mitoco Buddy’ 공식 출시",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
+<<<<<<< HEAD
+          imageSrc: "/images/common/fallback-contents.jpg",
+=======
           imageSrc: "/uploads/news-02.png",
+>>>>>>> origin/main
           title: "Payroll, QueryPie와 AI 보안 솔루션 협력",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
+<<<<<<< HEAD
+          imageSrc: "/images/common/fallback-contents.jpg",
+=======
           imageSrc: "/uploads/news-03.png",
+>>>>>>> origin/main
           title:
             "클라우드의 ‘도어락’ 역할을 하는 보안 솔루션 — 일본과 유럽으로 확장",
         },
@@ -320,7 +447,10 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     },
     ja: {
       nav: ["ソリューション", "機能", "会社", "プラン"],
-      hero: ["Experience a new AI business,", "QueryPie AI is the best way."],
+      heroHeading: "働き方を理解する AI",
+      heroDescription:
+        "QueryPie AI は、あなたの仕事とビジネスにおける AI 変革を成功へ導くお手伝いをします。",
+      heroPrimaryCtaLabel: "今すぐ体験する",
       heroPromptRotatingTexts: [
         "Experience a new AI business?",
         "最適なエージェントへ自動でルーティング。",
@@ -329,6 +459,10 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       clientCaption: "世界最高水準のソフトウェアチームが毎日信頼するプラットフォーム",
       contentListDescription:
         "データアクセスの未来を形づくる専門家コミュニティによる、実践的なガイド、戦略、インサイトをご覧ください。",
+<<<<<<< HEAD
+      contentListItems,
+      contentListLinks,
+=======
       contentListItems: [
         {
           category: "DEMO",
@@ -353,6 +487,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         },
       ],
       contentListLinks: ["DEMO", "Use Cases", "Blogs"],
+>>>>>>> origin/main
       contentListTitle: "ガイドとベストプラクティス",
       featureItems: [
         {
@@ -423,17 +558,29 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       newsItems: [
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
+<<<<<<< HEAD
+          imageSrc: "/images/common/fallback-contents.jpg",
+=======
           imageSrc: "/uploads/news-01.png",
+>>>>>>> origin/main
           title: "TerraSky の MCP 対応 AI プラットフォーム『mitoco Buddy』が正式リリース",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
+<<<<<<< HEAD
+          imageSrc: "/images/common/fallback-contents.jpg",
+=======
           imageSrc: "/uploads/news-02.png",
+>>>>>>> origin/main
           title: "Payroll が QueryPie と AI セキュリティソリューションで提携",
         },
         {
           href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
+<<<<<<< HEAD
+          imageSrc: "/images/common/fallback-contents.jpg",
+=======
           imageSrc: "/uploads/news-03.png",
+>>>>>>> origin/main
           title:
             "クラウドの“ドアロック”として機能するセキュリティソリューション — 日本とヨーロッパへ拡大",
         },
@@ -458,7 +605,11 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     .filter((item) => item.status === "published")
     .slice(0, 3)
     .map((item) => ({
+<<<<<<< HEAD
+      href: item.contentType === "outlink" ? item.externalUrl : getLocalePath(locale, `/news/${item.id}`),
+=======
       href: item.contentType === "outlink" ? item.externalUrl : `/${locale}/news/${item.id}`,
+>>>>>>> origin/main
       imageSrc: getContentThumbnailSrc(item.imageSrc),
       isExternal: item.contentType === "outlink",
       title: getLocalizedContent(item.title, locale),
@@ -476,8 +627,9 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       ctaEyebrow={copy.ctaSection[0]}
       ctaTitle={copy.ctaSection[1]}
       featureItems={copy.featureItems}
-      heroHeadingMuted={copy.hero[0]}
-      heroHeadingPrimary={copy.hero[1]}
+      heroDescription={copy.heroDescription}
+      heroHeading={copy.heroHeading}
+      heroPrimaryCtaLabel={copy.heroPrimaryCtaLabel}
       locale={locale}
       heroPromptRotatingTexts={copy.heroPromptRotatingTexts}
       mcpDescription={copy.mcpDescription}

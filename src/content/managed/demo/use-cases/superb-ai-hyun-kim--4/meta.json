@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/cs-thumb-superb.webp",
+          "webPath": "/demo/use-cases/cs-thumb-superb.webp"
+=======
           "sourcePath": "public/customer-success-cases/cs-thumb-superb.webp",
           "webPath": "/customer-success-cases/cs-thumb-superb.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/superb-ai-hyun-kim--4/en.mdx",
@@ -31,8 +36,13 @@
         "best practice"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/cs-thumb-superb.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"\\\"The adoption of AI in traditional industries hinges on data and security as the keys to success.\\\"\"\ndescription: \"In this video, we have the privilege of featuring Hyun Kim, the CEO and Founder of Superb AI.\"\ndate: \"2025-01-06\"\nogImage: \"public/demo/use-cases/cs-thumb-superb.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"Superb AI\", \"AI\", \"customer success story\", \"best practice\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/2/lovo-ai-tom-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/5/lg-uplus-daniel-ku\"",
+=======
       "ogImage": "/customer-success-cases/cs-thumb-superb.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"\\\"The adoption of AI in traditional industries hinges on data and security as the keys to success.\\\"\"\ndescription: \"In this video, we have the privilege of featuring Hyun Kim, the CEO and Founder of Superb AI.\"\ndate: \"2025-01-06\"\nogImage: \"public/customer-success-cases/cs-thumb-superb.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"Superb AI\", \"AI\", \"customer success story\", \"best practice\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/2/lovo-ai-tom-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/5/lg-uplus-daniel-ku\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/2/lovo-ai-tom-lee",
         "/features/demo/use-cases/3/air-company-mori-takeshi",
@@ -46,7 +56,11 @@
         "title": "\\\"The adoption of AI in traditional industries hinges on data and security as the keys to success.\\\"",
         "description": "In this video, we have the privilege of featuring Hyun Kim, the CEO and Founder of Superb AI.",
         "date": "2025-01-06",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/cs-thumb-superb.webp",
+=======
         "ogImage": "public/customer-success-cases/cs-thumb-superb.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "keywords": [
@@ -67,8 +81,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/cs-thumb-superb.webp",
+          "webPath": "/demo/use-cases/cs-thumb-superb.webp"
+=======
           "sourcePath": "public/customer-success-cases/cs-thumb-superb.webp",
           "webPath": "/customer-success-cases/cs-thumb-superb.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/superb-ai-hyun-kim--4/ko.mdx",
@@ -84,8 +103,13 @@
         "best practice"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/cs-thumb-superb.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"\\\"전통 산업에서의 AI 도입은 데이터와 보안이 성공의 핵심 요소입니다.\\\"\"\ndescription: \"MLOps 솔루션을 제공하는 Superb AI의 CEO Hyun Kim은 AI와 컴플라이언스 관계를 재차 강조했습니다. 그 이유는 무엇일까요? 지금 바로 만나보세요!\"\ndate: \"2025-01-06\"\nogImage: \"public/demo/use-cases/cs-thumb-superb.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"Superb AI\", \"AI\", \"customer success story\", \"best practice\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/2/lovo-ai-tom-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/5/lg-uplus-daniel-ku\"",
+=======
       "ogImage": "/customer-success-cases/cs-thumb-superb.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"\\\"전통 산업에서의 AI 도입은 데이터와 보안이 성공의 핵심 요소입니다.\\\"\"\ndescription: \"MLOps 솔루션을 제공하는 Superb AI의 CEO Hyun Kim은 AI와 컴플라이언스 관계를 재차 강조했습니다. 그 이유는 무엇일까요? 지금 바로 만나보세요!\"\ndate: \"2025-01-06\"\nogImage: \"public/customer-success-cases/cs-thumb-superb.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"Superb AI\", \"AI\", \"customer success story\", \"best practice\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/2/lovo-ai-tom-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/5/lg-uplus-daniel-ku\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/2/lovo-ai-tom-lee",
         "/features/demo/use-cases/3/air-company-mori-takeshi",
@@ -99,7 +123,11 @@
         "title": "\\\"전통 산업에서의 AI 도입은 데이터와 보안이 성공의 핵심 요소입니다.\\\"",
         "description": "MLOps 솔루션을 제공하는 Superb AI의 CEO Hyun Kim은 AI와 컴플라이언스 관계를 재차 강조했습니다. 그 이유는 무엇일까요? 지금 바로 만나보세요!",
         "date": "2025-01-06",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/cs-thumb-superb.webp",
+=======
         "ogImage": "public/customer-success-cases/cs-thumb-superb.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "keywords": [
@@ -120,8 +148,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/cs-thumb-superb.webp",
+          "webPath": "/demo/use-cases/cs-thumb-superb.webp"
+=======
           "sourcePath": "public/customer-success-cases/cs-thumb-superb.webp",
           "webPath": "/customer-success-cases/cs-thumb-superb.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/superb-ai-hyun-kim--4/ja.mdx",
@@ -137,8 +170,13 @@
         "ベストプラクティス"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/cs-thumb-superb.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"「伝統産業のAI導入、データとセキュリティが成功の核心要素です。」\"\ndescription: \"このビデオでは、Superb AIのCEO兼創設者であるHyun Kim氏をお迎えし、彼のインサイトをお届けします。\"\ndate: \"2025-01-06\"\nogImage: \"public/demo/use-cases/cs-thumb-superb.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"Superb AI\", \"AI\", \"顧客成功事例\", \"ベストプラクティス\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/2/lovo-ai-tom-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/5/lg-uplus-daniel-ku\"",
+=======
       "ogImage": "/customer-success-cases/cs-thumb-superb.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"「伝統産業のAI導入、データとセキュリティが成功の核心要素です。」\"\ndescription: \"このビデオでは、Superb AIのCEO兼創設者であるHyun Kim氏をお迎えし、彼のインサイトをお届けします。\"\ndate: \"2025-01-06\"\nogImage: \"public/customer-success-cases/cs-thumb-superb.webp\"\nhideOgImage: true\nhideTableOfContents: true\nkeywords: [\"QueryPie\", \"Superb AI\", \"AI\", \"顧客成功事例\", \"ベストプラクティス\"]\nrelatedPosts:\n  - \"/features/demo/use-cases/2/lovo-ai-tom-lee\"\n  - \"/features/demo/use-cases/3/air-company-mori-takeshi\"\n  - \"/features/demo/use-cases/5/lg-uplus-daniel-ku\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/2/lovo-ai-tom-lee",
         "/features/demo/use-cases/3/air-company-mori-takeshi",
@@ -152,7 +190,11 @@
         "title": "「伝統産業のAI導入、データとセキュリティが成功の核心要素です。」",
         "description": "このビデオでは、Superb AIのCEO兼創設者であるHyun Kim氏をお迎えし、彼のインサイトをお届けします。",
         "date": "2025-01-06",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/cs-thumb-superb.webp",
+=======
         "ogImage": "public/customer-success-cases/cs-thumb-superb.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "keywords": [

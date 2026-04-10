@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "grant-roles-users",
+  "imageSrc": "/demo/acp-features/tu-thumb-kac-2.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000040",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "How to Grant Roles to Users",
+    "ko": "How to Grant Roles to Users",
+    "ja": "How to Grant Roles to Users"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000040/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000040/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000040/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000040/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000040/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000040/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2021-12-14",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.businesswire.com/news/home/20211214005490/en/QueryPie-Closes-USD-17.75-Million-in-Oversubscribed-Preferred-Series-Seed-Round-Co-Led-by-Atinum-Investment-and-Murex-Partners",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-closes-usd-1775-million-in-oversubscribed-preferred-series-seed-round-co-led-by-atinum-investment-and-murex-partners-2",
+  "imageSrc": "/company/news/news-7.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 1,
+  "status": "hidden",
+  "storageId": "cnt_000164",
+  "summary": {
+    "en": "CHEQUER, a provider of the QueryPie modern data governance platform, closed a USD 17.75 million Preferred Series Seed funding round co-led by Atinum Investment and Murex Partners. QueryPie is an advanced data governance solution that simplifies data access and manages scattered data sources and data protection policies.",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "QueryPie Closes USD 17.75 Million in Oversubscribed Preferred Series Seed Round Co-Led by Atinum Investment and Murex Partners",
+    "ko": "",
+    "ja": ""
+  },
+  "locales": {}
+}

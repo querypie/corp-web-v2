@@ -1,0 +1,45 @@
+{
+  "authorName": "kris",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "querypie-cracking-global-markets",
+  "imageSrc": "/documentation/blogs/b-thumb-2.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000121",
+  "summary": {
+    "en": "How QueryPie confidently tackles global market challenges with innovative solutions and strategic expertise.",
+    "ko": "글로벌 성공을 위한 핵심 요건과 성공 요소를 모두 갖춘 QueryPie의 전략을 자세히 이야기해보며, 글로벌에서의 확장성과 경쟁력을 높이기 위한 비전과 실행 방안을 공유합니다.",
+    "ja": "QueryPie が、革新的なソリューションと戦略的な専門知識で、いかに自信を持ってグローバル市場の課題に取り組んでいるのかを紹介します。"
+  },
+  "title": {
+    "en": "Cracking the Toughest Global Markets: What Makes QueryPie So Confident?",
+    "ko": "가장 어렵다는 글로벌 진출, QueryPie는 왜 확신하나?",
+    "ja": "最も難しいと言われるグローバル展開、QueryPieはなぜ確信しているのか？"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000121/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000121/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000121/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000121/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000121/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000121/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2025-02-01",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "integrating-querypie-with-redash",
+  "imageSrc": "/demo/acp-features/de-thumb-redash.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000026",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "QueryPie x Redash",
+    "ko": "QueryPie x Redash",
+    "ja": "QueryPie x Redash"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000026/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000026/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000026/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000026/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000026/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000026/ja.tiptap.json"
+    }
+  }
+}

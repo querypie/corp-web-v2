@@ -55,6 +55,60 @@ function highlightScriptLike(code: string) {
     );
 }
 
+<<<<<<< HEAD
+function highlightSql(code: string) {
+  const escaped = escapeHtml(code);
+
+  return escaped
+    .replace(/(--.*$)/gm, (match) => wrapToken("code-token-comment", match))
+    .replace(/("(?:\\.|[^"])*"|'(?:\\.|[^'])*')/g, (match) => wrapToken("code-token-string", match))
+    .replace(/\b(\d+(?:\.\d+)?)\b/g, (match) => wrapToken("code-token-number", match))
+    .replace(/\b(SELECT|FROM|WHERE|GROUP\s+BY|ORDER\s+BY|HAVING|INSERT|INTO|VALUES|UPDATE|SET|DELETE|CREATE|ALTER|DROP|TABLE|VIEW|INDEX|AND|OR|NOT|NULL|IS|IN|AS|ON|JOIN|LEFT|RIGHT|INNER|OUTER|LIMIT|OFFSET|DISTINCT|COUNT|SUM|AVG|MIN|MAX|BY|ASC|DESC)\b/gi, (match) =>
+      wrapToken("code-token-keyword", match),
+    );
+}
+
+function highlightYaml(code: string) {
+  const escaped = escapeHtml(code);
+
+  return escaped
+    .replace(/(#.*$)/gm, (match) => wrapToken("code-token-comment", match))
+    .replace(/(\s|^)([A-Za-z0-9_.-]+)(:\s)/g, (_match, prefix, key, suffix) =>
+      `${prefix}${wrapToken("code-token-attr", key)}${wrapToken("code-token-punctuation", suffix)}`,
+    )
+    .replace(/("(?:\\.|[^"])*"|'(?:\\.|[^'])*')/g, (match) => wrapToken("code-token-string", match))
+    .replace(/\b(true|false|null)\b/gi, (match) => wrapToken("code-token-keyword", match))
+    .replace(/\b(\d+(?:\.\d+)?)\b/g, (match) => wrapToken("code-token-number", match));
+}
+
+function highlightPython(code: string) {
+  const escaped = escapeHtml(code);
+
+  return escaped
+    .replace(/(#.*$)/gm, (match) => wrapToken("code-token-comment", match))
+    .replace(/("""[\s\S]*?"""|'''[\s\S]*?'''|"(?:\\.|[^"])*"|'(?:\\.|[^'])*')/g, (match) =>
+      wrapToken("code-token-string", match),
+    )
+    .replace(/\b(def|return|if|elif|else|for|while|class|import|from|as|try|except|finally|with|lambda|yield|pass|break|continue|True|False|None|and|or|not|in|is)\b/g, (match) =>
+      wrapToken("code-token-keyword", match),
+    )
+    .replace(/\b(\d+(?:\.\d+)?)\b/g, (match) => wrapToken("code-token-number", match));
+}
+
+function highlightRego(code: string) {
+  const escaped = escapeHtml(code);
+
+  return escaped
+    .replace(/(#.*$)/gm, (match) => wrapToken("code-token-comment", match))
+    .replace(/("(?:\\.|[^"])*")/g, (match) => wrapToken("code-token-string", match))
+    .replace(/\b(package|import|default|not|some|with|if|in|contains|every|else|true|false|null)\b/g, (match) =>
+      wrapToken("code-token-keyword", match),
+    )
+    .replace(/\b(\d+(?:\.\d+)?)\b/g, (match) => wrapToken("code-token-number", match));
+}
+
+=======
+>>>>>>> origin/main
 function highlightShell(code: string) {
   const escaped = escapeHtml(code);
 
@@ -75,6 +129,25 @@ export function highlightCodeToHtml(code: string, language?: string) {
     return highlightScriptLike(code);
   }
 
+<<<<<<< HEAD
+  if (["sql"].includes(normalizedLanguage)) {
+    return highlightSql(code);
+  }
+
+  if (["yml", "yaml"].includes(normalizedLanguage)) {
+    return highlightYaml(code);
+  }
+
+  if (["py", "python"].includes(normalizedLanguage)) {
+    return highlightPython(code);
+  }
+
+  if (["rego"].includes(normalizedLanguage)) {
+    return highlightRego(code);
+  }
+
+=======
+>>>>>>> origin/main
   if (["sh", "bash", "shell", "zsh"].includes(normalizedLanguage)) {
     return highlightShell(code);
   }

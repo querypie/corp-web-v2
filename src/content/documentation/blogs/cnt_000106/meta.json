@@ -1,0 +1,45 @@
+{
+  "authorName": "kenny",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2025-06-10",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "why-we-need-ai-red-teaming",
+  "imageSrc": "/documentation/blogs/b-thumb-21.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000106",
+  "summary": {
+    "en": "AI is no longer just generating answers — it’s executing real-world actions. Through real incidents and case studies, QueryPie explains emerging AI security threats like command refusal and indirect prompt injection, and why AI Red Teaming is now essential.",
+    "ko": "AI는 더 이상 답변만 생성하지 않고 실제 세계에서 명령을 수행합니다. 실제 사건과 사례를 통해 QueryPie가 명령 거부, 간접 프롬프트 인젝션 등 새로운 AI 보안 위협과 AI Red Teaming의 필요성을 설명합니다.",
+    "ja": "AIはもはや回答を生成するだけでなく、現実世界でアクションを実行します。実際の事件や事例を通じて、QueryPieが命令拒否や間接プロンプトインジェクションなど新たなAIセキュリティ脅威とAI Red Teamingの必要性を説明します。"
+  },
+  "title": {
+    "en": "AI Rebels Are Becoming Reality — Why We Need AI Red Teaming",
+    "ko": "AI가 말을 듣지 않는다. 이제 AI Red Teaming이 필요하다.",
+    "ja": "AIが命令を聞かなかった：なぜAI Red Teamingが必要なのか"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000106/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000106/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000106/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000106/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000106/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000106/ja.tiptap.json"
+    }
+  }
+}

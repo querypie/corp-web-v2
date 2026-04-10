@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2026-03-02",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "quotation-analyze-ai-agent",
+  "imageSrc": "/demo/use-cases/aip-use-case-thumb-28-en.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000069",
+  "summary": {
+    "en": "Are you spending valuable time opening and organizing hundreds of local files and password-protected quotations one by one? With AIP, analysis is completed on the spot — without uploads and without data exposure.",
+    "ko": "Are you spending valuable time opening and organizing hundreds of local files and password-protected quotations one by one? With AIP, analysis is completed on the spot — without uploads and without data exposure.",
+    "ja": "数百におよぶローカルファイルや、パスワード付きの見積書を一つひとつ開いて整理する作業に、貴重な時間を費やしていませんか？AIPなら、アップロード不要・データ流出なしで、その場で分析を完了します。"
+  },
+  "title": {
+    "en": "AIP Use Case: Quotation Analysis AI Agent",
+    "ko": "AIP Use Case: Quotation Analysis AI Agent",
+    "ja": "AIP活用事例： 見積分析AIエージェント"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000069/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000069/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000069/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000069/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000069/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000069/ja.tiptap.json"
+    }
+  }
+}

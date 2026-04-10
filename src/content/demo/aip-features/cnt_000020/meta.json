@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "aip-features",
+  "contentType": "content",
+  "dateIso": "2025-09-23",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "google-oauth-demo",
+  "imageSrc": "/demo/aip-features/de-thumb-google-oauth.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000020",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "AIP Google OAuth Demo",
+    "ko": "AIP Google OAuth Demo",
+    "ja": "AIP Google OAuth デモ"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000020/en.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000020/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000020/ko.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000020/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000020/ja.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000020/ja.tiptap.json"
+    }
+  }
+}

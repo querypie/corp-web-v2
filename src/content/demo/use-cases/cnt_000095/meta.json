@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "allganize-changsu-lee",
+  "imageSrc": "/demo/use-cases/cs-thumb-allganize.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000095",
+  "summary": {
+    "en": "In today's video, we have the privilege of featuring Changsu Lee, the CEO and Founder of Allganize.",
+    "ko": "이번 영상에서 이창수 대표는 기업들을 위한 종합적인 사이버 보안 솔루션으로서 QueryPie가 제공하는 중요한 가치를 나눕니다.",
+    "ja": "AllganizeのCEO兼創設者であるChangsu Lee氏を特集することができます。"
+  },
+  "title": {
+    "en": "\\\"I envision a bright future, similar to the global business outcomes of QueryPie.\\\"",
+    "ko": "\\\"QueryPie처럼 글로벌 비즈니스 성과를 내는 미래를 상상합니다.\\\"",
+    "ja": "「QueryPie のようにグローバルビジネスでの成果を出す未来を描いています。」"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000095/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000095/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000095/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000095/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000095/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000095/ja.tiptap.json"
+    }
+  }
+}

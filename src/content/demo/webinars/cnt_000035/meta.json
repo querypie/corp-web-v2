@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "device-security-mdm-kandji",
+  "imageSrc": "/demo/webinars/wb-thumb-3.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000035",
+  "summary": {
+    "en": "In this webinar, our security experts Brant Hwang (CEO, QueryPie) and Kenny Park (CISO, QueryPie) discuss how to secure your Apple devices and utilize Kandji’s powerful, purpose-built tools to create an intuitive, streamlined experience for admins and users alike.",
+    "ko": "이번 웨비나에서는 보안 전문가인 Brant(CEO, QueryPie)와 Kenny(CISO, QueryPie)가 Apple 디바이스를 보안하는 방법과 Kandji의 강력한 맞춤형 도구를 활용해 관리자가 사용자에게 직관적이고 효율적인 경험을 제공하는 방법을 다룹니다.",
+    "ja": "Iこのウェビナーでは、QueryPieのセキュリティ専門家であるBrant Hwang(CEO)とKenny Park(CISO)がApple機器のセキュリティ強化方法とKandjiの強力で特化されたツールを活用して管理者とユーザーの両方に直観的で簡素化された経験を提供する方法について議論します。"
+  },
+  "title": {
+    "en": "Achieving device security through MDM: Kandji x QueryPie",
+    "ko": "MDM을 통한 디바이스 보안의 완성: Kandji x QueryPie",
+    "ja": "MDM によるデバイスセキュリティの実現: Kandji x QueryPie"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000035/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000035/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000035/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000035/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000035/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000035/ja.tiptap.json"
+    }
+  }
+}

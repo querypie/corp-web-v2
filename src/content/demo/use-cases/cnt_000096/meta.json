@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "air-company-mori-takeshi",
+  "imageSrc": "/demo/use-cases/cs-thumb-air.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000096",
+  "summary": {
+    "en": "In today's video, we have the privilege of featuring Mori Takeshi, the CEO of AIR Company Limited in Japan. AIR, also as one of QueryPie Japan's partners, they have been lead IT & software market in Japan for last decades.",
+    "ko": "이번 영상에서 Mori 대표님은 AIR가 QueryPie Japan을 전 세계 솔루션 파트너로 선택한 이유와, QueryPie가 일본 기업들에게 제공하는 종합적인 사이버 보안 솔루션으로서의 가치를 공유합니다.",
+    "ja": "AIRがQueryPie Japanを世界中のソリューションパートナーの1つに選んだ理由について、森氏はこう語っています。"
+  },
+  "title": {
+    "en": "\\\"Beyond monitoring, it’s true governance.\\\"",
+    "ko": "\\\"단순 모니터링을 넘어선, 진정한 거버넌스입니다.\\\"",
+    "ja": "「監視を超えて、それは真の統治です。」"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000096/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000096/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000096/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000096/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000096/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000096/ja.tiptap.json"
+    }
+  }
+}

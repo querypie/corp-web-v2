@@ -1,5 +1,5 @@
-import AdminDocumentationPage from "../../../../components/pages/admin/AdminDocumentationPage";
+import { redirect } from "next/navigation";
 
 export default function AdminDocumentationIntroductionDecksPage() {
-  return <AdminDocumentationPage categorySlug="introduction-decks" />;
+  redirect("/admin/documentation/introduction");
 }

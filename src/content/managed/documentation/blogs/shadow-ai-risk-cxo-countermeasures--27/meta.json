@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-27.webp",
+          "webPath": "/documentation/blogs/b-thumb-27.webp"
+=======
           "sourcePath": "public/blog/b-thumb-27.webp",
           "webPath": "/blog/b-thumb-27.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/shadow-ai-risk-cxo-countermeasures--27/en.mdx",
@@ -46,8 +51,13 @@
         "AI policy framework"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-27.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"[2026 Update] The Full Scope of Shadow AI Risk: 5 CxO Actions to Prevent Data Leaks and Compliance Violations\"\ndescription: \"Shadow AI is now a board-level business risk. IBM reports that breaches linked to shadow AI cost an average of $4.63M. This article explains five concrete actions for CxOs to prevent data leakage, compliance failures, and NDA violations, backed by the latest data.\"\ndate: \"2026-02-20\"\nauthor: \"\"\nogImage: \"public/documentation/blogs/b-thumb-27.webp\"\nkeywords: [\"shadow AI\", \"shadow AI risk\", \"AI governance\", \"enterprise AI security\", \"data leakage prevention\", \"compliance risk\", \"generative AI policy\", \"CxO\", \"CASB\", \"DLP\", \"AI risk management\", \"data protection\", \"NDA breach\", \"GDPR compliance\", \"PII protection\", \"AI access controls\", \"employee AI training\", \"shadow IT\", \"enterprise cybersecurity\", \"AI policy framework\"]\nrelatedPosts:\n  - \"/features/documentation/blog/22/ai-agent-security-replit-case\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"",
+=======
       "ogImage": "/blog/b-thumb-27.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"[2026 Update] The Full Scope of Shadow AI Risk: 5 CxO Actions to Prevent Data Leaks and Compliance Violations\"\ndescription: \"Shadow AI is now a board-level business risk. IBM reports that breaches linked to shadow AI cost an average of $4.63M. This article explains five concrete actions for CxOs to prevent data leakage, compliance failures, and NDA violations, backed by the latest data.\"\ndate: \"2026-02-20\"\nauthor: \"\"\nogImage: \"public/blog/b-thumb-27.webp\"\nkeywords: [\"shadow AI\", \"shadow AI risk\", \"AI governance\", \"enterprise AI security\", \"data leakage prevention\", \"compliance risk\", \"generative AI policy\", \"CxO\", \"CASB\", \"DLP\", \"AI risk management\", \"data protection\", \"NDA breach\", \"GDPR compliance\", \"PII protection\", \"AI access controls\", \"employee AI training\", \"shadow IT\", \"enterprise cybersecurity\", \"AI policy framework\"]\nrelatedPosts:\n  - \"/features/documentation/blog/22/ai-agent-security-replit-case\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/22/ai-agent-security-replit-case",
         "/features/documentation/blog/12/internal-data-leaks",
@@ -62,7 +72,11 @@
         "description": "Shadow AI is now a board-level business risk. IBM reports that breaches linked to shadow AI cost an average of $4.63M. This article explains five concrete actions for CxOs to prevent data leakage, compliance failures, and NDA violations, backed by the latest data.",
         "date": "2026-02-20",
         "author": "",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-27.webp",
+=======
         "ogImage": "public/blog/b-thumb-27.webp",
+>>>>>>> origin/main
         "keywords": [
           "shadow AI",
           "shadow AI risk",
@@ -96,8 +110,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-27.webp",
+          "webPath": "/documentation/blogs/b-thumb-27.webp"
+=======
           "sourcePath": "public/blog/b-thumb-27.webp",
           "webPath": "/blog/b-thumb-27.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/shadow-ai-risk-cxo-countermeasures--27/ja.mdx",
@@ -128,8 +147,13 @@
         "企業セキュリティ"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-27.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"【2026年最新】シャドーAIリスクの全貌｜情報漏洩・コンプライアンス違反を防ぐCxOの5つの対策\"\ndescription: \"シャドーAIは経営リスクそのものである。IBM調査によるとシャドーAI起因のデータ侵害コストは平均463万ドル。情報漏洩、コンプライアンス違反、NDA違反を防ぐCxO層向けの5つの具体的対策を最新データとともに解説します。\"\ndate: \"2026-02-20\"\nauthor: \"\"\nogImage: \"public/documentation/blogs/b-thumb-27.webp\"\nkeywords: [\"シャドーAI\", \"Shadow AI\", \"AIガバナンス\", \"情報漏洩\", \"コンプライアンス\", \"生成AI\", \"セキュリティ\", \"CxO\", \"CASB\", \"DLP\", \"AIリスク管理\", \"データ保護\", \"NDA\", \"GDPR\", \"個人情報保護\", \"AIポリシー\", \"従業員教育\", \"シャドーIT\", \"AIアクセス制御\", \"企業セキュリティ\"]\nrelatedPosts:\n  - \"/features/documentation/blog/22/ai-agent-security-replit-case\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"",
+=======
       "ogImage": "/blog/b-thumb-27.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"【2026年最新】シャドーAIリスクの全貌｜情報漏洩・コンプライアンス違反を防ぐCxOの5つの対策\"\ndescription: \"シャドーAIは経営リスクそのものである。IBM調査によるとシャドーAI起因のデータ侵害コストは平均463万ドル。情報漏洩、コンプライアンス違反、NDA違反を防ぐCxO層向けの5つの具体的対策を最新データとともに解説します。\"\ndate: \"2026-02-20\"\nauthor: \"\"\nogImage: \"public/blog/b-thumb-27.webp\"\nkeywords: [\"シャドーAI\", \"Shadow AI\", \"AIガバナンス\", \"情報漏洩\", \"コンプライアンス\", \"生成AI\", \"セキュリティ\", \"CxO\", \"CASB\", \"DLP\", \"AIリスク管理\", \"データ保護\", \"NDA\", \"GDPR\", \"個人情報保護\", \"AIポリシー\", \"従業員教育\", \"シャドーIT\", \"AIアクセス制御\", \"企業セキュリティ\"]\nrelatedPosts:\n  - \"/features/documentation/blog/22/ai-agent-security-replit-case\"\n  - \"/features/documentation/blog/12/internal-data-leaks\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/22/ai-agent-security-replit-case",
         "/features/documentation/blog/12/internal-data-leaks",
@@ -144,7 +168,11 @@
         "description": "シャドーAIは経営リスクそのものである。IBM調査によるとシャドーAI起因のデータ侵害コストは平均463万ドル。情報漏洩、コンプライアンス違反、NDA違反を防ぐCxO層向けの5つの具体的対策を最新データとともに解説します。",
         "date": "2026-02-20",
         "author": "",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-27.webp",
+=======
         "ogImage": "public/blog/b-thumb-27.webp",
+>>>>>>> origin/main
         "keywords": [
           "シャドーAI",
           "Shadow AI",

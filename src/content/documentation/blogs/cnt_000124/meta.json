@@ -1,0 +1,45 @@
+{
+  "authorName": "vin",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "seamless-figma-querypie-collaboration",
+  "imageSrc": "/documentation/blogs/b-thumb-11.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000124",
+  "summary": {
+    "en": "Discover how QueryPie and Figma ensure seamless collaboration for design and development teams, boosting productivity.",
+    "ko": "소프트웨어의 발전과 함께 디자이너의 업무 영역이 확장되어 왔는데요, 예전에는 어떻게 일했고, 현재 쿼리파이 협업의 모습부터 예전의 디자인작업에 이르는 그 혁신의 변천사를 알아볼까요?",
+    "ja": "QueryPie と Figma がどのように設計チームと開発チームのシームレスなコラボレーションを実現し、生産性を向上させているのかをご紹介します。"
+  },
+  "title": {
+    "en": "QueryPie x Figma: The Ultimate Guide to Seamless Collaboration",
+    "ko": "QueryPie와 Figma, 딱 맞아떨어지는 협업의 정석",
+    "ja": "QueryPie と Figma、ぴったりと合った協力の極意"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000124/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000124/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000124/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000124/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000124/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000124/ja.tiptap.json"
+    }
+  }
+}

@@ -34,7 +34,11 @@ export const seoPageDefinitions = [
       ko: "QueryPie AI로 AI 기반 워크플로를 안전하게 운영하세요.",
       ja: "QueryPie AI で AI ワークフローを安全に運用しましょう。",
     },
+<<<<<<< HEAD
+    defaultOgImage: "/images/common/fallback-contents.jpg",
+=======
     defaultOgImage: "/uploads/article-01.png",
+>>>>>>> origin/main
   },
   {
     key: "demo-list",
@@ -54,7 +58,11 @@ export const seoPageDefinitions = [
       ko: "QueryPie AI의 데모 콘텐츠를 확인해보세요.",
       ja: "QueryPie AI のデモコンテンツをご覧ください。",
     },
+<<<<<<< HEAD
+    defaultOgImage: "/images/common/fallback-contents.jpg",
+=======
     defaultOgImage: "/uploads/article-01.png",
+>>>>>>> origin/main
   },
   {
     key: "demo-detail",
@@ -74,7 +82,11 @@ export const seoPageDefinitions = [
       ko: "QueryPie AI의 상세 데모 콘텐츠입니다.",
       ja: "QueryPie AI の詳細デモコンテンツです。",
     },
+<<<<<<< HEAD
+    defaultOgImage: "/images/common/fallback-contents.jpg",
+=======
     defaultOgImage: "/uploads/article-01.png",
+>>>>>>> origin/main
   },
   {
     key: "docs-list",
@@ -94,7 +106,11 @@ export const seoPageDefinitions = [
       ko: "QueryPie AI의 문서와 가이드 콘텐츠입니다.",
       ja: "QueryPie AI のドキュメントとガイドです。",
     },
+<<<<<<< HEAD
+    defaultOgImage: "/images/common/fallback-contents.jpg",
+=======
     defaultOgImage: "/uploads/article-02.png",
+>>>>>>> origin/main
   },
   {
     key: "docs-detail",
@@ -114,7 +130,11 @@ export const seoPageDefinitions = [
       ko: "QueryPie AI의 상세 문서입니다.",
       ja: "QueryPie AI の詳細ドキュメントです。",
     },
+<<<<<<< HEAD
+    defaultOgImage: "/images/common/fallback-contents.jpg",
+=======
     defaultOgImage: "/uploads/article-02.png",
+>>>>>>> origin/main
   },
   {
     key: "news-list",
@@ -134,7 +154,11 @@ export const seoPageDefinitions = [
       ko: "QueryPie AI의 최신 뉴스입니다.",
       ja: "QueryPie AI の最新ニュースです。",
     },
+<<<<<<< HEAD
+    defaultOgImage: "/images/common/fallback-contents.jpg",
+=======
     defaultOgImage: "/uploads/news-01.png",
+>>>>>>> origin/main
   },
   {
     key: "plans",
@@ -154,7 +178,11 @@ export const seoPageDefinitions = [
       ko: "QueryPie AI의 요금제 정보를 확인하세요.",
       ja: "QueryPie AI の料金プランをご覧ください。",
     },
+<<<<<<< HEAD
+    defaultOgImage: "/images/common/fallback-contents.jpg",
+=======
     defaultOgImage: "/uploads/article-01.png",
+>>>>>>> origin/main
   },
   {
     key: "contact-us",
@@ -174,7 +202,11 @@ export const seoPageDefinitions = [
       ko: "QueryPie AI에 문의하세요.",
       ja: "QueryPie AI へお問い合わせください。",
     },
+<<<<<<< HEAD
+    defaultOgImage: "/images/common/fallback-contents.jpg",
+=======
     defaultOgImage: "/uploads/article-03.png",
+>>>>>>> origin/main
   },
 ] as const satisfies readonly SeoPageDefinition[];
 
@@ -313,6 +345,10 @@ export function createSeoDefinitionTemplate(routePath: string, matchMode: SeoPag
       ko: `${label} 페이지`,
       ja: `${label} ページ`,
     },
+<<<<<<< HEAD
+    defaultOgImage: "/images/common/fallback-contents.jpg",
+=======
     defaultOgImage: "/uploads/article-01.png",
+>>>>>>> origin/main
   };
 }

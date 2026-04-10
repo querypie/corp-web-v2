@@ -16,8 +16,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp24-download-en.webp",
+          "webPath": "/documentation/white-papers/wp24-download-en.webp"
+=======
           "sourcePath": "public/white-paper/wp24-download-en.webp",
           "webPath": "/white-paper/wp24-download-en.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/ai-tranformation-japan-download--24/en.mdx",
@@ -37,8 +42,13 @@
         "AI implementation process"
       ],
       "layout": "ArticleType2",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp24-download-en.webp",
+      "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"whitepaper\"\ntitle: \"Why Japanese Enterprises Are Accelerating Their AI Transformation Now\"\ndescription: \"\"\nogImage: \"public/documentation/white-papers/wp24-download-en.webp\"\nkeywords:\n - \"QueryPie\"\n - \"QueryPie AI\"\n - \"AI adoption in enterprises\"\n - \"Japanese enterprise AI challenges\"\n - \"AI-driven business transformation\"\n - \"AI roadmap for executives\"\n - \"Global AI best practices\"\n - \"Productivity gains with AI\"\n - \"AI implementation process\"\ngatingForm:\n  title: \"Please fill out the form to unlock your exclusive content!\"\n  submitButtonLabel: \"Download Now\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/documents/QP_Whitepaper_AI_Transformation_EN.pdf\"",
+=======
       "ogImage": "/white-paper/wp24-download-en.webp",
       "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"whitepaper\"\ntitle: \"Why Japanese Enterprises Are Accelerating Their AI Transformation Now\"\ndescription: \"\"\nogImage: \"public/white-paper/wp24-download-en.webp\"\nkeywords:\n - \"QueryPie\"\n - \"QueryPie AI\"\n - \"AI adoption in enterprises\"\n - \"Japanese enterprise AI challenges\"\n - \"AI-driven business transformation\"\n - \"AI roadmap for executives\"\n - \"Global AI best practices\"\n - \"Productivity gains with AI\"\n - \"AI implementation process\"\ngatingForm:\n  title: \"Please fill out the form to unlock your exclusive content!\"\n  submitButtonLabel: \"Download Now\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/documents/QP_Whitepaper_AI_Transformation_EN.pdf\"",
+>>>>>>> origin/main
       "relatedPosts": [],
       "sourcePath": "documentation/white-paper/24/ai-tranformation-japan/download/en/content.mdx",
       "title": "Why Japanese Enterprises Are Accelerating Their AI Transformation Now",
@@ -47,7 +57,11 @@
         "category": "whitepaper",
         "title": "Why Japanese Enterprises Are Accelerating Their AI Transformation Now",
         "description": "",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp24-download-en.webp",
+=======
         "ogImage": "public/white-paper/wp24-download-en.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "QueryPie AI",
@@ -71,8 +85,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp24-download-ko.webp",
+          "webPath": "/documentation/white-papers/wp24-download-ko.webp"
+=======
           "sourcePath": "public/white-paper/wp24-download-ko.webp",
           "webPath": "/white-paper/wp24-download-ko.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/ai-tranformation-japan-download--24/ko.mdx",
@@ -93,8 +112,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp24-download-jp.webp",
+          "webPath": "/documentation/white-papers/wp24-download-jp.webp"
+=======
           "sourcePath": "public/white-paper/wp24-download-jp.webp",
           "webPath": "/white-paper/wp24-download-jp.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/ai-tranformation-japan-download--24/ja.mdx",
@@ -116,8 +140,13 @@
         "AI導入プロセス"
       ],
       "layout": "ArticleType2",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp24-download-jp.webp",
+      "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"whitepaper\"\ntitle: \"なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか\"\ndescription: \"\"\nogImage: \"public/documentation/white-papers/wp24-download-jp.webp\"\nkeywords:\n - \"クエリパイ\"\n - \"クエリーパイ\"\n - \"クエリパイ AI\"\n - \"クエリーパイ AI\"\n - \"企業におけるAIの導入\"\n - \"日本企業のAIに関する課題\"\n - \"AI主導のビジネス変革\"\n - \"経営層のためのAIロードマップ\"\n - \"グローバルなAIのベストプラクティス\"\n - \"AIによる生産性向上\"\n - \"AI導入プロセス\"\ngatingForm:\n  title: \"限定コンテンツの入手には、フォームのご記入をお願いいたします。\"\n  submitButtonLabel: \"ダウンロードする\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/documents/QP_Whitepaper_AI_Transformation_JP.pdf\"",
+=======
       "ogImage": "/white-paper/wp24-download-jp.webp",
       "rawFrontmatter": "layout: \"ArticleType2\"\ncategory: \"whitepaper\"\ntitle: \"なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか\"\ndescription: \"\"\nogImage: \"public/white-paper/wp24-download-jp.webp\"\nkeywords:\n - \"クエリパイ\"\n - \"クエリーパイ\"\n - \"クエリパイ AI\"\n - \"クエリーパイ AI\"\n - \"企業におけるAIの導入\"\n - \"日本企業のAIに関する課題\"\n - \"AI主導のビジネス変革\"\n - \"経営層のためのAIロードマップ\"\n - \"グローバルなAIのベストプラクティス\"\n - \"AIによる生産性向上\"\n - \"AI導入プロセス\"\ngatingForm:\n  title: \"限定コンテンツの入手には、フォームのご記入をお願いいたします。\"\n  submitButtonLabel: \"ダウンロードする\"\n  submitAction: \"read-document\"\n  afterSubmitOpenPageHref: \"https://www.querypie.com/public/downloads/documents/QP_Whitepaper_AI_Transformation_JP.pdf\"",
+>>>>>>> origin/main
       "relatedPosts": [],
       "sourcePath": "documentation/white-paper/24/ai-tranformation-japan/download/ja/content.mdx",
       "title": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか",
@@ -126,7 +155,11 @@
         "category": "whitepaper",
         "title": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか",
         "description": "",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp24-download-jp.webp",
+=======
         "ogImage": "public/white-paper/wp24-download-jp.webp",
+>>>>>>> origin/main
         "keywords": [
           "クエリパイ",
           "クエリーパイ",

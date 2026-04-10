@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2026-02-26",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "quotation-ai-agent",
+  "imageSrc": "/demo/use-cases/aip-use-case-thumb-27-en.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000070",
+  "summary": {
+    "en": "No matter how complex your quotation logic is, AIP structures it as a Skill and delivers error-free quotes instantly.",
+    "ko": "No matter how complex your quotation logic is, AIP structures it as a Skill and delivers error-free quotes instantly.",
+    "ja": "どれほど複雑な見積ロジックでも、AIPがスキルとして構造化し、正確な見積書を即時出力します。"
+  },
+  "title": {
+    "en": "AIP Use Case: Quotation AI Agent",
+    "ko": "AIP Use Case: Quotation AI Agent",
+    "ja": "AIP活用事例： 見積AIエージェント"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000070/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000070/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000070/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000070/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000070/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000070/ja.tiptap.json"
+    }
+  }
+}

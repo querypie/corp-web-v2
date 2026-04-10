@@ -1,0 +1,39 @@
+{
+  "authorName": "QueryPie Team",
+  "authorRole": "QA",
+  "categorySlug": "blogs",
+  "dateIso": "2026-03-31",
+  "externalUrl": "",
+  "hideHeroImage": false,
+  "id": "authored-save-smoke-test",
+  "imageSrc": "/images/common/fallback-contents.jpg",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 3,
+  "status": "hidden",
+  "storageId": "cnt_000001",
+  "summary": {
+    "en": "Smoke test summary",
+    "ko": "스모크 테스트 요약",
+    "ja": "スモークテスト要約"
+  },
+  "title": {
+    "en": "Authored Save Smoke Test",
+    "ko": "Authored 저장 스모크 테스트",
+    "ja": "Authored 保存スモークテスト"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000001/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000001/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000001/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000001/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000001/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000001/ja.tiptap.json"
+    }
+  }
+}

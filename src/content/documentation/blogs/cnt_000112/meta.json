@@ -1,0 +1,45 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2025-01-16",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "zero-trust-security",
+  "imageSrc": "/documentation/blogs/b-thumb-15.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000112",
+  "summary": {
+    "en": "Understand how Zero Trust Security can protect your business by continuously verifying users, devices, and networks, ensuring stronger defense against threats. Explore it now!",
+    "ko": "Understand how Zero Trust Security can protect your business by continuously verifying users, devices, and networks, ensuring stronger defense against threats. Explore it now!",
+    "ja": "Understand how Zero Trust Security can protect your business by continuously verifying users, devices, and networks, ensuring stronger defense against threats. Explore it now!"
+  },
+  "title": {
+    "en": "Zero Trust Security: Redefining Cybersecurity in a Hyper-Connected World",
+    "ko": "Zero Trust Security: Redefining Cybersecurity in a Hyper-Connected World",
+    "ja": "Zero Trust Security: Redefining Cybersecurity in a Hyper-Connected World"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000112/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000112/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000112/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000112/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000112/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000112/ja.tiptap.json"
+    }
+  }
+}

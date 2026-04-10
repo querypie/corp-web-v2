@@ -4,9 +4,21 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import AdminHeader from "../../layout/admin/AdminHeader";
 import Button from "../../common/Button";
+<<<<<<< HEAD
+import Input from "../../common/Input";
+import LoadingText from "../../common/LoadingText";
+import MermaidDiagram from "../../common/MermaidDiagram";
+import Select from "../../common/Select";
+import Tab from "../../common/Tab";
+import TabGroup from "../../common/TabGroup";
+import Textarea from "../../common/Textarea";
+import TiptapEditor from "../../common/TiptapEditor";
+import AdminContentPreview from "./AdminContentPreview";
+=======
 import Select from "../../common/Select";
 import Tab from "../../common/Tab";
 import TiptapEditor from "../../common/TiptapEditor";
+>>>>>>> origin/main
 import { useAdminNavigationGuard } from "../../layout/admin/AdminNavigationGuard";
 import {
   upsertManagedContent,
@@ -23,15 +35,27 @@ import {
   getManagedCategoryLabel,
   getLocalizedContent,
   getPublicListHref,
+  getWhitePaperDownloadPreviewProps,
   getWriterLabel,
   slugifyTitle,
+  WHITE_PAPER_DOWNLOAD_BUTTON_LABEL,
   type ManagedContentCategorySlug,
   type ManagedContentEntry,
   type ManagedContentSection,
   type ManagedContentType,
+<<<<<<< HEAD
+  type WhitePaperGatingLevel,
 } from "@/features/content/data";
 import { cloneAsAuthoredContent } from "@/features/content/cloneToAuthored";
 import { convertMarkdownToTiptap } from "@/features/content/markdownToTiptap";
+import { splitLegacyQuotedListLine } from "@/features/content/legacyQuoteList";
+import { shouldRenderMermaid } from "@/features/content/mermaid";
+import { parseMarkdownTable } from "@/features/content/markdownTable";
+=======
+} from "@/features/content/data";
+import { cloneAsAuthoredContent } from "@/features/content/cloneToAuthored";
+import { convertMarkdownToTiptap } from "@/features/content/markdownToTiptap";
+>>>>>>> origin/main
 import {
   CONTENT_PREVIEW_BLOCKQUOTE_CLASS,
   CONTENT_PREVIEW_BODY_CLASS,
@@ -63,6 +87,20 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
+<<<<<<< HEAD
+function pathSafeBaseName(value: string) {
+  const segments = value.split("/");
+  return segments[segments.length - 1] ?? value;
+}
+
+const WHITE_PAPER_GATING_OPTIONS: Array<{ label: string; value: WhitePaperGatingLevel }> = [
+  { label: "Gating 없음", value: "none" },
+  { label: "Gating 10%", value: "10" },
+  { label: "Gating 30%", value: "30" },
+  { label: "Gating 50%", value: "50" },
+];
+
+=======
 function ButtonSpinner() {
   return (
     <span
@@ -72,6 +110,7 @@ function ButtonSpinner() {
   );
 }
 
+>>>>>>> origin/main
 function getEditingLocalizedValue(
   content: { en: string; ja: string; ko: string },
   locale: "en" | "ko" | "ja",
@@ -79,6 +118,24 @@ function getEditingLocalizedValue(
   return content[locale] ?? "";
 }
 
+<<<<<<< HEAD
+function hydrateRichTextFromHtml(entry: ManagedContentEntry): ManagedContentEntry {
+  if (entry.contentFormat !== "tiptap") {
+    return entry;
+  }
+
+  return {
+    ...entry,
+    bodyRichText: {
+      en: entry.bodyRichText.en.trim() ? entry.bodyRichText.en : entry.bodyHtml.en,
+      ko: entry.bodyRichText.ko.trim() ? entry.bodyRichText.ko : entry.bodyHtml.ko,
+      ja: entry.bodyRichText.ja.trim() ? entry.bodyRichText.ja : entry.bodyHtml.ja,
+    },
+  };
+}
+
+=======
+>>>>>>> origin/main
 function serializeDirtyCheckTarget(form: ManagedContentEntry) {
   return JSON.stringify({
     authorName: form.authorName,
@@ -89,7 +146,16 @@ function serializeDirtyCheckTarget(form: ManagedContentEntry) {
     contentFormat: form.contentFormat,
     contentType: form.contentType,
     dateIso: form.dateIso,
+<<<<<<< HEAD
+    downloadCoverImageSrc: form.downloadCoverImageSrc,
+    downloadPdfFileName: form.downloadPdfFileName,
+    downloadPdfSrc: form.downloadPdfSrc,
+    enableDownloadButton: form.enableDownloadButton,
     externalUrl: form.externalUrl,
+    gatingLevel: form.gatingLevel,
+=======
+    externalUrl: form.externalUrl,
+>>>>>>> origin/main
     hideHeroImage: form.hideHeroImage,
     id: form.id,
     imageSrc: form.imageSrc,
@@ -120,8 +186,8 @@ function ConfirmDialog({
 }) {
   return (
     /* 취소/검증 경고에 공통으로 쓰는 확인 모달 */
-    <div className={cx("fixed inset-0 z-50 flex items-center justify-center bg-[rgba(8,9,10,0.6)] px-5", className)} onClick={onCancel}>
-      <div className="w-full max-w-[320px] rounded-modal bg-bg-content px-5 py-8" onClick={(event) => event.stopPropagation()}>
+    <div className={cx("fixed inset-0 z-50 flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5", className)} onClick={onCancel}>
+      <div className="w-full max-w-[320px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-8" onClick={(event) => event.stopPropagation()}>
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="flex flex-col items-center gap-2 text-center">
             <h2 className="m-0 type-h3 text-fg">{title}</h2>
@@ -137,10 +203,17 @@ function ConfirmDialog({
             ) : null}
           </div>
           <div className="flex w-full flex-col justify-center gap-3 sm:flex-row">
+<<<<<<< HEAD
+            <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
+              {cancelLabel}
+            </Button>
+            <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onConfirm} style="round" variant="secondary">
+=======
             <Button size="default" arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
               {cancelLabel}
             </Button>
             <Button size="default" arrow={false} className="w-full justify-center sm:w-auto" onClick={onConfirm} style="round" variant="secondary">
+>>>>>>> origin/main
               {confirmLabel}
             </Button>
           </div>
@@ -174,9 +247,9 @@ function AiDraftDialog({
   onInstructionChange: (value: string) => void;
 }) {
   return (
-    <div className="fixed inset-0 z-40 flex items-center justify-center bg-[rgba(8,9,10,0.68)] px-5 py-6">
+    <div className="fixed inset-0 z-40 flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.68)] px-5 py-6">
       <div
-        className="flex max-h-[min(760px,calc(100vh-48px))] w-full max-w-[760px] flex-col overflow-hidden rounded-modal border border-border bg-bg px-5 py-5 md:px-6"
+        className="flex max-h-[min(760px,calc(100vh-48px))] w-full max-w-[760px] flex-col overflow-hidden rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-5 md:px-6"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto pr-1">
@@ -201,7 +274,7 @@ function AiDraftDialog({
               style="round"
               variant="secondary"
             >
-              {isGenerating ? "생성 중..." : "AI로 생성"}
+              {isGenerating ? <LoadingText text="생성 중..." /> : "AI로 생성"}
             </Button>
           </div>
           <TextAreaField
@@ -214,10 +287,17 @@ function AiDraftDialog({
         </div>
 
         <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:justify-end">
+<<<<<<< HEAD
+          <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
+            취소
+          </Button>
+          <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onApply} style="round" variant="primary">
+=======
           <Button size="default" arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
             취소
           </Button>
           <Button size="default" arrow={false} className="w-full justify-center sm:w-auto" onClick={onApply} style="round" variant="primary">
+>>>>>>> origin/main
             적용
           </Button>
         </div>
@@ -241,8 +321,8 @@ function TextField({
     /* 단일 줄 텍스트 입력 필드 */
     <div className="flex w-full flex-col gap-[10px]">
       <label className="type-body-md text-fg">{label}</label>
-      <input
-        className="ui-field h-11 w-full rounded-button bg-bg-content px-3 type-body-md text-fg outline-none placeholder:text-mute-fg"
+      <Input
+        className="w-full"
         onChange={(event) => onChange(event.target.value)}
         type="text"
         value={value}
@@ -280,6 +360,15 @@ function TextAreaField({
         {helperText ? <span className="type-body-sm text-mute-fg">{helperText}</span> : null}
       </div>
       <div className={cx("relative", textareaWrapperClassName)}>
+<<<<<<< HEAD
+        <Textarea
+          className={cx("resize-y bg-bg-content", rowsClassName ?? "min-h-[320px]", textareaClassName)}
+          onChange={(event) => onChange(event.target.value)}
+          placeholder={placeholder}
+          value={value}
+        />
+      </div>
+=======
         <textarea
           className={cx("ui-field w-full resize-y rounded-button bg-bg-content px-4 py-4 type-body-md text-fg outline-none placeholder:text-mute-fg", rowsClassName ?? "min-h-[320px]", textareaClassName)}
           onChange={(event) => onChange(event.target.value)}
@@ -301,24 +390,25 @@ function InlineField({
     <div className="grid items-center gap-2 md:grid-cols-[60px_minmax(0,1fr)]">
       <label className="type-body-md text-fg">{label}</label>
       {children}
+>>>>>>> origin/main
     </div>
   );
 }
 
-function NewsPreviewCard({
-  date,
-  imageSrc,
-  summary,
-  title,
-  url,
+function InlineField({
+  children,
+  label,
 }: {
-  date: string;
-  imageSrc: string;
-  summary: string;
-  title: string;
-  url: string;
+  children: React.ReactNode;
+  label: string;
 }) {
   return (
+<<<<<<< HEAD
+    <div className="grid items-center gap-2 md:grid-cols-[60px_minmax(0,1fr)]">
+      <label className="type-body-md text-fg">{label}</label>
+      {children}
+    </div>
+=======
     <a className="flex w-full flex-col gap-4 md:flex-row md:items-start md:gap-[30px]" href={url || "#"} rel="noreferrer noopener" target="_blank">
       <div className="order-2 flex min-w-0 flex-1 flex-col gap-[10px] md:order-1">
         <p className="m-0 type-body-md text-mute-fg">{date}</p>
@@ -331,10 +421,22 @@ function NewsPreviewCard({
         </div>
       ) : null}
     </a>
+>>>>>>> origin/main
   );
 }
 
 function renderInlineMarkdown(text: string) {
+<<<<<<< HEAD
+  if (/^(\*\*|__)[\s\S]+(\*\*|__)$/.test(text)) {
+    return <strong className="font-semibold text-fg">{renderInlineMarkdown(text.slice(2, -2))}</strong>;
+  }
+
+  if (/^(\*|_)[\s\S]+(\*|_)$/.test(text)) {
+    return <em className="italic text-fg">{renderInlineMarkdown(text.slice(1, -1))}</em>;
+  }
+
+=======
+>>>>>>> origin/main
   const tokens = text.split(/(<a\s+href="[^"]+"[^>]*>.*?<\/a>|\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_|`[^`]+`)/g);
   return tokens.filter(Boolean).map((token, index) => {
     if (/^<a\s+href="[^"]+"[^>]*>.*<\/a>$/.test(token)) {
@@ -374,6 +476,20 @@ function normalizeContentHtml(html: string) {
 }
 
 function parseMarkdownImage(block: string) {
+<<<<<<< HEAD
+  const legacyFigureLabelMatch = block.match(/^!\[\[([^\]]+)\]\s*([^\]]+)\]\(([^)]+)\)$/);
+
+  if (legacyFigureLabelMatch) {
+    const caption = `[${legacyFigureLabelMatch[1]}] ${legacyFigureLabelMatch[2]}`.trim();
+    return {
+      alt: caption,
+      caption,
+      src: normalizeContentAssetSrc(legacyFigureLabelMatch[3]),
+    };
+  }
+
+=======
+>>>>>>> origin/main
   const legacyBracketMatch = block.match(/^!\[\[(.+)\]\(([^)]+)\)$/);
 
   if (legacyBracketMatch) {
@@ -416,11 +532,24 @@ function PreviewMarkdown({ markdown }: { markdown: string }) {
         const imageMatch = parseMarkdownImage(trimmedBlock);
 
         if (imageMatch) {
+<<<<<<< HEAD
+          const caption = imageMatch.caption ?? imageMatch.alt;
+          return <figure key={blockIndex} className="m-0 flex flex-col gap-3"><div className="overflow-hidden rounded-box bg-bg-content"><img alt={imageMatch.alt} className="block h-full w-full object-cover" src={imageMatch.src} /></div>{caption ? <figcaption className="m-0 text-center type-content-caption text-mute-fg">{caption}</figcaption> : null}</figure>;
+=======
           return <figure key={blockIndex} className="m-0 overflow-hidden rounded-box bg-bg-content"><img alt={imageMatch.alt} className="block h-full w-full object-cover" src={imageMatch.src} /></figure>;
+>>>>>>> origin/main
         }
         if (/^\s*```/.test(firstLine) && /^\s*```\s*$/.test(lines[lines.length - 1] ?? "")) {
           const language = firstLine.replace(/^```/, "").trim();
           const code = normalizeFencedCodeLines(firstLine, lines.slice(1, -1)).join("\n");
+<<<<<<< HEAD
+
+          if (shouldRenderMermaid(code, language)) {
+            return <MermaidDiagram key={blockIndex} code={code} />;
+          }
+
+=======
+>>>>>>> origin/main
           return <div key={blockIndex} className={CONTENT_PREVIEW_CODEBLOCK_CLASS} dangerouslySetInnerHTML={{ __html: renderLineNumberedCodeBlock(code, language) }} />;
         }
         if (/^---+$/.test(block) || /^\*\*\*+$/.test(block)) {
@@ -436,11 +565,41 @@ function PreviewMarkdown({ markdown }: { markdown: string }) {
           return <h3 key={blockIndex} className={cx(CONTENT_PREVIEW_H3_CLASS, blockIndex > 0 && CONTENT_PREVIEW_H3_TOP_PADDING)}>{renderInlineMarkdown(block.replace(/^###\s+/, ""))}</h3>;
         }
         if (lines.every((line) => /^>\s?/.test(line))) {
+<<<<<<< HEAD
+          const quoteLines = lines.flatMap((line) => splitLegacyQuotedListLine(line.replace(/^>\s?/, "")));
+
+          if (
+            quoteLines.every((line) => /^\d+\.\s+/.test(line))
+          ) {
+            return <blockquote key={blockIndex} className={CONTENT_PREVIEW_BLOCKQUOTE_CLASS}><ol className={CONTENT_PREVIEW_OL_CLASS}>{quoteLines.map((line, idx) => <li key={idx}>{renderInlineMarkdown(line.replace(/^\d+\.\s+/, ""))}</li>)}</ol></blockquote>;
+          }
+
+          if (quoteLines.every((line) => /^\s*[-*]\s+/.test(line))) {
+            return <blockquote key={blockIndex} className={CONTENT_PREVIEW_BLOCKQUOTE_CLASS}><ul className={CONTENT_PREVIEW_UL_CLASS}>{quoteLines.map((line, idx) => <li key={idx}>{renderInlineMarkdown(line.replace(/^\s*[-*]\s+/, ""))}</li>)}</ul></blockquote>;
+          }
+
+          return <blockquote key={blockIndex} className={CONTENT_PREVIEW_BLOCKQUOTE_CLASS}>{quoteLines.map((line, idx) => <p key={idx} className="m-0">{renderInlineMarkdown(line)}</p>)}</blockquote>;
+=======
           return <blockquote key={blockIndex} className={CONTENT_PREVIEW_BLOCKQUOTE_CLASS}>{lines.map((line, idx) => <p key={idx} className="m-0">{renderInlineMarkdown(line.replace(/^>\s?/, ""))}</p>)}</blockquote>;
+>>>>>>> origin/main
         }
         if (lines.every((line) => /^\d+\.\s+/.test(line))) {
           return <ol key={blockIndex} className={CONTENT_PREVIEW_OL_CLASS}>{lines.map((line, idx) => <li key={idx}>{renderInlineMarkdown(line.replace(/^\d+\.\s+/, ""))}</li>)}</ol>;
         }
+<<<<<<< HEAD
+        if (lines.every((line) => /^\s*[-*]\s+/.test(line))) {
+          return <ul key={blockIndex} className={CONTENT_PREVIEW_UL_CLASS}>{lines.map((line, idx) => <li key={idx} className="type-content-body text-fg">{renderInlineMarkdown(line.replace(/^\s*[-*]\s+/, ""))}</li>)}</ul>;
+        }
+        const table = parseMarkdownTable(lines);
+        if (table) {
+          const { bodyRows, headerRow } = table;
+
+          return (
+            <div key={blockIndex} className="overflow-x-auto border border-border">
+              <table className="w-full min-w-[520px] border-collapse text-left">
+                <thead>
+                  <tr className="border-b border-border bg-bg-deep">
+=======
         if (lines.every((line) => /^-\s+/.test(line))) {
           return <ul key={blockIndex} className={CONTENT_PREVIEW_UL_CLASS}>{lines.map((line, idx) => <li key={idx}>{renderInlineMarkdown(line.replace(/^-\s+/, ""))}</li>)}</ul>;
         }
@@ -463,6 +622,7 @@ function PreviewMarkdown({ markdown }: { markdown: string }) {
               <table className="w-full min-w-[520px] border-collapse text-left">
                 <thead>
                   <tr className="border-b border-border">
+>>>>>>> origin/main
                     {headerRow.map((cell, cellIndex) => (
                       <th key={cellIndex} className="px-4 py-3 type-content-body text-fg">
                         {renderInlineMarkdown(cell)}
@@ -511,12 +671,14 @@ function PanelHeader({
 }) {
   return (
     /* 작성 폼/미리보기 상단 공통 헤더 */
-    <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-4 md:px-6">
+    <div className="flex items-center justify-between gap-4 border-b border-border pb-4">
       {trailing}
     </div>
   );
 }
 
+<<<<<<< HEAD
+=======
 function ContentPreview({
   bodyHtml,
   bodyMarkdown,
@@ -568,6 +730,7 @@ function ContentPreview({
   );
 }
 
+>>>>>>> origin/main
 type Props = {
   categorySlug: ManagedContentCategorySlug;
   initialItems?: ManagedContentEntry[];
@@ -584,8 +747,14 @@ export default function AdminManagedContentDetailPage({
   const router = useRouter();
   const { setHasUnsavedChanges } = useAdminNavigationGuard();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const pdfInputRef = useRef<HTMLInputElement | null>(null);
   const dateInputRef = useRef<HTMLInputElement | null>(null);
+<<<<<<< HEAD
+  const isInitializingRichTextRef = useRef(false);
+  const items = useManagedContents(section, initialItems) ?? [];
+=======
   const items = useManagedContents(section, initialItems);
+>>>>>>> origin/main
   const currentItem = useMemo(
     () =>
       itemId === "new"
@@ -601,8 +770,15 @@ export default function AdminManagedContentDetailPage({
   const [form, setForm] = useState<ManagedContentEntry>(() => createEmptyManagedContentDraft(section, categorySlug));
   const [dialog, setDialog] = useState<DialogState | null>(null);
   const [pendingThumbnailFile, setPendingThumbnailFile] = useState<File | null>(null);
+<<<<<<< HEAD
+  const [pendingPdfFile, setPendingPdfFile] = useState<File | null>(null);
   const [pendingThumbnailPreviewSrc, setPendingThumbnailPreviewSrc] = useState("");
   const [thumbnailName, setThumbnailName] = useState("");
+  const [pdfName, setPdfName] = useState("");
+=======
+  const [pendingThumbnailPreviewSrc, setPendingThumbnailPreviewSrc] = useState("");
+  const [thumbnailName, setThumbnailName] = useState("");
+>>>>>>> origin/main
   const [activeLocale, setActiveLocale] = useState<"en" | "ko" | "ja">("en");
   const [aiDialogOpen, setAiDialogOpen] = useState(false);
   const [aiInputValue, setAiInputValue] = useState("");
@@ -615,16 +791,25 @@ export default function AdminManagedContentDetailPage({
   const [isAiGenerating, setIsAiGenerating] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const categoryLabel = getManagedCategoryLabel(section, categorySlug, "en");
-  const initialFormState = useMemo(
-    () => currentItem ?? createEmptyManagedContentDraft(section, categorySlug),
-    [categorySlug, currentItem, section],
+  const [initialFormSnapshot, setInitialFormSnapshot] = useState(() =>
+    serializeDirtyCheckTarget(createEmptyManagedContentDraft(section, categorySlug)),
   );
   const hasUnsavedChanges =
+<<<<<<< HEAD
+    serializeDirtyCheckTarget(form) !== initialFormSnapshot ||
+    Boolean(pendingThumbnailFile) ||
+    Boolean(pendingPdfFile);
+  const showPreview = true;
+  const isContentType = form.contentType === "content";
+  const isOutlinkType = form.contentType === "outlink";
+  const isWhitePaper = section === "documentation" && categorySlug === "white-papers";
+=======
     serializeDirtyCheckTarget(form) !== serializeDirtyCheckTarget(initialFormState) ||
     Boolean(pendingThumbnailFile);
   const showPreview = true;
   const isContentType = form.contentType === "content";
   const isOutlinkType = form.contentType === "outlink";
+>>>>>>> origin/main
   const useRichEditor = isContentType && form.contentFormat === "tiptap";
 
   useEffect(() => {
@@ -634,15 +819,32 @@ export default function AdminManagedContentDetailPage({
       setPendingThumbnailPreviewSrc("");
     }
     setPendingThumbnailFile(null);
+<<<<<<< HEAD
+    setPendingPdfFile(null);
+=======
+>>>>>>> origin/main
 
     if (currentItem) {
-      setForm(currentItem);
-      setThumbnailName(currentItem.imageSrc);
+      const hydratedItem = hydrateRichTextFromHtml(currentItem);
+      isInitializingRichTextRef.current = true;
+      setForm(hydratedItem);
+      setInitialFormSnapshot(serializeDirtyCheckTarget(hydratedItem));
+      setThumbnailName(hydratedItem.imageSrc);
+      setPdfName(hydratedItem.downloadPdfFileName || hydratedItem.downloadPdfSrc);
       return;
     }
     const draft = createEmptyManagedContentDraft(section, categorySlug);
+<<<<<<< HEAD
+    const initialDraft: ManagedContentEntry =
+      section === "news" ? { ...draft, contentFormat: "markdown", contentType: "outlink" } : draft;
+    isInitializingRichTextRef.current = true;
+    setForm(initialDraft);
+    setInitialFormSnapshot(serializeDirtyCheckTarget(initialDraft));
+=======
     setForm(section === "news" ? { ...draft, contentFormat: "markdown", contentType: "outlink" } : draft);
+>>>>>>> origin/main
     setThumbnailName("");
+    setPdfName("");
   }, [categorySlug, currentItem, section]);
 
   useEffect(() => {
@@ -680,6 +882,35 @@ export default function AdminManagedContentDetailPage({
   }
 
   function updateRichText(locale: "en" | "ko" | "ja", payload: { html: string; json: string }) {
+<<<<<<< HEAD
+    setForm((current) => {
+      const isSameAsCurrentRichText =
+        current.bodyRichText[locale] === payload.json &&
+        current.bodyHtml[locale] === payload.html;
+
+      const nextForm = {
+        ...current,
+        bodyHtml: {
+          ...current.bodyHtml,
+          [locale]: payload.html,
+        },
+        bodyRichText: {
+          ...current.bodyRichText,
+          [locale]: payload.json,
+        },
+      };
+
+      if (isInitializingRichTextRef.current) {
+        if (isSameAsCurrentRichText) {
+          setInitialFormSnapshot(serializeDirtyCheckTarget(nextForm));
+        }
+
+        isInitializingRichTextRef.current = false;
+      }
+
+      return nextForm;
+    });
+=======
     setForm((current) => ({
       ...current,
       bodyHtml: {
@@ -691,6 +922,7 @@ export default function AdminManagedContentDetailPage({
         [locale]: payload.json,
       },
     }));
+>>>>>>> origin/main
   }
 
   function handleContentTypeChange(nextType: ManagedContentType) {
@@ -702,6 +934,10 @@ export default function AdminManagedContentDetailPage({
       ...current,
       contentFormat: nextType === "content" ? "tiptap" : "markdown",
       contentType: nextType,
+<<<<<<< HEAD
+      gatingLevel: nextType === "content" ? current.gatingLevel : "none",
+=======
+>>>>>>> origin/main
     }));
   }
 
@@ -918,9 +1154,79 @@ export default function AdminManagedContentDetailPage({
     }
   }
 
+<<<<<<< HEAD
+  function handlePdfChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setPendingPdfFile(file);
+    setPdfName(file.name);
+  }
+
+  function clearPdf() {
+    setPendingPdfFile(null);
+    setPdfName("");
+    updateForm("downloadPdfFileName", "");
+    updateForm("downloadPdfSrc", "");
+    updateForm("downloadCoverImageSrc", "");
+
+    if (pdfInputRef.current) {
+      pdfInputRef.current.value = "";
+    }
+  }
+
+  function handlePdfInputChange(value: string) {
+    setPendingPdfFile(null);
+    updateForm("downloadPdfFileName", value ? pathSafeBaseName(value) : "");
+    updateForm("downloadPdfSrc", value);
+    setPdfName(value);
+  }
+
+  async function uploadPdf(file: File) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("section", section);
+    formData.append("categorySlug", categorySlug);
+
+    const response = await fetch("/api/admin/uploads/document", {
+      body: formData,
+      method: "POST",
+    });
+
+    if (!response.ok) {
+      throw new Error("pdf upload failed");
+    }
+
+    const payload = (await response.json()) as { coverSrc?: string; fileName?: string; src?: string };
+
+    if (!payload.src || !payload.fileName) {
+      throw new Error("missing pdf src");
+    }
+
+    return payload;
+  }
+
+  function handleThumbnailInputChange(value: string) {
+    if (pendingThumbnailPreviewSrc) {
+      URL.revokeObjectURL(pendingThumbnailPreviewSrc);
+    }
+
+    setPendingThumbnailFile(null);
+    setPendingThumbnailPreviewSrc("");
+    updateForm("imageSrc", value);
+    setThumbnailName(value);
+  }
+
   async function uploadThumbnail(file: File) {
     const formData = new FormData();
     formData.append("file", file);
+    formData.append("section", section);
+    formData.append("categorySlug", categorySlug);
+=======
+  async function uploadThumbnail(file: File) {
+    const formData = new FormData();
+    formData.append("file", file);
+>>>>>>> origin/main
 
     const response = await fetch("/api/admin/uploads", {
       body: formData,
@@ -944,6 +1250,12 @@ export default function AdminManagedContentDetailPage({
     /* 저장/게시 전 필수 입력값만 간단히 검증한다 */
     const missing: string[] = [];
     if (!form.title.en.trim()) missing.push("제목 (EN)");
+<<<<<<< HEAD
+    if (isWhitePaper && form.enableDownloadButton && !form.downloadPdfSrc.trim() && !pendingPdfFile) {
+      missing.push("PDF");
+    }
+=======
+>>>>>>> origin/main
     if (isOutlinkType) {
       if (!form.summary.en.trim()) missing.push("설명 (EN)");
       if (!form.externalUrl.trim()) missing.push("URL");
@@ -973,6 +1285,12 @@ export default function AdminManagedContentDetailPage({
     }
 
     let nextImageSrc = currentForm.imageSrc;
+<<<<<<< HEAD
+    let nextDownloadPdfSrc = currentForm.downloadPdfSrc;
+    let nextDownloadPdfFileName = currentForm.downloadPdfFileName;
+    let nextDownloadCoverImageSrc = currentForm.downloadCoverImageSrc;
+=======
+>>>>>>> origin/main
 
     if (pendingThumbnailFile) {
       try {
@@ -988,6 +1306,26 @@ export default function AdminManagedContentDetailPage({
       }
     }
 
+<<<<<<< HEAD
+    if (pendingPdfFile) {
+      try {
+        const uploadedPdf = await uploadPdf(pendingPdfFile);
+        nextDownloadPdfSrc = uploadedPdf.src ?? "";
+        nextDownloadPdfFileName = uploadedPdf.fileName ?? "";
+        nextDownloadCoverImageSrc = uploadedPdf.coverSrc || nextImageSrc;
+      } catch {
+        setDialog({
+          description: "PDF를 저장하지 못했습니다. 다시 시도해 주세요.",
+          title: "PDF 업로드에 실패했습니다.",
+          type: "alert",
+        });
+        setIsSaving(false);
+        return;
+      }
+    }
+
+=======
+>>>>>>> origin/main
     const nextId = ensureUniqueSlug(
       itemId === "new"
         ? slugifyTitle(currentForm.title.en || currentForm.title.ko || currentForm.title.ja)
@@ -1017,6 +1355,18 @@ export default function AdminManagedContentDetailPage({
       ...currentForm,
       categorySlug,
       id: nextId,
+<<<<<<< HEAD
+      downloadCoverImageSrc: nextDownloadCoverImageSrc || nextImageSrc,
+      downloadPdfFileName: nextDownloadPdfFileName,
+      downloadPdfSrc: nextDownloadPdfSrc,
+      gatingLevel:
+        section === "documentation" &&
+        categorySlug === "white-papers" &&
+        currentForm.contentType === "content"
+          ? currentForm.gatingLevel
+          : "none",
+=======
+>>>>>>> origin/main
       imageSrc: nextImageSrc,
       section,
       sortOrder: nextSortOrder,
@@ -1048,6 +1398,10 @@ export default function AdminManagedContentDetailPage({
     }
 
     setPendingThumbnailFile(null);
+<<<<<<< HEAD
+    setPendingPdfFile(null);
+=======
+>>>>>>> origin/main
     setPendingThumbnailPreviewSrc("");
     setHasUnsavedChanges(false);
     router.push(getAdminCategoryHref(section, categorySlug));
@@ -1101,6 +1455,10 @@ export default function AdminManagedContentDetailPage({
     bodyMarkdown: getEditingLocalizedValue(form.bodyMarkdown, activeLocale) || "작성한 본문이 이 영역에 실시간 표시됩니다.",
     contentFormat: form.contentFormat,
     date: formatPublicDate("ko", form.dateIso),
+<<<<<<< HEAD
+    ...getWhitePaperDownloadPreviewProps(form),
+=======
+>>>>>>> origin/main
     hideHeroImage: form.hideHeroImage,
     heroImageAlt: getEditingLocalizedValue(form.title, activeLocale) || "Content thumbnail preview",
     heroImageSrc: pendingThumbnailPreviewSrc || form.imageSrc,
@@ -1121,12 +1479,39 @@ export default function AdminManagedContentDetailPage({
       />
 
       {/* 미리보기 on/off에 따라 2단 또는 단일 컬럼으로 전환 */}
+<<<<<<< HEAD
+      <div className={cx(showPreview ? "flex flex-col gap-5 md:gap-6 min-[1440px]:flex-row min-[1440px]:flex-wrap min-[1440px]:items-start min-[1440px]:gap-10" : "mx-auto w-full max-w-[720px]")}>
+        <div className="flex min-w-0 w-full max-w-[720px] self-start flex-col gap-5 overflow-visible min-[1440px]:w-[720px] min-[1440px]:flex-none">
+=======
       <div className={cx("grid gap-5 md:gap-6", showPreview ? "xl:grid-cols-[minmax(0,780px)_minmax(0,1fr)]" : "mx-auto w-full max-w-[780px]")}>
         <div className="flex min-w-0 w-full max-w-[780px] self-start flex-col gap-5 overflow-visible rounded-[28px] border border-border bg-bg">
+>>>>>>> origin/main
           <PanelHeader
             trailing={
               <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                 {section !== "news" ? (
+<<<<<<< HEAD
+                  <div className="flex w-full flex-col gap-3 sm:max-w-[500px] sm:flex-row">
+                    <div className="w-full sm:max-w-[220px]">
+                      <Select
+                        defaultValue={form.contentType}
+                        onChange={(event) => handleContentTypeChange(event.target.value as ManagedContentType)}
+                        options={[
+                          { label: "컨텐츠(기본)", value: "content" },
+                          { label: "아웃링크", value: "outlink" },
+                        ]}
+                      />
+                    </div>
+                    {isWhitePaper && isContentType ? (
+                      <div className="w-full sm:max-w-[220px]">
+                        <Select
+                          onChange={(event) => updateForm("gatingLevel", event.target.value as WhitePaperGatingLevel)}
+                          options={WHITE_PAPER_GATING_OPTIONS}
+                          value={form.gatingLevel}
+                        />
+                      </div>
+                    ) : null}
+=======
                   <div className="w-full max-w-[220px]">
                     <Select
                       defaultValue={form.contentType}
@@ -1136,6 +1521,7 @@ export default function AdminManagedContentDetailPage({
                         { label: "아웃링크", value: "outlink" },
                       ]}
                     />
+>>>>>>> origin/main
                   </div>
                 ) : <div />}
                 <div className="flex items-center gap-3 sm:justify-end">
@@ -1150,6 +1536,20 @@ export default function AdminManagedContentDetailPage({
                       EN 내용 복제
                     </Button>
                   ) : null}
+<<<<<<< HEAD
+                  <TabGroup className="self-start">
+                    {(["en", "ko", "ja"] as const).map((locale) => (
+                      <Tab
+                        className="px-3 md:px-5"
+                        key={locale}
+                        onClick={() => setActiveLocale(locale)}
+                        state={activeLocale === locale ? "on" : "off"}
+                      >
+                        {locale.toUpperCase()}
+                      </Tab>
+                    ))}
+                  </TabGroup>
+=======
                   <div className="inline-flex self-start rounded-full bg-bg-deep p-1">
                     <div className="inline-flex items-center rounded-full">
                       {(["en", "ko", "ja"] as const).map((locale) => (
@@ -1164,23 +1564,36 @@ export default function AdminManagedContentDetailPage({
                       ))}
                     </div>
                   </div>
+>>>>>>> origin/main
                 </div>
               </div>
             }
           />
 
           {/* 좌측 작성 폼 본문 */}
+<<<<<<< HEAD
+          <div className="grid gap-5 pt-3 md:pt-4">
+            <InlineField label="제목">
+              <div className="flex items-center gap-3">
+                <Input
+                  className="w-full"
+=======
           <div className="grid gap-5 px-5 pt-3 md:px-6 md:pt-4">
             <InlineField label="제목">
               <div className="flex items-center gap-3">
                 <input
                   className="ui-field h-11 w-full rounded-button bg-bg-content px-3 type-body-md text-fg outline-none placeholder:text-mute-fg"
+>>>>>>> origin/main
                   onChange={(event) => updateLocalizedField("title", activeLocale, event.target.value)}
                   type="text"
                   value={getEditingLocalizedValue(form.title, activeLocale)}
                 />
                 {isContentType && !useRichEditor && itemId === "new" ? (
+<<<<<<< HEAD
+                  <Button arrow={false} className="shrink-0 justify-center" onClick={openAiDialog} style="round" variant="outline">
+=======
                   <Button size="default" arrow={false} className="shrink-0 justify-center" onClick={openAiDialog} style="round" variant="outline">
+>>>>>>> origin/main
                     AI 작성
                   </Button>
                 ) : null}
@@ -1188,8 +1601,13 @@ export default function AdminManagedContentDetailPage({
             </InlineField>
             {isContentType ? (
               <InlineField label="Slug">
+<<<<<<< HEAD
+                <Input
+                  className="w-full"
+=======
                 <input
                   className="ui-field h-11 w-full rounded-button bg-bg-content px-3 type-body-md text-fg outline-none placeholder:text-mute-fg"
+>>>>>>> origin/main
                   onChange={(event) => updateForm("id", event.target.value)}
                   type="text"
                   value={form.id === "new" ? "" : form.id}
@@ -1197,9 +1615,15 @@ export default function AdminManagedContentDetailPage({
               </InlineField>
             ) : null}
             {isContentType ? (
+<<<<<<< HEAD
+              <InlineField label="요약">
+                <Textarea
+                  className="min-h-[88px] resize-y bg-bg-content"
+=======
               <InlineField label="설명">
                 <textarea
                   className="ui-field min-h-[88px] w-full resize-y rounded-button bg-bg-content px-4 py-4 type-body-md text-fg outline-none placeholder:text-mute-fg"
+>>>>>>> origin/main
                   onChange={(event) => updateLocalizedField("summary", activeLocale, event.target.value)}
                   value={getEditingLocalizedValue(form.summary, activeLocale)}
                 />
@@ -1208,16 +1632,26 @@ export default function AdminManagedContentDetailPage({
             {isContentType ? (
               <div className="grid gap-3 md:grid-cols-2">
                 <InlineField label="작성자">
+<<<<<<< HEAD
+                  <Input
+                    className="w-full"
+=======
                   <input
                     className="ui-field h-11 w-full rounded-button bg-bg-content px-3 type-body-md text-fg outline-none placeholder:text-mute-fg"
+>>>>>>> origin/main
                     onChange={(event) => updateForm("authorName", event.target.value)}
                     type="text"
                     value={form.authorName}
                   />
                 </InlineField>
                 <InlineField label="직책">
+<<<<<<< HEAD
+                  <Input
+                    className="w-full"
+=======
                   <input
                     className="ui-field h-11 w-full rounded-button bg-bg-content px-3 type-body-md text-fg outline-none placeholder:text-mute-fg"
+>>>>>>> origin/main
                     onChange={(event) => updateForm("authorRole", event.target.value)}
                     type="text"
                     value={form.authorRole}
@@ -1227,6 +1661,38 @@ export default function AdminManagedContentDetailPage({
             ) : null}
             <InlineField label="날짜">
               <div className="flex flex-col gap-3 sm:flex-row">
+<<<<<<< HEAD
+                <Input className="flex-1 bg-bg-content" inputClassName="text-mute-fg" readOnly type="text" value={form.dateIso} />
+                <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={handleDateButtonClick} style="round" variant="outline">선택</Button>
+                {isWhitePaper ? (
+                  <label className="flex items-center gap-2 type-body-sm text-mute-fg sm:ml-5">
+                    <input
+                      checked={form.enableDownloadButton}
+                      className="h-4 w-4 rounded border-border bg-bg-content accent-[var(--color-success)]"
+                      onChange={(event) => updateForm("enableDownloadButton", event.target.checked)}
+                      type="checkbox"
+                    />
+                    <span>다운로드 버튼</span>
+                  </label>
+                ) : null}
+                <input className="sr-only" onChange={(event) => updateForm("dateIso", event.target.value)} ref={dateInputRef} type="date" value={form.dateIso} />
+              </div>
+            </InlineField>
+            {isWhitePaper && form.enableDownloadButton ? (
+              <InlineField label="PDF">
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+                  <div className="flex min-w-0 flex-1 items-center gap-3">
+                    <Input
+                      className="w-full"
+                      onChange={(event) => handlePdfInputChange(event.target.value)}
+                      type="text"
+                      value={pendingPdfFile ? pdfName : form.downloadPdfSrc}
+                    />
+                    {pdfName ? (
+                      <button
+                        className="shrink-0 bg-transparent p-0 type-body-md text-mute-fg transition-colors hover:text-fg"
+                        onClick={clearPdf}
+=======
                 <input className="h-11 flex-1 rounded-button border border-transparent bg-bg-content px-3 type-body-md text-mute-fg outline-none" readOnly type="text" value={form.dateIso} />
                 <Button size="default" arrow={false} className="h-11 w-full justify-center sm:w-auto" onClick={handleDateButtonClick} style="round" variant="outline">선택</Button>
                 <input className="sr-only" onChange={(event) => updateForm("dateIso", event.target.value)} ref={dateInputRef} type="date" value={form.dateIso} />
@@ -1262,13 +1728,62 @@ export default function AdminManagedContentDetailPage({
                       <button
                         className="shrink-0 bg-transparent p-0 type-body-md text-mute-fg transition-colors hover:text-fg"
                         onClick={clearThumbnail}
+>>>>>>> origin/main
                         type="button"
                       >
                         삭제
                       </button>
                     ) : null}
                   </div>
+<<<<<<< HEAD
+                  <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => pdfInputRef.current?.click()} style="round" variant="outline">추가</Button>
+                  <input accept="application/pdf" className="sr-only" onChange={handlePdfChange} ref={pdfInputRef} type="file" />
+=======
                   <Button size="default" arrow={false} className="h-11 w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} style="round" variant="outline">추가</Button>
+                  <label className="flex items-center gap-2 type-body-sm text-mute-fg lg:ml-1">
+                    <input
+                      checked={form.hideHeroImage}
+                      className="h-4 w-4 rounded border-border bg-bg-content accent-[var(--color-success)]"
+                      onChange={(event) => updateForm("hideHeroImage", event.target.checked)}
+                      type="checkbox"
+                    />
+                    <span>본문 노출 제외</span>
+                  </label>
+                  <input accept="image/png,image/jpeg,image/webp" className="sr-only" onChange={handleThumbnailChange} ref={fileInputRef} type="file" />
+>>>>>>> origin/main
+                </div>
+              </InlineField>
+            ) : null}
+            {isOutlinkType ? (
+<<<<<<< HEAD
+              <InlineField label="요약">
+                <Textarea
+                  className="min-h-[120px] resize-y bg-bg-content"
+                  onChange={(event) => updateLocalizedField("summary", activeLocale, event.target.value)}
+                  value={getEditingLocalizedValue(form.summary, activeLocale)}
+                />
+              </InlineField>
+            ) : isContentType ? (
+              <InlineField label="썸네일">
+                <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+                  <div className="flex min-w-0 flex-1 items-center gap-3">
+                    <Input
+                      className="w-full"
+                      onChange={(event) => handleThumbnailInputChange(event.target.value)}
+                      type="text"
+                      value={pendingThumbnailFile ? thumbnailName : form.imageSrc}
+                    />
+                    {thumbnailName ? (
+                      <button
+                        className="shrink-0 bg-transparent p-0 type-body-md text-mute-fg transition-colors hover:text-fg"
+                        onClick={clearThumbnail}
+                        type="button"
+                      >
+                        삭제
+                      </button>
+                    ) : null}
+                  </div>
+                  <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} style="round" variant="outline">추가</Button>
                   <label className="flex items-center gap-2 type-body-sm text-mute-fg lg:ml-1">
                     <input
                       checked={form.hideHeroImage}
@@ -1285,6 +1800,13 @@ export default function AdminManagedContentDetailPage({
             {isOutlinkType ? (
               <InlineField label="썸네일">
                 <div className="flex flex-col gap-3 sm:flex-row">
+                  <div className="flex min-w-0 flex-1 items-center gap-3">
+                    <Input
+                      className="w-full"
+                      onChange={(event) => handleThumbnailInputChange(event.target.value)}
+=======
+              <InlineField label="썸네일">
+                <div className="flex flex-col gap-3 sm:flex-row">
                   <div className="flex min-w-0 h-11 flex-1 items-center justify-between gap-3 rounded-button border border-transparent bg-bg-content px-3">
                     <input
                       className="w-full border-0 bg-transparent type-body-md text-fg outline-none"
@@ -1297,6 +1819,7 @@ export default function AdminManagedContentDetailPage({
                         updateForm("imageSrc", event.target.value);
                         setThumbnailName(event.target.value);
                       }}
+>>>>>>> origin/main
                       type="text"
                       value={pendingThumbnailFile ? thumbnailName : form.imageSrc}
                     />
@@ -1310,15 +1833,24 @@ export default function AdminManagedContentDetailPage({
                       </button>
                     ) : null}
                   </div>
+<<<<<<< HEAD
+                  <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} style="round" variant="outline">추가</Button>
+=======
                   <Button size="default" arrow={false} className="h-11 w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} style="round" variant="outline">추가</Button>
+>>>>>>> origin/main
                 </div>
                 <input accept="image/png,image/jpeg,image/webp" className="sr-only" onChange={handleThumbnailChange} ref={fileInputRef} type="file" />
               </InlineField>
             ) : null}
             {isOutlinkType ? (
               <InlineField label="URL">
+<<<<<<< HEAD
+                <Input
+                  className="w-full"
+=======
                 <input
                   className="ui-field h-11 w-full rounded-button bg-bg-content px-3 type-body-md text-fg outline-none placeholder:text-mute-fg"
+>>>>>>> origin/main
                   onChange={(event) => updateForm("externalUrl", event.target.value)}
                   type="text"
                   value={form.externalUrl}
@@ -1347,7 +1879,11 @@ export default function AdminManagedContentDetailPage({
           </div>
 
           {/* 하단 액션 버튼 영역 */}
+<<<<<<< HEAD
+          <div className="flex flex-col gap-3 pb-5 sm:flex-row sm:flex-wrap sm:justify-center md:pb-6">
+=======
           <div className="flex flex-col gap-3 px-5 pb-5 sm:flex-row sm:flex-wrap sm:justify-center md:px-6 md:pb-6">
+>>>>>>> origin/main
             <Button
               arrow={false}
               className="w-full justify-center sm:w-auto"
@@ -1373,10 +1909,14 @@ export default function AdminManagedContentDetailPage({
               style="round"
               variant="primary"
             >
+<<<<<<< HEAD
+              {isSaving ? <LoadingText text="저장 중..." tone="dark" /> : "저장"}
+=======
               <span className="inline-flex items-center gap-2">
                 {isSaving ? <ButtonSpinner /> : null}
                 <span>{isSaving ? "저장 중..." : "저장"}</span>
               </span>
+>>>>>>> origin/main
             </Button>
             {isContentType && itemId !== "new" && form.contentFormat === "markdown" ? (
               <Button
@@ -1394,18 +1934,28 @@ export default function AdminManagedContentDetailPage({
 
         {/* 우측 퍼블릭 상세 미리보기 */}
         {showPreview ? (
+<<<<<<< HEAD
+          <div className="min-w-0 w-full self-start min-[1440px]:flex-1 min-[1440px]:sticky min-[1440px]:top-4">
+            <div className="max-h-[calc(100vh-32px)] overflow-auto">
+              {isOutlinkType ? (
+                <AdminContentPreview
+                  bodyMarkdown=""
+=======
           <div className="min-w-0 self-start overflow-hidden rounded-[20px] border border-border bg-bg-content/40 xl:sticky xl:top-4">
             <div className="max-h-[calc(100vh-32px)] overflow-auto px-4 py-5 sm:px-5 sm:py-6 md:px-6">
               {isOutlinkType ? (
                 <NewsPreviewCard
+>>>>>>> origin/main
                   date={previewData.date}
-                  imageSrc={previewData.heroImageSrc}
+                  heroImageAlt={previewData.heroImageAlt}
+                  heroImageSrc={previewData.heroImageSrc}
+                  section="news"
                   summary={previewData.summary}
                   title={previewData.title}
                   url={previewData.url}
                 />
               ) : (
-                <ContentPreview {...previewData} />
+                <AdminContentPreview {...previewData} section={section} />
               )}
             </div>
           </div>

@@ -7,7 +7,12 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
+<<<<<<< HEAD
+    "import:legacy": "node scripts/import-legacy-content.mjs",
+    "migrate:legacy-slugs": "node scripts/migrate-legacy-slugs.mjs"
+=======
     "import:legacy": "node scripts/import-legacy-content.mjs"
+>>>>>>> origin/main
   },
   "dependencies": {
     "@tiptap/extension-image": "^3.21.0",
@@ -17,6 +22,10 @@
     "@tiptap/pm": "^3.21.0",
     "@tiptap/react": "^3.21.0",
     "@tiptap/starter-kit": "^3.21.0",
+<<<<<<< HEAD
+    "mermaid": "^11.14.0",
+=======
+>>>>>>> origin/main
     "next": "^15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

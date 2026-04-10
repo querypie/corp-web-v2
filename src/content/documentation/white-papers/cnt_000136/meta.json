@@ -1,0 +1,45 @@
+{
+  "authorName": "brant",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2025-04-30",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "beyond-mcp-to-mcps",
+  "imageSrc": "/documentation/white-papers/wp-thumb-20.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000136",
+  "summary": {
+    "en": "MCP(Model Context Protocol) is innovative, but it has a critical weakness for use in enterprise environments. In this article, we will look at the basic concepts and current status of MCP, and deeply analyze the security issues that arise in enterprise environments.",
+    "ko": "MCP(Model Context Protocol)는 혁신적이지만, 엔터프라이즈 환경에서 사용하기에는 치명적인 약점이 존재합니다. 이 글에서는 MCP의 기본 개념과 현재 상황을 살펴보고, 엔터프라이즈 환경에서 발생하는 보안 문제점을 심층 분석합니다.",
+    "ja": "MCP（モデルコンテキストプロトコル）は革新的な技術ですが、エンタープライズ環境での利用には致命的な欠点があります。本記事では、MCPの基本的な概念と現在の状況を紹介し、エンタープライズ環境で発生するセキュリティ上の課題について深く分析します。"
+  },
+  "title": {
+    "en": "Beyond MCP to MCPS: The Need for a Secure Protocol for Enterprise AI",
+    "ko": "MCP를 넘어 MCPS로: 엔터프라이즈 AI를 위한 보안 프로토콜의 필요성",
+    "ja": "MCPを超えてMCPSへ：エンタープライズAIのためのセキュアプロトコルの必要性"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000136/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000136/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000136/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000136/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000136/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000136/ja.tiptap.json"
+    }
+  }
+}

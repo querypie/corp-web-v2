@@ -1,0 +1,45 @@
+{
+  "authorName": "kenny",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2025-05-21",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "your-architect-vs-ai-agents",
+  "imageSrc": "/documentation/white-papers/wp-thumb-22.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000134",
+  "summary": {
+    "en": "In this article, we clearly distinguish the roles of the MCP server and AI agents, providing a structured explanation of their respective responsibilities and limitations to prevent misunderstandings.",
+    "ko": "이 글에서는 MCP 서버와 AI 에이전트의 역할을 명확히 구분하여, 오해를 방지하기 위해 각각의 책임과 한계에 대한 체계적인 설명을 제공합니다.",
+    "ja": "この文章では、誤解を防ぐためにMCPサーバーとAIエージェントの役割を明確に区別し、それぞれの責任と限界について体系的に説明します。"
+  },
+  "title": {
+    "en": "Your Architecture vs. AI Agents: Can MCP Hold the Line?",
+    "ko": "MCP와 AI Agent가 싸운다: 당신의 설계는 안전한가?",
+    "ja": "MCPとAIエージェントが対決：あなたの設計は安全か？"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000134/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000134/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000134/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000134/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000134/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000134/ja.tiptap.json"
+    }
+  }
+}

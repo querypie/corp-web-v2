@@ -7,7 +7,11 @@
   "totalLocaleFiles": 358,
   "entries": [
     {
+<<<<<<< HEAD
+      "category": "introduction",
+=======
       "category": "introduction-decks",
+>>>>>>> origin/main
       "contentKind": "gated-download",
       "entryId": "acp-introduction-download",
       "locales": [
@@ -15,10 +19,17 @@
         "ko",
         "ja"
       ],
+<<<<<<< HEAD
+      "metaPath": "src/content/managed/documentation/introduction/acp-introduction-download/meta.json",
+      "section": "documentation",
+      "slug": "acp-introduction-download",
+      "sourceUrl": "/features/documentation/introduction/acp-introduction-download"
+=======
       "metaPath": "src/content/managed/documentation/introduction-decks/acp-introduction-download/meta.json",
       "section": "documentation",
       "slug": "acp-introduction-download",
       "sourceUrl": "/features/documentation/introduction-decks/acp-introduction-download"
+>>>>>>> origin/main
     },
     {
       "category": "blogs",
@@ -169,7 +180,11 @@
       "sourceUrl": "/features/documentation/white-paper/25/ai-tranformation-japan/download"
     },
     {
+<<<<<<< HEAD
+      "category": "introduction",
+=======
       "category": "introduction-decks",
+>>>>>>> origin/main
       "contentKind": "gated-download",
       "entryId": "aip-introduction-download",
       "locales": [
@@ -177,10 +192,17 @@
         "ko",
         "ja"
       ],
+<<<<<<< HEAD
+      "metaPath": "src/content/managed/documentation/introduction/aip-introduction-download/meta.json",
+      "section": "documentation",
+      "slug": "aip-introduction-download",
+      "sourceUrl": "/features/documentation/introduction/aip-introduction-download"
+=======
       "metaPath": "src/content/managed/documentation/introduction-decks/aip-introduction-download/meta.json",
       "section": "documentation",
       "slug": "aip-introduction-download",
       "sourceUrl": "/features/documentation/introduction-decks/aip-introduction-download"
+>>>>>>> origin/main
     },
     {
       "category": "use-cases",

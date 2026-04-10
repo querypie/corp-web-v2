@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/webinars/3dk-ep3-ja.webp",
+          "webPath": "/demo/webinars/3dk-ep3-ja.webp"
+=======
           "sourcePath": "public/webinar/3dk-ep3-ja.webp",
           "webPath": "/webinar/3dk-ep3-ja.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/querypie-server-management-ja--12/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/webinars/3dk-ep3-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー\"\ndescription: \"エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/webinars/3dk-ep3-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"\n  - \"/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja\"",
+=======
       "ogImage": "/webinar/3dk-ep3-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー\"\ndescription: \"エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/3dk-ep3-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"\n  - \"/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/10/querypie-databases-nosql-ledger-ja",
         "/features/demo/webinars/14/querypie-kubernetes-management-ja",
@@ -40,7 +50,11 @@
         "title": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー",
         "description": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/webinars/3dk-ep3-ja.webp",
+=======
         "ogImage": "public/webinar/3dk-ep3-ja.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/webinars/3dk-ep3-ja.webp",
+          "webPath": "/demo/webinars/3dk-ep3-ja.webp"
+=======
           "sourcePath": "public/webinar/3dk-ep3-ja.webp",
           "webPath": "/webinar/3dk-ep3-ja.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/querypie-server-management-ja--12/ja.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/webinars/3dk-ep3-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー\"\nhtmlTitle: \"エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！<br /> 大規模サーバー管理、自動スケーリング、権限とポリシー\"\ndescription: \"エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/webinars/3dk-ep3-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"\n  - \"/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja\"",
+=======
       "ogImage": "/webinar/3dk-ep3-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー\"\nhtmlTitle: \"エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！<br /> 大規模サーバー管理、自動スケーリング、権限とポリシー\"\ndescription: \"エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/3dk-ep3-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/10/querypie-databases-nosql-ledger-ja\"\n  - \"/features/demo/webinars/14/querypie-kubernetes-management-ja\"\n  - \"/features/demo/webinars/8/querypie-integrations-scim-slack-vault-ja\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/10/querypie-databases-nosql-ledger-ja",
         "/features/demo/webinars/14/querypie-kubernetes-management-ja",
@@ -81,7 +105,11 @@
         "htmlTitle": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！<br /> 大規模サーバー管理、自動スケーリング、権限とポリシー",
         "description": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/webinars/3dk-ep3-ja.webp",
+=======
         "ogImage": "public/webinar/3dk-ep3-ja.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "connect-servers-agent",
+  "imageSrc": "/demo/acp-features/tu-thumb-sac-7.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000034",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "How to Connect to Servers via the QueryPie Agent",
+    "ko": "에이전트를 통해 서버 접속하기",
+    "ja": "QueryPieエージェントを使用してサーバーに接続する方法"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000034/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000034/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000034/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000034/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000034/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000034/ja.tiptap.json"
+    }
+  }
+}

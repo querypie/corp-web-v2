@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2025-09-25",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "air-company-querypie-mcp-webinar-2",
+  "imageSrc": "/demo/webinars/air-company-mcp-20250925.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "hidden",
+  "storageId": "cnt_000019",
+  "summary": {
+    "en": "「AIを活用したいけれど、何から始めればいいかわからない」「AIを導入したのに、思ったような成果が出ない」その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。なぜMCPが成果につながるのか、実際にどのように活用されているのか、活用事例をもとにわかりやすくご紹介します。AI活用の次の一手として、ぜひこの機会にご参加ください。",
+    "ko": "「AIを活用したいけれど、何から始めればいいかわからない」「AIを導入したのに、思ったような成果が出ない」その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。なぜMCPが成果につながるのか、実際にどのように活用されているのか、活用事例をもとにわかりやすくご紹介します。AI活用の次の一手として、ぜひこの機会にご参加ください。",
+    "ja": "「AIを活用したいけれど、何から始めればいいかわからない」「AIを導入したのに、思ったような成果が出ない」その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。なぜMCPが成果につながるのか、実際にどのように活用されているのか、活用事例をもとにわかりやすくご紹介します。AI活用の次の一手として、ぜひこの機会にご参加ください。"
+  },
+  "title": {
+    "en": "【9/25(木)ウェビナー】「成果に直結！MCP活用事例」",
+    "ko": "【9/25(木)ウェビナー】「成果に直結！MCP活用事例」",
+    "ja": "【9/25(木)ウェビナー】「成果に直結！MCP活用事例」"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000019/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000019/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000019/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000019/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000019/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000019/ja.tiptap.json"
+    }
+  }
+}

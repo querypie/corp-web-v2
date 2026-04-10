@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2025-05-18",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "kubernetes-manager-agent",
+  "imageSrc": "/demo/use-cases/aip-use-case-thumb-4-en.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000088",
+  "summary": {
+    "en": "An AI agent that simplifies Kubernetes cluster management through conversational commands, enabling teams to deploy, monitor, and troubleshoot without complex kubectl syntax.",
+    "ko": "An AI agent that simplifies Kubernetes cluster management through conversational commands, enabling teams to deploy, monitor, and troubleshoot without complex kubectl syntax.",
+    "ja": "会話形式のコマンドを通じてKubernetesクラスター管理を簡素化するAIエージェント。複雑なkubectl構文を使わずに、チームがデプロイ、監視、トラブルシューティングを実行できるようにします。"
+  },
+  "title": {
+    "en": "AIP Use Case: Kubernetes Manager Agent",
+    "ko": "AIP Use Case: Kubernetes Manager Agent",
+    "ja": "AIP活用事例：Kubernetes管理エージェント"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000088/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000088/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000088/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000088/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000088/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000088/ja.tiptap.json"
+    }
+  }
+}

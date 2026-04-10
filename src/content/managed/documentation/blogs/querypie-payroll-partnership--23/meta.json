@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/company/news/news-20.webp",
+          "webPath": "/company/news/news-20.webp"
+=======
           "sourcePath": "public/news/news-20.webp",
           "webPath": "/news/news-20.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/querypie-payroll-partnership--23/ja.mdx",
@@ -46,8 +51,13 @@
         "HR Tech"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/company/news/news-20.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"株式会社ペイロールとQueryPieがAIセキュリティ分野で技術提携\"\ndescription: \"株式会社ペイロール(本社:東京都江東区、代表取締役社長:湯浅 哲哉、以下「ペイロール」)と、統合データガバナンスプラットフォームを提供するQueryPie, Inc.(本社:米国カリフォルニア州、CEO:Brant Hwang)およびその日本法人であるQueryPie Japan合同会社(本社:東京都港区、代表:有延 敬三、以下「QueryPie」)は、AIとセキュリティ分野における技術提携に合意したことをお知らせいたします。\"\ndate: \"2025-08-05\"\nauthor: \"\"\nogImage: \"public/company/news/news-20.webp\"\nkeywords: [\"AIセキュリティ\", \"日本進出\", \"戦略的パートナーシップ\", \"ペイロール\", \"BPO\", \"人事システム\", \"給与計算\", \"AI統合\", \"セキュリティガバナンス\", \"データ保護\", \"アクセス制御\", \"コンプライアンス\", \"DX推進\", \"AI自動化\", \"クラウドセキュリティ\", \"QueryPie\", \"韓国スタートアップ\", \"グローバル展開\", \"AI効率化\", \"HR Tech\"]\nrelatedPosts:\n  - \"/features/documentation/blog/20/nextjs-server-action-security\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"",
+=======
       "ogImage": "/news/news-20.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"株式会社ペイロールとQueryPieがAIセキュリティ分野で技術提携\"\ndescription: \"株式会社ペイロール(本社:東京都江東区、代表取締役社長:湯浅 哲哉、以下「ペイロール」)と、統合データガバナンスプラットフォームを提供するQueryPie, Inc.(本社:米国カリフォルニア州、CEO:Brant Hwang)およびその日本法人であるQueryPie Japan合同会社(本社:東京都港区、代表:有延 敬三、以下「QueryPie」)は、AIとセキュリティ分野における技術提携に合意したことをお知らせいたします。\"\ndate: \"2025-08-05\"\nauthor: \"\"\nogImage: \"public/news/news-20.webp\"\nkeywords: [\"AIセキュリティ\", \"日本進出\", \"戦略的パートナーシップ\", \"ペイロール\", \"BPO\", \"人事システム\", \"給与計算\", \"AI統合\", \"セキュリティガバナンス\", \"データ保護\", \"アクセス制御\", \"コンプライアンス\", \"DX推進\", \"AI自動化\", \"クラウドセキュリティ\", \"QueryPie\", \"韓国スタートアップ\", \"グローバル展開\", \"AI効率化\", \"HR Tech\"]\nrelatedPosts:\n  - \"/features/documentation/blog/20/nextjs-server-action-security\"\n  - \"/features/documentation/blog/21/why-we-need-ai-red-teaming\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/20/nextjs-server-action-security",
         "/features/documentation/blog/21/why-we-need-ai-red-teaming",
@@ -62,7 +72,11 @@
         "description": "株式会社ペイロール(本社:東京都江東区、代表取締役社長:湯浅 哲哉、以下「ペイロール」)と、統合データガバナンスプラットフォームを提供するQueryPie, Inc.(本社:米国カリフォルニア州、CEO:Brant Hwang)およびその日本法人であるQueryPie Japan合同会社(本社:東京都港区、代表:有延 敬三、以下「QueryPie」)は、AIとセキュリティ分野における技術提携に合意したことをお知らせいたします。",
         "date": "2025-08-05",
         "author": "",
+<<<<<<< HEAD
+        "ogImage": "public/company/news/news-20.webp",
+=======
         "ogImage": "public/news/news-20.webp",
+>>>>>>> origin/main
         "keywords": [
           "AIセキュリティ",
           "日本進出",

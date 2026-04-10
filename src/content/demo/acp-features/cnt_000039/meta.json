@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "grant-permissions-users-2-2",
+  "imageSrc": "/demo/acp-features/tu-thumb-sac-3.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "hidden",
+  "storageId": "cnt_000039",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "How to Grant Permissions to Users (2)",
+    "ko": "사용자 역할 기반의 권한을 부여하는 방법",
+    "ja": "ユーザーに権限を付与する方法 (2)"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000039/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000039/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000039/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000039/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000039/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000039/ja.tiptap.json"
+    }
+  }
+}

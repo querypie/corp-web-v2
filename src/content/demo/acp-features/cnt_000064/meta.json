@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "use-web-terminal",
+  "imageSrc": "/demo/acp-features/tu-thumb-sac-4.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000064",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "How to Use the Web Terminal",
+    "ko": "웹 터미널 사용 방법",
+    "ja": "Webターミナルを使用する方法"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000064/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000064/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000064/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000064/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000064/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000064/ja.tiptap.json"
+    }
+  }
+}

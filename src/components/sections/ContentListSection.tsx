@@ -11,7 +11,7 @@ type ContentListSectionProps = {
   className?: string;
   description: string;
   items: ContentListItem[];
-  links: string[];
+  links: Array<{ href: string; label: string }>;
   title: string;
 };
 
@@ -27,8 +27,8 @@ function ContentListCard({ category, href, imageSrc, title }: ContentListItem) {
         <img alt={title} className="card-media-motion block h-full w-full object-cover" src={imageSrc} />
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
-        <p className="m-0 type-body-md text-mute-fg">{category}</p>
-        <p className="content-hover-title m-0 type-body-lg text-fg">{title}</p>
+        <p className="m-0 type-mono text-brand">{category}</p>
+        <p className="content-hover-title m-0 type-h3 text-fg">{title}</p>
       </div>
     </a>
   );
@@ -54,9 +54,17 @@ export default function ContentListSection({
           <p className="m-0 type-body-lg text-mute-fg">{description}</p>
           <div className="flex flex-row flex-wrap items-start gap-3 md:flex-col">
             {links.map((link) => (
+<<<<<<< HEAD
+              <a key={link.href} href={link.href}>
+                <TextButton>
+                  {link.label}
+                </TextButton>
+              </a>
+=======
               <TextButton key={link}>
                 {link}
               </TextButton>
+>>>>>>> origin/main
             ))}
           </div>
         </div>

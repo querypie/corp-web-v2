@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2025-10-15",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "baggage-operations-ai-agent",
+  "imageSrc": "/demo/use-cases/aip-use-case-thumb-12-en.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000078",
+  "summary": {
+    "en": "An AI agent that delivers real-time baggage visibility, predicts disruptions, and automates recovery workflows across airlines, airports, and ground handling teams.",
+    "ko": "An AI agent that delivers real-time baggage visibility, predicts disruptions, and automates recovery workflows across airlines, airports, and ground handling teams.",
+    "ja": "リアルタイムの手荷物可視化を提供し、混乱を予測し、航空会社・空港・グランドハンドリング間のリカバリーワークフローを自動化するAIエージェント。"
+  },
+  "title": {
+    "en": "AIP Use Case: Baggage Operations AI Agent",
+    "ko": "AIP Use Case: Baggage Operations AI Agent",
+    "ja": "AIP活用事例： 手荷物業務AIエージェント"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000078/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000078/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000078/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000078/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000078/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000078/ja.tiptap.json"
+    }
+  }
+}

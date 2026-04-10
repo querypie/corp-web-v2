@@ -1,0 +1,45 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "introduction",
+  "contentType": "content",
+  "dateIso": "",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "aip-introduction-download",
+  "imageSrc": "/documentation/introduction/docu-thumb-introduction-aip.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000001",
+  "summary": {
+    "en": "Everything You Need to Know About QueryPie AIP",
+    "ko": "QueryPie AI Platform에 대한 모든 것을 알아보세요!",
+    "ja": "QueryPie AIPについて知っておくべきこと"
+  },
+  "title": {
+    "en": "QueryPie AIP Introduction",
+    "ko": "QueryPie AIP 제품 소개서",
+    "ja": "QueryPie AIP 製品紹介書"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/introduction/cnt_000001/en.html",
+      "jsonPath": "src/content/documentation/introduction/cnt_000001/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/introduction/cnt_000001/ko.html",
+      "jsonPath": "src/content/documentation/introduction/cnt_000001/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/introduction/cnt_000001/ja.html",
+      "jsonPath": "src/content/documentation/introduction/cnt_000001/ja.tiptap.json"
+    }
+  }
+}

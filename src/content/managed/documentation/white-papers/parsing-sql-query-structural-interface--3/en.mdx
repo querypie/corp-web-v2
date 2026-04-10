@@ -5,7 +5,11 @@ title: "Core Technology for Parsing SQL Across Multiple Vendors: QSI (Query Stru
 description: "Enhance system security with QueryPie's native command control through an advanced SSH proxy architecture."
 date: "2024-11-22"
 author: "evan"
+<<<<<<< HEAD
+ogImage: "public/documentation/white-papers/wp-thumb-3.webp"
+=======
 ogImage: "public/white-paper/wp-thumb-3.webp"
+>>>>>>> origin/main
 keywords: ["QueryPie", "QSI technology", "SQL parsing", "cross-vendor compatibility", "database efficiency"]
 relatedPosts:
   - "/features/documentation/white-paper/4/transaction-free-change-data-capture-system"
@@ -68,7 +72,11 @@ To implement consistent security policies across diverse databases, QueryPie pro
 
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-1-execution-phases.webp"
+=======
         filepath="public/white-paper/wp3-1-execution-phases.webp"
+>>>>>>> origin/main
         alt="Execution Phases"
     />
 </Box>
@@ -101,7 +109,11 @@ Here are examples of `SELECT * FROM actor` queries across different databases:
 **MySQL (ANTLR4)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-2-MySQL-ANTLR4.webp"
+=======
         filepath="public/white-paper/wp3-2-MySQL-ANTLR4.webp"
+>>>>>>> origin/main
         alt="MySQL (ANTLR4)"
     />
 </Box>
@@ -110,7 +122,11 @@ Here are examples of `SELECT * FROM actor` queries across different databases:
 **Oracle (ANTLR4)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-3-Oracle-ANTLR4.webp"
+=======
         filepath="public/white-paper/wp3-3-Oracle-ANTLR4.webp"
+>>>>>>> origin/main
         alt="Oracle (ANTLR4)"
     />
 </Box>
@@ -119,7 +135,11 @@ Here are examples of `SELECT * FROM actor` queries across different databases:
 **PostgreSQL (YACC)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-4-PostgreSQL-YACC.webp"
+=======
         filepath="public/white-paper/wp3-4-PostgreSQL-YACC.webp"
+>>>>>>> origin/main
         alt="PostgreSQL (YACC)"
     />
 </Box>
@@ -134,7 +154,11 @@ Represents references to tables or original data where actual data is stored.
 Example: The identifier `actor` refers to a specific table in the database, retrieving data through an operation.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-5-qsi-ast-Data-Reference.webp"
+=======
         filepath="public/white-paper/wp3-5-qsi-ast-Data-Reference.webp"
+>>>>>>> origin/main
         alt="Data Reference"
     />
 </Box>
@@ -144,7 +168,11 @@ Represents new data derived from a specific table.
 Example: In the query `SELECT name AS n FROM actor`, the `name` column from the `actor` table is given an alias `n`, creating a new form of the data.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-6-qsi-ast-Derived-Table.webp"
+=======
         filepath="public/white-paper/wp3-6-qsi-ast-Derived-Table.webp"
+>>>>>>> origin/main
         alt="Derived Table"
     />
 </Box>
@@ -154,7 +182,11 @@ Represents the structure that combines multiple tables to provide related data a
 Example: `SELECT * FROM address JOIN city USING (city_id)` merges the `address` and `city` tables based on `city_id`, retrieving all associated data from both tables.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-7-qsi-ast-Joined-Table.webp"
+=======
         filepath="public/white-paper/wp3-7-qsi-ast-Joined-Table.webp"
+>>>>>>> origin/main
         alt="Joined Table"
     />
 </Box>
@@ -164,7 +196,11 @@ This node supports operations that combine multiple result sets.
 Example: In the query `SELECT 1 UNION ALL SELECT 2`, the results of two `SELECT` statements are combined into a single table.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-8-qsi-ast-Compound-Table-Combination.webp"
+=======
         filepath="public/white-paper/wp3-8-qsi-ast-Compound-Table-Combination.webp"
+>>>>>>> origin/main
         alt="Compound Table Combination"
     />
 </Box>
@@ -174,7 +210,11 @@ Provides specific values directly in table format.
 Example: `VALUES (1,2), (3,4)` creates a small table with two rows and two columns that can be used immediately.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-9-qsi-ast-Inline-Derived-Table.webp"
+=======
         filepath="public/white-paper/wp3-9-qsi-ast-Inline-Derived-Table.webp"
+>>>>>>> origin/main
         alt="Inline Derived Table"
     />
 </Box>
@@ -184,7 +224,11 @@ Calls a specific function that returns data in table format.
 Example: `SELECT * FROM table_function()` retrieves table-formatted data returned by the function `table_function()`.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-10-qsi-ast-Table-Function-Call.webp"
+=======
         filepath="public/white-paper/wp3-10-qsi-ast-Table-Function-Call.webp"
+>>>>>>> origin/main
         alt="Table Function Call"
     />
 </Box>
@@ -205,7 +249,11 @@ For `SELECT` queries, which output table-formatted results, the analysis include
     - Contains columns that influence the query results but do not appear directly in the output, such as those used in `WHERE` or `HAVING` clauses.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-11-analysis-result.webp"
+=======
         filepath="public/white-paper/wp3-11-analysis-result.webp"
+>>>>>>> origin/main
         alt="Analysis Result"
     />
 </Box>
@@ -222,7 +270,11 @@ WHERE a.city_id = c.city_id
 Analysis Result
 <Box marginTopSize="xs" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-12-analysis-result-2.webp"
+=======
         filepath="public/white-paper/wp3-12-analysis-result-2.webp"
+>>>>>>> origin/main
         alt="Analysis Result"
     />
 </Box>
@@ -252,7 +304,11 @@ SELECT * FROM actor_view
 Analysis Result
 <Box marginTopSize="sm" center>
     <ArticleFileImage
+<<<<<<< HEAD
+        filepath="public/documentation/white-papers/wp3-13-analysis-result-3.webp"
+=======
         filepath="public/white-paper/wp3-13-analysis-result-3.webp"
+>>>>>>> origin/main
         alt="Analysis Result"
     />
 </Box>

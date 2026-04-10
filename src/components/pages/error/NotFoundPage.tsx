@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Button from "../../common/Button";
 import Footer from "../../layout/Footer";
 import Gnb from "../../layout/Gnb";
-import { defaultLocale, isLocale, type Locale } from "../../../constants/i18n";
+import { defaultLocale, getLocalePath, isLocale, type Locale } from "../../../constants/i18n";
 import { getShellMenuCopy } from "../../../constants/navigation";
 
 type NotFoundPageProps = {};
@@ -63,7 +63,7 @@ export default function NotFoundPage({}: NotFoundPageProps) {
   // 현재 locale 기준으로 404 카피와 링크를 분기
   const copy = {
     en: {
-      ctaHref: "/en",
+      ctaHref: getLocalePath("en", "/"),
       ctaLabel: "Back to home",
       ...getShellMenuCopy("en"),
       messageLines: [
@@ -73,7 +73,7 @@ export default function NotFoundPage({}: NotFoundPageProps) {
       title: "404",
     },
     ko: {
-      ctaHref: "/ko",
+      ctaHref: getLocalePath("ko", "/"),
       ctaLabel: "홈으로 돌아가기",
       ...getShellMenuCopy("ko"),
       messageLines: [
@@ -83,7 +83,7 @@ export default function NotFoundPage({}: NotFoundPageProps) {
       title: "404",
     },
     ja: {
-      ctaHref: "/ja",
+      ctaHref: getLocalePath("ja", "/"),
       ctaLabel: "ホームへ戻る",
       ...getShellMenuCopy("ja"),
       messageLines: [
@@ -98,7 +98,7 @@ export default function NotFoundPage({}: NotFoundPageProps) {
     <div className="flex min-h-screen flex-col bg-bg">
       <Gnb actionLabel={copy.navActionLabel} items={copy.navItems} locale={locale} />
       {/* 404 중앙 메시지 영역 */}
-      <main className="flex flex-1 px-5 pt-[100px] text-fg md:px-10 md:pt-page-top">
+      <main className="flex flex-1 px-5 pt-[100px] text-fg md:px-10 md:pt-[120px]">
         <section className="mx-auto flex w-full max-w-[1200px] flex-1 items-center justify-center pb-10">
           <div className="flex w-full max-w-[488px] flex-col items-center gap-8 md:flex-row md:items-start md:gap-[60px]">
             <div className="shrink-0">
@@ -123,7 +123,7 @@ export default function NotFoundPage({}: NotFoundPageProps) {
           </div>
         </section>
       </main>
-      <Footer className="mt-20 md:mt-footer-gap" legalLinks={copy.footerLegalLinks} locale={locale} sections={copy.footerSections} />
+      <Footer className="mt-10 md:mt-20" legalLinks={copy.footerLegalLinks} locale={locale} sections={copy.footerSections} />
     </div>
   );
 }

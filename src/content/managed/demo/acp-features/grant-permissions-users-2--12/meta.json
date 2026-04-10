@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-sac-3.webp",
+          "webPath": "/demo/acp-features/tu-thumb-sac-3.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-sac-3.webp",
           "webPath": "/tutorial/tu-thumb-sac-3.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/grant-permissions-users-2--12/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-sac-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Grant Permissions to Users (2)\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-sac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/13/grant-permissions-users\"\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/10/submit-server-access-workflow\"",
+=======
       "ogImage": "/tutorial/tu-thumb-sac-3.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Grant Permissions to Users (2)\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-sac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/13/grant-permissions-users\"\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/10/submit-server-access-workflow\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/13/grant-permissions-users",
         "/features/demo/acp-features/11/use-web-terminal",
@@ -40,7 +50,11 @@
         "title": "How to Grant Permissions to Users (2)",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-sac-3.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-sac-3.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-sac-3.webp",
+          "webPath": "/demo/acp-features/tu-thumb-sac-3.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-sac-3.webp",
           "webPath": "/tutorial/tu-thumb-sac-3.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/grant-permissions-users-2--12/ko.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-sac-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"사용자 역할 기반의 권한을 부여하는 방법\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-sac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/13/grant-permissions-users\"\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/10/submit-server-access-workflow\"",
+=======
       "ogImage": "/tutorial/tu-thumb-sac-3.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"사용자 역할 기반의 권한을 부여하는 방법\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-sac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/13/grant-permissions-users\"\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/10/submit-server-access-workflow\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/13/grant-permissions-users",
         "/features/demo/acp-features/11/use-web-terminal",
@@ -80,7 +104,11 @@
         "title": "사용자 역할 기반의 권한을 부여하는 방법",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-sac-3.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-sac-3.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -94,8 +122,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-sac-3.webp",
+          "webPath": "/demo/acp-features/tu-thumb-sac-3.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-sac-3.webp",
           "webPath": "/tutorial/tu-thumb-sac-3.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/grant-permissions-users-2--12/ja.mdx",
@@ -105,8 +138,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-sac-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"ユーザーに権限を付与する方法 (2)\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-sac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/13/grant-permissions-users\"\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/10/submit-server-access-workflow\"",
+=======
       "ogImage": "/tutorial/tu-thumb-sac-3.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"ユーザーに権限を付与する方法 (2)\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-sac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/13/grant-permissions-users\"\n  - \"/features/demo/acp-features/11/use-web-terminal\"\n  - \"/features/demo/acp-features/10/submit-server-access-workflow\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/13/grant-permissions-users",
         "/features/demo/acp-features/11/use-web-terminal",
@@ -120,7 +158,11 @@
         "title": "ユーザーに権限を付与する方法 (2)",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-sac-3.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-sac-3.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

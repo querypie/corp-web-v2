@@ -1,0 +1,45 @@
+{
+  "authorName": "greg",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2025-04-08",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "reverse-tunneling-jumphost-solution",
+  "imageSrc": "/documentation/white-papers/wp-thumb-14.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000142",
+  "summary": {
+    "en": "As enterprises adopt network isolation, secure access to internal servers becomes more complex. This white paper outlines the limitations of traditional SSH methods and explains how QueryPie enables seamless, scalable server access through multi-hop tunneling and centralized control—without exposing intermediate credentials.",
+    "ko": "기업의 망분리 환경에서 안전하고 효율적인 서버 접근을 가능하게 하는 QueryPie의 접근 제어 전략. Reverse Tunneling, JumpHost, 태그 기반 라우팅까지 – 복잡한 네트워크 환경을 단순화하고, 보안과 사용자 경험을 동시에 만족시킵니다.",
+    "ja": "As enterprises adopt network isolation, secure access to internal servers becomes more complex. This white paper outlines the limitations of traditional SSH methods and explains how QueryPie enables seamless, scalable server access through multi-hop tunneling and centralized control—without exposing intermediate credentials."
+  },
+  "title": {
+    "en": "Secure Server Access in an Era of Network Isolation: Multi-hop Bidirectional Tunneling via the SSH Protocol",
+    "ko": "망분리 시대의 안전한 서버 접근: SSH 프로토콜을 이용한 멀티홉 양방향 터널링 기술",
+    "ja": "Secure Server Access in an Era of Network Isolation: Multi-hop Bidirectional Tunneling via the SSH Protocol"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000142/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000142/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000142/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000142/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000142/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000142/ja.tiptap.json"
+    }
+  }
+}

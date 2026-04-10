@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/webinars/3dk-ep3-ko.webp",
+          "webPath": "/demo/webinars/3dk-ep3-ko.webp"
+=======
           "sourcePath": "public/webinar/3dk-ep3-ko.webp",
           "webPath": "/webinar/3dk-ep3-ko.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/querypie-server-management-ko--11/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/webinars/3dk-ep3-ko.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!\"\ndescription: \"3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/webinars/3dk-ep3-ko.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko\"\n  - \"/features/demo/webinars/9/querypie-databases-nosql-ledger-ko\"\n  - \"/features/demo/webinars/13/querypie-kubernetes-management-ko\"",
+=======
       "ogImage": "/webinar/3dk-ep3-ko.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!\"\ndescription: \"3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/3dk-ep3-ko.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko\"\n  - \"/features/demo/webinars/9/querypie-databases-nosql-ledger-ko\"\n  - \"/features/demo/webinars/13/querypie-kubernetes-management-ko\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko",
         "/features/demo/webinars/9/querypie-databases-nosql-ledger-ko",
@@ -40,7 +50,11 @@
         "title": "Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!",
         "description": "3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다.",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/webinars/3dk-ep3-ko.webp",
+=======
         "ogImage": "public/webinar/3dk-ep3-ko.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/webinars/3dk-ep3-ko.webp",
+          "webPath": "/demo/webinars/3dk-ep3-ko.webp"
+=======
           "sourcePath": "public/webinar/3dk-ep3-ko.webp",
           "webPath": "/webinar/3dk-ep3-ko.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/querypie-server-management-ko--11/ko.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/webinars/3dk-ep3-ko.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!\"\ndescription: \"3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/webinars/3dk-ep3-ko.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko\"\n  - \"/features/demo/webinars/9/querypie-databases-nosql-ledger-ko\"\n  - \"/features/demo/webinars/13/querypie-kubernetes-management-ko\"",
+=======
       "ogImage": "/webinar/3dk-ep3-ko.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!\"\ndescription: \"3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다.\"\ndate: \"2024-11-29\"\nogImage: \"public/webinar/3dk-ep3-ko.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko\"\n  - \"/features/demo/webinars/9/querypie-databases-nosql-ledger-ko\"\n  - \"/features/demo/webinars/13/querypie-kubernetes-management-ko\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/7/querypie-integrations-scim-slack-vault-ko",
         "/features/demo/webinars/9/querypie-databases-nosql-ledger-ko",
@@ -80,7 +104,11 @@
         "title": "Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!",
         "description": "3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다.",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/webinars/3dk-ep3-ko.webp",
+=======
         "ogImage": "public/webinar/3dk-ep3-ko.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

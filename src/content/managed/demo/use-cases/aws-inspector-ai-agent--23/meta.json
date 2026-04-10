@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/aip-use-case-thumb-17-en.webp",
+          "webPath": "/demo/use-cases/aip-use-case-thumb-17-en.webp"
+=======
           "sourcePath": "public/demo/aip-use-case-thumb-17-en.webp",
           "webPath": "/demo/aip-use-case-thumb-17-en.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/aws-inspector-ai-agent--23/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/aip-use-case-thumb-17-en.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: AWS Inspector Insight AI Agent\"\ndescription: \"An AI agent that turns AWS Inspector findings into prioritized remediation plans—summarizing risk, owners, and fixes with one conversational request.\"\ndate: \"2025-11-03\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-17-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/21/incident-mgmt-ai-agent\"\n  - \"/features/demo/use-cases/22/aws-log-analytics-agent\"\n  - \"/features/demo/use-cases/24/aws-solutions-architect-ai-agent\"",
+=======
       "ogImage": "/demo/aip-use-case-thumb-17-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: AWS Inspector Insight AI Agent\"\ndescription: \"An AI agent that turns AWS Inspector findings into prioritized remediation plans—summarizing risk, owners, and fixes with one conversational request.\"\ndate: \"2025-11-03\"\nogImage: \"public/demo/aip-use-case-thumb-17-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/21/incident-mgmt-ai-agent\"\n  - \"/features/demo/use-cases/22/aws-log-analytics-agent\"\n  - \"/features/demo/use-cases/24/aws-solutions-architect-ai-agent\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/21/incident-mgmt-ai-agent",
         "/features/demo/use-cases/22/aws-log-analytics-agent",
@@ -40,7 +50,11 @@
         "title": "AIP Use Case: AWS Inspector Insight AI Agent",
         "description": "An AI agent that turns AWS Inspector findings into prioritized remediation plans—summarizing risk, owners, and fixes with one conversational request.",
         "date": "2025-11-03",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/aip-use-case-thumb-17-en.webp",
+=======
         "ogImage": "public/demo/aip-use-case-thumb-17-en.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/aip-use-case-thumb-17-ja.webp",
+          "webPath": "/demo/use-cases/aip-use-case-thumb-17-ja.webp"
+=======
           "sourcePath": "public/demo/aip-use-case-thumb-17-ja.webp",
           "webPath": "/demo/aip-use-case-thumb-17-ja.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/aws-inspector-ai-agent--23/ja.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/aip-use-case-thumb-17-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： AWSインサイトAIエージェント\"\ndescription: \"AWS Inspectorの検出結果を、優先度付きの是正計画へ変換するAIエージェント。リスク、担当者、修正内容を、1回の会話型リクエストで要約します。\"\ndate: \"2025-11-10\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-17-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/21/incident-mgmt-ai-agent\"\n  - \"/features/demo/use-cases/22/aws-log-analytics-agent\"\n  - \"/features/demo/use-cases/24/aws-solutions-architect-ai-agent\"",
+=======
       "ogImage": "/demo/aip-use-case-thumb-17-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： AWSインサイトAIエージェント\"\ndescription: \"AWS Inspectorの検出結果を、優先度付きの是正計画へ変換するAIエージェント。リスク、担当者、修正内容を、1回の会話型リクエストで要約します。\"\ndate: \"2025-11-10\"\nogImage: \"public/demo/aip-use-case-thumb-17-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/21/incident-mgmt-ai-agent\"\n  - \"/features/demo/use-cases/22/aws-log-analytics-agent\"\n  - \"/features/demo/use-cases/24/aws-solutions-architect-ai-agent\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/21/incident-mgmt-ai-agent",
         "/features/demo/use-cases/22/aws-log-analytics-agent",
@@ -80,7 +104,11 @@
         "title": "AIP活用事例： AWSインサイトAIエージェント",
         "description": "AWS Inspectorの検出結果を、優先度付きの是正計画へ変換するAIエージェント。リスク、担当者、修正内容を、1回の会話型リクエストで要約します。",
         "date": "2025-11-10",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/aip-use-case-thumb-17-ja.webp",
+=======
         "ogImage": "public/demo/aip-use-case-thumb-17-ja.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

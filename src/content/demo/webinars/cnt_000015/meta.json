@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2026-02-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "air-company-querypie-ai-usecase-webinar-2",
+  "imageSrc": "/demo/webinars/air-company-querypie-ai-usecase-webinar-20260219.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "hidden",
+  "storageId": "cnt_000015",
+  "summary": {
+    "en": "AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。",
+    "ko": "AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。",
+    "ja": "AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。"
+  },
+  "title": {
+    "en": "AI、社内で使ってみた。活用事例を30分で｜2/19(木)開催",
+    "ko": "AI、社内で使ってみた。活用事例を30分で｜2/19(木)開催",
+    "ja": "AI、社内で使ってみた。活用事例を30分で｜2/19(木)開催"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000015/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000015/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000015/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000015/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000015/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000015/ja.tiptap.json"
+    }
+  }
+}

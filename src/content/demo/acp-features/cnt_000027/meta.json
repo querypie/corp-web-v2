@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2025-02-01",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "integrating-querypie-with-tableau",
+  "imageSrc": "/demo/acp-features/de-thumb-tableau.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000027",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "QueryPie x tableau",
+    "ko": "QueryPie x tableau",
+    "ja": "QueryPie x tableau"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000027/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000027/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000027/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000027/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000027/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000027/ja.tiptap.json"
+    }
+  }
+}

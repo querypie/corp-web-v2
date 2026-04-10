@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "submit-sql-export-workflow",
+  "imageSrc": "/demo/acp-features/tu-thumb-dac-8.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000061",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "How to Submit a Workflow for SQL Export Requests",
+    "ko": "쿼리 결과 및 특정 데이터 다운로드 요청하기",
+    "ja": "SQLエクスポートリクエストのワークフローを提出する方法"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000061/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000061/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000061/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000061/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000061/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000061/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2025-10-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "air-company-querypie-ai-webinar-3",
+  "imageSrc": "/demo/webinars/air-company-ai-webinar20251023.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "hidden",
+  "storageId": "cnt_000018",
+  "summary": {
+    "en": "AI活用は競争力の鍵。今や企業にとって避けて通れないテーマとなっています。​しかし「どの業務に取り入れればよいのか分からない」「人材やノウハウが足りない」「セキュリティやガバナンスが不安」といった理由から、導入が進まない企業も少なくありません。​本セミナーでは、こうした課題を整理し、実際にAIを業務へ取り込み成果を上げている実例を紹介します。​​",
+    "ko": "AI活用は競争力の鍵。今や企業にとって避けて通れないテーマとなっています。​しかし「どの業務に取り入れればよいのか分からない」「人材やノウハウが足りない」「セキュリティやガバナンスが不安」といった理由から、導入が進まない企業も少なくありません。​本セミナーでは、こうした課題を整理し、実際にAIを業務へ取り込み成果を上げている実例を紹介します。​​",
+    "ja": "AI活用は競争力の鍵。今や企業にとって避けて通れないテーマとなっています。​しかし「どの業務に取り入れればよいのか分からない」「人材やノウハウが足りない」「セキュリティやガバナンスが不安」といった理由から、導入が進まない企業も少なくありません。​本セミナーでは、こうした課題を整理し、実際にAIを業務へ取り込み成果を上げている実例を紹介します。​​"
+  },
+  "title": {
+    "en": "AIエージェントってウチの会社でも使えるの？30分でわかる入門編 【10/23(木)開催｜参加費無料】",
+    "ko": "AIエージェントってウチの会社でも使えるの？30分でわかる入門編 【10/23(木)開催｜参加費無料】",
+    "ja": "AIエージェントってウチの会社でも使えるの？30分でわかる入門編 【10/23(木)開催｜参加費無料】"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000018/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000018/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000018/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000018/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000018/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000018/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2025-05-19",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "findy-querypie-mcp-webinar",
+  "imageSrc": "/demo/webinars/findy-querypie-mcp-webinar.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000023",
+  "summary": {
+    "en": "Learn how to build an MCP server in just 10 minutes! We'll walk you through it with a live coding session in Korean. If you're curious about AI or MCP, don't miss out!",
+    "ko": "단 10분 만에 MCP 서버를 구현하는 방법! 당일 라이브 코딩으로 보여드립니다. 라이브 코딩은 한국어로 진행되니 AI와 MCP에 대해 궁금하셨던 분들, 이번 기회를 절대 놓치지 마세요!",
+    "ja": "たった10分でMCPサーバーを構築する方法を、当日のライブコーディングでご紹介します。ライブコーディングは韓国語で実施されます。AIやMCPにご興味のある方は、ぜひこの機会をお見逃しなく！"
+  },
+  "title": {
+    "en": "Join FINDY's CTO and QueryPie for an AI & MCP Online Seminar",
+    "ko": "Findy의 CTO와 QueryPie가 함께하는 AI & MCP 온라인 세미나에 초대합니다.",
+    "ja": "FindyのCTOとQueryPieが共演！AI & MCP オンラインセミナー開催のお知らせ"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000023/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000023/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000023/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000023/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000023/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000023/ja.tiptap.json"
+    }
+  }
+}

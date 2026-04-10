@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "connect-database-querypie-agent",
+  "imageSrc": "/demo/acp-features/tu-thumb-dac-9.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000032",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "How to Connect to Database via the QueryPie Agent",
+    "ko": "에이전트를 통해 데이터베이스 접속하기",
+    "ja": "QueryPieエージェントを使用してデータベースに接続する方法"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000032/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000032/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000032/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000032/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000032/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000032/ja.tiptap.json"
+    }
+  }
+}

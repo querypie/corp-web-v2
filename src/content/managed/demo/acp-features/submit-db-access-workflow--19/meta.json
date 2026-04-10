@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-6.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-6.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-6.webp",
           "webPath": "/tutorial/tu-thumb-dac-6.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/submit-db-access-workflow--19/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-6.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Submit a Workflow for DB Access Requests\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-6.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/18/submit-sql-request-workflow\"\n  - \"/features/demo/acp-features/17/submit-sql-export-workflow\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-6.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Submit a Workflow for DB Access Requests\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-6.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/18/submit-sql-request-workflow\"\n  - \"/features/demo/acp-features/17/submit-sql-export-workflow\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/20/apply-data-masking-policies",
         "/features/demo/acp-features/18/submit-sql-request-workflow",
@@ -40,7 +50,11 @@
         "title": "How to Submit a Workflow for DB Access Requests",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-6.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-6.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-6.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-6.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-6.webp",
           "webPath": "/tutorial/tu-thumb-dac-6.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/submit-db-access-workflow--19/ko.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-6.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"데이터베이스 접근 권한 요청하기\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-6.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/18/submit-sql-request-workflow\"\n  - \"/features/demo/acp-features/17/submit-sql-export-workflow\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-6.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"데이터베이스 접근 권한 요청하기\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-6.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/18/submit-sql-request-workflow\"\n  - \"/features/demo/acp-features/17/submit-sql-export-workflow\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/20/apply-data-masking-policies",
         "/features/demo/acp-features/18/submit-sql-request-workflow",
@@ -80,7 +104,11 @@
         "title": "데이터베이스 접근 권한 요청하기",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-6.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-6.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -94,8 +122,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-6.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-6.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-6.webp",
           "webPath": "/tutorial/tu-thumb-dac-6.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/submit-db-access-workflow--19/ja.mdx",
@@ -105,8 +138,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-6.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"DBアクセスリクエストのワークフローを提出する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-6.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/18/submit-sql-request-workflow\"\n  - \"/features/demo/acp-features/17/submit-sql-export-workflow\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-6.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"DBアクセスリクエストのワークフローを提出する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-6.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"\n  - \"/features/demo/acp-features/18/submit-sql-request-workflow\"\n  - \"/features/demo/acp-features/17/submit-sql-export-workflow\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/20/apply-data-masking-policies",
         "/features/demo/acp-features/18/submit-sql-request-workflow",
@@ -120,7 +158,11 @@
         "title": "DBアクセスリクエストのワークフローを提出する方法",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-6.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-6.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

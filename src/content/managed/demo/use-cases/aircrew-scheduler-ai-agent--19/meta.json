@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/aip-use-case-thumb-13-en.webp",
+          "webPath": "/demo/use-cases/aip-use-case-thumb-13-en.webp"
+=======
           "sourcePath": "public/demo/aip-use-case-thumb-13-en.webp",
           "webPath": "/demo/aip-use-case-thumb-13-en.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/aircrew-scheduler-ai-agent--19/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/aip-use-case-thumb-13-en.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: AirCrew Scheduler AI Agent\"\ndescription: \"An AI agent that optimizes crew pairing, rostering, and recovery from disruptions—turning policies, qualifications, and schedules into fast, compliant decisions through natural language.\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-13-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/17/aircraft-maintenance-ai-agent\"\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"\n  - \"/features/demo/use-cases/20/military-hr-ai-agent\"",
+=======
       "ogImage": "/demo/aip-use-case-thumb-13-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: AirCrew Scheduler AI Agent\"\ndescription: \"An AI agent that optimizes crew pairing, rostering, and recovery from disruptions—turning policies, qualifications, and schedules into fast, compliant decisions through natural language.\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/aip-use-case-thumb-13-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/17/aircraft-maintenance-ai-agent\"\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"\n  - \"/features/demo/use-cases/20/military-hr-ai-agent\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/17/aircraft-maintenance-ai-agent",
         "/features/demo/use-cases/18/baggage-operations-ai-agent",
@@ -40,7 +50,11 @@
         "title": "AIP Use Case: AirCrew Scheduler AI Agent",
         "description": "An AI agent that optimizes crew pairing, rostering, and recovery from disruptions—turning policies, qualifications, and schedules into fast, compliant decisions through natural language.",
         "date": "2025-10-15",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/aip-use-case-thumb-13-en.webp",
+=======
         "ogImage": "public/demo/aip-use-case-thumb-13-en.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/aip-use-case-thumb-13-ja.webp",
+          "webPath": "/demo/use-cases/aip-use-case-thumb-13-ja.webp"
+=======
           "sourcePath": "public/demo/aip-use-case-thumb-13-ja.webp",
           "webPath": "/demo/aip-use-case-thumb-13-ja.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/aircrew-scheduler-ai-agent--19/ja.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/aip-use-case-thumb-13-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 乗務員スケジューリングAIエージェント\"\ndescription: \"ポリシー、資格、スケジュールを自然言語で迅速かつ準拠した意思決定に変換し、クルーペアリング、ロスタリング、ディスラプションからの復旧を最適化するAIエージェント。\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-13-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/17/aircraft-maintenance-ai-agent\"\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"\n  - \"/features/demo/use-cases/20/military-hr-ai-agent\"",
+=======
       "ogImage": "/demo/aip-use-case-thumb-13-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 乗務員スケジューリングAIエージェント\"\ndescription: \"ポリシー、資格、スケジュールを自然言語で迅速かつ準拠した意思決定に変換し、クルーペアリング、ロスタリング、ディスラプションからの復旧を最適化するAIエージェント。\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/aip-use-case-thumb-13-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/17/aircraft-maintenance-ai-agent\"\n  - \"/features/demo/use-cases/18/baggage-operations-ai-agent\"\n  - \"/features/demo/use-cases/20/military-hr-ai-agent\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/17/aircraft-maintenance-ai-agent",
         "/features/demo/use-cases/18/baggage-operations-ai-agent",
@@ -80,7 +104,11 @@
         "title": "AIP活用事例： 乗務員スケジューリングAIエージェント",
         "description": "ポリシー、資格、スケジュールを自然言語で迅速かつ準拠した意思決定に変換し、クルーペアリング、ロスタリング、ディスラプションからの復旧を最適化するAIエージェント。",
         "date": "2025-10-15",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/aip-use-case-thumb-13-ja.webp",
+=======
         "ogImage": "public/demo/aip-use-case-thumb-13-ja.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

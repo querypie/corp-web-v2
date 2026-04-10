@@ -1,4 +1,8 @@
 import type { Locale } from "@/constants/i18n";
+<<<<<<< HEAD
+import Cta from "../../sections/Cta";
+=======
+>>>>>>> origin/main
 
 type NewsListItem = {
   date: string;
@@ -8,6 +12,8 @@ type NewsListItem = {
   summary: string;
   title: string;
 };
+
+export type { NewsListItem };
 
 type NewsListPageProps = {
   emptyMessage?: string;
@@ -20,28 +26,52 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function NewsListCard({
+export function NewsListCard({
   date,
   href,
   imageSrc,
+<<<<<<< HEAD
+=======
   index,
+>>>>>>> origin/main
   isExternal = true,
   summary,
   title,
-}: NewsListItem & { index: number }) {
+}: NewsListItem) {
+  const resolvedImageSrc = imageSrc.trim();
+
   return (
     /* 뉴스 카드 1개: 모바일은 세로, 데스크톱은 텍스트/썸네일 2열 */
     <a
       className="group flex w-full flex-col gap-4 md:flex-row md:items-start md:gap-[30px]"
-      data-reveal
       href={href}
+<<<<<<< HEAD
+=======
       style={{ transitionDelay: `${index * 70}ms` }}
+>>>>>>> origin/main
       rel={isExternal ? "noreferrer noopener" : undefined}
       target={isExternal ? "_blank" : undefined}
     >
       {/* 날짜 / 제목 / 요약 텍스트 영역 */}
       <div className="order-2 flex min-w-0 flex-1 flex-col gap-[10px] md:order-1">
         <p className="m-0 type-body-md text-mute-fg">{date}</p>
+<<<<<<< HEAD
+        <h2 className="content-hover-title m-0 type-h3 text-fg">{title}</h2>
+        <p className="m-0 hidden type-body-md text-mute-fg md:block">{summary}</p>
+      </div>
+      {/* 우측 썸네일 영역 */}
+      {resolvedImageSrc ? (
+        <div className="content-thumbnail-frame order-1 w-full shrink-0 overflow-hidden rounded-thumb bg-bg-content md:order-2 md:w-[380px]">
+          <img
+            alt={title}
+            className="card-media-motion block h-full w-full object-cover"
+            decoding="async"
+            loading="lazy"
+            src={resolvedImageSrc}
+          />
+        </div>
+      ) : null}
+=======
         <h2 className="content-hover-title m-0 type-h2 text-fg">{title}</h2>
         <p className="m-0 hidden type-body-md text-mute-fg md:block">{summary}</p>
       </div>
@@ -55,6 +85,7 @@ function NewsListCard({
           src={imageSrc}
         />
       </div>
+>>>>>>> origin/main
     </a>
   );
 }
@@ -76,21 +107,32 @@ export default function NewsListPage({
     )[locale];
 
   return (
-    <div className="flex w-full justify-center px-5 pb-10 md:px-10">
-      <section className="flex w-full max-w-[900px] flex-col gap-20">
+    <div className="flex w-full flex-col gap-20 px-5 pb-10 md:gap-[160px] md:px-10">
+      <section className="flex w-full justify-center">
+        <div className="flex w-full max-w-[900px] flex-col gap-20">
         {/* 뉴스 카드 목록 */}
         <div className="flex min-w-0 w-full flex-col gap-10">
           {items.length > 0 ? (
             items.map((item, index) => (
+<<<<<<< HEAD
+              <NewsListCard key={`${item.title}-${index}`} {...item} />
+=======
               <NewsListCard key={`${item.title}-${index}`} {...item} index={index} />
+>>>>>>> origin/main
             ))
           ) : (
             <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
               <p className="m-0 type-body-md text-mute-fg">{resolvedEmptyMessage}</p>
             </div>
+<<<<<<< HEAD
+            )}
+          </div>
+=======
           )}
+>>>>>>> origin/main
         </div>
       </section>
+      <Cta />
     </div>
   );
 }

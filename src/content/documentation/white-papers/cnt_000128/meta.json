@@ -1,0 +1,45 @@
+{
+  "authorName": "querypie",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2026-02-27",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "ai-agent-guardrails-governance-2026",
+  "imageSrc": "/documentation/white-papers/wp-thumb-28.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000128",
+  "summary": {
+    "en": "As AI agents move from conversational assistants to autonomous executors, enterprises need stronger control systems. This 2026 guide explains a four-element guardrail framework—Permission, Approval, Audit Trail, and Kill Switch—for CxOs and operational leaders.",
+    "ko": "As AI agents move from conversational assistants to autonomous executors, enterprises need stronger control systems. This 2026 guide explains a four-element guardrail framework—Permission, Approval, Audit Trail, and Kill Switch—for CxOs and operational leaders.",
+    "ja": "AIエージェントが自律的に業務を遂行する時代、企業はどう統制すべきか。権限設計・承認フロー・監査ログ・Kill Switchの4要素を体系化し、CxO・実務リーダー向けに解説する2026年版ガードレール設計ガイド。"
+  },
+  "title": {
+    "en": "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
+    "ko": "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
+    "ja": "AIエージェント時代のガードレール設計（2026年版）── 前編：思想・設計編"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000128/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000128/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000128/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000128/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000128/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000128/ja.tiptap.json"
+    }
+  }
+}

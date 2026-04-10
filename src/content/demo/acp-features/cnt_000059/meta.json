@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "submit-role-access-workflow",
+  "imageSrc": "/demo/acp-features/tu-thumb-sac-6.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000059",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "How to Submit a Workflow for Role Access Request",
+    "ko": "사용자 역할 기반의 권한 요청하기",
+    "ja": "ロールアクセスリクエストのワークフローを提出する方法"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000059/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000059/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000059/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000059/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000059/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000059/ja.tiptap.json"
+    }
+  }
+}

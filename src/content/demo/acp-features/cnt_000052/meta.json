@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "register-databases",
+  "imageSrc": "/demo/acp-features/tu-thumb-dac-1.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000052",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "How to Register the Databases You Need to Protect",
+    "ko": "관리 대상의 데이터베이스 등록 및 AWS 동기화하기",
+    "ja": "保護する必要があるデータベースを登録する方法"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000052/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000052/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000052/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000052/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000052/ja.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000052/ja.tiptap.json"
+    }
+  }
+}

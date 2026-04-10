@@ -4,6 +4,7 @@ type InputVariant = "input" | "dropdown";
 type InputState = "default" | "focus" | "disable";
 
 export type InputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "size"> & {
+  inputClassName?: string;
   label?: string;
   state?: InputState;
   variant?: InputVariant;
@@ -14,7 +15,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 const fieldShellClassName =
-  "ui-field-shell inline-flex h-10 w-[240px] items-center overflow-hidden rounded-button bg-bg-content px-3";
+  "ui-field-shell inline-flex h-10 w-[240px] items-center overflow-hidden rounded-button bg-bg-content px-4";
 
 const fieldTextClassName =
   "min-w-0 flex-1 border-0 bg-transparent type-body-md outline-none";
@@ -22,8 +23,9 @@ const fieldTextClassName =
 export default function Input({
   className,
   disabled,
+  inputClassName,
   label,
-  placeholder = "placeholder",
+  placeholder,
   readOnly,
   state = "default",
   value,
@@ -65,12 +67,13 @@ export default function Input({
         <input
           className={cx(
             fieldTextClassName,
-            resolvedState === "default" ? "text-mute-fg" : "text-fg",
-            "placeholder:text-mute-fg",
+            "text-fg",
+            "placeholder:text-placeholder",
+            inputClassName,
           )}
           disabled={resolvedState === "disable"}
           placeholder={placeholder}
-          readOnly={readOnly ?? resolvedState !== "default"}
+          readOnly={readOnly}
           value={value}
           {...props}
         />

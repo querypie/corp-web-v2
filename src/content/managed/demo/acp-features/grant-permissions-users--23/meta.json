@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-2.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-2.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-2.webp",
           "webPath": "/tutorial/tu-thumb-dac-2.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/grant-permissions-users--23/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Grant Permissions to Users\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/24/register-databases\"\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-2.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Grant Permissions to Users\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/24/register-databases\"\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/24/register-databases",
         "/features/demo/acp-features/22/use-web-editor",
@@ -40,7 +50,11 @@
         "title": "How to Grant Permissions to Users",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-2.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-2.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-2.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-2.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-2.webp",
           "webPath": "/tutorial/tu-thumb-dac-2.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/grant-permissions-users--23/ko.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"권한 생성 및 부여 방법\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/24/register-databases\"\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-2.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"권한 생성 및 부여 방법\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/24/register-databases\"\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/24/register-databases",
         "/features/demo/acp-features/22/use-web-editor",
@@ -80,7 +104,11 @@
         "title": "권한 생성 및 부여 방법",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-2.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-2.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -94,8 +122,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-2.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-2.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-2.webp",
           "webPath": "/tutorial/tu-thumb-dac-2.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/grant-permissions-users--23/ja.mdx",
@@ -105,8 +138,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-2.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"ユーザーに権限を付与する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/24/register-databases\"\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-2.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"ユーザーに権限を付与する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-2.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/24/register-databases\"\n  - \"/features/demo/acp-features/22/use-web-editor\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/24/register-databases",
         "/features/demo/acp-features/22/use-web-editor",
@@ -120,7 +158,11 @@
         "title": "ユーザーに権限を付与する方法",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-2.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-2.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

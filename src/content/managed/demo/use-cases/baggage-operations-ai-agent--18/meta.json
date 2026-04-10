@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/aip-use-case-thumb-12-en.webp",
+          "webPath": "/demo/use-cases/aip-use-case-thumb-12-en.webp"
+=======
           "sourcePath": "public/demo/aip-use-case-thumb-12-en.webp",
           "webPath": "/demo/aip-use-case-thumb-12-en.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/baggage-operations-ai-agent--18/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/aip-use-case-thumb-12-en.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Baggage Operations AI Agent\"\ndescription: \"An AI agent that delivers real-time baggage visibility, predicts disruptions, and automates recovery workflows across airlines, airports, and ground handling teams.\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-12-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/17/aircraft-maintenance-ai-agent\"\n  - \"/features/demo/use-cases/19/aircrew-scheduler-ai-agent\"",
+=======
       "ogImage": "/demo/aip-use-case-thumb-12-en.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP Use Case: Baggage Operations AI Agent\"\ndescription: \"An AI agent that delivers real-time baggage visibility, predicts disruptions, and automates recovery workflows across airlines, airports, and ground handling teams.\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/aip-use-case-thumb-12-en.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/17/aircraft-maintenance-ai-agent\"\n  - \"/features/demo/use-cases/19/aircrew-scheduler-ai-agent\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/16/dev-insight-ai-agent",
         "/features/demo/use-cases/17/aircraft-maintenance-ai-agent",
@@ -40,7 +50,11 @@
         "title": "AIP Use Case: Baggage Operations AI Agent",
         "description": "An AI agent that delivers real-time baggage visibility, predicts disruptions, and automates recovery workflows across airlines, airports, and ground handling teams.",
         "date": "2025-10-15",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/aip-use-case-thumb-12-en.webp",
+=======
         "ogImage": "public/demo/aip-use-case-thumb-12-en.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/use-cases/aip-use-case-thumb-12-ja.webp",
+          "webPath": "/demo/use-cases/aip-use-case-thumb-12-ja.webp"
+=======
           "sourcePath": "public/demo/aip-use-case-thumb-12-ja.webp",
           "webPath": "/demo/aip-use-case-thumb-12-ja.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/use-cases/baggage-operations-ai-agent--18/ja.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/use-cases/aip-use-case-thumb-12-ja.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 手荷物業務AIエージェント\"\ndescription: \"リアルタイムの手荷物可視化を提供し、混乱を予測し、航空会社・空港・グランドハンドリング間のリカバリーワークフローを自動化するAIエージェント。\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/use-cases/aip-use-case-thumb-12-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/17/aircraft-maintenance-ai-agent\"\n  - \"/features/demo/use-cases/19/aircrew-scheduler-ai-agent\"",
+=======
       "ogImage": "/demo/aip-use-case-thumb-12-ja.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"use-cases\"\ntitle: \"AIP活用事例： 手荷物業務AIエージェント\"\ndescription: \"リアルタイムの手荷物可視化を提供し、混乱を予測し、航空会社・空港・グランドハンドリング間のリカバリーワークフローを自動化するAIエージェント。\"\ndate: \"2025-10-15\"\nogImage: \"public/demo/aip-use-case-thumb-12-ja.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/use-cases/16/dev-insight-ai-agent\"\n  - \"/features/demo/use-cases/17/aircraft-maintenance-ai-agent\"\n  - \"/features/demo/use-cases/19/aircrew-scheduler-ai-agent\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/use-cases/16/dev-insight-ai-agent",
         "/features/demo/use-cases/17/aircraft-maintenance-ai-agent",
@@ -80,7 +104,11 @@
         "title": "AIP活用事例： 手荷物業務AIエージェント",
         "description": "リアルタイムの手荷物可視化を提供し、混乱を予測し、航空会社・空港・グランドハンドリング間のリカバリーワークフローを自動化するAIエージェント。",
         "date": "2025-10-15",
+<<<<<<< HEAD
+        "ogImage": "public/demo/use-cases/aip-use-case-thumb-12-ja.webp",
+=======
         "ogImage": "public/demo/aip-use-case-thumb-12-ja.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

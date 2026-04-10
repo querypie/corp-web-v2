@@ -37,18 +37,20 @@ const config: Config = {
       20: "80px",
       24: "96px",
       30: "120px",
-      "footer-gap": "120px",
-      "page-top": "120px",
     },
     extend: {
       // 컬러 토큰: UI 전반에서 공통으로 사용하는 의미 기반 색상
       colors: {
         fg: "var(--color-fg)",
         "mute-fg": "var(--color-mute-fg)",
+        placeholder: "var(--color-placeholder)",
         "bg-content": "var(--color-bg-content)",
         "bg-deep": "var(--color-bg-deep)",
         "bg-feather": "var(--color-bg-feather)",
         bg: "var(--color-bg)",
+        "bg-modal": "var(--color-bg-modal)",
+        "surface-popover": "rgb(var(--color-surface-popover-rgb) / <alpha-value>)",
+        overlay: "rgb(var(--color-overlay-rgb) / <alpha-value>)",
         border: "var(--color-border)",
         primary: "var(--color-primary)",
         secondary: "var(--color-secondary)",

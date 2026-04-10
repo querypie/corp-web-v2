@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "querypie-integrations-scim-slack-vault-ja",
+  "imageSrc": "/demo/webinars/3dk-ep1-ja.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000045",
+  "summary": {
+    "en": "QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。",
+    "ko": "QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。",
+    "ja": "QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。"
+  },
+  "title": {
+    "en": "エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携",
+    "ko": "エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携",
+    "ja": "エピソード 1 QueryPie の統合: 自動化の核心を突く！- SCIM、Vault、Slack承認ワークフロー連携"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000045/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000045/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000045/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000045/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000045/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000045/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "use-cases",
+  "contentType": "content",
+  "dateIso": "2025-10-02",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "m365-ai-agent",
+  "imageSrc": "/demo/use-cases/aip-use-case-thumb-7-en.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000084",
+  "summary": {
+    "en": "An AI agent that automates everyday Microsoft 365 work—emails, documents, schedules, and reports—through natural language, streamlining productivity across Outlook, Teams, SharePoint, and more.",
+    "ko": "An AI agent that automates everyday Microsoft 365 work—emails, documents, schedules, and reports—through natural language, streamlining productivity across Outlook, Teams, SharePoint, and more.",
+    "ja": "Outlook、Teams、SharePoint、OneDrive、Excelに会話型オートメーションをもたらし、複数のインターフェイスを行き来することなく、社員がより速く業務を進められるようにします。自然言語で、メールの下書き・整理、会議のスケジュール・要約、ドキュメントの整理、スプレッドシートの更新、ステータスレポートの作成を、日々の業務フローの中で直接行えます。"
+  },
+  "title": {
+    "en": "AIP Use Case: M365 AI Agent",
+    "ko": "AIP Use Case: M365 AI Agent",
+    "ja": "AIP活用事例： M365 AIエージェント"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000084/en.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000084/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000084/ko.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000084/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/use-cases/cnt_000084/ja.html",
+      "jsonPath": "src/content/demo/use-cases/cnt_000084/ja.tiptap.json"
+    }
+  }
+}

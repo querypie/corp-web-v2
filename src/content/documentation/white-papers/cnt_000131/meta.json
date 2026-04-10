@@ -1,0 +1,45 @@
+{
+  "authorName": "edwin",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2026-02-13",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "llm-evaluation-agentic-rag-part2",
+  "imageSrc": "/documentation/white-papers/wp-thumb-27.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000131",
+  "summary": {
+    "en": "13のLLM構成による実験結果を徹底分析。Thinkingモードの意外な落とし穴、GPTの安定性問題、そして60%のコスト削減を実現する最適パイプライン構成を明らかにします。",
+    "ko": "13のLLM構成による実験結果を徹底分析。Thinkingモードの意外な落とし穴、GPTの安定性問題、そして60%のコスト削減を実現する最適パイプライン構成を明らかにします。",
+    "ja": "13のLLM構成による実験結果を徹底分析。Thinkingモードの意外な落とし穴、GPTの安定性問題、そして60%のコスト削減を実現する最適パイプライン構成を明らかにします。"
+  },
+  "title": {
+    "en": "コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【後編】",
+    "ko": "コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【後編】",
+    "ja": "コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【後編】"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000131/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000131/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000131/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000131/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000131/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000131/ja.tiptap.json"
+    }
+  }
+}

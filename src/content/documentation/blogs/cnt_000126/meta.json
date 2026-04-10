@@ -1,0 +1,45 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2022-04-26",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "what-businesses-can-learn-from-sentiment-analysis",
+  "imageSrc": "/documentation/blogs/b-thumb-13.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000126",
+  "summary": {
+    "en": "Learn how sentiment analysis can boost your business by understanding customer emotions, refining strategies, and enhancing satisfaction. Explore its power today!",
+    "ko": "Learn how sentiment analysis can boost your business by understanding customer emotions, refining strategies, and enhancing satisfaction. Explore its power today!",
+    "ja": "Learn how sentiment analysis can boost your business by understanding customer emotions, refining strategies, and enhancing satisfaction. Explore its power today!"
+  },
+  "title": {
+    "en": "What businesses can learn from Sentiment Analysis",
+    "ko": "What businesses can learn from Sentiment Analysis",
+    "ja": "What businesses can learn from Sentiment Analysis"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000126/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000126/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000126/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000126/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000126/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000126/ja.tiptap.json"
+    }
+  }
+}

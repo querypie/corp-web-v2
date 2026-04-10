@@ -1,7 +1,13 @@
 import { notFound, redirect } from "next/navigation";
+<<<<<<< HEAD
+import { getLocalePath, isLocale } from "../../../../constants/i18n";
+import NewsDetailClientPage from "../../../../components/pages/news/NewsDetailClientPage";
+import type { DocsDetailPageProps } from "../../../../components/pages/documentation/DocumentationDetailPage";
+=======
 import { isLocale } from "../../../../constants/i18n";
 import NewsDetailClientPage from "../../../../components/pages/news/NewsDetailClientPage";
 import type { DocsDetailPageProps } from "../../../../components/pages/docs/DocsDetailPage";
+>>>>>>> origin/main
 import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
 
@@ -36,7 +42,11 @@ export default async function NewsDetailRoute({ params }: NewsDetailRouteProps) 
           category: "Previous Post",
           href: previousItem.contentType === "outlink"
             ? previousItem.externalUrl
+<<<<<<< HEAD
+            : getLocalePath(locale, `/news/${previousItem.id}`),
+=======
             : `/${locale}/news/${previousItem.id}`,
+>>>>>>> origin/main
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
           title: getLocalizedContent(previousItem.title, locale),
         }
@@ -46,7 +56,11 @@ export default async function NewsDetailRoute({ params }: NewsDetailRouteProps) 
           category: "Next post",
           href: nextItem.contentType === "outlink"
             ? nextItem.externalUrl
+<<<<<<< HEAD
+            : getLocalePath(locale, `/news/${nextItem.id}`),
+=======
             : `/${locale}/news/${nextItem.id}`,
+>>>>>>> origin/main
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
           title: getLocalizedContent(nextItem.title, locale),
         }
@@ -56,7 +70,11 @@ export default async function NewsDetailRoute({ params }: NewsDetailRouteProps) 
   return (
     <NewsDetailClientPage
       fallbackProps={{
+<<<<<<< HEAD
+        docsHref: getLocalePath(locale, "/company/news"),
+=======
         docsHref: `/${locale}/news`,
+>>>>>>> origin/main
         slug: decodedSlug,
         bodyHtml: getLocalizedContent(currentEntry.bodyHtml, locale),
         bodyMarkdown: getLocalizedContent(currentEntry.bodyMarkdown, locale),

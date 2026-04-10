@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
+<<<<<<< HEAD
+import { siteUrl } from "../constants/site";
+=======
+>>>>>>> origin/main
 import "../styles/globals.css";
 
 const jetBrainsMono = JetBrains_Mono({
@@ -21,6 +25,7 @@ const monaSans = localFont({
 export const metadata: Metadata = {
   title: "CMS",
   description: "Next.js App Router project scaffold.",
+  metadataBase: new URL(siteUrl),
 };
 
 type RootLayoutProps = {

@@ -1,4 +1,4 @@
-import type { Locale } from "@/constants/i18n";
+import { getLocalePath, type Locale } from "@/constants/i18n";
 
 export type DemoCategorySlug =
   | "all"
@@ -9,7 +9,7 @@ export type DemoCategorySlug =
 
 export type DocsCategorySlug =
   | "all"
-  | "introduction-decks"
+  | "introduction"
   | "glossary"
   | "manuals"
   | "white-papers"
@@ -33,27 +33,27 @@ type AdminCategoryConfig<TSlug extends string> = {
 
 export const demoCategoryConfigs: CategoryConfig<DemoCategorySlug>[] = [
   {
-    href: (locale) => `/${locale}/demo`,
-    label: { en: "All", ko: "전체", ja: "All" },
+    href: (locale) => getLocalePath(locale, "/features/demo"),
+    label: { en: "All", ko: "All", ja: "All" },
     slug: "all",
   },
   {
-    href: (locale) => `/${locale}/demo?category=use-cases`,
+    href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=use-cases`,
     label: { en: "Use Cases", ko: "Use Cases", ja: "Use Cases" },
     slug: "use-cases",
   },
   {
-    href: (locale) => `/${locale}/demo?category=aip-features`,
+    href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=aip-features`,
     label: { en: "AIP Features", ko: "AIP Features", ja: "AIP Features" },
     slug: "aip-features",
   },
   {
-    href: (locale) => `/${locale}/demo?category=acp-features`,
+    href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=acp-features`,
     label: { en: "ACP Features", ko: "ACP Features", ja: "ACP Features" },
     slug: "acp-features",
   },
   {
-    href: (locale) => `/${locale}/demo?category=webinars`,
+    href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=webinars`,
     label: { en: "Webinars", ko: "Webinars", ja: "Webinars" },
     slug: "webinars",
   },
@@ -61,26 +61,35 @@ export const demoCategoryConfigs: CategoryConfig<DemoCategorySlug>[] = [
 
 export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
   {
-    href: (locale) => `/${locale}/docs`,
-    label: { en: "All", ko: "전체", ja: "All" },
+    href: (locale) => getLocalePath(locale, "/features/documentation"),
+    label: { en: "All", ko: "All", ja: "All" },
     slug: "all",
   },
   {
-    href: (locale) => `/${locale}/docs?category=introduction-decks`,
-    label: { en: "Introduction Decks", ko: "소개 덱", ja: "Introduction Decks" },
-    slug: "introduction-decks",
+    href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=introduction`,
+    label: { en: "Introduction", ko: "Introduction", ja: "Introduction" },
+    slug: "introduction",
   },
   {
-    href: (locale) => `/${locale}/docs?category=glossary`,
-    label: { en: "Glossary", ko: "용어집", ja: "Glossary" },
+    href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=glossary`,
+    label: { en: "Glossary", ko: "Glossary", ja: "Glossary" },
     slug: "glossary",
   },
   {
-    href: (locale) => `/${locale}/docs?category=manuals`,
-    label: { en: "Manuals", ko: "매뉴얼", ja: "Manuals" },
+    href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=manuals`,
+    label: { en: "Manuals", ko: "Manuals", ja: "Manuals" },
     slug: "manuals",
   },
   {
+<<<<<<< HEAD
+    href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=white-papers`,
+    label: { en: "White Papers", ko: "White Papers", ja: "White Papers" },
+    slug: "white-papers",
+  },
+  {
+    href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=blogs`,
+    label: { en: "Blogs", ko: "Blogs", ja: "Blogs" },
+=======
     href: (locale) => `/${locale}/docs?category=white-papers`,
     label: { en: "White Papers", ko: "화이트페이퍼", ja: "White Papers" },
     slug: "white-papers",
@@ -88,6 +97,7 @@ export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
   {
     href: (locale) => `/${locale}/docs?category=blogs`,
     label: { en: "Blogs", ko: "블로그", ja: "Blogs" },
+>>>>>>> origin/main
     slug: "blogs",
   },
 ];
@@ -140,10 +150,10 @@ const docsAdminCategoryConfigs: AdminCategoryConfig<DocsCategorySlug>[] = [
   },
   {
     description: "소개 덱 콘텐츠와 노출 순서를 관리합니다.",
-    href: "/admin/documentation/introduction-decks",
-    label: "Introduction Decks",
-    slug: "introduction-decks",
-    title: "Introduction Decks",
+    href: "/admin/documentation/introduction",
+    label: "Introduction",
+    slug: "introduction",
+    title: "Introduction",
   },
   {
     description: "용어집 콘텐츠와 게시 노출 상태를 관리합니다.",
@@ -187,12 +197,26 @@ export function getCategoryLabel<TSlug extends string>(
   return configs.find((config) => config.slug === slug)?.label[locale] ?? "";
 }
 
+export function getCategoryHref<TSlug extends string>(
+  configs: CategoryConfig<TSlug>[],
+  slug: TSlug,
+  locale: Locale,
+) {
+  return configs.find((config) => config.slug === slug)?.href(locale) ?? "";
+}
+
 export function isDemoCategorySlug(value: string | undefined): value is DemoCategorySlug {
   return !!value && demoCategoryConfigs.some((config) => config.slug === value);
 }
 
 export function isDocsCategorySlug(value: string | undefined): value is DocsCategorySlug {
   return !!value && docsCategoryConfigs.some((config) => config.slug === value);
+}
+
+export function normalizeDocsCategoryParam(value: string | undefined): DocsCategorySlug | null {
+  if (!value) return null;
+  if (value === "introduction-decks") return "introduction";
+  return isDocsCategorySlug(value) ? value : null;
 }
 
 export function getPublicMenuItems<TSlug extends string>(

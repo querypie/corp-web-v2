@@ -1,0 +1,45 @@
+{
+  "authorName": "querypie",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2026-02-27",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "ai-agent-guardrails-governance-2026-implementation",
+  "imageSrc": "/documentation/white-papers/wp-thumb-29.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000129",
+  "summary": {
+    "en": "A practical implementation guide for AI-agent guardrails. Includes three case studies (PC-operation agents, development AI vulnerabilities, and autonomous 5G operations), a reusable checklist, and a 90-day rollout roadmap.",
+    "ko": "A practical implementation guide for AI-agent guardrails. Includes three case studies (PC-operation agents, development AI vulnerabilities, and autonomous 5G operations), a reusable checklist, and a 90-day rollout roadmap.",
+    "ja": "AIエージェントのガードレール設計を実務に落とし込む。PC操作エージェント・開発AI脆弱性・5G自律運用の3つのケーススタディ、保存版チェックリスト、90日導入ロードマップを提供する2026年版実践ガイド。"
+  },
+  "title": {
+    "en": "Guardrail Design in the AI Agent Era (2026 Edition) — Part 2: Practice & Implementation",
+    "ko": "Guardrail Design in the AI Agent Era (2026 Edition) — Part 2: Practice & Implementation",
+    "ja": "AIエージェント時代のガードレール設計（2026年版）── 後編：実践・導入編"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000129/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000129/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000129/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000129/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000129/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000129/ja.tiptap.json"
+    }
+  }
+}

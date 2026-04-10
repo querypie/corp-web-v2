@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/webinars/air-company-ai-webinar20260122.webp",
+          "webPath": "/demo/webinars/air-company-ai-webinar20260122.webp"
+=======
           "sourcePath": "public/webinar/air-company-ai-webinar20260122.webp",
           "webPath": "/webinar/air-company-ai-webinar20260122.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/air-company-querypie-ai-webinar--24/ja.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/webinars/air-company-ai-webinar20260122.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"2026年を迷わず走るための「AIの教科書」｜1/22(木)開催\"\ndescription: \"AIは今、驚異的なスピードで進化を続けています。しかし、その情報量の多さに圧倒され、「結局、何を押さえればいいのか分からない」「情報が散らばっていて追いきれない」と感じていませんか？本ウェビナーでは、AIに関する様々な情報を体系的に整理することにフォーカスし、押さえるべきAIの本質／情報収集先の候補／ビジネスや業務にどう活かすかの視点をまとめてお届けします。\"\ndate: \"2026-1-15\"\nogImage: \"public/demo/webinars/air-company-ai-webinar20260122.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/23/air-company-querypie-ai-webinar\"\n  - \"/features/demo/webinars/22/air-company-querypie-mcp-webinar\"\n  - \"/features/demo/webinars/21/air-company-querypie-ai-webinar\"",
+=======
       "ogImage": "/webinar/air-company-ai-webinar20260122.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"2026年を迷わず走るための「AIの教科書」｜1/22(木)開催\"\ndescription: \"AIは今、驚異的なスピードで進化を続けています。しかし、その情報量の多さに圧倒され、「結局、何を押さえればいいのか分からない」「情報が散らばっていて追いきれない」と感じていませんか？本ウェビナーでは、AIに関する様々な情報を体系的に整理することにフォーカスし、押さえるべきAIの本質／情報収集先の候補／ビジネスや業務にどう活かすかの視点をまとめてお届けします。\"\ndate: \"2026-1-15\"\nogImage: \"public/webinar/air-company-ai-webinar20260122.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/23/air-company-querypie-ai-webinar\"\n  - \"/features/demo/webinars/22/air-company-querypie-mcp-webinar\"\n  - \"/features/demo/webinars/21/air-company-querypie-ai-webinar\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/23/air-company-querypie-ai-webinar",
         "/features/demo/webinars/22/air-company-querypie-mcp-webinar",
@@ -40,7 +50,11 @@
         "title": "2026年を迷わず走るための「AIの教科書」｜1/22(木)開催",
         "description": "AIは今、驚異的なスピードで進化を続けています。しかし、その情報量の多さに圧倒され、「結局、何を押さえればいいのか分からない」「情報が散らばっていて追いきれない」と感じていませんか？本ウェビナーでは、AIに関する様々な情報を体系的に整理することにフォーカスし、押さえるべきAIの本質／情報収集先の候補／ビジネスや業務にどう活かすかの視点をまとめてお届けします。",
         "date": "2026-1-15",
+<<<<<<< HEAD
+        "ogImage": "public/demo/webinars/air-company-ai-webinar20260122.webp",
+=======
         "ogImage": "public/webinar/air-company-ai-webinar20260122.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

@@ -14,6 +14,30 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-11.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-11.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-1-diary-overview.webp",
+          "webPath": "/documentation/white-papers/wp11-1-diary-overview.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-2-results-table.webp",
+          "webPath": "/documentation/white-papers/wp11-2-results-table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-3-bloom-filter.webp",
+          "webPath": "/documentation/white-papers/wp11-3-bloom-filter.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-4-querypie-oven.webp",
+          "webPath": "/documentation/white-papers/wp11-4-querypie-oven.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-11.webp",
           "webPath": "/white-paper/wp-thumb-11.webp"
         },
@@ -36,6 +60,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp11-4-querypie-oven.webp",
           "webPath": "/white-paper/wp11-4-querypie-oven.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/efficient-audit-log-management--11/en.mdx",
@@ -52,8 +77,13 @@
         "efficient storage solutions"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-11.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Efficient Storage and Management of Large-Scale Audit Logs (OVEN)\"\ndescription: \"Guiding efficient storage and management of large-scale audit logs while meeting security and compliance requirements.\"\ndate: \"2025-01-23\"\nauthor: \"fabian\"\nogImage: \"public/documentation/white-papers/wp-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"large-scale audit logs\", \"audit log management\", \"data security\", \"compliance Requirements\", \"efficient storage solutions\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/4/transaction-free-change-data-capture-system\"\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
+=======
       "ogImage": "/white-paper/wp-thumb-11.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"Efficient Storage and Management of Large-Scale Audit Logs (OVEN)\"\ndescription: \"Guiding efficient storage and management of large-scale audit logs while meeting security and compliance requirements.\"\ndate: \"2025-01-23\"\nauthor: \"fabian\"\nogImage: \"public/white-paper/wp-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"large-scale audit logs\", \"audit log management\", \"data security\", \"compliance Requirements\", \"efficient storage solutions\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/4/transaction-free-change-data-capture-system\"\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/4/transaction-free-change-data-capture-system",
         "/features/documentation/white-paper/3/parsing-sql-query-structural-interface",
@@ -68,7 +98,11 @@
         "description": "Guiding efficient storage and management of large-scale audit logs while meeting security and compliance requirements.",
         "date": "2025-01-23",
         "author": "fabian",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-11.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-11.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "large-scale audit logs",
@@ -88,6 +122,30 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-11.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-11.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-1-diary-overview.webp",
+          "webPath": "/documentation/white-papers/wp11-1-diary-overview.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-2-results-table.webp",
+          "webPath": "/documentation/white-papers/wp11-2-results-table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-3-bloom-filter.webp",
+          "webPath": "/documentation/white-papers/wp11-3-bloom-filter.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-4-querypie-oven.webp",
+          "webPath": "/documentation/white-papers/wp11-4-querypie-oven.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-11.webp",
           "webPath": "/white-paper/wp-thumb-11.webp"
         },
@@ -110,6 +168,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp11-4-querypie-oven.webp",
           "webPath": "/white-paper/wp11-4-querypie-oven.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/efficient-audit-log-management--11/ko.mdx",
@@ -125,8 +184,13 @@
         "컴플라이언스"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-11.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"스케일 넘치는 대용량 감사 로그, 스마트하게 관리하기 (OVEN)\"\ndescription: \"보안 및 컴플라이언스 요구 사항을 충족하면서 대규모 감사 로그를 효율적으로 저장 및 관리하는 가이드를 공개합니다.\"\ndate: \"2025-01-23\"\nauthor: \"fabian\"\nogImage: \"public/documentation/white-papers/wp-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"대규모 감사 로그\", \"감사 로그 관리\", \"데이터 보안\", \"컴플라이언스\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/4/transaction-free-change-data-capture-system\"\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
+=======
       "ogImage": "/white-paper/wp-thumb-11.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"스케일 넘치는 대용량 감사 로그, 스마트하게 관리하기 (OVEN)\"\ndescription: \"보안 및 컴플라이언스 요구 사항을 충족하면서 대규모 감사 로그를 효율적으로 저장 및 관리하는 가이드를 공개합니다.\"\ndate: \"2025-01-23\"\nauthor: \"fabian\"\nogImage: \"public/white-paper/wp-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"대규모 감사 로그\", \"감사 로그 관리\", \"데이터 보안\", \"컴플라이언스\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/4/transaction-free-change-data-capture-system\"\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/4/transaction-free-change-data-capture-system",
         "/features/documentation/white-paper/3/parsing-sql-query-structural-interface",
@@ -141,7 +205,11 @@
         "description": "보안 및 컴플라이언스 요구 사항을 충족하면서 대규모 감사 로그를 효율적으로 저장 및 관리하는 가이드를 공개합니다.",
         "date": "2025-01-23",
         "author": "fabian",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-11.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-11.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "대규모 감사 로그",
@@ -160,6 +228,30 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-11.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-11.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-1-diary-overview.webp",
+          "webPath": "/documentation/white-papers/wp11-1-diary-overview.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-2-results-table.webp",
+          "webPath": "/documentation/white-papers/wp11-2-results-table.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-3-bloom-filter.webp",
+          "webPath": "/documentation/white-papers/wp11-3-bloom-filter.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp11-4-querypie-oven.webp",
+          "webPath": "/documentation/white-papers/wp11-4-querypie-oven.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-11.webp",
           "webPath": "/white-paper/wp-thumb-11.webp"
         },
@@ -182,6 +274,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp11-4-querypie-oven.webp",
           "webPath": "/white-paper/wp11-4-querypie-oven.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/efficient-audit-log-management--11/ja.mdx",
@@ -197,8 +290,13 @@
         "コンプライアンス"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-11.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"大規模監査ログの効率的な保存と管理（OVEN）\"\ndescription: \"セキュリティおよびコンプライアンスの要件を満たしながら、大規模な監査ログを効率的に保存および管理するガイドを公開します。\"\ndate: \"2025-01-23\"\nauthor: \"fabian\"\nogImage: \"public/documentation/white-papers/wp-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"大規模監査ログ\", \"監査ログ管理\", \"データセキュリティ\", \"コンプライアンス\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/4/transaction-free-change-data-capture-system\"\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
+=======
       "ogImage": "/white-paper/wp-thumb-11.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"大規模監査ログの効率的な保存と管理（OVEN）\"\ndescription: \"セキュリティおよびコンプライアンスの要件を満たしながら、大規模な監査ログを効率的に保存および管理するガイドを公開します。\"\ndate: \"2025-01-23\"\nauthor: \"fabian\"\nogImage: \"public/white-paper/wp-thumb-11.webp\"\nkeywords: [\"QueryPie\", \"大規模監査ログ\", \"監査ログ管理\", \"データセキュリティ\", \"コンプライアンス\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/4/transaction-free-change-data-capture-system\"\n  - \"/features/documentation/white-paper/3/parsing-sql-query-structural-interface\"\n  - \"/features/documentation/white-paper/1/personal-data-identification-analysis-ai\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/4/transaction-free-change-data-capture-system",
         "/features/documentation/white-paper/3/parsing-sql-query-structural-interface",
@@ -213,7 +311,11 @@
         "description": "セキュリティおよびコンプライアンスの要件を満たしながら、大規模な監査ログを効率的に保存および管理するガイドを公開します。",
         "date": "2025-01-23",
         "author": "fabian",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-11.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-11.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "大規模監査ログ",

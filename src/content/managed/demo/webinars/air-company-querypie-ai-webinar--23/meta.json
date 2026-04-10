@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/webinars/air-company-ai-webinar20251218.webp",
+          "webPath": "/demo/webinars/air-company-ai-webinar20251218.webp"
+=======
           "sourcePath": "public/webinar/air-company-ai-webinar20251218.webp",
           "webPath": "/webinar/air-company-ai-webinar20251218.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/webinars/air-company-querypie-ai-webinar--23/ja.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/webinars/air-company-ai-webinar20251218.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"AIエージェント活用事例 -使えないAIからの脱却-｜12/18(木)開催\"\ndescription: \"「AIで成果を出す」これは、多くの企業にとって新しい課題ではないでしょうか？他社より一歩抜け出す鍵となるのは、“AIエージェント”をいかに活用するかです。それには、AIエージェントが日常業務を自律的に実行できるような仕組みを、構築していく必要があります。本ウェビナーでは、構成図で全体像をわかりやすく解説。企業でも安心してAIを使えるセキュリティの実現策についてもご紹介します。​\"\ndate: \"2025-12-1\"\nogImage: \"public/demo/webinars/air-company-ai-webinar20251218.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/22/air-company-querypie-mcp-webinar\"\n  - \"/features/demo/webinars/21/air-company-querypie-ai-webinar\"\n  - \"/features/demo/webinars/20/air-company-querypie-mcp-webinar\"",
+=======
       "ogImage": "/webinar/air-company-ai-webinar20251218.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"webinars\"\ntitle: \"AIエージェント活用事例 -使えないAIからの脱却-｜12/18(木)開催\"\ndescription: \"「AIで成果を出す」これは、多くの企業にとって新しい課題ではないでしょうか？他社より一歩抜け出す鍵となるのは、“AIエージェント”をいかに活用するかです。それには、AIエージェントが日常業務を自律的に実行できるような仕組みを、構築していく必要があります。本ウェビナーでは、構成図で全体像をわかりやすく解説。企業でも安心してAIを使えるセキュリティの実現策についてもご紹介します。​\"\ndate: \"2025-12-1\"\nogImage: \"public/webinar/air-company-ai-webinar20251218.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/webinars/22/air-company-querypie-mcp-webinar\"\n  - \"/features/demo/webinars/21/air-company-querypie-ai-webinar\"\n  - \"/features/demo/webinars/20/air-company-querypie-mcp-webinar\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/webinars/22/air-company-querypie-mcp-webinar",
         "/features/demo/webinars/21/air-company-querypie-ai-webinar",
@@ -40,7 +50,11 @@
         "title": "AIエージェント活用事例 -使えないAIからの脱却-｜12/18(木)開催",
         "description": "「AIで成果を出す」これは、多くの企業にとって新しい課題ではないでしょうか？他社より一歩抜け出す鍵となるのは、“AIエージェント”をいかに活用するかです。それには、AIエージェントが日常業務を自律的に実行できるような仕組みを、構築していく必要があります。本ウェビナーでは、構成図で全体像をわかりやすく解説。企業でも安心してAIを使えるセキュリティの実現策についてもご紹介します。​",
         "date": "2025-12-1",
+<<<<<<< HEAD
+        "ogImage": "public/demo/webinars/air-company-ai-webinar20251218.webp",
+=======
         "ogImage": "public/webinar/air-company-ai-webinar20251218.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

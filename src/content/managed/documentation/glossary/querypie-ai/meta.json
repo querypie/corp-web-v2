@@ -14,6 +14,25 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/glossary/docu-thumb-glossary.webp",
+          "webPath": "/documentation/glossary/docu-thumb-glossary.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/glossary/docu-thumb-notes.webp",
+          "webPath": "/documentation/glossary/docu-thumb-notes.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/glossary/docu-thumb-admin.webp",
+          "webPath": "/documentation/glossary/docu-thumb-admin.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/glossary/docu-thumb-user.webp",
+          "webPath": "/documentation/glossary/docu-thumb-user.webp"
+=======
           "sourcePath": "public/documentation/docu-thumb-glossary.webp",
           "webPath": "/documentation/docu-thumb-glossary.webp"
         },
@@ -31,6 +50,7 @@
           "exists": true,
           "sourcePath": "public/documentation/docu-thumb-user.webp",
           "webPath": "/documentation/docu-thumb-user.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/glossary/querypie-ai/en.mdx",
@@ -47,8 +67,13 @@
         "key terms"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/glossary/docu-thumb-glossary.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"glossary\"\ntitle: \"QueryPie AI Glossary - Key Terms and Definitions\"\ndescription: \"Access QueryPie AI's glossary of key terms related to data governance and security. Learn essential terminology for understanding our platform and the industry.\"\nogImage: \"public/documentation/glossary/docu-thumb-glossary.webp\"\nkeywords: [\"QueryPie\", \"QueryPie AI\", \"glossary\", \"data governance\", \"security\", \"key terms\"]\nrelatedPosts:\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-notes.webp\"\n        alt: \"Release Notes\"\n    href: \"https://docs.querypie.com/en/release-notes\"\n    external: true\n    label: \"Release Notes\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-admin.webp\"\n        alt: \"Administrator Manual\"\n    href: \"https://docs.querypie.com/en/administrator-manual\"\n    external: true\n    label: \"Administrator Manual\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-user.webp\"\n        alt: \"User Manual\"\n    href: \"https://docs.querypie.com/en/user-manual\"\n    external: true\n    label: \"User Manual\"",
+=======
       "ogImage": "/documentation/docu-thumb-glossary.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"glossary\"\ntitle: \"QueryPie AI Glossary - Key Terms and Definitions\"\ndescription: \"Access QueryPie AI's glossary of key terms related to data governance and security. Learn essential terminology for understanding our platform and the industry.\"\nogImage: \"public/documentation/docu-thumb-glossary.webp\"\nkeywords: [\"QueryPie\", \"QueryPie AI\", \"glossary\", \"data governance\", \"security\", \"key terms\"]\nrelatedPosts:\n  - image:\n        filepath: \"public/documentation/docu-thumb-notes.webp\"\n        alt: \"Release Notes\"\n    href: \"https://docs.querypie.com/en/release-notes\"\n    external: true\n    label: \"Release Notes\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-admin.webp\"\n        alt: \"Administrator Manual\"\n    href: \"https://docs.querypie.com/en/administrator-manual\"\n    external: true\n    label: \"Administrator Manual\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-user.webp\"\n        alt: \"User Manual\"\n    href: \"https://docs.querypie.com/en/user-manual\"\n    external: true\n    label: \"User Manual\"",
+>>>>>>> origin/main
       "relatedPosts": [],
       "sourcePath": "documentation/glossary/querypie-ai/en/content.mdx",
       "title": "QueryPie AI Glossary - Key Terms and Definitions",
@@ -57,7 +82,11 @@
         "category": "glossary",
         "title": "QueryPie AI Glossary - Key Terms and Definitions",
         "description": "Access QueryPie AI's glossary of key terms related to data governance and security. Learn essential terminology for understanding our platform and the industry.",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/glossary/docu-thumb-glossary.webp",
+=======
         "ogImage": "public/documentation/docu-thumb-glossary.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "QueryPie AI",
@@ -66,13 +95,36 @@
           "security",
           "key terms"
         ],
+<<<<<<< HEAD
+        "relatedPosts": "  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-notes.webp\"\n        alt: \"Release Notes\"\n    href: \"https://docs.querypie.com/en/release-notes\"\n    external: true\n    label: \"Release Notes\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-admin.webp\"\n        alt: \"Administrator Manual\"\n    href: \"https://docs.querypie.com/en/administrator-manual\"\n    external: true\n    label: \"Administrator Manual\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-user.webp\"\n        alt: \"User Manual\"\n    href: \"https://docs.querypie.com/en/user-manual\"\n    external: true\n    label: \"User Manual\""
+=======
         "relatedPosts": "  - image:\n        filepath: \"public/documentation/docu-thumb-notes.webp\"\n        alt: \"Release Notes\"\n    href: \"https://docs.querypie.com/en/release-notes\"\n    external: true\n    label: \"Release Notes\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-admin.webp\"\n        alt: \"Administrator Manual\"\n    href: \"https://docs.querypie.com/en/administrator-manual\"\n    external: true\n    label: \"Administrator Manual\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-user.webp\"\n        alt: \"User Manual\"\n    href: \"https://docs.querypie.com/en/user-manual\"\n    external: true\n    label: \"User Manual\""
+>>>>>>> origin/main
       }
     },
     "ko": {
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/glossary/docu-thumb-glossary.webp",
+          "webPath": "/documentation/glossary/docu-thumb-glossary.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/glossary/docu-thumb-notes.webp",
+          "webPath": "/documentation/glossary/docu-thumb-notes.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/glossary/docu-thumb-admin.webp",
+          "webPath": "/documentation/glossary/docu-thumb-admin.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/glossary/docu-thumb-user.webp",
+          "webPath": "/documentation/glossary/docu-thumb-user.webp"
+=======
           "sourcePath": "public/documentation/docu-thumb-glossary.webp",
           "webPath": "/documentation/docu-thumb-glossary.webp"
         },
@@ -90,6 +142,7 @@
           "exists": true,
           "sourcePath": "public/documentation/docu-thumb-user.webp",
           "webPath": "/documentation/docu-thumb-user.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/glossary/querypie-ai/ko.mdx",
@@ -106,8 +159,13 @@
         "주요 용어"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/glossary/docu-thumb-glossary.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"glossary\"\ntitle: \"QueryPie Glossary - 주요 용어 및 정의\"\ndescription: \"QueryPie의 데이터 거버넌스 및 보안과 관련된 주요 용어를 살펴보세요. 우리 플랫폼과 보안 업계를 이해하는 데 중요한 용어들을 한눈에 확인할 수 있습니다.\"\nogImage: \"public/documentation/glossary/docu-thumb-glossary.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"용어집\", \"데이터 거버넌스\", \"보안\", \"주요 용어\"]\nrelatedPosts:\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-notes.webp\"\n        alt: \"최신 릴리스 노트\"\n    href: \"https://docs.querypie.com/ko/release-notes\"\n    external: true\n    label: \"최신 릴리스 노트\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-admin.webp\"\n        alt: \"관리자 매뉴얼\"\n    href: \"https://docs.querypie.com/ko/administrator-manual\"\n    external: true\n    label: \"관리자 매뉴얼\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-user.webp\"\n        alt: \"사용자 매뉴얼\"\n    href: \"https://docs.querypie.com/ko/user-manual\"\n    external: true\n    label: \"사용자 매뉴얼\"",
+=======
       "ogImage": "/documentation/docu-thumb-glossary.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"glossary\"\ntitle: \"QueryPie Glossary - 주요 용어 및 정의\"\ndescription: \"QueryPie의 데이터 거버넌스 및 보안과 관련된 주요 용어를 살펴보세요. 우리 플랫폼과 보안 업계를 이해하는 데 중요한 용어들을 한눈에 확인할 수 있습니다.\"\nogImage: \"public/documentation/docu-thumb-glossary.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"용어집\", \"데이터 거버넌스\", \"보안\", \"주요 용어\"]\nrelatedPosts:\n  - image:\n        filepath: \"public/documentation/docu-thumb-notes.webp\"\n        alt: \"최신 릴리스 노트\"\n    href: \"https://docs.querypie.com/ko/release-notes\"\n    external: true\n    label: \"최신 릴리스 노트\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-admin.webp\"\n        alt: \"관리자 매뉴얼\"\n    href: \"https://docs.querypie.com/ko/administrator-manual\"\n    external: true\n    label: \"관리자 매뉴얼\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-user.webp\"\n        alt: \"사용자 매뉴얼\"\n    href: \"https://docs.querypie.com/ko/user-manual\"\n    external: true\n    label: \"사용자 매뉴얼\"",
+>>>>>>> origin/main
       "relatedPosts": [],
       "sourcePath": "documentation/glossary/querypie-ai/ko/content.mdx",
       "title": "QueryPie Glossary - 주요 용어 및 정의",
@@ -116,7 +174,11 @@
         "category": "glossary",
         "title": "QueryPie Glossary - 주요 용어 및 정의",
         "description": "QueryPie의 데이터 거버넌스 및 보안과 관련된 주요 용어를 살펴보세요. 우리 플랫폼과 보안 업계를 이해하는 데 중요한 용어들을 한눈에 확인할 수 있습니다.",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/glossary/docu-thumb-glossary.webp",
+=======
         "ogImage": "public/documentation/docu-thumb-glossary.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -125,13 +187,36 @@
           "보안",
           "주요 용어"
         ],
+<<<<<<< HEAD
+        "relatedPosts": "  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-notes.webp\"\n        alt: \"최신 릴리스 노트\"\n    href: \"https://docs.querypie.com/ko/release-notes\"\n    external: true\n    label: \"최신 릴리스 노트\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-admin.webp\"\n        alt: \"관리자 매뉴얼\"\n    href: \"https://docs.querypie.com/ko/administrator-manual\"\n    external: true\n    label: \"관리자 매뉴얼\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-user.webp\"\n        alt: \"사용자 매뉴얼\"\n    href: \"https://docs.querypie.com/ko/user-manual\"\n    external: true\n    label: \"사용자 매뉴얼\""
+=======
         "relatedPosts": "  - image:\n        filepath: \"public/documentation/docu-thumb-notes.webp\"\n        alt: \"최신 릴리스 노트\"\n    href: \"https://docs.querypie.com/ko/release-notes\"\n    external: true\n    label: \"최신 릴리스 노트\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-admin.webp\"\n        alt: \"관리자 매뉴얼\"\n    href: \"https://docs.querypie.com/ko/administrator-manual\"\n    external: true\n    label: \"관리자 매뉴얼\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-user.webp\"\n        alt: \"사용자 매뉴얼\"\n    href: \"https://docs.querypie.com/ko/user-manual\"\n    external: true\n    label: \"사용자 매뉴얼\""
+>>>>>>> origin/main
       }
     },
     "ja": {
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/glossary/docu-thumb-glossary.webp",
+          "webPath": "/documentation/glossary/docu-thumb-glossary.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/glossary/docu-thumb-notes.webp",
+          "webPath": "/documentation/glossary/docu-thumb-notes.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/glossary/docu-thumb-admin.webp",
+          "webPath": "/documentation/glossary/docu-thumb-admin.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/glossary/docu-thumb-user.webp",
+          "webPath": "/documentation/glossary/docu-thumb-user.webp"
+=======
           "sourcePath": "public/documentation/docu-thumb-glossary.webp",
           "webPath": "/documentation/docu-thumb-glossary.webp"
         },
@@ -149,6 +234,7 @@
           "exists": true,
           "sourcePath": "public/documentation/docu-thumb-user.webp",
           "webPath": "/documentation/docu-thumb-user.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/glossary/querypie-ai/ja.mdx",
@@ -165,8 +251,13 @@
         "主要な用語"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/glossary/docu-thumb-glossary.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"glossary\"\ntitle: \"QueryPie AI 用語集 - 主要な用語と定義\"\ndescription: \"QueryPie AIのデータガバナンスおよびセキュリティに関連する主要な用語を確認してください。プラットフォームと業界を理解するために重要な用語を学びましょう。\"\nogImage: \"public/documentation/glossary/docu-thumb-glossary.webp\"\nkeywords: [\"QueryPie\", \"QueryPie AI\", \"用語集\", \"データガバナンス\", \"セキュリティ\", \"主要な用語\"]\nrelatedPosts:\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-notes.webp\"\n        alt: \"リリースノート\"\n    href: \"https://docs.querypie.com/ja/release-notes\"\n    external: true\n    label: \"リリースノート\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-admin.webp\"\n        alt: \"管理者マニュアル\"\n    href: \"https://docs.querypie.com/ja/administrator-manual\"\n    external: true\n    label: \"管理者マニュアル\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-user.webp\"\n        alt: \"ユーザーマニュアル\"\n    href: \"https://docs.querypie.com/ja/user-manual\"\n    external: true\n    label: \"ユーザーマニュアル\"",
+=======
       "ogImage": "/documentation/docu-thumb-glossary.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"glossary\"\ntitle: \"QueryPie AI 用語集 - 主要な用語と定義\"\ndescription: \"QueryPie AIのデータガバナンスおよびセキュリティに関連する主要な用語を確認してください。プラットフォームと業界を理解するために重要な用語を学びましょう。\"\nogImage: \"public/documentation/docu-thumb-glossary.webp\"\nkeywords: [\"QueryPie\", \"QueryPie AI\", \"用語集\", \"データガバナンス\", \"セキュリティ\", \"主要な用語\"]\nrelatedPosts:\n  - image:\n        filepath: \"public/documentation/docu-thumb-notes.webp\"\n        alt: \"リリースノート\"\n    href: \"https://docs.querypie.com/ja/release-notes\"\n    external: true\n    label: \"リリースノート\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-admin.webp\"\n        alt: \"管理者マニュアル\"\n    href: \"https://docs.querypie.com/ja/administrator-manual\"\n    external: true\n    label: \"管理者マニュアル\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-user.webp\"\n        alt: \"ユーザーマニュアル\"\n    href: \"https://docs.querypie.com/ja/user-manual\"\n    external: true\n    label: \"ユーザーマニュアル\"",
+>>>>>>> origin/main
       "relatedPosts": [],
       "sourcePath": "documentation/glossary/querypie-ai/ja/content.mdx",
       "title": "QueryPie AI 用語集 - 主要な用語と定義",
@@ -175,7 +266,11 @@
         "category": "glossary",
         "title": "QueryPie AI 用語集 - 主要な用語と定義",
         "description": "QueryPie AIのデータガバナンスおよびセキュリティに関連する主要な用語を確認してください。プラットフォームと業界を理解するために重要な用語を学びましょう。",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/glossary/docu-thumb-glossary.webp",
+=======
         "ogImage": "public/documentation/docu-thumb-glossary.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "QueryPie AI",
@@ -184,7 +279,11 @@
           "セキュリティ",
           "主要な用語"
         ],
+<<<<<<< HEAD
+        "relatedPosts": "  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-notes.webp\"\n        alt: \"リリースノート\"\n    href: \"https://docs.querypie.com/ja/release-notes\"\n    external: true\n    label: \"リリースノート\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-admin.webp\"\n        alt: \"管理者マニュアル\"\n    href: \"https://docs.querypie.com/ja/administrator-manual\"\n    external: true\n    label: \"管理者マニュアル\"\n  - image:\n        filepath: \"public/documentation/glossary/docu-thumb-user.webp\"\n        alt: \"ユーザーマニュアル\"\n    href: \"https://docs.querypie.com/ja/user-manual\"\n    external: true\n    label: \"ユーザーマニュアル\""
+=======
         "relatedPosts": "  - image:\n        filepath: \"public/documentation/docu-thumb-notes.webp\"\n        alt: \"リリースノート\"\n    href: \"https://docs.querypie.com/ja/release-notes\"\n    external: true\n    label: \"リリースノート\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-admin.webp\"\n        alt: \"管理者マニュアル\"\n    href: \"https://docs.querypie.com/ja/administrator-manual\"\n    external: true\n    label: \"管理者マニュアル\"\n  - image:\n        filepath: \"public/documentation/docu-thumb-user.webp\"\n        alt: \"ユーザーマニュアル\"\n    href: \"https://docs.querypie.com/ja/user-manual\"\n    external: true\n    label: \"ユーザーマニュアル\""
+>>>>>>> origin/main
       }
     }
   },

@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "querypie-databases-nosql-ledger-ja",
+  "imageSrc": "/demo/webinars/3dk-ep2-ja.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000043",
+  "summary": {
+    "en": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。",
+    "ko": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。",
+    "ja": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。"
+  },
+  "title": {
+    "en": "エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ",
+    "ko": "エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ",
+    "ja": "エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000043/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000043/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000043/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000043/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000043/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000043/ja.tiptap.json"
+    }
+  }
+}

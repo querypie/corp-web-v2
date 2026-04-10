@@ -1,0 +1,45 @@
+{
+  "authorName": "kenny",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2025-04-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "google-agentspace-vs-querypie-mcp-pam",
+  "imageSrc": "/documentation/white-papers/wp-thumb-19.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000137",
+  "summary": {
+    "en": "Google Agentspace is a powerful AI execution platform, but unchecked automation raises security concerns. This post explores how QueryPie MCP PAM enables secure, policy-based control for enterprise-grade AI adoption.",
+    "ko": "Google Agentspace는 AI 실행 플랫폼으로 주목받고 있지만, 실행 제어 없는 자동화는 보안 위험을 수반합니다. 이 글에서는 QueryPie MCP PAM이 어떻게 정책 기반의 실행 통제를 통해 기업의 AI 도입을 안전하게 만드는지 살펴봅니다.",
+    "ja": "oogle AgentspaceはAI実行プラットフォームとして注目されていますが、制御のない自動化はセキュリティリスクを伴います。この記事では、QueryPie MCP PAMがどのようにポリシーベースの実行制御を通じて、企業のAI導入を安全に実現するのかを解説します。"
+  },
+  "title": {
+    "en": "Google Agentspace Gets Things Done—QueryPie MCP PAM Keeps Them Safe",
+    "ko": "Google Agentspace는 생산성을, QueryPie MCP PAM은 보안을 책임진다.",
+    "ja": "Google Agentspaceで業務を効率化 - QueryPie MCP PAMで安全を確保"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000137/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000137/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000137/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000137/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000137/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000137/ja.tiptap.json"
+    }
+  }
+}

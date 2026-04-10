@@ -1,0 +1,45 @@
+{
+  "authorName": "fabian",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2025-01-23",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "efficient-audit-log-management",
+  "imageSrc": "/documentation/white-papers/wp-thumb-11.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000145",
+  "summary": {
+    "en": "Guiding efficient storage and management of large-scale audit logs while meeting security and compliance requirements.",
+    "ko": "보안 및 컴플라이언스 요구 사항을 충족하면서 대규모 감사 로그를 효율적으로 저장 및 관리하는 가이드를 공개합니다.",
+    "ja": "セキュリティおよびコンプライアンスの要件を満たしながら、大規模な監査ログを効率的に保存および管理するガイドを公開します。"
+  },
+  "title": {
+    "en": "Efficient Storage and Management of Large-Scale Audit Logs (OVEN)",
+    "ko": "스케일 넘치는 대용량 감사 로그, 스마트하게 관리하기 (OVEN)",
+    "ja": "大規模監査ログの効率的な保存と管理（OVEN）"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000145/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000145/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000145/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000145/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000145/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000145/ja.tiptap.json"
+    }
+  }
+}

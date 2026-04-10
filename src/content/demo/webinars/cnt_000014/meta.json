@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2026-03-02",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "air-company-querypie-ai-usecase-webinar",
+  "imageSrc": "/demo/webinars/air-company-querypie-ai-usecase-webinar-20260319.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000014",
+  "summary": {
+    "en": "好評につき、再放送決定！AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。",
+    "ko": "好評につき、再放送決定！AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。",
+    "ja": "好評につき、再放送決定！AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。"
+  },
+  "title": {
+    "en": "AI、社内で使ってみた。活用事例を30分で｜3/19(木)開催",
+    "ko": "AI、社内で使ってみた。活用事例を30分で｜3/19(木)開催",
+    "ja": "AI、社内で使ってみた。活用事例を30分で｜3/19(木)開催"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000014/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000014/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000014/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000014/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000014/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000014/ja.tiptap.json"
+    }
+  }
+}

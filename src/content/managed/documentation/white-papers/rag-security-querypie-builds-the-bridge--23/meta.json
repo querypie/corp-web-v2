@@ -14,6 +14,55 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-23.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-23.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-1-threat-scenario-kenny-case.webp",
+          "webPath": "/documentation/white-papers/wp23-1-threat-scenario-kenny-case.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-2-microsoft-rag-security-flow.webp",
+          "webPath": "/documentation/white-papers/wp23-2-microsoft-rag-security-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-3-aws-multi-tenant-rag-architecture-with-s3.webp",
+          "webPath": "/documentation/white-papers/wp23-3-aws-multi-tenant-rag-architecture-with-s3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-4-metadata-based-filtering-in-llamaindex.webp",
+          "webPath": "/documentation/white-papers/wp23-4-metadata-based-filtering-in-llamaindex.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-5-vector-based-multi-tenancy-in-pinecone-and-weaviate.webp",
+          "webPath": "/documentation/white-papers/wp23-5-vector-based-multi-tenancy-in-pinecone-and-weaviate.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-6-meta-context-based-pbac-flow.webp",
+          "webPath": "/documentation/white-papers/wp23-6-meta-context-based-pbac-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-7-architectural-summary-of-execution-flow-security.webp",
+          "webPath": "/documentation/white-papers/wp23-7-architectural-summary-of-execution-flow-security.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-8-execution-flow-comparison-microsoft-vs-meta-vs-querypie.webp",
+          "webPath": "/documentation/white-papers/wp23-8-execution-flow-comparison-microsoft-vs-meta-vs-querypie.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-9-from-declaration-to-execution.webp",
+          "webPath": "/documentation/white-papers/wp23-9-from-declaration-to-execution.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-23.webp",
           "webPath": "/white-paper/wp-thumb-23.webp"
         },
@@ -61,6 +110,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp23-9-from-declaration-to-execution.webp",
           "webPath": "/white-paper/wp23-9-from-declaration-to-execution.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/rag-security-querypie-builds-the-bridge--23/en.mdx",
@@ -83,8 +133,13 @@
         "AI Compliance"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-23.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"RAG 2.0 Security: Microsoft and Meta’s Groundwork, QueryPie Builds the Bridge\"\ndescription: \"This article introduces the background and security architecture of RAG 2.0 and emphasizes the importance of execution flow control through various corporate cases. RAG 2.0 is differentiated from existing RAGs in that it goes beyond simple document search and applies policies in real time to prevent sensitive information from being delivered to the wrong users.\"\ndate: \"2025-05-28\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-23.webp\"\nkeywords: [\"AI\",\"RAG 2.0\", \"PBAC\",\"CBAC\",\"RAG Architectures\",\"Enterprise AI Security\",\"Secure RAG\",\"Build Safe AI Foundation\",\"enterprise AI security\",\"Cloud Audit Logs\",\"AI Action Control\",\"AI Compliance\"]\nrelatedPosts:\n  - \"/features/documentation/aip-introduction-download\"\n  - \"/features/documentation/acp-introduction-download\"\n  - \"/features/documentation/querypie-install-guide\"",
+=======
       "ogImage": "/white-paper/wp-thumb-23.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"RAG 2.0 Security: Microsoft and Meta’s Groundwork, QueryPie Builds the Bridge\"\ndescription: \"This article introduces the background and security architecture of RAG 2.0 and emphasizes the importance of execution flow control through various corporate cases. RAG 2.0 is differentiated from existing RAGs in that it goes beyond simple document search and applies policies in real time to prevent sensitive information from being delivered to the wrong users.\"\ndate: \"2025-05-28\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-23.webp\"\nkeywords: [\"AI\",\"RAG 2.0\", \"PBAC\",\"CBAC\",\"RAG Architectures\",\"Enterprise AI Security\",\"Secure RAG\",\"Build Safe AI Foundation\",\"enterprise AI security\",\"Cloud Audit Logs\",\"AI Action Control\",\"AI Compliance\"]\nrelatedPosts:\n  - \"/features/documentation/aip-introduction-download\"\n  - \"/features/documentation/acp-introduction-download\"\n  - \"/features/documentation/querypie-install-guide\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/aip-introduction-download",
         "/features/documentation/acp-introduction-download",
@@ -99,7 +154,11 @@
         "description": "This article introduces the background and security architecture of RAG 2.0 and emphasizes the importance of execution flow control through various corporate cases. RAG 2.0 is differentiated from existing RAGs in that it goes beyond simple document search and applies policies in real time to prevent sensitive information from being delivered to the wrong users.",
         "date": "2025-05-28",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-23.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-23.webp",
+>>>>>>> origin/main
         "keywords": [
           "AI",
           "RAG 2.0",
@@ -125,6 +184,55 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-23.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-23.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-1-threat-scenario-kenny-case.webp",
+          "webPath": "/documentation/white-papers/wp23-1-threat-scenario-kenny-case.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-2-microsoft-rag-security-flow.webp",
+          "webPath": "/documentation/white-papers/wp23-2-microsoft-rag-security-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-3-aws-multi-tenant-rag-architecture-with-s3.webp",
+          "webPath": "/documentation/white-papers/wp23-3-aws-multi-tenant-rag-architecture-with-s3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-4-metadata-based-filtering-in-llamaindex.webp",
+          "webPath": "/documentation/white-papers/wp23-4-metadata-based-filtering-in-llamaindex.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-5-vector-based-multi-tenancy-in-pinecone-and-weaviate.webp",
+          "webPath": "/documentation/white-papers/wp23-5-vector-based-multi-tenancy-in-pinecone-and-weaviate.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-6-meta-context-based-pbac-flow.webp",
+          "webPath": "/documentation/white-papers/wp23-6-meta-context-based-pbac-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-7-architectural-summary-of-execution-flow-security.webp",
+          "webPath": "/documentation/white-papers/wp23-7-architectural-summary-of-execution-flow-security.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-8-execution-flow-comparison-microsoft-vs-meta-vs-querypie.webp",
+          "webPath": "/documentation/white-papers/wp23-8-execution-flow-comparison-microsoft-vs-meta-vs-querypie.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-9-from-declaration-to-execution.webp",
+          "webPath": "/documentation/white-papers/wp23-9-from-declaration-to-execution.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-23.webp",
           "webPath": "/white-paper/wp-thumb-23.webp"
         },
@@ -172,6 +280,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp23-9-from-declaration-to-execution.webp",
           "webPath": "/white-paper/wp23-9-from-declaration-to-execution.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/rag-security-querypie-builds-the-bridge--23/ko.mdx",
@@ -194,8 +303,13 @@
         "AI Compliance"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-23.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"RAG 2.0 보안 – Microsoft·Meta의 전략, QueryPie가 연결한다\"\ndescription: \"이 글에서는 RAG 2.0의 등장 배경과 보안 아키텍처를 소개하고, 다양한 기업 사례를 통해 실행 흐름 제어의 중요성을 강조합니다. RAG 2.0은 단순한 문서 검색을 넘어 실시간으로 정책을 적용하여 민감한 정보가 잘못된 사용자에게 전달되지 않도록 한다는 점에서 기존 RAG와 차별화됩니다.\"\ndate: \"2025-05-28\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-23.webp\"\nkeywords: [\"AI\",\"RAG 2.0\", \"PBAC\",\"CBAC\",\"RAG Architectures\",\"Enterprise AI Security\",\"Secure RAG\",\"Build Safe AI Foundation\",\"enterprise AI security\",\"Cloud Audit Logs\",\"AI Action Control\",\"AI Compliance\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"\n  - \"/features/documentation/white-paper/22/your-architect-vs-ai-agents\"",
+=======
       "ogImage": "/white-paper/wp-thumb-23.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"RAG 2.0 보안 – Microsoft·Meta의 전략, QueryPie가 연결한다\"\ndescription: \"이 글에서는 RAG 2.0의 등장 배경과 보안 아키텍처를 소개하고, 다양한 기업 사례를 통해 실행 흐름 제어의 중요성을 강조합니다. RAG 2.0은 단순한 문서 검색을 넘어 실시간으로 정책을 적용하여 민감한 정보가 잘못된 사용자에게 전달되지 않도록 한다는 점에서 기존 RAG와 차별화됩니다.\"\ndate: \"2025-05-28\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-23.webp\"\nkeywords: [\"AI\",\"RAG 2.0\", \"PBAC\",\"CBAC\",\"RAG Architectures\",\"Enterprise AI Security\",\"Secure RAG\",\"Build Safe AI Foundation\",\"enterprise AI security\",\"Cloud Audit Logs\",\"AI Action Control\",\"AI Compliance\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"\n  - \"/features/documentation/white-paper/22/your-architect-vs-ai-agents\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/20/beyond-mcp-to-mcps",
         "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops",
@@ -210,7 +324,11 @@
         "description": "이 글에서는 RAG 2.0의 등장 배경과 보안 아키텍처를 소개하고, 다양한 기업 사례를 통해 실행 흐름 제어의 중요성을 강조합니다. RAG 2.0은 단순한 문서 검색을 넘어 실시간으로 정책을 적용하여 민감한 정보가 잘못된 사용자에게 전달되지 않도록 한다는 점에서 기존 RAG와 차별화됩니다.",
         "date": "2025-05-28",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-23.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-23.webp",
+>>>>>>> origin/main
         "keywords": [
           "AI",
           "RAG 2.0",
@@ -236,6 +354,55 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/white-papers/wp-thumb-23.webp",
+          "webPath": "/documentation/white-papers/wp-thumb-23.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-1-threat-scenario-kenny-case.webp",
+          "webPath": "/documentation/white-papers/wp23-1-threat-scenario-kenny-case.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-2-microsoft-rag-security-flow.webp",
+          "webPath": "/documentation/white-papers/wp23-2-microsoft-rag-security-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-3-aws-multi-tenant-rag-architecture-with-s3.webp",
+          "webPath": "/documentation/white-papers/wp23-3-aws-multi-tenant-rag-architecture-with-s3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-4-metadata-based-filtering-in-llamaindex.webp",
+          "webPath": "/documentation/white-papers/wp23-4-metadata-based-filtering-in-llamaindex.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-5-vector-based-multi-tenancy-in-pinecone-and-weaviate.webp",
+          "webPath": "/documentation/white-papers/wp23-5-vector-based-multi-tenancy-in-pinecone-and-weaviate.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-6-meta-context-based-pbac-flow.webp",
+          "webPath": "/documentation/white-papers/wp23-6-meta-context-based-pbac-flow.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-7-architectural-summary-of-execution-flow-security.webp",
+          "webPath": "/documentation/white-papers/wp23-7-architectural-summary-of-execution-flow-security.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-8-execution-flow-comparison-microsoft-vs-meta-vs-querypie.webp",
+          "webPath": "/documentation/white-papers/wp23-8-execution-flow-comparison-microsoft-vs-meta-vs-querypie.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/white-papers/wp23-9-from-declaration-to-execution.webp",
+          "webPath": "/documentation/white-papers/wp23-9-from-declaration-to-execution.webp"
+=======
           "sourcePath": "public/white-paper/wp-thumb-23.webp",
           "webPath": "/white-paper/wp-thumb-23.webp"
         },
@@ -283,6 +450,7 @@
           "exists": true,
           "sourcePath": "public/white-paper/wp23-9-from-declaration-to-execution.webp",
           "webPath": "/white-paper/wp23-9-from-declaration-to-execution.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/white-papers/rag-security-querypie-builds-the-bridge--23/ja.mdx",
@@ -305,8 +473,13 @@
         "AIコンプライアンス"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/white-papers/wp-thumb-23.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"RAG 2.0 セキュリティ – Microsoft・Metaの戦略、QueryPieが繋ぐ\"\ndescription: \"本稿では、RAG 2.0の登場背景とセキュリティアーキテクチャを紹介し、さまざまな企業の事例を通じて実行フロー制御の重要性を強調します。RAG 2.0は単なるドキュメント検索を超え、リアルタイムでポリシーを適用し、機密情報が誤って不適切なユーザーに渡るのを防ぐ点で、従来のRAGとは一線を画します。\"\ndate: \"2025-05-28\"\nauthor: \"kenny\"\nogImage: \"public/documentation/white-papers/wp-thumb-23.webp\"\nkeywords: [\"AI\", \"RAG 2.0\", \"PBAC\", \"CBAC\", \"RAGアーキテクチャ\", \"エンタープライズAIセキュリティ\", \"セキュアRAG\", \"安全なAI基盤の構築\", \"企業向けAIセキュリティ\", \"クラウド監査ログ\", \"AIアクション制御\", \"AIコンプライアンス\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"\n  - \"/features/documentation/white-paper/22/your-architect-vs-ai-agents\"",
+=======
       "ogImage": "/white-paper/wp-thumb-23.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"whitepaper\"\ntitle: \"RAG 2.0 セキュリティ – Microsoft・Metaの戦略、QueryPieが繋ぐ\"\ndescription: \"本稿では、RAG 2.0の登場背景とセキュリティアーキテクチャを紹介し、さまざまな企業の事例を通じて実行フロー制御の重要性を強調します。RAG 2.0は単なるドキュメント検索を超え、リアルタイムでポリシーを適用し、機密情報が誤って不適切なユーザーに渡るのを防ぐ点で、従来のRAGとは一線を画します。\"\ndate: \"2025-05-28\"\nauthor: \"kenny\"\nogImage: \"public/white-paper/wp-thumb-23.webp\"\nkeywords: [\"AI\", \"RAG 2.0\", \"PBAC\", \"CBAC\", \"RAGアーキテクチャ\", \"エンタープライズAIセキュリティ\", \"セキュアRAG\", \"安全なAI基盤の構築\", \"企業向けAIセキュリティ\", \"クラウド監査ログ\", \"AIアクション制御\", \"AIコンプライアンス\"]\nrelatedPosts:\n  - \"/features/documentation/white-paper/20/beyond-mcp-to-mcps\"\n  - \"/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops\"\n  - \"/features/documentation/white-paper/22/your-architect-vs-ai-agents\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/white-paper/20/beyond-mcp-to-mcps",
         "/features/documentation/white-paper/21/welcome-to-the-age-of-agentsecops",
@@ -321,7 +494,11 @@
         "description": "本稿では、RAG 2.0の登場背景とセキュリティアーキテクチャを紹介し、さまざまな企業の事例を通じて実行フロー制御の重要性を強調します。RAG 2.0は単なるドキュメント検索を超え、リアルタイムでポリシーを適用し、機密情報が誤って不適切なユーザーに渡るのを防ぐ点で、従来のRAGとは一線を画します。",
         "date": "2025-05-28",
         "author": "kenny",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/white-papers/wp-thumb-23.webp",
+=======
         "ogImage": "public/white-paper/wp-thumb-23.webp",
+>>>>>>> origin/main
         "keywords": [
           "AI",
           "RAG 2.0",

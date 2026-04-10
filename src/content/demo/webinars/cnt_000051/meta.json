@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "querypie-side-kick-teaser-ko",
+  "imageSrc": "/demo/webinars/3dk-intro-ko.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000051",
+  "summary": {
+    "en": "쿼리파이에 대해 알고 싶고 궁금한 것이 많은 분들을 위해 준비하였습니다. DB접근제어, 시스템 접근제어, 쿠버네티스 접근제어, 웹 어플리케이션 접근제어, 그리고 데이터 디스커버리에 이르기까지....클라우드와 온프레미스에서 기업의 인프라를 아우르는 접근제어와 감사 솔루션을 아우르는 쿼리파이의 핵심만 쏙쏙 뽑았습니다.",
+    "ko": "쿼리파이에 대해 알고 싶고 궁금한 것이 많은 분들을 위해 준비하였습니다. DB접근제어, 시스템 접근제어, 쿠버네티스 접근제어, 웹 어플리케이션 접근제어, 그리고 데이터 디스커버리에 이르기까지....클라우드와 온프레미스에서 기업의 인프라를 아우르는 접근제어와 감사 솔루션을 아우르는 쿼리파이의 핵심만 쏙쏙 뽑았습니다.",
+    "ja": "쿼리파이에 대해 알고 싶고 궁금한 것이 많은 분들을 위해 준비하였습니다. DB접근제어, 시스템 접근제어, 쿠버네티스 접근제어, 웹 어플리케이션 접근제어, 그리고 데이터 디스커버리에 이르기까지....클라우드와 온프레미스에서 기업의 인프라를 아우르는 접근제어와 감사 솔루션을 아우르는 쿼리파이의 핵심만 쏙쏙 뽑았습니다."
+  },
+  "title": {
+    "en": "본격 고객 소통 콘텐츠 [Ch.쿼리파이: 3단 옆차기]가 찾아옵니다!",
+    "ko": "본격 고객 소통 콘텐츠 [Ch.쿼리파이: 3단 옆차기]가 찾아옵니다!",
+    "ja": "본격 고객 소통 콘텐츠 [Ch.쿼리파이: 3단 옆차기]가 찾아옵니다!"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000051/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000051/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000051/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000051/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000051/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000051/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "authorName": "kurt",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "personal-data-identification-analysis-ai",
+  "imageSrc": "/documentation/white-papers/wp-thumb-1.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000150",
+  "summary": {
+    "en": "Utilize QueryPie's AI to analyze personal data, ensuring better privacy management and regulatory compliance.",
+    "ko": "쿼리파이의 AI를 활용하여 개인 데이터를 분석하고, 더 나은 프라이버시 관리와 규제 준수를 보장하는 방법을 알아보세요.",
+    "ja": "QueryPie の AI を活用して個人データを分析し、より優れたプライバシー管理と規制遵守を実現します。"
+  },
+  "title": {
+    "en": "Improving Personal Data Identification and Analysis with AI",
+    "ko": "AI를 통한 개인정보 식별 및 분석 개선",
+    "ja": "AI による個人情報の識別と分析改善"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000150/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000150/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000150/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000150/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000150/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000150/ja.tiptap.json"
+    }
+  }
+}

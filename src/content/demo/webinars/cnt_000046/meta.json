@@ -1,0 +1,41 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "webinars",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "hideHeroImage": true,
+  "id": "querypie-integrations-scim-slack-vault-ko",
+  "imageSrc": "/demo/webinars/3dk-ep1-ko.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000046",
+  "summary": {
+    "en": "쿼리파이 제품에는 어떤 기능들이 있고 해당 기능들은 각기 어떤 역할을 하는지 궁금하시죠? Ep. 1에서는 고객을 대변하여 쿼리파이 제품의 주요 기능들에 대해 파헤쳐 보았습니다.",
+    "ko": "쿼리파이 제품에는 어떤 기능들이 있고 해당 기능들은 각기 어떤 역할을 하는지 궁금하시죠? Ep. 1에서는 고객을 대변하여 쿼리파이 제품의 주요 기능들에 대해 파헤쳐 보았습니다.",
+    "ja": "쿼리파이 제품에는 어떤 기능들이 있고 해당 기능들은 각기 어떤 역할을 하는지 궁금하시죠? Ep. 1에서는 고객을 대변하여 쿼리파이 제품의 주요 기능들에 대해 파헤쳐 보았습니다."
+  },
+  "title": {
+    "en": "Ep.1 QueryPie Integrations: 자동화 핵심만 찌르기!—SCIM, 얍! Vault, 얍! Slack 결재 워크플로 연동, 얍!",
+    "ko": "Ep.1 QueryPie Integrations: 자동화 핵심만 찌르기!—SCIM, 얍! Vault, 얍! Slack 결재 워크플로 연동, 얍!",
+    "ja": "Ep.1 QueryPie Integrations: 자동화 핵심만 찌르기!—SCIM, 얍! Vault, 얍! Slack 결재 워크플로 연동, 얍!"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/webinars/cnt_000046/en.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000046/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/webinars/cnt_000046/ko.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000046/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/webinars/cnt_000046/ja.html",
+      "jsonPath": "src/content/demo/webinars/cnt_000046/ja.tiptap.json"
+    }
+  }
+}

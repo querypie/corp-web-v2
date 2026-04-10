@@ -4,8 +4,10 @@ import { useEffect, useMemo, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Button from "../../common/Button";
 import Tab from "../../common/Tab";
+import TabGroup from "../../common/TabGroup";
+import Cta from "../../sections/Cta";
 import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PricingProduct } from "../../../constants/plans";
-import type { Locale } from "../../../constants/i18n";
+import { getLocalePath, type Locale } from "../../../constants/i18n";
 
 type PlansPageProps = {
   initialProductKey?: string;
@@ -19,9 +21,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 function withLocaleHref(locale: string, href: string) {
   // 플랜 CTA가 현재 언어 경로를 유지하도록 locale prefix 보정
   if (href.startsWith("http")) return href;
-  if (href.startsWith(`/${locale}/`)) return href;
-  if (href.startsWith("/")) return `/${locale}${href}`;
-  return `/${locale}/${href}`;
+  return getLocalePath(locale as Locale, href.startsWith("/") ? href : `/${href}`);
 }
 
 function PlanSummaryCard({
@@ -29,17 +29,14 @@ function PlanSummaryCard({
   description,
   features,
   href,
-  index,
   name,
   priceLabel,
   tone = "secondary",
-}: PlanCard & { index: number }) {
+}: PlanCard) {
   return (
     /* 상단 플랜 카드 한 장 */
     <article
       className="flex flex-col justify-between rounded-box bg-bg-content p-[30px] md:h-full md:min-h-[420px]"
-      data-reveal
-      style={{ transitionDelay: `${index * 70}ms` }}
     >
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-1">
@@ -69,9 +66,14 @@ function PlanSummaryCard({
           <Button
             arrow
             className="min-w-[126px]"
+<<<<<<< HEAD
+            style="full"
+            variant="primary"
+=======
             size="large"
             style="round"
             variant="secondary"
+>>>>>>> origin/main
           >
             {ctaLabel}
           </Button>
@@ -115,7 +117,7 @@ function ComparisonTable({
 }) {
   return (
     /* 하단 플랜 비교표 */
-    <div className="w-full" data-reveal style={{ transitionDelay: "220ms" }}>
+    <div className="w-full">
       <div className="overflow-x-auto">
         <div className="min-w-[760px]">
           <div className="grid w-full grid-cols-4 items-center py-4">
@@ -207,28 +209,27 @@ export default function PlansPage({
   }
 
   return (
-    <div className="flex w-full justify-center px-5 pb-10 md:px-10">
-      <section className="flex w-full max-w-[1200px] flex-col gap-[60px] md:gap-[80px]">
-          <div className="flex flex-col items-center gap-3" data-reveal>
+    <div className="flex w-full flex-col gap-20 px-5 pb-10 md:gap-[160px] md:px-10">
+      <section className="flex w-full justify-center">
+        <div className="flex w-full max-w-[1200px] flex-col gap-[60px] md:gap-[80px]">
+          <div className="flex flex-col items-center gap-3">
             <h1 className="m-0 mb-[8px] type-h1 text-center text-fg">Pricing</h1>
 
             {/* 제품군 전환 탭 */}
-            <div className="rounded-full bg-bg-deep p-1">
-              <div className="flex items-center rounded-full">
-                {(Object.entries(pricingProducts) as Array<[keyof typeof pricingProducts, PricingProduct]>).map(
-                  ([key, product]) => (
-                    <Tab
-                      key={key}
-                      className="shrink-0"
-                      onClick={() => handleProductChange(key)}
-                      state={activeProductKey === key ? "on" : "off"}
-                    >
-                      {product.tabLabel}
-                    </Tab>
-                  ),
-                )}
-              </div>
-            </div>
+            <TabGroup>
+              {(Object.entries(pricingProducts) as Array<[keyof typeof pricingProducts, PricingProduct]>).map(
+                ([key, product]) => (
+                  <Tab
+                    key={key}
+                    className="shrink-0"
+                    onClick={() => handleProductChange(key)}
+                    state={activeProductKey === key ? "on" : "off"}
+                  >
+                    {product.tabLabel}
+                  </Tab>
+                ),
+              )}
+            </TabGroup>
 
             <p className="m-0 text-center type-body-md text-mute-fg">{activeProductCaption}</p>
           </div>
@@ -241,7 +242,6 @@ export default function PlansPage({
                   key={`${activeProductKey}-${plan.name}`}
                   {...plan}
                   href={withLocaleHref(locale, plan.href)}
-                  index={index}
                 />
               ))}
             </div>
@@ -253,7 +253,9 @@ export default function PlansPage({
               />
             ) : null}
           </div>
-        </section>
+        </div>
+      </section>
+      <Cta />
     </div>
   );
 }

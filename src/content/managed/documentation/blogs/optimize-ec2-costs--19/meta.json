@@ -14,6 +14,15 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-19.webp",
+          "webPath": "/documentation/blogs/b-thumb-19.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog19-image-1.webp",
+          "webPath": "/documentation/blogs/blog19-image-1.webp"
+=======
           "sourcePath": "public/blog/b-thumb-19.webp",
           "webPath": "/blog/b-thumb-19.webp"
         },
@@ -21,6 +30,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog19-image-1.webp",
           "webPath": "/blog/blog19-image-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/optimize-ec2-costs--19/en.mdx",
@@ -37,8 +47,13 @@
         "cloud cost management"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-19.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Cost Optimization through EC2 Automation: Leveraging AWS Lambda and EventBridge\"\ndescription: \"Learn how to optimize EC2 costs by automating instances with AWS Lambda and EventBridge. This guide explores best practices for cost reduction through serverless solutions.\"\ndate: \"2025-02-07\"\nauthor: \"robb\"\nogImage: \"public/documentation/blogs/b-thumb-19.webp\"\nhideOgImage: true\nkeywords: [\"AWS EC2\", \"Lambda\", \"EventBridge\", \"cost optimization\", \"EC2 automation\", \"cloud cost management\"]\nrelatedPosts:\n  - \"/features/documentation/blog/17/privileged-access-management-pam\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"\n  - \"/features/documentation/blog/18/why-is-sso-important\"",
+=======
       "ogImage": "/blog/b-thumb-19.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"Cost Optimization through EC2 Automation: Leveraging AWS Lambda and EventBridge\"\ndescription: \"Learn how to optimize EC2 costs by automating instances with AWS Lambda and EventBridge. This guide explores best practices for cost reduction through serverless solutions.\"\ndate: \"2025-02-07\"\nauthor: \"robb\"\nogImage: \"public/blog/b-thumb-19.webp\"\nhideOgImage: true\nkeywords: [\"AWS EC2\", \"Lambda\", \"EventBridge\", \"cost optimization\", \"EC2 automation\", \"cloud cost management\"]\nrelatedPosts:\n  - \"/features/documentation/blog/17/privileged-access-management-pam\"\n  - \"/features/documentation/blog/16/healthcare-data-security\"\n  - \"/features/documentation/blog/18/why-is-sso-important\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/17/privileged-access-management-pam",
         "/features/documentation/blog/16/healthcare-data-security",
@@ -53,7 +68,11 @@
         "description": "Learn how to optimize EC2 costs by automating instances with AWS Lambda and EventBridge. This guide explores best practices for cost reduction through serverless solutions.",
         "date": "2025-02-07",
         "author": "robb",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-19.webp",
+=======
         "ogImage": "public/blog/b-thumb-19.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "keywords": [
           "AWS EC2",
@@ -74,6 +93,15 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-19.webp",
+          "webPath": "/documentation/blogs/b-thumb-19.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog19-image-1.webp",
+          "webPath": "/documentation/blogs/blog19-image-1.webp"
+=======
           "sourcePath": "public/blog/b-thumb-19.webp",
           "webPath": "/blog/b-thumb-19.webp"
         },
@@ -81,6 +109,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog19-image-1.webp",
           "webPath": "/blog/blog19-image-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/optimize-ec2-costs--19/ko.mdx",
@@ -98,8 +127,13 @@
         "쿼리파이"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-19.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"EC2 자동화를 통한 비용 절감: AWS Lambda와 EventBridge 활용법\"\ndescription: \"혹시 개발용 EC2 인스턴스를 하루 종일 켜두고 계신가요? AWS Lambda와 EventBridge를 활용한 EC2 자동화로 비용을 최적화하는 방법을 알아보세요.\"\ndate: \"2025-02-07\"\nauthor: \"robb\"\nogImage: \"public/documentation/blogs/b-thumb-19.webp\"\nhideOgImage: true\nkeywords: [\"AWS EC2\", \"Lambda\", \"EventBridge\", \"비용 최적화\", \"클라우드 자동화\", \"클라우드 비용 관리\", \"쿼리파이\"]\nrelatedPosts:\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/18/why-is-sso-important\"",
+=======
       "ogImage": "/blog/b-thumb-19.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"EC2 자동화를 통한 비용 절감: AWS Lambda와 EventBridge 활용법\"\ndescription: \"혹시 개발용 EC2 인스턴스를 하루 종일 켜두고 계신가요? AWS Lambda와 EventBridge를 활용한 EC2 자동화로 비용을 최적화하는 방법을 알아보세요.\"\ndate: \"2025-02-07\"\nauthor: \"robb\"\nogImage: \"public/blog/b-thumb-19.webp\"\nhideOgImage: true\nkeywords: [\"AWS EC2\", \"Lambda\", \"EventBridge\", \"비용 최적화\", \"클라우드 자동화\", \"클라우드 비용 관리\", \"쿼리파이\"]\nrelatedPosts:\n  - \"/features/documentation/blog/9/data-discovery-privacy-management\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/18/why-is-sso-important\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/9/data-discovery-privacy-management",
         "/features/documentation/blog/7/command-bypass-prevention-control",
@@ -114,7 +148,11 @@
         "description": "혹시 개발용 EC2 인스턴스를 하루 종일 켜두고 계신가요? AWS Lambda와 EventBridge를 활용한 EC2 자동화로 비용을 최적화하는 방법을 알아보세요.",
         "date": "2025-02-07",
         "author": "robb",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-19.webp",
+=======
         "ogImage": "public/blog/b-thumb-19.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "keywords": [
           "AWS EC2",
@@ -136,6 +174,15 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-19.webp",
+          "webPath": "/documentation/blogs/b-thumb-19.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog19-image-1.webp",
+          "webPath": "/documentation/blogs/blog19-image-1.webp"
+=======
           "sourcePath": "public/blog/b-thumb-19.webp",
           "webPath": "/blog/b-thumb-19.webp"
         },
@@ -143,6 +190,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog19-image-1.webp",
           "webPath": "/blog/blog19-image-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/optimize-ec2-costs--19/ja.mdx",
@@ -152,8 +200,13 @@
       "hideTableOfContents": false,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-19.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"EC2 自動化によるコスト削減：AWS Lambda と EventBridge の活用方法\"\ndescription: \"AWS LambdaとEventBridgeを活用してEC2コストを最適化する方法を学びましょう。このガイドでは、サーバーレスソリューションを通じてコスト削減のベストプラクティスを探ります。\"\ndate: \"2025-02-07\"\nauthor: \"robb\"\nogImage: \"public/documentation/blogs/b-thumb-19.webp\"\nhideOgImage: true\nkeywords: [“AWS EC2”, “Lambda”, “EventBridge”, “コスト最適化”, “EC2自動化”, “クラウドコスト管理”]\nrelatedPosts:\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"\n  - \"/features/documentation/blog/18/why-is-sso-important\"",
+=======
       "ogImage": "/blog/b-thumb-19.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"EC2 自動化によるコスト削減：AWS Lambda と EventBridge の活用方法\"\ndescription: \"AWS LambdaとEventBridgeを活用してEC2コストを最適化する方法を学びましょう。このガイドでは、サーバーレスソリューションを通じてコスト削減のベストプラクティスを探ります。\"\ndate: \"2025-02-07\"\nauthor: \"robb\"\nogImage: \"public/blog/b-thumb-19.webp\"\nhideOgImage: true\nkeywords: [“AWS EC2”, “Lambda”, “EventBridge”, “コスト最適化”, “EC2自動化”, “クラウドコスト管理”]\nrelatedPosts:\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/4/multi-cloud-kubernetes-access-control\"\n  - \"/features/documentation/blog/18/why-is-sso-important\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/1/agentless-philosophy",
         "/features/documentation/blog/4/multi-cloud-kubernetes-access-control",
@@ -168,7 +221,11 @@
         "description": "AWS LambdaとEventBridgeを活用してEC2コストを最適化する方法を学びましょう。このガイドでは、サーバーレスソリューションを通じてコスト削減のベストプラクティスを探ります。",
         "date": "2025-02-07",
         "author": "robb",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-19.webp",
+=======
         "ogImage": "public/blog/b-thumb-19.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "keywords": "[“AWS EC2”, “Lambda”, “EventBridge”, “コスト最適化”, “EC2自動化”, “クラウドコスト管理”]",
         "relatedPosts": [

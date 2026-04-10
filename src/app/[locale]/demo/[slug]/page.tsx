@@ -1,7 +1,12 @@
 import { notFound, redirect } from "next/navigation";
+<<<<<<< HEAD
+import { getLocalePath, isLocale } from "../../../../constants/i18n";
+=======
 import { isLocale } from "../../../../constants/i18n";
+>>>>>>> origin/main
 import DemoDetailClientPage from "../../../../components/pages/demo/DemoDetailClientPage";
-import type { DocsDetailPageProps } from "../../../../components/pages/docs/DocsDetailPage";
+import type { DocsDetailPageProps } from "../../../../components/pages/documentation/DocumentationDetailPage";
+import { demoCategoryConfigs, getCategoryHref } from "@/features/content/config";
 import {
   formatPublicDate,
   getManagedCategoryLabel,
@@ -63,7 +68,13 @@ export default async function DemoDetailRoute({ params }: DemoDetailRouteProps) 
   return (
     <DemoDetailClientPage
       fallbackProps={{
+<<<<<<< HEAD
+        docsHref: currentEntry
+          ? getCategoryHref(demoCategoryConfigs, currentEntry.categorySlug, locale)
+          : getLocalePath(locale, "/features/demo"),
+=======
         docsHref: `/${locale}/demo`,
+>>>>>>> origin/main
         slug: resolvedSlug,
         bodyHtml: currentEntry ? getLocalizedContent(currentEntry.bodyHtml, locale) : "",
         bodyMarkdown: currentEntry ? getLocalizedContent(currentEntry.bodyMarkdown, locale) : "",
@@ -78,7 +89,11 @@ export default async function DemoDetailRoute({ params }: DemoDetailRouteProps) 
         date: currentEntry ? formatPublicDate(locale, currentEntry.dateIso) : "",
         hideHeroImage: currentEntry?.hideHeroImage ?? false,
         heroImageAlt: currentEntry ? getLocalizedContent(currentEntry.title, locale) : "",
+<<<<<<< HEAD
+        heroImageSrc: currentEntry?.imageSrc ?? "/images/common/fallback-contents.jpg",
+=======
         heroImageSrc: currentEntry?.imageSrc ?? "/uploads/article-01.png",
+>>>>>>> origin/main
         title: currentEntry ? getLocalizedContent(currentEntry.title, locale) : "",
         writer: currentEntry
           ? currentEntry.authorRole

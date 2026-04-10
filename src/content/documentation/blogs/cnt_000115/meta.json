@@ -1,0 +1,45 @@
+{
+  "authorName": "allen",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "command-bypass-prevention-control",
+  "imageSrc": "/documentation/blogs/b-thumb-7.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000115",
+  "summary": {
+    "en": "Addressing the overlooked risks of command bypass issues and how QueryPie offers advanced solutions to prevent them.",
+    "ko": "서버 오디터와 기술 보안 실무자들이 애써 외면하고 있는 ‘서버 권한 관리’에 대한 판도라의 상자를 열어보며, 이를 제대로 관리하지 않으면 발생할 수 있는 위험과 그 해결책을 깊이 있게 탐구합니다.",
+    "ja": "コマンドバイパスの問題で見過ごされているリスクと、QueryPie がそれらを回避するための高度なソリューションを提供する方法について紹介します。"
+  },
+  "title": {
+    "en": "The Overlooked Command Bypass Issue: Let’s Finally Talk About It!",
+    "ko": "모두가 묵인하던 명령어 우회, 이제 터놓고 얘기해봅시다!",
+    "ja": "誰もが見過ごしていたコマンド回避、今こそ正直に話そう！"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000115/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000115/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000115/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000115/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000115/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000115/ja.tiptap.json"
+    }
+  }
+}

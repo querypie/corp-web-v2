@@ -1,0 +1,45 @@
+{
+  "authorName": "jake, ravi, noah",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "penetration-testing-standard",
+  "imageSrc": "/documentation/white-papers/wp-thumb-9.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000149",
+  "summary": {
+    "en": "QueryPie sets a new benchmark in penetration testing to prevent vulnerabilities and secure systems effectively.",
+    "ko": "QueryPie의 모의해킹 프로세스와 그 중요성에 대해 자세히 알려드립니다.",
+    "ja": "QueryPie は、脆弱性を防止し、システムを効果的に保護するために、侵入テストの新しいベンチマークを設定します。"
+  },
+  "title": {
+    "en": "QueryPie’s New Standard for Penetration Testing",
+    "ko": "QueryPie가 제시하는 모의해킹의 새로운 기준",
+    "ja": "QueryPieが示す新しいペネトレーションテスト基準"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000149/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000149/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000149/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000149/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000149/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000149/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "authorName": "eddy",
+  "authorRole": "",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "pac-policy-as-code",
+  "imageSrc": "/documentation/white-papers/wp-thumb-7.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000147",
+  "summary": {
+    "en": "Automate and optimize security protocols using QueryPie's Policy as Code, ensuring compliance and reducing risks.",
+    "ko": "PaC의 도입이 어떻게 보안 관리의 사각지대를 해소하고, 정책 설정과 관리를 보다 쉽고 안정적으로 만들어주는지 그 비결을 소개합니다.",
+    "ja": "QueryPie の Policy as Code を使用してセキュリティプロトコルを自動化および最適化し、コンプライアンスを確保し、リスクを軽減します。"
+  },
+  "title": {
+    "en": "Revolutionizing Security Management with Policy as Code (PaC)",
+    "ko": "Policy as Code(PaC) 접근을 통한 보안 관리 혁신",
+    "ja": "Policy as Code（PaC）アプローチによるセキュリティ管理の革新"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000147/en.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000147/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000147/ko.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000147/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/white-papers/cnt_000147/ja.html",
+      "jsonPath": "src/content/documentation/white-papers/cnt_000147/ja.tiptap.json"
+    }
+  }
+}

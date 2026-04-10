@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-1.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-1.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-1.webp",
           "webPath": "/tutorial/tu-thumb-dac-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/register-databases--24/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-1.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Register the Databases You Need to Protect\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/15/review-audit-logs\"\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/22/use-web-editor\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Register the Databases You Need to Protect\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/15/review-audit-logs\"\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/22/use-web-editor\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/15/review-audit-logs",
         "/features/demo/acp-features/23/grant-permissions-users",
@@ -40,7 +50,11 @@
         "title": "How to Register the Databases You Need to Protect",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-1.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-1.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-1.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-1.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-1.webp",
           "webPath": "/tutorial/tu-thumb-dac-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/register-databases--24/ko.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-1.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"관리 대상의 데이터베이스 등록 및 AWS 동기화하기\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/15/review-audit-logs\"\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/22/use-web-editor\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"관리 대상의 데이터베이스 등록 및 AWS 동기화하기\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/15/review-audit-logs\"\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/22/use-web-editor\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/15/review-audit-logs",
         "/features/demo/acp-features/23/grant-permissions-users",
@@ -80,7 +104,11 @@
         "title": "관리 대상의 데이터베이스 등록 및 AWS 동기화하기",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-1.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-1.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -94,8 +122,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-1.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-1.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-1.webp",
           "webPath": "/tutorial/tu-thumb-dac-1.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/register-databases--24/ja.mdx",
@@ -105,8 +138,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-1.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"保護する必要があるデータベースを登録する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/15/review-audit-logs\"\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/22/use-web-editor\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-1.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"保護する必要があるデータベースを登録する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-1.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/15/review-audit-logs\"\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/22/use-web-editor\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/15/review-audit-logs",
         "/features/demo/acp-features/23/grant-permissions-users",
@@ -120,7 +158,11 @@
         "title": "保護する必要があるデータベースを登録する方法",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-1.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-1.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

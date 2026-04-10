@@ -1,3 +1,5 @@
+import Cta from "../../sections/Cta";
+
 type CertificationItem = {
   description: readonly string[];
   imageAlt: string;
@@ -22,15 +24,12 @@ function CertificationCard({
   imageAlt,
   imageClassName,
   imageContainerClassName,
-  index,
   imageSrc,
   title,
-}: CertificationItem & { index: number }) {
+}: CertificationItem) {
   return (
     <article
       className="flex min-h-[260px] flex-col items-center justify-center gap-6 rounded-box bg-bg-content px-5 py-7 text-center sm:min-h-[280px] sm:gap-7 sm:py-8 md:min-h-[300px] md:gap-8"
-      data-reveal
-      style={{ transitionDelay: `${index * 70}ms` }}
     >
       {/* 인증 마크 크기가 제각각이라 카드별 래퍼 크기를 허용 */}
       <div
@@ -65,10 +64,11 @@ export default function CertificationsPage({
   title,
 }: CertificationsPageProps) {
   return (
-    <div className="flex w-full justify-center px-5 pb-10 md:px-10">
-      <section className="flex w-full max-w-[900px] flex-col gap-10 sm:gap-8 md:gap-10 lg:gap-[60px]">
+    <div className="flex w-full flex-col gap-20 px-5 pb-10 md:gap-[160px] md:px-10">
+      <section className="flex w-full justify-center">
+        <div className="flex w-full max-w-[900px] flex-col gap-10 sm:gap-8 md:gap-10 lg:gap-[60px]">
         {/* Figma 기준으로 좌측 제목 / 우측 소개 문구 2열 헤더를 구성 */}
-        <header className="grid gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]" data-reveal>
+        <header className="grid gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
           <h1 className="m-0 type-h1 text-fg">{title}</h1>
           <p className="m-0 type-body-lg text-fg">{intro}</p>
         </header>
@@ -76,10 +76,12 @@ export default function CertificationsPage({
         {/* 인증 카드는 동일한 정보 밀도를 유지하도록 공통 카드 컴포넌트로 렌더 */}
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {items.map((item, index) => (
-            <CertificationCard key={`${item.title}-${item.imageSrc}-${index}`} {...item} index={index} />
+            <CertificationCard key={`${item.title}-${item.imageSrc}-${index}`} {...item} />
           ))}
         </div>
+        </div>
       </section>
+      <Cta />
     </div>
   );
 }

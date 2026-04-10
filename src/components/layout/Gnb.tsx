@@ -10,6 +10,7 @@ import {
   getPrimaryNavHref,
   getSolutionsSubItems,
 } from "../../constants/navigation";
+import { defaultLocale, getLocalePath, isLocale, type Locale } from "../../constants/i18n";
 
 type GnbProps = {
   actionLabel?: string;
@@ -26,15 +27,18 @@ function cx(...values: Array<string | false | null | undefined>) {
 const mobileMenuBackdropClassName = "bg-bg";
 
 function getLocaleHref(pathname: string, locale: string, search: string) {
-  /* 현재 경로의 첫 세그먼트(locale)만 바꿔 같은 페이지에서 언어 전환 */
+  /* 현재 경로를 유지한 채 locale만 교체한다. 기본 locale(en)는 접두를 숨긴다. */
   const segments = pathname.split("/").filter(Boolean);
 
   if (segments.length === 0) {
-    return search ? `/${locale}?${search}` : `/${locale}`;
+    const nextHref = getLocalePath(locale as Locale, "/");
+    return search ? `${nextHref}?${search}` : nextHref;
   }
 
-  segments[0] = locale;
-  const nextPathname = `/${segments.join("/")}`;
+  const pathWithoutLocale = isLocale(segments[0])
+    ? `/${segments.slice(1).join("/")}`
+    : pathname;
+  const nextPathname = getLocalePath(locale as Locale, pathWithoutLocale || "/");
   return search ? `${nextPathname}?${search}` : nextPathname;
 }
 
@@ -58,7 +62,13 @@ export default function Gnb({
   const [currentSearch, setCurrentSearch] = useState("");
   const pathname = usePathname();
   const mobileLocaleRef = useRef<HTMLDivElement | null>(null);
+<<<<<<< HEAD
+  const homeHref = getLocalePath(locale as Locale, "/");
+  const isHomePage =
+    pathname === homeHref || (locale === defaultLocale && pathname === "/en");
+=======
   const isHomePage = pathname === `/${locale}`;
+>>>>>>> origin/main
   const isHomeTop = isHomePage && !mobileMenuOpen && !isScrolled;
 
   useEffect(() => {
@@ -168,11 +178,19 @@ export default function Gnb({
           className,
         )}
       >
+<<<<<<< HEAD
+        <div className={cx("flex h-[56px] w-full max-w-[1200px] items-center justify-between gap-6 transition-colors duration-300 md:h-16", isHomeTop ? "text-bg" : "text-fg")}>
+          <a
+            aria-label="QueryPie AI"
+            className={cx("inline-flex h-[18px] shrink-0 items-center transition-colors duration-300 md:h-5 md:w-[116px]", isHomeTop ? "text-bg" : "text-fg")}
+            href={homeHref}
+=======
         <div className={cx("flex h-[56px] w-full max-w-[1200px] items-center justify-between gap-6 transition-colors duration-300 md:h-[60px]", isHomeTop ? "text-bg" : "text-fg")}>
           <a
             aria-label="QueryPie AI"
             className={cx("inline-flex h-[18px] shrink-0 items-center transition-colors duration-300 md:h-5 md:w-[116px]", isHomeTop ? "text-bg" : "text-fg")}
             href={`/${locale}`}
+>>>>>>> origin/main
             onClick={() => {
               setMobileMenuOpen(false);
             }}
@@ -219,7 +237,11 @@ export default function Gnb({
                           solutionsOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                         )}
                       >
+<<<<<<< HEAD
+                        <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+=======
                         <div className="overflow-hidden rounded-[8px] border border-border bg-bg px-[14px] pb-[10px] pt-2">
+>>>>>>> origin/main
                           {getSolutionsSubItems(locale).map((sub) => (
                             <a
                               key={sub.label}
@@ -265,7 +287,11 @@ export default function Gnb({
                           featuresOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                         )}
                       >
+<<<<<<< HEAD
+                        <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+=======
                         <div className="overflow-hidden rounded-[8px] border border-border bg-bg px-[14px] pb-[10px] pt-2">
+>>>>>>> origin/main
                           {getFeaturesSubItems(locale).map((sub) => (
                             <a
                               key={sub.label}
@@ -311,7 +337,11 @@ export default function Gnb({
                           companyOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                         )}
                       >
+<<<<<<< HEAD
+                        <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+=======
                         <div className="overflow-hidden rounded-[8px] border border-border bg-bg px-[14px] pb-[10px] pt-2">
+>>>>>>> origin/main
                           {getCompanySubItems(locale).map((sub) => (
                             <a
                               key={sub.label}
@@ -385,7 +415,11 @@ export default function Gnb({
                   desktopLocaleOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                 )}
               >
+<<<<<<< HEAD
+                <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+=======
                 <div className="overflow-hidden rounded-[8px] border border-border bg-bg px-[14px] pb-[10px] pt-2">
+>>>>>>> origin/main
                   {localeSubItems.map((sub) => (
                     <a
                       key={sub.label}
@@ -425,7 +459,11 @@ export default function Gnb({
                   mobileLocaleOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                 )}
               >
+<<<<<<< HEAD
+                <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+=======
                 <div className="overflow-hidden rounded-[8px] border border-border bg-bg px-[14px] pb-[10px] pt-2">
+>>>>>>> origin/main
                   {localeSubItems.map((sub) => (
                     <a
                       key={sub.label}
@@ -456,10 +494,16 @@ export default function Gnb({
             <a className="hidden md:inline-flex" href="/admin" rel="noreferrer noopener" target="_blank">
               <Button
                 arrow={false}
+<<<<<<< HEAD
+                size="small"
+                style="full"
+                variant={isHomeTop ? "secondary" : "primary"}
+=======
                 className={cx(isHomeTop && "bg-[#111827] text-white hover:bg-[#1f2937]")}
                 size="small"
                 style="full"
                 variant="secondary"
+>>>>>>> origin/main
               >
                 {actionLabel}
               </Button>

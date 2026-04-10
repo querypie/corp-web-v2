@@ -1,0 +1,45 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2025-01-23",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "privileged-access-management-pam",
+  "imageSrc": "/documentation/blogs/b-thumb-17.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000110",
+  "summary": {
+    "en": "Discover how PAM strengthens security by managing and monitoring privileged access, reducing risks to critical data.",
+    "ko": "Discover how PAM strengthens security by managing and monitoring privileged access, reducing risks to critical data.",
+    "ja": "Discover how PAM strengthens security by managing and monitoring privileged access, reducing risks to critical data."
+  },
+  "title": {
+    "en": "Demystifying Privileged Access Management: Insights, Comparisons, and Practical Applications",
+    "ko": "Demystifying Privileged Access Management: Insights, Comparisons, and Practical Applications",
+    "ja": "Demystifying Privileged Access Management: Insights, Comparisons, and Practical Applications"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000110/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000110/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000110/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000110/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000110/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000110/ja.tiptap.json"
+    }
+  }
+}

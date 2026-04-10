@@ -1,5 +1,9 @@
 import { splitMarkdownBlocks } from "./markdownBlocks";
 import { highlightCodeToHtml } from "./codeHighlight";
+<<<<<<< HEAD
+import { parseMarkdownTable } from "./markdownTable";
+=======
+>>>>>>> origin/main
 
 type TiptapNode = {
   attrs?: Record<string, unknown>;
@@ -52,6 +56,20 @@ function normalizeContentAssetSrc(src: string) {
 }
 
 function parseMarkdownImage(block: string) {
+<<<<<<< HEAD
+  const legacyFigureLabelMatch = block.match(/^!\[\[([^\]]+)\]\s*([^\]]+)\]\(([^)]+)\)$/);
+
+  if (legacyFigureLabelMatch) {
+    const caption = `[${legacyFigureLabelMatch[1]}] ${legacyFigureLabelMatch[2]}`.trim();
+    return {
+      alt: caption,
+      caption,
+      src: normalizeContentAssetSrc(legacyFigureLabelMatch[3]),
+    };
+  }
+
+=======
+>>>>>>> origin/main
   const legacyBracketMatch = block.match(/^!\[\[(.+)\]\(([^)]+)\)$/);
 
   if (legacyBracketMatch) {
@@ -123,10 +141,31 @@ function createTextNode(
 }
 
 function convertInlineMarkdown(text: string) {
+<<<<<<< HEAD
+  const tokens = text.split(/(<a\s+href="[^"]+"[^>]*>.*?<\/a>|\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_|`[^`]+`)/g);
+  const nodes: TiptapNode[] = [];
+
+  for (const token of tokens.filter(Boolean)) {
+    if (/^<a\s+href="[^"]+"[^>]*>.*<\/a>$/.test(token)) {
+      const match = token.match(/^<a\s+href="([^"]+)"[^>]*>([\s\S]*)<\/a>$/);
+
+      if (match) {
+        nodes.push(
+          createTextNode(
+            match[2].replace(/<[^>]+>/g, ""),
+            [{ attrs: { href: match[1] }, type: "link" }],
+          ),
+        );
+        continue;
+      }
+    }
+
+=======
   const tokens = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_|`[^`]+`)/g);
   const nodes: TiptapNode[] = [];
 
   for (const token of tokens.filter(Boolean)) {
+>>>>>>> origin/main
     if (/^\[[^\]]+\]\([^)]+\)$/.test(token)) {
       const match = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
       if (match) {
@@ -199,11 +238,23 @@ function convertMarkdownBlock(block: string): ConvertedBlock {
 
   const imageMatch = parseMarkdownImage(trimmedBlock);
   if (imageMatch) {
+<<<<<<< HEAD
+    const figcaption = imageMatch.caption ? `<figcaption>${escapeHtml(imageMatch.caption)}</figcaption>` : "";
+    return {
+      html: imageMatch.caption
+        ? `<figure data-qp-image="true"><img src="${escapeHtml(imageMatch.src)}" alt="${escapeHtml(imageMatch.alt)}" />${figcaption}</figure>`
+        : `<img src="${escapeHtml(imageMatch.src)}" alt="${escapeHtml(imageMatch.alt)}" />`,
+      node: {
+        attrs: {
+          alt: imageMatch.alt,
+          caption: imageMatch.caption ?? "",
+=======
     return {
       html: `<img src="${escapeHtml(imageMatch.src)}" alt="${escapeHtml(imageMatch.alt)}" />`,
       node: {
         attrs: {
           alt: imageMatch.alt,
+>>>>>>> origin/main
           src: imageMatch.src,
         },
         type: "image",
@@ -284,9 +335,15 @@ function convertMarkdownBlock(block: string): ConvertedBlock {
     };
   }
 
+<<<<<<< HEAD
+  if (lines.every((line) => /^\s*[-*]\s+/.test(line))) {
+    const items = lines.map((line) => {
+      const content = convertInlineMarkdown(line.replace(/^\s*[-*]\s+/, ""));
+=======
   if (lines.every((line) => /^-\s+/.test(line))) {
     const items = lines.map((line) => {
       const content = convertInlineMarkdown(line.replace(/^-\s+/, ""));
+>>>>>>> origin/main
       return {
         html: `<li><p>${renderInlineNodesHtml(content)}</p></li>`,
         node: {
@@ -302,6 +359,11 @@ function convertMarkdownBlock(block: string): ConvertedBlock {
     };
   }
 
+<<<<<<< HEAD
+  const table = parseMarkdownTable(lines);
+  if (table) {
+    const { bodyRows, headerRow } = table;
+=======
   if (
     lines.length >= 2 &&
     lines.every((line) => /^\|.*\|$/.test(line.trim())) &&
@@ -315,6 +377,7 @@ function convertMarkdownBlock(block: string): ConvertedBlock {
         .map((cell) => cell.trim()),
     );
     const [headerRow, , ...bodyRows] = rows;
+>>>>>>> origin/main
 
     const headerCells = headerRow.map((cell) => {
       const content = convertInlineMarkdown(cell);

@@ -14,8 +14,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-3.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-3.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-3.webp",
           "webPath": "/tutorial/tu-thumb-dac-3.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/use-web-editor--22/en.mdx",
@@ -25,8 +30,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Use the Web Editor\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-3.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"How to Use the Web Editor\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/23/grant-permissions-users",
         "/features/demo/acp-features/21/apply-data-access-policies",
@@ -40,7 +50,11 @@
         "title": "How to Use the Web Editor",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-3.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-3.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -54,8 +68,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-3.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-3.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-3.webp",
           "webPath": "/tutorial/tu-thumb-dac-3.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/use-web-editor--22/ko.mdx",
@@ -65,8 +84,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"웹 SQL 에디터 사용 방법\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-3.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"웹 SQL 에디터 사용 방법\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/23/grant-permissions-users",
         "/features/demo/acp-features/21/apply-data-access-policies",
@@ -80,7 +104,11 @@
         "title": "웹 SQL 에디터 사용 방법",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-3.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-3.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [
@@ -94,8 +122,13 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/demo/acp-features/tu-thumb-dac-3.webp",
+          "webPath": "/demo/acp-features/tu-thumb-dac-3.webp"
+=======
           "sourcePath": "public/tutorial/tu-thumb-dac-3.webp",
           "webPath": "/tutorial/tu-thumb-dac-3.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/demo/acp-features/use-web-editor--22/ja.mdx",
@@ -105,8 +138,13 @@
       "hideTableOfContents": true,
       "keywords": [],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/demo/acp-features/tu-thumb-dac-3.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"Webエディターを使用する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/demo/acp-features/tu-thumb-dac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"",
+=======
       "ogImage": "/tutorial/tu-thumb-dac-3.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"acp-features\"\ntitle: \"Webエディターを使用する方法\"\ndescription: \"\"\ndate: \"2024-11-29\"\nogImage: \"public/tutorial/tu-thumb-dac-3.webp\"\nhideOgImage: true\nhideTableOfContents: true\nrelatedPosts:\n  - \"/features/demo/acp-features/23/grant-permissions-users\"\n  - \"/features/demo/acp-features/21/apply-data-access-policies\"\n  - \"/features/demo/acp-features/20/apply-data-masking-policies\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/demo/acp-features/23/grant-permissions-users",
         "/features/demo/acp-features/21/apply-data-access-policies",
@@ -120,7 +158,11 @@
         "title": "Webエディターを使用する方法",
         "description": "",
         "date": "2024-11-29",
+<<<<<<< HEAD
+        "ogImage": "public/demo/acp-features/tu-thumb-dac-3.webp",
+=======
         "ogImage": "public/tutorial/tu-thumb-dac-3.webp",
+>>>>>>> origin/main
         "hideOgImage": true,
         "hideTableOfContents": true,
         "relatedPosts": [

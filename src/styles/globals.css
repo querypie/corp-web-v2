@@ -21,6 +21,18 @@
   /* 색상 토큰: fg/bg/border 등 공통 의미 기반 색상 */
   --color-fg: #F1F1F2;
   --color-mute-fg: #8C9099;
+<<<<<<< HEAD
+  --color-placeholder: #4F5156;
+  --color-bg-content: #1F1F1F;
+  --color-bg-deep: #161616;
+  --color-bg: #000000;
+  --color-bg-modal: #000000;
+  --color-overlay-rgb: 8 9 10;
+  --color-border: #2A2A2C;
+  --color-primary: #FAFAFA;
+  --color-secondary: #242424;
+  --color-bg-gnb-popover-rgb: 36 36 36;
+=======
   --color-bg-content: #1B1B1D;
   --color-bg-deep: #181819;
   --color-bg-feather: #2C2D2F;
@@ -28,6 +40,7 @@
   --color-border: #2A2A2C;
   --color-primary: #FAFAFA;
   --color-secondary: #2A2A2E;
+>>>>>>> origin/main
   --color-white: #FFFFFF;
   --color-point: #C0E136;
   --color-success: #22C55E;
@@ -115,6 +128,51 @@ select {
   font: inherit;
 }
 
+.loading-text {
+  position: relative;
+  color: var(--loading-text-base);
+}
+
+.loading-text::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: transparent;
+  background-image: linear-gradient(
+    112deg,
+    transparent 0%,
+    transparent 34%,
+    var(--loading-text-highlight) 49%,
+    transparent 64%,
+    transparent 100%
+  );
+  background-position: 120% 0;
+  background-repeat: no-repeat;
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: loading-text-shimmer 1.7s ease-in-out infinite;
+  pointer-events: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-placeholder);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-fg);
+  -webkit-box-shadow: 0 0 0 1000px var(--color-bg-content) inset;
+  box-shadow: 0 0 0 1000px var(--color-bg-content) inset;
+  caret-color: var(--color-fg);
+  transition: background-color 99999s ease-out 0s;
+}
+
 @layer utilities {
   /* 입력 필드 공통 스타일.
      실제 input/textarea/select에 직접 붙이는 기본 포커스 링 유틸리티. */
@@ -148,7 +206,7 @@ select {
   }
 
   .card-hover:focus-visible {
-    background-color: #242426;
+    background-color: #242424;
   }
 
   /* 퍼블릭 컨텐츠 카드 제목 공통 스타일:
@@ -169,7 +227,11 @@ select {
   /* 마우스가 있는 환경에서만 hover 반응을 강하게 준다. */
   @media (hover: hover) and (pointer: fine) {
     .card-hover:hover {
+<<<<<<< HEAD
+      background-color: #242424;
+=======
       background-color: #242426;
+>>>>>>> origin/main
     }
 
     .group:hover .card-media-motion {
@@ -196,6 +258,8 @@ select {
 
   /* 공용 타이포 토큰: 모바일 기본값.
      페이지에서 임의 text-[...]보다 이 토큰을 우선 사용한다. */
+<<<<<<< HEAD
+=======
   .type-h0 {
     font-size: 32px;
     line-height: 38px;
@@ -203,15 +267,23 @@ select {
     font-weight: 400;
   }
 
+>>>>>>> origin/main
   .type-h1 {
     font-size: 26px;
     line-height: 32px;
     letter-spacing: 0;
+<<<<<<< HEAD
+    font-weight: 310;
+=======
     font-weight: 300;
+>>>>>>> origin/main
   }
 
   .type-h2 {
     font-size: 20px;
+<<<<<<< HEAD
+    line-height: 28px;
+=======
     line-height: 26px;
     letter-spacing: -0.2px;
     font-weight: 400;
@@ -251,6 +323,7 @@ select {
     font-family: var(--font-mono) !important;
     font-size: 14px;
     line-height: 20px;
+>>>>>>> origin/main
     letter-spacing: 0;
     font-weight: 300;
   }
@@ -263,6 +336,55 @@ select {
     font-weight: 400;
   }
 
+<<<<<<< HEAD
+  .type-h3 {
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+
+  .type-body-lg {
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: +0.1px;
+    font-weight: 310;
+  }
+
+  .type-body-md {
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: +0.1px;
+    font-weight: 310;
+  }
+
+  .type-body-sm {
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: +0.2px;
+    font-weight: 310;
+  }
+
+
+  /* 퍼블릭/공용 모노 타이포 */
+  .type-mono {
+    font-family: var(--font-mono) !important;
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: 0;
+    font-weight: 300;
+  }
+
+  /* 콘텐츠 본문 전용 타이포 */
+  .type-content-h1 {
+    font-size: 24px;
+    line-height: 34px;
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+
+=======
+>>>>>>> origin/main
   .type-content-h2 {
     font-size: 20px;
     line-height: 30px;
@@ -278,15 +400,33 @@ select {
   }
 
   .type-content-body {
+<<<<<<< HEAD
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: +0.1px;
+    font-weight: 310;
+  }
+
+  .type-content-caption {
+    font-size: 12px;
+    line-height: 20px;
+    letter-spacing: +0.1px;
+    font-weight: 310;
+=======
     font-size: 15px;
     line-height: 24px;
     letter-spacing: 0;
     font-weight: 300;
+>>>>>>> origin/main
   }
 
   .type-content-mono {
     font-family: var(--font-mono) !important;
+<<<<<<< HEAD
+    font-size: 13px;
+=======
     font-size: 14px;
+>>>>>>> origin/main
     line-height: 20px;
     letter-spacing: 0;
     font-weight: 300;
@@ -329,8 +469,14 @@ select {
   /* 줄번호 포함 코드블록 레이아웃 */
   .code-block-shell {
     display: grid;
+<<<<<<< HEAD
+    grid-template-columns: auto minmax(0, 1fr);
+    overflow-x: auto;
+    overflow-y: hidden;
+=======
     grid-template-columns: 44px minmax(0, 1fr);
     overflow: hidden;
+>>>>>>> origin/main
     border-radius: 10px;
     background: var(--color-bg-content);
     column-gap: 0;
@@ -342,12 +488,16 @@ select {
     align-items: flex-end;
     gap: 0;
     background: transparent;
+<<<<<<< HEAD
+    padding: 20px;
+=======
     padding: 16px 8px;
     font-family: var(--font-mono) !important;
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0;
     font-weight: 300;
+>>>>>>> origin/main
     color: var(--color-mute-fg);
     user-select: none;
     font-variant-ligatures: none;
@@ -355,33 +505,127 @@ select {
 
   .code-line-number {
     display: block;
+<<<<<<< HEAD
+    min-height: inherit;
+    line-height: inherit;
+=======
     min-height: 20px;
     line-height: 20px;
+>>>>>>> origin/main
   }
 
   .code-line {
     display: block;
+<<<<<<< HEAD
+    min-height: inherit;
+    line-height: inherit;
+=======
     min-height: 20px;
     line-height: 20px;
+>>>>>>> origin/main
   }
 
   .code-block-shell pre,
   .code-block-shell code,
   .code-block-shell .code-line {
+<<<<<<< HEAD
+=======
     font-size: 14px;
     line-height: 20px;
     letter-spacing: 0;
     font-weight: 300;
+>>>>>>> origin/main
     font-variant-ligatures: none;
   }
 
   .code-block-shell code {
     display: block;
     white-space: pre;
+<<<<<<< HEAD
+    min-width: max-content;
+=======
+>>>>>>> origin/main
   }
 
   .code-block-shell pre {
     background: transparent !important;
+<<<<<<< HEAD
+    margin: 0;
+    padding: 16px 20px 16px 0;
+    min-width: max-content;
+  }
+
+  .code-block-shell [data-node-view-content],
+  .code-block-shell [data-node-view-content] *,
+  .code-block-shell .ProseMirror,
+  .code-block-shell .ProseMirror * {
+    font-family: var(--font-mono) !important;
+    font-size: inherit !important;
+    line-height: inherit !important;
+    letter-spacing: inherit !important;
+    font-weight: inherit !important;
+    font-style: normal !important;
+  }
+
+  .code-block-shell [data-node-view-content] {
+    min-width: max-content;
+  }
+
+  .editor-code-block-shell {
+    border-radius: 10px;
+    background: var(--color-bg-content);
+    grid-template-columns: auto minmax(0, 1fr);
+    border: 0;
+    box-shadow: none;
+  }
+
+  .editor-code-block-shell .code-block-gutter {
+    border-right: 0;
+    background: transparent;
+    padding: 20px 20px 20px 20px;
+  }
+
+  .editor-code-block-shell pre {
+    background: transparent !important;
+    border: 0;
+    box-shadow: none;
+    padding: 16px 20px 16px 0;
+  }
+
+  .editor-code-block-shell code {
+    color: var(--color-fg);
+  }
+
+  .editor-code-block-shell [data-node-view-content] {
+    display: block;
+    white-space: pre;
+    line-height: 24px;
+    min-height: 24px;
+  }
+
+  .editor-code-block-shell .ProseMirror,
+  .editor-code-block-shell .ProseMirror *,
+  .editor-code-block-shell [data-node-view-content],
+  .editor-code-block-shell [data-node-view-content] * {
+    color: var(--color-fg);
+    font-style: normal !important;
+  }
+
+  .rich-content .editor-code-block-shell {
+    grid-template-columns: auto minmax(0, 1fr);
+    background: var(--color-bg-content);
+  }
+
+  .rich-content .editor-code-block-shell .code-block-gutter {
+    border-right: 0;
+    background: transparent;
+    padding: 20px 20px 20px 20px;
+  }
+
+  .rich-content .editor-code-block-shell pre {
+    padding: 16px 20px 16px 0;
+=======
+>>>>>>> origin/main
   }
 
   /* 데스크톱 이상에서만 타이포 스케일을 한 단계 키운다. */
@@ -398,27 +642,70 @@ select {
 
     .type-h2 {
       font-size: 24px;
+<<<<<<< HEAD
+      line-height: 32px;
+=======
       line-height: 30px;
+>>>>>>> origin/main
     }
 
     .type-h3 {
       font-size: 18px;
+<<<<<<< HEAD
+      line-height: 26px;
+=======
       line-height: 24px;
+>>>>>>> origin/main
     }
 
     .type-body-lg {
       font-size: 16px;
-      line-height: 24px;
+      line-height: 26px;
     }
 
     .type-body-md {
       font-size: 14px;
-      line-height: 20px;
+      line-height: 22px;
     }
 
     .type-body-sm {
       font-size: 12px;
-      line-height: 18px;
+      line-height: 20px;
+    }
+
+    .type-mono {
+      font-size: 13px;
+      line-height: 20px;
+    }
+
+    .type-content-h1 {
+      font-size: 28px;
+      line-height: 38px;
+    }
+
+    .type-content-h2 {
+      font-size: 22px;
+      line-height: 32px;
+    }
+
+    .type-content-h3 {
+      font-size: 16px;
+      line-height: 28px;
+    }
+
+    .type-content-body {
+      font-size: 16px;
+      line-height: 26px;
+    }
+
+    .type-content-caption {
+      font-size: 13px;
+      line-height: 22px;
+    }
+
+    .type-content-mono {
+      font-size: 14px;
+      line-height: 22px;
     }
 
     .type-mono {
@@ -464,20 +751,26 @@ select {
   }
 }
 
+<<<<<<< HEAD
+@keyframes loading-text-shimmer {
+  0% {
+    background-position: 120% 0;
+  }
+
+=======
 /* 메인 히어로 장식 별 점멸 */
 @keyframes hero-star-twinkle {
   0%,
+>>>>>>> origin/main
   100% {
-    opacity: 0.18;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.68;
-    transform: scale(1.35);
+    background-position: -40% 0;
   }
 }
 
+<<<<<<< HEAD
+/* 모바일 GNB 시트가 헤더 아래에서 아래로 펼쳐진다. */
+@keyframes mobile-menu-sheet-enter {
+=======
 /* 히어로 장식 아이콘 부유 */
 @keyframes hero-icon-float {
   0%, 100% {
@@ -503,16 +796,20 @@ select {
 
 /* 히어로 카피 전용 등장 애니메이션 */
 @keyframes hero-copy-enter {
+>>>>>>> origin/main
   from {
-    opacity: 0;
-    transform: translateY(20px);
+    clip-path: inset(0 0 100% 0);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
   }
 }
 
+<<<<<<< HEAD
+@keyframes mobile-menu-sheet-exit {
+  from {
+    clip-path: inset(0 0 0 0);
+=======
 /* 모바일 GNB 시트가 헤더 아래에서 아래로 펼쳐진다. */
 @keyframes mobile-menu-sheet-enter {
   from {
@@ -536,15 +833,10 @@ select {
 @keyframes hero-gradient-flow {
   0% {
     background-position: 0% 50%;
+>>>>>>> origin/main
   }
-  33% {
-    background-position: 100% 0%;
-  }
-  66% {
-    background-position: 50% 100%;
-  }
-  100% {
-    background-position: 0% 50%;
+  to {
+    clip-path: inset(0 0 100% 0);
   }
 }
 
@@ -569,7 +861,11 @@ select {
   width: 100%;
   object-fit: cover;
   object-position: center center;
+<<<<<<< HEAD
+  will-change: opacity;
+=======
   opacity: 1;
+>>>>>>> origin/main
 }
 
 /* 404 페이지 전용: bot 눈 깜빡임 */

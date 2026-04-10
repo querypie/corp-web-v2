@@ -14,6 +14,30 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-6.webp",
+          "webPath": "/documentation/blogs/b-thumb-6.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-1.webp",
+          "webPath": "/documentation/blogs/blog6-image-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-2.webp",
+          "webPath": "/documentation/blogs/blog6-image-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-3.webp",
+          "webPath": "/documentation/blogs/blog6-image-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-4.webp",
+          "webPath": "/documentation/blogs/blog6-image-4.webp"
+=======
           "sourcePath": "public/blog/b-thumb-6.webp",
           "webPath": "/blog/b-thumb-6.webp"
         },
@@ -36,6 +60,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog6-image-4.webp",
           "webPath": "/blog/blog6-image-4.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/integration-connection-paradigm--6/en.mdx",
@@ -51,8 +76,13 @@
         "innovative paradigm"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-6.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie’s New Paradigm: Beyond Integration, Toward True Connectivity\"\ndescription: \"QueryPie introduces a new paradigm, emphasizing true connectivity beyond mere system integration for better collaboration.\"\ndate: \"2024-11-22\"\nauthor: \"ella\"\nogImage: \"public/documentation/blogs/b-thumb-6.webp\"\nkeywords: [\"QueryPie\", \"true connectivity\", \"system integration\", \"enhanced collaboration\", \"innovative paradigm\"]\nrelatedPosts:\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
+=======
       "ogImage": "/blog/b-thumb-6.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie’s New Paradigm: Beyond Integration, Toward True Connectivity\"\ndescription: \"QueryPie introduces a new paradigm, emphasizing true connectivity beyond mere system integration for better collaboration.\"\ndate: \"2024-11-22\"\nauthor: \"ella\"\nogImage: \"public/blog/b-thumb-6.webp\"\nkeywords: [\"QueryPie\", \"true connectivity\", \"system integration\", \"enhanced collaboration\", \"innovative paradigm\"]\nrelatedPosts:\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/1/agentless-philosophy",
         "/features/documentation/blog/7/command-bypass-prevention-control",
@@ -67,7 +97,11 @@
         "description": "QueryPie introduces a new paradigm, emphasizing true connectivity beyond mere system integration for better collaboration.",
         "date": "2024-11-22",
         "author": "ella",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-6.webp",
+=======
         "ogImage": "public/blog/b-thumb-6.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "true connectivity",
@@ -86,6 +120,30 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-6.webp",
+          "webPath": "/documentation/blogs/b-thumb-6.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-1.webp",
+          "webPath": "/documentation/blogs/blog6-image-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-2.webp",
+          "webPath": "/documentation/blogs/blog6-image-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-3.webp",
+          "webPath": "/documentation/blogs/blog6-image-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-4.webp",
+          "webPath": "/documentation/blogs/blog6-image-4.webp"
+=======
           "sourcePath": "public/blog/b-thumb-6.webp",
           "webPath": "/blog/b-thumb-6.webp"
         },
@@ -108,6 +166,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog6-image-4.webp",
           "webPath": "/blog/blog6-image-4.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/integration-connection-paradigm--6/ko.mdx",
@@ -125,8 +184,13 @@
         "보안 솔루션"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-6.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie가 제시하는 새로운 패러다임, 연동을 넘어선 연결로\"\ndescription: \"QueryPie는 폐쇄적이고 엄격한 보안 환경에서 벗어나, 통합과 연결을 기반으로 한 혁신적인 보안 환경으로 패러다임을 전환하고자 합니다. 더 나은 협업과 효율성을 어떤 방식으로 만들어나가고 있는지 함께 확인해 보시죠!\"\ndate: \"2024-11-22\"\nauthor: \"ella\"\nogImage: \"public/documentation/blogs/b-thumb-6.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"연결성\", \"시스템 통합\", \"보안 전략\", \"혁신적인 패러다임\", \"보안 솔루션\"]\nrelatedPosts:\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
+=======
       "ogImage": "/blog/b-thumb-6.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPie가 제시하는 새로운 패러다임, 연동을 넘어선 연결로\"\ndescription: \"QueryPie는 폐쇄적이고 엄격한 보안 환경에서 벗어나, 통합과 연결을 기반으로 한 혁신적인 보안 환경으로 패러다임을 전환하고자 합니다. 더 나은 협업과 효율성을 어떤 방식으로 만들어나가고 있는지 함께 확인해 보시죠!\"\ndate: \"2024-11-22\"\nauthor: \"ella\"\nogImage: \"public/blog/b-thumb-6.webp\"\nkeywords: [\"QueryPie\", \"쿼리파이\", \"연결성\", \"시스템 통합\", \"보안 전략\", \"혁신적인 패러다임\", \"보안 솔루션\"]\nrelatedPosts:\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/1/agentless-philosophy",
         "/features/documentation/blog/7/command-bypass-prevention-control",
@@ -141,7 +205,11 @@
         "description": "QueryPie는 폐쇄적이고 엄격한 보안 환경에서 벗어나, 통합과 연결을 기반으로 한 혁신적인 보안 환경으로 패러다임을 전환하고자 합니다. 더 나은 협업과 효율성을 어떤 방식으로 만들어나가고 있는지 함께 확인해 보시죠!",
         "date": "2024-11-22",
         "author": "ella",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-6.webp",
+=======
         "ogImage": "public/blog/b-thumb-6.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "쿼리파이",
@@ -162,6 +230,30 @@
       "assetRefs": [
         {
           "exists": true,
+<<<<<<< HEAD
+          "sourcePath": "public/documentation/blogs/b-thumb-6.webp",
+          "webPath": "/documentation/blogs/b-thumb-6.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-1.webp",
+          "webPath": "/documentation/blogs/blog6-image-1.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-2.webp",
+          "webPath": "/documentation/blogs/blog6-image-2.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-3.webp",
+          "webPath": "/documentation/blogs/blog6-image-3.webp"
+        },
+        {
+          "exists": true,
+          "sourcePath": "public/documentation/blogs/blog6-image-4.webp",
+          "webPath": "/documentation/blogs/blog6-image-4.webp"
+=======
           "sourcePath": "public/blog/b-thumb-6.webp",
           "webPath": "/blog/b-thumb-6.webp"
         },
@@ -184,6 +276,7 @@
           "exists": true,
           "sourcePath": "public/blog/blog6-image-4.webp",
           "webPath": "/blog/blog6-image-4.webp"
+>>>>>>> origin/main
         }
       ],
       "bodyPath": "src/content/managed/documentation/blogs/integration-connection-paradigm--6/ja.mdx",
@@ -199,8 +292,13 @@
         "革新的なパラダイム"
       ],
       "layout": "Article",
+<<<<<<< HEAD
+      "ogImage": "/documentation/blogs/b-thumb-6.webp",
+      "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPieが示す新しいパラダイム、連携を超えた接続へ\"\ndescription: \"QueryPie が新しいパラダイムを導入し、より良いコラボレーションのために単なるシステム統合以上の真の接続性を重視している取り組みを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"ella\"\nogImage: \"public/documentation/blogs/b-thumb-6.webp\"\nkeywords: [\"QueryPie\", \"真の接続性\", \"システム統合\", \"高度なコラボレーション\", \"革新的なパラダイム\"]\nrelatedPosts:\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
+=======
       "ogImage": "/blog/b-thumb-6.webp",
       "rawFrontmatter": "layout: \"Article\"\ncategory: \"blog\"\ntitle: \"QueryPieが示す新しいパラダイム、連携を超えた接続へ\"\ndescription: \"QueryPie が新しいパラダイムを導入し、より良いコラボレーションのために単なるシステム統合以上の真の接続性を重視している取り組みを紹介します。\"\ndate: \"2024-11-22\"\nauthor: \"ella\"\nogImage: \"public/blog/b-thumb-6.webp\"\nkeywords: [\"QueryPie\", \"真の接続性\", \"システム統合\", \"高度なコラボレーション\", \"革新的なパラダイム\"]\nrelatedPosts:\n  - \"/features/documentation/blog/1/agentless-philosophy\"\n  - \"/features/documentation/blog/7/command-bypass-prevention-control\"\n  - \"/features/documentation/blog/11/seamless-figma-querypie-collaboration\"",
+>>>>>>> origin/main
       "relatedPosts": [
         "/features/documentation/blog/1/agentless-philosophy",
         "/features/documentation/blog/7/command-bypass-prevention-control",
@@ -215,7 +313,11 @@
         "description": "QueryPie が新しいパラダイムを導入し、より良いコラボレーションのために単なるシステム統合以上の真の接続性を重視している取り組みを紹介します。",
         "date": "2024-11-22",
         "author": "ella",
+<<<<<<< HEAD
+        "ogImage": "public/documentation/blogs/b-thumb-6.webp",
+=======
         "ogImage": "public/blog/b-thumb-6.webp",
+>>>>>>> origin/main
         "keywords": [
           "QueryPie",
           "真の接続性",

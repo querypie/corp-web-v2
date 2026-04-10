@@ -1,8 +1,13 @@
 "use client";
 
 import NewsDetailPage from "./NewsDetailPage";
+<<<<<<< HEAD
+import { getLocalePath, type Locale } from "@/constants/i18n";
+import type { DocsDetailPageProps } from "../documentation/DocumentationDetailPage";
+=======
 import type { Locale } from "@/constants/i18n";
 import type { DocsDetailPageProps } from "../docs/DocsDetailPage";
+>>>>>>> origin/main
 import { useManagedContents } from "@/features/content/clientStore";
 import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getWriterLabel, type ManagedContentEntry } from "@/features/content/data";
 import useHydrated from "@/hooks/useHydrated";
@@ -21,7 +26,12 @@ export default function NewsDetailClientPage({
   slug,
 }: NewsDetailClientPageProps) {
   const decodedSlug = decodeURIComponent(slug);
+<<<<<<< HEAD
+  const managedItems = useManagedContents("news", initialItems) ?? [];
+  const items = managedItems.filter((item) => item.status === "published");
+=======
   const items = useManagedContents("news", initialItems).filter((item) => item.status === "published");
+>>>>>>> origin/main
   const isHydrated = useHydrated();
 
   const currentIndex = items.findIndex((item) => item.id === decodedSlug);
@@ -40,7 +50,11 @@ export default function NewsDetailClientPage({
           category: "Previous Post",
           href: previousItem.contentType === "outlink"
             ? previousItem.externalUrl
+<<<<<<< HEAD
+            : getLocalePath(locale, `/news/${previousItem.id}`),
+=======
             : `/${locale}/news/${previousItem.id}`,
+>>>>>>> origin/main
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
           title: getLocalizedContent(previousItem.title, locale),
         }
@@ -50,7 +64,11 @@ export default function NewsDetailClientPage({
           category: "Next post",
           href: nextItem.contentType === "outlink"
             ? nextItem.externalUrl
+<<<<<<< HEAD
+            : getLocalePath(locale, `/news/${nextItem.id}`),
+=======
             : `/${locale}/news/${nextItem.id}`,
+>>>>>>> origin/main
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
           title: getLocalizedContent(nextItem.title, locale),
         }

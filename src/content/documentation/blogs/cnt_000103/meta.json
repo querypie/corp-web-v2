@@ -1,0 +1,45 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2025-08-11",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "top-pam-solutions",
+  "imageSrc": "/documentation/blogs/b-thumb-24.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000103",
+  "summary": {
+    "en": "Discover the top 10 Privileged Access Management (PAM) solutions that are essential for modern enterprise security, featuring comprehensive leading platforms that provide advanced credential management, zero-trust access control, and automated security features to protect your organization's critical IT infrastructure in today's rapidly evolving digital landscape.",
+    "ko": "현대 기업 보안에 필수적인 접근제어 솔루션(PAM) 톱 5 지금 살펴보세요. 고도화된 자격 증명 관리, 제로 트러스트 접근 제어, 자동화된 보안 기능을 제공하는 포괄적인 주요 플랫폼들을 통해 급속히 변화하는 디지털 환경에서 조직의 핵심 IT 인프라를 보호할 수 있습니다.",
+    "ja": "Discover the top 10 Privileged Access Management (PAM) solutions that are essential for modern enterprise security, featuring comprehensive leading platforms that provide advanced credential management, zero-trust access control, and automated security features to protect your organization's critical IT infrastructure in today's rapidly evolving digital landscape."
+  },
+  "title": {
+    "en": "Top 10 Privileged Access Management (PAM) Solutions You Should Know",
+    "ko": "기업 보안의 핵심, 접근제어 솔루션(PAM) Top 5",
+    "ja": "Top 10 Privileged Access Management (PAM) Solutions You Should Know"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000103/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000103/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000103/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000103/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000103/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000103/ja.tiptap.json"
+    }
+  }
+}

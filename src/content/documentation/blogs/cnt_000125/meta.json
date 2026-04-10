@@ -1,0 +1,45 @@
+{
+  "authorName": "Jessica Kim",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "technology-humanity-convergence",
+  "imageSrc": "/documentation/blogs/b-thumb-5.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000125",
+  "summary": {
+    "en": "How QueryPie merges technology with humanities to drive innovation and ensure long-term sustainability.",
+    "ko": "쿼리파이는 디지털 현대사회에서 보안이라는 복잡한 문제의 근본을 셀 수 없이 마주하며, 편리하고 안전한 해법을 찾아 나섭니다. 왜 나서서 힘들 길을 자처할까요?",
+    "ja": "QueryPie がどのようにテクノロジーを人文科学と融合させ、イノベーションを推進し、長期的な持続可能性を確保するのかについて紹介します。"
+  },
+  "title": {
+    "en": "QueryPie’s Stride & Sustainability by Converging Technology and Humanities",
+    "ko": "쿼리파이 헝거게임: 기술을 아는 사람들이 ‘사람을 이롭게하는 기술’로 세상과 통(通)하다!",
+    "ja": "QueryPieハンガーゲーム: 技術を知る人々が「人を幸せにする技術」で世界と通じる！"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000125/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000125/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000125/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000125/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000125/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000125/ja.tiptap.json"
+    }
+  }
+}
