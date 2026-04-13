@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2023-09-10",
+  "downloadCoverImageSrc": "/news/news-3.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.techseoul.news/mobile/article.html?no=239",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-participates-in-isec-2023-with-orca-security",
+  "imageSrc": "/news/news-3.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 17,
+  "status": "published",
+  "storageId": "cnt_000175",
+  "summary": {
+    "en": "CHEQUER Inc., the provider of the cloud solution QueryPie, announced on Sep 11, 2023, that it will participate in ISEC 2023, Asia's largest security event, which will take place at COEX from September 19th to 20th, 2023.",
+    "ko": "CHEQUER Inc., the provider of the cloud solution QueryPie, announced on Sep 11, 2023, that it will participate in ISEC 2023, Asia's largest security event, which will take place at COEX from September 19th to 20th, 2023.",
+    "ja": "CHEQUER Inc., the provider of the cloud solution QueryPie, announced on Sep 11, 2023, that it will participate in ISEC 2023, Asia's largest security event, which will take place at COEX from September 19th to 20th, 2023."
+  },
+  "title": {
+    "en": "QueryPie Participates in ISEC 2023 with Orca Security",
+    "ko": "QueryPie Participates in ISEC 2023 with Orca Security",
+    "ja": "QueryPie Participates in ISEC 2023 with Orca Security"
+  },
+  "locales": {}
+}

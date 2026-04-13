@@ -51,8 +51,9 @@ export default function Footer({
   locale = "en",
   sections = [
     { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer Service (FDES)"] },
-    { title: "Features", items: ["Demo", "Documentation"] },
-    { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us", "Plans"] },
+    { title: "Features", items: ["Demo", "Documentation", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
+    { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
+    { title: "Plans", items: ["AIP", "ACP"] },
   ],
 }: FooterProps) {
   const [copyright, ...officeLines] = addressLines;
@@ -84,17 +85,36 @@ export default function Footer({
                 className={cx(
                   "flex flex-col gap-5 type-body-md leading-5",
                   (section.title === "Solutions" || section.title === "ソリューション" || section.title === "솔루션") && "w-[191px]",
-                  (section.title === "Features" || section.title === "機能" || section.title === "기능") && "w-[96px]",
+                  (section.title === "Features" || section.title === "機能" || section.title === "기능") && "w-[180px]",
                   (section.title === "Company" || section.title === "회사" || section.title === "会社") && "w-[84px]",
+                  (section.title === "Plans" || section.title === "プラン" || section.title === "요금제") && "w-[84px]",
                 )}
               >
                 <p className="m-0 text-mute-fg">{section.title}</p>
-                <div className="flex flex-col gap-2 text-fg">
-                  {section.items.map((item) => (
-                    <a key={item} className="transition-colors hover:text-mute-fg" href={getFooterHref(item, locale)}>
+                <div className="flex flex-col gap-[10px] text-fg">
+                  {section.items.map((item) => {
+                    const href = getFooterHref(item, locale);
+                    const isExternal = href.startsWith("http");
+                    const isSolutionsSection =
+                      section.title === "Solutions" ||
+                      section.title === "ソリューション" ||
+                      section.title === "솔루션";
+
+                    return (
+                    <a
+                      key={item}
+                      className={cx(
+                        "transition-colors hover:text-mute-fg",
+                        isSolutionsSection && "whitespace-nowrap md:whitespace-normal",
+                      )}
+                      href={href}
+                      rel={isExternal ? "noreferrer noopener" : undefined}
+                      target={isExternal ? "_blank" : undefined}
+                    >
                       {item}
                     </a>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
             ))}

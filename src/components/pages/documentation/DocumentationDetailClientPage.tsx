@@ -8,7 +8,7 @@ import { useManagedContents } from "@/features/content/clientStore";
 import type { ContactPageCopy } from "@/features/contact/copy";
 import useHydrated from "@/hooks/useHydrated";
 import { docsCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/features/content/config";
-import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, type ManagedContentEntry } from "@/features/content/data";
+import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, isPublishedContentVisible, type ManagedContentEntry } from "@/features/content/data";
 import { getContentUnlockCookieName, isContentGatingEnabled } from "@/features/content/gating";
 
 type DocsDetailClientPageProps = {
@@ -32,7 +32,7 @@ export default function DocsDetailClientPage({
 }: DocsDetailClientPageProps) {
   const resolvedSlug = decodeURIComponent(slug);
   const managedItems = useManagedContents(section, initialItems) ?? [];
-  const items = managedItems.filter((item) => item.status === "published");
+  const items = managedItems.filter((item) => isPublishedContentVisible(item, locale));
   const isHydrated = useHydrated();
   const [isUnlocked, setIsUnlocked] = useState(initialContentUnlocked);
 
@@ -83,7 +83,6 @@ export default function DocsDetailClientPage({
     <DocsDetailPage
       {...fallbackProps}
       bodyHtml={isGateActive ? fallbackProps.bodyHtml : getLocalizedContent(currentItem.bodyHtml, locale)}
-      bodyMarkdown={isGateActive ? fallbackProps.bodyMarkdown : getLocalizedContent(currentItem.bodyMarkdown, locale)}
       category={getCategoryLabel(docsCategoryConfigs, currentItem.categorySlug, locale)}
       contentOverlay={isGateActive ? (
         <ContentGateOverlay
@@ -94,7 +93,6 @@ export default function DocsDetailClientPage({
           unlockCookieName={getContentUnlockCookieName(currentItem.id)}
         />
       ) : undefined}
-      contentFormat={currentItem.contentFormat}
       contentListItems={relatedItems}
       downloadHref={
         currentItem.section !== "news" &&

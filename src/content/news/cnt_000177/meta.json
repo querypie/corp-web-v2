@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2024-08-13",
+  "downloadCoverImageSrc": "/news/news-1.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://finance.yahoo.com/news/querypie-selected-real-madrid-next-000000956.html?guccounter=1&guce_referrer=aHR0cHM6Ly93d3cucXVlcnlwaWUuY29tLw&guce_referrer_sig=AQAAABJMqpHe4LiLzZld7_snxuqJbSo4bz_P7poCnWRYCl831YZKOD9_vOlo16cl8v2xHmz6i6xJzBKD9TIvdqX5BaZD1jEQQiyFdVA2Bay1_ZuiTkl8jswg_xXNi6a2n723Im5GHPzgkqSuEeksWlO_vFJDE8qp2Eg4k7vTkHx9ZlAZ",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-selected-for-real-madrid-next-accelerator-program",
+  "imageSrc": "/news/news-1.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 15,
+  "status": "published",
+  "storageId": "cnt_000177",
+  "summary": {
+    "en": "SEOUL, South Korea, Aug. 12, 2024 /PRNewswire/ -- QueryPie Inc., a cybersecurity solution startup, was selected as the only company in the cybersecurity field for the program 'Real Madrid Next Accelerator for Asia,' which supports Asian startups of Spain's Real Madrid and seeks new technology partners.",
+    "ko": "클라우드 보안 솔루션을 운영하는 쿼리파이가 스페인 레알 마드리드의 글로벌 파트너십 프로그램(Real Madrid Next Accelerator for Asia)에 선정됐다고 13일 밝혔다. 이 프로그램은 스포츠 산업의 디지털 전환을 견인하기 위해 아시아 스타트업을 폭넓게 지원하고 새로운 기술 기업 파트너를 모색하는 것을 목표로 한다.",
+    "ja": "SEOUL, South Korea, Aug. 12, 2024 /PRNewswire/ -- QueryPie Inc., a cybersecurity solution startup, was selected as the only company in the cybersecurity field for the program 'Real Madrid Next Accelerator for Asia,' which supports Asian startups of Spain's Real Madrid and seeks new technology partners."
+  },
+  "title": {
+    "en": "QueryPie selected for Real Madrid Next Accelerator Program",
+    "ko": "레알 마드리드가 택한 韓 보안 스타트업, 구단 보안 솔루션 구축",
+    "ja": "QueryPie selected for Real Madrid Next Accelerator Program"
+  },
+  "locales": {}
+}

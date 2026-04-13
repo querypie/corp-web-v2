@@ -17,7 +17,6 @@ export function cloneAsAuthoredContent(
 
   return {
     ...item,
-    contentFormat: item.contentType === "outlink" ? item.contentFormat : "tiptap",
     id: nextId,
     sortOrder: item.sortOrder,
     status: "hidden",

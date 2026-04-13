@@ -8,8 +8,6 @@ function cx(...values: Array<string | false | null | undefined>) {
 
 type AdminContentPreviewProps = {
   bodyHtml?: string;
-  bodyMarkdown: string;
-  contentFormat?: "markdown" | "tiptap";
   date: string;
   downloadHref?: string;
   downloadLabel?: string;
@@ -24,9 +22,7 @@ type AdminContentPreviewProps = {
 };
 
 export default function AdminContentPreview({
-  bodyHtml,
-  bodyMarkdown,
-  contentFormat = "markdown",
+  bodyHtml = "",
   date,
   downloadHref,
   downloadLabel = "Download Now",
@@ -86,11 +82,7 @@ export default function AdminContentPreview({
           </a>
         </div>
       ) : null}
-      <ContentBodyPreview
-        bodyHtml={bodyHtml}
-        bodyMarkdown={bodyMarkdown}
-        contentFormat={contentFormat}
-      />
+      <ContentBodyPreview bodyHtml={bodyHtml} />
     </div>
   );
 }

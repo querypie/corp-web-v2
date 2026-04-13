@@ -1,10 +1,10 @@
 "use client";
 
 import NewsDetailPage from "./NewsDetailPage";
-import { getLocalePath, type Locale } from "@/constants/i18n";
+import { type Locale } from "@/constants/i18n";
 import type { DocsDetailPageProps } from "../documentation/DocumentationDetailPage";
 import { useManagedContents } from "@/features/content/clientStore";
-import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getWriterLabel, type ManagedContentEntry } from "@/features/content/data";
+import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, isPublishedContentVisible, type ManagedContentEntry } from "@/features/content/data";
 import useHydrated from "@/hooks/useHydrated";
 
 type NewsDetailClientPageProps = {
@@ -22,7 +22,7 @@ export default function NewsDetailClientPage({
 }: NewsDetailClientPageProps) {
   const decodedSlug = decodeURIComponent(slug);
   const managedItems = useManagedContents("news", initialItems) ?? [];
-  const items = managedItems.filter((item) => item.status === "published");
+  const items = managedItems.filter((item) => isPublishedContentVisible(item, locale));
   const isHydrated = useHydrated();
 
   const currentIndex = items.findIndex((item) => item.id === decodedSlug);
@@ -41,7 +41,7 @@ export default function NewsDetailClientPage({
           category: "Previous Post",
           href: previousItem.contentType === "outlink"
             ? previousItem.externalUrl
-            : getLocalePath(locale, `/news/${previousItem.id}`),
+            : getPublicDetailHref("news", locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
           title: getLocalizedContent(previousItem.title, locale),
         }
@@ -51,7 +51,7 @@ export default function NewsDetailClientPage({
           category: "Next post",
           href: nextItem.contentType === "outlink"
             ? nextItem.externalUrl
-            : getLocalePath(locale, `/news/${nextItem.id}`),
+            : getPublicDetailHref("news", locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
           title: getLocalizedContent(nextItem.title, locale),
         }
@@ -62,9 +62,7 @@ export default function NewsDetailClientPage({
     <NewsDetailPage
       {...fallbackProps}
       bodyHtml={getLocalizedContent(currentItem.bodyHtml, locale)}
-      bodyMarkdown={getLocalizedContent(currentItem.bodyMarkdown, locale)}
       category="News"
-      contentFormat={currentItem.contentFormat}
       contentListItems={relatedItems}
       date={formatPublicDate(locale, currentItem.dateIso)}
       hideHeroImage={currentItem.hideHeroImage}

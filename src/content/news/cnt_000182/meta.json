@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2025-12-23",
+  "downloadCoverImageSrc": "/news/news-22.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "terrasky-and-querypie-ai-unveil-mitoco-buddy-for-work-2",
+  "imageSrc": "/news/news-22.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 10,
+  "status": "published",
+  "storageId": "cnt_000182",
+  "summary": {
+    "en": "QueryPie AI G.K. announces that TerraSky Co., Ltd.’s enterprise MCP-compatible AI platform, “mitoco Buddy,” has been officially launched.",
+    "ko": "QueryPie AI G.K. announces that TerraSky Co., Ltd.’s enterprise MCP-compatible AI platform, “mitoco Buddy,” has been officially launched.",
+    "ja": "QueryPie AI合同会社は、株式会社テラスカイが提供する、企業向けMCP対応AIプラットフォーム「mitoco Buddy」が、このたび正式にローンチされたことをお知らせいたします。"
+  },
+  "title": {
+    "en": "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
+    "ko": "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
+    "ja": "テラスカイ社のMCP対応AIプラットフォーム 「mitoco Buddy」が正式ローンチ"
+  },
+  "locales": {}
+}

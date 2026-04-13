@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2025-01-07",
+  "downloadCoverImageSrc": "/news/news-13.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.thesoftwarereport.com/the-top-50-software-ceos-of-2024/",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "the-top-50-software-ceos-of-2024",
+  "imageSrc": "/news/news-13.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 14,
+  "status": "published",
+  "storageId": "cnt_000178",
+  "summary": {
+    "en": "The Software Report is pleased to announce The Top 50 Software CEOs of 2024. The CEOs on this year’s list represent some of the most influential companies in the software industry, spanning from rapidly growing startups to established global leaders.",
+    "ko": "The Software Report is pleased to announce The Top 50 Software CEOs of 2024. The CEOs on this year’s list represent some of the most influential companies in the software industry, spanning from rapidly growing startups to established global leaders.",
+    "ja": "The Software Report is pleased to announce The Top 50 Software CEOs of 2024. The CEOs on this year’s list represent some of the most influential companies in the software industry, spanning from rapidly growing startups to established global leaders."
+  },
+  "title": {
+    "en": "The Top 50 Software CEOs of 2024",
+    "ko": "The Top 50 Software CEOs of 2024",
+    "ja": "The Top 50 Software CEOs of 2024"
+  },
+  "locales": {}
+}

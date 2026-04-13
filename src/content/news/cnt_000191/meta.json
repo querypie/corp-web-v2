@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2025-08-05",
+  "downloadCoverImageSrc": "/news/news-23.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.datanet.co.kr/news/articleView.html?idxno=204196",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "쿼리파이-일본-hr-saas-기업과-ai-보안-협력-체계-구축",
+  "imageSrc": "/news/news-23.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000191",
+  "summary": {
+    "en": "",
+    "ko": "데이터 보안 플랫폼 기업 쿼리파이(대표 황인서)가 일본 비즈니스 프로세스 아웃소싱(BPO) 기업 페이롤(Payroll)과 AI 및 보안 분야에서의 기술 제휴를 체결했다고 5일 발표했다. 이번 제휴를 통해 쿼리파이는 페이롤에 보안 솔루션과 관련 기술을 제공하고, AI 통합에 대한 최신 지식과 AI 기반 업무 효율화 솔루션을 지원한다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "",
+    "ko": "쿼리파이, 일본 HR SaaS 기업과 AI 보안 협력 체계 구축",
+    "ja": ""
+  },
+  "locales": {}
+}

@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2025-04-10",
+  "downloadCoverImageSrc": "/news/news-15.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://view.asiae.co.kr/article/2025033108392136156",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "쿼리파이-싱가포르-정부-지원-글로벌-사이버보안-프로그램-선정",
+  "imageSrc": "/news/news-15.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 6,
+  "status": "published",
+  "storageId": "cnt_000186",
+  "summary": {
+    "en": "",
+    "ko": "데이터 거버넌스 및 사이버 보안 솔루션을 제공하는 쿼리파이(QueryPie)가 싱가포르 정부 주도의 글로벌 사이버 보안 성장 프로그램인 ‘사이버부스트 카탈라이즈(CyberBoost Catalyse)’ 2기에 선정됐다. 31일 쿼리파이에 따르면 ‘사이버부스트 카탈라이즈’는 혁신적인 사이버 보안 기술을 가진 스타트업의 아시아 및 글로벌 시장 진출을 적극적으로 지원하는 프로그램이다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "",
+    "ko": "쿼리파이, 싱가포르 정부 지원 글로벌 사이버보안 프로그램 선정",
+    "ja": ""
+  },
+  "locales": {}
+}

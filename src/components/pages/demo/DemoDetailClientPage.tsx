@@ -9,7 +9,7 @@ import { useManagedContents } from "@/features/content/clientStore";
 import type { ContactPageCopy } from "@/features/contact/copy";
 import useHydrated from "@/hooks/useHydrated";
 import { demoCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/features/content/config";
-import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, type ManagedContentEntry } from "@/features/content/data";
+import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, isPublishedContentVisible, type ManagedContentEntry } from "@/features/content/data";
 import { getContentUnlockCookieName, isContentGatingEnabled } from "@/features/content/gating";
 
 type DemoDetailClientPageProps = {
@@ -31,7 +31,7 @@ export default function DemoDetailClientPage({
 }: DemoDetailClientPageProps) {
   const resolvedSlug = decodeURIComponent(slug);
   const managedItems = useManagedContents("demo", initialItems) ?? [];
-  const items = managedItems.filter((item) => item.status === "published");
+  const items = managedItems.filter((item) => isPublishedContentVisible(item, locale));
   const isHydrated = useHydrated();
   const [isUnlocked, setIsUnlocked] = useState(initialContentUnlocked);
 
@@ -82,7 +82,6 @@ export default function DemoDetailClientPage({
     <DemoDetailPage
       {...fallbackProps}
       bodyHtml={isGateActive ? fallbackProps.bodyHtml : getLocalizedContent(currentUseCase.bodyHtml, locale)}
-      bodyMarkdown={isGateActive ? fallbackProps.bodyMarkdown : getLocalizedContent(currentUseCase.bodyMarkdown, locale)}
       category={getCategoryLabel(demoCategoryConfigs, currentUseCase.categorySlug, locale)}
       contentOverlay={isGateActive ? (
         <ContentGateOverlay
@@ -93,7 +92,6 @@ export default function DemoDetailClientPage({
           unlockCookieName={getContentUnlockCookieName(currentUseCase.id)}
         />
       ) : undefined}
-      contentFormat={currentUseCase.contentFormat}
       contentListItems={relatedPublishedItems}
       downloadHref={
         currentUseCase.enableDownloadButton && currentUseCase.downloadPdfSrc

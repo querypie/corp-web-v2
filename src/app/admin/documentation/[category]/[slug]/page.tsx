@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import AdminManagedContentDetailPage from "../../../../../components/pages/admin/AdminManagedContentDetailPage";
 import { isAdminSectionCategory } from "@/features/content/config";
-import { readContentState } from "@/features/content/contentState.server";
+import { stripManagedContentBodies } from "@/features/content/data";
+import { readContentItem, readContentState } from "@/features/content/contentState.server";
 
 type Props = {
   params: Promise<{ category: string; slug: string }>;
@@ -13,7 +14,12 @@ export default async function AdminDocumentationCategoryDetailRoute({ params }: 
 
   if (!isAdminSectionCategory("documentation", category) || category === "all") notFound();
 
-  const initialItems = await readContentState("documentation");
+  const [initialItem, initialItems] = await Promise.all([
+    readContentItem("documentation", resolvedSlug, { categorySlug: category as never }),
+    readContentState("documentation"),
+  ]);
 
-  return <AdminManagedContentDetailPage categorySlug={category as never} initialItems={initialItems} itemId={resolvedSlug} section="documentation" />;
+  if (!initialItem) notFound();
+
+  return <AdminManagedContentDetailPage categorySlug={category as never} initialItem={initialItem} initialItems={initialItems.map(stripManagedContentBodies)} itemId={resolvedSlug} section="documentation" />;
 }

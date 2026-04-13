@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2025-11-10",
+  "downloadCoverImageSrc": "/news/news-22.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://itbusinesstoday.com/tech/ai/terrasky-and-querypie-ai-unveil-mitoco-buddy-for-work/",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "terrasky-and-querypie-ai-unveil-mitoco-buddy-for-work",
+  "imageSrc": "/news/news-22.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 11,
+  "status": "published",
+  "storageId": "cnt_000181",
+  "summary": {
+    "en": "QueryPie AI G.K. (Headquarters: Minato-ku, Tokyo; Co-CEO: Brant Hwang; hereinafter “QueryPie AI”) announced a collaboration with TerraSky Co., Ltd. (Headquarters: Chuo-ku, Tokyo; President & CEO: Hideya Sato) in the field of AI agent services. Through this collaboration, QueryPie AI’s enterprise AI platform, QueryPie AI Platform (AIP), has been adopted for TerraSky’s new service, “mitoco Buddy,” which integrates fragmented cloud services within enterprises, enhances data connectivity and utilization, and supports faster decision-making and business process automation.",
+    "ko": "QueryPie AI G.K. (Headquarters: Minato-ku, Tokyo; Co-CEO: Brant Hwang; hereinafter “QueryPie AI”) announced a collaboration with TerraSky Co., Ltd. (Headquarters: Chuo-ku, Tokyo; President & CEO: Hideya Sato) in the field of AI agent services. Through this collaboration, QueryPie AI’s enterprise AI platform, QueryPie AI Platform (AIP), has been adopted for TerraSky’s new service, “mitoco Buddy,” which integrates fragmented cloud services within enterprises, enhances data connectivity and utilization, and supports faster decision-making and business process automation.",
+    "ja": "QueryPie AI合同会社と株式会社テラスカイは、AIエージェント事業において協業を発表。QueryPie AIのエンタープライズ向けAIプラットフォーム「QueryPie AI Platform（AIP）」が、テラスカイの新サービス「mitoco Buddy」に採用され、企業内のクラウドサービス統合と業務自動化を支援します。"
+  },
+  "title": {
+    "en": "TerraSky and QueryPie AI Unveil ‘mitoco Buddy’ for Work",
+    "ko": "TerraSky and QueryPie AI Unveil ‘mitoco Buddy’ for Work",
+    "ja": "QueryPie AI、株式会社テラスカイと協業しAIエージェント「mitoco Buddy」を発表"
+  },
+  "locales": {}
+}

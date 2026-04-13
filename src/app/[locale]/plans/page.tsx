@@ -4,14 +4,14 @@ import { isLocale, type Locale } from "../../../constants/i18n";
 
 type PlansRouteProps = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ product?: string }>;
+  searchParams: Promise<{ acp?: string }>;
 };
 
 export default async function PlansRoute({ params, searchParams }: PlansRouteProps) {
   const { locale } = await params;
-  const { product } = await searchParams;
+  const { acp } = await searchParams;
 
   if (!isLocale(locale)) notFound();
 
-  return <PlansPage initialProductKey={product} locale={locale as Locale} />;
+  return <PlansPage initialProductKey={acp !== undefined ? "acp" : undefined} locale={locale as Locale} />;
 }

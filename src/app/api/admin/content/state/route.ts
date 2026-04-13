@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import {
   deleteAuthoredContent,
-  regenerateAuthoredContentSeed,
   saveAuthoredContent,
   updateAuthoredContentMeta,
 } from "@/features/content/authored.server";
@@ -12,7 +11,13 @@ import {
   updateContentStateStatus,
   upsertContentState,
 } from "@/features/content/contentState.server";
-import type { ManagedContentEntry, ManagedContentSection, ManagedContentStatus } from "@/features/content/data";
+import { stripManagedContentBodies } from "@/features/content/data";
+import type {
+  ManagedContentCategorySlug,
+  ManagedContentEntry,
+  ManagedContentSection,
+  ManagedContentStatus,
+} from "@/features/content/data";
 
 type ReplaceStateRequest = {
   items?: ManagedContentEntry[];
@@ -37,8 +42,17 @@ function parseSection(url: string) {
   return section as ManagedContentSection | null;
 }
 
-function isPersistedAuthoredItem(item: ManagedContentEntry) {
-  return item.contentFormat === "tiptap" || item.contentType === "outlink" || item.section === "news";
+function parseCategorySlug(url: string) {
+  const categorySlug = new URL(url).searchParams.get("categorySlug");
+  return categorySlug as ManagedContentCategorySlug | null;
+}
+
+function parseItemId(url: string) {
+  return new URL(url).searchParams.get("id");
+}
+
+function parseView(url: string) {
+  return new URL(url).searchParams.get("view");
 }
 
 function isSameItem(left: ManagedContentEntry | undefined, right: ManagedContentEntry) {
@@ -47,8 +61,18 @@ function isSameItem(left: ManagedContentEntry | undefined, right: ManagedContent
 
 export async function GET(request: Request) {
   const section = parseSection(request.url) ?? undefined;
-  const items = await readContentState(section);
-  return NextResponse.json({ items });
+  const categorySlug = parseCategorySlug(request.url) ?? undefined;
+  const itemId = parseItemId(request.url);
+  const view = parseView(request.url);
+  const items = await readContentState(section, { categorySlug });
+
+  if (itemId) {
+    return NextResponse.json({ item: items.find((entry) => entry.id === itemId) ?? null });
+  }
+
+  return NextResponse.json({
+    items: view === "list" ? items.map(stripManagedContentBodies) : items,
+  });
 }
 
 export async function POST(request: Request) {
@@ -63,33 +87,25 @@ export async function POST(request: Request) {
     const currentMap = new Map(currentItems.map((item) => [item.id, item]));
     const payloadSections = new Set(payload.items.map((item) => item.section));
     const nextItems: ManagedContentEntry[] = [];
-    let shouldRegenerateAuthoredSeed = false;
-
     for (const item of payload.items) {
-      if (isPersistedAuthoredItem(item)) {
-        const currentItem = currentMap.get(item.id);
+      const normalizedItem = item;
+      const currentItem = currentMap.get(normalizedItem.id);
 
-        if (isSameItem(currentItem, item)) {
-          nextItems.push(item);
-          continue;
-        }
-
-        const savedItem = await saveAuthoredContent(
-          item.storageId || currentItem?.storageId
-            ? {
-                ...item,
-                storageId: item.storageId ?? currentItem?.storageId,
-              }
-            : item,
-          { regenerateSeed: false },
-        );
-
-        shouldRegenerateAuthoredSeed = true;
-        nextItems.push(savedItem);
+      if (isSameItem(currentItem, normalizedItem)) {
+        nextItems.push(normalizedItem);
         continue;
       }
 
-      nextItems.push(item);
+      const savedItem = await saveAuthoredContent(
+        normalizedItem.storageId || currentItem?.storageId
+          ? {
+              ...normalizedItem,
+              storageId: normalizedItem.storageId ?? currentItem?.storageId,
+            }
+          : normalizedItem,
+      );
+
+      nextItems.push(savedItem);
     }
 
     const itemsToPersist =
@@ -99,10 +115,6 @@ export async function POST(request: Request) {
             ...currentItems.filter((item) => !payloadSections.has(item.section)),
           ]
         : nextItems;
-
-    if (shouldRegenerateAuthoredSeed) {
-      await regenerateAuthoredContentSeed();
-    }
 
     const items = await replaceContentState(itemsToPersist);
     return NextResponse.json({ items });
@@ -122,10 +134,8 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: "item is required" }, { status: 400 });
   }
 
-  const savedItem =
-    isPersistedAuthoredItem(item)
-      ? await saveAuthoredContent(item)
-      : item;
+  const normalizedItem = item;
+  const savedItem = await saveAuthoredContent(normalizedItem);
 
   await upsertContentState(savedItem, payload.currentId);
   return NextResponse.json({ item: savedItem });
@@ -138,7 +148,7 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ error: "id and status are required" }, { status: 400 });
   }
 
-  if (payload.item && (payload.item.contentFormat === "tiptap" || payload.item.contentType === "outlink" || payload.item.section === "news")) {
+  if (payload.item) {
     await updateAuthoredContentMeta({
       categorySlug: payload.item.categorySlug,
       id: payload.item.id,
@@ -159,7 +169,7 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: "id is required" }, { status: 400 });
   }
 
-  if (payload.item && (payload.item.contentFormat === "tiptap" || payload.item.contentType === "outlink" || payload.item.section === "news")) {
+  if (payload.item) {
     await deleteAuthoredContent({
       categorySlug: payload.item.categorySlug,
       id: payload.item.id,

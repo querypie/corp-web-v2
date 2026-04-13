@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2024-11-21",
+  "downloadCoverImageSrc": "/news/news-12.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.datanet.co.kr/news/articleView.html?idxno=197957",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "쿼리파이-글로벌-탑-100-소프트웨어-기업-선정",
+  "imageSrc": "/news/news-12.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 7,
+  "status": "published",
+  "storageId": "cnt_000185",
+  "summary": {
+    "en": "",
+    "ko": "쿼리파이(대표 황인서)는 ‘더 소프트웨어 리포트(The Software Report)’에서 주관하는 ‘탑 100 소프트웨어 기업’에 선정됐다고 21일 밝혔다. ‘더 소프트웨어 리포트’는 글로벌 소프트웨어 산업 내 권위 있는 기관 중 하나로, 후보 기업의 실적에 대한 심층 조사 수행을 포함해 제품 기능, 고객 만족도, 기업 평판, 혁신적 역량, 조직의 깊이, ESG 참여도 및 장기적 실행 가능성 등 수많은 요소들을 종합적으로 고려하여 매해 최고의 소프트웨어 기업 100곳을 선정한다. 지난 해 어도비, 크라우드스트라이크, 데이터독 등이 선정된 바 있다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "",
+    "ko": "쿼리파이, 글로벌 ‘탑 100 소프트웨어 기업’ 선정",
+    "ja": ""
+  },
+  "locales": {}
+}

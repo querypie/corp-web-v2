@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
+  type ManagedContentCategorySlug,
   type ManagedContentEntry,
   type ManagedContentSection,
   type ManagedContentStatus,
@@ -14,29 +15,63 @@ type ManagedContentChangeDetail = {
   shouldRefetch?: boolean;
 };
 
+type ManagedContentView = "full" | "list";
+
 const snapshotCache = new Map<string, ManagedContentEntry[]>();
 
 function getCacheKey(section?: ManagedContentSection) {
   return section ?? "__all__";
 }
 
-function writeSnapshotCache(items: ManagedContentEntry[], section?: ManagedContentSection) {
-  snapshotCache.set(getCacheKey(section), items);
+function getScopedCacheKey(
+  section?: ManagedContentSection,
+  categorySlug?: ManagedContentCategorySlug | "all",
+  view: ManagedContentView = "full",
+) {
+  return `${getCacheKey(section)}::${categorySlug ?? "__all__"}::${view}`;
+}
+
+function writeSnapshotCache(
+  items: ManagedContentEntry[],
+  section?: ManagedContentSection,
+  categorySlug?: ManagedContentCategorySlug | "all",
+  view: ManagedContentView = "full",
+) {
+  snapshotCache.set(getScopedCacheKey(section, categorySlug, view), items);
 
   if (section) {
-    const allItems = snapshotCache.get(getCacheKey());
+    const sectionAllKey = getScopedCacheKey(section, "all", view);
+    const sectionAllItems = snapshotCache.get(sectionAllKey);
+
+    if (sectionAllItems) {
+      snapshotCache.set(
+        sectionAllKey,
+        categorySlug && categorySlug !== "all"
+          ? [
+              ...sectionAllItems.filter((item) => item.categorySlug !== categorySlug),
+              ...items,
+            ]
+          : items,
+      );
+    }
+
+    const allItems = snapshotCache.get(getScopedCacheKey(undefined, "all", view));
 
     if (allItems) {
       snapshotCache.set(
-        getCacheKey(),
-        [...allItems.filter((item) => item.section !== section), ...items],
+        getScopedCacheKey(undefined, "all", view),
+        [...allItems.filter((item) => item.section !== section), ...(snapshotCache.get(sectionAllKey) ?? items)],
       );
     }
   }
 }
 
-function readSnapshotCache(section?: ManagedContentSection) {
-  return snapshotCache.get(getCacheKey(section));
+function readSnapshotCache(
+  section?: ManagedContentSection,
+  categorySlug?: ManagedContentCategorySlug | "all",
+  view: ManagedContentView = "full",
+) {
+  return snapshotCache.get(getScopedCacheKey(section, categorySlug, view));
 }
 
 function emitChange(detail?: ManagedContentChangeDetail) {
@@ -44,8 +79,26 @@ function emitChange(detail?: ManagedContentChangeDetail) {
   window.dispatchEvent(new CustomEvent<ManagedContentChangeDetail>(MANAGED_CONTENT_STORE_EVENT, { detail }));
 }
 
-async function readState(section?: ManagedContentSection) {
-  const search = section ? `?section=${section}` : "";
+async function readState(
+  section?: ManagedContentSection,
+  categorySlug?: ManagedContentCategorySlug | "all",
+  view: ManagedContentView = "full",
+) {
+  const params = new URLSearchParams();
+
+  if (section) {
+    params.set("section", section);
+  }
+
+  if (categorySlug && categorySlug !== "all") {
+    params.set("categorySlug", categorySlug);
+  }
+
+  if (view === "list") {
+    params.set("view", "list");
+  }
+
+  const search = params.size ? `?${params.toString()}` : "";
   const response = await fetch(`/api/admin/content/state${search}`, {
     cache: "no-store",
   });
@@ -56,12 +109,40 @@ async function readState(section?: ManagedContentSection) {
 
   const payload = (await response.json()) as { items?: ManagedContentEntry[] };
   const items = payload.items ?? [];
-  writeSnapshotCache(items, section);
+  writeSnapshotCache(items, section, categorySlug, view);
   return items;
 }
 
-export async function getManagedContentsSnapshot(section?: ManagedContentSection) {
-  return readState(section);
+export async function getManagedContentsSnapshot(
+  section?: ManagedContentSection,
+  categorySlug?: ManagedContentCategorySlug | "all",
+  view: ManagedContentView = "full",
+) {
+  return readState(section, categorySlug, view);
+}
+
+export async function getManagedContentDetail(
+  section: ManagedContentSection,
+  id: string,
+) {
+  const params = new URLSearchParams({
+    id,
+    section,
+  });
+  const response = await fetch(`/api/admin/content/state?${params.toString()}`, {
+    cache: "no-store",
+  });
+
+  const payload = (await response.json().catch(() => ({}))) as {
+    error?: string;
+    item?: ManagedContentEntry | null;
+  };
+
+  if (!response.ok) {
+    throw new Error(payload.error ?? "Failed to read content detail.");
+  }
+
+  return payload.item ?? null;
 }
 
 export async function persistManagedContents(items: ManagedContentEntry[]) {
@@ -183,17 +264,27 @@ export async function reorderManagedContents(orderedItems: ManagedContentEntry[]
 export function useManagedContents(
   section?: ManagedContentSection,
   initialItems?: ManagedContentEntry[],
+  categorySlug?: ManagedContentCategorySlug | "all",
+  view: ManagedContentView = "full",
 ) {
   const initialItemsRef = useRef(initialItems);
+  const hasBootstrappedDataRef = useRef(Boolean(readSnapshotCache(section, categorySlug, view) ?? initialItemsRef.current?.length));
   const [items, setItems] = useState<ManagedContentEntry[]>(() =>
-    readSnapshotCache(section) ?? initialItemsRef.current ?? [],
+    readSnapshotCache(section, categorySlug, view) ?? initialItemsRef.current ?? [],
   );
+
+  useEffect(() => {
+    if (initialItemsRef.current?.length) {
+      writeSnapshotCache(initialItemsRef.current, section, categorySlug, view);
+      setItems((current) => (current.length ? current : initialItemsRef.current ?? []));
+    }
+  }, [categorySlug, section, view]);
 
   useEffect(() => {
     let active = true;
 
     const sync = () => {
-      void getManagedContentsSnapshot(section)
+      void getManagedContentsSnapshot(section, categorySlug, view)
         .then((nextItems) => {
           if (!active) return;
           setItems(nextItems);
@@ -213,7 +304,7 @@ export function useManagedContents(
       }
 
       if (detail?.shouldRefetch === false) {
-        const cached = readSnapshotCache(section);
+        const cached = readSnapshotCache(section, categorySlug, view);
 
         if (cached && active) {
           setItems(cached);
@@ -225,20 +316,39 @@ export function useManagedContents(
       sync();
     };
 
-    sync();
+    if (!hasBootstrappedDataRef.current) {
+      sync();
+    } else {
+      hasBootstrappedDataRef.current = false;
+    }
+
     window.addEventListener(MANAGED_CONTENT_STORE_EVENT, handleChange as EventListener);
 
     return () => {
       active = false;
       window.removeEventListener(MANAGED_CONTENT_STORE_EVENT, handleChange as EventListener);
     };
-  }, [section]);
+  }, [categorySlug, section, view]);
 
   return items;
 }
 
-export function useManagedContentsLoading(section?: ManagedContentSection) {
-  const [isLoading, setIsLoading] = useState(true);
+export function useManagedContentsLoading(
+  section?: ManagedContentSection,
+  initialItems?: ManagedContentEntry[],
+  categorySlug?: ManagedContentCategorySlug | "all",
+  view: ManagedContentView = "full",
+) {
+  const initialItemsRef = useRef(initialItems);
+  const hasBootstrappedDataRef = useRef(Boolean(readSnapshotCache(section, categorySlug, view) ?? initialItemsRef.current?.length));
+  const [isLoading, setIsLoading] = useState(() => !hasBootstrappedDataRef.current);
+
+  useEffect(() => {
+    if (initialItemsRef.current?.length) {
+      writeSnapshotCache(initialItemsRef.current, section, categorySlug, view);
+      setIsLoading(false);
+    }
+  }, [categorySlug, section, view]);
 
   useEffect(() => {
     let active = true;
@@ -247,7 +357,7 @@ export function useManagedContentsLoading(section?: ManagedContentSection) {
       if (!active) return;
       setIsLoading(true);
 
-      void getManagedContentsSnapshot(section)
+      void getManagedContentsSnapshot(section, categorySlug, view)
         .catch(() => {
           // Loading state should still resolve even if sync falls back to cached/initial data elsewhere.
         })
@@ -268,14 +378,19 @@ export function useManagedContentsLoading(section?: ManagedContentSection) {
       sync();
     };
 
-    sync();
+    if (!hasBootstrappedDataRef.current) {
+      sync();
+    } else {
+      hasBootstrappedDataRef.current = false;
+    }
+
     window.addEventListener(MANAGED_CONTENT_STORE_EVENT, handleChange as EventListener);
 
     return () => {
       active = false;
       window.removeEventListener(MANAGED_CONTENT_STORE_EVENT, handleChange as EventListener);
     };
-  }, [section]);
+  }, [categorySlug, section, view]);
 
   return isLoading;
 }

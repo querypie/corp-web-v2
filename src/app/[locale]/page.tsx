@@ -9,6 +9,7 @@ import {
 import {
   getContentThumbnailSrc,
   getLocalizedContent,
+  isPublishedContentVisible,
   getPublicDetailHref,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
@@ -67,7 +68,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         (item) =>
           item.section === section &&
           item.categorySlug === categorySlug &&
-          item.status === "published",
+          isPublishedContentVisible(item, locale),
       )
       .sort((left, right) => (right.dateIso || "").localeCompare(left.dateIso || ""))[0];
 
@@ -481,10 +482,10 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
   }[locale];
 
   const newsItems = (await readContentState("news"))
-    .filter((item) => item.status === "published")
+    .filter((item) => isPublishedContentVisible(item, locale))
     .slice(0, 3)
     .map((item) => ({
-      href: item.contentType === "outlink" ? item.externalUrl : getLocalePath(locale, `/news/${item.id}`),
+      href: item.contentType === "outlink" ? item.externalUrl : getPublicDetailHref("news", locale, item.id),
       imageSrc: getContentThumbnailSrc(item.imageSrc),
       isExternal: item.contentType === "outlink",
       title: getLocalizedContent(item.title, locale),

@@ -11,6 +11,7 @@ import {
   getManagedCategoryLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
+  isPublishedContentVisible,
   getPublicDetailHref,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
@@ -32,24 +33,24 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
   if (!isLocale(locale)) notFound();
 
   const cookieStore = await cookies();
-  const docsItems = (await readContentState("documentation")).filter((item) => item.status === "published");
+  const docsItems = (await readContentState("documentation")).filter((item) => isPublishedContentVisible(item, locale));
   const currentIndex = docsItems.findIndex((item) => item.id === resolvedSlug);
   const currentEntry = currentIndex >= 0 ? docsItems[currentIndex] : null;
 
-  const isContentUnlocked = currentEntry
-    ? hasUnlockedContentAccess(cookieStore.get(getContentUnlockCookieName(currentEntry.id))?.value)
-    : false;
+  if (!currentEntry) {
+    notFound();
+  }
 
-  if (currentEntry?.contentType === "outlink") {
+  const isContentUnlocked = hasUnlockedContentAccess(
+    cookieStore.get(getContentUnlockCookieName(currentEntry.id))?.value,
+  );
+
+  if (currentEntry.contentType === "outlink") {
     redirect(currentEntry.externalUrl);
   }
 
-  const categoryItems = currentEntry
-    ? docsItems.filter((item) => item.categorySlug === currentEntry.categorySlug)
-    : [];
-  const categoryIndex = currentEntry
-    ? categoryItems.findIndex((item) => item.id === resolvedSlug)
-    : -1;
+  const categoryItems = docsItems.filter((item) => item.categorySlug === currentEntry.categorySlug);
+  const categoryIndex = categoryItems.findIndex((item) => item.id === resolvedSlug);
 
   const previousItem = categoryIndex > 0 ? categoryItems[categoryIndex - 1] : null;
   const nextItem = categoryIndex < categoryItems.length - 1 ? categoryItems[categoryIndex + 1] : null;
@@ -73,12 +74,10 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
       : null,
   ].filter((item): item is NonNullable<typeof item> => !!item);
 
-  const isGateActive = currentEntry
-    ? isContentGatingEnabled(currentEntry) && !isContentUnlocked
-    : false;
-  const localizedBodyHtml = currentEntry ? getLocalizedContent(currentEntry.bodyHtml, locale) : "";
+  const isGateActive = isContentGatingEnabled(currentEntry) && !isContentUnlocked;
+  const localizedBodyHtml = getLocalizedContent(currentEntry.bodyHtml, locale);
   const previewBodyHtml =
-    currentEntry && isGateActive
+    isGateActive
       ? buildContentPreviewHtml(localizedBodyHtml, currentEntry.gatingLevel)
       : localizedBodyHtml;
 
@@ -86,32 +85,26 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
     <DocsDetailClientPage
       contactCopy={getContactPageCopy(locale)}
       fallbackProps={{
-        docsHref: currentEntry
-          ? getCategoryHref(docsCategoryConfigs, currentEntry.categorySlug, locale)
-          : getLocalePath(locale, "/features/documentation"),
+        docsHref: getCategoryHref(docsCategoryConfigs, currentEntry.categorySlug, locale),
         slug: resolvedSlug,
         bodyHtml: previewBodyHtml,
-        bodyMarkdown: currentEntry ? getLocalizedContent(currentEntry.bodyMarkdown, locale) : "",
-        category: currentEntry ? getManagedCategoryLabel("documentation", currentEntry.categorySlug, locale) : "",
-        contentFormat: currentEntry?.contentFormat ?? "markdown",
+        category: getManagedCategoryLabel("documentation", currentEntry.categorySlug, locale),
         contentListDescription: "",
         contentListItems: relatedItems,
         contentListLinks: [],
         contentListTitle: "Contents List",
-        date: currentEntry ? formatPublicDate(locale, currentEntry.dateIso) : "",
+        date: formatPublicDate(locale, currentEntry.dateIso),
         downloadHref:
-          currentEntry?.enableDownloadButton && currentEntry.downloadPdfSrc
+          currentEntry.enableDownloadButton && currentEntry.downloadPdfSrc
             ? getLocalePath(locale, `/features/documentation/${resolvedSlug}/download`)
             : undefined,
-        hideHeroImage: currentEntry?.hideHeroImage ?? false,
-        heroImageAlt: currentEntry ? getLocalizedContent(currentEntry.title, locale) : "",
-        heroImageSrc: currentEntry?.imageSrc ?? "/images/common/fallback-contents.jpg",
-        title: currentEntry ? getLocalizedContent(currentEntry.title, locale) : "",
-        writer: currentEntry
-          ? currentEntry.authorRole
-            ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
-            : currentEntry.authorName
-          : "",
+        hideHeroImage: currentEntry.hideHeroImage,
+        heroImageAlt: getLocalizedContent(currentEntry.title, locale),
+        heroImageSrc: currentEntry.imageSrc || "/images/common/fallback-contents.jpg",
+        title: getLocalizedContent(currentEntry.title, locale),
+        writer: currentEntry.authorRole
+          ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
+          : currentEntry.authorName,
       } satisfies DocsDetailPageProps}
       initialContentUnlocked={isContentUnlocked}
       initialItems={docsItems}

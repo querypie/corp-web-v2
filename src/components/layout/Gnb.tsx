@@ -7,6 +7,7 @@ import Button from "../common/Button";
 import {
   getCompanySubItems,
   getFeaturesSubItems,
+  getPlansSubItems,
   getPrimaryNavHref,
   getSolutionsSubItems,
 } from "../../constants/navigation";
@@ -100,14 +101,6 @@ export default function Gnb({
   }, [pathname]);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    setCurrentSearch(window.location.search.replace(/^\?/, ""));
-  }, [pathname]);
-
-  useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
@@ -148,6 +141,15 @@ export default function Gnb({
     };
   }, [mobileLocaleOpen]);
 
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const nextSearch = window.location.search.replace(/^\?/, "");
+    setCurrentSearch((current) => (current === nextSearch ? current : nextSearch));
+  });
+
   /* 언어 드롭다운은 현재 페이지를 유지한 채 locale만 변경 */
   const localeSubItems = [
     { label: "English", href: getLocaleHref(pathname, "en", currentSearch) },
@@ -158,8 +160,8 @@ export default function Gnb({
     { title: items[0], items: getSolutionsSubItems(locale) },
     { title: items[1], items: getFeaturesSubItems(locale) },
     { title: items[2], items: getCompanySubItems(locale) },
+    { title: items[3], items: getPlansSubItems(locale) },
   ];
-  const plansLabel = items[3];
 
   return (
     <>
@@ -503,13 +505,6 @@ export default function Gnb({
               </div>
             ))}
 
-            <a
-              className="type-body-lg text-fg transition-transform active:scale-[0.98]"
-              href={getPrimaryNavHref(plansLabel, locale)}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              {plansLabel}
-            </a>
           </nav>
         </div>
       ) : null}

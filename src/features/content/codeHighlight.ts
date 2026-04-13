@@ -16,6 +16,25 @@ function unescapeHtml(value: string) {
     .replace(/&amp;/g, "&");
 }
 
+function stripPersistedHighlightSpans(value: string) {
+  let normalized = value;
+  let previous = "";
+
+  while (previous !== normalized) {
+    previous = normalized;
+    normalized = normalized.replace(
+      /<span\b[^>]*class=(["'])[^"']*\b(?:type-content-mono|code-token-[^"'\s]+)\b[^"']*\1[^>]*>([\s\S]*?)<\/span>/g,
+      "$2",
+    );
+  }
+
+  return normalized;
+}
+
+function normalizeStoredCodeBlock(codeContent: string) {
+  return stripPersistedHighlightSpans(unescapeHtml(codeContent));
+}
+
 function wrapToken(tokenClass: string, value: string) {
   return `<span class="type-content-mono ${tokenClass}">${value}</span>`;
 }
@@ -153,7 +172,7 @@ export function highlightCodeBlocksInHtml(html: string) {
   return html.replace(
     /<pre><code(?: class="language-([^"]+)")?>([\s\S]*?)<\/code><\/pre>/g,
     (_match, language: string | undefined, codeContent: string) => {
-      const rawCode = unescapeHtml(codeContent);
+      const rawCode = normalizeStoredCodeBlock(codeContent);
       return renderLineNumberedCodeBlock(rawCode, language);
     },
   );

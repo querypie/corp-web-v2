@@ -42,7 +42,6 @@ type SaveAuthoredContentInput = Pick<
   | "bodyHtml"
   | "bodyRichText"
   | "categorySlug"
-  | "contentFormat"
   | "contentType"
   | "dateIso"
   | "downloadCoverImageSrc"
@@ -71,10 +70,6 @@ function getAuthoredSectionRoot(section: ManagedContentSection) {
   }
 
   return path.join(contentRoot, section);
-}
-
-function getAuthoredSeedPath(section: ManagedContentSection) {
-  return path.join(getAuthoredSectionRoot(section), "content-seed.json");
 }
 
 function getEntryDir(
@@ -106,15 +101,6 @@ function normalizeLocalizedRecord(value: Partial<Record<Locale, string>> | undef
     en: value?.en ?? "",
     ko: value?.ko ?? value?.en ?? "",
     ja: value?.ja ?? value?.en ?? "",
-  };
-}
-
-function createSeedEntry(entry: ManagedContentEntry): ManagedContentEntry {
-  return {
-    ...entry,
-    bodyHtml: createEmptyLocalizedContent(),
-    bodyMarkdown: createEmptyLocalizedContent(),
-    bodyRichText: createEmptyLocalizedContent(),
   };
 }
 
@@ -252,11 +238,7 @@ export async function readAuthoredManagedContents() {
   );
 
   const metaFiles = await readAuthoredMetaFiles();
-  const seedEntriesBySection: Record<ManagedContentSection, ManagedContentEntry[]> = {
-    demo: [],
-    documentation: [],
-    news: [],
-  };
+  const entries: ManagedContentEntry[] = [];
 
   for (const metaFile of metaFiles) {
     const meta = await readMetaFile(metaFile);
@@ -289,14 +271,12 @@ export async function readAuthoredManagedContents() {
 
     await writeFileAtomic(metaFile, `${JSON.stringify(normalizedMeta, null, 2)}\n`);
 
-    seedEntriesBySection[meta.section].push({
+    entries.push({
       authorName: meta.authorName,
       authorRole: meta.authorRole,
       bodyHtml,
-      bodyMarkdown: createEmptyLocalizedContent(),
       bodyRichText,
       categorySlug: meta.categorySlug,
-      contentFormat: meta.contentType === "content" ? "tiptap" : "markdown",
       contentType: meta.contentType ?? "content",
       dateIso: meta.dateIso,
       downloadCoverImageSrc: meta.downloadCoverImageSrc ?? "",
@@ -318,47 +298,12 @@ export async function readAuthoredManagedContents() {
     });
   }
 
-  return [
-    ...seedEntriesBySection.demo,
-    ...seedEntriesBySection.documentation,
-    ...seedEntriesBySection.news,
-  ];
-}
-
-export async function regenerateAuthoredContentSeed() {
-  const entries = await readAuthoredManagedContents();
-  const entriesBySection: Record<ManagedContentSection, ManagedContentEntry[]> = {
-    demo: [],
-    documentation: [],
-    news: [],
-  };
-
-  entries.forEach((entry) => {
-    entriesBySection[entry.section].push(createSeedEntry(entry));
-  });
-
-  await Promise.all(
-    (Object.entries(entriesBySection) as Array<[ManagedContentSection, ManagedContentEntry[]]>).map(
-      async ([section, sectionEntries]) => {
-        await writeFileAtomic(
-          getAuthoredSeedPath(section),
-          `${JSON.stringify(sectionEntries, null, 2)}\n`,
-        );
-      },
-    ),
-  );
-
   return entries;
 }
 
 export async function saveAuthoredContent(
   input: SaveAuthoredContentInput,
-  options?: { regenerateSeed?: boolean },
 ) {
-  if (input.contentType === "content" && input.contentFormat !== "tiptap") {
-    throw new Error("Content-type authored entries must be saved as TipTap content.");
-  }
-
   const storageId = input.storageId || (await createNextStorageId());
   const entryDir = getEntryDir(input.section, input.categorySlug, storageId);
 
@@ -421,13 +366,8 @@ export async function saveAuthoredContent(
 
   await writeFileAtomic(path.join(entryDir, "meta.json"), `${JSON.stringify(meta, null, 2)}\n`);
 
-  if (options?.regenerateSeed !== false) {
-    await regenerateAuthoredContentSeed();
-  }
-
   return {
     ...input,
-    bodyMarkdown: createEmptyLocalizedContent(),
     storageId,
   } satisfies ManagedContentEntry;
 }
@@ -446,12 +386,10 @@ export async function deleteAuthoredContent({
   const entryDir = await findAuthoredEntryDir({ categorySlug, id, section, storageId });
 
   if (!entryDir || !existsSync(entryDir)) {
-    await regenerateAuthoredContentSeed();
     return { deleted: false };
   }
 
   await fs.rm(entryDir, { force: true, recursive: true });
-  await regenerateAuthoredContentSeed();
 
   return { deleted: true };
 }
@@ -483,7 +421,6 @@ export async function updateAuthoredContentMeta({
   };
 
   await writeFileAtomic(metaPath, `${JSON.stringify(nextMeta, null, 2)}\n`);
-  await regenerateAuthoredContentSeed();
 
   return nextMeta;
 }

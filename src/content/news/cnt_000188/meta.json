@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2025-05-15",
+  "downloadCoverImageSrc": "/news/news-17.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.datanet.co.kr/news/articleView.html?idxno=202021",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "쿼리파이-mcp에-보안-기능-탑재해-자유로운-ai-사용-지원",
+  "imageSrc": "/news/news-17.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000188",
+  "summary": {
+    "en": "",
+    "ko": "쿼리파이가 AI와 SaaS를 자유롭게 사용하면서 제로 트러스트 원칙의 통제를 제공하는 ‘시큐어 엔터프라이즈 AI 허브(Secure Enterprise AI Hub, 이하 AI 허브)’ 출시를 예고하고 있어 주목된다. AI 허브는 MCP(Model Context Protocol)를 활용하고 쿼리파이의 통제 기술을 적용해 안전하게 AI를 연결할 수 있게 한다. 사용자와 AI·LLM, 엔터프라이즈 리소스를 안전하고 자유롭게 연결할 수 있으며, 기업·기관의 보안 정책을 적용할 수 있다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "",
+    "ko": "쿼리파이 “MCP에 보안 기능 탑재해 자유로운 AI 사용 지원",
+    "ja": ""
+  },
+  "locales": {}
+}

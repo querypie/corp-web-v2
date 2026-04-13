@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2025-07-22",
+  "downloadCoverImageSrc": "/news/news-19.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://byline.network/2025/07/22-443/",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "쿼리파이-ai-기반-데이터-보안-솔루션-버전-공개1년간-무료-사용-가능",
+  "imageSrc": "/news/news-19.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 2,
+  "status": "published",
+  "storageId": "cnt_000190",
+  "summary": {
+    "en": "",
+    "ko": "데이터 보안 플랫폼 기업 쿼리파이(대표 황인서)는 자사의 엔터프라이즈급 보안 솔루션 ‘쿼리파이(QueryPie)’를 사용자 누구나 1년간 무료로 사용할 수 있는 ‘쿼리파이 커뮤니티 버전’으로 공개했다고 밝혔다. 이번 커뮤니티 버전은 많은 기업들이 비용 부담 없이 직접 설치해 운영할 수 있도록 설계된 무료 배포판이다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "",
+    "ko": "쿼리파이, AI 기반 데이터 보안 솔루션 버전 공개…1년간 무료 사용 가능",
+    "ja": ""
+  },
+  "locales": {}
+}

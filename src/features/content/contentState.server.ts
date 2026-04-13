@@ -5,14 +5,22 @@ import path from "path";
 import {
   createLocalizedContent,
   sortManagedContents,
+  type ManagedContentCategorySlug,
   type ManagedContentEntry,
   type ManagedContentSection,
   type ManagedContentStatus,
 } from "./data";
-import { readServerManagedContents } from "./serverSeed";
+import { readAuthoredManagedContents } from "./authored.server";
 
 const stateRoot = path.join(process.cwd(), "src", "content", "state");
 const statePath = path.join(stateRoot, "content-state.json");
+let cachedState:
+  | {
+      items: ManagedContentEntry[];
+      mtimeMs: number;
+      size: number;
+    }
+  | null = null;
 
 async function ensureStateRoot() {
   await fs.mkdir(stateRoot, { recursive: true });
@@ -20,14 +28,41 @@ async function ensureStateRoot() {
 
 async function readStateFile() {
   if (!existsSync(statePath)) {
+    cachedState = null;
     return null;
   }
 
   try {
+    const stat = await fs.stat(statePath);
+
+    if (
+      cachedState &&
+      cachedState.mtimeMs === stat.mtimeMs &&
+      cachedState.size === stat.size
+    ) {
+      return cachedState.items;
+    }
+
     const raw = await fs.readFile(statePath, "utf8");
     const parsed = JSON.parse(raw) as ManagedContentEntry[];
-    return Array.isArray(parsed) ? parsed : null;
+    if (!Array.isArray(parsed)) {
+      cachedState = null;
+      return null;
+    }
+
+    const normalizedItems = sortManagedContents(
+      dedupeManagedEntries(filterManagedEntries(parsed.map(normalizeStateEntry))),
+    );
+
+    cachedState = {
+      items: normalizedItems,
+      mtimeMs: stat.mtimeMs,
+      size: stat.size,
+    };
+
+    return normalizedItems;
   } catch {
+    cachedState = null;
     return null;
   }
 }
@@ -37,10 +72,8 @@ function normalizeStateEntry(item: Partial<ManagedContentEntry>): ManagedContent
     authorName: item.authorName ?? "",
     authorRole: item.authorRole ?? "",
     bodyHtml: item.bodyHtml ?? createLocalizedContent(),
-    bodyMarkdown: item.bodyMarkdown ?? createLocalizedContent(),
     bodyRichText: item.bodyRichText ?? createLocalizedContent(),
     categorySlug: item.categorySlug ?? "use-cases",
-    contentFormat: item.contentFormat ?? "markdown",
     contentType: item.contentType ?? (item.section === "news" ? "outlink" : "content"),
     dateIso: item.dateIso ?? "",
     downloadCoverImageSrc: item.downloadCoverImageSrc ?? "",
@@ -78,20 +111,42 @@ function dedupeManagedEntries(items: ManagedContentEntry[]) {
 
 async function readAllContentState() {
   const fileState = await readStateFile();
-  return fileState
-    ? sortManagedContents(dedupeManagedEntries(filterManagedEntries(fileState.map(normalizeStateEntry))))
-    : dedupeManagedEntries(filterManagedEntries(await readServerManagedContents()));
+  return fileState ?? dedupeManagedEntries(filterManagedEntries(await readAuthoredManagedContents()));
 }
 
-export async function readContentState(section?: ManagedContentSection) {
+export async function readContentState(
+  section?: ManagedContentSection,
+  options?: { categorySlug?: ManagedContentCategorySlug },
+) {
   const items = await readAllContentState();
-  return section ? items.filter((item) => item.section === section) : items;
+  const sectionItems = section ? items.filter((item) => item.section === section) : items;
+
+  if (!options?.categorySlug) {
+    return sectionItems;
+  }
+
+  return sectionItems.filter((item) => item.categorySlug === options.categorySlug);
+}
+
+export async function readContentItem(
+  section: ManagedContentSection,
+  id: string,
+  options?: { categorySlug?: ManagedContentCategorySlug },
+) {
+  const items = await readContentState(section, options);
+  return items.find((item) => item.id === id) ?? null;
 }
 
 export async function writeContentState(items: ManagedContentEntry[]) {
   await ensureStateRoot();
   const sortedItems = sortManagedContents(dedupeManagedEntries(items));
   await fs.writeFile(statePath, `${JSON.stringify(sortedItems, null, 2)}\n`, "utf8");
+  const stat = await fs.stat(statePath);
+  cachedState = {
+    items: sortedItems,
+    mtimeMs: stat.mtimeMs,
+    size: stat.size,
+  };
   return sortedItems;
 }
 

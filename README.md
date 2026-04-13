@@ -1,165 +1,208 @@
-# CMS Renewal
+# CMS
 
-Next.js 기반의 퍼블릭 웹사이트와 관리자 CMS를 함께 관리하는 프로젝트입니다.
+Next.js App Router 기반의 퍼블릭 사이트와 관리자 CMS를 함께 운영하는 프로젝트입니다.
 
-## Overview
+## 개요
 
-이 프로젝트는 두 영역으로 구성됩니다.
+이 저장소는 두 축으로 구성됩니다.
 
-- Public site
-  - 다국어(`en`, `ko`, `ja`) 기반 퍼블릭 페이지
-  - Home / Demo / Documentation / News / Plans
-  - About Us / Certifications / Contact Us
-- Admin CMS
-  - 콘텐츠 생성, 수정, 임시저장, 게시 상태 관리
-  - Demo / Documentation / News 관리
+- 퍼블릭 사이트
+  - 다국어 로케일: `en`, `ko`, `ja`
+  - 주요 영역: Home, Features Demo, Features Documentation, Company, Plans, Legal
+- 관리자 CMS
+  - Demo / Documentation / News 콘텐츠 관리
+  - 업로드 API 및 콘텐츠 상태 저장
   - SEO 설정 관리
 
-## Tech Stack
+## 기술 스택
 
-- Next.js (App Router)
-- React
+- Next.js 15
+- React 19
 - TypeScript
 - Tailwind CSS
+- Tiptap
 
-## Run Locally
+## 실행 방법
 
 ```bash
 npm install
 npm run dev
 ```
 
-Type check:
+기본 개발 서버 주소:
+
+- `http://localhost:3000`
+
+기타 스크립트:
 
 ```bash
 npm run typecheck
+npm run build
+npm run start
+npm run audit:public-assets
 ```
 
-## Project Structure
+## 실제 폴더 구조
+
+프로젝트는 `src/app`, `src/features`, `src/content` 세 축이 핵심입니다.
+
+### 1. 라우팅 계층: `src/app`
 
 - `src/app/[locale]`
-  - 퍼블릭 라우트
-  - `about-us`, `certifications`, `contact-us`, `demo`, `docs`, `news`, `plans`
+  - 퍼블릭 페이지 진입점
+  - 실제 주요 경로
+    - `company/about-us`
+    - `company/certifications`
+    - `company/contact-us`
+    - `company/news`
+    - `features/demo`
+    - `features/documentation`
+    - `plans`
+    - `privacy-policy`
+    - `terms-of-service`
+    - `eula`
+    - `cookie-preference`
 - `src/app/admin`
-  - 관리자 라우트
+  - 관리자 페이지
   - `demo`, `documentation`, `news`, `seo`
-  - 공통 리스트/상세 기반의 관리 화면 사용
-- `src/app/api/admin/seo`
-  - SEO 관리용 보조 API
-- `src/components/common`
-  - 버튼, 입력, 셀렉트, 탭, reveal 등 공통 UI
-- `src/components/layout`
-  - GNB, Footer, AdminShell 등 공통 레이아웃
+- `src/app/api`
+  - 관리자 콘텐츠 상태, 업로드, SEO 관련 API
+
+### 2. UI 계층: `src/components`
+
+- `src/components/pages`
+  - 라우트 단위 페이지 컴포넌트
 - `src/components/sections`
   - 페이지를 구성하는 섹션 단위 UI
-- `src/components/pages`
-  - 실제 라우트에서 사용하는 페이지 단위 컴포넌트
-- `src/features`
-  - 콘텐츠, SEO 등 도메인별 상태/모델/스토어
-- `src/constants`
-  - 여러 파일에서 공유되는 정적 상수
-- `src/styles`
-  - 전역 스타일 및 타이포 유틸리티
+- `src/components/layout`
+  - GNB, Footer, AdminShell 등 공통 레이아웃
+- `src/components/common`
+  - 버튼, 입력, 탭, 에디터 등 공용 컴포넌트
 
-## Styling Guide
+### 3. 도메인 계층: `src/features`
 
-- 스타일은 기존 디자인 토큰과 Tailwind 유틸리티를 우선 사용합니다.
-- 임의의 px 값은 꼭 필요한 경우에만 사용하고, 가능하면 기존 spacing / radius / color 토큰에 맞춥니다.
-- 타이포는 `src/styles/globals.css`의 `type-*` 유틸리티를 우선 사용합니다.
-- 색상 토큰은 `src/styles/globals.css`의 CSS 변수와 `tailwind.config.ts` 토큰을 함께 기준으로 사용합니다.
-- 반복되는 hover / focus / card 스타일은 공용 유틸리티 또는 공용 컴포넌트로 정리합니다.
+- `src/features/content`
+  - 콘텐츠 모델, 카테고리 설정, 서버 상태 읽기/쓰기, 클라이언트 store
+- `src/features/seo`
+  - SEO 상태 관리
+- `src/features/contact`
+  - 문의 관련 문구 데이터
 
-### Shared UI Patterns
+`src/features/content/config.ts`가 Demo / Documentation 카테고리 정의의 기준점입니다.
 
-- 카드 hover 배경은 `card-hover` 유틸리티를 우선 사용합니다.
-- 퍼블릭 컨텐츠 카드 제목 hover 색상은 `content-hover-title` 유틸리티를 우선 사용합니다.
-- 입력 계열 포커스 스타일은 `ui-field`, `ui-field-shell` 유틸리티를 우선 사용합니다.
+### 4. 콘텐츠 저장소: `src/content`
 
-## Icons
+- `src/content/demo`
+  - Demo 콘텐츠 원본
+  - 하위 카테고리: `use-cases`, `aip-features`, `acp-features`, `webinars`
+- `src/content/documentation`
+  - Documentation 원본
+  - 하위 카테고리: `introduction`, `glossary`, `manuals`, `white-papers`, `blogs`
+- `src/content/news`
+  - News 원본
+- `src/content/legal`
+  - 개인정보처리방침 등 법무 문서
+- `src/content/state/content-state.json`
+  - 퍼블릭/어드민이 공통으로 읽는 최종 콘텐츠 상태
 
-- 가능한 경우 `/public/icons`의 SVG 자산을 재사용합니다.
-- 여러 곳에서 반복 사용되는 아이콘은 `src/components/common/`의 독립 컴포넌트로 분리합니다.
-- SVG 코드를 직접 인라인으로 넣는 경우는 재사용성 또는 접근성 이유가 명확할 때만 허용합니다.
+실제 운영 기준으로 콘텐츠의 최종 source of truth는 `src/content/state/content-state.json`입니다.
 
-## Naming
+## 콘텐츠 동작 방식
 
-- 파일명과 컴포넌트명은 `PascalCase`를 사용합니다.
-- 훅은 `useCamelCase` 형식을 사용합니다.
-- 상수는 의미가 명확한 이름을 사용하고 필요 이상 축약하지 않습니다.
+콘텐츠는 두 층으로 이해하면 됩니다.
 
-## Data Rules
+1. `src/content/**`
+   - authored 원본 콘텐츠
+2. `src/content/state/content-state.json`
+   - 어드민 변경사항이 반영된 최종 상태
 
-- 한 파일 내부에서만 사용하는 데이터는 해당 파일 안에 둡니다.
-- 여러 컴포넌트/페이지에서 공유되는 정적 데이터만 `src/constants/`로 분리합니다.
-- 도메인 로직과 저장 구조는 가능하면 `src/features/` 아래에 둡니다.
-- 콘텐츠 관리 로직은 `src/features/content`를 단일 소스로 유지합니다.
-- SEO 관리 로직은 `src/features/seo` 아래에 둡니다.
+`src/features/content/contentState.server.ts`가 이 파일을 읽고 쓰며, 관리자 화면은 `/api/admin/content/state`를 통해 이 상태를 갱신합니다.
 
-## Content Architecture
+## Source Of Truth
 
-- 퍼블릭 Demo / Documentation / News는 공통 콘텐츠 모델을 사용합니다.
-- 어드민 Demo / Documentation / News도 공통 리스트/상세 페이지를 재사용합니다.
-- 카테고리별 제목, 설명, 경로 메타는 가능한 한 `src/features/content/config.ts`에서 관리합니다.
-- 다국어 콘텐츠는 locale별 필드를 저장하고 퍼블릭에서 현재 locale 기준으로 읽습니다.
-- 최종 콘텐츠 source of truth는 `src/content/state/content-state.json` 입니다.
-- 파일 기반 authored 콘텐츠는 `src/content/{demo,documentation,news}` 아래에서 관리합니다.
+콘텐츠 관련 작업에서는 아래 기준을 우선합니다.
 
-## Comment Rules
+- 최종 콘텐츠 상태: `src/content/state/content-state.json`
+- 콘텐츠 상태 읽기/쓰기: `src/features/content/contentState.server.ts`
+- 카테고리/메뉴 정의: `src/features/content/config.ts`
+- 퍼블릭 메뉴/푸터 카피: `src/constants/navigation.ts`
 
-- 주석은 한글로 작성합니다.
-- 구현 의도, 예외 처리 이유, 구조 판단 근거가 필요한 부분에만 추가합니다.
-- 코드가 그대로 설명하는 내용은 주석으로 반복하지 않습니다.
+## SEO 동작 방식
 
-## Change Rules
+- 콘텐츠 상태와 달리 SEO 설정은 현재 `src/features/seo/clientStore.ts` 기준으로 브라우저 `localStorage`를 사용합니다.
+- 따라서 기존 README의 "관리자 콘텐츠와 SEO 일부가 localStorage 기반" 설명 중 콘텐츠 부분은 현재 기준으로 틀리고, SEO 쪽만 맞습니다.
 
-- 기존 패턴이 있는 화면은 새 스타일을 임의로 만들지 말고 기존 패턴을 우선 따릅니다.
-- 공통으로 쓰일 가능성이 있는 UI/로직은 먼저 재사용 가능한 구조인지 검토합니다.
-- 새로운 페이지나 관리 기능을 추가할 때는 퍼블릭/어드민/데이터 구조가 함께 맞물리는지 확인합니다.
+SEO 관련 작업에서는 아래 기준을 우선합니다.
 
-## Menu Updates
+- 클라이언트 저장소: `src/features/seo/clientStore.ts`
+- 현재 SEO 상태는 브라우저 `localStorage` 의존이 있습니다.
 
-- GNB 상단 메뉴명과 실제 Footer 메뉴명은 `src/constants/navigation.ts`의 `getShellMenuCopy()`에서 공통으로 관리합니다.
-- 따라서 다음 항목을 수정하려면 `getShellMenuCopy()`를 먼저 봅니다.
-  - 상단 GNB 1차 메뉴명
-  - Footer 섹션 제목
-  - Footer 섹션 하위 메뉴명
-  - 404 페이지에서 사용하는 GNB / Footer 메뉴명
-- GNB 드롭다운 하위 메뉴명은 같은 파일의 아래 함수에서 관리합니다.
-  - `getSolutionsSubItems()`
-  - `getFeaturesSubItems()`
-  - `getCompanySubItems()`
-- 메뉴 링크 경로는 같은 파일의 아래 함수에서 관리합니다.
-  - `getPrimaryNavHref()`
-  - `getFooterHref()`
-  - `getLegalHref()`
-- 메뉴명을 수정할 때는 아래를 함께 확인합니다.
-  - `en`, `ko`, `ja` 라벨이 모두 맞는지
-  - GNB 1차 메뉴와 Footer 메뉴가 같은 용어를 쓰는지
-  - 드롭다운 하위 메뉴명과 Footer 하위 메뉴명이 의도적으로 다른지, 아니면 통일해야 하는지
-  - 라벨 변경 후 링크 매핑 조건도 함께 수정해야 하는지
+## 라우팅 규칙
 
-## Notes
+`next.config.ts` 기준 핵심 규칙은 다음과 같습니다.
 
-- 현재 관리자 콘텐츠와 SEO 설정 중 일부는 브라우저 저장소(`localStorage`) 기반으로 동작합니다.
-- SEO는 현재 런타임 메타 반영 방식으로 연결되어 있습니다.
-- 새 퍼블릭 페이지가 추가되면 SEO 메뉴의 `미등록 페이지 탐색` 또는 `고급 정의 편집` 흐름도 함께 점검합니다.
+- `/` 요청은 `/en`으로 rewrite 됩니다.
+- locale이 없는 퍼블릭 경로는 기본적으로 `/en/*`로 rewrite 됩니다.
 
-## Legal Pages
+주의:
 
-### Privacy Policy Versioning
+- 퍼블릭 경로를 수정할 때는 `getLocalePath()`, `getPublicListHref()`, `getPublicDetailHref()` 같은 경로 생성 함수와 함께 확인합니다.
+- rewrite를 수정할 때는 `public/` 정적 자산 요청까지 함께 점검해야 합니다.
 
-- 개인정보처리방침 원본은 `src/content/legal/privacy-policy/` 아래에서 버전별 HTML 파일로 관리합니다.
-  - 영어 원본: `src/content/legal/privacy-policy/en`
-  - 한국어 원본: `src/content/legal/privacy-policy/ko`
-- 앱은 각 버전의 `.html` 파일을 직접 읽어 렌더링합니다.
-  - 예: `src/content/legal/privacy-policy/en/26-01-15.html`
-  - 예: `src/content/legal/privacy-policy/ko/26-01-15.html`
-- 일본어(`ja`) 로케일은 별도 원문을 두지 않고 영어 버전을 fallback으로 사용합니다.
-- 새 버전 추가 방법:
-  - 가장 최근 버전 파일을 복사해 새 날짜 파일을 만듭니다.
-  - 변경된 문구만 수정합니다.
-  - 예: `26-01-15.html`을 복사해 `26-03-01.html` 생성
-- 새 `.html` 파일이 추가되면 아래가 자동으로 갱신됩니다.
-  - 최신 개인정보처리방침 페이지: `/[locale]/privacy-policy`
-  - 과거 버전 페이지: `/[locale]/privacy-policy/[version]`
-  - 헤더 우측 버전 셀렉트 옵션
+## 법무 문서
+
+개인정보처리방침 버전 파일은 아래 경로에서 관리합니다.
+
+- `src/content/legal/privacy-policy/en`
+- `src/content/legal/privacy-policy/ko`
+
+현재 `ja`는 별도 원문 폴더가 없고 영어 버전을 fallback으로 사용합니다.
+
+## 작업 시 기준
+
+- 작업 시작 전에 아래 파일을 우선 확인합니다.
+  - `README.md`
+  - `next.config.ts`
+  - `src/features/content/config.ts`
+  - `src/constants/navigation.ts`
+  - 관련 도메인의 `src/app/*`, `src/components/pages/*`, `src/features/*`
+- UI 변경은 먼저 `src/components/common`, `src/components/layout`, `src/components/sections`에서 재사용 가능한 패턴이 있는지 확인합니다.
+- 퍼블릭 메뉴와 Footer 카피는 `src/constants/navigation.ts`를 우선 확인합니다.
+- 카테고리명, 경로, 메뉴 구성은 하드코딩하지 말고 `src/features/content/config.ts`, `src/constants/*`에 이미 정의가 있는지 먼저 확인합니다.
+- 콘텐츠 관련 변경은 `src/content/**`와 `src/content/state/content-state.json`이 함께 영향받는지 확인합니다.
+- 먼저 기존 패턴을 찾고, 그다음 수정합니다.
+- 이미 공용 컴포넌트가 있으면 새 컴포넌트를 만들기 전에 재사용 가능성을 확인합니다.
+- 범위를 벗어나는 리팩터링은 사용자 요청이 없으면 하지 않습니다.
+- 기존 구조를 바꿔야 한다면, 왜 필요한지 먼저 근거를 확인합니다.
+
+## 작업 체크리스트
+
+콘텐츠 작업:
+
+- 어떤 섹션인지 확인
+  - `demo`
+  - `documentation`
+  - `news`
+- 어떤 카테고리인지 확인
+- 원본 콘텐츠 변경인지, 최종 상태 변경인지 구분
+- `src/content/**`와 `src/content/state/content-state.json` 중 어디가 영향을 받는지 확인
+- 관리자 화면과 퍼블릭 화면이 같은 데이터를 읽는지 확인
+
+UI 작업:
+
+- 먼저 `src/components/common`
+- 그다음 `src/components/layout`
+- 그다음 `src/components/sections`
+- 마지막으로 `src/components/pages`
+
+스타일 수정 시에는 아래를 우선 확인합니다.
+
+- `src/styles/globals.css`
+- 기존 Tailwind 유틸리티
+- 반복되는 시각 패턴의 공통화 가능성
+
+## 빠른 진단 포인트
+
+- 이미지나 다운로드 경로가 깨지면 `public/` 실제 파일 위치, 콘텐츠 데이터, `next.config.ts` rewrite, 실제 브라우저 요청 URL을 같이 확인합니다.
+- 관리자에서 콘텐츠가 안 보이면 `/api/admin/content/state`, `src/content/state/content-state.json`, `src/features/content/clientStore.ts` 흐름을 먼저 확인합니다.
+- SEO 이상 동작은 `src/features/seo/clientStore.ts`와 브라우저 `localStorage` 상태를 먼저 의심하는 편이 맞습니다.

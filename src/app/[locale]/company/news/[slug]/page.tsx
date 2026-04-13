@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "../../../../../constants/i18n";
 import NewsDetailClientPage from "../../../../../components/pages/news/NewsDetailClientPage";
 import type { DocsDetailPageProps } from "../../../../../components/pages/documentation/DocumentationDetailPage";
-import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent } from "@/features/content/data";
+import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, isPublishedContentVisible } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
 
 type Props = {
@@ -16,7 +16,7 @@ export default async function NewsDetailRoute({ params }: Props) {
 
   if (!isLocale(locale)) notFound();
 
-  const newsItems = (await readContentState("news")).filter((item) => item.status === "published");
+  const newsItems = (await readContentState("news")).filter((item) => isPublishedContentVisible(item, locale));
   const currentIndex = newsItems.findIndex((item) => item.id === decodedSlug);
   const currentEntry = currentIndex >= 0 ? newsItems[currentIndex] : null;
 
@@ -37,7 +37,7 @@ export default async function NewsDetailRoute({ params }: Props) {
           category: "Previous Post",
           href: previousItem.contentType === "outlink"
             ? previousItem.externalUrl
-            : getLocalePath(locale, `/company/news/${previousItem.id}`),
+            : getPublicDetailHref("news", locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
           title: getLocalizedContent(previousItem.title, locale),
         }
@@ -47,7 +47,7 @@ export default async function NewsDetailRoute({ params }: Props) {
           category: "Next post",
           href: nextItem.contentType === "outlink"
             ? nextItem.externalUrl
-            : getLocalePath(locale, `/company/news/${nextItem.id}`),
+            : getPublicDetailHref("news", locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
           title: getLocalizedContent(nextItem.title, locale),
         }
@@ -60,9 +60,7 @@ export default async function NewsDetailRoute({ params }: Props) {
         docsHref: getLocalePath(locale, "/company/news"),
         slug: decodedSlug,
         bodyHtml: getLocalizedContent(currentEntry.bodyHtml, locale),
-        bodyMarkdown: getLocalizedContent(currentEntry.bodyMarkdown, locale),
         category: "News",
-        contentFormat: currentEntry.contentFormat,
         contentListDescription: "",
         contentListItems: relatedItems,
         contentListLinks: [],
@@ -70,7 +68,7 @@ export default async function NewsDetailRoute({ params }: Props) {
         date: formatPublicDate(locale, currentEntry.dateIso),
         hideHeroImage: currentEntry.hideHeroImage,
         heroImageAlt: getLocalizedContent(currentEntry.title, locale),
-        heroImageSrc: currentEntry.imageSrc,
+        heroImageSrc: getContentThumbnailSrc(currentEntry.imageSrc),
         title: getLocalizedContent(currentEntry.title, locale),
         writer: currentEntry.authorRole
           ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
@@ -90,7 +88,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     alternates: {
-      canonical: getLocalePath(locale, `/company/news/${decodeURIComponent(slug)}`),
+      canonical: getPublicDetailHref("news", locale, decodeURIComponent(slug)),
     },
   };
 }

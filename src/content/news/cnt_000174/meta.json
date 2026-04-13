@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2022-10-04",
+  "downloadCoverImageSrc": "/news/news-4.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://koreatechdesk.com/korea-credit-guarantee-fund-backs-4-startups-with-a-13-million-credit-guarantee-to-become-unicorns",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "data-governance-and-security-solutions-provider-querypie-partners-with-collaborative-documentation-tool-typed-to-enhance-productivity-and-streamline-collaboration-2",
+  "imageSrc": "/news/news-4.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 18,
+  "status": "published",
+  "storageId": "cnt_000174",
+  "summary": {
+    "en": "The Korea Credit Guarantee Fund (KODIT) has announced its support for four innovative startups through its Innovation Icon Support Program. The KCGF’s program selects startups with innovative business models and new technologies and supports them in becoming unicorn companies. This move comes at a crucial time when the venture investment ecosystem has shrunk due to global financial crises.",
+    "ko": "The Korea Credit Guarantee Fund (KODIT) has announced its support for four innovative startups through its Innovation Icon Support Program. The KCGF’s program selects startups with innovative business models and new technologies and supports them in becoming unicorn companies. This move comes at a crucial time when the venture investment ecosystem has shrunk due to global financial crises.",
+    "ja": "The Korea Credit Guarantee Fund (KODIT) has announced its support for four innovative startups through its Innovation Icon Support Program. The KCGF’s program selects startups with innovative business models and new technologies and supports them in becoming unicorn companies. This move comes at a crucial time when the venture investment ecosystem has shrunk due to global financial crises."
+  },
+  "title": {
+    "en": "Korea Credit Guarantee Fund backs 4 startups with a $13 million credit guarantee to become unicorns",
+    "ko": "Korea Credit Guarantee Fund backs 4 startups with a $13 million credit guarantee to become unicorns",
+    "ja": "Korea Credit Guarantee Fund backs 4 startups with a $13 million credit guarantee to become unicorns"
+  },
+  "locales": {}
+}

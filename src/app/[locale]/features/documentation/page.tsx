@@ -11,6 +11,7 @@ import {
   formatPublicDate,
   getContentThumbnailSrc,
   getLocalizedContent,
+  isPublishedContentVisible,
   getPublicDetailHref,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
@@ -32,7 +33,7 @@ export default async function DocumentationPage({ params, searchParams }: DocsPa
       ? normalizedCategory as DocsCategorySlug
       : "all";
 
-  const docsItems = (await readContentState("documentation")).filter((item) => item.status === "published");
+  const docsItems = (await readContentState("documentation")).filter((item) => isPublishedContentVisible(item, locale));
 
   const allItems = docsItems.map((item) => ({
     category: getCategoryLabel(docsCategoryConfigs, item.categorySlug, locale),

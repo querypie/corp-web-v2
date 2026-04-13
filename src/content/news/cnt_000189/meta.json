@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2025-07-01",
+  "downloadCoverImageSrc": "/news/news-18.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.datanet.co.kr/news/articleView.html?idxno=203322",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "쿼리파이-ai-시대-안전한-데이터-환경-실현한다-서울-세미나-성료",
+  "imageSrc": "/news/news-18.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 3,
+  "status": "published",
+  "storageId": "cnt_000189",
+  "summary": {
+    "en": "",
+    "ko": "한국IT진흥은 최근 ‘AI가 꿈꾸는 안전한 데이터 세상, 쿼리파이가 현실로 만들어갑니다’를 주제로 여의도 CGV에서 쿼리파이(QueryPie) 서울 세미나를 성황리에 개최했다고 밝혔다. 이번 세미나는 AI 허브 및 쿼리파이 솔루션의 혁신 기술 소개와 함께 쿼리파이의 조달청 디지털서비스몰 등록을 기념해 마련됐다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "",
+    "ko": "쿼리파이 “AI 시대 안전한 데이터 환경 실현한다··· 서울 세미나 성료",
+    "ja": ""
+  },
+  "locales": {}
+}

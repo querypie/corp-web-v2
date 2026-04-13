@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2024-04-18",
+  "downloadCoverImageSrc": "/news/news-2.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.safetydetectives.com/blog/brant-hwang-querypie/",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "interview-with-brant-hwang-founder-of-querypie",
+  "imageSrc": "/news/news-2.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 16,
+  "status": "published",
+  "storageId": "cnt_000176",
+  "summary": {
+    "en": "In an insightful interview with SafetyDetectives, Brant Hwang, the founder of QueryPie, shared his motivations and the innovative approach behind his company. Hwang, who began his programming journey at just nine years old, emphasized the dual benefits of accelerating AI while ensuring robust data protection—a pivotal factor as the world shifts from big data to AI-driven technologies.",
+    "ko": "In an insightful interview with SafetyDetectives, Brant Hwang, the founder of QueryPie, shared his motivations and the innovative approach behind his company. Hwang, who began his programming journey at just nine years old, emphasized the dual benefits of accelerating AI while ensuring robust data protection—a pivotal factor as the world shifts from big data to AI-driven technologies.",
+    "ja": "In an insightful interview with SafetyDetectives, Brant Hwang, the founder of QueryPie, shared his motivations and the innovative approach behind his company. Hwang, who began his programming journey at just nine years old, emphasized the dual benefits of accelerating AI while ensuring robust data protection—a pivotal factor as the world shifts from big data to AI-driven technologies."
+  },
+  "title": {
+    "en": "Interview With Brant Hwang - Founder of QueryPie",
+    "ko": "Interview With Brant Hwang - Founder of QueryPie",
+    "ja": "Interview With Brant Hwang - Founder of QueryPie"
+  },
+  "locales": {}
+}

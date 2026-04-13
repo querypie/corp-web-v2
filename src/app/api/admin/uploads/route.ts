@@ -39,7 +39,7 @@ async function createUniqueFilePath(dirPath: string, baseName: string) {
 
 function resolveUploadDirName(section: string | null, categorySlug: string | null) {
   if (section === "news") {
-    return "company/news";
+    return "news";
   }
 
   if (section === "documentation") {

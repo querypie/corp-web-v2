@@ -189,17 +189,8 @@ export default function PlansPage({
   }, [resolvedInitialProductKey]);
 
   function handleProductChange(nextKey: keyof typeof pricingProducts) {
-    const nextParams = new URLSearchParams();
-
-    if (nextKey === "aip") {
-      nextParams.delete("product");
-    } else {
-      nextParams.set("product", nextKey);
-    }
-
-    const nextQuery = nextParams.toString();
     setActiveProductKey(nextKey);
-    router.replace(nextQuery ? `${pathname}?${nextQuery}` : pathname, { scroll: false });
+    router.replace(nextKey === "acp" ? `${pathname}?acp` : pathname, { scroll: false });
   }
 
   return (

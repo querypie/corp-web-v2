@@ -11,6 +11,7 @@ import {
   getManagedCategoryLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
+  isPublishedContentVisible,
   getPublicDetailHref,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
@@ -33,7 +34,7 @@ export default async function DemoDetailRoute({ params }: Props) {
 
   const cookieStore = await cookies();
 
-  const demoItems = (await readContentState("demo")).filter((item) => item.status === "published");
+  const demoItems = (await readContentState("demo")).filter((item) => isPublishedContentVisible(item, locale));
   const currentIndex = demoItems.findIndex((item) => item.id === resolvedSlug);
   const currentEntry = currentIndex >= 0 ? demoItems[currentIndex] : null;
 
@@ -83,9 +84,7 @@ export default async function DemoDetailRoute({ params }: Props) {
         bodyHtml: isGateActive
           ? buildContentPreviewHtml(getLocalizedContent(currentEntry.bodyHtml, locale), currentEntry.gatingLevel)
           : getLocalizedContent(currentEntry.bodyHtml, locale),
-        bodyMarkdown: getLocalizedContent(currentEntry.bodyMarkdown, locale),
         category: getManagedCategoryLabel("demo", currentEntry.categorySlug, locale),
-        contentFormat: currentEntry.contentFormat,
         contentListDescription: "",
         contentListItems: relatedItems,
         contentListLinks: [],

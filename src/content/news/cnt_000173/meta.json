@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2023-04-18",
+  "downloadCoverImageSrc": "/news/news-5.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.techseoul.news/mobile/article.html?no=169",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-signed-a-contract-to-supply-ai-and-data-security-solutions-to-vessl-ai",
+  "imageSrc": "/news/news-5.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 19,
+  "status": "published",
+  "storageId": "cnt_000173",
+  "summary": {
+    "en": "CHEQUER, Inc, a cloud data security solution startup, announced on the 13th that it has signed a contract with VESSL AI, a machine learning development platform, to provide a 'QueryPie' solution for data security in AI services.",
+    "ko": "CHEQUER, Inc, a cloud data security solution startup, announced on the 13th that it has signed a contract with VESSL AI, a machine learning development platform, to provide a 'QueryPie' solution for data security in AI services.",
+    "ja": "CHEQUER, Inc, a cloud data security solution startup, announced on the 13th that it has signed a contract with VESSL AI, a machine learning development platform, to provide a 'QueryPie' solution for data security in AI services."
+  },
+  "title": {
+    "en": "QueryPie signed a contract to supply AI and Data security solutions to VESSL AI",
+    "ko": "QueryPie signed a contract to supply AI and Data security solutions to VESSL AI",
+    "ja": "QueryPie signed a contract to supply AI and Data security solutions to VESSL AI"
+  },
+  "locales": {}
+}

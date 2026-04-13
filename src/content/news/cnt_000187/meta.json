@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2025-05-07",
+  "downloadCoverImageSrc": "/news/news-16.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.sedaily.com/article/14062889",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "유니콘-80가-고객보안-솔루션에-ai비서도-지원",
+  "imageSrc": "/news/news-16.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 5,
+  "status": "published",
+  "storageId": "cnt_000187",
+  "summary": {
+    "en": "",
+    "ko": "기업 고객들이 인공지능(AI) 에이전트를 안전한 환경에서 더 빠르게 활용해서 혁신할 수 있도록 지원하겠습니다.” 황인서 쿼리파이 대표는 7일 서울 강서구 사옥에서 서울경제신문과 만나 \"고객사들이 AI 산업의 한 축으로 성장하는 것을 돕는 동시에 쿼리파이도 AI 에이전트 시대를 주도해 나가겠다”며 이같이 밝혔다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "",
+    "ko": "유니콘 80%가 고객…보안 솔루션에 AI비서도 지원",
+    "ja": ""
+  },
+  "locales": {}
+}

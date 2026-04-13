@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2024-08-20",
+  "downloadCoverImageSrc": "/news/news-10.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.boannews.com/media/view.asp?idx=133355&kind=3",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "쿼리파이-강원대-차세대-사이버-보안-전문가-양성-추진",
+  "imageSrc": "/news/news-10.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000183",
+  "summary": {
+    "en": "",
+    "ko": "쿼리파이가 강원대학교와 함께 진행하는 이번 보안 실무 교육은 강원 RIS 사업의 목적으로, 빠른 속도로 성장하고 있는 사이버 보안 시장에 대응 가능한 전문가 양성을 지원하기 위해 개설됐다. 교육은 오는 8월 22일부터 31일까지 진행되며, 강원 RIS 융합전공 및 15개 참여 대학 학생들과 강원대학교 융합보안학과 학생을 대상으로 한다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "",
+    "ko": "쿼리파이-강원대, 차세대 사이버 보안 전문가 양성 추진",
+    "ja": ""
+  },
+  "locales": {}
+}

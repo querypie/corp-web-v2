@@ -5,7 +5,6 @@ import AdminHeader from "../../layout/admin/AdminHeader";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
 import LoadingText from "../../common/LoadingText";
-import MermaidDiagram from "../../common/MermaidDiagram";
 import Switch from "../../common/Switch";
 import Tab from "../../common/Tab";
 import TabGroup from "../../common/TabGroup";
@@ -13,6 +12,7 @@ import AdminContentPreview from "./AdminContentPreview";
 import {
   persistManagedContents,
   deleteManagedContent,
+  getManagedContentDetail,
   reorderManagedContents,
   updateManagedContentStatus,
   useManagedContentsLoading,
@@ -24,6 +24,7 @@ import {
   getAdminDetailHref,
   getContentThumbnailSrc,
   getDownloadPreviewProps,
+  hasLocalizedTitle,
   getManagedCategoryLabel,
   getLocalizedContent,
   getWriterLabel,
@@ -32,30 +33,6 @@ import {
   type ManagedContentSection,
 } from "@/features/content/data";
 import { cloneAsAuthoredContent } from "@/features/content/cloneToAuthored";
-import { splitLegacyQuotedListLine } from "@/features/content/legacyQuoteList";
-import { shouldRenderMermaid } from "@/features/content/mermaid";
-import { parseMarkdownTable } from "@/features/content/markdownTable";
-import {
-  CONTENT_PREVIEW_BLOCKQUOTE_CLASS,
-  CONTENT_PREVIEW_BODY_CLASS,
-  CONTENT_PREVIEW_CODEBLOCK_CLASS,
-  CONTENT_PREVIEW_H1_CLASS,
-  CONTENT_PREVIEW_H2_CLASS,
-  CONTENT_PREVIEW_H3_CLASS,
-  CONTENT_PREVIEW_H1_TOP_PADDING,
-  CONTENT_PREVIEW_H2_TOP_PADDING,
-  CONTENT_PREVIEW_H3_TOP_PADDING,
-  CONTENT_PREVIEW_OL_CLASS,
-  CONTENT_PREVIEW_RICH_CLASS,
-  CONTENT_PREVIEW_TABLE_CELL_CLASS,
-  CONTENT_PREVIEW_TABLE_CLASS,
-  CONTENT_PREVIEW_TABLE_HEADER_CELL_CLASS,
-  CONTENT_PREVIEW_TABLE_ROW_CLASS,
-  CONTENT_PREVIEW_TABLE_WRAPPER_CLASS,
-  CONTENT_PREVIEW_UL_CLASS,
-} from "@/features/content/previewStyles";
-import { highlightCodeBlocksInHtml, renderLineNumberedCodeBlock } from "@/features/content/codeHighlight";
-import { normalizeFencedCodeLines, splitMarkdownBlocks } from "@/features/content/markdownBlocks";
 import useHydrated from "@/hooks/useHydrated";
 
 function cx(...values: Array<string | false | null | undefined>) {
@@ -72,7 +49,7 @@ function SearchField({
   return (
     /* 리스트 상단 검색 필드 */
     <Input
-      className="w-full md:max-w-[320px]"
+      className="w-full md:w-[260px]"
       onChange={(event) => onChange(event.target.value)}
       placeholder="Search content"
       type="text"
@@ -170,239 +147,17 @@ function ActionIcon({
   );
 }
 
-function renderInlineMarkdown(text: string) {
-  if (/^(\*\*|__)[\s\S]+(\*\*|__)$/.test(text)) {
-    return <strong className="font-semibold text-fg">{renderInlineMarkdown(text.slice(2, -2))}</strong>;
-  }
-
-  if (/^(\*|_)[\s\S]+(\*|_)$/.test(text)) {
-    return <em className="italic text-fg">{renderInlineMarkdown(text.slice(1, -1))}</em>;
-  }
-
-  const tokens = text.split(/(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|__[^_]+__|\*[^*]+\*|_[^_]+_|`[^`]+`)/g);
-
-  return tokens.filter(Boolean).map((token, index) => {
-    if (/^\[[^\]]+\]\([^)]+\)$/.test(token)) {
-      const match = token.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
-      if (!match) return token;
-      return (
-        <a key={index} className="text-fg underline underline-offset-4" href={match[2]}>
-          {match[1]}
-        </a>
-      );
-    }
-
-    if (/^`[^`]+`$/.test(token)) {
-      return (
-        <code key={index} className="rounded-[8px] bg-bg-content px-2 py-1 type-content-mono text-fg">
-          {token.slice(1, -1)}
-        </code>
-      );
-    }
-
-    if (/^(\*\*|__)[\s\S]+(\*\*|__)$/.test(token)) {
-      return (
-        <strong key={index} className="font-semibold text-fg">
-          {token.slice(2, -2)}
-        </strong>
-      );
-    }
-
-    if (/^(\*|_)[\s\S]+(\*|_)$/.test(token)) {
-      return (
-        <em key={index} className="italic text-fg">
-          {token.slice(1, -1)}
-        </em>
-      );
-    }
-
-    return token;
-  });
-}
-
-function normalizeContentAssetSrc(src: string) {
-  return src.startsWith("public/") ? `/${src.slice("public/".length)}` : src;
-}
-
-function parseMarkdownImage(block: string) {
-  const legacyFigureLabelMatch = block.match(/^!\[\[([^\]]+)\]\s*([^\]]+)\]\(([^)]+)\)$/);
-
-  if (legacyFigureLabelMatch) {
-    const caption = `[${legacyFigureLabelMatch[1]}] ${legacyFigureLabelMatch[2]}`.trim();
-    return {
-      alt: caption,
-      caption,
-      src: normalizeContentAssetSrc(legacyFigureLabelMatch[3]),
-    };
-  }
-
-  const legacyBracketMatch = block.match(/^!\[\[(.+)\]\(([^)]+)\)$/);
-
-  if (legacyBracketMatch) {
-    return {
-      alt: legacyBracketMatch[1],
-      src: normalizeContentAssetSrc(legacyBracketMatch[2]),
-    };
-  }
-
-  const doubleBracketMatch = block.match(/^!\[\[(.+)\]\]\(([^)]+)\)$/);
-
-  if (doubleBracketMatch) {
-    return {
-      alt: doubleBracketMatch[1],
-      src: normalizeContentAssetSrc(doubleBracketMatch[2]),
-    };
-  }
-
-  const standardMatch = block.match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
-
-  if (standardMatch) {
-    return {
-      alt: standardMatch[1],
-      src: normalizeContentAssetSrc(standardMatch[2]),
-    };
-  }
-
-  return null;
-}
-
-function PreviewMarkdown({ markdown }: { markdown: string }) {
-  const blocks = splitMarkdownBlocks(markdown);
-
-  return (
-    /* 카드 클릭 시 뜨는 모달 내부에서 본문 미리보기 렌더링 */
-    <div className="flex flex-col gap-4 text-fg">
-      {blocks.map((block, blockIndex) => {
-        const lines = block.split("\n");
-        const firstLine = lines[0] ?? "";
-        const trimmedBlock = block.trim();
-        const imageMatch = parseMarkdownImage(trimmedBlock);
-
-        if (imageMatch) {
-          const caption = imageMatch.caption ?? imageMatch.alt;
-          return <figure key={blockIndex} className="m-0 flex flex-col gap-3"><div className="overflow-hidden rounded-box bg-bg-content"><img alt={imageMatch.alt} className="block h-full w-full object-cover" src={imageMatch.src} /></div>{caption ? <figcaption className="m-0 text-center type-content-caption text-mute-fg">{caption}</figcaption> : null}</figure>;
-        }
-
-        if (/^\s*```/.test(firstLine) && /^\s*```\s*$/.test(lines[lines.length - 1] ?? "")) {
-          const language = firstLine.replace(/^```/, "").trim();
-          const code = normalizeFencedCodeLines(firstLine, lines.slice(1, -1)).join("\n");
-
-          if (shouldRenderMermaid(code, language)) {
-            return <MermaidDiagram key={blockIndex} code={code} />;
-          }
-
-          return <div key={blockIndex} className={CONTENT_PREVIEW_CODEBLOCK_CLASS} dangerouslySetInnerHTML={{ __html: renderLineNumberedCodeBlock(code, language) }} />;
-        }
-
-        if (/^---+$/.test(block) || /^\*\*\*+$/.test(block)) {
-          return <hr key={blockIndex} className="border-0 border-t border-border" />;
-        }
-
-        if (block.startsWith("# ")) {
-          return <h1 key={blockIndex} className={cx(CONTENT_PREVIEW_H1_CLASS, blockIndex > 0 && CONTENT_PREVIEW_H1_TOP_PADDING)}>{renderInlineMarkdown(block.replace(/^#\s+/, ""))}</h1>;
-        }
-
-        if (block.startsWith("## ")) {
-          return <h2 key={blockIndex} className={cx(CONTENT_PREVIEW_H2_CLASS, blockIndex > 0 && CONTENT_PREVIEW_H2_TOP_PADDING)}>{renderInlineMarkdown(block.replace(/^##\s+/, ""))}</h2>;
-        }
-
-        if (block.startsWith("### ")) {
-          return <h3 key={blockIndex} className={cx(CONTENT_PREVIEW_H3_CLASS, blockIndex > 0 && CONTENT_PREVIEW_H3_TOP_PADDING)}>{renderInlineMarkdown(block.replace(/^###\s+/, ""))}</h3>;
-        }
-
-        if (lines.every((line) => /^>\s?/.test(line))) {
-          const quoteLines = lines.flatMap((line) => splitLegacyQuotedListLine(line.replace(/^>\s?/, "")));
-
-          if (
-            quoteLines.every((line) => /^\d+\.\s+/.test(line))
-          ) {
-            return <blockquote key={blockIndex} className={CONTENT_PREVIEW_BLOCKQUOTE_CLASS}><ol className={CONTENT_PREVIEW_OL_CLASS}>{quoteLines.map((line, idx) => <li key={idx}>{renderInlineMarkdown(line.replace(/^\d+\.\s+/, ""))}</li>)}</ol></blockquote>;
-          }
-
-          if (quoteLines.every((line) => /^\s*[-*]\s+/.test(line))) {
-            return <blockquote key={blockIndex} className={CONTENT_PREVIEW_BLOCKQUOTE_CLASS}><ul className={CONTENT_PREVIEW_UL_CLASS}>{quoteLines.map((line, idx) => <li key={idx}>{renderInlineMarkdown(line.replace(/^\s*[-*]\s+/, ""))}</li>)}</ul></blockquote>;
-          }
-
-          return <blockquote key={blockIndex} className={CONTENT_PREVIEW_BLOCKQUOTE_CLASS}>{quoteLines.map((line, idx) => <p key={idx} className="m-0">{renderInlineMarkdown(line)}</p>)}</blockquote>;
-        }
-
-        if (lines.every((line) => /^\d+\.\s+/.test(line))) {
-          return <ol key={blockIndex} className={CONTENT_PREVIEW_OL_CLASS}>{lines.map((line, idx) => <li key={idx}>{renderInlineMarkdown(line.replace(/^\d+\.\s+/, ""))}</li>)}</ol>;
-        }
-
-        if (lines.every((line) => /^\s*[-*]\s+/.test(line))) {
-          return <ul key={blockIndex} className={CONTENT_PREVIEW_UL_CLASS}>{lines.map((line, idx) => <li key={idx} className="type-content-body text-fg">{renderInlineMarkdown(line.replace(/^\s*[-*]\s+/, ""))}</li>)}</ul>;
-        }
-        const table = parseMarkdownTable(lines);
-        if (table) {
-          const { bodyRows, headerRow } = table;
-
-          return (
-            <div key={blockIndex} className={CONTENT_PREVIEW_TABLE_WRAPPER_CLASS}>
-              <table className={CONTENT_PREVIEW_TABLE_CLASS}>
-                <thead>
-                  <tr className={CONTENT_PREVIEW_TABLE_ROW_CLASS}>
-                    {headerRow.map((cell, cellIndex) => (
-                      <th key={cellIndex} className={CONTENT_PREVIEW_TABLE_HEADER_CELL_CLASS}>
-                        {renderInlineMarkdown(cell)}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {bodyRows.map((row, rowIndex) => (
-                    <tr key={rowIndex} className={CONTENT_PREVIEW_TABLE_ROW_CLASS}>
-                      {row.map((cell, cellIndex) => (
-                        <td key={cellIndex} className={CONTENT_PREVIEW_TABLE_CELL_CLASS}>
-                          {renderInlineMarkdown(cell)}
-                        </td>
-                      ))}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          );
-        }
-
-        return <p key={blockIndex} className={CONTENT_PREVIEW_BODY_CLASS}>{lines.map((line, idx) => <span key={idx}>{renderInlineMarkdown(line)}{idx < lines.length - 1 ? <br /> : null}</span>)}</p>;
-      })}
-    </div>
-  );
-}
-
-function normalizeContentHtml(html: string) {
-  const normalized = html.replace(
-    /(src=|href=)(["'])public\//g,
-    (_, attribute, quote) => `${attribute}${quote}/`,
-  );
-
-  return highlightCodeBlocksInHtml(normalized);
-}
-
-function PreviewHtml({ html }: { html: string }) {
-  return (
-    <div
-      className={CONTENT_PREVIEW_RICH_CLASS}
-      dangerouslySetInnerHTML={{ __html: normalizeContentHtml(html) }}
-    />
-  );
-}
-
 function PreviewModal({
   item,
+  isLoading = false,
   onClose,
 }: {
   item: ManagedContentEntry;
+  isLoading?: boolean;
   onClose: () => void;
 }) {
   const [activeLocale, setActiveLocale] = useState<"en" | "ko" | "ja">("en");
   const localizedBodyHtml = getLocalizedContent(item.bodyHtml, activeLocale);
-  const localizedBodyMarkdown = getLocalizedContent(item.bodyMarkdown, activeLocale);
-  const useRichHtmlPreview =
-    item.contentFormat === "tiptap" &&
-    localizedBodyHtml.trim() !== "" &&
-    localizedBodyHtml.trim() !== "<p></p>";
 
   return (
     /* 리스트 카드 클릭 시 퍼블릭 상세 형태로 보여주는 미리보기 모달 */
@@ -427,21 +182,25 @@ function PreviewModal({
           </div>
         </div>
         <div className="overflow-auto px-5 py-5 md:px-6">
-          <AdminContentPreview
-            bodyHtml={localizedBodyHtml}
-            bodyMarkdown={localizedBodyMarkdown}
-            contentFormat={item.contentFormat}
-            date={formatPublicDate(activeLocale, item.dateIso)}
-            {...getDownloadPreviewProps(item)}
-            heroImageAlt={getLocalizedContent(item.title, activeLocale)}
-            heroImageSrc={getContentThumbnailSrc(item.imageSrc)}
-            hideHeroImage={item.hideHeroImage}
-            section={item.section}
-            summary={getLocalizedContent(item.summary, activeLocale)}
-            title={getLocalizedContent(item.title, activeLocale)}
-            url={item.externalUrl || "#"}
-            writer={item.section === "news" ? "" : getWriterLabel(item)}
-          />
+          {isLoading ? (
+            <div className="flex min-h-[320px] items-center justify-center">
+              <LoadingText className="type-body-md" text="불러오는 중..." />
+            </div>
+          ) : (
+            <AdminContentPreview
+              bodyHtml={localizedBodyHtml}
+              date={formatPublicDate(activeLocale, item.dateIso)}
+              {...getDownloadPreviewProps(item)}
+              heroImageAlt={getLocalizedContent(item.title, activeLocale)}
+              heroImageSrc={getContentThumbnailSrc(item.imageSrc)}
+              hideHeroImage={item.hideHeroImage}
+              section={item.section}
+              summary={getLocalizedContent(item.summary, activeLocale)}
+              title={getLocalizedContent(item.title, activeLocale)}
+              url={item.externalUrl || "#"}
+              writer={item.section === "news" ? "" : getWriterLabel(item)}
+            />
+          )}
         </div>
       </div>
     </div>
@@ -449,7 +208,9 @@ function PreviewModal({
 }
 
 function ContentRow({
+  activeLocale,
   isReorderMode,
+  isTogglePending,
   index,
   item,
   onDelete,
@@ -461,7 +222,9 @@ function ContentRow({
   onTogglePublished,
   showCategory,
 }: {
+  activeLocale: "en" | "ko" | "ja";
   isReorderMode: boolean;
+  isTogglePending: boolean;
   index: number;
   item: ManagedContentEntry;
   onDelete: () => void;
@@ -474,8 +237,8 @@ function ContentRow({
   showCategory: boolean;
 }) {
   const isPublished = item.status === "published";
-  const isLegacyContent = item.section !== "news" && item.contentFormat === "markdown";
-  const statusLabel = isPublished ? "게시중" : "비노출";
+  const statusLabel = isPublished ? "On" : "Off";
+  const localizedTitle = getLocalizedContent(item.title, activeLocale);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -541,23 +304,20 @@ function ContentRow({
       ) : null}
 
       <div className="content-thumbnail-frame w-full overflow-hidden rounded-thumb bg-bg-deep md:w-[132px]">
-        <img alt={getLocalizedContent(item.title, "en")} className="block h-full w-full object-cover" src={getContentThumbnailSrc(item.imageSrc)} />
+        <img alt={localizedTitle} className="block h-full w-full object-cover" src={getContentThumbnailSrc(item.imageSrc)} />
       </div>
 
       <div className="min-w-0 self-center pr-0 md:pr-2">
-        {isLegacyContent ? (
-          <p className="mb-2 mt-0 type-body-sm text-[var(--color-destructive)]">Legacy</p>
-        ) : null}
         {showCategory ? (
           <p className="mb-2 mt-0 type-body-sm text-mute-fg">
-            {getManagedCategoryLabel(item.section, item.categorySlug, "en")}
+            {getManagedCategoryLabel(item.section, item.categorySlug, activeLocale)}
           </p>
         ) : null}
-        <p className="m-0 type-body-lg text-fg">{getLocalizedContent(item.title, "en")}</p>
+        <p className="m-0 type-body-lg text-fg">{localizedTitle}</p>
       </div>
 
       <div className="flex items-center justify-between gap-4 md:contents">
-        <div className="type-body-md text-mute-fg md:self-center md:whitespace-nowrap">{formatPublicDate("en", item.dateIso)}</div>
+        <div className="type-body-md text-mute-fg md:self-center md:whitespace-nowrap">{formatPublicDate(activeLocale, item.dateIso)}</div>
 
         <div className="flex items-center justify-end gap-2 md:col-start-auto md:justify-between md:gap-3">
           <div className="flex flex-col items-center gap-2">
@@ -566,10 +326,11 @@ function ContentRow({
               onClick={(event) => {
                 event.preventDefault();
                 event.stopPropagation();
+                if (isTogglePending) return;
                 onTogglePublished();
               }}
             >
-              <Switch checked={isPublished} onChange={() => {}} size="compact" />
+              <Switch checked={isPublished} disabled={isTogglePending} onChange={() => {}} size="compact" />
             </div>
             <span className={cx("type-body-sm", isPublished ? "text-fg" : "text-mute-fg")}>
               {statusLabel}
@@ -668,15 +429,19 @@ export default function AdminManagedContentListPage({
   section,
   title,
 }: Props) {
-  const items = useManagedContents(section, initialItems);
-  const isLoading = useManagedContentsLoading(section);
+  const scopedCategorySlug = categorySlug === "all" ? "all" : categorySlug;
+  const items = useManagedContents(section, initialItems, scopedCategorySlug, "list");
+  const isLoading = useManagedContentsLoading(section, initialItems, scopedCategorySlug, "list");
   const isHydrated = useHydrated();
   const [query, setQuery] = useState("");
   const [pendingDuplicateItem, setPendingDuplicateItem] = useState<ManagedContentEntry | null>(null);
   const [pendingDeleteItem, setPendingDeleteItem] = useState<ManagedContentEntry | null>(null);
+  const [isStatusUpdating, setIsStatusUpdating] = useState(false);
   const [previewItem, setPreviewItem] = useState<ManagedContentEntry | null>(null);
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   const [isDuplicating, setIsDuplicating] = useState(false);
   const [isReorderMode, setIsReorderMode] = useState(false);
+  const [activeLocale, setActiveLocale] = useState<"en" | "ko" | "ja">("en");
   const [draftItems, setDraftItems] = useState<ManagedContentEntry[]>([]);
   const rowRefs = useRef(new Map<string, HTMLDivElement>());
   const previousPositions = useRef(new Map<string, number>());
@@ -694,11 +459,14 @@ export default function AdminManagedContentListPage({
   const filteredItems = useMemo(() => {
     /* 카테고리와 검색어 기준으로 화면에 보여줄 항목을 계산한다 */
     const normalized = query.trim().toLowerCase();
-    if (!normalized) return categoryItems;
-    return categoryItems.filter((item) =>
-      getLocalizedContent(item.title, "en").toLowerCase().includes(normalized),
+    const localeVisibleItems = categoryItems.filter((item) => hasLocalizedTitle(item.title, activeLocale));
+
+    if (!normalized) return localeVisibleItems;
+
+    return localeVisibleItems.filter((item) =>
+      getLocalizedContent(item.title, activeLocale).toLowerCase().includes(normalized),
     );
-  }, [categoryItems, query]);
+  }, [activeLocale, categoryItems, query]);
 
   const writeHref =
     section === "news"
@@ -768,8 +536,34 @@ export default function AdminManagedContentListPage({
   }
 
   async function handleTogglePublished(item: ManagedContentEntry) {
+    if (isStatusUpdating) {
+      return;
+    }
+
     const nextStatus = item.status === "published" ? "hidden" : "published";
-    await updateManagedContentStatus(item.id, nextStatus, item);
+    setIsStatusUpdating(true);
+
+    try {
+      await updateManagedContentStatus(item.id, nextStatus, item);
+    } finally {
+      setIsStatusUpdating(false);
+    }
+  }
+
+  function handleOpenPreview(item: ManagedContentEntry) {
+    setPreviewItem(item);
+    setIsPreviewLoading(true);
+
+    void getManagedContentDetail(item.section, item.id)
+      .then((detailItem) => {
+        setPreviewItem(detailItem ?? item);
+      })
+      .catch(() => {
+        setPreviewItem(item);
+      })
+      .finally(() => {
+        setIsPreviewLoading(false);
+      });
   }
 
   useLayoutEffect(() => {
@@ -808,18 +602,31 @@ export default function AdminManagedContentListPage({
 
       <div className="mx-auto flex w-full max-w-[1000px] flex-col gap-4">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <SearchField onChange={setQuery} value={query} />
+          <div className="flex w-full flex-col gap-3 md:flex-row md:items-center md:gap-4">
+            <SearchField onChange={setQuery} value={query} />
+            <TabGroup className="self-start">
+              {(["en", "ko", "ja"] as const).map((locale) => (
+                <Tab
+                  key={locale}
+                  onClick={() => setActiveLocale(locale)}
+                  state={activeLocale === locale ? "on" : "off"}
+                >
+                  {locale.toUpperCase()}
+                </Tab>
+              ))}
+            </TabGroup>
+          </div>
           {categorySlug !== "all" ? (
-            <div className="flex w-full flex-col gap-3 md:w-auto md:flex-row">
+            <div className="flex w-full flex-col gap-3 md:w-auto md:flex-row md:items-center">
               {isReorderMode ? (
                 <>
-                  <Button arrow={false} className="w-full justify-center md:w-auto" onClick={() => {
+                  <Button arrow={false} className="w-full shrink-0 justify-center whitespace-nowrap md:w-auto" onClick={() => {
                     setDraftItems(categoryItems);
                     setIsReorderMode(false);
                   }} style="round" variant="outline">
                     취소
                   </Button>
-                  <Button arrow={false} className="w-full justify-center md:w-auto" onClick={() => {
+                  <Button arrow={false} className="w-full shrink-0 justify-center whitespace-nowrap md:w-auto" onClick={() => {
                     void reorderManagedContents(draftItems)
                       .then(() => {
                         setIsReorderMode(false);
@@ -839,7 +646,7 @@ export default function AdminManagedContentListPage({
                 <>
                   <Button
                     arrow={false}
-                    className="w-full justify-center md:w-auto"
+                    className="w-full shrink-0 justify-center whitespace-nowrap md:w-auto"
                     onClick={() => {
                       setDraftItems(categoryItems);
                       setIsReorderMode(true);
@@ -858,7 +665,7 @@ export default function AdminManagedContentListPage({
                     순서변경
                   </Button>
                   <a className="w-full md:w-auto" href={writeHref}>
-                    <Button arrow={false} className="w-full justify-center md:w-auto" style="round" variant="secondary">
+                    <Button arrow={false} className="w-full shrink-0 justify-center whitespace-nowrap md:w-auto" style="round" variant="secondary">
                       <ActionIcon>
                         <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
                           <path d="M12 5v14" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
@@ -874,6 +681,10 @@ export default function AdminManagedContentListPage({
           ) : null}
         </div>
 
+        <p className="m-0 type-body-md text-mute-fg">
+          <span className="text-fg">{displayedItems.length}개</span> 컨텐츠
+        </p>
+
         {/* 실제 콘텐츠 리스트 / 빈 상태 영역 */}
         <div className="flex flex-col gap-3">
           {!isHydrated ? (
@@ -885,7 +696,9 @@ export default function AdminManagedContentListPage({
           ) : displayedItems.length > 0 ? (
             displayedItems.map((item, index) => (
               <ContentRow
+                activeLocale={activeLocale}
                 isReorderMode={isReorderMode}
+                isTogglePending={isStatusUpdating}
                 key={item.id}
                 index={index}
                 item={item}
@@ -900,7 +713,7 @@ export default function AdminManagedContentListPage({
                 }}
                 onMoveDown={() => moveItem(item.id, "down")}
                 onMoveUp={() => moveItem(item.id, "up")}
-                onOpenPreview={() => setPreviewItem(item)}
+                onOpenPreview={() => handleOpenPreview(item)}
                 onTogglePublished={() => {
                   void handleTogglePublished(item).catch((error: unknown) => {
                     window.alert(
@@ -954,6 +767,7 @@ export default function AdminManagedContentListPage({
       {previewItem ? (
         <PreviewModal
           item={previewItem}
+          isLoading={isPreviewLoading}
           onClose={() => setPreviewItem(null)}
         />
       ) : null}

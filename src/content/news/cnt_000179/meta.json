@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2025-03-20",
+  "downloadCoverImageSrc": "/news/news-14.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.mk.co.kr/en/business/11269240",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "security-solution-playing-the-role-of-a-door-lock-in-the-cloud-expanding-to-japan-and-europe",
+  "imageSrc": "/news/news-14.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 13,
+  "status": "published",
+  "storageId": "cnt_000179",
+  "summary": {
+    "en": "A Korean startup founded by the youngest-ever developer at Kakao is now stepping up as a national representative in software. QueryPie, a homegrown cloud-based data security solution, has gained global attention by joining Y Combinator and securing investments from Salesforce (US) and Z Venture Capital (Japan).",
+    "ko": "카카오 최연소 개발자 출신 창업자가 세운 클라우드 기반 데이터 보호 솔루션 스타트업이 한국 소프트웨어 국가대표로 나서고 있다. 미국 대표 액셀러레이터인 와이콤비네이터에 뽑히고 미국 세일즈포스와 일본 제트벤처캐피털(ZVC) 투자를 받아 화제가 된 토종 보안 소프트웨어 기업 쿼리파이의 황인서 대표(사진)가 주인공이다.",
+    "ja": "A Korean startup founded by the youngest-ever developer at Kakao is now stepping up as a national representative in software. QueryPie, a homegrown cloud-based data security solution, has gained global attention by joining Y Combinator and securing investments from Salesforce (US) and Z Venture Capital (Japan)."
+  },
+  "title": {
+    "en": "Security Solution Playing the Role of a “Door Lock” in the Cloud — Expanding to Japan and Europe",
+    "ko": "클라우드 세상의 '도어록' 역할 보안 솔루션으로 日·유럽 진격",
+    "ja": "Security Solution Playing the Role of a “Door Lock” in the Cloud — Expanding to Japan and Europe"
+  },
+  "locales": {}
+}

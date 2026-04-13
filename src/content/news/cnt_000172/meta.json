@@ -1,0 +1,32 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2022-10-04",
+  "downloadCoverImageSrc": "/news/news-4.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://technode.global/prnasia/data-governance-and-security-solutions-provider-querypie-partners-with-collaborative-documentation-tool-typed-to-enhance-productivity-and-streamline-collaboration/",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "data-governance-and-security-solutions-provider-querypie-partners-with-collaborative-documentation-tool-typed-to-enhance-productivity-and-streamline-collaboration",
+  "imageSrc": "/news/news-4.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 20,
+  "status": "published",
+  "storageId": "cnt_000172",
+  "summary": {
+    "en": "SEOUL, South Korea, Oct. 4, 2022 /PRNewswire/ — Korea’s fastest-growing data governance and security platform, QueryPie has partnered with Typed to enhance productivity and streamline collaboration across their processes. Typed is also a member of the Born2Global Centre.",
+    "ko": "SEOUL, South Korea, Oct. 4, 2022 /PRNewswire/ — Korea’s fastest-growing data governance and security platform, QueryPie has partnered with Typed to enhance productivity and streamline collaboration across their processes. Typed is also a member of the Born2Global Centre.",
+    "ja": "SEOUL, South Korea, Oct. 4, 2022 /PRNewswire/ — Korea’s fastest-growing data governance and security platform, QueryPie has partnered with Typed to enhance productivity and streamline collaboration across their processes. Typed is also a member of the Born2Global Centre."
+  },
+  "title": {
+    "en": "Data governance and security solutions provider “QueryPie” partners with collaborative documentation tool “Typed” to enhance productivity and streamline collaboration",
+    "ko": "Data governance and security solutions provider “QueryPie” partners with collaborative documentation tool “Typed” to enhance productivity and streamline collaboration",
+    "ja": "Data governance and security solutions provider “QueryPie” partners with collaborative documentation tool “Typed” to enhance productivity and streamline collaboration"
+  },
+  "locales": {}
+}

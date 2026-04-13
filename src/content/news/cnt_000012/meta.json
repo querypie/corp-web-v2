@@ -12,21 +12,21 @@
   "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "querypie-becomes-okta-integration-network-partner-in-korea",
-  "imageSrc": "/company/news/news-4.webp",
+  "imageSrc": "/news/news-4.webp",
   "relatedIds": [],
   "section": "news",
-  "sortOrder": 5,
+  "sortOrder": 23,
   "status": "published",
   "storageId": "cnt_000012",
   "summary": {
     "en": "QueryPie is a powerful data governance solution developed by a team of database specialists at CHEQUER that makes it simple to manage disparaate data sources and security standards in one location.",
-    "ko": "",
-    "ja": ""
+    "ko": "QueryPie is a powerful data governance solution developed by a team of database specialists at CHEQUER that makes it simple to manage disparaate data sources and security standards in one location.",
+    "ja": "QueryPie is a powerful data governance solution developed by a team of database specialists at CHEQUER that makes it simple to manage disparaate data sources and security standards in one location."
   },
   "title": {
     "en": "QueryPie becomes Okta Integration Network Partner in Korea",
-    "ko": "",
-    "ja": ""
+    "ko": "QueryPie becomes Okta Integration Network Partner in Korea",
+    "ja": "QueryPie becomes Okta Integration Network Partner in Korea"
   },
   "locales": {}
 }

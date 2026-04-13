@@ -230,7 +230,7 @@ export default function TiptapEditor({
     editorProps: {
       attributes: {
         class:
-          `${CONTENT_PREVIEW_RICH_CLASS} min-h-[320px] outline-none [&_p.is-editor-empty:first-child::before]:pointer-events-none [&_p.is-editor-empty:first-child::before]:float-left [&_p.is-editor-empty:first-child::before]:h-0 [&_p.is-editor-empty:first-child::before]:text-mute-fg [&_p.is-editor-empty:first-child::before]:content-[attr(data-placeholder)]`,
+          `${CONTENT_PREVIEW_RICH_CLASS} content-rich-editor min-h-[320px] outline-none [&_p.is-editor-empty:first-child::before]:pointer-events-none [&_p.is-editor-empty:first-child::before]:float-left [&_p.is-editor-empty:first-child::before]:h-0 [&_p.is-editor-empty:first-child::before]:text-mute-fg [&_p.is-editor-empty:first-child::before]:content-[attr(data-placeholder)]`,
       },
       handleKeyDown(view, event) {
         const isUndoKey = (event.metaKey || event.ctrlKey) && !event.shiftKey && event.key.toLowerCase() === "z";

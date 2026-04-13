@@ -16,7 +16,7 @@ export default function TiptapCodeBlockView({ node }: NodeViewProps) {
         ))}
       </div>
       <pre className="type-content-mono">
-        <code className="type-content-mono text-fg">
+        <code className="type-content-mono">
           <NodeViewContent
             className="block whitespace-pre outline-none"
             spellCheck={false}

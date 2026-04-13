@@ -12,6 +12,7 @@ import {
   formatPublicDate,
   getContentThumbnailSrc,
   getLocalizedContent,
+  isPublishedContentVisible,
   getPublicDetailHref,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
@@ -30,7 +31,7 @@ export default async function DemoPage({ params, searchParams }: Props) {
   const selectedCategory: DemoCategorySlug =
     isDemoCategorySlug(category) && category !== "all" ? category : "all";
 
-  const demoItems = (await readContentState("demo")).filter((item) => item.status === "published");
+  const demoItems = (await readContentState("demo")).filter((item) => isPublishedContentVisible(item, locale));
 
   const allItems = demoItems.map((item) => ({
     category: getCategoryLabel(demoCategoryConfigs, item.categorySlug, locale),

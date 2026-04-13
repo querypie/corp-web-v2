@@ -18,10 +18,8 @@ export type ManagedContentEntry = {
   authorName: string;
   authorRole: string;
   bodyHtml: LocalizedContent;
-  bodyMarkdown: LocalizedContent;
   bodyRichText: LocalizedContent;
   categorySlug: ManagedContentCategorySlug;
-  contentFormat: "markdown" | "tiptap";
   contentType: ManagedContentType;
   dateIso: string;
   downloadCoverImageSrc: string;
@@ -42,6 +40,14 @@ export type ManagedContentEntry = {
   title: LocalizedContent;
 };
 
+export function stripManagedContentBodies(item: ManagedContentEntry): ManagedContentEntry {
+  return {
+    ...item,
+    bodyHtml: createLocalizedContent(),
+    bodyRichText: createLocalizedContent(),
+  };
+}
+
 export const MANAGED_CONTENT_STORAGE_KEY = "querypie-admin-managed-content";
 export const MANAGED_CONTENT_STORE_EVENT = "querypie:managed-content:changed";
 export const CONTENT_DOWNLOAD_BUTTON_LABEL = "Download File";
@@ -57,10 +63,8 @@ export function createEmptyManagedContentDraft(
     authorName: "",
     authorRole: "",
     bodyHtml: createLocalizedContent(useRichEditor ? createEmptyTiptapHtml() : ""),
-    bodyMarkdown: createLocalizedContent(),
     bodyRichText: createLocalizedContent(useRichEditor ? createEmptyTiptapJson() : ""),
     categorySlug,
-    contentFormat: section === "news" ? "markdown" : "tiptap",
     contentType: section === "news" ? "outlink" : "content",
     dateIso: "",
     downloadCoverImageSrc: "",
@@ -102,6 +106,17 @@ function createEmptyTiptapHtml() {
 
 export function getLocalizedContent(content: LocalizedContent, locale: Locale) {
   return content[locale] || content.en || content.ko || content.ja || "";
+}
+
+export function hasLocalizedTitle(content: LocalizedContent, locale: Locale) {
+  return Boolean(content[locale]?.trim());
+}
+
+export function isPublishedContentVisible(
+  item: Pick<ManagedContentEntry, "status" | "title">,
+  locale: Locale,
+) {
+  return item.status === "published" && hasLocalizedTitle(item.title, locale);
 }
 
 export function getContentThumbnailSrc(imageSrc: string) {

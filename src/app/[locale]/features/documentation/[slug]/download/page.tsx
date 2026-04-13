@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import ContentDownloadPage from "../../../../../../components/pages/documentation/ContentDownloadPage";
 import { isLocale, getLocalePath } from "../../../../../../constants/i18n";
 import { getContactPageCopy } from "@/features/contact/copy";
-import { getLocalizedContent } from "@/features/content/data";
+import { getLocalizedContent, isPublishedContentVisible } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
 import { getContentUnlockCookieName } from "@/features/content/gating";
 
@@ -17,7 +17,7 @@ export default async function WhitePaperDownloadRoute({ params }: WhitePaperDown
 
   if (!isLocale(locale)) notFound();
 
-  const docsItems = (await readContentState("documentation")).filter((item) => item.status === "published");
+  const docsItems = (await readContentState("documentation")).filter((item) => isPublishedContentVisible(item, locale));
   const currentEntry = docsItems.find((item) => item.id === resolvedSlug);
 
   if (
