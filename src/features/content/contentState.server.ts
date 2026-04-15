@@ -10,25 +10,32 @@ import {
   type ManagedContentSection,
   type ManagedContentStatus,
 } from "./data";
-import { readAuthoredManagedContents } from "./authored.server";
+import { getAuthoredCacheVersion, readAuthoredManagedContents } from "./authored.server";
 
 const stateRoot = path.join(process.cwd(), "src", "content", "state");
 const statePath = path.join(stateRoot, "content-state.json");
 let cachedState:
   | {
-      items: ManagedContentEntry[];
+      fullItems: ManagedContentEntry[];
+      listItems: ManagedContentEntry[];
       mtimeMs: number;
       size: number;
     }
   | null = null;
+const mergedStateCache = new Map<string, ManagedContentEntry[]>();
 
 async function ensureStateRoot() {
   await fs.mkdir(stateRoot, { recursive: true });
 }
 
-async function readStateFile() {
+function invalidateMergedStateCache() {
+  mergedStateCache.clear();
+}
+
+async function readStateFile(options?: { includeBodies?: boolean }) {
   if (!existsSync(statePath)) {
     cachedState = null;
+    invalidateMergedStateCache();
     return null;
   }
 
@@ -40,39 +47,49 @@ async function readStateFile() {
       cachedState.mtimeMs === stat.mtimeMs &&
       cachedState.size === stat.size
     ) {
-      return cachedState.items;
+      return options?.includeBodies === false ? cachedState.listItems : cachedState.fullItems;
     }
 
     const raw = await fs.readFile(statePath, "utf8");
     const parsed = JSON.parse(raw) as ManagedContentEntry[];
     if (!Array.isArray(parsed)) {
       cachedState = null;
+      invalidateMergedStateCache();
       return null;
     }
 
-    const normalizedItems = sortManagedContents(
-      dedupeManagedEntries(filterManagedEntries(parsed.map(normalizeStateEntry))),
+    const fullItems = sortManagedContents(
+      dedupeManagedEntries(filterManagedEntries(parsed.map((item) => normalizeStateEntry(item, true)))),
+    );
+    const listItems = sortManagedContents(
+      dedupeManagedEntries(filterManagedEntries(parsed.map((item) => normalizeStateEntry(item, false)))),
     );
 
     cachedState = {
-      items: normalizedItems,
+      fullItems,
+      listItems,
       mtimeMs: stat.mtimeMs,
       size: stat.size,
     };
+    invalidateMergedStateCache();
 
-    return normalizedItems;
+    return options?.includeBodies === false ? listItems : fullItems;
   } catch {
     cachedState = null;
+    invalidateMergedStateCache();
     return null;
   }
 }
 
-function normalizeStateEntry(item: Partial<ManagedContentEntry>): ManagedContentEntry {
+function normalizeStateEntry(
+  item: Partial<ManagedContentEntry>,
+  includeBodies = true,
+): ManagedContentEntry {
   return {
     authorName: item.authorName ?? "",
     authorRole: item.authorRole ?? "",
-    bodyHtml: item.bodyHtml ?? createLocalizedContent(),
-    bodyRichText: item.bodyRichText ?? createLocalizedContent(),
+    bodyHtml: includeBodies ? item.bodyHtml ?? createLocalizedContent() : createLocalizedContent(),
+    bodyRichText: includeBodies ? item.bodyRichText ?? createLocalizedContent() : createLocalizedContent(),
     categorySlug: item.categorySlug ?? "use-cases",
     contentType: item.contentType ?? (item.section === "news" ? "outlink" : "content"),
     dateIso: item.dateIso ?? "",
@@ -109,16 +126,84 @@ function dedupeManagedEntries(items: ManagedContentEntry[]) {
   return [...map.values()];
 }
 
+function mergeManagedEntries(
+  baseItems: ManagedContentEntry[],
+  overrideItems: ManagedContentEntry[],
+) {
+  const map = new Map(baseItems.map((item) => [item.id, item]));
+
+  overrideItems.forEach((item) => {
+    const baseItem = map.get(item.id);
+
+    if (!baseItem) {
+      map.set(item.id, item);
+      return;
+    }
+
+    const hasOverrideBody =
+      Object.values(item.bodyHtml).some((value) => value.trim().length > 0)
+      || Object.values(item.bodyRichText).some((value) => value.trim().length > 0);
+    const hasBaseBody =
+      Object.values(baseItem.bodyHtml).some((value) => value.trim().length > 0)
+      || Object.values(baseItem.bodyRichText).some((value) => value.trim().length > 0);
+
+    map.set(
+      item.id,
+      hasOverrideBody || !hasBaseBody
+        ? item
+        : {
+            ...item,
+            bodyHtml: baseItem.bodyHtml,
+            bodyRichText: baseItem.bodyRichText,
+          },
+    );
+  });
+
+  return [...map.values()];
+}
+
 async function readAllContentState() {
-  const fileState = await readStateFile();
-  return fileState ?? dedupeManagedEntries(filterManagedEntries(await readAuthoredManagedContents()));
+  return readAllContentStateWithOptions();
+}
+
+async function readAllContentStateWithOptions(options?: { includeBodies?: boolean }) {
+  const includeBodies = options?.includeBodies ?? true;
+  const fileState = await readStateFile({ includeBodies });
+  const stateSignature = cachedState
+    ? `${cachedState.mtimeMs}:${cachedState.size}`
+    : "missing";
+  const cacheKey = `${includeBodies ? "full" : "list"}::${stateSignature}::${getAuthoredCacheVersion()}`;
+  const mergedCached = mergedStateCache.get(cacheKey);
+
+  if (mergedCached) {
+    return mergedCached;
+  }
+
+  const authoredState = dedupeManagedEntries(
+    filterManagedEntries(
+      await readAuthoredManagedContents({ includeBodies }),
+    ),
+  );
+
+  if (!fileState) {
+    mergedStateCache.set(cacheKey, authoredState);
+    return authoredState;
+  }
+
+  const mergedItems = sortManagedContents(
+    dedupeManagedEntries(mergeManagedEntries(authoredState, fileState)),
+  );
+  mergedStateCache.set(cacheKey, mergedItems);
+  return mergedItems;
 }
 
 export async function readContentState(
   section?: ManagedContentSection,
-  options?: { categorySlug?: ManagedContentCategorySlug },
+  options?: { categorySlug?: ManagedContentCategorySlug; includeBodies?: boolean },
 ) {
-  const items = await readAllContentState();
+  const items = await readAllContentStateWithOptions({
+    includeBodies: options?.includeBodies,
+  });
   const sectionItems = section ? items.filter((item) => item.section === section) : items;
 
   if (!options?.categorySlug) {
@@ -143,10 +228,12 @@ export async function writeContentState(items: ManagedContentEntry[]) {
   await fs.writeFile(statePath, `${JSON.stringify(sortedItems, null, 2)}\n`, "utf8");
   const stat = await fs.stat(statePath);
   cachedState = {
-    items: sortedItems,
+    fullItems: sortedItems,
+    listItems: sortedItems.map((item) => normalizeStateEntry(item, false)),
     mtimeMs: stat.mtimeMs,
     size: stat.size,
   };
+  invalidateMergedStateCache();
   return sortedItems;
 }
 

@@ -12,7 +12,7 @@ export default async function AdminDemoPage({
 }: AdminDemoPageProps) {
   const initialItems = await readContentState(
     "demo",
-    categorySlug === "all" ? undefined : { categorySlug },
+    categorySlug === "all" ? { includeBodies: false } : { categorySlug, includeBodies: false },
   );
   const { description, title } = getAdminCategoryPageMeta("demo", categorySlug);
 
