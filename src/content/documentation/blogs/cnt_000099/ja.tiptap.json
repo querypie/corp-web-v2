@@ -1,1 +1,2333 @@
-{"content":[{"attrs":{"level":2},"content":[{"marks":[{"type":"bold"}],"text":"結論：AIの業務活用が進むほど、AI固有の攻撃面（アタックサーフェス）は拡大する。","type":"text"}],"type":"heading"},{"content":[{"text":"プロンプトインジェクション、学習データ汚染、モデルサプライチェーン攻撃——これらはもはや理論上のリスクではなく、2025年以降に実際のインシデントが報告されています。経営層が今構築すべきは、従来のサイバーセキュリティに「AI固有のリスク層」を追加した多層防御体制です。","type":"text"}],"type":"paragraph"},{"type":"horizontalRule"},{"attrs":{"level":2},"content":[{"text":"1. なぜ今「AIセキュリティ」が経営課題なのか","type":"text"}],"type":"heading"},{"content":[{"text":"AI活用の拡大は、同時に","type":"text"},{"marks":[{"type":"bold"}],"text":"新しいサイバー攻撃の標的","type":"text"},{"text":"を生み出しています。","type":"text"}],"type":"paragraph"},{"content":[{"content":[{"content":[{"marks":[{"attrs":{"href":"https://www.gartner.com/en/newsroom/press-releases/2025-08-05-gartner-hype-cycle-identifies-top-ai-innovations-in-2025"},"type":"link"}],"text":"Gartner","type":"text"},{"text":"は2025年の戦略的テクノロジートレンドにおいて、AIセキュリティを重要課題として位置づけ、AIを活用する企業がAI固有のセキュリティインシデントに直面するリスクが急速に高まっていると警告しています。","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"marks":[{"attrs":{"href":"https://www.nist.gov/itl/ai-risk-management-framework"},"type":"link"}],"text":"NIST AI RMF 1.0（2023年公開）","type":"text"},{"text":"および補足文書","type":"text"},{"marks":[{"attrs":{"href":"https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"},"type":"link"}],"text":"NIST AI 600-1 Generative AI Profile（2024年公開）","type":"text"},{"text":"は、AI固有のリスク（敵対的攻撃、データ汚染、出力操作）を従来のサイバーリスクとは別枠で管理する必要性を明記しています。","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"marks":[{"attrs":{"href":"https://labs.zenity.io/p/summary-zenity-research-published-blackhat-2024"},"type":"link"}],"text":"Zenity Research（2024年）","type":"text"},{"text":"は、Microsoft Copilot Studioにサーバーサイドリクエストフォージェリ（SSRF）の脆弱性を発見し、企業向けAIツール自体が攻撃経路になりうることを実証しました（","type":"text"},{"marks":[{"attrs":{"href":"https://nvd.nist.gov/vuln/detail/cve-2024-38206"},"type":"link"}],"text":"CVE-2024-38206","type":"text"},{"text":"として登録済み）。","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"content":[{"text":"従来のサイバーセキュリティは「ネットワーク・エンドポイント・データ」を守る三層構造でした。AI時代には、ここに ","type":"text"},{"marks":[{"type":"bold"}],"text":"「モデル・プロンプト・学習データ・出力」","type":"text"},{"text":" という第四の層が加わります。この認識転換が、CxOに求められる最初のステップです。","type":"text"}],"type":"paragraph"},{"type":"horizontalRule"},{"attrs":{"level":2},"content":[{"text":"2. AIシステムを狙う7つの攻撃ベクトル","type":"text"}],"type":"heading"},{"attrs":{"level":3},"content":[{"text":"2-1. プロンプトインジェクション","type":"text"}],"type":"heading"},{"content":[{"text":"AIへの入力（プロンプト）に","type":"text"},{"marks":[{"type":"bold"}],"text":"悪意ある指示を埋め込む","type":"text"},{"text":"攻撃です。システムプロンプトの無効化、機密情報の抽出、意図しない動作の誘発が可能になります。2025年にはGPT-4oベースの企業チャットボットで実際のインシデントが報告されています。","type":"text"}],"type":"paragraph"},{"attrs":{"level":3},"content":[{"text":"2-2. 学習データ汚染（データポイズニング）","type":"text"}],"type":"heading"},{"content":[{"text":"AIモデルの学習データに","type":"text"},{"marks":[{"type":"bold"}],"text":"意図的に偽・有害データを混入","type":"text"},{"text":"させる攻撃です。モデルの判断精度を低下させたり、特定の出力を誘導したりします。オープンソースのデータセットを利用する企業は特にリスクが高くなります。","type":"text"}],"type":"paragraph"},{"attrs":{"level":3},"content":[{"text":"2-3. モデルサプライチェーン攻撃","type":"text"}],"type":"heading"},{"content":[{"text":"Hugging Face等の公開モデルリポジトリから取得したモデルに","type":"text"},{"marks":[{"type":"bold"}],"text":"バックドアが仕込まれている","type":"text"},{"text":"ケースです。2024年にはHugging Hub上で悪意あるモデルが複数検出されました（","type":"text"},{"marks":[{"attrs":{"href":"https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/"},"type":"link"}],"text":"JFrog Security Research報告","type":"text"},{"text":"）。","type":"text"}],"type":"paragraph"},{"attrs":{"level":3},"content":[{"text":"2-4. AIエージェントの権限悪用","type":"text"}],"type":"heading"},{"content":[{"text":"AIエージェントに付与された","type":"text"},{"marks":[{"type":"bold"}],"text":"システムアクセス権限を悪用","type":"text"},{"text":"する攻撃です。エージェントがAPI経由でデータベースやファイルシステムにアクセスする場合、権限の過剰付与が重大なリスクとなります。","type":"text"}],"type":"paragraph"},{"content":[{"content":[{"text":"📖 AIエージェントの権限設計について、最小権限原則・承認フロー・監査ログを含む詳細なフレームワークは、ホワイトペーパー","type":"text"},{"marks":[{"attrs":{"href":"https://www.querypie.ai/ja/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026"},"type":"link"}],"text":"「AIエージェント時代のガードレール設計：前編 思想・設計編」","type":"text"},{"text":"で解説しています。","type":"text"}],"type":"paragraph"}],"type":"blockquote"},{"attrs":{"level":3},"content":[{"text":"2-5. 出力操作（Output Manipulation）","type":"text"}],"type":"heading"},{"content":[{"text":"AIの出力結果を","type":"text"},{"marks":[{"type":"bold"}],"text":"意図的に歪める","type":"text"},{"text":"攻撃です。RAG（検索拡張生成）システムにおいて、参照先文書を改ざんすることでAIの出力を操作する手法が確認されています。","type":"text"}],"type":"paragraph"},{"attrs":{"level":3},"content":[{"text":"2-6. モデル窃取・知的財産流出","type":"text"}],"type":"heading"},{"content":[{"text":"APIを通じた大量クエリで","type":"text"},{"marks":[{"type":"bold"}],"text":"モデルの挙動を再現（モデル抽出攻撃）","type":"text"},{"text":" したり、ファインチューニング済みモデルの知的財産が流出するリスクです。","type":"text"}],"type":"paragraph"},{"attrs":{"level":3},"content":[{"text":"2-7. AI利用による社会工学攻撃の高度化","type":"text"}],"type":"heading"},{"content":[{"text":"攻撃者がAIを","type":"text"},{"marks":[{"type":"bold"}],"text":"フィッシングメール生成やディープフェイク作成","type":"text"},{"text":"に悪用するケースです。従来の社会工学攻撃が格段に精巧になり、検知が困難になっています。","type":"text"}],"type":"paragraph"},{"type":"horizontalRule"},{"attrs":{"level":2},"content":[{"text":"3. OWASP Top 10 for LLMに学ぶ優先対策","type":"text"}],"type":"heading"},{"content":[{"marks":[{"attrs":{"href":"https://owasp.org/"},"type":"link"}],"text":"OWASP（Open Web Application Security Project）","type":"text"},{"text":"が公開した ","type":"text"},{"marks":[{"type":"bold"}],"text":"<a href=\"https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/\" target=\"_blank\" rel=\"noopener noreferrer\">「Top 10 for LLM Applications 2025」</a>","type":"text"},{"text":" は、LLMアプリケーション固有のセキュリティリスクを体系化した重要な参照基準です。","type":"text"}],"type":"paragraph"},{"attrs":{"level":3},"content":[{"text":"上位3リスクと対策の要点","type":"text"}],"type":"heading"},{"content":[{"marks":[{"type":"bold"}],"text":"1. プロンプトインジェクション（LLM01）","type":"text"}],"type":"paragraph"},{"content":[{"content":[{"content":[{"text":"入力検証・サニタイゼーションの実装","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"システムプロンプトと外部入力の厳格な分離","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"出力フィルタリングの多段化","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"content":[{"marks":[{"type":"bold"}],"text":"2. 機密情報漏洩（LLM02）","type":"text"}],"type":"paragraph"},{"content":[{"content":[{"content":[{"text":"学習データ・入力データの機密分類管理","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"PII（個人情報）検出・マスキングの自動化","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"データ損失防止（DLP）ツールとの連携","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"content":[{"marks":[{"type":"bold"}],"text":"3. サプライチェーンリスク（LLM05）","type":"text"}],"type":"paragraph"},{"content":[{"content":[{"content":[{"text":"使用モデル・ライブラリの脆弱性スキャン","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"モデルの出所・整合性の検証プロセス","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"SBOM（ソフトウェア部品表）のAI版「AI-BOM」管理","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"type":"horizontalRule"},{"attrs":{"level":2},"content":[{"text":"4. 攻撃ベクトル別 対策比較表","type":"text"}],"type":"heading"},{"content":[{"content":[{"content":[{"content":[{"text":"攻撃ベクトル","type":"text"}],"type":"paragraph"}],"type":"tableHeader"},{"content":[{"content":[{"text":"リスクレベル","type":"text"}],"type":"paragraph"}],"type":"tableHeader"},{"content":[{"content":[{"text":"主な対策","type":"text"}],"type":"paragraph"}],"type":"tableHeader"},{"content":[{"content":[{"text":"コスト","type":"text"}],"type":"paragraph"}],"type":"tableHeader"},{"content":[{"content":[{"text":"導入難易度","type":"text"}],"type":"paragraph"}],"type":"tableHeader"}],"type":"tableRow"},{"content":[{"content":[{"content":[{"text":"プロンプトインジェクション","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"★★★★★","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"入力検証・出力フィルタ・プロンプト分離","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"中","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"中","type":"text"}],"type":"paragraph"}],"type":"tableCell"}],"type":"tableRow"},{"content":[{"content":[{"content":[{"text":"学習データ汚染","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"★★★★☆","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"データ品質監査・出所検証・異常検知","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"高","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"高","type":"text"}],"type":"paragraph"}],"type":"tableCell"}],"type":"tableRow"},{"content":[{"content":[{"content":[{"text":"モデルサプライチェーン","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"★★★★☆","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"モデルスキャン・AI-BOM管理・署名検証","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"中","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"中","type":"text"}],"type":"paragraph"}],"type":"tableCell"}],"type":"tableRow"},{"content":[{"content":[{"content":[{"text":"エージェント権限悪用","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"★★★★★","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"最小権限原則・アクセスログ・承認ゲート","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"中","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"中","type":"text"}],"type":"paragraph"}],"type":"tableCell"}],"type":"tableRow"},{"content":[{"content":[{"content":[{"text":"出力操作","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"★★★☆☆","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"RAGソース検証・出力クロスチェック","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"低〜中","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"低","type":"text"}],"type":"paragraph"}],"type":"tableCell"}],"type":"tableRow"},{"content":[{"content":[{"content":[{"text":"モデル窃取","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"★★★☆☆","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"レート制限・アクセス制御・モニタリング","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"低","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"低","type":"text"}],"type":"paragraph"}],"type":"tableCell"}],"type":"tableRow"},{"content":[{"content":[{"content":[{"text":"AI悪用型社会工学","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"★★★★☆","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"従業員教育・多要素認証・検知ツール","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"中","type":"text"}],"type":"paragraph"}],"type":"tableCell"},{"content":[{"content":[{"text":"中","type":"text"}],"type":"paragraph"}],"type":"tableCell"}],"type":"tableRow"}],"type":"table"},{"content":[{"marks":[{"type":"bold"}],"text":"推奨アプローチ：","type":"text"},{"text":" プロンプトインジェクション対策とエージェント権限管理は","type":"text"},{"marks":[{"type":"bold"}],"text":"最優先","type":"text"},{"text":"で取り組むべきです。この2つは攻撃の発生頻度が高く、インパクトも大きいためです。","type":"text"}],"type":"paragraph"},{"type":"horizontalRule"},{"attrs":{"level":2},"content":[{"text":"5. AIセキュリティガバナンスの構築手順","type":"text"}],"type":"heading"},{"attrs":{"level":3},"content":[{"text":"ステップ1：AI資産の棚卸し","type":"text"}],"type":"heading"},{"content":[{"content":[{"content":[{"text":"社内で利用中のAIツール・モデル・APIを一覧化する","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"各AI資産の","type":"text"},{"marks":[{"type":"bold"}],"text":"アクセス権限・データ接続先・利用部門","type":"text"},{"text":"を明確にする","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"シャドーAI（未承認AI利用）の実態調査を実施する","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"attrs":{"level":3},"content":[{"text":"ステップ2：AI固有リスクの評価","type":"text"}],"type":"heading"},{"content":[{"content":[{"content":[{"marks":[{"attrs":{"href":"https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/"},"type":"link"}],"text":"OWASP Top 10 for LLM","type":"text"},{"text":"を基準にリスクアセスメントを実施する","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"各AI資産に対して","type":"text"},{"marks":[{"type":"bold"}],"text":"機密区分別の利用ポリシー","type":"text"},{"text":"を策定する","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"marks":[{"attrs":{"href":"https://www.nist.gov/itl/ai-risk-management-framework"},"type":"link"}],"text":"NIST AI RMF","type":"text"},{"text":"に基づくリスク管理フレームワークを導入する","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"attrs":{"level":3},"content":[{"text":"ステップ3：技術的対策の実装","type":"text"}],"type":"heading"},{"content":[{"content":[{"content":[{"text":"プロンプトインジェクション対策（入力検証・出力フィルタ）","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"AIエージェントの","type":"text"},{"marks":[{"type":"bold"}],"text":"最小権限原則","type":"text"},{"text":"と承認ゲートの設計","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"AI利用ログの一元管理と","type":"text"},{"marks":[{"type":"bold"}],"text":"リアルタイム異常検知","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"content":[{"content":[{"text":"📖 承認ゲート設計・監査ログの実装手順・停止手順の詳細は、ホワイトペーパー","type":"text"},{"marks":[{"attrs":{"href":"https://www.querypie.ai/ja/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026"},"type":"link"}],"text":"「AIエージェント時代のガードレール設計：前編 思想・設計編」","type":"text"},{"text":"をご参照ください。ケーススタディや90日ロードマップをお探しの方は","type":"text"},{"marks":[{"attrs":{"href":"https://www.querypie.ai/ja/features/documentation/white-paper/29/ai-agent-guardrails-governance-2026-implementation"},"type":"link"}],"text":"後編：実践・導入編","type":"text"},{"text":"もあわせてご活用ください。","type":"text"}],"type":"paragraph"}],"type":"blockquote"},{"attrs":{"level":3},"content":[{"text":"ステップ4：組織的対策の展開","type":"text"}],"type":"heading"},{"content":[{"content":[{"content":[{"marks":[{"type":"bold"}],"text":"全社員向けAIセキュリティ研修","type":"text"},{"text":"を定期実施する（年2回以上）","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"AI利用インシデント対応手順書の策定","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"四半期ごとのAIセキュリティ監査の実施","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"attrs":{"level":3},"content":[{"text":"ステップ5：継続的改善","type":"text"}],"type":"heading"},{"content":[{"content":[{"content":[{"text":"新しい攻撃手法・脆弱性情報の定期収集","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"Red Team演習（AIシステムへの擬似攻撃テスト）の実施","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"AIセキュリティKPIの設定と経営報告","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"type":"horizontalRule"},{"attrs":{"level":2},"content":[{"text":"6. 経営上の示唆と次のアクション","type":"text"}],"type":"heading"},{"attrs":{"level":3},"content":[{"text":"重要ポイント","type":"text"}],"type":"heading"},{"content":[{"content":[{"content":[{"text":"AIセキュリティは従来のサイバーセキュリティの","type":"text"},{"marks":[{"type":"bold"}],"text":"延長ではなく追加層","type":"text"},{"text":"として設計する","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"プロンプトインジェクションとエージェント権限管理が","type":"text"},{"marks":[{"type":"bold"}],"text":"最優先対策","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"技術的対策と組織的対策（教育・監査・体制）の","type":"text"},{"marks":[{"type":"bold"}],"text":"両輪","type":"text"},{"text":"が不可欠","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"attrs":{"level":3},"content":[{"text":"CxOへの具体的アクション","type":"text"}],"type":"heading"},{"content":[{"marks":[{"type":"bold"}],"text":"今日やること：","type":"text"}],"type":"paragraph"},{"content":[{"content":[{"content":[{"text":"IT/セキュリティ部門にAI資産の棚卸し状況を確認する","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"自社のAI利用ポリシーが「AI固有のリスク」を対象にしているか点検する","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"content":[{"marks":[{"type":"bold"}],"text":"今週やること：","type":"text"}],"type":"paragraph"},{"content":[{"content":[{"content":[{"marks":[{"attrs":{"href":"https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/"},"type":"link"}],"text":"OWASP Top 10 for LLM","type":"text"},{"text":"を参照し、自社AI環境の簡易リスク評価を実施する","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"AIエージェントに付与されている権限の一覧を作成する","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"content":[{"marks":[{"type":"bold"}],"text":"今月やること：","type":"text"}],"type":"paragraph"},{"content":[{"content":[{"content":[{"text":"AIセキュリティ責任者（またはAIセキュリティタスクフォース）の設置を決裁する","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"全社員向けAIセキュリティ研修の計画を策定する","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"text":"Red Team演習の実施計画を検討する","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"attrs":{"level":2},"content":[{"text":"さらに詳しく知るために","type":"text"}],"type":"heading"},{"content":[{"content":[{"content":[{"marks":[{"attrs":{"href":"https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/"},"type":"link"}],"text":"OWASP「Top 10 for LLM Applications 2025」","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"marks":[{"attrs":{"href":"https://www.nist.gov/itl/ai-risk-management-framework"},"type":"link"}],"text":"NIST「AI Risk Management Framework 1.0」","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"marks":[{"attrs":{"href":"https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"},"type":"link"}],"text":"NIST AI 600-1「Generative AI Profile」","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"marks":[{"attrs":{"href":"https://www.meti.go.jp/shingikai/mono_info_service/ai_shakai_jisso/index.html"},"type":"link"}],"text":"経済産業省「AI事業者ガイドライン（第1.0版、2024年4月）」","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"marks":[{"attrs":{"href":"https://nvd.nist.gov/vuln/detail/cve-2024-38206"},"type":"link"}],"text":"米国National Vulnerability Database「CVE-2024-38206」","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"marks":[{"attrs":{"href":"https://artificialintelligenceact.eu/"},"type":"link"}],"text":"EU AI Act（2024年発効・2025年以降段階適用）","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"marks":[{"attrs":{"href":"https://www.querypie.ai/ja/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026"},"type":"link"}],"text":"ホワイトペーパー「AIエージェント時代のガードレール設計：前編 思想・設計編」","type":"text"}],"type":"paragraph"}],"type":"listItem"},{"content":[{"content":[{"marks":[{"attrs":{"href":"https://www.querypie.ai/ja/features/documentation/white-paper/29/ai-agent-guardrails-governance-2026-implementation"},"type":"link"}],"text":"ホワイトペーパー「AIエージェント時代のガードレール設計：後編 実践・導入編」","type":"text"}],"type":"paragraph"}],"type":"listItem"}],"type":"bulletList"},{"type":"horizontalRule"},{"content":[{"marks":[{"type":"bold"}],"text":"AIセキュリティは、AI活用の「ブレーキ」ではなく「安全装置」です。","type":"text"},{"text":" 適切なセキュリティガバナンスがあれば、リスクを管理しながらAIの恩恵を最大化できます。経営層のリーダーシップで、今日から対策の第一歩を踏み出してください。","type":"text"}],"type":"paragraph"}],"type":"doc"}
+{
+  "content": [
+    {
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "text": "結論：AIの業務活用が進むほど、AI固有の攻撃面（アタックサーフェス）は拡大する。",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "text": "プロンプトインジェクション、学習データ汚染、モデルサプライチェーン攻撃——これらはもはや理論上のリスクではなく、2025年以降に実際のインシデントが報告されています。経営層が今構築すべきは、従来のサイバーセキュリティに「AI固有のリスク層」を追加した多層防御体制です。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "text": "1. なぜ今「AIセキュリティ」が経営課題なのか",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "text": "AI活用の拡大は、同時に",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "新しいサイバー攻撃の標的",
+          "type": "text"
+        },
+        {
+          "text": "を生み出しています。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://www.gartner.com/en/newsroom/press-releases/2025-08-05-gartner-hype-cycle-identifies-top-ai-innovations-in-2025"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "Gartner",
+                  "type": "text"
+                },
+                {
+                  "text": "は2025年の戦略的テクノロジートレンドにおいて、AIセキュリティを重要課題として位置づけ、AIを活用する企業がAI固有のセキュリティインシデントに直面するリスクが急速に高まっていると警告しています。",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://www.nist.gov/itl/ai-risk-management-framework"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "NIST AI RMF 1.0（2023年公開）",
+                  "type": "text"
+                },
+                {
+                  "text": "および補足文書",
+                  "type": "text"
+                },
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "NIST AI 600-1 Generative AI Profile（2024年公開）",
+                  "type": "text"
+                },
+                {
+                  "text": "は、AI固有のリスク（敵対的攻撃、データ汚染、出力操作）を従来のサイバーリスクとは別枠で管理する必要性を明記しています。",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://labs.zenity.io/p/summary-zenity-research-published-blackhat-2024"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "Zenity Research（2024年）",
+                  "type": "text"
+                },
+                {
+                  "text": "は、Microsoft Copilot Studioにサーバーサイドリクエストフォージェリ（SSRF）の脆弱性を発見し、企業向けAIツール自体が攻撃経路になりうることを実証しました（",
+                  "type": "text"
+                },
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://nvd.nist.gov/vuln/detail/cve-2024-38206"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "CVE-2024-38206",
+                  "type": "text"
+                },
+                {
+                  "text": "として登録済み）。",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "content": [
+        {
+          "text": "従来のサイバーセキュリティは「ネットワーク・エンドポイント・データ」を守る三層構造でした。AI時代には、ここに ",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "「モデル・プロンプト・学習データ・出力」",
+          "type": "text"
+        },
+        {
+          "text": " という第四の層が加わります。この認識転換が、CxOに求められる最初のステップです。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "text": "2. AIシステムを狙う7つの攻撃ベクトル",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "2-1. プロンプトインジェクション",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "text": "AIへの入力（プロンプト）に",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "悪意ある指示を埋め込む",
+          "type": "text"
+        },
+        {
+          "text": "攻撃です。システムプロンプトの無効化、機密情報の抽出、意図しない動作の誘発が可能になります。2025年にはGPT-4oベースの企業チャットボットで実際のインシデントが報告されています。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "2-2. 学習データ汚染（データポイズニング）",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "text": "AIモデルの学習データに",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "意図的に偽・有害データを混入",
+          "type": "text"
+        },
+        {
+          "text": "させる攻撃です。モデルの判断精度を低下させたり、特定の出力を誘導したりします。オープンソースのデータセットを利用する企業は特にリスクが高くなります。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "2-3. モデルサプライチェーン攻撃",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "text": "Hugging Face等の公開モデルリポジトリから取得したモデルに",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "バックドアが仕込まれている",
+          "type": "text"
+        },
+        {
+          "text": "ケースです。2024年にはHugging Hub上で悪意あるモデルが複数検出されました（",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "attrs": {
+                "href": "https://jfrog.com/blog/data-scientists-targeted-by-malicious-hugging-face-ml-models-with-silent-backdoor/"
+              },
+              "type": "link"
+            }
+          ],
+          "text": "JFrog Security Research報告",
+          "type": "text"
+        },
+        {
+          "text": "）。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "2-4. AIエージェントの権限悪用",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "text": "AIエージェントに付与された",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "システムアクセス権限を悪用",
+          "type": "text"
+        },
+        {
+          "text": "する攻撃です。エージェントがAPI経由でデータベースやファイルシステムにアクセスする場合、権限の過剰付与が重大なリスクとなります。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "text": "📖 AIエージェントの権限設計について、最小権限原則・承認フロー・監査ログを含む詳細なフレームワークは、ホワイトペーパー",
+              "type": "text"
+            },
+            {
+              "marks": [
+                {
+                  "attrs": {
+                    "href": "https://www.querypie.ai/ja/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026"
+                  },
+                  "type": "link"
+                }
+              ],
+              "text": "「AIエージェント時代のガードレール設計：前編 思想・設計編」",
+              "type": "text"
+            },
+            {
+              "text": "で解説しています。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "blockquote"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "2-5. 出力操作（Output Manipulation）",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "text": "AIの出力結果を",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "意図的に歪める",
+          "type": "text"
+        },
+        {
+          "text": "攻撃です。RAG（検索拡張生成）システムにおいて、参照先文書を改ざんすることでAIの出力を操作する手法が確認されています。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "2-6. モデル窃取・知的財産流出",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "text": "APIを通じた大量クエリで",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "モデルの挙動を再現（モデル抽出攻撃）",
+          "type": "text"
+        },
+        {
+          "text": " したり、ファインチューニング済みモデルの知的財産が流出するリスクです。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "2-7. AI利用による社会工学攻撃の高度化",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "text": "攻撃者がAIを",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "フィッシングメール生成やディープフェイク作成",
+          "type": "text"
+        },
+        {
+          "text": "に悪用するケースです。従来の社会工学攻撃が格段に精巧になり、検知が困難になっています。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "text": "3. OWASP Top 10 for LLMに学ぶ優先対策",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "marks": [
+            {
+              "attrs": {
+                "href": "https://owasp.org/"
+              },
+              "type": "link"
+            }
+          ],
+          "text": "OWASP（Open Web Application Security Project）",
+          "type": "text"
+        },
+        {
+          "text": "が公開した ",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "<a href=\"https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/\" target=\"_blank\" rel=\"noopener noreferrer\">「Top 10 for LLM Applications 2025」</a>",
+          "type": "text"
+        },
+        {
+          "text": " は、LLMアプリケーション固有のセキュリティリスクを体系化した重要な参照基準です。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "上位3リスクと対策の要点",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "1. プロンプトインジェクション（LLM01）",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "入力検証・サニタイゼーションの実装",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "システムプロンプトと外部入力の厳格な分離",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "出力フィルタリングの多段化",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "content": [
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "2. 機密情報漏洩（LLM02）",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "学習データ・入力データの機密分類管理",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "PII（個人情報）検出・マスキングの自動化",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "データ損失防止（DLP）ツールとの連携",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "content": [
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "3. サプライチェーンリスク（LLM05）",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "使用モデル・ライブラリの脆弱性スキャン",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "モデルの出所・整合性の検証プロセス",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "SBOM（ソフトウェア部品表）のAI版「AI-BOM」管理",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "text": "4. 攻撃ベクトル別 対策比較表",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "攻撃ベクトル",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableHeader"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "リスクレベル",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableHeader"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "主な対策",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableHeader"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "コスト",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableHeader"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "導入難易度",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableHeader"
+            }
+          ],
+          "type": "tableRow"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "プロンプトインジェクション",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "★★★★★",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "入力検証・出力フィルタ・プロンプト分離",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "中",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "中",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            }
+          ],
+          "type": "tableRow"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "学習データ汚染",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "★★★★☆",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "データ品質監査・出所検証・異常検知",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "高",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "高",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            }
+          ],
+          "type": "tableRow"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "モデルサプライチェーン",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "★★★★☆",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "モデルスキャン・AI-BOM管理・署名検証",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "中",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "中",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            }
+          ],
+          "type": "tableRow"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "エージェント権限悪用",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "★★★★★",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "最小権限原則・アクセスログ・承認ゲート",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "中",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "中",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            }
+          ],
+          "type": "tableRow"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "出力操作",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "★★★☆☆",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "RAGソース検証・出力クロスチェック",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "低〜中",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "低",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            }
+          ],
+          "type": "tableRow"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "モデル窃取",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "★★★☆☆",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "レート制限・アクセス制御・モニタリング",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "低",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "低",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            }
+          ],
+          "type": "tableRow"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "AI悪用型社会工学",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "★★★★☆",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "従業員教育・多要素認証・検知ツール",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "中",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            },
+            {
+              "content": [
+                {
+                  "content": [
+                    {
+                      "text": "中",
+                      "type": "text"
+                    }
+                  ],
+                  "type": "paragraph"
+                }
+              ],
+              "type": "tableCell"
+            }
+          ],
+          "type": "tableRow"
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "content": [
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "推奨アプローチ：",
+          "type": "text"
+        },
+        {
+          "text": " プロンプトインジェクション対策とエージェント権限管理は",
+          "type": "text"
+        },
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "最優先",
+          "type": "text"
+        },
+        {
+          "text": "で取り組むべきです。この2つは攻撃の発生頻度が高く、インパクトも大きいためです。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "text": "5. AIセキュリティガバナンスの構築手順",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "ステップ1：AI資産の棚卸し",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "社内で利用中のAIツール・モデル・APIを一覧化する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "各AI資産の",
+                  "type": "text"
+                },
+                {
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "アクセス権限・データ接続先・利用部門",
+                  "type": "text"
+                },
+                {
+                  "text": "を明確にする",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "シャドーAI（未承認AI利用）の実態調査を実施する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "ステップ2：AI固有リスクの評価",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "OWASP Top 10 for LLM",
+                  "type": "text"
+                },
+                {
+                  "text": "を基準にリスクアセスメントを実施する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "各AI資産に対して",
+                  "type": "text"
+                },
+                {
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "機密区分別の利用ポリシー",
+                  "type": "text"
+                },
+                {
+                  "text": "を策定する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://www.nist.gov/itl/ai-risk-management-framework"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "NIST AI RMF",
+                  "type": "text"
+                },
+                {
+                  "text": "に基づくリスク管理フレームワークを導入する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "ステップ3：技術的対策の実装",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "プロンプトインジェクション対策（入力検証・出力フィルタ）",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "AIエージェントの",
+                  "type": "text"
+                },
+                {
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "最小権限原則",
+                  "type": "text"
+                },
+                {
+                  "text": "と承認ゲートの設計",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "AI利用ログの一元管理と",
+                  "type": "text"
+                },
+                {
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "リアルタイム異常検知",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "text": "📖 承認ゲート設計・監査ログの実装手順・停止手順の詳細は、ホワイトペーパー",
+              "type": "text"
+            },
+            {
+              "marks": [
+                {
+                  "attrs": {
+                    "href": "https://www.querypie.ai/ja/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026"
+                  },
+                  "type": "link"
+                }
+              ],
+              "text": "「AIエージェント時代のガードレール設計：前編 思想・設計編」",
+              "type": "text"
+            },
+            {
+              "text": "をご参照ください。ケーススタディや90日ロードマップをお探しの方は",
+              "type": "text"
+            },
+            {
+              "marks": [
+                {
+                  "attrs": {
+                    "href": "https://www.querypie.ai/ja/features/documentation/white-paper/29/ai-agent-guardrails-governance-2026-implementation"
+                  },
+                  "type": "link"
+                }
+              ],
+              "text": "後編：実践・導入編",
+              "type": "text"
+            },
+            {
+              "text": "もあわせてご活用ください。",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "type": "blockquote"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "ステップ4：組織的対策の展開",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "全社員向けAIセキュリティ研修",
+                  "type": "text"
+                },
+                {
+                  "text": "を定期実施する（年2回以上）",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "AI利用インシデント対応手順書の策定",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "四半期ごとのAIセキュリティ監査の実施",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "ステップ5：継続的改善",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "新しい攻撃手法・脆弱性情報の定期収集",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "Red Team演習（AIシステムへの擬似攻撃テスト）の実施",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "AIセキュリティKPIの設定と経営報告",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "text": "6. 経営上の示唆と次のアクション",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "重要ポイント",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "AIセキュリティは従来のサイバーセキュリティの",
+                  "type": "text"
+                },
+                {
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "延長ではなく追加層",
+                  "type": "text"
+                },
+                {
+                  "text": "として設計する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "プロンプトインジェクションとエージェント権限管理が",
+                  "type": "text"
+                },
+                {
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "最優先対策",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "技術的対策と組織的対策（教育・監査・体制）の",
+                  "type": "text"
+                },
+                {
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "両輪",
+                  "type": "text"
+                },
+                {
+                  "text": "が不可欠",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "text": "CxOへの具体的アクション",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "今日やること：",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "IT/セキュリティ部門にAI資産の棚卸し状況を確認する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "自社のAI利用ポリシーが「AI固有のリスク」を対象にしているか点検する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "content": [
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "今週やること：",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "OWASP Top 10 for LLM",
+                  "type": "text"
+                },
+                {
+                  "text": "を参照し、自社AI環境の簡易リスク評価を実施する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "AIエージェントに付与されている権限の一覧を作成する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "content": [
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "今月やること：",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "AIセキュリティ責任者（またはAIセキュリティタスクフォース）の設置を決裁する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "全社員向けAIセキュリティ研修の計画を策定する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "text": "Red Team演習の実施計画を検討する",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "text": "さらに詳しく知るために",
+          "type": "text"
+        }
+      ],
+      "type": "heading"
+    },
+    {
+      "content": [
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://genai.owasp.org/resource/owasp-top-10-for-llm-applications-2025/"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "OWASP「Top 10 for LLM Applications 2025」",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://www.nist.gov/itl/ai-risk-management-framework"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "NIST「AI Risk Management Framework 1.0」",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-generative-artificial-intelligence"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "NIST AI 600-1「Generative AI Profile」",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://www.meti.go.jp/shingikai/mono_info_service/ai_shakai_jisso/index.html"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "経済産業省「AI事業者ガイドライン（第1.0版、2024年4月）」",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://nvd.nist.gov/vuln/detail/cve-2024-38206"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "米国National Vulnerability Database「CVE-2024-38206」",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://artificialintelligenceact.eu/"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "EU AI Act（2024年発効・2025年以降段階適用）",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://www.querypie.ai/ja/features/documentation/white-paper/28/ai-agent-guardrails-governance-2026"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "ホワイトペーパー「AIエージェント時代のガードレール設計：前編 思想・設計編」",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        },
+        {
+          "content": [
+            {
+              "content": [
+                {
+                  "marks": [
+                    {
+                      "attrs": {
+                        "href": "https://www.querypie.ai/ja/features/documentation/white-paper/29/ai-agent-guardrails-governance-2026-implementation"
+                      },
+                      "type": "link"
+                    }
+                  ],
+                  "text": "ホワイトペーパー「AIエージェント時代のガードレール設計：後編 実践・導入編」",
+                  "type": "text"
+                }
+              ],
+              "type": "paragraph"
+            }
+          ],
+          "type": "listItem"
+        }
+      ],
+      "type": "bulletList"
+    },
+    {
+      "type": "horizontalRule"
+    },
+    {
+      "content": [
+        {
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "AIセキュリティは、AI活用の「ブレーキ」ではなく「安全装置」です。",
+          "type": "text"
+        },
+        {
+          "text": " 適切なセキュリティガバナンスがあれば、リスクを管理しながらAIの恩恵を最大化できます。経営層のリーダーシップで、今日から対策の第一歩を踏み出してください。",
+          "type": "text"
+        }
+      ],
+      "type": "paragraph"
+    }
+  ],
+  "type": "doc"
+}

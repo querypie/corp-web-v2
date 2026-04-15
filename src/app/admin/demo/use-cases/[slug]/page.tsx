@@ -12,7 +12,7 @@ export default async function AdminDemoUseCaseDetailRoute({ params }: Props) {
   const resolvedSlug = decodeURIComponent(slug);
   const [initialItem, initialItems] = await Promise.all([
     readContentItem("demo", resolvedSlug, { categorySlug: "use-cases" }),
-    readContentState("demo"),
+    readContentState("demo", { includeBodies: false }),
   ]);
 
   if (!initialItem) notFound();

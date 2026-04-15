@@ -12,7 +12,7 @@ export default async function AdminNewsDetailRoute({ params }: Props) {
   const resolvedSlug = decodeURIComponent(slug);
   const [initialItem, initialItems] = await Promise.all([
     readContentItem("news", resolvedSlug, { categorySlug: "news" }),
-    readContentState("news"),
+    readContentState("news", { includeBodies: false }),
   ]);
 
   if (!initialItem) notFound();

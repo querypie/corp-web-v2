@@ -21,11 +21,13 @@ import type {
 
 type ReplaceStateRequest = {
   items?: ManagedContentEntry[];
+  preserveExistingBodies?: boolean;
 };
 
 type UpsertStateRequest = {
   currentId?: string;
   item?: ManagedContentEntry;
+  preserveExistingBodies?: boolean;
 };
 
 type DeleteStateRequest = {
@@ -59,12 +61,42 @@ function isSameItem(left: ManagedContentEntry | undefined, right: ManagedContent
   return left ? JSON.stringify(left) === JSON.stringify(right) : false;
 }
 
+function hasBodyContent(item: Pick<ManagedContentEntry, "bodyHtml" | "bodyRichText"> | undefined) {
+  if (!item) return false;
+
+  return Object.values(item.bodyHtml).some((value) => value.trim().length > 0)
+    || Object.values(item.bodyRichText).some((value) => value.trim().length > 0);
+}
+
+function mergeBodiesFromCurrent(
+  item: ManagedContentEntry,
+  currentItem: ManagedContentEntry | undefined,
+  preserveExistingBodies = false,
+) {
+  if (!preserveExistingBodies || !currentItem) {
+    return item;
+  }
+
+  if (hasBodyContent(item) || !hasBodyContent(currentItem)) {
+    return item;
+  }
+
+  return {
+    ...item,
+    bodyHtml: currentItem.bodyHtml,
+    bodyRichText: currentItem.bodyRichText,
+  };
+}
+
 export async function GET(request: Request) {
   const section = parseSection(request.url) ?? undefined;
   const categorySlug = parseCategorySlug(request.url) ?? undefined;
   const itemId = parseItemId(request.url);
   const view = parseView(request.url);
-  const items = await readContentState(section, { categorySlug });
+  const items = await readContentState(section, {
+    categorySlug,
+    includeBodies: view !== "list",
+  });
 
   if (itemId) {
     return NextResponse.json({ item: items.find((entry) => entry.id === itemId) ?? null });
@@ -88,7 +120,11 @@ export async function POST(request: Request) {
     const payloadSections = new Set(payload.items.map((item) => item.section));
     const nextItems: ManagedContentEntry[] = [];
     for (const item of payload.items) {
-      const normalizedItem = item;
+      const normalizedItem = mergeBodiesFromCurrent(
+        item,
+        currentMap.get(item.id),
+        payload.preserveExistingBodies,
+      );
       const currentItem = currentMap.get(normalizedItem.id);
 
       if (isSameItem(currentItem, normalizedItem)) {
@@ -134,7 +170,15 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: "item is required" }, { status: 400 });
   }
 
-  const normalizedItem = item;
+  const currentItems = await readContentState();
+  const currentItem = currentItems.find(
+    (entry) => entry.id === (payload.currentId ?? item.id),
+  ) ?? currentItems.find((entry) => entry.id === item.id);
+  const normalizedItem = mergeBodiesFromCurrent(
+    item,
+    currentItem,
+    payload.preserveExistingBodies,
+  );
   const savedItem = await saveAuthoredContent(normalizedItem);
 
   await upsertContentState(savedItem, payload.currentId);

@@ -16,6 +16,9 @@ type ManagedContentChangeDetail = {
 };
 
 type ManagedContentView = "full" | "list";
+type SaveOptions = {
+  preserveExistingBodies?: boolean;
+};
 
 const snapshotCache = new Map<string, ManagedContentEntry[]>();
 
@@ -145,9 +148,9 @@ export async function getManagedContentDetail(
   return payload.item ?? null;
 }
 
-export async function persistManagedContents(items: ManagedContentEntry[]) {
+export async function persistManagedContents(items: ManagedContentEntry[], options?: SaveOptions) {
   const response = await fetch("/api/admin/content/state", {
-    body: JSON.stringify({ items }),
+    body: JSON.stringify({ items, preserveExistingBodies: options?.preserveExistingBodies }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -163,9 +166,17 @@ export async function persistManagedContents(items: ManagedContentEntry[]) {
   emitChange({ shouldRefetch: true });
 }
 
-export async function upsertManagedContent(item: ManagedContentEntry, currentId?: string) {
+export async function upsertManagedContent(
+  item: ManagedContentEntry,
+  currentId?: string,
+  options?: SaveOptions,
+) {
   const response = await fetch("/api/admin/content/state", {
-    body: JSON.stringify({ currentId, item }),
+    body: JSON.stringify({
+      currentId,
+      item,
+      preserveExistingBodies: options?.preserveExistingBodies,
+    }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -205,17 +216,6 @@ export async function updateManagedContentStatus(
   status: ManagedContentStatus,
   item?: ManagedContentEntry,
 ) {
-  const cacheSection = item?.section;
-  const previousSectionSnapshot = cacheSection ? readSnapshotCache(cacheSection) : undefined;
-
-  if (item && previousSectionSnapshot) {
-    writeSnapshotCache(
-      previousSectionSnapshot.map((entry) => (entry.id === id ? { ...entry, status } : entry)),
-      cacheSection,
-    );
-    emitChange({ section: cacheSection, shouldRefetch: false });
-  }
-
   const response = await fetch("/api/admin/content/state", {
     body: JSON.stringify({ id, item, status }),
     headers: {
@@ -227,14 +227,10 @@ export async function updateManagedContentStatus(
   const payload = (await response.json()) as { error?: string };
 
   if (!response.ok) {
-    if (cacheSection && previousSectionSnapshot) {
-      writeSnapshotCache(previousSectionSnapshot, cacheSection);
-      emitChange({ section: cacheSection, shouldRefetch: false });
-    }
     throw new Error(payload.error ?? "Failed to update content status.");
   }
 
-  emitChange({ section: cacheSection, shouldRefetch: false });
+  emitChange({ section: item?.section, shouldRefetch: true });
 }
 
 export async function reorderManagedContents(orderedItems: ManagedContentEntry[]) {
@@ -258,7 +254,9 @@ export async function reorderManagedContents(orderedItems: ManagedContentEntry[]
       ),
   );
 
-  await persistManagedContents([...normalizedItems, ...otherItems]);
+  await persistManagedContents([...normalizedItems, ...otherItems], {
+    preserveExistingBodies: true,
+  });
 }
 
 export function useManagedContents(
@@ -274,11 +272,13 @@ export function useManagedContents(
   );
 
   useEffect(() => {
-    if (initialItemsRef.current?.length) {
-      writeSnapshotCache(initialItemsRef.current, section, categorySlug, view);
-      setItems((current) => (current.length ? current : initialItemsRef.current ?? []));
+    initialItemsRef.current = initialItems;
+
+    if (initialItems !== undefined) {
+      writeSnapshotCache(initialItems, section, categorySlug, view);
+      setItems(initialItems);
     }
-  }, [categorySlug, section, view]);
+  }, [categorySlug, initialItems, section, view]);
 
   useEffect(() => {
     let active = true;
@@ -344,11 +344,13 @@ export function useManagedContentsLoading(
   const [isLoading, setIsLoading] = useState(() => !hasBootstrappedDataRef.current);
 
   useEffect(() => {
-    if (initialItemsRef.current?.length) {
-      writeSnapshotCache(initialItemsRef.current, section, categorySlug, view);
+    initialItemsRef.current = initialItems;
+
+    if (initialItems !== undefined) {
+      writeSnapshotCache(initialItems, section, categorySlug, view);
       setIsLoading(false);
     }
-  }, [categorySlug, section, view]);
+  }, [categorySlug, initialItems, section, view]);
 
   useEffect(() => {
     let active = true;

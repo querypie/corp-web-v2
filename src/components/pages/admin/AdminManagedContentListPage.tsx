@@ -502,19 +502,28 @@ export default function AdminManagedContentListPage({
   function handleDuplicateItem(item: ManagedContentEntry) {
     setIsDuplicating(true);
 
-    const siblingItems = items.filter(
-      (entry) => entry.section === item.section && entry.categorySlug === item.categorySlug,
-    );
-    const reindexedItems = items.map((entry) =>
-      entry.section === item.section &&
-      entry.categorySlug === item.categorySlug &&
-      entry.sortOrder >= item.sortOrder
-        ? { ...entry, sortOrder: entry.sortOrder + 1 }
-        : entry,
-    );
-    const duplicatedItem = cloneAsAuthoredContent(item, siblingItems);
+    void getManagedContentDetail(item.section, item.id)
+      .then((fullItem) => {
+        if (!fullItem) {
+          throw new Error("원본 콘텐츠를 불러오지 못했습니다.");
+        }
 
-    void persistManagedContents([duplicatedItem, ...reindexedItems])
+        const siblingItems = items.filter(
+          (entry) => entry.section === item.section && entry.categorySlug === item.categorySlug,
+        );
+        const reindexedItems = items.map((entry) =>
+          entry.section === item.section &&
+          entry.categorySlug === item.categorySlug &&
+          entry.sortOrder >= item.sortOrder
+            ? { ...entry, sortOrder: entry.sortOrder + 1 }
+            : entry,
+        );
+        const duplicatedItem = cloneAsAuthoredContent(fullItem, siblingItems);
+
+        return persistManagedContents([duplicatedItem, ...reindexedItems], {
+          preserveExistingBodies: true,
+        });
+      })
       .then(() => {
         setPendingDuplicateItem(null);
         setPreviewItem(null);

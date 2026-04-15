@@ -3,7 +3,7 @@ import { stripManagedContentBodies } from "@/features/content/data";
 import AdminManagedContentListPage from "./AdminManagedContentListPage";
 
 export default async function AdminNewsPage() {
-  const initialItems = await readContentState("news");
+  const initialItems = await readContentState("news", { includeBodies: false });
 
   return (
     <AdminManagedContentListPage

@@ -63,6 +63,15 @@ type SaveAuthoredContentInput = Pick<
 >;
 
 const contentRoot = path.join(process.cwd(), "src", "content");
+let authoredMetaFilesCache: string[] | null = null;
+let authoredMetaCache: AuthoredContentMeta[] | null = null;
+let authoredEntriesCache:
+  | {
+      withBodies: ManagedContentEntry[] | null;
+      withoutBodies: ManagedContentEntry[] | null;
+    }
+  | null = null;
+let authoredCacheVersion = 0;
 
 function getAuthoredSectionRoot(section: ManagedContentSection) {
   if (section === "documentation") {
@@ -114,39 +123,22 @@ async function writeFileAtomic(filePath: string, contents: string) {
   await fs.rename(tempPath, filePath);
 }
 
+function invalidateAuthoredCaches() {
+  authoredMetaFilesCache = null;
+  authoredMetaCache = null;
+  authoredEntriesCache = null;
+  authoredCacheVersion += 1;
+}
+
+export function getAuthoredCacheVersion() {
+  return authoredCacheVersion;
+}
+
 async function listStorageIds() {
-  const storageIds: string[] = [];
-
-  async function walk(currentDir: string) {
-    if (!existsSync(currentDir)) {
-      return;
-    }
-
-    const entries = await fs.readdir(currentDir, { withFileTypes: true });
-
-    for (const entry of entries) {
-      const fullPath = path.join(currentDir, entry.name);
-
-      if (!entry.isDirectory()) {
-        continue;
-      }
-
-      if (/^cnt_\d+$/.test(entry.name)) {
-        storageIds.push(entry.name);
-        continue;
-      }
-
-      await walk(fullPath);
-    }
-  }
-
-  await Promise.all(
-    (["demo", "documentation", "news"] as const).map((section) =>
-      walk(getAuthoredSectionRoot(section)),
-    ),
-  );
-
-  return storageIds;
+  const metas = await readAllAuthoredMetas();
+  return metas
+    .map((meta) => meta.storageId)
+    .filter((storageId): storageId is string => /^cnt_\d+$/.test(storageId));
 }
 
 async function createNextStorageId() {
@@ -160,6 +152,10 @@ async function createNextStorageId() {
 }
 
 async function readAuthoredMetaFiles() {
+  if (authoredMetaFilesCache) {
+    return authoredMetaFilesCache;
+  }
+
   const metaFiles: string[] = [];
 
   async function walk(currentDir: string) {
@@ -189,7 +185,8 @@ async function readAuthoredMetaFiles() {
     ),
   );
 
-  return metaFiles.sort();
+  authoredMetaFilesCache = metaFiles.sort();
+  return authoredMetaFilesCache;
 }
 
 async function readMetaFile(metaPath: string) {
@@ -200,6 +197,17 @@ async function readMetaFile(metaPath: string) {
   } catch (error) {
     throw new Error(`Invalid meta.json: ${toPosix(path.relative(process.cwd(), metaPath))}`);
   }
+}
+
+async function readAllAuthoredMetas() {
+  if (authoredMetaCache) {
+    return authoredMetaCache;
+  }
+
+  const metaFiles = await readAuthoredMetaFiles();
+  const metas = await Promise.all(metaFiles.map((metaPath) => readMetaFile(metaPath)));
+  authoredMetaCache = metas;
+  return metas;
 }
 
 async function findAuthoredEntryDir({
@@ -217,20 +225,25 @@ async function findAuthoredEntryDir({
     return getEntryDir(section, categorySlug, storageId);
   }
 
-  const metaFiles = await readAuthoredMetaFiles();
+  const metas = await readAllAuthoredMetas();
 
-  for (const metaFile of metaFiles) {
-    const meta = await readMetaFile(metaFile);
-
+  for (const meta of metas) {
     if (meta.id === id && meta.section === section && meta.categorySlug === categorySlug) {
-      return path.dirname(metaFile);
+      return getEntryDir(meta.section, meta.categorySlug, meta.storageId);
     }
   }
 
   return null;
 }
 
-export async function readAuthoredManagedContents() {
+export async function readAuthoredManagedContents(options?: { includeBodies?: boolean }) {
+  const includeBodies = options?.includeBodies ?? true;
+  const cachedEntries = authoredEntriesCache?.[includeBodies ? "withBodies" : "withoutBodies"];
+
+  if (cachedEntries) {
+    return cachedEntries;
+  }
+
   await Promise.all(
     (["demo", "documentation", "news"] as const).map((section) =>
       ensureDir(getAuthoredSectionRoot(section)),
@@ -238,38 +251,35 @@ export async function readAuthoredManagedContents() {
   );
 
   const metaFiles = await readAuthoredMetaFiles();
+  const metas = await readAllAuthoredMetas();
   const entries: ManagedContentEntry[] = [];
 
-  for (const metaFile of metaFiles) {
-    const meta = await readMetaFile(metaFile);
+  for (const [index, meta] of metas.entries()) {
     const bodyHtml = createEmptyLocalizedContent();
     const bodyRichText = createEmptyLocalizedContent();
-    const entryDir = path.dirname(metaFile);
     const nextLocales: Partial<Record<Locale, AuthoredLocaleRecord>> = {};
 
-    for (const locale of locales) {
-      const jsonPath = path.join(entryDir, `${locale}.tiptap.json`);
-      const htmlPath = path.join(entryDir, `${locale}.html`);
+    if (includeBodies) {
+      const metaFile = metaFiles[index];
+      const entryDir = path.dirname(metaFile);
 
-      if (!existsSync(jsonPath) && !existsSync(htmlPath)) {
-        continue;
+      for (const locale of locales) {
+        const jsonPath = path.join(entryDir, `${locale}.tiptap.json`);
+        const htmlPath = path.join(entryDir, `${locale}.html`);
+
+        if (!existsSync(jsonPath) && !existsSync(htmlPath)) {
+          continue;
+        }
+
+        bodyRichText[locale] = existsSync(jsonPath) ? await fs.readFile(jsonPath, "utf8") : "";
+        bodyHtml[locale] = existsSync(htmlPath) ? await fs.readFile(htmlPath, "utf8") : "";
+
+        nextLocales[locale] = {
+          htmlPath: toPosix(path.relative(process.cwd(), htmlPath)),
+          jsonPath: toPosix(path.relative(process.cwd(), jsonPath)),
+        };
       }
-
-      bodyRichText[locale] = existsSync(jsonPath) ? await fs.readFile(jsonPath, "utf8") : "";
-      bodyHtml[locale] = existsSync(htmlPath) ? await fs.readFile(htmlPath, "utf8") : "";
-
-      nextLocales[locale] = {
-        htmlPath: toPosix(path.relative(process.cwd(), htmlPath)),
-        jsonPath: toPosix(path.relative(process.cwd(), jsonPath)),
-      };
     }
-
-    const normalizedMeta: AuthoredContentMeta = {
-      ...meta,
-      locales: nextLocales,
-    };
-
-    await writeFileAtomic(metaFile, `${JSON.stringify(normalizedMeta, null, 2)}\n`);
 
     entries.push({
       authorName: meta.authorName,
@@ -297,6 +307,11 @@ export async function readAuthoredManagedContents() {
       title: normalizeLocalizedRecord(meta.title),
     });
   }
+
+  authoredEntriesCache = {
+    withBodies: includeBodies ? entries : authoredEntriesCache?.withBodies ?? null,
+    withoutBodies: includeBodies ? authoredEntriesCache?.withoutBodies ?? null : entries,
+  };
 
   return entries;
 }
@@ -365,6 +380,7 @@ export async function saveAuthoredContent(
   };
 
   await writeFileAtomic(path.join(entryDir, "meta.json"), `${JSON.stringify(meta, null, 2)}\n`);
+  invalidateAuthoredCaches();
 
   return {
     ...input,
@@ -390,6 +406,7 @@ export async function deleteAuthoredContent({
   }
 
   await fs.rm(entryDir, { force: true, recursive: true });
+  invalidateAuthoredCaches();
 
   return { deleted: true };
 }
@@ -421,6 +438,7 @@ export async function updateAuthoredContentMeta({
   };
 
   await writeFileAtomic(metaPath, `${JSON.stringify(nextMeta, null, 2)}\n`);
+  invalidateAuthoredCaches();
 
   return nextMeta;
 }

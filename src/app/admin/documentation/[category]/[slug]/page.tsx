@@ -14,9 +14,19 @@ export default async function AdminDocumentationCategoryDetailRoute({ params }: 
 
   if (!isAdminSectionCategory("documentation", category) || category === "all") notFound();
 
+  if (resolvedSlug === "new") {
+    return (
+      <AdminManagedContentDetailPage
+        categorySlug={category as never}
+        itemId="new"
+        section="documentation"
+      />
+    );
+  }
+
   const [initialItem, initialItems] = await Promise.all([
     readContentItem("documentation", resolvedSlug, { categorySlug: category as never }),
-    readContentState("documentation"),
+    readContentState("documentation", { includeBodies: false }),
   ]);
 
   if (!initialItem) notFound();

@@ -373,10 +373,7 @@ const [isSaving, setIsSaving] = useState(false);
       };
 
       if (isInitializingRichTextRef.current) {
-        if (isSameAsCurrentRichText) {
-          setInitialFormSnapshot(serializeDirtyCheckTarget(nextForm));
-        }
-
+        setInitialFormSnapshot(serializeDirtyCheckTarget(nextForm));
         isInitializingRichTextRef.current = false;
       }
 
@@ -618,6 +615,7 @@ const [isSaving, setIsSaving] = useState(false);
             sortOrder: item.sortOrder + 1,
           },
           item.id,
+          { preserveExistingBodies: true },
         );
       }
     }

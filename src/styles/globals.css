@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 전역 디자인 토큰.
-   Tailwind 토큰도 여기 CSS 변수를 참조하므로, 빠른 시각 테스트는 이 값만 바꿔도 된다. */
+/* ==========================================================================
+   Global Tokens
+   앱 전역에서 재사용하는 디자인 토큰 모음.
+   컬러, 폰트, 라운딩, 컨텐츠 전용 색상은 여기서 조절한다.
+   ========================================================================== */
 :root {
   /* 폰트 토큰: 기본 / 한글 / 일본어 / 모노 */
   --font-sans: var(--font-mona-sans), "SF Pro Display", -apple-system, system-ui, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
@@ -62,6 +65,12 @@
   box-sizing: border-box;
 }
 
+/* ==========================================================================
+   Base Typography / Locale Font Selection
+   기본 폰트 패밀리와 locale별 폰트 전환 규칙.
+   EN/KO/JA가 여기서 갈린다.
+   ========================================================================== */
+
 html,
 :lang(en) {
   font-family: var(--font-sans);
@@ -94,7 +103,10 @@ body {
   margin: 0;
 }
 
-/* 스크롤바는 전역 다크 톤 기준으로 통일한다. */
+/* ==========================================================================
+   Global Scrollbar
+   공통 스크롤바 톤. 데스크톱 브라우저 전반에 적용된다.
+   ========================================================================== */
 html {
   scrollbar-color: #4a4c50 #141516;
 }
@@ -133,6 +145,11 @@ textarea,
 select {
   font: inherit;
 }
+
+/* ==========================================================================
+   Shared Effects
+   로딩 텍스트 shimmer, placeholder/autofill 보정 등 브라우저 기본 동작 보정.
+   ========================================================================== */
 
 .loading-text {
   position: relative;
@@ -180,6 +197,11 @@ textarea:-webkit-autofill:focus {
 }
 
 @layer utilities {
+  /* ========================================================================
+     Interactive Utility Classes
+     버튼/카드/입력창처럼 여러 컴포넌트에서 공통으로 재사용하는 유틸리티.
+     ======================================================================== */
+
   /* 입력 필드 공통 스타일.
      실제 input/textarea/select에 직접 붙이는 기본 포커스 링 유틸리티. */
   .ui-field {
@@ -258,6 +280,14 @@ textarea:-webkit-autofill:focus {
     }
   }
 
+  /* ========================================================================
+     Typography Tokens
+     컴포넌트에서 직접 text-[...]를 섞지 않고, 의미 단위 타입 토큰으로 사용한다.
+     - type-h*: 일반 UI 제목
+     - type-body-*: 일반 UI 본문
+     - type-content-*: 문서/뉴스/데모 본문 전용
+     ======================================================================== */
+
   /* 공용 타이포 토큰: 모바일 기본값.
      페이지에서 임의 text-[...]보다 이 토큰을 우선 사용한다. */
   .type-h1 {
@@ -285,21 +315,21 @@ textarea:-webkit-autofill:focus {
     font-size: 15px;
     line-height: 24px;
     letter-spacing: +0.2px;
-    font-weight: 310;
+    font-weight: 400;
   }
 
   .type-body-md {
     font-size: 14px;
     line-height: 22px;
     letter-spacing: +0.2px;
-    font-weight: 310;
+    font-weight: 400;
   }
 
   .type-body-sm {
     font-size: 12px;
     line-height: 20px;
     letter-spacing: +0.2px;
-    font-weight: 310;
+    font-weight: 400;
   }
 
 
@@ -338,21 +368,21 @@ textarea:-webkit-autofill:focus {
     font-size: 14px;
     line-height: 24px;
     letter-spacing: +0.2px;
-    font-weight: 310;
+    font-weight: 400;
   }
 
   .type-content-table {
     font-size: 13px;
     line-height: 22px;
     letter-spacing: +0.2px;
-    font-weight: 310;
+    font-weight: 400;
   }
 
   .type-content-caption {
     font-size: 12px;
     line-height: 20px;
     letter-spacing: +0.2px;
-    font-weight: 310;
+    font-weight: 400;
   }
 
   .type-content-mono {
@@ -379,7 +409,6 @@ textarea:-webkit-autofill:focus {
     padding: 3px 6px;
     font-family: var(--font-mono) !important;
     font-size: 12px;
-    line-height: 20px;
     letter-spacing: 0;
     font-weight: 300;
     color: var(--color-code-inline-fg);
@@ -387,47 +416,14 @@ textarea:-webkit-autofill:focus {
     white-space: normal;
   }
 
-  .content-rich-editor table {
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    border-radius: 10px;
-  }
-
-  /* 코드 하이라이트 토큰 색상.
-     Prism/rehype가 아니라 수동 렌더링 결과에 맞춰 사용한다. */
-  .code-token-tag {
-    color: var(--color-code-token-tag);
-  }
-
-  .code-token-attr {
-    color: var(--color-code-token-attr);
-  }
-
-  .code-token-string {
-    color: var(--color-code-token-string);
-  }
-
-  .code-token-keyword {
-    color: var(--color-code-token-keyword);
-  }
-
-  .code-token-number {
-    color: var(--color-code-token-number);
-  }
-
-  .code-token-comment {
-    color: var(--color-code-token-comment);
-  }
-
-  .code-token-variable {
-    color: var(--color-code-token-variable);
-  }
-
-  .code-token-punctuation {
-    color: var(--color-code-token-punctuation);
-  }
-
-  /* 줄번호 포함 코드블록 레이아웃 */
+  /* ========================================================================
+     Code Block
+     컨텐츠 본문/어드민 미리보기/에디터가 모두 공유하는 단순 코드블록 스타일.
+     목표:
+     - 줄번호와 코드 줄 높이 일치
+     - 가로로 길면 스크롤만 발생
+     - 컬러 하이라이팅 없이 단색 모노 스타일 사용
+     ======================================================================== */
   .code-block-shell {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
@@ -435,52 +431,45 @@ textarea:-webkit-autofill:focus {
     overflow-y: hidden;
     border-radius: 10px;
     background: var(--color-bg-content);
-    column-gap: 0;
   }
 
   .code-block-gutter {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0;
-    background: transparent;
+    display: grid;
+    align-content: start;
+    justify-items: end;
     padding: 20px;
     color: var(--color-code-line-number-fg);
     user-select: none;
     font-variant-ligatures: none;
   }
 
-  .code-line-number {
-    display: block;
-    min-height: inherit;
-    line-height: inherit;
-  }
-
-  .code-line {
-    display: block;
-    min-height: inherit;
-    line-height: inherit;
-    color: var(--color-code-block-fg);
-  }
-
-  .code-block-shell pre,
-  .code-block-shell code,
-  .code-block-shell .code-line {
-    font-variant-ligatures: none;
+  .code-block-shell pre {
+    margin: 0;
+    min-width: max-content;
+    padding: 20px 20px 20px 0;
+    background: transparent !important;
   }
 
   .code-block-shell code {
     display: block;
-    white-space: pre;
     min-width: max-content;
+    white-space: pre;
     color: var(--color-code-block-fg);
+    font-variant-ligatures: none;
   }
 
-  .code-block-shell pre {
-    background: transparent !important;
-    margin: 0;
-    padding: 16px 20px 16px 0;
-    min-width: max-content;
+  .code-line-number {
+    display: block;
+    min-height: 22px;
+    line-height: 22px;
+  }
+
+  .code-line {
+    display: block;
+    min-height: 22px;
+    line-height: 22px;
+    color: var(--color-code-block-fg);
+    font-variant-ligatures: none;
   }
 
   .code-block-shell [data-node-view-content],
@@ -496,39 +485,11 @@ textarea:-webkit-autofill:focus {
   }
 
   .code-block-shell [data-node-view-content] {
-    min-width: max-content;
-  }
-
-  .editor-code-block-shell {
-    border-radius: 10px;
-    background: var(--color-bg-content);
-    grid-template-columns: auto minmax(0, 1fr);
-    border: 0;
-    box-shadow: none;
-  }
-
-  .editor-code-block-shell .code-block-gutter {
-    border-right: 0;
-    background: transparent;
-    padding: 20px 20px 20px 20px;
-  }
-
-  .editor-code-block-shell pre {
-    background: transparent !important;
-    border: 0;
-    box-shadow: none;
-    padding: 16px 20px 16px 0;
-  }
-
-  .editor-code-block-shell code {
-    color: var(--color-code-block-fg);
-  }
-
-  .editor-code-block-shell [data-node-view-content] {
     display: block;
+    min-width: max-content;
     white-space: pre;
-    line-height: 24px;
-    min-height: 24px;
+    line-height: 22px;
+    min-height: 22px;
   }
 
   .editor-code-block-shell .ProseMirror,
@@ -539,20 +500,11 @@ textarea:-webkit-autofill:focus {
     font-style: normal !important;
   }
 
-  .rich-content .editor-code-block-shell {
-    grid-template-columns: auto minmax(0, 1fr);
-    background: var(--color-bg-content);
-  }
-
-  .rich-content .editor-code-block-shell .code-block-gutter {
-    border-right: 0;
-    background: transparent;
-    padding: 20px 20px 20px 20px;
-  }
-
-  .rich-content .editor-code-block-shell pre {
-    padding: 16px 20px 16px 0;
-  }
+  /* ========================================================================
+     Desktop Typography Overrides
+     768px 이상에서만 타입 스케일을 한 단계 키운다.
+     모바일/데스크톱 간 타이포 차이는 여기서 관리한다.
+     ======================================================================== */
 
   /* 데스크톱 이상에서만 타이포 스케일을 한 단계 키운다. */
   @media (min-width: 768px) {
@@ -628,6 +580,12 @@ textarea:-webkit-autofill:focus {
 
   }
 }
+
+/* ==========================================================================
+   Global Keyframes / One-off Page Animations
+   홈, 모바일 GNB, 404 등 페이지/섹션 단위 애니메이션 모음.
+   필요한 컴포넌트에서 animation-name으로 참조한다.
+   ========================================================================== */
 
 /* 홈/섹션 공용 애니메이션: 무한 좌우 흐름 */
 @keyframes marquee {
