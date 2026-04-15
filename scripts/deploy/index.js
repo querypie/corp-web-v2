@@ -37,6 +37,13 @@ async function createDeployment() {
         ref: branch,
         org: 'querypie',
       },
+      projectSettings: {
+        framework: 'nextjs',
+        buildCommand: 'npm run build',
+        devCommand: 'npm run dev',
+        installCommand: 'npm install',
+        outputDirectory: '.next',
+      },
     },
   });
 }
