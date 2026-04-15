@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.ref_type == 'branch'
     env:
-      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} # querypie organization secret
       VERCEL_TEAM_ID: team_8DsCdrF1uCfwY30OS8F8lREn
       BRANCH: ${{ github.event.ref }}
     steps:
