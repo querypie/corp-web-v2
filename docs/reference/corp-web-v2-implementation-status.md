@@ -1,6 +1,6 @@
 # corp-web-v2 구현 현황
 
-**최종 업데이트**: 2026-04-15
+**최종 업데이트**: 2026-04-15 (배포 인프라 반영)
 
 corp-web-v2의 현재 구현 상태를 영역별로 기술한다.
 
@@ -130,7 +130,6 @@ Page Components         ← 렌더링
 |------|----------|------|
 | Community License 신청/발급 | 🔴 최우선 | corp-web-app 대체 필수 |
 | 리드/폼 연동 (Salesforce, Slack, Google Sheets) | 🔴 필수 | |
-| Vercel CI/CD (GitHub Actions) | 🔴 필수 | |
 | SEO 서버 영속화 | 🟡 | localStorage → 파일 저장 전환 필요 |
 | Blog / Whitepaper / Webinar Admin | 🟡 | CMS 완성 계획 참고 |
 | Stage→Production 릴리즈 워크플로우 | 🟡 | CMS 완성 계획 참고 |
@@ -140,10 +139,16 @@ Page Components         ← 렌더링
 
 ## 인프라 및 배포
 
-- 배포 플랫폼: Vercel (명시적 설정 파일 없음, 기본값 사용 중)
-- CI/CD: 미구성 (GitHub Actions 없음)
-- 환경변수: `.env.local.example` 참고
-- 브랜치 전략: 미정 (계획 문서 참고)
+- 배포 플랫폼: Vercel (팀: QueryPie AI, 프로젝트: `corp-web-v2`, 리전: `icn1`)
+- CI/CD: GitHub Actions 구현 완료 (`ci.yml`, `deploy-*.yml`, `delete-deploy.yml`)
+- 배포 전략:
+  - `main` push → Staging 자동 배포 (`stage-v2.querypie.com`)
+  - Production은 `workflow_dispatch` 수동 실행 (`www-v2.querypie.com`)
+  - PR → Preview 자동 배포
+- 환경변수: `.env.local.example` 참고, GitHub Secret: `VERCEL_TOKEN`
+- DNS: Route53 레코드 등록 대기 중
+
+→ [Vercel 배포 구현 현황](./vercel-deployment.md)
 
 ---
 
@@ -151,3 +156,4 @@ Page Components         ← 렌더링
 
 - [프로젝트 계획](../plan/2026-04-15-corp-web-v2-project-plan-design.md)
 - [CMS 완성 계획](../plan/2026-04-15-corp-web-v2-cms-completion-design.md)
+- [Vercel 배포 현황](./vercel-deployment.md)

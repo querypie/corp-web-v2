@@ -40,14 +40,16 @@ corp-web-app의 Community License 발급 기능을 corp-web-v2에 구현한다.
 
 이메일 유효성 검증(MX 레코드, 비즈니스 이메일), UTM 어트리뷰션 추적 포함.
 
-### 1-3. Vercel 배포 자동화
+### ~~1-3. Vercel 배포 자동화~~ ✅ 완료
 
-GitHub Actions 기반 CI/CD 파이프라인을 구성한다.
+GitHub Actions 기반 CI/CD 파이프라인이 구현되어 있다.
 
-- **브랜치 전략**: `main` → Production, `stage` → Stage 환경
-- Pull Request 시 자동 Preview 배포
-- 타입 체크 / 린트를 CI 게이트로 적용
-- 환경변수 관리 전략 문서화
+- `main` push → Staging 자동 배포 (`stage-v2.querypie.com`)
+- Production 배포는 `workflow_dispatch` 수동 실행 (`www-v2.querypie.com`)
+- PR open/sync → Preview 자동 배포
+- PR → `main` 시 빌드 + 타입체크 검증
+
+→ [Vercel 배포 구현 현황](../reference/vercel-deployment.md)
 
 ### 1-4. 개발 가이드 문서 작성
 
@@ -110,7 +112,7 @@ corp-web-v2의 주요 구현 상태 요약:
 | Admin CMS | ⚠️ 부분 완료 | Demo/Docs/News 관리 가능, Stage→Prod 워크플로우 미완 |
 | Community License 발급 | ❌ 미구현 | |
 | 폼/리드 연동 | ❌ 미구현 | |
-| Vercel CI/CD | ❌ 미구현 | |
+| Vercel CI/CD | ✅ 완료 | [배포 현황 참고](../reference/vercel-deployment.md) |
 | SEO 서버 저장 | ⚠️ 미완 | 현재 localStorage만 사용 |
 | 자동화 테스트 | ❌ 없음 | |
 
