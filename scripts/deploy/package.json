@@ -1,0 +1,12 @@
+{
+  "name": "corp-web-v2-deploy",
+  "type": "module",
+  "scripts": {
+    "deploy": "node index.js",
+    "delete-deploy": "node delete-deploy.js"
+  },
+  "dependencies": {
+    "@vercel/sdk": "^1.19.1",
+    "dotenv": "^17.2.3"
+  }
+}
