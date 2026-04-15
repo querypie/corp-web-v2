@@ -86,10 +86,7 @@ scripts/deploy/
 
 ## Vercel 프로젝트 설정
 
-- **팀**: QueryPie AI (`team_8DsCdrF1uCfwY30OS8F8lREn`)
-- **프로젝트**: `corp-web-v2` (`prj_xeobCehIxv13fSJdlEprUfdqRlTd`)
-- **리전**: `icn1` (서울)
-- **GitHub 자동 배포**: 비활성화 (`git.deploymentEnabled: false`) — 모든 배포는 GHA를 통해 진행
+`VERCEL_TEAM_ID`, `VERCEL_PROJECT_ID`는 각 배포 워크플로우 파일에 직접 명시되어 있다. 리전 및 Git 설정은 `vercel.json`에서 관리한다.
 
 ### `vercel.json`
 
@@ -125,6 +122,8 @@ scripts/deploy/
 |------|-------|
 | `www-v2.querypie.com` | `cname.vercel-dns.com` |
 | `stage-v2.querypie.com` | `cname.vercel-dns.com` |
+
+→ Route53 등록 PR: [chequer-io/cloud-platform#610](https://github.com/chequer-io/cloud-platform/pulls/610)
 
 ---
 
