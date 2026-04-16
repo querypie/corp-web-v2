@@ -7,12 +7,13 @@
 
 ## 배경
 
-corp-web-v2는 파일 기반 CMS를 내장하고 있다. 콘텐츠는 `src/content/` 디렉토리에 저장되고, Admin 대시보드를 통해 편집·관리된다. `src/content/state/content-state.json`이 최종 게시 상태를 관리하는 핵심 파일이다.
+corp-web-v2는 파일 기반 CMS를 내장하고 있다. 콘텐츠는 `src/content/` 디렉토리에 저장되고, Admin 대시보드를 통해 편집·관리된다.
 
 현재 상태:
 - Demo, Documentation, News 콘텐츠의 Admin 편집 기능은 구현되어 있음
 - Stage 미리보기 → Production 릴리즈 워크플로우가 없음
 - Blog, Whitepaper 등 corp-web-contents의 콘텐츠가 이관되지 않음
+- CMS 저장 구조, SEO 영속화, 콘텐츠 디렉토리 위치 등 구조적 검토 항목이 존재함 → [CMS 아키텍처 검토 항목](./2026-04-16-cms-architecture-issues.md) 참조
 
 ---
 
@@ -27,14 +28,10 @@ corp-web-v2는 파일 기반 CMS를 내장하고 있다. 콘텐츠는 `src/conte
 - Admin 페이지 별 CRUD 완성도 점검
 - 콘텐츠 타입별 에디터 동작 검증 (Demo, Documentation, News, Blog, Whitepaper)
 - 파일 업로드 (`/api/admin/uploads`) 동작 확인
-- SEO 메타데이터 저장 방식 (현재 localStorage → 서버 영속화 필요)
 
-### 1-2. SEO 서버 영속화
+### 1-2. 구조적 이슈 해소
 
-현재 SEO 상태가 브라우저 localStorage에만 저장된다. 서버 측 영속화로 전환한다.
-
-- SEO 상태를 파일 또는 별도 JSON으로 서버에 저장
-- Admin에서 수정한 SEO 설정이 빌드/배포 시 반영되도록 처리
+콘텐츠 저장 구조, SEO 영속화, 콘텐츠 디렉토리 위치에 대한 구조적 문제가 확인되었다. 각 항목의 제약과 대안은 [CMS 아키텍처 검토 항목](./2026-04-16-cms-architecture-issues.md)에 정리되어 있으며, 검토 후 구현 방향을 결정한다.
 
 ### 1-3. 콘텐츠 타입 확장
 
@@ -137,3 +134,4 @@ corp-web-contents의 MDX 콘텐츠를 corp-web-v2 CMS 포맷으로 변환하는 
 ## 관련 문서
 
 - [프로젝트 메인 계획](./2026-04-15-corp-web-v2-project-plan-design.md)
+- [CMS 아키텍처 검토 항목](./2026-04-16-cms-architecture-issues.md)
