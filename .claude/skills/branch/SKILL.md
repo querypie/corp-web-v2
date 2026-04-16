@@ -35,7 +35,7 @@ git pull origin main
 ```bash
 # 브랜치 목록과 PR 상태 확인
 git branch -a
-env -u GITHUB_TOKEN -u GH_TOKEN gh pr list --state all \
+gh pr list --state all \
   --json number,headRefName,state \
   --jq '.[] | "\(.headRefName) \(.state)"'
 
@@ -68,7 +68,7 @@ git checkout -b <prefix>/<descriptive-name> origin/main
 |------|--------|
 | main 이동 & 업데이트 | `git checkout main && git pull origin main` |
 | 현재 브랜치 확인 | `git branch --show-current` |
-| PR 상태 확인 | `env -u GITHUB_TOKEN -u GH_TOKEN gh pr list --state all` |
+| PR 상태 확인 | `gh pr list --state all` |
 | 로컬 브랜치 삭제 | `git branch -d <branch-name>` |
 | 원격 추적 정리 | `git remote prune origin` |
 | 새 브랜치 생성 | `git checkout -b feat/<name> origin/main` |

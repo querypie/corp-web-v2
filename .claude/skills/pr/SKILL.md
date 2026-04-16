@@ -72,11 +72,10 @@ git push -u origin <branch>
 ### 4. PR 생성
 
 ```bash
-env -u GITHUB_TOKEN -u GH_TOKEN \
-  gh workflow run create-pr.yml \
-    -f branch="<branch>" \
-    -f title="<type>: <subject>" \
-    -f body="$(cat <<'EOF'
+gh workflow run create-pr.yml \
+  -f branch="<branch>" \
+  -f title="<type>: <subject>" \
+  -f body="$(cat <<'EOF'
 ## Summary
 - <변경 내용 요약>
 
@@ -90,7 +89,7 @@ PR 생성 후 URL 확인:
 
 ```bash
 sleep 5
-env -u GITHUB_TOKEN -u GH_TOKEN gh pr list --head <branch> --json number,url --jq '.[0].url'
+gh pr list --head <branch> --json number,url --jq '.[0].url'
 ```
 
 ### 5. Vercel Preview 확인
@@ -99,7 +98,7 @@ PR이 생성되면 Vercel이 자동으로 Preview URL을 발급한다.
 
 ```bash
 # PR에 달린 Vercel deployment 상태 확인
-env -u GITHUB_TOKEN -u GH_TOKEN gh pr checks <pr-number>
+gh pr checks <pr-number>
 ```
 
 Preview URL은 PR 댓글에서 확인한다.
@@ -120,10 +119,9 @@ Preview URL은 PR 댓글에서 확인한다.
 ```bash
 git push --force-with-lease origin <branch>
 
-env -u GITHUB_TOKEN -u GH_TOKEN \
-  gh pr edit <pr-number> \
-    --title "..." \
-    --body "..."
+gh pr edit <pr-number> \
+  --title "..." \
+  --body "..."
 ```
 
 ## 체크리스트
