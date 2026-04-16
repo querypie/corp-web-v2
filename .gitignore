@@ -30,4 +30,4 @@ yarn-error.log*
 tsconfig.tsbuildinfo
 *.tsbuildinfo
 .worktrees/
-.vercel/
+.vercel/output/
