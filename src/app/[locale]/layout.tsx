@@ -5,6 +5,7 @@ import { getShellMenuCopy } from "../../constants/navigation";
 import SeoRuntime from "../../components/common/SeoRuntime";
 import Footer from "../../components/layout/Footer";
 import Gnb from "../../components/layout/Gnb";
+import UtmCapture from "../../components/common/UtmCapture";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -32,6 +33,7 @@ export default async function LocaleLayout({
       <SeoRuntime locale={locale as Locale} />
       <Suspense fallback={null}>
         <Gnb actionLabel={shellCopy.navActionLabel} items={shellCopy.navItems} locale={locale} />
+        <UtmCapture />
       </Suspense>
       <main className="flex-1 pt-[100px] text-fg md:pt-[140px]">
         {children}
