@@ -22,23 +22,31 @@ QueryPie 공식 웹사이트는 현재 두 레포지토리로 운영된다.
 
 > **완료 기준**: corp-web-v2가 Stage 환경에서 이용자 평가를 받을 수 있는 상태
 
-### 1-1. Community License 신청/발급 플로우 (최우선)
+### ~~1-1. Community License 신청/발급 플로우~~ ✅ 완료
 
-corp-web-app의 Community License 발급 기능을 corp-web-v2에 구현한다.
+corp-web-app의 Community License 발급 기능이 corp-web-v2에 구현되었다.
 
-- 신청 폼 UI
-- 외부 라이선스 발급 API 연동 (`QUERYPIE_LICENSE_ISSUE_API_ENDPOINT`)
-- 발급 결과 처리 및 사용자 안내
+- 신청 폼 UI (en/ko/ja, locale별 성이름 순서 처리)
+- MX 레코드 이메일 유효성 검증
+- 외부 라이선스 발급 API 연동 (`QUERYPIE_LICENSE_ISSUE_API_ENDPOINT`) — 환경변수 미설정 시 skip
+- Salesforce 리드 전달 연동
+- Slack 알림
+
+2026-04-16 Staging E2E 검증 완료 (`stage-v2.querypie.com`).
+
+→ [Community License 기능 상세](../reference/community-license.md)
 
 ### 1-2. 리드/폼 연동
 
-문서 다운로드·데모 신청·문의하기 등 전환 경로에서 리드를 수집하는 연동을 구현한다.
+⚠️ **Community License 경로만 구현 완료.** 문서 다운로드·데모 신청·문의하기 등 다른 전환 경로의 연동은 미구현이다.
 
-- Salesforce 리드 캡처
-- Slack 알림 (비즈니스 문의 채널)
-- Google Sheets 연동 (웨이팅리스트 등)
+- [x] Salesforce 리드 캡처 — Community License 폼
+- [x] Slack 알림 — Community License 폼
+- [ ] Salesforce / Slack 연동 — Contact Us, ContentLeadForm
+- [ ] Google Sheets 연동 (웨이팅리스트 등)
+- [ ] UTM 어트리뷰션 추적
 
-이메일 유효성 검증(MX 레코드, 비즈니스 이메일), UTM 어트리뷰션 추적 포함.
+→ [리드 캡처 폼 현황](../reference/lead-capture-forms.md)
 
 ### ~~1-3. Vercel 배포 자동화~~ ✅ 완료
 
@@ -53,20 +61,20 @@ GitHub Actions 기반 CI/CD 파이프라인이 구현되어 있다.
 
 ### 1-4. 개발 가이드 문서 작성
 
-신규 개발자가 프로젝트를 빠르게 파악하고 기여할 수 있도록 가이드를 작성한다.
+⚠️ 부분 완료. 배포 프로세스·AI 에이전트 작업 가이드 중심으로 작성되었다.
 
-- 아키텍처 개요 (라우팅, CMS 데이터 흐름, 다국어 구조)
-- 로컬 개발 환경 설정
-- 콘텐츠 작성 및 어드민 운영 가이드
-- 배포 프로세스
+- [x] `AGENTS.md` — Source of Truth, 작업 규칙, 빠른 진단
+- [x] `README.md` — 프로젝트 소개, 실행 방법, AI 에이전트 작업 흐름
+- [x] 배포 프로세스 (`docs/reference/vercel-deployment.md`)
+- [ ] 콘텐츠 작성 및 어드민 운영 가이드
+- [ ] 아키텍처 개요 (콘텐츠 작성자 관점)
 
-### 1-5. AI Agent용 Skill 보완
+### ~~1-5. AI Agent용 Skill 보완~~ ✅ 완료
 
-Claude Code 등 AI Agent가 이 레포에서 효과적으로 작업할 수 있도록 Skill을 작성한다.
+Claude Code 등 AI Agent가 이 레포에서 효과적으로 작업할 수 있는 스킬 구성이 완료되었다.
 
-- 프로젝트 구조 및 컨벤션 요약
-- 콘텐츠 추가/수정 워크플로우
-- 자주 수행하는 작업 패턴 (페이지 추가, 컴포넌트 작성 등)
+- `.claude/skills/branch`, `worktree`, `pr`, `commit`, `vercel` 스킬 추가
+- `AGENTS.md`에 프로젝트 구조, Source of Truth, 작업 규칙, 체크리스트 문서화
 
 ---
 
@@ -110,11 +118,11 @@ corp-web-v2의 주요 구현 상태 요약:
 | 공개 페이지 전체 | ✅ 완료 | Home, Features, Company, Plans, Legal 등 |
 | 다국어 (en/ko/ja) | ✅ 완료 | App Router locale 라우팅 |
 | Admin CMS | ⚠️ 부분 완료 | Demo/Docs/News 관리 가능, Stage→Prod 워크플로우 미완 |
-| Community License 발급 | ❌ 미구현 | |
-| 폼/리드 연동 | ❌ 미구현 | |
+| Community License 발급 | ✅ 완료 | 2026-04-16 Staging E2E 검증 완료 |
+| 폼/리드 연동 | ⚠️ 부분 완료 | Community License 경로만 (Salesforce/Slack). 나머지 전환 경로 미구현 |
 | Vercel CI/CD | ✅ 완료 | [배포 현황 참고](../reference/vercel-deployment.md) |
 | SEO 서버 저장 | ⚠️ 미완 | 현재 localStorage만 사용 |
-| 자동화 테스트 | ❌ 없음 | |
+| 자동화 테스트 | ✅ 완료 | Vitest, 166개 (유닛·통합·컴포넌트) |
 
 ---
 
