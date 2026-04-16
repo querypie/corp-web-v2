@@ -77,12 +77,23 @@
 
 ## 검증 체크리스트
 
-> 구현 완료, 실제 API 연계 동작은 미검증 상태.
+> 2026-04-16 staging (`stage-v2.querypie.com`) 환경에서 E2E 테스트 완료.
 
-- [ ] `/community-license`, `/ko/community-license`, `/ja/community-license` 폼 렌더링 및 필드 순서 확인
+- [x] `/community-license`, `/ko/community-license`, `/ja/community-license` 폼 렌더링 및 필드 순서 확인
 - [ ] 존재하지 않는 도메인 이메일 제출 → "Please enter a valid email address." 오류 (약 2초 후)
 - [ ] `QUERYPIE_LICENSE_ISSUE_API_*` 미설정 시 skip 후 Salesforce 단계 진행
 - [ ] `QUERYPIE_LICENSE_ISSUE_API_*` 설정 시 라이선스 발급 API 호출 성공
-- [ ] Salesforce에 리드 전달되고 `recordUUID` 응답 수신 후 성공 화면 표시
-- [ ] Slack 채널에 알림 수신, 비프로덕션 환경에서 `[TEST]` 태그 확인
-- [ ] 성공 후 "Go to Home" 버튼 → locale 홈으로 이동
+- [x] Salesforce에 리드 전달되고 `recordUUID` 응답 수신 후 성공 화면 표시
+- [x] Slack 채널에 알림 수신, 비프로덕션 환경에서 `[TEST]` 태그 확인
+- [x] 성공 후 "Go to Home" 버튼 → locale 홈으로 이동
+
+### 2026-04-16 테스트 결과 (Staging)
+
+| 항목 | 결과 |
+|------|------|
+| 테스트 환경 | `https://stage-v2.querypie.com/community-license` |
+| 폼 렌더링 | 정상 — First Name / Last Name / Email / Organization Name (필수) + Job Title / Organization Website (선택) |
+| 폼 제출 | `POST /api/community-license` → HTTP 200 |
+| Salesforce Lead 생성 | 정상 — `recordUUID` 응답 수신 확인 |
+| Slack 알림 | 정상 — `[TEST]` 태그와 함께 수신 확인 |
+| 성공 화면 | "Submission Complete" 화면으로 전환, "Go to Home" 버튼 표시 |

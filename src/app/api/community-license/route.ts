@@ -91,6 +91,7 @@ export async function POST(request: Request) {
 
     // 4. Salesforce POST (환경변수 없으면 skip)
     if (!process.env.SALESFORCE_ENDPOINT) {
+      console.warn("[community-license] salesforce: skipped (env not set)");
       await sendToSlack(requestBody);
       return NextResponse.json({ success: true });
     }
@@ -107,13 +108,16 @@ export async function POST(request: Request) {
     try {
       const json = (await sfResult.json()) as { recordUUID?: string };
       if (!json.recordUUID) {
+        console.error("[community-license] salesforce: failed - no recordUUID in response");
         return NextResponse.json({ success: false });
       }
+      console.info(`[community-license] salesforce: success recordUUID=${json.recordUUID}`);
     } catch (error) {
-      console.error("Salesforce response JSON parse error:", error);
+      console.error("[community-license] salesforce: failed - JSON parse error", error);
     }
 
     if (!sfResult.ok) {
+      console.error(`[community-license] salesforce: failed - HTTP ${sfResult.status}`);
       return NextResponse.json({ success: false });
     }
 
