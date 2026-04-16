@@ -3,6 +3,7 @@
 import { createContext, useContext } from "react";
 
 type AdminNavigationGuardValue = {
+  allowNextNavigation: () => void;
   requestNavigation: (href: string) => void;
   setHasUnsavedChanges: (value: boolean) => void;
 };

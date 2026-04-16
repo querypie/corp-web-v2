@@ -3,8 +3,14 @@ import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "../../../../../constants/i18n";
 import NewsDetailClientPage from "../../../../../components/pages/news/NewsDetailClientPage";
 import type { DocsDetailPageProps } from "../../../../../components/pages/documentation/DocumentationDetailPage";
-import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, isPublishedContentVisible } from "@/features/content/data";
-import { readContentState } from "@/features/content/contentState.server";
+import {
+  formatPublicDate,
+  getContentThumbnailSrc,
+  getLocalizedContent,
+  getPublicDetailHref,
+  isPublishedContentAccessible,
+} from "@/features/content/data";
+import { readContentItem, readContentState } from "@/features/content/contentState.server";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -16,11 +22,14 @@ export default async function NewsDetailRoute({ params }: Props) {
 
   if (!isLocale(locale)) notFound();
 
-  const newsItems = (await readContentState("news")).filter((item) => isPublishedContentVisible(item, locale));
-  const currentIndex = newsItems.findIndex((item) => item.id === decodedSlug);
-  const currentEntry = currentIndex >= 0 ? newsItems[currentIndex] : null;
+  const [allNewsItems, currentEntry] = await Promise.all([
+    readContentState("news", { includeBodies: false }),
+    readContentItem("news", decodedSlug, { includeBodies: true }),
+  ]);
+  const accessibleNewsItems = allNewsItems.filter(isPublishedContentAccessible);
+  const currentIndex = accessibleNewsItems.findIndex((item) => item.id === decodedSlug);
 
-  if (!currentEntry) {
+  if (!currentEntry || !isPublishedContentAccessible(currentEntry)) {
     notFound();
   }
 
@@ -28,8 +37,8 @@ export default async function NewsDetailRoute({ params }: Props) {
     redirect(currentEntry.externalUrl);
   }
 
-  const previousItem = currentIndex > 0 ? newsItems[currentIndex - 1] : null;
-  const nextItem = currentIndex < newsItems.length - 1 ? newsItems[currentIndex + 1] : null;
+  const previousItem = currentIndex > 0 ? accessibleNewsItems[currentIndex - 1] : null;
+  const nextItem = currentIndex < accessibleNewsItems.length - 1 ? accessibleNewsItems[currentIndex + 1] : null;
 
   const relatedItems = [
     previousItem
@@ -68,13 +77,13 @@ export default async function NewsDetailRoute({ params }: Props) {
         date: formatPublicDate(locale, currentEntry.dateIso),
         hideHeroImage: currentEntry.hideHeroImage,
         heroImageAlt: getLocalizedContent(currentEntry.title, locale),
-        heroImageSrc: getContentThumbnailSrc(currentEntry.imageSrc),
+        heroImageSrc: currentEntry.imageSrc,
         title: getLocalizedContent(currentEntry.title, locale),
         writer: currentEntry.authorRole
           ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
           : currentEntry.authorName,
       } satisfies DocsDetailPageProps}
-      initialItems={newsItems}
+      initialItems={accessibleNewsItems}
       locale={locale}
       slug={decodedSlug}
     />

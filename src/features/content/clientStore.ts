@@ -12,6 +12,7 @@ export const MANAGED_CONTENT_STORE_EVENT = "querypie:managed-content:changed";
 
 type ManagedContentChangeDetail = {
   section?: ManagedContentSection;
+  showLoading?: boolean;
   shouldRefetch?: boolean;
 };
 
@@ -230,7 +231,7 @@ export async function updateManagedContentStatus(
     throw new Error(payload.error ?? "Failed to update content status.");
   }
 
-  emitChange({ section: item?.section, shouldRefetch: true });
+  emitChange({ section: item?.section, shouldRefetch: true, showLoading: false });
 }
 
 export async function reorderManagedContents(orderedItems: ManagedContentEntry[]) {
@@ -264,7 +265,9 @@ export function useManagedContents(
   initialItems?: ManagedContentEntry[],
   categorySlug?: ManagedContentCategorySlug | "all",
   view: ManagedContentView = "full",
+  options?: { liveSync?: boolean },
 ) {
+  const liveSync = options?.liveSync ?? true;
   const initialItemsRef = useRef(initialItems);
   const hasBootstrappedDataRef = useRef(Boolean(readSnapshotCache(section, categorySlug, view) ?? initialItemsRef.current?.length));
   const [items, setItems] = useState<ManagedContentEntry[]>(() =>
@@ -281,6 +284,10 @@ export function useManagedContents(
   }, [categorySlug, initialItems, section, view]);
 
   useEffect(() => {
+    if (!liveSync) {
+      return;
+    }
+
     let active = true;
 
     const sync = () => {
@@ -328,7 +335,7 @@ export function useManagedContents(
       active = false;
       window.removeEventListener(MANAGED_CONTENT_STORE_EVENT, handleChange as EventListener);
     };
-  }, [categorySlug, section, view]);
+  }, [categorySlug, liveSync, section, view]);
 
   return items;
 }
@@ -355,16 +362,19 @@ export function useManagedContentsLoading(
   useEffect(() => {
     let active = true;
 
-    const sync = () => {
+    const sync = (showLoading = true) => {
       if (!active) return;
-      setIsLoading(true);
+
+      if (showLoading) {
+        setIsLoading(true);
+      }
 
       void getManagedContentsSnapshot(section, categorySlug, view)
         .catch(() => {
           // Loading state should still resolve even if sync falls back to cached/initial data elsewhere.
         })
         .finally(() => {
-          if (!active) return;
+          if (!showLoading || !active) return;
           setIsLoading(false);
         });
     };
@@ -377,7 +387,7 @@ export function useManagedContentsLoading(
         return;
       }
 
-      sync();
+      sync(detail?.showLoading ?? true);
     };
 
     if (!hasBootstrappedDataRef.current) {

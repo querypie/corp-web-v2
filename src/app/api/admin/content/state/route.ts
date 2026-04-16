@@ -1,16 +1,12 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
+import { getLocalePath, locales } from "@/constants/i18n";
 import {
   deleteAuthoredContent,
   saveAuthoredContent,
   updateAuthoredContentMeta,
 } from "@/features/content/authored.server";
-import {
-  deleteContentState,
-  readContentState,
-  replaceContentState,
-  updateContentStateStatus,
-  upsertContentState,
-} from "@/features/content/contentState.server";
+import { readContentState } from "@/features/content/contentState.server";
 import { stripManagedContentBodies } from "@/features/content/data";
 import type {
   ManagedContentCategorySlug,
@@ -37,6 +33,10 @@ type DeleteStateRequest = {
 type UpdateStatusRequest = {
   id?: string;
   status?: ManagedContentStatus;
+};
+
+const NO_STORE_HEADERS = {
+  "Cache-Control": "no-store, max-age=0",
 };
 
 function parseSection(url: string) {
@@ -88,6 +88,10 @@ function mergeBodiesFromCurrent(
   };
 }
 
+function getScopeKey(item: Pick<ManagedContentEntry, "section" | "categorySlug">) {
+  return `${item.section}::${item.categorySlug}`;
+}
+
 export async function GET(request: Request) {
   const section = parseSection(request.url) ?? undefined;
   const categorySlug = parseCategorySlug(request.url) ?? undefined;
@@ -99,12 +103,52 @@ export async function GET(request: Request) {
   });
 
   if (itemId) {
-    return NextResponse.json({ item: items.find((entry) => entry.id === itemId) ?? null });
+    return NextResponse.json(
+      { item: items.find((entry) => entry.id === itemId) ?? null },
+      { headers: NO_STORE_HEADERS },
+    );
   }
 
   return NextResponse.json({
     items: view === "list" ? items.map(stripManagedContentBodies) : items,
+  }, {
+    headers: NO_STORE_HEADERS,
   });
+}
+
+function revalidateAdminPaths(item: Pick<ManagedContentEntry, "section" | "categorySlug" | "id">) {
+  revalidatePath("/admin");
+  revalidatePath(`/admin/${item.section}`);
+
+  if (item.section === "news") {
+    revalidatePath("/admin/news");
+    revalidatePath(`/admin/news/${item.id}`);
+    return;
+  }
+
+  revalidatePath(`/admin/${item.section}/${item.categorySlug}`);
+  revalidatePath(`/admin/${item.section}/${item.categorySlug}/${item.id}`);
+}
+
+function revalidatePublicPaths(item: Pick<ManagedContentEntry, "section" | "id">) {
+  for (const locale of locales) {
+    if (item.section === "documentation") {
+      revalidatePath(getLocalePath(locale, "/features/documentation"));
+      revalidatePath(getLocalePath(locale, `/features/documentation/${item.id}`));
+      revalidatePath(getLocalePath(locale, `/features/documentation/${item.id}/download`));
+      continue;
+    }
+
+    if (item.section === "demo") {
+      revalidatePath(getLocalePath(locale, "/features/demo"));
+      revalidatePath(getLocalePath(locale, `/features/demo/${item.id}`));
+      revalidatePath(getLocalePath(locale, `/features/demo/${item.id}/download`));
+      continue;
+    }
+
+    revalidatePath(getLocalePath(locale, "/company/news"));
+    revalidatePath(getLocalePath(locale, `/company/news/${item.id}`));
+  }
 }
 
 export async function POST(request: Request) {
@@ -117,7 +161,7 @@ export async function POST(request: Request) {
 
     const currentItems = await readContentState();
     const currentMap = new Map(currentItems.map((item) => [item.id, item]));
-    const payloadSections = new Set(payload.items.map((item) => item.section));
+    const payloadScopes = new Set(payload.items.map((item) => getScopeKey(item)));
     const nextItems: ManagedContentEntry[] = [];
     for (const item of payload.items) {
       const normalizedItem = mergeBodiesFromCurrent(
@@ -144,15 +188,32 @@ export async function POST(request: Request) {
       nextItems.push(savedItem);
     }
 
-    const itemsToPersist =
-      payloadSections.size === 1
-        ? [
-            ...nextItems,
-            ...currentItems.filter((item) => !payloadSections.has(item.section)),
-          ]
-        : nextItems;
+    const nextItemIds = new Set(nextItems.map((item) => item.id));
+    const removedItems = currentItems.filter((item) =>
+      payloadScopes.has(getScopeKey(item)) && !nextItemIds.has(item.id),
+    );
 
-    const items = await replaceContentState(itemsToPersist);
+    await Promise.all(
+      removedItems.map((item) =>
+        deleteAuthoredContent({
+          categorySlug: item.categorySlug,
+          id: item.id,
+          section: item.section,
+          storageId: item.storageId,
+        }),
+      ),
+    );
+
+    nextItems.forEach((item) => {
+      revalidateAdminPaths(item);
+      revalidatePublicPaths(item);
+    });
+    removedItems.forEach((item) => {
+      revalidateAdminPaths(item);
+      revalidatePublicPaths(item);
+    });
+
+    const items = await readContentState();
     return NextResponse.json({ items });
   } catch (error) {
     return NextResponse.json(
@@ -180,8 +241,9 @@ export async function PUT(request: Request) {
     payload.preserveExistingBodies,
   );
   const savedItem = await saveAuthoredContent(normalizedItem);
+  revalidateAdminPaths(savedItem);
+  revalidatePublicPaths(savedItem);
 
-  await upsertContentState(savedItem, payload.currentId);
   return NextResponse.json({ item: savedItem });
 }
 
@@ -192,17 +254,20 @@ export async function PATCH(request: Request) {
     return NextResponse.json({ error: "id and status are required" }, { status: 400 });
   }
 
-  if (payload.item) {
+  const currentItem = payload.item ?? (await readContentState()).find((item) => item.id === payload.id);
+
+  if (currentItem) {
     await updateAuthoredContentMeta({
-      categorySlug: payload.item.categorySlug,
-      id: payload.item.id,
-      section: payload.item.section,
-      storageId: payload.item.storageId,
+      categorySlug: currentItem.categorySlug,
+      id: currentItem.id,
+      section: currentItem.section,
+      storageId: currentItem.storageId,
       updates: { status: payload.status },
     });
+    revalidateAdminPaths(currentItem);
+    revalidatePublicPaths(currentItem);
   }
 
-  await updateContentStateStatus(payload.id, payload.status);
   return NextResponse.json({ ok: true });
 }
 
@@ -213,15 +278,18 @@ export async function DELETE(request: Request) {
     return NextResponse.json({ error: "id is required" }, { status: 400 });
   }
 
-  if (payload.item) {
+  const currentItem = payload.item ?? (await readContentState()).find((item) => item.id === payload.id);
+
+  if (currentItem) {
     await deleteAuthoredContent({
-      categorySlug: payload.item.categorySlug,
-      id: payload.item.id,
-      section: payload.item.section,
-      storageId: payload.item.storageId,
+      categorySlug: currentItem.categorySlug,
+      id: currentItem.id,
+      section: currentItem.section,
+      storageId: currentItem.storageId,
     });
+    revalidateAdminPaths(currentItem);
+    revalidatePublicPaths(currentItem);
   }
 
-  await deleteContentState(payload.id);
   return NextResponse.json({ ok: true });
 }

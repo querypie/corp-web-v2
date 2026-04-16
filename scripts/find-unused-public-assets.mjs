@@ -4,7 +4,6 @@ import path from "path";
 
 const projectRoot = process.cwd();
 const publicRoot = path.join(projectRoot, "public");
-const statePath = path.join(projectRoot, "src", "content", "state", "content-state.json");
 
 const textExtensions = new Set([
   ".ts",
@@ -138,43 +137,6 @@ function scanTextContents(text, refs, source) {
   extractLooseTextRefs(text, refs, source);
 }
 
-function scanContentState(refs) {
-  const raw = readFileSync(statePath, "utf8");
-  const items = JSON.parse(raw);
-
-  items.forEach((item, index) => {
-    const source = `content-state:${item.id ?? index}`;
-    walkJson(item, refs, source);
-
-    ["bodyHtml", "bodyMarkdown", "summary", "title"].forEach((field) => {
-      const localized = item[field];
-
-      if (localized && typeof localized === "object") {
-        Object.values(localized).forEach((value) => {
-          if (typeof value === "string") {
-            scanTextContents(value, refs, source);
-          }
-        });
-      }
-    });
-
-    const bodyRichText = item.bodyRichText;
-    if (bodyRichText && typeof bodyRichText === "object") {
-      Object.values(bodyRichText).forEach((value) => {
-        if (typeof value !== "string") {
-          return;
-        }
-
-        try {
-          walkJson(JSON.parse(value), refs, source);
-        } catch {
-          scanTextContents(value, refs, source);
-        }
-      });
-    }
-  });
-}
-
 async function walkFiles(targetPath, onFile) {
   const targetStat = await stat(targetPath);
 
@@ -258,7 +220,6 @@ function groupByTopLevel(paths) {
 async function main() {
   const refs = new Map();
 
-  scanContentState(refs);
   await scanProjectFiles(refs);
 
   const publicFiles = await listPublicFiles(publicRoot);

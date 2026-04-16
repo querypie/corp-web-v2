@@ -10,7 +10,6 @@ import {
 } from "@/features/content/config";
 import {
   formatPublicDate,
-  getContentThumbnailSrc,
   getLocalizedContent,
   isPublishedContentVisible,
   getPublicDetailHref,
@@ -31,14 +30,14 @@ export default async function DemoPage({ params, searchParams }: Props) {
   const selectedCategory: DemoCategorySlug =
     isDemoCategorySlug(category) && category !== "all" ? category : "all";
 
-  const demoItems = (await readContentState("demo")).filter((item) => isPublishedContentVisible(item, locale));
+  const demoItems = (await readContentState("demo", { includeBodies: false })).filter((item) => isPublishedContentVisible(item, locale));
 
   const allItems = demoItems.map((item) => ({
     category: getCategoryLabel(demoCategoryConfigs, item.categorySlug, locale),
     date: item.categorySlug === "webinars" ? formatPublicDate(locale, item.dateIso) : undefined,
     description: getLocalizedContent(item.summary, locale),
     href: item.contentType === "outlink" ? item.externalUrl : getPublicDetailHref("demo", locale, item.id),
-    imageSrc: getContentThumbnailSrc(item.imageSrc),
+    imageSrc: item.imageSrc,
     title: getLocalizedContent(item.title, locale),
   }));
 

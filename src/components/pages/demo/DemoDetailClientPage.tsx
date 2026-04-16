@@ -9,7 +9,15 @@ import { useManagedContents } from "@/features/content/clientStore";
 import type { ContactPageCopy } from "@/features/contact/copy";
 import useHydrated from "@/hooks/useHydrated";
 import { demoCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/features/content/config";
-import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, isPublishedContentVisible, type ManagedContentEntry } from "@/features/content/data";
+import {
+  formatPublicDate,
+  getContentThumbnailSrc,
+  getLocalizedContent,
+  getPublicDetailHref,
+  getWriterLabel,
+  isPublishedContentAccessible,
+  type ManagedContentEntry,
+} from "@/features/content/data";
 import { getContentUnlockCookieName, isContentGatingEnabled } from "@/features/content/gating";
 
 type DemoDetailClientPageProps = {
@@ -30,8 +38,8 @@ export default function DemoDetailClientPage({
   slug,
 }: DemoDetailClientPageProps) {
   const resolvedSlug = decodeURIComponent(slug);
-  const managedItems = useManagedContents("demo", initialItems) ?? [];
-  const items = managedItems.filter((item) => isPublishedContentVisible(item, locale));
+  const managedItems = useManagedContents("demo", initialItems, undefined, "full", { liveSync: false }) ?? [];
+  const items = managedItems.filter(isPublishedContentAccessible);
   const isHydrated = useHydrated();
   const [isUnlocked, setIsUnlocked] = useState(initialContentUnlocked);
 
@@ -81,7 +89,7 @@ export default function DemoDetailClientPage({
   return (
     <DemoDetailPage
       {...fallbackProps}
-      bodyHtml={isGateActive ? fallbackProps.bodyHtml : getLocalizedContent(currentUseCase.bodyHtml, locale)}
+      bodyHtml={fallbackProps.bodyHtml}
       category={getCategoryLabel(demoCategoryConfigs, currentUseCase.categorySlug, locale)}
       contentOverlay={isGateActive ? (
         <ContentGateOverlay

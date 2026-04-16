@@ -1,4 +1,5 @@
 import type { Locale } from "@/constants/i18n";
+import ContentPreviewImage from "../../common/ContentPreviewImage";
 import Cta from "../../sections/Cta";
 
 type NewsListItem = {
@@ -31,8 +32,6 @@ export function NewsListCard({
   summary,
   title,
 }: NewsListItem) {
-  const resolvedImageSrc = imageSrc.trim();
-
   return (
     /* 뉴스 카드 1개: 모바일은 세로, 데스크톱은 텍스트/썸네일 2열 */
     <a
@@ -48,17 +47,13 @@ export function NewsListCard({
         <p className="m-0 hidden type-body-md text-mute-fg md:block">{summary}</p>
       </div>
       {/* 우측 썸네일 영역 */}
-      {resolvedImageSrc ? (
-        <div className="content-thumbnail-frame order-1 w-full shrink-0 overflow-hidden rounded-thumb bg-bg-content md:order-2 md:w-[380px]">
-          <img
-            alt={title}
-            className="card-media-motion block h-full w-full object-cover"
-            decoding="async"
-            loading="lazy"
-            src={resolvedImageSrc}
-          />
-        </div>
-      ) : null}
+      <ContentPreviewImage
+        alt={title}
+        className="card-media-motion block h-full w-full object-cover"
+        containerClassName="content-thumbnail-frame order-1 w-full shrink-0 overflow-hidden rounded-thumb bg-bg-content md:order-2 md:w-[380px]"
+        src={imageSrc}
+        useThumbnailFallback
+      />
     </a>
   );
 }

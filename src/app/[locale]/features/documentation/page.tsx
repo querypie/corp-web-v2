@@ -9,7 +9,6 @@ import {
 } from "@/features/content/config";
 import {
   formatPublicDate,
-  getContentThumbnailSrc,
   getLocalizedContent,
   isPublishedContentVisible,
   getPublicDetailHref,
@@ -33,14 +32,14 @@ export default async function DocumentationPage({ params, searchParams }: DocsPa
       ? normalizedCategory as DocsCategorySlug
       : "all";
 
-  const docsItems = (await readContentState("documentation")).filter((item) => isPublishedContentVisible(item, locale));
+  const docsItems = (await readContentState("documentation", { includeBodies: false })).filter((item) => isPublishedContentVisible(item, locale));
 
   const allItems = docsItems.map((item) => ({
     category: getCategoryLabel(docsCategoryConfigs, item.categorySlug, locale),
     date: item.categorySlug === "blogs" ? formatPublicDate(locale, item.dateIso) : undefined,
     description: getLocalizedContent(item.summary, locale),
     href: item.contentType === "outlink" ? item.externalUrl : getPublicDetailHref("documentation", locale, item.id),
-    imageSrc: getContentThumbnailSrc(item.imageSrc),
+    imageSrc: item.imageSrc,
     title: getLocalizedContent(item.title, locale),
   }));
 

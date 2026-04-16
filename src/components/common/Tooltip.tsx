@@ -99,7 +99,7 @@ export default function Tooltip({
               role="tooltip"
               style={{ left: `${position.left}px`, top: `${position.top}px` }}
             >
-              <span className="relative block whitespace-nowrap rounded-[6px] border border-border bg-bg-modal px-[10px] py-[6px] text-center type-body-sm text-fg shadow-[0_12px_28px_rgba(var(--color-overlay-rgb)/0.34)]">
+              <span className="relative block whitespace-pre-line rounded-[6px] border border-border bg-bg-modal px-[10px] py-[6px] text-center type-body-sm text-fg shadow-[0_12px_28px_rgba(var(--color-overlay-rgb)/0.34)]">
                 {content}
                 <span className="absolute left-1/2 top-full h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border-b border-r border-border bg-bg-modal" />
               </span>
