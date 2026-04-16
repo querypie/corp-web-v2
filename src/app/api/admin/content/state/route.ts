@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { getLocalePath, locales } from "@/constants/i18n";
 import {
   deleteAuthoredContent,
@@ -7,8 +7,11 @@ import {
   updateAuthoredContentMeta,
 } from "@/features/content/authored.server";
 import {
-  CONTENT_STATE_CACHE_TAG,
+  deleteContentState,
   readContentState,
+  replaceContentState,
+  updateContentStateStatus,
+  upsertContentState,
 } from "@/features/content/contentState.server";
 import { stripManagedContentBodies } from "@/features/content/data";
 import type {
@@ -17,9 +20,6 @@ import type {
   ManagedContentSection,
   ManagedContentStatus,
 } from "@/features/content/data";
-
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 type ReplaceStateRequest = {
   items?: ManagedContentEntry[];
@@ -157,10 +157,6 @@ function revalidatePublicPaths(item: Pick<ManagedContentEntry, "section" | "id">
   }
 }
 
-function revalidateContentStateCache() {
-  revalidateTag(CONTENT_STATE_CACHE_TAG);
-}
-
 export async function POST(request: Request) {
   try {
     const payload = (await request.json()) as ReplaceStateRequest;
@@ -214,6 +210,13 @@ export async function POST(request: Request) {
       ),
     );
 
+    const itemsToPersist = [
+      ...nextItems,
+      ...currentItems.filter((item) => !payloadScopes.has(getScopeKey(item))),
+    ];
+
+    const items = await replaceContentState(itemsToPersist);
+
     nextItems.forEach((item) => {
       revalidateAdminPaths(item);
       revalidatePublicPaths(item);
@@ -222,9 +225,7 @@ export async function POST(request: Request) {
       revalidateAdminPaths(item);
       revalidatePublicPaths(item);
     });
-    revalidateContentStateCache();
 
-    const items = await readContentState();
     return NextResponse.json({ items });
   } catch (error) {
     return NextResponse.json(
@@ -252,9 +253,10 @@ export async function PUT(request: Request) {
     payload.preserveExistingBodies,
   );
   const savedItem = await saveAuthoredContent(normalizedItem);
+
+  await upsertContentState(savedItem, payload.currentId);
   revalidateAdminPaths(savedItem);
   revalidatePublicPaths(savedItem);
-  revalidateContentStateCache();
 
   return NextResponse.json({ item: savedItem });
 }
@@ -276,9 +278,9 @@ export async function PATCH(request: Request) {
       storageId: currentItem.storageId,
       updates: { status: payload.status },
     });
+    await updateContentStateStatus(payload.id, payload.status);
     revalidateAdminPaths(currentItem);
     revalidatePublicPaths(currentItem);
-    revalidateContentStateCache();
   }
 
   return NextResponse.json({ ok: true });
@@ -300,9 +302,9 @@ export async function DELETE(request: Request) {
       section: currentItem.section,
       storageId: currentItem.storageId,
     });
+    await deleteContentState(payload.id);
     revalidateAdminPaths(currentItem);
     revalidatePublicPaths(currentItem);
-    revalidateContentStateCache();
   }
 
   return NextResponse.json({ ok: true });

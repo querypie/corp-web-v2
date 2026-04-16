@@ -29,3 +29,6 @@ yarn-error.log*
 # typescript
 tsconfig.tsbuildinfo
 *.tsbuildinfo
+.worktrees/
+.vercel/README.txt
+.vercel/output/

@@ -7,9 +7,12 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "audit:public-assets": "node scripts/find-unused-public-assets.mjs"
+    "audit:public-assets": "node scripts/find-unused-public-assets.mjs",
+    "test": "vitest",
+    "test:run": "vitest run"
   },
   "dependencies": {
+    "@slack/web-api": "^7.13.0",
     "@tiptap/extension-image": "^3.21.0",
     "@tiptap/extension-link": "^3.21.0",
     "@tiptap/extension-table": "^3.21.0",
@@ -17,18 +20,32 @@
     "@tiptap/pm": "^3.21.0",
     "@tiptap/react": "^3.21.0",
     "@tiptap/starter-kit": "^3.21.0",
-    "next": "^15.3.0",
+    "next": "^15.5.15",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "xss": "^1.0.15"
+  },
+  "overrides": {
+    "picomatch": "^2.3.2",
+    "tinyglobby": {
+      "picomatch": "^4.0.4"
+    }
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^22.14.0",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.20",
+    "happy-dom": "^20.9.0",
+    "jsdom": "^27.0.1",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vitest": "^3.2.4"
   }
 }

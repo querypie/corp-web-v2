@@ -605,14 +605,21 @@ const [isSaving, setIsSaving] = useState(false);
 
     const nextSortOrder =
       itemId === "new"
-        ? Math.min(
-            1,
-            ...items
-              .filter((entry) => entry.section === section && entry.categorySlug === categorySlug)
-              .map((entry) => entry.sortOrder),
-          ) - 1
+        ? 1
         : currentForm.sortOrder;
 
+    if (itemId === "new") {
+      for (const item of items.filter((entry) => entry.section === section && entry.categorySlug === categorySlug)) {
+        await upsertManagedContent(
+          {
+            ...item,
+            sortOrder: item.sortOrder + 1,
+          },
+          item.id,
+          { preserveExistingBodies: true },
+        );
+      }
+    }
     const nextItem: ManagedContentEntry = {
       ...currentForm,
       categorySlug,

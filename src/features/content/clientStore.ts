@@ -21,6 +21,63 @@ type SaveOptions = {
   preserveExistingBodies?: boolean;
 };
 
+const snapshotCache = new Map<string, ManagedContentEntry[]>();
+
+function getCacheKey(section?: ManagedContentSection) {
+  return section ?? "__all__";
+}
+
+function getScopedCacheKey(
+  section?: ManagedContentSection,
+  categorySlug?: ManagedContentCategorySlug | "all",
+  view: ManagedContentView = "full",
+) {
+  return `${getCacheKey(section)}::${categorySlug ?? "__all__"}::${view}`;
+}
+
+function writeSnapshotCache(
+  items: ManagedContentEntry[],
+  section?: ManagedContentSection,
+  categorySlug?: ManagedContentCategorySlug | "all",
+  view: ManagedContentView = "full",
+) {
+  snapshotCache.set(getScopedCacheKey(section, categorySlug, view), items);
+
+  if (section) {
+    const sectionAllKey = getScopedCacheKey(section, "all", view);
+    const sectionAllItems = snapshotCache.get(sectionAllKey);
+
+    if (sectionAllItems) {
+      snapshotCache.set(
+        sectionAllKey,
+        categorySlug && categorySlug !== "all"
+          ? [
+              ...sectionAllItems.filter((item) => item.categorySlug !== categorySlug),
+              ...items,
+            ]
+          : items,
+      );
+    }
+
+    const allItems = snapshotCache.get(getScopedCacheKey(undefined, "all", view));
+
+    if (allItems) {
+      snapshotCache.set(
+        getScopedCacheKey(undefined, "all", view),
+        [...allItems.filter((item) => item.section !== section), ...(snapshotCache.get(sectionAllKey) ?? items)],
+      );
+    }
+  }
+}
+
+function readSnapshotCache(
+  section?: ManagedContentSection,
+  categorySlug?: ManagedContentCategorySlug | "all",
+  view: ManagedContentView = "full",
+) {
+  return snapshotCache.get(getScopedCacheKey(section, categorySlug, view));
+}
+
 function emitChange(detail?: ManagedContentChangeDetail) {
   if (typeof window === "undefined") return;
   window.dispatchEvent(new CustomEvent<ManagedContentChangeDetail>(MANAGED_CONTENT_STORE_EVENT, { detail }));
@@ -55,7 +112,9 @@ async function readState(
   }
 
   const payload = (await response.json()) as { items?: ManagedContentEntry[] };
-  return payload.items ?? [];
+  const items = payload.items ?? [];
+  writeSnapshotCache(items, section, categorySlug, view);
+  return items;
 }
 
 export async function getManagedContentsSnapshot(
@@ -210,12 +269,16 @@ export function useManagedContents(
 ) {
   const liveSync = options?.liveSync ?? true;
   const initialItemsRef = useRef(initialItems);
-  const [items, setItems] = useState<ManagedContentEntry[]>(() => initialItemsRef.current ?? []);
+  const hasBootstrappedDataRef = useRef(Boolean(readSnapshotCache(section, categorySlug, view) ?? initialItemsRef.current?.length));
+  const [items, setItems] = useState<ManagedContentEntry[]>(() =>
+    readSnapshotCache(section, categorySlug, view) ?? initialItemsRef.current ?? [],
+  );
 
   useEffect(() => {
     initialItemsRef.current = initialItems;
 
     if (initialItems !== undefined) {
+      writeSnapshotCache(initialItems, section, categorySlug, view);
       setItems(initialItems);
     }
   }, [categorySlug, initialItems, section, view]);
@@ -247,10 +310,24 @@ export function useManagedContents(
         return;
       }
 
+      if (detail?.shouldRefetch === false) {
+        const cached = readSnapshotCache(section, categorySlug, view);
+
+        if (cached && active) {
+          setItems(cached);
+        }
+
+        return;
+      }
+
       sync();
     };
 
-    sync();
+    if (!hasBootstrappedDataRef.current) {
+      sync();
+    } else {
+      hasBootstrappedDataRef.current = false;
+    }
 
     window.addEventListener(MANAGED_CONTENT_STORE_EVENT, handleChange as EventListener);
 
@@ -270,22 +347,24 @@ export function useManagedContentsLoading(
   view: ManagedContentView = "full",
 ) {
   const initialItemsRef = useRef(initialItems);
-  const [isLoading, setIsLoading] = useState(() => !initialItemsRef.current?.length);
+  const hasBootstrappedDataRef = useRef(Boolean(readSnapshotCache(section, categorySlug, view) ?? initialItemsRef.current?.length));
+  const [isLoading, setIsLoading] = useState(() => !hasBootstrappedDataRef.current);
 
   useEffect(() => {
     initialItemsRef.current = initialItems;
 
     if (initialItems !== undefined) {
+      writeSnapshotCache(initialItems, section, categorySlug, view);
       setIsLoading(false);
     }
   }, [categorySlug, initialItems, section, view]);
 
   useEffect(() => {
     let active = true;
-    const shouldLoadOnMount = !initialItemsRef.current?.length;
 
     const sync = (showLoading = true) => {
       if (!active) return;
+
       if (showLoading) {
         setIsLoading(true);
       }
@@ -311,7 +390,11 @@ export function useManagedContentsLoading(
       sync(detail?.showLoading ?? true);
     };
 
-    sync(shouldLoadOnMount);
+    if (!hasBootstrappedDataRef.current) {
+      sync();
+    } else {
+      hasBootstrappedDataRef.current = false;
+    }
 
     window.addEventListener(MANAGED_CONTENT_STORE_EVENT, handleChange as EventListener);
 

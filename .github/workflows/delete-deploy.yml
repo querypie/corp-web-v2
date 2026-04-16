@@ -1,0 +1,35 @@
+name: Delete Deploy
+
+permissions:
+  contents: read
+
+on:
+  delete:
+
+defaults:
+  run:
+    working-directory: scripts/deploy
+
+jobs:
+  delete-deploy:
+    name: Delete Deploy
+    runs-on: ubuntu-latest
+    if: github.event.ref_type == 'branch'
+    env:
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} # querypie organization secret
+      VERCEL_TEAM_ID: team_8DsCdrF1uCfwY30OS8F8lREn
+      VERCEL_PROJECT_ID: prj_xeobCehIxv13fSJdlEprUfdqRlTd
+      BRANCH: ${{ github.event.ref }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Delete Deploy Script
+        run: npm run delete-deploy
