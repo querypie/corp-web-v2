@@ -59,6 +59,22 @@ describe("POST /api/community-license", () => {
     vi.restoreAllMocks();
   });
 
+  describe("Salesforce 환경변수 미설정", () => {
+    it("SALESFORCE_ENDPOINT가 없으면 success:true를 반환하고 Salesforce를 호출하지 않는다", async () => {
+      vi.unstubAllEnvs();
+      // SALESFORCE_ENDPOINT 미설정
+      stubMxRecord(true);
+
+      const fetchSpy = vi.spyOn(global, "fetch");
+
+      const res = await POST(makeRequest(validBody));
+      const body = await res.json();
+
+      expect(body.success).toBe(true);
+      expect(fetchSpy).not.toHaveBeenCalled();
+    });
+  });
+
   describe("입력 검증", () => {
     it("FirstName 누락 시 400을 반환한다", async () => {
       const res = await POST(makeRequest({ LastName: "Hong", Email: "a@b.com", Company: "Co" }));
