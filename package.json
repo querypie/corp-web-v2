@@ -12,6 +12,7 @@
     "test:run": "vitest run"
   },
   "dependencies": {
+    "@slack/web-api": "^7.13.0",
     "@tiptap/extension-image": "^3.21.0",
     "@tiptap/extension-link": "^3.21.0",
     "@tiptap/extension-table": "^3.21.0",
@@ -22,7 +23,8 @@
     "next": "^15.5.15",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "server-only": "^0.0.1"
+    "server-only": "^0.0.1",
+    "xss": "^1.0.15"
   },
   "overrides": {
     "picomatch": "^2.3.2",
