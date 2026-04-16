@@ -4,6 +4,17 @@
 
 ---
 
+## URL
+
+| 환경 | URL |
+|------|-----|
+| Staging | `https://stage-v2.querypie.com/community-license` |
+| Production | `https://www-v2.querypie.com/community-license` |
+
+다국어: `/ko/community-license`, `/ja/community-license`
+
+---
+
 ## 파일 구조
 
 | 파일 | 역할 |
