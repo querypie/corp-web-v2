@@ -19,3 +19,10 @@ export type MdxHeading = {
   text: string;
   list?: MdxHeading[];
 };
+
+export type RelatedPost = {
+  title: string;
+  href: string;
+  summary?: string;
+  category?: "blog" | "whitepaper" | "external";
+};
