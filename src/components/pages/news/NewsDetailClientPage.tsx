@@ -4,7 +4,15 @@ import NewsDetailPage from "./NewsDetailPage";
 import { type Locale } from "@/constants/i18n";
 import type { DocsDetailPageProps } from "../documentation/DocumentationDetailPage";
 import { useManagedContents } from "@/features/content/clientStore";
-import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, getWriterLabel, isPublishedContentVisible, type ManagedContentEntry } from "@/features/content/data";
+import {
+  formatPublicDate,
+  getContentThumbnailSrc,
+  getLocalizedContent,
+  getPublicDetailHref,
+  getWriterLabel,
+  isPublishedContentAccessible,
+  type ManagedContentEntry,
+} from "@/features/content/data";
 import useHydrated from "@/hooks/useHydrated";
 
 type NewsDetailClientPageProps = {
@@ -21,8 +29,8 @@ export default function NewsDetailClientPage({
   slug,
 }: NewsDetailClientPageProps) {
   const decodedSlug = decodeURIComponent(slug);
-  const managedItems = useManagedContents("news", initialItems) ?? [];
-  const items = managedItems.filter((item) => isPublishedContentVisible(item, locale));
+  const managedItems = useManagedContents("news", initialItems, undefined, "full", { liveSync: false }) ?? [];
+  const items = managedItems.filter(isPublishedContentAccessible);
   const isHydrated = useHydrated();
 
   const currentIndex = items.findIndex((item) => item.id === decodedSlug);
@@ -61,7 +69,7 @@ export default function NewsDetailClientPage({
   return (
     <NewsDetailPage
       {...fallbackProps}
-      bodyHtml={getLocalizedContent(currentItem.bodyHtml, locale)}
+      bodyHtml={fallbackProps.bodyHtml}
       category="News"
       contentListItems={relatedItems}
       date={formatPublicDate(locale, currentItem.dateIso)}

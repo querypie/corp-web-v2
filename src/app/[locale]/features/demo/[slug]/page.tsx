@@ -11,10 +11,10 @@ import {
   getManagedCategoryLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
-  isPublishedContentVisible,
+  isPublishedContentAccessible,
   getPublicDetailHref,
 } from "@/features/content/data";
-import { readContentState } from "@/features/content/contentState.server";
+import { readContentItem, readContentState } from "@/features/content/contentState.server";
 import {
   buildContentPreviewHtml,
   getContentUnlockCookieName,
@@ -34,11 +34,13 @@ export default async function DemoDetailRoute({ params }: Props) {
 
   const cookieStore = await cookies();
 
-  const demoItems = (await readContentState("demo")).filter((item) => isPublishedContentVisible(item, locale));
-  const currentIndex = demoItems.findIndex((item) => item.id === resolvedSlug);
-  const currentEntry = currentIndex >= 0 ? demoItems[currentIndex] : null;
+  const [allDemoItems, currentEntry] = await Promise.all([
+    readContentState("demo", { includeBodies: false }),
+    readContentItem("demo", resolvedSlug, { includeBodies: true }),
+  ]);
+  const accessibleDemoItems = allDemoItems.filter(isPublishedContentAccessible);
 
-  if (!currentEntry) {
+  if (!currentEntry || !isPublishedContentAccessible(currentEntry)) {
     notFound();
   }
 
@@ -50,7 +52,7 @@ export default async function DemoDetailRoute({ params }: Props) {
     redirect(currentEntry.externalUrl);
   }
 
-  const categoryItems = demoItems.filter((item) => item.categorySlug === currentEntry.categorySlug);
+  const categoryItems = accessibleDemoItems.filter((item) => item.categorySlug === currentEntry.categorySlug);
   const categoryIndex = categoryItems.findIndex((item) => item.id === resolvedSlug);
   const previousItem = categoryIndex > 0 ? categoryItems[categoryIndex - 1] : null;
   const nextItem = categoryIndex < categoryItems.length - 1 ? categoryItems[categoryIndex + 1] : null;
@@ -96,7 +98,7 @@ export default async function DemoDetailRoute({ params }: Props) {
             : undefined,
         hideHeroImage: currentEntry.hideHeroImage,
         heroImageAlt: getLocalizedContent(currentEntry.title, locale),
-        heroImageSrc: currentEntry.imageSrc || "/images/common/fallback-contents.jpg",
+        heroImageSrc: currentEntry.imageSrc,
         title: getLocalizedContent(currentEntry.title, locale),
         writer: currentEntry.authorRole
           ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
@@ -104,7 +106,7 @@ export default async function DemoDetailRoute({ params }: Props) {
       } satisfies DocsDetailPageProps}
       contactCopy={getContactPageCopy(locale)}
       initialContentUnlocked={isContentUnlocked}
-      initialItems={demoItems}
+      initialItems={accessibleDemoItems}
       locale={locale}
       slug={resolvedSlug}
     />

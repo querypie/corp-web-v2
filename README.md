@@ -102,28 +102,22 @@ npm run audit:public-assets
   - News 원본
 - `src/content/legal`
   - 개인정보처리방침 등 법무 문서
-- `src/content/state/content-state.json`
-  - 퍼블릭/어드민이 공통으로 읽는 최종 콘텐츠 상태
 
-실제 운영 기준으로 콘텐츠의 최종 source of truth는 `src/content/state/content-state.json`입니다.
+실제 운영 기준으로 콘텐츠의 source of truth는 `src/content/**` authored 파일입니다.
 
 ## 콘텐츠 동작 방식
 
-콘텐츠는 두 층으로 이해하면 됩니다.
+콘텐츠는 `src/content/**` authored 파일이 source of truth입니다.
 
-1. `src/content/**`
-   - authored 원본 콘텐츠
-2. `src/content/state/content-state.json`
-   - 어드민 변경사항이 반영된 최종 상태
-
-`src/features/content/contentState.server.ts`가 이 파일을 읽고 쓰며, 관리자 화면은 `/api/admin/content/state`를 통해 이 상태를 갱신합니다.
+`src/features/content/contentState.server.ts`는 authored 파일을 읽고, 관리자 화면은 `/api/admin/content/state`를 통해 authored 파일을 직접 갱신합니다.
 
 ## Source Of Truth
 
 콘텐츠 관련 작업에서는 아래 기준을 우선합니다.
 
-- 최종 콘텐츠 상태: `src/content/state/content-state.json`
+- 최종 콘텐츠 상태: `src/content/**`
 - 콘텐츠 상태 읽기/쓰기: `src/features/content/contentState.server.ts`
+- 콘텐츠 authored 저장: `src/features/content/authored.server.ts`
 - 카테고리/메뉴 정의: `src/features/content/config.ts`
 - 퍼블릭 메뉴/푸터 카피: `src/constants/navigation.ts`
 
@@ -169,7 +163,7 @@ SEO 관련 작업에서는 아래 기준을 우선합니다.
 - UI 변경은 먼저 `src/components/common`, `src/components/layout`, `src/components/sections`에서 재사용 가능한 패턴이 있는지 확인합니다.
 - 퍼블릭 메뉴와 Footer 카피는 `src/constants/navigation.ts`를 우선 확인합니다.
 - 카테고리명, 경로, 메뉴 구성은 하드코딩하지 말고 `src/features/content/config.ts`, `src/constants/*`에 이미 정의가 있는지 먼저 확인합니다.
-- 콘텐츠 관련 변경은 `src/content/**`와 `src/content/state/content-state.json`이 함께 영향받는지 확인합니다.
+- 콘텐츠 관련 변경은 먼저 `src/content/**` authored 파일에 영향이 있는지 확인합니다.
 - 먼저 기존 패턴을 찾고, 그다음 수정합니다.
 - 이미 공용 컴포넌트가 있으면 새 컴포넌트를 만들기 전에 재사용 가능성을 확인합니다.
 - 범위를 벗어나는 리팩터링은 사용자 요청이 없으면 하지 않습니다.
@@ -184,8 +178,8 @@ SEO 관련 작업에서는 아래 기준을 우선합니다.
   - `documentation`
   - `news`
 - 어떤 카테고리인지 확인
-- 원본 콘텐츠 변경인지, 최종 상태 변경인지 구분
-- `src/content/**`와 `src/content/state/content-state.json` 중 어디가 영향을 받는지 확인
+- authored 원본 변경인지, 레거시 fallback 확인이 필요한지 구분
+- 기본적으로 `src/content/**`를 우선 확인
 - 관리자 화면과 퍼블릭 화면이 같은 데이터를 읽는지 확인
 
 UI 작업:
@@ -204,5 +198,5 @@ UI 작업:
 ## 빠른 진단 포인트
 
 - 이미지나 다운로드 경로가 깨지면 `public/` 실제 파일 위치, 콘텐츠 데이터, `next.config.ts` rewrite, 실제 브라우저 요청 URL을 같이 확인합니다.
-- 관리자에서 콘텐츠가 안 보이면 `/api/admin/content/state`, `src/content/state/content-state.json`, `src/features/content/clientStore.ts` 흐름을 먼저 확인합니다.
+- 관리자에서 콘텐츠가 안 보이면 `/api/admin/content/state`, `src/features/content/authored.server.ts`, `src/features/content/clientStore.ts` 흐름을 먼저 확인합니다.
 - SEO 이상 동작은 `src/features/seo/clientStore.ts`와 브라우저 `localStorage` 상태를 먼저 의심하는 편이 맞습니다.

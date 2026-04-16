@@ -21,6 +21,7 @@ export default function AdminShell({ children }: AdminShellProps) {
   const [pendingHref, setPendingHref] = useState<string | null>(null);
   const [pendingBackNavigation, setPendingBackNavigation] = useState(false);
   const allowBrowserNavigationRef = useRef(false);
+  const allowNextNavigationRef = useRef(false);
 
   function requestNavigation(href: string) {
     if (!hasUnsavedChanges) {
@@ -37,6 +38,11 @@ export default function AdminShell({ children }: AdminShellProps) {
     }
 
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      if (allowNextNavigationRef.current) {
+        allowNextNavigationRef.current = false;
+        return;
+      }
+
       event.preventDefault();
       event.returnValue = "";
     };
@@ -74,6 +80,9 @@ export default function AdminShell({ children }: AdminShellProps) {
   return (
     <AdminNavigationGuardContext.Provider
       value={{
+        allowNextNavigation: () => {
+          allowNextNavigationRef.current = true;
+        },
         requestNavigation,
         setHasUnsavedChanges,
       }}

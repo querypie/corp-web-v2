@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "../../../../constants/i18n";
 import NewsListClientPage from "../../../../components/pages/news/NewsListClientPage";
-import { formatPublicDate, getContentThumbnailSrc, getLocalizedContent, getPublicDetailHref, isPublishedContentVisible } from "@/features/content/data";
+import { formatPublicDate, getLocalizedContent, getPublicDetailHref, isPublishedContentVisible } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
 
 type Props = {
@@ -20,12 +20,12 @@ export default async function NewsPage({ params }: Props) {
     ja: { title: "News" },
   }[locale];
 
-  const fallbackItems = (await readContentState("news"))
+  const fallbackItems = (await readContentState("news", { includeBodies: false }))
     .filter((item) => isPublishedContentVisible(item, locale))
     .map((item) => ({
       date: formatPublicDate(locale, item.dateIso),
       href: item.contentType === "outlink" ? item.externalUrl : getPublicDetailHref("news", locale, item.id),
-      imageSrc: getContentThumbnailSrc(item.imageSrc),
+      imageSrc: item.imageSrc,
       isExternal: item.contentType === "outlink",
       summary: getLocalizedContent(item.summary, locale),
       title: getLocalizedContent(item.title, locale),

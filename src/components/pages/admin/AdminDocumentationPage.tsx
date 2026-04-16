@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from "next/cache";
 import { readContentState } from "@/features/content/contentState.server";
 import { stripManagedContentBodies } from "@/features/content/data";
 import { getAdminCategoryPageMeta, type DocsCategorySlug } from "@/features/content/config";
@@ -10,6 +11,7 @@ type AdminDocumentationPageProps = {
 export default async function AdminDocumentationPage({
   categorySlug = "all",
 }: AdminDocumentationPageProps) {
+  noStore();
   const initialItems = await readContentState(
     "documentation",
     categorySlug === "all" ? { includeBodies: false } : { categorySlug, includeBodies: false },

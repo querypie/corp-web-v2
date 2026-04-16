@@ -11,10 +11,10 @@ import {
   getManagedCategoryLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
-  isPublishedContentVisible,
+  isPublishedContentAccessible,
   getPublicDetailHref,
 } from "@/features/content/data";
-import { readContentState } from "@/features/content/contentState.server";
+import { readContentItem, readContentState } from "@/features/content/contentState.server";
 import {
   buildContentPreviewHtml,
   getContentUnlockCookieName,
@@ -33,11 +33,13 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
   if (!isLocale(locale)) notFound();
 
   const cookieStore = await cookies();
-  const docsItems = (await readContentState("documentation")).filter((item) => isPublishedContentVisible(item, locale));
-  const currentIndex = docsItems.findIndex((item) => item.id === resolvedSlug);
-  const currentEntry = currentIndex >= 0 ? docsItems[currentIndex] : null;
+  const [allDocsItems, currentEntry] = await Promise.all([
+    readContentState("documentation", { includeBodies: false }),
+    readContentItem("documentation", resolvedSlug, { includeBodies: true }),
+  ]);
+  const accessibleDocsItems = allDocsItems.filter(isPublishedContentAccessible);
 
-  if (!currentEntry) {
+  if (!currentEntry || !isPublishedContentAccessible(currentEntry)) {
     notFound();
   }
 
@@ -49,7 +51,7 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
     redirect(currentEntry.externalUrl);
   }
 
-  const categoryItems = docsItems.filter((item) => item.categorySlug === currentEntry.categorySlug);
+  const categoryItems = accessibleDocsItems.filter((item) => item.categorySlug === currentEntry.categorySlug);
   const categoryIndex = categoryItems.findIndex((item) => item.id === resolvedSlug);
 
   const previousItem = categoryIndex > 0 ? categoryItems[categoryIndex - 1] : null;
@@ -100,14 +102,14 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
             : undefined,
         hideHeroImage: currentEntry.hideHeroImage,
         heroImageAlt: getLocalizedContent(currentEntry.title, locale),
-        heroImageSrc: currentEntry.imageSrc || "/images/common/fallback-contents.jpg",
+        heroImageSrc: currentEntry.imageSrc,
         title: getLocalizedContent(currentEntry.title, locale),
         writer: currentEntry.authorRole
           ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
           : currentEntry.authorName,
       } satisfies DocsDetailPageProps}
       initialContentUnlocked={isContentUnlocked}
-      initialItems={docsItems}
+      initialItems={accessibleDocsItems}
       locale={locale}
       slug={resolvedSlug}
     />

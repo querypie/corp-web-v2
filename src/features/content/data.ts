@@ -112,11 +112,21 @@ export function hasLocalizedTitle(content: LocalizedContent, locale: Locale) {
   return Boolean(content[locale]?.trim());
 }
 
+export function hasAnyLocalizedTitle(content: LocalizedContent) {
+  return Boolean(content.en?.trim() || content.ko?.trim() || content.ja?.trim());
+}
+
 export function isPublishedContentVisible(
   item: Pick<ManagedContentEntry, "status" | "title">,
   locale: Locale,
 ) {
   return item.status === "published" && hasLocalizedTitle(item.title, locale);
+}
+
+export function isPublishedContentAccessible(
+  item: Pick<ManagedContentEntry, "status" | "title">,
+) {
+  return item.status === "published" && hasAnyLocalizedTitle(item.title);
 }
 
 export function getContentThumbnailSrc(imageSrc: string) {

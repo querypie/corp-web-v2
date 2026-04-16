@@ -1,4 +1,5 @@
 import type { Locale } from "@/constants/i18n";
+import ContentPreviewImage from "../../common/ContentPreviewImage";
 import Cta from "../../sections/Cta";
 
 type DocsListItem = {
@@ -43,9 +44,13 @@ function DocsListCard({
       className="group flex w-full cursor-pointer flex-col gap-5"
       href={href}
     >
-      <div className="content-thumbnail-frame w-full overflow-hidden rounded-thumb bg-bg-content">
-        <img alt={title} className="card-media-motion block h-full w-full object-cover" decoding="async" loading="lazy" src={imageSrc} />
-      </div>
+      <ContentPreviewImage
+        alt={title}
+        className="card-media-motion block h-full w-full object-cover"
+        containerClassName="content-thumbnail-frame w-full overflow-hidden rounded-thumb bg-bg-content"
+        src={imageSrc}
+        useThumbnailFallback
+      />
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
         {showCategory ? <p className="m-0 type-mono text-brand">{category}</p> : null}
         <p className="content-hover-title m-0 type-h3 text-fg">{title}</p>

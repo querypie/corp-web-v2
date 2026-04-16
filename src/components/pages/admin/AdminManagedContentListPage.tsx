@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import AdminHeader from "../../layout/admin/AdminHeader";
 import Button from "../../common/Button";
+import ContentPreviewImage from "../../common/ContentPreviewImage";
 import Input from "../../common/Input";
 import LoadingText from "../../common/LoadingText";
 import Switch from "../../common/Switch";
@@ -22,18 +23,16 @@ import {
   formatPublicDate,
   getAdminCategoryHref,
   getAdminDetailHref,
-  getContentThumbnailSrc,
   getDownloadPreviewProps,
-  hasLocalizedTitle,
   getManagedCategoryLabel,
   getLocalizedContent,
   getWriterLabel,
+  hasLocalizedTitle,
   type ManagedContentCategorySlug,
   type ManagedContentEntry,
   type ManagedContentSection,
 } from "@/features/content/data";
 import { cloneAsAuthoredContent } from "@/features/content/cloneToAuthored";
-import useHydrated from "@/hooks/useHydrated";
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -192,7 +191,7 @@ function PreviewModal({
               date={formatPublicDate(activeLocale, item.dateIso)}
               {...getDownloadPreviewProps(item)}
               heroImageAlt={getLocalizedContent(item.title, activeLocale)}
-              heroImageSrc={getContentThumbnailSrc(item.imageSrc)}
+              heroImageSrc={item.imageSrc}
               hideHeroImage={item.hideHeroImage}
               section={item.section}
               summary={getLocalizedContent(item.summary, activeLocale)}
@@ -238,7 +237,7 @@ function ContentRow({
 }) {
   const isPublished = item.status === "published";
   const statusLabel = isPublished ? "On" : "Off";
-  const localizedTitle = getLocalizedContent(item.title, activeLocale);
+  const localizedTitle = item.title[activeLocale].trim();
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
@@ -303,9 +302,13 @@ function ContentRow({
         </div>
       ) : null}
 
-      <div className="content-thumbnail-frame w-full overflow-hidden rounded-thumb bg-bg-deep md:w-[132px]">
-        <img alt={localizedTitle} className="block h-full w-full object-cover" src={getContentThumbnailSrc(item.imageSrc)} />
-      </div>
+      <ContentPreviewImage
+        alt={localizedTitle}
+        className="block h-full w-full object-cover"
+        containerClassName="content-thumbnail-frame w-full overflow-hidden rounded-thumb bg-bg-deep md:w-[132px]"
+        src={item.imageSrc}
+        useThumbnailFallback
+      />
 
       <div className="min-w-0 self-center pr-0 md:pr-2">
         {showCategory ? (
@@ -432,7 +435,6 @@ export default function AdminManagedContentListPage({
   const scopedCategorySlug = categorySlug === "all" ? "all" : categorySlug;
   const items = useManagedContents(section, initialItems, scopedCategorySlug, "list");
   const isLoading = useManagedContentsLoading(section, initialItems, scopedCategorySlug, "list");
-  const isHydrated = useHydrated();
   const [query, setQuery] = useState("");
   const [pendingDuplicateItem, setPendingDuplicateItem] = useState<ManagedContentEntry | null>(null);
   const [pendingDeleteItem, setPendingDeleteItem] = useState<ManagedContentEntry | null>(null);
@@ -448,23 +450,25 @@ export default function AdminManagedContentListPage({
 
   const categoryItems = useMemo(
     () =>
-      categorySlug === "all"
-        ? items
-        : items.filter(
-            (item) => item.section === section && item.categorySlug === categorySlug,
-          ),
+      items.filter((item) =>
+        categorySlug === "all"
+          ? item.section === section
+          : item.section === section && item.categorySlug === categorySlug,
+      ),
     [categorySlug, items, section],
   );
 
   const filteredItems = useMemo(() => {
     /* 카테고리와 검색어 기준으로 화면에 보여줄 항목을 계산한다 */
     const normalized = query.trim().toLowerCase();
-    const localeVisibleItems = categoryItems.filter((item) => hasLocalizedTitle(item.title, activeLocale));
+    const localeVisibleItems = categoryItems.filter((item) =>
+      hasLocalizedTitle(item.title, activeLocale),
+    );
 
     if (!normalized) return localeVisibleItems;
 
     return localeVisibleItems.filter((item) =>
-      getLocalizedContent(item.title, activeLocale).toLowerCase().includes(normalized),
+      item.title[activeLocale].toLowerCase().includes(normalized),
     );
   }, [activeLocale, categoryItems, query]);
 
@@ -696,9 +700,7 @@ export default function AdminManagedContentListPage({
 
         {/* 실제 콘텐츠 리스트 / 빈 상태 영역 */}
         <div className="flex flex-col gap-3">
-          {!isHydrated ? (
-            <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center" />
-          ) : isLoading ? (
+          {isLoading ? (
             <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
               <LoadingText className="type-body-md" text="불러오는 중..." />
             </div>

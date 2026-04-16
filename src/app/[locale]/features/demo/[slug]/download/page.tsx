@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import ContentDownloadPage from "../../../../../../components/pages/documentation/ContentDownloadPage";
 import { isLocale, getLocalePath } from "../../../../../../constants/i18n";
 import { getContactPageCopy } from "@/features/contact/copy";
-import { getLocalizedContent, isPublishedContentVisible } from "@/features/content/data";
-import { readContentState } from "@/features/content/contentState.server";
+import { getLocalizedContent, isPublishedContentAccessible } from "@/features/content/data";
+import { readContentItem } from "@/features/content/contentState.server";
 import { getContentUnlockCookieName } from "@/features/content/gating";
 
 type DemoDownloadRouteProps = {
@@ -17,10 +17,14 @@ export default async function DemoDownloadRoute({ params }: DemoDownloadRoutePro
 
   if (!isLocale(locale)) notFound();
 
-  const demoItems = (await readContentState("demo")).filter((item) => isPublishedContentVisible(item, locale));
-  const currentEntry = demoItems.find((item) => item.id === resolvedSlug);
+  const currentEntry = await readContentItem("demo", resolvedSlug, { includeBodies: false });
 
-  if (!currentEntry || !currentEntry.enableDownloadButton || !currentEntry.downloadPdfSrc) {
+  if (
+    !currentEntry ||
+    !isPublishedContentAccessible(currentEntry) ||
+    !currentEntry.enableDownloadButton ||
+    !currentEntry.downloadPdfSrc
+  ) {
     notFound();
   }
 

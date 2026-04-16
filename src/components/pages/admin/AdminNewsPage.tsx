@@ -1,8 +1,10 @@
+import { unstable_noStore as noStore } from "next/cache";
 import { readContentState } from "@/features/content/contentState.server";
 import { stripManagedContentBodies } from "@/features/content/data";
 import AdminManagedContentListPage from "./AdminManagedContentListPage";
 
 export default async function AdminNewsPage() {
+  noStore();
   const initialItems = await readContentState("news", { includeBodies: false });
 
   return (

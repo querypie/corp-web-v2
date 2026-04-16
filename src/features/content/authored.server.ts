@@ -63,14 +63,6 @@ type SaveAuthoredContentInput = Pick<
 >;
 
 const contentRoot = path.join(process.cwd(), "src", "content");
-let authoredMetaFilesCache: string[] | null = null;
-let authoredMetaCache: AuthoredContentMeta[] | null = null;
-let authoredEntriesCache:
-  | {
-      withBodies: ManagedContentEntry[] | null;
-      withoutBodies: ManagedContentEntry[] | null;
-    }
-  | null = null;
 let authoredCacheVersion = 0;
 
 function getAuthoredSectionRoot(section: ManagedContentSection) {
@@ -124,9 +116,6 @@ async function writeFileAtomic(filePath: string, contents: string) {
 }
 
 function invalidateAuthoredCaches() {
-  authoredMetaFilesCache = null;
-  authoredMetaCache = null;
-  authoredEntriesCache = null;
   authoredCacheVersion += 1;
 }
 
@@ -152,10 +141,6 @@ async function createNextStorageId() {
 }
 
 async function readAuthoredMetaFiles() {
-  if (authoredMetaFilesCache) {
-    return authoredMetaFilesCache;
-  }
-
   const metaFiles: string[] = [];
 
   async function walk(currentDir: string) {
@@ -185,8 +170,7 @@ async function readAuthoredMetaFiles() {
     ),
   );
 
-  authoredMetaFilesCache = metaFiles.sort();
-  return authoredMetaFilesCache;
+  return metaFiles.sort();
 }
 
 async function readMetaFile(metaPath: string) {
@@ -200,14 +184,8 @@ async function readMetaFile(metaPath: string) {
 }
 
 async function readAllAuthoredMetas() {
-  if (authoredMetaCache) {
-    return authoredMetaCache;
-  }
-
   const metaFiles = await readAuthoredMetaFiles();
-  const metas = await Promise.all(metaFiles.map((metaPath) => readMetaFile(metaPath)));
-  authoredMetaCache = metas;
-  return metas;
+  return Promise.all(metaFiles.map((metaPath) => readMetaFile(metaPath)));
 }
 
 async function findAuthoredEntryDir({
@@ -238,11 +216,6 @@ async function findAuthoredEntryDir({
 
 export async function readAuthoredManagedContents(options?: { includeBodies?: boolean }) {
   const includeBodies = options?.includeBodies ?? true;
-  const cachedEntries = authoredEntriesCache?.[includeBodies ? "withBodies" : "withoutBodies"];
-
-  if (cachedEntries) {
-    return cachedEntries;
-  }
 
   await Promise.all(
     (["demo", "documentation", "news"] as const).map((section) =>
@@ -307,11 +280,6 @@ export async function readAuthoredManagedContents(options?: { includeBodies?: bo
       title: normalizeLocalizedRecord(meta.title),
     });
   }
-
-  authoredEntriesCache = {
-    withBodies: includeBodies ? entries : authoredEntriesCache?.withBodies ?? null,
-    withoutBodies: includeBodies ? authoredEntriesCache?.withoutBodies ?? null : entries,
-  };
 
   return entries;
 }

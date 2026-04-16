@@ -12,6 +12,7 @@ export const MANAGED_CONTENT_STORE_EVENT = "querypie:managed-content:changed";
 
 type ManagedContentChangeDetail = {
   section?: ManagedContentSection;
+  showLoading?: boolean;
   shouldRefetch?: boolean;
 };
 
@@ -19,63 +20,6 @@ type ManagedContentView = "full" | "list";
 type SaveOptions = {
   preserveExistingBodies?: boolean;
 };
-
-const snapshotCache = new Map<string, ManagedContentEntry[]>();
-
-function getCacheKey(section?: ManagedContentSection) {
-  return section ?? "__all__";
-}
-
-function getScopedCacheKey(
-  section?: ManagedContentSection,
-  categorySlug?: ManagedContentCategorySlug | "all",
-  view: ManagedContentView = "full",
-) {
-  return `${getCacheKey(section)}::${categorySlug ?? "__all__"}::${view}`;
-}
-
-function writeSnapshotCache(
-  items: ManagedContentEntry[],
-  section?: ManagedContentSection,
-  categorySlug?: ManagedContentCategorySlug | "all",
-  view: ManagedContentView = "full",
-) {
-  snapshotCache.set(getScopedCacheKey(section, categorySlug, view), items);
-
-  if (section) {
-    const sectionAllKey = getScopedCacheKey(section, "all", view);
-    const sectionAllItems = snapshotCache.get(sectionAllKey);
-
-    if (sectionAllItems) {
-      snapshotCache.set(
-        sectionAllKey,
-        categorySlug && categorySlug !== "all"
-          ? [
-              ...sectionAllItems.filter((item) => item.categorySlug !== categorySlug),
-              ...items,
-            ]
-          : items,
-      );
-    }
-
-    const allItems = snapshotCache.get(getScopedCacheKey(undefined, "all", view));
-
-    if (allItems) {
-      snapshotCache.set(
-        getScopedCacheKey(undefined, "all", view),
-        [...allItems.filter((item) => item.section !== section), ...(snapshotCache.get(sectionAllKey) ?? items)],
-      );
-    }
-  }
-}
-
-function readSnapshotCache(
-  section?: ManagedContentSection,
-  categorySlug?: ManagedContentCategorySlug | "all",
-  view: ManagedContentView = "full",
-) {
-  return snapshotCache.get(getScopedCacheKey(section, categorySlug, view));
-}
 
 function emitChange(detail?: ManagedContentChangeDetail) {
   if (typeof window === "undefined") return;
@@ -111,9 +55,7 @@ async function readState(
   }
 
   const payload = (await response.json()) as { items?: ManagedContentEntry[] };
-  const items = payload.items ?? [];
-  writeSnapshotCache(items, section, categorySlug, view);
-  return items;
+  return payload.items ?? [];
 }
 
 export async function getManagedContentsSnapshot(
@@ -230,7 +172,7 @@ export async function updateManagedContentStatus(
     throw new Error(payload.error ?? "Failed to update content status.");
   }
 
-  emitChange({ section: item?.section, shouldRefetch: true });
+  emitChange({ section: item?.section, shouldRefetch: true, showLoading: false });
 }
 
 export async function reorderManagedContents(orderedItems: ManagedContentEntry[]) {
@@ -264,23 +206,25 @@ export function useManagedContents(
   initialItems?: ManagedContentEntry[],
   categorySlug?: ManagedContentCategorySlug | "all",
   view: ManagedContentView = "full",
+  options?: { liveSync?: boolean },
 ) {
+  const liveSync = options?.liveSync ?? true;
   const initialItemsRef = useRef(initialItems);
-  const hasBootstrappedDataRef = useRef(Boolean(readSnapshotCache(section, categorySlug, view) ?? initialItemsRef.current?.length));
-  const [items, setItems] = useState<ManagedContentEntry[]>(() =>
-    readSnapshotCache(section, categorySlug, view) ?? initialItemsRef.current ?? [],
-  );
+  const [items, setItems] = useState<ManagedContentEntry[]>(() => initialItemsRef.current ?? []);
 
   useEffect(() => {
     initialItemsRef.current = initialItems;
 
     if (initialItems !== undefined) {
-      writeSnapshotCache(initialItems, section, categorySlug, view);
       setItems(initialItems);
     }
   }, [categorySlug, initialItems, section, view]);
 
   useEffect(() => {
+    if (!liveSync) {
+      return;
+    }
+
     let active = true;
 
     const sync = () => {
@@ -303,24 +247,10 @@ export function useManagedContents(
         return;
       }
 
-      if (detail?.shouldRefetch === false) {
-        const cached = readSnapshotCache(section, categorySlug, view);
-
-        if (cached && active) {
-          setItems(cached);
-        }
-
-        return;
-      }
-
       sync();
     };
 
-    if (!hasBootstrappedDataRef.current) {
-      sync();
-    } else {
-      hasBootstrappedDataRef.current = false;
-    }
+    sync();
 
     window.addEventListener(MANAGED_CONTENT_STORE_EVENT, handleChange as EventListener);
 
@@ -328,7 +258,7 @@ export function useManagedContents(
       active = false;
       window.removeEventListener(MANAGED_CONTENT_STORE_EVENT, handleChange as EventListener);
     };
-  }, [categorySlug, section, view]);
+  }, [categorySlug, liveSync, section, view]);
 
   return items;
 }
@@ -340,31 +270,32 @@ export function useManagedContentsLoading(
   view: ManagedContentView = "full",
 ) {
   const initialItemsRef = useRef(initialItems);
-  const hasBootstrappedDataRef = useRef(Boolean(readSnapshotCache(section, categorySlug, view) ?? initialItemsRef.current?.length));
-  const [isLoading, setIsLoading] = useState(() => !hasBootstrappedDataRef.current);
+  const [isLoading, setIsLoading] = useState(() => !initialItemsRef.current?.length);
 
   useEffect(() => {
     initialItemsRef.current = initialItems;
 
     if (initialItems !== undefined) {
-      writeSnapshotCache(initialItems, section, categorySlug, view);
       setIsLoading(false);
     }
   }, [categorySlug, initialItems, section, view]);
 
   useEffect(() => {
     let active = true;
+    const shouldLoadOnMount = !initialItemsRef.current?.length;
 
-    const sync = () => {
+    const sync = (showLoading = true) => {
       if (!active) return;
-      setIsLoading(true);
+      if (showLoading) {
+        setIsLoading(true);
+      }
 
       void getManagedContentsSnapshot(section, categorySlug, view)
         .catch(() => {
           // Loading state should still resolve even if sync falls back to cached/initial data elsewhere.
         })
         .finally(() => {
-          if (!active) return;
+          if (!showLoading || !active) return;
           setIsLoading(false);
         });
     };
@@ -377,14 +308,10 @@ export function useManagedContentsLoading(
         return;
       }
 
-      sync();
+      sync(detail?.showLoading ?? true);
     };
 
-    if (!hasBootstrappedDataRef.current) {
-      sync();
-    } else {
-      hasBootstrappedDataRef.current = false;
-    }
+    sync(shouldLoadOnMount);
 
     window.addEventListener(MANAGED_CONTENT_STORE_EVENT, handleChange as EventListener);
 

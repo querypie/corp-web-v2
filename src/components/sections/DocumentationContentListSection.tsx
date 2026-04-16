@@ -1,3 +1,5 @@
+import ContentPreviewImage from "../common/ContentPreviewImage";
+
 type DocumentationContentListItem = {
   category: string;
   href: string;
@@ -23,13 +25,13 @@ function DocumentationContentListCard({
   return (
     /* documentation 상세 하단용 콘텐츠 카드 1개 */
     <a className="group flex w-full cursor-pointer items-start gap-5" href={href}>
-      <div className="content-thumbnail-frame w-[120px] shrink-0 overflow-hidden rounded-box bg-bg-content md:w-[213px]">
-        <img
-          alt={title}
-          className="card-media-motion block h-full w-full object-cover"
-          src={imageSrc}
-        />
-      </div>
+      <ContentPreviewImage
+        alt={title}
+        className="card-media-motion block h-full w-full object-cover"
+        containerClassName="content-thumbnail-frame w-[120px] shrink-0 overflow-hidden rounded-box bg-bg-content md:w-[213px]"
+        src={imageSrc}
+        useThumbnailFallback
+      />
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
         <p className="m-0 type-body-md text-mute-fg">{category}</p>
         <p className="content-hover-title m-0 type-body-lg text-fg">{title}</p>

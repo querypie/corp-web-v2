@@ -11,6 +11,7 @@ import Tab from "../../common/Tab";
 import TabGroup from "../../common/TabGroup";
 import Textarea from "../../common/Textarea";
 import TiptapEditor from "../../common/TiptapEditor";
+import Tooltip from "../../common/Tooltip";
 import AdminContentPreview from "./AdminContentPreview";
 import { useAdminNavigationGuard } from "../../layout/admin/AdminNavigationGuard";
 import {
@@ -221,7 +222,7 @@ function InlineField({
   label,
 }: {
   children: React.ReactNode;
-  label: string;
+  label: React.ReactNode;
 }) {
   return (
     <div className="grid items-center gap-2 md:grid-cols-[60px_minmax(0,1fr)]">
@@ -264,7 +265,7 @@ export default function AdminManagedContentDetailPage({
   section,
 }: Props) {
   const router = useRouter();
-  const { setHasUnsavedChanges } = useAdminNavigationGuard();
+  const { allowNextNavigation, setHasUnsavedChanges } = useAdminNavigationGuard();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const pdfInputRef = useRef<HTMLInputElement | null>(null);
   const dateInputRef = useRef<HTMLInputElement | null>(null);
@@ -604,21 +605,13 @@ const [isSaving, setIsSaving] = useState(false);
 
     const nextSortOrder =
       itemId === "new"
-        ? 1
+        ? Math.min(
+            1,
+            ...items
+              .filter((entry) => entry.section === section && entry.categorySlug === categorySlug)
+              .map((entry) => entry.sortOrder),
+          ) - 1
         : currentForm.sortOrder;
-
-    if (itemId === "new") {
-      for (const item of items.filter((entry) => entry.section === section && entry.categorySlug === categorySlug)) {
-        await upsertManagedContent(
-          {
-            ...item,
-            sortOrder: item.sortOrder + 1,
-          },
-          item.id,
-          { preserveExistingBodies: true },
-        );
-      }
-    }
 
     const nextItem: ManagedContentEntry = {
       ...currentForm,
@@ -665,7 +658,8 @@ const [isSaving, setIsSaving] = useState(false);
     setPendingPdfFile(null);
     setPendingThumbnailPreviewSrc("");
     setHasUnsavedChanges(false);
-    router.push(getAdminCategoryHref(section, categorySlug));
+    allowNextNavigation();
+    window.location.assign(getAdminCategoryHref(section, categorySlug));
   }
 
   const previewData = {
@@ -740,7 +734,26 @@ const [isSaving, setIsSaving] = useState(false);
 
           {/* 좌측 작성 폼 본문 */}
           <div className="grid gap-5 pt-3 md:pt-4">
-            <InlineField label="제목">
+            <InlineField
+              label={(
+                <span className="inline-flex items-center gap-1.5">
+                  <span>제목</span>
+                  <Tooltip content={"각 언어 탭에 제목을 입력한 경우에만\n해당 언어 사이트에 게시물이 노출됩니다."}>
+                    <button
+                      aria-label="제목 노출 규칙 안내"
+                      className="inline-flex h-4 w-4 items-center justify-center rounded-full text-mute-fg transition-colors hover:text-fg"
+                      type="button"
+                    >
+                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="7.25" stroke="currentColor" strokeWidth="1.5" />
+                        <path d="M10 8v5" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
+                        <circle cx="10" cy="5.5" r="1" fill="currentColor" />
+                      </svg>
+                    </button>
+                  </Tooltip>
+                </span>
+              )}
+            >
               <div className="flex items-center gap-3">
                 <Input
                   className="w-full"
