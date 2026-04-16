@@ -129,7 +129,6 @@ src/
 | 리드/폼 연동 (Salesforce, Slack, Google Sheets) | ❌ 미구현 |
 | Blog / Whitepaper / Webinar Admin | ❌ 미구현 |
 | SEO 서버 영속화 | ⚠️ localStorage만 사용 |
-| 자동화 테스트 | ❌ 없음 |
 
 ---
 
@@ -155,6 +154,42 @@ src/
 - 배포 플랫폼: Vercel (리전: `icn1`)
 - `vercel.json`의 `"git": { "deploymentEnabled": false }`로 Vercel 자동 git 배포는 비활성화되어 있고, GHA가 배포를 직접 트리거합니다.
 - GitHub Secret: `VERCEL_TOKEN` (querypie organization secret)
+
+---
+
+## 테스트
+
+### 프레임워크
+
+[Vitest](https://vitest.dev/) — 유닛 + 통합 테스트. 테스트 파일은 `src/**/*.test.ts` / `src/**/*.test.tsx` 형식으로 작성합니다.
+
+```bash
+npm run test        # watch 모드
+npm run test:run    # CI 모드 (단일 실행)
+```
+
+### PR 작업 시 테스트 규칙
+
+PR에 코드 변경이 포함될 경우, **변경된 로직에 대한 테스트를 함께 작성**합니다.
+
+- 새 함수·유틸리티를 추가하면 해당 파일의 `.test.ts`에 유닛 테스트를 추가합니다.
+- 새 API 라우트를 추가하면 Mock 기반 통합 테스트를 함께 작성합니다.
+- 새 컴포넌트를 추가하면 렌더링·인터랙션 테스트를 함께 작성합니다.
+- 기존 함수의 동작을 변경하면 영향받는 테스트를 함께 수정합니다.
+
+### 테스트 대상 우선순위
+
+| 우선순위 | 대상 |
+|----------|------|
+| 🔴 필수 | 순수 함수·유틸 (`data.ts`, `gating.ts`, `i18n.ts` 등) |
+| 🔴 필수 | API 라우트 핸들러 — Mock으로 핵심 경로 검증 |
+| 🟡 권장 | 컴포넌트 (Server / Client) — Mock·Fixture 활용 |
+| 🟢 예외 허용 | happy-dom이 지원하지 않는 브라우저 API에 강하게 결합된 컴포넌트 (예: Tiptap 에디터) — 핵심 로직을 순수 함수로 분리해 테스트 |
+
+### 환경 및 Mock 패턴
+
+- 기본 환경: `happy-dom` / API 라우트 테스트: `// @vitest-environment node` pragma
+- 상세 내용: [테스트 커버리지 현황](docs/reference/test-coverage.md)
 
 ---
 
