@@ -89,8 +89,13 @@ export async function POST(request: Request) {
       requestBody.Email as string,
     );
 
-    // 4. Salesforce POST
-    const sfResult = await fetch(process.env.SALESFORCE_ENDPOINT as string, {
+    // 4. Salesforce POST (환경변수 없으면 skip)
+    if (!process.env.SALESFORCE_ENDPOINT) {
+      await sendToSlack(requestBody);
+      return NextResponse.json({ success: true });
+    }
+
+    const sfResult = await fetch(process.env.SALESFORCE_ENDPOINT, {
       method: "POST",
       headers: {
         "content-type": "application/json",
