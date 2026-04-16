@@ -17,6 +17,7 @@ export const issueLicense = async (organization?: string, requestedBy?: string) 
       !process.env.QUERYPIE_LICENSE_ISSUE_API_ENDPOINT ||
       !process.env.QUERYPIE_LICENSE_ISSUE_API_KEY
     ) {
+      console.log("[community-license] license issue: skipped (env not set)");
       return { status: "skip" };
     }
 
@@ -39,9 +40,10 @@ export const issueLicense = async (organization?: string, requestedBy?: string) 
       throw new Error(data.errorMessage);
     }
 
+    console.log("[community-license] license issue: success");
     return { status: "success" };
   } catch (error) {
-    console.error("Error issuing license:", error);
+    console.error("[community-license] license issue: failed", error);
     throw error;
   }
 };
