@@ -1,0 +1,51 @@
+---
+layout: "Article"
+category: "blog"
+title: "Next.js Server Action and Frontend Security"
+description: "Next.js Server Actions may lead developers to make security mistakes. This article analyzes these risks."
+date: "2025-03-20"
+author: "QueryPie Team"
+ogImage: "public/documentation/blogs/b-thumb-20.webp"
+keywords: ["Next.js", "Security", "Server Action"]
+---
+
+# Basic Concepts and Usage of Next.js Server Action
+
+Next.js Server Actions allow you to call server-side functions from React components.
+
+## How It Works
+
+Define a function with the `use server` directive:
+
+```typescript
+'use server';
+
+export async function createAction(data: FormData) {
+  // server-side logic
+}
+```
+
+## Security Considerations
+
+<InfoNote>
+Always validate inputs on the server side. Never trust client-provided data.
+</InfoNote>
+
+<Box center>
+  <ArticleFileImage
+    filepath="public/documentation/blogs/b-thumb-20.webp"
+    alt="Server Action Security Diagram"
+  />
+</Box>
+
+<ArticleGatingForm>
+
+## Full Analysis (Gated Content)
+
+This section is only visible after unlocking.
+
+### Attack Vectors
+
+Content here requires form submission.
+
+</ArticleGatingForm>
