@@ -4,11 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 
 vi.mock("@/features/content/contentState.server", () => ({
-  deleteContentState: vi.fn(),
   readContentState: vi.fn(),
-  replaceContentState: vi.fn(),
-  updateContentStateStatus: vi.fn(),
-  upsertContentState: vi.fn(),
 }));
 
 vi.mock("@/features/content/authored.server", () => ({
@@ -18,11 +14,7 @@ vi.mock("@/features/content/authored.server", () => ({
 }));
 
 import {
-  deleteContentState,
   readContentState,
-  replaceContentState,
-  updateContentStateStatus,
-  upsertContentState,
 } from "@/features/content/contentState.server";
 import {
   deleteAuthoredContent,
@@ -33,10 +25,6 @@ import { createLocalizedContent, type ManagedContentEntry } from "@/features/con
 import { DELETE, GET, PATCH, POST, PUT } from "./route";
 
 const mockReadContentState = vi.mocked(readContentState);
-const mockReplaceContentState = vi.mocked(replaceContentState);
-const mockUpsertContentState = vi.mocked(upsertContentState);
-const mockDeleteContentState = vi.mocked(deleteContentState);
-const mockUpdateContentStateStatus = vi.mocked(updateContentStateStatus);
 const mockSaveAuthoredContent = vi.mocked(saveAuthoredContent);
 const mockDeleteAuthoredContent = vi.mocked(deleteAuthoredContent);
 const mockUpdateAuthoredContentMeta = vi.mocked(updateAuthoredContentMeta);
@@ -151,9 +139,8 @@ describe("POST /api/admin/content/state", () => {
 
   it("유효한 items를 저장하고 반환한다", async () => {
     const item = makeEntry({ id: "new-item", storageId: "cnt_000001" });
-    mockReadContentState.mockResolvedValue([]);
+    mockReadContentState.mockResolvedValueOnce([]).mockResolvedValueOnce([item]);
     mockSaveAuthoredContent.mockResolvedValue({ ...item, storageId: "cnt_000001" });
-    mockReplaceContentState.mockResolvedValue([item]);
 
     const request = makeRequest("http://localhost/api/admin/content/state", {
       method: "POST",
@@ -164,13 +151,12 @@ describe("POST /api/admin/content/state", () => {
 
     expect(response.status).toBe(200);
     expect(data.items).toHaveLength(1);
-    expect(mockReplaceContentState).toHaveBeenCalled();
+    expect(mockSaveAuthoredContent).toHaveBeenCalled();
   });
 
   it("동일한 아이템이면 saveAuthoredContent를 호출하지 않는다", async () => {
     const item = makeEntry({ id: "same-item" });
     mockReadContentState.mockResolvedValue([item]);
-    mockReplaceContentState.mockResolvedValue([item]);
 
     const request = makeRequest("http://localhost/api/admin/content/state", {
       method: "POST",
@@ -209,7 +195,6 @@ describe("PUT /api/admin/content/state", () => {
     const item = makeEntry({ id: "my-item", storageId: "cnt_000001" });
     mockReadContentState.mockResolvedValue([]);
     mockSaveAuthoredContent.mockResolvedValue({ ...item, storageId: "cnt_000001" });
-    mockUpsertContentState.mockResolvedValue([item]);
 
     const request = makeRequest("http://localhost/api/admin/content/state", {
       method: "PUT",
@@ -221,7 +206,6 @@ describe("PUT /api/admin/content/state", () => {
     expect(response.status).toBe(200);
     expect(data.item.id).toBe("my-item");
     expect(mockSaveAuthoredContent).toHaveBeenCalled();
-    expect(mockUpsertContentState).toHaveBeenCalled();
   });
 });
 
@@ -237,7 +221,7 @@ describe("PATCH /api/admin/content/state", () => {
   });
 
   it("id와 status가 있으면 상태를 업데이트한다", async () => {
-    mockUpdateContentStateStatus.mockResolvedValue([]);
+    mockReadContentState.mockResolvedValue([]);
 
     const request = makeRequest("http://localhost/api/admin/content/state", {
       method: "PATCH",
@@ -248,13 +232,12 @@ describe("PATCH /api/admin/content/state", () => {
 
     expect(response.status).toBe(200);
     expect(data.ok).toBe(true);
-    expect(mockUpdateContentStateStatus).toHaveBeenCalledWith("my-item", "published");
+    expect(mockUpdateAuthoredContentMeta).not.toHaveBeenCalled();
   });
 
   it("item이 있으면 authored meta도 함께 업데이트한다", async () => {
     const item = makeEntry({ id: "my-item" });
     mockUpdateAuthoredContentMeta.mockResolvedValue({} as never);
-    mockUpdateContentStateStatus.mockResolvedValue([]);
 
     const request = makeRequest("http://localhost/api/admin/content/state", {
       method: "PATCH",
@@ -278,7 +261,7 @@ describe("DELETE /api/admin/content/state", () => {
   });
 
   it("id가 있으면 콘텐츠를 삭제한다", async () => {
-    mockDeleteContentState.mockResolvedValue([]);
+    mockReadContentState.mockResolvedValue([]);
 
     const request = makeRequest("http://localhost/api/admin/content/state", {
       method: "DELETE",
@@ -289,13 +272,12 @@ describe("DELETE /api/admin/content/state", () => {
 
     expect(response.status).toBe(200);
     expect(data.ok).toBe(true);
-    expect(mockDeleteContentState).toHaveBeenCalledWith("to-delete");
+    expect(mockDeleteAuthoredContent).not.toHaveBeenCalled();
   });
 
   it("item이 있으면 authored content도 함께 삭제한다", async () => {
     const item = makeEntry({ id: "to-delete" });
     mockDeleteAuthoredContent.mockResolvedValue({ deleted: true });
-    mockDeleteContentState.mockResolvedValue([]);
 
     const request = makeRequest("http://localhost/api/admin/content/state", {
       method: "DELETE",
