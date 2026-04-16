@@ -18,6 +18,7 @@ export type ContactField = {
 export type ContactPageCopy = {
   consentLabel: string;
   emailLinks: ContactLink[];
+  errorGeneral: string;
   formDescription: string;
   formFields: ContactField[];
   messageField: ContactField;
@@ -29,6 +30,9 @@ export type ContactPageCopy = {
   productFieldLabel: string;
   productOptions: string[];
   submitLabel: string;
+  successButton: string;
+  successDescription: string;
+  successTitle: string;
   titleLines: string[];
 };
 
@@ -81,12 +85,16 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         required: true,
       },
       consentLabel: "Keep me updated on QueryPie news, events, & product info.",
+      errorGeneral: "Failed to submit the form. Please try again later.",
       privacyText: "QueryPie values your privacy. Please check out our",
       privacyTermsLabel: "Terms",
       privacyTermsHref: getLocalePath("en", "/features/documentation"),
       privacyPolicyLabel: "Privacy Policy",
       privacyPolicyHref: getLocalePath("en", "/features/documentation"),
       submitLabel: "Submit",
+      successTitle: "Submission Complete",
+      successDescription: "Thank you for your application!\nOur team will review it and get back to you shortly.",
+      successButton: "Go to Home",
     },
     ko: {
       titleLines: ["전문가와 연결하세요.", "더 빠르게 성과를 만드세요."],
@@ -134,12 +142,16 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         required: true,
       },
       consentLabel: "QueryPie의 뉴스, 이벤트, 제품 정보를 받아보겠습니다.",
+      errorGeneral: "폼 제출에 실패했습니다. 다시 시도해 주세요.",
       privacyText: "QueryPie는 고객의 개인정보를 중요하게 생각합니다. 자세한 내용은",
       privacyTermsLabel: "이용약관",
       privacyTermsHref: getLocalePath("ko", "/features/documentation"),
       privacyPolicyLabel: "개인정보처리방침",
       privacyPolicyHref: getLocalePath("ko", "/features/documentation"),
       submitLabel: "제출하기",
+      successTitle: "제출이 완료되었습니다.",
+      successDescription: "문의해 주셔서 감사합니다!\n담당자가 검토 후 빠르게 연락드리겠습니다.",
+      successButton: "홈으로 이동",
     },
     ja: {
       titleLines: ["専門家にご相談ください。", "成功までのスピードを高めます。"],
@@ -187,12 +199,16 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         required: true,
       },
       consentLabel: "QueryPie のニュース、イベント、製品情報を受け取る。",
+      errorGeneral: "フォームの送信に失敗しました。もう一度お試しください。",
       privacyText: "QueryPie はお客様のプライバシーを尊重します。詳しくは",
       privacyTermsLabel: "利用規約",
       privacyTermsHref: getLocalePath("ja", "/features/documentation"),
       privacyPolicyLabel: "プライバシーポリシー",
       privacyPolicyHref: getLocalePath("ja", "/features/documentation"),
       submitLabel: "送信",
+      successTitle: "送信が完了しました。",
+      successDescription: "お問い合わせいただきありがとうございます。\n担当者が確認後、速やかにご連絡いたします。",
+      successButton: "ホームに戻る",
     },
   }[locale];
 }
