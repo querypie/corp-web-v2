@@ -1,26 +1,8 @@
-# CMS
+# corp-web-v2
 
-Next.js App Router 기반의 퍼블릭 사이트와 관리자 CMS를 함께 운영하는 프로젝트입니다.
+QueryPie의 회사 홍보·소개 웹사이트입니다. 제품 소개, Features Demo, Documentation, Company 정보, Plans, Legal 문서 등을 다국어(en/ko/ja)로 제공합니다.
 
-## 개요
-
-이 저장소는 두 축으로 구성됩니다.
-
-- 퍼블릭 사이트
-  - 다국어 로케일: `en`, `ko`, `ja`
-  - 주요 영역: Home, Features Demo, Features Documentation, Company, Plans, Legal
-- 관리자 CMS
-  - Demo / Documentation / News 콘텐츠 관리
-  - 업로드 API 및 콘텐츠 상태 저장
-  - SEO 설정 관리
-
-## 기술 스택
-
-- Next.js 15
-- React 19
-- TypeScript
-- Tailwind CSS
-- Tiptap
+현재 운영 중인 두 레포지토리(`corp-web-app` + `corp-web-contents`)를 하나의 Next.js 15 앱으로 통합·대체하는 것이 목표이며, Admin CMS(Demo / Documentation / News 편집·게시)가 보조 기능으로 포함되어 있습니다.
 
 ## 실행 방법
 
@@ -29,9 +11,7 @@ npm install
 npm run dev
 ```
 
-기본 개발 서버 주소:
-
-- `http://localhost:3000`
+기본 개발 서버 주소: `http://localhost:3000`
 
 기타 스크립트:
 
@@ -42,161 +22,113 @@ npm run start
 npm run audit:public-assets
 ```
 
-## 실제 폴더 구조
+## 기술 스택
 
-프로젝트는 `src/app`, `src/features`, `src/content` 세 축이 핵심입니다.
+→ [구현 현황 — 기술 스택](docs/reference/corp-web-v2-implementation-status.md#기술-스택)
 
-### 1. 라우팅 계층: `src/app`
+## 폴더 구조
 
-- `src/app/[locale]`
-  - 퍼블릭 페이지 진입점
-  - 실제 주요 경로
-    - `company/about-us`
-    - `company/certifications`
-    - `company/contact-us`
-    - `company/news`
-    - `features/demo`
-    - `features/documentation`
-    - `plans`
-    - `privacy-policy`
-    - `terms-of-service`
-    - `eula`
-    - `cookie-preference`
-- `src/app/admin`
-  - 관리자 페이지
-  - `demo`, `documentation`, `news`, `seo`
-- `src/app/api`
-  - 관리자 콘텐츠 상태, 업로드, SEO 관련 API
-
-### 2. UI 계층: `src/components`
-
-- `src/components/pages`
-  - 라우트 단위 페이지 컴포넌트
-- `src/components/sections`
-  - 페이지를 구성하는 섹션 단위 UI
-- `src/components/layout`
-  - GNB, Footer, AdminShell 등 공통 레이아웃
-- `src/components/common`
-  - 버튼, 입력, 탭, 에디터 등 공용 컴포넌트
-
-### 3. 도메인 계층: `src/features`
-
-- `src/features/content`
-  - 콘텐츠 모델, 카테고리 설정, 서버 상태 읽기/쓰기, 클라이언트 store
-- `src/features/seo`
-  - SEO 상태 관리
-- `src/features/contact`
-  - 문의 관련 문구 데이터
-
-`src/features/content/config.ts`가 Demo / Documentation 카테고리 정의의 기준점입니다.
-
-### 4. 콘텐츠 저장소: `src/content`
-
-- `src/content/demo`
-  - Demo 콘텐츠 원본
-  - 하위 카테고리: `use-cases`, `aip-features`, `acp-features`, `webinars`
-- `src/content/documentation`
-  - Documentation 원본
-  - 하위 카테고리: `introduction`, `glossary`, `manuals`, `white-papers`, `blogs`
-- `src/content/news`
-  - News 원본
-- `src/content/legal`
-  - 개인정보처리방침 등 법무 문서
-
-실제 운영 기준으로 콘텐츠의 source of truth는 `src/content/**` authored 파일입니다.
+→ [구현 현황 — 디렉토리 구조](docs/reference/corp-web-v2-implementation-status.md#디렉토리-구조)
 
 ## 콘텐츠 동작 방식
 
-콘텐츠는 `src/content/**` authored 파일이 source of truth입니다.
-
-`src/features/content/contentState.server.ts`는 authored 파일을 읽고, 관리자 화면은 `/api/admin/content/state`를 통해 authored 파일을 직접 갱신합니다.
+→ [구현 현황 — CMS 데이터 흐름](docs/reference/corp-web-v2-implementation-status.md#cms-데이터-흐름)
 
 ## Source Of Truth
 
-콘텐츠 관련 작업에서는 아래 기준을 우선합니다.
-
-- 최종 콘텐츠 상태: `src/content/**`
-- 콘텐츠 상태 읽기/쓰기: `src/features/content/contentState.server.ts`
-- 콘텐츠 authored 저장: `src/features/content/authored.server.ts`
-- 카테고리/메뉴 정의: `src/features/content/config.ts`
-- 퍼블릭 메뉴/푸터 카피: `src/constants/navigation.ts`
+→ [AGENTS.md — Source of Truth](AGENTS.md#source-of-truth)
 
 ## SEO 동작 방식
 
-- 콘텐츠 상태와 달리 SEO 설정은 현재 `src/features/seo/clientStore.ts` 기준으로 브라우저 `localStorage`를 사용합니다.
-- 따라서 기존 README의 "관리자 콘텐츠와 SEO 일부가 localStorage 기반" 설명 중 콘텐츠 부분은 현재 기준으로 틀리고, SEO 쪽만 맞습니다.
-
-SEO 관련 작업에서는 아래 기준을 우선합니다.
-
-- 클라이언트 저장소: `src/features/seo/clientStore.ts`
-- 현재 SEO 상태는 브라우저 `localStorage` 의존이 있습니다.
+→ [AGENTS.md — SEO](AGENTS.md#seo)
 
 ## 라우팅 규칙
 
-`next.config.ts` 기준 핵심 규칙은 다음과 같습니다.
-
-- `/` 요청은 `/en`으로 rewrite 됩니다.
-- locale이 없는 퍼블릭 경로는 기본적으로 `/en/*`로 rewrite 됩니다.
-
-주의:
-
-- 퍼블릭 경로를 수정할 때는 `getLocalePath()`, `getPublicListHref()`, `getPublicDetailHref()` 같은 경로 생성 함수와 함께 확인합니다.
-- rewrite를 수정할 때는 `public/` 정적 자산 요청까지 함께 점검해야 합니다.
+→ [AGENTS.md — 라우팅](AGENTS.md#라우팅)
 
 ## 법무 문서
 
-개인정보처리방침 버전 파일은 아래 경로에서 관리합니다.
+→ [AGENTS.md — 법무 문서](AGENTS.md#법무-문서)
 
-- `src/content/legal/privacy-policy/en`
-- `src/content/legal/privacy-policy/ko`
+## 작업 시 기준 · 체크리스트
 
-현재 `ja`는 별도 원문 폴더가 없고 영어 버전을 fallback으로 사용합니다.
-
-## 작업 시 기준
-
-- 작업 시작 전에 아래 파일을 우선 확인합니다.
-  - `README.md`
-  - `next.config.ts`
-  - `src/features/content/config.ts`
-  - `src/constants/navigation.ts`
-  - 관련 도메인의 `src/app/*`, `src/components/pages/*`, `src/features/*`
-- UI 변경은 먼저 `src/components/common`, `src/components/layout`, `src/components/sections`에서 재사용 가능한 패턴이 있는지 확인합니다.
-- 퍼블릭 메뉴와 Footer 카피는 `src/constants/navigation.ts`를 우선 확인합니다.
-- 카테고리명, 경로, 메뉴 구성은 하드코딩하지 말고 `src/features/content/config.ts`, `src/constants/*`에 이미 정의가 있는지 먼저 확인합니다.
-- 콘텐츠 관련 변경은 먼저 `src/content/**` authored 파일에 영향이 있는지 확인합니다.
-- 먼저 기존 패턴을 찾고, 그다음 수정합니다.
-- 이미 공용 컴포넌트가 있으면 새 컴포넌트를 만들기 전에 재사용 가능성을 확인합니다.
-- 범위를 벗어나는 리팩터링은 사용자 요청이 없으면 하지 않습니다.
-- 기존 구조를 바꿔야 한다면, 왜 필요한지 먼저 근거를 확인합니다.
-
-## 작업 체크리스트
-
-콘텐츠 작업:
-
-- 어떤 섹션인지 확인
-  - `demo`
-  - `documentation`
-  - `news`
-- 어떤 카테고리인지 확인
-- authored 원본 변경인지, 레거시 fallback 확인이 필요한지 구분
-- 기본적으로 `src/content/**`를 우선 확인
-- 관리자 화면과 퍼블릭 화면이 같은 데이터를 읽는지 확인
-
-UI 작업:
-
-- 먼저 `src/components/common`
-- 그다음 `src/components/layout`
-- 그다음 `src/components/sections`
-- 마지막으로 `src/components/pages`
-
-스타일 수정 시에는 아래를 우선 확인합니다.
-
-- `src/styles/globals.css`
-- 기존 Tailwind 유틸리티
-- 반복되는 시각 패턴의 공통화 가능성
+→ [AGENTS.md — 작업 규칙](AGENTS.md#작업-규칙)
 
 ## 빠른 진단 포인트
 
-- 이미지나 다운로드 경로가 깨지면 `public/` 실제 파일 위치, 콘텐츠 데이터, `next.config.ts` rewrite, 실제 브라우저 요청 URL을 같이 확인합니다.
-- 관리자에서 콘텐츠가 안 보이면 `/api/admin/content/state`, `src/features/content/authored.server.ts`, `src/features/content/clientStore.ts` 흐름을 먼저 확인합니다.
-- SEO 이상 동작은 `src/features/seo/clientStore.ts`와 브라우저 `localStorage` 상태를 먼저 의심하는 편이 맞습니다.
+→ [AGENTS.md — 빠른 진단](AGENTS.md#빠른-진단)
+
+---
+
+## AI 에이전트 작업 가이드
+
+Claude Code / Codex 등 AI 에이전트가 이 레포지토리에서 작업할 때의 흐름입니다.
+
+**시작 전 필독:** [AGENTS.md](AGENTS.md) — 프로젝트 목적, Source of Truth, 작업 규칙, 주의사항, 빠른 진단
+
+### 작업 흐름
+
+프롬프트 앞에 아래 문장을 추가하면 CC가 worktree를 생성하고 그 안에서 작업합니다.
+
+```
+새 worktree에서 작업해줘. <작업 내용>
+```
+
+### 테스트 코드
+
+코드 변경이 포함된 작업에는 테스트를 함께 요청하세요. 프롬프트에 명시하지 않으면 작성되지 않을 수 있습니다.
+
+```
+새 worktree에서 작업해줘. <작업 내용> 테스트 코드도 함께 작성하고 PR을 작성해줘.
+```
+
+### 예시 프롬프트
+
+```
+새 worktree에서 작업해줘. QueryPie가 ISO 27001 인증을 획득했어. 뉴스 콘텐츠를 새로 추가하고 PR을 작성해줘.
+```
+
+```
+새 worktree에서 작업해줘. Features Documentation에 "데이터 접근 제어 설정" 문서를 새로 추가해줘. 테스트 코드를 충실하게 작성하고 PR을 작성해줘.
+```
+
+```
+새 worktree에서 작업해줘. Plans 페이지의 Enterprise 플랜 설명 문구를 수정하고 PR을 작성해줘.
+```
+
+```
+새 worktree에서 작업해줘. About Us 페이지의 회사 소개 문구를 수정해줘. 한국어·일본어도 함께 반영해서 PR을 작성해줘.
+```
+
+```
+새 worktree에서 작업해줘. 개인정보처리방침 한국어 버전을 새 버전(v3)으로 추가하고 PR을 작성해줘.
+```
+
+```
+Staging 서버에서 에러가 발생하고 있어. Vercel CLI로 로그를 조회해서 원인을 파악하고 수정 PR을 작성해줘. 테스트 코드를 충실하게 작성해줘.
+```
+
+### Claude Code 스킬
+
+`.claude/skills/` 아래 단계별 스킬이 제공됩니다.
+
+| 스킬 | 설명 |
+|------|------|
+| `worktree` | worktree 생성·정리 |
+| `branch` | 브랜치 생성 |
+| `commit` | 커밋 메시지 작성 규칙 |
+| `pr` | PR 생성 — scope gate, 테스트 확인, 워크플로우 실행 |
+| `vercel` | Vercel 배포 로그 조회 |
+
+---
+
+## 관련 문서
+
+| 문서 | 설명 |
+|------|------|
+| [AGENTS.md](AGENTS.md) | AI 에이전트 작업 가이드 — Source of Truth, 작업 규칙, 라우팅·SEO·법무 주의사항, 빠른 진단 |
+| [구현 현황](docs/reference/corp-web-v2-implementation-status.md) | 기술 스택, 폴더 구조, 공개 페이지·Admin CMS·API 라우트 완성도, CMS 데이터 흐름 |
+| [Vercel 배포](docs/reference/vercel-deployment.md) | GitHub Actions 워크플로우, 배포 환경, 환경변수, DNS 설정 |
+| [테스트 커버리지](docs/reference/test-coverage.md) | 테스트 파일 목록, Mock 패턴, 환경 설정 |
+| [Community License](docs/reference/community-license.md) | 라이선스 신청/발급 기능 상세 |
+| [GitHub 설정](docs/reference/github-settings.md) | CI 워크플로우, 브랜치 보호 규칙 |
