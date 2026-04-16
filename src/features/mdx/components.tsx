@@ -1,7 +1,28 @@
+import { isValidElement } from "react";
 import type { MDXComponents } from "mdx/types";
 import type { Locale } from "@/constants/i18n";
 import type { ContactPageCopy } from "@/features/contact/copy";
 import ArticleGatingFormOverlay from "@/components/mdx-layout/ArticleGatingFormOverlay";
+
+// heading children → plain text (for id generation matching headings.ts slugify)
+function childrenToText(children: React.ReactNode): string {
+  if (typeof children === "string") return children;
+  if (typeof children === "number") return String(children);
+  if (Array.isArray(children)) return children.map(childrenToText).join("");
+  if (isValidElement(children)) {
+    const props = children.props as { children?: React.ReactNode };
+    return childrenToText(props.children);
+  }
+  return "";
+}
+
+function slugifyHeading(children: React.ReactNode): string {
+  return childrenToText(children)
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
 
 export type MdxComponentContext = {
   locale: Locale;
@@ -13,6 +34,17 @@ export type MdxComponentContext = {
 
 export function buildMdxComponents(ctx: MdxComponentContext): MDXComponents {
   return {
+    // ── 헤딩 (TOC 앵커 id 주입) ───────────────────────────────
+    h1: ({ children }: { children?: React.ReactNode }) => (
+      <h1 id={slugifyHeading(children)}>{children}</h1>
+    ),
+    h2: ({ children }: { children?: React.ReactNode }) => (
+      <h2 id={slugifyHeading(children)}>{children}</h2>
+    ),
+    h3: ({ children }: { children?: React.ReactNode }) => (
+      <h3 id={slugifyHeading(children)}>{children}</h3>
+    ),
+
     // ── 레이아웃 ──────────────────────────────────────────────
     Box: ({ center, children }: { center?: boolean; children?: React.ReactNode }) => (
       <div className={center ? "flex justify-center" : undefined}>{children}</div>
