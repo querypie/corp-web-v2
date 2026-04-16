@@ -19,7 +19,7 @@ function formatDate(iso: string, locale: Locale): string {
   }).format(new Date(iso));
 }
 
-export default function ArticleLayout({ children, frontmatter, headings, locale }: Props) {
+export default function WhitePaperLayout({ children, frontmatter, headings, locale }: Props) {
   const heroImageSrc = frontmatter.ogImage
     ? frontmatter.ogImage.replace(/^public\//, "/")
     : "";

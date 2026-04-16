@@ -6,7 +6,7 @@ import { loadMdxSource } from "@/features/mdx/loader";
 import { renderMdx } from "@/features/mdx/renderer";
 import { buildMdxComponents } from "@/features/mdx/components";
 import { extractHeadingsFromMdx } from "@/features/mdx/headings";
-import ArticleLayout from "@/components/mdx-layout/ArticleLayout";
+import BlogLayout from "@/components/mdx-layout/BlogLayout";
 import { getContactPageCopy } from "@/features/contact/copy";
 import { getContentUnlockCookieName, hasUnlockedContentAccess } from "@/features/content/gating";
 
@@ -57,8 +57,8 @@ export default async function BlogMdxPage({ params }: Props) {
   const headings = extractHeadingsFromMdx(source);
 
   return (
-    <ArticleLayout frontmatter={frontmatter} headings={headings} locale={locale as Locale}>
+    <BlogLayout frontmatter={frontmatter} headings={headings} locale={locale as Locale}>
       {content}
-    </ArticleLayout>
+    </BlogLayout>
   );
 }
