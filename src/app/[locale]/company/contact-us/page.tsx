@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getLocalePath, isLocale } from "../../../../constants/i18n";
+import { getLocalePath, isLocale, type Locale } from "../../../../constants/i18n";
 import ContactUsPage from "../../../../components/pages/contact/ContactUsPage";
 import { getContactPageCopy } from "@/features/contact/copy";
 
@@ -13,7 +13,7 @@ export default async function ContactUsRoute({ params }: Props) {
 
   if (!isLocale(locale)) notFound();
 
-  return <ContactUsPage {...getContactPageCopy(locale)} />;
+  return <ContactUsPage {...getContactPageCopy(locale)} locale={locale as Locale} />;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
