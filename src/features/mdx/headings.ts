@@ -1,9 +1,9 @@
 import type { MdxHeading } from "./types";
 
-function slugify(text: string): string {
+export function slugifyHeadingText(text: string): string {
   return text
     .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
+    .replace(/[^\p{L}\p{N}\s-]/gu, "")
     .trim()
     .replace(/\s+/g, "-");
 }
@@ -36,7 +36,7 @@ export function extractHeadingsFromMdx(mdxSource: string): MdxHeading[] {
     const level = match[1].length;
     const raw = match[2].trim();
     const text = cleanHeadingText(raw);
-    const heading: MdxHeading = { targetId: slugify(text), text };
+    const heading: MdxHeading = { targetId: slugifyHeadingText(text), text };
 
     while (stack.length > 0 && stack[stack.length - 1].level >= level) {
       stack.pop();

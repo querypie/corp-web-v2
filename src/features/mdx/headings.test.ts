@@ -129,9 +129,14 @@ describe("extractHeadingsFromMdx", () => {
       expect(result[0].targetId).toBe("padded-title");
     });
 
-    it("한국어 제목은 알파벳/숫자만 남긴다", () => {
+    it("한국어 제목을 보존해 슬러그를 생성한다", () => {
       const result = extractHeadingsFromMdx("# 소개 Introduction");
-      expect(result[0].targetId).toBe("introduction");
+      expect(result[0].targetId).toBe("소개-introduction");
+    });
+
+    it("일본어 제목을 보존해 슬러그를 생성한다", () => {
+      const result = extractHeadingsFromMdx("# Server Actionの内部動作方式");
+      expect(result[0].targetId).toBe("server-actionの内部動作方式");
     });
   });
 
