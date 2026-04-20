@@ -204,7 +204,6 @@ Blog/Whitepaper MDX에서 실제로 사용되는 컴포넌트만 구현한다.
 | `Box` | 648 | `<div className="flex justify-center">` 래퍼 |
 | `Link` | 96 | Next.js `<Link>` |
 | `State` | 90 | Tailwind 인라인 뱃지 |
-| `ArticleGatingForm` | 45 | corp-web-v2 기존 gating 로직 연동 |
 | `ButtonLink` | 27 | corp-web-v2 기존 Button 컴포넌트 활용 |
 | `Youtube` | 27 | `<iframe>` responsive embed |
 | `InfoNote` | 21 | Tailwind callout 박스 (파란 테두리) |
@@ -214,13 +213,9 @@ Blog/Whitepaper MDX에서 실제로 사용되는 컴포넌트만 구현한다.
 
 Tailwind Typography (`@tailwindcss/typography`) prose 클래스를 기반으로 `h1`~`h6`, `p`, `a`, `code`, `pre`, `ul`, `ol`, `li`, `table` 요소를 오버라이드한다.
 
-### ArticleGatingForm 연동
+### 범위 제외: ArticleGatingForm
 
-MDX 내 `<ArticleGatingForm>` 태그는 corp-web-v2의 기존 gating 기능과 연동한다.
-
-- `src/features/content/gating.ts`의 `isContentGatingEnabled()`, `buildContentPreviewHtml()` 활용
-- `page.tsx`에서 gating 상태를 판단하여 `ArticleGatingForm` 컴포넌트에 prop으로 전달
-- 인증 쿠키는 기존 `getContentUnlockCookieName()` 방식 그대로 사용
+첫 번째 MDX 렌더링 PR은 MDX 파일 로딩, SSR 렌더링, 레이아웃, TOC, 실제 사용 컴포넌트 렌더링에 집중한다. MDX 내 `<ArticleGatingForm>`과 기존 content gating 연동은 리드폼, 쿠키, 잠금 해제 UX가 함께 필요한 별도 작업으로 분리한다.
 
 ---
 

@@ -1,8 +1,5 @@
 import { isValidElement } from "react";
 import type { MDXComponents } from "mdx/types";
-import type { Locale } from "@/constants/i18n";
-import type { ContactPageCopy } from "@/features/contact/copy";
-import ArticleGatingFormOverlay from "@/components/mdx-layout/ArticleGatingFormOverlay";
 
 // heading children → plain text (for id generation matching headings.ts slugify)
 function childrenToText(children: React.ReactNode): string {
@@ -24,15 +21,7 @@ function slugifyHeading(children: React.ReactNode): string {
     .replace(/\s+/g, "-");
 }
 
-export type MdxComponentContext = {
-  locale: Locale;
-  isUnlocked: boolean;
-  unlockCookieName: string;
-  title: string;
-  contactCopy: ContactPageCopy;
-};
-
-export function buildMdxComponents(ctx: MdxComponentContext): MDXComponents {
+export function buildMdxComponents(): MDXComponents {
   return {
     // ── 헤딩 (TOC 앵커 id 주입) ───────────────────────────────
     h1: ({ children }: { children?: React.ReactNode }) => (
@@ -148,18 +137,5 @@ export function buildMdxComponents(ctx: MdxComponentContext): MDXComponents {
         {children}
       </a>
     ),
-
-    // ── 게이팅 ───────────────────────────────────────────────
-    ArticleGatingForm: ({ children }: { children?: React.ReactNode }) => {
-      if (ctx.isUnlocked) return <>{children}</>;
-      return (
-        <ArticleGatingFormOverlay
-          contactCopy={ctx.contactCopy}
-          locale={ctx.locale}
-          title={ctx.title}
-          unlockCookieName={ctx.unlockCookieName}
-        />
-      );
-    },
   };
 }

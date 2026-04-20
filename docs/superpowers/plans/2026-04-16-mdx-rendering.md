@@ -4,7 +4,7 @@
 
 **Goal:** Blog/Whitepaper MDX 파일을 `/[locale]/features/documentation/blog/[slug]` 및 `/[locale]/features/documentation/white-paper/[slug]` 라우트에서 SSR 방식으로 렌더링한다.
 
-**Architecture:** `next-mdx-remote-client/rsc`의 `evaluate()`로 MDX를 서버에서 컴파일·렌더링한다. MDX 파일은 `src/content/mdx/{category}/{slug}/{locale}.mdx`에 저장하며, 기존 Tiptap 라우트(`/features/documentation/[slug]`)는 변경하지 않는다. HTML 요소 스타일은 기존 `CONTENT_PREVIEW_RICH_CLASS`를 래퍼에 그대로 적용하고, 커스텀 컴포넌트는 실제 사용 목록(10개)만 Tailwind로 새로 구현한다.
+**Architecture:** `next-mdx-remote-client/rsc`의 `evaluate()`로 MDX를 서버에서 컴파일·렌더링한다. MDX 파일은 `src/content/mdx/{category}/{slug}/{locale}.mdx`에 저장하며, 기존 Tiptap 라우트(`/features/documentation/[slug]`)는 변경하지 않는다. HTML 요소 스타일은 기존 `CONTENT_PREVIEW_RICH_CLASS`를 래퍼에 그대로 적용하고, 커스텀 컴포넌트는 MDX 렌더링 검증에 필요한 실제 사용 목록만 Tailwind로 새로 구현한다. `<ArticleGatingForm>` 연동은 리드폼, 쿠키, 잠금 해제 UX가 포함되는 별도 작업으로 분리한다.
 
 **Tech Stack:** `next-mdx-remote-client@^2`, `remark-gfm@^4`, Next.js 15 App Router, Tailwind CSS 3.4, Vitest
 
@@ -21,7 +21,6 @@
 | 신규 | `src/features/mdx/components.tsx` | buildMdxComponents() 팩토리 |
 | 신규 | `src/features/mdx/renderer.ts` | evaluate() 래퍼 |
 | 신규 | `src/features/mdx/renderer.test.ts` | renderer 통합 테스트 |
-| 신규 | `src/components/mdx-layout/ArticleGatingFormOverlay.tsx` | 게이팅 폼 Client Component |
 | 신규 | `src/components/mdx-layout/ArticleLayout.tsx` | Blog/WP 공통 레이아웃 |
 | 신규 | `src/components/mdx-layout/ArticleToc.tsx` | 목차 사이드바 Client Component |
 | 신규 | `src/content/mdx/blog/nextjs-server-action-security/en.mdx` | 테스트용 샘플 블로그 |
@@ -289,19 +288,8 @@ Blog/Whitepaper MDX에서 실제 사용되는 컴포넌트만 구현한다. HTML
 `src/features/mdx/components.tsx`:
 ```tsx
 import type { MDXComponents } from "mdx/types";
-import type { Locale } from "@/constants/i18n";
-import type { ContactPageCopy } from "@/features/contact/copy";
-import ArticleGatingFormOverlay from "@/components/mdx-layout/ArticleGatingFormOverlay";
 
-export type MdxComponentContext = {
-  locale: Locale;
-  isUnlocked: boolean;
-  unlockCookieName: string;
-  title: string;
-  contactCopy: ContactPageCopy;
-};
-
-export function buildMdxComponents(ctx: MdxComponentContext): MDXComponents {
+export function buildMdxComponents(): MDXComponents {
   return {
     // ── 레이아웃 ──────────────────────────────────────────────
     Box: ({ center, children }: { center?: boolean; children?: React.ReactNode }) => (
@@ -406,19 +394,6 @@ export function buildMdxComponents(ctx: MdxComponentContext): MDXComponents {
         {children}
       </a>
     ),
-
-    // ── 게이팅 ───────────────────────────────────────────────
-    ArticleGatingForm: ({ children }: { children?: React.ReactNode }) => {
-      if (ctx.isUnlocked) return <>{children}</>;
-      return (
-        <ArticleGatingFormOverlay
-          contactCopy={ctx.contactCopy}
-          locale={ctx.locale}
-          title={ctx.title}
-          unlockCookieName={ctx.unlockCookieName}
-        />
-      );
-    },
   };
 }
 ```
@@ -522,58 +497,9 @@ git commit -m "feat(mdx): add renderMdx helper wrapping next-mdx-remote-client e
 
 ---
 
-## Task 6: ArticleGatingFormOverlay (Client Component)
+## Task 6: 범위 제외 - MDX ArticleGatingForm
 
-**Files:**
-- Create: `src/components/mdx-layout/ArticleGatingFormOverlay.tsx`
-
-- [ ] **Step 1: 컴포넌트 작성**
-
-`src/components/mdx-layout/ArticleGatingFormOverlay.tsx`:
-```tsx
-"use client";
-
-import { useRouter } from "next/navigation";
-import ContentLeadForm from "@/components/pages/documentation/ContentLeadForm";
-import type { ContactPageCopy } from "@/features/contact/copy";
-import type { Locale } from "@/constants/i18n";
-
-type Props = {
-  contactCopy: ContactPageCopy;
-  locale: Locale;
-  title: string;
-  unlockCookieName: string;
-};
-
-export default function ArticleGatingFormOverlay({
-  contactCopy,
-  locale,
-  title,
-  unlockCookieName,
-}: Props) {
-  const router = useRouter();
-
-  return (
-    <div className="flex w-full flex-col items-center gap-6 border-t border-border py-12">
-      <ContentLeadForm
-        contactCopy={contactCopy}
-        locale={locale}
-        mode="unlock"
-        onSuccess={() => router.refresh()}
-        title={title}
-        unlockCookieName={unlockCookieName}
-      />
-    </div>
-  );
-}
-```
-
-- [ ] **Step 2: 커밋**
-
-```bash
-git add src/components/mdx-layout/ArticleGatingFormOverlay.tsx
-git commit -m "feat(mdx): add ArticleGatingFormOverlay client component for content gating"
-```
+첫 번째 PR에서는 MDX 파일이 SSR로 적절히 렌더링되는지에 집중한다. `<ArticleGatingForm>` 연동은 기존 content gating, 리드폼, unlock cookie, 잠금 해제 후 refresh 동작을 함께 설계해야 하므로 별도 Issue로 분리한다.
 
 ---
 
@@ -830,17 +756,13 @@ Always validate inputs on the server side. Never trust client-provided data.
   />
 </Box>
 
-<ArticleGatingForm>
+## Full Analysis
 
-## Full Analysis (Gated Content)
-
-This section is only visible after unlocking.
+This section validates that deeper article content renders as standard MDX.
 
 ### Attack Vectors
 
-Content here requires form submission.
-
-</ArticleGatingForm>
+Content here is part of the initial MDX rendering scope.
 ```
 
 - [ ] **Step 3: 화이트페이퍼 샘플 작성**
@@ -877,17 +799,13 @@ Companies face the challenge of managing vast amounts of data while safeguarding
 - **CCPA** — California consumer privacy rights  
 - **HIPAA** — US health information protection
 
-<ArticleGatingForm>
-
 # Solution Architecture
 
-This gated section describes the full AI-powered solution.
+This section validates that full white paper MDX content renders without gating.
 
 ## Technical Details
 
 QueryPie's approach uses transformer-based models for entity recognition.
-
-</ArticleGatingForm>
 ```
 
 - [ ] **Step 4: 커밋**
@@ -910,15 +828,12 @@ git commit -m "feat(mdx): add sample blog and whitepaper MDX files for testing"
 ```tsx
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { loadMdxSource } from "@/features/mdx/loader";
 import { renderMdx } from "@/features/mdx/renderer";
 import { buildMdxComponents } from "@/features/mdx/components";
 import { extractHeadingsFromMdx } from "@/features/mdx/headings";
 import ArticleLayout from "@/components/mdx-layout/ArticleLayout";
-import { getContactPageCopy } from "@/features/contact/copy";
-import { getContentUnlockCookieName, hasUnlockedContentAccess } from "@/features/content/gating";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -946,45 +861,16 @@ export default async function BlogMdxPage({ params }: Props) {
   const source = await loadMdxSource("blog", slug, locale as Locale);
   if (!source) notFound();
 
-  const cookieStore = await cookies();
-  const unlockCookieName = getContentUnlockCookieName(slug);
-  const isUnlocked = hasUnlockedContentAccess(
-    cookieStore.get(unlockCookieName)?.value,
-  );
-  const contactCopy = getContactPageCopy(locale as Locale);
-
-  const components = buildMdxComponents({
-    locale: locale as Locale,
-    isUnlocked,
-    unlockCookieName,
-    title: "",        // frontmatter.title은 아래에서 채운다
-    contactCopy,
-  });
-
-  const { content, frontmatter } = await renderMdx(source, components);
-
-  // title을 frontmatter에서 가져와 gating 컴포넌트에 전달하려면
-  // components를 재빌드한다 (title은 gating form UI에만 사용)
-  const componentsWithTitle = buildMdxComponents({
-    locale: locale as Locale,
-    isUnlocked,
-    unlockCookieName,
-    title: frontmatter.title,
-    contactCopy,
-  });
-  const { content: finalContent } = await renderMdx(source, componentsWithTitle);
-
+  const { content, frontmatter } = await renderMdx(source, buildMdxComponents());
   const headings = extractHeadingsFromMdx(source);
 
   return (
     <ArticleLayout frontmatter={frontmatter} headings={headings} locale={locale as Locale}>
-      {finalContent}
+      {content}
     </ArticleLayout>
   );
 }
 ```
-
-> **Note:** `renderMdx`를 두 번 호출하는 것은 `frontmatter.title`을 `buildMdxComponents`에 넘기기 위한 것이다. 이를 피하려면 `ArticleGatingFormOverlay`가 `title`을 별도 prop으로 받거나, 첫 번째 evaluate에서 frontmatter만 파싱(`components={}`)하고 두 번째에서 content를 렌더링하면 된다. 현재 구현은 정확성 우선이며 최적화는 별도 작업이다.
 
 - [ ] **Step 2: 커밋**
 
@@ -1006,15 +892,12 @@ git commit -m "feat(mdx): add blog MDX route at /[locale]/features/documentation
 ```tsx
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { cookies } from "next/headers";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { loadMdxSource } from "@/features/mdx/loader";
 import { renderMdx } from "@/features/mdx/renderer";
 import { buildMdxComponents } from "@/features/mdx/components";
 import { extractHeadingsFromMdx } from "@/features/mdx/headings";
 import ArticleLayout from "@/components/mdx-layout/ArticleLayout";
-import { getContactPageCopy } from "@/features/contact/copy";
-import { getContentUnlockCookieName, hasUnlockedContentAccess } from "@/features/content/gating";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -1042,26 +925,7 @@ export default async function WhitepaperMdxPage({ params }: Props) {
   const source = await loadMdxSource("white-paper", slug, locale as Locale);
   if (!source) notFound();
 
-  const cookieStore = await cookies();
-  const unlockCookieName = getContentUnlockCookieName(slug);
-  const isUnlocked = hasUnlockedContentAccess(
-    cookieStore.get(unlockCookieName)?.value,
-  );
-  const contactCopy = getContactPageCopy(locale as Locale);
-
-  // Step 1: frontmatter만 파싱 (title 획득용)
-  const { frontmatter } = await renderMdx(source, {});
-
-  // Step 2: title을 포함한 컴포넌트로 최종 렌더링
-  const components = buildMdxComponents({
-    locale: locale as Locale,
-    isUnlocked,
-    unlockCookieName,
-    title: frontmatter.title,
-    contactCopy,
-  });
-  const { content } = await renderMdx(source, components);
-
+  const { content, frontmatter } = await renderMdx(source, buildMdxComponents());
   const headings = extractHeadingsFromMdx(source);
 
   return (
@@ -1116,7 +980,6 @@ npm run dev
 - [ ] 본문 Markdown(heading, paragraph, code block, table)이 올바른 스타일로 렌더링된다
 - [ ] `<Box>` + `<ArticleFileImage>`가 이미지를 표시한다 (이미지 파일 없으면 broken image — 정상)
 - [ ] `<InfoNote>`가 파란 callout으로 표시된다
-- [ ] `<ArticleGatingForm>` 이후 콘텐츠가 잠금 상태에서 보이지 않고 게이팅 폼이 표시된다
 - [ ] TOC 사이드바가 데스크탑에서 표시된다
 - [ ] 기존 Tiptap 라우트(`/features/documentation/[slug]`)가 여전히 정상 작동한다
 
@@ -1133,9 +996,9 @@ git commit -m "feat(mdx): MDX rendering system complete — blog and whitepaper 
 
 | 항목 | 설명 |
 |------|------|
-| `renderMdx` 이중 호출 | frontmatter.title을 gating 컴포넌트에 넘기기 위해 2회 evaluate. 최적화는 별도 작업 |
 | 이미지 경로 | MDX의 `filepath="public/X"` → `/X`. 이미지 파일을 `public/` 하위에 실제로 복사해야 표시됨 |
 | `relatedPosts` URL | corp-web-contents 구 URL 형식(`/features/documentation/blog/8/...`) → corp-web-v2 slug 형식으로 수동 변환 필요 |
 | SSR 캐싱 | 현재 요청마다 evaluate() 실행. 트래픽 증가 시 React `cache()` 또는 CDN 캐싱으로 최적화 |
 | `ArticleType2` 레이아웃 | 미구현. 필요 시 `ArticleLayout` 변형으로 추가 |
 | 콘텐츠 마이그레이션 | corp-web-contents MDX → `src/content/mdx/` 이관 스크립트 별도 작업 |
+| MDX ArticleGatingForm | 첫 번째 PR 범위 밖. 기존 content gating과 리드폼 연동을 포함한 별도 작업으로 진행 |

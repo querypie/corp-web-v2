@@ -1,30 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { buildMdxComponents, type MdxComponentContext } from "./components";
-import { getContactPageCopy } from "@/features/contact/copy";
+import { buildMdxComponents } from "./components";
 
-// ArticleGatingFormOverlay는 useRouter를 사용하므로 mock 처리
-vi.mock("next/navigation", () => ({
-  useRouter: () => ({ refresh: vi.fn() }),
-}));
-
-// ContentLeadForm은 복잡한 렌더링 없이 mock 처리
-vi.mock("@/components/pages/documentation/ContentLeadForm", () => ({
-  default: ({ title }: { title: string }) => (
-    <div data-testid="content-lead-form">{title}</div>
-  ),
-}));
-
-const baseCtx: MdxComponentContext = {
-  locale: "en",
-  isUnlocked: false,
-  unlockCookieName: "querypie_content_unlocked_20",
-  title: "Test Article",
-  contactCopy: getContactPageCopy("en"),
-};
-
-function getComponents(overrides?: Partial<MdxComponentContext>) {
-  return buildMdxComponents({ ...baseCtx, ...overrides });
+function getComponents() {
+  return buildMdxComponents();
 }
 
 describe("buildMdxComponents", () => {
@@ -77,39 +56,8 @@ describe("buildMdxComponents", () => {
   });
 
   describe("ArticleGatingForm", () => {
-    it("isUnlocked=true이면 children을 렌더링한다", () => {
-      const { ArticleGatingForm } = getComponents({ isUnlocked: true }) as any;
-      render(
-        <ArticleGatingForm>
-          <p>Gated Content</p>
-        </ArticleGatingForm>,
-      );
-      expect(screen.getByText("Gated Content")).toBeInTheDocument();
-    });
-
-    it("isUnlocked=false이면 ContentLeadForm(overlay)을 렌더링한다", () => {
-      const { ArticleGatingForm } = getComponents({ isUnlocked: false }) as any;
-      render(<ArticleGatingForm />);
-      expect(screen.getByTestId("content-lead-form")).toBeInTheDocument();
-    });
-
-    it("isUnlocked=false이면 title을 overlay에 전달한다", () => {
-      const { ArticleGatingForm } = getComponents({
-        isUnlocked: false,
-        title: "Special Article",
-      }) as any;
-      render(<ArticleGatingForm />);
-      expect(screen.getByText("Special Article")).toBeInTheDocument();
-    });
-
-    it("isUnlocked=false이면 gated children을 노출하지 않는다", () => {
-      const { ArticleGatingForm } = getComponents({ isUnlocked: false }) as any;
-      render(
-        <ArticleGatingForm>
-          <p>Secret Content</p>
-        </ArticleGatingForm>,
-      );
-      expect(screen.queryByText("Secret Content")).not.toBeInTheDocument();
+    it("첫 번째 MDX 렌더링 PR 범위에서는 등록하지 않는다", () => {
+      expect("ArticleGatingForm" in getComponents()).toBe(false);
     });
   });
 
