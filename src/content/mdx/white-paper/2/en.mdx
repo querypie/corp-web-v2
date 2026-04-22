@@ -32,6 +32,8 @@ When an SSH session is established, data communication between the client and se
 
 In particular, when it comes to server commands, users can bypass them through shortcuts or aliases, for example. Even if a server access control solution specifies prohibited commands, the same commands can still be executed by embedding them within scripts. Common server access control methods, such as those in a man-in-the-middle (MITM) proxy server that combine user input to parse commands, cannot effectively defend against such bypass attacks. Therefore, to enhance security, control should be implemented at the server level, such as by installing an agent on the server and running a daemon to monitor processes, rather than relying on proxy-level control.
 
+
+
 # Objectives
 
 Installing something on the server to control commands in order to enhance security can lead to ambiguities between areas such as Endpoint Detection and Response (EDR) and might also cause performance degradation or other side effects, making SSH usage less convenient. To address this, QueryPie has focused on finding a way to implement command control at the server level without requiring the installation of agents on the server, thus maintaining security while avoiding the drawbacks associated with traditional agent-based solutions.
@@ -56,3 +58,4 @@ The user command monitoring daemon can be implemented using technologies such as
 - ebpf
 
 These extended features can be implemented incrementally to align with the organization’s security requirements and user convenience. QueryPie remains committed to continuously discovering and developing new security features that meet customer needs, becoming a trusted partner in creating a more secure system environment. If you need assistance or would like to explore potential collaboration, feel free to reach out at any time.
+
