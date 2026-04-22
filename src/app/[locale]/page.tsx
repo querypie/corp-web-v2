@@ -247,7 +247,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         { title: "Features", items: ["Demo", "Documentation"] },
         { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us", "Plans"] },
       ],
-      legal: ["Cookie Preference", "Terms of Use", "Privacy Policy", "EULA"],
+      legal: ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"],
     },
     ko: {
       nav: ["솔루션", "기능", "회사", "요금제"],

@@ -19,10 +19,10 @@ export type ShellMenuCopy = {
 
 export function getShellMenuCopy(locale: string): ShellMenuCopy {
   const footerLegalLinks = {
-    en: ["Cookie Preference", "Terms of Use", "Privacy Policy", "EULA"],
+    en: ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"],
     ko: ["쿠키 설정", "이용약관", "개인정보처리방침", "EULA"],
     ja: ["クッキー設定", "利用規約", "プライバシーポリシー", "EULA"],
-  }[locale] ?? ["Cookie Preference", "Terms of Use", "Privacy Policy", "EULA"];
+  }[locale] ?? ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"];
 
   return {
     footerLegalLinks,
@@ -175,7 +175,7 @@ export function getLegalHref(item: string, locale: string) {
     return getLocalePath(locale as Locale, "/privacy-policy");
   }
 
-  if (item === "Terms of Use" || item === "이용약관" || item === "利用規約") {
+  if (item === "Terms of Service" || item === "Terms of Use" || item === "이용약관" || item === "利用規約") {
     return getLocalePath(locale as Locale, "/terms-of-service");
   }
 
