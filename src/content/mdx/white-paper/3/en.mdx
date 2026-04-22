@@ -68,7 +68,7 @@ To implement consistent security policies across diverse databases, QueryPie pro
 
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-1-execution-phases.png"
+        filepath="public/white-paper/3/1-execution-phases.png"
         alt="Execution Phases"
     />
 </Box>
@@ -101,7 +101,7 @@ Here are examples of `SELECT * FROM actor` queries across different databases:
 **MySQL (ANTLR4)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-2-MySQL-ANTLR4.png"
+        filepath="public/white-paper/3/2-MySQL-ANTLR4.png"
         alt="MySQL (ANTLR4)"
     />
 </Box>
@@ -110,7 +110,7 @@ Here are examples of `SELECT * FROM actor` queries across different databases:
 **Oracle (ANTLR4)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-3-Oracle-ANTLR4.png"
+        filepath="public/white-paper/3/3-Oracle-ANTLR4.png"
         alt="Oracle (ANTLR4)"
     />
 </Box>
@@ -119,7 +119,7 @@ Here are examples of `SELECT * FROM actor` queries across different databases:
 **PostgreSQL (YACC)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-4-PostgreSQL-YACC.png"
+        filepath="public/white-paper/3/4-PostgreSQL-YACC.png"
         alt="PostgreSQL (YACC)"
     />
 </Box>
@@ -134,7 +134,7 @@ Represents references to tables or original data where actual data is stored.
 Example: The identifier `actor` refers to a specific table in the database, retrieving data through an operation.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-5-qsi-ast-Data-Reference.png"
+        filepath="public/white-paper/3/5-qsi-ast-Data-Reference.png"
         alt="Data Reference"
     />
 </Box>
@@ -144,7 +144,7 @@ Represents new data derived from a specific table.
 Example: In the query `SELECT name AS n FROM actor`, the `name` column from the `actor` table is given an alias `n`, creating a new form of the data.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-6-qsi-ast-Derived-Table.png"
+        filepath="public/white-paper/3/6-qsi-ast-Derived-Table.png"
         alt="Derived Table"
     />
 </Box>
@@ -154,7 +154,7 @@ Represents the structure that combines multiple tables to provide related data a
 Example: `SELECT * FROM address JOIN city USING (city_id)` merges the `address` and `city` tables based on `city_id`, retrieving all associated data from both tables.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-7-qsi-ast-Joined-Table.png"
+        filepath="public/white-paper/3/7-qsi-ast-Joined-Table.png"
         alt="Joined Table"
     />
 </Box>
@@ -164,7 +164,7 @@ This node supports operations that combine multiple result sets.
 Example: In the query `SELECT 1 UNION ALL SELECT 2`, the results of two `SELECT` statements are combined into a single table.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-8-qsi-ast-Compound-Table-Combination.png"
+        filepath="public/white-paper/3/8-qsi-ast-Compound-Table-Combination.png"
         alt="Compound Table Combination"
     />
 </Box>
@@ -174,7 +174,7 @@ Provides specific values directly in table format.
 Example: `VALUES (1,2), (3,4)` creates a small table with two rows and two columns that can be used immediately.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-9-qsi-ast-Inline-Derived-Table.png"
+        filepath="public/white-paper/3/9-qsi-ast-Inline-Derived-Table.png"
         alt="Inline Derived Table"
     />
 </Box>
@@ -184,7 +184,7 @@ Calls a specific function that returns data in table format.
 Example: `SELECT * FROM table_function()` retrieves table-formatted data returned by the function `table_function()`.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-10-qsi-ast-Table-Function-Call.png"
+        filepath="public/white-paper/3/10-qsi-ast-Table-Function-Call.png"
         alt="Table Function Call"
     />
 </Box>
@@ -205,7 +205,7 @@ For `SELECT` queries, which output table-formatted results, the analysis include
     - Contains columns that influence the query results but do not appear directly in the output, such as those used in `WHERE` or `HAVING` clauses.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-11-analysis-result.png"
+        filepath="public/white-paper/3/11-analysis-result.png"
         alt="Analysis Result"
     />
 </Box>
@@ -222,7 +222,7 @@ WHERE a.city_id = c.city_id
 Analysis Result
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-12-analysis-result-2.png"
+        filepath="public/white-paper/3/12-analysis-result-2.png"
         alt="Analysis Result"
     />
 </Box>
@@ -252,7 +252,7 @@ SELECT * FROM actor_view
 Analysis Result
 <Box marginTopSize="sm" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-13-analysis-result-3.png"
+        filepath="public/white-paper/3/13-analysis-result-3.png"
         alt="Analysis Result"
     />
 </Box>

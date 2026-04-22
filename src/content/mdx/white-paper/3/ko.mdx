@@ -55,7 +55,7 @@ relatedPosts:
 
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-1-execution-phases.png"
+        filepath="public/white-paper/3/1-execution-phases.png"
         alt="Execution Phases"
     />
 </Box>
@@ -86,7 +86,7 @@ RAW AST 는 입력된 데이터베이스 쿼리를 파싱하는 원시 파서가
 **MySQL (ANTLR4)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-2-MySQL-ANTLR4.png"
+        filepath="public/white-paper/3/2-MySQL-ANTLR4.png"
         alt="MySQL (ANTLR4)"
     />
 </Box>
@@ -94,7 +94,7 @@ RAW AST 는 입력된 데이터베이스 쿼리를 파싱하는 원시 파서가
 **Oracle (ANTLR4)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-3-Oracle-ANTLR4.png"
+        filepath="public/white-paper/3/3-Oracle-ANTLR4.png"
         alt="Oracle (ANTLR4)"
     />
 </Box>
@@ -102,7 +102,7 @@ RAW AST 는 입력된 데이터베이스 쿼리를 파싱하는 원시 파서가
 **PostgreSQL (YACC)**
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-4-PostgreSQL-YACC.png"
+        filepath="public/white-paper/3/4-PostgreSQL-YACC.png"
         alt="PostgreSQL (YACC)"
     />
 </Box>
@@ -116,7 +116,7 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `actor` 라는 식별자는 데이터베이스에 저장된 특정 테이블을 참조하여 데이터를 가져오는 연산을 수행합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-5-qsi-ast-Data-Reference.png"
+        filepath="public/white-paper/3/5-qsi-ast-Data-Reference.png"
         alt="Data Reference"
     />
 </Box>
@@ -126,7 +126,7 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `SELECT name AS n FROM actor`, 쿼리에서는 `actor` 테이블의 `name` 컬럼에 `n`이라는 별칭을 부여하여, 이를 새로운 형태로 제공합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-6-qsi-ast-Derived-Table.png"
+        filepath="public/white-paper/3/6-qsi-ast-Derived-Table.png"
         alt="Derived Table"
     />
 </Box>
@@ -136,7 +136,7 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `SELECT * FROM address JOIN city USING (city_id)`는 `address`와 `city` 테이블을 `city_id`를 기준으로 결합하여, 두 테이블에서 연관된 모든 데이터를 조회합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-7-qsi-ast-Joined-Table.png"
+        filepath="public/white-paper/3/7-qsi-ast-Joined-Table.png"
         alt="Joined Table"
     />
 </Box>
@@ -146,7 +146,7 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `SELECT 1 UNION ALL SELECT 2`와 같은 쿼리에서는 두 개의 `SELECT` 결과를 하나의 테이블로 결합하여 반환합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-8-qsi-ast-Compound-Table-Combination.png"
+        filepath="public/white-paper/3/8-qsi-ast-Compound-Table-Combination.png"
         alt="Compound Table Combination"
     />
 </Box>
@@ -156,7 +156,7 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `VALUES (1,2), (3,4)`는 두 개의 행과 두 개의 열을 가진 작은 테이블을 생성하여 즉시 사용할 수 있습니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-9-qsi-ast-Inline-Derived-Table.png"
+        filepath="public/white-paper/3/9-qsi-ast-Inline-Derived-Table.png"
         alt="Inline Derived Table"
     />
 </Box>
@@ -166,7 +166,7 @@ QSI AST는 데이터베이스 쿼리의 의미적 구조를 표현하는데, 주
 예를 들어, `SELECT * FROM table_function()`는 `table_function()`이라는 함수가 반환하는 테이블 형식의 데이터를 조회합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-10-qsi-ast-Table-Function-Call.png"
+        filepath="public/white-paper/3/10-qsi-ast-Table-Function-Call.png"
         alt="Table Function Call"
     />
 </Box>
@@ -186,7 +186,7 @@ SELECT 쿼리와 같이 테이블 형식으로 출력되는 쿼리의 분석 결
 - 컬럼 결과에 영향을 주지 않는 WHERE, HAVING 등에 사용된 컬럼을 의미합니다.
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-11-analysis-result.png"
+        filepath="public/white-paper/3/11-analysis-result.png"
         alt="Analysis Result"
     />
 </Box>
@@ -203,7 +203,7 @@ WHERE a.city_id = c.city_id
 분석 결과
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-12-analysis-result-2.png"
+        filepath="public/white-paper/3/12-analysis-result-2.png"
         alt="Analysis Result"
     />
 </Box>
@@ -233,7 +233,7 @@ SELECT * FROM actor_view
 분석 결과
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/3/wp3-13-analysis-result-3.png"
+        filepath="public/white-paper/3/13-analysis-result-3.png"
         alt="Analysis Result"
     />
 </Box>
