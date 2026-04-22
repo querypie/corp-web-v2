@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import PrivacyPolicyPage from "../../../components/pages/legal/PrivacyPolicyPage";
-import { isLocale, type Locale } from "../../../constants/i18n";
+import { getLocalePath, isLocale, type Locale } from "../../../constants/i18n";
 import {
   getPrivacyPolicyContent,
   getPrivacyPolicyVersionOptions,
@@ -12,6 +13,30 @@ type PrivacyPolicyRouteProps = {
 };
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({
+  params,
+}: PrivacyPolicyRouteProps): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!isLocale(locale)) return {};
+
+  const versions = await getPrivacyPolicyVersions(locale as Locale);
+  const latestVersion = versions[0];
+
+  if (!latestVersion) {
+    return {};
+  }
+
+  const content = await getPrivacyPolicyContent(locale as Locale, latestVersion);
+
+  return {
+    title: content.title,
+    alternates: {
+      canonical: getLocalePath(locale as Locale, "/privacy-policy"),
+    },
+  };
+}
 
 export default async function PrivacyPolicyRoute({
   params,

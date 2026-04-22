@@ -45,12 +45,25 @@ export default async function WhitePaperDownloadRoute({ params }: WhitePaperDown
 
 export async function generateMetadata({ params }: WhitePaperDownloadRouteProps): Promise<Metadata> {
   const { locale, slug } = await params;
+  const resolvedSlug = decodeURIComponent(slug);
 
   if (!isLocale(locale)) return {};
 
+  const currentEntry = await readContentItem("documentation", resolvedSlug, { includeBodies: false });
+
+  if (
+    !currentEntry ||
+    !isPublishedContentAccessible(currentEntry) ||
+    !currentEntry.enableDownloadButton ||
+    !currentEntry.downloadPdfSrc
+  ) {
+    return {};
+  }
+
   return {
+    title: getLocalizedContent(currentEntry.title, locale),
     alternates: {
-      canonical: getLocalePath(locale, `/features/documentation/${decodeURIComponent(slug)}/download`),
+      canonical: getLocalePath(locale, `/features/documentation/${resolvedSlug}/download`),
     },
   };
 }

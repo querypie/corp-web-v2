@@ -20,3 +20,11 @@ export function getDocumentationPageCopy(locale: Locale): ContentListPageCopy {
     ja: { metadataTitle: "ドキュメント", title: "ドキュメント" },
   }[locale];
 }
+
+export function getPlansPageCopy(locale: Locale): ContentListPageCopy {
+  return {
+    en: { metadataTitle: "Pricing", title: "Pricing" },
+    ko: { metadataTitle: "Pricing", title: "Pricing" },
+    ja: { metadataTitle: "Pricing", title: "Pricing" },
+  }[locale];
+}
