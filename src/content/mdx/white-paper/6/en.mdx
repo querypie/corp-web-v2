@@ -5,7 +5,7 @@ title: "Access Control for Secure Operation of Kubernetes Clusters"
 description: "QueryPie ensures secure Kubernetes access control for improved cloud cluster management and operational security."
 date: "2024-11-22"
 author: "david"
-ogImage: "public/white-paper/wp-thumb-6.png"
+ogImage: "public/white-paper/6/thumbnail.png"
 keywords: ["QueryPie", "Kubernetes security", "access control", "cloud cluster management", "operational security"]
 relatedPosts:
   - "/en/white-paper/2"
@@ -21,7 +21,7 @@ As a result, many organizations share Admin privileges among multiple users, whi
 
 <Box marginTopSize="xs" center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-1-Introduction.png"
+        filepath="public/white-paper/6/wp6-1-Introduction.png"
         alt="Introduction"
     />
 </Box>
@@ -49,7 +49,7 @@ By managing separate kubeconfig files for each user, permission management and r
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-2-Challenges-1.png"
+        filepath="public/white-paper/6/wp6-2-Challenges-1.png"
         alt="Challenges"
     />
 </Box>
@@ -61,7 +61,7 @@ In reality, when you talk to people who have actually implemented Kubernetes RBA
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-3-Challenges-2.png"
+        filepath="public/white-paper/6/wp6-3-Challenges-2.png"
         alt="Challenges"
     />
 </Box>
@@ -78,7 +78,7 @@ In other words, the cluster administrator is responsible for managing each user 
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-4-Challenges-3.png"
+        filepath="public/white-paper/6/wp6-4-Challenges-3.png"
         alt="Challenges"
     />
 </Box>
@@ -92,7 +92,7 @@ As the number of clusters and users increases, the operational resources require
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-5-Challenges-4.png"
+        filepath="public/white-paper/6/wp6-5-Challenges-4.png"
         alt="Challenges"
     />
 </Box>
@@ -106,7 +106,7 @@ This creates challenges in both configuring the audit logs and managing the log 
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-6-Challenges-5.png"
+        filepath="public/white-paper/6/wp6-6-Challenges-5.png"
         alt="Challenges"
     />
 </Box>
@@ -121,7 +121,7 @@ How would you set up the Kubernetes RBAC Role configuration in this case?
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-7-Challenges-6.png"
+        filepath="public/white-paper/6/wp6-7-Challenges-6.png"
         alt="Challenges"
     />
 </Box>
@@ -135,7 +135,7 @@ Managing the Role specifications every time would increase the operational burde
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-8-Challenges-7.png"
+        filepath="public/white-paper/6/wp6-8-Challenges-7.png"
         alt="Challenges"
     />
 </Box>
@@ -148,7 +148,7 @@ In this case, if you want to grant access only to the pods starting with "david"
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-9-Challenges-8.png"
+        filepath="public/white-paper/6/wp6-9-Challenges-8.png"
         alt="Challenges"
     />
 </Box>
@@ -173,7 +173,7 @@ The Kubernetes Access Controller (hereinafter referred to as KAC) works by placi
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-10-Solution-Overview.png"
+        filepath="public/white-paper/6/wp6-10-Solution-Overview.png"
         alt="Solution Overview"
     />
 </Box>
@@ -199,7 +199,7 @@ Essentially, the KAC Proxy server is responsible for granting or blocking access
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-11-Technical-Description-1.png"
+        filepath="public/white-paper/6/wp6-11-Technical-Description-1.png"
         alt="Technical Description"
     />
 </Box>
@@ -212,7 +212,7 @@ If the client doesn't have the required permissions, the server returns an error
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-12-Technical-Description-2.png"
+        filepath="public/white-paper/6/wp6-12-Technical-Description-2.png"
         alt="Technical Description"
     />
 </Box>
@@ -225,7 +225,7 @@ Therefore, to maintain compatibility, KAC retains the cluster access approach us
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-13-Technical-Description-3.png"
+        filepath="public/white-paper/6/wp6-13-Technical-Description-3.png"
         alt="Technical Description"
     />
 </Box>
@@ -240,7 +240,7 @@ It analyzes not only API calls used for resource creation, retrieval, deletion (
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-14-Technical-Description-4.png"
+        filepath="public/white-paper/6/wp6-14-Technical-Description-4.png"
         alt="Technical Description"
     />
 </Box>
@@ -252,7 +252,7 @@ We have implemented functionality to replay this data through a player, allowing
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-15-Technical-Description-5.png"
+        filepath="public/white-paper/6/wp6-15-Technical-Description-5.png"
         alt="Technical Description"
     />
 </Box>
@@ -266,7 +266,7 @@ The KAC Proxy server decodes these event streams in real-time, checks for any vi
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-16-Technical-Description-6.png"
+        filepath="public/white-paper/6/wp6-16-Technical-Description-6.png"
         alt="Technical Description"
     />
 </Box>
@@ -288,7 +288,7 @@ Now, let's explain how KAC has improved upon this.
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-17-rbac-spec-1.png"
+        filepath="public/white-paper/6/wp6-17-rbac-spec-1.png"
         alt="RBAC Specifications"
     />
 </Box>
@@ -304,7 +304,7 @@ The "actions" section specifies which actions can be performed on resources like
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-18-rbac-spec-2.png"
+        filepath="public/white-paper/6/wp6-18-rbac-spec-2.png"
         alt="RBAC Specifications"
     />
 </Box>
@@ -322,7 +322,7 @@ Since wildcard and pattern matching expressions are supported, there is no need 
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-19-rbac-spec-3.png"
+        filepath="public/white-paper/6/wp6-19-rbac-spec-3.png"
         alt="RBAC Specifications"
     />
 </Box>
@@ -339,7 +339,7 @@ Finally, cluster tags represent the attributes of the cluster, and tags are espe
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp6-20-rbac-spec-4.png"
+        filepath="public/white-paper/6/wp6-20-rbac-spec-4.png"
         alt="RBAC Specifications"
     />
 </Box>
