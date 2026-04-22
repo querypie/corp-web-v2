@@ -19,12 +19,17 @@ function formatDate(iso: string, locale: Locale): string {
   }).format(new Date(iso));
 }
 
+function formatAuthor(author: MdxFrontmatter["author"]): string | undefined {
+  return Array.isArray(author) ? author.join(", ") : author;
+}
+
 export default function BlogLayout({ children, frontmatter, headings, locale }: Props) {
   const heroImageSrc = frontmatter.ogImage
     ? frontmatter.ogImage.replace(/^public\//, "/")
     : "";
   const showHero = Boolean(heroImageSrc) && !frontmatter.hideHeroImage;
   const showToc = !frontmatter.hideTableOfContents && headings.length > 0;
+  const author = formatAuthor(frontmatter.author);
 
   return (
     <div className="flex w-full justify-center px-5 pb-10 md:px-10">
@@ -38,8 +43,8 @@ export default function BlogLayout({ children, frontmatter, headings, locale }: 
             {/* 헤더: 제목·날짜·저자 */}
             <div className="flex flex-col gap-[10px]">
               <h1 className="m-0 type-h1 leading-[42px] text-fg">{frontmatter.title}</h1>
-              {frontmatter.author && (
-                <div className="type-body-md text-fg">{frontmatter.author}</div>
+              {author && (
+                <div className="type-body-md text-fg">{author}</div>
               )}
               {frontmatter.date && (
                 <p className="m-0 type-body-md text-mute-fg">

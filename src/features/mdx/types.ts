@@ -6,7 +6,7 @@ export type MdxFrontmatter = {
   title: string;
   description?: string;
   date: string;
-  author?: string;
+  author?: string | string[];
   ogImage?: string;
   keywords?: string[];
   relatedPosts?: string[];

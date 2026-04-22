@@ -1,5 +1,6 @@
 import { isValidElement } from "react";
 import type { MDXComponents } from "mdx/types";
+import { slugifyHeadingText } from "./headings";
 
 // heading children → plain text (for id generation matching headings.ts slugify)
 function childrenToText(children: React.ReactNode): string {
@@ -14,12 +15,40 @@ function childrenToText(children: React.ReactNode): string {
 }
 
 function slugifyHeading(children: React.ReactNode): string {
-  return childrenToText(children)
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, "")
-    .trim()
-    .replace(/\s+/g, "-");
+  return slugifyHeadingText(childrenToText(children));
 }
+
+function getTableCellClass(cellBackgroundColor?: string): string | undefined {
+  if (cellBackgroundColor === "gray") return "bg-bg-deep";
+  return undefined;
+}
+
+const Table = Object.assign(
+  ({ center, children }: { center?: boolean; children?: React.ReactNode }) => (
+    <div className={center ? "flex justify-center overflow-x-auto" : "overflow-x-auto"}>
+      <table>{children}</table>
+    </div>
+  ),
+  {
+    Thead: ({ children }: { children?: React.ReactNode }) => <thead>{children}</thead>,
+    Tbody: ({ children }: { children?: React.ReactNode }) => <tbody>{children}</tbody>,
+    Tr: ({ children }: { children?: React.ReactNode }) => <tr>{children}</tr>,
+    Th: ({
+      cellBackgroundColor,
+      children,
+    }: {
+      cellBackgroundColor?: string;
+      children?: React.ReactNode;
+    }) => <th className={getTableCellClass(cellBackgroundColor)}>{children}</th>,
+    Td: ({
+      cellBackgroundColor,
+      children,
+    }: {
+      cellBackgroundColor?: string;
+      children?: React.ReactNode;
+    }) => <td className={getTableCellClass(cellBackgroundColor)}>{children}</td>,
+  },
+);
 
 export function buildMdxComponents(): MDXComponents {
   return {
@@ -43,6 +72,8 @@ export function buildMdxComponents(): MDXComponents {
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2">{children}</div>
     ),
 
+    Table,
+
     // ── 미디어 ───────────────────────────────────────────────
     ArticleFileImage: ({
       filepath,
@@ -55,8 +86,9 @@ export function buildMdxComponents(): MDXComponents {
       alt?: string;
       caption?: string;
     }) => {
-      // filepath="public/blog/foo.png" → "/blog/foo.png"
       const resolvedSrc = (filepath ?? src ?? "").replace(/^public\//, "/");
+      if (!resolvedSrc) return null;
+
       return (
         <figure className="mx-auto my-0 flex max-w-full flex-col gap-3">
           <img
@@ -115,6 +147,15 @@ export function buildMdxComponents(): MDXComponents {
     ),
 
     Link: ({ href, children }: { href?: string; children?: React.ReactNode }) => (
+      <a
+        href={href}
+        className="text-brand underline underline-offset-4 transition-colors hover:text-fg"
+      >
+        {children}
+      </a>
+    ),
+
+    InlineLink: ({ href, children }: { href?: string; children?: React.ReactNode }) => (
       <a
         href={href}
         className="text-brand underline underline-offset-4 transition-colors hover:text-fg"

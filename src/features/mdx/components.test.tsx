@@ -30,12 +30,10 @@ describe("buildMdxComponents", () => {
       expect(img?.getAttribute("src")).toBe("/direct/path.png");
     });
 
-    it("filepath와 src 모두 없으면 실제 이미지 경로가 없다", () => {
+    it("filepath와 src 모두 없으면 아무것도 렌더링하지 않는다", () => {
       const { ArticleFileImage } = getComponents() as any;
       const { container } = render(<ArticleFileImage alt="no-src" />);
-      const img = container.querySelector("img");
-      // src=""는 happy-dom에서 null로 반환될 수 있음
-      expect(img?.getAttribute("src") ?? "").toBe("");
+      expect(container.firstChild).toBeNull();
     });
 
     it("caption prop이 있으면 figcaption을 렌더링한다", () => {
@@ -108,6 +106,31 @@ describe("buildMdxComponents", () => {
     });
   });
 
+  describe("Table", () => {
+    it("compound table components를 렌더링한다", () => {
+      const { Table } = getComponents() as any;
+      const { container } = render(
+        <Table center>
+          <Table.Thead>
+            <Table.Tr>
+              <Table.Th cellBackgroundColor="gray">Head</Table.Th>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>
+            <Table.Tr>
+              <Table.Td>Cell</Table.Td>
+            </Table.Tr>
+          </Table.Tbody>
+        </Table>,
+      );
+
+      expect(container.firstChild).toHaveClass("flex", "justify-center");
+      expect(screen.getByRole("table")).toBeInTheDocument();
+      expect(screen.getByRole("columnheader", { name: "Head" })).toHaveClass("bg-bg-deep");
+      expect(screen.getByRole("cell", { name: "Cell" })).toBeInTheDocument();
+    });
+  });
+
   describe("State", () => {
     it("color=blue이면 파란 배경 클래스를 적용한다", () => {
       const { State } = getComponents() as any;
@@ -158,6 +181,15 @@ describe("buildMdxComponents", () => {
     });
   });
 
+  describe("InlineLink", () => {
+    it("href 속성을 갖는다", () => {
+      const { InlineLink } = getComponents() as any;
+      render(<InlineLink href="/inline/path">Inline text</InlineLink>);
+      const anchor = screen.getByRole("link", { name: "Inline text" });
+      expect(anchor).toHaveAttribute("href", "/inline/path");
+    });
+  });
+
   describe("heading 컴포넌트 (TOC id 주입)", () => {
     it("h1에 텍스트 기반 id를 주입한다", () => {
       const { h1: H1 } = getComponents() as any;
@@ -181,6 +213,18 @@ describe("buildMdxComponents", () => {
       const { h2: H2 } = getComponents() as any;
       const { container } = render(<H2>Hello, World! (2026)</H2>);
       expect(container.querySelector("h2")).toHaveAttribute("id", "hello-world-2026");
+    });
+
+    it("한국어 텍스트를 보존한 id를 생성한다", () => {
+      const { h2: H2 } = getComponents() as any;
+      const { container } = render(<H2>서버 액션의 내부 동작 방식</H2>);
+      expect(container.querySelector("h2")).toHaveAttribute("id", "서버-액션의-내부-동작-방식");
+    });
+
+    it("일본어 텍스트를 보존한 id를 생성한다", () => {
+      const { h2: H2 } = getComponents() as any;
+      const { container } = render(<H2>Server Actionの内部動作方式</H2>);
+      expect(container.querySelector("h2")).toHaveAttribute("id", "server-actionの内部動作方式");
     });
 
     it("중첩된 children에서 텍스트를 추출한다", () => {
