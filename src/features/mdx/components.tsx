@@ -1,5 +1,7 @@
-import { isValidElement } from "react";
+import { Children, isValidElement } from "react";
+import type { ReactElement } from "react";
 import type { MDXComponents } from "mdx/types";
+import MermaidDiagram from "./MermaidDiagram";
 import { slugifyHeadingText } from "./headings";
 
 // heading children → plain text (for id generation matching headings.ts slugify)
@@ -115,6 +117,19 @@ export function buildMdxComponents(): MDXComponents {
         />
       </div>
     ),
+
+    pre: ({ children }: { children?: React.ReactNode }) => {
+      const codeChild = Children.toArray(children).find(
+        (child) => isValidElement(child) && child.type === "code",
+      ) as ReactElement<{ className?: string; children?: React.ReactNode }> | undefined;
+
+      if (codeChild?.props.className?.includes("language-mermaid")) {
+        const code = typeof codeChild.props.children === "string" ? codeChild.props.children.trim() : "";
+        return <MermaidDiagram code={code} />;
+      }
+
+      return <pre>{children}</pre>;
+    },
 
     // ── UI 요소 ──────────────────────────────────────────────
     State: ({
