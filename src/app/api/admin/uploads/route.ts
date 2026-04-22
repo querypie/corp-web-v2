@@ -9,6 +9,18 @@ const ALLOWED_MIME_TYPES = new Set([
   "image/webp",
 ]);
 
+const ALLOWED_VIDEO_MIME_TYPES = new Set([
+  "video/mp4",
+  "video/quicktime",
+  "video/webm",
+]);
+
+const VIDEO_EXTENSIONS_BY_MIME_TYPE = new Map([
+  ["video/mp4", ".mp4"],
+  ["video/quicktime", ".mov"],
+  ["video/webm", ".webm"],
+]);
+
 function sanitizeBaseName(fileName: string) {
   const ext = path.extname(fileName);
   const baseName = path.basename(fileName, ext);
@@ -20,16 +32,16 @@ function sanitizeBaseName(fileName: string) {
   return sanitized || "upload";
 }
 
-async function createUniqueFilePath(dirPath: string, baseName: string) {
+async function createUniqueFilePath(dirPath: string, baseName: string, extension = ".webp") {
   let index = 1;
-  let nextName = `${baseName}.webp`;
+  let nextName = `${baseName}${extension}`;
   let nextPath = path.join(dirPath, nextName);
 
   while (true) {
     try {
       await fs.access(nextPath);
       index += 1;
-      nextName = `${baseName}-${index}.webp`;
+      nextName = `${baseName}-${index}${extension}`;
       nextPath = path.join(dirPath, nextName);
     } catch {
       return { fileName: nextName, filePath: nextPath };
@@ -62,6 +74,21 @@ function resolveUploadDirName(section: string | null, categorySlug: string | nul
   return "uploads";
 }
 
+async function removeUpload(src: string, dirName: string) {
+  if (!src.startsWith(`/${dirName}/`) || src.includes("..")) {
+    return;
+  }
+
+  const publicDir = path.join(process.cwd(), "public");
+  const filePath = path.join(publicDir, src);
+
+  if (!filePath.startsWith(path.join(publicDir, dirName))) {
+    return;
+  }
+
+  await fs.rm(filePath, { force: true });
+}
+
 export async function POST(request: Request) {
   const formData = await request.formData();
   const file = formData.get("file");
@@ -74,7 +101,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "File is required." }, { status: 400 });
   }
 
-  if (!ALLOWED_MIME_TYPES.has(file.type)) {
+  if (!ALLOWED_MIME_TYPES.has(file.type) && !ALLOWED_VIDEO_MIME_TYPES.has(file.type)) {
     return NextResponse.json({ error: "Unsupported file type." }, { status: 400 });
   }
 
@@ -82,13 +109,41 @@ export async function POST(request: Request) {
   const uploadsDir = path.join(process.cwd(), "public", dirName);
   const baseName = sanitizeBaseName(file.name);
   const bytes = Buffer.from(await file.arrayBuffer());
+
+  await fs.mkdir(uploadsDir, { recursive: true });
+
+  if (ALLOWED_VIDEO_MIME_TYPES.has(file.type)) {
+    const extension = VIDEO_EXTENSIONS_BY_MIME_TYPE.get(file.type) ?? (path.extname(file.name).toLowerCase() || ".mp4");
+    const { fileName, filePath } = await createUniqueFilePath(uploadsDir, baseName, extension);
+    await fs.writeFile(filePath, bytes);
+
+    return NextResponse.json({ src: `/${dirName}/${fileName}` });
+  }
+
   const optimizedImage = await sharp(bytes)
     .webp({ effort: 4, quality: 80 })
     .toBuffer();
-
-  await fs.mkdir(uploadsDir, { recursive: true });
   const { fileName, filePath } = await createUniqueFilePath(uploadsDir, baseName);
   await fs.writeFile(filePath, optimizedImage);
 
   return NextResponse.json({ src: `/${dirName}/${fileName}` });
+}
+
+export async function DELETE(request: Request) {
+  const payload = await request.json().catch(() => null) as {
+    categorySlug?: unknown;
+    section?: unknown;
+    src?: unknown;
+  } | null;
+  const section = typeof payload?.section === "string" ? payload.section : null;
+  const categorySlug = typeof payload?.categorySlug === "string" ? payload.categorySlug : null;
+  const src = typeof payload?.src === "string" ? payload.src : "";
+
+  if (!src) {
+    return NextResponse.json({ error: "src is required." }, { status: 400 });
+  }
+
+  await removeUpload(src, resolveUploadDirName(section, categorySlug));
+
+  return NextResponse.json({ success: true });
 }
