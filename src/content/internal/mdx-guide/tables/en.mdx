@@ -1,0 +1,361 @@
+---
+layout: "Article"
+category: "internal"
+title: "Tables"
+description: "Markdown tables and Table component with colored headers, left-side headers, and horizontal scrolling"
+date: "2026-02-28"
+author: "QueryPie Team"
+hideOgImage: true
+---
+
+# Markdown Table
+
+You can create tables using pipes (`|`) and hyphens (`-`). Each header column requires at least three hyphens.
+
+How to write:
+
+```markdown
+| Command      | Description                          |
+| ------------ | ------------------------------------ |
+| `git status` | List all new or modified files       |
+| `git diff`   | Show file differences not yet staged |
+```
+
+Result:
+
+| Command      | Description                          |
+| ------------ | ------------------------------------ |
+| `git status` | List all new or modified files       |
+| `git diff`   | Show file differences not yet staged |
+
+---
+
+# Text Alignment
+
+Use colons (`:`) in the separator row to control text alignment. `:---` for left, `:---:` for center, `---:` for right.
+
+How to write:
+
+```markdown
+| Left-aligned | Center-aligned | Right-aligned |
+| :----------- | :------------: | ------------: |
+| Content      |    Content     |       Content |
+| Left         |     Center     |         Right |
+```
+
+Result:
+
+| Left-aligned | Center-aligned | Right-aligned |
+| :----------- | :------------: | ------------: |
+| Content      |    Content     |       Content |
+| Left         |     Center     |         Right |
+
+---
+
+# Formatting in Markdown Tables
+
+You can use inline formatting such as **bold**, *italic*, `code`, ~~strikethrough~~, and [links](https://www.querypie.com) inside table cells.
+
+How to write:
+
+```markdown
+| Feature          | Status        | Notes                                            |
+| ---------------- | ------------- | ------------------------------------------------ |
+| **Authentication** | `Active`    | Supports [SSO](https://www.querypie.com) and MFA |
+| **Authorization**  | *Beta*      | ~~Legacy~~ → Role-based access control           |
+```
+
+Result:
+
+| Feature          | Status        | Notes                                            |
+| ---------------- | ------------- | ------------------------------------------------ |
+| **Authentication** | `Active`    | Supports [SSO](https://www.querypie.com) and MFA |
+| **Authorization**  | *Beta*      | ~~Legacy~~ → Role-based access control           |
+
+---
+
+# Escaping Pipes
+
+To display a literal pipe character (`|`) inside a cell, escape it with a backslash (`\|`).
+
+How to write:
+
+```markdown
+| Syntax   | Output |
+| -------- | ------ |
+| `\|`     | \|     |
+```
+
+Result:
+
+| Syntax   | Output |
+| -------- | ------ |
+| `\|`     | \|     |
+
+---
+
+# Table Component
+
+For more advanced tables (colored headers, left-side headers, horizontal scrolling), use the `Table` JSX component instead of markdown syntax.
+
+---
+
+# Basic Table (Component)
+
+Use the `Table` component with its sub-components: `Table.Thead`, `Table.Tbody`, `Table.Tr`, `Table.Th`, and `Table.Td`.
+
+How to write:
+
+```jsx
+<Table>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th>Feature</Table.Th>
+            <Table.Th>Status</Table.Th>
+            <Table.Th>Description</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Authentication</Table.Td>
+            <Table.Td>Active</Table.Td>
+            <Table.Td>SSO and MFA support</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Authorization</Table.Td>
+            <Table.Td>Active</Table.Td>
+            <Table.Td>Role-based access control</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+```
+
+Result:
+
+<Table>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th>Feature</Table.Th>
+            <Table.Th>Status</Table.Th>
+            <Table.Th>Description</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Authentication</Table.Td>
+            <Table.Td>Active</Table.Td>
+            <Table.Td>SSO and MFA support</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Authorization</Table.Td>
+            <Table.Td>Active</Table.Td>
+            <Table.Td>Role-based access control</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+---
+
+# Colored Header Cells
+
+Use the `cellBackgroundColor` prop on `Table.Th` to apply colored backgrounds. Available colors: `gray`, `blue`, `purple`, `green`, `yellow`, `red`.
+
+How to write:
+
+```jsx
+<Table>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray">Category</Table.Th>
+            <Table.Th cellBackgroundColor="blue">Q1</Table.Th>
+            <Table.Th cellBackgroundColor="purple">Q2</Table.Th>
+            <Table.Th cellBackgroundColor="green">Q3</Table.Th>
+            <Table.Th cellBackgroundColor="yellow">Q4</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Revenue</Table.Td>
+            <Table.Td>$100K</Table.Td>
+            <Table.Td>$120K</Table.Td>
+            <Table.Td>$150K</Table.Td>
+            <Table.Td>$200K</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Users</Table.Td>
+            <Table.Td>1,000</Table.Td>
+            <Table.Td>1,500</Table.Td>
+            <Table.Td>2,000</Table.Td>
+            <Table.Td>3,000</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+```
+
+Result:
+
+<Table>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray">Category</Table.Th>
+            <Table.Th cellBackgroundColor="blue">Q1</Table.Th>
+            <Table.Th cellBackgroundColor="purple">Q2</Table.Th>
+            <Table.Th cellBackgroundColor="green">Q3</Table.Th>
+            <Table.Th cellBackgroundColor="yellow">Q4</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Revenue</Table.Td>
+            <Table.Td>$100K</Table.Td>
+            <Table.Td>$120K</Table.Td>
+            <Table.Td>$150K</Table.Td>
+            <Table.Td>$200K</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Users</Table.Td>
+            <Table.Td>1,000</Table.Td>
+            <Table.Td>1,500</Table.Td>
+            <Table.Td>2,000</Table.Td>
+            <Table.Td>3,000</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+---
+
+# Left-Side Headers
+
+To create headers on the left side, use `Table.Td` with `cellBackgroundColor` and bold text in the first column. Omit `Table.Thead` entirely.
+
+How to write:
+
+```jsx
+<Table>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="blue">**Name**</Table.Td>
+            <Table.Td>QueryPie</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="purple">**Type**</Table.Td>
+            <Table.Td>Data Governance Platform</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="green">**Status**</Table.Td>
+            <Table.Td>Active</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+```
+
+Result:
+
+<Table>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="blue">**Name**</Table.Td>
+            <Table.Td>QueryPie</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="purple">**Type**</Table.Td>
+            <Table.Td>Data Governance Platform</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="green">**Status**</Table.Td>
+            <Table.Td>Active</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+---
+
+# Horizontal Scrolling
+
+Tables with many columns automatically get horizontal scrolling. No extra props are needed -- just add enough columns and the table will scroll horizontally when the content overflows.
+
+How to write:
+
+```jsx
+<Table>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th>Name</Table.Th>
+            <Table.Th>Role</Table.Th>
+            <Table.Th>Team</Table.Th>
+            <Table.Th>Location</Table.Th>
+            <Table.Th>Status</Table.Th>
+            <Table.Th>Start Date</Table.Th>
+            <Table.Th>Email</Table.Th>
+            <Table.Th>Phone</Table.Th>
+            <Table.Th>Manager</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Alice</Table.Td>
+            <Table.Td>Engineer</Table.Td>
+            <Table.Td>Platform</Table.Td>
+            <Table.Td>Seoul</Table.Td>
+            <Table.Td>Active</Table.Td>
+            <Table.Td>2024-01</Table.Td>
+            <Table.Td>alice@example.com</Table.Td>
+            <Table.Td>010-1234</Table.Td>
+            <Table.Td>Bob</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Charlie</Table.Td>
+            <Table.Td>Designer</Table.Td>
+            <Table.Td>Product</Table.Td>
+            <Table.Td>Tokyo</Table.Td>
+            <Table.Td>Active</Table.Td>
+            <Table.Td>2024-03</Table.Td>
+            <Table.Td>charlie@example.com</Table.Td>
+            <Table.Td>010-5678</Table.Td>
+            <Table.Td>Dana</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+```
+
+Result:
+
+<Table>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th>Name</Table.Th>
+            <Table.Th>Role</Table.Th>
+            <Table.Th>Team</Table.Th>
+            <Table.Th>Location</Table.Th>
+            <Table.Th>Status</Table.Th>
+            <Table.Th>Start Date</Table.Th>
+            <Table.Th>Email</Table.Th>
+            <Table.Th>Phone</Table.Th>
+            <Table.Th>Manager</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Alice</Table.Td>
+            <Table.Td>Engineer</Table.Td>
+            <Table.Td>Platform</Table.Td>
+            <Table.Td>Seoul</Table.Td>
+            <Table.Td>Active</Table.Td>
+            <Table.Td>2024-01</Table.Td>
+            <Table.Td>alice@example.com</Table.Td>
+            <Table.Td>010-1234</Table.Td>
+            <Table.Td>Bob</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Charlie</Table.Td>
+            <Table.Td>Designer</Table.Td>
+            <Table.Td>Product</Table.Td>
+            <Table.Td>Tokyo</Table.Td>
+            <Table.Td>Active</Table.Td>
+            <Table.Td>2024-03</Table.Td>
+            <Table.Td>charlie@example.com</Table.Td>
+            <Table.Td>010-5678</Table.Td>
+            <Table.Td>Dana</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>

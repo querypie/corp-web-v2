@@ -190,6 +190,31 @@ describe("buildMdxComponents", () => {
     });
   });
 
+  describe("pre", () => {
+    it("language-mermaid 코드 블록이면 Mermaid 렌더링 fallback UI를 보여준다", () => {
+      const { pre: Pre } = getComponents() as any;
+      render(
+        <Pre>
+          <code className="language-mermaid">{"graph TD\nA-->B"}</code>
+        </Pre>,
+      );
+
+      expect(screen.getByText("Loading diagram...")).toBeInTheDocument();
+    });
+
+    it("일반 코드 블록이면 기본 pre 엘리먼트를 유지한다", () => {
+      const { pre: Pre } = getComponents() as any;
+      const { container } = render(
+        <Pre>
+          <code className="language-ts">const answer = 42;</code>
+        </Pre>,
+      );
+
+      expect(container.querySelector("pre")).toBeInTheDocument();
+      expect(screen.getByText("const answer = 42;")).toBeInTheDocument();
+    });
+  });
+
   describe("heading 컴포넌트 (TOC id 주입)", () => {
     it("h1에 텍스트 기반 id를 주입한다", () => {
       const { h1: H1 } = getComponents() as any;

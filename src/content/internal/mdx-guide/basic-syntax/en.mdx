@@ -1,0 +1,255 @@
+---
+layout: "Article"
+category: "internal"
+title: "Basic Syntax"
+description: "Headings, text styling, lists, links, blockquotes, and code blocks"
+date: "2026-02-28"
+author: "QueryPie Team"
+hideOgImage: true
+---
+
+# Headings
+
+In this system, heading levels are shifted down by one: `#` renders as an HTML `<h2>`, `##` as `<h3>`, `###` as `<h4>`, and so on. The Article layout automatically generates a table of contents from these headings.
+
+How to write:
+
+```markdown
+# Heading Level 1 (renders as h2)
+## Heading Level 2 (renders as h3)
+### Heading Level 3 (renders as h4)
+#### Heading Level 4 (renders as h5)
+```
+
+Result:
+
+# Heading Level 1 (renders as h2)
+
+## Heading Level 2 (renders as h3)
+
+### Heading Level 3 (renders as h4)
+
+#### Heading Level 4 (renders as h5)
+
+---
+
+# Text Styling
+
+You can apply bold, italic, strikethrough, and inline code styles to text.
+
+How to write:
+
+```markdown
+**Bold text**
+*Italic text*
+~~Strikethrough text~~
+`Inline code`
+```
+
+Result:
+
+**Bold text**
+
+*Italic text*
+
+~~Strikethrough text~~
+
+`Inline code`
+
+---
+
+# Ordered Lists
+
+Numbered lists start with `1.`, `2.`, `3.`, etc. Even if you use incorrect numbers, they will auto-correct to sequential order.
+
+How to write:
+
+```markdown
+1. First item
+2. Second item
+3. Third item
+1. This will render as "4" even though it says "1"
+```
+
+Result:
+
+1. First item
+2. Second item
+3. Third item
+1. This will render as "4" even though it says "1"
+
+---
+
+# Unordered Lists
+
+Bulleted lists use `-` at the start of a line. Indent by 4 spaces to create nested items.
+
+How to write:
+
+```markdown
+- First item
+- Second item
+    - Nested item
+    - Another nested item
+        - Deeply nested item
+- Third item
+```
+
+Result:
+
+- First item
+- Second item
+    - Nested item
+    - Another nested item
+        - Deeply nested item
+- Third item
+
+---
+
+# Nested Lists
+
+You can mix ordered and unordered lists by nesting them with 4-space indentation.
+
+How to write:
+
+```markdown
+1. First ordered item
+2. Second ordered item
+    - Unordered sub-item
+    - Another sub-item
+3. Third ordered item
+    1. Ordered sub-item
+    2. Another ordered sub-item
+```
+
+Result:
+
+1. First ordered item
+2. Second ordered item
+    - Unordered sub-item
+    - Another sub-item
+3. Third ordered item
+    1. Ordered sub-item
+    2. Another ordered sub-item
+
+---
+
+# Links
+
+Use `[display text](url)` to create a hyperlink.
+
+How to write:
+
+```markdown
+[QueryPie](https://www.querypie.com)
+```
+
+Result:
+
+[QueryPie](https://www.querypie.com)
+
+---
+
+# Blockquotes
+
+Use `>` followed by a space to create a blockquote. You can use other markdown syntax and JSX components inside blockquotes.
+
+How to write:
+
+```markdown
+> This is a blockquote. You can use **bold**, *italic*, and other markdown inside it.
+```
+
+Result:
+
+> This is a blockquote. You can use **bold**, *italic*, and other markdown inside it.
+
+---
+
+# Inline Code
+
+Wrap text in backticks to display it as inline code.
+
+How to write:
+
+```markdown
+Use the `useState` hook to manage state in React.
+```
+
+Result:
+
+Use the `useState` hook to manage state in React.
+
+---
+
+# Code Blocks
+
+Use triple backticks with a language identifier to create a syntax-highlighted code block. Supported languages include `javascript`, `python`, `sql`, `yaml`, and more.
+
+How to write:
+
+````markdown
+```javascript
+const [value, setValue] = useState(initialValue);
+```
+````
+
+Result:
+
+```javascript
+const [value, setValue] = useState(initialValue);
+```
+
+---
+
+# Horizontal Rules
+
+Use three hyphens (`---`) on their own line to create a horizontal rule.
+
+How to write:
+
+```markdown
+Content above the line.
+
+---
+
+Content below the line.
+```
+
+Result:
+
+Content above the line.
+
+---
+
+Content below the line.
+
+---
+
+# Line Breaks
+
+A blank line between text creates a new paragraph. To create a line break within a paragraph without starting a new one, add two spaces at the end of a line or use `<br />`.
+
+How to write:
+
+```markdown
+First paragraph.
+
+Second paragraph (blank line above creates a new paragraph).
+
+Line one with two trailing spaces
+Line two in the same paragraph.
+
+Line one.<br />Line two using a br tag.
+```
+
+Result:
+
+First paragraph.
+
+Second paragraph (blank line above creates a new paragraph).
+
+Line one with two trailing spaces
+Line two in the same paragraph.
+
+Line one.<br />Line two using a br tag.

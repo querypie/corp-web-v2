@@ -1,0 +1,197 @@
+---
+layout: "Article"
+category: "internal"
+title: "Inline Components"
+description: "State, InlineLink, Badge, DarkBadge, YellowBadge, and SuperScript components"
+date: "2026-02-28"
+author: "QueryPie Team"
+hideOgImage: true
+---
+
+# State
+
+`State` renders a colored inline label. Default color is gray.
+
+## Basic State
+
+How to write:
+
+```jsx
+<State>Default</State>
+```
+
+Result:
+
+<State>Default</State>
+
+## Color Variants
+
+Use the `color` prop to set the color. Available colors: `gray` (default), `blue`, `purple`, `green`, `yellow`, `red`.
+
+How to write:
+
+```jsx
+<State color="blue">Blue</State>
+<State color="purple">Purple</State>
+<State color="green">Green</State>
+<State color="yellow">Yellow</State>
+<State color="red">Red</State>
+```
+
+Result:
+
+<State color="blue">Blue</State> <State color="purple">Purple</State> <State color="green">Green</State> <State color="yellow">Yellow</State> <State color="red">Red</State>
+
+## Named State Components
+
+You can also use named components instead of the `color` prop.
+
+How to write:
+
+```jsx
+<BlueState>Blue</BlueState>
+<PurpleState>Purple</PurpleState>
+<GreenState>Green</GreenState>
+<YellowState>Yellow</YellowState>
+<RedState>Red</RedState>
+```
+
+Result:
+
+<BlueState>Blue</BlueState> <PurpleState>Purple</PurpleState> <GreenState>Green</GreenState> <YellowState>Yellow</YellowState> <RedState>Red</RedState>
+
+## State in Context
+
+States work naturally inline with text.
+
+How to write:
+
+```markdown
+The server status is <GreenState>Running</GreenState> and the deployment is <YellowState>Pending</YellowState>.
+```
+
+Result:
+
+The server status is <GreenState>Running</GreenState> and the deployment is <YellowState>Pending</YellowState>.
+
+---
+
+# InlineLink
+
+`InlineLink` renders a URL as a clickable link, displaying the URL itself as the link text.
+
+How to write:
+
+```jsx
+Visit <InlineLink href="https://www.querypie.com" /> for more information.
+```
+
+Result:
+
+Visit <InlineLink href="https://www.querypie.com" /> for more information.
+
+This is different from a standard markdown link `[text](url)` which lets you set custom display text. `InlineLink` always displays the URL.
+
+How to write:
+
+```jsx
+Our documentation is at <InlineLink href="https://docs.querypie.com" />.
+```
+
+Result:
+
+Our documentation is at <InlineLink href="https://docs.querypie.com" />.
+
+---
+
+# Badge
+
+`Badge` renders a styled inline badge.
+
+## Basic Badge
+
+How to write:
+
+```jsx
+<Badge>Default Badge</Badge>
+```
+
+Result:
+
+<Badge>Default Badge</Badge>
+
+## Reversed Badge
+
+Use the `reverse` prop to invert the badge colors.
+
+How to write:
+
+```jsx
+<Badge reverse>Reversed Badge</Badge>
+```
+
+Result:
+
+<Badge reverse>Reversed Badge</Badge>
+
+---
+
+# DarkBadge
+
+`DarkBadge` renders a dark-themed badge.
+
+How to write:
+
+```jsx
+<DarkBadge>Dark Badge</DarkBadge>
+```
+
+Result:
+
+<DarkBadge>Dark Badge</DarkBadge>
+
+---
+
+# YellowBadge
+
+`YellowBadge` renders a yellow-themed badge.
+
+How to write:
+
+```jsx
+<YellowBadge>Yellow Badge</YellowBadge>
+```
+
+Result:
+
+<YellowBadge>Yellow Badge</YellowBadge>
+
+## All Badge Types
+
+<Badge>Badge</Badge> <Badge reverse>Badge (reverse)</Badge> <DarkBadge>DarkBadge</DarkBadge> <YellowBadge>YellowBadge</YellowBadge>
+
+---
+
+# SuperScript
+
+`SuperScript` renders text as a superscript annotation.
+
+How to write:
+
+```jsx
+QueryPie<SuperScript>1</SuperScript> is a data governance platform.
+```
+
+Result:
+
+QueryPie<SuperScript>1</SuperScript> is a data governance platform.
+
+How to write:
+
+```jsx
+This feature requires Enterprise plan<SuperScript>*</SuperScript>.
+```
+
+Result:
+
+This feature requires Enterprise plan<SuperScript>*</SuperScript>.
