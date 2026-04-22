@@ -20,12 +20,12 @@
 | `/eula` | `/[locale]/eula/` | ✅ |
 | `/features/demo` | `/[locale]/features/demo/` | ✅ |
 | `/features/documentation` | `/[locale]/features/documentation/` | ✅ |
-| `/features/documentation/acp-introduction-download` | `/[locale]/features/documentation/[slug]` | ❓ 콘텐츠 항목 없음 (아래 참고) |
+| `/features/documentation/acp-introduction-download` | `/[locale]/features/documentation/[slug]` | ❓ CMS 콘텐츠 항목 확인 필요 |
 | `/features/documentation/aip-introduction-download` | `src/content/documentation/introduction/cnt_000001` | ✅ |
 | `/features/documentation/glossary-items` | `src/content/documentation/glossary/cnt_000170` | ✅ |
 | `/features/documentation/querypie-install-guide` | `src/content/documentation/manuals/cnt_000001` | ✅ |
 
-> **주의**: `acp-introduction-download`에 해당하는 CMS 콘텐츠 항목이 없음. 라우팅이 `[slug]` 동적 경로를 통해 처리되는지, 혹은 별도 콘텐츠 항목이 필요한지 확인 필요.
+> **주의**: `acp-introduction-download`는 공개 sitemap에는 존재하지만, `src/content/documentation/introduction/`에서 대응 CMS 콘텐츠 항목을 찾지 못했습니다. 라우팅이 `[slug]` 동적 경로를 통해 처리되는지, 혹은 별도 콘텐츠 항목이 필요한지 확인 필요.
 
 ---
 
@@ -34,8 +34,8 @@
 > 구 사이트에서 동일 슬러그가 여러 번 등장: `review-audit-logs` (#7, #15, #25), `grant-permissions-users` (#13, #23)  
 > v2에서는 각각 1개 항목으로 통합됨. 의도적 통합인지 확인 필요.
 
-| # | 구 슬러그 | v2 콘텐츠 ID | 상태 |
-|---|-----------|-------------|------|
+| # | 구 슬러그 | 상태 |
+|---|-----------|------|
 | 1 | `integrating-querypie-with-redash` | ✅ |
 | 2 | `integrating-querypie-with-metabase` | ✅ |
 | 3 | `integrating-querypie-with-tableau` | ✅ |
@@ -189,56 +189,51 @@ v2 추가 항목: `test-영어` (테스트 항목, 삭제 필요)
 
 ---
 
-## 7. Documentation — White Paper (26개)
+## 7. Documentation — White Paper (30개)
 
-> **사이트맵 주의**: 조회 시 #3~#9 항목이 잘려서 로드되지 않음. 해당 항목의 슬러그는 기존 사이트에서 직접 확인 필요.
-> 또한 #24, #25가 동일 슬러그(`ai-tranformation-japan`)로 등록되어 있음.
+> **사이트맵 기준**: 현재 공개 sitemap에는 30개 URL이 확인됩니다.
+> #24와 #25는 동일 슬러그(`ai-tranformation-japan`)를 공유하며, 각각 `/download` 경로도 존재합니다.
+> #23은 public URL slug와 CMS 저장 ID가 다릅니다.
 
 | # | 구 슬러그 | v2 슬러그 | 상태 |
 |---|-----------|-----------|------|
-| 1 | `personal-data-identification-analysis-ai` | 동일 | ✅ |
-| 2 | `shell-native-command-control-ssh-proxy-architecture` | 동일 | ✅ |
-| 3 | ❓ 확인 필요 | — | ❓ |
-| 4 | ❓ 확인 필요 | — | ❓ |
-| 5 | ❓ 확인 필요 | — | ❓ |
-| 6 | ❓ 확인 필요 | — | ❓ |
-| 7 | ❓ 확인 필요 | — | ❓ |
-| 8 | ❓ 확인 필요 | — | ❓ |
-| 9 | ❓ 확인 필요 | — | ❓ |
-| 10 | `querypie-devsecops-pipeline` | 동일 | ✅ |
-| 11 | `efficient-audit-log-management` | 동일 | ✅ |
-| 12 | `querypie-grpc-dast-security` | 동일 | ✅ |
-| 13 | `seamless-ssh-connection` | 동일 | ✅ |
-| 14 | `reverse-tunneling-jumphost-solution` | 동일 | ✅ |
-| 15 | `redefining-pam-for-the-mcp-era` | 동일 | ✅ |
-| 16 | `next-step-mcp-pam` | 동일 | ✅ |
-| 17 | `ai-autonomous-access-control` | 동일 | ✅ |
-| 18 | `uncovering-mcp-security` | 동일 | ✅ |
-| 19 | `google-agentspace-vs-querypie-mcp-pam` | 동일 | ✅ |
-| 20 | `beyond-mcp-to-mcps` | 동일 | ✅ |
-| 21 | `welcome-to-the-age-of-agentsecops` | 동일 | ✅ |
-| 22 | `your-architect-vs-ai-agents` | 동일 | ✅ |
-| 23 | `rag-security-querypie-builds-the-bridge` | `rag-security-querypie-builds-the-bridge--23` | ⚠️ 슬러그 다름 |
-| 24 | `ai-tranformation-japan` (+ `/download`) | `ai-tranformation-japan` | ✅ |
-| 25 | `ai-tranformation-japan` (+ `/download`, #24와 동일 슬러그) | — | ❓ 구 사이트 중복 슬러그 |
-| 26 | `llm-evaluation-agentic-rag-part1` | 동일 | ✅ |
+| 1 | `personal-data-identification-analysis-ai` | `1/personal-data-identification-analysis-ai` | ✅ |
+| 2 | `shell-native-command-control-ssh-proxy-architecture` | `2/shell-native-command-control-ssh-proxy-architecture` | ✅ |
+| 3 | `parsing-sql-query-structural-interface` | `3/parsing-sql-query-structural-interface` | ✅ |
+| 4 | `transaction-free-change-data-capture-system` | `4/transaction-free-change-data-capture-system` | ✅ |
+| 5 | `preventing-command-bypass` | `5/preventing-command-bypass` | ✅ |
+| 6 | `kubernetes-access-control` | `6/kubernetes-access-control` | ✅ |
+| 7 | `pac-policy-as-code` | `7/pac-policy-as-code` | ✅ |
+| 8 | `secure-login-token-management` | `8/secure-login-token-management` | ✅ |
+| 9 | `penetration-testing-standard` | `9/penetration-testing-standard` | ✅ |
+| 10 | `querypie-devsecops-pipeline` | `10/querypie-devsecops-pipeline` | ✅ |
+| 11 | `efficient-audit-log-management` | `11/efficient-audit-log-management` | ✅ |
+| 12 | `querypie-grpc-dast-security` | `12/querypie-grpc-dast-security` | ✅ |
+| 13 | `seamless-ssh-connection` | `13/seamless-ssh-connection` | ✅ |
+| 14 | `reverse-tunneling-jumphost-solution` | `14/reverse-tunneling-jumphost-solution` | ✅ |
+| 15 | `redefining-pam-for-the-mcp-era` | `15/redefining-pam-for-the-mcp-era` | ✅ |
+| 16 | `next-step-mcp-pam` | `16/next-step-mcp-pam` | ✅ |
+| 17 | `ai-autonomous-access-control` | `17/ai-autonomous-access-control` | ✅ |
+| 18 | `uncovering-mcp-security` | `18/uncovering-mcp-security` | ✅ |
+| 19 | `google-agentspace-vs-querypie-mcp-pam` | `19/google-agentspace-vs-querypie-mcp-pam` | ✅ |
+| 20 | `beyond-mcp-to-mcps` | `20/beyond-mcp-to-mcps` | ✅ |
+| 21 | `welcome-to-the-age-of-agentsecops` | `21/welcome-to-the-age-of-agentsecops` | ✅ |
+| 22 | `your-architect-vs-ai-agents` | `22/your-architect-vs-ai-agents` | ✅ |
+| 23 | `rag-security-querypie-builds-the-bridge` | `23/rag-security-querypie-builds-the-bridge` | ⚠️ CMS 저장 ID는 `rag-security-querypie-builds-the-bridge--23` |
+| 24 | `ai-tranformation-japan` (+ `/download`) | `24/ai-tranformation-japan` | ✅ |
+| 25 | `ai-tranformation-japan` (+ `/download`, #24와 동일 슬러그) | `25/ai-tranformation-japan` | ✅ |
+| 26 | `llm-evaluation-agentic-rag-part1` | `26/llm-evaluation-agentic-rag-part1` | ✅ |
+| 27 | `llm-evaluation-agentic-rag-part2` | `27/llm-evaluation-agentic-rag-part2` | ✅ |
+| 28 | `ai-agent-guardrails-governance-2026` | `28/ai-agent-guardrails-governance-2026` | ✅ |
+| 29 | `ai-agent-guardrails-governance-2026-implementation` | `29/ai-agent-guardrails-governance-2026-implementation` | ✅ |
+| 30 | `saas-end-or-evolution` (+ `/download`) | `30/saas-end-or-evolution` | ✅ |
 
-**v2 추가 항목** (구 사이트맵에 없는 신규 콘텐츠 또는 #3~9):
+**v2 추가 항목** (사이트맵에 없는 항목):
 
 | v2 슬러그 | 비고 |
 |-----------|------|
-| `saas-end-or-evolution` | 신규 또는 #3~9 중 하나 |
-| `ai-agent-guardrails-governance-2026` | 신규 또는 #3~9 중 하나 |
-| `ai-agent-guardrails-governance-2026-implementation` | 신규 또는 #3~9 중 하나 |
-| `llm-evaluation-agentic-rag-part2` | 신규 또는 #3~9 중 하나 |
-| `kubernetes-access-control` | 신규 또는 #3~9 중 하나 |
-| `pac-policy-as-code` | 신규 또는 #3~9 중 하나 |
-| `parsing-sql-query-structural-interface` | 신규 또는 #3~9 중 하나 |
-| `penetration-testing-standard` | 신규 또는 #3~9 중 하나 |
-| `preventing-command-bypass` | 신규 또는 #3~9 중 하나 |
-| `secure-login-token-management` | 신규 또는 #3~9 중 하나 |
-| `transaction-free-change-data-capture-system` | 신규 또는 #3~9 중 하나 |
-| `saas-end-or-evolution-2` (hidden) | 신규 또는 #3~9 중 하나 |
+| `test-영어` | 테스트용 블로그 항목, 정리 필요 |
+| `saas-end-or-evolution-2` (hidden) | 동일 제목의 hidden 중복 항목으로 보임 |
 
 ---
 
@@ -249,30 +244,10 @@ v2 추가 항목: `test-영어` (테스트 항목, 삭제 필요)
 | 항목 | 내용 |
 |------|------|
 | ❌ Webinar #27 | `air-company-ai-agent-security-webinar` — v2에 없음 |
-| ❓ White Paper #3~9 | 사이트맵 조회 시 잘려서 슬러그 미확인 |
-| ❓ `acp-introduction-download` | CMS 콘텐츠 항목 없음, 라우팅 처리 방식 확인 필요 |
+| ❓ `acp-introduction-download` | 공개 sitemap에는 존재하지만, repo의 CMS 콘텐츠 항목은 아직 확인되지 않음 |
 
 ### 슬러그 불일치 (URL 리다이렉트 필요 여부 검토)
 
 | 구 슬러그 | v2 슬러그 |
 |-----------|-----------|
-| `rag-security-querypie-builds-the-bridge` | `rag-security-querypie-builds-the-bridge--23` |
-
-### 정리 필요 항목
-
-| 항목 | 내용 |
-|------|------|
-| `test-영어` (blog) | 테스트 항목, 삭제 필요 |
-| `google-oauth-demo-2` (aip-features, hidden) | 용도 확인 후 삭제 또는 유지 |
-| `saas-end-or-evolution-2` (white-paper, hidden) | 용도 확인 후 삭제 또는 유지 |
-
-### White Paper #3~9 수동 확인 방법
-
-```
-https://www.querypie.com/features/documentation/white-paper/3/{slug}
-https://www.querypie.com/features/documentation/white-paper/4/{slug}
-...
-https://www.querypie.com/features/documentation/white-paper/9/{slug}
-```
-
-브라우저에서 각 URL 접근 후 슬러그 확인 → v2 white-paper 목록과 대조.
+| `rag-security-querypie-builds-the-bridge` | `23/rag-security-querypie-builds-the-bridge` |
