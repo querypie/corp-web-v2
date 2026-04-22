@@ -1,0 +1,89 @@
+---
+layout: "Article"
+category: "blog"
+title: "What businesses can learn from Sentiment Analysis"
+description: "Learn how sentiment analysis can boost your business by understanding customer emotions, refining strategies, and enhancing satisfaction. Explore its power today!"
+date: "2022-04-26"
+ogImage: "public/blog/b-thumb-13.png"
+keywords: ["QueryPie", "data breaches", "small breaches", "data leak risks", "risk mitigation", "internal security"]
+relatedPosts:
+  - "/en/blog/9"
+  - "/en/blog/7"
+  - "/en/blog/4"
+---
+
+Let's say a woman is walking on the street, coming back from work, thinking about a client deal that fell through at the last moment; suddenly, a kid comes up and gives her a bouquet. The woman smiles and says, "That's just what I needed today!". Imagine a scenario where the same woman is coming back from work, thinking about her unsuccessful client deal, suddenly she hits a pole and hurts herself. She shouts, "That's just what I needed today!". In both scenarios, she says the same sentence but the sentiment changes with the context - the additional information in the second case signals that the tone is sarcastic. Studying these changes in sentimental contexts in text parsed from social media reviews and comments to determine business and brand insights. The ability to detect users' hidden, underlying thoughts and emotions is a potential gold mine for consumer brands. Let's dive deeper into sentiment analysis to see how it works and how it is helping businesses
+
+# What is Sentiment Analysis?
+
+We're living in the era of Web 2.0, which works on the bedrock of data. Each tweet, comment, reaction, or post is a dataset. Sentiment analysis [1] - a subfield of text mining, analyzes texts with natural language processing algorithms and machine learning to determine social sentiments and emotions - whether positive, negative, or neutral. It allows businesses to monitor their brand or business strategy proactively, especially in case of negative sentiment.
+
+Sentiment analysis considers the many different ways consumers interact with a brand. Either by polarity (positive, negative, neutral), emotions (happy, sad, angry, etc.), intentions (interested, not interested), and aspect-based analysis (an aspect-based classifier is added to determine the reviews about a specific part of a product). Some of the common sentiment analysis questions can be:
+
+- Is this review positive or negative?
+- In this email response, is the customer satisfied or dissatisfied?
+- How are people responding to this ad campaign release based on the tweets and comments?
+- How have a particular community's attitudes about the mayor changed since the election?
+
+However, humans are complex beings, and we express our opinions in complex ways. Even words that generally convey anger, such as 'bad' or 'kill' (example: your app is so bad, it's killing my battery), can also convey positive sentiments (example: the app's concept is badass, you guys are killing it). These examples pose a challenge when it comes to detecting user opinions accurately. Sometimes, even humans are at loggerheads about the tonality of a particular expression; however, its technology is developing rapidly. Let's see the machine learning models that are used in sentiment analysis.
+
+# The tech behind Sentiment Analysis
+## Rule-based Analysis:
+The rule-based analysis uses human-created rules to identify subjectivity or polarity. The rules can range from "Categorize the opinions based on positive vs. negative words such as ‘good,’ ‘best,’ ‘beautiful’ vs. ‘bad,’ ‘worst,’ ‘ugly,’ etc. However, this method often fails to consider the complex connotations humans use.
+
+## Automatic Analysis:
+The automatic analysis relies on machine learning algorithms to classify sentiments. Below is a breakdown of MonkeyLearn's sentiment analysis model [2].
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/blog/blog13-image-1.png"
+        alt="QueryPie x Figma"
+        caption="Which One is the Final Version? Let’s Leave it to Chance."
+    />
+</Box>
+
+Initially, the model is trained to associate a particular text to the corresponding output. Then, the input text is transformed into a feature vector based on the bag-of-words [3] or bag-of-n-grams [4] approach. The feature vector pairs are then fed into the ML algorithm to generate a model. Once the data is fed into the system, it is classified based on various algorithms such as Naïve Bayes [5], Linear Regression [6], Support Vector Machines [7], J48 [8], BFTree [9], OneR [10], or RandomForest [11] classifier. (There are other advanced models [12] that can be used.)
+
+# Sentiment Analysis Use Cases
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/blog/blog13-image-2.png"
+        alt="QueryPie x Figma"
+        caption="Which One is the Final Version? Let’s Leave it to Chance."
+    />
+</Box>
+## Social Media and Brand Sentiment Analysis
+Sentiment analysis helps consumer brands track brand perception, find patterns and trends, monitor influencers to help them gain insights based on sentiments from different platforms, manage, and anticipate perception. KFC used sentiment analysis to change its marketing strategy and include pop-culture references and memes to improve sales.
+
+## Competitor Analysis
+Brands gather information on their competitors through news articles, influencer strategy, user-generated content, and general perception to obtain real-time results and fill gaps in their business intelligence. Apple used competitor analysis to identify customer pain points such as design and privacy issues and improve their existing product lines.
+
+## Product Analysis
+Companies use sentiment analysis in product analysis to shape their minimum viable product by following brand keywords, customer needs, and segmented audience feedback to improve how the audience perceives the brand. Google Chrome uses sentiment analysis to gain insights about specific aspects of the product (UI, security, extensions, themes) and recommendations.
+
+## Voice of Customer Analysis
+Sentiment analysis captures the voice of the customer by exploring targeted audience sections, their wants, and expectations, along with direct and indirect customer feedback. TripAdvisor uses an aspect-based approach to extract valuable observations regarding user needs and what they can do to improve their services.
+
+## Customer Support Feedback Analysis
+Customer support feedback analysis is obtained by understanding the general reaction to the service regarding its response time, effectiveness, or quality of interaction. This helps brands manage their workflow, prioritize tickets, and handle queries.
+
+# Final Thoughts
+While sentiment analysis is still growing, researchers have already started looking at more advanced forms of sentiment analysis in Intent analysis and Contextual semantic search (CSS). The intent analysis also analyzes the audience's intent along with the sentiment, while CSS focuses on the contextual meaning of the text and not just the specific keyword. As tech advances, businesses must also ensure that the usage is ethical and not indulge in nefarious activities [13]. We can continue to marvel at how our sentiments and intentions can shape brand strategies.
+
+# References
+
+1. [Optimization of sentiment analysis using machine learning classifiers](https://bit.ly/3ooL5l1)
+2. [Sentiment Analysis: A Definitive Guide](https://bit.ly/3Hxfi91)
+3. [A Gentle Introduction to the Bag-of-Words Model](https://bit.ly/3Gwum5j)
+4. [Bag-of-n-grams](https://bit.ly/3onTBRp)
+5. [Naive Bayes Classifiers](https://bit.ly/3oKCDgj)
+6. [ML | Linear Regression](https://bit.ly/3GuZMJo)
+7. [Support Vector Machine — Introduction to Machine Learning Algorithms](https://bit.ly/3Gt4zuO)
+8. [J48 Classification (C4.5 Algorithm) in a Nutshell](https://bit.ly/3AZ2S7e)
+9. [Class BFTree](https://bit.ly/3B0NoQf)
+10. [OneR](https://bit.ly/3gqyCsJ)
+11. [Understanding Random Forest](https://bit.ly/32Vl6Km)
+12. [Using machine learning for sentiment analysis: a deep dive](https://bit.ly/3Gv02Im)
+13. [Facebook reveals news feed experiment to control emotions](https://bit.ly/3opJbjZ)
