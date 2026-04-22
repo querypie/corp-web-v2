@@ -1,0 +1,466 @@
+---
+layout: "Article"
+category: "internal"
+title: "Mermaid Diagrams"
+description: "Flowcharts, sequence diagrams, class diagrams, ER diagrams, state diagrams, pie charts, and Gantt charts"
+date: "2026-03-03"
+author: "QueryPie Team"
+hideOgImage: true
+---
+
+# Overview
+
+[Mermaid](https://mermaid.js.org/) is a JavaScript-based diagramming tool that renders diagrams from text definitions. Write diagrams using a simple syntax inside a fenced code block with the `mermaid` language identifier.
+
+How to write:
+
+````markdown
+```mermaid
+graph LR
+    A --> B
+```
+````
+
+---
+
+# Flowchart
+
+Flowcharts describe processes using nodes and directional edges. Use `graph TD` for top-down or `graph LR` for left-right direction. Nodes can have different shapes: `[rectangle]`, `(rounded)`, `{diamond}`, `([stadium])`, `[[subroutine]]`.
+
+How to write:
+
+````markdown
+```mermaid
+graph TD
+    Start([Start]) --> InputData[Receive User Input]
+    InputData --> Validate{Is Input Valid?}
+    Validate -->|Yes| Process[Process Request]
+    Validate -->|No| Error[Return Error Response]
+    Error --> InputData
+    Process --> Cache{Cache Exists?}
+    Cache -->|Yes| ReturnCache[Return Cached Data]
+    Cache -->|No| Query[Query Database]
+    Query --> UpdateCache[Update Cache]
+    UpdateCache --> ReturnResult[Return Result]
+    ReturnCache --> End([End])
+    ReturnResult --> End
+```
+````
+
+Result:
+
+```mermaid
+graph TD
+    Start([Start]) --> InputData[Receive User Input]
+    InputData --> Validate{Is Input Valid?}
+    Validate -->|Yes| Process[Process Request]
+    Validate -->|No| Error[Return Error Response]
+    Error --> InputData
+    Process --> Cache{Cache Exists?}
+    Cache -->|Yes| ReturnCache[Return Cached Data]
+    Cache -->|No| Query[Query Database]
+    Query --> UpdateCache[Update Cache]
+    UpdateCache --> ReturnResult[Return Result]
+    ReturnCache --> End([End])
+    ReturnResult --> End
+```
+
+---
+
+# Sequence Diagram
+
+Sequence diagrams show interactions between participants over time. Use arrows (`->>`, `-->>`) for synchronous and dashed messages, and `activate`/`deactivate` to show lifelines.
+
+How to write:
+
+````markdown
+```mermaid
+sequenceDiagram
+    actor User
+    participant App as Web App
+    participant Auth as Auth Service
+    participant DB as Database
+
+    User->>App: Enter credentials
+    App->>Auth: POST /login
+    activate Auth
+    Auth->>DB: Verify credentials
+    activate DB
+    DB-->>Auth: User record
+    deactivate DB
+    alt Valid credentials
+        Auth-->>App: JWT token
+        App-->>User: Login successful
+    else Invalid credentials
+        Auth-->>App: 401 Unauthorized
+        App-->>User: Show error message
+    end
+    deactivate Auth
+
+    User->>App: Request protected resource
+    App->>Auth: Validate JWT
+    Auth-->>App: Token valid
+    App-->>User: Return resource
+```
+````
+
+Result:
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant App as Web App
+    participant Auth as Auth Service
+    participant DB as Database
+
+    User->>App: Enter credentials
+    App->>Auth: POST /login
+    activate Auth
+    Auth->>DB: Verify credentials
+    activate DB
+    DB-->>Auth: User record
+    deactivate DB
+    alt Valid credentials
+        Auth-->>App: JWT token
+        App-->>User: Login successful
+    else Invalid credentials
+        Auth-->>App: 401 Unauthorized
+        App-->>User: Show error message
+    end
+    deactivate Auth
+
+    User->>App: Request protected resource
+    App->>Auth: Validate JWT
+    Auth-->>App: Token valid
+    App-->>User: Return resource
+```
+
+---
+
+# Class Diagram
+
+Class diagrams represent the structure of a system by showing classes, their attributes, methods, and relationships. Use `<|--` for inheritance, `*--` for composition, `o--` for aggregation, and `-->` for association.
+
+How to write:
+
+````markdown
+```mermaid
+classDiagram
+    class BasePolicy {
+        <<abstract>>
+        +String id
+        +String name
+        +Boolean enabled
+        +evaluate(context) Boolean
+    }
+    class AccessPolicy {
+        +String[] allowedRoles
+        +TimeRange schedule
+        +evaluate(context) Boolean
+    }
+    class DataMaskingPolicy {
+        +String[] targetColumns
+        +MaskType maskType
+        +apply(data) MaskedData
+    }
+    class AuditPolicy {
+        +LogLevel level
+        +String[] events
+        +record(event) void
+    }
+    class PolicyEngine {
+        +Policy[] policies
+        +enforce(request) Decision
+        +audit(request, decision) void
+    }
+
+    BasePolicy <|-- AccessPolicy
+    BasePolicy <|-- DataMaskingPolicy
+    BasePolicy <|-- AuditPolicy
+    PolicyEngine o-- BasePolicy : manages
+```
+````
+
+Result:
+
+```mermaid
+classDiagram
+    class BasePolicy {
+        <<abstract>>
+        +String id
+        +String name
+        +Boolean enabled
+        +evaluate(context) Boolean
+    }
+    class AccessPolicy {
+        +String[] allowedRoles
+        +TimeRange schedule
+        +evaluate(context) Boolean
+    }
+    class DataMaskingPolicy {
+        +String[] targetColumns
+        +MaskType maskType
+        +apply(data) MaskedData
+    }
+    class AuditPolicy {
+        +LogLevel level
+        +String[] events
+        +record(event) void
+    }
+    class PolicyEngine {
+        +Policy[] policies
+        +enforce(request) Decision
+        +audit(request, decision) void
+    }
+
+    BasePolicy <|-- AccessPolicy
+    BasePolicy <|-- DataMaskingPolicy
+    BasePolicy <|-- AuditPolicy
+    PolicyEngine o-- BasePolicy : manages
+```
+
+---
+
+# Entity Relationship Diagram
+
+ER diagrams define database schemas and the relationships between entities. Cardinality is expressed using `||` (exactly one), `o|` (zero or one), `}|` (one or more), and `}o` (zero or more).
+
+How to write:
+
+````markdown
+```mermaid
+erDiagram
+    USER ||--o{ CONNECTION : creates
+    USER {
+        int id PK
+        string email
+        string name
+        string role
+    }
+    CONNECTION ||--|{ ACCESS_RULE : "governed by"
+    CONNECTION {
+        int id PK
+        int user_id FK
+        string db_type
+        string host
+        int port
+    }
+    ACCESS_RULE }o--|| POLICY : references
+    ACCESS_RULE {
+        int id PK
+        int connection_id FK
+        int policy_id FK
+        string permission
+    }
+    POLICY ||--o{ AUDIT_LOG : generates
+    POLICY {
+        int id PK
+        string name
+        string type
+        boolean enabled
+    }
+    AUDIT_LOG {
+        int id PK
+        int policy_id FK
+        timestamp created_at
+        string action
+        string result
+    }
+```
+````
+
+Result:
+
+```mermaid
+erDiagram
+    USER ||--o{ CONNECTION : creates
+    USER {
+        int id PK
+        string email
+        string name
+        string role
+    }
+    CONNECTION ||--|{ ACCESS_RULE : "governed by"
+    CONNECTION {
+        int id PK
+        int user_id FK
+        string db_type
+        string host
+        int port
+    }
+    ACCESS_RULE }o--|| POLICY : references
+    ACCESS_RULE {
+        int id PK
+        int connection_id FK
+        int policy_id FK
+        string permission
+    }
+    POLICY ||--o{ AUDIT_LOG : generates
+    POLICY {
+        int id PK
+        string name
+        string type
+        boolean enabled
+    }
+    AUDIT_LOG {
+        int id PK
+        int policy_id FK
+        timestamp created_at
+        string action
+        string result
+    }
+```
+
+---
+
+# State Diagram
+
+State diagrams model the states of a system and transitions between them. Use `[*]` for start/end states and `-->` for transitions with optional labels.
+
+How to write:
+
+````markdown
+```mermaid
+stateDiagram-v2
+    [*] --> Pending: Query submitted
+
+    Pending --> Reviewing: Assigned to reviewer
+    Reviewing --> Approved: Reviewer approves
+    Reviewing --> Rejected: Reviewer rejects
+    Reviewing --> Pending: Request changes
+
+    Approved --> Executing: Auto-execute
+    Rejected --> [*]
+
+    state Executing {
+        [*] --> Running
+        Running --> Success: Completed
+        Running --> Failed: Error occurred
+        Success --> [*]
+        Failed --> [*]
+    }
+
+    Executing --> Logging: Record result
+    Logging --> [*]
+```
+````
+
+Result:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Pending: Query submitted
+
+    Pending --> Reviewing: Assigned to reviewer
+    Reviewing --> Approved: Reviewer approves
+    Reviewing --> Rejected: Reviewer rejects
+    Reviewing --> Pending: Request changes
+
+    Approved --> Executing: Auto-execute
+    Rejected --> [*]
+
+    state Executing {
+        [*] --> Running
+        Running --> Success: Completed
+        Running --> Failed: Error occurred
+        Success --> [*]
+        Failed --> [*]
+    }
+
+    Executing --> Logging: Record result
+    Logging --> [*]
+```
+
+---
+
+# Pie Chart
+
+Pie charts display proportional data as slices of a circle. Use the `pie` keyword followed by a title and `"label" : value` entries.
+
+How to write:
+
+````markdown
+```mermaid
+pie title Database Connections by Type
+    "PostgreSQL" : 42
+    "MySQL" : 28
+    "MongoDB" : 15
+    "Redis" : 10
+    "Oracle" : 5
+```
+````
+
+Result:
+
+```mermaid
+pie title Database Connections by Type
+    "PostgreSQL" : 42
+    "MySQL" : 28
+    "MongoDB" : 15
+    "Redis" : 10
+    "Oracle" : 5
+```
+
+---
+
+# Gantt Chart
+
+Gantt charts visualize project schedules. Define sections, tasks, durations, and dependencies. Tasks can be marked as `done`, `active`, or `crit` (critical).
+
+How to write:
+
+````markdown
+```mermaid
+gantt
+    title Feature Release Timeline
+    dateFormat YYYY-MM-DD
+    axisFormat %m/%d
+
+    section Design
+        Requirements gathering  :done,    req, 2026-03-01, 5d
+        UI/UX design            :done,    design, after req, 4d
+        Design review           :done,    review, after design, 2d
+
+    section Development
+        Backend API             :active,  api, after review, 8d
+        Frontend integration    :active,  fe, after review, 10d
+        Mermaid component       :crit,    mermaid, after api, 5d
+
+    section Testing
+        Unit tests              :         test1, after mermaid, 3d
+        Integration tests       :         test2, after fe, 4d
+        UAT                     :         uat, after test2, 3d
+
+    section Release
+        Staging deploy          :         staging, after uat, 1d
+        Production deploy       :crit,    prod, after staging, 1d
+```
+````
+
+Result:
+
+```mermaid
+gantt
+    title Feature Release Timeline
+    dateFormat YYYY-MM-DD
+    axisFormat %m/%d
+
+    section Design
+        Requirements gathering  :done,    req, 2026-03-01, 5d
+        UI/UX design            :done,    design, after req, 4d
+        Design review           :done,    review, after design, 2d
+
+    section Development
+        Backend API             :active,  api, after review, 8d
+        Frontend integration    :active,  fe, after review, 10d
+        Mermaid component       :crit,    mermaid, after api, 5d
+
+    section Testing
+        Unit tests              :         test1, after mermaid, 3d
+        Integration tests       :         test2, after fe, 4d
+        UAT                     :         uat, after test2, 3d
+
+    section Release
+        Staging deploy          :         staging, after uat, 1d
+        Production deploy       :crit,    prod, after staging, 1d
+```
