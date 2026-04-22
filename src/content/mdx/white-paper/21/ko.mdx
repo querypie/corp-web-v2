@@ -1,0 +1,1049 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "코드는 멈췄고, 에이전트가 움직인다 – AgentSecOps의 시대로"
+description: "AI 에이전트 기반의 자동화 시스템이 확산되면서, 단순한 자동화 수준을 넘어, 실행 주체(agent)가 독립적으로 의사결정을 내리고 외부 시스템을 호출하는 AgentOps가 등장했습니다. 이 글에서는 AgentOps와 함께 등장하게 된 AgentSecOps에 대해 살펴보고, 기존 DevSecOps 체계 대비 어떤 구조와 역할을 수행하게 될지 심층 분석합니다."
+date: "2025-05-13"
+author: "kenny"
+ogImage: "public/white-paper/wp-thumb-21.png"
+keywords: ["AgentSecOps","AgentSecOps Framework", "QueryPie MCPS","MCP","Model Context Protocol","엔터프라이즈 AI 보안","MCP PAM","안전한 AI 기반 구축","AI 정책 적용","클라우드 감사 로그","AI 액션 제어","AI 컴플라이언스"]
+relatedPosts:
+  - "/ko/white-paper/18"
+  - "/ko/white-paper/19"
+  - "/ko/white-paper/20"
+---
+# 1. 서론: DevSecOps를 넘어서는 AgentSecOps의 필요성
+
+AI 에이전트 기반의 자동화 시스템이 확산되면서, 조직 내 자산과 API에 대한 접근 방식이 근본적으로 변화하고 있습니다. LangChain, CrewAI, AutoGPT와 같은 프레임워크는 단순한 자동화 수준을 넘어, 실행 주체(agent)가 독립적으로 의사결정을 내리고 외부 시스템을 호출하는 구조를 현실화하고 있습니다. 이러한 시스템을 포괄적으로 운영하는 개념이 AgentOps입니다. AgentOps는 LLM 기반 워크플로우 최적화, 도구 호출 스케줄링, 결과 해석 및 리포팅 자동화 등 다양한 기능을 포함합니다[1].
+
+AgentOps는 단일 개념이 아니라, 에이전트 실행 구조에 따라 명확히 구분되는 실행 유형을 기반으로 구성됩니다. 실제 조직 환경에서 AI 에이전트가 업무를 자동화하는 방식은 크게 두 가지로 나뉘며, 이 실행 구조에 따라 보안 개입 지점, 감사 흐름, 정책 평가 방식도 달라집니다.
+
+첫째는 순차 실행형 AgentOps입니다. 이는 하나의 에이전트가 사용자 요청을 받아 여러 도구나 API를 단계별로 직렬 실행하는 구조입니다. 예를 들어, 사용자가 “다음 주 도쿄 출장 준비해줘”라고 지시하면, 에이전트는 다음 순서로 실행합니다:
+
+<br />
+        <InfoNote hideIcon>
+        1. 항공권 예약 API 호출
+        2. 호텔 예약 플랫폼 연동
+        3. 캘린더 API를 통해 일정 생성
+        4. 이메일 API를 통해 사용자에게 결과 통보
+        </InfoNote>
+
+<br />
+이 흐름은 하나의 컨텍스트 안에서 처리되며, 단일 실행 흐름에 대해 재시도, 정책 검토, 로깅, 승인 삽입 등의 통제가 필요합니다[1].
+
+둘째는 에이전트 간 호출형 AgentOps, 즉 Agent-to-Agent 구조입니다. 이 구조는 하나의 에이전트가 직접 모든 작업을 수행하지 않고, 역할을 분산하여 다른 에이전트를 호출하는 다단계 실행 흐름을 구성합니다. 예를 들어, “마케팅 보고서를 작성해줘”라는 요청이 들어오면:
+
+<br />
+        <InfoNote hideIcon>
+        * Agent A1은 전체 흐름을 기획하고,
+        * Agent A2는 데이터 수집을 수행하며,
+        * Agent A3는 요약과 시각화를 담당합니다.
+        * 최종적으로 Agent A1이 결과를 병합하여 보고서를 완성합니다.
+        </InfoNote>
+
+<br />
+각 호출 간에는 컨텍스트 전달, 역할 위임 검증, 정책 충돌 탐지, 실행 권한 검토가 필요하며, 각 에이전트는 독립적으로 정책 평가(PDP), 실행 통제(PEP), 감사 로깅이 이루어져야 합니다[3].
+
+이 두 가지 구조는 AgentOps를 이해하고 보안 통제를 설계하는 데 매우 중요한 기준이 됩니다. 보안 정책 삽입 위치, 통제 주체, 실행 흐름의 예측 가능성이 구조마다 다르기 때문에, 이를 명확히 구분하지 않으면 정책이 무력화되거나 로깅이 누락되는 등의 문제가 발생합니다[4][5].
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp21-1-comparison-of-agentops-execution-models.png"
+        alt="[그림 1] AgentOps 실행 구조 유형 비교"
+        caption="[그림 1] AgentOps 실행 구조 유형 비교"
+    />
+</Box>
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> 구분 항목 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 순차 실행형 AgentOps </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Agent-to-Agent 구조 (A2A) </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **실행 방식** </Table.Td>
+            <Table.Td>단일 에이전트가 직렬 API 호출</Table.Td>
+            <Table.Td>다수의 에이전트가 역할 기반으로 분산 실행</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **실행 흐름** </Table.Td>
+            <Table.Td>고정된 순서, 예측 가능</Table.Td>
+            <Table.Td>동적 호출 경로, 흐름 분기 가능</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **정책 삽입 위치** </Table.Td>
+            <Table.Td>단일 흐름 내부에 순차 삽입</Table.Td>
+            <Table.Td>각 호출 간 인터페이스마다 개별 삽입 필요</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **PDF 평가 범위** </Table.Td>
+            <Table.Td>전체 흐름에 대해 1회 정책 평가</Table.Td>
+            <Table.Td>호출마다 별도 PDP 평가 필요</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **위임 검증 필요 여부** </Table.Td>
+            <Table.Td>불필요 (단일 주체)</Table.Td>
+            <Table.Td>필수 (주체 간 위임 관계 검증 필요)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **실패 복구 전략** </Table.Td>
+            <Table.Td>실패 → 재시도 또는 중단</Table.Td>
+            <Table.Td>실패 시 개별 에이전트에서 감지 및 독립 복구 필요</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **감사 로깅 구조** </Table.Td>
+            <Table.Td>단일 세션 기반 로그</Table.Td>
+            <Table.Td>다단계 세션 및 호출 연계 로깅 필요</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **예시** </Table.Td>
+            <Table.Td>출장 예약, 메일 발송, 회의 생성 등</Table.Td>
+            <Table.Td>보고서 작성, 워크플로우 자동화, 멀티 SaaS 통합</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+이러한 AgentOps 실행 구조는 기존 DevSecOps 체계에서 정의된 릴리즈 중심 보안 모델로는 통제할 수 없습니다.
+코드 커밋이나 배포 없이 실행이 가능하고, 실행 주체가 사람인지 에이전트인지 명확하지 않으며, 실행 목적조차 명시되지 않을 수 있기 때문입니다. AgentSecOps는 이러한 실행 흐름에 정책 기반 제어를 삽입하고, 각 실행 단위에 대해 승인, 권한 평가, 로그 기록을 실시간으로 수행하는 구조로 설계되어야 하며, 이 역할은 AgentOps 아키텍처 위에서만 가능해집니다[16][17].
+
+기존 DevSecOps는 정적 분석(SAST), 동적 분석(DAST), IaC 보안 검사, 이미지 스캐닝, SCA(Software Composition Analysis), 비밀키 노출 탐지 등 다양한 보안 모듈을 CI/CD 파이프라인에 통합함으로써, 코드 수준의 위험을 사전에 식별하고 제거하는 체계를 갖추고 있습니다. SCA는 오픈소스 라이브러리 및 종속성 내 포함된 보안 취약점, 라이선스 위반, 유지관리 상태 등을 분석하며, 최근의 GitHub Advanced Security, Snyk, WhiteSource와 같은 도구가 이를 자동화하고 있습니다[2].
+
+다음 다이어그램은 GitHub 중심의 코드 작성 이후, Jenkins나 GitHub Actions에서 이미지 빌드가 이루어지고, Harbor에서 이미지 취약점을 검사하며, 문제가 없을 경우 AWS ECR에 배포되는 흐름을 보여줍니다. 이후 ArgoCD를 통해 Kubernetes 클러스터에 배포되고, 이 과정에서 Vault를 통한 시크릿 관리, ZAP을 통한 DAST 보안 테스트, Helm과 Terraform을 통한 인프라 구성 검증까지 포함됩니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp21-2-example-of-devsecops-pipeline.png"
+        alt="[그림 2] DevSecOps Pipeline"
+        caption="[그림 2] DevSecOps Pipeline"
+    />
+</Box>
+
+이와 같은 현대적인 DevSecOps 파이프라인은 다양한 보안 기능을 통합하여, 배포 전과 배포 후의 정적 및 동적 위험을 포괄적으로 관리할 수 있습니다. 코드 분석, 이미지 무결성 검증, 오픈소스 종속성 취약점 탐지(SCA), IaC 정책 위반 탐지, 런타임 워크로드 보호, 클라우드 구성 분석(CSPM), 권한 분석(CIEM), 통합 CNAPP 기반 통제까지 포함됩니다. 그러나 이 전체 구조는 인간 주체가 코드를 작성하고, 명시적인 릴리즈 흐름을 따라야만 통제가 가능합니다.
+
+AI 기반 AgentOps는 이와는 다른 방식으로 동작합니다. 에이전트는 GitHub 저장소에 직접 API를 호출하거나, Slack에 메시지를 보내고, AWS Lambda를 트리거하는 등 사전에 정의되지 않은 실행 흐름을 생성할 수 있습니다. 이러한 실행 흐름은 CI/CD에 통합되지 않으며, Git 커밋이나 Jenkins 로그 없이도 발생합니다. 결과적으로, 기존의 DevSecOps 체계에서 정의된 보안 통제 경로를 따르지 않는 실행이 빈번하게 나타나게 됩니다[3].
+
+이런 실행 흐름에 대해서는 DevSecOps의 모든 보안 제어가 적용되지 않거나, 아예 후속 대응 자체가 불가능해질 수 있습니다. 예를 들어, 해당 실행은 이미지 스캐닝이나 IaC 검토, 배포 승인 같은 사전 보안 검사를 우회하게 됩니다. 이러한 구조적 공백에 대응하기 위해 등장한 것이 AgentSecOps입니다.
+
+AgentSecOps는 AI 에이전트의 실행 요청을 수집하고, 정책 기반으로 해당 요청을 평가하며, 승인 여부를 실시간으로 판단하는 보안 계층입니다. 이 구조는 DevSecOps와 병렬적으로 존재하는 것이 아니라, 실행 시점에서 개입할 수 있는 별도의 정책 통제 영역에 해당합니다.
+
+
+# 2. DevSecOps와 AgentSecOps의 구조 비교
+
+DevSecOps는 소프트웨어 개발 파이프라인에서 보안을 자동화하는 체계로, 코드 작성 단계부터 운영 환경까지 연속적으로 보안 활동을 단계별로 구현하는 것이 핵심입니다. 초기에는 정적 분석(SAST)과 취약점 스캐닝 정도에 머물렀지만, 최근에는 오픈소스 라이브러리의 구성 및 취약점 평가(SCA), 인프라 구성 코드(IaC)의 정책 위반 탐지, 이미지 취약점 검사, 시크릿 노출 방지 등 다양한 기능이 통합되었습니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp21-3-vulnerability-management-across-the-cloud-devsecops-pipeline.png"
+        alt="[그림 3] 클라우드 환경에서의 DevSecOps Pipeline 취약점 관리"
+        caption="[그림 3] 클라우드 환경에서의 DevSecOps Pipeline 취약점 관리"
+    />
+</Box>
+
+클라우드 환경에서는 CSPM(Cloud Security Posture Management), CIEM(Cloud Infrastructure Entitlement Management), CWPP(Cloud Workload Protection Platform) 등과 같은 플랫폼도 포함되어 DevSecOps는 하나의 보안 생태계로 진화하였습니다[4].
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp21-4-application-vulnerability-management.png"
+        alt="[그림 4] 클라우드 환경에 맞는 취약점 관리 방법"
+        caption="[그림 4] 클라우드 환경에 맞는 취약점 관리 방법"
+    />
+</Box>
+
+DevSecOps는 코드 기반으로 정의된 자산을 기준으로 보안을 수행합니다. GitHub, GitLab과 같은 소스 저장소에서 코드가 커밋되면, CI/CD 도구(Jenkins, GitHub Actions 등)가 이를 빌드하고 테스트합니다. 이 과정에서 SCA 도구는 오픈소스 취약점을 식별하고, 이미지 분석 도구는 컨테이너 보안 위협을 평가하며, IaC 템플릿은 규정 준수 여부를 검사합니다. 배포 단계에서는 CSPM이나 CWPP가 구성 오류와 런타임 행위를 모니터링합니다[5].
+
+하지만 이러한 전체 구조는 코드가 명시적으로 존재하고, 사람이 정의한 파이프라인 내에서만 유효합니다. LLM 기반 에이전트는 개발자가 작성하지 않은 코드를 실행하며, 스크립트 없이 API 호출을 하거나, 내부 시스템에 직접 접근합니다. Git 커밋 없이도 Slack에 메시지를 전송하고, Jenkins 로그 없이도 AWS Lambda를 트리거하며, 사전에 정의되지 않은 목적에 따라 실행됩니다. 이와 같은 실행은 DevSecOps에서 정의한 보안 제어 지점을 우회하게 됩니다[6].
+
+AgentSecOps는 이러한 동적 실행 요청에 개입하는 구조로, 실행 시점에서 정책(PDP: Policy Decision Point)을 평가하고, 실행 목적(PBAC: Purpose-Based Access Control)을 기준으로 권한을 검증하며, 승인 흐름과 감사 로깅을 통합합니다. 이 구조는 단일 실행 단위에 대한 실시간 통제를 목적으로 하며, DevSecOps의 정적 분석이나 사전 방어 모델과는 전혀 다른 통제 위치를 가집니다.
+
+다음 다이어그램은 시간 흐름을 기준으로 DevSecOps와 AgentSecOps의 개입 지점을 비교한 것입니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp21-5-timeline-based-comparison-of-control-flow.png"
+        alt="[그림 5] DevSecOps vs AgentSecOps Control Flow"
+        caption="[그림 5] DevSecOps vs AgentSecOps Control Flow"
+    />
+</Box>
+
+DevSecOps는 실행 전 코드와 자산 상태를 평가하고, AgentSecOps는 실행 시점의 행위와 정책 충돌 여부를 판단합니다. AgentSecOps는 다음과 같은 보안 요구사항을 충족하기 위해 설계됩니다.
+
+* 실행 요청의 주체 식별
+* 실행 목적과 리소스 간 정책 충돌 여부 확인
+* 승인 요청 흐름 기반의 사전 제어 삽입
+* 실행 로그 및 감사 기록의 세션 단위 추적
+
+AgentSecOps는 단순히 DevSecOps를 보완하는 개념이 아니라, 실행 흐름의 실시간 통제라는 독립된 보안 계층으로 이해되어야 합니다. 특히 AI 에이전트가 의사결정과 실행을 동시에 수행하는 환경에서는, 정책 기반의 동적 승인 체계 없이는 보안 책임 추적이 불가능해질 수 있습니다[7].
+
+
+# 3. 구조 분석: AgentSecOps를 구성하는 실행 통제 아키텍처
+
+AgentSecOps는 단순한 실행 모니터링 체계가 아니라, 실행 요청을 중심으로 보안 정책을 적용하고, 그 흐름을 동적으로 평가하는 실시간 통제 아키텍처입니다. DevSecOps가 코드, 이미지, 구성 파일을 기준으로 정적 또는 사전 정의된 검사를 수행하는 것과 달리, AgentSecOps는 실행 주체와 실행 맥락을 중심으로 정책을 동적으로 평가합니다[8].
+
+이 아키텍처는 다음과 같은 핵심 구성 요소로 구성됩니다.
+
+## 3.1 정책 결정 지점(PDP: Policy Decision Point)
+
+PDP는 실행 요청을 수신한 후, 해당 요청이 허용 가능한지 여부를 결정하는 중앙 정책 엔진입니다. 이 엔진은 YAML 또는 Rego(Cedar 등) 형식의 정책 정의 파일을 기반으로 실행 주체, 리소스, 목적, 시점 등의 조건을 평가합니다. 예를 들어, 다음과 같은 정책이 적용될 수 있습니다.
+
+<br />
+        <InfoNote hideIcon>
+        * 요청자의 역할이 ‘AI Agent’이고,
+        * 실행 대상이 ‘GitHub Repository’이며,
+        * 목적이 ‘PR 병합’인 경우,
+        * 워크스페이스 외부 소스 접근이 제한되는 시간대에는 거부 처리
+        </InfoNote>
+
+<br />
+정책은 보통 Open Policy Agent(OPA), Cedar, Kyverno 등의 도구로 구현됩니다[9].
+
+## 3.2 목적 기반 권한 검증 (PBAC: Purpose-Based Access Control)
+
+PBAC(Purpose-Based Access Control)는 실행의 ‘목적’을 기반으로 접근 여부를 판단하는 권한 제어 모델입니다.
+RBAC(역할 기반 접근 제어)는 사용자나 에이전트의 역할(role)을, ABAC(속성 기반 접근 제어)는 사용자와 리소스의 속성(attribute)을 기준으로 정책을 적용합니다.
+반면 PBAC는 실행 요청 시 함께 명시되는 의도(purpose)를 중심으로 정책 판단을 수행합니다.
+
+이 접근은 다음과 같은 실행 시점 보안 시나리오에서 특히 효과적입니다:
+
+<br />
+        <InfoNote hideIcon>
+        * 실행 주체가 사람 대신 AI 에이전트 또는 자동화된 시스템인 경우
+        * 하나의 API 요청이 다양한 목적에 따라 분기되어야 할 필요가 있는 경우
+        * 실행의 정당성을 사전에 정의된 ‘목적’에 따라 구분해야 하는 다계층 보안 환경
+        </InfoNote>
+
+<br />
+*예시: Google Drive 파일 공유*
+
+AI 에이전트가 회사 문서를 자동으로 Google Drive에서 공유한다고 가정합니다.
+이때 목적이 “내부 팀 간 협업”일 경우에는 Slack, Notion 등 조직 내 공유 플랫폼을 통해 허용될 수 있습니다.
+반면, 목적이 “외부 파트너 검토용”인 경우에는 보안 정책상 추가 검토나 승인 절차가 필요합니다. PBAC를 활용하면 동일한 공유 API 요청에 대해서도 실행 목적에 따라 정책 결과를 다르게 적용할 수 있습니다.
+
+**예시 정책**
+```rego
+allow {
+    input.purpose == "internal_collab"
+    input.user.role == "ai_assistant"
+    input.resource.type == "gdrive.document"
+    input.resource.sharing == "organization"
+}
+```
+
+이 정책은 다음 조건을 만족할 경우 문서 공유를 허용합니다:
+
+* 실행 목적이 "internal_collab" (내부 협업용 공유)
+* 요청 주체의 역할이 "ai_assistant"
+* 리소스가 Google Drive 문서이며, 공유 범위가 조직 내부(organization)로 제한됨
+
+같은 API 호출이더라도, 목적이 `"external_partner_review"` 라면
+`input.context.approval == true` 와 같은 추가 조건이 없을 경우 공유가 차단됩니다.
+
+
+**활용 시나리오 비교**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> 실행 목적 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 허용 여부 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 필요 정책 조건 </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> `internal_collab` (내부 협업) </Table.Td>
+            <Table.Td>허용</Table.Td>
+            <Table.Td>조직 내부 공유, 에이전트 역할 확인</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `external_partner_review` (외부 공유) </Table.Td>
+            <Table.Td>조건부 허용</Table.Td>
+            <Table.Td>NDA 확인, 승인 플래그 존재 (`approval == true`)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `public_share` (공개 링크 공유) </Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>회사 정책상 전체 공개는 허용하지 않음</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+<br />
+**PBAC vs RBAC vs ABAC 비교 테이블**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> 항목 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> RBAC </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> ABAC </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> PBAC (Purpose-Based) </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **기준 요소** </Table.Td>
+            <Table.Td>역할(Role)</Table.Td>
+            <Table.Td>속성(Attribute)</Table.Td>
+            <Table.Td>목적(Purpose)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **실행 의도 반영** </Table.Td>
+            <Table.Td>불가능</Table.Td>
+            <Table.Td>제한적 (속성으로 우회 가능)</Table.Td>
+            <Table.Td>가능 (명시적 목적 기반 판단)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **복합 조건 표현력** </Table.Td>
+            <Table.Td>낮음</Table.Td>
+            <Table.Td>높음</Table.Td>
+            <Table.Td>중간 (속성과 결합 가능)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **정책 설계 난이도** </Table.Td>
+            <Table.Td>낮음</Table.Td>
+            <Table.Td>높음</Table.Td>
+            <Table.Td>중간</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **주 사용 시나리오** </Table.Td>
+            <Table.Td>내부 사용자 권한 구분</Table.Td>
+            <Table.Td>정밀 리소스 접근 제어</Table.Td>
+            <Table.Td>AI, RPA, 에이전트 기반 자동화</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **예시** </Table.Td>
+            <Table.Td>"admin만 접근 가능"</Table.Td>
+            <Table.Td>"부서=재무 AND 등급=5 이상"</Table.Td>
+            <Table.Td>"목적=알림 전파인 경우만 허용"</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **실행 시점 제어 적합성** </Table.Td>
+            <Table.Td>낮음</Table.Td>
+            <Table.Td>조건부 가능</Table.Td>
+            <Table.Td>높음 (실행 직전 목적 평가 가능)</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+PBAC는 실행 흐름의 정당성과 맥락적 합리성을 목적 단위로 분기 평가할 수 있기 때문에, AgentSecOps 구조 내에서 실행 시점 정책의 핵심 평가 기준으로 활용될 수 있습니다. 이는 특히 에이전트가 자율적으로 SaaS API를 호출하고, 내부/외부 경계를 넘나드는 자동화를 수행할 때, 기존 권한 모델만으로는 통제 불가능한 실행 의도 기반 보안 판단의 해법이 됩니다[10].
+
+
+## 3.3 정책 집행 지점(PEP: Policy Enforcement Point)
+
+PEP는 PDP의 평가 결과를 받아 실제 실행을 허용하거나 차단하는 모듈입니다. 에이전트가 외부 API 호출을 시도할 때, 해당 요청은 먼저 PEP를 거치며, 허가되지 않은 요청은 즉시 중단됩니다. PEP는 내부 프록시, 미들웨어 API, 에이전트 런타임 스크립트 등 다양한 위치에 삽입될 수 있습니다.
+
+예를 들어, Slack API 호출 미들웨어에 삽입된 PEP는 메시지 발신 전 PDP에 정책 평가 요청을 전달하고, 결과에 따라 메시지를 차단하거나 승인합니다. 이를 통해 에이전트의 무단 실행을 사전에 차단할 수 있습니다.
+
+
+## 3.4 정책 정보 제공자(PIP: Policy Information Point)
+
+PIP는 PDP가 정책 평가 시 참조하는 외부 데이터를 제공합니다. 사용자 역할, 인증 상태, 현재 시간, 에이전트 컨텍스트, 작업 경로, 최근 실행 내역 등은 PIP로부터 수집됩니다. 이 정보는 실행 요청의 컨텍스트를 구성하며, 정책 판단의 정밀도를 높입니다.
+
+
+## 3.5 감사 기록 및 세션 기반 로깅
+
+실행 요청이 허용되든 거부되든, 모든 정책 평가 및 실행 내역은 세션 기반으로 저장됩니다. 이를 통해 관리자는 개별 실행 흐름을 복원하고, 특정 AI 에이전트가 어떤 요청을 수행했는지 시각적으로 분석할 수 있습니다. 이 구조는 추후 포렌식, 보안 감사, 규제 대응에 매우 중요한 역할을 합니다.
+
+다음은 AgentSecOps 구조의 핵심 컴포넌트 관계를 나타낸 다이어그램입니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp21-6-agentsecops-component-architecture.png"
+        alt="[그림 6] AgentSecOps Component Architecture"
+        caption="[그림 6] AgentSecOps Component Architecture"
+    />
+</Box>
+
+이 구조를 통해 AgentSecOps는 실행 주체의 맥락을 이해하고, 실시간으로 정책을 적용하며, 실행 경로를 추적 가능하게 만듭니다. 이는 단순 모니터링이 아니라 실행 제어를 하는 통합 보안 아키텍처로 정의할 수 있습니다[11].
+
+
+# 4. 위협 시나리오 분석: AgentSecOps로 대응 가능한 실행 위협 유형
+
+AI 기반 에이전트는 사람의 개입 없이 API 호출, 문서 작성, 메시지 발송, 클라우드 자산 변경 등을 수행할 수 있습니다. 이러한 자율 실행 환경에서는 인증, 승인, 기록, 책임 추적이 불명확한 실행이 반복적으로 발생하게 되며, 이로 인해 전통적인 보안 모델이 통제하지 못하는 새로운 위협 유형이 나타납니다. AgentSecOps는 이러한 실행 시점 위협을 사전에 탐지하고 차단하기 위한 구조로 설계되어 있습니다[12].
+
+다음은 AI 에이전트 환경에서 발생 가능한 주요 위협 시나리오 다섯 가지와, 이에 대한 AgentSecOps 아키텍처의 대응 구조입니다.
+
+## 4.1 역할 외 실행 발생 (Privilege Escalation via Agent Context)
+
+AI 에이전트가 특정 사용자의 자격 정보를 기반으로 실행되지만, 실제로는 해당 사용자가 허용받지 않은 리소스에 접근하거나 실행 명령을 전달하는 상황이 발생할 수 있습니다. 예를 들어, 조직 내 ‘일반 직원’인 사용자 A가 특정 Google Drive 문서에 대한 요약을 요청하였고, 이에 따라 에이전트가 API를 통해 문서에 접근하는 과정에서, 내부 인사정보가 포함된 기밀 문서(tag: confidential)에까지 접근한 후 이를 외부 채널이나 타 사용자에게 전달하는 방식입니다. 이는 사용자 A의 역할로는 명백히 접근이 제한된 리소스에 대해, 에이전트가 실행 목적을 오용하거나 컨텍스트를 우회하여 권한 상승(Privilege Escalation)을 일으킨 시나리오입니다.
+
+AgentSecOps는 이러한 실행 요청에 대해 실행 주체(user.role), 실행 목적(purpose), 자원 속성(resource.tag)을 통합적으로 평가하며, 실행 시점에서 동적으로 접근을 제어합니다. 특히 역할 기반 접근 제어(RBAC)만으로는 실행 의도의 분리가 어려운 환경에서는, 목적 기반 접근 제어(PBAC)를 통해 정밀한 통제가 가능합니다.
+
+다음은 해당 시나리오에 대응하는 정책 정의 예시입니다.
+
+```rego
+default allow = false
+
+allow {
+    input.user.role == "employee"
+    input.resource.type == "gdrive.document"
+    input.resource.tag != "confidential"
+    input.purpose == "summary"
+}
+```
+
+이 정책은 다음 조건을 모두 만족하는 경우에만 실행을 허용합니다.
+
+* 요청 주체의 역할이 employee입니다.
+* 요청 대상 리소스는 Google Drive 문서(gdrive.document)입니다.
+* 문서의 보안 태그가 confidential이 아닙니다.
+* 실행 목적이 "summary"로 명시되어 있습니다.
+
+<br />
+정책 평가에 따른 실행 결과는 다음과 같이 분기됩니다.
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> 실행 조건 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 실행 여부 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 판단 근거 </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>일반 직원이 일반 문서를 요약 목적으로 요청</Table.Td>
+            <Table.Td>허용</Table.Td>
+            <Table.Td>모든 조건을 충족함</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>일반 직원이 confidential 문서를 요약 요청</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>문서의 보안 태그 조건 불충족</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>일반 직원이 요약 외 목적(예: translate) 요청</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>실행 목적이 불일치함</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>관리자가 confidential 문서에 접근 요청</Table.Td>
+            <Table.Td>정책 외부</Table.Td>
+            <Table.Td>별도 관리자 권한 정책 정의 필요</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+PBAC는 실행 목적을 정책 평가 기준에 명시함으로써, 실행 시점에서 발생할 수 있는 다양한 컨텍스트 분기를 통제할 수 있습니다. 특히 AI 기반 자동화 구조에서는 사용자와 실행 주체가 분리되므로, 실행 목적을 중심으로 한 정책 모델이 AgentSecOps 내에서 핵심 역할을 수행합니다.
+
+
+## 4.2 위임 범위 오남용 (Delegation Misuse and Overscope Execution)
+
+AI 에이전트가 다른 사용자를 대신하여 권한을 위임받아 실행하는 구조는, 조직 내 자동화 시스템에서 자주 발생하는 패턴입니다. 그러나 이 경우, 에이전트가 위임된 범위를 벗어나거나 의도하지 않은 API 호출을 수행하게 되면, 실행 주체와 권한 책임 간의 불일치로 인해 보안 사고로 이어질 수 있습니다.
+
+예를 들어, 프로젝트 관리자가 Jira 프로젝트의 특정 이슈 등록 권한을 에이전트에게 위임하였으나, 해당 에이전트가 승인받지 않은 외부 프로젝트 보드에까지 이슈를 생성하거나, Epic 단위의 고위험 항목까지 자동으로 등록하는 경우입니다. 이는 사용자가 승인한 범위를 넘어선 실행이므로, 위임 범위 오남용에 해당합니다.
+
+AgentSecOps는 위임 실행 구조에 대해 `delegated_by`, `resource.id`, `purpose`와 같은 실행 컨텍스트 정보를 함께 평가하며, 위임 범위의 적정성 여부를 동적으로 판단할 수 있습니다. 다음은 해당 시나리오에 대응하는 정책 예시입니다.
+
+```rego
+default allow = false
+
+allow {
+    input.delegated_by == "user_123"
+    input.user.role == "ai_issue_creator"
+    input.resource.id == "jira-project-X"
+    input.purpose == "task_registration"
+}
+```
+
+이 정책은 다음 조건을 모두 만족해야 실행을 허용합니다.
+
+* 실행이 사용자 ID "user_123"로부터 위임되었음을 명시해야 합니다.
+* 실행 주체의 역할이 ai_issue_creator여야 합니다.
+* Jira 프로젝트 보드는 "jira-project-X"로 제한되어야 합니다.
+* 실행 목적이 "task_registration"으로 정의되어 있어야 합니다.
+
+<br />
+정책에 따른 실행 분기는 다음과 같습니다.
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> 실행 조건 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 실행 여부 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 판단 근거 </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>위임자가 `user_123`이고, `jira-project-X`에 이슈 등록</Table.Td>
+            <Table.Td>허용</Table.Td>
+            <Table.Td>위임 조건과 자원 범위 모두 충족</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>위임자는 동일하나, 다른 프로젝트(`jira-project-Y`)에 등록</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>자원 범위 초과</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>실행 주체 역할이 `ai_issue_creator`가 아닌 경우</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>위임 실행 주체 조건 불충족</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>실행 목적이 `"task_registration"`이 아닌 경우</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>허용된 실행 목적 조건 불충족</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+위임 기반 자동화 환경에서는 위임자의 승인과 실행 주체의 권한이 분리되어 발생하는 보안 취약점이 존재합니다. AgentSecOps는 실행 시점에서 이와 같은 위임 관계를 컨텍스트 기반 정책으로 검증할 수 있으며, 위임 범위에 대한 정책 명세를 통해 실행 흐름을 안전하게 제한할 수 있습니다.
+
+
+## 4.3 트리거 오용을 통한 외부 API 확장 (Trigger Abuse and External API Expansion)
+
+AI 에이전트는 외부 시스템에서 발생한 이벤트를 기반으로 실행되는 구조를 자주 사용합니다. 대표적인 예로 GitHub의 webhook 이벤트가 있을 수 있습니다. 그러나 이처럼 외부 이벤트 기반으로 작동하는 에이전트는, 사전에 정의되지 않은 외부 시스템이나 내부 고위험 리소스까지 확장 실행을 시도할 수 있습니다. 이러한 경우 실행의 출처와 목적이 불일치하게 되며, 트리거 오용에 해당합니다.
+
+예를 들어, GitHub 저장소에 코드가 푸시되었을 때 에이전트가 빌드 자동화를 수행하는 것은 허용된 목적일 수 있습니다. 그러나 해당 트리거를 이용해 AWS 환경에 새로운 EC2 인스턴스를 생성하거나, GitLab에 병렬 작업을 생성하는 등, 사전에 명시되지 않은 실행 확장까지 진행될 경우 이는 보안 위반으로 간주됩니다.
+
+AgentSecOps는 트리거의 출처(`trigger.source`)와 호출 대상 리소스(`resource.domain`)가 사전에 정의된 조건과 일치하는지 확인하고, 실행 목적(`purpose`)과도 비교하여 동작을 제한합니다. 다음은 이 시나리오에 대한 정책 정의 예시입니다.
+
+```rego
+default allow = false
+
+allow {
+    input.trigger.source == "github"
+    input.resource.domain == "github.com"
+    input.purpose == "ci_pipeline"
+}
+```
+
+해당 정책은 다음 조건을 모두 만족하는 경우에만 실행을 허용합니다.
+
+* 트리거는 GitHub webhook에서 발생해야 합니다.
+* 리소스의 도메인은 github.com에 속해야 합니다.
+* 실행 목적은 "ci_pipeline"으로 명시되어야 합니다.
+
+<br />
+정책 평가에 따른 실행 분기는 다음과 같습니다.
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> 실행 조건 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 실행 여부 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 판단 근거 </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>GitHub 이벤트 기반, GitHub 내 빌드 자동화 실행 요청</Table.Td>
+            <Table.Td>허용</Table.Td>
+            <Table.Td>출처와 리소스 도메인이 일치함</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>GitHub 이벤트 기반, AWS EC2 실행 요청</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>트리거 출처와 리소스 도메인이 불일치</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>GitLab 이벤트 기반, GitHub 작업 요청</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>트리거 출처 불일치</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>GitHub 이벤트 기반, 목적이 `"deployment"`로 명시된 실행 요청</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>허용된 실행 목적 조건 불일치</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+AgentSecOps는 외부 이벤트 기반 트리거의 출처와 실행 목적 간의 정책적 일관성을 평가함으로써,
+사전에 정의되지 않은 실행 확장을 사전에 방지할 수 있습니다. 이 구조는 특히 다중 SaaS 환경에서 발생할 수 있는
+무분별한 API 연결 시도를 제어하는 데 효과적입니다.
+
+
+## 4.4 실행 경로 불투명성 (Execution Path Obfuscation)
+
+AI 에이전트가 다양한 시스템과 연동되어 자율적으로 실행 요청을 수행하는 환경에서는, 실행 결과만 기록되고 그 요청이 누가, 언제, 어떤 조건에서 수행되었는지 추적이 어려운 경우가 발생할 수 있습니다. 이는 보안 사고 발생 시 행위 주체를 식별하기 어렵게 만들며, 포렌식과 컴플라이언스 대응에 심각한 문제를 초래할 수 있습니다. 예를 들어, 에이전트가 Google Calendar API를 호출하여 조직 전체 회의를 자동 생성했으나, 해당 요청이 어떤 사용자 또는 에이전트 ID로 수행되었는지, 실행 목적이 무엇이었는지, 어떤 조건 하에서 호출되었는지가 실행 로그에 남아 있지 않은 경우입니다. 이러한 상황은 실행 결과는 존재하지만 경로가 식별되지 않는 가시성 식별이 어려운 실행 흐름이며, 공격자가 로그 조작이나 의도적 우회를 시도할 경우 보안의 사각지대가 될 수 있습니다.
+
+AgentSecOps는 모든 실행 요청에 대해 사전에 정의된 컨텍스트 필수 항목을 요구합니다. PDP는 정책 평가 시 이러한 항목이 존재하지 않거나 누락될 경우 해당 요청을 차단할 수 있으며, 모든 실행 흐름은 세션 단위로 감사 로그에 저장되어야 합니다.
+
+다음은 해당 시나리오에 대한 정책 정의 예시입니다.
+
+```rego
+default allow = false
+
+allow {
+    input.user.id
+    input.session.id
+    input.resource.id
+    input.purpose
+}
+```
+
+이 정책은 다음 필수 항목이 모두 존재할 때만 실행을 허용합니다:
+
+* 사용자 식별자(user.id)
+* 세션 ID(session.id)
+* 자원 식별자(resource.id)
+* 실행 목적(purpose)
+
+이러한 정책은 실제 평가 로직이라기보다는, 실행 요청 포맷의 정합성을 검증하는 역할을 수행합니다. 필수 항목이 누락된 요청은 실행 전 단계에서 차단되며,
+정상 실행의 경우에도 모든 컨텍스트는 세션 로그에 함께 기록됩니다.
+
+<br />
+정책에 따른 실행 분기는 다음과 같습니다.
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> 실행 조건 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 실행 여부 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 판단 근거 </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>모든 필수 항목(user, session, resource, purpose)이 포함된 요청</Table.Td>
+            <Table.Td>허용</Table.Td>
+            <Table.Td>요청 구조 완전함</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>session.id가 누락된 요청</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>실행 경로 추적 불가</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>purpose 필드가 없는 자동화 요청</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>실행 목적 불명확, 정책 평가 불가능</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>에이전트가 비식별 상태로 요청한 경우</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>user.id 미확정, 실행 책임 추적 불가</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+AgentSecOps는 실행 요청이 단순히 성공했는지를 넘어서, 그 요청이 어떤 맥락과 조건에서 수행되었는지를 포함하여 판단합니다. 이러한 실행 맥락의 정합성은 단순한 보안 평가뿐 아니라,
+사고 대응, 행위 감사, 정책 개선을 위한 핵심 기반 정보가 됩니다.
+
+
+## 4.5 AI 출력 기반 자동 실행 유도 (Prompt-to-Execution Abuse via LLM Output)
+
+AI 에이전트가 대형 언어 모델(LLM)의 응답을 기반으로 외부 시스템을 호출하는 구조에서는, 프롬프트 입력 결과로 생성된 응답이 의도하지 않은 실행을 유발할 가능성이 존재합니다. 특히 LLM의 응답이 API 호출과 직접 연결되는 구조일 경우, 악의적 또는 불명확한 입력으로 인해 고위험 명령이 자동 실행될 수 있습니다.
+
+예를 들어, 사용자가 “테스트 서버 정리해줘”라고 자연어로 요청한 경우, LLM이 이를 `aws ec2 terminate-instances --all`과 같이 해석하고, 에이전트가 이를 실제로 실행한다면 이는 명백한 Prompt Injection 기반 실행 사고에 해당합니다.
+
+이러한 상황에서는 실행 요청이 의도된 목적과 정책 조건을 만족하는지를 명확히 판단해야 하며, 특정 고위험 키워드가 포함된 응답에 대해서는 추가 승인을 요구하거나 자동 실행을 차단해야 합니다.
+
+다음은 해당 시나리오에 대응하는 정책 정의 예시입니다.
+
+```rego
+default allow = false
+
+allow {
+    not contains(input.llm_response, "terminate")
+    not contains(input.llm_response, "delete")
+    not contains(input.llm_response, "format")
+    input.purpose == "maintenance"
+    input.context.approved == true
+}
+```
+
+이 정책은 다음 조건을 만족하는 경우에만 실행을 허용합니다.
+
+* LLM 응답 내에 terminate, delete, format 등의 고위험 키워드가 없어야 합니다.
+* 실행 목적은 "maintenance"로 명시되어야 합니다.
+* 실행 요청은 사전에 관리자 또는 정책 시스템에 의해 approved == true로 승인되어야 합니다.
+
+<br />
+정책 평가에 따른 실행 분기는 다음과 같습니다.
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> 실행 조건 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 실행 여부 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 판단 근거 </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>LLM 응답에 위험 명령 없고, 승인된 유지보수 요청</Table.Td>
+            <Table.Td>허용</Table.Td>
+            <Table.Td>목적 및 승인이 모두 만족됨</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>응답에 `"terminate"` 포함됨</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>고위험 키워드 포함</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>승인되지 않은 요청(`approved == false`)</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>이중 승인 조건 불충족</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>실행 목적이 `"cleanup"` 등 불명확한 텍스트로 전달됨</Table.Td>
+            <Table.Td>차단</Table.Td>
+            <Table.Td>정책 내 명시된 목적과 불일치</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+AgentSecOps는 실행 요청의 문맥뿐 아니라, 실제 실행 문장의 내부 내용까지도 평가 조건에 포함시킬 수 있습니다.
+이는 LLM과 자동화된 실행 계층이 연결될 때 필연적으로 요구되는 보안 구조이며,
+Prompt-to-Execution 경로의 안전성을 확보하기 위해 이중 승인 흐름과 키워드 기반 필터링을 병행 적용해야 합니다.
+
+다음은 위협 시나리오와 AgentSecOps의 대응 컴포넌트 간 관계를 정리한 매핑 다이어그램입니다.
+
+<br />
+**위협 시나리오와 AgentSecOps 대응 컴포넌트 매핑 표**
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> 위협 시나리오 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 대응 컴포넌트 및 매커니즘 </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Privilege Escalation via Agent Context</Table.Td>
+            <Table.Td>PDP + PBAC 목적 기반 정책 평가</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Delegation Misuse and Overscope Execution</Table.Td>
+            <Table.Td>위임 메타데이터 확인(PIP) + 정책 내 위임 범위 제한(PDP)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Trigger Abuse and External API Expansion</Table.Td>
+            <Table.Td>트리거 출처 검증(PDP) + 리소스 도메인 불일치 시 실행 차단(PEP)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Execution Path Obfuscation</Table.Td>
+            <Table.Td>사용자 ID, 세션 ID, 실행 목적 필드 존재 여부 검증(PDP) + 감사 로그 기록</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Prompt-to-Execution Abuse via LLM Output</Table.Td>
+            <Table.Td>LLM 응답 키워드 필터링(PDP) + 승인 플래그 존재 확인 + 목적 검증(PDP)</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+AgentSecOps는 DevSecOps와 보완 관계에 있으며, DevSecOps가 실행 전·중·후에 걸쳐 다양한 보안 자동화를 포함하는 구조로 확장되었음에도 불구하고, 실행 요청 단위의 정책 판단과 목적 기반 통제라는 측면에서는 여전히 보완이 필요한 지점이 존재합니다. 특히 에이전트 기반의 자율 실행 환경에서는 DevSecOps가 포착하지 못하는 실행 목적, 위임 범위, 트리거 출처 등의 맥락을 AgentSecOps가 정책적으로 통제함으로써, 실행 시점 보안의 공백을 메울 수 있습니다[13].
+
+
+# 5. 전략 제언: AgentSecOps 설계 및 도입을 위한 기술 전략
+
+AgentSecOps는 기존 보안 체계와는 전혀 다른 개입 지점과 정책 평가 기준을 요구합니다. 따라서 이 아키텍처를 조직에 실질적으로 적용하기 위해서는 설계 방식뿐 아니라 정책 구성, 실행 흐름 통합, 감사 체계 설계까지 포함하는 구조적 전략이 필요합니다[14].
+
+
+## 5.1 실행 흐름 통합을 위한 아키텍처 전략
+
+AgentSecOps는 에이전트 실행 요청이 발생하는 시점에 개입하여, 해당 요청의 실행을 차단하거나 허용하는 구조입니다. 따라서 에이전트가 호출하는 외부 시스템(API, SaaS 등) 또는 내부 서비스에 대해 중간에서 정책 평가 요청을 삽입할 수 있는 구조가 필요합니다.
+
+* 미들웨어 기반 구조: API 호출 전에 정책 검증 레이어를 삽입하여 요청을 평가합니다.
+* 프록시 기반 구조: 모든 에이전트 호출을 MCP(Model Context Protocol) Proxy 또는 API Gateway를 통해 중계합니다.
+* Webhook Wrapper 구조: GitHub, Slack, Jira와 같은 이벤트 기반 호출 전후에 정책 확인 단계를 삽입합니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp21-7-architecture-with-mcp-pam.png"
+        alt="[그림 7] Architecture with MCP PAM"
+        caption="[그림 6] Architecture with MCP PAM"
+    />
+</Box>
+
+이러한 아키텍처는 기존 시스템을 변경하지 않고도 삽입 가능하며, API 프록시 기반 정책 삽입 방식은 특히 SaaS 기반 호출에 유용하게 적용할 수 있습니다.
+
+현재 대부분의 조직은 Terraform, CloudFormation, Pulumi와 같은 IaC 도구를 통해 AWS 기반의 인프라 리소스를 매우 정교하게 선언적으로 제어하고 있습니다. 이러한 환경에서는 실행 주체가 사람일 때에도 승인을 동반한 릴리즈 절차를 요구하며, 자동화 또한 통제된 형태로 제한됩니다. 따라서 AI Agent가 직접적으로 AWS 리소스를 생성하거나 조작하는 방식은 현실적으로 불가능합니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp21-8-iac-security-flow.png"
+        alt="[그림 8] IaC Security Flow"
+        caption="[그림 8] IaC Security Flow"
+    />
+</Box>
+
+그러나 최근 LLM 기반 에이전트가 IaC 템플릿을 생성하거나 GitOps 기반 워크플로우를 자동 트리거하는 방식으로 IaC 앞단의 설계 흐름에 개입할 가능성이 증가하고 있으며, 실제로 일부 개발형 에이전트는 이러한 흐름을 실험적으로 구현하고 있습니다. 이러한 전환이 가시화되는 상황에서, 보안 정책이 없는 상태로 에이전트가 IaC와 연결된다면, 리소스 생성과 권한 분배의 책임 추적이 불가능해질 수 있습니다. 실행 흐름 내 통제 계층이 반드시 선행되어야 하는 이유입니다.
+
+
+## 5.2 정책 구성 및 감사 전략
+
+실행 요청은 단순한 호출이 아니라, 주체, 목적, 시점, 컨텍스트를 모두 포함한 복합 조건으로 판단되어야 하며, 이에 따라 정책 구성도 3단계로 나누어야 합니다.
+
+* 주체 식별 (Who): 실행 요청자가 누구인가 (user_id, agent_id, group 등)
+* 목적 명시 (Why): 해당 요청의 명시적 목적은 무엇인가 (예: aws.ec2.start)
+* 맥락 판단 (When/Where): 요청 시각, 위치, 승인 이력, 세션 연결 등
+
+다음은 AWS EC2 인스턴스 시작 요청에 대해 정책을 적용한 예시입니다. 
+
+```rego
+# 실행 요청을 허용할 기본 조건은 false로 설정
+default allow = false
+
+# 정책 허용 조건 정의
+allow {
+    
+    # 실행 목적이 EC2 인스턴스 시작일 경우
+    input.purpose == "aws.ec2.start"
+    
+    # 요청자의 역할이 'ai_provisioner'일 경우 (AI 기반 자원 할당 전용 역할)
+    input.user.role == "ai_provisioner"
+    
+    # 리소스 타입이 EC2 인스턴스일 경우
+    input.resource.type == "aws.ec2.instance"
+    
+    # 실행 요청이 오전 9시부터 오후 6시 사이일 경우에만 허용
+    input.context.time_hour >= 9
+    input.context.time_hour < 18
+}
+```
+
+이 정책은 실행 목적, 사용자 역할, 자원 유형, 실행 시점을 함께 고려하여, 보안 정책의 정밀성과 실행 통제 가능성을 높입니다[15].
+
+
+## 5.3 실행 기록 및 감사 체계 설계 
+
+AgentSecOps는 정책 판단을 통해 실행을 허용하거나 차단할 뿐 아니라, 그 실행이 어떤 맥락에서 발생했는지를 정확하게 기록하는 기능이 필수적으로 요구됩니다. 특히 AI 에이전트가 다양한 권한을 위임받아 자율적으로 행동하는 구조에서는, 단순 허용/거부 결과만으로는 책임 추적이 어렵습니다. 따라서 실행에 사용된 모든 맥락 정보와 정책 평가 결과를 세션 단위로 감사 로그에 기록하는 체계가 필수입니다.
+
+이러한 기록의 핵심은 정책 평가 지점(PDP)이 아니라, 정책 평가 시 참조되는 컨텍스트 정보(PIP)에서 시작됩니다.
+PIP는 실행 요청에 포함되거나 외부에서 수집된 사용자 정보, 세션 정보, 리소스 특성, 실행 목적, 트리거 정보, 시간·위치 등의 맥락 데이터를 PDP에 제공하며, 이 데이터는 정책 평가와 함께 최종적으로 감사 로그에 함께 기록됩니다.
+
+PIP가 제공하는 실행 컨텍스트 예시 (JSON 형식)
+
+```json
+{
+    "user": {
+        "id": "user_1024",               // 실행 요청자 고유 식별자
+        "role": "ai_assistant"           // 역할 정보: AI 기반 에이전트
+    },
+    "session": {
+        "id": "sess-abc-789",            // 세션 ID (실행 단위 식별)
+        "start_time": "2024-06-01T14:12:30Z", // 세션 시작 시각
+        "ip": "192.168.10.14"            // 호출 발생 IP 주소
+    },
+    "resource": {
+        "id": "doc-456",                 // 접근 대상 리소스 식별자
+        "type": "gdrive.document",       // 리소스 유형 (Google Drive 문서)
+        "tag": "confidential"            // 민감도 태그
+    },
+    "purpose": "summary",              // 실행 목적 (요약 요청)
+    "trigger": {
+        "source": "google_workspace",    // 실행 트리거의 출처
+        "method": "voice_command"        // 실행 방식 (예: 음성 호출)
+    },
+    "context": {
+        "location": "KR",                // 실행 위치
+        "weekday": "Monday",             // 실행 요일
+        "time_hour": 14                  // 실행 시간대 (24시간 기준)
+    }
+}
+```
+
+이 정보는 정책 평가 조건을 구성할 뿐 아니라, 실행 세션 단위의 감사 로그에도 함께 저장되어야 합니다.
+
+<br />
+Rego 기반 정책 내 PIP 활용 예시 및 설명
+
+```rego
+default allow = false
+```
+
+→ 모든 요청은 기본적으로 거부합니다. 명시된 조건을 만족해야만 허용됩니다.
+
+```rego
+allow {
+    input.user.role == "ai_assistant"
+}
+```
+
+→ 실행 요청자의 역할이 `ai_assistant`일 경우에만 검토를 계속합니다.
+
+```rego
+allow {
+    input.resource.type == "gdrive.document"
+}
+```
+
+→ 요청 대상 리소스는 Google Drive 문서 유형이어야 합니다.
+
+```rego
+allow {
+    input.resource.tag != "confidential"
+}
+```
+
+→ 민감 태그(`confidential`)가 붙어 있는 문서는 접근을 차단합니다.
+
+```rego
+allow {
+    input.purpose == "summary"
+}
+```
+
+→ 실행 목적이 문서 요약(`summary`)인 경우에만 허용합니다.
+
+```rego
+allow {
+    input.session.id
+    input.trigger.source == "google_workspace"
+}
+```
+
+→ 세션 ID가 존재하고, 실행 트리거 출처가 Google Workspace이어야 합니다.
+
+```rego
+allow {
+    input.context.time_hour >= 9
+    input.context.time_hour < 18
+}
+```
+
+→ 실행 시간은 오전 9시부터 오후 6시 사이(업무 시간대)이어야 합니다.
+
+<br />
+세션 기반 감사 로그 스키마 예시 (JSON 템플릿 + 설명)
+
+```json
+{
+    "session_id": "sess-abc-789",           // 실행 단위 세션 ID
+    "timestamp": "2024-06-01T14:12:32Z",    // 실행이 이루어진 정확한 시점
+    "user": {
+        "id": "user_1024",                    // 요청자 ID
+        "role": "ai_assistant"               // 역할 정보
+    },
+    "resource": {
+        "id": "doc-456",                      // 대상 리소스 ID
+        "type": "gdrive.document"             // 리소스 유형
+    },
+    "purpose": "summary",                   // 실행 목적
+    "trigger": {
+        "source": "google_workspace",         // 트리거된 시스템 출처
+        "method": "voice_command"             // 실행 방식
+    },
+    "policy_evaluation": {
+        "policy_id": "gdrive-doc-summary-policy-v2", // 정책 식별자
+        "result": "deny",                    // 평가 결과 (허용/거부)
+        "reason": "resource.tag == confidential" // 거부 사유
+    },
+    "execution": {
+        "status": "blocked",                 // 실행 결과
+        "executor": "MCP(Model Context Protocol)-agent-pam-01"       // 실행을 통제한 MCP(Model Context Protocol) PAM 인스턴스
+    }
+}
+```
+
+이와 같은 로그 구성은 정책 평가 조건과 실행 결과의 일치 여부를 검증할 수 있도록 하며, 정책 우회 시도, 승인 흐름 누락, 실행 과잉 요청에 대한 사후 분석을 가능하게 만듭니다. AgentSecOps는 실행 흐름의 보안성과 감사 가능성을 보장하기 위해
+정책 평가 단계와 실행 로깅 단계를 일관되게 연결해야 하며, PIP는 그 연결을 가능하게 만드는 정보 제공 관문(Policy Context Broker)으로 기능합니다.
+
+
+## 5.4 현실적 운영 한계와 상용화 전략
+
+AgentSecOps 아키텍처는 기술적으로 완성도 높은 실행 통제 모델을 제시합니다. 그러나 대부분의 조직은 이 구조를 자체적으로 설계하고 운영하는 데 현실적인 제약을 가지고 있습니다. 이로 인해 AgentSecOps는 설계 원칙만으로는 실효적인 통제 체계가 되기 어렵고, 정책 실행 계층을 상용화하여 구현하는 것이 필수적입니다.
+
+먼저, 정책 결정 지점(PDP)은 실행 주체와 리소스, 목적, 시점, 승인 여부 등을 실시간으로 평가해야 하며, 이를 위해 복잡한 정책 템플릿 설계, 버전 관리, 정책 충돌 검증, 고가용성 처리 구조가 요구됩니다.
+
+정책 집행 지점(PEP)은 API 호출 흐름의 앞단 또는 중간에서 동작해야 하며, 수십 개의 SaaS 툴 또는 클라우드 API와의 통합이 전제되어야 합니다. 이를 각 시스템별로 직접 삽입하는 것은 인증 처리, 인터페이스 충돌, 네트워크 구성 변경 등의 문제를 수반합니다.
+
+정책 정보 제공 지점(PIP)은 사용자 역할, 인증 상태, 세션 정보, 요청 트리거 등 다양한 비정형 정보를 수집·정규화하여 정책 평가에 제공해야 하며, 이는 로그 통합 시스템 또는 전용 브로커 없이는 구현이 어렵습니다.
+
+이러한 제약 속에서 AgentSecOps는 오히려 전용 통제 플랫폼을 통한 상용화 구조로 실현 가능성이 더욱 높아집니다. 대표적인 예로 QueryPie MCP(Model Context Protocol) Agent PAM은 실행 시점 정책 평가(PDP), API 프록시 집행(PEP), 컨텍스트 수집(PIP) 기능을 통합한 구조로, 클라우드 및 SaaS 기반 에이전트 호출 흐름에 대응 가능한 통제 계층을 제공합니다 [16].
+
+MCP(Model Context Protocol) 기반 PAM 구조는 기존 IAM이나 DevSecOps의 인증 기반 통제를 보완하며, 실행 행위 자체에 대한 정책 삽입이 가능하도록 설계되어 있습니다. 또한 실행 목적 태깅, 관리자 승인 흐름 삽입, 정책 충돌 탐지, 감사 로그 내보내기 등 실무 적용에 필요한 기능을 단일 플랫폼에서 제공합니다.
+
+결론적으로 AgentSecOps는 이론적 모델로서의 완성도뿐 아니라, MCP(Model Context Protocol) PAM과 같은 상용 플랫폼의 지원 없이는 기업 내 실제 도입과 운영이 불가능에 가까운 구조입니다. 따라서 보안 설계자는 기술 원칙과 함께 상용 실행 통제 구조와의 통합 전략을 수립하는 것이 필수적입니다 [17].
+
+
+# 6. 결론 및 권고안
+
+본 백서는 AI 기반 에이전트 실행 흐름이 기존 보안 체계에 미치는 구조적 충격을 분석하고, 이를 통제하기 위한 실행 중심 보안 모델로서 AgentSecOps 아키텍처를 제안하였습니다. 특히 AgentOps와 DevSecOps의 한계, 실행 주체의 비인간화, 에이전트 중심 흐름에서의 정책 평가 필요성을 체계적으로 조명하였습니다.
+
+AgentSecOps는 단순한 자동화 보호 장치가 아니라, 실행 흐름의 목적, 시점, 자원, 권한을 실시간으로 평가하고 기록할 수 있는 실행 중심 보안 통제 계층입니다. 이는 기존의 코드 중심, 릴리즈 전 중심의 DevSecOps 프레임워크로는 대응할 수 없는 영역이며, 정책 기반 실행 차단, 승인 흐름 삽입, 감사 추적이라는 전혀 다른 통제 메커니즘을 요구합니다 [18].
+
+특히 AI 에이전트가 단독 실행을 수행하는 환경이 아니라, Agent-to-Agent 실행 흐름이 연속적으로 이어지는 구조에서는 상황은 더욱 복잡해집니다. 에이전트 간 호출마다 별도의 정책 평가(PDP), 실행 통제(PEP), 정보 참조(PIP)가 개입되어야 하며, 이 과정에서 발생하는 모든 실행 평가 결과는 중앙 실행 분석 시스템에서 통합적으로 집계되어야 합니다.
+
+다음은 이 구조를 시각적으로 나타낸 다이어그램입니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp21-9-distributed-agent-execution-and-centralized-policy-analysis.png"
+        alt="[그림 9] Distributed Agent Execution and Centralized Policy Analysis"
+        caption="[그림 9] Distributed Agent Execution and Centralized Policy Analysis"
+    />
+</Box>
+
+이러한 구조는 각 AgentOps 마다 개별 적용하는 건 기술적으로 가능하지만, 운영적으로는 매우 복잡하며 구축 및 유지 비용이 기하급수적으로 증가합니다. 기업 내부에서 수십 개의 에이전트 흐름을 모니터링하고, 각 흐름에 대해 PDP 정책을 설계하고, 평가 결과를 통합 분석하는 구조를 직접 운영하기란 현실적으로 불가능에 가깝습니다.
+
+따라서 AgentSecOps는 실무적으로는 MCP(Model Context Protocol) 기반 실행 보안 솔루션(MCP(Model Context Protocol) Agent PAM)의 형태로 구현되어야 하며, 이는 단순 기능이 아니라 운영 전략적 필수 인프라입니다. QueryPie MCP(Model Context Protocol) PAM은 실행 흐름에 정책 평가를 삽입하고, 개별 실행을 차단하거나 승인 흐름에 연동시키며, 그 결과를 통합적으로 분석할 수 있는 구조를 제공합니다[19].
+
+다음과 같은 환경에서는 MCP(Model Context Protocol) PAM 기반의 AgentSecOps 도입이 특히 요구됩니다:
+
+<br />
+        <InfoNote hideIcon>
+        * LLM 기반 에이전트가 Slack, GitHub, Notion, AWS, GCP, HR system 등 외부 SaaS와 연계되는 환경
+        * GitOps, IaC 기반 배포 흐름에 AI 에이전트가 직접 템플릿을 생성하는 자동화 구조
+        * 실행 흐름에 대한 감사·승인 이력이 규제 대상이 되는 산업군 (금융, 의료, 공공)
+        * 에이전트가 다단계 호출을 수행하는 멀티워크플로우 조직 구조
+        </InfoNote>
+
+<br />
+AgentSecOps는 실행 흐름 그 자체에 대한 정책 통제 구조를 제시하며, 이는 향후 AI 기반 운영 체계에서의 보안 통제 전환점이 될 것입니다. 조직은 이 모델을 단순한 기술 추세로 받아들일 것이 아니라, 보안 운영 모델의 구조적 혁신으로 인식해야 하며, 이를 위한 실행 정책 설계 문화와 통합 플랫폼 도입 전략을 동시에 수립해야 합니다.
+
+<br />
+<br />
+
+<ButtonLink href="https://app.querypie.com/" variant="black" size="lg">🚀 AI Hub로 안전한 MCP와 AI Agent 운영, 지금 직접 체험해보세요. </ButtonLink>
+
+## References
+
+[1] [I. Belcic, “What is AutoGPT?,” IBM, 2023.](https://www.ibm.com/think/topics/autogpt)
+
+[2] [GitHub Docs, “Webhooks,” GitHub Developer Guide, 2023.](https://docs.github.com/en/webhooks)
+
+[3] [I. Belcic, “What is AutoGPT?,” IBM, 2023.](https://www.ibm.com/think/topics/autogpt)
+
+[4] [GitHub Docs, “Webhooks,” GitHub Developer Guide, 2023.](https://docs.github.com/en/webhooks)
+
+[5] [Anthropic, “Responsible AI Agents and Oversight,” Anthropic Research, 2024.](https://www.anthropic.com/research/building-effective-agents)
+
+[6] [Google Cloud, “Introducing the DevSecOps Toolkit,” Google Cloud Blog, 2023.](https://cloud.google.com/blog/products/networking/introducing-the-devsecops-toolkit?hl=en)
+
+[7] [HashiCorp Docs, “Govern: Enforce policy controls before provisioning,” Terraform by HashiCorp, 2024.](https://developer.hashicorp.com/terraform/intro/phases/govern)
+
+[8] [Amazon Web Services, “Cedar – An Open Source Language for Access Control,” AWS News Blog, May 2023.](https://aws.amazon.com/about-aws/whats-new/2023/05/cedar-open-source-language-access-control/?nc1=h_ls)
+
+[9] T. Priebe et al., “Supporting Attribute-based Access Control in Authorization and Authentication Infrastructures with SAML,” in Proc. IFIP TC11 WG11.5, 2004.
+
+[10] [T. Moses, “XACML 3.0 Core Specification,” OASIS Standard, 2017.](http://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html)
+
+[11] [Open Policy Agent, “Rego Language Guide,” OPA Official Documentation, 2023.](https://www.openpolicyagent.org/docs/latest/policy-language/)
+
+[12] S. Rizvi and A. Ghafoor, “A Purpose-Based Access Control Model for Privacy Protection,” Computer Networks, vol. 43, no. 1, pp. 593–611, 2005.
+
+[13] [Kyverno Project, “Policy Engine for Kubernetes,” Kyverno Documentation, 2023.](https://kyverno.io/docs/)
+
+[14] [OWASP, “Top 10 for LLM Applications,” OWASP Foundation, 2023.](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+
+[15] [GitLab Docs, “CI/CD Security Patterns,” GitLab Documentation, 2023.](https://docs.gitlab.com/ee/topics/autodevops/)
+
+[16] [Microsoft, “AI Trust and Risk Framework,” Microsoft Responsible AI Practices, 2024.](https://www.microsoft.com/en-us/ai/responsible-ai)
+
+[17] [AWS, “Using IAM Policies to Control Access,” AWS Identity and Access Management User Guide, 2023.](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)
+
+[18] [QueryPie, “Uncovering MCP Security,” QueryPie White Paper, 2025.](https://www.querypie.com/resources/discover/white-paper/18/uncovering-mcp-security)
+
+[19] [QueryPie, “Redefining PAM for the MCP Era,” QueryPie White Paper, 2025.](https://www.querypie.com/resources/discover/white-paper/15/redefining-pam-for-the-mcp-era)
+
+[20] D. Kozen and J. Millen, “Policy Composition in Access Control,” IEEE Security & Privacy, vol. 14, no. 3, pp. 36–43, 2016.
+
+[21] [QueryPie, “Next-Step MCP PAM Architecture,” QueryPie Resource Center, 2025.](https://www.querypie.com/resources/discover/white-paper/16/next-step-mcp-pam)

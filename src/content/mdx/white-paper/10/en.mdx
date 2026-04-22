@@ -1,0 +1,427 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "QueryPie’s DevSecOps Pipeline: Proven to Enhance Development Speed and Stability"
+description: "Streamline development with QueryPie's DevSecOps pipeline for enhanced speed, stability, and security."
+date: "2024-11-22"
+author: ["jake", "ravi", "noah"]
+ogImage: "public/white-paper/wp-thumb-10.png"
+keywords: ["QueryPie", "DevSecOps pipeline", "development speed", "stability", "software security", "enhanced delivery"]
+relatedPosts:
+  - "/en/white-paper/9"
+  - "/en/white-paper/8"
+  - "/en/white-paper/7"
+---
+
+# Overview
+
+## Security-Integrated QueryPie Pipeline
+
+At QueryPie, we prioritize both fast development speed and stability. Our team is committed to rapid growth and agility in responding to changes. However, one crucial aspect we cannot overlook is security. In the early stages, we often found that increasing development speed led to security reviews being pushed back or overlooked. This resulted in security vulnerabilities being discovered post-launch, leading to urgent patches, high costs, and potential damage to brand trust.
+
+DevSecOps is the approach we use to fundamentally address these issues. By integrating security into the development (Dev) and operations (Ops) processes, we ensure that security is automated and standardized from the early stages of development through to production. QueryPie has implemented a pipeline that seamlessly integrates security throughout the entire process.
+
+## QueryPie’s Security Review Process Across All Development Lifecycle Phases
+
+As a Privileged Access Management (PAM) solution, QueryPie provides high levels of security to protect critical assets and data through its products: Database Access Controller (DAC), System Access Controller (SAC), and Kubernetes Access Controller (KAC). To ensure thorough security management, QueryPie performs consistent security reviews and checks across the entire development lifecycle. From the initial requirements phase, through design, implementation, testing, deployment, and operations, we apply multi-layered security review processes at each stage to prevent potential security threats in advance.
+
+To achieve this, we have adopted the DevSecOps approach, which tightly integrates development and security. With automated security testing and continuous monitoring, we quickly identify and address vulnerabilities, enhancing both the stability and trustworthiness of our products. For us, security is not just a feature; it is a core element of our products.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp10-1-querypie-cicd-pipeline.png"
+        alt="QueryPie CI/CD Pipeline"
+        caption="QueryPie CI/CD Pipeline"
+    />
+</Box>
+<br />
+
+## The Necessity of DevSecOps and Security Challenges in Cloud Environments
+
+Traditional security approaches often conduct security reviews after development is completed, which typically leads to long delays and high costs when issues arise. For example, fixing a security vulnerability discovered after the code is finished requires reanalyzing and modifying the already developed code or system architecture. This is far more complex and costly than addressing issues found at the initial stages.
+
+However, DevSecOps can address these problems by integrating security early in the development process. Through automated security reviews and periodic, continuous security checks, QueryPie can maintain development efficiency while providing a secure cloud environment. Furthermore, in cloud environments, where infrastructure management is highly automated, security vulnerabilities are at risk of being exposed quickly. Therefore, QueryPie’s DevSecOps pipeline is continuously improving to tackle the various security challenges inherent in cloud environments and ensure secure product operations.
+
+## Ensuring Trust through QueryPie’s DevSecOps Pipeline
+
+Through the DevSecOps pipeline, QueryPie automates security, proactively addresses security challenges in cloud environments, and aims to establish itself as a trusted PAM solution. This white paper will explain in detail how security throughout QueryPie’s development lifecycle and the implementation of its DevSecOps pipeline contribute to the reliability of the product.
+
+# CI/CD Pipeline Setup and Automation
+
+In QueryPie, the CI/CD pipeline is built using Github Action, with security checkpoints placed at each stage to automatically conduct security inspections. Through vulnerability assessments at each stage, if vulnerabilities of Medium severity or higher are found, progress to the next stage is controlled until the vulnerabilities are addressed. The types of vulnerabilities managed are shown in the image below, demonstrating the management process of checking, identifying, and removing various types of vulnerabilities throughout all stages of the CI/CD pipeline.
+
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp10-2-types-of-vulns-to-check.png"
+        alt="Types of vulnerabilities to be checked in the CI/CD pipeline"
+        caption="Types of vulnerabilities to be checked in the CI/CD pipeline"
+    />
+</Box>
+<br />
+
+## QueryPie DecSecOps Steps
+
+STEP 0) Manage deployment images as clean, vulnerability-free golden images.
+STEP 1) Perform SCA and SAST to assess source code vulnerabilities and open-source dependencies.
+STEP 2) Scan vulnerabilities in the container images that are being deployed.
+STEP 3) Perform DAST and penetration testing to check for application vulnerabilities.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp10-3-vulnerability-scanning-tools.png"
+        alt="Vulnerability Scanning Tools in the CI/CD Pipeline"
+        caption="Vulnerability Scanning Tools in the CI/CD Pipeline"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp10-4-vulnerability-scan-report.png"
+        alt="Report of Vulnerability Scanning in the CI/CD Pipeline"
+        caption="Report of Vulnerability Scanning in the CI/CD Pipeline"
+    />
+</Box>
+
+# Golden Image Management
+
+At QueryPie, we separate the images used for **customer deployments** and **internal testing**.
+
+Each image is created and managed as a Golden Image that removes CIS Benchmark Level 1 and CVE vulnerabilities, and no other images are allowed for use.
+
+Image hardening is performed using scripts created by our security team to remove CIS Benchmark Level 1 and CVE vulnerabilities.
+
+Below are the CIS Benchmark checks for OS Image Hardening.
+
+<br />
+<Table center>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray">**Category**</Table.Th>
+            <Table.Th cellBackgroundColor="gray">**Check Items**</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>**1. Initial Setup**</Table.Td>
+            <Table.Td>1.1 Filesystem
+                1.2 Configure Software and Patch Management
+                1.3 Configure Secure Boot Settings
+                1.4 Configure Additional Process Hardening
+                1.5 Mandatory Access Control
+                1.6 Configure Command Line Warning Banners</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**2. Services**</Table.Td>
+            <Table.Td>2.1 Configure Time Synchronization
+                2.2 Configure Special Purpose Services
+                2.3 Configure Service Clients</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**3. Network Configuration**</Table.Td>
+            <Table.Td>3.1 Configure Network Devices
+                3.2 Configure Network Kernel Modules
+                3.3 Configure Network Kernel Parameters
+                3.4 Configure Host Based Firewall</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**4. Access, Authentication, and Authorization**</Table.Td>
+            <Table.Td>4.1 Configure Job Schedulers
+                4.2 Configure SSH Server
+                4.3 Configure Privilege Escalation
+                4.4 Configure Pluggable Authentication Modules
+                4.5 User Accounts and Environment</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**5. Logging and Auditing**</Table.Td>
+            <Table.Td>5.1 Configure Logging
+                5.2 Configure System Accounting (auditd)
+                5.3 Configure Integrity Checking</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**6. System Maintenance**</Table.Td>
+            <Table.Td>6.1 System File Permissions
+                6.2 Local User and Group Settings</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+<br />
+
+Based on the above check items, we write and run a Remediation Script as follows and automatically adjust the configuration.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp10-5-hardening-process.png"
+        alt="CIS Benchmark Level 1 - Hardening Process"
+        caption="CIS Benchmark Level 1 - Hardening Process"
+    />
+</Box>
+<br />
+
+# Code Security Inspection and Dependency Management
+
+The SAST (Static Application Security Testing) tools used to identify security vulnerabilities in the development source code often do not provide sufficient coverage with just the default detection rules provided by the vendor. Below is an example of the vulnerability detection results using the basic detection rules on publicly available sample code containing vulnerabilities.
+
+```kotlin
+package ai.qwiet.springbootkotlinwebgoat
+
+import org.springframework.http.HttpHeaders
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import java.io.InputStreamReader
+import java.io.BufferedReader
+import java.io.File
+import mu.KotlinLogging
+import org.apache.logging.log4j.LogManager
+
+@RestController
+class HelloController {
+    val logger = KotlinLogging.logger {}
+    val secondaryLogger = LogManager.getLogger()
+
+    @GetMapping("/")
+    fun index(): String {
+        return "Greetings from Spring Boot!"
+    }
+
+    @GetMapping("/greet")
+    fun greet(@RequestParam("username") username: String): String {
+        logger.info { "Got request for `/greet`" }
+        // vulnerability: Sensitive Data Leak
+        secondaryLogger.debug("Params for `/greet `: $username")
+        // vulnerability: XSS
+        return "Greetings ${username}!"
+    }
+
+    fun parseParams(name: String, msg: String): Map<String, String?> {
+        val checkedName = name.takeUnless { it contains '\\' }?.ifBlank { "default_name" }
+        val checkedMsg = msg.ifBlank { "default_msg" }
+        return mapOf("parsed_name" to checkedName, "parsed_msg" to checkedMsg)
+    }
+
+    @GetMapping("/exec")
+    fun exec(@RequestParam("cmd") cmd: String): ResponseEntity<String> {
+        logger.info { "Got request for `/exec`!" }
+        secondaryLogger.debug("Params for `/exec`: $cmd")
+
+        var out = "NOP"
+        if (cmd != "nop") {
+            // vulnerability: Remote Code Execution
+            val proc = Runtime.getRuntime().exec(cmd)
+            val lineReader = BufferedReader(InputStreamReader(proc.getInputStream()))
+            val output = StringBuilder()
+            lineReader.lines().forEach { line ->
+                output.append(line + "\n")
+            }
+            out = "Did execute command `$cmd`, got stdout: $output"
+        }
+        return ResponseEntity(out, HttpStatus.OK)
+    }
+
+    @GetMapping("/touch_file")
+    fun touchFile(@RequestParam("name") name: String, @RequestParam("msg") msg: String): ResponseEntity<String> {
+        logger.info { "Got request for `/touch_file`!" }
+        secondaryLogger.debug("Params for `/touch_file`: $name | $msg")
+        if (name.length < 3) {
+            logger.warn { "The provided name is very short!" }
+        }
+
+        if (name == null || msg == null) {
+            return ResponseEntity("The `name` & `msg` parameters have to be set.", HttpStatus.OK)
+        } else {
+            val parsedParams = parseParams(name, msg)
+            val fullPath = "/tmp/http4kexample/" + parsedParams["parsed_name"]
+            val finalMsg = "MESSAGE: " + parsedParams["parsed_msg"]
+            // vulnerability: Directory Traversal
+            File(fullPath).writeText(finalMsg)
+            return ResponseEntity("Did write message `$finalMsg` to file at `$fullPath`", HttpStatus.OK)
+        }
+    }
+
+    @GetMapping("/debug")
+    fun debug(@RequestParam("url") url: String): ResponseEntity<String> {
+        logger.info { "Got request for `/debug`!" }
+        secondaryLogger.debug("Params for `/debug`: $url")
+
+        val headers = HttpHeaders()
+        headers.add("Location", url)
+        // vulnerability: Open Redirect
+        return ResponseEntity(headers, HttpStatus.FOUND)
+    }
+
+    @GetMapping("/render_html")
+    fun renderHtml(@RequestParam("name") name: String): ResponseEntity<String> {
+        logger.info { "Got request for `/render_html`!" }
+        secondaryLogger.debug("Params for `/render_html`: $name")
+
+        // vulnerability: XSS
+        val out = StringBuilder().append("<h1>Hello there, ").append("$name").append("!</h1>").toString()
+        return ResponseEntity(out, HttpStatus.OK)
+    }
+
+    @GetMapping("/add")
+    fun add(@RequestParam("x") x: String, @RequestParam("y") y: String): ResponseEntity<String> {
+        logger.info { "Got request for `/add`!" }
+        secondaryLogger.debug("Params for `/add`: $x | $y")
+
+        val xi = x.toInt()
+        val xy = y.toInt()
+        val out = (xi + xy).toString()
+        return ResponseEntity(out, HttpStatus.OK)
+    }
+}
+```
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp10-6-vulnerability-detection-snyk.png"
+        alt="Vulnerability detection results using Snyk's default detection rules"
+        caption="Vulnerability detection results using Snyk's default detection rules"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp10-7-vulnerability-detection-github.png"
+        alt="Vulnerability detection results using GitHub's default detection rules"
+        caption="Vulnerability detection results using GitHub's default detection rules"
+    />
+</Box>
+<br />
+<Table center>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray">**Vulnerability Type**</Table.Th>
+            <Table.Th cellBackgroundColor="gray">**Snyk**</Table.Th>
+            <Table.Th cellBackgroundColor="gray">**GitHub**</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>**XSS**</Table.Td>
+            <Table.Td><State color="red">Not Detected</State></Table.Td>
+            <Table.Td><State color="blue">Detected</State></Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**Command Injection**</Table.Td>
+            <Table.Td><State color="blue">Detected</State></Table.Td>
+            <Table.Td><State color="blue">Detected</State></Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**Directory Traversal**</Table.Td>
+            <Table.Td><State color="red">Not Detected</State></Table.Td>
+            <Table.Td><State color="red">Not Detected</State></Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**Open Redirect**</Table.Td>
+            <Table.Td><State color="red">Not Detected</State></Table.Td>
+            <Table.Td><State color="red">Not Detected</State></Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+<br />
+
+To address these issues, various SAST products offer custom detection rule functionality. However, without sufficient experience in the relevant tasks, it can be difficult to effectively utilize these features. To keep up with the product development environment and evolving new vulnerabilities, QueryPie has developed custom detection patterns to ensure that SAST detection rules are always up to date.
+
+When a Pull Request (PR) is created in the product's source code repository, GitHub Actions is triggered to request vulnerability scanning of the code through the SAST tool. If vulnerabilities are found, the migration control feature is used to block the merging of the source code until the vulnerabilities are resolved, ensuring the integrity and security of the product.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp10-8-cicd-migration-control-process.png"
+        alt="CI/CD Pipeline Migration Control Process"
+        caption="CI/CD Pipeline Migration Control Process"
+    />
+</Box>
+<br />
+
+# Image Security Validation and SBOM Management
+
+## Image Security Validation
+A process is established where application images are automatically built using GitHub Actions and uploaded to Harbor. During this process, Trivy is used to scan for image vulnerabilities.
+
+If vulnerabilities are found in the image, the corresponding alert is immediately provided in the Pull Request (PR), allowing developers to quickly identify and address the vulnerabilities. Notably, if the vulnerability is classified as Medium or higher, the image becomes subject to remediation.
+
+In addition to scanning with Trivy, images are also uploaded to AWS Elastic Container Registry (ECR), where AWS Inspector performs additional checks. This helps identify vulnerabilities that Trivy may have missed, allowing for a more thorough analysis and management of images. Through this process, we can ensure the deployment of highly reliable images.
+
+## SBOM Management
+
+For each release, QueryPie generates a Software Bill of Materials (SBOM) in the CycloneDX format, and the following management process is carried out:
+
+- Scan the SBOM file to identify open-source libraries with vulnerabilities and address them.
+- Ensure license compliance, and manage to prevent violations of copyright or regulatory requirements.
+
+# Cloud Environment IaC Security Management
+
+## Resource Deployment and Management via IaC
+
+Infrastructure as Code (IaC) refers to managing and automating infrastructure provisioning through code. With code-based infrastructure, the hassle of manual configurations is eliminated, enabling more flexible infrastructure management through automated deployment processes. It allows for consistent settings across multiple environments and modifications or updates as needed. Previously, resources such as servers, networks, and storage had to be set manually, but with IaC, they can be easily deployed with reduced deployment time and minimized error possibilities. Moreover, integration with Version Control Systems (VCS) like GitHub enables tracking infrastructure changes, allowing for quick responses and stable environment management.
+
+## Security Vulnerability Review and Fix via IaC Scanning
+
+Security vulnerability review via IaC scanning addresses security issues that may arise before deployment by solving them directly in the IaC layer. As various infrastructure configurations are coded, security risks can be blocked early, and vulnerabilities can be fixed during the code writing phase to enhance security. The strength of IaC, which allows for rapid and consistent deployment, also comes with the risk that small configuration errors could lead to serious security vulnerabilities. For instance, if unnecessary permissions, incorrect image sources, inadequate access control, or exposed secrets are left in the code, these security issues will appear every time the infrastructure is deployed. IaC scanning helps prevent these risks in advance, and by integrating the inspection process into the CI/CD pipeline, automated security can be implemented.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp10-9-iac-scan.png"
+        alt="IaC Scan"
+        caption="IaC Scan"
+    />
+</Box>
+<br />
+
+## Policy Validation and Enforcement via Open Policy Agent (OPA)
+
+OPA provides the ability to manage and validate policies as code, enabling the pre-deployment review and application of policies. By combining IaC tools like Terraform and Ansible with OPA, pre-defined policies can be automatically executed and applied before infrastructure deployment, ensuring consistent adherence to security standards. This ensures that even deployments made by different development and infrastructure teams adhere to consistent security policies, improving the overall security stability.
+
+In cloud environments, resources are created through various paths, so it is crucial to clearly identify and manage all resources within the management scope. The security team uses OPA to prevent unnecessary services or resources from being deployed in AWS Native Architecture. This ensures visibility in cloud infrastructure, enabling all resources to be systematically managed. Furthermore, OPA helps block the creation of resources that do not meet security standards according to the pre-applied policies, ensuring efficient and secure cloud management.
+
+Additionally, tags are a critical element in resource permission management and cost control. Missing essential tags can lead to difficulties in operational management and cost tracking. The security team applies policies using OPA to restrict the creation or execution of resources that do not have essential tags, such as RiskOwner and Owner. This prevents tag management omissions and enables consistent tag management through automated policy application. This approach supports systematic resource management and security policy compliance in the cloud environment, contributing to enhanced infrastructure stability and visibility.
+
+## Continuous Compliance and Governance via IaC Management
+
+Security standards such as ISO 27001 require the establishment of a security management system to ensure the confidentiality, integrity, and availability of infrastructure. However, in cloud environments, where infrastructure changes are frequent and large-scale, manually managing every change is nearly impossible. IaC addresses this challenge by codifying infrastructure configurations and automating their management. Policies can be programmed, ensuring that security configurations remain consistent and repeatable.
+
+# Dynamic Vulnerability Scanning with DAST
+
+## Vulnerability Diagnosis Process at the Deployment Stage
+
+At the deployment stage, we conduct a comprehensive vulnerability assessment by combining Dynamic Application Security Testing (DAST) with penetration testing using OWASP ZAP. The DAST process does not end with just a basic Active Scan, but rather includes additional steps where our security team uses custom scripts to verify access control on pages that are inaccessible with a regular user token. It also includes parameter tampering tests on packets that are encoded or encrypted before transmission.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp10-10-dast.png"
+        alt="DAST - Using Custom Scripts"
+        caption="DAST - Using Custom Scripts"
+    />
+</Box>
+<br />
+
+In the DAST and penetration testing process, if medium or higher vulnerabilities are identified, deployment is only completed after the vulnerabilities are resolved. This process helps ensure a secure deployment and contributes to enhancing the overall security of the system.
+
+# Innovation and Trust Building for Sustainable Security Solutions
+
+QueryPie views security not as a short-term task but as a long-term commitment to our customers, making it our top priority. Through continuous security enhancements, we strictly comply with major industry security policies and regulations, striving to provide a safe environment that customers can trust. By integrating various security tests into our CI/CD pipeline, we thoroughly check for vulnerabilities throughout the development cycle. Recently, we have also incorporated fuzz testing to proactively identify threats such as Denial of Service (DOS) attacks at an early stage.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/wp10-11-fuzzing.png"
+        alt="Enhancing the Fuzzing Process in the CI/CD Pipeline"
+        caption="Enhancing the Fuzzing Process in the CI/CD Pipeline"
+    />
+</Box>
+<br />
+
+These efforts ensure that our customers can manage their data securely and further strengthen the trustworthiness of the services provided by QueryPie. We will continue to evolve, building on the trust we have with our customers, to offer sustainable security solutions.
+
+

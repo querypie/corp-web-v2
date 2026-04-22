@@ -1,0 +1,1121 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "MCPセキュリティ評価：文献調査によるMCPセキュリティ脅威の特定と脆弱性分析"
+description: "AIシステムがますます相互接続される中で、モデル間のコンテキスト共有は、信頼性の高い推論と安全な実行を確保するために不可欠となっています。本ホワイトペーパーでは、Model Context Protocol（MCP）に関する最新の研究を分析し、主要なセキュリティ脅威を特定するとともに、文脈認識型アクセス制御と自律的なポリシー施行を実現する次世代アーキテクチャ — MCP PAM を提案します。"
+date: "2025-04-23"
+author: "kenny"
+ogImage: "public/white-paper/wp-thumb-18.png"
+keywords: ["AIセキュリティ", "実行型AI", "モデルコンテキストプロトコル", "MCP", "MCP PAM", "AI-PAM", "AI-SPM", "自律型アクセス制御", "AI実行制御", "AIエージェントセキュリティ", "エージェント型AI", "プロンプトインジェクション対策", "ゼロトラストAI", "実行時ポリシー施行", "AIガバナンス", "ジャストインタイムアクセス", "最小権限の原則", "OPA", "Cedar", "QueryPie", "コンテキストフロー", "ポリシー・アズ・コード", "AIインフラセキュリティ"]
+relatedPosts:
+  - "/ja/white-paper/17"
+  - "/ja/white-paper/16"
+  - "/ja/white-paper/15"
+---
+# 1. 序論と目的
+
+## 背景と論拠
+AIシステムが急速なペースで実用化され続ける中、システム間の相互作用とコンテキスト情報の共有は、モデルの精度を確保し、推論の継続性を維持し、それらに適応した応答を可能にするために不可欠となっている。このような状況の中で、モデルコンテキストプロトコル（MCP）は、大規模言語モデル（LLM）やエージェントベースシステムにおけるコンテキスト配信を構造化し、標準化するために設計された有望な新しいフレームワークとして登場した[1]。
+
+MCPは、構造化されたコンテキストフローのメカニズムを通じて、モデル間の連携、実行コンテキストの共有、ポリシー駆動型のアクセス制御を容易にする。特に、ゼロ・トラスト・セキュリティ・アーキテクチャと統合する可能性があり、安全なAI運用のための戦略的基盤を提供する点で重要である[2]。しかし、MCPはまだ設計と実装の初期段階にあり、その構造的特性はいくつかの重大なセキュリティ脅威をもたらす：
+
+- レイヤーにまたがるコンテキストの誤用
+- 委任認証の悪用
+- ポリシーのバイパスとモデルの誤動作[3][4]。
+
+これらの脅威は単なる設定の欠陥ではなく、AIシステム全体の信頼性、一貫性、信頼性を損ないかねない深刻なリスクをもたらす。
+
+## 分析の目的
+
+このホワイトペーパーの目的は以下の通りである：
+
+1. 2024年11月から2025年4月までに発表されたMCP関連の最新研究論文のうち15本を体系的にレビューおよび分析し、特に文献に示されたセキュリティ脅威シナリオの特定、分類、構造化に焦点を当てる。
+2. 2024年11月、Anthropic社による最初の技術リリース後、現在入手可能なすべてのMCP出版物の包括的な分析を実施する。
+3. MCPベースのアーキテクチャの上に構築されたLLMやAIエージェントシステムに出現する可能性のある、現実世界の攻撃ベクトルや脆弱性のカテゴリーを特定する。
+4. この脅威分析に基づき、ポリシー主導の対抗策と実行可能な技術的保護方法を提案するとともに、MCP時代に特化した新しいセキュリティ・アーキテクチャの必要性を強調する。
+
+## レビューした文献の範囲
+
+この分析は、arXiv、ResearchGate、Preprints.org 、Anthropicなどのプラットフォームで発表された、合計15のMCP関連の研究論文と技術報告に基づいている。選ばれた文書は、以下の主要な主題分野を網羅している：
+
+- MCPアーキテクチャと標準化の動向
+- ポリシーベースの制御と認証委任モデル
+- LLMとコンテキスト配信フローの統合
+- 脆弱性、異常な動作、監査の限界を含む、MCPシステム内のセキュリティ脅威シナリオ
+
+レビューされた文献の完全な要約は、セクション2（文献レビューの枠組みと分類）の「MCPに関連する15の主要論文の要約表」に示されており、関連する戦略と所見に関連して、以下の各セクションを通して各文献が適宜引用されている。
+
+## 分析の枠組み
+
+- **主要キーワードによるトピック分類**：MCPセキュリティ関連キーワードクラスターに基づく分類。
+- **脅威の種類による構造化**：シナリオを脅威カテゴリーT1～T4に分類。
+- **情報源の信頼性、適時性、適用性の評価**：信頼できる最新の研究プラットフォームからの文書を優先する。
+- **MCP セキュリティ・アーキテクチャとの関連性**：戦略的な整合性、および現実世界の実装における適用可能性に基づいて評価される。
+
+この分析の枠組みは、本ホワイトペーパーのセクション3（MCPベースのシステムにおけるセキュリティ脅威シナリオ分析）およびセクション4（セキュリティ脅威分析に基づく戦略的推奨事項）に適用される。
+
+## 文書の構成
+
+本ホワイトペーパーは5つの主要なパートで構成されており、それぞれがモデル・コンテキスト・プロトコル（MCP）ベースのAIシステムに関連するセキュリティ脅威を分析し、次世代のセキュリティ・アーキテクチャとともに構造的な対策を提案するよう設計されている：
+
+1. **序論と目的**
+MCPの背景を説明し、コンテキストを意識したシステムにおける新たなセキュリティリスクを浮き彫りにする。15の主要な出版物のレビューに基づき、構造化された脅威分析の必要性を説明する。
+
+2. **文献レビューの枠組みと分類**
+
+最近のMCP関連論文15本を定量的・定性的に分類・評価。分析結果は脅威カテゴリーT1～T4にマッピングされ、要約表には各研究の戦略的貢献度を示す数値関連性スコア（MSR）が記載されている。
+
+3. **MCPベースのシステムにおけるセキュリティ脅威シナリオ分析**
+
+MCP システムで観測される 4 つの中核的な脅威タイプ（T1～T4）について、シナリオに基づく例を用いて詳しく説明する。このセクションには、各脅威構造を視覚的に説明するためのコードサンプル、 実行フロー、および障害箇所が含まれている。
+
+4. **セキュリティ脅威分析に基づく戦略的提言**
+
+T1～T4の脅威に対処するための4つの戦略的柱（ポリシーの関連付け、コンテキスト統合、 委任管理、監査トレーサビリティ）を提案する。各戦略は、期待される影響とともに、MCP アーキテクチャ内の該当するセキュリティレイヤーにマッピングされる。
+
+5. **結論と新しいセキュリティー・アーキテクチャーの提案**
+
+統合的、自律的、かつポリシー駆動型のセキュリティフレームワークとしての**MCP PAM（Model Context Protocol Privileged Access Management**）を紹介する。このセクションでは、MCP 時代におけるセキュリティへのアプローチ方法のパラダイムシフトの必要性を強調する。
+
+# 2. 文献レビューの枠組みと分類
+
+## 分析の目的とアプローチ
+
+本セクションは、モデル・コンテキスト・プロトコル（MCP）ベースのAIシステムにおけるセキュリティ脅威を理解し、対処するための基礎となる。この目標を達成するため、2024年11月から2025年4月までに発表された最近の論文15本を収集し、体系的に分析した。
+
+選ばれた文献は、arXiv、Preprints.org、ResearchGate、Anthropicなど、評判の高いプラットフォームから入手したもので、以下の主要なトピックをカバーしている：
+
+- **MCPの基本的なアーキテクチャとコンテキスト指向のデザイン**
+- **ポリシーベースのアクセス制御と委任メカニズムの限界**
+- **コンテキストフローの処理と伝送経路における脆弱性**
+- **監査ログ構造の課題と監査可能性の確保**
+- **LLMとエージェントベースのAI実行環境との間で統一されたポリシーを適用することの難しさ**
+
+この文献レビューは、表面的なトピックの要約や傾向の観察にとどまらない。その代わりに、実用的な基盤を構築することを目的としている：
+
+- **セクション3**で議論される、T1～T4の中核となる脅威タイプを**特定するための理論的根拠とシナリオに基づく根拠を確立する**。
+- **セクション4**で示される、**ポリシー主導の戦略設計と階層的セキュリティマッピングに**必要な構造的洞察を提供する。
+- **セクション5**で提案される**MCP PAM**アーキテクチャの機能レベルの検証をサポートする。
+
+各出版物は、技術的貢献、セキュリティとの関連性、適用可能性、戦略的適合性という 4 つの基準について、**量的・質的レンズを通して**評価される。この評価に基づき、**文献要約表（表1**）と**戦略適合性スコア（MSR：MCP Strategic Relevance Score**）が提供される。
+
+この分析結果は、脅威の構造、シナリオ、対応戦略の設計をサポートするために、本稿の以下の部分で直接適用される。
+
+## 評価基準と採点フレームワーク
+このMCPに基づくセキュリティ脅威分析のために選ばれた15本の論文は、トピックとの関連性だけでなく、**戦略的な関連性**、具体的には、実行可能な対策立案や構造的な脅威パターンの特定への貢献度によって評価された。
+
+**評価項目：4つの主要な基準**
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> 評価基準 </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> 説明 </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>① 技術貢献度 (Technical Contribution)</Table.Td>
+            <Table.Td>MCPの設計、実行、または統合フレームワークに関するアーキテクチャの提案や実装例を紹介する論文かどうか。 </Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>② セキュリティ関連性 (Security Relevance)</Table.Td>
+            <Table.Td>ポリシー違反、コンテキストの改ざん、委任の誤用、監査制限などのセキュリティ脅威に明示的に対処しているかどうか。</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>③ 適用可能性 (Applicability to MCP Systems)</Table.Td>
+            <Table.Td>このアイデアが、ポリシーエンジン、LLM統合、エージェントベースの実行を含むシステム設計に現実的に適用できるかどうか。</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>④ 戦略連携性 (Relevance to Strategic Design)</Table.Td>
+            <Table.Td>その作業が、T1～T4の脅威タイプや、このホワイトペーパーで紹介したMCP PAM戦略と論理的に整合しているかどうか。</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+<br /> 
+
+**MSRスコアの計算式（MCP戦略関連性スコア）**
+
+各論文は、上記の4つの基準それぞれについて、0から3の尺度で評価された。そして、これらの評価をもとに、以下の加重式を用いて**MSR（MCP Strategic Relevance）スコアを**算出した：
+
+> MSRi=(Ti×0.3)+(Si×0.4)+(Ai×0.2)+(Ri×0.1)MSRi=(Ti×0.3)+(Si×0.4)+(Ai×0.2)+(Ri×0.1)
+
+<br /> 
+
+- **Ti（技術的貢献）**：MCP のアーキテクチャ、システム設計、実行構造に関する技術的要素を提案または実装している度合い。
+- **Si**（セキュリティとの関連性）：ポリシー違反、コンテキストの不正操作、監査の失敗などのセキュリティリスクとの直接的な関連性。
+- **Ai（適用性）**：提案されたコンセプトやフレームワークを実際のMCPベースのシステムに適用する際の実用性。
+- **Ri（戦略的関連性）**：コンテンツが、T1～T4 の脅威シナリオ、対応戦略、または本ホワイトペーパーで提案されている MCP PAM アーキテクチャと整合している度合い。
+
+<br /> 
+
+**MSRスコアによる分類**
+
+<Table center width="100%" marginTopSize="xs">
+  <Table.Thead>
+    <Table.Tr>
+      <Table.Th cellBackgroundColor="gray">MSRスコア範囲</Table.Th>
+      <Table.Th cellBackgroundColor="gray">分類</Table.Th>
+      <Table.Th cellBackgroundColor="gray">意味</Table.Th>
+    </Table.Tr>
+  </Table.Thead>
+  <Table.Tbody>
+    <Table.Tr>
+      <Table.Td>2.5以上</Table.Td>
+      <Table.Td>コア戦略ペーパー</Table.Td>
+      <Table.Td>T1-T4脅威の特定およびMCP PAM戦略設計に直接貢献する論文。</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>1.5〜2.4</Table.Td>
+      <Table.Td>次点資料</Table.Td>
+      <Table.Td>特定の戦略やシナリオに限定した洞察を提供する論文。</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>1.4以下</Table.Td>
+      <Table.Td>分析対象外</Table.Td>
+      <Table.Td>MCPセキュリティとの直接的な関連性が低く、コア分析から除外された論文。</Table.Td>
+    </Table.Tr>
+  </Table.Tbody>
+</Table>
+
+**MSRスコアの使用目的**
+
+MSRのスコアとクラス分けは以下の通り：
+
+- **セクション2.3**：文献を要約し、評価表に分類する。
+- **セクション3**：T1～T4の脅威シナリオを定義する際に、文献引用の優先順位をつける。
+- **セクション4**：各戦略案の実現可能性を裏付ける基礎的な証拠。
+- **セクション5**：MCP PAMアーキテクチャの提案の実用的な根拠の検証。
+
+## 文献毎の評価表（MSR） 
+<Table center width="100%">
+  <Table.Thead>
+    <Table.Tr>
+      <Table.Th cellBackgroundColor="gray">No.</Table.Th>
+      <Table.Th cellBackgroundColor="gray">タイトル概要</Table.Th>
+      <Table.Th cellBackgroundColor="gray">T</Table.Th>
+      <Table.Th cellBackgroundColor="gray">S</Table.Th>
+      <Table.Th cellBackgroundColor="gray">A</Table.Th>
+      <Table.Th cellBackgroundColor="gray">R</Table.Th>
+      <Table.Th cellBackgroundColor="gray">MSRスコア</Table.Th>
+      <Table.Th cellBackgroundColor="gray">分類</Table.Th>
+    </Table.Tr>
+  </Table.Thead>
+  <Table.Tbody>
+    <Table.Tr><Table.Td>[1]</Table.Td><Table.Td>MCP構造および脅威の概要</Table.Td><Table.Td>3</Table.Td><Table.Td>2</Table.Td><Table.Td>1</Table.Td><Table.Td>2</Table.Td><Table.Td>2.3</Table.Td><Table.Td>次点資料</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[2]</Table.Td><Table.Td>LLMセキュリティ脆弱性</Table.Td><Table.Td>1</Table.Td><Table.Td>3</Table.Td><Table.Td>2</Table.Td><Table.Td>3</Table.Td><Table.Td>2.5</Table.Td><Table.Td>コア戦略ペーパー</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[3]</Table.Td><Table.Td>制約プログラミングの統合</Table.Td><Table.Td>2</Table.Td><Table.Td>2</Table.Td><Table.Td>3</Table.Td><Table.Td>2</Table.Td><Table.Td>2.3</Table.Td><Table.Td>次点資料</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[4]</Table.Td><Table.Td>MCP標準化調査</Table.Td><Table.Td>3</Table.Td><Table.Td>2</Table.Td><Table.Td>1</Table.Td><Table.Td>2</Table.Td><Table.Td>2.3</Table.Td><Table.Td>次点資料</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[5]</Table.Td><Table.Td>業界別統合事例</Table.Td><Table.Td>3</Table.Td><Table.Td>0</Table.Td><Table.Td>1</Table.Td><Table.Td>0</Table.Td><Table.Td>1.1</Table.Td><Table.Td>❌ 分析から除外</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[6]</Table.Td><Table.Td>ポリシーベースの安全保証</Table.Td><Table.Td>2</Table.Td><Table.Td>2</Table.Td><Table.Td>2</Table.Td><Table.Td>2</Table.Td><Table.Td>2.2</Table.Td><Table.Td>次点資料</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[7]</Table.Td><Table.Td>LLMエージェント・アーキテクチャ</Table.Td><Table.Td>2</Table.Td><Table.Td>2</Table.Td><Table.Td>2</Table.Td><Table.Td>1</Table.Td><Table.Td>2.1</Table.Td><Table.Td>次点資料</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[8]</Table.Td><Table.Td>ハードウェア統合事例</Table.Td><Table.Td>1</Table.Td><Table.Td>1</Table.Td><Table.Td>2</Table.Td><Table.Td>1</Table.Td><Table.Td>1.4</Table.Td><Table.Td>❌ 分析から除外</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[9]</Table.Td><Table.Td>MCP公式イントロダクション</Table.Td><Table.Td>3</Table.Td><Table.Td>1</Table.Td><Table.Td>1</Table.Td><Table.Td>2</Table.Td><Table.Td>2.1</Table.Td><Table.Td>次点資料</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[10]</Table.Td><Table.Td>委任に対するセキュリティ・フレームワーク</Table.Td><Table.Td>2</Table.Td><Table.Td>3</Table.Td><Table.Td>2</Table.Td><Table.Td>2</Table.Td><Table.Td>2.5</Table.Td><Table.Td>コア戦略ペーパー</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[11]</Table.Td><Table.Td>MCPにおける説明責任の問題</Table.Td><Table.Td>1</Table.Td><Table.Td>3</Table.Td><Table.Td>1</Table.Td><Table.Td>3</Table.Td><Table.Td>2.2</Table.Td><Table.Td>次点資料</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[12]</Table.Td><Table.Td>MCPサーバーによる自動化</Table.Td><Table.Td>2</Table.Td><Table.Td>2</Table.Td><Table.Td>3</Table.Td><Table.Td>2</Table.Td><Table.Td>2.3</Table.Td><Table.Td>次点資料</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[13]</Table.Td><Table.Td>社会技術的リスク分析</Table.Td><Table.Td>2</Table.Td><Table.Td>2</Table.Td><Table.Td>1</Table.Td><Table.Td>3</Table.Td><Table.Td>2.2</Table.Td><Table.Td>次点資料</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[14]</Table.Td><Table.Td>大企業向けMCPデザイン</Table.Td><Table.Td>3</Table.Td><Table.Td>2</Table.Td><Table.Td>2</Table.Td><Table.Td>3</Table.Td><Table.Td>2.5</Table.Td><Table.Td>コア戦略ペーパー</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>[15]</Table.Td><Table.Td>相互運用性と拡張性</Table.Td><Table.Td>2</Table.Td><Table.Td>1</Table.Td><Table.Td>1</Table.Td><Table.Td>3</Table.Td><Table.Td>1.9</Table.Td><Table.Td>次点資料</Table.Td></Table.Tr>
+  </Table.Tbody>
+</Table>
+
+## 除外論文とその理由
+
+以下の論文は、戦略的関連性（MSR）のスコアが低かったため、中核的脅威分析から除外された：
+
+- [5] *Paul Pajo, "*Smithery.ai ..."：：セキュリティよりも業種統合のユースケースにフォーカス。脅威モデリングや構造的リスク要因との関連は最小限。
+- [8] Xinyi Hou, "Hardware Synergy..."：ハードウェアの統合が中心で、MCPセキュリティ・アーキテクチャや脅威分析との関連性は低い。
+
+これらの論文は背景となる参考文献としては役立つかもしれないが、脅威シナリオの枠組みに直接含めるには不適切と判断された。
+
+
+## 文献要約表の概要
+
+以下の要約表は、分析対象となった全15件の論文の主要なメタデータと要約をまとめたものである。各文書は、特に**T1～T4の脅威タイプの**分類、戦略的対策の設計、ポリシーに基づくセキュリティフレームワークの策定において、以降のセクションで引用される場合がある。
+
+各論文について、表は以下を含む：
+- 出版日
+- 著者
+- タイトルとコア・トピック
+- 概要
+- 主要キーワード
+- ソース・プラットフォーム
+- 直接ダウンロードリンク
+<br /> 
+
+**MCP関連主要15文献のサマリー表（2024年11月～2025年4月11日）**
+
+<Table center width="100%">
+  <Table.Thead>
+    <Table.Tr>
+      <Table.Th cellBackgroundColor="gray">番号</Table.Th>
+      <Table.Th cellBackgroundColor="gray">日付</Table.Th>
+      <Table.Th cellBackgroundColor="gray">著者</Table.Th>
+      <Table.Th cellBackgroundColor="gray">論文タイトル</Table.Th>
+      <Table.Th cellBackgroundColor="gray">概要</Table.Th>
+      <Table.Th cellBackgroundColor="gray">キーワード</Table.Th>
+      <Table.Th cellBackgroundColor="gray">ソース</Table.Th>
+    </Table.Tr>
+  </Table.Thead>
+  <Table.Tbody>
+    <Table.Tr><Table.Td>1</Table.Td><Table.Td>2025年3月</Table.Td><Table.Td>侯信義ほか</Table.Td><Table.Td><a href="https://arxiv.org/abs/2503.23278" target="_blank">モデル・コンテキスト・プロトコル（MCP）：現状、セキュリティ上の脅威、今後の研究の方向性</a></Table.Td><Table.Td>MCPのアーキテクチャーとセキュリティリスクを分析し、適用上の課題と今後の研究について論じる。</Table.Td><Table.Td>MCP, セキュリティ</Table.Td><Table.Td>arXiv</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>2</Table.Td><Table.Td>2025年4月</Table.Td><Table.Td>ブランドン・ラドセビッチ、ジョン・ハロラン</Table.Td><Table.Td><a href="https://arxiv.org/abs/2504.03767" target="_blank">MCP安全性監査：モデル・コンテキスト・プロトコルを用いたLLMは、主要なセキュリティ侵害を許す</a></Table.Td><Table.Td>MCP対応LLMの重大な脆弱性を特定し、監査方法を提案する。</Table.Td><Table.Td>MCP, セキュリティ</Table.Td><Table.Td>arXiv</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>3</Table.Td><Table.Td>2025年4月</Table.Td><Table.Td>シュテファン・ザイダー</Table.Td><Table.Td><a href="https://arxiv.org/abs/2501.00539" target="_blank">MCP-Solver：言語モデルと制約プログラミングシステムの統合</a></Table.Td><Table.Td>LLMとMCPを用いた制約ソルバーを統合し、問題解決能力を強化。</Table.Td><Table.Td>MCP, 制約条件の解決</Table.Td><Table.Td>arXiv</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>4</Table.Td><Table.Td>2025年4月</Table.Td><Table.Td>アディティ・シンほか</Table.Td><Table.Td><a href="https://www.preprints.org/manuscript/202504.0245/v1" target="_blank">モデルコンテキストプロトコル（MCP）の調査：大規模言語モデル（LLM）を強化するためのコンテキストの標準化</a></Table.Td><Table.Td>LLMのコンテキスト管理を業界横断的に標準化するMCPの可能性を検証。</Table.Td><Table.Td>MCP、LLMインテグレーション</Table.Td><Table.Td>Preprints.org</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>5</Table.Td><Table.Td>2025年3月</Table.Td><Table.Td>ポール・パジョ</Table.Td><Table.Td><a href="https://www.researchgate.net/publication/390115049_Smitheryai" target="_blank">Smithery.ai : LLM統合と異業種アプリケーションのためのモデルコンテキストプロトコル</a></Table.Td><Table.Td>LLMを業界全体で統合するためのMCPベースのフレームワークについて論じる。</Table.Td><Table.Td>MCP、LLMインテグレーション</Table.Td><Table.Td>リサーチゲート</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>6</Table.Td><Table.Td>2025年3月</Table.Td><Table.Td>ザオルン・チェンほか</Table.Td><Table.Td><a href="https://arxiv.org/abs/2503.22738" target="_blank">シールドエージェント：検証可能な安全ポリシーの推論によるエージェントのシールド</a></Table.Td><Table.Td>AIエージェントを保護するための安全ポリシーをMCPに導入。</Table.Td><Table.Td>MCP, 安全</Table.Td><Table.Td>arXiv</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>7</Table.Td><Table.Td>2025年3月</Table.Td><Table.Td>ジュンユ・ルオほか</Table.Td><Table.Td><a href="https://arxiv.org/abs/2503.21460" target="_blank">大規模言語モデルエージェント：方法論、応用と課題に関するサーベイ</a></Table.Td><Table.Td>MCPを強化したLLMエージェントの方法論と課題を調査。</Table.Td><Table.Td>MCP、LLMエージェント</Table.Td><Table.Td>arXiv</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>8</Table.Td><Table.Td>2025年3月</Table.Td><Table.Td>侯信義ほか</Table.Td><Table.Td><a href="https://arxiv.org/abs/2503.04596" target="_blank">LLMアプリケーションの次のフロンティア：オープンエコシステムとハードウェアの相乗効果</a></Table.Td><Table.Td>MCP主導のLLMエコシステムにおけるハードウェアの統合を探る。</Table.Td><Table.Td>MCP、ハードウェア・インテグレーション</Table.Td><Table.Td>arXiv</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>9</Table.Td><Table.Td>2024年11月</Table.Td><Table.Td>アンソロピック</Table.Td><Table.Td><a href="https://www.anthropic.com/news/model-context-protocol" target="_blank">モデル・コンテキスト・プロトコルの紹介</a></Table.Td><Table.Td>LLMにおけるコンテキスト統合の標準としてのMCPを公式に紹介。</Table.Td><Table.Td>MCP、インテグレーション</Table.Td><Table.Td>Anthropic</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>10</Table.Td><Table.Td>2025年1月</Table.Td><Table.Td>ギャリー・A・ガビソン、R・パトリック・シアン</Table.Td><Table.Td><a href="https://arxiv.org/abs/2501.09674" target="_blank">認証された委任と認可されたAIエージェント</a></Table.Td><Table.Td>安全なエージェントの委任と認可のためのMCPベースのフレームワークを提案する。</Table.Td><Table.Td>MCP、AIエージェント</Table.Td><Table.Td>arXiv</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>11</Table.Td><Table.Td>2025年4月</Table.Td><Table.Td>ギャリー・A・ガビソン、R・パトリック・シアン</Table.Td><Table.Td><a href="https://arxiv.org/abs/2504.03255" target="_blank">LLMベースのエージェント・システムにおける内在的責任と創発的責任の問題</a></Table.Td><Table.Td>MCP主導のLLMエージェントシステムに関する責任問題を論じる。</Table.Td><Table.Td>MCP、賠償責任</Table.Td><Table.Td>arXiv</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>12</Table.Td><Table.Td>2025年3月</Table.Td><Table.Td>ポール・パジョ</Table.Td><Table.Td><a href="https://www.researchgate.net/publication/389687667" target="_blank">モデル・コンテキスト・プロトコル・サーバー：AI主導のワークフロー自動化のための新しいパラダイム</a></Table.Td><Table.Td>レガシーシステムと比較して、ワークフロー自動化におけるMCPサーバーの有効性を評価。</Table.Td><Table.Td>MCPサーバー、オートメーション</Table.Td><Table.Td>リサーチゲート</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>13</Table.Td><Table.Td>2025年3月</Table.Td><Table.Td>ポール・パジョ</Table.Td><Table.Td><a href="https://www.researchgate.net/publication/390232494_Accelerating_AI_Integration_Multi-Order_Effects_and_Sociotechnical_Implications_of_Standardized_AI-Tool_Interoperability" target="_blank">AI統合の加速：標準化されたAIツールの相互運用性がもたらす多階層効果と社会技術的意義</a></Table.Td><Table.Td>MCPの広範な社会技術的影響と相互運用性の利点について論じる。</Table.Td><Table.Td>MCP、相互運用性</Table.Td><Table.Td>リサーチゲート</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>14</Table.Td><Table.Td>2025年3月</Table.Td><Table.Td>アナンド・ラマチャンドラン</Table.Td><Table.Td><a href="https://www.researchgate.net/publication/389713732" target="_blank">企業のAI統合を変革する：アーキテクチャ、 MCPの実装と応用</a></Table.Td><Table.Td>MCPのエンタープライズAI統合の能力とケーススタディをレビュー。</Table.Td><Table.Td>MCP、エンタープライズAI</Table.Td><Table.Td>リサーチゲート</Table.Td></Table.Tr>
+    <Table.Tr><Table.Td>15</Table.Td><Table.Td>2025年3月</Table.Td><Table.Td>アシシュ・カタムリ</Table.Td><Table.Td><a href="https://www.ijirset.com/upload/2025/march/12_Unlocking.pdf" target="_blank">インテリジェントエージェントのためのコンテキストの解明：標準化された統合フレームワークとしてのモデルコンテキストプロトコル</a></Table.Td><Table.Td>LLMとツールやサービスとのスケーラブルな統合を可能にするユニバーサル・コネクタとしてのMCPを探求。</Table.Td><Table.Td>MCP、LLM インテグレーション、標準化</Table.Td><Table.Td>IJIRSET</Table.Td></Table.Tr>
+  </Table.Tbody>
+</Table>
+
+# 3. MCPベースのシステムにおけるセキュリティ脅威シナリオ分析
+
+## 分析のアプローチ
+
+**セクション2**で紹介した15の文献の分析に基づき、このホワイトペーパーのパートでは、**モデル・コンテキスト・プロトコル（MCP）に**基づき、AIシステムで発生する可能性のある主要な**セキュリティ脅威のタイプを**分類し、拡張する。各脅威カテゴリーは構造化された分解を通して探求され、実世界のシナリオに拡張される。MCPはAIモデル間のコンテキストとポリシーの交換をサポートするコアプロトコルとして設計されているが、その構造的な特徴から、以下のようなセキュリティ脅威モデルを生み出す可能性がある。
+
+## MCPにおけるセキュリティ脅威タイプの分類
+
+<Table center width="100%" marginTopSize="xs">
+  <Table.Thead>
+    <Table.Tr>
+      <Table.Th cellBackgroundColor="gray">タイプ</Table.Th>
+      <Table.Th cellBackgroundColor="gray">脅威名 (英字表記)</Table.Th>
+      <Table.Th cellBackgroundColor="gray">説明</Table.Th>
+      <Table.Th cellBackgroundColor="gray">主な文献ソース</Table.Th>
+    </Table.Tr>
+  </Table.Thead>
+  <Table.Tbody>
+    <Table.Tr>
+      <Table.Td>T1</Table.Td>
+      <Table.Td>コンテキスト・インジェクション／なりすまし（Context Injection / Spoofing）</Table.Td>
+      <Table.Td>攻撃者は、LLMやエージェントの動作を悪意を持って操作するために、偽造または改ざんされたコンテキストを注入する。</Table.Td>
+      <Table.Td>[1], [2], [10]</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>T2</Table.Td>
+      <Table.Td>委任の乱用 (Delegation Abuse)</Table.Td>
+      <Table.Td>過度または安全でない委任メカニズムにより、権限のないエージェントが特権アクションにアクセスする。</Table.Td>
+      <Table.Td>[2], [10], [11], [14]</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>T3</Table.Td>
+      <Table.Td>悪用可能なコンテキストを介した不正行為のモデル化 (Model Misbehavior via Exploitable Context)</Table.Td>
+      <Table.Td>不正な、あるいは敵対的なコンテキスト構造は、モデルが意図しない、あるいは非倫理的な出力を生成する原因となる。</Table.Td>
+      <Table.Td>[1], [6], [7]</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>T4</Table.Td>
+      <Table.Td>監査不可能なコンテキスト・フロー (Non-auditable Context Flow)</Table.Td>
+      <Table.Td>標準化されない、または記録されないコンテキスト伝送は、モニタリングとインシデント対応の妨げとなる。</Table.Td>
+      <Table.Td>[2], [12], [13]</Table.Td>
+    </Table.Tr>
+  </Table.Tbody>
+</Table>
+
+## 主要な脅威シナリオ
+
+**シナリオ A：LLMの誤動作につながるコンテキスト・インジェクション（T1、T3）**
+
+**モデルコンテキストプロトコル（MCP）は**、LLMとAIエージェントが正確な実行環境で動作するようにコンテキストを構造化するように設計されている。しかし、このコンテキスト情報が検証されずに外部から注入されたり、転送中に改ざんされたりすると、LLMは攻撃者の意図に従って動作する可能性がある。これは、不正な応答、特権の悪用、システムの歪みにつながる可能性がある。プロンプトインジェクションとは異なり、これはプロトコルレイヤーの脆弱性を突く、**コンテキストレベルのプロトコル改ざん**攻撃である。
+<br /> 
+**脅威の流れの例：**
+1. ユーザーからのリクエスト：*「口座残高を確認したい」*
+2. システムは、ユーザーの許可データを含むコンテキスト・ペイロードを生成し、LLMに渡す。
+3. 中間ノードまたは脆弱なエージェントに侵入した攻撃者は、コンテキスト・ペイロードを変更する。
+4. LLMは変更されたコンテキストを信頼し、特権コマンドを実行する（例えば、資金移動や口座削除）。
+5. システムはレスポンスの検証を怠り、不正な実行を許して特権エスカレーションやデータ漏えいを引き起こす。
+※ペイロードとは：パケットやデータグラムなどのデータの送受信単位のうち、宛先などの制御情報を除いた、相手に送り届けようとしている正味のデータ本体のこと
+<br /> 
+
+**コードの比較：正常なコンテキストと改ざんされたコンテキストのペイロードの比較**
+
+```json
+JSON
+// 正常な Context Payload
+{
+    "user": {
+        "id": "user_84321",
+        "role": "viewer",
+        "authenticated": true
+    },
+    "request": {
+        "action": "view_balance"
+    },
+    "policy": {
+        "allow": ["view_balance"],
+        "deny": ["transfer_funds", "delete_account"]
+    }
+}
+```
+
+```json 
+// JSON
+// 攻撃者が注入した改ざんされた Context Payload
+{
+    "user": {
+        "id": "user_84321",
+        "role": "admin",   // 権限偽装
+        "authenticated": true
+    },
+    "request": {
+        "action": "transfer_funds",   // 高リスク作業に変更
+    },
+    "policy": {
+        "allow": ["view_balance", "transfer_funds"],
+        "deny": []
+    }
+}
+```
+
+> このように改変されたコンテキストによって、システムは権限を与えられた管理者からのリクエストであると誤認し、LLMは特権コマンドを何の疑いもなく処理するようになる。
+
+<br /> 
+****セキュリティの内訳**
+
+- **コンテキストの完全性検証の欠如**
+
+ロール、アクション、ポリシーなどの重要なコンテキスト・フィールドに、暗号化署名や検証ロジックが存在しない。
+
+- **信頼できないソースからのポリシー・インジェクション**
+
+ポリシー定義（許可/拒否）はクライアントサイドまたは中間ノードによって生成されるため、本質的に信頼できない。
+
+- **LLMは未検証のコンテキストに基づいて実行する**
+
+LLMは、二次的な検証を行わず、入力されたコンテキストのみに基づいて意思決定を行う。
+
+- **コンテキスト生成レイヤーとポリシー実施レイヤーの分離**
+
+コンテキスト構築レイヤーとポリシー実行ロジックの分離は、オープンな攻撃ベクトルを生み出す。
+
+---
+
+**シナリオB: 権限のないエージェントによる委任なりすまし (T2)**
+
+MCPベースのシステムでは、エージェント間のコラボレーションは**ポリシーベースの委任モデルによって**管理される。しかし、**委任リクエストの検証**が弱い場合、あるいは委任チェーンのトラッキングが不完全な場合、攻撃者は下位エージェントを侵害し、より高い特権を持つエージェントになりすまして委任権限を盗むことができる。これは**不正な権限エスカレーション**につながり、システム全体の完全性を脅かす。
+
+<br /> 
+**脅威の流れの例：**
+1. エージェントAは、コア・インフラストラクチャに対する権限を持つ特権エージェントである。
+2. エージェントBは、機能限定エージェントで、外部との統合や顧客向けのタスクに使用される。
+3. 攻撃者はエージェントBを侵害し、あたかもエージェントAから発行されたかのように委任ペイロードを偽造する。
+4. システムは`from_agent`、`token`、`scope`などのフィールドを検証することなく、 リクエストを受け入れる。
+5. その結果、攻撃者はエージェントBを使用して、エージェントAを装って**特権アクションを**実行し、**バウンダリ・バイパス**（セキュリティ境界の迂回）を達成する。
+<br /> 
+**コード例：委任なりすまし攻撃**
+
+```json 
+// JSON
+// 正常な委任リクエスト構造
+{
+    "type": "delegation_request",
+    "from_agent": "agent_b",
+    "to_agent": "agent_a",
+    "scope": "read_only",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+```json 
+// JSON
+// 攻撃者が改ざんした委任リクエスト
+{
+    "type": "delegation_request",
+    "from_agent": "agent_a",             // 偽造された出発主体
+    "to_agent": "agent_b",
+    "scope": "infrastructure_control",   // 上位権限リクエスト
+    "token": "eyJhbGciOiJI...TamperedToken..."  // 改ざんされた署名のないトークン
+}
+```
+> 適切な検証なしに処理された場合、この偽造されたリクエストにより、エージェントBは、システム設定の変更、ファイルの削除、ユーザーアカウントの変更など、本来エージェントAに制限されるべき危険性の高い操作を実行できるようになる。
+
+<br /> 
+
+**セキュリティの内訳**
+
+- **委任リクエストの身元検証の欠如**
+
+from_agentフィールドが本当に指定された送信元から送信されたものであることを確認するための、暗号化署名または証明書メカニズムがない。
+
+- **スコープ制約の欠落**
+
+スコープフィールドはポリシーの上限に対して評価されないため、攻撃者はより広範なアクセスを要求することで特権をエスカレートさせることができる。
+
+- **委任チェーンの追跡が不可能**
+
+システムは、委任の系統やトラストチェーンを可視化できないため、なりすましや複数レベルの委任の悪用を検知できない。
+
+- **未署名または改ざんされたトークンの受け入れ**
+
+トークン（JWT、MACなど）は署名やタイムスタンプの検証なしで受け入れられ、悪意のある操作やリプレイ攻撃に対して脆弱になる。
+
+---
+
+**シナリオC：コンテキスト環境間での実行の乖離（T3）**
+
+MCPは、複数の実行環境にわたって同じコンテキストを提供することで、ポリシーの一貫性とセキュリティの予測可能性を保証することを目的としている。しかし、現実の環境では、LLM やエージェントの設定、ローカルポリシー読み込みメカニズム、インタプリタのバージョンの違いによって、同じコンテキストが実行環境によって異なる解釈を受けるという非決定論的な動作が発生する可能性がある。このような違いは、最終的に**ポリシーの不整合**、**セキュリティの予測可能性の失敗**、**トラストチェーンの崩壊に**つながる可能性がある。 
+<br /> 
+**脅威の流れの例：**
+1. 単一のコンテキスト・ペイロードが複数のシステムに配信される。
+2. 各システムは、ローカルに組み込まれたLLMやポリシー解釈エンジンを使ってコンテキストを評価する。
+3. ポリシー・ロジックやポリシー・エンジンのバージョンの違いにより、あるシステムではリクエストが許可され、別のシステムではブロックされる。
+4. これは、同じリクエストに対する一貫性のないポリシー実行結果を招き、組織全体の集中管理態勢を弱体化させる。
+<br /> 
+**コードの例：ノード間で異なるポリシー解釈**
+
+
+```json
+// JSON
+// 伝送された文脈 (Context Payload)
+{
+"user": {
+"id": "dev_user",
+"role": "editor"
+},
+"request": {
+"action": "publish"
+},
+"context": {
+"project": "prod-marketing",
+"env": "staging"
+}
+}
+
+```
+
+```rego
+# rego
+# Node A (ポリシー解釈: editor は publish 可能)
+package access
+
+default allow = false
+
+allow {
+  input.user.role == "editor"
+  input.request.action == "publish"
+}
+
+```
+
+```rego
+# rego
+# Node B (ポリシー解釈: publish は admin のみ可能)
+package access
+
+default allow = false
+
+allow {
+  input.user.role == "admin"
+  input.request.action == "publish"
+}
+
+```
+> 全く同じコンテキストを受信しているにもかかわらず、**ノード**Aと**ノード**Bは正反対のポリシー決定を返答し、一方はアクセスを許可し、もう一方は拒否する。これにより、ポリシーの一貫性が崩れ、予測可能性が損なわれ、システムの信頼境界を弱体化する。
+
+<br /> 
+**セキュリティの内訳**
+
+- **ローカルなポリシー評価**
+
+ポリシーはノード・レベルに分散され、独自に解釈されるため、一元的なポリシー適用とならず、見落とされる。
+
+- **標準化されたポリシーテンプレートの欠如**
+
+Regoのポリシーはノードによって異なるため、統一されていないポリシー定義のために解釈の相違が生じる。
+
+- **実行環境メタデータの欠落**
+
+コンテキスト・ペイロードにはランタイム・メタデータ（OS、地域、エンジン・バージョンなど）が含まれていないため、環境間で一貫性のある解釈ができない。
+
+- **ポリシーエンジンの非同期化**
+
+MCPエージェントまたはLLMランタイム間の非同期化は、トラストチェーンを弱め、同一のコンテキストに対して一貫性のないポリシー適用につながります。
+
+---
+
+**シナリオD：コンテキストフローのロギングの失敗と監査の不可視化（T4）**
+
+MCP ベースのシステムでは、コンテキストはエージェント間で継続的に受け渡され、ポリシー実行フローの基礎を形成して評価される。しかし、コンテキストの流れがログに記録されないか、標準化されない形式でログに記録されるか、または意味不明な方法で暗号化されると、インシデントが発生した場合に**監査トレーサビリティが**事実上不可能になる。その結果、**監査が可視化できなくなり**、**コンプライアンス違反**、**フォレンジック分析の妨害**、**セキュリティ対応の遅延といった**重大なセキュリティの崩壊につながる。
+
+<br /> 
+**脅威の流れの例：**
+
+1. ユーザーがシステム内で特定のアクションのリクエストを開始する。
+2. リクエストはMCPコンテキストでラップされ、複数のエージェントとMCPサーバに渡される。
+3. 転送中に、不正なコンテキストの変更や悪意のある委任が発生する。
+4. MCPサーバーはイベントをログに記録するが、コンテキストID、該当エージェント、実行結果などの重要な詳細が欠落しているか、読み取り不可能な暗号化された形式で保存される。
+5. 結果として、セキュリティ運用チームは、実行経路を追跡したり、どこに問題があるかを特定したりすることができない。
+<br /> 
+**コード例：不完全なロギング vs構造化されたロギング**
+
+```json
+// 非標準ログサンプル (内容省略、フィールド欠落)
+{
+    "event": "context_execution",
+    "context_id": "ctx_1132abc",
+    "timestamp": "2025-04-10T02:15:23Z",
+    "status": "executed"
+}
+```
+```json
+// 期待されるログ形式の例 (構造化され検証可能な形式)
+{
+    "event": "context_execution",
+    "context_id": "ctx_1132abc",
+    "agent": {
+        "id": "agent_X7",
+        "signature_valid": true
+    },
+    "policy": {
+        "evaluated": true,
+        "result": "allow"
+    },
+    "request": {
+        "action": "delete_account",
+        "initiated_by": "user_0841"
+    },
+    "timestamp": "2025-04-10T02:15:23Z",
+    "hash": "b324f8a6c1..."
+}
+```
+> 最初の例では、技術的なイベントのみがログに記録され、ポリシーの決定や実行者は可視化されない。対照的に、2番目の例では、ポリシー適用の結果、エージェントの署名検証、監査とフォレンジック分析のための完全なコンテキストが含まれる。
+
+<br /> 
+**セキュリティの内訳**
+
+- **構造化されていないコンテキスト・フロー・ロギング**
+
+表層レベルのイベントのみが記録され、ポリシーの適用履歴や実行パスは記録されない。
+
+- **非標準のログフォーマット**
+
+ログの書式が統一されておらず、重要なフィールド（エージェント、ポリシー、結果など）が省略されているため、解釈の妨げになっている。
+
+- **ログの完全性を検証しない**
+
+デジタル署名やハッシュ検証がないため、改ざんされたログが検出されない。
+
+- **エンドツーエンドのログ相関がない**
+
+エージェントとMCPサーバー間で相関IDを共有しないと、1つのコンテキストリクエストの全行程を追跡することが困難になる。
+
+---
+**シナリオ E: 論理的分離によるポリシー実行の不一致 (T2, T3)**
+
+多くのMCPベースのシステムでは、**ポリシーの評価を**担当するコンポーネント（例えば、Open Policy Agent）は、実際のタスクを実行する**ランタイム・エグゼキュータ**（例えば、LLMやオーケストレータ）から分離されている。この分離は、**ポリシーの決定と実行時の動作との間で不整合が発生するという**重大なリスクをもたらす。ポリシーのロジックと実行エージェントが物理的または論理的に切り離されている場合、実行時の動作が強制されたポリシーに従わない可能性があり、その結果、ポリシーのバイパスや権限の不正使用につながる恐れがある。
+
+<br /> 
+**脅威の流れの例：**
+1. ユーザーがMCPベースのLLMシステムにアクション要求を送信する。
+2. ポリシーエンジン（OPAなど）はリクエストを評価し、拒否判定を返す。
+3. しかし、ポリシーの結果は実行者に送信されないか、実行者によって無視され、代わりに、ローカルコンテキストに依存して、アクションを実行するかどうかを決定する。
+4. その結果、ポリシーによって明確に拒否されているにもかかわらず、リクエストはとにかく実行される。
+5. これはセキュリティ・ポリシーの回避につながり、システムを信頼できないものにしてしまう。
+
+<br /> 
+**コード例：ポリシーの決定 vs実行時の動作**
+
+```rego
+# コード スニペット
+# ポリシーエンジン (例: OPA で実行)
+package policy.access
+
+default allow = false
+
+allow {
+  input.user.role == "manager"
+  input.request.action == "delete_user"
+}
+```
+```json
+// JSON
+// Context Payload (LLM が受け取る入力)
+{
+"user": {
+"id": "user_042",
+"role": "analyst"
+},
+"request": {
+"action": "delete_user"
+}
+}
+```
+```python
+# Python
+# 実行エンジン内部ロジック (LLM/Agent 内部)
+if context["user"]["authenticated"] and context["request"]["action"] == "delete_user":
+    perform_deletion()
+```
+
+> ユーザのロールが "manager "ではないので、ポリシー・エンジンは削除要求を拒否すべきであるが、ランタイム・エグゼキュータはユーザが認証されているかどうかをチェックするだけで、削除を進める。この結果、**ポリシーと動作の不一致が発生**します。
+<br /> 
+**セキュリティの内訳**
+
+- **意思決定と実行の間に欠けているポリシー・バインディング**（特定のユーザーやグループに対する、特定の権限の設定）
+
+ポリシーの結果が実行レイヤーに確実に、あるいは即座に反映されないため、盲点が生じる。
+
+- **コンテキストのみのロジックの実行**
+
+エクゼキュータは、外部からのポリシー評価を無視して、ローカルのコンテキストを使って独自に意思決定を行う。
+
+- **ポリシーが強制適用されるランタイム実行はない**
+
+"ポリシーの承認が真であるときのみ実行が許可される "という強制的な決まり事はない。
+
+- **「仲介者」の上書きリスク**
+
+オーケストレーターやルーターのようなミドルウェアコンポーネントは、「仲介者」として、ポリシーの結果を上書きしたり破棄したりする可能性があり、安全でない振る舞いを進行させる。
+
+
+---
+## 主要な構造的セキュリティ欠陥のまとめ
+MCPベースのシステムで確認されたセキュリティの脅威は、孤立した脆弱性ではなく、むしろMCPアーキテクチャ全体に埋め込まれた**構造的なセキュリティの弱点に**起因するものである。主な欠陥は以下の通り：
+
+<Table center width="100%" marginTopSize="xs">
+  <Table.Thead>
+    <Table.Tr>
+      <Table.Th cellBackgroundColor="gray">脆弱な項目</Table.Th>
+      <Table.Th cellBackgroundColor="gray">説明</Table.Th>
+    </Table.Tr>
+  </Table.Thead>
+  <Table.Tbody>
+    <Table.Tr>
+      <Table.Td>非標準のコンテキスト・スキーマ (Non-standard Context Schema)</Table.Td>
+      <Table.Td>システム間で統一されたコンテキストスキーマがないため、同じコンテキストの解釈に一貫性がなく、ポリシーの実行が困難になる。</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>実行環境の非決定性 (Execution Non-determinism)</Table.Td>
+      <Table.Td>ローカルのLLMやエージェントの構成、ポリシーのバージョン、インタプリタにばらつきがあると、同じリクエストでも異なる結果を生じることがある。</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>ポリシーそのものとポリシー実行者の分離 (Policy-Executor Separation)</Table.Td>
+      <Table.Td>ポリシーの意思決定と実際の実行主体が分離しているため、意図したポリシーに反するアクションが実行される可能性がある。</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>ログの標準化の欠如と監査の不可視性 (Lack of Logging Standardization and Audit Invisibility)</Table.Td>
+      <Table.Td>コンテキストフローログが欠落していたり、非標準のフォーマットで保存されていたり、重要な情報が欠落していたりして、事故後のトレースやフォレンジック分析が不可能な場合がある。</Table.Td>
+    </Table.Tr>
+  </Table.Tbody>
+</Table>
+
+これらの構造的な弱点は、MCPアーキテクチャが意図した設計に反して、状態の不一致、ポリシーの回避、不正な実行、セキュリティの予測可能性を損ねるといった、様々なセキュリティリスクを不注意の上にもたらす可能性があることを明らかにしている。
+
+## MCPアーキテクチャにおける脅威とレイヤのマッピング
+
+的確で効果的なセキュリティ対応を可能にするため、各脅威タイプとMCPシステムの特定のアーキテクチャーレイヤーとの関係をまとめると、以下のようになる：
+
+<Table center width="100%" marginTopSize="xs">
+  <Table.Thead>
+    <Table.Tr>
+      <Table.Th cellBackgroundColor="gray">脅威タイプ</Table.Th>
+      <Table.Th cellBackgroundColor="gray">主なサブ要素</Table.Th>
+      <Table.Th cellBackgroundColor="gray">影響を受けるシステム階層</Table.Th>
+    </Table.Tr>
+  </Table.Thead>
+  <Table.Tbody>
+    <Table.Tr>
+      <Table.Td>T1 コンテキスト・インジェクション（Context Injection）</Table.Td>
+      <Table.Td>偽造されたコンテキスト、実行条件の改ざん</Table.Td>
+      <Table.Td>LLMランタイム / 入力プロセッサ</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>T2 委任メカニズムの悪用（Delegation Abuse）</Table.Td>
+      <Table.Td>委任のなりすまし、過剰な権限拡大</Table.Td>
+      <Table.Td>ポリシーエンジン / エージェントハブ</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>T3 実行結果の非決定性（Execution Divergence）</Table.Td>
+      <Table.Td>ポリシー判断の不一致、環境の差異</Table.Td>
+      <Table.Td>LLMランタイム / ポリシー評価エンジン</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>T4 監査不可性（Audit Invisibility）</Table.Td>
+      <Table.Td>ログの欠落、非標準フォーマット、トレース不可</Table.Td>
+      <Table.Td>MCPサーバー / SIEM / 監査レイヤー</Table.Td>
+    </Table.Tr>
+  </Table.Tbody>
+</Table>
+の基礎的な参考資料となり、どのアーキテクチャレイヤに特定の保護・制御対策が必要かを決定するのに役立つ。
+
+## 脅威構造と戦略的対応の方向性のまとめ
+
+先の分析で概説したように、MCPベースのシステムは、以下のような様々なシステマティックで広範なセキュリティ脅威に直面している：
+
+- コンテキスト・フローにおける整合性と信頼の欠如
+- 一貫性のないポリシーの解釈
+- ルールに準拠しないランタイムの動作
+- コンテキスト・フローにおける監査の不可視性
+
+これらの脅威は、システムのセキュリティ実施能力、ポリシー実行の信頼性、コンプライアンス遵守態勢を直接的に損なうことにつながる。これらの脅威は、MCPフレームワーク上に構築されたAIインフラの全体的なセキュリティ保証に深刻な課題をもたらす。これらのリスクに対処するため、セクション4では、先に特定した4つの脅威タイプ（T1～T4）に基づき、技術的かつポリシー主導型のセキュリティ対策を提案する。戦略的な方向性は以下を軸とする：
+
+- ポリシー評価と実行の不一致を除去する
+- コンテキストの流れの整合性の確保
+- 委任における制約とトレーサビリティの強制
+- 監査機能の構造化と標準化
+
+これらの戦略を通じて、MCPベースシステムのセキュリティ態勢と運用の安定性の両方を強化する、実用的で柔軟性のあるセキュリティ・アーキテクチャの確立を目指す。
+
+# 4.セキュリティ脅威分析に基づく戦略的提言
+
+## 戦略的枠組み
+
+セクション3で特定されたセキュリティの脅威は、MCPベースの環境に合わせた3つの基本的なセキュリティ原則によって対処することができる：
+
+- **ポリシーの一貫性**：
+委任範囲、実行条件、監査基準を含むセキュリティポリシーは、エージェント、LLM、サーバ間で一貫して適用されなければならない。
+- **リアルタイム検知**：
+コンテキストの改ざん、ポリシーの迂回、モデルの誤動作を発生したその時に特定するため、統一された検知フレームワークが必要になる。
+- **監査性**：
+MCPシステム内の実行フローとコンテキストの伝播は、信頼性の高い監査とフォレンジックをサポートするために、すべてのレイヤーにわたって追跡可能でなければならない。
+
+## 戦略A：ポリシーの一貫性と実行時バインディング（結合）の確保
+
+**目的**
+
+この戦略は、ポリシーの評価と実行時の**論理的整合性を**確立し、ポリシー違反が実行段階で効果的にブロックされることを保証することを目的としている。この整合性は、ポリシー層とアクション層がしばしば切り離されるLLMやマルチエージェントシステムを含む環境では特に重要である[1][3]。
+<br /> 
+**推奨事項**
+- ポリシーエンジン（例えばOPA - Open Policy Agent）をLLMまたはエージェントランタイムと直接接続する。実行は、ポリシーの決定が検証された後にのみ許可されるべきである。
+OPAベースのフレームワークは、AI統合インフラストラクチャにおいて、プロアクティブなポリシー決定ポイント（PDP）とポリシー実施ポイント（PEP）をサポートし、すでにその有効性が証明されている[3][12]。
+- ポリシーのテンプレートとバージョンを一元化されたリポジトリに保存し、定期的な更新をすべての実行ノードにプッシュする。
+このアプローチは、環境間でポリシーのバージョンが一貫していないことに起因する**非決定性を**緩和する(T3)[4][14]。
+- 実行前に、ポリシーの結果（許可/拒否）を含む署名された決定オブジェクト（ポリシー決定トークン）を生成する。実行エンジンは、有効なトークンを伴わないアクションを拒否しなければならない。
+この構造は、**ポリシーから実行へのバインディング**（結合）**を強制し、ランタイム層のみで行われる不正な実行決定を排除する[10]。
+<br /> 
+**期待される成果**
+- ローカル環境での誤った解釈やポリシーバージョンの違いによる意図しない実行を防ぐ
+- ポリシーの意図と実行時の動作の不一致をなくす
+- システム全体の一元的なポリシーベースのコントロールを強化
+- 脅威シナリオC（実行の乖離）およびシナリオE（ポリシーと実行の分離）のプロアクティブな緩和を提供します。
+<br /> 
+**修正される脅威の種類**
+
+- **T2**: 委任時のポリシー適用に一貫性がない
+- **T3**: 全ての実行環境下での非決定論的ポリシー評価
+
+## 戦略 B：コンテキストフローの整合性と改ざん防止
+
+**目的**
+
+MCPベースのシステムでは、コンテキストは実行の基盤として機能し、ポリシー評価とセキュリティ制御の両方の中心的な要素である。コンテキスト・ペイロードが改ざんされたり、送信中に偽造されたりすると、攻撃者はポリシーを迂回したり、LLMの誤動作を引き起こしたりする可能性がある。この戦略は、コンテキストの整合性を確保し、改ざんをリアルタイムで検知・防止することを目的としている。
+
+<br /> 
+**推奨事項**
+- デジタル署名を導入して、各コンテキストの出所と整合性性を検証する。署名は、非対称 PKI または HMAC ベースの認証方法を使用して実装できる[2][6]。
+
+- 各コンテキストフローについて、チェックサムまたはMerkle Treeベースの完全性ハッシュを生成する。MCPサーバはデータを受信した時点で検証する。
+Merkle Tree構造は、複数のコンテキストフィールドを並行して効率的かつ正確に検証することを可能にする[3][12]。
+
+- 実行時に検証に失敗したコンテキストは、ポリシーによって自動的に拒否される。
+失敗した試行内容はログに記録され、管理者によるレビューのためにMCP監査システムに転送される。
+
+- ポリシーエンジンと実行エンジンの両方が同じコンテキストを独立して検証する二重の整合性チェックを適用する。
+この構造は、中間エージェントやノードによる改ざんのリスクを排除する[1][10]。
+<br /> 
+**期待される成果**
+- 破損または偽装されたコンテキストによるLLMの誤動作を防ぐ（シナリオAなど）
+- 改ざんされたコンテキストに基づくポリシーバイパスや権限偽装攻撃をブロックする
+- コンテキスト主導の意思決定における信頼を確立する
+- 検証可能なコンテキストベースの監査ログの作成を可能にする
+<br /> 
+**修正される脅威の種類**
+- **T1**:コンテキスト・インジェクションとなりすまし
+- **T3**：文脈の歪曲による悪意のある操作
+
+## 戦略C：委任管理となりすまし防止
+
+**目的**
+
+MCPシステムは、エージェント間の連携によって構築されており、多くの場合、権限の委譲を頻繁に行う必要がある。しかし、委任リクエストが十分に検証されない場合、攻撃者はエージェントになりすましたり、大雑把に定義された委任メカニズムを悪用して、権限のエスカレーションを不正に行う可能性があります。この戦略では、 明示的かつ制限的な委任チェーンを設計し、委任パスのトレーサビリティを確保することに焦点を当てる。
+<br /> 
+**推奨事項**
+- すべての委任リクエストは、前の委任者のID、ポリシーの承認ログおよびデジタル署名で構成される、完全な委任チェーンを含むべきである。
+このメタデータは、OIDCベースのトークンにカプセル化することも、MCPのネイティブなコンテキスト構造に直接統合することもできる[2][10]。
+
+- スコープまたはケイパビリティフィールドを使用して、委任権限の上限を定義する。
+例えば、"read-only "アクセス権を持つロールは、決して "admin "レベルでの委任を要求してはならない。これはRBACスタイルの制約[11]を反映している。
+
+- 委任リクエストを受信すると、MCPサーバーまたはポリシーエンジンは、その要求が事前に定義された、ポリシーによって許可されたパスと一致するかどうかを検証すべきである。
+未登録または未承認のデリゲーションチェーンは直ちに拒否され、委任されたロールの実行は阻止されるべきである。
+
+- 委任リクエストは、発信元のエンティティによって暗号的に署名されなければならない。
+RSAまたはHMAC署名を使用して、正当な委任者のみが有効な委任リクエストを発行できるようにする[6]。
+<br /> 
+**期待される成果**
+
+- なりすましエージェントによる偽装された委任リクエストの発行を防ぐ
+- 制御下にない権限委譲による過剰な権限エスカレーションをブロックする
+- 信頼でき、追跡可能な委任チェーンを確保する。
+- 下位エージェントが上位エージェントになりすましたり、上位エージェントの権限を継承しようとするT2シナリオに対する強力な防御を提供する。
+
+<br /> 
+**修正される脅威の種類**
+- **T2**: 委任の濫用となりすましの委任リクエスト
+
+## 戦略 D：構造化された監査ロギングとフォレンジック・トレーサビリティ
+
+**目的**
+
+MCPベースのシステムでセキュリティを維持するには、コンテキストの流れ、ポリシーの決定、実行結果の体系的なロギングが必要です。しかし、非標準のログフォーマットの使用、イベントの部分的な省略、エージェント間の切断されたロギングは、監査の不可視性を生み出し、インシデント発生時の根本原因分析、説明責任の追跡、規制遵守を妨げる重大な弱点となる。この戦略は、構造化されたロギングフォーマットと追跡可能なイベント相関システムを確立し、MCP環境におけるフォレンジックの準備態勢を強化し、インシデント発生後の対応を強化することを目的としている。
+
+**推奨事項**
+
+- すべてのMCP関連アクティビティは、context_id、agent_id、policy_result、timestamp、execution_outcome、signature_statusを含む構造化されたJSON形式で記録されなければならない。
+このフォーマットは、MCPサーバ、ポリシーエンジン、および実行レイヤ[2][12]全体に渡って、一貫して採用されなければならない。
+
+- 各ログエントリは、チェーンベースのログの検証と順序付けを可能にするために、prev_hashやsession_idのようなフィールドとともに、SHA256ハッシュやMerkleツリー値のような暗号的な整合性チェックを含んでいなければならない[6][13]。
+
+- 中間ノードまたはリレーエージェントを通過したイベントは、中央監査サーバーで記録されなければならない。これにより、調査中に完全なコンテキストフローパスとエージェントのトラストチェーンを再構築することが可能になる。
+
+- ログは、既存のセキュリティ情報・イベント管理（SIEM）プラットフォームやフォレンジック・ツールにリアルタイムで供給されるべきである。
+
+ログは柔軟な検索性をサポートし、脅威の探索やインシデントの再現のためのKQL/SQLクエリの自動生成のために設計された構造でなければならない[4]。
+
+
+<br /> 
+**期待される成果**
+
+- すべてのコンテキストの遷移とエージェントとのやり取りの完全な可視化
+- なりすまし、または悪意のある操作をされたリクエストのフォレンジック・トレーサビリティ
+- コンプライアンスと監査準備のための強力なサポート
+- T4 シナリオ（セキュリティ・インシデントの追跡と追跡の失敗）を直接的な緩和。
+<br /> 
+**修正される脅威の種類**
+
+- **T4**:欠落している、または検証不可能なコンテキストロギング
+
+この戦略は、単なるロギングにとどまらず、MCPベースのシステムを透明化し、監査可能にし、フォレンジックの要求に応えるようにするために必要なコンテキスト・インテリジェンスを提供し、セキュリティチームを強化する[12][13][15]。
+
+## 戦略総括表
+
+**MCPベースの脅威を軽減するための4つの重要な戦略的対策のまとめ**
+<Table center width="100%" marginTopSize="xs">
+  <Table.Thead>
+    <Table.Tr>
+      <Table.Th cellBackgroundColor="gray">戦略</Table.Th>
+      <Table.Th cellBackgroundColor="gray">戦略タイトル</Table.Th>
+      <Table.Th cellBackgroundColor="gray">コア・サマリー</Table.Th>
+      <Table.Th cellBackgroundColor="gray">脅威への対応</Table.Th>
+    </Table.Tr>
+  </Table.Thead>
+  <Table.Tbody>
+    <Table.Tr>
+      <Table.Td>戦略A</Table.Td>
+      <Table.Td>ポリシーの一貫性とランタイムバインドの確保</Table.Td>
+      <Table.Td>実行前にポリシー決定を適用して、ポリシーエンジンと実行時の動作の整合性を維持する。</Table.Td>
+      <Table.Td>T2、T3</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>戦略B</Table.Td>
+      <Table.Td>コンテキストフローの整合性と改ざん防止</Table.Td>
+      <Table.Td>送信中のコンテキストに対する悪意のある操作を防ぐために、整合性検証とデジタル署名を適用する。</Table.Td>
+      <Table.Td>T1</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>戦略C</Table.Td>
+      <Table.Td>委任制御となりすまし防止</Table.Td>
+      <Table.Td>委任チェーントレース、スコープ制限、署名検証を使用して、委任リクエストの正当性とセキュリティを確保する。</Table.Td>
+      <Table.Td>T2</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>戦略D</Table.Td>
+      <Table.Td>構造化された監査ロギングとフォレンジック・トレーサビリティ</Table.Td>
+      <Table.Td>コンテキストフローと実行結果を構造化された形式で記録し、完全な監査可能性とトレーサビリティを確保する。</Table.Td>
+      <Table.Td>T4</Table.Td>
+    </Table.Tr>
+  </Table.Tbody>
+</Table>
+
+次の最後のセクション「**5：結論と新しいセキュリティアーキテクチャの提案」では**、これまで議論してきた脅威と戦略を統合し、MCPベースのAIシステムに合わせた最新のセキュリティフレームワークを提案する。
+
+# 5. 結論と新しいセキュリティ・アーキテクチャの提案
+
+## 包括的な分析
+
+本ホワイトペーパーでは、最近の学術論文や技術論文15件の評価に基づき、モデルコンテキストプロトコル（MCP）上に構築されたAIシステムの構造的なセキュリティ分析を行う。コンテキストの送信、ポリシーの評価、実行制御、監査ロギングなど、複数のアーキテクチャ層にわたって、4つの中核的な脅威の出現を繰り返し観察した：
+
+- **T1:　コンテキスト・インジェクションと悪意のある操作**
+- **T2: 委任メカニズムの悪用**
+- **T3: 非決定論的ポリシー評価と実行結果**
+- **T4:　監査の不可視性とフォレンジックの失敗**
+
+これらの脅威は、MCPベースのAIインフラの信頼性、説明責任およびポリシーの一貫性を損なう可能性がある。さらに、このような脆弱性を効果的に軽減するために必要なコンテキストの認識と実行時の強制力が欠如している従来のセキュリティモデルの深刻な限界が明らかになった。
+
+## 既存戦略の基礎と拡張の必要性
+
+セクション4では、MCPに関連するセキュリティ上の脅威（T1～T4）に対処するための4つの 戦略的対策を提案した。これらの戦略（コンテキストの整合性、委任制御、ポリシー実行の一貫性、監査トレーサビリティ）は、特定された脅威シナリオに合致する強力な設計原則を提供する。 
+しかし、これらの戦略を現実のAI主導型インフラに一貫性を持って持続的に適用するためには、より包括的なソリューションが必要である。問題は、単にこれらの戦略が有効かどうかではなく、セキュリティ・フレームワークの結束を通じて、信頼性の高い自動的な運用が可能かどうかである。
+次のような業務上の要求は、そのような枠組みの必要性を浮き彫りにしている：
+
+- **ポリシーの評価-エンフォースメントを伴う実行バインディング**
+
+- **委任チェーン追跡と範囲制御**
+
+- **コンテキスト整合性検証と実行前ポリシーバインディング**
+
+- **実行とポリシー結果の構造化および署名された監査ロギング**
+
+- **リスク適応型自律アクセス制御**
+
+これらの要件は、機能的なセキュリティ・コンポーネントの必要性だけでなく、これらの戦略を自動的かつ確実に編成し、実施できる総合的なシステムの必要性を強調している。このニーズに応えるため、このホワイトペーパーでは、**MCP PAM（Model Context Protocol Privileged Access Control – MCP 特権アクセス管理**）-MCP環境のために特別に構築されたセキュリティ・アーキテクチャ-を紹介する。
+
+次のセクション「**5.3：新しいセキュリティ・フレームワークの必要性**」では、MCP 特権アクセス管理を正式に紹介し、その中核機能を定義し、脅威カテゴリT1～T4に対応付ける。
+
+## 新しいセキュリティフレームワークの必要性：MCP PAM（MCP 特権アクセス管理）の提案
+
+MCP PAMは、MCPベースのシステムで特定された主要な脅威シナリオ（T1～T4）に対処するために構築されたセキュリティアーキテクチャである。これは従来のアクセス・コントロール・ツールではなく、モデル・コンテキスト・プロトコル環境の動的で分散化された性質に合わせて特別に設計された、コンテキストを認識し、ポリシーを強化し、リスク適応型セキュリティ・プラットフォームである。
+
+**MCP PAMのコア機能**
+<Table center width="100%" marginTopSize="xs">
+  <Table.Thead>
+    <Table.Tr>
+      <Table.Th cellBackgroundColor="gray">MCP PAM機能</Table.Th>
+      <Table.Th cellBackgroundColor="gray">説明</Table.Th>
+    </Table.Tr>
+  </Table.Thead>
+  <Table.Tbody>
+    <Table.Tr>
+      <Table.Td>コンテキストを考慮したアクセス制御</Table.Td>
+      <Table.Td>実行コンテキストに基づいてポリシーを動的に評価し、それに応じてアクセス決定を調整する。</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>委任チェーンの検証</Table.Td>
+      <Table.Td>委任リクエスト（ソース、スコープ、認証を含む）を検証し、トレースすることで、なりすましやエスカレーションを防止する。</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>ポリシーに基づく実行の強制</Table.Td>
+      <Table.Td>ポリシーによって明示的に許可されない限り、いかなるアクションも実行されないよう強制する。事前のポリシー評価を欠く実行をブロックする。</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>構造化ログと署名ログ</Table.Td>
+      <Table.Td>コンテキスト、ポリシー、アクションをリンクする構造化された暗号署名付き監査ログを生成し、トレーサビリティと耐改ざん性を確保する。</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>リスク適応型自律制御</Table.Td>
+      <Table.Td>リアルタイムのDLPとUEBAスコアリングを使用して実施動作を自動的に調整し、悪用や異常なアクティビティを防止する。</Table.Td>
+    </Table.Tr>
+  </Table.Tbody>
+</Table>
+<br />
+
+**MCP PAM機能とT1-T4セキュリティ脅威のマッピング** (● 直接的な軽減 | ○ 間接的な軽減)
+<Table center width="100%" marginTopSize="xs">
+  <Table.Thead>
+    <Table.Tr>
+      <Table.Th cellBackgroundColor="gray">MCP PAM機能</Table.Th>
+      <Table.Th cellBackgroundColor="gray">T1:<br />コンテキスト・インジェクション</Table.Th>
+      <Table.Th cellBackgroundColor="gray">T2:<br />委任の乱用</Table.Th>
+      <Table.Th cellBackgroundColor="gray">T3:<br />実行の不一致</Table.Th>
+      <Table.Th cellBackgroundColor="gray">T4:<br />監査不可視性</Table.Th>
+    </Table.Tr>
+  </Table.Thead>
+  <Table.Tbody>
+    <Table.Tr>
+      <Table.Td>コンテキストを考慮したアクセス制御</Table.Td>
+      <Table.Td>●</Table.Td>
+      <Table.Td>○</Table.Td>
+      <Table.Td>●</Table.Td>
+      <Table.Td></Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>委任チェーンの検証</Table.Td>
+      <Table.Td></Table.Td>
+      <Table.Td>●</Table.Td>
+      <Table.Td>○</Table.Td>
+      <Table.Td></Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>ポリシーに基づく実行の強制</Table.Td>
+      <Table.Td>○</Table.Td>
+      <Table.Td>●</Table.Td>
+      <Table.Td>●</Table.Td>
+      <Table.Td></Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>構造化ログと署名ログ</Table.Td>
+      <Table.Td></Table.Td>
+      <Table.Td></Table.Td>
+      <Table.Td>○</Table.Td>
+      <Table.Td>●</Table.Td>
+    </Table.Tr>
+    <Table.Tr>
+      <Table.Td>リスク適応型自律制御</Table.Td>
+      <Table.Td>●</Table.Td>
+      <Table.Td>●</Table.Td>
+      <Table.Td>●</Table.Td>
+      <Table.Td>○</Table.Td>
+    </Table.Tr>
+  </Table.Tbody>
+</Table>
+
+さらに、MCP PAMは、MCP環境下における脅威に対処するために、以下の重要なセキュリティ機能を提供する：
+
+- **予防**：　実行前にポリシーを検証し、改ざんやなりすましのあるコンテキストデータをブロックする。
+- **検知**：　リアルタイムのロギングとリスク・スコアリングにより、異常の発生を検知します。
+- **応答**：　動的なリスク評価に基づいて、ポリシーの強制適用と実行のブロックに自動的に対応します。
+- **責任**：　構造化された監査可能な形式で、完全な実行フローを記録する。
+
+MCP PAMは、ポリシーと実行の分断、委任トレーサビリティの欠如、コンテキストの整合性リスク、監査ログの一貫性の無さといった重要な問題を、統合化されたアーキテクチャの中で解決する。MCP PAMは、最新のAI駆動環境に最適化する目的に特化したセキュリティ制御システムである。
+
+## 本ホワイトペーパーの結論とまとめ
+
+AIシステムはますます自律的になりつつあり、その実行構造は、従来のアカウントや権限ベースのセキュリティモデルではもはや管理できない複雑さを顕著に示している。特に、モデルコンテキストプロトコル（MCP）に基づくシステムは、以下の特徴を併せ持つ：
+
+- 実行は、ユーザーが直接入力するのではなく、エージェントとLLMによって行われる。
+- ポリシー決定と実行結果は、実行前後のコンテキストによって変わる。
+- 権限の委譲、プロキシ操作、APIオーケストレーションは、権限の水平的なフローを作り出す。
+
+このようなダイナミクスは、コンテキストの改ざん、ポリシーの無視、ランタイムの不整合、監査漏れなど、従来のPAMフレームワークでは対処できない新たなセキュリティ上の課題をもたらす。
+
+**このホワイトペーパーの結論は明確である：**
+> **「AI主導のMCPベースの環境では、自律的にコンテキストベースの実行ポリシーを評価、実施、記録できる新しいMCPセキュリティ・アーキテクチャが必要であり、そのソリューションはMCP PAMである」**
+
+<br />
+<br />
+
+<ButtonLink href="https://app.querypie.com" variant="black" size="lg">🚀 安全なMCPとAIエージェント運用を、今すぐAI Hubで先取り体験。</ButtonLink>
+
+# 参考文献
+[1] [X. Hou, L. Zhang, R. Sun, and Y. Wang, “Model Context Protocol (MCP): Landscape, Security Threats, and Future Research Directions,” arXiv preprint, Mar. 2025.](https://arxiv.org/abs/2503.23278)
+
+[2] [B. Radosevich and J. Halloran, “MCP Safety Audit: LLMs with the Model Context Protocol Allow Major Security Exploits,” arXiv preprint, Apr. 2025.](https://arxiv.org/abs/2504.03767)
+
+[3] [S. Szeider, “MCP-Solver: Integrating Language Models with Constraint Programming Systems,” arXiv preprint, Apr. 2025.](https://arxiv.org/abs/2501.00539)
+
+[4] [A. Singh, Y. Gupta, and N. Trivedi, “A Survey of the Model Context Protocol (MCP): Standardizing Context to Enhance Large Language Models (LLMs),” Preprints.org, Apr. 2025.](https://www.preprints.org/manuscript/202504.0245/v1)
+
+[5] [P. Pajo, “Smithery.ai: A Model Context Protocol for Enhanced LLM Integration and Cross-Industry Applications,” ResearchGate, Mar. 2025.](https://www.researchgate.net/publication/390115049_Smitheryai)
+
+[6] [Z. Chen, J. Lin, and R. Wang, “ShieldAgent: Shielding Agents via Verifiable Safety Policy Reasoning,” arXiv preprint, Mar. 2025.](https://arxiv.org/abs/2503.22738)
+
+[7] [J. Luo, K. Hu, and M. Zhao, “Large Language Model Agent: A Survey on Methodology, Applications and Challenges,” arXiv preprint, Mar. 2025.](https://arxiv.org/abs/2503.21460)
+
+[8] [X. Hou, R. Sun, and J. Yao, “The Next Frontier of LLM Applications: Open Ecosystems and Hardware Synergy,” arXiv preprint, Mar. 2025.](https://arxiv.org/abs/2503.04596)
+
+[9] [Anthropic, “Introducing the Model Context Protocol,” Anthropic Technical Blog, Nov. 2024.](https://www.anthropic.com/news/model-context-protocol)
+
+[10] [T. South, J. Velasquez, and M. D. Kemp, “Authenticated Delegation and Authorized AI Agents,” arXiv preprint, Jan. 2025.](https://arxiv.org/abs/2501.09674)
+
+[11] [G. A. Gabison and R. P. Xian, “Inherent and Emergent Liability Issues in LLM-Based Agentic Systems,” arXiv preprint, Apr. 2025.](https://arxiv.org/abs/2504.03255)
+
+[12] [P. Pajo, “Model Context Protocol Servers: A Novel Paradigm for AI-Driven Workflow Automation,” ResearchGate, Mar. 2025.](https://www.researchgate.net/publication/389687667)
+
+[13] [P. Pajo, “Accelerating AI Integration: Multi-Order Effects and Sociotechnical Implications of Standardized AI-Tool Interoperability,” ResearchGate, Mar. 2025.](https://www.researchgate.net/publication/390232494_Accelerating_AI_Integration_Multi-Order_Effects_and_Sociotechnical_Implications_of_Standardized_AI-Tool_Interoperability)
+
+[14] [A. Ramachandran, “Transforming Enterprise AI Integration: Architecture, Implementation and Applications of MCP,” ResearchGate, Mar. 2025.](https://www.researchgate.net/publication/389713732)
+
+[15] [A. Kattamuri, “Unlocking Context for Intelligent Agents: The Model Context Protocol as a Standardized Integration Framework,” IJIRSET, Mar. 2025.](https://www.ijirset.com/upload/2025/march/12_Unlocking.pdf)
+
+[16] [QueryPie, “Security Governance and Integrated PAM Strategy for AI Agents in the Age of the Model Context Protocol (MCP),” White Paper, 2025.](/resources/discover/white-paper/15/redefining-pam-for-the-mcp-era)
+
+[17] [QueryPie, “MCP PAM as the Next Step Beyond Guardrails,” White Paper, 2025.](/resources/discover/white-paper/16/next-step-mcp-pam)
