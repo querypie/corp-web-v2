@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "../../constants/i18n";
 import HomePage from "../../components/pages/home/HomePage";
+import { getHomeMetadataTitle } from "@/features/home/pageCopy";
 import {
   demoCategoryConfigs,
   docsCategoryConfigs,
@@ -17,6 +19,19 @@ import { readContentState } from "@/features/content/contentState.server";
 type LocalePageProps = {
   params: Promise<{ locale: string }>;
 };
+
+export async function generateMetadata({ params }: LocalePageProps): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!isLocale(locale)) return {};
+
+  return {
+    title: getHomeMetadataTitle(),
+    alternates: {
+      canonical: locale === "en" ? "/" : `/${locale}`,
+    },
+  };
+}
 
 const mcpIconSources = [
   "/icons/ChatGPT.svg",

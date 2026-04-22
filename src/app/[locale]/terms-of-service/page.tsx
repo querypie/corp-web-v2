@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 import TermsOfServicePage from "../../../components/pages/legal/TermsOfServicePage";
-import { isLocale, type Locale } from "../../../constants/i18n";
+import { getLocalePath, isLocale, type Locale } from "../../../constants/i18n";
 import { termsOfServiceBodyHtml } from "../../../constants/termsOfService";
 
 type TermsOfServiceRouteProps = {
@@ -30,6 +31,21 @@ async function getTermsOfServiceContent(locale: Locale): Promise<TermsOfServiceC
   return {
     bodyHtml,
     title: "Terms of Service",
+  };
+}
+
+export async function generateMetadata({ params }: TermsOfServiceRouteProps): Promise<Metadata> {
+  const { locale } = await params;
+
+  if (!isLocale(locale)) return {};
+
+  const content = await getTermsOfServiceContent(locale as Locale);
+
+  return {
+    title: content.title,
+    alternates: {
+      canonical: getLocalePath(locale, "/terms-of-service"),
+    },
   };
 }
 

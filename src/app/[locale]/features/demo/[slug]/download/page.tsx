@@ -45,12 +45,25 @@ export default async function DemoDownloadRoute({ params }: DemoDownloadRoutePro
 
 export async function generateMetadata({ params }: DemoDownloadRouteProps): Promise<Metadata> {
   const { locale, slug } = await params;
+  const resolvedSlug = decodeURIComponent(slug);
 
   if (!isLocale(locale)) return {};
 
+  const currentEntry = await readContentItem("demo", resolvedSlug, { includeBodies: false });
+
+  if (
+    !currentEntry ||
+    !isPublishedContentAccessible(currentEntry) ||
+    !currentEntry.enableDownloadButton ||
+    !currentEntry.downloadPdfSrc
+  ) {
+    return {};
+  }
+
   return {
+    title: getLocalizedContent(currentEntry.title, locale),
     alternates: {
-      canonical: getLocalePath(locale, `/features/demo/${decodeURIComponent(slug)}/download`),
+      canonical: getLocalePath(locale, `/features/demo/${resolvedSlug}/download`),
     },
   };
 }
