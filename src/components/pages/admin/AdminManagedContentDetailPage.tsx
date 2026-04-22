@@ -28,6 +28,7 @@ import {
   getManagedCategoryLabel,
   getLocalizedContent,
   getWriterLabel,
+  hasAnyLocalizedTitle,
   slugifyTitle,
   type ContentGatingLevel,
   type ManagedContentCategorySlug,
@@ -257,6 +258,29 @@ type Props = {
   section: ManagedContentSection;
 };
 
+type PendingVideoUpload = {
+  file: File;
+  replaceSrc: string;
+};
+
+type PendingImageUpload = {
+  file: File;
+  replaceSrc: string;
+};
+
+const LOCALES = ["en", "ko", "ja"] as const;
+
+function replaceAllExact(value: string, search: string, replacement: string) {
+  return value.split(search).join(replacement);
+}
+
+function formContainsText(form: ManagedContentEntry, value: string) {
+  return LOCALES.some((locale) =>
+    form.bodyRichText[locale].includes(value) ||
+    form.bodyHtml[locale].includes(value),
+  );
+}
+
 export default function AdminManagedContentDetailPage({
   categorySlug,
   initialItem,
@@ -270,6 +294,10 @@ export default function AdminManagedContentDetailPage({
   const pdfInputRef = useRef<HTMLInputElement | null>(null);
   const dateInputRef = useRef<HTMLInputElement | null>(null);
   const isInitializingRichTextRef = useRef(false);
+  const pendingDeletedImageSrcsRef = useRef(new Set<string>());
+  const pendingDeletedVideoSrcsRef = useRef(new Set<string>());
+  const pendingImageUploadsRef = useRef(new Map<string, PendingImageUpload>());
+  const pendingVideoUploadsRef = useRef(new Map<string, PendingVideoUpload>());
   const items = useManagedContents(section, initialItems, "all", "list") ?? [];
   const currentItem = itemId === "new" ? null : initialItem ?? null;
   const [form, setForm] = useState<ManagedContentEntry>(() => createEmptyManagedContentDraft(section, categorySlug));
@@ -288,7 +316,9 @@ const [isSaving, setIsSaving] = useState(false);
   const hasUnsavedChanges =
     serializeDirtyCheckTarget(form) !== initialFormSnapshot ||
     Boolean(pendingThumbnailFile) ||
-    Boolean(pendingPdfFile);
+    Boolean(pendingPdfFile) ||
+    pendingImageUploadsRef.current.size > 0 ||
+    pendingVideoUploadsRef.current.size > 0;
   const showPreview = true;
   const isContentType = form.contentType === "content";
   const isOutlinkType = form.contentType === "outlink";
@@ -301,6 +331,16 @@ const [isSaving, setIsSaving] = useState(false);
       URL.revokeObjectURL(pendingThumbnailPreviewSrc);
       setPendingThumbnailPreviewSrc("");
     }
+    for (const previewSrc of pendingImageUploadsRef.current.keys()) {
+      URL.revokeObjectURL(previewSrc);
+    }
+    pendingImageUploadsRef.current.clear();
+    pendingDeletedImageSrcsRef.current.clear();
+    for (const previewSrc of pendingVideoUploadsRef.current.keys()) {
+      URL.revokeObjectURL(previewSrc);
+    }
+    pendingVideoUploadsRef.current.clear();
+    pendingDeletedVideoSrcsRef.current.clear();
     setPendingThumbnailFile(null);
     setPendingPdfFile(null);
 
@@ -334,6 +374,16 @@ const [isSaving, setIsSaving] = useState(false);
       if (pendingThumbnailPreviewSrc) {
         URL.revokeObjectURL(pendingThumbnailPreviewSrc);
       }
+      for (const previewSrc of pendingImageUploadsRef.current.keys()) {
+        URL.revokeObjectURL(previewSrc);
+      }
+      pendingImageUploadsRef.current.clear();
+      pendingDeletedImageSrcsRef.current.clear();
+      for (const previewSrc of pendingVideoUploadsRef.current.keys()) {
+        URL.revokeObjectURL(previewSrc);
+      }
+      pendingVideoUploadsRef.current.clear();
+      pendingDeletedVideoSrcsRef.current.clear();
     };
   }, [pendingThumbnailPreviewSrc]);
 
@@ -524,16 +574,216 @@ const [isSaving, setIsSaving] = useState(false);
     return payload.src;
   }
 
-  function validateForm() {
+  function prepareImagePreview(file: File, replaceSrc?: string) {
+    const previewSrc = URL.createObjectURL(file);
+    const normalizedReplaceSrc = replaceSrc ?? "";
+    let serverReplaceSrc = normalizedReplaceSrc;
+
+    if (normalizedReplaceSrc.startsWith("blob:")) {
+      serverReplaceSrc = pendingImageUploadsRef.current.get(normalizedReplaceSrc)?.replaceSrc ?? "";
+      URL.revokeObjectURL(normalizedReplaceSrc);
+      pendingImageUploadsRef.current.delete(normalizedReplaceSrc);
+    }
+
+    pendingImageUploadsRef.current.set(previewSrc, {
+      file,
+      replaceSrc: serverReplaceSrc.startsWith("blob:") ? "" : serverReplaceSrc,
+    });
+    setHasUnsavedChanges(true);
+
+    return previewSrc;
+  }
+
+  function trackRemovedImage(src: string) {
+    if (src.startsWith("blob:")) {
+      URL.revokeObjectURL(src);
+      pendingImageUploadsRef.current.delete(src);
+      return;
+    }
+
+    pendingDeletedImageSrcsRef.current.add(src);
+    setHasUnsavedChanges(true);
+  }
+
+  function prepareVideoPreview(file: File, replaceSrc?: string) {
+    const previewSrc = URL.createObjectURL(file);
+    const normalizedReplaceSrc = replaceSrc ?? "";
+    let serverReplaceSrc = normalizedReplaceSrc;
+
+    if (normalizedReplaceSrc.startsWith("blob:")) {
+      serverReplaceSrc = pendingVideoUploadsRef.current.get(normalizedReplaceSrc)?.replaceSrc ?? "";
+      URL.revokeObjectURL(normalizedReplaceSrc);
+      pendingVideoUploadsRef.current.delete(normalizedReplaceSrc);
+    }
+
+    pendingVideoUploadsRef.current.set(previewSrc, {
+      file,
+      replaceSrc: serverReplaceSrc.startsWith("blob:") ? "" : serverReplaceSrc,
+    });
+    setHasUnsavedChanges(true);
+
+    return previewSrc;
+  }
+
+  function trackRemovedVideo(src: string) {
+    if (src.startsWith("blob:")) {
+      URL.revokeObjectURL(src);
+      pendingVideoUploadsRef.current.delete(src);
+      return;
+    }
+
+    pendingDeletedVideoSrcsRef.current.add(src);
+    setHasUnsavedChanges(true);
+  }
+
+  async function uploadVideo(file: File) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("section", section);
+    formData.append("categorySlug", categorySlug);
+
+    const response = await fetch("/api/admin/uploads", {
+      body: formData,
+      method: "POST",
+    });
+
+    if (!response.ok) {
+      throw new Error("video upload failed");
+    }
+
+    const payload = (await response.json()) as { src?: string };
+
+    if (!payload.src) {
+      throw new Error("missing video src");
+    }
+
+    return payload.src;
+  }
+
+  async function deleteUploadedFile(src: string) {
+    if (!src || src.startsWith("blob:")) {
+      return;
+    }
+
+    await fetch("/api/admin/uploads", {
+      body: JSON.stringify({ categorySlug, section, src }),
+      headers: { "Content-Type": "application/json" },
+      method: "DELETE",
+    });
+  }
+
+  async function finalizePendingImages(currentForm: ManagedContentEntry) {
+    const pendingEntries = Array.from(pendingImageUploadsRef.current.entries()).filter(([previewSrc]) =>
+      formContainsText(currentForm, previewSrc),
+    );
+
+    if (pendingEntries.length === 0) {
+      return {
+        finalizedForm: currentForm,
+        oldImageSrcs: [] as string[],
+        uploadedImageSrcs: [] as string[],
+      };
+    }
+
+    let finalizedForm: ManagedContentEntry = {
+      ...currentForm,
+      bodyHtml: { ...currentForm.bodyHtml },
+      bodyRichText: { ...currentForm.bodyRichText },
+    };
+    const oldImageSrcs: string[] = [];
+    const uploadedImageSrcs: string[] = [];
+
+    for (const [previewSrc, pendingImage] of pendingEntries) {
+      const uploadedSrc = await uploadThumbnail(pendingImage.file);
+      uploadedImageSrcs.push(uploadedSrc);
+
+      finalizedForm = {
+        ...finalizedForm,
+        bodyHtml: {
+          en: replaceAllExact(finalizedForm.bodyHtml.en, previewSrc, uploadedSrc),
+          ko: replaceAllExact(finalizedForm.bodyHtml.ko, previewSrc, uploadedSrc),
+          ja: replaceAllExact(finalizedForm.bodyHtml.ja, previewSrc, uploadedSrc),
+        },
+        bodyRichText: {
+          en: replaceAllExact(finalizedForm.bodyRichText.en, previewSrc, uploadedSrc),
+          ko: replaceAllExact(finalizedForm.bodyRichText.ko, previewSrc, uploadedSrc),
+          ja: replaceAllExact(finalizedForm.bodyRichText.ja, previewSrc, uploadedSrc),
+        },
+      };
+
+      if (pendingImage.replaceSrc && pendingImage.replaceSrc !== uploadedSrc) {
+        oldImageSrcs.push(pendingImage.replaceSrc);
+      }
+    }
+
+    return {
+      finalizedForm,
+      oldImageSrcs,
+      uploadedImageSrcs,
+    };
+  }
+
+  async function finalizePendingVideos(currentForm: ManagedContentEntry) {
+    const pendingEntries = Array.from(pendingVideoUploadsRef.current.entries()).filter(([previewSrc]) =>
+      formContainsText(currentForm, previewSrc),
+    );
+
+    if (pendingEntries.length === 0) {
+      return {
+        finalizedForm: currentForm,
+        oldVideoSrcs: [] as string[],
+        uploadedVideoSrcs: [] as string[],
+      };
+    }
+
+    let finalizedForm: ManagedContentEntry = {
+      ...currentForm,
+      bodyHtml: { ...currentForm.bodyHtml },
+      bodyRichText: { ...currentForm.bodyRichText },
+    };
+    const oldVideoSrcs: string[] = [];
+    const uploadedVideoSrcs: string[] = [];
+
+    for (const [previewSrc, pendingVideo] of pendingEntries) {
+      const uploadedSrc = await uploadVideo(pendingVideo.file);
+      uploadedVideoSrcs.push(uploadedSrc);
+
+      finalizedForm = {
+        ...finalizedForm,
+        bodyHtml: {
+          en: replaceAllExact(finalizedForm.bodyHtml.en, previewSrc, uploadedSrc),
+          ko: replaceAllExact(finalizedForm.bodyHtml.ko, previewSrc, uploadedSrc),
+          ja: replaceAllExact(finalizedForm.bodyHtml.ja, previewSrc, uploadedSrc),
+        },
+        bodyRichText: {
+          en: replaceAllExact(finalizedForm.bodyRichText.en, previewSrc, uploadedSrc),
+          ko: replaceAllExact(finalizedForm.bodyRichText.ko, previewSrc, uploadedSrc),
+          ja: replaceAllExact(finalizedForm.bodyRichText.ja, previewSrc, uploadedSrc),
+        },
+      };
+
+      if (pendingVideo.replaceSrc && pendingVideo.replaceSrc !== uploadedSrc) {
+        oldVideoSrcs.push(pendingVideo.replaceSrc);
+      }
+    }
+
+    return {
+      finalizedForm,
+      oldVideoSrcs,
+      uploadedVideoSrcs,
+    };
+  }
+
+  function validateForm(targetForm: ManagedContentEntry = form) {
     /* 저장/게시 전 필수 입력값만 간단히 검증한다 */
     const missing: string[] = [];
-    if (!form.title.en.trim()) missing.push("제목 (EN)");
-    if (supportsLeadGate && form.enableDownloadButton && !form.downloadPdfSrc.trim() && !pendingPdfFile) {
+    if (!hasAnyLocalizedTitle(targetForm.title)) missing.push("제목 (EN/KO/JA 중 1개)");
+    if (supportsLeadGate && targetForm.enableDownloadButton && !targetForm.downloadPdfSrc.trim() && !pendingPdfFile) {
       missing.push("PDF");
     }
     if (isOutlinkType) {
-      if (!form.summary.en.trim()) missing.push("설명 (EN)");
-      if (!form.externalUrl.trim()) missing.push("URL");
+      if (!targetForm.summary.en.trim()) missing.push("설명 (EN)");
+      if (!targetForm.externalUrl.trim()) missing.push("URL");
     }
     return missing;
   }
@@ -547,8 +797,8 @@ const [isSaving, setIsSaving] = useState(false);
     setIsSaving(true);
 
     const currentForm = overrideForm ?? form;
-    const missing = validateForm();
-    if (status === "published" && missing.length > 0) {
+    const missing = validateForm(currentForm);
+    if (missing.length > 0) {
       setDialog({
         description: "다음 항목을 입력해야 저장할 수 있습니다.",
         highlightedLines: missing,
@@ -563,6 +813,11 @@ const [isSaving, setIsSaving] = useState(false);
     let nextDownloadPdfSrc = currentForm.downloadPdfSrc;
     let nextDownloadPdfFileName = currentForm.downloadPdfFileName;
     let nextDownloadCoverImageSrc = currentForm.downloadCoverImageSrc;
+    let finalizedContentForm = currentForm;
+    let oldImageSrcs: string[] = [];
+    let uploadedImageSrcs: string[] = [];
+    let oldVideoSrcs: string[] = [];
+    let uploadedVideoSrcs: string[] = [];
 
     if (pendingThumbnailFile) {
       try {
@@ -595,10 +850,40 @@ const [isSaving, setIsSaving] = useState(false);
       }
     }
 
+    try {
+      const finalizedImages = await finalizePendingImages(currentForm);
+      finalizedContentForm = finalizedImages.finalizedForm;
+      oldImageSrcs = finalizedImages.oldImageSrcs;
+      uploadedImageSrcs = finalizedImages.uploadedImageSrcs;
+    } catch {
+      setDialog({
+        description: "이미지를 저장하지 못했습니다. 다시 시도해 주세요.",
+        title: "이미지 업로드에 실패했습니다.",
+        type: "alert",
+      });
+      setIsSaving(false);
+      return;
+    }
+
+    try {
+      const finalizedVideos = await finalizePendingVideos(finalizedContentForm);
+      finalizedContentForm = finalizedVideos.finalizedForm;
+      oldVideoSrcs = finalizedVideos.oldVideoSrcs;
+      uploadedVideoSrcs = finalizedVideos.uploadedVideoSrcs;
+    } catch {
+      setDialog({
+        description: "영상을 저장하지 못했습니다. 다시 시도해 주세요.",
+        title: "영상 업로드에 실패했습니다.",
+        type: "alert",
+      });
+      setIsSaving(false);
+      return;
+    }
+
     const nextId = ensureUniqueSlug(
       itemId === "new"
-        ? slugifyTitle(currentForm.title.en || currentForm.title.ko || currentForm.title.ja)
-        : currentForm.id,
+        ? slugifyTitle(finalizedContentForm.title.en || finalizedContentForm.title.ko || finalizedContentForm.title.ja)
+        : finalizedContentForm.id,
       items.filter((item) => item.section === section),
       itemId === "new" ? undefined : itemId,
     );
@@ -621,15 +906,15 @@ const [isSaving, setIsSaving] = useState(false);
       }
     }
     const nextItem: ManagedContentEntry = {
-      ...currentForm,
+      ...finalizedContentForm,
       categorySlug,
       id: nextId,
       downloadCoverImageSrc: nextDownloadCoverImageSrc || nextImageSrc,
       downloadPdfFileName: nextDownloadPdfFileName,
       downloadPdfSrc: nextDownloadPdfSrc,
       gatingLevel:
-        section !== "news" && currentForm.contentType === "content"
-          ? currentForm.gatingLevel
+        section !== "news" && finalizedContentForm.contentType === "content"
+          ? finalizedContentForm.gatingLevel
           : "none",
       imageSrc: nextImageSrc,
       section,
@@ -645,6 +930,8 @@ const [isSaving, setIsSaving] = useState(false);
         itemId === "new" ? undefined : itemId,
       );
     } catch (error) {
+      await Promise.all(uploadedImageSrcs.map((src) => deleteUploadedFile(src)));
+      await Promise.all(uploadedVideoSrcs.map((src) => deleteUploadedFile(src)));
       setDialog({
         description:
           error instanceof Error
@@ -660,6 +947,26 @@ const [isSaving, setIsSaving] = useState(false);
     if (pendingThumbnailPreviewSrc) {
       URL.revokeObjectURL(pendingThumbnailPreviewSrc);
     }
+    const imageSrcsToDelete = Array.from(new Set([
+      ...oldImageSrcs,
+      ...pendingDeletedImageSrcsRef.current,
+    ])).filter((src) => !formContainsText(nextItem, src));
+    await Promise.all(imageSrcsToDelete.map((src) => deleteUploadedFile(src)));
+    const videoSrcsToDelete = Array.from(new Set([
+      ...oldVideoSrcs,
+      ...pendingDeletedVideoSrcsRef.current,
+    ])).filter((src) => !formContainsText(nextItem, src));
+    await Promise.all(videoSrcsToDelete.map((src) => deleteUploadedFile(src)));
+    for (const previewSrc of pendingImageUploadsRef.current.keys()) {
+      URL.revokeObjectURL(previewSrc);
+    }
+    pendingImageUploadsRef.current.clear();
+    pendingDeletedImageSrcsRef.current.clear();
+    for (const previewSrc of pendingVideoUploadsRef.current.keys()) {
+      URL.revokeObjectURL(previewSrc);
+    }
+    pendingVideoUploadsRef.current.clear();
+    pendingDeletedVideoSrcsRef.current.clear();
 
     setPendingThumbnailFile(null);
     setPendingPdfFile(null);
@@ -944,7 +1251,10 @@ const [isSaving, setIsSaving] = useState(false);
               <div className="flex flex-col gap-[10px]">
                 <TiptapEditor
                   onChange={(payload) => updateRichText(activeLocale, payload)}
-                  onUploadImage={uploadThumbnail}
+                  onPrepareImage={prepareImagePreview}
+                  onRemoveVideo={trackRemovedVideo}
+                  onRemoveImage={trackRemovedImage}
+                  onPrepareVideo={prepareVideoPreview}
                   value={getEditingLocalizedValue(form.bodyRichText, activeLocale)}
                 />
               </div>
