@@ -39,7 +39,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
+  const title = { en: "QueryPie News", ko: "QueryPie News", ja: "QueryPie: ニュース" }[locale];
+
   return {
+    title,
     alternates: {
       canonical: getLocalePath(locale, "/company/news"),
     },

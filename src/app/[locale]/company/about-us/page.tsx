@@ -236,7 +236,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
+  const title = { en: "About Us", ko: "About Us", ja: "会社概要" }[locale];
+
   return {
+    title,
     alternates: {
       canonical: getLocalePath(locale, "/company/about-us"),
     },

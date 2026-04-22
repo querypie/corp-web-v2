@@ -21,7 +21,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
+  const title = { en: "QueryPie Contacts", ko: "QueryPie Contacts", ja: "QueryPie: お問い合わせ" }[locale];
+
   return {
+    title,
     alternates: {
       canonical: getLocalePath(locale, "/company/contact-us"),
     },

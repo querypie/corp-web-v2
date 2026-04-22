@@ -67,7 +67,10 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
 
   if (!isLocale(locale)) return {};
 
+  const title = { en: "Demo", ko: "Demo", ja: "デモ" }[locale];
+
   return {
+    title,
     alternates: {
       canonical: getLocalePath(locale, "/features/demo"),
     },
