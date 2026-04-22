@@ -5,7 +5,7 @@ title: "QueryPie gRPC DAST Security: ZAP Custom Script Example"
 description: "Learn how QueryPie leverages gRPC communication for high performance and stability in web applications."
 date: "2025-02-06"
 author: "noah"
-ogImage: "public/white-paper/wp-thumb-12.png"
+ogImage: "public/white-paper/12/thumbnail.png"
 keywords: ["QueryPie", "gRPC security", "OWASP ZAP", "vulnerability scanning", "security automation", "web application security"]
 relatedPosts:
   - "/en/white-paper/10"
@@ -26,7 +26,7 @@ For example, when examining a packet from a web application implemented with gRP
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp12-1-decoding-grpc-request.png"
+        filepath="public/white-paper/12/wp12-1-decoding-grpc-request.png"
         alt="Base64 Decoding of gRPC Request POST Data"
         caption="Base64 Decoding of gRPC Request POST Data"
     />
@@ -36,7 +36,7 @@ For example, when examining a packet from a web application implemented with gRP
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp12-2-verifying-grpc-request.png"
+        filepath="public/white-paper/12/wp12-2-verifying-grpc-request.png"
         alt="Verifying gRPC Request POST Data"
         caption="Verifying gRPC Request POST Data"
     />
@@ -48,7 +48,7 @@ However, if the string "cat" is re-encoded in Base64, it becomes clear that the 
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp12-3-original-grpc-request.png"
+        filepath="public/white-paper/12/wp12-3-original-grpc-request.png"
         alt="The original gRPC request POST data is different."
         caption="The original gRPC request POST data is different."
     />
@@ -58,7 +58,7 @@ However, if the string "cat" is re-encoded in Base64, it becomes clear that the 
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp12-4-cat-string.png"
+        filepath="public/white-paper/12/wp12-4-cat-string.png"
         alt="ZAP’s custom scripts support three different engines"
         caption="ZAP’s custom scripts support three different engines"
     />
@@ -76,7 +76,7 @@ ZAP’s custom scripts support three different engines, and the ECMAScript (Graa
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp12-5-owasp-zap-custom-scripts.png"
+        filepath="public/white-paper/12/wp12-5-owasp-zap-custom-scripts.png"
         alt="OWASP ZAP’s custom scripts support three different engines"
         caption="OWASP ZAP’s custom scripts support three different engines"
     />
@@ -96,7 +96,7 @@ You can use the gRPC encoding/decoding commands provided in the grpc-pentest-sui
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp12-6-grpc-encoding-decoding.png"
+        filepath="public/white-paper/12/wp12-6-grpc-encoding-decoding.png"
         alt="gRPC Encoding/Decoding through grpc-pentest-suite Script Execution"
         caption="gRPC Encoding/Decoding through grpc-pentest-suite Script Execution"
     />
@@ -108,7 +108,7 @@ Afterward, you can define vulnerability detection conditions based on the items 
 <br />
 <Box center>
     <ArticleFileImage
-        filepath="public/white-paper/wp12-7-sql-injection-vulnerability-criteria.png"
+        filepath="public/white-paper/12/wp12-7-sql-injection-vulnerability-criteria.png"
         alt="SQL Injection Vulnerability Criteria and Detection Alert Definition"
         caption="SQL Injection Vulnerability Criteria and Detection Alert Definition"
     />
