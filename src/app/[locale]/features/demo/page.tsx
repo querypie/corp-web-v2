@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "../../../../constants/i18n";
 import DemoListClientPage from "../../../../components/pages/demo/DemoListClientPage";
+import { getDemoPageCopy } from "@/features/content/pageCopy";
 import {
   demoCategoryConfigs,
   getCategoryLabel,
@@ -52,12 +53,14 @@ export default async function DemoPage({ params, searchParams }: Props) {
           return matchedCategory?.slug === selectedCategory;
         });
 
+  const copy = getDemoPageCopy(locale);
+
   return (
     <DemoListClientPage
       fallbackItems={fallbackItems}
       locale={locale}
       selectedCategory={selectedCategory}
-      title="Demo"
+      title={copy.title}
     />
   );
 }
@@ -67,7 +70,10 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
 
   if (!isLocale(locale)) return {};
 
+  const { metadataTitle } = getDemoPageCopy(locale);
+
   return {
+    title: metadataTitle,
     alternates: {
       canonical: getLocalePath(locale, "/features/demo"),
     },

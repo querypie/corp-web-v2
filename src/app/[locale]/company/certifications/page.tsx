@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import CertificationsPage from "../../../../components/pages/company/CertificationsPage";
 import { getLocalePath, isLocale } from "../../../../constants/i18n";
+import { getCertificationsMetadataTitle } from "@/features/company/pageCopy";
 
 type CertificationsRouteProps = {
   params: Promise<{ locale: string }>;
@@ -299,6 +300,7 @@ export async function generateMetadata({ params }: CertificationsRouteProps): Pr
   if (!isLocale(locale)) return {};
 
   return {
+    title: getCertificationsMetadataTitle(locale),
     alternates: {
       canonical: getLocalePath(locale, "/company/certifications"),
     },

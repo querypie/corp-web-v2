@@ -21,7 +21,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
+  const { metadataTitle } = getCommunityLicensePageCopy(locale);
+
   return {
+    title: metadataTitle,
     alternates: {
       canonical: getLocalePath(locale, "/community-license"),
     },

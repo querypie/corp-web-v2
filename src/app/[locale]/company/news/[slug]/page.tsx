@@ -92,12 +92,20 @@ export default async function NewsDetailRoute({ params }: Props) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
+  const decodedSlug = decodeURIComponent(slug);
 
   if (!isLocale(locale)) return {};
 
+  const currentEntry = await readContentItem("news", decodedSlug, { includeBodies: false });
+
+  if (!currentEntry || !isPublishedContentAccessible(currentEntry)) {
+    return {};
+  }
+
   return {
+    title: getLocalizedContent(currentEntry.title, locale),
     alternates: {
-      canonical: getPublicDetailHref("news", locale, decodeURIComponent(slug)),
+      canonical: getPublicDetailHref("news", locale, decodedSlug),
     },
   };
 }

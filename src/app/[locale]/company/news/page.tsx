@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "../../../../constants/i18n";
 import NewsListClientPage from "../../../../components/pages/news/NewsListClientPage";
+import { getNewsPageCopy } from "@/features/company/pageCopy";
 import { formatPublicDate, getLocalizedContent, getPublicDetailHref, isPublishedContentVisible } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
 
@@ -14,11 +15,7 @@ export default async function NewsPage({ params }: Props) {
 
   if (!isLocale(locale)) notFound();
 
-  const copy = {
-    en: { title: "News" },
-    ko: { title: "뉴스" },
-    ja: { title: "News" },
-  }[locale];
+  const copy = getNewsPageCopy(locale);
 
   const fallbackItems = (await readContentState("news", { includeBodies: false }))
     .filter((item) => isPublishedContentVisible(item, locale))
@@ -39,7 +36,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
+  const { metadataTitle } = getNewsPageCopy(locale);
+
   return {
+    title: metadataTitle,
     alternates: {
       canonical: getLocalePath(locale, "/company/news"),
     },

@@ -13,7 +13,8 @@ export default async function ContactUsRoute({ params }: Props) {
 
   if (!isLocale(locale)) notFound();
 
-  return <ContactUsPage {...getContactPageCopy(locale)} locale={locale as Locale} />;
+  const copy = getContactPageCopy(locale);
+  return <ContactUsPage {...copy} locale={locale as Locale} />;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -21,7 +22,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
+  const { metadataTitle } = getContactPageCopy(locale);
+
   return {
+    title: metadataTitle,
     alternates: {
       canonical: getLocalePath(locale, "/company/contact-us"),
     },

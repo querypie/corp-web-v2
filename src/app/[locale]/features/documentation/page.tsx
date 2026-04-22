@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "../../../../constants/i18n";
 import DocsListClientPage from "../../../../components/pages/documentation/DocumentationListClientPage";
+import { getDocumentationPageCopy } from "@/features/content/pageCopy";
 import {
   docsCategoryConfigs,
   getCategoryLabel,
@@ -54,12 +55,14 @@ export default async function DocumentationPage({ params, searchParams }: DocsPa
           return matchedCategory?.slug === selectedCategory;
         });
 
+  const copy = getDocumentationPageCopy(locale);
+
   return (
     <DocsListClientPage
       fallbackItems={fallbackItems}
       locale={locale}
       selectedCategory={selectedCategory}
-      title="Documentation"
+      title={copy.title}
     />
   );
 }
@@ -69,7 +72,10 @@ export async function generateMetadata({ params }: DocsPageProps): Promise<Metad
 
   if (!isLocale(locale)) return {};
 
+  const { metadataTitle } = getDocumentationPageCopy(locale);
+
   return {
+    title: metadataTitle,
     alternates: {
       canonical: getLocalePath(locale, "/features/documentation"),
     },
