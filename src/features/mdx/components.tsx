@@ -86,8 +86,9 @@ export function buildMdxComponents(): MDXComponents {
       alt?: string;
       caption?: string;
     }) => {
-      // filepath="public/blog/foo.png" → "/blog/foo.png"
       const resolvedSrc = (filepath ?? src ?? "").replace(/^public\//, "/");
+      if (!resolvedSrc) return null;
+
       return (
         <figure className="mx-auto my-0 flex max-w-full flex-col gap-3">
           <img

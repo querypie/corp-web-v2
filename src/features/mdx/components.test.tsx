@@ -30,12 +30,10 @@ describe("buildMdxComponents", () => {
       expect(img?.getAttribute("src")).toBe("/direct/path.png");
     });
 
-    it("filepath와 src 모두 없으면 실제 이미지 경로가 없다", () => {
+    it("filepath와 src 모두 없으면 아무것도 렌더링하지 않는다", () => {
       const { ArticleFileImage } = getComponents() as any;
       const { container } = render(<ArticleFileImage alt="no-src" />);
-      const img = container.querySelector("img");
-      // src=""는 happy-dom에서 null로 반환될 수 있음
-      expect(img?.getAttribute("src") ?? "").toBe("");
+      expect(container.firstChild).toBeNull();
     });
 
     it("caption prop이 있으면 figcaption을 렌더링한다", () => {
