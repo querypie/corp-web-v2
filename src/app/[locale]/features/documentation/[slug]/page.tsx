@@ -118,12 +118,20 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
 
 export async function generateMetadata({ params }: DocsDetailRouteProps): Promise<Metadata> {
   const { locale, slug } = await params;
+  const resolvedSlug = decodeURIComponent(slug);
 
   if (!isLocale(locale)) return {};
 
+  const currentEntry = await readContentItem("documentation", resolvedSlug, { includeBodies: false });
+
+  if (!currentEntry || !isPublishedContentAccessible(currentEntry)) {
+    return {};
+  }
+
   return {
+    title: getLocalizedContent(currentEntry.title, locale),
     alternates: {
-      canonical: getLocalePath(locale, `/features/documentation/${decodeURIComponent(slug)}`),
+      canonical: getLocalePath(locale, `/features/documentation/${resolvedSlug}`),
     },
   };
 }

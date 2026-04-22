@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "../../../../constants/i18n";
 import AboutUsPage from "../../../../components/pages/company/AboutUsPage";
+import { getAboutUsMetadataTitle } from "@/features/company/pageCopy";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -236,10 +237,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
-  const title = { en: "About Us", ko: "About Us", ja: "会社概要" }[locale];
-
   return {
-    title,
+    title: getAboutUsMetadataTitle(locale),
     alternates: {
       canonical: getLocalePath(locale, "/company/about-us"),
     },

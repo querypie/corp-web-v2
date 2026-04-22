@@ -9,6 +9,7 @@ export type CommunityLicenseField = {
 };
 
 export type CommunityLicensePageCopy = {
+  metadataTitle: string;
   titleLines: string[];
   description: string;
   fields: CommunityLicenseField[];
@@ -24,6 +25,7 @@ export type CommunityLicensePageCopy = {
 export function getCommunityLicensePageCopy(locale: Locale): CommunityLicensePageCopy {
   const copies = {
     en: {
+      metadataTitle: "License Request Form",
       titleLines: ["License Request Form"],
       description:
         "Request your license. Unlock your potential.\nFast, easy licensing tailored for your business\u2014get started in just a few clicks.\nRequest now!",
@@ -79,6 +81,7 @@ export function getCommunityLicensePageCopy(locale: Locale): CommunityLicensePag
       errorGeneral: "An error occurred. Please try again.",
     },
     ko: {
+      metadataTitle: "라이선스 발급 신청",
       titleLines: ["라이선스 발급 신청"],
       description:
         "라이선스를 신청하고 비즈니스 잠재력을 키워보세요!\n신청 후 입력하신 이메일로 1년 라이선스가 발급됩니다.",
@@ -134,6 +137,7 @@ export function getCommunityLicensePageCopy(locale: Locale): CommunityLicensePag
       errorGeneral: "오류가 발생했습니다. 다시 시도해주세요.",
     },
     ja: {
+      metadataTitle: "ライセンス発行の申請",
       titleLines: ["ライセンス発行の申請"],
       description:
         "ライセンスを申請して、ビジネスの可能性を広げましょう！\n申請後、ご入力いただいたメールアドレス宛に1年間有効なライセンスをお送りします。",

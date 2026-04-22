@@ -115,12 +115,20 @@ export default async function DemoDetailRoute({ params }: Props) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
+  const resolvedSlug = decodeURIComponent(slug);
 
   if (!isLocale(locale)) return {};
 
+  const currentEntry = await readContentItem("demo", resolvedSlug, { includeBodies: false });
+
+  if (!currentEntry || !isPublishedContentAccessible(currentEntry)) {
+    return {};
+  }
+
   return {
+    title: getLocalizedContent(currentEntry.title, locale),
     alternates: {
-      canonical: getLocalePath(locale, `/features/demo/${decodeURIComponent(slug)}`),
+      canonical: getLocalePath(locale, `/features/demo/${resolvedSlug}`),
     },
   };
 }

@@ -16,6 +16,7 @@ export type ContactField = {
 };
 
 export type ContactPageCopy = {
+  metadataTitle: string;
   consentLabel: string;
   emailLinks: ContactLink[];
   errorGeneral: string;
@@ -39,6 +40,7 @@ export type ContactPageCopy = {
 export function getContactPageCopy(locale: Locale): ContactPageCopy {
   return {
     en: {
+      metadataTitle: "QueryPie Contacts",
       titleLines: ["Connect with our experts.", "Accelerate your success."],
       formDescription:
         "Quick, friendly guidance for your business—answers you'll appreciate, support you'll trust.",
@@ -97,6 +99,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       successButton: "Go to Home",
     },
     ko: {
+      metadataTitle: "QueryPie Contacts",
       titleLines: ["전문가와 연결하세요.", "더 빠르게 성과를 만드세요."],
       formDescription: "빠르고 친절한 가이드로 비즈니스에 필요한 답을 드립니다.",
       emailLinks: [
@@ -154,6 +157,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       successButton: "홈으로 이동",
     },
     ja: {
+      metadataTitle: "QueryPie: お問い合わせ",
       titleLines: ["専門家にご相談ください。", "成功までのスピードを高めます。"],
       formDescription: "ビジネスに必要な答えを、すばやく丁寧にご案内します。",
       emailLinks: [
