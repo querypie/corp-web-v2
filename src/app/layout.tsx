@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
-import { siteUrl } from "../constants/site";
+import { siteTitle, siteUrl } from "../constants/site";
 import "../styles/globals.css";
 
 const jetBrainsMono = JetBrains_Mono({
@@ -20,8 +20,8 @@ const monaSans = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "CMS",
-  description: "Next.js App Router project scaffold.",
+  title: siteTitle,
+  description: "QueryPie AI transforms how enterprises work with AI.",
   metadataBase: new URL(siteUrl),
 };
 

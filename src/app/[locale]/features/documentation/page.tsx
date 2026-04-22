@@ -69,7 +69,10 @@ export async function generateMetadata({ params }: DocsPageProps): Promise<Metad
 
   if (!isLocale(locale)) return {};
 
+  const title = { en: "Documentation", ko: "Documentation", ja: "ドキュメント" }[locale];
+
   return {
+    title,
     alternates: {
       canonical: getLocalePath(locale, "/features/documentation"),
     },

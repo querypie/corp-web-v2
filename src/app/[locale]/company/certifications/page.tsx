@@ -298,7 +298,14 @@ export async function generateMetadata({ params }: CertificationsRouteProps): Pr
 
   if (!isLocale(locale)) return {};
 
+  const title = {
+    en: "QueryPie AI Certifications",
+    ko: "QueryPie AI Certifications",
+    ja: "QueryPie AI: 認証",
+  }[locale];
+
   return {
+    title,
     alternates: {
       canonical: getLocalePath(locale, "/company/certifications"),
     },

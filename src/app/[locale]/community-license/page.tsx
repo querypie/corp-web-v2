@@ -21,7 +21,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
+  const title = {
+    en: "License Request Form",
+    ko: "라이선스 발급 신청",
+    ja: "ライセンス発行の申請",
+  }[locale];
+
   return {
+    title,
     alternates: {
       canonical: getLocalePath(locale, "/community-license"),
     },
