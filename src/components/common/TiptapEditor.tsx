@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { mergeAttributes } from "@tiptap/core";
+import { mergeAttributes, Node as TiptapNode } from "@tiptap/core";
 import { EditorContent, ReactNodeViewRenderer, useEditor } from "@tiptap/react";
 import CodeBlock from "@tiptap/extension-code-block";
 import StarterKit from "@tiptap/starter-kit";
@@ -52,6 +52,16 @@ type ImagePopoverState = {
   width: string;
 };
 
+type VideoPopoverState = {
+  autoplayOnView: boolean;
+  caption: string;
+  left: number;
+  loop: boolean;
+  muted: boolean;
+  top: number;
+  visible: boolean;
+};
+
 type TableControlsState = {
   columnLeft: number;
   columnTop: number;
@@ -69,6 +79,18 @@ function isSameImagePopoverState(current: ImagePopoverState, next: ImagePopoverS
     current.top === next.top &&
     current.visible === next.visible &&
     current.width === next.width
+  );
+}
+
+function isSameVideoPopoverState(current: VideoPopoverState, next: VideoPopoverState) {
+  return (
+    current.autoplayOnView === next.autoplayOnView &&
+    current.caption === next.caption &&
+    current.left === next.left &&
+    current.loop === next.loop &&
+    current.muted === next.muted &&
+    current.top === next.top &&
+    current.visible === next.visible
   );
 }
 
@@ -92,6 +114,17 @@ function updateImagePopoverState(
     const nextState = typeof next === "function" ? next(current) : next;
 
     return isSameImagePopoverState(current, nextState) ? current : nextState;
+  });
+}
+
+function updateVideoPopoverState(
+  setVideoPopover: React.Dispatch<React.SetStateAction<VideoPopoverState>>,
+  next: VideoPopoverState | ((current: VideoPopoverState) => VideoPopoverState),
+) {
+  setVideoPopover((current) => {
+    const nextState = typeof next === "function" ? next(current) : next;
+
+    return isSameVideoPopoverState(current, nextState) ? current : nextState;
   });
 }
 
@@ -205,6 +238,185 @@ const ResizableImage = Image.extend({
   },
 });
 
+const VideoBlock = TiptapNode.create({
+  name: "video",
+  group: "block",
+  atom: true,
+  draggable: true,
+  selectable: true,
+
+  addAttributes() {
+    return {
+      aspectRatio: {
+        default: "16 / 9",
+        parseHTML: (element) => {
+          if (!(element instanceof HTMLElement)) {
+            return "16 / 9";
+          }
+
+          const figure = element.tagName === "FIGURE" ? element : element.closest("figure");
+          return figure?.dataset.aspectRatio || "16 / 9";
+        },
+      },
+      autoplayOnView: {
+        default: false,
+        parseHTML: (element) => {
+          if (!(element instanceof HTMLElement)) {
+            return false;
+          }
+
+          const figure = element.tagName === "FIGURE" ? element : element.closest("figure");
+          return figure?.dataset.autoplayOnView === "true";
+        },
+      },
+      caption: {
+        default: "",
+        parseHTML: (element) => {
+          if (!(element instanceof HTMLElement)) {
+            return "";
+          }
+
+          const figure = element.tagName === "FIGURE" ? element : element.closest("figure");
+          return figure?.querySelector("figcaption")?.textContent?.trim() ?? "";
+        },
+      },
+      controls: {
+        default: true,
+        parseHTML: (element) => {
+          if (!(element instanceof HTMLElement)) {
+            return true;
+          }
+
+          const video = element.tagName === "VIDEO" ? element : element.querySelector("video");
+          return video instanceof HTMLVideoElement ? video.hasAttribute("controls") : true;
+        },
+      },
+      loop: {
+        default: false,
+        parseHTML: (element) => {
+          if (!(element instanceof HTMLElement)) {
+            return false;
+          }
+
+          const video = element.tagName === "VIDEO" ? element : element.querySelector("video");
+          return video instanceof HTMLVideoElement ? video.hasAttribute("loop") : false;
+        },
+      },
+      muted: {
+        default: false,
+        parseHTML: (element) => {
+          if (!(element instanceof HTMLElement)) {
+            return false;
+          }
+
+          const video = element.tagName === "VIDEO" ? element : element.querySelector("video");
+          return video instanceof HTMLVideoElement ? video.hasAttribute("muted") : false;
+        },
+      },
+      poster: {
+        default: "",
+        parseHTML: (element) => {
+          if (!(element instanceof HTMLElement)) {
+            return "";
+          }
+
+          const video = element.tagName === "VIDEO" ? element : element.querySelector("video");
+          return video instanceof HTMLVideoElement ? video.getAttribute("poster") ?? "" : "";
+        },
+      },
+      src: {
+        default: "",
+        parseHTML: (element) => {
+          if (!(element instanceof HTMLElement)) {
+            return "";
+          }
+
+          const video = element.tagName === "VIDEO" ? element : element.querySelector("video");
+          return video instanceof HTMLVideoElement ? video.getAttribute("src") ?? "" : "";
+        },
+      },
+      width: {
+        default: "100%",
+        parseHTML: (element) => {
+          if (!(element instanceof HTMLElement)) {
+            return "100%";
+          }
+
+          const figure = element.tagName === "FIGURE" ? element : element.closest("figure");
+          return figure?.style.width || figure?.dataset.width || "100%";
+        },
+      },
+    };
+  },
+
+  parseHTML() {
+    return [
+      {
+        tag: "figure[data-qp-video]",
+      },
+      {
+        tag: "video[src]",
+      },
+    ];
+  },
+
+  renderHTML({ HTMLAttributes }) {
+    const {
+      aspectRatio,
+      autoplayOnView,
+      caption,
+      controls,
+      loop,
+      muted,
+      poster,
+      src,
+      width,
+    } = HTMLAttributes as {
+      aspectRatio?: string;
+      autoplayOnView?: boolean;
+      caption?: string;
+      controls?: boolean;
+      loop?: boolean;
+      muted?: boolean;
+      poster?: string;
+      src?: string;
+      width?: string;
+    };
+
+    return [
+      "figure",
+      mergeAttributes({
+        "data-aspect-ratio": aspectRatio || "16 / 9",
+        "data-autoplay-on-view": autoplayOnView ? "true" : undefined,
+        "data-qp-video": "true",
+        "data-width": width || "100%",
+        style: width ? `width:${width};` : undefined,
+      }),
+      [
+        "div",
+        {
+          style: `aspect-ratio:${aspectRatio || "16 / 9"};overflow:hidden;width:100%;`,
+        },
+        [
+          "video",
+          {
+            controls: controls === false ? undefined : "",
+            controlsList: "nodownload",
+            loop: loop ? "" : undefined,
+            muted: muted ? "" : undefined,
+            playsinline: "",
+            poster: poster || undefined,
+            preload: "metadata",
+            src,
+            style: "height:100%;width:100%;",
+          },
+        ],
+      ],
+      ...(caption ? [["figcaption", {}, caption]] : []),
+    ];
+  },
+});
+
 const StyledCodeBlock = CodeBlock.extend({
   addNodeView() {
     return ReactNodeViewRenderer(TiptapCodeBlockView);
@@ -231,7 +443,7 @@ function ToolButton({
       <button
         aria-label={tooltip}
         className={cx(
-          "inline-flex h-9 items-center justify-center rounded-button px-3 text-center type-body-sm transition-colors whitespace-nowrap",
+          "inline-flex h-9 items-center justify-center rounded-button px-2.5 text-center type-body-sm transition-colors whitespace-nowrap",
           disabled && "cursor-not-allowed opacity-40",
           isActive
             ? "bg-fg text-bg"
@@ -290,20 +502,56 @@ function TableHandleButton({
   );
 }
 
+function VideoToggleButton({
+  children,
+  isActive,
+  onClick,
+}: {
+  children: React.ReactNode;
+  isActive: boolean;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      aria-pressed={isActive}
+      className={cx(
+        "inline-flex h-9 min-w-[72px] items-center justify-center rounded-button border px-3 type-body-sm transition-colors",
+        isActive
+          ? "border-fg bg-fg text-bg"
+          : "border-border bg-transparent text-fg hover:bg-bg hover:text-fg",
+      )}
+      onMouseDown={(event) => {
+        event.preventDefault();
+        onClick();
+      }}
+      type="button"
+    >
+      {children}
+    </button>
+  );
+}
+
 type Props = {
   className?: string;
   onChange: (payload: { html: string; json: string }) => void;
-  onUploadImage?: (file: File) => Promise<string>;
+  onPrepareImage?: (file: File, replaceSrc?: string) => string;
+  onPrepareVideo?: (file: File, replaceSrc?: string) => string;
+  onRemoveImage?: (src: string) => void;
+  onRemoveVideo?: (src: string) => void;
   value: string;
 };
 
 export default function TiptapEditor({
   className,
   onChange,
-  onUploadImage,
+  onPrepareImage,
+  onPrepareVideo,
+  onRemoveImage,
+  onRemoveVideo,
   value,
 }: Props) {
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const imageInputRef = useRef<HTMLInputElement | null>(null);
+  const videoInputRef = useRef<HTMLInputElement | null>(null);
   const editorShellRef = useRef<HTMLDivElement | null>(null);
   const baselineContentRef = useRef("");
   const lastAppliedValueRef = useRef(value);
@@ -315,6 +563,16 @@ export default function TiptapEditor({
     top: 0,
     visible: false,
     width: "100%",
+  });
+  const [isVideoPopoverPinned, setIsVideoPopoverPinned] = useState(false);
+  const [videoPopover, setVideoPopover] = useState<VideoPopoverState>({
+    autoplayOnView: false,
+    caption: "",
+    left: 0,
+    loop: false,
+    muted: false,
+    top: 0,
+    visible: false,
   });
   const [tableControls, setTableControls] = useState<TableControlsState>({
     columnLeft: 0,
@@ -361,6 +619,7 @@ export default function TiptapEditor({
         openOnClick: false,
       }),
       ResizableImage,
+      VideoBlock,
       Youtube.configure({
         allowFullscreen: true,
         controls: true,
@@ -455,15 +714,106 @@ export default function TiptapEditor({
     };
   }, [editor, isImagePopoverPinned]);
 
-  async function handleImageSelection(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0];
-
-    if (!file || !editor || !onUploadImage) {
+  useEffect(() => {
+    if (!editor) {
       return;
     }
 
-    const imageSrc = await onUploadImage(file);
+    const updateVideoPopover = () => {
+      if (!editor.isActive("video")) {
+        if (isVideoPopoverPinned) {
+          return;
+        }
+
+        updateVideoPopoverState(setVideoPopover, (current) => ({ ...current, visible: false }));
+        return;
+      }
+
+      const selectedNode = editor.view.nodeDOM(editor.state.selection.from);
+
+      if (!(selectedNode instanceof HTMLElement)) {
+        updateVideoPopoverState(setVideoPopover, (current) => ({ ...current, visible: false }));
+        return;
+      }
+
+      const shellRect =
+        editorShellRef.current?.getBoundingClientRect() ??
+        editor.view.dom.getBoundingClientRect();
+      const videoRect = selectedNode.getBoundingClientRect();
+      const attrs = editor.getAttributes("video");
+
+      updateVideoPopoverState(setVideoPopover, {
+        autoplayOnView: attrs.autoplayOnView === true,
+        caption: typeof attrs.caption === "string" ? attrs.caption : "",
+        left: videoRect.left - shellRect.left + videoRect.width / 2,
+        loop: attrs.loop === true,
+        muted: attrs.muted === true,
+        top: videoRect.top - shellRect.top + 16,
+        visible: true,
+      });
+    };
+
+    updateVideoPopover();
+    editor.on("selectionUpdate", updateVideoPopover);
+    editor.on("transaction", updateVideoPopover);
+
+    return () => {
+      editor.off("selectionUpdate", updateVideoPopover);
+      editor.off("transaction", updateVideoPopover);
+    };
+  }, [editor, isVideoPopoverPinned]);
+
+  async function handleImageSelection(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+
+    if (!file || !editor || !onPrepareImage) {
+      return;
+    }
+
+    const previousSrc = editor.isActive("image")
+      ? editor.getAttributes("image").src
+      : "";
+    const imageSrc = onPrepareImage(
+      file,
+      typeof previousSrc === "string" ? previousSrc : "",
+    );
     editor.chain().focus().setImage({ src: imageSrc }).run();
+    event.target.value = "";
+  }
+
+  async function handleVideoSelection(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+
+    if (!file || !editor || !onPrepareVideo) {
+      return;
+    }
+
+    const previousSrc = editor.isActive("video")
+      ? editor.getAttributes("video").src
+      : "";
+    const videoSrc = onPrepareVideo(
+      file,
+      typeof previousSrc === "string" ? previousSrc : "",
+    );
+
+    if (editor.isActive("video")) {
+      editor.chain().focus().updateAttributes("video", { src: videoSrc }).run();
+    } else {
+      editor.commands.insertContent({
+        attrs: {
+          aspectRatio: "16 / 9",
+          autoplayOnView: true,
+          caption: "",
+          controls: true,
+          loop: true,
+          muted: true,
+          src: videoSrc,
+          width: "100%",
+        },
+        type: "video",
+      });
+    }
+
     event.target.value = "";
   }
 
@@ -517,6 +867,71 @@ export default function TiptapEditor({
 
     editor.commands.updateAttributes("image", { caption });
     updateImagePopoverState(setImagePopover, (current) => ({ ...current, caption }));
+  }
+
+  function deleteSelectedImage() {
+    if (!editor) {
+      return;
+    }
+
+    const src = editor.getAttributes("image").src;
+    if (typeof src === "string" && src) {
+      onRemoveImage?.(src);
+    }
+
+    editor.chain().focus().deleteSelection().run();
+    updateImagePopoverState(setImagePopover, (current) => ({ ...current, visible: false }));
+  }
+
+  function updateVideoCaption(caption: string) {
+    if (!editor) {
+      return;
+    }
+
+    editor.commands.updateAttributes("video", { caption });
+    updateVideoPopoverState(setVideoPopover, (current) => ({ ...current, caption }));
+  }
+
+  function toggleVideoAttribute(attribute: "loop" | "muted") {
+    if (!editor) {
+      return;
+    }
+
+    const nextValue = !videoPopover[attribute];
+    editor.commands.updateAttributes("video", { [attribute]: nextValue });
+    updateVideoPopoverState(setVideoPopover, (current) => ({ ...current, [attribute]: nextValue }));
+  }
+
+  function toggleVideoAutoplayOnView() {
+    if (!editor) {
+      return;
+    }
+
+    const nextValue = !videoPopover.autoplayOnView;
+    const attrs = nextValue
+      ? { autoplayOnView: true, muted: true }
+      : { autoplayOnView: false };
+
+    editor.commands.updateAttributes("video", attrs);
+    updateVideoPopoverState(setVideoPopover, (current) => ({
+      ...current,
+      autoplayOnView: nextValue,
+      muted: nextValue ? true : current.muted,
+    }));
+  }
+
+  function deleteSelectedVideo() {
+    if (!editor) {
+      return;
+    }
+
+    const src = editor.getAttributes("video").src;
+    if (typeof src === "string" && src) {
+      onRemoveVideo?.(src);
+    }
+
+    editor.chain().focus().deleteSelection().run();
+    updateVideoPopoverState(setVideoPopover, (current) => ({ ...current, visible: false }));
   }
 
   function hideTableControls() {
@@ -720,12 +1135,21 @@ export default function TiptapEditor({
               </svg>
             </ToolbarIcon>
           </ToolButton>
-          <ToolButton onClick={() => fileInputRef.current?.click()} tooltip="Insert Image">
+          <ToolButton disabled={!onPrepareImage} onClick={() => imageInputRef.current?.click()} tooltip="Insert Image">
             <ToolbarIcon>
               <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
                 <rect x="2.25" y="3" width="11.5" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.3"/>
                 <circle cx="5.5" cy="6" r="1.1" fill="currentColor"/>
                 <path d="M4 11L7.1 8.3C7.5 7.95 8.1 7.96 8.5 8.32L10 9.6L11 8.7C11.4 8.34 11.98 8.33 12.4 8.68L13 9.2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </ToolbarIcon>
+          </ToolButton>
+          <ToolButton disabled={!onPrepareVideo} onClick={() => videoInputRef.current?.click()} tooltip="Insert Video">
+            <ToolbarIcon>
+              <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
+                <rect x="2.25" y="3.25" width="11.5" height="9.5" rx="1.4" stroke="currentColor" strokeWidth="1.3"/>
+                <path d="M7 6.1V9.9L10.2 8L7 6.1Z" fill="currentColor"/>
+                <path d="M3.2 5.4H12.8" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round"/>
               </svg>
             </ToolbarIcon>
           </ToolButton>
@@ -763,18 +1187,30 @@ export default function TiptapEditor({
             style={{ left: `${imagePopover.left}px`, top: `${imagePopover.top}px` }}
           >
             <div className="flex items-center justify-center">
-              <TabGroup className="bg-bg-content/60">
-                {(["50%", "75%", "100%"] as const).map((width) => (
-                  <Tab
-                    className="min-w-[72px] px-4"
-                    key={width}
-                    onClick={() => setSelectedImageWidth(width)}
-                    state={imagePopover.width === width ? "on" : "off"}
-                  >
-                    {width}
-                  </Tab>
-                ))}
-              </TabGroup>
+              <div className="flex w-full flex-wrap items-center justify-between gap-2">
+                <TabGroup className="bg-bg-content/60">
+                  {(["50%", "75%", "100%"] as const).map((width) => (
+                    <Tab
+                      className="min-w-[72px] px-4"
+                      key={width}
+                      onClick={() => setSelectedImageWidth(width)}
+                      state={imagePopover.width === width ? "on" : "off"}
+                    >
+                      {width}
+                    </Tab>
+                  ))}
+                </TabGroup>
+                <button
+                  className="inline-flex h-9 items-center justify-center rounded-button border border-border px-3 type-body-sm text-destructive transition-colors hover:bg-bg hover:text-destructive"
+                  onMouseDown={(event) => {
+                    event.preventDefault();
+                    deleteSelectedImage();
+                  }}
+                  type="button"
+                >
+                  Delete
+                </button>
+              </div>
             </div>
             <label className="flex flex-col gap-2">
               <span className="sr-only">Image caption</span>
@@ -786,6 +1222,69 @@ export default function TiptapEditor({
                 placeholder="Add a caption"
                 type="text"
                 value={imagePopover.caption}
+              />
+            </label>
+          </div>
+        ) : null}
+        {videoPopover.visible ? (
+          <div
+            className="absolute z-20 flex min-w-[440px] max-w-[520px] -translate-x-1/2 flex-col gap-3 rounded-[20px] border border-border bg-[var(--color-bg-modal)] p-3 shadow-[0_12px_32px_rgba(0,0,0,0.32)] backdrop-blur-[12px]"
+            style={{ left: `${videoPopover.left}px`, top: `${videoPopover.top}px` }}
+          >
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <div className="flex items-center gap-2">
+                <VideoToggleButton
+                  isActive={videoPopover.autoplayOnView}
+                  onClick={toggleVideoAutoplayOnView}
+                >
+                  Autoplay
+                </VideoToggleButton>
+                <VideoToggleButton
+                  isActive={videoPopover.muted}
+                  onClick={() => toggleVideoAttribute("muted")}
+                >
+                  Muted
+                </VideoToggleButton>
+                <VideoToggleButton
+                  isActive={videoPopover.loop}
+                  onClick={() => toggleVideoAttribute("loop")}
+                >
+                  Loop
+                </VideoToggleButton>
+              </div>
+              <div className="flex items-center gap-2">
+                <button
+                  className="inline-flex h-9 items-center justify-center rounded-button border border-border px-3 type-body-sm text-fg transition-colors hover:bg-bg hover:text-fg"
+                  onMouseDown={(event) => {
+                    event.preventDefault();
+                    videoInputRef.current?.click();
+                  }}
+                  type="button"
+                >
+                  Replace
+                </button>
+                <button
+                  className="inline-flex h-9 items-center justify-center rounded-button border border-border px-3 type-body-sm text-destructive transition-colors hover:bg-bg hover:text-destructive"
+                  onMouseDown={(event) => {
+                    event.preventDefault();
+                    deleteSelectedVideo();
+                  }}
+                  type="button"
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+            <label className="flex flex-col gap-2">
+              <span className="sr-only">Video caption</span>
+              <Input
+                className="w-full rounded-[14px] border border-border bg-bg-content"
+                onBlur={() => setIsVideoPopoverPinned(false)}
+                onChange={(event) => updateVideoCaption(event.target.value)}
+                onFocus={() => setIsVideoPopoverPinned(true)}
+                placeholder="Add a caption"
+                type="text"
+                value={videoPopover.caption}
               />
             </label>
           </div>
@@ -835,7 +1334,14 @@ export default function TiptapEditor({
         accept="image/png,image/jpeg,image/webp"
         className="sr-only"
         onChange={handleImageSelection}
-        ref={fileInputRef}
+        ref={imageInputRef}
+        type="file"
+      />
+      <input
+        accept="video/mp4,video/webm,video/quicktime"
+        className="sr-only"
+        onChange={handleVideoSelection}
+        ref={videoInputRef}
         type="file"
       />
     </div>
