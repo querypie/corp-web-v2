@@ -44,6 +44,68 @@ function parseContent(value: string) {
   }
 }
 
+type ImagePopoverState = {
+  caption: string;
+  left: number;
+  top: number;
+  visible: boolean;
+  width: string;
+};
+
+type TableControlsState = {
+  columnLeft: number;
+  columnTop: number;
+  isTopLeftCell: boolean;
+  rowLeft: number;
+  rowTop: number;
+  targetPos: number;
+  visible: boolean;
+};
+
+function isSameImagePopoverState(current: ImagePopoverState, next: ImagePopoverState) {
+  return (
+    current.caption === next.caption &&
+    current.left === next.left &&
+    current.top === next.top &&
+    current.visible === next.visible &&
+    current.width === next.width
+  );
+}
+
+function isSameTableControlsState(current: TableControlsState, next: TableControlsState) {
+  return (
+    current.columnLeft === next.columnLeft &&
+    current.columnTop === next.columnTop &&
+    current.isTopLeftCell === next.isTopLeftCell &&
+    current.rowLeft === next.rowLeft &&
+    current.rowTop === next.rowTop &&
+    current.targetPos === next.targetPos &&
+    current.visible === next.visible
+  );
+}
+
+function updateImagePopoverState(
+  setImagePopover: React.Dispatch<React.SetStateAction<ImagePopoverState>>,
+  next: ImagePopoverState | ((current: ImagePopoverState) => ImagePopoverState),
+) {
+  setImagePopover((current) => {
+    const nextState = typeof next === "function" ? next(current) : next;
+
+    return isSameImagePopoverState(current, nextState) ? current : nextState;
+  });
+}
+
+function updateTableControlsState(
+  setTableControls: React.Dispatch<React.SetStateAction<TableControlsState>>,
+  next: TableControlsState | ((current: TableControlsState) => TableControlsState),
+) {
+  setTableControls((current) => {
+    const nextState = typeof next === "function" ? next(current) : next;
+
+    return isSameTableControlsState(current, nextState) ? current : nextState;
+  });
+}
+
 const ResizableImage = Image.extend({
   addAttributes() {
     return {
@@ -152,12 +214,14 @@ const StyledCodeBlock = CodeBlock.extend({
 function ToolButton({
   children,
   className,
+  disabled = false,
   isActive = false,
   onClick,
   tooltip,
 }: {
   children: React.ReactNode;
   className?: string;
+  disabled?: boolean;
   isActive?: boolean;
   onClick: () => void;
   tooltip: string;
@@ -168,13 +232,18 @@ function ToolButton({
         aria-label={tooltip}
         className={cx(
           "inline-flex h-9 items-center justify-center rounded-button px-3 text-center type-body-sm transition-colors whitespace-nowrap",
+          disabled && "cursor-not-allowed opacity-40",
           isActive
             ? "bg-fg text-bg"
-            : "bg-transparent text-fg hover:bg-bg hover:text-fg",
+            : "bg-transparent text-fg hover:bg-bg hover:text-fg disabled:hover:bg-transparent disabled:hover:text-fg",
           className,
         )}
+        disabled={disabled}
         onMouseDown={(event) => {
           event.preventDefault();
+          if (disabled) {
+            return;
+          }
           onClick();
         }}
         type="button"
@@ -197,6 +266,30 @@ function ToolbarIcon({
   );
 }
 
+function TableHandleButton({
+  children,
+  label,
+  onClick,
+}: {
+  children: React.ReactNode;
+  label: string;
+  onClick: () => void;
+}) {
+  return (
+    <button
+      aria-label={label}
+      className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-[var(--color-bg-modal)] text-[14px] font-semibold leading-none text-fg shadow-[0_6px_16px_rgba(0,0,0,0.22)] transition-colors hover:bg-fg hover:text-bg"
+      onMouseDown={(event) => {
+        event.preventDefault();
+        onClick();
+      }}
+      type="button"
+    >
+      {children}
+    </button>
+  );
+}
+
 type Props = {
   className?: string;
   onChange: (payload: { html: string; json: string }) => void;
@@ -216,18 +309,21 @@ export default function TiptapEditor({
   const lastAppliedValueRef = useRef(value);
   const suppressNextUpdateRef = useRef(false);
   const [isImagePopoverPinned, setIsImagePopoverPinned] = useState(false);
-  const [imagePopover, setImagePopover] = useState<{
-    caption: string;
-    left: number;
-    top: number;
-    visible: boolean;
-    width: string;
-  }>({
+  const [imagePopover, setImagePopover] = useState<ImagePopoverState>({
     caption: "",
     left: 0,
     top: 0,
     visible: false,
     width: "100%",
+  });
+  const [tableControls, setTableControls] = useState<TableControlsState>({
+    columnLeft: 0,
+    columnTop: 0,
+    isTopLeftCell: false,
+    rowLeft: 0,
+    rowTop: 0,
+    targetPos: 0,
+    visible: false,
   });
   const content = useMemo(() => parseContent(value), [value]);
 
@@ -323,14 +419,14 @@ export default function TiptapEditor({
           return;
         }
 
-        setImagePopover((current) => ({ ...current, visible: false }));
+        updateImagePopoverState(setImagePopover, (current) => ({ ...current, visible: false }));
         return;
       }
 
       const selectedNode = editor.view.nodeDOM(editor.state.selection.from);
 
       if (!(selectedNode instanceof HTMLElement)) {
-        setImagePopover((current) => ({ ...current, visible: false }));
+        updateImagePopoverState(setImagePopover, (current) => ({ ...current, visible: false }));
         return;
       }
 
@@ -340,7 +436,7 @@ export default function TiptapEditor({
       const imageRect = selectedNode.getBoundingClientRect();
       const attrs = editor.getAttributes("image");
 
-      setImagePopover({
+      updateImagePopoverState(setImagePopover, {
         caption: typeof attrs.caption === "string" ? attrs.caption : "",
         left: imageRect.left - shellRect.left + imageRect.width / 2,
         top: imageRect.top - shellRect.top + imageRect.height / 2,
@@ -411,7 +507,7 @@ export default function TiptapEditor({
     }
 
     editor.chain().focus().updateAttributes("image", { width }).run();
-    setImagePopover((current) => ({ ...current, width }));
+    updateImagePopoverState(setImagePopover, (current) => ({ ...current, width }));
   }
 
   function updateImageCaption(caption: string) {
@@ -420,7 +516,103 @@ export default function TiptapEditor({
     }
 
     editor.commands.updateAttributes("image", { caption });
-    setImagePopover((current) => ({ ...current, caption }));
+    updateImagePopoverState(setImagePopover, (current) => ({ ...current, caption }));
+  }
+
+  function hideTableControls() {
+    updateTableControlsState(setTableControls, (current) => ({ ...current, visible: false }));
+  }
+
+  function handleEditorMouseMove(event: React.MouseEvent<HTMLDivElement>) {
+    if (!editor) {
+      return;
+    }
+
+    const target = event.target;
+
+    if (!(target instanceof HTMLElement)) {
+      hideTableControls();
+      return;
+    }
+
+    if (target.closest("[data-table-handle]")) {
+      return;
+    }
+
+    const shellRect =
+      editorShellRef.current?.getBoundingClientRect() ??
+      editor.view.dom.getBoundingClientRect();
+
+    const cell = target.closest("td,th");
+
+    if (!(cell instanceof HTMLElement) || !editor.view.dom.contains(cell)) {
+      hideTableControls();
+      return;
+    }
+
+    const cellRect = cell.getBoundingClientRect();
+    const row = cell.parentElement instanceof HTMLTableRowElement ? cell.parentElement : null;
+    const table = cell.closest("table");
+    const posAtCell = editor.view.posAtCoords({
+      left: cellRect.left + Math.min(cellRect.width / 2, 12),
+      top: cellRect.top + Math.min(cellRect.height / 2, 12),
+    });
+
+    if (!posAtCell) {
+      hideTableControls();
+      return;
+    }
+
+    updateTableControlsState(setTableControls, {
+      columnLeft: cellRect.left - shellRect.left + cellRect.width / 2,
+      columnTop: cellRect.top - shellRect.top - 13,
+      isTopLeftCell:
+        !!row &&
+        !!table &&
+        Array.from(row.children).indexOf(cell) === 0 &&
+        Array.from(table.rows).indexOf(row) === 0,
+      rowLeft: cellRect.left - shellRect.left - 13,
+      rowTop: cellRect.top - shellRect.top + cellRect.height / 2,
+      targetPos: posAtCell.pos,
+      visible: true,
+    });
+  }
+
+  function runTableAction(action: "addColumnAfter" | "addRowAfter" | "deleteColumn" | "deleteRow" | "toggleHeaderColumn" | "toggleHeaderRow") {
+    if (!editor || !tableControls.visible) {
+      return;
+    }
+
+    const chain = editor.chain().focus().setTextSelection(tableControls.targetPos);
+
+    if (action === "addColumnAfter") {
+      chain.addColumnAfter().run();
+      return;
+    }
+
+    if (action === "deleteColumn") {
+      chain.deleteColumn().run();
+      hideTableControls();
+      return;
+    }
+
+    if (action === "toggleHeaderColumn") {
+      chain.toggleHeaderColumn().run();
+      return;
+    }
+
+    if (action === "addRowAfter") {
+      chain.addRowAfter().run();
+      return;
+    }
+
+    if (action === "toggleHeaderRow") {
+      chain.toggleHeaderRow().run();
+      return;
+    }
+
+    chain.deleteRow().run();
+    hideTableControls();
   }
 
   if (!editor) {
@@ -559,7 +751,12 @@ export default function TiptapEditor({
         </div>
       </div>
 
-      <div className="relative rounded-button border border-border bg-transparent px-5 py-4" ref={editorShellRef}>
+      <div
+        className="relative rounded-button border border-border bg-transparent px-5 py-4"
+        onMouseLeave={hideTableControls}
+        onMouseMove={handleEditorMouseMove}
+        ref={editorShellRef}
+      >
         {imagePopover.visible ? (
           <div
             className="absolute z-20 flex min-w-[420px] max-w-[480px] -translate-x-1/2 -translate-y-1/2 flex-col gap-3 rounded-[20px] border border-border bg-[var(--color-bg-modal)] p-3 shadow-[0_12px_32px_rgba(0,0,0,0.32)] backdrop-blur-[12px]"
@@ -592,6 +789,44 @@ export default function TiptapEditor({
               />
             </label>
           </div>
+        ) : null}
+        {tableControls.visible ? (
+          <>
+            <div
+              className="absolute z-20 flex -translate-x-1/2 -translate-y-1/2 flex-col gap-1 rounded-full border border-border bg-[var(--color-bg-modal)] p-1 shadow-[0_10px_24px_rgba(0,0,0,0.24)] backdrop-blur-[12px]"
+              data-table-handle="row"
+              style={{ left: `${tableControls.rowLeft}px`, top: `${tableControls.rowTop}px` }}
+            >
+              <TableHandleButton label="Add Row Below" onClick={() => runTableAction("addRowAfter")}>
+                +
+              </TableHandleButton>
+              <TableHandleButton label="Delete Row" onClick={() => runTableAction("deleteRow")}>
+                -
+              </TableHandleButton>
+              {tableControls.isTopLeftCell ? (
+                <TableHandleButton label="Toggle Header Row" onClick={() => runTableAction("toggleHeaderRow")}>
+                  H
+                </TableHandleButton>
+              ) : null}
+            </div>
+            <div
+              className="absolute z-20 flex -translate-x-1/2 -translate-y-1/2 gap-1 rounded-full border border-border bg-[var(--color-bg-modal)] p-1 shadow-[0_10px_24px_rgba(0,0,0,0.24)] backdrop-blur-[12px]"
+              data-table-handle="column"
+              style={{ left: `${tableControls.columnLeft}px`, top: `${tableControls.columnTop}px` }}
+            >
+              <TableHandleButton label="Add Column Right" onClick={() => runTableAction("addColumnAfter")}>
+                +
+              </TableHandleButton>
+              <TableHandleButton label="Delete Column" onClick={() => runTableAction("deleteColumn")}>
+                -
+              </TableHandleButton>
+              {tableControls.isTopLeftCell ? (
+                <TableHandleButton label="Toggle Header Column" onClick={() => runTableAction("toggleHeaderColumn")}>
+                  H
+                </TableHandleButton>
+              ) : null}
+            </div>
+          </>
         ) : null}
         <EditorContent editor={editor} />
       </div>
