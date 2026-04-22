@@ -1,0 +1,346 @@
+---
+layout: "Article"
+category: "internal"
+title: "Layout Components"
+description: "Box, SplitView, CenterSection, and FullSection components for page layout"
+date: "2026-02-28"
+author: "QueryPie Team"
+hideOgImage: true
+---
+
+# Box
+
+`Box` is the most fundamental layout component. It wraps content and controls direction, spacing, and alignment.
+
+## Direction
+
+Use `direction` to arrange child elements. Default is `row` (horizontal). Use `column` for vertical stacking.
+
+How to write:
+
+```jsx
+<Box direction="row" gapSize="sm">
+    <State color="blue">Item 1</State>
+    <State color="purple">Item 2</State>
+    <State color="green">Item 3</State>
+</Box>
+```
+
+Result:
+
+<Box direction="row" gapSize="sm">
+    <State color="blue">Item 1</State>
+    <State color="purple">Item 2</State>
+    <State color="green">Item 3</State>
+</Box>
+
+How to write:
+
+```jsx
+<Box direction="column" gapSize="sm">
+    <State color="blue">Item 1</State>
+    <State color="purple">Item 2</State>
+    <State color="green">Item 3</State>
+</Box>
+```
+
+Result:
+
+<Box direction="column" gapSize="sm">
+    <State color="blue">Item 1</State>
+    <State color="purple">Item 2</State>
+    <State color="green">Item 3</State>
+</Box>
+
+## Margin and Padding
+
+`Box` supports `marginTopSize`, `marginBottomSize`, `marginLeftSize`, `marginRightSize`, `paddingTopSize`, `paddingBottomSize`, `paddingLeftSize`, `paddingRightSize`.
+
+Available size values:
+
+<Table>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th>Value</Table.Th>
+            <Table.Th>Size</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>`xs`</Table.Td>
+            <Table.Td>20px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`sm`</Table.Td>
+            <Table.Td>40px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`md`</Table.Td>
+            <Table.Td>60px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`lg`</Table.Td>
+            <Table.Td>80px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`xl`</Table.Td>
+            <Table.Td>120px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`xxl`</Table.Td>
+            <Table.Td>160px</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+How to write:
+
+```jsx
+<Box marginTopSize="sm" paddingTopSize="xs" paddingBottomSize="xs">
+    Content with top margin (sm) and vertical padding (xs).
+</Box>
+```
+
+Result:
+
+<Box marginTopSize="sm" paddingTopSize="xs" paddingBottomSize="xs">
+    Content with top margin (sm) and vertical padding (xs).
+</Box>
+
+## Gap Size
+
+`gapSize` controls the spacing between child elements inside a `Box`.
+
+<Table>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th>Value</Table.Th>
+            <Table.Th>Size</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>`xs`</Table.Td>
+            <Table.Td>10px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`sm`</Table.Td>
+            <Table.Td>20px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`md`</Table.Td>
+            <Table.Td>30px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`lg`</Table.Td>
+            <Table.Td>40px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`xl`</Table.Td>
+            <Table.Td>60px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`xxl`</Table.Td>
+            <Table.Td>80px</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+How to write:
+
+```jsx
+<Box direction="row" gapSize="lg">
+    <Badge>Gap lg</Badge>
+    <Badge>Between</Badge>
+    <Badge>Items</Badge>
+</Box>
+```
+
+Result:
+
+<Box direction="row" gapSize="lg">
+    <Badge>Gap lg</Badge>
+    <Badge>Between</Badge>
+    <Badge>Items</Badge>
+</Box>
+
+## Center
+
+Add the `center` prop to center-align the content.
+
+How to write:
+
+```jsx
+<Box center>
+    Centered content
+</Box>
+```
+
+Result:
+
+<Box center>
+    Centered content
+</Box>
+
+---
+
+# SplitView
+
+`SplitView` creates a two-column (or multi-column) layout that collapses to a single column at the specified breakpoint.
+
+## Basic Usage
+
+How to write:
+
+```jsx
+<SplitView gapSize="lg" breakpoint="md">
+    <SplitView.View>
+        Left column content. This side will appear first.
+    </SplitView.View>
+    <SplitView.View>
+        Right column content. This side will appear second.
+    </SplitView.View>
+</SplitView>
+```
+
+Result:
+
+<SplitView gapSize="lg" breakpoint="md">
+    <SplitView.View>
+        Left column content. This side will appear first.
+    </SplitView.View>
+    <SplitView.View>
+        Right column content. This side will appear second.
+    </SplitView.View>
+</SplitView>
+
+## Breakpoint
+
+The `breakpoint` prop controls when the two-column layout collapses into a single column.
+
+<Table>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th>Value</Table.Th>
+            <Table.Th>Collapses below</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>`xl`</Table.Td>
+            <Table.Td>1400px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`lg`</Table.Td>
+            <Table.Td>1260px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`md`</Table.Td>
+            <Table.Td>768px</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>`sm`</Table.Td>
+            <Table.Td>480px</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+## Reverse
+
+When `reverse` is set, the order of items is reversed in the collapsed (single-column) view.
+
+How to write:
+
+```jsx
+<SplitView gapSize="lg" breakpoint="md" reverse>
+    <SplitView.View>
+        First in wide view, second when collapsed.
+    </SplitView.View>
+    <SplitView.View>
+        Second in wide view, first when collapsed.
+    </SplitView.View>
+</SplitView>
+```
+
+Result:
+
+<SplitView gapSize="lg" breakpoint="md" reverse>
+    <SplitView.View>
+        First in wide view, second when collapsed.
+    </SplitView.View>
+    <SplitView.View>
+        Second in wide view, first when collapsed.
+    </SplitView.View>
+</SplitView>
+
+## Fixed Width Column
+
+Use `fixWidth` on a `SplitView.View` to set a fixed width for one column.
+
+How to write:
+
+```jsx
+<SplitView gapSize="lg" breakpoint="md">
+    <SplitView.View fixWidth="200px">
+        Fixed 200px sidebar.
+    </SplitView.View>
+    <SplitView.View>
+        Flexible main content area.
+    </SplitView.View>
+</SplitView>
+```
+
+Result:
+
+<SplitView gapSize="lg" breakpoint="md">
+    <SplitView.View fixWidth="200px">
+        Fixed 200px sidebar.
+    </SplitView.View>
+    <SplitView.View>
+        Flexible main content area.
+    </SplitView.View>
+</SplitView>
+
+---
+
+# CenterSection
+
+`CenterSection` constrains content to a centered, max-width container. Commonly used for page-level layout.
+
+How to write:
+
+```jsx
+<CenterSection gapSize="md">
+    This content is horizontally centered with a max-width container.
+</CenterSection>
+```
+
+Result:
+
+<CenterSection gapSize="md">
+    This content is horizontally centered with a max-width container.
+</CenterSection>
+
+`CenterSection` accepts the same margin, padding, and gap props as `Box`.
+
+---
+
+# FullSection
+
+`FullSection` spans the full width of the viewport. Useful for backgrounds or full-bleed sections.
+
+How to write:
+
+```jsx
+<FullSection paddingTopSize="sm" paddingBottomSize="sm" background="gray">
+    This section spans the full viewport width with a gray background.
+</FullSection>
+```
+
+Result:
+
+<FullSection paddingTopSize="sm" paddingBottomSize="sm" background="gray">
+    This section spans the full viewport width with a gray background.
+</FullSection>
+
+`FullSection` accepts the same margin, padding, and gap props as `Box`, plus the `background` prop.

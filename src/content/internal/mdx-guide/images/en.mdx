@@ -1,0 +1,155 @@
+---
+layout: "Article"
+category: "internal"
+title: "Images"
+description: "ArticleFileImage component with captions, border radius, and layout options"
+date: "2026-02-28"
+author: "QueryPie Team"
+hideOgImage: true
+---
+
+# Basic Image
+
+Use the `ArticleFileImage` component to display images. The `filepath` prop points to the image file relative to the project root, and `alt` provides alternative text.
+
+How to write:
+
+```jsx
+<ArticleFileImage
+    filepath="public/blog/data-discovery-platform.png"
+    alt="Data Discovery Platform"
+/>
+```
+
+Result:
+
+<ArticleFileImage
+    filepath="public/blog/data-discovery-platform.png"
+    alt="Data Discovery Platform"
+/>
+
+---
+
+# Image with Caption
+
+Add the `caption` prop to display descriptive text below the image.
+
+How to write:
+
+```jsx
+<ArticleFileImage
+    filepath="public/blog/data-discovery-platform.png"
+    alt="Data Discovery Platform"
+    caption="Data Discovery Platform"
+/>
+```
+
+Result:
+
+<ArticleFileImage
+    filepath="public/blog/data-discovery-platform.png"
+    alt="Data Discovery Platform"
+    caption="Data Discovery Platform"
+/>
+
+---
+
+# Image with Border Radius
+
+Use the `borderRadius` prop to round the image corners. Available values: `xs`, `sm`, `md`, `lg`, `xl`, `xxl`.
+
+How to write:
+
+```jsx
+<ArticleFileImage
+    filepath="public/blog/data-discovery-platform.png"
+    alt="Data Discovery Platform"
+    borderRadius="sm"
+/>
+```
+
+Result:
+
+<ArticleFileImage
+    filepath="public/blog/data-discovery-platform.png"
+    alt="Data Discovery Platform"
+    borderRadius="sm"
+/>
+
+---
+
+# Image with Spacing
+
+Wrap the image in a `Box` component to control margin and padding around it.
+
+How to write:
+
+```jsx
+<Box marginTopSize="lg">
+    <ArticleFileImage
+        filepath="public/blog/data-discovery-platform.png"
+        alt="Data Discovery Platform"
+        caption="With top margin (lg)"
+    />
+</Box>
+```
+
+Result:
+
+<Box marginTopSize="lg">
+    <ArticleFileImage
+        filepath="public/blog/data-discovery-platform.png"
+        alt="Data Discovery Platform"
+        caption="With top margin (lg)"
+    />
+</Box>
+
+---
+
+# Side-by-Side Images
+
+Use `SplitView` with `SplitView.View` children to place images side by side. The `gapSize` prop controls spacing between items. The `breakpoint` prop (`sm`, `md`, `lg`) controls when the layout stacks to a single column on smaller screens. Add the `reverse` prop to reverse the order when stacked.
+
+How to write:
+
+```jsx
+<SplitView gapSize="lg" breakpoint="md">
+    <SplitView.View>
+        <ArticleFileImage
+            filepath="public/blog/data-discovery-platform.png"
+            alt="Image 1"
+            borderRadius="sm"
+            caption="First image"
+        />
+    </SplitView.View>
+    <SplitView.View>
+        <ArticleFileImage
+            filepath="public/blog/data-discovery-platform-popup.png"
+            alt="Image 2"
+            borderRadius="sm"
+            caption="Second image"
+        />
+    </SplitView.View>
+</SplitView>
+```
+
+Result:
+
+<SplitView gapSize="lg" breakpoint="md">
+    <SplitView.View>
+        <ArticleFileImage
+            filepath="public/blog/data-discovery-platform.png"
+            alt="Image 1"
+            borderRadius="sm"
+            caption="First image"
+        />
+    </SplitView.View>
+    <SplitView.View>
+        <ArticleFileImage
+            filepath="public/blog/data-discovery-platform-popup.png"
+            alt="Image 2"
+            borderRadius="sm"
+            caption="Second image"
+        />
+    </SplitView.View>
+</SplitView>

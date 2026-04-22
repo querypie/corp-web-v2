@@ -1,0 +1,367 @@
+---
+layout: "Article"
+category: "databases"
+title: "Sample Article"
+description: "This is sample article"
+date: "2024-11-22"
+author: "Teddy Kim"
+ogImage: "public/white-paper/how-to-create-a-database.png"
+keywords: ["QueryPie", "AI-powered data analysis", "personal data analysis", "compliance", "privacy management"]
+relatedPosts: ["/resources/discover/white-paper/1/personal-data-identification-analysis-ai", "/resources/discover/white-paper/2/shell-native-command-control-ssh-proxy-architecture", "/resources/discover/white-paper/3/parsing-sql-query-structural-interface"]
+---
+
+# 타이틀 1
+`# 여기 글씨` : html h2 태그로 변환됩니다.
+
+# 구분선
+---
+`---` : 이처럼 `-` 3개를 연속으로 쓰면 구분선이 보입니다.
+
+## 타이틀 2
+`## 여기 글씨` 샵 2개를 쓰면 h3 태그로 변환됩니다.
+
+## 순서가 있는 리스트
+1. Requester : Can send a request.
+2. Requester : Can send a request.
+3. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다.
+3. Executor : Can execute approved SQL Request and Export Request.
+2. 번호를 잘못 붙여도 됩니다.
+
+## 순서가 없는 리스트
+- Requester : Can send a request.
+- 들여쓰기 하면 하위 리스트로 변환됩니다.
+    - 또
+        - 또
+1. 숫자 리스트도 가능합니다.
+2. 숫자 리스트도 가능합니다.
+    - Requester : Can send a request.
+    - 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다. 긴 글입니다.
+    - Executor : Can execute approved SQL Request and Export Request.
+
+## 캡션 이미지
+<Box marginTopSize="lg">
+    <ArticleFileImage
+        filepath="public/blog/data-discovery-platform.png"
+        alt="Data Discovery Platform"
+        caption="Data Discovery Platform"
+    />
+</Box>
+`ArticleFileImage` 컴포넌트에 `caption` 속성을 추가하면 이미지 아래에 캡션을 추가할 수 있습니다.
+
+`Box` 컴포넌트로 감싸고 `marginTopSize` 속성을 추가하면 이미지 위에 여백을 추가할 수 있습니다.
+
+뿐만 아니라 `marginBottomSize`, `marginLeftSize`, `marginRightSize`,  `paddingTopSize`, `paddingBottomSize`, `paddingLeftSize`, `paddingRightSize` 속성을 추가하여 여백을 추가할 수 있습니다.
+
+# Box 컴포넌트
+## `marginTopSize`, `marginBottomSize`, `marginLeftSize`, `marginRightSize`,  `paddingTopSize`, `paddingBottomSize`, `paddingLeftSize`, `paddingRightSize` 속성 값
+- `xs` : 20px
+- `sm` : 40px
+- `md` : 60px
+- `lg` : 80px
+- `xl` : 120px
+- `xxl` : 160px
+
+## `gapSize` 속성도 있습니다. 이 속성은 `Box` 컴포넌트 안의 요소들 사이의 간격을 조절합니다.
+- `xs` : 10px
+- `sm` : 20px
+- `md` : 30px
+- `lg` : 40px
+- `xl` : 60px
+- `xxl` : 80px
+
+## direction 속성
+- `row` : 요소들을 가로로 배치합니다. 기본값입니다.
+- `column` : 요소들을 세로로 배치합니다.
+
+# SplitView 컴포넌트
+<Box marginTopSize="sm">
+    <SplitView gapSize="lg" breakpoint="md" reverse>
+        <SplitView.View>
+            <ArticleFileImage
+                filepath="public/blog/data-discovery-platform-popup.png"
+                alt="Data Discovery Platform Popup"
+                borderRadius="sm"
+                caption="Data Discovery Platform"
+            />
+        </SplitView.View>
+        <SplitView.View>
+            <ArticleFileImage
+                filepath="public/blog/data-discovery-platform-workflow.png"
+                alt="Data Discovery Platform Workflow"
+                borderRadius="sm"
+                caption="Data Discovery Platform"
+            />
+        </SplitView.View>
+    </SplitView>
+</Box>
+## `gapSize` 속성
+- Box와 동일합니다.
+
+## `breakpoint` 속성
+- `xl` : 1400px 이하로 내려가면 한줄이 됩니다.
+- `lg` : 1260px 이하로 내려가면 한줄이 됩니다.
+- `md` : 768px 이하로 내려가면 한줄이 됩니다.
+- `sm` : 480px 이하로 내려가면 한줄이 됩니다.
+## `reverse` 속성
+- `breakpoint`이 적용된 상태(한줄 처리)에서 `reverse` 속성이 있으면 내부 요소가 반대로 배치됩니다.
+
+# Note 컴포넌트
+- Note 컴포넌트는 레이아웃 속성을 `marginTopSize`만 가집니다.
+
+## InfoNote
+<InfoNote>
+    **Q. Can I approve only some of the DB connections requested by users?**
+
+    A. For DB Access Request, partial approval is possible only for some DB connections. If you uncheck the boxes for items that you do not want to grant permission for in the list of DB connections requested by the user and click Approve, the checked connections will be approved, and the unchecked connections will be automatically rejected.
+</InfoNote>
+
+## `hideIcon` 속성(아래 전부 해당)
+<InfoNote hideIcon>
+    **Q. Can I approve only some of the DB connections requested by users?**
+
+    A. For DB Access Request, partial approval is possible only for some DB connections. If you uncheck the boxes for items that you do not want to grant permission for in the list of DB connections requested by the user and click Approve, the checked connections will be approved, and the unchecked connections will be automatically rejected.
+</InfoNote>
+
+## DocumentNote 및 marginTopSize 속성(xl)
+<DocumentNote marginTopSize="xl">
+    **Q. Can I approve only some of the DB connections requested by users?**
+
+    A. For DB Access Request, partial approval is possible only for some DB connections. If you uncheck the boxes for items that you do not want to grant permission for in the list of DB connections requested by the user and click Approve, the checked connections will be approved, and the unchecked connections will be automatically rejected.
+</DocumentNote>
+
+## CheckNote 및 marginTopSize 속성(sm)
+<CheckNote marginTopSize="sm">
+    **Q. Can I approve only some of the DB connections requested by users?**
+
+    A. For DB Access Request, partial approval is possible only for some DB connections. If you uncheck the boxes for items that you do not want to grant permission for in the list of DB connections requested by the user and click Approve, the checked connections will be approved, and the unchecked connections will be automatically rejected.
+</CheckNote>
+
+## WarningNote 및 marginTopSize 속성(xs)
+<WarningNote marginTopSize="xs">
+    **Q. Can I approve only some of the DB connections requested by users?**
+
+    A. For DB Access Request, partial approval is possible only for some DB connections. If you uncheck the boxes for items that you do not want to grant permission for in the list of DB connections requested by the user and click Approve, the checked connections will be approved, and the unchecked connections will be automatically rejected.
+</WarningNote>
+
+## ErrorNote 및 marginTopSize 속성(md)
+<ErrorNote marginTopSize="md">
+    **Q. Can I approve only some of the DB connections requested by users?**
+
+    A. For DB Access Request, partial approval is possible only for some DB connections. If you uncheck the boxes for items that you do not want to grant permission for in the list of DB connections requested by the user and click Approve, the checked connections will be approved, and the unchecked connections will be automatically rejected.
+</ErrorNote>
+
+# 텍스트 링크
+- 원하는 텍스트를 `[링크](url)`로 감싸면 링크가 생성됩니다.
+- 예시: 나는 [네이버](https://naver.com)를 좋아합니다.
+
+# InlineLink 컴포넌트
+한국의 검색엔진은 <InlineLink href="https://naver.com" />, <InlineLink href="https://daum.net" />이 대표적입니다.
+
+우리 웹사이트는 <InlineLink href="https://www.querypie.com" />입니다.
+
+# State 컴포넌트
+## 기본
+`<State>기본</State>` <State>기본</State> 스타일입니다.
+
+## 색상
+`<State color="blue">파랑</State>` <State color="blue">파랑</State>색입니다.
+
+`<State color="purple">보라</State>` <State color="purple">보라</State>색입니다.
+
+`<State color="green">초록</State>` <State color="green">초록</State>색입니다.
+
+`<State color="yellow">노랑</State>` <State color="yellow">노랑</State>색입니다.
+
+`<State color="red">빨강</State>` <State color="red">빨강</State>색입니다.
+
+## 색상 구분은 다음과 같이도 가능합니다.
+`<BlueState>파랑</BlueState>` <BlueState>파랑</BlueState>색입니다.
+
+`<PurpleState>보라</PurpleState>` <PurpleState>보라</PurpleState>색입니다.
+
+`<GreenState>초록</GreenState>` <GreenState>초록</GreenState>색입니다.
+
+`<YellowState>노랑</YellowState>` <YellowState>노랑</YellowState>색입니다.
+
+`<RedState>빨강</RedState>` <RedState>빨강</RedState>색입니다.
+
+# Quote
+`> 이렇게 쓰면 됩니다.`
+
+> 용서는 곧 사랑이다. 고결하고 아름다운 **사랑**의 형태이다. <PurpleState>사랑</PurpleState>이 없는 사람은 쉽게 용서하지 못한다. 용서는 평화와 행복을 그 보답으로 준다. 그대, 용서함으로써 행복 하라!
+용서는 곧 사랑이다. 고결하고 아름다운 **사랑**의 형태이다. <PurpleState>사랑</PurpleState>이 없는 사람은 쉽게 용서하지 못한다. 용서는 평화와 행복을 그 보답으로 준다. 그대, 용서함으로써 행복 하라!
+
+위와 같이 쓰면 됩니다. 다른 마크다운 문법이나. JSX 컴포넌트도 사용 가능합니다.
+
+
+# Inline Code
+- 백틱으로 이렇게 \`글씨\`를 감싸면 됩니다.
+- 결과물: 백틱으로 이렇게 `글씨`를 감싸면 됩니다.
+
+# Code Block
+```javascript
+const [value, setValue] = useState(initValue);
+const [value2, setValue2] = useState(initValue);
+const [value3, setValue3] = useState(initValue);
+```
+
+# Table
+## 일반적인 스타일
+- 흘러 넘칠 경우 가로 스크롤 됩니다.
+<Table>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray">Table</Table.Th>
+            <Table.Th cellBackgroundColor="blue">1</Table.Th>
+            <Table.Th cellBackgroundColor="purple">2</Table.Th>
+            <Table.Th cellBackgroundColor="green">3</Table.Th>
+            <Table.Th cellBackgroundColor="yellow">4</Table.Th>
+            <Table.Th cellBackgroundColor="red">5</Table.Th>
+            <Table.Th cellBackgroundColor="blue">1</Table.Th>
+            <Table.Th cellBackgroundColor="purple">2</Table.Th>
+            <Table.Th cellBackgroundColor="green">3</Table.Th>
+            <Table.Th cellBackgroundColor="yellow">4</Table.Th>
+            <Table.Th cellBackgroundColor="red">5</Table.Th>
+            <Table.Th cellBackgroundColor="blue">1</Table.Th>
+            <Table.Th cellBackgroundColor="purple">2</Table.Th>
+            <Table.Th cellBackgroundColor="green">3</Table.Th>
+            <Table.Th cellBackgroundColor="yellow">4</Table.Th>
+            <Table.Th cellBackgroundColor="red">5</Table.Th>
+            <Table.Th cellBackgroundColor="blue">1</Table.Th>
+            <Table.Th cellBackgroundColor="purple">2</Table.Th>
+            <Table.Th cellBackgroundColor="green">3</Table.Th>
+            <Table.Th cellBackgroundColor="yellow">4</Table.Th>
+            <Table.Th cellBackgroundColor="red">5</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>1</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>2</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>3</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+## 좌측에 헤더를 둔 스타일
+- 이게 맞는 건 아닌데 꼼수를 안내합니다.
+<Table>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray">**Table**</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="blue">**1**</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="purple">**2**</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="green">**3**</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+            <Table.Td>Title</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="yellow">**4**</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="red">**5**</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+            <Table.Td>123</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+<ArticleGatingForm>
+게이팅 폼 내용입니다.
+</ArticleGatingForm>

@@ -1,0 +1,217 @@
+---
+layout: "Article"
+category: "internal"
+title: "Notes & Alerts"
+description: "InfoNote, DocumentNote, CheckNote, WarningNote, and ErrorNote components"
+date: "2026-02-28"
+author: "QueryPie Team"
+hideOgImage: true
+---
+
+# InfoNote
+
+A general-purpose informational note with a blue accent.
+
+How to write:
+
+```jsx
+<InfoNote>
+    **Tip:** You can use markdown inside notes, including **bold**, *italic*, and `inline code`.
+</InfoNote>
+```
+
+Result:
+
+<InfoNote>
+    **Tip:** You can use markdown inside notes, including **bold**, *italic*, and `inline code`.
+</InfoNote>
+
+---
+
+# DocumentNote
+
+A note for referencing documents or specifications.
+
+How to write:
+
+```jsx
+<DocumentNote>
+    Refer to the [API documentation](https://docs.querypie.com) for detailed endpoint specifications.
+</DocumentNote>
+```
+
+Result:
+
+<DocumentNote>
+    Refer to the [API documentation](https://docs.querypie.com) for detailed endpoint specifications.
+</DocumentNote>
+
+---
+
+# CheckNote
+
+A success or confirmation note with a green accent.
+
+How to write:
+
+```jsx
+<CheckNote>
+    Configuration saved successfully. Changes will take effect after the next deployment.
+</CheckNote>
+```
+
+Result:
+
+<CheckNote>
+    Configuration saved successfully. Changes will take effect after the next deployment.
+</CheckNote>
+
+---
+
+# WarningNote
+
+A warning note with a yellow accent.
+
+How to write:
+
+```jsx
+<WarningNote>
+    **Warning:** This action will modify all existing records. Please back up your data before proceeding.
+</WarningNote>
+```
+
+Result:
+
+<WarningNote>
+    **Warning:** This action will modify all existing records. Please back up your data before proceeding.
+</WarningNote>
+
+---
+
+# ErrorNote
+
+An error note with a red accent for critical information.
+
+How to write:
+
+```jsx
+<ErrorNote>
+    **Error:** This operation cannot be undone. Deleted data cannot be recovered.
+</ErrorNote>
+```
+
+Result:
+
+<ErrorNote>
+    **Error:** This operation cannot be undone. Deleted data cannot be recovered.
+</ErrorNote>
+
+---
+
+# Hide Icon
+
+All note components support the `hideIcon` prop to remove the icon on the left side.
+
+How to write:
+
+```jsx
+<InfoNote hideIcon>
+    This info note has no icon.
+</InfoNote>
+```
+
+Result:
+
+<InfoNote hideIcon>
+    This info note has no icon.
+</InfoNote>
+
+How to write:
+
+```jsx
+<WarningNote hideIcon>
+    This warning note has no icon.
+</WarningNote>
+```
+
+Result:
+
+<WarningNote hideIcon>
+    This warning note has no icon.
+</WarningNote>
+
+---
+
+# Margin Top Size
+
+All note components support `marginTopSize` to add spacing above the note. Available values: `xs`, `sm`, `md`, `lg`, `xl`, `xxl`.
+
+How to write:
+
+```jsx
+<InfoNote marginTopSize="xs">
+    Note with xs (20px) top margin.
+</InfoNote>
+
+<DocumentNote marginTopSize="sm">
+    Note with sm (40px) top margin.
+</DocumentNote>
+
+<CheckNote marginTopSize="md">
+    Note with md (60px) top margin.
+</CheckNote>
+
+<WarningNote marginTopSize="lg">
+    Note with lg (80px) top margin.
+</WarningNote>
+
+<ErrorNote marginTopSize="xl">
+    Note with xl (120px) top margin.
+</ErrorNote>
+```
+
+Result:
+
+<InfoNote marginTopSize="xs">
+    Note with xs (20px) top margin.
+</InfoNote>
+
+<DocumentNote marginTopSize="sm">
+    Note with sm (40px) top margin.
+</DocumentNote>
+
+<CheckNote marginTopSize="md">
+    Note with md (60px) top margin.
+</CheckNote>
+
+<WarningNote marginTopSize="lg">
+    Note with lg (80px) top margin.
+</WarningNote>
+
+<ErrorNote marginTopSize="xl">
+    Note with xl (120px) top margin.
+</ErrorNote>
+
+---
+
+# All Note Types at a Glance
+
+<InfoNote>
+    **InfoNote** — General information and tips.
+</InfoNote>
+
+<DocumentNote marginTopSize="xs">
+    **DocumentNote** — References to documents and specifications.
+</DocumentNote>
+
+<CheckNote marginTopSize="xs">
+    **CheckNote** — Success confirmations and positive outcomes.
+</CheckNote>
+
+<WarningNote marginTopSize="xs">
+    **WarningNote** — Cautions and important warnings.
+</WarningNote>
+
+<ErrorNote marginTopSize="xs">
+    **ErrorNote** — Critical errors and destructive action warnings.
+</ErrorNote>
