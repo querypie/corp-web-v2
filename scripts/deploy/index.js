@@ -12,7 +12,12 @@ const targetEnv = process.env.TARGET_ENV;
 const branch = process.env.BRANCH;
 
 const POLL_INTERVAL_MS = 5_000;
-const POLL_TIMEOUT_MS = 10 * 60 * 1_000;
+const DEFAULT_POLL_TIMEOUT_MS = 20 * 60 * 1_000;
+const POLL_TIMEOUT_MS = Number(process.env.DEPLOY_POLL_TIMEOUT_MS || DEFAULT_POLL_TIMEOUT_MS);
+
+if (!Number.isFinite(POLL_TIMEOUT_MS) || POLL_TIMEOUT_MS <= 0) {
+  throw new Error('DEPLOY_POLL_TIMEOUT_MS must be a positive number of milliseconds');
+}
 const MAX_RETRIES = 2;
 const RETRY_DELAY_MS = 15_000;
 
