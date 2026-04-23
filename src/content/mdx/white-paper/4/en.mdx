@@ -1,0 +1,308 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "Building a Transaction-Free, Flawless CDC (Change Data Capture) System"
+description: "Sync data seamlessly with QueryPie's CDC system, ensuring conflict-free updates without transactions."
+date: "2024-11-22"
+author: "mason"
+ogImage: "public/white-paper/4/thumbnail.png"
+keywords: ["QueryPie", "CDC system", "data synchronization", "conflict-free updates", "transaction-less operation"]
+relatedPosts:
+  - "/en/white-paper/3"
+  - "/en/white-paper/1"
+  - "/en/white-paper/9"
+---
+
+# Introduction
+
+With increasing regulations such as the Personal Information Protection Act, Electronic Financial Transaction Act, and Medical Records Privacy Act, service providers are legally mandated to log changes to sensitive data, including personal information.
+Beyond legal obligations, logging database changes is essential for real-time monitoring, threat detection, data integrity maintenance, and incident response.
+These are critical for ensuring service stability and security, making change capture a vital requirement for developers, database administrators, and security experts.
+
+To meet these requirements, many service providers leverage Change Data Capture (CDC) technology—a method to identify and track data changes in real time.
+At QueryPie, which provides database access control capabilities, CDC is also an integral feature. This white paper discusses the approach QueryPie takes to implement a CDC system without relying on transactions.
+
+# Challenges
+
+## Challenges with Transaction-Based CDC
+
+CDC involves logging both before and after data whenever a change occurs.
+One common method to implement this is by utilizing database transactions.
+
+For instance, when a user issues an `UPDATE` query, the CDC system can record the data states before and after the change through the following process:
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/4/1-diagram-1.png"
+        alt="Issue to Solve"
+        caption="*Before and After Data States for Query Execution Diagram*"
+    />
+</Box>
+<br />
+
+However, implementing CDC through transactions poses challenges, as it requires a rollback operation for every update query executed on the target table.
+Transaction rollbacks increase the load on the DBMS, and this load grows with the size of the target table.
+Moreover, the process involves duplicate reads of the same table to capture the data states before and after the query execution, which significantly reduces database access efficiency.
+Additionally, in NoSQL systems, transactions are often not supported, or if they are, they operate at a weaker level of consistency.
+This makes it difficult or even impossible to implement transaction-based CDC in such environments.
+
+The impact of transaction rollbacks on performance can be assessed through a simple test scenario with the following setup:
+
+- MySQL 8.0 (on-premise, 8core(vcore 16), mem 256GB)
+- 100,000 records
+- A table named `actor` with the specified DDL schema
+- High-speed network to minimize network bottlenecks
+
+```sql
+CREATE TABLE actor (
+    actor_id int NOT NULL AUTO_INCREMENT,
+    first_name varchar(255) NOT NULL,
+    last_name varchar(255) NOT NULL,
+    last_update timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (actor_id)
+);
+```
+
+Let's assume a scenario where the `first_name` column in all records of the table is updated to `'Christopher'`.
+If transaction rollback functionality is utilized, the following steps and queries must be executed:
+
+```sh
+mysql> SET AUTOCOMMIT=0;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> SELECT * FROM actor;
+...
+100000 rows in set (0.42 sec)
+
+mysql> UPDATE actor4 SET first_name='Christopher' WHERE 1;
+Query OK, 100000 rows affected (1.54 sec)
+Rows matched: 100000  Changed: 100000  Warnings: 0
+
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.85 sec)
+
+mysql> UPDATE actor4 SET first_name='Christopher' WHERE 1;
+Query OK, 100000 rows affected (1.58 sec)
+Rows matched: 100000  Changed: 100000  Warnings: 0
+
+mysql> COMMIT;
+Query OK, 0 rows affected (0.04 sec)
+```
+
+Here’s a simplified table showing the time required for each operation.
+Steps added specifically for CDC are highlighted in yellow:
+
+<br />
+<Table center>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray">**Operation**</Table.Th>
+            <Table.Th cellBackgroundColor="gray">**Execution Time**</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Table Query</Table.Td>
+            <Table.Td>0.42s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="yellow">Table Update</Table.Td>
+            <Table.Td cellBackgroundColor="yellow">1.54s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="yellow">Transaction Rollback</Table.Td>
+            <Table.Td cellBackgroundColor="yellow">0.85s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Table Update</Table.Td>
+            <Table.Td>1.58s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Transaction Commit</Table.Td>
+            <Table.Td>0.04s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray">Total Execution Time</Table.Td>
+            <Table.Td cellBackgroundColor="gray">**4.43s**</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray">User Query Execution Time</Table.Td>
+            <Table.Td cellBackgroundColor="gray">2.04s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="red">Additional Operation Time</Table.Td>
+            <Table.Td cellBackgroundColor="red">2.39s</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+<br />
+
+As observed, the transaction rollback-based CDC mechanism results in more than double the time required due to the additional operations for updates and rollbacks.
+This leads to a 50% performance degradation from the user's perspective when implementing CDC.
+
+## Other Challenges with CDC Implementations
+
+Additionally, there are methods to implement CDC such as creating triggers on tables to track data changes, recording update times or timestamps like `modified_at` in tables and periodically querying them, or utilizing log files like MySQL's binlog.
+While each method has its pros and cons, they all share a common drawback: the need to modify the DBMS for CDC functionality, resulting in dependency on the DBMS.
+In other words, every time a new DBMS instance is added, the corresponding settings must also be configured.
+
+So, what method can be used to implement CDC effectively without adding load to the DBMS or creating DBMS dependencies?
+
+# Goal
+
+To minimize the load on the DBMS, CDC implementation should avoid using transactions and performing redundant queries on the same table.
+Additionally, to prevent DBMS dependency, the CDC process should not require modifications to the DBMS.
+
+At QueryPie, we address these requirements by utilizing our in-house query analysis library, QSI (Query Structure Interface), to obtain post-query data without directly querying the database.
+But how can we retrieve post-query data without directly inspecting the table?
+
+# Solution Overview
+
+<Box marginTopSize="sm" center>
+    <ArticleFileImage
+        filepath="public/white-paper/4/2-diagram-2.png"
+        alt="Solution Overview"
+        caption="Diagram Related to *After Row* Prediction Logic for CDC in the *ActionAnalyzer* of *QSI*"
+    />
+</Box>
+<br />
+
+
+QSI avoids directly querying the table.
+Instead, it simulates the changes that the executed query would make on the pre-change table data and delivers the post-change table results.
+In other words, rather than delegating the process of checking query execution results to the database, QSI performs the query internally and provides the results.
+With QueryPie's query simulation technology, CDC can be implemented without triggering transactions or rollbacks in the database.
+Additionally, since only query execution is required, no modifications to the DBMS are necessary, making QueryPie immediately usable upon installation.
+
+# Technical Description and Architecture
+
+<Box marginTopSize="sm" center>
+    <ArticleFileImage
+        filepath="public/white-paper/4/3-diagram-3.png"
+        alt="Technical Description and Architecture"
+    />
+</Box>
+<br />
+
+Through the QueryPie web editor or proxy, QSI receives user input queries, such as `INSERT`, `UPDATE`, or `DELETE`, that involve table modifications.
+To perform an analysis, pre-query execution data is required.
+QSI processes the user input query, identifies the target table where the changes will occur, and generates a query to retrieve the pre-change data from the target table based on the analyzed query.
+Using the generated query, QSI fetches the pre-modification data from the target table.
+
+Now that the pre-modification data of the target table and the user's input query necessary for query result simulation have been obtained, the simulation is performed.
+In the query simulation, various elements are considered, such as information about the values being modified, conditions for the rows being updated, content of the pre-modification data, and parameters of the input query.
+Once the simulation is completed, the results are processed and structured to provide the post-modification data. Subsequently, the CDC results are converted into a CSV format and stored in MySQL as a blob type.
+
+## QueryPie CDC Example
+
+For instance, suppose a user wants to change the `last_name` to `'oh'` for all rows in the `actor` table where `first_name` is `'mason'`.
+To perform this operation, the user writes the following query and executes it through QueryPie:
+
+```sql
+UPDATE actor SET last_name='oh' WHERE first_name='mason';
+```
+
+QueryPie receives the above query and passes it to QSI.
+QSI analyzes the input query and generates a query to retrieve the target table's pre-modification data.
+The results of the generated query are used as the "pre-modification data" for CDC.
+The generated query is as follows:
+
+```sql
+SELECT last_name FROM actor WHERE first_name='mason';
+```
+
+Now, using the data derived from analyzing the user input query and the pre-modification data, QSI performs query simulation.
+Specifically, the operation of changing the `last_name` to `'oh'` for all rows where `first_name` is `'mason'` is simulated on the pre-modification data of the `actor` table.
+The result of the simulation is used as the "post-modification data" for CDC.
+
+Through this sequence of processes, both the pre-modification and post-modification data required for CDC are obtained.
+The acquired data is stored in an internal DBMS, completing the CDC operation.
+
+## Limitations
+
+It is not possible to simulate all environments.
+In cases such as function calls where the result value depends on the execution time and cannot be determined before query execution, the values cannot be simulated.
+However, in the primary application environment of QueryPie—database modifications in operational networks—the majority of changes involve value corrections.
+In such cases, literal values are generally used more frequently than function calls, resulting in a lower perceived frequency of this limitation.
+Plans are underway to support more complex simulations, such as function calls, in the future.
+
+# Expectations
+
+By using QueryPie CDC, the overhead identified in the problem section related to execution time is eliminated.
+Notably, the QSI query simulation step does not impose the burden of table updates and transaction rollbacks on the DBMS.
+
+<br />
+<Table center>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray">**Action**</Table.Th>
+            <Table.Th cellBackgroundColor="gray">**Execution Time**</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Table Query</Table.Td>
+            <Table.Td>0.42s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="yellow">Table Update</Table.Td>
+            <Table.Td cellBackgroundColor="yellow">1.54s -> 0s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="yellow">Transaction Rollback</Table.Td>
+            <Table.Td cellBackgroundColor="yellow">0.85s -> 0s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="blue">QSI Query Simulation</Table.Td>
+            <Table.Td cellBackgroundColor="blue">1.62s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Table Update</Table.Td>
+            <Table.Td>1.58s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Transaction Commit</Table.Td>
+            <Table.Td>0.04s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray">Total Execution Time</Table.Td>
+            <Table.Td cellBackgroundColor="gray">**3.66s**</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray">User Query Execution Time</Table.Td>
+            <Table.Td cellBackgroundColor="gray">2.04s</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="blue">Additional Operation Time</Table.Td>
+            <Table.Td cellBackgroundColor="blue">2.39s -> 1.62s</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+<br />
+
+As shown, QueryPie CDC achieves 35% faster performance compared to transaction-based CDC.
+Additionally, by skipping table updates and transaction rollbacks, which require direct DBMS queries, the load on the DBMS is significantly reduced.
+
+# Three Key Advantages of QueryPie CDC: Performance, Flexibility, Scalability
+
+The strengths that set QueryPie CDC apart from other CDC solutions can be summarized as follows:
+
+- **Performance**: QueryPie CDC operates faster than transaction-based CDC and imposes significantly less load on the database.
+- **Flexibility**: QueryPie CDC does not require any changes to the DBMS configuration for its operation, meaning it is free from DBMS dependencies.
+This allows for immediate use after installation without needing to modify the DBMS.
+- **Scalability**: Since QueryPie CDC is not tied to a specific DBMS, it can support new types of DBMS without requiring additional adjustments, enabling seamless expansion to other database systems.
+
+# Conclusion
+
+Implementing transaction-based CDC poses challenges such as frequent transaction rollbacks, duplicate query executions, and limited support for NoSQL.
+Other methods also face the drawback of being tied to the DBMS.
+By utilizing QSI, QueryPie’s CDC system eliminates DBMS dependencies while minimizing database load.
+This is achieved through QueryPie’s proprietary query simulation technology, which avoids transaction rollbacks and prevents redundant table lookups.
+
+Surpassing the limitations of transaction-based CDC, QueryPie offers a new CDC solution that balances performance and flexibility.
+With QueryPie’s CDC, organizations can ensure data integrity and security while achieving fast and efficient operations.
+Looking forward, QueryPie will continue to enhance its CDC technology to empower customers with data-driven decision-making capabilities and innovative business environments that meet both regulatory and security demands.
+
+Data is the key asset of the future. QueryPie is committed to protecting this critical asset and being a trusted partner in driving success for businesses and their customers.
+

@@ -1,0 +1,220 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "Security Governance and Integrated PAM Strategy for AI Agents in the Age of the Model Context Protocol (MCP)"
+description: "Learn how integrating Privileged Access Management (PAM) into the Model Context Protocol (MCP) framework strengthens AI governance, enhances visibility, and mitigates emerging security risks in enterprise environments."
+date: "2025-04-08"
+author: "kenny"
+ogImage: "public/white-paper/15/thumbnail.png"
+keywords: ["MCP", "PAM", "Privileged Access Management", "Model Context Protocol", "MCP PAM", "MCP-PAM integration", "AI security", "AI governance", "Zero Trust AI", "AI access control", "PAM for AI", "secure AI agent", "enterprise AI security", "AI IAM", "AI infrastructure"]
+relatedPosts:
+  - "/en/white-paper/1"
+  - "/en/white-paper/5"
+  - "/en/white-paper/2"
+---
+
+
+# Security Governance and Integrated PAM Strategy for AI Agents in the Age of the Model Context Protocol (MCP)
+The Model Context Protocol (MCP), developed by [Anthropic](https://www.anthropic.com/), is an open standard designed to securely facilitate bidirectional interactions between AI systems and external tools or data sources[1][2]. Acting as a sort of “universal adapter”, MCP enables AI agents—such as large language models (LLMs)—to seamlessly integrate with a wide range of external systems, creating new synergies across platforms[1][3].
+
+Through MCP, AI agents can directly access functionalities and datasets from existing business tools and even perform actions on them. This eliminates the need for custom, one-off scripts that were previously required for each system, thereby improving interoperability and reducing integration overhead[3].
+
+Since announcing MCP in late 2024, Anthropic has actively incorporated feedback from the developer community. The protocol is thoroughly documented and openly shared[1], making it accessible to a broad ecosystem of AI tools and models—not just limited to [Claude](https://claude.ai/) or any proprietary system[1]. As an open-source specification, MCP invites contribution and adoption across the industry.
+
+Ultimately, MCP serves as a standardized interface that significantly expands the scope of AI utility, enabling agents to interact with real-time data and execute commands beyond the boundaries of their original training[2].
+<br />
+<Youtube center src="https://www.youtube.com/embed/wQYLtxt0MU4?si=AgLOgzSv04tJ2mw_" />
+<br />
+
+# How does MCP work
+The architecture of the Model Context Protocol (MCP) is built on a three-party model consisting of a host, client, and server.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/15/1-how-does-mcp-work.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+
+In this structure, the host refers to the AI application—such as an AI assistant—that seeks to access external tools or data sources. The client is the embedded module within the host responsible for handling MCP communications. The server represents the external system—such as a CRM, database, or calendar—that the AI wants to interact with, and which is implemented to support the MCP protocol[1][4].
+
+This architecture enables two-way communication, where the AI agent (host) sends queries or commands to the MCP server via the client, and the server responds using a standardized protocol[1]. Crucially, MCP establishes a clear security boundary between the AI and external systems. This boundary helps control the information the AI can access and the actions it can perform, acting as a safeguard against unintended behavior[1].
+
+According to the specifications released by Anthropic, MCP includes features such as context management, session and permission control, and authentication[1]. It’s designed to be flexible enough for integration not only with standard web APIs but also with a wide variety of tool interfaces. For example, MCP uses JSON-RPC 2.0 as its message exchange format, enabling language-neutral communication between AI agents and external servers[1][5]. Additionally, the protocol outlines flows for obtaining user consent when an AI agent attempts to perform certain actions, reflecting its emphasis on security and privacy by design[1].
+
+MCP leverages existing web standards and authentication mechanisms. It recommends using OAuth 2.0 for token-based authentication and JWT (JSON Web Token) for identity and authorization verification. This allows organizations to integrate AI agents into existing identity infrastructures[2][6].
+
+To access protected resources on an MCP server, an AI agent must first obtain an access token from an OAuth authorization server and present it during its request. The MCP server validates the token’s integrity and scope before executing any action[6]. AI agents are assigned their own client credentials, distinct from human users, and the token carries identity and context information that allows fine-grained control over what actions the agent is allowed to perform[6][7].
+
+By embedding context-aware authentication and authorization mechanisms into its framework, MCP ensures that AI agents can only execute permitted actions, even in dynamic environments[6]. If an agent’s access needs to be revoked—for instance, due to compromise or changes in role—the protocol supports token revocation to immediately prevent further action[6].
+
+# Security Vulnerabilities and Threats Vectors in MCP Environments
+However, the current MCP specification delegates responsibilities such as token revocation and credential management to individual MCP servers and authorization services. MCP itself is not intended to serve as a complete identity and access management (IAM) solution[2]. In other words, while MCP standardizes the interface and incorporates some security functions, lifecycle management of authentication tokens and secure key storage should be handled through external security modules or existing IAM systems[2].
+
+While MCP has opened the door for AI agents to directly interact with enterprise systems, several security challenges still remain. The following are key vulnerabilities and threat vectors identified within MCP environments[2]:
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/15/2-security-risks-in-mcp-environments.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+
+- **Spoofing Attacks**: Despite MCP’s host-client-server model, there is a risk during the initial setup phase where the client might be tricked into trusting a malicious MCP server. For example, an attacker could impersonate a legitimate server—by mimicking its API endpoint—and feed the AI agent misleading instructions or extract sensitive data[2]. Without built-in verification mechanisms to establish server trustworthiness, session hijacking becomes a realistic threat.
+
+- **Name Collision and Tool Poisoning**: In the MCP ecosystem, different tools or resources may share similar names, leading to confusion about which tool the AI agent is interacting with. This risk increases if an attacker registers an MCP server using a common or misleading name, potentially causing the AI to connect to and execute commands on the wrong server[2]. This name collision vulnerability, when combined with tool poisoning—such as hiding malicious instructions in tool descriptions—can mislead AI agents into performing unintended actions and leaking sensitive data[8].
+
+- **Command Injection via Prompts**: When AI agents interpret natural language prompts to generate MCP requests, there’s a risk of executing dangerous command patterns (e.g., Slack-style /delete commands). For instance, if a user vaguely asks an AI assistant to “clean up old resources,” the agent might interpret this too broadly and execute destructive actions like deleting databases[9]. In one reported case, a DevOps AI agent deleted critical data without verification, illustrating the need for tighter privilege restrictions and validation mechanisms. Such misuse becomes even more concerning when paired with prompt injection attacks[8][9].
+
+- **Sandbox Escape**: If MCP allows AI agents to execute code or access files on the server, vulnerabilities could be exploited to escape sandboxed environments. An agent could use a flaw in the MCP server to execute system-level commands or access unauthorized files and processes[2]. This sandbox escape scenario is particularly dangerous when AI agents interact with powerful tools, potentially leading to system compromise or lateral movement across internal networks.
+
+- **Lack of Token Revocation Mechanisms**: As noted earlier, MCP relies on mechanisms like OAuth tokens to control AI agent permissions. However, it lacks a standardized way to revoke tokens in real time[2]. Unlike human session management, an AI agent’s access token may remain valid until expiration—even if the agent is compromised or no longer authorized. This gap poses an extended threat window, and highlights the need for protocol-level support for immediate revocation[6].
+
+**Credential Management Limitations**: While MCP standardizes communication between AI and tools, it does not provide features for securely storing or rotating credentials like API keys or passwords[2]. Each MCP server implementation is responsible for managing its own secrets. Without proper handling, these credentials are at risk of leakage. Security vendors such as CyberArk recommend using dedicated vaults or key management systems alongside MCP to safeguard privileged credentials, emphasizing that PAM best practices remain essential[10].
+
+Despite these challenges, MCP remains a groundbreaking technology that significantly expands the capabilities of AI agents. Its potential to transform how AI interacts with enterprise systems is undeniable. However, safely deploying MCP in real-world business environments requires an additional layer of security—and this is where the concept of Privileged Access Management (PAM) becomes critical[2].
+
+# The Role and Functions of Privileged Access Management (PAM)
+
+Privileged Access Management (PAM) is a security strategy and solution designed to control and monitor access to accounts with elevated privileges—such as administrator or system-level accounts[11][12]. Unlike standard user accounts, privileged accounts can cause significant damage if misused or compromised, making them subject to stricter controls beyond traditional Identity and Access Management (IAM) systems[11].
+
+According to industry leaders like [Microsoft](https://www.microsoft.com/) and [CyberArk](cyberark.com), PAM aims to protect critical assets from insider misuse and external threats by identifying, isolating, monitoring, and auditing all privileged accounts and sessions within an organization[12][13]. Key capabilities of a PAM solution typically include secure credential vaults for storing administrative passwords and keys, session recording features to monitor and audit privileged user activities, multi-factor authentication (MFA) to verify user identities, and the enforcement of the principle of least privilege, ensuring that users are granted only the minimum level of access necessary to perform their tasks[12].
+
+These advanced security measures are specifically targeted at high-risk access scenarios. Applying such controls uniformly to all users would hinder operational efficiency, which is why IAM and PAM are treated as distinct layers based on varying levels of access risk[11].
+
+Core functions of implementing Privileged Access Management include the following[12][13]:
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/15/4-core-functions-of-pam.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+- **Credential Vault**: Stores privileged account credentials—such as passwords and access keys—in a centralized, highly secure, and encrypted vault. PAM solutions typically randomize administrator passwords on a scheduled basis, store them securely, and provide controlled access either through temporary viewing or via proxy-based connections when users request access to those accounts. This approach ensures that users never directly handle sensitive credentials, reducing the risk of leaks and preventing issues related to shared or reused accounts[12][13].
+
+- **Session Monitoring**: Continuously monitors and records privileged sessions, such as administrative SSH or RDP connections. Every command and action taken during a session is logged for auditability. In many cases, the session can be terminated in real time if suspicious activity is detected[12]. This capability ensures traceability—knowing who did what and when—and enables rapid response to unauthorized actions or policy violations.
+
+- **Multi-Factor Authentication (MFA)**: Requires users to verify their identity through an additional authentication factor beyond just a password—such as a one-time passcode or authentication app[12]. Applying MFA to all privileged access points significantly reduces the risk of unauthorized access, even if a password is compromised. For example, MFA can be enforced on database consoles or VPN connections to ensure that access is only granted after successful secondary authentication.
+
+- **Least Privilege Principle**: Grants users and processes only the minimum level of access required to perform their tasks[13]. PAM solutions support this principle through features like Just-In-Time (JIT) privilege elevation, where administrative rights are temporarily granted and automatically revoked once the task is complete[13]. This minimizes standing privileges, reduces the attack surface, and limits potential damage in the event of a compromise[9].
+<br />
+Through these core PAM functionalities, organizations gain critical visibility and control over privileged accounts, along with enhanced auditability and accountability[12]. According to CyberArk, when left unmanaged, privileged accounts can remain unmonitored for hundreds of hours per account. With PAM in place, every action is recorded and made fully visible to security administrators[13]. For this reason, privileged accounts are treated with significantly higher security standards than standard user accounts, and PAM is increasingly regarded as a foundational element of modern cybersecurity frameworks[11].
+
+The PAM landscape is also evolving with the integration of AI and machine learning technologies. Microsoft reports a growing use of AI/ML techniques in PAM, particularly in User and Entity Behavior Analytics (UEBA), to detect anomalies and suspicious behavior patterns[12]. These systems learn normal behavior profiles for privileged users and use statistical models to flag deviations—such as logins at unusual times or abnormally high command execution volumes—triggering alerts or automated response playbooks[14]. Security vendors like Krontech emphasize that integrating AI-driven anomaly detection and risk scoring into PAM can help security teams proactively block threats and reduce response times[5]. By continuously analyzing massive volumes of access logs and behavioral data, AI enables more precise differentiation between legitimate and abnormal activity, minimizing false positives compared to traditional rule-based systems[15].
+
+Additionally, predictive analytics powered by machine learning allow organizations to identify and remediate potential vulnerabilities before they are exploited. As a result, PAM is shifting from reactive threat mitigation to proactive defense[14]. In summary, AI is transforming PAM solutions by automating tasks that previously relied on manual oversight and improving real-time detection accuracy[15].
+
+That said, implementing PAM does not eliminate all risks. The goal of privileged access management is to substantially reduce risk, not to eradicate it completely. For instance, while PAM can significantly deter insider threats, it cannot entirely prevent them[9]. Privileged users may still make critical mistakes or intentionally abuse access, and external attackers who succeed in credential theft could bypass PAM controls. CyberArk notes that many privileged account breaches are not solely due to PAM misconfigurations but are also tied to human factors, such as phishing and social engineering attacks[13].
+
+Therefore, deploying PAM must be accompanied by continuous monitoring, user education, and a clear understanding that security is not a one-time product but a continuous process. As the saying goes in the cybersecurity industry, “perfect security doesn’t exist.”[5] PAM delivers the best results when it is used in conjunction with other layered defenses and integrated into a broader defense-in-depth strategy[5][16].
+
+Given these realities, integrating PAM with MCP-based AI agents becomes essential. To mitigate the security vulnerabilities discussed earlier and safely manage AI-driven actions, organizations need to extend PAM principles and techniques into the MCP environment[2]. This approach allows businesses to retain the agility and integration benefits of MCP while applying the proven oversight and controls of traditional IAM/PAM systems to AI agents—delivering both innovation and security at scale.
+
+# The Need for MCP PAM
+
+In the world of MCP, the introduction of PAM is aligned with two core goals: strengthening AI governance and minimizing risk. While MCP enables AI agents to interact freely with a variety of tools, without a privileged access management layer, these interactions may lack sufficient oversight. This challenge is amplified in environments with multiple MCP servers, where maintaining visibility becomes increasingly difficult.
+
+By integrating PAM into MCP environments, organizations can retain the openness and interoperability of MCP while bringing AI agent behavior under enterprise security policy controls. This integrated approach mirrors the layered structure of traditional identity systems. Where IAM governs the identity of all users and devices, PAM provides deeper visibility and control over privileged entities—a category that now includes not only human administrators but also autonomous AI agents[11].
+
+To implement an integrated MCP-PAM strategy effectively, the following core principles should be taken into account[3]:
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/15/3-mcp-pam-integration-strategy.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+- **Defense in Depth**: Security should never rely on a single layer. Combining MCP and PAM establishes multiple safeguards around AI agents[3]. For example, MCP traffic from AI agents can be filtered through a dedicated proxy, while backend systems—such as Kubernetes-managed services—apply a second layer of access control via platforms like QueryPie. In this model, a QueryPie MCP server handles first-level access via PAM, and when that traffic reaches QueryPie-managed infrastructure, a second control is enforced over the destination systems and databases. If one layer fails, another remains to mitigate the risk.
+
+- **Visibility**: PAM integration must enable comprehensive monitoring and logging of AI agent activities. Security teams should be able to view, in a centralized console, which tools an AI accessed via MCP, when, and what actions were performed[3]. This visibility is critical not only for incident response but also for establishing trust and transparency in AI-driven environments[15][17]. This visibility is critical not only for incident response but also for establishing trust and transparency in AI-driven environments.
+
+- **Traceability & Audit**: All actions performed by AI agents should be fully auditable[3]. Just as PAM provides audit trails for human administrators, similar mechanisms should track MCP-based actions. Each AI agent should have a unique identity, and its MCP calls—including results—must be time-stamped and logged. Particularly sensitive commands (e.g., data deletions or privilege changes) should be flagged for administrative review. These records are vital for forensic analysis and regulatory compliance in the event of a security incident[3].
+
+- **Accountability & Least Privilege**: AI agents must be subject to clear accountability and scoped access controls[3]. From an accountability standpoint, it must be possible to identify exactly which AI agent made which decision or performed which action. Furthermore, in situations where required, it should also be possible to trace back to the person or system that authorized that action. To support this, each AI agent should be assigned a separate account or issued a dedicated OAuth client ID, ensuring that its identity is clearly distinguishable from that of a human user[18]. From an accountability standpoint, it must be possible to identify exactly which AI agent made which decision or performed which action. Furthermore, in situations where required, it should also be possible to trace back to the person or system that authorized that action. To support this, each AI agent should be assigned a separate account or issued a dedicated OAuth client ID, ensuring that its identity is clearly distinguishable from that of a human user[18]. This principle, when combined with Just-In-Time (JIT) privilege elevation, ensures that AI agents can only access specific resources for a limited time and only when needed—greatly reducing the risk of misuse or overreach[13][15].
+
+- **Intent Alignment**: AI agent behavior must remain aligned with organizational policies and user intent[3]. PAM systems can detect and intercept AI actions that exceed authorized boundaries—such as excessive data queries or execution of unapproved commands. When violations occur, PAM can either block the action or trigger a secondary approval workflow. This acts as a trustworthy guardrail, ensuring that AI operates only within approved limits[16]. For example, if an AI agent attempts to consolidate sensitive information beyond its scope, a policy engine can flag the request and require manual validation. Such mechanisms help maintain continuous alignment between AI behavior and enterprise compliance or ethical standards.
+
+To implement the principles outlined above, organizations can take the following concrete steps as part of their integrated MCP-PAM strategy:
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/15/5-mcp-steps-to-mcp-pam-strategy.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+
+- **Create Dedicated Accounts and Permission Profiles for AI Agents**: As previously discussed, AI agents should be treated as independent users, each issued a unique identity and assigned specific permissions[18]. For example, each agent can be provisioned with an individual OAuth client ID, which is then linked to a defined role managed within the PAM system. This ensures that AI agents do not inherit human-level privileges and enables fine-grained access control on a per-agent basis[18].
+
+- **Introduce MCP PAM via Secure Proxies**: A secure proxy layer can intercept MCP traffic from AI agents and evaluate each request against defined access policies. Middleware such as the Open MCP Auth Proxy—developed by platforms like WSO2—can validate OAuth tokens and enforce context-based policies in real time[6]. For instance, if an AI attempts a “DELETE” operation, the proxy inspects the request and determines whether it is authorized under current policy. This type of real-time, context-aware authorization helps prevent both accidental misuse and malicious behavior by AI agents[6].
+
+- **Monitor AI Activity and Automate Incident Response**: All AI agent activity logs should be forwarded to integrated PAM and SIEM systems for continuous monitoring[15]. The SIEM can correlate AI-generated events to detect anomalies and raise alerts. When integrated with a SOAR (Security Orchestration, Automation, and Response) platform, automated response playbooks can be triggered[17]. For example, if an AI agent attempts to delete large volumes of data within a short period, the SIEM can detect the pattern and instruct the SOAR system to revoke the agent’s access token or isolate the agent entirely[17]. Such automated responses reduce reaction time and mitigate the risk of damage caused at machine speed.
+
+- **Conduct Periodic Reviews and Staff Training**: Even in a well-integrated system, periodic audits and policy tuning are essential. Security teams should routinely review AI agent logs to verify policy enforcement and adjust permissions or introduce new controls based on observed behavior[9]. Development and operations teams must also be educated on the AI agents’ permission models and limitations, and trained in writing safe prompts and following secure usage practices. Combining technical controls with process-oriented awareness ensures the effectiveness and sustainability of the overall strategy.
+
+By adopting the strategies outlined above, organizations can fully harness the power of AI agents within MCP environments—without compromising on digital trust[5]. Concerns over uncontrolled behavior or unintended data exposure can be addressed through the safety net provided by MCP PAM[16]. In essence, the combination of MCP and PAM functions as a blueprint for privileged access management in the era of AI, enabling enterprises to adopt agentic AI responsibly within their existing security frameworks[16].
+
+Trust in AI translates directly into broader technology adoption, and this integrated approach is likely to emerge as a standard model for enterprise-scale AI deployments. In fact, major technology firms like Microsoft and IBM are already evolving their Zero Trust architectures into “AI-ready security frameworks”[13], and the MCP-PAM integration strategy is becoming a key enabler of that transformation.
+
+# Final Thoughts: Enabling Trusted AI Through Integrated Access Control
+In conclusion, the integration of the MCP architecture with PAM controls is an essential security measure for safely deploying AI agents in enterprise environments. It allows organizations to preserve the openness and extensibility of MCP while restoring control, balance, and accountability through PAM. This combined approach enhances the trustworthiness and transparency of AI behavior, reduces regulatory risk[5], and lays the groundwork for responsible and secure AI adoption across industries[16].
+
+Ultimately, by adopting this strategy, organizations can embrace the productivity and efficiency gains of AI while upholding strong governance and security standards—paving the way for a future built on digital trust. As MCP continues to evolve and PAM solutions advance in parallel, we can expect to see a growing number of best practices emerge for safe and accountable AI implementation at scale.
+
+<br />
+<br />
+
+<ButtonLink href="https://app.querypie.com" variant="black" size="lg">🚀 Get a glimpse of tomorrow’s secure MCP operations — start with AI Hub.</ButtonLink>
+
+# References
+
+[1] [Anthropic, "Model Context Protocol Specification (2025-03-26): Architecture.", Anthropic Documentation, 2025.](https://spec.modelcontextprotocol.io)
+
+[2] [X. Hou, Y. Zhao, S. Wang, H. Wang, "Model Context Protocol (MCP): Landscape, Security Threats, and Future Research Directions.", arXiv preprint, 2025.](https://arxiv.org/abs/2503.23278)
+
+[3] [A. Hathibelagal, "Understanding Model Context Protocol (MCP): A protocol that’s trying to standardize how LLMs access external data and tools.", Predict (Medium), Mar. 9, 2025.](https://medium.com/predict/understanding-model-context-protocol-mcp-771f1cfb3c0a)
+
+[4] [P. Schmid, "Model Context Protocol (MCP) an overview.", philschmid.de Blog, Apr. 3, 2025.](https://www.philschmid.de/mcp-introduction)
+
+[5] [A. Jones, "Wait, are we just handing over system access to the AI agents?", Angie Jones Tech Blog (DEV Community), Dec. 30, 2024.](https://angiejones.tech/system-access-for-ai-agents/)
+
+[6] [V. Liyanage, "The AI Agent Security Challenge: MCP and Open MCP Auth Proxy to the Rescue.", WSO2 Solution Architecture Team Blog (Medium), Apr. 15, 2025.](https://medium.com/sa-team-blog/the-ai-agent-security-challenge-mcp-and-open-mcp-auth-proxy-to-the-rescue-a2099626850c)
+
+[7] [B. Cook, "Handling AI agent permissions.", Stytch Blog, 2023.](https://stytch.com/blog/handling-ai-agent-permissions)
+
+[8] [Invariant Labs, "MCP Security Notification: Tool Poisoning Attacks.", Invariant Labs Blog, Apr. 1, 2025.](https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks)
+
+[9] [J. G., "How PAM Mitigates Insider Threats: Preventing Data Breaches, Privilege Misuse, and More.", The Hacker News, Mar. 2025.](https://thehackernews.com/2025/03/how-pam-mitigates-insider-threats.html)
+
+[10] [Microsoft, "What is privileged access management (PAM)?", Microsoft Security 101, 2023.](https://www.microsoft.com/en-us/security/business/security-101/what-is-privileged-access-management-pam)
+
+[11] [IBM, "What is Privileged Access Management (PAM) and why it matters.", IBM Think Blog, 2023.](https://www.ibm.com/think/topics/privileged-access-management)
+
+[12] [CyberArk, "What is Privileged Access Management (PAM)?", CyberArk Security Glossary, 2025.](https://www.cyberark.com/what-is/privileged-access-management/)
+
+[13] [Krontech, "Enhancing Cybersecurity with AI-Powered Privileged Access Management.", Kron Blog, Mar. 20, 2024.](https://ftp.kron.com.tr/enhancing-cybersecurity-with-ai-powered-privileged-access-management)
+
+[14] [SSH Communications Security, "Leveraging Machine Learning and AI in PAM for Predictive Security.", SSH.com Academy, 2024.](https://www.ssh.com/academy/pam/leveraging-machine-learning-and-ai-in-privileged-access-management-for-predictive-security)
+
+[15] [A. G., "How AI Is Transforming IAM and Identity Security.", The Hacker News, Nov. 2024.](https://thehackernews.com/2024/11/how-ai-is-transforming-iam-and-identity.html)
+
+[16] [Delinea, "Unlock AI’s potential, not your defenses.", Delinea (Product Brief), 2024.](https://delinea.com/solutions/secure-ai-with-delinea)
+
+[17] [Energy SOAR, "SIEM, SOAR and AI in cybersecurity.", EnergySOAR Blog, Jul. 26, 2024.](https://energysoar.com/siem-soar-and-ai-in-cybersecurity/)
+
+[18] [Slack, "Developing Slash Commands.", Slack API Documentation, 2023](https://api.slack.com/interactivity/slash-commands)
+

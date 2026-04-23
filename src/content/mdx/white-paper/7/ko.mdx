@@ -1,0 +1,219 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "Policy as Code(PaC) 접근을 통한 보안 관리 혁신"
+description: "PaC의 도입이 어떻게 보안 관리의 사각지대를 해소하고, 정책 설정과 관리를 보다 쉽고 안정적으로 만들어주는지 그 비결을 소개합니다."
+date: "2024-11-22"
+author: "eddy"
+ogImage: "public/white-paper/7/thumbnail.png"
+keywords: ["QueryPie", "쿼리파이", "Policy as Code", "보안 자동화", "규정 준수", "위험 감소", "최적화된 프로토콜"]
+relatedPosts:
+  - "/ko/white-paper/8"
+  - "/ko/white-paper/2"
+  - "/ko/white-paper/5"
+---
+
+오늘날의 디지털 환경에서 기업은 데이터베이스, 서버, 쿠버네티스, 웹 어플리케이션 등 다양한 리소스에 대한 보안 접근을 철저히 관리해야 합니다. 하지만 복잡한 보안 환경과 빈번한 정책 변경을 수동으로 관리하는 것은 보안 허점을 초래할 수 있는 위험 요소가 됩니다. 정책 변경 이력의 누락, 불분명한 책임 추적, 비효율적인 승인 과정 등은 보안 사고의 원인이 될 수 있습니다.
+
+이러한 문제를 해결하기 위해 QueryPie는 Policy as Code(PaC) 접근 방식을 도입했습니다. PaC는 보안 정책을 코드로 관리하여 변경 사항을 투명하게 기록하고 승인 절차를 강화함으로써 정책의 일관성을 유지합니다. 이를 통해 정책 변경 시 책임이 명확히 기록되고, 규칙에 맞는 정책만이 운영 환경에 적용되어 보안성을 크게 높일 수 있습니다.
+
+이번 기술 블로그에서는 PaC의 도입이 어떻게 보안 관리의 사각지대를 해소하고, 정책 설정과 관리를 보다 쉽고 안정적으로 만들어주는지에 대해 자세히 알아보겠습니다. 실시간 검증과 편리한 작성 지원 기능을 통해 관리자들이 어떻게 보다 효과적으로 보안 정책을 관리할 수 있는지 그 비결을 소개합니다.
+
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/1-screenshot-1.png"
+        alt="Policy as Code (PaC) Editor"
+    />
+</Box>
+
+## Policy as Code(PaC)란?
+
+리소스 관리에서 정책은 특정 리소스의 접근 규칙과 허용 및 금지되는 행동을 정의합니다. 예를 들어, 모든 서버에서 sudo 명령어를 사용할 수 없다는 정책을 둘 수 있으며, 이처럼 간단한 규칙이라도 관리 중 실수가 발생할 가능성이 큽니다. 또한 정책의 변경 이력을 기록하고 관리하기가 쉽지 않습니다. Policy as Code는 이러한 문제를 해결하기 위한 체계적 접근법으로, 정책에 코드 방식의 관리 방식을 도입하여 작성과 기록의 일관성을 확보합니다. YAML 형식으로 작성된 정책은 key-value 구조로 가독성을 높이며, 정책의 변경 이력 또한 코드 관리 방식으로 추적할 수 있습니다.
+
+# PaC Editor
+
+관리자가 YAML 형식으로 정책을 작성할 때 YAML 지식이 필요하고, 정책의 설정 범위를 명확히 이해하지 못할 경우 관리에 어려움이 생길 수 있습니다. 특히, 정책 문서가 올바르지 않을 경우 정책이 적용된 후에야 문제를 확인하게 되어 관리자 경험이 저하될 수 있습니다.
+
+QueryPie의 PaC Editor는 JSON Schema를 활용하여 정책을 정의하고 실시간으로 검증하는 인터페이스를 제공하여 이러한 문제를 해결합니다. PaC Editor는 다음의 주요 목표를 달성합니다:
+- **실시간 검증과 오류 방지**: 실시간 검증을 통해 사용자는 오류를 즉시 확인하고, 작성 중 실수를 사전에 방지할 수 있습니다.
+- **자동화된 추천 기능**: 사전 정의된 형식과 추천 옵션을 제공하여 정책 작성이 올바르게 이루어질 수 있도록 돕습니다.
+
+# PaC Editor의 동작 방식: Parse, Assist, Validate
+
+PaC Editor는 Parse, Assist, Validate의 3단계로 작동합니다. 사진과 함께 각 단계를 설명하겠습니다.
+
+
+## Parse 단계: YAML 파싱
+
+사용자가 입력한 YAML 형식의 정책 데이터를 JS Object로 변환하고, 입력된 내용의 구문적 일관성을 확인하는 핵심 과정입니다. 이 단계에서 `yaml` JavaScript 라이브러리를 활용하여, YAML 문서를 파싱하고 각 요소의 위치 정보까지 추적하여 변환된 객체에 반영합니다. 이 과정은 이후 Assist와 Validate 단계를 위한 준비 단계로서 중요한 역할을 합니다.
+
+**세부 과정**
+
+1. **YAML 문서 구문 분석**
+사용자가 Editor에 입력한 텍스트를 `yaml` 라이브러리로 파싱하여 YAML 형식에 맞는지 확인합니다. YAML은 JSON에 비해 가독성이 뛰어나고 구조적 표현이 간결한 장점이 있지만, 들여쓰기와 같은 구문적 규칙을 엄격히 준수해야 합니다. `yaml` 라이브러리는 이를 점검하여 **구문 오류나 불일치가 있는지** 검증하고, 문제가 발생할 경우 오류 메시지를 생성해 사용자에게 피드백할 수 있도록 합니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/2-screenshot-2.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="YAML 파싱 에러"
+    />
+</Box>
+<br />
+
+2. **JS Object로의 변환**
+구문 검사를 통과한 YAML 데이터를 자바스크립트 객체로 변환합니다. JSON 형식으로 변환된 정책 데이터는 이후 단계들에서 JSON Schema로 검증할 수 있도록 준비됩니다.
+
+3. **위치 정보 추적 및 매핑**
+YAML 문서의 각 요소에 대해 **위치 정보(location)**를 추적하여, 변환된 JS Object 내 각 필드와 요소에 대응되는 위치를 매핑합니다. 이 위치 정보는 피드백 전달 시에 중요한 역할을 하며, 오류가 발생했을 때 관리자에게 **정확한 문제 발생 위치와 원인**을 명확하게 제시할 수 있도록 돕습니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/3-screenshot-3.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="에러 메세지 내 위치정보 표현"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/4-screenshot-4.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="작성 가이드 메세지 내 위치정보 표현"
+    />
+</Box>
+<br />
+
+**Parse 단계의 중요성**
+
+Parse 단계는 Policy as Code Editor의 동작 과정에서 매우 중요한 역할을 담당합니다. 이 과정에서 정확히 파싱된 데이터와 위치 정보가 확보됨으로써, 이후 단계에서 구문적 오류 없는 상태로 정책을 검증하고, 사용자가 설정을 원활히 진행할 수 있도록 지원합니다.
+
+## PaC Schema
+
+**Assist**와 **Validate** 단계는 JSON Schema를 확장한 **PaC Schema**에 기반하여 사용자에게 직관적이고 정확한 정책 작성 경험을 제공합니다. 먼저 JSON Schema의 역할과 필요성을 간단히 설명한 후, PaC Schema의 확장 사항과 각 단계의 역할을 구체적으로 다루겠습니다.
+
+**JSON Schema란**
+
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/5-json-schema.png"
+        alt="JSON Schema"
+        caption="JSON Schema 사용 방식"
+    />
+</Box>
+<br />
+
+JSON Schema는 JSON 데이터의 구조, 필수 필드, 형식 등을 정의하여, 데이터가 일관된 구조를 가지도록 강제하는 표준입니다. API 응답, 설정 파일, 정책 관리 등 다양한 곳에서 활용됩니다. JSON Schema의 주요 기능은 다음과 같습니다:
+
+- **데이터 유효성 검사**: 정의된 규칙에 따라 JSON 데이터가 유효한지 검사합니다.
+- **데이터 구조 정의**: 각 필드의 유형, 형식, 필수 요소를 지정하여 데이터의 일관성을 보장합니다.
+- **자동화된 피드백 제공**: JSON 데이터가 규칙에 어긋날 경우 오류를 반환하여, 사용자에게 문제를 직관적으로 알려줍니다.
+
+**PaC Schema의 필요성과 확장 기능**
+
+기본 JSON Schema는 데이터 유효성 검사와 데이터 구조 정의에 있어 유용하지만, PaC Editor에서는 정책 작성에 필요한 추가적인 안내와 규칙이 요구됩니다. 이를 해결하기 위해 JSON Schema를 확장한 **PaC Schema**를 도입하여 정책 작성에 대한 실질적 지원과 구체적 피드백을 제공합니다. PaC Schema는 다음과 같은 두 가지 주요 확장 사항을 포함합니다:
+
+1. **Hint 관련 사항**
+PaC Schema에는 각 정책 요소에 대한 작성 가이드 또는 설명을 포함하는 **hint**가 추가됩니다. 특히 복합적인 데이터 타입(예: 객체, 배열)의 경우, 하위 필드들이 아직 작성되지 않았을 때도 부모 필드에서 모든 필드에 대한 힌트를 제공하는 기능이 있어, 작성 초기 단계에서도 각 필드가 필요한 내용을 확인할 수 있습니다. 이를 통해 사용자는 정책 작성 과정에서 실시간으로 필요한 정보를 쉽게 파악할 수 있습니다.
+
+2. **필드 간 의존성 관련 사항**
+정책 작성 시 특정 필드가 다른 필드의 값에 의존하는 경우가 있습니다. PaC Schema는 필드 간 의존성을 정의하는 기능을 통해, 필요한 필드 값이 입력되었는지 여부에 따라 사용자가 필요한 필드를 추가하도록 안내할 수 있습니다.
+
+## Assist 단계: 작성 가이드 제공
+
+관리자가 정책을 작성하는 과정에서 PaC Schema로 정의한 hint와 필드 간 의존성 규칙에 따라 관리자에게 필요한 정보를 피드백하는 단계입니다. Parse단계에서 획득한 JS Object에 대해 `json-schema-library`의 순회 기능을 사용하여 모든 필드를 검토하고, 필요한 안내를 수집합니다.
+
+**세부 과정**
+
+1. **Hint 필드 기반 작성 가이드 제공**
+각 필드를 순회하며, PaC Schema에 정의된 **hint 필드**를 확인합니다. 모든 필드에 대해 작성 가이드와 권장 사항을 수집하여, 사용자가 정책 작성 시 해당 필드의 목적과 작성 방법을 쉽게 이해할 수 있도록 합니다. 복합 객체 타입의 경우, 하위 필드들이 비어 있을 때 상위 필드에서 필요한 힌트를 표시하여 초기 설정에 도움을 줍니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/6-screenshot-5.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="특정 필드 입력 가이드"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/7-screenshot-6.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="하위 필드들 전체 입력 가이드"
+    />
+</Box>
+<br />
+
+2. **필드 간 의존성 검사**
+필드 간 의존성 규칙이 PaC Schema에 정의되어 있는 경우, 순회 과정에서 이를 점검하여 필수 의존성이 충족되지 않았을 때 사용자에게 알립니다. 예를 들어, 특정 필드가 `true`로 설정될 경우 다른 필드가 필수로 입력되어야 한다면, 해당 규칙이 만족되지 않았을 때 관련 필드 추가를 권장하는 피드백을 제공합니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/8-screenshot-7.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="필드 간 의존성 관련 가이드"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/9-screenshot-8.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="필드 간 의존성 관련 에러"
+    />
+</Box>
+<br />
+
+## Validate 단계: 정책 유효성 검증 및 오류 피드백 제공
+
+작성된 정책이 PaC Schema를 준수하는지 확인하고, 규칙에 어긋나는 부분을 탐지하여 사용자에게 피드백하는 최종 검증 단계입니다. 이 단계에서도 Parse단계에서 획득한 JS Object에 대해 `json-schema-library`의 **validate** API를 사용하여 정책 구조와 데이터 형식의 정확성을 검사하고, 오류 발생 시 세부적인 정보를 수집하여 제공합니다.
+
+**세부 과정**
+
+- **JSON Schema 유효성 검사**
+`validate` API를 통해 PaC Schema에 정의된 JSON Schema 규칙에 따라 각 필드의 데이터 형식, 필수 항목 충족 여부, 값의 범위 등을 검토합니다. 필수 필드가 누락되었거나 데이터 형식이 맞지 않는 경우 등 규칙 위반 사항을 감지하여, 위치 정보와 함께 오류 피드백을 수집합니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/10-screenshot-9.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="입력 값에 대한 패턴 검사 에러"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/11-screenshot-10.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="필드 누락에 대한 검사 에러"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/7/12-screenshot-11.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="필드 누락 및 타입에 대한 검사 에러"
+    />
+</Box>
+<br />
+
+# QueryPie PaC Editor: 접근 제어 정책 관리의 혁신적 도약
+
+결론적으로, QueryPie의 PaC Editor는 고객이 접근 제어 정책을 보다 쉽게 설정하고 관리할 수 있도록 돕는 강력한 도구로 자리매김하고 있습니다. 실시간 검증 기능과 인라인 오류 표시는 정책 설정 과정에서의 실수를 최소화하고 즉각적인 피드백 과정을 통해 사용자의 편의는 크게 향상되고 있습니다.
+
+앞으로 추가될 자동화 기능과 개선된 검증 로직, 그리고 AI 기반의 코드 변환 기능은 정책 관리의 효율성을 더욱 높일 것입니다. AI를 통해 PaC Schema를 학습하여 관리자가 정책을 문장으로 표현하면 이를 자동으로 코드로 변환해주는 기능에 대한 구상과 검토가 끊임없이 이어지곤 합니다. 이러한 혁신적인 기능을 통해 쿼리파이는 고객이 정책 작성 및 관리에 소요되는 시간을 줄이고, 보다 직관적인 경험을 제공하여 높은 만족도 제공할 수 있습니다. 앞으로도 쿼리파이는 고객과 함께 성장하며, 더욱 편리하고 효율적인 정책 관리 솔루션을 제공하기 위해 끊임없이 노력하겠습니다.
+
+# 참고 문서
+
+- [https://www.paloaltonetworks.com/cyberpedia/what-is-policy-as-code](https://www.paloaltonetworks.com/cyberpedia/what-is-policy-as-code)
+- [https://aws.github.io/aws-eks-best-practices/ko/security/docs/compliance/#pac-policy-as-code](https://aws.github.io/aws-eks-best-practices/ko/security/docs/compliance/#pac-policy-as-code)
+- [https://json-schema.org/overview/what-is-jsonschema](https://json-schema.org/overview/what-is-jsonschema)
+- ChatGPT
+

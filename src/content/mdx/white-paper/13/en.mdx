@@ -1,0 +1,208 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "Optimal Method for Using a Terminal with Seamless SSH Connection"
+description: "Discover an optimal method for seamless SSH connections that enhances security without disrupting the CLI workflow. Learn how QueryPie’s approach eliminates the need for additional agents while maintaining robust access control."
+date: "2025-03-10"
+author: "ryan"
+ogImage: "public/white-paper/13/thumbnail.png"
+keywords: ["QueryPie", "SSH connection", "seamless SSH", "terminal access control", "CLI workflow", "QueryPie SSH", "SSH security", "developer productivity"]
+relatedPosts:
+  - "/en/white-paper/2"
+  - "/en/white-paper/5"
+  - "/en/white-paper/6"
+---
+
+
+# Preface
+What is the biggest issue with traditional access control solutions? Most solutions require users to install a separate agent on their PC and connect to servers exclusively through a GUI-based interface. This approach significantly disrupts the workflow of developers and system administrators who are accustomed to a CLI environment. If they are forced to abandon their efficient workflows—leveraging shortcuts and scripts—in favor of GUI-based access, productivity is bound to suffer.
+
+To address this problem, QueryPie developed Seamless SSH Connection. This approach ensures security while allowing users to maintain their familiar SSH workflows. By making minor modifications to the SSH configuration file, users can apply access control without sacrificing their preferred CLI environment—this is the core advantage of our solution.
+
+```sh
+Host *.querypie.io
+  Port 22
+  ProxyCommand qpa ssh %r %h %p
+```
+
+Once this configuration is set up, users can connect to target servers using the same SSH commands they are already familiar with:
+
+```sh
+ssh ryan@test.querypie.io
+```
+
+# How Seamless SSH Connection works
+To understand how Seamless SSH Connection functions, it's essential to first grasp the concept of SSH ProxyCommand.
+
+## SSH ProxyCommand
+`ProxyCommand` is a method that routes SSH connections through an intermediary server before reaching the final destination. This feature can be specified in the SSH client configuration, where the SSH client executes the command set in ProxyCommand to establish communication with the target server.
+<br />
+
+**How It Works**
+1. **User Execution**: When a user attempts to connect to a remote server via SSH, the SSH client first checks whether a `ProxyCommand` is configured. If a `ProxyCommand` is set, the SSH client executes the specified command before establishing a direct connection to the target server.
+
+2. **Data Stream Connection**:
+- **stdin**: The SSH client sends data through the stdin of the `ProxyCommand` process. This data can include user commands or file transfer requests.
+- **stdout**: The `ProxyCommand` process manages the connection to the target server and relays the response back to the SSH client via stdout. This allows the user to see the server’s output as if they were directly connected.
+
+3. **Bidirectional Data Transmission**: `ProxyCommand` transmits user input from stdin to the target server. The target server's response is received and returned to the SSH client via stdout. This effectively establishes a bidirectional communication channel between the SSH client and the target server.
+
+<br />
+**Special Variables Used in ProxyCommand**
+- `%r` → The username specified in the SSH command.
+- `%h` → The target server address specified in the SSH command.
+- `%p` → The target server port specified in the SSH command (default: 22, unless overridden with -p). 
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/13/2-shell-command.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+
+## QueryPie Agent - CLI Extension
+In Seamless SSH Connection, the `qpa` command used in ProxyCommand is an extended CLI version of the QueryPie Agent, a client-side agent that enables SSH access through QueryPie. The SSH client’s connection is tunneled through the Agent, allowing user authentication via the QueryPie system.
+
+
+
+<br />
+**Connection Structure**
+ SSH Client → Agent CLI → ARiSA Proxy Server → Target Server
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/13/3-architecture.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+
+**Component Overview**
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Component </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Description </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>SSH</Table.Td>
+            <Table.Td>OpenSSH client.</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Agent - CLI (`qpa`)</Table.Td>
+            <Table.Td>A shell command executed via ProxyCommand. <br />
+*Referred to as SubProcess within the agent, it implements IPC communication for messaging with MainProcess.*</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Agent - Main</Table.Td>
+            <Table.Td>A user agent that handles login, tunneling, and UI-based execution.</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>API</Table.Td>
+            <Table.Td>Implements and provides services defined in agentService.proto.</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>TargetServer</Table.Td>
+            <Table.Td>The destination server (e.g., `test.querypie.com`)</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+# Usage Example
+With Seamless SSH Connection, server developers can continue using familiar techniques even in an environment with access control solutions.
+
+For example, suppose you need to apply a specific configuration to test servers numbered 1 through 10. Manually entering SSH commands and executing them one by one on each server would be inefficient. Instead, you can use the following method to execute the same command across multiple servers simultaneously.
+
+## Executing Commands on Multiple Servers Using iTerm2
+In iTerm2, you can split the terminal into multiple panes and execute commands simultaneously across them:
+- Press `Cmd + D` to split the window vertically.
+- Press `Cmd + Shift + D` to split the window horizontally.
+- Press `Option + Cmd + I` to enable synchronized input, allowing you to type the same command in all panes at once.
+
+This feature helps streamline command execution across multiple servers with minimal input, significantly improving efficiency.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/13/4-iterm2.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+
+With QueryPie’s Seamless SSH Connection feature, you can continue using these existing methods without any changes in usability.
+
+## Writing Scripts for Multiple Server Connections
+If you are not using iTerm2 as your terminal or prefer scripting for automation, you can write a script to connect to multiple servers and execute commands efficiently. This approach is particularly useful when managing multiple servers simultaneously in a more programmatic way.
+
+```sh
+#!/bin/bash
+# List of target servers
+SERVERS=("test1.querypie.io" "test2.querypie.io" "test3.querypie.io" "test4.querypie.io")
+# User account
+USER="ryan"
+# Commands to execute on each server
+COMMANDS=(
+  "echo 'TMOUT=300' >> ~/.bashrc"
+  "source ~/.bashrc"
+)
+# Connect to each server and execute commands
+for SERVER in "${SERVERS[@]}"; do
+  echo "Connecting to ${SERVER}..."
+  ssh "${USER}@${SERVER}" <<EOF
+    $(printf "%s\n" "${COMMANDS[@]}")
+EOF
+  if [ $? -eq 0 ]; then
+    echo "Commands executed successfully on ${SERVER}"
+  else
+    echo "Failed to execute commands on ${SERVER}"
+  fi
+done
+```
+This script connects to test servers **1 through 4** and modifies the timeout settings. Since the script executes the commands automatically on all servers, there is no need to open an interactive shell for each server, making the process much more efficient.
+
+## Connecting to Multiple Servers Simultaneously Using tmux
+You can also use [tmux-cssh](https://github.com/zinic/tmux-cssh), an open-source tool, to connect to multiple servers at the same time. With this tool, you can run the following command to establish simultaneous SSH sessions:
+
+```sh
+tmux-cssh -ns -ss
+'ssh -oProxyCommand='\''qpa ssh %r %h %p'\''
+-oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null'
+-u admin test{001..01}.querypie.io
+```
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/13/5-tmux.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+
+# Conclusion
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/13/1-main.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+Implementing an access control solution is a crucial step in strengthening an organization's security, but it should not come at the cost of user experience. Traditional GUI-based access control solutions have enhanced security but often hindered the productivity of developers and system administrators who rely on CLI-based workflows.
+
+QueryPie’s Seamless SSH Connection achieves both **security** and **usability**. It ensures secure access control while allowing users to continue utilizing their familiar SSH workflows and tools—such as iTerm2 multi-pane sessions, automation scripts, and tmux—without disruption. The ability to maintain existing workflows with just a simple configuration change offers significant productivity benefits for the entire organization.
+
+By striking the right balance between security and usability, QueryPie provides a seamless, efficient working environment, ensuring that access control solutions do not interfere with users' daily operations.
+
+

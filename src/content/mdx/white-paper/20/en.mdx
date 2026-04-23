@@ -1,0 +1,487 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "Beyond MCP to MCPS: The Need for a Secure Protocol for Enterprise AI"
+description: "MCP(Model Context Protocol) is innovative, but it has a critical weakness for use in enterprise environments. In this article, we will look at the basic concepts and current status of MCP, and deeply analyze the security issues that arise in enterprise environments."
+date: "2025-04-30"
+author: "brant"
+ogImage: "public/white-paper/20/thumbnail.png"
+keywords: ["MCP","QueryPie MCPS","MCPS","Model Context Protocol","Enterprise AI Security","Secured Model Context Protocol","Build Safe AI Foundation","enterprise AI security","Cloud Audit Logs","AI Action Control","AI Compliance"]
+relatedPosts:
+  - "/en/white-paper/17"
+  - "/en/white-paper/18"
+  - "/en/white-paper/19"
+---
+# Introduction: The Innovation of MCP—Powerful, But Not Enterprise-Ready
+
+Model Context Protocol (MCP) has recently emerged as a significant breakthrough in the AI space.[1] Designed as an open standard to connect AI assistants with the systems where data resides—such as content repositories, business tools, and developer environments—MCP aims to help models generate more accurate and contextually relevant responses.[1] Much like how USB-C provides a standardized connection for a wide range of peripherals, MCP offers a unified interface for linking AI models to diverse data sources and tools. It’s even been dubbed the “USB-C for AI”.[4] Early adopters such as Block, Apollo, Zapier, and Cursor have already begun integrating MCP, signaling rapid ecosystem growth.[1]
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/20/1-what-is-mcp-and-mcp-server.png"
+        alt="MCP Architecture Overview"
+        caption="MCP Architecture Overview"
+    />
+</Box>
+
+Despite its innovation, MCP has a critical shortcoming when it comes to enterprise adoption: it lacks built-in security. Like the early days of HTTP, MCP currently provides no native support for authentication, authorization, encryption, or audit logging—features that are essential for enterprise environments handling sensitive data under strict regulatory requirements. This security gap is the single largest barrier preventing MCP from gaining traction in enterprise deployments.
+This paper examines the foundational structure and current state of MCP, and then takes a deeper look at the security risks it poses in enterprise contexts. Drawing inspiration from the evolution of HTTP to HTTPS, we make the case for a secured extension—**MCPS (Model Context Protocol Secured)**—and explore what such a protocol would look like, how it could be implemented, and the benefits and challenges it would bring.
+
+# In-Depth Analysis of MCP: Concept, Architecture, and Current State
+
+The Model Context Protocol (MCP) is an open standard proposed by Anthropic to standardize how AI applications—such as chatbots, IDE assistants, and custom agents—interact with external tools, data sources, and systems.[1] By replacing fragmented integration methods with a single protocol, MCP allows developers to build against a consistent interface, eliminating the need to maintain separate connectors for each data source.[1]
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/20/2-how-does-mcp-work.png"
+        alt="How MCP Works"
+        caption="How MCP Works"
+    />
+</Box>
+
+MCP follows a client-server architecture[2]:
+* **Host:** The application that the user interacts with (e.g., Claude Desktop, Cursor IDE, custom AI agents).[2] The host manages multiple client instances and is responsible for enforcing security policies such as user permissions and consent.[3]
+* **Client:** Resides within the host application and manages a one-to-one connection with a specific MCP server.[2]
+* **Server:** A lightweight program that exposes the functionality of an external system (such as APIs, databases, or local files) in compliance with the MCP specification.[2] MCP servers can be implemented in languages like Python, TypeScript, and more.[1]
+
+MCP supports two primary transport methods for client-server communication[2]:
+* **stdio (Standard Input/Output):** Used when both the client and server run on the same machine. This method is simple and effective for local integrations, such as accessing files from a local system.[2]
+* **HTTP + SSE (Server-Sent Events):** Enables clients to connect over HTTP, while the server maintains a persistent connection to push messages (events) to the client using the SSE standard.[2]
+
+MCP defines three key primitives that structure its functionality[2]:
+* **Tools:** Functions that the LLM can invoke to perform specific tasks (model-level control). This is similar to function calls, such as querying a weather API.[2]
+* **Resources:** Data sources that the LLM can access (application-level control). These resemble REST API GET endpoints and are read-only, offering data without side effects.[2]
+* **Prompts:** Predefined templates that guide how tools or resources should be used (user-level control).[2]
+
+MCP is built on proven technologies such as the Language Server Protocol (LSP) and JSON-RPC 2.0, and is published as an open specification with detailed documentation.[1] Adoption is growing, with early support from companies and tools like Block, Apollo, Zed, Replit, Codeium, Sourcegraph, Zapier, Cursor, and Claude Desktop.[1] However, MCP remains in its early development stages. Some components are not yet fully implemented—for example, resource access is not supported in Cursor—and the protocol itself continues to evolve rapidly.[12]
+
+The design choices of MCP carry several critical implications from a security standpoint, especially when considered for enterprise use.
+
+**First, each primitive in MCP—tools, resources, and prompts—is controlled by a different actor, which introduces fundamental differences in trust boundaries and risk levels.**[2] Tools, which are executed by the AI model itself, pose the highest level of security risk due to the unpredictable nature of LLMs. These should be governed by the strictest access policies and enforcement mechanisms.[13] In contrast, resources—typically read-only data endpoints managed by the application—carry lower execution risk but can raise concerns around data privacy and leakage.[13] Prompts, which are under user control, represent yet another layer of trust and behavioral unpredictability. A secure extension of MCP—referred to in this paper as MCPS (Model Context Protocol Secured)—must recognize these functional distinctions and apply differentiated security policies accordingly. For example, tools may require explicit authorization workflows, while resource endpoints may benefit from data masking or filtering mechanisms.
+
+**Second, the choice of transport method (stdio vs. HTTP + SSE) has direct security implications that the current MCP specification does not fully address.** While stdio is used for local, intra-process communication—typically within a trusted execution boundary—HTTP + SSE crosses network boundaries and thus demands a much stronger security posture.[2] The MCP specification defines the messaging structure using JSON-RPC, but it does not enforce transport-layer security protocols.[13] As a result, servers that use HTTP + SSE may be exposed to network-based threats if they are not placed behind security-enhancing components like TLS-enabled reverse proxies.[14] MCPS must prioritize secure transport, particularly for networked deployments using HTTP + SSE, by embedding security requirements directly into the protocol.
+
+**Third, although MCP aspires to become a universal standard for AI integration[1], it remains in an early and actively evolving state. Current implementations exhibit inconsistencies and limited feature support across platforms[12], suggesting that fragmentation and interoperability challenges may already be emerging.** For MCP to fulfill its vision as “USB-C for AI”[4], it must not only achieve security standardization but also ensure consistent implementation and support for all core protocol features across the ecosystem. MCPS should be designed with these dynamic realities in mind, anticipating future protocol evolution and ecosystem-wide adoption.
+
+# Security Weaknesses of MCP in Enterprise Environments
+
+The MCP specification itself acknowledges the potential security risks stemming from arbitrary data access and remote code execution.[13] However, it does not enforce security principles at the protocol level. Instead, it explicitly states that the responsibility for building secure applications falls on the implementers—host, client, and server developers.[13]
+The spec outlines several recommended security principles[13], but they are suggested as **SHOULDs**, not mandated **MUSTs**, leaving critical controls optional:
+* **User Consent and Control:** Users should give explicit consent and retain control over any data access or operation performed. The specification encourages clear UI presentation to inform users of what will happen.
+* **Data Privacy:** Hosts should obtain explicit consent before exposing user data to the server. Resource data must not be sent elsewhere without user approval, and appropriate access controls should be in place.
+* **Tool Safety:** Tools, which represent arbitrary function calls, are particularly risky. Any tool descriptions originating from untrusted servers should be treated as untrusted. Hosts are encouraged to seek user approval before invoking tools.
+* **LLM Sampling Control:** All LLM-generated responses should be explicitly approved by the user, with visibility into the prompt and result.
+
+Despite these guidelines, the following **critical enterprise-grade security features are missing from the protocol layer:**
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/20/3-mcp-without-security.png"
+        alt="Major Vulnerabilities When MCP Security isn't implemented"
+        caption="Major Vulnerabilities When MCP Security isn't implemented"
+    />
+</Box>
+
+* **Authentication:** MCP currently lacks a built-in, enforceable mechanism to verify the identity of either party when a client connects to a server or vice versa—especially across network boundaries. How can a server confirm that a connecting client is legitimate? How can a client trust the identity of a server it is communicating with?
+* **Authorization:** While user consent for tool invocation is recommended[13] (and partially implemented in some hosts[12]), MCP does not provide a standardized mechanism for fine-grained access control. There is no protocol-level support for determining whether a specific user or client is allowed to access a given resource or invoke a tool with specific parameters.
+* **Data Encryption (Confidentiality & Integrity):** MCP lacks a built-in encryption feature for data transmitted over networks, particularly via HTTP+SSE transport. This leaves data vulnerable to interception or tampering—similar to the risks that existed with early HTTP.[15].
+* **Logging and Auditing:** There is no standardized mechanism for capturing and recording security-related events—such as connection attempts, authentication successes or failures, authorization decisions, tool executions, or errors—for monitoring, forensic analysis, or compliance purposes.
+
+This absence of standardized, protocol-level security enforcement inevitably leads to inconsistent security implementations across MCP adopters. For example, Cursor manages API keys via environment variables[12] and implements a workflow that requires user approval before executing tools.[12] However, these are implementation-level controls—not guarantees provided by the protocol. Other hosts might not implement these measures at all, and some, like Cursor’s “Yolo mode”[12], even offer explicit bypasses of such recommended safeguards. Similarly, Phil Schmid’s reference to OAuth 2.0[8] illustrates a potential pattern but not a core requirement of the MCP protocol.
+
+This technical gap translates into very real business risks:
+* **Data Exposure:** Sensitive enterprise data—whether in resource content or tool parameters/responses—could be transmitted unencrypted over the network.[15]
+* **Unauthorized Access or Execution:** Malicious clients may connect to MCP servers, or unauthenticated servers may serve malicious tools or data. LLMs could be tricked into performing unauthorized operations via compromised tools.
+* **Regulatory Noncompliance:** The absence of encryption, authentication, and auditing features makes it difficult to meet the compliance requirements of GDPR, HIPAA, PCI-DSS, and similar frameworks.[19]
+* **Traceability and Accountability Limitations:** Without standardized and trustworthy logs, investigating security incidents or tracing the origin of operations becomes nearly impossible.
+* **Reputation Risk:** Any security breach stemming from these gaps can significantly damage brand trust and public image.[21]
+
+While MCP's emphasis on ‘user consent’[13] is a vital aspect of user-centric security, it largely addresses interactions between end users and host applications. What remains overlooked are machine-to-machine (M2M) security requirements—especially those critical in enterprise environments. For instance, how does the server know it's communicating with a legitimate client, and how does the client verify the server's authenticity? How is their communication protected in transit? These foundational network security issues—identity verification and traffic encryption—are not directly addressed by MCP's current principles or specifications. This gap is particularly problematic when using HTTP+SSE as a transport mechanism, which inherently crosses trust boundaries. Enterprise-grade security demands controls at both the user level and the system/network level—and MCP currently lacks coverage for the latter.
+
+Furthermore, MCP documentation advises that tool descriptions “should not be trusted unless obtained from a trusted server”.[13] This introduces a classic bootstrapping dilemma: without protocol-level authentication, how can trust in the server be established in the first place? The guidance implicitly assumes the existence of a trust mechanism, but in the absence of enforced server authentication (e.g., through something like HTTPS certificates), the client has no reliable way to verify a server’s identity or the integrity of the tool descriptions it provides. This creates a circular dependency—trust is required to establish trust—which MCP currently does not help resolve.
+
+Ultimately, MCP's security model relies on individual implementors to “do the right thing”[13], mirroring the early shortcomings of Internet protocols that deferred security responsibility to application developers. This approach inevitably results in inconsistent and unreliable security postures—precisely the opposite of what a standardized, interoperable ecosystem like MCP aims to achieve.[1] History shows us that relying solely on best practices without enforcement fails more often than it succeeds—whether in early HTTP, IoT protocols, or cloud API designs.[21]. Standardization efforts like HTTPS succeeded because they established baseline, enforced security expectations. By contrast, MCP’s current posture effectively assumes that both vendor A’s client and vendor B’s server will implement compatible and sufficiently robust security controls—an assumption that weakens the protocol’s plug-and-play vision[6] and becomes a major barrier for enterprises seeking predictable and trustworthy security.
+
+
+# Lessons from History: How the Web Secured Itself (HTTP → HTTPS)
+
+The World Wide Web (WWW) and HTTP were invented between 1989 and 1991 by Tim Berners-Lee at CERN.[25] The original purpose was simple: to enable researchers to share hypertext documents over a network.[26] Early versions like HTTP/0.9 were extremely lightweight and minimal in design.[25]
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/20/4-http-to-https.png"
+        alt="HTTP vs HTTPS: Basic of Transport Layer Security"
+        caption="HTTP vs HTTPS: Basic of TLS (https://sslinsights.com/http-vs-https/)"
+    />
+</Box>
+
+However, early HTTP operated as a plaintext protocol.[15] As the web expanded beyond simple document sharing into more dynamic and sensitive use cases, this design led to several critical vulnerabilities:
+* **Eavesdropping (Loss of Confidentiality):** Anyone monitoring the network could read transmitted data—including passwords, form submissions, and personal information.[15]
+* **Tampering (Loss of Integrity):** Data could be modified in transit, allowing attackers to inject malicious code or unauthorized advertisements into legitimate traffic.[16]
+* **Lack of Authentication:** There was no built-in way to verify the identity of a web server, exposing users to spoofing attacks, man-in-the-middle (MitM) attacks, and other forms of routing-based threats like DNS hijacking, BGP hijacking, or domain impersonation.[16]
+
+As the web evolved into a platform for e-commerce and sensitive data exchange, HTTP's lack of security became unacceptable.[17] The need for secure and trustworthy communication grew urgent.
+
+The industry’s response was the development of SSL/TLS and HTTPS. Netscape introduced SSL (Secure Sockets Layer) around 1994–1995[31], which was later standardized by the IETF as TLS (Transport Layer Security).[31] HTTPS was built by layering HTTP on top of SSL/TLS.15 The two protocols even operate on different ports: HTTP on port 80, and HTTPS on port 443.[18]
+
+SSL/TLS protects web communication through three core mechanisms:
+* **Encryption (Confidentiality):** 핸During the handshake process, SSL/TLS uses asymmetric cryptography (public/private key exchange) to securely negotiate a shared symmetric session key. All subsequent HTTP traffic is encrypted using this session key[15], rendering any intercepted data meaningless—just random characters without decryption.[16]
+* **Authentication (Server Identity Verification):** The server presents an SSL/TLS certificate issued by a trusted Certificate Authority (CA).[15] Browsers validate this certificate to confirm the server’s identity and domain ownership.[15] This process is visually represented by the padlock icon in the browser’s address bar.[15]
+* **Integrity:** SSL/TLS uses message authentication codes (MACs) within the encryption layer to ensure that the data has not been tampered with in transit.[36]
+
+As a result, HTTPS has become the de facto standard for web communications.[30] It has built user trust[15], enabled secure online transactions and sensitive data exchange, and even influenced SEO rankings.[15] While HTTP itself has evolved through versions 1.1, 2, and 3, HTTPS continues to be layered across all of them.[15]
+
+The transition from HTTP to HTTPS was neither immediate nor without challenges. It required the development of foundational protocols like SSL/TLS, the global rollout of certificate authority (CA) infrastructure, updates to browser and server software, and the resolution of initial concerns around implementation complexity and cost.[31] This suggests that the path toward MCPS will also face obstacles that go beyond purely technical considerations.
+
+The core value of HTTPS lies not just in encryption, but in its fusion with **trusted third-party authentication** through CAs. This combination is what enabled confidence in handling sensitive online interactions.[15] Similarly, for MCPS to succeed, it will likely require not just encryption layered onto MCP, but a robust mechanism to establish **trust between clients and servers**—perhaps through mutual TLS or other forms of entity-level validation (see Section V).
+
+The standardization process itself was critical to HTTPS adoption. Moving SSL into IETF and evolving it into TLS was essential for broad uptake and interoperability.[31] MCPS will also require a formal, community-driven standardization process to transcend individual implementations and achieve the interoperability and ecosystem-wide adoption that MCP aspires to.[1]
+
+
+# MCPS Initiative: A Security Protocol for Enterprise AI
+
+We now formally propose MCPS (Secured Model Context Protocol) as an essential evolution of MCP. Drawing from the lessons of HTTPS, MCPS must be designed from the ground up to embed enterprise-grade security requirements.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/20/5-https-and-mcps.png"
+        alt="Beyond MCP to MCPS: Inevitable Evolution of Security"
+        caption="Beyond MCP to MCPS: Inevitable Evolution of Security"
+    />
+</Box>
+
+**MCPS Objective:** To establish a trusted baseline for enterprise environments by providing confidentiality, integrity, and strong authentication for all MCP communications.
+
+MCPS must integrate the following essential security features directly at the protocol level to meet the requirements of enterprise environments:
+
+**1. Mutual Authentication (Client & Server):** 
+  - **Significance:** Unlike web browsing where server authentication is often sufficient, MCP involves bidirectional interactions between potentially sensitive enterprise systems (servers) and powerful AI clients. Both sides must validate each other’s identity to prevent unauthorized access, spoofing, or malicious tool/resource injection—particularly important in B2B or internal enterprise scenarios.[20]
+  - **Proposed Mechanism**: **Mutual TLS (mTLS)**: MCPS should mandate mutual TLS, where both the client and server present certificates for mutual verification.[19] Unlike standard TLS, which only authenticates the server, mTLS ensures two-way trust[50] and significantly enhances protection against man-in-the-middle (MitM) attacks, spoofing, and credential stuffing, while also strengthening API security.[19] This approach requires managing client-side certificates, and in enterprise settings, may involve the use of internal certificate authorities (CAs) or trusted certificate stores to maintain secure and scalable identity verification.[20]
+
+**2. Mandatory Transport Encryption (Confidentiality & Integrity):**
+  - **Necessity:** All MCP data—including requests, responses, tool parameters, and resource content—must be protected from eavesdropping and tampering, especially when transmitted over the network via HTTP+SSE.
+  - **Proposed Mechanism: TLS (Current Secure Versions): MCPS must enforce the use of up-to-date TLS versions (e.g., TLS 1.2 or TLS 1.3[31]) for all network-based communications. This leverages the mature security properties of TLS[15], including strong encryption suites and, ideally, forward secrecy.[35]
+
+**3. Robust Authorization and Access Control:**
+  - **Beyond Authentication:** Knowing who is connecting is not enough—MCPS must also define what actions those entities are allowed to perform. This is critical considering the potential impact of tool-triggered AI operations.
+  - **Proposed Integration Points:** MCPS should standardize methods for conveying authorization context or integrating with existing enterprise IAM systems. Options may include:
+    + Passing standardized tokens (e.g., OAuth 2.0 Bearer tokens, JWT) securely within MCPS channels—drawing on best practices for securing RPCs.[53] These tokens can ride over mTLS-protected connections.
+    + Deriving authorization decisions from attributes in client certificates (used in mTLS).
+    + Defining protocol-level roles or permission scopes per connection/tool/resource (more complex).
+
+**4. Comprehensive Audit Logging:**
+   - **Necessity:** Security monitoring, incident response, compliance reporting, and accountability all rely on detailed and consistent audit records.
+   - **Proposed Requirements:** MCPS should define a standard set of auditable events and a minimum required schema for log data (e.g., timestamp, source/destination identifiers, event type such as connection, auth success/failure, tool invocation, resource access, outcome, and relevant parameters). Logs should cover the entire lifecycle of an MCPS connection and all critical operations within it. See OWASP Top 10 for the importance of secure logging.[56]
+
+Requiring mTLS in MCPS fundamentally shifts the trust model from “implementor discretion” (as with current MCP[13])to a protocol-enforced, verifiable identity model—critical for enterprise adoption.[13] While HTTPS relies on server certificates[16], mTLS adds client-side authentication[20], which is essential when both the AI client and the server-side data sources are potentially sensitive or critical systems. For enterprise systems interacting through MCP—where both the AI client and the server-side data sources may be highly sensitive or mission-critical—verifying both ends of the connection is essential. By mandating mTLS within MCPS, we directly address the authentication gap identified in Section III and establish a strong identity foundation necessary for downstream authorization decisions.
+
+Integrating authorization into MCPS, however, presents a significant challenge. Authorization logic is often highly contextual and deeply integrated with existing enterprise identity and access management (IAM) systems. Prior discussions around securing RPC calls with OAuth or JWT in conjunction with TLS[53]highlight a practical model: TLS or mTLS handles secure transport, while tokens handle application-level authorization. Given the diversity of enterprise authorization requirements, it would be more feasible and flexible for MCPS to mandate secure transport using TLS/mTLS and standardize the transmission of existing authorization tokens (such as JWT) over that channel, rather than attempting to define a new, one-size-fits-all authorization framework at the protocol level. MCPS should focus on enabling secure, interoperable token delivery rather than reinventing enterprise-specific access control.
+
+Defining standardized audit logging within the MCPS protocol specification is also critical for maintaining consistent visibility across heterogeneous client and server implementations. OWASP ranks “Security Logging and Monitoring Failures” among the Top 10 most critical security risks[56], and highlights the importance of detailed logging in sensitive applications.[57] Relying on implementation-specific logging leads to inconsistent formats and data quality, undermining effective security monitoring. If MCPS aims to become an enterprise-grade protocol, it must define a minimum set of loggable events and required data fields within the protocol specification itself. This ensures that any compliant implementation—regardless of vendor—delivers a baseline level of auditability. This supports not only functional interoperability but also operational security interoperability.
+
+
+# Pathways to Implementation: Potential Strategies for Building MCPS
+
+The core challenge lies in how to effectively integrate or layer the essential security components—mTLS, TLS encryption, authorization context, and logging—into or alongside the existing MCP protocol.
+
+## Approach 1: Layering MCP Over TLS/mTLS (“The HTTPS Model”)
+
+* **Description:** This approach treats the existing MCP protocol—specifically JSON-RPC messages over stdio or SSE—as an application-layer payload. For network-based communication (e.g., HTTP+SSE), it mandates that the underlying HTTP connection must be secured with TLS (for server authentication) or, ideally, with mTLS (for mutual authentication). This mirrors how HTTPS wraps HTTP in TLS.
+* **How It Works:** A standard TLS/mTLS handshake establishes a secure channel before any MCP message is transmitted over the network. For local stdio communication, this approach may be less applicable or may require alternative security mechanisms, potentially relying on OS-level access controls.
+* **Use of Existing Technology:** This model leverages well-established TLS/mTLS libraries and infrastructure.[55] Reverse proxies (e.g., Nginx[14]) can be deployed in front of MCP servers to terminate TLS/mTLS connections.
+* **Authorization and Logging:** Authorization tokens (e.g., JWTs) can be transmitted via HTTP headers (such as Authorization: Bearer...) within the secured TLS tunnel.[53] Logging responsibilities are split across the TLS/mTLS transport layer (for connection and authentication events) and the MCP application layer (for tool/resource interactions), requiring correlation for full traceability.
+
+## Approach 2: Embedding Security Directly into the MCP Protocol Specification
+
+* **Description:** This strategy modifies the core MCP protocol specification (JSON-RPC messages and state machine) to include native security mechanisms.
+* **How It Might Work:** This would involve defining new MCP message types for authentication handshakes (potentially with certificate metadata or challenge-response flows), session-level encryption negotiation, standardized authorization token transmission, and log event formatting. This could be inspired by secure RPC protocols but must remain compatible with MCP’s JSON-RPC architecture.
+* **Potential Benefits:** This approach would tightly integrate security with protocol logic, potentially enabling optimized handshakes and unified security handling across both stdio and network transport scenarios.
+* **Challenges:** It would require significant standardization efforts, could break backward compatibility with current MCP implementations, and may risk “reinventing the wheel” compared to reusing existing TLS/mTLS stacks.
+
+## Approach 3: The Hybrid Model
+* **Description:** This combines elements of both approaches. For example, it could enforce TLS/mTLS at the transport layer (as in Approach 1), while also extending the MCP protocol to define standard messages for richer authorization tokens or logging data (as in Approach 2).
+* **Rationale:** This hybrid model takes advantage of robust, widely adopted transport security mechanisms like TLS/mTLS, while enhancing the MCP protocol to better address application-layer security needs such as fine-grained access control and auditability.
+
+## Comparative Table: MCPS Implementation Strategies
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Strategy </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Approach 1: Layered (MCP over TLS/mTLS) </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Approach 2: Protocol Augmentation </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Approach 3: Hybrid </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **Description** </Table.Td>
+            <Table.Td>Encapsulate MCP with standard TLS/mTLS</Table.Td>
+            <Table.Td>Integrate security mechanisms into MCP spec</Table.Td>
+            <Table.Td>TLS/mTLS transport + standardized MCP auth/log messages</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **Encryption** </Table.Td>
+            <Table.Td>Standard TLS</Table.Td>
+            <Table.Td>Custom/embedded encryption logic</Table.Td>
+            <Table.Td>Standard TLS</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **Authentication** </Table.Td>
+            <Table.Td>TLS/mTLS certificates</Table.Td>
+            <Table.Td>Protocol-defined mechanism</Table.Td>
+            <Table.Td>TLS/mTLS certificates</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **Authorization** </Table.Td>
+            <Table.Td>External (e.g., tokens in HTTP headers)</Table.Td>
+            <Table.Td>Built-in protocol mechanisms</Table.Td>
+            <Table.Td>Standardized token delivery within MCP</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **Logging** </Table.Td>
+            <Table.Td>Separate TLS and app logs (requires correlation)</Table.Td>
+            <Table.Td>Integrated protocol-level logging</Table.Td>
+            <Table.Td>TLS logs + standardized MCP log messages</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **Advantages** </Table.Td>
+            <Table.Td>Leverages existing tech/infrastructure, faster standardization?</Table.Td>
+            <Table.Td>Tight integration, unified transport security</Table.Td>
+            <Table.Td>Best of both worlds? Balanced effort</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **Drawbacks** </Table.Td>
+            <Table.Td>Feels “bolted on,” unclear stdio handling</Table.Td>
+            <Table.Td>Breaks compatibility, high effort, design complexity</Table.Td>
+            <Table.Td>Added complexity, still requires effort</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **Ecosystem Impact** </Table.Td>
+            <Table.Td>Low barrier to entry; TLS/mTLS library support required</Table.Td>
+            <Table.Td>Full client/server rewrite likely needed</Table.Td>
+            <Table.Td>Requires TLS/mTLS + partial protocol rework</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray"> **Primary References** </Table.Td>
+            <Table.Td>[14]</Table.Td>
+            <Table.Td>(Conceptual – little direct support)</Table.Td>
+            <Table.Td>(Conceptual hybridization)</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+The "layered" approach (MCP over TLS/mTLS) is arguably the most practical and best aligned with established internet security practices, such as HTTPS. Despite some perceived inelegance, it likely represents the fastest path to a secure solution. HTTPS, after all, layers HTTP over TLS[15], and many existing RPC security discussions center around adding TLS.[14] This approach leverages decades of development and infrastructure built around TLS and PKI. While the "protocol augmentation" model (Approach 2) may appear cleaner, the effort, risk, and time required to design, standardize, and implement entirely new security mechanisms within the MCP spec could significantly delay the availability of a secure solution. From a pragmatic standpoint, building on proven foundations is a wiser route.
+
+Regardless of the implementation strategy, managing the keys and certificates required for mTLS[20] may pose an even greater operational challenge for organizations adopting MCPS than the protocol design itself. mTLS requires both client and server to possess valid certificates[44], and the processes of generating, managing, validating, renewing, and revoking those certificates represent essential steps and potential pain points.[51] Documentation, such as that detailing how to implement mTLS with OpenSSL[20], outlines this complexity. Establishing such infrastructure—including a possible internal CA—and scaling the deployment and management of client certificates across many AI agents (or IoT-like use cases) introduces significant operational overhead that must be factored into the overall protocol planning.
+
+The choice of implementation strategy directly impacts the standardization process and timeline. A layered model may allow for faster standardization by referencing existing TLS/mTLS specifications, whereas protocol augmentation would require defining entirely new security mechanisms within the MCP spec. The hybrid model lies somewhere in between. Given the well-known challenges of achieving community consensus—especially evident in IoT protocol security standardization efforts[21] —there is a strong likelihood that leveraging existing standards will be the preferred path whenever feasible.
+
+
+# Benefits: The Value Proposition of MCPS
+
+By embedding essential security features, MCPS directly addresses the critical gaps identified in Section III and enables the deployment of MCP in sensitive enterprise environments where trust, security, and compliance are non-negotiable.[3]
+
+Mandatory encryption and authentication—especially through mutual TLS (mTLS)—offer verifiable assurances of data confidentiality, integrity, and participant identity. This establishes trust between interacting systems and the organizations operating them, similar to the trust signals enabled by HTTPS.[15]
+
+MCPS capabilities directly support regulatory and industry compliance requirements that demand strong authentication, encryption, and audit traceability—such as HIPAA, GDPR, and PCI-DSS.[19] This helps reduce risk exposure and simplifies audit preparation.
+
+With MCPS, organizations can confidently use MCP for applications that involve sensitive data (e.g., financial records, customer PII, proprietary code) or critical operations (e.g., triggering financial transactions, modifying production systems)—scenarios that are too risky under today’s insecure MCP.
+
+A standardized security layer across implementations ensures a consistent baseline of security, promoting safer and more reliable interoperability than today’s fragmented landscape, where security is left to the discretion of individual implementers (as discussed in Section III). This consistency encourages broader, more confident adoption.
+
+While initial implementation may require effort, a standardized MCPS layer reduces long-term redundancy and the potential for error by eliminating the need for each developer or organization to build custom security overlays for MCP—just as developers don't need to re-implement TLS for every HTTPS-based application.
+
+The core value of MCPS lies not just in adding security features, but in standardizing them. This standardization is key to realizing MCP’s original promise: a trustworthy and interoperable ecosystem at scale.[1] As outlined in Section III, the lack of security standardization currently leads to fragmentation and risk. MCPS closes this gap by defining a minimum security baseline, ensuring that any standards-compliant client can safely interact with any standards-compliant server—delivering on interoperability in a way enterprises can trust. This goes beyond point-to-point solutions and strengthens security across the entire ecosystem.
+
+Moreover, MCPS could serve as a key enabler for more advanced, autonomous AI agents within the enterprise. Today, a lack of trust severely limits what agents are allowed to do via MCP. While MCP enables agent-driven actions[7], the security risks described in Section III—such as unauthorized execution and data leakage—lead enterprises to tightly restrict the autonomy of agents using the protocol. By providing strong identity verification and access control, MCPS gives enterprises the confidence to allow agents to perform more complex and higher-risk operations via the protocol, opening the door to more sophisticated AI-driven use cases.
+
+
+# MCPS Implementation: Key Challenges
+
+Despite its clear benefits, realizing MCPS as a secure, enterprise-grade protocol will require addressing several complex technical and operational hurdles.
+* **Technical Complexity and Performance Overhead:**
+  - Implementing strong security is inherently complex. It requires specialized knowledge in encryption, TLS/mTLS, certificate management, and secure protocol design.[56]
+  - Encryption/decryption processes and TLS/mTLS handshakes introduce latency and computational overhead.[22] This can be particularly significant in performance-sensitive AI applications or resource-constrained environments—such as edge devices or lightweight client/server deployments—mirroring challenges seen in IoT security.[21]
+* **Standardization Process and Community Alignment:**
+  - Defining MCPS will require consensus among key stakeholders—including Anthropic, OpenAI, tool vendors, and enterprise adopters—on security requirements and technical direction.[21]
+  - Striking the right balance between security rigor, ease of implementation, and backward compatibility (where applicable) is likely to be contentious. Achieving consensus in a rapidly evolving domain is notoriously difficult.[31]
+* **Ecosystem Adoption and Migration:**
+  - Upgrading the existing ecosystem—including MCP hosts, clients, and servers—to support MCPS will require considerable coordination and engineering effort.
+  - Clear migration strategies must be established, including transition periods, potential coexistence of insecure MCP implementations, and phased enforcement of MCPS compliance.[59]
+  - Adoption will hinge on the availability of developer-friendly libraries and SDKs[1] that provide seamless MCPS integration and usability.
+* **Operational Challenges (Especially Around mTLS):**
+  - **Certificate Management:** Provisioning, distributing, renewing, and revoking large volumes of client certificates can be complex and resource-intensive.[44] A robust PKI infrastructure—potentially involving internal certificate authorities—must be in place.
+  - **Trust Store Maintenance:** Servers will need to manage trust stores that contain either approved client CAs or individual client certificates, and keep them updated.[44]
+  - **Integration:** MCPS (particularly client identification via mTLS) must be integrated with existing enterprise IAM systems and security monitoring tools.
+* **Policy and Governance Considerations:**
+  - **Trust Model Definition:** Who is authorized to issue certificates? How is trust established and maintained between different organizations using MCPS?
+  - **Developer and Admin Guidance:** Clear operational policies and security best practices must be established to guide those implementing and managing MCPS.[23]
+  - **Misconfiguration Risks:** Even the most secure protocol can become a liability if implemented or configured incorrectly.[22]
+
+The operational complexity of managing mTLS certificates at scale[44]—particularly in large deployments—could become the most significant practical obstacle to broad MCPS adoption, exceeding even the challenges of protocol design. While protocol design and standardization (as discussed in Section VI) are complex, they are generally one-time or infrequent efforts. In contrast, managing the certificate lifecycle for potentially millions of AI clients or agents represents a continuous operational burden. The related steps are described in detail.[20] Enterprises will need scalable, automated solutions to handle this burden. Without robust PKI infrastructure and mature automation tools, the overhead of certificate management could significantly hinder MCPS adoption. Unless properly addressed through proven best practices and tooling, this operational barrier may delay or even derail enterprise rollout.
+
+The commonly referenced “constrained device” challenge in IoT security protocols[21]may also apply to some MCP deployment scenarios—such as lightweight clients or servers acting as tool or resource providers—which can influence the choice of cryptographic algorithms or implementation strategies for MCPS. Limited device capabilities (CPU, memory, bandwidth) are explicitly linked to the difficulty of implementing strong security like TLS in IoT.[21] While most MCP hosts or servers are expected to run on powerful systems, the flexibility of the protocol[2] allows for implementation even on less capable devices. MCPS must be designed with these use cases in mind and evaluate whether performance overhead[32] could become prohibitive. This may require careful selection of cryptographic suites[35] or optimized implementation strategies.
+
+To achieve MCPS standardization and adoption, strong leadership and collaboration will be required from key stakeholders such as Anthropic and OpenAI. MCP was introduced by Anthropic[1] and has been adopted by other companies like OpenAI.[7] The history of HTTPS/TLS shows that successful standardization has depended heavily on industry leaders and formal standardization bodies.[27] Likewise, MCPS must navigate similar technical and political challenges to lead ecosystem-wide adoption. Without such leadership, MCPS risks becoming a fragmented or niche solution, or spawning multiple competing “secure MCP” variants—ultimately undermining its goal of trusted interoperability.
+
+
+# Conclusion: Building a Secure Foundation for the Future of AI
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-paper/20/6-build-safety-for-AI-future.png"
+        alt="Advanced Security is Essential in the AI ​​Future"
+        caption="Advanced Security is Essential in the AI ​​Future"
+    />
+</Box>
+
+MCP holds tremendous potential as an integration protocol for AI, but in its current form, it has critical security gaps that make it insufficient for enterprise use. The evolution of HTTPS in securing the web clearly demonstrates the importance of standardized, built-in security.
+
+To address this, we have proposed MCPS—a secured extension of MCP that incorporates mutual authentication (mTLS), mandatory transport encryption (TLS), robust authorization mechanisms, and comprehensive audit logging as foundational elements. MCPS is not merely about adding security features; it is about creating a standardized layer of trust that enables a reliable, interoperable AI ecosystem.
+
+There are undeniable challenges ahead in developing, standardizing, and adopting MCPS. These include technical complexity, performance overhead, ecosystem alignment, and significant operational hurdles—particularly the burden of managing certificates for mTLS at scale.
+
+Nevertheless, robust and standardized security is not optional—it is essential. It is the prerequisite for MCP to be safely and fully realized in enterprise environments, where trust, compliance, and control are non-negotiable. Security must be embedded by design, not added as an afterthought.
+
+We therefore call on the AI and security community—including developers, vendors, standards bodies, and enterprises—to actively participate in the definition, standardization, and implementation of MCPS. Contributing to open source projects or joining emerging working groups are strong starting points.
+
+Embedding security at the core of foundational AI infrastructure like MCP is critical. It ensures that the next wave of AI integration is not only powerful but also safe and responsible. MCPS represents a pivotal step toward that secure future.
+
+<br />
+<br />
+
+<ButtonLink href="https://app.querypie.com" variant="black" size="lg">🚀 Get a glimpse of tomorrow’s secure MCP operations — start with AI Hub.</ButtonLink>
+
+# References
+[1] [Anthropic, “Introducing the Model Context Protocol,” News, Apr. 2025.](https://www.anthropic.com/news/model-context-protocol)
+
+[2] [Philschmid, “Model Context Protocol (MCP) an overview,” Blog, Apr. 2025.](https://www.philschmid.de/mcp-introduction) 
+
+[3] [OpenCV, “A beginners Guide on Model Context Protocol (MCP),” Blog, Apr. 2025.](https://opencv.org/blog/model-context-protocol/)
+
+[4] [Anthropic, “Model Context Protocol (MCP),” Documents, Apr. 2025.](https://docs.anthropic.com/en/docs/agents-and-tools/mcp) 
+
+[5] [Model Context Protocol, “Model Context Protocol: Introduction,” User Guide, Apr. 2025.](https://modelcontextprotocol.io/introduction) 
+
+[6] [Composio, “What is Model Context Protocol (MCP): Explained,” Blog, Mar. 2025.](https://composio.dev/blog/what-is-model-context-protocol-mcp-explained/) 
+
+[7] [Zapier, “What is MCP (Model Context Protocol)?,” Blog, Apr. 2025.](https://zapier.com/blog/mcp/) 
+
+[8] [Builder.io, “What is the Model Context Protocol (MCP)?,” Blog, Apr. 2025.](https://www.builder.io/blog/model-context-protocol) 
+
+[9] [Descope, “What Is the Model Context Protocol (MCP) and How It Works,” Blog, Apr. 2025.](https://www.descope.com/learn/post/mcp)
+
+[10] [OpenAI, “Model context protocol (MCP),” OpenAI Agent SDK, Apr. 2025.](https://openai.github.io/openai-agents-python/mcp/)
+
+[11] [.NET, “Build a Model Context Protocol (MCP) server in C#,” Blog, Apr. 2025.](https://devblogs.microsoft.com/dotnet/build-a-model-context-protocol-mcp-server-in-csharp/)
+
+[12] [Cursor, “Model Context Protocol,” Documents, Apr. 2025.](https://docs.cursor.com/context/model-context-protocol)
+
+[13] [Model Context Protocol, “Specification,” Specification, Mar. 2025.](https://modelcontextprotocol.io/specification/2025-03-26/index)
+
+[14] [Ethereum, “supports SSL (https) JSON-RPC connections,” Ethereum Stack Exchange, Jan. 2017.](https://ethereum.stackexchange.com/questions/10639/supports-ssl-https-json-rpc-connections)
+
+[15] [AWS, “HTTP vs HTTPS - Difference Between Transfer Protocols,” AWS Compute Blog, Apr. 2025.](https://aws.amazon.com/compare/the-difference-between-https-and-http/)
+
+[16] [Cloudflare, “Why is HTTP not secure? | HTTP vs. HTTPS,” Cloudflare Learning, Apr. 2025.](https://www.cloudflare.com/learning/ssl/why-is-http-not-secure/)
+
+[17] [Sectigo, “HTTP vs HTTPS: What Are The Differences?,” Blog, Jan. 2022.](https://www.sectigo.com/resource-library/http-vs-https)
+
+[18] [Keyfactor, “HTTP vs HTTPS: What's the Difference?,” Blog, Sep. 2022.](https://www.keyfactor.com/blog/http-vs-https-whats-the-difference/)
+
+[19] [Keysight, “Mutual TLS: A Secure Way to Authenticate and Encrypt Network Communication,” Blog, Apr. 2023.](https://www.keysight.com/blogs/en/tech/nwvs/2023/04/25/mutual-tls-authentication)
+
+[20] [AWS, “Introducing mutual TLS authentication for Amazon API Gateway,” AWS Compute Blog, Sep. 2020.](https://aws.amazon.com/blogs/compute/introducing-mutual-tls-authentication-for-amazon-api-gateway/)
+
+[21] [IDEAS, “Security of IoT Application Layer Protocols: Challenges and Findings,” Papers, Mar. 2020.](https://ideas.repec.org/a/gam/jftint/v12y2020i3p55-d333464.html)
+
+[22] [ResearchGate, “Security of IoT Application Layer Protocols: Challenges and Findings,” Papers, Mar. 2020.](https://www.researchgate.net/publication/340007148_Security_of_IoT_Application_Layer_Protocols_Challenges_and_Findings)
+
+[23] [ISACA, “2019 Volume 1 Security Issues in IoT Challenges and Countermeasures,” ISACA Journal, Jan. 2019.](https://www.isaca.org/resources/isaca-journal/issues/2019/volume-1/security-issues-in-iot-challenges-and-countermeasures)
+
+[24] [MDPI, “Security of IoT Application Layer Protocols: Challenges and Findings,” Papers, Jan. 2020.](https://www.mdpi.com/1999-5903/12/3/55)
+
+[25] [Wikipedia, “HTTP,” Article, Aug. 2010.](https://en.wikipedia.org/wiki/HTTP)
+
+[26] [CERN, “A short history of the Web,” About, Apr. 2025.](https://home.cern/science/computing/birth-web/short-history-web)
+
+[27] [Wikipedia, “World Wide Web,” About, Apr. 2025.](https://en.wikipedia.org/wiki/World_Wide_Web_Foundation)
+
+[28] [Ijstr.org, “Development History Of The World Wide Web,” Ijstr.org, Sep. 2019.](https://www.ijstr.org/final-print/sep2019/Development-History-Of-The-World-Wide-Web.pdf)
+
+[29] [MDN Web Docs, “Evolution of HTTP,” Documents, Apr. 2025.](https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Evolution_of_HTTP)
+
+[30] [Hostinger, “HTTP vs HTTPS: Key Differences and Which One to Choose for Your Site,” Tutorials, May. 2024.](https://www.hostinger.com/tutorials/http-vs-https)
+
+[31] [DEV Community, “The history of HTTPS,” DEV Community, May. 2023.](https://dev.to/smitterhane/how-tls-was-born-to-secure-modern-age-internet-45jb)
+
+[32] [UpGuard, “What's the Difference Between HTTP vs HTTPS?,” Blog, Nov. 2024.](https://www.upguard.com/blog/http-vs-https)
+
+[33] [GlobalSign, “History of the Internet: The Development of PKI,” Blog, Dec. 2021.](https://www.globalsign.com/en/blog/sg/history-internet-development-pki)
+
+[34] [Wikipedia, “HTTPS,” Article, Apr. 2025.](https://en.wikipedia.org/wiki/HTTPS)
+
+[35] [The HTTPS-Only Standard, “Technical Guidelines,” The HTTPS-Only Standard, Apr. 2025.](https://https.cio.gov/technical-guidelines/)
+
+[36] [F5, “What is SSL/TLS Encryption?,” F5 Glossary, Apr. 2025.](https://www.f5.com/glossary/ssl-tls-encryption)
+
+[37] [AWS, “What is SSL/TLS Certificate?,” AWS Compute Blog, Apr. 2025.](https://aws.amazon.com/what-is/ssl-certificate/)
+
+[38] [DigiCert, “How TLS/SSL Certificates Work,” DigiCert, Apr. 2025.](https://www.digicert.com/how-tls-ssl-certificates-work)
+
+[39] [SSL.com, “SSL/TLS Handshake: Ensuring Secure Online Interactions,” Blog, Sep. 2023.](https://www.ssl.com/article/ssl-tls-handshake-ensuring-secure-online-interactions/)
+
+[40] [Cloudflare, “What is SSL (Secure Sockets Layer)?,” Cloudflare Learning, Apr. 2025.](https://www.cloudflare.com/learning/ssl/what-is-ssl/)
+
+[41] [DreamHost, “Your Complete Guide to SSL/TLS and HTTPS,” Blog, Feb. 2025.](https://www.dreamhost.com/blog/ultimate-guide-ssl-tls/)
+
+[42] [Okta, “HTTP vs. HTTPS: Definition, Comparison & Security Implications,” Okta Identity 101, Aug. 2024.](https://www.okta.com/identity-101/http-vs-https/)
+
+[43] [Skip2 Networks, “A Brief History of HTTP,” Blog, Feb. 2024.](https://www.skip2.net/blog/legacy/a-brief-history-of-the-http-protocol)
+
+[44] [AWS, “How to turn on mutual TLS authentication for your REST APIs in API Gateway,” AWS Documentation, Apr. 2025.](https://docs.aws.amazon.com/apigateway/latest/developerguide/rest-api-mutual-tls.html)
+
+[45] [WaveMaker, “Mutual TLS Support in REST APIs,” Blog, Aug. 2022.](https://www.wavemaker.com/learn/blog/2022/08/23/Support-for-mutual-tls-in-rest-apis/)
+
+[46] [SocketXP, “Mutual TLS Authentication - Everything you need to know,” SocketXP, Nov. 2024.](https://www.socketxp.com/iot/mutual-tls-authentication/)
+
+[47] [Cloudflare, “Mutual TLS (mTLS) - API Shield,” Cloudflare Docs, Apr. 2025.](https://developers.cloudflare.com/api-shield/security/mtls/)
+
+[48] [SecureW2, “Understanding Mutual TLS (MTLS) Authentication: How It Works,” Blog, Apr. 2025.](https://www.securew2.com/blog/mutual-tls-mtls-authentication)
+
+[49] [BuiltIn, “Mutual TLS: A Tutorial,” Article, Apr. 2025.](https://builtin.com/software-engineering-perspectives/mutual-tls-tutorial)
+
+[50] [Cloudflare, “What is mTLS? | Mutual TLS,” Cloudflare Learning, Apr. 2025.](https://www.cloudflare.com/learning/access-management/what-is-mutual-tls/)
+
+[51] [SSL.com, “Authenticating Users and IoT Devices with Mutual TLS,” Blog, Nov. 2024.](https://www.ssl.com/article/authenticating-users-and-iot-devices-with-mutual-tls/)
+
+[52] [Cloudflare, “What happens in a TLS handshake? | SSL handshake,” Cloudflare Learning, Apr. 2025.](https://www.cloudflare.com/learning/ssl/what-happens-in-a-tls-handshake/)
+
+[53] [Quorum, “Securing JSON RPC,” Quorum Documentation, Apr. 2025.](https://goquorum.readthedocs.io/Quorum%20Features/rpc-security/)
+
+[54] [GoQuorum, “JSON-RPC API security,” ConsenSys GoQuorum Docs, Nov. 2023.](https://docs.goquorum.consensys.io/configure-and-manage/manage/json-rpc-api-security)
+
+[55] [gRPC, “Authentication,” gRPC Docs, Jan. 2024.](https://grpc.io/docs/guides/auth/)
+
+[56] [CrowdStrike, “Application Security: Challenges, Tools & Best Practices,” CYBERSECURITY 101, Dec. 2024.](https://www.crowdstrike.com/en-us/cybersecurity-101/application-security/)
+
+[57] [ijcset, “Application Layer Security Issues and Its Solutions,” ijcset, Jun. 2012.](http://ijcset.net/docs/Volumes/volume2issue6/ijcset2012020605.pdf)
+
+[58] [Hyperledger Besu, “Configure client and server TLS,” Hyperledger Besu Documentation, Mar. 2025.](https://besu.hyperledger.org/private-networks/how-to/configure/tls/client-and-server)
+
+[59] [GoldRush, “RPC Communication Protocols in Blockchain: JSON-RPC vs. gRPC,” GoldRush Guides, Apr. 2025.](https://goldrush.dev/guides/understanding-rpc-communication-protocols-in-blockchain-json-rpc-vs-grpc/)
+
+[60] [Stack Overflow, “Is JSON RPC over TLS secure enough?,” Stack Overflow, Jan. 2013.](https://stackoverflow.com/questions/14069580/is-json-rpc-over-tls-secure-enough)
+
+[61] [Information Security Stack Exchange, “Securing JSON data - tls,” Information Security Stack Exchange, Apr. 2015.](https://security.stackexchange.com/questions/58965/securing-json-data)
+
+[62] [Performance Evaluation Group (UniPV), “Security of IoT application layer protocols: challenges and findings,” Performance Evaluation Group (UniPV), Feb. 2020.](https://peg.unipv.it/publications/PDF/future-internet_preprint.pdf)
+
+[63] [Pathlock, “7 Application Security Vulnerabilities and Defensive Strategies,” Blog, Feb. 2025.](https://pathlock.com/learn/7-application-security-vulnerabilities-and-defensive-strategies/)
