@@ -31,7 +31,9 @@ describe("mdx detail routes", () => {
   });
 
   it("slug가 없으면 redirect 대상으로 판단한다", () => {
-    expect(resolveMdxDetailRoute("blog", "en", "6", undefined, "integration-connection-paradigm", "Hello World")).toMatchObject({
+    expect(
+      resolveMdxDetailRoute("blog", "en", "6", undefined, "integration-connection-paradigm", "Hello World"),
+    ).toMatchObject({
       canonicalHref: "/blog/6/integration-connection-paradigm",
       shouldRedirect: true,
     });
@@ -68,4 +70,5 @@ describe("mdx detail routes", () => {
       shouldRedirect: false,
     });
   });
-});
+}
+);

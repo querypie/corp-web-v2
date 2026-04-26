@@ -80,14 +80,14 @@ describe("loadMdxListItems", () => {
     expect(items[0]).toMatchObject({
       dateIso: "2024-05-01",
       description: "Newer post",
-      href: "/ko/blog/2",
+      href: "/ko/blog/2/newer",
       id: "2",
       imageSrc: "/blog/2/thumbnail.png",
       title: "Newer",
     });
     expect(items[1]).toMatchObject({
       dateIso: "2024-01-01",
-      href: "/ko/blog/1",
+      href: "/ko/blog/1/older",
       id: "1",
       imageSrc: "/blog/1/thumbnail.png",
       title: "Older",
@@ -118,7 +118,7 @@ describe("loadMdxListItems", () => {
 
     expect(items).toHaveLength(1);
     expect(items[0]).toMatchObject({
-      href: "/white-papers/2",
+      href: "/white-papers/2/only-item",
       id: "2",
       imageSrc: "/white-papers/2/thumbnail.png",
       title: "Only item",
