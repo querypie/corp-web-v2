@@ -6,6 +6,7 @@ import DemoDetailClientPage from "../../../../../components/pages/demo/DemoDetai
 import type { DocsDetailPageProps } from "../../../../../components/pages/documentation/DocumentationDetailPage";
 import { getContactPageCopy } from "@/features/contact/copy";
 import { getAipDemoHrefByContentId } from "@/features/demo/aip";
+import { getUseCaseDemoHrefByContentId } from "@/features/demo/useCase";
 import { demoCategoryConfigs, getCategoryHref } from "@/features/content/config";
 import {
   formatPublicDate,
@@ -45,7 +46,9 @@ export default async function DemoDetailRoute({ params }: Props) {
     notFound();
   }
 
-  const canonicalShortHref = getAipDemoHrefByContentId(locale, currentEntry.id);
+  const canonicalShortHref =
+    getAipDemoHrefByContentId(locale, currentEntry.id) ??
+    getUseCaseDemoHrefByContentId(locale, currentEntry.id);
   if (canonicalShortHref) {
     redirect(canonicalShortHref);
   }
@@ -131,7 +134,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {};
   }
 
-  const canonicalShortHref = getAipDemoHrefByContentId(locale, currentEntry.id);
+  const canonicalShortHref =
+    getAipDemoHrefByContentId(locale, currentEntry.id) ??
+    getUseCaseDemoHrefByContentId(locale, currentEntry.id);
 
   return {
     title: getLocalizedContent(currentEntry.title, locale),
