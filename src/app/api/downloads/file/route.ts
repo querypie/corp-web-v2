@@ -2,16 +2,32 @@ import { promises as fs } from "fs";
 import path from "path";
 import { NextResponse } from "next/server";
 
-function resolvePublicFile(src: string) {
-  const relativeSrc = src.startsWith("/") ? src.slice(1) : src;
-  const publicRoot = path.join(process.cwd(), "public");
-  const absolutePath = path.join(publicRoot, relativeSrc);
+const DOWNLOADABLE_PUBLIC_ROOTS = [
+  {
+    prefix: "/documentation/",
+    root: path.join(process.cwd(), "public", "documentation"),
+  },
+  {
+    prefix: "/demo/",
+    root: path.join(process.cwd(), "public", "demo"),
+  },
+];
 
-  if (!absolutePath.startsWith(publicRoot)) {
-    throw new Error("Invalid path.");
+function resolvePublicFile(src: string) {
+  for (const { prefix, root } of DOWNLOADABLE_PUBLIC_ROOTS) {
+    if (!src.startsWith(prefix)) {
+      continue;
+    }
+
+    const relativeSrc = src.slice(prefix.length);
+    const absolutePath = path.join(root, relativeSrc);
+
+    if (absolutePath.startsWith(root)) {
+      return absolutePath;
+    }
   }
 
-  return absolutePath;
+  throw new Error("Invalid path.");
 }
 
 export async function GET(request: Request) {

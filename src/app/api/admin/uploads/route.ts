@@ -3,6 +3,24 @@ import path from "path";
 import { NextResponse } from "next/server";
 import sharp from "sharp";
 
+const UPLOAD_DIR_PATHS = {
+  uploads: path.join(process.cwd(), "public", "uploads"),
+  news: path.join(process.cwd(), "public", "news"),
+  documentation: path.join(process.cwd(), "public", "documentation"),
+  "documentation/blogs": path.join(process.cwd(), "public", "documentation", "blogs"),
+  "documentation/white-papers": path.join(process.cwd(), "public", "documentation", "white-papers"),
+  "documentation/glossary": path.join(process.cwd(), "public", "documentation", "glossary"),
+  "documentation/manuals": path.join(process.cwd(), "public", "documentation", "manuals"),
+  "documentation/introduction": path.join(process.cwd(), "public", "documentation", "introduction"),
+  demo: path.join(process.cwd(), "public", "demo"),
+  "demo/use-cases": path.join(process.cwd(), "public", "demo", "use-cases"),
+  "demo/webinars": path.join(process.cwd(), "public", "demo", "webinars"),
+  "demo/aip-features": path.join(process.cwd(), "public", "demo", "aip-features"),
+  "demo/acp-features": path.join(process.cwd(), "public", "demo", "acp-features"),
+} as const;
+
+type UploadDirName = keyof typeof UPLOAD_DIR_PATHS;
+
 const ALLOWED_MIME_TYPES = new Set([
   "image/jpeg",
   "image/png",
@@ -49,7 +67,7 @@ async function createUniqueFilePath(dirPath: string, baseName: string, extension
   }
 }
 
-function resolveUploadDirName(section: string | null, categorySlug: string | null) {
+function resolveUploadDirName(section: string | null, categorySlug: string | null): UploadDirName {
   if (section === "news") {
     return "news";
   }
@@ -74,15 +92,16 @@ function resolveUploadDirName(section: string | null, categorySlug: string | nul
   return "uploads";
 }
 
-async function removeUpload(src: string, dirName: string) {
+async function removeUpload(src: string, dirName: UploadDirName) {
   if (!src.startsWith(`/${dirName}/`) || src.includes("..")) {
     return;
   }
 
-  const publicDir = path.join(process.cwd(), "public");
-  const filePath = path.join(publicDir, src);
+  const dirRoot = UPLOAD_DIR_PATHS[dirName];
+  const relativeSrc = src.slice(`/${dirName}/`.length);
+  const filePath = path.join(dirRoot, relativeSrc);
 
-  if (!filePath.startsWith(path.join(publicDir, dirName))) {
+  if (!filePath.startsWith(dirRoot)) {
     return;
   }
 
@@ -106,7 +125,7 @@ export async function POST(request: Request) {
   }
 
   const dirName = resolveUploadDirName(section, categorySlug);
-  const uploadsDir = path.join(process.cwd(), "public", dirName);
+  const uploadsDir = UPLOAD_DIR_PATHS[dirName];
   const baseName = sanitizeBaseName(file.name);
   const bytes = Buffer.from(await file.arrayBuffer());
 
