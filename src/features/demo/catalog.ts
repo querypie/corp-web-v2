@@ -2112,7 +2112,7 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "AIエージェントの「暴走」や「権限悪用」を防ぐには？本ウェビナーでは、実際のインシデント事例を読み解きながら、AIエージェントに付与する権限をどう設計すれば安全に使い続けられるのかを解説します。安全性と実用性を両立する実践的なフレームワークをご紹介する、実務直結型の30分です。"
     },
     "imageSrc": {
-      "ja": "/demo/webinars/27/thumbnail.png"
+      "ja": "/demo/webinar/27/air-company-ai-agent-security-webinar-20260416.png"
     },
     "date": "2026-04-09"
   }
