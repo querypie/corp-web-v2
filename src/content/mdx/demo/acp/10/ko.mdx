@@ -1,0 +1,54 @@
+---
+layout: "Article"
+category: "demo"
+title: "\uc11c\ubc84 \uc811\uadfc \uad8c\ud55c \uc694\uccad\ud558\uae30"
+description: "\uc544\ub798 \uc21c\uc11c\uc5d0 \ub530\ub77c \uc811\uadfc\uc774 \ud544\uc694\ud55c \uc11c\ubc84\uc5d0 \ub300\ud55c Direct Permission\uc744 \uc694\uccad\ud569\ub2c8\ub2e4."
+date: "2024-11-29"
+ogImage: "public/demo/acp/10/thumbnail.webp"
+hideHeroImage: true
+---
+
+<Youtube src="https://www.youtube.com/embed/WYiWd8OBrzI?si=lWmupNbnnYD3H-0Y" title="Watch video" />
+
+# Overview
+
+아래 순서에 따라 접근이 필요한 서버에 대한 Direct Permission을 요청합니다.
+Server Access Request는 승인 즉시 권한이 부여되며 웹 터미널 또는 프록시를 통해 해당 서버에 접속할 수 있습니다.
+
+# Submitting a Server Access Request
+
+STEP 1 아래 경로를 통해 **Server Access Request** 페이지에 진입합니다.
+
+- Servers > 왼쪽 상단 버튼
+- Workflow > Submit Request > Server Access Request
+
+STEP 2 결재 규칙을 선택하고 승인자를 지정합니다.
+
+- **Approval Rule:** **General > Approval Rules** 메뉴에서 관리자가 생성한 규칙 목록들이 나타납니다.
+- 규칙에 따라 승인 대상이 달라질 수 있으며, 관리자가 승인자를 지정한 결재 규칙인 경우 자동으로 승인자가 지정됩니다.
+- **Approver:** 결재 라인에서 `+` 버튼을 누르고 단계별 승인자를 지정합니다.
+- **A single assignee can complete the approval request:** 여러 명 중 한 명의 승인만으로 결재 요청이 승인 처리됩니다.
+- **All assignees must approve this request:** 모든 승인자가 승인하여야 결재 요청이 승인 처리됩니다.
+
+STEP 3 `Add Servers`를 클릭하여 요청 대상 서버를 추가합니다.
+
+- 왼쪽의 **Server Group** 목록에서, 권한을 요청하려는 서버가 속한 서버 그룹을 선택합니다.
+- 오른쪽의 **Servers** 목록에서 요청 대상 서버를 선택합니다.
+  (다중 선택 가능, 선택한 서버 개수가 우측 상단에 표시됨)
+- **Accounts**에서 권한을 요청하고자 하는 계정을 선택합니다.
+  (다중 선택 가능)
+
+STEP 4 요청 정보를 입력한 후 `Submit` 버튼을 눌러 Request를 요청합니다.
+
+- **Title:** 요청 제목을 입력합니다.
+- **Expiration Date:** 해당 권한이 회수되는 만료일자를 선택합니다.
+- **Reason for Request:** 권한을 요청하는 사유를 입력합니다.
+
+# 요청받은 결재 승인하기
+
+STEP 1 승인자로 지정된 관리자는 **Workflow > Received Requests > To Do** 메뉴로 이동합니다.
+
+STEP 2 결재의 디테일 페이지에서 `Approve` 버튼을 눌러 승인처리합니다.
+
+> Server Access Request를 통해 부여된 권한은 Security > Server Default Settings 정책을 적용받습니다.
+> 부여받은 요청자는 서버 목록에서 Default Role을 선택할 경우에 적용됩니다.

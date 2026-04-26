@@ -1,0 +1,39 @@
+---
+layout: "Article"
+category: "demo"
+title: "\ub370\uc774\ud130 \uc811\uadfc \uc81c\ud55c \uc815\ucc45 \uc124\uc815\ud558\uae30"
+description: "\uc870\uc9c1 \ub0b4\uc5d0\uc11c \uac1c\uc778\uc815\ubcf4 \ub610\ub294 \ubbfc\uac10\uc815\ubcf4\uc640 \uac19\uc774 \uc811\uadfc \uc81c\ud55c\uc774 \ud544\uc694\ud55c \ub370\uc774\ud130\ub294 \uc870\ud68c\uc2dc \ud574\ub2f9 \ub370\uc774\ud130\ub97c \ud655\uc778\ud560 \uc218 \uc5c6\ub3c4\ub85d \uc815\ucc45\uc744 \uc124\uc815\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4."
+date: "2024-11-29"
+ogImage: "public/demo/acp/21/thumbnail.webp"
+hideHeroImage: true
+---
+
+<Youtube src="https://www.youtube.com/embed/8vn-bs4dSok?si=bHziwD8nJm4rd-nC" title="Watch video" />
+
+# Overview
+
+조직 내에서 개인정보 또는 민감정보와 같이 접근 제한이 필요한 데이터는 조회시 해당 데이터를 확인할 수 없도록 정책을 설정할 수 있습니다.
+Data Access 메뉴에서 정책을 설정할 커넥션을 선택하여 정책을 생성하고, 접근 제한이 필요한 데이터를 테이블 또는 컬럼 기준으로 규칙을 등록하고 관리할 수 있습니다.
+
+# 테이블/컬럼 접근 제한 정책 생성하기
+
+STEP 1 **Data Access** 메뉴에서 `Create Policy` 버튼을 클릭하여 다음의 정보들을 입력하고 저장합니다.
+
+- **Policy Name:** 정책을 구문할 수 있는 이름
+- **Target Connection:** 정책을 적용할 커넥션
+
+STEP 2 생성된 정책을 선택하고, `Add Rule List` 버튼을 클릭하여 규칙을 저장합니다.
+
+- **Database Name:** 규칙 등록을 위한 필수 값입니다.
+- **Table Name:** 규칙 등록을 위한 필수 값입니다.
+  테이블만 선택할 경우, 해당 테이블 조회 자체가 불가능하도록 제한됩니다.
+- **Column Name:** *(선택항목)* 컬럼 단위로 데이터 접근을 제한하고자 하는 경우 선택합니다.
+- **Allowed Users:** 해당 규칙을 예외처리할 사용자 또는 그룹을 선택합니다.
+- 해당 데이터 조회가 필요한 사용자 또는 그룹에 한해 **테이블/컬럼 접근 제한 규칙을 예외 처리**할 수 있습니다.
+
+※ **Allowed Users**에 해당되지 않은 사용자가 **Data Access** 정책이 등록된 데이터를 조회합니다.
+
+- Table에 정책이 적용된 경우, `You don't have permission to access the table 'querypie'.
+  Please check your privileges`.
+  에러메세지가 나타나며 테이블 조회 자체가 불가능하도록 제한됩니다.
+- Column에 정책이 적용된 경우, *RESTRICTED* 로 표시됩니다.

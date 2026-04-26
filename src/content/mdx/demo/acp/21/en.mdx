@@ -1,0 +1,41 @@
+---
+layout: "Article"
+category: "demo"
+title: "How to Apply Data Access Policies"
+description: "Within your organization, sensitive data that requires access restrictions\u2014such as personal or confidential information\u2014can be protected by setting policies that prevent unauthoriz"
+date: "2024-11-29"
+ogImage: "public/demo/acp/21/thumbnail.webp"
+hideHeroImage: true
+---
+
+<Youtube src="https://www.youtube.com/embed/8vn-bs4dSok?si=bHziwD8nJm4rd-nC" title="Watch video" />
+
+# Overview
+
+Within your organization, sensitive data that requires access restrictions—such as personal or confidential information—can be protected by setting policies that prevent unauthorized users from viewing the data.
+Using the **Data Access** menu, you can create and manage policies by selecting the target connection and defining rules for tables or columns requiring restricted access.
+
+# Creating a Table/Column Access Restriction Policy
+
+STEP 1 Navigate to the **Data Access** menu and click the `Create Policy` button.
+Enter the following details:
+
+- **Policy Name:** A unique name to identify the policy.
+- **Target Connection:** The database connection to which the policy will apply.
+
+STEP 2 After saving the policy, select the created policy and click `Add Rule List` to define rules.
+Provide the following information for each rule:
+
+- **Database Name:** Specify the database.
+  This is required.
+- **Table Name:** Specify the table.
+  If only a table is selected, access to the entire table will be restricted.
+- **Column Name:** *(Optional)* Specify the column if access should be restricted at the column level.
+- **Allowed Users:** Specify users or groups exempt from the rule.
+- Users or groups added to **Allowed Users** will be able to bypass table or column access restrictions.
+
+※ If a user who is not listed in **Allowed Users** attempts to query data restricted by a **Data Access Policy:**
+
+- For a Table-Level Policy, the user will encounter the following error message: `You don't have permission to access the table 'querypie'.
+  Please check your privileges.` Access to the table will be entirely blocked.
+- For a Column-Level Policy, the restricted column's data will appear as *RESTRICTED* in the query results.

@@ -1,0 +1,37 @@
+---
+layout: "Article"
+category: "demo"
+title: "\ub370\uc774\ud130 \ub9c8\uc2a4\ud0b9 \uc815\ucc45 \uc124\uc815\ud558\uae30"
+description: "\uc870\uc9c1 \ub0b4\uc5d0\uc11c \uac1c\uc778\uc815\ubcf4 \ub610\ub294 \ubbfc\uac10\uc815\ubcf4\uc640 \uac19\uc774 \uad00\ub9ac\uac00 \ud544\uc694\ud55c \ub370\uc774\ud130\ub294 \uc870\ud68c \uc2dc \ub9c8\uc2a4\ud0b9\ub418\uc5b4 \ud45c\uc2dc\ud558\ub3c4\ub85d \uc815\ucc45\uc744 \uc124\uc815\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4."
+date: "2024-11-29"
+ogImage: "public/demo/acp/20/thumbnail.webp"
+hideHeroImage: true
+---
+
+<Youtube src="https://www.youtube.com/embed/5sHErWERHsw?si=fdW4n-V15fc7kA-Z" title="Watch video" />
+
+# Overview
+
+조직 내에서 개인정보 또는 민감정보와 같이 관리가 필요한 데이터는 조회 시 마스킹되어 표시하도록 정책을 설정할 수 있습니다.
+Data Masking 메뉴에서 정책을 설정할 커넥션을 선택하여 정책을 생성하고, 마스킹이 필요한 데이터를 컬럼 기준으로 규칙을 등록하고 관리할 수 있습니다.
+
+# 데이터 마스킹 정책 적용하기
+
+STEP 1 **Data Masking** 메뉴에서 `Create Policy` 버튼을 클릭하여 다음의 정보들을 입력하고 저장합니다.
+
+- **Policy Name:** 정책을 구문할 수 있는 이름
+- **Target Connection:** 정책을 적용할 커넥션
+
+STEP 2 생성된 정책을 선택하고, `Add Rule List` 버튼을 클릭하여 규칙을 저장합니다.
+
+- **Database Name:** 규칙 등록을 위한 필수 값입니다.
+- **Table Name:** 규칙 등록을 위한 필수 값입니다.
+- **Column Name:** 규칙 등록을 위한 필수 값입니다.
+- **Masking Pattern:** 선택한 컬럼에 적용할 마스킹 패턴을 1개 이상 등록합니다.
+- **Masking Pattern** 메뉴에서 정규식을 통해 직접 탐지 패턴과 마스킹 패턴을 생성할 수 있으며, 기본적으로 20여가지의 개인정보 및 민감정보를 마스킹하는 패턴을 제공합니다.
+- **Allowed Users:** 해당 규칙을 예외처리할 사용자 또는 그룹을 선택합니다.
+- 해당 데이터 조회가 필요한 사용자 또는 그룹에 한해 **마스킹 규칙을 예외 처리**할 수 있습니다.
+
+※ **Allowed Users**에 해당되지 않은 사용자가 **Data Masking 정책**이 등록된 데이터를 조회합니다.
+
+- 적용한 마스킹 패턴에 따라 `*****@gmail.com`와 같이 마스킹되어 표시됩니다.

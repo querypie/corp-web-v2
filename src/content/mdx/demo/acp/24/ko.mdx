@@ -1,0 +1,61 @@
+---
+layout: "Article"
+category: "demo"
+title: "\uad00\ub9ac \ub300\uc0c1\uc758 \ub370\uc774\ud130\ubca0\uc774\uc2a4 \ub4f1\ub85d \ubc0f AWS \ub3d9\uae30\ud654\ud558\uae30"
+description: "\ud074\ub77c\uc6b0\ub4dc \ub3d9\uae30\ud654 \uae30\ub2a5\uc744 \ud1b5\ud574 \ub2e4\uc591\ud55c \ud074\ub77c\uc6b0\ub4dc\uc758 \ub370\uc774\ud130\ubca0\uc774\uc2a4\ub97c \ud55c \ubc88\uc5d0 \ub3d9\uae30\ud654 \ud574\uc62c \uc218 \uc788\ub294 \ubc29\ubc95\uacfc \uc218\ub3d9\uc73c\ub85c \ub370\uc774\ud130\ubca0\uc774\uc2a4\ub97c \ub4f1\ub85d\ud558\ub294 \ubc29\ubc95\uc744 \ud655\uc778\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4."
+date: "2024-11-29"
+ogImage: "public/demo/acp/24/thumbnail.webp"
+hideHeroImage: true
+---
+
+<Youtube src="https://www.youtube.com/embed/Yf8CymMZAGY?si=uvMzIc9FeLstyu-7" title="Watch video" />
+
+# Overview
+
+클라우드 동기화 기능을 통해 다양한 클라우드의 데이터베이스를 한 번에 동기화 해올 수 있는 방법과 수동으로 데이터베이스를 등록하는 방법을 확인할 수 있습니다.
+해당 가이드에서는 AWS 내의 리소스를 동기화하여 QueryPie 에서 관리하는 데이터베이스로 등록하고 온프렘에서 관리되고 있는 데이터베이스를 수동으로 등록하는 방법을 제공합니다.
+
+# AWS 연동을 통한 DB 동기화 및 관리
+
+> **사전 조건:** 각 데이터베이스 동기화 시 아래의 정책이 필요합니다.
+> - **RDS** : AmazonRDSReadOnlyAccess - **DynamoDB** : AmazonDynamoDBFullAccess - **Redshift** : AmazonRedshiftReadOnlyAccess - **Athena** : AmazonAthenaFullAccess, AmazonS3DFullAccess - **Redis** : AmazonElastiCacheFullAccess
+
+STEP 1 **Cloud Provider** 메뉴에서 `Create Provider` 버튼을 클릭하여 연동 정보를 입력합니다.
+
+- **Name:** Provider를 구분할 수 있는 이름
+- **Cloud Provider:** Amazon Web Services
+- **Region:** 동기화하고자 하는 리소스의 리전
+- **Credential:** Choose one of the following options:
+- **Default Credential:** QueryPie가 설치된 EC2 인스턴스 IAM 권한에 정책을 할당하여 같은 AWS 내 리소스 동기화
+- **Cross Account Role:** IAM 역할을 생성하여 다른 AWS 계정의 리소스 동기화
+- **Access Key:** AWS 계정의 Access Key를 입력하여 리소스 동기화
+- **Database Type Filter:** 동기화 하고자하는 리소스
+- **Replication Frequency:** Choose the synchronization method:
+- **Manual:** 동기화를 하고자 하는 시점에만 수동으로 동기화
+- **Scheduling:** Cron Expressions 활용으로 주기적인 리소스 동기화를 스케줄링
+
+STEP 2 **Cloud Provider** 메뉴에서 생성된 프로바이더를 선택합니다.
+
+STEP 3 `Synchronize` 버튼을 클릭하여 AWS 리소스를 동기화합니다.
+
+STEP 4 **DB Connections** 메뉴에서 동기화된 리소스들을 확입합니다.
+
+# 데이터베이스 수동으로 등록하기
+
+STEP 1 **DB Connection** 메뉴에서 `SCreate Connection`S 버튼을 클릭합니다.
+
+STEP 2 데이터 소스 종류를 선택하고 리소스 정보를 입력합니다.
+
+- **Allowed Zone:** DB 커넥션에 접속할 수 있는 네트워크 대역
+- General > Allowed Zones 메뉴에서 등록한 대역을 선택할 수 있으며, 기본적으로 모든 대역을 허용하는 Default 값이 선택됩니다.
+- **Connection Name:** Connection을 구분할 수 있는 이름
+- **Host:** DB의 Host (도메인, IP 모두 지원합니다.)
+- **Port:** DB의 Port
+- **Database Name:** 커넥션 연결 시 기본적으로 접속할 DB 이름
+- **Secret Store:** 인증정보 저장 위치
+- **QueryPie:** QueryPie 내부에 저장
+- **Vault:** Vault 연동을 지원하며, 등록한 Vault 이름이 표시됩니다.
+
+STEP 3 **Username**, **Password** 입력 후 `Test Connection` 버튼을 클릭하여 접속 정보가 유효한지 확인합니다.
+
+STEP 4 `Next` 버튼을 눌러 저장하고, **DB Connection** 메뉴의 목록에서 생성한 커넥션을 확인합니다.

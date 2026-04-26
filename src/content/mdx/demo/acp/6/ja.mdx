@@ -1,0 +1,74 @@
+---
+layout: "Article"
+category: "demo"
+title: "How to Register the Kubernetes You Need to Protect"
+description: "This tutorial explains how to synchronize Kubernetes clusters using the cloud synchronization feature or manually register clusters for management."
+date: "2024-11-29"
+ogImage: "public/demo/acp/6/thumbnail.webp"
+hideHeroImage: true
+---
+
+<Youtube src="https://www.youtube.com/embed/k04sppmIr50?si=C5pxwOPPxRVhvoeA" title="Watch video" />
+
+# Overview
+
+This tutorial explains how to synchronize Kubernetes clusters using the cloud synchronization feature or manually register clusters for management.
+
+# Synchronizing Kubernetes Resources via AWS Integration
+
+> **Preconditions** 1.
+> **To synchronize Kubernetes resources, ensure the following policies are assigned:** - eks:ListClusters - eks:DescribeCluster - eks:ListAccessEntries - eks:DescribeAccessEntry - eks:CreateAccessEntry - eks:ListAssociatedAccessPolicies - eks:AssociateAccessPolicy 2.
+> Additionally, update the **AWS EKS Authentication Mode:** - Synchronization uses the EKS access entry API.
+> To ensure smooth synchronization, it’s recommended to set the authentication mode to **EKS API and ConfigMap.**
+
+STEP 1 In the Cloud Provider menu, click the `Create Provider` button and enter the following details:
+
+- **Name:** A unique name to identify the provider
+- **Cloud Provider:** Amazon Web Services
+- **Region:** The region of the resources to be synchronized
+- **Credential**
+- **Default Credential:** Assign IAM policies to the EC2 instance where QueryPie is installed to synchronize resources within the same AWS account
+- **Cross Account Role:** Create an IAM role to synchronize resources from another AWS account
+- **Search Filter:** Filter specific types of resources to synchronize
+- It works the same way as AWS's search mechanism.
+- You can use filters such as name, host, OS, and tags.
+  Enter the filters in the following order:
+
+`Key -> Press Enter -> Select a search condition -> Press Enter -> Enter the value -> Press Enter`
+
+- **Replication Frequency:** Method of synchronization
+- **Manual:** Synchronize only when manually triggered
+- **Scheduling:** Synchronize periodically using a schedule.
+  Cron Expressions are supported.
+
+STEP 2 Select the provider you created in the **Cloud Provider** menu.
+
+STEP 3 Click the `Synchronize` button to sync AWS resources.
+
+STEP 4 Go to the **Clusters** menu to view the synchronized resources.
+
+# Manually Registering a Kubernetes Cluster
+
+STEP 1 In the **Clusters** menu, click the `Create Cluster` button and enter the following details:
+
+- **Name:** A unique name to identify the cluster
+- **Version:** Detailed version information for the cluster
+- **API URL:** The API URL of the Kubernetes cluster to receive API requests
+
+STEP 2 Click the **download and run this script** button to download the script.
+
+STEP 3 Run the downloaded script on the target cluster, and enter the following information from the script’s output:
+
+- **Service Account Token:** The Kubernetes service account token used by QueryPie Proxy to make API calls
+- **Certificate Authority:** The CA certificate used by QueryPie to verify the Kubernetes API server
+
+STEP 4 Click `Verify Credential` to ensure the connection is valid.
+
+STEP 5 Configure the logging options for the cluster:
+
+- **Request Audit:** Enable logging of Kubernetes API call history for the cluster
+- **Request Audit Types:** Select the types of API verbs to be logged
+- **Pod Session Recording:** Enable recording of sessions opened via `Pod exec` commands within the cluster
+- To enable this option, **Request Audit** must be turned on, and the `create` and `get` verbs must be selected under **Request Audit Types**.
+
+STEP 6 Click the `Save` button to successfully register the cluster.

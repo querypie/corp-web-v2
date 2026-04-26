@@ -1,4 +1,4 @@
-export type MdxCategory = "blog" | "white-paper";
+export type MdxCategory = "blog" | "white-paper" | "demo";
 
 export type MdxFrontmatter = {
   layout: "Article";

@@ -4,6 +4,7 @@ import { getLocalePath } from "../constants/i18n";
 import { siteUrl } from "../constants/site";
 import { readContentState } from "../features/content/contentState.server";
 import { getPublicDetailHref, isPublishedContentVisible } from "../features/content/data";
+import { acpDemoEntries, getAcpDemoHref } from "../features/demo/acp";
 
 function absolute(path: string) {
   return new URL(path, siteUrl).toString();
@@ -49,6 +50,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })),
   );
 
+  const acpDemoMdxEntries = locales.flatMap((locale) =>
+    acpDemoEntries
+      .map((item) => getAcpDemoHref(locale as Locale, item.id))
+      .filter((href): href is string => Boolean(href))
+      .map((href) => ({
+        url: absolute(href),
+      })),
+  );
+
   const newsEntries = locales.flatMap((locale) =>
     newsItems
       .filter((item) => isPublishedContentVisible(item, locale as Locale) && item.contentType !== "outlink")
@@ -58,5 +68,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })),
   );
 
-  return [...staticEntries, ...docsEntries, ...demoEntries, ...newsEntries];
+  return [...staticEntries, ...docsEntries, ...demoEntries, ...acpDemoMdxEntries, ...newsEntries];
 }

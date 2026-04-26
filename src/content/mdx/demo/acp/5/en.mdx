@@ -1,0 +1,59 @@
+---
+layout: "Article"
+category: "demo"
+title: "How to Grant Roles to Users"
+description: "You can manage access policies for Kubernetes clusters within your organization."
+date: "2024-11-29"
+ogImage: "public/demo/acp/5/thumbnail.webp"
+hideHeroImage: true
+---
+
+<Youtube src="https://www.youtube.com/embed/E_NEaALFgf4?si=tfN3Qo-Q5ZKx6MGJ" title="Watch video" />
+
+# Overview
+
+You can manage access policies for Kubernetes clusters within your organization.
+Kubernetes policies operate as **Policy as Code (PaC)**, functioning in YAML format.
+These policies allow you to define access rules for cluster resources, API scopes, resource tags, and user attributes, as well as configure accessible IP addresses.
+Once policies are defined, they can be compiled into Roles, which aggregate multiple policies into a single role definition.
+
+QueryPie supports **Role-Based Access Control (RBAC)**, enabling organizations to allow or restrict user access to Kubernetes based on predefined roles.
+
+# Setting Kubernetes Access Policies
+
+STEP 1 Navigate to the **Policies** menu and click the `Create Policy` button and enter the following details:
+
+- **Name:** A unique name to identify the policy.
+- **Description:** Provide detailed information about the policy.
+
+STEP 2 Select the created policy and click the `Go to Editor Mode` button.
+Modify the policy content in one of the following ways:
+
+- Use the buttons on the right panel to insert or modify code.
+- Directly edit the code in the **Code Editor**.
+- Use the **Errors** tab at the bottom to debug errors in the edited code.
+
+STEP 3 Once the policy is defined, click the `Save` button in the top-right corner to save your change
+
+# Creating a Role
+
+STEP 1 Navigate to the **Roles** menu and click the `Create Role` button and enter the following details:
+
+- **Name:** A unique name to identify the role.
+- **Description:** Provide detailed information about the role.
+
+STEP 2 Select the created role and click the `Assign Policies` button.
+Add one or more previously created policies to the role.
+
+- **Users/Groups:** Displays the list of users or groups assigned to the role.
+- **Clusters:** Displays the list of clusters accessible with the role.
+
+# Granting a Role
+
+STEP 1 Navigate to the **Access Control** menu and choose the user or group to whom the role will be assigned.
+
+STEP 2 Click the `Grant Roles` button on the right, and heck the box for one or more roles to assign and set an expiration date for the role.
+
+STEP 3 Click the `Grant` button to finalize the assignment.
+
+- Go to the **Clusters** tab to view the resources accessible under the assigned role.
