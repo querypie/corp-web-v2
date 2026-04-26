@@ -11,16 +11,27 @@ type MdxContentListItem = {
   title: string;
 };
 
+type MdxContentMenuItem = {
+  href?: string;
+  isActive: boolean;
+  label: string;
+};
+
 type MdxContentListPageProps = {
   currentPage: number;
   emptyMessage?: string;
   items: MdxContentListItem[];
   locale: Locale;
+  menu?: MdxContentMenuItem[];
   nextHref?: string | null;
   previousHref?: string | null;
   title: string;
   totalPages: number;
 };
+
+function cx(...values: Array<string | false | null | undefined>) {
+  return values.filter(Boolean).join(" ");
+}
 
 function MdxContentListCard({ date, description, href, imageSrc, title }: MdxContentListItem) {
   return (
@@ -46,6 +57,7 @@ export default function MdxContentListPage({
   emptyMessage,
   items,
   locale,
+  menu,
   nextHref,
   previousHref,
   title,
@@ -64,31 +76,66 @@ export default function MdxContentListPage({
   return (
     <div className="flex w-full flex-col gap-20 px-5 pb-10 md:gap-[160px] md:px-10">
       <section className="flex w-full justify-center">
-        <div className="flex w-full max-w-[1200px] flex-col gap-12">
-          <header className="flex items-center justify-center">
-            <h1 className="m-0 flex-1 type-h1 text-fg">{title}</h1>
-          </header>
+        <div className="flex w-full max-w-[1200px] flex-col">
+          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-[60px]">
+            <div className="flex w-full flex-col gap-10 md:w-fit md:shrink-0 md:self-start md:sticky md:top-0">
+              <header className="flex items-center justify-center">
+                <h1 className="m-0 flex-1 type-h1 text-fg">{title}</h1>
+              </header>
 
-          {items.length > 0 ? (
-            <>
-              <div className="grid min-w-0 w-full grid-cols-1 gap-x-[30px] gap-y-16 md:grid-cols-2 lg:grid-cols-3">
-                {items.map((item, index) => (
-                  <MdxContentListCard key={`${item.title}-${index}`} {...item} />
-                ))}
-              </div>
-              <PaginationNav
-                currentPage={currentPage}
-                locale={locale}
-                nextHref={nextHref}
-                previousHref={previousHref}
-                totalPages={totalPages}
-              />
-            </>
-          ) : (
-            <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
-              <p className="m-0 type-body-md text-mute-fg">{resolvedEmptyMessage}</p>
+              {menu?.length ? (
+                <nav className="flex w-full flex-row flex-wrap gap-[10px] type-body-md md:w-fit md:self-start md:flex-col">
+                  {menu.map((item) =>
+                    item.href ? (
+                      <a
+                        key={`${item.label}-${item.href}`}
+                        className={cx(
+                          "whitespace-nowrap transition-colors hover:text-fg",
+                          item.isActive ? "text-fg" : "text-mute-fg",
+                        )}
+                        href={item.href}
+                      >
+                        {item.label}
+                      </a>
+                    ) : (
+                      <span
+                        key={item.label}
+                        className={cx(
+                          "whitespace-nowrap",
+                          item.isActive ? "text-fg" : "text-mute-fg",
+                        )}
+                      >
+                        {item.label}
+                      </span>
+                    ),
+                  )}
+                </nav>
+              ) : null}
             </div>
-          )}
+
+            <div className="flex min-w-0 w-full flex-col gap-12 md:max-w-[790px]">
+              {items.length > 0 ? (
+                <>
+                  <div className="grid min-w-0 w-full grid-cols-1 gap-x-[30px] gap-y-16 md:grid-cols-2">
+                    {items.map((item, index) => (
+                      <MdxContentListCard key={`${item.title}-${index}`} {...item} />
+                    ))}
+                  </div>
+                  <PaginationNav
+                    currentPage={currentPage}
+                    locale={locale}
+                    nextHref={nextHref}
+                    previousHref={previousHref}
+                    totalPages={totalPages}
+                  />
+                </>
+              ) : (
+                <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
+                  <p className="m-0 type-body-md text-mute-fg">{resolvedEmptyMessage}</p>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </section>
       <Cta />
