@@ -1,11 +1,24 @@
-import type { Locale } from "@/constants/i18n";
-import type { SolutionStaticMetadata } from "../../_shared/pageHelpers";
-import { createGenerateMetadata, createSolutionPage } from "../../_shared/pageHelpers";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { isLocale, type Locale } from "@/constants/i18n";
+import { getSolutionHref } from "@/features/solutions/routes";
 import ContentEN from "./content.en";
 import ContentKO from "./content.ko";
 import ContentJA from "./content.ja";
 
-export const metadataByLocale: Record<Locale, SolutionStaticMetadata> = {
+type SolutionStaticMetadata = {
+  title: string;
+  description: string;
+  keywords?: string[];
+  abstract?: string;
+};
+
+type PageProps = {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ category?: string }>;
+};
+
+const metadataByLocale: Record<Locale, SolutionStaticMetadata> = {
   "en": {
     "title": "QueryPie AIP: MCP Hub That Connects Everything",
     "description": "Single platform centrally managing all MCP servers and tools—no fragmentation, no complexity, no limits. Streamline AI workflows across your entire tech stack while we handle the complexity behind the scenes.",
@@ -59,11 +72,38 @@ export const metadataByLocale: Record<Locale, SolutionStaticMetadata> = {
   }
 } as const;
 
+export async function generateMetadata({ params }: Pick<PageProps, "params">): Promise<Metadata> {
+  const { locale } = await params;
+  if (!isLocale(locale)) return {};
 
-export const generateMetadata = createGenerateMetadata("aip-mcp-gateway", metadataByLocale);
+  const meta = metadataByLocale[locale];
+  if (!meta) return {};
 
-export default createSolutionPage({
-  en: ContentEN,
-  ko: ContentKO,
-  ja: ContentJA,
-});
+  return {
+    title: meta.title,
+    description: meta.description,
+    keywords: meta.keywords,
+    alternates: {
+      canonical: getSolutionHref(locale, "aip-mcp-gateway"),
+    },
+  };
+}
+
+export default async function SolutionPage({ params, searchParams }: PageProps) {
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+
+  const Content = {
+    en: ContentEN,
+    ko: ContentKO,
+    ja: ContentJA,
+  }[locale];
+
+  if (!Content) notFound();
+
+  return (
+    <div className="bg-white text-[#111827]">
+      <Content locale={locale} searchParams={await searchParams} />
+    </div>
+  );
+}
