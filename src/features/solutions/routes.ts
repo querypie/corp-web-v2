@@ -30,24 +30,6 @@ export const solutionEntries: SolutionEntry[] = [
   { id: "acp-integrations", slug: ["acp", "integrations"] },
 ];
 
-const placeholderPathMap = {
-  "/aip-not-found": "/solutions/aip",
-  "/acp-not-found": "/solutions/acp",
-  "/fdes-not-found": "/solutions/aip/fde-services",
-} as const;
-
-const acpAliasSlugMap = {
-  "database-access-controller": "database-access-controller",
-  "system-access-controller": "system-access-controller",
-  "kubernetes-access-controller": "kubernetes-access-controller",
-  "web-access-controller": "web-access-controller",
-  "web-application-access-controller": "web-access-controller",
-} as const;
-
-function normalizePathname(pathname: string): string {
-  const normalized = pathname.startsWith("/") ? pathname : `/${pathname}`;
-  return normalized.replace(/\/+$/, "") || "/";
-}
 
 export function getSolutionEntryBySlug(slug: string[]): SolutionEntry | null {
   const joined = slug.join("/");
@@ -63,29 +45,3 @@ export function getSolutionHref(locale: Locale, id: SolutionEntry["id"]): string
   return getLocalePath(locale, `/solutions/${entry.slug.join("/")}`);
 }
 
-export function resolveLegacyPlaceholderPath(pathname: string): string | null {
-  const normalized = normalizePathname(pathname);
-  return placeholderPathMap[normalized as keyof typeof placeholderPathMap] ?? null;
-}
-
-export function resolveLegacySolutionAlias(pathname: string): string | null {
-  const normalized = normalizePathname(pathname);
-
-  if (normalized === "/platform/ai/aip" || normalized.startsWith("/platform/ai/aip/")) {
-    return normalized.replace(/^\/platform\/ai\/aip/, "/solutions/aip");
-  }
-
-  if (normalized === "/resources/integrations" || normalized === "/resources/discover/integrations") {
-    return "/solutions/acp/integrations";
-  }
-
-  const acpAliasMatch = normalized.match(
-    /^\/(?:products|platform\/security|resources\/manage)\/(database-access-controller|system-access-controller|kubernetes-access-controller|web-access-controller|web-application-access-controller)$/,
-  );
-  if (acpAliasMatch?.[1]) {
-    const targetSlug = acpAliasSlugMap[acpAliasMatch[1] as keyof typeof acpAliasSlugMap];
-    return `/solutions/acp/${targetSlug}`;
-  }
-
-  return null;
-}
