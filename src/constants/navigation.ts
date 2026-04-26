@@ -1,4 +1,5 @@
 import { getLocalePath, type Locale } from "./i18n";
+import { getSolutionHref } from "@/features/solutions/routes";
 
 export type NavigationSubItem = {
   href: string;
@@ -41,9 +42,9 @@ export function getSolutionsSubItems(locale: string): NavigationSubItem[] {
   const copy = ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer Service (FDES)"];
 
   return [
-    { label: copy[0], href: getLocalePath(locale as Locale, "/aip-not-found") },
-    { label: copy[1], href: getLocalePath(locale as Locale, "/acp-not-found") },
-    { label: copy[2], href: getLocalePath(locale as Locale, "/fdes-not-found") },
+    { label: copy[0], href: getSolutionHref(locale as Locale, "aip") },
+    { label: copy[1], href: getSolutionHref(locale as Locale, "acp") },
+    { label: copy[2], href: getSolutionHref(locale as Locale, "aip-fde-services") },
   ];
 }
 
@@ -100,11 +101,11 @@ export function getFooterHref(item: string, locale: string) {
   }
 
   if (item === "AI Platform (AIP)") {
-    return getLocalePath(locale as Locale, "/aip-not-found");
+    return getSolutionHref(locale as Locale, "aip");
   }
 
   if (item === "Access Control Platform (ACP)") {
-    return getLocalePath(locale as Locale, "/acp-not-found");
+    return getSolutionHref(locale as Locale, "acp");
   }
 
   if (
@@ -112,7 +113,7 @@ export function getFooterHref(item: string, locale: string) {
     item === "Forward Deployed Engineer 서비스 (FDES)" ||
     item === "Forward Deployed Engineer サービス (FDES)"
   ) {
-    return getLocalePath(locale as Locale, "/fdes-not-found");
+    return getSolutionHref(locale as Locale, "aip-fde-services");
   }
 
   if (item === "About Us" || item === "회사 소개" || item === "会社概要") {
