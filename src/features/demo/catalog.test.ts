@@ -13,15 +13,15 @@ import {
 } from "./catalog";
 
 describe("demoMdxEntries", () => {
-  it("ACP/AIP/use-cases/webinars demo 82개를 포함한다", () => {
-    expect(demoMdxEntries).toHaveLength(82);
+  it("ACP/AIP/use-cases/webinars demo 83개를 포함한다", () => {
+    expect(demoMdxEntries).toHaveLength(83);
   });
 
   it("카테고리별 건수를 유지한다", () => {
     expect(demoMdxEntries.filter((entry) => entry.segment === "acp")).toHaveLength(26);
     expect(demoMdxEntries.filter((entry) => entry.segment === "aip")).toHaveLength(1);
     expect(demoMdxEntries.filter((entry) => entry.segment === "use-cases")).toHaveLength(29);
-    expect(demoMdxEntries.filter((entry) => entry.segment === "webinars")).toHaveLength(26);
+    expect(demoMdxEntries.filter((entry) => entry.segment === "webinars")).toHaveLength(27);
   });
 });
 
@@ -38,6 +38,9 @@ describe("demoMdx lookup helpers", () => {
     expect(getDemoMdxEntryByCategoryAndId("webinars", "26")?.slug).toBe(
       "air-company-querypie-ai-usecase-webinar",
     );
+    expect(getDemoMdxEntryByCategoryAndId("webinars", "27")?.slug).toBe(
+      "air-company-ai-agent-security-webinar",
+    );
   });
 
   it("MDX slug를 반환한다", () => {
@@ -45,6 +48,7 @@ describe("demoMdx lookup helpers", () => {
     expect(getDemoMdxSlug("aip", "1")).toBe("aip/1");
     expect(getDemoMdxSlug("use-cases", "29")).toBe("use-cases/29");
     expect(getDemoMdxSlug("webinars", "17")).toBe("webinars/17");
+    expect(getDemoMdxSlug("webinars", "27")).toBe("webinars/27");
   });
 });
 
@@ -56,6 +60,9 @@ describe("demoMdx href helpers", () => {
     );
     expect(getDemoMdxHrefByCategoryAndId("ja", "webinars", "17")).toBe(
       "/ja/webinars/17/findy-querypie-mcp-webinar",
+    );
+    expect(getDemoMdxHrefByCategoryAndId("ja", "webinars", "27")).toBe(
+      "/ja/webinars/27/air-company-ai-agent-security-webinar",
     );
   });
 
@@ -99,5 +106,6 @@ describe("locale visibility/fallback", () => {
   it("locale별 visible entry가 달라진다", () => {
     expect(getVisibleDemoMdxEntries("en").length).toBeLessThan(demoMdxEntries.length);
     expect(getVisibleDemoMdxEntries("ja").length).toBeGreaterThan(getVisibleDemoMdxEntries("en").length);
+    expect(getVisibleDemoMdxEntries("ja").some((entry) => entry.segment === "webinars" && entry.id === "27")).toBe(true);
   });
 });
