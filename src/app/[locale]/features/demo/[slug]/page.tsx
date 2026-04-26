@@ -5,9 +5,6 @@ import { getLocalePath, isLocale } from "../../../../../constants/i18n";
 import DemoDetailClientPage from "../../../../../components/pages/demo/DemoDetailClientPage";
 import type { DocsDetailPageProps } from "../../../../../components/pages/documentation/DocumentationDetailPage";
 import { getContactPageCopy } from "@/features/contact/copy";
-import { getAipDemoHrefByContentId } from "@/features/demo/aip";
-import { getUseCaseDemoHrefByContentId } from "@/features/demo/useCase";
-import { getWebinarDemoHrefByContentId } from "@/features/demo/webinar";
 import { demoCategoryConfigs, getCategoryHref } from "@/features/content/config";
 import {
   formatPublicDate,
@@ -45,14 +42,6 @@ export default async function DemoDetailRoute({ params }: Props) {
 
   if (!currentEntry || !isPublishedContentAccessible(currentEntry)) {
     notFound();
-  }
-
-  const canonicalShortHref =
-    getAipDemoHrefByContentId(locale, currentEntry.id) ??
-    getUseCaseDemoHrefByContentId(locale, currentEntry.id) ??
-    getWebinarDemoHrefByContentId(locale, currentEntry.id);
-  if (canonicalShortHref) {
-    redirect(canonicalShortHref);
   }
 
   const isContentUnlocked = hasUnlockedContentAccess(
@@ -136,15 +125,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {};
   }
 
-  const canonicalShortHref =
-    getAipDemoHrefByContentId(locale, currentEntry.id) ??
-    getUseCaseDemoHrefByContentId(locale, currentEntry.id) ??
-    getWebinarDemoHrefByContentId(locale, currentEntry.id);
-
   return {
     title: getLocalizedContent(currentEntry.title, locale),
     alternates: {
-      canonical: canonicalShortHref ?? getLocalePath(locale, `/features/demo/${resolvedSlug}`),
+      canonical: getLocalePath(locale, `/features/demo/${resolvedSlug}`),
     },
   };
 }

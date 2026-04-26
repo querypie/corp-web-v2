@@ -5,7 +5,6 @@ import {
   formatPublicDate,
   getContentThumbnailSrc,
   getLocalizedContent,
-  getPublicDetailHref,
   getWriterLabel,
   hasLocalizedTitle,
   isPublishedContentVisible,
@@ -200,31 +199,6 @@ describe("formatPublicDate", () => {
 
   it("유효하지 않은 날짜는 빈 문자열을 반환한다", () => {
     expect(formatPublicDate("en", "not-a-date")).toBe("");
-  });
-});
-
-describe("getPublicDetailHref", () => {
-  it("AIP demo는 짧은 demo/aip 경로를 반환한다", () => {
-    expect(getPublicDetailHref("demo", "en", "google-oauth-demo")).toBe("/demo/aip/1/google-oauth-demo");
-    expect(getPublicDetailHref("demo", "ko", "google-oauth-demo")).toBe("/ko/demo/aip/1/google-oauth-demo");
-  });
-
-  it("use-case demo는 짧은 demo/use-case 경로를 반환한다", () => {
-    expect(getPublicDetailHref("demo", "en", "allganize-changsu-lee")).toBe("/demo/use-case/1/allganize-changsu-lee");
-    expect(getPublicDetailHref("demo", "ko", "allganize-changsu-lee")).toBe("/ko/demo/use-case/1/allganize-changsu-lee");
-  });
-
-  it("webinar demo는 짧은 demo/webinar 경로를 반환한다", () => {
-    expect(getPublicDetailHref("demo", "en", "air-company-querypie-mcp-webinar")).toBe(
-      "/demo/webinar/22/air-company-querypie-mcp-webinar",
-    );
-    expect(getPublicDetailHref("demo", "ko", "air-company-querypie-mcp-webinar")).toBe(
-      "/ko/demo/webinar/22/air-company-querypie-mcp-webinar",
-    );
-  });
-
-  it("그 외 demo는 기존 features/demo 경로를 유지한다", () => {
-    expect(getPublicDetailHref("demo", "en", "some-other-demo")).toBe("/features/demo/some-other-demo");
   });
 });
 
