@@ -1,8 +1,11 @@
+import "server-only";
+
+import * as fs from "node:fs";
+import * as path from "node:path";
+import { parse } from "yaml";
+
 import type { Locale } from "@/constants/i18n";
-import type { MdxFrontmatter } from "./types";
-import enAuthors from "./author-data/en.json";
-import koAuthors from "./author-data/ko.json";
-import jaAuthors from "./author-data/ja.json";
+import type { MdxFrontmatter } from "../types";
 
 type AuthorLinkType = "linkedin" | string;
 
@@ -30,10 +33,24 @@ export type ResolvedArticleAuthor = {
   links: AuthorLink[];
 };
 
+const AUTHOR_DATA_DIR = path.join(process.cwd(), "src", "features", "mdx", "authors");
+
+function loadAuthorRecords(locale: Locale): AuthorRecord[] {
+  const filePath = path.join(AUTHOR_DATA_DIR, `${locale}.yaml`);
+  const source = fs.readFileSync(filePath, "utf8");
+  const parsed = parse(source);
+
+  if (!Array.isArray(parsed)) {
+    throw new Error(`Expected author data array in ${filePath}`);
+  }
+
+  return parsed as AuthorRecord[];
+}
+
 const AUTHOR_RECORDS_BY_LOCALE: Record<Locale, AuthorRecord[]> = {
-  en: enAuthors,
-  ko: koAuthors,
-  ja: jaAuthors,
+  en: loadAuthorRecords("en"),
+  ko: loadAuthorRecords("ko"),
+  ja: loadAuthorRecords("ja"),
 };
 
 const AUTHOR_INTRO_HEADINGS: Record<Locale, string> = {
@@ -49,9 +66,7 @@ function toAuthorIds(author: MdxFrontmatter["author"]): string[] {
 
   const ids = Array.isArray(author) ? author : [author];
 
-  return ids
-    .map((value) => value.trim())
-    .filter(Boolean);
+  return ids.map((value) => value.trim()).filter(Boolean);
 }
 
 function normalizeProfileImageSrc(profileImage?: string): string | undefined {
