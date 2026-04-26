@@ -10,7 +10,7 @@ function getLinkedInUrl(author: ResolvedArticleAuthor): string | undefined {
   return author.links.find((link) => link.type === "linkedin")?.url;
 }
 
-export default function ArticleAuthorBox({ authors, locale }: Props) {
+export default function AuthorBox({ authors, locale }: Props) {
   if (authors.length === 0) {
     return null;
   }

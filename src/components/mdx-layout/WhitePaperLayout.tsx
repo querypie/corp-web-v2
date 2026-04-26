@@ -3,7 +3,7 @@ import type { Locale } from "@/constants/i18n";
 import type { MdxFrontmatter, MdxHeading } from "@/features/mdx/types";
 import { CONTENT_PREVIEW_RICH_CLASS } from "@/features/content/previewStyles";
 import { formatResolvedAuthorNames, getDetailedArticleAuthors, resolveArticleAuthors } from "@/features/mdx/authors";
-import ArticleAuthorBox from "./ArticleAuthorBox";
+import AuthorBox from "./AuthorBox";
 import ArticleToc from "./ArticleToc";
 
 type Props = {
@@ -67,7 +67,7 @@ export default function WhitePaperLayout({ children, frontmatter, headings, loca
             {/* MDX 본문 */}
             <div className={CONTENT_PREVIEW_RICH_CLASS}>{children}</div>
 
-            <ArticleAuthorBox authors={detailedAuthors} locale={locale} />
+            <AuthorBox authors={detailedAuthors} locale={locale} />
           </div>
 
           {/* 오른쪽 사이드바: TOC */}
