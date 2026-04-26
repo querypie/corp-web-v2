@@ -90,7 +90,7 @@ const SplitView = Object.assign(
   },
 );
 
-export function buildSolutionMdxComponents({
+export function buildSolutionContentComponents({
   locale,
   searchParams,
 }: {

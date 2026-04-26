@@ -1,5 +1,5 @@
 import type { Locale } from "@/constants/i18n";
-import { buildSolutionMdxComponents } from "@/features/solutions/mdxComponents";
+import { buildSolutionContentComponents } from "@/features/solutions/contentComponents";
 
 type Props = {
   locale: Locale;
@@ -31,7 +31,7 @@ export default function AcpSystemAccessControllerENSolutionContent({ locale, sea
     ThreeColumnList,
     ThumbnailYoutube,
     Youtube
-  } = buildSolutionMdxComponents({ locale, searchParams }) as any;
+  } = buildSolutionContentComponents({ locale, searchParams }) as any;
 
   return (
 <Box direction="column">

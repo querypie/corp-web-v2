@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/constants/i18n";
-import { loadSolutionMeta } from "./loader";
+import { getSolutionStaticMetadata } from "./solutionMetadata";
 import { getSolutionHref, getSolutionEntryById, type SolutionEntry } from "./routes";
 import { getSolutionStaticContent } from "./staticContent";
 
@@ -18,7 +18,7 @@ export function createSolutionMetadata(id: SolutionEntry["id"]) {
     const entry = getSolutionEntryById(id);
     if (!entry) return {};
 
-    const meta = await loadSolutionMeta(entry.slug.join("/"), locale as Locale);
+    const meta = getSolutionStaticMetadata(entry.id, locale as Locale);
     if (!meta) return {};
 
     return {

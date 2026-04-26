@@ -1,12 +1,12 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { buildSolutionMdxComponents } from "./mdxComponents";
+import { buildSolutionContentComponents } from "./contentComponents";
 
 function getComponents() {
-  return buildSolutionMdxComponents({ locale: "ko", searchParams: { category: "db" } }) as any;
+  return buildSolutionContentComponents({ locale: "ko", searchParams: { category: "db" } }) as any;
 }
 
-describe("buildSolutionMdxComponents", () => {
+describe("buildSolutionContentComponents", () => {
   it("내부 Link href에 locale prefix를 붙인다", () => {
     const { Link } = getComponents();
 
