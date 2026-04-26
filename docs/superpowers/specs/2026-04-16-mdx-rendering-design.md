@@ -116,9 +116,11 @@ src/
 
 ### MDX 파일 네이밍 규칙
 
-- corp-web-v2 저장 경로는 `src/content/mdx/blog/<id>/<locale>.mdx`, `src/content/mdx/white-papers/<id>/<locale>.mdx`처럼 콘텐츠 ID 디렉터리를 사용한다.
-- 원본 `corp-web-contents/pages/features/documentation/{blog,white-paper}/<id>/<slug>/<locale>/content.mdx` 경로의 `<slug>`는 locale 공통 canonical slug이므로, 각 MDX frontmatter에 `slug` 필드로 명시한다.
-- 번역 추가·수정 시 동일 ID 폴더 안에서 해당 로케일 파일만 편집하면 된다.
+- corp-web-v2 저장 경로는 `src/content/mdx/blog/<id>/<locale>.mdx`, `src/content/mdx/white-papers/<id>/<locale>.mdx`, `src/content/mdx/demo/<segment>/<id>/<locale>.mdx`, `src/content/internal/**/<locale>.mdx`처럼 유형별 규칙을 따른다.
+- blog/white-paper는 원본 `corp-web-contents/pages/features/documentation/{blog,white-paper}/<id>/<slug>/<locale>/content.mdx` 경로의 `<slug>`를 locale 공통 canonical slug로 보고, 각 MDX frontmatter에 `slug` 필드로 명시한다.
+- demo는 `src/features/demo/catalog.ts`의 canonical slug를 각 locale MDX frontmatter의 `slug` 필드에 동일하게 기록한다.
+- internal은 라우트 세그먼트 자체를 canonical slug로 보고 frontmatter에 `slug`를 기록한다.
+- 번역 추가·수정 시 동일 ID/세그먼트 폴더 안에서 해당 로케일 파일만 편집하면 된다.
 - 특정 로케일 파일이 없으면 `en.mdx`로 폴백한다.
 
 ### MDX 본문 포매팅 규칙

@@ -7,9 +7,11 @@
 
 ## MDX 마이그레이션 파일 규칙
 
-- `src/content/mdx/blog/<id>/<locale>.mdx`와 `src/content/mdx/white-papers/<id>/<locale>.mdx`는 corp-web-v2의 저장 구조다.
-- 원본 `corp-web-contents/pages/features/documentation/{blog,white-paper}/<id>/<slug>/<locale>/content.mdx` 경로의 `<slug>`는 번역 공통 canonical slug로 보고, 각 locale MDX frontmatter에 명시적으로 `slug` 필드로 기록한다.
-- 따라서 v2 MDX는 디렉터리명으로는 콘텐츠 ID를 유지하고, URL/원본 경로 식별에 필요한 slug는 frontmatter에서 읽을 수 있어야 한다.
+- `src/content/mdx/blog/<id>/<locale>.mdx`, `src/content/mdx/white-papers/<id>/<locale>.mdx`, `src/content/mdx/demo/<segment>/<id>/<locale>.mdx`, `src/content/internal/**/<locale>.mdx`는 현재 corp-web-v2의 MDX 저장 구조다.
+- blog/white-paper는 원본 `corp-web-contents/pages/features/documentation/{blog,white-paper}/<id>/<slug>/<locale>/content.mdx` 경로의 `<slug>`를 번역 공통 canonical slug로 보고, 각 locale MDX frontmatter에 명시적으로 `slug` 필드로 기록한다.
+- demo는 `src/features/demo/catalog.ts`의 canonical slug를 기준으로 각 locale MDX frontmatter에 동일한 `slug` 값을 기록한다.
+- internal은 라우트 세그먼트 자체를 canonical slug로 보고, 각 MDX frontmatter에 명시적으로 `slug` 필드를 기록한다.
+- 따라서 v2 MDX는 디렉터리명으로는 콘텐츠 ID/세그먼트를 유지하더라도, URL/원본 경로 식별에 필요한 slug는 frontmatter에서 읽을 수 있어야 한다.
 
 ---
 
