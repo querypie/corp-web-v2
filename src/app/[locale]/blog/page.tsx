@@ -5,6 +5,7 @@ import { getLocalePath, isLocale } from "@/constants/i18n";
 import { formatPublicDate } from "@/features/content/data";
 import { buildPaginatedHref, paginateItems, parsePageParam } from "@/features/pagination";
 import { loadMdxListItems, MDX_LIST_PAGE_SIZE } from "@/features/mdx/list";
+import { getMdxSidebarMenuItems } from "@/features/mdx/navigation";
 import { getMdxListPageCopy } from "@/features/mdx/pageCopy";
 
 type Props = {
@@ -35,6 +36,7 @@ export default async function BlogListPage({ params, searchParams }: Props) {
         title: item.title,
       }))}
       locale={locale}
+      menu={getMdxSidebarMenuItems("blog", locale)}
       nextHref={
         paginated.nextPage ? buildPaginatedHref(basePath, paginated.nextPage) : null
       }

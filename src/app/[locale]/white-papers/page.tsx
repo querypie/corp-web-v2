@@ -4,6 +4,7 @@ import MdxContentListPage from "@/components/pages/mdx/MdxContentListPage";
 import { getLocalePath, isLocale } from "@/constants/i18n";
 import { formatPublicDate } from "@/features/content/data";
 import { loadMdxListItems, MDX_LIST_PAGE_SIZE } from "@/features/mdx/list";
+import { getMdxSidebarMenuItems } from "@/features/mdx/navigation";
 import { getMdxListPageCopy } from "@/features/mdx/pageCopy";
 import { buildPaginatedHref, paginateItems, parsePageParam } from "@/features/pagination";
 
@@ -35,6 +36,7 @@ export default async function WhitePaperListPage({ params, searchParams }: Props
         title: item.title,
       }))}
       locale={locale}
+      menu={getMdxSidebarMenuItems("white-paper", locale)}
       nextHref={
         paginated.nextPage ? buildPaginatedHref(basePath, paginated.nextPage) : null
       }
