@@ -8,7 +8,7 @@ describe("resolveArticleAuthors", () => {
     const enAuthors = resolveArticleAuthors("brant", "en");
     const koAuthors = resolveArticleAuthors("brant", "ko");
     const jaAuthors = resolveArticleAuthors("terazawa", "ja");
-    const guestMigratedAuthors = resolveArticleAuthors("jessica-kim", "en");
+    const guestMigratedAuthors = resolveArticleAuthors("jessica", "en");
 
     expect(enAuthors).toEqual([
       expect.objectContaining({
@@ -36,7 +36,7 @@ describe("resolveArticleAuthors", () => {
 
     expect(guestMigratedAuthors[0]).toEqual(
       expect.objectContaining({
-        id: "jessica-kim",
+        id: "jessica",
         isRegistered: true,
         name: "Jessica Kim",
       }),
