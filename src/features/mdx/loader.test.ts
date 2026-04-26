@@ -96,5 +96,19 @@ describe("loadMdxSource", () => {
       const calledPath = spy.mock.calls[0][0] as string;
       expect(calledPath).toContain(path.join("demo", "acp", "1", "ko.mdx"));
     });
+
+    it("use-cases slug 경로를 올바르게 구성한다", async () => {
+      const spy = vi.spyOn(fsModule.promises, "readFile").mockResolvedValueOnce("" as any);
+      await loadMdxSource("demo", "use-cases/1", "en");
+      const calledPath = spy.mock.calls[0][0] as string;
+      expect(calledPath).toContain(path.join("demo", "use-cases", "1", "en.mdx"));
+    });
+
+    it("webinars slug 경로를 올바르게 구성한다", async () => {
+      const spy = vi.spyOn(fsModule.promises, "readFile").mockResolvedValueOnce("" as any);
+      await loadMdxSource("demo", "webinars/17", "ja");
+      const calledPath = spy.mock.calls[0][0] as string;
+      expect(calledPath).toContain(path.join("demo", "webinars", "17", "ja.mdx"));
+    });
   });
 });

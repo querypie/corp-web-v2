@@ -1,0 +1,37 @@
+---
+layout: "Article"
+category: "demo"
+title: "AIP活用事例： AWSインサイトAIエージェント"
+description: "AWS Inspectorの検出結果を、優先度付きの是正計画へ変換するAIエージェント。リスク、担当者、修正内容を、1回の会話型リクエストで要約します。"
+date: "2025-11-10"
+ogImage: "public/demo/use-cases/23/thumbnail-ja.png"
+relatedPosts:
+  - "/demo/use-cases/21/incident-mgmt-ai-agent"
+  - "/demo/use-cases/22/aws-log-analytics-agent"
+  - "/demo/use-cases/24/aws-solutions-architect-ai-agent"
+hideHeroImage: true
+hideTableOfContents: true
+---
+
+<Youtube
+  src="https://www.youtube.com/embed/9a2BuJVmqBo?si=X5lyKuj3jZLAg5Gf"
+/>
+
+**AWSインサイトAIエージェント**は、生の検出結果からアクションへと進める支援をセキュリティ／DevSecOpsチームに提供します。EC2、ECR、LambdaにまたがるCVEを手作業でトリアージする代わりに、「本番で最もリスクが高い脆弱性は？」「どのイメージがLog4Shellに晒されている？」「14日超のクリティカルについて修正計画を作成して」といった自然言語の質問で、優先度付けされ、担当者に紐づいた是正ガイダンスを受け取れます。
+
+QueryPie AIのAIプラットフォーム（AIP）とModel Context Protocol（MCP）連携で動作し、Amazon Inspector、AWS Organizations、ECR、EC2/ASG、Lambda、Patch Manager、チケット／チャットツールに接続します。検出結果に、アセットのコンテキスト（環境、タグ、オーナー）、エクスプロイト動向、代替統制を付加してエンリッチします。エージェントは、事前入力済みタスクのチケット起票、パッチウィンドウの作成、カナリーロールアウトの調整、Slack/Teamsへの進捗投稿まで実行し、承認を強制しつつ完全な監査証跡を保持します。
+
+**主な機能 :**
+
+- **優先度付き脆弱性サマリー**
+  - 重大度、環境、サービス、露出度で結果を集約し、アクティブに悪用されているCVEを強調
+- **オーナーシップと影響範囲のマッピング**
+  - タグ／IaCからリソースのオーナーを特定し、影響サービスや顧客影響を定量化
+- **是正計画の立案**
+  - 具体的な修正を提案：イメージ再ビルド、パッケージアップグレード、AMIパッチ、Lambdaレイヤー更新、WAFルール適用など
+- **ワークフロー自動化**
+  - Jiraチケットの起票、パッチ波（ウェーブ）のスケジュール、変更管理フック付きのロールアウトをオーケストレーション
+- **コンプライアンスレポーティング**
+  - SLA（例：クリティカルを7/14日以内に是正）に対するダッシュボードとアテステーションを生成し、例外を追跡
+
+このユースケースは、検出結果を明確な計画と自動化されたアクションへ変換することで、脆弱性管理を加速します。セキュリティチームは一貫した優先順位付けとコミュニケーションを得られ、プラットフォームチームはターゲット化された実行可能タスクを受け取れます。これらはすべて、QueryPie AIPのガバナンスと監査の枠組みの中で運用されます。
