@@ -26,6 +26,12 @@ describe("loadMdxSource", () => {
       const result = await loadMdxSource("white-paper", "1", "en");
       expect(result).toBe("# Whitepaper");
     });
+
+    it("demo 카테고리의 중첩 slug 파일을 읽는다", async () => {
+      vi.spyOn(fsModule.promises, "readFile").mockResolvedValueOnce("# Demo" as any);
+      const result = await loadMdxSource("demo", "acp/1", "en");
+      expect(result).toBe("# Demo");
+    });
   });
 
   describe("locale 폴백", () => {
@@ -82,6 +88,13 @@ describe("loadMdxSource", () => {
       await loadMdxSource("blog", "20", "ja");
       const fallbackPath = spy.mock.calls[1][0] as string;
       expect(fallbackPath).toContain(path.join("blog", "20", "en.mdx"));
+    });
+
+    it("demo 카테고리의 중첩 slug 경로를 올바르게 구성한다", async () => {
+      const spy = vi.spyOn(fsModule.promises, "readFile").mockResolvedValueOnce("" as any);
+      await loadMdxSource("demo", "acp/1", "ko");
+      const calledPath = spy.mock.calls[0][0] as string;
+      expect(calledPath).toContain(path.join("demo", "acp", "1", "ko.mdx"));
     });
   });
 });

@@ -1,0 +1,49 @@
+---
+layout: "Article"
+category: "demo"
+title: "How to Connect to Kubernetes via the QueryPie Agent"
+description: "Installing the QueryPie Agent allows you to use third-party Kubernetes client tools such as kubectl, Lens, and k9s."
+date: "2024-11-29"
+ogImage: "public/demo/acp/4/thumbnail.webp"
+hideHeroImage: true
+---
+
+<Youtube src="https://www.youtube.com/embed/AnhHnXdBM10?si=v9w6b9isSqjYaEkT" title="Watch video" />
+
+# Overview
+
+Installing the QueryPie Agent allows you to use third-party Kubernetes client tools such as kubectl, Lens, and k9s.
+
+# Downloading the QueryPie Agent
+
+> The QueryPie Agent supports Mac, Windows, and Linux operating systems.
+
+STEP 1 After logging into QueryPie, click on your profile in the top right corner and select the `Agent Download` button.
+
+STEP 2 Download the installation file suitable for your PC's operating system.
+
+# Running the Agent and Connecting to a Cluster
+
+STEP 1 Enter the QueryPie URL in the **QueryPie Host** field and click `Next`.
+
+STEP 2 Log in using your credentials in the browser window.
+
+STEP 3 Once login is successful, return to the Agent app.
+
+STEP 4 Check the list of accessible resources in the Agent app.
+
+- If you have multiple roles, select the desired role after logging into the Agent.
+- Click the magnifying glass icon next to each cluster to view detailed policy information applied to that cluster.
+
+STEP 5 In the Agent settings, click the `KubeConfig Path` button and configure the Kubeconfig file path.
+
+- **Path Configuration:** The user can specify the file path where the Kubeconfig file will be saved.
+- The default path is `$HOME/.kube/querypie-kubeconfig`.
+
+STEP 6 Copy the provided command line and execute it in your terminal to declare the KUBECONFIG environment variable.
+
+> 1.
+> If this is the first time setting the KUBECONFIG environment variable, replace the default "`${KUBECONFIG}`" value with "`${HOME}/.kube/config`".
+> ```sh export KUBECONFIG="${HOME}/.kube/config:${HOME}/.kube/querypie-kubeconfig"```2.
+> If you’ve changed the custom Kubeconfig path provided by QueryPie, update the environment variable with the new path:```sh export KUBECONFIG="${KUBECONFIG}:"```3.
+> Use`Copy`to copy the command line, declare it on your client, and switch the context to an accessible cluster:```sh export KUBECONFIG="${KUBECONFIG}:${HOME}/.kube/querypie-kubeconfig"```

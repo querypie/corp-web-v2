@@ -1,0 +1,72 @@
+---
+layout: "Article"
+category: "demo"
+title: "How to Grant Permissions to Users"
+description: "Administrators can manage templates for restricted commands that are not allowed on servers and can directly grant or revoke access permissions to servers."
+date: "2024-11-29"
+ogImage: "public/demo/acp/23/thumbnail.webp"
+hideHeroImage: true
+---
+
+<Youtube src="https://www.youtube.com/embed/HP3nFVcY9v0?si=BZuYFhLksFzi4AgK" title="Watch video" />
+
+# Overview
+
+Administrators can manage templates for restricted commands that are not allowed on servers and can directly grant or revoke access permissions to servers.
+Command restriction is string-based, and support for regular expressions is also available.
+
+# Setting Up a Command Template
+
+STEP 1 Go to the **Command Templates** menu and click `<br />Create Template`.
+Enter the following details:
+
+- **Name:** Enter a name to identify the template.
+- **Description:** Enter additional information about the template.
+
+STEP 2 Select whether to allow or deny commands registered in the command template.
+
+- **Deny:** Configure the commands to be denied.
+  Any commands other than the configured ones will be allowed.
+- **Allow:** Configure the commands to be allowed.
+  Only the configured commands will be permitted, and all others will be denied.
+
+STEP 3 **Commands(SSH):** Configure the command policy for commands executed through the web terminal on the server.
+
+- **Keyword:** Commands can be entered as keywords.
+- **RegEx:** Commands can be entered as regular expressions.
+
+STEP 4 **Commands(SFTP):** Configure the functionality policy for commands executed via web SFTP or FTP on the server.
+
+STEP 5 Click the `Save` button at the bottom right to finalize the configuration.
+
+# Granting a Direct Permission
+
+STEP 1 Go to the **Access Control** menu and select the user or group to whom you want to grant the privilege.
+
+STEP 2 Click the `Grant Permissions` button.
+
+STEP 3 Choose the server group from the left-hand list for which you want to grant access permissions.
+
+STEP 4 The associated servers and accounts within that group will appear on the right-hand side.
+Select the server and accounts you wish to grant permissions to.
+
+1. On the right-hand side, select the **server(s)** you want to grant permissions for.
+2. At the bottom right, select the **account(s)** that can access the selected server(s).
+
+STEP 5 Click the `Next` button.
+
+STEP 6 Set the following policy, then click the `Grant` button to finalize the permission assignment.
+
+- **Expiration Date:** Set an expiration date for the access permission (default is 1 year, max is 1 year).
+- **Protocols:** Specify the protocol(s) used for server access.
+- **Command Template:** Set restricted command sets for server access.
+  Click Command Template Details to review the specific restrictions.
+- **Access Start Time:** Set the start time for server access.
+- **Access End Time:** Set the end time for server access.
+- **Access Weekday:** Choose the days of the week when access is allowed.
+- **IP Addresses:** Define the IP addresses from which access is allowed.
+- **Command Audit:** Determine whether the commands used in the connected session should be logged through this permission.
+- **Command Detection:** Determine whether the detection of forbidden commands within scripts and aliases should be enabled when called.
+- **Proxy Usage:** Set whether the QueryPie Agent allows server access under this Permission.
+- **Max Sessions:** Limit the number of concurrent sessions a user can have on a server.
+- **Session Timeout (minutes):** Set the duration (in minutes) after which an inactive session will be terminated.

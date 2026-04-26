@@ -1,0 +1,50 @@
+---
+layout: "Article"
+category: "demo"
+title: "\ub370\uc774\ud130\ubca0\uc774\uc2a4 \uc811\uadfc \uad8c\ud55c \uc694\uccad\ud558\uae30"
+description: "\uc811\uadfc\uc774 \ud544\uc694\ud55c DB \ucee4\ub125\uc158\uc5d0 \ub300\ud55c Privilege\ub97c \uc694\uccad\ud558\uace0, \uc2b9\uc778\uc774 \uc644\ub8cc\ub420 \uacbd\uc6b0 \uc989\uc2dc \uad8c\ud55c\uc774 \ubd80\uc5ec\ub418\uba70 QueryPie Web\uc5d0 \uc788\ub294 SQL Editor \ub610\ub294 Agent\ub97c \ud1b5\ud574 \uad8c\ud55c\uc744 \ubc1b\uc740 \ucee4\ub125\uc158\uc5d0 \uc811\uc18d\ud560 \uc218 \uc788\uc2b5\ub2c8\ub2e4."
+date: "2024-11-29"
+ogImage: "public/demo/acp/19/thumbnail.webp"
+hideHeroImage: true
+---
+
+<Youtube src="https://www.youtube.com/embed/7IsKgexJnz8?si=wonel5xWtR7HvuZc" title="Watch video" />
+
+# Overview
+
+접근이 필요한 DB 커넥션에 대한 Privilege를 요청하고, 승인이 완료될 경우 즉시 권한이 부여되며 QueryPie Web에 있는 SQL Editor 또는 Agent를 통해 권한을 받은 커넥션에 접속할 수 있습니다.
+
+# 데이터베이스 접근 권한 요청하기
+
+STEP 1 아래 경로를 통해 **DB Access Request** 페이지에 진입합니다.
+
+- Database > 왼쪽 상단 버튼
+- Workflow > Submit Request > DB Access Reques
+
+STEP 2 결재 규칙을 선택하고 승인자를 지정합니다.
+
+- **Approval Rule:** **General > Approval Rules** 메뉴에서 관리자가 생성한 규칙 목록들이 나타납니다.
+- 규칙에 따라 승인 대상이 달라질 수 있으며, 관리자가 승인자를 지정한 결재 규칙인 경우 자동으로 승인자가 지정됩니다.
+- **Approver:** 결재 라인에서 `+` 버튼을 누르고 단계별 승인자를 지정합니다.
+- **A single assignee can complete the approval request:** 여러 명 중 한 명의 승인만으로 결재 요청이 승인 처리됩니다.
+- **All assignees must approve this request:** 모든 승인자가 승인하여야 결재 요청이 승인 처리됩니다.
+
+STEP 3 요청할 DB 커넥션을 선택하고 권한을 지정합니다.
+
+- **Privilege Type:** 특정 DB 커넥션에 요청할 Privilege Type을 지정하면 그 값이 표시됩니다.
+- **Current Privilege:** 해당 커넥션의 현재 권한을 표시합니다.
+  현재 접근 권한이 없는 경우 비어있습니다.
+- **Expiration Date:** 현재 해당 커넥션에 부여되어 있는 권한의 만료일자를 표시합니다.
+
+STEP 4 요청 정보를 입력한 후 `Submit` 버튼을 눌러 Request를 요청합니다.
+
+- **Title:** 요청 제목을 입력합니다.
+- **Expiration Date:** 요청 권한의 만료일자를 입력합니다.
+  기본값은 1년입니다.
+- **Reason for Request:** 접근 권한을 요청하는 사유를 입력합니다.
+
+# 요청받은 결재 승인하기
+
+STEP 1 승인자로 지정된 관리자는 **Workflow > Received Requests > To Do** 메뉴로 이동합니다.
+
+STEP 2 결재의 디테일 페이지에서 `Approve` 버튼을 눌러 승인처리합니다.

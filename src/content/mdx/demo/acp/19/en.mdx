@@ -1,0 +1,50 @@
+---
+layout: "Article"
+category: "demo"
+title: "How to Submit a Workflow for DB Access Requests"
+description: "By requesting privileges for required DB connections, users can gain immediate access upon approval."
+date: "2024-11-29"
+ogImage: "public/demo/acp/19/thumbnail.webp"
+hideHeroImage: true
+---
+
+<Youtube src="https://www.youtube.com/embed/7IsKgexJnz8?si=wonel5xWtR7HvuZc" title="Watch video" />
+
+# Overview
+
+By requesting privileges for required DB connections, users can gain immediate access upon approval.
+Once access is granted, users can connect to the database through the QueryPie Web SQL Editor or Agent.
+
+# Submitting a DB Access Request
+
+STEP 1 Access the **DB Access Request** page through the following paths:
+
+- Database > Top-left Button
+- Workflow > Submit Request > DB Access Reques
+
+STEP 2 Select approval rules and assign approvers.
+
+- **Approval Rule:** Choose an approval rule from the list created by the administrator in **General > Approval Rules**.
+- Approval rules determine who must approve the request.
+  If the rule specifies approvers, they will be automatically assigned.
+- **Approver:** Use the `+` button to add approvers at each stage of the approval workflow.
+- **A single assignee can complete the approval request:** Any one approver in a group can approve the request.
+- **All assignees must approve this request:** All assigned approvers must approve the request for it to proceed.
+
+STEP 3 Select the DB connection and specify privileges.
+
+- **Privilege Type:** Choose the privilege type to request for the selected DB connection.
+- **Current Privilege:** Displays the user's current privileges for the connection (empty if no access exists).
+- **Expiration Date:** Shows the expiration date of any current privileges.
+
+STEP 4 After entering all details, click the `Submit` button to send the request for approval.
+
+- **Title:** Provide a title for the request.
+- **Expiration Date:** Specify the expiration date for the requested privileges (default: 1 year).
+- **Reason for Request:** State the reason for requesting access.
+
+# Approving a Request
+
+STEP 1 Assigned approvers can navigate to **Workflow > Received Requests > To Do** to view pending requests.
+
+STEP 2 Open the details page for the request and click the `Approve` button to complete the approval process.
