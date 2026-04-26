@@ -1,0 +1,285 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "Kubernetesクラスターの安全な運用のためのアクセス制御"
+description: "QueryPie は、クラウドクラスタ管理と運用セキュリティを強化するために、安全な Kubernetes アクセス制御を保証します。"
+date: "2024-11-22"
+author: "david"
+ogImage: "public/white-papers/6/thumbnail.png"
+keywords: ["QueryPie", "Kubernetes security", "access control", "cloud cluster management", "operational security"]
+relatedPosts:
+  - "/ja/white-papers/2"
+  - "/ja/white-papers/5"
+  - "/ja/white-papers/7"
+---
+
+# 序文
+
+Kubernetesクラスターの導入と利用が拡大する中で、クラスターのセキュリティと運用効率を確保するために、アクセス制御の重要性がますます高まっています。しかし、Kubernetesが標準で提供するRBAC(Role-Based Access Control)機能は強力なアクセス制御をサポートしているものの、その設定や管理が複雑であるため、実際に積極的に活用している組織は多くありません。
+
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/1-Introduction.png"
+        alt="Introduction"
+    />
+</Box>
+<br />
+
+共有されたAdmin権限は、全てのユーザーに無制限の権限を付与するため、誤操作によるリソースの削除や変更のリスクが大幅に増加します。これによりサービス障害が発生する可能性があり、問題が起きた際に誰がどの作業を行ったのかを追跡・監査するのが非常に困難になります。そのため、Kubernetesクラスターの安全で効率的な運用には、ユーザーごとに明確なアクセス制御ポリシーを策定することが不可欠です。
+
+こうした課題に対処するために、多くの組織がKubernetesのRBAC(Role-Based Access Control)の導入を検討します。しかし、RBACには機能上の制約や管理の難しさがあり、積極的に活用している組織は多くありません。実際、Kubernetes RBACにはどのような難点があるのでしょうか？また、それを解決し、安全にKubernetesクラスターを運用するにはどうすれば良いのでしょうか？
+
+これらの課題を解決するために開発された、Kubernetesアクセス制御製品の機能や開発で採用された技術について詳しくご紹介します。
+
+# **問題定義**
+
+Kubernetesには、RBAC(Role-Based Access Control)というロールベースのアクセス制御機能が既に組み込まれています。このRBACを活用することで、クラスター内のリソースごとにアクセス権限を分けてロールを作成し、そのロールを必要なユーザーに付与する形で管理することが可能です。例えば、ユーザーごとにクラスター内のnamespaceを分割し、それぞれのユーザーが自分のnamespace内のリソースにのみアクセスできるように設定できます。
+
+このためには、ユーザーごとの認証情報を含むkubeconfigを作成し、各ユーザーに配布します。以下の図を例にすると、Davidは "David"namespace内のリソースにのみアクセスでき、AndrewやSamもそれぞれのnamespace内のリソースにのみアクセス可能な仕組みです。このように、ユーザーごとにkubeconfigを管理することで、一定の権限管理とクラスター内リソースの衝突問題を解決することができます。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/2-Challenges-1.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+しかし、Kubernetes RBACを適用すれば運用が楽になるのでしょうか？実際にKubernetes RBACを導入した方々の意見を聞いてみると、運用上の不便さを挙げる方が多いです。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/3-Challenges-2.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+どのような課題があるのでしょうか？まず、kubeconfigの管理について考えてみましょう。クラスターでユーザーごとにRBACを適用する場合、クラスター管理者が行わなければならない作業は予想以上に多岐にわたります。まず、どのリソースに対してどのようなアクションを許可するのかを定義するRoleを作成する必要があります。その後、作成したRoleを各ユーザーにRoleBindingで割り当てます。さらに、ユーザーがそのRoleを使ってクラスターにアクセスできるように、X.509証明書やトークンを使用してユーザーごとのkubeconfigを生成しなければなりません。つまり、クラスター管理者はユーザーごと、さらにRoleごとに細かく管理を行う必要があり、この運用の煩雑さが大きな負担となっています。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/4-Challenges-3.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+サービスの規模が拡大し、マルチクラスターを運用するケースが増えるとどうなるでしょうか？管理しなければならないクラスターが1つではなく複数になる場合、クラスター管理者の負担はさらに増加します。先ほど説明したように、Roleの作成、Roleのバインディング、ユーザーごとのkubeconfig管理を各クラスターごとに繰り返し実行しなければなりません。クラスターやユーザーの数が増えるにつれて、運用リソースの負担も比例して増大していくのです。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/5-Challenges-4.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+Kubernetesの監査ログは、誰がいつどのリソースにアクセスしたかを記録します。しかし、このログを管理するには、クラスター管理者が各クラスターごとに監査設定を行う必要があるという負担があります。さらに、監査時に特定のユーザーの操作を調査する必要がある場合、各クラスターの監査ログを1つずつ検索する必要があります。そのため、監査ログの設定作業とログデータの管理に大きな課題があります。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/6-Challenges-5.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+kubeconfigや監査ログの管理だけでなく、Kubernetes RBACにはいくつかの機能的な制約があります。その中の1つが、Kubernetes RBAC仕様で拒否ルール(Deny Rule)をサポートしていない点です。例えば、上記の図のように「nginx Podを除くすべてのリソースにアクセス権を与えたい」と仮定します。この場合、Kubernetes RBACのRole設定をどうすればよいでしょうか？
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/7-Challenges-6.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+KubernetesのRole仕様は許可ルールのみをサポートしているため、上記の図のように、Role仕様にnginxを除外したすべてのリソース名を1つずつ追加する必要があります。もし追加すべきリソースが3～4個程度であればまだしも、10個や20個に増えた場合はどうすれば良いでしょうか。また、リソースが頻繁に追加・削除される場合にはどう対応すれば良いでしょうか。そのたびにRole仕様を管理するのは、運用の負担を増大させることになるでしょう。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/8-Challenges-7.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+2つ目の残念な点は、RBAC設定時にパターンマッチングをサポートしていない部分です。例えば、Pod名が”david”で始まる複数のPodがあると仮定します。この場合、”david”で始まるPodのみにアクセス権限を付与したい場合、どのように設定すれば良いでしょうか？
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/9-Challenges-8.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+残念ながら、現在のKubernetes Role仕様ではリソース名にパターンマッチングを指定することはできません。つまり、”david”で始まるPodをパターンで設定する方法が存在しないのです。そのため、ご覧の通り、`david-1`、`david-2`、`david-3`といったようにPod名を1つずつ全て手動で記載する必要があります。これもまた、クラスター管理者にとっては煩雑な作業となります。
+
+さらに、Kubernetesのアクセス制御機能には、RBACとABACを同時に使用したい場合に設定が複雑になることや、Podリストの表示時にアクセス権のあるPodだけをフィルタリングしてユーザーに表示する機能が欠けているといった不足点もあります。
+
+# 目標設定
+
+これまでに説明したKubernetes標準のRBAC機能の不足を補い、クラスター管理者のアクセス制御に関する運用負担を軽減するため、新たなKubernetesアクセス制御製品を開発するという目標を立てました。そして、この新しいKubernetesアクセス制御製品を導入する際、ユーザーが抵抗を感じないよう、従来のKubernetesの使いやすさをそのまま維持するという目標も設定しました。
+
+# ソリューション概要
+
+Kubernetes アクセス制御製品（以下、KAC）は、クライアントとKubernetes APIサーバーの間にKACプロキシサーバーを配置してアクセス制御を行う仕組みです。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/10-Solution-Overview.png"
+        alt="Solution Overview"
+    />
+</Box>
+<br />
+
+クライアントとKubernetes APIサーバーの間で、ユーザーリクエストが含まれるKubernetes APIリクエストを傍受して動作します。傍受したAPIリクエストを分析し、どのリソースにどのアクションを実行しようとしているのかを確認します。その後、そのユーザーが該当する権限を持っているかをチェックします。また、将来的な監査のために、誰が、いつ、どのリソースに対してどのアクションを実行したのかを記録する監査ログ機能を標準で提供しています。
+
+
+その後、APIリクエストの種類に応じてさまざまな追加機能を提供します。例えば、**Pod exec**のようにコンテナ内部に接続するリクエストの場合、ユーザーがコンテナ内で入力したコマンドや出力内容を記録し、後で再生できるようにしました。また、Podリストを取得する場合には、Kubernetes APIサーバーの応答をフィルタリングし、実際にユーザーが権限を持つPodのみを表示する機能も提供しています。さらに、これらの機能を提供する際にも、既存のKubernetesクライアントツールがそのまま使用できるように設計されています。このため、KAC Proxyサーバーは透過的(transparent)に設計され、ユーザーのクライアントツールからはKAC Proxyサーバーの存在を意識することなく利用できます。
+
+# 技術的説明
+
+KACのアクセス制御機能がどのように動作するのか、技術的な観点からステップごとに説明します。基本的に、クラスター内のリソースへのアクセスの許可とブロックは、KAC Proxyサーバーで処理されます。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/11-Technical-Description-1.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+クライアントがリクエストを送信すると、KACプロキシサーバーはそのリクエストに対する権限をチェックします。ポリシーチェックの結果、権限がある場合はユーザーのリクエストをKubernetes APIサーバーに転送しますが、権限がない場合は、クライアントに対してリクエスト権限がない旨のエラーメッセージを返します。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/12-Technical-Description-2.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+KACプロキシサーバーでポリシーに基づいてアクセスを制限または許可するには、まず、誰がアクセスしようとしているのかを識別する必要があります。つまり、認証機能が必要です。Kubernetesでは、クライアントの認証情報をkubeconfigファイルを介して管理しています。また、ほとんどのKubernetesクライアントツールもこのkubeconfigを使用しています。そのため、KACは互換性を確保するために、kubeconfigを利用したクラスターへのアクセス方法をそのまま維持しています。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/13-Technical-Description-3.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+また、kubeconfigファイルはユーザーが煩雑に管理する必要がないよう、ユーザーのローカル環境に KAC エージェントを配置し、エージェントがkubeconfigファイルを管理する方式を採用しました。これにより、管理者の運用負担を軽減しています。
+
+KACプロキシは、クライアントからのさまざまなリクエストをプロトコルごとに解析します。たとえば、`kubectl create pod`、`kubectl get pod`、`kubectl delete pod`のようにリソースの作成、取得、削除などに使用されるAPIだけでなく、`kubectl exec`コマンドでPod内のコンテナにアクセスする場合や、`kubectl`コマンドで`--watch`オプションを指定してイベントを監視する場合のリクエストも解析します。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/14-Technical-Description-4.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+特に、`kubectl exec`コマンドでPod内のコンテナにアクセスする場合、**KACプロキシサーバー**はストリームを解析し、コンテナ内でユーザーがどのような入力を行い、どのような出力を得たのかを確認できます。そして、このデータを記録し、後でプレイヤーを使用して再生できるような機能を実装しました。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/15-Technical-Description-5.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+ユーザーが`kubectl`コマンドに`--watch`オプションを付けてリソースの状態を監視する場合、リソースに状態変化が発生するたびにストリームで応答が返されます。このプロセスで、KACプロキシサーバーはイベントストリームの内容を解析し、ユーザーが権限を持つリソース情報のみが見られるようにする機能を実装しました。例えば、`kubectl --watch`オプションでリソースの状態を監視している際、リソースの状態が変更されると、各イベントには追加、削除、修正情報だけでなく、PodやDeploymentなどの実際のリソース情報も含まれます。KACプロキシサーバーはこれらのイベントストリームをリアルタイムでデコードし、アクセス制御ポリシーに違反するリソースが含まれていないかを確認し、必要に応じてフィルタリングを行います。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/16-Technical-Description-6.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+次に、ユーザーが`kubectl get pod --all-namespaces`コマンドのようにクラスタ内のすべてのPodリストを取得する場合についてです。この場合、KACは返されるPodリスト全体の各Podについて、ユーザーの権限をチェックし、権限がないリソースはフィルタリングして表示する機能を提供します。つまり、全体のPodリストを取得したとしても、実際にアクセス権を持つPodのみが表示される仕組みです。
+
+KACプロキシサーバーは、ユーザーが Kubernetesリソースにアクセスする際に、きめ細かい権限制御を行う中心的なコンポーネントです。このサーバーはKubernetes APIとリソースに関する深い理解を基盤に、受信するリクエストを詳細に解析し、対象リソースと操作の種類を正確に識別します。特筆すべき点は、従来のKubernetesの使いやすさをそのまま維持しながら、すべてのクライアントリクエストに対して厳格なアクセス権限検証を実施する点です。
+
+# RBAC仕様の改善
+
+冒頭で述べたように、KubernetesのRBAC仕様にはいくつかの制約があります。ここでは、KACがそれらの制約をどのように改善したかについて説明します。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/17-rbac-spec-1.png"
+        alt="RBAC Specifications"
+    />
+</Box>
+<br />
+
+KACでは、Kubernetes RBAC仕様で表現できない要件をサポートするため、独自のポリシー仕様を提供しています。上記の図は KACポリシー仕様の例ですが、大きく分けて次の4つの項目から構成されています: resources、subjects、actions、conditions。まず、resources項目では、どのクラスターを対象とするのか、クラスター名を指定できます。次に、subjects項目では、どのKubernetesグループやユーザー権限でリソースにアクセスするのかを指定します。また、actions 項目では、PodやDeploymentなどのリソースに対してどのようなアクション(操作)を許可するのかを指定できます。最後に、conditions項目では、タグやユーザー属性を基にアクセス制御条件を設定することができる仕様を提供しています。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/18-rbac-spec-2.png"
+        alt="RBAC Specifications"
+    />
+</Box>
+<br />
+
+resources項目にはアクセス制御を行う対象のクラスター名を指定します。上記の図のように複数のクラスターを指定することが可能であり、マルチクラスター環境でも1つのポリシー仕様で統合的にアクセス制御ポリシーを管理することができます。
+
+subjects項目には、KAC ProxyサーバーがKubernetes APIサーバーを呼び出す際に、どのKubernetesグループまたはユーザー権限で呼び出すかを指定します。これはKubernetesのImpersonation機能を活用しており、KAC Proxyサーバーが Kubernetes APIサーバーを呼び出す際に、ここで指定されたKubernetesグループの権限でAPIサーバーを呼び出す形になります。
+
+次に、actions項目には実際にアクセス制御を行うKubernetesリソースのタイプ、namespace、name、そしてverb(操作)を指定します。また、ワイルドカードやパターンマッチングをサポートしているため、従来のKubernetes Role仕様のようにリソース名を1つずつ個別に指定する必要がなくなりました。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/19-rbac-spec-3.png"
+        alt="RBAC Specifications"
+    />
+</Box>
+<br />
+
+拒否ルールもサポートしています。冒頭で述べたように、現在のKubernetes RBACのRole仕様は許可ルールしかサポートしていませんが、拒否ルールをサポートすることで、ブラックリストベースのアクセス制御が可能になりました。続いて、conditions項目には、このポリシーが適用される条件を設定できます。ここでは、クラスターのタグやユーザーの属性値を基にして、ポリシーを適用する条件を指定できます。例えば、ユーザーの属性として「チーム」を指定することが可能であり、チームごとに属性を設定できることで、ポリシーの適用がさらに簡単になります。最後に、クラスタータグはクラスターの属性として機能します。このタグはマルチクラスター環境でポリシー管理を行う際に非常に有用であり、複数のクラスターを効率的に管理することを可能にします。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/20-rbac-spec-4.png"
+        alt="RBAC Specifications"
+    />
+</Box>
+<br />
+
+KACは、QueryPieの他の製品であるDACやSACと同様に、クラスター同期機能を提供しています。これにより、数回のクリックでクラウドプロバイダーごとのマネージドKubernetesのリストを簡単に取得し、アクセス制御サーバーに登録することができます。Kubernetesクラスターリストが登録されると、管理者は各クラスターにタグを付与することが可能です。このタグは、KACポリシー仕様に基づいてアクセス制御設定に活用されます。
+
+例えば、開発用クラスターにのみ特定のアクセス制御ポリシーを適用したい場合を考えてみましょう。自動で取得されたクラスターリストの中から開発用クラスターを選び、ClusterTypeに"dev"というタグを付与します。その後、ポリシー仕様のconditions項目にこのタグ内容を設定すると、そのポリシー仕様はすべての devクラスターに一括で適用されます。まとめると、Kubernetesクラスターリストの自動同期機能とクラスタータグ機能を活用することで、多数のクラスターに対してもアクセス制御ポリシーを効率的かつ簡単に管理することが可能になります。
+
+# 終わりに
+
+KACは、従来のKubernetes RBACが抱える課題を補完し、強化されたアクセス制御機能と効率的な管理体験を提供します。技術的には、透明性の高いプロキシアーキテクチャと多様なリクエストタイプごとの詳細な解析を通じて、既存のKubernetesツールとの完全な互換性を確保するとともに、コンテナへのアクセスに関する詳細な監査追跡が可能です。また、ポリシー管理の面では中央集中的な管理方式を採用し、管理者が多くのクラスターに対するアクセス制御を一貫して設定・管理できるようにサポートします。
+
+SaaS環境の普及に伴い、増加するKubernetesクラスターを安全かつ効率的に運用するため、QueryPie KACは欠かせないツールとして確固たる地位を築いています。QueryPie KACを活用し、企業のクラスター資産を保護するとともに、運用効率を最大化しましょう。
+

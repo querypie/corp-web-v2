@@ -1,0 +1,196 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "MCP(Model Context Protocol) 시대의 PAM(Privileged Access Management)을 재정의 하다."
+description: "AI 에이전트가 기업 인프라에 안전하게 접근하려면, 이제는 MCP와 PAM의 결합이 필수입니다. 본 화이트페이퍼에서는 QueryPie가 제안하는 MCP-PAM 통합 전략을 통해 SSH 연결, 터미널 제어, AI 거버넌스까지 아우르는 새로운 보안 아키텍처를 소개합니다."
+date: "2025-04-08"
+author: "kenny"
+ogImage: "public/white-papers/15/thumbnail.png"
+keywords: ["QueryPie", "쿼리파이", "SSH 연결", "QueryPie SSH", "SSH 보안", "터미널 접근 제어", "CLI 워크플로우", "MCP PAM", "AI 보안", "AI 거버넌스", "개발자 생산성", "특권 접근 관리", "엔터프라이즈 보안", "AI 인프라", "Zero Trust 보안", "AI 통합 전략"]
+relatedPosts:
+  - "/ko/white-papers/1"
+  - "/ko/white-papers/5"
+  - "/ko/white-papers/2"
+---
+
+
+# AI 에이전트를 위한 MCP 기반 보안 거버넌스와 PAM 통합 전략
+Model Context Protocol(MCP)는 [Anthropic](https://www.anthropic.com/)에서 개발한 개방형 표준으로, **AI 시스템과 외부 도구 및 데이터 간의 양방향 상호작용을 표준화하여 안전하게 연결**하는 것을 목표로 하고 있습니다[1][2]. 이는 일종의 “범용 어댑터(universal adapter)” 역할을 수행하며, 대규모 언어 모델(LLM) 등의 AI 에이전트가 다양한 외부 시스템과 시너지를 이루며 통합될 수 있도록 설계되었습니다[1][3].
+MCP를 통해 AI 에이전트는 기존 비즈니스 도구들의 기능과 데이터를 직접 활용하거나 액션을 수행할 수 있으며, 이러한 통합은 과거 각각의 시스템마다 별도의 일회성 스크립트를 작성해야 했던 비효율을 줄이고 상호 운용성을 크게 향상시켰습니다[3].
+
+Anthropic은 2024년 말 MCP를 발표하면서 개발자 커뮤니티의 피드백을 적극적으로 수렴하였으며, MCP 사양은 투명하게 공개되어 있습니다[1]. 이 프로토콜은 [Claude](https://claude.ai/) 등 특정 AI에 국한되지 않고 오픈 소스 형태로 제공되어, 다양한 AI 모델과 도구들이 폭넓게 채택하고 기여할 수 있도록 하였습니다[1]. 결과적으로 MCP는 AI 모델이 실시간 데이터에 접근하고 외부 명령을 수행할 수 있는 표준화된 인터페이스를 제공함으로써, AI 활용의 범위를 획기적으로 확장하였습니다[2].
+
+<br />
+<Youtube center src="https://www.youtube.com/embed/wQYLtxt0MU4?si=AgLOgzSv04tJ2mw_" />
+<br />
+
+# MCP의 구성
+MCP의 아키텍처는 호스트-클라이언트-서버 3자 모델로 구성됩니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/15/1-how-does-mcp-work.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+
+여기서 호스트(Host)는 외부 데이터 소스나 도구에 접근하고자 하는 AI 애플리케이션(예: AI 어시스턴트)을 의미하며, 클라이언트(Client)는 호스트에 내장되어 MCP 통신을 담당하는 모듈입니다. 서버(Server)는 CRM, 데이터베이스, 캘린더 등 AI가 연결하고자 하는 외부 시스템으로, MCP 프로토콜을 지원하도록 구현된 측을 가리킵니다[1][4]. 이러한 구조를 통해 AI 에이전트(호스트)가 MCP 클라이언트를 통해 MCP 서버에 질의하거나 명령을 전송하면, 서버는 표준화된 방식으로 응답하며 양방향 통신(two-way interaction)이 이루어집니다[1]. 특히 MCP는 AI와 외부 시스템 간에 명확한 보안 경계(security boundary)를 설정하여, AI가 획득할 수 있는 정보와 수행할 수 있는 작업을 제어함으로써 예상치 못한 행동을 방지하기 위한 안전장치를 제공합니다[1].
+
+Anthropic이 공개한 MCP 사양서에 따르면, MCP는 컨텍스트 관리, 세션 및 권한 제어, 인증 등을 포함하며, 일반 웹 API뿐만 아니라 다양한 형태의 도구 인터페이스에 적용될 수 있도록 설계되어 있습니다[1]. 예를 들어 MCP는 메시지 교환 형식으로 JSON-RPC 2.0 규격을 채택하여 통신하며, 이를 통해 AI와 외부 서버 간의 언어 중립적인 데이터 송수신이 가능합니다[1][5]. 또한 MCP는 AI 에이전트가 작업을 수행하려 할 때 사용자 동의를 얻는 흐름을 포함하는 등, 보안과 프라이버시를 고려한 절차를 명시하고 있습니다[1].
+
+MCP는 기존 웹 표준과 인증 체계를 기반으로 설계되었으며, 예를 들어 OAuth 2.0을 통한 토큰 기반 인증과 JWT(Json Web Token)의 활용을 권장함으로써 AI 에이전트에 대한 신원 인증과 권한 검증이 기존 인프라에 자연스럽게 통합될 수 있도록 지원합니다[2][6]. 즉, AI 에이전트가 외부 MCP 서버의 보호 자원에 접근하기 위해서는 OAuth 인증 서버로부터 액세스 토큰을 안전하게 발급받아 제출해야 하며, MCP 서버는 해당 토큰의 유효성과 권한 범위를 검토한 후 요청을 처리하게 됩니다[6]. 이때 AI 에이전트는 사람 사용자와는 별도의 클라이언트 자격 증명을 보유해야 하며, 토큰에는 에이전트의 신원과 맥락 정보가 포함되어 있어, 수행 가능한 작업을 세밀하게 제어할 수 있습니다[6][7].
+
+이처럼 MCP는 맥락 인지형 인증 및 인가 메커니즘을 프레임워크 자체에 내장하고 있어, AI 에이전트가 동적으로 변화하는 환경에서도 허가된 작업만 수행하도록 보장합니다[6]. 특히, AI 에이전트에 부여된 접근 권한을 철회해야 하는 상황(예: 에이전트가 침해되었거나 더 이상 권한이 필요하지 않은 경우)에서는, 토큰을 즉시 무효화(revocation)하여 추가적인 액션을 차단할 수 있도록 프로토콜 차원에서 설계되어 있습니다[6].
+
+# MCP 환경에서 식별된 주요 취약점 및 위협 요소
+다만 현재 MCP 사양에서는 이러한 토큰 철회나 자격 증명 관리 기능의 구현 책임을 개별 MCP 서버와 인증 서버에 위임하고 있으며, MCP 자체가 완전한 IAM 솔루션을 제공하는 것은 아닙니다[2]. 다시 말해, MCP는 AI와 도구 사이의 인터페이스를 표준화하고 일부 보안 기능을 포함하고 있지만, 인증 토큰의 수명 관리나 비밀키 저장 등의 기능은 별도의 보안 모듈 또는 기존 IAM 시스템과 연계하여 보완해야 합니다[2].
+MCP의 도입으로 AI 에이전트가 기업 시스템과 직접 상호작용할 수 있는 기반이 마련되었지만, 여전히 몇 가지 보안 과제가 남아 있습니다. 다음은 MCP 환경에서 식별된 주요 취약점 및 위협 요소들입니다[2]:
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/15/2-security-risks-in-mcp-environments.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+
+- **스푸핑(Spoofing)**: MCP는 호스트-클라이언트-서버 모델을 따르지만, 초기 설정 과정에서 클라이언트가 악의적인 MCP 서버를 신뢰하도록 유도하는 가로채기 및 가장(spoofing) 공격의 가능성이 지적되고 있습니다. 예를 들어, 공격자가 합법적인 서버를 가장하여(API 엔드포인트를 속여) AI에게 잘못된 지시를 내리거나 민감 정보를 유출시킬 수 있습니다[2]. 이러한 세션 하이재킹 위험은 MCP 통신 과정에서 서버의 신뢰성을 검증할 수 있는 추가적인 장치가 마련되지 않는다면 현실적인 위협이 될 수 있습니다.
+- **이름 충돌(Name Collision)**: MCP 생태계 내에서 서로 다른 도구나 리소스가 유사한 이름을 가질 경우, AI 에이전트가 의도하지 않은 도구를 호출하게 되는 혼선이 발생할 수 있습니다. 특히, 공격자가 일반적인 이름의 MCP 서버를 미리 등록해두는 방식으로 AI가 잘못된 서버에 연결하여 명령을 수행하도록 유도할 수 있습니다[2]. 이러한 이름 충돌 취약점은 사용자 인터페이스에 보이지 않는 툴 설명에 악의적인 명령을 숨기는 툴 포이즈닝(tool poisoning) 공격과 결합될 경우, 민감한 데이터를 탈취하는 데 악용될 수 있습니다[8].
+- **명령 주입 공격(Command Injection)**: AI 에이전트가 자연어 프롬프트나 명령을 해석하여 MCP 서버에 요청을 보낼 때, 특정 형식의 명령어(예: 슬랙의 /delete와 같은 슬래시 명령)가 악용될 가능성이 존재합니다. 예를 들어 사용자가 AI 어시스턴트에게 “오래된 리소스를 정리하라”고 지시할 경우, AI가 이를 과도하게 해석해 /delete 명령을 실행하는 상황이 발생할 수 있습니다[9]. 실제로 한 DevOps AI 에이전트가 모호한 사용자 지시에 따라 데이터베이스를 삭제한 사례가 보고되었으며, 이는 에이전트에 대한 명확한 권한 제한과 검증 절차가 필요함을 보여줍니다[9]. 이처럼 프롬프트 주입(prompt injection) 취약점과 결합된 명령 오남용은 MCP 환경에서도 반드시 고려되어야 합니다[8].
+- **샌드박스 이스케이프(Sandbox Escape)**: MCP를 통해 AI가 서버 측에서 코드를 실행하거나 파일에 접근할 수 있을 경우, 원래 의도된 권한 범위를 초과하여 시스템 자원에 접근할 수 있는 위험이 존재합니다. 예를 들어 AI가 MCP 서버의 취약점을 이용해 운영체제 수준의 명령을 실행하거나 격리된 환경에서 벗어나는 경우, 허용되지 않은 파일이나 프로세스에 접근할 수 있습니다[2]. 이러한 샌드박스 탈출은 강력한 도구를 다루는 AI 에이전트의 경우 특히 심각하며, 공격자는 이를 통해 호스트 시스템을 장악하거나 내부 네트워크에 침투할 수 있습니다.
+- **권한 철회 부재**: 앞서 언급한 바와 같이, MCP는 OAuth 토큰 등을 통해 AI 에이전트의 권한을 제어하지만, 발급된 토큰을 실시간으로 철회(revoke)하는 표준화된 방법은 명확히 정의되어 있지 않습니다[2]. 예를 들어, 사람 사용자의 세션을 관리하듯이, AI 에이전트에 부여된 접근 권한도 관리자 판단에 따라 즉시 무효화할 수 있어야 하지만, 현재로서는 이에 대한 기능이 부족할 수 있습니다. 이로 인해 에이전트가 오남용되거나 침해된 상황에서 발급된 권한이 만료될 때까지 위험이 지속되는 문제가 발생할 수 있습니다. 이러한 권한 철회 메커니즘의 부재는 MCP 보안 모델의 중요한 취약점으로 지적되고 있으며, 향후 프로토콜 차원에서 개선이 요구되고 있습니다[6].
+- **자격 증명 관리(Credential Management)**: MCP는 AI와 도구 간 통신을 위한 규약은 정의하고 있지만, 인증서나 비밀번호 등 자격 증명 정보를 안전하게 저장하거나 주기적으로 변경하는 기능은 포함하고 있지 않습니다[2]. API 키나 비밀키와 같은 민감한 인증 정보를 어떻게 관리할 것인지는 각 MCP 서버 구현에 맡겨져 있으며, 관리가 부실할 경우 정보 유출 위험이 존재합니다. CyberArk 등 보안 전문 기업은 이러한 특권 인증 정보를 전통적인 IAM 수준으로 보호해야 하며, MCP 도입 시에도 별도의 보안 금고(Vault)나 키 관리 시스템을 함께 운영할 것을 권장하고 있습니다[10].
+
+따라서 MCP를 실제 기업 환경에 안전하게 도입하고 운영하기 위해서는 추가적인 보안 계층의 마련이 필수적이며, 이 과정에서 Privileged Access Management(PAM)의 개념이 중요한 역할을 하게 됩니다[2].
+
+
+# Privileged Access Management(PAM)의 역할과 기능
+
+Privileged Access Management(PAM, 특권 접근 관리)는 관리자 계정이나 중요 시스템 계정처럼 높은 권한(privileged)을 가진 계정의 접근을 통제하고 모니터링하기 위한 보안 전략이자 솔루션을 의미합니다[11][12]. 일반 사용자 계정과 달리, 시스템 관리 권한을 지닌 특권 계정은 잘못 사용될 경우 막대한 피해를 초래할 수 있기 때문에, IAM(Identity and Access Management)과 더불어 보다 강력한 통제가 요구됩니다[11].
+
+[Microsoft](https://www.microsoft.com/)와 [CyberArk](cyberark.com) 등에 따르면, PAM은 조직 내 모든 특권 계정과 세션을 식별하고, 이를 격리·모니터링·감사함으로써 내부자의 오남용이나 외부 공격자로부터 핵심 자산을 보호하는 것을 목표로 하고 있습니다[12][13].
+구체적으로 PAM 프로그램은 인증 정보 금고(credential vault), 세션 모니터링(session recording), 다중요소 인증(MFA), 최소 권한 원칙(Least Privilege) 등의 고급 보안 조치를 적용하여, 관리자 권한의 부여 과정을 엄격히 관리하고 특권 계정의 활동을 체계적으로 추적합니다[12].
+
+이러한 강력한 통제 방식은 일반 사용자 계정에 일괄 적용할 경우 업무 효율성에 영향을 줄 수 있으므로, 보안 요구 수준의 차이에 따라 IAM과 PAM이 분리되어 운영되고 있습니다[11].
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/15/4-core-functions-of-pam.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+- **자격 증명 금고(Credential Vault)**: 특권 계정의 비밀번호나 키와 같은 인증 정보를 중앙의 안전한 금고에 보관하고, 이를 주기적으로 변경하여 관리합니다. 사용자는 해당 정보를 직접 알지 못한 채, 승인된 경우에만 금고를 통해 접근할 수 있도록 함으로써 비밀 유출의 위험을 줄이고, 계정 공유로 인한 문제를 방지할 수 있습니다[12]. 예를 들어, PAM 솔루션은 관리자 계정의 비밀번호를 주기적으로 무작위로 변경한 뒤 암호화된 저장소에 보관하며, 사용자가 해당 계정의 사용을 요청할 경우 일시적으로 열람하거나 프록시 형태로 접속하도록 지원합니다[13].
+- **세션 모니터링(Session Monitoring)**: 특권 세션(예: 관리자 SSH 접속이나 RDP 세션)을 실시간으로 모니터링하고 기록하여, 사용자가 특권 권한으로 수행하는 모든 활동을 추적할 수 있도록 합니다. PAM 솔루션은 세션 녹화 및 로그 저장 기능을 통해 감사자가 사후에 검토할 수 있도록 지원하며, 필요 시 세션 중간에 강제 종료할 수 있는 기능도 제공합니다[12]. 이를 통해 누가 언제 어떤 명령을 실행했는지를 명확히 파악할 수 있으며, 이상 행위 발생 시 즉각적인 대응이 가능합니다.
+- **다중요소 인증(MFA)**: 특권 사용자가 로그인할 때 비밀번호 외에 추가적인 인증 수단(예: OTP, 인증 애플리케이션 등)을 요구함으로써 보안 강도를 높입니다[12]. 모든 특권 계정 접근 지점에 MFA를 적용함으로써 계정 탈취에 대비할 수 있으며, 예를 들어 데이터베이스 관리자 콘솔이나 VPN 접속 시 반드시 2차 인증을 거치도록 설정함으로써 비밀번호 유출 상황에서도 접근을 차단할 수 있습니다.
+- **최소 권한 원칙(Least Privilege)**: 사용자나 프로세스에 대해 업무 수행에 반드시 필요한 최소한의 권한만 부여하고, 그 외 권한은 제한하는 보안 원칙입니다[13]. PAM 솔루션은 이를 지원하기 위해 Just-In-Time(JIT) 권한 상승 기능과 권한 자동 회수 기능을 제공합니다. 예를 들어, 사용자는 평소에는 일반 권한만 부여받고 있다가 특정 작업 시점에만 관리자 권한을 일시적으로 부여받은 뒤, 작업이 완료되면 즉시 해당 권한이 회수되는 방식입니다[13]. 이처럼 시간적으로 제한된 권한 부여 방식은 권한 남용을 예방하고, 시스템 침해 시에도 피해를 최소화하는 데 효과적입니다[9].    
+<br />
+이상의 PAM 기능들을 통해 조직은 특권 계정에 대한 가시성(visibility)과 통제력을 확보하고, 감사 및 책임 추적(accountability) 체계를 구축할 수 있습니다[12]. CyberArk의 보고에 따르면, 특권 계정에 대한 모니터링 없이 방치될 경우 계정당 수백 시간에 달하는 무감시 상태가 발생할 수 있으며, PAM을 도입할 경우 모든 활동이 기록되어 보안 관리자에게 투명하게 노출됩니다[13].이러한 이유로 특권 계정은 일반 계정보다 훨씬 높은 보안 수준으로 관리되어야 하며, PAM은 현대 조직의 필수 보안 요소로 자리매김하고 있습니다[11].
+
+최근 PAM 분야는 AI 및 머신러닝 기술과의 융합을 통해 한층 고도화되고 있습니다. Microsoft의 자료에 따르면, 사용자 및 엔티티 행위 분석(UEBA)과 같은 AI/ML 기반 기법을 PAM에 적용하여 이상 행위를 탐지하는 사례가 증가하고 있습니다[12]. AI는 특권 사용자의 정상적인 행동 패턴을 학습한 뒤, 이와 통계적으로 유의미하게 다른 행위—예를 들어 평소와 다른 시간대의 접속이나 과도한 명령 실행—를 실시간으로 감지하여 경고를 전송하거나 자동화된 대응 시나리오(플레이북)를 실행합니다[14].
+
+[Krontech](https://krontech.com/) 등 보안 전문 업체는, AI 기반 이상 징후 감지 및 위험 점수화를 PAM에 도입함으로써 보안팀이 사전에 위협을 차단하고 대응 시간을 단축할 수 있다고 강조하고 있습니다[5]. AI는 대규모 접속 로그와 사용자 행위 데이터를 지속적으로 분석함으로써, 기존의 정적 규칙 기반 시스템보다 훨씬 정밀하게 정상 및 이상 행위를 구분하고 오탐(False Positive)을 줄이는 데 기여합니다[15]. 또한 머신러닝을 활용한 예측 분석을 통해 잠재적인 취약 지점을 사전에 식별하고 조치할 수 있어, PAM은 기존의 사후 대응 중심 보안에서 사전 예방적 방어 체계로 진화하고 있습니다[14].
+
+요약하자면, AI의 도입은 PAM 솔루션의 수작업 의존도를 낮추고 위협 탐지의 정확도를 높이며, 실시간 대응 역량을 대폭 강화하는 데 기여하고 있습니다[15] **그럼에도 불구하고 PAM을 도입했다고 해서 모든 위험이 사라지는 것은 아닙니다.** 특권 접근 관리의 목적은 보안 위험을 현저히 감소시키는 것이지, 완전히 제거하는 것은 아니기 때문에, 잔여 위험에 대한 대비 역시 필요합니다. 예를 들어 내부자 위협(Insider Threat)의 경우, PAM을 통해 상당 부분 억제할 수는 있지만 완전히 방지할 수는 없습니다[9]. 특권 사용자가 고의적으로 악용하거나 실수로 인한 사고를 일으킬 가능성은 여전히 존재하며, 외부 공격자가 계정 탈취에 성공할 경우 PAM의 통제를 우회할 가능성도 배제할 수 없습니다. CyberArk에 따르면, 실제로 발생한 특권 계정 관련 보안 사고 중 상당수는 단순한 PAM 미비뿐 아니라 사회공학 기법 등 인적 요소와 복합적으로 얽혀 있었습니다[13].
+
+따라서 조직은 PAM 솔루션을 도입하는 것에 그치지 않고, 지속적인 모니터링과 사용자 보안 교육을 병행해야 합니다. “완벽한 보안은 존재하지 않는다”는 업계 격언처럼, 보안은 단일 제품이 아닌 지속적인 프로세스로 이해되어야 하며, PAM 역시 정기적인 점검과 개선을 통해 그 효과를 극대화할 수 있습니다[5]. 결국 PAM은 매우 강력한 보안 도구이지만, 이를 제대로 활용하고 다른 보안 통제들과 함께 심층 방어(Defense in Depth) 체계 속에서 운용할 때 비로소 가장 큰 가치를 발휘하게 됩니다[5][16]. 이러한 배경에서, AI 에이전트에 MCP를 적용할 때에도 PAM과의 통합은 매우 중요합니다.
+
+앞서 살펴본 MCP의 보안 취약점을 보완하고 AI 에이전트의 행동을 안전하게 통제하기 위해서는, MCP 기반 AI 에이전트에 특권 접근 관리의 원칙과 기술을 접목하는 전략이 필요합니다[2]. 이는 MCP의 유연하고 개방적인 구조를 그대로 유지하면서도, 전통적인 IAM/PAM이 제공하는 강력한 통제와 감시 기능을 AI 에이전트 환경에 확대 적용하는 방식이라 할 수 있습니다.
+
+# MCP PAM의 필요성 
+
+MCP 세계에서 MCP PAM의 등장은, 결과적으로 AI 거버넌스 강화와 위험 최소화라는 공통된 목표를 지향합니다. MCP는 AI 에이전트가 다양한 외부 도구와 상호작용할 수 있는 유연한 구조를 제공하지만, PAM이 결합되지 않는다면 AI의 행위를 효과적으로 통제하기는 어렵습니다. 특히 다수의 MCP 서버를 운영하는 환경에서는 AI의 요청 흐름에 대한 가시성을 확보하기가 더욱 까다로워질 수 있습니다.
+
+따라서 MCP 환경에 MCP PAM을 도입하면, MCP가 제공하는 개방성과 편의성을 유지하면서도 AI 에이전트의 활동을 조직의 보안 정책 하에서 체계적으로 관리할 수 있습니다. 이러한 통합 접근법은 기존 IAM 체계와도 맥락을 함께합니다. 즉, IAM이 모든 사용자와 기기의 신원을 포괄적으로 관리하는 개념이라면, PAM은 그 중에서도 특권을 가진 주체들에 대한 가시성과 통제를 강화하는 계층입니다. 이제 이 통제 대상은 사람 관리자뿐만 아니라 AI 에이전트로까지 확장되고 있습니다[11].
+
+MCP PAM 통합 전략을 구현하기 위해 고려해야 할 핵심 원칙들은 다음과 같습니다[3]:
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/15/3-mcp-pam-integration-strategy.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+- **심층 방어 (Defense in Depth)**: 단일 보안 수단에 의존하지 않고 다계층의 방어 체계를 구축하는 방식입니다. MCP와 PAM의 결합은 AI 에이전트에 대한 이중 보호막을 형성하며, 예를 들어 AI의 MCP 트래픽을 전용 프록시를 통해 필터링하고, 백엔드 서버에서는 QueryPie와 같은 Kubernetes 기반의 접근 제어 시스템을 추가로 적용하는 방식이 활용될 수 있습니다. QueryPie MCP 서버는 MCP PAM을 통해 1차 접근 통제를 수행하고, 해당 트래픽이 MCP PAM을 거쳐 QueryPie에 도달하면, 연결된 서버 및 데이터베이스에서 다시 한 번 QueryPie를 통한 2차 접근 제어가 이루어집니다. 이처럼 다중 레이어의 통제를 통해 한 계층이 실패하더라도 전체 보안이 유지되도록 합니다.
+- **가시성 확보 (Visibility)**: PAM 통합을 통해 AI 에이전트의 모든 활동을 모니터링하고 로그를 수집할 수 있어야 합니다. 예를 들어 AI가 MCP를 통해 어떤 도구에 언제 어떤 요청을 보냈는지, 그 결과로 어떤 행동이 실행되었는지를 관리자 콘솔에서 직관적으로 확인할 수 있어야 합니다[3]. 이를 위해 MCP 클라이언트/서버와 PAM 시스템 간 로그 연동을 구축하고, SIEM(Security Information and Event Management) 시스템과 통합하여 상관 분석하는 방안도 고려할 수 있습니다[15][17]. 충분한 가시성은 보안 사고 발생 시 신속한 원인 분석과 책임 소재 규명을 가능하게 하며, AI의 거동에 대한 투명성을 확보함으로써 신뢰도를 높이는 기반이 됩니다.
+- **추적 가능성과 감사 (Traceability & Audit)**: AI 에이전트의 모든 행위는 사후 감사가 가능하도록 정밀하게 기록되어야 합니다[3]. PAM이 본래 제공하는 특권 사용자 감사 추적 기능을 동일하게 AI에도 적용함으로써, AI의 활동 흐름을 완전하게 재구성할 수 있습니다. 예를 들어, AI 에이전트별로 고유 ID를 부여하고, 이들이 수행한 MCP 호출 및 결과를 시간순으로 기록하며, 특히 데이터 삭제나 권한 변경 등 고위험 명령에는 별도 플래그를 설정하여 관리자가 사전 검토 또는 승인 절차를 거치도록 할 수 있습니다. 이는 보안 사고 대응뿐만 아니라 규제 준수 측면에서도 필수적인 요건입니다.
+- **책임성과 최소 권한 원칙 (Accountability & Least Privilege)**: AI 에이전트에게도 명확한 책임 주체와 권한 범위가 설정되어야 합니다[3]. 어떤 AI가 어떤 행동을 했는지 식별 가능해야 하며, 필요 시 해당 행동을 승인한 사람이나 시스템도 추적할 수 있어야 합니다. 이를 위해 AI 에이전트별로 별도의 계정 또는 OAuth 클라이언트를 발급하고, 사람 사용자와는 구분되는 식별자를 사용하는 것이 바람직합니다[18]. 또한 최소 권한 원칙에 따라, AI에게는 반드시 수행해야 할 업무에 필요한 최소한의 API 권한만을 부여하고, 그 외 기능은 비활성화해야 합니다. 예를 들어 HR 전용 AI 에이전트는 인사 시스템의 읽기 권한만 갖도록 하며, 재무 데이터 접근이나 시스템 설정 변경 권한은 아예 부여하지 않는 방식입니다. 이는 JIT(Just-In-Time) 권한 상승과 결합하여, 필요한 시점에만 제한적으로 접근을 허용함으로써 오남용 위험을 최소화할 수 있습니다[13][15].
+- **의도 정렬 (Intent Alignment)**: AI 에이전트의 행동이 조직의 보안 정책 및 사용자 의도와 정렬되도록 하는 것이 중요합니다[3]. PAM을 통해 정책에 위배되는 AI 행동—예를 들어 승인되지 않은 명령 실행이나 과도한 데이터 접근—이 감지되면, 자동으로 제어하거나 추가적인 확인을 요구할 수 있습니다. 이는 AI에게 신뢰 가능한 가드레일(trustworthy guardrail)을 제공하는 방식으로, PAM이 일종의 안전 울타리 역할을 수행하게 됩니다[16]. 예를 들어 AI가 민감 정보를 통합하려 할 때 정책 엔진이 이를 탐지하여 “허용되지 않은 작업”으로 차단하거나, 관리자 승인을 요청하도록 설정할 수 있습니다. 이러한 메커니즘을 갖춤으로써, AI의 활동이 조직의 보안 기준 및 윤리적 가이드라인에서 벗어나지 않도록 지속적으로 교정할 수 있습니다.
+
+위 원칙들을 구현하기 위한 구체적인 통합 방안으로는 다음과 같은 조치들이 있습니다.
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/15/5-mcp-steps-to-mcp-pam-strategy.png"
+        alt=""
+        caption=""
+    />
+</Box>
+<br />
+
+- **AI 전용 계정 및 권한 프로파일 생성**: 앞서 언급한 대로, AI 에이전트를 하나의 독립된 사용자처럼 취급하여 별도의 계정(ID)을 발급하고 권한을 설정합니다[18]. 예컨대 AI 에이전트마다 OAuth 클라이언트 ID를 부여하고, 해당 클라이언트에 맵핑된 역할(role)을 PAM에서 관리합니다. 이를 통해 AI가 사람 사용자의 권한을 그대로 물려받아 남용되는 일을 막고, 에이전트별로 세밀한 권한제어가 가능해집니다[18].
+
+- **MCP PAM 도입**: MCP 트래픽을 중계하는 보안 프록시를 운용하여 AI 요청에 대한 정책 평가를 수행합니다. WSO2 등이 개발한 Open MCP Auth Proxy와 같은 미들웨어를 활용하면, AI 에이전트의 MCP 호출을 가로채어 OAuth 토큰의 유효성, 컨텍스트 기반 정책 준수 여부 등을 검사하고 통과/차단을 결정할 수 있습니다[6]. 예를 들어 AI가 “DELETE” 동작을 수행하려 할 때, 해당 요청을 프록시가 감지하여 정책에 따라 승인된 작업인지 검사한 후 허용하거나 거부합니다. 이러한 맥락 기반 인가를 실시간 적용함으로써 AI의 과실 또는 악의적 행동을 사전에 차단할 수 있습니다[6].
+
+- **모니터링 및 연계 대응**: AI 에이전트의 모든 활동 로그를 PAM 및 SIEM 시스템으로 보내 통합 모니터링을 실시합니다[15]. SIEM은 AI 관련 이벤트를 상관분석하여 이상징후를 탐지하고 경보를 발령할 수 있으며, SOAR(Security Orchestration, Automation, and Response) 플랫폼과 연계하여 자동 대응도 가능합니다[17]. 예컨대 AI 에이전트가 짧은 시간 내에 대량의 데이터 삭제를 시도하면 SIEM이 이를 탐지해 SOAR 플레이북을 실행, 해당 에이전트의 접근 토큰을 즉시 철회하거나 에이전트를 격리시키는 조치를 취하도록 합니다[17]. 이러한 자동화된 대응은 AI 속도로 진행되는 사고에 인간이 뒤쳐질 수 있는 틈을 줄여주며, 신속한 차단으로 피해를 최소화합니다.
+
+- **주기적 검토와 교육**: 통합 시스템 하에서도 주기적인 감사 및 튜닝이 필수적입니다. 보안팀은 AI 에이전트의 로그를 정기적으로 검토하여 정책이 의도대로 작동하는지 확인하고, 발견된 문제에 따라 권한을 조정하거나 추가 통제를 도입해야 합니다[9]. 또한 개발팀과 운영팀에게 AI 에이전트의 권한 모델과 제한 사항을 충분히 숙지시키고, 안전한 프롬프트 작성 및 사용 수칙을 교육합니다. 기술과 프로세스 측면의 대비를 병행함으로써 통합 전략의 효과를 극대화할 수 있습니다.
+
+이와 같은 전략을 통해, 조직은 MCP 환경에서도 AI 에이전트의 강력한 기능을 안전하게 활용하며 디지털 신뢰(Digital Trust)를 구축할 수 있습니다[5]. AI에게 시스템 접근 권한을 부여할 때 발생할 수 있는 정보 유출이나 통제 불능 상황에 대한 우려는, MCP PAM이라는 안전장치(safety net)를 통해 상당 부분 해소될 수 있습니다[16]. 결과적으로 MCP와 PAM의 결합은 AI 시대의 특권 접근 관리 구현을 위한 청사진(blueprint) 역할을 하며, 기업이 에이전틱 AI를 도입하더라도 기존 보안 프레임워크 내에서 책임감 있게 운영할 수 있도록 돕는 구조를 형성합니다.
+
+AI에 대한 신뢰는 기술 수용도와 직결되므로, 이와 같은 통합적 보안 접근법은 에이전틱 AI의 기업 적용에 있어 사실상 표준 모델로 자리잡을 가능성이 높습니다. 실제로 Microsoft, IBM 등 주요 기술 기업들은 Zero Trust 아키텍처를 AI까지 확대 적용하는 “AI-준비형 보안” 프레임워크를 모색하고 있으며[13], MCP와 PAM의 연계 전략은 그 실현을 위한 핵심 요소로 주목받고 있습니다.
+
+# 맺음말
+MCP 아키텍처와 PAM의 통합은 AI 에이전트를 기업 환경에서 안전하고 책임감 있게 활용하기 위한 필수 보안 대비책입니다. MCP가 제공하는 개방성과 유연성을 유지하면서도, PAM을 통해 강력한 통제와 감시를 실현함으로써 조직은 AI에 대한 신뢰성과 투명성을 확보할 수 있습니다. 이는 규제 준수 리스크를 줄이는 동시에, 생산성과 효율성을 높이려는 기업의 전략적 목표에도 부합합니다. 궁극적으로, 이러한 접근법은 보안을 희생하지 않고 AI 기술을 적극적으로 도입할 수 있는 디지털 신뢰 기반을 구축하는 길이며, 향후 MCP 표준의 발전과 PAM 솔루션의 진화를 통해 더 많은 모범사례가 축적되기를 기대합니다[16].
+
+<br />
+<br />
+
+<ButtonLink href="https://app.querypie.com/" variant="black" size="lg">🚀 AI Hub로 안전한 MCP와 AI Agent 운영, 지금 직접 체험해보세요. </ButtonLink>
+
+# 참고 문헌
+
+[1] [Anthropic, "Model Context Protocol Specification (2025-03-26): Architecture.", Anthropic Documentation, 2025.](https://spec.modelcontextprotocol.io)
+
+[2] [X. Hou, Y. Zhao, S. Wang, H. Wang, "Model Context Protocol (MCP): Landscape, Security Threats, and Future Research Directions.", arXiv preprint, 2025.](https://arxiv.org/abs/2503.23278)
+
+[3] [A. Hathibelagal, "Understanding Model Context Protocol (MCP): A protocol that’s trying to standardize how LLMs access external data and tools.", Predict (Medium), Mar. 9, 2025.](https://medium.com/predict/understanding-model-context-protocol-mcp-771f1cfb3c0a)
+
+[4] [P. Schmid, "Model Context Protocol (MCP) an overview.", philschmid.de Blog, Apr. 3, 2025.](https://www.philschmid.de/mcp-introduction)
+
+[5] [A. Jones, "Wait, are we just handing over system access to the AI agents?", Angie Jones Tech Blog (DEV Community), Dec. 30, 2024.](https://angiejones.tech/system-access-for-ai-agents/)
+
+[6] [V. Liyanage, "The AI Agent Security Challenge: MCP and Open MCP Auth Proxy to the Rescue.", WSO2 Solution Architecture Team Blog (Medium), Apr. 15, 2025.](https://medium.com/sa-team-blog/the-ai-agent-security-challenge-mcp-and-open-mcp-auth-proxy-to-the-rescue-a2099626850c)
+
+[7] [B. Cook, "Handling AI agent permissions.", Stytch Blog, 2023.](https://stytch.com/blog/handling-ai-agent-permissions)
+
+[8] [Invariant Labs, "MCP Security Notification: Tool Poisoning Attacks.", Invariant Labs Blog, Apr. 1, 2025.](https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks)
+
+[9] [J. G., "How PAM Mitigates Insider Threats: Preventing Data Breaches, Privilege Misuse, and More.", The Hacker News, Mar. 2025.](https://thehackernews.com/2025/03/how-pam-mitigates-insider-threats.html)
+
+[10] [Microsoft, "What is privileged access management (PAM)?", Microsoft Security 101, 2023.](https://www.microsoft.com/en-us/security/business/security-101/what-is-privileged-access-management-pam)
+
+[11] [IBM, "What is Privileged Access Management (PAM) and why it matters.", IBM Think Blog, 2023.](https://www.ibm.com/think/topics/privileged-access-management)
+
+[12] [CyberArk, "What is Privileged Access Management (PAM)?", CyberArk Security Glossary, 2025.](https://www.cyberark.com/what-is/privileged-access-management/)
+
+[13] [Krontech, "Enhancing Cybersecurity with AI-Powered Privileged Access Management.", Kron Blog, Mar. 20, 2024.](https://ftp.kron.com.tr/enhancing-cybersecurity-with-ai-powered-privileged-access-management)
+
+[14] [SSH Communications Security, "Leveraging Machine Learning and AI in PAM for Predictive Security.", SSH.com Academy, 2024.](https://www.ssh.com/academy/pam/leveraging-machine-learning-and-ai-in-privileged-access-management-for-predictive-security)
+
+[15] [A. G., "How AI Is Transforming IAM and Identity Security.", The Hacker News, Nov. 2024.](https://thehackernews.com/2024/11/how-ai-is-transforming-iam-and-identity.html)
+
+[16] [Delinea, "Unlock AI’s potential, not your defenses.", Delinea (Product Brief), 2024.](https://delinea.com/solutions/secure-ai-with-delinea)
+
+[17] [Energy SOAR, "SIEM, SOAR and AI in cybersecurity.", EnergySOAR Blog, Jul. 26, 2024.](https://energysoar.com/siem-soar-and-ai-in-cybersecurity/)
+
+[18] [Slack, "Developing Slash Commands.", Slack API Documentation, 2023](https://api.slack.com/interactivity/slash-commands)
+

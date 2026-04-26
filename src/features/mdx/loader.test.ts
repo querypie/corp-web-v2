@@ -78,7 +78,7 @@ describe("loadMdxSource", () => {
       const spy = vi.spyOn(fsModule.promises, "readFile").mockResolvedValueOnce("" as any);
       await loadMdxSource("white-paper", "1", "ko");
       const calledPath = spy.mock.calls[0][0] as string;
-      expect(calledPath).toContain(path.join("white-paper", "1", "ko.mdx"));
+      expect(calledPath).toContain(path.join("white-papers", "1", "ko.mdx"));
     });
 
     it("폴백 시 en.mdx 경로를 사용한다", async () => {

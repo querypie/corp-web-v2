@@ -1,0 +1,268 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "Revolutionizing Security Management with Policy as Code (PaC)"
+description: "Automate and optimize security protocols using QueryPie's Policy as Code, ensuring compliance and reducing risks."
+date: "2024-11-22"
+author: "eddy"
+ogImage: "public/white-papers/7/thumbnail.png"
+keywords: ["QueryPie", "Policy as Code", "security automation", "compliance", "risk reduction", "optimized protocols"]
+relatedPosts:
+  - "/en/white-papers/8"
+  - "/en/white-papers/2"
+  - "/en/white-papers/5"
+---
+
+In today’s digital landscape, organizations must rigorously manage secure access to a wide range of resources, including databases, servers, Kubernetes clusters, and web applications.
+However, manually handling security in such complex environments, especially with frequent policy updates, can lead to security vulnerabilities.
+Missing policy change logs, unclear accountability, and inefficient approval processes are common causes behind security incidents.
+
+To address these challenges, QueryPie has adopted the Policy as Code (PaC) approach.
+PaC allows security policies to be managed as code, ensuring that changes are transparently recorded and approval workflows are strengthened.
+This approach not only enforces consistency in policies but also enhances security by ensuring that only validated and compliant policies are applied to production environments.
+
+In this technical white paper, we will dive into how PaC eliminates blind spots in security management and makes policy configuration and administration easier and more reliable.
+We will also explore the role of real-time validation and intuitive authoring tools in empowering administrators to effectively manage security policies with confidence.
+
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/1-screenshot-1.png"
+        alt="Policy as Code (PaC) Editor"
+    />
+</Box>
+
+## What is Policy as Code (PaC)?
+
+In resource management, policies define the rules for accessing specific resources and outline permitted or prohibited actions.
+For instance, a policy might prohibit the use of `sudo` commands on all servers. However, even with such straightforward rules, errors during management are highly likely.
+Additionally, tracking and managing the history of policy changes can be challenging.
+
+Policy as Code (PaC) is a systematic approach to addressing these issues.
+It incorporates a code-based management style for policies, ensuring consistency in their creation and documentation.
+Policies are written in formats like YAML, which uses a key-value structure for improved readability.
+Furthermore, policy change histories can be tracked using code management practices, providing a transparent and reliable system for policy updates and revisions.
+
+# PaC Editor
+
+When administrators write policies in YAML format, they may face challenges if they lack YAML knowledge or fail to fully understand the scope of the policy configurations.
+These issues can lead to difficulties in management and, more critically, errors that are only discovered after the policy is applied, resulting in a suboptimal administrative experience.
+
+QueryPie’s PaC Editor addresses these challenges by utilizing JSON Schema to define policies and offering a real-time validation interface.
+The PaC Editor achieves the following key objectives:
+
+- **Real-Time Validation and Error Prevention**: With real-time validation, users can immediately identify errors, preventing mistakes during the writing process.
+- **Automated Suggestions**: By providing predefined formats and suggested options, the PaC Editor helps ensure that policies are created correctly and efficiently.
+
+# How the PaC Editor Works: Parse, Assist, Validate
+
+The PaC Editor operates through three key stages: **Parse, Assist, and Validate**.
+Below, each stage will be explained in detail, accompanied by illustrative examples or diagrams.
+
+
+## Parse: YAML Parsing
+
+The **Parse** stage is a critical step where YAML-formatted policy data entered by the user is converted into a **JavaScript Object**, ensuring the syntactic consistency of the input.
+In this stage, the yaml JavaScript library is used to parse the YAML document.
+It not only processes the document but also tracks the location of each element, mapping this information to the converted object.
+This process serves as a foundational step for the subsequent Assist and Validate stages.
+
+**Detailed Process**
+
+1. **YAML Document Syntax Analysis**
+The text entered by the user in the Editor is parsed using the yaml library to verify its compliance with YAML syntax.
+YAML is more readable and provides concise structural expressions compared to JSON.
+However, strict syntax rules, such as indentation, must be followed.
+The `yaml` library checks for **syntax errors or inconsistencies** and, if any issues arise, generates error messages to provide immediate feedback to the user.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/2-screenshot-2.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="YAML Parsing Errors"
+    />
+</Box>
+<br />
+
+2. **Conversion to JavaScript Object**
+After passing the syntax check, the YAML data is converted into a JavaScript Object.
+This object is now in JSON format, making it suitable for further validation using JSON Schema in subsequent stages.
+3. **Tracking and Mapping Location Information**
+In this stage, the position (location) of each element in the YAML document is tracked and mapped to the corresponding fields within the JavaScript Object.
+The location information plays a crucial role in providing feedback to the user.
+In case of errors, the system can pinpoint** the exact location and the root cause of the issue**, making it easier for administrators to resolve problems efficiently.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/3-screenshot-3.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="Error Messages with Location Information"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/4-screenshot-4.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="Guidance Messages with Location Context"
+    />
+</Box>
+<br />
+
+**Importance of the Parse Stage**
+
+The Parse stage plays a crucial role in the operation of the Policy as Code Editor.
+By accurately parsing the data and capturing location information, this stage ensures that the policy is free from syntactical errors, allowing for smooth validation in the subsequent stages.
+
+## PaC Schema
+
+The **Assist** and **Validate** stages in the PaC Editor are based on **PaC Schema**, an extension of **JSON Schema**, providing users with an intuitive and precise policy writing experience.
+First, let's briefly explain the role and necessity of JSON Schema, followed by a detailed discussion of the extensions made in PaC Schema and how each stage works with it.
+
+**What is JSON Schema?**
+
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/5-json-schema.png"
+        alt="JSON Schema"
+        caption="How JSON Schema is Used"
+    />
+</Box>
+<br />
+
+JSON Schema is a standard that defines the structure, required fields, and data types of JSON data, enforcing consistency in the data format.
+It is widely used in various contexts, including API responses, configuration files, and policy management.
+Below are the key features of JSON Schema:
+
+- **Data Validation**: JSON Schema validates whether JSON data conforms to the defined rules.
+- **Data Structure Definition**: It defines the types, formats, and required elements for each field, ensuring data consistency across different applications.
+- **Automated Feedback**: When JSON data deviates from the defined rules, JSON Schema returns an error, providing intuitive feedback to users about the specific issue.
+
+**The Necessity and Extensions of PaC Schema**
+
+While the basic JSON Schema is useful for data validation and defining data structures, the PaC Editor requires additional guidance and rules for effective policy creation.
+To address this, **PaC Schema** extends JSON Schema to provide practical support and detailed feedback specifically tailored to policy writing.
+The PaC Schema includes two key extensions:
+
+1. **Hint-Related Features**
+PaC Schema introduces a **hint** field for each policy element, which includes writing guides or descriptions.
+This is especially useful for complex data types (e.g., objects, arrays).
+Even when subfields are not yet defined, the parent field can provide hints for all fields, allowing users to see what is needed for each field during the early stages of policy creation.
+This helps users easily grasp the required information in real time as they proceed with the policy writing process.
+2. **Field Dependency Features**
+When writing policies, certain fields may depend on the values of other fields.
+PaC Schema defines field dependencies, guiding users to add the necessary fields based on the values that have already been entered.
+This ensures that users are prompted to add the required fields when needed, streamlining the policy creation process.
+
+## Assist: Providing Writing Guidance
+
+The Assist stage provides the necessary feedback to administrators during the policy writing process, based on the hints and field dependencies defined in PaC Schema.
+In this stage, the JS Object obtained from the Parse stage is reviewed using the traversal function of the `json-schema-library`.
+This allows all fields to be examined, and the necessary guidance is collected and provided to the administrator.
+
+**Detailed Process**
+
+1. **Hint Field-Based Writing Guidance**
+In this step, the system traverses each field and checks the **hint** fields defined in PaC Schema.
+It collects the writing guides and recommendations for all fields, ensuring that the user can easily understand the purpose and writing method for each field during the policy creation process.
+For complex object types, when subfields are empty, hints are provided in the parent field to guide the user through the initial setup.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/6-screenshot-5.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="Specific Field Input Guidance"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/7-screenshot-6.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="Subfield Input Guidance"
+    />
+</Box>
+<br />
+
+1. **Field Dependency Check**
+If field dependencies are defined in PaC Schema, the system checks these dependencies during the traversal process. If any required dependencies are not met, the user is alerted.
+For example, if a specific field is set to true, and other fields must be filled as a result, the system will check whether the rule is satisfied.
+If not, it will provide feedback, encouraging the user to add the necessary fields.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/8-screenshot-7.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="Field Dependency Guidance"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/9-screenshot-8.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="Field Dependency Errors"
+    />
+</Box>
+<br />
+
+## Validate: Policy Validation and Error Feedback
+
+The Validate stage is the final step where the system ensures that the written policy adheres to the PaC Schema and detects any deviations from the defined rules, providing feedback to the user.
+In this stage, the JS Object obtained from the Parse stage is validated using the **validate** API from the `json-schema-library`.
+This checks the accuracy of the policy structure and data formats.
+If any errors occur, detailed information is collected and provided to the user for correction.
+
+**Detailed Process**
+
+- **JSON Schema Validation**
+Through the `validate` API, the system checks the policy against the rules defined in the PaC Schema, validating each field's data format, required elements, and value ranges.
+The system detects any violations of these rules, such as missing required fields or incorrect data formats, and collects detailed error feedback along with location information to help the user correct the issue.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/10-screenshot-9.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="Pattern Check Errors for Input Values"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/11-screenshot-10.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="Field Missing Errors"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/7/12-screenshot-11.png"
+        alt="Policy as Code (PaC) Editor"
+        caption="Field Missing and Type Validation Errors"
+    />
+</Box>
+<br />
+
+# QueryPie PaC Editor: A Revolutionary Leap in Access Control Policy Management
+
+In conclusion, QueryPie’s PaC Editor has become a powerful tool that helps customers easily set up and manage access control policies.
+With real-time validation and inline error display, the tool minimizes mistakes during the policy setup process.
+Instant feedback greatly enhances user convenience, ensuring a smoother experience.
+
+The automation features, improved validation logic, and AI-based code transformation capabilities to be added in the future will further enhance the efficiency of policy management.
+By learning the PaC Schema through AI, the system envisions and reviews the ability for administrators to express policies in natural language, which will then be automatically converted into code.
+This innovative feature will help QueryPie reduce the time customers spend on policy creation and management, providing a more intuitive experience and leading to higher satisfaction.
+
+Going forward, QueryPie will continue to grow with its customers, tirelessly striving to provide more convenient and efficient policy management solutions.
+
+# References
+
+- [https://www.paloaltonetworks.com/cyberpedia/what-is-policy-as-code](https://www.paloaltonetworks.com/cyberpedia/what-is-policy-as-code)
+- [https://aws.github.io/aws-eks-best-practices/ko/security/docs/compliance/#pac-policy-as-code](https://aws.github.io/aws-eks-best-practices/ko/security/docs/compliance/#pac-policy-as-code)
+- [https://json-schema.org/overview/what-is-jsonschema](https://json-schema.org/overview/what-is-jsonschema)
+

@@ -1,0 +1,421 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "개발 속도와 안정성 향상이 검증된 QueryPie의 DevSecOps 파이프라인"
+description: "개발 초기부터 운영 단계까지 보안을 자동화하고 표준화된 방식으로 구축 운영하고 있는 QueryPie의 파이프라인을 소개합니다."
+date: "2024-11-22"
+author: ["jake", "ravi", "noah"]
+ogImage: "public/white-papers/10/thumbnail.png"
+keywords: ["QueryPie", "쿼리파이", "DevSecOps 파이프라인", "개발 속도", "안정성", "소프트웨어 보안", "자동화"]
+relatedPosts:
+  - "/ko/white-papers/9"
+  - "/ko/white-papers/8"
+  - "/ko/white-papers/7"
+---
+
+# 개요
+
+## 보안을 통합한 QueryPie의 파이프라인
+
+QueryPie가 중요하게 생각하는 부분, 빠른 개발 속도와 안정성입니다. QueryPie 팀은 빠른 성장을 원합니다. 그리고 변화에 민첩하게 대응하길 원합니다. 그러나 간과하면 안되는 부분이 있습니다. 우리는 개발 속도를 높이다 보면 보안 검토가 뒤로 밀리거나 간과되는 경우를 초기에 많이 경험하였습니다. 이로 인하여 출시 후 보안 취약점이 발견되면 긴급 패치, 높은 비용, 그리고 브랜드 신뢰도 손실로 이어질 수 있다는 위험을 충분히 인지하고 있습니다.
+
+DevSecOps는 이러한 문제를 근본적으로 해결하기 위한 접근 방식입니다. 개발(Dev)과 운영(Ops) 과정에 보안(Security)을 통합하여, 개발 초기부터 운영 단계까지 보안을 자동화하고 표준화된 방식으로 QueryPie는 파이프라인을 구축 운영하고 있습니다.
+
+## QueryPie의 개발 라이프사이클 전 단계 보안성 검토 프로세스
+
+QueryPie는 Privileged Access Management(PAM) 솔루션으로서, Database Access Control(DAC), System Access Control(SAC), Kubernetes Access Control(KAC) 등 중요한 자산과 정보를 보호하기 위해 고도의 보안을 요구하는 제품입니다. 이에 따라 더욱더 철저한 보안 관리를 위하여 QueryPie는 개발 라이프사이클 전반에 걸쳐 일관된 보안 검토 및 점검이 이루어집니다. 개발 초기 단계의 요구사항 수립부터, 설계, 구현, 테스트, 배포, 운영에 이르기까지 각 단계에서 다층적인 보안 검토 프로세스를 적용하여 잠재적인 보안 위협을 사전에 방지하고 있습니다. 이를 구현하기 위해서 저희는 DevSecOps 접근 방식을 채택하여 개발과 보안을 통합하여 긴밀히 연계하고 자동화된 보안 검사와 지속적인 모니터링으로 취약점을 신속하게 식별하고 대응함으로써, 제품의 안정성과 신뢰성을 더욱 강화하고 있습니다. 이처럼, 우리에게 보안은 단순한 기능을 넘어 제품의 핵심 요소로 자리 잡고 있습니다.
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/1-querypie-cicd-pipeline.png"
+        alt="QueryPie CI/CD Pipeline"
+        caption="QueryPie CI/CD 파이프라인"
+    />
+</Box>
+<br />
+
+## DevSecOps의 필요성과 클라우드 환경에서의 보안 과제
+
+기존의 보안 접근법은 보안에 대한 검토를 개발 완료 후에 수행하는 경우가 많아, 문제 발생 시 수정에 시간이 오래 걸리고 비용이 높아지는 경우가 대부분 이었습니다. 예를 들어, 코드가 완성된 후 발견된 보안 취약점을 수정하려면 이미 작성된 코드나 시스템 아키텍처를 다시 분석하고 변경해야 합니다. 이는 초기 단계에서 문제가 발견될 때보다 훨씬 더 복잡하고 더 많이 비용의 발생을 초래 합니다.
+
+그러나 DevSecOps는 보안을 개발 초기에 통합함으로써 이러한 문제를 해결할 수 있습니다. 자동화된 보안 검토와 주기적이고 지속적인 보안 점검을 통해 QueryPie는 개발 효율성을 유지하면서도 안전한 클라우드 환경을 제공할 수 있습니다. 또한 클라우드 환경에서는 다수의 인프라 구성과 관리가 자동화되므로, 보안 취약점이 빠르게 노출될 위험이 있습니다. 따라서 QueryPie의 DevSecOps 파이프라인은 클라우드 환경이 가지고 있는 여러 보안 과제를 해결하고, 안전한 제품 운영을 지속하기 위해 끊임없이 개선하고 있습니다.
+
+## QueryPie의 DevSecOps 파이프라인 구축을 통한 신뢰성 확보
+
+QueryPie는 DevSecOps 파이프라인을 통해 보안을 자동화하고 클라우드 환경의 보안 과제를 적극적으로 해결하며, 신뢰할 수 있는 PAM 솔루션으로 자리매김하고자 합니다. 본 백서에서는 QueryPie의 개발 라이프사이클 전 단계에서 이루어지는 보안성 검토와 DevSecOps 파이프라인의 구축 과정을 통해 보안이 어떻게 제품 신뢰성에 기여하는지를 자세히 설명하고자 합니다.
+
+# CI/CD 파이프라인 구축과 자동화
+
+QueryPie에서는 Github Action을 통해 CI/CD 파이프라인이 구축되어 있으며, 아래 각 단계별로 보안 체크포인트를 배치하여 자동으로 보안 검사를 수행하고 있습니다.
+단계별 취약점 진단을 통해 Medium 이상의 취약점 발견된 경우, 취약점 조치가 된 이후에 다음 단계로 진행될 수 있도록 제어하고 있습니다. 관리되는 취약점 유형은 아래 이미지와 같이 CI/CD 파이프라인 전 단계에서 다양한 유형의 취약점을 점검 및 식별하고 제거하는 관리 프로세스를 구축하고 있습니다.
+
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/2-types-of-vulns-to-check.png"
+        alt="Types of vulnerabilities to be checked in the CI/CD pipeline"
+        caption="CI/CD 파이프라인에서 점검되어야 하는 취약점 유형"
+    />
+</Box>
+<br />
+
+## QueryPie DecSecOps 단계
+
+STEP 0) 배포를 위한 이미지를 취약점 없는 깨끗한 골든 이미지로 관리합니다.
+STEP 1) SCA, SAST 점검을 통해 소스코드 취약점 및 오픈소스 Dependency를 점검합니다.
+STEP 2) 배포되는 컨테이너 이미지에 대한 취약점을 스캔합니다.
+STEP 3) DAST와 모의해킹을 병행하여 어플리케이션 취약점을 점검합니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/3-vulnerability-scanning-tools.png"
+        alt="Vulnerability Scanning Tools in the CI/CD Pipeline"
+        caption="CI/CD 파이프라인의 취약점 점검 도구"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/4-vulnerability-scan-report.png"
+        alt="Report of Vulnerability Scanning in the CI/CD Pipeline"
+        caption="CI/CD 파이프라인의 취약점 점검 현황"
+    />
+</Box>
+<br />
+
+# Golden Image 관리
+
+QueryPie에서는 **고객 배포용 이미지**와 **내부 테스트용 이미지**를 분리해서 사용하고 있습니다.
+
+각 이미지는 CIS Benchmark Level 1 및 CVE 취약점을 제거한 Golden Image로 생성하여 관리중이며, 이외 별도의 이미지는 사용이 불가하도록 통제하고 있습니다.
+
+이미지 하드닝은 보안팀에서 자체 제작한 스크립트를 통해 CIS Benchmark Level 1 및 CVE 취약점을 제거합니다.
+
+다음은 OS Image Hardening 을 위한 CIS Benchmark 점검 항목 입니다.
+<br />
+<Table center>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray">**카테고리**</Table.Th>
+            <Table.Th cellBackgroundColor="gray">**세부 점검 항목**</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>**1. Initial Setup**</Table.Td>
+            <Table.Td>1.1 Filesystem
+                1.2 Configure Software and Patch Management
+                1.3 Configure Secure Boot Settings
+                1.4 Configure Additional Process Hardening
+                1.5 Mandatory Access Control
+                1.6 Configure Command Line Warning Banners</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**2. Services**</Table.Td>
+            <Table.Td>2.1 Configure Time Synchronization
+                2.2 Configure Special Purpose Services
+                2.3 Configure Service Clients</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**3. Network Configuration**</Table.Td>
+            <Table.Td>3.1 Configure Network Devices
+                3.2 Configure Network Kernel Modules
+                3.3 Configure Network Kernel Parameters
+                3.4 Configure Host Based Firewall</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**4. Access, Authentication, and Authorization**</Table.Td>
+            <Table.Td>4.1 Configure Job Schedulers
+                4.2 Configure SSH Server
+                4.3 Configure Privilege Escalation
+                4.4 Configure Pluggable Authentication Modules
+                4.5 User Accounts and Environment</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**5. Logging and Auditing**</Table.Td>
+            <Table.Td>5.1 Configure Logging
+                5.2 Configure System Accounting (auditd)
+                5.3 Configure Integrity Checking</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**6. System Maintenance**</Table.Td>
+            <Table.Td>6.1 System File Permissions
+                6.2 Local User and Group Settings</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+<br />
+
+위 점검 항목을 기반으로 아래와 같이 Remediation Script 를 작성하고 자동으로 Configuration 을  조정 합니다.
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/5-hardening-process.png"
+        alt="CIS Benchmark Level 1 - Hardening Process"
+        caption="CIS Benchmark Level 1 - Hardening Process"
+    />
+</Box>
+<br />
+
+# 코드 보안 검사 및 종속성 관리
+
+개발 소스코드의 보안 취약점을 식별하기 위해 사용하는 SAST 도구는 벤더사가 제공하는 기본 탐지 룰만으로는 충분하지 않은 경우가 종종 있습니다. 아래는 취약점이 포함된 공개 샘플 코드를 대상으로 기본 탐지 룰을 활용한 취약점 탐지 결과를 보여줍니다.
+
+```kotlin
+package ai.qwiet.springbootkotlinwebgoat
+
+import org.springframework.http.HttpHeaders
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import java.io.InputStreamReader
+import java.io.BufferedReader
+import java.io.File
+import mu.KotlinLogging
+import org.apache.logging.log4j.LogManager
+
+@RestController
+class HelloController {
+    val logger = KotlinLogging.logger {}
+    val secondaryLogger = LogManager.getLogger()
+
+    @GetMapping("/")
+    fun index(): String {
+        return "Greetings from Spring Boot!"
+    }
+
+    @GetMapping("/greet")
+    fun greet(@RequestParam("username") username: String): String {
+        logger.info { "Got request for `/greet`" }
+        // vulnerability: Sensitive Data Leak
+        secondaryLogger.debug("Params for `/greet `: $username")
+        // vulnerability: XSS
+        return "Greetings ${username}!"
+    }
+
+    fun parseParams(name: String, msg: String): Map<String, String?> {
+        val checkedName = name.takeUnless { it contains '\\' }?.ifBlank { "default_name" }
+        val checkedMsg = msg.ifBlank { "default_msg" }
+        return mapOf("parsed_name" to checkedName, "parsed_msg" to checkedMsg)
+    }
+
+    @GetMapping("/exec")
+    fun exec(@RequestParam("cmd") cmd: String): ResponseEntity<String> {
+        logger.info { "Got request for `/exec`!" }
+        secondaryLogger.debug("Params for `/exec`: $cmd")
+
+        var out = "NOP"
+        if (cmd != "nop") {
+            // vulnerability: Remote Code Execution
+            val proc = Runtime.getRuntime().exec(cmd)
+            val lineReader = BufferedReader(InputStreamReader(proc.getInputStream()))
+            val output = StringBuilder()
+            lineReader.lines().forEach { line ->
+                output.append(line + "\n")
+            }
+            out = "Did execute command `$cmd`, got stdout: $output"
+        }
+        return ResponseEntity(out, HttpStatus.OK)
+    }
+
+    @GetMapping("/touch_file")
+    fun touchFile(@RequestParam("name") name: String, @RequestParam("msg") msg: String): ResponseEntity<String> {
+        logger.info { "Got request for `/touch_file`!" }
+        secondaryLogger.debug("Params for `/touch_file`: $name | $msg")
+        if (name.length < 3) {
+            logger.warn { "The provided name is very short!" }
+        }
+
+        if (name == null || msg == null) {
+            return ResponseEntity("The `name` & `msg` parameters have to be set.", HttpStatus.OK)
+        } else {
+            val parsedParams = parseParams(name, msg)
+            val fullPath = "/tmp/http4kexample/" + parsedParams["parsed_name"]
+            val finalMsg = "MESSAGE: " + parsedParams["parsed_msg"]
+            // vulnerability: Directory Traversal
+            File(fullPath).writeText(finalMsg)
+            return ResponseEntity("Did write message `$finalMsg` to file at `$fullPath`", HttpStatus.OK)
+        }
+    }
+
+    @GetMapping("/debug")
+    fun debug(@RequestParam("url") url: String): ResponseEntity<String> {
+        logger.info { "Got request for `/debug`!" }
+        secondaryLogger.debug("Params for `/debug`: $url")
+
+        val headers = HttpHeaders()
+        headers.add("Location", url)
+        // vulnerability: Open Redirect
+        return ResponseEntity(headers, HttpStatus.FOUND)
+    }
+
+    @GetMapping("/render_html")
+    fun renderHtml(@RequestParam("name") name: String): ResponseEntity<String> {
+        logger.info { "Got request for `/render_html`!" }
+        secondaryLogger.debug("Params for `/render_html`: $name")
+
+        // vulnerability: XSS
+        val out = StringBuilder().append("<h1>Hello there, ").append("$name").append("!</h1>").toString()
+        return ResponseEntity(out, HttpStatus.OK)
+    }
+
+    @GetMapping("/add")
+    fun add(@RequestParam("x") x: String, @RequestParam("y") y: String): ResponseEntity<String> {
+        logger.info { "Got request for `/add`!" }
+        secondaryLogger.debug("Params for `/add`: $x | $y")
+
+        val xi = x.toInt()
+        val xy = y.toInt()
+        val out = (xi + xy).toString()
+        return ResponseEntity(out, HttpStatus.OK)
+    }
+}
+```
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/6-vulnerability-detection-snyk.png"
+        alt="Vulnerability detection results using Snyk's default detection rules"
+        caption="Vulnerability detection results using Snyk's default detection rules"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/7-vulnerability-detection-github.png"
+        alt="Vulnerability detection results using GitHub's default detection rules"
+        caption="Vulnerability detection results using GitHub's default detection rules"
+    />
+</Box>
+<br />
+<Table center>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray">**Vulnerability Type**</Table.Th>
+            <Table.Th cellBackgroundColor="gray">**Snyk**</Table.Th>
+            <Table.Th cellBackgroundColor="gray">**GitHub**</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>**XSS**</Table.Td>
+            <Table.Td><State color="red">Not Detected</State></Table.Td>
+            <Table.Td><State color="blue">Detected</State></Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**Command Injection**</Table.Td>
+            <Table.Td><State color="blue">Detected</State></Table.Td>
+            <Table.Td><State color="blue">Detected</State></Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**Directory Traversal**</Table.Td>
+            <Table.Td><State color="red">Not Detected</State></Table.Td>
+            <Table.Td><State color="red">Not Detected</State></Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**Open Redirect**</Table.Td>
+            <Table.Td><State color="red">Not Detected</State></Table.Td>
+            <Table.Td><State color="red">Not Detected</State></Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+<br />
+
+이러한 이슈에 대응하기 위하여 다양한 SAST 제품에서 커스텀 탐지 룰 기능을 제공하지만, 관련 업무 경험이 부족한 경우 이를 효과적으로 활용하기 어려울 수 있습니다. QueryPie는 제품 개발 환경과 변화하는 신규 취약점에 대응하기 위해 커스텀 탐지 패턴을 직접 구성하여 SAST 탐지 패턴을 항상 최신 상태로 유지하고 있습니다.
+
+이후에 제품의 소스코드 저장소에 PR(Pull Request)이 생성되면, GitHub Actions가 실행되어 SAST 도구에 해당 소스코드의 취약점 진단을 요청합니다. 만약 취약점이 발견되면, 이관 제어 기능을 통해 취약점이 해결될 때까지 소스코드의 병합을 차단하여 제품의 무결성과 보안성을 보장합니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/8-cicd-migration-control-process.png"
+        alt="CI/CD Pipeline Migration Control Process"
+        caption="CI/CD 파이프라인 이관 제어 프로세스"
+    />
+</Box>
+<br />
+
+# 이미지 보안 검증 및 SBOM 관리
+
+## 이미지 보안 검증
+GitHub Actions를 활용하여 애플리케이션 이미지를 자동으로 빌드하고, 빌드된 이미지를 Harbor에 업로드하는 프로세스가 구축되어 있습니다.
+이 과정에서 Trivy를 사용하여 이미지 취약점을 스캔합니다.
+
+이미지에 취약점이 발견되면, 해당 경고는 PR에서 즉시 알림으로 제공되어 개발자가 신속하게 취약점을 인지하고 조치를 취할 수 있습니다. 특히, 취약점이 Medium 이상으로 분류될 경우, 해당 이미지는 조치 대상이 됩니다.
+
+또한, Trivy에 의한 스캐닝 외에도 AWS Elastic Container Registry(ECR)에 이미지를 업로드하여 AWS Inspector를 통해 추가 점검을 수행합니다. 이를 통해 Trivy가 놓칠 수 있는 취약점을 식별하고, 이미지를 더욱 철저하게 분석하고 관리할 수 있습니다. 이러한 프로세스를 통해 신뢰성이 높은 이미지를 배포할 수 있습니다.
+
+## SBOM 관리
+
+QueryPie는 매 릴리즈마다 CycloneDX 포맷의 소프트웨어 자재 목록(SBOM)을 생성하여 아래 관리 프로세스를 진행합니다.
+- SBOM 파일을 스캔하여 취약점이 존재하는 오픈소스 라이브러리를 식별하고 조치합니다.
+- 라이센스 준수 여부를 파악하고, 저작권 또는 규제 요구사항을 위반하지 않도록 관리합니다.
+
+# 클라우드 환경의 IaC 보안 관리
+
+## IaC를 통한 리소스 배포 및 관리
+
+IaC (Infrastructure as Code)란 인프라를 코드로 관리하고 자동화하여 프로비저닝하는 것을 말합니다. 코드형 인프라를 통해 수동 설정의 번거로움을 없애고, 자동화된 배포 프로세스를 통해 더욱 더 유연한 인프라 관리가 가능해집니다. 여러 환경에서 일관된 설정을 구현할 수 있고, 필요에 따라 수정 및 업데이트가 가능합니다. 기존에는 수동으로 설정해야 했던 서버, 네트워크, 스토리지와 같은 자원을 코드화하여 간단히 배포할 수 있으며, 배포 시간이 단축되고 오류 가능성도 줄어듭니다. 또한, Github와 같은 VCS(Version Control System)와 연계하여 인프라 변경 사항을 추적할 수 있어, 신속한 대응과 안정적인 환경 관리를 가능하게 합니다.
+
+## IaC 스캐닝을 통한 보안 취약점 검토 및 개선
+
+IaC 스캐닝을 통한 보안 취약점 검토는 배포 전에 발생할 수 있는 보안 문제에 대해 IaC layer에서 직접 해결하는 방법입니다. 이는 인프라 구성에 필요한 다양한 설정들을 코드화 하면서 발생할 수 있는 보안상의 risk를 초기에 차단하고, 코드 작성 단계에서 취약점을 개선하여 보안을 강화하는 것을 의미합니다. 빠르고 일관된 배포를 가능하게 해주는 IaC의 강점은, 동시에 작은 설정 오류 하나가 심각한 보안 취약점으로 이어질 수 있는 위험을 내포하고 있습니다. 특히 인프라 전반에 걸쳐 불필요한 권한설정, 잘못된 이미지 소스 사용, 접근 관리 미흡, Secret 노출 등의 문제가 코드에 남아있다면, 이후 배포에서 매번 같은 보안 문제를 포함하게 됩니다. IaC 스캐닝을 통해 이와 같은 위험을 사전에 방지하고, 점검 절차를 CI/CD 파이프라인에 통합하여 자동화된 보안을 구현할 수 있습니다.
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/9-iac-scan.png"
+        alt="IaC Scan"
+        caption="IaC 스캐닝"
+    />
+</Box>
+<br />
+
+## Open Policy Agent(OPA)를 통한 정책 검증 및 적용
+
+OPA는 정책을 코드로 관리하고 검증할 수 있는 기능을 제공하여, 리소스가 배포되기 전에 정책을 사전 검토하고 적용할 수 있습니다. Terraform, Ansible과 같은 IaC 도구와 OPA를 결합하여 인프라 배포 전에 사전에 정의된 정책을 자동으로 실행하고 적용함으로써, 일관된 보안 표준 준수를 보장할 수 있습니다. 이를 통해 개발, 인프라팀이 개별적으로 수행하는 배포에도 일관된 정책이 적용되어 보안의 안정성을 높일 수 있습니다.
+
+클라우드 환경에서는 리소스가 다양한 경로를 통해 생성되기 때문에, 생성된 리소스를 명확히 파악하고 관리 범위에 포함하는 것이 중요합니다. 보안팀에서는 OPA를 통해 AWS Native Architecture에서 불필요한 서비스나 리소스가 배포되지 않도록 제어하고 있습니다. 이를 통해 클라우드 인프라의 가시성을 확보하고, 모든 리소스가 체계적으로 관리될 수 있도록합니다. 또한 사전에 적용된 정책에 따라 보안 기준에 맞지 않는 리소스가 생성되지 않도록 차단함으로써, 효율적이고 안전한 클라우드 관리가 이루어질 수 있도록 합니다.
+
+또한, 태그는 리소스에 대한 권한 관리와 비용 통제에 중요한 요소로, 특정 태그가 누락된 리소스는 운영 관리와 비용 추적에 어려움을 초래할 수 있습니다. 보안팀에서는 OPA를 통해 RiskOwner, Owner 등 필수 태그가 지정되지 않은 경우 해당 리소스의 생성 또는 실행을 제한하는 정책을 적용하고 있습니다. 이를 통해 태그 관리 누락을 사전에 방지하고, 자동화된 정책 적용을 통해 일관된 태그 관리가 가능하도록 합니다. 이러한 접근은 클라우드 환경에서 체계적인 자원 관리와 보안 정책 준수를 지원하며, 인프라의 안정성과 가시성을 강화하는 데 기여합니다.
+
+## 지속적 컴플라이언스와 거버넌스를 위한 IaC 관리
+
+ISO 27001과 같은 보안 표준은 인프라의 기밀성, 무결성, 가용성을 보장하는 보안 관리 체계의 구축을 요구합니다. 그러나 클라우드 인프라와 같은 환경에서는 인프라 변경이 빈번하고, 규모가 방대해지면서 모든 변경 사항을 수동으로 관리하는 것은 불가능에 가깝습니다. IaC는 이러한 문제를 해결하기 위해 인프라 구성을 코드화하여 자동화된 방식으로 관리하고, 필요한 정책을 프로그래밍하여 반복 가능하고 일관된 보안 구성을 유지할 수 있게 합니다.
+
+# 동적 취약점 점검 (DAST)
+
+## 배포 단계에서의 취약점 진단 프로세스
+
+배포 단계에서는 OWASP ZAP을 활용한 동적 애플리케이션 보안 테스트(DAST)와 함께 모의해킹을 병행하여 종합적인 취약점 진단을 수행합니다. DAST 수행 과정도 단순히 기본 Active Scan으로 끝나는 것이 아니라, 보안팀이 자체 제작한 커스텀 스크립트를 활용하여 일반 사용자 토큰으로 접근 불가한 페이지에 대한 권한을 검증하거나, 인코딩 또는 암호화되어 전송되는 패킷에 대한 파라미터 변조 테스트 등을 진행합니다.
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/10-dast.png"
+        alt="DAST - Using Custom Scripts"
+        caption="DAST - 자체제작 스크립트 활용"
+    />
+</Box>
+<br />
+
+DAST와 모의해킹 과정에서 Medium 이상의 취약점이 발견된 경우, 해당 취약점을 조치한 후에야 배포가 완료됩니다. 이를 통해 안전한 배포를 보장하고, 시스템의 보안성을 강화하는 데 기여하고자 합니다.
+
+# 지속 가능한 보안 솔루션을 위한 혁신과 신뢰 구축
+
+QueryPie는 보안을 단순한 단기 과제가 아닌, 고객과의 장기적인 약속으로 인식하며 이를 최우선 과제로 삼고 있습니다. 지속적인 보안 강화를 통해 업계의 주요 보안 정책과 컴플라이언스를 철저히 준수하며, 고객이 신뢰할 수 있는 안전한 환경을 제공하기 위해 최선을 다하고 있습니다. CI/CD 파이프라인에 다양한 보안 테스트를 통합하여 개발 주기 전반에 걸쳐 취약점을 철저히 점검하고 있으며, 최근에는 퍼징(Fuzzing) 테스트를 추가하여 서비스 거부 공격(DOS)과 같은 위협을 조기에 발견하고자 노력하고 있습니다.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/11-fuzzing.png"
+        alt="Enhancing the Fuzzing Process in the CI/CD Pipeline"
+        caption="CI/CD 파이프라인 Fuzzing Process 고도화"
+    />
+</Box>
+<br />
+
+이러한 노력은 고객이 안전하게 데이터 관리를 할 수 있도록 보장하며, QueryPie가 제공하는 서비스의 신뢰성을 더욱 강화합니다. 우리는 앞으로도 고객과의 신뢰를 바탕으로, 지속 가능한 보안 솔루션을 제공하기 위해 끊임없이 발전할 것입니다.
+

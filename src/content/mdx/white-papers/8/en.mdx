@@ -1,0 +1,259 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "Secure Login Token Management: An Essential Frontend Strategy"
+description: "Secure user authentication with QueryPie's login token management, enhancing frontend security and data protection."
+date: "2024-11-22"
+author: "zac"
+ogImage: "public/white-papers/8/thumbnail.png"
+keywords: ["QueryPie", "login token management", "secure authentication", "frontend security", "data protection"]
+relatedPosts:
+  - "/en/white-papers/7"
+  - "/en/white-papers/9"
+  - "/en/white-papers/10"
+---
+
+# Introduction
+
+In today’s technological landscape, user authentication methods are constantly evolving, and security protocols are advancing accordingly. Token-based authentication, known for its high scalability and flexibility, is rapidly becoming the standard. This method is increasingly replacing traditional session-based authentication due to its enhanced security and efficiency. QueryPie has also adopted token-based authentication in its products to improve security.
+
+## New Challenges in the Frontend Domain
+
+The history of implementing authentication in the web frontend is relatively short. Traditional session-based authentication relies on the server to manage user sessions. In the frontend, authentication was once as simple as creating a form and transmitting the user’s ID and password to the server’s designated endpoint. However, in recent years, the frontend landscape has experienced several significant technological changes.
+
+1. Thanks to the rise of AJAX and Single Page Application (SPA) architecture, frontend developers now exchange data with the backend using JSON-based API communication.
+2. With the advent of the Web Storage API, managing persistence in the frontend has become much easier.
+3. Additionally, the emergence of SSR (Server-Side Rendering) frameworks like NextJS has shifted many roles previously handled by the server to the frontend.
+
+These changes, when combined with token-based authentication, present the frontend with a new challenge: secure token transmission and persistence management.
+
+# Secure Tokens and the Risk of Insecure User Environments
+
+Token-based authentication is not only convenient for developers but also provides strong security due to its resistance to tampering. However, the situation changes if the token itself is compromised.
+
+## Types of Threats
+
+The primary route for token theft is through the user's browser. If a user is using an outdated browser, it may be vulnerable to exploits targeting browser vulnerabilities. Recently, the rise of evergreen browsers like Chrome, which ensures users are always using the latest version, has led to quicker patching of browser vulnerabilities.
+
+However, the more likely weak points lie in JavaScript code that does not meet the security standards provided by the browser or in incorrect server configurations. Attackers can exploit these vulnerabilities to perform attacks such as Cross-Site Scripting (XSS), Cross-Site Request Forgery (CSRF), or Session Hijacking, leading to token theft or similar types of attacks.
+
+
+
+**Cross Site Scripting (XSS)**
+> [https://owasp.org/www-community/attacks/xss/](https://owasp.org/www-community/attacks/xss/)
+> Cross-Site Scripting (XSS) attacks are a type of injection, in which malicious scripts are injected into otherwise benign and trusted websites. XSS attacks occur when an attacker uses a web application to send malicious code, generally in the form of a **browser side script**, to a different end user. Flaws that allow these attacks to succeed are quite widespread and occur anywhere a web application uses input from a user within the output it generates without validating or encoding it.
+
+An XSS (Cross-Site Scripting) attack involves executing malicious scripts in the user's browser, which is a traditional form of code injection. While there are various methods of attack, the most common example is as follows:
+
+- The attacker identifies a vulnerability in the website, for example, a search parameter on a URL like `vulnerable-site.com/search?query=${query}`, where the query parameter is directly output to the results page without proper sanitization.
+- The attacker then injects malicious code into the query string, such as: `vulnerable-site.com/search?query=<script>...malicious code...</script>` The result is that the malicious script is executed when the search results page is loaded, and the link containing the malicious code is included in the page.
+- The attacker then shares this link through messengers, communities, or other platforms, encouraging other users to click on it.
+- If the site allows JavaScript to access the user's session or access token, the attacker could steal the access token, exposing the user to token theft.
+
+**Cross Site Request Forgery (CSRF)**
+> [https://owasp.org/www-community/attacks/csrf](https://owasp.org/www-community/attacks/csrf)
+> Cross-Site Request Forgery (CSRF) is an attack that forces an end user to execute unwanted actions on a web application in which they’re currently authenticated. With a little help of social engineering (such as sending a link via email or chat), an attacker may trick the users of a web application into executing actions of the attacker’s choosing. If the victim is a normal user, a successful CSRF attack can force the user to perform state changing requests like transferring funds, changing their email address, and so forth. If the victim is an administrative account, CSRF can compromise the entire web application.
+
+A CSRF (Cross-Site Request Forgery) attack by itself doesn't directly steal tokens, but similar to an XSS attack, it exploits weaknesses in website design and user authentication states, causing users to unintentionally perform actions that could lead to malicious consequences. This can be just as critical a vulnerability as token theft.
+
+1. The attacker sends a phishing email that appears to come from a legitimate site (e.g., `vulnerable-shop.com`) and tricks the user into clicking on a link that redirects to a malicious website (e.g., `scam-shop.com`).
+2. If the user is already logged in to `vulnerable-shop.com`, clicking the link takes them to `scam-shop.com`.
+3. The malicious `scam-shop.com` page contains a script that automatically executes as soon as the page is loaded.
+
+```html
+<form id="form" action="https://vulerable-shop.com/api/purchase" method="POST">
+    <input type="hidden" name="item_id" value="$expensive_item">
+    <input type="hidden" name="address" value="$attackes_house">
+    <input type="hidden" name="amount" value="10000">
+    <button type="submit">Purchase</button>
+</form>
+<script>
+    document.getElementById('form').submit();
+</script>
+```
+
+If the user is already logged in and the security settings are inadequate, the attacker can trick the user into unknowingly purchasing 10,000 expensive items and sending them to the attacker.
+
+A CSRF attack exploits the nature of cookies, which operate as follows:
+- Cookies are stored in the user's browser.
+- Cookies are automatically included in any request made to the domain specified in the cookie settings.
+
+# Frontend Authentication Security: Best Practices and Threat Analysis with QueryPie RED Team
+
+Implementing authentication securely is notoriously challenging. It requires not only delivering robust functionality but also addressing potential security vulnerabilities. While developing QueryPie, a security solution, the frontend team devoted significant effort and research to integrating reliable authentication mechanisms. Throughout this process, QueryPie's RED Team played a pivotal role by conducting white-hat hacking on our products, uncovering potential vulnerabilities, and helping us enhance our authentication framework to build a more secure system.
+
+As mentioned earlier, implementing secure authentication in frontend development remains a relatively immature field. Many guides available online suggest practices that are actually security-compromised, making it difficult to identify accurate and reliable information.
+
+In this article, we will explore the types of threats present in frontend code written by developers at QueryPie. Through concrete examples, we will diagnose common vulnerabilities and present best practices to address these issues. By the end of this article, you’ll feel confident in implementing authentication securely in frontend applications without unnecessary concerns.
+
+# Example: Beginner Frontend Developer's SPA Authentication Implementation
+
+
+Below is a commonly seen code snippet for login and API requests in Single Page Applications (SPA):
+
+```javascript
+async function login(id, pw) {
+    const res = await fetch('<cross_origin_api_url>/api/auth', {
+        method: 'POST',
+        body: encrypt({id, pw}),
+        mode: 'cors'
+    });
+    const token = await res.json();
+    localStorage.setItem('accessToken', token.accessToken);
+}
+
+async function getProtectedResource(id) {
+    const accessToken = localStorage.getItem('accessToken');
+    const res = fetch(`<cross_origin_api_url>/api/protected-resource/${id}`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        },
+        mode: 'cors'
+    });
+}
+```
+
+The code has the following context:
+1. API Agreement with the Backend
+- Tokens are included in the `Authorization` header for authentication.
+- `Access-Control-Allow-Origin` header is set to `*` to allow all origins, for development convenience.
+2. Token Persistence
+- The `localStorage` API is used to store tokens for reuse across user sessions.
+
+Based on the provided code and its context, the following threats are exposed:
+
+## Authorization Header → Vulnerable to XSS Attack
+
+Using the `Authorization` header to send the access token can be vulnerable to XSS attacks. For tokens to be included in the `Authorization` header, they must be stored in either JavaScript memory or some form of storage. If an attacker successfully executes an XSS attack, they gain access to the page's JavaScript environment. Any globally exposed tokens or functions to retrieve tokens can be accessed and subsequently stolen by the attacker.
+
+## LocalStorage → Vulnerable to XSS Attack
+
+In the given code, localStorage is used for token persistence. Since localStorage is accessible globally within the browser, knowing the key is sufficient to retrieve the token. In the case of a successful XSS attack, the token stored in localStorage can be easily stolen by the attacker, making this storage method highly vulnerable.
+
+## Access-Control-Allow-Origin: * → Vulnerable to Session Hijacking, CSRF
+
+Browsers implement Cross-Origin Resource Sharing (CORS) policies to prevent sensitive information from being sent across different origins without proper authorization. Allowing `Access-Control-Allow-Origin: *` in server responses permits requests from any origin, essentially making the server accessible to all sources, even unrelated or malicious ones.
+
+While this permissive CORS configuration does not directly cause CSRF vulnerabilities, it exacerbates the risks. If a CSRF attack occurs, the server's indiscriminate acceptance of requests increases the potential impact, amplifying the damage caused by the attack.
+
+# Improving Authentication Methods
+
+To securely manage tokens on the frontend, paradoxically, it is more effective to manage them passively through properly secured cookies rather than actively managing them in the code. The following measures are recommended to enhance token security:
+
+## Enforce HTTPS Communication
+
+Although it may seem like a given today, failing to use HTTPS leaves your system vulnerable to Man-in-the-Middle (MitM) attacks, regardless of how robust your code-level security measures are. HTTPS is fundamental and non-negotiable.
+
+## Replace Web Storage with Cookies for Persistence
+
+Instead of using the Web Storage API (which is vulnerable to XSS attacks), store sensitive data like tokens in cookies. While cookies themselves are not immune to CSRF or XSS vulnerabilities, the following configurations significantly reduce these risks:
+
+- HTTP Only: Prevents JavaScript from accessing cookies, effectively blocking direct cookie theft via XSS attacks. Cookies in this configuration should always be created server-side.
+- SameSite=Strict: Ensures cookies are only sent for requests originating from the same site, substantially mitigating CSRF attacks. If cross-site requests are necessary, use SameSite=Lax at a minimum.
+- Secure: Restricts cookie transmission to environments where both the browser and server use HTTPS, offering protection against MitM attacks.
+- Granular Domain and Path Settings: Limit the domains and paths that can access each token. This reduces the scope for CSRF attacks and prevents overly broad permissions from being granted due to misconfigurations.
+
+## Setting an Appropriate CORS Policy
+
+If your web app is hosted on a domain different from the server’s origin, it is crucial to configure the `Access-Control-Allow-Origin` header to dynamically allow only specific, authorized domains.
+
+For instance, if your web app hosted at `people.abc.com` makes a CORS request to `defg.com/api`, the `defg.com/api` server should explicitly allow requests originating from `people.abc.com`:
+<InfoNote>
+    Whenever possible, instead of opening up CORS policies, it is safer to use the same domain for both the web app and API endpoints, creating a secure SameSite environment.
+</InfoNote>
+
+>  `Access-Control-Allow-Origin: people.abc.com`
+
+Additionally, when using cookies for authentication via CORS requests, the server must include additional header settings to send the access token stored in the cookie back to the server.
+
+> `Access-Control-Allow-Credentials: true`
+
+
+
+# Improved Result
+
+If we implement the solutions as outlined, the improved code would look like this:
+
+```javascript
+async function login(id, pw) {
+    await fetch('https://<cross_origin_api_url>/api/auth', {
+        method: 'POST',
+        body: encrypt({id, pw}),
+        mode: 'cors'
+    });
+}
+
+async function getProtectedResource(id) {
+    const res = fetch(`https://<cross_origin_api_url>/api/protected-resource/${id}`, {
+        mode: 'cors',
+        credentials: 'include'
+    });
+}
+```
+
+The frontend code has become remarkably simplified. The logic is almost removed, leaving only the settings. However, behind the scenes, many more processes are taking place. Let's break it down to understand how authentication occurs.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/8/1-what-happens-behind-the-scene-1.png"
+        alt="What Happens Behind the Scene 1: When login Is Called"
+        caption="What Happens Behind the Scene 1: When login Is Called"
+    />
+</Box>
+<br />
+The diagram represents the communication flow between the browser and the server when the `login` function from the example code is invoked.
+
+1. Before sending the request, the browser checks if it is a cross-site request.
+2. If the request is cross-site, the browser sends a preflight request to the server (using the OPTIONS method).
+- The server evaluates the `OPTIONS` method request to determine whether the domain is allowed and responds with headers permitting cross-site requests, such as `Access-Control-Allow-Origin` and `Access-Control-Allow-Credentials`.
+3. The browser reviews the preflight response to ensure the server's headers are appropriate. If the headers are valid, the browser proceeds with the original request.
+4. The server processes the authentication request and sets a cookie with security attributes such as `HttpOnly`, `Secure`, and `SameSite=Lax`.
+5. The browser securely stores the cookie for subsequent requests.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/8/2-what-happens-behind-the-scene-2.png"
+        alt="What Happens Behind the Scene 2: When getProtectedResource is Called"
+        caption="What Happens Behind the Scene 2: When getProtectedResource is Called"
+    />
+</Box>
+<br />
+
+1. Browser - The browser sends a CORS Preflight request to the resource server. This step verifies how the server has configured its CORS headers.
+2. Server - Upon receiving the CORS Preflight request for the resource, the server determines whether to include the `Access-Control-Allow-Origin` header and decides if the request is allowed.
+3. If the server correctly sets the CORS headers, the browser proceeds with the actual request. If the credentials field in the request is set to include, the browser verifies whether `Access-Control-Allow-Credentials: true` is present and includes the cookie in the request headers.
+4. Server - The server extracts the token from the included cookie and performs internal authentication. If the user is not logged in or there is a security misconfiguration on the client side, the cookie will be absent, and the server denies access to the resource.
+
+As a result, the system is significantly more secure, offering robust protection against XSS and CSRF attacks.
+
+# Let’s Take It a Step Further
+
+Our frontend team significantly improved security and simplified the authentication logic by transitioning from Web Storage-based token management to a cookie-based approach. However, in the realm of security, there is no such thing as a completely foolproof method. Thus, it’s essential to implement additional configurations to minimize potential damage, even if tokens are compromised.
+
+## Token Rotation
+
+Token rotation involves shortening the validity period of tokens and frequently refreshing them.
+
+Access tokens with long validity periods pose a significant risk if compromised, as attackers can leverage them for extended periods, potentially causing greater harm. By assigning a short lifecycle to access tokens, you can ensure that even if a token is stolen, its usability expires quickly, limiting the damage.
+
+## Refresh Tokens
+
+Short-lived access tokens may inconvenience users by prompting frequent logins. To mitigate this, refresh tokens can be introduced, enabling new access tokens to be issued without requiring users to log in repeatedly. This approach maintains a short lifespan for access tokens while allowing seamless renewal through valid refresh tokens, effectively supporting a robust token rotation strategy.
+
+
+# Secure Frontend Token Authentication Strategies for Safe Web Services
+
+Implementing a secure frontend token authentication mechanism while adhering to basic web security principles is crucial. By reducing complexity and handling critical security processes server-side, you can effectively minimize the attack surface for hackers. Token management on the frontend can be strengthened through cookie-based passive security measures, leveraging browser security policies to handle authentication processes safely.
+
+Additionally, implementing token rotation strategies, such as setting shorter token lifespans and periodic renewals, enhances security and improves user experience by mitigating the risks associated with token theft. With these approaches, you can adopt the secure frontend token authentication framework proposed by QueryPie to deliver safer web services.
+
+
+# References
+
+- [https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies)
+- [https://www.okta.com/identity-101/what-is-token-based-authentication/](https://www.okta.com/identity-101/what-is-token-based-authentication/)
+- [https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+
+
