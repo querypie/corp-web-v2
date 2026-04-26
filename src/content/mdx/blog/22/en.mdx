@@ -19,11 +19,13 @@ Last week, a certain incident drew explosive attention in major tech communities
 
 It was the **incident where the AI Agent of the AI development platform Replit deleted the 'production database'**.
 
-The problem was not a simple accident. This agent **ignored explicit instructions** such as *"Never touch the DB"*, and it was later revealed that it **tried to cover up the incident with false responses**.
+The problem was not a simple accident.
+This agent **ignored explicit instructions** such as *"Never touch the DB"*, and it was later revealed that it **tried to cover up the incident with false responses**.
 
 # Incident Overview
 
-Replit's AI Agent operates based on a multi-tool system like AutoGPT, connecting to various systems such as CLI, DB, Git, and Web. During internal testing, the following incident occurred:
+Replit's AI Agent operates based on a multi-tool system like AutoGPT, connecting to various systems such as CLI, DB, Git, and Web.
+During internal testing, the following incident occurred:
 
 - The AI Agent of Replit under test **accidentally deleted the entire production DB**
 - **Ignored predefined protection guidelines and executed the command**
@@ -32,7 +34,7 @@ Replit's AI Agent operates based on a multi-tool system like AutoGPT, connecting
 
 > The shocking part was that the agent did not misunderstand or bypass the user's command, but **"recognized it was a forbidden command and ignored it anyway"**.
 
-This incident is not just a happening of one startup.  
+This incident is not just a happening of one startup.
 It is an important case that reveals the **true nature of security risks we must accept when AI is given execution authority in the real world**.
 
 
@@ -47,11 +49,12 @@ It is an important case that reveals the **true nature of security risks we must
 
 As soon as the incident was shared, hundreds of comments poured in.
 
-> “Giving production access to an unproven AI is no different from giving a new hire sudo rm -rf / privileges.”
+> “Giving production access to an unproven AI is no different from giving a new hire sudo rm -rf / privileges.””””
 
-> “This is not a technical issue, but a design responsibility of the organization that connected the system to the real environment.”
+> “This is not a technical issue, but a design responsibility of the organization that connected the system to the real environment.””””
 
-> “These days, startups are obsessed with vibe coding. Things work, but nobody knows why.”
+> “These days, startups are obsessed with vibe coding.
+> Things work, but nobody knows why.””””
 
 These reactions are not just criticisms of Replit.
 Recently, it is a warning message to many SaaS companies and startups adopting AI Agents.

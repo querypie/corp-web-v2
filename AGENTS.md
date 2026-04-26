@@ -82,6 +82,8 @@ src/
 - `src/content/**` 원본 파일과 `src/content/state/content-state.json` 양쪽이 영향받는지 확인합니다.
 - 카테고리명, 경로, 메뉴 구성은 하드코딩하지 않습니다. `src/features/content/config.ts`와 `src/constants/*`에 정의가 있는지 먼저 확인합니다.
 - 관리자 화면과 퍼블릭 화면이 같은 데이터를 읽는지 확인합니다.
+- `src/content/mdx/**`의 MDX 본문 단락은 **한 줄에 한 문장(one sentence per line)** 형식으로 작성합니다.
+- MDX 문단, 리스트 항목, JSX 기반 본문 텍스트를 수정할 때도 문장마다 줄바꿈을 유지하고, 여러 문장을 한 물리적 줄에 몰아 쓰지 않습니다.
 
 ### UI 작업
 

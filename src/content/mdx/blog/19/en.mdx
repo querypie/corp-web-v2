@@ -23,15 +23,20 @@ relatedPosts:
 
 # Are you keeping your development EC2 instance running all day?
 
-If you could turn it on only when needed, you’d save costs and make management much easier. Surprisingly, many teams face this issue. 
+If you could turn it on only when needed, you’d save costs and make management much easier.
+Surprisingly, many teams face this issue.
 
 **Our team faced the same challenge.**
 
-Even on weekends and nights without overtime, EC2 instances were still running. But we were being charged for the time when they weren’t actually in use. Over time, unnecessary operating costs piled up, and resource management became inefficient.
+Even on weekends and nights without overtime, EC2 instances were still running.
+But we were being charged for the time when they weren’t actually in use.
+Over time, unnecessary operating costs piled up, and resource management became inefficient.
 
-To solve this, we implemented automation using **AWS Lambda** and **Amazon EventBridge**. As a result, we were able to **reduce our EC2 costs by 45%** and significantly decrease management overhead.
+To solve this, we implemented automation using **AWS Lambda** and **Amazon EventBridge**.
+As a result, we were able to **reduce our EC2 costs by 45%** and significantly decrease management overhead.
 
-How did we achieve this? Let’s explore how we tackled this.
+How did we achieve this?
+Let’s explore how we tackled this.
 
 # The Reason We Decided to Implement Automation
 
@@ -41,11 +46,13 @@ After analyzing our AWS costs over the past month, we found that a **significant
 - Instances continued running over the weekend even when not in use, causing unnecessary charges.
 - The manual process of starting and stopping EC2 instances was cumbersome and inefficient.
 
-To address these issues, we decided to implement an **automated EC2 scheduling system**. With automation in place, we expected to run instances only when needed, and automatically shut them down when not in use, achieving both cost savings and operational efficiency.
+To address these issues, we decided to implement an **automated EC2 scheduling system**.
+With automation in place, we expected to run instances only when needed, and automatically shut them down when not in use, achieving both cost savings and operational efficiency.
 
 # Architecture for EC2 Automation
 
-To efficiently manage EC2 instances for development, we built an **automation system using AWS serverless services**. This ensures that instances run only when needed and automatically shut down when not in use.
+To efficiently manage EC2 instances for development, we built an **automation system using AWS serverless services**.
+This ensures that instances run only when needed and automatically shut down when not in use.
 
 ## Key Components and Their Roles
 
@@ -75,7 +82,7 @@ To efficiently manage EC2 instances for development, we built an **automation sy
 ## Automation Workflow
 
 1. **Start of Workday (10 AM)** → EventBridge triggers Lambda to **automatically start** EC2 instances.
-2. **End of Workday (7 PM)** → EventBridge triggers Lambda to **automatically stop**EC2 instances. 
+2. **End of Workday (7 PM)** → EventBridge triggers Lambda to **automatically stop**EC2 instances.
 3. **Exception Handling** → If a developer needs to keep an instance running for overtime or weekends:
     - **An 'Override' tag can be added to the EC2 instance** to prevent automatic shutdown.
     - Lambda checks for this tag and skips termination if the override is set.
@@ -88,16 +95,21 @@ To automatically start and stop EC2 instances for development, the first step is
 
 ## 1. Configuring EC2 Tags
 
-To distinguish between instances that should be automated and those that should not, specific tags need to be added to the target EC2 instances. The following AWS CLI command adds a `Scheduled=True` tag to a specific EC2 instance:
+To distinguish between instances that should be automated and those that should not, specific tags need to be added to the target EC2 instances.
+The following AWS CLI command adds a `Scheduled=True` tag to a specific EC2 instance:
 
 ```sh
 aws ec2 create-tags --resources i-0abcd1234efgh5678 --tags Key=Scheduled,Value=True
 ```
 
-Only instances with this tag will follow the automated schedule for start and stop events. Instances without this tag are excluded from automation and must be managed manually. Additionally, to exclude a specific instance from automatic shutdown, an Override=True tag can be added. Before stopping an instance, the Lambda function checks for this tag and skips termination if it is set.
+Only instances with this tag will follow the automated schedule for start and stop events.
+Instances without this tag are excluded from automation and must be managed manually.
+Additionally, to exclude a specific instance from automatic shutdown, an Override=True tag can be added.
+Before stopping an instance, the Lambda function checks for this tag and skips termination if it is set.
 
 ## 2. Configuring IAM Policies
-For AWS Lambda to control EC2 instances, **an appropriate IAM policy must be configured**. This grants Lambda the necessary permissions to start and stop instances.
+For AWS Lambda to control EC2 instances, **an appropriate IAM policy must be configured**.
+This grants Lambda the necessary permissions to start and stop instances.
 
 The following policy allows Lambda to **start and stop** EC2 instances:
 
@@ -130,10 +142,12 @@ To enhance security, you can modify this policy to restrict actions to only EC2 
 By configuring these permissions, **Lambda will only have access to manage designated EC2 instances**, ensuring both security and effective automation.
 
 ## 3. Implementing the Lambda Function
-You can write a Lambda function to **automatically start and stop EC2 instances** based on their tags. It only targets instances with the `Scheduled=True` tag.
+You can write a Lambda function to **automatically start and stop EC2 instances** based on their tags.
+It only targets instances with the `Scheduled=True` tag.
 
 **Lambda Code (Supports Both Start & Stop Operations)**
-The following code is a Lambda function that starts or stops EC2 instances. While the previous version only handled `start_instances`, this version also includes `stop_instances`.
+The following code is a Lambda function that starts or stops EC2 instances.
+While the previous version only handled `start_instances`, this version also includes `stop_instances`.
 
 ```python
 import boto3
@@ -203,7 +217,7 @@ aws events put-rule \
     --schedule-expression "cron(0 10 ? * MON-FRI *)"
 ```
 
-With this setup, EC2 instances will automatically start during work hours and shut down after work, reducing unnecessary costs! 
+With this setup, EC2 instances will automatically start during work hours and shut down after work, reducing unnecessary costs!
 
 # Challenges and Solutions Found During Operation
 
@@ -232,7 +246,7 @@ After implementing automation, we encountered a few issues and addressed them as
     </Table.Tbody>
 </Table>
 
-By implementing these solutions, we were able to effectively handle operational challenges without disruptions. 
+By implementing these solutions, we were able to effectively handle operational challenges without disruptions.
 
 # Benefits of Automation
 After implementing EC2 scheduling automation, we achieved significant improvements:
@@ -276,6 +290,8 @@ To further improve our EC2 scheduling automation system, we are exploring the fo
 By implementing these enhancements, we expect to **achieve smarter infrastructure management, maximize operational efficiency, and further reduce costs**. 🚀
 
 # Closing
-We introduced an EC2 automation approach using AWS Lambda and EventBridge. By implementing this system, our team successfully achieved both **cost optimization** and **reduced operational overhead**.
+We introduced an EC2 automation approach using AWS Lambda and EventBridge.
+By implementing this system, our team successfully achieved both **cost optimization** and **reduced operational overhead**.
 
-If you’re facing similar challenges, we highly recommend trying this automation for yourself. With efficient resource management and cost optimization, you can create a more streamlined and effective operational environment. 😊
+If you’re facing similar challenges, we highly recommend trying this automation for yourself.
+With efficient resource management and cost optimization, you can create a more streamlined and effective operational environment. 😊

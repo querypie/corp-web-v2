@@ -15,13 +15,21 @@ relatedPosts:
 
 # Why is a New Security Strategy Necessary? - The Limitations of Traditional Solutions
 
-As IT infrastructures transition from on-premises to the cloud, traditional access control solutions are struggling to meet the requirements of modern cloud environments. In particular, domestic security solutions often remain closed and are typically delivered with hardware or implemented through SI (System Integration) models. With the increasing adoption of cloud infrastructures, legacy access control solutions are facing limitations. The growing complexity of managing various infrastructures and vast amounts of data makes it increasingly difficult to apply consistent policies, placing additional burdens on security administrators. While some large enterprises outsource these responsibilities, this approach is not sustainable in the rapidly evolving cloud landscape. How are you responding to this inevitable "limit" that's fast approaching?
+As IT infrastructures transition from on-premises to the cloud, traditional access control solutions are struggling to meet the requirements of modern cloud environments.
+In particular, domestic security solutions often remain closed and are typically delivered with hardware or implemented through SI (System Integration) models.
+With the increasing adoption of cloud infrastructures, legacy access control solutions are facing limitations.
+The growing complexity of managing various infrastructures and vast amounts of data makes it increasingly difficult to apply consistent policies, placing additional burdens on security administrators.
+While some large enterprises outsource these responsibilities, this approach is not sustainable in the rapidly evolving cloud landscape.
+How are you responding to this inevitable "limit" that's fast approaching?
 
 > *In the wave of cloud migration, traditional, closed, hardware-centric access control solutions are becoming increasingly inadequate for integrated management and policy enforcement in modern environments.*
 
 # Redefining Limits: QueryPie’s Evolution Towards a Connected Access Approach
 
-QueryPie aims to shift from a closed, rigid security environment to one based on integration and connectivity. Rather than confining data and users within restricted boundaries, QueryPie offers integration with other global security solutions, enabling the creation of a flexible and secure security environment. This evolution presents a new standard in security. Let’s explore some of the key integration features that QueryPie provides:
+QueryPie aims to shift from a closed, rigid security environment to one based on integration and connectivity.
+Rather than confining data and users within restricted boundaries, QueryPie offers integration with other global security solutions, enabling the creation of a flexible and secure security environment.
+This evolution presents a new standard in security.
+Let’s explore some of the key integration features that QueryPie provides:
 
 ## [Integration One] Unifying Users: Automating User Management with IDP Integration
 
@@ -36,11 +44,18 @@ QueryPie aims to shift from a closed, rigid security environment to one based on
 </Box>
 <br />
 
-When there are new hires or departures, or when an employee changes departments, security teams need to manage access rights promptly. Each user should be given only the minimum necessary permissions, and those permissions must be updated or revoked as roles change. However, in an organization using multiple solutions, manually processing these changes across different systems can be time-consuming and prone to errors.
+When there are new hires or departures, or when an employee changes departments, security teams need to manage access rights promptly.
+Each user should be given only the minimum necessary permissions, and those permissions must be updated or revoked as roles change.
+However, in an organization using multiple solutions, manually processing these changes across different systems can be time-consuming and prone to errors.
 
-QueryPie resolves this issue through integration with Identity and Access Management (IAM) solutions such as Okta and Microsoft Entra ID. By incorporating IDP integration into QueryPie’s user management capabilities, the process of updating user permissions based on personnel changes becomes automated. When a new employee joins, an employee departs, or there’s a departmental transfer, access rights are automatically adjusted, reducing repetitive tasks and ensuring that access control policies are consistently aligned with user roles. Through IDP integration and scheduling, user data can be updated periodically, and with SCIM protocol integration, changes can be reflected in real-time. In today’s fast-moving environment, such automation is critical for maintaining secure and accurate access control, and without IDP integration, this task would be extremely challenging.
+QueryPie resolves this issue through integration with Identity and Access Management (IAM) solutions such as Okta and Microsoft Entra ID.
+By incorporating IDP integration into QueryPie’s user management capabilities, the process of updating user permissions based on personnel changes becomes automated.
+When a new employee joins, an employee departs, or there’s a departmental transfer, access rights are automatically adjusted, reducing repetitive tasks and ensuring that access control policies are consistently aligned with user roles.
+Through IDP integration and scheduling, user data can be updated periodically, and with SCIM protocol integration, changes can be reflected in real-time.
+In today’s fast-moving environment, such automation is critical for maintaining secure and accurate access control, and without IDP integration, this task would be extremely challenging.
 
-For example, when A Company’s HR team marks an employee as "inactive" in the HR system after their departure, QueryPie automatically detects the status change through scheduling and revokes the access rights to all resources without the need for any manual intervention. This significantly reduces the time spent on permission revocation tasks, eliminating unnecessary access rights that would otherwise remain.
+For example, when A Company’s HR team marks an employee as "inactive" in the HR system after their departure, QueryPie automatically detects the status change through scheduling and revokes the access rights to all resources without the need for any manual intervention.
+This significantly reduces the time spent on permission revocation tasks, eliminating unnecessary access rights that would otherwise remain.
 
 ## [Integration Two] Unifying Resources: Asset Management through AWS, Azure, and GCP Integration
 
@@ -55,13 +70,25 @@ For example, when A Company’s HR team marks an employee as "inactive" in the H
 </Box>
 <br />
 
-In a typical enterprise, the resources that need access control span across databases, systems, clusters, and web applications, and the variety and quantity of these resources can be overwhelming. Resource management involves tasks like tracking new resources, decommissioning unused ones, monitoring changes, and checking for sensitive information. To implement access control for these resources, each must be listed, registered in the access control system, and appropriate permissions must be assigned. However, due to the diversity and scale of resources, this process becomes complex and time-consuming.
+In a typical enterprise, the resources that need access control span across databases, systems, clusters, and web applications, and the variety and quantity of these resources can be overwhelming.
+Resource management involves tasks like tracking new resources, decommissioning unused ones, monitoring changes, and checking for sensitive information.
+To implement access control for these resources, each must be listed, registered in the access control system, and appropriate permissions must be assigned.
+However, due to the diversity and scale of resources, this process becomes complex and time-consuming.
 
-Imagine managing a large number of databases, with several new ones being added and removed daily. If this process had to be managed manually each time, it would be a cumbersome task. Managing this on a large scale would be nearly impossible, particularly in a cloud environment where resources are frequently scaled up and down for performance management.
+Imagine managing a large number of databases, with several new ones being added and removed daily.
+If this process had to be managed manually each time, it would be a cumbersome task.
+Managing this on a large scale would be nearly impossible, particularly in a cloud environment where resources are frequently scaled up and down for performance management.
 
-To solve this, QueryPie offers cloud provider scheduling features and integrates with major cloud providers like AWS, Azure, and GCP to automatically track and manage resources in dynamic cloud environments. For example, when an instance scales out in AWS, QueryPie syncs it in near real-time, granting the necessary user permissions. Likewise, when an instance is no longer needed and removed from AWS, QueryPie automatically revokes related permissions, ensuring the resource list and permissions are always up-to-date. This approach eliminates the need for manual resource management and strengthens overall security through automation.
+To solve this, QueryPie offers cloud provider scheduling features and integrates with major cloud providers like AWS, Azure, and GCP to automatically track and manage resources in dynamic cloud environments.
+For example, when an instance scales out in AWS, QueryPie syncs it in near real-time, granting the necessary user permissions.
+Likewise, when an instance is no longer needed and removed from AWS, QueryPie automatically revokes related permissions, ensuring the resource list and permissions are always up-to-date.
+This approach eliminates the need for manual resource management and strengthens overall security through automation.
 
-For example, Company C, which had to manually register 100,000 servers in their access control system, estimated that this task would take at least 3 months. Each server required individual registration, access permission setup, and tracking, which would consume significant infrastructure team resources and time. However, after adopting QueryPie and using the cloud sync feature, the company was able to automatically register and manage all the servers across 50+ AWS accounts in just a few days. QueryPie integrated in real-time with AWS, automatically registering new resources and enabling instant permission grants and revocations when needed. As a result, Company C saved over 95% of the expected time and was able to focus their infrastructure team's resources on other critical security tasks.
+For example, Company C, which had to manually register 100,000 servers in their access control system, estimated that this task would take at least 3 months.
+Each server required individual registration, access permission setup, and tracking, which would consume significant infrastructure team resources and time.
+However, after adopting QueryPie and using the cloud sync feature, the company was able to automatically register and manage all the servers across 50+ AWS accounts in just a few days.
+QueryPie integrated in real-time with AWS, automatically registering new resources and enabling instant permission grants and revocations when needed.
+As a result, Company C saved over 95% of the expected time and was able to focus their infrastructure team's resources on other critical security tasks.
 
 ## [Integration Three] Unifying Logs: Centralized Monitoring with SIEM Solutions like Splunk
 
@@ -76,11 +103,18 @@ For example, Company C, which had to manually register 100,000 servers in their 
 </Box>
 <br />
 
-Enterprises are required to log and monitor all activities related to user access, permission changes, and actions within personal data processing systems. Audit logs serve as crucial evidence for regulatory compliance, track user activities on critical resources, and are vital assets that must be carefully managed.
+Enterprises are required to log and monitor all activities related to user access, permission changes, and actions within personal data processing systems.
+Audit logs serve as crucial evidence for regulatory compliance, track user activities on critical resources, and are vital assets that must be carefully managed.
 
-QueryPie has built-in log query and reporting functions. Recognizing the broader need for log management, it also offers integration with SIEM (Security Information and Event Management) systems like Splunk. SIEM solutions are essential for detecting anomalies and responding to breaches across the entire IT infrastructure, including firewalls, servers, applications, and endpoints. Through SIEM integration, QueryPie enables enterprises to manage and analyze logs from various sources in one place, providing centralized monitoring for enhanced security management.
+QueryPie has built-in log query and reporting functions.
+Recognizing the broader need for log management, it also offers integration with SIEM (Security Information and Event Management) systems like Splunk.
+SIEM solutions are essential for detecting anomalies and responding to breaches across the entire IT infrastructure, including firewalls, servers, applications, and endpoints.
+Through SIEM integration, QueryPie enables enterprises to manage and analyze logs from various sources in one place, providing centralized monitoring for enhanced security management.
 
-For example, Company C, when attempting to investigate and analyze an inappropriate use of access rights by a specific user, was previously only able to view logs within their access control system. Managing logs across different systems and centralizing them for easy access was impractical. During the evaluation of new access control solutions, Company C adopted QueryPie, and by integrating it with SIEM through Splunk, they could now link and analyze that user's network activity, server access records, and application usage, all within a single unified log system. This centralized log management greatly improved their ability to identify threats and respond more quickly.
+For example, Company C, when attempting to investigate and analyze an inappropriate use of access rights by a specific user, was previously only able to view logs within their access control system.
+Managing logs across different systems and centralizing them for easy access was impractical.
+During the evaluation of new access control solutions, Company C adopted QueryPie, and by integrating it with SIEM through Splunk, they could now link and analyze that user's network activity, server access records, and application usage, all within a single unified log system.
+This centralized log management greatly improved their ability to identify threats and respond more quickly.
 
 ## [Integration Four] Integrating the Secret Store: Security Key Management via Solutions like Vault
 
@@ -95,21 +129,35 @@ For example, Company C, when attempting to investigate and analyze an inappropri
 </Box>
 <br />
 
-Security solutions handle various secret keys, including tokens, passwords, certificates, and API keys. To manage these keys securely, strict security policies must be followed, including encrypted storage, periodic password updates, and adherence to minimum rules.
+Security solutions handle various secret keys, including tokens, passwords, certificates, and API keys.
+To manage these keys securely, strict security policies must be followed, including encrypted storage, periodic password updates, and adherence to minimum rules.
 
-For more robust key management and access control, QueryPie offers integration with Secret Stores like Vault. Instead of distributing keys across multiple locations, QueryPie uses a centralized storage approach to securely store and manage multiple secret keys in a single location, reducing exposure risks and simplifying key management and tracking.
+For more robust key management and access control, QueryPie offers integration with Secret Stores like Vault.
+Instead of distributing keys across multiple locations, QueryPie uses a centralized storage approach to securely store and manage multiple secret keys in a single location, reducing exposure risks and simplifying key management and tracking.
 
-Secret keys, being sensitive information, must be managed securely. However, in many cases, these keys are not properly managed. For example, if database access accounts and passwords are shared among users, and passwords remain unchanged for extended periods, security threats can arise. QueryPie mitigates such risks by integrating with Secret Stores. By combining QueryPie’s database access with Vault’s Dynamic Database Engine, users are assigned temporary passwords each time they connect to a database. These temporary credentials are discarded immediately after use, minimizing the possibility of shared or exposed account information and passwords.
+Secret keys, being sensitive information, must be managed securely.
+However, in many cases, these keys are not properly managed.
+For example, if database access accounts and passwords are shared among users, and passwords remain unchanged for extended periods, security threats can arise.
+QueryPie mitigates such risks by integrating with Secret Stores.
+By combining QueryPie’s database access with Vault’s Dynamic Database Engine, users are assigned temporary passwords each time they connect to a database.
+These temporary credentials are discarded immediately after use, minimizing the possibility of shared or exposed account information and passwords.
 
-For example, Company C was in a situation where multiple users shared database access accounts and passwords, and the passwords had not been changed for a long time, creating a high risk of security breaches. Managing password updates every three months consumed considerable time, and eliminating the risk of password exposure was nearly impossible.
+For example, Company C was in a situation where multiple users shared database access accounts and passwords, and the passwords had not been changed for a long time, creating a high risk of security breaches.
+Managing password updates every three months consumed considerable time, and eliminating the risk of password exposure was nearly impossible.
 
-After implementing QueryPie, Company C solved this issue by integrating with Vault’s Secret Store functionality. By linking QueryPie with Vault's Dynamic Database Engine, temporary accounts and passwords were generated for users every time they accessed the database, and the credentials were discarded immediately after use. As a result, Company C significantly reduced the time spent managing passwords and nearly eliminated the risk of account information being shared or exposed by using temporary passwords.
+After implementing QueryPie, Company C solved this issue by integrating with Vault’s Secret Store functionality.
+By linking QueryPie with Vault's Dynamic Database Engine, temporary accounts and passwords were generated for users every time they accessed the database, and the credentials were discarded immediately after use.
+As a result, Company C significantly reduced the time spent managing passwords and nearly eliminated the risk of account information being shared or exposed by using temporary passwords.
 
 # QueryPie: The Future Opportunity Value
 
-This article has highlighted the value of QueryPie through various integration examples. QueryPie offers an innovative solution centered on access control to protect a company’s critical infrastructure and sensitive information. With connectivity and integration at its core, QueryPie aims to minimize threats and detect anomalies using AI-driven technologies. The company is partnering with global IT and security partners in areas such as user management, cloud asset protection, and log monitoring, going beyond the traditional closed security models.
+This article has highlighted the value of QueryPie through various integration examples.
+QueryPie offers an innovative solution centered on access control to protect a company’s critical infrastructure and sensitive information.
+With connectivity and integration at its core, QueryPie aims to minimize threats and detect anomalies using AI-driven technologies.
+The company is partnering with global IT and security partners in areas such as user management, cloud asset protection, and log monitoring, going beyond the traditional closed security models.
 
-QueryPie’s approach emphasizes security not as a mere obstacle, but as a bridge that allows businesses to safely explore new opportunities. Through this approach, QueryPie is building a more secure and automated security architecture, continually striving to help companies grow safely.
+QueryPie’s approach emphasizes security not as a mere obstacle, but as a bridge that allows businesses to safely explore new opportunities.
+Through this approach, QueryPie is building a more secure and automated security architecture, continually striving to help companies grow safely.
 
 ## 🧐[Bonus Tip] **Remember! QueryPie’s 3 Core Approaches**
 
