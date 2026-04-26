@@ -54,6 +54,12 @@ npm run audit:public-assets
 
 → [AGENTS.md — 작업 규칙](AGENTS.md#작업-규칙)
 
+## MDX 작성 규칙
+
+- `src/content/mdx/**` 아래 Blog / White Paper MDX는 본문 단락을 **한 줄에 한 문장(one sentence per line)** 형식으로 작성합니다.
+- 새 문장을 추가하거나 기존 문장을 수정할 때는 같은 문단 안에서도 문장마다 줄바꿈합니다.
+- 리스트 항목이나 JSX 기반 본문 텍스트(`Table.Td`, `InfoNote` 등)도 여러 문장을 한 줄에 몰아 쓰지 않고 문장 단위 줄바꿈을 유지합니다.
+
 ## 빠른 진단 포인트
 
 → [AGENTS.md — 빠른 진단](AGENTS.md#빠른-진단)
