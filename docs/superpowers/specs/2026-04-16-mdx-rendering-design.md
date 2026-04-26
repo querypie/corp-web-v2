@@ -28,7 +28,7 @@
          ↓
   Server Component (page.tsx)
          ↓
-  loader.ts: fs.readFile(src/content/mdx/{category}/{slug}/{locale}.mdx)
+  loader.ts: fs.readFile(src/content/mdx/{category}/{id}/{locale}.mdx)
          ↓
   next-mdx-remote-client/rsc: evaluate({ source, components })
          ↓
@@ -93,12 +93,12 @@ src/
 ├── content/
 │   └── mdx/
 │       ├── blog/
-│       │   └── {slug}/           # e.g. nextjs-server-action-security/
+│       │   └── {id}/             # e.g. 20/
 │       │       ├── en.mdx
 │       │       ├── ko.mdx
 │       │       └── ja.mdx
-│       └── white-paper/
-│           └── {slug}/           # e.g. personal-data-identification-analysis-ai/
+│       └── white-papers/
+│           └── {id}/             # e.g. 1/
 │               ├── en.mdx
 │               ├── ko.mdx
 │               └── ja.mdx
@@ -116,10 +116,10 @@ src/
 
 ### MDX 파일 네이밍 규칙
 
-- `{slug}`는 corp-web-v2의 콘텐츠 ID 기준 (e.g. `nextjs-server-action-security`)
-- 각 슬러그 폴더 안에 `en.mdx`, `ko.mdx`, `ja.mdx` 세 파일이 나란히 위치
-- 번역 추가·수정 시 동일 폴더 내에서 해당 로케일 파일만 편집하면 됨
-- 특정 로케일 파일이 없으면 `en.mdx`로 폴백
+- corp-web-v2 저장 경로는 `src/content/mdx/blog/<id>/<locale>.mdx`, `src/content/mdx/white-papers/<id>/<locale>.mdx`처럼 콘텐츠 ID 디렉터리를 사용한다.
+- 원본 `corp-web-contents/pages/features/documentation/{blog,white-paper}/<id>/<slug>/<locale>/content.mdx` 경로의 `<slug>`는 locale 공통 canonical slug이므로, 각 MDX frontmatter에 `slug` 필드로 명시한다.
+- 번역 추가·수정 시 동일 ID 폴더 안에서 해당 로케일 파일만 편집하면 된다.
+- 특정 로케일 파일이 없으면 `en.mdx`로 폴백한다.
 
 ### MDX 본문 포매팅 규칙
 
@@ -141,18 +141,22 @@ import type { Locale } from "@/constants/i18n";
 
 const MDX_ROOT = path.join(process.cwd(), "src", "content", "mdx");
 
+function getMdxCategoryDirectory(category: "blog" | "white-paper") {
+  return category === "white-paper" ? "white-papers" : category;
+}
+
 export async function loadMdxSource(
   category: "blog" | "white-paper",
-  slug: string,
+  id: string,
   locale: Locale,
 ): Promise<string | null> {
-  const filePath = path.join(MDX_ROOT, category, slug, `${locale}.mdx`);
+  const filePath = path.join(MDX_ROOT, getMdxCategoryDirectory(category), id, `${locale}.mdx`);
   try {
     return await fs.readFile(filePath, "utf-8");
   } catch {
     // locale 파일 없으면 en fallback
     if (locale !== "en") {
-      const fallback = path.join(MDX_ROOT, category, slug, "en.mdx");
+      const fallback = path.join(MDX_ROOT, getMdxCategoryDirectory(category), id, "en.mdx");
       return fs.readFile(fallback, "utf-8").catch(() => null);
     }
     return null;
@@ -249,6 +253,7 @@ Blog/Whitepaper 공통 레이아웃을 Tailwind로 신규 구현한다.
 ---
 layout: "Article"          # 필수: Article | ArticleType2
 category: "blog"           # blog | whitepaper
+slug: "nextjs-server-action-security"  # 원본 corp-web-contents 경로 기준 canonical slug
 title: "제목"
 description: "설명"
 date: "2025-03-20"
