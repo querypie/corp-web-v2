@@ -59,7 +59,9 @@ function normalizeProfileImageSrc(profileImage?: string): string | undefined {
     return undefined;
   }
 
-  return profileImage.replace(/^public\//, "/");
+  const normalized = profileImage.replace(/^public\//, "").replace(/^\/+/, "");
+
+  return normalized ? `/${normalized}` : undefined;
 }
 
 export function resolveArticleAuthors(author: MdxFrontmatter["author"], locale: Locale): ResolvedArticleAuthor[] {

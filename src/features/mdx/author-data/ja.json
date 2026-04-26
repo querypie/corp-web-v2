@@ -10,7 +10,7 @@
         "url": "https://www.linkedin.com/in/ishwang/"
       }
     ],
-    "profileImage": "public/crew/brant.png"
+    "profileImage": "crew/brant.png"
   },
   {
     "id": "sam",
@@ -23,7 +23,7 @@
         "url": "https://www.linkedin.com/in/sam0-kim/"
       }
     ],
-    "profileImage": "public/crew/sam.png"
+    "profileImage": "crew/sam.png"
   },
   {
     "id": "kenny",
@@ -36,7 +36,7 @@
         "url": "https://www.linkedin.com/in/kwansoonpark/"
       }
     ],
-    "profileImage": "public/crew/kenny.png"
+    "profileImage": "crew/kenny.png"
   },
   {
     "id": "kris",
@@ -49,7 +49,7 @@
         "url": "https://www.linkedin.com/in/kris-kwansue-park-89a83b19/"
       }
     ],
-    "profileImage": "public/crew/kris.png"
+    "profileImage": "crew/kris.png"
   },
   {
     "id": "keizo",
@@ -62,7 +62,7 @@
         "url": "https://www.linkedin.com/in/keizo-arinobu-b40769/"
       }
     ],
-    "profileImage": "public/crew/keizo.png"
+    "profileImage": "crew/keizo.png"
   },
   {
     "id": "terazawa",
@@ -75,7 +75,7 @@
         "url": "https://www.linkedin.com/in/terazawa/"
       }
     ],
-    "profileImage": "public/crew/terazawa.jpg"
+    "profileImage": "crew/terazawa.jpg"
   },
   {
     "id": "jake",
@@ -88,7 +88,7 @@
         "url": "https://www.linkedin.com/in/sungbin-im-ba817b25/"
       }
     ],
-    "profileImage": "public/crew/jake.png"
+    "profileImage": "crew/jake.png"
   },
   {
     "id": "byeoko",
@@ -101,7 +101,7 @@
         "url": "https://www.linkedin.com/in/hyunki-lee-2b189a1b7/"
       }
     ],
-    "profileImage": "public/crew/byeoko.png"
+    "profileImage": "crew/byeoko.png"
   },
   {
     "id": "ravi",
@@ -114,7 +114,7 @@
         "url": "https://www.linkedin.com/in/ravi-kang-595014270/"
       }
     ],
-    "profileImage": "public/crew/ravi.png"
+    "profileImage": "crew/ravi.png"
   },
   {
     "id": "noah",
@@ -127,7 +127,7 @@
         "url": "https://www.linkedin.com/in/gyeongho-kim-a41b34209/"
       }
     ],
-    "profileImage": "public/crew/noah.png"
+    "profileImage": "crew/noah.png"
   },
   {
     "id": "ella",
@@ -140,7 +140,7 @@
         "url": "https://www.linkedin.com/in/umbr-ella/"
       }
     ],
-    "profileImage": "public/crew/ella.png"
+    "profileImage": "crew/ella.png"
   },
   {
     "id": "allen",
@@ -153,7 +153,7 @@
         "url": "https://www.linkedin.com/in/allenmjkim/"
       }
     ],
-    "profileImage": "public/crew/allen.png"
+    "profileImage": "crew/allen.png"
   },
   {
     "id": "keira",
@@ -166,7 +166,7 @@
         "url": "https://www.linkedin.com/in/yohseob-yoon-a0b522117/"
       }
     ],
-    "profileImage": "public/crew/keira.png"
+    "profileImage": "crew/keira.png"
   },
   {
     "id": "brendon",
@@ -174,7 +174,7 @@
     "position": "Product Manager",
     "description": "Brendonは20年以上の経験を持つ元クラウドエンジニアで、IT、AI、Windows技術に深い知識を持ち、Microsoftソリューションに強い情熱を注いでいます。かつてチームリーダーとして活躍し、現在はQueryPieでプロダクトマネージャーとして新たな挑戦をしています。エンジニアリング、運用、人工知能の深い知識を活かし、QueryPieの技術基盤の維持と向上、革新の推進、高品質なソリューションの提供に貢献しています。",
     "urls": [],
-    "profileImage": "public/crew/brendon.png"
+    "profileImage": "crew/brendon.png"
   },
   {
     "id": "regan",
@@ -182,7 +182,7 @@
     "position": "Product Manager",
     "description": "Reganは顧客重視のプロダクトマネージャーで、セキュアで使いやすいソリューションの提供に情熱を注いでいます。優れたコミュニケーション能力と迅速な適応力を持ち、国際的な背景を活かして顧客のニーズと革新を結びつけています。データガバナンスの専門知識と新興のデータベースベンダーに対する好奇心を持ち、技術の探求に情熱を注いでいます。顧客満足のための製品開発に貢献する不可欠な存在です。",
     "urls": [],
-    "profileImage": "public/crew/regan.png"
+    "profileImage": "crew/regan.png"
   },
   {
     "id": "vin",
@@ -195,7 +195,7 @@
         "url": "https://www.linkedin.com/in/vin-jeong/"
       }
     ],
-    "profileImage": "public/crew/vin.png"
+    "profileImage": "crew/vin.png"
   },
   {
     "id": "jk",
@@ -208,7 +208,7 @@
         "url": "https://www.linkedin.com/in/jk-kim-9363b5a7/"
       }
     ],
-    "profileImage": "public/crew/jk.png"
+    "profileImage": "crew/jk.png"
   },
   {
     "id": "skipper",
@@ -221,7 +221,7 @@
         "url": "https://www.linkedin.com/in/kyudong-moon-b40bb5b6/"
       }
     ],
-    "profileImage": "public/crew/skipper.png"
+    "profileImage": "crew/skipper.png"
   },
   {
     "id": "andrew",
@@ -234,7 +234,7 @@
         "url": "https://www.linkedin.com/in/%EC%8B%9C%EC%9A%B1-%EC%A0%95-22150687/"
       }
     ],
-    "profileImage": "public/crew/andrew.png"
+    "profileImage": "crew/andrew.png"
   },
   {
     "id": "evan",
@@ -247,7 +247,7 @@
         "url": "https://www.linkedin.com/in/evan-choi-b63b27147/"
       }
     ],
-    "profileImage": "public/crew/evan.png"
+    "profileImage": "crew/evan.png"
   },
   {
     "id": "ryan",
@@ -260,7 +260,7 @@
         "url": "https://www.linkedin.com/in/ryan-chae-647a4126/"
       }
     ],
-    "profileImage": "public/crew/ryan.png"
+    "profileImage": "crew/ryan.png"
   },
   {
     "id": "kevin",
@@ -273,7 +273,7 @@
         "url": "https://www.linkedin.com/in/sohyeonseop/"
       }
     ],
-    "profileImage": "public/crew/kevin.png"
+    "profileImage": "crew/kevin.png"
   },
   {
     "id": "mason",
@@ -286,7 +286,7 @@
         "url": "https://www.linkedin.com/in/mason-oh/"
       }
     ],
-    "profileImage": "public/crew/mason.png"
+    "profileImage": "crew/mason.png"
   },
   {
     "id": "mosty",
@@ -294,7 +294,7 @@
     "position": "Software Engineer",
     "description": "Mostyは、約10年のシステムエンジニアとしての経験を持つ熟練の開発者です。QueryPieでは、サーバーアクセス制御およびKubernetesアクセス制御製品の開発と管理に注力しています。メトリックやデバッグに情熱を持つMostyは、サービスの安定的かつ効率的な運用を確保する重要な役割を果たし、QueryPieが信頼性が高く安全なソリューションを提供することに貢献しています。",
     "urls": [],
-    "profileImage": "public/crew/mosty.png"
+    "profileImage": "crew/mosty.png"
   },
   {
     "id": "wein",
@@ -307,7 +307,7 @@
         "url": "https://www.linkedin.com/in/%ED%83%9C%EC%83%81-%EC%A1%B0-270a49136/"
       }
     ],
-    "profileImage": "public/crew/wein.png"
+    "profileImage": "crew/wein.png"
   },
   {
     "id": "logan",
@@ -315,7 +315,7 @@
     "position": "Software Engineer",
     "description": "Loganは、20年以上の経験を持つ熟練のソフトウェア開発者で、バックエンドシステム、クラウドインフラ、および大規模なアプリケーションに専門的な知識を持っています。Java、TypeScript、Python、C#を使いこなし、Spring BootやASP.NETといったフレームワークに深い専門知識を持っています。AIサービスやブロックチェーンプラットフォームを含むプロジェクトを成功裏にリードし、革新を促進する高性能なソリューションを提供した経験があります。",
     "urls": [],
-    "profileImage": "public/crew/logan.png"
+    "profileImage": "crew/logan.png"
   },
   {
     "id": "bruce",
@@ -323,7 +323,7 @@
     "position": "Techlead, Software Engineer",
     "description": "Bruceは、検索エンジン開発、スパムフィルタ設計、大規模分散システムに専門的な知識を持つ熟練のエンジニアです。数学的なバックグラウンドを活かし、データ精製と検索サービスにおいてセキュリティソリューションに注力しています。QueryPieのバックエンド開発チームのリーダーとして、セキュリティポリシーの研究とAIおよびデータ分析を活用して高度なセキュリティ環境を構築する革新を主導し、より安全なデジタル世界を作るために努力しています。",
     "urls": [],
-    "profileImage": "public/crew/bruce.png"
+    "profileImage": "crew/bruce.png"
   },
   {
     "id": "kurt",
@@ -336,7 +336,7 @@
         "url": "https://www.linkedin.com/in/%EA%B2%BD%EB%AF%BC-%EC%9C%A0-a28b5b1a2/"
       }
     ],
-    "profileImage": "public/crew/kurt.png"
+    "profileImage": "crew/kurt.png"
   },
   {
     "id": "david",
@@ -344,7 +344,7 @@
     "position": "Software Engineer",
     "description": "Davidは、ソフトウェアの複雑な仕組みを理解することに深い好奇心を持つ情熱的な開発者です。QueryPieでは、Kubernetesアクセス制御（KAC）とWebアクセス制御（WAC）ソリューションの開発において重要な役割を果たしました。技術的な専門知識とGolangへの愛情をもって、複雑な課題に取り組み、革新的なセキュリティソリューションに貢献しています。",
     "urls": [],
-    "profileImage": "public/crew/david.png"
+    "profileImage": "crew/david.png"
   },
   {
     "id": "timo",
@@ -352,7 +352,7 @@
     "position": "Techlead, Software Engineer",
     "description": "Timo Kimは20年の経験を持つ熟練のソフトウェア開発者で、Daum、Kakao、Kakaoenterpriseのプロジェクトに貢献し、Daumの検索サービスやKakaoTalkの#Search機能を含むさまざまなプロジェクトに参加しました。ウェブサイトの最適化と検索技術の向上に熟練しており、現在はQueryPieでフロントエンドリーダーとして、AI統合インターフェースとセキュリティソリューションを中心に、スムーズで安全なユーザー体験を提供することに注力しています。",
     "urls": [],
-    "profileImage": "public/crew/timo.png"
+    "profileImage": "crew/timo.png"
   },
   {
     "id": "eddy",
@@ -365,7 +365,7 @@
         "url": "https://www.linkedin.com/in/eddy-jeon-a56a681a9/"
       }
     ],
-    "profileImage": "public/crew/eddy.png"
+    "profileImage": "crew/eddy.png"
   },
   {
     "id": "zac",
@@ -378,7 +378,7 @@
         "url": "https://www.linkedin.com/in/jinwoo-jung-8b11a8112/"
       }
     ],
-    "profileImage": "public/crew/zac.png"
+    "profileImage": "crew/zac.png"
   },
   {
     "id": "candice",
@@ -391,7 +391,7 @@
         "url": "https://www.linkedin.com/in/candice-hong-9312bb260/"
       }
     ],
-    "profileImage": "public/crew/candice.png"
+    "profileImage": "crew/candice.png"
   },
   {
     "id": "fabian",
@@ -399,7 +399,7 @@
     "position": "Software Engineer",
     "description": "Fabianは検索プラットフォーム、品質データパイプライン、サービス分野でほぼ10年の経験を持つ熟練のソフトウェアエンジニアです。彼はユーザーのニーズとサービスの目標に一致する意味のあるインサイトを生成するためにデータを分析し処理することに情熱を注いでいます。Fabianはユーザー体験を向上させ、ビジネス成功に貢献するデータ駆動型ソリューションを提供することに優れています。",
     "urls": [],
-    "profileImage": "public/crew/fabian.png"
+    "profileImage": "crew/fabian.png"
   },
   {
     "id": "robb",
@@ -412,7 +412,7 @@
         "url": "https://www.linkedin.com/in/robb-lee-285089164/"
       }
     ],
-    "profileImage": "public/crew/robb.png"
+    "profileImage": "crew/robb.png"
   },
   {
     "id": "teddy",
@@ -425,7 +425,7 @@
         "url": "https://www.linkedin.com/in/kimhongyeon"
       }
     ],
-    "profileImage": "public/crew/teddy.jpg"
+    "profileImage": "crew/teddy.jpg"
   },
   {
     "id": "greg",
@@ -438,7 +438,7 @@
         "url": "https://www.linkedin.com/in/hosung-yim/"
       }
     ],
-    "profileImage": "public/crew/greg.png"
+    "profileImage": "crew/greg.png"
   },
   {
     "id": "edwin",
@@ -446,7 +446,7 @@
     "position": "Software Engineer, QueryPie, Inc.",
     "description": "QueryPie AI Service チーム所属のソフトウェアエンジニア。企業向けAIサービス開発を担当し、LLMベースのドメイン特化システム構築、B2C/B2B/B2B2Cクライアント向けのAIソリューション設計、および独立型AIエージェント事業モデルの研究開発に従事。",
     "urls": [],
-    "profileImage": "public/crew/edwin.png"
+    "profileImage": "crew/edwin.png"
   },
   {
     "id": "querypie",

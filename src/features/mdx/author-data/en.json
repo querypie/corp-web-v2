@@ -10,7 +10,7 @@
         "url": "https://www.linkedin.com/in/ishwang/"
       }
     ],
-    "profileImage": "public/crew/brant.png"
+    "profileImage": "crew/brant.png"
   },
   {
     "id": "sam",
@@ -23,7 +23,7 @@
         "url": "https://www.linkedin.com/in/sam0-kim/"
       }
     ],
-    "profileImage": "public/crew/sam.png"
+    "profileImage": "crew/sam.png"
   },
   {
     "id": "kenny",
@@ -36,7 +36,7 @@
         "url": "https://www.linkedin.com/in/kwansoonpark/"
       }
     ],
-    "profileImage": "public/crew/kenny.png"
+    "profileImage": "crew/kenny.png"
   },
   {
     "id": "kris",
@@ -49,7 +49,7 @@
         "url": "https://www.linkedin.com/in/kris-kwansue-park-89a83b19/"
       }
     ],
-    "profileImage": "public/crew/kris.png"
+    "profileImage": "crew/kris.png"
   },
   {
     "id": "keizo",
@@ -62,7 +62,7 @@
         "url": "https://www.linkedin.com/in/keizo-arinobu-b40769/"
       }
     ],
-    "profileImage": "public/crew/keizo.png"
+    "profileImage": "crew/keizo.png"
   },
   {
     "id": "terazawa",
@@ -75,7 +75,7 @@
         "url": "https://www.linkedin.com/in/terazawa/"
       }
     ],
-    "profileImage": "public/crew/terazawa.jpg"
+    "profileImage": "crew/terazawa.jpg"
   },
   {
     "id": "terazawa-ko",
@@ -88,7 +88,7 @@
         "url": "https://www.linkedin.com/in/terazawa/"
       }
     ],
-    "profileImage": "public/crew/terazawa.jpg"
+    "profileImage": "crew/terazawa.jpg"
   },
   {
     "id": "jake",
@@ -101,7 +101,7 @@
         "url": "https://www.linkedin.com/in/sungbin-im-ba817b25/"
       }
     ],
-    "profileImage": "public/crew/jake.png"
+    "profileImage": "crew/jake.png"
   },
   {
     "id": "byeoko",
@@ -114,7 +114,7 @@
         "url": "https://www.linkedin.com/in/hyunki-lee-2b189a1b7/"
       }
     ],
-    "profileImage": "public/crew/byeoko.png"
+    "profileImage": "crew/byeoko.png"
   },
   {
     "id": "ravi",
@@ -127,7 +127,7 @@
         "url": "https://www.linkedin.com/in/ravi-kang-595014270/"
       }
     ],
-    "profileImage": "public/crew/ravi.png"
+    "profileImage": "crew/ravi.png"
   },
   {
     "id": "noah",
@@ -140,7 +140,7 @@
         "url": "https://www.linkedin.com/in/gyeongho-kim-a41b34209/"
       }
     ],
-    "profileImage": "public/crew/noah.png"
+    "profileImage": "crew/noah.png"
   },
   {
     "id": "ella",
@@ -153,7 +153,7 @@
         "url": "https://www.linkedin.com/in/umbr-ella/"
       }
     ],
-    "profileImage": "public/crew/ella.png"
+    "profileImage": "crew/ella.png"
   },
   {
     "id": "allen",
@@ -166,7 +166,7 @@
         "url": "https://www.linkedin.com/in/allenmjkim/"
       }
     ],
-    "profileImage": "public/crew/allen.png"
+    "profileImage": "crew/allen.png"
   },
   {
     "id": "keira",
@@ -179,7 +179,7 @@
         "url": "https://www.linkedin.com/in/yohseob-yoon-a0b522117/"
       }
     ],
-    "profileImage": "public/crew/keira.png"
+    "profileImage": "crew/keira.png"
   },
   {
     "id": "brendon",
@@ -187,7 +187,7 @@
     "position": "Product Manager",
     "description": "Brendon is a former cloud engineer with over 20 years of experience and extensive expertise in IT, AI, and Windows technologies, fueled by a strong passion for Microsoft solutions. Previously serving as a team leader, he has now embraced a new challenge as a Product Manager at QueryPie. Leveraging his deep knowledge in engineering, operations, and artificial intelligence, Brendon plays a key role in maintaining and advancing QueryPie’s technical foundation, driving innovation, and delivering high-quality solutions.",
     "urls": [],
-    "profileImage": "public/crew/brendon.png"
+    "profileImage": "crew/brendon.png"
   },
   {
     "id": "regan",
@@ -195,7 +195,7 @@
     "position": "Product Manager",
     "description": "Regan is a customer-focused Product Manager passionate about delivering secure and user-friendly solutions. Known for his excellent communication and quick adaptability, he leverages his international background to align customer needs with innovation. With expertise in data governance and a curiosity for emerging database vendors, Regan thrives on exploring new technologies. His passion for exploration and commitment to customer satisfaction make him an invaluable contributor to impactful product development.",
     "urls": [],
-    "profileImage": "public/crew/regan.png"
+    "profileImage": "crew/regan.png"
   },
   {
     "id": "vin",
@@ -208,7 +208,7 @@
         "url": "https://www.linkedin.com/in/vin-jeong/"
       }
     ],
-    "profileImage": "public/crew/vin.png"
+    "profileImage": "crew/vin.png"
   },
   {
     "id": "jk",
@@ -221,7 +221,7 @@
         "url": "https://www.linkedin.com/in/jk-kim-9363b5a7/"
       }
     ],
-    "profileImage": "public/crew/jk.png"
+    "profileImage": "crew/jk.png"
   },
   {
     "id": "skipper",
@@ -234,7 +234,7 @@
         "url": "https://www.linkedin.com/in/kyudong-moon-b40bb5b6/"
       }
     ],
-    "profileImage": "public/crew/skipper.png"
+    "profileImage": "crew/skipper.png"
   },
   {
     "id": "andrew",
@@ -247,7 +247,7 @@
         "url": "https://www.linkedin.com/in/%EC%8B%9C%EC%9A%B1-%EC%A0%95-22150687/"
       }
     ],
-    "profileImage": "public/crew/andrew.png"
+    "profileImage": "crew/andrew.png"
   },
   {
     "id": "evan",
@@ -260,7 +260,7 @@
         "url": "https://www.linkedin.com/in/evan-choi-b63b27147/"
       }
     ],
-    "profileImage": "public/crew/evan.png"
+    "profileImage": "crew/evan.png"
   },
   {
     "id": "ryan",
@@ -273,7 +273,7 @@
         "url": "https://www.linkedin.com/in/ryan-chae-647a4126/"
       }
     ],
-    "profileImage": "public/crew/ryan.png"
+    "profileImage": "crew/ryan.png"
   },
   {
     "id": "kevin",
@@ -286,7 +286,7 @@
         "url": "https://www.linkedin.com/in/sohyeonseop/"
       }
     ],
-    "profileImage": "public/crew/kevin.png"
+    "profileImage": "crew/kevin.png"
   },
   {
     "id": "mason",
@@ -299,7 +299,7 @@
         "url": "https://www.linkedin.com/in/mason-oh/"
       }
     ],
-    "profileImage": "public/crew/mason.png"
+    "profileImage": "crew/mason.png"
   },
   {
     "id": "mosty",
@@ -307,7 +307,7 @@
     "position": "Software Engineer",
     "description": "Mosty is an experienced developer with nearly a decade of expertise as a System Engineer. At QueryPie, he focuses on developing and managing Server Access Control and Kubernetes Access Control products. Passionate about metrics and debugging, Mosty plays a key role in ensuring the stable and efficient operation of services, contributing to QueryPie's commitment to delivering reliable and secure solutions.",
     "urls": [],
-    "profileImage": "public/crew/mosty.png"
+    "profileImage": "crew/mosty.png"
   },
   {
     "id": "wein",
@@ -320,7 +320,7 @@
         "url": "https://www.linkedin.com/in/%ED%83%9C%EC%83%81-%EC%A1%B0-270a49136/"
       }
     ],
-    "profileImage": "public/crew/wein.png"
+    "profileImage": "crew/wein.png"
   },
   {
     "id": "logan",
@@ -328,7 +328,7 @@
     "position": "Software Engineer",
     "description": "Logan is a seasoned software developer with over 20 years of experience in backend systems, cloud infrastructure, and large-scale applications. Proficient in Java, TypeScript, Python, and C#, he has deep expertise in frameworks such as Spring Boot and ASP.NET. Logan has successfully led projects spanning AI services and blockchain platforms, earning a reputation for delivering scalable, high-performance solutions that drive innovation.",
     "urls": [],
-    "profileImage": "public/crew/logan.png"
+    "profileImage": "crew/logan.png"
   },
   {
     "id": "bruce",
@@ -336,7 +336,7 @@
     "position": "Techlead, Software Engineer",
     "description": "Bruce is a seasoned engineer with expertise in search engine development, spam filter design, and large-scale distributed systems. With a strong mathematics background, he applies his skills in data refinement and search services to focus on security solutions. As leader of QueryPie’s Backend Development Team, Bruce drives innovation by researching security policies and leveraging AI and data analytics to build advanced security environments, striving to create a safer digital world.",
     "urls": [],
-    "profileImage": "public/crew/bruce.png"
+    "profileImage": "crew/bruce.png"
   },
   {
     "id": "kurt",
@@ -349,7 +349,7 @@
         "url": "https://www.linkedin.com/in/%EA%B2%BD%EB%AF%BC-%EC%9C%A0-a28b5b1a2/"
       }
     ],
-    "profileImage": "public/crew/kurt.png"
+    "profileImage": "crew/kurt.png"
   },
   {
     "id": "david",
@@ -357,7 +357,7 @@
     "position": "Software Engineer",
     "description": "David is a passionate developer with a deep curiosity for understanding the intricacies of software, from hardware to applications. At QueryPie, he has played a key role in developing Kubernetes Access Control (KAC) and Web Access Control (WAC) solutions. Known for his technical expertise and love for Golang, David thrives on tackling complex challenges and contributing to innovative security solutions.",
     "urls": [],
-    "profileImage": "public/crew/david.png"
+    "profileImage": "crew/david.png"
   },
   {
     "id": "timo",
@@ -365,7 +365,7 @@
     "position": "Techlead, Software Engineer",
     "description": "Timo Kim is a seasoned software developer with 20 years of experience, having contributed to projects at Daum, Kakao, and Kakaoenterprise, including Daum's search services and KakaoTalk's #Search feature. Skilled in optimizing websites and advancing search technologies, Timo now serves as the Frontend Leader at QueryPie, focusing on AI-integrated interfaces and security solutions to deliver seamless, secure user experiences.",
     "urls": [],
-    "profileImage": "public/crew/timo.png"
+    "profileImage": "crew/timo.png"
   },
   {
     "id": "eddy",
@@ -378,7 +378,7 @@
         "url": "https://www.linkedin.com/in/eddy-jeon-a56a681a9/"
       }
     ],
-    "profileImage": "public/crew/eddy.png"
+    "profileImage": "crew/eddy.png"
   },
   {
     "id": "zac",
@@ -391,7 +391,7 @@
         "url": "https://www.linkedin.com/in/jinwoo-jung-8b11a8112/"
       }
     ],
-    "profileImage": "public/crew/zac.png"
+    "profileImage": "crew/zac.png"
   },
   {
     "id": "candice",
@@ -404,7 +404,7 @@
         "url": "https://www.linkedin.com/in/candice-hong-9312bb260/"
       }
     ],
-    "profileImage": "public/crew/candice.png"
+    "profileImage": "crew/candice.png"
   },
   {
     "id": "fabian",
@@ -412,7 +412,7 @@
     "position": "Software Engineer",
     "description": "Fabian is an experienced software engineer with nearly 10 years of expertise in search systems, including search platforms, quality data pipelines, and serving. He is passionate about analyzing and processing data to create meaningful insights that align with user needs and service objectives. Fabian excels in delivering data-driven solutions that enhance user experience and contribute to business success.",
     "urls": [],
-    "profileImage": "public/crew/fabian.png"
+    "profileImage": "crew/fabian.png"
   },
   {
     "id": "robb",
@@ -425,7 +425,7 @@
         "url": "https://www.linkedin.com/in/robb-lee-285089164/"
       }
     ],
-    "profileImage": "public/crew/robb.png"
+    "profileImage": "crew/robb.png"
   },
   {
     "id": "teddy",
@@ -438,7 +438,7 @@
         "url": "https://www.linkedin.com/in/kimhongyeon"
       }
     ],
-    "profileImage": "public/crew/teddy.jpg"
+    "profileImage": "crew/teddy.jpg"
   },
   {
     "id": "greg",
@@ -451,6 +451,6 @@
         "url": "https://www.linkedin.com/in/hosung-yim/"
       }
     ],
-    "profileImage": "public/crew/greg.png"
+    "profileImage": "crew/greg.png"
   }
 ]
