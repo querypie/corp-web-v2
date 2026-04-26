@@ -13,7 +13,7 @@ describe("resolveArticleAuthors", () => {
         isRegistered: true,
         name: "Brant Hwang",
         position: "CEO, Founder",
-        profileImageSrc: "/querypie-company/crew/brant.png",
+        profileImageSrc: "/crew/brant.png",
       }),
     ]);
 

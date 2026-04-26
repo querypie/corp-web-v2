@@ -26,7 +26,7 @@ describe("BlogLayout", () => {
     expect(screen.getByText(/出現する未来/)).toBeInTheDocument();
 
     const profileImage = screen.getByAltText("寺澤慎祐");
-    expect(profileImage).toHaveAttribute("src", "/querypie-company/crew/terazawa.jpg");
+    expect(profileImage).toHaveAttribute("src", "/crew/terazawa.jpg");
 
     const linkedInLink = screen.getByRole("link", { name: /LinkedIn/i });
     expect(linkedInLink).toHaveAttribute("href", "https://www.linkedin.com/in/terazawa/");
