@@ -4,7 +4,7 @@ import { getLocalePath } from "../constants/i18n";
 import { siteUrl } from "../constants/site";
 import { readContentState } from "../features/content/contentState.server";
 import { getPublicDetailHref, isPublishedContentVisible } from "../features/content/data";
-import { acpDemoEntries, getAcpDemoHref } from "../features/demo/acp";
+import { getDemoMdxHref, getVisibleDemoMdxEntries } from "../features/demo/catalog";
 
 function absolute(path: string) {
   return new URL(path, siteUrl).toString();
@@ -18,7 +18,6 @@ function perLocale(pathname: string) {
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const docsItems = await readContentState("documentation");
-  const demoItems = await readContentState("demo");
   const newsItems = await readContentState("news");
 
   const staticEntries = [
@@ -42,21 +41,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   );
 
   const demoEntries = locales.flatMap((locale) =>
-    demoItems
-      .filter((item) => isPublishedContentVisible(item, locale as Locale) && item.contentType !== "outlink")
-      .map((item) => ({
-        url: absolute(getPublicDetailHref("demo", locale as Locale, item.id)),
-        lastModified: item.dateIso || undefined,
-      })),
-  );
-
-  const acpDemoMdxEntries = locales.flatMap((locale) =>
-    acpDemoEntries
-      .map((item) => getAcpDemoHref(locale as Locale, item.id))
-      .filter((href): href is string => Boolean(href))
-      .map((href) => ({
-        url: absolute(href),
-      })),
+    getVisibleDemoMdxEntries(locale as Locale).map((entry) => ({
+      url: absolute(getDemoMdxHref(locale as Locale, entry.segment, entry.id) ?? "/features/demo"),
+      lastModified: entry.date || undefined,
+    })),
   );
 
   const newsEntries = locales.flatMap((locale) =>
@@ -68,5 +56,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       })),
   );
 
-  return [...staticEntries, ...docsEntries, ...demoEntries, ...acpDemoMdxEntries, ...newsEntries];
+  return [...staticEntries, ...docsEntries, ...demoEntries, ...newsEntries];
 }

@@ -14,6 +14,7 @@ import {
   isPublishedContentVisible,
   getPublicDetailHref,
 } from "@/features/content/data";
+import { getLatestPublicDemoEntry, toPublicDemoListItem } from "@/features/demo/public";
 import { readContentState } from "@/features/content/contentState.server";
 
 type LocalePageProps = {
@@ -87,9 +88,11 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       )
       .sort((left, right) => (right.dateIso || "").localeCompare(left.dateIso || ""))[0];
 
-  const latestUseCase = latestByCategory("demo", "use-cases");
+  const latestUseCase = getLatestPublicDemoEntry(locale, "use-cases");
   const latestWhitePaper = latestByCategory("documentation", "white-papers");
   const latestBlog = latestByCategory("documentation", "blogs");
+
+  const latestUseCaseCard = latestUseCase ? toPublicDemoListItem(latestUseCase, locale) : null;
 
   const contentListItems: Array<{
     category: string;
@@ -97,15 +100,12 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     imageSrc: string;
     title: string;
   }> = [
-    latestUseCase
+    latestUseCaseCard
       ? {
-          category: getCategoryLabel(demoCategoryConfigs, "use-cases", locale),
-          href:
-            latestUseCase.contentType === "outlink"
-              ? latestUseCase.externalUrl
-              : getPublicDetailHref("demo", locale, latestUseCase.id),
-          imageSrc: getContentThumbnailSrc(latestUseCase.imageSrc),
-          title: getLocalizedContent(latestUseCase.title, locale),
+          category: latestUseCaseCard.category,
+          href: latestUseCaseCard.href,
+          imageSrc: latestUseCaseCard.imageSrc,
+          title: latestUseCaseCard.title,
         }
       : null,
     latestWhitePaper
