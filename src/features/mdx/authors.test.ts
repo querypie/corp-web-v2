@@ -8,6 +8,7 @@ describe("resolveArticleAuthors", () => {
     const enAuthors = resolveArticleAuthors("brant", "en");
     const koAuthors = resolveArticleAuthors("brant", "ko");
     const jaAuthors = resolveArticleAuthors("terazawa", "ja");
+    const guestMigratedAuthors = resolveArticleAuthors("jessica-kim", "en");
 
     expect(enAuthors).toEqual([
       expect.objectContaining({
@@ -30,6 +31,14 @@ describe("resolveArticleAuthors", () => {
         name: "寺澤慎祐",
         position: "マーケティングコンサルタント",
         description: expect.stringContaining("出現する未来"),
+      }),
+    );
+
+    expect(guestMigratedAuthors[0]).toEqual(
+      expect.objectContaining({
+        id: "jessica-kim",
+        isRegistered: true,
+        name: "Jessica Kim",
       }),
     );
   });
