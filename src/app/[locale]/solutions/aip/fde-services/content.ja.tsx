@@ -6,6 +6,27 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie AIP：あなたのためのAI変革エキスパート",
+    "description": "組織に組み込まれたフォワードデプロイドエンジニア（FDE）が、戦略と開発から本番運用まで包括的なAI変革を提供し、AIイニシアチブの成功を保証。",
+    "keywords": [
+      "クエリパイ AI",
+      "QueryPie AI",
+      "AI Platform",
+      "AIP",
+      "AI",
+      "MCPゲートウェイ",
+      "アクセス制御",
+      "カスタムAIエージェント",
+      "インフラ運用",
+      "QueryPie AI Agent",
+      "使用量ベース",
+      "フォワードデプロイドエンジニア",
+      "FDE"
+    ]
+} as const;
+
+
 export default function AipFdeServicesJASolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

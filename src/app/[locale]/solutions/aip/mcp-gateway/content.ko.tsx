@@ -6,6 +6,24 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie AIP: MCP Hub That Connects Everything",
+    "description": "Single platform centrally managing all MCP servers and tools—no fragmentation, no complexity, no limits. Streamline AI workflows across your entire tech stack while we handle the complexity behind the scenes.",
+    "keywords": [
+      "QueryPie AI",
+      "AI Platform",
+      "MCP management",
+      "access control",
+      "QueryPie",
+      "streamlined operations",
+      "MCP servers",
+      "Usage-based Enterprise AI",
+      "MCP Gateway",
+      "FDE Service"
+    ]
+} as const;
+
+
 export default function AipMcpGatewayKOSolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

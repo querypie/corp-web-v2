@@ -6,6 +6,22 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie SAC: System Access Controller",
+    "description": "QueryPie SAC は、AWS、GCP、Azure上のクラウドインスタンスを保護するように設計されており、オンプレミス環境にも対応しています。",
+    "abstract": "QueryPie SAC は、AWS、GCP、Azure上のクラウドインスタンスを保護するように設計されており、オンプレミス環境にも対応しています。",
+    "keywords": [
+      "QueryPie SAC",
+      "システムアクセスコントローラ",
+      "AWS",
+      "GCP",
+      "Azure",
+      "オンプレミス",
+      "クラウドセキュリティ"
+    ]
+} as const;
+
+
 export default function AcpSystemAccessControllerJASolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

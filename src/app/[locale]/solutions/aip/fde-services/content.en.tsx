@@ -6,6 +6,24 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie AIP: AI Transformation Expert at Your Service",
+    "description": "Forward Deployed Engineers (FDE) embedded in your organization deliver comprehensive AI transformation—from strategy and development to production operations, ensuring your AI initiatives succeed.",
+    "keywords": [
+      "QueryPie AI",
+      "AI Platform",
+      "MCP management",
+      "access control",
+      "QueryPie",
+      "streamlined operations",
+      "MCP servers",
+      "Usage-based Enterprise AI",
+      "MCP Gateway",
+      "FDE Service"
+    ]
+} as const;
+
+
 export default function AipFdeServicesENSolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

@@ -6,6 +6,22 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie DAC, Database Access Controller",
+    "description": "QueryPie DAC는 데이터 보호를 위해 설계되었으며, 다양한 클라우드 생태계를 원활하게 연결합니다.",
+    "keywords": [
+      "QueryPie DAC",
+      "데이터베이스 접근 제어기",
+      "DB 접근 제어",
+      "데이터 보호",
+      "SQL 편집기",
+      "RBAC",
+      "ABAC",
+      "감사"
+    ]
+} as const;
+
+
 export default function AcpDatabaseAccessControllerKOSolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

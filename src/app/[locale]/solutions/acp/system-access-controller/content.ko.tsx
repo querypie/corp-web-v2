@@ -6,6 +6,26 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie SAC, System Access Controller",
+    "description": "QueryPie SAC는 AWS, GCP, Azure와 같은 클라우드 인스턴스 보호를 위해 설계되었으며, 온프레미스 또한 지원합니다.",
+    "keywords": [
+      "QueryPie SAC",
+      "시스템 접근 제어",
+      "AWS",
+      "GCP",
+      "Azure",
+      "온프레미스",
+      "클라우드 보안",
+      "웹 터미널",
+      "QueryPie Proxy",
+      "웹 SFTP",
+      "System Access Controller",
+      "접근 제어"
+    ]
+} as const;
+
+
 export default function AcpSystemAccessControllerKOSolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

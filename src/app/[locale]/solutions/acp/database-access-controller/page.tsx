@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { getSolutionHref } from "@/features/solutions/routes";
-import ContentEN from "./content.en";
-import ContentKO from "./content.ko";
-import ContentJA from "./content.ja";
+import ContentEN, { metadata as metadataEN } from "./content.en";
+import ContentKO, { metadata as metadataKO } from "./content.ko";
+import ContentJA, { metadata as metadataJA } from "./content.ja";
 
 type SolutionStaticMetadata = {
   title: string;
   description: string;
-  keywords?: string[];
+  keywords?: readonly string[];
   abstract?: string;
 };
 
@@ -19,50 +19,10 @@ type PageProps = {
 };
 
 const metadataByLocale: Record<Locale, SolutionStaticMetadata> = {
-  "en": {
-    "title": "QueryPie DAC, Database Access Controller",
-    "description": "QueryPie DAC is crafted for data protection, seamlessly connectiong various cloud ecosystems. ",
-    "keywords": [
-      "QueryPie DAC",
-      "database access controller",
-      "DB access control",
-      "data protection",
-      "SQL editor",
-      "RBAC",
-      "ABAC",
-      "audit"
-    ]
-  },
-  "ko": {
-    "title": "QueryPie DAC, Database Access Controller",
-    "description": "QueryPie DAC는 데이터 보호를 위해 설계되었으며, 다양한 클라우드 생태계를 원활하게 연결합니다.",
-    "keywords": [
-      "QueryPie DAC",
-      "데이터베이스 접근 제어기",
-      "DB 접근 제어",
-      "데이터 보호",
-      "SQL 편집기",
-      "RBAC",
-      "ABAC",
-      "감사"
-    ]
-  },
-  "ja": {
-    "title": "QueryPie DAC: Database Access Controller",
-    "description": "QueryPie DACnはデータ保護のために作られ、様々なクラウドエコシステムにシームレスに接続します。 ",
-    "abstract": "QueryPie DACnはデータ保護のために作られ、様々なクラウドエコシステムにシームレスに接続します。 ",
-    "keywords": [
-      "QueryPie DAC",
-      "データベースアクセスコントローラ",
-      "DBアクセス制御",
-      "データ保護",
-      "SQLエディタ",
-      "RBAC",
-      "ABAC",
-      "データ監査"
-    ]
-  }
-} as const;
+  en: metadataEN,
+  ko: metadataKO,
+  ja: metadataJA,
+};
 
 export async function generateMetadata({ params }: Pick<PageProps, "params">): Promise<Metadata> {
   const { locale } = await params;
@@ -74,7 +34,7 @@ export async function generateMetadata({ params }: Pick<PageProps, "params">): P
   return {
     title: meta.title,
     description: meta.description,
-    keywords: meta.keywords,
+    keywords: meta.keywords ? [...meta.keywords] : undefined,
     alternates: {
       canonical: getSolutionHref(locale, "acp-database-access-controller"),
     },

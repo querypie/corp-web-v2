@@ -6,6 +6,24 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie KAC:  Kubernetes Access Controller",
+    "description": "QueryPie WACは、管理者ポータルや SaaS プラットフォームを含む Web アプリケーションのアクセスおよびログアクティビティを保護します。",
+    "abstract": "QueryPie WACは、管理者ポータルや SaaS プラットフォームを含む Web アプリケーションのアクセスおよびログアクティビティを保護します。",
+    "keywords": [
+      "QueryPie WAC",
+      "Webアプリケーションアクセスコントローラ",
+      "SaaS",
+      "機密データ",
+      "データ保護",
+      "統合アクセス制御権限管理",
+      "HTTP要求",
+      "Webアプリケーションコンプライアンス",
+      "SIEM統合"
+    ]
+} as const;
+
+
 export default function AcpWebAccessControllerJASolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

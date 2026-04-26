@@ -6,6 +6,17 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie AI: インテグレーション",
+    "description": "MCPサーバーを通じてお気に入りのビジネスツールに接続し、システム、アプリ、サービス全体のワークフローを自動化。",
+    "keywords": [
+      "QueryPie AIの統合",
+      "MCPサーバーの統合",
+      "QueryPie AI"
+    ]
+} as const;
+
+
 export default function AipIntegrationsJASolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { getSolutionHref } from "@/features/solutions/routes";
-import ContentEN from "./content.en";
-import ContentKO from "./content.ko";
-import ContentJA from "./content.ja";
+import ContentEN, { metadata as metadataEN } from "./content.en";
+import ContentKO, { metadata as metadataKO } from "./content.ko";
+import ContentJA, { metadata as metadataJA } from "./content.ja";
 
 type SolutionStaticMetadata = {
   title: string;
   description: string;
-  keywords?: string[];
+  keywords?: readonly string[];
   abstract?: string;
 };
 
@@ -19,34 +19,10 @@ type PageProps = {
 };
 
 const metadataByLocale: Record<Locale, SolutionStaticMetadata> = {
-  "en": {
-    "title": "QueryPie AIP Integrations",
-    "description": "Connect to your favorite business tools through MCP servers and automate workflows across systems, apps, and services.",
-    "keywords": [
-      "QueryPie AIP integrations",
-      "MCP integrations",
-      "QueryPie AI"
-    ]
-  },
-  "ko": {
-    "title": "QueryPie AIP Integrations",
-    "description": "Connect to your favorite business tools through MCP servers and automate workflows across systems, apps, and services.",
-    "keywords": [
-      "QueryPie AIP integrations",
-      "MCP integrations",
-      "QueryPie AI"
-    ]
-  },
-  "ja": {
-    "title": "QueryPie AI: インテグレーション",
-    "description": "MCPサーバーを通じてお気に入りのビジネスツールに接続し、システム、アプリ、サービス全体のワークフローを自動化。",
-    "keywords": [
-      "QueryPie AIの統合",
-      "MCPサーバーの統合",
-      "QueryPie AI"
-    ]
-  }
-} as const;
+  en: metadataEN,
+  ko: metadataKO,
+  ja: metadataJA,
+};
 
 export async function generateMetadata({ params }: Pick<PageProps, "params">): Promise<Metadata> {
   const { locale } = await params;
@@ -58,7 +34,7 @@ export async function generateMetadata({ params }: Pick<PageProps, "params">): P
   return {
     title: meta.title,
     description: meta.description,
-    keywords: meta.keywords,
+    keywords: meta.keywords ? [...meta.keywords] : undefined,
     alternates: {
       canonical: getSolutionHref(locale, "aip-integrations"),
     },

@@ -6,6 +6,18 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie Integrations",
+    "description": "Connect straight to your data sources and get full visibility across all your systems, apps, and services.",
+    "keywords": [
+      "QueryPie integrations",
+      "integrate data source",
+      "system integration",
+      "QueryPie"
+    ]
+} as const;
+
+
 export default function AcpIntegrationsENSolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

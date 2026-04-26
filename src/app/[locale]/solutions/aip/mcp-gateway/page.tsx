@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { getSolutionHref } from "@/features/solutions/routes";
-import ContentEN from "./content.en";
-import ContentKO from "./content.ko";
-import ContentJA from "./content.ja";
+import ContentEN, { metadata as metadataEN } from "./content.en";
+import ContentKO, { metadata as metadataKO } from "./content.ko";
+import ContentJA, { metadata as metadataJA } from "./content.ja";
 
 type SolutionStaticMetadata = {
   title: string;
   description: string;
-  keywords?: string[];
+  keywords?: readonly string[];
   abstract?: string;
 };
 
@@ -19,58 +19,10 @@ type PageProps = {
 };
 
 const metadataByLocale: Record<Locale, SolutionStaticMetadata> = {
-  "en": {
-    "title": "QueryPie AIP: MCP Hub That Connects Everything",
-    "description": "Single platform centrally managing all MCP servers and tools—no fragmentation, no complexity, no limits. Streamline AI workflows across your entire tech stack while we handle the complexity behind the scenes.",
-    "keywords": [
-      "QueryPie AI",
-      "AI Platform",
-      "MCP management",
-      "access control",
-      "QueryPie",
-      "streamlined operations",
-      "MCP servers",
-      "Usage-based Enterprise AI",
-      "MCP Gateway",
-      "FDE Service"
-    ]
-  },
-  "ko": {
-    "title": "QueryPie AIP: MCP Hub That Connects Everything",
-    "description": "Single platform centrally managing all MCP servers and tools—no fragmentation, no complexity, no limits. Streamline AI workflows across your entire tech stack while we handle the complexity behind the scenes.",
-    "keywords": [
-      "QueryPie AI",
-      "AI Platform",
-      "MCP management",
-      "access control",
-      "QueryPie",
-      "streamlined operations",
-      "MCP servers",
-      "Usage-based Enterprise AI",
-      "MCP Gateway",
-      "FDE Service"
-    ]
-  },
-  "ja": {
-    "title": "QueryPie AIP：すべてを接続するMCPハブ",
-    "description": "すべてのMCPサーバーとツールを一元管理する単一プラットフォーム—分散なし、複雑さなし、制限なし。舞台裏の複雑さは私たちが処理し、技術スタック全体のAIワークフローを効率化。",
-    "keywords": [
-      "クエリパイ AI",
-      "QueryPie AI",
-      "AI Platform",
-      "AIP",
-      "AI",
-      "MCPゲートウェイ",
-      "アクセス制御",
-      "カスタムAIエージェント",
-      "インフラ運用",
-      "QueryPie AI Agent",
-      "使用量ベース",
-      "フォワードデプロイドエンジニア",
-      "FDE"
-    ]
-  }
-} as const;
+  en: metadataEN,
+  ko: metadataKO,
+  ja: metadataJA,
+};
 
 export async function generateMetadata({ params }: Pick<PageProps, "params">): Promise<Metadata> {
   const { locale } = await params;
@@ -82,7 +34,7 @@ export async function generateMetadata({ params }: Pick<PageProps, "params">): P
   return {
     title: meta.title,
     description: meta.description,
-    keywords: meta.keywords,
+    keywords: meta.keywords ? [...meta.keywords] : undefined,
     alternates: {
       canonical: getSolutionHref(locale, "aip-mcp-gateway"),
     },

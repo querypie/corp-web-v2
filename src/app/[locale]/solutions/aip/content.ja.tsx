@@ -6,6 +6,27 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie AIプラットフォーム (AIP)",
+    "description": "経済的でエンタープライズ対応のソリューションを通じてエンタープライズAI変革を実現するプラットフォーム—使用量ベースのLLM導入と包括的なMCPゲートウェイを特徴とする。カスタマイズされたAIエージェントを提供するフォワードデプロイドエンジニア（FDE）による完全な変革。",
+    "keywords": [
+      "クエリパイ AI",
+      "QueryPie AI",
+      "AI Platform",
+      "AIP",
+      "AI",
+      "MCPゲートウェイ",
+      "アクセス制御",
+      "カスタムAIエージェント",
+      "インフラ運用",
+      "QueryPie AI Agent",
+      "使用量ベース",
+      "フォワードデプロイドエンジニア",
+      "FDE"
+    ]
+} as const;
+
+
 export default function AipJASolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

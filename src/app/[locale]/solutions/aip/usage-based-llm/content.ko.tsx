@@ -6,6 +6,24 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie AIP: Usage-Based Enterprise AI That Works",
+    "description": "Browser-based platform with instant access—no downloads, no setup, no fixed costs. Up to 90% savings vs. ChatGPT makes enterprise-wide AI adoption finally achievable.",
+    "keywords": [
+      "QueryPie AI",
+      "AI Platform",
+      "MCP management",
+      "access control",
+      "QueryPie",
+      "streamlined operations",
+      "MCP servers",
+      "Usage-based Enterprise AI",
+      "MCP Gateway",
+      "FDE Service"
+    ]
+} as const;
+
+
 export default function AipUsageBasedLlmKOSolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

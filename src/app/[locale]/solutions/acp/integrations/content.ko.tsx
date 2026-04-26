@@ -6,6 +6,18 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie Integrations",
+    "description": "데이터 소스에 직접 연결하여 모든 시스템, 앱, 서비스에 걸쳐 완벽한 가시성을 확보하세요.",
+    "keywords": [
+      "QueryPie integrations",
+      "데이터 소스 연동",
+      "시스템 연동",
+      "QueryPie"
+    ]
+} as const;
+
+
 export default function AcpIntegrationsKOSolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

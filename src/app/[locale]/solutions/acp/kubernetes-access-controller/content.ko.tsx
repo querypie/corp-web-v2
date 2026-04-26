@@ -6,6 +6,24 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie KAC, Kubernetes Access Controller",
+    "description": "QueryPie KAC는 AWS EKS와 온프레미스 클러스터를 관리하며, 쿠버네티스 API 보호를 위한 솔루션입니다.",
+    "keywords": [
+      "QueryPie KAC",
+      "쿠버네티스 접근 제어기",
+      "AWS EKS",
+      "쿠버네티스 API 보호",
+      "자동화",
+      "ABAC",
+      "RBAC",
+      "세션 기록",
+      "쿠버네티스 클러스터",
+      "SSH 연결"
+    ]
+} as const;
+
+
 export default function AcpKubernetesAccessControllerKOSolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

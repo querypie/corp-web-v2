@@ -6,6 +6,17 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie AIP Integrations",
+    "description": "Connect to your favorite business tools through MCP servers and automate workflows across systems, apps, and services.",
+    "keywords": [
+      "QueryPie AIP integrations",
+      "MCP integrations",
+      "QueryPie AI"
+    ]
+} as const;
+
+
 export default function AipIntegrationsENSolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

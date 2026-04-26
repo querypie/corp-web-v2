@@ -6,6 +6,24 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie AI Platform (AIP)",
+    "description": "QueryPie AIP is the platform that delivers enterprise AI transformation through economical, enterprise-ready solutions—featuring usage-based LLM deployment and comprehensive MCP gateway.Complete transformation through Forward Deployed Engineers (FDE) delivering tailored AI agents.",
+    "keywords": [
+      "QueryPie AI",
+      "AI Platform",
+      "MCP management",
+      "access control",
+      "QueryPie",
+      "streamlined operations",
+      "MCP servers",
+      "Usage-based Enterprise AI",
+      "MCP Gateway",
+      "FDE Service"
+    ]
+} as const;
+
+
 export default function AipENSolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

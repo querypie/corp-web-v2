@@ -6,6 +6,18 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie: インテグレーション",
+    "description": "データソースに直接接続し、すべてのシステム、アプリケーション、およびサービスを完全に把握することが可能です。",
+    "keywords": [
+      "QueryPieの統合",
+      "データソースの統合",
+      "システムの統合",
+      "QueryPie"
+    ]
+} as const;
+
+
 export default function AcpIntegrationsJASolutionContent({ locale, searchParams }: Props) {
   const {
     Box,

@@ -6,6 +6,22 @@ type Props = {
   searchParams?: { category?: string };
 };
 
+export const metadata = {
+    "title": "QueryPie DAC, Database Access Controller",
+    "description": "QueryPie DAC is crafted for data protection, seamlessly connectiong various cloud ecosystems. ",
+    "keywords": [
+      "QueryPie DAC",
+      "database access controller",
+      "DB access control",
+      "data protection",
+      "SQL editor",
+      "RBAC",
+      "ABAC",
+      "audit"
+    ]
+} as const;
+
+
 export default function AcpDatabaseAccessControllerENSolutionContent({ locale, searchParams }: Props) {
   const {
     Box,
