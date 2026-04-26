@@ -1,23 +1,23 @@
-import { notFound, redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { getAcpDemoHref } from "@/features/demo/acp";
 
-type Props = {
+type RouteContext = {
   params: Promise<{ locale: string; id: string; rest?: string[] }>;
 };
 
-export default async function LegacyAcpDemoRedirectPage({ params }: Props) {
+export async function GET(request: Request, { params }: RouteContext) {
   const { locale, id } = await params;
 
   if (!isLocale(locale)) {
-    notFound();
+    return new NextResponse(null, { status: 404 });
   }
 
   const href = getAcpDemoHref(locale as Locale, id);
 
   if (!href) {
-    notFound();
+    return new NextResponse(null, { status: 404 });
   }
 
-  redirect(href);
+  return NextResponse.redirect(new URL(href, request.url));
 }
