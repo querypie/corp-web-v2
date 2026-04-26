@@ -1,5 +1,13 @@
-import { createSolutionMetadata, createSolutionPage } from "@/features/solutions/staticPage";
+import { createGenerateMetadata, createSolutionPage } from "../../_shared/pageHelpers";
+import ContentEN from "./content.en";
+import ContentKO from "./content.ko";
+import ContentJA from "./content.ja";
+import metadataByLocale from "./metadata";
 
-export const generateMetadata = createSolutionMetadata("acp-web-access-controller");
+export const generateMetadata = createGenerateMetadata("acp-web-access-controller", metadataByLocale);
 
-export default createSolutionPage("acp-web-access-controller");
+export default createSolutionPage({
+  en: ContentEN,
+  ko: ContentKO,
+  ja: ContentJA,
+});

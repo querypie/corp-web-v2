@@ -1,5 +1,13 @@
-import { createSolutionMetadata, createSolutionPage } from "@/features/solutions/staticPage";
+import { createGenerateMetadata, createSolutionPage } from "../../_shared/pageHelpers";
+import ContentEN from "./content.en";
+import ContentKO from "./content.ko";
+import ContentJA from "./content.ja";
+import metadataByLocale from "./metadata";
 
-export const generateMetadata = createSolutionMetadata("aip-integrations");
+export const generateMetadata = createGenerateMetadata("aip-integrations", metadataByLocale);
 
-export default createSolutionPage("aip-integrations");
+export default createSolutionPage({
+  en: ContentEN,
+  ko: ContentKO,
+  ja: ContentJA,
+});
