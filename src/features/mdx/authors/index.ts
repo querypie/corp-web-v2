@@ -117,8 +117,8 @@ export function formatResolvedAuthorNames(authors: ResolvedArticleAuthor[]): str
   return authors.map((author) => author.name).join(", ");
 }
 
-export function getDetailedArticleAuthors(authors: ResolvedArticleAuthor[]): ResolvedArticleAuthor[] {
-  return authors.filter((author) => author.isRegistered);
+export function getDisplayableArticleAuthors(authors: ResolvedArticleAuthor[]): ResolvedArticleAuthor[] {
+  return authors.filter((author) => Boolean(author.name.trim()));
 }
 
 export function getAuthorIntroHeading(locale: Locale): string {

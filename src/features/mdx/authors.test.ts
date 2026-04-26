@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 
-import { formatResolvedAuthorNames, getAuthorIntroHeading, resolveArticleAuthors } from "./authors";
+import { formatResolvedAuthorNames, getAuthorIntroHeading, getDisplayableArticleAuthors, resolveArticleAuthors } from "./authors";
 
 describe("resolveArticleAuthors", () => {
   it("locale별 등록된 author 정보를 해석한다", () => {
@@ -62,6 +62,17 @@ describe("formatResolvedAuthorNames", () => {
     const authors = resolveArticleAuthors(["brant", "terazawa"], "ja");
 
     expect(formatResolvedAuthorNames(authors)).toBe("Brant Hwang, 寺澤慎祐");
+  });
+});
+
+describe("getDisplayableArticleAuthors", () => {
+  it("등록 여부와 무관하게 이름이 있는 author는 AuthorBox 대상으로 유지한다", () => {
+    const authors = resolveArticleAuthors(["brant", "Jessica Kim"], "en");
+
+    expect(getDisplayableArticleAuthors(authors).map((author) => author.name)).toEqual([
+      "Brant Hwang",
+      "Jessica Kim",
+    ]);
   });
 });
 

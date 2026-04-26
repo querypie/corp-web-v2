@@ -38,7 +38,7 @@ describe("BlogLayout", () => {
     expect(container.textContent).toContain("寺澤慎祐");
   });
 
-  it("등록된 author만 소개 박스에 포함하고 헤더는 locale 이름 순서를 유지한다", async () => {
+  it("등록 여부와 무관하게 author가 있으면 소개 박스에 포함하고 헤더는 locale 이름 순서를 유지한다", async () => {
     const element = await BlogLayout({
       children: <p>본문</p>,
       frontmatter: {
@@ -58,10 +58,10 @@ describe("BlogLayout", () => {
     expect(screen.getByText("About the author")).toBeInTheDocument();
     expect(screen.getByRole("img", { name: "Brant Hwang" })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: "Ravi Kang" })).toBeInTheDocument();
-    expect(screen.queryByRole("img", { name: "Jessica Kim" })).not.toBeInTheDocument();
+    expect(screen.getByText("Jessica Kim")).toBeInTheDocument();
   });
 
-  it("등록되지 않은 author만 있으면 소개 박스를 렌더링하지 않는다", async () => {
+  it("등록되지 않은 author만 있어도 소개 박스를 렌더링한다", async () => {
     const element = await BlogLayout({
       children: <p>본문</p>,
       frontmatter: {
@@ -77,7 +77,7 @@ describe("BlogLayout", () => {
 
     render(element);
 
-    expect(screen.getByText("Jessica Kim")).toBeInTheDocument();
-    expect(screen.queryByText("About the author")).not.toBeInTheDocument();
+    expect(screen.getAllByText("Jessica Kim")).toHaveLength(2);
+    expect(screen.getByText("About the author")).toBeInTheDocument();
   });
 });
