@@ -1,6 +1,7 @@
 import { getLocalePath, type Locale } from "@/constants/i18n";
 import { getAipDemoHrefByContentId } from "@/features/demo/aip";
 import { getUseCaseDemoHrefByContentId } from "@/features/demo/useCase";
+import { getWebinarDemoHrefByContentId } from "@/features/demo/webinar";
 import {
   demoCategoryConfigs,
   docsCategoryConfigs,
@@ -285,6 +286,7 @@ export function getPublicDetailHref(
     return (
       getAipDemoHrefByContentId(locale, slug) ??
       getUseCaseDemoHrefByContentId(locale, slug) ??
+      getWebinarDemoHrefByContentId(locale, slug) ??
       getLocalePath(locale, `/features/demo/${slug}`)
     );
   }
