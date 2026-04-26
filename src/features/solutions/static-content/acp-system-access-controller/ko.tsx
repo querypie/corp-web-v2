@@ -1,0 +1,323 @@
+import type { Locale } from "@/constants/i18n";
+import { buildSolutionMdxComponents } from "@/features/solutions/mdxComponents";
+
+type Props = {
+  locale: Locale;
+  searchParams?: { category?: string };
+};
+
+export default function AcpSystemAccessControllerKOSolutionContent({ locale, searchParams }: Props) {
+  const {
+    Box,
+    CenterSection,
+    DarkBadge,
+    FileImage,
+    Integrations,
+    IntroducingQueryPie,
+    KeyFeature,
+    KillerFeature,
+    KillerFeatureCategory,
+    KillerFeatures,
+    LearnMoreLink,
+    Link,
+    LottiePlayer,
+    MainFeatureDescription,
+    SplitView,
+    StaticBody,
+    StaticH1,
+    StaticH2,
+    StaticH4,
+    StaticHeader,
+    ThreeColumnList,
+    ThumbnailYoutube,
+    Youtube
+  } = buildSolutionMdxComponents({ locale, searchParams }) as any;
+
+  return (
+<Box direction="column">
+  <Box paddingTopSize="lg" center as="section" background="sac">
+    <CenterSection gapSize="xxl" center>
+      <Box direction="column" gapSize="sm" center>
+        <StaticH1>{'System Access Controller'}</StaticH1>
+        <StaticHeader color="var(--text-body)">
+          {
+            'QueryPie SAC은 클라우드 환경과 온프레미스의 여러 시스템, 서버, 네트워크 장비 등 SSH 접속이 가능한 모든 리소스의 권한을 통합 관리할 수 있습니다.'
+          }
+          <br />
+          {
+            '관리자는 사용자 명령을 모니터링하고 세션을 재생하여 모든 플랫폼에서 보안과 감독을 강화할 수 있습니다.'
+          }
+        </StaticHeader>
+      </Box>
+      <Youtube src="https://www.youtube.com/embed/h1jlfwQFaiA?si=qvk_Mk0ryxXhwX51" />
+    </CenterSection>
+  </Box>
+
+  <Box paddingTopSize="ultra" paddingBottomSize="xl" center as="section">
+    <CenterSection gapSize="lg">
+      <Box direction="column" gapSize="sm">
+        <StaticH2>{'Key Features of SAC'}</StaticH2>
+        <StaticBody color="var(--text-body)">
+          {
+            'QueryPie SAC은 태그 기반 권한 설정과 웹 터미널을 통해 서버 관리를 간소화하며,'
+          }
+          <br />
+          {'에이전트 기반 프록시 접근과 통합 SSH/SFTP 관리를 지원하여 원활한 연결을 제공합니다.'}
+        </StaticBody>
+      </Box>
+      <ThreeColumnList gapSize="md">
+        <KeyFeature
+          iconFilepath="public/solutions/acp/system-access-controller/server.svg"
+          label="효율적인 서버 관리"
+          description="서버 그룹 기능과 태그 필터링을 통해 손쉽고 빠르게 서버를 관리할 수 있으며, 중앙에서 권한과 정책을 효율적으로 운영하여 보안과 접근 제어를 최적화합니다. 이로써 관리자는 복잡한 서버 환경을 간편하게 다룰 수 있습니다."
+        />
+        <KeyFeature
+          iconFilepath="public/solutions/acp/system-access-controller/terminal.svg"
+          label="웹 터미널 지원"
+          description="웹 브라우저 내에서 서버 연결과 작업 실행을 위한 웹 터미널과 웹 SFTP를 제공하여 일관된 접근을 보장하고, 모든 작업에 대해 효율적인 권한 제어가 가능하도록 합니다. 사용자는 별도의 클라이언트 없이 편리하게 서버를 관리하고 작업을 수행할 수 있습니다."
+        />
+        <KeyFeature
+          iconFilepath="public/solutions/acp/system-access-controller/server-group.svg"
+          label="서버 그룹을 통한 손쉬운 권한 관리"
+          description="서버 그룹을 통해 권한을 부여하고 정책을 관리하며, 접근 시간과 같은 세부 설정을 상속받아 서버 및 사용자 수준에서 유연하게 관리할 수 있습니다. 이로써 보안은 강화되고 관리자의 업무 효율성은 더욱 높아집니다."
+        />
+        <KeyFeature
+          iconFilepath="public/solutions/acp/system-access-controller/proxy.svg"
+          label="프록시 접근을 위한 에이전트 지원"
+          description="QueryPie는 사용자가 기존에 사용하던 프로그램 그대로 다양한 시스템과 서버 장비에 안전하게 연결할 수 있도록 데스크탑 에이전트를 제공합니다."
+        />
+        <KeyFeature
+          iconFilepath="public/solutions/acp/system-access-controller/network.svg"
+          label="통합된 SSH & SFTP 접근 관리"
+          description="클라우드와 온프레미스 환경을 아우르는 시스템과 서버를 포함한 모든 리소스에 대해 SSH를 통해 접근할 수 있는 권한을 중앙 관리할 수 있습니다."
+        />
+      </ThreeColumnList>
+    </CenterSection>
+  </Box>
+
+  <Box paddingTopSize="xl" paddingBottomSize="xl" center as="section">
+    <CenterSection gapSize="xxl">
+      <Box direction="column" gapSize="sm">
+        <StaticH2>{'How QueryPie SAC Works'}</StaticH2>
+        <StaticBody color="var(--text-body)">
+          {
+            'QueryPie SAC은 웹 터미널과 웹 SFTP를 통해 사용자를 연결함으로써 접근 제어와 감사 작업을 간소화합니다.'
+          }
+          <br />
+          {
+            '사용자는 QueryPie 프록시 서버를 통해 서버에 쉽게 연결할 수 있으며, 보안 프로토콜을 유지하면서 원활한 접근이 가능합니다.'
+          }
+          <br />
+          {
+            'QueryPie SAC 앱은 모든 작업을 모니터링하여 서버 상호작용에 대한 강력한 감독과 제어를 제공합니다.'
+          }
+        </StaticBody>
+      </Box>
+      <Box as="section" center>
+        <div style={{ maxWidth: '1000px' }}>
+          <FileImage
+            alt="How QueryPie SAC Works"
+            filepath="public/solutions/acp/system-access-controller/works.png"
+            width={1000}
+            height={520}
+            responsive
+          />
+        </div>
+      </Box>
+    </CenterSection>
+  </Box>
+
+  <Box paddingTopSize="xl" paddingBottomSize="ultra" center as="section">
+    <CenterSection gapSize="xl">
+      <Box direction="column" gapSize="sm">
+        <StaticH2>{'Easy Installation, Easy Use'}</StaticH2>
+        <StaticBody color="var(--text-body)">
+          {
+            'QueryPie는 클라우드 네이티브 기술과 웹 기반 인터페이스를 결합하여 다양한 운영 체제에서 손쉽게 설치하고 운영할 수 있도록 합니다.'
+          }
+          <br />
+          {
+            'Docker 패키징을 통해 쉬운 배포가 가능하며, 온프레미스 보안과 SaaS처럼 편리한 업데이트 방식을 결합한 하이브리드 접근 방식을 지원합니다.'
+          }
+          <br />
+          {
+            '이 디자인은 금융, 의료, 공공 부문에서의 컴플라이언스를 지원하며, 문제가 발생할 경우 즉시 롤백할 수 있는 기능을 제공합니다.'
+          }
+          <br />
+          {
+            'QueryPie는 SaaS의 편리함과 온프레미스 솔루션의 강력한 보안을 결합하여 고객 가치를 전달하는 데 중점을 둡니다.'
+          }
+        </StaticBody>
+      </Box>
+      <Box as="section" center>
+        <div style={{ maxWidth: '1000px' }}>
+          <FileImage
+            alt="Easy Installation, Easy Use"
+            filepath="public/solutions/acp/system-access-controller/easy-use-ko.png"
+            width={1000}
+            height={440}
+            responsive
+          />
+        </div>
+      </Box>
+    </CenterSection>
+  </Box>
+
+  <Box paddingTopSize="md" paddingBottomSize="md" center as="section" background="gray">
+    <CenterSection>
+      <SplitView gapSize="xxl" breakpoint="md" useNoGapWhenMobile>
+        <SplitView.View verticalCenter>
+          <Box direction="column" gapSize="sm">
+            <StaticH4>{'웹 터미널 & SFTP 클라이언트'}</StaticH4>
+            <StaticBody color="var(--text-body)">
+              {
+                '웹 터미널과 SFTP 클라이언트를 사용해 서버에 쉽게 연결하고 작업을 처리하세요. 명령을 실행하고 파일을 전송할 수 있으며, 운영 체제에 관계없이 브라우저에서 바로 작업을 완료할 수 있습니다.'
+              }
+            </StaticBody>
+          </Box>
+        </SplitView.View>
+        <SplitView.View fixWidth="53.3%">
+          <FileImage
+            alt="웹 터미널 & SFTP 클라이언트"
+            filepath="public/solutions/acp/system-access-controller/web-client.png"
+            width={640}
+            height={680}
+            responsive
+          />
+        </SplitView.View>
+      </SplitView>
+    </CenterSection>
+  </Box>
+
+  <Box paddingTopSize="md" paddingBottomSize="md" center as="section">
+    <CenterSection>
+      <SplitView gapSize="xxl" breakpoint="md" reverse useNoGapWhenMobile>
+        <SplitView.View fixWidth="50%">
+          <FileImage
+            alt="명령어 접근 권한 제어 및 관리"
+            filepath="public/solutions/acp/system-access-controller/access-control.png"
+            width={600}
+            height={600}
+            responsive
+          />
+        </SplitView.View>
+        <SplitView.View verticalCenter>
+          <Box direction="column" gapSize="sm">
+            <StaticH4>{'명령어 접근 권한 제어 및 관리'}</StaticH4>
+            <StaticBody color="var(--text-body)">
+              {
+                '서버 그룹 또는 개별 서버에 대해 위험 수준에 따라 SSH 명령어 권한을 설정하고 관리할 수 있습니다. 차단된 명령어는 알림을 트리거하여 의심스러운 활동을 신속하게 감지할 수 있도록 도와줍니다.'
+              }
+            </StaticBody>
+          </Box>
+        </SplitView.View>
+      </SplitView>
+    </CenterSection>
+  </Box>
+
+  <Box paddingTopSize="md" paddingBottomSize="md" center as="section" background="gray">
+    <CenterSection>
+      <SplitView gapSize="xxl" breakpoint="md" useNoGapWhenMobile>
+        <SplitView.View verticalCenter>
+          <Box direction="column" gapSize="sm">
+            <StaticH4>{'태그 기반 리소스 관리 기능'}</StaticH4>
+            <StaticBody color="var(--text-body)">
+              {
+                '개별 서버에 태그를 지정하고, 이를 그룹화하여 권한을 신속하게 적용할 수 있습니다. 클라우드 서비스 프로바이더와의 동기화 시, 태그가 자동으로 동기화되어 클라우드 환경에서 리소스를 쉽게 관리할 수 있습니다.'
+              }
+            </StaticBody>
+          </Box>
+        </SplitView.View>
+        <SplitView.View fixWidth="53.3%">
+          <FileImage
+            alt="태그 기반 리소스 관리 기능"
+            filepath="public/solutions/acp/system-access-controller/tag-based-management.png"
+            width={640}
+            height={570}
+            responsive
+          />
+        </SplitView.View>
+      </SplitView>
+    </CenterSection>
+  </Box>
+
+  <Box paddingTopSize="md" paddingBottomSize="md" center as="section">
+    <CenterSection>
+      <SplitView gapSize="xxl" breakpoint="md" reverse useNoGapWhenMobile>
+        <SplitView.View fixWidth="50%">
+          <FileImage
+            alt="실시간 모니터링 & 세션 리플레이"
+            filepath="public/solutions/acp/system-access-controller/session-replay.png"
+            width={600}
+            height={530}
+            responsive
+          />
+        </SplitView.View>
+        <SplitView.View verticalCenter>
+          <Box direction="column" gapSize="sm">
+            <StaticH4>{'실시간 모니터링 & 세션 리플레이'}</StaticH4>
+            <StaticBody color="var(--text-body)">
+              {
+                '실시간 모니터링과 세션 리플레이를 통해 사용자 활동을 동일한 화면에서 쉽게 확인할 수 있습니다. 또한 이상 징후가 발견되면 즉시 세션을 종료하여 자원을 안전하게 보호할 수 있습니다. '
+              }
+            </StaticBody>
+          </Box>
+        </SplitView.View>
+      </SplitView>
+    </CenterSection>
+  </Box>
+
+  <Box paddingTopSize="md" paddingBottomSize="md" center as="section" background="gray">
+    <CenterSection>
+      <SplitView gapSize="xxl" breakpoint="md" useNoGapWhenMobile>
+        <SplitView.View verticalCenter>
+          <Box direction="column" gapSize="sm">
+            <StaticH4>{'IaC 기반 접근 제어'}</StaticH4>
+            <StaticBody color="var(--text-body)">
+              {
+                '사용자 친화적인 GUI와 IaC 편집을 통해 IAM 정책을 쉽게 관리할 수 있습니다. 중앙 집중식으로 관리되는 정책을 사용하여 리소스나 특정 항목에 대한 접근을 빠르게 제어할 수 있습니다.'
+              }
+            </StaticBody>
+          </Box>
+        </SplitView.View>
+        <SplitView.View fixWidth="51.7%">
+          <FileImage
+            alt="IaC 기반 접근 제어"
+            filepath="public/solutions/acp/system-access-controller/iac.png"
+            width={620}
+            height={480}
+            responsive
+          />
+        </SplitView.View>
+      </SplitView>
+    </CenterSection>
+  </Box>
+
+  <Box paddingTopSize="md" paddingBottomSize="lg" center as="section">
+    <CenterSection>
+      <SplitView gapSize="xxl" breakpoint="md" reverse useNoGapWhenMobile>
+        <SplitView.View fixWidth="50%">
+          <FileImage
+            alt="다양한 프로토콜 지원"
+            filepath="public/solutions/acp/system-access-controller/protocol.png"
+            width={600}
+            height={540}
+            responsive
+          />
+        </SplitView.View>
+        <SplitView.View verticalCenter>
+          <Box direction="column" gapSize="sm">
+            <StaticH4>{'다양한 프로토콜 지원'}</StaticH4>
+            <StaticBody color="var(--text-body)">
+              {
+                'SSH, SFTP, RDP, VNC 등을 사용하여 안전하게 연결하세요. 이 프로토콜들은 유연한 원격 접근, 파일 전송, 원격 데스크탑 작업을 지원하며, 보안은 철저히 유지됩니다.'
+              }
+            </StaticBody>
+          </Box>
+        </SplitView.View>
+      </SplitView>
+    </CenterSection>
+  </Box>
+</Box>
+  );
+}
