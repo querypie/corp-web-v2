@@ -5,6 +5,7 @@ import {
   formatPublicDate,
   getContentThumbnailSrc,
   getLocalizedContent,
+  getPublicDetailHref,
   getWriterLabel,
   hasLocalizedTitle,
   isPublishedContentVisible,
@@ -199,6 +200,17 @@ describe("formatPublicDate", () => {
 
   it("유효하지 않은 날짜는 빈 문자열을 반환한다", () => {
     expect(formatPublicDate("en", "not-a-date")).toBe("");
+  });
+});
+
+describe("getPublicDetailHref", () => {
+  it("AIP demo는 짧은 demo/aip 경로를 반환한다", () => {
+    expect(getPublicDetailHref("demo", "en", "google-oauth-demo")).toBe("/demo/aip/1/google-oauth-demo");
+    expect(getPublicDetailHref("demo", "ko", "google-oauth-demo")).toBe("/ko/demo/aip/1/google-oauth-demo");
+  });
+
+  it("그 외 demo는 기존 features/demo 경로를 유지한다", () => {
+    expect(getPublicDetailHref("demo", "en", "some-other-demo")).toBe("/features/demo/some-other-demo");
   });
 });
 
