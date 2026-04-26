@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import {
+  getSolutionEntryById,
   getSolutionEntryBySlug,
   getSolutionHref,
   solutionEntries,
@@ -8,6 +9,16 @@ import {
 describe("solutionEntries", () => {
   it("legacy canonical solutions 11개 경로를 모두 유지한다", () => {
     expect(solutionEntries).toHaveLength(11);
+  });
+});
+
+describe("getSolutionEntryById", () => {
+  it("solution id로 canonical entry를 찾는다", () => {
+    expect(getSolutionEntryById("aip")?.slug).toEqual(["aip"]);
+    expect(getSolutionEntryById("acp-web-access-controller")?.slug).toEqual([
+      "acp",
+      "web-access-controller",
+    ]);
   });
 });
 

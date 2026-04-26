@@ -30,6 +30,9 @@ export const solutionEntries: SolutionEntry[] = [
   { id: "acp-integrations", slug: ["acp", "integrations"] },
 ];
 
+export function getSolutionEntryById(id: SolutionEntry["id"]): SolutionEntry | null {
+  return solutionEntries.find((entry) => entry.id === id) ?? null;
+}
 
 export function getSolutionEntryBySlug(slug: string[]): SolutionEntry | null {
   const joined = slug.join("/");
@@ -37,11 +40,10 @@ export function getSolutionEntryBySlug(slug: string[]): SolutionEntry | null {
 }
 
 export function getSolutionHref(locale: Locale, id: SolutionEntry["id"]): string {
-  const entry = solutionEntries.find((item) => item.id === id);
+  const entry = getSolutionEntryById(id);
   if (!entry) {
     throw new Error(`Unknown solution id: ${id}`);
   }
 
   return getLocalePath(locale, `/solutions/${entry.slug.join("/")}`);
 }
-

@@ -1,5 +1,0 @@
-{
-  "title": "QueryPie アクセス制御プラットフォーム (ACP)",
-  "description": "アクセス制御プラットフォームはデータベースとインフラ全体にわたる包括的なアクセス管理を提供するプラットフォームです。",
-  "keywords": ["クエリパイ ACP", "Access Control Platform", "ACP", "データベースアクセス制御", "システムアクセス制御", "Kubernetesアクセス制御", "Webアクセス制御", "SQLエディター", "AIエージェント", "RBAC", "ABAC", "リアルタイム監視"]
-}
