@@ -2095,6 +2095,26 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "/demo/webinar/26/air-company-querypie-ai-usecase-webinar-20260319.png"
     },
     "date": "2026-03-02"
+  },
+  {
+    "categorySlug": "webinars",
+    "segment": "webinars",
+    "id": "27",
+    "slug": "air-company-ai-agent-security-webinar",
+    "mdxSlug": "webinars/27",
+    "locales": [
+      "ja"
+    ],
+    "title": {
+      "ja": "AIエージェントセキュリティガイド｜4/16(木)開催"
+    },
+    "description": {
+      "ja": "AIエージェントの「暴走」や「権限悪用」を防ぐには？本ウェビナーでは、実際のインシデント事例を読み解きながら、AIエージェントに付与する権限をどう設計すれば安全に使い続けられるのかを解説します。安全性と実用性を両立する実践的なフレームワークをご紹介する、実務直結型の30分です。"
+    },
+    "imageSrc": {
+      "ja": "/demo/webinar/27/air-company-ai-agent-security-webinar-20260416.png"
+    },
+    "date": "2026-04-09"
   }
 ] as const;
 
