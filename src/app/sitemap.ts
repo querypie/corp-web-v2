@@ -25,6 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...perLocale("/blog"),
     ...perLocale("/white-papers"),
     ...perLocale("/features/demo"),
+    ...perLocale("/webinars"),
     ...perLocale("/features/documentation"),
     ...perLocale("/company/news"),
     ...perLocale("/company/certifications"),
