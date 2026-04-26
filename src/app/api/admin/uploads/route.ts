@@ -79,10 +79,11 @@ async function removeUpload(src: string, dirName: string) {
     return;
   }
 
-  const publicDir = path.join(process.cwd(), "public");
-  const filePath = path.join(publicDir, src);
+  const dirRoot = path.join(process.cwd(), "public", dirName);
+  const relativeSrc = src.slice(`/${dirName}/`.length);
+  const filePath = path.join(dirRoot, relativeSrc);
 
-  if (!filePath.startsWith(path.join(publicDir, dirName))) {
+  if (!filePath.startsWith(dirRoot)) {
     return;
   }
 
