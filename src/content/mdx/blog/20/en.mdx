@@ -131,7 +131,7 @@ Despite the risks, Server Actions are not entirely unprotected.
 According to the official documentation, Next.js includes several built-in security mechanisms to help safeguard applications:
 
 - **Secure Action IDs**: Ensures secure communication between the client and server using internally generated action identifiers.
-- **[CSRF(Cross-Site Request Forgery)](/resources/discover/white-paper/8/secure-login-token-management#types-of-threats) Prevention**: Restricts Server Action calls to POST requests and enforces same-origin policies.
+- **[CSRF(Cross-Site Request Forgery)](/white-papers/8/secure-login-token-management#types-of-threats) Prevention**: Restricts Server Action calls to POST requests and enforces same-origin policies.
 - **Closure Variable Protection**: Encrypts and signs state values passed between the server and client to prevent tampering.
 - **Code Isolation**: Ensures that server-only logic is not bundled into client-side JavaScript, reducing the risk of accidental exposure.
 - **Error Message Protection**: Prevents the display of sensitive error details in production environments.

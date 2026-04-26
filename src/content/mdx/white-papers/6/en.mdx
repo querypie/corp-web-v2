@@ -1,0 +1,366 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "Access Control for Secure Operation of Kubernetes Clusters"
+description: "QueryPie ensures secure Kubernetes access control for improved cloud cluster management and operational security."
+date: "2024-11-22"
+author: "david"
+ogImage: "public/white-papers/6/thumbnail.png"
+keywords: ["QueryPie", "Kubernetes security", "access control", "cloud cluster management", "operational security"]
+relatedPosts:
+  - "/en/white-papers/2"
+  - "/en/white-papers/5"
+  - "/en/white-papers/7"
+---
+
+# Introduction
+
+With the increasing use of Kubernetes clusters, the importance of access control for enhancing security and operational efficiency is becoming more prominent.
+However, the Role-Based Access Control (RBAC) feature provided by Kubernetes is often underutilized due to its complexity in setup and management.
+As a result, many organizations share Admin privileges among multiple users, which can escalate security risks and lead to operational issues.
+
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/1-Introduction.png"
+        alt="Introduction"
+    />
+</Box>
+<br />
+
+Shared Admin privileges grant unlimited access to all users, increasing the risk of accidental deletion or modification of resources.
+This can lead to service disruptions, and in the event of an issue, it becomes difficult to track who performed which action.
+Therefore, establishing clear access control policies for each user is essential for the safe and efficient operation of Kubernetes clusters.
+
+Although Kubernetes RBAC is considered for access control, many organizations struggle to adopt it due to various limitations in functionality and management complexities.
+What challenges does Kubernetes RBAC pose, and how can they be addressed to ensure safer use of Kubernetes clusters?
+
+In this document, I will introduce the features of our Kubernetes access control product, which was developed to resolve these issues, as well as the technologies we used during development.
+
+# **Challenges**
+
+Kubernetes already has a built-in access control feature based on roles, called **RBAC** (Role-Based Access Control).
+By using Kubernetes RBAC, you can naturally divide access rights for each resource within the cluster by creating roles and assigning them only to the users who need those permissions.
+For example, you can allocate separate namespaces within the cluster for each user, and each user can only access resources within their own namespace.
+
+To implement this, you need to generate a kubeconfig file for each user, containing their authentication information, and distribute it to the respective users.
+As illustrated in the diagram, David can only access resources in the "David" namespace, and similarly, Andrew and Sam can only access resources within their own namespaces.
+By managing separate kubeconfig files for each user, permission management and resource collision issues within the cluster can be largely addressed.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/2-Challenges-1.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+However, does implementing Kubernetes RBAC make operations easier?
+In reality, when you talk to people who have actually implemented Kubernetes RBAC, they often mention several inconveniences.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/3-Challenges-2.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+What difficulties might arise?
+Let's start by considering the management of kubeconfig.
+When applying Kubernetes RBAC for each user in a cluster, the cluster administrator has more tasks than expected.
+First, they need to define the Role specifications, detailing what actions can be performed on which resources.
+Then, they must bind the Role to the users via RoleBinding.
+In addition, to ensure users can access the cluster with that Role, the administrator must create a kubeconfig for each user using X.509 certificates or token methods.
+In other words, the cluster administrator is responsible for managing each user and each Role specification individually.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/4-Challenges-3.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+As the scale of the service grows, there is an increasing number of organizations that manage multiple clusters.
+What happens when the number of clusters to be managed increases?
+The cluster administrator will need to create Role specifications, bind roles, and manage user-specific kubeconfigs for each cluster as mentioned earlier.
+As the number of clusters and users increases, the operational resources required will inevitably grow.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/5-Challenges-4.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+How should audit logs be managed? Kubernetes audit logs record who accessed which resources and when.
+In order to keep audit logs, the cluster administrator has to configure audit settings for each cluster, which can be a burden.
+Additionally, if an audit requires tracking the actions of a specific user, the administrator would need to search the audit logs for each cluster individually.
+This creates challenges in both configuring the audit logs and managing the log data.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/6-Challenges-5.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+Kubeconfig and audit log management are not the only challenges.
+There are some shortcomings in Kubernetes RBAC.
+One of them is that Kubernetes RBAC specifications do not support Deny rules.
+For example, let's assume that you want to give a user access to all resources except for the nginx pod.
+How would you set up the Kubernetes RBAC Role configuration in this case?
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/7-Challenges-6.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+Kubernetes Role specifications only support Allow rules, so as shown in the image, you must add the names of all resources except nginx to the Role specification one by one.
+If there are only 3 or 4 resources to add, it's manageable, but what if there are 10 or 20 resources?
+And what if resources are frequently added or deleted?
+Managing the Role specifications every time would increase the operational burden.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/8-Challenges-7.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+The second issue is that RBAC does not support pattern matching when configuring.
+For example, let's assume there are multiple pods whose names start with "david."
+In this case, if you want to grant access only to the pods starting with "david" to a user, how would you do it?
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/9-Challenges-8.png"
+        alt="Challenges"
+    />
+</Box>
+<br />
+
+Unfortunately, the current Kubernetes Role specification does not support pattern matching when adding resource names.
+In other words, there is no way to specify pods starting with "david" using a pattern.
+As you can see, you would have to add each pod name individually, such as "david-1," "david-2," "david-3," and so on.
+This is another cumbersome part for the cluster administrator.
+
+Additionally, Kubernetes access control features have limitations, such as complex configurations when wanting to use both RBAC and ABAC simultaneously, or the inability to filter and show only the pods the user has access to when listing pods.
+
+# Goals
+
+Therefore, the goal was set to develop a Kubernetes access control product that would complement the lacking basic Kubernetes RBAC features and reduce the cluster administrator's burden of access control management.
+Additionally, when introducing this new Kubernetes access control product, the goal was to maintain the existing usability of Kubernetes so that users would not feel resistance to its adoption.
+
+# Solution Overview
+
+The Kubernetes Access Controller (hereinafter referred to as KAC) works by placing a KAC Proxy server between the client and the Kubernetes API server to manage access control.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/10-Solution-Overview.png"
+        alt="Solution Overview"
+    />
+</Box>
+<br />
+
+The system operates by intercepting Kubernetes API requests from the client to the Kubernetes API server.
+
+
+After intercepting the API call, it analyzes the request to determine what resource and action are being attempted and checks if the user has the required permissions for that action.
+Additionally, KAC provides an audit log feature by default, recording who did what, when, and on which resource, for future auditing purposes.
+
+Depending on the type of API request, KAC offers several additional features.
+For example, if the request involves Pod exec, like accessing a container, it records the commands entered and the outputs in the container, enabling later playback.
+If the request is to list Pods, it filters the Kubernetes API server's response so that users can only see Pods they have permissions to access.
+Importantly, these features are implemented in a way that users can continue using their existing Kubernetes client tools as they did before.
+To achieve this, the KAC Proxy server is designed to be transparent, so that users are unaware of the KAC Proxy server's presence from the client tool's perspective.
+
+# Technical Description
+
+Let's break down how the KAC access control functionality works from a technical perspective, step by step.
+Essentially, the KAC Proxy server is responsible for granting or blocking access to resources within the cluster.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/11-Technical-Description-1.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+When a client sends a request, the KAC Proxy server checks whether the client has the appropriate permissions for that request.
+Depending on the policy check results, if the client has the required permissions, the KAC Proxy forwards the request to the Kubernetes API server.
+If the client doesn't have the required permissions, the server returns an error message indicating that the client doesn't have access rights.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/12-Technical-Description-2.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+In order for the KAC Proxy server to allow or block access based on policies, it must first identify who is attempting to access the resources.
+This requires authentication functionality. Kubernetes manages client authentication information through the kubeconfig file, which is also used by most Kubernetes client tools.
+Therefore, to maintain compatibility, KAC retains the cluster access approach using kubeconfig as it is.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/13-Technical-Description-3.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+To ensure that users do not have to manage the kubeconfig file manually, we have adopted a method where a KAC Agent is placed on the user's local machine, and the Agent manages the kubeconfig file.
+This approach helps reduce the operational burden on administrators.
+
+The KAC Proxy analyzes various client requests based on the protocol.
+It analyzes not only API calls used for resource creation, retrieval, deletion (such as `kubectl create pod`, `kubectl get pod`, `kubectl delete pod`), but also events related to commands like `kubectl exec` to access containers within pods, and even when using the `–watch` option in `kubectl` commands.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/14-Technical-Description-4.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+Specifically, when accessing a container within a pod using the kubectl exec command, the KAC Proxy server analyzes the stream to track what inputs the user has entered and what outputs they have received within the container.
+We have implemented functionality to replay this data through a player, allowing administrators to review the actions performed inside the container.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/15-Technical-Description-5.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+When a user runs the `kubectl` command with the `--watch` option to monitor resource status, they receive a stream of responses every time there is a change in the resource state.
+In this process, the KAC Proxy server analyzes the event stream and ensures that only resources the user has access to are visible.
+For example, when monitoring resource states with the `--watch` option, the event for a resource change will include information about additions, deletions, and modifications, as well as details about the actual resources like pods, deployments, etc.
+The KAC Proxy server decodes these event streams in real-time, checks for any violations of access control policies, and filters out any resources that the user does not have permission to view.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/16-Technical-Description-6.png"
+        alt="Technical Description"
+    />
+</Box>
+<br />
+
+Next, there are cases where a user queries the entire pod list in the cluster using the command `kubectl get pod --all-namespaces`.
+In such cases, KAC ensures that even in the response of the entire pod list, the user's access permissions are checked for each pod, and any resources the user doesn't have access to are filtered out before being displayed.
+This means that even when querying the entire pod list, the user will only see the pods they have permission to access.
+
+The KAC proxy server is a core component responsible for performing detailed access control when users access Kubernetes resources.
+This server meticulously analyzes incoming requests based on a deep understanding of Kubernetes APIs and resources to accurately identify the target resource and the type of operation.
+Notably, it maintains the usability of the existing Kubernetes system while performing thorough access control checks for every client request.
+
+# Improvement of RBAC Specifications
+
+As mentioned in the introduction, Kubernetes RBAC specifications have certain limitations.
+Now, let's explain how KAC has improved upon this.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/17-rbac-spec-1.png"
+        alt="RBAC Specifications"
+    />
+</Box>
+<br />
+
+To support what Kubernetes RBAC specifications cannot express, KAC provides its own policy specification. The image above shows an example of the KAC policy specification.
+As you can see, it is divided into four main sections: resources, subjects, actions, and conditions.
+
+First, the "resources" section specifies which clusters to target by naming the cluster.
+Next, the "subjects" section defines which Kubernetes groups or user permissions can access the resources.
+The "actions" section specifies which actions can be performed on resources like pods or deployments, and finally, the "conditions" section allows access control based on tags or user attributes, providing flexibility for access control.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/18-rbac-spec-2.png"
+        alt="RBAC Specifications"
+    />
+</Box>
+<br />
+
+In the "resources" section, the cluster names to be controlled for access are specified.
+As shown in the image above, multiple clusters can be designated, allowing for unified access control policy management across multiple clusters with a single specification.
+
+The "subjects" section specifies which Kubernetes group or user permission the KAC proxy server will use when calling the Kubernetes API server.
+This utilizes Kubernetes' impersonation feature, where the KAC proxy server will make the API call to the Kubernetes server using the permissions of the specified Kubernetes group.
+
+Next, in the "actions" section, the Kubernetes resource types, namespaces, names, and verbs for access control are specified.
+Since wildcard and pattern matching expressions are supported, there is no need to specify resource names individually as in the existing Kubernetes Role specifications.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/19-rbac-spec-3.png"
+        alt="RBAC Specifications"
+    />
+</Box>
+<br />
+
+Deny rules are also supported.
+As mentioned earlier, the current Kubernetes RBAC Role specification only supports allow rules, but by supporting deny rules, access control can now also be enforced using a blacklist approach.
+
+Next, in the "conditions" section, the conditions under which this policy should apply can be specified.
+Here, policies can be applied based on the cluster's tags or user attributes.
+For example, user attributes can be used to assign teams, making it easier to apply policies based on teams.
+Finally, cluster tags represent the attributes of the cluster, and tags are especially useful for policy management in multi-cluster environments.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/6/20-rbac-spec-4.png"
+        alt="RBAC Specifications"
+    />
+</Box>
+<br />
+
+KAC, like other QueryPie products such as DAC and SAC, provides a cluster synchronization feature.
+With just a few clicks, it can automatically fetch the list of managed Kubernetes clusters from each cloud provider and easily register them in the access control server.
+Once the Kubernetes cluster list is registered, the administrator can assign tags to each cluster.
+These tags are then referenced in the KAC Policy specification and used for access control settings.
+
+For example, let's assume you want to apply a separate access control policy only to clusters of type "development."
+From the automatically retrieved cluster list, you can assign the tag "ClusterType: dev" to the development clusters.
+By including this tag in the conditions section of the policy specification, the policy will automatically be applied to all development clusters.
+In summary, using the automatic Kubernetes cluster synchronization and cluster tagging features, access control policies can easily be managed across numerous clusters.
+
+# Conclusion
+
+KAC enhances the existing Kubernetes RBAC by providing more robust access control features and an efficient management experience.
+Technically, through a transparent Proxy architecture and detailed analysis of various request types, KAC ensures full compatibility with existing Kubernetes tools while enabling detailed audit tracking of container access.
+From a policy management perspective, it supports a centralized management approach, allowing administrators to consistently set and manage access controls across numerous clusters.
+
+As the proliferation of SaaS environments increases the number of Kubernetes clusters, QueryPie KAC has become an essential tool for securely and efficiently managing these clusters.
+Leverage QueryPie KAC to protect your cluster assets and maximize operational efficiency.
+

@@ -1,0 +1,295 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "Core Technology for Parsing SQL Across Multiple Vendors: QSI (Query Structural Interface)"
+description: "Enhance system security with QueryPie's native command control through an advanced SSH proxy architecture."
+date: "2024-11-22"
+author: "evan"
+ogImage: "public/white-papers/3/thumbnail.png"
+keywords: ["QueryPie", "QSI technology", "SQL parsing", "cross-vendor compatibility", "database efficiency"]
+relatedPosts:
+  - "/en/white-papers/4"
+  - "/en/white-papers/2"
+  - "/en/white-papers/1"
+---
+
+# Introduction
+
+The number of businesses worldwide required to comply with global regulations such as **CCPA, GDPR,** and **ISO 27001** is rapidly growing.
+This shift in the business environment has elevated consistent data management and security to essential elements of corporate operations.
+In practice, database systems commonly involve access through diverse platforms and query languages.
+However, differences in syntax and behavior across databases make consistent access control and monitoring a challenging task.
+Today, we will introduce a solution that consolidates queries from multiple databases into a unified abstract syntax structure and provides a solid foundation for database query security through real-time analysis.
+
+# Step.1 Identifying the Problem: Differences in Database Syntax Create Management Complexity!
+
+Large enterprises and data-driven organizations often use a combination of traditional SQL databases such as MySQL, SQL Server, PostgreSQL, and Oracle, alongside NoSQL databases like MongoDB.
+The variation in query syntax and behavior across these databases makes it difficult to consistently enforce the same security policies.
+As databases scale and grow more complex, the difficulty in controlling queries and managing security increases, eventually leading to potential security threats.
+This complexity also acts as a barrier to meeting the requirements of data protection regulations such as **GDPR** and **CCPA**.
+
+Here are examples of queries that limit the number of rows across different databases:
+
+**MySQL**
+- `SELECT * FROM {table} LIMIT 10`
+
+**SQL Server**
+- `SELECT TOP 10 * FROM {table}`
+
+**Oracle**
+- `SELECT * FROM {table} FETCH FIRST 10 ROWS ONLY`
+
+**MongoDB**
+- `db.getCollection('{table}').limit(10);`
+
+## That is Why Query Control Matters.
+
+More than half of today’s data breaches result from insider threats or insufficient access control.
+For example, when unauthorized users access highly privileged data, traditional access control systems often fail to block such attempts effectively.
+Without proper query management, data leaks or malicious misuse become far more likely.
+Even more concerning, employees or analysts executing large-scale queries that include sensitive data can lead to unpredictable results, leaving critical company assets vulnerable to significant risks.
+
+# Step 2. Setting the Goal: Find a Solution to Meet Global Compliance Requirements!
+
+To address these challenges, technology that enables consistent security policies across diverse databases is essential.
+This forms the foundation for implementing information security management systems as outlined by **ISO 27001** and meeting the data protection and privacy requirements of regulations like **GDPR** and **CCPA**.
+QueryPie has focused on developing core technologies to meet these global compliance demands effectively.
+
+
+# **3 Key Approaches of QueryPie for Unified Security Policies**
+
+To implement consistent security policies across diverse databases, QueryPie proposes three key approaches:
+
+- **Integration of Database Queries into a Unified AST**: QueryPie consolidates query syntax from various databases such as MySQL, SQL Server, Oracle, and MongoDB into a **single Abstract Syntax Tree (AST)**. This allows for consistent processing and analysis of queries regardless of the database platform.
+- **Real-Time Query Analysis and Execution Prediction**: QueryPie analyzes the AST in real-time while referencing database schema information to predict query execution outcomes. This enables the proactive identification of the impact of queries executed by users or applications.
+- **Detailed Analysis of Relationships Between Objects**: QueryPie conducts an in-depth analysis of the relationships between database objects such as tables and columns included in queries. This helps trace data flow, detect unauthorized access to sensitive data, and mitigate insider threats effectively.
+
+# **Technical Explanation**
+
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/1-execution-phases.png"
+        alt="Execution Phases"
+    />
+</Box>
+
+## **Execution Phases**
+
+The execution process is divided into four stages: `INPUT`, `RAW AST`, `QSI AST`, `Analysis Result`
+
+- First, in the **INPUT** phase, the query is received and parsed into a **RAW AST**, identifying its syntax structure.
+- Next, in the **QSI AST** phase, the syntax tree is transformed into a semantic tree, defining the logical relationships between each query element.
+- Finally, in the **Analysis Result** phase, the analyzed information is used to generate the final output, providing a model of how the query results will be structured.
+
+## **INPUT**
+
+The query is received as raw input from the database.
+
+```sql
+SELECT * FROM sakila.actor
+```
+
+## **RAW AST**
+
+The RAW AST represents the output from parsing the input query using a raw parser.
+The raw parser is implemented using well-known parser generators such as. ANTLR, YACC, or JavaCC.
+Since each database has unique syntax, the resulting AST structure varies across databases.
+For example, even with the same parser generator, `SELECT 1` in MySQL and `SELECT 1 FROM DUAL` in Oracle produce semantically different results.
+
+Here are examples of `SELECT * FROM actor` queries across different databases:
+
+**MySQL (ANTLR4)**
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/2-MySQL-ANTLR4.png"
+        alt="MySQL (ANTLR4)"
+    />
+</Box>
+<br />
+
+**Oracle (ANTLR4)**
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/3-Oracle-ANTLR4.png"
+        alt="Oracle (ANTLR4)"
+    />
+</Box>
+<br />
+
+**PostgreSQL (YACC)**
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/4-PostgreSQL-YACC.png"
+        alt="PostgreSQL (YACC)"
+    />
+</Box>
+<br />
+
+## **QSI AST**
+
+The QSI AST represents the semantic structure of a database query, illustrating the data processing flow through **derivations**, **joins**, and **sources** while organizing various data processing operations.
+
+**Data Reference**
+Represents references to tables or original data where actual data is stored.
+Example: The identifier `actor` refers to a specific table in the database, retrieving data through an operation.
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/5-qsi-ast-Data-Reference.png"
+        alt="Data Reference"
+    />
+</Box>
+<br />
+**Derived Table**
+Represents new data derived from a specific table.
+Example: In the query `SELECT name AS n FROM actor`, the `name` column from the `actor` table is given an alias `n`, creating a new form of the data.
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/6-qsi-ast-Derived-Table.png"
+        alt="Derived Table"
+    />
+</Box>
+<br />
+**Joined Table**
+Represents the structure that combines multiple tables to provide related data as a single result.
+Example: `SELECT * FROM address JOIN city USING (city_id)` merges the `address` and `city` tables based on `city_id`, retrieving all associated data from both tables.
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/7-qsi-ast-Joined-Table.png"
+        alt="Joined Table"
+    />
+</Box>
+<br />
+**Compound Table Combination**
+This node supports operations that combine multiple result sets.
+Example: In the query `SELECT 1 UNION ALL SELECT 2`, the results of two `SELECT` statements are combined into a single table.
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/8-qsi-ast-Compound-Table-Combination.png"
+        alt="Compound Table Combination"
+    />
+</Box>
+<br />
+**Inline Derived Table**
+Provides specific values directly in table format.
+Example: `VALUES (1,2), (3,4)` creates a small table with two rows and two columns that can be used immediately.
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/9-qsi-ast-Inline-Derived-Table.png"
+        alt="Inline Derived Table"
+    />
+</Box>
+<br />
+**Table Function Call**
+Calls a specific function that returns data in table format.
+Example: `SELECT * FROM table_function()` retrieves table-formatted data returned by the function `table_function()`.
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/10-qsi-ast-Table-Function-Call.png"
+        alt="Table Function Call"
+    />
+</Box>
+<br />
+## **Analysis Result**
+
+The final analysis result provides a structured data model based on the input query.
+
+For `SELECT` queries, which output table-formatted results, the analysis includes the following components:
+
+- Final Column List
+    - Represents the final column output as defined in the `SELECT` clause of the query.
+- Referenced Column List
+    - Includes all columns referenced in the query, such as those used in subqueries or functions.
+- Referenced Table List
+    - Covers all original tables, aliased tables, or Common Table Expressions (CTEs) referenced in the query, providing a complete view of the table sources involved.
+- Indirect Column List
+    - Contains columns that influence the query results but do not appear directly in the output, such as those used in `WHERE` or `HAVING` clauses.
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/11-analysis-result.png"
+        alt="Analysis Result"
+    />
+</Box>
+<br />
+**Example**
+Input Query
+```sql
+SELECT a.address || ', ' || c.city AS addr,
+a.phone                     AS phone
+FROM address AS a, city AS c
+WHERE a.city_id = c.city_id
+```
+
+Analysis Result
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/12-analysis-result-2.png"
+        alt="Analysis Result"
+    />
+</Box>
+<br />
+**View**
+
+When a query references a table defined as a View, the system retrieves and analyzes the View definition to trace the original tables where the data is stored.
+<br />
+View Definition
+```sql
+CREATE VIEW sakila.actor_view (
+id,
+full_name,
+update_at
+) AS
+SELECT actor_id,
+first_name || last_name,
+last_update
+FROM actor
+```
+
+Input Query
+```sql
+SELECT * FROM actor_view
+```
+
+Analysis Result
+<Box marginTopSize="sm" center>
+    <ArticleFileImage
+        filepath="public/white-papers/3/13-analysis-result-3.png"
+        alt="Analysis Result"
+    />
+</Box>
+<br />
+# **A Closer Look at Use Cases: Best Practices**
+
+How does QueryPie strengthen data security and ensure compliance with global standards using its solution?
+
+**Data Access Control**
+
+- **Granular Permission Settings**: Defines access permissions at the table and column levels to adhere to the principle of least privilege.
+
+**Data Masking**
+
+- **Dynamic Data Masking**: Masks sensitive information in real-time based on user permissions during data queries.
+- **Centralized Masking Policy Management**: Maintains consistent masking rules by managing them centrally.
+
+**Sensitive Data Monitoring**
+
+- **Access Alerts and Notifications**: Immediately notifies administrators of access to sensitive data in real time.
+- **Logging and Audit Trails**: Records all data access activities in detail for future audits or analysis.
+- **Anomaly Detection**: Uses machine learning to identify and respond to unusual data access patterns.
+
+**Ledger Table Protection**
+
+- **Access Restriction and Monitoring**: Strictly limits access to financial or accounting ledger tables and enhances monitoring during access.
+- **Data Integrity Maintenance**: Requires approval workflows for any changes to ledger data, ensuring data integrity.
+
+# **QSI: A Revolution in Data Security, Enhancing Trust and Competitiveness!**
+
+Modern enterprises face the challenge of maintaining data security in diverse database environments while adhering to complex global compliance requirements.
+The QSI solution introduced here provides foundational technology to overcome these challenges.
+
+By integrating query parsing across multiple vendors and analyzing queries in real-time, QSI enables organizations to apply consistent security policies and minimize the risk of data breaches.
+Furthermore, by adopting best practices in data access control, data masking, sensitive data monitoring, and ledger table protection, organizations can effectively meet global compliance standards such as **ISO 27001, GDPR,** and **CCPA**.
+
+Data security is not just about mitigating risks—it is a key factor in building trust and driving competitiveness.
+With QSI, enterprises can reliably manage data even in complex database environments, minimizing legal risks associated with regulatory compliance and focusing more on achieving business objectives.
+
+

@@ -1,0 +1,425 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "開発速度と安定性の向上が証明されたQueryPieのDevSecOpsパイプライン"
+description: "QueryPie の DevSecOps パイプラインを使用して開発を合理化し、速度、安定性、セキュリティを強化します。"
+date: "2024-11-22"
+author: ["jake", "ravi", "noah"]
+ogImage: "public/white-papers/10/thumbnail.png"
+keywords: ["QueryPie", "DevSecOps パイプライン", "開発速度", "安定性", "ソフトウェアセキュリティ", "強化されたデリバリー"]
+relatedPosts:
+  - "/ja/white-papers/9"
+  - "/ja/white-papers/8"
+  - "/ja/white-papers/7"
+---
+
+#  はじめに
+
+## セキュリティを統合したQueryPieのパイプライン
+
+QueryPieでは、開発スピードと安定性の両方を重視しています。私たちのチームは、変化に迅速に対応し、成長と機動性を追求しています。しかし、見過ごせない重要な要素がセキュリティです。初期段階では、開発速度を上げるとセキュリティレビューが後回しになったり、見落としを引き起こすことが多くありました。その結果、リリース後にセキュリティ脆弱性が発見され、緊急のパッチ適用や高額なコスト、ブランド信頼への潜在的なダメージが生じました。
+
+DevSecOpsは、これらの問題に根本的に対処するために採用しているアプローチです。開発(Dev)と運用(Ops)のプロセスにセキュリティを統合することで、開発の初期段階から本番環境に至るまで、セキュリティが自動化され、標準化されていることを確保しています。QueryPieでは、セキュリティをプロセス全体にシームレスに統合したパイプラインを実装しています。
+
+## [QueryPieの開発ライフサイクル全段階におけるセキュリティレビュープロセス]
+
+特権アクセス管理(PAM)ソリューションとして、QueryPieは、データベースアクセスコントローラー(DAC)、システムアクセスコントローラー(SAC)、およびKubernetesアクセスコントローラー(KAC)を通じて、重要な資産とデータを保護するために高いセキュリティレベルを提供します。徹底したセキュリティ管理を確保するために、QueryPieは開発ライフサイクル全体を通じて一貫したセキュリティレビューとチェックを実施しています。初期の要求定義フェーズから設計、実装、テスト、展開、運用に至るまで、各段階で多層的なセキュリティレビューを適用し、潜在的なセキュリティ脅威を事前に防止しています。これを実現するために、私たちはDevSecOpsアプローチを採用し、開発とセキュリティを密接に統合しています。自動化されたセキュリティテストと継続的な監視を通じて、脆弱性を迅速に特定し、対応することで、製品の安定性と信頼性を向上させています。私たちにとって、セキュリティは単なる機能ではなく、製品の核心的な要素です。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/1-querypie-cicd-pipeline.png"
+        alt="QueryPie CI/CDパイプライン"
+        caption="QueryPie CI/CDパイプライン"
+    />
+</Box>
+<br />
+
+## [DevSecOpsの必要性とクラウド環境でのセキュリティ課題]
+
+従来のセキュリティアプローチでは、開発が完了した後にセキュリティレビューを行うことが一般的で、問題が発生した際に長期間の遅延や高額なコストがかかることが多くあります。例えば、コードが完成した後に発見されたセキュリティ脆弱性を修正するためには、すでに開発されたコードやシステムアーキテクチャを再分析して修正する必要があります。これは、初期段階で見つかった問題に対処するよりも遥かに複雑でコストがかかります。
+
+しかし、DevSecOpsはセキュリティを開発プロセスの早い段階に統合することで、これらの問題を解決することができます。自動化されたセキュリティレビューや定期的で継続的なセキュリティチェックを通じて、QueryPie は開発効率を維持しながら、安全なクラウド環境を提供することができます。さらに、インフラストラクチャ管理が高度に自動化されているクラウド環境では、セキュリティ脆弱性が迅速に露呈するリスクがあります。したがって、QueryPieのDevSecOpsパイプラインは、クラウド環境特有のさまざまなセキュリティ課題に対応するために継続的に改善されており、安全な製品運用を確保しています。
+
+## [QueryPieのDevSecOpsパイプライン構築を通じた信頼性の確保]
+
+QueryPieはDevSecOpsパイプラインを通じてセキュリティを自動化し、クラウド環境のセキュリティ課題を積極的に解決し、信頼できる PAM ソリューションとしての地位を確立しようとしています。本ホワイトペーパーでは、QueryPieの開発ライフサイクル全段階で行われるセキュリティ性の検討とDevSecOpsパイプラインの構築プロセスを通じて、セキュリティが製品の信頼性にどのように貢献しているかについて詳述します。
+
+# CI/CDパイプライン構築と自動化
+
+QueryPieでは、CI/CDパイプラインはGithub Actionsを使用して構築されており、各ステージにセキュリティチェックポイントが配置され、セキュリティ検査が自動的に実施されます。各ステージで脆弱性評価が行われ、重大度が中以上の脆弱性が見つかった場合、その脆弱性が修正されるまで次のステージへの進行が制御されます。管理される脆弱性の種類は以下の画像に示されており、CI/CDパイプライン全体で様々な種類の脆弱性をチェック、識別、除去する管理プロセスが示されています。
+
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/2-types-of-vulns-to-check.png"
+        alt="CI / CD パイプラインで確認すべき脆弱性の種類"
+        caption="CI / CD パイプラインで確認すべき脆弱性の種類"
+    />
+</Box>
+<br />
+
+## [QueryPie DevSecOps段階]
+
+STEP 0) デプロイのためのイメージを脆弱性のないクリーンなゴールデンイメージとして管理します。
+STEP 1) SCA(Software Composition Analysis、ソフトウェア構成分析)、SAST(Static Application Security Testing、静的アプリケーションセキュリティテスト) チェックを通じてソースコードの脆弱性とオープンソース依存関係を点検します。
+STEP 2) デプロイされるコンテナイメージの脆弱性をスキャンします。
+STEP 3) DAST(Dynamic Application Security Testing、動的アプリケーションセキュリティテスト)と模擬ハッキングを並行してアプリケーションの脆弱性を点検します。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/3-vulnerability-scanning-tools.png"
+        alt="CI/CDパイプラインの脆弱性チェックツール"
+        caption="CI/CDパイプラインの脆弱性チェックツール"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/4-vulnerability-scan-report.png"
+        alt="CI/CDパイプラインの脆弱性チェック状況"
+        caption="CI/CDパイプラインの脆弱性チェック状況"
+    />
+</Box>
+
+# ゴールデンイメージ管理
+
+QueryPieでは、**お客様向けのデプロイ用イメージと内部テスト用イメージ**を分けて使用しています。
+
+各イメージは、CIS ベンチマークレベル1およびCVE(Common Vulnerabilities and Exposures、共通脆弱性識別子)の脆弱性を除去したゴールデンイメージとして作成・管理され、他のイメージは使用を許可していません。
+
+イメージの強化は、セキュリティチームが作成したスクリプトを使用して、CISベンチマークレベル1およびCVEの脆弱性を除去することで行われます。
+
+次に、OSイメージハードニングのためのCISベンチマークのチェック項目は以下の通りです。
+
+<br />
+<Table center>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray">**カテゴリ**</Table.Th>
+            <Table.Th cellBackgroundColor="gray">**詳細チェック項目**</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>**1. 初期設定**</Table.Td>
+            <Table.Td>1.1 ファイルシステム
+                1.2 ソフトウェアとパッチ管理の設定
+                1.3 セキュアブート設定の設定
+                1.4 追加のプロセスハードニング設定
+                1.5 強制アクセス制御
+                1.6 コマンドライン警告バナーの設定</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**2. サービス**</Table.Td>
+            <Table.Td>2.1 刻同期の設定
+                2.2 特別用途サービスの設定
+                2.3 サービスクライアントの設定</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**3. ネットワーク設定**</Table.Td>
+            <Table.Td>3.1 ネットワークデバイスの設定
+                3.2 ネットワークカーネルモジュールの設定
+                3.3 ネットワークカーネルパラメータの設定
+                3.4 ホストベースファイアウォールの設定</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**4. アクセス、認証、認可**</Table.Td>
+            <Table.Td>4.1 ジョブスケジューラの設定
+                4.2 SSHサーバーの設定
+                4.3 権限昇格の設定
+                4.4 プラグイン認証モジュールの設定
+                4.5 ユーザーアカウントと環境設定</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**5. ログと監査**</Table.Td>
+            <Table.Td>5.1 ログの設定
+                5.2 システム会計 (auditd) の設定
+                5.3 整合性チェックの設定</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**6. システムメンテナンス**</Table.Td>
+            <Table.Td>6.1 システムファイルの権限設定
+                6.2 ローカルユーザーおよびグループ設定</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+<br />
+
+上記のチェック項目に基づき、以下のように修正スクリプトが作成され、自動的に設定が調整されます。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/5-hardening-process.png"
+        alt="CISベンチマークレベル 1 - ハードニングプロセス"
+        caption="CISベンチマークレベル1 - ハードニングプロセス"
+    />
+</Box>
+<br />
+
+# コードセキュリティ検査および依存関係管理
+
+開発ソースコードのセキュリティ脆弱性を特定するために使用するSASTツールは、ベンダーが提供する基本的な検出ルールだけでは、十分なカバレッジを提供しない場合がよくあります。以下は、脆弱性が含まれた公開サンプルコードを対象に、基本的な検出ルールを使用した脆弱性検出結果を示しています。
+
+```kotlin
+package ai.qwiet.springbootkotlinwebgoat
+
+import org.springframework.http.HttpHeaders
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
+import java.io.InputStreamReader
+import java.io.BufferedReader
+import java.io.File
+import mu.KotlinLogging
+import org.apache.logging.log4j.LogManager
+
+@RestController
+class HelloController {
+    val logger = KotlinLogging.logger {}
+    val secondaryLogger = LogManager.getLogger()
+
+    @GetMapping("/")
+    fun index(): String {
+        return "Greetings from Spring Boot!"
+    }
+
+    @GetMapping("/greet")
+    fun greet(@RequestParam("username") username: String): String {
+        logger.info { "Got request for `/greet`" }
+        // vulnerability: Sensitive Data Leak
+        secondaryLogger.debug("Params for `/greet `: $username")
+        // vulnerability: XSS
+        return "Greetings ${username}!"
+    }
+
+    fun parseParams(name: String, msg: String): Map<String, String?> {
+        val checkedName = name.takeUnless { it contains '\\' }?.ifBlank { "default_name" }
+        val checkedMsg = msg.ifBlank { "default_msg" }
+        return mapOf("parsed_name" to checkedName, "parsed_msg" to checkedMsg)
+    }
+
+    @GetMapping("/exec")
+    fun exec(@RequestParam("cmd") cmd: String): ResponseEntity<String> {
+        logger.info { "Got request for `/exec`!" }
+        secondaryLogger.debug("Params for `/exec`: $cmd")
+
+        var out = "NOP"
+        if (cmd != "nop") {
+            // vulnerability: Remote Code Execution
+            val proc = Runtime.getRuntime().exec(cmd)
+            val lineReader = BufferedReader(InputStreamReader(proc.getInputStream()))
+            val output = StringBuilder()
+            lineReader.lines().forEach { line ->
+                output.append(line + "\n")
+            }
+            out = "Did execute command `$cmd`, got stdout: $output"
+        }
+        return ResponseEntity(out, HttpStatus.OK)
+    }
+
+    @GetMapping("/touch_file")
+    fun touchFile(@RequestParam("name") name: String, @RequestParam("msg") msg: String): ResponseEntity<String> {
+        logger.info { "Got request for `/touch_file`!" }
+        secondaryLogger.debug("Params for `/touch_file`: $name | $msg")
+        if (name.length < 3) {
+            logger.warn { "The provided name is very short!" }
+        }
+
+        if (name == null || msg == null) {
+            return ResponseEntity("The `name` & `msg` parameters have to be set.", HttpStatus.OK)
+        } else {
+            val parsedParams = parseParams(name, msg)
+            val fullPath = "/tmp/http4kexample/" + parsedParams["parsed_name"]
+            val finalMsg = "MESSAGE: " + parsedParams["parsed_msg"]
+            // vulnerability: Directory Traversal
+            File(fullPath).writeText(finalMsg)
+            return ResponseEntity("Did write message `$finalMsg` to file at `$fullPath`", HttpStatus.OK)
+        }
+    }
+
+    @GetMapping("/debug")
+    fun debug(@RequestParam("url") url: String): ResponseEntity<String> {
+        logger.info { "Got request for `/debug`!" }
+        secondaryLogger.debug("Params for `/debug`: $url")
+
+        val headers = HttpHeaders()
+        headers.add("Location", url)
+        // vulnerability: Open Redirect
+        return ResponseEntity(headers, HttpStatus.FOUND)
+    }
+
+    @GetMapping("/render_html")
+    fun renderHtml(@RequestParam("name") name: String): ResponseEntity<String> {
+        logger.info { "Got request for `/render_html`!" }
+        secondaryLogger.debug("Params for `/render_html`: $name")
+
+        // vulnerability: XSS
+        val out = StringBuilder().append("<h1>Hello there, ").append("$name").append("!</h1>").toString()
+        return ResponseEntity(out, HttpStatus.OK)
+    }
+
+    @GetMapping("/add")
+    fun add(@RequestParam("x") x: String, @RequestParam("y") y: String): ResponseEntity<String> {
+        logger.info { "Got request for `/add`!" }
+        secondaryLogger.debug("Params for `/add`: $x | $y")
+
+        val xi = x.toInt()
+        val xy = y.toInt()
+        val out = (xi + xy).toString()
+        return ResponseEntity(out, HttpStatus.OK)
+    }
+}
+```
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/6-vulnerability-detection-snyk.png"
+        alt="Snyk基本検出ルールによる脆弱性検出結果"
+        caption="Snyk基本検出ルールによる脆弱性検出結果"
+    />
+</Box>
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/7-vulnerability-detection-github.png"
+        alt="GitHub基本検出ルールによる脆弱性検出結果"
+        caption="GitHub基本検出ルールによる脆弱性検出結果"
+    />
+</Box>
+<br />
+<Table center>
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray">**脆弱性タイプ**</Table.Th>
+            <Table.Th cellBackgroundColor="gray">**Snyk**</Table.Th>
+            <Table.Th cellBackgroundColor="gray">**GitHub**</Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>**XSS**</Table.Td>
+            <Table.Td><State color="red">検出されず</State></Table.Td>
+            <Table.Td><State color="blue">検出された</State></Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**コマンドインジェクション**</Table.Td>
+            <Table.Td><State color="blue">検出された</State></Table.Td>
+            <Table.Td><State color="blue">検出された</State></Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**ディレクトリトラバーサル**</Table.Td>
+            <Table.Td><State color="red">検出されず</State></Table.Td>
+            <Table.Td><State color="red">検出されず</State></Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>**オープンリダイレクト**</Table.Td>
+            <Table.Td><State color="red">検出されず</State></Table.Td>
+            <Table.Td><State color="red">検出されず</State></Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+<br />
+
+これらの問題に対応するために、さまざまなSAST製品ではカスタム検出ルール機能を提供していますが、関連業務の経験が不足している場合、これを効果的に活用することが難しい場合があります。QueryPieは製品開発環境と変化する新しい脆弱性に対応するために、カスタム検出パターンを直接構成し、SAST検出パターンを常に最新の状態に保っています。
+
+その後、製品のソースコードリポジトリにPR(Pull Request)が作成されると、GitHub Actionsが実行され、SASTツールにそのソースコードの脆弱性診断をリクエストします。もし脆弱性が発見された場合、移行制御機能を通じて、脆弱性が解決されるまでソースコードのマージをブロックし、製品の整合性とセキュリティを保証します。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/8-cicd-migration-control-process.png"
+        alt="CI/CDパイプライン移行制御プロセス"
+        caption="CI/CDパイプライン移行制御プロセス"
+    />
+</Box>
+<br />
+
+# 画像のセキュリティ検証およびSBOM管理
+
+## [画像のセキュリティ検証]
+GitHub Actionsを利用して、アプリケーション画像が自動的にビルドされ、ビルドされた画像がHarborにアップロードされるプロセスが構築されています。この過程で、Trivyを使用して画像の脆弱性をスキャンします。
+
+画像に脆弱性が発見されると、その警告はPR(Pull Request)で即座に通知され、開発者が迅速に脆弱性を認識して対応することができます。特に、脆弱性がMedium以上に分類された場合、その画像は対処対象となります。
+
+また、Trivy によるスキャンに加えて、AWS Elastic Container Registry(ECR)に画像をアップロードし、AWS Inspectorを通じて追加のチェックを実施します。これにより、Trivyが見逃す可能性のある脆弱性を特定し、画像をさらに徹底的に分析・管理することができます。このプロセスを通じて、高い信頼性のある画像を展開することができます。
+
+## [SBOM管理]
+
+QueryPieは、毎回のリリースごとにCycloneDXフォーマットのソフトウェア部品表(SBOM、Software Bill of Materials)を生成し、以下の管理プロセスを実行します。
+
+- SBOMファイルをスキャンし、脆弱性を含むオープンソースライブラリを特定し、対応します。
+- ライセンスの遵守状況を確認し、著作権や規制要求に違反しないように管理します。
+
+# クラウド環境における IaC セキュリティ管理
+
+## [IaCを使用したリソースのデプロイおよび管理]
+
+IaC(Infrastructure as Code)は、インフラをコードで管理し、自動化してプロビジョニングを行うことを指します。コード化されたインフラを使用することで、手動設定の煩わしさをなくし、より柔軟なインフラ管理を実現できます。複数の環境で一貫した設定を実現でき、必要に応じて修正や更新も可能です。従来、手動で設定していたサーバー、ネットワーク、ストレージなどのリソースをコード化することで、簡単にデプロイでき、デプロイ時間が短縮され、エラーの可能性も減少します。また、GithubなどのVCS(Version Control System)と連携することで、インフラの変更点を追跡でき、迅速な対応と安定した環境管理が可能になります。
+
+## [IaCスキャンを通じたセキュリティ脆弱性の検討と改善]
+
+IaCスキャンを使用したセキュリティ脆弱性の検討は、デプロイ前に発生する可能性のあるセキュリティ問題をIaCレイヤーで直接解決する方法です。インフラ構成に必要な様々な設定をコード化する際に発生するセキュリティ上のリスクを初期段階で防ぎ、コード作成段階で脆弱性を改善することでセキュリティを強化します。IaCの強みである迅速かつ一貫したデプロイが、同時に小さな設定ミスが深刻なセキュリティ脆弱性に繋がるリスクを孕んでいます。特にインフラ全体に渡って不必要な権限設定、誤ったイメージソースの使用、アクセス管理不足、Secretの露出などの問題がコードに残っていると、以後のデプロイ時に毎回同じセキュリティ問題を引き起こす可能性があります。IaC スキャンを通じてこれらのリスクを事前に防ぎ、CI/CDパイプラインにセキュリティ検査を統合することで、自動化されたセキュリティを実現できます。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/9-iac-scan.png"
+        alt="IaCスキャン"
+        caption="IaCスキャン"
+    />
+</Box>
+<br />
+
+## [Open Policy Agent(OPA)によるポリシー検証と適用]
+
+OPAは、ポリシーをコードで管理および検証できる機能を提供し、リソースがデプロイされる前にポリシーを事前に検討して適用することができます。Terraform、AnsibleなどのIaCツールとOPAを組み合わせることで、インフラデプロイ前に事前に定義されたポリシーを自動的に実行して適用することで、一貫したセキュリティ標準の遵守を保証できます。これにより、開発およびインフラチームが個別に行うデプロイにも一貫したポリシーが適用され、セキュリティの安定性を高めることができます。
+
+クラウド環境では、リソースが様々なルートで作成されるため、作成されたリソースを明確に把握し、管理範囲に含めることが重要です。セキュリティチームは、OPAを使用してAWS ネイティブアーキテクチャで不必要なサービスやリソースがデプロイされないように制御しています。これにより、クラウドインフラの可視性を確保し、すべてのリソースが体系的に管理されることを保証します。また、事前に適用されたポリシーに従ってセキュリティ基準に合わないリソースが作成されないように制限し、効率的で安全なクラウド管理を実現します。
+
+また、タグはリソースの権限管理およびコスト管理に重要な要素であり、特定のタグが欠落したリソースは運用管理やコスト追跡に困難を引き起こす可能性があります。セキュリティチームはOPAを使用して、RiskOwner、Ownerなどの必須タグが指定されていない場合、そのリソースの作成または実行を制限するポリシーを適用しています。これにより、タグ管理の漏れを事前に防ぎ、ポリシー適用の自動化により一貫したタグ管理が可能になります。このアプローチは、クラウド環境で体系的なリソース管理およびセキュリティポリシーの遵守を支援し、インフラの安定性と可視性を強化するのに貢献しています。
+
+## [継続的なコンプライアンスおよびガバナンスのためのIaC管理]
+
+ISO 27001などのセキュリティ標準は、インフラの機密性、整合性、可用性を保証するセキュリティ管理体系の構築を要求します。しかし、クラウドインフラのような環境では、インフラ変更が頻繁に行われ、規模が大きくなるため、すべての変更を手動で管理することはほぼ不可能です。IaC はこれらの問題を解決するために、インフラ構成をコード化して自動化された方法で管理し、必要なポリシーをプログラム化することで繰り返し可能で一貫したセキュリティ構成を維持できるようにします。
+
+# 動的脆弱性診断(DAST)
+
+## [デプロイメント段階での脆弱性診断プロセス]
+
+デプロイメント段階では、OWASP ZAPを使用した動的アプリケーションセキュリティテスト(DAST)とともに、ペネトレーションテストを並行して実施し、総合的な脆弱性診断を行います。DASTの実行過程は単に基本的なアクティブスキャンで終了するわけではなく、セキュリティチームが独自に作成したカスタムスクリプトを活用し、一般ユーザートークンでアクセスできないページの権限を検証したり、エンコードまたは暗号化されて送信されるパケットに対してパラメータの改ざんテストを行ったりします。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/10-dast.png"
+        alt="DAST - 独自作成のスクリプトの活用"
+        caption="DAST - 独自作成のスクリプトの活用"
+    />
+</Box>
+<br />
+
+DASTおよびペネトレーションテストの過程で、中程度以上の脆弱性が発見された場合、該当する脆弱性を修正してからデプロイを完了させます。これにより、安全なデプロイメントを保証し、システムのセキュリティ強化に貢献しています。
+
+# 持続可能なセキュリティソリューションのための革新と信頼構築
+
+QueryPieは、セキュリティを単なる短期的な課題としてではなく、お客様との長期的な約束として認識し、最優先事項として取り組んでいます。継続的なセキュリティ強化を通じて業界の主要なセキュリティポリシーとコンプライアンスを徹底的に遵守し、お客様が信頼できる安全な環境を提供するために全力を尽くしています。CI/CDパイプラインにさまざまなセキュリティテストを統合し、開発サイクル全体を通じて脆弱性を徹底的にチェックしており、最近ではファジング(Fuzzing)テストを追加してサービス拒否攻撃(DOS、Denial of Service Attack)などの脅威を早期に発見しようと努力しています。
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/10/11-fuzzing.png"
+        alt="CI/CDパイプラインのファジングプロセスの高度化"
+        caption="CI/CDパイプラインのファジングプロセスの高度化"
+    />
+</Box>
+<br />
+
+これらの努力は、お客様が安全にデータを管理できることを保証し、QueryPieが提供するサービスの信頼性をさらに強化します。今後もお客様との信頼に基づき、持続可能なセキュリティソリューションを提供するために絶えず進化し続けます。
+
+

@@ -1,0 +1,251 @@
+---
+layout: "Article"
+category: "whitepaper"
+title: "스케일 넘치는 대용량 감사 로그, 스마트하게 관리하기 (OVEN)"
+description: "보안 및 컴플라이언스 요구 사항을 충족하면서 대규모 감사 로그를 효율적으로 저장 및 관리하는 가이드를 공개합니다."
+date: "2025-01-23"
+author: "fabian"
+ogImage: "public/white-papers/11/thumbnail.png"
+keywords: ["QueryPie", "대규모 감사 로그", "감사 로그 관리", "데이터 보안", "컴플라이언스"]
+relatedPosts:
+  - "/ko/white-papers/4"
+  - "/ko/white-papers/3"
+  - "/ko/white-papers/1"
+---
+
+# 서론
+
+감사 로그(Audit Log)는 시스템의 보안, 투명성, 그리고 규정 준수 측면에서 중요한 역할을 합니다. 특히 금융, 의료, 공공기관과 같은 민감한 데이터를 다루는 분야에서는 감사 로그의 최소 보관 기간이 5년 이상으로 설정되는 경우가 많아, 적재 및 관리에 대한 요구가 더욱 중요해지고 있습니다. 예를 들어, 대형 금융 회사는 하루에도 수백만 건의 감사 로그가 생성되며, 이는 수년간의 보관 시 테라바이트(TB)가 넘는 큰 스토리지를 요구합니다. 이러한 대용량 로그 관리의 필요성은 날로 증가하고 있습니다.
+
+# 문제
+
+기존의 로그 관리 시스템은 다음과 같은 문제를 가지고 있습니다.
+
+**1. 저장 문제**
+- 로그 데이터가 지속적으로 증가하면서 데이터베이스 스토리지 확장이 필요하며, 이는 높은 운영 비용과 관리 복잡성을 초래합니다.
+
+**2. 조회 문제**
+- 대규모 로그 데이터를 빠르고 효율적으로 조회하기 어려워, 분석 및 규정 준수에 필요한 정보 추출이 지연될 수 있습니다.
+
+**3. 외부 연동의 비효율성**
+- 대용량 로그 데이터 효과적으로 분석하기 위해서는, 외부 OLAP 저장소에 적제하기 위한 ETL 추가 작업이 필요했습니다. 이러한 부가 작업은 개발 비용과 운영 부담을 증가시켰습니다.
+
+# 솔루션
+
+QueryPie 대용량 감사 로그를 효과적으로 저장, 조회 및 관리를 위해 아래 목표를 설정하였습니다.
+
+**1. 대용량 로그를 효율적으로 저장하기 위해, S3와 같은 오브젝트 저장소와 연동하여 로그 데이터를 저장합니다.**
+- 대용량 로그 데이터를 저장하기 위해서는, 오브젝트 저장소와 연동하여 로그 데이터를 저장하는 것이 효율적입니다.
+
+**2. 외부 연동의 효율을 높이기 위해 외부 S3에 적재된 데이터는 외부 OLAP 연동 및 조회가 용이한 형태로 저장합니다.**
+- 외부 OLAP 저장소에 적재하기 위해서는, 데이터를 적재하는 형태가 OLAP 저장소에 적합한 형태로 저장되어야 합니다.
+
+
+
+**3. 위 목표를 만족하기 위하여, 감사 로그 특성을 고려한 필요한 기능만 제공하여 불필요한 기능을 배제합니다.**
+- 감사 로그는 적재 후 수정 되지 않으며, 명시적인 삭제가 필요하지 않습니다.
+    - 저장 및 조회 기능만 제공합니다.
+- 감사 로그는 시간 순서대로 적재 되며, 시간 범위 내에서 목록에 대한 조회 기능만 제공합니다.
+
+# 상세 설명
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/white-papers/11/1-diary-overview.png"
+        alt="Diary Overview"
+        caption="Diary Overview"
+    />
+</Box>
+<br />
+
+## 감사 로그 관리에 필요한 기능만 제공
+
+감사 로그는 적재 후 수정되지 않으며, 명시적인 삭제가 필요하지 않습니다. 따라서, 저장 및 조회 기능만 제공합니다.
+
+- **적재 (WRITE)**
+    - 감사로그를 빠른 Write 성능을 가진 HotStore에 적재 합니다.
+    - 적재된 로그는 일정 기간이 지나면 ColdStore로 시간단위로 모아 이동합니다.
+
+- **조회 (READ)**
+    - 조회는 시간 범위 내에서 목록에 대한 조회 기능만 제공합니다.
+    - 내부 저장 공간과 무관한 일관된 조회 기능을 외부로 추상화하여 제공합니다.
+
+## 대용량 로그를 효율적으로 저장하기 위해 BLOB 저장소와 연동
+
+ColdStore로 이동된 로그는 내부 Cabinet Blob 저장소에 저장됩니다.
+- Cabinet은 Blob 저장소로 S3와 같은 오브젝트 저장소와 연동하여 로그 데이터를 저장합니다.
+- Blob 저장소에 저장된 감사로그는 WORM(Write Once Read Many) 특성을 가지고 있어, 적재된 로그 데이터를 수정하지 않고 조회만 가능합니다.
+
+# 조회와 외부 연동을 위한 데이터 저장 형태
+
+감사 로그는 로그 그룹명, 그리고 저장된 시계열 시간 정보가 가장 중요하고 조회시 필수 정보입니다.
+- 대용량 로그 데이터 저장 조회시 일반적으로 사용되는 경로 기반 Partitioning을 사용해 조회 및 외부 연동을 용이 하게 합니다
+    - `collection=${COLLECTION}/date=${DATE}{HOUR}.gz`
+        - 로그 그룹명
+            - $\{COLLECTION\}
+        - 시간
+            - $\{DATE\}: Date of log storage.
+            - $\{HOUR\}: Hour of log storage.
+    - 예시
+        - collection test-log
+            - Logs from 2024-01-01T19:00:00 to 2024-01-02T01:00:00 (UTC) are stored as:
+
+    <Table center width="100%">
+        <Table.Thead>
+            <Table.Tr>
+                <Table.Th cellBackgroundColor="gray">**Collection**</Table.Th>
+                <Table.Th cellBackgroundColor="gray">**Date**</Table.Th>
+                <Table.Th cellBackgroundColor="gray">**Hour**</Table.Th>
+            </Table.Tr>
+        </Table.Thead>
+        <Table.Tbody>
+            <Table.Tr>
+                <Table.Td rowSpan={7}>collection=test-log/</Table.Td>
+                <Table.Td rowSpan={2}>date=2024-01-02/</Table.Td>
+                <Table.Td>01.gz</Table.Td>
+            </Table.Tr>
+            <Table.Tr>
+                <Table.Td>02.gz</Table.Td>
+            </Table.Tr>
+            <Table.Tr>
+                <Table.Td rowSpan={5}>date=2024-01-01/</Table.Td>
+                <Table.Td>23.gz</Table.Td>
+            </Table.Tr>
+            <Table.Tr>
+                <Table.Td>22.gz</Table.Td>
+            </Table.Tr>
+            <Table.Tr>
+                <Table.Td>21.gz</Table.Td>
+            </Table.Tr>
+            <Table.Tr>
+                <Table.Td>20.gz</Table.Td>
+            </Table.Tr>
+            <Table.Tr>
+                <Table.Td>19.gz</Table.Td>
+            </Table.Tr>
+        </Table.Tbody>
+    </Table>
+    <br />
+
+    위 경로 기반 Partitioning은 외부 OLAP 저장소와 연동하여 로그 데이터를 조회하기 위한 효율적인 방법입니다.
+    - 아래 Athena를 사용하여 S3에 저장된 Diary 로그를 바로 조회 & 분석 가능한 예시를 제공합니다.
+
+    **Athena 연동 및 조회 Example**
+    - S3 저장된 Diary 로그 Athena 연동 테이블 생성 예시
+    ```sql
+    CREATE EXTERNAL TABLE test_log (
+        `record_uuid` STRING,
+        `created_at` STRING,
+        `data` STRUCT<
+            msg: STRING,
+            time: STRING,
+            level: STRING,
+            request_id: STRING,
+            operation_id: STRING
+        >
+    )
+    PARTITIONED BY (
+        `date_created` STRING
+    )
+    ROW FORMAT SERDE 'org.openx.data.jsonserde.JsonSerDe'
+    STORED AS INPUTFORMAT 'org.apache.hadoop.mapred.TextInputFormat'
+        OUTPUTFORMAT 'org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat'
+    LOCATION 's3://${S3_BUCKET_ROOT_PATH}/collection=test-log/'
+    TBLPROPERTIES (
+        'classification' = 'json',
+        'compressionType' = 'gzip',
+        'projection.enabled' = 'true',
+        'projection.date_created.type' = 'date',
+        'projection.date_created.format' = 'yyyy-MM-dd',
+        'projection.date_created.interval' = '1',
+        'projection.date_created.interval.unit' = 'DAYS',
+        'projection.date_created.range' = '2024-12-01, NOW',
+        'storage.location.template' = 's3://${S3_BUCKET_ROOT_PATH}/collection=test-log/date=${date_created}/'
+    );
+
+    ```
+    - 연동 테이블 생성 후, SQL을 통한 조회 분석 예시
+    ```sql
+    SELECT date_created, data.level, count(*)
+    FROM test_log
+    GROUP BY date_created, data.level
+    ORDER BY date_created, data.level;
+
+    ```
+    <br />
+    <Box center>
+        <ArticleFileImage
+            filepath="public/white-papers/11/2-results-table.png"
+            alt="result"
+        />
+    </Box>
+    <br />
+    ## 내부 조회 성능을 위한 Bloom Filter
+    조회시 시간 범위 외 로그 데이터에 대한 필터링 기능이 필요합니다.
+    - ColdStore 에는 1시간 단위의 대량의 로그가 Blob 형태로 저장되어 있기 때문에 필터링 조건에 만족하지 않는 Blob 데이터를 조회하는것은 성능적으로 비효율적입니다.
+        - 각 시간 단위의 Blob에 대한 Bloom Filter를 생성하여, 필터링 조건에 만족하지 않는 Blob을 스킵하여 조회 성능을 향상시킵니다.
+    - Bloom Filter는 False Positive는 확률적으로 발생할수 있으나, False Negative 는 없음을 보장합니다.
+        - 위와 같은 특성을 이용해 확실히 존재하지 않는 Blob은 스킵하고,
+        - 존재한다고 오탐된 False Positive Blob은 Blob이 조회가 될뿐, 로직에서 다시 걸러지게 됩니다.
+
+
+    <br />
+    <Box center>
+        <ArticleFileImage
+            filepath="public/white-papers/11/3-bloom-filter.png"
+            alt="Bloom Filter"
+            caption="Performance improvement by skipping unnecessary access using Bloom Filter and an example of false positives – Source: https://en.wikipedia.org/wiki/Bloom_filter"
+        />
+    </Box>
+    <br />
+
+    # 결론 및 기대 효과
+    QueryPie 신규 감사 로그 모듈 `OVEN`은 기존 감사 로그 저장 관리에 대한 아래 두개의 문제를 해결하기 위해 설계되었습니다.
+    - 대용량 로그 관리의 효율성
+    - 외부 연동의 효율성
+
+    감사 로그 관리 모듈 `OVEN`은 S3와 같은 대용량 저장소와 연동하면서도, 저장 및 조회에 대한 기능을 일관된 인터페이스를 제공하여 개발 편의성을 제공합니다. 또한, 외부 연동을 고려한 설계를 통해 Athena, Hive와 같은 OLAP 저장소와 즉시 연동이 가능하며, 대규모 데이터 분석 작업을 손쉽게 처리할 수 있습니다.
+
+    <br />
+    <Box center>
+        <ArticleFileImage
+            filepath="public/white-papers/11/4-querypie-oven.png"
+            alt="QueryPie OVEN"
+        />
+    </Box>
+    <br />
+
+    기존 감사 로그 저장 관리에 비해 `OVEN`은 아래와 같은 효과를 기대할 수 있습니다.
+
+    1. **비용 절감**
+    - AWS S3를 활용한 Blob 스토리지 저장으로 대규모 데이터를 경제적으로 관리할 수 있습니다.
+    2. **대규모 감사 로그 적재 / 조회 기능 개발의 편의성**
+    - 감사 로그 저장 및 조회에 필요한 기능만 제공하여, 개발 및 운영의 복잡성을 줄일 수 있습니다.
+    - 내부 로그가 저장되는 HotStore / ColdStore 의 종류는 `OVEN` 내부에서 관리되며, 로그를 적재하거나 조회하는 개발자는 이를 알 필요가 없습니다.
+    3. **확장성과 호환성**
+    - 표준화된 데이터 구조로 Athena, Hive와 같은 도구와 즉시 연동이 가능하며, 대규모 데이터 분석 작업을 손쉽게 처리할 수 있습니다.
+    - 표준화된 데이터 구조로 Athena, Hive와 같은 도구와 즉시 연동이 가능하며, 대규모 데이터 분석 작업을 손쉽게 처리할 수 있습니다.
+
+    # 앞으로
+    현재 S3 및 S3 호환 저장소중 MinIO를 정식 지원하며, 추후 다양한 대용량 저장소와의 연동을 테스트 및 지원할 예정입니다.
+
+    >**S3-Compatible Storage Support**
+    >- AWS S3 (정식 지원, 테스트 중)
+    >- MinIO (정식 지원)
+    >- Google Cloud Storage (지원 테스트 중)
+    >
+    >
+    >**S3 미호환 저장소 지원 (계획중)**
+    >- Azure Blob Storage (계획)
+    >- Ceph (계획)
+    >- Swift (계획)
+
+    또한 외부 연동을 위한 표준적인 가이드 및 예시를 제공하여, 다양한 분석 및 시각화 도구와의 연동을 쉽게 할 수 있도록 지원할 예정입니다.
+
+    >**외부 연동 가이드 및 예시**
+    >1. **Real-Time Data Visualization Integration:**
+       > 효과적인 실시간 데이터 시각화 연동을 위한 Lambda 를 통한 OpenSearch 연동, Kibana 시각화 예시
+    >2. **Data Warehouse ETL Guide:**
+       > DataWarehouse ETL 을 위한 Athena/EMR(Spark) 이용한 데이터 분석 파이프라인 구축 가이드
+
