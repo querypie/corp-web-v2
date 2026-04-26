@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import type { Locale } from "@/constants/i18n";
 import type { MdxFrontmatter, MdxHeading } from "@/features/mdx/types";
 import { CONTENT_PREVIEW_RICH_CLASS } from "@/features/content/previewStyles";
-import { formatResolvedAuthorNames, getDetailedArticleAuthors, resolveArticleAuthors } from "@/features/mdx/authors";
+import { formatResolvedAuthorNames, getDisplayableArticleAuthors, resolveArticleAuthors } from "@/features/mdx/authors";
 import AuthorBox from "./AuthorBox";
 import ArticleToc from "./ArticleToc";
 
@@ -29,7 +29,7 @@ export default function WhitePaperLayout({ children, frontmatter, headings, loca
   const showToc = !frontmatter.hideTableOfContents && headings.length > 0;
   const authors = resolveArticleAuthors(frontmatter.author, locale);
   const author = formatResolvedAuthorNames(authors);
-  const detailedAuthors = getDetailedArticleAuthors(authors);
+  const displayableAuthors = getDisplayableArticleAuthors(authors);
 
   return (
     <div className="flex w-full justify-center px-5 pb-10 md:px-10">
@@ -67,7 +67,7 @@ export default function WhitePaperLayout({ children, frontmatter, headings, loca
             {/* MDX 본문 */}
             <div className={CONTENT_PREVIEW_RICH_CLASS}>{children}</div>
 
-            <AuthorBox authors={detailedAuthors} locale={locale} />
+            <AuthorBox authors={displayableAuthors} locale={locale} />
           </div>
 
           {/* 오른쪽 사이드바: TOC */}

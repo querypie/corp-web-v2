@@ -477,6 +477,9 @@
     - type: linkedin
       url: https://www.linkedin.com/in/kimhongyeon
   profileImage: crew/teddy.jpg
+- id: jessica
+  name: Jessica Kim
+  urls: []
 - id: greg
   name: Greg Yim
   position: Software Engineer

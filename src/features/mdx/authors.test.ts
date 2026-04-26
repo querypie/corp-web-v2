@@ -1,13 +1,14 @@
 import { describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 
-import { formatResolvedAuthorNames, getAuthorIntroHeading, resolveArticleAuthors } from "./authors";
+import { formatResolvedAuthorNames, getAuthorIntroHeading, getDisplayableArticleAuthors, resolveArticleAuthors } from "./authors";
 
 describe("resolveArticleAuthors", () => {
   it("locale별 등록된 author 정보를 해석한다", () => {
     const enAuthors = resolveArticleAuthors("brant", "en");
     const koAuthors = resolveArticleAuthors("brant", "ko");
     const jaAuthors = resolveArticleAuthors("terazawa", "ja");
+    const guestMigratedAuthors = resolveArticleAuthors("jessica", "en");
 
     expect(enAuthors).toEqual([
       expect.objectContaining({
@@ -30,6 +31,14 @@ describe("resolveArticleAuthors", () => {
         name: "寺澤慎祐",
         position: "マーケティングコンサルタント",
         description: expect.stringContaining("出現する未来"),
+      }),
+    );
+
+    expect(guestMigratedAuthors[0]).toEqual(
+      expect.objectContaining({
+        id: "jessica",
+        isRegistered: true,
+        name: "Jessica Kim",
       }),
     );
   });
@@ -62,6 +71,17 @@ describe("formatResolvedAuthorNames", () => {
     const authors = resolveArticleAuthors(["brant", "terazawa"], "ja");
 
     expect(formatResolvedAuthorNames(authors)).toBe("Brant Hwang, 寺澤慎祐");
+  });
+});
+
+describe("getDisplayableArticleAuthors", () => {
+  it("등록 여부와 무관하게 이름이 있는 author는 AuthorBox 대상으로 유지한다", () => {
+    const authors = resolveArticleAuthors(["brant", "Jessica Kim"], "en");
+
+    expect(getDisplayableArticleAuthors(authors).map((author) => author.name)).toEqual([
+      "Brant Hwang",
+      "Jessica Kim",
+    ]);
   });
 });
 
