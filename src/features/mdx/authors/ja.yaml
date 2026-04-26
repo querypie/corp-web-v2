@@ -1,0 +1,302 @@
+- id: brant
+  name: Brant Hwang
+  position: CEO, Founder
+  description: QueryPieの創業者兼CEOであるBrantは、AIを活用した特権アクセス管理（PAM）ソリューションを提供しています。BrantはKAISTでコンピュータサイエンスの修士号を取得し、17年以上のソフトウェア分野の経験を有しています。彼は、エンタープライズソフトウェア、組み込みシステム、インターネットポータル、コマースプラットフォームなど、さまざまな分野で経験を積んできました。起業を考える前には、カカオでプラットフォーム開発に携わっていました。Brantは、ソフトウェアの核心はそれが提供する人々にあると信じており、問題をシンプルかつ効率的に解決することに注力しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/ishwang/
+  profileImage: crew/brant.png
+- id: sam
+  name: Sam Kim
+  position: CTO
+  description: サムは、大規模な検索クラウドシステムの豊富な専門知識を持つCTOで、企業環境向けのセキュリティアクセス制御システムを設計する製品部門をリードしています。強固な技術的基盤と革新的なビジョンを持ち、サムはスケーラブルで安全なソリューションを設計し、現代企業の要求に応えています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/sam0-kim/
+  profileImage: crew/sam.png
+- id: kenny
+  name: Kenny Park
+  position: CISO
+  description: ケニーは、QueryPieのCISOおよびグローバルディレクターで、情報セキュリティ、クラウドコンピューティング、グローバル運営における20年以上の経験を有しています。彼は、QueryPieのグローバル戦略をリードし、最上級のセキュリティとコンプライアンスを保証しています。ケニーは、強力なセキュリティフレームワークの構築、クラウドインフラの管理、イノベーションの促進において重要な成果を上げてきました。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/kwansoonpark/
+  profileImage: crew/kenny.png
+- id: kris
+  name: Kris Park
+  position: CPO
+  description: クリスは、2023年3月からQueryPieの最高戦略責任者として、クラウド技術を活用してグローバルなデータ管理とサイバーセキュリティを改善しています。彼は日本市場への拡張をリードし、より広範なグローバル成長のための基盤を築いています。戦略開発と実行における深い専門知識を基に、クリスは革新を推進し、QueryPieを先進的なSaaS企業として導く重要な役割を果たしています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/kris-kwansue-park-89a83b19/
+  profileImage: crew/kris.png
+- id: keizo
+  name: Keizo Arinobu
+  position: CGO, Japan Country Manager
+  description: ケイゾは、QueryPieの日本国マネージャーで、ビジネス成長とデータ駆動型の変革を推進する豊富な経験を持っています。MongoDB、Talend、WingArc、ThoughtSpotでリーダーシップの役割を果たし、販売、マーケティング、パートナーエコシステムの開発で優れた成果を上げました。QueryPieでは、ケイゾはパートナーシップ強化を目指し、日本企業に革新的なデータソリューションを提供し、データ駆動型戦略の採用を支援しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/keizo-arinobu-b40769/
+  profileImage: crew/keizo.png
+- id: terazawa
+  name: 寺澤慎祐
+  position: マーケティングコンサルタント
+  description: IT業界でマーケティングに長く従事し、英国ウェールズ大学MBA取得後、マーケティング／人材組織開発コンサル、ビジネス傾聴協会代表、アート思考経営アカデミー主宰として活動。経営における論理と直感を統合し、「出現する未来」を創造する支援を行っている。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/terazawa/
+  profileImage: crew/terazawa.jpg
+- id: jake
+  name: Jake Im
+  position: Security Team Lead
+  description: ジェイクはセキュリティ専門家で、金融および軍事環境を含む厳しい分野でセキュリティ運用を管理してきた16年以上の経験を持っています。QueryPieのセキュリティチームリーダーとして、重要な資産を保護し、進化する脅威から強固な保護を提供しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/sungbin-im-ba817b25/
+  profileImage: crew/jake.png
+- id: byeoko
+  name: Byeoko Lee
+  position: Sr. Security Engineer
+  description: ビヨコは、13年以上の経験を持つサイバーセキュリティ専門家で、高度なセキュリティソリューションの設計と実装に熟練しています。集中型ログ管理、セキュリティインシデント調査、さまざまな技術管理に優れたビヨコは、進化するセキュリティの脅威に対応するためのシステム保護に力を入れています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/hyunki-lee-2b189a1b7/
+  profileImage: crew/byeoko.png
+- id: ravi
+  name: Ravi Kang
+  position: Security Engineer
+  description: ラヴィは、QueryPieのセキュリティエンジニアであり、ペネトレーションテストの専門家で、セキュリティベストプラクティスに関してさまざまな組織にコンサルティングを行ってきました。脆弱性の識別と強力なセキュリティ対策の実施に特化しており、セキュリティとデータガバナンスを強化する重要な役割を果たしています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/ravi-kang-595014270/
+  profileImage: crew/ravi.png
+- id: noah
+  name: Noah Kim
+  position: Security Engineer
+  description: |
+    ノアは、ペネトレーションテストのコンサルタントおよび社内ペネトレーションテスターとして、包括的な脆弱性評価を実施し、安定性とセキュリティを確保しています。SASTやDASTなどのソリューションをCI/CDパイプラインに統合し、会社の製品に対する脆弱性管理を行っています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/gyeongho-kim-a41b34209/
+  profileImage: crew/noah.png
+- id: ella
+  name: Ella Lee
+  position: PM Lead
+  description: |
+    エラはIT製品マネージャーでありPMリーダーとして、顧客のニーズを理解し、製品品質と顧客満足度を向上させる機能改善を主導しています。顧客の洞察と製品開発とのギャップを埋めることに強みがあり、ビジネスの成功と顧客満足に重要な貢献をしています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/umbr-ella/
+  profileImage: crew/ella.png
+- id: allen
+  name: Allen Kim
+  position: Product Manager
+  description: Allenは経験豊富なセキュリティの専門家であり、現在はプロダクトマネージャーとして活躍しています。情報セキュリティとSaaSソリューションの計画において豊富な経験を持ち、システムやKubernetesのアクセス管理と監査の設計と管理に優れています。ユーザーの利便性と堅牢なセキュリティのバランスを取ることにコミットしており、Allenの専門知識と積極的なアプローチは、組織の目標に沿ったソリューションの推進に貢献しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/allenmjkim/
+  profileImage: crew/allen.png
+- id: keira
+  name: Keira Yoon
+  position: Product Manager
+  description: Keiraは、AI/ML技術の商業化に特化したダイナミックなプロダクトマネージャーで、学術的背景とさまざまな職業経験を持っています。適応力があり、素早く学習することで知られ、現在はサイバーセキュリティ分野に注力し、学際的な経験を活かして革新的なソリューションを推進し、影響力のある結果を生み出しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/yohseob-yoon-a0b522117/
+  profileImage: crew/keira.png
+- id: brendon
+  name: Brendon Choi
+  position: Product Manager
+  description: Brendonは20年以上の経験を持つ元クラウドエンジニアで、IT、AI、Windows技術に深い知識を持ち、Microsoftソリューションに強い情熱を注いでいます。かつてチームリーダーとして活躍し、現在はQueryPieでプロダクトマネージャーとして新たな挑戦をしています。エンジニアリング、運用、人工知能の深い知識を活かし、QueryPieの技術基盤の維持と向上、革新の推進、高品質なソリューションの提供に貢献しています。
+  urls: []
+  profileImage: crew/brendon.png
+- id: regan
+  name: Regan Park
+  position: Product Manager
+  description: Reganは顧客重視のプロダクトマネージャーで、セキュアで使いやすいソリューションの提供に情熱を注いでいます。優れたコミュニケーション能力と迅速な適応力を持ち、国際的な背景を活かして顧客のニーズと革新を結びつけています。データガバナンスの専門知識と新興のデータベースベンダーに対する好奇心を持ち、技術の探求に情熱を注いでいます。顧客満足のための製品開発に貢献する不可欠な存在です。
+  urls: []
+  profileImage: crew/regan.png
+- id: vin
+  name: Vin Jeong
+  position: Design Team Lead
+  description: VinはQueryPieのデザインチームリーダーで、ワークフローの効率化とユーザビリティの向上を目指した直感的でユーザー中心のデザイン作成に注力しています。複雑なデザイン課題を解決することに情熱を注ぎ、創造力を活かして製品のブランディングとユーザーエクスペリエンスを向上させています。柔軟で革新的なアプローチで、QueryPieのデザインビジョンを形作り、製品が機能的で視覚的にインパクトのあるものになるよう導いています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/vin-jeong/
+  profileImage: crew/vin.png
+- id: jk
+  name: Jk Kim
+  position: Techlead, Software Engineer
+  description: JKは20年以上の経験を持ち、自律ロボット、推薦システム、グローバル広告プラットフォーム、企業向けソフトウェアなどのプロジェクトをリードしてきました。ソフトウェアアーキテクチャ、サーバーサイドプログラミング、UNIXプラットフォーム、機密データの保護やシステムアクセスの管理を行うセキュリティシステム（PAM、データアクセスコントローラー、システムアクセスコントローラー）などの設計に精通しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/jk-kim-9363b5a7/
+  profileImage: crew/jk.png
+- id: skipper
+  name: Skipper Moon
+  position: SVP of Engineering
+  description: Skipperは、コミュニティおよびゲームサービスの開発を経て、ゲームプラットフォームやKakaoTalkサーバー、KakaoGiftサービスのプロジェクトをリードしました。BankSaladの幹部として家計簿サービスを管理し、Carrot
+    General InsuranceのCIO/CTOとしてデジタルトランスフォーメーションを推進しました。現在はQueryPieでSVP of
+    Engineeringとして、技術的安定性、カスタマーサポート、顧客満足に焦点を当てているTPMチームを率いています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/kyudong-moon-b40bb5b6/
+  profileImage: crew/skipper.png
+- id: andrew
+  name: Andrew Jung
+  position: Techlead, Software Engineer
+  description: Andrewは20年以上の経験を持つエンジニアで、検索エンジン、AIプラットフォーム、動画推薦システムの開発に携わってきました。QueryPieのコアチームリーダーとして、先進的なプロキシ技術を用いたシステムアクセス管理の革新を先導しています。データベース、クラウドインフラ、現代のセキュリティプロトコルに深い専門知識を持ち、企業セキュリティにおけるQueryPieの進展を推進する重要な役割を果たしています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/%EC%8B%9C%EC%9A%B1-%EC%A0%95-22150687/
+  profileImage: crew/andrew.png
+- id: evan
+  name: Evan Choi
+  position: Software Engineer
+  description: Evanは複雑なシステムの開発および維持に精通した経験豊富なソフトウェアエンジニアで、QueryPieではエンタープライズクライアント向けのスケーラブルでセキュアなデータ管理ソリューションを構築しています。システムアーキテクチャに強いバックグラウンドを持ち、.NETやRustに対する情熱がイノベーションとパフォーマンスを推進し、QueryPieの最前線で重要な役割を担っています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/evan-choi-b63b27147/
+  profileImage: crew/evan.png
+- id: ryan
+  name: Ryan Chae
+  position: Software Engineer
+  description: Ryanは、セキュアでスケーラブルなシステムの開発に豊富な経験を持つソフトウェアエンジニアです。QueryPieでの重要な貢献者として、SSHプロキシアーキテクチャによるシェルネイティブなコマンド制御の設計において重要な役割を果たし、プラットフォームのセキュリティと効率を向上させました。システムアーキテクチャの専門知識とイノベーションへのコミットメントが、進化するエンタープライズクライアントのニーズに応える堅実なソリューションの開発を推進しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/ryan-chae-647a4126/
+  profileImage: crew/ryan.png
+- id: kevin
+  name: Kevin So
+  position: Software Engineer
+  description: Kevinは、多様なプラットフォーム（Windows、Android、サーバー、Web環境）でシームレスに動作する製品の開発に豊富な経験を持つソフトウェアエンジニアです。直感的で視覚的に魅力的なUI/UXデザインを作成することに深くコミットしており、技術的スキルと細部へのこだわりを組み合わせて優れたユーザーエクスペリエンスを提供しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/sohyeonseop/
+  profileImage: crew/kevin.png
+- id: mason
+  name: Mason Oh
+  position: Software Engineer
+  description: MasonはQueryPieでデータベースアクセス制御サーバー、プロキシ開発、SQLパーシング（.NET Core
+    8およびAntlr）を専門とする熟練のエンジニアです。Wireshark、dotnet-dump、APMなどのツールを使用して、TCPパケット解析、メモリリーク、CPUの最適化といった複雑な問題を解決することに優れています。AWSの専門知識を持ち、NLB関連のネットワーク問題の解決経験があり、Dockerにも精通しており、Kubernetesの知識を積極的に拡大しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/mason-oh/
+  profileImage: crew/mason.png
+- id: mosty
+  name: Mosty Kim
+  position: Software Engineer
+  description: Mostyは、約10年のシステムエンジニアとしての経験を持つ熟練の開発者です。QueryPieでは、サーバーアクセス制御およびKubernetesアクセス制御製品の開発と管理に注力しています。メトリックやデバッグに情熱を持つMostyは、サービスの安定的かつ効率的な運用を確保する重要な役割を果たし、QueryPieが信頼性が高く安全なソリューションを提供することに貢献しています。
+  urls: []
+  profileImage: crew/mosty.png
+- id: wein
+  name: Wein Cho
+  position: Software Engineer
+  description: Weinは、複雑なシステムの設計および保守に広範な経験を持つ優れたソフトウェアエンジニアです。QueryPieでは、企業が強力なデータ管理機能を備えることができるよう、スケーラブルで安全なソリューションの開発に注力しています。システムアーキテクチャに関する堅実な基盤と革新へのコミットメントをもとに、WeinはQueryPieが最先端のデータガバナンスプラットフォームを提供する上で重要な役割を果たしています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/%ED%83%9C%EC%83%81-%EC%A1%B0-270a49136/
+  profileImage: crew/wein.png
+- id: logan
+  name: Logan Chae
+  position: Software Engineer
+  description: Loganは、20年以上の経験を持つ熟練のソフトウェア開発者で、バックエンドシステム、クラウドインフラ、および大規模なアプリケーションに専門的な知識を持っています。Java、TypeScript、Python、C#を使いこなし、Spring
+    BootやASP.NETといったフレームワークに深い専門知識を持っています。AIサービスやブロックチェーンプラットフォームを含むプロジェクトを成功裏にリードし、革新を促進する高性能なソリューションを提供した経験があります。
+  urls: []
+  profileImage: crew/logan.png
+- id: bruce
+  name: Bruce Han
+  position: Techlead, Software Engineer
+  description: Bruceは、検索エンジン開発、スパムフィルタ設計、大規模分散システムに専門的な知識を持つ熟練のエンジニアです。数学的なバックグラウンドを活かし、データ精製と検索サービスにおいてセキュリティソリューションに注力しています。QueryPieのバックエンド開発チームのリーダーとして、セキュリティポリシーの研究とAIおよびデータ分析を活用して高度なセキュリティ環境を構築する革新を主導し、より安全なデジタル世界を作るために努力しています。
+  urls: []
+  profileImage: crew/bruce.png
+- id: kurt
+  name: Kurt Yoo
+  position: AI Software Engineer
+  description: Kurtは、最先端のデータ管理ソリューションを開発および保守することに専門的な知識を持つ優れたソフトウェアエンジニアです。QueryPieでは、AIデータ発見のためのコアAIを発明し、インテリジェントなデータ分類機能を進展させる重要な役割を果たしました。スケーラブルで安全なプラットフォーム構築に関する専門知識をもとに、KurtはQueryPieのソリューションが企業クライアントの動的なニーズを満たすことを確実にし、データガバナンス技術におけるリーダーシップを強化しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/%EA%B2%BD%EB%AF%BC-%EC%9C%A0-a28b5b1a2/
+  profileImage: crew/kurt.png
+- id: david
+  name: David Choi
+  position: Software Engineer
+  description: Davidは、ソフトウェアの複雑な仕組みを理解することに深い好奇心を持つ情熱的な開発者です。QueryPieでは、Kubernetesアクセス制御（KAC）とWebアクセス制御（WAC）ソリューションの開発において重要な役割を果たしました。技術的な専門知識とGolangへの愛情をもって、複雑な課題に取り組み、革新的なセキュリティソリューションに貢献しています。
+  urls: []
+  profileImage: crew/david.png
+- id: timo
+  name: Timo Kim
+  position: Techlead, Software Engineer
+  description: Timo
+    Kimは20年の経験を持つ熟練のソフトウェア開発者で、Daum、Kakao、Kakaoenterpriseのプロジェクトに貢献し、Daumの検索サービスやKakaoTalkの#Search機能を含むさまざまなプロジェクトに参加しました。ウェブサイトの最適化と検索技術の向上に熟練しており、現在はQueryPieでフロントエンドリーダーとして、AI統合インターフェースとセキュリティソリューションを中心に、スムーズで安全なユーザー体験を提供することに注力しています。
+  urls: []
+  profileImage: crew/timo.png
+- id: eddy
+  name: Eddy Jeon
+  position: Frontend Engineer
+  description: Eddy
+    Jeonは現在、QueryPieでサービスのフロントエンドパートリーダーとして活躍している献身的なソフトウェアエンジニアです。この役割では、ユーザー体験を向上させるユーザーフレンドリーなインターフェースの開発と維持に注力しています。Eddyの卓越性へのコミットメントとフロントエンド技術に対する専門知識は、QueryPieが革新的なデータガバナンスソリューションを提供するという使命に大きく貢献しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/eddy-jeon-a56a681a9/
+  profileImage: crew/eddy.png
+- id: zac
+  name: Zac Jung
+  position: Frontend Engineer
+  description: ZacはQueryPieでフロントエンドファウンデーションパートリーダーとして活躍する経験豊富なフロントエンドエンジニアです。大規模なフロントエンドシステムを専門とし、ユーザー体験（UX）と開発者体験（DX）の両方を重視して、効率的で直感的なソリューションを創出します。Zacは最新技術と最高のソフトウェアエンジニアリングプラクティスを活用して堅牢なシステムを構築し、革新を推進し続ける一方で、細部にまで配慮しています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/jinwoo-jung-8b11a8112/
+  profileImage: crew/zac.png
+- id: candice
+  name: Candice Hong
+  position: Head of HR
+  description: CandiceはQueryPieの人事部門の責任者として、前向きで生産的な職場環境を創造するための人事戦略を推進しています。人材採用、従業員の育成、組織文化に注力し、QueryPieが革新的なデータガバナンステクノロジーを提供するという使命を支えるために、優れた人材を引き付け、維持することを確実にしています。彼女の専門知識と献身は、会社のリーダーシップチームにおいて重要な役割を果たしています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/candice-hong-9312bb260/
+  profileImage: crew/candice.png
+- id: fabian
+  name: Fabian Lee
+  position: Software Engineer
+  description: Fabianは検索プラットフォーム、品質データパイプライン、サービス分野でほぼ10年の経験を持つ熟練のソフトウェアエンジニアです。彼はユーザーのニーズとサービスの目標に一致する意味のあるインサイトを生成するためにデータを分析し処理することに情熱を注いでいます。Fabianはユーザー体験を向上させ、ビジネス成功に貢献するデータ駆動型ソリューションを提供することに優れています。
+  urls: []
+  profileImage: crew/fabian.png
+- id: robb
+  name: Robb Lee
+  position: Technical Project Manager
+  description: Robbはデータセキュリティ、ガバナンス、そしてクラウドベースのソリューションを専門とする熟練のテクニカルプロジェクトマネージャーです。QueryPieでは、ソリューションの開発と運用をサポートし、組織がスケーラブルで安全かつ高性能な技術でデータを効率的に管理し保護できるよう支援しています。また、クライアントがQueryPieを通じてデータを円滑かつ安全に管理できるようサポートしています。
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/robb-lee-285089164/
+  profileImage: crew/robb.png
+- id: teddy
+  name: Teddy Kim
+  position: Software Engineer
+  description: ""
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/kimhongyeon
+  profileImage: crew/teddy.jpg
+- id: greg
+  name: Greg Yim
+  position: Software Engineer
+  description: ""
+  urls:
+    - type: linkedin
+      url: https://www.linkedin.com/in/hosung-yim/
+  profileImage: crew/greg.png
+- id: edwin
+  name: Edwin Park (エドウィン・パーク)
+  position: Software Engineer, QueryPie, Inc.
+  description: QueryPie AI Service
+    チーム所属のソフトウェアエンジニア。企業向けAIサービス開発を担当し、LLMベースのドメイン特化システム構築、B2C/B2B/B2B2Cクライアント向けのAIソリューション設計、および独立型AIエージェント事業モデルの研究開発に従事。
+  urls: []
+  profileImage: crew/edwin.png
+- id: querypie
+  name: QueryPie AI編集部
+  position: ""
+  description: QueryPie
+    AI編集部は、企業のAI活用とデータ統制の最前線を追うコンテンツチームです。AIエージェント・アクセス管理・コンプライアンスなど、CxOと実務担当者が「今、判断に必要な情報」を、最新の調査データと業界事例をもとにお届けします。
+  urls: []
+  profileImage: public/querypie-company/icon/qp-logo-icon.png
