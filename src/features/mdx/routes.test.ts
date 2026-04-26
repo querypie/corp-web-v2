@@ -70,5 +70,4 @@ describe("mdx detail routes", () => {
       shouldRedirect: false,
     });
   });
-}
-);
+});
