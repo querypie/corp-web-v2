@@ -4,6 +4,7 @@ export type MdxListCategory = Extract<MdxCategory, "blog" | "white-paper">;
 export type MdxFrontmatter = {
   layout: "Article";
   category: string;
+  slug?: string;
   title: string;
   description?: string;
   date: string;
