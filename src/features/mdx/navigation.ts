@@ -12,7 +12,7 @@ function getActiveDocsCategorySlug(category: MdxListCategory): DocsCategorySlug 
 
 function getMdxListCategoryHref(categorySlug: DocsCategorySlug, locale: Locale) {
   if (categorySlug === "white-papers") {
-    return getLocalePath(locale, "/white-papers");
+    return getLocalePath(locale, "/whitepapers");
   }
 
   if (categorySlug === "blogs") {

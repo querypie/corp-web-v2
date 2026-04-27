@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { getMdxSidebarMenuItems } from "./navigation";
 
 describe("getMdxSidebarMenuItems", () => {
-  it("white-paper 목록은 documentation 사이드바 라벨을 유지하면서 white-papers를 활성화한다", () => {
+  it("white-paper 목록은 documentation 사이드바 라벨을 유지하면서 whitepapers를 활성화한다", () => {
     const items = getMdxSidebarMenuItems("white-paper", "en");
 
     expect(items.map((item) => item.label)).toEqual([
@@ -14,7 +14,7 @@ describe("getMdxSidebarMenuItems", () => {
       "Blogs",
     ]);
     expect(items.find((item) => item.label === "White Papers")).toMatchObject({
-      href: "/white-papers",
+      href: "/whitepapers",
       isActive: true,
     });
     expect(items.find((item) => item.label === "Blogs")).toMatchObject({

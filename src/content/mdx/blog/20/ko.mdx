@@ -131,7 +131,7 @@ Next.js의 서버 액션은 마치 마법처럼 서버와 클라이언트가 연
 공식 문서에 따르면 Next.js는 서버 액션과 관련하여 다음과 같은 기본적인 보안 메커니즘을 제공합니다:
 
 - **Secure Action IDs**: 서버와 클라이언트 간 통신의 유효성을 내부적으로 생성된 ID로 검증합니다.
-- **[CSRF(Cross-Site Request Forgery)](/white-papers/8/secure-login-token-management#위협의-종류) 방지**: 서버 액션 호출 시 POST 요청만 허용하고 동일 출처 요청만 허용합니다.
+- **[CSRF(Cross-Site Request Forgery)](/whitepapers/8/secure-login-token-management#위협의-종류) 방지**: 서버 액션 호출 시 POST 요청만 허용하고 동일 출처 요청만 허용합니다.
 - **클로저 변수 보호**: 클라이언트로 전달되는 상태값을 암호화 및 서명하여 보호합니다.
 - **코드 격리**: 서버 전용 코드는 클라이언트 번들에 포함되지 않도록 처리합니다.
 - **에러 메시지 보호**: 프로덕션 환경에서는 민감한 상세 오류 메시지를 노출하지 않습니다.

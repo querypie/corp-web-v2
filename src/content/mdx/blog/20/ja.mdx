@@ -130,7 +130,7 @@ Next.jsのServer Actionは、サーバーとクライアントが魔法のよう
 公式ドキュメントによると、Next.jsはServer Actionに関して以下のような基本的なセキュリティメカニズムを提供します：
 
 - **Secure Action IDs**: サーバーとクライアント間の通信の有効性を内部生成されたIDで検証します。
-- **[CSRF(Cross-Site Request Forgery)](/white-papers/8/secure-login-token-management#脅威の種類)防止**: Server Action呼び出し時にPOSTリクエストのみを許可し、同一オリジンリクエストのみを許可します。
+- **[CSRF(Cross-Site Request Forgery)](/whitepapers/8/secure-login-token-management#脅威の種類)防止**: Server Action呼び出し時にPOSTリクエストのみを許可し、同一オリジンリクエストのみを許可します。
 - **クロージャ変数の保護**: クライアントに渡される状態値を暗号化および署名して保護します。
 - **コードの分離**: サーバー専用コードがクライアントバンドルに含まれないように処理します。
 - **エラーメッセージの保護**: 本番環境では機密性の高い詳細なエラーメッセージを公開しません。

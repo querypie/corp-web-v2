@@ -24,7 +24,7 @@ export type MdxListItem = {
 };
 
 function getMdxCategoryDirectory(category: MdxListCategory) {
-  return category === "white-paper" ? "white-papers" : category;
+  return category === "white-paper" ? "whitepapers" : category;
 }
 
 function sortMdxListItems(left: MdxListItem, right: MdxListItem) {

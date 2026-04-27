@@ -1,0 +1,1019 @@
+---
+layout: "Article"
+category: "whitepaper"
+slug: "welcome-to-the-age-of-agentsecops"
+title: "Welcome to the Age of AgentSecOps—Code Stands Still, Agents Take Over"
+description: "As AI agent–based automation systems continue to proliferate, we’ve moved beyond simple task automation to a new paradigm: AgentOps, where autonomous agents make decisions and interact with external systems on their own. In this article, we explore the emerging concept of AgentSecOps—security operations tailored for agent-driven environments—and take a deep dive into how its structure and role compare to traditional DevSecOps frameworks."
+date: "2025-05-13"
+author: "kenny"
+ogImage: "public/whitepapers/21/thumbnail.png"
+keywords: ["AgentSecOps","AgentSecOps Framework", "QueryPie MCPS","MCP","Model Context Protocol","Enterprise AI Security","MCP PAM","Build Safe AI Foundation","enterprise AI security","Cloud Audit Logs","AI Action Control","AI Compliance"]
+relatedPosts:
+  - "/en/whitepapers/18"
+  - "/en/whitepapers/19"
+  - "/en/whitepapers/20"
+---
+# 1. Introduction: Why AgentSecOps Goes Beyond DevSecOps
+
+As AI agent-based automation continues to spread, the way organizations manage access to assets and APIs is undergoing a fundamental transformation. Frameworks like LangChain, CrewAI, and AutoGPT go far beyond simple automation. They enable agents to make autonomous decisions and invoke external systems independently. This operational paradigm is known as AgentOps—a comprehensive approach to running agent-driven systems. AgentOps encompasses a wide range of functions, including LLM-based workflow optimization, tool invocation scheduling, automated interpretation of results, and reporting[1].
+
+AgentOps is not a single, monolithic concept. Instead, it is defined by distinct execution models based on how agents operate. In real-world environments, AI agents typically automate tasks in one of two main ways—each with its own implications for security touchpoints, audit flows, and policy enforcement.
+
+The first model is **sequential execution**, where a single agent handles a user request by calling multiple tools or APIs in a linear, step-by-step fashion. For example, if a user says, “Plan my business trip to Tokyo next week,” the agent might:
+
+<br />
+        <InfoNote hideIcon>
+        1. Call an API to book flights
+        2. Connect to a hotel reservation platform
+        3. Use a calendar API to create the itinerary
+        4. Send an update via email API
+        </InfoNote>
+
+<br />
+This entire process happens within a single execution context. Security controls—such as retries, policy checks, logging, and approval steps—must be applied within this linear flow[1].
+
+The second model is **agent-to-agent execution**—a distributed flow in which one agent delegates parts of the task to others. For instance, if a user requests a marketing report:
+
+<br />
+        <InfoNote hideIcon>
+        * **Agent A1** orchestrates the overall flow
+        * **Agent A2** handles data collection
+        * **Agent A3** focuses on summarization and visualization
+        * Finally, Agent A1 merges the outputs and delivers the report
+        </InfoNote>
+
+<br />
+This distributed approach requires context hand-off, delegation verification, conflict detection, and permission reviews at each handover. Each agent must independently perform policy decision points (PDP), policy enforcement (PEP), and audit logging[3].
+
+These two models form the core architectural types of AgentOps. Understanding them is critical when designing effective security controls. Each model requires different policy insertion points, control entities, and flow predictability. Failure to distinguish between them can result in ineffective policies or missing logs[4][5].
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/whitepapers/21/1-comparison-of-agentops-execution-models.png"
+        alt="[Figure 1] Comparison of AgentOps Execution Models"
+        caption="[Figure 1] Comparison of AgentOps Execution Models"
+    />
+</Box>
+
+<br />
+### [Table 1] Comparison of AgentOps Execution Models
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Category </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Sequential AgentOps </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Agent-to-Agent (A2A) </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Execution Method</Table.Td>
+            <Table.Td>Single agent calling APIs sequentially</Table.Td>
+            <Table.Td>Multiple agents executing by roles</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Flow Structure</Table.Td>
+            <Table.Td>Fixed order, predictable</Table.Td>
+            <Table.Td>Dynamic paths, branching possible</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Policy Insertion</Table.Td>
+            <Table.Td>Inline in the single execution flow</Table.Td>
+            <Table.Td>Required at each inter-agent interface</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>PDP Evaluation</Table.Td>
+            <Table.Td>One-time evaluation for entire flow</Table.Td>
+            <Table.Td>Evaluation needed at every handoff</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Delegation Checks</Table.Td>
+            <Table.Td>Not required (single actor)</Table.Td>
+            <Table.Td>Required (must verify role delegation)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Failure Handling</Table.Td>
+            <Table.Td>Retry or halt</Table.Td>
+            <Table.Td>Individual agent recovery mechanisms</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray">Audit Logging</Table.Td>
+            <Table.Td>Single-session logging</Table.Td>
+            <Table.Td>Multi-session, linked call chain logging</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td cellBackgroundColor="gray">Use Cases</Table.Td>
+            <Table.Td>Travel booking, meeting setup, emails</Table.Td>
+            <Table.Td>Report generation, workflow automation, multi-SaaS integration</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+Traditional DevSecOps models, which center on release-stage security, are no longer sufficient to control these types of AgentOps flows. Execution can happen without any code commit or deployment. The identity of the actor—whether human or agent—may not be clear, and the intent of execution might not even be explicitly stated. 
+
+To address this, **AgentSecOps** must embed policy-driven controls directly into these agent workflows. It needs to support real-time approval, authorization evaluation, and audit logging at the execution unit level. Importantly, this level of control is only achievable when built natively on top of the AgentOps architecture[16][17].
+
+Traditional DevSecOps integrates a variety of security modules into the CI/CD pipeline—such as static analysis (SAST), dynamic analysis (DAST), infrastructure-as-code (IaC) checks, image scanning, software composition analysis (SCA), and secret detection. These tools are designed to identify and eliminate code-level risks early in the development cycle. SCA tools, for instance, analyze open-source libraries and dependencies for security vulnerabilities, license violations, and maintenance status. Tools like GitHub Advanced Security, Snyk, and WhiteSource have recently been used to automate this process[2].
+
+The diagram below illustrates a DevSecOps flow, where code is committed to GitHub, triggering image builds via Jenkins or GitHub Actions. Vulnerability scanning is performed in Harbor, and only clean images are deployed to AWS ECR. ArgoCD then syncs the GitHub manifest and deploys to a Kubernetes cluster. During deployment, secrets management (Vault), DAST testing (ZAP), and infrastructure validation via Helm and Terraform are integrated.
+
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/whitepapers/21/2-example-of-devsecops-pipeline.png"
+        alt="[Figure 2] Example of a DevSecOps Pipeline"
+        caption="[Figure 2] Example of a DevSecOps Pipeline"
+    />
+</Box>
+
+This kind of modern DevSecOps pipeline offers comprehensive management of both pre-deployment and post-deployment risks—integrating static and dynamic security capabilities such as code analysis, image integrity validation, open-source dependency scanning (SCA), IaC policy enforcement, runtime workload protection, cloud security posture management (CSPM), identity entitlement management (CIEM), and centralized CNAPP control. However, this structure relies on a fundamental assumption: that a human initiates the execution by writing code and following a defined release process.
+
+AI-powered AgentOps breaks this assumption. Agents can bypass traditional pipelines entirely—triggering GitHub APIs directly, posting to Slack, or invoking AWS Lambda without going through Git commits or CI/CD logs. These non-deterministic execution flows are not captured by traditional DevSecOps frameworks. As a result, critical executions may occur without triggering any of the established security controls[3].
+
+In such cases, DevSecOps controls may not apply—or may not even be possible to enforce post-factum. For example, the execution could bypass image scans, IaC policy checks, or deployment approvals altogether. This structural gap is exactly what **AgentSecOps** is designed to fill.
+
+AgentSecOps introduces a real-time security layer that captures and evaluates execution requests initiated by AI agents. It applies policy-based controls to determine whether such actions should be allowed, denied, or require additional approval. Crucially, AgentSecOps does not operate within the traditional CI/CD path—it functions as a parallel policy enforcement domain that intervenes at the moment of execution.
+
+
+# 2. Comparing DevSecOps and AgentSecOps Architectures
+
+DevSecOps is a framework designed to automate security throughout the software development pipeline. Its core principle is to integrate security activities continuously from code authoring to runtime environments. While it originally focused on static analysis (SAST) and vulnerability scanning, modern DevSecOps now includes functions such as software composition analysis (SCA), policy violation detection in infrastructure-as-code (IaC), container image scanning, and secret leakage prevention.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/whitepapers/21/3-vulnerability-management-across-the-cloud-devsecops-pipeline.png"
+        alt="[Figure 3] Vulnerability Management Across the Cloud DevSecOps Pipeline"
+        caption="[Figure 3] Vulnerability Management Across the Cloud DevSecOps Pipeline"
+    />
+</Box>
+
+In cloud-native environments, DevSecOps has evolved into a full-fledged ecosystem by incorporating platforms like **Cloud Security Posture Management (CSPM), Cloud Infrastructure Entitlement Management (CIEM)**, and **Cloud Workload Protection Platforms (CWPP)**[4].
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/whitepapers/21/4-application-vulnerability-management.png"
+        alt="[Figure 4] Application Vulnerability Management"
+        caption="[Figure 4] Application Vulnerability Management"
+    />
+</Box>
+
+DevSecOps enforces security based on code-defined assets. When a developer commits code to a repository like GitHub or GitLab, CI/CD tools such as Jenkins or GitHub Actions build and test it. During this process, SCA tools scan for vulnerabilities in open-source dependencies, image scanners assess container risks, and IaC templates are checked for policy compliance. At deployment, tools like CSPM and CWPP monitor misconfigurations and runtime behavior[5].
+
+However, this entire structure assumes that code is explicitly written and that actions follow a predefined, human-authored pipeline. LLM-based agents violate this assumption. They can execute logic not written by human developers, make API calls without scripts, and directly access internal systems. They may send messages to Slack or trigger AWS Lambda functions—without Git commits or Jenkins logs—following execution flows that were never explicitly defined. These behaviors effectively bypass the security checkpoints DevSecOps relies on[6].
+
+AgentSecOps introduces a new architecture that intervenes at execution time, where it evaluates policies (PDP: Policy Decision Point), verifies permissions based on execution intent (PBAC: Purpose-Based Access Control), and integrates approval workflows with audit logging. Unlike DevSecOps, which focuses on static code analysis and pre-execution prevention, AgentSecOps aims to control each execution unit in real time. Its control point is fundamentally different.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/whitepapers/21/5-timeline-based-comparison-of-control-flow.png"
+        alt="[Figure 5] Timeline-Based Comparison of Control Flow"
+        caption="[Figure 5] Timeline-Based Comparison of Control Flow"
+    />
+</Box>
+
+While DevSecOps evaluates the state of code and assets before execution, AgentSecOps inspects behaviors and policy compliance at the point of execution. AgentSecOps is designed to meet the following security requirements:
+
+* Identifying the actor initiating execution
+* Detecting conflicts between execution purpose and resource policies
+* Inserting pre-approval checks based on execution context
+* Capturing session-level logs and audit trails for all actions
+
+AgentSecOps should not be seen as a mere extension of DevSecOps. It constitutes an independent layer of runtime security control. In environments where AI agents both decide and act autonomously, policy-based dynamic approval is the only way to ensure traceability and accountability in security operations[7].
+
+
+# 3. Architectural Breakdown: Execution Control in AgentSecOps
+
+AgentSecOps is not simply a monitoring layer—it is a real-time control architecture that applies security policies around execution requests and dynamically evaluates execution flows. Unlike DevSecOps, which focuses on static or predefined checks for code, images, and configuration files, AgentSecOps evaluates policies based on the actor and execution context[8].
+
+This architecture is composed of several key components, each of which plays a distinct role in dynamic policy enforcement.
+
+## 3.1 Policy Decision Point (PDP)
+
+The Policy Decision Point (PDP) is the central policy engine that determines whether an execution request should be allowed or denied. Once a request is received, the PDP evaluates the action against policy definitions, which are typically written in YAML or policy languages like Rego (or Cedar). The decision is based on a combination of factors such as the actor, resource, purpose, and timing of the request.
+
+<br />
+        <InfoNote hideIcon>
+        * If the requester’s role is ‘AI Agent’,
+        * And the target resource is a ‘GitHub Repository’,
+        * And the purpose is ‘merge a pull request’,
+        * Then deny access during restricted hours for external workspace sources
+        </InfoNote>
+
+<br />
+These kinds of policies are commonly implemented using tools like Open Policy Agent (OPA), Cedar, or Kyverno[9].
+
+## 3.2 Purpose-Based Access Control (PBAC)
+
+Purpose-Based Access Control (PBAC) is an authorization model that makes access decisions based on the purpose of an execution request. While RBAC (Role-Based Access Control) uses the role of a user or agent, and ABAC (Attribute-Based Access Control) uses attributes of users and resources, PBAC evaluates policies centered on the explicitly stated intent of the execution.
+
+This approach is especially effective in real-time security scenarios such as:
+
+<br />
+        <InfoNote hideIcon>
+        * When the execution actor is an AI agent or automated system rather than a human
+        * When a single API request must be handled differently depending on its purpose
+        * When execution legitimacy must be evaluated within a multi-layered security environment based on declared intent
+        </InfoNote>
+
+<br />
+### Example: Sharing a Document from Google Drive
+
+Imagine an AI agent automatically shares a company document via Google Drive. If the purpose is “internal collaboration,” the action might be allowed through Slack, Notion, or other internal platforms. If the purpose is “external partner review,” additional approval or verification may be required due to company policy.
+
+**Example Policy (Rego)**
+```rego
+allow {
+    input.purpose == "internal_collab"
+    input.user.role == "ai_assistant"
+    input.resource.type == "gdrive.document"
+    input.resource.sharing == "organization"
+}
+```
+
+This policy allows document sharing only if:
+
+* The purpose of execution is "internal_collab" (internal collaboration)
+* The actor’s role is "ai_assistant"
+* The resource is a Google Drive document with "organization"-scoped sharing
+
+If the purpose were `"external_partner_review"` instead, the same API call would be denied unless a condition like `input.context.approval == true` is also satisfied.
+
+
+### [Table 2] Use Case Comparison
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Execution Purpose </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Access Decision </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Required Policy Condition </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td> `internal_collab` </Table.Td>
+            <Table.Td>Allowed</Table.Td>
+            <Table.Td>Internal sharing scope, agent role confirmation</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `external_partner_review` </Table.Td>
+            <Table.Td>Conditionally Allowed</Table.Td>
+            <Table.Td>NDA check, approval flag present (`approval == true`)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td> `public_share` </Table.Td>
+            <Table.Td>Denied</Table.Td>
+            <Table.Td>Full public sharing disallowed by policy</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+<br />
+### [Table 3] PBAC vs RBAC vs ABAC
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Feature </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> RBAC </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> ABAC </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> PBAC (Purpose-Based) </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Basis for Decision</Table.Td>
+            <Table.Td>Role</Table.Td>
+            <Table.Td>Attribute</Table.Td>
+            <Table.Td>Purpose</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Execution Intent Awareness</Table.Td>
+            <Table.Td>No</Table.Td>
+            <Table.Td>Limited (via attributes)</Table.Td>
+            <Table.Td>Yes (explicitly defined)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Expression of Complex Logic</Table.Td>
+            <Table.Td>Low</Table.Td>
+            <Table.Td>High</Table.Td>
+            <Table.Td>Medium (can combine with attributes)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Policy Design Complexity</Table.Td>
+            <Table.Td>Low</Table.Td>
+            <Table.Td>High</Table.Td>
+            <Table.Td>Medium</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Primary Use Cases</Table.Td>
+            <Table.Td>Internal access control</Table.Td>
+            <Table.Td>Fine-grained resource access</Table.Td>
+            <Table.Td>AI, RPA, agent-driven automation</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Example Policy</Table.Td>
+            <Table.Td>“Admins only”</Table.Td>
+            <Table.Td>“Dept=Finance AND Level ≥ 5”</Table.Td>
+            <Table.Td>“Allow only if purpose=notify_users”</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Fit for Runtime Enforcement</Table.Td>
+            <Table.Td>Low</Table.Td>
+            <Table.Td>Conditional</Table.Td>
+            <Table.Td>High (evaluated at execution time)</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+PBAC enables security systems to evaluate the legitimacy and contextual appropriateness of actions based on declared purposes—making it a critical evaluation criterion for real-time policy enforcement in AgentSecOps. As AI agents autonomously invoke SaaS APIs and execute automation across internal and external boundaries, PBAC addresses intent-based execution control gaps that cannot be managed through traditional access models alone[10].
+
+
+## 3.3 Policy Enforcement Point (PEP)
+
+The Policy Enforcement Point (PEP) is the module responsible for enforcing decisions made by the PDP. When an agent attempts to invoke an external API, the request must pass through the PEP. If the request is unauthorized, it is immediately blocked. PEPs can be embedded in various locations, such as internal proxies, middleware APIs, or agent runtime scripts. 
+
+For example, a PEP inserted in a Slack API middleware could send a policy evaluation request to the PDP before the agent posts a message. Based on the PDP’s response, the PEP can either allow or block the message—effectively preventing unauthorized agent executions in advance.
+
+
+## 3.4 Policy Information Point (PIP)
+
+The Policy Information Point (PIP) provides external data that the Policy Decision Point (PDP) uses during policy evaluation. This may include the user’s role, authentication status, current time, agent execution context, workflow metadata, and recent execution history.
+
+These contextual data points help the PDP evaluate policies with higher accuracy and adapt decisions to real-time conditions.
+
+
+## 3.5 Audit Logging and Session-Based Traceability
+
+Regardless of whether a request is allowed or denied, all policy evaluations and execution attempts are recorded in session-based logs. These logs enable administrators to reconstruct specific execution flows and visually analyze which actions were taken by particular AI agents. This session-based logging is critical for forensics, security audits, and regulatory compliance.
+
+Below is a flow diagram that illustrates how core components in the AgentSecOps architecture interact during an execution request:
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/whitepapers/21/6-agentsecops-component-architecture.png"
+        alt="[Figure 6] AgentSecOps Component Architecture"
+        caption="[Figure 6] AgentSecOps Component Architecture"
+    />
+</Box>
+
+Through this architecture, AgentSecOps enables real-time policy enforcement by understanding the full execution context. It’s not just a monitoring system, but a full-spectrum security control layer that governs execution behavior dynamically and precisely[11].
+
+
+# 4. Threat Scenario Analysis: Execution Risks Addressed by AgentSecOps
+
+AI-powered agents can perform actions such as API calls, document generation, messaging, and cloud asset modification without human intervention. In such autonomous execution environments, actions may frequently occur without clear authentication, approval, logging, or accountability. As a result, new types of threats emerge that traditional security models are unable to detect or control. AgentSecOps is purpose-built to detect and block these execution-time threats in real time[12].
+
+The following outlines five major threat scenarios that may occur in AI agent operations, along with how AgentSecOps architectures are designed to mitigate them. 
+
+## 4.1 Privilege Escalation via Agent Context
+
+An AI agent may act on behalf of a user with limited privileges, but during execution, access resources or perform actions beyond what that user is authorized to do. 
+
+For example, consider a user “A” with an employee role who requests an AI agent to summarize a Google Drive document. The agent proceeds to access not only the intended document, but also a sensitive internal HR file tagged as confidential, and sends part of its contents to another user or external channel.
+
+In this case, the AI agent misuses execution intent or circumvents context boundaries, resulting in a privilege escalation scenario.
+
+AgentSecOps evaluates each execution request by combining the user’s role, the execution purpose, and resource attributes (e.g., tags). This enables dynamic access control at the time of execution. In environments where RBAC alone fails to account for intent, Purpose-Based Access Control (PBAC) provides the fine-grained control needed.
+
+**Example Policy (Rego)**
+```rego
+default allow = false
+
+allow {
+    input.user.role == "employee"
+    input.resource.type == "gdrive.document"
+    input.resource.tag != "confidential"
+    input.purpose == "summary"
+}
+```
+
+This policy allows execution only if all of the following conditions are met:
+
+* The actor’s role is `employee`
+* The resource is a Google Drive document (`gdrive.document`)
+* The resource is not tagged as `confidential`
+* The execution purpose is explicitly declared as `"summary"`
+
+<br />
+### [Table 4] Mitigation Policy Outcome for Privilege Escalation via Agent Context
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Execution Context </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Allowed? </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Reason </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Employee requests summary of general document</Table.Td>
+            <Table.Td>Allowed</Table.Td>
+            <Table.Td>All conditions satisfied</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Employee requests summary of confidential document</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>resource.tag == confidential fails</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Employee requests document translation</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>purpose != summary</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Admin requests access to confidential document</Table.Td>
+            <Table.Td>Outside Scope</Table.Td>
+            <Table.Td>Requires separate admin-level policy</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+By incorporating execution purpose directly into policy logic, PBAC enables precise branching decisions at runtime. This is especially important in agent-driven environments, where the actor (user) and the executor (agent) are decoupled. Within the AgentSecOps architecture, intent-based policies become a foundational tool for managing execution security.
+
+
+## 4.2 Delegation Misuse and Overscope Execution
+
+AI agents frequently operate on behalf of other users through delegated permissions—this is a common pattern in organizational automation systems. However, if the agent acts beyond the scope of delegation or makes unintended API calls, a mismatch arises between the execution actor and the permission owner. This disconnect can lead to serious security incidents.
+
+For example, a project manager delegates permission to an AI agent to create issues in a specific Jira project. But the agent—intended only to work within “Project X”—starts creating issues in unauthorized external boards or even auto-generates high-impact Epics without explicit approval. This behavior constitutes delegation misuse, as the agent operates outside its authorized boundary.
+
+AgentSecOps evaluates delegated_by, resource.id, and purpose as part of the execution context. These values are used to dynamically assess whether the delegation is within scope. Below is a sample policy designed to mitigate this scenario.
+
+**Example Policy (Rego)**
+```rego
+default allow = false
+
+allow {
+    input.delegated_by == "user_123"
+    input.user.role == "ai_issue_creator"
+    input.resource.id == "jira-project-X"
+    input.purpose == "task_registration"
+}
+```
+
+This policy permits execution only if all of the following conditions are met:
+
+* The action is explicitly delegated by `"user_123"`
+* The executor’s role is `ai_issue_creator`
+* The resource being accessed is restricted to `"jira-project-X"`
+* The purpose of the execution is `"task_registration"`
+
+<br />
+### [Table 5] Mitigation Policy Outcome for Delegation Misuse and Overscope Execution
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Execution Context </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Allowed? </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Reason </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Delegated by `user_123`, creating issue in `jira-project-X`</Table.Td>
+            <Table.Td>Allowed</Table.Td>
+            <Table.Td>All conditions satisfied</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Same delegator, but issue created in `jira-project-Y`</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>Resource ID does not match delegated scope</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Executor’s role is not `ai_issue_creator`</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>Role condition not met</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Purpose is not `task_registration`</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>Execution intent outside of approved scope</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+In delegation-based automation environments, the delegator’s intent and the executor’s permissions are decoupled, creating potential security gaps. AgentSecOps mitigates this by using context-aware policies that validate delegation details at runtime. By explicitly defining delegation scope in policies, organizations can tightly control agent behavior—even when execution authority has been transferred.
+
+
+## 4.3 Trigger Abuse and External API Expansion
+
+AI agents often operate based on external events originating from systems like GitHub webhooks. While this is a common and powerful pattern, event-triggered agents may extend their execution beyond intended boundaries—reaching unauthorized internal high-risk resources or unapproved external systems. When such behavior occurs, and the origin of the trigger does not match the execution purpose, this is considered trigger abuse.
+
+For example, it may be acceptable for an agent to perform build automation in response to a GitHub push event. However, if the same trigger is used to provision a new EC2 instance in AWS or initiate parallel workflows in GitLab—none of which were explicitly authorized—this would constitute a security violation.
+
+AgentSecOps policies evaluate whether the trigger source (`trigger.source`) and target resource domain (`resource.domain`) match predefined, allowed conditions. Additionally, the execution purpose (`purpose`)must also align with the trigger’s intent. Here’s a sample policy to enforce this control:
+
+**Example Policy (Rego)**
+```rego
+default allow = false
+
+allow {
+    input.trigger.source == "github"
+    input.resource.domain == "github.com"
+    input.purpose == "ci_pipeline"
+}
+```
+
+This policy permits execution only if all of the following are true:
+
+* The event trigger originates from GitHub (e.g., webhook)
+* The target resource domain belongs to `github.com`
+* The declared purpose is `"ci_pipeline"`
+
+<br />
+### [Table 6] Mitigation Policy Outcome for Trigger Abuse and External API Expansion
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Execution Context </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Allowed? </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Reason </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>GitHub event triggers CI automation in GitHub</Table.Td>
+            <Table.Td>Allowed</Table.Td>
+            <Table.Td>All source, domain, and purpose conditions met</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>GitHub event triggers EC2 instance creation in AWS</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>Resource domain does not match source</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>GitLab event triggers action in GitHub</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>Mismatch in trigger source</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>GitHub event with declared purpose "deployment"</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>Execution purpose does not match allowed intent</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+By enforcing policy-level alignment between trigger source and execution purpose, AgentSecOps can preemptively block unauthorized API expansions that weren’t explicitly defined in automation plans. This structure is particularly effective in multi-SaaS environments, where it helps prevent unchecked API chaining across platforms.
+
+
+## 4.4 Execution Path Obfuscation
+
+In environments where AI agents autonomously interact with multiple systems, only the outcome of an action may be recorded, without any visibility into who executed it, when, and under what conditions. This lack of traceability becomes a serious issue for security incident response, forensics, and compliance.
+
+For example, an agent might use the Google Calendar API to automatically schedule an organization-wide meeting. However, if the execution log does not contain information about which user or agent ID initiated the request, what the execution purpose was, or under what conditions the call was made, the organization is left with an action trace but no identifiable path. If an attacker attempts to manipulate logs or bypass checks intentionally, such blind spots could result in undetected breaches.
+
+AgentSecOps requires that all execution requests include predefined mandatory context fields. During policy evaluation, the Policy Decision Point (PDP) can reject any request that is missing critical metadata. Furthermore, all execution flows must be logged at the session level to support traceability.
+
+**Example Policy (Rego)**
+```rego
+default allow = false
+
+allow {
+    input.user.id
+    input.session.id
+    input.resource.id
+    input.purpose
+}
+```
+
+This policy allows execution only if all of the following fields are present:
+
+* User/Agent ID (`user.id`)
+* Session ID (`session.id`)
+* Resource ID (`resource.id`)
+* Execution Purpose (`purpose`)
+
+This type of policy does not focus on business logic, but rather acts as a request schema validator. Requests that are missing required fields are blocked before execution, and for approved actions, the full context is recorded into session logs.
+
+<br />
+### [Table 7] Mitigation Policy Outcome for Execution Path Obfuscation
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Execution Context </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Allowed? </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Reason </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>All required fields (user, session, resource, purpose) present</Table.Td>
+            <Table.Td>Allowed</Table.Td>
+            <Table.Td>Request structure is complete</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>session.id is missing</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>Unable to trace execution path</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>purpose is absent</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>Execution intent cannot be validated</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Agent sends request without identifiable user.id</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>No accountable actor, execution trace incomplete</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+AgentSecOps does more than determine whether an execution request is allowed. It validates whether the request was made with complete and coherent context, ensuring that every action can be attributed, analyzed, and audited. This context integrity is fundamental not only for real-time security control, but also for incident response, behavioral auditing, and policy refinement.
+
+
+## 4.5 Prompt-to-Execution Abuse via LLM Output
+
+In systems where AI agents invoke external APIs based on responses from large language models (LLMs), there is a significant risk that unintended executions may be triggered from natural language prompts. This risk is especially critical when LLM responses are directly tied to command execution.
+
+For instance, if a user inputs “clean up the test server,” the LLM might interpret this as a command like `aws ec2 terminate-instances --all`. If the agent then executes that command without additional validation, it would result in a clear case of prompt injection–driven execution failure.
+
+AgentSecOps must evaluate not just the context of the execution request, but also the actual content of the LLM-generated command. Any response that includes high-risk keywords (e.g., “terminate”, “delete”, “format”) must be flagged. Execution should only proceed if the request passes purpose validation and has been explicitly approved by a policy or admin.
+
+**Example Policy (Rego)**
+```rego
+default allow = false
+
+allow {
+    not contains(input.llm_response, "terminate")
+    not contains(input.llm_response, "delete")
+    not contains(input.llm_response, "format")
+    input.purpose == "maintenance"
+    input.context.approved == true
+}
+```
+
+This policy allows execution only when all of the following are true:
+
+* The LLM response does not include high-risk keywords like `terminate`, `delete`, or `format`
+* The execution purpose is `"maintenance"`
+* The request has been explicitly approved (`approved == true`)
+
+<br />
+### [Table 8] Mitigation Policy Outcome for Prompt-to-Execution Abuse via LLM Output
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Execution Context </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Allowed? </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> Reason </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Safe LLM response, purpose is maintenance, approved</Table.Td>
+            <Table.Td>Allowed</Table.Td>
+            <Table.Td>Meets all purpose and approval conditions</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>LLM response contains `"terminate"`</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>High-risk keyword present</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Unapproved request (`approved == false`)</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>Double-approval condition not met</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Purpose provided as ambiguous term (e.g., `“cleanup”`)</Table.Td>
+            <Table.Td>Blocked</Table.Td>
+            <Table.Td>Execution intent not clearly aligned with policy</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+AgentSecOps must evaluate not only the request context, but also the semantics of the execution string itself. When LLMs are directly connected to automation systems, double approval flows and keyword-based filtering become essential to maintaining security. This layered approach protects against prompt-based abuse and ensures that no high-risk execution can occur without oversight.
+
+<br />
+### [Table 9] Threat Scenarios vs AgentSecOps Response Components
+
+<Table center width="100%" marginTopSize="xs">
+    <Table.Thead>
+        <Table.Tr>
+            <Table.Th cellBackgroundColor="gray"> Threat Scenario </Table.Th>
+            <Table.Th cellBackgroundColor="gray"> AgentSecOps Component / Mechanism </Table.Th>
+        </Table.Tr>
+    </Table.Thead>
+    <Table.Tbody>
+        <Table.Tr>
+            <Table.Td>Privilege Escalation via Agent Context</Table.Td>
+            <Table.Td>PDP + PBAC (purpose-based policy evaluation)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Delegation Misuse and Overscope Execution</Table.Td>
+            <Table.Td>Delegation metadata validation (PIP) + scoped policy (PDP)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Trigger Abuse and External API Expansion</Table.Td>
+            <Table.Td>Trigger source validation (PDP) + execution block for unmatching resource domain (PEP)</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Execution Path Obfuscation</Table.Td>
+            <Table.Td>Mandatory fields check (user ID, session ID, purpose) + logging</Table.Td>
+        </Table.Tr>
+        <Table.Tr>
+            <Table.Td>Prompt-to-Execution Abuse via LLM Output</Table.Td>
+            <Table.Td>LLM output keyword filter (PDP) + approval flag + purpose check (PDP)</Table.Td>
+        </Table.Tr>
+    </Table.Tbody>
+</Table>
+
+AgentSecOps works as a complementary layer to DevSecOps. While DevSecOps has evolved to include automated security controls across pre-, mid-, and post-deployment stages, it still lacks policy evaluation and intent-based access control at the execution request level. 
+
+In agent-driven autonomous execution environments, AgentSecOps fills these gaps by governing execution intent, delegation boundaries, trigger sources, and other runtime contextual factors that DevSecOps cannot capture alone. It closes the security blind spots of modern automation ecosystems[13].
+
+
+# 5. Strategic Recommendations: Designing and Implementing AgentSecOps
+
+AgentSecOps requires entirely new control points and policy evaluation criteria that differ fundamentally from traditional security frameworks. As such, implementing this architecture within an organization demands not only a sound design approach, but also a structured strategy encompassing policy design, execution flow integration, and audit logging[14].
+
+## 5.1 Architecture Strategies for Execution Flow Integration
+
+AgentSecOps operates by intervening at the point of agent-initiated execution to either allow or deny a given request. This requires inserting a policy evaluation layer between the agent and the target system—whether that’s an external API, SaaS platform, or internal service.
+
+* **Middleware-Based Architecture:** Inserts a policy validation layer prior to API invocation.
+* **Proxy-Based Architecture:** Routes all agent executions through an intermediary, such as an MCP (Model Context Protocol) proxy or API gateway.
+* **Webhook Wrapper Architecture:** Wraps event-based triggers (e.g., from GitHub, Slack, Jira) with pre- and post-execution policy checks.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/whitepapers/21/7-architecture-with-mcp-pam.png"
+        alt="[Figure 7] Architecture with MCP PAM"
+        caption="[Figure 7] Architecture with MCP PAM"
+    />
+</Box>
+
+These integration methods can often be deployed without modifying existing systems. In particular, API proxy-based enforcement is highly effective for SaaS interactions, enabling fine-grained security without interfering with the original service.
+
+In modern organizations, infrastructure is typically provisioned declaratively via tools like Terraform, CloudFormation, or Pulumi, especially in AWS-based environments. Even for human actors, such environments enforce structured release workflows that require explicit approval and traceability. Consequently, AI agents do not have direct access to manipulate cloud infrastructure resources—such actions are typically blocked or restricted.
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/whitepapers/21/8-iac-security-flow.png"
+        alt="[Figure 8] IaC Security Flow"
+        caption="[Figure 8] IaC Security Flow"
+    />
+</Box>
+
+However, LLM-powered agents are increasingly capable of generating IaC templates or triggering GitOps workflows upstream in the development process. In some experimental implementations, agents are already being used to automate parts of these IaC-driven workflows. If this trend continues without proper security policies in place, it becomes nearly impossible to attribute responsibility for resource creation or access allocation. 
+
+This is precisely why a policy enforcement layer must be integrated before execution begins—to ensure that agents cannot bypass infrastructure governance.
+
+
+## 5.2 Policy Composition and Audit Strategy
+
+Execution requests should not be treated as simple API calls—they must be evaluated as compound conditions encompassing the actor, purpose, timing, and context. Accordingly, policy structures in AgentSecOps should be organized into a three-tier model:
+
+* **Subject Identification (Who):** Who is making the request? (e.g., user_id, agent_id, group)
+* **Purpose Declaration (Why):** What is the explicit purpose of the request? (e.g., aws.ec2.start)
+* **Contextual Conditions (When/Where):** Request timestamp, geographic location, approval history, session linkage, etc. 
+
+<br />
+**Example: Policy for AWS EC2 Instance Start Request**
+```rego
+# Set default policy to deny
+default allow = false
+
+# Define allow conditions
+allow {
+    
+    # Purpose of execution must be EC2 instance startup
+    input.purpose == "aws.ec2.start"
+    
+    # User role must be 'ai_provisioner' (dedicated role for AI-based provisioning)
+    input.user.role == "ai_provisioner"
+    
+    # Resource type must be an EC2 instance
+    input.resource.type == "aws.ec2.instance"
+    
+    # Request must occur between 9:00 AM and 6:00 PM
+    input.context.time_hour >= 9
+    input.context.time_hour < 18
+}
+```
+
+Through such context-rich policy evaluation, AgentSecOps ensures that actions are not only authorized, but also timely, appropriate, and attributable. This approach strengthens security governance in environments where AI agents act semi-autonomously[15].
+
+
+## 5.3 Execution Logging and Audit Architecture
+
+AgentSecOps is not only responsible for allowing or denying executions based on policy decisions—it must also accurately record the context in which each execution occurred. In AI-driven environments where agents operate with delegated authority, simple pass/fail results are insufficient for accountability. Therefore, all contextual data and policy evaluation outcomes must be recorded at the session level.
+
+The foundation of such auditability does not begin with the PDP (Policy Decision Point) itself, but rather with the PIP (Policy Information Point), which provides the contextual data that feeds into each policy decision. The PIP gathers information either embedded in the execution request or collected from external systems—this includes user details, session metadata, resource attributes, declared purpose, trigger source, and temporal or geographic context. All of this is used both during evaluation and for subsequent session-based audit logging.
+
+<br />
+**Example: Execution Context Provided by the PIP (JSON)**
+
+```json
+{
+    "user": {
+        "id": "user_1024",               // Unique identifier of the request initiator
+        "role": "ai_assistant"           // Role info, e.g., AI-based agent
+    },
+    "session": {
+        "id": "sess-abc-789",            // Unique execution session ID
+        "start_time": "2024-06-01T14:12:30Z",
+        "ip": "192.168.10.14"            // Source IP of the request
+    },
+    "resource": {
+        "id": "doc-456",                 // Target resource ID
+        "type": "gdrive.document",       // Resource type (e.g., Google Drive document)
+        "tag": "confidential"            // Sensitivity tag
+    },
+    "purpose": "summary",              // Execution intent (e.g., document summarization)
+    "trigger": {
+        "source": "google_workspace",    // Origin of the trigger
+        "method": "voice_command"        // How the execution was triggered
+    },
+    "context": {
+        "location": "KR",                // Geographic location
+        "weekday": "Monday",             // Day of week
+        "time_hour": 14                  // Time of day (24-hour format)
+    }
+}
+```
+
+This information not only forms the basis for policy evaluation conditions, but must also be recorded as part of the session-level audit logs.
+
+<br />
+**Example: Rego Policy Using PIP-Sourced Context (Annotated)**
+
+```rego
+default allow = false
+# Deny all executions unless explicitly allowed by policy.
+allow {
+    input.user.role == "ai_assistant"
+    # Requestor must have the 'ai_assistant' role.
+    
+    input.resource.type == "gdrive.document"
+    # Target resource must be a Google Drive document.
+  
+    input.resource.tag != "confidential"
+    # Reject requests targeting confidential documents.
+  
+    input.purpose == "summary"
+    # Purpose must be explicitly stated as 'summary'.
+  
+    input.session.id
+    input.trigger.source == "google_workspace"
+    # Must include session ID and originate from Google Workspace.
+  
+    input.context.time_hour >= 9
+    input.context.time_hour < 18
+    # Execution must occur during business hours (9 AM – 6 PM).
+}
+```
+
+<br />
+**Example: Session-Based Audit Log Schema (JSON)**
+
+```json
+{
+    "session_id": "sess-abc-789",           // Unique session ID for the execution
+    "timestamp": "2024-06-01T14:12:32Z",    // Exact time of execution
+    "user": {
+        "id": "user_1024",                    // ID of the requestor
+        "role": "ai_assistant"               // Role of the actor
+    },
+    "resource": {
+        "id": "doc-456",                      // Target resource ID
+        "type": "gdrive.document"             // Type of the resource
+    },
+    "purpose": "summary",                   // Declared execution purpose
+    "trigger": {
+        "source": "google_workspace",         // Source system of the trigger
+        "method": "voice_command"             // Trigger method (e.g., voice)
+    },
+    "policy_evaluation": {
+        "policy_id": "gdrive-doc-summary-policy-v2", // Identifier of the evaluated policy
+        "result": "deny",                    // Evaluation result (allow or deny)
+        "reason": "resource.tag == confidential" // Reason for denial
+    },
+    "execution": {
+        "status": "blocked",                 // Final execution outcome
+        "executor": "MCP(Model Context Protocol)-agent-pam-01"       // MCP-PAM instance that enforced the policy
+    }
+}
+```
+
+This type of logging structure makes it possible to verify that policy evaluation results are consistent with execution behavior. It enables post-incident analysis of bypass attempts, missing approval flows, or excessive executions.
+For AgentSecOps to ensure execution-layer security and traceability, the policy decision phase and logging phase must be tightly integrated. The PIP functions as the Policy Context Broker that enables this integration by injecting real-time context into both decision logic and audit trails.
+
+
+## 5.4 Operational Limitations and Commercialization Strategy
+
+While AgentSecOps presents a highly sophisticated execution control model, most organizations face practical limitations in designing and operating such architecture independently. As a result, AgentSecOps cannot be enforced effectively through design principles alone—it requires a commercialized policy execution layer for real-world implementation.
+
+First, the Policy Decision Point (PDP) must evaluate the actor, resource, purpose, timing, and approval status of each execution request in real time. To support this, it requires complex policy template design, version management, conflict resolution, and a high-availability architecture.
+
+The Policy Enforcement Point (PEP) must operate upstream or inline within the API call flow, and must be capable of integrating with dozens of SaaS tools or cloud APIs. Embedding PEPs directly into each individual system introduces challenges such as authentication handling, interface conflicts, and network configuration changes.
+
+The Policy Information Point (PIP) must collect and normalize a wide range of unstructured data—such as user roles, authentication status, session metadata, and request triggers—for use in policy evaluation. This level of integration is difficult to achieve without a centralized logging system or a dedicated policy context broker.
+
+Given these constraints, AgentSecOps is more realistically implemented through a dedicated control platform. A prime example is QueryPie’s MCP (Model Context Protocol) Agent PAM, which integrates execution-time policy evaluation (PDP), API proxy enforcement (PEP), and context collection (PIP) into a unified architecture—offering a control layer capable of governing agent-driven workflows across cloud and SaaS environments[16].
+
+The MCP (Model Context Protocol)-based PAM architecture complements traditional IAM and DevSecOps by enabling policy enforcement directly on execution behaviors—not just authentication. It also offers practical features essential for real-world use, including purpose tagging, managerial approval flow insertion, policy conflict detection, and exportable audit logs—all within a single unified platform.
+
+Ultimately, while AgentSecOps presents a highly refined theoretical model, its practical adoption and operation within enterprise environments is nearly impossible without support from commercial platforms like MCP (Model Context Protocol) PAM. As such, security architects must go beyond technical principles and establish integration strategies that align with production-ready execution control platforms[17].
+
+
+# 6. Conclusion and Recommendations
+
+This white paper has analyzed the structural impact of AI agent-driven execution flows on traditional security models and proposed the AgentSecOps architecture as an execution-centric security framework designed to address these emerging threats. It highlighted the limitations of both DevSecOps and AgentOps, the implications of non-human actors as execution agents, and the growing need for real-time policy evaluation in agent-driven workflows.
+
+AgentSecOps is not just a protective layer for automation. It is a purpose-, time-, resource-, and permission-aware control mechanism that enforces and records security policies at the moment of execution. Unlike DevSecOps, which focuses on pre-release, code-centric security, AgentSecOps introduces a new enforcement model—one that enables policy-based blocking, approval flow insertion, and context-aware auditability[18].
+
+This challenge becomes even more complex in agent-to-agent environments, where execution chains are distributed across multiple autonomous agents. In such workflows, each agent handoff must include separate policy evaluation (PDP), enforcement (PEP), and context provision (PIP). The results from these distributed control points must be aggregated into a centralized execution analysis system.
+
+The following diagram illustrates this architecture visually:
+
+<br />
+<Box center>
+    <ArticleFileImage
+        filepath="public/whitepapers/21/9-distributed-agent-execution-and-centralized-policy-analysis.png"
+        alt="[Figure 9] Distributed Agent Execution and Centralized Policy Analysis"
+        caption="[Figure 9] Distributed Agent Execution and Centralized Policy Analysis"
+    />
+</Box>
+
+Although technically feasible, applying PDP/PEP/PIP logic individually to each agent in a large-scale AgentOps environment becomes operationally overwhelming. Managing dozens of independent agent flows, authoring policies for each, and aggregating the results for centralized analysis is not realistically sustainable for internal teams.
+
+To be practically viable, AgentSecOps must be implemented through an execution security platform—specifically, an MCP (Model Context Protocol)-based PAM solution. This is not merely a feature set, but a strategic infrastructure requirement. QueryPie’s MCP Agent PAM delivers this capability by embedding policy evaluation into the execution flow, integrating approvals, and enabling centralized visibility and analytics of agent behavior[19].
+
+AgentSecOps should be adopted—through MCP PAM—especially in the following environments:
+
+<br />
+        <InfoNote hideIcon>
+        * LLM-driven agents connected to external SaaS tools like Slack, GitHub, Notion, AWS, GCP, or HR systems
+        * Automation frameworks where agents generate IaC templates and trigger GitOps-based deployments
+        * Regulated industries (e.g., finance, healthcare, government) requiring audit and approval trails for executions
+        * Multi-workflow environments where agents execute complex, multi-step delegated tasks
+        </InfoNote>
+
+<br />
+AgentSecOps presents a policy enforcement model focused directly on execution behavior—a critical shift in security architecture for AI-driven operations. Organizations should not treat it as a fleeting trend, but as a structural transformation of the security operating model. To prepare for this shift, enterprises must develop both an execution policy design culture and a strategy for integrating control platforms capable of enforcing policies across increasingly autonomous agent systems.
+
+<br />
+<br />
+
+<ButtonLink href="https://app.querypie.com" variant="black" size="lg">🚀 Get a glimpse of tomorrow’s secure MCP operations — start with AI Hub.</ButtonLink>
+
+## References
+
+[1] [I. Belcic, “What is AutoGPT?,” IBM, 2023.](https://www.ibm.com/think/topics/autogpt)
+
+[2] [GitHub Docs, “Webhooks,” GitHub Developer Guide, 2023.](https://docs.github.com/en/webhooks)
+
+[3] [I. Belcic, “What is AutoGPT?,” IBM, 2023.](https://www.ibm.com/think/topics/autogpt)
+
+[4] [GitHub Docs, “Webhooks,” GitHub Developer Guide, 2023.](https://docs.github.com/en/webhooks)
+
+[5] [Anthropic, “Responsible AI Agents and Oversight,” Anthropic Research, 2024.](https://www.anthropic.com/research/building-effective-agents)
+
+[6] [Google Cloud, “Introducing the DevSecOps Toolkit,” Google Cloud Blog, 2023.](https://cloud.google.com/blog/products/networking/introducing-the-devsecops-toolkit?hl=en)
+
+[7] [HashiCorp Docs, “Govern: Enforce policy controls before provisioning,” Terraform by HashiCorp, 2024.](https://developer.hashicorp.com/terraform/intro/phases/govern)
+
+[8] [Amazon Web Services, “Cedar – An Open Source Language for Access Control,” AWS News Blog, May 2023.](https://aws.amazon.com/about-aws/whats-new/2023/05/cedar-open-source-language-access-control/?nc1=h_ls)
+
+[9] T. Priebe et al., “Supporting Attribute-based Access Control in Authorization and Authentication Infrastructures with SAML,” in Proc. IFIP TC11 WG11.5, 2004.
+
+[10] [T. Moses, “XACML 3.0 Core Specification,” OASIS Standard, 2017.](http://docs.oasis-open.org/xacml/3.0/xacml-3.0-core-spec-os-en.html)
+
+[11] [Open Policy Agent, “Rego Language Guide,” OPA Official Documentation, 2023.](https://www.openpolicyagent.org/docs/latest/policy-language/)
+
+[12] S. Rizvi and A. Ghafoor, “A Purpose-Based Access Control Model for Privacy Protection,” Computer Networks, vol. 43, no. 1, pp. 593–611, 2005.
+
+[13] [Kyverno Project, “Policy Engine for Kubernetes,” Kyverno Documentation, 2023.](https://kyverno.io/docs/)
+
+[14] [OWASP, “Top 10 for LLM Applications,” OWASP Foundation, 2023.](https://owasp.org/www-project-top-10-for-large-language-model-applications/)
+
+[15] [GitLab Docs, “CI/CD Security Patterns,” GitLab Documentation, 2023.](https://docs.gitlab.com/ee/topics/autodevops/)
+
+[16] [Microsoft, “AI Trust and Risk Framework,” Microsoft Responsible AI Practices, 2024.](https://www.microsoft.com/en-us/ai/responsible-ai)
+
+[17] [AWS, “Using IAM Policies to Control Access,” AWS Identity and Access Management User Guide, 2023.](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)
+
+[18] [QueryPie, “Uncovering MCP Security,” QueryPie White Paper, 2025.](https://www.querypie.com/whitepapers/18/uncovering-mcp-security)
+
+[19] [QueryPie, “Redefining PAM for the MCP Era,” QueryPie White Paper, 2025.](https://www.querypie.com/whitepapers/15/redefining-pam-for-the-mcp-era)
+
+[20] D. Kozen and J. Millen, “Policy Composition in Access Control,” IEEE Security & Privacy, vol. 14, no. 3, pp. 36–43, 2016.
+
+[21] [QueryPie, “Next-Step MCP PAM Architecture,” QueryPie Resource Center, 2025.](https://www.querypie.com/whitepapers/16/next-step-mcp-pam)

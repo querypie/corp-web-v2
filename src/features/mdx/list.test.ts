@@ -111,7 +111,7 @@ describe("loadMdxListItems", () => {
         category: "whitepaper",
         date: "2024-03-10",
         description: "White paper",
-        ogImage: "public/white-papers/2/thumbnail.png",
+        ogImage: "public/whitepapers/2/thumbnail.png",
         slug: "white-paper-custom-slug",
         title: "Only item",
       },
@@ -121,9 +121,9 @@ describe("loadMdxListItems", () => {
 
     expect(items).toHaveLength(1);
     expect(items[0]).toMatchObject({
-      href: "/white-papers/2/white-paper-custom-slug",
+      href: "/whitepapers/2/white-paper-custom-slug",
       id: "2",
-      imageSrc: "/white-papers/2/thumbnail.png",
+      imageSrc: "/whitepapers/2/thumbnail.png",
       title: "Only item",
     });
   });
