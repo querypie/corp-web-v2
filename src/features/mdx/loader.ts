@@ -6,7 +6,7 @@ import type { MdxCategory } from "./types";
 const MDX_ROOT = path.join(process.cwd(), "src", "content", "mdx");
 
 function getMdxCategoryDirectory(category: MdxCategory) {
-  return category === "white-paper" ? "white-papers" : category;
+  return category === "white-paper" ? "whitepapers" : category;
 }
 
 export async function loadMdxSource(

@@ -23,7 +23,7 @@ describe("mdx detail routes", () => {
         "nextjs-server-action-and-frontend-security",
         "Next.js Server Action and Frontend Security",
       ),
-    ).toBe("/ko/white-papers/1/nextjs-server-action-and-frontend-security");
+    ).toBe("/ko/whitepapers/1/nextjs-server-action-and-frontend-security");
   });
 
   it("frontmatter slug가 없으면 title 기반 slug를 fallback으로 사용한다", () => {
@@ -50,7 +50,7 @@ describe("mdx detail routes", () => {
         "Hello World",
       ),
     ).toMatchObject({
-      canonicalHref: "/ja/white-papers/1/nextjs-server-action-and-frontend-security",
+      canonicalHref: "/ja/whitepapers/1/nextjs-server-action-and-frontend-security",
       shouldRedirect: true,
     });
   });

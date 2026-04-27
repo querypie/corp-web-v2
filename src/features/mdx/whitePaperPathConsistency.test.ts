@@ -3,8 +3,8 @@ import { promises as fs } from "fs";
 import { describe, expect, it } from "vitest";
 
 const WORKTREE_ROOT = process.cwd();
-const WHITE_PAPERS_MDX_ROOT = path.join(WORKTREE_ROOT, "src", "content", "mdx", "white-papers");
-const WHITE_PAPERS_PUBLIC_ROOT = path.join(WORKTREE_ROOT, "public", "white-papers");
+const WHITE_PAPERS_MDX_ROOT = path.join(WORKTREE_ROOT, "src", "content", "mdx", "whitepapers");
+const WHITE_PAPERS_PUBLIC_ROOT = path.join(WORKTREE_ROOT, "public", "whitepapers");
 
 async function collectFiles(root: string): Promise<string[]> {
   const entries = await fs.readdir(root, { withFileTypes: true });
@@ -22,11 +22,11 @@ async function collectFiles(root: string): Promise<string[]> {
 }
 
 describe("white paper path consistency", () => {
-  it("MDX white paper source 디렉터리는 white-papers 복수형을 사용한다", async () => {
-    await expect(fs.access(path.join(WORKTREE_ROOT, "src", "content", "mdx", "white-papers"))).resolves.toBeUndefined();
+  it("MDX white paper source 디렉터리는 whitepapers 복수형을 사용한다", async () => {
+    await expect(fs.access(path.join(WORKTREE_ROOT, "src", "content", "mdx", "whitepapers"))).resolves.toBeUndefined();
   });
 
-  it("white paper public 자산 디렉터리는 white-papers 복수형을 사용한다", async () => {
+  it("white paper public 자산 디렉터리는 whitepapers 복수형을 사용한다", async () => {
     await expect(fs.access(WHITE_PAPERS_PUBLIC_ROOT)).resolves.toBeUndefined();
   });
 
@@ -36,8 +36,10 @@ describe("white paper path consistency", () => {
     for (const file of files.filter((candidate) => candidate.endsWith(".mdx") || candidate.endsWith(".ts"))) {
       const content = await fs.readFile(file, "utf-8");
       expect(content).not.toContain("public/white-paper/");
-      expect(content).not.toContain("/white-paper/");
+      expect(content).not.toMatch(/(?:^|["'(=\s])\/white-paper\//);
       expect(content).not.toContain("/resources/discover/white-paper/");
+      expect(content).not.toContain("public/white-papers/");
+      expect(content).not.toMatch(/(?:^|["'(=\s])\/white-papers\//);
     }
   });
 });

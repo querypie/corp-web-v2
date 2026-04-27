@@ -1,0 +1,75 @@
+---
+layout: "Article"
+category: "whitepaper"
+slug: "shell-native-command-control-ssh-proxy-architecture"
+title: "Shell Native Command Control through SSH Proxy Architecture"
+description: "Enhance system security with QueryPie's native command control through an advanced SSH proxy architecture."
+date: "2024-11-22"
+author: ["ryan", "kevin"]
+ogImage: "public/whitepapers/2/thumbnail.png"
+keywords: ["QueryPie", "SSH proxy architecture", "native command control", "system security", "secure operations"]
+relatedPosts:
+  - "/en/whitepapers/7"
+  - "/en/whitepapers/6"
+  - "/en/whitepapers/8"
+---
+
+# Introduction
+
+Server access control solutions are essential security mechanisms that protect servers, which are among a company’s most critical assets.
+The core of server access control solutions is to track and manage which users access which servers and execute which commands.
+Traditional server access control solutions buffer each character input by a user, just like a virtual terminal, until the user presses the Enter key, and then combine the inputted characters to form the command the user intends to execute.
+However, this approach not only requires significant development time and costs, but it also becomes extremely difficult to parse the exact command if the user inputs the command using shortcuts or various key combinations.
+To address this challenge and enhance command parsing accuracy, QueryPie has developed a technology for command auditing and control using shell scripts.
+
+
+# Issue to Solve
+
+<Box marginTopSize="xs" center>
+    <ArticleFileImage
+        filepath="public/whitepapers/2/1-issue-to-solve.png"
+        alt="Issue to Solve"
+    />
+</Box>
+<br />
+
+When an SSH session is established, data communication between the client and server occurs character by character as the user inputs commands.
+The format used for this communication is ANSI codes, which include various ANSI escape sequences employed for controlling the output format in terminals.
+Given that these sequences are part of the string stream, accurately parsing the user-entered command from this stream is as complex as creating a virtual terminal.
+As a result, most server access control solutions focus more on logging activities than on accurately parsing commands to block dangerous ones, which implies that vulnerabilities still exist in server security.
+
+In particular, when it comes to server commands, users can bypass them through shortcuts or aliases, for example.
+Even if a server access control solution specifies prohibited commands, the same commands can still be executed by embedding them within scripts.
+Common server access control methods, such as those in a man-in-the-middle (MITM) proxy server that combine user input to parse commands, cannot effectively defend against such bypass attacks.
+Therefore, to enhance security, control should be implemented at the server level, such as by installing an agent on the server and running a daemon to monitor processes, rather than relying on proxy-level control.
+
+
+
+# Objectives
+
+Installing something on the server to control commands in order to enhance security can lead to ambiguities between areas such as Endpoint Detection and Response (EDR) and might also cause performance degradation or other side effects, making SSH usage less convenient.
+To address this, QueryPie has focused on finding a way to implement command control at the server level without requiring the installation of agents on the server, thus maintaining security while avoiding the drawbacks associated with traditional agent-based solutions.
+
+# Solution Overview
+
+QueryPie employs script injection for sophisticated command detection, enabling it to identify the exact commands executed by users through logging and blocking.
+This technology allows QueryPie to accurately detect forbidden commands, aliased commands, and symbolic link-based commands embedded within scripts—issues that traditional methods could not identify.
+
+<br />
+<Youtube center src="https://www.youtube.com/embed/CoOT9SXTl_c?si=08DzQe2umIrvRaFW" />
+<br />
+
+# Conclusion
+
+Traditional server access control solutions typically relied on a proxy server that reassembled [SSH data messages](https://www.rfc-editor.org/rfc/rfc4254.html#section-5.2) intercepted through sniffing, reconstructing and controlling the commands entered by users. In contrast, QueryPie's solution captures and blocks commands executed through scripts on the target server, effectively eliminating the possibility of incorrect command parsing.
+
+By injecting QueryPie Scripts during SSH session establishment and using technology to communicate the blocked command information back to the QueryPie Proxy server, this solution can be expanded without the need to install agents, leveraging process monitoring daemons on the server.
+
+The user command monitoring daemon can be implemented using technologies such as:
+- LD_PRELOAD
+- ptrace
+- ebpf
+
+These extended features can be implemented incrementally to align with the organization’s security requirements and user convenience.
+QueryPie remains committed to continuously discovering and developing new security features that meet customer needs, becoming a trusted partner in creating a more secure system environment.
+If you need assistance or would like to explore potential collaboration, feel free to reach out at any time.

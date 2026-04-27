@@ -3,7 +3,7 @@ import { slugifyTitle } from "@/features/content/data";
 import type { MdxListCategory } from "./types";
 
 function getMdxDetailBasePath(category: MdxListCategory) {
-  return category === "blog" ? "/blog" : "/white-papers";
+  return category === "blog" ? "/blog" : "/whitepapers";
 }
 
 export function getMdxDetailSlug(frontmatterSlug: string | undefined, title: string) {

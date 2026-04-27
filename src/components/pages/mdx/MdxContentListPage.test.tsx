@@ -34,7 +34,7 @@ describe("MdxContentListPage", () => {
         locale="en"
         menu={[
           { href: "/features/documentation", isActive: false, label: "All" },
-          { href: "/white-papers", isActive: false, label: "White Papers" },
+          { href: "/whitepapers", isActive: false, label: "White Papers" },
           { href: "/blog", isActive: true, label: "Blogs" },
         ]}
         nextHref="/blog?page=3"
@@ -51,7 +51,7 @@ describe("MdxContentListPage", () => {
     );
     expect(screen.getByRole("link", { name: "White Papers" })).toHaveAttribute(
       "href",
-      "/white-papers",
+      "/whitepapers",
     );
     expect(screen.getByRole("link", { name: "Blogs" })).toHaveAttribute("href", "/blog");
     expect(screen.getByRole("link", { name: /Post 1/ })).toHaveAttribute("href", "/blog/1");
