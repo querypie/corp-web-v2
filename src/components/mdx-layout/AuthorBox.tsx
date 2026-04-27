@@ -1,5 +1,5 @@
 import type { Locale } from "@/constants/i18n";
-import { getAuthorIntroHeading, type ResolvedArticleAuthor } from "@/features/mdx/authors";
+import { type ResolvedArticleAuthor } from "@/features/mdx/authors";
 
 type Props = {
   authors: ResolvedArticleAuthor[];
@@ -16,14 +16,13 @@ export default function AuthorBox({ authors, locale }: Props) {
   }
 
   return (
-    <section className="flex flex-col gap-5 rounded-box bg-bg-content px-6 py-6 md:px-8" aria-label={getAuthorIntroHeading(locale)}>
-      <h2 className="m-0 type-h3 text-fg">{getAuthorIntroHeading(locale)}</h2>
+    <section aria-label={`${locale}-article-author-box`}>
       <ul className="m-0 flex list-none flex-col gap-5 p-0">
         {authors.map((author) => {
           const linkedInUrl = getLinkedInUrl(author);
 
           return (
-            <li key={author.id} className="flex flex-col gap-4 border-t border-border pt-5 first:border-t-0 first:pt-0">
+            <li key={author.id} className="flex flex-col gap-4 rounded-box bg-bg-content px-6 py-5 md:px-[30px]">
               <div className="flex items-center gap-4">
                 {author.profileImageSrc && (
                   <img

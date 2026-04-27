@@ -30,6 +30,7 @@ export default function WhitePaperLayout({ children, frontmatter, headings, loca
   const authors = resolveArticleAuthors(frontmatter.author, locale);
   const author = formatResolvedAuthorNames(authors);
   const displayableAuthors = getDisplayableArticleAuthors(authors);
+  const showAuthorBox = displayableAuthors.length > 0;
 
   return (
     <div className="flex w-full justify-center px-5 pb-10 md:px-10">
@@ -40,12 +41,14 @@ export default function WhitePaperLayout({ children, frontmatter, headings, loca
 
           {/* 본문 영역 */}
           <div className="flex w-full max-w-[680px] flex-col gap-14 md:justify-self-center md:gap-20">
-            {/* 헤더: 제목·날짜·저자 */}
+            {/* 헤더: 제목·저자·날짜 */}
             <div className="flex flex-col gap-[10px]">
               <h1 className="m-0 type-h1 leading-[42px] text-fg">{frontmatter.title}</h1>
-              {author && (
+              {showAuthorBox ? (
+                <AuthorBox authors={displayableAuthors} locale={locale} />
+              ) : author ? (
                 <div className="type-body-md text-fg">{author}</div>
-              )}
+              ) : null}
               {frontmatter.date && (
                 <p className="m-0 type-body-md text-mute-fg">
                   {formatDate(frontmatter.date, locale)}
@@ -66,8 +69,6 @@ export default function WhitePaperLayout({ children, frontmatter, headings, loca
 
             {/* MDX 본문 */}
             <div className={CONTENT_PREVIEW_RICH_CLASS}>{children}</div>
-
-            <AuthorBox authors={displayableAuthors} locale={locale} />
           </div>
 
           {/* 오른쪽 사이드바: TOC */}
