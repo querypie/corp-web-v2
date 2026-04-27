@@ -201,18 +201,6 @@ function getAdminCategoryConfigs(section: "demo" | "documentation") {
   return section === "demo" ? demoAdminCategoryConfigs : docsAdminCategoryConfigs;
 }
 
-function getDocumentationMdxCategoryHref(locale: Locale, slug: DocsCategorySlug) {
-  if (slug === "white-papers") {
-    return getLocalePath(locale, "/whitepapers");
-  }
-
-  if (slug === "blogs") {
-    return getLocalePath(locale, "/blog");
-  }
-
-  return null;
-}
-
 export function getCategoryLabel<TSlug extends string>(
   configs: CategoryConfig<TSlug>[],
   slug: TSlug,
@@ -251,43 +239,26 @@ export function getPublicMenuItems<TSlug extends string>(
   }));
 }
 
-const docsCmsCategorySlugs: DocsCategorySlug[] = ["all", "introduction", "glossary", "manuals"];
-const docsMdxCategorySlugs: DocsCategorySlug[] = ["white-papers", "blogs"];
+const docsSidebarCategorySlugs: DocsCategorySlug[] = [
+  "all",
+  "introduction",
+  "glossary",
+  "manuals",
+  "white-papers",
+  "blogs",
+];
 
 export function getDocumentationSidebarMenuItems(
   locale: Locale,
   activeSlug: DocsCategorySlug,
-  hrefOverrides: Partial<Record<DocsCategorySlug, string>> = {},
 ): PublicMenuItem<DocsCategorySlug>[] {
-  const defaultMdxHrefOverrides: Partial<Record<DocsCategorySlug, string>> = {
-    blogs: getDocumentationMdxCategoryHref(locale, "blogs") ?? undefined,
-    "white-papers": getDocumentationMdxCategoryHref(locale, "white-papers") ?? undefined,
-  };
-
-  const resolvedHrefOverrides = {
-    ...defaultMdxHrefOverrides,
-    ...hrefOverrides,
-  };
-
   const linkItemsBySlug = new Map(
-    getPublicMenuItems(docsCategoryConfigs, locale, activeSlug).map((item) => [
-      item.slug,
-      {
-        ...item,
-        href: resolvedHrefOverrides[item.slug] ?? item.href,
-      },
-    ]),
+    getPublicMenuItems(docsCategoryConfigs, locale, activeSlug).map((item) => [item.slug, item]),
   );
 
   return [
     { kind: "section", label: "CMS" },
-    ...docsCmsCategorySlugs.flatMap((slug) => {
-      const item = linkItemsBySlug.get(slug);
-      return item ? [item] : [];
-    }),
-    { kind: "divider" },
-    { kind: "section", label: "MDX" },
-    ...docsMdxCategorySlugs.flatMap((slug) => {
+    ...docsSidebarCategorySlugs.flatMap((slug) => {
       const item = linkItemsBySlug.get(slug);
       return item ? [item] : [];
     }),
