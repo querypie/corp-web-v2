@@ -32,10 +32,10 @@ describe("getPublicDemoListPageCopy", () => {
 describe("getPublicDemoMenuItems", () => {
   it("현재 category를 active로 표시한 public demo 메뉴를 반환한다", () => {
     expect(getPublicDemoMenuItems("en", "acp-features")).toEqual([
-      { href: "/demo/use-cases", isActive: false, label: "Use Cases" },
-      { href: "/demo/aip", isActive: false, label: "AIP Features" },
-      { href: "/demo/acp", isActive: true, label: "ACP Features" },
-      { href: "/webinars", isActive: false, label: "Webinars" },
+      { href: "/demo/use-cases", isActive: false, kind: "link", label: "Use Cases", slug: "use-cases" },
+      { href: "/demo/aip", isActive: false, kind: "link", label: "AIP Features", slug: "aip-features" },
+      { href: "/demo/acp", isActive: true, kind: "link", label: "ACP Features", slug: "acp-features" },
+      { href: "/webinars", isActive: false, kind: "link", label: "Webinars", slug: "webinars" },
     ]);
   });
 });

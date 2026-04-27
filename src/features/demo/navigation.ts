@@ -69,14 +69,19 @@ export function getPublicDemoListPageCopy(locale: Locale, category: PublicDemoLi
   return publicDemoListCopyByCategory[category][locale];
 }
 
-export function getPublicDemoMenuItems(locale: Locale, activeCategory: PublicDemoListCategory) {
+export function getPublicDemoMenuItems(
+  locale: Locale,
+  activeCategory: PublicDemoListCategory,
+): PublicMenuItem<DemoCategorySlug>[] {
   return publicDemoListCategories.map((category) => {
     const copy = getPublicDemoListPageCopy(locale, category);
 
     return {
       href: getPublicDemoListHref(locale, category),
       isActive: category === activeCategory,
+      kind: "link",
       label: copy.title,
+      slug: category,
     };
   });
 }
