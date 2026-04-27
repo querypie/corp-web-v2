@@ -5,7 +5,7 @@ vi.mock("server-only", () => ({}));
 import WhitePaperLayout from "./WhitePaperLayout";
 
 describe("WhitePaperLayout", () => {
-  it("등록된 author의 locale 소개 박스를 함께 렌더링한다", async () => {
+  it("등록된 author 카드를 제목 바로 아래에 렌더링한다", async () => {
     const element = await WhitePaperLayout({
       children: <p>본문</p>,
       frontmatter: {
@@ -21,8 +21,13 @@ describe("WhitePaperLayout", () => {
 
     render(element);
 
-    expect(screen.getAllByText("Brant Hwang")).toHaveLength(2);
-    expect(screen.getByText("작성자 소개")).toBeInTheDocument();
+    const title = screen.getByRole("heading", { level: 1, name: "Korean White Paper" });
+    const articleAuthorBox = screen.getByLabelText("ko-article-author-box");
+    const date = screen.getByText("2026년 1월 1일");
+
+    expect(screen.getByText("Brant Hwang")).toBeInTheDocument();
     expect(screen.getByText(/브랜트는 QueryPie의 창립자이자 CEO/)).toBeInTheDocument();
+    expect(title.compareDocumentPosition(articleAuthorBox) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(articleAuthorBox.compareDocumentPosition(date) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });

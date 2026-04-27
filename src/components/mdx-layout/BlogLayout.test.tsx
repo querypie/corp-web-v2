@@ -5,7 +5,7 @@ vi.mock("server-only", () => ({}));
 import BlogLayout from "./BlogLayout";
 
 describe("BlogLayout", () => {
-  it("등록된 author의 locale 이름과 소개 박스를 렌더링한다", async () => {
+  it("등록된 author 카드를 제목 바로 아래에 렌더링한다", async () => {
     const element = await BlogLayout({
       children: <p>본문</p>,
       frontmatter: {
@@ -19,26 +19,26 @@ describe("BlogLayout", () => {
       locale: "ja",
     });
 
-    const { container } = render(element);
+    render(element);
 
-    expect(screen.getByRole("heading", { level: 1, name: "Japanese Author Post" })).toBeInTheDocument();
-    expect(screen.getAllByText("寺澤慎祐")).toHaveLength(2);
-    expect(screen.getByText("著者紹介")).toBeInTheDocument();
+    const title = screen.getByRole("heading", { level: 1, name: "Japanese Author Post" });
+    const authorImage = screen.getByAltText("寺澤慎祐");
+    const articleAuthorBox = screen.getByLabelText("ja-article-author-box");
+    const date = screen.getByText("2026年1月1日");
+
+    expect(authorImage).toHaveAttribute("src", "/crew/terazawa.jpg");
     expect(screen.getByText("マーケティングコンサルタント")).toBeInTheDocument();
     expect(screen.getByText(/出現する未来/)).toBeInTheDocument();
-
-    const profileImage = screen.getByAltText("寺澤慎祐");
-    expect(profileImage).toHaveAttribute("src", "/crew/terazawa.jpg");
+    expect(title.compareDocumentPosition(articleAuthorBox) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(articleAuthorBox.compareDocumentPosition(date) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
 
     const linkedInLink = screen.getByRole("link", { name: /LinkedIn/i });
     expect(linkedInLink).toHaveAttribute("href", "https://www.linkedin.com/in/terazawa/");
     expect(linkedInLink).toHaveAttribute("target", "_blank");
     expect(linkedInLink).toHaveAttribute("rel", expect.stringContaining("noopener"));
-
-    expect(container.textContent).toContain("寺澤慎祐");
   });
 
-  it("등록 여부와 무관하게 author가 있으면 소개 박스에 포함하고 헤더는 locale 이름 순서를 유지한다", async () => {
+  it("등록 여부와 무관하게 author가 있으면 제목 아래 카드 순서를 유지한다", async () => {
     const element = await BlogLayout({
       children: <p>본문</p>,
       frontmatter: {
@@ -54,14 +54,14 @@ describe("BlogLayout", () => {
 
     render(element);
 
-    expect(screen.getByText("Brant Hwang, Jessica Kim, Ravi Kang")).toBeInTheDocument();
-    expect(screen.getByText("About the author")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: "Mixed Authors Post" })).toBeInTheDocument();
+    expect(screen.getByLabelText("en-article-author-box")).toBeInTheDocument();
     expect(screen.getByRole("img", { name: "Brant Hwang" })).toBeInTheDocument();
     expect(screen.getByRole("img", { name: "Ravi Kang" })).toBeInTheDocument();
     expect(screen.getByText("Jessica Kim")).toBeInTheDocument();
   });
 
-  it("등록되지 않은 author만 있어도 소개 박스를 렌더링한다", async () => {
+  it("등록되지 않은 author만 있어도 제목 아래에 author 카드를 렌더링한다", async () => {
     const element = await BlogLayout({
       children: <p>본문</p>,
       frontmatter: {
@@ -77,7 +77,10 @@ describe("BlogLayout", () => {
 
     render(element);
 
-    expect(screen.getAllByText("Jessica Kim")).toHaveLength(2);
-    expect(screen.getByText("About the author")).toBeInTheDocument();
+    const title = screen.getByRole("heading", { level: 1, name: "Guest Post" });
+    const articleAuthorBox = screen.getByLabelText("en-article-author-box");
+
+    expect(screen.getByText("Jessica Kim")).toBeInTheDocument();
+    expect(title.compareDocumentPosition(articleAuthorBox) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 });
