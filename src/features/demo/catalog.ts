@@ -1510,9 +1510,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "ISMS悪夢をご覧になっていますか？ 認証を受けるためにぐるぐる回っているなら、ここAWSウェビナーの核心整理内容を確認してみてください！"
     },
     "imageSrc": {
-      "en": "/demo/webinar/1/wb-thumb-1.png",
-      "ko": "/demo/webinar/1/wb-thumb-1.png",
-      "ja": "/demo/webinar/1/wb-thumb-1.png"
+      "en": "/demo/webinars/1/thumbnail.png",
+      "ko": "/demo/webinars/1/thumbnail.png",
+      "ja": "/demo/webinars/1/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1538,9 +1538,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "技術が高度化するにつれて、ハッカーの攻撃方法もまた精巧になり、複雑になっています。このような状況の中で、新しいセキュリティ標準を設けるために、Okta、Palo Alto Networks、そしてQueryPieが力を合わせてOPQアライアンスを結成しました。"
     },
     "imageSrc": {
-      "en": "/demo/webinar/2/wb-thumb-2.png",
-      "ko": "/demo/webinar/2/wb-thumb-2.png",
-      "ja": "/demo/webinar/2/wb-thumb-2.png"
+      "en": "/demo/webinars/2/thumbnail.png",
+      "ko": "/demo/webinars/2/thumbnail.png",
+      "ja": "/demo/webinars/2/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1566,9 +1566,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "Iこのウェビナーでは、QueryPieのセキュリティ専門家であるBrant Hwang(CEO)とKenny Park(CISO)がApple機器のセキュリティ強化方法とKandjiの強力で特化されたツールを活用して管理者とユーザーの両方に直観的で簡素化された経験を提供する方法について議論します。"
     },
     "imageSrc": {
-      "en": "/demo/webinar/3/wb-thumb-3.png",
-      "ko": "/demo/webinar/3/wb-thumb-3.png",
-      "ja": "/demo/webinar/3/wb-thumb-3.png"
+      "en": "/demo/webinars/3/thumbnail.png",
+      "ko": "/demo/webinars/3/thumbnail.png",
+      "ja": "/demo/webinars/3/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1594,9 +1594,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "韓国最高のHRプラットフォームであるFlexがQueryPieをシステムに導入した後に発見した驚くべき事実を公開します。 果たしてFlexチームを魅了し、業務方式を革新的に変化させたQueryPieの隠された魔法は何でしょうか？"
     },
     "imageSrc": {
-      "en": "/demo/webinar/4/wb-thumb-4.png",
-      "ko": "/demo/webinar/4/wb-thumb-4.png",
-      "ja": "/demo/webinar/4/wb-thumb-4.png"
+      "en": "/demo/webinars/4/thumbnail.png",
+      "ko": "/demo/webinars/4/thumbnail.png",
+      "ja": "/demo/webinars/4/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1622,9 +1622,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "QueryPieがPrismaアクセスを選択した理由？ QueryPieがPrisma Accessをセキュリティニーズのための最終的な選択肢として特定した方法の詳細をご覧ください。"
     },
     "imageSrc": {
-      "en": "/demo/webinar/5/wb-thumb-5.png",
-      "ko": "/demo/webinar/5/wb-thumb-5.png",
-      "ja": "/demo/webinar/5/wb-thumb-5.png"
+      "en": "/demo/webinars/5/thumbnail.png",
+      "ko": "/demo/webinars/5/thumbnail.png",
+      "ja": "/demo/webinars/5/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1647,8 +1647,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ko": "쿼리파이에 대해 알고 싶고 궁금한 것이 많은 분들을 위해 준비하였습니다. DB접근제어, 시스템 접근제어, 쿠버네티스 접근제어, 웹 어플리케이션 접근제어, 그리고 데이터 디스커버리에 이르기까지....클라우드와 온프레미스에서 기업의 인프라를 아우르는 접근제어와 감사 솔루션을 아우르는 쿼리파이의 핵심만 쏙쏙 뽑았습니다."
     },
     "imageSrc": {
-      "en": "/demo/webinar/6/3dk-intro-ko.png",
-      "ko": "/demo/webinar/6/3dk-intro-ko.png"
+      "en": "/demo/webinars/6/thumbnail.png",
+      "ko": "/demo/webinars/6/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1671,8 +1671,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ko": "쿼리파이 제품에는 어떤 기능들이 있고 해당 기능들은 각기 어떤 역할을 하는지 궁금하시죠? Ep. 1에서는 고객을 대변하여 쿼리파이 제품의 주요 기능들에 대해 파헤쳐 보았습니다."
     },
     "imageSrc": {
-      "en": "/demo/webinar/7/3dk-ep1-ko.png",
-      "ko": "/demo/webinar/7/3dk-ep1-ko.png"
+      "en": "/demo/webinars/7/thumbnail.png",
+      "ko": "/demo/webinars/7/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1695,8 +1695,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "QueryPieにはどんな機能があり、それらの機能はそれぞれどんな役割を果たすのか気になりますよね？エピソード1では、お客様に代わってQueryPie製品の主要な機能について探ってみました。"
     },
     "imageSrc": {
-      "en": "/demo/webinar/8/3dk-ep1-ja.png",
-      "ja": "/demo/webinar/8/3dk-ep1-ja.png"
+      "en": "/demo/webinars/8/thumbnail.png",
+      "ja": "/demo/webinars/8/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1719,8 +1719,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ko": "축적된 민감정보에 대해 보안은 강화하고, 접근 제어와 관리를 편리하게 하여 보안 안정성을 확보할 수 있도록 쿼리파이의 DB접근제어(쿼리파이 DAC)가 중추적 역할을 해 주고 있는데요,  멀티 클라우드 환경 속에서 방대한 민감정보와 데이터를 안정적으로 관리할 수 있는 방법에 대해 살펴보았습니다."
     },
     "imageSrc": {
-      "en": "/demo/webinar/9/3dk-ep2-ko.png",
-      "ko": "/demo/webinar/9/3dk-ep2-ko.png"
+      "en": "/demo/webinars/9/thumbnail.png",
+      "ko": "/demo/webinars/9/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1743,8 +1743,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。"
     },
     "imageSrc": {
-      "en": "/demo/webinar/10/3dk-ep2-ja.png",
-      "ja": "/demo/webinar/10/3dk-ep2-ja.png"
+      "en": "/demo/webinars/10/thumbnail.png",
+      "ja": "/demo/webinars/10/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1767,8 +1767,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ko": "3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다."
     },
     "imageSrc": {
-      "en": "/demo/webinar/11/3dk-ep3-ko.png",
-      "ko": "/demo/webinar/11/3dk-ep3-ko.png"
+      "en": "/demo/webinars/11/thumbnail.png",
+      "ko": "/demo/webinars/11/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1791,8 +1791,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。"
     },
     "imageSrc": {
-      "en": "/demo/webinar/12/3dk-ep3-ja.png",
-      "ja": "/demo/webinar/12/3dk-ep3-ja.png"
+      "en": "/demo/webinars/12/thumbnail.png",
+      "ja": "/demo/webinars/12/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1815,8 +1815,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ko": "4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다."
     },
     "imageSrc": {
-      "en": "/demo/webinar/13/3dk-ep4-ko.png",
-      "ko": "/demo/webinar/13/3dk-ep4-ko.png"
+      "en": "/demo/webinars/13/thumbnail.png",
+      "ko": "/demo/webinars/13/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1839,8 +1839,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "エピソード 4では、QueryPie のクーバネティスアクセス制御ソリューションである “QueryPie KAC (Kubernetes Access Controller)” を活用して、クーバネティス環境でも堅固なセキュリティ環境を維持する方法について掘り下げてみました。"
     },
     "imageSrc": {
-      "en": "/demo/webinar/14/3dk-ep4-ja.png",
-      "ja": "/demo/webinar/14/3dk-ep4-ja.png"
+      "en": "/demo/webinars/14/thumbnail.png",
+      "ja": "/demo/webinars/14/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -1863,8 +1863,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！"
     },
     "imageSrc": {
-      "en": "/demo/webinar/15/wb-thumb-15.png",
-      "ja": "/demo/webinar/15/wb-thumb-15.png"
+      "en": "/demo/webinars/15/thumbnail.png",
+      "ja": "/demo/webinars/15/thumbnail.png"
     },
     "date": "2024-12-05"
   },
@@ -1884,7 +1884,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "近年クラウド環境の普及に伴い、企業内部からの情報漏えいのリスクが高まっています。クラウドは簡単に構築が可能な性質上、リソース管理が煩雑になってしまうことが多いのが現状です。本ウェビナーでは、そうした企業が持つクラウドセキュリティの関する課題に対して効率的にアプローチする方法についてご紹介いたします！"
     },
     "imageSrc": {
-      "ja": "/demo/webinar/16/air-company-zerotrust.png"
+      "en": "/demo/webinars/16/thumbnail.png",
+      "ja": "/demo/webinars/16/thumbnail.png"
     },
     "date": "2025-05-15"
   },
@@ -1910,9 +1911,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "たった10分でMCPサーバーを構築する方法を、当日のライブコーディングでご紹介します。ライブコーディングは韓国語で実施されます。AIやMCPにご興味のある方は、ぜひこの機会をお見逃しなく！"
     },
     "imageSrc": {
-      "en": "/demo/webinar/17/findy-querypie-mcp-webinar.png",
-      "ko": "/demo/webinar/17/findy-querypie-mcp-webinar.png",
-      "ja": "/demo/webinar/17/findy-querypie-mcp-webinar.png"
+      "en": "/demo/webinars/17/thumbnail.png",
+      "ko": "/demo/webinars/17/thumbnail.png",
+      "ja": "/demo/webinars/17/thumbnail.png"
     },
     "date": "2025-05-19"
   },
@@ -1932,7 +1933,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "AIが世界を動かす時代が、いよいよ現実に。その中心にあるのが、革新的なプロトコル「MCP」です。従来の常識を覆し、AI活用を一気に加速させました。今こそ、AI時代の必須スキル「MCP」を、しっかり学んでみませんか？ 生成AI / MCPをフル活用し、自律型セキュリティ運用を実現する 「QueryPie Secure Enterprise AI Hub」の最新情報をお届けします。"
     },
     "imageSrc": {
-      "ja": "/demo/webinar/18/air-company-mcp.png"
+      "en": "/demo/webinars/18/thumbnail.png",
+      "ja": "/demo/webinars/18/thumbnail.png"
     },
     "date": "2025-06-05"
   },
@@ -1952,7 +1954,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "AIが世界を動かす時代が、いよいよ現実に。その中心にあるのが、革新的なプロトコル「MCP」です。従来の常識を覆し、AI活用を一気に加速させました。今こそ、AI時代の必須スキル「MCP」を、しっかり学んでみませんか？"
     },
     "imageSrc": {
-      "ja": "/demo/webinar/19/air-company-mcp2.png"
+      "en": "/demo/webinars/19/thumbnail.png",
+      "ja": "/demo/webinars/19/thumbnail.png"
     },
     "date": "2025-07-08"
   },
@@ -1972,7 +1975,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "「AIを活用したいけれど、何から始めればいいかわからない」「AIを導入したのに、思ったような成果が出ない」その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。なぜMCPが成果につながるのか、実際にどのように活用されているのか、活用事例をもとにわかりやすくご紹介します。AI活用の次の一手として、ぜひこの機会にご参加ください。"
     },
     "imageSrc": {
-      "ja": "/demo/webinar/20/air-company-mcp-20250925.png"
+      "en": "/demo/webinars/20/thumbnail.png",
+      "ja": "/demo/webinars/20/thumbnail.png"
     },
     "date": "2025-09-25"
   },
@@ -1992,7 +1996,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "AI活用は競争力の鍵。今や企業にとって避けて通れないテーマとなっています。​しかし「どの業務に取り入れればよいのか分からない」「人材やノウハウが足りない」「セキュリティやガバナンスが不安」といった理由から、導入が進まない企業も少なくありません。​本セミナーでは、こうした課題を整理し、実際にAIを業務へ取り込み成果を上げている実例を紹介します。​​"
     },
     "imageSrc": {
-      "ja": "/demo/webinar/21/air-company-ai-webinar20251023.png"
+      "en": "/demo/webinars/21/thumbnail.png",
+      "ja": "/demo/webinars/21/thumbnail.png"
     },
     "date": "2025-10-08"
   },
@@ -2012,7 +2017,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "「AIを活用したいけれど、何から始めればいいかわからない」「生成AIを導入したのに、思ったような成果が出ない」「ChatGPTやCopilot、Geminiを使いこなせていない」そんなふうに課題を感じている方は多いのではないでしょうか？その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。本ウェビナーでは、MCPを活用事例をもとに、なぜMCPが成果につながるのか、実際にどのように活用されているのかを具体的かつわかりやすくご紹介します。​​"
     },
     "imageSrc": {
-      "ja": "/demo/webinar/22/air-company-mcp-20251120.png"
+      "en": "/demo/webinars/22/thumbnail.png",
+      "ja": "/demo/webinars/22/thumbnail.png"
     },
     "date": "2025-11-10"
   },
@@ -2032,7 +2038,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "「AIで成果を出す」これは、多くの企業にとって新しい課題ではないでしょうか？他社より一歩抜け出す鍵となるのは、“AIエージェント”をいかに活用するかです。それには、AIエージェントが日常業務を自律的に実行できるような仕組みを、構築していく必要があります。本ウェビナーでは、構成図で全体像をわかりやすく解説。企業でも安心してAIを使えるセキュリティの実現策についてもご紹介します。​"
     },
     "imageSrc": {
-      "ja": "/demo/webinar/23/air-company-ai-webinar20251218.png"
+      "en": "/demo/webinars/23/thumbnail.png",
+      "ja": "/demo/webinars/23/thumbnail.png"
     },
     "date": "2025-12-1"
   },
@@ -2052,7 +2059,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "AIは今、驚異的なスピードで進化を続けています。しかし、その情報量の多さに圧倒され、「結局、何を押さえればいいのか分からない」「情報が散らばっていて追いきれない」と感じていませんか？本ウェビナーでは、AIに関する様々な情報を体系的に整理することにフォーカスし、押さえるべきAIの本質／情報収集先の候補／ビジネスや業務にどう活かすかの視点をまとめてお届けします。"
     },
     "imageSrc": {
-      "ja": "/demo/webinar/24/air-company-ai-webinar20260122.png"
+      "en": "/demo/webinars/24/thumbnail.png",
+      "ja": "/demo/webinars/24/thumbnail.png"
     },
     "date": "2026-1-15"
   },
@@ -2072,7 +2080,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。"
     },
     "imageSrc": {
-      "ja": "/demo/webinar/25/air-company-querypie-ai-usecase-webinar-20260219.png"
+      "en": "/demo/webinars/25/thumbnail.png",
+      "ja": "/demo/webinars/25/thumbnail.png"
     },
     "date": "2026-02-13"
   },
@@ -2092,7 +2101,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "好評につき、再放送決定！AIはどんどん便利になっていますが、大切なのは「どう活用するか」を具体的に見つけること。本ウェビナーでは、社内の試行錯誤から生まれたリアルなAI活用事例を、成功までの過程とともに30分でご紹介します。"
     },
     "imageSrc": {
-      "ja": "/demo/webinar/26/air-company-querypie-ai-usecase-webinar-20260319.png"
+      "en": "/demo/webinars/26/thumbnail.png",
+      "ja": "/demo/webinars/26/thumbnail.png"
     },
     "date": "2026-03-02"
   },
@@ -2112,7 +2122,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "AIエージェントの「暴走」や「権限悪用」を防ぐには？本ウェビナーでは、実際のインシデント事例を読み解きながら、AIエージェントに付与する権限をどう設計すれば安全に使い続けられるのかを解説します。安全性と実用性を両立する実践的なフレームワークをご紹介する、実務直結型の30分です。"
     },
     "imageSrc": {
-      "ja": "/demo/webinar/27/air-company-ai-agent-security-webinar-20260416.png"
+      "en": "/demo/webinars/27/thumbnail.png",
+      "ja": "/demo/webinars/27/thumbnail.png"
     },
     "date": "2026-04-09"
   }
