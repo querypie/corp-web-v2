@@ -1,8 +1,7 @@
 import DocsListPage from "./DocumentationListPage";
 import type { Locale } from "@/constants/i18n";
 import {
-  docsCategoryConfigs,
-  getPublicMenuItems,
+  getDocumentationSidebarMenuItems,
   type DocsCategorySlug,
 } from "@/features/content/config";
 
@@ -30,7 +29,7 @@ export default function DocsListClientPage({
     <DocsListPage
       items={fallbackItems}
       locale={locale}
-      menu={getPublicMenuItems(docsCategoryConfigs, locale, selectedCategory)}
+      menu={getDocumentationSidebarMenuItems(locale, { activeSlug: selectedCategory })}
       showCategory={selectedCategory === "all"}
       title={title}
     />

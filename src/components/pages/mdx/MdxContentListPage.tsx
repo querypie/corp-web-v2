@@ -1,4 +1,5 @@
 import type { Locale } from "@/constants/i18n";
+import type { PublicMenuItem } from "@/features/content/config";
 import ContentPreviewImage from "../../common/ContentPreviewImage";
 import PaginationNav from "../../common/PaginationNav";
 import Cta from "../../sections/Cta";
@@ -11,18 +12,12 @@ type MdxContentListItem = {
   title: string;
 };
 
-type MdxContentMenuItem = {
-  href?: string;
-  isActive: boolean;
-  label: string;
-};
-
 type MdxContentListPageProps = {
   currentPage: number;
   emptyMessage?: string;
   items: MdxContentListItem[];
   locale: Locale;
-  menu?: MdxContentMenuItem[];
+  menu?: PublicMenuItem[];
   nextHref?: string | null;
   previousHref?: string | null;
   title: string;
@@ -85,8 +80,20 @@ export default function MdxContentListPage({
 
               {menu?.length ? (
                 <nav className="flex w-full flex-row flex-wrap gap-[10px] type-body-md md:w-fit md:self-start md:flex-col">
-                  {menu.map((item) =>
-                    item.href ? (
+                  {menu.map((item, index) => {
+                    if (item.kind === "label") {
+                      return (
+                        <span key={`${item.label}-${index}`} className="whitespace-nowrap type-mono text-mute-fg">
+                          {item.label}
+                        </span>
+                      );
+                    }
+
+                    if (item.kind === "separator") {
+                      return <div key={`separator-${index}`} className="my-1 h-px w-full bg-line md:my-2" role="separator" />;
+                    }
+
+                    return (
                       <a
                         key={`${item.label}-${item.href}`}
                         className={cx(
@@ -97,18 +104,8 @@ export default function MdxContentListPage({
                       >
                         {item.label}
                       </a>
-                    ) : (
-                      <span
-                        key={item.label}
-                        className={cx(
-                          "whitespace-nowrap",
-                          item.isActive ? "text-fg" : "text-mute-fg",
-                        )}
-                      >
-                        {item.label}
-                      </span>
-                    ),
-                  )}
+                    );
+                  })}
                 </nav>
               ) : null}
             </div>

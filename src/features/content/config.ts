@@ -23,6 +23,28 @@ type CategoryConfig<TSlug extends string> = {
   slug: TSlug;
 };
 
+export type PublicMenuLinkItem<TSlug extends string = string> = {
+  href: string;
+  isActive: boolean;
+  kind: "link";
+  label: string;
+  slug: TSlug;
+};
+
+export type PublicMenuLabelItem = {
+  kind: "label";
+  label: string;
+};
+
+export type PublicMenuSeparatorItem = {
+  kind: "separator";
+};
+
+export type PublicMenuItem<TSlug extends string = string> =
+  | PublicMenuLabelItem
+  | PublicMenuLinkItem<TSlug>
+  | PublicMenuSeparatorItem;
+
 type AdminCategoryConfig<TSlug extends string> = {
   description: string;
   href: string;
@@ -211,9 +233,51 @@ export function getPublicMenuItems<TSlug extends string>(
   return configs.map((config) => ({
     href: config.href(locale),
     isActive: config.slug === activeSlug,
+    kind: "link" as const,
     label: config.label[locale],
     slug: config.slug,
   }));
+}
+
+export function getDocumentationSidebarMenuItems(
+  locale: Locale,
+  options: {
+    activeMdxSlug?: Extract<DocsCategorySlug, "white-papers" | "blogs">;
+    activeSlug?: DocsCategorySlug;
+  } = {},
+): PublicMenuItem<DocsCategorySlug>[] {
+  const cmsItems = getPublicMenuItems(
+    docsCategoryConfigs,
+    locale,
+    options.activeSlug ?? "all",
+  ).map((item) => ({
+    ...item,
+    isActive: options.activeSlug ? item.slug === options.activeSlug : false,
+  }));
+
+  const mdxItems = getPublicMenuItems(
+    docsCategoryConfigs.filter(
+      (config): config is CategoryConfig<Extract<DocsCategorySlug, "white-papers" | "blogs">> =>
+        config.slug === "white-papers" || config.slug === "blogs",
+    ),
+    locale,
+    options.activeMdxSlug ?? "white-papers",
+  ).map((item) => ({
+    ...item,
+    href:
+      item.slug === "white-papers"
+        ? getLocalePath(locale, "/whitepapers")
+        : getLocalePath(locale, "/blog"),
+    isActive: options.activeMdxSlug ? item.slug === options.activeMdxSlug : false,
+  }));
+
+  return [
+    { kind: "label", label: "CMS" },
+    ...cmsItems,
+    { kind: "separator" },
+    { kind: "label", label: "MDX" },
+    ...mdxItems,
+  ];
 }
 
 export function getAdminSectionMenuItems(section: "demo" | "documentation") {
