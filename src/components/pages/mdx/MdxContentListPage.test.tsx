@@ -33,9 +33,18 @@ describe("MdxContentListPage", () => {
         ]}
         locale="en"
         menu={[
-          { href: "/features/documentation", isActive: false, label: "All" },
-          { href: "/whitepapers", isActive: false, label: "White Papers" },
-          { href: "/blog", isActive: true, label: "Blogs" },
+          { kind: "section", label: "CMS" },
+          { href: "/features/documentation", isActive: false, kind: "link", label: "All", slug: "all" },
+          { kind: "divider" },
+          { kind: "section", label: "MDX" },
+          {
+            href: "/whitepapers",
+            isActive: false,
+            kind: "link",
+            label: "White Papers",
+            slug: "white-papers",
+          },
+          { href: "/blog", isActive: true, kind: "link", label: "Blogs", slug: "blogs" },
         ]}
         nextHref="/blog?page=3"
         previousHref="/blog"
@@ -49,6 +58,8 @@ describe("MdxContentListPage", () => {
       "href",
       "/features/documentation",
     );
+    expect(screen.getByText("CMS")).toBeInTheDocument();
+    expect(screen.getByText("MDX")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "White Papers" })).toHaveAttribute(
       "href",
       "/whitepapers",

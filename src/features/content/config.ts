@@ -23,6 +23,28 @@ type CategoryConfig<TSlug extends string> = {
   slug: TSlug;
 };
 
+export type PublicMenuLinkItem<TSlug extends string = string> = {
+  href: string;
+  isActive: boolean;
+  kind: "link";
+  label: string;
+  slug: TSlug;
+};
+
+export type PublicMenuSectionItem = {
+  kind: "section";
+  label: string;
+};
+
+export type PublicMenuDividerItem = {
+  kind: "divider";
+};
+
+export type PublicMenuItem<TSlug extends string = string> =
+  | PublicMenuLinkItem<TSlug>
+  | PublicMenuSectionItem
+  | PublicMenuDividerItem;
+
 type AdminCategoryConfig<TSlug extends string> = {
   description: string;
   href: string;
@@ -207,13 +229,47 @@ export function getPublicMenuItems<TSlug extends string>(
   configs: CategoryConfig<TSlug>[],
   locale: Locale,
   activeSlug: TSlug,
-) {
+): PublicMenuLinkItem<TSlug>[] {
   return configs.map((config) => ({
     href: config.href(locale),
     isActive: config.slug === activeSlug,
+    kind: "link",
     label: config.label[locale],
     slug: config.slug,
   }));
+}
+
+const docsCmsCategorySlugs: DocsCategorySlug[] = ["all", "introduction", "glossary", "manuals"];
+const docsMdxCategorySlugs: DocsCategorySlug[] = ["white-papers", "blogs"];
+
+export function getDocumentationSidebarMenuItems(
+  locale: Locale,
+  activeSlug: DocsCategorySlug,
+  hrefOverrides: Partial<Record<DocsCategorySlug, string>> = {},
+): PublicMenuItem<DocsCategorySlug>[] {
+  const linkItemsBySlug = new Map(
+    getPublicMenuItems(docsCategoryConfigs, locale, activeSlug).map((item) => [
+      item.slug,
+      {
+        ...item,
+        href: hrefOverrides[item.slug] ?? item.href,
+      },
+    ]),
+  );
+
+  return [
+    { kind: "section", label: "CMS" },
+    ...docsCmsCategorySlugs.flatMap((slug) => {
+      const item = linkItemsBySlug.get(slug);
+      return item ? [item] : [];
+    }),
+    { kind: "divider" },
+    { kind: "section", label: "MDX" },
+    ...docsMdxCategorySlugs.flatMap((slug) => {
+      const item = linkItemsBySlug.get(slug);
+      return item ? [item] : [];
+    }),
+  ];
 }
 
 export function getAdminSectionMenuItems(section: "demo" | "documentation") {

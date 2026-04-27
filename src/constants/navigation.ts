@@ -1,5 +1,6 @@
 import { getLocalePath, type Locale } from "./i18n";
 import { getSolutionHref } from "@/features/solutions/routes";
+import { getPublicDemoListHref } from "@/features/demo/navigation";
 
 export type NavigationSubItem = {
   href: string;
@@ -49,11 +50,15 @@ export function getSolutionsSubItems(locale: string): NavigationSubItem[] {
 }
 
 export function getFeaturesSubItems(locale: string): NavigationSubItem[] {
-  const copy = ["Demo", "Documentation"];
+  const resolvedLocale = locale as Locale;
 
   return [
-    { label: copy[0], href: getLocalePath(locale as Locale, "/features/demo") },
-    { label: copy[1], href: getLocalePath(locale as Locale, "/features/documentation") },
+    { label: "Use Cases", href: getPublicDemoListHref(resolvedLocale, "use-cases") },
+    { label: "AIP Features", href: getPublicDemoListHref(resolvedLocale, "aip-features") },
+    { label: "ACP Features", href: getPublicDemoListHref(resolvedLocale, "acp-features") },
+    { label: "Webinars", href: getPublicDemoListHref(resolvedLocale, "webinars") },
+    { label: "White Papers", href: getLocalePath(resolvedLocale, "/whitepapers") },
+    { label: "Blogs", href: getLocalePath(resolvedLocale, "/blog") },
   ];
 }
 

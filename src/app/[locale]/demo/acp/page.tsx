@@ -11,7 +11,7 @@ type Props = {
   searchParams: Promise<{ page?: string }>;
 };
 
-export default async function WebinarsPage({ params, searchParams }: Props) {
+export default async function AcpDemoListPage({ params, searchParams }: Props) {
   const { locale } = await params;
   const { page } = await searchParams;
 
@@ -19,7 +19,7 @@ export default async function WebinarsPage({ params, searchParams }: Props) {
     notFound();
   }
 
-  return renderPublicDemoListPage(locale, "webinars", page);
+  return renderPublicDemoListPage(locale, "acp-features", page);
 }
 
 export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
@@ -30,5 +30,5 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
     return {};
   }
 
-  return buildPublicDemoListMetadata(locale, "webinars", page);
+  return buildPublicDemoListMetadata(locale, "acp-features", page);
 }

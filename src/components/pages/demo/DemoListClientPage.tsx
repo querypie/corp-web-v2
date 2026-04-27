@@ -1,10 +1,7 @@
 import DemoListPage from "./DemoListPage";
 import type { Locale } from "@/constants/i18n";
-import {
-  demoCategoryConfigs,
-  getPublicMenuItems,
-  type DemoCategorySlug,
-} from "@/features/content/config";
+import { type DemoCategorySlug } from "@/features/content/config";
+import { getDemoSidebarMenuItems } from "@/features/demo/navigation";
 
 type DemoListClientPageProps = {
   fallbackItems: Array<{
@@ -30,7 +27,7 @@ export default function DemoListClientPage({
     <DemoListPage
       items={fallbackItems}
       locale={locale}
-      menu={getPublicMenuItems(demoCategoryConfigs, locale, selectedCategory)}
+      menu={getDemoSidebarMenuItems(locale, selectedCategory)}
       showCategory={selectedCategory === "all"}
       title={title}
     />
