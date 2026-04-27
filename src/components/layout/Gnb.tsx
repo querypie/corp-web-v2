@@ -6,9 +6,10 @@ import { usePathname, useRouter } from "next/navigation";
 import Button from "../common/Button";
 import {
   getCompanySubItems,
-  getFeaturesSubItems,
+  getDemoSubItems,
   getPlansSubItems,
   getPrimaryNavHref,
+  getResourcesSubItems,
   getSolutionsSubItems,
 } from "../../constants/navigation";
 import { defaultLocale, getLocalePath, isLocale, type Locale } from "../../constants/i18n";
@@ -46,7 +47,7 @@ function getLocaleHref(pathname: string, locale: string, search: string) {
 export default function Gnb({
   actionLabel = "Free start!",
   className,
-  items = ["Solutions", "Features", "Company", "Plans"],
+  items = ["Solutions", "Demo", "Resources", "Company", "Plans"],
   locale = "en",
   localeIcon,
 }: GnbProps) {
@@ -54,7 +55,8 @@ export default function Gnb({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
-  const [featuresOpen, setFeaturesOpen] = useState(false);
+  const [demoOpen, setDemoOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
   const [plansOpen, setPlansOpen] = useState(false);
   const [desktopLocaleOpen, setDesktopLocaleOpen] = useState(false);
@@ -158,9 +160,10 @@ export default function Gnb({
   ];
   const mobileSections = [
     { title: items[0], items: getSolutionsSubItems(locale) },
-    { title: items[1], items: getFeaturesSubItems(locale) },
-    { title: items[2], items: getCompanySubItems(locale) },
-    { title: items[3], items: getPlansSubItems(locale) },
+    { title: items[1], items: getDemoSubItems(locale) },
+    { title: items[2], items: getResourcesSubItems(locale) },
+    { title: items[3], items: getCompanySubItems(locale) },
+    { title: items[4], items: getPlansSubItems(locale) },
   ];
 
   return (
@@ -248,17 +251,17 @@ export default function Gnb({
                     <div
                       key={item}
                       className="relative"
-                      onMouseEnter={() => setFeaturesOpen(true)}
-                      onMouseLeave={() => setFeaturesOpen(false)}
+                      onMouseEnter={() => setDemoOpen(true)}
+                      onMouseLeave={() => setDemoOpen(false)}
                     >
                       <button
                         className={cx(
                           "type-body-md transition-colors",
                           isHomeTop
-                            ? featuresOpen
+                            ? demoOpen
                               ? "text-bg"
                               : "text-bg/70 hover:text-bg"
-                            : featuresOpen
+                            : demoOpen
                               ? "text-mute-fg"
                               : "text-fg hover:text-mute-fg",
                         )}
@@ -270,11 +273,11 @@ export default function Gnb({
                       <div
                         className={cx(
                           "absolute left-1/2 top-full pt-3 -translate-x-1/2 transition-all duration-200",
-                          featuresOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
+                          demoOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                         )}
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
-                          {getFeaturesSubItems(locale).map((sub) => (
+                          {getDemoSubItems(locale).map((sub) => (
                             <a
                               key={sub.label}
                               className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute-fg"
@@ -290,6 +293,52 @@ export default function Gnb({
                 }
 
                 if (navSlot === 2) {
+                  return (
+                    <div
+                      key={item}
+                      className="relative"
+                      onMouseEnter={() => setResourcesOpen(true)}
+                      onMouseLeave={() => setResourcesOpen(false)}
+                    >
+                      <button
+                        className={cx(
+                          "type-body-md transition-colors",
+                          isHomeTop
+                            ? resourcesOpen
+                              ? "text-bg"
+                              : "text-bg/70 hover:text-bg"
+                            : resourcesOpen
+                              ? "text-mute-fg"
+                              : "text-fg hover:text-mute-fg",
+                        )}
+                        type="button"
+                      >
+                        {item}
+                      </button>
+
+                      <div
+                        className={cx(
+                          "absolute left-1/2 top-full pt-3 -translate-x-1/2 transition-all duration-200",
+                          resourcesOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
+                        )}
+                      >
+                        <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+                          {getResourcesSubItems(locale).map((sub) => (
+                            <a
+                              key={sub.label}
+                              className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute-fg"
+                              href={sub.href}
+                            >
+                              {sub.label}
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                }
+
+                if (navSlot === 3) {
                   return (
                     <div
                       key={item}

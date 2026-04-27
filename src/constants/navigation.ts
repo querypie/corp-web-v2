@@ -1,6 +1,10 @@
 import { getLocalePath, type Locale } from "./i18n";
+import {
+  demoCategoryConfigs,
+  docsCategoryConfigs,
+  getCategoryHref,
+} from "@/features/content/config";
 import { getSolutionHref } from "@/features/solutions/routes";
-import { getPublicDemoListHref } from "@/features/demo/navigation";
 
 export type NavigationSubItem = {
   href: string;
@@ -25,6 +29,11 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
     ko: ["쿠키 설정", "이용약관", "개인정보처리방침", "EULA"],
     ja: ["クッキー設定", "利用規約", "プライバシーポリシー", "EULA"],
   }[locale] ?? ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"];
+  const navItems = {
+    en: ["Solutions", "Demo", "Resources", "Company", "Plans"],
+    ko: ["솔루션", "데모", "리소스", "회사", "요금제"],
+    ja: ["ソリューション", "デモ", "リソース", "会社", "プラン"],
+  }[locale] ?? ["Solutions", "Demo", "Resources", "Company", "Plans"];
 
   return {
     footerLegalLinks,
@@ -35,7 +44,7 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
       { title: "Plans", items: ["AIP", "ACP"] },
     ],
     navActionLabel: "Free start!",
-    navItems: ["Solutions", "Features", "Company", "Plans"],
+    navItems,
   };
 }
 
@@ -49,16 +58,25 @@ export function getSolutionsSubItems(locale: string): NavigationSubItem[] {
   ];
 }
 
-export function getFeaturesSubItems(locale: string): NavigationSubItem[] {
+export function getDemoSubItems(locale: string): NavigationSubItem[] {
   const resolvedLocale = locale as Locale;
 
   return [
-    { label: "Use Cases", href: getPublicDemoListHref(resolvedLocale, "use-cases") },
-    { label: "AIP Features", href: getPublicDemoListHref(resolvedLocale, "aip-features") },
-    { label: "ACP Features", href: getPublicDemoListHref(resolvedLocale, "acp-features") },
-    { label: "Webinars", href: getPublicDemoListHref(resolvedLocale, "webinars") },
-    { label: "White Papers", href: getLocalePath(resolvedLocale, "/whitepapers") },
-    { label: "Blogs", href: getLocalePath(resolvedLocale, "/blog") },
+    { label: "Use Cases", href: getCategoryHref(demoCategoryConfigs, "use-cases", resolvedLocale) },
+    { label: "AIP Features", href: getCategoryHref(demoCategoryConfigs, "aip-features", resolvedLocale) },
+    { label: "ACP Features", href: getCategoryHref(demoCategoryConfigs, "acp-features", resolvedLocale) },
+  ];
+}
+
+export function getResourcesSubItems(locale: string): NavigationSubItem[] {
+  const resolvedLocale = locale as Locale;
+
+  return [
+    { label: "Introduction", href: getCategoryHref(docsCategoryConfigs, "introduction", resolvedLocale) },
+    { label: "Glossary", href: getCategoryHref(docsCategoryConfigs, "glossary", resolvedLocale) },
+    { label: "Manuals", href: getCategoryHref(docsCategoryConfigs, "manuals", resolvedLocale) },
+    { label: "White Papers", href: getCategoryHref(docsCategoryConfigs, "white-papers", resolvedLocale) },
+    { label: "Blog", href: getCategoryHref(docsCategoryConfigs, "blogs", resolvedLocale) },
   ];
 }
 

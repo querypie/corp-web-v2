@@ -150,7 +150,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
   // 홈 화면에서 사용하는 locale별 카피/데이터
   const copy = {
     en: {
-      nav: ["Solutions", "Features", "Company", "Plans"],
+      nav: ["Solutions", "Demo", "Resources", "Company", "Plans"],
       heroHeading: "AI That Gets How You Work",
       heroDescription:
         "QueryPie AI is here to help you achieve successful AI transformation in your life and business.",
@@ -265,7 +265,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       legal: ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"],
     },
     ko: {
-      nav: ["솔루션", "기능", "회사", "요금제"],
+      nav: ["솔루션", "데모", "리소스", "회사", "요금제"],
       heroHeading: "당신의 일하는 방식을 이해하는 AI",
       heroDescription:
         "QueryPie AI는 당신의 일과 비즈니스 전반에서 성공적인 AI 전환을 이룰 수 있도록 돕습니다.",
@@ -380,7 +380,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       legal: ["쿠키 설정", "이용약관", "개인정보처리방침", "EULA"],
     },
     ja: {
-      nav: ["ソリューション", "機能", "会社", "プラン"],
+      nav: ["ソリューション", "デモ", "リソース", "会社", "プラン"],
       heroHeading: "働き方を理解する AI",
       heroDescription:
         "QueryPie AI は、あなたの仕事とビジネスにおける AI 変革を成功へ導くお手伝いをします。",
