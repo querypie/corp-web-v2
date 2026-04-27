@@ -201,6 +201,18 @@ function getAdminCategoryConfigs(section: "demo" | "documentation") {
   return section === "demo" ? demoAdminCategoryConfigs : docsAdminCategoryConfigs;
 }
 
+function getDocumentationMdxCategoryHref(locale: Locale, slug: DocsCategorySlug) {
+  if (slug === "white-papers") {
+    return getLocalePath(locale, "/whitepapers");
+  }
+
+  if (slug === "blogs") {
+    return getLocalePath(locale, "/blog");
+  }
+
+  return null;
+}
+
 export function getCategoryLabel<TSlug extends string>(
   configs: CategoryConfig<TSlug>[],
   slug: TSlug,
@@ -247,12 +259,22 @@ export function getDocumentationSidebarMenuItems(
   activeSlug: DocsCategorySlug,
   hrefOverrides: Partial<Record<DocsCategorySlug, string>> = {},
 ): PublicMenuItem<DocsCategorySlug>[] {
+  const defaultMdxHrefOverrides: Partial<Record<DocsCategorySlug, string>> = {
+    blogs: getDocumentationMdxCategoryHref(locale, "blogs") ?? undefined,
+    "white-papers": getDocumentationMdxCategoryHref(locale, "white-papers") ?? undefined,
+  };
+
+  const resolvedHrefOverrides = {
+    ...defaultMdxHrefOverrides,
+    ...hrefOverrides,
+  };
+
   const linkItemsBySlug = new Map(
     getPublicMenuItems(docsCategoryConfigs, locale, activeSlug).map((item) => [
       item.slug,
       {
         ...item,
-        href: hrefOverrides[item.slug] ?? item.href,
+        href: resolvedHrefOverrides[item.slug] ?? item.href,
       },
     ]),
   );

@@ -30,13 +30,13 @@ describe("getDocumentationSidebarMenuItems", () => {
       { kind: "divider" },
       { kind: "section", label: "MDX" },
       {
-        href: "/ko/features/documentation?category=white-papers",
+        href: "/ko/whitepapers",
         isActive: false,
         kind: "link",
         label: "White Papers",
         slug: "white-papers",
       },
-      { href: "/ko/features/documentation?category=blogs", isActive: true, kind: "link", label: "Blogs", slug: "blogs" },
+      { href: "/ko/blog", isActive: true, kind: "link", label: "Blogs", slug: "blogs" }
     ]);
   });
 
@@ -68,13 +68,13 @@ describe("getDocumentationSidebarMenuItems", () => {
       { kind: "divider" },
       { kind: "section", label: "MDX" },
       {
-        href: "/features/documentation?category=white-papers",
+        href: "/whitepapers",
         isActive: true,
         kind: "link",
         label: "White Papers",
         slug: "white-papers",
       },
-      { href: "/features/documentation?category=blogs", isActive: false, kind: "link", label: "Blogs", slug: "blogs" },
+      { href: "/blog", isActive: false, kind: "link", label: "Blogs", slug: "blogs" }
     ]);
   });
 });
