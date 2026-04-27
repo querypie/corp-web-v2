@@ -61,6 +61,7 @@ describe("loadMdxListItems", () => {
           date: "2024-01-01",
           description: "Older post",
           ogImage: "public/blog/1/thumbnail.png",
+          slug: "older-post-slug",
           title: "Older",
         },
       } as any)
@@ -70,6 +71,7 @@ describe("loadMdxListItems", () => {
           date: "2024-05-01",
           description: "Newer post",
           ogImage: "public/blog/2/thumbnail.png",
+          slug: "newer-post-slug",
           title: "Newer",
         },
       } as any);
@@ -80,14 +82,14 @@ describe("loadMdxListItems", () => {
     expect(items[0]).toMatchObject({
       dateIso: "2024-05-01",
       description: "Newer post",
-      href: "/ko/blog/2",
+      href: "/ko/blog/2/newer-post-slug",
       id: "2",
       imageSrc: "/blog/2/thumbnail.png",
       title: "Newer",
     });
     expect(items[1]).toMatchObject({
       dateIso: "2024-01-01",
-      href: "/ko/blog/1",
+      href: "/ko/blog/1/older-post-slug",
       id: "1",
       imageSrc: "/blog/1/thumbnail.png",
       title: "Older",
@@ -110,6 +112,7 @@ describe("loadMdxListItems", () => {
         date: "2024-03-10",
         description: "White paper",
         ogImage: "public/white-papers/2/thumbnail.png",
+        slug: "white-paper-custom-slug",
         title: "Only item",
       },
     } as any);
@@ -118,7 +121,7 @@ describe("loadMdxListItems", () => {
 
     expect(items).toHaveLength(1);
     expect(items[0]).toMatchObject({
-      href: "/white-papers/2",
+      href: "/white-papers/2/white-paper-custom-slug",
       id: "2",
       imageSrc: "/white-papers/2/thumbnail.png",
       title: "Only item",

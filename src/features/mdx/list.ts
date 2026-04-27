@@ -3,10 +3,11 @@ import "server-only";
 import path from "path";
 import { promises as fs } from "fs";
 import { unstable_cache } from "next/cache";
-import { getLocalePath, type Locale } from "@/constants/i18n";
+import type { Locale } from "@/constants/i18n";
 import { getContentThumbnailSrc } from "@/features/content/data";
 import { loadMdxSource } from "./loader";
 import { renderMdx } from "./renderer";
+import { getMdxDetailHref } from "./routes";
 import type { MdxListCategory } from "./types";
 
 const MDX_ROOT = path.join(process.cwd(), "src", "content", "mdx");
@@ -21,10 +22,6 @@ export type MdxListItem = {
   imageSrc: string;
   title: string;
 };
-
-function getMdxListPath(category: MdxListCategory) {
-  return category === "blog" ? "/blog" : "/white-papers";
-}
 
 function getMdxCategoryDirectory(category: MdxListCategory) {
   return category === "white-paper" ? "white-papers" : category;
@@ -55,7 +52,7 @@ const loadCachedMdxListItems = unstable_cache(
         }
 
         const { frontmatter } = await renderMdx(source, {});
-        const href = getLocalePath(locale, `${getMdxListPath(category)}/${slug}`);
+        const href = getMdxDetailHref(category, locale, slug, frontmatter.slug, frontmatter.title);
         const imageSrc = frontmatter.ogImage
           ? getContentThumbnailSrc(frontmatter.ogImage.replace(/^public\//, "/"))
           : getContentThumbnailSrc("");
