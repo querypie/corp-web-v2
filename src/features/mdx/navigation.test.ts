@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { getMdxSidebarMenuItems } from "./navigation";
 
 describe("getMdxSidebarMenuItems", () => {
-  it("white-paper 목록은 CMS 섹션 아래에 documentation 카테고리 전체를 CMS href 순서대로 유지한다", () => {
+  it("white-paper 목록은 CMS/MDX 섹션형 documentation 사이드바를 유지하면서 whitepapers를 활성화한다", () => {
     const items = getMdxSidebarMenuItems("white-paper", "en");
 
     expect(items).toEqual([
@@ -29,28 +29,18 @@ describe("getMdxSidebarMenuItems", () => {
         label: "Manuals",
         slug: "manuals",
       },
-      {
-        href: "/features/documentation?category=white-papers",
-        isActive: true,
-        kind: "link",
-        label: "White Papers",
-        slug: "white-papers",
-      },
-      {
-        href: "/features/documentation?category=blogs",
-        isActive: false,
-        kind: "link",
-        label: "Blogs",
-        slug: "blogs",
-      },
+      { kind: "divider" },
+      { kind: "section", label: "MDX" },
+      { href: "/whitepapers", isActive: true, kind: "link", label: "White Papers", slug: "white-papers" },
+      { href: "/blog", isActive: false, kind: "link", label: "Blogs", slug: "blogs" },
     ]);
   });
 
-  it("blog 목록은 blogs를 활성화하되 blogs href도 CMS documentation category 링크를 사용한다", () => {
+  it("blog 목록은 blogs를 활성화하고 CMS 카테고리 href를 유지한다", () => {
     const items = getMdxSidebarMenuItems("blog", "ko");
 
     expect(items.find((item) => item.kind === "link" && item.label === "Blogs")).toMatchObject({
-      href: "/ko/features/documentation?category=blogs",
+      href: "/ko/blog",
       isActive: true,
       kind: "link",
       label: "Blogs",

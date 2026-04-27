@@ -35,20 +35,16 @@ describe("MdxContentListPage", () => {
         menu={[
           { kind: "section", label: "CMS" },
           { href: "/features/documentation", isActive: false, kind: "link", label: "All", slug: "all" },
+          { kind: "divider" },
+          { kind: "section", label: "MDX" },
           {
-            href: "/features/documentation?category=white-papers",
+            href: "/whitepapers",
             isActive: false,
             kind: "link",
             label: "White Papers",
             slug: "white-papers",
           },
-          {
-            href: "/features/documentation?category=blogs",
-            isActive: true,
-            kind: "link",
-            label: "Blogs",
-            slug: "blogs",
-          },
+          { href: "/blog", isActive: true, kind: "link", label: "Blogs", slug: "blogs" },
         ]}
         nextHref="/blog?page=3"
         previousHref="/blog"
@@ -63,15 +59,12 @@ describe("MdxContentListPage", () => {
       "/features/documentation",
     );
     expect(screen.getByText("CMS")).toBeInTheDocument();
-    expect(screen.queryByText("MDX")).not.toBeInTheDocument();
+    expect(screen.getByText("MDX")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "White Papers" })).toHaveAttribute(
       "href",
-      "/features/documentation?category=white-papers",
+      "/whitepapers",
     );
-    expect(screen.getByRole("link", { name: "Blogs" })).toHaveAttribute(
-      "href",
-      "/features/documentation?category=blogs",
-    );
+    expect(screen.getByRole("link", { name: "Blogs" })).toHaveAttribute("href", "/blog");
     expect(screen.getByRole("link", { name: /Post 1/ })).toHaveAttribute("href", "/blog/1");
     expect(screen.getByRole("link", { name: "Previous Page" })).toHaveAttribute("href", "/blog");
     expect(screen.getByRole("link", { name: "Next Page" })).toHaveAttribute("href", "/blog?page=3");
