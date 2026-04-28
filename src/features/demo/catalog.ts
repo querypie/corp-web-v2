@@ -790,9 +790,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "AllganizeのCEO兼創設者であるChangsu Lee氏を特集することができます。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/1/cs-thumb-allganize.png",
-      "ko": "/demo/use-cases/1/cs-thumb-allganize.png",
-      "ja": "/demo/use-cases/1/cs-thumb-allganize.png"
+      "en": "/demo/use-cases/1/thumbnail.png",
+      "ko": "/demo/use-cases/1/thumbnail.png",
+      "ja": "/demo/use-cases/1/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -818,9 +818,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "LOVO AIのCEO兼共同創設者であるTom Lee氏をご招待します。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/2/cs-thumb-lovo.png",
-      "ko": "/demo/use-cases/2/cs-thumb-lovo.png",
-      "ja": "/demo/use-cases/2/cs-thumb-lovo.png"
+      "en": "/demo/use-cases/2/thumbnail.png",
+      "ko": "/demo/use-cases/2/thumbnail.png",
+      "ja": "/demo/use-cases/2/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -846,9 +846,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "AIRがQueryPie Japanを世界中のソリューションパートナーの1つに選んだ理由について、森氏はこう語っています。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/3/cs-thumb-air.png",
-      "ko": "/demo/use-cases/3/cs-thumb-air.png",
-      "ja": "/demo/use-cases/3/cs-thumb-air.png"
+      "en": "/demo/use-cases/3/thumbnail.png",
+      "ko": "/demo/use-cases/3/thumbnail.png",
+      "ja": "/demo/use-cases/3/thumbnail.png"
     },
     "date": "2024-11-29"
   },
@@ -874,9 +874,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "このビデオでは、Superb AIのCEO兼創設者であるHyun Kim氏をお迎えし、彼のインサイトをお届けします。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/4/cs-thumb-superb.png",
-      "ko": "/demo/use-cases/4/cs-thumb-superb.png",
-      "ja": "/demo/use-cases/4/cs-thumb-superb.png"
+      "en": "/demo/use-cases/4/thumbnail.png",
+      "ko": "/demo/use-cases/4/thumbnail.png",
+      "ja": "/demo/use-cases/4/thumbnail.png"
     },
     "date": "2025-01-06"
   },
@@ -902,9 +902,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "LG U+はどのようにパブリッククラウド環境でゼロトラストを実現したのか？ QueryPieを活用したセキュリティ自動化 & アクセス制御の成功事例をご紹介！"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/5/cs-thumb-lguplus.png",
-      "ko": "/demo/use-cases/5/cs-thumb-lguplus.png",
-      "ja": "/demo/use-cases/5/cs-thumb-lguplus.png"
+      "en": "/demo/use-cases/5/thumbnail.png",
+      "ko": "/demo/use-cases/5/thumbnail.png",
+      "ja": "/demo/use-cases/5/thumbnail.png"
     },
     "date": "2025-03-24"
   },
@@ -930,9 +930,9 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "QueryPie AIがクラウド運用をどう変えるのか、デモ動画でご覧ください。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/6/querypie-ai-agent-en.png",
-      "ko": "/demo/use-cases/6/querypie-ai-agent-ko.png",
-      "ja": "/demo/use-cases/6/querypie-ai-agent-en.png"
+      "en": "/demo/use-cases/6/thumbnail-en.png",
+      "ko": "/demo/use-cases/6/thumbnail-ko.png",
+      "ja": "/demo/use-cases/6/thumbnail-en.png"
     },
     "date": "2025-04-10"
   },
@@ -955,8 +955,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "自然言語による質問を瞬時にデータインサイトと可視化に変換するAIエージェント。SQLを書くことなく、チームがデータ分析を行えるようサポートします。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/7/aip-use-case-thumb-1-en.png",
-      "ja": "/demo/use-cases/7/aip-use-case-thumb-1-ja.png"
+      "en": "/demo/use-cases/7/thumbnail-en.png",
+      "ja": "/demo/use-cases/7/thumbnail-ja.png"
     },
     "date": "2025-05-18"
   },
@@ -979,8 +979,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "自然言語での質問を瞬時にデータインサイトと可視化に変換するAIエージェント。SQLを書くことなく、チームがデータ分析を行えるよう支援します。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/8/aip-use-case-thumb-2-en.png",
-      "ja": "/demo/use-cases/8/aip-use-case-thumb-2-ja.png"
+      "en": "/demo/use-cases/8/thumbnail-en.png",
+      "ja": "/demo/use-cases/8/thumbnail-ja.png"
     },
     "date": "2025-05-18"
   },
@@ -1003,8 +1003,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "自然言語を通じてサーバーアクセスリクエストと管理を自動化するAIエージェント。厳格なセキュリティ管理を維持しながら、特権アクセスを効率化します。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/9/aip-use-case-thumb-3-en.png",
-      "ja": "/demo/use-cases/9/aip-use-case-thumb-3-ja.png"
+      "en": "/demo/use-cases/9/thumbnail-en.png",
+      "ja": "/demo/use-cases/9/thumbnail-ja.png"
     },
     "date": "2025-05-18"
   },
@@ -1027,8 +1027,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "会話形式のコマンドを通じてKubernetesクラスター管理を簡素化するAIエージェント。複雑なkubectl構文を使わずに、チームがデプロイ、監視、トラブルシューティングを実行できるようにします。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/10/aip-use-case-thumb-4-en.png",
-      "ja": "/demo/use-cases/10/aip-use-case-thumb-4-ja.png"
+      "en": "/demo/use-cases/10/thumbnail-en.png",
+      "ja": "/demo/use-cases/10/thumbnail-ja.png"
     },
     "date": "2025-05-18"
   },
@@ -1051,8 +1051,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "自然言語クエリを通じてセキュリティ監査分析を変革するAIエージェント。チームがアクセスパターンの調査、異常検知、コンプライアンスレポートの生成を即座に実行できるようにします。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/11/aip-use-case-thumb-5-en.png",
-      "ja": "/demo/use-cases/11/aip-use-case-thumb-5-ja.png"
+      "en": "/demo/use-cases/11/thumbnail-en.png",
+      "ja": "/demo/use-cases/11/thumbnail-ja.png"
     },
     "date": "2025-05-18"
   },
@@ -1075,8 +1075,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "複数のプラットフォームにまたがるチームの業務調整を変革するAIエージェント。自然言語でのやり取りを通じて、ワークフローの自動化、情報共有、タスク実行をアプリケーション間の切り替えなしで実現します。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/12/aip-use-case-thumb-6-en.png",
-      "ja": "/demo/use-cases/12/aip-use-case-thumb-6-ja.png"
+      "en": "/demo/use-cases/12/thumbnail-en.png",
+      "ja": "/demo/use-cases/12/thumbnail-ja.png"
     },
     "date": "2025-05-18"
   },
@@ -1099,8 +1099,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "Outlook、Teams、SharePoint、OneDrive、Excelに会話型オートメーションをもたらし、複数のインターフェイスを行き来することなく、社員がより速く業務を進められるようにします。自然言語で、メールの下書き・整理、会議のスケジュール・要約、ドキュメントの整理、スプレッドシートの更新、ステータスレポートの作成を、日々の業務フローの中で直接行えます。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/13/aip-use-case-thumb-7-en.png",
-      "ja": "/demo/use-cases/13/aip-use-case-thumb-7-ja.png"
+      "en": "/demo/use-cases/13/thumbnail-en.png",
+      "ja": "/demo/use-cases/13/thumbnail-ja.png"
     },
     "date": "2025-10-02"
   },
@@ -1123,8 +1123,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "申込者データの取得、リスクスコアリング、意思決定用サマリーの生成を自動化し、ポリシーを一貫適用しながら審査の迅速化を実現するAIエージェント。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/14/aip-use-case-thumb-8-en.png",
-      "ja": "/demo/use-cases/14/aip-use-case-thumb-8-ja.png"
+      "en": "/demo/use-cases/14/thumbnail-en.png",
+      "ja": "/demo/use-cases/14/thumbnail-ja.png"
     },
     "date": "2025-10-03"
   },
@@ -1147,8 +1147,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "ファクトリーIoTシグナルを監視し、異常を検知し、自然言語でメンテナンスワークフローをオーケストレーションするAIエージェント。OTデータとITシステムを橋渡しし、より迅速で安全なオペレーションを実現します。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/15/aip-use-case-thumb-9-en.png",
-      "ja": "/demo/use-cases/15/aip-use-case-thumb-9-ja.png"
+      "en": "/demo/use-cases/15/thumbnail-en.png",
+      "ja": "/demo/use-cases/15/thumbnail-ja.png"
     },
     "date": "2025-10-03"
   },
@@ -1171,8 +1171,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "コード、PR、課題、ビルド、インシデントといったエンジニアリングのエグゾーストを、自然言語で行動可能なインサイトとサマリーに変換するAIエージェント。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/16/aip-use-case-thumb-10-en.png",
-      "ja": "/demo/use-cases/16/aip-use-case-thumb-10-ja.png"
+      "en": "/demo/use-cases/16/thumbnail-en.png",
+      "ja": "/demo/use-cases/16/thumbnail-ja.png"
     },
     "date": "2025-10-14"
   },
@@ -1195,8 +1195,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "ログ、マニュアル、センサーデータを診断インサイトと作業指示（ワークオーダー）に変換し、航空機の安全性、稼働率、コンプライアンスを向上させるAIエージェント。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/17/aip-use-case-thumb-11-en.png",
-      "ja": "/demo/use-cases/17/aip-use-case-thumb-11-ja.png"
+      "en": "/demo/use-cases/17/thumbnail-en.png",
+      "ja": "/demo/use-cases/17/thumbnail-ja.png"
     },
     "date": "2025-10-15"
   },
@@ -1219,8 +1219,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "リアルタイムの手荷物可視化を提供し、混乱を予測し、航空会社・空港・グランドハンドリング間のリカバリーワークフローを自動化するAIエージェント。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/18/aip-use-case-thumb-12-en.png",
-      "ja": "/demo/use-cases/18/aip-use-case-thumb-12-ja.png"
+      "en": "/demo/use-cases/18/thumbnail-en.png",
+      "ja": "/demo/use-cases/18/thumbnail-ja.png"
     },
     "date": "2025-10-15"
   },
@@ -1243,8 +1243,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "ポリシー、資格、スケジュールを自然言語で迅速かつ準拠した意思決定に変換し、クルーペアリング、ロスタリング、ディスラプションからの復旧を最適化するAIエージェント。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/19/aip-use-case-thumb-13-en.png",
-      "ja": "/demo/use-cases/19/aip-use-case-thumb-13-ja.png"
+      "en": "/demo/use-cases/19/thumbnail-en.png",
+      "ja": "/demo/use-cases/19/thumbnail-ja.png"
     },
     "date": "2025-10-15"
   },
@@ -1267,8 +1267,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "配置、休暇、評価、記録管理を自然言語で効率化し、完全な監督体制のもとで軍人事業務を迅速化するAIエージェント。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/20/aip-use-case-thumb-14-en.png",
-      "ja": "/demo/use-cases/20/aip-use-case-thumb-14-ja.png"
+      "en": "/demo/use-cases/20/thumbnail-en.png",
+      "ja": "/demo/use-cases/20/thumbnail-ja.png"
     },
     "date": "2025-10-29"
   },
@@ -1291,8 +1291,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "運用ステータスを統合し、標準レポートを生成し、アラートとアクションをオーケストレーションするAIエージェント。自然言語で状況管理を効率化します。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/21/aip-use-case-thumb-15-en.png",
-      "ja": "/demo/use-cases/21/aip-use-case-thumb-15-ja.png"
+      "en": "/demo/use-cases/21/thumbnail-en.png",
+      "ja": "/demo/use-cases/21/thumbnail-ja.png"
     },
     "date": "2025-10-29"
   },
@@ -1315,8 +1315,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "自然言語でAWSログを調査し、CloudWatch、CloudTrail、各種サービスログを相関して、インシデントのトリアージと根本原因分析を加速するAIエージェント。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/22/aip-use-case-thumb-16-en.png",
-      "ja": "/demo/use-cases/22/aip-use-case-thumb-16-ja.png"
+      "en": "/demo/use-cases/22/thumbnail-en.png",
+      "ja": "/demo/use-cases/22/thumbnail-ja.png"
     },
     "date": "2025-11-03"
   },
@@ -1339,8 +1339,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "AWS Inspectorの検出結果を、優先度付きの是正計画へ変換するAIエージェント。リスク、担当者、修正内容を、1回の会話型リクエストで要約します。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/23/aip-use-case-thumb-17-en.png",
-      "ja": "/demo/use-cases/23/aip-use-case-thumb-17-ja.png"
+      "en": "/demo/use-cases/23/thumbnail-en.png",
+      "ja": "/demo/use-cases/23/thumbnail-ja.png"
     },
     "date": "2025-11-03"
   },
@@ -1363,8 +1363,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "自然言語でパターン提案、コスト見積もり、ベストプラクティス検証を行い、AWSアーキテクチャを設計・妥当性確認するAIエージェント。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/24/aip-use-case-thumb-18-en.png",
-      "ja": "/demo/use-cases/24/aip-use-case-thumb-18-ja.png"
+      "en": "/demo/use-cases/24/thumbnail-en.png",
+      "ja": "/demo/use-cases/24/thumbnail-ja.png"
     },
     "date": "2025-11-05"
   },
@@ -1387,8 +1387,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "市場データと口座データを自然言語での会話を通じて、パフォーマンス、アロケーション、リスクのポートフォリオインサイトに変換し、行動可能な次の一手まで提示するAIエージェント。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/25/aip-use-case-thumb-19-en.png",
-      "ja": "/demo/use-cases/25/aip-use-case-thumb-19-ja.png"
+      "en": "/demo/use-cases/25/thumbnail-en.png",
+      "ja": "/demo/use-cases/25/thumbnail-ja.png"
     },
     "date": "2025-11-11"
   },
@@ -1411,8 +1411,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "自然言語で指示するだけで、スクリーニングからモデル更新、決算要約、レポート作成までを自動化する投資リサーチ向けAIエージェント。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/26/aip-use-case-thumb-20-en.png",
-      "ja": "/demo/use-cases/26/aip-use-case-thumb-20-ja.png"
+      "en": "/demo/use-cases/26/thumbnail-en.png",
+      "ja": "/demo/use-cases/26/thumbnail-ja.png"
     },
     "date": "2025-11-11"
   },
@@ -1435,8 +1435,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "どれほど複雑な見積ロジックでも、AIPがスキルとして構造化し、正確な見積書を即時出力します。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/27/aip-use-case-thumb-27-en.png",
-      "ja": "/demo/use-cases/27/aip-use-case-thumb-27-ja.png"
+      "en": "/demo/use-cases/27/thumbnail-en.png",
+      "ja": "/demo/use-cases/27/thumbnail-ja.png"
     },
     "date": "2026-02-26"
   },
@@ -1459,8 +1459,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "数百におよぶローカルファイルや、パスワード付きの見積書を一つひとつ開いて整理する作業に、貴重な時間を費やしていませんか？AIPなら、アップロード不要・データ流出なしで、その場で分析を完了します。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/28/aip-use-case-thumb-28-en.png",
-      "ja": "/demo/use-cases/28/aip-use-case-thumb-28-ja.png"
+      "en": "/demo/use-cases/28/thumbnail-en.png",
+      "ja": "/demo/use-cases/28/thumbnail-ja.png"
     },
     "date": "2026-03-02"
   },
@@ -1483,8 +1483,8 @@ export const demoMdxEntries: readonly DemoMdxEntry[] = [
       "ja": "高額なSEOツールに頼ることなく、QueryPie AIPを活用することでWebサイトの詳細な分析と改善ポイントの整理、そして視覚的に分かりやすいダッシュボード作成までを短時間で実現できます。"
     },
     "imageSrc": {
-      "en": "/demo/use-cases/29/aip-use-case-thumb-29-en.png",
-      "ja": "/demo/use-cases/29/aip-use-case-thumb-29-ja.png"
+      "en": "/demo/use-cases/29/thumbnail-en.png",
+      "ja": "/demo/use-cases/29/thumbnail-ja.png"
     },
     "date": "2026-03-02"
   },
