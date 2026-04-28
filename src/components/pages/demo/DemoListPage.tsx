@@ -1,4 +1,5 @@
 import type { Locale } from "@/constants/i18n";
+import type { PublicMenuItem } from "@/features/content/config";
 import ContentPreviewImage from "../../common/ContentPreviewImage";
 import Cta from "../../sections/Cta";
 
@@ -11,17 +12,11 @@ type DemoListItem = {
   title: string;
 };
 
-type DemoMenuItem = {
-  href: string;
-  isActive: boolean;
-  label: string;
-};
-
 type DemoListPageProps = {
   emptyMessage?: string;
   items: DemoListItem[];
   locale: Locale;
-  menu: DemoMenuItem[];
+  menu: PublicMenuItem[];
   showCategory?: boolean;
   title: string;
 };
@@ -91,18 +86,42 @@ export default function DemoListPage({
             </header>
 
             <nav className="flex w-full flex-row flex-wrap gap-[10px] type-body-md md:w-fit md:self-start md:flex-col">
-              {menu.map((item) => (
-                <a
-                  key={item.href}
-                  className={cx(
-                    "whitespace-nowrap transition-colors hover:text-fg",
-                    item.isActive ? "text-fg" : "text-mute-fg",
-                  )}
-                  href={item.href}
-                >
-                  {item.label}
-                </a>
-              ))}
+              {menu.map((item, index) => {
+                if (item.kind === "divider") {
+                  return (
+                    <div
+                      key={`divider-${index}`}
+                      aria-orientation="horizontal"
+                      className="my-1 h-px w-full bg-line md:my-2"
+                      role="separator"
+                    />
+                  );
+                }
+
+                if (item.kind === "section") {
+                  return (
+                    <span
+                      key={`section-${item.label}-${index}`}
+                      className="whitespace-nowrap type-mono text-mute-fg"
+                    >
+                      {item.label}
+                    </span>
+                  );
+                }
+
+                return (
+                  <a
+                    key={`${item.label}-${item.href}`}
+                    className={cx(
+                      "whitespace-nowrap transition-colors hover:text-fg",
+                      item.isActive ? "text-fg" : "text-mute-fg",
+                    )}
+                    href={item.href}
+                  >
+                    {item.label}
+                  </a>
+                );
+              })}
             </nav>
           </div>
 

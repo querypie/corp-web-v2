@@ -3,11 +3,11 @@ import "server-only";
 import path from "path";
 import { promises as fs } from "fs";
 import { unstable_cache } from "next/cache";
-import type { Locale } from "@/constants/i18n";
+import { getLocalePath, type Locale } from "@/constants/i18n";
 import { getContentThumbnailSrc } from "@/features/content/data";
 import { loadMdxSource } from "./loader";
 import { renderMdx } from "./renderer";
-import { getMdxDetailHref } from "./routes";
+import { getMdxDetailHref, getMdxDetailSlug } from "./routes";
 import type { MdxListCategory } from "./types";
 
 const MDX_ROOT = path.join(process.cwd(), "src", "content", "mdx");
@@ -37,6 +37,25 @@ function sortMdxListItems(left: MdxListItem, right: MdxListItem) {
   return Number(right.id) - Number(left.id);
 }
 
+function getBlogListItemHref(locale: Locale, id: string, frontmatterSlug: string | undefined, title: string) {
+  const slug = getMdxDetailSlug(frontmatterSlug, title);
+  return `https://www.querypie.com${getLocalePath(locale, `/features/documentation/blog/${id}/${slug}`)}`;
+}
+
+function getMdxListItemHref(
+  category: MdxListCategory,
+  locale: Locale,
+  id: string,
+  frontmatterSlug: string | undefined,
+  title: string,
+) {
+  if (category === "blog") {
+    return getBlogListItemHref(locale, id, frontmatterSlug, title);
+  }
+
+  return getMdxDetailHref(category, locale, id, frontmatterSlug, title);
+}
+
 const loadCachedMdxListItems = unstable_cache(
   async (category: MdxListCategory, locale: Locale): Promise<MdxListItem[]> => {
     const categoryRoot = path.join(MDX_ROOT, getMdxCategoryDirectory(category));
@@ -52,7 +71,7 @@ const loadCachedMdxListItems = unstable_cache(
         }
 
         const { frontmatter } = await renderMdx(source, {});
-        const href = getMdxDetailHref(category, locale, slug, frontmatter.slug, frontmatter.title);
+        const href = getMdxListItemHref(category, locale, slug, frontmatter.slug, frontmatter.title);
         const imageSrc = frontmatter.ogImage
           ? getContentThumbnailSrc(frontmatter.ogImage.replace(/^public\//, "/"))
           : getContentThumbnailSrc("");

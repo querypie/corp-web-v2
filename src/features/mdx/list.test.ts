@@ -82,14 +82,14 @@ describe("loadMdxListItems", () => {
     expect(items[0]).toMatchObject({
       dateIso: "2024-05-01",
       description: "Newer post",
-      href: "/ko/blog/2/newer-post-slug",
+      href: "https://www.querypie.com/ko/features/documentation/blog/2/newer-post-slug",
       id: "2",
       imageSrc: "/blog/2/thumbnail.png",
       title: "Newer",
     });
     expect(items[1]).toMatchObject({
       dateIso: "2024-01-01",
-      href: "/ko/blog/1/older-post-slug",
+      href: "https://www.querypie.com/ko/features/documentation/blog/1/older-post-slug",
       id: "1",
       imageSrc: "/blog/1/thumbnail.png",
       title: "Older",
