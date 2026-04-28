@@ -1,6 +1,5 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import {
   demoMdxEntries,
@@ -115,7 +114,7 @@ describe("locale visibility/fallback", () => {
 
 describe("demoMdx image assets", () => {
   it("use-cases thumbnail paths point to existing public files", () => {
-    const repoRoot = fileURLToPath(new URL("../../../", import.meta.url));
+    const repoRoot = process.cwd();
     const missing = demoMdxEntries
       .filter((entry) => entry.segment === "use-cases")
       .flatMap((entry) =>
