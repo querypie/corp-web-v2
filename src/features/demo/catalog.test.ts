@@ -1,3 +1,6 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import {
   demoMdxEntries,
@@ -107,5 +110,21 @@ describe("locale visibility/fallback", () => {
     expect(getVisibleDemoMdxEntries("en").length).toBeLessThan(demoMdxEntries.length);
     expect(getVisibleDemoMdxEntries("ja").length).toBeGreaterThan(getVisibleDemoMdxEntries("en").length);
     expect(getVisibleDemoMdxEntries("ja").some((entry) => entry.segment === "webinars" && entry.id === "27")).toBe(true);
+  });
+});
+
+describe("demoMdx image assets", () => {
+  it("use-cases thumbnail paths point to existing public files", () => {
+    const repoRoot = fileURLToPath(new URL("../../../", import.meta.url));
+    const missing = demoMdxEntries
+      .filter((entry) => entry.segment === "use-cases")
+      .flatMap((entry) =>
+        Object.entries(entry.imageSrc).flatMap(([locale, imageSrc]) => {
+          const publicPath = path.join(repoRoot, "public", imageSrc.replace(/^\//, ""));
+          return existsSync(publicPath) ? [] : [`${entry.segment}:${entry.id}:${locale}:${imageSrc}`];
+        }),
+      );
+
+    expect(missing).toEqual([]);
   });
 });
