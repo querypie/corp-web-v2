@@ -8,7 +8,7 @@ export default defineConfig({
   reporter: 'list',
   timeout: 60_000,
   use: {
-    baseURL: process.env.LOCAL_E2E_BASE_URL ?? 'https://stage-v2.querypie.com',
+    baseURL: process.env.LOCAL_E2E_BASE_URL ?? 'https://stage.querypie.com',
     headless: true,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',

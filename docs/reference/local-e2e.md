@@ -13,7 +13,7 @@ They are useful for checking behavior that unit and component tests cannot fully
 ### Contact Us
 
 - Route: `/company/contact-us`
-- Default base URL: `https://stage-v2.querypie.com`
+- Default base URL: `https://stage.querypie.com`
 - Test file: `tests-local/src/app/company/contact-us/page.e2e.mjs`
 - Playwright config: `playwright.local.config.mjs`
 - Script: `npm run e2e:local:contact-us:stage`
@@ -33,7 +33,7 @@ npm run e2e:local:contact-us:stage
 These tests use the following optional environment variables.
 
 - `LOCAL_E2E_BASE_URL`
-  - Overrides the default stage base URL.
+  - Overrides the default base URL.
   - Example: `LOCAL_E2E_BASE_URL=http://127.0.0.1:3000`
 - `CONTACT_US_E2E_ROUTE_PATH`
   - Overrides the default route path.
