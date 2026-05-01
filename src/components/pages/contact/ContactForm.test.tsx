@@ -81,6 +81,32 @@ describe("ContactForm", () => {
     expect(screen.getByRole("button")).not.toBeDisabled();
   });
 
+  it("submit 버튼 클릭 시 /api/contact-us로 POST 요청을 보낸다", async () => {
+    const fetchMock = vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: true }),
+    } as unknown as Response);
+
+    render(
+      <ContactForm
+        {...contactCopy}
+        locale="en"
+      />,
+    );
+    fillRequiredFields();
+    fireEvent.click(screen.getByRole("button"));
+
+    await waitFor(() => {
+      expect(fetchMock).toHaveBeenCalledWith(
+        "/api/contact-us",
+        expect.objectContaining({
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+        }),
+      );
+    });
+  });
+
   it("제출 시 /api/contact-us로 POST 요청을 보낸다", async () => {
     const fetchMock = vi.mocked(fetch).mockResolvedValue({
       ok: true,

@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit",
     "audit:public-assets": "node scripts/find-unused-public-assets.mjs",
     "test": "vitest",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "e2e:local:contact-us:stage": "npx playwright test tests-local/src/app/company/contact-us/page.e2e.mjs --config=playwright.local.config.mjs"
   },
   "dependencies": {
     "@slack/web-api": "^7.13.0",
@@ -37,6 +38,7 @@
     }
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",

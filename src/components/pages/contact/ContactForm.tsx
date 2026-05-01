@@ -218,6 +218,7 @@ export default function ContactForm(props: ContactFormProps) {
           arrow={false}
           disabled={!canSubmit}
           style="full"
+          type="submit"
           variant="secondary"
         >
           {status === "submitting" ? "..." : copy.submitLabel}
