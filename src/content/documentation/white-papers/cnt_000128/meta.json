@@ -4,7 +4,7 @@
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2026-02-27",
-  "downloadCoverImageSrc": "",
+  "downloadCoverImageSrc": "/documentation/white-papers/wp-thumb-28.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
@@ -15,7 +15,7 @@
   "imageSrc": "/documentation/white-papers/wp-thumb-28.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 12,
+  "sortOrder": 2,
   "status": "published",
   "storageId": "cnt_000128",
   "summary": {
@@ -25,7 +25,7 @@
   },
   "title": {
     "en": "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
-    "ko": "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
+    "ko": "",
     "ja": "AIエージェント時代のガードレール設計（2026年版）── 前編：思想・設計編"
   },
   "locales": {

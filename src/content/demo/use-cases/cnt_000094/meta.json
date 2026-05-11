@@ -4,14 +4,18 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2024-11-29",
+  "downloadCoverImageSrc": "/demo/use-cases/cs-thumb-lovo.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "lovo-ai-tom-lee",
   "imageSrc": "/demo/use-cases/cs-thumb-lovo.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 1,
+  "sortOrder": 28,
   "status": "published",
   "storageId": "cnt_000094",
   "summary": {
@@ -20,8 +24,8 @@
     "ja": "LOVO AIのCEO兼共同創設者であるTom Lee氏をご招待します。"
   },
   "title": {
-    "en": "\\\"QueryPie' s like a tailor shop almost for security.\\\"",
-    "ko": "\\\"QueryPie는 마치 보안을 위한 맞춤 테일러샵 같아요.\\\"",
+    "en": "\"QueryPie' s like a tailor shop almost for security.\"",
+    "ko": "\"QueryPie는 마치 보안을 위한 맞춤 테일러샵 같아요.\"",
     "ja": "「QueryPieはまるでセキュリティのためのオーダーメードテイラーショップのようです。」"
   },
   "locales": {

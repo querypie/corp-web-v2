@@ -4,18 +4,18 @@
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2024-11-22",
-  "downloadCoverImageSrc": "",
+  "downloadCoverImageSrc": "/documentation/white-papers/wp-thumb-1.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
-  "gatingLevel": "none",
+  "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "personal-data-identification-analysis-ai",
   "imageSrc": "/documentation/white-papers/wp-thumb-1.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 12,
+  "sortOrder": 29,
   "status": "published",
   "storageId": "cnt_000150",
   "summary": {
@@ -25,8 +25,8 @@
   },
   "title": {
     "en": "Improving Personal Data Identification and Analysis with AI",
-    "ko": "AI를 통한 개인정보 식별 및 분석 개선",
-    "ja": "AI による個人情報の識別と分析改善"
+    "ko": "",
+    "ja": ""
   },
   "locales": {
     "en": {

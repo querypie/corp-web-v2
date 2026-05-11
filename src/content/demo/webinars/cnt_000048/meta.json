@@ -4,14 +4,18 @@
   "categorySlug": "webinars",
   "contentType": "content",
   "dateIso": "2024-11-29",
+  "downloadCoverImageSrc": "/demo/webinars/3dk-ep4-ko.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "querypie-kubernetes-management-ko",
   "imageSrc": "/demo/webinars/3dk-ep4-ko.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 0,
+  "sortOrder": 8,
   "status": "published",
   "storageId": "cnt_000048",
   "summary": {
@@ -22,7 +26,7 @@
   "title": {
     "en": "Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!",
     "ko": "Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!",
-    "ja": "Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!"
+    "ja": ""
   },
   "locales": {
     "en": {

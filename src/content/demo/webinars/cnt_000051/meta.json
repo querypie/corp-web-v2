@@ -4,14 +4,18 @@
   "categorySlug": "webinars",
   "contentType": "content",
   "dateIso": "2024-11-29",
+  "downloadCoverImageSrc": "/demo/webinars/3dk-intro-ko.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "querypie-side-kick-teaser-ko",
   "imageSrc": "/demo/webinars/3dk-intro-ko.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 0,
+  "sortOrder": 15,
   "status": "published",
   "storageId": "cnt_000051",
   "summary": {
@@ -22,7 +26,7 @@
   "title": {
     "en": "본격 고객 소통 콘텐츠 [Ch.쿼리파이: 3단 옆차기]가 찾아옵니다!",
     "ko": "본격 고객 소통 콘텐츠 [Ch.쿼리파이: 3단 옆차기]가 찾아옵니다!",
-    "ja": "본격 고객 소통 콘텐츠 [Ch.쿼리파이: 3단 옆차기]가 찾아옵니다!"
+    "ja": ""
   },
   "locales": {
     "en": {

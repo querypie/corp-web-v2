@@ -4,14 +4,18 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2025-10-15",
+  "downloadCoverImageSrc": "/demo/use-cases/aip-use-case-thumb-12-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "baggage-operations-ai-agent",
   "imageSrc": "/demo/use-cases/aip-use-case-thumb-12-en.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 1,
+  "sortOrder": 10,
   "status": "published",
   "storageId": "cnt_000078",
   "summary": {
@@ -21,7 +25,7 @@
   },
   "title": {
     "en": "AIP Use Case: Baggage Operations AI Agent",
-    "ko": "AIP Use Case: Baggage Operations AI Agent",
+    "ko": "",
     "ja": "AIP活用事例： 手荷物業務AIエージェント"
   },
   "locales": {

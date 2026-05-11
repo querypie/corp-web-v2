@@ -4,14 +4,18 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2025-03-24",
+  "downloadCoverImageSrc": "/demo/use-cases/cs-thumb-lguplus.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "lg-uplus-daniel-ku",
   "imageSrc": "/demo/use-cases/cs-thumb-lguplus.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 1,
+  "sortOrder": 25,
   "status": "published",
   "storageId": "cnt_000092",
   "summary": {
@@ -20,7 +24,7 @@
     "ja": "LG U+はどのようにパブリッククラウド環境でゼロトラストを実現したのか？ QueryPieを活用したセキュリティ自動化 & アクセス制御の成功事例をご紹介！"
   },
   "title": {
-    "en": "\\\"The solution that best fit our automation strategy was undoubtedly QueryPie!\\\"",
+    "en": "\"The solution that best fit our automation strategy was undoubtedly QueryPie!\"",
     "ko": "“검토했던 솔루션 중 저희의 자동화 계획과 가장 일치했던 솔루션은 단연 QueryPie였습니다!”",
     "ja": "「私たちの自動化計画と最も一致したソリューションは間違いなくQueryPieでした！」"
   },

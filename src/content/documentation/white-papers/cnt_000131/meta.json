@@ -4,7 +4,7 @@
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2026-02-13",
-  "downloadCoverImageSrc": "",
+  "downloadCoverImageSrc": "/documentation/white-papers/wp-thumb-27.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
@@ -15,8 +15,8 @@
   "imageSrc": "/documentation/white-papers/wp-thumb-27.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 12,
-  "status": "published",
+  "sortOrder": 5,
+  "status": "hidden",
   "storageId": "cnt_000131",
   "summary": {
     "en": "13のLLM構成による実験結果を徹底分析。Thinkingモードの意外な落とし穴、GPTの安定性問題、そして60%のコスト削減を実現する最適パイプライン構成を明らかにします。",
@@ -25,7 +25,7 @@
   },
   "title": {
     "en": "コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【後編】",
-    "ko": "コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【後編】",
+    "ko": "",
     "ja": "コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【後編】"
   },
   "locales": {

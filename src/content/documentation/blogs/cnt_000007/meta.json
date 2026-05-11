@@ -4,7 +4,7 @@
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2026-03-09",
-  "downloadCoverImageSrc": "",
+  "downloadCoverImageSrc": "/documentation/blogs/b-thumb-29.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
@@ -15,7 +15,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-29.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 10,
+  "sortOrder": 2,
   "status": "published",
   "storageId": "cnt_000007",
   "summary": {
@@ -25,7 +25,7 @@
   },
   "title": {
     "en": "AI Attack Tools Breach 600 Firewalls Across 55 Countries: How to Protect the Data Beyond the Firewall",
-    "ko": "AI Attack Tools Breach 600 Firewalls Across 55 Countries: How to Protect the Data Beyond the Firewall",
+    "ko": "",
     "ja": "AI攻撃ツールが55カ国のファイアウォール600台を突破──ファイアウォールの先にある\\\"データ\\\"をどう守るか"
   },
   "locales": {

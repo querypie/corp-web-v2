@@ -4,29 +4,29 @@
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2025-03-10",
-  "downloadCoverImageSrc": "",
+  "downloadCoverImageSrc": "/documentation/white-papers/wp-thumb-13.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
-  "gatingLevel": "none",
+  "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "seamless-ssh-connection",
   "imageSrc": "/documentation/white-papers/wp-thumb-13.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 12,
+  "sortOrder": 17,
   "status": "published",
   "storageId": "cnt_000143",
   "summary": {
     "en": "Discover an optimal method for seamless SSH connections that enhances security without disrupting the CLI workflow. Learn how QueryPie’s approach eliminates the need for additional agents while maintaining robust access control.",
     "ko": "CLI 워크플로우를 방해하지 않으면서도 보안을 강화하는 매끄러운 SSH 연결을 위한 최적의 방법을 알아보세요. 추가 에이전트 없이 강력한 접근 제어를 유지하는 QueryPie의 접근 방법을 설명합니다.",
-    "ja": "Discover an optimal method for seamless SSH connections that enhances security without disrupting the CLI workflow. Learn how QueryPie’s approach eliminates the need for additional agents while maintaining robust access control."
+    "ja": "CLIワークフローを妨げることなくセキュリティを高める、シームレスなSSH接続の最適な方法をご紹介します。追加エージェントを必要とせずに強力なアクセス制御を実現する、QueryPieのアプローチを解説します。"
   },
   "title": {
     "en": "Optimal Method for Using a Terminal with Seamless SSH Connection",
     "ko": "보안성과 업무 효율성을 동시에 높이는 Seamless SSH Connection 전략",
-    "ja": "Optimal Method for Using a Terminal with Seamless SSH Connection"
+    "ja": "シームレスなSSH接続でターミナルを使う最適な方法"
   },
   "locales": {
     "en": {

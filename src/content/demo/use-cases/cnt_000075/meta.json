@@ -4,14 +4,18 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2025-11-03",
+  "downloadCoverImageSrc": "/demo/use-cases/aip-use-case-thumb-17-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "aws-inspector-ai-agent",
   "imageSrc": "/demo/use-cases/aip-use-case-thumb-17-en.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 1,
+  "sortOrder": 7,
   "status": "published",
   "storageId": "cnt_000075",
   "summary": {
@@ -21,7 +25,7 @@
   },
   "title": {
     "en": "AIP Use Case: AWS Inspector Insight AI Agent",
-    "ko": "AIP Use Case: AWS Inspector Insight AI Agent",
+    "ko": "",
     "ja": "AIP活用事例： AWSインサイトAIエージェント"
   },
   "locales": {

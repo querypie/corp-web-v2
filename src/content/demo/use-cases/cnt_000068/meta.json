@@ -4,8 +4,12 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2026-03-02",
+  "downloadCoverImageSrc": "/demo/use-cases/aip-use-case-thumb-29-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "seo-analyst",
   "imageSrc": "/demo/use-cases/aip-use-case-thumb-29-en.webp",
@@ -21,7 +25,7 @@
   },
   "title": {
     "en": "AIP Use Case: SEO Analysis AI Agent",
-    "ko": "AIP Use Case: SEO Analysis AI Agent",
+    "ko": "",
     "ja": "AIP活用事例： SEO分析AIエージェント"
   },
   "locales": {

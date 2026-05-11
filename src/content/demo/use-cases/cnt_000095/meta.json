@@ -4,14 +4,18 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2024-11-29",
+  "downloadCoverImageSrc": "/demo/use-cases/cs-thumb-allganize.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "allganize-changsu-lee",
   "imageSrc": "/demo/use-cases/cs-thumb-allganize.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 1,
+  "sortOrder": 29,
   "status": "published",
   "storageId": "cnt_000095",
   "summary": {
@@ -20,8 +24,8 @@
     "ja": "AllganizeのCEO兼創設者であるChangsu Lee氏を特集することができます。"
   },
   "title": {
-    "en": "\\\"I envision a bright future, similar to the global business outcomes of QueryPie.\\\"",
-    "ko": "\\\"QueryPie처럼 글로벌 비즈니스 성과를 내는 미래를 상상합니다.\\\"",
+    "en": "\"I envision a bright future, similar to the global business outcomes of QueryPie.\"",
+    "ko": "\"QueryPie처럼 글로벌 비즈니스 성과를 내는 미래를 상상합니다.\"",
     "ja": "「QueryPie のようにグローバルビジネスでの成果を出す未来を描いています。」"
   },
   "locales": {

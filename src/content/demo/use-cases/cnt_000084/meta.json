@@ -4,14 +4,18 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2025-10-02",
+  "downloadCoverImageSrc": "/demo/use-cases/aip-use-case-thumb-7-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "m365-ai-agent",
   "imageSrc": "/demo/use-cases/aip-use-case-thumb-7-en.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 1,
+  "sortOrder": 15,
   "status": "published",
   "storageId": "cnt_000084",
   "summary": {
@@ -21,7 +25,7 @@
   },
   "title": {
     "en": "AIP Use Case: M365 AI Agent",
-    "ko": "AIP Use Case: M365 AI Agent",
+    "ko": "",
     "ja": "AIP活用事例： M365 AIエージェント"
   },
   "locales": {
