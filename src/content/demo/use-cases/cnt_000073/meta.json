@@ -4,14 +4,18 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2025-11-05",
+  "downloadCoverImageSrc": "/demo/use-cases/aip-use-case-thumb-18-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "aws-solutions-architect-ai-agent",
   "imageSrc": "/demo/use-cases/aip-use-case-thumb-18-en.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 1,
+  "sortOrder": 6,
   "status": "published",
   "storageId": "cnt_000073",
   "summary": {
@@ -21,7 +25,7 @@
   },
   "title": {
     "en": "AIP Use Case: AWS Solutions Architect AI Agent",
-    "ko": "AIP Use Case: AWS Solutions Architect AI Agent",
+    "ko": "",
     "ja": "AIP活用事例： AWSソリューションアーキテクトAIエージェント"
   },
   "locales": {

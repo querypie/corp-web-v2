@@ -4,14 +4,18 @@
   "categorySlug": "webinars",
   "contentType": "content",
   "dateIso": "2024-11-29",
+  "downloadCoverImageSrc": "/demo/webinars/3dk-ep3-ko.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "querypie-server-management-ko",
   "imageSrc": "/demo/webinars/3dk-ep3-ko.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 0,
+  "sortOrder": 14,
   "status": "published",
   "storageId": "cnt_000050",
   "summary": {
@@ -22,7 +26,7 @@
   "title": {
     "en": "Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!",
     "ko": "Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!",
-    "ja": "Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!"
+    "ja": ""
   },
   "locales": {
     "en": {

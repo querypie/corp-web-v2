@@ -4,14 +4,18 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2025-10-03",
+  "downloadCoverImageSrc": "/demo/use-cases/aip-use-case-thumb-8-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "credit-check-ai-agent",
   "imageSrc": "/demo/use-cases/aip-use-case-thumb-8-en.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 1,
+  "sortOrder": 14,
   "status": "published",
   "storageId": "cnt_000083",
   "summary": {
@@ -21,7 +25,7 @@
   },
   "title": {
     "en": "AIP Use Case: Credit Check AI Agent",
-    "ko": "AIP Use Case: Credit Check AI Agent",
+    "ko": "",
     "ja": "AIP活用事例： クレジット審査AIエージェント"
   },
   "locales": {

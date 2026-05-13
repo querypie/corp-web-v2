@@ -9,13 +9,13 @@
   "downloadPdfSrc": "/documentation/white-papers/qp-whitepaper-ai-transformation-en.pdf",
   "enableDownloadButton": true,
   "externalUrl": "",
-  "gatingLevel": "none",
+  "gatingLevel": "10",
   "hideHeroImage": false,
-  "id": "ai-tranformation-japan",
+  "id": "ai-transformation-japan",
   "imageSrc": "/documentation/white-papers/wp-thumb-24.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 12,
+  "sortOrder": 8,
   "status": "published",
   "storageId": "cnt_000132",
   "summary": {
@@ -25,7 +25,7 @@
   },
   "title": {
     "en": "Why Japanese Enterprises Are Accelerating Their AI Transformation Now",
-    "ko": "왜 지금 일본 기업이 AI 트랜스포메이션에 나서야 하는가",
+    "ko": "",
     "ja": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか"
   },
   "locales": {

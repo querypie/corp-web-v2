@@ -4,14 +4,18 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2025-10-15",
+  "downloadCoverImageSrc": "/demo/use-cases/aip-use-case-thumb-13-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "aircrew-scheduler-ai-agent",
   "imageSrc": "/demo/use-cases/aip-use-case-thumb-13-en.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 1,
+  "sortOrder": 9,
   "status": "published",
   "storageId": "cnt_000079",
   "summary": {
@@ -21,7 +25,7 @@
   },
   "title": {
     "en": "AIP Use Case: AirCrew Scheduler AI Agent",
-    "ko": "AIP Use Case: AirCrew Scheduler AI Agent",
+    "ko": "",
     "ja": "AIP活用事例： 乗務員スケジューリングAIエージェント"
   },
   "locales": {

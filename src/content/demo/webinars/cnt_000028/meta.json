@@ -4,14 +4,18 @@
   "categorySlug": "webinars",
   "contentType": "content",
   "dateIso": "2024-12-05",
+  "downloadCoverImageSrc": "/demo/webinars/wb-thumb-15.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "querypie-japan-webinar-security",
   "imageSrc": "/demo/webinars/wb-thumb-15.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 0,
+  "sortOrder": 10,
   "status": "published",
   "storageId": "cnt_000028",
   "summary": {
@@ -22,7 +26,7 @@
   "title": {
     "en": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
     "ko": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
-    "ja": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー"
+    "ja": ""
   },
   "locales": {
     "en": {

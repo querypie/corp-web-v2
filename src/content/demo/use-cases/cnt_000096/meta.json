@@ -4,14 +4,18 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2024-11-29",
+  "downloadCoverImageSrc": "/demo/use-cases/cs-thumb-air.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "air-company-mori-takeshi",
   "imageSrc": "/demo/use-cases/cs-thumb-air.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 1,
+  "sortOrder": 27,
   "status": "published",
   "storageId": "cnt_000096",
   "summary": {
@@ -20,8 +24,8 @@
     "ja": "AIRがQueryPie Japanを世界中のソリューションパートナーの1つに選んだ理由について、森氏はこう語っています。"
   },
   "title": {
-    "en": "\\\"Beyond monitoring, it’s true governance.\\\"",
-    "ko": "\\\"단순 모니터링을 넘어선, 진정한 거버넌스입니다.\\\"",
+    "en": "\"Beyond monitoring, it’s true governance.\"",
+    "ko": "\"단순 모니터링을 넘어선, 진정한 거버넌스입니다.\"",
     "ja": "「監視を超えて、それは真の統治です。」"
   },
   "locales": {

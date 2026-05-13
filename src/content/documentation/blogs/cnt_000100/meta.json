@@ -4,7 +4,7 @@
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2026-02-20",
-  "downloadCoverImageSrc": "",
+  "downloadCoverImageSrc": "/documentation/blogs/b-thumb-27.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
@@ -15,7 +15,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-27.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 9,
+  "sortOrder": 4,
   "status": "published",
   "storageId": "cnt_000100",
   "summary": {
@@ -25,7 +25,7 @@
   },
   "title": {
     "en": "[2026 Update] The Full Scope of Shadow AI Risk: 5 CxO Actions to Prevent Data Leaks and Compliance Violations",
-    "ko": "[2026 Update] The Full Scope of Shadow AI Risk: 5 CxO Actions to Prevent Data Leaks and Compliance Violations",
+    "ko": "",
     "ja": "【2026年最新】シャドーAIリスクの全貌｜情報漏洩・コンプライアンス違反を防ぐCxOの5つの対策"
   },
   "locales": {

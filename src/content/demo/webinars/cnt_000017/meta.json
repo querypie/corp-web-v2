@@ -4,14 +4,18 @@
   "categorySlug": "webinars",
   "contentType": "content",
   "dateIso": "2025-11-10",
+  "downloadCoverImageSrc": "/demo/webinars/air-company-mcp-20251120.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "air-company-querypie-mcp-webinar",
   "imageSrc": "/demo/webinars/air-company-mcp-20251120.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 0,
+  "sortOrder": 6,
   "status": "published",
   "storageId": "cnt_000017",
   "summary": {
@@ -20,8 +24,8 @@
     "ja": "「AIを活用したいけれど、何から始めればいいかわからない」「生成AIを導入したのに、思ったような成果が出ない」「ChatGPTやCopilot、Geminiを使いこなせていない」そんなふうに課題を感じている方は多いのではないでしょうか？その壁を突破する鍵となるのが、MCP（Model Context Protocol）です。本ウェビナーでは、MCPを活用事例をもとに、なぜMCPが成果につながるのか、実際にどのように活用されているのかを具体的かつわかりやすくご紹介します。​​"
   },
   "title": {
-    "en": "成果に直結！MCP活用事例｜11/20(木)開催",
-    "ko": "成果に直結！MCP活用事例｜11/20(木)開催",
+    "en": "",
+    "ko": "",
     "ja": "成果に直結！MCP活用事例｜11/20(木)開催"
   },
   "locales": {

@@ -4,14 +4,18 @@
   "categorySlug": "webinars",
   "contentType": "content",
   "dateIso": "2024-11-29",
+  "downloadCoverImageSrc": "/demo/webinars/3dk-ep1-ko.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "querypie-integrations-scim-slack-vault-ko",
   "imageSrc": "/demo/webinars/3dk-ep1-ko.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 0,
+  "sortOrder": 18,
   "status": "published",
   "storageId": "cnt_000046",
   "summary": {
@@ -22,7 +26,7 @@
   "title": {
     "en": "Ep.1 QueryPie Integrations: 자동화 핵심만 찌르기!—SCIM, 얍! Vault, 얍! Slack 결재 워크플로 연동, 얍!",
     "ko": "Ep.1 QueryPie Integrations: 자동화 핵심만 찌르기!—SCIM, 얍! Vault, 얍! Slack 결재 워크플로 연동, 얍!",
-    "ja": "Ep.1 QueryPie Integrations: 자동화 핵심만 찌르기!—SCIM, 얍! Vault, 얍! Slack 결재 워크플로 연동, 얍!"
+    "ja": ""
   },
   "locales": {
     "en": {

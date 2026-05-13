@@ -4,7 +4,7 @@
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2025-08-11",
-  "downloadCoverImageSrc": "",
+  "downloadCoverImageSrc": "/documentation/blogs/b-thumb-24.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
@@ -15,7 +15,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-24.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 9,
+  "sortOrder": 7,
   "status": "published",
   "storageId": "cnt_000103",
   "summary": {
@@ -26,7 +26,7 @@
   "title": {
     "en": "Top 10 Privileged Access Management (PAM) Solutions You Should Know",
     "ko": "기업 보안의 핵심, 접근제어 솔루션(PAM) Top 5",
-    "ja": "Top 10 Privileged Access Management (PAM) Solutions You Should Know"
+    "ja": ""
   },
   "locales": {
     "en": {

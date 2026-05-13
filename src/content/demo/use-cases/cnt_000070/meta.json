@@ -4,14 +4,18 @@
   "categorySlug": "use-cases",
   "contentType": "content",
   "dateIso": "2026-02-26",
+  "downloadCoverImageSrc": "/demo/use-cases/aip-use-case-thumb-27-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
+  "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "quotation-ai-agent",
   "imageSrc": "/demo/use-cases/aip-use-case-thumb-27-en.webp",
   "relatedIds": [],
   "section": "demo",
-  "sortOrder": 1,
+  "sortOrder": 3,
   "status": "published",
   "storageId": "cnt_000070",
   "summary": {
@@ -21,7 +25,7 @@
   },
   "title": {
     "en": "AIP Use Case: Quotation AI Agent",
-    "ko": "AIP Use Case: Quotation AI Agent",
+    "ko": "",
     "ja": "AIP活用事例： 見積AIエージェント"
   },
   "locales": {

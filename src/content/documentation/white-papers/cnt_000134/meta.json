@@ -4,7 +4,7 @@
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2025-05-21",
-  "downloadCoverImageSrc": "",
+  "downloadCoverImageSrc": "/documentation/white-papers/wp-thumb-22.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
@@ -15,7 +15,7 @@
   "imageSrc": "/documentation/white-papers/wp-thumb-22.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 12,
+  "sortOrder": 10,
   "status": "published",
   "storageId": "cnt_000134",
   "summary": {

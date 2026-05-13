@@ -4,7 +4,7 @@
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2025-01-23",
-  "downloadCoverImageSrc": "",
+  "downloadCoverImageSrc": "/documentation/blogs/b-thumb-17.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
@@ -15,7 +15,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-17.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 9,
+  "sortOrder": 14,
   "status": "published",
   "storageId": "cnt_000110",
   "summary": {
@@ -25,8 +25,8 @@
   },
   "title": {
     "en": "Demystifying Privileged Access Management: Insights, Comparisons, and Practical Applications",
-    "ko": "Demystifying Privileged Access Management: Insights, Comparisons, and Practical Applications",
-    "ja": "Demystifying Privileged Access Management: Insights, Comparisons, and Practical Applications"
+    "ko": "",
+    "ja": ""
   },
   "locales": {
     "en": {
