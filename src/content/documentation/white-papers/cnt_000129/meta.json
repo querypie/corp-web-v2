@@ -1,5 +1,5 @@
 {
-  "authorName": "querypie",
+  "authorName": "QueryPie AI Editorial Team",
   "authorRole": "",
   "categorySlug": "white-papers",
   "contentType": "content",
@@ -10,13 +10,13 @@
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
-  "hideHeroImage": true,
+  "hideHeroImage": false,
   "id": "ai-agent-guardrails-governance-2026-implementation",
   "imageSrc": "/documentation/white-papers/wp-thumb-29.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 3,
-  "status": "hidden",
+  "sortOrder": 5,
+  "status": "published",
   "storageId": "cnt_000129",
   "summary": {
     "en": "A practical implementation guide for AI-agent guardrails. Includes three case studies (PC-operation agents, development AI vulnerabilities, and autonomous 5G operations), a reusable checklist, and a 90-day rollout roadmap.",
