@@ -53,7 +53,7 @@ export default function ContentGateOverlay({
           <div className="mx-auto flex w-full max-w-[400px] flex-col gap-6 pb-8">
             <div className="flex flex-col gap-3 pt-8 text-center">
               <h2 className="m-0 type-h2 text-fg">{localized.eyebrow}</h2>
-              <p className="m-0 type-body-md text-mute-fg">{localized.description}</p>
+              <p className="m-0 type-body-md text-mute">{localized.description}</p>
             </div>
             <ContentLeadForm
               contactCopy={contactCopy}

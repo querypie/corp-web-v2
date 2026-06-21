@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: Pick<PageProps, "params">): P
     description: meta.description,
     keywords: meta.keywords ? [...meta.keywords] : undefined,
     alternates: {
-      canonical: getSolutionHref(locale, "aip-usage-based-llm"),
+      canonical: getSolutionHref(locale, "usage-based-llm"),
     },
   };
 }
@@ -54,7 +54,7 @@ export default async function SolutionPage({ params, searchParams }: PageProps) 
   if (!Content) notFound();
 
   return (
-    <div className="bg-white text-[#111827]">
+    <div>
       <Content locale={locale} searchParams={await searchParams} />
     </div>
   );

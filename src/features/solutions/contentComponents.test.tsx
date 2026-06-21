@@ -24,7 +24,7 @@ describe("buildSolutionContentComponents", () => {
     render(
       <Integrations
         allLabel="All"
-        basePath="/solutions/acp/integrations"
+        basePath="/solutions/acp"
         categories={[
           { id: "db", label: "Databases" },
           { id: "cloud", label: "Cloud" },
@@ -40,7 +40,7 @@ describe("buildSolutionContentComponents", () => {
     expect(screen.queryByText("AWS")).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "Databases (1)" })).toHaveAttribute(
       "href",
-      "/ko/solutions/acp/integrations?category=db",
+      "/ko/solutions/acp?category=db",
     );
   });
 

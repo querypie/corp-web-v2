@@ -1,0 +1,15 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 640 266" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Connections">
+<path id="Line 10" d="M1.46468e-05 259L0.505302 259C22.5967 259 40.5053 241.091 40.5053 219L40.5053 172.495C40.5053 150.682 58.1877 133 80 133" stroke="var(--stroke-0, #F2F2F2)" stroke-width="2"/>
+<path id="Line 22" d="M-1.86364e-06 175L9.79973 175C24.4136 175 37.8643 167.03 44.8836 154.213L45.2126 153.612C52.1725 140.902 65.5096 133 80 133" stroke="var(--stroke-0, #F2F2F2)" stroke-width="2"/>
+<path id="Line 23" d="M-1.86364e-06 91L9.79973 91C24.4136 91 37.8643 98.9696 44.8836 111.787L45.2126 112.388C52.1725 125.098 65.5096 133 80 133" stroke="var(--stroke-0, #F2F2F2)" stroke-width="2"/>
+<path id="Line 17" d="M640 265L639.495 265C617.403 265 599.495 247.091 599.495 225L599.495 172.495C599.495 150.682 581.812 133 560 133" stroke="var(--stroke-0, #F2F2F2)" stroke-width="2"/>
+<path id="Line 20" d="M640 200L637.296 200C617.941 200 601.571 185.682 598.995 166.5C596.418 147.318 580.048 133 560.694 133L560 133" stroke="var(--stroke-0, #F2F2F2)" stroke-width="2"/>
+<path id="Line 21" d="M640 66L637.296 66C617.941 66 601.571 80.3177 598.995 99.5C596.418 118.682 580.048 133 560.694 133L560 133" stroke="var(--stroke-0, #F2F2F2)" stroke-width="2"/>
+<path id="Line 18" d="M640 1L639.495 1C617.403 0.999999 599.495 18.9086 599.495 41L599.495 93.5053C599.495 115.318 581.812 133 560 133" stroke="var(--stroke-0, #F2F2F2)" stroke-width="2"/>
+<path id="Line 11" d="M5.76576e-06 9L0.505293 9C22.5967 9 40.5053 26.9086 40.5053 49L40.5053 93.5053C40.5053 115.318 58.1877 133 80 133" stroke="var(--stroke-0, #F2F2F2)" stroke-width="2"/>
+<line id="Line 19" x1="560" y1="133" x2="639" y2="133" stroke="var(--stroke-0, #F2F2F2)" stroke-width="2"/>
+<line id="Line 24" x1="460" y1="133" x2="560" y2="133" stroke="var(--stroke-0, #F2F2F2)" stroke-width="2"/>
+<line id="Line 25" x1="80" y1="133" x2="180" y2="133" stroke="var(--stroke-0, #F2F2F2)" stroke-width="2"/>
+</g>
+</svg>

@@ -18,7 +18,7 @@ export default function CommunityLicensePage({
               </span>
             ))}
           </h1>
-          <p className="m-0 whitespace-pre-line type-body-md text-mute-fg">
+          <p className="m-0 whitespace-pre-line type-body-md text-mute">
             {copy.description}
           </p>
         </div>

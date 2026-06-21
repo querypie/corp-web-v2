@@ -73,7 +73,7 @@ export default function CommunityLicenseForm({ copy }: { copy: FormCopy }) {
     return (
       <div className="flex flex-col gap-5">
         <h2 className="type-h3 text-fg">{copy.successTitle}</h2>
-        <p className="m-0 whitespace-pre-line type-body-md text-mute-fg">
+        <p className="m-0 whitespace-pre-line type-body-md text-mute">
           {copy.successDescription}
         </p>
         <div className="flex">

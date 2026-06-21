@@ -38,11 +38,10 @@ src/
 │   ├── seo/               # SEO 메타데이터 관리
 │   └── contact/           # 문의 페이지 복사본
 ├── content/               # 콘텐츠 파일 (소스)
-│   ├── demo/
-│   ├── documentation/
-│   ├── news/
-│   ├── legal/
-│   └── state/content-state.json   # 최종 게시 상태 (핵심 파일)
+│   ├── demo/              # category/cnt_xxxxxx/meta.json + locale 본문
+│   ├── documentation/     # category/cnt_xxxxxx/meta.json + locale 본문
+│   ├── news/              # cnt_xxxxxx/meta.json
+│   └── legal/
 └── constants/             # 내비게이션, i18n, plans, legal 등 정적 데이터
 ```
 
@@ -97,7 +96,7 @@ src/
 
 | 경로 | 메서드 | 역할 |
 |------|--------|------|
-| `/api/admin/content/state` | POST | content-state.json 업데이트 |
+| `/api/admin/content/state` | GET/POST/PUT/PATCH/DELETE | 관리형 콘텐츠 파일 조회·저장·상태 변경·삭제 |
 | `/api/admin/seo/discover` | GET | SEO 메타데이터 조회 |
 | `/api/admin/uploads` | POST | 파일 업로드 |
 | `/api/admin/uploads/content-document` | POST | 문서 업로드 |
@@ -109,13 +108,17 @@ src/
 ## CMS 데이터 흐름
 
 ```
-src/content/**          ← 원본 콘텐츠 파일 (html, tiptap.json, meta.json)
+Admin CMS
         ↓
-content-state.json      ← Admin 변경사항 반영된 최종 상태 (6,600+ lines)
+/api/admin/content/state
         ↓
-contentState.server.ts  ← 서버사이드 파일 I/O
+authored.server.ts      ← src/content/**/cnt_xxxxxx 파일 I/O
         ↓
-data.ts                 ← 콘텐츠 쿼리 / 필터링 / 상세 조회
+src/content/**          ← meta.json, locale별 html/tiptap.json
+        ↓
+contentState.server.ts  ← 서버사이드 콘텐츠 조회
+        ↓
+data.ts                 ← 콘텐츠 유틸 / 필터링 / 경로 생성
         ↓
 Page Components         ← 렌더링
 ```
@@ -154,6 +157,4 @@ Page Components         ← 렌더링
 
 ## 관련 문서
 
-- [프로젝트 계획](../plan/2026-04-15-corp-web-v2-project-plan-design.md)
-- [CMS 완성 계획](../plan/2026-04-15-corp-web-v2-cms-completion-design.md)
 - [Vercel 배포 현황](./vercel-deployment.md)

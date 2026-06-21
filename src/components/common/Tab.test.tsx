@@ -23,7 +23,7 @@ describe("Tab", () => {
     render(<Tab state="off">Inactive</Tab>);
     const btn = screen.getByRole("button");
     expect(btn.className).toContain("bg-transparent");
-    expect(btn.className).toContain("text-mute-fg");
+    expect(btn.className).toContain("text-mute");
   });
 
   it("disabled이면 버튼이 비활성화되고 off 스타일을 적용한다", () => {

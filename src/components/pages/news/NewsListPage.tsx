@@ -42,9 +42,9 @@ export function NewsListCard({
     >
       {/* 날짜 / 제목 / 요약 텍스트 영역 */}
       <div className="order-2 flex min-w-0 flex-1 flex-col gap-[10px] md:order-1">
-        <p className="m-0 type-body-md text-mute-fg">{date}</p>
+        <p className="m-0 type-body-md text-mute">{date}</p>
         <h2 className="content-hover-title m-0 type-h3 text-fg">{title}</h2>
-        <p className="m-0 hidden type-body-md text-mute-fg md:block">{summary}</p>
+        <p className="m-0 hidden type-body-md text-mute md:block">{summary}</p>
       </div>
       {/* 우측 썸네일 영역 */}
       <ContentPreviewImage
@@ -77,7 +77,7 @@ export default function NewsListPage({
   return (
     <div className="flex w-full flex-col gap-20 px-5 pb-10 md:gap-[160px] md:px-10">
       <section className="flex w-full justify-center">
-        <div className="flex w-full max-w-[900px] flex-col gap-20">
+        <div className="flex w-full max-w-[1200px] flex-col gap-20">
         {/* 뉴스 카드 목록 */}
         <div className="flex min-w-0 w-full flex-col gap-10">
           {items.length > 0 ? (
@@ -86,13 +86,13 @@ export default function NewsListPage({
             ))
           ) : (
             <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
-              <p className="m-0 type-body-md text-mute-fg">{resolvedEmptyMessage}</p>
+              <p className="m-0 type-body-md text-mute">{resolvedEmptyMessage}</p>
             </div>
             )}
           </div>
         </div>
       </section>
-      <Cta />
+      <Cta locale={locale} />
     </div>
   );
 }

@@ -185,7 +185,3 @@ curl -X POST \
 `type`은 `plain` 또는 `sensitive`. `sensitive`는 `development` 환경에 설정 불가.
 
 ---
-
-## 관련 문서
-
-- [프로젝트 계획](../plan/2026-04-15-corp-web-v2-project-plan-design.md)

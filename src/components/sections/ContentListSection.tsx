@@ -27,7 +27,7 @@ function ContentListCard({ category, href, imageSrc, title }: ContentListItem) {
         <img alt={title} className="card-media-motion block h-full w-full object-cover" src={imageSrc} />
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
-        <p className="m-0 type-mono text-brand">{category}</p>
+        <p className="m-0 type-body-sm text-mute">{category}</p>
         <p className="content-hover-title m-0 type-h3 text-fg">{title}</p>
       </div>
     </a>
@@ -43,7 +43,7 @@ export default function ContentListSection({
 }: ContentListSectionProps) {
   return (
     /* 홈 하단용 콘텐츠 리스트 섹션 */
-    <section className={cx("flex w-full justify-center overflow-hidden bg-bg-deep py-12 md:py-[100px]", className)}>
+    <section className={cx("flex w-full justify-center overflow-hidden bg-bg-deep py-14 md:py-[100px]", className)}>
       <div className="flex w-full justify-center px-5 md:px-10">
         <div
           className="flex w-full max-w-[1200px] flex-col gap-8 md:flex-row md:items-start md:gap-[60px]"
@@ -51,14 +51,12 @@ export default function ContentListSection({
         {/* 좌측 제목/설명/필터 버튼 영역 */}
         <div className="flex w-full flex-col gap-5 md:w-[350px] md:min-w-[160px]">
           <h2 className="m-0 type-h2 text-fg">{title}</h2>
-          <p className="m-0 type-body-lg text-mute-fg">{description}</p>
+          <p className="m-0 type-body-lg text-mute">{description}</p>
           <div className="flex flex-row flex-wrap items-start gap-3 md:flex-col">
             {links.map((link) => (
-              <a key={link.href} href={link.href}>
-                <TextButton>
-                  {link.label}
-                </TextButton>
-              </a>
+              <TextButton href={link.href} key={link.href}>
+                {link.label}
+              </TextButton>
             ))}
           </div>
         </div>

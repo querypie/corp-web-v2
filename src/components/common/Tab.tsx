@@ -32,7 +32,7 @@ export default function Tab({
         // 호버 상태 미리보기
         resolvedState === "hover" && "bg-transparent text-fg",
         // 비활성 탭
-        resolvedState === "off" && "bg-transparent text-mute-fg hover:text-fg",
+        resolvedState === "off" && "bg-transparent text-mute hover:text-fg",
         "cursor-pointer disabled:cursor-not-allowed",
         className,
       )}

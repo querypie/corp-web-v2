@@ -18,7 +18,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 function ReviewCard({ body, company, imageSrc, role }: ReviewItem) {
   return (
     /* 후기 카드 1개 */
-    <article className="card-hover flex h-auto min-w-0 w-full flex-col justify-between gap-5 rounded-box bg-bg-content px-6 py-[30px] md:h-[210px] md:flex-1 md:w-auto md:gap-0">
+    <article className="flex h-auto min-w-0 w-full flex-col justify-between gap-5 rounded-box bg-bg-content px-6 py-[30px] md:h-[210px] md:flex-1 md:w-auto md:gap-0">
       <p className="m-0 type-body-lg text-fg">{body}</p>
       <div className="flex items-start gap-3">
         <div className="h-10 w-10 overflow-hidden rounded-lg">
@@ -26,7 +26,7 @@ function ReviewCard({ body, company, imageSrc, role }: ReviewItem) {
         </div>
         <div className="flex min-w-0 flex-1 flex-col type-body-md leading-5">
           <p className="m-0 text-fg">{company}</p>
-          <p className="m-0 text-mute-fg">{role}</p>
+          <p className="m-0 text-mute">{role}</p>
         </div>
       </div>
     </article>

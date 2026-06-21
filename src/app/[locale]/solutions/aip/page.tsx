@@ -54,7 +54,7 @@ export default async function SolutionPage({ params, searchParams }: PageProps) 
   if (!Content) notFound();
 
   return (
-    <div className="bg-white text-[#111827]">
+    <div>
       <Content locale={locale} searchParams={await searchParams} />
     </div>
   );

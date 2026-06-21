@@ -47,10 +47,10 @@ function DocsListCard({
         useThumbnailFallback
       />
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
-        {showCategory ? <p className="m-0 type-mono text-brand">{category}</p> : null}
+        {showCategory ? <p className="m-0 type-body-sm text-mute">{category}</p> : null}
         <p className="content-hover-title m-0 type-h3 text-fg">{title}</p>
-        {description ? <p className="m-0 type-body-md text-mute-fg">{description}</p> : null}
-        {date ? <p className="m-0 type-body-md text-mute-fg">{date}</p> : null}
+        {description ? <p className="m-0 type-body-md text-mute">{description}</p> : null}
+        {date ? <p className="m-0 type-body-md text-mute">{date}</p> : null}
       </div>
     </a>
   );
@@ -101,7 +101,7 @@ export default function DocsListPage({
                   return (
                     <span
                       key={`section-${item.label}-${index}`}
-                      className="whitespace-nowrap type-mono text-mute-fg"
+                      className="whitespace-nowrap type-mono text-mute"
                     >
                       {item.label}
                     </span>
@@ -113,7 +113,7 @@ export default function DocsListPage({
                     key={item.href}
                     className={cx(
                       "whitespace-nowrap transition-colors hover:text-fg",
-                      item.isActive ? "text-fg" : "text-mute-fg",
+                      item.isActive ? "text-fg" : "text-mute",
                     )}
                     href={item.href}
                   >
@@ -131,14 +131,14 @@ export default function DocsListPage({
               ))
             ) : (
               <div className="col-span-full flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
-                <p className="m-0 type-body-md text-mute-fg">{resolvedEmptyMessage}</p>
+                <p className="m-0 type-body-md text-mute">{resolvedEmptyMessage}</p>
               </div>
             )}
           </div>
         </div>
         </div>
       </section>
-      <Cta />
+      <Cta locale={locale} />
     </div>
   );
 }

@@ -115,7 +115,7 @@ export default function AdminSidebar({
                 key={item.href}
                 className={cx(
                   "inline-flex items-center rounded-button px-3 py-2 type-body-md transition-colors",
-                  isActive ? "bg-secondary text-fg" : "text-mute-fg hover:bg-[#242426] hover:text-fg",
+                  isActive ? "bg-secondary text-fg" : "text-mute hover:bg-[#242426] hover:text-fg",
                 )}
                 href={item.href}
                 onClick={(event) => {
@@ -151,7 +151,7 @@ export default function AdminSidebar({
                     key={item.href}
                     className={cx(
                       "inline-flex items-center rounded-button px-3 py-2 type-body-md transition-colors",
-                      isActive ? "bg-secondary text-fg" : "text-mute-fg hover:bg-[#242426] hover:text-fg",
+                      isActive ? "bg-secondary text-fg" : "text-mute hover:bg-[#242426] hover:text-fg",
                     )}
                     href={item.href}
                     onClick={(event) => {

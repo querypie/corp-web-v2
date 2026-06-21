@@ -42,7 +42,7 @@ const config: Config = {
       // 컬러 토큰: UI 전반에서 공통으로 사용하는 의미 기반 색상
       colors: {
         fg: "var(--color-fg)",
-        "mute-fg": "var(--color-mute-fg)",
+        "mute": "var(--color-mute)",
         placeholder: "var(--color-placeholder)",
         "bg-content": "var(--color-bg-content)",
         "bg-deep": "var(--color-bg-deep)",
@@ -82,7 +82,7 @@ const config: Config = {
       // 폰트 패밀리 토큰
       fontFamily: {
         sans: [
-          "Mona Sans VF",
+          "var(--font-mona-sans)",
           "SF Pro Display",
           "-apple-system",
           "system-ui",
@@ -96,7 +96,7 @@ const config: Config = {
           "sans-serif",
         ],
         pretendard: ["Pretendard Variable"],
-        "pretendard-ja": ["Pretendard JP"],
+        "pretendard-ja": ["Pretendard JP Variable"],
         mono: ["var(--font-jetbrains-mono)", "monospace"],
       },
     },

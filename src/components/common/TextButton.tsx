@@ -1,12 +1,25 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 
 type TextButtonState = "default" | "hover" | "disable";
 
-export type TextButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children"> & {
-  arrow?: boolean;
+type TextButtonBaseProps = {
   children?: ReactNode;
+  className?: string;
+  disabled?: boolean;
   state?: TextButtonState;
 };
+
+type TextButtonAnchorProps = TextButtonBaseProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof TextButtonBaseProps | "href"> & {
+    href: string;
+  };
+
+type TextButtonButtonProps = TextButtonBaseProps &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, keyof TextButtonBaseProps> & {
+    href?: undefined;
+  };
+
+export type TextButtonProps = TextButtonAnchorProps | TextButtonButtonProps;
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -33,35 +46,61 @@ function ArrowRightIcon({ className }: { className?: string }) {
 }
 
 export default function TextButton({
-  arrow = true,
   children = "Button",
   className,
   disabled,
+  href,
   state = "default",
-  type = "button",
   ...props
 }: TextButtonProps) {
   const resolvedState = disabled ? "disable" : state;
+  const classes = cx(
+    "pressable group inline-flex items-center justify-center gap-1.5 bg-transparent p-0 text-brand hover:text-fg",
+    !className?.includes("type-") && "type-body-md",
+    resolvedState === "hover" && "text-fg",
+    resolvedState === "disable" && "cursor-not-allowed opacity-40",
+    !disabled && "cursor-pointer",
+    className,
+  );
+  const content = (
+    <>
+      <span>{children}</span>
+      <ArrowRightIcon className="h-4 w-4 text-mute group-hover:animate-[button-arrow-nudge_220ms_ease-out_forwards]" />
+    </>
+  );
+
+  if (href) {
+    const anchorProps = props as Omit<
+      AnchorHTMLAttributes<HTMLAnchorElement>,
+      keyof TextButtonBaseProps | "href"
+    >;
+
+    return (
+      <a
+        {...anchorProps}
+        aria-disabled={disabled ? true : undefined}
+        className={classes}
+        href={disabled ? undefined : href}
+        tabIndex={disabled ? -1 : anchorProps.tabIndex}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  const buttonProps = props as Omit<
+    ButtonHTMLAttributes<HTMLButtonElement>,
+    keyof TextButtonBaseProps
+  >;
 
   return (
     <button
-      className={cx(
-        "group inline-flex items-center justify-center gap-1.5 bg-transparent p-0 type-body-md text-fg transition-colors hover:text-mute-fg",
-        resolvedState === "hover" && "text-mute-fg",
-        resolvedState === "disable" && "cursor-not-allowed opacity-40",
-        !disabled && "cursor-pointer",
-        className,
-      )}
+      {...buttonProps}
+      className={classes}
       disabled={resolvedState === "disable"}
-      type={type}
-      {...props}
+      type={buttonProps.type ?? "button"}
     >
-      <span>{children}</span>
-      {arrow ? (
-        <ArrowRightIcon
-          className="h-4 w-4 group-hover:animate-[button-arrow-nudge_220ms_ease-out_forwards]"
-        />
-      ) : null}
+      {content}
     </button>
   );
 }

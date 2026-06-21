@@ -1,5 +1,6 @@
+import Cta from "@/components/sections/Cta";
+import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
-import { buildSolutionContentComponents } from "@/features/solutions/contentComponents";
 
 type Props = {
   locale: Locale;
@@ -7,142 +8,81 @@ type Props = {
 };
 
 export const metadata = {
-    "title": "QueryPie AIP：あなたのためのAI変革エキスパート",
-    "description": "組織に組み込まれたフォワードデプロイドエンジニア（FDE）が、戦略と開発から本番運用まで包括的なAI変革を提供し、AIイニシアチブの成功を保証。",
-    "keywords": [
-      "クエリパイ AI",
-      "QueryPie AI",
-      "AI Platform",
-      "AIP",
-      "AI",
-      "MCPゲートウェイ",
-      "アクセス制御",
-      "カスタムAIエージェント",
-      "インフラ運用",
-      "QueryPie AI Agent",
-      "使用量ベース",
-      "フォワードデプロイドエンジニア",
-      "FDE"
-    ]
+  title: "FDE Services",
+  description:
+    "Forward Deployed Engineersが業務フローを特定し、カスタムAIエージェントを構築してAIを成果へつなげます。",
+  keywords: ["FDE Services", "Forward Deployed Engineers", "AI agents"],
 } as const;
 
+const featureItems = [
+  {
+    title: ["Find", "Problems"],
+    body: [
+      "AI専門家が変革を妨げる課題を特定します。",
+      "時間とコストが膨らむ前にボトルネックを見つけ、",
+      "実行可能な優先順位を整理します。",
+    ],
+    imageAlt: "AI変革の課題発見プレビュー",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+  {
+    title: ["Make", "Plans"],
+    body: [
+      "事業に合ったAIアプローチを専門家と設計します。",
+      "複雑な課題を明確で実行可能な",
+      "アクションプランへ落とし込みます。",
+    ],
+    imageAlt: "AI変革計画プレビュー",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+  },
+  {
+    title: ["Build Custom", "AI Agents"],
+    body: [
+      "初期アイデアから完成したプロダクトまで支援します。",
+      "実際の業務フローに合わせたAIエージェントを",
+      "設計、構築、改善します。",
+    ],
+    imageAlt: "カスタムAIエージェント構築プレビュー",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+  {
+    title: ["Make AI", "Work"],
+    body: [
+      "AIが本番環境で機能するよう継続的に支援します。",
+      "専門家のガイドにより、デモから",
+      "持続的な価値へつなげます。",
+    ],
+    imageAlt: "本番AI運用プレビュー",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+  },
+];
 
-export default function AipFdeServicesJASolutionContent({ locale, searchParams }: Props) {
-  const {
-    Box,
-    CenterSection,
-    DarkBadge,
-    FileImage,
-    Integrations,
-    IntroducingQueryPie,
-    KeyFeature,
-    KillerFeature,
-    KillerFeatureCategory,
-    KillerFeatures,
-    LearnMoreLink,
-    Link,
-    LottiePlayer,
-    MainFeatureDescription,
-    SplitView,
-    StaticBody,
-    StaticH1,
-    StaticH2,
-    StaticH4,
-    StaticHeader,
-    ThreeColumnList,
-    ThumbnailYoutube,
-    Youtube
-  } = buildSolutionContentComponents({ locale, searchParams }) as any;
-
+export default function FdeServicesJASolutionContent({ locale }: Props) {
   return (
-<Box direction="column">
-  <Box paddingTopSize="lg" paddingBottomSize="xxl" center as="section">
-    <CenterSection gapSize="xxl">
-      <Box direction="column" center gapSize="sm">
-        <StaticH1>
-          {'QueryPie FDE'}
-          <br />
-          {'AXを成功に導く専門家チーム'}
-        </StaticH1>
-        <StaticHeader color="var(--text-body)">
-          {
-            'フォワードデプロイドエンジニア（FDE）は、ビジネスとテクノロジーの両方を理解する専門家です。'
-          }
-          <br />
-          {
-            '業務変革のコンセプト設計から、AI開発、本番運用まで一貫してサポート。'
-          }
-          <br />
-          {
-            'あなたのチームに入り込み、確実な成果を出すAXを実現します。'
-          }
-        </StaticHeader>
-      </Box>
-      <Box as="section" center>
-        <FileImage
-          alt="Custom AI Agents"
-          filepath="public/solutions/aip/fde-services/fde.svg"
-          width={920}
-          height={580}
-          responsive
-        />
-      </Box>
-    </CenterSection>
-  </Box>
+    <div className="flex w-full flex-col gap-14 px-5 pb-10 md:gap-[160px] md:px-10">
+      <section className="flex w-full justify-center">
+        <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
+          <div>
+            <h1 className="m-0 type-h1 text-fg">
+              <span className="block">AI Transformation Expert</span>
+              <span className="block">at Your Service</span>
+            </h1>
+          </div>
+          <p className="m-0 max-w-[720px] type-body-lg leading-relaxed text-fg">
+            Forward Deployed Engineers (FDE) embedded in your organization deliver comprehensive AI
+            transformation—from strategy and development to production operations, ensuring your AI
+            initiatives succeed.
+          </p>
+        </header>
+      </section>
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" background="gray" center as="section" id="features">
-    <CenterSection gapSize="xxl">
-      <MainFeatureDescription
-        title={'課題の発見と分析'}
-        description={'現場ヒアリングを通じて、AXを妨げている真の課題を特定。\n時間とコストの無駄を防ぎ、最適な解決策を導きます。'}
-        image="public/solutions/aip/fde-services/find-problems.png"
-        imageWidth={540}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
+      <FeatureSection items={featureItems} />
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'戦略とロードマップの策定'}
-        description={'貴社のビジネス目標に合わせた、最適なAX戦略を設計。\n課題を具体的なアクションステップに落とし込み、\n実現可能な導入計画を立案します。'}
-        image="public/solutions/aip/fde-services/make-plans.png"
-        imageWidth={580}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section" background="gray">
-    <CenterSection>
-      <MainFeatureDescription
-        title={'カスタムAIエージェントの構築'}
-        description={'貴社の業務に特化したAIエージェントを、ゼロから構築。\n要件定義、設計、開発、テストの全工程でFDEがガイドし、\n実用的なAIを実装します。'}
-        image="public/solutions/aip/fde-services/build-custom-ai-agents.png"
-        imageWidth={520}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'AI実用化を支援'}
-        description={'本番稼働後も、運用支援と効果測定を継続的に実施。\nデータに基づいた改善提案で、AXの成果を最大化します。'}
-        image="public/solutions/aip/fde-services/make-ai-work.png"
-        imageWidth={580}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-</Box>
+      <div>
+        <Cta locale={locale} />
+      </div>
+    </div>
   );
 }

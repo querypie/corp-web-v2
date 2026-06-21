@@ -291,7 +291,7 @@ export default async function CertificationsRoute({
 
   if (!isLocale(locale)) notFound();
 
-  return <CertificationsPage {...certificationsCopy[locale]} />;
+  return <CertificationsPage {...certificationsCopy[locale]} locale={locale} />;
 }
 
 export async function generateMetadata({ params }: CertificationsRouteProps): Promise<Metadata> {

@@ -1,5 +1,8 @@
+import Cta from "@/components/sections/Cta";
+import YoutubePreviewPlayer from "@/components/common/YoutubePreviewPlayer";
+import AipThreeCardSection from "@/components/sections/AipThreeCardSection";
+import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
-import { buildSolutionContentComponents } from "@/features/solutions/contentComponents";
 
 type Props = {
   locale: Locale;
@@ -7,209 +10,98 @@ type Props = {
 };
 
 export const metadata = {
-    "title": "QueryPie: Secure Enterprise AI Hub",
-    "description": "보안 때문에 망설였던 AI, 이젠 쉽고 안전하게 사용하세요. AI가 데이터를 분석하고, 인프라를 운영하며, 보안을 강화하는 하나의 자율 보안 운영 플랫폼. 당신의 AI는 더 스마트해지고 보안은 더 강력해집니다.",
-    "keywords": [
-      "쿼리파이",
-      "QueryPie",
-      "AI PAM",
-      "PAM",
-      "AI",
-      "MCP 보안",
-      "Zero Trust",
-      "접근 제어",
-      "보안 자동화",
-      "자율 보안",
-      "인프라 운영",
-      "QueryPie AI Agent"
-    ]
+  title: "QueryPie AI Platform (AIP)",
+  description:
+    "QueryPie AIP는 엔터프라이즈 AI 전환을 위한 AI 플랫폼입니다.",
+  keywords: ["QueryPie AI", "AI Platform", "AIP", "MCP Gateway"],
 } as const;
 
+const featureItems = [
+  {
+    body: [
+      "사용량 기반 제어, 비용 가시성,",
+      "프로덕션 팀을 위한 거버넌스로",
+      "엔터프라이즈 LLM 환경을 운영합니다.",
+    ],
+    imageAlt: "사용량 기반 LLM 배포 미리보기",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+    title: ["실용적인", "엔터프라이즈 AI를 시작하세요"],
+  },
+  {
+    body: [
+      "관리형 MCP 게이트웨이로 AI 에이전트를",
+      "도구와 데이터에 연결하고, 정책 적용과",
+      "감사 로그까지 한곳에서 확인합니다.",
+    ],
+    imageAlt: "MCP 게이트웨이 미리보기",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+    title: ["모든 MCP 연결을", "거버넌스하세요"],
+  },
+  {
+    body: [
+      "Forward Deployed Engineers가 비즈니스 업무를 찾고,",
+      "맞춤형 에이전트를 구축해 AI 파일럿을",
+      "측정 가능한 가치로 전환합니다.",
+    ],
+    imageAlt: "Forward Deployed Engineer 워크플로우 미리보기",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+    title: ["실제 업무에 맞춘", "에이전트를 구축하세요"],
+  },
+  {
+    body: [
+      "프롬프트, 모델, 도구, 사용 활동을",
+      "하나의 운영 레이어로 모아 보안팀과",
+      "비즈니스팀이 AI를 자신 있게 확장합니다.",
+    ],
+    imageAlt: "AI 운영 가시성 미리보기",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+    title: ["엔터프라이즈 제어로", "AI를 확장하세요"],
+  },
+];
 
-export default function AipKOSolutionContent({ locale, searchParams }: Props) {
-  const {
-    Box,
-    CenterSection,
-    DarkBadge,
-    FileImage,
-    Integrations,
-    IntroducingQueryPie,
-    KeyFeature,
-    KillerFeature,
-    KillerFeatureCategory,
-    KillerFeatures,
-    LearnMoreLink,
-    Link,
-    LottiePlayer,
-    MainFeatureDescription,
-    SplitView,
-    StaticBody,
-    StaticH1,
-    StaticH2,
-    StaticH4,
-    StaticHeader,
-    ThreeColumnList,
-    ThumbnailYoutube,
-    Youtube
-  } = buildSolutionContentComponents({ locale, searchParams }) as any;
-
+export default function AipKOSolutionContent({ locale }: Props) {
   return (
-<Box direction="column">
-  <Box paddingTopSize="lg" paddingBottomSize="xxl" center as="section">
-    <CenterSection gapSize="xxl">
-      <Box direction="column" center gapSize="sm">
-        <StaticH1>
-          {'QueryPie AI Platform (AIP)'}
-        </StaticH1>
-        <StaticHeader color="var(--text-body)">
-          {
-            'The platform that delivers enterprise AI transformation through economical, enterprise-ready solutions—'
-          }
-          <br />
-          {
-            'featuring usage-based LLM deployment and comprehensive MCP gateway.'
-          }
-          <br />
-          {
-            'Complete transformation through Forward Deployed Engineers (FDE) delivering tailored AI agents.'
-          }
-        </StaticHeader>
-      </Box>
-      <Box as="section" center>
-        <ThumbnailYoutube
-          videoId="nJGSCd6itUE"
-          thumbnailImg="public/solutions/aip/aip-video-thumb.png"
-        />
-      </Box>
-    </CenterSection>
-  </Box>
+    <div className="flex w-full flex-col gap-14 px-5 pb-10 md:gap-[160px] md:px-10">
+      <div className="flex flex-col gap-14 md:gap-20">
+        <div>
+          <section className="flex w-full justify-center">
+            <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
+              <h1 className="m-0 type-h1 text-fg">AI Platform</h1>
+              <p className="m-0 max-w-[720px] type-body-lg leading-relaxed text-fg">
+                경제적이고 엔터프라이즈에 적합한 솔루션으로 기업의 AI 전환을 구현하는
+                플랫폼입니다. 사용량 기반 LLM 배포와 포괄적인 MCP 게이트웨이를 제공하며,
+                Forward Deployed Engineers (FDE)가 맞춤형 AI 에이전트를 통해 완전한 전환을
+                지원합니다.
+              </p>
+            </header>
+          </section>
+        </div>
 
-  <IntroducingQueryPie
-    title="Enterprise AI That Actually Delivers"
-    description="AI automation that connects everything, costs less, and comes with expert deployment support."
-    items={[
-      {
-        titleImage: 'public/solutions/aip/tailored-security.png',
-        title: 'Usage-Based\nEnterprise AI',
-        description: 'Replace expensive ChatGPT subscriptions with cost-effective, usage-based enterprise LLM deployment that scales with your needs.\nPerfect for organizations seeking flexible, budget-friendly AI solutions with enterprise-grade security and compliance capabilities.',
-        learnMoreButton: {
-          href: '/solutions/aip/usage-based-llm',
-          label: 'Learn more',
-          external: true
-        }
-      },
-      {
-        titleImage: 'public/solutions/aip/simple-compliance.png',
-        title: 'Unified\nMCP Gateway',
-        description: 'Centrally manage, monitor, and integrate 45+ pre-built MCP tools and custom MCP servers through our comprehensive gateway platform. \nStreamline AI workflows across your entire tech stack with unified governance and seamless tool connectivity.',
-        learnMoreButton: {
-          href: '/solutions/aip/mcp-gateway',
-          label: 'Learn more',
-          external: true
-        }
-      },
-      {
-        titleImage: 'public/solutions/aip/complete-visibility.png',
-        title: 'Forward Deployed Engineer (FDE) Service',
-        description: 'Complete AI transformation from strategy consulting to custom AI agent development through our expert team. \nAccelerate your AI journey with dedicated Forward Deployed Engineers (FDE) who deliver tailored, production-ready solutions for your business.',
-        learnMoreButton: {
-          href: '/solutions/aip/fde-services',
-          label: 'Learn more',
-          external: true
-        }
-      }
-    ]}
-  />
+        <div>
+          <section className="flex w-full justify-center">
+            <YoutubePreviewPlayer
+              embedSrc="https://www.youtube.com/embed/nJGSCd6itUE?si=2wccYas88jLRO7q2"
+              thumbnailAlt="QueryPie AI Platform video thumbnail"
+              thumbnailSrc="/solutions/aip/aip-cover.jpg"
+              title="QueryPie AI Platform video"
+            />
+          </section>
+        </div>
+      </div>
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" background="gray" center as="section" id="features">
-    <CenterSection gapSize="xxl">
-      <Box direction="column" center gapSize="sm">
-        <StaticH2>{'What QueryPie AIP Can Do'}</StaticH2>
-      </Box>
-      <MainFeatureDescription
-        title={'Prompt Auto-Generation'}
-        description={'Start with a simple prompt in your Preset Instructions\nand let our auto-generation create comprehensive,\noptimized prompts that maximize your AI agent effectiveness.'}
-        checkList={[]}
-        image="public/solutions/aip/aip_function_prompt.gif"
-        imageWidth={540}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
+      <div className="-mx-5 md:-mx-10">
+        <AipThreeCardSection locale={locale} />
+      </div>
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'Simple Integrations'}
-        description={'Easily connect your working tools through OAuth authorization.\nBeyond our provided integrations, add your custom and internal tools\nto create business workflow automation tailored to your needs.'}
-        checkList={[]}
-        learnMoreButton={{
-          href: '/solutions/aip/integrations',
-          label: 'See All Available AIP Integrations',
-          external: true
-        }}
-        image="public/solutions/aip/aip_function_integration.gif"
-        imageWidth={580}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
+      <div id="features">
+        <FeatureSection items={featureItems} />
+      </div>
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section" background="gray">
-    <CenterSection>
-      <MainFeatureDescription
-        title={'Contextual Knowledge Bundles'}
-        description={'Turn your documents into knowledge bundles for smarter AI responses.\nRAG-powered agents pull from your organization\'s information instantly,\ndelivering accurate answers based on your business context.'}
-        checkList={[]}
-        image="public/solutions/aip/aip_function_knowledge.gif"
-        imageWidth={520}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'Custom Agent Creation'}
-        description={'Install pre-built agents from our comprehensive library\nor create custom solutions tailoring each agent\'s capabilities\nto your specific operational requirements.'}
-        checkList={[]}
-        image="public/solutions/aip/aip_function_createagent.gif"
-        imageWidth={620}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section" background="gray">
-    <CenterSection>
-      <MainFeatureDescription
-        title={'Artifact Visualization'}
-        description={'Enhance AI responses with charts, graphs, and interactive elements.\nMake complex insights easier to understand through visual aids,\nthen export polished reports for stakeholders and decision-makers.'}
-        checkList={[]}
-        image="public/solutions/aip/aip_function_visualization.gif"
-        imageWidth={520}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'Schedule Agents'}
-        description={'Automate routine tasks by scheduling AI agents at specified intervals.\nConfigure recurring operations through simple agent conversations,\nreducing manual effort while ensuring consistent execution.'}
-        checkList={[]}
-        image="public/solutions/aip/aip_function_schedule.gif"
-        imageWidth={620}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
-
-</Box>
+      <div>
+        <Cta locale={locale} />
+      </div>
+    </div>
   );
 }

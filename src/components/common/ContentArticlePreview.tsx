@@ -40,7 +40,7 @@ export default function ContentArticlePreview({
       <div className="flex flex-col gap-[10px]">
         <h1 className="m-0 type-h1 leading-[42px] text-fg">{title}</h1>
         {writer ? <div className="type-body-md text-fg">{writer}</div> : null}
-        {date ? <p className="m-0 type-body-md text-mute-fg">{date}</p> : null}
+        {date ? <p className="m-0 type-body-md text-mute">{date}</p> : null}
       </div>
 
       {shouldRenderHero ? (

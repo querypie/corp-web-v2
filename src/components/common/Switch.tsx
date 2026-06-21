@@ -66,7 +66,7 @@ export default function Switch({
       type={type}
       {...props}
     >
-      {label ? <span className={cx(styles.text, "text-mute-fg")}>{label}</span> : null}
+      {label ? <span className={cx(styles.text, "text-mute")}>{label}</span> : null}
       <span
         className={cx(
           "relative inline-flex items-center rounded-full transition-colors",

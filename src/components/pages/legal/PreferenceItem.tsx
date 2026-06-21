@@ -33,7 +33,7 @@ export default function PreferenceItem({
         />
         <div className="flex flex-col gap-2">
           <h2 className="m-0 type-body-lg text-fg">{title}</h2>
-          <p className="m-0 type-body-md text-mute-fg">{`${description} ${detail}`}</p>
+          <p className="m-0 type-body-md text-mute">{`${description} ${detail}`}</p>
         </div>
       </div>
     </article>

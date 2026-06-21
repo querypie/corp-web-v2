@@ -128,7 +128,7 @@ function ConfirmDialog({
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="flex flex-col items-center gap-2 text-center">
             <h2 className="m-0 type-h3 text-fg">{title}</h2>
-            <p className="m-0 whitespace-pre-line type-body-md text-mute-fg">{description}</p>
+            <p className="m-0 whitespace-pre-line type-body-md text-mute">{description}</p>
             {highlightedLines?.length ? (
               <div className="flex flex-col items-center gap-1 text-center">
                 {highlightedLines.map((line) => (
@@ -204,7 +204,7 @@ function TextAreaField({
     <div className={cx("flex w-full flex-col gap-[10px]", containerClassName)}>
       <div className="flex items-end justify-between gap-4">
         <label className="type-body-md text-fg">{label}</label>
-        {helperText ? <span className="type-body-sm text-mute-fg">{helperText}</span> : null}
+        {helperText ? <span className="type-body-sm text-mute">{helperText}</span> : null}
       </div>
       <div className={cx("relative", textareaWrapperClassName)}>
         <Textarea
@@ -234,7 +234,7 @@ function InlineField({
 }
 
 function StatusBadge({ children }: { children: React.ReactNode }) {
-  return <div className="rounded-full border border-border bg-bg-content px-3 py-1 type-body-sm leading-4 text-mute-fg">{children}</div>;
+  return <div className="rounded-full border border-border bg-bg-content px-3 py-1 type-body-sm leading-4 text-mute">{children}</div>;
 }
 
 function PanelHeader({
@@ -1055,7 +1055,7 @@ const [isSaving, setIsSaving] = useState(false);
                   <Tooltip content={"각 언어 탭에 제목을 입력한 경우에만\n해당 언어 사이트에 게시물이 노출됩니다."}>
                     <button
                       aria-label="제목 노출 규칙 안내"
-                      className="inline-flex h-4 w-4 items-center justify-center rounded-full text-mute-fg transition-colors hover:text-fg"
+                      className="inline-flex h-4 w-4 items-center justify-center rounded-full text-mute transition-colors hover:text-fg"
                       type="button"
                     >
                       <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 20 20" fill="none">
@@ -1119,10 +1119,10 @@ const [isSaving, setIsSaving] = useState(false);
             <InlineField label="날짜">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                 <div className="flex min-w-0 flex-1 items-center gap-3">
-                  <Input className="w-full bg-bg-content" inputClassName="text-mute-fg" readOnly type="text" value={form.dateIso} />
+                  <Input className="w-full bg-bg-content" inputClassName="text-mute" readOnly type="text" value={form.dateIso} />
                   {form.dateIso ? (
                     <button
-                      className="shrink-0 bg-transparent p-0 type-body-md text-mute-fg transition-colors hover:text-fg"
+                      className="shrink-0 bg-transparent p-0 type-body-md text-mute transition-colors hover:text-fg"
                       onClick={clearDate}
                       type="button"
                     >
@@ -1132,7 +1132,7 @@ const [isSaving, setIsSaving] = useState(false);
                 </div>
                 <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={handleDateButtonClick} style="round" variant="outline">선택</Button>
                 {supportsLeadGate ? (
-                  <label className="flex items-center gap-2 type-body-sm text-mute-fg sm:ml-5">
+                  <label className="flex items-center gap-2 type-body-sm text-mute sm:ml-5">
                     <input
                       checked={form.enableDownloadButton}
                       className="h-4 w-4 rounded border-border bg-bg-content accent-[var(--color-success)]"
@@ -1157,7 +1157,7 @@ const [isSaving, setIsSaving] = useState(false);
                     />
                     {pdfName ? (
                       <button
-                        className="shrink-0 bg-transparent p-0 type-body-md text-mute-fg transition-colors hover:text-fg"
+                        className="shrink-0 bg-transparent p-0 type-body-md text-mute transition-colors hover:text-fg"
                         onClick={clearPdf}
                         type="button"
                       >
@@ -1190,7 +1190,7 @@ const [isSaving, setIsSaving] = useState(false);
                     />
                     {thumbnailName ? (
                       <button
-                        className="shrink-0 bg-transparent p-0 type-body-md text-mute-fg transition-colors hover:text-fg"
+                        className="shrink-0 bg-transparent p-0 type-body-md text-mute transition-colors hover:text-fg"
                         onClick={clearThumbnail}
                         type="button"
                       >
@@ -1199,7 +1199,7 @@ const [isSaving, setIsSaving] = useState(false);
                     ) : null}
                   </div>
                   <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} style="round" variant="outline">추가</Button>
-                  <label className="flex items-center gap-2 type-body-sm text-mute-fg lg:ml-1">
+                  <label className="flex items-center gap-2 type-body-sm text-mute lg:ml-1">
                     <input
                       checked={form.hideHeroImage}
                       className="h-4 w-4 rounded border-border bg-bg-content accent-[var(--color-success)]"
@@ -1224,7 +1224,7 @@ const [isSaving, setIsSaving] = useState(false);
                     />
                     {thumbnailName ? (
                       <button
-                        className="shrink-0 bg-transparent p-0 type-body-md text-mute-fg transition-colors hover:text-fg"
+                        className="shrink-0 bg-transparent p-0 type-body-md text-mute transition-colors hover:text-fg"
                         onClick={clearThumbnail}
                         type="button"
                       >

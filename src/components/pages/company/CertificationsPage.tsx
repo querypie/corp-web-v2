@@ -1,4 +1,5 @@
 import Cta from "../../sections/Cta";
+import type { Locale } from "../../../constants/i18n";
 
 type CertificationItem = {
   description: readonly string[];
@@ -12,6 +13,7 @@ type CertificationItem = {
 type CertificationsPageProps = {
   intro: string;
   items: readonly CertificationItem[];
+  locale: Locale;
   title: string;
 };
 
@@ -46,13 +48,9 @@ function CertificationCard({
       </div>
       <div className="flex w-full flex-col items-center gap-4 sm:gap-5">
         <p className="m-0 type-body-lg text-fg">{title}</p>
-        <div className="flex flex-col type-body-md text-mute-fg">
-          {description.map((line) => (
-            <p key={line} className="m-0">
-              {line}
-            </p>
-          ))}
-        </div>
+        <p className="m-0 max-w-[240px] text-pretty type-body-md text-mute">
+          {description.join(" ")}
+        </p>
       </div>
     </article>
   );
@@ -61,12 +59,13 @@ function CertificationCard({
 export default function CertificationsPage({
   intro,
   items,
+  locale,
   title,
 }: CertificationsPageProps) {
   return (
     <div className="flex w-full flex-col gap-20 px-5 pb-10 md:gap-[160px] md:px-10">
       <section className="flex w-full justify-center">
-        <div className="flex w-full max-w-[900px] flex-col gap-10 sm:gap-8 md:gap-10 lg:gap-[60px]">
+        <div className="flex w-full max-w-[1200px] flex-col gap-10 sm:gap-8 md:gap-10 lg:gap-[60px]">
         {/* Figma 기준으로 좌측 제목 / 우측 소개 문구 2열 헤더를 구성 */}
         <header className="grid gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
           <h1 className="m-0 type-h1 text-fg">{title}</h1>
@@ -81,7 +80,7 @@ export default function CertificationsPage({
         </div>
         </div>
       </section>
-      <Cta />
+      <Cta locale={locale} />
     </div>
   );
 }

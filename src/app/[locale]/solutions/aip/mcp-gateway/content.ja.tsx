@@ -1,5 +1,6 @@
+import Cta from "@/components/sections/Cta";
+import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
-import { buildSolutionContentComponents } from "@/features/solutions/contentComponents";
 
 type Props = {
   locale: Locale;
@@ -7,156 +8,91 @@ type Props = {
 };
 
 export const metadata = {
-    "title": "QueryPie AIP：すべてを接続するMCPハブ",
-    "description": "すべてのMCPサーバーとツールを一元管理する単一プラットフォーム—分散なし、複雑さなし、制限なし。舞台裏の複雑さは私たちが処理し、技術スタック全体のAIワークフローを効率化。",
-    "keywords": [
-      "クエリパイ AI",
-      "QueryPie AI",
-      "AI Platform",
-      "AIP",
-      "AI",
-      "MCPゲートウェイ",
-      "アクセス制御",
-      "カスタムAIエージェント",
-      "インフラ運用",
-      "QueryPie AI Agent",
-      "使用量ベース",
-      "フォワードデプロイドエンジニア",
-      "FDE"
-    ]
+  title: "MCP Gateway",
+  description:
+    "AIエージェントをエンタープライズのツールとデータに接続する、ガバナンス対応MCPゲートウェイです。",
+  keywords: ["MCP Gateway", "Model Context Protocol", "AI governance"],
 } as const;
 
+const featureItems = [
+  {
+    title: ["Smart Edge", "Tunneling"],
+    body: [
+      "セキュアなトンネリングで内部システムへ接続します。",
+      "ファイアウォールで保護されたリソースに",
+      "既存のセキュリティ構成を変えずにアクセスできます。",
+    ],
+    imageAlt: "スマートエッジトンネリングプレビュー",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+  {
+    title: ["Easy MCP", "Proxy Access"],
+    body: [
+      "セキュアなローカルMCPプロキシを通じて、",
+      "外部ツールからMCPプリセットを利用できます。",
+      "Cursor IDE、Claude Desktop、Windsurfに対応します。",
+    ],
+    imageAlt: "MCPプロキシアクセスプレビュー",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+  },
+  {
+    title: ["Org-Level MCP", "Management"],
+    body: [
+      "細かな権限でMCPツールへのアクセスを制御します。",
+      "有効化、無効化、ガバナンスを",
+      "組織単位で一元管理できます。",
+    ],
+    imageAlt: "組織レベルMCP管理プレビュー",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+  {
+    title: ["Audit", "Logging"],
+    body: [
+      "組織全体のすべてのイベントを追跡します。",
+      "ユーザー操作とシステム変更を監視し、",
+      "セキュリティとコンプライアンスを支援します。",
+    ],
+    imageAlt: "監査ログプレビュー",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+  },
+  {
+    title: ["Data Loss", "Prevention"],
+    body: [
+      "機密情報がAI会話に入ることを",
+      "自動的にブロックします。",
+      "APIキーや社外秘情報を保護します。",
+    ],
+    imageAlt: "データ損失防止プレビュー",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+];
 
-export default function AipMcpGatewayJASolutionContent({ locale, searchParams }: Props) {
-  const {
-    Box,
-    CenterSection,
-    DarkBadge,
-    FileImage,
-    Integrations,
-    IntroducingQueryPie,
-    KeyFeature,
-    KillerFeature,
-    KillerFeatureCategory,
-    KillerFeatures,
-    LearnMoreLink,
-    Link,
-    LottiePlayer,
-    MainFeatureDescription,
-    SplitView,
-    StaticBody,
-    StaticH1,
-    StaticH2,
-    StaticH4,
-    StaticHeader,
-    ThreeColumnList,
-    ThumbnailYoutube,
-    Youtube
-  } = buildSolutionContentComponents({ locale, searchParams }) as any;
-
+export default function McpGatewayJASolutionContent({ locale }: Props) {
   return (
-<Box direction="column">
-  <Box paddingTopSize="lg" paddingBottomSize="xxl" center as="section">
-    <CenterSection gapSize="xxl">
-      <Box direction="column" center gapSize="sm">
-        <StaticH1>
-          {'QueryPie AIP'}
-          <br />
-          {'統合型AIゲートウェイ'}
-        </StaticH1>
-        <StaticHeader color="var(--text-body)">
-          {
-            'AIによる業務最適化には、既存システムとの連携が必須。でも、大規模なシステム再構築は不要です。'
-          }
-          <br />
-          {
-            'QueryPie AIPなら、45種類以上の構築済みツールとカスタムツールを統合して一元管理できます。'
-          }
-          <br />
-          {
-            '複雑な接続処理はプラットフォームが担当し、既存システム全体のAIワークフローを効率化します。'
-          }
-        </StaticHeader>
-      </Box>
-      <Box as="section" center>
-        <FileImage
-          alt="MCP Gateway"
-          filepath="public/solutions/aip/mcp-gateway/mcp-gateway.svg"
-          width={920}
-          height={580}
-          responsive
-        />
-      </Box>
-    </CenterSection>
-  </Box>
+    <div className="flex w-full flex-col gap-14 px-5 pb-10 md:gap-[160px] md:px-10">
+      <section className="flex w-full justify-center">
+        <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
+          <div>
+            <h1 className="m-0 type-h1 text-fg">
+              <span className="block">MCP Hub</span>
+              <span className="block">That Connects Everything</span>
+            </h1>
+          </div>
+          <p className="m-0 max-w-[720px] type-body-lg leading-relaxed text-fg">
+            Single platform centrally managing all MCP servers and tools—no fragmentation, no
+            complexity, no limits. Streamline AI workflows across your entire tech stack while we
+            handle the complexity behind the scenes.
+          </p>
+        </header>
+      </section>
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" background="gray" center as="section" id="features">
-    <CenterSection gapSize="xxl">
-      <MainFeatureDescription
-        title={'セキュアな社内システム接続\n（スマートエッジトンネリング）'}
-        description={'トンネリングを通じて、社内システムへ安全にアクセス。\n既存のセキュリティ環境を変更せずに、\nファイアウォールで保護されたリソースに接続できます。'}
-        image="public/solutions/aip/mcp-gateway/aip_function_tunneling.gif"
-        imageWidth={540}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
+      <FeatureSection items={featureItems} />
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'外部ツールとの連携'}
-        description={'安全なローカルプロキシサーバーを介して、\n外部開発ツールからQueryPie AIPのMCP設定を利用可能。\nCursor IDE、Claude Desktop、Windsurfなどから、\nシームレスにアクセスできます。'}
-        image="public/solutions/aip/mcp-gateway/aip_function_mcpproxy.gif"
-        imageWidth={580}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section" background="gray">
-    <CenterSection>
-      <MainFeatureDescription
-        title={'組織全体を一元管理'}
-        description={'詳細な権限設定で、誰がどのツールにアクセスできるかを制御。\n組織全体のすべてのAIツール利用を、一元的に管理できます。'}
-        image="public/solutions/aip/mcp-gateway/aip_function_mcpmanagement.gif"
-        imageWidth={520}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'組織全体のすべての操作を、\n完全に可視化して追跡。'}
-        description={'ユーザーの活動とシステム変更を監視し、\nセキュリティとコンプライアンスを強化します。'}
-        image="public/solutions/aip/mcp-gateway/aip_function_audit.gif"
-        imageWidth={580}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section" background="gray">
-    <CenterSection>
-      <MainFeatureDescription
-        title={'データ漏洩防止（DLP）'}
-        description={'機密データがAIチャットに入り込むことを自動的にブロック。\nクレジットカード番号、APIキー、個人情報などの露出を瞬時に防止します。'}
-        image="public/solutions/aip/mcp-gateway/aip_function_dlp.gif"
-        imageWidth={520}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-</Box>
+      <div>
+        <Cta locale={locale} />
+      </div>
+    </div>
   );
 }

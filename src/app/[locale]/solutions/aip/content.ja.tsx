@@ -1,5 +1,8 @@
+import Cta from "@/components/sections/Cta";
+import YoutubePreviewPlayer from "@/components/common/YoutubePreviewPlayer";
+import AipThreeCardSection from "@/components/sections/AipThreeCardSection";
+import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
-import { buildSolutionContentComponents } from "@/features/solutions/contentComponents";
 
 type Props = {
   locale: Locale;
@@ -7,210 +10,98 @@ type Props = {
 };
 
 export const metadata = {
-    "title": "QueryPie AIプラットフォーム (AIP)",
-    "description": "経済的でエンタープライズ対応のソリューションを通じてエンタープライズAI変革を実現するプラットフォーム—使用量ベースのLLM導入と包括的なMCPゲートウェイを特徴とする。カスタマイズされたAIエージェントを提供するフォワードデプロイドエンジニア（FDE）による完全な変革。",
-    "keywords": [
-      "クエリパイ AI",
-      "QueryPie AI",
-      "AI Platform",
-      "AIP",
-      "AI",
-      "MCPゲートウェイ",
-      "アクセス制御",
-      "カスタムAIエージェント",
-      "インフラ運用",
-      "QueryPie AI Agent",
-      "使用量ベース",
-      "フォワードデプロイドエンジニア",
-      "FDE"
-    ]
+  title: "QueryPie AIプラットフォーム (AIP)",
+  description:
+    "QueryPie AIPは、エンタープライズAI変革のためのAIプラットフォームです。",
+  keywords: ["QueryPie AI", "AI Platform", "AIP", "MCP Gateway"],
 } as const;
 
+const featureItems = [
+  {
+    body: [
+      "使用量ベースの制御、コスト可視化、",
+      "本番チーム向けのガバナンスにより、",
+      "エンタープライズLLM環境を運用します。",
+    ],
+    imageAlt: "使用量ベースLLMデプロイのプレビュー",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+    title: ["実用的な", "エンタープライズAIを開始"],
+  },
+  {
+    body: [
+      "管理されたMCPゲートウェイを通じて",
+      "AIエージェントをツールとデータに接続し、",
+      "ポリシー適用と監査ログを一元化します。",
+    ],
+    imageAlt: "MCPゲートウェイのプレビュー",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+    title: ["すべてのMCP接続を", "ガバナンス"],
+  },
+  {
+    body: [
+      "Forward Deployed Engineersが業務ワークフローを特定し、",
+      "カスタムエージェントを構築して、AIのPoCを",
+      "測定可能な価値へ移行します。",
+    ],
+    imageAlt: "Forward Deployed Engineerワークフロープレビュー",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+    title: ["実業務に合わせた", "エージェントを構築"],
+  },
+  {
+    body: [
+      "プロンプト、モデル、ツール、利用状況を",
+      "ひとつの運用レイヤーに集約し、セキュリティと",
+      "事業部門が安心してAIを拡張できるようにします。",
+    ],
+    imageAlt: "AI運用可視性のプレビュー",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+    title: ["エンタープライズ制御で", "AIを拡張"],
+  },
+];
 
-export default function AipJASolutionContent({ locale, searchParams }: Props) {
-  const {
-    Box,
-    CenterSection,
-    DarkBadge,
-    FileImage,
-    Integrations,
-    IntroducingQueryPie,
-    KeyFeature,
-    KillerFeature,
-    KillerFeatureCategory,
-    KillerFeatures,
-    LearnMoreLink,
-    Link,
-    LottiePlayer,
-    MainFeatureDescription,
-    SplitView,
-    StaticBody,
-    StaticH1,
-    StaticH2,
-    StaticH4,
-    StaticHeader,
-    ThreeColumnList,
-    ThumbnailYoutube,
-    Youtube
-  } = buildSolutionContentComponents({ locale, searchParams }) as any;
-
+export default function AipJASolutionContent({ locale }: Props) {
   return (
-<Box direction="column">
-  <Box paddingTopSize="lg" paddingBottomSize="xxl" center as="section">
-    <CenterSection gapSize="xxl">
-      <Box direction="column" center gapSize="sm">
-        <StaticH1>
-          {'QueryPie AIプラットフォーム (AIP)'}
-        </StaticH1>
-        <StaticHeader color="var(--text-body)">
-          {
-            'QueryPie AIPは、既存の業務システムとつながり、実務で使えるAIを実現します。'
-          }
-          <br />
-          {
-            '従量課金でコストを最適化。大規模なシステム改修も不要。'
-          }
-          <br />
-          {
-            '専門家が伴走するので、確実に成果が出るAIプラットフォームです。'
-          }
-        </StaticHeader>
-      </Box>
-      <Box as="section" center>
-        <ThumbnailYoutube
-          videoId="nJGSCd6itUE"
-          thumbnailImg="public/solutions/aip/aip-video-thumb-jp.png"
-        />
-      </Box>
-    </CenterSection>
-  </Box>
+    <div className="flex w-full flex-col gap-14 px-5 pb-10 md:gap-[160px] md:px-10">
+      <div className="flex flex-col gap-14 md:gap-20">
+        <div>
+          <section className="flex w-full justify-center">
+            <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
+              <h1 className="m-0 type-h1 text-fg">AI Platform</h1>
+              <p className="m-0 max-w-[720px] type-body-lg leading-relaxed text-fg">
+                経済的でエンタープライズ対応のソリューションにより、企業のAI変革を実現する
+                プラットフォームです。使用量ベースのLLMデプロイと包括的なMCPゲートウェイを
+                備え、Forward Deployed Engineers (FDE) がカスタムAIエージェントを通じて
+                変革を完遂します。
+              </p>
+            </header>
+          </section>
+        </div>
 
-  <IntroducingQueryPie
-    title="成果にこだわるエンタープライズAI"
-    description="AI導入を、ワンストップで実現する３つの価値"
-    items={[
-      {
-        titleImage: 'public/solutions/aip/tailored-security.png',
-        title: '従量課金型の\nAIモデル',
-        description: '全社員分のライセンス購入を経営層にどう説明する？使われなかったら？\nQueryPie AIPは使った分だけ支払う従量課金型。小さく始めて効果を見ながら段階的に拡大できます。\nプレミアムLLMを必要な時だけ利用でき、月額固定費の無駄から解放されます。',
-        learnMoreButton: {
-          href: '/solutions/aip/usage-based-llm',
-          label: '詳細を見る',
-          external: true
-        }
-      },
-      {
-        titleImage: 'public/solutions/aip/simple-compliance.png',
-        title: '統合型\nAIゲートウェイ',
-        description: '既存システムに「つなぐだけ」で、大規模なシステム改修は不要です。\n複雑な接続処理はQueryPie AIPが担当。\nバラバラだったシステムが、1つのプラットフォームで統合されたAIワークフローに変わります。',
-        learnMoreButton: {
-          href: '/solutions/aip/mcp-gateway',
-          label: '詳細を見る',
-          external: true
-        }
-      },
-      {
-        titleImage: 'public/solutions/aip/complete-visibility.png',
-        title: 'AI専門家伴走\nサービス',
-        description: 'ビジネスとテクノロジーの両方を理解する専門家、フォワードデプロイドエンジニア(FDE)が、あなたのチームに入り込みます。\n課題発見から構築、本番稼働まで伴走し、確実に成果を出すAI導入を実現します。',
-        learnMoreButton: {
-          href: '/solutions/aip/fde-services',
-          label: '詳細を見る',
-          external: true
-        }
-      }
-    ]}
-  />
+        <div>
+          <section className="flex w-full justify-center">
+            <YoutubePreviewPlayer
+              embedSrc="https://www.youtube.com/embed/nJGSCd6itUE?si=2wccYas88jLRO7q2"
+              thumbnailAlt="QueryPie AI Platform video thumbnail"
+              thumbnailSrc="/solutions/aip/aip-cover.jpg"
+              title="QueryPie AI Platform video"
+            />
+          </section>
+        </div>
+      </div>
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" background="gray" center as="section" id="features">
-    <CenterSection gapSize="xxl">
-      <Box direction="column" center gapSize="sm">
-        <StaticH2>{'QueryPie AIPができること'}</StaticH2>
-      </Box>
-      <MainFeatureDescription
-        title={'プロンプト自動生成'}
-        description={'プリセットされた簡単な指示文（プロンプト）から始めれば\n包括的かつ最適化されたプロンプトを自動生成します。\n専門知識がなくてもAIエージェントの効果を最大限に引き出せます。'}
-        checkList={[]}
-        image="public/solutions/aip/aip_function_prompt.gif"
-        imageWidth={540}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
+      <div className="-mx-5 md:-mx-10">
+        <AipThreeCardSection locale={locale} />
+      </div>
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'シンプルな統合'}
-        description={'OAuth認証でお使いのツール（Slack、Googleなど）を簡単に接続。\n提供されている統合機能に加えて、カスタムツールや内部ツールも追加でき、\nニーズに合わせたビジネスワークフロー自動化を実現します。'}
-        checkList={[]}
-        learnMoreButton={{
-          href: '/solutions/aip/integrations',
-          label: 'QueryPie AIPと接続可能な連携ツールの一覧はこちら',
-          external: true
-        }}
-        image="public/solutions/aip/aip_function_integration.gif"
-        imageWidth={580}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
+      <div id="features">
+        <FeatureSection items={featureItems} />
+      </div>
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section" background="gray">
-    <CenterSection>
-      <MainFeatureDescription
-        title={'社内文書の学習機能'}
-        description={'社内文書をアップロードして知識ベース化。\nAIが組織の情報を瞬時に取得し、貴社のビジネスに合った正確な回答をします。'}
-        checkList={[]}
-        image="public/solutions/aip/aip_function_knowledge.gif"
-        imageWidth={520}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'カスタムエージェント作成'}
-        description={'包括的なライブラリから構築済みのエージェントをインストール、\nまたは特定の運用要件に合わせて各エージェントの機能を\nカスタマイズした独自のソリューションを作成できます。'}
-        checkList={[]}
-        image="public/solutions/aip/aip_function_createagent.gif"
-        imageWidth={620}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section" background="gray">
-    <CenterSection>
-      <MainFeatureDescription
-        title={'ビジュアルレポート作成'}
-        description={'AIの回答をグラフや表、インタラクティブな図で表示。\n複雑な分析結果を視覚的にわかりやすく整理し、\nそのままエクスポートして会議に活用できます。'}
-        checkList={[]}
-        image="public/solutions/aip/aip_function_visualization.gif"
-        imageWidth={520}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'エージェントスケジューリング'}
-        description={'指定した間隔でAIエージェントをスケジュール設定し、\n定型タスクを自動化。\n簡単なエージェント会話を通じて定期的な操作を設定でき、\n手動作業を削減しながら一貫した実行を保証します。'}
-        checkList={[]}
-        image="public/solutions/aip/aip_function_schedule.gif"
-        imageWidth={620}
-        imageShadow={true}
-      />
-    </CenterSection>
-  </Box>
-
-</Box>
+      <div>
+        <Cta locale={locale} />
+      </div>
+    </div>
   );
 }

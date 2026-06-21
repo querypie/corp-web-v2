@@ -26,7 +26,7 @@ export default function ClientSection({
     /* 고객사 로고와 짧은 설명을 보여주는 섹션 */
     <section className={cx("flex w-full flex-col items-center", className)}>
       <div className="flex w-full max-w-[1200px] flex-col items-center gap-5">
-        <p className="m-0 w-full text-center type-body-lg text-mute-fg">
+        <p className="m-0 w-full text-center type-body-lg text-mute">
           {caption}
         </p>
         {/* 로고를 좌우로 반복 이동시키는 marquee 영역 */}

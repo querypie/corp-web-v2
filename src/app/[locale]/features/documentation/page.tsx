@@ -33,9 +33,11 @@ export default async function DocumentationPage({ params, searchParams }: DocsPa
       ? normalizedCategory as DocsCategorySlug
       : "all";
 
-  const docsItems = (await readContentState("documentation", { includeBodies: false })).filter((item) => isPublishedContentVisible(item, locale));
+  const docsItems = (await readContentState("documentation", { includeBodies: false }))
+    .filter((item) => isPublishedContentVisible(item, locale))
+    .filter((item) => selectedCategory === "all" || item.categorySlug === selectedCategory);
 
-  const allItems = docsItems.map((item) => ({
+  const fallbackItems = docsItems.map((item) => ({
     category: getCategoryLabel(docsCategoryConfigs, item.categorySlug, locale),
     date: item.categorySlug === "blogs" ? formatPublicDate(locale, item.dateIso) : undefined,
     description: getLocalizedContent(item.summary, locale),
@@ -43,17 +45,6 @@ export default async function DocumentationPage({ params, searchParams }: DocsPa
     imageSrc: item.imageSrc,
     title: getLocalizedContent(item.title, locale),
   }));
-
-  const fallbackItems =
-    selectedCategory === "all"
-      ? allItems
-      : allItems.filter((item) => {
-          const matchedCategory = docsCategoryConfigs.find(
-            (config) => config.label[locale] === item.category,
-          );
-
-          return matchedCategory?.slug === selectedCategory;
-        });
 
   const copy = getDocumentationPageCopy(locale);
 

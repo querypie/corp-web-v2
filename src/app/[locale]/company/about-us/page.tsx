@@ -21,6 +21,7 @@ export default async function AboutUsRoute({ params }: Props) {
         "You can now execute cutting-edge AI strategies without a Fortune 500-level budget and realize all innovations at previously impossible costs.",
         "Starting in Silicon Valley in 2017 as a data protection specialist, QueryPie AI sets a new standard for enterprise AI.",
       ],
+      companyImageAlt: "Company introduction",
       investors: [
         { alt: "Salesforce Ventures", imageSrc: "/images/about-us/logo-salesforce.svg" },
         { alt: "Y Combinator", imageSrc: "/images/about-us/logo-ycombinator.svg" },
@@ -95,6 +96,7 @@ export default async function AboutUsRoute({ params }: Props) {
         "이제 포춘 500 수준의 예산 없이도 최첨단 AI 전략을 실행하고, 이전에는 불가능했던 비용 구조로 모든 혁신을 현실화할 수 있습니다.",
         "2017년 실리콘밸리에서 데이터 보호 전문 기업으로 출발한 QueryPie AI는 엔터프라이즈 AI의 새로운 기준을 만들어가고 있습니다.",
       ],
+      companyImageAlt: "회사 소개",
       investors: [
         { alt: "Salesforce Ventures", imageSrc: "/images/about-us/logo-salesforce.svg" },
         { alt: "Y Combinator", imageSrc: "/images/about-us/logo-ycombinator.svg" },
@@ -163,6 +165,7 @@ export default async function AboutUsRoute({ params }: Props) {
         "Fortune 500 レベルの予算がなくても最先端のAI戦略を実行でき、これまで不可能だったコスト構造であらゆるイノベーションを実現できます。",
         "2017年にシリコンバレーでデータ保護の専門企業としてスタートした QueryPie AI は、エンタープライズAIの新しい基準を築いています。",
       ],
+      companyImageAlt: "会社紹介",
       investors: [
         { alt: "Salesforce Ventures", imageSrc: "/images/about-us/logo-salesforce.svg" },
         { alt: "Y Combinator", imageSrc: "/images/about-us/logo-ycombinator.svg" },
@@ -225,11 +228,11 @@ export default async function AboutUsRoute({ params }: Props) {
         { imageSrc: "/images/about-us/keizo.webp", linkedinHref: "https://www.linkedin.com/in/keizo-arinobu-b40769/", name: "Keizo Arinobu", role: "CGO & Japan Country Manager" },
       ],
       teamTitle: "チーム",
-      title: ["The Smart Standard", "for Enterprise AI"],
+      title: ["エンタープライズAIのための", "新しい基準"],
     },
   }[locale];
 
-  return <AboutUsPage {...copy} />;
+  return <AboutUsPage {...copy} locale={locale} />;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

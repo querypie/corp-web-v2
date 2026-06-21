@@ -50,10 +50,10 @@ export default function Footer({
   legalLinks = ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"],
   locale = "en",
   sections = [
-    { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer Service (FDES)"] },
+    { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
     { title: "Features", items: ["Demo", "Documentation", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
     { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
-    { title: "Plans", items: ["AIP", "ACP"] },
+    { title: "Pricing & Plans", items: ["AIP", "ACP"] },
   ],
 }: FooterProps) {
   const [copyright, ...officeLines] = addressLines;
@@ -61,7 +61,7 @@ export default function Footer({
   return (
     <footer
       className={cx(
-        "relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10 md:bg-[radial-gradient(93.31%_130%_at_50%_100%,rgba(255,132,64,0.58)_0%,rgba(255,112,48,0.34)_24%,rgba(255,94,38,0.18)_48%,rgba(255,94,38,0.00)_72%)]",
+        "relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10 md:bg-[radial-gradient(93.31%_130%_at_50%_118%,rgba(255,132,64,0.58)_0%,rgba(255,112,48,0.34)_24%,rgba(255,94,38,0.18)_48%,rgba(255,94,38,0.00)_72%)]",
         className,
       )}
     >
@@ -87,10 +87,15 @@ export default function Footer({
                   (section.title === "Solutions" || section.title === "ソリューション" || section.title === "솔루션") && "w-[191px]",
                   (section.title === "Features" || section.title === "機能" || section.title === "기능") && "w-[180px]",
                   (section.title === "Company" || section.title === "회사" || section.title === "会社") && "w-[84px]",
-                  (section.title === "Plans" || section.title === "プラン" || section.title === "요금제") && "w-[84px]",
+                  (section.title === "Plans" ||
+                    section.title === "Pricing & Plans" ||
+                    section.title === "プラン" ||
+                    section.title === "価格・プラン" ||
+                    section.title === "요금제" ||
+                    section.title === "가격 · 플랜") && "w-[84px]",
                 )}
               >
-                <p className="m-0 text-mute-fg">{section.title}</p>
+                <p className="m-0 text-mute">{section.title}</p>
                 <div className="flex flex-col gap-[10px] text-fg">
                   {section.items.map((item) => {
                     const href = getFooterHref(item, locale);
@@ -104,7 +109,7 @@ export default function Footer({
                     <a
                       key={item}
                       className={cx(
-                        "transition-colors hover:text-mute-fg",
+                        "transition-colors hover:text-mute",
                         isSolutionsSection && "whitespace-nowrap md:whitespace-normal",
                       )}
                       href={href}
@@ -146,7 +151,7 @@ export default function Footer({
               {/* 법적 링크 */}
             <div className="flex w-full flex-wrap items-center gap-x-5 gap-y-[10px] whitespace-nowrap type-body-md leading-5 text-fg">
               {legalLinks.map((item) => (
-                <a key={item} className="transition-colors hover:text-mute-fg" href={getLegalHref(item, locale)}>
+                <a key={item} className="transition-colors hover:text-mute" href={getLegalHref(item, locale)}>
                   {item}
                 </a>
               ))}

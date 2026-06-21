@@ -1,0 +1,169 @@
+.connectionFlow {
+  --acp-flow-duration: 4.8s;
+  color: var(--color-point);
+  overflow: visible;
+}
+
+.flowPulse {
+  color: var(--color-point);
+  filter:
+    drop-shadow(0 0 3px color-mix(in srgb, var(--color-fg) 88%, transparent))
+    drop-shadow(0 0 9px color-mix(in srgb, var(--color-point) 72%, transparent));
+  opacity: 0;
+}
+
+.flowPulseHalo {
+  opacity: 0.38;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 6;
+}
+
+.flowPulseCore {
+  stroke: var(--color-fg);
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+.lock {
+  --acp-flow-duration: 4.8s;
+  color: var(--color-point);
+  overflow: visible;
+}
+
+.lockBg {
+  animation: lockFlashLeft var(--acp-flow-duration) linear infinite;
+  fill: var(--color-secondary);
+  filter:
+    drop-shadow(0 0 0 transparent)
+    drop-shadow(0 0 0 transparent);
+}
+
+.lockRight .lockBg {
+  animation-name: lockFlashRight;
+}
+
+.controllerIcon {
+  --acp-flow-duration: 4.8s;
+  overflow: visible;
+}
+
+.controllerIconBg {
+  animation: controllerIconFlash var(--acp-flow-duration) linear infinite;
+  fill: #0c77e5;
+}
+
+.controllerActivationBg {
+  --acp-flow-duration: 4.8s;
+  animation: controllerActivationBg var(--acp-flow-duration) linear infinite;
+  background:
+    radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--color-point) 42%, transparent) 0%,
+      color-mix(in srgb, #0c77e5 26%, transparent) 42%,
+      transparent 72%
+    );
+  filter: blur(24px);
+  opacity: 0;
+}
+
+.controllerTitle {
+  --acp-flow-duration: 4.8s;
+  animation: controllerTitleFlash var(--acp-flow-duration) linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flowPulse {
+    display: none;
+  }
+
+  .lockBg {
+    animation: none;
+    fill: var(--color-secondary);
+    filter: none;
+  }
+
+  .controllerIconBg {
+    animation: none;
+    fill: #0c77e5;
+  }
+
+  .controllerActivationBg,
+  .controllerTitle {
+    animation: none;
+  }
+}
+
+@keyframes lockFlashLeft {
+  0%, 28%, 40%, 100% {
+    fill: var(--color-secondary);
+    filter:
+      drop-shadow(0 0 0 transparent)
+      drop-shadow(0 0 0 transparent);
+  }
+
+  34% {
+    fill: color-mix(in srgb, var(--color-point) 78%, var(--color-secondary));
+    filter:
+      drop-shadow(0 0 5px color-mix(in srgb, var(--color-fg) 70%, transparent))
+      drop-shadow(0 0 16px color-mix(in srgb, var(--color-point) 72%, transparent));
+  }
+}
+
+@keyframes controllerActivationBg {
+  0%, 44%, 61%, 100% {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.82);
+  }
+
+  52% {
+    opacity: 0.86;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@keyframes controllerIconFlash {
+  0%, 44%, 61%, 100% {
+    fill: #0c77e5;
+    filter:
+      drop-shadow(0 0 0 transparent)
+      drop-shadow(0 0 0 transparent);
+  }
+
+  52% {
+    fill: color-mix(in srgb, var(--color-point) 66%, #0c77e5);
+    filter:
+      drop-shadow(0 0 5px color-mix(in srgb, var(--color-fg) 70%, transparent))
+      drop-shadow(0 0 18px color-mix(in srgb, var(--color-point) 76%, transparent));
+  }
+}
+
+@keyframes controllerTitleFlash {
+  0%, 44%, 61%, 100% {
+    color: var(--color-fg);
+    text-shadow: none;
+  }
+
+  52% {
+    color: var(--color-white);
+    text-shadow:
+      0 0 8px color-mix(in srgb, var(--color-fg) 82%, transparent),
+      0 0 18px color-mix(in srgb, var(--color-point) 74%, transparent);
+  }
+}
+
+@keyframes lockFlashRight {
+  0%, 62%, 73%, 100% {
+    fill: var(--color-secondary);
+    filter:
+      drop-shadow(0 0 0 transparent)
+      drop-shadow(0 0 0 transparent);
+  }
+
+  68% {
+    fill: color-mix(in srgb, var(--color-point) 78%, var(--color-secondary));
+    filter:
+      drop-shadow(0 0 5px color-mix(in srgb, var(--color-fg) 70%, transparent))
+      drop-shadow(0 0 16px color-mix(in srgb, var(--color-point) 72%, transparent));
+  }
+}

@@ -1,5 +1,6 @@
+import Cta from "@/components/sections/Cta";
+import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
-import { buildSolutionContentComponents } from "@/features/solutions/contentComponents";
 
 type Props = {
   locale: Locale;
@@ -7,148 +8,91 @@ type Props = {
 };
 
 export const metadata = {
-    "title": "QueryPie AIP: MCP Hub That Connects Everything",
-    "description": "Single platform centrally managing all MCP servers and tools—no fragmentation, no complexity, no limits. Streamline AI workflows across your entire tech stack while we handle the complexity behind the scenes.",
-    "keywords": [
-      "QueryPie AI",
-      "AI Platform",
-      "MCP management",
-      "access control",
-      "QueryPie",
-      "streamlined operations",
-      "MCP servers",
-      "Usage-based Enterprise AI",
-      "MCP Gateway",
-      "FDE Service"
-    ]
+  title: "MCP Gateway",
+  description:
+    "Connect AI agents to enterprise tools and data through a governed MCP gateway with visibility, policy enforcement, and audit logs.",
+  keywords: ["MCP Gateway", "Model Context Protocol", "AI governance"],
 } as const;
 
+const featureItems = [
+  {
+    title: ["Smart Edge", "Tunneling"],
+    body: [
+      "Access internal systems through secure tunneling.",
+      "Connect to firewall-protected resources",
+      "without changing security infrastructure.",
+    ],
+    imageAlt: "Smart edge tunneling preview",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+  {
+    title: ["Easy MCP", "Proxy Access"],
+    body: [
+      "Use MCP presets in external tools through",
+      "a secure local MCP proxy for Cursor IDE,",
+      "Claude Desktop, and Windsurf.",
+    ],
+    imageAlt: "MCP proxy access preview",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+  },
+  {
+    title: ["Org-Level MCP", "Management"],
+    body: [
+      "Control who can access each MCP tool",
+      "with granular permissions and centralized",
+      "activation, deactivation, and governance.",
+    ],
+    imageAlt: "Organization-level MCP management preview",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+  {
+    title: ["Audit", "Logging"],
+    body: [
+      "Track every event across your organization.",
+      "Monitor user activity and system changes",
+      "for security and compliance.",
+    ],
+    imageAlt: "Audit logging preview",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+  },
+  {
+    title: ["Data Loss", "Prevention"],
+    body: [
+      "Automatically block sensitive data",
+      "from entering AI conversations, including",
+      "API keys and confidential information.",
+    ],
+    imageAlt: "Data loss prevention preview",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+];
 
-export default function AipMcpGatewayENSolutionContent({ locale, searchParams }: Props) {
-  const {
-    Box,
-    CenterSection,
-    DarkBadge,
-    FileImage,
-    Integrations,
-    IntroducingQueryPie,
-    KeyFeature,
-    KillerFeature,
-    KillerFeatureCategory,
-    KillerFeatures,
-    LearnMoreLink,
-    Link,
-    LottiePlayer,
-    MainFeatureDescription,
-    SplitView,
-    StaticBody,
-    StaticH1,
-    StaticH2,
-    StaticH4,
-    StaticHeader,
-    ThreeColumnList,
-    ThumbnailYoutube,
-    Youtube
-  } = buildSolutionContentComponents({ locale, searchParams }) as any;
-
+export default function McpGatewayENSolutionContent({ locale }: Props) {
   return (
-<Box direction="column">
-  <Box paddingTopSize="lg" paddingBottomSize="xxl" center as="section">
-    <CenterSection gapSize="xxl">
-      <Box direction="column" center gapSize="sm">
-        <StaticH1>
-          {'QueryPie AIP:'}
-          <br />
-          {'MCP Hub That Connects Everything'}
-        </StaticH1>
-        <StaticHeader color="var(--text-body)">
-          {
-            'Single platform centrally managing all MCP servers and tools—no fragmentation, no complexity, no limits.'
-          }
-          <br />
-          {
-            'Streamline AI workflows across your entire tech stack while we handle the complexity behind the scenes.'
-          }
-        </StaticHeader>
-      </Box>
-      <Box as="section" center>
-        <FileImage
-          alt="MCP Gateway"
-          filepath="public/solutions/aip/mcp-gateway/mcp-gateway.svg"
-          width={920}
-          height={580}
-          responsive
-        />
-      </Box>
-    </CenterSection>
-  </Box>
+    <div className="flex w-full flex-col gap-14 px-5 pb-10 md:gap-[160px] md:px-10">
+      <section className="flex w-full justify-center">
+        <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
+          <div>
+            <h1 className="m-0 type-h1 text-fg">
+              <span className="block">MCP Hub</span>
+              <span className="block">That Connects Everything</span>
+            </h1>
+          </div>
+          <p className="m-0 max-w-[720px] type-body-lg leading-relaxed text-fg">
+            Single platform centrally managing all MCP servers and tools—no fragmentation, no
+            complexity, no limits. Streamline AI workflows across your entire tech stack while we
+            handle the complexity behind the scenes.
+          </p>
+        </header>
+      </section>
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" background="gray" center as="section" id="features">
-    <CenterSection gapSize="xxl">
-      <MainFeatureDescription
-        title={'Smart Edge Tunneling'}
-        description={'Access internal systems through secure tunneling technology.\nConnect to firewall-protected resources\nwhile keeping your security infrastructure unchanged.'}
-        image="public/solutions/aip/mcp-gateway/aip_function_tunneling.gif"
-        imageWidth={540}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
+      <FeatureSection items={featureItems} />
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'Easy MCP Proxy Access'}
-        description={'Use MCP presets in external tools through secure local MCP proxy.\nAccess custom presets directly\nin Cursor IDE, Claude Desktop, and Windsurf seamlessly.'}
-        image="public/solutions/aip/mcp-gateway/aip_function_mcpproxy.gif"
-        imageWidth={580}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section" background="gray">
-    <CenterSection>
-      <MainFeatureDescription
-        title={'Org-Level MCP Management'}
-        description={'Control who can access which MCP tools\nwith granular permissions.\nActivate, deactivate, and govern all AI tool usage\nacross your organization centrally.'}
-        image="public/solutions/aip/mcp-gateway/aip_function_mcpmanagement.gif"
-        imageWidth={520}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'Audit Logging'}
-        description={'Track every event across your organization with complete visibility.\nMonitor user activities and system changes\nfor enhanced security and compliance.'}
-        image="public/solutions/aip/mcp-gateway/aip_function_audit.gif"
-        imageWidth={580}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section" background="gray">
-    <CenterSection>
-      <MainFeatureDescription
-        title={'Data Loss Prevention (DLP)'}
-        description={'Automatically block sensitive data\nfrom entering AI conversations.\nPrevent credit cards, SSNs, API keys,\nand confidential information exposure instantly.'}
-        image="public/solutions/aip/mcp-gateway/aip_function_dlp.gif"
-        imageWidth={520}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-</Box>
+      <div>
+        <Cta locale={locale} />
+      </div>
+    </div>
   );
 }
