@@ -26,6 +26,8 @@ import Page6 from "./acp/page";
 import Content6EN, { metadata as Metadata6EN } from "./acp/content.en";
 import Content6KO, { metadata as Metadata6KO } from "./acp/content.ko";
 import Content6JA, { metadata as Metadata6JA } from "./acp/content.ja";
+import { generateMetadata as g7 } from "./acp/integrations/page";
+import Page7 from "./acp/integrations/page";
 
 const routeModules = {
   "aip": {
@@ -58,13 +60,26 @@ const routeModules = {
     content: { en: Content6EN, ko: Content6KO, ja: Content6JA },
     metadata: { en: Metadata6EN, ko: Metadata6KO, ja: Metadata6JA },
   },
+  "acp-integrations": {
+    page: Page7,
+    generateMetadata: g7,
+  },
 } as const;
 
 describe("solutions route-local modules", () => {
-  it("모든 canonical solution entry에 대해 route-local content 모듈을 제공한다", () => {
+  it("모든 canonical solution entry에 대해 route-local page를 제공한다", () => {
     for (const entry of solutionEntries) {
       const modules = routeModules[entry.id as keyof typeof routeModules];
       expect(modules.page, `${entry.id} page`).toBeTypeOf("function");
+    }
+  });
+
+  it("content 기반 solution entry에 대해 route-local content 모듈을 제공한다", () => {
+    for (const entry of solutionEntries) {
+      const modules = routeModules[entry.id as keyof typeof routeModules];
+
+      if (!("content" in modules)) continue;
+
       expect(modules.content.en, `${entry.id} en`).toBeTypeOf("function");
       expect(modules.content.ko, `${entry.id} ko`).toBeTypeOf("function");
       expect(modules.content.ja, `${entry.id} ja`).toBeTypeOf("function");
