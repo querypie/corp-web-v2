@@ -6,7 +6,7 @@ import Button from "../../common/Button";
 import Tab from "../../common/Tab";
 import TabGroup from "../../common/TabGroup";
 import Cta from "../../sections/Cta";
-import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PricingProduct } from "../../../constants/plans";
+import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PlanFeature, type PricingProduct } from "../../../constants/plans";
 import { getLocalePath, type Locale } from "../../../constants/i18n";
 
 type PlansPageProps = {
@@ -22,6 +22,10 @@ function withLocaleHref(locale: string, href: string) {
   // 플랜 CTA가 현재 언어 경로를 유지하도록 locale prefix 보정
   if (href.startsWith("http")) return href;
   return getLocalePath(locale as Locale, href.startsWith("/") ? href : `/${href}`);
+}
+
+function isPlanFeatureDivider(feature: PlanFeature): feature is Extract<PlanFeature, { type: "divider" }> {
+  return typeof feature === "object" && "type" in feature && feature.type === "divider";
 }
 
 function PlanSummaryCard({
@@ -41,23 +45,38 @@ function PlanSummaryCard({
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-1">
           <h2 className={cx("m-0 type-h2", tone === "primary" ? "text-brand" : "text-fg")}>{name}</h2>
-          <p className="m-0 type-body-md text-mute-fg">{description}</p>
+          <p className="m-0 type-body-md text-mute">{description}</p>
         </div>
 
         <p className="m-0 type-h2 text-fg">{priceLabel}</p>
 
         <ul className="m-0 flex list-none flex-col gap-1.5 p-0">
-          {features.map((feature) => (
-            <li
-              key={typeof feature === "string" ? feature : feature.value}
-              className="type-body-md text-fg"
-            >
-              <span className={cx(typeof feature === "string" || feature.tone !== "danger" ? "text-success" : "text-destructive")}>
-                {typeof feature === "string" || feature.tone !== "danger" ? "✓" : "✕"}
-              </span>{" "}
-              {typeof feature === "string" ? feature : feature.value}
-            </li>
-          ))}
+          {features.map((feature, index) => {
+            if (isPlanFeatureDivider(feature)) {
+              return (
+                <li
+                  aria-hidden="true"
+                  className="my-2 h-px w-full bg-border"
+                  key={`divider-${index}`}
+                />
+              );
+            }
+
+            return (
+              <li
+                key={`${typeof feature === "string" ? feature : feature.value}-${index}`}
+                className="flex items-start gap-1.5 whitespace-pre-line type-body-md text-fg"
+              >
+                <span className={cx(
+                  "inline-flex w-4 shrink-0 justify-center",
+                  typeof feature === "string" || feature.tone !== "danger" ? "text-success" : "text-destructive",
+                )}>
+                  {typeof feature === "string" || feature.tone !== "danger" ? "✓" : "✕"}
+                </span>
+                <span>{typeof feature === "string" ? feature : feature.value}</span>
+              </li>
+            );
+          })}
         </ul>
       </div>
 
@@ -80,7 +99,7 @@ function PlanSummaryCard({
 function getValueToneClass(tone?: ComparisonValue["tone"]) {
   if (tone === "success") return "text-success";
   if (tone === "danger") return "text-destructive";
-  if (tone === "muted") return "text-mute-fg";
+  if (tone === "muted") return "text-mute";
   return "text-fg";
 }
 
@@ -97,7 +116,7 @@ function renderComparisonValue(cell: ComparisonValue) {
   return (
     <span className="inline-flex items-center justify-center gap-2">
       <span className={getValueToneClass(cell.tone)}>{symbol}</span>
-      {text ? <span className="text-mute-fg">{text}</span> : null}
+      {text ? <span className="text-mute">{text}</span> : null}
     </span>
   );
 }
@@ -132,7 +151,7 @@ function ComparisonTable({
           <div className="flex flex-col gap-5">
             {comparisonGroups.map((group) => (
               <div key={group.title} className="flex flex-col gap-0">
-                <div className="rounded-button bg-bg-content px-5 py-[10px] type-body-md text-mute-fg">
+                <div className="rounded-button bg-bg-content px-5 py-[10px] type-body-md text-mute">
                   {group.title}
                 </div>
 
@@ -216,7 +235,7 @@ export default function PlansPage({
               )}
             </TabGroup>
 
-            <p className="m-0 text-center type-body-md text-mute-fg">{activeProductCaption}</p>
+            <p className="m-0 text-center type-body-md text-mute">{activeProductCaption}</p>
           </div>
 
           {/* 선택된 제품군에 맞는 카드/비교표 렌더링 */}
@@ -240,7 +259,7 @@ export default function PlansPage({
           </div>
         </div>
       </section>
-      <Cta />
+      <Cta locale={locale} />
     </div>
   );
 }

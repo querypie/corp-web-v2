@@ -71,7 +71,7 @@ function DeleteConfirmDialog({
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="flex flex-col items-center gap-2 text-center">
             <h2 className="m-0 type-h3 text-fg">삭제하시겠습니까?</h2>
-            <p className="m-0 type-body-md text-mute-fg">이 작업은 되돌릴 수 없습니다.</p>
+            <p className="m-0 type-body-md text-mute">이 작업은 되돌릴 수 없습니다.</p>
           </div>
           <div className="flex justify-center gap-3">
             <Button arrow={false} onClick={onCancel} style="round" variant="outline">
@@ -102,7 +102,7 @@ function DuplicateConfirmDialog({
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="flex flex-col items-center gap-2 text-center">
             <h2 className="m-0 type-h3 text-fg">게시물을 복제할까요?</h2>
-            <p className="m-0 whitespace-pre-line type-body-md text-mute-fg">
+            <p className="m-0 whitespace-pre-line type-body-md text-mute">
               복사된 게시물은 비노출 상태로 저장됩니다.
               {"\n"}
               변경된 slug(URL) 확인해 주세요.
@@ -128,7 +128,7 @@ function MenuIcon({
   children: React.ReactNode;
 }) {
   return (
-    <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center text-mute-fg">
+    <span className="inline-flex h-4 w-4 shrink-0 items-center justify-center text-mute">
       {children}
     </span>
   );
@@ -293,10 +293,10 @@ function ContentRow({
             event.stopPropagation();
           }}
         >
-          <button className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-button text-[15px] leading-none text-mute-fg transition-colors hover:bg-bg hover:text-fg" onClick={onMoveUp} type="button">
+          <button className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-button text-[15px] leading-none text-mute transition-colors hover:bg-bg hover:text-fg" onClick={onMoveUp} type="button">
             ↑
           </button>
-          <button className="ml-3 flex h-7 w-7 cursor-pointer items-center justify-center rounded-button text-[15px] leading-none text-mute-fg transition-colors hover:bg-bg hover:text-fg md:ml-0" onClick={onMoveDown} type="button">
+          <button className="ml-3 flex h-7 w-7 cursor-pointer items-center justify-center rounded-button text-[15px] leading-none text-mute transition-colors hover:bg-bg hover:text-fg md:ml-0" onClick={onMoveDown} type="button">
             ↓
           </button>
         </div>
@@ -312,7 +312,7 @@ function ContentRow({
 
       <div className="min-w-0 self-center pr-0 md:pr-2">
         {showCategory ? (
-          <p className="mb-2 mt-0 type-body-sm text-mute-fg">
+          <p className="mb-2 mt-0 type-body-sm text-mute">
             {getManagedCategoryLabel(item.section, item.categorySlug, activeLocale)}
           </p>
         ) : null}
@@ -320,7 +320,7 @@ function ContentRow({
       </div>
 
       <div className="flex items-center justify-between gap-4 md:contents">
-        <div className="type-body-md text-mute-fg md:self-center md:whitespace-nowrap">{formatPublicDate(activeLocale, item.dateIso)}</div>
+        <div className="type-body-md text-mute md:self-center md:whitespace-nowrap">{formatPublicDate(activeLocale, item.dateIso)}</div>
 
         <div className="flex items-center justify-end gap-2 md:col-start-auto md:justify-between md:gap-3">
           <div className="flex flex-col items-center gap-2">
@@ -335,7 +335,7 @@ function ContentRow({
             >
               <Switch checked={isPublished} disabled={isTogglePending} onChange={() => {}} size="compact" />
             </div>
-            <span className={cx("type-body-sm", isPublished ? "text-fg" : "text-mute-fg")}>
+            <span className={cx("type-body-sm", isPublished ? "text-fg" : "text-mute")}>
               {statusLabel}
             </span>
           </div>
@@ -344,7 +344,7 @@ function ContentRow({
               <button
                 aria-expanded={menuOpen}
                 aria-label="더보기"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-button text-mute-fg transition-colors hover:bg-bg hover:text-fg"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-button text-mute transition-colors hover:bg-bg hover:text-fg"
                 onClick={(event) => {
                   event.preventDefault();
                   event.stopPropagation();
@@ -367,7 +367,7 @@ function ContentRow({
                   }}
                 >
                   <a
-                    className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute-fg"
+                    className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute"
                     href={getAdminDetailHref(item.section, item.categorySlug, item.id)}
                   >
                     <MenuIcon>
@@ -379,7 +379,7 @@ function ContentRow({
                     수정
                   </a>
                   <button
-                    className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute-fg"
+                    className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute"
                     onClick={onDuplicate}
                     type="button"
                   >
@@ -392,7 +392,7 @@ function ContentRow({
                     복제
                   </button>
                   <button
-                    className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute-fg"
+                    className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute"
                     onClick={onDelete}
                     type="button"
                   >
@@ -694,7 +694,7 @@ export default function AdminManagedContentListPage({
           ) : null}
         </div>
 
-        <p className="m-0 type-body-md text-mute-fg">
+        <p className="m-0 type-body-md text-mute">
           <span className="text-fg">{displayedItems.length}개</span> 컨텐츠
         </p>
 
@@ -739,7 +739,7 @@ export default function AdminManagedContentListPage({
             ))
           ) : (
             <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
-              <p className="m-0 type-body-md text-mute-fg">게시물이 없습니다.</p>
+              <p className="m-0 type-body-md text-mute">게시물이 없습니다.</p>
             </div>
           )}
         </div>

@@ -177,7 +177,7 @@ export default function AdminShell({ children }: AdminShellProps) {
             <div className="flex flex-col items-center gap-5 text-center">
               <div className="flex flex-col items-center gap-2 text-center">
                 <h2 className="m-0 type-h3 text-fg">페이지를 벗어나시겠습니까?</h2>
-                <p className="m-0 whitespace-pre-line type-body-md text-mute-fg">
+                <p className="m-0 whitespace-pre-line type-body-md text-mute">
                   저장하지 않은 내용은 사라집니다.
                 </p>
               </div>

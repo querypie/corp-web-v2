@@ -33,7 +33,7 @@ function getButtonStyle(
 ): ButtonStyleConfig {
   return {
     container: cx(
-      "inline-flex items-center justify-center rounded-button transition-colors duration-300",
+      "pressable inline-flex items-center justify-center rounded-button",
       shape === "full" ? "rounded-full" : "rounded-button",
       size === "small" && "h-8 gap-1.5 px-4",
       size === "default" && "h-10 gap-1.5 px-5",

@@ -9,9 +9,9 @@
    ========================================================================== */
 :root {
   /* 폰트 토큰: 기본 / 한글 / 일본어 / 모노 */
-  --font-sans: var(--font-mona-sans), "SF Pro Display", -apple-system, system-ui, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
-  --font-sans-ko: "Pretendard Variable";
-  --font-sans-ja: "Pretendard JP";
+  --font-sans: var(--font-mona-sans), var(--font-pretendard), var(--font-m-plus-1), "SF Pro Display", -apple-system, system-ui, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
+  --font-sans-ko: var(--font-mona-sans), var(--font-pretendard), sans-serif;
+  --font-sans-ja: var(--font-mona-sans), var(--font-m-plus-1), "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
 
   /* 라운드 토큰: rounded-* 유틸리티가 이 값을 사용한다. */
@@ -22,17 +22,17 @@
   --radius-full: 9999px;
 
   /* 공통 컬러: 전역 fg/bg/border 및 상태 색상 */
-  --color-fg: #F1F1F2;
-  --color-mute-fg: #8C9099;
+  --color-fg: #F2F2F2;
+  --color-mute: #909090;
   --color-placeholder: #4F5156;
-  --color-bg-content: #1F1F1F;
-  --color-bg-deep: #161616;
-  --color-bg: #000000;
-  --color-bg-modal: #000000;
+  --color-bg-content: #262626;
+  --color-bg-deep: #222222;
+  --color-bg: #161616;
+  --color-bg-modal: #161616;
   --color-overlay-rgb: 8 9 10;
-  --color-border: #2A2A2C;
-  --color-primary: #FAFAFA;
-  --color-secondary: #242424;
+  --color-border: #333333;
+  --color-primary: #FFFFFF;
+  --color-secondary: #2E2E2E;
   --color-bg-gnb-popover-rgb: 36 36 36;
   --color-white: #FFFFFF;
   --color-point: #C0E136;
@@ -59,6 +59,11 @@
 
   /* 썸네일 공통 비율: 카드/리스트 이미지에서 재사용 */
   --content-thumbnail-aspect: 16 / 9;
+
+  /* 인터랙션 모션: 모바일 터치 눌림 효과 공통값 */
+  --motion-press-scale: 0.98;
+  --motion-press-duration: 160ms;
+  --motion-press-ease: ease;
 }
 
 * {
@@ -74,17 +79,7 @@
 html,
 :lang(en) {
   font-family: var(--font-sans);
-  font-feature-settings:
-    "ss01" on,
-    "ss02" off,
-    "ss03" off,
-    "ss04" off,
-    "ss05" off,
-    "ss06" off,
-    "ss07" off,
-    "ss08" off,
-    "ss09" on,
-    "ss10" off;
+  font-feature-settings: "ss01" on, "ss09" on;
 }
 
 html {
@@ -202,6 +197,27 @@ textarea:-webkit-autofill:focus {
      버튼/카드/입력창처럼 여러 컴포넌트에서 공통으로 재사용하는 유틸리티.
      ======================================================================== */
 
+  .text-mute {
+    color: var(--color-mute);
+  }
+
+  .hover\:text-mute:hover {
+    color: var(--color-mute);
+  }
+
+  .group:hover .group-hover\:text-mute {
+    color: var(--color-mute);
+  }
+
+  .group\/nav:hover .group-hover\/nav\:text-mute,
+  .group\/nav:focus-within .group-focus-within\/nav\:text-mute {
+    color: var(--color-mute);
+  }
+
+  .\[\&_p\.is-editor-empty\:first-child\:\:before\]\:text-mute p.is-editor-empty:first-child::before {
+    color: var(--color-mute);
+  }
+
   /* 입력 필드 공통 스타일.
      실제 input/textarea/select에 직접 붙이는 기본 포커스 링 유틸리티. */
   .ui-field {
@@ -234,7 +250,7 @@ textarea:-webkit-autofill:focus {
   }
 
   .card-hover:focus-visible {
-    background-color: #242424;
+    background-color: #303030;
   }
 
   /* 퍼블릭 컨텐츠 카드 제목 공통 스타일:
@@ -252,10 +268,22 @@ textarea:-webkit-autofill:focus {
     aspect-ratio: var(--content-thumbnail-aspect);
   }
 
+  .pressable {
+    -webkit-tap-highlight-color: transparent;
+    transform: translateZ(0);
+    transition-duration: var(--motion-press-duration);
+    transition-property: background-color, border-color, box-shadow, color, opacity, transform;
+    transition-timing-function: var(--motion-press-ease);
+  }
+
+  .pressable:not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateZ(0) scale(var(--motion-press-scale));
+  }
+
   /* 마우스가 있는 환경에서만 hover 반응을 강하게 준다. */
   @media (hover: hover) and (pointer: fine) {
     .card-hover:hover {
-      background-color: #242424;
+      background-color: #303030;
     }
 
     .group:hover .card-media-motion {
@@ -270,13 +298,15 @@ textarea:-webkit-autofill:focus {
     [role="button"] {
       -webkit-tap-highlight-color: transparent;
       transform: translateZ(0);
-      transition: transform 160ms ease;
+      transition-duration: var(--motion-press-duration);
+      transition-property: background-color, border-color, box-shadow, color, opacity, transform;
+      transition-timing-function: var(--motion-press-ease);
     }
 
     a[href]:active,
-    button:active,
-    [role="button"]:active {
-      transform: translateZ(0) scale(0.98);
+    button:not(:disabled):active,
+    [role="button"]:not([aria-disabled="true"]):active {
+      transform: translateZ(0) scale(var(--motion-press-scale));
     }
   }
 
@@ -294,42 +324,42 @@ textarea:-webkit-autofill:focus {
     font-size: 26px;
     line-height: 32px;
     letter-spacing: 0;
-    font-weight: 310;
+    font-weight: 300;
   }
 
   .type-h2 {
     font-size: 20px;
     line-height: 28px;
-    letter-spacing: 0;
-    font-weight: 400;
+    letter-spacing: +0.2px;
+    font-weight: 300;
   }
 
   .type-h3 {
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .type-body-lg {
     font-size: 15px;
     line-height: 24px;
     letter-spacing: +0.2px;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .type-body-md {
     font-size: 14px;
     line-height: 22px;
     letter-spacing: +0.2px;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .type-body-sm {
     font-size: 12px;
     line-height: 20px;
     letter-spacing: +0.2px;
-    font-weight: 400;
+    font-weight: 300;
   }
 
 
@@ -354,35 +384,35 @@ textarea:-webkit-autofill:focus {
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 0;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .type-content-h3 {
     font-size: 15px;
     line-height: 24px;
     letter-spacing: 0;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .type-content-body {
     font-size: 14px;
     line-height: 24px;
     letter-spacing: +0.2px;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .type-content-table {
     font-size: 13px;
     line-height: 22px;
     letter-spacing: +0.2px;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .type-content-caption {
     font-size: 12px;
     line-height: 20px;
     letter-spacing: +0.2px;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .type-content-mono {
@@ -519,7 +549,7 @@ textarea:-webkit-autofill:focus {
     }
 
     .type-h3 {
-      font-size: 18px;
+      font-size: 17px;
       line-height: 26px;
     }
 
@@ -637,17 +667,6 @@ textarea:-webkit-autofill:focus {
   100% {
     transform: translateX(3px);
   }
-}
-
-/* 홈B 실제 루프 비디오 레이어 */
-.homeb-hero-video {
-  position: absolute;
-  inset: 0;
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  object-position: center center;
-  will-change: opacity;
 }
 
 /* 404 페이지 전용: bot 눈 깜빡임 */

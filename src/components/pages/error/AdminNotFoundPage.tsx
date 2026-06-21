@@ -55,10 +55,10 @@ export default function AdminNotFoundPage() {
         <div className="flex w-full max-w-[340px] flex-col items-start gap-5 text-left">
           <h1 className="m-0 type-h1 text-fg">404</h1>
           <div className="flex w-full flex-col gap-[10px]">
-            <p className="m-0 type-body-md text-mute-fg">
+            <p className="m-0 type-body-md text-mute">
               요청하신 관리자 페이지를 찾을 수 없습니다.
             </p>
-            <p className="m-0 type-body-md text-mute-fg">
+            <p className="m-0 type-body-md text-mute">
               관리자 홈으로 돌아가 다시 시작해 보세요.
             </p>
           </div>

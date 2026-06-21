@@ -1,5 +1,6 @@
+import Cta from "@/components/sections/Cta";
+import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
-import { buildSolutionContentComponents } from "@/features/solutions/contentComponents";
 
 type Props = {
   locale: Locale;
@@ -7,150 +8,69 @@ type Props = {
 };
 
 export const metadata = {
-    "title": "QueryPie AIP：実際使用量ベースエンタープライズAI",
-    "description": "ブラウザベースプラットフォームで即座にアクセス—ダウンロード不要、セットアップ不要、固定費用なし。ChatGPTと比較して最大90%のコスト削減により、企業全体でのAI導入がついに実現可能に。",
-    "keywords": [
-      "クエリパイ AI",
-      "QueryPie AI",
-      "AI Platform",
-      "AIP",
-      "AI",
-      "MCPゲートウェイ",
-      "アクセス制御",
-      "カスタムAIエージェント",
-      "インフラ運用",
-      "QueryPie AI Agent",
-      "使用量ベース",
-      "フォワードデプロイドエンジニア",
-      "FDE"
-    ]
+  title: "使用量ベースLLM",
+  description:
+    "使用量ベースの制御、コスト可視化、ガバナンスを備えたエンタープライズLLM環境を提供します。",
+  keywords: ["Usage-Based LLM", "Enterprise AI", "LLM governance"],
 } as const;
 
+const featureItems = [
+  {
+    title: ["Pay-Per-Use", "Pricing"],
+    body: [
+      "固定費なしで、利用した分だけ支払えます。",
+      "組織規模を問わず、AI導入を",
+      "柔軟かつ予測可能に運用できます。",
+    ],
+    imageAlt: "使用量ベース料金プレビュー",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+  {
+    title: ["Premium LLM", "Models"],
+    body: [
+      "OpenAI、Anthropic、Googleなどの主要モデルを",
+      "ひとつの場所から選択して利用できます。",
+      "業務ごとに最適なAIをすばやく適用します。",
+    ],
+    imageAlt: "LLMモデル選択プレビュー",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+  },
+  {
+    title: ["SSO & Central", "Management"],
+    body: [
+      "既存のIDプロバイダーとSSOで連携します。",
+      "アカウント、権限、管理ポリシーを一元管理し、",
+      "セキュリティと運用効率を高めます。",
+    ],
+    imageAlt: "SSOと一元管理プレビュー",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+];
 
-export default function AipUsageBasedLlmJASolutionContent({ locale, searchParams }: Props) {
-  const {
-    Box,
-    CenterSection,
-    DarkBadge,
-    FileImage,
-    Integrations,
-    IntroducingQueryPie,
-    KeyFeature,
-    KillerFeature,
-    KillerFeatureCategory,
-    KillerFeatures,
-    LearnMoreLink,
-    Link,
-    LottiePlayer,
-    MainFeatureDescription,
-    SplitView,
-    StaticBody,
-    StaticH1,
-    StaticH2,
-    StaticH4,
-    StaticHeader,
-    ThreeColumnList,
-    ThumbnailYoutube,
-    Youtube
-  } = buildSolutionContentComponents({ locale, searchParams }) as any;
-
+export default function UsageBasedLlmJASolutionContent({ locale }: Props) {
   return (
-<Box direction="column">
-  <Box paddingTopSize="lg" paddingBottomSize="xxl" center as="section">
-    <CenterSection gapSize="xxl">
-      <Box direction="column" center gapSize="sm">
-        <StaticH1>
-          {'QueryPie AIP'}
-          <br />
-          {'従量課金型エンタープライズAI'}
-        </StaticH1>
-        <StaticHeader color="var(--text-body)">
-          {
-            'QueryPie AIPは、ブラウザで使えるプラットフォーム。ダウンロード不要、セットアップ不要で即座にアクセスできます。'
-          }
-          <br />
-          {
-            '固定費用なしで使った分だけ支払う従量課金型だから、ChatGPTと比較して最大90%*のコスト削減を実現。'
-          }
-          <br />
-          {
-            '小さく始めて効果を見ながら段階的に拡大できます。'
-          }
-          <small>
-          {
-            '*ユーザーの利用量により異なります'
-          }
-          </small>
-        </StaticHeader>
-      </Box>
-      <Box as="section" center>
-        <FileImage
-          alt="Usage-based LLM Deployment"
-          filepath="public/solutions/aip/usage-based-llm/usage-based-llm.svg"
-          width={920}
-          height={580}
-          responsive
-        />
-      </Box>
-    </CenterSection>
-  </Box>
+    <div className="flex w-full flex-col gap-14 px-5 pb-10 md:gap-[160px] md:px-10">
+      <section className="flex w-full justify-center">
+        <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
+          <div>
+            <h1 className="m-0 type-h1 text-fg">
+              <span className="block">Usage-Based Enterprise AI</span>
+              <span className="block">That Works</span>
+            </h1>
+          </div>
+          <p className="m-0 max-w-[720px] type-body-lg leading-relaxed text-fg">
+            Browser-based platform with instant access—no downloads, no setup, no fixed costs. Up to
+            90% savings vs. ChatGPT makes enterprise-wide AI adoption finally achievable.
+          </p>
+        </header>
+      </section>
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" background="gray" center as="section" id="features">
-    <CenterSection gapSize="xxl">
-      <MainFeatureDescription
-        title={'利用量に応じた課金モデル'}
-        description={'使った分だけ支払う従量課金型。\n高額な月額固定費がないので無駄がありません。\nあらゆる規模の組織にとって、AI導入が手軽で拡張も簡単です。'}
-        image="public/solutions/aip/usage-based-llm/aip_function_pay.gif"
-        imageWidth={540}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
+      <FeatureSection items={featureItems} />
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'選択可能なプレミアムLLM\n(大規模言語モデル)'}
-        description={'ChatGPT、Claude、Geminiなど、業界をリードするAIモデルにアクセス。\nニーズに適したAIを選択し、チームの生産性を瞬時に向上します。'}
-        image="public/solutions/aip/usage-based-llm/aip_function_llmmodel.gif"
-        imageWidth={580}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section" background="gray">
-    <CenterSection>
-      <MainFeatureDescription
-        title={'シングルサインオン(SSO) で一元管理'}
-        description={'既存のアイデンティティプロバイダーとSSO連携し、\nシームレスにログイン。すべてのアカウントを一元管理し、\nセキュリティと管理体制を強化します。'}
-        image="public/solutions/aip/usage-based-llm/aip_function_sso.gif"
-        imageWidth={520}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="giga" paddingBottomSize="giga" center as="section">
-    <CenterSection gapSize="xxl">
-      <Box direction="column" center gapSize="sm">
-        <StaticH2>
-          {'最高のパフォーマンスを、最適なコストで！'}
-        </StaticH2>
-      </Box>
-      <Box as="section">
-        <FileImage
-          alt="Platform Comparison"
-          filepath="public/solutions/aip/usage-based-llm/platform-comparison-jp-rev2.svg"
-          responsive
-        />
-      </Box>
-    </CenterSection>
-  </Box>
-</Box>
+      <div>
+        <Cta locale={locale} />
+      </div>
+    </div>
   );
 }

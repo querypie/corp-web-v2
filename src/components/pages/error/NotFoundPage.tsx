@@ -109,7 +109,7 @@ export default function NotFoundPage({}: NotFoundPageProps) {
               <h1 className="m-0 type-h1 text-fg">{copy.title}</h1>
               <div className="flex w-full flex-col gap-[10px]">
                 {copy.messageLines.map((line) => (
-                  <p key={line} className="m-0 type-body-md text-mute-fg">
+                  <p key={line} className="m-0 type-body-md text-mute">
                     {line}
                   </p>
                 ))}

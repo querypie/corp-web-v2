@@ -4,7 +4,6 @@ import { getLocalePath } from "../constants/i18n";
 import { siteUrl } from "../constants/site";
 import { readContentState } from "../features/content/contentState.server";
 import { getPublicDetailHref, isPublishedContentVisible } from "../features/content/data";
-import { getDemoMdxHref, getVisibleDemoMdxEntries } from "../features/demo/catalog";
 
 function absolute(path: string) {
   return new URL(path, siteUrl).toString();
@@ -17,18 +16,13 @@ function perLocale(pathname: string) {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const demoItems = await readContentState("demo");
   const docsItems = await readContentState("documentation");
   const newsItems = await readContentState("news");
 
   const staticEntries = [
     ...perLocale("/"),
-    ...perLocale("/blog"),
-    ...perLocale("/whitepapers"),
     ...perLocale("/features/demo"),
-    ...perLocale("/demo/use-cases"),
-    ...perLocale("/demo/aip"),
-    ...perLocale("/demo/acp"),
-    ...perLocale("/webinars"),
     ...perLocale("/features/documentation"),
     ...perLocale("/company/news"),
     ...perLocale("/company/certifications"),
@@ -37,6 +31,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...perLocale("/plans"),
   ];
 
+  const demoEntries = locales.flatMap((locale) =>
+    demoItems
+      .filter((item) => isPublishedContentVisible(item, locale as Locale) && item.contentType !== "outlink")
+      .map((item) => ({
+        url: absolute(getPublicDetailHref("demo", locale as Locale, item.id)),
+        lastModified: item.dateIso || undefined,
+      })),
+  );
+
   const docsEntries = locales.flatMap((locale) =>
     docsItems
       .filter((item) => isPublishedContentVisible(item, locale as Locale) && item.contentType !== "outlink")
@@ -44,13 +47,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         url: absolute(getPublicDetailHref("documentation", locale as Locale, item.id)),
         lastModified: item.dateIso || undefined,
       })),
-  );
-
-  const demoEntries = locales.flatMap((locale) =>
-    getVisibleDemoMdxEntries(locale as Locale).map((entry) => ({
-      url: absolute(getDemoMdxHref(locale as Locale, entry.segment, entry.id) ?? "/features/demo"),
-      lastModified: entry.date || undefined,
-    })),
   );
 
   const newsEntries = locales.flatMap((locale) =>

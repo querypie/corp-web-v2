@@ -15,7 +15,7 @@ export default function RouteLoadingScreen({
         <div className="h-px w-16 bg-border" />
         <LoadingText className="type-h3" text={title} tone="light" />
         {description ? (
-          <p className="m-0 type-body-md text-mute-fg">{description}</p>
+          <p className="m-0 type-body-md text-mute">{description}</p>
         ) : null}
       </div>
     </div>

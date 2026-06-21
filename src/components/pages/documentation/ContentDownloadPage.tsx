@@ -47,7 +47,7 @@ export default function ContentDownloadPage({
           </div>
           <div className="flex flex-col gap-[10px]">
             <h1 className="m-0 type-h3 text-fg">{title}</h1>
-            <p className="m-0 type-body-md text-mute-fg">{localized.helperText}</p>
+            <p className="m-0 type-body-md text-mute">{localized.helperText}</p>
           </div>
         </div>
 

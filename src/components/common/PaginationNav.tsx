@@ -42,7 +42,7 @@ export default function PaginationNav({
   if (totalPages <= 1) {
     return (
       <div className="flex items-center justify-center gap-4 border-t border-line pt-8">
-        <span className="type-body-md text-mute-fg">1 / 1</span>
+        <span className="type-body-md text-mute">1 / 1</span>
       </div>
     );
   }
@@ -62,7 +62,7 @@ export default function PaginationNav({
         </span>
       )}
 
-      <span className="type-body-md text-mute-fg">
+      <span className="type-body-md text-mute">
         {currentPage} / {totalPages}
       </span>
 

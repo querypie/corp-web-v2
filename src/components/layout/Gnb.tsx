@@ -6,13 +6,12 @@ import { usePathname, useRouter } from "next/navigation";
 import Button from "../common/Button";
 import {
   getCompanySubItems,
-  getDemoSubItems,
+  getFeaturesSubItems,
   getPlansSubItems,
   getPrimaryNavHref,
-  getResourcesSubItems,
   getSolutionsSubItems,
 } from "../../constants/navigation";
-import { defaultLocale, getLocalePath, isLocale, type Locale } from "../../constants/i18n";
+import { getLocalePath, isLocale, type Locale } from "../../constants/i18n";
 
 type GnbProps = {
   actionLabel?: string;
@@ -47,28 +46,19 @@ function getLocaleHref(pathname: string, locale: string, search: string) {
 export default function Gnb({
   actionLabel = "Free start!",
   className,
-  items = ["Solutions", "Demo", "Resources", "Company", "Plans"],
+  items = ["Solutions", "Features", "Company", "Plans"],
   locale = "en",
   localeIcon,
 }: GnbProps) {
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
-  const [solutionsOpen, setSolutionsOpen] = useState(false);
-  const [demoOpen, setDemoOpen] = useState(false);
-  const [resourcesOpen, setResourcesOpen] = useState(false);
-  const [companyOpen, setCompanyOpen] = useState(false);
   const [plansOpen, setPlansOpen] = useState(false);
-  const [desktopLocaleOpen, setDesktopLocaleOpen] = useState(false);
   const [mobileLocaleOpen, setMobileLocaleOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [currentSearch, setCurrentSearch] = useState("");
   const pathname = usePathname();
   const mobileLocaleRef = useRef<HTMLDivElement | null>(null);
   const homeHref = getLocalePath(locale as Locale, "/");
-  const isHomePage =
-    pathname === homeHref || (locale === defaultLocale && pathname === "/en");
-  const isHomeTop = isHomePage && !mobileMenuOpen && !isScrolled;
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
@@ -98,22 +88,8 @@ export default function Gnb({
 
   useEffect(() => {
     setMobileMenuOpen(false);
-    setDesktopLocaleOpen(false);
     setMobileLocaleOpen(false);
   }, [pathname]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 0);
-    };
-
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     if (!mobileLocaleOpen) {
@@ -160,10 +136,9 @@ export default function Gnb({
   ];
   const mobileSections = [
     { title: items[0], items: getSolutionsSubItems(locale) },
-    { title: items[1], items: getDemoSubItems(locale) },
-    { title: items[2], items: getResourcesSubItems(locale) },
-    { title: items[3], items: getCompanySubItems(locale) },
-    { title: items[4], items: getPlansSubItems(locale) },
+    { title: items[1], items: getFeaturesSubItems(locale) },
+    { title: items[2], items: getCompanySubItems(locale) },
+    { title: items[3], items: getPlansSubItems(locale) },
   ];
 
   return (
@@ -171,18 +146,14 @@ export default function Gnb({
       <header
         className={cx(
           "fixed inset-x-0 top-0 z-50 flex w-full items-center justify-center pl-5 pr-4 transition-[background-color,backdrop-filter] duration-300 md:px-10",
-          mobileMenuOpen
-            ? mobileMenuBackdropClassName
-            : isHomeTop
-              ? "bg-transparent"
-              : "bg-bg",
+          mobileMenuOpen ? mobileMenuBackdropClassName : "bg-bg",
           className,
         )}
       >
-        <div className={cx("flex h-[56px] w-full max-w-[1200px] items-center justify-between gap-6 transition-colors duration-300 md:h-16", isHomeTop ? "text-bg" : "text-fg")}>
+        <div className="flex h-[56px] w-full max-w-[1200px] items-center justify-between gap-6 text-fg transition-colors duration-300 md:h-16">
           <a
             aria-label="QueryPie AI"
-            className={cx("inline-flex h-[18px] shrink-0 items-center transition-colors duration-300 md:h-5 md:w-[116px]", isHomeTop ? "text-bg" : "text-fg")}
+            className="inline-flex h-[18px] shrink-0 items-center text-fg transition-colors duration-300 md:h-5 md:w-[116px]"
             href={homeHref}
             onClick={() => {
               setMobileMenuOpen(false);
@@ -190,7 +161,7 @@ export default function Gnb({
           >
             <img
               alt="QueryPie AI"
-              className={cx("block h-[18px] w-auto transition-[filter,opacity] duration-300 md:h-5 md:w-[116px]", isHomeTop && "brightness-0")}
+              className="block h-[18px] w-auto transition-[filter,opacity] duration-300 md:h-5 md:w-[116px]"
               src="/icons/querypie-ai-logo.svg"
             />
           </a>
@@ -204,37 +175,23 @@ export default function Gnb({
                   return (
                     <div
                       key={item}
-                      className="relative"
-                      onMouseEnter={() => setSolutionsOpen(true)}
-                      onMouseLeave={() => setSolutionsOpen(false)}
+                      className="group/nav relative"
                     >
                       <button
-                        className={cx(
-                          "type-body-md transition-colors",
-                          isHomeTop
-                            ? solutionsOpen
-                              ? "text-bg"
-                              : "text-bg/70 hover:text-bg"
-                            : solutionsOpen
-                              ? "text-mute-fg"
-                              : "text-fg hover:text-mute-fg",
-                        )}
+                        className="type-body-md text-fg transition-colors hover:text-mute group-hover/nav:text-mute group-focus-within/nav:text-mute"
                         type="button"
                       >
                         {item}
                       </button>
 
                       <div
-                        className={cx(
-                          "absolute left-1/2 top-full pt-3 -translate-x-1/2 transition-all duration-200",
-                          solutionsOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
-                        )}
+                        className="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 -translate-y-1 pt-3 opacity-0 transition-all duration-200 group-hover/nav:pointer-events-auto group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:pointer-events-auto group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100"
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getSolutionsSubItems(locale).map((sub) => (
                             <a
                               key={sub.label}
-                              className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute-fg"
+                              className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
                             >
                               {sub.label}
@@ -250,37 +207,23 @@ export default function Gnb({
                   return (
                     <div
                       key={item}
-                      className="relative"
-                      onMouseEnter={() => setDemoOpen(true)}
-                      onMouseLeave={() => setDemoOpen(false)}
+                      className="group/nav relative"
                     >
                       <button
-                        className={cx(
-                          "type-body-md transition-colors",
-                          isHomeTop
-                            ? demoOpen
-                              ? "text-bg"
-                              : "text-bg/70 hover:text-bg"
-                            : demoOpen
-                              ? "text-mute-fg"
-                              : "text-fg hover:text-mute-fg",
-                        )}
+                        className="type-body-md text-fg transition-colors hover:text-mute group-hover/nav:text-mute group-focus-within/nav:text-mute"
                         type="button"
                       >
                         {item}
                       </button>
 
                       <div
-                        className={cx(
-                          "absolute left-1/2 top-full pt-3 -translate-x-1/2 transition-all duration-200",
-                          demoOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
-                        )}
+                        className="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 -translate-y-1 pt-3 opacity-0 transition-all duration-200 group-hover/nav:pointer-events-auto group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:pointer-events-auto group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100"
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
-                          {getDemoSubItems(locale).map((sub) => (
+                          {getFeaturesSubItems(locale).map((sub) => (
                             <a
                               key={sub.label}
-                              className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute-fg"
+                              className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
                             >
                               {sub.label}
@@ -296,83 +239,23 @@ export default function Gnb({
                   return (
                     <div
                       key={item}
-                      className="relative"
-                      onMouseEnter={() => setResourcesOpen(true)}
-                      onMouseLeave={() => setResourcesOpen(false)}
+                      className="group/nav relative"
                     >
                       <button
-                        className={cx(
-                          "type-body-md transition-colors",
-                          isHomeTop
-                            ? resourcesOpen
-                              ? "text-bg"
-                              : "text-bg/70 hover:text-bg"
-                            : resourcesOpen
-                              ? "text-mute-fg"
-                              : "text-fg hover:text-mute-fg",
-                        )}
+                        className="type-body-md text-fg transition-colors hover:text-mute group-hover/nav:text-mute group-focus-within/nav:text-mute"
                         type="button"
                       >
                         {item}
                       </button>
 
                       <div
-                        className={cx(
-                          "absolute left-1/2 top-full pt-3 -translate-x-1/2 transition-all duration-200",
-                          resourcesOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
-                        )}
-                      >
-                        <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
-                          {getResourcesSubItems(locale).map((sub) => (
-                            <a
-                              key={sub.label}
-                              className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute-fg"
-                              href={sub.href}
-                            >
-                              {sub.label}
-                            </a>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-
-                if (navSlot === 3) {
-                  return (
-                    <div
-                      key={item}
-                      className="relative"
-                      onMouseEnter={() => setCompanyOpen(true)}
-                      onMouseLeave={() => setCompanyOpen(false)}
-                    >
-                      <button
-                        className={cx(
-                          "type-body-md transition-colors",
-                          isHomeTop
-                            ? companyOpen
-                              ? "text-bg"
-                              : "text-bg/70 hover:text-bg"
-                            : companyOpen
-                              ? "text-mute-fg"
-                              : "text-fg hover:text-mute-fg",
-                        )}
-                        type="button"
-                      >
-                        {item}
-                      </button>
-
-                      <div
-                        className={cx(
-                          "absolute left-1/2 top-full pt-3 -translate-x-1/2 transition-all duration-200",
-                          companyOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
-                        )}
+                        className="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 -translate-y-1 pt-3 opacity-0 transition-all duration-200 group-hover/nav:pointer-events-auto group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:pointer-events-auto group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100"
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getCompanySubItems(locale).map((sub) => (
                             <a
                               key={sub.label}
-                              className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute-fg"
+                              className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
                             >
                               {sub.label}
@@ -394,13 +277,7 @@ export default function Gnb({
                     <button
                       className={cx(
                         "type-body-md transition-colors",
-                        isHomeTop
-                          ? plansOpen
-                            ? "text-bg"
-                            : "text-bg/70 hover:text-bg"
-                          : plansOpen
-                            ? "text-mute-fg"
-                            : "text-fg hover:text-mute-fg",
+                        plansOpen ? "text-mute" : "text-fg hover:text-mute",
                       )}
                       onClick={() => {
                         router.push(getPrimaryNavHref(item, locale));
@@ -414,9 +291,7 @@ export default function Gnb({
               })}
             </nav>
             <div
-              className="relative hidden md:inline-flex"
-              onMouseEnter={() => setDesktopLocaleOpen(true)}
-              onMouseLeave={() => setDesktopLocaleOpen(false)}
+              className="group/nav relative hidden md:inline-flex"
             >
               <button
                 aria-label="Change language"
@@ -427,26 +302,20 @@ export default function Gnb({
                   <img
                     alt=""
                     aria-hidden="true"
-                    className={cx(
-                      "h-6 w-6 object-contain transition-[filter,opacity] duration-300",
-                      isHomeTop ? "brightness-0" : "group-hover:opacity-50",
-                    )}
+                    className="h-6 w-6 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
                     src="/icons/global.svg"
                   />
                 )}
               </button>
 
               <div
-                className={cx(
-                  "absolute left-1/2 top-full pt-3 -translate-x-1/2 transition-all duration-200",
-                  desktopLocaleOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
-                )}
+                className="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 -translate-y-1 pt-3 opacity-0 transition-all duration-200 group-hover/nav:pointer-events-auto group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:pointer-events-auto group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100"
               >
                 <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                   {localeSubItems.map((sub) => (
                     <a
                       key={sub.label}
-                      className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute-fg"
+                      className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                       href={sub.href}
                     >
                       {sub.label}
@@ -467,10 +336,7 @@ export default function Gnb({
                   <img
                     alt=""
                     aria-hidden="true"
-                    className={cx(
-                      "h-6 w-6 object-contain transition-[filter,opacity] duration-300",
-                      isHomeTop ? "brightness-0" : "group-hover:opacity-50",
-                    )}
+                    className="h-6 w-6 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
                     src="/icons/global.svg"
                   />
                 )}
@@ -486,7 +352,7 @@ export default function Gnb({
                   {localeSubItems.map((sub) => (
                     <a
                       key={sub.label}
-                      className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute-fg"
+                      className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                       href={sub.href}
                       onClick={() => setMobileLocaleOpen(false)}
                     >
@@ -499,14 +365,14 @@ export default function Gnb({
             <button
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className={cx("inline-flex h-8 w-8 items-center justify-center md:hidden", isHomeTop && "text-bg")}
+              className="inline-flex h-8 w-8 items-center justify-center md:hidden"
               onClick={() => setMobileMenuOpen((current) => !current)}
               type="button"
             >
               <img
                 alt=""
                 aria-hidden="true"
-                className={cx("h-8 w-8 object-contain", isHomeTop && "brightness-0")}
+                className="h-8 w-8 object-contain"
                 src={mobileMenuOpen ? "/icons/m-Close.svg" : "/icons/m-Menu.svg"}
               />
             </button>
@@ -515,7 +381,7 @@ export default function Gnb({
                 arrow={false}
                 size="small"
                 style="full"
-                variant={isHomeTop ? "secondary" : "primary"}
+                variant="primary"
               >
                 {actionLabel}
               </Button>
@@ -538,12 +404,12 @@ export default function Gnb({
                 key={section.title}
                 className="flex w-full flex-col gap-[10px]"
               >
-                <p className="m-0 type-body-sm text-mute-fg">{section.title}</p>
+                <p className="m-0 type-body-sm text-mute">{section.title}</p>
                 <div className="flex w-full flex-col gap-[10px]">
                   {section.items.map((item) => (
                     <a
                       key={item.label}
-                      className="type-body-lg text-fg transition-transform active:scale-[0.98]"
+                      className="pressable type-body-lg text-fg"
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                     >

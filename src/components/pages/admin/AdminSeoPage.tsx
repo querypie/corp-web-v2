@@ -138,7 +138,7 @@ export default function AdminSeoPage() {
                   "inline-flex w-full items-center rounded-button px-3 py-2 text-left type-body-md transition-colors",
                   item.key === selectedKey
                     ? "bg-secondary text-fg"
-                    : "text-mute-fg hover:bg-[#242426] hover:text-fg",
+                    : "text-mute hover:bg-[#242426] hover:text-fg",
                 )}
                 onClick={() => setSelectedKey(item.key)}
                 type="button"
@@ -165,7 +165,7 @@ export default function AdminSeoPage() {
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
                 <h2 className="m-0 type-h3 text-fg">{currentDefinition?.label}</h2>
-                <p className="m-0 mt-2 type-body-md text-mute-fg">{currentDefinition?.description}</p>
+                <p className="m-0 mt-2 type-body-md text-mute">{currentDefinition?.description}</p>
               </div>
               <TabGroup>
                 {(["en", "ko", "ja"] as const).map((locale) => (
@@ -217,7 +217,7 @@ export default function AdminSeoPage() {
                   <span className="type-body-md text-fg">OG Image</span>
                   <div className="flex flex-col gap-3 sm:flex-row">
                     <div className="flex min-w-0 h-10 flex-1 items-center rounded-button border border-transparent bg-bg px-3">
-                      <span className="truncate type-body-md text-mute-fg">
+                      <span className="truncate type-body-md text-mute">
                         {ogImageDisplayValue}
                       </span>
                     </div>
@@ -260,16 +260,16 @@ export default function AdminSeoPage() {
               </div>
 
               <div className="rounded-[20px] bg-bg px-5 py-5">
-                <p className="m-0 type-body-sm text-mute-fg">SERP Preview</p>
+                <p className="m-0 type-body-sm text-mute">SERP Preview</p>
                 <div className="mt-4 flex flex-col gap-2">
                   <p className="m-0 type-body-sm text-success">querypie.ai / {currentDefinition?.key}</p>
                   <p className="m-0 type-h3 text-[#8ab4f8]">{currentEntry.title[activeLocale] || "Title"}</p>
-                  <p className="m-0 type-body-md text-mute-fg">{currentEntry.description[activeLocale] || "Description"}</p>
+                  <p className="m-0 type-body-md text-mute">{currentEntry.description[activeLocale] || "Description"}</p>
                 </div>
               </div>
 
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                <p className="m-0 type-body-sm text-mute-fg">실시간 적용</p>
+                <p className="m-0 type-body-sm text-mute">실시간 적용</p>
                 <div className="flex flex-col gap-3 sm:flex-row">
                   <Button arrow={false} onClick={() => resetSeoEntry(currentEntry.key)} style="round" variant="outline">
                     SEO 기본값으로 초기화
@@ -292,7 +292,7 @@ export default function AdminSeoPage() {
           >
             <div>
               <h3 className="m-0 type-h3 text-fg">추가 가능한 페이지</h3>
-              <p className="m-0 mt-2 type-body-md text-mute-fg">
+              <p className="m-0 mt-2 type-body-md text-mute">
                 SEO 정의에 아직 등록되지 않은 퍼블릭 페이지입니다.
               </p>
             </div>
@@ -304,7 +304,7 @@ export default function AdminSeoPage() {
                     <div className="flex items-start justify-between gap-4">
                       <div>
                         <p className="m-0 type-body-md text-fg">{candidate.label}</p>
-                        <p className="m-0 mt-1 type-body-sm text-mute-fg">
+                        <p className="m-0 mt-1 type-body-sm text-mute">
                           {candidate.routePattern || "/"} · {candidate.matchMode}
                         </p>
                       </div>
@@ -316,7 +316,7 @@ export default function AdminSeoPage() {
                 ))
               ) : (
                 <div className="flex min-h-[180px] items-center justify-center text-center">
-                  <p className="m-0 type-body-md text-mute-fg">추가 가능한 새 페이지가 없습니다.</p>
+                  <p className="m-0 type-body-md text-mute">추가 가능한 새 페이지가 없습니다.</p>
                 </div>
               )}
             </div>

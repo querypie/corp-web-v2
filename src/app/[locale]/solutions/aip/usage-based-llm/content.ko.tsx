@@ -1,5 +1,6 @@
+import Cta from "@/components/sections/Cta";
+import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
-import { buildSolutionContentComponents } from "@/features/solutions/contentComponents";
 
 type Props = {
   locale: Locale;
@@ -7,138 +8,69 @@ type Props = {
 };
 
 export const metadata = {
-    "title": "QueryPie AIP: Usage-Based Enterprise AI That Works",
-    "description": "Browser-based platform with instant access—no downloads, no setup, no fixed costs. Up to 90% savings vs. ChatGPT makes enterprise-wide AI adoption finally achievable.",
-    "keywords": [
-      "QueryPie AI",
-      "AI Platform",
-      "MCP management",
-      "access control",
-      "QueryPie",
-      "streamlined operations",
-      "MCP servers",
-      "Usage-based Enterprise AI",
-      "MCP Gateway",
-      "FDE Service"
-    ]
+  title: "사용량 기반 LLM",
+  description:
+    "사용량 기반 제어, 비용 가시성, 거버넌스를 갖춘 엔터프라이즈 LLM 환경을 배포합니다.",
+  keywords: ["Usage-Based LLM", "Enterprise AI", "LLM governance"],
 } as const;
 
+const featureItems = [
+  {
+    title: ["Pay-Per-Use", "Pricing"],
+    body: [
+      "고정 비용 없이 사용한 만큼만 지불합니다.",
+      "조직 규모와 상관없이 AI 도입 비용을",
+      "유연하고 예측 가능하게 운영합니다.",
+    ],
+    imageAlt: "사용량 기반 가격 정책 미리보기",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+  {
+    title: ["Premium LLM", "Models"],
+    body: [
+      "OpenAI, Anthropic, Google 등 주요 모델을",
+      "한곳에서 선택하고 사용할 수 있습니다.",
+      "업무별로 적합한 AI를 빠르게 적용합니다.",
+    ],
+    imageAlt: "LLM 모델 선택 미리보기",
+    imageSrc: "/images/home/features/feature-panel-b.png",
+    reverse: true,
+  },
+  {
+    title: ["SSO & Central", "Management"],
+    body: [
+      "기존 ID 공급자와 SSO로 자연스럽게 연결합니다.",
+      "계정, 권한, 관리 정책을 중앙에서 통제해",
+      "보안과 운영 효율을 높입니다.",
+    ],
+    imageAlt: "SSO 및 중앙 관리 미리보기",
+    imageSrc: "/images/home/features/feature-panel-a.png",
+  },
+];
 
-export default function AipUsageBasedLlmKOSolutionContent({ locale, searchParams }: Props) {
-  const {
-    Box,
-    CenterSection,
-    DarkBadge,
-    FileImage,
-    Integrations,
-    IntroducingQueryPie,
-    KeyFeature,
-    KillerFeature,
-    KillerFeatureCategory,
-    KillerFeatures,
-    LearnMoreLink,
-    Link,
-    LottiePlayer,
-    MainFeatureDescription,
-    SplitView,
-    StaticBody,
-    StaticH1,
-    StaticH2,
-    StaticH4,
-    StaticHeader,
-    ThreeColumnList,
-    ThumbnailYoutube,
-    Youtube
-  } = buildSolutionContentComponents({ locale, searchParams }) as any;
-
+export default function UsageBasedLlmKOSolutionContent({ locale }: Props) {
   return (
-<Box direction="column">
-  <Box paddingTopSize="lg" paddingBottomSize="xxl" center as="section">
-    <CenterSection gapSize="xxl">
-      <Box direction="column" center gapSize="sm">
-        <StaticH1>
-          {'QueryPie AIP:'}
-          <br />
-          {'Usage-Based Enterprise AI That Works'}
-        </StaticH1>
-        <StaticHeader color="var(--text-body)">
-          {
-            'Browser-based platform with instant access—no downloads, no setup, no fixed costs.'
-          }
-          <br />
-          {
-            'Up to 90% savings vs. ChatGPT makes enterprise-wide AI adoption finally achievable.'
-          }
-        </StaticHeader>
-      </Box>
-      <Box as="section" center>
-        <FileImage
-          alt="Usage-based LLM Deployment"
-          filepath="public/solutions/aip/usage-based-llm/usage-based-llm.svg"
-          width={920}
-          height={580}
-          responsive
-        />
-      </Box>
-    </CenterSection>
-  </Box>
+    <div className="flex w-full flex-col gap-14 px-5 pb-10 md:gap-[160px] md:px-10">
+      <section className="flex w-full justify-center">
+        <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
+          <div>
+            <h1 className="m-0 type-h1 text-fg">
+              <span className="block">Usage-Based Enterprise AI</span>
+              <span className="block">That Works</span>
+            </h1>
+          </div>
+          <p className="m-0 max-w-[720px] type-body-lg leading-relaxed text-fg">
+            Browser-based platform with instant access—no downloads, no setup, no fixed costs. Up to
+            90% savings vs. ChatGPT makes enterprise-wide AI adoption finally achievable.
+          </p>
+        </header>
+      </section>
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" background="gray" center as="section" id="features">
-    <CenterSection gapSize="xxl">
-      <MainFeatureDescription
-        title={'Pay-Per-Use Pricing'}
-        description={'Pay only for what you use—no fixed costs, no waste.\nAI adoption becomes affordable and scalable\nfor any organization size.'}
-        image="public/solutions/aip/usage-based-llm/aip_function_pay.gif"
-        imageWidth={540}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
+      <FeatureSection items={featureItems} />
 
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section">
-    <CenterSection>
-      <MainFeatureDescription
-        imagePosition="left"
-        title={'Premium LLM Models at Your Choice'}
-        description={'Access OpenAI, Anthropic, Google, and more industry-leading models.\nChoose the right AI for your needs\nand boost team productivity instantly.'}
-        image="public/solutions/aip/usage-based-llm/aip_function_llmmodel.gif"
-        imageWidth={580}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="lg" paddingBottomSize="lg" center as="section" background="gray">
-    <CenterSection>
-      <MainFeatureDescription
-        title={'SSO & Central Management'}
-        description={'Seamless login with existing identity provider through SSO.\nCentrally manage all accounts\nfor better security and administrative control.'}
-        image="public/solutions/aip/usage-based-llm/aip_function_sso.gif"
-        imageWidth={520}
-        imageShadow={true}
-        checkList={[]}
-      />
-    </CenterSection>
-  </Box>
-
-  <Box paddingTopSize="giga" paddingBottomSize="giga" center as="section">
-    <CenterSection gapSize="xxl">
-      <Box direction="column" center gapSize="sm">
-        <StaticH2>
-          {'Best Performance, Best Price!'}
-        </StaticH2>
-      </Box>
-      <Box as="section">
-        <FileImage
-          alt="Platform Comparison"
-          filepath="public/solutions/aip/usage-based-llm/platform-comparison-en.svg"
-          responsive
-        />
-      </Box>
-    </CenterSection>
-  </Box>
-</Box>
+      <div>
+        <Cta locale={locale} />
+      </div>
+    </div>
   );
 }

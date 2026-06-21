@@ -1,130 +1,122 @@
 # corp-web-v2
 
-QueryPie의 회사 홍보·소개 웹사이트입니다. 제품 소개, Features Demo, Documentation, Company 정보, Plans, Legal 문서 등을 다국어(en/ko/ja)로 제공합니다.
+QueryPie 회사 홍보·소개 웹사이트입니다. 제품 소개, Features Demo, Documentation, Company, Plans, Legal 문서를 `en / ko / ja` 다국어로 제공합니다.
 
-현재 운영 중인 두 레포지토리(`corp-web-app` + `corp-web-contents`)를 하나의 Next.js 15 앱으로 통합·대체하는 것이 목표이며, Admin CMS(Demo / Documentation / News 편집·게시)가 보조 기능으로 포함되어 있습니다.
+Admin CMS는 Demo / Documentation / News 콘텐츠를 편집·게시하기 위한 보조 기능으로 포함되어 있습니다.
 
-## 실행 방법
+---
+
+## 실행
 
 ```bash
 npm install
 npm run dev
 ```
 
-기본 개발 서버 주소: `http://localhost:3000`
+개발 서버:
 
-기타 스크립트:
+```text
+http://localhost:3000
+```
+
+---
+
+## 주요 명령
 
 ```bash
+npm run dev
 npm run typecheck
+npm run test:run
 npm run build
 npm run start
 npm run audit:public-assets
 ```
 
-## 기술 스택
+로컬 전용 Playwright E2E:
 
-→ [구현 현황 — 기술 스택](docs/reference/corp-web-v2-implementation-status.md#기술-스택)
+```bash
+npm run e2e:local:contact-us:stage
+```
 
-## 폴더 구조
-
-→ [구현 현황 — 디렉토리 구조](docs/reference/corp-web-v2-implementation-status.md#디렉토리-구조)
-
-## 콘텐츠 동작 방식
-
-→ [구현 현황 — CMS 데이터 흐름](docs/reference/corp-web-v2-implementation-status.md#cms-데이터-흐름)
-
-## Source Of Truth
-
-→ [AGENTS.md — Source of Truth](AGENTS.md#source-of-truth)
-
-## SEO 동작 방식
-
-→ [AGENTS.md — SEO](AGENTS.md#seo)
-
-## 라우팅 규칙
-
-→ [AGENTS.md — 라우팅](AGENTS.md#라우팅)
-
-## 법무 문서
-
-→ [AGENTS.md — 법무 문서](AGENTS.md#법무-문서)
-
-## 작업 시 기준 · 체크리스트
-
-→ [AGENTS.md — 작업 규칙](AGENTS.md#작업-규칙)
-
-## MDX 작성 규칙
-
-- `src/content/mdx/**` 아래 Blog / White Paper MDX는 본문 단락을 **한 줄에 한 문장(one sentence per line)** 형식으로 작성합니다.
-- 새 문장을 추가하거나 기존 문장을 수정할 때는 같은 문단 안에서도 문장마다 줄바꿈합니다.
-- 리스트 항목이나 JSX 기반 본문 텍스트(`Table.Td`, `InfoNote` 등)도 여러 문장을 한 줄에 몰아 쓰지 않고 문장 단위 줄바꿈을 유지합니다.
-
-## 빠른 진단 포인트
-
-→ [AGENTS.md — 빠른 진단](AGENTS.md#빠른-진단)
+설정과 실행 조건은 `docs/reference/local-e2e.md`를 확인합니다.
 
 ---
 
-## AI 에이전트 작업 가이드
+## 기술 스택
 
-Claude Code / Codex 등 AI 에이전트가 이 레포지토리에서 작업할 때의 흐름입니다.
-
-**시작 전 필독:** [AGENTS.md](AGENTS.md) — 프로젝트 목적, Source of Truth, 작업 규칙, 주의사항, 빠른 진단
-
-### 작업 흐름
-
-프롬프트 앞에 아래 문장을 추가하면 CC가 worktree를 생성하고 그 안에서 작업합니다.
-
-```
-새 worktree에서 작업해줘. <작업 내용>
-```
-
-### 테스트 코드
-
-코드 변경이 포함된 작업에는 테스트를 함께 요청하세요. 프롬프트에 명시하지 않으면 작성되지 않을 수 있습니다.
-
-```
-새 worktree에서 작업해줘. <작업 내용> 테스트 코드도 함께 작성하고 PR을 작성해줘.
-```
-
-### 예시 프롬프트
-
-```
-새 worktree에서 작업해줘. QueryPie가 ISO 27001 인증을 획득했어. 뉴스 콘텐츠를 새로 추가하고 PR을 작성해줘.
-```
-
-```
-새 worktree에서 작업해줘. Features Documentation에 "데이터 접근 제어 설정" 문서를 새로 추가해줘. 테스트 코드를 충실하게 작성하고 PR을 작성해줘.
-```
-
-```
-새 worktree에서 작업해줘. Plans 페이지의 Enterprise 플랜 설명 문구를 수정하고 PR을 작성해줘.
-```
-
-```
-새 worktree에서 작업해줘. About Us 페이지의 회사 소개 문구를 수정해줘. 한국어·일본어도 함께 반영해서 PR을 작성해줘.
-```
-
-```
-새 worktree에서 작업해줘. 개인정보처리방침 한국어 버전을 새 버전(v3)으로 추가하고 PR을 작성해줘.
-```
-
-```
-Staging 서버에서 에러가 발생하고 있어. Vercel CLI로 로그를 조회해서 원인을 파악하고 수정 PR을 작성해줘. 테스트 코드를 충실하게 작성해줘.
-```
-
-### Claude Code 스킬
-
-`.claude/skills/` 아래 단계별 스킬이 제공됩니다.
-
-| 스킬 | 설명 |
+| 항목 | 버전 |
 |------|------|
-| `worktree` | worktree 생성·정리 |
-| `branch` | 브랜치 생성 |
-| `commit` | 커밋 메시지 작성 규칙 |
-| `pr` | PR 생성 — scope gate, 테스트 확인, 워크플로우 실행 |
-| `vercel` | Vercel 배포 로그 조회 |
+| Next.js App Router | 15.x |
+| React | 19.x |
+| TypeScript | 5.8 |
+| Tailwind CSS | 3.4 |
+| Tiptap | 3.x |
+| Vitest | 3.x |
+
+---
+
+## 디렉토리 개요
+
+```text
+src/
+├── app/
+│   ├── [locale]/       # 공개 페이지: en / ko / ja
+│   ├── admin/          # Admin CMS
+│   └── api/            # 서버 API 라우트
+├── components/         # common, layout, pages, sections
+├── features/           # content, seo, contact 등 도메인 로직
+├── content/            # demo, documentation, news, legal 콘텐츠
+├── constants/          # i18n, navigation, plans, legal 등
+└── styles/             # 전역 스타일
+```
+
+---
+
+## 콘텐츠 구조
+
+관리형 콘텐츠는 `src/content/{demo,documentation,news}/**/cnt_xxxxxx/` 아래 파일을 원본으로 사용합니다.
+
+- `meta.json`
+- `en.html`, `ko.html`, `ja.html`
+- `*.tiptap.json`
+
+콘텐츠 읽기/쓰기 관련 코드는 아래 파일을 먼저 확인합니다.
+
+- `src/features/content/contentState.server.ts`
+- `src/features/content/authored.server.ts`
+- `src/features/content/data.ts`
+- `src/features/content/config.ts`
+
+---
+
+## 라우팅 / 다국어
+
+- locale은 `en`, `ko`, `ja`를 지원합니다.
+- `/` 요청은 영어 공개 페이지로 처리됩니다.
+- 공개 경로 생성은 `src/constants/i18n.ts`의 `getLocalePath()`를 우선 사용합니다.
+- 공개 콘텐츠 상세 경로는 `getPublicListHref()`, `getPublicDetailHref()` 사용 여부를 먼저 확인합니다.
+- locale별 public 영역의 `lang`은 `src/app/[locale]/layout.tsx`에서 적용합니다.
+
+---
+
+## SEO
+
+현재 SEO 상태는 브라우저 `localStorage` 기반입니다.
+
+- 클라이언트 저장소: `src/features/seo/clientStore.ts`
+- 런타임 적용: `src/components/common/SeoRuntime.tsx`
+
+---
+
+## 배포
+
+| 환경 | 도메인 | 트리거 |
+|------|--------|--------|
+| Staging | `stage-v2.querypie.com` | `main` push |
+| Production | `www-v2.querypie.com` | `workflow_dispatch` |
+| Preview | Vercel preview URL | PR open / sync |
+
+상세 내용은 `docs/reference/vercel-deployment.md`를 확인합니다.
 
 ---
 
@@ -132,9 +124,11 @@ Staging 서버에서 에러가 발생하고 있어. Vercel CLI로 로그를 조�
 
 | 문서 | 설명 |
 |------|------|
-| [AGENTS.md](AGENTS.md) | AI 에이전트 작업 가이드 — Source of Truth, 작업 규칙, 라우팅·SEO·법무 주의사항, 빠른 진단 |
-| [구현 현황](docs/reference/corp-web-v2-implementation-status.md) | 기술 스택, 폴더 구조, 공개 페이지·Admin CMS·API 라우트 완성도, CMS 데이터 흐름 |
-| [Vercel 배포](docs/reference/vercel-deployment.md) | GitHub Actions 워크플로우, 배포 환경, 환경변수, DNS 설정 |
-| [테스트 커버리지](docs/reference/test-coverage.md) | 테스트 파일 목록, Mock 패턴, 환경 설정 |
-| [Community License](docs/reference/community-license.md) | 라이선스 신청/발급 기능 상세 |
-| [GitHub 설정](docs/reference/github-settings.md) | CI 워크플로우, 브랜치 보호 규칙 |
+| [AGENTS.md](AGENTS.md) | 에이전트 작업 규칙 |
+| [구현 현황](docs/reference/corp-web-v2-implementation-status.md) | 공개 페이지, Admin CMS, API 구현 현황 |
+| [테스트 커버리지](docs/reference/test-coverage.md) | 테스트 파일 목록과 mock 패턴 |
+| [Local E2E](docs/reference/local-e2e.md) | 로컬 Playwright E2E 실행 방법 |
+| [Vercel 배포](docs/reference/vercel-deployment.md) | GitHub Actions / Vercel 배포 구조 |
+| [GitHub 설정](docs/reference/github-settings.md) | CI 워크플로우와 브랜치 보호 |
+| [Contact Us API](docs/reference/contact-us-api.md) | 문의 API와 리드 캡처 흐름 |
+| [UTM Attribution](docs/reference/utm-attribution.md) | UTM 저장과 전송 흐름 |

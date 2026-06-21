@@ -23,17 +23,13 @@ export default function McpSection({
     <section className={cx("flex w-full justify-center", className)}>
       <div className="flex w-full max-w-[1200px] flex-col gap-8">
         {/* 상단 카피 영역 */}
-        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between md:gap-10">
+        <div className="grid gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
           <h2 className="m-0 type-h2 leading-7 tracking-[-0.3px] text-fg">
             {title}
           </h2>
-          <div className="w-full type-body-lg leading-6 text-mute-fg md:w-[360px]">
-            {description.map((line) => (
-              <p key={line} className="m-0">
-                {line}
-              </p>
-            ))}
-          </div>
+          <p className="m-0 max-w-[720px] type-body-lg leading-6 text-mute">
+            {description.join(" ")}
+          </p>
         </div>
 
         {/* MCP 아이콘 카드 그리드 */}

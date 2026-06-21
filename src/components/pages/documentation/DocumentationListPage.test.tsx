@@ -11,7 +11,7 @@ vi.mock("../../sections/Cta", () => ({
 }));
 
 describe("DocsListPage", () => {
-  it("사이드바에 CMS/MDX 섹션 구분과 링크를 함께 렌더링한다", () => {
+  it("사이드바에 CMS 카테고리 링크를 렌더링한다", () => {
     render(
       <DocsListPage
         items={[
@@ -25,7 +25,6 @@ describe("DocsListPage", () => {
         ]}
         locale="en"
         menu={[
-          { kind: "section", label: "CMS" },
           { href: "/features/documentation", isActive: true, kind: "link", label: "All", slug: "all" },
           {
             href: "/features/documentation?category=manuals",
@@ -34,26 +33,14 @@ describe("DocsListPage", () => {
             label: "Manuals",
             slug: "manuals",
           },
-          { kind: "divider" },
-          { kind: "section", label: "MDX" },
-          {
-            href: "/whitepapers",
-            isActive: false,
-            kind: "link",
-            label: "White Papers",
-            slug: "white-papers",
-          },
-          { href: "/blog", isActive: false, kind: "link", label: "Blogs", slug: "blogs" },
         ]}
         title="Documentation"
       />,
     );
 
     expect(screen.getByRole("heading", { name: "Documentation" })).toBeInTheDocument();
-    expect(screen.getByText("CMS")).toBeInTheDocument();
-    expect(screen.getByText("MDX")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "All" })).toHaveAttribute("href", "/features/documentation");
-    expect(screen.getByRole("link", { name: "White Papers" })).toHaveAttribute("href", "/whitepapers");
-    expect(screen.getByRole("separator")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Manuals" })).toHaveAttribute("href", "/features/documentation?category=manuals");
+    expect(screen.queryByText("MDX")).not.toBeInTheDocument();
   });
 });

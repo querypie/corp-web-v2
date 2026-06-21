@@ -17,7 +17,7 @@ function StatCard({
     /* 대시보드에서 반복 사용하는 공통 통계 카드 */
     <article className={cx("rounded-box border border-border bg-bg-content p-5", className)}>
       <div className="flex flex-col gap-5">
-        <p className="m-0 type-body-md text-mute-fg">{title}</p>
+        <p className="m-0 type-body-md text-mute">{title}</p>
         {children}
       </div>
     </article>
@@ -89,7 +89,7 @@ function PieChart({
           <div key={item.label} className="flex items-center gap-2">
             <span className="h-2.5 w-2.5 rounded-full" style={{ backgroundColor: item.color }} />
             <span className="type-body-md text-fg">{item.label}</span>
-            <span className="type-body-md text-mute-fg">{item.value}</span>
+            <span className="type-body-md text-mute">{item.value}</span>
           </div>
         ))}
       </div>
@@ -127,19 +127,19 @@ export default function AdminDashboardPage() {
         <StatCard title="Content Count">
           <div className="grid grid-cols-2 gap-3">
             <div className="rounded-box bg-bg-deep p-4">
-              <p className="m-0 type-body-md text-mute-fg">Use Cases</p>
+              <p className="m-0 type-body-md text-mute">Use Cases</p>
               <p className="mt-3 m-0 type-h2 text-fg">14</p>
             </div>
             <div className="rounded-box bg-bg-deep p-4">
-              <p className="m-0 type-body-md text-mute-fg">Blogs</p>
+              <p className="m-0 type-body-md text-mute">Blogs</p>
               <p className="mt-3 m-0 type-h2 text-fg">28</p>
             </div>
             <div className="rounded-box bg-bg-deep p-4">
-              <p className="m-0 type-body-md text-mute-fg">White Papers</p>
+              <p className="m-0 type-body-md text-mute">White Papers</p>
               <p className="mt-3 m-0 type-h2 text-fg">9</p>
             </div>
             <div className="rounded-box bg-bg-deep p-4">
-              <p className="m-0 type-body-md text-mute-fg">News</p>
+              <p className="m-0 type-body-md text-mute">News</p>
               <p className="mt-3 m-0 type-h2 text-fg">11</p>
             </div>
           </div>
@@ -152,11 +152,11 @@ export default function AdminDashboardPage() {
           </div>
           <div className="flex flex-col gap-3">
             <div className="rounded-box bg-bg-deep p-4">
-              <p className="m-0 type-body-md text-mute-fg">Missing metadata</p>
+              <p className="m-0 type-body-md text-mute">Missing metadata</p>
               <p className="mt-2 m-0 type-body-lg text-fg">8 pages</p>
             </div>
             <div className="rounded-box bg-bg-deep p-4">
-              <p className="m-0 type-body-md text-mute-fg">Broken internal links</p>
+              <p className="m-0 type-body-md text-mute">Broken internal links</p>
               <p className="mt-2 m-0 type-body-lg text-fg">5 pages</p>
             </div>
           </div>

@@ -1,7 +1,8 @@
 import { Children, Fragment, isValidElement } from "react";
-import type { CSSProperties, ElementType, ReactNode } from "react";
-import type { MDXComponents } from "mdx/types";
+import type { ComponentType, CSSProperties, ElementType, JSX, ReactNode } from "react";
 import { getLocalePath, type Locale } from "@/constants/i18n";
+
+type ContentComponents = Record<string, ComponentType<any> | keyof JSX.IntrinsicElements>;
 
 function joinClasses(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(" ");
@@ -96,7 +97,7 @@ export function buildSolutionContentComponents({
 }: {
   locale: Locale;
   searchParams?: { category?: string };
-}): MDXComponents {
+}): ContentComponents {
   const currentCategory = typeof searchParams?.category === "string" ? searchParams.category : "all";
 
   return {

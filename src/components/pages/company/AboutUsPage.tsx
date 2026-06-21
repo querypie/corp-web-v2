@@ -1,4 +1,5 @@
 import Cta from "../../sections/Cta";
+import type { Locale } from "../../../constants/i18n";
 
 type Investor = {
   alt: string;
@@ -26,11 +27,13 @@ type LocationItem = {
 
 type AboutUsPageProps = {
   companyDescription: string[];
+  companyImageAlt: string;
   investors: Investor[];
   investorsTitle: string;
   journeyDescription: string;
   journeyItems: JourneyItem[];
   journeyTitle: string;
+  locale: Locale;
   locations: LocationItem[];
   locationsTitle: string;
   mapImageSrc: string;
@@ -64,7 +67,7 @@ function TeamCard({ imageSrc, linkedinHref, name, role }: TeamMember) {
       <div className="flex min-w-0 flex-col justify-between gap-4 md:gap-5">
         <div className="flex flex-col gap-1">
           <p className="m-0 type-body-lg text-fg">{name}</p>
-          <p className="m-0 type-body-md text-mute-fg">{role}</p>
+          <p className="m-0 type-body-md text-mute">{role}</p>
         </div>
         <span className="inline-flex h-6 w-6 opacity-30 transition-opacity group-hover:opacity-100">
           <img alt="LinkedIn" className="h-6 w-6 object-contain" src="/icons/linkedin.svg" />
@@ -89,7 +92,7 @@ function LocationCard({ addressLines, city, country, iconSrc }: LocationItem) {
         <img alt="" aria-hidden="true" className="h-[18px] w-6 object-contain" src={iconSrc} />
         <p className="m-0 type-body-lg text-fg">{city}</p>
       </div>
-      <div className="type-body-sm text-mute-fg">
+      <div className="type-body-sm text-mute">
         <p className="m-0">{country}</p>
         {addressLines.map((line) => (
           <p key={line} className="m-0">
@@ -103,11 +106,13 @@ function LocationCard({ addressLines, city, country, iconSrc }: LocationItem) {
 
 export default function AboutUsPage({
   companyDescription,
+  companyImageAlt,
   investors,
   investorsTitle,
   journeyDescription,
   journeyItems,
   journeyTitle,
+  locale,
   locations,
   locationsTitle,
   mapImageSrc,
@@ -119,20 +124,12 @@ export default function AboutUsPage({
   return (
     <div className="flex w-full flex-col gap-20 px-5 pb-10 md:gap-[160px] md:px-10">
       <section className="flex w-full justify-center">
-        <div className="flex w-full max-w-[900px] flex-col gap-20 md:gap-[160px]">
+        <div className="flex w-full max-w-[1200px] flex-col gap-20 md:gap-[160px]">
         {/* 회사 소개 상단 */}
         <div className="grid gap-5 sm:gap-6 md:grid-cols-2 md:gap-[30px]">
           <div className="type-h1 text-fg">
-            <p className="m-0 text-mute-fg">{title[0]}</p>
+            <p className="m-0 text-mute">{title[0]}</p>
             <p className="m-0">{title[1]}</p>
-            <div
-              aria-hidden="true"
-              className="mt-[30px] h-px w-[60px]"
-              style={{
-                background:
-                  "linear-gradient(90deg, #FF7051 0%, #BA709F 29.81%, #456BF0 100%)",
-              }}
-            />
           </div>
           <div className="flex flex-col gap-5 sm:gap-6 md:gap-[30px]">
             {companyDescription.map((paragraph) => (
@@ -142,7 +139,7 @@ export default function AboutUsPage({
             ))}
             <div className="content-thumbnail-frame w-full overflow-hidden rounded-box">
               <img
-                alt="Company introduction"
+                alt={companyImageAlt}
                 className="block h-full w-full object-contain"
                 src="/images/about-us/company-introduction.jpg"
               />
@@ -215,7 +212,7 @@ export default function AboutUsPage({
         </div>
         </div>
       </section>
-      <Cta />
+      <Cta locale={locale} />
     </div>
   );
 }

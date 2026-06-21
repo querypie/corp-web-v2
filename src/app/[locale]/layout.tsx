@@ -29,7 +29,7 @@ export default async function LocaleLayout({
   const shellCopy = getShellMenuCopy(locale);
 
   return (
-    <div className="flex min-h-screen flex-col bg-bg" data-locale={locale as Locale}>
+    <div className="flex min-h-screen flex-col bg-bg" data-locale={locale as Locale} lang={locale}>
       <SeoRuntime locale={locale as Locale} />
       <Suspense fallback={null}>
         <Gnb actionLabel={shellCopy.navActionLabel} items={shellCopy.navItems} locale={locale} />

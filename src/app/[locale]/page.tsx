@@ -14,7 +14,6 @@ import {
   isPublishedContentVisible,
   getPublicDetailHref,
 } from "@/features/content/data";
-import { getLatestPublicDemoEntry, toPublicDemoListItem } from "@/features/demo/public";
 import { readContentState } from "@/features/content/contentState.server";
 
 type LocalePageProps = {
@@ -88,11 +87,9 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       )
       .sort((left, right) => (right.dateIso || "").localeCompare(left.dateIso || ""))[0];
 
-  const latestUseCase = getLatestPublicDemoEntry(locale, "use-cases");
+  const latestUseCase = latestByCategory("demo", "use-cases");
   const latestWhitePaper = latestByCategory("documentation", "white-papers");
   const latestBlog = latestByCategory("documentation", "blogs");
-
-  const latestUseCaseCard = latestUseCase ? toPublicDemoListItem(latestUseCase, locale) : null;
 
   const contentListItems: Array<{
     category: string;
@@ -100,12 +97,15 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     imageSrc: string;
     title: string;
   }> = [
-    latestUseCaseCard
+    latestUseCase
       ? {
-          category: latestUseCaseCard.category,
-          href: latestUseCaseCard.href,
-          imageSrc: latestUseCaseCard.imageSrc,
-          title: latestUseCaseCard.title,
+          category: getCategoryLabel(demoCategoryConfigs, "use-cases", locale),
+          href:
+            latestUseCase.contentType === "outlink"
+              ? latestUseCase.externalUrl
+              : getPublicDetailHref("demo", locale, latestUseCase.id),
+          imageSrc: getContentThumbnailSrc(latestUseCase.imageSrc),
+          title: getLocalizedContent(latestUseCase.title, locale),
         }
       : null,
     latestWhitePaper
@@ -150,16 +150,11 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
   // 홈 화면에서 사용하는 locale별 카피/데이터
   const copy = {
     en: {
-      nav: ["Solutions", "Demo", "Resources", "Company", "Plans"],
-      heroHeading: "AI That Gets How You Work",
-      heroDescription:
-        "QueryPie AI is here to help you achieve successful AI transformation in your life and business.",
-      heroPrimaryCtaLabel: "Experience it now",
-      heroPromptRotatingTexts: [
-        "Experience a new AI business?",
-        "Route the right task to the right agent.",
-        "Turn product ops into self-driving systems.",
-      ],
+      nav: ["Solutions", "Features", "Company", "Plans"],
+      heroHeading: "Experience a new AI business,",
+      heroDescription: "QueryPie AI is the best way.",
+      heroPrimaryCtaLabel: "Free start!",
+      heroImageAlt: "QueryPie AI workspace preview",
       clientCaption: "Trusted every day by teams that build world-class software",
       contentListDescription:
         "Explore real-world guidance, strategies, and insights from a community of experts shaping the future of data access.",
@@ -251,30 +246,25 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         },
       ],
       newsTitle: "Lastest News",
-      ctaActionLabel: "Get Start!",
+      ctaActionLabel: "Make It Happen",
       ctaSection: [
         "Stop Thinking.",
         "Start Transforming.",
         "Sign up in seconds and secure your 14-day free trial now.",
       ],
       footerSections: [
-        { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer Service (FDES)"] },
+        { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
         { title: "Features", items: ["Demo", "Documentation"] },
         { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us", "Plans"] },
       ],
       legal: ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"],
     },
     ko: {
-      nav: ["솔루션", "데모", "리소스", "회사", "요금제"],
-      heroHeading: "당신의 일하는 방식을 이해하는 AI",
-      heroDescription:
-        "QueryPie AI는 당신의 일과 비즈니스 전반에서 성공적인 AI 전환을 이룰 수 있도록 돕습니다.",
-      heroPrimaryCtaLabel: "지금 체험하기",
-      heroPromptRotatingTexts: [
-        "새로운 AI 비즈니스를 경험해볼까요?",
-        "적절한 에이전트에 작업을 자동으로 연결하세요.",
-        "제품 운영을 스스로 움직이게 만드세요.",
-      ],
+      nav: ["솔루션", "기능", "회사", "요금제"],
+      heroHeading: "새로운 AI 비즈니스를 경험하세요,",
+      heroDescription: "QueryPie AI가 가장 좋은 방법입니다.",
+      heroPrimaryCtaLabel: "무료로 시작하기",
+      heroImageAlt: "QueryPie AI 워크스페이스 미리보기",
       clientCaption: "세계적인 소프트웨어 팀이 매일 신뢰하는 플랫폼",
       contentListDescription:
         "데이터 접근의 미래를 만드는 전문가 커뮤니티의 실제 가이드, 전략, 인사이트를 살펴보세요.",
@@ -366,30 +356,25 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         },
       ],
       newsTitle: "최신 뉴스",
-      ctaActionLabel: "시작하기",
+      ctaActionLabel: "지금 실현하기",
       ctaSection: [
         "생각은 멈추고.",
         "이제 전환하세요.",
         "지금 가입하고 14일 무료 체험을 바로 시작하세요.",
       ],
       footerSections: [
-        { title: "솔루션", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer 서비스 (FDES)"] },
+        { title: "솔루션", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
         { title: "기능", items: ["데모", "문서"] },
         { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기", "요금제"] },
       ],
       legal: ["쿠키 설정", "이용약관", "개인정보처리방침", "EULA"],
     },
     ja: {
-      nav: ["ソリューション", "デモ", "リソース", "会社", "プラン"],
-      heroHeading: "働き方を理解する AI",
-      heroDescription:
-        "QueryPie AI は、あなたの仕事とビジネスにおける AI 変革を成功へ導くお手伝いをします。",
-      heroPrimaryCtaLabel: "今すぐ体験する",
-      heroPromptRotatingTexts: [
-        "Experience a new AI business?",
-        "最適なエージェントへ自動でルーティング。",
-        "プロダクト運用をセルフドライブ化する。",
-      ],
+      nav: ["ソリューション", "機能", "会社", "プラン"],
+      heroHeading: "新しいAIビジネスを体験するなら、",
+      heroDescription: "QueryPie AIが最適です。",
+      heroPrimaryCtaLabel: "無料で始める",
+      heroImageAlt: "QueryPie AI ワークスペースプレビュー",
       clientCaption: "世界最高水準のソフトウェアチームが毎日信頼するプラットフォーム",
       contentListDescription:
         "データアクセスの未来を形づくる専門家コミュニティによる、実践的なガイド、戦略、インサイトをご覧ください。",
@@ -481,14 +466,14 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         },
       ],
       newsTitle: "最新ニュース",
-      ctaActionLabel: "始める",
+      ctaActionLabel: "今すぐ実現する",
       ctaSection: [
         "考え続けるのをやめて。",
         "変革を始めよう。",
         "今すぐ登録して、14日間の無料トライアルを始めましょう。",
       ],
       footerSections: [
-        { title: "ソリューション", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Forward Deployed Engineer サービス (FDES)"] },
+        { title: "ソリューション", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
         { title: "機能", items: ["デモ", "ドキュメント"] },
         { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ", "プラン"] },
       ],
@@ -514,15 +499,16 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       contentListItems={copy.contentListItems}
       contentListLinks={copy.contentListLinks}
       contentListTitle={copy.contentListTitle}
+      ctaActionLabel={copy.ctaActionLabel}
       ctaDescription={copy.ctaSection[2]}
       ctaEyebrow={copy.ctaSection[0]}
       ctaTitle={copy.ctaSection[1]}
       featureItems={copy.featureItems}
       heroDescription={copy.heroDescription}
       heroHeading={copy.heroHeading}
+      heroImageAlt={copy.heroImageAlt}
       heroPrimaryCtaLabel={copy.heroPrimaryCtaLabel}
       locale={locale}
-      heroPromptRotatingTexts={copy.heroPromptRotatingTexts}
       mcpDescription={copy.mcpDescription}
       mcpItems={copy.mcpItems}
       mcpTitle={copy.mcpTitle}
