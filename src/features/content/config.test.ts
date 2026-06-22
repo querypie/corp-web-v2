@@ -45,37 +45,37 @@ describe("getDocumentationSidebarMenuItems", () => {
 
   it("white-papers 활성 상태에서 Documentation CMS 카테고리 메뉴를 반환한다", () => {
     expect(getDocumentationSidebarMenuItems("en", "white-papers")).toEqual([
-      { href: "/features/documentation", isActive: false, kind: "link", label: "All", slug: "all" },
+      { href: "/en/features/documentation", isActive: false, kind: "link", label: "All", slug: "all" },
       {
-        href: "/features/documentation?category=introduction",
+        href: "/en/features/documentation?category=introduction",
         isActive: false,
         kind: "link",
         label: "Introduction",
         slug: "introduction",
       },
       {
-        href: "/features/documentation?category=glossary",
+        href: "/en/features/documentation?category=glossary",
         isActive: false,
         kind: "link",
         label: "Glossary",
         slug: "glossary",
       },
       {
-        href: "/features/documentation?category=manuals",
+        href: "/en/features/documentation?category=manuals",
         isActive: false,
         kind: "link",
         label: "Manuals",
         slug: "manuals",
       },
       {
-        href: "/features/documentation?category=white-papers",
+        href: "/en/features/documentation?category=white-papers",
         isActive: true,
         kind: "link",
         label: "White Papers",
         slug: "white-papers",
       },
       {
-        href: "/features/documentation?category=blogs",
+        href: "/en/features/documentation?category=blogs",
         isActive: false,
         kind: "link",
         label: "Blogs",

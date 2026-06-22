@@ -18,16 +18,16 @@ describe("DocsListPage", () => {
           {
             category: "Manuals",
             description: "desc",
-            href: "/features/documentation/item-1",
+            href: "/en/features/documentation/item-1",
             imageSrc: "/documentation/item-1/thumbnail.png",
             title: "Item 1",
           },
         ]}
         locale="en"
         menu={[
-          { href: "/features/documentation", isActive: true, kind: "link", label: "All", slug: "all" },
+          { href: "/en/features/documentation", isActive: true, kind: "link", label: "All", slug: "all" },
           {
-            href: "/features/documentation?category=manuals",
+            href: "/en/features/documentation?category=manuals",
             isActive: false,
             kind: "link",
             label: "Manuals",
@@ -39,8 +39,8 @@ describe("DocsListPage", () => {
     );
 
     expect(screen.getByRole("heading", { name: "Documentation" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "All" })).toHaveAttribute("href", "/features/documentation");
-    expect(screen.getByRole("link", { name: "Manuals" })).toHaveAttribute("href", "/features/documentation?category=manuals");
+    expect(screen.getByRole("link", { name: "All" })).toHaveAttribute("href", "/en/features/documentation");
+    expect(screen.getByRole("link", { name: "Manuals" })).toHaveAttribute("href", "/en/features/documentation?category=manuals");
     expect(screen.queryByText("MDX")).not.toBeInTheDocument();
   });
 });

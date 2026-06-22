@@ -92,7 +92,8 @@ src/
 ## 라우팅 / 다국어
 
 - locale은 `en`, `ko`, `ja`를 지원합니다.
-- `/` 요청은 영어 공개 페이지로 처리됩니다.
+- 공개 URL은 영어 포함 모든 locale에 `/{locale}` 접두사를 붙입니다. 예: `/en/solutions/aip`, `/ko/solutions/aip`, `/ja/solutions/aip`
+- `/` 및 locale 없는 public path는 영어 경로(`/en`, `/en/...`)로 redirect됩니다.
 - 공개 경로 생성은 `src/constants/i18n.ts`의 `getLocalePath()`를 우선 사용합니다.
 - 공개 콘텐츠 상세 경로는 `getPublicListHref()`, `getPublicDetailHref()` 사용 여부를 먼저 확인합니다.
 - locale별 public 영역의 `lang`은 `src/app/[locale]/layout.tsx`에서 적용합니다.

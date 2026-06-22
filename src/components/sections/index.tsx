@@ -88,30 +88,30 @@ export default function SectionComponentsGuide() {
           items={[
             {
               category: "DEMO",
-              href: "/features/documentation/seo-analysis-aip-agent",
+              href: "/en/features/documentation/seo-analysis-aip-agent",
               imageSrc: "/images/common/fallback-contents.jpg",
               title:
                 "SEO analysis, once considered the domain of specialists, can now be handled by an AIP agent.",
             },
             {
               category: "White Papers",
-              href: "/features/documentation/guardrail-design-2026",
+              href: "/en/features/documentation/guardrail-design-2026",
               imageSrc: "/images/common/fallback-contents.jpg",
               title:
                 "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
             },
             {
               category: "Blogs",
-              href: "/features/documentation/ai-security-threat-map-2026",
+              href: "/en/features/documentation/ai-security-threat-map-2026",
               imageSrc: "/images/common/fallback-contents.jpg",
               title:
                 "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
             },
           ]}
           links={[
-            { href: "/features/demo?category=use-cases", label: "Use Cases" },
-            { href: "/features/documentation?category=white-papers", label: "White Papers" },
-            { href: "/features/documentation?category=blogs", label: "Blogs" },
+            { href: "/en/features/demo?category=use-cases", label: "Use Cases" },
+            { href: "/en/features/documentation?category=white-papers", label: "White Papers" },
+            { href: "/en/features/documentation?category=blogs", label: "Blogs" },
           ]}
           title="Guides and Best Practices"
         />

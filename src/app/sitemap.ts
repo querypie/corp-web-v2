@@ -28,7 +28,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...perLocale("/company/certifications"),
     ...perLocale("/company/about-us"),
     ...perLocale("/company/contact-us"),
-    ...perLocale("/plans"),
+    ...perLocale("/plans/aip"),
+    ...perLocale("/plans/acp"),
   ];
 
   const demoEntries = locales.flatMap((locale) =>

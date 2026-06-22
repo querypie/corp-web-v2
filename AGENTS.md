@@ -72,6 +72,7 @@ src/
 - 카테고리명, 공개 경로, locale 경로는 하드코딩하지 말고 기존 헬퍼와 설정을 사용합니다.
 - 사용자가 만든 미완료 변경이 있을 수 있으므로, 관련 없는 변경은 되돌리지 않습니다.
 - UI 변경은 기존 컴포넌트와 Tailwind 유틸리티를 우선 사용합니다.
+- git에 올릴 때 commit message, PR 제목, PR 설명은 한국어로 작성합니다.
 
 컴포넌트 확인 순서:
 
@@ -120,7 +121,7 @@ Admin 저장 흐름:
 ## 다국어 / 라우팅 주의사항
 
 - locale은 `en`, `ko`, `ja`만 사용합니다.
-- 기본 공개 경로는 영어입니다. `getLocalePath()`를 사용해 locale별 경로를 생성합니다.
+- 공개 URL은 영어 포함 모든 locale에 `/{locale}` 접두사를 붙입니다. bare public path는 `/en/...`으로 redirect되며, 경로 생성은 `getLocalePath()`를 사용합니다.
 - 공개 상세 경로는 `getPublicListHref()`, `getPublicDetailHref()` 사용 여부를 먼저 확인합니다.
 - `src/app/[locale]/layout.tsx`에서 locale별 `lang`이 public 영역에 적용됩니다.
 - Legal 문서에서 `ja`는 영어 버전을 fallback으로 사용할 수 있습니다.

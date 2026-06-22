@@ -1,12 +1,10 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
-import PlansPage from "../../../components/pages/plans/PlansPage";
-import { getLocalePath, isLocale, type Locale } from "../../../constants/i18n";
+import { getLocalePath, isLocale } from "../../../constants/i18n";
 import { getPlansPageCopy } from "@/features/content/pageCopy";
 
 type PlansRouteProps = {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ acp?: string }>;
 };
 
 export async function generateMetadata({ params }: Pick<PlansRouteProps, "params">): Promise<Metadata> {
@@ -19,16 +17,15 @@ export async function generateMetadata({ params }: Pick<PlansRouteProps, "params
   return {
     title: metadataTitle,
     alternates: {
-      canonical: getLocalePath(locale, "/plans"),
+      canonical: getLocalePath(locale, "/plans/aip"),
     },
   };
 }
 
-export default async function PlansRoute({ params, searchParams }: PlansRouteProps) {
+export default async function PlansRoute({ params }: PlansRouteProps) {
   const { locale } = await params;
-  const { acp } = await searchParams;
 
   if (!isLocale(locale)) notFound();
 
-  return <PlansPage initialProductKey={acp !== undefined ? "acp" : undefined} locale={locale as Locale} />;
+  permanentRedirect(getLocalePath(locale, "/plans/aip"));
 }

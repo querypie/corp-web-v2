@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { useMemo } from "react";
+import { useRouter } from "next/navigation";
 import Button from "../../common/Button";
 import Tab from "../../common/Tab";
 import TabGroup from "../../common/TabGroup";
@@ -10,7 +10,7 @@ import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, ty
 import { getLocalePath, type Locale } from "../../../constants/i18n";
 
 type PlansPageProps = {
-  initialProductKey?: string;
+  productKey?: "aip" | "acp";
   locale: Locale;
 };
 
@@ -185,17 +185,13 @@ function ComparisonTable({
 }
 
 export default function PlansPage({
-  initialProductKey,
+  productKey = "aip",
   locale,
 }: PlansPageProps) {
   const pricingProducts = pricingProductsByLocale[locale];
   const router = useRouter();
-  const pathname = usePathname();
-  const resolvedInitialProductKey =
-    initialProductKey && initialProductKey in pricingProducts
-      ? (initialProductKey as keyof typeof pricingProducts)
-      : "aip";
-  const [activeProductKey, setActiveProductKey] = useState<keyof typeof pricingProducts>(resolvedInitialProductKey);
+  const activeProductKey: keyof typeof pricingProducts =
+    productKey in pricingProducts ? productKey : "aip";
   const activeProduct = useMemo(
     () => pricingProducts[activeProductKey],
     [activeProductKey, pricingProducts],
@@ -203,13 +199,9 @@ export default function PlansPage({
   const activeProductCaption =
     activeProductKey === "aip" ? "AI Platform" : "Access Control Platform";
 
-  useEffect(() => {
-    setActiveProductKey(resolvedInitialProductKey);
-  }, [resolvedInitialProductKey]);
-
   function handleProductChange(nextKey: keyof typeof pricingProducts) {
-    setActiveProductKey(nextKey);
-    router.replace(nextKey === "acp" ? `${pathname}?acp` : pathname, { scroll: false });
+    if (nextKey === activeProductKey) return;
+    router.push(getLocalePath(locale, `/plans/${nextKey}`), { scroll: false });
   }
 
   return (
