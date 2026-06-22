@@ -1,14 +1,19 @@
 import { pageXPaddingClassName } from "@/constants/layout";
+import CookiePreferenceActions from "./CookiePreferenceActions";
 import PreferenceItem from "./PreferenceItem";
 import type { CookieCategory } from "../../../constants/legal";
 
 type CookiePreferencePageProps = {
+  acceptAllLabel: string;
+  declineAllLabel: string;
   intro: string[];
   preferences: CookieCategory[];
   title: string;
 };
 
 export default function CookiePreferencePage({
+  acceptAllLabel,
+  declineAllLabel,
   intro,
   preferences,
   title,
@@ -24,6 +29,10 @@ export default function CookiePreferencePage({
                 {paragraph}
               </p>
             ))}
+            <CookiePreferenceActions
+              acceptLabel={acceptAllLabel}
+              declineLabel={declineAllLabel}
+            />
           </div>
         </header>
 

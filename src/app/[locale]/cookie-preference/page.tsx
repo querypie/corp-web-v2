@@ -36,5 +36,13 @@ export default async function CookiePreferenceRoute({
 
   const copy = cookiePreferenceCopy[locale as Locale];
 
-  return <CookiePreferencePage intro={copy.intro} preferences={copy.preferences} title={copy.title} />;
+  return (
+    <CookiePreferencePage
+      acceptAllLabel={copy.acceptAllLabel}
+      declineAllLabel={copy.declineAllLabel}
+      intro={copy.intro}
+      preferences={copy.preferences}
+      title={copy.title}
+    />
+  );
 }
