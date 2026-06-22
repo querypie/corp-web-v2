@@ -63,13 +63,17 @@ src/
 | `/company/contact-us` | ✅ | 문의 폼 |
 | `/company/news` | ✅ | 뉴스 목록 |
 | `/company/news/[slug]` | ✅ | 뉴스 상세 |
-| `/plans` | ✅ | 가격/플랜 |
+| `/plans` | ✅ | `/plans/aip`로 redirect |
+| `/plans/aip` | ✅ | AIP 가격/플랜 |
+| `/plans/acp` | ✅ | ACP 가격/플랜 |
 | `/privacy-policy`, `/privacy-policy/[version]` | ✅ | 버전 관리 포함 |
 | `/terms-of-service` | ✅ | |
 | `/eula` | ✅ | |
 | `/cookie-preference` | ✅ | |
 
-모든 공개 경로는 `[locale]` 래퍼를 통해 다국어 지원. `next.config.ts`의 rewrite 규칙으로 `/` → `/en` 자동 처리.
+모든 공개 경로는 `[locale]` 래퍼를 통해 다국어 지원. 실제 공개 URL은 영어 포함 모든 locale에 `/{locale}` 접두사를 사용한다. 예: `/en/solutions/aip`, `/ko/solutions/aip`, `/ja/solutions/aip`
+
+위 표의 경로는 locale을 제외한 논리 경로이며, `next.config.ts`의 redirect 규칙으로 `/` 및 locale 없는 public path는 `/en`, `/en/...`으로 이동한다.
 
 ---
 

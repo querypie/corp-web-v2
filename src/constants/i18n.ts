@@ -31,10 +31,6 @@ export function getLocalePath(locale: Locale, pathname = "/") {
   const normalizedPath = pathname.startsWith("/") ? pathname : `/${pathname}`;
   const pathWithoutLocale = stripLocalePrefix(normalizedPath);
 
-  if (locale === defaultLocale) {
-    return pathWithoutLocale;
-  }
-
   return pathWithoutLocale === "/"
     ? `/${locale}`
     : `/${locale}${pathWithoutLocale}`;

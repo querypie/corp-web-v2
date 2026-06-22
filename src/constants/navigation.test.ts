@@ -3,6 +3,8 @@ import {
   getDemoSubItems,
   getFeaturesSubItems,
   getFooterHref,
+  getPlansSubItems,
+  getPrimaryNavHref,
   getResourcesSubItems,
   getShellMenuCopy,
   getSolutionsSubItems,
@@ -11,12 +13,12 @@ import {
 describe("getSolutionsSubItems", () => {
   it("Solutions 메뉴를 canonical solutions 경로로 연결한다", () => {
     expect(getSolutionsSubItems("en")).toEqual([
-      { label: "AI Platform (AIP)", href: "/solutions/aip" },
-      { label: "Access Control Platform (ACP)", href: "/solutions/acp" },
+      { label: "AI Platform (AIP)", href: "/en/solutions/aip" },
+      { label: "Access Control Platform (ACP)", href: "/en/solutions/acp" },
     ]);
   });
 
-  it("비영어 locale에는 locale prefix를 붙인다", () => {
+  it("locale별 prefix를 붙인다", () => {
     expect(getSolutionsSubItems("ko")).toEqual([
       { label: "AI 플랫폼 (AIP)", href: "/ko/solutions/aip" },
       { label: "접근 제어 플랫폼 (ACP)", href: "/ko/solutions/acp" },
@@ -31,13 +33,13 @@ describe("getSolutionsSubItems", () => {
 describe("getDemoSubItems", () => {
   it("Demo 메뉴를 CMS demo 경로로 연결한다", () => {
     expect(getDemoSubItems("en")).toEqual([
-      { label: "Use Cases", href: "/features/demo?category=use-cases" },
-      { label: "AIP Features", href: "/features/demo?category=aip-features" },
-      { label: "ACP Features", href: "/features/demo?category=acp-features" },
+      { label: "Use Cases", href: "/en/features/demo?category=use-cases" },
+      { label: "AIP Features", href: "/en/features/demo?category=aip-features" },
+      { label: "ACP Features", href: "/en/features/demo?category=acp-features" },
     ]);
   });
 
-  it("비영어 locale에는 locale prefix를 붙인다", () => {
+  it("locale별 prefix를 붙인다", () => {
     expect(getDemoSubItems("ko")).toEqual([
       { label: "Use Cases", href: "/ko/features/demo?category=use-cases" },
       { label: "AIP Features", href: "/ko/features/demo?category=aip-features" },
@@ -49,12 +51,12 @@ describe("getDemoSubItems", () => {
 describe("getFeaturesSubItems", () => {
   it("Features 메뉴를 Demo / Documentation 목록 경로로 연결한다", () => {
     expect(getFeaturesSubItems("en")).toEqual([
-      { label: "Demo", href: "/features/demo" },
-      { label: "Documentation", href: "/features/documentation" },
+      { label: "Demo", href: "/en/features/demo" },
+      { label: "Documentation", href: "/en/features/documentation" },
     ]);
   });
 
-  it("비영어 locale에는 locale prefix를 붙인다", () => {
+  it("locale별 prefix를 붙인다", () => {
     expect(getFeaturesSubItems("ko")).toEqual([
       { label: "데모", href: "/ko/features/demo" },
       { label: "문서", href: "/ko/features/documentation" },
@@ -65,15 +67,15 @@ describe("getFeaturesSubItems", () => {
 describe("getResourcesSubItems", () => {
   it("Resources 메뉴를 CMS documentation 경로로 연결한다", () => {
     expect(getResourcesSubItems("en")).toEqual([
-      { label: "Introduction", href: "/features/documentation?category=introduction" },
-      { label: "Glossary", href: "/features/documentation?category=glossary" },
-      { label: "Manuals", href: "/features/documentation?category=manuals" },
-      { label: "White Papers", href: "/features/documentation?category=white-papers" },
-      { label: "Blog", href: "/features/documentation?category=blogs" },
+      { label: "Introduction", href: "/en/features/documentation?category=introduction" },
+      { label: "Glossary", href: "/en/features/documentation?category=glossary" },
+      { label: "Manuals", href: "/en/features/documentation?category=manuals" },
+      { label: "White Papers", href: "/en/features/documentation?category=white-papers" },
+      { label: "Blog", href: "/en/features/documentation?category=blogs" },
     ]);
   });
 
-  it("비영어 locale에는 locale prefix를 붙인다", () => {
+  it("locale별 prefix를 붙인다", () => {
     expect(getResourcesSubItems("ko")).toEqual([
       { label: "Introduction", href: "/ko/features/documentation?category=introduction" },
       { label: "Glossary", href: "/ko/features/documentation?category=glossary" },
@@ -113,9 +115,29 @@ describe("getShellMenuCopy", () => {
   });
 });
 
+describe("plans navigation", () => {
+  it("Plans 메뉴는 AIP/ACP 경로를 사용한다", () => {
+    expect(getPlansSubItems("en")).toEqual([
+      { label: "AIP", href: "/en/plans/aip" },
+      { label: "ACP", href: "/en/plans/acp" },
+    ]);
+    expect(getPlansSubItems("ko")).toEqual([
+      { label: "AIP", href: "/ko/plans/aip" },
+      { label: "ACP", href: "/ko/plans/acp" },
+    ]);
+  });
+
+  it("상위 Plans 링크는 기본 AIP 경로로 연결한다", () => {
+    expect(getPrimaryNavHref("Plans", "en")).toBe("/en/plans/aip");
+    expect(getPrimaryNavHref("가격 · 플랜", "ko")).toBe("/ko/plans/aip");
+    expect(getPrimaryNavHref("AIP", "ja")).toBe("/ja/plans/aip");
+    expect(getPrimaryNavHref("ACP", "ja")).toBe("/ja/plans/acp");
+  });
+});
+
 describe("getFooterHref", () => {
   it("footer solutions 링크도 canonical solutions 경로를 사용한다", () => {
-    expect(getFooterHref("AI Platform (AIP)", "en")).toBe("/solutions/aip");
+    expect(getFooterHref("AI Platform (AIP)", "en")).toBe("/en/solutions/aip");
     expect(getFooterHref("접근 제어 플랫폼 (ACP)", "ko")).toBe("/ko/solutions/acp");
     expect(getFooterHref("AIプラットフォーム (AIP)", "ja")).toBe("/ja/solutions/aip");
   });
@@ -129,5 +151,11 @@ describe("getFooterHref", () => {
       "https://docs.querypie.com/ko/installation/querypie-acp-community-edition",
     );
     expect(getFooterHref("ACP ドキュメント", "ja")).toBe("https://docs.querypie.com/ko");
+  });
+
+  it("footer plans 링크는 AIP/ACP 경로를 사용한다", () => {
+    expect(getFooterHref("AIP", "en")).toBe("/en/plans/aip");
+    expect(getFooterHref("ACP", "ko")).toBe("/ko/plans/acp");
+    expect(getFooterHref("価格・プラン", "ja")).toBe("/ja/plans/aip");
   });
 });

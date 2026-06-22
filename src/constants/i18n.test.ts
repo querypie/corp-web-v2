@@ -38,13 +38,13 @@ describe("stripLocalePrefix", () => {
 });
 
 describe("getLocalePath", () => {
-  it("기본 locale(en)은 접두사 없이 경로를 반환한다", () => {
-    expect(getLocalePath("en", "/features/demo")).toBe("/features/demo");
-    expect(getLocalePath("en", "/plans")).toBe("/plans");
-    expect(getLocalePath("en", "/")).toBe("/");
+  it("기본 locale(en)에도 접두사를 붙인다", () => {
+    expect(getLocalePath("en", "/features/demo")).toBe("/en/features/demo");
+    expect(getLocalePath("en", "/plans")).toBe("/en/plans");
+    expect(getLocalePath("en", "/")).toBe("/en");
   });
 
-  it("en 이외 locale은 접두사를 붙인다", () => {
+  it("모든 locale에 접두사를 붙인다", () => {
     expect(getLocalePath("ko", "/features/demo")).toBe("/ko/features/demo");
     expect(getLocalePath("ja", "/plans")).toBe("/ja/plans");
   });
@@ -60,6 +60,6 @@ describe("getLocalePath", () => {
 
   it("locale 경로가 포함된 경우 중복 없이 반환한다", () => {
     expect(getLocalePath("ko", "/ko/plans")).toBe("/ko/plans");
-    expect(getLocalePath("en", "/en/plans")).toBe("/plans");
+    expect(getLocalePath("en", "/en/plans")).toBe("/en/plans");
   });
 });

@@ -46,10 +46,10 @@ describe("getSolutionEntryBySlug", () => {
 
 describe("getSolutionHref", () => {
   it("locale별 canonical href를 생성한다", () => {
-    expect(getSolutionHref("en", "aip")).toBe("/solutions/aip");
+    expect(getSolutionHref("en", "aip")).toBe("/en/solutions/aip");
     expect(getSolutionHref("ko", "usage-based-llm")).toBe("/ko/solutions/aip/usage-based-llm");
     expect(getSolutionHref("ja", "mcp-gateway")).toBe("/ja/solutions/aip/mcp-gateway");
-    expect(getSolutionHref("en", "fde-services")).toBe("/solutions/aip/fde-services");
+    expect(getSolutionHref("en", "fde-services")).toBe("/en/solutions/aip/fde-services");
     expect(getSolutionHref("ja", "acp")).toBe("/ja/solutions/acp");
     expect(getSolutionHref("ko", "acp-integrations")).toBe("/ko/solutions/acp/integrations");
   });

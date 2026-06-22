@@ -4,31 +4,17 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/en",
-        destination: "/",
+        source: "/",
+        destination: "/en",
         permanent: true,
       },
       {
-        source: "/en/:path*",
-        destination: "/:path*",
+        // Redirect bare public routes to the explicit default locale.
+        source: "/:path((?!admin(?:/|$)|api(?:/|$)|_next(?:/|$)|en(?:/|$)|ko(?:/|$)|ja(?:/|$)|.*\\..*).*)",
+        destination: "/en/:path",
         permanent: true,
       },
     ];
-  },
-  async rewrites() {
-    return {
-      beforeFiles: [
-        {
-          source: "/",
-          destination: "/en",
-        },
-        {
-          // Rewrite only bare public routes; keep admin/api/static and explicit locales untouched.
-          source: "/:path((?!admin(?:/|$)|api(?:/|$)|_next(?:/|$)|en(?:/|$)|ko(?:/|$)|ja(?:/|$)|.*\\..*).*)",
-          destination: "/en/:path",
-        },
-      ],
-    };
   },
 };
 

@@ -138,8 +138,8 @@ export function getCompanySubItems(locale: string): NavigationSubItem[] {
 
 export function getPlansSubItems(locale: string): NavigationSubItem[] {
   return [
-    { label: "AIP", href: getLocalePath(locale as Locale, "/plans") },
-    { label: "ACP", href: `${getLocalePath(locale as Locale, "/plans")}?acp` },
+    { label: "AIP", href: getLocalePath(locale as Locale, "/plans/aip") },
+    { label: "ACP", href: getLocalePath(locale as Locale, "/plans/acp") },
   ];
 }
 
@@ -152,15 +152,15 @@ export function getPrimaryNavHref(item: string, locale: string) {
     item === "プラン" ||
     item === "価格・プラン"
   ) {
-    return getLocalePath(locale as Locale, "/plans");
+    return getLocalePath(locale as Locale, "/plans/aip");
   }
 
   if (item === "AIP") {
-    return getLocalePath(locale as Locale, "/plans");
+    return getLocalePath(locale as Locale, "/plans/aip");
   }
 
   if (item === "ACP") {
-    return `${getLocalePath(locale as Locale, "/plans")}?acp`;
+    return getLocalePath(locale as Locale, "/plans/acp");
   }
 
   return getLocalePath(locale as Locale, "/");
@@ -168,11 +168,11 @@ export function getPrimaryNavHref(item: string, locale: string) {
 
 export function getFooterHref(item: string, locale: string) {
   if (item === "AIP") {
-    return getLocalePath(locale as Locale, "/plans");
+    return getLocalePath(locale as Locale, "/plans/aip");
   }
 
   if (item === "ACP") {
-    return `${getLocalePath(locale as Locale, "/plans")}?acp`;
+    return getLocalePath(locale as Locale, "/plans/acp");
   }
 
   if (item === "AI Platform (AIP)" || item === "AI 플랫폼 (AIP)" || item === "AIプラットフォーム (AIP)") {
@@ -231,7 +231,7 @@ export function getFooterHref(item: string, locale: string) {
     item === "プラン" ||
     item === "価格・プラン"
   ) {
-    return getLocalePath(locale as Locale, "/plans");
+    return getLocalePath(locale as Locale, "/plans/aip");
   }
 
   return getLocalePath(locale as Locale, "/");
