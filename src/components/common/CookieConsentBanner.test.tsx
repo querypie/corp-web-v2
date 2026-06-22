@@ -30,11 +30,19 @@ describe("CookieConsentBanner", () => {
     render(<CookieConsentBanner locale="ko" />);
 
     expect(screen.getAllByRole("button").map((button) => button.textContent)).toEqual([
-      "모두 허용",
-      "거부",
+      "Yes, I accept",
+      "Decline",
     ]);
+    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute(
+      "href",
+      "/ko/privacy-policy",
+    );
+    expect(screen.getByRole("link", { name: "Cookie Preference" })).toHaveAttribute(
+      "href",
+      "/ko/cookie-preference",
+    );
 
-    fireEvent.click(screen.getByRole("button", { name: "모두 허용" }));
+    fireEvent.click(screen.getByRole("button", { name: "Yes, I accept" }));
 
     expect(getCookie(COOKIE_PREFERENCE_KEYS.set)).toBe("1");
     expect(getCookie(COOKIE_PREFERENCE_KEYS.functional)).toBe("1");
