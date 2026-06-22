@@ -7,6 +7,7 @@ import SeoRuntime from "../../components/common/SeoRuntime";
 import Footer from "../../components/layout/Footer";
 import Gnb from "../../components/layout/Gnb";
 import UtmCapture from "../../components/common/UtmCapture";
+import CookieConsentBanner from "../../components/common/CookieConsentBanner";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -40,6 +41,7 @@ export default async function LocaleLayout({
         {children}
       </main>
       <Footer className="mt-10 md:mt-20" legalLinks={shellCopy.footerLegalLinks} locale={locale} sections={shellCopy.footerSections} />
+      <CookieConsentBanner locale={locale as Locale} />
     </div>
   );
 }
