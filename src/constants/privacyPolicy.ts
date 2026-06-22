@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
+import { renderLegalMarkdownFile } from "@/features/legal/legalMarkdown.server";
 import { getLocalePath, type Locale } from "./i18n";
 
 type PrivacyPolicySourceLocale = "en" | "ko";
@@ -20,18 +21,15 @@ export async function getPrivacyPolicyVersions(locale: Locale) {
   const files = await fs.readdir(dir);
 
   return files
-    .filter((fileName) => fileName.endsWith(".html") && !fileName.endsWith(".raw.html"))
-    .map((fileName) => fileName.replace(/\.html$/, ""))
+    .filter((fileName) => fileName.endsWith(".md"))
+    .map((fileName) => fileName.replace(/\.md$/, ""))
     .sort()
     .reverse();
 }
 
 export async function getPrivacyPolicyContent(locale: Locale, version: string): Promise<PrivacyPolicyContent> {
   const sourceLocale = getPrivacyPolicySourceLocale(locale);
-  const bodyHtml = await fs.readFile(
-    path.join(privacyPolicyBaseDir, sourceLocale, `${version}.html`),
-    "utf8",
-  );
+  const bodyHtml = await renderLegalMarkdownFile(path.join(privacyPolicyBaseDir, sourceLocale, `${toFullPrivacyPolicyVersion(version)}.md`));
 
   return {
     bodyHtml,
@@ -42,11 +40,13 @@ export async function getPrivacyPolicyContent(locale: Locale, version: string): 
 export async function getPrivacyPolicyVersionOptions(locale: Locale) {
   const versions = await getPrivacyPolicyVersions(locale);
 
-  return versions.map((version, index) => ({
-    href: index === 0
-      ? getLocalePath(locale, "/privacy-policy")
-      : getLocalePath(locale, `/privacy-policy/${version}`),
+  return versions.map((version) => ({
+    href: getLocalePath(locale, `/privacy-policy/${version}`),
     label: version,
     value: version,
   }));
+}
+
+export function toFullPrivacyPolicyVersion(version: string) {
+  return version.replace(/^(\d{2})-(\d{2})-(\d{2})$/, "20$1-$2-$3");
 }
