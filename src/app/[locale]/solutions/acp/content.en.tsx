@@ -1,3 +1,4 @@
+import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import Cta from "@/components/sections/Cta";
 import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
@@ -19,51 +20,56 @@ export const metadata = {
 const featureItems = [
   {
     body: [
-      "Control access to databases with unified policies,",
-      "query-level governance, masking, and full audit logs",
-      "without disrupting developer workflows.",
+      "QueryPie DAC is crafted for data protection in the cloud era, seamlessly connecting various cloud ecosystems.",
+      "It automatically identifies sensitive data and personal information, ensuring robust security for your assets.",
     ],
     imageAlt: "Database access control preview",
-    imageSrc: "/images/home/features/feature-panel-a.png",
-    title: ["Govern every", "database session"],
+    title: ["DAC -", "Database Access Control"],
+    videoSrc: "/solutions/acp/acp-dac.mp4",
   },
   {
     body: [
-      "Manage server access through web terminals,",
-      "approval workflows, session recording, and",
-      "policy-as-code controls for privileged users.",
+      "QueryPie SAC is designed for cloud instance protection on AWS, GCP, and Azure, while also supporting on-premises environments.",
+      "It enables administrators to monitor user commands and replay sessions, enhancing security and oversight.",
     ],
     imageAlt: "System access control preview",
-    imageSrc: "/images/home/features/feature-panel-b.png",
     reverse: true,
-    title: ["Secure privileged", "system access"],
+    title: ["SAC -", "System Access Control"],
+    videoSrc: "/solutions/acp/acp-sac.mp4",
   },
   {
     body: [
-      "Apply consistent RBAC across Kubernetes clusters",
-      "and capture API activity and container sessions",
-      "from one centralized access control layer.",
+      "QueryPie KAC is a solution for Kubernetes API protection, enabling centralized management of cloud infrastructures like AWS EKS and on-premises clusters.",
+      "Administrators can manage access, monitor API requests, and replay container command executions.",
     ],
     imageAlt: "Kubernetes access control preview",
-    imageSrc: "/images/home/features/feature-panel-a.png",
-    title: ["Unify Kubernetes", "access governance"],
+    title: ["KAC -", "Kubernetes Access Control"],
+    videoSrc: "/solutions/acp/acp-kac.mp4",
   },
   {
     body: [
-      "Bring SaaS and internal web applications under",
-      "centralized access policies with monitoring,",
-      "watermarking, and just-in-time permissions.",
+      "QueryPie WAC secures access and logs activities for web applications, including admin portals and SaaS platforms.",
+      "It captures logs and screenshots, masks sensitive data, and controls actions like file transfers.",
     ],
     imageAlt: "Web access control preview",
-    imageSrc: "/images/home/features/feature-panel-b.png",
     reverse: true,
-    title: ["Control business", "web applications"],
+    title: ["WAC -", "Web Access Control"],
+    videoSrc: "/solutions/acp/acp-wac.mp4",
+  },
+  {
+    body: [
+      "Real-time risk detection, policy-based permissions, and sensitive data masking — all in one unified gateway.",
+      "Beyond blocking: intelligent access that adapts to context and compliance.",
+    ],
+    imageAlt: "Managed access control preview",
+    title: ["MAC -", "MCP Access Controller"],
+    videoSrc: "/solutions/acp/acp-mac.mp4",
   },
 ];
 
 export default function AcpENSolutionContent({ locale }: Props) {
   return (
-    <div className="flex w-full flex-col gap-14 px-5 pb-10 md:gap-[160px] md:px-10">
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <div className="flex flex-col gap-14 md:gap-20">
         <div>
           <section className="flex w-full justify-center">

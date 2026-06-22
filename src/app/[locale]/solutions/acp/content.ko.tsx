@@ -1,3 +1,4 @@
+import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import Cta from "@/components/sections/Cta";
 import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
@@ -19,51 +20,56 @@ export const metadata = {
 const featureItems = [
   {
     body: [
-      "통합 정책, 쿼리 단위 거버넌스, 마스킹,",
-      "전체 감사 로그로 데이터베이스 접근을 제어하고",
-      "개발자 업무 흐름은 그대로 유지합니다.",
+      "QueryPie DAC is crafted for data protection in the cloud era, seamlessly connecting various cloud ecosystems.",
+      "It automatically identifies sensitive data and personal information, ensuring robust security for your assets.",
     ],
     imageAlt: "데이터베이스 접근 제어 미리보기",
-    imageSrc: "/images/home/features/feature-panel-a.png",
-    title: ["모든 데이터베이스", "세션을 거버넌스하세요"],
+    title: ["DAC -", "Database Access Control"],
+    videoSrc: "/solutions/acp/acp-dac.mp4",
   },
   {
     body: [
-      "웹 터미널, 승인 워크플로우, 세션 녹화,",
-      "Policy as Code 기반 제어로 권한 사용자의",
-      "시스템 접근을 안전하게 관리합니다.",
+      "QueryPie SAC is designed for cloud instance protection on AWS, GCP, and Azure, while also supporting on-premises environments.",
+      "It enables administrators to monitor user commands and replay sessions, enhancing security and oversight.",
     ],
     imageAlt: "시스템 접근 제어 미리보기",
-    imageSrc: "/images/home/features/feature-panel-b.png",
     reverse: true,
-    title: ["권한 시스템", "접근을 보호하세요"],
+    title: ["SAC -", "System Access Control"],
+    videoSrc: "/solutions/acp/acp-sac.mp4",
   },
   {
     body: [
-      "여러 Kubernetes 클러스터에 일관된 RBAC를 적용하고,",
-      "API 활동과 컨테이너 세션을 하나의 중앙 접근 제어",
-      "레이어에서 기록하고 관리합니다.",
+      "QueryPie KAC is a solution for Kubernetes API protection, enabling centralized management of cloud infrastructures like AWS EKS and on-premises clusters.",
+      "Administrators can manage access, monitor API requests, and replay container command executions.",
     ],
     imageAlt: "Kubernetes 접근 제어 미리보기",
-    imageSrc: "/images/home/features/feature-panel-a.png",
-    title: ["Kubernetes 접근", "거버넌스를 통합하세요"],
+    title: ["KAC -", "Kubernetes Access Control"],
+    videoSrc: "/solutions/acp/acp-kac.mp4",
   },
   {
     body: [
-      "SaaS와 내부 웹 애플리케이션을 중앙 정책 아래 두고,",
-      "모니터링, 워터마킹, Just-in-time 권한으로",
-      "비즈니스 앱 접근을 제어합니다.",
+      "QueryPie WAC secures access and logs activities for web applications, including admin portals and SaaS platforms.",
+      "It captures logs and screenshots, masks sensitive data, and controls actions like file transfers.",
     ],
     imageAlt: "웹 접근 제어 미리보기",
-    imageSrc: "/images/home/features/feature-panel-b.png",
     reverse: true,
-    title: ["비즈니스 웹 앱", "접근을 제어하세요"],
+    title: ["WAC -", "Web Access Control"],
+    videoSrc: "/solutions/acp/acp-wac.mp4",
+  },
+  {
+    body: [
+      "Real-time risk detection, policy-based permissions, and sensitive data masking — all in one unified gateway.",
+      "Beyond blocking: intelligent access that adapts to context and compliance.",
+    ],
+    imageAlt: "관리형 접근 제어 미리보기",
+    title: ["MAC -", "MCP Access Controller"],
+    videoSrc: "/solutions/acp/acp-mac.mp4",
   },
 ];
 
 export default function AcpKOSolutionContent({ locale }: Props) {
   return (
-    <div className="flex w-full flex-col gap-14 px-5 pb-10 md:gap-[160px] md:px-10">
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <div className="flex flex-col gap-14 md:gap-20">
         <div>
           <section className="flex w-full justify-center">

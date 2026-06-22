@@ -1,3 +1,4 @@
+import { pageXPaddingClassName } from "@/constants/layout";
 import PreferenceItem from "./PreferenceItem";
 import type { CookieCategory } from "../../../constants/legal";
 
@@ -13,7 +14,7 @@ export default function CookiePreferencePage({
   title,
 }: CookiePreferencePageProps) {
   return (
-    <div className="flex w-full justify-center px-5 pb-10 md:px-10">
+    <div className={`flex w-full justify-center ${pageXPaddingClassName} pb-10`}>
       <section className="flex w-full max-w-[900px] flex-col gap-10 sm:gap-8 md:gap-10 lg:gap-[60px]">
         <header className="grid gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
           <h1 className="m-0 type-h1 text-fg">{title}</h1>

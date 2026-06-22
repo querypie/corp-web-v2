@@ -1,3 +1,4 @@
+import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import Cta from "../../sections/Cta";
 import type { Locale } from "../../../constants/i18n";
 
@@ -122,9 +123,9 @@ export default function AboutUsPage({
   title,
 }: AboutUsPageProps) {
   return (
-    <div className="flex w-full flex-col gap-20 px-5 pb-10 md:gap-[160px] md:px-10">
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <section className="flex w-full justify-center">
-        <div className="flex w-full max-w-[1200px] flex-col gap-20 md:gap-[160px]">
+        <div className={`flex w-full max-w-[1200px] flex-col ${pageSectionGapClassName}`}>
         {/* 회사 소개 상단 */}
         <div className="grid gap-5 sm:gap-6 md:grid-cols-2 md:gap-[30px]">
           <div className="type-h1 text-fg">

@@ -1,9 +1,15 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import { featureItemGapClassName } from "@/constants/layout";
+
 type FeatureItem = {
   body: string[];
   imageAlt: string;
-  imageSrc: string;
+  imageSrc?: string;
   reverse?: boolean;
   title: string[];
+  videoSrc?: string;
 };
 
 type FeatureSectionProps = {
@@ -60,10 +66,14 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function FeatureCopy({ body, title }: Pick<FeatureItem, "body" | "title">) {
+function FeatureCopy({
+  body,
+  className,
+  title,
+}: Pick<FeatureItem, "body" | "title"> & { className?: string }) {
   return (
     /* 기능 설명 텍스트 블록 */
-    <div className="flex flex-1 flex-col gap-2 not-italic md:gap-5 lg:min-w-[200px]">
+    <div className={cx("flex flex-1 flex-col gap-2 not-italic md:gap-5 lg:min-w-[200px]", className)}>
       <div className="order-1 w-full type-h2 leading-7 tracking-[-0.3px] text-fg md:order-none">
         {title.map((line) => (
           <p key={line} className="m-0">
@@ -82,12 +92,60 @@ function FeatureCopy({ body, title }: Pick<FeatureItem, "body" | "title">) {
   );
 }
 
-function FeatureImage({ imageAlt, imageSrc }: Pick<FeatureItem, "imageAlt" | "imageSrc">) {
+function FeatureMedia({
+  className,
+  imageAlt,
+  imageSrc,
+  setVideoRef,
+  videoSrc,
+}: Pick<FeatureItem, "imageAlt" | "imageSrc" | "videoSrc"> & {
+  className?: string;
+  setVideoRef?: (video: HTMLVideoElement | null) => void;
+}) {
+  if (!videoSrc && !imageSrc) return null;
+
   return (
     /* 기능 소개용 비주얼 패널 */
-    <div className="aspect-[2/1] w-full overflow-hidden rounded-box lg:w-[790px] lg:max-w-[65%]">
-      <img alt={imageAlt} className="block h-full w-full object-contain" src={imageSrc} />
+    <div
+      className={cx(
+        "overflow-hidden rounded-box",
+        videoSrc ? "w-full md:h-[480px] md:w-fit" : "aspect-[2/1] w-full lg:w-[790px] lg:max-w-[65%]",
+        className,
+      )}
+    >
+      {videoSrc ? (
+        <FeatureVideoPlayer
+          setVideoRef={setVideoRef}
+          src={videoSrc}
+          title={imageAlt}
+        />
+      ) : (
+        <img alt={imageAlt} className="block h-full w-full object-contain" src={imageSrc} />
+      )}
     </div>
+  );
+}
+
+function FeatureVideoPlayer({
+  setVideoRef,
+  src,
+  title,
+}: {
+  setVideoRef?: (video: HTMLVideoElement | null) => void;
+  src: string;
+  title: string;
+}) {
+  return (
+    <video
+      aria-label={title}
+      className="block h-auto w-full bg-black md:h-full md:w-auto"
+      loop
+      muted
+      playsInline
+      preload="metadata"
+      ref={setVideoRef}
+      src={src}
+    />
   );
 }
 
@@ -95,25 +153,103 @@ export default function FeatureSection({
   className,
   items = defaultItems,
 }: FeatureSectionProps) {
+  const videoRefs = useRef(new Map<number, HTMLVideoElement>());
+
+  useEffect(() => {
+    let rafId = 0;
+
+    function updatePlayback() {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        if (document.visibilityState !== "visible") {
+          videoRefs.current.forEach((video) => video.pause());
+          return;
+        }
+
+        const viewportCenter = window.innerHeight / 2;
+        const activationDistance = Math.min(window.innerHeight * 0.34, 280);
+        let activeIndex: number | null = null;
+        let closestDistance = Number.POSITIVE_INFINITY;
+
+        videoRefs.current.forEach((video, index) => {
+          const rect = video.getBoundingClientRect();
+          const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+          if (!isVisible) return;
+
+          const videoCenter = rect.top + rect.height / 2;
+          const distance = Math.abs(videoCenter - viewportCenter);
+          if (distance > activationDistance) return;
+
+          if (distance < closestDistance) {
+            activeIndex = index;
+            closestDistance = distance;
+          }
+        });
+
+        videoRefs.current.forEach((video, index) => {
+          if (index === activeIndex) {
+            void video.play();
+            return;
+          }
+
+          video.pause();
+        });
+      });
+    }
+
+    updatePlayback();
+    window.addEventListener("scroll", updatePlayback, { passive: true });
+    window.addEventListener("resize", updatePlayback);
+    document.addEventListener("visibilitychange", updatePlayback);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", updatePlayback);
+      window.removeEventListener("resize", updatePlayback);
+      document.removeEventListener("visibilitychange", updatePlayback);
+      videoRefs.current.forEach((video) => video.pause());
+    };
+  }, []);
+
   return (
     /* 텍스트/이미지 페어를 반복 렌더하는 기능 소개 섹션 */
     <section className={cx("flex w-full justify-center", className)}>
-      <div className="flex w-full max-w-[1200px] flex-col gap-12 md:gap-16 lg:gap-[100px]">
-        {items.map((item, index) => (
-          /* 모바일: 세로 배치, 데스크탑: 가로 배치 (reverse 시 flex-row-reverse) */
-          <div
-            key={`${item.imageSrc}-${index}`}
-            className={cx(
-              "flex flex-col items-start gap-5 lg:flex-row lg:gap-[60px]",
-              item.reverse && "lg:flex-row-reverse",
-            )}
-            data-reveal
-            style={{ transitionDelay: `${index * 90}ms` }}
-          >
-            <FeatureImage imageAlt={item.imageAlt} imageSrc={item.imageSrc} />
-            <FeatureCopy body={item.body} title={item.title} />
-          </div>
-        ))}
+      <div className={`flex w-full max-w-[1200px] flex-col ${featureItemGapClassName}`}>
+        {items.map((item, index) => {
+          const shouldReverse = item.reverse ?? index % 2 === 1;
+
+          return (
+            /* 모바일: 미디어 먼저, 데스크탑: 가로 배치 (reverse 시 미디어/텍스트 순서 교차) */
+            <div
+              key={`${item.videoSrc ?? item.imageSrc}-${index}`}
+              className={cx(
+                "flex flex-col items-start gap-5 lg:flex-row lg:gap-[60px]",
+                shouldReverse && "lg:flex-row-reverse",
+              )}
+              data-reveal
+              style={{ transitionDelay: `${index * 90}ms` }}
+            >
+              <FeatureCopy body={item.body} className="order-2 lg:order-none" title={item.title} />
+              <FeatureMedia
+                className="order-1 lg:order-none"
+                imageAlt={item.imageAlt}
+                imageSrc={item.imageSrc}
+                setVideoRef={
+                  item.videoSrc
+                    ? (video) => {
+                        if (video) {
+                          videoRefs.current.set(index, video);
+                          return;
+                        }
+                        videoRefs.current.delete(index);
+                      }
+                    : undefined
+                }
+                videoSrc={item.videoSrc}
+              />
+            </div>
+          );
+        })}
       </div>
     </section>
   );

@@ -34,9 +34,6 @@
 .lockBg {
   animation: lockFlashLeft var(--acp-flow-duration) linear infinite;
   fill: var(--color-secondary);
-  filter:
-    drop-shadow(0 0 0 transparent)
-    drop-shadow(0 0 0 transparent);
 }
 
 .lockRight .lockBg {
@@ -63,13 +60,19 @@
       color-mix(in srgb, #0c77e5 26%, transparent) 42%,
       transparent 72%
     );
-  filter: blur(24px);
   opacity: 0;
 }
 
 .controllerTitle {
   --acp-flow-duration: 4.8s;
   animation: controllerTitleFlash var(--acp-flow-duration) linear infinite;
+}
+
+.paused .lockBg,
+.paused .controllerIconBg,
+.paused .controllerActivationBg,
+.paused .controllerTitle {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -97,16 +100,10 @@
 @keyframes lockFlashLeft {
   0%, 28%, 40%, 100% {
     fill: var(--color-secondary);
-    filter:
-      drop-shadow(0 0 0 transparent)
-      drop-shadow(0 0 0 transparent);
   }
 
   34% {
     fill: color-mix(in srgb, var(--color-point) 78%, var(--color-secondary));
-    filter:
-      drop-shadow(0 0 5px color-mix(in srgb, var(--color-fg) 70%, transparent))
-      drop-shadow(0 0 16px color-mix(in srgb, var(--color-point) 72%, transparent));
   }
 }
 
@@ -125,16 +122,10 @@
 @keyframes controllerIconFlash {
   0%, 44%, 61%, 100% {
     fill: #0c77e5;
-    filter:
-      drop-shadow(0 0 0 transparent)
-      drop-shadow(0 0 0 transparent);
   }
 
   52% {
     fill: color-mix(in srgb, var(--color-point) 66%, #0c77e5);
-    filter:
-      drop-shadow(0 0 5px color-mix(in srgb, var(--color-fg) 70%, transparent))
-      drop-shadow(0 0 18px color-mix(in srgb, var(--color-point) 76%, transparent));
   }
 }
 
@@ -155,15 +146,9 @@
 @keyframes lockFlashRight {
   0%, 62%, 73%, 100% {
     fill: var(--color-secondary);
-    filter:
-      drop-shadow(0 0 0 transparent)
-      drop-shadow(0 0 0 transparent);
   }
 
   68% {
     fill: color-mix(in srgb, var(--color-point) 78%, var(--color-secondary));
-    filter:
-      drop-shadow(0 0 5px color-mix(in srgb, var(--color-fg) 70%, transparent))
-      drop-shadow(0 0 16px color-mix(in srgb, var(--color-point) 72%, transparent));
   }
 }

@@ -228,7 +228,7 @@ function AcpControllerIcon({ className }: { className: string }) {
   );
 }
 
-function AnimatedConnectionFlow() {
+function AnimatedConnectionFlow({ svgRef }: { svgRef?: (svg: SVGSVGElement | null) => void }) {
   return (
     <svg
       aria-hidden="true"
@@ -237,6 +237,7 @@ function AnimatedConnectionFlow() {
       height={266}
       overflow="visible"
       preserveAspectRatio="none"
+      ref={svgRef}
       viewBox="0 0 640 266"
       width={640}
     >
@@ -317,7 +318,9 @@ function ConnectorLock({ className, side }: { className: string; side: "left" | 
 
 export default function AcpDiagram({ locale }: { locale: Locale }) {
   const frameRef = useRef<HTMLDivElement>(null);
+  const animationSvgRef = useRef<SVGSVGElement | null>(null);
   const [scale, setScale] = useState(1);
+  const [isAnimationActive, setIsAnimationActive] = useState(false);
   const copy = diagramCopy[locale];
   const localizedRoleItems = roleItems.map((item, index) => ({ ...item, label: copy.roles[index] }));
   const localizedTargetItems = targetItems.map((item, index) => ({ ...item, label: copy.targets[index] }));
@@ -338,6 +341,34 @@ export default function AcpDiagram({ locale }: { locale: Locale }) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    const frame = frameRef.current;
+    if (!frame) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsAnimationActive(Boolean(entry?.isIntersecting));
+      },
+      { threshold: 0.08 },
+    );
+
+    observer.observe(frame);
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const svg = animationSvgRef.current;
+    if (!svg) return;
+
+    if (isAnimationActive && document.visibilityState === "visible") {
+      svg.unpauseAnimations();
+      return;
+    }
+
+    svg.pauseAnimations();
+  }, [isAnimationActive]);
+
   return (
     <section className="flex w-full justify-center" aria-label={copy.ariaLabel}>
       <div className="w-full max-w-[1200px]">
@@ -349,7 +380,10 @@ export default function AcpDiagram({ locale }: { locale: Locale }) {
             }}
           >
             <div
-              className="absolute left-0 top-0 h-[480px] w-[1080px] origin-top-left"
+              className={cx(
+                "absolute left-0 top-0 h-[480px] w-[1080px] origin-top-left",
+                !isAnimationActive && styles.paused,
+              )}
               style={{
                 transform: `scale(${scale})`,
               }}
@@ -368,7 +402,14 @@ export default function AcpDiagram({ locale }: { locale: Locale }) {
                 src={iconSrc("connections.svg")}
                 width={640}
               />
-              <AnimatedConnectionFlow />
+              <AnimatedConnectionFlow
+                svgRef={(svg) => {
+                  animationSvgRef.current = svg;
+                  if (svg && !isAnimationActive) {
+                    svg.pauseAnimations();
+                  }
+                }}
+              />
               <ConnectorLock className="absolute left-[320px] top-[197px] z-30 h-[46px] w-[40px]" side="left" />
               <ConnectorLock className="absolute left-[720px] top-[197px] z-30 h-[46px] w-[40px]" side="right" />
               <ShieldPanel
