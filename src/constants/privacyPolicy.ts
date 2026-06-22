@@ -29,7 +29,7 @@ export async function getPrivacyPolicyVersions(locale: Locale) {
 
 export async function getPrivacyPolicyContent(locale: Locale, version: string): Promise<PrivacyPolicyContent> {
   const sourceLocale = getPrivacyPolicySourceLocale(locale);
-  const bodyHtml = await renderLegalMarkdownFile(path.join(privacyPolicyBaseDir, sourceLocale, `${toFullPrivacyPolicyVersion(version)}.md`));
+  const bodyHtml = await renderLegalMarkdownFile(path.join(privacyPolicyBaseDir, sourceLocale, `${version}.md`));
 
   return {
     bodyHtml,
@@ -45,8 +45,4 @@ export async function getPrivacyPolicyVersionOptions(locale: Locale) {
     label: version,
     value: version,
   }));
-}
-
-export function toFullPrivacyPolicyVersion(version: string) {
-  return version.replace(/^(\d{2})-(\d{2})-(\d{2})$/, "20$1-$2-$3");
 }
