@@ -1,3 +1,4 @@
+import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import Cta from "../../sections/Cta";
 import type { Locale } from "../../../constants/i18n";
 
@@ -63,7 +64,7 @@ export default function CertificationsPage({
   title,
 }: CertificationsPageProps) {
   return (
-    <div className="flex w-full flex-col gap-20 px-5 pb-10 md:gap-[160px] md:px-10">
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <section className="flex w-full justify-center">
         <div className="flex w-full max-w-[1200px] flex-col gap-10 sm:gap-8 md:gap-10 lg:gap-[60px]">
         {/* Figma 기준으로 좌측 제목 / 우측 소개 문구 2열 헤더를 구성 */}

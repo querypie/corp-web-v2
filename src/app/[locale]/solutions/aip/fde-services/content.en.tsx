@@ -1,3 +1,4 @@
+import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import Cta from "@/components/sections/Cta";
 import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
@@ -61,7 +62,7 @@ const featureItems = [
 
 export default function FdeServicesENSolutionContent({ locale }: Props) {
   return (
-    <div className="flex w-full flex-col gap-14 px-5 pb-10 md:gap-[160px] md:px-10">
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <section className="flex w-full justify-center">
         <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
           <div>

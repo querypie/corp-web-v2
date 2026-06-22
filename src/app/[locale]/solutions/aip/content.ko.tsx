@@ -1,3 +1,4 @@
+import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import Cta from "@/components/sections/Cta";
 import YoutubePreviewPlayer from "@/components/common/YoutubePreviewPlayer";
 import AipThreeCardSection from "@/components/sections/AipThreeCardSection";
@@ -63,7 +64,7 @@ const featureItems = [
 
 export default function AipKOSolutionContent({ locale }: Props) {
   return (
-    <div className="flex w-full flex-col gap-14 px-5 pb-10 md:gap-[160px] md:px-10">
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <div className="flex flex-col gap-14 md:gap-20">
         <div>
           <section className="flex w-full justify-center">
@@ -82,10 +83,10 @@ export default function AipKOSolutionContent({ locale }: Props) {
         <div>
           <section className="flex w-full justify-center">
             <YoutubePreviewPlayer
-              embedSrc="https://www.youtube.com/embed/nJGSCd6itUE?si=2wccYas88jLRO7q2"
               thumbnailAlt="QueryPie AI Platform video thumbnail"
               thumbnailSrc="/solutions/aip/aip-cover.jpg"
               title="QueryPie AI Platform video"
+              videoSrc="/solutions/aip/QueryPie%20AIP%20-%20Secure%20Enterprise%20Agentic%20AI%20Platform.mp4"
             />
           </section>
         </div>

@@ -1,6 +1,7 @@
 import { Suspense, type ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { isLocale, locales, type Locale } from "../../constants/i18n";
+import { pageTopPaddingClassName } from "../../constants/layout";
 import { getShellMenuCopy } from "../../constants/navigation";
 import SeoRuntime from "../../components/common/SeoRuntime";
 import Footer from "../../components/layout/Footer";
@@ -35,7 +36,7 @@ export default async function LocaleLayout({
         <Gnb actionLabel={shellCopy.navActionLabel} items={shellCopy.navItems} locale={locale} />
         <UtmCapture />
       </Suspense>
-      <main className="flex-1 pt-[100px] text-fg md:pt-[140px]">
+      <main className={`flex-1 ${pageTopPaddingClassName} text-fg`}>
         {children}
       </main>
       <Footer className="mt-10 md:mt-20" legalLinks={shellCopy.footerLegalLinks} locale={locale} sections={shellCopy.footerSections} />

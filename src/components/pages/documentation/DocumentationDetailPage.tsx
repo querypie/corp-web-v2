@@ -1,3 +1,4 @@
+import { pageXPaddingClassName } from "@/constants/layout";
 import type { ReactNode } from "react";
 import ContentArticlePreview from "../../common/ContentArticlePreview";
 import DocumentationContentListSection from "../../sections/DocumentationContentListSection";
@@ -59,7 +60,7 @@ export default function DocsDetailPage({
   writer,
 }: DocsDetailPageProps) {
   return (
-    <div className="flex w-full justify-center px-5 pb-10 md:px-10">
+    <div className={`flex w-full justify-center ${pageXPaddingClassName} pb-10`}>
       <article className="flex w-full max-w-[1200px] flex-col gap-[120px]">
         <div
           className={cx(

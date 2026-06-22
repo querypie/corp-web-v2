@@ -1,5 +1,6 @@
 "use client";
 
+import { pageXPaddingClassName } from "@/constants/layout";
 import type { ContactPageCopy } from "@/features/contact/copy";
 import ContentLeadForm from "./ContentLeadForm";
 
@@ -39,7 +40,7 @@ export default function ContentDownloadPage({
   const localized = getLocalizedCopy(locale);
 
   return (
-    <div className="flex w-full justify-center px-5 pb-10 md:px-10">
+    <div className={`flex w-full justify-center ${pageXPaddingClassName} pb-10`}>
       <section className="mx-auto flex w-full max-w-[900px] flex-col gap-20 pb-10 md:flex-row md:items-start md:gap-[80px]">
         <div className="flex min-w-0 flex-1 basis-1/2 flex-col gap-6">
           <div className="w-full overflow-hidden rounded-thumb bg-bg-content">

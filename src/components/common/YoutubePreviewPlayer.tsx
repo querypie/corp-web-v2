@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import MediaPlayButton from "@/components/common/MediaPlayButton";
 
 type YoutubePreviewPlayerProps = {
-  embedSrc: string;
+  embedSrc?: string;
   thumbnailAlt: string;
   thumbnailSrc: string;
   title: string;
+  videoSrc?: string;
 };
 
 function withPlaybackParams(src: string) {
@@ -25,12 +27,23 @@ export default function YoutubePreviewPlayer({
   thumbnailAlt,
   thumbnailSrc,
   title,
+  videoSrc,
 }: YoutubePreviewPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
     <div className="aspect-video w-full max-w-[1080px] overflow-hidden rounded-box bg-bg-content">
-      {isPlaying ? (
+      {isPlaying && videoSrc ? (
+        <video
+          autoPlay
+          className="block h-full w-full bg-black object-cover"
+          controls
+          playsInline
+          poster={thumbnailSrc}
+          src={videoSrc}
+          title={title}
+        />
+      ) : isPlaying && embedSrc ? (
         <iframe
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowFullScreen
@@ -53,11 +66,7 @@ export default function YoutubePreviewPlayer({
             src={thumbnailSrc}
             width={2048}
           />
-          <span className="absolute inset-0 flex items-center justify-center">
-            <span className="flex h-14 w-14 items-center justify-center rounded-full bg-black/35 backdrop-blur-xl transition duration-200 group-hover:scale-[1.04] group-hover:bg-black/45 md:h-16 md:w-16">
-              <span className="ml-1 h-0 w-0 border-y-[8px] border-l-[14px] border-y-transparent border-l-white md:border-y-[10px] md:border-l-[17px]" />
-            </span>
-          </span>
+          <MediaPlayButton />
         </button>
       )}
     </div>

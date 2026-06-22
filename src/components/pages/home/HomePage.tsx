@@ -1,3 +1,4 @@
+import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import Cta from "../../sections/Cta";
 import ClientSection from "../../sections/ClientSection";
 import ContentListSection from "../../sections/ContentListSection";
@@ -97,7 +98,7 @@ export default function HomePage({
   reviewTitle,
 }: HomePageProps) {
   return (
-    <div className="mt-5 flex flex-col gap-20 overflow-x-hidden bg-bg px-5 pb-10 text-fg md:mt-0 md:gap-[160px] md:px-10">
+    <div className={`mt-5 flex flex-col ${pageSectionGapClassName} overflow-x-hidden bg-bg ${pageXPaddingClassName} pb-10 text-fg md:mt-0`}>
       <div className="relative -mx-5 md:-mx-10">
         <HomePageHero
           ctaLabel={heroPrimaryCtaLabel}

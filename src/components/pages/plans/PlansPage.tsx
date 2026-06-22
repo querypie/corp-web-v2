@@ -1,5 +1,6 @@
 "use client";
 
+import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import Button from "../../common/Button";
@@ -205,7 +206,7 @@ export default function PlansPage({
   }
 
   return (
-    <div className="flex w-full flex-col gap-20 px-5 pb-10 md:gap-[160px] md:px-10">
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <section className="flex w-full justify-center">
         <div className="flex w-full max-w-[1200px] flex-col gap-[60px] md:gap-[80px]">
           <div className="flex flex-col items-center gap-3">

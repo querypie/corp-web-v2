@@ -1,3 +1,4 @@
+import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import type { Locale } from "@/constants/i18n";
 import type { PublicMenuItem } from "@/features/content/config";
 import ContentPreviewImage from "../../common/ContentPreviewImage";
@@ -75,7 +76,7 @@ export default function DemoListPage({
     )[locale];
 
   return (
-    <div className="flex w-full flex-col gap-20 px-5 pb-10 md:gap-[160px] md:px-10">
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <section className="flex w-full justify-center">
         <div className="flex w-full max-w-[1200px] flex-col">
         {/* 좌측 메뉴 + 우측 데모 리스트 */}
