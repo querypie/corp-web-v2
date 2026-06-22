@@ -33,7 +33,7 @@ export async function generateMetadata({
   return {
     title: content.title,
     alternates: {
-      canonical: getLocalePath(locale as Locale, "/privacy-policy"),
+      canonical: getLocalePath(locale as Locale, `/privacy-policy/${latestVersion}`),
     },
   };
 }
