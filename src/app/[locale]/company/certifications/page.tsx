@@ -42,6 +42,13 @@ const certificationsCopy = {
         title: "PCI DSS",
       },
       {
+        description: ["Artificial Intelligence", "Management System"],
+        imageAlt: "ISO/IEC 42001",
+        imageContainerClassName: "h-[76px] w-[120px]",
+        imageSrc: "/images/certifications/iso42001.png",
+        title: "ISO/IEC 42001",
+      },
+      {
         description: ["Information Security", "Management Systems"],
         imageAlt: "ISO/IEC 27001",
         imageContainerClassName: "h-[76px] w-[120px]",
@@ -70,14 +77,7 @@ const certificationsCopy = {
         title: "ISO 27018",
       },
       {
-        description: ["Business Continuity", "Management"],
-        imageAlt: "ISO 22301",
-        imageContainerClassName: "h-[77px] w-[120px]",
-        imageSrc: "/images/certifications/iso22301.png",
-        title: "ISO 22301",
-      },
-      {
-        description: ["Business Continuity", "Management"],
+        description: ["Personal Information & Information", "Security Management System"],
         imageAlt: "ISMS-P",
         imageContainerClassName: "h-[83px] w-[120px]",
         imageSrc: "/images/certifications/isms-p.png",
@@ -133,6 +133,13 @@ const certificationsCopy = {
         title: "PCI DSS",
       },
       {
+        description: ["인공지능", "경영 시스템"],
+        imageAlt: "ISO/IEC 42001",
+        imageContainerClassName: "h-[76px] w-[120px]",
+        imageSrc: "/images/certifications/iso42001.png",
+        title: "ISO/IEC 42001",
+      },
+      {
         description: ["정보 보안", "관리 체계"],
         imageAlt: "ISO/IEC 27001",
         imageContainerClassName: "h-[76px] w-[120px]",
@@ -161,14 +168,7 @@ const certificationsCopy = {
         title: "ISO 27018",
       },
       {
-        description: ["비즈니스 연속성", "관리"],
-        imageAlt: "ISO 22301",
-        imageContainerClassName: "h-[77px] w-[120px]",
-        imageSrc: "/images/certifications/iso22301.png",
-        title: "ISO 22301",
-      },
-      {
-        description: ["비즈니스 연속성", "관리"],
+        description: ["개인정보 및 정보보호", "관리 체계"],
         imageAlt: "ISMS-P",
         imageContainerClassName: "h-[83px] w-[120px]",
         imageSrc: "/images/certifications/isms-p.png",
@@ -224,6 +224,13 @@ const certificationsCopy = {
         title: "PCI DSS",
       },
       {
+        description: ["人工知能", "マネジメントシステム"],
+        imageAlt: "ISO/IEC 42001",
+        imageContainerClassName: "h-[76px] w-[120px]",
+        imageSrc: "/images/certifications/iso42001.png",
+        title: "ISO/IEC 42001",
+      },
+      {
         description: ["情報セキュリティ", "マネジメントシステム"],
         imageAlt: "ISO/IEC 27001",
         imageContainerClassName: "h-[76px] w-[120px]",
@@ -252,14 +259,7 @@ const certificationsCopy = {
         title: "ISO 27018",
       },
       {
-        description: ["事業継続", "マネジメント"],
-        imageAlt: "ISO 22301",
-        imageContainerClassName: "h-[77px] w-[120px]",
-        imageSrc: "/images/certifications/iso22301.png",
-        title: "ISO 22301",
-      },
-      {
-        description: ["事業継続", "マネジメント"],
+        description: ["個人情報および情報", "セキュリティマネジメントシステム"],
         imageAlt: "ISMS-P",
         imageContainerClassName: "h-[83px] w-[120px]",
         imageSrc: "/images/certifications/isms-p.png",
