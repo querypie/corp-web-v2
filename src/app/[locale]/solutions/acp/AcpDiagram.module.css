@@ -50,17 +50,26 @@
   fill: #0c77e5;
 }
 
-.controllerActivationBg {
+.controllerBadge {
   --acp-flow-duration: 4.8s;
-  animation: controllerActivationBg var(--acp-flow-duration) linear infinite;
-  background:
-    radial-gradient(
-      ellipse at center,
-      color-mix(in srgb, var(--color-point) 42%, transparent) 0%,
-      color-mix(in srgb, #0c77e5 26%, transparent) 42%,
-      transparent 72%
-    );
+  animation: controllerBadgeFlash var(--acp-flow-duration) linear infinite;
+  overflow: hidden;
+  position: relative;
+}
+
+.controllerBadge::before {
+  animation: controllerBadgeShine var(--acp-flow-duration) linear infinite;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-white) 58%, transparent) 46%,
+    transparent 72%
+  );
+  content: "";
+  inset: -55% -35%;
   opacity: 0;
+  position: absolute;
+  transform: translateX(-95%) rotate(8deg);
 }
 
 .controllerTitle {
@@ -70,7 +79,8 @@
 
 .paused .lockBg,
 .paused .controllerIconBg,
-.paused .controllerActivationBg,
+.paused .controllerBadge,
+.paused .controllerBadge::before,
 .paused .controllerTitle {
   animation-play-state: paused;
 }
@@ -91,7 +101,8 @@
     fill: #0c77e5;
   }
 
-  .controllerActivationBg,
+  .controllerBadge,
+  .controllerBadge::before,
   .controllerTitle {
     animation: none;
   }
@@ -107,15 +118,33 @@
   }
 }
 
-@keyframes controllerActivationBg {
+@keyframes controllerBadgeFlash {
   0%, 44%, 61%, 100% {
-    opacity: 0;
-    transform: translateX(-50%) scale(0.82);
+    background-color: var(--color-bg);
+    box-shadow: none;
   }
 
   52% {
-    opacity: 0.86;
-    transform: translateX(-50%) scale(1);
+    background-color: color-mix(in srgb, var(--color-point) 26%, var(--color-bg));
+    box-shadow:
+      0 0 10px color-mix(in srgb, var(--color-fg) 28%, transparent),
+      0 0 18px color-mix(in srgb, var(--color-point) 38%, transparent);
+  }
+}
+
+@keyframes controllerBadgeShine {
+  0%, 45%, 61%, 100% {
+    opacity: 0;
+    transform: translateX(-95%) rotate(8deg);
+  }
+
+  50% {
+    opacity: 0.78;
+  }
+
+  58% {
+    opacity: 0;
+    transform: translateX(95%) rotate(8deg);
   }
 }
 
