@@ -89,7 +89,6 @@ src/
 | `/admin/news` | ✅ | 뉴스 목록 |
 | `/admin/news/new` | ✅ | 새 뉴스 작성 |
 | `/admin/news/[slug]` | ✅ | 뉴스 편집 |
-| `/admin/seo` | ⚠️ | SEO 메타데이터 편집 (localStorage 저장, 서버 미영속화) |
 | Blog 관리 | ❌ | 미구현 |
 | Whitepaper 관리 | ❌ | 미구현 |
 | Webinar 관리 | ❌ | 미구현 |
@@ -101,7 +100,6 @@ src/
 | 경로 | 메서드 | 역할 |
 |------|--------|------|
 | `/api/admin/content/state` | GET/POST/PUT/PATCH/DELETE | 관리형 콘텐츠 파일 조회·저장·상태 변경·삭제 |
-| `/api/admin/seo/discover` | GET | SEO 메타데이터 조회 |
 | `/api/admin/uploads` | POST | 파일 업로드 |
 | `/api/admin/uploads/content-document` | POST | 문서 업로드 |
 | `/api/downloads/content` | GET | 공개 콘텐츠 다운로드 |
