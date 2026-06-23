@@ -66,7 +66,7 @@ export async function renderLegalMarkdownFile(filePath: string) {
 export function renderLegalMarkdown(markdownSource: string) {
   const html = markdown.render(markdownSource);
 
-  return xss(html, {
+  const sanitizedHtml = xss(html, {
     onTagAttr(_tag, name, value) {
       if (name === "href" && !isAllowedHref(value)) {
         return "";
@@ -84,6 +84,15 @@ export function renderLegalMarkdown(markdownSource: string) {
     stripIgnoreTagBody: ["script", "style", "iframe"],
     whiteList: Object.fromEntries(allowedTags.map((tag) => [tag, allowedAttributes[tag] ?? []])) as IWhiteList,
   });
+
+  return normalizeLegalTableEmptyCells(sanitizedHtml);
+}
+
+function normalizeLegalTableEmptyCells(html: string) {
+  return html.replace(
+    /(<tr>\s*<td[^>]*>\s*이전 받는 자의 보관기간\s*<\/td>\s*<td[^>]*\s(?:colspan|colSpan)="2"[^>]*>[\s\S]*?<\/td>\s*)<\/tr>/gi,
+    "$1<td></td></tr>",
+  );
 }
 
 function isAllowedHref(value: string) {

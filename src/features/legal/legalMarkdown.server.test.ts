@@ -29,4 +29,12 @@ describe("renderLegalMarkdown", () => {
     expect(html).not.toContain("<iframe");
     expect(html).not.toContain("alert(1)");
   });
+
+  it("한국어 개인정보 국외 이전 테이블의 보관기간 행에 빈 마지막 칸을 렌더링한다", () => {
+    const html = renderLegalMarkdown(
+      '<table><thead><tr><th>구분</th><th>국외 이전/보관 목적</th><th>이전/보관 항목</th><th>이전/보관 플랫폼</th></tr></thead><tbody><tr><td>이전 받는 자의 보관기간</td><td colspan="2"><p>보관기간 안내</p></td></tr></tbody></table>',
+    );
+
+    expect(html).toContain('<td colspan="2"><p>보관기간 안내</p></td><td></td></tr>');
+  });
 });

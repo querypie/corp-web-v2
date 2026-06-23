@@ -20,8 +20,8 @@ export const metadata = {
 const featureItems = [
   {
     body: [
-      "QueryPie DAC is crafted for data protection in the cloud era, seamlessly connecting various cloud ecosystems.",
-      "It automatically identifies sensitive data and personal information, ensuring robust security for your assets.",
+      "QueryPie DACは、さまざまなクラウドエコシステムをシームレスにつなぎ、クラウド時代のデータ保護のために設計されています。",
+      "機密データや個人情報を自動で識別し、重要なデータ資産を堅牢に保護します。",
     ],
     imageAlt: "データベースアクセス制御プレビュー",
     title: ["DAC -", "Database Access Control"],
@@ -29,8 +29,8 @@ const featureItems = [
   },
   {
     body: [
-      "QueryPie SAC is designed for cloud instance protection on AWS, GCP, and Azure, while also supporting on-premises environments.",
-      "It enables administrators to monitor user commands and replay sessions, enhancing security and oversight.",
+      "QueryPie SACは、AWS、GCP、Azure上のクラウドインスタンス保護に加え、オンプレミス環境にも対応します。",
+      "管理者はユーザーコマンドを監視し、セッションを再生することで、セキュリティと管理の可視性を高められます。",
     ],
     imageAlt: "システムアクセス制御プレビュー",
     reverse: true,
@@ -39,8 +39,8 @@ const featureItems = [
   },
   {
     body: [
-      "QueryPie KAC is a solution for Kubernetes API protection, enabling centralized management of cloud infrastructures like AWS EKS and on-premises clusters.",
-      "Administrators can manage access, monitor API requests, and replay container command executions.",
+      "QueryPie KACはKubernetes APIを保護するソリューションで、AWS EKSなどのクラウドインフラやオンプレミスクラスターを一元管理できます。",
+      "管理者はアクセス権限の管理、APIリクエストの監視、コンテナコマンド実行の再生を行えます。",
     ],
     imageAlt: "Kubernetesアクセス制御プレビュー",
     title: ["KAC -", "Kubernetes Access Control"],
@@ -48,8 +48,8 @@ const featureItems = [
   },
   {
     body: [
-      "QueryPie WAC secures access and logs activities for web applications, including admin portals and SaaS platforms.",
-      "It captures logs and screenshots, masks sensitive data, and controls actions like file transfers.",
+      "QueryPie WACは、管理者ポータルやSaaSプラットフォームを含むWebアプリケーションへのアクセスを保護し、操作を記録します。",
+      "ログやスクリーンショットを取得し、機密データをマスキングし、ファイル転送などの操作を制御します。",
     ],
     imageAlt: "Webアクセス制御プレビュー",
     reverse: true,
@@ -58,8 +58,8 @@ const featureItems = [
   },
   {
     body: [
-      "Real-time risk detection, policy-based permissions, and sensitive data masking — all in one unified gateway.",
-      "Beyond blocking: intelligent access that adapts to context and compliance.",
+      "リアルタイムのリスク検知、ポリシーベースの権限、機密データのマスキングを、ひとつの統合ゲートウェイで提供します。",
+      "単なるブロックにとどまらず、状況とコンプライアンス要件に適応するインテリジェントなアクセス制御を実現します。",
     ],
     imageAlt: "マネージドアクセス制御プレビュー",
     title: ["MAC -", "MCP Access Controller"],

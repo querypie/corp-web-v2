@@ -49,9 +49,9 @@ describe("Button", () => {
     expect(screen.getByRole("button")).toHaveAttribute("type", "button");
   });
 
-  it("size=large이면 h-14 클래스를 적용한다", () => {
+  it("size=large이면 h-12 클래스를 적용한다", () => {
     render(<Button size="large">Large</Button>);
-    expect(screen.getByRole("button").className).toContain("h-14");
+    expect(screen.getByRole("button").className).toContain("h-12");
   });
 
   it("size=small이면 h-8 클래스를 적용한다", () => {

@@ -30,19 +30,20 @@ describe("CookieConsentBanner", () => {
     render(<CookieConsentBanner locale="ko" />);
 
     expect(screen.getAllByRole("button").map((button) => button.textContent)).toEqual([
-      "Yes, I accept",
-      "Decline",
+      "동의합니다",
+      "거부",
     ]);
-    expect(screen.getByRole("link", { name: "Privacy Policy" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "개인정보처리방침" })).toHaveAttribute(
       "href",
       "/ko/privacy-policy",
     );
-    expect(screen.getByRole("link", { name: "Cookie Preference" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: "쿠키 설정" })).toHaveAttribute(
       "href",
       "/ko/cookie-preference",
     );
+    expect(screen.getByText(/더 나은 경험을 제공하기 위해 쿠키를 사용합니다/)).toBeInTheDocument();
 
-    fireEvent.click(screen.getByRole("button", { name: "Yes, I accept" }));
+    fireEvent.click(screen.getByRole("button", { name: "동의합니다" }));
 
     expect(getCookie(COOKIE_PREFERENCE_KEYS.set)).toBe("1");
     expect(getCookie(COOKIE_PREFERENCE_KEYS.functional)).toBe("1");
@@ -70,6 +71,6 @@ describe("CookieConsentBanner", () => {
 
     render(<CookieConsentBanner locale="ja" />);
 
-    expect(screen.queryByRole("complementary", { name: "Cookie 設定" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("complementary", { name: "クッキー設定" })).not.toBeInTheDocument();
   });
 });
