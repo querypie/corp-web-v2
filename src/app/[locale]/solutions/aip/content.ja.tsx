@@ -3,7 +3,7 @@ import Cta from "@/components/sections/Cta";
 import YoutubePreviewPlayer from "@/components/common/YoutubePreviewPlayer";
 import AipThreeCardSection from "@/components/sections/AipThreeCardSection";
 import FeatureSection from "@/components/sections/FeatureSection";
-import type { Locale } from "@/constants/i18n";
+import { getLocalePath, type Locale } from "@/constants/i18n";
 
 type Props = {
   locale: Locale;
@@ -17,52 +17,86 @@ export const metadata = {
   keywords: ["QueryPie AI", "AI Platform", "AIP", "MCP Gateway"],
 } as const;
 
-const featureItems = [
-  {
-    body: [
-      "使用量ベースの制御、コスト可視化、",
-      "本番チーム向けのガバナンスにより、",
-      "エンタープライズLLM環境を運用します。",
-    ],
-    imageAlt: "使用量ベースLLMデプロイのプレビュー",
-    imageSrc: "/images/home/features/feature-panel-a.png",
-    title: ["実用的な", "エンタープライズAIを開始"],
-  },
-  {
-    body: [
-      "管理されたMCPゲートウェイを通じて",
-      "AIエージェントをツールとデータに接続し、",
-      "ポリシー適用と監査ログを一元化します。",
-    ],
-    imageAlt: "MCPゲートウェイのプレビュー",
-    imageSrc: "/images/home/features/feature-panel-b.png",
-    reverse: true,
-    title: ["すべてのMCP接続を", "ガバナンス"],
-  },
-  {
-    body: [
-      "Forward Deployed Engineersが業務ワークフローを特定し、",
-      "カスタムエージェントを構築して、AIのPoCを",
-      "測定可能な価値へ移行します。",
-    ],
-    imageAlt: "Forward Deployed Engineerワークフロープレビュー",
-    imageSrc: "/images/home/features/feature-panel-a.png",
-    title: ["実業務に合わせた", "エージェントを構築"],
-  },
-  {
-    body: [
-      "プロンプト、モデル、ツール、利用状況を",
-      "ひとつの運用レイヤーに集約し、セキュリティと",
-      "事業部門が安心してAIを拡張できるようにします。",
-    ],
-    imageAlt: "AI運用可視性のプレビュー",
-    imageSrc: "/images/home/features/feature-panel-b.png",
-    reverse: true,
-    title: ["エンタープライズ制御で", "AIを拡張"],
-  },
-];
+function getFeatureItems(locale: Locale) {
+  return [
+    {
+      body: [
+        "プリセットされた簡単な指示文（プロンプト）から始めれば、包括的かつ最適化されたプロンプトを自動生成します。",
+        "専門知識がなくてもAIエージェントの効果を最大限に引き出せます。",
+      ],
+      imageAlt: "プロンプト自動生成",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_prompt.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      title: ["プロンプト自動生成"],
+    },
+    {
+      action: {
+        href: getLocalePath(locale, "/solutions/aip/integrations"),
+        label: "QueryPie AIPと接続可能な連携ツールの一覧はこちら",
+      },
+      body: [
+        "OAuth認証でお使いのツール（Slack、Googleなど）を簡単に接続。",
+        "提供されている統合機能に加えて、カスタムツールや内部ツールも追加でき、ニーズに合わせたビジネスワークフロー自動化を実現します。",
+      ],
+      imageAlt: "シンプルな統合",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_integration.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      reverse: true,
+      title: ["シンプルな統合"],
+    },
+    {
+      body: [
+        "社内文書をアップロードして知識ベース化。",
+        "AIが組織の情報を瞬時に取得し、貴社のビジネスに合った正確な回答をします。",
+      ],
+      imageAlt: "社内文書の学習機能",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_knowledge.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      title: ["社内文書の学習機能"],
+    },
+    {
+      body: [
+        "包括的なライブラリから構築済みのエージェントをインストール、または特定の運用要件に合わせて各エージェントの機能をカスタマイズした独自のソリューションを作成できます。",
+      ],
+      imageAlt: "カスタムエージェント作成",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_createagent.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      reverse: true,
+      title: ["カスタムエージェント作成"],
+    },
+    {
+      body: [
+        "AIの回答をグラフや表、インタラクティブな図で表示。",
+        "複雑な分析結果を視覚的にわかりやすく整理し、そのままエクスポートして会議に活用できます。",
+      ],
+      imageAlt: "ビジュアルレポート作成",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_visualization.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      title: ["ビジュアルレポート作成"],
+    },
+    {
+      body: [
+        "指定した間隔でAIエージェントをスケジュール設定し、定型タスクを自動化。",
+        "簡単なエージェント会話を通じて定期的な操作を設定でき、手動作業を削減しながら一貫した実行を保証します。",
+      ],
+      imageAlt: "エージェントスケジューリング",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_schedule.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      reverse: true,
+      title: ["エージェントスケジューリング"],
+    },
+  ];
+}
 
 export default function AipJASolutionContent({ locale }: Props) {
+  const featureItems = getFeatureItems(locale);
+
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <div className="flex flex-col gap-14 md:gap-20">

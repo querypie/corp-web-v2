@@ -3,7 +3,7 @@ import Cta from "@/components/sections/Cta";
 import YoutubePreviewPlayer from "@/components/common/YoutubePreviewPlayer";
 import AipThreeCardSection from "@/components/sections/AipThreeCardSection";
 import FeatureSection from "@/components/sections/FeatureSection";
-import type { Locale } from "@/constants/i18n";
+import { getLocalePath, type Locale } from "@/constants/i18n";
 
 type Props = {
   locale: Locale;
@@ -17,52 +17,85 @@ export const metadata = {
   keywords: ["QueryPie AI", "AI Platform", "AIP", "MCP Gateway"],
 } as const;
 
-const featureItems = [
-  {
-    body: [
-      "사용량 기반 제어, 비용 가시성,",
-      "프로덕션 팀을 위한 거버넌스로",
-      "엔터프라이즈 LLM 환경을 운영합니다.",
-    ],
-    imageAlt: "사용량 기반 LLM 배포 미리보기",
-    imageSrc: "/images/home/features/feature-panel-a.png",
-    title: ["실용적인", "엔터프라이즈 AI를 시작하세요"],
-  },
-  {
-    body: [
-      "관리형 MCP 게이트웨이로 AI 에이전트를",
-      "도구와 데이터에 연결하고, 정책 적용과",
-      "감사 로그까지 한곳에서 확인합니다.",
-    ],
-    imageAlt: "MCP 게이트웨이 미리보기",
-    imageSrc: "/images/home/features/feature-panel-b.png",
-    reverse: true,
-    title: ["모든 MCP 연결을", "거버넌스하세요"],
-  },
-  {
-    body: [
-      "Forward Deployed Engineers가 비즈니스 업무를 찾고,",
-      "맞춤형 에이전트를 구축해 AI 파일럿을",
-      "측정 가능한 가치로 전환합니다.",
-    ],
-    imageAlt: "Forward Deployed Engineer 워크플로우 미리보기",
-    imageSrc: "/images/home/features/feature-panel-a.png",
-    title: ["실제 업무에 맞춘", "에이전트를 구축하세요"],
-  },
-  {
-    body: [
-      "프롬프트, 모델, 도구, 사용 활동을",
-      "하나의 운영 레이어로 모아 보안팀과",
-      "비즈니스팀이 AI를 자신 있게 확장합니다.",
-    ],
-    imageAlt: "AI 운영 가시성 미리보기",
-    imageSrc: "/images/home/features/feature-panel-b.png",
-    reverse: true,
-    title: ["엔터프라이즈 제어로", "AI를 확장하세요"],
-  },
-];
+function getFeatureItems(locale: Locale) {
+  return [
+    {
+      body: [
+        "Preset Instructions에 간단한 프롬프트만 입력하면 자동 생성 기능이 AI 에이전트 효과를 극대화하는 포괄적이고 최적화된 프롬프트를 만들어줍니다.",
+      ],
+      imageAlt: "프롬프트 자동 생성",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_prompt.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      title: ["프롬프트 자동 생성"],
+    },
+    {
+      action: {
+        href: getLocalePath(locale, "/solutions/aip/integrations"),
+        label: "사용 가능한 AIP 연동 모두 보기",
+      },
+      body: [
+        "OAuth 인증으로 업무 도구를 손쉽게 연결하세요.",
+        "제공되는 연동 외에도 맞춤형 도구와 내부 도구를 추가해 비즈니스에 맞는 워크플로 자동화를 구성할 수 있습니다.",
+      ],
+      imageAlt: "간편한 연동",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_integration.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      reverse: true,
+      title: ["간편한 연동"],
+    },
+    {
+      body: [
+        "문서를 지식 번들로 전환해 더 똑똑한 AI 응답을 제공합니다.",
+        "RAG 기반 에이전트가 조직 정보를 즉시 참조해 비즈니스 맥락에 맞는 정확한 답변을 생성합니다.",
+      ],
+      imageAlt: "맥락 기반 지식 번들",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_knowledge.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      title: ["맥락 기반 지식 번들"],
+    },
+    {
+      body: [
+        "풍부한 라이브러리에서 사전 구축된 에이전트를 설치하거나, 운영 요구사항에 맞게 각 에이전트의 기능을 조정한 맞춤형 솔루션을 만들 수 있습니다.",
+      ],
+      imageAlt: "맞춤형 에이전트 생성",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_createagent.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      reverse: true,
+      title: ["맞춤형 에이전트 생성"],
+    },
+    {
+      body: [
+        "차트, 그래프, 인터랙티브 요소로 AI 응답을 더 풍부하게 만듭니다.",
+        "복잡한 인사이트를 시각 자료로 쉽게 이해시키고, 이해관계자와 의사결정자를 위한 완성도 높은 보고서로 내보낼 수 있습니다.",
+      ],
+      imageAlt: "Artifact 시각화",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_visualization.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      title: ["Artifact 시각화"],
+    },
+    {
+      body: [
+        "AI 에이전트를 지정한 주기로 실행해 반복 업무를 자동화합니다.",
+        "간단한 에이전트 대화로 정기 작업을 구성해 수작업을 줄이고 일관된 실행을 보장합니다.",
+      ],
+      imageAlt: "에이전트 스케줄링",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_schedule.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      reverse: true,
+      title: ["에이전트 스케줄링"],
+    },
+  ];
+}
 
 export default function AipKOSolutionContent({ locale }: Props) {
+  const featureItems = getFeatureItems(locale);
+
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <div className="flex flex-col gap-14 md:gap-20">
