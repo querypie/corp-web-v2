@@ -1,12 +1,19 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import TextButton from "@/components/common/TextButton";
 import { featureItemGapClassName } from "@/constants/layout";
 
 type FeatureItem = {
+  action?: {
+    href: string;
+    label: string;
+  };
   body: string[];
   imageAlt: string;
+  imageClassName?: string;
   imageSrc?: string;
+  mediaClassName?: string;
   reverse?: boolean;
   title: string[];
   videoSrc?: string;
@@ -67,10 +74,11 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 function FeatureCopy({
+  action,
   body,
   className,
   title,
-}: Pick<FeatureItem, "body" | "title"> & { className?: string }) {
+}: Pick<FeatureItem, "action" | "body" | "title"> & { className?: string }) {
   return (
     /* 기능 설명 텍스트 블록 */
     <div className={cx("flex flex-1 flex-col gap-2 not-italic md:gap-5 lg:min-w-[200px]", className)}>
@@ -88,6 +96,11 @@ function FeatureCopy({
           </p>
         ))}
       </div>
+      {action ? (
+        <TextButton className="order-3 justify-start self-start md:order-none" href={action.href}>
+          {action.label}
+        </TextButton>
+      ) : null}
     </div>
   );
 }
@@ -95,10 +108,11 @@ function FeatureCopy({
 function FeatureMedia({
   className,
   imageAlt,
+  imageClassName,
   imageSrc,
   setVideoRef,
   videoSrc,
-}: Pick<FeatureItem, "imageAlt" | "imageSrc" | "videoSrc"> & {
+}: Pick<FeatureItem, "imageAlt" | "imageClassName" | "imageSrc" | "videoSrc"> & {
   className?: string;
   setVideoRef?: (video: HTMLVideoElement | null) => void;
 }) {
@@ -120,7 +134,11 @@ function FeatureMedia({
           title={imageAlt}
         />
       ) : (
-        <img alt={imageAlt} className="block h-full w-full object-contain" src={imageSrc} />
+        <img
+          alt={imageAlt}
+          className={cx("block object-contain", imageClassName ?? "h-full w-full")}
+          src={imageSrc}
+        />
       )}
     </div>
   );
@@ -229,10 +247,16 @@ export default function FeatureSection({
               data-reveal
               style={{ transitionDelay: `${index * 90}ms` }}
             >
-              <FeatureCopy body={item.body} className="order-2 lg:order-none" title={item.title} />
+              <FeatureCopy
+                action={item.action}
+                body={item.body}
+                className="order-2 lg:order-none"
+                title={item.title}
+              />
               <FeatureMedia
-                className="order-1 lg:order-none"
+                className={cx("order-1 lg:order-none", item.mediaClassName)}
                 imageAlt={item.imageAlt}
+                imageClassName={item.imageClassName}
                 imageSrc={item.imageSrc}
                 setVideoRef={
                   item.videoSrc

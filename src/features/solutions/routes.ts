@@ -7,6 +7,7 @@ export type SolutionEntry = {
     | "usage-based-llm"
     | "mcp-gateway"
     | "fde-services"
+    | "aip-integrations"
     | "acp-integrations";
   slug: string[];
 };
@@ -16,6 +17,7 @@ export const solutionEntries: SolutionEntry[] = [
   { id: "usage-based-llm", slug: ["aip", "usage-based-llm"] },
   { id: "mcp-gateway", slug: ["aip", "mcp-gateway"] },
   { id: "fde-services", slug: ["aip", "fde-services"] },
+  { id: "aip-integrations", slug: ["aip", "integrations"] },
   { id: "acp", slug: ["acp"] },
   { id: "acp-integrations", slug: ["acp", "integrations"] },
 ];

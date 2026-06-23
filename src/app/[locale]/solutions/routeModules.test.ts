@@ -21,6 +21,8 @@ import Page4 from "./aip/fde-services/page";
 import Content4EN, { metadata as Metadata4EN } from "./aip/fde-services/content.en";
 import Content4KO, { metadata as Metadata4KO } from "./aip/fde-services/content.ko";
 import Content4JA, { metadata as Metadata4JA } from "./aip/fde-services/content.ja";
+import { generateMetadata as g5 } from "./aip/integrations/page";
+import Page5 from "./aip/integrations/page";
 import { generateMetadata as g6 } from "./acp/page";
 import Page6 from "./acp/page";
 import Content6EN, { metadata as Metadata6EN } from "./acp/content.en";
@@ -53,6 +55,10 @@ const routeModules = {
     generateMetadata: g4,
     content: { en: Content4EN, ko: Content4KO, ja: Content4JA },
     metadata: { en: Metadata4EN, ko: Metadata4KO, ja: Metadata4JA },
+  },
+  "aip-integrations": {
+    page: Page5,
+    generateMetadata: g5,
   },
   "acp": {
     page: Page6,

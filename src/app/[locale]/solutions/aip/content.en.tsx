@@ -3,7 +3,7 @@ import Cta from "@/components/sections/Cta";
 import YoutubePreviewPlayer from "@/components/common/YoutubePreviewPlayer";
 import AipThreeCardSection from "@/components/sections/AipThreeCardSection";
 import FeatureSection from "@/components/sections/FeatureSection";
-import type { Locale } from "@/constants/i18n";
+import { getLocalePath, type Locale } from "@/constants/i18n";
 
 type Props = {
   locale: Locale;
@@ -17,52 +17,85 @@ export const metadata = {
   keywords: ["QueryPie AI", "AI Platform", "AIP", "MCP Gateway"],
 } as const;
 
-const featureItems = [
-  {
-    body: [
-      "Deploy enterprise-ready LLM access with",
-      "usage-based controls, cost visibility, and",
-      "governance designed for production teams.",
-    ],
-    imageAlt: "Usage-based LLM deployment preview",
-    imageSrc: "/images/home/features/feature-panel-a.png",
-    title: ["Launch practical", "enterprise AI"],
-  },
-  {
-    body: [
-      "Connect AI agents to tools and data through",
-      "a governed MCP gateway with visibility,",
-      "policy enforcement, and audit-ready logs.",
-    ],
-    imageAlt: "MCP gateway preview",
-    imageSrc: "/images/home/features/feature-panel-b.png",
-    reverse: true,
-    title: ["Govern every", "MCP connection"],
-  },
-  {
-    body: [
-      "Forward Deployed Engineers help identify",
-      "business workflows, build tailored agents,",
-      "and move AI from pilot to measurable value.",
-    ],
-    imageAlt: "Forward deployed engineer workflow preview",
-    imageSrc: "/images/home/features/feature-panel-a.png",
-    title: ["Build agents", "around real work"],
-  },
-  {
-    body: [
-      "Bring prompt, model, tool, and usage activity",
-      "into one operating layer so security and",
-      "business teams can scale AI with confidence.",
-    ],
-    imageAlt: "AI operations visibility preview",
-    imageSrc: "/images/home/features/feature-panel-b.png",
-    reverse: true,
-    title: ["Scale AI with", "enterprise control"],
-  },
-];
+function getFeatureItems(locale: Locale) {
+  return [
+    {
+      body: [
+        "Start with a simple prompt in your Preset Instructions and let our auto-generation create comprehensive, optimized prompts that maximize your AI agent effectiveness.",
+      ],
+      imageAlt: "Prompt Auto-Generation",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_prompt.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      title: ["Prompt Auto-Generation"],
+    },
+    {
+      action: {
+        href: getLocalePath(locale, "/solutions/aip/integrations"),
+        label: "See All Available AIP Integrations",
+      },
+      body: [
+        "Easily connect your working tools through OAuth authorization.",
+        "Beyond our provided integrations, add your custom and internal tools to create business workflow automation tailored to your needs.",
+      ],
+      imageAlt: "Simple Integrations",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_integration.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      reverse: true,
+      title: ["Simple Integrations"],
+    },
+    {
+      body: [
+        "Turn your documents into knowledge bundles for smarter AI responses.",
+        "RAG-powered agents pull from your organization's information instantly, delivering accurate answers based on your business context.",
+      ],
+      imageAlt: "Contextual Knowledge Bundles",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_knowledge.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      title: ["Contextual Knowledge Bundles"],
+    },
+    {
+      body: [
+        "Install pre-built agents from our comprehensive library or create custom solutions tailoring each agent's capabilities to your specific operational requirements.",
+      ],
+      imageAlt: "Custom Agent Creation",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_createagent.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      reverse: true,
+      title: ["Custom Agent Creation"],
+    },
+    {
+      body: [
+        "Enhance AI responses with charts, graphs, and interactive elements.",
+        "Make complex insights easier to understand through visual aids, then export polished reports for stakeholders and decision-makers.",
+      ],
+      imageAlt: "Artifact Visualization",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_visualization.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      title: ["Artifact Visualization"],
+    },
+    {
+      body: [
+        "Automate routine tasks by scheduling AI agents at specified intervals.",
+        "Configure recurring operations through simple agent conversations, reducing manual effort while ensuring consistent execution.",
+      ],
+      imageAlt: "Schedule Agents",
+      imageClassName: "h-[400px] w-auto",
+      imageSrc: "/solutions/aip/aip_function_schedule.gif",
+      mediaClassName: "aspect-auto h-[400px] w-fit max-w-full lg:w-fit lg:max-w-none",
+      reverse: true,
+      title: ["Schedule Agents"],
+    },
+  ];
+}
 
 export default function AipENSolutionContent({ locale }: Props) {
+  const featureItems = getFeatureItems(locale);
+
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <div className="flex flex-col gap-14 md:gap-20">
