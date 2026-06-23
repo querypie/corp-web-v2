@@ -19,6 +19,7 @@ const copyByLocale: Record<
     accept: string;
     decline: string;
     cookiePreferenceLinkLabel: string;
+    sentenceAfterCookiePreference: string;
     privacyPolicyLinkLabel: string;
     sentenceAfterPrivacy: string;
     sentenceBeforeCookiePreference: string;
@@ -30,6 +31,7 @@ const copyByLocale: Record<
     accept: "Yes, I accept",
     decline: "Decline",
     cookiePreferenceLinkLabel: "Cookie Preference",
+    sentenceAfterCookiePreference: ".",
     privacyPolicyLinkLabel: "Privacy Policy",
     sentenceAfterPrivacy: ".",
     sentenceBeforeCookiePreference: "Decline, and we’ll respect your choice – no tracking involved.",
@@ -37,24 +39,26 @@ const copyByLocale: Record<
     title: "Cookie preferences",
   },
   ko: {
-    accept: "Yes, I accept",
-    decline: "Decline",
-    cookiePreferenceLinkLabel: "Cookie Preference",
-    privacyPolicyLinkLabel: "Privacy Policy",
-    sentenceAfterPrivacy: ".",
-    sentenceBeforeCookiePreference: "Decline, and we’ll respect your choice – no tracking involved.",
-    sentenceBeforePrivacy: "To enhance your experience, we use cookies. Learn more about how we use them in our",
+    accept: "동의합니다",
+    decline: "거부",
+    cookiePreferenceLinkLabel: "쿠키 설정",
+    sentenceAfterCookiePreference: "에서 관리할 수 있습니다.",
+    privacyPolicyLinkLabel: "개인정보처리방침",
+    sentenceAfterPrivacy: "에서 확인할 수 있습니다.",
+    sentenceBeforeCookiePreference: "세부 항목은",
+    sentenceBeforePrivacy: "더 나은 경험을 제공하기 위해 쿠키를 사용합니다. 쿠키 사용 방식은",
     title: "쿠키 설정",
   },
   ja: {
-    accept: "Yes, I accept",
-    decline: "Decline",
-    cookiePreferenceLinkLabel: "Cookie Preference",
-    privacyPolicyLinkLabel: "Privacy Policy",
-    sentenceAfterPrivacy: ".",
-    sentenceBeforeCookiePreference: "Decline, and we’ll respect your choice – no tracking involved.",
-    sentenceBeforePrivacy: "To enhance your experience, we use cookies. Learn more about how we use them in our",
-    title: "Cookie 設定",
+    accept: "同意する",
+    decline: "拒否",
+    cookiePreferenceLinkLabel: "クッキー設定",
+    sentenceAfterCookiePreference: "で管理できます。",
+    privacyPolicyLinkLabel: "プライバシーポリシー",
+    sentenceAfterPrivacy: "でご確認ください。",
+    sentenceBeforeCookiePreference: "詳細な項目は",
+    sentenceBeforePrivacy: "より良い体験を提供するために Cookie を使用します。Cookie の利用方法は",
+    title: "クッキー設定",
   },
 };
 
@@ -100,7 +104,7 @@ export default function CookieConsentBanner({ locale }: CookieConsentBannerProps
             >
               {copy.cookiePreferenceLinkLabel}
             </a>
-            .
+            {copy.sentenceAfterCookiePreference}
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:shrink-0">

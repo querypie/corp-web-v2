@@ -1,9 +1,11 @@
 import type { Locale } from "@/constants/i18n";
 import type { ReactNode } from "react";
+import { getButtonStyle, type ButtonSize } from "../common/Button";
 
 type CtaProps = {
   actionLabel?: string;
   actionHref?: string;
+  actionSize?: ButtonSize;
   className?: string;
   eyebrow?: ReactNode;
   description?: ReactNode;
@@ -18,6 +20,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 export default function Cta({
   actionLabel,
   actionHref = "https://app.querypie.com/",
+  actionSize = "large",
   className,
   description = "Sign up in seconds and secure your 14-day free trial now.",
   eyebrow = "Stop Thinking.",
@@ -33,6 +36,7 @@ export default function Cta({
         ja: "今すぐ実現する",
       } satisfies Record<Locale, string>
     )[locale];
+  const actionStyles = getButtonStyle("secondary", "full", actionSize, "default");
 
   return (
     /* 페이지 하단 전환 유도용 CTA 섹션 */
@@ -46,7 +50,7 @@ export default function Cta({
           {description}
         </p>
         <a
-          className="pressable inline-flex h-10 cursor-pointer items-center justify-center gap-1.5 rounded-full bg-secondary px-5 type-body-md text-fg hover:bg-[#343434] hover:text-fg"
+          className={cx(actionStyles.container, actionStyles.text, "group cursor-pointer")}
           href={actionHref}
           rel="noreferrer noopener"
           target="_blank"

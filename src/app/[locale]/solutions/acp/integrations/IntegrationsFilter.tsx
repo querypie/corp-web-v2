@@ -1,8 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import type { Locale } from "@/constants/i18n";
 import {
   integrationCategories,
+  integrationCategoryLabels,
   integrationItems,
   type IntegrationCategoryId,
   type IntegrationItem,
@@ -39,8 +41,13 @@ function IntegrationCard({ enhanceIconContrast, icon, invertIcon, name }: Integr
   );
 }
 
-export default function IntegrationsFilter() {
+type IntegrationsFilterProps = {
+  locale: Locale;
+};
+
+export default function IntegrationsFilter({ locale }: IntegrationsFilterProps) {
   const [activeCategory, setActiveCategory] = useState<IntegrationCategoryId>("all");
+  const labels = integrationCategoryLabels[locale];
   const visibleItems = useMemo(() => {
     if (activeCategory === "all") return integrationItems;
     return integrationItems.filter((item) => item.categories.includes(activeCategory));
@@ -66,7 +73,7 @@ export default function IntegrationsFilter() {
                 onClick={() => setActiveCategory(category.id)}
                 type="button"
               >
-                {category.label} ({getCategoryCount(category.id)})
+                {labels[category.id]} ({getCategoryCount(category.id)})
               </button>
             );
           })}

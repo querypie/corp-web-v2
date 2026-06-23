@@ -1,3 +1,5 @@
+import type { Locale } from "@/constants/i18n";
+
 export type IntegrationCategoryId =
   | "all"
   | "data-sources"
@@ -17,20 +19,55 @@ export type IntegrationItem = {
   name: string;
 };
 
-export const integrationCategories: Array<{
+export const integrationCategories: ReadonlyArray<{
   id: IntegrationCategoryId;
-  label: string;
 }> = [
-  { id: "all", label: "All" },
-  { id: "data-sources", label: "Data Sources" },
-  { id: "containers-cloud-services", label: "Containers & Cloud Services" },
-  { id: "sso-identity-providers", label: "Single Sign-On and Identity Providers" },
-  { id: "sql-bi-tools", label: "SQL & BI Tools" },
-  { id: "notification", label: "Notification" },
-  { id: "siem-soar", label: "SIEM / SOAR" },
-  { id: "monitoring", label: "Monitoring" },
-  { id: "secret-stores", label: "Secret Stores" },
+  { id: "all" },
+  { id: "data-sources" },
+  { id: "containers-cloud-services" },
+  { id: "sso-identity-providers" },
+  { id: "sql-bi-tools" },
+  { id: "notification" },
+  { id: "siem-soar" },
+  { id: "monitoring" },
+  { id: "secret-stores" },
 ];
+
+export const integrationCategoryLabels: Record<Locale, Record<IntegrationCategoryId, string>> = {
+  en: {
+    all: "All",
+    "data-sources": "Data Sources",
+    "containers-cloud-services": "Containers & Cloud Services",
+    "sso-identity-providers": "Single Sign-On and Identity Providers",
+    "sql-bi-tools": "SQL & BI Tools",
+    notification: "Notification",
+    "siem-soar": "SIEM / SOAR",
+    monitoring: "Monitoring",
+    "secret-stores": "Secret Stores",
+  },
+  ko: {
+    all: "전체",
+    "data-sources": "데이터 소스",
+    "containers-cloud-services": "컨테이너 및 클라우드 서비스",
+    "sso-identity-providers": "SSO 및 ID 공급자",
+    "sql-bi-tools": "SQL 및 BI 도구",
+    notification: "알림",
+    "siem-soar": "SIEM / SOAR",
+    monitoring: "모니터링",
+    "secret-stores": "시크릿 저장소",
+  },
+  ja: {
+    all: "すべて",
+    "data-sources": "データソース",
+    "containers-cloud-services": "コンテナ・クラウドサービス",
+    "sso-identity-providers": "SSO・IDプロバイダー",
+    "sql-bi-tools": "SQL・BIツール",
+    notification: "通知",
+    "siem-soar": "SIEM / SOAR",
+    monitoring: "モニタリング",
+    "secret-stores": "シークレットストア",
+  },
+};
 
 const iconBasePath = "/solutions/acp/integration-icon";
 

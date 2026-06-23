@@ -24,7 +24,7 @@ export default function LegalContentBody({
   return (
     <div
       className={[
-        "flex flex-col gap-6 text-fg",
+        "flex min-w-0 max-w-full flex-col gap-6 overflow-x-auto text-fg",
         "[&_h2]:m-0 [&_h2]:mt-12 [&_h2:first-of-type]:mt-0 [&_h2]:type-h2 [&_h2]:leading-[30px] [&_h2]:text-fg",
         "[&_h3]:m-0 [&_h3]:mt-7 [&_h3:first-of-type]:mt-0 [&_h3]:type-h3 [&_h3]:text-fg",
         "[&_p]:m-0 [&_p]:mt-4 [&_p:first-child]:mt-0 [&_p]:type-body-lg [&_p]:leading-8 [&_p]:whitespace-pre-wrap [&_p]:text-fg",
@@ -35,14 +35,14 @@ export default function LegalContentBody({
         "[&_li]:type-body-lg [&_li]:leading-8 [&_li]:text-fg",
         "[&_li>p]:mt-0",
         "[&_li>ul]:mt-2 [&_li>ol]:mt-2",
-        "[&_table]:my-8 [&_table]:w-full [&_table]:min-w-[720px] [&_table]:border-collapse",
+        "[&_table]:my-8 [&_table]:w-full [&_table]:min-w-[720px] [&_table]:table-fixed [&_table]:border-collapse",
         tableTone === "deep" ? "[&_thead]:bg-bg-deep" : "[&_thead]:bg-bg-content",
         "[&_td[cellbackgroundcolor='gray']]:bg-bg-deep",
         "[&_th.table_bgGray__F5xyC]:bg-bg-deep",
         "[&_td.table_bgGray__F5xyC]:bg-bg-deep",
         tableTone === "deep" ? "[&_th]:bg-bg-deep" : "",
-        "[&_th]:border [&_th]:border-border [&_th]:px-4 [&_th]:py-3 [&_th]:text-left [&_th]:align-top [&_th]:type-body-lg [&_th]:font-semibold [&_th]:text-fg",
-        "[&_td]:border [&_td]:border-border [&_td]:px-4 [&_td]:py-3 [&_td]:align-top [&_td]:type-body-lg [&_td]:leading-7 [&_td]:text-fg",
+        "[&_th]:border [&_th]:border-border [&_th]:px-4 [&_th]:py-3 [&_th]:text-left [&_th]:align-top [&_th]:type-body-lg [&_th]:font-semibold [&_th]:break-keep [&_th]:text-fg",
+        "[&_td]:border [&_td]:border-border [&_td]:px-4 [&_td]:py-3 [&_td]:align-top [&_td]:type-body-lg [&_td]:leading-7 [&_td]:break-keep [&_td]:text-fg",
         "[&_td>p]:mt-0 [&_td>ul]:mt-0 [&_td>ol]:mt-0",
         "[&_div:has(>table)]:w-full [&_div:has(>table)]:overflow-x-auto [&_div:has(>table)]:pb-2",
         "[&_br]:block [&_br]:content-[''] [&_br]:mb-2",

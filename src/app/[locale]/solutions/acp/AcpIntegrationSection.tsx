@@ -19,14 +19,14 @@ const copy = {
       "데이터베이스, 서버, Kubernetes, 웹 애플리케이션, ID 공급자, 보안 도구 등 50개 이상의 시스템과 연동해 전체 인프라 생태계의 권한 제어를 하나로 통합합니다.",
     button: "사용 가능한 ACP 연동 보기",
     imageAlt: "ACP 연동 생태계",
-    title: ["One Platform", "All Infrastructure"],
+    title: ["하나의 플랫폼", "모든 인프라"],
   },
   ja: {
     body:
       "データベース、サーバー、Kubernetes、Webアプリケーション、IDプロバイダー、セキュリティツールなど50以上のシステムと連携し、インフラ全体の権限制御を統合します。",
     button: "利用可能なACP連携を見る",
     imageAlt: "ACP連携エコシステム",
-    title: ["One Platform", "All Infrastructure"],
+    title: ["ひとつのプラットフォーム", "すべてのインフラ"],
   },
 } satisfies Record<Locale, {
   body: string;

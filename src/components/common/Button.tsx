@@ -1,9 +1,9 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "outline";
-type ButtonStyle = "round" | "full";
-type ButtonSize = "small" | "default" | "large";
-type ButtonState = "default" | "hover" | "disable";
+export type ButtonVariant = "primary" | "secondary" | "outline";
+export type ButtonStyle = "round" | "full";
+export type ButtonSize = "small" | "default" | "large";
+export type ButtonState = "default" | "hover" | "disable";
 
 export type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "style"> & {
   arrow?: boolean;
@@ -25,7 +25,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 // variant / size / state 조합에 따라 버튼의 배경/텍스트/아이콘 크기를 계산
-function getButtonStyle(
+export function getButtonStyle(
   variant: ButtonVariant,
   shape: ButtonStyle,
   size: ButtonSize,
@@ -37,7 +37,7 @@ function getButtonStyle(
       shape === "full" ? "rounded-full" : "rounded-button",
       size === "small" && "h-8 gap-1.5 px-4",
       size === "default" && "h-10 gap-1.5 px-5",
-      size === "large" && "h-14 gap-2 px-6",
+      size === "large" && "h-12 gap-2 px-6",
       variant === "outline" &&
         cx(
           "border border-secondary",
