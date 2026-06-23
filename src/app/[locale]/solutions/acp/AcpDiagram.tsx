@@ -169,7 +169,6 @@ function ShieldPanel({ className, subtitle, capabilities }: { className?: string
         src={iconSrc("shield-mask.svg")}
         width={280}
       />
-      <div className={cx(styles.controllerActivationBg, "absolute left-1/2 top-[78px] z-10 h-[170px] w-[190px] -translate-x-1/2 rounded-full")} />
       <div className="relative flex w-full flex-col items-center gap-10">
         <div className="flex w-full flex-col items-center gap-5">
           <AcpControllerIcon className="h-[46px] w-10" />
@@ -177,7 +176,7 @@ function ShieldPanel({ className, subtitle, capabilities }: { className?: string
             <p className={cx(styles.controllerTitle, "m-0 whitespace-nowrap text-center font-sans text-lg font-medium leading-6 tracking-[0] text-fg")}>
               QueryPie ACP
             </p>
-            <p className="m-0 rounded-full bg-bg px-3 py-0.5 text-center font-sans text-xs font-light leading-[18px] text-fg">
+            <p className={cx(styles.controllerBadge, "m-0 rounded-full bg-bg px-3 py-0.5 text-center font-sans text-xs font-light leading-[18px] text-fg")}>
               {subtitle}
             </p>
           </div>
