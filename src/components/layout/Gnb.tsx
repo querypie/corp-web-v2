@@ -150,10 +150,10 @@ export default function Gnb({
           className,
         )}
       >
-        <div className="flex h-[56px] w-full max-w-[1200px] items-center justify-between gap-6 text-fg transition-colors duration-300 md:h-16">
+        <div className="flex h-16 w-full max-w-[1200px] items-center justify-between gap-6 text-fg transition-colors duration-300">
           <a
             aria-label="QueryPie AI"
-            className="inline-flex h-[18px] shrink-0 items-center text-fg transition-colors duration-300 md:h-5 md:w-[116px]"
+            className="inline-flex h-5 w-[116px] shrink-0 items-center text-fg transition-colors duration-300"
             href={homeHref}
             onClick={() => {
               setMobileMenuOpen(false);
@@ -161,7 +161,7 @@ export default function Gnb({
           >
             <img
               alt="QueryPie AI"
-              className="block h-[18px] w-auto transition-[filter,opacity] duration-300 md:h-5 md:w-[116px]"
+              className="block h-5 w-[116px] transition-[filter,opacity] duration-300"
               src="/icons/querypie-ai-logo.svg"
             />
           </a>
@@ -392,7 +392,7 @@ export default function Gnb({
 
       {mobileMenuVisible ? (
         <div className={cx(
-          "fixed inset-x-0 bottom-0 top-[56px] z-40 overflow-y-auto md:hidden",
+          "fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto md:hidden",
           mobileMenuOpen
             ? "animate-[mobile-menu-sheet-enter_320ms_cubic-bezier(0.22,1,0.36,1)_both]"
             : "animate-[mobile-menu-sheet-exit_280ms_cubic-bezier(0.4,0,0.2,1)_both]",
