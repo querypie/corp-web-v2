@@ -1,4 +1,5 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
+import AipSolutionHeroMedia from "@/components/sections/AipSolutionHeroMedia";
 import Cta from "@/components/sections/Cta";
 import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
@@ -17,77 +18,82 @@ export const metadata = {
 
 const featureItems = [
   {
-    title: ["Smart Edge", "Tunneling"],
+    title: ["スマートエッジトンネリング"],
     body: [
-      "セキュアなトンネリングで内部システムへ接続します。",
-      "ファイアウォールで保護されたリソースに",
-      "既存のセキュリティ構成を変えずにアクセスできます。",
+      "セキュアなトンネリング技術で内部システムへ接続します。ファイアウォールで保護されたリソースに、既存のセキュリティ構成を変えずにアクセスできます。",
     ],
     imageAlt: "スマートエッジトンネリングプレビュー",
-    imageSrc: "/images/home/features/feature-panel-a.png",
+    imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
+    imageSrc: "/solutions/aip/mcp-gateway/aip_function_tunneling.gif",
+    mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
-    title: ["Easy MCP", "Proxy Access"],
+    title: ["簡単なMCPプロキシアクセス"],
     body: [
-      "セキュアなローカルMCPプロキシを通じて、",
-      "外部ツールからMCPプリセットを利用できます。",
-      "Cursor IDE、Claude Desktop、Windsurfに対応します。",
+      "セキュアなローカルMCPプロキシを通じて外部ツールからMCPプリセットを利用できます。カスタムプリセットをCursor IDE、Claude Desktop、Windsurfで直接利用できます。",
     ],
     imageAlt: "MCPプロキシアクセスプレビュー",
-    imageSrc: "/images/home/features/feature-panel-b.png",
+    imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
+    imageSrc: "/solutions/aip/mcp-gateway/aip_function_mcpproxy.gif",
+    mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
   {
-    title: ["Org-Level MCP", "Management"],
+    title: ["組織レベルのMCP管理"],
     body: [
-      "細かな権限でMCPツールへのアクセスを制御します。",
-      "有効化、無効化、ガバナンスを",
-      "組織単位で一元管理できます。",
+      "細かな権限で誰がどのMCPツールにアクセスできるかを制御します。AIツール利用の有効化、無効化、ガバナンスを組織全体で一元管理できます。",
     ],
     imageAlt: "組織レベルMCP管理プレビュー",
-    imageSrc: "/images/home/features/feature-panel-a.png",
+    imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
+    imageSrc: "/solutions/aip/mcp-gateway/aip_function_mcpmanagement.gif",
+    mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
-    title: ["Audit", "Logging"],
+    title: ["監査ログ"],
     body: [
-      "組織全体のすべてのイベントを追跡します。",
-      "ユーザー操作とシステム変更を監視し、",
-      "セキュリティとコンプライアンスを支援します。",
+      "組織全体のすべてのイベントを完全な可視性で追跡します。ユーザー操作とシステム変更を監視し、セキュリティとコンプライアンスを支援します。",
     ],
     imageAlt: "監査ログプレビュー",
-    imageSrc: "/images/home/features/feature-panel-b.png",
+    imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
+    imageSrc: "/solutions/aip/mcp-gateway/aip_function_audit.gif",
+    mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
   {
-    title: ["Data Loss", "Prevention"],
+    title: ["データ損失防止 (DLP)"],
     body: [
-      "機密情報がAI会話に入ることを",
-      "自動的にブロックします。",
-      "APIキーや社外秘情報を保護します。",
+      "機密情報がAI会話に入ることを自動的にブロックします。クレジットカード、SSN、APIキー、機密情報の露出を即座に防ぎます。",
     ],
     imageAlt: "データ損失防止プレビュー",
-    imageSrc: "/images/home/features/feature-panel-a.png",
+    imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
+    imageSrc: "/solutions/aip/mcp-gateway/aip_function_dlp.gif",
+    mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
 ];
 
 export default function McpGatewayJASolutionContent({ locale }: Props) {
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
-      <section className="flex w-full justify-center">
-        <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
-          <div>
-            <h1 className="m-0 type-h1 text-fg">
-              <span className="block">MCP Hub</span>
-              <span className="block">That Connects Everything</span>
-            </h1>
-          </div>
-          <p className="m-0 max-w-[720px] type-body-lg leading-relaxed text-fg">
-            Single platform centrally managing all MCP servers and tools—no fragmentation, no
-            complexity, no limits. Streamline AI workflows across your entire tech stack while we
-            handle the complexity behind the scenes.
-          </p>
-        </header>
-      </section>
+      <div className="flex w-full flex-col gap-10 md:gap-[80px]">
+        <section className="flex w-full justify-center">
+          <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
+            <div>
+              <h1 className="m-0 text-pretty type-h1 text-fg">
+                すべてをつなぐ
+                <br className="hidden md:block" /> MCPハブ
+              </h1>
+            </div>
+            <p className="m-0 max-w-[720px] text-pretty type-body-lg leading-relaxed text-fg">
+              すべてのMCPサーバーとツールをひとつのプラットフォームで一元管理します。分断、
+              複雑さ、制約を抑え、技術スタック全体のAIワークフローを効率化します。
+            </p>
+          </header>
+        </section>
+        <AipSolutionHeroMedia
+          imageAlt="MCP Gateway製品プレビュー"
+          imageSrc="/solutions/aip/mcp-gateway/mcp-gateway.png"
+        />
+      </div>
 
       <FeatureSection items={featureItems} />
 
