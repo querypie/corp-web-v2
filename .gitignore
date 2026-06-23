@@ -32,3 +32,6 @@ tsconfig.tsbuildinfo
 .worktrees/
 .vercel/README.txt
 .vercel/output/
+
+# Claude Code local settings
+.claude/settings.json
