@@ -3,6 +3,7 @@ import AipSolutionHeroMedia from "@/components/sections/AipSolutionHeroMedia";
 import Cta from "@/components/sections/Cta";
 import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
+import UsageBasedLlmComparisonTable, { type ComparisonCopy } from "./UsageBasedLlmComparisonTable";
 
 type Props = {
   locale: Locale;
@@ -50,6 +51,66 @@ const featureItems = [
   },
 ];
 
+const comparisonCopy: ComparisonCopy = {
+  rows: {
+    monthlyCost: "월간 요금",
+    models: "지원 LLM 모델",
+    features: "기능",
+    annualCost: ["200명 규모", "조직 기준", "연간 비용"],
+  },
+  competitors: [
+    {
+      name: "Company O",
+      monthlyCost: "$30/month",
+      models: ["GPT-4.1, 4o, o3,", "o3-mini, o1,", "and more"],
+      features: ["AI 채팅", "개인, 비즈니스 RAG", "라이브 검색", "이미지 생성", "데이터 분석"],
+      annualCost: ["$72,000", "per year"],
+    },
+    {
+      name: "Company M",
+      monthlyCost: "$20/month",
+      models: ["GPT-4o,", "o3-mini, o1"],
+      features: ["문서 요약", "문서 작성/편집"],
+      annualCost: ["$48,000", "per year"],
+    },
+    {
+      name: "Company A",
+      monthlyCost: "$25/month",
+      models: ["Claude 4 Opus,", "Claude 4 Sonnet,", "and more"],
+      features: ["AI 채팅", "데이터 분석"],
+      annualCost: ["$60,000", "per year"],
+    },
+    {
+      name: "Company P",
+      monthlyCost: "$40/month",
+      models: ["LLaMA 3,", "Deepseek-R1"],
+      features: ["AI 채팅", "라이브 검색"],
+      annualCost: ["$96,000", "per year"],
+    },
+  ],
+  queryPie: {
+    name: "QueryPie",
+    monthlyCost: "$0 (사용량 기반)",
+    models: ["Claude, GPT, Gemini,", "고객 보유 LLM 모델까지 지원"],
+    summary: ["경쟁사 제공 기능을 모두 포함하고", "업무에 필요한 핵심 기능까지", "함께 제공합니다"],
+    features: [
+      "AI 채팅",
+      "개인, 비즈니스 RAG",
+      "라이브 검색",
+      "이미지 생성",
+      "데이터 분석",
+      "프롬프트 자동 생성",
+      "인프라 관리",
+      "AI 에이전트 생성",
+      "보안, 모니터링",
+      "중앙 관리",
+    ],
+    annualCost: "$7,200~ per year",
+    savings: "(Company O 대비 최대 90% 절감)",
+  },
+  note: "* 사용량에 따라 달라질 수 있으나 일반적으로 80-90% 비용 절감이 가능합니다.",
+};
+
 export default function UsageBasedLlmKOSolutionContent({ locale }: Props) {
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
@@ -75,6 +136,8 @@ export default function UsageBasedLlmKOSolutionContent({ locale }: Props) {
       </div>
 
       <FeatureSection items={featureItems} />
+
+      <UsageBasedLlmComparisonTable copy={comparisonCopy} />
 
       <div>
         <Cta locale={locale} />

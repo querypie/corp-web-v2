@@ -3,6 +3,7 @@ import AipSolutionHeroMedia from "@/components/sections/AipSolutionHeroMedia";
 import Cta from "@/components/sections/Cta";
 import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
+import UsageBasedLlmComparisonTable, { type ComparisonCopy } from "./UsageBasedLlmComparisonTable";
 
 type Props = {
   locale: Locale;
@@ -50,6 +51,70 @@ const featureItems = [
   },
 ];
 
+const comparisonCopy: ComparisonCopy = {
+  rows: {
+    monthlyCost: "Monthly Cost",
+    models: "Supported LLM Models",
+    features: "Features",
+    annualCost: ["Annual Cost", "for 200-User", "Organizations"],
+  },
+  competitors: [
+    {
+      name: "Company O",
+      monthlyCost: "$30/month",
+      models: ["GPT-4.1, 4o, o3,", "o3-mini, o1,", "and more"],
+      features: ["AI Chat", "Personal, Business RAG", "Live Search", "Image Creation", "Data Analysis"],
+      annualCost: ["$72,000", "per year"],
+    },
+    {
+      name: "Company M",
+      monthlyCost: "$20/month",
+      models: ["GPT-4o,", "o3-mini, o1"],
+      features: ["Document Summaries", "Document Creation/Editing"],
+      annualCost: ["$48,000", "per year"],
+    },
+    {
+      name: "Company A",
+      monthlyCost: "$25/month",
+      models: ["Claude 4 Opus,", "Claude 4 Sonnet,", "and more"],
+      features: ["AI Chat", "Data Analysis"],
+      annualCost: ["$60,000", "per year"],
+    },
+    {
+      name: "Company P",
+      monthlyCost: "$40/month",
+      models: ["LLaMA 3,", "Deepseek-R1"],
+      features: ["AI Chat", "Live Search"],
+      annualCost: ["$96,000", "per year"],
+    },
+  ],
+  queryPie: {
+    name: "QueryPie",
+    monthlyCost: "$0 (Usage-based)",
+    models: ["Claude, GPT, Gemini,", "plus any customer-owned LLM models"],
+    summary: [
+      "Built with all the features",
+      "supported by competitors,",
+      "plus essential business functionality",
+    ],
+    features: [
+      "AI Chat",
+      "Personal, Business RAG",
+      "Live Search",
+      "Image Creation",
+      "Data Analysis",
+      "Prompt Auto-Generation",
+      "Infrastructure Management",
+      "AI Agent Creation",
+      "Security, Monitoring",
+      "Centralized Management",
+    ],
+    annualCost: "$7,200~ per year",
+    savings: "(Save up to 90% vs. Company O)",
+  },
+  note: "* May vary based on usage, but typically saves 80-90%",
+};
+
 export default function UsageBasedLlmENSolutionContent({ locale }: Props) {
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
@@ -75,6 +140,8 @@ export default function UsageBasedLlmENSolutionContent({ locale }: Props) {
       </div>
 
       <FeatureSection items={featureItems} />
+
+      <UsageBasedLlmComparisonTable copy={comparisonCopy} />
 
       <div>
         <Cta locale={locale} />

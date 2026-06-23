@@ -3,6 +3,7 @@ import AipSolutionHeroMedia from "@/components/sections/AipSolutionHeroMedia";
 import Cta from "@/components/sections/Cta";
 import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
+import UsageBasedLlmComparisonTable, { type ComparisonCopy } from "./UsageBasedLlmComparisonTable";
 
 type Props = {
   locale: Locale;
@@ -50,6 +51,66 @@ const featureItems = [
   },
 ];
 
+const comparisonCopy: ComparisonCopy = {
+  rows: {
+    monthlyCost: "月額費用",
+    models: "対応LLMモデル",
+    features: "機能",
+    annualCost: ["200ユーザー", "組織の", "年間費用"],
+  },
+  competitors: [
+    {
+      name: "Company O",
+      monthlyCost: "$30/month",
+      models: ["GPT-4.1, 4o, o3,", "o3-mini, o1,", "and more"],
+      features: ["AIチャット", "個人, ビジネスRAG", "ライブ検索", "画像生成", "データ分析"],
+      annualCost: ["$72,000", "per year"],
+    },
+    {
+      name: "Company M",
+      monthlyCost: "$20/month",
+      models: ["GPT-4o,", "o3-mini, o1"],
+      features: ["ドキュメント要約", "ドキュメント作成/編集"],
+      annualCost: ["$48,000", "per year"],
+    },
+    {
+      name: "Company A",
+      monthlyCost: "$25/month",
+      models: ["Claude 4 Opus,", "Claude 4 Sonnet,", "and more"],
+      features: ["AIチャット", "データ分析"],
+      annualCost: ["$60,000", "per year"],
+    },
+    {
+      name: "Company P",
+      monthlyCost: "$40/month",
+      models: ["LLaMA 3,", "Deepseek-R1"],
+      features: ["AIチャット", "ライブ検索"],
+      annualCost: ["$96,000", "per year"],
+    },
+  ],
+  queryPie: {
+    name: "QueryPie",
+    monthlyCost: "$0 (使用量ベース)",
+    models: ["Claude, GPT, Gemini,", "お客様所有のLLMモデルにも対応"],
+    summary: ["競合が提供する機能を備え、", "ビジネスに必要な主要機能も", "あわせて提供します"],
+    features: [
+      "AIチャット",
+      "個人, ビジネスRAG",
+      "ライブ検索",
+      "画像生成",
+      "データ分析",
+      "プロンプト自動生成",
+      "インフラ管理",
+      "AIエージェント作成",
+      "セキュリティ, 監視",
+      "一元管理",
+    ],
+    annualCost: "$7,200~ per year",
+    savings: "(Company O比で最大90%削減)",
+  },
+  note: "* 使用量により変動しますが、通常は80-90%のコスト削減が可能です。",
+};
+
 export default function UsageBasedLlmJASolutionContent({ locale }: Props) {
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
@@ -75,6 +136,8 @@ export default function UsageBasedLlmJASolutionContent({ locale }: Props) {
       </div>
 
       <FeatureSection items={featureItems} />
+
+      <UsageBasedLlmComparisonTable copy={comparisonCopy} />
 
       <div>
         <Cta locale={locale} />
