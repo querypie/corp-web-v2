@@ -24,7 +24,7 @@ export function getDocumentationPageCopy(locale: Locale): ContentListPageCopy {
 export function getPlansPageCopy(locale: Locale): ContentListPageCopy {
   return {
     en: { metadataTitle: "Pricing", title: "Pricing" },
-    ko: { metadataTitle: "Pricing", title: "Pricing" },
-    ja: { metadataTitle: "Pricing", title: "Pricing" },
+    ko: { metadataTitle: "가격 · 플랜", title: "가격 · 플랜" },
+    ja: { metadataTitle: "価格・プラン", title: "価格・プラン" },
   }[locale];
 }

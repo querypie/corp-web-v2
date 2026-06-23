@@ -9,6 +9,7 @@ import TabGroup from "../../common/TabGroup";
 import Cta from "../../sections/Cta";
 import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PlanFeature, type PricingProduct } from "../../../constants/plans";
 import { getLocalePath, type Locale } from "../../../constants/i18n";
+import { getPlansPageCopy } from "../../../features/content/pageCopy";
 
 type PlansPageProps = {
   productKey?: "aip" | "acp";
@@ -190,6 +191,7 @@ export default function PlansPage({
   locale,
 }: PlansPageProps) {
   const pricingProducts = pricingProductsByLocale[locale];
+  const pageCopy = getPlansPageCopy(locale);
   const router = useRouter();
   const activeProductKey: keyof typeof pricingProducts =
     productKey in pricingProducts ? productKey : "aip";
@@ -210,7 +212,7 @@ export default function PlansPage({
       <section className="flex w-full justify-center">
         <div className="flex w-full max-w-[1200px] flex-col gap-[60px] md:gap-[80px]">
           <div className="flex flex-col items-center gap-3">
-            <h1 className="m-0 mb-[8px] type-h1 text-center text-fg">Pricing</h1>
+            <h1 className="m-0 mb-[8px] type-h1 text-center text-fg">{pageCopy.title}</h1>
 
             {/* 제품군 전환 탭 */}
             <TabGroup>
