@@ -39,7 +39,7 @@ export default function AcpIntegrationSection({ locale }: AcpIntegrationSectionP
   const content = copy[locale];
 
   return (
-    <section className="flex w-full justify-center bg-bg-deep px-5 py-14 md:px-10 md:py-[100px]">
+    <section className="flex w-full justify-center">
       <div className="flex w-full max-w-[1200px] flex-col items-start gap-10 lg:flex-row lg:gap-[60px]">
         <div className="flex min-w-0 flex-1 flex-col items-start gap-5">
           <h2 className="m-0 min-w-full type-h2 font-normal text-fg">

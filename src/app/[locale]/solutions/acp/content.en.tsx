@@ -2,6 +2,7 @@ import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layo
 import Cta from "@/components/sections/Cta";
 import FeatureSection from "@/components/sections/FeatureSection";
 import type { Locale } from "@/constants/i18n";
+import AcpAiPackSection from "./AcpAiPackSection";
 import AcpDiagram from "./AcpDiagram";
 import AcpIntegrationSection from "./AcpIntegrationSection";
 
@@ -94,6 +95,10 @@ export default function AcpENSolutionContent({ locale }: Props) {
       </div>
 
       <div className="-mx-5 md:-mx-10">
+        <AcpAiPackSection locale={locale} />
+      </div>
+
+      <div>
         <AcpIntegrationSection locale={locale} />
       </div>
 

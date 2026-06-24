@@ -145,7 +145,7 @@ export default function Gnb({
     <>
       <header
         className={cx(
-          "fixed inset-x-0 top-0 z-50 flex w-full items-center justify-center pl-5 pr-4 transition-[background-color,backdrop-filter] duration-300 md:px-10",
+          "fixed inset-x-0 top-[var(--language-banner-offset,0px)] z-50 flex w-full items-center justify-center pl-5 pr-4 transition-[background-color,backdrop-filter,top] duration-300 md:px-10",
           mobileMenuOpen ? mobileMenuBackdropClassName : "bg-bg",
           className,
         )}
@@ -392,7 +392,7 @@ export default function Gnb({
 
       {mobileMenuVisible ? (
         <div className={cx(
-          "fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto md:hidden",
+          "fixed inset-x-0 bottom-0 top-[calc(64px+var(--language-banner-offset,0px))] z-40 overflow-y-auto transition-[top] duration-300 md:hidden",
           mobileMenuOpen
             ? "animate-[mobile-menu-sheet-enter_320ms_cubic-bezier(0.22,1,0.36,1)_both]"
             : "animate-[mobile-menu-sheet-exit_280ms_cubic-bezier(0.4,0,0.2,1)_both]",
