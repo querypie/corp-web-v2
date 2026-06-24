@@ -376,7 +376,7 @@ export default function Gnb({
                 src={mobileMenuOpen ? "/icons/m-Close.svg" : "/icons/m-Menu.svg"}
               />
             </button>
-            <a className="hidden md:inline-flex" href="/admin" rel="noreferrer noopener" target="_blank">
+            <a className="hidden md:inline-flex" href="https://app.querypie.com/" rel="noreferrer noopener" target="_blank">
               <Button
                 arrow={false}
                 size="small"

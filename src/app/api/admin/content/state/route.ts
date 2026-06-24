@@ -24,15 +24,23 @@ type UpsertStateRequest = {
   currentId?: string;
   item?: ManagedContentEntry;
   preserveExistingBodies?: boolean;
+  shiftSiblingsForNew?: boolean;
 };
 
 type DeleteStateRequest = {
   id?: string;
+  storageId?: string;
 };
 
 type UpdateStatusRequest = {
   id?: string;
+  sortOrders?: Array<{
+    id: string;
+    sortOrder: number;
+    storageId?: string;
+  }>;
   status?: ManagedContentStatus;
+  storageId?: string;
 };
 
 const NO_STORE_HEADERS = {
@@ -41,12 +49,12 @@ const NO_STORE_HEADERS = {
 
 function parseSection(url: string) {
   const section = new URL(url).searchParams.get("section");
-  return section as ManagedContentSection | null;
+  return isManagedContentSection(section) ? section : null;
 }
 
 function parseCategorySlug(url: string) {
   const categorySlug = new URL(url).searchParams.get("categorySlug");
-  return categorySlug as ManagedContentCategorySlug | null;
+  return isManagedContentCategorySlug(categorySlug) ? categorySlug : null;
 }
 
 function parseItemId(url: string) {
@@ -55,6 +63,107 @@ function parseItemId(url: string) {
 
 function parseView(url: string) {
   return new URL(url).searchParams.get("view");
+}
+
+function isManagedContentSection(value: unknown): value is ManagedContentSection {
+  return value === "demo" || value === "documentation" || value === "news";
+}
+
+function isManagedContentCategorySlug(value: unknown): value is ManagedContentCategorySlug {
+  return (
+    value === "use-cases" ||
+    value === "aip-features" ||
+    value === "acp-features" ||
+    value === "webinars" ||
+    value === "introduction" ||
+    value === "glossary" ||
+    value === "manuals" ||
+    value === "white-papers" ||
+    value === "blogs" ||
+    value === "news"
+  );
+}
+
+function isManagedContentStatus(value: unknown): value is ManagedContentStatus {
+  return value === "hidden" || value === "published";
+}
+
+function isCategorySlugAllowedForSection(
+  section: ManagedContentSection,
+  categorySlug: ManagedContentCategorySlug,
+) {
+  if (section === "news") {
+    return categorySlug === "news";
+  }
+
+  if (section === "demo") {
+    return (
+      categorySlug === "use-cases" ||
+      categorySlug === "aip-features" ||
+      categorySlug === "acp-features" ||
+      categorySlug === "webinars"
+    );
+  }
+
+  return (
+    categorySlug === "introduction" ||
+    categorySlug === "glossary" ||
+    categorySlug === "manuals" ||
+    categorySlug === "white-papers" ||
+    categorySlug === "blogs"
+  );
+}
+
+function validateManagedContentItem(item: ManagedContentEntry) {
+  if (!isManagedContentSection(item.section)) {
+    return "Invalid section";
+  }
+
+  if (!isManagedContentCategorySlug(item.categorySlug)) {
+    return "Invalid categorySlug";
+  }
+
+  if (!isCategorySlugAllowedForSection(item.section, item.categorySlug)) {
+    return "categorySlug is not allowed for section";
+  }
+
+  return null;
+}
+
+function findCurrentItem(
+  items: ManagedContentEntry[],
+  identity: {
+    categorySlug?: ManagedContentCategorySlug;
+    id?: string;
+    section?: ManagedContentSection;
+    storageId?: string;
+  },
+) {
+  if (identity.storageId) {
+    const item = items.find((entry) => entry.storageId === identity.storageId);
+
+    if (item) {
+      return item;
+    }
+  }
+
+  if (!identity.id) {
+    return undefined;
+  }
+
+  if (identity.section && identity.categorySlug) {
+    const item = items.find((entry) =>
+      entry.id === identity.id &&
+      entry.section === identity.section &&
+      entry.categorySlug === identity.categorySlug,
+    );
+
+    if (item) {
+      return item;
+    }
+  }
+
+  return items.find((entry) => entry.id === identity.id);
 }
 
 function isSameItem(left: ManagedContentEntry | undefined, right: ManagedContentEntry) {
@@ -88,15 +197,27 @@ function mergeBodiesFromCurrent(
   };
 }
 
-function getScopeKey(item: Pick<ManagedContentEntry, "section" | "categorySlug">) {
-  return `${item.section}::${item.categorySlug}`;
-}
-
 export async function GET(request: Request) {
+  const url = new URL(request.url);
+  const rawSection = url.searchParams.get("section");
+  const rawCategorySlug = url.searchParams.get("categorySlug");
   const section = parseSection(request.url) ?? undefined;
   const categorySlug = parseCategorySlug(request.url) ?? undefined;
   const itemId = parseItemId(request.url);
   const view = parseView(request.url);
+
+  if (rawSection && !section) {
+    return NextResponse.json({ error: "Invalid section" }, { status: 400 });
+  }
+
+  if (rawCategorySlug && !categorySlug) {
+    return NextResponse.json({ error: "Invalid categorySlug" }, { status: 400 });
+  }
+
+  if (section && categorySlug && !isCategorySlugAllowedForSection(section, categorySlug)) {
+    return NextResponse.json({ error: "categorySlug is not allowed for section" }, { status: 400 });
+  }
+
   const items = await readContentState(section, {
     categorySlug,
     includeBodies: view !== "list",
@@ -117,7 +238,6 @@ export async function GET(request: Request) {
 }
 
 function revalidateAdminPaths(item: Pick<ManagedContentEntry, "section" | "categorySlug" | "id">) {
-  revalidatePath("/admin");
   revalidatePath(`/admin/${item.section}`);
 
   if (item.section === "news") {
@@ -160,16 +280,25 @@ export async function POST(request: Request) {
     }
 
     const currentItems = await readContentState();
-    const currentMap = new Map(currentItems.map((item) => [item.id, item]));
-    const payloadScopes = new Set(payload.items.map((item) => getScopeKey(item)));
     const nextItems: ManagedContentEntry[] = [];
     for (const item of payload.items) {
+      const validationError = validateManagedContentItem(item);
+
+      if (validationError) {
+        return NextResponse.json({ error: validationError }, { status: 400 });
+      }
+
+      const currentItem = findCurrentItem(currentItems, {
+        categorySlug: item.categorySlug,
+        id: item.id,
+        section: item.section,
+        storageId: item.storageId,
+      });
       const normalizedItem = mergeBodiesFromCurrent(
         item,
-        currentMap.get(item.id),
+        currentItem,
         payload.preserveExistingBodies,
       );
-      const currentItem = currentMap.get(normalizedItem.id);
 
       if (isSameItem(currentItem, normalizedItem)) {
         nextItems.push(normalizedItem);
@@ -188,27 +317,7 @@ export async function POST(request: Request) {
       nextItems.push(savedItem);
     }
 
-    const nextItemIds = new Set(nextItems.map((item) => item.id));
-    const removedItems = currentItems.filter((item) =>
-      payloadScopes.has(getScopeKey(item)) && !nextItemIds.has(item.id),
-    );
-
-    await Promise.all(
-      removedItems.map((item) =>
-        deleteAuthoredContent({
-          categorySlug: item.categorySlug,
-          id: item.id,
-          section: item.section,
-          storageId: item.storageId,
-        }),
-      ),
-    );
-
     nextItems.forEach((item) => {
-      revalidateAdminPaths(item);
-      revalidatePublicPaths(item);
-    });
-    removedItems.forEach((item) => {
       revalidateAdminPaths(item);
       revalidatePublicPaths(item);
     });
@@ -231,16 +340,52 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: "item is required" }, { status: 400 });
   }
 
+  const validationError = validateManagedContentItem(item);
+
+  if (validationError) {
+    return NextResponse.json({ error: validationError }, { status: 400 });
+  }
+
   const currentItems = await readContentState();
-  const currentItem = currentItems.find(
-    (entry) => entry.id === (payload.currentId ?? item.id),
-  ) ?? currentItems.find((entry) => entry.id === item.id);
+  const currentItem = findCurrentItem(currentItems, {
+    categorySlug: item.categorySlug,
+    id: payload.currentId ?? item.id,
+    section: item.section,
+    storageId: item.storageId,
+  });
   const normalizedItem = mergeBodiesFromCurrent(
     item,
     currentItem,
     payload.preserveExistingBodies,
   );
   const savedItem = await saveAuthoredContent(normalizedItem);
+
+  if (payload.shiftSiblingsForNew && !currentItem) {
+    const siblingItems = currentItems.filter(
+      (entry) =>
+        entry.section === savedItem.section &&
+        entry.categorySlug === savedItem.categorySlug &&
+        entry.id !== savedItem.id,
+    );
+
+    await Promise.all(
+      siblingItems.map((entry) =>
+        updateAuthoredContentMeta({
+          categorySlug: entry.categorySlug,
+          id: entry.id,
+          section: entry.section,
+          storageId: entry.storageId,
+          updates: { sortOrder: entry.sortOrder + 1 },
+        }),
+      ),
+    );
+
+    siblingItems.forEach((entry) => {
+      revalidateAdminPaths(entry);
+      revalidatePublicPaths(entry);
+    });
+  }
+
   revalidateAdminPaths(savedItem);
   revalidatePublicPaths(savedItem);
 
@@ -250,23 +395,65 @@ export async function PUT(request: Request) {
 export async function PATCH(request: Request) {
   const payload = (await request.json()) as UpdateStatusRequest & { item?: ManagedContentEntry };
 
-  if (!payload.id || !payload.status) {
-    return NextResponse.json({ error: "id and status are required" }, { status: 400 });
-  }
+  if (payload.sortOrders) {
+    if (!Array.isArray(payload.sortOrders) || payload.sortOrders.length === 0) {
+      return NextResponse.json({ error: "sortOrders must be a non-empty array" }, { status: 400 });
+    }
 
-  const currentItem = payload.item ?? (await readContentState()).find((item) => item.id === payload.id);
+    const currentItems = await readContentState();
+    const missingUpdate = payload.sortOrders.find((update) => !findCurrentItem(currentItems, update));
 
-  if (currentItem) {
-    await updateAuthoredContentMeta({
-      categorySlug: currentItem.categorySlug,
-      id: currentItem.id,
-      section: currentItem.section,
-      storageId: currentItem.storageId,
-      updates: { status: payload.status },
+    if (missingUpdate) {
+      return NextResponse.json({ error: `Content item not found: ${missingUpdate.storageId ?? missingUpdate.id}` }, { status: 404 });
+    }
+
+    await Promise.all(
+      payload.sortOrders.map((update) => {
+        const currentItem = findCurrentItem(currentItems, update)!;
+
+        return updateAuthoredContentMeta({
+          categorySlug: currentItem.categorySlug,
+          id: currentItem.id,
+          section: currentItem.section,
+          storageId: currentItem.storageId,
+          updates: { sortOrder: update.sortOrder },
+        });
+      }),
+    );
+
+    payload.sortOrders.forEach((update) => {
+      const currentItem = findCurrentItem(currentItems, update)!;
+
+      revalidateAdminPaths(currentItem);
+      revalidatePublicPaths(currentItem);
     });
-    revalidateAdminPaths(currentItem);
-    revalidatePublicPaths(currentItem);
+
+    return NextResponse.json({ ok: true });
   }
+
+  if ((!payload.id && !payload.storageId) || !payload.status) {
+    return NextResponse.json({ error: "id or storageId and status are required" }, { status: 400 });
+  }
+
+  if (!isManagedContentStatus(payload.status)) {
+    return NextResponse.json({ error: "Invalid status" }, { status: 400 });
+  }
+
+  const currentItem = findCurrentItem(await readContentState(), payload);
+
+  if (!currentItem) {
+    return NextResponse.json({ error: "Content item not found" }, { status: 404 });
+  }
+
+  await updateAuthoredContentMeta({
+    categorySlug: currentItem.categorySlug,
+    id: currentItem.id,
+    section: currentItem.section,
+    storageId: currentItem.storageId,
+    updates: { status: payload.status },
+  });
+  revalidateAdminPaths(currentItem);
+  revalidatePublicPaths(currentItem);
 
   return NextResponse.json({ ok: true });
 }
@@ -274,22 +461,24 @@ export async function PATCH(request: Request) {
 export async function DELETE(request: Request) {
   const payload = (await request.json()) as DeleteStateRequest & { item?: ManagedContentEntry };
 
-  if (!payload.id) {
-    return NextResponse.json({ error: "id is required" }, { status: 400 });
+  if (!payload.id && !payload.storageId) {
+    return NextResponse.json({ error: "id or storageId is required" }, { status: 400 });
   }
 
-  const currentItem = payload.item ?? (await readContentState()).find((item) => item.id === payload.id);
+  const currentItem = findCurrentItem(await readContentState(), payload);
 
-  if (currentItem) {
-    await deleteAuthoredContent({
-      categorySlug: currentItem.categorySlug,
-      id: currentItem.id,
-      section: currentItem.section,
-      storageId: currentItem.storageId,
-    });
-    revalidateAdminPaths(currentItem);
-    revalidatePublicPaths(currentItem);
+  if (!currentItem) {
+    return NextResponse.json({ error: "Content item not found" }, { status: 404 });
   }
+
+  await deleteAuthoredContent({
+    categorySlug: currentItem.categorySlug,
+    id: currentItem.id,
+    section: currentItem.section,
+    storageId: currentItem.storageId,
+  });
+  revalidateAdminPaths(currentItem);
+  revalidatePublicPaths(currentItem);
 
   return NextResponse.json({ ok: true });
 }

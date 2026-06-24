@@ -78,17 +78,21 @@ export default function NewsListPage({
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <section className="flex w-full justify-center">
-        <div className="flex w-full max-w-[1200px] flex-col gap-20">
-        {/* 뉴스 카드 목록 */}
-        <div className="flex min-w-0 w-full flex-col gap-10">
-          {items.length > 0 ? (
-            items.map((item, index) => (
-              <NewsListCard key={`${item.title}-${index}`} {...item} />
-            ))
-          ) : (
-            <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
-              <p className="m-0 type-body-md text-mute">{resolvedEmptyMessage}</p>
-            </div>
+        <div className="flex w-full max-w-[1200px] flex-col gap-10">
+          <header className="flex w-full items-center">
+            <h1 className="m-0 type-h1 text-fg">{title}</h1>
+          </header>
+
+          {/* 뉴스 카드 목록 */}
+          <div className="flex min-w-0 w-full flex-col gap-10">
+            {items.length > 0 ? (
+              items.map((item, index) => (
+                <NewsListCard key={`${item.title}-${index}`} {...item} />
+              ))
+            ) : (
+              <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
+                <p className="m-0 type-body-md text-mute">{resolvedEmptyMessage}</p>
+              </div>
             )}
           </div>
         </div>

@@ -28,6 +28,10 @@
     "ko": "",
     "ja": "SaaSの終焉か、進化か 〜AIエージェント時代にSaaS企業が取るべき戦略〜"
   },
+  "visibleLocales": [
+    "en",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000127/en.html",

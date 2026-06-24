@@ -11,7 +11,6 @@ export type AdminNavGroup = {
 };
 
 export const adminPrimaryNavItems: AdminNavItem[] = [
-  { href: "/admin", label: "Dashboard" },
   { href: "/admin/news", label: "News" },
 ];
 

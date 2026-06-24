@@ -6,10 +6,12 @@ import type { DocsDetailPageProps } from "../documentation/DocumentationDetailPa
 import { useManagedContents } from "@/features/content/clientStore";
 import {
   formatPublicDate,
+  getAdjacentContentLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
+  getNewsFormatLabel,
   getPublicDetailHref,
-  getWriterLabel,
+  getResolvedContentLocale,
   isPublishedContentAccessible,
   type ManagedContentEntry,
 } from "@/features/content/data";
@@ -42,26 +44,27 @@ export default function NewsDetailClientPage({
 
   const previousItem = currentIndex > 0 ? items[currentIndex - 1] : null;
   const nextItem = currentIndex < items.length - 1 ? items[currentIndex + 1] : null;
+  const contentLocale = getResolvedContentLocale(currentItem, locale);
 
   const relatedItems = [
     previousItem
       ? {
-          category: "Previous Post",
+          category: getAdjacentContentLabel("previous", locale),
           href: previousItem.contentType === "outlink"
             ? previousItem.externalUrl
             : getPublicDetailHref("news", locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
-          title: getLocalizedContent(previousItem.title, locale),
+          title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
         }
       : null,
     nextItem
       ? {
-          category: "Next post",
+          category: getAdjacentContentLabel("next", locale),
           href: nextItem.contentType === "outlink"
             ? nextItem.externalUrl
             : getPublicDetailHref("news", locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
-          title: getLocalizedContent(nextItem.title, locale),
+          title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
         }
       : null,
   ].filter((item): item is NonNullable<typeof item> => !!item);
@@ -69,15 +72,15 @@ export default function NewsDetailClientPage({
   return (
     <NewsDetailPage
       {...fallbackProps}
-      bodyHtml={fallbackProps.bodyHtml}
+      bodyHtml={getLocalizedContent(currentItem.bodyHtml, contentLocale) || fallbackProps.bodyHtml}
       category="News"
       contentListItems={relatedItems}
       date={formatPublicDate(locale, currentItem.dateIso)}
       hideHeroImage={currentItem.hideHeroImage}
-      heroImageAlt={getLocalizedContent(currentItem.title, locale)}
+      heroImageAlt={getLocalizedContent(currentItem.title, contentLocale)}
       heroImageSrc={currentItem.imageSrc}
-      title={getLocalizedContent(currentItem.title, locale)}
-      writer={getWriterLabel(currentItem)}
+      title={getLocalizedContent(currentItem.title, contentLocale)}
+      writer={getNewsFormatLabel(currentItem, locale)}
     />
   );
 }

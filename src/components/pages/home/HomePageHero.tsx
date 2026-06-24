@@ -1,5 +1,4 @@
 import Button from "../../common/Button";
-import { getLocalePath, type Locale } from "../../../constants/i18n";
 
 type HomePageHeroProps = {
   ctaLabel: string;
@@ -29,7 +28,7 @@ export default function HomePageHero({
                 </h2>
               </div>
 
-              <a href={getLocalePath(locale as Locale, "/company/contact-us")}>
+              <a href="https://app.querypie.com/" rel="noreferrer noopener" target="_blank">
                 <Button arrow={false} style="full" variant="secondary">
                   {ctaLabel}
                 </Button>

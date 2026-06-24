@@ -5,12 +5,15 @@ import { getLocalePath, isLocale } from "../../../../../constants/i18n";
 import DocsDetailClientPage from "../../../../../components/pages/documentation/DocumentationDetailClientPage";
 import type { DocsDetailPageProps } from "../../../../../components/pages/documentation/DocumentationDetailPage";
 import { getContactPageCopy } from "@/features/contact/copy";
+import { getDocumentationPageCopy } from "@/features/content/pageCopy";
 import { docsCategoryConfigs, getCategoryHref } from "@/features/content/config";
 import {
   formatPublicDate,
+  getAdjacentContentLabel,
   getManagedCategoryLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
+  getResolvedContentLocale,
   isPublishedContentAccessible,
   getPublicDetailHref,
 } from "@/features/content/data";
@@ -44,12 +47,15 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
   }
 
   const isContentUnlocked = hasUnlockedContentAccess(
-    cookieStore.get(getContentUnlockCookieName(currentEntry.id))?.value,
+    cookieStore.get(getContentUnlockCookieName(currentEntry.id, "documentation"))?.value ??
+      cookieStore.get(getContentUnlockCookieName(currentEntry.id))?.value,
   );
 
   if (currentEntry.contentType === "outlink") {
     redirect(currentEntry.externalUrl);
   }
+
+  const contentLocale = getResolvedContentLocale(currentEntry, locale);
 
   const categoryItems = accessibleDocsItems.filter((item) => item.categorySlug === currentEntry.categorySlug);
   const categoryIndex = categoryItems.findIndex((item) => item.id === resolvedSlug);
@@ -60,28 +66,29 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
   const relatedItems = [
     previousItem
       ? {
-          category: "Previous Post",
+          category: getAdjacentContentLabel("previous", locale),
           href: getPublicDetailHref("documentation", locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
-          title: getLocalizedContent(previousItem.title, locale),
+          title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
         }
       : null,
     nextItem
       ? {
-          category: "Next post",
+          category: getAdjacentContentLabel("next", locale),
           href: getPublicDetailHref("documentation", locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
-          title: getLocalizedContent(nextItem.title, locale),
+          title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
         }
       : null,
   ].filter((item): item is NonNullable<typeof item> => !!item);
 
   const isGateActive = isContentGatingEnabled(currentEntry) && !isContentUnlocked;
-  const localizedBodyHtml = getLocalizedContent(currentEntry.bodyHtml, locale);
+  const localizedBodyHtml = getLocalizedContent(currentEntry.bodyHtml, contentLocale);
   const previewBodyHtml =
     isGateActive
       ? buildContentPreviewHtml(localizedBodyHtml, currentEntry.gatingLevel)
       : localizedBodyHtml;
+  const copy = getDocumentationPageCopy(locale);
 
   return (
     <DocsDetailClientPage
@@ -101,9 +108,10 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
             ? getLocalePath(locale, `/features/documentation/${resolvedSlug}/download`)
             : undefined,
         hideHeroImage: currentEntry.hideHeroImage,
-        heroImageAlt: getLocalizedContent(currentEntry.title, locale),
+        heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),
         heroImageSrc: currentEntry.imageSrc,
-        title: getLocalizedContent(currentEntry.title, locale),
+        parentLabel: copy.title,
+        title: getLocalizedContent(currentEntry.title, contentLocale),
         writer: currentEntry.authorRole
           ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
           : currentEntry.authorName,
@@ -129,7 +137,7 @@ export async function generateMetadata({ params }: DocsDetailRouteProps): Promis
   }
 
   return {
-    title: getLocalizedContent(currentEntry.title, locale),
+    title: getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale)),
     alternates: {
       canonical: getLocalePath(locale, `/features/documentation/${resolvedSlug}`),
     },

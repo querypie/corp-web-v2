@@ -3,7 +3,7 @@ import "server-only";
 import { existsSync, promises as fs } from "fs";
 import path from "path";
 import { locales, type Locale } from "@/constants/i18n";
-import type { ManagedContentCategorySlug, ManagedContentEntry, ManagedContentSection } from "./data";
+import { getDefaultVisibleLocales, type ManagedContentCategorySlug, type ManagedContentEntry, type ManagedContentSection } from "./data";
 
 type AuthoredLocaleRecord = {
   htmlPath: string;
@@ -32,6 +32,7 @@ type AuthoredContentMeta = {
   storageId: string;
   summary: Record<Locale, string>;
   title: Record<Locale, string>;
+  visibleLocales?: Locale[];
   locales: Partial<Record<Locale, AuthoredLocaleRecord>>;
 };
 
@@ -60,6 +61,7 @@ type SaveAuthoredContentInput = Pick<
   | "storageId"
   | "summary"
   | "title"
+  | "visibleLocales"
 >;
 
 const contentRoot = path.join(process.cwd(), "src", "content");
@@ -72,6 +74,8 @@ let authoredEntriesCache:
     }
   | null = null;
 let authoredCacheVersion = 0;
+let storageIdCreationQueue = Promise.resolve();
+const reservedStorageIds = new Set<string>();
 
 function getAuthoredSectionRoot(section: ManagedContentSection) {
   if (section === "documentation") {
@@ -123,6 +127,10 @@ async function writeFileAtomic(filePath: string, contents: string) {
   await fs.rename(tempPath, filePath);
 }
 
+async function removeFileIfExists(filePath: string) {
+  await fs.rm(filePath, { force: true });
+}
+
 function invalidateAuthoredCaches() {
   authoredMetaFilesCache = null;
   authoredMetaCache = null;
@@ -141,14 +149,38 @@ async function listStorageIds() {
     .filter((storageId): storageId is string => /^cnt_\d+$/.test(storageId));
 }
 
-async function createNextStorageId() {
+async function createNextStorageIdUnlocked() {
   const storageIds = await listStorageIds();
   const numericIds = storageIds
     .map((storageId) => Number(storageId.replace(/^cnt_/, "")))
     .filter((value) => Number.isFinite(value));
-  const nextValue = (numericIds.length ? Math.max(...numericIds) : 0) + 1;
+  let nextValue = (numericIds.length ? Math.max(...numericIds) : 0) + 1;
 
-  return `cnt_${String(nextValue).padStart(6, "0")}`;
+  let nextStorageId = `cnt_${String(nextValue).padStart(6, "0")}`;
+
+  while (storageIds.includes(nextStorageId) || reservedStorageIds.has(nextStorageId)) {
+    nextValue += 1;
+    nextStorageId = `cnt_${String(nextValue).padStart(6, "0")}`;
+  }
+
+  reservedStorageIds.add(nextStorageId);
+  return nextStorageId;
+}
+
+async function createNextStorageId() {
+  const previousQueue = storageIdCreationQueue;
+  let releaseQueue = () => {};
+  storageIdCreationQueue = new Promise<void>((resolve) => {
+    releaseQueue = resolve;
+  });
+
+  await previousQueue;
+
+  try {
+    return await createNextStorageIdUnlocked();
+  } finally {
+    releaseQueue();
+  }
 }
 
 async function readAuthoredMetaFiles() {
@@ -210,6 +242,20 @@ async function readAllAuthoredMetas() {
   return metas;
 }
 
+async function findAuthoredMetaPathByStorageId(storageId: string) {
+  const metaFiles = await readAuthoredMetaFiles();
+
+  for (const metaPath of metaFiles) {
+    const meta = await readMetaFile(metaPath);
+
+    if (meta.storageId === storageId) {
+      return metaPath;
+    }
+  }
+
+  return null;
+}
+
 async function findAuthoredEntryDir({
   categorySlug,
   id,
@@ -222,7 +268,11 @@ async function findAuthoredEntryDir({
   storageId?: string;
 }) {
   if (storageId) {
-    return getEntryDir(section, categorySlug, storageId);
+    const metaPath = await findAuthoredMetaPathByStorageId(storageId);
+
+    if (metaPath) {
+      return path.dirname(metaPath);
+    }
   }
 
   const metas = await readAllAuthoredMetas();
@@ -281,6 +331,8 @@ export async function readAuthoredManagedContents(options?: { includeBodies?: bo
       }
     }
 
+    const title = normalizeLocalizedRecord(meta.title);
+
     entries.push({
       authorName: meta.authorName,
       authorRole: meta.authorRole,
@@ -304,7 +356,8 @@ export async function readAuthoredManagedContents(options?: { includeBodies?: bo
       status: meta.status,
       storageId: meta.storageId,
       summary: normalizeLocalizedRecord(meta.summary),
-      title: normalizeLocalizedRecord(meta.title),
+      title,
+      visibleLocales: meta.visibleLocales ?? getDefaultVisibleLocales(title),
     });
   }
 
@@ -320,33 +373,51 @@ export async function saveAuthoredContent(
   input: SaveAuthoredContentInput,
 ) {
   const storageId = input.storageId || (await createNextStorageId());
+  const currentEntryDir = input.storageId
+    ? await findAuthoredEntryDir({
+        categorySlug: input.categorySlug,
+        id: input.id,
+        section: input.section,
+        storageId: input.storageId,
+      })
+    : null;
   const entryDir = getEntryDir(input.section, input.categorySlug, storageId);
 
-  await ensureDir(entryDir);
+  if (currentEntryDir && currentEntryDir !== entryDir) {
+    await ensureDir(path.dirname(entryDir));
+    await fs.rm(entryDir, { force: true, recursive: true });
+    await fs.rename(currentEntryDir, entryDir);
+  } else {
+    await ensureDir(entryDir);
+  }
 
   const localesMap: Partial<Record<Locale, AuthoredLocaleRecord>> = {};
 
   for (const locale of locales) {
     const richText = input.bodyRichText[locale] ?? "";
     const html = input.bodyHtml[locale] ?? "";
+    const jsonPath = path.join(entryDir, `${locale}.tiptap.json`);
+    const htmlPath = path.join(entryDir, `${locale}.html`);
 
     if (input.contentType === "outlink") {
+      await Promise.all([removeFileIfExists(jsonPath), removeFileIfExists(htmlPath)]);
       continue;
     }
 
     if (!richText.trim() && !html.trim()) {
+      await Promise.all([removeFileIfExists(jsonPath), removeFileIfExists(htmlPath)]);
       continue;
     }
 
     const jsonRelativePath = toPosix(
-      path.relative(process.cwd(), path.join(entryDir, `${locale}.tiptap.json`)),
+      path.relative(process.cwd(), jsonPath),
     );
     const htmlRelativePath = toPosix(
-      path.relative(process.cwd(), path.join(entryDir, `${locale}.html`)),
+      path.relative(process.cwd(), htmlPath),
     );
 
-    await writeFileAtomic(path.join(entryDir, `${locale}.tiptap.json`), richText);
-    await writeFileAtomic(path.join(entryDir, `${locale}.html`), html);
+    await writeFileAtomic(jsonPath, richText);
+    await writeFileAtomic(htmlPath, html);
 
     localesMap[locale] = {
       htmlPath: htmlRelativePath,
@@ -376,6 +447,7 @@ export async function saveAuthoredContent(
     storageId,
     summary: normalizeLocalizedRecord(input.summary),
     title: normalizeLocalizedRecord(input.title),
+    visibleLocales: input.visibleLocales,
     locales: localesMap,
   };
 

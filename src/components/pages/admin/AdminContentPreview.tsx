@@ -30,7 +30,7 @@ export default function AdminContentPreview({
   url = "#",
   writer = "",
 }: AdminContentPreviewProps) {
-  if (section === "news") {
+  if (section === "news" && !bodyHtml.trim()) {
     return (
       <div className="mx-auto w-full max-w-[680px] py-5">
         <NewsListCard

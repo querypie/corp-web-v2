@@ -5,9 +5,12 @@ import NewsDetailClientPage from "../../../../../components/pages/news/NewsDetai
 import type { DocsDetailPageProps } from "../../../../../components/pages/documentation/DocumentationDetailPage";
 import {
   formatPublicDate,
+  getAdjacentContentLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
+  getNewsFormatLabel,
   getPublicDetailHref,
+  getResolvedContentLocale,
   isPublishedContentAccessible,
 } from "@/features/content/data";
 import { readContentItem, readContentState } from "@/features/content/contentState.server";
@@ -37,28 +40,30 @@ export default async function NewsDetailRoute({ params }: Props) {
     redirect(currentEntry.externalUrl);
   }
 
+  const contentLocale = getResolvedContentLocale(currentEntry, locale);
+
   const previousItem = currentIndex > 0 ? accessibleNewsItems[currentIndex - 1] : null;
   const nextItem = currentIndex < accessibleNewsItems.length - 1 ? accessibleNewsItems[currentIndex + 1] : null;
 
   const relatedItems = [
     previousItem
       ? {
-          category: "Previous Post",
+          category: getAdjacentContentLabel("previous", locale),
           href: previousItem.contentType === "outlink"
             ? previousItem.externalUrl
             : getPublicDetailHref("news", locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
-          title: getLocalizedContent(previousItem.title, locale),
+          title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
         }
       : null,
     nextItem
       ? {
-          category: "Next post",
+          category: getAdjacentContentLabel("next", locale),
           href: nextItem.contentType === "outlink"
             ? nextItem.externalUrl
             : getPublicDetailHref("news", locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
-          title: getLocalizedContent(nextItem.title, locale),
+          title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
         }
       : null,
   ].filter((item): item is NonNullable<typeof item> => !!item);
@@ -68,7 +73,7 @@ export default async function NewsDetailRoute({ params }: Props) {
       fallbackProps={{
         docsHref: getLocalePath(locale, "/company/news"),
         slug: decodedSlug,
-        bodyHtml: getLocalizedContent(currentEntry.bodyHtml, locale),
+        bodyHtml: getLocalizedContent(currentEntry.bodyHtml, contentLocale),
         category: "News",
         contentListDescription: "",
         contentListItems: relatedItems,
@@ -76,12 +81,10 @@ export default async function NewsDetailRoute({ params }: Props) {
         contentListTitle: "News",
         date: formatPublicDate(locale, currentEntry.dateIso),
         hideHeroImage: currentEntry.hideHeroImage,
-        heroImageAlt: getLocalizedContent(currentEntry.title, locale),
+        heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),
         heroImageSrc: currentEntry.imageSrc,
-        title: getLocalizedContent(currentEntry.title, locale),
-        writer: currentEntry.authorRole
-          ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
-          : currentEntry.authorName,
+        title: getLocalizedContent(currentEntry.title, contentLocale),
+        writer: getNewsFormatLabel(currentEntry, locale),
       } satisfies DocsDetailPageProps}
       initialItems={accessibleNewsItems}
       locale={locale}
@@ -103,7 +106,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
 
   return {
-    title: getLocalizedContent(currentEntry.title, locale),
+    title: getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale)),
     alternates: {
       canonical: getPublicDetailHref("news", locale, decodedSlug),
     },

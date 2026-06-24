@@ -12,6 +12,7 @@ export type ManagedContentStatus = "hidden" | "published";
 export type ManagedContentCategorySlug = Exclude<DemoCategorySlug | DocsCategorySlug, "all"> | NewsCategorySlug;
 export type ManagedContentType = "content" | "outlink";
 export type ContentGatingLevel = "none" | "10" | "30" | "50";
+export type NewsFormat = "Press Release" | "Official Announcement" | "Media Coverage";
 export type LocalizedContent = Record<Locale, string>;
 
 export type ManagedContentEntry = {
@@ -38,6 +39,7 @@ export type ManagedContentEntry = {
   status: ManagedContentStatus;
   summary: LocalizedContent;
   title: LocalizedContent;
+  visibleLocales: Locale[];
 };
 
 export function stripManagedContentBodies(item: ManagedContentEntry): ManagedContentEntry {
@@ -52,20 +54,53 @@ export const MANAGED_CONTENT_STORAGE_KEY = "querypie-admin-managed-content";
 export const MANAGED_CONTENT_STORE_EVENT = "querypie:managed-content:changed";
 export const CONTENT_DOWNLOAD_BUTTON_LABEL = "Download File";
 export const CONTENT_UNLOCK_BUTTON_LABEL = "Unlock Content";
+export const NEWS_FORMATS: NewsFormat[] = [
+  "Press Release",
+  "Official Announcement",
+  "Media Coverage",
+];
+export const DEFAULT_NEWS_FORMAT: NewsFormat = "Media Coverage";
+const ADJACENT_CONTENT_LABELS: Record<"next" | "previous", Record<Locale, string>> = {
+  next: {
+    en: "Next post",
+    ja: "次の記事",
+    ko: "다음 글",
+  },
+  previous: {
+    en: "Previous Post",
+    ja: "前の記事",
+    ko: "이전 글",
+  },
+};
+const NEWS_FORMAT_LABELS: Record<NewsFormat, Record<Locale, string>> = {
+  "Media Coverage": {
+    en: "Media Coverage",
+    ja: "メディア掲載",
+    ko: "미디어 보도",
+  },
+  "Official Announcement": {
+    en: "Official Announcement",
+    ja: "公式発表",
+    ko: "공식 발표",
+  },
+  "Press Release": {
+    en: "Press Release",
+    ja: "プレスリリース",
+    ko: "보도자료",
+  },
+};
 
 export function createEmptyManagedContentDraft(
   section: ManagedContentSection,
   categorySlug: ManagedContentCategorySlug,
 ): ManagedContentEntry {
-  const useRichEditor = section !== "news";
-
   return {
-    authorName: "",
+    authorName: section === "news" ? DEFAULT_NEWS_FORMAT : "",
     authorRole: "",
-    bodyHtml: createLocalizedContent(useRichEditor ? createEmptyTiptapHtml() : ""),
-    bodyRichText: createLocalizedContent(useRichEditor ? createEmptyTiptapJson() : ""),
+    bodyHtml: createLocalizedContent(createEmptyTiptapHtml()),
+    bodyRichText: createLocalizedContent(createEmptyTiptapJson()),
     categorySlug,
-    contentType: section === "news" ? "outlink" : "content",
+    contentType: "content",
     dateIso: "",
     downloadCoverImageSrc: "",
     downloadPdfFileName: "",
@@ -82,6 +117,7 @@ export function createEmptyManagedContentDraft(
     status: "hidden",
     summary: createLocalizedContent(),
     title: createLocalizedContent(),
+    visibleLocales: [],
   };
 }
 
@@ -117,16 +153,33 @@ export function hasAnyLocalizedTitle(content: LocalizedContent) {
 }
 
 export function isPublishedContentVisible(
-  item: Pick<ManagedContentEntry, "status" | "title">,
+  item: Pick<ManagedContentEntry, "status" | "visibleLocales">,
   locale: Locale,
 ) {
-  return item.status === "published" && hasLocalizedTitle(item.title, locale);
+  return item.status === "published" && item.visibleLocales.includes(locale);
 }
 
 export function isPublishedContentAccessible(
-  item: Pick<ManagedContentEntry, "status" | "title">,
+  item: Pick<ManagedContentEntry, "status" | "visibleLocales">,
 ) {
-  return item.status === "published" && hasAnyLocalizedTitle(item.title);
+  return item.status === "published" && item.visibleLocales.length > 0;
+}
+
+export function getDefaultVisibleLocales(title: LocalizedContent) {
+  return (["en", "ko", "ja"] as const).filter((locale) => title[locale]?.trim());
+}
+
+export function getResolvedContentLocale(
+  item: Pick<ManagedContentEntry, "visibleLocales">,
+  locale: Locale,
+) {
+  if (item.visibleLocales.includes(locale)) {
+    return locale;
+  }
+
+  return (["en", "ko", "ja"] as const).find((fallbackLocale) =>
+    item.visibleLocales.includes(fallbackLocale),
+  ) ?? locale;
 }
 
 export function getContentThumbnailSrc(imageSrc: string) {
@@ -172,6 +225,28 @@ export function ensureUniqueSlug(id: string, items: ManagedContentEntry[], curre
   }
 
   return nextId;
+}
+
+export function resolveManagedContentSlug({
+  currentId,
+  enteredSlug,
+  items,
+  title,
+}: {
+  currentId?: string;
+  enteredSlug: string;
+  items: ManagedContentEntry[];
+  title: LocalizedContent;
+}) {
+  const trimmedSlug = enteredSlug.trim();
+  const baseSlug =
+    trimmedSlug && trimmedSlug !== "new"
+      ? slugifyTitle(trimmedSlug)
+      : currentId
+        ? currentId
+        : slugifyTitle(title.en || title.ko || title.ja);
+
+  return ensureUniqueSlug(baseSlug, items, currentId);
 }
 
 export function sortManagedContents(items: ManagedContentEntry[]) {
@@ -220,6 +295,16 @@ export function getWriterLabel(item: Pick<ManagedContentEntry, "authorName" | "a
     : item.authorName.trim();
 }
 
+export function getNewsFormatLabel(item: Pick<ManagedContentEntry, "authorName">, locale?: Locale) {
+  const value = item.authorName.trim();
+  const format = NEWS_FORMATS.includes(value as NewsFormat) ? (value as NewsFormat) : DEFAULT_NEWS_FORMAT;
+  return locale ? NEWS_FORMAT_LABELS[format][locale] : format;
+}
+
+export function getAdjacentContentLabel(direction: "next" | "previous", locale: Locale) {
+  return ADJACENT_CONTENT_LABELS[direction][locale];
+}
+
 export function getDownloadPreviewProps(
   item: Pick<
     ManagedContentEntry,
@@ -232,6 +317,25 @@ export function getDownloadPreviewProps(
     downloadHref: shouldShow ? item.downloadPdfSrc || "#" : undefined,
     downloadLabel: CONTENT_DOWNLOAD_BUTTON_LABEL,
   };
+}
+
+export function isDownloadableContentPdfSrc(
+  section: ManagedContentSection,
+  src: string,
+) {
+  const trimmedSrc = src.trim();
+  const expectedPrefix =
+    section === "documentation"
+      ? "/documentation/"
+      : section === "demo"
+        ? "/demo/"
+        : "";
+
+  return Boolean(
+    expectedPrefix &&
+    trimmedSrc.startsWith(expectedPrefix) &&
+    trimmedSrc.toLowerCase().endsWith(".pdf"),
+  );
 }
 
 export function getManagedCategoryLabel(

@@ -1,6 +1,6 @@
 # corp-web-v2 구현 현황
 
-**최종 업데이트**: 2026-04-15 (배포 인프라 반영)
+**최종 업데이트**: 2026-06-24 (Admin CMS 콘텐츠 저장 구조 반영)
 
 corp-web-v2의 현재 구현 상태를 영역별로 기술한다.
 
@@ -89,9 +89,9 @@ src/
 | `/admin/news` | ✅ | 뉴스 목록 |
 | `/admin/news/new` | ✅ | 새 뉴스 작성 |
 | `/admin/news/[slug]` | ✅ | 뉴스 편집 |
-| Blog 관리 | ❌ | 미구현 |
-| Whitepaper 관리 | ❌ | 미구현 |
-| Webinar 관리 | ❌ | 미구현 |
+| Blog 관리 | ✅ | Documentation Blogs 카테고리 |
+| Whitepaper 관리 | ✅ | Documentation White Papers 카테고리 |
+| Webinar 관리 | ✅ | Demo Webinars 카테고리 |
 
 ---
 
@@ -125,6 +125,10 @@ data.ts                 ← 콘텐츠 유틸 / 필터링 / 경로 생성
 Page Components         ← 렌더링
 ```
 
+관리형 콘텐츠의 물리 저장 단위는 `cnt_xxxxxx` 디렉토리이며, `meta.json`의 `storageId`가 영구 식별자다. 공개 URL slug인 `id`, `section`, `categorySlug`는 변경될 수 있으므로 Admin 변경 API는 `storageId`를 우선 사용하고, `section/categorySlug/id`는 호환용 보조 식별자로만 사용한다.
+
+저장 시 `section/categorySlug`가 바뀌면 기존 `storageId` 디렉토리를 새 위치로 이동한다. 본문이 비어 있거나 `contentType`이 `outlink`로 바뀐 locale은 기존 `*.html`, `*.tiptap.json` 파일을 제거해 오래된 본문이 다시 노출되지 않게 한다. 신규 `storageId` 생성은 프로세스 내 예약 큐로 같은 번호 중복 생성을 줄인다.
+
 콘텐츠 게이팅(`gating.ts`)으로 다운로드 전 리드폼 제출 요구 가능.
 
 ---
@@ -136,9 +140,8 @@ Page Components         ← 렌더링
 | Community License 신청/발급 | 🔴 최우선 | corp-web-app 대체 필수 |
 | 리드/폼 연동 (Salesforce, Slack, Google Sheets) | 🔴 필수 | |
 | SEO 서버 영속화 | 🟡 | localStorage → 파일 저장 전환 필요 |
-| Blog / Whitepaper / Webinar Admin | 🟡 | CMS 완성 계획 참고 |
 | Stage→Production 릴리즈 워크플로우 | 🟡 | CMS 완성 계획 참고 |
-| 자동화 테스트 | 🟠 | 테스트 파일 없음 |
+| 자동화 테스트 확대 | 🟠 | 핵심 API/콘텐츠 저장 테스트는 구현됨. UI E2E 보강 필요 |
 
 ---
 

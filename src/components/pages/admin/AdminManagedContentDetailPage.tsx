@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import AdminHeader from "../../layout/admin/AdminHeader";
 import Button from "../../common/Button";
 import Input from "../../common/Input";
 import LoadingText from "../../common/LoadingText";
@@ -12,34 +11,50 @@ import TabGroup from "../../common/TabGroup";
 import Textarea from "../../common/Textarea";
 import TiptapEditor from "../../common/TiptapEditor";
 import Tooltip from "../../common/Tooltip";
-import AdminContentPreview from "./AdminContentPreview";
+import { PreviewModal } from "./AdminManagedContentListPage";
 import { useAdminNavigationGuard } from "../../layout/admin/AdminNavigationGuard";
 import {
   upsertManagedContent,
   useManagedContents,
 } from "@/features/content/clientStore";
+import type { Locale } from "@/constants/i18n";
 import {
   createEmptyManagedContentDraft,
-  ensureUniqueSlug,
-  formatPublicDate,
+  DEFAULT_NEWS_FORMAT,
   getAdminCategoryHref,
   getContentThumbnailSrc,
-  getDownloadPreviewProps,
-  getManagedCategoryLabel,
   getLocalizedContent,
-  getWriterLabel,
+  getNewsFormatLabel,
   hasAnyLocalizedTitle,
-  slugifyTitle,
+  isDownloadableContentPdfSrc,
+  NEWS_FORMATS,
+  resolveManagedContentSlug,
   type ContentGatingLevel,
   type ManagedContentCategorySlug,
   type ManagedContentEntry,
   type ManagedContentSection,
   type ManagedContentType,
+  type NewsFormat,
 } from "@/features/content/data";
+import {
+  hasTranslatableBodyText,
+  localeDisplayNames,
+  type TranslationErrorCode,
+} from "@/features/content/translation/tiptap";
 
 type DialogState =
   | { type: "cancel" }
-  | { description: string; highlightedLines?: string[]; title: string; type: "alert" };
+  | { description: string; highlightedLines?: string[]; title: string; type: "alert" }
+  | { type: "translate-confirm" }
+  | { sourceLocale: Locale; type: "translate-loading" }
+  | {
+      canRetry: boolean;
+      code: TranslationErrorCode;
+      description: string;
+      detail?: string;
+      title: string;
+      type: "translate-error";
+    };
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -57,11 +72,95 @@ const CONTENT_GATING_OPTIONS: Array<{ label: string; value: ContentGatingLevel }
   { label: "Gating 50%", value: "50" },
 ];
 
+const NEWS_FORMAT_LABELS: Record<NewsFormat, Record<Locale, string>> = {
+  "Media Coverage": {
+    en: "Media Coverage",
+    ja: "メディア掲載",
+    ko: "미디어 보도",
+  },
+  "Official Announcement": {
+    en: "Official Announcement",
+    ja: "公式発表",
+    ko: "공식 발표",
+  },
+  "Press Release": {
+    en: "Press Release",
+    ja: "プレスリリース",
+    ko: "보도자료",
+  },
+};
+
+function getNewsFormatOptions(locale: Locale): Array<{ label: string; value: NewsFormat }> {
+  return NEWS_FORMATS.map((format) => ({
+    label: NEWS_FORMAT_LABELS[format][locale],
+    value: format,
+  }));
+}
+
+const TRANSLATION_ERROR_COPY: Record<TranslationErrorCode, { canRetry: boolean; message: string }> = {
+  CONFIGURATION_ERROR: {
+    canRetry: false,
+    message: "번역 API 설정이 없습니다. 관리자에게 OPENAI_API_KEY 설정을 확인해 달라고 요청하세요.",
+  },
+  CONTENT_TOO_LONG: {
+    canRetry: false,
+    message: "본문이 너무 길어 한 번에 번역할 수 없습니다. 내용을 나누어 다시 시도하세요.",
+  },
+  EMPTY_CONTENT: {
+    canRetry: false,
+    message: "번역할 제목, 요약, 본문이 없습니다.",
+  },
+  INVALID_RESPONSE: {
+    canRetry: true,
+    message: "번역 결과 형식이 올바르지 않아 적용하지 못했습니다.",
+  },
+  NETWORK_ERROR: {
+    canRetry: true,
+    message: "서버에 연결하지 못했습니다. 네트워크 상태를 확인한 뒤 다시 시도하세요.",
+  },
+  PROVIDER_ERROR: {
+    canRetry: true,
+    message: "번역 서버에서 오류가 발생했습니다. 잠시 후 다시 시도하세요.",
+  },
+  RATE_LIMITED: {
+    canRetry: true,
+    message: "현재 번역 요청이 많아 처리하지 못했습니다. 잠시 후 다시 시도하세요.",
+  },
+  REQUEST_ABORTED: {
+    canRetry: true,
+    message: "번역이 취소되었습니다.",
+  },
+  UNAUTHORIZED: {
+    canRetry: false,
+    message: "번역 권한이 없습니다. 다시 로그인한 뒤 시도하세요.",
+  },
+  UNKNOWN: {
+    canRetry: true,
+    message: "알 수 없는 오류로 번역하지 못했습니다. 잠시 후 다시 시도하세요.",
+  },
+};
+
 function getEditingLocalizedValue(
   content: { en: string; ja: string; ko: string },
-  locale: "en" | "ko" | "ja",
+  locale: Locale,
 ) {
   return content[locale] ?? "";
+}
+
+function getLocaleLabel(locale: Locale) {
+  return localeDisplayNames[locale];
+}
+
+function hasLocaleTranslationSource(form: ManagedContentEntry, locale: Locale, includeBody: boolean) {
+  return Boolean(
+    form.title[locale]?.trim() ||
+    form.summary[locale]?.trim() ||
+    (includeBody && hasTranslatableBodyText(form.bodyRichText[locale])),
+  );
+}
+
+function hasLocaleEditableContent(form: ManagedContentEntry, locale: Locale, includeBody: boolean) {
+  return hasLocaleTranslationSource(form, locale, includeBody);
 }
 
 function hydrateRichTextFromHtml(entry: ManagedContentEntry): ManagedContentEntry {
@@ -99,6 +198,7 @@ function serializeDirtyCheckTarget(form: ManagedContentEntry) {
     storageId: form.storageId ?? null,
     summary: form.summary,
     title: form.title,
+    visibleLocales: form.visibleLocales,
   });
 }
 
@@ -108,6 +208,7 @@ function ConfirmDialog({
   confirmLabel,
   description,
   highlightedLines,
+  hideCancel = false,
   onCancel,
   onConfirm,
   title,
@@ -117,6 +218,7 @@ function ConfirmDialog({
   confirmLabel: string;
   description: string;
   highlightedLines?: string[];
+  hideCancel?: boolean;
   onCancel: () => void;
   onConfirm: () => void;
   title: string;
@@ -124,11 +226,11 @@ function ConfirmDialog({
   return (
     /* 취소/검증 경고에 공통으로 쓰는 확인 모달 */
     <div className={cx("fixed inset-0 z-50 flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5", className)} onClick={onCancel}>
-      <div className="w-full max-w-[320px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-8" onClick={(event) => event.stopPropagation()}>
+      <div className="w-full max-w-[380px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-6 py-8" onClick={(event) => event.stopPropagation()}>
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="flex flex-col items-center gap-2 text-center">
             <h2 className="m-0 type-h3 text-fg">{title}</h2>
-            <p className="m-0 whitespace-pre-line type-body-md text-mute">{description}</p>
+            <p className="m-0 max-w-[320px] whitespace-pre-line type-body-md leading-7 text-mute">{description}</p>
             {highlightedLines?.length ? (
               <div className="flex flex-col items-center gap-1 text-center">
                 {highlightedLines.map((line) => (
@@ -139,12 +241,101 @@ function ConfirmDialog({
               </div>
             ) : null}
           </div>
-          <div className="flex w-full flex-col justify-center gap-3 sm:flex-row">
-            <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
-              {cancelLabel}
-            </Button>
+          <div className="flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
+            {hideCancel ? null : (
+              <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
+                {cancelLabel}
+              </Button>
+            )}
             <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onConfirm} style="round" variant="secondary">
               {confirmLabel}
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TranslationProgressDialog({
+  sourceLocale,
+  onCancel,
+}: {
+  sourceLocale: Locale;
+  onCancel: () => void;
+}) {
+  const targetLocales = (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5">
+      <div className="w-full max-w-[320px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-8">
+        <div className="flex flex-col items-center gap-5 text-center">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border">
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-fg border-t-transparent" />
+          </div>
+          <div className="flex flex-col gap-2">
+            <h2 className="m-0 type-h3 text-fg">번역 중</h2>
+            <p className="m-0 type-body-md text-mute">
+              {targetLocales.map((locale) => localeDisplayNames[locale]).join(", ")}를 작성하고 있습니다.
+            </p>
+          </div>
+          <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
+            취소
+          </Button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TranslationSourceDialog({
+  onCancel,
+  onConfirm,
+  onSourceLocaleChange,
+  sourceLocale,
+  sourceLocales,
+}: {
+  onCancel: () => void;
+  onConfirm: () => void;
+  onSourceLocaleChange: (locale: Locale) => void;
+  sourceLocale: Locale;
+  sourceLocales: Locale[];
+}) {
+  const targetLocales = (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5" onClick={onCancel}>
+      <div className="w-full max-w-[420px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-6 py-8" onClick={(event) => event.stopPropagation()}>
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col items-center gap-2 text-center">
+            <h2 className="m-0 type-h3 text-fg">기준 언어를 선택하세요.</h2>
+            <p className="m-0 max-w-[340px] whitespace-pre-line type-body-md leading-7 text-mute">
+              선택하신 언어를 기준으로 나머지 언어를 번역해서 넣습니다.
+              {"\n"}번역될 언어의 원문은 사라집니다.
+              {"\n"}실행 전 저장을 권장합니다.
+            </p>
+          </div>
+          <label className="flex flex-col items-center gap-2 type-body-md text-fg">
+            <span>기준 언어</span>
+            <Select
+              className="w-[200px]"
+              onChange={(event) => onSourceLocaleChange(event.target.value as Locale)}
+              options={sourceLocales.map((locale) => ({
+                label: localeDisplayNames[locale],
+                value: locale,
+              }))}
+              value={sourceLocale}
+            />
+          </label>
+          <p className="m-0 text-center type-body-sm text-mute">
+            {targetLocales.map((locale) => localeDisplayNames[locale]).join(", ")} 항목이 대체됩니다.
+          </p>
+          <div className="flex w-full flex-col justify-center gap-3 sm:flex-row">
+            <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
+              취소
+            </Button>
+            <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onConfirm} style="round" variant="secondary">
+              번역하기
             </Button>
           </div>
         </div>
@@ -233,23 +424,6 @@ function InlineField({
   );
 }
 
-function StatusBadge({ children }: { children: React.ReactNode }) {
-  return <div className="rounded-full border border-border bg-bg-content px-3 py-1 type-body-sm leading-4 text-mute">{children}</div>;
-}
-
-function PanelHeader({
-  trailing,
-}: {
-  trailing?: React.ReactNode;
-}) {
-  return (
-    /* 작성 폼/미리보기 상단 공통 헤더 */
-    <div className="flex items-center justify-between gap-4 border-b border-border pb-4">
-      {trailing}
-    </div>
-  );
-}
-
 type Props = {
   categorySlug: ManagedContentCategorySlug;
   initialItem?: ManagedContentEntry | null;
@@ -293,11 +467,13 @@ export default function AdminManagedContentDetailPage({
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const pdfInputRef = useRef<HTMLInputElement | null>(null);
   const dateInputRef = useRef<HTMLInputElement | null>(null);
+  const stickyToolbarRef = useRef<HTMLElement | null>(null);
   const isInitializingRichTextRef = useRef(false);
   const pendingDeletedImageSrcsRef = useRef(new Set<string>());
   const pendingDeletedVideoSrcsRef = useRef(new Set<string>());
   const pendingImageUploadsRef = useRef(new Map<string, PendingImageUpload>());
   const pendingVideoUploadsRef = useRef(new Map<string, PendingVideoUpload>());
+  const translationAbortControllerRef = useRef<AbortController | null>(null);
   const items = useManagedContents(section, initialItems, "all", "list") ?? [];
   const currentItem = itemId === "new" ? null : initialItem ?? null;
   const [form, setForm] = useState<ManagedContentEntry>(() => createEmptyManagedContentDraft(section, categorySlug));
@@ -307,9 +483,12 @@ export default function AdminManagedContentDetailPage({
   const [pendingThumbnailPreviewSrc, setPendingThumbnailPreviewSrc] = useState("");
   const [thumbnailName, setThumbnailName] = useState("");
   const [pdfName, setPdfName] = useState("");
-  const [activeLocale, setActiveLocale] = useState<"en" | "ko" | "ja">("en");
-const [isSaving, setIsSaving] = useState(false);
-  const categoryLabel = getManagedCategoryLabel(section, categorySlug, "en");
+  const [activeLocale, setActiveLocale] = useState<Locale>("en");
+  const [translationSourceLocale, setTranslationSourceLocale] = useState<Locale>("en");
+  const [editorToolbarTop, setEditorToolbarTop] = useState("68px");
+  const [previewOpen, setPreviewOpen] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [translationSuccessMessage, setTranslationSuccessMessage] = useState("");
   const [initialFormSnapshot, setInitialFormSnapshot] = useState(() =>
     serializeDirtyCheckTarget(createEmptyManagedContentDraft(section, categorySlug)),
   );
@@ -319,11 +498,38 @@ const [isSaving, setIsSaving] = useState(false);
     Boolean(pendingPdfFile) ||
     pendingImageUploadsRef.current.size > 0 ||
     pendingVideoUploadsRef.current.size > 0;
-  const showPreview = true;
   const isContentType = form.contentType === "content";
   const isOutlinkType = form.contentType === "outlink";
   const supportsLeadGate = section !== "news" && isContentType;
   const useRichEditor = isContentType;
+  const translationSourceLocales = (["en", "ko", "ja"] as const).filter((locale) =>
+    hasLocaleTranslationSource(form, locale, isContentType),
+  );
+  const canTranslateAnyLocale = translationSourceLocales.length > 0;
+
+  useLayoutEffect(() => {
+    const toolbar = stickyToolbarRef.current;
+
+    if (!toolbar) {
+      return;
+    }
+
+    const updateEditorToolbarTop = () => {
+      const rect = toolbar.getBoundingClientRect();
+      setEditorToolbarTop(`${Math.ceil(rect.top + rect.height + 4)}px`);
+    };
+
+    updateEditorToolbarTop();
+
+    const resizeObserver = new ResizeObserver(updateEditorToolbarTop);
+    resizeObserver.observe(toolbar);
+    window.addEventListener("resize", updateEditorToolbarTop);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateEditorToolbarTop);
+    };
+  }, []);
 
   useEffect(() => {
     /* 수정 화면이면 기존 데이터를 채우고, 신규면 빈 초안을 준비한다 */
@@ -371,6 +577,7 @@ const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     return () => {
+      translationAbortControllerRef.current?.abort();
       if (pendingThumbnailPreviewSrc) {
         URL.revokeObjectURL(pendingThumbnailPreviewSrc);
       }
@@ -387,6 +594,15 @@ const [isSaving, setIsSaving] = useState(false);
     };
   }, [pendingThumbnailPreviewSrc]);
 
+  useEffect(() => {
+    if (!translationSuccessMessage) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => setTranslationSuccessMessage(""), 4500);
+    return () => window.clearTimeout(timeout);
+  }, [translationSuccessMessage]);
+
   function updateForm<K extends keyof ManagedContentEntry>(key: K, value: ManagedContentEntry[K]) {
     setForm((current) => ({ ...current, [key]: value }));
   }
@@ -402,6 +618,19 @@ const [isSaving, setIsSaving] = useState(false);
         ...current[key],
         [locale]: value,
       },
+    }));
+  }
+
+  function toggleVisibleLocale(locale: "en" | "ko" | "ja", checked: boolean) {
+    if (!hasLocaleEditableContent(form, locale, isContentType)) {
+      return;
+    }
+
+    setForm((current) => ({
+      ...current,
+      visibleLocales: checked
+        ? Array.from(new Set([...current.visibleLocales, locale]))
+        : current.visibleLocales.filter((item) => item !== locale),
     }));
   }
 
@@ -432,15 +661,157 @@ const [isSaving, setIsSaving] = useState(false);
     });
   }
 
-  function handleContentTypeChange(nextType: ManagedContentType) {
-    if (section === "news") {
+  function getTranslationFailureCopy(code: TranslationErrorCode, fallback?: string) {
+    const copy = TRANSLATION_ERROR_COPY[code] ?? TRANSLATION_ERROR_COPY.UNKNOWN;
+    return {
+      canRetry: copy.canRetry,
+      message: fallback || copy.message,
+    };
+  }
+
+  function openTranslationConfirm() {
+    if (!canTranslateAnyLocale) {
+      const copy = getTranslationFailureCopy("EMPTY_CONTENT");
+      setDialog({
+        canRetry: false,
+        code: "EMPTY_CONTENT",
+        description: `${copy.message} 기존 입력 내용은 변경되지 않았습니다.`,
+        title: "번역할 내용이 없습니다.",
+        type: "translate-error",
+      });
       return;
     }
 
+    setTranslationSourceLocale(
+      translationSourceLocales.includes(activeLocale)
+        ? activeLocale
+        : translationSourceLocales[0],
+    );
+    setDialog({ type: "translate-confirm" });
+  }
+
+  async function requestTranslation(targetLocale: Locale, sourceLocale: Locale, signal: AbortSignal) {
+    const response = await fetch("/api/admin/content/translate", {
+      body: JSON.stringify({
+        bodyRichText: isContentType ? form.bodyRichText[sourceLocale] : "",
+        locale: targetLocale,
+        summary: form.summary[sourceLocale],
+        title: form.title[sourceLocale],
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      signal,
+    });
+
+    const payload = (await response.json().catch(() => ({}))) as {
+      bodyRichText?: string;
+      code?: TranslationErrorCode;
+      detail?: string;
+      error?: string;
+      message?: string;
+      summary?: string;
+      title?: string;
+    };
+
+    if (!response.ok) {
+      const code = payload.code ?? "UNKNOWN";
+      const copy = getTranslationFailureCopy(code, payload.error);
+
+      throw Object.assign(new Error(copy.message), {
+        detail: payload.detail,
+        translationCode: code,
+      });
+    }
+
+    return {
+      bodyRichText: payload.bodyRichText ?? form.bodyRichText[sourceLocale],
+      locale: targetLocale,
+      summary: payload.summary ?? form.summary[sourceLocale],
+      title: payload.title ?? form.title[sourceLocale],
+    };
+  }
+
+  async function runTranslation(sourceLocale = translationSourceLocale) {
+    if (
+      dialog?.type === "translate-loading" ||
+      !hasLocaleTranslationSource(form, sourceLocale, isContentType)
+    ) {
+      return;
+    }
+
+    const targetLocales = (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
+    const controller = new AbortController();
+    translationAbortControllerRef.current = controller;
+    setTranslationSuccessMessage("");
+    setDialog({ sourceLocale, type: "translate-loading" });
+
+    try {
+      const translations = await Promise.all(
+        targetLocales.map((targetLocale) =>
+          requestTranslation(targetLocale, sourceLocale, controller.signal),
+        ),
+      );
+
+      setForm((current) => ({
+        ...current,
+        bodyRichText: {
+          ...current.bodyRichText,
+          ...Object.fromEntries(
+            translations.map((translation) => [translation.locale, translation.bodyRichText]),
+          ),
+        },
+        summary: {
+          ...current.summary,
+          ...Object.fromEntries(
+            translations.map((translation) => [translation.locale, translation.summary]),
+          ),
+        },
+        title: {
+          ...current.title,
+          ...Object.fromEntries(
+            translations.map((translation) => [translation.locale, translation.title]),
+          ),
+        },
+      }));
+      setDialog(null);
+      setTranslationSuccessMessage("번역이 완료되었습니다.");
+    } catch (error) {
+      if (controller.signal.aborted) {
+        setDialog(null);
+        setTranslationSuccessMessage("번역이 취소되었습니다. 기존 입력 내용은 변경되지 않았습니다.");
+        return;
+      }
+
+      const code = (error as { translationCode?: TranslationErrorCode } | null)?.translationCode ?? "NETWORK_ERROR";
+      const copy = getTranslationFailureCopy(code, error instanceof Error ? error.message : undefined);
+      setDialog({
+        canRetry: copy.canRetry,
+        code,
+        description: `${copy.message} 기존 입력 내용은 변경되지 않았습니다.`,
+        detail: (error as { detail?: string } | null)?.detail,
+        title: "번역 실패",
+        type: "translate-error",
+      });
+    } finally {
+      if (translationAbortControllerRef.current === controller) {
+        translationAbortControllerRef.current = null;
+      }
+    }
+  }
+
+  function cancelTranslation() {
+    translationAbortControllerRef.current?.abort();
+  }
+
+  function handleContentTypeChange(nextType: ManagedContentType) {
     setForm((current) => ({
       ...current,
       contentType: nextType,
       gatingLevel: nextType === "content" ? current.gatingLevel : "none",
+      authorName: section === "news" && !current.authorName.trim() ? DEFAULT_NEWS_FORMAT : current.authorName,
+      authorRole: section === "news" ? "" : current.authorRole,
     }));
   }
 
@@ -778,8 +1149,22 @@ const [isSaving, setIsSaving] = useState(false);
     /* 저장/게시 전 필수 입력값만 간단히 검증한다 */
     const missing: string[] = [];
     if (!hasAnyLocalizedTitle(targetForm.title)) missing.push("제목 (EN/KO/JA 중 1개)");
+    for (const locale of targetForm.visibleLocales) {
+      if (!targetForm.title[locale]?.trim()) {
+        missing.push(`${getLocaleLabel(locale)} 제목`);
+      }
+    }
     if (supportsLeadGate && targetForm.enableDownloadButton && !targetForm.downloadPdfSrc.trim() && !pendingPdfFile) {
       missing.push("PDF");
+    }
+    if (
+      supportsLeadGate &&
+      targetForm.enableDownloadButton &&
+      targetForm.downloadPdfSrc.trim() &&
+      !pendingPdfFile &&
+      !isDownloadableContentPdfSrc(section, targetForm.downloadPdfSrc)
+    ) {
+      missing.push("PDF 경로 (/documentation/...pdf 또는 /demo/...pdf)");
     }
     if (isOutlinkType) {
       if (!targetForm.summary.en.trim()) missing.push("설명 (EN)");
@@ -799,8 +1184,13 @@ const [isSaving, setIsSaving] = useState(false);
     const currentForm = overrideForm ?? form;
     const missing = validateForm(currentForm);
     if (missing.length > 0) {
+      const hasVisibleLocaleTitleMissing = currentForm.visibleLocales.some((locale) =>
+        !currentForm.title[locale]?.trim(),
+      );
       setDialog({
-        description: "다음 항목을 입력해야 저장할 수 있습니다.",
+        description: hasVisibleLocaleTitleMissing
+          ? "노출 체크된 언어는 제목이 필요합니다.\n제목이 없으면 공개 화면에서\n다른 언어 제목이 표시될 수 있습니다."
+          : "다음 항목을 입력해야 저장할 수 있습니다.",
         highlightedLines: missing,
         title: "입력되지 않은 항목이 있습니다.",
         type: "alert",
@@ -880,31 +1270,18 @@ const [isSaving, setIsSaving] = useState(false);
       return;
     }
 
-    const nextId = ensureUniqueSlug(
-      itemId === "new"
-        ? slugifyTitle(finalizedContentForm.title.en || finalizedContentForm.title.ko || finalizedContentForm.title.ja)
-        : finalizedContentForm.id,
-      items.filter((item) => item.section === section),
-      itemId === "new" ? undefined : itemId,
-    );
+    const nextId = resolveManagedContentSlug({
+      currentId: itemId === "new" ? undefined : itemId,
+      enteredSlug: finalizedContentForm.id,
+      items: items.filter((item) => item.section === section),
+      title: finalizedContentForm.title,
+    });
 
     const nextSortOrder =
       itemId === "new"
         ? 1
         : currentForm.sortOrder;
 
-    if (itemId === "new") {
-      for (const item of items.filter((entry) => entry.section === section && entry.categorySlug === categorySlug)) {
-        await upsertManagedContent(
-          {
-            ...item,
-            sortOrder: item.sortOrder + 1,
-          },
-          item.id,
-          { preserveExistingBodies: true },
-        );
-      }
-    }
     const nextItem: ManagedContentEntry = {
       ...finalizedContentForm,
       categorySlug,
@@ -928,6 +1305,7 @@ const [isSaving, setIsSaving] = useState(false);
       savedItem = await upsertManagedContent(
         nextItem,
         itemId === "new" ? undefined : itemId,
+        { shiftSiblingsForNew: itemId === "new" },
       );
     } catch (error) {
       await Promise.all(uploadedImageSrcs.map((src) => deleteUploadedFile(src)));
@@ -976,98 +1354,125 @@ const [isSaving, setIsSaving] = useState(false);
     window.location.assign(getAdminCategoryHref(section, categorySlug));
   }
 
-  const previewData = {
-    bodyHtml: getEditingLocalizedValue(form.bodyHtml, activeLocale),
-    date: formatPublicDate("ko", form.dateIso),
-    ...getDownloadPreviewProps(form),
-    hideHeroImage: form.hideHeroImage,
-    heroImageAlt: getEditingLocalizedValue(form.title, activeLocale) || "Content thumbnail preview",
-    heroImageSrc: pendingThumbnailPreviewSrc || form.imageSrc,
-    summary: getEditingLocalizedValue(form.summary, activeLocale) || "",
-    title: getEditingLocalizedValue(form.title, activeLocale) || "제목을 입력하면 여기에 반영됩니다.",
-    url: form.externalUrl,
-    writer: getWriterLabel({
-      authorName: form.authorName || "작성자 이름",
-      authorRole: form.authorRole || "직책",
-    }) || "작성자 이름 / 직책",
+  const previewItem: ManagedContentEntry = {
+    ...form,
+    bodyHtml: isOutlinkType ? { en: "", ko: "", ja: "" } : form.bodyHtml,
+    bodyRichText: isOutlinkType ? { en: "", ko: "", ja: "" } : form.bodyRichText,
+    imageSrc: pendingThumbnailPreviewSrc || form.imageSrc,
   };
+
   return (
     <section className="flex flex-col gap-4">
-      {/* 페이지 상단 설명과 현재 작업 상태를 표시 */}
-      <AdminHeader
-        description="콘텐츠 작성, 수정, 비노출 저장, 게시 전 미리보기를 이 화면에서 관리합니다."
-        title={itemId === "new" ? `${categoryLabel} > Create Content` : `${categoryLabel} > Modify Content`}
-      />
-
-      {/* 미리보기 on/off에 따라 2단 또는 단일 컬럼으로 전환 */}
-      <div className={cx(showPreview ? "flex flex-col gap-5 md:gap-6 min-[1440px]:flex-row min-[1440px]:flex-wrap min-[1440px]:items-start min-[1440px]:gap-10" : "mx-auto w-full max-w-[720px]")}>
-        <div className="flex min-w-0 w-full max-w-[720px] self-start flex-col gap-5 overflow-visible min-[1440px]:w-[720px] min-[1440px]:flex-none">
-          <PanelHeader
-            trailing={
-              <div className="flex w-full flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                {section !== "news" ? (
-                  <div className="flex w-full flex-col gap-3 sm:max-w-[500px] sm:flex-row">
-                    <div className="w-full sm:max-w-[180px]">
-                      <Select
-                        defaultValue={form.contentType}
-                        onChange={(event) => handleContentTypeChange(event.target.value as ManagedContentType)}
-                        options={[
-                          { label: "컨텐츠(기본)", value: "content" },
-                          { label: "아웃링크", value: "outlink" },
-                        ]}
-                      />
-                    </div>
-                    {supportsLeadGate ? (
-                      <div className="w-full sm:max-w-[180px]">
-                        <Select
-                          onChange={(event) => updateForm("gatingLevel", event.target.value as ContentGatingLevel)}
-                          options={CONTENT_GATING_OPTIONS}
-                          value={form.gatingLevel}
-                        />
-                      </div>
-                    ) : null}
-                  </div>
-                ) : <div />}
-                <div className="flex items-center gap-3 sm:justify-end">
-                  <TabGroup className="self-start">
-                    {(["en", "ko", "ja"] as const).map((locale) => (
-                      <Tab
-                        className="px-3 md:px-5"
-                        key={locale}
-                        onClick={() => setActiveLocale(locale)}
-                        state={activeLocale === locale ? "on" : "off"}
-                      >
-                        {locale.toUpperCase()}
-                      </Tab>
-                    ))}
-                  </TabGroup>
-                </div>
+      {/* 편집 페이지 상단 스티키 툴바 */}
+      <header className="sticky top-[60px] z-30 -mx-5 overflow-x-auto bg-bg px-5 py-3 md:top-0 md:-mx-10 md:px-10" ref={stickyToolbarRef}>
+        <div className="flex w-full min-w-0 flex-nowrap items-center justify-between gap-3">
+          <div className="flex min-w-0 flex-1 flex-nowrap items-center gap-3">
+            <div className="w-[180px] min-w-[140px] shrink">
+              <Select
+                onChange={(event) => handleContentTypeChange(event.target.value as ManagedContentType)}
+                options={[
+                  { label: "컨텐츠(기본)", value: "content" },
+                  { label: "아웃링크", value: "outlink" },
+                ]}
+                value={form.contentType}
+              />
+            </div>
+            {supportsLeadGate ? (
+              <div className="w-[180px] min-w-[140px] shrink">
+                <Select
+                  onChange={(event) => updateForm("gatingLevel", event.target.value as ContentGatingLevel)}
+                  options={CONTENT_GATING_OPTIONS}
+                  value={form.gatingLevel}
+                />
               </div>
-            }
-          />
+            ) : null}
+          </div>
+          <div className="flex shrink-0 flex-nowrap items-center justify-end gap-3">
+            <TabGroup className="shrink-0 self-start">
+              {(["en", "ko", "ja"] as const).map((locale) => {
+                const canToggleLocale = hasLocaleEditableContent(form, locale, isContentType);
 
-          {/* 좌측 작성 폼 본문 */}
-          <div className="grid gap-5 pt-3 md:pt-4">
-            <InlineField
-              label={(
-                <span className="inline-flex items-center gap-1.5">
-                  <span>제목</span>
-                  <Tooltip content={"각 언어 탭에 제목을 입력한 경우에만\n해당 언어 사이트에 게시물이 노출됩니다."}>
-                    <button
-                      aria-label="제목 노출 규칙 안내"
-                      className="inline-flex h-4 w-4 items-center justify-center rounded-full text-mute transition-colors hover:text-fg"
-                      type="button"
+                return (
+                  <Tab
+                    className="gap-2 px-3 md:px-4"
+                    key={locale}
+                    onClick={() => setActiveLocale(locale)}
+                    state={activeLocale === locale ? "on" : "off"}
+                  >
+                    <span>{locale.toUpperCase()}</span>
+                    <Tooltip
+                      content={
+                        canToggleLocale
+                          ? "해당 언어를 노출하려면 체크하세요."
+                          : "해당 탭에 내용을 입력해야 노출할 수 있습니다."
+                      }
+                      placement="bottom"
                     >
-                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 20 20" fill="none">
-                        <circle cx="10" cy="10" r="7.25" stroke="currentColor" strokeWidth="1.5" />
-                        <path d="M10 8v5" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
-                        <circle cx="10" cy="5.5" r="1" fill="currentColor" />
-                      </svg>
-                    </button>
-                  </Tooltip>
-                </span>
-              )}
+                      <input
+                        aria-label={`${locale.toUpperCase()} 노출`}
+                        checked={form.visibleLocales.includes(locale)}
+                        className="ml-1 h-3.5 w-3.5 shrink-0 self-center rounded border-border bg-bg-content accent-[var(--color-success)] disabled:opacity-40"
+                        disabled={!canToggleLocale}
+                        onChange={(event) => toggleVisibleLocale(locale, event.target.checked)}
+                        onClick={(event) => event.stopPropagation()}
+                        type="checkbox"
+                      />
+                    </Tooltip>
+                  </Tab>
+                );
+              })}
+            </TabGroup>
+            <Button
+              arrow={false}
+              className="shrink-0 justify-center whitespace-nowrap"
+              disabled={!canTranslateAnyLocale || dialog?.type === "translate-loading"}
+              onClick={openTranslationConfirm}
+              style="round"
+              variant="outline"
             >
+              번역
+            </Button>
+            <div className="flex shrink-0 flex-nowrap items-center gap-3">
+              <Button arrow={false} className="shrink-0 justify-center whitespace-nowrap" onClick={() => setPreviewOpen(true)} style="round" variant="outline">
+                미리보기
+              </Button>
+              <Button
+                arrow={false}
+                className="shrink-0 justify-center whitespace-nowrap"
+                onClick={() => {
+                  if (!hasUnsavedChanges) {
+                    setHasUnsavedChanges(false);
+                    router.push(getAdminCategoryHref(section, categorySlug));
+                    return;
+                  }
+
+                  setDialog({ type: "cancel" });
+                }}
+                style="round"
+                variant="outline"
+              >
+                취소
+              </Button>
+              <Button
+                arrow={false}
+                className="shrink-0 justify-center whitespace-nowrap"
+                disabled={isSaving}
+                onClick={() => commit(itemId === "new" ? "hidden" : form.status)}
+                style="round"
+                variant="primary"
+              >
+                {isSaving ? <LoadingText text="저장 중..." tone="dark" /> : "저장"}
+              </Button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div className="mx-auto w-full max-w-[720px]">
+        <div className="flex min-w-0 w-full flex-col gap-5 overflow-visible">
+          {/* 좌측 작성 폼 본문 */}
+          <div className="grid gap-5 pt-3">
+            <InlineField label="제목">
               <div className="flex items-center gap-3">
                 <Input
                   className="w-full"
@@ -1096,7 +1501,15 @@ const [isSaving, setIsSaving] = useState(false);
                 />
               </InlineField>
             ) : null}
-            {isContentType ? (
+            {section === "news" ? (
+              <InlineField label="형식">
+                <Select
+                  onChange={(event) => updateForm("authorName", event.target.value as NewsFormat)}
+                  options={getNewsFormatOptions(activeLocale)}
+                  value={getNewsFormatLabel(form)}
+                />
+              </InlineField>
+            ) : isContentType ? (
               <div className="grid gap-3 md:grid-cols-2">
                 <InlineField label="작성자">
                   <Input
@@ -1255,65 +1668,27 @@ const [isSaving, setIsSaving] = useState(false);
                   onRemoveVideo={trackRemovedVideo}
                   onRemoveImage={trackRemovedImage}
                   onPrepareVideo={prepareVideoPreview}
+                  toolbarStickyTop={editorToolbarTop}
                   value={getEditingLocalizedValue(form.bodyRichText, activeLocale)}
                 />
               </div>
             ) : null}
           </div>
-
-          {/* 하단 액션 버튼 영역 */}
-          <div className="flex flex-col gap-3 pb-5 sm:flex-row sm:flex-wrap sm:justify-center md:pb-6">
-            <Button
-              arrow={false}
-              className="w-full justify-center sm:w-auto"
-              onClick={() => {
-                if (!hasUnsavedChanges) {
-                  setHasUnsavedChanges(false);
-                  router.push(getAdminCategoryHref(section, categorySlug));
-                  return;
-                }
-
-                setDialog({ type: "cancel" });
-              }}
-              style="round"
-              variant="outline"
-            >
-              취소
-            </Button>
-            <Button
-              arrow={false}
-              className="w-full justify-center sm:w-auto"
-              disabled={isSaving}
-              onClick={() => commit(itemId === "new" ? "hidden" : form.status)}
-              style="round"
-              variant="primary"
-            >
-              {isSaving ? <LoadingText text="저장 중..." tone="dark" /> : "저장"}
-            </Button>
-          </div>
         </div>
-
-        {/* 우측 퍼블릭 상세 미리보기 */}
-        {showPreview ? (
-          <div className="min-w-0 w-full self-start min-[1440px]:flex-1 min-[1440px]:sticky min-[1440px]:top-4">
-            <div className="max-h-[calc(100vh-32px)] overflow-auto">
-              {isOutlinkType ? (
-                <AdminContentPreview
-                  date={previewData.date}
-                  heroImageAlt={previewData.heroImageAlt}
-                  heroImageSrc={previewData.heroImageSrc}
-                  section="news"
-                  summary={previewData.summary}
-                  title={previewData.title}
-                  url={previewData.url}
-                />
-              ) : (
-                <AdminContentPreview {...previewData} section={section} />
-              )}
-            </div>
-          </div>
-        ) : null}
       </div>
+
+      {previewOpen ? (
+        <PreviewModal
+          item={previewItem}
+          onClose={() => setPreviewOpen(false)}
+        />
+      ) : null}
+
+      {translationSuccessMessage ? (
+        <div className="fixed left-1/2 top-5 z-[60] -translate-x-1/2 rounded-[8px] border border-border bg-[var(--color-bg-modal)] px-5 py-3 text-center shadow-[0_12px_32px_rgba(0,0,0,0.32)] backdrop-blur-[12px] type-body-sm text-fg">
+          {translationSuccessMessage}
+        </div>
+      ) : null}
 
       {dialog?.type === "cancel" ? (
         <ConfirmDialog
@@ -1333,9 +1708,46 @@ const [isSaving, setIsSaving] = useState(false);
         <ConfirmDialog
           confirmLabel="확인"
           description={dialog.description}
+          hideCancel
           highlightedLines={dialog.highlightedLines}
           onCancel={() => setDialog(null)}
           onConfirm={() => setDialog(null)}
+          title={dialog.title}
+        />
+      ) : null}
+
+      {dialog?.type === "translate-confirm" ? (
+        <TranslationSourceDialog
+          onCancel={() => setDialog(null)}
+          onConfirm={() => void runTranslation(translationSourceLocale)}
+          onSourceLocaleChange={setTranslationSourceLocale}
+          sourceLocale={translationSourceLocale}
+          sourceLocales={translationSourceLocales}
+        />
+      ) : null}
+
+      {dialog?.type === "translate-loading" ? (
+        <TranslationProgressDialog sourceLocale={dialog.sourceLocale} onCancel={cancelTranslation} />
+      ) : null}
+
+      {dialog?.type === "translate-error" ? (
+        <ConfirmDialog
+          cancelLabel="닫기"
+          confirmLabel={dialog.canRetry ? "다시 시도" : "확인"}
+          description={
+            dialog.detail
+              ? `${dialog.description} 오류 상세: ${dialog.detail}`
+              : dialog.description
+          }
+          onCancel={() => setDialog(null)}
+          onConfirm={() => {
+            if (!dialog.canRetry) {
+              setDialog(null);
+              return;
+            }
+
+            void runTranslation(translationSourceLocale);
+          }}
           title={dialog.title}
         />
       ) : null}

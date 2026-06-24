@@ -59,12 +59,12 @@ export default function AdminNotFoundPage() {
               요청하신 관리자 페이지를 찾을 수 없습니다.
             </p>
             <p className="m-0 type-body-md text-mute">
-              관리자 홈으로 돌아가 다시 시작해 보세요.
+              뉴스 관리 화면으로 돌아가 다시 시작해 보세요.
             </p>
           </div>
-          <a href="/admin">
+          <a href="/admin/news">
             <Button arrow={false} style="round" variant="secondary">
-              관리자 홈으로
+              뉴스 관리로
             </Button>
           </a>
         </div>

@@ -139,6 +139,90 @@ function updateTableControlsState(
   });
 }
 
+function isInternalMediaSrc(src: string) {
+  const trimmedSrc = src.trim();
+
+  if (!trimmedSrc || trimmedSrc.startsWith("data:")) {
+    return false;
+  }
+
+  if (trimmedSrc.startsWith("blob:")) {
+    return true;
+  }
+
+  if (trimmedSrc.startsWith("/") && !trimmedSrc.startsWith("//")) {
+    return true;
+  }
+
+  try {
+    return new URL(trimmedSrc).origin === window.location.origin;
+  } catch {
+    return false;
+  }
+}
+
+function removeElementOrMediaFigure(element: Element) {
+  const figure = element.closest("figure[data-qp-image], figure[data-qp-video]");
+  (figure ?? element).remove();
+}
+
+function sanitizePastedHtml(html: string) {
+  if (typeof window === "undefined") {
+    return html;
+  }
+
+  const document = new DOMParser().parseFromString(html, "text/html");
+
+  document.querySelectorAll("img[src]").forEach((image) => {
+    if (!isInternalMediaSrc(image.getAttribute("src") ?? "")) {
+      removeElementOrMediaFigure(image);
+    }
+  });
+
+  document.querySelectorAll("iframe, embed, object").forEach((element) => element.remove());
+
+  document.querySelectorAll("video").forEach((video) => {
+    const src = video.getAttribute("src") ?? "";
+    const sourceSrcs = Array.from(video.querySelectorAll("source[src]")).map((source) =>
+      source.getAttribute("src") ?? "",
+    );
+    const hasInternalSource = Boolean(src && isInternalMediaSrc(src)) ||
+      sourceSrcs.some(isInternalMediaSrc);
+
+    if (!hasInternalSource) {
+      removeElementOrMediaFigure(video);
+      return;
+    }
+
+    video.querySelectorAll("source[src]").forEach((source) => {
+      if (!isInternalMediaSrc(source.getAttribute("src") ?? "")) {
+        source.remove();
+      }
+    });
+  });
+
+  return document.body.innerHTML;
+}
+
+function clipboardHasBlockedFileOnlyPaste(event: ClipboardEvent) {
+  const clipboardData = event.clipboardData;
+
+  if (!clipboardData) {
+    return false;
+  }
+
+  const hasBlockedFile = Array.from(clipboardData.items).some((item) => {
+    const file = item.kind === "file" ? item.getAsFile() : null;
+    return Boolean(file && (file.type.startsWith("image/") || file.type.startsWith("video/")));
+  });
+
+  if (!hasBlockedFile) {
+    return false;
+  }
+
+  return !clipboardData.getData("text/html").trim() && !clipboardData.getData("text/plain").trim();
+}
+
 const ResizableImage = Image.extend({
   addAttributes() {
     return {
@@ -439,7 +523,7 @@ function ToolButton({
   tooltip: string;
 }) {
   return (
-    <Tooltip content={tooltip}>
+    <Tooltip content={tooltip} offsetY={10}>
       <button
         aria-label={tooltip}
         className={cx(
@@ -538,6 +622,7 @@ type Props = {
   onPrepareVideo?: (file: File, replaceSrc?: string) => string;
   onRemoveImage?: (src: string) => void;
   onRemoveVideo?: (src: string) => void;
+  toolbarStickyTop?: string;
   value: string;
 };
 
@@ -548,6 +633,7 @@ export default function TiptapEditor({
   onPrepareVideo,
   onRemoveImage,
   onRemoveVideo,
+  toolbarStickyTop = "16px",
   value,
 }: Props) {
   const imageInputRef = useRef<HTMLInputElement | null>(null);
@@ -592,6 +678,14 @@ export default function TiptapEditor({
         class:
           `${CONTENT_PREVIEW_RICH_CLASS} content-rich-editor min-h-[320px] outline-none [&_p.is-editor-empty:first-child::before]:pointer-events-none [&_p.is-editor-empty:first-child::before]:float-left [&_p.is-editor-empty:first-child::before]:h-0 [&_p.is-editor-empty:first-child::before]:text-mute [&_p.is-editor-empty:first-child::before]:content-[attr(data-placeholder)]`,
       },
+      handlePaste(_view, event) {
+        if (clipboardHasBlockedFileOnlyPaste(event)) {
+          event.preventDefault();
+          return true;
+        }
+
+        return false;
+      },
       handleKeyDown(view, event) {
         const isUndoKey = (event.metaKey || event.ctrlKey) && !event.shiftKey && event.key.toLowerCase() === "z";
 
@@ -607,6 +701,9 @@ export default function TiptapEditor({
         }
 
         return false;
+      },
+      transformPastedHTML(html) {
+        return sanitizePastedHtml(html);
       },
     },
     extensions: [
@@ -665,6 +762,10 @@ export default function TiptapEditor({
     editor.commands.setContent(parseContent(value));
     baselineContentRef.current = JSON.stringify(editor.getJSON());
     lastAppliedValueRef.current = baselineContentRef.current;
+    onChange({
+      html: editor.getHTML(),
+      json: baselineContentRef.current,
+    });
   }, [editor, value]);
 
   useEffect(() => {
@@ -1036,7 +1137,10 @@ export default function TiptapEditor({
 
   return (
     <div className={cx("flex flex-col gap-3 pt-2", className)}>
-      <div className="sticky top-4 z-20 -mx-1 overflow-x-auto rounded-button bg-transparent px-1 py-1">
+      <div
+        className="sticky z-20 -mx-1 overflow-x-auto rounded-button bg-transparent px-1"
+        style={{ top: toolbarStickyTop }}
+      >
         <div className="flex w-full justify-center">
           <div className="flex w-full items-center justify-center gap-0 rounded-button border border-border bg-bg-content px-2 py-1">
             <ToolButton isActive={editor.isActive("heading", { level: 1 })} onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} tooltip="Heading 1">

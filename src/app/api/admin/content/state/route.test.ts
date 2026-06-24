@@ -56,6 +56,7 @@ function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContent
     status: "published",
     summary: createLocalizedContent(),
     title: createLocalizedContent("Test Title"),
+    visibleLocales: ["en", "ko", "ja"],
     ...overrides,
   };
 }
@@ -87,6 +88,20 @@ describe("GET /api/admin/content/state", () => {
     await GET(makeRequest("http://localhost/api/admin/content/state?section=demo"));
 
     expect(mockReadContentState).toHaveBeenCalledWith("demo", expect.objectContaining({}));
+  });
+
+  it("잘못된 section 쿼리파라미터는 400을 반환한다", async () => {
+    const response = await GET(makeRequest("http://localhost/api/admin/content/state?section=invalid"));
+
+    expect(response.status).toBe(400);
+    expect(mockReadContentState).not.toHaveBeenCalled();
+  });
+
+  it("section에 맞지 않는 categorySlug는 400을 반환한다", async () => {
+    const response = await GET(makeRequest("http://localhost/api/admin/content/state?section=demo&categorySlug=blogs"));
+
+    expect(response.status).toBe(400);
+    expect(mockReadContentState).not.toHaveBeenCalled();
   });
 
   it("id 쿼리파라미터가 있으면 단일 아이템을 반환한다", async () => {
@@ -170,6 +185,21 @@ describe("POST /api/admin/content/state", () => {
     expect(mockSaveAuthoredContent).not.toHaveBeenCalled();
   });
 
+  it("payload에 없는 같은 카테고리 아이템을 삭제하지 않는다", async () => {
+    const existingItem = makeEntry({ id: "existing", storageId: "cnt_000001" });
+    const payloadItem = makeEntry({ id: "payload", storageId: "cnt_000002" });
+    mockReadContentState.mockResolvedValueOnce([existingItem]).mockResolvedValueOnce([existingItem, payloadItem]);
+    mockSaveAuthoredContent.mockResolvedValue({ ...payloadItem, storageId: "cnt_000002" });
+
+    const request = makeRequest("http://localhost/api/admin/content/state", {
+      method: "POST",
+      body: JSON.stringify({ items: [payloadItem] }),
+    });
+    await POST(request);
+
+    expect(mockDeleteAuthoredContent).not.toHaveBeenCalled();
+  });
+
   it("서버 오류 발생 시 500을 반환한다", async () => {
     mockReadContentState.mockRejectedValue(new Error("disk error"));
 
@@ -210,6 +240,58 @@ describe("PUT /api/admin/content/state", () => {
     expect(data.item.id).toBe("my-item");
     expect(mockSaveAuthoredContent).toHaveBeenCalled();
   });
+
+  it("storageId가 있으면 기존 id가 바뀌어도 같은 아이템으로 병합한다", async () => {
+    const existingItem = makeEntry({ id: "old-slug", storageId: "cnt_000001" });
+    const nextItem = makeEntry({ id: "new-slug", storageId: "cnt_000001" });
+    mockReadContentState.mockResolvedValue([existingItem]);
+    mockSaveAuthoredContent.mockResolvedValue({ ...nextItem, storageId: "cnt_000001" });
+
+    const request = makeRequest("http://localhost/api/admin/content/state", {
+      method: "PUT",
+      body: JSON.stringify({ item: nextItem, preserveExistingBodies: true }),
+    });
+    const response = await PUT(request);
+
+    expect(response.status).toBe(200);
+    expect(mockSaveAuthoredContent).toHaveBeenCalledWith(expect.objectContaining({
+      id: "new-slug",
+      storageId: "cnt_000001",
+    }));
+  });
+
+  it("section과 categorySlug 조합이 맞지 않으면 400을 반환한다", async () => {
+    const item = makeEntry({ categorySlug: "blogs", section: "demo" });
+
+    const request = makeRequest("http://localhost/api/admin/content/state", {
+      method: "PUT",
+      body: JSON.stringify({ item }),
+    });
+    const response = await PUT(request);
+
+    expect(response.status).toBe(400);
+    expect(mockSaveAuthoredContent).not.toHaveBeenCalled();
+  });
+
+  it("신규 아이템 저장 옵션이 있으면 같은 카테고리 형제 순서를 뒤로 민다", async () => {
+    const existingItem = makeEntry({ id: "existing", sortOrder: 1, storageId: "cnt_000001" });
+    const newItem = makeEntry({ id: "new-item", sortOrder: 1, storageId: undefined });
+    mockReadContentState.mockResolvedValue([existingItem]);
+    mockSaveAuthoredContent.mockResolvedValue({ ...newItem, storageId: "cnt_000002" });
+    mockUpdateAuthoredContentMeta.mockResolvedValue({} as never);
+
+    const request = makeRequest("http://localhost/api/admin/content/state", {
+      method: "PUT",
+      body: JSON.stringify({ item: newItem, shiftSiblingsForNew: true }),
+    });
+    const response = await PUT(request);
+
+    expect(response.status).toBe(200);
+    expect(mockUpdateAuthoredContentMeta).toHaveBeenCalledWith(expect.objectContaining({
+      id: "existing",
+      updates: { sortOrder: 2 },
+    }));
+  });
 });
 
 describe("PATCH /api/admin/content/state", () => {
@@ -223,32 +305,72 @@ describe("PATCH /api/admin/content/state", () => {
     expect(response.status).toBe(400);
   });
 
-  it("id와 status가 있으면 상태를 업데이트한다", async () => {
-    mockReadContentState.mockResolvedValue([]);
+  it("storageId와 status가 있으면 상태를 업데이트한다", async () => {
+    const wrongIdItem = makeEntry({ id: "same-slug", storageId: "cnt_000001", status: "hidden" });
+    const targetItem = makeEntry({ categorySlug: "blogs", id: "same-slug", section: "documentation", storageId: "cnt_000002" });
+    mockReadContentState.mockResolvedValue([wrongIdItem, targetItem]);
+    mockUpdateAuthoredContentMeta.mockResolvedValue({} as never);
 
     const request = makeRequest("http://localhost/api/admin/content/state", {
       method: "PATCH",
-      body: JSON.stringify({ id: "my-item", status: "published" }),
+      body: JSON.stringify({ id: "same-slug", status: "published", storageId: "cnt_000002" }),
     });
     const response = await PATCH(request);
     const data = await response.json() as { ok: boolean };
 
     expect(response.status).toBe(200);
     expect(data.ok).toBe(true);
+    expect(mockUpdateAuthoredContentMeta).toHaveBeenCalledWith(expect.objectContaining({
+      id: "same-slug",
+      section: "documentation",
+      storageId: "cnt_000002",
+      updates: { status: "published" },
+    }));
+  });
+
+  it("잘못된 status는 400을 반환한다", async () => {
+    const request = makeRequest("http://localhost/api/admin/content/state", {
+      method: "PATCH",
+      body: JSON.stringify({ id: "my-item", status: "invalid" }),
+    });
+    const response = await PATCH(request);
+
+    expect(response.status).toBe(400);
     expect(mockUpdateAuthoredContentMeta).not.toHaveBeenCalled();
   });
 
-  it("item이 있으면 authored meta도 함께 업데이트한다", async () => {
-    const item = makeEntry({ id: "my-item" });
+  it("id에 해당하는 서버 아이템이 없으면 404를 반환한다", async () => {
+    mockReadContentState.mockResolvedValue([]);
+
+    const request = makeRequest("http://localhost/api/admin/content/state", {
+      method: "PATCH",
+      body: JSON.stringify({ id: "my-item", status: "hidden" }),
+    });
+    const response = await PATCH(request);
+
+    expect(response.status).toBe(404);
+    expect(mockUpdateAuthoredContentMeta).not.toHaveBeenCalled();
+  });
+
+  it("sortOrders가 있으면 순서를 업데이트한다", async () => {
+    const wrongIdItem = makeEntry({ id: "item-a", sortOrder: 1, storageId: "cnt_000001" });
+    const item = makeEntry({ categorySlug: "blogs", id: "item-a", section: "documentation", sortOrder: 1, storageId: "cnt_000002" });
+    mockReadContentState.mockResolvedValue([wrongIdItem, item]);
     mockUpdateAuthoredContentMeta.mockResolvedValue({} as never);
 
     const request = makeRequest("http://localhost/api/admin/content/state", {
       method: "PATCH",
-      body: JSON.stringify({ id: "my-item", status: "hidden", item }),
+      body: JSON.stringify({ sortOrders: [{ id: "item-a", sortOrder: 2, storageId: "cnt_000002" }] }),
     });
-    await PATCH(request);
+    const response = await PATCH(request);
 
-    expect(mockUpdateAuthoredContentMeta).toHaveBeenCalled();
+    expect(response.status).toBe(200);
+    expect(mockUpdateAuthoredContentMeta).toHaveBeenCalledWith(expect.objectContaining({
+      id: "item-a",
+      section: "documentation",
+      storageId: "cnt_000002",
+      updates: { sortOrder: 2 },
+    }));
   });
 });
 
@@ -263,7 +385,29 @@ describe("DELETE /api/admin/content/state", () => {
     expect(response.status).toBe(400);
   });
 
-  it("id가 있으면 콘텐츠를 삭제한다", async () => {
+  it("storageId가 있으면 해당 콘텐츠를 삭제한다", async () => {
+    const wrongIdItem = makeEntry({ id: "to-delete", storageId: "cnt_000001" });
+    const item = makeEntry({ categorySlug: "blogs", id: "to-delete", section: "documentation", storageId: "cnt_000002" });
+    mockReadContentState.mockResolvedValue([wrongIdItem, item]);
+    mockDeleteAuthoredContent.mockResolvedValue({ deleted: true });
+
+    const request = makeRequest("http://localhost/api/admin/content/state", {
+      method: "DELETE",
+      body: JSON.stringify({ id: "to-delete", storageId: "cnt_000002" }),
+    });
+    const response = await DELETE(request);
+    const data = await response.json() as { ok: boolean };
+
+    expect(response.status).toBe(200);
+    expect(data.ok).toBe(true);
+    expect(mockDeleteAuthoredContent).toHaveBeenCalledWith(expect.objectContaining({
+      id: "to-delete",
+      section: "documentation",
+      storageId: "cnt_000002",
+    }));
+  });
+
+  it("id에 해당하는 서버 아이템이 없으면 404를 반환한다", async () => {
     mockReadContentState.mockResolvedValue([]);
 
     const request = makeRequest("http://localhost/api/admin/content/state", {
@@ -271,23 +415,8 @@ describe("DELETE /api/admin/content/state", () => {
       body: JSON.stringify({ id: "to-delete" }),
     });
     const response = await DELETE(request);
-    const data = await response.json() as { ok: boolean };
 
-    expect(response.status).toBe(200);
-    expect(data.ok).toBe(true);
+    expect(response.status).toBe(404);
     expect(mockDeleteAuthoredContent).not.toHaveBeenCalled();
-  });
-
-  it("item이 있으면 authored content도 함께 삭제한다", async () => {
-    const item = makeEntry({ id: "to-delete" });
-    mockDeleteAuthoredContent.mockResolvedValue({ deleted: true });
-
-    const request = makeRequest("http://localhost/api/admin/content/state", {
-      method: "DELETE",
-      body: JSON.stringify({ id: "to-delete", item }),
-    });
-    await DELETE(request);
-
-    expect(mockDeleteAuthoredContent).toHaveBeenCalled();
   });
 });

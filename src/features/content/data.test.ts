@@ -3,11 +3,14 @@ import {
   createLocalizedContent,
   ensureUniqueSlug,
   formatPublicDate,
+  getAdjacentContentLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
+  getNewsFormatLabel,
   getWriterLabel,
   hasLocalizedTitle,
   isPublishedContentVisible,
+  resolveManagedContentSlug,
   slugifyTitle,
   sortManagedContents,
   stripManagedContentBodies,
@@ -38,6 +41,7 @@ function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContent
     status: "published",
     summary: createLocalizedContent(),
     title: createLocalizedContent("Test Title"),
+    visibleLocales: ["en", "ko", "ja"],
     ...overrides,
   };
 }
@@ -86,18 +90,18 @@ describe("hasLocalizedTitle", () => {
 });
 
 describe("isPublishedContentVisible", () => {
-  it("published 상태이고 제목이 있으면 true를 반환한다", () => {
-    const item = { status: "published" as const, title: createLocalizedContent("Title") };
+  it("published 상태이고 locale이 노출 대상으로 체크되어 있으면 true를 반환한다", () => {
+    const item = { status: "published" as const, visibleLocales: ["en" as const] };
     expect(isPublishedContentVisible(item, "en")).toBe(true);
   });
 
   it("hidden 상태이면 false를 반환한다", () => {
-    const item = { status: "hidden" as const, title: createLocalizedContent("Title") };
+    const item = { status: "hidden" as const, visibleLocales: ["en" as const] };
     expect(isPublishedContentVisible(item, "en")).toBe(false);
   });
 
-  it("해당 locale의 제목이 없으면 false를 반환한다", () => {
-    const item = { status: "published" as const, title: { en: "Title", ko: "", ja: "" } };
+  it("해당 locale이 노출 대상으로 체크되어 있지 않으면 false를 반환한다", () => {
+    const item = { status: "published" as const, visibleLocales: ["en" as const] };
     expect(isPublishedContentVisible(item, "ko")).toBe(false);
   });
 });
@@ -142,6 +146,55 @@ describe("ensureUniqueSlug", () => {
 
   it("현재 편집 중인 항목은 충돌에서 제외한다", () => {
     expect(ensureUniqueSlug("my-slug", items, "my-slug")).toBe("my-slug");
+  });
+});
+
+describe("resolveManagedContentSlug", () => {
+  const items = [
+    makeEntry({ id: "existing-slug" }),
+    makeEntry({ id: "custom-slug" }),
+  ];
+
+  it("신규 콘텐츠에서 입력 slug가 있으면 제목 대신 입력 slug를 사용한다", () => {
+    expect(
+      resolveManagedContentSlug({
+        enteredSlug: "my-custom-news-slug",
+        items,
+        title: createLocalizedContent("Title Based Slug"),
+      }),
+    ).toBe("my-custom-news-slug");
+  });
+
+  it("신규 콘텐츠에서 입력 slug가 없으면 제목 기반 slug를 사용한다", () => {
+    expect(
+      resolveManagedContentSlug({
+        enteredSlug: "",
+        items,
+        title: createLocalizedContent("Title Based Slug"),
+      }),
+    ).toBe("title-based-slug");
+  });
+
+  it("수정 콘텐츠에서 입력 slug가 비어 있으면 기존 slug를 유지한다", () => {
+    expect(
+      resolveManagedContentSlug({
+        currentId: "existing-slug",
+        enteredSlug: "",
+        items,
+        title: createLocalizedContent("Changed Title"),
+      }),
+    ).toBe("existing-slug");
+  });
+
+  it("수정 콘텐츠에서 입력 slug가 바뀌면 입력 slug를 정규화하고 충돌을 피한다", () => {
+    expect(
+      resolveManagedContentSlug({
+        currentId: "existing-slug",
+        enteredSlug: "Custom Slug",
+        items,
+        title: createLocalizedContent("Changed Title"),
+      }),
+    ).toBe("custom-slug-2");
   });
 });
 
@@ -213,6 +266,24 @@ describe("getWriterLabel", () => {
 
   it("공백으로만 이루어진 역할은 무시한다", () => {
     expect(getWriterLabel({ authorName: "Kim", authorRole: "  " })).toBe("Kim");
+  });
+});
+
+describe("getNewsFormatLabel", () => {
+  it("locale이 없으면 저장용 영어 형식을 반환한다", () => {
+    expect(getNewsFormatLabel({ authorName: "Press Release" })).toBe("Press Release");
+  });
+
+  it("locale이 있으면 표시 언어로 변환한다", () => {
+    expect(getNewsFormatLabel({ authorName: "Press Release" }, "ko")).toBe("보도자료");
+    expect(getNewsFormatLabel({ authorName: "Media Coverage" }, "ja")).toBe("メディア掲載");
+  });
+});
+
+describe("getAdjacentContentLabel", () => {
+  it("이전/다음 글 라벨을 locale별로 반환한다", () => {
+    expect(getAdjacentContentLabel("previous", "ko")).toBe("이전 글");
+    expect(getAdjacentContentLabel("next", "ja")).toBe("次の記事");
   });
 });
 

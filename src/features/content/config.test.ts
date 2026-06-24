@@ -4,40 +4,40 @@ import { getDocumentationSidebarMenuItems } from "./config";
 describe("getDocumentationSidebarMenuItems", () => {
   it("blogs 활성 상태에서 Documentation CMS 카테고리 메뉴를 반환한다", () => {
     expect(getDocumentationSidebarMenuItems("ko", "blogs")).toEqual([
-      { href: "/ko/features/documentation", isActive: false, kind: "link", label: "All", slug: "all" },
+      { href: "/ko/features/documentation", isActive: false, kind: "link", label: "전체", slug: "all" },
       {
         href: "/ko/features/documentation?category=introduction",
         isActive: false,
         kind: "link",
-        label: "Introduction",
+        label: "소개",
         slug: "introduction",
       },
       {
         href: "/ko/features/documentation?category=glossary",
         isActive: false,
         kind: "link",
-        label: "Glossary",
+        label: "용어집",
         slug: "glossary",
       },
       {
         href: "/ko/features/documentation?category=manuals",
         isActive: false,
         kind: "link",
-        label: "Manuals",
+        label: "매뉴얼",
         slug: "manuals",
       },
       {
         href: "/ko/features/documentation?category=white-papers",
         isActive: false,
         kind: "link",
-        label: "White Papers",
+        label: "화이트페이퍼",
         slug: "white-papers",
       },
       {
         href: "/ko/features/documentation?category=blogs",
         isActive: true,
         kind: "link",
-        label: "Blogs",
+        label: "블로그",
         slug: "blogs",
       },
     ]);

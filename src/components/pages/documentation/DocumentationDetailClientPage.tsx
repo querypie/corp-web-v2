@@ -10,9 +10,11 @@ import useHydrated from "@/hooks/useHydrated";
 import { docsCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/features/content/config";
 import {
   formatPublicDate,
+  getAdjacentContentLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
   getPublicDetailHref,
+  getResolvedContentLocale,
   getWriterLabel,
   isPublishedContentAccessible,
   type ManagedContentEntry,
@@ -56,6 +58,7 @@ export default function DocsDetailClientPage({
   }
 
   const isGateActive = isContentGatingEnabled(currentItem) && !isUnlocked;
+  const contentLocale = getResolvedContentLocale(currentItem, locale);
 
   const categoryItems = items.filter(
     (item) => item.categorySlug === currentItem.categorySlug,
@@ -65,8 +68,8 @@ export default function DocsDetailClientPage({
   const previousItem = categoryIndex > 0 ? categoryItems[categoryIndex - 1] : null;
   const nextItem = categoryIndex < categoryItems.length - 1 ? categoryItems[categoryIndex + 1] : null;
 
-  const previousLabel = "Previous Post";
-  const nextLabel = "Next post";
+  const previousLabel = getAdjacentContentLabel("previous", locale);
+  const nextLabel = getAdjacentContentLabel("next", locale);
 
   const relatedItems = [
     previousItem
@@ -74,7 +77,7 @@ export default function DocsDetailClientPage({
           category: previousLabel,
           href: getPublicDetailHref(section, locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
-          title: getLocalizedContent(previousItem.title, locale),
+          title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
         }
       : null,
     nextItem
@@ -82,7 +85,7 @@ export default function DocsDetailClientPage({
           category: nextLabel,
           href: getPublicDetailHref(section, locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
-          title: getLocalizedContent(nextItem.title, locale),
+          title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
         }
       : null,
   ].filter((item): item is NonNullable<typeof item> => !!item);
@@ -90,15 +93,17 @@ export default function DocsDetailClientPage({
   return (
     <DocsDetailPage
       {...fallbackProps}
-      bodyHtml={fallbackProps.bodyHtml}
+      bodyHtml={getLocalizedContent(currentItem.bodyHtml, contentLocale) || fallbackProps.bodyHtml}
       category={getCategoryLabel(docsCategoryConfigs, currentItem.categorySlug, locale)}
       contentOverlay={isGateActive ? (
         <ContentGateOverlay
           contactCopy={contactCopy}
+          contentId={currentItem.id}
           locale={locale}
           onUnlock={() => setIsUnlocked(true)}
-          title={getLocalizedContent(currentItem.title, locale)}
-          unlockCookieName={getContentUnlockCookieName(currentItem.id)}
+          section={section}
+          title={getLocalizedContent(currentItem.title, contentLocale)}
+          unlockCookieName={getContentUnlockCookieName(currentItem.id, section)}
         />
       ) : undefined}
       contentListItems={relatedItems}
@@ -112,9 +117,9 @@ export default function DocsDetailClientPage({
       docsHref={getCategoryHref(docsCategoryConfigs, currentItem.categorySlug, locale)}
       date={formatPublicDate(locale, currentItem.dateIso)}
       hideHeroImage={currentItem.hideHeroImage}
-      heroImageAlt={getLocalizedContent(currentItem.title, locale)}
+      heroImageAlt={getLocalizedContent(currentItem.title, contentLocale)}
       heroImageSrc={currentItem.imageSrc}
-      title={getLocalizedContent(currentItem.title, locale)}
+      title={getLocalizedContent(currentItem.title, contentLocale)}
       writer={getWriterLabel(currentItem)}
     />
   );

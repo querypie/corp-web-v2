@@ -1,6 +1,6 @@
 # 테스트 커버리지 현황
 
-최종 업데이트: 2026-04-16
+최종 업데이트: 2026-06-24
 
 ---
 
@@ -9,17 +9,18 @@
 | 파일 | 테스트 수 | 환경 | 대상 |
 |------|-----------|------|------|
 | `src/constants/i18n.test.ts` | 11 | happy-dom | locale 판별, 경로 변환 |
-| `src/features/content/data.test.ts` | 32 | happy-dom | 콘텐츠 쿼리·변환 순수 함수 |
+| `src/features/content/data.test.ts` | 39 | happy-dom | 콘텐츠 쿼리·변환 순수 함수 |
 | `src/features/content/gating.test.ts` | 15 | happy-dom | 게이팅 조건, HTML 미리보기 생성 |
-| `src/app/api/admin/content/state/route.test.ts` | 18 | node | Admin 콘텐츠 상태 API (GET/POST/PUT/PATCH/DELETE) |
-| `src/app/api/downloads/content/route.test.ts` | 7 | node | 콘텐츠 다운로드·잠금 해제 API |
+| `src/features/content/authored.server.test.ts` | 2 | node | Admin 콘텐츠 파일 저장, outlink 전환 시 본문 정리, storageId 폴더 이동 |
+| `src/app/api/admin/content/state/route.test.ts` | 26 | node | Admin 콘텐츠 상태 API, storageId 우선 식별, 입력 검증 |
+| `src/app/api/downloads/content/route.test.ts` | 9 | node | 콘텐츠 다운로드·잠금 해제 API |
 | `src/components/common/Tab.test.tsx` | 7 | happy-dom | Tab 렌더링·상태 |
 | `src/components/common/Button.test.tsx` | 11 | happy-dom | Button variant·size·disabled |
 | `src/components/common/ContentBodyPreview.test.tsx` | 6 | happy-dom | HTML 렌더링, public/ 경로 정규화 |
 | `src/components/common/Select.test.tsx` | 6 | happy-dom | 제어·비제어 Select |
 | `src/components/pages/legal/LegalVersionSelect.test.tsx` | 4 | happy-dom | 버전 선택 후 router.push |
 | `src/components/pages/documentation/ContentLeadForm.test.tsx` | 7 | happy-dom | 폼 검증, fetch, 에러 처리 |
-| **합계** | **124** | | |
+| **전체 합계** | **297** | | `npm run test:run` 기준 |
 
 ---
 

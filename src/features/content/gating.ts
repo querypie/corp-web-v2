@@ -20,8 +20,12 @@ const VOID_TAGS = new Set([
   "wbr",
 ]);
 
-export function getContentUnlockCookieName(id: string) {
-  return `${CONTENT_UNLOCK_COOKIE_PREFIX}_${id.replace(/[^a-zA-Z0-9_-]/g, "_")}`;
+export function getContentUnlockCookieName(
+  id: string,
+  section?: ManagedContentEntry["section"],
+) {
+  const scopedId = section ? `${section}_${id}` : id;
+  return `${CONTENT_UNLOCK_COOKIE_PREFIX}_${scopedId.replace(/[^a-zA-Z0-9_-]/g, "_")}`;
 }
 
 export function isContentGatingEnabled(

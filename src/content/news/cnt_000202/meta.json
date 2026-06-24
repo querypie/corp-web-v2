@@ -1,0 +1,50 @@
+{
+  "authorName": "Press Release",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "content",
+  "dateIso": "2026-06-09",
+  "downloadCoverImageSrc": "/news/notepie-og.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "notepie-launch",
+  "imageSrc": "/news/notepie-og.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000202",
+  "summary": {
+    "en": "QueryPie has unveiled NotePie, an AI work assistant that answers questions based on user-specified documents and web sources, provides source information, and supports the creation of reports, slides, mind maps, podcasts, and other work outputs.",
+    "ko": "QueryPie는 사용자가 지정한 문서와 웹 소스를 기반으로 질문에 답하고, 출처 정보를 제공하며, 보고서, 슬라이드, 마인드맵, 팟캐스트 등 다양한 업무 산출물 생성을 지원하는 AI 업무 어시스턴트 NotePie를 공개했다.",
+    "ja": "QueryPieは、ユーザーが指定したドキュメントやWebソースに基づいて質問に回答し、ソース情報を提供し、レポート、スライド、マインドマップ、ポッドキャストなどの作業成果物の作成をサポートするAIワークアシスタント「NotePie」を発表しました。"
+  },
+  "title": {
+    "en": "QueryPie Unveils NotePie, an AI Work Assistant Based on Documents and Web Sources",
+    "ko": "QueryPie, 문서 및 웹 소스 기반 AI 업무 어시스턴트 NotePie 공개",
+    "ja": "QueryPieがドキュメントとWebソースに基づくAIワークアシスタント「NotePie」を発表"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/news/cnt_000202/en.html",
+      "jsonPath": "src/content/news/cnt_000202/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/news/cnt_000202/ko.html",
+      "jsonPath": "src/content/news/cnt_000202/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/news/cnt_000202/ja.html",
+      "jsonPath": "src/content/news/cnt_000202/ja.tiptap.json"
+    }
+  }
+}
