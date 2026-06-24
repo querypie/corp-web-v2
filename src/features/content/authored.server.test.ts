@@ -94,6 +94,20 @@ afterEach(async () => {
 });
 
 describe("saveAuthoredContent", () => {
+  it("dateIso를 YYYY-MM-DD 형식으로 정규화해서 저장한다", async () => {
+    const existing = makeEntry({ dateIso: "2026-1-15", storageId: "cnt_000001" });
+    const entryDir = await writeExistingContent(existing);
+    const { saveAuthoredContent } = await import("./authored.server");
+
+    const saved = await saveAuthoredContent(existing);
+    const meta = JSON.parse(await fs.readFile(path.join(entryDir, "meta.json"), "utf8")) as {
+      dateIso: string;
+    };
+
+    expect(saved.dateIso).toBe("2026-01-15");
+    expect(meta.dateIso).toBe("2026-01-15");
+  });
+
   it("outlink 저장 시 기존 locale 본문 파일을 제거한다", async () => {
     const existing = makeEntry({ storageId: "cnt_000001" });
     const entryDir = await writeExistingContent(existing);

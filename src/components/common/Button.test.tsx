@@ -58,4 +58,11 @@ describe("Button", () => {
     render(<Button size="small">Small</Button>);
     expect(screen.getByRole("button").className).toContain("h-8");
   });
+
+  it("size=xsmall이면 Figma xsmall 크기와 sm 텍스트를 적용한다", () => {
+    render(<Button size="xsmall">XSmall</Button>);
+    expect(screen.getByRole("button").className).toContain("h-[26px]");
+    expect(screen.getByRole("button").className).toContain("px-3");
+    expect(screen.getByRole("button").className).toContain("type-body-sm");
+  });
 });

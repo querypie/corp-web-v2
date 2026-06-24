@@ -3,6 +3,7 @@ import {
   createLocalizedContent,
   ensureUniqueSlug,
   formatPublicDate,
+  getDateIsoSortValue,
   getAdjacentContentLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
@@ -10,6 +11,7 @@ import {
   getWriterLabel,
   hasLocalizedTitle,
   isPublishedContentVisible,
+  normalizeDateIso,
   resolveManagedContentSlug,
   slugifyTitle,
   sortManagedContents,
@@ -216,10 +218,38 @@ describe("sortManagedContents", () => {
     expect(sorted[1].id).toBe("old");
   });
 
+  it("padding 없는 dateIso도 날짜 값 기준으로 정렬한다", () => {
+    const items = [
+      makeEntry({ id: "january", sortOrder: 1, dateIso: "2026-1-15" }),
+      makeEntry({ id: "june", sortOrder: 1, dateIso: "2026-06-09" }),
+    ];
+    const sorted = sortManagedContents(items);
+    expect(sorted[0].id).toBe("june");
+    expect(sorted[1].id).toBe("january");
+  });
+
   it("원본 배열을 변경하지 않는다", () => {
     const items = [makeEntry({ id: "b", sortOrder: 2 }), makeEntry({ id: "a", sortOrder: 1 })];
     sortManagedContents(items);
     expect(items[0].id).toBe("b");
+  });
+});
+
+describe("normalizeDateIso", () => {
+  it("YYYY-M-D 날짜를 YYYY-MM-DD로 정규화한다", () => {
+    expect(normalizeDateIso("2026-1-5")).toBe("2026-01-05");
+    expect(normalizeDateIso("2026-01-15")).toBe("2026-01-15");
+  });
+
+  it("유효하지 않은 날짜는 원본 trim 값으로 둔다", () => {
+    expect(normalizeDateIso("  not-a-date  ")).toBe("not-a-date");
+    expect(normalizeDateIso("2026-13-40")).toBe("2026-13-40");
+  });
+});
+
+describe("getDateIsoSortValue", () => {
+  it("padding 없는 날짜와 padding 있는 날짜를 같은 날짜 값으로 계산한다", () => {
+    expect(getDateIsoSortValue("2026-1-15")).toBe(getDateIsoSortValue("2026-01-15"));
   });
 });
 

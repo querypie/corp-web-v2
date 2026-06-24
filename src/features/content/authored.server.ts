@@ -3,7 +3,13 @@ import "server-only";
 import { existsSync, promises as fs } from "fs";
 import path from "path";
 import { locales, type Locale } from "@/constants/i18n";
-import { getDefaultVisibleLocales, type ManagedContentCategorySlug, type ManagedContentEntry, type ManagedContentSection } from "./data";
+import {
+  getDefaultVisibleLocales,
+  normalizeDateIso,
+  type ManagedContentCategorySlug,
+  type ManagedContentEntry,
+  type ManagedContentSection,
+} from "./data";
 
 type AuthoredLocaleRecord = {
   htmlPath: string;
@@ -340,7 +346,7 @@ export async function readAuthoredManagedContents(options?: { includeBodies?: bo
       bodyRichText,
       categorySlug: meta.categorySlug,
       contentType: meta.contentType ?? "content",
-      dateIso: meta.dateIso,
+      dateIso: normalizeDateIso(meta.dateIso),
       downloadCoverImageSrc: meta.downloadCoverImageSrc ?? "",
       downloadPdfFileName: meta.downloadPdfFileName ?? "",
       downloadPdfSrc: meta.downloadPdfSrc ?? "",
@@ -425,12 +431,13 @@ export async function saveAuthoredContent(
     };
   }
 
+  const normalizedDateIso = normalizeDateIso(input.dateIso);
   const meta: AuthoredContentMeta = {
     authorName: input.authorName,
     authorRole: input.authorRole,
     categorySlug: input.categorySlug,
     contentType: input.contentType,
-    dateIso: input.dateIso,
+    dateIso: normalizedDateIso,
     downloadCoverImageSrc: input.downloadCoverImageSrc,
     downloadPdfFileName: input.downloadPdfFileName,
     downloadPdfSrc: input.downloadPdfSrc,
@@ -456,6 +463,7 @@ export async function saveAuthoredContent(
 
   return {
     ...input,
+    dateIso: normalizedDateIso,
     storageId,
   } satisfies ManagedContentEntry;
 }

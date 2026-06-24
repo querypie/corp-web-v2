@@ -249,13 +249,62 @@ export function resolveManagedContentSlug({
   return ensureUniqueSlug(baseSlug, items, currentId);
 }
 
+export function normalizeDateIso(dateIso: string) {
+  const trimmedDateIso = dateIso.trim();
+  const match = /^(\d{4})-(\d{1,2})-(\d{1,2})$/.exec(trimmedDateIso);
+
+  if (!match) {
+    return trimmedDateIso;
+  }
+
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const date = new Date(Date.UTC(year, month - 1, day));
+
+  if (
+    date.getUTCFullYear() !== year ||
+    date.getUTCMonth() !== month - 1 ||
+    date.getUTCDate() !== day
+  ) {
+    return trimmedDateIso;
+  }
+
+  return `${match[1]}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
+
+export function getDateIsoSortValue(dateIso: string) {
+  const normalizedDateIso = normalizeDateIso(dateIso);
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(normalizedDateIso);
+
+  if (!match) {
+    return Number.NEGATIVE_INFINITY;
+  }
+
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  return Date.UTC(year, month - 1, day);
+}
+
+export function compareDateIsoDesc(leftDateIso: string, rightDateIso: string) {
+  const leftTime = getDateIsoSortValue(leftDateIso);
+  const rightTime = getDateIsoSortValue(rightDateIso);
+
+  if (leftTime !== rightTime) {
+    return rightTime - leftTime;
+  }
+
+  return normalizeDateIso(rightDateIso).localeCompare(normalizeDateIso(leftDateIso));
+}
+
 export function sortManagedContents(items: ManagedContentEntry[]) {
   return [...items].sort((left, right) => {
     if (left.sortOrder !== right.sortOrder) {
       return left.sortOrder - right.sortOrder;
     }
 
-    return right.dateIso.localeCompare(left.dateIso);
+    return compareDateIsoDesc(left.dateIso, right.dateIso);
   });
 }
 
@@ -276,7 +325,7 @@ export function formatPublicDate(locale: Locale, dateIso: string) {
     return "";
   }
 
-  const date = new Date(`${dateIso}T00:00:00`);
+  const date = new Date(`${normalizeDateIso(dateIso)}T00:00:00`);
 
   if (Number.isNaN(date.getTime())) {
     return "";

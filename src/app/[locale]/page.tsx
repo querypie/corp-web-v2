@@ -9,7 +9,9 @@ import {
   getCategoryLabel,
 } from "@/features/content/config";
 import {
+  compareDateIsoDesc,
   getContentThumbnailSrc,
+  getManagedCategoryLabel,
   getLocalizedContent,
   isPublishedContentVisible,
   getPublicDetailHref,
@@ -73,19 +75,43 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     notFound();
   }
 
-  const publishedItems = await readContentState();
+  const publishedItems = await readContentState(undefined, { includeBodies: false });
+  const visiblePublishedItems = publishedItems.filter((item) =>
+    isPublishedContentVisible(item, locale),
+  );
+  const noticeItems = visiblePublishedItems
+    .map((item) => {
+      const title = getLocalizedContent(item.title, locale);
+      const isExternal = item.contentType === "outlink" && Boolean(item.externalUrl.trim());
+
+      if (!title) {
+        return null;
+      }
+
+      return {
+        category: getManagedCategoryLabel(item.section, item.categorySlug, locale),
+        href: isExternal ? item.externalUrl : getPublicDetailHref(item.section, locale, item.id),
+        imageSrc: getContentThumbnailSrc(item.imageSrc),
+        isExternal,
+        title,
+        dateIso: item.dateIso,
+      };
+    })
+    .filter((item): item is NonNullable<typeof item> => Boolean(item))
+    .sort((left, right) => compareDateIsoDesc(left.dateIso, right.dateIso))
+    .slice(0, 3)
+    .map(({ dateIso: _dateIso, ...item }) => item);
   const latestByCategory = (
     section: "demo" | "documentation",
     categorySlug: string,
   ) =>
-    publishedItems
+    visiblePublishedItems
       .filter(
         (item) =>
           item.section === section &&
-          item.categorySlug === categorySlug &&
-          isPublishedContentVisible(item, locale),
+          item.categorySlug === categorySlug,
       )
-      .sort((left, right) => (right.dateIso || "").localeCompare(left.dateIso || ""))[0];
+      .sort((left, right) => compareDateIsoDesc(left.dateIso, right.dateIso))[0];
 
   const latestUseCase = latestByCategory("demo", "use-cases");
   const latestWhitePaper = latestByCategory("documentation", "white-papers");
@@ -481,8 +507,8 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     },
   }[locale];
 
-  const newsItems = (await readContentState("news"))
-    .filter((item) => isPublishedContentVisible(item, locale))
+  const newsItems = visiblePublishedItems
+    .filter((item) => item.section === "news")
     .slice(0, 3)
     .map((item) => ({
       href: item.contentType === "outlink" ? item.externalUrl : getPublicDetailHref("news", locale, item.id),
@@ -514,6 +540,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       mcpTitle={copy.mcpTitle}
       newsItems={newsItems.length > 0 ? newsItems : copy.newsItems}
       newsTitle={copy.newsTitle}
+      noticeItems={noticeItems}
       reviewItems={copy.reviewItems}
       reviewTitle={copy.reviewTitle}
     />
