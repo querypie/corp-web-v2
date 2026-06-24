@@ -1,0 +1,50 @@
+{
+  "authorName": "Press Release",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "content",
+  "dateIso": "2026-06-05",
+  "downloadCoverImageSrc": "/news/lingo-og.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "lingo-launch",
+  "imageSrc": "/news/lingo-og.webp",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 2,
+  "status": "published",
+  "storageId": "cnt_000201",
+  "summary": {
+    "en": "QueryPie introduced Lingo, an AI real-time interpretation service that supports live captions and translation across in-person meetings, Google Meet, Microsoft Teams, and Zoom, then connects meeting summaries and follow-up work automation through QueryPie AI Platform.",
+    "ko": "QueryPie는 대면 회의, Google Meet, Microsoft Teams, Zoom 등에서 실시간 자막 및 번역을 지원하고 QueryPie AI Platform을 통해 회의 요약 및 후속 작업 자동화를 연결하는 AI 실시간 통역 서비스 Lingo를 선보였습니다.",
+    "ja": "QueryPieは、対面会議、Google Meet、Microsoft Teams、Zoomでのライブキャプションと翻訳をサポートし、QueryPie AI Platformを通じて会議の要約とフォローアップ業務の自動化を連携するAIリアルタイム通訳サービス「Lingo」を導入しました。"
+  },
+  "title": {
+    "en": "QueryPie unveils Lingo, an AI real-time interpretation service",
+    "ko": "QueryPie, AI 실시간 통역 서비스 Lingo 공개",
+    "ja": "QueryPie、AIリアルタイム通訳サービス「Lingo」を発表"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/news/cnt_000201/en.html",
+      "jsonPath": "src/content/news/cnt_000201/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/news/cnt_000201/ko.html",
+      "jsonPath": "src/content/news/cnt_000201/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/news/cnt_000201/ja.html",
+      "jsonPath": "src/content/news/cnt_000201/ja.tiptap.json"
+    }
+  }
+}

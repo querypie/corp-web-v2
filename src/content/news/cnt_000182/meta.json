@@ -15,7 +15,7 @@
   "imageSrc": "/news/news-22.webp",
   "relatedIds": [],
   "section": "news",
-  "sortOrder": 10,
+  "sortOrder": 13,
   "status": "published",
   "storageId": "cnt_000182",
   "summary": {
@@ -28,5 +28,10 @@
     "ko": "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
     "ja": "テラスカイ社のMCP対応AIプラットフォーム 「mitoco Buddy」が正式ローンチ"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {}
 }
