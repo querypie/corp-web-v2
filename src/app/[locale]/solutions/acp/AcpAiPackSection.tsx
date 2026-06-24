@@ -1,0 +1,134 @@
+import type { Locale } from "@/constants/i18n";
+
+type AcpAiPackSectionProps = {
+  locale: Locale;
+};
+
+const copy = {
+  en: {
+    title: "ACP - AI Pack",
+    description:
+      "The ACP AI Pack is an extension product family that enables AI Chat and AI Agents to safely execute tasks including tool calls, data retrieval, approval bypass risk detection, and abnormal behavior control within the existing ACP framework of access control, authorization, policies, and auditing.",
+    cards: [
+      {
+        description:
+          "Users perform analysis, authorization, and audit tasks using natural language within QueryPie.",
+        title: "AI Chat",
+      },
+      {
+        description:
+          "External agents, such as Claude, AIP, and internal agents, call QueryPie functions via the MCP tool.",
+        title: "ACP MCP",
+      },
+      {
+        description:
+          "Automate repetitive security tasks, such as creating audit reports and organizing authorization change history.",
+        title: "AI Skills",
+      },
+    ],
+    imageAlt: "ACP AI Pack preview",
+  },
+  ko: {
+    title: "ACP - AI Pack",
+    description:
+      "ACP AI Pack은 기존 ACP의 접근 제어, 권한, 정책, 감사 체계 안에서 AI Chat과 AI Agent가 도구 호출, 데이터 조회, 승인 우회 리스크 감지, 이상 행위 제어 같은 작업을 안전하게 수행하도록 돕는 확장 제품군입니다.",
+    cards: [
+      {
+        description:
+          "사용자는 QueryPie 안에서 자연어로 분석, 권한 처리, 감사 업무를 수행합니다.",
+        title: "AI Chat",
+      },
+      {
+        description:
+          "Claude, AIP, 내부 에이전트 같은 외부 에이전트가 MCP 도구를 통해 QueryPie 기능을 호출합니다.",
+        title: "ACP MCP",
+      },
+      {
+        description:
+          "감사 리포트 생성, 권한 변경 이력 정리 같은 반복 보안 업무를 자동화합니다.",
+        title: "AI Skills",
+      },
+    ],
+    imageAlt: "ACP AI Pack 미리보기",
+  },
+  ja: {
+    title: "ACP - AI Pack",
+    description:
+      "ACP AI Packは、既存のACPのアクセス制御、認可、ポリシー、監査の枠組みの中で、AI ChatとAI Agentがツール呼び出し、データ取得、承認回避リスクの検知、異常行動の制御などのタスクを安全に実行できるようにする拡張製品群です。",
+    cards: [
+      {
+        description:
+          "ユーザーはQueryPie内で自然言語を使い、分析、認可、監査タスクを実行します。",
+        title: "AI Chat",
+      },
+      {
+        description:
+          "Claude、AIP、社内エージェントなどの外部エージェントがMCPツールを通じてQueryPie機能を呼び出します。",
+        title: "ACP MCP",
+      },
+      {
+        description:
+          "監査レポート作成や認可変更履歴の整理など、反復的なセキュリティタスクを自動化します。",
+        title: "AI Skills",
+      },
+    ],
+    imageAlt: "ACP AI Packプレビュー",
+  },
+} satisfies Record<Locale, {
+  cards: Array<{
+    description: string;
+    title: string;
+  }>;
+  description: string;
+  imageAlt: string;
+  title: string;
+}>;
+
+export default function AcpAiPackSection({ locale }: AcpAiPackSectionProps) {
+  const content = copy[locale];
+
+  return (
+    <section className="flex w-full justify-center bg-bg-deep px-5 py-14 md:px-10 md:py-[100px]">
+      <div className="flex w-full max-w-[1200px] flex-col items-start gap-10 md:gap-[60px]">
+        <header className="flex w-full flex-col items-center gap-5 text-center">
+          <h2 className="m-0 w-full type-h1 font-normal tracking-[0] text-fg md:tracking-[-0.2px]">
+            {content.title}
+          </h2>
+          <p className="m-0 w-full text-pretty type-body-lg leading-[26px] text-mute">
+            {content.description}
+          </p>
+        </header>
+
+        <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-[60px]">
+          <div className="flex w-full flex-col gap-2.5 lg:w-[420px] lg:shrink-0">
+            {content.cards.map((card) => (
+              <article
+                className="flex min-h-[138px] w-full flex-col items-start justify-start rounded-box bg-bg p-[30px]"
+                key={card.title}
+              >
+                <div className="flex w-full flex-col gap-2.5">
+                  <h3 className="m-0 w-full type-h3 font-medium tracking-[0] text-fg md:tracking-[-0.2px]">
+                    {card.title}
+                  </h3>
+                  <p className="m-0 w-full type-body-md leading-[22px] text-mute">
+                    {card.description}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="relative aspect-[341/200] w-full overflow-hidden lg:h-[400px] lg:w-[682px] lg:shrink-0">
+            <img
+              alt={content.imageAlt}
+              className="block h-full w-full object-cover"
+              height="400"
+              src="/solutions/aip/aip-cover.jpg"
+              width="682"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
