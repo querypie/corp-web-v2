@@ -7,6 +7,7 @@ import HomeNewsListClientSection from "../../sections/HomeNewsListClientSection"
 import McpSection from "../../sections/McpSection";
 import ReviewSection from "../../sections/ReviewSection";
 import HomePageHero from "./HomePageHero";
+import HomeNoticePopover, { type HomeNoticeItem } from "./HomeNoticePopover";
 import type { Locale } from "../../../constants/i18n";
 
 type FeatureItem = {
@@ -69,6 +70,7 @@ export type HomePageProps = {
   mcpTitle: string;
   newsItems: NewsItem[];
   newsTitle: string;
+  noticeItems: HomeNoticeItem[];
   reviewItems: ReviewItem[];
   reviewTitle: string;
 };
@@ -94,11 +96,14 @@ export default function HomePage({
   mcpTitle,
   newsItems,
   newsTitle,
+  noticeItems,
   reviewItems,
   reviewTitle,
 }: HomePageProps) {
   return (
     <div className={`mt-5 flex flex-col ${pageSectionGapClassName} overflow-x-hidden bg-bg ${pageXPaddingClassName} pb-10 text-fg md:mt-0`}>
+      <HomeNoticePopover items={noticeItems} />
+
       <div className="relative -mx-5 md:-mx-10">
         <HomePageHero
           ctaLabel={heroPrimaryCtaLabel}

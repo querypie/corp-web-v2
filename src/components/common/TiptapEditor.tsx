@@ -139,33 +139,6 @@ function updateTableControlsState(
   });
 }
 
-function isInternalMediaSrc(src: string) {
-  const trimmedSrc = src.trim();
-
-  if (!trimmedSrc || trimmedSrc.startsWith("data:")) {
-    return false;
-  }
-
-  if (trimmedSrc.startsWith("blob:")) {
-    return true;
-  }
-
-  if (trimmedSrc.startsWith("/") && !trimmedSrc.startsWith("//")) {
-    return true;
-  }
-
-  try {
-    return new URL(trimmedSrc).origin === window.location.origin;
-  } catch {
-    return false;
-  }
-}
-
-function removeElementOrMediaFigure(element: Element) {
-  const figure = element.closest("figure[data-qp-image], figure[data-qp-video]");
-  (figure ?? element).remove();
-}
-
 function sanitizePastedHtml(html: string) {
   if (typeof window === "undefined") {
     return html;
@@ -173,54 +146,9 @@ function sanitizePastedHtml(html: string) {
 
   const document = new DOMParser().parseFromString(html, "text/html");
 
-  document.querySelectorAll("img[src]").forEach((image) => {
-    if (!isInternalMediaSrc(image.getAttribute("src") ?? "")) {
-      removeElementOrMediaFigure(image);
-    }
-  });
-
   document.querySelectorAll("iframe, embed, object").forEach((element) => element.remove());
 
-  document.querySelectorAll("video").forEach((video) => {
-    const src = video.getAttribute("src") ?? "";
-    const sourceSrcs = Array.from(video.querySelectorAll("source[src]")).map((source) =>
-      source.getAttribute("src") ?? "",
-    );
-    const hasInternalSource = Boolean(src && isInternalMediaSrc(src)) ||
-      sourceSrcs.some(isInternalMediaSrc);
-
-    if (!hasInternalSource) {
-      removeElementOrMediaFigure(video);
-      return;
-    }
-
-    video.querySelectorAll("source[src]").forEach((source) => {
-      if (!isInternalMediaSrc(source.getAttribute("src") ?? "")) {
-        source.remove();
-      }
-    });
-  });
-
   return document.body.innerHTML;
-}
-
-function clipboardHasBlockedFileOnlyPaste(event: ClipboardEvent) {
-  const clipboardData = event.clipboardData;
-
-  if (!clipboardData) {
-    return false;
-  }
-
-  const hasBlockedFile = Array.from(clipboardData.items).some((item) => {
-    const file = item.kind === "file" ? item.getAsFile() : null;
-    return Boolean(file && (file.type.startsWith("image/") || file.type.startsWith("video/")));
-  });
-
-  if (!hasBlockedFile) {
-    return false;
-  }
-
-  return !clipboardData.getData("text/html").trim() && !clipboardData.getData("text/plain").trim();
 }
 
 const ResizableImage = Image.extend({
@@ -677,14 +605,6 @@ export default function TiptapEditor({
       attributes: {
         class:
           `${CONTENT_PREVIEW_RICH_CLASS} content-rich-editor min-h-[320px] outline-none [&_p.is-editor-empty:first-child::before]:pointer-events-none [&_p.is-editor-empty:first-child::before]:float-left [&_p.is-editor-empty:first-child::before]:h-0 [&_p.is-editor-empty:first-child::before]:text-mute [&_p.is-editor-empty:first-child::before]:content-[attr(data-placeholder)]`,
-      },
-      handlePaste(_view, event) {
-        if (clipboardHasBlockedFileOnlyPaste(event)) {
-          event.preventDefault();
-          return true;
-        }
-
-        return false;
       },
       handleKeyDown(view, event) {
         const isUndoKey = (event.metaKey || event.ctrlKey) && !event.shiftKey && event.key.toLowerCase() === "z";

@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 export type ButtonVariant = "primary" | "secondary" | "outline";
 export type ButtonStyle = "round" | "full";
-export type ButtonSize = "small" | "default" | "large";
+export type ButtonSize = "xsmall" | "small" | "default" | "large";
 export type ButtonState = "default" | "hover" | "disable";
 
 export type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "style"> & {
@@ -35,6 +35,7 @@ export function getButtonStyle(
     container: cx(
       "pressable inline-flex items-center justify-center rounded-button",
       shape === "full" ? "rounded-full" : "rounded-button",
+      size === "xsmall" && "h-[26px] gap-1.5 px-3",
       size === "small" && "h-8 gap-1.5 px-4",
       size === "default" && "h-10 gap-1.5 px-5",
       size === "large" && "h-12 gap-2 px-6",
@@ -51,7 +52,8 @@ export function getButtonStyle(
       state === "disable" && "opacity-40",
     ),
     text: cx(
-      "type-body-md transition-colors duration-300",
+      size === "xsmall" ? "type-body-sm" : "type-body-md",
+      "transition-colors duration-300",
       variant === "primary"
         ? state === "hover"
           ? "text-bg"
