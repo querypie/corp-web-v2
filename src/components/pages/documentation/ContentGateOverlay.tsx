@@ -4,11 +4,14 @@ import { startTransition } from "react";
 import { useRouter } from "next/navigation";
 import ContentLeadForm from "./ContentLeadForm";
 import type { ContactPageCopy } from "@/features/contact/copy";
+import type { ManagedContentSection } from "@/features/content/data";
 
 type ContentGateOverlayProps = {
   contactCopy: ContactPageCopy;
+  contentId: string;
   locale: "en" | "ko" | "ja";
   onUnlock: () => void;
+  section: Exclude<ManagedContentSection, "news">;
   title: string;
   unlockCookieName: string;
 };
@@ -30,8 +33,10 @@ function getLocalizedCopy(locale: "en" | "ko" | "ja") {
 
 export default function ContentGateOverlay({
   contactCopy,
+  contentId,
   locale,
   onUnlock,
+  section,
   title,
   unlockCookieName,
 }: ContentGateOverlayProps) {
@@ -57,9 +62,11 @@ export default function ContentGateOverlay({
             </div>
             <ContentLeadForm
               contactCopy={contactCopy}
+              contentId={contentId}
               locale={locale}
               mode="unlock"
               onSuccess={handleSuccess}
+              section={section}
               title={title}
               unlockCookieName={unlockCookieName}
             />

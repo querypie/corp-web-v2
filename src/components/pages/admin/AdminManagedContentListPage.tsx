@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import AdminHeader from "../../layout/admin/AdminHeader";
 import Button from "../../common/Button";
 import ContentPreviewImage from "../../common/ContentPreviewImage";
 import Input from "../../common/Input";
@@ -11,11 +10,12 @@ import Tab from "../../common/Tab";
 import TabGroup from "../../common/TabGroup";
 import AdminContentPreview from "./AdminContentPreview";
 import {
-  persistManagedContents,
   deleteManagedContent,
   getManagedContentDetail,
   reorderManagedContents,
   updateManagedContentStatus,
+  updateManagedContentSortOrders,
+  upsertManagedContent,
   useManagedContentsLoading,
   useManagedContents,
 } from "@/features/content/clientStore";
@@ -25,9 +25,9 @@ import {
   getAdminDetailHref,
   getDownloadPreviewProps,
   getManagedCategoryLabel,
+  getNewsFormatLabel,
   getLocalizedContent,
   getWriterLabel,
-  hasLocalizedTitle,
   type ManagedContentCategorySlug,
   type ManagedContentEntry,
   type ManagedContentSection,
@@ -37,6 +37,12 @@ import { cloneAsAuthoredContent } from "@/features/content/cloneToAuthored";
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
+
+const localeBadgeClassName = {
+  en: "border-amber-300/20 bg-amber-300/10 text-amber-200",
+  ko: "border-sky-400/20 bg-sky-400/10 text-sky-200",
+  ja: "border-rose-400/20 bg-rose-400/10 text-rose-200",
+} satisfies Record<"en" | "ko" | "ja", string>;
 
 function SearchField({
   value,
@@ -48,7 +54,7 @@ function SearchField({
   return (
     /* 리스트 상단 검색 필드 */
     <Input
-      className="w-full md:w-[260px]"
+      className="w-full min-w-[140px]"
       onChange={(event) => onChange(event.target.value)}
       placeholder="Search content"
       type="text"
@@ -146,7 +152,7 @@ function ActionIcon({
   );
 }
 
-function PreviewModal({
+export function PreviewModal({
   item,
   isLoading = false,
   onClose,
@@ -197,7 +203,7 @@ function PreviewModal({
               summary={getLocalizedContent(item.summary, activeLocale)}
               title={getLocalizedContent(item.title, activeLocale)}
               url={item.externalUrl || "#"}
-              writer={item.section === "news" ? "" : getWriterLabel(item)}
+              writer={item.section === "news" ? getNewsFormatLabel(item, activeLocale) : getWriterLabel(item)}
             />
           )}
         </div>
@@ -217,7 +223,7 @@ function ContentRow({
   rowRef,
   onMoveDown,
   onMoveUp,
-  onOpenPreview,
+  onOpenDetail,
   onTogglePublished,
   showCategory,
 }: {
@@ -231,7 +237,7 @@ function ContentRow({
   rowRef: (node: HTMLDivElement | null) => void;
   onMoveDown: () => void;
   onMoveUp: () => void;
-  onOpenPreview: () => void;
+  onOpenDetail: () => void;
   onTogglePublished: () => void;
   showCategory: boolean;
 }) {
@@ -273,13 +279,13 @@ function ContentRow({
       ref={rowRef}
       onClick={() => {
         if (isReorderMode) return;
-        onOpenPreview();
+        onOpenDetail();
       }}
       onKeyDown={(event) => {
         if (isReorderMode) return;
         if (event.key === "Enter" || event.key === " ") {
           event.preventDefault();
-          onOpenPreview();
+          onOpenDetail();
         }
       }}
       role={isReorderMode ? undefined : "button"}
@@ -316,11 +322,26 @@ function ContentRow({
             {getManagedCategoryLabel(item.section, item.categorySlug, activeLocale)}
           </p>
         ) : null}
-        <p className="m-0 type-body-lg text-fg">{localizedTitle}</p>
+        <p className="m-0 type-body-md text-fg">{localizedTitle}</p>
       </div>
 
       <div className="flex items-center justify-between gap-4 md:contents">
-        <div className="type-body-md text-mute md:self-center md:whitespace-nowrap">{formatPublicDate(activeLocale, item.dateIso)}</div>
+        <div className="flex flex-col gap-2 md:self-center md:whitespace-nowrap">
+          <div className="flex flex-wrap gap-1">
+            {item.visibleLocales.slice(0, 3).map((locale) => (
+              <span
+                key={locale}
+                className={cx(
+                  "inline-flex h-[18px] items-center rounded-full border px-1.5 text-[10px] font-normal uppercase leading-none",
+                  localeBadgeClassName[locale],
+                )}
+              >
+                {locale}
+              </span>
+            ))}
+          </div>
+          <div className="type-body-md text-mute">{formatPublicDate(activeLocale, item.dateIso)}</div>
+        </div>
 
         <div className="flex items-center justify-end gap-2 md:col-start-auto md:justify-between md:gap-3">
           <div className="flex flex-col items-center gap-2">
@@ -366,18 +387,6 @@ function ContentRow({
                     event.stopPropagation();
                   }}
                 >
-                  <a
-                    className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute"
-                    href={getAdminDetailHref(item.section, item.categorySlug, item.id)}
-                  >
-                    <MenuIcon>
-                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 20h9" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                        <path d="M16.5 3.5a2.121 2.121 0 1 1 3 3L7 19l-4 1 1-4 12.5-12.5Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                      </svg>
-                    </MenuIcon>
-                    수정
-                  </a>
                   <button
                     className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute"
                     onClick={onDuplicate}
@@ -419,18 +428,14 @@ function ContentRow({
 
 type Props = {
   categorySlug: ManagedContentCategorySlug | "all";
-  description: string;
   initialItems?: ManagedContentEntry[];
   section: ManagedContentSection;
-  title: string;
 };
 
 export default function AdminManagedContentListPage({
   categorySlug,
-  description,
   initialItems,
   section,
-  title,
 }: Props) {
   const scopedCategorySlug = categorySlug === "all" ? "all" : categorySlug;
   const items = useManagedContents(section, initialItems, scopedCategorySlug, "list");
@@ -439,8 +444,6 @@ export default function AdminManagedContentListPage({
   const [pendingDuplicateItem, setPendingDuplicateItem] = useState<ManagedContentEntry | null>(null);
   const [pendingDeleteItem, setPendingDeleteItem] = useState<ManagedContentEntry | null>(null);
   const [isStatusUpdating, setIsStatusUpdating] = useState(false);
-  const [previewItem, setPreviewItem] = useState<ManagedContentEntry | null>(null);
-  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   const [isDuplicating, setIsDuplicating] = useState(false);
   const [isReorderMode, setIsReorderMode] = useState(false);
   const [activeLocale, setActiveLocale] = useState<"en" | "ko" | "ja">("en");
@@ -461,9 +464,7 @@ export default function AdminManagedContentListPage({
   const filteredItems = useMemo(() => {
     /* 카테고리와 검색어 기준으로 화면에 보여줄 항목을 계산한다 */
     const normalized = query.trim().toLowerCase();
-    const localeVisibleItems = categoryItems.filter((item) =>
-      hasLocalizedTitle(item.title, activeLocale),
-    );
+    const localeVisibleItems = categoryItems.filter((item) => item.visibleLocales.includes(activeLocale));
 
     if (!normalized) return localeVisibleItems;
 
@@ -471,6 +472,14 @@ export default function AdminManagedContentListPage({
       item.title[activeLocale].toLowerCase().includes(normalized),
     );
   }, [activeLocale, categoryItems, query]);
+  const listCountLabel =
+    categorySlug === "all"
+      ? section === "demo"
+        ? "Demo"
+        : section === "documentation"
+          ? "Documentation"
+          : "News"
+      : getManagedCategoryLabel(section, categorySlug, activeLocale);
 
   const writeHref =
     section === "news"
@@ -515,22 +524,27 @@ export default function AdminManagedContentListPage({
         const siblingItems = items.filter(
           (entry) => entry.section === item.section && entry.categorySlug === item.categorySlug,
         );
-        const reindexedItems = items.map((entry) =>
-          entry.section === item.section &&
-          entry.categorySlug === item.categorySlug &&
-          entry.sortOrder >= item.sortOrder
-            ? { ...entry, sortOrder: entry.sortOrder + 1 }
-            : entry,
-        );
         const duplicatedItem = cloneAsAuthoredContent(fullItem, siblingItems);
+        const orderedWithDuplicate = siblingItems
+          .slice()
+          .sort((left, right) => left.sortOrder - right.sortOrder)
+          .flatMap((entry) =>
+            entry.id === item.id
+              ? [duplicatedItem, entry]
+              : [entry],
+          );
 
-        return persistManagedContents([duplicatedItem, ...reindexedItems], {
-          preserveExistingBodies: true,
-        });
+        return upsertManagedContent(duplicatedItem)
+          .then((savedItem) =>
+            updateManagedContentSortOrders(
+              orderedWithDuplicate.map((entry) =>
+                entry.id === duplicatedItem.id ? savedItem : entry,
+              ),
+            ),
+          );
       })
       .then(() => {
         setPendingDuplicateItem(null);
-        setPreviewItem(null);
       })
       .catch((error: unknown) => {
         window.alert(
@@ -561,22 +575,6 @@ export default function AdminManagedContentListPage({
     } finally {
       setIsStatusUpdating(false);
     }
-  }
-
-  function handleOpenPreview(item: ManagedContentEntry) {
-    setPreviewItem(item);
-    setIsPreviewLoading(true);
-
-    void getManagedContentDetail(item.section, item.id)
-      .then((detailItem) => {
-        setPreviewItem(detailItem ?? item);
-      })
-      .catch(() => {
-        setPreviewItem(item);
-      })
-      .finally(() => {
-        setIsPreviewLoading(false);
-      });
   }
 
   useLayoutEffect(() => {
@@ -610,14 +608,14 @@ export default function AdminManagedContentListPage({
 
   return (
     <section className="flex flex-col gap-4">
-      {/* 리스트 페이지 헤더 */}
-      <AdminHeader description={description} title={title} />
-
-      <div className="mx-auto flex w-full max-w-[1000px] flex-col gap-4">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div className="flex w-full flex-col gap-3 md:flex-row md:items-center md:gap-4">
-            <SearchField onChange={setQuery} value={query} />
-            <TabGroup className="self-start">
+      {/* 리스트 페이지 상단 스티키 툴바 */}
+      <header className="sticky top-[60px] z-30 -mx-5 overflow-x-auto bg-bg px-5 py-3 md:top-0 md:-mx-10 md:px-10">
+        <div className="flex w-full min-w-0 flex-nowrap items-center justify-between gap-3">
+          <div className="flex min-w-0 flex-1 flex-nowrap items-center gap-3">
+            <div className="w-[240px] min-w-[140px] shrink">
+              <SearchField onChange={setQuery} value={query} />
+            </div>
+            <TabGroup className="shrink-0 self-start">
               {(["en", "ko", "ja"] as const).map((locale) => (
                 <Tab
                   key={locale}
@@ -629,73 +627,78 @@ export default function AdminManagedContentListPage({
               ))}
             </TabGroup>
           </div>
-          {categorySlug !== "all" ? (
-            <div className="flex w-full flex-col gap-3 md:w-auto md:flex-row md:items-center">
-              {isReorderMode ? (
-                <>
-                  <Button arrow={false} className="w-full shrink-0 justify-center whitespace-nowrap md:w-auto" onClick={() => {
-                    setDraftItems(categoryItems);
-                    setIsReorderMode(false);
-                  }} style="round" variant="outline">
-                    취소
-                  </Button>
-                  <Button arrow={false} className="w-full shrink-0 justify-center whitespace-nowrap md:w-auto" onClick={() => {
-                    void reorderManagedContents(draftItems)
-                      .then(() => {
-                        setIsReorderMode(false);
-                      })
-                      .catch((error: unknown) => {
-                        window.alert(
-                          error instanceof Error
-                            ? error.message
-                            : "순서를 저장하지 못했습니다. 다시 시도해 주세요.",
-                        );
-                      });
-                  }} style="round" variant="secondary">
-                    확인
-                  </Button>
-                </>
-              ) : (
-                <>
-                  <Button
-                    arrow={false}
-                    className="w-full shrink-0 justify-center whitespace-nowrap md:w-auto"
-                    onClick={() => {
+          <div className="flex shrink-0 flex-nowrap items-center justify-end gap-3">
+            {categorySlug !== "all" ? (
+              <div className="flex shrink-0 flex-nowrap items-center gap-3">
+                {isReorderMode ? (
+                  <>
+                    <Button arrow={false} className="shrink-0 justify-center whitespace-nowrap" onClick={() => {
                       setDraftItems(categoryItems);
-                      setIsReorderMode(true);
-                    }}
-                    style="round"
-                    variant="outline"
-                  >
-                    <ActionIcon>
-                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                        <path d="M6.5 8.5 9.5 5.5l3 3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                        <path d="M9.5 6v12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                        <path d="M14.5 15.5 17.5 18.5l3-3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                        <path d="M17.5 6v12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                      </svg>
-                    </ActionIcon>
-                    순서변경
-                  </Button>
-                  <a className="w-full md:w-auto" href={writeHref}>
-                    <Button arrow={false} className="w-full shrink-0 justify-center whitespace-nowrap md:w-auto" style="round" variant="secondary">
+                      setIsReorderMode(false);
+                    }} style="round" variant="outline">
+                      취소
+                    </Button>
+                    <Button arrow={false} className="shrink-0 justify-center whitespace-nowrap" onClick={() => {
+                      void reorderManagedContents(draftItems)
+                        .then(() => {
+                          setIsReorderMode(false);
+                        })
+                        .catch((error: unknown) => {
+                          window.alert(
+                            error instanceof Error
+                              ? error.message
+                              : "순서를 저장하지 못했습니다. 다시 시도해 주세요.",
+                          );
+                        });
+                    }} style="round" variant="secondary">
+                      확인
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <Button
+                      arrow={false}
+                      className="shrink-0 justify-center whitespace-nowrap"
+                      onClick={() => {
+                        setDraftItems(categoryItems);
+                        setIsReorderMode(true);
+                      }}
+                      style="round"
+                      variant="outline"
+                    >
                       <ActionIcon>
                         <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                          <path d="M12 5v14" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
-                          <path d="M5 12h14" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
+                          <path d="M6.5 8.5 9.5 5.5l3 3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                          <path d="M9.5 6v12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                          <path d="M14.5 15.5 17.5 18.5l3-3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                          <path d="M17.5 6v12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
                         </svg>
                       </ActionIcon>
-                      글 작성
+                      순서변경
                     </Button>
-                  </a>
-                </>
-              )}
-            </div>
-          ) : null}
+                    <a className="shrink-0" href={writeHref}>
+                      <Button arrow={false} className="shrink-0 justify-center whitespace-nowrap" style="round" variant="secondary">
+                        <ActionIcon>
+                          <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 5v14" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
+                            <path d="M5 12h14" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
+                          </svg>
+                        </ActionIcon>
+                        글 작성
+                      </Button>
+                    </a>
+                  </>
+                )}
+              </div>
+            ) : null}
+          </div>
         </div>
+      </header>
 
-        <p className="m-0 type-body-md text-mute">
-          <span className="text-fg">{displayedItems.length}개</span> 컨텐츠
+      <div className="mx-auto flex w-full max-w-[1000px] flex-col gap-4">
+        <p className="m-0 flex items-center gap-2 type-body-md text-mute">
+          <span>{listCountLabel}</span>
+          <span className="text-fg">{displayedItems.length}개</span>
         </p>
 
         {/* 실제 콘텐츠 리스트 / 빈 상태 영역 */}
@@ -724,7 +727,9 @@ export default function AdminManagedContentListPage({
                 }}
                 onMoveDown={() => moveItem(item.id, "down")}
                 onMoveUp={() => moveItem(item.id, "up")}
-                onOpenPreview={() => handleOpenPreview(item)}
+                onOpenDetail={() => {
+                  window.location.assign(getAdminDetailHref(item.section, item.categorySlug, item.id));
+                }}
                 onTogglePublished={() => {
                   void handleTogglePublished(item).catch((error: unknown) => {
                     window.alert(
@@ -752,7 +757,6 @@ export default function AdminManagedContentListPage({
           onConfirm={() => {
             void handleDeleteItem(pendingDeleteItem)
               .then(() => {
-                setPreviewItem((current) => (current?.id === pendingDeleteItem.id ? null : current));
                 setPendingDeleteItem(null);
               })
               .catch((error: unknown) => {
@@ -774,14 +778,6 @@ export default function AdminManagedContentListPage({
         />
       ) : null}
 
-      {/* 카드 클릭 미리보기 모달 */}
-      {previewItem ? (
-        <PreviewModal
-          item={previewItem}
-          isLoading={isPreviewLoading}
-          onClose={() => setPreviewItem(null)}
-        />
-      ) : null}
     </section>
   );
 }

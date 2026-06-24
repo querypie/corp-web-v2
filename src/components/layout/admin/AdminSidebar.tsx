@@ -27,7 +27,7 @@ export default function AdminSidebar({
     <aside
       className={cx(
         "group relative hidden w-full flex-col bg-bg-deep px-3 py-2 transition-[width,padding] duration-200 md:flex md:px-3 md:py-3",
-        isCollapsed ? "md:w-[52px] md:px-2" : "md:w-[220px] md:px-3",
+        isCollapsed ? "md:w-[52px] md:px-2" : "md:w-[200px] md:px-3",
       )}
       onMouseMove={(event) => {
         if (!isCollapsed) return;
@@ -66,7 +66,7 @@ export default function AdminSidebar({
               return;
             }
 
-            requestNavigation("/admin");
+            requestNavigation("/admin/news");
           }}
           type="button"
         >
@@ -108,7 +108,7 @@ export default function AdminSidebar({
       >
         <div className="flex flex-wrap gap-2 md:flex-col md:gap-px">
           {adminPrimaryNavItems.map((item) => {
-            const isActive = pathname === item.href;
+            const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
 
             return (
               <a

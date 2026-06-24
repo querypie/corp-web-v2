@@ -77,6 +77,21 @@ export default function AdminShell({ children }: AdminShellProps) {
     setMobileMenuOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(min-width: 768px) and (max-width: 1180px)");
+
+    const syncSidebarState = () => {
+      setIsSidebarCollapsed(mediaQuery.matches);
+    };
+
+    syncSidebarState();
+    mediaQuery.addEventListener("change", syncSidebarState);
+
+    return () => {
+      mediaQuery.removeEventListener("change", syncSidebarState);
+    };
+  }, []);
+
   return (
     <AdminNavigationGuardContext.Provider
       value={{
@@ -93,7 +108,7 @@ export default function AdminShell({ children }: AdminShellProps) {
           <div className="flex w-full items-center justify-between">
             <button
               className="inline-flex items-center gap-2"
-              onClick={() => requestNavigation("/admin")}
+              onClick={() => requestNavigation("/admin/news")}
               type="button"
             >
               <img alt="" aria-hidden="true" className="h-5 w-5 object-contain" src="/icons/querypie-symbol.svg" />

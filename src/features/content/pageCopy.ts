@@ -8,7 +8,7 @@ export type ContentListPageCopy = {
 export function getDemoPageCopy(locale: Locale): ContentListPageCopy {
   return {
     en: { metadataTitle: "Demo", title: "Demo" },
-    ko: { metadataTitle: "Demo", title: "Demo" },
+    ko: { metadataTitle: "데모", title: "데모" },
     ja: { metadataTitle: "デモ", title: "デモ" },
   }[locale];
 }
@@ -16,7 +16,7 @@ export function getDemoPageCopy(locale: Locale): ContentListPageCopy {
 export function getDocumentationPageCopy(locale: Locale): ContentListPageCopy {
   return {
     en: { metadataTitle: "Documentation", title: "Documentation" },
-    ko: { metadataTitle: "Documentation", title: "Documentation" },
+    ko: { metadataTitle: "문서", title: "문서" },
     ja: { metadataTitle: "ドキュメント", title: "ドキュメント" },
   }[locale];
 }

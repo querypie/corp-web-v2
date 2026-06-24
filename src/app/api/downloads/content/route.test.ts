@@ -1,10 +1,12 @@
 // @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockExistsSync, mockMkdir, mockReadFile, mockWriteFile } = vi.hoisted(() => ({
+const { mockExistsSync, mockMkdir, mockReadContentItem, mockReadFile, mockRename, mockWriteFile } = vi.hoisted(() => ({
   mockExistsSync: vi.fn(),
   mockMkdir: vi.fn().mockResolvedValue(undefined),
+  mockReadContentItem: vi.fn(),
   mockReadFile: vi.fn(),
+  mockRename: vi.fn().mockResolvedValue(undefined),
   mockWriteFile: vi.fn().mockResolvedValue(undefined),
 }));
 
@@ -13,22 +15,45 @@ vi.mock("fs", () => ({
   promises: {
     mkdir: mockMkdir,
     readFile: mockReadFile,
+    rename: mockRename,
     writeFile: mockWriteFile,
   },
+}));
+
+vi.mock("@/features/content/contentState.server", () => ({
+  readContentItem: mockReadContentItem,
 }));
 
 import { POST } from "./route";
 
 afterEach(() => {
   vi.clearAllMocks();
+  mockMkdir.mockResolvedValue(undefined);
+  mockRename.mockResolvedValue(undefined);
+  mockWriteFile.mockResolvedValue(undefined);
 });
 
 const BASE_DOWNLOAD_PAYLOAD = {
   form: { email: "test@example.com", name: "Test User" },
-  attachmentUrl: "/uploads/doc.pdf",
+  attachmentUrl: "/documentation/white-papers/doc.pdf",
   attachmentFileName: "doc.pdf",
   returnUrl: "/features/documentation/my-doc",
-  pdfPreviewUrl: "/uploads/doc-preview.pdf",
+  pdfPreviewUrl: "/documentation/white-papers/doc.pdf",
+};
+
+const BASE_CONTENT_ITEM = {
+  bodyHtml: { en: "", ko: "", ja: "" },
+  bodyRichText: { en: "", ko: "", ja: "" },
+  categorySlug: "white-papers",
+  contentType: "content",
+  downloadPdfFileName: "server-doc.pdf",
+  downloadPdfSrc: "/documentation/white-papers/server-doc.pdf",
+  enableDownloadButton: true,
+  id: "server-doc",
+  section: "documentation",
+  status: "published",
+  title: { en: "Server Doc", ko: "", ja: "" },
+  visibleLocales: ["en"],
 };
 
 describe("POST /api/downloads/content", () => {
@@ -91,6 +116,7 @@ describe("POST /api/downloads/content", () => {
       const writtenContent = JSON.parse(mockWriteFile.mock.calls[0][1] as string) as unknown[];
       expect(writtenContent).toHaveLength(1);
       expect((writtenContent[0] as Record<string, unknown>).form).toEqual(BASE_DOWNLOAD_PAYLOAD.form);
+      expect(mockRename).toHaveBeenCalledOnce();
     });
 
     it("기존 리드가 있으면 앞에 추가한다", async () => {
@@ -125,6 +151,51 @@ describe("POST /api/downloads/content", () => {
 
       const setCookie = response.headers.get("set-cookie");
       expect(setCookie).toContain("querypie_content_unlocked_my-item=true");
+    });
+
+    it("contentId와 section이 있으면 서버의 콘텐츠 메타로 다운로드 URL과 쿠키를 만든다", async () => {
+      mockExistsSync.mockReturnValue(false);
+      mockReadContentItem.mockResolvedValue(BASE_CONTENT_ITEM);
+
+      const request = new Request("http://localhost/api/downloads/content", {
+        method: "POST",
+        body: JSON.stringify({
+          ...BASE_DOWNLOAD_PAYLOAD,
+          attachmentUrl: "/documentation/white-papers/client-doc.pdf",
+          attachmentFileName: "client-doc.pdf",
+          contentId: "server-doc",
+          section: "documentation",
+          unlockCookieName: "querypie_content_unlocked_client-doc",
+        }),
+      });
+      const response = await POST(request);
+      const data = await response.json() as { downloadUrl: string };
+
+      expect(response.status).toBe(200);
+      expect(data.downloadUrl).toContain("server-doc.pdf");
+      expect(data.downloadUrl).not.toContain("client-doc.pdf");
+      expect(response.headers.get("set-cookie")).toContain("querypie_content_unlocked_documentation_server-doc=true");
+    });
+
+    it("contentId가 가리키는 콘텐츠가 다운로드 불가이면 404를 반환한다", async () => {
+      mockReadContentItem.mockResolvedValue({
+        ...BASE_CONTENT_ITEM,
+        downloadPdfSrc: "",
+        enableDownloadButton: false,
+      });
+
+      const request = new Request("http://localhost/api/downloads/content", {
+        method: "POST",
+        body: JSON.stringify({
+          ...BASE_DOWNLOAD_PAYLOAD,
+          contentId: "server-doc",
+          section: "documentation",
+        }),
+      });
+      const response = await POST(request);
+
+      expect(response.status).toBe(404);
+      expect(mockWriteFile).not.toHaveBeenCalled();
     });
   });
 

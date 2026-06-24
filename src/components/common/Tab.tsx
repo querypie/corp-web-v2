@@ -40,7 +40,7 @@ export default function Tab({
       type={type}
       {...props}
     >
-      <span>{children}</span>
+      <span className="inline-flex items-center justify-center">{children}</span>
     </button>
   );
 }

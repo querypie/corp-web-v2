@@ -125,7 +125,7 @@ export default function DocsListPage({
               </nav>
             </div>
 
-            <div className="grid min-w-0 w-full grid-cols-1 gap-x-[30px] gap-y-16 md:max-w-[790px] md:grid-cols-2">
+            <div className="grid min-w-0 w-full grid-cols-1 gap-x-[40px] gap-y-16 md:max-w-[840px] md:grid-cols-2">
               {items.length > 0 ? (
                 items.map((item, index) => (
                   <DocsListCard key={`${item.title}-${index}`} {...item} showCategory={showCategory} />

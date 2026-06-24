@@ -56,27 +56,27 @@ type AdminCategoryConfig<TSlug extends string> = {
 export const demoCategoryConfigs: CategoryConfig<DemoCategorySlug>[] = [
   {
     href: (locale) => getLocalePath(locale, "/features/demo"),
-    label: { en: "All", ko: "All", ja: "All" },
+    label: { en: "All", ko: "전체", ja: "すべて" },
     slug: "all",
   },
   {
     href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=use-cases`,
-    label: { en: "Use Cases", ko: "Use Cases", ja: "Use Cases" },
+    label: { en: "Use Cases", ko: "활용 사례", ja: "ユースケース" },
     slug: "use-cases",
   },
   {
     href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=aip-features`,
-    label: { en: "AIP Features", ko: "AIP Features", ja: "AIP Features" },
+    label: { en: "AIP Features", ko: "AIP 기능", ja: "AIP機能" },
     slug: "aip-features",
   },
   {
     href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=acp-features`,
-    label: { en: "ACP Features", ko: "ACP Features", ja: "ACP Features" },
+    label: { en: "ACP Features", ko: "ACP 기능", ja: "ACP機能" },
     slug: "acp-features",
   },
   {
     href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=webinars`,
-    label: { en: "Webinars", ko: "Webinars", ja: "Webinars" },
+    label: { en: "Webinars", ko: "웨비나", ja: "ウェビナー" },
     slug: "webinars",
   },
 ];
@@ -84,32 +84,32 @@ export const demoCategoryConfigs: CategoryConfig<DemoCategorySlug>[] = [
 export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
   {
     href: (locale) => getLocalePath(locale, "/features/documentation"),
-    label: { en: "All", ko: "All", ja: "All" },
+    label: { en: "All", ko: "전체", ja: "すべて" },
     slug: "all",
   },
   {
     href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=introduction`,
-    label: { en: "Introduction", ko: "Introduction", ja: "Introduction" },
+    label: { en: "Introduction", ko: "소개", ja: "紹介" },
     slug: "introduction",
   },
   {
     href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=glossary`,
-    label: { en: "Glossary", ko: "Glossary", ja: "Glossary" },
+    label: { en: "Glossary", ko: "용어집", ja: "用語集" },
     slug: "glossary",
   },
   {
     href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=manuals`,
-    label: { en: "Manuals", ko: "Manuals", ja: "Manuals" },
+    label: { en: "Manuals", ko: "매뉴얼", ja: "マニュアル" },
     slug: "manuals",
   },
   {
     href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=white-papers`,
-    label: { en: "White Papers", ko: "White Papers", ja: "White Papers" },
+    label: { en: "White Papers", ko: "화이트페이퍼", ja: "ホワイトペーパー" },
     slug: "white-papers",
   },
   {
     href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=blogs`,
-    label: { en: "Blogs", ko: "Blogs", ja: "Blogs" },
+    label: { en: "Blogs", ko: "블로그", ja: "ブログ" },
     slug: "blogs",
   },
 ];

@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import ContentDownloadPage from "../../../../../../components/pages/documentation/ContentDownloadPage";
 import { isLocale, getLocalePath } from "../../../../../../constants/i18n";
 import { getContactPageCopy } from "@/features/contact/copy";
-import { getLocalizedContent, isPublishedContentAccessible } from "@/features/content/data";
+import { getLocalizedContent, getResolvedContentLocale, isPublishedContentAccessible } from "@/features/content/data";
 import { readContentItem } from "@/features/content/contentState.server";
 import { getContentUnlockCookieName } from "@/features/content/gating";
 
@@ -33,12 +33,14 @@ export default async function WhitePaperDownloadRoute({ params }: WhitePaperDown
       attachmentFileName={currentEntry.downloadPdfFileName || `${currentEntry.id}.pdf`}
       attachmentUrl={currentEntry.downloadPdfSrc}
       contactCopy={getContactPageCopy(locale)}
+      contentId={currentEntry.id}
       coverImageSrc={currentEntry.downloadCoverImageSrc || currentEntry.imageSrc || "/images/common/fallback-contents.jpg"}
       locale={locale}
       pdfPreviewUrl={currentEntry.downloadPdfSrc}
       returnUrl={getLocalePath(locale, `/features/documentation/${resolvedSlug}`)}
-      title={getLocalizedContent(currentEntry.title, locale)}
-      unlockCookieName={getContentUnlockCookieName(currentEntry.id)}
+      section="documentation"
+      title={getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale))}
+      unlockCookieName={getContentUnlockCookieName(currentEntry.id, "documentation")}
     />
   );
 }
@@ -61,7 +63,7 @@ export async function generateMetadata({ params }: WhitePaperDownloadRouteProps)
   }
 
   return {
-    title: getLocalizedContent(currentEntry.title, locale),
+    title: getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale)),
     alternates: {
       canonical: getLocalePath(locale, `/features/documentation/${resolvedSlug}/download`),
     },

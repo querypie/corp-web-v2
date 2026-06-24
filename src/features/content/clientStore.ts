@@ -19,6 +19,7 @@ type ManagedContentChangeDetail = {
 type ManagedContentView = "full" | "list";
 type SaveOptions = {
   preserveExistingBodies?: boolean;
+  shiftSiblingsForNew?: boolean;
 };
 
 const snapshotCache = new Map<string, ManagedContentEntry[]>();
@@ -177,6 +178,7 @@ export async function upsertManagedContent(
       currentId,
       item,
       preserveExistingBodies: options?.preserveExistingBodies,
+      shiftSiblingsForNew: options?.shiftSiblingsForNew,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -196,7 +198,7 @@ export async function upsertManagedContent(
 
 export async function deleteManagedContent(id: string, item?: ManagedContentEntry) {
   const response = await fetch("/api/admin/content/state", {
-    body: JSON.stringify({ id, item }),
+    body: JSON.stringify({ id, storageId: item?.storageId }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -218,7 +220,7 @@ export async function updateManagedContentStatus(
   item?: ManagedContentEntry,
 ) {
   const response = await fetch("/api/admin/content/state", {
-    body: JSON.stringify({ id, item, status }),
+    body: JSON.stringify({ id, status, storageId: item?.storageId }),
     headers: {
       "Content-Type": "application/json",
     },
@@ -234,30 +236,38 @@ export async function updateManagedContentStatus(
   emitChange({ section: item?.section, shouldRefetch: true, showLoading: false });
 }
 
-export async function reorderManagedContents(orderedItems: ManagedContentEntry[]) {
-  const currentItems = await readState();
+export async function updateManagedContentSortOrders(orderedItems: ManagedContentEntry[]) {
   const firstItem = orderedItems[0];
 
   if (!firstItem) {
     return;
   }
 
-  const normalizedItems = orderedItems.map((item, index) => ({
-    ...item,
-    sortOrder: index + 1,
-  }));
-
-  const otherItems = currentItems.filter(
-    (item) =>
-      !(
-        item.section === firstItem.section &&
-        item.categorySlug === firstItem.categorySlug
-      ),
-  );
-
-  await persistManagedContents([...normalizedItems, ...otherItems], {
-    preserveExistingBodies: true,
+  const response = await fetch("/api/admin/content/state", {
+    body: JSON.stringify({
+      sortOrders: orderedItems.map((item, index) => ({
+        id: item.id,
+        sortOrder: index + 1,
+        storageId: item.storageId,
+      })),
+    }),
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "PATCH",
   });
+
+  const payload = (await response.json()) as { error?: string };
+
+  if (!response.ok) {
+    throw new Error(payload.error ?? "Failed to update content order.");
+  }
+
+  emitChange({ section: firstItem.section, shouldRefetch: true });
+}
+
+export async function reorderManagedContents(orderedItems: ManagedContentEntry[]) {
+  await updateManagedContentSortOrders(orderedItems);
 }
 
 export function useManagedContents(

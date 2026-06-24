@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import Button from "../../common/Button";
 import type { ContactField, ContactPageCopy } from "@/features/contact/copy";
+import type { ManagedContentSection } from "@/features/content/data";
 import { CONTENT_UNLOCK_BUTTON_LABEL } from "@/features/content/data";
 import {
   ContactCheckboxRow,
@@ -20,11 +21,13 @@ type ContentLeadFormProps = {
   attachmentUrl?: string;
   buttonLabel?: string;
   contactCopy: ContactPageCopy;
+  contentId?: string;
   locale: "en" | "ko" | "ja";
   mode: ContentLeadFormMode;
   onSuccess?: () => void;
   pdfPreviewUrl?: string;
   returnUrl?: string;
+  section?: Exclude<ManagedContentSection, "news">;
   title: string;
   unlockCookieName?: string;
 };
@@ -96,11 +99,13 @@ export default function ContentLeadForm({
   attachmentUrl,
   buttonLabel,
   contactCopy,
+  contentId,
   locale,
   mode,
   onSuccess,
   pdfPreviewUrl,
   returnUrl,
+  section,
   title,
   unlockCookieName,
 }: ContentLeadFormProps) {
@@ -132,6 +137,7 @@ export default function ContentLeadForm({
         body: JSON.stringify({
           attachmentFileName,
           attachmentUrl,
+          contentId,
           form: {
             ...form,
             products: selectedProducts,
@@ -140,6 +146,7 @@ export default function ContentLeadForm({
           mode,
           pdfPreviewUrl,
           returnUrl,
+          section,
           title,
           unlockCookieName,
         }),

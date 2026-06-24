@@ -13,6 +13,10 @@ const DOWNLOADABLE_PUBLIC_ROOTS = [
   },
 ];
 
+function sanitizeDownloadFileName(fileName: string) {
+  return path.basename(fileName).replace(/["\r\n]/g, "") || "download.pdf";
+}
+
 function resolvePublicFile(src: string) {
   for (const { prefix, root } of DOWNLOADABLE_PUBLIC_ROOTS) {
     if (!src.startsWith(prefix)) {
@@ -20,9 +24,10 @@ function resolvePublicFile(src: string) {
     }
 
     const relativeSrc = src.slice(prefix.length);
-    const absolutePath = path.join(root, relativeSrc);
+    const absolutePath = path.resolve(root, relativeSrc);
+    const relativePath = path.relative(root, absolutePath);
 
-    if (absolutePath.startsWith(root)) {
+    if (relativePath && !relativePath.startsWith("..") && !path.isAbsolute(relativePath)) {
       return absolutePath;
     }
   }
@@ -33,7 +38,7 @@ function resolvePublicFile(src: string) {
 export async function GET(request: Request) {
   const url = new URL(request.url);
   const src = url.searchParams.get("src");
-  const fileName = url.searchParams.get("fileName") ?? "download.pdf";
+  const fileName = sanitizeDownloadFileName(url.searchParams.get("fileName") ?? "download.pdf");
 
   if (!src || !src.endsWith(".pdf")) {
     return NextResponse.json({ error: "PDF source is required." }, { status: 400 });

@@ -2,16 +2,19 @@
 
 import { pageXPaddingClassName } from "@/constants/layout";
 import type { ContactPageCopy } from "@/features/contact/copy";
+import type { ManagedContentSection } from "@/features/content/data";
 import ContentLeadForm from "./ContentLeadForm";
 
 type ContentDownloadPageProps = {
   attachmentFileName: string;
   attachmentUrl: string;
   contactCopy: ContactPageCopy;
+  contentId: string;
   coverImageSrc: string;
   locale: "en" | "ko" | "ja";
   pdfPreviewUrl: string;
   returnUrl: string;
+  section: Exclude<ManagedContentSection, "news">;
   title: string;
   unlockCookieName?: string;
 };
@@ -30,10 +33,12 @@ export default function ContentDownloadPage({
   attachmentFileName,
   attachmentUrl,
   contactCopy,
+  contentId,
   coverImageSrc,
   locale,
   pdfPreviewUrl,
   returnUrl,
+  section,
   title,
   unlockCookieName,
 }: ContentDownloadPageProps) {
@@ -57,10 +62,12 @@ export default function ContentDownloadPage({
             attachmentFileName={attachmentFileName}
             attachmentUrl={attachmentUrl}
             contactCopy={contactCopy}
+            contentId={contentId}
             locale={locale}
             mode="download"
             pdfPreviewUrl={pdfPreviewUrl}
             returnUrl={returnUrl}
+            section={section}
             title={title}
             unlockCookieName={unlockCookieName}
           />

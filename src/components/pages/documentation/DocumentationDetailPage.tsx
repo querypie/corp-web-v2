@@ -72,8 +72,12 @@ export default function DocsDetailPage({
         >
           {showSidebarNav ? (
             <div className="flex items-start gap-[6px] type-body-md leading-5 md:sticky md:top-[80px] md:justify-self-start md:self-start">
-              <p className="m-0 text-fg">{parentLabel}</p>
-              <p className="m-0 text-mute">/</p>
+              {parentLabel ? (
+                <>
+                  <p className="m-0 text-fg">{parentLabel}</p>
+                  <p className="m-0 text-mute">/</p>
+                </>
+              ) : null}
               <a className="text-mute transition-colors duration-200 hover:text-fg" href={docsHref}>
                 {category}
               </a>
