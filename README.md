@@ -80,6 +80,8 @@ src/
 - `en.html`, `ko.html`, `ja.html`
 - `*.tiptap.json`
 
+`cnt_xxxxxx`는 콘텐츠의 물리 저장 ID(`storageId`)입니다. 공개 URL slug(`id`), 섹션, 카테고리는 변경될 수 있으므로 Admin 저장·상태 변경·삭제 흐름에서는 `storageId`를 우선 식별자로 사용합니다. 본문이 비거나 outlink 콘텐츠로 전환되면 기존 locale 본문 파일은 저장 시 정리됩니다.
+
 콘텐츠 읽기/쓰기 관련 코드는 아래 파일을 먼저 확인합니다.
 
 - `src/features/content/contentState.server.ts`
