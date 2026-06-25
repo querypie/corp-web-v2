@@ -1,4 +1,10 @@
+import TextButton from "@/components/common/TextButton";
+
 type McpSectionProps = {
+  action?: {
+    href: string;
+    label: string;
+  };
   className?: string;
   description: string[];
   items: Array<{
@@ -13,6 +19,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 export default function McpSection({
+  action,
   className,
   description,
   items,
@@ -27,9 +34,16 @@ export default function McpSection({
           <h2 className="m-0 type-h2 leading-7 tracking-[-0.3px] text-fg">
             {title}
           </h2>
-          <p className="m-0 max-w-[720px] type-body-lg leading-6 text-mute">
-            {description.join(" ")}
-          </p>
+          <div className="flex max-w-[720px] flex-col items-start gap-4">
+            <p className="m-0 type-body-lg leading-6 text-mute">
+              {description.join(" ")}
+            </p>
+            {action ? (
+              <TextButton href={action.href} className="type-body-md">
+                {action.label}
+              </TextButton>
+            ) : null}
+          </div>
         </div>
 
         {/* MCP 아이콘 카드 그리드 */}
