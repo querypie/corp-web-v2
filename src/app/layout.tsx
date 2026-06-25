@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
-import { JetBrains_Mono, M_PLUS_1 } from "next/font/google";
+import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { siteTitle, siteUrl } from "../constants/site";
 import "../styles/globals.css";
@@ -9,13 +9,6 @@ const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-jetbrains-mono",
-});
-
-const mPlus1 = M_PLUS_1({
-  weight: "variable",
-  display: "swap",
-  variable: "--font-m-plus-1",
-  preload: false,
 });
 
 const monaSans = localFont({
@@ -31,6 +24,15 @@ const pretendard = localFont({
   display: "swap",
   variable: "--font-pretendard",
   weight: "45 920",
+  style: "normal",
+  preload: false,
+});
+
+const mPlus1 = localFont({
+  src: "../../public/fonts/MPLUS1-Regular.woff2",
+  display: "swap",
+  variable: "--font-m-plus-1",
+  weight: "400",
   style: "normal",
   preload: false,
 });
