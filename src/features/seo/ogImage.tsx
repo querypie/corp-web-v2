@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import type { Locale } from "@/constants/i18n";
+import { getOgDescriptionLines, getOgTitleLines } from "@/features/seo/ogTitle";
 
 export const ogImageSize = {
   width: 1200,
@@ -97,6 +98,8 @@ export async function createOgImage({ description, locale, origin, title }: OgIm
   ]);
   const textStyle = getLocaleTextStyle(locale);
   const fontFamily = getOgFontFamily(locale);
+  const titleLines = getOgTitleLines(title, locale);
+  const descriptionLines = getOgDescriptionLines(description, locale, textStyle.descriptionSize);
 
   return new ImageResponse(
     (
@@ -136,6 +139,8 @@ export async function createOgImage({ description, locale, origin, title }: OgIm
         >
           <div
             style={{
+              display: "flex",
+              flexDirection: "column",
               fontFamily,
               fontSize: textStyle.titleSize,
               fontWeight: 400,
@@ -147,10 +152,24 @@ export async function createOgImage({ description, locale, origin, title }: OgIm
               wordBreak: "keep-all",
             }}
           >
-            {title}
+            {titleLines.map((line, index) => (
+              <div
+                key={`${line}-${index}`}
+                style={{
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  width: "100%",
+                }}
+              >
+                {line}
+              </div>
+            ))}
           </div>
           <div
             style={{
+              display: "flex",
+              flexDirection: "column",
               fontFamily,
               fontSize: textStyle.descriptionSize,
               fontWeight: 400,
@@ -162,7 +181,19 @@ export async function createOgImage({ description, locale, origin, title }: OgIm
               wordBreak: "keep-all",
             }}
           >
-            {description}
+            {descriptionLines.map((line, index) => (
+              <div
+                key={`${line}-${index}`}
+                style={{
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                  width: "100%",
+                }}
+              >
+                {line}
+              </div>
+            ))}
           </div>
         </div>
       </div>
