@@ -4,10 +4,11 @@ import { isLocale, type Locale } from "@/constants/i18n";
 import { siteTitle } from "@/constants/site";
 import { createOgImage } from "@/features/seo/ogImage";
 
-export const runtime = "nodejs";
+export const runtime = "edge";
 
 export async function GET(request: Request) {
-  const { searchParams } = new URL(request.url);
+  const requestUrl = new URL(request.url);
+  const { origin, searchParams } = requestUrl;
   const localeParam = searchParams.get("locale");
   const locale: Locale = isLocale(localeParam ?? "") ? localeParam as Locale : "en";
   const title = searchParams.get("title") || siteTitle;
@@ -16,6 +17,7 @@ export async function GET(request: Request) {
   try {
     return await createOgImage({
       locale,
+      origin,
       title,
       description,
     });

@@ -1,5 +1,3 @@
-import { readFile } from "node:fs/promises";
-import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import type { Locale } from "@/constants/i18n";
 
@@ -11,6 +9,7 @@ export const ogImageSize = {
 type OgImageProps = {
   description: string;
   locale: Locale;
+  origin: string;
   title: string;
 };
 
@@ -22,48 +21,35 @@ type OgFontConfig = {
 };
 
 const fontConfigByLocale: Record<Locale, { path: string; name: string }> = {
-  en: { path: "fonts/og/MonaSans-Regular.ttf", name: "Mona Sans" },
-  ko: { path: "fonts/og/Pretendard-Regular.ttf", name: "Pretendard" },
-  ja: { path: "fonts/og/MPLUS1-Regular.ttf", name: "M PLUS 1" },
+  en: { path: "/fonts/og/MonaSans-Regular.ttf", name: "Mona Sans" },
+  ko: { path: "/fonts/og/Pretendard-Regular.ttf", name: "Pretendard" },
+  ja: { path: "/fonts/og/MPLUS1-Regular.ttf", name: "M PLUS 1" },
 };
 
-const fontDataCache = new Map<string, Promise<Buffer>>();
-let backgroundDataUrlCache: Promise<string> | null = null;
+const fontDataCache = new Map<string, Promise<ArrayBuffer>>();
 
-function readPublicFile(path: string) {
-  return readFile(join(process.cwd(), "public", path));
-}
-
-async function getOgFont(locale: Locale): Promise<OgFontConfig> {
+async function getOgFont(origin: string, locale: Locale): Promise<OgFontConfig> {
   const config = fontConfigByLocale[locale];
-  const filePath = config.path;
-  let fontData = fontDataCache.get(filePath);
+  const fontUrl = new URL(config.path, origin).toString();
+  let fontData = fontDataCache.get(fontUrl);
 
   if (!fontData) {
-    fontData = readPublicFile(filePath);
-    fontDataCache.set(filePath, fontData);
-  }
+    fontData = fetch(fontUrl).then((response) => {
+      if (!response.ok) {
+        throw new Error(`Failed to load OG font: ${fontUrl}`);
+      }
 
-  const buffer = await fontData;
-  const data = new ArrayBuffer(buffer.byteLength);
-  new Uint8Array(data).set(buffer);
+      return response.arrayBuffer();
+    });
+    fontDataCache.set(fontUrl, fontData);
+  }
 
   return {
     name: config.name,
-    data,
+    data: await fontData,
     style: "normal",
     weight: 400,
   };
-}
-
-async function getBackgroundDataUrl() {
-  if (!backgroundDataUrlCache) {
-    backgroundDataUrlCache = readPublicFile("og/base.png").then(
-      (buffer) => `data:image/png;base64,${buffer.toString("base64")}`,
-    );
-  }
-
-  return backgroundDataUrlCache;
 }
 
 function getLocaleTextStyle(locale: Locale) {
@@ -82,10 +68,10 @@ function getLocaleTextStyle(locale: Locale) {
   };
 }
 
-export async function createOgImage({ description, locale, title }: OgImageProps) {
-  const [backgroundDataUrl, font] = await Promise.all([
-    getBackgroundDataUrl(),
-    getOgFont(locale),
+export async function createOgImage({ description, locale, origin, title }: OgImageProps) {
+  const [backgroundImageUrl, font] = await Promise.all([
+    Promise.resolve(new URL("/og/base.png", origin).toString()),
+    getOgFont(origin, locale),
   ]);
   const textStyle = getLocaleTextStyle(locale);
 
@@ -104,7 +90,7 @@ export async function createOgImage({ description, locale, title }: OgImageProps
         <img
           alt=""
           height={ogImageSize.height}
-          src={backgroundDataUrl}
+          src={backgroundImageUrl}
           style={{
             height: ogImageSize.height,
             left: 0,
