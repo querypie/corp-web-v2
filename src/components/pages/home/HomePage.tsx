@@ -29,6 +29,11 @@ type McpItem = {
   label: string;
 };
 
+type McpAction = {
+  href: string;
+  label: string;
+};
+
 type ReviewItem = {
   body: string;
   company: string;
@@ -71,6 +76,7 @@ export type HomePageProps = {
   heroImageAlt: string;
   heroPrimaryCtaLabel: string;
   locale: Locale;
+  mcpAction: McpAction;
   mcpDescription: string[];
   mcpItems: McpItem[];
   mcpTitle: string;
@@ -97,6 +103,7 @@ export default function HomePage({
   heroImageAlt,
   heroPrimaryCtaLabel,
   locale,
+  mcpAction,
   mcpDescription,
   mcpItems,
   mcpTitle,
@@ -124,6 +131,7 @@ export default function HomePage({
       <div><FeatureSection items={featureItems} /></div>
       <div>
         <McpSection
+          action={mcpAction}
           description={mcpDescription}
           items={mcpItems}
           title={mcpTitle}

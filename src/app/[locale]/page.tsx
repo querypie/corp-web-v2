@@ -35,37 +35,47 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
   };
 }
 
-const mcpIconSources = [
-  "/icons/ChatGPT.svg",
-  "/icons/Gemini.svg",
-  "/icons/GoogleCalendar.svg",
-  "/icons/Discord.svg",
-  "/icons/Claude.svg",
-  "/icons/GoogleDrive.svg",
-  "/icons/Notion.svg",
-  "/icons/Confluence.svg",
-  "/icons/Slack.svg",
-  "/icons/Upstage.svg",
-  "/icons/Jira.svg",
-  "/icons/Github.svg",
-  "/icons/Atlassian.svg",
-  "/icons/Google.svg",
-  "/icons/Outlook.svg",
-  "/icons/Apple.svg",
-  "/icons/Gmail.svg",
-  "/icons/Figma.svg",
-] as const;
+type McpIconSource = {
+  className?: string;
+  label: string;
+  src: string;
+};
 
-const mcpItems = mcpIconSources.map((src) => ({
+const mcpIconSources: readonly McpIconSource[] = [
+  { label: "Slack", src: "/solutions/aip/integration-icon/slack.svg" },
+  { label: "Discord", src: "/solutions/aip/integration-icon/discord.svg" },
+  {
+    className: "invert grayscale brightness-125",
+    label: "GitHub",
+    src: "/solutions/aip/integration-icon/github.svg",
+  },
+  { label: "Notion", src: "/solutions/aip/integration-icon/notion.svg" },
+  { label: "Confluence", src: "/solutions/aip/integration-icon/confluence.svg" },
+  { label: "Snowflake", src: "/solutions/aip/integration-icon/snowflake.svg" },
+  { label: "Google Calendar", src: "/solutions/aip/integration-icon/google-calendar.svg" },
+  { label: "Google Drive", src: "/solutions/aip/integration-icon/google-drive.svg" },
+  { label: "Gmail", src: "/solutions/aip/integration-icon/google-gmail.svg" },
+  { label: "Google Sheets", src: "/solutions/aip/integration-icon/google-sheets.svg" },
+  { label: "Microsoft 365", src: "/solutions/aip/integration-icon/microsoft-365.svg" },
+  { label: "Salesforce", src: "/solutions/aip/integration-icon/salesforce.svg" },
+  { label: "AWS", src: "/solutions/aip/integration-icon/aws.svg" },
+  { label: "Kubernetes", src: "/solutions/aip/integration-icon/kubernetes.svg" },
+  { label: "Datadog", src: "/solutions/aip/integration-icon/datadog.svg" },
+  { label: "PostgreSQL", src: "/solutions/aip/integration-icon/postgresql.svg" },
+  { label: "MySQL", src: "/solutions/aip/integration-icon/mysql.svg" },
+  { label: "Redis", src: "/solutions/aip/integration-icon/redis.svg" },
+];
+
+const mcpItems = mcpIconSources.map(({ className, label, src }) => ({
   icon: (
     <img
       alt=""
       aria-hidden="true"
-      className="h-12 w-12 object-contain"
+      className={["h-12 w-12 object-contain", className].filter(Boolean).join(" ")}
       src={src}
     />
   ),
-  label: src.split("/").pop()?.replace(".svg", "") ?? "MCP",
+  label,
 }));
 
 export default async function LocaleHomePage({ params }: LocalePageProps) {
@@ -250,8 +260,12 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         "actionable issues that are routed, labeled, and",
         "prioritized for the right team.",
       ],
+      mcpAction: {
+        href: getLocalePath(locale, "/solutions/aip/integrations"),
+        label: "See All Available AIP Integrations",
+      },
       mcpItems,
-      mcpTitle: "Supports almost all MCPs",
+      mcpTitle: "Works with Almost All MCP Servers",
       reviewItems: [
         {
           body: "It was night and day from one batch to another, adoption went from single digits to over 80%. It just spread like wildfire, all the best builders were using AIP.",
@@ -374,8 +388,12 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         "적절한 팀에 라우팅하고 라벨링하며,",
         "우선순위를 정할 수 있습니다.",
       ],
+      mcpAction: {
+        href: getLocalePath(locale, "/solutions/aip/integrations"),
+        label: "사용 가능한 AIP 연동 모두 보기",
+      },
       mcpItems,
-      mcpTitle: "거의 모든 MCP를 지원합니다",
+      mcpTitle: "거의 모든 MCP 서버와 연동됩니다",
       reviewItems: [
         {
           body: "배치가 한 번 바뀌자 도입률이 한 자릿수에서 80% 이상으로 뛰었습니다. 최고의 빌더들이 AIP를 쓰기 시작하면서 순식간에 퍼졌습니다.",
@@ -498,8 +516,12 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
         "適切なチームへルーティングしラベル付けし、",
         "優先順位付けできます。",
       ],
+      mcpAction: {
+        href: getLocalePath(locale, "/solutions/aip/integrations"),
+        label: "利用可能なAIP連携をすべて見る",
+      },
       mcpItems,
-      mcpTitle: "ほぼすべての MCP をサポート",
+      mcpTitle: "ほぼすべての MCP サーバーと連携",
       reviewItems: [
         {
           body: "バッチを切り替えた瞬間、導入率は一桁台から80%以上に跳ね上がりました。AIPは優れたビルダーの間で一気に広がりました。",
@@ -577,6 +599,7 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
       heroImageAlt={copy.heroImageAlt}
       heroPrimaryCtaLabel={copy.heroPrimaryCtaLabel}
       locale={locale}
+      mcpAction={copy.mcpAction}
       mcpDescription={copy.mcpDescription}
       mcpItems={copy.mcpItems}
       mcpTitle={copy.mcpTitle}
