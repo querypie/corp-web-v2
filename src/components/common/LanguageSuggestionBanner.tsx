@@ -195,7 +195,7 @@ export default function LanguageSuggestionBanner({
 
           <Button
             arrow={false}
-            className="px-4"
+            className="min-w-[64px] shrink-0 whitespace-nowrap px-4"
             onClick={() => changeLanguage(selectedLocale)}
             size="default"
             type="button"

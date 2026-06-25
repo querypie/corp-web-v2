@@ -38,6 +38,24 @@ export async function generateMetadata({ params }: Pick<PageProps, "params">): P
     alternates: {
       canonical: getSolutionHref(locale, "aip"),
     },
+    openGraph: {
+      title: "AI Platform",
+      description: meta.description,
+      images: [
+        {
+          url: `${getSolutionHref(locale, "aip")}/opengraph-image`,
+          width: 1200,
+          height: 630,
+          alt: "AI Platform",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "AI Platform",
+      description: meta.description,
+      images: [`${getSolutionHref(locale, "aip")}/opengraph-image`],
+    },
   };
 }
 
