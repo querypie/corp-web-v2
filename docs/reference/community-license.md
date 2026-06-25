@@ -1,6 +1,6 @@
 # Community License 신청 기능
 
-`corp-web-app`의 Community License 신청/발급 기능을 이식한 구현. 백엔드 동작은 corp-web-app과 동일하다.
+`corp-web-app`의 Community License 신청/발급 기능을 이식한 구현. v2에서는 API Route 기반으로 처리하며, 외부 연동 환경변수가 없으면 설정된 단계만 skip한다.
 
 ---
 
@@ -8,10 +8,10 @@
 
 | 환경 | URL |
 |------|-----|
-| Staging | `https://stage-v2.querypie.com/community-license` |
-| Production | `https://www-v2.querypie.com/community-license` |
+| Staging | `https://stage-v2.querypie.com/en/community-license` |
+| Production | `https://www-v2.querypie.com/en/community-license` |
 
-다국어: `/ko/community-license`, `/ja/community-license`
+다국어: `/en/community-license`, `/ko/community-license`, `/ja/community-license`
 
 ---
 
@@ -36,7 +36,7 @@
 2. **MX 레코드 검증** — 이메일 도메인의 MX 레코드가 없으면 `{success: false, errorMessage: "Please enter a valid email address."}` 반환 (2초 딜레이 포함)
 3. **XSS 필터링** — `xss` 패키지의 `filterXSS`로 모든 텍스트 필드 처리; `Company`가 빈 값이면 `"None"` 대입
 4. **라이선스 발급** (`issueLicense`) — `QUERYPIE_LICENSE_ISSUE_API_ENDPOINT`, `QUERYPIE_LICENSE_ISSUE_API_KEY` 미설정 시 skip; 설정된 경우 API 호출 실패 시 전체 흐름 중단
-5. **Salesforce POST** — `{requestBody, processType: "LEAD_MS"}` 전송; 응답에 `recordUUID` 없거나 `ok: false`이면 `{success: false}` 반환
+5. **Salesforce POST** — `SALESFORCE_ENDPOINT` 미설정 시 skip; 설정된 경우 `{requestBody, processType: "LEAD_MS"}` 전송; 응답에 `recordUUID` 없거나 `ok: false`이면 `{success: false}` 반환
 6. **Slack 알림** — 실패해도 전체 흐름에 영향 없음 (에러 swallow)
 7. **응답** — `{success: true}`
 
@@ -46,7 +46,7 @@
 
 | 변수 | 필수 | 설명 |
 |------|------|------|
-| `SALESFORCE_ENDPOINT` | 필수 | Salesforce 리드 전달 URL |
+| `SALESFORCE_ENDPOINT` | 선택 | Salesforce 리드 전달 URL. 미설정 시 Salesforce 단계 skip |
 | `QUERYPIE_LICENSE_ISSUE_API_ENDPOINT` | 선택 | 라이선스 발급 API URL. 미설정 시 발급 단계 skip |
 | `QUERYPIE_LICENSE_ISSUE_API_KEY` | 선택 | 라이선스 발급 API 키. 미설정 시 발급 단계 skip |
 | `SLACK_BOT_OAUTH_TOKEN` | 선택 | Slack Bot 토큰. 미설정 시 Slack 알림 skip |
@@ -65,7 +65,7 @@
 ## corp-web-app 대비 차이점
 
 - Server Action → API Route (`POST /api/community-license`)로 변경
-- UTM attribution 제외 (corp-web-v2 미구현)
+- UTM attribution 제외 (현재 Community License 폼에는 미적용)
 - `next-safe-action` 미사용, 직접 fetch
 
 **corp-web-app 원본 참고:**
@@ -79,7 +79,7 @@
 
 > 2026-04-16 staging (`stage-v2.querypie.com`) 환경에서 E2E 테스트 완료.
 
-- [x] `/community-license`, `/ko/community-license`, `/ja/community-license` 폼 렌더링 및 필드 순서 확인
+- [x] `/en/community-license`, `/ko/community-license`, `/ja/community-license` 폼 렌더링 및 필드 순서 확인
 - [ ] 존재하지 않는 도메인 이메일 제출 → "Please enter a valid email address." 오류 (약 2초 후)
 - [ ] `QUERYPIE_LICENSE_ISSUE_API_*` 미설정 시 skip 후 Salesforce 단계 진행
 - [ ] `QUERYPIE_LICENSE_ISSUE_API_*` 설정 시 라이선스 발급 API 호출 성공
@@ -91,7 +91,7 @@
 
 | 항목 | 결과 |
 |------|------|
-| 테스트 환경 | `https://stage-v2.querypie.com/community-license` |
+| 테스트 환경 | `https://stage-v2.querypie.com/en/community-license` |
 | 폼 렌더링 | 정상 — First Name / Last Name / Email / Organization Name (필수) + Job Title / Organization Website (선택) |
 | 폼 제출 | `POST /api/community-license` → HTTP 200 |
 | Salesforce Lead 생성 | 정상 — `recordUUID` 응답 수신 확인 |

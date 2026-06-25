@@ -4,9 +4,9 @@
 
 | 폼 | 라우트 | 제출 상태 | 외부 연동 |
 |----|--------|----------|---------|
-| [Community License 신청](#1-community-license-신청) | `/community-license` | ✅ 구현 완료 | Salesforce, Slack |
-| [Contact Us](#2-contact-us) | `/company/contact-us` | ✅ 구현 완료 | Salesforce (best-effort), Slack (필수) |
-| [콘텐츠 다운로드 / 언락 (Gating)](#3-콘텐츠-다운로드--언락-gating) | `/documentation/[slug]` | ✅ 구현 완료 | 없음 (로컬 JSON) |
+| [Community License 신청](#1-community-license-신청) | `/en/community-license` | ✅ 구현 완료 | Salesforce, Slack |
+| [Contact Us](#2-contact-us) | `/en/company/contact-us` | ✅ 구현 완료 | Salesforce (best-effort), Slack (필수) |
+| [콘텐츠 다운로드 / 언락 (Gating)](#3-콘텐츠-다운로드--언락-gating) | `/en/features/documentation/[slug]` | ✅ 구현 완료 | 없음 (로컬 JSON) |
 
 ---
 
@@ -22,11 +22,11 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 Salesforce 
 
 | 항목 | 내용 |
 |------|------|
-| 라우트 | `/community-license`, `/ko/community-license`, `/ja/community-license` |
+| 라우트 | `/en/community-license`, `/ko/community-license`, `/ja/community-license` |
 | API | `POST /api/community-license` |
 | 주요 컴포넌트 | `src/components/pages/community-license/CommunityLicenseForm.tsx` |
 | 수집 필드 | FirstName, LastName, Email, Company (필수) / Title, Website (선택) / 마케팅 동의 |
-| 외부 연동 | Salesforce (필수), Slack 알림 (선택), 라이선스 발급 API (선택) |
+| 외부 연동 | Salesforce (선택), Slack 알림 (선택), 라이선스 발급 API (선택) |
 
 ---
 
@@ -76,7 +76,7 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 Salesforce 
 | `plannedImplementationDate` | Planned Implementation Date | select | ✅ |
 | (제품 체크박스) | Products/Services of Interest | checkbox | ✅ |
 | `message` | Questions or Additional Information | textarea | ✅ |
-| `updates` | 마케팅 동의 | checkbox | — |
+| `marketingConsent` | 마케팅 동의 | checkbox | — |
 
 **Inquiry Type 선택지:** Request for Product Demo / Pricing Plan Discussion / Technical Question / Partnership / Other
 
@@ -173,6 +173,6 @@ Contact Us 폼과 동일한 필드 구성 (`src/features/contact/copy.ts` 공유
   "attachmentFileName": "report.pdf",
   "attachmentUrl": "https://...",
   "pdfPreviewUrl": "https://...",
-  "returnUrl": "/documentation/..."
+  "returnUrl": "/en/features/documentation/..."
 }
 ```

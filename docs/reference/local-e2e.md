@@ -12,8 +12,8 @@ They are useful for checking behavior that unit and component tests cannot fully
 
 ### Contact Us
 
-- Route: `/company/contact-us`
-- Default base URL: `https://stage.querypie.com`
+- Route: `/en/company/contact-us`
+- Default base URL: `https://stage-v2.querypie.com`
 - Test file: `tests-local/src/app/company/contact-us/page.e2e.mjs`
 - Playwright config: `playwright.local.config.mjs`
 - Script: `npm run e2e:local:contact-us:stage`
@@ -37,7 +37,7 @@ These tests use the following optional environment variables.
   - Example: `LOCAL_E2E_BASE_URL=http://127.0.0.1:3000`
 - `CONTACT_US_E2E_ROUTE_PATH`
   - Overrides the default route path.
-  - Default: `/company/contact-us`
+  - Default: `/en/company/contact-us`
 - `CONTACT_US_E2E_EMAIL`
   - Email used for the submit-flow test.
   - Default: `stage-e2e@querypie.ai`
