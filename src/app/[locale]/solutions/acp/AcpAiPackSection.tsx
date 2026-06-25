@@ -7,8 +7,10 @@ type AcpAiPackSectionProps = {
 const copy = {
   en: {
     title: "ACP - AI Pack",
-    description:
-      "The ACP AI Pack is an extension product family that enables AI Chat and AI Agents to safely execute tasks including tool calls, data retrieval, approval bypass risk detection, and abnormal behavior control within the existing ACP framework of access control, authorization, policies, and auditing.",
+    description: [
+      "ACP AI Pack extends ACP’s access control, authorization, policy, and audit framework for AI Chat and AI Agents.",
+      "It helps them safely perform tool calls, retrieve data, detect approval-bypass risks, and control abnormal behavior.",
+    ],
     cards: [
       {
         description:
@@ -30,8 +32,10 @@ const copy = {
   },
   ko: {
     title: "ACP - AI Pack",
-    description:
-      "ACP AI Pack은 기존 ACP의 접근 제어, 권한, 정책, 감사 체계 안에서 AI Chat과 AI Agent가 도구 호출, 데이터 조회, 승인 우회 리스크 감지, 이상 행위 제어 같은 작업을 안전하게 수행하도록 돕는 확장 제품군입니다.",
+    description: [
+      "ACP AI Pack은 ACP의 접근 제어, 권한, 정책, 감사 체계를 AI Chat과 AI Agent로 확장합니다.",
+      "도구 호출, 데이터 조회, 승인 우회 리스크 감지, 이상 행위 제어를 안전하게 수행하도록 돕습니다.",
+    ],
     cards: [
       {
         description:
@@ -53,8 +57,10 @@ const copy = {
   },
   ja: {
     title: "ACP - AI Pack",
-    description:
-      "ACP AI Packは、既存のACPのアクセス制御、認可、ポリシー、監査の枠組みの中で、AI ChatとAI Agentがツール呼び出し、データ取得、承認回避リスクの検知、異常行動の制御などのタスクを安全に実行できるようにする拡張製品群です。",
+    description: [
+      "ACP AI Packは、ACPのアクセス制御、認可、ポリシー、監査の枠組みをAI ChatとAI Agentへ拡張します。",
+      "ツール呼び出し、データ取得、承認回避リスクの検知、異常行動の制御を安全に実行できるよう支援します。",
+    ],
     cards: [
       {
         description:
@@ -79,7 +85,7 @@ const copy = {
     description: string;
     title: string;
   }>;
-  description: string;
+  description: string[];
   imageAlt: string;
   title: string;
 }>;
@@ -94,8 +100,10 @@ export default function AcpAiPackSection({ locale }: AcpAiPackSectionProps) {
           <h2 className="m-0 w-full type-h1 font-normal tracking-[0] text-fg md:tracking-[-0.2px]">
             {content.title}
           </h2>
-          <p className="m-0 w-full text-pretty type-body-lg leading-[26px] text-mute">
-            {content.description}
+          <p className="m-0 flex w-full flex-col text-pretty type-body-lg leading-[26px] text-mute">
+            {content.description.map((line) => (
+              <span key={line}>{line}</span>
+            ))}
           </p>
         </header>
 
@@ -123,7 +131,7 @@ export default function AcpAiPackSection({ locale }: AcpAiPackSectionProps) {
               alt={content.imageAlt}
               className="block h-full w-full object-cover"
               height="400"
-              src="/solutions/aip/aip-cover.jpg"
+              src="/images/common/fallback-contents.jpg"
               width="682"
             />
           </div>

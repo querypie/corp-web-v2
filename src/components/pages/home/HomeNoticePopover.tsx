@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type React from "react";
 import Button from "@/components/common/Button";
+import type { Locale } from "@/constants/i18n";
 
 export type HomeNoticeItem = {
   category: string;
@@ -14,13 +15,35 @@ export type HomeNoticeItem = {
 
 type HomeNoticePopoverProps = {
   items: HomeNoticeItem[];
+  locale: Locale;
 };
 
 const NOTICE_COOKIE_NAME = "querypie-home-notice-hidden";
 const NOTICE_COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 30;
-const AUTO_ROLLING_INTERVAL_MS = 5000;
+const AUTO_ROLLING_INTERVAL_MS = 4000;
 const DRAG_THRESHOLD_PX = 32;
 const IMAGE_SLIDE_DURATION_MS = 260;
+const noticePopoverCopy = {
+  en: {
+    closeLabel: "Close",
+    noticeLabel: "Latest content notice",
+    showNoticeLabel: (index: number) => `Show notice ${index}`,
+  },
+  ko: {
+    closeLabel: "닫기",
+    noticeLabel: "최신 콘텐츠 공지",
+    showNoticeLabel: (index: number) => `공지 ${index} 보기`,
+  },
+  ja: {
+    closeLabel: "閉じる",
+    noticeLabel: "最新コンテンツのお知らせ",
+    showNoticeLabel: (index: number) => `お知らせ ${index} を表示`,
+  },
+} satisfies Record<Locale, {
+  closeLabel: string;
+  noticeLabel: string;
+  showNoticeLabel: (index: number) => string;
+}>;
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -36,7 +59,7 @@ function setHiddenCookie() {
   document.cookie = `${NOTICE_COOKIE_NAME}=1; max-age=${NOTICE_COOKIE_MAX_AGE_SECONDS}; path=/; samesite=lax`;
 }
 
-export default function HomeNoticePopover({ items }: HomeNoticePopoverProps) {
+export default function HomeNoticePopover({ items, locale }: HomeNoticePopoverProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
@@ -121,6 +144,7 @@ export default function HomeNoticePopover({ items }: HomeNoticePopoverProps) {
   }
 
   const activeItem = items[normalizedActiveIndex];
+  const copy = noticePopoverCopy[locale];
 
   const goToIndex = (index: number) => {
     const normalizedTargetIndex = getWrappedIndex(index);
@@ -189,7 +213,7 @@ export default function HomeNoticePopover({ items }: HomeNoticePopoverProps) {
 
   return (
     <aside
-      aria-label="Latest content notice"
+      aria-label={copy.noticeLabel}
       className="fixed bottom-5 left-1/2 z-[55] w-[300px] max-w-[calc(100vw-40px)] -translate-x-1/2 overflow-hidden rounded-box bg-bg-deep shadow-[0_18px_48px_rgba(var(--color-overlay-rgb)/0.42)] md:bottom-auto md:left-auto md:right-10 md:top-[80%] md:-translate-x-0 md:-translate-y-1/2"
       data-node-id="810:1450"
     >
@@ -250,7 +274,7 @@ export default function HomeNoticePopover({ items }: HomeNoticePopoverProps) {
         <div className="absolute left-1/2 flex h-8 -translate-x-1/2 items-center gap-1.5">
           {items.map((item, index) => (
             <button
-              aria-label={`Show notice ${index + 1}`}
+              aria-label={copy.showNoticeLabel(index + 1)}
               aria-pressed={index === normalizedActiveIndex}
               className={cx(
                 "h-2 rounded-full transition-all",
@@ -270,7 +294,7 @@ export default function HomeNoticePopover({ items }: HomeNoticePopoverProps) {
           type="button"
           variant="secondary"
         >
-          close
+          {copy.closeLabel}
         </Button>
       </div>
     </aside>

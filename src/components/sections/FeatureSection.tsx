@@ -7,9 +7,11 @@ import { featureItemGapClassName } from "@/constants/layout";
 type FeatureItem = {
   action?: {
     href: string;
+    isExternal?: boolean;
     label: string;
   };
   body: string[];
+  iconSrc?: string;
   imageAlt: string;
   imageClassName?: string;
   imageSrc?: string;
@@ -77,19 +79,30 @@ function FeatureCopy({
   action,
   body,
   className,
+  iconSrc,
   title,
-}: Pick<FeatureItem, "action" | "body" | "title"> & { className?: string }) {
+}: Pick<FeatureItem, "action" | "body" | "iconSrc" | "title"> & { className?: string }) {
   return (
     /* 기능 설명 텍스트 블록 */
-    <div className={cx("flex flex-1 flex-col gap-2 not-italic md:gap-5 lg:min-w-[200px]", className)}>
-      <div className="order-1 w-full type-h2 leading-7 tracking-[-0.3px] text-fg md:order-none">
-        {title.map((line) => (
-          <p key={line} className="m-0">
-            {line}
-          </p>
-        ))}
+    <div className={cx("flex w-full min-w-0 flex-1 flex-col gap-3 not-italic md:gap-5 lg:min-w-[200px]", className)}>
+      <div className="order-1 flex w-full min-w-0 items-center gap-3 md:contents">
+        {iconSrc ? (
+          <img
+            alt=""
+            aria-hidden="true"
+            className="h-10 w-10 shrink-0 rounded-[10px] object-contain md:h-15 md:w-15 md:rounded-[14px]"
+            src={iconSrc}
+          />
+        ) : null}
+        <div className="min-w-0 flex-1 break-words text-pretty type-h3 font-normal leading-6 tracking-[0] text-fg md:w-full md:flex-none md:type-h2 md:leading-8">
+          {title.map((line) => (
+            <p key={line} className="m-0">
+              {line}
+            </p>
+          ))}
+        </div>
       </div>
-      <div className="order-2 w-full type-body-lg leading-6 text-mute md:order-none">
+      <div className="order-2 w-full break-words text-pretty type-body-lg leading-6 text-mute md:order-none md:leading-[26px]">
         {body.map((line) => (
           <p key={line} className="m-0">
             {line}
@@ -97,7 +110,12 @@ function FeatureCopy({
         ))}
       </div>
       {action ? (
-        <TextButton className="order-3 justify-start self-start md:order-none" href={action.href}>
+        <TextButton
+          className="order-3 justify-start self-start md:order-none"
+          href={action.href}
+          rel={action.isExternal ? "noreferrer noopener" : undefined}
+          target={action.isExternal ? "_blank" : undefined}
+        >
           {action.label}
         </TextButton>
       ) : null}
@@ -123,7 +141,7 @@ function FeatureMedia({
     <div
       className={cx(
         "overflow-hidden rounded-box",
-        videoSrc ? "w-full md:h-[480px] md:w-fit" : "aspect-[2/1] w-full lg:w-[790px] lg:max-w-[65%]",
+        videoSrc ? "w-full md:h-[480px] md:w-fit" : "aspect-[2/1] w-full shrink-0 lg:w-[790px] lg:max-w-[65%]",
         className,
       )}
     >
@@ -241,7 +259,7 @@ export default function FeatureSection({
             <div
               key={`${item.videoSrc ?? item.imageSrc}-${index}`}
               className={cx(
-                "flex flex-col items-start gap-5 lg:flex-row lg:gap-[60px]",
+                "flex min-w-0 flex-col items-start gap-5 lg:flex-row lg:gap-[60px]",
                 shouldReverse && "lg:flex-row-reverse",
               )}
               data-reveal
@@ -251,6 +269,7 @@ export default function FeatureSection({
                 action={item.action}
                 body={item.body}
                 className="order-2 lg:order-none"
+                iconSrc={item.iconSrc}
                 title={item.title}
               />
               <FeatureMedia

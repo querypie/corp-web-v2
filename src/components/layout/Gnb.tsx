@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { MouseEvent as ReactMouseEvent, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Button from "../common/Button";
@@ -134,6 +134,22 @@ export default function Gnb({
     { label: "日本語", href: getLocaleHref(pathname, "ja", currentSearch) },
     { label: "한국어", href: getLocaleHref(pathname, "ko", currentSearch) },
   ];
+  const handleLocaleClick = (event: ReactMouseEvent<HTMLAnchorElement>, href: string) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    setMobileLocaleOpen(false);
+    router.push(href, { scroll: false });
+  };
   const mobileSections = [
     { title: items[0], items: getSolutionsSubItems(locale) },
     { title: items[1], items: getFeaturesSubItems(locale) },
@@ -317,6 +333,7 @@ export default function Gnb({
                       key={sub.label}
                       className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                       href={sub.href}
+                      onClick={(event) => handleLocaleClick(event, sub.href)}
                     >
                       {sub.label}
                     </a>
@@ -354,7 +371,7 @@ export default function Gnb({
                       key={sub.label}
                       className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                       href={sub.href}
-                      onClick={() => setMobileLocaleOpen(false)}
+                      onClick={(event) => handleLocaleClick(event, sub.href)}
                     >
                       {sub.label}
                     </a>

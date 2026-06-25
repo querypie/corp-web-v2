@@ -11,7 +11,13 @@ import HomeNoticePopover, { type HomeNoticeItem } from "./HomeNoticePopover";
 import type { Locale } from "../../../constants/i18n";
 
 type FeatureItem = {
+  action?: {
+    href: string;
+    isExternal?: boolean;
+    label: string;
+  };
   body: string[];
+  iconSrc?: string;
   imageAlt: string;
   imageSrc: string;
   reverse?: boolean;
@@ -102,7 +108,7 @@ export default function HomePage({
 }: HomePageProps) {
   return (
     <div className={`mt-5 flex flex-col ${pageSectionGapClassName} overflow-x-hidden bg-bg ${pageXPaddingClassName} pb-10 text-fg md:mt-0`}>
-      <HomeNoticePopover items={noticeItems} />
+      <HomeNoticePopover items={noticeItems} locale={locale} />
 
       <div className="relative -mx-5 md:-mx-10">
         <HomePageHero
