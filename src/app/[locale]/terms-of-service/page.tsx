@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import TermsOfServicePage from "../../../components/pages/legal/TermsOfServicePage";
 import { getLocalePath, isLocale, type Locale } from "../../../constants/i18n";
 import { getTermsOfServiceContent } from "../../../constants/legalContent";
+import { withDynamicOgImage } from "@/features/seo/metadata";
+import { getStaticSeoDescription } from "@/features/seo/staticDescriptions";
 
 type TermsOfServiceRouteProps = {
   params: Promise<{ locale: string }>;
@@ -14,13 +16,15 @@ export async function generateMetadata({ params }: TermsOfServiceRouteProps): Pr
   if (!isLocale(locale)) return {};
 
   const content = await getTermsOfServiceContent(locale as Locale);
+  const description = getStaticSeoDescription("termsOfService", locale);
 
-  return {
+  return withDynamicOgImage({
     title: content.title,
+    description,
     alternates: {
       canonical: getLocalePath(locale, "/terms-of-service"),
     },
-  };
+  }, { locale, title: content.title, description });
 }
 
 export default async function TermsOfServiceRoute({

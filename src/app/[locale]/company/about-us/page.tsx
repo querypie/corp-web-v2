@@ -2,7 +2,11 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "../../../../constants/i18n";
 import AboutUsPage from "../../../../components/pages/company/AboutUsPage";
-import { getAboutUsMetadataTitle } from "@/features/company/pageCopy";
+import {
+  getAboutUsMetadataDescription,
+  getAboutUsMetadataTitle,
+} from "@/features/company/pageCopy";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -240,10 +244,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
-  return {
-    title: getAboutUsMetadataTitle(locale),
+  const title = getAboutUsMetadataTitle(locale);
+  const description = getAboutUsMetadataDescription(locale);
+
+  return withDynamicOgImage({
+    title,
+    description,
     alternates: {
       canonical: getLocalePath(locale, "/company/about-us"),
     },
-  };
+  }, { locale, title, description });
 }

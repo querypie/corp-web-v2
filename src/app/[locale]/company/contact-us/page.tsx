@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getLocalePath, isLocale, type Locale } from "../../../../constants/i18n";
 import ContactUsPage from "../../../../components/pages/contact/ContactUsPage";
 import { getContactPageCopy } from "@/features/contact/copy";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -22,12 +23,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
-  const { metadataTitle } = getContactPageCopy(locale);
+  const { formDescription, metadataTitle } = getContactPageCopy(locale);
 
-  return {
+  return withDynamicOgImage({
     title: metadataTitle,
+    description: formDescription,
     alternates: {
       canonical: getLocalePath(locale, "/company/contact-us"),
     },
-  };
+  }, { locale, title: metadataTitle, description: formDescription });
 }

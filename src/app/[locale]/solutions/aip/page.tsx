@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { getSolutionHref } from "@/features/solutions/routes";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 import ContentEN, { metadata as metadataEN } from "./content.en";
 import ContentKO, { metadata as metadataKO } from "./content.ko";
 import ContentJA, { metadata as metadataJA } from "./content.ja";
@@ -31,32 +32,14 @@ export async function generateMetadata({ params }: Pick<PageProps, "params">): P
   const meta = metadataByLocale[locale];
   if (!meta) return {};
 
-  return {
+  return withDynamicOgImage({
     title: meta.title,
     description: meta.description,
     keywords: meta.keywords ? [...meta.keywords] : undefined,
     alternates: {
       canonical: getSolutionHref(locale, "aip"),
     },
-    openGraph: {
-      title: "AI Platform",
-      description: meta.description,
-      images: [
-        {
-          url: `${getSolutionHref(locale, "aip")}/opengraph-image`,
-          width: 1200,
-          height: 630,
-          alt: "AI Platform",
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "AI Platform",
-      description: meta.description,
-      images: [`${getSolutionHref(locale, "aip")}/opengraph-image`],
-    },
-  };
+  }, { locale, title: meta.title, description: meta.description });
 }
 
 export default async function SolutionPage({ params, searchParams }: PageProps) {

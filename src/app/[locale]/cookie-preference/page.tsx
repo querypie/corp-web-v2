@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import CookiePreferencePage from "../../../components/pages/legal/CookiePreferencePage";
 import { getLocalePath, isLocale, type Locale } from "../../../constants/i18n";
 import { cookiePreferenceCopy } from "../../../constants/legal";
+import { withDynamicOgImage } from "@/features/seo/metadata";
+import { getStaticSeoDescription } from "@/features/seo/staticDescriptions";
 
 type CookiePreferenceRouteProps = {
   params: Promise<{ locale: string }>;
@@ -16,13 +18,15 @@ export async function generateMetadata({
   if (!isLocale(locale)) return {};
 
   const copy = cookiePreferenceCopy[locale as Locale];
+  const description = getStaticSeoDescription("cookiePreference", locale);
 
-  return {
+  return withDynamicOgImage({
     title: copy.title,
+    description,
     alternates: {
       canonical: getLocalePath(locale as Locale, "/cookie-preference"),
     },
-  };
+  }, { locale, title: copy.title, description });
 }
 
 export default async function CookiePreferenceRoute({

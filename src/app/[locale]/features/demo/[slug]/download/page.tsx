@@ -6,6 +6,7 @@ import { getContactPageCopy } from "@/features/contact/copy";
 import { getLocalizedContent, getResolvedContentLocale, isPublishedContentAccessible } from "@/features/content/data";
 import { readContentItem } from "@/features/content/contentState.server";
 import { getContentUnlockCookieName } from "@/features/content/gating";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type DemoDownloadRouteProps = {
   params: Promise<{ locale: string; slug: string }>;
@@ -62,10 +63,14 @@ export async function generateMetadata({ params }: DemoDownloadRouteProps): Prom
     return {};
   }
 
-  return {
-    title: getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale)),
+  const title = getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale));
+  const description = getLocalizedContent(currentEntry.summary, getResolvedContentLocale(currentEntry, locale));
+
+  return withDynamicOgImage({
+    title,
+    description,
     alternates: {
       canonical: getLocalePath(locale, `/features/demo/${resolvedSlug}/download`),
     },
-  };
+  }, { locale, title, description });
 }

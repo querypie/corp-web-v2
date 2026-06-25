@@ -18,6 +18,7 @@ import {
   getPublicDetailHref,
 } from "@/features/content/data";
 import { readContentItem, readContentState } from "@/features/content/contentState.server";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 import {
   buildContentPreviewHtml,
   getContentUnlockCookieName,
@@ -133,10 +134,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {};
   }
 
-  return {
-    title: getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale)),
+  const title = getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale));
+  const description = getLocalizedContent(currentEntry.summary, getResolvedContentLocale(currentEntry, locale));
+
+  return withDynamicOgImage({
+    title,
+    description,
     alternates: {
       canonical: getLocalePath(locale, `/features/demo/${resolvedSlug}`),
     },
-  };
+  }, { locale, title, description });
 }

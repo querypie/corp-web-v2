@@ -16,6 +16,7 @@ import {
   getPublicDetailHref,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -61,12 +62,13 @@ export async function generateMetadata({ params }: Pick<Props, "params">): Promi
 
   if (!isLocale(locale)) return {};
 
-  const { metadataTitle } = getDemoPageCopy(locale);
+  const { metadataDescription, metadataTitle } = getDemoPageCopy(locale);
 
-  return {
+  return withDynamicOgImage({
     title: metadataTitle,
+    description: metadataDescription,
     alternates: {
       canonical: getLocalePath(locale, "/features/demo"),
     },
-  };
+  }, { locale, title: metadataTitle, description: metadataDescription });
 }
