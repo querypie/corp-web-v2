@@ -1,6 +1,6 @@
 # Vercel 배포 구현 현황
 
-**최종 업데이트**: 2026-04-16
+**최종 업데이트**: 2026-06-25
 
 corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 
@@ -25,6 +25,7 @@ corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 ```
 .github/workflows/
   ci.yml                # PR → main 빌드 + 타입체크 검증
+  create-pr.yml         # 수동(workflow_dispatch) PR 생성
   deploy-preview.yml    # PR open/sync 시 Preview 배포
   deploy-staging.yml    # main push 시 Staging 자동 배포
   deploy-production.yml # 수동(workflow_dispatch) Production 배포
@@ -37,7 +38,8 @@ corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 - **검증 항목**:
   - `validate-next-build` — `npm run build`
   - `validate-typecheck` — `npm run typecheck`
-  - lint, test — 스크립트 구현 후 주석 해제 예정
+  - `validate-test` — `npm run test:run`
+  - lint — 스크립트 구현 후 주석 해제 예정
 
 ### `deploy-staging.yml` — Staging 자동 배포
 
@@ -87,6 +89,14 @@ scripts/deploy/
 ## Vercel 프로젝트 설정
 
 `VERCEL_TEAM_ID`, `VERCEL_PROJECT_ID`는 각 배포 워크플로우 파일에 직접 명시되어 있다. 리전 및 Git 설정은 `vercel.json`에서 관리한다.
+
+`NEXT_PUBLIC_SITE_URL`이 설정되어 있으면 해당 값을 canonical / OG 절대 URL의 기준으로 사용한다. 미설정 시 `VERCEL_TARGET_ENV` 기준으로 자동 결정한다.
+
+| `VERCEL_TARGET_ENV` | 기본 site URL |
+|---------------------|---------------|
+| `staging` | `https://stage-v2.querypie.com` |
+| `preview` | `https://www-v2.querypie.com` |
+| `production` | `https://www.querypie.com` |
 
 ### `vercel.json`
 

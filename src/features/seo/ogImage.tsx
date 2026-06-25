@@ -6,6 +6,8 @@ export const ogImageSize = {
   height: 630,
 } as const;
 
+const ogImagePaddingX = 68;
+
 type OgImageProps = {
   description: string;
   locale: Locale;
@@ -20,16 +22,18 @@ type OgFontConfig = {
   weight: 400;
 };
 
-const fontConfigByLocale: Record<Locale, { path: string; name: string }> = {
-  en: { path: "/fonts/og/MonaSans-Regular.ttf", name: "Mona Sans" },
-  ko: { path: "/fonts/og/Pretendard-Regular.ttf", name: "Pretendard" },
-  ja: { path: "/fonts/og/MPLUS1-Regular.ttf", name: "M PLUS 1" },
-};
+const ogFontConfigs = {
+  mona: { path: "/fonts/og/MonaSans-Regular.ttf", name: "Mona Sans" },
+  pretendard: { path: "/fonts/og/Pretendard-Regular.ttf", name: "Pretendard" },
+  mPlus1: { path: "/fonts/og/MPLUS1-Regular.ttf", name: "M PLUS 1" },
+} as const;
 
 const fontDataCache = new Map<string, Promise<ArrayBuffer>>();
 
-async function getOgFont(origin: string, locale: Locale): Promise<OgFontConfig> {
-  const config = fontConfigByLocale[locale];
+async function loadOgFont(
+  origin: string,
+  config: { path: string; name: string },
+): Promise<OgFontConfig> {
   const fontUrl = new URL(config.path, origin).toString();
   let fontData = fontDataCache.get(fontUrl);
 
@@ -52,8 +56,26 @@ async function getOgFont(origin: string, locale: Locale): Promise<OgFontConfig> 
   };
 }
 
+async function getOgFonts(origin: string, locale: Locale): Promise<OgFontConfig[]> {
+  const localeFallbackFont =
+    locale === "ko" ? ogFontConfigs.pretendard :
+    locale === "ja" ? ogFontConfigs.mPlus1 :
+    undefined;
+  const configs = localeFallbackFont
+    ? [ogFontConfigs.mona, localeFallbackFont]
+    : [ogFontConfigs.mona];
+
+  return Promise.all(configs.map((config) => loadOgFont(origin, config)));
+}
+
+function getOgFontFamily(locale: Locale) {
+  if (locale === "ko") return "Mona Sans, Pretendard";
+  if (locale === "ja") return "Mona Sans, M PLUS 1";
+  return "Mona Sans";
+}
+
 function getLocaleTextStyle(locale: Locale) {
-  if (locale === "en") {
+  if (locale === "en" || locale === "ko") {
     return {
       titleSize: 64,
       descriptionSize: 36,
@@ -62,18 +84,19 @@ function getLocaleTextStyle(locale: Locale) {
   }
 
   return {
-    titleSize: 60,
+    titleSize: 64,
     descriptionSize: 34,
-    descriptionLineHeight: 50,
+    descriptionLineHeight: 52,
   };
 }
 
 export async function createOgImage({ description, locale, origin, title }: OgImageProps) {
-  const [backgroundImageUrl, font] = await Promise.all([
+  const [backgroundImageUrl, fonts] = await Promise.all([
     Promise.resolve(new URL("/og/base.png", origin).toString()),
-    getOgFont(origin, locale),
+    getOgFonts(origin, locale),
   ]);
   const textStyle = getLocaleTextStyle(locale);
+  const fontFamily = getOgFontFamily(locale);
 
   return new ImageResponse(
     (
@@ -105,21 +128,21 @@ export async function createOgImage({ description, locale, origin, title }: OgIm
           style={{
             display: "flex",
             flexDirection: "column",
-            left: 68,
+            left: ogImagePaddingX,
             position: "absolute",
             top: 220,
-            width: 940,
+            width: ogImageSize.width - ogImagePaddingX * 2,
           }}
         >
           <div
             style={{
-              fontFamily: font.name,
+              fontFamily,
               fontSize: textStyle.titleSize,
               fontWeight: 400,
-              letterSpacing: "-0.2px",
-              lineHeight: 1.08,
+              letterSpacing: "-0.5px",
+              lineHeight: 1.3,
               margin: 0,
-              maxWidth: 940,
+              width: "100%",
               whiteSpace: "pre-wrap",
               wordBreak: "keep-all",
             }}
@@ -128,13 +151,13 @@ export async function createOgImage({ description, locale, origin, title }: OgIm
           </div>
           <div
             style={{
-              fontFamily: font.name,
+              fontFamily,
               fontSize: textStyle.descriptionSize,
               fontWeight: 400,
               letterSpacing: "-0.2px",
               lineHeight: `${textStyle.descriptionLineHeight}px`,
               marginTop: 46,
-              maxWidth: 931,
+              width: "100%",
               whiteSpace: "pre-wrap",
               wordBreak: "keep-all",
             }}
@@ -146,7 +169,7 @@ export async function createOgImage({ description, locale, origin, title }: OgIm
     ),
     {
       ...ogImageSize,
-      fonts: [font],
+      fonts,
     },
   );
 }

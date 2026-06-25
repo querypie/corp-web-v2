@@ -1,6 +1,6 @@
 # corp-web-v2 구현 현황
 
-**최종 업데이트**: 2026-06-24 (Admin CMS 콘텐츠 저장 구조 반영)
+**최종 업데이트**: 2026-06-25 (폼 연동, 테스트, API 현황 반영)
 
 corp-web-v2의 현재 구현 상태를 영역별로 기술한다.
 
@@ -36,7 +36,9 @@ src/
 ├── features/
 │   ├── content/           # 콘텐츠 시스템 (상태 관리, 쿼리, 게이팅)
 │   ├── seo/               # SEO 메타데이터 관리
-│   └── contact/           # 문의 페이지 복사본
+│   ├── contact/           # 문의 페이지 복사본
+│   ├── community-license/ # Community License 신청/발급
+│   └── utm/               # UTM attribution
 ├── content/               # 콘텐츠 파일 (소스)
 │   ├── demo/              # category/cnt_xxxxxx/meta.json + locale 본문
 │   ├── documentation/     # category/cnt_xxxxxx/meta.json + locale 본문
@@ -58,6 +60,7 @@ src/
 | `/features/documentation` | ✅ | 문서 목록 |
 | `/features/documentation/[slug]` | ✅ | 문서 상세 |
 | `/features/documentation/[slug]/download` | ✅ | 게이팅 다운로드 |
+| `/community-license` | ✅ | Community License 신청 |
 | `/company/about-us` | ✅ | 회사 소개 |
 | `/company/certifications` | ✅ | 인증 현황 |
 | `/company/contact-us` | ✅ | 문의 폼 |
@@ -100,10 +103,15 @@ src/
 | 경로 | 메서드 | 역할 |
 |------|--------|------|
 | `/api/admin/content/state` | GET/POST/PUT/PATCH/DELETE | 관리형 콘텐츠 파일 조회·저장·상태 변경·삭제 |
+| `/api/admin/content/translate` | POST | Admin 콘텐츠 번역 보조 |
 | `/api/admin/uploads` | POST | 파일 업로드 |
 | `/api/admin/uploads/content-document` | POST | 문서 업로드 |
-| `/api/downloads/content` | GET | 공개 콘텐츠 다운로드 |
+| `/api/community-license` | POST | Community License 신청, 라이선스 발급, Salesforce/Slack 연동 |
+| `/api/contact-us` | POST | Contact Us 제출, UTM 수집, Salesforce/Slack 연동 |
+| `/api/downloads/content` | POST | 공개 콘텐츠 다운로드 리드 저장·언락 |
 | `/api/downloads/file` | GET | 파일 다운로드 |
+| `/api/language-suggestion` | GET | 언어 제안 |
+| `/api/og` | GET | OG 이미지 생성 |
 
 ---
 
@@ -133,15 +141,14 @@ Page Components         ← 렌더링
 
 ---
 
-## 현재 미구현 항목
+## 남은 정리 항목
 
 | 항목 | 우선순위 | 비고 |
 |------|----------|------|
-| Community License 신청/발급 | 🔴 최우선 | corp-web-app 대체 필수 |
-| 리드/폼 연동 (Salesforce, Slack, Google Sheets) | 🔴 필수 | |
 | SEO 서버 영속화 | 🟡 | localStorage → 파일 저장 전환 필요 |
-| Stage→Production 릴리즈 워크플로우 | 🟡 | CMS 완성 계획 참고 |
-| 자동화 테스트 확대 | 🟠 | 핵심 API/콘텐츠 저장 테스트는 구현됨. UI E2E 보강 필요 |
+| Google Sheets 연동 | 🟡 | 현재 Contact Us / Community License는 Salesforce + Slack 기준 |
+| Stage→Production 운영 체크리스트 | 🟡 | 배포 워크플로우는 구현됨. 릴리즈 절차 문서화 필요 |
+| UI E2E 확대 | 🟠 | Vitest 304개 통과. 로컬 Playwright는 Contact Us stage 흐름 중심 |
 
 ---
 

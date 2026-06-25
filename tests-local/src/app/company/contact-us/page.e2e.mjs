@@ -5,7 +5,7 @@ const sampleEmail = process.env.CONTACT_US_E2E_EMAIL ?? 'stage-e2e@querypie.ai';
 const sampleMessage =
   process.env.CONTACT_US_E2E_MESSAGE ??
   'Stage E2E verification from Hermes. Please ignore this test submission.';
-const routePath = process.env.CONTACT_US_E2E_ROUTE_PATH ?? '/company/contact-us';
+const routePath = process.env.CONTACT_US_E2E_ROUTE_PATH ?? '/en/company/contact-us';
 
 async function gotoContactUs(page, baseURL) {
   await page.goto(`${baseURL}${routePath}`, { waitUntil: 'networkidle' });
