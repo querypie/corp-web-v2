@@ -4,7 +4,6 @@ import { isLocale, locales, type Locale } from "../../constants/i18n";
 import { pageTopPaddingClassName } from "../../constants/layout";
 import { getShellMenuCopy } from "../../constants/navigation";
 import LanguageSuggestionBanner from "../../components/common/LanguageSuggestionBanner";
-import SeoRuntime from "../../components/common/SeoRuntime";
 import Footer from "../../components/layout/Footer";
 import Gnb from "../../components/layout/Gnb";
 import UtmCapture from "../../components/common/UtmCapture";
@@ -33,7 +32,6 @@ export default async function LocaleLayout({
 
   return (
     <div className="flex min-h-screen flex-col bg-bg" data-locale={locale as Locale} lang={locale}>
-      <SeoRuntime locale={locale as Locale} />
       <Suspense fallback={null}>
         <LanguageSuggestionBanner currentLocale={locale as Locale} />
         <Gnb actionLabel={shellCopy.navActionLabel} items={shellCopy.navItems} locale={locale} />

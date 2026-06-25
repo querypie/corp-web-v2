@@ -14,6 +14,7 @@ import {
   isPublishedContentAccessible,
 } from "@/features/content/data";
 import { readContentItem, readContentState } from "@/features/content/contentState.server";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -105,10 +106,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return {};
   }
 
-  return {
-    title: getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale)),
+  const title = getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale));
+  const description = getLocalizedContent(currentEntry.summary, getResolvedContentLocale(currentEntry, locale));
+
+  return withDynamicOgImage({
+    title,
+    description,
     alternates: {
       canonical: getPublicDetailHref("news", locale, decodedSlug),
     },
-  };
+  }, { locale, title, description });
 }

@@ -2,7 +2,11 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import CertificationsPage from "../../../../components/pages/company/CertificationsPage";
 import { getLocalePath, isLocale } from "../../../../constants/i18n";
-import { getCertificationsMetadataTitle } from "@/features/company/pageCopy";
+import {
+  getCertificationsMetadataDescription,
+  getCertificationsMetadataTitle,
+} from "@/features/company/pageCopy";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type CertificationsRouteProps = {
   params: Promise<{ locale: string }>;
@@ -299,10 +303,14 @@ export async function generateMetadata({ params }: CertificationsRouteProps): Pr
 
   if (!isLocale(locale)) return {};
 
-  return {
-    title: getCertificationsMetadataTitle(locale),
+  const title = getCertificationsMetadataTitle(locale);
+  const description = getCertificationsMetadataDescription(locale);
+
+  return withDynamicOgImage({
+    title,
+    description,
     alternates: {
       canonical: getLocalePath(locale, "/company/certifications"),
     },
-  };
+  }, { locale, title, description });
 }

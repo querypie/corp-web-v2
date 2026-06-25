@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "@/constants/i18n";
 import CommunityLicensePage from "@/components/pages/community-license/CommunityLicensePage";
 import { getCommunityLicensePageCopy } from "@/features/community-license/copy";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -21,12 +22,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
-  const { metadataTitle } = getCommunityLicensePageCopy(locale);
+  const { description, metadataTitle } = getCommunityLicensePageCopy(locale);
 
-  return {
+  return withDynamicOgImage({
     title: metadataTitle,
+    description,
     alternates: {
       canonical: getLocalePath(locale, "/community-license"),
     },
-  };
+  }, { locale, title: metadataTitle, description });
 }

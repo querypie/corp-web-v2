@@ -5,6 +5,7 @@ import NewsListClientPage from "../../../../components/pages/news/NewsListClient
 import { getNewsPageCopy } from "@/features/company/pageCopy";
 import { formatPublicDate, getLocalizedContent, getPublicDetailHref, isPublishedContentVisible } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -36,12 +37,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   if (!isLocale(locale)) return {};
 
-  const { metadataTitle } = getNewsPageCopy(locale);
+  const { metadataDescription, metadataTitle } = getNewsPageCopy(locale);
 
-  return {
+  return withDynamicOgImage({
     title: metadataTitle,
+    description: metadataDescription,
     alternates: {
       canonical: getLocalePath(locale, "/company/news"),
     },
-  };
+  }, { locale, title: metadataTitle, description: metadataDescription });
 }

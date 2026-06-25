@@ -2,7 +2,8 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "../../constants/i18n";
 import HomePage from "../../components/pages/home/HomePage";
-import { getHomeMetadataTitle } from "@/features/home/pageCopy";
+import { getHomeMetadataDescription, getHomeMetadataTitle } from "@/features/home/pageCopy";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 import {
   demoCategoryConfigs,
   docsCategoryConfigs,
@@ -27,12 +28,16 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
 
   if (!isLocale(locale)) return {};
 
-  return {
+  const title = getHomeMetadataTitle();
+  const description = getHomeMetadataDescription();
+
+  return withDynamicOgImage({
     title: getHomeMetadataTitle(),
+    description,
     alternates: {
       canonical: locale === "en" ? "/" : `/${locale}`,
     },
-  };
+  }, { locale, title, description });
 }
 
 type McpIconSource = {

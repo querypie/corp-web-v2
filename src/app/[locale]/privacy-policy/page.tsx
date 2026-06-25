@@ -7,6 +7,8 @@ import {
   getPrivacyPolicyVersionOptions,
   getPrivacyPolicyVersions,
 } from "../../../constants/privacyPolicy";
+import { withDynamicOgImage } from "@/features/seo/metadata";
+import { getStaticSeoDescription } from "@/features/seo/staticDescriptions";
 
 type PrivacyPolicyRouteProps = {
   params: Promise<{ locale: string }>;
@@ -29,13 +31,15 @@ export async function generateMetadata({
   }
 
   const content = await getPrivacyPolicyContent(locale as Locale, latestVersion);
+  const description = getStaticSeoDescription("privacyPolicy", locale);
 
-  return {
+  return withDynamicOgImage({
     title: content.title,
+    description,
     alternates: {
       canonical: getLocalePath(locale as Locale, `/privacy-policy/${latestVersion}`),
     },
-  };
+  }, { locale, title: content.title, description });
 }
 
 export default async function PrivacyPolicyRoute({

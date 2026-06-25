@@ -15,6 +15,7 @@ import {
   getPublicDetailHref,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type DocsPageProps = {
   params: Promise<{ locale: string }>;
@@ -63,12 +64,13 @@ export async function generateMetadata({ params }: DocsPageProps): Promise<Metad
 
   if (!isLocale(locale)) return {};
 
-  const { metadataTitle } = getDocumentationPageCopy(locale);
+  const { metadataDescription, metadataTitle } = getDocumentationPageCopy(locale);
 
-  return {
+  return withDynamicOgImage({
     title: metadataTitle,
+    description: metadataDescription,
     alternates: {
       canonical: getLocalePath(locale, "/features/documentation"),
     },
-  };
+  }, { locale, title: metadataTitle, description: metadataDescription });
 }

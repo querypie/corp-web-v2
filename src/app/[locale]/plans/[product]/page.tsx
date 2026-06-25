@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import PlansPage from "../../../../components/pages/plans/PlansPage";
 import { getLocalePath, isLocale, type Locale } from "../../../../constants/i18n";
 import { getPlansPageCopy } from "@/features/content/pageCopy";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 
 const planProducts = ["aip", "acp"] as const;
 
@@ -25,14 +26,15 @@ export async function generateMetadata({ params }: PlansProductRouteProps): Prom
 
   if (!isLocale(locale) || !isPlanProduct(product)) return {};
 
-  const { metadataTitle } = getPlansPageCopy(locale);
+  const { metadataDescription, metadataTitle } = getPlansPageCopy(locale);
 
-  return {
+  return withDynamicOgImage({
     title: metadataTitle,
+    description: metadataDescription,
     alternates: {
       canonical: getLocalePath(locale, `/plans/${product}`),
     },
-  };
+  }, { locale, title: metadataTitle, description: metadataDescription });
 }
 
 export default async function PlansProductRoute({ params }: PlansProductRouteProps) {

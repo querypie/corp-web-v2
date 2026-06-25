@@ -4,6 +4,7 @@ import Cta from "@/components/sections/Cta";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { pageXPaddingClassName } from "@/constants/layout";
 import { getSolutionHref } from "@/features/solutions/routes";
+import { withDynamicOgImage } from "@/features/seo/metadata";
 import IntegrationsFilter from "./IntegrationsFilter";
 
 type PageProps = {
@@ -57,13 +58,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!isLocale(locale)) return {};
   const copy = copyByLocale[locale];
 
-  return {
+  return withDynamicOgImage({
     title: copy.title,
     description: copy.description,
     alternates: {
       canonical: getSolutionHref(locale, "aip-integrations"),
     },
-  };
+  }, { locale, title: copy.title, description: copy.description });
 }
 
 export default async function AipIntegrationsPage({ params }: PageProps) {
