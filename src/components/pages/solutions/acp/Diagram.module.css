@@ -169,7 +169,7 @@
   }
 
   52% {
-    color: var(--color-white);
+    color: var(--color-fg);
     text-shadow:
       0 0 8px color-mix(in srgb, var(--color-fg) 82%, transparent),
       0 0 18px color-mix(in srgb, var(--color-point) 74%, transparent);
