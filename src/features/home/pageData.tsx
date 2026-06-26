@@ -2,11 +2,6 @@ import type { ComponentProps } from "react";
 import HomePage from "@/components/pages/home/HomePage";
 import { getLocalePath, type Locale } from "@/constants/i18n";
 import {
-  demoCategoryConfigs,
-  docsCategoryConfigs,
-  getCategoryLabel,
-} from "@/features/content/config";
-import {
   compareDateIsoDesc,
   getContentThumbnailSrc,
   getManagedCategoryLabel,
@@ -90,75 +85,42 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
       .sort((left, right) => compareDateIsoDesc(left.dateIso, right.dateIso))
       .slice(0, 3)
       .map(({ dateIso: _dateIso, ...item }) => item);
-    const latestByCategory = (
-      section: "demo" | "documentation",
-      categorySlug: string,
-    ) =>
-      visiblePublishedItems
-        .filter(
-          (item) =>
-            item.section === section &&
-            item.categorySlug === categorySlug,
-        )
-        .sort((left, right) => compareDateIsoDesc(left.dateIso, right.dateIso))[0];
-
-    const latestUseCase = latestByCategory("demo", "use-cases");
-    const latestWhitePaper = latestByCategory("documentation", "white-papers");
-    const latestBlog = latestByCategory("documentation", "blogs");
-
     const contentListItems: Array<{
       category: string;
       href: string;
       imageSrc: string;
       title: string;
-    }> = [
-      latestUseCase
-        ? {
-            category: getCategoryLabel(demoCategoryConfigs, "use-cases", locale),
-            href:
-              latestUseCase.contentType === "outlink"
-                ? latestUseCase.externalUrl
-                : getPublicDetailHref("demo", locale, latestUseCase.id),
-            imageSrc: getContentThumbnailSrc(latestUseCase.imageSrc),
-            title: getLocalizedContent(latestUseCase.title, locale),
-          }
-        : null,
-      latestWhitePaper
-        ? {
-            category: getCategoryLabel(docsCategoryConfigs, "white-papers", locale),
-            href:
-              latestWhitePaper.contentType === "outlink"
-                ? latestWhitePaper.externalUrl
-                : getPublicDetailHref("documentation", locale, latestWhitePaper.id),
-            imageSrc: getContentThumbnailSrc(latestWhitePaper.imageSrc),
-            title: getLocalizedContent(latestWhitePaper.title, locale),
-          }
-        : null,
-      latestBlog
-        ? {
-            category: getCategoryLabel(docsCategoryConfigs, "blogs", locale),
-            href:
-              latestBlog.contentType === "outlink"
-                ? latestBlog.externalUrl
-                : getPublicDetailHref("documentation", locale, latestBlog.id),
-            imageSrc: getContentThumbnailSrc(latestBlog.imageSrc),
-            title: getLocalizedContent(latestBlog.title, locale),
-          }
-        : null,
-    ].filter((item): item is NonNullable<typeof item> => !!item);
+    }> = visiblePublishedItems
+      .filter((item) => item.section !== "news")
+      .map((item) => {
+        const title = getLocalizedContent(item.title, locale);
+        const isExternal = item.contentType === "outlink" && Boolean(item.externalUrl.trim());
+
+        if (!title) {
+          return null;
+        }
+
+        return {
+          category: getManagedCategoryLabel(item.section, item.categorySlug, locale),
+          href: isExternal ? item.externalUrl : getPublicDetailHref(item.section, locale, item.id),
+          imageSrc: getContentThumbnailSrc(item.imageSrc),
+          title,
+          dateIso: item.dateIso,
+        };
+      })
+      .filter((item): item is NonNullable<typeof item> => Boolean(item))
+      .sort((left, right) => compareDateIsoDesc(left.dateIso, right.dateIso))
+      .slice(0, 3)
+      .map(({ dateIso: _dateIso, ...item }) => item);
 
     const contentListLinks = [
       {
-        href: getLocalePath(locale, "/features/demo?category=use-cases"),
-        label: getCategoryLabel(demoCategoryConfigs, "use-cases", locale),
+        href: getLocalePath(locale, "/features/demo"),
+        label: locale === "ko" ? "데모" : locale === "ja" ? "デモ" : "Demo",
       },
       {
-        href: getLocalePath(locale, "/features/documentation?category=white-papers"),
-        label: getCategoryLabel(docsCategoryConfigs, "white-papers", locale),
-      },
-      {
-        href: getLocalePath(locale, "/features/documentation?category=blogs"),
-        label: getCategoryLabel(docsCategoryConfigs, "blogs", locale),
+        href: getLocalePath(locale, "/features/documentation"),
+        label: locale === "ko" ? "다큐멘테이션" : locale === "ja" ? "ドキュメンテーション" : "Documentation",
       },
     ];
 
@@ -172,10 +134,10 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         heroImageAlt: "QueryPie AI workspace preview",
         clientCaption: "Trusted every day by teams that build world-class software",
         contentListDescription:
-          "Explore real-world guidance, strategies, and insights from a community of experts shaping the future of data access.",
+          "Explore the latest demos and documentation for building governed AI workflows and secure enterprise access.",
         contentListItems,
         contentListLinks,
-        contentListTitle: "Guides and Best Practices",
+        contentListTitle: "QueryPie Resources",
         featureItems: [
           {
             action: {
@@ -240,9 +202,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
         ],
         mcpDescription: [
-          "Turn conversations and customer feedback into",
-          "actionable issues that are routed, labeled, and",
-          "prioritized for the right team.",
+          "Connect AI agents to enterprise tools and data",
+          "through a governed MCP gateway with centralized",
+          "management, visibility, policy controls, and audit logs.",
         ],
         mcpAction: {
           href: getLocalePath(locale, "/solutions/aip/integrations"),
@@ -305,10 +267,10 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         heroImageAlt: "QueryPie AI 워크스페이스 미리보기",
         clientCaption: "세계적인 소프트웨어 팀이 매일 신뢰하는 플랫폼",
         contentListDescription:
-          "데이터 접근의 미래를 만드는 전문가 커뮤니티의 실제 가이드, 전략, 인사이트를 살펴보세요.",
+          "거버넌스가 적용된 AI 워크플로와 안전한 엔터프라이즈 접근 관리를 위한 최신 데모와 문서를 확인하세요.",
         contentListItems,
         contentListLinks,
-        contentListTitle: "가이드와 베스트 프랙티스",
+        contentListTitle: "QueryPie 리소스",
         featureItems: [
           {
             action: {
@@ -373,9 +335,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
         ],
         mcpDescription: [
-          "대화와 고객 피드백을 실행 가능한 이슈로 바꾸고,",
-          "적절한 팀에 라우팅하고 라벨링하며,",
-          "우선순위를 정할 수 있습니다.",
+          "AI 에이전트를 엔터프라이즈 도구와 데이터에 연결하고,",
+          "MCP Gateway에서 중앙 관리, 가시성, 정책 제어,",
+          "감사 로그까지 함께 제공합니다.",
         ],
         mcpAction: {
           href: getLocalePath(locale, "/solutions/aip/integrations"),
@@ -438,10 +400,10 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         heroImageAlt: "QueryPie AI ワークスペースプレビュー",
         clientCaption: "世界最高水準のソフトウェアチームが毎日信頼するプラットフォーム",
         contentListDescription:
-          "データアクセスの未来を形づくる専門家コミュニティによる、実践的なガイド、戦略、インサイトをご覧ください。",
+          "ガバナンスの効いたAIワークフローと安全なエンタープライズアクセス管理に役立つ最新のデモとドキュメントをご覧ください。",
         contentListItems,
         contentListLinks,
-        contentListTitle: "ガイドとベストプラクティス",
+        contentListTitle: "QueryPie リソース",
         featureItems: [
           {
             action: {
@@ -506,9 +468,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
         ],
         mcpDescription: [
-          "会話と顧客フィードバックを実行可能な課題に変え、",
-          "適切なチームへルーティングしラベル付けし、",
-          "優先順位付けできます。",
+          "AIエージェントをエンタープライズツールとデータに接続し、",
+          "MCP Gatewayで一元管理、可視化、ポリシー制御、",
+          "監査ログまで提供します。",
         ],
         mcpAction: {
           href: getLocalePath(locale, "/solutions/aip/integrations"),
