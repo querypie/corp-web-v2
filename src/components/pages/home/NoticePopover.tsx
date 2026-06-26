@@ -5,7 +5,7 @@ import type React from "react";
 import Button from "@/components/ui/Button";
 import type { Locale } from "@/constants/i18n";
 
-export type HomeNoticeItem = {
+export type NoticeItem = {
   category: string;
   href: string;
   imageSrc: string;
@@ -13,8 +13,8 @@ export type HomeNoticeItem = {
   title: string;
 };
 
-type HomeNoticePopoverProps = {
-  items: HomeNoticeItem[];
+type NoticePopoverProps = {
+  items: NoticeItem[];
   locale: Locale;
 };
 
@@ -59,7 +59,7 @@ function setHiddenCookie() {
   document.cookie = `${NOTICE_COOKIE_NAME}=1; max-age=${NOTICE_COOKIE_MAX_AGE_SECONDS}; path=/; samesite=lax`;
 }
 
-export default function HomeNoticePopover({ items, locale }: HomeNoticePopoverProps) {
+export default function NoticePopover({ items, locale }: NoticePopoverProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [dragOffset, setDragOffset] = useState(0);
   const [isVisible, setIsVisible] = useState(false);

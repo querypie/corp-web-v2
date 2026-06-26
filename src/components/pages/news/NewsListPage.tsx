@@ -1,7 +1,7 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import type { Locale } from "@/constants/i18n";
 import ContentPreviewImage from "@/components/content/ContentPreviewImage";
-import Cta from "@/components/sections/common/Cta";
+import Cta from "@/components/sections/Cta";
 
 type NewsListItem = {
   date: string;

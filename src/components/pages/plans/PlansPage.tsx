@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import Tab from "@/components/ui/Tab";
 import TabGroup from "@/components/ui/TabGroup";
-import Cta from "@/components/sections/common/Cta";
+import Cta from "@/components/sections/Cta";
 import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PlanFeature, type PricingProduct } from "@/constants/plans";
 import { getLocalePath, type Locale } from "@/constants/i18n";
 import { getPlansPageCopy } from "@/copy/contentPages";

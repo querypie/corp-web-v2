@@ -1,13 +1,13 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import Cta from "@/components/sections/common/Cta";
-import HomeClient from "@/components/sections/HomeClient";
-import HomeFeaturedContent from "@/components/sections/HomeFeaturedContent";
-import FeatureMediaList from "@/components/sections/common/FeatureMediaList";
-import HomeMcp from "@/components/sections/HomeMcp";
-import HomeNews from "@/components/sections/HomeNews";
-import HomeReview from "@/components/sections/HomeReview";
-import HomePageHero from "./HomePageHero";
-import HomeNoticePopover, { type HomeNoticeItem } from "./HomeNoticePopover";
+import Cta from "@/components/sections/Cta";
+import Clients from "./Clients";
+import FeaturedContent from "./FeaturedContent";
+import FeatureMediaList from "@/components/sections/FeatureMediaList";
+import Mcps from "./Mcps";
+import News from "./News";
+import Review from "./Review";
+import Hero from "./Hero";
+import NoticePopover, { type NoticeItem } from "./NoticePopover";
 import type { Locale } from "@/constants/i18n";
 
 type FeatureItem = {
@@ -48,7 +48,7 @@ type NewsItem = {
   title: string;
 };
 
-type HomeFeaturedContentItem = {
+type FeaturedContentItem = {
   category: string;
   href: string;
   imageSrc: string;
@@ -63,7 +63,7 @@ type ContentListLink = {
 export type HomePageProps = {
   clientCaption: string;
   contentListDescription: string;
-  contentListItems: HomeFeaturedContentItem[];
+  contentListItems: FeaturedContentItem[];
   contentListLinks: ContentListLink[];
   contentListTitle: string;
   ctaActionLabel: string;
@@ -82,7 +82,7 @@ export type HomePageProps = {
   mcpTitle: string;
   newsItems: NewsItem[];
   newsTitle: string;
-  noticeItems: HomeNoticeItem[];
+  noticeItems: NoticeItem[];
   reviewItems: ReviewItem[];
   reviewTitle: string;
 };
@@ -115,10 +115,10 @@ export default function HomePage({
 }: HomePageProps) {
   return (
     <div className={`mt-5 flex flex-col ${pageSectionGapClassName} overflow-x-hidden bg-bg ${pageXPaddingClassName} pb-10 text-fg md:mt-0`}>
-      <HomeNoticePopover items={noticeItems} locale={locale} />
+      <NoticePopover items={noticeItems} locale={locale} />
 
       <div className="relative -mx-5 md:-mx-10">
-        <HomePageHero
+        <Hero
           ctaLabel={heroPrimaryCtaLabel}
           description={heroDescription}
           heroHeading={heroHeading}
@@ -127,19 +127,19 @@ export default function HomePage({
         />
       </div>
 
-      <div><HomeClient caption={clientCaption} /></div>
+      <div><Clients caption={clientCaption} /></div>
       <div><FeatureMediaList items={featureItems} /></div>
       <div>
-        <HomeMcp
+        <Mcps
           action={mcpAction}
           description={mcpDescription}
           items={mcpItems}
           title={mcpTitle}
         />
       </div>
-      <div><HomeReview items={reviewItems} title={reviewTitle} /></div>
+      <div><Review items={reviewItems} title={reviewTitle} /></div>
       <div className="-mx-5 md:-mx-10">
-        <HomeFeaturedContent
+        <FeaturedContent
           description={contentListDescription}
           items={contentListItems}
           links={contentListLinks}
@@ -147,7 +147,7 @@ export default function HomePage({
         />
       </div>
       <div>
-        <HomeNews items={newsItems} title={newsTitle} />
+        <News items={newsItems} title={newsTitle} />
       </div>
       <div>
         <Cta

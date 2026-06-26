@@ -1,6 +1,6 @@
 import Button from "@/components/ui/Button";
 
-type HomePageHeroProps = {
+type HeroProps = {
   ctaLabel: string;
   description: string;
   heroHeading: string;
@@ -8,13 +8,13 @@ type HomePageHeroProps = {
   locale: string;
 };
 
-export default function HomePageHero({
+export default function Hero({
   ctaLabel,
   description,
   heroHeading,
   imageAlt,
   locale,
-}: HomePageHeroProps) {
+}: HeroProps) {
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[rgba(68,69,71,0)] to-[#444547] text-fg">
       <div className="relative flex w-full justify-center px-5 md:px-10">

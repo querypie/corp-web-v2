@@ -1,10 +1,10 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import Cta from "@/components/sections/common/Cta";
-import FeatureMediaList from "@/components/sections/common/FeatureMediaList";
+import Cta from "@/components/sections/Cta";
+import FeatureMediaList from "@/components/sections/FeatureMediaList";
 import type { Locale } from "@/constants/i18n";
-import AcpAiPackSection from "./AcpAiPackSection";
-import AcpDiagram from "./AcpDiagram";
-import AcpIntegrationSection from "./AcpIntegrationSection";
+import AiPackSection from "./AiPackSection";
+import Diagram from "./Diagram";
+import IntegrationSection from "./IntegrationSection";
 
 type Props = {
   locale: Locale;
@@ -86,7 +86,7 @@ export default function AcpKOSolutionContent({ locale }: Props) {
         </div>
 
         <div>
-          <AcpDiagram locale={locale} />
+          <Diagram locale={locale} />
         </div>
       </div>
 
@@ -95,11 +95,11 @@ export default function AcpKOSolutionContent({ locale }: Props) {
       </div>
 
       <div className="-mx-5 md:-mx-10">
-        <AcpAiPackSection locale={locale} />
+        <AiPackSection locale={locale} />
       </div>
 
       <div>
-        <AcpIntegrationSection locale={locale} />
+        <IntegrationSection locale={locale} />
       </div>
 
       <div>

@@ -2,7 +2,7 @@
 
 import type { Locale } from "@/constants/i18n";
 import { useEffect, useRef, useState } from "react";
-import styles from "./AcpDiagram.module.css";
+import styles from "./Diagram.module.css";
 
 const assetBase = "/solutions/acp/Diagram";
 const diagramWidth = 1080;
@@ -316,7 +316,7 @@ function ConnectorLock({ className, side }: { className: string; side: "left" | 
   );
 }
 
-export default function AcpDiagram({ locale }: { locale: Locale }) {
+export default function Diagram({ locale }: { locale: Locale }) {
   const frameRef = useRef<HTMLDivElement>(null);
   const animationSvgRef = useRef<SVGSVGElement | null>(null);
   const [scale, setScale] = useState(1);

@@ -1,7 +1,7 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import AipHero from "@/components/sections/AipHero";
-import Cta from "@/components/sections/common/Cta";
-import FeatureMediaList from "@/components/sections/common/FeatureMediaList";
+import Hero from "@/components/pages/solutions/aip/Hero";
+import Cta from "@/components/sections/Cta";
+import FeatureMediaList from "@/components/sections/FeatureMediaList";
 import type { Locale } from "@/constants/i18n";
 import UsageBasedLlmComparisonTable, { type ComparisonCopy } from "./UsageBasedLlmComparisonTable";
 
@@ -129,7 +129,7 @@ export default function UsageBasedLlmKOSolutionContent({ locale }: Props) {
             </p>
           </header>
         </section>
-        <AipHero
+        <Hero
           imageAlt="Usage-Based LLM 제품 미리보기"
           imageSrc="/solutions/aip/usage-based-llm/usage-based-llm.svg"
         />

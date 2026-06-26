@@ -2,7 +2,7 @@ import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layo
 import type { Locale } from "@/constants/i18n";
 import type { PublicMenuItem } from "@/features/content/config";
 import ContentPreviewImage from "@/components/content/ContentPreviewImage";
-import Cta from "@/components/sections/common/Cta";
+import Cta from "@/components/sections/Cta";
 
 type DemoListItem = {
   category: string;

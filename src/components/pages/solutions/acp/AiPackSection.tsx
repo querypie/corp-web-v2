@@ -1,6 +1,6 @@
 import type { Locale } from "@/constants/i18n";
 
-type AcpAiPackSectionProps = {
+type AiPackSectionProps = {
   locale: Locale;
 };
 
@@ -90,7 +90,7 @@ const copy = {
   title: string;
 }>;
 
-export default function AcpAiPackSection({ locale }: AcpAiPackSectionProps) {
+export default function AiPackSection({ locale }: AiPackSectionProps) {
   const content = copy[locale];
 
   return (
