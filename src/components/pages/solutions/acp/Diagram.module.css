@@ -5,12 +5,7 @@
 }
 
 .shieldPanel {
-  background:
-    radial-gradient(120% 70% at 82% 12%, rgb(109 49 206 / 0.62), transparent 52%),
-    radial-gradient(130% 90% at 76% 58%, rgb(80 212 133 / 0.38), transparent 58%),
-    radial-gradient(110% 78% at 28% 36%, rgb(12 119 229 / 0.46), transparent 56%),
-    linear-gradient(180deg, var(--color-bg-content) 0%, var(--color-bg) 100%);
-  isolation: isolate;
+  background: url("/assets/products/acp/diagram/shield-mask.png") center / 100% 100% no-repeat;
 }
 
 .flowPulse {
