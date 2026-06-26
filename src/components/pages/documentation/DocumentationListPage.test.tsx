@@ -6,7 +6,7 @@ vi.mock("@/components/content/ContentPreviewImage", () => ({
   default: ({ alt, src }: { alt: string; src: string }) => <img alt={alt} src={src} />,
 }));
 
-vi.mock("@/components/marketing/Cta", () => ({
+vi.mock("@/components/sections/common/Cta", () => ({
   default: () => <div data-testid="cta" />,
 }));
 

@@ -1,11 +1,11 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import Cta from "@/components/marketing/Cta";
-import ClientSection from "@/components/marketing/ClientSection";
-import ContentListSection from "@/components/marketing/ContentListSection";
-import FeatureSection from "@/components/marketing/FeatureSection";
-import HomeNewsListClientSection from "@/components/marketing/HomeNewsListClientSection";
-import McpSection from "@/components/marketing/McpSection";
-import ReviewSection from "@/components/marketing/ReviewSection";
+import Cta from "@/components/sections/common/Cta";
+import HomeClient from "@/components/sections/HomeClient";
+import HomeFeaturedContent from "@/components/sections/HomeFeaturedContent";
+import FeatureMediaList from "@/components/sections/common/FeatureMediaList";
+import HomeMcp from "@/components/sections/HomeMcp";
+import HomeNews from "@/components/sections/HomeNews";
+import HomeReview from "@/components/sections/HomeReview";
 import HomePageHero from "./HomePageHero";
 import HomeNoticePopover, { type HomeNoticeItem } from "./HomeNoticePopover";
 import type { Locale } from "@/constants/i18n";
@@ -48,7 +48,7 @@ type NewsItem = {
   title: string;
 };
 
-type ContentListItem = {
+type HomeFeaturedContentItem = {
   category: string;
   href: string;
   imageSrc: string;
@@ -63,7 +63,7 @@ type ContentListLink = {
 export type HomePageProps = {
   clientCaption: string;
   contentListDescription: string;
-  contentListItems: ContentListItem[];
+  contentListItems: HomeFeaturedContentItem[];
   contentListLinks: ContentListLink[];
   contentListTitle: string;
   ctaActionLabel: string;
@@ -127,19 +127,19 @@ export default function HomePage({
         />
       </div>
 
-      <div><ClientSection caption={clientCaption} /></div>
-      <div><FeatureSection items={featureItems} /></div>
+      <div><HomeClient caption={clientCaption} /></div>
+      <div><FeatureMediaList items={featureItems} /></div>
       <div>
-        <McpSection
+        <HomeMcp
           action={mcpAction}
           description={mcpDescription}
           items={mcpItems}
           title={mcpTitle}
         />
       </div>
-      <div><ReviewSection items={reviewItems} title={reviewTitle} /></div>
+      <div><HomeReview items={reviewItems} title={reviewTitle} /></div>
       <div className="-mx-5 md:-mx-10">
-        <ContentListSection
+        <HomeFeaturedContent
           description={contentListDescription}
           items={contentListItems}
           links={contentListLinks}
@@ -147,7 +147,7 @@ export default function HomePage({
         />
       </div>
       <div>
-        <HomeNewsListClientSection fallbackItems={newsItems} locale={locale} title={newsTitle} />
+        <HomeNews items={newsItems} title={newsTitle} />
       </div>
       <div>
         <Cta

@@ -1,16 +1,16 @@
 import TextButton from "@/components/ui/TextButton";
 
-type ContentListItem = {
+type HomeFeaturedContentItem = {
   category: string;
   href: string;
   imageSrc: string;
   title: string;
 };
 
-type ContentListSectionProps = {
+type HomeFeaturedContentProps = {
   className?: string;
   description: string;
-  items: ContentListItem[];
+  items: HomeFeaturedContentItem[];
   links: Array<{ href: string; label: string }>;
   title: string;
 };
@@ -19,7 +19,7 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function ContentListCard({ category, href, imageSrc, title }: ContentListItem) {
+function HomeFeaturedContentCard({ category, href, imageSrc, title }: HomeFeaturedContentItem) {
   return (
     /* 홈 전용 콘텐츠 리스트 카드 1개 */
     <a className="group flex w-full cursor-pointer flex-col gap-5 md:flex-row md:items-start" href={href}>
@@ -34,13 +34,13 @@ function ContentListCard({ category, href, imageSrc, title }: ContentListItem) {
   );
 }
 
-export default function ContentListSection({
+export default function HomeFeaturedContent({
   className,
   description,
   items,
   links,
   title,
-}: ContentListSectionProps) {
+}: HomeFeaturedContentProps) {
   return (
     /* 홈 하단용 콘텐츠 리스트 섹션 */
     <section className={cx("flex w-full justify-center overflow-hidden bg-bg-deep py-14 md:py-[100px]", className)}>
@@ -64,7 +64,7 @@ export default function ContentListSection({
         {/* 우측 카드 리스트 */}
         <div className="flex min-w-0 flex-1 flex-col justify-center gap-8 md:min-w-[460px] md:gap-[30px]">
           {items.map((item) => (
-            <ContentListCard key={`${item.category}-${item.title}`} {...item} />
+            <HomeFeaturedContentCard key={`${item.category}-${item.title}`} {...item} />
           ))}
         </div>
         </div>

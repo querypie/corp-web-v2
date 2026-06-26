@@ -63,7 +63,17 @@ src/
 │   ├── [locale]/       # 공개 페이지: en / ko / ja
 │   ├── admin/          # Admin CMS
 │   └── api/            # 서버 API 라우트
-├── components/         # common, layout, pages, sections
+├── components/
+│   ├── ui/             # Button, Input, Select 등 UI primitive
+│   ├── content/        # 콘텐츠 미리보기, Tiptap, rich text 렌더링
+│   ├── sections/       # 페이지 섹션
+│   │   ├── common/     # Cta, DetailContentList, FeatureMediaList 등 공유 섹션
+│   │   └── *.tsx       # Home*, Aip* 등 페이지/도메인 접두사 섹션
+│   ├── site/           # 쿠키 배너, UTM capture 등 전역 사이트 동작
+│   ├── forms/          # 공유 form 조각
+│   ├── layout/         # GNB, Footer, Admin shell
+│   ├── admin/          # Admin 전용 화면 컴포넌트
+│   └── pages/          # 공개 페이지 조립 컴포넌트
 ├── features/           # content, seo, contact 등 도메인 로직
 ├── content/            # demo, documentation, news, legal 콘텐츠
 ├── constants/          # i18n, navigation, plans, legal 등
@@ -104,10 +114,11 @@ src/
 
 ## SEO
 
-현재 SEO 상태는 브라우저 `localStorage` 기반입니다.
+SEO 메타데이터와 OG 이미지는 `src/features/seo`에서 관리합니다.
 
-- 클라이언트 저장소: `src/features/seo/clientStore.ts`
-- 런타임 적용: `src/components/common/SeoRuntime.tsx`
+- 메타데이터 생성: `src/features/seo/metadata.ts`
+- OG 이미지: `src/features/seo/ogImage.tsx`
+- OG 제목 포맷: `src/features/seo/ogTitle.ts`
 
 ---
 

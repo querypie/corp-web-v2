@@ -1,7 +1,7 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import AipSolutionHeroMedia from "@/components/marketing/AipSolutionHeroMedia";
-import Cta from "@/components/marketing/Cta";
-import FeatureSection from "@/components/marketing/FeatureSection";
+import AipHero from "@/components/sections/AipHero";
+import Cta from "@/components/sections/common/Cta";
+import FeatureMediaList from "@/components/sections/common/FeatureMediaList";
 import type { Locale } from "@/constants/i18n";
 
 type Props = {
@@ -89,13 +89,13 @@ export default function McpGatewayKOSolutionContent({ locale }: Props) {
             </p>
           </header>
         </section>
-        <AipSolutionHeroMedia
+        <AipHero
           imageAlt="MCP Gateway 제품 미리보기"
           imageSrc="/solutions/aip/mcp-gateway/mcp-gateway.png"
         />
       </div>
 
-      <FeatureSection items={featureItems} />
+      <FeatureMediaList items={featureItems} />
 
       <div>
         <Cta locale={locale} />

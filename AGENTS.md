@@ -32,7 +32,9 @@ src/
 ├── components/
 │   ├── ui/             # Button, Input, Select 등 순수 UI primitive
 │   ├── content/        # 콘텐츠 미리보기, Tiptap, rich text 렌더링
-│   ├── marketing/      # CTA, feature, review 등 마케팅 섹션
+│   ├── sections/       # 페이지 섹션, common에는 여러 페이지 공유 섹션
+│   │   ├── common/     # Cta, DetailContentList, FeatureMediaList 등 공유 섹션
+│   │   └── *.tsx       # Home*, Aip* 등 페이지/도메인 접두사 섹션
 │   ├── site/           # 쿠키 배너, UTM capture 등 전역 사이트 동작
 │   ├── forms/          # 여러 페이지에서 공유하는 form 조각
 │   ├── layout/         # GNB, Footer, Admin shell
@@ -48,7 +50,7 @@ src/
 
 1. `src/components/ui`
 2. `src/components/layout`
-3. `src/components/content`, `src/components/marketing`, `src/components/forms`, `src/components/site`
+3. `src/components/content`, `src/components/sections`, `src/components/forms`, `src/components/site`
 4. `src/components/pages`, `src/components/admin`
 
 ---
@@ -76,7 +78,8 @@ src/
 - 정적 문구와 metadata copy는 `src/copy`에 둡니다. API, 저장, 브라우저 상태, 라우팅 계산 같은 동작 로직만 `src/features`에 둡니다.
 - `src/app` 라우트 파일은 locale 확인, metadata 생성, 데이터 조회, 페이지 컴포넌트 연결만 담당하게 유지합니다.
 - `src/app`에서 `components`, `constants`, `features`, `copy`를 import할 때는 깊은 상대경로 대신 `@/...` alias를 우선 사용합니다.
-- `src/components/ui`에는 도메인 의존성이 없는 UI primitive만 둡니다. 콘텐츠/Tiptap 관련은 `components/content`, 마케팅 섹션은 `components/marketing`, 전역 사이트 동작은 `components/site`에 둡니다.
+- `src/components/ui`에는 도메인 의존성이 없는 UI primitive만 둡니다. 콘텐츠/Tiptap 관련은 `components/content`, 페이지 섹션은 `components/sections`, 전역 사이트 동작은 `components/site`에 둡니다.
+- 여러 페이지에서 공유하는 섹션은 `src/components/sections/common`에 둡니다. 특정 페이지나 도메인에 가까운 섹션은 `Home*`, `Aip*`처럼 접두사를 붙여 `src/components/sections`에 둡니다.
 - 솔루션 페이지의 locale별 JSX 본문, 섹션 컴포넌트, 통합 필터/데이터는 `src/components/pages/solutions`에 둡니다. `src/app/[locale]/solutions`에는 route `page.tsx`와 route 테스트만 둡니다.
 - 카테고리명, 공개 경로, locale 경로는 하드코딩하지 말고 기존 헬퍼와 설정을 사용합니다.
 - UI 변경은 기존 컴포넌트와 Tailwind 유틸리티를 우선 사용합니다.

@@ -1,12 +1,12 @@
-type AipSolutionHeroMediaProps = {
+type AipHeroProps = {
   imageAlt: string;
   imageSrc: string;
 };
 
-export default function AipSolutionHeroMedia({
+export default function AipHero({
   imageAlt,
   imageSrc,
-}: AipSolutionHeroMediaProps) {
+}: AipHeroProps) {
   return (
     <section className="flex w-full justify-center">
       <div className="flex w-full max-w-[1200px] justify-center overflow-hidden rounded-box bg-bg-deep py-10">

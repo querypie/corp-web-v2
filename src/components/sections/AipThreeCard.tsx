@@ -2,7 +2,7 @@ import type { Locale } from "@/constants/i18n";
 import { getSolutionHref } from "@/features/solutions/routes";
 import TextButton from "@/components/ui/TextButton";
 
-type AipThreeCardSectionProps = {
+type AipThreeCardProps = {
   locale: Locale;
 };
 
@@ -112,7 +112,7 @@ const copy = {
   title: string;
 }>;
 
-export default function AipThreeCardSection({ locale }: AipThreeCardSectionProps) {
+export default function AipThreeCard({ locale }: AipThreeCardProps) {
   const content = copy[locale];
 
   return (

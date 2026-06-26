@@ -29,10 +29,16 @@ src/
 │   ├── admin/             # Admin CMS 대시보드
 │   └── api/               # 서버 API 라우트
 ├── components/
-│   ├── common/            # 재사용 UI 컴포넌트
+│   ├── ui/                # Button, Input, Select 등 UI primitive
+│   ├── content/           # 콘텐츠 미리보기, Tiptap, rich text 렌더링
 │   ├── layout/            # GNB, Footer, Admin 레이아웃
 │   ├── pages/             # 페이지별 컴포넌트
-│   └── sections/          # 페이지 섹션 컴포넌트
+│   ├── sections/          # 페이지 섹션 컴포넌트
+│   │   ├── common/        # Cta, DetailContentList, FeatureMediaList 등 공유 섹션
+│   │   └── *.tsx          # Home*, Aip* 등 페이지/도메인 접두사 섹션
+│   ├── site/              # 쿠키 배너, UTM capture 등 전역 사이트 동작
+│   ├── forms/             # 공유 form 조각
+│   └── admin/             # Admin 전용 화면 컴포넌트
 ├── features/
 │   ├── content/           # 콘텐츠 시스템 (상태 관리, 쿼리, 게이팅)
 │   ├── seo/               # SEO 메타데이터 관리

@@ -1,7 +1,7 @@
 import { pageXPaddingClassName } from "@/constants/layout";
 import type { ReactNode } from "react";
 import ContentArticlePreview from "@/components/content/ContentArticlePreview";
-import DocumentationContentListSection from "@/components/marketing/DocumentationContentListSection";
+import DetailContentList from "@/components/sections/common/DetailContentList";
 import { CONTENT_DOWNLOAD_BUTTON_LABEL } from "@/features/content/data";
 
 export type DocsDetailPageProps = {
@@ -116,7 +116,7 @@ export default function DocsDetailPage({
               ))}
             </div>
 
-            <DocumentationContentListSection className="pt-2" items={contentListItems} />
+            <DetailContentList className="pt-2" items={contentListItems} />
           </div>
         </div>
       </article>
