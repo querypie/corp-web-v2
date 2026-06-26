@@ -117,7 +117,7 @@ export default function AipKOSolutionContent({ locale }: Props) {
           <section className="flex w-full justify-center">
             <YoutubePreviewPlayer
               thumbnailAlt="QueryPie AI Platform video thumbnail"
-              thumbnailSrc="/assets/products/aip/aip-cover.jpg"
+              thumbnailSrc="/assets/products/aip/aip-cover.png"
               title="QueryPie AI Platform video"
               videoSrc="/assets/products/aip/QueryPie%20AIP%20-%20Secure%20Enterprise%20Agentic%20AI%20Platform.mp4"
             />

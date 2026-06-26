@@ -9,8 +9,7 @@
     "typecheck": "tsc --noEmit",
     "audit:public-assets": "node scripts/find-unused-public-assets.mjs",
     "test": "vitest",
-    "test:run": "vitest run",
-    "e2e:local:contact-us:stage": "npx playwright test tests-local/src/app/company/contact-us/page.e2e.mjs --config=playwright.local.config.mjs"
+    "test:run": "vitest run"
   },
   "dependencies": {
     "@slack/web-api": "^7.13.0",

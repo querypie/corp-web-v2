@@ -1,4 +1,5 @@
 import type { Locale } from "@/constants/i18n";
+import AiPackVideo from "./AiPackVideo";
 
 type AiPackSectionProps = {
   locale: Locale;
@@ -107,8 +108,8 @@ export default function AiPackSection({ locale }: AiPackSectionProps) {
           </p>
         </header>
 
-        <div className="flex w-full flex-col gap-8 lg:flex-row lg:items-start lg:justify-between lg:gap-[60px]">
-          <div className="flex w-full flex-col gap-2.5 lg:w-[420px] lg:shrink-0">
+        <div className="flex w-full flex-col-reverse gap-8 lg:flex-row-reverse lg:items-start lg:gap-[60px]">
+          <div className="flex w-full min-w-0 flex-col gap-2.5 lg:flex-1">
             {content.cards.map((card) => (
               <article
                 className="flex min-h-[138px] w-full flex-col items-start justify-start rounded-box bg-bg p-[30px]"
@@ -126,14 +127,8 @@ export default function AiPackSection({ locale }: AiPackSectionProps) {
             ))}
           </div>
 
-          <div className="relative aspect-[341/200] w-full overflow-hidden lg:h-[400px] lg:w-[682px] lg:shrink-0">
-            <img
-              alt={content.imageAlt}
-              className="block h-full w-full object-cover"
-              height="400"
-              src="/assets/common/fallback-contents.jpg"
-              width="682"
-            />
+          <div className="relative w-full overflow-hidden rounded-box md:h-[600px] md:w-fit lg:shrink-0">
+            <AiPackVideo title={content.imageAlt} />
           </div>
         </div>
       </div>

@@ -32,14 +32,6 @@ npm run start
 npm run audit:public-assets
 ```
 
-로컬 전용 Playwright E2E:
-
-```bash
-npm run e2e:local:contact-us:stage
-```
-
-설정과 실행 조건은 `docs/reference/local-e2e.md`를 확인합니다.
-
 ---
 
 ## 기술 스택
@@ -141,7 +133,6 @@ SEO 메타데이터와 OG 이미지는 `src/features/seo`에서 관리합니다.
 | [AGENTS.md](AGENTS.md) | 에이전트 작업 규칙 |
 | [구현 현황](docs/reference/corp-web-v2-implementation-status.md) | 공개 페이지, Admin CMS, API 구현 현황 |
 | [테스트 커버리지](docs/reference/test-coverage.md) | 테스트 파일 목록과 mock 패턴 |
-| [Local E2E](docs/reference/local-e2e.md) | 로컬 Playwright E2E 실행 방법 |
 | [Vercel 배포](docs/reference/vercel-deployment.md) | GitHub Actions / Vercel 배포 구조 |
 | [GitHub 설정](docs/reference/github-settings.md) | CI 워크플로우와 브랜치 보호 |
 | [Contact Us API](docs/reference/contact-us-api.md) | 문의 API와 리드 캡처 흐름 |
