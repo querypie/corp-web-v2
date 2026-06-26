@@ -11,6 +11,7 @@ type FeatureItem = {
     label: string;
   };
   body: string[];
+  desktopTitle?: string[];
   iconSrc?: string;
   imageAlt: string;
   imageClassName?: string;
@@ -18,6 +19,7 @@ type FeatureItem = {
   mediaClassName?: string;
   reverse?: boolean;
   title: string[];
+  videoHeightClassName?: string;
   videoSrc?: string;
 };
 
@@ -79,9 +81,10 @@ function FeatureCopy({
   action,
   body,
   className,
+  desktopTitle,
   iconSrc,
   title,
-}: Pick<FeatureItem, "action" | "body" | "iconSrc" | "title"> & { className?: string }) {
+}: Pick<FeatureItem, "action" | "body" | "desktopTitle" | "iconSrc" | "title"> & { className?: string }) {
   return (
     /* 기능 설명 텍스트 블록 */
     <div className={cx("flex w-full min-w-0 flex-1 flex-col gap-3 not-italic md:gap-5 lg:min-w-[200px]", className)}>
@@ -94,13 +97,22 @@ function FeatureCopy({
             src={iconSrc}
           />
         ) : null}
-        <div className="min-w-0 flex-1 break-words text-pretty type-h3 font-normal leading-6 tracking-[0] text-fg md:w-full md:flex-none md:type-h2 md:leading-8">
+        <div className={cx("min-w-0 flex-1 break-words text-pretty type-h3 font-normal leading-6 tracking-[0] text-fg md:w-full md:flex-none md:type-h2 md:leading-8", desktopTitle && "md:hidden")}>
           {title.map((line) => (
             <p key={line} className="m-0">
               {line}
             </p>
           ))}
         </div>
+        {desktopTitle ? (
+          <div className="hidden min-w-0 flex-1 break-words text-pretty font-normal tracking-[0] text-fg md:block md:w-full md:flex-none md:type-h2 md:leading-8">
+            {desktopTitle.map((line) => (
+              <p key={line} className="m-0">
+                {line}
+              </p>
+            ))}
+          </div>
+        ) : null}
       </div>
       <div className="order-2 w-full break-words text-pretty type-body-lg leading-6 text-mute md:order-none md:leading-[26px]">
         {body.map((line) => (
@@ -129,8 +141,9 @@ function FeatureMedia({
   imageClassName,
   imageSrc,
   setVideoRef,
+  videoHeightClassName,
   videoSrc,
-}: Pick<FeatureItem, "imageAlt" | "imageClassName" | "imageSrc" | "videoSrc"> & {
+}: Pick<FeatureItem, "imageAlt" | "imageClassName" | "imageSrc" | "videoHeightClassName" | "videoSrc"> & {
   className?: string;
   setVideoRef?: (video: HTMLVideoElement | null) => void;
 }) {
@@ -141,7 +154,7 @@ function FeatureMedia({
     <div
       className={cx(
         "overflow-hidden rounded-box",
-        videoSrc ? "w-full md:h-[480px] md:w-fit" : "aspect-[2/1] w-full shrink-0 lg:w-[790px] lg:max-w-[65%]",
+        videoSrc ? cx("w-full md:w-fit", videoHeightClassName ?? "md:h-[480px]") : "aspect-[2/1] w-full shrink-0 lg:w-[790px] lg:max-w-[65%]",
         className,
       )}
     >
@@ -269,6 +282,7 @@ export default function FeatureMediaList({
                 action={item.action}
                 body={item.body}
                 className="order-2 lg:order-none"
+                desktopTitle={item.desktopTitle}
                 iconSrc={item.iconSrc}
                 title={item.title}
               />
@@ -288,6 +302,7 @@ export default function FeatureMediaList({
                       }
                     : undefined
                 }
+                videoHeightClassName={item.videoHeightClassName}
                 videoSrc={item.videoSrc}
               />
             </div>
