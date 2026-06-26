@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Cta from "@/components/sections/common/Cta";
+import Cta from "@/components/sections/Cta";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { pageXPaddingClassName } from "@/constants/layout";
 import { getSolutionHref } from "@/features/solutions/routes";

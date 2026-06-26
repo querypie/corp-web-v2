@@ -1,8 +1,8 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import Cta from "@/components/sections/common/Cta";
+import Cta from "@/components/sections/Cta";
 import YoutubePreviewPlayer from "@/components/content/YoutubePreviewPlayer";
-import AipThreeCard from "@/components/sections/AipThreeCard";
-import FeatureMediaList from "@/components/sections/common/FeatureMediaList";
+import ThreeCard from "@/components/pages/solutions/aip/ThreeCard";
+import FeatureMediaList from "@/components/sections/FeatureMediaList";
 import { getLocalePath, type Locale } from "@/constants/i18n";
 
 type Props = {
@@ -126,7 +126,7 @@ export default function AipKOSolutionContent({ locale }: Props) {
       </div>
 
       <div className="-mx-5 md:-mx-10">
-        <AipThreeCard locale={locale} />
+        <ThreeCard locale={locale} />
       </div>
 
       <div id="features">

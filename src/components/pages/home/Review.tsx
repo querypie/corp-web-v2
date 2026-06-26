@@ -5,7 +5,7 @@ type ReviewItem = {
   role: string;
 };
 
-type HomeReviewProps = {
+type ReviewProps = {
   className?: string;
   items: ReviewItem[];
   title: string;
@@ -33,11 +33,11 @@ function ReviewCard({ body, company, imageSrc, role }: ReviewItem) {
   );
 }
 
-export default function HomeReview({
+export default function Review({
   className,
   items,
   title,
-}: HomeReviewProps) {
+}: ReviewProps) {
   return (
     /* 사용자 후기 카드 섹션 */
     <section className={cx("flex w-full justify-center", className)}>

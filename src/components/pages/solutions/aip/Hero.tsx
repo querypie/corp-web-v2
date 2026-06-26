@@ -1,12 +1,12 @@
-type AipHeroProps = {
+type HeroProps = {
   imageAlt: string;
   imageSrc: string;
 };
 
-export default function AipHero({
+export default function Hero({
   imageAlt,
   imageSrc,
-}: AipHeroProps) {
+}: HeroProps) {
   return (
     <section className="flex w-full justify-center">
       <div className="flex w-full max-w-[1200px] justify-center overflow-hidden rounded-box bg-bg-deep py-10">

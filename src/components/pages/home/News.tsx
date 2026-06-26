@@ -5,7 +5,7 @@ type NewsItem = {
   title: string;
 };
 
-type HomeNewsProps = {
+type NewsProps = {
   className?: string;
   items: NewsItem[];
   title: string;
@@ -33,11 +33,11 @@ function NewsCard({ href, imageSrc, isExternal = true, title }: NewsItem) {
   );
 }
 
-export default function HomeNews({
+export default function News({
   className,
   items,
   title,
-}: HomeNewsProps) {
+}: NewsProps) {
   return (
     /* 최신 뉴스 카드 리스트 섹션 */
     <section className={cx("flex w-full justify-center", className)}>

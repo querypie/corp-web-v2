@@ -1,7 +1,7 @@
 import { pageXPaddingClassName } from "@/constants/layout";
 import type { ReactNode } from "react";
 import ContentArticlePreview from "@/components/content/ContentArticlePreview";
-import DetailContentList from "@/components/sections/common/DetailContentList";
+import DetailContentList from "@/components/sections/DetailContentList";
 import { CONTENT_DOWNLOAD_BUTTON_LABEL } from "@/features/content/data";
 
 export type DocsDetailPageProps = {

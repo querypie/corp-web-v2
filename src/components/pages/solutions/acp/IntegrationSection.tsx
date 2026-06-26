@@ -2,7 +2,7 @@ import TextButton from "@/components/ui/TextButton";
 import type { Locale } from "@/constants/i18n";
 import { getSolutionHref } from "@/features/solutions/routes";
 
-type AcpIntegrationSectionProps = {
+type IntegrationSectionProps = {
   locale: Locale;
 };
 
@@ -35,7 +35,7 @@ const copy = {
   title: string[];
 }>;
 
-export default function AcpIntegrationSection({ locale }: AcpIntegrationSectionProps) {
+export default function IntegrationSection({ locale }: IntegrationSectionProps) {
   const content = copy[locale];
 
   return (

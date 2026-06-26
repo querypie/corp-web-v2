@@ -1,7 +1,7 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import AipHero from "@/components/sections/AipHero";
-import Cta from "@/components/sections/common/Cta";
-import FeatureMediaList from "@/components/sections/common/FeatureMediaList";
+import Hero from "@/components/pages/solutions/aip/Hero";
+import Cta from "@/components/sections/Cta";
+import FeatureMediaList from "@/components/sections/FeatureMediaList";
 import type { Locale } from "@/constants/i18n";
 
 type Props = {
@@ -90,7 +90,7 @@ export default function McpGatewayENSolutionContent({ locale }: Props) {
             </p>
           </header>
         </section>
-        <AipHero
+        <Hero
           imageAlt="MCP Gateway product preview"
           imageSrc="/solutions/aip/mcp-gateway/mcp-gateway.png"
         />
