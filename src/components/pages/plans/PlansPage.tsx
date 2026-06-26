@@ -67,7 +67,7 @@ function PlanSummaryCard({
             return (
               <li
                 key={`${typeof feature === "string" ? feature : feature.value}-${index}`}
-                className="flex items-start gap-1.5 whitespace-pre-line type-body-md text-fg"
+                className="flex items-start gap-1.5 type-body-md text-fg"
               >
                 <span className={cx(
                   "inline-flex w-4 shrink-0 justify-center",

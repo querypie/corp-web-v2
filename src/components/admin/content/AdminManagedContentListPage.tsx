@@ -311,7 +311,7 @@ function ContentRow({
       <ContentPreviewImage
         alt={localizedTitle}
         className="block h-full w-full object-cover"
-        containerClassName="content-thumbnail-frame w-full overflow-hidden rounded-thumb bg-bg-deep md:w-[132px]"
+        containerClassName="content-thumbnail-frame w-full overflow-hidden rounded-button bg-bg-deep md:w-[132px]"
         src={item.imageSrc}
         useThumbnailFallback
       />

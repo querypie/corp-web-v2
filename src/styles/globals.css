@@ -25,8 +25,8 @@
   --color-fg: #EEEEEE;
   --color-mute: #909090;
   --color-placeholder: #505050;
-  --color-bg-content: #202020;
-  --color-bg-deep: #1E1E1E;
+  --color-bg-content: #1D1D1D;
+  --color-bg-deep: #1A1A1A;
   --color-bg: #0F0F0F;
   --color-bg-modal: #0F0F0F;
   --color-overlay-rgb: 8 9 10;
@@ -259,7 +259,7 @@ textarea:-webkit-autofill:focus {
   }
 
   .card-hover:focus-visible {
-    background-color: #2C2C2C;
+    background-color: #2A2A2A;
   }
 
   /* 퍼블릭 컨텐츠 카드 제목 공통 스타일:
@@ -292,7 +292,7 @@ textarea:-webkit-autofill:focus {
   /* 마우스가 있는 환경에서만 hover 반응을 강하게 준다. */
   @media (hover: hover) and (pointer: fine) {
     .card-hover:hover {
-      background-color: #2C2C2C;
+      background-color: #2A2A2A;
     }
 
     .group:hover .card-media-motion {
@@ -404,8 +404,8 @@ textarea:-webkit-autofill:focus {
   }
 
   .type-content-body {
-    font-size: 14px;
-    line-height: 24px;
+    font-size: 15px;
+    line-height: 26px;
     letter-spacing: +0.2px;
     font-weight: 300;
   }
@@ -418,7 +418,7 @@ textarea:-webkit-autofill:focus {
   }
 
   .type-content-caption {
-    font-size: 12px;
+    font-size: 13px;
     line-height: 20px;
     letter-spacing: +0.2px;
     font-weight: 300;
@@ -608,7 +608,7 @@ textarea:-webkit-autofill:focus {
     }
 
     .type-content-caption {
-      font-size: 13px;
+      font-size: 14px;
       line-height: 22px;
     }
 
