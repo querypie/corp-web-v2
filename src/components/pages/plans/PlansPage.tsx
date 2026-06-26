@@ -138,15 +138,15 @@ function ComparisonTable({
           <div className="grid w-full grid-cols-4 items-center py-4">
             <div />
             {plans.map((plan) => (
-              <div
+              <h2
                 key={plan}
                 className={cx(
-                  "px-5 text-center type-body-md",
+                  "m-0 px-5 text-center type-h2 font-medium",
                   plan === "Enterprise" ? "text-brand" : "text-fg",
                 )}
               >
                 {plan}
-              </div>
+              </h2>
             ))}
           </div>
 
