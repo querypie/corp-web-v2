@@ -47,9 +47,9 @@ export default function Mcps({
         </div>
 
         {/* MCP 아이콘 카드 그리드 */}
-        <div className="flex flex-wrap gap-[10px]">
+        <div className="grid grid-cols-5 gap-2 md:flex md:flex-wrap md:gap-[10px]">
           {items.map((item) => (
-            <div key={item.label} className="flex items-center rounded-box bg-bg-content p-[30px]">
+            <div key={item.label} className="flex aspect-square min-w-0 items-center justify-center rounded-box bg-bg-content p-1 md:aspect-auto md:p-[30px]">
               {item.icon}
             </div>
           ))}

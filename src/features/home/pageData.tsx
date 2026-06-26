@@ -54,7 +54,7 @@ const mcpItems = mcpIconSources.map(({ className, label, src }) => ({
     <img
       alt=""
       aria-hidden="true"
-      className={["h-12 w-12 object-contain", className].filter(Boolean).join(" ")}
+      className={["h-8 w-8 object-contain md:h-12 md:w-12", className].filter(Boolean).join(" ")}
       src={src}
     />
   ),
