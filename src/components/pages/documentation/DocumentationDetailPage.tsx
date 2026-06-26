@@ -73,11 +73,11 @@ export default function DocsDetailPage({
             <div className="flex items-start gap-[6px] type-body-md leading-5 md:sticky md:top-[80px] md:justify-self-start md:self-start">
               {parentLabel ? (
                 <>
-                  <p className="m-0 text-fg">{parentLabel}</p>
+                  <p className="m-0 text-mute">{parentLabel}</p>
                   <p className="m-0 text-mute">/</p>
                 </>
               ) : null}
-              <a className="text-mute transition-colors duration-200 hover:text-fg" href={docsHref}>
+              <a className="text-fg transition-colors duration-200 hover:text-mute" href={docsHref}>
                 {category}
               </a>
             </div>

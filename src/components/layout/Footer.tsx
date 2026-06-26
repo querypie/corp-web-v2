@@ -19,19 +19,19 @@ function cx(...values: Array<string | false | null | undefined>) {
 
 const socialLinks = [
   {
-    className: "h-6 w-6",
+    className: "h-7 w-7",
     href: "/",
     label: "LinkedIn",
     src: "/assets/brand/icons/linkedin.svg",
   },
   {
-    className: "h-6 w-6",
+    className: "h-7 w-7",
     href: "/",
     label: "YouTube",
     src: "/assets/brand/icons/youtube.svg",
   },
   {
-    className: "h-6 w-6",
+    className: "h-7 w-7",
     href: "/",
     label: "X",
     src: "/assets/brand/icons/x.svg",
@@ -166,7 +166,7 @@ export default function Footer({
                   <a
                     key={link.label}
                     aria-label={link.label}
-                    className="inline-flex h-6 w-6 items-center justify-center opacity-100 transition-opacity hover:opacity-50"
+                    className="inline-flex h-7 w-7 items-center justify-center opacity-100 transition-opacity hover:opacity-50"
                     href={link.href}
                   >
                     <img
@@ -191,8 +191,8 @@ export default function Footer({
 
           {/* 회사 주소 및 카피라이트 */}
           <div className="flex flex-col gap-[10px] leading-5">
-            <p className="m-0 type-body-md text-fg">{copyright}</p>
-            <div className="type-body-sm text-fg">
+            <p className="m-0 type-body-md text-fg opacity-50">{copyright}</p>
+            <div className="type-body-sm text-fg opacity-50">
               {officeLines.map((line) => (
                 <p key={line} className="m-0">
                   {line}

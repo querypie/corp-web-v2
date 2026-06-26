@@ -318,7 +318,7 @@ export default function Gnb({
                   <img
                     alt=""
                     aria-hidden="true"
-                    className="h-6 w-6 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
+                    className="h-7 w-7 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
                     src="/assets/ui/icons/global.svg"
                   />
                 )}
@@ -382,14 +382,14 @@ export default function Gnb({
             <button
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className="inline-flex h-8 w-8 items-center justify-center md:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center md:hidden"
               onClick={() => setMobileMenuOpen((current) => !current)}
               type="button"
             >
               <img
                 alt=""
                 aria-hidden="true"
-                className="h-8 w-8 object-contain"
+                className="h-9 w-9 object-contain"
                 src={mobileMenuOpen ? "/assets/ui/icons/m-Close.svg" : "/assets/ui/icons/m-Menu.svg"}
               />
             </button>
@@ -421,12 +421,12 @@ export default function Gnb({
                 key={section.title}
                 className="flex w-full flex-col gap-[10px]"
               >
-                <p className="m-0 type-body-sm text-mute">{section.title}</p>
+                <p className="m-0 type-body-md text-mute">{section.title}</p>
                 <div className="flex w-full flex-col gap-[10px]">
                   {section.items.map((item) => (
                     <a
                       key={item.label}
-                      className="pressable type-body-lg text-fg"
+                      className="pressable type-h2 text-fg"
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                     >
