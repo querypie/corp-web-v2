@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import Button from "../../common/Button";
-import { getLocalePath } from "../../../constants/i18n";
-import { adminNavGroups, adminPrimaryNavItems } from "../../../constants/admin";
+import Button from "@/components/ui/Button";
+import { getLocalePath } from "@/constants/i18n";
+import { adminNavGroups, adminPrimaryNavItems } from "@/constants/admin";
 import { useAdminNavigationGuard } from "./AdminNavigationGuard";
 
 function cx(...values: Array<string | false | null | undefined>) {

@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Input from "@/components/common/Input";
-import Button from "@/components/common/Button";
+import Input from "@/components/ui/Input";
+import Button from "@/components/ui/Button";
 import {
   ContactCheckboxRow,
   FieldLabel,
-} from "@/components/pages/contact/ContactFormParts";
-import type { CommunityLicensePageCopy } from "@/features/community-license/copy";
+} from "@/components/forms/ContactFormParts";
+import type { CommunityLicensePageCopy } from "@/copy/communityLicense";
 
 type FormState =
   | { status: "idle" }

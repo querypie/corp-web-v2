@@ -1,14 +1,14 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import Cta from "../../sections/Cta";
-import ClientSection from "../../sections/ClientSection";
-import ContentListSection from "../../sections/ContentListSection";
-import FeatureSection from "../../sections/FeatureSection";
-import HomeNewsListClientSection from "../../sections/HomeNewsListClientSection";
-import McpSection from "../../sections/McpSection";
-import ReviewSection from "../../sections/ReviewSection";
+import Cta from "@/components/marketing/Cta";
+import ClientSection from "@/components/marketing/ClientSection";
+import ContentListSection from "@/components/marketing/ContentListSection";
+import FeatureSection from "@/components/marketing/FeatureSection";
+import HomeNewsListClientSection from "@/components/marketing/HomeNewsListClientSection";
+import McpSection from "@/components/marketing/McpSection";
+import ReviewSection from "@/components/marketing/ReviewSection";
 import HomePageHero from "./HomePageHero";
 import HomeNoticePopover, { type HomeNoticeItem } from "./HomeNoticePopover";
-import type { Locale } from "../../../constants/i18n";
+import type { Locale } from "@/constants/i18n";
 
 type FeatureItem = {
   action?: {

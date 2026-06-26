@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
-import { siteTitle, siteUrl } from "../constants/site";
+import { siteTitle, siteUrl } from "@/constants/site";
 import "../styles/globals.css";
 
 const jetBrainsMono = JetBrains_Mono({

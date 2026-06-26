@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import AdminManagedContentDetailPage from "../../../../../components/pages/admin/AdminManagedContentDetailPage";
+import AdminManagedContentDetailPage from "@/components/admin/content/AdminManagedContentDetailPage";
 import { isAdminSectionCategory } from "@/features/content/config";
 import { stripManagedContentBodies } from "@/features/content/data";
 import { readContentItem, readContentState } from "@/features/content/contentState.server";

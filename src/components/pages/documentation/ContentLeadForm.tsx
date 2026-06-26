@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import Button from "../../common/Button";
-import type { ContactField, ContactPageCopy } from "@/features/contact/copy";
+import Button from "@/components/ui/Button";
+import type { ContactField, ContactPageCopy } from "@/copy/contact";
 import type { ManagedContentSection } from "@/features/content/data";
 import { CONTENT_UNLOCK_BUTTON_LABEL } from "@/features/content/data";
 import {
@@ -12,7 +12,7 @@ import {
   ContactTextField,
   FieldLabel,
   splitContactFields,
-} from "../contact/ContactFormParts";
+} from "@/components/forms/ContactFormParts";
 
 type ContentLeadFormMode = "download" | "unlock";
 

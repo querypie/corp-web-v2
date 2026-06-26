@@ -3,9 +3,9 @@ import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { getSolutionHref } from "@/features/solutions/routes";
 import { withDynamicOgImage } from "@/features/seo/metadata";
-import ContentEN, { metadata as metadataEN } from "./content.en";
-import ContentKO, { metadata as metadataKO } from "./content.ko";
-import ContentJA, { metadata as metadataJA } from "./content.ja";
+import ContentEN, { metadata as metadataEN } from "@/components/pages/solutions/aip/content.en";
+import ContentKO, { metadata as metadataKO } from "@/components/pages/solutions/aip/content.ko";
+import ContentJA, { metadata as metadataJA } from "@/components/pages/solutions/aip/content.ja";
 
 type SolutionStaticMetadata = {
   title: string;

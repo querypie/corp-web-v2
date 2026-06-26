@@ -6,7 +6,7 @@
 
 ## 프로젝트 개요
 
-`corp-web-v2`는 QueryPie 회사 홍보·소개 웹사이트입니다. 제품 소개, Features Demo, Documentation, Company, Plans, Legal 문서를 `en / ko / ja` 다국어로 제공합니다.
+`corp-web-v2`는 QueryPie 회사 홍보·소개 웹사이트입니다. 제품 소개, Demo, Documentation, Company, Plans, Legal 문서를 `en / ko / ja` 다국어로 제공합니다.
 
 Admin CMS는 Demo / Documentation / News 콘텐츠를 편집·게시하기 위한 보조 기능입니다. 공개 웹사이트의 안정성과 콘텐츠 일관성이 우선입니다.
 
@@ -24,44 +24,47 @@ Admin CMS는 Demo / Documentation / News 콘텐츠를 편집·게시하기 위�
 
 ---
 
-## 핵심 구조
+## 주요 구조
 
 ```text
 src/
-├── app/
-│   ├── [locale]/       # 공개 페이지: en / ko / ja
-│   ├── admin/          # Admin CMS
-│   └── api/            # 서버 API 라우트
+├── app/                # App Router: public locale routes, admin, api
 ├── components/
-│   ├── common/         # 공용 UI
-│   ├── layout/         # GNB, Footer, AdminShell
-│   ├── pages/          # 페이지 조립 컴포넌트
-│   └── sections/       # 섹션 컴포넌트
-├── features/
-│   ├── content/        # 콘텐츠 모델, 상태, 읽기/쓰기
-│   └── seo/            # SEO 클라이언트 상태
-├── content/
-│   ├── demo/
-│   ├── documentation/
-│   ├── news/
-│   └── legal/
-└── constants/          # i18n, navigation, plans, legal 등
+│   ├── ui/             # Button, Input, Select 등 순수 UI primitive
+│   ├── content/        # 콘텐츠 미리보기, Tiptap, rich text 렌더링
+│   ├── marketing/      # CTA, feature, review 등 마케팅 섹션
+│   ├── site/           # 쿠키 배너, UTM capture 등 전역 사이트 동작
+│   ├── forms/          # 여러 페이지에서 공유하는 form 조각
+│   ├── layout/         # GNB, Footer, Admin shell
+│   ├── admin/          # Admin 전용 화면 컴포넌트
+│   └── pages/          # 공개 페이지 조립 컴포넌트
+├── constants/          # i18n, navigation, plans, legal 등
+├── copy/               # 정적 페이지 문구와 metadata copy
+├── content/            # demo, documentation, news, legal 원본
+└── features/           # content, seo, utm 등 동작 로직
 ```
+
+컴포넌트 확인 순서:
+
+1. `src/components/ui`
+2. `src/components/layout`
+3. `src/components/content`, `src/components/marketing`, `src/components/forms`, `src/components/site`
+4. `src/components/pages`, `src/components/admin`
 
 ---
 
 ## 먼저 확인할 파일
 
-작업 범위에 따라 아래 파일을 먼저 확인합니다.
-
 | 목적 | 파일 |
 |------|------|
 | 라우팅 / locale rewrite | `next.config.ts`, `src/constants/i18n.ts` |
 | 공개 메뉴 / 푸터 | `src/constants/navigation.ts` |
+| 정적 페이지 문구 / 메타 copy | `src/copy/*` |
 | 콘텐츠 카테고리 | `src/features/content/config.ts` |
 | 콘텐츠 읽기 | `src/features/content/contentState.server.ts`, `src/features/content/data.ts` |
 | Admin 저장 | `src/features/content/authored.server.ts` |
 | 전역 스타일 / 폰트 | `src/styles/globals.css`, `src/app/layout.tsx`, `src/app/[locale]/layout.tsx` |
+| SEO / OG 이미지 | `src/features/seo/metadata.ts`, `src/features/seo/ogImage.tsx` |
 
 ---
 
@@ -69,38 +72,23 @@ src/
 
 - 기존 패턴을 먼저 찾고, 같은 방식으로 수정합니다.
 - 요청 범위를 벗어나는 리팩터링은 하지 않습니다.
+- 관련 없는 사용자 변경은 되돌리지 않습니다.
+- 정적 문구와 metadata copy는 `src/copy`에 둡니다. API, 저장, 브라우저 상태, 라우팅 계산 같은 동작 로직만 `src/features`에 둡니다.
+- `src/app` 라우트 파일은 locale 확인, metadata 생성, 데이터 조회, 페이지 컴포넌트 연결만 담당하게 유지합니다.
+- `src/app`에서 `components`, `constants`, `features`, `copy`를 import할 때는 깊은 상대경로 대신 `@/...` alias를 우선 사용합니다.
+- `src/components/ui`에는 도메인 의존성이 없는 UI primitive만 둡니다. 콘텐츠/Tiptap 관련은 `components/content`, 마케팅 섹션은 `components/marketing`, 전역 사이트 동작은 `components/site`에 둡니다.
+- 솔루션 페이지의 locale별 JSX 본문, 섹션 컴포넌트, 통합 필터/데이터는 `src/components/pages/solutions`에 둡니다. `src/app/[locale]/solutions`에는 route `page.tsx`와 route 테스트만 둡니다.
 - 카테고리명, 공개 경로, locale 경로는 하드코딩하지 말고 기존 헬퍼와 설정을 사용합니다.
-- 사용자가 만든 미완료 변경이 있을 수 있으므로, 관련 없는 변경은 되돌리지 않습니다.
 - UI 변경은 기존 컴포넌트와 Tailwind 유틸리티를 우선 사용합니다.
+- B2B SaaS/보안/엔터프라이즈 화면은 신뢰감, 명확한 정보 구조, 절제된 시각 표현을 우선합니다.
+- 다국어 화면에서는 긴 한국어·일본어 문구로 인한 줄바꿈과 overflow를 확인합니다.
 - git에 올릴 때 commit message, PR 제목, PR 설명은 한국어로 작성합니다.
-
-컴포넌트 확인 순서:
-
-1. `src/components/common`
-2. `src/components/layout`
-3. `src/components/sections`
-4. `src/components/pages`
-
----
-
-## Figma Dev Mode MCP
-
-Figma 디자인 구현 요청이 있으면 일반 Figma Remote MCP가 아니라 Figma Dev Mode MCP 연결을 우선 사용합니다.
-
-- MCP endpoint: `http://127.0.0.1:3845/mcp`
-- VS Code User config: `/Users/vin/Library/Application Support/Code/User/mcp.json`
-- Workspace config는 필수가 아닙니다. 전역 User config를 우선 사용합니다.
-- 전제: Figma Desktop 앱에서 Dev Mode MCP 서버가 실행 중이어야 합니다.
-- Codex 도구에 Figma MCP가 직접 노출되지 않으면 로컬 HTTP JSON-RPC로 endpoint에 접근합니다.
-- `lsof -nP -iTCP:3845 -sTCP:LISTEN`에서 Figma가 포트를 열고 있는데 일반 `curl`/`nc`가 `Failed to connect` 또는 `Operation not permitted`로 실패하면, Figma 문제가 아니라 Codex 샌드박스의 로컬 TCP 접근 제한일 수 있습니다. 이 경우 같은 MCP `curl` 요청을 `sandbox_permissions: require_escalated`로 즉시 재시도합니다.
-- MCP HTTP 호출은 `initialize` 응답 헤더의 `mcp-session-id`를 이후 `tools/list`, `tools/call` 요청에 반드시 포함합니다.
-- Figma 노드 구현 시 `get_design_context`를 우선 호출하고, MCP 응답 지침에 따라 `get_screenshot`도 함께 호출해 실제 시각 상태를 확인한 뒤 구현합니다.
 
 ---
 
 ## 콘텐츠 규칙
 
-관리형 콘텐츠의 원본은 `src/content/{demo,documentation,news}/**/cnt_xxxxxx/` 아래 파일입니다.
+관리형 콘텐츠 원본은 `src/content/{demo,documentation,news}/**/cnt_xxxxxx/` 아래 파일입니다.
 
 - 메타데이터: `meta.json`
 - locale 본문: `en.html`, `ko.html`, `ja.html`
@@ -118,22 +106,50 @@ Admin 저장 흐름:
 
 ---
 
-## 다국어 / 라우팅 주의사항
+## 다국어 / 라우팅
 
 - locale은 `en`, `ko`, `ja`만 사용합니다.
-- 공개 URL은 영어 포함 모든 locale에 `/{locale}` 접두사를 붙입니다. bare public path는 `/en/...`으로 redirect되며, 경로 생성은 `getLocalePath()`를 사용합니다.
-- 공개 상세 경로는 `getPublicListHref()`, `getPublicDetailHref()` 사용 여부를 먼저 확인합니다.
-- `src/app/[locale]/layout.tsx`에서 locale별 `lang`이 public 영역에 적용됩니다.
+- 공개 URL은 영어 포함 모든 locale에 `/{locale}` 접두사를 붙입니다.
+- bare public path는 `/en/...`으로 redirect되며, 경로 생성은 `getLocalePath()`를 사용합니다.
+- 공개 콘텐츠 상세 경로는 `getPublicListHref()`, `getPublicDetailHref()` 사용 여부를 먼저 확인합니다.
 - Legal 문서에서 `ja`는 영어 버전을 fallback으로 사용할 수 있습니다.
 
 ---
 
-## SEO 주의사항
+## 테스트 / 브라우저 검증
 
-현재 SEO 상태는 브라우저 `localStorage` 기반입니다.
+기본 검증:
 
-- 클라이언트 저장소: `src/features/seo/clientStore.ts`
-- SEO 이상 동작 시 브라우저 localStorage와 `SeoRuntime` 흐름을 먼저 확인합니다.
+```bash
+npm run typecheck
+npm run test:run
+```
+
+- 변경 범위에 맞게 테스트를 추가하거나 수정합니다.
+- 순수 함수 / 유틸 변경: 유닛 테스트 우선
+- API 라우트 변경: mock 기반 통합 테스트
+- UI 변경: 핵심 렌더링과 인터랙션 검증
+- Next.js App Router / 공용 UI 변경은 서버/클라이언트 컴포넌트 경계 오류가 늦게 드러날 수 있으므로 `npm run build`를 우선 고려합니다.
+- `npm run typecheck`와 `npm run build`는 동시에 실행하지 않습니다. `.next/types` 재생성 중 typecheck가 일시 실패할 수 있습니다.
+- dev server가 실행 중인 상태에서 `npm run build`를 실행하지 않습니다. 둘 다 `.next`를 쓰므로 빌드 검증이 필요하면 dev server를 중지하고 실행합니다.
+- 로컬 테스트 서버는 3000번 포트만 사용합니다. 3000번이 점유되어 있으면 다른 포트로 우회하지 말고 점유 프로세스를 확인합니다.
+
+브라우저 검증:
+
+- 로컬 E2E 참고: `docs/reference/local-e2e.md`
+- Playwright Chromium은 `/Users/vin/Library/Caches/ms-playwright/`에 설치되어 있습니다.
+- `browser-harness` 실행 파일은 `/Users/vin/.local/bin/browser-harness`입니다. 새 셸은 `/Users/vin/.zshenv`에서 PATH를 받습니다.
+- Codex 샌드박스에서 Playwright 또는 하네스가 `bootstrap_check_in ... Permission denied`, `kill EPERM`, `Target page, context or browser has been closed` 같은 macOS 브라우저 프로세스 권한 오류를 내면 설치 문제가 아닙니다. 같은 명령을 `sandbox_permissions: require_escalated`로 즉시 재시도합니다.
+
+---
+
+## Figma
+
+Figma 디자인 구현 요청이 있으면 일반 Figma Remote MCP가 아니라 Figma Dev Mode MCP를 우선 사용합니다.
+
+- MCP endpoint: `http://127.0.0.1:3845/mcp`
+- Figma Desktop 앱에서 Dev Mode MCP 서버가 실행 중이어야 합니다.
+- 로컬 TCP 접근이 `Operation not permitted` 또는 connection error로 막히면 같은 MCP 요청을 `sandbox_permissions: require_escalated`로 재시도합니다.
 
 ---
 
@@ -144,29 +160,8 @@ Admin 저장 흐름:
 | 이미지 / 다운로드 깨짐 | `public/`, 콘텐츠 데이터, `next.config.ts`, 브라우저 요청 URL |
 | Admin 콘텐츠 누락 | `/api/admin/content/state`, `src/content/**/meta.json`, `src/features/content/clientStore.ts` |
 | 공개 콘텐츠 누락 | publish 상태, locale 본문, `isPublishedContentVisible()` |
-| SEO 상태 이상 | `src/features/seo/clientStore.ts`, localStorage |
 | locale / 폰트 이상 | `src/app/[locale]/layout.tsx`, `src/styles/globals.css` |
-
----
-
-## 테스트
-
-```bash
-npm run typecheck
-npm run test:run
-```
-
-변경 범위에 맞게 테스트를 추가하거나 수정합니다.
-
-- 로컬 테스트 서버는 3000번 포트만 사용합니다. `npm run dev`는 `next dev --port 3000`으로 실행하며, 3000번이 점유되어 있으면 다른 포트로 우회하지 말고 점유 프로세스를 확인합니다.
-- 순수 함수 / 유틸 변경: 유닛 테스트 우선
-- API 라우트 변경: mock 기반 통합 테스트
-- UI 변경: 핵심 렌더링과 인터랙션 검증
-- Next.js App Router / 공용 UI 변경: 서버 컴포넌트와 클라이언트 컴포넌트 경계 오류가 브라우저 런타임에서 늦게 드러날 수 있으므로 `npm run build`를 우선 실행해 검증합니다.
-- `npm run typecheck`와 `npm run build`는 동시에 실행하지 않습니다. `.next/types`가 재생성되는 동안 typecheck가 일시적으로 실패할 수 있습니다.
-- dev server가 실행 중인 상태에서 `npm run build`를 실행하지 않습니다. 둘 다 `.next`를 쓰기 때문에 dev server가 `Cannot find module './*.js'`, `vendor-chunks/next.js` 같은 깨진 산출물을 물 수 있습니다. 빌드 검증이 필요하면 dev server를 중지하고 `npm run build`를 실행한 뒤, 필요하면 `.next`를 정리하고 dev server를 다시 시작합니다.
-- 서버 컴포넌트에서 사용하는 공용 컴포넌트는 이벤트 핸들러, 브라우저 API, client-only props가 섞이지 않았는지 먼저 확인합니다. 상호작용이 필요하면 `"use client"` 적용 여부를 명확히 판단합니다.
-- 브라우저 흐름 확인: `docs/reference/local-e2e.md` 참고
+| SEO / OG 이상 | `src/features/seo/*`, 해당 route의 `generateMetadata()` |
 
 ---
 
@@ -182,13 +177,12 @@ npm run test:run
 
 ---
 
-## 관련 문서
+## 관련 문서 / 스킬
 
 - `README.md` — 프로젝트 개요와 실행 방법
-- `docs/reference/corp-web-v2-implementation-status.md` — 구현 현황
 - `docs/reference/test-coverage.md` — 테스트 현황과 mock 패턴
 - `docs/reference/local-e2e.md` — 로컬 Playwright E2E
-- `docs/reference/github-settings.md` — GitHub 설정
+- `docs/reference/vercel-deployment.md` — 배포 정보
 - `.claude/skills/branch/SKILL.md` — 작업 브랜치 생성
 - `.claude/skills/worktree/SKILL.md` — worktree 작업
 - `.claude/skills/pr/SKILL.md` — PR 작성

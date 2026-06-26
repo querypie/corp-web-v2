@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { readContentItem, readContentState } from "@/features/content/contentState.server";
 import { stripManagedContentBodies } from "@/features/content/data";
-import AdminManagedContentDetailPage from "../../../../../components/pages/admin/AdminManagedContentDetailPage";
+import AdminManagedContentDetailPage from "@/components/admin/content/AdminManagedContentDetailPage";
 
 type Props = {
   params: Promise<{ slug: string }>;

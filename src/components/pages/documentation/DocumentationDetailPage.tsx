@@ -1,7 +1,7 @@
 import { pageXPaddingClassName } from "@/constants/layout";
 import type { ReactNode } from "react";
-import ContentArticlePreview from "../../common/ContentArticlePreview";
-import DocumentationContentListSection from "../../sections/DocumentationContentListSection";
+import ContentArticlePreview from "@/components/content/ContentArticlePreview";
+import DocumentationContentListSection from "@/components/marketing/DocumentationContentListSection";
 import { CONTENT_DOWNLOAD_BUTTON_LABEL } from "@/features/content/data";
 
 export type DocsDetailPageProps = {

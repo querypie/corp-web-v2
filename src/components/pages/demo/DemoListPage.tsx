@@ -1,8 +1,8 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import type { Locale } from "@/constants/i18n";
 import type { PublicMenuItem } from "@/features/content/config";
-import ContentPreviewImage from "../../common/ContentPreviewImage";
-import Cta from "../../sections/Cta";
+import ContentPreviewImage from "@/components/content/ContentPreviewImage";
+import Cta from "@/components/marketing/Cta";
 
 type DemoListItem = {
   category: string;

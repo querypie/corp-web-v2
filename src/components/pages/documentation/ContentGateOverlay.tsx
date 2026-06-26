@@ -3,7 +3,7 @@
 import { startTransition } from "react";
 import { useRouter } from "next/navigation";
 import ContentLeadForm from "./ContentLeadForm";
-import type { ContactPageCopy } from "@/features/contact/copy";
+import type { ContactPageCopy } from "@/copy/contact";
 import type { ManagedContentSection } from "@/features/content/data";
 
 type ContentGateOverlayProps = {

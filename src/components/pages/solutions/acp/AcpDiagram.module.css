@@ -1,0 +1,198 @@
+.connectionFlow {
+  --acp-flow-duration: 4.8s;
+  color: var(--color-point);
+  overflow: visible;
+}
+
+.shieldPanel {
+  background:
+    radial-gradient(120% 70% at 82% 12%, rgb(109 49 206 / 0.62), transparent 52%),
+    radial-gradient(130% 90% at 76% 58%, rgb(80 212 133 / 0.38), transparent 58%),
+    radial-gradient(110% 78% at 28% 36%, rgb(12 119 229 / 0.46), transparent 56%),
+    linear-gradient(180deg, var(--color-bg-content) 0%, var(--color-bg) 100%);
+  isolation: isolate;
+  transform: translateZ(0);
+}
+
+.shieldPanelArtwork {
+  opacity: 0.9;
+  transform: translateZ(0);
+}
+
+.flowPulse {
+  color: var(--color-point);
+  filter:
+    drop-shadow(0 0 3px color-mix(in srgb, var(--color-fg) 88%, transparent))
+    drop-shadow(0 0 9px color-mix(in srgb, var(--color-point) 72%, transparent));
+  opacity: 0;
+}
+
+.flowPulseHalo {
+  opacity: 0.38;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 6;
+}
+
+.flowPulseCore {
+  stroke: var(--color-fg);
+  stroke-linecap: round;
+  stroke-width: 2;
+}
+
+.lock {
+  --acp-flow-duration: 4.8s;
+  color: var(--color-point);
+  overflow: visible;
+}
+
+.lockBg {
+  animation: lockFlashLeft var(--acp-flow-duration) linear infinite;
+  fill: var(--color-secondary);
+}
+
+.lockRight .lockBg {
+  animation-name: lockFlashRight;
+}
+
+.controllerIcon {
+  --acp-flow-duration: 4.8s;
+  overflow: visible;
+}
+
+.controllerIconBg {
+  animation: controllerIconFlash var(--acp-flow-duration) linear infinite;
+  fill: #0c77e5;
+}
+
+.controllerBadge {
+  --acp-flow-duration: 4.8s;
+  animation: controllerBadgeFlash var(--acp-flow-duration) linear infinite;
+  overflow: hidden;
+  position: relative;
+}
+
+.controllerBadge::before {
+  animation: controllerBadgeShine var(--acp-flow-duration) linear infinite;
+  background: linear-gradient(
+    110deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-white) 58%, transparent) 46%,
+    transparent 72%
+  );
+  content: "";
+  inset: -55% -35%;
+  opacity: 0;
+  position: absolute;
+  transform: translateX(-95%) rotate(8deg);
+}
+
+.controllerTitle {
+  --acp-flow-duration: 4.8s;
+  animation: controllerTitleFlash var(--acp-flow-duration) linear infinite;
+}
+
+.paused .lockBg,
+.paused .controllerIconBg,
+.paused .controllerBadge,
+.paused .controllerBadge::before,
+.paused .controllerTitle {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flowPulse {
+    display: none;
+  }
+
+  .lockBg {
+    animation: none;
+    fill: var(--color-secondary);
+    filter: none;
+  }
+
+  .controllerIconBg {
+    animation: none;
+    fill: #0c77e5;
+  }
+
+  .controllerBadge,
+  .controllerBadge::before,
+  .controllerTitle {
+    animation: none;
+  }
+}
+
+@keyframes lockFlashLeft {
+  0%, 28%, 40%, 100% {
+    fill: var(--color-secondary);
+  }
+
+  34% {
+    fill: color-mix(in srgb, var(--color-point) 78%, var(--color-secondary));
+  }
+}
+
+@keyframes controllerBadgeFlash {
+  0%, 44%, 61%, 100% {
+    background-color: var(--color-bg);
+    box-shadow: none;
+  }
+
+  52% {
+    background-color: color-mix(in srgb, var(--color-point) 26%, var(--color-bg));
+    box-shadow:
+      0 0 10px color-mix(in srgb, var(--color-fg) 28%, transparent),
+      0 0 18px color-mix(in srgb, var(--color-point) 38%, transparent);
+  }
+}
+
+@keyframes controllerBadgeShine {
+  0%, 45%, 61%, 100% {
+    opacity: 0;
+    transform: translateX(-95%) rotate(8deg);
+  }
+
+  50% {
+    opacity: 0.78;
+  }
+
+  58% {
+    opacity: 0;
+    transform: translateX(95%) rotate(8deg);
+  }
+}
+
+@keyframes controllerIconFlash {
+  0%, 44%, 61%, 100% {
+    fill: #0c77e5;
+  }
+
+  52% {
+    fill: color-mix(in srgb, var(--color-point) 66%, #0c77e5);
+  }
+}
+
+@keyframes controllerTitleFlash {
+  0%, 44%, 61%, 100% {
+    color: var(--color-fg);
+    text-shadow: none;
+  }
+
+  52% {
+    color: var(--color-white);
+    text-shadow:
+      0 0 8px color-mix(in srgb, var(--color-fg) 82%, transparent),
+      0 0 18px color-mix(in srgb, var(--color-point) 74%, transparent);
+  }
+}
+
+@keyframes lockFlashRight {
+  0%, 62%, 73%, 100% {
+    fill: var(--color-secondary);
+  }
+
+  68% {
+    fill: color-mix(in srgb, var(--color-point) 78%, var(--color-secondary));
+  }
+}

@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getLocalePath, isLocale, type Locale } from "../../../../constants/i18n";
-import ContactUsPage from "../../../../components/pages/contact/ContactUsPage";
-import { getContactPageCopy } from "@/features/contact/copy";
+import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
+import ContactUsPage from "@/components/pages/contact/ContactUsPage";
+import { getContactPageCopy } from "@/copy/contact";
 import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type Props = {

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/marketing/Cta";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { pageXPaddingClassName } from "@/constants/layout";
 import { getSolutionHref } from "@/features/solutions/routes";
 import { withDynamicOgImage } from "@/features/seo/metadata";
-import IntegrationsFilter from "./IntegrationsFilter";
+import IntegrationsFilter from "@/components/pages/solutions/acp/integrations/IntegrationsFilter";
 
 type PageProps = {
   params: Promise<{ locale: string }>;

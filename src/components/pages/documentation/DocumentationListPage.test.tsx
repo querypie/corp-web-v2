@@ -2,11 +2,11 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import DocsListPage from "./DocumentationListPage";
 
-vi.mock("../../common/ContentPreviewImage", () => ({
+vi.mock("@/components/content/ContentPreviewImage", () => ({
   default: ({ alt, src }: { alt: string; src: string }) => <img alt={alt} src={src} />,
 }));
 
-vi.mock("../../sections/Cta", () => ({
+vi.mock("@/components/marketing/Cta", () => ({
   default: () => <div data-testid="cta" />,
 }));
 

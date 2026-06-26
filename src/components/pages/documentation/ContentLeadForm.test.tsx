@@ -1,13 +1,13 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { getContactPageCopy } from "@/features/contact/copy";
+import { getContactPageCopy } from "@/copy/contact";
 import ContentLeadForm from "./ContentLeadForm";
 
 const contactCopy = getContactPageCopy("en");
 
 // 필수 필드(required=true)를 모두 채운 최소 폼 데이터
-function fillRequiredFields() {
-  const requiredFields = contactCopy.formFields.filter((f) => f.required);
+function fillRequiredFields(copy = contactCopy) {
+  const requiredFields = copy.formFields.filter((f) => f.required);
   for (const field of requiredFields) {
     const input = document.querySelector(`[name="${field.name}"]`) as HTMLInputElement | HTMLSelectElement | null;
     if (!input) continue;
@@ -19,7 +19,7 @@ function fillRequiredFields() {
     }
   }
   // 제품 옵션 중 하나 체크
-  const firstProductCheckbox = document.querySelector(`[name="product:${contactCopy.productOptions[0]}"]`) as HTMLInputElement | null;
+  const firstProductCheckbox = document.querySelector(`[name="product:${copy.productOptions[0]}"]`) as HTMLInputElement | null;
   if (firstProductCheckbox) {
     fireEvent.click(firstProductCheckbox);
   }
@@ -168,7 +168,7 @@ describe("ContentLeadForm", () => {
         title="테스트 문서"
       />,
     );
-    fillRequiredFields();
+    fillRequiredFields(koCopy);
     fireEvent.submit(screen.getByRole("button").closest("form")!);
 
     await waitFor(() => {

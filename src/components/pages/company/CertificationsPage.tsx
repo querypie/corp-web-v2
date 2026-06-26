@@ -1,6 +1,6 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import Cta from "../../sections/Cta";
-import type { Locale } from "../../../constants/i18n";
+import Cta from "@/components/marketing/Cta";
+import type { Locale } from "@/constants/i18n";
 
 type CertificationItem = {
   description: readonly string[];

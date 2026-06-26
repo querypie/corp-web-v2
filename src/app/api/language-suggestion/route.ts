@@ -1,6 +1,6 @@
 import { cookies, headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
-import { isLocale, type Locale } from "../../../constants/i18n";
+import { isLocale, type Locale } from "@/constants/i18n";
 
 const LANGUAGE_BANNER_COOKIE = "querypie_language_banner_dismissed";
 

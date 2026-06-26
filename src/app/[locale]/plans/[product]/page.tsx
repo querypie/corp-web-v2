@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import PlansPage from "../../../../components/pages/plans/PlansPage";
-import { getLocalePath, isLocale, type Locale } from "../../../../constants/i18n";
-import { getPlansPageCopy } from "@/features/content/pageCopy";
+import PlansPage from "@/components/pages/plans/PlansPage";
+import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
+import { getPlansPageCopy } from "@/copy/contentPages";
 import { withDynamicOgImage } from "@/features/seo/metadata";
 
 const planProducts = ["aip", "acp"] as const;

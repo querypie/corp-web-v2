@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import EulaPage from "../../../components/pages/legal/EulaPage";
-import { getLocalePath, isLocale, type Locale } from "../../../constants/i18n";
-import { getEulaContent } from "../../../constants/legalContent";
+import EulaPage from "@/components/pages/legal/EulaPage";
+import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
+import { getEulaContent } from "@/constants/legalContent";
 import { withDynamicOgImage } from "@/features/seo/metadata";
-import { getStaticSeoDescription } from "@/features/seo/staticDescriptions";
+import { getLegalSeoDescription } from "@/features/seo/legalSeoDescriptions";
 
 type EulaRouteProps = {
   params: Promise<{ locale: string }>;
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: EulaRouteProps): Promise<Meta
 
   if (!isLocale(locale)) return {};
   const content = await getEulaContent(locale as Locale);
-  const description = getStaticSeoDescription("eula", locale);
+  const description = getLegalSeoDescription("eula", locale);
 
   return withDynamicOgImage({
     title: content.title,

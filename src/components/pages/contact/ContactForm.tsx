@@ -2,8 +2,8 @@
 
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
-import Button from "../../common/Button";
-import type { ContactField, ContactPageCopy } from "@/features/contact/copy";
+import Button from "@/components/ui/Button";
+import type { ContactField, ContactPageCopy } from "@/copy/contact";
 import type { Locale } from "@/constants/i18n";
 import { getLocalePath } from "@/constants/i18n";
 import { readUtmCookie } from "@/features/utm/utm";
@@ -15,7 +15,7 @@ import {
   ContactTextField,
   FieldLabel,
   splitContactFields,
-} from "./ContactFormParts";
+} from "@/components/forms/ContactFormParts";
 
 type FormState = Record<string, string>;
 

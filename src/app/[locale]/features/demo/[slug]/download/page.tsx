@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import ContentDownloadPage from "../../../../../../components/pages/documentation/ContentDownloadPage";
-import { isLocale, getLocalePath } from "../../../../../../constants/i18n";
-import { getContactPageCopy } from "@/features/contact/copy";
+import ContentDownloadPage from "@/components/pages/documentation/ContentDownloadPage";
+import { isLocale, getLocalePath } from "@/constants/i18n";
+import { getContactPageCopy } from "@/copy/contact";
 import { getLocalizedContent, getResolvedContentLocale, isPublishedContentAccessible } from "@/features/content/data";
 import { readContentItem } from "@/features/content/contentState.server";
 import { getContentUnlockCookieName } from "@/features/content/gating";

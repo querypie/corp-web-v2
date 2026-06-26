@@ -3,13 +3,13 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { useMemo } from "react";
 import { useRouter } from "next/navigation";
-import Button from "../../common/Button";
-import Tab from "../../common/Tab";
-import TabGroup from "../../common/TabGroup";
-import Cta from "../../sections/Cta";
-import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PlanFeature, type PricingProduct } from "../../../constants/plans";
-import { getLocalePath, type Locale } from "../../../constants/i18n";
-import { getPlansPageCopy } from "../../../features/content/pageCopy";
+import Button from "@/components/ui/Button";
+import Tab from "@/components/ui/Tab";
+import TabGroup from "@/components/ui/TabGroup";
+import Cta from "@/components/marketing/Cta";
+import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PlanFeature, type PricingProduct } from "@/constants/plans";
+import { getLocalePath, type Locale } from "@/constants/i18n";
+import { getPlansPageCopy } from "@/copy/contentPages";
 
 type PlansPageProps = {
   productKey?: "aip" | "acp";

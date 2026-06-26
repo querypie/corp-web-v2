@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getLocalePath, isLocale } from "../../../../constants/i18n";
-import DocsListClientPage from "../../../../components/pages/documentation/DocumentationListClientPage";
-import { getDocumentationPageCopy } from "@/features/content/pageCopy";
+import { getLocalePath, isLocale } from "@/constants/i18n";
+import DocsListClientPage from "@/components/pages/documentation/DocumentationListClientPage";
+import { getDocumentationPageCopy } from "@/copy/contentPages";
 import {
   docsCategoryConfigs,
   getCategoryLabel,

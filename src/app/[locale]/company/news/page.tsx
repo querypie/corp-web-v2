@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getLocalePath, isLocale } from "../../../../constants/i18n";
-import NewsListClientPage from "../../../../components/pages/news/NewsListClientPage";
-import { getNewsPageCopy } from "@/features/company/pageCopy";
+import { getLocalePath, isLocale } from "@/constants/i18n";
+import NewsListClientPage from "@/components/pages/news/NewsListClientPage";
+import { getNewsPageCopy } from "@/copy/company";
 import { formatPublicDate, getLocalizedContent, getPublicDetailHref, isPublishedContentVisible } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
 import { withDynamicOgImage } from "@/features/seo/metadata";

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type React from "react";
-import Button from "@/components/common/Button";
+import Button from "@/components/ui/Button";
 import type { Locale } from "@/constants/i18n";
 
 export type HomeNoticeItem = {

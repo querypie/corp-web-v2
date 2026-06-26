@@ -3,31 +3,31 @@ import { getSolutionHref, solutionEntries } from "@/features/solutions/routes";
 
 import { generateMetadata as g1 } from "./aip/page";
 import Page1 from "./aip/page";
-import Content1EN, { metadata as Metadata1EN } from "./aip/content.en";
-import Content1KO, { metadata as Metadata1KO } from "./aip/content.ko";
-import Content1JA, { metadata as Metadata1JA } from "./aip/content.ja";
+import Content1EN, { metadata as Metadata1EN } from "@/components/pages/solutions/aip/content.en";
+import Content1KO, { metadata as Metadata1KO } from "@/components/pages/solutions/aip/content.ko";
+import Content1JA, { metadata as Metadata1JA } from "@/components/pages/solutions/aip/content.ja";
 import { generateMetadata as g2 } from "./aip/usage-based-llm/page";
 import Page2 from "./aip/usage-based-llm/page";
-import Content2EN, { metadata as Metadata2EN } from "./aip/usage-based-llm/content.en";
-import Content2KO, { metadata as Metadata2KO } from "./aip/usage-based-llm/content.ko";
-import Content2JA, { metadata as Metadata2JA } from "./aip/usage-based-llm/content.ja";
+import Content2EN, { metadata as Metadata2EN } from "@/components/pages/solutions/aip/usage-based-llm/content.en";
+import Content2KO, { metadata as Metadata2KO } from "@/components/pages/solutions/aip/usage-based-llm/content.ko";
+import Content2JA, { metadata as Metadata2JA } from "@/components/pages/solutions/aip/usage-based-llm/content.ja";
 import { generateMetadata as g3 } from "./aip/mcp-gateway/page";
 import Page3 from "./aip/mcp-gateway/page";
-import Content3EN, { metadata as Metadata3EN } from "./aip/mcp-gateway/content.en";
-import Content3KO, { metadata as Metadata3KO } from "./aip/mcp-gateway/content.ko";
-import Content3JA, { metadata as Metadata3JA } from "./aip/mcp-gateway/content.ja";
+import Content3EN, { metadata as Metadata3EN } from "@/components/pages/solutions/aip/mcp-gateway/content.en";
+import Content3KO, { metadata as Metadata3KO } from "@/components/pages/solutions/aip/mcp-gateway/content.ko";
+import Content3JA, { metadata as Metadata3JA } from "@/components/pages/solutions/aip/mcp-gateway/content.ja";
 import { generateMetadata as g4 } from "./aip/fde-services/page";
 import Page4 from "./aip/fde-services/page";
-import Content4EN, { metadata as Metadata4EN } from "./aip/fde-services/content.en";
-import Content4KO, { metadata as Metadata4KO } from "./aip/fde-services/content.ko";
-import Content4JA, { metadata as Metadata4JA } from "./aip/fde-services/content.ja";
+import Content4EN, { metadata as Metadata4EN } from "@/components/pages/solutions/aip/fde-services/content.en";
+import Content4KO, { metadata as Metadata4KO } from "@/components/pages/solutions/aip/fde-services/content.ko";
+import Content4JA, { metadata as Metadata4JA } from "@/components/pages/solutions/aip/fde-services/content.ja";
 import { generateMetadata as g5 } from "./aip/integrations/page";
 import Page5 from "./aip/integrations/page";
 import { generateMetadata as g6 } from "./acp/page";
 import Page6 from "./acp/page";
-import Content6EN, { metadata as Metadata6EN } from "./acp/content.en";
-import Content6KO, { metadata as Metadata6KO } from "./acp/content.ko";
-import Content6JA, { metadata as Metadata6JA } from "./acp/content.ja";
+import Content6EN, { metadata as Metadata6EN } from "@/components/pages/solutions/acp/content.en";
+import Content6KO, { metadata as Metadata6KO } from "@/components/pages/solutions/acp/content.ko";
+import Content6JA, { metadata as Metadata6JA } from "@/components/pages/solutions/acp/content.ja";
 import { generateMetadata as g7 } from "./acp/integrations/page";
 import Page7 from "./acp/integrations/page";
 
@@ -72,7 +72,7 @@ const routeModules = {
   },
 } as const;
 
-describe("solutions route-local modules", () => {
+describe("solutions solution route modules", () => {
   it("모든 canonical solution entry에 대해 route-local page를 제공한다", () => {
     for (const entry of solutionEntries) {
       const modules = routeModules[entry.id as keyof typeof routeModules];
@@ -80,7 +80,7 @@ describe("solutions route-local modules", () => {
     }
   });
 
-  it("content 기반 solution entry에 대해 route-local content 모듈을 제공한다", () => {
+  it("content 기반 solution entry에 대해 solution content 모듈을 제공한다", () => {
     for (const entry of solutionEntries) {
       const modules = routeModules[entry.id as keyof typeof routeModules];
 

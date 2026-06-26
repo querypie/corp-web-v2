@@ -1,9 +1,9 @@
 import type { MetadataRoute } from "next";
-import { locales, type Locale } from "../constants/i18n";
-import { getLocalePath } from "../constants/i18n";
-import { siteUrl } from "../constants/site";
-import { readContentState } from "../features/content/contentState.server";
-import { getPublicDetailHref, isPublishedContentVisible } from "../features/content/data";
+import { locales, type Locale } from "@/constants/i18n";
+import { getLocalePath } from "@/constants/i18n";
+import { siteUrl } from "@/constants/site";
+import { readContentState } from "@/features/content/contentState.server";
+import { getPublicDetailHref, isPublishedContentVisible } from "@/features/content/data";
 
 function absolute(path: string) {
   return new URL(path, siteUrl).toString();
