@@ -1,6 +1,6 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import Cta from "@/components/marketing/Cta";
-import FeatureSection from "@/components/marketing/FeatureSection";
+import Cta from "@/components/sections/common/Cta";
+import FeatureMediaList from "@/components/sections/common/FeatureMediaList";
 import type { Locale } from "@/constants/i18n";
 import AcpAiPackSection from "./AcpAiPackSection";
 import AcpDiagram from "./AcpDiagram";
@@ -91,7 +91,7 @@ export default function AcpJASolutionContent({ locale }: Props) {
       </div>
 
       <div>
-        <FeatureSection items={featureItems} />
+        <FeatureMediaList items={featureItems} />
       </div>
 
       <div className="-mx-5 md:-mx-10">

@@ -1,5 +1,5 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import Cta from "@/components/marketing/Cta";
+import Cta from "@/components/sections/common/Cta";
 import type { Locale } from "@/constants/i18n";
 
 type CertificationItem = {

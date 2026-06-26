@@ -21,7 +21,7 @@ type FeatureItem = {
   videoSrc?: string;
 };
 
-type FeatureSectionProps = {
+type FeatureMediaListProps = {
   className?: string;
   items?: FeatureItem[];
 };
@@ -185,10 +185,10 @@ function FeatureVideoPlayer({
   );
 }
 
-export default function FeatureSection({
+export default function FeatureMediaList({
   className,
   items = defaultItems,
-}: FeatureSectionProps) {
+}: FeatureMediaListProps) {
   const videoRefs = useRef(new Map<number, HTMLVideoElement>());
 
   useEffect(() => {

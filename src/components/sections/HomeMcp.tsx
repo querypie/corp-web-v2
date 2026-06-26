@@ -1,6 +1,6 @@
 import TextButton from "@/components/ui/TextButton";
 
-type McpSectionProps = {
+type HomeMcpProps = {
   action?: {
     href: string;
     label: string;
@@ -18,13 +18,13 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-export default function McpSection({
+export default function HomeMcp({
   action,
   className,
   description,
   items,
   title,
-}: McpSectionProps) {
+}: HomeMcpProps) {
   return (
     /* MCP 설명 + 아이콘 그리드 섹션 */
     <section className={cx("flex w-full justify-center", className)}>

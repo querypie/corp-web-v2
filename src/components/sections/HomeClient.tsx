@@ -1,4 +1,4 @@
-type ClientSectionProps = {
+type HomeClientProps = {
   caption?: string;
   className?: string;
 };
@@ -18,10 +18,10 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-export default function ClientSection({
+export default function HomeClient({
   caption = "Trusted every day by teams that build world-class software",
   className,
-}: ClientSectionProps) {
+}: HomeClientProps) {
   return (
     /* 고객사 로고와 짧은 설명을 보여주는 섹션 */
     <section className={cx("flex w-full flex-col items-center", className)}>

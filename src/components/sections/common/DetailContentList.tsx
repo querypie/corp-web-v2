@@ -1,29 +1,29 @@
 import ContentPreviewImage from "@/components/content/ContentPreviewImage";
 
-type DocumentationContentListItem = {
+type DetailContentItem = {
   category: string;
   href: string;
   imageSrc: string;
   title: string;
 };
 
-type DocumentationContentListSectionProps = {
+type DetailContentListProps = {
   className?: string;
-  items: DocumentationContentListItem[];
+  items: DetailContentItem[];
 };
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function DocumentationContentListCard({
+function DetailContentCard({
   category,
   href,
   imageSrc,
   title,
-}: DocumentationContentListItem) {
+}: DetailContentItem) {
   return (
-    /* documentation 상세 하단용 콘텐츠 카드 1개 */
+    /* 상세 페이지 하단용 콘텐츠 카드 1개 */
     <a className="group flex w-full cursor-pointer items-start gap-5" href={href}>
       <ContentPreviewImage
         alt={title}
@@ -40,16 +40,16 @@ function DocumentationContentListCard({
   );
 }
 
-export default function DocumentationContentListSection({
+export default function DetailContentList({
   className,
   items,
-}: DocumentationContentListSectionProps) {
+}: DetailContentListProps) {
   return (
-    /* documentation 상세 하단 전용 콘텐츠 리스트 */
+    /* 상세 페이지 하단용 콘텐츠 리스트 */
     <section className={cx("flex w-full justify-center", className)}>
       <div className="flex w-full max-w-[680px] flex-col justify-center gap-5 md:gap-[30px]">
         {items.map((item) => (
-          <DocumentationContentListCard key={`${item.category}-${item.title}`} {...item} />
+          <DetailContentCard key={`${item.category}-${item.title}`} {...item} />
         ))}
       </div>
     </section>
