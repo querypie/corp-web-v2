@@ -51,7 +51,7 @@ describe("GET /api/downloads/file", () => {
 
   it("허용되지 않은 public 경로는 404를 반환한다", async () => {
     const request = new Request(
-      "http://localhost/api/downloads/file?src=/path/solutions/acp/acp-integration.pdf&fileName=sample.pdf",
+      "http://localhost/api/downloads/file?src=/path/assets/products/acp/acp-integration.pdf&fileName=sample.pdf",
     );
     const response = await GET(request);
     const data = (await response.json()) as { error: string };

@@ -111,7 +111,7 @@ export default function AdminShell({ children }: AdminShellProps) {
               onClick={() => requestNavigation("/admin/news")}
               type="button"
             >
-              <img alt="" aria-hidden="true" className="h-5 w-5 object-contain" src="/icons/querypie-symbol.svg" />
+              <img alt="" aria-hidden="true" className="h-5 w-5 object-contain" src="/assets/brand/logos/querypie-symbol.svg" />
               <span className="type-h3 text-fg">CMS</span>
             </button>
             <button
@@ -125,7 +125,7 @@ export default function AdminShell({ children }: AdminShellProps) {
                 alt=""
                 aria-hidden="true"
                 className="h-10 w-10 object-contain"
-                src={mobileMenuOpen ? "/icons/m-Close.svg" : "/icons/m-Menu.svg"}
+                src={mobileMenuOpen ? "/assets/ui/icons/m-Close.svg" : "/assets/ui/icons/m-Menu.svg"}
               />
             </button>
           </div>

@@ -178,7 +178,7 @@ export default function Gnb({
             <img
               alt="QueryPie AI"
               className="block h-5 w-[116px] transition-[filter,opacity] duration-300"
-              src="/icons/querypie-ai-logo.svg"
+              src="/assets/brand/logos/querypie-ai-logo.svg"
             />
           </a>
           <div className="flex items-center gap-[10px] md:gap-[30px]">
@@ -319,7 +319,7 @@ export default function Gnb({
                     alt=""
                     aria-hidden="true"
                     className="h-6 w-6 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
-                    src="/icons/global.svg"
+                    src="/assets/ui/icons/global.svg"
                   />
                 )}
               </button>
@@ -354,7 +354,7 @@ export default function Gnb({
                     alt=""
                     aria-hidden="true"
                     className="h-6 w-6 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
-                    src="/icons/global.svg"
+                    src="/assets/ui/icons/global.svg"
                   />
                 )}
               </button>
@@ -390,7 +390,7 @@ export default function Gnb({
                 alt=""
                 aria-hidden="true"
                 className="h-8 w-8 object-contain"
-                src={mobileMenuOpen ? "/icons/m-Close.svg" : "/icons/m-Menu.svg"}
+                src={mobileMenuOpen ? "/assets/ui/icons/m-Close.svg" : "/assets/ui/icons/m-Menu.svg"}
               />
             </button>
             <a className="hidden md:inline-flex" href="https://app.querypie.com/" rel="noreferrer noopener" target="_blank">

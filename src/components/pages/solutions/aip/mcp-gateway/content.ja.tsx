@@ -24,7 +24,7 @@ const featureItems = [
     ],
     imageAlt: "スマートエッジトンネリングプレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/mcp-gateway/aip_function_tunneling.gif",
+    imageSrc: "/assets/products/aip/mcp-gateway/aip_function_tunneling.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
@@ -34,7 +34,7 @@ const featureItems = [
     ],
     imageAlt: "MCPプロキシアクセスプレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/mcp-gateway/aip_function_mcpproxy.gif",
+    imageSrc: "/assets/products/aip/mcp-gateway/aip_function_mcpproxy.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
@@ -45,7 +45,7 @@ const featureItems = [
     ],
     imageAlt: "組織レベルMCP管理プレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/mcp-gateway/aip_function_mcpmanagement.gif",
+    imageSrc: "/assets/products/aip/mcp-gateway/aip_function_mcpmanagement.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
@@ -55,7 +55,7 @@ const featureItems = [
     ],
     imageAlt: "監査ログプレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/mcp-gateway/aip_function_audit.gif",
+    imageSrc: "/assets/products/aip/mcp-gateway/aip_function_audit.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
@@ -66,7 +66,7 @@ const featureItems = [
     ],
     imageAlt: "データ損失防止プレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/mcp-gateway/aip_function_dlp.gif",
+    imageSrc: "/assets/products/aip/mcp-gateway/aip_function_dlp.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
 ];
@@ -91,7 +91,7 @@ export default function McpGatewayJASolutionContent({ locale }: Props) {
         </section>
         <Hero
           imageAlt="MCP Gateway製品プレビュー"
-          imageSrc="/solutions/aip/mcp-gateway/mcp-gateway.png"
+          imageSrc="/assets/products/aip/mcp-gateway/mcp-gateway.png"
         />
       </div>
 

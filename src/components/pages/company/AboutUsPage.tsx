@@ -71,7 +71,7 @@ function TeamCard({ imageSrc, linkedinHref, name, role }: TeamMember) {
           <p className="m-0 type-body-md text-mute">{role}</p>
         </div>
         <span className="inline-flex h-6 w-6 opacity-30 transition-opacity group-hover:opacity-100">
-          <img alt="LinkedIn" className="h-6 w-6 object-contain" src="/icons/linkedin.svg" />
+          <img alt="LinkedIn" className="h-6 w-6 object-contain" src="/assets/brand/icons/linkedin.svg" />
         </span>
       </div>
       <div className="h-[88px] w-[88px] overflow-hidden rounded-thumb bg-bg-deep md:h-[100px] md:w-[100px]">
@@ -142,7 +142,7 @@ export default function AboutUsPage({
               <img
                 alt={companyImageAlt}
                 className="block h-full w-full object-contain"
-                src="/images/about-us/company-introduction.jpg"
+                src="/assets/pages/company/about-us/company-introduction.jpg"
               />
             </div>
           </div>

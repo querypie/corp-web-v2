@@ -255,8 +255,8 @@ describe("getDateIsoSortValue", () => {
 
 describe("getContentThumbnailSrc", () => {
   it("빈 이미지는 fallback 경로를 반환한다", () => {
-    expect(getContentThumbnailSrc("")).toBe("/images/common/fallback-contents.jpg");
-    expect(getContentThumbnailSrc("  ")).toBe("/images/common/fallback-contents.jpg");
+    expect(getContentThumbnailSrc("")).toBe("/assets/common/fallback-contents.jpg");
+    expect(getContentThumbnailSrc("  ")).toBe("/assets/common/fallback-contents.jpg");
   });
 
   it("/images/content/ 경로를 /uploads/ 로 변환한다", () => {

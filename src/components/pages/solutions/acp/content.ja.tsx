@@ -26,7 +26,7 @@ const featureItems = [
     ],
     imageAlt: "データベースアクセス制御プレビュー",
     title: ["DAC -", "Database Access Control"],
-    videoSrc: "/solutions/acp/acp-dac.mp4",
+    videoSrc: "/assets/products/acp/acp-dac.mp4",
   },
   {
     body: [
@@ -36,7 +36,7 @@ const featureItems = [
     imageAlt: "システムアクセス制御プレビュー",
     reverse: true,
     title: ["SAC -", "System Access Control"],
-    videoSrc: "/solutions/acp/acp-sac.mp4",
+    videoSrc: "/assets/products/acp/acp-sac.mp4",
   },
   {
     body: [
@@ -45,7 +45,7 @@ const featureItems = [
     ],
     imageAlt: "Kubernetesアクセス制御プレビュー",
     title: ["KAC -", "Kubernetes Access Control"],
-    videoSrc: "/solutions/acp/acp-kac.mp4",
+    videoSrc: "/assets/products/acp/acp-kac.mp4",
   },
   {
     body: [
@@ -55,7 +55,7 @@ const featureItems = [
     imageAlt: "Webアクセス制御プレビュー",
     reverse: true,
     title: ["WAC -", "Web Access Control"],
-    videoSrc: "/solutions/acp/acp-wac.mp4",
+    videoSrc: "/assets/products/acp/acp-wac.mp4",
   },
   {
     body: [
@@ -64,7 +64,7 @@ const featureItems = [
     ],
     imageAlt: "マネージドアクセス制御プレビュー",
     title: ["MAC -", "MCP Access Controller"],
-    videoSrc: "/solutions/acp/acp-mac.mp4",
+    videoSrc: "/assets/products/acp/acp-mac.mp4",
   },
 ];
 

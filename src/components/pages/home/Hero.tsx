@@ -40,7 +40,7 @@ export default function Hero({
                 <img
                   alt={imageAlt}
                   className="absolute inset-0 block h-full w-full object-cover"
-                  src="/images/home/hero/home-hero.png"
+                  src="/assets/pages/home/hero/home-hero.png"
                 />
               </div>
             </div>

@@ -38,7 +38,7 @@ export default function LegalVersionSelect({
           alt=""
           aria-hidden="true"
           className="pointer-events-none h-[14px] w-[14px] object-contain"
-          src="/icons/chevron-down.svg"
+          src="/assets/ui/icons/chevron-down.svg"
         />
       </div>
     );

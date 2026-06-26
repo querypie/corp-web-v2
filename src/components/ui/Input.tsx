@@ -59,7 +59,7 @@ export default function Input({
             alt=""
             aria-hidden="true"
             className="h-[14px] w-[14px] shrink-0 object-contain"
-            src="/icons/chevron-down.svg"
+            src="/assets/ui/icons/chevron-down.svg"
           />
         </>
       ) : (

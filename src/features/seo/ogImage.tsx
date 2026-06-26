@@ -24,9 +24,9 @@ type OgFontConfig = {
 };
 
 const ogFontConfigs = {
-  mona: { path: "/fonts/og/MonaSans-Regular.ttf", name: "Mona Sans" },
-  pretendard: { path: "/fonts/og/Pretendard-Regular.ttf", name: "Pretendard" },
-  mPlus1: { path: "/fonts/og/MPLUS1-Regular.ttf", name: "M PLUS 1" },
+  mona: { path: "/assets/fonts/og/MonaSans-Regular.ttf", name: "Mona Sans" },
+  pretendard: { path: "/assets/fonts/og/Pretendard-Regular.ttf", name: "Pretendard" },
+  mPlus1: { path: "/assets/fonts/og/MPLUS1-Regular.ttf", name: "M PLUS 1" },
 } as const;
 
 const fontDataCache = new Map<string, Promise<ArrayBuffer>>();
@@ -93,7 +93,7 @@ function getLocaleTextStyle(locale: Locale) {
 
 export async function createOgImage({ description, locale, origin, title }: OgImageProps) {
   const [backgroundImageUrl, fonts] = await Promise.all([
-    Promise.resolve(new URL("/og/base.png", origin).toString()),
+    Promise.resolve(new URL("/assets/og/base.png", origin).toString()),
     getOgFonts(origin, locale),
   ]);
   const textStyle = getLocaleTextStyle(locale);

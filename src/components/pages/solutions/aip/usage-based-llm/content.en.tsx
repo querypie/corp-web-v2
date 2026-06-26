@@ -25,7 +25,7 @@ const featureItems = [
     ],
     imageAlt: "Usage-based pricing preview",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/usage-based-llm/aip_function_pay.gif",
+    imageSrc: "/assets/products/aip/usage-based-llm/aip_function_pay.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
@@ -35,7 +35,7 @@ const featureItems = [
     ],
     imageAlt: "LLM model selector preview",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/usage-based-llm/aip_function_llmmodel.gif",
+    imageSrc: "/assets/products/aip/usage-based-llm/aip_function_llmmodel.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
@@ -46,7 +46,7 @@ const featureItems = [
     ],
     imageAlt: "SSO and central management preview",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/usage-based-llm/aip_function_sso.gif",
+    imageSrc: "/assets/products/aip/usage-based-llm/aip_function_sso.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
 ];
@@ -135,7 +135,7 @@ export default function UsageBasedLlmENSolutionContent({ locale }: Props) {
         </section>
         <Hero
           imageAlt="Usage-Based LLM product preview"
-          imageSrc="/solutions/aip/usage-based-llm/usage-based-llm.svg"
+          imageSrc="/assets/products/aip/usage-based-llm/usage-based-llm.svg"
         />
       </div>
 

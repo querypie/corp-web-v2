@@ -186,7 +186,7 @@ export function getContentThumbnailSrc(imageSrc: string) {
   const trimmedImageSrc = imageSrc.trim();
 
   if (!trimmedImageSrc) {
-    return "/images/common/fallback-contents.jpg";
+    return "/assets/common/fallback-contents.jpg";
   }
 
   if (trimmedImageSrc.startsWith("/images/content/")) {

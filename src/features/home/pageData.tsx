@@ -25,28 +25,28 @@ type McpIconSource = {
 };
 
 const mcpIconSources: readonly McpIconSource[] = [
-  { label: "Slack", src: "/solutions/aip/integration-icon/slack.svg" },
-  { label: "Discord", src: "/solutions/aip/integration-icon/discord.svg" },
+  { label: "Slack", src: "/assets/products/aip/integrations/slack.svg" },
+  { label: "Discord", src: "/assets/products/aip/integrations/discord.svg" },
   {
     className: "invert grayscale brightness-125",
     label: "GitHub",
-    src: "/solutions/aip/integration-icon/github.svg",
+    src: "/assets/products/aip/integrations/github.svg",
   },
-  { label: "Notion", src: "/solutions/aip/integration-icon/notion.svg" },
-  { label: "Confluence", src: "/solutions/aip/integration-icon/confluence.svg" },
-  { label: "Snowflake", src: "/solutions/aip/integration-icon/snowflake.svg" },
-  { label: "Google Calendar", src: "/solutions/aip/integration-icon/google-calendar.svg" },
-  { label: "Google Drive", src: "/solutions/aip/integration-icon/google-drive.svg" },
-  { label: "Gmail", src: "/solutions/aip/integration-icon/google-gmail.svg" },
-  { label: "Google Sheets", src: "/solutions/aip/integration-icon/google-sheets.svg" },
-  { label: "Microsoft 365", src: "/solutions/aip/integration-icon/microsoft-365.svg" },
-  { label: "Salesforce", src: "/solutions/aip/integration-icon/salesforce.svg" },
-  { label: "AWS", src: "/solutions/aip/integration-icon/aws.svg" },
-  { label: "Kubernetes", src: "/solutions/aip/integration-icon/kubernetes.svg" },
-  { label: "Datadog", src: "/solutions/aip/integration-icon/datadog.svg" },
-  { label: "PostgreSQL", src: "/solutions/aip/integration-icon/postgresql.svg" },
-  { label: "MySQL", src: "/solutions/aip/integration-icon/mysql.svg" },
-  { label: "Redis", src: "/solutions/aip/integration-icon/redis.svg" },
+  { label: "Notion", src: "/assets/products/aip/integrations/notion.svg" },
+  { label: "Confluence", src: "/assets/products/aip/integrations/confluence.svg" },
+  { label: "Snowflake", src: "/assets/products/aip/integrations/snowflake.svg" },
+  { label: "Google Calendar", src: "/assets/products/aip/integrations/google-calendar.svg" },
+  { label: "Google Drive", src: "/assets/products/aip/integrations/google-drive.svg" },
+  { label: "Gmail", src: "/assets/products/aip/integrations/google-gmail.svg" },
+  { label: "Google Sheets", src: "/assets/products/aip/integrations/google-sheets.svg" },
+  { label: "Microsoft 365", src: "/assets/products/aip/integrations/microsoft-365.svg" },
+  { label: "Salesforce", src: "/assets/products/aip/integrations/salesforce.svg" },
+  { label: "AWS", src: "/assets/products/aip/integrations/aws.svg" },
+  { label: "Kubernetes", src: "/assets/products/aip/integrations/kubernetes.svg" },
+  { label: "Datadog", src: "/assets/products/aip/integrations/datadog.svg" },
+  { label: "PostgreSQL", src: "/assets/products/aip/integrations/postgresql.svg" },
+  { label: "MySQL", src: "/assets/products/aip/integrations/mysql.svg" },
+  { label: "Redis", src: "/assets/products/aip/integrations/redis.svg" },
 ];
 
 const mcpItems = mcpIconSources.map(({ className, label, src }) => ({
@@ -183,9 +183,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "It is an economical AI innovation platform optimized for enterprise environments. It supports usage-based LLM deployment and MCP gateways, and Field Deployment Engineers (FDEs) provide customized AI agents to facilitate complete innovation.",
             ],
-            iconSrc: "/images/home/features/icon-aip.png",
+            iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP workspace preview",
-            imageSrc: "/images/home/features/feature-panel-a.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
             title: ["AIP - AI Platform"],
           },
           {
@@ -196,9 +196,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "It supports authorization, monitoring, and audit-ready governance by centralizing access control for databases, systems, Kubernetes, and web applications.",
             ],
-            iconSrc: "/images/home/features/icon-acp.png",
+            iconSrc: "/assets/pages/home/features/icon-acp.png",
             imageAlt: "Model selector preview",
-            imageSrc: "/images/home/features/feature-panel-b.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["ACP - Access Control Platform"],
           },
@@ -211,9 +211,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "As an AI-based real-time interpretation service, it supports real-time subtitling and translation in various environments, including in-person meetings as well as Google Meet, Zoom, Teams, and more.",
             ],
-            iconSrc: "/images/home/features/icon-lingo.png",
+            iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP workspace preview",
-            imageSrc: "/images/home/features/feature-panel-a.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
             title: ["Lingo"],
           },
           {
@@ -225,9 +225,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "Experience an innovative feature where AI directly learns from user-uploaded documents or web links and processes them into various forms of data.",
             ],
-            iconSrc: "/images/home/features/icon-notepie.png",
+            iconSrc: "/assets/pages/home/features/icon-notepie.png",
             imageAlt: "Model selector preview",
-            imageSrc: "/images/home/features/feature-panel-b.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["NotePie"],
           },
@@ -247,13 +247,13 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           {
             body: "It was night and day from one batch to another, adoption went from single digits to over 80%. It just spread like wildfire, all the best builders were using AIP.",
             company: "TerraSky",
-            imageSrc: "/images/home/reviews/reviewer-01.png",
+            imageSrc: "/assets/pages/home/reviews/reviewer-01.png",
             role: "General Partner, Y Combinator",
           },
           {
             body: "My favorite enterprise AI service is Cursor. Every one of our engineers, some 40,000, are now assisted by AI and our productivity has gone up incredibly.",
             company: "TerraSky",
-            imageSrc: "/images/home/reviews/reviewer-02.png",
+            imageSrc: "/assets/pages/home/reviews/reviewer-02.png",
             role: "General Partner, Y Combinator",
           },
         ],
@@ -261,17 +261,17 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         newsItems: [
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-            imageSrc: "/images/common/fallback-contents.jpg",
+            imageSrc: "/assets/common/fallback-contents.jpg",
             title: "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-            imageSrc: "/images/common/fallback-contents.jpg",
+            imageSrc: "/assets/common/fallback-contents.jpg",
             title: "Payroll Partners with QueryPie on AI Security Solutions",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-            imageSrc: "/images/common/fallback-contents.jpg",
+            imageSrc: "/assets/common/fallback-contents.jpg",
             title:
               "Security Solution Playing the Role of a “Door Lock” in the Cloud — Expanding to Japan and Europe",
           },
@@ -311,9 +311,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "엔터프라이즈 환경에 최적화된 경제적인 AI 혁신 플랫폼입니다. 사용량 기반 LLM 배포와 MCP 게이트웨이를 지원하며, Field Deployment Engineer(FDE)가 맞춤형 AI Agent를 제공해 완전한 혁신을 돕습니다.",
             ],
-            iconSrc: "/images/home/features/icon-aip.png",
+            iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP 워크스페이스 미리보기",
-            imageSrc: "/images/home/features/feature-panel-a.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
             title: ["AIP - AI Platform"],
           },
           {
@@ -324,9 +324,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "데이터베이스, 시스템, Kubernetes, 웹 애플리케이션의 접근 제어를 중앙화해 권한 관리, 모니터링, 감사 대응 거버넌스를 지원합니다.",
             ],
-            iconSrc: "/images/home/features/icon-acp.png",
+            iconSrc: "/assets/pages/home/features/icon-acp.png",
             imageAlt: "모델 셀렉터 미리보기",
-            imageSrc: "/images/home/features/feature-panel-b.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["ACP - Access Control Platform"],
           },
@@ -339,9 +339,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "AI 기반 실시간 통역 서비스로, 대면 회의는 물론 Google Meet, Zoom, Teams 등 다양한 환경에서 실시간 자막과 번역을 지원합니다.",
             ],
-            iconSrc: "/images/home/features/icon-lingo.png",
+            iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP 워크스페이스 미리보기",
-            imageSrc: "/images/home/features/feature-panel-a.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
             title: ["Lingo"],
           },
           {
@@ -353,9 +353,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "사용자가 업로드한 문서나 웹 링크를 AI가 직접 학습하고, 다양한 형태의 데이터로 가공하는 혁신적인 기능을 경험할 수 있습니다.",
             ],
-            iconSrc: "/images/home/features/icon-notepie.png",
+            iconSrc: "/assets/pages/home/features/icon-notepie.png",
             imageAlt: "모델 셀렉터 미리보기",
-            imageSrc: "/images/home/features/feature-panel-b.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["NotePie"],
           },
@@ -375,13 +375,13 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           {
             body: "배치가 한 번 바뀌자 도입률이 한 자릿수에서 80% 이상으로 뛰었습니다. 최고의 빌더들이 AIP를 쓰기 시작하면서 순식간에 퍼졌습니다.",
             company: "TerraSky",
-            imageSrc: "/images/home/reviews/reviewer-01.png",
+            imageSrc: "/assets/pages/home/reviews/reviewer-01.png",
             role: "General Partner, Y Combinator",
           },
           {
             body: "제가 가장 좋아하는 엔터프라이즈 AI 서비스는 Cursor입니다. 수만 명의 엔지니어가 AI의 도움을 받고 있고 생산성이 믿기지 않을 정도로 높아졌습니다.",
             company: "TerraSky",
-            imageSrc: "/images/home/reviews/reviewer-02.png",
+            imageSrc: "/assets/pages/home/reviews/reviewer-02.png",
             role: "General Partner, Y Combinator",
           },
         ],
@@ -389,17 +389,17 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         newsItems: [
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-            imageSrc: "/images/common/fallback-contents.jpg",
+            imageSrc: "/assets/common/fallback-contents.jpg",
             title: "TerraSky의 MCP 호환 AI 플랫폼 ‘mitoco Buddy’ 공식 출시",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-            imageSrc: "/images/common/fallback-contents.jpg",
+            imageSrc: "/assets/common/fallback-contents.jpg",
             title: "Payroll, QueryPie와 AI 보안 솔루션 협력",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-            imageSrc: "/images/common/fallback-contents.jpg",
+            imageSrc: "/assets/common/fallback-contents.jpg",
             title:
               "클라우드의 ‘도어락’ 역할을 하는 보안 솔루션 — 일본과 유럽으로 확장",
           },
@@ -439,9 +439,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "エンタープライズ環境に最適化された、経済的なAIイノベーションプラットフォームです。使用量ベースのLLMデプロイとMCP Gatewayをサポートし、Field Deployment Engineer(FDE)がカスタムAI Agentを提供して包括的な革新を支援します。",
             ],
-            iconSrc: "/images/home/features/icon-aip.png",
+            iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP ワークスペースプレビュー",
-            imageSrc: "/images/home/features/feature-panel-a.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
             title: ["AIP - AI Platform"],
           },
           {
@@ -452,9 +452,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "データベース、システム、Kubernetes、Webアプリケーションのアクセス制御を一元化し、認可、モニタリング、監査対応のガバナンスを支援します。",
             ],
-            iconSrc: "/images/home/features/icon-acp.png",
+            iconSrc: "/assets/pages/home/features/icon-acp.png",
             imageAlt: "モデルセレクタープレビュー",
-            imageSrc: "/images/home/features/feature-panel-b.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["ACP - Access Control Platform"],
           },
@@ -467,9 +467,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "AIベースのリアルタイム通訳サービスとして、対面会議に加え、Google Meet、Zoom、Teamsなど多様な環境でリアルタイム字幕と翻訳をサポートします。",
             ],
-            iconSrc: "/images/home/features/icon-lingo.png",
+            iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP ワークスペースプレビュー",
-            imageSrc: "/images/home/features/feature-panel-a.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
             title: ["Lingo"],
           },
           {
@@ -481,9 +481,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "ユーザーがアップロードしたドキュメントやWebリンクをAIが直接学習し、さまざまな形式のデータへ加工する革新的な機能を体験できます。",
             ],
-            iconSrc: "/images/home/features/icon-notepie.png",
+            iconSrc: "/assets/pages/home/features/icon-notepie.png",
             imageAlt: "モデルセレクタープレビュー",
-            imageSrc: "/images/home/features/feature-panel-b.png",
+            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["NotePie"],
           },
@@ -503,13 +503,13 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           {
             body: "バッチを切り替えた瞬間、導入率は一桁台から80%以上に跳ね上がりました。AIPは優れたビルダーの間で一気に広がりました。",
             company: "TerraSky",
-            imageSrc: "/images/home/reviews/reviewer-01.png",
+            imageSrc: "/assets/pages/home/reviews/reviewer-01.png",
             role: "General Partner, Y Combinator",
           },
           {
             body: "私のお気に入りのエンタープライズAIサービスはCursorです。何万人ものエンジニアがAIに支援され、生産性が驚くほど向上しました。",
             company: "TerraSky",
-            imageSrc: "/images/home/reviews/reviewer-02.png",
+            imageSrc: "/assets/pages/home/reviews/reviewer-02.png",
             role: "General Partner, Y Combinator",
           },
         ],
@@ -517,17 +517,17 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         newsItems: [
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-            imageSrc: "/images/common/fallback-contents.jpg",
+            imageSrc: "/assets/common/fallback-contents.jpg",
             title: "TerraSky の MCP 対応 AI プラットフォーム『mitoco Buddy』が正式リリース",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-            imageSrc: "/images/common/fallback-contents.jpg",
+            imageSrc: "/assets/common/fallback-contents.jpg",
             title: "Payroll が QueryPie と AI セキュリティソリューションで提携",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
-            imageSrc: "/images/common/fallback-contents.jpg",
+            imageSrc: "/assets/common/fallback-contents.jpg",
             title:
               "クラウドの“ドアロック”として機能するセキュリティソリューション — 日本とヨーロッパへ拡大",
           },

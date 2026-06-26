@@ -25,7 +25,7 @@ const featureItems = [
     ],
     imageAlt: "使用量ベース料金プレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/usage-based-llm/aip_function_pay.gif",
+    imageSrc: "/assets/products/aip/usage-based-llm/aip_function_pay.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
@@ -35,7 +35,7 @@ const featureItems = [
     ],
     imageAlt: "LLMモデル選択プレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/usage-based-llm/aip_function_llmmodel.gif",
+    imageSrc: "/assets/products/aip/usage-based-llm/aip_function_llmmodel.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
@@ -46,7 +46,7 @@ const featureItems = [
     ],
     imageAlt: "SSOと一元管理プレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/usage-based-llm/aip_function_sso.gif",
+    imageSrc: "/assets/products/aip/usage-based-llm/aip_function_sso.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
 ];
@@ -131,7 +131,7 @@ export default function UsageBasedLlmJASolutionContent({ locale }: Props) {
         </section>
         <Hero
           imageAlt="使用量ベースLLM製品プレビュー"
-          imageSrc="/solutions/aip/usage-based-llm/usage-based-llm.svg"
+          imageSrc="/assets/products/aip/usage-based-llm/usage-based-llm.svg"
         />
       </div>
 

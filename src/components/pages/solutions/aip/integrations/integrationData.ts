@@ -79,7 +79,7 @@ export const integrationCategoryLabels: Record<Locale, Record<IntegrationCategor
   },
 };
 
-const iconBasePath = "/solutions/aip/integration-icon";
+const iconBasePath = "/assets/products/aip/integrations";
 
 export const integrationItems: IntegrationItem[] = [
   { name: "AirTable", icon: `${iconBasePath}/airtable.svg`, categories: ["database-connections"] },

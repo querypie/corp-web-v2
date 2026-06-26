@@ -35,7 +35,7 @@ export default async function DemoDownloadRoute({ params }: DemoDownloadRoutePro
       attachmentUrl={currentEntry.downloadPdfSrc}
       contactCopy={getContactPageCopy(locale)}
       contentId={currentEntry.id}
-      coverImageSrc={currentEntry.downloadCoverImageSrc || currentEntry.imageSrc || "/images/common/fallback-contents.jpg"}
+      coverImageSrc={currentEntry.downloadCoverImageSrc || currentEntry.imageSrc || "/assets/common/fallback-contents.jpg"}
       locale={locale}
       pdfPreviewUrl={currentEntry.downloadPdfSrc}
       returnUrl={getLocalePath(locale, `/features/demo/${resolvedSlug}`)}
