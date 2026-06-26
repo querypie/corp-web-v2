@@ -36,6 +36,18 @@ const socialLinks = [
     label: "X",
     src: "/assets/brand/icons/x.svg",
   },
+  {
+    className: "h-7 w-7",
+    href: "https://www.facebook.com/querypie",
+    label: "Facebook",
+    src: "/assets/brand/icons/Facebook.svg",
+  },
+  {
+    className: "h-7 w-7",
+    href: "https://www.instagram.com/querypie.ai",
+    label: "Instagram",
+    src: "/assets/brand/icons/Instagram.svg",
+  },
 ] as const;
 
 export default function Footer({
@@ -168,6 +180,8 @@ export default function Footer({
                     aria-label={link.label}
                     className="inline-flex h-7 w-7 items-center justify-center opacity-100 transition-opacity hover:opacity-50"
                     href={link.href}
+                    rel={link.href.startsWith("http") ? "noreferrer noopener" : undefined}
+                    target={link.href.startsWith("http") ? "_blank" : undefined}
                   >
                     <img
                       alt=""
