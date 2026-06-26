@@ -22,16 +22,16 @@
   --radius-full: 9999px;
 
   /* 공통 컬러: 전역 fg/bg/border 및 상태 색상 */
-  --color-fg: #F2F2F2;
+  --color-fg: #EEEEEE;
   --color-mute: #909090;
   --color-placeholder: #505050;
-  --color-bg-content: #242424;
-  --color-bg-deep: #1F1F1F;
-  --color-bg: #121212;
-  --color-bg-modal: #121212;
+  --color-bg-content: #202020;
+  --color-bg-deep: #1E1E1E;
+  --color-bg: #0F0F0F;
+  --color-bg-modal: #0F0F0F;
   --color-overlay-rgb: 8 9 10;
-  --color-border: #2E2E2E;
-  --color-primary: #FFFFFF;
+  --color-border: #2B2B2B;
+  --color-primary: #EEEEEE;
   --color-secondary: #2E2E2E;
   --color-bg-gnb-popover-rgb: 36 36 36;
   --color-white: #FFFFFF;
@@ -259,7 +259,7 @@ textarea:-webkit-autofill:focus {
   }
 
   .card-hover:focus-visible {
-    background-color: #303030;
+    background-color: #2C2C2C;
   }
 
   /* 퍼블릭 컨텐츠 카드 제목 공통 스타일:
@@ -292,7 +292,7 @@ textarea:-webkit-autofill:focus {
   /* 마우스가 있는 환경에서만 hover 반응을 강하게 준다. */
   @media (hover: hover) and (pointer: fine) {
     .card-hover:hover {
-      background-color: #303030;
+      background-color: #2C2C2C;
     }
 
     .group:hover .card-media-motion {

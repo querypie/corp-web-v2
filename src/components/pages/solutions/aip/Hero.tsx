@@ -9,7 +9,7 @@ export default function Hero({
 }: HeroProps) {
   return (
     <section className="flex w-full justify-center">
-      <div className="flex w-full max-w-[1200px] justify-center overflow-hidden rounded-box bg-bg-deep py-10">
+      <div className="flex w-full max-w-[1200px] justify-center overflow-hidden rounded-box bg-bg-content py-10">
         <img
           alt={imageAlt}
           className="block h-auto w-full max-w-[1054px] object-contain"

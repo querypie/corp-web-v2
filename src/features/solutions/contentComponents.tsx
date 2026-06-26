@@ -292,7 +292,7 @@ export function buildSolutionContentComponents({
             <ul className="flex flex-col gap-3">
               {checkList.map((item) => (
                 <li key={item} className="flex items-start gap-3 text-base leading-7 text-[#4b5563]">
-                  <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#111827] text-xs text-white">
+                  <span className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full bg-[#111827] text-xs text-fg">
                     ✓
                   </span>
                   <span>{item}</span>
@@ -344,11 +344,11 @@ export function buildSolutionContentComponents({
       }>;
       title: string;
     }) => (
-      <section className="bg-[#111827] text-white">
+      <section className="bg-[#111827] text-fg">
         <div className="mx-auto flex max-w-[1200px] flex-col gap-10 px-6 py-16 md:px-10 md:py-20">
           <div className="flex max-w-3xl flex-col gap-4">
             <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">{renderWithLineBreaks(title)}</h2>
-            <p className="text-base leading-7 text-white/75">{renderWithLineBreaks(description)}</p>
+            <p className="text-base leading-7 text-fg">{renderWithLineBreaks(description)}</p>
           </div>
           <ul className="grid grid-cols-1 gap-6 lg:grid-cols-3">
             {items.map((item) => (
@@ -357,16 +357,16 @@ export function buildSolutionContentComponents({
                 <div className="flex flex-1 flex-col gap-4">
                   <h3 className="text-2xl font-semibold tracking-tight">{renderWithLineBreaks(item.title)}</h3>
                   {item.subTitle ? (
-                    <span className="inline-flex w-fit rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white/80">
+                    <span className="inline-flex w-fit rounded-full bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-fg">
                       {renderWithLineBreaks(item.subTitle)}
                     </span>
                   ) : null}
-                  <p className="text-sm leading-7 text-white/75">{renderWithLineBreaks(item.description)}</p>
+                  <p className="text-sm leading-7 text-fg">{renderWithLineBreaks(item.description)}</p>
                 </div>
                 {item.learnMoreButton ? (
                   <a
                     href={resolveHref(locale, item.learnMoreButton.href)}
-                    className="inline-flex w-fit items-center text-sm font-semibold text-white hover:text-white/80"
+                    className="inline-flex w-fit items-center text-sm font-semibold text-fg hover:text-fg"
                     {...maybeOpenInNewTab(item.learnMoreButton.href, item.learnMoreButton.external)}
                   >
                     {item.learnMoreButton.label}
@@ -406,7 +406,7 @@ export function buildSolutionContentComponents({
                 className={joinClasses(
                   "inline-flex rounded-full border px-4 py-2 text-sm font-medium transition-colors",
                   currentCategory === "all"
-                    ? "border-[#111827] bg-[#111827] text-white"
+                    ? "border-[#111827] bg-[#111827] text-fg"
                     : "border-black/10 bg-white text-[#111827] hover:border-black/20 hover:bg-black/[0.03]",
                 )}
               >
@@ -422,7 +422,7 @@ export function buildSolutionContentComponents({
                     className={joinClasses(
                       "inline-flex rounded-full border px-4 py-2 text-sm font-medium transition-colors",
                       currentCategory === category.id
-                        ? "border-[#111827] bg-[#111827] text-white"
+                        ? "border-[#111827] bg-[#111827] text-fg"
                         : "border-black/10 bg-white text-[#111827] hover:border-black/20 hover:bg-black/[0.03]",
                     )}
                   >
@@ -469,7 +469,7 @@ export function buildSolutionContentComponents({
     ),
 
     DarkBadge: ({ children }: { children?: ReactNode }) => (
-      <span className="inline-flex rounded-full bg-[#111827] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+      <span className="inline-flex rounded-full bg-[#111827] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-fg">
         {children}
       </span>
     ),
