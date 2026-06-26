@@ -61,6 +61,8 @@ const mcpItems = mcpIconSources.map(({ className, label, src }) => ({
   label,
 }));
 
+const homeFeatureVideoHeightClassName = "md:h-[600px]";
+
 export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
   const publishedItems = await readContentState(undefined, { includeBodies: false });
     const visiblePublishedItems = publishedItems.filter((item) =>
@@ -185,7 +187,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP workspace preview",
-            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-AIP.mp4",
             title: ["AIP - AI Platform"],
           },
           {
@@ -196,11 +199,13 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "It supports authorization, monitoring, and audit-ready governance by centralizing access control for databases, systems, Kubernetes, and web applications.",
             ],
+            desktopTitle: ["ACP -", "Access Control Platform"],
             iconSrc: "/assets/pages/home/features/icon-acp.png",
             imageAlt: "Model selector preview",
-            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["ACP - Access Control Platform"],
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-ACP.mp4",
           },
           {
             action: {
@@ -213,7 +218,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP workspace preview",
-            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
             title: ["Lingo"],
           },
           {
@@ -227,9 +233,10 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-notepie.png",
             imageAlt: "Model selector preview",
-            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["NotePie"],
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-NotePie.mp4",
           },
         ],
         mcpDescription: [
@@ -313,7 +320,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP 워크스페이스 미리보기",
-            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-AIP.mp4",
             title: ["AIP - AI Platform"],
           },
           {
@@ -324,11 +332,13 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "데이터베이스, 시스템, Kubernetes, 웹 애플리케이션의 접근 제어를 중앙화해 권한 관리, 모니터링, 감사 대응 거버넌스를 지원합니다.",
             ],
+            desktopTitle: ["ACP -", "Access Control Platform"],
             iconSrc: "/assets/pages/home/features/icon-acp.png",
             imageAlt: "모델 셀렉터 미리보기",
-            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["ACP - Access Control Platform"],
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-ACP.mp4",
           },
           {
             action: {
@@ -341,7 +351,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP 워크스페이스 미리보기",
-            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
             title: ["Lingo"],
           },
           {
@@ -355,9 +366,10 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-notepie.png",
             imageAlt: "모델 셀렉터 미리보기",
-            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["NotePie"],
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-NotePie.mp4",
           },
         ],
         mcpDescription: [
@@ -441,7 +453,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP ワークスペースプレビュー",
-            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-AIP.mp4",
             title: ["AIP - AI Platform"],
           },
           {
@@ -452,11 +465,13 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "データベース、システム、Kubernetes、Webアプリケーションのアクセス制御を一元化し、認可、モニタリング、監査対応のガバナンスを支援します。",
             ],
+            desktopTitle: ["ACP -", "Access Control Platform"],
             iconSrc: "/assets/pages/home/features/icon-acp.png",
             imageAlt: "モデルセレクタープレビュー",
-            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["ACP - Access Control Platform"],
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-ACP.mp4",
           },
           {
             action: {
@@ -469,7 +484,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP ワークスペースプレビュー",
-            imageSrc: "/assets/pages/home/features/feature-panel-a.png",
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
             title: ["Lingo"],
           },
           {
@@ -483,9 +499,10 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-notepie.png",
             imageAlt: "モデルセレクタープレビュー",
-            imageSrc: "/assets/pages/home/features/feature-panel-b.png",
             reverse: true,
             title: ["NotePie"],
+            videoHeightClassName: homeFeatureVideoHeightClassName,
+            videoSrc: "/assets/pages/home/features/Home-NotePie.mp4",
           },
         ],
         mcpDescription: [

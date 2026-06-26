@@ -17,11 +17,14 @@ type FeatureItem = {
     label: string;
   };
   body: string[];
+  desktopTitle?: string[];
   iconSrc?: string;
   imageAlt: string;
-  imageSrc: string;
+  imageSrc?: string;
   reverse?: boolean;
   title: string[];
+  videoHeightClassName?: string;
+  videoSrc?: string;
 };
 
 type McpItem = {
