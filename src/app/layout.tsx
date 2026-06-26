@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import { siteTitle, siteUrl } from "@/constants/site";
 import "../styles/globals.css";
 
@@ -50,7 +51,10 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html className={`${jetBrainsMono.variable} ${monaSans.variable} ${pretendard.variable} ${mPlus1.variable}`} lang="en">
-      <body className="bg-bg">{children}</body>
+      <body className="bg-bg">
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }
