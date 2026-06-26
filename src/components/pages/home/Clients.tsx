@@ -4,14 +4,14 @@ type ClientsProps = {
 };
 
 const clientLogos = [
-  { alt: "Client logo 01", className: "h-8 md:h-10", height: 80, src: "/images/home/clients/01.png", width: 326 },
-  { alt: "Client logo 02", className: "h-8 md:h-10", height: 80, src: "/images/home/clients/02.png", width: 150 },
-  { alt: "Client logo 03", className: "h-8 md:h-10", height: 80, src: "/images/home/clients/03.png", width: 182 },
-  { alt: "Client logo 04", className: "h-8 md:h-10", height: 80, src: "/images/home/clients/04.png", width: 202 },
-  { alt: "Client logo 05", className: "h-8 md:h-10", height: 80, src: "/images/home/clients/05.png", width: 156 },
-  { alt: "Client logo 06", className: "h-8 md:h-10", height: 80, src: "/images/home/clients/06.png", width: 136 },
-  { alt: "Client logo 07", className: "h-8 md:h-10", height: 80, src: "/images/home/clients/07.png", width: 130 },
-  { alt: "Client logo 08", className: "h-8 md:h-10", height: 80, src: "/images/home/clients/08.png", width: 210 },
+  { alt: "Client logo 01", className: "h-8 md:h-10", height: 80, src: "/assets/pages/home/clients/01.png", width: 326 },
+  { alt: "Client logo 02", className: "h-8 md:h-10", height: 80, src: "/assets/pages/home/clients/02.png", width: 150 },
+  { alt: "Client logo 03", className: "h-8 md:h-10", height: 80, src: "/assets/pages/home/clients/03.png", width: 182 },
+  { alt: "Client logo 04", className: "h-8 md:h-10", height: 80, src: "/assets/pages/home/clients/04.png", width: 202 },
+  { alt: "Client logo 05", className: "h-8 md:h-10", height: 80, src: "/assets/pages/home/clients/05.png", width: 156 },
+  { alt: "Client logo 06", className: "h-8 md:h-10", height: 80, src: "/assets/pages/home/clients/06.png", width: 136 },
+  { alt: "Client logo 07", className: "h-8 md:h-10", height: 80, src: "/assets/pages/home/clients/07.png", width: 130 },
+  { alt: "Client logo 08", className: "h-8 md:h-10", height: 80, src: "/assets/pages/home/clients/08.png", width: 210 },
 ] as const;
 
 function cx(...values: Array<string | false | null | undefined>) {

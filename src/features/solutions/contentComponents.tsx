@@ -383,11 +383,13 @@ export function buildSolutionContentComponents({
       allLabel,
       basePath,
       categories,
+      iconBasePath,
       products,
     }: {
       allLabel: string;
       basePath?: string;
       categories: Array<{ id: string; label: string }>;
+      iconBasePath: string;
       products: Array<{ categoryIds: string[]; label: string; svgFilename: string }>;
     }) => {
       const resolvedBasePath = resolveHref(locale, basePath ?? "/") ?? "/";
@@ -435,7 +437,7 @@ export function buildSolutionContentComponents({
               <li key={product.label} className="flex min-h-[148px] flex-col items-center justify-center gap-4 rounded-3xl border border-black/10 bg-white px-5 py-6 text-center shadow-sm">
                 <img
                   alt={product.label}
-                  src={`/integration-icon/${product.svgFilename}.svg`}
+                  src={`${iconBasePath}/${product.svgFilename}.svg`}
                   className="h-16 w-16 object-contain"
                 />
                 <span className="text-sm font-medium leading-6 text-[#111827]">{product.label}</span>

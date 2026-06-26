@@ -48,7 +48,7 @@ export default function AdminSidebar({
             className="absolute left-1/2 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100"
             style={{ top: `${hoverY}px` }}
           >
-            <img alt="" aria-hidden="true" className="h-4 w-4 object-contain" src="/icons/arrow-right.svg" />
+            <img alt="" aria-hidden="true" className="h-4 w-4 object-contain" src="/assets/ui/icons/arrow-right.svg" />
           </span>
         </button>
       ) : null}
@@ -77,7 +77,7 @@ export default function AdminSidebar({
               "h-5 w-5 object-contain transition-opacity duration-200",
               isCollapsed ? "opacity-100 group-hover:opacity-0" : "opacity-100",
             )}
-            src="/icons/querypie-symbol.svg"
+            src="/assets/brand/logos/querypie-symbol.svg"
           />
           {isCollapsed ? null : (
             <div className="type-h3 text-fg">CMS</div>
@@ -93,7 +93,7 @@ export default function AdminSidebar({
           onClick={onToggleCollapse}
           type="button"
         >
-          <img alt="" aria-hidden="true" className="h-4 w-4 object-contain" src="/icons/panel-left.svg" />
+          <img alt="" aria-hidden="true" className="h-4 w-4 object-contain" src="/assets/ui/icons/panel-left.svg" />
         </button>
       </div>
 

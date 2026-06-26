@@ -50,10 +50,9 @@ export default function DocsDetailPage({
   heroImageSrc,
   parentLabel = "Documentation",
   shareLinks = [
-    { href: "/", iconSrc: "/icons/linkedin.svg", label: "LinkedIn" },
-    { href: "/", iconSrc: "/icons/x.svg", label: "X" },
-    { href: "/", iconSrc: "/icons/Facebook.svg", label: "Facebook" },
-    { href: "/", iconSrc: "/icons/URL.svg", label: "Copy URL" },
+    { href: "/", iconSrc: "/assets/brand/icons/linkedin.svg", label: "LinkedIn" },
+    { href: "/", iconSrc: "/assets/brand/icons/x.svg", label: "X" },
+    { href: "/", iconSrc: "/assets/ui/icons/URL.svg", label: "Copy URL" },
   ],
   showSidebarNav = true,
   title,

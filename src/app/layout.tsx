@@ -12,7 +12,7 @@ const jetBrainsMono = JetBrains_Mono({
 });
 
 const monaSans = localFont({
-  src: "../../public/fonts/MonaSansVF.woff2",
+  src: "../../public/assets/fonts/MonaSansVF.woff2",
   display: "swap",
   variable: "--font-mona-sans",
   weight: "200 900",
@@ -20,7 +20,7 @@ const monaSans = localFont({
 });
 
 const pretendard = localFont({
-  src: "../../public/fonts/PretendardVariable.woff2",
+  src: "../../public/assets/fonts/PretendardVariable.woff2",
   display: "swap",
   variable: "--font-pretendard",
   weight: "45 920",
@@ -29,7 +29,7 @@ const pretendard = localFont({
 });
 
 const mPlus1 = localFont({
-  src: "../../public/fonts/MPLUS1-Regular.woff2",
+  src: "../../public/assets/fonts/MPLUS1-Regular.woff2",
   display: "swap",
   variable: "--font-m-plus-1",
   weight: "400",

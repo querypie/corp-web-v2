@@ -64,7 +64,7 @@ export default function IntegrationSection({ locale }: IntegrationSectionProps) 
             alt={content.imageAlt}
             className="block h-full w-full object-contain"
             height="410"
-            src="/solutions/acp/acp-integration.png"
+            src="/assets/products/acp/acp-integration.png"
             width="430"
           />
         </div>

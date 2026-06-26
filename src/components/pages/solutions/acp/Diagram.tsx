@@ -4,7 +4,7 @@ import type { Locale } from "@/constants/i18n";
 import { useEffect, useRef, useState } from "react";
 import styles from "./Diagram.module.css";
 
-const assetBase = "/solutions/acp/Diagram";
+const assetBase = "/assets/products/acp/diagram";
 const diagramWidth = 1080;
 const diagramHeight = 480;
 

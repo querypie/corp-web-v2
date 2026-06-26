@@ -26,7 +26,7 @@ const featureItems = [
     ],
     imageAlt: "Database access control preview",
     title: ["DAC -", "Database Access Control"],
-    videoSrc: "/solutions/acp/acp-dac.mp4",
+    videoSrc: "/assets/products/acp/acp-dac.mp4",
   },
   {
     body: [
@@ -36,7 +36,7 @@ const featureItems = [
     imageAlt: "System access control preview",
     reverse: true,
     title: ["SAC -", "System Access Control"],
-    videoSrc: "/solutions/acp/acp-sac.mp4",
+    videoSrc: "/assets/products/acp/acp-sac.mp4",
   },
   {
     body: [
@@ -45,7 +45,7 @@ const featureItems = [
     ],
     imageAlt: "Kubernetes access control preview",
     title: ["KAC -", "Kubernetes Access Control"],
-    videoSrc: "/solutions/acp/acp-kac.mp4",
+    videoSrc: "/assets/products/acp/acp-kac.mp4",
   },
   {
     body: [
@@ -55,7 +55,7 @@ const featureItems = [
     imageAlt: "Web access control preview",
     reverse: true,
     title: ["WAC -", "Web Access Control"],
-    videoSrc: "/solutions/acp/acp-wac.mp4",
+    videoSrc: "/assets/products/acp/acp-wac.mp4",
   },
   {
     body: [
@@ -64,7 +64,7 @@ const featureItems = [
     ],
     imageAlt: "Managed access control preview",
     title: ["MAC -", "MCP Access Controller"],
-    videoSrc: "/solutions/acp/acp-mac.mp4",
+    videoSrc: "/assets/products/acp/acp-mac.mp4",
   },
 ];
 

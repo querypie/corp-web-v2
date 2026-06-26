@@ -69,7 +69,7 @@ export const integrationCategoryLabels: Record<Locale, Record<IntegrationCategor
   },
 };
 
-const iconBasePath = "/solutions/acp/integration-icon";
+const iconBasePath = "/assets/products/acp/integrations";
 
 export const integrationItems: IntegrationItem[] = [
   { name: "Agit", icon: `${iconBasePath}/agit.svg`, categories: ["notification"] },

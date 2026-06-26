@@ -25,7 +25,7 @@ function getFeatureItems(locale: Locale) {
       ],
       imageAlt: "프롬프트 자동 생성",
       imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-      imageSrc: "/solutions/aip/aip_function_prompt.gif",
+      imageSrc: "/assets/products/aip/aip_function_prompt.gif",
       mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
       title: ["프롬프트 자동 생성"],
     },
@@ -40,7 +40,7 @@ function getFeatureItems(locale: Locale) {
       ],
       imageAlt: "간편한 연동",
       imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-      imageSrc: "/solutions/aip/aip_function_integration.gif",
+      imageSrc: "/assets/products/aip/aip_function_integration.gif",
       mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
       reverse: true,
       title: ["간편한 연동"],
@@ -52,7 +52,7 @@ function getFeatureItems(locale: Locale) {
       ],
       imageAlt: "맥락 기반 지식 번들",
       imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-      imageSrc: "/solutions/aip/aip_function_knowledge.gif",
+      imageSrc: "/assets/products/aip/aip_function_knowledge.gif",
       mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
       title: ["맥락 기반 지식 번들"],
     },
@@ -62,7 +62,7 @@ function getFeatureItems(locale: Locale) {
       ],
       imageAlt: "맞춤형 에이전트 생성",
       imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-      imageSrc: "/solutions/aip/aip_function_createagent.gif",
+      imageSrc: "/assets/products/aip/aip_function_createagent.gif",
       mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
       reverse: true,
       title: ["맞춤형 에이전트 생성"],
@@ -74,7 +74,7 @@ function getFeatureItems(locale: Locale) {
       ],
       imageAlt: "Artifact 시각화",
       imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-      imageSrc: "/solutions/aip/aip_function_visualization.gif",
+      imageSrc: "/assets/products/aip/aip_function_visualization.gif",
       mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
       title: ["Artifact 시각화"],
     },
@@ -85,7 +85,7 @@ function getFeatureItems(locale: Locale) {
       ],
       imageAlt: "에이전트 스케줄링",
       imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-      imageSrc: "/solutions/aip/aip_function_schedule.gif",
+      imageSrc: "/assets/products/aip/aip_function_schedule.gif",
       mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
       reverse: true,
       title: ["에이전트 스케줄링"],
@@ -117,9 +117,9 @@ export default function AipKOSolutionContent({ locale }: Props) {
           <section className="flex w-full justify-center">
             <YoutubePreviewPlayer
               thumbnailAlt="QueryPie AI Platform video thumbnail"
-              thumbnailSrc="/solutions/aip/aip-cover.jpg"
+              thumbnailSrc="/assets/products/aip/aip-cover.jpg"
               title="QueryPie AI Platform video"
-              videoSrc="/solutions/aip/QueryPie%20AIP%20-%20Secure%20Enterprise%20Agentic%20AI%20Platform.mp4"
+              videoSrc="/assets/products/aip/QueryPie%20AIP%20-%20Secure%20Enterprise%20Agentic%20AI%20Platform.mp4"
             />
           </section>
         </div>

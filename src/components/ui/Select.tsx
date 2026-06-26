@@ -64,7 +64,7 @@ export default function Select({
         alt=""
         aria-hidden="true"
         className="pointer-events-none absolute right-3 top-1/2 h-[14px] w-[14px] -translate-y-1/2 object-contain"
-        src="/icons/chevron-down.svg"
+        src="/assets/ui/icons/chevron-down.svg"
       />
     </div>
   );

@@ -24,7 +24,7 @@ const featureItems = [
     ],
     imageAlt: "AI 전환 문제 발굴 미리보기",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/fde-services/find-problems.webp",
+    imageSrc: "/assets/products/aip/fde-services/find-problems.webp",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
@@ -34,7 +34,7 @@ const featureItems = [
     ],
     imageAlt: "AI 전환 계획 미리보기",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/fde-services/make-plans.webp",
+    imageSrc: "/assets/products/aip/fde-services/make-plans.webp",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
@@ -45,7 +45,7 @@ const featureItems = [
     ],
     imageAlt: "맞춤형 AI 에이전트 구축 미리보기",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/fde-services/build-custom-ai-agents.webp",
+    imageSrc: "/assets/products/aip/fde-services/build-custom-ai-agents.webp",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
@@ -55,7 +55,7 @@ const featureItems = [
     ],
     imageAlt: "프로덕션 AI 운영 미리보기",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/fde-services/make-ai-work.webp",
+    imageSrc: "/assets/products/aip/fde-services/make-ai-work.webp",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
@@ -81,7 +81,7 @@ export default function FdeServicesKOSolutionContent({ locale }: Props) {
         </section>
         <Hero
           imageAlt="FDE Services 제품 미리보기"
-          imageSrc="/solutions/aip/fde-services/fde.svg"
+          imageSrc="/assets/products/aip/fde-services/fde.svg"
         />
       </div>
 

@@ -24,7 +24,7 @@ const featureItems = [
     ],
     imageAlt: "Smart edge tunneling preview",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/mcp-gateway/aip_function_tunneling.gif",
+    imageSrc: "/assets/products/aip/mcp-gateway/aip_function_tunneling.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
@@ -34,7 +34,7 @@ const featureItems = [
     ],
     imageAlt: "MCP proxy access preview",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/mcp-gateway/aip_function_mcpproxy.gif",
+    imageSrc: "/assets/products/aip/mcp-gateway/aip_function_mcpproxy.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
@@ -45,7 +45,7 @@ const featureItems = [
     ],
     imageAlt: "Organization-level MCP management preview",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/mcp-gateway/aip_function_mcpmanagement.gif",
+    imageSrc: "/assets/products/aip/mcp-gateway/aip_function_mcpmanagement.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
@@ -55,7 +55,7 @@ const featureItems = [
     ],
     imageAlt: "Audit logging preview",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/mcp-gateway/aip_function_audit.gif",
+    imageSrc: "/assets/products/aip/mcp-gateway/aip_function_audit.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
@@ -66,7 +66,7 @@ const featureItems = [
     ],
     imageAlt: "Data loss prevention preview",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/mcp-gateway/aip_function_dlp.gif",
+    imageSrc: "/assets/products/aip/mcp-gateway/aip_function_dlp.gif",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
 ];
@@ -92,7 +92,7 @@ export default function McpGatewayENSolutionContent({ locale }: Props) {
         </section>
         <Hero
           imageAlt="MCP Gateway product preview"
-          imageSrc="/solutions/aip/mcp-gateway/mcp-gateway.png"
+          imageSrc="/assets/products/aip/mcp-gateway/mcp-gateway.png"
         />
       </div>
 

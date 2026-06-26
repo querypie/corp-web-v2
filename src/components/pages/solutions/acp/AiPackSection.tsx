@@ -131,7 +131,7 @@ export default function AiPackSection({ locale }: AiPackSectionProps) {
               alt={content.imageAlt}
               className="block h-full w-full object-cover"
               height="400"
-              src="/images/common/fallback-contents.jpg"
+              src="/assets/common/fallback-contents.jpg"
               width="682"
             />
           </div>

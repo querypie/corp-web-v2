@@ -24,7 +24,7 @@ const featureItems = [
     ],
     imageAlt: "AI変革の課題発見プレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/fde-services/find-problems.webp",
+    imageSrc: "/assets/products/aip/fde-services/find-problems.webp",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
@@ -34,7 +34,7 @@ const featureItems = [
     ],
     imageAlt: "AI変革計画プレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/fde-services/make-plans.webp",
+    imageSrc: "/assets/products/aip/fde-services/make-plans.webp",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
@@ -45,7 +45,7 @@ const featureItems = [
     ],
     imageAlt: "カスタムAIエージェント構築プレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/fde-services/build-custom-ai-agents.webp",
+    imageSrc: "/assets/products/aip/fde-services/build-custom-ai-agents.webp",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
   },
   {
@@ -55,7 +55,7 @@ const featureItems = [
     ],
     imageAlt: "本番AI運用プレビュー",
     imageClassName: "h-auto w-full md:h-[400px] md:w-auto",
-    imageSrc: "/solutions/aip/fde-services/make-ai-work.webp",
+    imageSrc: "/assets/products/aip/fde-services/make-ai-work.webp",
     mediaClassName: "aspect-auto h-auto w-full md:h-[400px] md:w-fit md:max-w-full lg:w-fit lg:max-w-none",
     reverse: true,
   },
@@ -81,7 +81,7 @@ export default function FdeServicesJASolutionContent({ locale }: Props) {
         </section>
         <Hero
           imageAlt="FDE Services製品プレビュー"
-          imageSrc="/solutions/aip/fde-services/fde.svg"
+          imageSrc="/assets/products/aip/fde-services/fde.svg"
         />
       </div>
 

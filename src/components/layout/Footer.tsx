@@ -22,19 +22,19 @@ const socialLinks = [
     className: "h-6 w-6",
     href: "/",
     label: "LinkedIn",
-    src: "/icons/linkedin.svg",
+    src: "/assets/brand/icons/linkedin.svg",
   },
   {
     className: "h-6 w-6",
     href: "/",
     label: "YouTube",
-    src: "/icons/youtube.svg",
+    src: "/assets/brand/icons/youtube.svg",
   },
   {
     className: "h-6 w-6",
     href: "/",
     label: "X",
-    src: "/icons/x.svg",
+    src: "/assets/brand/icons/x.svg",
   },
 ] as const;
 
@@ -73,7 +73,7 @@ export default function Footer({
             <img
               alt="QueryPie AI"
               className="block h-5 w-[116px]"
-              src="/icons/querypie-ai-logo.svg"
+              src="/assets/brand/logos/querypie-ai-logo.svg"
             />
           </a>
 

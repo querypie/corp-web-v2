@@ -29,6 +29,7 @@ describe("buildSolutionContentComponents", () => {
           { id: "db", label: "Databases" },
           { id: "cloud", label: "Cloud" },
         ]}
+        iconBasePath="/assets/products/acp/integrations"
         products={[
           { categoryIds: ["db"], label: "PostgreSQL", svgFilename: "postgresql-icon" },
           { categoryIds: ["cloud"], label: "AWS", svgFilename: "aws-icon" },
@@ -42,6 +43,10 @@ describe("buildSolutionContentComponents", () => {
       "href",
       "/ko/solutions/acp?category=db",
     );
+    expect(screen.getByRole("img", { name: "PostgreSQL" })).toHaveAttribute(
+      "src",
+      "/assets/products/acp/integrations/postgresql-icon.svg",
+    );
   });
 
   it("KillerFeatures는 marker children을 카드 목록으로 렌더링한다", () => {
@@ -53,7 +58,7 @@ describe("buildSolutionContentComponents", () => {
           <KillerFeature
             title="Sensitive Data Masking"
             description="Protect critical data."
-            image="public/solutions/acp/dac3.gif"
+            image="public/assets/products/acp/dac3.gif"
           >
             <LearnMoreLink href="https://docs.querypie.com/en/test">Learn More</LearnMoreLink>
           </KillerFeature>
