@@ -1,11 +1,11 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import Button from "../../common/Button";
+import Button from "@/components/ui/Button";
 import Footer from "../../layout/Footer";
 import Gnb from "../../layout/Gnb";
-import { defaultLocale, getLocalePath, isLocale, type Locale } from "../../../constants/i18n";
-import { getShellMenuCopy } from "../../../constants/navigation";
+import { defaultLocale, getLocalePath, isLocale, type Locale } from "@/constants/i18n";
+import { getShellMenuCopy } from "@/constants/navigation";
 
 type NotFoundPageProps = {};
 

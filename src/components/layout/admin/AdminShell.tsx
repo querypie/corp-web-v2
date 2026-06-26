@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import AdminSidebar from "./AdminSidebar";
-import Button from "../../common/Button";
+import Button from "@/components/ui/Button";
 import { AdminNavigationGuardContext } from "./AdminNavigationGuard";
 import { adminNavGroups, adminPrimaryNavItems } from "@/constants/admin";
 

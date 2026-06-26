@@ -5,7 +5,7 @@ import DocsDetailPage, { type DocsDetailPageProps } from "./DocumentationDetailP
 import ContentGateOverlay from "./ContentGateOverlay";
 import type { Locale } from "@/constants/i18n";
 import { useManagedContents } from "@/features/content/clientStore";
-import type { ContactPageCopy } from "@/features/contact/copy";
+import type { ContactPageCopy } from "@/copy/contact";
 import useHydrated from "@/hooks/useHydrated";
 import { docsCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/features/content/config";
 import {

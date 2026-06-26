@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "@/constants/i18n";
 import CommunityLicensePage from "@/components/pages/community-license/CommunityLicensePage";
-import { getCommunityLicensePageCopy } from "@/features/community-license/copy";
+import { getCommunityLicensePageCopy } from "@/copy/communityLicense";
 import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type Props = {

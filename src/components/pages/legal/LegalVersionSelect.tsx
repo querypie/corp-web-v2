@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import Select from "../../common/Select";
+import Select from "@/components/ui/Select";
 
 type LegalVersionOption = {
   href: string;

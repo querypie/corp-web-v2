@@ -1,7 +1,7 @@
 import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
-import { getLocalePath, isLocale } from "../../../constants/i18n";
-import { getPlansPageCopy } from "@/features/content/pageCopy";
+import { getLocalePath, isLocale } from "@/constants/i18n";
+import { getPlansPageCopy } from "@/copy/contentPages";
 import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type PlansRouteProps = {

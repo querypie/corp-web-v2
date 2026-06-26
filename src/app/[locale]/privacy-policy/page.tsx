@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import PrivacyPolicyPage from "../../../components/pages/legal/PrivacyPolicyPage";
-import { getLocalePath, isLocale, type Locale } from "../../../constants/i18n";
+import PrivacyPolicyPage from "@/components/pages/legal/PrivacyPolicyPage";
+import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
 import {
   getPrivacyPolicyContent,
   getPrivacyPolicyVersionOptions,
   getPrivacyPolicyVersions,
-} from "../../../constants/privacyPolicy";
+} from "@/constants/privacyPolicy";
 import { withDynamicOgImage } from "@/features/seo/metadata";
-import { getStaticSeoDescription } from "@/features/seo/staticDescriptions";
+import { getLegalSeoDescription } from "@/features/seo/legalSeoDescriptions";
 
 type PrivacyPolicyRouteProps = {
   params: Promise<{ locale: string }>;
@@ -31,7 +31,7 @@ export async function generateMetadata({
   }
 
   const content = await getPrivacyPolicyContent(locale as Locale, latestVersion);
-  const description = getStaticSeoDescription("privacyPolicy", locale);
+  const description = getLegalSeoDescription("privacyPolicy", locale);
 
   return withDynamicOgImage({
     title: content.title,

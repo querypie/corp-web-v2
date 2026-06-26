@@ -1,7 +1,7 @@
 "use client";
 
 import { pageXPaddingClassName } from "@/constants/layout";
-import type { ContactPageCopy } from "@/features/contact/copy";
+import type { ContactPageCopy } from "@/copy/contact";
 import type { ManagedContentSection } from "@/features/content/data";
 import ContentLeadForm from "./ContentLeadForm";
 

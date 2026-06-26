@@ -1,11 +1,11 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
-import { getLocalePath, isLocale } from "../../../../../constants/i18n";
-import DocsDetailClientPage from "../../../../../components/pages/documentation/DocumentationDetailClientPage";
-import type { DocsDetailPageProps } from "../../../../../components/pages/documentation/DocumentationDetailPage";
-import { getContactPageCopy } from "@/features/contact/copy";
-import { getDocumentationPageCopy } from "@/features/content/pageCopy";
+import { getLocalePath, isLocale } from "@/constants/i18n";
+import DocsDetailClientPage from "@/components/pages/documentation/DocumentationDetailClientPage";
+import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
+import { getContactPageCopy } from "@/copy/contact";
+import { getDocumentationPageCopy } from "@/copy/contentPages";
 import { docsCategoryConfigs, getCategoryHref } from "@/features/content/config";
 import {
   formatPublicDate,

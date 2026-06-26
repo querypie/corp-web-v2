@@ -7,8 +7,8 @@ import {
   readCookiePreference,
   writeCookiePreference,
 } from "@/features/cookie-preferences/preferences";
-import Switch from "../../common/Switch";
-import type { CookieCategory } from "../../../constants/legal";
+import Switch from "@/components/ui/Switch";
+import type { CookieCategory } from "@/constants/legal";
 
 type PreferenceItemProps = Pick<CookieCategory, "description" | "detail" | "id" | "status" | "title">;
 

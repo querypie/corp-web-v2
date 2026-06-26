@@ -1,7 +1,7 @@
 import { pageXPaddingClassName } from "@/constants/layout";
 import CookiePreferenceActions from "./CookiePreferenceActions";
 import PreferenceItem from "./PreferenceItem";
-import type { CookieCategory } from "../../../constants/legal";
+import type { CookieCategory } from "@/constants/legal";
 
 type CookiePreferencePageProps = {
   acceptAllLabel: string;

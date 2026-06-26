@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import CookiePreferencePage from "../../../components/pages/legal/CookiePreferencePage";
-import { getLocalePath, isLocale, type Locale } from "../../../constants/i18n";
-import { cookiePreferenceCopy } from "../../../constants/legal";
+import CookiePreferencePage from "@/components/pages/legal/CookiePreferencePage";
+import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
+import { cookiePreferenceCopy } from "@/constants/legal";
 import { withDynamicOgImage } from "@/features/seo/metadata";
-import { getStaticSeoDescription } from "@/features/seo/staticDescriptions";
+import { getLegalSeoDescription } from "@/features/seo/legalSeoDescriptions";
 
 type CookiePreferenceRouteProps = {
   params: Promise<{ locale: string }>;
@@ -18,7 +18,7 @@ export async function generateMetadata({
   if (!isLocale(locale)) return {};
 
   const copy = cookiePreferenceCopy[locale as Locale];
-  const description = getStaticSeoDescription("cookiePreference", locale);
+  const description = getLegalSeoDescription("cookiePreference", locale);
 
   return withDynamicOgImage({
     title: copy.title,

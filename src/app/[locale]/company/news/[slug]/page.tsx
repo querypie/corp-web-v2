@@ -1,8 +1,8 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { getLocalePath, isLocale } from "../../../../../constants/i18n";
-import NewsDetailClientPage from "../../../../../components/pages/news/NewsDetailClientPage";
-import type { DocsDetailPageProps } from "../../../../../components/pages/documentation/DocumentationDetailPage";
+import { getLocalePath, isLocale } from "@/constants/i18n";
+import NewsDetailClientPage from "@/components/pages/news/NewsDetailClientPage";
+import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
 import {
   formatPublicDate,
   getAdjacentContentLabel,

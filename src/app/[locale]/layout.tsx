@@ -1,13 +1,13 @@
 import { Suspense, type ReactNode } from "react";
 import { notFound } from "next/navigation";
-import { isLocale, locales, type Locale } from "../../constants/i18n";
-import { pageTopPaddingClassName } from "../../constants/layout";
-import { getShellMenuCopy } from "../../constants/navigation";
-import LanguageSuggestionBanner from "../../components/common/LanguageSuggestionBanner";
-import Footer from "../../components/layout/Footer";
-import Gnb from "../../components/layout/Gnb";
-import UtmCapture from "../../components/common/UtmCapture";
-import CookieConsentBanner from "../../components/common/CookieConsentBanner";
+import { isLocale, locales, type Locale } from "@/constants/i18n";
+import { pageTopPaddingClassName } from "@/constants/layout";
+import { getShellMenuCopy } from "@/constants/navigation";
+import LanguageSuggestionBanner from "@/components/site/LanguageSuggestionBanner";
+import Footer from "@/components/layout/Footer";
+import Gnb from "@/components/layout/Gnb";
+import UtmCapture from "@/components/site/UtmCapture";
+import CookieConsentBanner from "@/components/site/CookieConsentBanner";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));

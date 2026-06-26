@@ -1,6 +1,8 @@
 # `src/constants`
 
-Design tokens, copy text, navigation data, and other shared constants live here.
+Design tokens, navigation data, product constants, and other shared configuration live here.
+
+Static page copy and metadata text live in `src/copy`.
 
 Suggested examples:
 - `colors.ts`

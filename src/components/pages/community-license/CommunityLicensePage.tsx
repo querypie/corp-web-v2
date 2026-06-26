@@ -1,5 +1,5 @@
 import CommunityLicenseForm from "./CommunityLicenseForm";
-import type { CommunityLicensePageCopy } from "@/features/community-license/copy";
+import type { CommunityLicensePageCopy } from "@/copy/communityLicense";
 
 export default function CommunityLicensePage({
   copy,

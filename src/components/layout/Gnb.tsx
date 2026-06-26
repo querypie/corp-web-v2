@@ -3,15 +3,15 @@
 import type { MouseEvent as ReactMouseEvent, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import Button from "../common/Button";
+import Button from "@/components/ui/Button";
 import {
   getCompanySubItems,
   getFeaturesSubItems,
   getPlansSubItems,
   getPrimaryNavHref,
   getSolutionsSubItems,
-} from "../../constants/navigation";
-import { getLocalePath, isLocale, type Locale } from "../../constants/i18n";
+} from "@/constants/navigation";
+import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
 
 type GnbProps = {
   actionLabel?: string;

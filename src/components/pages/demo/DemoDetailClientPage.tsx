@@ -6,7 +6,7 @@ import type { Locale } from "@/constants/i18n";
 import type { DocsDetailPageProps } from "../documentation/DocumentationDetailPage";
 import ContentGateOverlay from "../documentation/ContentGateOverlay";
 import { useManagedContents } from "@/features/content/clientStore";
-import type { ContactPageCopy } from "@/features/contact/copy";
+import type { ContactPageCopy } from "@/copy/contact";
 import useHydrated from "@/hooks/useHydrated";
 import { demoCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/features/content/config";
 import {
