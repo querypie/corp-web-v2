@@ -162,14 +162,6 @@ function ShieldPanel({ className, subtitle, capabilities }: { className?: string
         className,
       )}
     >
-      <img
-        alt=""
-        aria-hidden="true"
-        className={cx(styles.shieldPanelArtwork, "absolute inset-0 block size-full object-cover")}
-        height={480}
-        src={iconSrc("shield-mask.svg")}
-        width={280}
-      />
       <div className="relative flex w-full flex-col items-center gap-10">
         <div className="flex w-full flex-col items-center gap-5">
           <AcpControllerIcon className="h-[46px] w-10" />
