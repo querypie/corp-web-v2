@@ -108,7 +108,7 @@ export default function AdminShell({ children }: AdminShellProps) {
           <div className="flex w-full items-center justify-between">
             <button
               className="inline-flex items-center gap-2"
-              onClick={() => requestNavigation("/admin/news")}
+              onClick={() => requestNavigation("/admin")}
               type="button"
             >
               <img alt="" aria-hidden="true" className="h-5 w-5 object-contain" src="/assets/brand/logos/querypie-symbol.svg" />
