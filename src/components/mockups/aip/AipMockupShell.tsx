@@ -13,7 +13,9 @@ type IconName =
   | "agent"
   | "automation"
   | "bell"
+  | "botMessage"
   | "chevron"
+  | "clock"
   | "grid"
   | "hardDrive"
   | "message"
@@ -21,6 +23,7 @@ type IconName =
   | "mcp"
   | "plus"
   | "preset"
+  | "puzzle"
   | "send"
   | "settings"
   | "sparkle";
@@ -29,27 +32,30 @@ const iconPaths: Record<IconName, string> = {
   agent: "M12 4a4 4 0 014 4v1a4 4 0 01-8 0V8a4 4 0 014-4z M5 20a7 7 0 0114 0",
   automation: "M12 3v4m0 10v4M4.9 5.6l2.8 2.8m8.6 8.6l2.8 2.8M3 12h4m10 0h4M4.9 18.4l2.8-2.8m8.6-8.6l2.8-2.8",
   bell: "M18 8a6 6 0 00-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4",
+  botMessage: "M12 6V3m-4 7h.01M16 10h.01M7 15h10M5 18l-3 3V7a2 2 0 012-2h16a2 2 0 012 2v9a2 2 0 01-2 2H5z",
   chevron: "M9 6l6 6-6 6",
+  clock: "M12 6v6l4 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
   grid: "M4 4h6v6H4z M14 4h6v6h-6z M4 14h6v6H4z M14 14h6v6h-6z",
   hardDrive: "M4 6h16l2 10H2L4 6z M6 18h12",
   message: "M5 5h14v10H8l-4 4V5z",
   mic: "M12 4a3 3 0 00-3 3v5a3 3 0 006 0V7a3 3 0 00-3-3z M5 11a7 7 0 0014 0 M12 18v3",
   mcp: "M8 12a4 4 0 018 0 4 4 0 01-8 0z M3 12h2m14 0h2M12 3v2m0 14v2",
   plus: "M12 5v14M5 12h14",
-  preset: "M5 7h14v10H5z M8 10h8 M8 14h5",
+  preset: "M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z M3.3 7L12 12l8.7-5M12 22V12",
+  puzzle: "M14 7V5a2 2 0 10-4 0v2H7a2 2 0 00-2 2v3h2a2 2 0 110 4H5v3a2 2 0 002 2h3v-2a2 2 0 114 0v2h3a2 2 0 002-2v-3h-2a2 2 0 110-4h2V9a2 2 0 00-2-2h-3z",
   send: "M5 12h13M12 5l7 7-7 7",
   settings: "M12 8a4 4 0 100 8 4 4 0 000-8z M12 2v3m0 14v3M4.9 4.9l2.1 2.1m10 10l2.1 2.1M2 12h3m14 0h3M4.9 19.1l2.1-2.1m10-10l2.1-2.1",
   sparkle: "M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5z",
 };
 
 const menuIconById: Record<string, IconName> = {
-  agents: "agent",
-  automation: "automation",
+  agents: "botMessage",
+  automation: "clock",
   chat: "message",
   mcp: "mcp",
   "my-drive": "hardDrive",
   presets: "preset",
-  skills: "sparkle",
+  skills: "puzzle",
   widgets: "grid",
 };
 
@@ -89,14 +95,14 @@ function Sidebar({
   onMenuClick: (menu: string) => void;
 }) {
   return (
-    <aside className="hidden w-[260px] shrink-0 border-r border-[#e5e7eb] bg-[#f8fafc] text-[#101828] md:flex md:flex-col">
+    <aside className="hidden w-[260px] shrink-0 border-r border-[#2a2d33] bg-[#17191d] text-[#f4f4f5] md:flex md:flex-col">
       <div className="flex h-14 items-center justify-between px-3">
-        <button className="flex min-w-0 items-center gap-2 rounded-md p-2 text-left hover:bg-[#eef2f7]" type="button">
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-[#111827] text-[12px] font-bold text-white">
+        <button className="flex min-w-0 items-center gap-2 rounded-md p-2 text-left hover:bg-[#24272d]" type="button">
+          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white text-[12px] font-bold text-[#111318]">
             Q
           </div>
           <span className="min-w-0 truncate text-[14px] font-semibold">QueryPie AI</span>
-          <Icon className="h-3.5 w-3.5 text-[#667085]" name="chevron" />
+          <Icon className="h-3.5 w-3.5 text-[#9ca3af]" name="chevron" />
         </button>
       </div>
 
@@ -107,17 +113,17 @@ function Sidebar({
             <button
               className={`group flex h-9 items-center gap-2 rounded-md px-2.5 text-left text-[13px] transition-colors ${
                 isActive
-                  ? "bg-white font-medium text-[#111827] shadow-[0_1px_2px_rgba(16,24,40,0.08)]"
-                  : "text-[#344054] hover:bg-[#eef2f7]"
+                  ? "bg-[#262a31] font-medium text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
+                  : "text-[#d1d5db] hover:bg-[#22252b] hover:text-white"
               }`}
               key={item.id}
               onClick={() => onMenuClick(item.id)}
               type="button"
             >
-              <Icon className="h-4 w-4 text-[#667085]" name={menuIconById[item.id]} />
+              <Icon className={`h-4 w-4 ${isActive ? "text-white" : "text-[#a8b0bd]"}`} name={menuIconById[item.id]} />
               <span className="min-w-0 truncate">{item.label}</span>
               {item.id === "widgets" ? (
-                <span className="ml-auto rounded-full border border-[#d0d5dd] px-1.5 py-0.5 text-[10px] text-[#667085]">
+                <span className="ml-auto rounded-full border border-[#3a3f48] px-1.5 py-0.5 text-[10px] text-[#9ca3af]">
                   Deprecated
                 </span>
               ) : null}
@@ -127,15 +133,15 @@ function Sidebar({
 
         <div className="mt-4 px-2">
           <div className="mb-1 flex items-center justify-between">
-            <p className="m-0 text-[11px] font-medium uppercase tracking-[0.08em] text-[#98a2b3]">Agents</p>
-            <button className="text-[12px] text-[#475467] hover:underline" onClick={() => onMenuClick("agents")} type="button">
+            <p className="m-0 text-[11px] font-medium uppercase tracking-[0.08em] text-[#858b96]">Agents</p>
+            <button className="text-[12px] text-[#b0b7c3] hover:text-white hover:underline" onClick={() => onMenuClick("agents")} type="button">
               View all
             </button>
           </div>
           <div className="flex flex-col gap-0.5">
             {aipMockupAgents.slice(0, 3).map((agent) => (
               <button
-                className="flex h-9 items-center gap-2 rounded-md px-2 text-left text-[13px] text-[#344054] hover:bg-[#eef2f7]"
+                className="flex h-9 items-center gap-2 rounded-md px-2 text-left text-[13px] text-[#d1d5db] hover:bg-[#22252b] hover:text-white"
                 key={agent.id}
                 onClick={() => onMenuClick("agents")}
                 type="button"
@@ -148,23 +154,23 @@ function Sidebar({
         </div>
       </nav>
 
-      <div className="border-t border-[#e5e7eb] p-2">
+      <div className="border-t border-[#2a2d33] p-2">
         <div className="mb-2 flex items-center gap-1.5">
-          <button className="flex h-8 items-center gap-1.5 rounded-md px-2 text-[12px] text-[#344054] hover:bg-[#eef2f7]" type="button">
+          <button className="flex h-8 items-center gap-1.5 rounded-md px-2 text-[12px] text-[#d1d5db] hover:bg-[#22252b] hover:text-white" type="button">
             <span className="h-2 w-2 rounded-full bg-[#12b76a]" />
             Edge Tunnel
           </button>
-          <button aria-label="Notifications" className="flex h-8 w-8 items-center justify-center rounded-md text-[#475467] hover:bg-[#eef2f7]" type="button">
+          <button aria-label="Notifications" className="flex h-8 w-8 items-center justify-center rounded-md text-[#a8b0bd] hover:bg-[#22252b] hover:text-white" type="button">
             <Icon name="bell" />
           </button>
         </div>
-        <button className="flex w-full items-center gap-2 rounded-md p-2 text-left hover:bg-[#eef2f7]" type="button">
-          <div className="h-8 w-8 rounded-full bg-[#e0e7ff]" />
+        <button className="flex w-full items-center gap-2 rounded-md p-2 text-left hover:bg-[#22252b]" type="button">
+          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#d9e2ff] to-[#8795ff]" />
           <div className="min-w-0 flex-1">
-            <p className="m-0 truncate text-[13px] font-medium text-[#101828]">Jane Lee</p>
-            <p className="m-0 truncate text-[11px] text-[#667085]">jane@querypie.com</p>
+            <p className="m-0 truncate text-[13px] font-medium text-white">Jane Lee</p>
+            <p className="m-0 truncate text-[11px] text-[#9ca3af]">jane@querypie.com</p>
           </div>
-          <Icon className="h-4 w-4 text-[#667085]" name="settings" />
+          <Icon className="h-4 w-4 text-[#a8b0bd]" name="settings" />
         </button>
       </div>
     </aside>
