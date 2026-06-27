@@ -395,18 +395,19 @@ function AppHeader() {
           </button>
 
           {isModelSelectorOpen ? (
-            <div className="absolute left-0 top-11 z-50 w-[240px] min-w-max rounded-md border border-[#e5e5e5] bg-white p-2 text-[#171717] shadow-md">
-              <div className="flex max-h-[400px] flex-col overflow-y-auto overflow-x-hidden">
+            <div className="absolute left-0 top-11 z-50 w-[240px] min-w-max rounded-2xl border border-[#dedede] bg-white p-2 text-[#0a0a0a] shadow-md outline-none">
+              <div className="flex h-full w-full flex-col overflow-hidden rounded-none rounded-t-[10px] bg-white text-[#0a0a0a] md:w-[240px] md:rounded-2xl">
+                <div className="max-h-[400px] overflow-y-auto overflow-x-hidden">
                 {pinnedModel ? (
                   <>
                     <div className="overflow-hidden p-1 text-[#171717]">
-                      <div className="flex items-center gap-1.5 px-2 py-1.5 text-xs font-medium text-[#737373]">
+                      <div className="flex items-center gap-1.5 px-2 py-1.5 text-xs font-medium text-[#808080]">
                         <PinIcon className="h-3.5 w-3.5" />
-                        <span className="text-sm font-normal">Pinned</span>
+                        <span className="text-sm font-normal text-[#808080]">Pinned</span>
                       </div>
                       <div
                         aria-label={pinnedModel.model.label}
-                        className="group/item flex w-full cursor-default select-none items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-[#f5f5f5]"
+                        className="group/item relative flex w-full cursor-default select-none items-center justify-between gap-2 rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-[#0000000d]"
                         onClick={() => selectModel(pinnedModel.model.id)}
                         onKeyDown={(event) => {
                           if (event.key === "Enter" || event.key === " ") selectModel(pinnedModel.model.id);
@@ -416,13 +417,13 @@ function AppHeader() {
                       >
                         <div className="flex items-center gap-2">
                           <LlmIcon group={pinnedModel.group.icon} />
-                          <span className={pinnedModel.model.id === selectedModelId ? "text-[#006adc]" : undefined}>
+                          <span className={pinnedModel.model.id === selectedModelId ? "text-[#2c74e1]" : undefined}>
                             {pinnedModel.model.label}
                           </span>
                         </div>
                         <button
                           aria-label="Unpin model"
-                          className="rounded p-1 hover:bg-[#f5f5f5]"
+                          className="rounded p-1 hover:bg-[#0000000d]"
                           onClick={(event) => {
                             event.stopPropagation();
                             setPinnedModelId(null);
@@ -433,7 +434,7 @@ function AppHeader() {
                         </button>
                       </div>
                     </div>
-                    <div className="-mx-1 h-px bg-[#e5e5e5]" />
+                    <div className="-mx-1 h-px bg-[#dedede]/80" />
                   </>
                 ) : null}
 
@@ -443,11 +444,11 @@ function AppHeader() {
 
                   return (
                     <div key={group.id}>
-                      {index > 0 || pinnedModel ? <div className="-mx-1 h-px bg-[#e5e5e5]" /> : null}
+                      {index > 0 || pinnedModel ? <div className="-mx-1 h-px bg-[#dedede]/80" /> : null}
                       <div className="overflow-hidden p-1 text-[#171717]">
-                        <div className="flex items-center gap-2 px-2 py-1.5 text-xs font-medium text-[#737373]">
+                        <div className="flex items-center gap-2 px-2 py-1.5 text-xs font-medium text-[#808080]">
                           <LlmIcon group={group.icon} />
-                          <span className="text-sm font-normal">{group.label}</span>
+                          <span className="text-sm font-normal text-[#808080]">{group.label}</span>
                         </div>
                         {visibleModels.map((model) => {
                           const isSelected = model.id === selectedModelId;
@@ -455,7 +456,7 @@ function AppHeader() {
                           return (
                             <div
                               aria-label={model.label}
-                              className="group/item flex w-full cursor-default select-none items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-[#f5f5f5]"
+                              className="group/item relative flex w-full cursor-default select-none items-center justify-between gap-2 rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-[#0000000d]"
                               key={model.id}
                               onClick={() => selectModel(model.id)}
                               onKeyDown={(event) => {
@@ -464,25 +465,25 @@ function AppHeader() {
                               role="button"
                               tabIndex={0}
                             >
-                              <span className={isSelected ? "text-[#006adc]" : undefined}>{model.label}</span>
+                              <span className={isSelected ? "text-[#2c74e1]" : undefined}>{model.label}</span>
                               <div className="flex items-center gap-1">
                                 <button
                                   aria-label="Pin model"
-                                  className="rounded p-1 opacity-0 hover:bg-[#f5f5f5] group-hover/item:opacity-100"
+                                  className="rounded p-1 opacity-0 hover:bg-[#0000000d] md:group-hover/item:opacity-100"
                                   onClick={(event) => {
                                     event.stopPropagation();
                                     setPinnedModelId(model.id);
                                   }}
                                   type="button"
                                 >
-                                  <PinIcon className="h-4 w-4 text-[#737373]" />
+                                  <PinIcon className="h-4 w-4 text-[#808080]" />
                                 </button>
                                 {model.options ? (
                                   <button
                                     aria-label="Options"
                                     className={[
-                                      "rounded p-1 hover:bg-[#f5f5f5]",
-                                      isExpanded ? "bg-[#f5f5f5]" : "",
+                                      "rounded p-1 hover:bg-[#0000000d]",
+                                      isExpanded ? "bg-[#0000000d]" : "",
                                     ].join(" ")}
                                     onClick={(event) => {
                                       event.stopPropagation();
@@ -501,6 +502,7 @@ function AppHeader() {
                     </div>
                   );
                 })}
+                </div>
               </div>
             </div>
           ) : null}
