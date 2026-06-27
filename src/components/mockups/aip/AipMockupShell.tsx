@@ -1,15 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useMemo, useState } from "react";
-import {
-  aipMockupAgents,
-  aipMockupChats,
-  aipMockupMcpTools,
-  aipMockupMenuItems,
-  aipMockupMessages,
-  type AipMockupMessage,
-} from "./mockData";
+import { useState } from "react";
+import { aipMockupChats, aipMockupMenuItems } from "./mockData";
 
 type IconName =
   | "agent"
@@ -181,17 +174,6 @@ function MenuSvg({ children, className }: { children: ReactNode; className: stri
   );
 }
 
-function AgentAvatar({ name, shortName }: { name: string; shortName: string }) {
-  return (
-    <span
-      aria-label={name}
-      className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#ff8a5c] via-[#b987d4] to-[#5177ff] text-[12px] font-semibold text-white"
-    >
-      {shortName}
-    </span>
-  );
-}
-
 function Sidebar({
   activeMenu,
   onMenuClick,
@@ -274,270 +256,169 @@ function Sidebar({
   );
 }
 
-function TopBar({ activeMenu }: { activeMenu: string }) {
-  const activeLabel = aipMockupMenuItems.find((item) => item.id === activeMenu)?.label ?? "New chat";
-
+function AppHeader() {
   return (
-    <header className="flex h-14 shrink-0 items-center justify-between border-b border-[#eaecf0] bg-white px-4 text-[#101828]">
-      <div className="flex min-w-0 items-center gap-2">
-        <h2 className="m-0 truncate text-[15px] font-semibold">{activeLabel}</h2>
-        <span className="hidden rounded-full bg-[#f2f4f7] px-2 py-1 text-[11px] text-[#667085] sm:inline">
-          Local mock
-        </span>
-      </div>
-      <div className="flex items-center gap-2">
-        <button className="hidden h-8 rounded-md border border-[#d0d5dd] bg-white px-3 text-[13px] font-medium text-[#344054] hover:bg-[#f9fafb] sm:block" type="button">
-          Share
-        </button>
-        <button className="h-8 rounded-md bg-[#111827] px-3 text-[13px] font-medium text-white hover:bg-[#1f2937]" type="button">
-          Publish
-        </button>
+    <header className="sticky top-0 z-40 shrink-0 overflow-hidden bg-white">
+      <div className="mx-auto flex h-14 max-w-[1088px] items-center justify-between px-3 md:px-5">
+        <div className="flex min-w-0 shrink-0 items-center gap-2">
+          <button
+            className="inline-flex h-9 min-w-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-lg border-none px-3 py-2 text-sm font-medium text-[#171717] transition-all hover:bg-[#f5f5f5]"
+            type="button"
+          >
+            <span className="hidden h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#111827] text-white md:flex">
+              <Icon className="h-3 w-3" name="sparkle" />
+            </span>
+            <span className="truncate">GPT-4.1</span>
+            <Icon className="h-4 w-4 shrink-0 rotate-90 text-[#737373]" name="chevron" />
+          </button>
+        </div>
+        <div className="flex shrink-0 items-center" />
       </div>
     </header>
   );
 }
 
-function AgentsPanel({
-  selectedAgentId,
-  onSelectAgent,
+function ChatWelcomeLanding() {
+  return (
+    <div className="flex h-full max-h-full transform-gpu flex-col items-center justify-center pb-1 transition-all duration-200 sm:max-h-0 sm:pb-16">
+      <div className="flex flex-col items-center gap-0 p-2">
+        <div className="flex items-center justify-center gap-4">
+          <h1 className="m-0 text-center text-2xl font-normal text-[#171717] sm:text-4xl">
+            Good afternoon, Jane Lee
+          </h1>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ChatFormAction({
+  children,
+  className = "",
+  label,
 }: {
-  selectedAgentId: string;
-  onSelectAgent: (agentId: string) => void;
+  children: ReactNode;
+  className?: string;
+  label: string;
 }) {
   return (
-    <aside className="hidden w-[280px] shrink-0 border-r border-[#eaecf0] bg-white p-4 lg:block">
-      <div className="mb-4 flex items-center justify-between">
-        <p className="m-0 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#98a2b3]">Agents</p>
-        <button className="rounded-md border border-[#d0d5dd] px-2 py-1 text-[12px] text-[#344054] hover:bg-[#f9fafb]" type="button">
-          Add
-        </button>
-      </div>
-      <div className="flex flex-col gap-1.5">
-        {aipMockupAgents.map((agent) => {
-          const isSelected = selectedAgentId === agent.id;
-          return (
-            <button
-              className={`flex items-center gap-3 rounded-lg p-2.5 text-left transition-colors ${
-                isSelected ? "bg-[#f2f4f7]" : "hover:bg-[#f9fafb]"
-              }`}
-              key={agent.id}
-              onClick={() => onSelectAgent(agent.id)}
-              type="button"
-            >
-              <AgentAvatar name={agent.name} shortName={agent.shortName} />
-              <span className="min-w-0">
-                <span className="block truncate text-[13px] font-medium text-[#101828]">{agent.name}</span>
-                <span className="block truncate text-[11px] text-[#667085]">{agent.owner}</span>
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      <div className="mt-7">
-        <p className="m-0 mb-3 text-[12px] font-semibold uppercase tracking-[0.08em] text-[#98a2b3]">MCP</p>
-        <div className="flex flex-wrap gap-2">
-          {aipMockupMcpTools.map((name) => (
-            <button
-              className="rounded-full border border-[#d0d5dd] bg-white px-3 py-1.5 text-[12px] text-[#344054] hover:bg-[#f9fafb]"
-              key={name}
-              type="button"
-            >
-              {name}
-            </button>
-          ))}
-        </div>
-      </div>
-    </aside>
+    <button
+      aria-label={label}
+      className={[
+        "inline-flex h-9 w-9 items-center justify-center rounded-full p-1 text-[#171717] transition-colors hover:bg-[#f5f5f5]",
+        className,
+      ].join(" ")}
+      type="button"
+    >
+      {children}
+    </button>
   );
 }
 
-function ResultCard({ card }: { card: Extract<AipMockupMessage, { role: "assistant" }>["card"] }) {
-  if (!card) return null;
-
+function PresetMentionTrigger() {
   return (
-    <div className="mt-4 w-full max-w-[560px] overflow-hidden rounded-xl border border-[#d0d5dd] bg-white shadow-[0_8px_24px_rgba(16,24,40,0.08)]">
-      <div className="flex items-start gap-3 border-b border-[#eaecf0] p-4">
-        <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#f2f4f7] text-[#344054]">
-          <Icon name="grid" />
-        </div>
-        <div>
-          <p className="m-0 text-[14px] font-semibold text-[#101828]">{card.title}</p>
-          <p className="m-0 mt-1 text-[12px] text-[#667085]">{card.description}</p>
-        </div>
-      </div>
-      <table className="w-full border-collapse text-left text-[12px]">
-        <thead className="bg-[#f9fafb] text-[#667085]">
-          <tr>
-            <th className="px-4 py-2 font-medium">Customer</th>
-            <th className="px-4 py-2 font-medium">Segment</th>
-            <th className="px-4 py-2 font-medium">Spend</th>
-          </tr>
-        </thead>
-        <tbody className="text-[#344054]">
-          {card.rows.map(([customer, segment, spend]) => (
-            <tr className="border-t border-[#eaecf0]" key={customer}>
-              <td className="px-4 py-2">{customer}</td>
-              <td className="px-4 py-2">{segment}</td>
-              <td className="px-4 py-2">{spend}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <button
+      aria-label="Select preset"
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-transparent text-[#171717] transition-colors hover:bg-[#f5f5f5]"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        className="h-6 w-6"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <circle cx="12" cy="12" r="4" />
+        <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8" />
+      </svg>
+    </button>
   );
 }
 
-function ChatMessage({ message }: { message: AipMockupMessage }) {
-  if (message.role === "user") {
-    return (
-      <div className="flex justify-end">
-        <div className="max-w-[620px] rounded-[18px] bg-[#f2f4f7] px-5 py-3.5 text-[#101828]">
-          <p className="m-0 text-[14px] leading-6">{message.body}</p>
-        </div>
-      </div>
-    );
-  }
-
+function McpToggleTrigger() {
   return (
-    <div className="flex gap-3">
-      <AgentAvatar name={message.title} shortName="D" />
-      <div className="min-w-0">
-        <p className="m-0 text-[14px] font-semibold text-[#101828]">{message.title}</p>
-        <div className="mt-2 flex flex-col gap-2 text-[14px] leading-6 text-[#344054]">
-          {message.body.map((line) => (
-            <p className="m-0" key={line}>
-              {line}
-            </p>
-          ))}
-        </div>
-        <ResultCard card={message.card} />
-      </div>
-    </div>
+    <ChatFormAction label="Use MCP">
+      <MenuIcon className="h-6 w-6" name="mcp" />
+    </ChatFormAction>
   );
 }
 
-function ChatComposer({
-  agentName,
-  onSend,
-}: {
-  agentName: string;
-  onSend: (text: string) => void;
-}) {
-  const [text, setText] = useState("");
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const canSubmit = text.trim().length > 0;
+function ContextWindowUsage() {
+  return null;
+}
 
-  const send = () => {
-    if (!canSubmit) return;
-    onSend(text.trim());
-    setText("");
-  };
-
+function ChatAudioRecorder() {
   return (
-    <div className="relative mx-auto w-full max-w-[780px]">
-      {isMenuOpen ? (
-        <div className="absolute bottom-[104px] left-3 w-[220px] rounded-xl border border-[#d0d5dd] bg-white p-1.5 text-[13px] shadow-[0_16px_40px_rgba(16,24,40,0.14)]">
-          {["Upload file", "Select from My Drive", "Use widget", "Use artifact"].map((item) => (
-            <button className="block w-full rounded-lg px-3 py-2 text-left text-[#344054] hover:bg-[#f9fafb]" key={item} type="button">
-              {item}
-            </button>
-          ))}
-        </div>
-      ) : null}
+    <button
+      aria-label="Voice input"
+      className="inline-flex h-9 w-9 items-center justify-center rounded-full p-1 text-[#374151] transition-colors hover:bg-[#f5f5f5]"
+      type="button"
+    >
+      <Icon className="h-6 w-6" name="mic" />
+    </button>
+  );
+}
 
-      <div className="rounded-[30px] border border-[#d0d5dd] bg-white shadow-[0_10px_30px_rgba(16,24,40,0.08)]">
-        <div className="px-5 pb-3.5 pt-4.5">
-          <textarea
-            className="m-0 max-h-[120px] min-h-[34px] w-full resize-none bg-transparent text-[14px] leading-6 text-[#101828] outline-none placeholder:text-[#667085]"
-            onChange={(event) => setText(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Enter" && !event.shiftKey) {
-                event.preventDefault();
-                send();
-              }
-            }}
-            placeholder={`Message ${agentName}`}
-            rows={1}
-            value={text}
-          />
-        </div>
-
-        <div className="flex items-center gap-1.5 px-3 pb-3">
-          <button
-            aria-label="Open attachment menu"
-            className="flex h-9 w-9 items-center justify-center rounded-full text-[#344054] hover:bg-[#f2f4f7]"
-            onClick={() => setIsMenuOpen((value) => !value)}
-            type="button"
-          >
-            <Icon name="plus" />
-          </button>
-          <button className="flex min-w-0 items-center gap-2 rounded-full px-2.5 py-1.5 text-[13px] font-medium text-[#344054] hover:bg-[#f2f4f7]" type="button">
-            <AgentAvatar name={agentName} shortName={agentName.slice(0, 1)} />
-            <span className="max-w-[180px] truncate">{agentName}</span>
-          </button>
-          <span className="hidden rounded-full bg-[#f2f4f7] px-3 py-1.5 text-[12px] text-[#344054] sm:inline">
-            Automation
-          </span>
-          <div className="mx-auto flex" />
-          <span className="hidden text-[12px] text-[#667085] md:inline">12%</span>
-          <button
-            aria-label="Voice input"
-            className={`flex h-9 w-9 items-center justify-center rounded-full ${
-              canSubmit ? "bg-[#f2f4f7] text-[#98a2b3]" : "bg-[#111827] text-white"
-            }`}
-            type="button"
-          >
-            <Icon name="mic" />
-          </button>
-          <button
-            aria-label="Send message"
-            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#111827] text-white disabled:pointer-events-none disabled:opacity-40"
-            disabled={!canSubmit}
-            onClick={send}
-            type="button"
-          >
-            <Icon name="send" />
-          </button>
+function PresetChatForm() {
+  return (
+    <div className="relative mx-auto w-full max-w-[800px]">
+      <div className="relative isolate">
+        <div className="relative z-20 transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
+          <form className="mx-auto flex w-full max-w-[800px] flex-row gap-3 transition-all duration-[600ms]">
+            <div className="relative flex h-full min-w-0 flex-1 flex-col items-stretch">
+              <div className="relative" />
+              <div className="flex w-full items-center">
+                <div className="relative flex w-full grow flex-col overflow-hidden rounded-[30px] border border-[#d4d4d4] bg-white text-[#171717] shadow-sm transition-all duration-[600ms]">
+                  <div />
+                  <div className="px-5 pb-3.5 pt-[18px]">
+                    <textarea
+                      className="m-0 box-border max-h-[min(30svh,13rem)] min-h-[24px] w-full resize-none whitespace-pre-wrap break-words bg-transparent text-[15px] leading-6 text-[#171717] outline-none placeholder:text-black/50"
+                      placeholder="Ask me anything"
+                      readOnly
+                      rows={1}
+                    />
+                  </div>
+                  <div className="flex items-center gap-1.5 px-3 pb-3">
+                    <div className="flex items-center gap-0.5">
+                      <ChatFormAction label="Open attachment menu">
+                        <Icon className="h-6 w-6" name="plus" />
+                      </ChatFormAction>
+                      <PresetMentionTrigger />
+                      <McpToggleTrigger />
+                    </div>
+                    <div className="mx-auto flex" />
+                    <div className="flex items-center gap-2">
+                      <ContextWindowUsage />
+                      <ChatAudioRecorder />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
   );
 }
 
-function ChatCanvas({ agentName }: { agentName: string }) {
-  const [extraMessages, setExtraMessages] = useState<AipMockupMessage[]>([]);
-  const messages = useMemo(() => [...aipMockupMessages, ...extraMessages], [extraMessages]);
-
+function NewChatScreen() {
   return (
-    <section className="flex min-h-0 flex-1 flex-col bg-[#fcfcfd]">
-      <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-5 py-8 md:px-8">
-        <div className="mx-auto w-full max-w-[780px]">
-          <p className="m-0 text-[12px] font-medium uppercase tracking-[0.08em] text-[#98a2b3]">Agent Chat</p>
-          <h3 className="m-0 mt-1 text-[24px] font-semibold tracking-[-0.01em] text-[#101828]">{agentName}</h3>
+    <section className="flex h-full min-h-0 flex-col bg-white">
+      <div className="min-h-0 flex-1">
+        <div className="relative h-full w-full flex-1 grow overflow-hidden">
+          <div className="flex h-full w-full flex-col">
+            <div className="flex flex-1 flex-col items-center justify-center">
+              <ChatWelcomeLanding />
+              <PresetChatForm />
+              <div aria-hidden="true" className="hidden h-[100px] sm:block" />
+            </div>
+          </div>
         </div>
-
-        <div className="mx-auto mt-6 flex w-full max-w-[780px] flex-1 flex-col justify-start gap-5 overflow-hidden">
-          {messages.map((message) => (
-            <ChatMessage key={message.id} message={message} />
-          ))}
-        </div>
-      </div>
-
-      <div className="shrink-0 px-4 pb-5">
-        <ChatComposer
-          agentName={agentName}
-          onSend={(body) =>
-            setExtraMessages((current) => [
-              ...current,
-              {
-                id: `user-${current.length + 2}`,
-                role: "user",
-                body,
-              },
-            ])
-          }
-        />
       </div>
     </section>
   );
@@ -545,19 +426,14 @@ function ChatCanvas({ agentName }: { agentName: string }) {
 
 export default function AipMockupShell({ className }: { className?: string }) {
   const [activeMenu, setActiveMenu] = useState("chat");
-  const [selectedAgentId, setSelectedAgentId] = useState("data-analysis");
-  const selectedAgent = aipMockupAgents.find((agent) => agent.id === selectedAgentId) ?? aipMockupAgents[0];
 
   return (
     <div className={["w-full", className].filter(Boolean).join(" ")} data-aip-mockup>
       <div className="mx-auto flex h-[700px] w-full max-w-[1180px] overflow-hidden rounded-[22px] border border-[#d0d5dd] bg-white text-[#101828] shadow-[0_32px_100px_rgba(16,24,40,0.18)] md:h-[760px]">
         <Sidebar activeMenu={activeMenu} onMenuClick={setActiveMenu} />
         <div className="flex min-w-0 flex-1 flex-col">
-          <TopBar activeMenu={activeMenu} />
-          <div className="flex min-h-0 flex-1">
-            <AgentsPanel selectedAgentId={selectedAgentId} onSelectAgent={setSelectedAgentId} />
-            <ChatCanvas agentName={selectedAgent.name} />
-          </div>
+          <AppHeader />
+          <NewChatScreen />
         </div>
       </div>
     </div>
