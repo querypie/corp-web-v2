@@ -111,12 +111,12 @@ function Sidebar({
   return (
     <aside className="hidden w-[260px] shrink-0 border-r border-[#2a2d33] bg-[#17191d] text-[#f4f4f5] md:flex md:flex-col">
       <div className="flex h-14 items-center justify-between px-3">
-        <button className="flex min-w-0 items-center gap-2 rounded-md p-2 text-left hover:bg-[#24272d]" type="button">
-          <div className="flex h-7 w-7 items-center justify-center rounded-md bg-white text-[12px] font-bold text-[#111318]">
-            Q
-          </div>
-          <span className="min-w-0 truncate text-[14px] font-semibold">QueryPie AI</span>
-          <Icon className="h-3.5 w-3.5 text-[#9ca3af]" name="chevron" />
+        <button className="flex min-w-0 items-center rounded-md p-2 text-left hover:bg-[#24272d]" type="button">
+          <img
+            alt="QueryPie AI"
+            className="h-5 w-auto max-w-[140px]"
+            src="/assets/brand/logos/querypie-ai-logo.svg"
+          />
         </button>
       </div>
 
