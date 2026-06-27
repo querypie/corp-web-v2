@@ -256,21 +256,254 @@ function Sidebar({
   );
 }
 
-function AppHeader() {
+type LlmModel = {
+  id: string;
+  label: string;
+  options?: boolean;
+};
+
+type LlmGroup = {
+  icon: "aip" | "claude" | "gemini" | "gpt" | "solar";
+  id: string;
+  label: string;
+  models: LlmModel[];
+};
+
+const llmModelGroups: LlmGroup[] = [
+  {
+    id: "aip",
+    icon: "aip",
+    label: "AIP",
+    models: [
+      { id: "auto", label: "Auto Router" },
+      { id: "QLM-1", label: "Auto" },
+    ],
+  },
+  {
+    id: "anthropic.claude",
+    icon: "claude",
+    label: "Claude",
+    models: [
+      { id: "claude-4.6-sonnet", label: "Claude Sonnet 4.6", options: true },
+      { id: "claude-4.6-opus", label: "Claude Opus 4.6", options: true },
+    ],
+  },
+  {
+    id: "openai.gpt",
+    icon: "gpt",
+    label: "GPT",
+    models: [
+      { id: "gpt-4.1", label: "GPT-4.1", options: true },
+      { id: "gpt-4o", label: "GPT-4o", options: true },
+    ],
+  },
+  {
+    id: "google.gemini",
+    icon: "gemini",
+    label: "Gemini",
+    models: [
+      { id: "gemini-2.5-pro", label: "Gemini 2.5 Pro", options: true },
+      { id: "gemini-2.5-flash", label: "Gemini 2.5 Flash" },
+    ],
+  },
+  {
+    id: "upstage.solar",
+    icon: "solar",
+    label: "Solar",
+    models: [{ id: "solar-pro2", label: "Solar Pro 2" }],
+  },
+];
+
+function LlmIcon({ group, className = "h-4 w-4" }: { className?: string; group: LlmGroup["icon"] }) {
+  return <img alt={group} className={className} src={`/assets/icons/llm-${group}-color.svg`} />;
+}
+
+function PinIcon({ className = "h-4 w-4" }: { className?: string }) {
   return (
-    <header className="sticky top-0 z-40 shrink-0 overflow-hidden bg-white">
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <path d="M12 17v5" />
+      <path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16h14v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V4h1a2 2 0 0 0 0-4H8a2 2 0 0 0 0 4h1z" />
+    </svg>
+  );
+}
+
+function Settings2Icon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg
+      aria-hidden="true"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+      viewBox="0 0 24 24"
+    >
+      <path d="M20 7h-9" />
+      <path d="M14 17H5" />
+      <circle cx="17" cy="17" r="3" />
+      <circle cx="7" cy="7" r="3" />
+    </svg>
+  );
+}
+
+function AppHeader() {
+  const [isModelSelectorOpen, setIsModelSelectorOpen] = useState(false);
+  const [selectedModelId, setSelectedModelId] = useState("gpt-4.1");
+  const [pinnedModelId, setPinnedModelId] = useState<string | null>(null);
+  const [expandedModelId, setExpandedModelId] = useState<string | null>(null);
+  const selectedGroup =
+    llmModelGroups.find((group) => group.models.some((model) => model.id === selectedModelId)) ?? llmModelGroups[0];
+  const selectedModel = selectedGroup.models.find((model) => model.id === selectedModelId) ?? selectedGroup.models[0];
+  const pinnedModel =
+    pinnedModelId == null
+      ? null
+      : llmModelGroups
+          .flatMap((group) => group.models.map((model) => ({ group, model })))
+          .find(({ model }) => model.id === pinnedModelId) ?? null;
+
+  const selectModel = (modelId: string) => {
+    setSelectedModelId(modelId);
+    setIsModelSelectorOpen(false);
+    setExpandedModelId(null);
+  };
+
+  return (
+    <header className="sticky top-0 z-40 shrink-0 overflow-visible bg-white">
       <div className="mx-auto flex h-14 max-w-[1088px] items-center justify-between px-3 md:px-5">
-        <div className="flex min-w-0 shrink-0 items-center gap-2">
+        <div className="relative flex min-w-0 shrink-0 items-center gap-2">
           <button
+            aria-expanded={isModelSelectorOpen}
             className="inline-flex h-9 min-w-0 items-center justify-center gap-1.5 whitespace-nowrap rounded-lg border-none px-3 py-2 text-sm font-medium text-[#171717] transition-all hover:bg-[#f5f5f5]"
+            onClick={() => setIsModelSelectorOpen((value) => !value)}
             type="button"
           >
-            <span className="hidden h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#111827] text-white md:flex">
-              <Icon className="h-3 w-3" name="sparkle" />
+            <span className="hidden md:block">
+              <LlmIcon group={selectedGroup.icon} />
             </span>
-            <span className="truncate">GPT-4.1</span>
+            <span className="truncate">{selectedModel.label}</span>
             <Icon className="h-4 w-4 shrink-0 rotate-90 text-[#737373]" name="chevron" />
           </button>
+
+          {isModelSelectorOpen ? (
+            <div className="absolute left-0 top-11 z-50 w-[240px] min-w-max rounded-md border border-[#e5e5e5] bg-white p-2 text-[#171717] shadow-md">
+              <div className="flex max-h-[400px] flex-col overflow-y-auto overflow-x-hidden">
+                {pinnedModel ? (
+                  <>
+                    <div className="overflow-hidden p-1 text-[#171717]">
+                      <div className="flex items-center gap-1.5 px-2 py-1.5 text-xs font-medium text-[#737373]">
+                        <PinIcon className="h-3.5 w-3.5" />
+                        <span className="text-sm font-normal">Pinned</span>
+                      </div>
+                      <div
+                        aria-label={pinnedModel.model.label}
+                        className="group/item flex w-full cursor-default select-none items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-[#f5f5f5]"
+                        onClick={() => selectModel(pinnedModel.model.id)}
+                        onKeyDown={(event) => {
+                          if (event.key === "Enter" || event.key === " ") selectModel(pinnedModel.model.id);
+                        }}
+                        role="button"
+                        tabIndex={0}
+                      >
+                        <div className="flex items-center gap-2">
+                          <LlmIcon group={pinnedModel.group.icon} />
+                          <span className={pinnedModel.model.id === selectedModelId ? "text-[#006adc]" : undefined}>
+                            {pinnedModel.model.label}
+                          </span>
+                        </div>
+                        <button
+                          aria-label="Unpin model"
+                          className="rounded p-1 hover:bg-[#f5f5f5]"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            setPinnedModelId(null);
+                          }}
+                          type="button"
+                        >
+                          <PinIcon className="h-4 w-4 text-[#171717]" />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="-mx-1 h-px bg-[#e5e5e5]" />
+                  </>
+                ) : null}
+
+                {llmModelGroups.map((group, index) => {
+                  const visibleModels = group.models.filter((model) => model.id !== pinnedModelId);
+                  if (visibleModels.length === 0) return null;
+
+                  return (
+                    <div key={group.id}>
+                      {index > 0 || pinnedModel ? <div className="-mx-1 h-px bg-[#e5e5e5]" /> : null}
+                      <div className="overflow-hidden p-1 text-[#171717]">
+                        <div className="flex items-center gap-2 px-2 py-1.5 text-xs font-medium text-[#737373]">
+                          <LlmIcon group={group.icon} />
+                          <span className="text-sm font-normal">{group.label}</span>
+                        </div>
+                        {visibleModels.map((model) => {
+                          const isSelected = model.id === selectedModelId;
+                          const isExpanded = expandedModelId === model.id;
+                          return (
+                            <div
+                              aria-label={model.label}
+                              className="group/item flex w-full cursor-default select-none items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-[#f5f5f5]"
+                              key={model.id}
+                              onClick={() => selectModel(model.id)}
+                              onKeyDown={(event) => {
+                                if (event.key === "Enter" || event.key === " ") selectModel(model.id);
+                              }}
+                              role="button"
+                              tabIndex={0}
+                            >
+                              <span className={isSelected ? "text-[#006adc]" : undefined}>{model.label}</span>
+                              <div className="flex items-center gap-1">
+                                <button
+                                  aria-label="Pin model"
+                                  className="rounded p-1 opacity-0 hover:bg-[#f5f5f5] group-hover/item:opacity-100"
+                                  onClick={(event) => {
+                                    event.stopPropagation();
+                                    setPinnedModelId(model.id);
+                                  }}
+                                  type="button"
+                                >
+                                  <PinIcon className="h-4 w-4 text-[#737373]" />
+                                </button>
+                                {model.options ? (
+                                  <button
+                                    aria-label="Options"
+                                    className={[
+                                      "rounded p-1 hover:bg-[#f5f5f5]",
+                                      isExpanded ? "bg-[#f5f5f5]" : "",
+                                    ].join(" ")}
+                                    onClick={(event) => {
+                                      event.stopPropagation();
+                                      setExpandedModelId(isExpanded ? null : model.id);
+                                    }}
+                                    type="button"
+                                  >
+                                    <Settings2Icon className="h-4 w-4" />
+                                  </button>
+                                ) : null}
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ) : null}
         </div>
         <div className="flex shrink-0 items-center" />
       </div>
