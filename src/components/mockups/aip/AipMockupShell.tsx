@@ -263,7 +263,7 @@ type LlmModel = {
 };
 
 type LlmGroup = {
-  icon: "aip" | "claude" | "gemini" | "gpt" | "solar";
+  icon: "aip" | "claude";
   id: string;
   label: string;
   models: LlmModel[];
@@ -274,10 +274,7 @@ const llmModelGroups: LlmGroup[] = [
     id: "aip",
     icon: "aip",
     label: "AIP",
-    models: [
-      { id: "auto", label: "Auto Router" },
-      { id: "QLM-1", label: "Auto" },
-    ],
+    models: [{ id: "QLM-1", label: "Auto", options: true }],
   },
   {
     id: "anthropic.claude",
@@ -287,30 +284,6 @@ const llmModelGroups: LlmGroup[] = [
       { id: "claude-4.6-sonnet", label: "Claude Sonnet 4.6", options: true },
       { id: "claude-4.6-opus", label: "Claude Opus 4.6", options: true },
     ],
-  },
-  {
-    id: "openai.gpt",
-    icon: "gpt",
-    label: "GPT",
-    models: [
-      { id: "gpt-4.1", label: "GPT-4.1", options: true },
-      { id: "gpt-4o", label: "GPT-4o", options: true },
-    ],
-  },
-  {
-    id: "google.gemini",
-    icon: "gemini",
-    label: "Gemini",
-    models: [
-      { id: "gemini-2.5-pro", label: "Gemini 2.5 Pro", options: true },
-      { id: "gemini-2.5-flash", label: "Gemini 2.5 Flash" },
-    ],
-  },
-  {
-    id: "upstage.solar",
-    icon: "solar",
-    label: "Solar",
-    models: [{ id: "solar-pro2", label: "Solar Pro 2" }],
   },
 ];
 
@@ -358,7 +331,7 @@ function Settings2Icon({ className = "h-4 w-4" }: { className?: string }) {
 
 function AppHeader() {
   const [isModelSelectorOpen, setIsModelSelectorOpen] = useState(false);
-  const [selectedModelId, setSelectedModelId] = useState("gpt-4.1");
+  const [selectedModelId, setSelectedModelId] = useState("QLM-1");
   const [pinnedModelId, setPinnedModelId] = useState<string | null>(null);
   const [expandedModelId, setExpandedModelId] = useState<string | null>(null);
   const selectedGroup =
