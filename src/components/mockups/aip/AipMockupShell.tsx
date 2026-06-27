@@ -192,24 +192,26 @@ function Sidebar({
       </div>
 
       <nav className="flex min-h-0 flex-1 flex-col gap-4 overflow-auto p-2">
-        {aipMockupMenuItems.map((item) => {
-          const isActive = activeMenu === item.id;
-          return (
-            <button
-              className={`group flex h-9 w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none transition-colors ${
-                isActive
-                  ? "bg-white/10 text-[#f4f4f5]"
-                  : "text-[#f4f4f5] hover:bg-white/10 hover:text-[#f4f4f5]"
-              }`}
-              key={item.id}
-              onClick={() => onMenuClick(item.id)}
-              type="button"
-            >
-              <MenuIcon className="h-4 w-4 shrink-0" name={menuIconById[item.id]} />
-              <span className="min-w-0 truncate">{item.label}</span>
-            </button>
-          );
-        })}
+        <div className="flex flex-col gap-0.5">
+          {aipMockupMenuItems.map((item) => {
+            const isActive = activeMenu === item.id;
+            return (
+              <button
+                className={`group flex h-9 w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none transition-colors ${
+                  isActive
+                    ? "bg-white/10 text-[#f4f4f5]"
+                    : "text-[#f4f4f5] hover:bg-white/10 hover:text-[#f4f4f5]"
+                }`}
+                key={item.id}
+                onClick={() => onMenuClick(item.id)}
+                type="button"
+              >
+                <MenuIcon className="h-4 w-4 shrink-0" name={menuIconById[item.id]} />
+                <span className="min-w-0 truncate">{item.label}</span>
+              </button>
+            );
+          })}
+        </div>
 
         <div className="relative flex min-w-0 flex-1 flex-col">
           <div className="flex shrink-0 items-center rounded-md px-1 py-2 text-xs text-[#a1a1aa]">Chat</div>
@@ -229,12 +231,8 @@ function Sidebar({
       </nav>
 
       <div className="relative flex items-center justify-between gap-2 px-2 pb-2 pl-1 pr-2 pt-2">
-        <button className="flex min-w-0 flex-1 items-center gap-2 rounded-full p-2 text-left transition-colors hover:bg-white/10" type="button">
+        <button aria-label="Profile" className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors hover:bg-white/10" type="button">
           <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#d9e2ff] to-[#8795ff]" />
-          <div className="min-w-0 flex-1">
-            <p className="m-0 truncate text-[13px] font-medium text-white">Jane Lee</p>
-            <p className="m-0 truncate text-[11px] text-[#a1a1aa]">jane@querypie.com</p>
-          </div>
         </button>
         <div className="flex items-center gap-1.5">
           <button className="flex h-8 items-center gap-[5px] whitespace-nowrap rounded-md px-2 text-sm font-normal text-[#f4f4f5] hover:bg-white/10" type="button">
@@ -243,6 +241,9 @@ function Sidebar({
           </button>
           <button aria-label="Notifications" className="relative flex h-8 w-8 items-center justify-center rounded-md text-[#f4f4f5] hover:bg-white/10" type="button">
             <Icon name="bell" />
+          </button>
+          <button aria-label="Settings" className="relative flex h-8 w-8 items-center justify-center rounded-md text-[#f4f4f5] hover:bg-white/10" type="button">
+            <Icon name="settings" />
           </button>
         </div>
       </div>
