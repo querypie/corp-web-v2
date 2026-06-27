@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import {
   aipMockupAgents,
+  aipMockupChats,
   aipMockupMcpTools,
   aipMockupMenuItems,
   aipMockupMessages,
@@ -16,6 +17,7 @@ type IconName =
   | "botMessage"
   | "chevron"
   | "clock"
+  | "component"
   | "grid"
   | "hardDrive"
   | "message"
@@ -35,6 +37,7 @@ const iconPaths: Record<IconName, string> = {
   botMessage: "M12 6V3m-4 7h.01M16 10h.01M7 15h10M5 18l-3 3V7a2 2 0 012-2h16a2 2 0 012 2v9a2 2 0 01-2 2H5z",
   chevron: "M9 6l6 6-6 6",
   clock: "M12 6v6l4 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+  component: "M8.5 2.5l3 3-3 3-3-3 3-3z M15.5 2.5l3 3-3 3-3-3 3-3z M8.5 9.5l3 3-3 3-3-3 3-3z M15.5 9.5l3 3-3 3-3-3 3-3z",
   grid: "M4 4h6v6H4z M14 4h6v6h-6z M4 14h6v6H4z M14 14h6v6h-6z",
   hardDrive: "M4 6h16l2 10H2L4 6z M6 18h12",
   message: "M5 5h14v10H8l-4 4V5z",
@@ -50,16 +53,27 @@ const iconPaths: Record<IconName, string> = {
 
 const menuIconById: Record<string, IconName> = {
   agents: "botMessage",
+  apps: "component",
   automation: "clock",
   chat: "message",
   mcp: "mcp",
   "my-drive": "hardDrive",
   presets: "preset",
   skills: "puzzle",
-  widgets: "grid",
 };
 
 function Icon({ name, className = "h-4 w-4" }: { className?: string; name: IconName }) {
+  if (name === "mcp") {
+    return (
+      <svg aria-hidden="true" className={className} fill="none" viewBox="0 0 16 16">
+        <path
+          d="M8.98.5c.66 0 1.29.25 1.76.68.27.25.47.55.58.89.12.33.15.68.1 1.03l-.1.66.66-.09c.38-.05.77-.02 1.14.1.32.1.61.26.86.47l.14.12c.23.21.41.46.53.74.12.27.18.57.18.86 0 .3-.06.59-.18.87-.12.27-.3.52-.53.73l-6.06 5.69a.75.75 0 00-.16.23.67.67 0 00.16.77l1.24 1.17c.02.02.02.04.02.05 0 .02-.01.03-.02.05-.04.04-.12.04-.16 0L7.9 14.3a.86.86 0 01-.18-.25.74.74 0 010-.59.85.85 0 01.18-.26l6.07-5.69c.21-.2.38-.44.5-.7.12-.27.18-.55.18-.84 0-.29-.06-.58-.18-.84a2.16 2.16 0 00-.7-.88 2.39 2.39 0 00-3.03.14L5.74 9.07l-.07.07c-.04.03-.12.03-.16 0-.02-.02-.02-.04-.02-.05 0-.02 0-.03.02-.05l5.07-4.76c.21-.2.38-.44.5-.7.12-.26.18-.55.18-.84 0-.29-.06-.58-.18-.84-.12-.27-.29-.51-.5-.7A2.35 2.35 0 008.98.61c-.59 0-1.17.22-1.6.62L.67 7.53c-.04.04-.12.04-.16 0-.02-.02-.02-.04-.02-.05 0-.02 0-.03.02-.05l6.71-6.29C7.69.75 8.32.5 8.98.5zm0 2.22c.03 0 .06.02.08.03.02.02.02.04.02.05 0 .02 0 .03-.02.05L4.1 7.46c-.21.2-.38.44-.5.71-.12.27-.18.56-.18.85 0 .29.06.58.18.84.12.27.29.51.5.7.43.4 1.01.62 1.59.62.59 0 1.17-.22 1.6-.62l4.96-4.65c.04-.04.12-.04.16 0 .02.02.02.04.02.05 0 .02 0 .03-.02.05l-4.96 4.65c-.47.43-1.1.68-1.76.68-.66 0-1.29-.25-1.76-.68-.23-.21-.4-.46-.53-.74a2.15 2.15 0 010-1.73c.12-.27.3-.52.53-.73l4.96-4.65c.02-.02.05-.04.09-.04z"
+          fill="currentColor"
+        />
+      </svg>
+    );
+  }
+
   return (
     <svg
       aria-hidden="true"
@@ -122,32 +136,27 @@ function Sidebar({
             >
               <Icon className={`h-4 w-4 ${isActive ? "text-white" : "text-[#a8b0bd]"}`} name={menuIconById[item.id]} />
               <span className="min-w-0 truncate">{item.label}</span>
-              {item.id === "widgets" ? (
-                <span className="ml-auto rounded-full border border-[#3a3f48] px-1.5 py-0.5 text-[10px] text-[#9ca3af]">
-                  Deprecated
-                </span>
-              ) : null}
             </button>
           );
         })}
 
         <div className="mt-4 px-2">
           <div className="mb-1 flex items-center justify-between">
-            <p className="m-0 text-[11px] font-medium uppercase tracking-[0.08em] text-[#858b96]">Agents</p>
-            <button className="text-[12px] text-[#b0b7c3] hover:text-white hover:underline" onClick={() => onMenuClick("agents")} type="button">
+            <p className="m-0 text-[11px] font-medium uppercase tracking-[0.08em] text-[#858b96]">Chat</p>
+            <button className="text-[12px] text-[#b0b7c3] hover:text-white hover:underline" onClick={() => onMenuClick("chat")} type="button">
               View all
             </button>
           </div>
           <div className="flex flex-col gap-0.5">
-            {aipMockupAgents.slice(0, 3).map((agent) => (
+            {aipMockupChats.map((chat) => (
               <button
                 className="flex h-9 items-center gap-2 rounded-md px-2 text-left text-[13px] text-[#d1d5db] hover:bg-[#22252b] hover:text-white"
-                key={agent.id}
-                onClick={() => onMenuClick("agents")}
+                key={chat}
+                onClick={() => onMenuClick("chat")}
                 type="button"
               >
-                <AgentAvatar name={agent.name} shortName={agent.shortName} />
-                <span className="min-w-0 truncate">{agent.name}</span>
+                <Icon className="h-4 w-4 shrink-0 text-[#a8b0bd]" name="message" />
+                <span className="min-w-0 truncate">{chat}</span>
               </button>
             ))}
           </div>

@@ -33,10 +33,10 @@ export const aipMockupMenuItems: AipMockupMenuItem[] = [
   { id: "agents", label: "Agents" },
   { id: "presets", label: "Presets" },
   { id: "mcp", label: "MCP" },
-  { id: "widgets", label: "Widgets" },
   { id: "automation", label: "Automation" },
   { id: "my-drive", label: "My Drive" },
   { id: "skills", label: "Skills" },
+  { id: "apps", label: "Apps" },
 ];
 
 export const aipMockupAgents: AipMockupAgent[] = [
@@ -73,3 +73,9 @@ export const aipMockupMessages: AipMockupMessage[] = [
 ];
 
 export const aipMockupMcpTools = ["Salesforce", "Snowflake", "Google Drive", "Slack"] as const;
+
+export const aipMockupChats = [
+  "VIP customer report",
+  "Weekly sales summary",
+  "Slack follow-up draft",
+] as const;
