@@ -7,12 +7,12 @@ export default function AipMockupPreviewPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#07080a] px-5 py-10 text-fg md:px-10">
+    <main className="min-h-screen bg-[#f2f4f7] px-5 py-10 text-[#101828] md:px-10">
       <div className="mx-auto flex w-full max-w-[1200px] flex-col gap-6">
         <div className="flex flex-col gap-2">
-          <p className="m-0 text-[12px] uppercase tracking-[0.12em] text-mute">Local preview</p>
-          <h1 className="m-0 type-h2 text-fg">AIP hero mockup</h1>
-          <p className="m-0 max-w-[720px] type-body-lg text-mute">
+          <p className="m-0 text-[12px] uppercase tracking-[0.12em] text-[#667085]">Local preview</p>
+          <h1 className="m-0 type-h2 text-[#101828]">AIP hero mockup</h1>
+          <p className="m-0 max-w-[720px] type-body-lg text-[#667085]">
             A standalone AIP mock app for the homepage hero. This route is available only in local development.
           </p>
         </div>
