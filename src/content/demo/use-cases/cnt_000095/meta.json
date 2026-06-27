@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "allganize-changsu-lee",
-  "imageSrc": "/demo/use-cases/cs-thumb-allganize.webp",
+  "imageSrc": "/demo/use-cases/cs-thumb-allganize-2.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 29,
@@ -28,6 +28,11 @@
     "ko": "\"QueryPie처럼 글로벌 비즈니스 성과를 내는 미래를 상상합니다.\"",
     "ja": "「QueryPie のようにグローバルビジネスでの成果を出す未来を描いています。」"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000095/en.html",

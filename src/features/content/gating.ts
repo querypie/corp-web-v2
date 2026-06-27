@@ -80,6 +80,110 @@ function countTextContent(html: string) {
     .trim().length;
 }
 
+function findSentenceBoundary(text: string, preferredLength: number) {
+  const normalizedPreferredLength = Math.max(1, Math.min(preferredLength, text.length));
+  const sentenceEndMatches = Array.from(text.matchAll(/[.!?。！？](?:\s+|$)/g));
+  const sentenceEndIndexes = sentenceEndMatches.map((match) => match.index + match[0].length);
+  const nextSentenceEnd = sentenceEndIndexes.find(
+    (index) => index >= normalizedPreferredLength && index <= normalizedPreferredLength + 240,
+  );
+
+  if (nextSentenceEnd) {
+    return nextSentenceEnd;
+  }
+
+  const previousSentenceEnd = sentenceEndIndexes
+    .filter((index) => index <= normalizedPreferredLength && index >= normalizedPreferredLength * 0.6)
+    .at(-1);
+
+  if (previousSentenceEnd) {
+    return previousSentenceEnd;
+  }
+
+  const nextWordBoundary = text
+    .slice(normalizedPreferredLength, normalizedPreferredLength + 80)
+    .search(/\s/);
+
+  if (nextWordBoundary > 0) {
+    return normalizedPreferredLength + nextWordBoundary;
+  }
+
+  const previousWordBoundary = text.slice(0, normalizedPreferredLength).search(/\s\S*$/);
+
+  if (previousWordBoundary > 0) {
+    return previousWordBoundary;
+  }
+
+  return normalizedPreferredLength;
+}
+
+function truncateTextAtSentenceBoundary(text: string, targetLength: number) {
+  if (text.length <= targetLength) {
+    return text;
+  }
+
+  const cutIndex = findSentenceBoundary(text, targetLength);
+  return text.slice(0, cutIndex).trimEnd();
+}
+
+function truncateHtmlByTextLength(html: string, targetLength: number) {
+  const tokens = tokenizeHtml(html);
+  const openTags: string[] = [];
+  let result = "";
+  let currentLength = 0;
+  let didTruncate = false;
+
+  for (const token of tokens) {
+    if (didTruncate) {
+      break;
+    }
+
+    if (token.startsWith("<")) {
+      result += token;
+
+      if (isCommentToken(token) || isSelfClosingTag(token)) {
+        continue;
+      }
+
+      if (isClosingTag(token)) {
+        openTags.pop();
+      } else {
+        const tagName = getTagName(token);
+
+        if (tagName) {
+          openTags.push(tagName);
+        }
+      }
+
+      continue;
+    }
+
+    const remainingLength = targetLength - currentLength;
+
+    if (remainingLength <= 0) {
+      didTruncate = true;
+      break;
+    }
+
+    if (token.length <= remainingLength) {
+      result += token;
+      currentLength += token.length;
+      continue;
+    }
+
+    const truncatedText = truncateTextAtSentenceBoundary(token, remainingLength);
+    result += truncatedText;
+    currentLength += truncatedText.length;
+    didTruncate = true;
+  }
+
+  for (let index = openTags.length - 1; index >= 0; index -= 1) {
+    result += `</${openTags[index]}>`;
+  }
+
+  return result;
+}
+
 function collectRootBlocks(html: string) {
   const tokens = tokenizeHtml(html);
   const blocks: string[] = [];
@@ -154,8 +258,16 @@ export function buildContentPreviewHtml(html: string, level: ContentGatingLevel)
   let currentLength = 0;
 
   for (const block of blocks) {
+    const blockTextLength = countTextContent(block);
+
+    if (currentLength + blockTextLength > targetLength) {
+      const remainingLength = Math.max(1, targetLength - currentLength);
+      selectedBlocks.push(truncateHtmlByTextLength(block, remainingLength));
+      break;
+    }
+
     selectedBlocks.push(block);
-    currentLength += countTextContent(block);
+    currentLength += blockTextLength;
 
     if (currentLength >= targetLength) {
       break;

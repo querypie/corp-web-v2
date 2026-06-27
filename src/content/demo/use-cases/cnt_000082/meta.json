@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "factory-iot-ai-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case-thumb-9-en.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 13,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000082",
   "summary": {
     "en": "An AI agent that monitors factory IoT signals, detects anomalies, and orchestrates maintenance workflows through natural language—bridging OT data with IT systems for faster, safer operations.",
-    "ko": "An AI agent that monitors factory IoT signals, detects anomalies, and orchestrates maintenance workflows through natural language—bridging OT data with IT systems for faster, safer operations.",
-    "ja": "ファクトリーIoTシグナルを監視し、異常を検知し、自然言語でメンテナンスワークフローをオーケストレーションするAIエージェント。OTデータとITシステムを橋渡しし、より迅速で安全なオペレーションを実現します。"
+    "ko": "공장 IoT 신호를 모니터링하고 이상을 감지하며 자연어를 통해 유지보수 워크플로우를 조율하는 AI 에이전트로, 더 빠르고 안전한 운영을 위해 OT 데이터와 IT 시스템을 연결합니다.",
+    "ja": "工場のIoTシグナルを監視し、異常を検出し、自然言語を通じてメンテナンスワークフローを調整するAIエージェント。OTデータとITシステムを橋渡しし、より迅速で安全な操業を実現します。"
   },
   "title": {
     "en": "AIP Use Case: Factory IoT AI Agent",
-    "ko": "",
-    "ja": "AIP活用事例： ファクトリーIoT AIエージェント"
+    "ko": "AIP 사용 사례: 공장 IoT AI 에이전트",
+    "ja": "AIPユースケース：ファクトリーIoT AIエージェント"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000082/en.html",

@@ -1,0 +1,50 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "introduction",
+  "contentType": "content",
+  "dateIso": "2025-10-29",
+  "downloadCoverImageSrc": "/documentation/introduction/aip-introduction.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "50",
+  "hideHeroImage": false,
+  "id": "querypie-aip",
+  "imageSrc": "/documentation/introduction/aip-introduction.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000210",
+  "summary": {
+    "en": "Everything You Need to Know About QueryPie AIP",
+    "ko": "QueryPie AIP에 대해 알아야 할 모든 것",
+    "ja": "QueryPie AIPについて知っておくべきすべてのこと"
+  },
+  "title": {
+    "en": "QueryPie AIP Introduction",
+    "ko": "QueryPie AIP 소개",
+    "ja": "QueryPie AIPのご紹介"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/introduction/cnt_000210/en.html",
+      "jsonPath": "src/content/documentation/introduction/cnt_000210/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/introduction/cnt_000210/ko.html",
+      "jsonPath": "src/content/documentation/introduction/cnt_000210/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/introduction/cnt_000210/ja.html",
+      "jsonPath": "src/content/documentation/introduction/cnt_000210/ja.tiptap.json"
+    }
+  }
+}

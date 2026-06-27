@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "aws-solutions-architect-ai-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case-thumb-18-en.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 6,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000073",
   "summary": {
     "en": "An AI agent that designs and validates AWS architectures—proposing patterns, estimating cost, and checking best practices through natural language.",
-    "ko": "An AI agent that designs and validates AWS architectures—proposing patterns, estimating cost, and checking best practices through natural language.",
-    "ja": "自然言語でパターン提案、コスト見積もり、ベストプラクティス検証を行い、AWSアーキテクチャを設計・妥当性確認するAIエージェント。"
+    "ko": "자연어를 통해 패턴을 제안하고, 비용을 예측하며, 모범 사례를 검토하여 AWS 아키텍처를 설계하고 검증하는 AI 에이전트입니다.",
+    "ja": "自然言語を通じてパターンの提案、コストの見積もり、ベストプラクティスの確認を行い、AWSアーキテクチャの設計と検証を行うAIエージェント。"
   },
   "title": {
     "en": "AIP Use Case: AWS Solutions Architect AI Agent",
-    "ko": "",
-    "ja": "AIP活用事例： AWSソリューションアーキテクトAIエージェント"
+    "ko": "AIP 사용 사례: AWS 솔루션스 아키텍트 AI 에이전트",
+    "ja": "AIPユースケース：AWS Solutions Architect AI Agent"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000073/en.html",

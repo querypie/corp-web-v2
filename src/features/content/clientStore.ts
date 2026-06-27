@@ -22,6 +22,29 @@ type SaveOptions = {
   shiftSiblingsForNew?: boolean;
 };
 
+type ContentStateErrorPayload = {
+  code?: string;
+  detail?: string;
+  error?: string;
+  locale?: string;
+  suggestions?: string[];
+};
+
+function formatContentStateError(payload: ContentStateErrorPayload, fallback: string) {
+  if (payload.code === "TIPTAP_HTML_RENDER_FAILED") {
+    return [
+      payload.error ?? "본문 HTML 변환에 실패했습니다.",
+      payload.locale ? `문제 언어: ${payload.locale}` : "",
+      payload.detail ? `원인: ${payload.detail}` : "",
+      payload.suggestions?.length
+        ? `수정 방법:\n${payload.suggestions.map((suggestion) => `- ${suggestion}`).join("\n")}`
+        : "",
+    ].filter(Boolean).join("\n\n");
+  }
+
+  return payload.error ?? fallback;
+}
+
 const snapshotCache = new Map<string, ManagedContentEntry[]>();
 
 function getCacheKey(section?: ManagedContentSection) {
@@ -129,11 +152,24 @@ export async function getManagedContentsSnapshot(
 export async function getManagedContentDetail(
   section: ManagedContentSection,
   id: string,
+  options?: {
+    categorySlug?: ManagedContentCategorySlug;
+    storageId?: string;
+  },
 ) {
   const params = new URLSearchParams({
     id,
     section,
   });
+
+  if (options?.categorySlug) {
+    params.set("categorySlug", options.categorySlug);
+  }
+
+  if (options?.storageId) {
+    params.set("storageId", options.storageId);
+  }
+
   const response = await fetch(`/api/admin/content/state?${params.toString()}`, {
     cache: "no-store",
   });
@@ -159,10 +195,10 @@ export async function persistManagedContents(items: ManagedContentEntry[], optio
     method: "POST",
   });
 
-  const payload = (await response.json().catch(() => ({}))) as { error?: string };
+  const payload = (await response.json().catch(() => ({}))) as ContentStateErrorPayload;
 
   if (!response.ok) {
-    throw new Error(payload.error ?? "Failed to persist content state.");
+    throw new Error(formatContentStateError(payload, "Failed to persist content state."));
   }
 
   emitChange({ shouldRefetch: true });
@@ -186,10 +222,10 @@ export async function upsertManagedContent(
     method: "PUT",
   });
 
-  const payload = (await response.json()) as { error?: string; item?: ManagedContentEntry };
+  const payload = (await response.json()) as ContentStateErrorPayload & { item?: ManagedContentEntry };
 
   if (!response.ok || !payload.item) {
-    throw new Error(payload.error ?? "Failed to save content.");
+    throw new Error(formatContentStateError(payload, "Failed to save content."));
   }
 
   emitChange({ section: payload.item.section, shouldRefetch: true });

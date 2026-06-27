@@ -9,6 +9,7 @@ import Switch from "@/components/ui/Switch";
 import Tab from "@/components/ui/Tab";
 import TabGroup from "@/components/ui/TabGroup";
 import AdminContentPreview from "./AdminContentPreview";
+import type { Locale } from "@/constants/i18n";
 import {
   deleteManagedContent,
   getManagedContentDetail,
@@ -26,13 +27,13 @@ import {
   getDownloadPreviewProps,
   getManagedCategoryLabel,
   getNewsFormatLabel,
-  getLocalizedContent,
   getWriterLabel,
   type ManagedContentCategorySlug,
   type ManagedContentEntry,
   type ManagedContentSection,
 } from "@/features/content/data";
 import { cloneAsAuthoredContent } from "@/features/content/cloneToAuthored";
+import { renderTiptapHtml } from "@/features/content/tiptapHtml";
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -154,15 +155,24 @@ function ActionIcon({
 
 export function PreviewModal({
   item,
+  initialLocale = "en",
   isLoading = false,
   onClose,
 }: {
+  initialLocale?: Locale;
   item: ManagedContentEntry;
   isLoading?: boolean;
   onClose: () => void;
 }) {
-  const [activeLocale, setActiveLocale] = useState<"en" | "ko" | "ja">("en");
-  const localizedBodyHtml = getLocalizedContent(item.bodyHtml, activeLocale);
+  const [activeLocale, setActiveLocale] = useState<Locale>(initialLocale);
+  const localizedRichTextHtml = renderTiptapHtml(item.bodyRichText[activeLocale] ?? "");
+  const localizedBodyHtml = localizedRichTextHtml || (item.bodyHtml[activeLocale] ?? "");
+  const localizedSummary = item.summary[activeLocale] ?? "";
+  const localizedTitle = item.title[activeLocale] ?? "";
+
+  useEffect(() => {
+    setActiveLocale(initialLocale);
+  }, [initialLocale, item.id, item.storageId]);
 
   return (
     /* 리스트 카드 클릭 시 퍼블릭 상세 형태로 보여주는 미리보기 모달 */
@@ -172,7 +182,7 @@ export function PreviewModal({
         onClick={(event) => event.stopPropagation()}
       >
         <div className="border-b border-border px-5 py-4 md:px-6">
-          <div className="flex justify-center">
+          <div className="flex items-center justify-between gap-4">
             <TabGroup>
               {(["en", "ko", "ja"] as const).map((locale) => (
                 <Tab
@@ -184,6 +194,17 @@ export function PreviewModal({
                 </Tab>
               ))}
             </TabGroup>
+            <button
+              aria-label="미리보기 닫기"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-button text-mute transition-colors hover:bg-bg-content hover:text-fg"
+              onClick={onClose}
+              type="button"
+            >
+              <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none">
+                <path d="M6 6l12 12" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
+                <path d="M18 6 6 18" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
+              </svg>
+            </button>
           </div>
         </div>
         <div className="overflow-auto px-5 py-5 md:px-6">
@@ -193,15 +214,19 @@ export function PreviewModal({
             </div>
           ) : (
             <AdminContentPreview
+              key={`${item.id}-${activeLocale}`}
               bodyHtml={localizedBodyHtml}
+              category={getManagedCategoryLabel(item.section, item.categorySlug, activeLocale)}
+              contentType={item.contentType}
               date={formatPublicDate(activeLocale, item.dateIso)}
               {...getDownloadPreviewProps(item)}
-              heroImageAlt={getLocalizedContent(item.title, activeLocale)}
+              gatingLevel={item.gatingLevel}
+              heroImageAlt={localizedTitle}
               heroImageSrc={item.imageSrc}
               hideHeroImage={item.hideHeroImage}
               section={item.section}
-              summary={getLocalizedContent(item.summary, activeLocale)}
-              title={getLocalizedContent(item.title, activeLocale)}
+              summary={localizedSummary}
+              title={localizedTitle}
               url={item.externalUrl || "#"}
               writer={item.section === "news" ? getNewsFormatLabel(item, activeLocale) : getWriterLabel(item)}
             />
@@ -220,6 +245,7 @@ function ContentRow({
   item,
   onDelete,
   onDuplicate,
+  onPreview,
   rowRef,
   onMoveDown,
   onMoveUp,
@@ -234,6 +260,7 @@ function ContentRow({
   item: ManagedContentEntry;
   onDelete: () => void;
   onDuplicate: () => void;
+  onPreview: () => void;
   rowRef: (node: HTMLDivElement | null) => void;
   onMoveDown: () => void;
   onMoveUp: () => void;
@@ -322,7 +349,10 @@ function ContentRow({
             {getManagedCategoryLabel(item.section, item.categorySlug, activeLocale)}
           </p>
         ) : null}
-        <p className="m-0 type-body-md text-fg">{localizedTitle}</p>
+        <p className="m-0 type-body-md text-fg">
+          <span>{localizedTitle}</span>
+          {item.contentType === "outlink" ? <span aria-hidden="true" className="icon-outlink-mask ml-1 h-3.5 w-3.5 shrink-0 align-[-2px] text-mute" /> : null}
+        </p>
       </div>
 
       <div className="flex items-center justify-between gap-4 md:contents">
@@ -389,7 +419,30 @@ function ContentRow({
                 >
                   <button
                     className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute"
-                    onClick={onDuplicate}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      setMenuOpen(false);
+                      onPreview();
+                    }}
+                    type="button"
+                  >
+                    <MenuIcon>
+                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
+                        <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
+                        <circle cx="12" cy="12" r="2.5" stroke="currentColor" strokeWidth="1.75" />
+                      </svg>
+                    </MenuIcon>
+                    미리보기
+                  </button>
+                  <button
+                    className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      setMenuOpen(false);
+                      onDuplicate();
+                    }}
                     type="button"
                   >
                     <MenuIcon>
@@ -402,7 +455,12 @@ function ContentRow({
                   </button>
                   <button
                     className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute"
-                    onClick={onDelete}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      event.stopPropagation();
+                      setMenuOpen(false);
+                      onDelete();
+                    }}
                     type="button"
                   >
                     <MenuIcon>
@@ -443,6 +501,8 @@ export default function AdminManagedContentListPage({
   const [query, setQuery] = useState("");
   const [pendingDuplicateItem, setPendingDuplicateItem] = useState<ManagedContentEntry | null>(null);
   const [pendingDeleteItem, setPendingDeleteItem] = useState<ManagedContentEntry | null>(null);
+  const [previewItem, setPreviewItem] = useState<ManagedContentEntry | null>(null);
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   const [isStatusUpdating, setIsStatusUpdating] = useState(false);
   const [isDuplicating, setIsDuplicating] = useState(false);
   const [isReorderMode, setIsReorderMode] = useState(false);
@@ -515,7 +575,10 @@ export default function AdminManagedContentListPage({
   function handleDuplicateItem(item: ManagedContentEntry) {
     setIsDuplicating(true);
 
-    void getManagedContentDetail(item.section, item.id)
+    void getManagedContentDetail(item.section, item.id, {
+      categorySlug: item.categorySlug,
+      storageId: item.storageId,
+    })
       .then((fullItem) => {
         if (!fullItem) {
           throw new Error("원본 콘텐츠를 불러오지 못했습니다.");
@@ -555,6 +618,34 @@ export default function AdminManagedContentListPage({
       })
       .finally(() => {
         setIsDuplicating(false);
+      });
+  }
+
+  function handlePreviewItem(item: ManagedContentEntry) {
+    setPreviewItem(item);
+    setIsPreviewLoading(true);
+
+    void getManagedContentDetail(item.section, item.id, {
+      categorySlug: item.categorySlug,
+      storageId: item.storageId,
+    })
+      .then((fullItem) => {
+        if (!fullItem) {
+          throw new Error("콘텐츠를 불러오지 못했습니다.");
+        }
+
+        setPreviewItem(fullItem);
+      })
+      .catch((error: unknown) => {
+        window.alert(
+          error instanceof Error
+            ? error.message
+            : "미리보기를 불러오지 못했습니다. 다시 시도해 주세요.",
+        );
+        setPreviewItem(null);
+      })
+      .finally(() => {
+        setIsPreviewLoading(false);
       });
   }
 
@@ -718,6 +809,7 @@ export default function AdminManagedContentListPage({
                 item={item}
                 onDelete={() => setPendingDeleteItem(item)}
                 onDuplicate={() => setPendingDuplicateItem(item)}
+                onPreview={() => handlePreviewItem(item)}
                 rowRef={(node) => {
                   if (node) {
                     rowRefs.current.set(item.id, node);
@@ -775,6 +867,18 @@ export default function AdminManagedContentListPage({
           isSubmitting={isDuplicating}
           onCancel={() => setPendingDuplicateItem(null)}
           onConfirm={() => handleDuplicateItem(pendingDuplicateItem)}
+        />
+      ) : null}
+
+      {previewItem ? (
+        <PreviewModal
+          initialLocale={activeLocale}
+          isLoading={isPreviewLoading}
+          item={previewItem}
+          onClose={() => {
+            setPreviewItem(null);
+            setIsPreviewLoading(false);
+          }}
         />
       ) : null}
 

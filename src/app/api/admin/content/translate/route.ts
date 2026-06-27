@@ -22,7 +22,10 @@ type TranslationErrorPayload = {
 
 const MAX_TRANSLATION_CHARACTERS = 60000;
 const MAX_TRANSLATION_CHUNK_CHARACTERS = 6000;
-const MAX_TRANSLATION_CHUNK_ITEMS = 20;
+const MAX_TRANSLATION_CHUNK_ITEMS = 50;
+const TRANSLATION_PROVIDER_ATTEMPT_TIMEOUT_MS = 30000;
+const TRANSLATION_PROVIDER_MAX_ATTEMPTS = 3;
+const TRANSLATION_PROVIDER_RETRY_DELAY_MS = 700;
 
 function jsonError(
   code: TranslationErrorCode,
@@ -44,6 +47,120 @@ function getTargetLanguage(locale: Locale) {
 
 function isAbortError(error: unknown) {
   return error instanceof Error && error.name === "AbortError";
+}
+
+async function fetchWithTimeout(
+  input: RequestInfo | URL,
+  init: RequestInit,
+  timeoutMs: number,
+) {
+  const timeoutController = new AbortController();
+  let didTimeout = false;
+  const timeout = setTimeout(() => {
+    didTimeout = true;
+    timeoutController.abort();
+  }, timeoutMs);
+  const parentSignal = init.signal;
+  const abortFromParent = () => timeoutController.abort();
+
+  parentSignal?.addEventListener("abort", abortFromParent, { once: true });
+
+  try {
+    return await fetch(input, {
+      ...init,
+      signal: timeoutController.signal,
+    });
+  } catch (error) {
+    if (didTimeout && isAbortError(error)) {
+      throw Object.assign(new Error("Translation provider request timed out."), {
+        detail: `Provider did not respond within ${Math.round(timeoutMs / 1000)} seconds.`,
+        translationCode: "PROVIDER_ERROR" satisfies TranslationErrorCode,
+      });
+    }
+
+    throw error;
+  } finally {
+    clearTimeout(timeout);
+    parentSignal?.removeEventListener("abort", abortFromParent);
+  }
+}
+
+function sleep(ms: number, signal: AbortSignal) {
+  return new Promise<void>((resolve, reject) => {
+    if (signal.aborted) {
+      reject(Object.assign(new Error("Translation request was aborted."), {
+        translationCode: "REQUEST_ABORTED" satisfies TranslationErrorCode,
+      }));
+      return;
+    }
+
+    const timeout = setTimeout(() => {
+      signal.removeEventListener("abort", abort);
+      resolve();
+    }, ms);
+
+    const abort = () => {
+      clearTimeout(timeout);
+      reject(Object.assign(new Error("Translation request was aborted."), {
+        translationCode: "REQUEST_ABORTED" satisfies TranslationErrorCode,
+      }));
+    };
+
+    signal.addEventListener("abort", abort, { once: true });
+  });
+}
+
+function getTranslationCode(error: unknown): TranslationErrorCode {
+  if (isAbortError(error)) {
+    return "REQUEST_ABORTED";
+  }
+
+  return (error as { translationCode?: TranslationErrorCode } | null)?.translationCode ?? "UNKNOWN";
+}
+
+function isRetryableProviderError(code: TranslationErrorCode) {
+  return code === "PROVIDER_ERROR" || code === "INVALID_RESPONSE" || code === "NETWORK_ERROR" || code === "UNKNOWN";
+}
+
+async function retryProviderTranslation(
+  runAttempt: () => Promise<string[]>,
+  context: { locale: Locale; model: string; provider: string; textCount: number },
+  signal: AbortSignal,
+) {
+  const attemptDetails: string[] = [];
+
+  for (let attempt = 1; attempt <= TRANSLATION_PROVIDER_MAX_ATTEMPTS; attempt += 1) {
+    try {
+      return await runAttempt();
+    } catch (error) {
+      const code = getTranslationCode(error);
+      const message = error instanceof Error ? error.message : "Unknown error";
+      const detail = (error as { detail?: string } | null)?.detail;
+      attemptDetails.push(
+        `시도 ${attempt}/${TRANSLATION_PROVIDER_MAX_ATTEMPTS}: ${code} - ${detail || message}`,
+      );
+
+      if (!isRetryableProviderError(code) || attempt === TRANSLATION_PROVIDER_MAX_ATTEMPTS) {
+        throw Object.assign(error instanceof Error ? error : new Error(message), {
+          detail: [
+            `provider=${context.provider}`,
+            `model=${context.model}`,
+            `target=${localeDisplayNames[context.locale]}`,
+            `texts=${context.textCount}`,
+            ...attemptDetails,
+          ].join("\n"),
+          translationCode: code,
+        });
+      }
+
+      await sleep(TRANSLATION_PROVIDER_RETRY_DELAY_MS, signal);
+    }
+  }
+
+  throw Object.assign(new Error("Translation provider failed after retries."), {
+    detail: attemptDetails.join("\n"),
+    translationCode: "PROVIDER_ERROR" satisfies TranslationErrorCode,
+  });
 }
 
 function extractOpenAIText(payload: unknown) {
@@ -124,56 +241,71 @@ async function callOpenAICompatibleTranslation(
   locale: Locale,
   signal: AbortSignal,
   useResponseFormat: boolean,
+  provider: string,
 ) {
-  const response = await fetch(endpoint, {
-    body: JSON.stringify({
-      messages: createTranslationMessages(texts, locale),
-      model,
-      ...(useResponseFormat ? { response_format: { type: "json_object" } } : {}),
-      temperature: 0.2,
-    }),
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
+  return retryProviderTranslation(
+    async () => {
+      const response = await fetchWithTimeout(endpoint, {
+        body: JSON.stringify({
+          messages: createTranslationMessages(texts, locale),
+          model,
+          ...(useResponseFormat ? { response_format: { type: "json_object" } } : {}),
+          temperature: 0.2,
+        }),
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        signal,
+      }, TRANSLATION_PROVIDER_ATTEMPT_TIMEOUT_MS);
+
+      const payload = (await response.json().catch(() => ({}))) as unknown;
+
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          throw Object.assign(new Error("Translation provider authorization failed."), {
+            translationCode: "UNAUTHORIZED" satisfies TranslationErrorCode,
+          });
+        }
+
+        if (response.status === 429) {
+          throw Object.assign(new Error("Translation provider rate limit exceeded."), {
+            translationCode: "RATE_LIMITED" satisfies TranslationErrorCode,
+          });
+        }
+
+        throw Object.assign(new Error(`Translation provider failed with HTTP ${response.status}.`), {
+          detail: JSON.stringify(payload).slice(0, 500),
+          translationCode: "PROVIDER_ERROR" satisfies TranslationErrorCode,
+        });
+      }
+
+      const providerText = extractOpenAIText(payload);
+      return parseProviderTranslations(providerText, texts.length);
     },
-    method: "POST",
+    {
+      locale,
+      model,
+      provider,
+      textCount: texts.length,
+    },
     signal,
-  });
-
-  const payload = (await response.json().catch(() => ({}))) as unknown;
-
-  if (!response.ok) {
-    if (response.status === 401 || response.status === 403) {
-      throw Object.assign(new Error("Translation provider authorization failed."), {
-        translationCode: "UNAUTHORIZED" satisfies TranslationErrorCode,
-      });
-    }
-
-    if (response.status === 429) {
-      throw Object.assign(new Error("Translation provider rate limit exceeded."), {
-        translationCode: "RATE_LIMITED" satisfies TranslationErrorCode,
-      });
-    }
-
-    throw Object.assign(new Error("Translation provider failed."), {
-      detail: JSON.stringify(payload).slice(0, 500),
-      translationCode: "PROVIDER_ERROR" satisfies TranslationErrorCode,
-    });
-  }
-
-  const providerText = extractOpenAIText(payload);
-  return parseProviderTranslations(providerText, texts.length);
+  );
 }
 
 async function callOpenAITranslation(texts: string[], locale: Locale, signal: AbortSignal) {
+  const model = process.env.OPENAI_TRANSLATION_MODEL ?? "gpt-4o-mini";
+
   return callOpenAICompatibleTranslation(
     "https://api.openai.com/v1/chat/completions",
     process.env.OPENAI_API_KEY ?? "",
-    process.env.OPENAI_TRANSLATION_MODEL ?? "gpt-4o-mini",
+    model,
     texts,
     locale,
     signal,
     true,
+    "OpenAI",
   );
 }
 
@@ -187,14 +319,17 @@ async function callGlmTranslation(texts: string[], locale: Locale, signal: Abort
     });
   }
 
+  const model = process.env.ANTHROPIC_TRANSLATION_MODEL ?? process.env.ANTHROPIC_MODEL ?? "glm-5.2-fp8";
+
   return callOpenAICompatibleTranslation(
     `${baseUrl}/v1/chat/completions`,
     token,
-    process.env.ANTHROPIC_TRANSLATION_MODEL ?? process.env.ANTHROPIC_MODEL ?? "glm-5.2-fp8",
+    model,
     texts,
     locale,
     signal,
     false,
+    "GLM-compatible",
   );
 }
 
@@ -208,57 +343,70 @@ async function callAnthropicTranslation(texts: string[], locale: Locale, signal:
     });
   }
 
-  const response = await fetch(`${baseUrl}/v1/messages`, {
-    body: JSON.stringify({
-      max_tokens: 8192,
-      messages: [
-        {
-          content: JSON.stringify({
-            outputFormat: { translations: ["translated text in the same order"] },
-            targetLanguage: getTargetLanguage(locale),
-            texts,
-          }),
-          role: "user",
+  const model = process.env.ANTHROPIC_TRANSLATION_MODEL ?? process.env.ANTHROPIC_MODEL ?? "glm-5.2-fp8";
+
+  return retryProviderTranslation(
+    async () => {
+      const response = await fetchWithTimeout(`${baseUrl}/v1/messages`, {
+        body: JSON.stringify({
+          max_tokens: 8192,
+          messages: [
+            {
+              content: JSON.stringify({
+                outputFormat: { translations: ["translated text in the same order"] },
+                targetLanguage: getTargetLanguage(locale),
+                texts,
+              }),
+              role: "user",
+            },
+          ],
+          model,
+          system:
+            "You translate CMS content. Return strict JSON only. Preserve product names, URLs, code, placeholders, and markdown-like tokens. Do not add commentary.",
+          temperature: 0.2,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": token,
+          Authorization: `Bearer ${token}`,
+          "anthropic-version": "2023-06-01",
         },
-      ],
-      model: process.env.ANTHROPIC_TRANSLATION_MODEL ?? process.env.ANTHROPIC_MODEL ?? "glm-5.2-fp8",
-      system:
-        "You translate CMS content. Return strict JSON only. Preserve product names, URLs, code, placeholders, and markdown-like tokens. Do not add commentary.",
-      temperature: 0.2,
-    }),
-    headers: {
-      "Content-Type": "application/json",
-      "x-api-key": token,
-      Authorization: `Bearer ${token}`,
-      "anthropic-version": "2023-06-01",
+        method: "POST",
+        signal,
+      }, TRANSLATION_PROVIDER_ATTEMPT_TIMEOUT_MS);
+
+      const payload = (await response.json().catch(() => ({}))) as unknown;
+
+      if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
+          throw Object.assign(new Error("Translation provider authorization failed."), {
+            translationCode: "UNAUTHORIZED" satisfies TranslationErrorCode,
+          });
+        }
+
+        if (response.status === 429) {
+          throw Object.assign(new Error("Translation provider rate limit exceeded."), {
+            translationCode: "RATE_LIMITED" satisfies TranslationErrorCode,
+          });
+        }
+
+        throw Object.assign(new Error(`Translation provider failed with HTTP ${response.status}.`), {
+          detail: JSON.stringify(payload).slice(0, 500),
+          translationCode: "PROVIDER_ERROR" satisfies TranslationErrorCode,
+        });
+      }
+
+      const providerText = extractAnthropicText(payload);
+      return parseProviderTranslations(providerText, texts.length);
     },
-    method: "POST",
+    {
+      locale,
+      model,
+      provider: "Anthropic-compatible",
+      textCount: texts.length,
+    },
     signal,
-  });
-
-  const payload = (await response.json().catch(() => ({}))) as unknown;
-
-  if (!response.ok) {
-    if (response.status === 401 || response.status === 403) {
-      throw Object.assign(new Error("Translation provider authorization failed."), {
-        translationCode: "UNAUTHORIZED" satisfies TranslationErrorCode,
-      });
-    }
-
-    if (response.status === 429) {
-      throw Object.assign(new Error("Translation provider rate limit exceeded."), {
-        translationCode: "RATE_LIMITED" satisfies TranslationErrorCode,
-      });
-    }
-
-    throw Object.assign(new Error("Translation provider failed."), {
-      detail: JSON.stringify(payload).slice(0, 500),
-      translationCode: "PROVIDER_ERROR" satisfies TranslationErrorCode,
-    });
-  }
-
-  const providerText = extractAnthropicText(payload);
-  return parseProviderTranslations(providerText, texts.length);
+  );
 }
 
 function parseProviderTranslations(providerText: string, expectedLength: number) {
@@ -313,15 +461,37 @@ async function translateTexts(texts: string[], locale: Locale, signal: AbortSign
   const translatedChunks: string[][] = [];
 
   if (process.env.ANTHROPIC_BASE_URL) {
-    for (const chunk of chunks) {
-      translatedChunks.push(await callGlmTranslation(chunk, locale, signal));
+    for (let index = 0; index < chunks.length; index += 1) {
+      const chunk = chunks[index];
+      try {
+        translatedChunks.push(await callGlmTranslation(chunk, locale, signal));
+      } catch (error) {
+        throw Object.assign(error instanceof Error ? error : new Error("Translation chunk failed."), {
+          detail: [
+            `chunk=${index + 1}/${chunks.length}`,
+            (error as { detail?: string } | null)?.detail,
+          ].filter(Boolean).join("\n"),
+          translationCode: getTranslationCode(error),
+        });
+      }
     }
     return translatedChunks.flat();
   }
 
   if (process.env.OPENAI_API_KEY) {
-    for (const chunk of chunks) {
-      translatedChunks.push(await callOpenAITranslation(chunk, locale, signal));
+    for (let index = 0; index < chunks.length; index += 1) {
+      const chunk = chunks[index];
+      try {
+        translatedChunks.push(await callOpenAITranslation(chunk, locale, signal));
+      } catch (error) {
+        throw Object.assign(error instanceof Error ? error : new Error("Translation chunk failed."), {
+          detail: [
+            `chunk=${index + 1}/${chunks.length}`,
+            (error as { detail?: string } | null)?.detail,
+          ].filter(Boolean).join("\n"),
+          translationCode: getTranslationCode(error),
+        });
+      }
     }
     return translatedChunks.flat();
   }

@@ -55,6 +55,7 @@ type FeaturedContentItem = {
   category: string;
   href: string;
   imageSrc: string;
+  isExternal?: boolean;
   title: string;
 };
 

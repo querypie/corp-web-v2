@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "portfolio-insight-ai-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case-thumb-19-en.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 5,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000071",
   "summary": {
     "en": "An AI agent that turns market and account data into portfolio insights—performance, allocation, and risk—delivered through natural language with actionable next steps.",
-    "ko": "An AI agent that turns market and account data into portfolio insights—performance, allocation, and risk—delivered through natural language with actionable next steps.",
-    "ja": "市場データと口座データを自然言語での会話を通じて、パフォーマンス、アロケーション、リスクのポートフォリオインサイトに変換し、行動可能な次の一手まで提示するAIエージェント。"
+    "ko": "시장 및 계정 데이터를 포트폴리오 인사이트(성과, 배분, 위험)로 전환하고, 실행 가능한 다음 단계와 함께 자연어로 제공하는 AI 에이전트입니다.",
+    "ja": "市場および口座データをポートフォリオのインサイト（パフォーマンス、アロケーション、リスク）に変換し、自然言語で実行可能な次のステップとともに提供するAIエージェント。"
   },
   "title": {
     "en": "AIP Use Case: Portfolio Insight AI Agent",
-    "ko": "",
-    "ja": "AIP活用事例： 投資ポートフォリオ・インサイトAIエージェント"
+    "ko": "AIP 사용 사례: 포트폴리오 인사이트 AI 에이전트",
+    "ja": "AIPユースケース：Portfolio Insight AI Agent"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000071/en.html",

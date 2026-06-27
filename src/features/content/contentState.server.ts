@@ -6,7 +6,11 @@ import {
   type ManagedContentEntry,
   type ManagedContentSection,
 } from "./data";
-import { getAuthoredCacheVersion, readAuthoredManagedContents } from "./authored.server";
+import {
+  getAuthoredCacheVersion,
+  readAuthoredManagedContentItem,
+  readAuthoredManagedContents,
+} from "./authored.server";
 
 const authoredStateCache = new Map<string, ManagedContentEntry[]>();
 
@@ -66,6 +70,13 @@ export async function readContentItem(
   id: string,
   options?: { categorySlug?: ManagedContentCategorySlug; includeBodies?: boolean },
 ) {
+  if (options?.includeBodies) {
+    return readAuthoredManagedContentItem(section, id, {
+      categorySlug: options.categorySlug,
+      includeBodies: true,
+    });
+  }
+
   const items = await readContentState(section, options);
   return items.find((item) => item.id === id) ?? null;
 }

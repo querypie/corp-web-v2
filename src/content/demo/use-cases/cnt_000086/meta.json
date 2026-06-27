@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "server-access-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case-thumb-3-en.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 20,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000086",
   "summary": {
     "en": "An AI agent that automates server access requests and management through natural language, streamlining privileged access while maintaining strict security controls.",
-    "ko": "An AI agent that automates server access requests and management through natural language, streamlining privileged access while maintaining strict security controls.",
-    "ja": "自然言語を通じてサーバーアクセスリクエストと管理を自動化するAIエージェント。厳格なセキュリティ管理を維持しながら、特権アクセスを効率化します。"
+    "ko": "자연어를 통해 서버 액세스 요청 및 관리를 자동화하여 엄격한 보안 통제를 유지하면서도 권한 있는 액세스를 간소화하는 AI 에이전트입니다.",
+    "ja": "自然言語を通じてサーバーアクセスのリクエストと管理を自動化し、厳格なセキュリティ管理を維持しながら特権アクセスを合理化するAIエージェント。"
   },
   "title": {
     "en": "AIP Use Case: Server Access Agent",
-    "ko": "AIP Use Case: Server Access Agent",
-    "ja": "AIP活用事例：サーバーアクセスエージェント"
+    "ko": "AIP 사용 사례: 서버 액세스 에이전트",
+    "ja": "AIPユースケース：Server Access Agent"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000086/en.html",

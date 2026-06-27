@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import type { Locale } from "@/constants/i18n";
 import type { PublicMenuItem } from "@/features/content/config";
@@ -10,6 +11,7 @@ type DocsListItem = {
   description?: string;
   href: string;
   imageSrc: string;
+  isExternal?: boolean;
   title: string;
 };
 
@@ -26,20 +28,19 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function DocsListCard({
+export function DocsListCard({
   category,
   date,
   description,
   href,
   imageSrc,
+  isExternal = false,
   showCategory,
   title,
 }: DocsListItem & { showCategory: boolean }) {
-  return (
-    <a
-      className="group flex w-full cursor-pointer flex-col gap-5"
-      href={href}
-    >
+  const cardClassName = "group flex w-full cursor-pointer flex-col gap-5";
+  const cardContent = (
+    <>
       <ContentPreviewImage
         alt={title}
         className="card-media-motion block h-full w-full object-cover"
@@ -49,11 +50,33 @@ function DocsListCard({
       />
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
         {showCategory ? <p className="m-0 type-body-sm text-mute">{category}</p> : null}
-        <p className="content-hover-title m-0 type-h3 text-fg">{title}</p>
+        <p className="content-hover-title m-0 type-h3 text-fg">
+          <span>{title}</span>
+          {isExternal ? <span aria-hidden="true" className="icon-outlink-mask ml-1.5 h-4 w-4 shrink-0 align-[-2px] text-mute" /> : null}
+        </p>
         {description ? <p className="m-0 type-body-md text-mute">{description}</p> : null}
         {date ? <p className="m-0 type-body-md text-mute">{date}</p> : null}
       </div>
-    </a>
+    </>
+  );
+
+  if (isExternal) {
+    return (
+      <a
+        className={cardClassName}
+        href={href}
+        rel="noreferrer noopener"
+        target="_blank"
+      >
+        {cardContent}
+      </a>
+    );
+  }
+
+  return (
+    <Link className={cardClassName} href={href}>
+      {cardContent}
+    </Link>
   );
 }
 
@@ -78,12 +101,12 @@ export default function DocsListPage({
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <section className="flex w-full justify-center">
-        <div className="flex w-full max-w-[1200px] flex-col gap-10">
+        <div className="flex w-full max-w-[1200px] flex-col gap-6 md:gap-10">
           <header className="flex w-full items-center">
             <h1 className="m-0 type-h1 text-fg">{title}</h1>
           </header>
 
-          <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-[60px]">
+          <div className="flex flex-col gap-12 md:flex-row md:items-start md:justify-between md:gap-[60px]">
             <div className="flex w-full flex-col gap-10 md:w-fit md:shrink-0 md:self-start md:sticky md:top-[80px]">
               <nav className="flex w-full flex-row flex-wrap gap-[10px] type-body-md md:w-fit md:self-start md:flex-col">
                 {menu.map((item, index) => {
@@ -110,7 +133,7 @@ export default function DocsListPage({
                   }
 
                   return (
-                    <a
+                    <Link
                       key={item.href}
                       className={cx(
                         "whitespace-nowrap transition-colors hover:text-fg",
@@ -119,13 +142,13 @@ export default function DocsListPage({
                       href={item.href}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   );
                 })}
               </nav>
             </div>
 
-            <div className="grid min-w-0 w-full grid-cols-1 gap-x-[40px] gap-y-16 md:max-w-[840px] md:grid-cols-2">
+            <div className="grid min-w-0 w-full grid-cols-1 gap-x-[40px] gap-y-[60px] md:max-w-[840px] md:grid-cols-2 md:gap-y-16">
               {items.length > 0 ? (
                 items.map((item, index) => (
                   <DocsListCard key={`${item.title}-${index}`} {...item} showCategory={showCategory} />

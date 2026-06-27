@@ -71,7 +71,7 @@ export default function ContentArticlePreview({
         </div>
       ) : null}
 
-      <div className={cx("relative", Boolean(contentOverlay) && "pb-[520px] sm:pb-[560px]")}>
+      <div>
         <ContentBodyPreview bodyHtml={bodyHtml} />
         {contentOverlay}
       </div>

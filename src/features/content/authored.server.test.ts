@@ -15,7 +15,17 @@ function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContent
     authorName: "Author",
     authorRole: "",
     bodyHtml: createLocalizedContent("<p>body</p>"),
-    bodyRichText: createLocalizedContent("{}"),
+    bodyRichText: createLocalizedContent(
+      JSON.stringify({
+        type: "doc",
+        content: [
+          {
+            type: "paragraph",
+            content: [{ type: "text", text: "body" }],
+          },
+        ],
+      }),
+    ),
     categorySlug: "use-cases",
     contentType: "content",
     dateIso: "2026-01-01",
@@ -132,6 +142,71 @@ describe("saveAuthoredContent", () => {
     expect(meta.locales).toEqual({});
   });
 
+  it("저장 시 HTML이 비어 있고 Tiptap JSON이 있으면 HTML 파일을 생성한다", async () => {
+    const existing = makeEntry({ storageId: "cnt_000001", visibleLocales: ["en", "ko"] });
+    const entryDir = await writeExistingContent(existing);
+    const richText = JSON.stringify({
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [{ type: "text", text: "저장 시 생성된 본문" }],
+        },
+      ],
+    });
+    const { saveAuthoredContent } = await import("./authored.server");
+
+    await saveAuthoredContent({
+      ...existing,
+      bodyHtml: { en: "<p>English body</p>", ko: "", ja: "" },
+      bodyRichText: { en: existing.bodyRichText.en, ko: richText, ja: "" },
+    });
+
+    await expect(fs.readFile(path.join(entryDir, "ko.tiptap.json"), "utf8")).resolves.toBe(richText);
+    await expect(fs.readFile(path.join(entryDir, "ko.html"), "utf8")).resolves.toBe(
+      "<p>저장 시 생성된 본문</p>",
+    );
+  });
+
+  it("저장 시 기존 HTML이 있어도 Tiptap JSON 기준으로 HTML 파일을 다시 생성한다", async () => {
+    const existing = makeEntry({ storageId: "cnt_000001", visibleLocales: ["en", "ko"] });
+    const entryDir = await writeExistingContent(existing);
+    const richText = JSON.stringify({
+      type: "doc",
+      content: [
+        {
+          type: "paragraph",
+          content: [{ type: "text", text: "편집 완료 본문" }],
+        },
+      ],
+    });
+    const { saveAuthoredContent } = await import("./authored.server");
+
+    await saveAuthoredContent({
+      ...existing,
+      bodyHtml: { en: "<p>English body</p>", ko: "<p>이전 HTML</p>", ja: "" },
+      bodyRichText: { en: existing.bodyRichText.en, ko: richText, ja: "" },
+    });
+
+    await expect(fs.readFile(path.join(entryDir, "ko.html"), "utf8")).resolves.toBe(
+      "<p>편집 완료 본문</p>",
+    );
+  });
+
+  it("저장 시 Tiptap JSON을 HTML로 렌더링하지 못하면 빈 HTML을 저장하지 않는다", async () => {
+    const existing = makeEntry({ storageId: "cnt_000001", visibleLocales: ["en", "ko"] });
+    await writeExistingContent(existing);
+    const { saveAuthoredContent } = await import("./authored.server");
+
+    await expect(
+      saveAuthoredContent({
+        ...existing,
+        bodyHtml: { en: "<p>English body</p>", ko: "", ja: "" },
+        bodyRichText: { en: existing.bodyRichText.en, ko: "{invalid-json", ja: "" },
+      }),
+    ).rejects.toThrow("Failed to render ko Tiptap JSON to HTML.");
+  });
+
   it("storageId 기준으로 기존 폴더를 찾아 새 section/category 위치로 이동한다", async () => {
     const existing = makeEntry({ storageId: "cnt_000001" });
     const oldEntryDir = await writeExistingContent(existing);
@@ -158,5 +233,40 @@ describe("saveAuthoredContent", () => {
       section: "documentation",
       storageId: "cnt_000001",
     });
+  });
+});
+
+describe("readAuthoredManagedContents", () => {
+  it("locale HTML이 비어 있으면 Tiptap JSON에서 HTML을 렌더링한다", async () => {
+    const entry = makeEntry({
+      bodyHtml: { en: "<p>English body</p>", ko: "", ja: "" },
+      bodyRichText: {
+        en: "{\"type\":\"doc\"}",
+        ko: JSON.stringify({
+          type: "doc",
+          content: [
+            {
+              type: "paragraph",
+              content: [{ type: "text", text: "한국어 본문" }],
+            },
+          ],
+        }),
+        ja: "",
+      },
+      storageId: "cnt_000001",
+      visibleLocales: ["en", "ko"],
+    });
+    const entryDir = await writeExistingContent(entry);
+    await fs.writeFile(path.join(entryDir, "ko.html"), "", "utf8");
+    await fs.writeFile(path.join(entryDir, "ko.tiptap.json"), entry.bodyRichText.ko, "utf8");
+
+    const { readAuthoredManagedContents } = await import("./authored.server");
+    const { renderTiptapHtml } = await import("./tiptapHtml");
+    const items = await readAuthoredManagedContents({ includeBodies: true });
+    const item = items.find((candidate) => candidate.id === entry.id);
+
+    expect(renderTiptapHtml(entry.bodyRichText.ko)).toBe("<p>한국어 본문</p>");
+    expect(item?.bodyRichText.ko).toBe(entry.bodyRichText.ko);
+    expect(item?.bodyHtml.ko).toBe("<p>한국어 본문</p>");
   });
 });

@@ -128,6 +128,20 @@ describe("ContentLeadForm", () => {
     });
   });
 
+  it("unlock 모드 버튼 라벨을 locale에 맞게 표시한다", () => {
+    const koCopy = getContactPageCopy("ko");
+    render(
+      <ContentLeadForm
+        contactCopy={koCopy}
+        locale="ko"
+        mode="unlock"
+        title="테스트 문서"
+      />,
+    );
+
+    expect(screen.getByRole("button")).toHaveTextContent("콘텐츠 열기");
+  });
+
   it("제출 중에는 버튼에 처리 중 텍스트를 표시한다", async () => {
     // fetch가 즉시 resolve되지 않도록 보류 (never-resolving promise)
     // eslint-disable-next-line @typescript-eslint/no-explicit-any

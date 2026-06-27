@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "aws-inspector-ai-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case-thumb-17-en.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 7,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000075",
   "summary": {
     "en": "An AI agent that turns AWS Inspector findings into prioritized remediation plans—summarizing risk, owners, and fixes with one conversational request.",
-    "ko": "An AI agent that turns AWS Inspector findings into prioritized remediation plans—summarizing risk, owners, and fixes with one conversational request.",
-    "ja": "AWS Inspectorの検出結果を、優先度付きの是正計画へ変換するAIエージェント。リスク、担当者、修正内容を、1回の会話型リクエストで要約します。"
+    "ko": "AWS Inspector 결과를 우선순위가 지정된 수정 계획으로 전환하는 AI 에이전트 — 하나의 대화형 요청으로 위험, 소유자 및 수정 사항을 요약합니다.",
+    "ja": "AWS Inspectorの発見事項を優先順位付けされた修復計画に変換し、1つの会話型リクエストでリスク、所有者、修正策を要約するAIエージェント。"
   },
   "title": {
     "en": "AIP Use Case: AWS Inspector Insight AI Agent",
-    "ko": "",
-    "ja": "AIP活用事例： AWSインサイトAIエージェント"
+    "ko": "AIP 사용 사례: AWS Inspector Insight AI Agent",
+    "ja": "AIP ユースケース: AWS Inspector Insight AI Agent"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000075/en.html",

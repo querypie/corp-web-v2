@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "superb-ai-hyun-kim",
-  "imageSrc": "/demo/use-cases/cs-thumb-superb.webp",
+  "imageSrc": "/demo/use-cases/cs-thumb-superb-2.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 26,
@@ -28,6 +28,11 @@
     "ko": "\"전통 산업에서의 AI 도입은 데이터와 보안이 성공의 핵심 요소입니다.\"",
     "ja": "「伝統産業のAI導入、データとセキュリティが成功の核心要素です。」"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000093/en.html",

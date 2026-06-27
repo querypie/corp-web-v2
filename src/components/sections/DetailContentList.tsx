@@ -1,9 +1,11 @@
+import Link from "next/link";
 import ContentPreviewImage from "@/components/content/ContentPreviewImage";
 
 type DetailContentItem = {
   category: string;
   href: string;
   imageSrc: string;
+  isExternal?: boolean;
   title: string;
 };
 
@@ -20,11 +22,12 @@ function DetailContentCard({
   category,
   href,
   imageSrc,
+  isExternal = false,
   title,
 }: DetailContentItem) {
-  return (
-    /* 상세 페이지 하단용 콘텐츠 카드 1개 */
-    <a className="group flex w-full cursor-pointer items-start gap-5" href={href}>
+  const cardClassName = "group flex w-full cursor-pointer items-start gap-5";
+  const cardContent = (
+    <>
       <ContentPreviewImage
         alt={title}
         className="card-media-motion block h-full w-full object-cover"
@@ -34,9 +37,32 @@ function DetailContentCard({
       />
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
         <p className="m-0 type-body-md text-mute">{category}</p>
-        <p className="content-hover-title m-0 type-body-lg text-fg">{title}</p>
+        <p className="content-hover-title m-0 type-body-lg text-fg">
+          <span>{title}</span>
+          {isExternal ? <span aria-hidden="true" className="icon-outlink-mask ml-1 h-3.5 w-3.5 shrink-0 align-[-2px] text-mute" /> : null}
+        </p>
       </div>
-    </a>
+    </>
+  );
+
+  if (isExternal) {
+    return (
+      /* 상세 페이지 하단용 콘텐츠 카드 1개 */
+      <a
+        className={cardClassName}
+        href={href}
+        rel="noreferrer noopener"
+        target="_blank"
+      >
+        {cardContent}
+      </a>
+    );
+  }
+
+  return (
+    <Link className={cardClassName} href={href}>
+      {cardContent}
+    </Link>
   );
 }
 

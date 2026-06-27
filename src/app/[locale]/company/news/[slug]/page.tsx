@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { getLocalePath, isLocale } from "@/constants/i18n";
-import NewsDetailClientPage from "@/components/pages/news/NewsDetailClientPage";
+import NewsDetailPage from "@/components/pages/news/NewsDetailPage";
 import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
 import {
   formatPublicDate,
@@ -54,6 +54,7 @@ export default async function NewsDetailRoute({ params }: Props) {
             ? previousItem.externalUrl
             : getPublicDetailHref("news", locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
+          isExternal: previousItem.contentType === "outlink",
           title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
         }
       : null,
@@ -64,14 +65,15 @@ export default async function NewsDetailRoute({ params }: Props) {
             ? nextItem.externalUrl
             : getPublicDetailHref("news", locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
+          isExternal: nextItem.contentType === "outlink",
           title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
         }
       : null,
   ].filter((item): item is NonNullable<typeof item> => !!item);
 
   return (
-    <NewsDetailClientPage
-      fallbackProps={{
+    <NewsDetailPage
+      {...({
         docsHref: getLocalePath(locale, "/company/news"),
         slug: decodedSlug,
         bodyHtml: getLocalizedContent(currentEntry.bodyHtml, contentLocale),
@@ -86,10 +88,7 @@ export default async function NewsDetailRoute({ params }: Props) {
         heroImageSrc: currentEntry.imageSrc,
         title: getLocalizedContent(currentEntry.title, contentLocale),
         writer: getNewsFormatLabel(currentEntry, locale),
-      } satisfies DocsDetailPageProps}
-      initialItems={accessibleNewsItems}
-      locale={locale}
-      slug={decodedSlug}
+      } satisfies DocsDetailPageProps)}
     />
   );
 }

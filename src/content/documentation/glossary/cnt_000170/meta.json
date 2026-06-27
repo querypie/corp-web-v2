@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "glossary-items",
-  "imageSrc": "/documentation/glossary/docu-thumb-glossary.webp",
+  "imageSrc": "/documentation/glossary/glossary.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 6,
@@ -28,6 +28,11 @@
     "ko": "QueryPie Glossary - 주요 용어 및 정의",
     "ja": "QueryPie AI 用語集 - 主要な用語と定義"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/glossary/cnt_000170/en.html",

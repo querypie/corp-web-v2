@@ -13,6 +13,20 @@ vi.mock("@/features/content/contentState.server", () => ({
 vi.mock("@/features/content/authored.server", () => ({
   deleteAuthoredContent: vi.fn(),
   saveAuthoredContent: vi.fn(),
+  TiptapHtmlRenderError: class TiptapHtmlRenderError extends Error {
+    code = "TIPTAP_HTML_RENDER_FAILED" as const;
+    locale: string;
+    reason: string;
+    suggestions: string[];
+
+    constructor(locale: string, reason: string, suggestions: string[]) {
+      super(`Failed to render ${locale} Tiptap JSON to HTML.`);
+      this.name = "TiptapHtmlRenderError";
+      this.locale = locale;
+      this.reason = reason;
+      this.suggestions = suggestions;
+    }
+  },
   updateAuthoredContentMeta: vi.fn(),
 }));
 
@@ -22,6 +36,7 @@ import {
 import {
   deleteAuthoredContent,
   saveAuthoredContent,
+  TiptapHtmlRenderError,
   updateAuthoredContentMeta,
 } from "@/features/content/authored.server";
 import { createLocalizedContent, type ManagedContentEntry } from "@/features/content/data";
@@ -112,6 +127,28 @@ describe("GET /api/admin/content/state", () => {
     const data = await response.json() as { item: ManagedContentEntry };
 
     expect(data.item?.id).toBe("target");
+  });
+
+  it("storageId 쿼리파라미터가 있으면 storageId로 단일 아이템을 반환한다", async () => {
+    const wrongIdItem = makeEntry({ id: "same-slug", storageId: "cnt_000001" });
+    const targetItem = makeEntry({
+      bodyHtml: {
+        en: "<p>English</p>",
+        ja: "<p>日本語</p>",
+        ko: "<p>한국어</p>",
+      },
+      categorySlug: "blogs",
+      id: "same-slug",
+      section: "documentation",
+      storageId: "cnt_000002",
+    });
+    mockReadContentState.mockResolvedValue([wrongIdItem, targetItem]);
+
+    const response = await GET(makeRequest("http://localhost/api/admin/content/state?section=documentation&id=same-slug&storageId=cnt_000002"));
+    const data = await response.json() as { item: ManagedContentEntry };
+
+    expect(data.item.storageId).toBe("cnt_000002");
+    expect(data.item.bodyHtml.ko).toBe("<p>한국어</p>");
   });
 
   it("id가 없는 아이템을 조회하면 null을 반환한다", async () => {
@@ -210,6 +247,34 @@ describe("POST /api/admin/content/state", () => {
     const response = await POST(request);
 
     expect(response.status).toBe(500);
+  });
+
+  it("Tiptap HTML 변환 실패 시 원인과 수정 방법을 반환한다", async () => {
+    const item = makeEntry({ id: "my-item", storageId: "cnt_000001" });
+    mockReadContentState.mockResolvedValue([]);
+    mockSaveAuthoredContent.mockRejectedValue(
+      new TiptapHtmlRenderError("ko", "Tiptap JSON 문법이 깨져 있습니다.", [
+        "에디터 본문을 다시 열어 내용을 한 번 수정한 뒤 저장하세요.",
+      ]),
+    );
+
+    const request = makeRequest("http://localhost/api/admin/content/state", {
+      method: "PUT",
+      body: JSON.stringify({ item }),
+    });
+    const response = await PUT(request);
+    const data = await response.json() as {
+      code: string;
+      detail: string;
+      locale: string;
+      suggestions: string[];
+    };
+
+    expect(response.status).toBe(422);
+    expect(data.code).toBe("TIPTAP_HTML_RENDER_FAILED");
+    expect(data.locale).toBe("ko");
+    expect(data.detail).toContain("Tiptap JSON");
+    expect(data.suggestions[0]).toContain("에디터 본문");
   });
 });
 

@@ -1,0 +1,37 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "manuals",
+  "contentType": "outlink",
+  "dateIso": "2026-05-15",
+  "downloadCoverImageSrc": "/documentation/manuals/api.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://docs.querypie.com/en/api-reference",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-acp-openapi-reference",
+  "imageSrc": "/documentation/manuals/acp-api.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 7,
+  "status": "published",
+  "storageId": "cnt_000207",
+  "summary": {
+    "en": "A guide that collects entry points to the QueryPie ACP OpenAPI Reference and related developer resources.",
+    "ko": "QueryPie ACP OpenAPI 참조 및 관련 개발자 리소스에 대한 진입점을 모아둔 가이드입니다.",
+    "ja": "QueryPie ACP OpenAPI リファレンスおよび関連する開発者リソースへのエントリポイントをまとめたガイドです。"
+  },
+  "title": {
+    "en": "QueryPie ACP OpenAPI Reference",
+    "ko": "QueryPie ACP OpenAPI 참조",
+    "ja": "QueryPie ACP OpenAPI リファレンス"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {}
+}

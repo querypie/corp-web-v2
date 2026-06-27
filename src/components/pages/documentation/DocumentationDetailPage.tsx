@@ -1,5 +1,6 @@
 import { pageXPaddingClassName } from "@/constants/layout";
 import type { ReactNode } from "react";
+import Link from "next/link";
 import ContentArticlePreview from "@/components/content/ContentArticlePreview";
 import DetailContentList from "@/components/sections/DetailContentList";
 import { CONTENT_DOWNLOAD_BUTTON_LABEL } from "@/features/content/data";
@@ -13,6 +14,7 @@ export type DocsDetailPageProps = {
     category: string;
     href: string;
     imageSrc: string;
+    isExternal?: boolean;
     title: string;
   }>;
   contentListLinks: string[];
@@ -77,9 +79,9 @@ export default function DocsDetailPage({
                   <p className="m-0 text-mute">/</p>
                 </>
               ) : null}
-              <a className="text-fg transition-colors duration-200 hover:text-mute" href={docsHref}>
+              <Link className="text-fg transition-colors duration-200 hover:text-mute" href={docsHref}>
                 {category}
-              </a>
+              </Link>
             </div>
           ) : null}
 

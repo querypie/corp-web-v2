@@ -28,7 +28,10 @@ function NewsCard({ href, imageSrc, isExternal = true, title }: NewsItem) {
           src={imageSrc}
         />
       </div>
-      <p className="content-hover-title m-0 type-body-lg text-fg">{title}</p>
+      <p className="content-hover-title m-0 type-body-lg text-fg">
+        <span>{title}</span>
+        {isExternal ? <span aria-hidden="true" className="icon-outlink-mask ml-1 h-3.5 w-3.5 shrink-0 align-[-2px] text-mute" /> : null}
+      </p>
     </a>
   );
 }

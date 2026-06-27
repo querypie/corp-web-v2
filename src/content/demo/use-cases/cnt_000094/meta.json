@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "lovo-ai-tom-lee",
-  "imageSrc": "/demo/use-cases/cs-thumb-lovo.webp",
+  "imageSrc": "/demo/use-cases/cs-thumb-lovo-2.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 28,
@@ -28,6 +28,11 @@
     "ko": "\"QueryPie는 마치 보안을 위한 맞춤 테일러샵 같아요.\"",
     "ja": "「QueryPieはまるでセキュリティのためのオーダーメードテイラーショップのようです。」"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000094/en.html",

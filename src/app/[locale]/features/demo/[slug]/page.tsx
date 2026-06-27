@@ -2,7 +2,8 @@ import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { getLocalePath, isLocale } from "@/constants/i18n";
-import DemoDetailClientPage from "@/components/pages/demo/DemoDetailClientPage";
+import DemoDetailPage from "@/components/pages/demo/DemoDetailPage";
+import ContentGateOverlay from "@/components/pages/documentation/ContentGateOverlay";
 import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
 import { getContactPageCopy } from "@/copy/contact";
 import { getDemoPageCopy } from "@/copy/contentPages";
@@ -68,16 +69,22 @@ export default async function DemoDetailRoute({ params }: Props) {
     previousItem
       ? {
           category: getAdjacentContentLabel("previous", locale),
-          href: getPublicDetailHref("demo", locale, previousItem.id),
+          href: previousItem.contentType === "outlink"
+            ? previousItem.externalUrl
+            : getPublicDetailHref("demo", locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
+          isExternal: previousItem.contentType === "outlink",
           title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
         }
       : null,
     nextItem
       ? {
           category: getAdjacentContentLabel("next", locale),
-          href: getPublicDetailHref("demo", locale, nextItem.id),
+          href: nextItem.contentType === "outlink"
+            ? nextItem.externalUrl
+            : getPublicDetailHref("demo", locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
+          isExternal: nextItem.contentType === "outlink",
           title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
         }
       : null,
@@ -87,8 +94,8 @@ export default async function DemoDetailRoute({ params }: Props) {
   const copy = getDemoPageCopy(locale);
 
   return (
-    <DemoDetailClientPage
-      fallbackProps={{
+    <DemoDetailPage
+      {...({
         docsHref: getCategoryHref(demoCategoryConfigs, currentEntry.categorySlug, locale),
         slug: resolvedSlug,
         bodyHtml: isGateActive
@@ -112,12 +119,17 @@ export default async function DemoDetailRoute({ params }: Props) {
         writer: currentEntry.authorRole
           ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
           : currentEntry.authorName,
-      } satisfies DocsDetailPageProps}
-      contactCopy={getContactPageCopy(locale)}
-      initialContentUnlocked={isContentUnlocked}
-      initialItems={accessibleDemoItems}
-      locale={locale}
-      slug={resolvedSlug}
+      } satisfies DocsDetailPageProps)}
+      contentOverlay={isGateActive ? (
+        <ContentGateOverlay
+          contactCopy={getContactPageCopy(locale)}
+          contentId={currentEntry.id}
+          locale={locale}
+          section="demo"
+          title={getLocalizedContent(currentEntry.title, contentLocale)}
+          unlockCookieName={getContentUnlockCookieName(currentEntry.id, "demo")}
+        />
+      ) : undefined}
     />
   );
 }

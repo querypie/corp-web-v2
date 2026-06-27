@@ -4,7 +4,7 @@
   "categorySlug": "aip-features",
   "contentType": "content",
   "dateIso": "2025-09-23",
-  "downloadCoverImageSrc": "",
+  "downloadCoverImageSrc": "/demo/aip-features/aip-demo.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "google-oauth-demo",
-  "imageSrc": "/demo/aip-features/de-thumb-google-oauth.webp",
+  "imageSrc": "/demo/aip-features/aip-demo.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 1,
@@ -25,9 +25,14 @@
   },
   "title": {
     "en": "AIP Google OAuth Demo",
-    "ko": "AIP Google OAuth Demo",
+    "ko": "AIP Google OAuth 데모",
     "ja": "AIP Google OAuth デモ"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/aip-features/cnt_000020/en.html",

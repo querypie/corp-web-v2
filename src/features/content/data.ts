@@ -308,6 +308,29 @@ export function sortManagedContents(items: ManagedContentEntry[]) {
   });
 }
 
+export function sortPublicContentItems(
+  items: ManagedContentEntry[],
+  options: { preferManualOrder: boolean },
+) {
+  if (options.preferManualOrder) {
+    return sortManagedContents(items);
+  }
+
+  return [...items].sort((left, right) => {
+    const dateCompare = compareDateIsoDesc(left.dateIso, right.dateIso);
+
+    if (dateCompare !== 0) {
+      return dateCompare;
+    }
+
+    if (left.sortOrder !== right.sortOrder) {
+      return left.sortOrder - right.sortOrder;
+    }
+
+    return left.id.localeCompare(right.id);
+  });
+}
+
 export function getNextSortOrder(
   items: ManagedContentEntry[],
   section: ManagedContentSection,

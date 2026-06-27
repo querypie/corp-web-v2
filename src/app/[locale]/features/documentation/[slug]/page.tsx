@@ -2,7 +2,8 @@ import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { getLocalePath, isLocale } from "@/constants/i18n";
-import DocsDetailClientPage from "@/components/pages/documentation/DocumentationDetailClientPage";
+import DocsDetailPage from "@/components/pages/documentation/DocumentationDetailPage";
+import ContentGateOverlay from "@/components/pages/documentation/ContentGateOverlay";
 import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
 import { getContactPageCopy } from "@/copy/contact";
 import { getDocumentationPageCopy } from "@/copy/contentPages";
@@ -68,16 +69,22 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
     previousItem
       ? {
           category: getAdjacentContentLabel("previous", locale),
-          href: getPublicDetailHref("documentation", locale, previousItem.id),
+          href: previousItem.contentType === "outlink"
+            ? previousItem.externalUrl
+            : getPublicDetailHref("documentation", locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
+          isExternal: previousItem.contentType === "outlink",
           title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
         }
       : null,
     nextItem
       ? {
           category: getAdjacentContentLabel("next", locale),
-          href: getPublicDetailHref("documentation", locale, nextItem.id),
+          href: nextItem.contentType === "outlink"
+            ? nextItem.externalUrl
+            : getPublicDetailHref("documentation", locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
+          isExternal: nextItem.contentType === "outlink",
           title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
         }
       : null,
@@ -92,9 +99,8 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
   const copy = getDocumentationPageCopy(locale);
 
   return (
-    <DocsDetailClientPage
-      contactCopy={getContactPageCopy(locale)}
-      fallbackProps={{
+    <DocsDetailPage
+      {...({
         docsHref: getCategoryHref(docsCategoryConfigs, currentEntry.categorySlug, locale),
         slug: resolvedSlug,
         bodyHtml: previewBodyHtml,
@@ -116,11 +122,17 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
         writer: currentEntry.authorRole
           ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
           : currentEntry.authorName,
-      } satisfies DocsDetailPageProps}
-      initialContentUnlocked={isContentUnlocked}
-      initialItems={accessibleDocsItems}
-      locale={locale}
-      slug={resolvedSlug}
+      } satisfies DocsDetailPageProps)}
+      contentOverlay={isGateActive ? (
+        <ContentGateOverlay
+          contactCopy={getContactPageCopy(locale)}
+          contentId={currentEntry.id}
+          locale={locale}
+          section="documentation"
+          title={getLocalizedContent(currentEntry.title, contentLocale)}
+          unlockCookieName={getContentUnlockCookieName(currentEntry.id, "documentation")}
+        />
+      ) : undefined}
     />
   );
 }
