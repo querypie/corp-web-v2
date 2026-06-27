@@ -15,6 +15,7 @@ type IconName =
   | "agent"
   | "automation"
   | "bell"
+  | "building2"
   | "chevron"
   | "grid"
   | "message"
@@ -28,6 +29,7 @@ const iconPaths: Record<IconName, string> = {
   agent: "M12 4a4 4 0 014 4v1a4 4 0 01-8 0V8a4 4 0 014-4z M5 20a7 7 0 0114 0",
   automation: "M12 3v4m0 10v4M4.9 5.6l2.8 2.8m8.6 8.6l2.8 2.8M3 12h4m10 0h4M4.9 18.4l2.8-2.8m8.6-8.6l2.8-2.8",
   bell: "M18 8a6 6 0 00-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 21h4",
+  building2: "M10 12h4 M10 8h4 M14 21v-3a2 2 0 0 0-4 0v3 M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2 M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16",
   chevron: "M9 6l6 6-6 6",
   grid: "M4 4h6v6H4z M14 4h6v6h-6z M4 14h6v6H4z M14 14h6v6h-6z",
   message: "M5 5h14v10H8l-4 4V5z",
@@ -260,8 +262,11 @@ function Sidebar({
           <button aria-label="Notifications" className="relative flex h-8 w-8 items-center justify-center rounded-md text-[#f4f4f5] hover:bg-white/10" type="button">
             <Icon name="bell" />
           </button>
-          <button aria-label="Settings" className="relative flex h-8 w-8 items-center justify-center rounded-md text-[#f4f4f5] hover:bg-white/10" type="button">
-            <Icon name="settings" />
+          <button aria-label="Workspace admin" className="relative flex h-8 w-8 items-center justify-center rounded-md text-[#f4f4f5] hover:bg-white/10" type="button">
+            <Icon name="building2" />
+            <span className="absolute bottom-1.5 left-[calc(50%+2px)] rounded-full bg-[#1f1f1f] p-px">
+              <Icon className="h-3 w-3 stroke-2" name="settings" />
+            </span>
           </button>
         </div>
       </div>
