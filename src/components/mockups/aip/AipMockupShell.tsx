@@ -180,9 +180,9 @@ function Sidebar({
   onMenuClick: (menu: string) => void;
 }) {
   return (
-    <aside className="hidden w-[260px] shrink-0 border-r border-[#2a2d33] bg-[#17191d] text-[#f4f4f5] md:flex md:flex-col">
-      <div className="flex h-14 items-center justify-between px-3">
-        <button className="flex min-w-0 items-center rounded-md p-2 text-left hover:bg-[#24272d]" type="button">
+    <aside className="hidden w-[260px] shrink-0 border-r border-[#27272a] bg-[#1f1f1f] text-[#f4f4f5] md:flex md:flex-col">
+      <div className="flex h-14 items-center justify-between gap-0 px-2 py-0">
+        <button className="flex min-w-0 items-center justify-start rounded-md bg-transparent p-2 text-left transition-colors hover:bg-white/10" type="button">
           <img
             alt="QueryPie AI"
             className="h-5 w-auto max-w-[140px]"
@@ -191,67 +191,60 @@ function Sidebar({
         </button>
       </div>
 
-      <nav className="flex flex-1 flex-col gap-0.5 px-2 py-2">
+      <nav className="flex min-h-0 flex-1 flex-col gap-4 overflow-auto p-2">
         {aipMockupMenuItems.map((item) => {
           const isActive = activeMenu === item.id;
           return (
             <button
-              className={`group flex h-9 items-center gap-2 rounded-md px-2.5 text-left text-[13px] transition-colors ${
+              className={`group flex h-9 w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none transition-colors ${
                 isActive
-                  ? "bg-[#262a31] font-medium text-white shadow-[inset_0_0_0_1px_rgba(255,255,255,0.04)]"
-                  : "text-[#d1d5db] hover:bg-[#22252b] hover:text-white"
+                  ? "bg-white/10 text-[#f4f4f5]"
+                  : "text-[#f4f4f5] hover:bg-white/10 hover:text-[#f4f4f5]"
               }`}
               key={item.id}
               onClick={() => onMenuClick(item.id)}
               type="button"
             >
-              <MenuIcon className={`h-4 w-4 ${isActive ? "text-white" : "text-[#a8b0bd]"}`} name={menuIconById[item.id]} />
+              <MenuIcon className="h-4 w-4 shrink-0" name={menuIconById[item.id]} />
               <span className="min-w-0 truncate">{item.label}</span>
             </button>
           );
         })}
 
-        <div className="mt-4 px-2">
-          <div className="mb-1 flex items-center justify-between">
-            <p className="m-0 text-[11px] font-medium uppercase tracking-[0.08em] text-[#858b96]">Chat</p>
-            <button className="text-[12px] text-[#b0b7c3] hover:text-white hover:underline" onClick={() => onMenuClick("chat")} type="button">
-              View all
-            </button>
-          </div>
-          <div className="flex flex-col gap-0.5">
+        <div className="relative flex min-w-0 flex-1 flex-col">
+          <div className="flex shrink-0 items-center rounded-md px-1 py-2 text-xs text-[#a1a1aa]">Chat</div>
+          <div className="flex flex-col text-sm">
             {aipMockupChats.map((chat) => (
               <button
-                className="flex h-9 items-center gap-2 rounded-md px-2 text-left text-[13px] text-[#d1d5db] hover:bg-[#22252b] hover:text-white"
+                className="group relative flex h-9 w-full items-center rounded-lg text-left text-sm text-[#f4f4f5] transition-colors duration-200 hover:bg-white/10"
                 key={chat}
                 onClick={() => onMenuClick("chat")}
                 type="button"
               >
-                <Icon className="h-4 w-4 shrink-0 text-[#a8b0bd]" name="message" />
-                <span className="min-w-0 truncate">{chat}</span>
+                <span className="min-w-0 truncate pl-3 pr-2">{chat}</span>
               </button>
             ))}
           </div>
         </div>
       </nav>
 
-      <div className="border-t border-[#2a2d33] p-2">
-        <div className="mb-2 flex items-center gap-1.5">
-          <button className="flex h-8 items-center gap-1.5 rounded-md px-2 text-[12px] text-[#d1d5db] hover:bg-[#22252b] hover:text-white" type="button">
-            <span className="h-2 w-2 rounded-full bg-[#12b76a]" />
-            Edge Tunnel
-          </button>
-          <button aria-label="Notifications" className="flex h-8 w-8 items-center justify-center rounded-md text-[#a8b0bd] hover:bg-[#22252b] hover:text-white" type="button">
-            <Icon name="bell" />
-          </button>
-        </div>
-        <button className="flex w-full items-center gap-2 rounded-md p-2 text-left hover:bg-[#22252b]" type="button">
+      <div className="relative flex items-center justify-between gap-2 px-2 pb-2 pl-1 pr-2 pt-2">
+        <button className="flex min-w-0 flex-1 items-center gap-2 rounded-full p-2 text-left transition-colors hover:bg-white/10" type="button">
           <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#d9e2ff] to-[#8795ff]" />
           <div className="min-w-0 flex-1">
             <p className="m-0 truncate text-[13px] font-medium text-white">Jane Lee</p>
-            <p className="m-0 truncate text-[11px] text-[#9ca3af]">jane@querypie.com</p>
+            <p className="m-0 truncate text-[11px] text-[#a1a1aa]">jane@querypie.com</p>
           </div>
-          <Icon className="h-4 w-4 text-[#a8b0bd]" name="settings" />
         </button>
+        <div className="flex items-center gap-1.5">
+          <button className="flex h-8 items-center gap-[5px] whitespace-nowrap rounded-md px-2 text-sm font-normal text-[#f4f4f5] hover:bg-white/10" type="button">
+            <span className="h-2 w-2 rounded-full bg-[#039855]" />
+            Edge Tunnel
+          </button>
+          <button aria-label="Notifications" className="relative flex h-8 w-8 items-center justify-center rounded-md text-[#f4f4f5] hover:bg-white/10" type="button">
+            <Icon name="bell" />
+          </button>
+        </div>
       </div>
     </aside>
   );
