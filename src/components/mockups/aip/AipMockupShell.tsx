@@ -34,7 +34,7 @@ const iconPaths: Record<IconName, string> = {
   mic: "M12 4a3 3 0 00-3 3v5a3 3 0 006 0V7a3 3 0 00-3-3z M5 11a7 7 0 0014 0 M12 18v3",
   plus: "M12 5v14M5 12h14",
   send: "M5 12h13M12 5l7 7-7 7",
-  settings: "M12 8a4 4 0 100 8 4 4 0 000-8z M12 2v3m0 14v3M4.9 4.9l2.1 2.1m10 10l2.1 2.1M2 12h3m14 0h3M4.9 19.1l2.1-2.1m10-10l2.1-2.1",
+  settings: "M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915",
   sparkle: "M12 3l2 5 5 2-5 2-2 5-2-5-5-2 5-2 2-5z",
 };
 
@@ -51,6 +51,24 @@ const menuIconById: Record<string, MenuIconName> = {
 };
 
 function Icon({ name, className = "h-4 w-4" }: { className?: string; name: IconName }) {
+  if (name === "settings") {
+    return (
+      <svg
+        aria-hidden="true"
+        className={className}
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        viewBox="0 0 24 24"
+      >
+        <path d={iconPaths.settings} />
+        <circle cx="12" cy="12" r="3" />
+      </svg>
+    );
+  }
+
   return (
     <svg
       aria-hidden="true"
