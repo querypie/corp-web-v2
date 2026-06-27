@@ -31,7 +31,6 @@ export type AipMockupMessage =
 export const aipMockupMenuItems: AipMockupMenuItem[] = [
   { id: "chat", label: "New chat" },
   { id: "agents", label: "Agents" },
-  { id: "presets", label: "Presets" },
   { id: "mcp", label: "MCP" },
   { id: "automation", label: "Automation" },
   { id: "my-drive", label: "My Drive" },
