@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "seo-analyst",
-  "imageSrc": "/demo/use-cases/aip-use-case-thumb-29-en.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 1,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000068",
   "summary": {
     "en": "High-cost SEO tools are no longer a requirement. With QueryPie AIP, you can perform in-depth website analysis, identify actionable improvement points, and generate intuitive visual dashboards — all within minutes.",
-    "ko": "High-cost SEO tools are no longer a requirement. With QueryPie AIP, you can perform in-depth website analysis, identify actionable improvement points, and generate intuitive visual dashboards — all within minutes.",
-    "ja": "高額なSEOツールに頼ることなく、QueryPie AIPを活用することでWebサイトの詳細な分析と改善ポイントの整理、そして視覚的に分かりやすいダッシュボード作成までを短時間で実現できます。"
+    "ko": "고비용의 SEO 도구는 더 이상 필수가 아닙니다. QueryPie AIP를 통해 심층적인 웹사이트 분석을 수행하고, 실행 가능한 개선 사항을 도출하며, 직관적인 시각화 대시보드를 생성할 수 있습니다 — 단 몇 분 만에.",
+    "ja": "高価なSEOツールはもはや必須ではありません。QueryPie AIPを使用すれば、Webサイトの詳細な分析、実行可能な改善点の特定、直感的な視覚ダッシュボードの生成を、わずか数分で実行できます。"
   },
   "title": {
     "en": "AIP Use Case: SEO Analysis AI Agent",
-    "ko": "",
-    "ja": "AIP活用事例： SEO分析AIエージェント"
+    "ko": "AIP 활용 사례: SEO 분석 AI 에이전트",
+    "ja": "AIPユースケース：SEO分析AIエージェント"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000068/en.html",

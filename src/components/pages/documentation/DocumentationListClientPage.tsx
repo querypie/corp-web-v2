@@ -12,6 +12,7 @@ type DocsListClientPageProps = {
     description?: string;
     href: string;
     imageSrc: string;
+    isExternal?: boolean;
     title: string;
   }>;
   locale: Locale;

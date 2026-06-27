@@ -15,6 +15,7 @@ import {
   resolveManagedContentSlug,
   slugifyTitle,
   sortManagedContents,
+  sortPublicContentItems,
   stripManagedContentBodies,
   type ManagedContentEntry,
 } from "./data";
@@ -232,6 +233,41 @@ describe("sortManagedContents", () => {
     const items = [makeEntry({ id: "b", sortOrder: 2 }), makeEntry({ id: "a", sortOrder: 1 })];
     sortManagedContents(items);
     expect(items[0].id).toBe("b");
+  });
+});
+
+describe("sortPublicContentItems", () => {
+  it("preferManualOrder가 false이면 날짜 최신순으로 정렬한다", () => {
+    const items = [
+      makeEntry({ id: "manual-first", dateIso: "2026-01-01", sortOrder: 1 }),
+      makeEntry({ id: "latest", dateIso: "2026-03-01", sortOrder: 99 }),
+    ];
+
+    const sorted = sortPublicContentItems(items, { preferManualOrder: false });
+
+    expect(sorted.map((item) => item.id)).toEqual(["latest", "manual-first"]);
+  });
+
+  it("preferManualOrder가 false이고 날짜가 같으면 sortOrder 오름차순으로 정렬한다", () => {
+    const items = [
+      makeEntry({ id: "second", dateIso: "2026-03-01", sortOrder: 2 }),
+      makeEntry({ id: "first", dateIso: "2026-03-01", sortOrder: 1 }),
+    ];
+
+    const sorted = sortPublicContentItems(items, { preferManualOrder: false });
+
+    expect(sorted.map((item) => item.id)).toEqual(["first", "second"]);
+  });
+
+  it("preferManualOrder가 true이면 sortOrder를 날짜보다 우선한다", () => {
+    const items = [
+      makeEntry({ id: "latest", dateIso: "2026-03-01", sortOrder: 2 }),
+      makeEntry({ id: "manual-first", dateIso: "2026-01-01", sortOrder: 1 }),
+    ];
+
+    const sorted = sortPublicContentItems(items, { preferManualOrder: true });
+
+    expect(sorted.map((item) => item.id)).toEqual(["manual-first", "latest"]);
   });
 });
 

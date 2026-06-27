@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "lg-uplus-daniel-ku",
-  "imageSrc": "/demo/use-cases/cs-thumb-lguplus.webp",
+  "imageSrc": "/demo/use-cases/cs-thumb-lguplus-2.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 25,
@@ -28,6 +28,11 @@
     "ko": "“검토했던 솔루션 중 저희의 자동화 계획과 가장 일치했던 솔루션은 단연 QueryPie였습니다!”",
     "ja": "「私たちの自動化計画と最も一致したソリューションは間違いなくQueryPieでした！」"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000092/en.html",

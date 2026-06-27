@@ -1,0 +1,37 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "manuals",
+  "contentType": "outlink",
+  "dateIso": "2026-05-15",
+  "downloadCoverImageSrc": "/documentation/manuals/acp-admin-manual.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://docs.querypie.com/en/administrator-manual",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-acp-administrator-manual",
+  "imageSrc": "/documentation/manuals/acp-admin-manual.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 5,
+  "status": "published",
+  "storageId": "cnt_000203",
+  "summary": {
+    "en": "A guide page for administrator setup, operations, and permission management procedures.",
+    "ko": "관리자 설정, 운영 및 권한 관리 절차에 대한 가이드 페이지입니다.",
+    "ja": "管理者設定、運用、および権限管理手順に関するガイドページです。"
+  },
+  "title": {
+    "en": "QueryPie ACP Administrator Manual",
+    "ko": "QueryPie ACP 관리자 매뉴얼",
+    "ja": "QueryPie ACP 管理者マニュアル"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {}
+}

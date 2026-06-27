@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DemoDetailPage from "./DemoDetailPage";
 import type { Locale } from "@/constants/i18n";
 import type { DocsDetailPageProps } from "../documentation/DocumentationDetailPage";
@@ -20,7 +20,11 @@ import {
   isPublishedContentAccessible,
   type ManagedContentEntry,
 } from "@/features/content/data";
-import { getContentUnlockCookieName, isContentGatingEnabled } from "@/features/content/gating";
+import {
+  buildContentPreviewHtml,
+  getContentUnlockCookieName,
+  isContentGatingEnabled,
+} from "@/features/content/gating";
 
 type DemoDetailClientPageProps = {
   contactCopy: ContactPageCopy;
@@ -48,6 +52,10 @@ export default function DemoDetailClientPage({
   const currentIndex = items.findIndex((item) => item.id === resolvedSlug);
   const currentUseCase = currentIndex >= 0 ? items[currentIndex] : null;
 
+  useEffect(() => {
+    setIsUnlocked(initialContentUnlocked);
+  }, [initialContentUnlocked, resolvedSlug]);
+
   if (!isHydrated) {
     return <DemoDetailPage {...fallbackProps} />;
   }
@@ -58,6 +66,14 @@ export default function DemoDetailClientPage({
 
   const isGateActive = isContentGatingEnabled(currentUseCase) && !isUnlocked;
   const contentLocale = getResolvedContentLocale(currentUseCase, locale);
+  const currentBodyHtml = getLocalizedContent(currentUseCase.bodyHtml, contentLocale);
+  const fallbackBodyHtml = fallbackProps.bodyHtml || "";
+  const localizedBodyHtml = fallbackBodyHtml || currentBodyHtml;
+  const visibleBodyHtml = isGateActive
+    ? fallbackBodyHtml || (currentBodyHtml
+      ? buildContentPreviewHtml(currentBodyHtml, currentUseCase.gatingLevel)
+      : localizedBodyHtml)
+    : localizedBodyHtml;
 
   const categoryItems = items.filter(
     (item) => item.categorySlug === currentUseCase.categorySlug,
@@ -74,16 +90,22 @@ export default function DemoDetailClientPage({
     previousItem
       ? {
           category: previousLabel,
-          href: getPublicDetailHref("demo", locale, previousItem.id),
+          href: previousItem.contentType === "outlink"
+            ? previousItem.externalUrl
+            : getPublicDetailHref("demo", locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
+          isExternal: previousItem.contentType === "outlink",
           title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
         }
       : null,
     nextItem
       ? {
           category: nextLabel,
-          href: getPublicDetailHref("demo", locale, nextItem.id),
+          href: nextItem.contentType === "outlink"
+            ? nextItem.externalUrl
+            : getPublicDetailHref("demo", locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
+          isExternal: nextItem.contentType === "outlink",
           title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
         }
       : null,
@@ -92,7 +114,7 @@ export default function DemoDetailClientPage({
   return (
     <DemoDetailPage
       {...fallbackProps}
-      bodyHtml={getLocalizedContent(currentUseCase.bodyHtml, contentLocale) || fallbackProps.bodyHtml}
+      bodyHtml={visibleBodyHtml}
       category={getCategoryLabel(demoCategoryConfigs, currentUseCase.categorySlug, locale)}
       contentOverlay={isGateActive ? (
         <ContentGateOverlay

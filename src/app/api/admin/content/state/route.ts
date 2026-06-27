@@ -4,6 +4,7 @@ import { getLocalePath, locales } from "@/constants/i18n";
 import {
   deleteAuthoredContent,
   saveAuthoredContent,
+  TiptapHtmlRenderError,
   updateAuthoredContentMeta,
 } from "@/features/content/authored.server";
 import { readContentState } from "@/features/content/contentState.server";
@@ -47,6 +48,26 @@ const NO_STORE_HEADERS = {
   "Cache-Control": "no-store, max-age=0",
 };
 
+function contentStateErrorResponse(error: unknown) {
+  if (error instanceof TiptapHtmlRenderError) {
+    return NextResponse.json(
+      {
+        code: error.code,
+        detail: error.reason,
+        error: "본문 HTML 변환에 실패했습니다.",
+        locale: error.locale,
+        suggestions: error.suggestions,
+      },
+      { status: 422 },
+    );
+  }
+
+  return NextResponse.json(
+    { error: error instanceof Error ? error.message : "Failed to persist content state." },
+    { status: 500 },
+  );
+}
+
 function parseSection(url: string) {
   const section = new URL(url).searchParams.get("section");
   return isManagedContentSection(section) ? section : null;
@@ -59,6 +80,10 @@ function parseCategorySlug(url: string) {
 
 function parseItemId(url: string) {
   return new URL(url).searchParams.get("id");
+}
+
+function parseStorageId(url: string) {
+  return new URL(url).searchParams.get("storageId");
 }
 
 function parseView(url: string) {
@@ -204,6 +229,7 @@ export async function GET(request: Request) {
   const section = parseSection(request.url) ?? undefined;
   const categorySlug = parseCategorySlug(request.url) ?? undefined;
   const itemId = parseItemId(request.url);
+  const storageId = parseStorageId(request.url);
   const view = parseView(request.url);
 
   if (rawSection && !section) {
@@ -223,9 +249,13 @@ export async function GET(request: Request) {
     includeBodies: view !== "list",
   });
 
-  if (itemId) {
+  if (itemId || storageId) {
+    const item = storageId
+      ? items.find((entry) => entry.storageId === storageId) ?? null
+      : items.find((entry) => entry.id === itemId) ?? null;
+
     return NextResponse.json(
-      { item: items.find((entry) => entry.id === itemId) ?? null },
+      { item },
       { headers: NO_STORE_HEADERS },
     );
   }
@@ -325,71 +355,72 @@ export async function POST(request: Request) {
     const items = await readContentState();
     return NextResponse.json({ items });
   } catch (error) {
-    return NextResponse.json(
-      { error: error instanceof Error ? error.message : "Failed to persist content state." },
-      { status: 500 },
-    );
+    return contentStateErrorResponse(error);
   }
 }
 
 export async function PUT(request: Request) {
-  const payload = (await request.json()) as UpsertStateRequest;
-  const item = payload.item;
+  try {
+    const payload = (await request.json()) as UpsertStateRequest;
+    const item = payload.item;
 
-  if (!item) {
-    return NextResponse.json({ error: "item is required" }, { status: 400 });
-  }
+    if (!item) {
+      return NextResponse.json({ error: "item is required" }, { status: 400 });
+    }
 
-  const validationError = validateManagedContentItem(item);
+    const validationError = validateManagedContentItem(item);
 
-  if (validationError) {
-    return NextResponse.json({ error: validationError }, { status: 400 });
-  }
+    if (validationError) {
+      return NextResponse.json({ error: validationError }, { status: 400 });
+    }
 
-  const currentItems = await readContentState();
-  const currentItem = findCurrentItem(currentItems, {
-    categorySlug: item.categorySlug,
-    id: payload.currentId ?? item.id,
-    section: item.section,
-    storageId: item.storageId,
-  });
-  const normalizedItem = mergeBodiesFromCurrent(
-    item,
-    currentItem,
-    payload.preserveExistingBodies,
-  );
-  const savedItem = await saveAuthoredContent(normalizedItem);
-
-  if (payload.shiftSiblingsForNew && !currentItem) {
-    const siblingItems = currentItems.filter(
-      (entry) =>
-        entry.section === savedItem.section &&
-        entry.categorySlug === savedItem.categorySlug &&
-        entry.id !== savedItem.id,
-    );
-
-    await Promise.all(
-      siblingItems.map((entry) =>
-        updateAuthoredContentMeta({
-          categorySlug: entry.categorySlug,
-          id: entry.id,
-          section: entry.section,
-          storageId: entry.storageId,
-          updates: { sortOrder: entry.sortOrder + 1 },
-        }),
-      ),
-    );
-
-    siblingItems.forEach((entry) => {
-      revalidateAdminPaths(entry);
-      revalidatePublicPaths(entry);
+    const currentItems = await readContentState();
+    const currentItem = findCurrentItem(currentItems, {
+      categorySlug: item.categorySlug,
+      id: payload.currentId ?? item.id,
+      section: item.section,
+      storageId: item.storageId,
     });
+    const normalizedItem = mergeBodiesFromCurrent(
+      item,
+      currentItem,
+      payload.preserveExistingBodies,
+    );
+    const savedItem = await saveAuthoredContent(normalizedItem);
+
+    if (payload.shiftSiblingsForNew && !currentItem) {
+      const siblingItems = currentItems.filter(
+        (entry) =>
+          entry.section === savedItem.section &&
+          entry.categorySlug === savedItem.categorySlug &&
+          entry.id !== savedItem.id,
+      );
+
+      await Promise.all(
+        siblingItems.map((entry) =>
+          updateAuthoredContentMeta({
+            categorySlug: entry.categorySlug,
+            id: entry.id,
+            section: entry.section,
+            storageId: entry.storageId,
+            updates: { sortOrder: entry.sortOrder + 1 },
+          }),
+        ),
+      );
+
+      siblingItems.forEach((entry) => {
+        revalidateAdminPaths(entry);
+        revalidatePublicPaths(entry);
+      });
+    }
+
+    revalidateAdminPaths(savedItem);
+    revalidatePublicPaths(savedItem);
+
+    return NextResponse.json({ item: savedItem });
+  } catch (error) {
+    return contentStateErrorResponse(error);
   }
-
-  revalidateAdminPaths(savedItem);
-  revalidatePublicPaths(savedItem);
-
-  return NextResponse.json({ item: savedItem });
 }
 
 export async function PATCH(request: Request) {

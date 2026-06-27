@@ -14,6 +14,7 @@ import {
   getLocalizedContent,
   isPublishedContentVisible,
   getPublicDetailHref,
+  sortPublicContentItems,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
 import { withDynamicOgImage } from "@/features/seo/metadata";
@@ -35,13 +36,17 @@ export default async function DemoPage({ params, searchParams }: Props) {
   const demoItems = (await readContentState("demo", { includeBodies: false }))
     .filter((item) => isPublishedContentVisible(item, locale))
     .filter((item) => selectedCategory === "all" || item.categorySlug === selectedCategory);
+  const sortedDemoItems = sortPublicContentItems(demoItems, {
+    preferManualOrder: selectedCategory !== "all",
+  });
 
-  const fallbackItems = demoItems.map((item) => ({
+  const fallbackItems = sortedDemoItems.map((item) => ({
     category: getCategoryLabel(demoCategoryConfigs, item.categorySlug, locale),
     date: item.categorySlug === "webinars" ? formatPublicDate(locale, item.dateIso) : undefined,
     description: getLocalizedContent(item.summary, locale),
     href: item.contentType === "outlink" ? item.externalUrl : getPublicDetailHref("demo", locale, item.id),
     imageSrc: item.imageSrc,
+    isExternal: item.contentType === "outlink",
     title: getLocalizedContent(item.title, locale),
   }));
 

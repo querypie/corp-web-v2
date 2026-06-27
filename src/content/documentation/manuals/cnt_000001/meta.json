@@ -3,16 +3,16 @@
   "authorRole": "",
   "categorySlug": "manuals",
   "contentType": "content",
-  "dateIso": "",
-  "downloadCoverImageSrc": "",
+  "dateIso": "2026-05-15",
+  "downloadCoverImageSrc": "/documentation/manuals/acp-community-edition-guide.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
   "hideHeroImage": false,
-  "id": "querypie-install-guide",
-  "imageSrc": "/documentation/manuals/docu-thumb-community-install-guide.webp",
+  "id": "acp-community-install-guide",
+  "imageSrc": "/documentation/manuals/acp-community-edition-guide.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 1,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000001",
   "summary": {
     "en": "QueryPie ACP Community Edition is a free version that lets you experience all the core features of QueryPie ACP Enterprise — including Database, System, Kubernetes, and Web Access Controllers — with a maximum limit of 5 users. Get started quickly with a simple installation.",
-    "ko": "QueryPie 커뮤니티 버전은 QueryPie Enterprise의 핵심 기능인 Database, System, Kubernetes, Web Access Controller를 모두 체험할 수 있는 무료 버전입니다. 간편한 설치로 지금 바로 시작해보세요.",
-    "ja": "QueryPie ACP Community Edition」は、Database・System・Kubernetes・Webアクセスコントローラーなど、QueryPie Enterpriseの主要機能をすべて体験できる無償バージョンです。簡単なインストールですぐに始められます。"
+    "ko": "QueryPie ACP Community Edition은 최대 5명의 사용자 제한으로 Database, System, Kubernetes 및 Web Access Controller를 포함한 QueryPie ACP Enterprise의 모든 핵심 기능을 경험할 수 있는 무료 버전입니다. 간단한 설치로 빠르게 시작해 보세요.",
+    "ja": "QueryPie ACP Community Editionは、Database、System、Kubernetes、Web Access Controllerを含むQueryPie ACP Enterpriseのすべてのコア機能を最大5ユーザーまで体験できる無料版です。簡単なインストールですぐに始められます。"
   },
   "title": {
     "en": "QueryPie ACP Community Edition Installation Guide",
-    "ko": "QueryPie 커뮤니티 버전 설치 가이드",
-    "ja": "QueryPie ACP コミュニティ版のインストールガイド"
+    "ko": "QueryPie ACP Community Edition 설치 가이드",
+    "ja": "QueryPie ACP Community Edition インストールガイド"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/manuals/cnt_000001/en.html",

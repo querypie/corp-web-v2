@@ -218,6 +218,13 @@ textarea:-webkit-autofill:focus {
     color: var(--color-mute);
   }
 
+  .icon-outlink-mask {
+    display: inline-block;
+    background-color: currentColor;
+    -webkit-mask: url("/assets/ui/icons/Outlink.svg") center / contain no-repeat;
+    mask: url("/assets/ui/icons/Outlink.svg") center / contain no-repeat;
+  }
+
   .group\/nav:hover .group-hover\/nav\:text-mute,
   .group\/nav:focus-within .group-focus-within\/nav\:text-mute {
     color: var(--color-mute);
@@ -386,21 +393,21 @@ textarea:-webkit-autofill:focus {
     font-size: 24px;
     line-height: 34px;
     letter-spacing: 0;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .type-content-h2 {
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 0;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .type-content-h3 {
-    font-size: 15px;
-    line-height: 24px;
+    font-size: 16px;
+    line-height: 26px;
     letter-spacing: 0;
-    font-weight: 400;
+    font-weight: 300;
   }
 
   .type-content-body {
@@ -593,7 +600,7 @@ textarea:-webkit-autofill:focus {
     }
 
     .type-content-h3 {
-      font-size: 16px;
+      font-size: 18px;
       line-height: 28px;
     }
 

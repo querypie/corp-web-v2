@@ -10,7 +10,7 @@ type ContentGateOverlayProps = {
   contactCopy: ContactPageCopy;
   contentId: string;
   locale: "en" | "ko" | "ja";
-  onUnlock: () => void;
+  onUnlock?: () => void;
   section: Exclude<ManagedContentSection, "news">;
   title: string;
   unlockCookieName: string;
@@ -45,32 +45,30 @@ export default function ContentGateOverlay({
 
   function handleSuccess() {
     startTransition(() => {
-      onUnlock();
+      onUnlock?.();
       router.refresh();
     });
   }
 
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 top-[max(120px,35%)]">
-      <div className="pointer-events-auto absolute inset-x-0 bottom-0 z-10">
-        <div className="h-[400px] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,var(--color-bg)_100%)]" />
-        <div className="w-full bg-bg">
-          <div className="mx-auto flex w-full max-w-[400px] flex-col gap-6 pb-8">
-            <div className="flex flex-col gap-3 pt-8 text-center">
-              <h2 className="m-0 type-h2 text-fg">{localized.eyebrow}</h2>
-              <p className="m-0 type-body-md text-mute">{localized.description}</p>
-            </div>
-            <ContentLeadForm
-              contactCopy={contactCopy}
-              contentId={contentId}
-              locale={locale}
-              mode="unlock"
-              onSuccess={handleSuccess}
-              section={section}
-              title={title}
-              unlockCookieName={unlockCookieName}
-            />
+    <div className="relative z-10 mt-[-200px]">
+      <div className="h-[220px] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,var(--color-bg)_78%)]" />
+      <div className="w-full bg-bg">
+        <div className="mx-auto flex w-full max-w-[400px] flex-col gap-6 pb-8">
+          <div className="flex flex-col gap-3 pt-8 text-center">
+            <h2 className="m-0 type-h2 text-fg">{localized.eyebrow}</h2>
+            <p className="m-0 type-body-md text-mute">{localized.description}</p>
           </div>
+          <ContentLeadForm
+            contactCopy={contactCopy}
+            contentId={contentId}
+            locale={locale}
+            mode="unlock"
+            onSuccess={handleSuccess}
+            section={section}
+            title={title}
+            unlockCookieName={unlockCookieName}
+          />
         </div>
       </div>
     </div>

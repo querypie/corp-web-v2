@@ -54,6 +54,7 @@ export default function NewsDetailClientPage({
             ? previousItem.externalUrl
             : getPublicDetailHref("news", locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
+          isExternal: previousItem.contentType === "outlink",
           title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
         }
       : null,
@@ -64,6 +65,7 @@ export default function NewsDetailClientPage({
             ? nextItem.externalUrl
             : getPublicDetailHref("news", locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
+          isExternal: nextItem.contentType === "outlink",
           title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
         }
       : null,

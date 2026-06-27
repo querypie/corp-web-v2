@@ -2,6 +2,7 @@
 
 import type { MouseEvent as ReactMouseEvent, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import {
@@ -167,7 +168,7 @@ export default function Gnb({
         )}
       >
         <div className="flex h-16 w-full max-w-[1200px] items-center justify-between gap-6 text-fg transition-colors duration-300">
-          <a
+          <Link
             aria-label="QueryPie AI"
             className="inline-flex h-5 w-[116px] shrink-0 items-center text-fg transition-colors duration-300"
             href={homeHref}
@@ -180,7 +181,7 @@ export default function Gnb({
               className="block h-5 w-[116px] transition-[filter,opacity] duration-300"
               src="/assets/brand/logos/querypie-ai-logo.svg"
             />
-          </a>
+          </Link>
           <div className="flex items-center gap-[10px] md:gap-[30px]">
             {/* 데스크톱 전용 글로벌 네비게이션 */}
             <nav aria-label="Global" className="hidden items-center gap-[30px] md:flex">
@@ -205,13 +206,13 @@ export default function Gnb({
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getSolutionsSubItems(locale).map((sub) => (
-                            <a
+                            <Link
                               key={sub.label}
                               className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
                             >
                               {sub.label}
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       </div>
@@ -237,13 +238,13 @@ export default function Gnb({
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getFeaturesSubItems(locale).map((sub) => (
-                            <a
+                            <Link
                               key={sub.label}
                               className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
                             >
                               {sub.label}
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       </div>
@@ -269,13 +270,13 @@ export default function Gnb({
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getCompanySubItems(locale).map((sub) => (
-                            <a
+                            <Link
                               key={sub.label}
                               className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
                             >
                               {sub.label}
-                            </a>
+                            </Link>
                           ))}
                         </div>
                       </div>
@@ -284,25 +285,18 @@ export default function Gnb({
                 }
 
                 return (
-                  <div
+                  <Link
                     key={item}
-                    className="relative"
+                    className={cx(
+                      "relative type-body-md transition-colors",
+                      plansOpen ? "text-mute" : "text-fg hover:text-mute",
+                    )}
+                    href={getPrimaryNavHref(item, locale)}
                     onMouseEnter={() => setPlansOpen(true)}
                     onMouseLeave={() => setPlansOpen(false)}
                   >
-                    <button
-                      className={cx(
-                        "type-body-md transition-colors",
-                        plansOpen ? "text-mute" : "text-fg hover:text-mute",
-                      )}
-                      onClick={() => {
-                        router.push(getPrimaryNavHref(item, locale));
-                      }}
-                      type="button"
-                    >
-                      {item}
-                    </button>
-                  </div>
+                    {item}
+                  </Link>
                 );
               })}
             </nav>
@@ -424,14 +418,14 @@ export default function Gnb({
                 <p className="m-0 type-body-md text-mute">{section.title}</p>
                 <div className="flex w-full flex-col gap-[10px]">
                   {section.items.map((item) => (
-                    <a
+                    <Link
                       key={item.label}
                       className="pressable type-h2 text-fg"
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {item.label}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

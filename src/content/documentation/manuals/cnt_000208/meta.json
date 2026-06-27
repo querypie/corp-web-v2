@@ -1,0 +1,37 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "manuals",
+  "contentType": "outlink",
+  "dateIso": "2026-05-15",
+  "downloadCoverImageSrc": "/documentation/manuals/acp-release-notes.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://docs.querypie.com/en/release-notes",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-acp-release-notes",
+  "imageSrc": "/documentation/manuals/acp-release-notes.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 6,
+  "status": "published",
+  "storageId": "cnt_000208",
+  "summary": {
+    "en": "A guide page for checking the latest product updates, added features, and improvements.",
+    "ko": "최신 제품 업데이트, 추가된 기능 및 개선 사항을 확인하기 위한 가이드 페이지입니다.",
+    "ja": "最新の製品アップデート、追加機能、改善点を確認するためのガイドページです。"
+  },
+  "title": {
+    "en": "QueryPie ACP Release Notes",
+    "ko": "QueryPie ACP 릴리스 노트",
+    "ja": "QueryPie ACP リリースノート"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {}
+}

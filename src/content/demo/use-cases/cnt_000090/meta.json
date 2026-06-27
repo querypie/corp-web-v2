@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "data-analytics-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case-thumb-1-en.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 18,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000090",
   "summary": {
     "en": "An AI agent that turns natural language questions into instant data insights and visualizations, empowering teams to analyze data without writing SQL.",
-    "ko": "An AI agent that turns natural language questions into instant data insights and visualizations, empowering teams to analyze data without writing SQL.",
-    "ja": "自然言語による質問を瞬時にデータインサイトと可視化に変換するAIエージェント。SQLを書くことなく、チームがデータ分析を行えるようサポートします。"
+    "ko": "자연어 질문을 즉각적인 데이터 인사이트와 시각화로 변환하여 팀이 SQL을 작성하지 않고도 데이터를 분석할 수 있도록 지원하는 AI 에이전트입니다.",
+    "ja": "自然言語の質問を即座にデータインサイトと視覚化に変換し、SQLを記述することなくチームがデータを分析できるようにするAIエージェント。"
   },
   "title": {
     "en": "AIP Use Case: Data Analytics Agent",
-    "ko": "AIP Use Case: Data Analytics Agent",
-    "ja": "AIP活用事例：データ分析エージェント"
+    "ko": "AIP 사용 사례: 데이터 분석 에이전트",
+    "ja": "AIPユースケース：データ分析エージェント"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000090/en.html",

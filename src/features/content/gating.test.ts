@@ -89,6 +89,18 @@ describe("buildContentPreviewHtml", () => {
     const preview = buildContentPreviewHtml(html, "10");
     expect(preview.length).toBeLessThan(html.length / 3);
   });
+
+  it("블록 중간에서 잘릴 때 문장 경계와 닫힌 태그를 유지한다", () => {
+    const html = [
+      "<p>First sentence is visible. Second sentence should be hidden by the gate. Third sentence is also hidden.</p>",
+      "<p>Another paragraph should not be included.</p>",
+    ].join("");
+    const preview = buildContentPreviewHtml(html, "10");
+
+    expect(preview).toContain("First sentence is visible.");
+    expect(preview).not.toContain("Second sentence should be hidden");
+    expect(preview).toMatch(/<\/p>$/);
+  });
 });
 
 describe("hasUnlockedContentAccess", () => {

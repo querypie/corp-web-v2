@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "quotation-ai-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case-thumb-27-en.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 3,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000070",
   "summary": {
     "en": "No matter how complex your quotation logic is, AIP structures it as a Skill and delivers error-free quotes instantly.",
-    "ko": "No matter how complex your quotation logic is, AIP structures it as a Skill and delivers error-free quotes instantly.",
-    "ja": "どれほど複雑な見積ロジックでも、AIPがスキルとして構造化し、正確な見積書を即時出力します。"
+    "ko": "아무리 복잡한 견적 로직이라도 AIP는 이를 스킬로 구조화하여 오류 없는 견적을 즉시 제공합니다.",
+    "ja": "どれほど複雑な見積もりロジックであっても、AIPはそれをSkillとして構造化し、エラーのない見積もりを即座に提供します。"
   },
   "title": {
     "en": "AIP Use Case: Quotation AI Agent",
-    "ko": "",
-    "ja": "AIP活用事例： 見積AIエージェント"
+    "ko": "AIP 사용 사례: 견적 AI 에이전트",
+    "ja": "AIP ユースケース：見積もり AI エージェント"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000070/en.html",

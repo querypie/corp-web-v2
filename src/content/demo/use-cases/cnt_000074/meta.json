@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "aws-log-analytics-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case-thumb-16-en.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 8,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000074",
   "summary": {
     "en": "An AI agent that investigates AWS logs with natural language—correlating CloudWatch, CloudTrail, and service logs to speed up incident triage and root-cause analysis.",
-    "ko": "An AI agent that investigates AWS logs with natural language—correlating CloudWatch, CloudTrail, and service logs to speed up incident triage and root-cause analysis.",
-    "ja": "自然言語でAWSログを調査し、CloudWatch、CloudTrail、各種サービスログを相関して、インシデントのトリアージと根本原因分析を加速するAIエージェント。"
+    "ko": "자연어로 AWS 로그를 조사하여 CloudWatch, CloudTrail 및 서비스 로그를 상호 연관시켜 인시던트 분류 및 근본 원인 분석을 가속화하는 AI 에이전트입니다.",
+    "ja": "自然言語でAWSログを調査するAIエージェント。CloudWatch、CloudTrail、サービスログを相関分析し、インシデントのトリアージと根本原因分析を高速化します。"
   },
   "title": {
     "en": "AIP Use Case: AWS Log Analytics AI Agent",
-    "ko": "",
-    "ja": "AIP活用事例： AWSログ分析AIエージェント"
+    "ko": "AIP 사용 사례: AWS Log Analytics AI Agent",
+    "ja": "AIP ユースケース: AWS Log Analytics AI Agent"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000074/en.html",

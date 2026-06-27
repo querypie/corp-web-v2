@@ -44,6 +44,7 @@ export default async function DocumentationPage({ params, searchParams }: DocsPa
     description: getLocalizedContent(item.summary, locale),
     href: item.contentType === "outlink" ? item.externalUrl : getPublicDetailHref("documentation", locale, item.id),
     imageSrc: item.imageSrc,
+    isExternal: item.contentType === "outlink",
     title: getLocalizedContent(item.title, locale),
   }));
 

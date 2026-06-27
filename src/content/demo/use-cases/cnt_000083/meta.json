@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "credit-check-ai-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case-thumb-8-en.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 14,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000083",
   "summary": {
     "en": "An AI agent that automates creditworthiness checks by retrieving applicant data, scoring risk, and generating decision-ready summaries—faster approvals with consistent policy enforcement.",
-    "ko": "An AI agent that automates creditworthiness checks by retrieving applicant data, scoring risk, and generating decision-ready summaries—faster approvals with consistent policy enforcement.",
-    "ja": "申込者データの取得、リスクスコアリング、意思決定用サマリーの生成を自動化し、ポリシーを一貫適用しながら審査の迅速化を実現するAIエージェント。"
+    "ko": "신청자 데이터를 검색하고, 리스크를 평가하며, 의사 결정에 바로 사용할 수 있는 요약을 생성하여 신용 평가를 자동화하는 AI 에이전트입니다. 일관된 정책 적용으로 더 빠른 승인을 제공합니다.",
+    "ja": "申請者データを取得し、リスクをスコアリングし、意思決定に役立つ要約を生成することで与信審査を自動化する AI エージェント。一貫したポリシー適用により、承認を迅速化します。"
   },
   "title": {
     "en": "AIP Use Case: Credit Check AI Agent",
-    "ko": "",
-    "ja": "AIP活用事例： クレジット審査AIエージェント"
+    "ko": "AIP 사용 사례: 신용 조회 AI 에이전트",
+    "ja": "AIP ユースケース: クレジットチェック AI エージェント"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000083/en.html",

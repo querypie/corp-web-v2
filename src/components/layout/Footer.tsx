@@ -130,35 +130,7 @@ export default function Footer({
                       >
                         <span>{item}</span>
                         {isExternal ? (
-                          <svg
-                            aria-hidden="true"
-                            className="h-3.5 w-3.5 shrink-0 text-mute"
-                            fill="none"
-                            viewBox="0 0 16 16"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M6 3.5H3.5C2.95 3.5 2.5 3.95 2.5 4.5V12.5C2.5 13.05 2.95 13.5 3.5 13.5H11.5C12.05 13.5 12.5 13.05 12.5 12.5V10"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="1"
-                            />
-                            <path
-                              d="M9 2.5H13.5V7"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="1"
-                            />
-                            <path
-                              d="M13.25 2.75L7.5 8.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth="1"
-                            />
-                          </svg>
+                          <span aria-hidden="true" className="icon-outlink-mask h-3.5 w-3.5 shrink-0 text-mute" />
                         ) : null}
                       </a>
                     );

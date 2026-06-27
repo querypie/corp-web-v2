@@ -1,0 +1,37 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "manuals",
+  "contentType": "outlink",
+  "dateIso": "2026-05-15",
+  "downloadCoverImageSrc": "/documentation/manuals/acp-manual.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "https://docs.querypie.com/en",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-acp-manual",
+  "imageSrc": "/documentation/manuals/acp-manual.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 3,
+  "status": "published",
+  "storageId": "cnt_000205",
+  "summary": {
+    "en": "A guide page that brings together administrator and user documentation for QueryPie ACP.",
+    "ko": "QueryPie ACP의 관리자 및 사용자 문서를 통합한 가이드 페이지입니다.",
+    "ja": "QueryPie ACPの管理者およびユーザー向けドキュメントをまとめたガイドページです。"
+  },
+  "title": {
+    "en": "QueryPie ACP Manual",
+    "ko": "QueryPie ACP 매뉴얼",
+    "ja": "QueryPie ACP マニュアル"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {}
+}

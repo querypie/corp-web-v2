@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "incident-mgmt-ai-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case-thumb-15-en.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 17,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000077",
   "summary": {
     "en": "An AI agent that consolidates operational status, generates standard reports, and orchestrates alerts and actions—streamlining situation management through natural language.",
-    "ko": "An AI agent that consolidates operational status, generates standard reports, and orchestrates alerts and actions—streamlining situation management through natural language.",
-    "ja": "運用ステータスを統合し、標準レポートを生成し、アラートとアクションをオーケストレーションするAIエージェント。自然言語で状況管理を効率化します。"
+    "ko": "운영 상태를 통합하고 표준 보고서를 생성하며 경고 및 조치를 조율하여 자연어를 통해 상황 관리를 간소화하는 AI 에이전트입니다.",
+    "ja": "運用状況を統合し、標準レポートを生成し、アラートとアクションを調整することで、自然言語を通じて状況管理を合理化するAIエージェント。"
   },
   "title": {
     "en": "AIP Use Case: Reporting & Incident Management AI Agent",
-    "ko": "",
-    "ja": "AIP活用事例： 報告・インシデント管理AIエージェント"
+    "ko": "AIP 사용 사례: 보고 및 사건 관리 AI 에이전트",
+    "ja": "AIPユースケース：レポート＆インシデント管理AIエージェント"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/demo/use-cases/cnt_000077/en.html",

@@ -47,6 +47,7 @@ type DialogState =
   | { description: string; highlightedLines?: string[]; title: string; type: "alert" }
   | { type: "translate-confirm" }
   | { sourceLocale: Locale; type: "translate-loading" }
+  | { sourceLocale: Locale; targetLocales: Locale[]; type: "translate-success" }
   | {
       canRetry: boolean;
       code: TranslationErrorCode;
@@ -71,6 +72,7 @@ const CONTENT_GATING_OPTIONS: Array<{ label: string; value: ContentGatingLevel }
   { label: "Gating 30%", value: "30" },
   { label: "Gating 50%", value: "50" },
 ];
+const TRANSLATION_REQUEST_TIMEOUT_MS = 240000;
 
 const NEWS_FORMAT_LABELS: Record<NewsFormat, Record<Locale, string>> = {
   "Media Coverage": {
@@ -116,11 +118,11 @@ const TRANSLATION_ERROR_COPY: Record<TranslationErrorCode, { canRetry: boolean; 
   },
   NETWORK_ERROR: {
     canRetry: true,
-    message: "서버에 연결하지 못했습니다. 네트워크 상태를 확인한 뒤 다시 시도하세요.",
+    message: "번역 요청이 제한 시간 안에 끝나지 않았습니다. 네트워크 또는 번역 서버 상태를 확인한 뒤 다시 시도하세요.",
   },
   PROVIDER_ERROR: {
     canRetry: true,
-    message: "번역 서버에서 오류가 발생했습니다. 잠시 후 다시 시도하세요.",
+    message: "번역 서버 응답이 실패했습니다. 아래 상세 내용을 확인한 뒤 다시 시도하세요.",
   },
   RATE_LIMITED: {
     canRetry: true,
@@ -159,23 +161,52 @@ function hasLocaleTranslationSource(form: ManagedContentEntry, locale: Locale, i
   );
 }
 
-function hasLocaleEditableContent(form: ManagedContentEntry, locale: Locale, includeBody: boolean) {
-  return hasLocaleTranslationSource(form, locale, includeBody);
+function hasLocaleVisibleTitle(form: ManagedContentEntry, locale: Locale) {
+  return Boolean(form.title[locale]?.trim());
+}
+
+function normalizeVisibleLocalesByTitle(form: ManagedContentEntry): ManagedContentEntry {
+  const visibleLocales = form.visibleLocales.filter((locale) => hasLocaleVisibleTitle(form, locale));
+
+  if (visibleLocales.length === form.visibleLocales.length) {
+    return form;
+  }
+
+  return {
+    ...form,
+    visibleLocales,
+  };
+}
+
+function syncVisibleLocalesByTitle(form: ManagedContentEntry): ManagedContentEntry {
+  const visibleLocales = (["en", "ko", "ja"] as const).filter((locale) => hasLocaleVisibleTitle(form, locale));
+
+  if (
+    visibleLocales.length === form.visibleLocales.length &&
+    visibleLocales.every((locale) => form.visibleLocales.includes(locale))
+  ) {
+    return form;
+  }
+
+  return {
+    ...form,
+    visibleLocales,
+  };
 }
 
 function hydrateRichTextFromHtml(entry: ManagedContentEntry): ManagedContentEntry {
   if (entry.contentType !== "content") {
-    return entry;
+    return normalizeVisibleLocalesByTitle(entry);
   }
 
-  return {
+  return normalizeVisibleLocalesByTitle({
     ...entry,
     bodyRichText: {
       en: entry.bodyRichText.en.trim() ? entry.bodyRichText.en : entry.bodyHtml.en,
       ko: entry.bodyRichText.ko.trim() ? entry.bodyRichText.ko : entry.bodyHtml.ko,
       ja: entry.bodyRichText.ja.trim() ? entry.bodyRichText.ja : entry.bodyHtml.ja,
     },
-  };
+  });
 }
 
 function serializeDirtyCheckTarget(form: ManagedContentEntry) {
@@ -258,30 +289,102 @@ function ConfirmDialog({
 }
 
 function TranslationProgressDialog({
+  onConfirm,
   sourceLocale,
+  status = "loading",
+  completedLocales,
   onCancel,
 }: {
+  onConfirm?: () => void;
   sourceLocale: Locale;
-  onCancel: () => void;
+  status?: "loading" | "success";
+  completedLocales?: Locale[];
+  onCancel?: () => void;
 }) {
-  const targetLocales = (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
+  const [elapsedSeconds, setElapsedSeconds] = useState(0);
+  const targetLocales = completedLocales ?? (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
+  const isSuccess = status === "success";
+  const progress = isSuccess ? 100 : Math.min(95, Math.max(8, Math.round((elapsedSeconds / 60) * 95)));
+  const progressLabel =
+    isSuccess
+      ? "번역 결과가 입력되었습니다."
+      : elapsedSeconds >= 60
+      ? "응답이 지연되어 상태를 확인하고 있습니다."
+      : progress < 35
+      ? "번역 요청을 준비하고 있습니다."
+      : progress < 75
+        ? "번역문을 생성하고 있습니다."
+        : progress < 95
+          ? "결과를 정리하고 있습니다."
+          : "번역 서버 응답을 확인하고 있습니다.";
+
+  useEffect(() => {
+    if (isSuccess) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setElapsedSeconds((current) => current + 1);
+    }, 1000);
+
+    return () => window.clearInterval(interval);
+  }, [isSuccess]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5">
-      <div className="w-full max-w-[320px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-8">
-        <div className="flex flex-col items-center gap-5 text-center">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border">
-            <span className="h-4 w-4 animate-spin rounded-full border-2 border-fg border-t-transparent" />
+      <div className="w-full max-w-[380px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-8">
+        <div className="flex flex-col items-center gap-6 text-center">
+          <div className={cx(
+            "flex h-10 w-10 items-center justify-center rounded-full border",
+            isSuccess ? "border-success text-success" : "border-border text-fg",
+          )}>
+            {isSuccess ? (
+              <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
+                <path d="m6 12 4 4 8-8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+              </svg>
+            ) : (
+              <span className="h-4 w-4 animate-spin rounded-full border-2 border-fg border-t-transparent" />
+            )}
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="m-0 type-h3 text-fg">번역 중</h2>
+            <h2 className="m-0 type-h3 text-fg">{isSuccess ? "번역 완료" : "번역 중"}</h2>
             <p className="m-0 type-body-md text-mute">
-              {targetLocales.map((locale) => localeDisplayNames[locale]).join(", ")}를 작성하고 있습니다.
+              {isSuccess
+                ? `${targetLocales.map((locale) => localeDisplayNames[locale]).join(", ")} 내용이 입력되었습니다.`
+                : `${targetLocales.map((locale) => localeDisplayNames[locale]).join(", ")}를 작성하고 있습니다.`}
             </p>
           </div>
-          <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
-            취소
-          </Button>
+          <div className="flex w-full flex-col gap-3">
+            <div className="flex items-center justify-between type-body-sm">
+              <span className="text-mute">{progressLabel}</span>
+              <span className="text-fg">{progress}%</span>
+            </div>
+            <div
+              aria-label="번역 진행률"
+              aria-valuemax={100}
+              aria-valuemin={0}
+              aria-valuenow={progress}
+              className="h-2 w-full overflow-hidden rounded-full bg-bg-content"
+              role="progressbar"
+            >
+              <div
+                className="h-full rounded-full bg-success transition-[width] duration-700 ease-out"
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <div className="flex items-center justify-center type-body-sm text-mute">
+              <span>{isSuccess ? "번역된 제목이 있는 언어는 노출 탭에 체크되었습니다." : `경과 ${elapsedSeconds}초`}</span>
+            </div>
+          </div>
+          {isSuccess ? (
+            <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onConfirm} style="round" variant="secondary">
+              확인
+            </Button>
+          ) : (
+            <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
+              취소
+            </Button>
+          )}
         </div>
       </div>
     </div>
@@ -468,7 +571,6 @@ export default function AdminManagedContentDetailPage({
   const pdfInputRef = useRef<HTMLInputElement | null>(null);
   const dateInputRef = useRef<HTMLInputElement | null>(null);
   const stickyToolbarRef = useRef<HTMLElement | null>(null);
-  const isInitializingRichTextRef = useRef(false);
   const pendingDeletedImageSrcsRef = useRef(new Set<string>());
   const pendingDeletedVideoSrcsRef = useRef(new Set<string>());
   const pendingImageUploadsRef = useRef(new Map<string, PendingImageUpload>());
@@ -488,7 +590,6 @@ export default function AdminManagedContentDetailPage({
   const [editorToolbarTop, setEditorToolbarTop] = useState("68px");
   const [previewOpen, setPreviewOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
-  const [translationSuccessMessage, setTranslationSuccessMessage] = useState("");
   const [initialFormSnapshot, setInitialFormSnapshot] = useState(() =>
     serializeDirtyCheckTarget(createEmptyManagedContentDraft(section, categorySlug)),
   );
@@ -552,7 +653,6 @@ export default function AdminManagedContentDetailPage({
 
     if (currentItem) {
       const hydratedItem = hydrateRichTextFromHtml(currentItem);
-      isInitializingRichTextRef.current = true;
       setForm(hydratedItem);
       setInitialFormSnapshot(serializeDirtyCheckTarget(hydratedItem));
       setThumbnailName(hydratedItem.imageSrc);
@@ -560,7 +660,6 @@ export default function AdminManagedContentDetailPage({
       return;
     }
     const initialDraft = createEmptyManagedContentDraft(section, categorySlug);
-    isInitializingRichTextRef.current = true;
     setForm(initialDraft);
     setInitialFormSnapshot(serializeDirtyCheckTarget(initialDraft));
     setThumbnailName("");
@@ -594,15 +693,6 @@ export default function AdminManagedContentDetailPage({
     };
   }, [pendingThumbnailPreviewSrc]);
 
-  useEffect(() => {
-    if (!translationSuccessMessage) {
-      return;
-    }
-
-    const timeout = window.setTimeout(() => setTranslationSuccessMessage(""), 4500);
-    return () => window.clearTimeout(timeout);
-  }, [translationSuccessMessage]);
-
   function updateForm<K extends keyof ManagedContentEntry>(key: K, value: ManagedContentEntry[K]) {
     setForm((current) => ({ ...current, [key]: value }));
   }
@@ -612,26 +702,45 @@ export default function AdminManagedContentDetailPage({
     locale: "en" | "ko" | "ja",
     value: string,
   ) {
-    setForm((current) => ({
-      ...current,
-      [key]: {
-        ...current[key],
-        [locale]: value,
-      },
-    }));
+    setForm((current) => {
+      const nextForm = {
+        ...current,
+        [key]: {
+          ...current[key],
+          [locale]: value,
+        },
+      };
+
+      if (key !== "title") {
+        return nextForm;
+      }
+
+      const normalizedForm = normalizeVisibleLocalesByTitle(nextForm);
+
+      if (!value.trim() || normalizedForm.visibleLocales.includes(locale)) {
+        return normalizedForm;
+      }
+
+      return {
+        ...normalizedForm,
+        visibleLocales: [...normalizedForm.visibleLocales, locale],
+      };
+    });
   }
 
   function toggleVisibleLocale(locale: "en" | "ko" | "ja", checked: boolean) {
-    if (!hasLocaleEditableContent(form, locale, isContentType)) {
-      return;
-    }
+    setForm((current) => {
+      if (checked && !hasLocaleVisibleTitle(current, locale)) {
+        return normalizeVisibleLocalesByTitle(current);
+      }
 
-    setForm((current) => ({
-      ...current,
-      visibleLocales: checked
-        ? Array.from(new Set([...current.visibleLocales, locale]))
-        : current.visibleLocales.filter((item) => item !== locale),
-    }));
+      return {
+        ...current,
+        visibleLocales: checked
+          ? Array.from(new Set([...current.visibleLocales, locale]))
+          : current.visibleLocales.filter((item) => item !== locale),
+      };
+    });
   }
 
   function updateRichText(locale: "en" | "ko" | "ja", payload: { html: string; json: string }) {
@@ -640,7 +749,11 @@ export default function AdminManagedContentDetailPage({
         current.bodyRichText[locale] === payload.json &&
         current.bodyHtml[locale] === payload.html;
 
-      const nextForm = {
+      if (isSameAsCurrentRichText) {
+        return current;
+      }
+
+      return {
         ...current,
         bodyHtml: {
           ...current.bodyHtml,
@@ -651,13 +764,6 @@ export default function AdminManagedContentDetailPage({
           [locale]: payload.json,
         },
       };
-
-      if (isInitializingRichTextRef.current) {
-        setInitialFormSnapshot(serializeDirtyCheckTarget(nextForm));
-        isInitializingRichTextRef.current = false;
-      }
-
-      return nextForm;
     });
   }
 
@@ -691,19 +797,45 @@ export default function AdminManagedContentDetailPage({
   }
 
   async function requestTranslation(targetLocale: Locale, sourceLocale: Locale, signal: AbortSignal) {
-    const response = await fetch("/api/admin/content/translate", {
-      body: JSON.stringify({
-        bodyRichText: isContentType ? form.bodyRichText[sourceLocale] : "",
-        locale: targetLocale,
-        summary: form.summary[sourceLocale],
-        title: form.title[sourceLocale],
-      }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      signal,
-    });
+    const timeoutController = new AbortController();
+    let didTimeout = false;
+    const timeout = window.setTimeout(() => {
+      didTimeout = true;
+      timeoutController.abort();
+    }, TRANSLATION_REQUEST_TIMEOUT_MS);
+    const abortFromParent = () => timeoutController.abort();
+
+    signal.addEventListener("abort", abortFromParent, { once: true });
+
+    let response: Response;
+
+    try {
+      response = await fetch("/api/admin/content/translate", {
+        body: JSON.stringify({
+          bodyRichText: isContentType ? form.bodyRichText[sourceLocale] : "",
+          locale: targetLocale,
+          summary: form.summary[sourceLocale],
+          title: form.title[sourceLocale],
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        signal: timeoutController.signal,
+      });
+    } catch (error) {
+      if (didTimeout && error instanceof Error && error.name === "AbortError") {
+        throw Object.assign(new Error("번역 API가 제한 시간 안에 응답하지 않았습니다."), {
+          detail: `${Math.round(TRANSLATION_REQUEST_TIMEOUT_MS / 1000)}초 동안 /api/admin/content/translate 응답이 없었습니다.`,
+          translationCode: "NETWORK_ERROR" satisfies TranslationErrorCode,
+        });
+      }
+
+      throw error;
+    } finally {
+      window.clearTimeout(timeout);
+      signal.removeEventListener("abort", abortFromParent);
+    }
 
     const payload = (await response.json().catch(() => ({}))) as {
       bodyRichText?: string;
@@ -726,6 +858,7 @@ export default function AdminManagedContentDetailPage({
     }
 
     return {
+      bodyHtml: "",
       bodyRichText: payload.bodyRichText ?? form.bodyRichText[sourceLocale],
       locale: targetLocale,
       summary: payload.summary ?? form.summary[sourceLocale],
@@ -744,18 +877,23 @@ export default function AdminManagedContentDetailPage({
     const targetLocales = (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
     const controller = new AbortController();
     translationAbortControllerRef.current = controller;
-    setTranslationSuccessMessage("");
     setDialog({ sourceLocale, type: "translate-loading" });
 
     try {
-      const translations = await Promise.all(
-        targetLocales.map((targetLocale) =>
-          requestTranslation(targetLocale, sourceLocale, controller.signal),
-        ),
-      );
+      const translations: Awaited<ReturnType<typeof requestTranslation>>[] = [];
 
-      setForm((current) => ({
+      for (const targetLocale of targetLocales) {
+        translations.push(await requestTranslation(targetLocale, sourceLocale, controller.signal));
+      }
+
+      setForm((current) => syncVisibleLocalesByTitle({
         ...current,
+        bodyHtml: {
+          ...current.bodyHtml,
+          ...Object.fromEntries(
+            translations.map((translation) => [translation.locale, translation.bodyHtml]),
+          ),
+        },
         bodyRichText: {
           ...current.bodyRichText,
           ...Object.fromEntries(
@@ -775,12 +913,18 @@ export default function AdminManagedContentDetailPage({
           ),
         },
       }));
-      setDialog(null);
-      setTranslationSuccessMessage("번역이 완료되었습니다.");
+      setDialog({
+        sourceLocale,
+        targetLocales: translations.map((translation) => translation.locale),
+        type: "translate-success",
+      });
     } catch (error) {
       if (controller.signal.aborted) {
-        setDialog(null);
-        setTranslationSuccessMessage("번역이 취소되었습니다. 기존 입력 내용은 변경되지 않았습니다.");
+        setDialog({
+          description: "번역이 취소되었습니다. 기존 입력 내용은 변경되지 않았습니다.",
+          title: "번역 취소",
+          type: "alert",
+        });
         return;
       }
 
@@ -1181,7 +1325,7 @@ export default function AdminManagedContentDetailPage({
 
     setIsSaving(true);
 
-    const currentForm = overrideForm ?? form;
+    const currentForm = normalizeVisibleLocalesByTitle(overrideForm ?? form);
     const missing = validateForm(currentForm);
     if (missing.length > 0) {
       const hasVisibleLocaleTitleMissing = currentForm.visibleLocales.some((locale) =>
@@ -1390,7 +1534,7 @@ export default function AdminManagedContentDetailPage({
           <div className="flex shrink-0 flex-nowrap items-center justify-end gap-3">
             <TabGroup className="shrink-0 self-start">
               {(["en", "ko", "ja"] as const).map((locale) => {
-                const canToggleLocale = hasLocaleEditableContent(form, locale, isContentType);
+                const canToggleLocale = hasLocaleVisibleTitle(form, locale);
 
                 return (
                   <Tab
@@ -1457,7 +1601,7 @@ export default function AdminManagedContentDetailPage({
                 arrow={false}
                 className="shrink-0 justify-center whitespace-nowrap"
                 disabled={isSaving}
-                onClick={() => commit(itemId === "new" ? "hidden" : form.status)}
+                onClick={() => commit(itemId === "new" ? "published" : form.status)}
                 style="round"
                 variant="primary"
               >
@@ -1663,6 +1807,7 @@ export default function AdminManagedContentDetailPage({
             {isContentType && useRichEditor ? (
               <div className="flex flex-col gap-[10px]">
                 <TiptapEditor
+                  key={activeLocale}
                   onChange={(payload) => updateRichText(activeLocale, payload)}
                   onPrepareImage={prepareImagePreview}
                   onRemoveVideo={trackRemovedVideo}
@@ -1679,15 +1824,10 @@ export default function AdminManagedContentDetailPage({
 
       {previewOpen ? (
         <PreviewModal
+          initialLocale={activeLocale}
           item={previewItem}
           onClose={() => setPreviewOpen(false)}
         />
-      ) : null}
-
-      {translationSuccessMessage ? (
-        <div className="fixed left-1/2 top-5 z-[60] -translate-x-1/2 rounded-[8px] border border-border bg-[var(--color-bg-modal)] px-5 py-3 text-center shadow-[0_12px_32px_rgba(0,0,0,0.32)] backdrop-blur-[12px] type-body-sm text-fg">
-          {translationSuccessMessage}
-        </div>
       ) : null}
 
       {dialog?.type === "cancel" ? (
@@ -1730,13 +1870,22 @@ export default function AdminManagedContentDetailPage({
         <TranslationProgressDialog sourceLocale={dialog.sourceLocale} onCancel={cancelTranslation} />
       ) : null}
 
+      {dialog?.type === "translate-success" ? (
+        <TranslationProgressDialog
+          completedLocales={dialog.targetLocales}
+          sourceLocale={dialog.sourceLocale}
+          status="success"
+          onConfirm={() => setDialog(null)}
+        />
+      ) : null}
+
       {dialog?.type === "translate-error" ? (
         <ConfirmDialog
           cancelLabel="닫기"
           confirmLabel={dialog.canRetry ? "다시 시도" : "확인"}
           description={
             dialog.detail
-              ? `${dialog.description} 오류 상세: ${dialog.detail}`
+              ? `${dialog.description}\n\n오류 상세:\n${dialog.detail}`
               : dialog.description
           }
           onCancel={() => setDialog(null)}

@@ -569,6 +569,7 @@ export default function TiptapEditor({
   const editorShellRef = useRef<HTMLDivElement | null>(null);
   const baselineContentRef = useRef("");
   const lastAppliedValueRef = useRef(value);
+  const pendingContentSyncRef = useRef(0);
   const suppressNextUpdateRef = useRef(false);
   const [isImagePopoverPinned, setIsImagePopoverPinned] = useState(false);
   const [imagePopover, setImagePopover] = useState<ImagePopoverState>({
@@ -648,10 +649,6 @@ export default function TiptapEditor({
     onCreate({ editor: currentEditor }) {
       baselineContentRef.current = JSON.stringify(currentEditor.getJSON());
       lastAppliedValueRef.current = baselineContentRef.current;
-      onChange({
-        html: currentEditor.getHTML(),
-        json: baselineContentRef.current,
-      });
     },
     onUpdate({ editor: currentEditor }) {
       if (suppressNextUpdateRef.current) {
@@ -677,15 +674,26 @@ export default function TiptapEditor({
       return;
     }
 
+    const syncId = pendingContentSyncRef.current + 1;
+    pendingContentSyncRef.current = syncId;
     lastAppliedValueRef.current = value;
-    suppressNextUpdateRef.current = true;
-    editor.commands.setContent(parseContent(value));
-    baselineContentRef.current = JSON.stringify(editor.getJSON());
-    lastAppliedValueRef.current = baselineContentRef.current;
-    onChange({
-      html: editor.getHTML(),
-      json: baselineContentRef.current,
+
+    window.queueMicrotask(() => {
+      if (pendingContentSyncRef.current !== syncId || editor.isDestroyed) {
+        return;
+      }
+
+      suppressNextUpdateRef.current = true;
+      editor.commands.setContent(parseContent(value));
+      baselineContentRef.current = JSON.stringify(editor.getJSON());
+      lastAppliedValueRef.current = baselineContentRef.current;
     });
+
+    return () => {
+      if (pendingContentSyncRef.current === syncId) {
+        pendingContentSyncRef.current += 1;
+      }
+    };
   }, [editor, value]);
 
   useEffect(() => {

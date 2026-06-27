@@ -4,6 +4,7 @@ type FeaturedContentItem = {
   category: string;
   href: string;
   imageSrc: string;
+  isExternal?: boolean;
   title: string;
 };
 
@@ -19,16 +20,30 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function FeaturedContentCard({ category, href, imageSrc, title }: FeaturedContentItem) {
+function FeaturedContentCard({
+  category,
+  href,
+  imageSrc,
+  isExternal = false,
+  title,
+}: FeaturedContentItem) {
   return (
     /* 홈 전용 콘텐츠 리스트 카드 1개 */
-    <a className="group flex w-full cursor-pointer flex-col gap-5 md:flex-row md:items-start" href={href}>
+    <a
+      className="group flex w-full cursor-pointer flex-col gap-5 md:flex-row md:items-start"
+      href={href}
+      rel={isExternal ? "noreferrer noopener" : undefined}
+      target={isExternal ? "_blank" : undefined}
+    >
       <div className="content-thumbnail-frame w-full shrink-0 overflow-hidden rounded-box bg-bg-content md:w-[213px]">
         <img alt={title} className="card-media-motion block h-full w-full object-cover" src={imageSrc} />
       </div>
       <div className="flex min-w-0 flex-1 flex-col gap-[10px]">
         <p className="m-0 type-body-sm text-mute">{category}</p>
-        <p className="content-hover-title m-0 type-h3 text-fg">{title}</p>
+        <p className="content-hover-title m-0 type-h3 text-fg">
+          <span>{title}</span>
+          {isExternal ? <span aria-hidden="true" className="icon-outlink-mask ml-1.5 h-4 w-4 shrink-0 align-[-2px] text-mute" /> : null}
+        </p>
       </div>
     </a>
   );

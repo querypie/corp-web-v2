@@ -15,7 +15,7 @@ export type TranslationErrorCode =
 export type TiptapJsonNode = {
   attrs?: Record<string, unknown>;
   content?: TiptapJsonNode[];
-  marks?: Array<{ type?: string }>;
+  marks?: Array<{ attrs?: Record<string, unknown>; type?: string }>;
   text?: string;
   type?: string;
 };

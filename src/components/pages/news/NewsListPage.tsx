@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import type { Locale } from "@/constants/i18n";
 import ContentPreviewImage from "@/components/content/ContentPreviewImage";
@@ -33,18 +34,16 @@ export function NewsListCard({
   summary,
   title,
 }: NewsListItem) {
-  return (
-    /* 뉴스 카드 1개: 모바일은 세로, 데스크톱은 텍스트/썸네일 2열 */
-    <a
-      className="group flex w-full flex-col gap-4 md:flex-row md:items-start md:gap-[30px]"
-      href={href}
-      rel={isExternal ? "noreferrer noopener" : undefined}
-      target={isExternal ? "_blank" : undefined}
-    >
+  const cardClassName = "group flex w-full flex-col gap-4 md:flex-row md:items-start md:gap-[30px]";
+  const cardContent = (
+    <>
       {/* 날짜 / 제목 / 요약 텍스트 영역 */}
       <div className="order-2 flex min-w-0 flex-1 flex-col gap-[10px] md:order-1">
         <p className="m-0 type-body-md text-mute">{date}</p>
-        <h2 className="content-hover-title m-0 type-h3 text-fg">{title}</h2>
+        <h2 className="content-hover-title m-0 type-h3 text-fg">
+          <span>{title}</span>
+          {isExternal ? <span aria-hidden="true" className="icon-outlink-mask ml-1.5 h-4 w-4 shrink-0 align-[-2px] text-mute" /> : null}
+        </h2>
         <p className="m-0 hidden type-body-md text-mute md:block">{summary}</p>
       </div>
       {/* 우측 썸네일 영역 */}
@@ -55,7 +54,27 @@ export function NewsListCard({
         src={imageSrc}
         useThumbnailFallback
       />
-    </a>
+    </>
+  );
+
+  if (isExternal) {
+    return (
+      /* 뉴스 카드 1개: 모바일은 세로, 데스크톱은 텍스트/썸네일 2열 */
+      <a
+        className={cardClassName}
+        href={href}
+        rel="noreferrer noopener"
+        target="_blank"
+      >
+        {cardContent}
+      </a>
+    );
+  }
+
+  return (
+    <Link className={cardClassName} href={href}>
+      {cardContent}
+    </Link>
   );
 }
 

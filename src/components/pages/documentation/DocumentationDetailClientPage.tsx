@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DocsDetailPage, { type DocsDetailPageProps } from "./DocumentationDetailPage";
 import ContentGateOverlay from "./ContentGateOverlay";
 import type { Locale } from "@/constants/i18n";
@@ -19,7 +19,11 @@ import {
   isPublishedContentAccessible,
   type ManagedContentEntry,
 } from "@/features/content/data";
-import { getContentUnlockCookieName, isContentGatingEnabled } from "@/features/content/gating";
+import {
+  buildContentPreviewHtml,
+  getContentUnlockCookieName,
+  isContentGatingEnabled,
+} from "@/features/content/gating";
 
 type DocsDetailClientPageProps = {
   contactCopy: ContactPageCopy;
@@ -49,6 +53,10 @@ export default function DocsDetailClientPage({
   const currentIndex = items.findIndex((item) => item.id === resolvedSlug);
   const currentItem = currentIndex >= 0 ? items[currentIndex] : null;
 
+  useEffect(() => {
+    setIsUnlocked(initialContentUnlocked);
+  }, [initialContentUnlocked, resolvedSlug]);
+
   if (!isHydrated) {
     return <DocsDetailPage {...fallbackProps} />;
   }
@@ -59,6 +67,14 @@ export default function DocsDetailClientPage({
 
   const isGateActive = isContentGatingEnabled(currentItem) && !isUnlocked;
   const contentLocale = getResolvedContentLocale(currentItem, locale);
+  const currentBodyHtml = getLocalizedContent(currentItem.bodyHtml, contentLocale);
+  const fallbackBodyHtml = fallbackProps.bodyHtml || "";
+  const localizedBodyHtml = fallbackBodyHtml || currentBodyHtml;
+  const visibleBodyHtml = isGateActive
+    ? fallbackBodyHtml || (currentBodyHtml
+      ? buildContentPreviewHtml(currentBodyHtml, currentItem.gatingLevel)
+      : localizedBodyHtml)
+    : localizedBodyHtml;
 
   const categoryItems = items.filter(
     (item) => item.categorySlug === currentItem.categorySlug,
@@ -75,16 +91,22 @@ export default function DocsDetailClientPage({
     previousItem
       ? {
           category: previousLabel,
-          href: getPublicDetailHref(section, locale, previousItem.id),
+          href: previousItem.contentType === "outlink"
+            ? previousItem.externalUrl
+            : getPublicDetailHref(section, locale, previousItem.id),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
+          isExternal: previousItem.contentType === "outlink",
           title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
         }
       : null,
     nextItem
       ? {
           category: nextLabel,
-          href: getPublicDetailHref(section, locale, nextItem.id),
+          href: nextItem.contentType === "outlink"
+            ? nextItem.externalUrl
+            : getPublicDetailHref(section, locale, nextItem.id),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
+          isExternal: nextItem.contentType === "outlink",
           title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
         }
       : null,
@@ -93,7 +115,7 @@ export default function DocsDetailClientPage({
   return (
     <DocsDetailPage
       {...fallbackProps}
-      bodyHtml={getLocalizedContent(currentItem.bodyHtml, contentLocale) || fallbackProps.bodyHtml}
+      bodyHtml={visibleBodyHtml}
       category={getCategoryLabel(docsCategoryConfigs, currentItem.categorySlug, locale)}
       contentOverlay={isGateActive ? (
         <ContentGateOverlay

@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import Button from "@/components/ui/Button";
 import type { ContactField, ContactPageCopy } from "@/copy/contact";
 import type { ManagedContentSection } from "@/features/content/data";
-import { CONTENT_UNLOCK_BUTTON_LABEL } from "@/features/content/data";
 import {
   ContactCheckboxRow,
   ContactPrivacyNotice,
@@ -73,6 +72,19 @@ function isRequiredSatisfied(copy: ContactPageCopy, form: FormState) {
 }
 
 function getLocalizedCopy(locale: "en" | "ko" | "ja", mode: ContentLeadFormMode, buttonLabel?: string) {
+  const defaultSubmitLabel = {
+    download: {
+      en: "Download Now",
+      ko: "다운로드",
+      ja: "ダウンロード",
+    },
+    unlock: {
+      en: "Unlock Content",
+      ko: "콘텐츠 열기",
+      ja: "コンテンツを開く",
+    },
+  }[mode][locale];
+
   return {
     processing: {
       en: mode === "download" ? "Preparing your file..." : "Unlocking content...",
@@ -90,7 +102,7 @@ function getLocalizedCopy(locale: "en" | "ko" | "ja", mode: ContentLeadFormMode,
         ? "PDF を準備できませんでした。もう一度お試しください。"
         : "コンテンツを開放できませんでした。もう一度お試しください。",
     }[locale],
-    submitLabel: buttonLabel ?? (mode === "download" ? "Download Now" : CONTENT_UNLOCK_BUTTON_LABEL),
+    submitLabel: buttonLabel ?? defaultSubmitLabel,
   };
 }
 
