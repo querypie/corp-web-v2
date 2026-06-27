@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
     return [
       {
         // Redirect bare public routes to the explicit default locale.
-        source: "/:path((?!$|admin(?:/|$)|api(?:/|$)|_next(?:/|$)|en(?:/|$)|ko(?:/|$)|ja(?:/|$)|.*\\..*).*)",
+        source: "/:path((?!$|admin(?:/|$)|api(?:/|$)|mockups(?:/|$)|_next(?:/|$)|en(?:/|$)|ko(?:/|$)|ja(?:/|$)|.*\\..*).*)",
         destination: "/en/:path",
         permanent: true,
       },
