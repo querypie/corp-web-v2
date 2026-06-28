@@ -99,6 +99,41 @@ body {
   margin: 0;
 }
 
+.homepage-aip-mockup,
+.homepage-aip-mockup * {
+  font-family: var(--font-sans);
+  font-weight: 350;
+  font-synthesis-weight: none;
+}
+
+.homepage-aip-mockup :where([class~="font-normal"], [class~="font-medium"]) {
+  font-weight: 350;
+}
+
+.homepage-aip-mockup :where([class~="font-semibold"], strong, b, th) {
+  font-weight: 400;
+}
+
+.homepage-aip-mockup :where([class~="font-bold"]) {
+  font-weight: 500;
+}
+
+.homepage-aip-mockup .aip-mockup-sidebar-scroll {
+  scrollbar-color: #4a4c50 transparent;
+}
+
+.homepage-aip-mockup .aip-mockup-sidebar-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.homepage-aip-mockup .aip-mockup-sidebar-scroll::-webkit-scrollbar-thumb {
+  border-color: transparent;
+}
+
+.homepage-aip-mockup .aip-mockup-sidebar-scroll::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
 /* ==========================================================================
    Global Scrollbar
    공통 스크롤바 톤. 데스크톱 브라우저 전반에 적용된다.
