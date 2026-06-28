@@ -128,8 +128,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
     const copy = {
       en: {
         nav: ["Solutions", "Features", "Company", "Plans"],
-        heroHeading: "Experience a new AI business,",
-        heroDescription: "QueryPie AI is the best way.",
+        heroHeading: "Agentic AI Platform for Enterprises",
+        heroDescription:
+          "Securely connect all your data and systems.\nOperate trusted AI with built-in security and governance.",
         heroPrimaryCtaLabel: "Free start!",
         heroImageAlt: "QueryPie AI workspace preview",
         clientCaption: "Trusted every day by teams that build world-class software",
@@ -261,8 +262,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
       },
       ko: {
         nav: ["솔루션", "기능", "회사", "요금제"],
-        heroHeading: "새로운 AI 비즈니스를 경험하세요,",
-        heroDescription: "QueryPie AI가 가장 좋은 방법입니다.",
+        heroHeading: "엔터프라이즈 기업을 위한 Agentic AI Platform",
+        heroDescription:
+          "모든 데이터와 시스템을 안전하게 연결하고,\n보안과 거버넌스를 기반으로 신뢰할 수 있는 AI를 운영하세요.",
         heroPrimaryCtaLabel: "무료로 시작하기",
         heroImageAlt: "QueryPie AI 워크스페이스 미리보기",
         clientCaption: "세계적인 소프트웨어 팀이 매일 신뢰하는 플랫폼",

@@ -39,8 +39,9 @@ export const aipMockupMenuItems: AipMockupMenuItem[] = [
 ];
 
 export const aipMockupAgents: AipMockupAgent[] = [
-  { id: "finance-analyst", name: "Finance Analyst", owner: "Organization Agent", shortName: "F" },
-  { id: "sales-ops", name: "Sales Ops Agent", owner: "Organization Agent", shortName: "S" },
+  { id: "quotation-assistant", name: "Quotation Assistant", owner: "Organization Agent", shortName: "Q" },
+  { id: "sales-insight", name: "Sales Insight Agent", owner: "Organization Agent", shortName: "S" },
+  { id: "document-review", name: "Document Review Agent", owner: "Organization Agent", shortName: "D" },
   { id: "data-analysis", name: "Data Analysis Agent", owner: "Personal Agent", shortName: "D" },
   { id: "report-writer", name: "Report Writer", owner: "Personal Agent", shortName: "R" },
 ];
@@ -74,7 +75,6 @@ export const aipMockupMessages: AipMockupMessage[] = [
 export const aipMockupMcpTools = ["Salesforce", "Snowflake", "Google Drive", "Slack"] as const;
 
 export const aipMockupChats = [
-  "VIP customer report",
-  "Weekly sales summary",
-  "Slack follow-up draft",
+  "Revenue dashboard analysis",
+  "Support operations widgets",
 ] as const;
