@@ -12,7 +12,7 @@
   "gatingLevel": "10",
   "hideHeroImage": false,
   "id": "ai-transformation-japan",
-  "imageSrc": "/documentation/white-papers/wp-thumb-24.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-25.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 8,
@@ -28,6 +28,10 @@
     "ko": "",
     "ja": "なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか"
   },
+  "visibleLocales": [
+    "en",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000132/en.html",

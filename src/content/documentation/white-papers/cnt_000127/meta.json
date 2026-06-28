@@ -12,7 +12,7 @@
   "gatingLevel": "10",
   "hideHeroImage": false,
   "id": "saas-end-or-evolution",
-  "imageSrc": "/documentation/white-papers/wp-thumb-30-en.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-26.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 3,
@@ -20,16 +20,17 @@
   "storageId": "cnt_000127",
   "summary": {
     "en": "This white paper analyzes the impact of AI agents on the SaaS business, outlines the strategies SaaS companies should adopt, and shares the real story of QueryPie AI's transformation from a SaaS vendor to an AI-native company.",
-    "ko": "This white paper analyzes the impact of AI agents on the SaaS business, outlines the strategies SaaS companies should adopt, and shares the real story of QueryPie AI's transformation from a SaaS vendor to an AI-native company.",
+    "ko": "본 백서는 AI 에이전트가 SaaS 비즈니스에 미치는 영향을 분석하고, SaaS 기업이 취해야 할 전략과 QueryPie AI 자신의 SaaS 벤더에서 AI Native 기업으로의 변혁 실록을 전합니다.",
     "ja": "本ホワイトペーパーは、AIエージェントがSaaSビジネスに与える影響を分析し、SaaS企業が取るべき戦略と、QueryPie AI自身のSaaSベンダーからAI Native企業への変革の実録をお伝えします。"
   },
   "title": {
     "en": "The End of SaaS, or Its Evolution? — Strategies SaaS Companies Must Adopt in the Age of AI Agents",
-    "ko": "",
+    "ko": "SaaS의 종언인가, 진화인가 ~AI 에이전트 시대에 SaaS 기업이 취해야 할 전략~",
     "ja": "SaaSの終焉か、進化か 〜AIエージェント時代にSaaS企業が取るべき戦略〜"
   },
   "visibleLocales": [
     "en",
+    "ko",
     "ja"
   ],
   "locales": {

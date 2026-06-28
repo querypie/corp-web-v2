@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "rag-security-querypie-builds-the-bridge",
-  "imageSrc": "/documentation/white-papers/wp-thumb-23.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-24.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 9,
@@ -28,6 +28,11 @@
     "ko": "RAG 2.0 보안 – Microsoft·Meta의 전략, QueryPie가 연결한다",
     "ja": "RAG 2.0 セキュリティ – Microsoft・Metaの戦略、QueryPieが繋ぐ"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000008/en.html",

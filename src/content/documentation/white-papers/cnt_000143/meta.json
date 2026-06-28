@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "seamless-ssh-connection",
-  "imageSrc": "/documentation/white-papers/wp-thumb-13.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-18.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 19,
@@ -28,6 +28,11 @@
     "ko": "보안성과 업무 효율성을 동시에 높이는 Seamless SSH Connection 전략",
     "ja": "シームレスなSSH接続でターミナルを使う最適な方法"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000143/en.html",

@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "shell-native-command-control-ssh-proxy-architecture",
-  "imageSrc": "/documentation/white-papers/wp-thumb-2.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-9.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 29,
@@ -28,6 +28,11 @@
     "ko": "SSH 프록시 구조를 통한 Shell Native 명령어 제어",
     "ja": "SSHプロキシ構造によるシェルネイティブコマンド制御"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000154/en.html",

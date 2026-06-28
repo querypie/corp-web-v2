@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "penetration-testing-standard",
-  "imageSrc": "/documentation/white-papers/wp-thumb-9.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-2.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 23,
@@ -28,6 +28,11 @@
     "ko": "QueryPie가 제시하는 모의해킹의 새로운 기준",
     "ja": "QueryPieが示す新しいペネトレーションテスト基準"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000149/en.html",

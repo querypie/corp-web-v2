@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "querypie-grpc-dast-security",
-  "imageSrc": "/documentation/white-papers/wp-thumb-12.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-14.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 20,
@@ -28,6 +28,11 @@
     "ko": "QueryPie gRPC 통신을 위한 DAST 보안 전략 : ZAP 커스텀 스크립트 적용 사례",
     "ja": "QueryPie gRPC DAST セキュリティ: ZAP カスタムスクリプトの例"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000144/en.html",

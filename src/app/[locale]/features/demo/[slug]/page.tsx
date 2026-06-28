@@ -31,13 +31,20 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+export async function generateStaticParams() {
+  const demoItems = await readContentState("demo", { includeBodies: false });
+
+  return demoItems
+    .filter((item) => isPublishedContentAccessible(item) && item.contentType !== "outlink")
+    .filter((item) => !isContentGatingEnabled(item))
+    .map((item) => ({ slug: item.id }));
+}
+
 export default async function DemoDetailRoute({ params }: Props) {
   const { locale, slug } = await params;
   const resolvedSlug = decodeURIComponent(slug);
 
   if (!isLocale(locale)) notFound();
-
-  const cookieStore = await cookies();
 
   const [allDemoItems, currentEntry] = await Promise.all([
     readContentState("demo", { includeBodies: false }),
@@ -48,11 +55,6 @@ export default async function DemoDetailRoute({ params }: Props) {
   if (!currentEntry || !isPublishedContentAccessible(currentEntry)) {
     notFound();
   }
-
-  const isContentUnlocked = hasUnlockedContentAccess(
-    cookieStore.get(getContentUnlockCookieName(currentEntry.id, "demo"))?.value ??
-      cookieStore.get(getContentUnlockCookieName(currentEntry.id))?.value,
-  );
 
   if (currentEntry.contentType === "outlink") {
     redirect(currentEntry.externalUrl);
@@ -90,7 +92,15 @@ export default async function DemoDetailRoute({ params }: Props) {
       : null,
   ].filter((item): item is NonNullable<typeof item> => !!item);
 
-  const isGateActive = isContentGatingEnabled(currentEntry) && !isContentUnlocked;
+  const isGateEnabled = isContentGatingEnabled(currentEntry);
+  const cookieStore = isGateEnabled ? await cookies() : null;
+  const isContentUnlocked = cookieStore
+    ? hasUnlockedContentAccess(
+        cookieStore.get(getContentUnlockCookieName(currentEntry.id, "demo"))?.value ??
+          cookieStore.get(getContentUnlockCookieName(currentEntry.id))?.value,
+      )
+    : false;
+  const isGateActive = isGateEnabled && !isContentUnlocked;
   const copy = getDemoPageCopy(locale);
 
   return (

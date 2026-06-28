@@ -16,9 +16,11 @@ function perLocale(pathname: string) {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const demoItems = await readContentState("demo");
-  const docsItems = await readContentState("documentation");
-  const newsItems = await readContentState("news");
+  const [demoItems, docsItems, newsItems] = await Promise.all([
+    readContentState("demo", { includeBodies: false }),
+    readContentState("documentation", { includeBodies: false }),
+    readContentState("news", { includeBodies: false }),
+  ]);
 
   const staticEntries = [
     ...perLocale("/"),

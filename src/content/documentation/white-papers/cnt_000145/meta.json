@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "efficient-audit-log-management",
-  "imageSrc": "/documentation/white-papers/wp-thumb-11.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-6.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 21,
@@ -28,6 +28,11 @@
     "ko": "스케일 넘치는 대용량 감사 로그, 스마트하게 관리하기 (OVEN)",
     "ja": "大規模監査ログの効率的な保存と管理（OVEN）"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000145/en.html",

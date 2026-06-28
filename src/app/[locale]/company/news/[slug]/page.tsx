@@ -20,6 +20,14 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+export async function generateStaticParams() {
+  const newsItems = await readContentState("news", { includeBodies: false });
+
+  return newsItems
+    .filter((item) => isPublishedContentAccessible(item) && item.contentType !== "outlink")
+    .map((item) => ({ slug: item.id }));
+}
+
 export default async function NewsDetailRoute({ params }: Props) {
   const { locale, slug } = await params;
   const decodedSlug = decodeURIComponent(slug);

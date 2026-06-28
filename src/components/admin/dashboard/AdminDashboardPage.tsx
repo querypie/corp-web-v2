@@ -1,14 +1,19 @@
 import type { ReactNode } from "react";
 import { unstable_noStore as noStore } from "next/cache";
+import ContentPreviewImage from "@/components/content/ContentPreviewImage";
 import TextButton from "@/components/ui/TextButton";
 import { locales } from "@/constants/i18n";
+import type { Locale } from "@/constants/i18n";
 import { readContentState } from "@/features/content/contentState.server";
 import { readVercelAnalyticsSummary, type VercelAnalyticsListItem } from "@/features/analytics/vercel.server";
 import {
-  getAdminCategoryHref,
+  getLocalizedContent,
+  getManagedCategoryLabel,
+  getPublicDetailHref,
+  getResolvedContentLocale,
   type ManagedContentEntry,
-  type ManagedContentSection,
 } from "@/features/content/data";
+import { isContentGatingEnabled } from "@/features/content/gating";
 
 type SummaryCard = {
   description: string;
@@ -16,13 +21,15 @@ type SummaryCard = {
   value: string;
 };
 
-const vercelAnalyticsHref = "https://vercel.com/querypie/corp-web-v2/analytics";
-
-const sectionLabels: Record<ManagedContentSection, string> = {
-  demo: "Demo",
-  documentation: "Documentation",
-  news: "News",
+type TopContentPageItem = {
+  category: string;
+  href: string;
+  imageSrc: string;
+  pageViews: number;
+  title: string;
 };
+
+const vercelAnalyticsHref = "https://vercel.com/querypie/corp-web-v2/analytics";
 
 function DashboardCard({
   children,
@@ -74,6 +81,11 @@ function getTopItem(items: VercelAnalyticsListItem[]) {
   return items[0] ?? null;
 }
 
+function normalizePath(value: string) {
+  const path = value.split("?")[0].split("#")[0] || "/";
+  return path.length > 1 ? path.replace(/\/+$/, "") : path;
+}
+
 function getVisibleItemCount(items: ManagedContentEntry[]) {
   return items.filter((item) => item.status === "published" && item.visibleLocales.length > 0).length;
 }
@@ -82,10 +94,17 @@ function getMissingLocaleCount(items: ManagedContentEntry[]) {
   return items.filter((item) => item.status === "published" && item.visibleLocales.length < locales.length).length;
 }
 
+function getGatedContentCount(items: ManagedContentEntry[]) {
+  return items.filter((item) =>
+    item.status === "published" &&
+    item.visibleLocales.length > 0 &&
+    isContentGatingEnabled(item),
+  ).length;
+}
+
 function buildDashboardData(items: ManagedContentEntry[]) {
-  const totalCount = items.length;
   const publishedCount = getVisibleItemCount(items);
-  const hiddenCount = items.filter((item) => item.status === "hidden").length;
+  const gatedContentCount = getGatedContentCount(items);
   const missingLocaleCount = getMissingLocaleCount(items);
   const downloadableCount = items.filter((item) => item.enableDownloadButton || item.downloadPdfSrc).length;
 
@@ -96,14 +115,14 @@ function buildDashboardData(items: ManagedContentEntry[]) {
       description: "게시 상태이며 하나 이상의 locale에 노출되는 콘텐츠",
     },
     {
-      label: "Hidden",
-      value: String(hiddenCount),
-      description: "작성 중이거나 공개 화면에서 숨겨진 콘텐츠",
-    },
-    {
       label: "Locale gaps",
       value: String(missingLocaleCount),
       description: "게시되었지만 EN/KO/JA 중 일부 locale이 빠진 콘텐츠",
+    },
+    {
+      label: "Gated content",
+      value: String(gatedContentCount),
+      description: "게시 상태이며 게이팅이 적용된 콘텐츠",
     },
     {
       label: "Downloads",
@@ -112,41 +131,47 @@ function buildDashboardData(items: ManagedContentEntry[]) {
     },
   ];
 
-  const sectionStats = (["news", "demo", "documentation"] as const).map((section) => {
-    const sectionItems = items.filter((item) => item.section === section);
-    const sectionPublishedCount = getVisibleItemCount(sectionItems);
-
-    return {
-      hiddenCount: sectionItems.filter((item) => item.status === "hidden").length,
-      href: getAdminCategoryHref(section, section === "news" ? "news" : section === "demo" ? "use-cases" : "blogs"),
-      label: sectionLabels[section],
-      publishedCount: sectionPublishedCount,
-      section,
-      totalCount: sectionItems.length,
-      visibleRate: totalCount === 0 ? 0 : (sectionPublishedCount / Math.max(sectionItems.length, 1)) * 100,
-    };
-  });
-
-  const localeStats = locales.map((locale) => {
-    const visibleCount = items.filter((item) => item.status === "published" && item.visibleLocales.includes(locale)).length;
-
-    return {
-      label: locale.toUpperCase(),
-      locale,
-      percent: publishedCount === 0 ? 0 : (visibleCount / publishedCount) * 100,
-      visibleCount,
-    };
-  });
-
   return {
-    hiddenCount,
-    localeStats,
-    missingLocaleCount,
-    publishedCount,
-    sectionStats,
     summaryCards,
-    totalCount,
   };
+}
+
+function buildTopContentPages(
+  items: ManagedContentEntry[],
+  pages: VercelAnalyticsListItem[],
+): TopContentPageItem[] {
+  const contentByPath = new Map<string, { item: ManagedContentEntry; locale: Locale }>();
+
+  for (const item of items) {
+    if (item.status !== "published" || item.visibleLocales.length === 0 || item.contentType !== "content") {
+      continue;
+    }
+
+    for (const locale of item.visibleLocales) {
+      contentByPath.set(normalizePath(getPublicDetailHref(item.section, locale, item.id)), {
+        item,
+        locale,
+      });
+    }
+  }
+
+  return pages
+    .map((page) => {
+      const matched = contentByPath.get(normalizePath(page.label));
+      if (!matched) return null;
+
+      const contentLocale = getResolvedContentLocale(matched.item, matched.locale);
+
+      return {
+        category: getManagedCategoryLabel(matched.item.section, matched.item.categorySlug, contentLocale),
+        href: getPublicDetailHref(matched.item.section, contentLocale, matched.item.id),
+        imageSrc: matched.item.imageSrc,
+        pageViews: page.value,
+        title: getLocalizedContent(matched.item.title, contentLocale),
+      };
+    })
+    .filter((item): item is TopContentPageItem => item !== null)
+    .slice(0, 10);
 }
 
 function MetricList({ items }: { items: VercelAnalyticsListItem[] }) {
@@ -188,12 +213,13 @@ export default async function AdminDashboardPage() {
     readVercelAnalyticsSummary(),
   ]);
   const data = buildDashboardData(items);
+  const topContentPages = buildTopContentPages(items, analytics.contentPages);
   const topCountry = getTopItem(analytics.countries);
   const topDevice = getTopItem(analytics.devices);
   const pageViewChange = getChangePercent(analytics.pageViews, analytics.previousPageViews);
 
   return (
-    <section className="mx-auto flex w-full max-w-[1120px] flex-col gap-5 py-5 md:gap-6 md:py-8">
+    <section className="mx-auto flex w-full max-w-[1000px] flex-col gap-5 py-5 md:gap-6 md:py-8">
       <DashboardSection title="Vercel Web Analytics">
         <DashboardCard className="p-[30px]">
           <div className="flex flex-col gap-5">
@@ -299,45 +325,37 @@ export default async function AdminDashboardPage() {
               ))}
             </div>
 
-            <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_minmax(320px,0.7fr)]">
-              <div className="flex flex-col gap-3">
-                <p className="m-0 type-body-md text-fg">Section health</p>
-                <div className="flex flex-col gap-5">
-                  {data.sectionStats.map((section) => (
-                    <a key={section.section} className="rounded-box bg-bg px-5 py-5 transition-colors hover:bg-secondary" href={section.href}>
-                      <div className="flex items-start justify-between gap-4">
-                        <div className="min-w-0">
-                          <p className="m-0 type-body-md text-fg">{section.label}</p>
-                          <p className="m-0 type-body-sm text-mute">
-                            {section.publishedCount} live / {section.hiddenCount} hidden / {section.totalCount} total
-                          </p>
-                        </div>
-                        <span className="shrink-0 type-body-md text-fg">{formatPercent(section.visibleRate)}</span>
+            <div className="flex flex-col gap-3">
+              <p className="m-0 type-body-md text-fg">Top viewed content</p>
+              <div className="flex flex-col overflow-hidden rounded-box bg-bg divide-y divide-border">
+                {topContentPages.length > 0 ? (
+                  topContentPages.map((item, index) => (
+                    <div key={`${item.href}:${index}`} className="grid gap-4 px-5 py-4 md:grid-cols-[36px_72px_minmax(0,1fr)_92px_84px] md:items-center">
+                      <div className="type-body-sm text-mute">{index + 1}</div>
+                      <ContentPreviewImage
+                        alt={item.title}
+                        className="block h-full w-full object-cover"
+                        containerClassName="h-[48px] w-[72px] overflow-hidden rounded-button bg-bg-content"
+                        src={item.imageSrc}
+                        useThumbnailFallback
+                      />
+                      <div className="min-w-0">
+                        <p className="mb-1 mt-0 type-body-sm text-mute">{item.category}</p>
+                        <p className="m-0 line-clamp-2 type-body-md text-fg">{item.title}</p>
                       </div>
-                      <div className="mt-3 h-1.5 overflow-hidden rounded-full bg-black">
-                        <div className="h-full rounded-full bg-point" style={{ width: formatPercent(section.visibleRate) }} />
+                      <div className="type-body-sm text-mute md:text-right">
+                        {formatNumber(item.pageViews)} views
                       </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
-              <div className="flex flex-col gap-3">
-                <p className="m-0 type-body-md text-fg">Locale coverage</p>
-                <div className="flex flex-col gap-4 rounded-box bg-bg px-5 py-5">
-                  {data.localeStats.map((locale) => (
-                    <div key={locale.locale} className="flex flex-col gap-2">
-                      <div className="flex items-center justify-between gap-3">
-                        <span className="type-body-md text-fg">{locale.label}</span>
-                        <span className="type-body-sm text-mute">
-                          {locale.visibleCount} items · {formatPercent(locale.percent)}
-                        </span>
-                      </div>
-                      <div className="h-1.5 overflow-hidden rounded-full bg-black">
-                        <div className="h-full rounded-full bg-success" style={{ width: formatPercent(locale.percent) }} />
-                      </div>
+                      <TextButton className="w-fit justify-self-start type-body-sm md:justify-self-end" href={item.href} target="_blank" rel="noreferrer">
+                        바로가기
+                      </TextButton>
                     </div>
-                  ))}
-                </div>
+                  ))
+                ) : (
+                  <div className="flex min-h-[160px] items-center justify-center px-5 py-6 text-center type-body-md text-mute">
+                    페이지뷰가 집계된 콘텐츠가 없습니다.
+                  </div>
+                )}
               </div>
             </div>
           </div>

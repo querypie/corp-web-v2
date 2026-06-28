@@ -37,7 +37,6 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
 
   if (!isLocale(locale)) notFound();
 
-  const cookieStore = await cookies();
   const [allDocsItems, currentEntry] = await Promise.all([
     readContentState("documentation", { includeBodies: false }),
     readContentItem("documentation", resolvedSlug, { includeBodies: true }),
@@ -47,11 +46,6 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
   if (!currentEntry || !isPublishedContentAccessible(currentEntry)) {
     notFound();
   }
-
-  const isContentUnlocked = hasUnlockedContentAccess(
-    cookieStore.get(getContentUnlockCookieName(currentEntry.id, "documentation"))?.value ??
-      cookieStore.get(getContentUnlockCookieName(currentEntry.id))?.value,
-  );
 
   if (currentEntry.contentType === "outlink") {
     redirect(currentEntry.externalUrl);
@@ -90,7 +84,15 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
       : null,
   ].filter((item): item is NonNullable<typeof item> => !!item);
 
-  const isGateActive = isContentGatingEnabled(currentEntry) && !isContentUnlocked;
+  const isGateEnabled = isContentGatingEnabled(currentEntry);
+  const cookieStore = isGateEnabled ? await cookies() : null;
+  const isContentUnlocked = cookieStore
+    ? hasUnlockedContentAccess(
+        cookieStore.get(getContentUnlockCookieName(currentEntry.id, "documentation"))?.value ??
+          cookieStore.get(getContentUnlockCookieName(currentEntry.id))?.value,
+      )
+    : false;
+  const isGateActive = isGateEnabled && !isContentUnlocked;
   const localizedBodyHtml = getLocalizedContent(currentEntry.bodyHtml, contentLocale);
   const previewBodyHtml =
     isGateActive

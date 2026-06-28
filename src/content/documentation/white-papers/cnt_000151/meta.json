@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "preventing-command-bypass",
-  "imageSrc": "/documentation/white-papers/wp-thumb-5.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-1.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 26,
@@ -28,6 +28,11 @@
     "ko": "실행 프로세스 추적 방식을 통한 명령어 우회 원천 차단",
     "ja": "実行プロセス追跡方式によるコマンド回避の根本的なブロック"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000151/en.html",

@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "pac-policy-as-code",
-  "imageSrc": "/documentation/white-papers/wp-thumb-7.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-31.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 24,
@@ -28,6 +28,11 @@
     "ko": "Policy as Code(PaC) 접근을 통한 보안 관리 혁신",
     "ja": "Policy as Code（PaC）アプローチによるセキュリティ管理の革新"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000147/en.html",

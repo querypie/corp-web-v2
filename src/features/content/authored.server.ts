@@ -73,11 +73,19 @@ type SaveAuthoredContentInput = Pick<
 
 const contentRoot = path.join(process.cwd(), "src", "content");
 let authoredMetaFilesCache: string[] | null = null;
+let authoredMetaFilesPromise: Promise<string[]> | null = null;
 let authoredMetaCache: AuthoredContentMeta[] | null = null;
+let authoredMetaPromise: Promise<AuthoredContentMeta[]> | null = null;
 let authoredEntriesCache:
   | {
       withBodies: ManagedContentEntry[] | null;
       withoutBodies: ManagedContentEntry[] | null;
+    }
+  | null = null;
+let authoredEntriesPromise:
+  | {
+      withBodies: Promise<ManagedContentEntry[]> | null;
+      withoutBodies: Promise<ManagedContentEntry[]> | null;
     }
   | null = null;
 let authoredCacheVersion = 0;
@@ -268,8 +276,11 @@ async function removeFileIfExists(filePath: string) {
 
 function invalidateAuthoredCaches() {
   authoredMetaFilesCache = null;
+  authoredMetaFilesPromise = null;
   authoredMetaCache = null;
+  authoredMetaPromise = null;
   authoredEntriesCache = null;
+  authoredEntriesPromise = null;
   authoredCacheVersion += 1;
 }
 
@@ -323,6 +334,22 @@ async function readAuthoredMetaFiles() {
     return authoredMetaFilesCache;
   }
 
+  if (authoredMetaFilesPromise) {
+    return authoredMetaFilesPromise;
+  }
+
+  authoredMetaFilesPromise = readAuthoredMetaFilesUncached();
+
+  try {
+    authoredMetaFilesCache = await authoredMetaFilesPromise;
+    return authoredMetaFilesCache;
+  } catch (error) {
+    authoredMetaFilesPromise = null;
+    throw error;
+  }
+}
+
+async function readAuthoredMetaFilesUncached() {
   const metaFiles: string[] = [];
 
   async function walk(currentDir: string) {
@@ -352,8 +379,7 @@ async function readAuthoredMetaFiles() {
     ),
   );
 
-  authoredMetaFilesCache = metaFiles.sort();
-  return authoredMetaFilesCache;
+  return metaFiles.sort();
 }
 
 async function readMetaFile(metaPath: string) {
@@ -443,10 +469,24 @@ async function readAllAuthoredMetas() {
     return authoredMetaCache;
   }
 
+  if (authoredMetaPromise) {
+    return authoredMetaPromise;
+  }
+
+  authoredMetaPromise = readAllAuthoredMetasUncached();
+
+  try {
+    authoredMetaCache = await authoredMetaPromise;
+    return authoredMetaCache;
+  } catch (error) {
+    authoredMetaPromise = null;
+    throw error;
+  }
+}
+
+async function readAllAuthoredMetasUncached() {
   const metaFiles = await readAuthoredMetaFiles();
-  const metas = await Promise.all(metaFiles.map((metaPath) => readMetaFile(metaPath)));
-  authoredMetaCache = metas;
-  return metas;
+  return Promise.all(metaFiles.map((metaPath) => readMetaFile(metaPath)));
 }
 
 async function findAuthoredMetaPathByStorageId(storageId: string) {
@@ -525,6 +565,35 @@ export async function readAuthoredManagedContents(options?: { includeBodies?: bo
     return cachedEntries;
   }
 
+  const pendingEntries = authoredEntriesPromise?.[includeBodies ? "withBodies" : "withoutBodies"];
+
+  if (pendingEntries) {
+    return pendingEntries;
+  }
+
+  const nextEntriesPromise = readAuthoredManagedContentsUncached(includeBodies);
+  authoredEntriesPromise = {
+    withBodies: includeBodies ? nextEntriesPromise : authoredEntriesPromise?.withBodies ?? null,
+    withoutBodies: includeBodies ? authoredEntriesPromise?.withoutBodies ?? null : nextEntriesPromise,
+  };
+
+  try {
+    const entries = await nextEntriesPromise;
+    authoredEntriesCache = {
+      withBodies: includeBodies ? entries : authoredEntriesCache?.withBodies ?? null,
+      withoutBodies: includeBodies ? authoredEntriesCache?.withoutBodies ?? null : entries,
+    };
+    return entries;
+  } catch (error) {
+    authoredEntriesPromise = {
+      withBodies: includeBodies ? null : authoredEntriesPromise?.withBodies ?? null,
+      withoutBodies: includeBodies ? authoredEntriesPromise?.withoutBodies ?? null : null,
+    };
+    throw error;
+  }
+}
+
+async function readAuthoredManagedContentsUncached(includeBodies: boolean) {
   await Promise.all(
     (["demo", "documentation", "news"] as const).map((section) =>
       ensureDir(getAuthoredSectionRoot(section)),
@@ -541,11 +610,6 @@ export async function readAuthoredManagedContents(options?: { includeBodies?: bo
       includeBodies,
     }));
   }
-
-  authoredEntriesCache = {
-    withBodies: includeBodies ? entries : authoredEntriesCache?.withBodies ?? null,
-    withoutBodies: includeBodies ? authoredEntriesCache?.withoutBodies ?? null : entries,
-  };
 
   return entries;
 }

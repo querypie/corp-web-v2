@@ -40,9 +40,9 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 const localeBadgeClassName = {
-  en: "border-amber-300/20 bg-amber-300/10 text-amber-200",
-  ko: "border-sky-400/20 bg-sky-400/10 text-sky-200",
-  ja: "border-rose-400/20 bg-rose-400/10 text-rose-200",
+  en: "border-[color:color-mix(in_srgb,var(--color-warning)_35%,transparent)] bg-bg-content text-warning",
+  ko: "border-[color:color-mix(in_srgb,var(--color-point)_35%,transparent)] bg-bg-content text-point",
+  ja: "border-[color:color-mix(in_srgb,var(--color-brand)_35%,transparent)] bg-bg-content text-brand",
 } satisfies Record<"en" | "ko" | "ja", string>;
 
 function SearchField({

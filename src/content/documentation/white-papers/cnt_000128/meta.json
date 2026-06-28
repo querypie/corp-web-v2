@@ -10,9 +10,9 @@
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
-  "hideHeroImage": true,
+  "hideHeroImage": false,
   "id": "ai-agent-guardrails-governance-2026",
-  "imageSrc": "/documentation/white-papers/wp-thumb-28.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-10.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 4,
@@ -20,16 +20,17 @@
   "storageId": "cnt_000128",
   "summary": {
     "en": "As AI agents move from conversational assistants to autonomous executors, enterprises need stronger control systems. This 2026 guide explains a four-element guardrail framework—Permission, Approval, Audit Trail, and Kill Switch—for CxOs and operational leaders.",
-    "ko": "As AI agents move from conversational assistants to autonomous executors, enterprises need stronger control systems. This 2026 guide explains a four-element guardrail framework—Permission, Approval, Audit Trail, and Kill Switch—for CxOs and operational leaders.",
+    "ko": "AI 에이전트가 자율적으로 업무를 수행하는 시대, 기업은 어떻게 통제해야 하는가. 권한 설계·승인 플로우·감사 로그·Kill Switch의 4가지 요소를 체계화하고, CxO·실무 리더를 대상으로 설명하는 2026년판 가드레일 설계 가이드.",
     "ja": "AIエージェントが自律的に業務を遂行する時代、企業はどう統制すべきか。権限設計・承認フロー・監査ログ・Kill Switchの4要素を体系化し、CxO・実務リーダー向けに解説する2026年版ガードレール設計ガイド。"
   },
   "title": {
     "en": "Guardrail Design in the AI Agent Era (2026 Edition) — Part 1: Philosophy & Design",
-    "ko": "",
-    "ja": "AIエージェント時代のガードレール設計（2026年版）── 前編：思想・設計編"
+    "ko": "AI 에이전트 시대의 가드레일 설계 (2026년판) - 전편: 사상·설계편",
+    "ja": "AIエージェント時代のガードレール設計 (2026年版) - 前編：思想・設計編"
   },
   "visibleLocales": [
     "en",
+    "ko",
     "ja"
   ],
   "locales": {

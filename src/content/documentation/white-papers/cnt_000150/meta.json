@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "personal-data-identification-analysis-ai",
-  "imageSrc": "/documentation/white-papers/wp-thumb-1.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 30,
@@ -28,6 +28,9 @@
     "ko": "",
     "ja": ""
   },
+  "visibleLocales": [
+    "en"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000150/en.html",
