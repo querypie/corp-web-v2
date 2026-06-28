@@ -1167,7 +1167,7 @@ function AppHeader() {
                       </div>
                       <div
                         aria-label={pinnedModel.model.label}
-                        className="group/item relative flex w-full cursor-default select-none items-center justify-between gap-2 rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-white/10"
+                        className="group/item relative flex w-full cursor-pointer select-none items-center justify-between gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-[#2a2a2a]"
                         onClick={() => selectModel(pinnedModel.model.id)}
                         onKeyDown={(event) => {
                           if (event.key === "Enter" || event.key === " ") selectModel(pinnedModel.model.id);
@@ -1216,7 +1216,7 @@ function AppHeader() {
                           return (
                             <div
                               aria-label={model.label}
-                              className="group/item relative flex w-full cursor-default select-none items-center justify-between gap-2 rounded-sm px-2 py-1.5 text-sm outline-none hover:bg-white/10"
+                              className="group/item relative flex w-full cursor-pointer select-none items-center justify-between gap-2 rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-[#2a2a2a]"
                               key={model.id}
                               onClick={() => selectModel(model.id)}
                               onKeyDown={(event) => {
