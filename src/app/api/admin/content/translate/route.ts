@@ -21,11 +21,13 @@ type TranslationErrorPayload = {
 };
 
 const MAX_TRANSLATION_CHARACTERS = 60000;
-const MAX_TRANSLATION_CHUNK_CHARACTERS = 6000;
-const MAX_TRANSLATION_CHUNK_ITEMS = 50;
-const TRANSLATION_PROVIDER_ATTEMPT_TIMEOUT_MS = 30000;
+const DEFAULT_TRANSLATION_CHUNK_CHARACTERS = 3000;
+const DEFAULT_TRANSLATION_CHUNK_ITEMS = 80;
+const DEFAULT_TRANSLATION_PROVIDER_ATTEMPT_TIMEOUT_MS = 60000;
+const DEFAULT_TRANSLATION_CHUNK_CONCURRENCY = 1;
 const TRANSLATION_PROVIDER_MAX_ATTEMPTS = 3;
 const TRANSLATION_PROVIDER_RETRY_DELAY_MS = 700;
+const DEFAULT_TRANSLATION_PROVIDER_MAX_OUTPUT_TOKENS = 16000;
 
 function jsonError(
   code: TranslationErrorCode,
@@ -43,6 +45,16 @@ function getTargetLanguage(locale: Locale) {
   if (locale === "en") return "English";
   if (locale === "ja") return "Japanese";
   return "Korean";
+}
+
+function getPositiveIntegerEnv(name: string, fallback: number) {
+  const configuredValue = Number(process.env[name]);
+
+  if (Number.isFinite(configuredValue) && configuredValue > 0) {
+    return Math.floor(configuredValue);
+  }
+
+  return fallback;
 }
 
 function isAbortError(error: unknown) {
@@ -163,9 +175,14 @@ async function retryProviderTranslation(
   });
 }
 
-function extractOpenAIText(payload: unknown) {
-  const choices = (payload as { choices?: Array<{ message?: { content?: string } }> }).choices;
-  return choices?.[0]?.message?.content ?? "";
+function extractOpenAIChoice(payload: unknown) {
+  const choices = (payload as { choices?: Array<{ finish_reason?: string; message?: { content?: string } }> }).choices;
+  const choice = choices?.[0];
+
+  return {
+    finishReason: choice?.finish_reason,
+    text: choice?.message?.content ?? "",
+  };
 }
 
 function extractAnthropicText(payload: unknown) {
@@ -233,6 +250,41 @@ function createTranslationMessages(texts: string[], locale: Locale) {
   ];
 }
 
+function getTranslationProviderMaxOutputTokens() {
+  return getPositiveIntegerEnv(
+    "TRANSLATION_PROVIDER_MAX_OUTPUT_TOKENS",
+    DEFAULT_TRANSLATION_PROVIDER_MAX_OUTPUT_TOKENS,
+  );
+}
+
+function getTranslationProviderAttemptTimeoutMs() {
+  return getPositiveIntegerEnv(
+    "TRANSLATION_PROVIDER_ATTEMPT_TIMEOUT_MS",
+    DEFAULT_TRANSLATION_PROVIDER_ATTEMPT_TIMEOUT_MS,
+  );
+}
+
+function getTranslationChunkCharacters() {
+  return getPositiveIntegerEnv(
+    "TRANSLATION_CHUNK_CHARACTERS",
+    DEFAULT_TRANSLATION_CHUNK_CHARACTERS,
+  );
+}
+
+function getTranslationChunkItems() {
+  return getPositiveIntegerEnv(
+    "TRANSLATION_CHUNK_ITEMS",
+    DEFAULT_TRANSLATION_CHUNK_ITEMS,
+  );
+}
+
+function getTranslationChunkConcurrency() {
+  return getPositiveIntegerEnv(
+    "TRANSLATION_CHUNK_CONCURRENCY",
+    DEFAULT_TRANSLATION_CHUNK_CONCURRENCY,
+  );
+}
+
 async function callOpenAICompatibleTranslation(
   endpoint: string,
   token: string,
@@ -247,6 +299,7 @@ async function callOpenAICompatibleTranslation(
     async () => {
       const response = await fetchWithTimeout(endpoint, {
         body: JSON.stringify({
+          max_tokens: getTranslationProviderMaxOutputTokens(),
           messages: createTranslationMessages(texts, locale),
           model,
           ...(useResponseFormat ? { response_format: { type: "json_object" } } : {}),
@@ -258,7 +311,7 @@ async function callOpenAICompatibleTranslation(
         },
         method: "POST",
         signal,
-      }, TRANSLATION_PROVIDER_ATTEMPT_TIMEOUT_MS);
+      }, getTranslationProviderAttemptTimeoutMs());
 
       const payload = (await response.json().catch(() => ({}))) as unknown;
 
@@ -281,8 +334,8 @@ async function callOpenAICompatibleTranslation(
         });
       }
 
-      const providerText = extractOpenAIText(payload);
-      return parseProviderTranslations(providerText, texts.length);
+      const providerChoice = extractOpenAIChoice(payload);
+      return parseProviderTranslations(providerChoice.text, texts.length, providerChoice.finishReason);
     },
     {
       locale,
@@ -349,7 +402,7 @@ async function callAnthropicTranslation(texts: string[], locale: Locale, signal:
     async () => {
       const response = await fetchWithTimeout(`${baseUrl}/v1/messages`, {
         body: JSON.stringify({
-          max_tokens: 8192,
+          max_tokens: getTranslationProviderMaxOutputTokens(),
           messages: [
             {
               content: JSON.stringify({
@@ -373,7 +426,7 @@ async function callAnthropicTranslation(texts: string[], locale: Locale, signal:
         },
         method: "POST",
         signal,
-      }, TRANSLATION_PROVIDER_ATTEMPT_TIMEOUT_MS);
+      }, getTranslationProviderAttemptTimeoutMs());
 
       const payload = (await response.json().catch(() => ({}))) as unknown;
 
@@ -409,12 +462,15 @@ async function callAnthropicTranslation(texts: string[], locale: Locale, signal:
   );
 }
 
-function parseProviderTranslations(providerText: string, expectedLength: number) {
+function parseProviderTranslations(providerText: string, expectedLength: number, finishReason?: string) {
   const translations = parseTranslations(providerText, expectedLength);
 
   if (!translations) {
     throw Object.assign(new Error("Translation provider returned an invalid response."), {
-      detail: providerText.slice(0, 500),
+      detail: [
+        finishReason ? `finish_reason=${finishReason}` : null,
+        `response=${providerText.slice(0, 500)}`,
+      ].filter(Boolean).join("\n"),
       translationCode: "INVALID_RESPONSE" satisfies TranslationErrorCode,
     });
   }
@@ -426,13 +482,15 @@ function chunkTexts(texts: string[]) {
   const chunks: string[][] = [];
   let currentChunk: string[] = [];
   let currentCharacters = 0;
+  const chunkCharacters = getTranslationChunkCharacters();
+  const chunkItems = getTranslationChunkItems();
 
   for (const text of texts) {
     const shouldStartNextChunk =
       currentChunk.length > 0 &&
       (
-        currentChunk.length >= MAX_TRANSLATION_CHUNK_ITEMS ||
-        currentCharacters + text.length > MAX_TRANSLATION_CHUNK_CHARACTERS
+        currentChunk.length >= chunkItems ||
+        currentCharacters + text.length > chunkCharacters
       );
 
     if (shouldStartNextChunk) {
@@ -452,48 +510,51 @@ function chunkTexts(texts: string[]) {
   return chunks;
 }
 
+async function translateChunks(
+  chunks: string[][],
+  translateChunk: (chunk: string[]) => Promise<string[]>,
+) {
+  const translatedChunks: string[][] = Array.from({ length: chunks.length });
+  let nextIndex = 0;
+  const workerCount = Math.min(getTranslationChunkConcurrency(), chunks.length);
+
+  async function runWorker() {
+    while (nextIndex < chunks.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      const chunk = chunks[index];
+
+      try {
+        translatedChunks[index] = await translateChunk(chunk);
+      } catch (error) {
+        throw Object.assign(error instanceof Error ? error : new Error("Translation chunk failed."), {
+          detail: [
+            `chunk=${index + 1}/${chunks.length}`,
+            (error as { detail?: string } | null)?.detail,
+          ].filter(Boolean).join("\n"),
+          translationCode: getTranslationCode(error),
+        });
+      }
+    }
+  }
+
+  await Promise.all(Array.from({ length: workerCount }, () => runWorker()));
+  return translatedChunks.flat();
+}
+
 async function translateTexts(texts: string[], locale: Locale, signal: AbortSignal) {
   if (texts.length === 0) {
     return [];
   }
 
   const chunks = chunkTexts(texts);
-  const translatedChunks: string[][] = [];
 
   if (process.env.ANTHROPIC_BASE_URL) {
-    for (let index = 0; index < chunks.length; index += 1) {
-      const chunk = chunks[index];
-      try {
-        translatedChunks.push(await callGlmTranslation(chunk, locale, signal));
-      } catch (error) {
-        throw Object.assign(error instanceof Error ? error : new Error("Translation chunk failed."), {
-          detail: [
-            `chunk=${index + 1}/${chunks.length}`,
-            (error as { detail?: string } | null)?.detail,
-          ].filter(Boolean).join("\n"),
-          translationCode: getTranslationCode(error),
-        });
-      }
-    }
-    return translatedChunks.flat();
+    return translateChunks(chunks, (chunk) => callGlmTranslation(chunk, locale, signal));
   }
 
   if (process.env.OPENAI_API_KEY) {
-    for (let index = 0; index < chunks.length; index += 1) {
-      const chunk = chunks[index];
-      try {
-        translatedChunks.push(await callOpenAITranslation(chunk, locale, signal));
-      } catch (error) {
-        throw Object.assign(error instanceof Error ? error : new Error("Translation chunk failed."), {
-          detail: [
-            `chunk=${index + 1}/${chunks.length}`,
-            (error as { detail?: string } | null)?.detail,
-          ].filter(Boolean).join("\n"),
-          translationCode: getTranslationCode(error),
-        });
-      }
-    }
-    return translatedChunks.flat();
+    return translateChunks(chunks, (chunk) => callOpenAITranslation(chunk, locale, signal));
   }
 
   throw Object.assign(new Error("Translation provider is not configured."), {

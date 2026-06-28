@@ -46,13 +46,15 @@ type DialogState =
   | { type: "cancel" }
   | { description: string; highlightedLines?: string[]; title: string; type: "alert" }
   | { type: "translate-confirm" }
-  | { sourceLocale: Locale; type: "translate-loading" }
+  | { sourceLocale: Locale; targetLocales: Locale[]; type: "translate-loading" }
   | { sourceLocale: Locale; targetLocales: Locale[]; type: "translate-success" }
   | {
       canRetry: boolean;
       code: TranslationErrorCode;
       description: string;
       detail?: string;
+      sourceLocale: Locale;
+      targetLocale: Locale;
       title: string;
       type: "translate-error";
     };
@@ -72,7 +74,7 @@ const CONTENT_GATING_OPTIONS: Array<{ label: string; value: ContentGatingLevel }
   { label: "Gating 30%", value: "30" },
   { label: "Gating 50%", value: "50" },
 ];
-const TRANSLATION_REQUEST_TIMEOUT_MS = 240000;
+const TRANSLATION_REQUEST_TIMEOUT_MS = 900000;
 
 const NEWS_FORMAT_LABELS: Record<NewsFormat, Record<Locale, string>> = {
   "Media Coverage": {
@@ -102,7 +104,7 @@ function getNewsFormatOptions(locale: Locale): Array<{ label: string; value: New
 const TRANSLATION_ERROR_COPY: Record<TranslationErrorCode, { canRetry: boolean; message: string }> = {
   CONFIGURATION_ERROR: {
     canRetry: false,
-    message: "번역 API 설정이 없습니다. 관리자에게 OPENAI_API_KEY 설정을 확인해 달라고 요청하세요.",
+    message: "번역 API 설정을 확인해 주세요.",
   },
   CONTENT_TOO_LONG: {
     canRetry: false,
@@ -114,15 +116,15 @@ const TRANSLATION_ERROR_COPY: Record<TranslationErrorCode, { canRetry: boolean; 
   },
   INVALID_RESPONSE: {
     canRetry: true,
-    message: "번역 결과 형식이 올바르지 않아 적용하지 못했습니다.",
+    message: "번역 결과를 적용하지 못했습니다. API 키 설정 또는 번역 서버 상태를 확인해 주세요.",
   },
   NETWORK_ERROR: {
     canRetry: true,
-    message: "번역 요청이 제한 시간 안에 끝나지 않았습니다. 네트워크 또는 번역 서버 상태를 확인한 뒤 다시 시도하세요.",
+    message: "번역 요청이 완료되지 않았습니다. API 키 설정 또는 번역 서버 상태를 확인해 주세요.",
   },
   PROVIDER_ERROR: {
     canRetry: true,
-    message: "번역 서버 응답이 실패했습니다. 아래 상세 내용을 확인한 뒤 다시 시도하세요.",
+    message: "번역 서버 응답을 처리하지 못했습니다. API 키 설정 또는 번역 서버 상태를 확인해 주세요.",
   },
   RATE_LIMITED: {
     canRetry: true,
@@ -293,23 +295,31 @@ function TranslationProgressDialog({
   sourceLocale,
   status = "loading",
   completedLocales,
+  targetLocales: requestedTargetLocales,
   onCancel,
 }: {
   onConfirm?: () => void;
   sourceLocale: Locale;
   status?: "loading" | "success";
   completedLocales?: Locale[];
+  targetLocales?: Locale[];
   onCancel?: () => void;
 }) {
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
-  const targetLocales = completedLocales ?? (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
+  const targetLocales = completedLocales ?? requestedTargetLocales ?? (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
   const isSuccess = status === "success";
-  const progress = isSuccess ? 100 : Math.min(95, Math.max(8, Math.round((elapsedSeconds / 60) * 95)));
+  const progress = isSuccess ? 100 : Math.min(98, Math.max(8, Math.round((elapsedSeconds / 300) * 90) + 8));
   const progressLabel =
     isSuccess
       ? "번역 결과가 입력되었습니다."
-      : elapsedSeconds >= 60
-      ? "응답이 지연되어 상태를 확인하고 있습니다."
+      : elapsedSeconds >= 300
+      ? "긴 본문 번역이 계속 진행 중입니다."
+      : elapsedSeconds >= 180
+      ? "일부 본문 구간을 다시 확인하고 있습니다."
+      : elapsedSeconds >= 90
+      ? "본문이 길어 처리 시간이 늘어나고 있습니다."
+      : elapsedSeconds >= 45
+      ? "본문 번역을 처리하고 있습니다."
       : progress < 35
       ? "번역 요청을 준비하고 있습니다."
       : progress < 75
@@ -395,14 +405,18 @@ function TranslationSourceDialog({
   onCancel,
   onConfirm,
   onSourceLocaleChange,
+  onTargetLocaleChange,
   sourceLocale,
   sourceLocales,
+  targetLocale,
 }: {
   onCancel: () => void;
   onConfirm: () => void;
   onSourceLocaleChange: (locale: Locale) => void;
+  onTargetLocaleChange: (locale: Locale) => void;
   sourceLocale: Locale;
   sourceLocales: Locale[];
+  targetLocale: Locale;
 }) {
   const targetLocales = (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
 
@@ -411,28 +425,37 @@ function TranslationSourceDialog({
       <div className="w-full max-w-[420px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-6 py-8" onClick={(event) => event.stopPropagation()}>
         <div className="flex flex-col gap-5">
           <div className="flex flex-col items-center gap-2 text-center">
-            <h2 className="m-0 type-h3 text-fg">기준 언어를 선택하세요.</h2>
+            <h2 className="m-0 type-h3 text-fg">번역 언어 선택</h2>
             <p className="m-0 max-w-[340px] whitespace-pre-line type-body-md leading-7 text-mute">
-              선택하신 언어를 기준으로 나머지 언어를 번역해서 넣습니다.
-              {"\n"}번역될 언어의 원문은 사라집니다.
+              기준 언어를 타겟 언어로 번역합니다.
+              {"\n"}타겟 언어의 기존 내용은 대체됩니다.
               {"\n"}실행 전 저장을 권장합니다.
             </p>
           </div>
-          <label className="flex flex-col items-center gap-2 type-body-md text-fg">
-            <span>기준 언어</span>
-            <Select
-              className="w-[200px]"
-              onChange={(event) => onSourceLocaleChange(event.target.value as Locale)}
-              options={sourceLocales.map((locale) => ({
-                label: localeDisplayNames[locale],
-                value: locale,
-              }))}
-              value={sourceLocale}
-            />
-          </label>
-          <p className="m-0 text-center type-body-sm text-mute">
-            {targetLocales.map((locale) => localeDisplayNames[locale]).join(", ")} 항목이 대체됩니다.
-          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <label className="flex flex-col gap-2 type-body-md text-fg">
+              <span>기준</span>
+              <Select
+                onChange={(event) => onSourceLocaleChange(event.target.value as Locale)}
+                options={sourceLocales.map((locale) => ({
+                  label: localeDisplayNames[locale],
+                  value: locale,
+                }))}
+                value={sourceLocale}
+              />
+            </label>
+            <label className="flex flex-col gap-2 type-body-md text-fg">
+              <span>타겟</span>
+              <Select
+                onChange={(event) => onTargetLocaleChange(event.target.value as Locale)}
+                options={targetLocales.map((locale) => ({
+                  label: localeDisplayNames[locale],
+                  value: locale,
+                }))}
+                value={targetLocale}
+              />
+            </label>
+          </div>
           <div className="flex w-full flex-col justify-center gap-3 sm:flex-row">
             <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
               취소
@@ -587,6 +610,7 @@ export default function AdminManagedContentDetailPage({
   const [pdfName, setPdfName] = useState("");
   const [activeLocale, setActiveLocale] = useState<Locale>("en");
   const [translationSourceLocale, setTranslationSourceLocale] = useState<Locale>("en");
+  const [translationTargetLocale, setTranslationTargetLocale] = useState<Locale>("ko");
   const [editorToolbarTop, setEditorToolbarTop] = useState("68px");
   const [previewOpen, setPreviewOpen] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -606,6 +630,7 @@ export default function AdminManagedContentDetailPage({
   const translationSourceLocales = (["en", "ko", "ja"] as const).filter((locale) =>
     hasLocaleTranslationSource(form, locale, isContentType),
   );
+  const translationTargetLocales = (["en", "ko", "ja"] as const).filter((locale) => locale !== translationSourceLocale);
   const canTranslateAnyLocale = translationSourceLocales.length > 0;
 
   useLayoutEffect(() => {
@@ -692,6 +717,22 @@ export default function AdminManagedContentDetailPage({
       pendingDeletedVideoSrcsRef.current.clear();
     };
   }, [pendingThumbnailPreviewSrc]);
+
+  useEffect(() => {
+    if (!translationSourceLocales.includes(translationSourceLocale)) {
+      const nextSourceLocale = translationSourceLocales[0];
+
+      if (nextSourceLocale) {
+        setTranslationSourceLocale(nextSourceLocale);
+      }
+    }
+  }, [translationSourceLocale, translationSourceLocales]);
+
+  useEffect(() => {
+    if (!translationTargetLocales.includes(translationTargetLocale)) {
+      setTranslationTargetLocale(translationTargetLocales[0]);
+    }
+  }, [translationTargetLocale, translationTargetLocales]);
 
   function updateForm<K extends keyof ManagedContentEntry>(key: K, value: ManagedContentEntry[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -782,18 +823,32 @@ export default function AdminManagedContentDetailPage({
         canRetry: false,
         code: "EMPTY_CONTENT",
         description: `${copy.message} 기존 입력 내용은 변경되지 않았습니다.`,
+        sourceLocale: translationSourceLocale,
+        targetLocale: translationTargetLocale,
         title: "번역할 내용이 없습니다.",
         type: "translate-error",
       });
       return;
     }
 
-    setTranslationSourceLocale(
-      translationSourceLocales.includes(activeLocale)
-        ? activeLocale
-        : translationSourceLocales[0],
-    );
+    const nextSourceLocale = translationSourceLocales.includes(activeLocale)
+      ? activeLocale
+      : translationSourceLocales[0];
+    const nextTargetLocale = translationTargetLocale === nextSourceLocale
+      ? (["en", "ko", "ja"] as const).find((locale) => locale !== nextSourceLocale) ?? "en"
+      : translationTargetLocale;
+
+    setTranslationSourceLocale(nextSourceLocale);
+    setTranslationTargetLocale(nextTargetLocale);
     setDialog({ type: "translate-confirm" });
+  }
+
+  function handleTranslationSourceLocaleChange(locale: Locale) {
+    setTranslationSourceLocale(locale);
+
+    if (translationTargetLocale === locale) {
+      setTranslationTargetLocale((["en", "ko", "ja"] as const).find((item) => item !== locale) ?? "en");
+    }
   }
 
   async function requestTranslation(targetLocale: Locale, sourceLocale: Locale, signal: AbortSignal) {
@@ -849,7 +904,7 @@ export default function AdminManagedContentDetailPage({
 
     if (!response.ok) {
       const code = payload.code ?? "UNKNOWN";
-      const copy = getTranslationFailureCopy(code, payload.error);
+      const copy = getTranslationFailureCopy(code);
 
       throw Object.assign(new Error(copy.message), {
         detail: payload.detail,
@@ -866,25 +921,22 @@ export default function AdminManagedContentDetailPage({
     };
   }
 
-  async function runTranslation(sourceLocale = translationSourceLocale) {
+  async function runTranslation(sourceLocale = translationSourceLocale, targetLocale = translationTargetLocale) {
     if (
       dialog?.type === "translate-loading" ||
-      !hasLocaleTranslationSource(form, sourceLocale, isContentType)
+      !hasLocaleTranslationSource(form, sourceLocale, isContentType) ||
+      sourceLocale === targetLocale
     ) {
       return;
     }
 
-    const targetLocales = (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
     const controller = new AbortController();
     translationAbortControllerRef.current = controller;
-    setDialog({ sourceLocale, type: "translate-loading" });
+    setDialog({ sourceLocale, targetLocales: [targetLocale], type: "translate-loading" });
 
     try {
-      const translations: Awaited<ReturnType<typeof requestTranslation>>[] = [];
-
-      for (const targetLocale of targetLocales) {
-        translations.push(await requestTranslation(targetLocale, sourceLocale, controller.signal));
-      }
+      const translation = await requestTranslation(targetLocale, sourceLocale, controller.signal);
+      const translations = [translation];
 
       setForm((current) => syncVisibleLocalesByTitle({
         ...current,
@@ -935,6 +987,8 @@ export default function AdminManagedContentDetailPage({
         code,
         description: `${copy.message} 기존 입력 내용은 변경되지 않았습니다.`,
         detail: (error as { detail?: string } | null)?.detail,
+        sourceLocale,
+        targetLocale,
         title: "번역 실패",
         type: "translate-error",
       });
@@ -1859,15 +1913,17 @@ export default function AdminManagedContentDetailPage({
       {dialog?.type === "translate-confirm" ? (
         <TranslationSourceDialog
           onCancel={() => setDialog(null)}
-          onConfirm={() => void runTranslation(translationSourceLocale)}
-          onSourceLocaleChange={setTranslationSourceLocale}
+          onConfirm={() => void runTranslation(translationSourceLocale, translationTargetLocale)}
+          onSourceLocaleChange={handleTranslationSourceLocaleChange}
+          onTargetLocaleChange={setTranslationTargetLocale}
           sourceLocale={translationSourceLocale}
           sourceLocales={translationSourceLocales}
+          targetLocale={translationTargetLocale}
         />
       ) : null}
 
       {dialog?.type === "translate-loading" ? (
-        <TranslationProgressDialog sourceLocale={dialog.sourceLocale} onCancel={cancelTranslation} />
+        <TranslationProgressDialog sourceLocale={dialog.sourceLocale} targetLocales={dialog.targetLocales} onCancel={cancelTranslation} />
       ) : null}
 
       {dialog?.type === "translate-success" ? (
@@ -1883,11 +1939,7 @@ export default function AdminManagedContentDetailPage({
         <ConfirmDialog
           cancelLabel="닫기"
           confirmLabel={dialog.canRetry ? "다시 시도" : "확인"}
-          description={
-            dialog.detail
-              ? `${dialog.description}\n\n오류 상세:\n${dialog.detail}`
-              : dialog.description
-          }
+          description={dialog.description}
           onCancel={() => setDialog(null)}
           onConfirm={() => {
             if (!dialog.canRetry) {
@@ -1895,7 +1947,7 @@ export default function AdminManagedContentDetailPage({
               return;
             }
 
-            void runTranslation(translationSourceLocale);
+            void runTranslation(dialog.sourceLocale, dialog.targetLocale);
           }}
           title={dialog.title}
         />

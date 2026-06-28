@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "transaction-free-change-data-capture-system",
-  "imageSrc": "/documentation/white-papers/wp-thumb-4.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-29.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 27,
@@ -28,6 +28,11 @@
     "ko": "트랜잭션리스, 완벽한 CDC(Change Data Capture) 시스템 구축법",
     "ja": "トランザクションレス、完璧なCDC（Change Data Capture）システム構築法"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000155/en.html",

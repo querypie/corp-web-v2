@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "parsing-sql-query-structural-interface",
-  "imageSrc": "/documentation/white-papers/wp-thumb-3.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-17.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 28,
@@ -28,6 +28,11 @@
     "ko": "다양한 벤더의 SQL 파싱하는 핵심 기술, QSI(Query Structural Interface)",
     "ja": "さまざまなベンダーのSQL解析のためのコア技術、QSI（Query Structural Interface）"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000148/en.html",

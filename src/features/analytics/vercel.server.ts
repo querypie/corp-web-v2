@@ -11,6 +11,7 @@ export type VercelAnalyticsTrendItem = {
 };
 
 export type VercelAnalyticsSummary = {
+  contentPages: VercelAnalyticsListItem[];
   countries: VercelAnalyticsListItem[];
   devices: VercelAnalyticsListItem[];
   error?: string;
@@ -174,6 +175,7 @@ export async function readVercelAnalyticsSummary(): Promise<VercelAnalyticsSumma
   if (!token) {
     return {
       countries: [],
+      contentPages: [],
       devices: [],
       error: "VERCEL_ACCESS_TOKEN 환경변수가 필요합니다.",
       isConfigured: false,
@@ -197,12 +199,13 @@ export async function readVercelAnalyticsSummary(): Promise<VercelAnalyticsSumma
       fetchAggregate({ by: "day", days: 30, limit: 30 }),
       fetchAggregate({ by: "day", days: 30, limit: 30, offsetDays: 30 }),
       fetchAggregate({ by: "country", days: 30, limit: 6 }),
-      fetchAggregate({ by: "requestPath", days: 30, limit: 8 }),
+      fetchAggregate({ by: "requestPath", days: 30, limit: 50 }),
       fetchAggregate({ by: "referrerHostname", days: 30, limit: 6 }),
       fetchAggregate({ by: "deviceType", days: 30, limit: 6 }),
     ]);
 
     return {
+      contentPages: toListItems(pageRows, "requestPath", 50),
       countries: toListItems(countryRows, "country", 6),
       devices: toListItems(deviceRows, "deviceType", 6),
       isConfigured: true,
@@ -215,6 +218,7 @@ export async function readVercelAnalyticsSummary(): Promise<VercelAnalyticsSumma
   } catch (error) {
     return {
       countries: [],
+      contentPages: [],
       devices: [],
       error: error instanceof Error ? error.message : "Vercel Analytics 데이터를 불러오지 못했습니다.",
       isConfigured: true,

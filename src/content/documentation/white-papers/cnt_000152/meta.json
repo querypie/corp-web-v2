@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "querypie-devsecops-pipeline",
-  "imageSrc": "/documentation/white-papers/wp-thumb-10.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-12.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 22,
@@ -28,6 +28,11 @@
     "ko": "개발 속도와 안정성 향상이 검증된 QueryPie의 DevSecOps 파이프라인",
     "ja": "開発速度と安定性の向上が証明されたQueryPieのDevSecOpsパイプライン"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000152/en.html",

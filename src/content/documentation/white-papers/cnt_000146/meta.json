@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "kubernetes-access-control",
-  "imageSrc": "/documentation/white-papers/wp-thumb-6.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-30.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 25,
@@ -28,6 +28,11 @@
     "ko": "Kubernetes 클러스터의 안전한 운영을 위한 접근 제어",
     "ja": "Kubernetesクラスターの安全な運用のためのアクセス制御"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000146/en.html",

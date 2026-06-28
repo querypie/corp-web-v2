@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "reverse-tunneling-jumphost-solution",
-  "imageSrc": "/documentation/white-papers/wp-thumb-14.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-21.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 18,
@@ -28,6 +28,11 @@
     "ko": "망분리 시대의 안전한 서버 접근: SSH 프로토콜을 이용한 멀티홉 양방향 터널링 기술",
     "ja": "ネットワーク分離時代における安全なサーバーアクセス: SSHプロトコルによるマルチホップ双方向トンネリング"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000142/en.html",

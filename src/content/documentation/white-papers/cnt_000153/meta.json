@@ -12,7 +12,7 @@
   "gatingLevel": "50",
   "hideHeroImage": false,
   "id": "secure-login-token-management",
-  "imageSrc": "/documentation/white-papers/wp-thumb-8.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-13.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 23,
@@ -28,6 +28,11 @@
     "ko": "안전한 로그인 토큰 관리, 프론트엔드의 필수 전략",
     "ja": "安全なログイントークン管理、フロントエンドの必須戦略"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000153/en.html",

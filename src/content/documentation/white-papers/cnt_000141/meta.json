@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "redefining-pam-for-the-mcp-era",
-  "imageSrc": "/documentation/white-papers/wp-thumb-15.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-33.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 17,
@@ -28,6 +28,11 @@
     "ko": "MCP(Model Context Protocol) 시대의 PAM(Privileged Access Management)을 재정의 하다.",
     "ja": "MCP(Model Context Protocol)時代のPAM(Privileged Access Management)を再定義する。"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000141/en.html",

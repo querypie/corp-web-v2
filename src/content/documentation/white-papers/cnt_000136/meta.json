@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "beyond-mcp-to-mcps",
-  "imageSrc": "/documentation/white-papers/wp-thumb-20.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-22.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 12,
@@ -28,6 +28,11 @@
     "ko": "MCP를 넘어 MCPS로: 엔터프라이즈 AI를 위한 보안 프로토콜의 필요성",
     "ja": "MCPを超えてMCPSへ：エンタープライズAIのためのセキュアプロトコルの必要性"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000136/en.html",

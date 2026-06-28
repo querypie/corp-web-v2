@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "your-architect-vs-ai-agents",
-  "imageSrc": "/documentation/white-papers/wp-thumb-22.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-28.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 10,
@@ -28,6 +28,11 @@
     "ko": "MCP와 AI Agent가 싸운다: 당신의 설계는 안전한가?",
     "ja": "MCPとAIエージェントが対決：あなたの設計は安全か？"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000134/en.html",

@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "uncovering-mcp-security",
-  "imageSrc": "/documentation/white-papers/wp-thumb-18.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-19.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 14,
@@ -28,6 +28,11 @@
     "ko": "MCP 보안성 평가: 문헌 조사를 통한 MCP 보안 위협 식별 및 취약점 분석",
     "ja": "MCPセキュリティ評価：文献調査によるMCPセキュリティ脅威の特定と脆弱性分析"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000138/en.html",

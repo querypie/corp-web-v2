@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "ai-agent-guardrails-governance-2026-implementation",
-  "imageSrc": "/documentation/white-papers/wp-thumb-29.webp",
+  "imageSrc": "/documentation/white-papers/thumbnail-10.webp",
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 5,
@@ -20,14 +20,19 @@
   "storageId": "cnt_000129",
   "summary": {
     "en": "A practical implementation guide for AI-agent guardrails. Includes three case studies (PC-operation agents, development AI vulnerabilities, and autonomous 5G operations), a reusable checklist, and a 90-day rollout roadmap.",
-    "ko": "A practical implementation guide for AI-agent guardrails. Includes three case studies (PC-operation agents, development AI vulnerabilities, and autonomous 5G operations), a reusable checklist, and a 90-day rollout roadmap.",
+    "ko": "AI 에이전트 가드레일에 대한 실용적인 구현 가이드입니다. 세 가지 사례 연구(PC 운영 에이전트, 개발 AI 취약성, 자율 5G 운영), 재사용 가능한 체크리스트, 90일 출시 로드맵이 포함되어 있습니다.",
     "ja": "AIエージェントのガードレール設計を実務に落とし込む。PC操作エージェント・開発AI脆弱性・5G自律運用の3つのケーススタディ、保存版チェックリスト、90日導入ロードマップを提供する2026年版実践ガイド。"
   },
   "title": {
     "en": "Guardrail Design in the AI Agent Era (2026 Edition) — Part 2: Practice & Implementation",
-    "ko": "",
+    "ko": "AI 에이전트 시대의 가드레일 설계 (2026 에디션) — 2부: 실무 및 구현",
     "ja": "AIエージェント時代のガードレール設計（2026年版）── 後編：実践・導入編"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/white-papers/cnt_000129/en.html",
