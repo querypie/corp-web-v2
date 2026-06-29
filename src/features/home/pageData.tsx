@@ -56,8 +56,6 @@ const mcpItems = mcpIconSources.map(({ className, label, src }) => ({
   label,
 }));
 
-const homeFeatureVideoHeightClassName = "md:h-[600px]";
-
 export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
   const publishedItems = await readContentState(undefined, { includeBodies: false });
     const visiblePublishedItems = publishedItems.filter((item) =>
@@ -152,7 +150,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP workspace preview",
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-AIP.mp4",
             title: ["AIP - AI Platform"],
           },
@@ -169,7 +166,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             imageAlt: "Model selector preview",
             reverse: true,
             title: ["ACP - Access Control Platform"],
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-ACP.mp4",
           },
           {
@@ -183,7 +179,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP workspace preview",
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
             title: ["Lingo"],
           },
@@ -200,7 +195,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             imageAlt: "Model selector preview",
             reverse: true,
             title: ["NotePie"],
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-NotePie.mp4",
           },
         ],
@@ -289,7 +283,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP 워크스페이스 미리보기",
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-AIP.mp4",
             title: ["AIP - AI Platform"],
           },
@@ -306,7 +299,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             imageAlt: "모델 셀렉터 미리보기",
             reverse: true,
             title: ["ACP - Access Control Platform"],
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-ACP.mp4",
           },
           {
@@ -320,7 +312,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP 워크스페이스 미리보기",
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
             title: ["Lingo"],
           },
@@ -337,7 +328,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             imageAlt: "모델 셀렉터 미리보기",
             reverse: true,
             title: ["NotePie"],
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-NotePie.mp4",
           },
         ],
@@ -425,7 +415,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP ワークスペースプレビュー",
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-AIP.mp4",
             title: ["AIP - AI Platform"],
           },
@@ -442,7 +431,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             imageAlt: "モデルセレクタープレビュー",
             reverse: true,
             title: ["ACP - Access Control Platform"],
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-ACP.mp4",
           },
           {
@@ -456,7 +444,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP ワークスペースプレビュー",
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
             title: ["Lingo"],
           },
@@ -473,7 +460,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             imageAlt: "モデルセレクタープレビュー",
             reverse: true,
             title: ["NotePie"],
-            videoHeightClassName: homeFeatureVideoHeightClassName,
             videoSrc: "/assets/pages/home/features/Home-NotePie.mp4",
           },
         ],

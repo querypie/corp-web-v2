@@ -561,6 +561,7 @@ function MenuSvg({ children, className }: { children: ReactNode; className: stri
 function Sidebar({
   activeMenu,
   activeAdminPage,
+  activeAgentId,
   activeChatTitle,
   onAdminMenuClick,
   onAgentClick,
@@ -570,6 +571,7 @@ function Sidebar({
 }: {
   activeMenu: string;
   activeAdminPage: string;
+  activeAgentId: string | null;
   activeChatTitle: string | null;
   onAdminMenuClick: (page: string) => void;
   onAgentClick: (agentId: string) => void;
@@ -580,6 +582,8 @@ function Sidebar({
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const notificationButtonRef = useRef<HTMLButtonElement | null>(null);
   const notificationPopoverRef = useRef<HTMLDivElement | null>(null);
+  const activeMenuItemClassName = "bg-[#2a2a2a] text-[#fafafa]";
+  const inactiveMenuItemClassName = "text-[#f4f4f5]";
   const notifications = [
     {
       id: "daily-sales-summary",
@@ -637,26 +641,26 @@ function Sidebar({
           <>
             <div className="flex flex-col gap-0.5">
               {aipMockupMenuItems.map((item) => {
-                const isActive = activeMenu === item.id && !(item.id === "chat" && activeChatTitle);
+                const isActive = activeMenu === item.id && !(item.id === "chat" && (activeChatTitle || activeAgentId));
                 const isAgentsMenu = item.id === "agents";
                 return (
                   <div key={item.id}>
                     <button
-                      className={`group flex h-9 w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none transition-colors ${
-                        isActive
-                          ? "bg-white/10 text-[#f4f4f5]"
-                          : "text-[#f4f4f5] hover:bg-white/10 hover:text-[#f4f4f5]"
-                      }`}
+                      aria-current={isActive ? "page" : undefined}
+                      className={[
+                        "group flex h-9 w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none",
+                        isActive ? activeMenuItemClassName : inactiveMenuItemClassName,
+                      ].join(" ")}
                       onClick={() => (item.id === "chat" ? onNewChatClick() : onMenuClick(item.id))}
                       type="button"
                     >
                       <MenuIcon className="h-4 w-4 shrink-0" name={menuIconById[item.id]} />
                       <span className="min-w-0 truncate">{item.label}</span>
                       {isAgentsMenu ? (
-                        <span className="ml-auto shrink-0 text-xs text-[#f4f4f5] group-hover:underline">View all</span>
+                        <span className="ml-auto shrink-0 text-xs text-[#f4f4f5]">View all</span>
                       ) : null}
                     </button>
-                    {isAgentsMenu ? <SidebarAgentSubMenu onAgentClick={onAgentClick} /> : null}
+                    {isAgentsMenu ? <SidebarAgentSubMenu activeAgentId={activeAgentId} onAgentClick={onAgentClick} /> : null}
                   </div>
                 );
               })}
@@ -668,9 +672,10 @@ function Sidebar({
                 {aipMockupChats.map((chat) => (
                   <button
                     className={[
-                      "group relative flex h-9 w-full items-center rounded-lg text-left text-sm text-[#f4f4f5] transition-colors duration-200 hover:bg-white/10",
-                      activeMenu === "chat" && activeChatTitle === chat ? "bg-white/10" : "",
+                      "group relative flex h-9 w-full items-center rounded-lg text-left text-sm",
+                      activeMenu === "chat" && activeChatTitle === chat ? activeMenuItemClassName : inactiveMenuItemClassName,
                     ].join(" ")}
+                    aria-current={activeMenu === "chat" && activeChatTitle === chat ? "page" : undefined}
                     key={chat}
                     onClick={() => onChatClick(chat)}
                     type="button"
@@ -807,6 +812,9 @@ function AdminSidebarMenu({
   activeAdminPage: string;
   onAdminMenuClick: (page: string) => void;
 }) {
+  const activeMenuItemClassName = "bg-[#2a2a2a] text-[#fafafa]";
+  const inactiveMenuItemClassName = "text-[#f4f4f5]";
+
   return (
     <>
       {adminMenuGroups.map((group) => (
@@ -823,11 +831,10 @@ function AdminSidebarMenu({
                 return (
                   <li className="group/menu-item relative" key={item.id}>
                     <button
+                      aria-current={isActive ? "page" : undefined}
                       className={[
-                        "group flex h-9 w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none transition-colors",
-                        isActive
-                          ? "bg-white/10 text-[#f4f4f5]"
-                          : "text-[#f4f4f5] hover:bg-white/10 hover:text-[#f4f4f5]",
+                        "group flex h-9 w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none",
+                        isActive ? activeMenuItemClassName : inactiveMenuItemClassName,
                       ].join(" ")}
                       onClick={() => onAdminMenuClick(item.id)}
                       type="button"
@@ -846,23 +853,34 @@ function AdminSidebarMenu({
   );
 }
 
-function SidebarAgentSubMenu({ onAgentClick }: { onAgentClick: (agentId: string) => void }) {
+function SidebarAgentSubMenu({
+  activeAgentId,
+  onAgentClick,
+}: {
+  activeAgentId: string | null;
+  onAgentClick: (agentId: string) => void;
+}) {
   const personalAgents = aipMockupAgents.filter((agent) => agent.owner === "Personal Agent");
   const organizationAgents = aipMockupAgents.filter((agent) => agent.owner === "Organization Agent");
+  const activeMenuItemClassName = "bg-[#2a2a2a] text-[#fafafa]";
+  const inactiveMenuItemClassName = "text-[#f4f4f5]";
   const sections = [
-    { id: "personal", label: "Personal", agents: personalAgents },
-    { id: "organization", label: "Organization", agents: organizationAgents },
+    { id: "personal", agents: personalAgents },
+    { id: "organization", agents: organizationAgents },
   ].filter((section) => section.agents.length > 0);
 
   return (
     <ul className="ml-3.5 flex min-w-0 translate-x-px flex-col border-l border-[#27272a] pl-2.5">
       {sections.map((section) => (
         <li key={section.id}>
-          <div className="px-2 py-1 text-xs font-medium text-[#a1a1aa]">{section.label}</div>
           <div className="flex flex-col">
             {section.agents.map((agent) => (
               <button
-                className="flex h-9 min-w-0 w-full items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm text-[#f4f4f5] outline-none transition-colors hover:bg-white/10 hover:text-[#f4f4f5]"
+                aria-current={activeAgentId === agent.id ? "page" : undefined}
+                className={[
+                  "flex h-9 min-w-0 w-full items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none",
+                  activeAgentId === agent.id ? activeMenuItemClassName : inactiveMenuItemClassName,
+                ].join(" ")}
                 key={agent.id}
                 onClick={() => onAgentClick(agent.id)}
                 type="button"
@@ -1288,7 +1306,7 @@ function AppHeader() {
 function ExampleChatConversation() {
   return (
     <div className="min-h-0 flex-1 overflow-y-auto">
-      <div className="mx-auto flex w-full max-w-[800px] flex-col gap-8 px-8 pb-8 pt-7">
+      <div className="mx-auto flex w-full max-w-[800px] flex-col gap-8 px-8 pb-8 pt-7 md:px-12">
         <div className="flex justify-end">
           <div className="max-w-[620px] rounded-[20px] bg-[#2f2f2f] px-4 py-3 text-[15px] leading-6 text-[#f4f4f5]">
             Check today&apos;s emails for one with a quotation attached, convert it to a PDF, and save it to my Desktop.
@@ -1529,7 +1547,7 @@ function AgentChatStartForm({
   promptGuides: string[];
 }) {
   return (
-    <div className="mx-auto w-full max-w-[800px] px-8">
+    <div className="mx-auto w-full max-w-[800px] px-8 md:px-12">
       <form className="main-content-chat flex w-full flex-row gap-3 transition-all duration-200">
         <div className="relative flex h-full min-w-0 flex-1 flex-col items-stretch">
           <div className="flex w-full items-center">
@@ -1748,7 +1766,7 @@ function VisualizationChatConversation({ chatTitle }: { chatTitle: string }) {
   const chat = visualizationChats[chatTitle] ?? visualizationChats["Revenue dashboard analysis"];
 
   return (
-    <div className="mx-auto flex w-full max-w-[800px] flex-1 flex-col gap-8 overflow-y-auto px-4 pb-8 pt-7">
+    <div className="mx-auto flex w-full max-w-[800px] flex-1 flex-col gap-8 overflow-y-auto px-4 pb-8 pt-7 md:px-12">
       <div className="flex justify-end">
         <div className="max-w-[620px] rounded-[20px] bg-[#2f2f2f] px-4 py-3 text-[15px] leading-6 text-[#f4f4f5]">
           {chat.question}
@@ -1900,7 +1918,7 @@ function WidgetBarChart() {
 function SupportWidgetsChatConversation() {
   return (
     <div className="min-h-0 flex-1 overflow-y-auto">
-      <div className="mx-auto flex w-full max-w-[800px] flex-col gap-8 px-8 pb-8 pt-7">
+      <div className="mx-auto flex w-full max-w-[800px] flex-col gap-8 px-8 pb-8 pt-7 md:px-12">
         <div className="flex justify-end">
           <div className="max-w-[620px] rounded-[20px] bg-[#2f2f2f] px-4 py-3 text-[15px] leading-6 text-[#f4f4f5]">
             Review last month&apos;s support tickets and create dashboard widgets for CS operations.
@@ -2149,7 +2167,7 @@ function RevenueArtifactChatScreen() {
   return (
     <section className="flex h-full min-h-0 bg-[#121212]">
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="mx-auto flex w-full max-w-[680px] flex-1 flex-col gap-8 overflow-y-auto px-8 pb-8 pt-7">
+        <div className="mx-auto flex w-full max-w-[680px] flex-1 flex-col gap-8 overflow-y-auto px-8 pb-8 pt-7 md:px-12">
           <div className="flex justify-end">
             <div className="max-w-[560px] rounded-[20px] bg-[#2f2f2f] px-4 py-3 text-[15px] leading-6 text-[#f4f4f5]">
               Create an interactive revenue dashboard artifact from this month&apos;s CRM and billing data.
@@ -2631,7 +2649,7 @@ function PresetChatForm() {
   }, [isHintMenuOpen, isMcpMenuOpen]);
 
   return (
-    <div className="relative mx-auto w-full max-w-[800px] px-8" ref={containerRef}>
+    <div className="relative mx-auto w-full max-w-[800px] px-8 md:px-12" ref={containerRef}>
       <div className="relative isolate">
         <div className="relative z-20 transition-transform duration-[600ms] ease-[cubic-bezier(0.16,1,0.3,1)]">
           <form className="mx-auto flex w-full max-w-[800px] flex-row gap-3 transition-all duration-[600ms]">
@@ -2747,7 +2765,7 @@ function AgentsScreen({ onAgentClick }: { onAgentClick: (agentId: string) => voi
       <header className="mb-[30px] flex min-w-0 flex-wrap items-start gap-4">
         <div className="w-full">
           <div className="flex w-full items-center gap-1">
-            <h1 className="text-3xl font-medium leading-9 text-[#fafafa]">Agents</h1>
+            <h1 className="type-h2 font-medium text-[#fafafa]">Agents</h1>
           </div>
           <p className="mt-1 text-sm leading-5 text-[#8f8f8f]">
             From scheduling to custom workflows, use AI agents to handle repetitive work more efficiently.
@@ -3041,7 +3059,7 @@ function AutomationScreen() {
       <header className="mb-[30px] flex min-w-0 flex-wrap items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="flex w-full items-center gap-1">
-            <h1 className="text-3xl font-medium leading-9 text-[#fafafa]">Automation</h1>
+            <h1 className="type-h2 font-medium text-[#fafafa]">Automation</h1>
           </div>
           <p className="mt-1 text-sm leading-5 text-[#8f8f8f]">
             Create an automation to run an agent from a schedule, email, webhook, or folder watch trigger.
@@ -3275,7 +3293,7 @@ function MyDriveScreen() {
           <header className="mb-[30px] flex min-w-0 flex-wrap items-start gap-4">
             <div className="w-full">
               <div className="flex w-full items-center gap-1">
-                <h1 className="text-3xl font-medium leading-9 text-[#fafafa]">My Drive</h1>
+                <h1 className="type-h2 font-medium text-[#fafafa]">My Drive</h1>
               </div>
               <p className="mt-1 text-sm leading-5 text-[#8f8f8f]">
                 Upload files in advance and use them in chats when needed. A viewer is not provided.
@@ -3483,7 +3501,7 @@ function SkillsScreen() {
           <header className="mb-[30px] flex min-w-0 flex-wrap items-start justify-between gap-4">
             <div className="min-w-0">
               <div className="flex w-full items-center gap-1">
-                <h1 className="text-3xl font-medium leading-9 text-[#fafafa]">Skills</h1>
+                <h1 className="type-h2 font-medium text-[#fafafa]">Skills</h1>
               </div>
               <p className="mt-1 block max-w-2xl text-sm leading-5 text-[#8f8f8f]">
                 Pre-packaged, repeatable best practices and tools.
@@ -3915,7 +3933,7 @@ function AppsScreen() {
       <header className="mb-[30px] flex min-w-0 flex-wrap items-start gap-4">
         <div className="w-full">
           <div className="flex w-full items-center gap-1">
-            <h1 className="text-3xl font-medium leading-9 text-[#fafafa]">Apps</h1>
+            <h1 className="type-h2 font-medium text-[#fafafa]">Apps</h1>
           </div>
           <p className="mt-1 text-sm leading-5 text-[#8f8f8f]">Launch apps connected to your AI workspace.</p>
         </div>
@@ -4395,7 +4413,7 @@ function DashboardScreen() {
       <header className="mb-[30px] flex min-w-0 flex-wrap items-start gap-4">
         <div className="w-full">
           <div className="flex w-full items-center gap-1">
-            <h1 className="text-3xl font-medium leading-9 text-[#fafafa]">Organization Dashboard</h1>
+            <h1 className="type-h2 font-medium text-[#fafafa]">Organization Dashboard</h1>
           </div>
           <p className="mt-1 text-sm leading-5 text-[#8f8f8f]">Manage your organization and monitor recent activities.</p>
         </div>
@@ -4489,7 +4507,7 @@ function AdminPageShell({
       <header className="mb-[30px] flex min-w-0 flex-wrap items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="flex w-full items-center gap-1">
-            <h1 className="text-3xl font-medium leading-9 text-[#fafafa]">{title}</h1>
+            <h1 className="type-h2 font-medium text-[#fafafa]">{title}</h1>
           </div>
           {subtitle ? <p className="mt-1 whitespace-pre-line text-sm leading-5 text-[#8f8f8f]">{subtitle}</p> : null}
         </div>
@@ -6819,7 +6837,7 @@ function AdminScreen() {
       <header className="mb-[30px] flex min-w-0 flex-wrap items-start gap-4">
         <div className="w-full">
           <div className="flex w-full items-center gap-1">
-            <h1 className="text-3xl font-medium leading-9 text-[#fafafa]">General Settings</h1>
+            <h1 className="type-h2 font-medium text-[#fafafa]">General Settings</h1>
           </div>
           <p className="mt-1 text-sm leading-5 text-[#8f8f8f]">Manage your organization settings and preferences.</p>
         </div>
@@ -6887,7 +6905,7 @@ function McpScreen() {
       <header className="mb-[30px] flex min-w-0 items-start justify-between gap-4">
         <div className="min-w-0">
           <div className="flex w-full items-center gap-1">
-            <h1 className="text-3xl font-medium leading-9 text-[#fafafa]">MCP</h1>
+            <h1 className="type-h2 font-medium text-[#fafafa]">MCP</h1>
           </div>
           <p className="mt-1 text-sm leading-5 text-[#8f8f8f]">Connect apps and APIs to share context.</p>
         </div>
@@ -7218,7 +7236,7 @@ export default function AipMockupShell({
     <div className={["w-full", className].filter(Boolean).join(" ")} data-aip-mockup onWheelCapture={handleMockupWheel}>
       <div
         className={[
-          "mx-auto flex h-[700px] w-full max-w-[1200px] overflow-hidden rounded-[22px] border border-[#2f2f2f] bg-[#121212] text-[#f4f4f5] md:h-[760px]",
+          "mx-auto flex h-[720px] w-full max-w-[1200px] overflow-hidden rounded-[14px] border border-[#2f2f2f] bg-[#121212] text-[#f4f4f5] md:h-[720px]",
           withShadow ? "shadow-[0_32px_100px_rgba(16,24,40,0.18)]" : "",
         ]
           .filter(Boolean)
@@ -7227,6 +7245,7 @@ export default function AipMockupShell({
       >
         <Sidebar
           activeAdminPage={activeAdminPage}
+          activeAgentId={activeAgentId}
           activeChatTitle={activeChatTitle}
           activeMenu={activeMenu}
           onAdminMenuClick={openAdminPage}
@@ -7235,26 +7254,28 @@ export default function AipMockupShell({
           onMenuClick={openMenu}
           onNewChatClick={openNewChat}
         />
-        {activeMenu === "agents" ? (
-          <AgentsScreen onAgentClick={openAgentChat} />
-        ) : activeMenu === "admin" ? (
-          <AdminContent activeAdminPage={activeAdminPage} key={activeAdminPage} />
-        ) : activeMenu === "automation" ? (
-          <AutomationScreen />
-        ) : activeMenu === "apps" ? (
-          <AppsScreen />
-        ) : activeMenu === "mcp" ? (
-          <McpScreen />
-        ) : activeMenu === "my-drive" ? (
-          <MyDriveScreen />
-        ) : activeMenu === "skills" ? (
-          <SkillsScreen />
-        ) : (
-          <div className="flex min-w-0 flex-1 flex-col">
-            {activeAgentId ? null : <AppHeader />}
-            <NewChatScreen activeAgentId={activeAgentId} activeChatTitle={activeChatTitle} />
-          </div>
-        )}
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden md:[&>section]:!px-12">
+          {activeMenu === "agents" ? (
+            <AgentsScreen onAgentClick={openAgentChat} />
+          ) : activeMenu === "admin" ? (
+            <AdminContent activeAdminPage={activeAdminPage} key={activeAdminPage} />
+          ) : activeMenu === "automation" ? (
+            <AutomationScreen />
+          ) : activeMenu === "apps" ? (
+            <AppsScreen />
+          ) : activeMenu === "mcp" ? (
+            <McpScreen />
+          ) : activeMenu === "my-drive" ? (
+            <MyDriveScreen />
+          ) : activeMenu === "skills" ? (
+            <SkillsScreen />
+          ) : (
+            <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+              {activeAgentId ? null : <AppHeader />}
+              <NewChatScreen activeAgentId={activeAgentId} activeChatTitle={activeChatTitle} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

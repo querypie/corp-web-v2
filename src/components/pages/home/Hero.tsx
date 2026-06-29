@@ -1,6 +1,12 @@
 import Button from "@/components/ui/Button";
 import AipMockupShell from "@/components/mockups/aip/AipMockupShell";
 
+const MOCKUP_ORIGINAL_WIDTH = 1200;
+const MOCKUP_ORIGINAL_HEIGHT = 720;
+const MOCKUP_DISPLAY_WIDTH = 1000;
+const MOCKUP_DISPLAY_SCALE = MOCKUP_DISPLAY_WIDTH / MOCKUP_ORIGINAL_WIDTH;
+const MOCKUP_DISPLAY_HEIGHT = Math.round((MOCKUP_ORIGINAL_HEIGHT / MOCKUP_ORIGINAL_WIDTH) * MOCKUP_DISPLAY_WIDTH);
+
 type HeroProps = {
   ctaLabel: string;
   description: string;
@@ -22,11 +28,9 @@ export default function Hero({
         <div className="flex w-full max-w-[1200px] flex-col items-start gap-6 sm:gap-8 md:gap-10 xl:gap-12">
           <div className="w-full">
             <div className="flex w-full max-w-[1200px] flex-col items-start gap-5 sm:gap-6">
-              <div className="w-full">
-                <h2 className="m-0 max-w-[720px] type-h2">
-                  <span className="block text-mute">{heroHeading}</span>
-                  <span className="block whitespace-pre-line text-fg">{description}</span>
-                </h2>
+              <div className="w-full max-w-[720px]">
+                <h2 className="m-0 type-h2 text-fg">{heroHeading}</h2>
+                <p className="m-0 mt-2.5 whitespace-pre-line type-body-lg text-mute">{description}</p>
               </div>
 
               <a href="https://app.querypie.com/" rel="noreferrer noopener" target="_blank">
@@ -37,8 +41,29 @@ export default function Hero({
             </div>
 
             <div className="mt-[60px] flex w-full justify-center" aria-label={imageAlt}>
-              <div className="relative mb-[112px] w-full max-w-[1200px] overflow-hidden" style={{ height: 820 }}>
-                <AipMockupShell className="homepage-aip-mockup" frameHeight={820} withShadow={false} />
+              <div
+                className="relative mb-[100px] w-full"
+                style={{ height: MOCKUP_DISPLAY_HEIGHT, maxWidth: MOCKUP_DISPLAY_WIDTH }}
+              >
+                <div className="relative z-10 h-full overflow-hidden">
+                  <div
+                    style={{
+                      height: MOCKUP_ORIGINAL_HEIGHT,
+                      transform: `scale(${MOCKUP_DISPLAY_SCALE})`,
+                      transformOrigin: "top left",
+                      width: MOCKUP_ORIGINAL_WIDTH,
+                    }}
+                  >
+                    <AipMockupShell className="homepage-aip-mockup" frameHeight={MOCKUP_ORIGINAL_HEIGHT} withShadow={false} />
+                  </div>
+                </div>
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-1/2 top-full h-[100px] w-full -translate-x-1/2 overflow-hidden rounded-t-[14px]"
+                >
+                  <div className="absolute inset-x-0 top-0 h-[100px] rounded-t-[14px] bg-[linear-gradient(180deg,rgba(18,18,18,0.38)_0%,rgba(18,18,18,0.26)_34%,rgba(18,18,18,0.1)_68%,rgba(18,18,18,0)_100%)] shadow-[0_-10px_28px_rgba(18,18,18,0.32)] blur-[10px]" />
+                  <div className="absolute inset-x-[18px] top-0 h-[92px] rounded-t-[14px] bg-[linear-gradient(180deg,rgba(255,255,255,0.07)_0%,rgba(255,255,255,0.025)_30%,rgba(255,255,255,0)_100%)] blur-[18px]" />
+                </div>
               </div>
             </div>
           </div>

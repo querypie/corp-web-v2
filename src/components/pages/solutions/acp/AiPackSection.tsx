@@ -127,7 +127,7 @@ export default function AiPackSection({ locale }: AiPackSectionProps) {
             ))}
           </div>
 
-          <div className="relative w-full overflow-hidden rounded-box md:h-[600px] md:w-fit lg:shrink-0">
+          <div className="relative w-full overflow-hidden rounded-box lg:w-[790px] lg:max-w-[65%] lg:shrink-0">
             <AiPackVideo title={content.imageAlt} />
           </div>
         </div>
