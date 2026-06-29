@@ -118,6 +118,10 @@ body {
   font-weight: 500;
 }
 
+.homepage-aip-mockup-mobile > div {
+  border-radius: 20px;
+}
+
 .homepage-aip-mockup .aip-mockup-sidebar-scroll {
   scrollbar-color: #4a4c50 transparent;
 }

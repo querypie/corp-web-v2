@@ -117,7 +117,7 @@ export default function HomePage({
   reviewTitle,
 }: HomePageProps) {
   return (
-    <div className={`mt-5 flex flex-col ${pageSectionGapClassName} overflow-x-hidden bg-bg ${pageXPaddingClassName} pb-10 text-fg md:mt-0`}>
+    <div className={`flex flex-col ${pageSectionGapClassName} overflow-x-hidden bg-bg ${pageXPaddingClassName} pb-10 text-fg`}>
       <NoticePopover items={noticeItems} locale={locale} />
 
       <div className="relative -mx-5 md:-mx-10">
