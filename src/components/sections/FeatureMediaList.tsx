@@ -19,7 +19,6 @@ type FeatureItem = {
   mediaClassName?: string;
   reverse?: boolean;
   title: string[];
-  videoHeightClassName?: string;
   videoSrc?: string;
 };
 
@@ -141,9 +140,8 @@ function FeatureMedia({
   imageClassName,
   imageSrc,
   setVideoRef,
-  videoHeightClassName,
   videoSrc,
-}: Pick<FeatureItem, "imageAlt" | "imageClassName" | "imageSrc" | "videoHeightClassName" | "videoSrc"> & {
+}: Pick<FeatureItem, "imageAlt" | "imageClassName" | "imageSrc" | "videoSrc"> & {
   className?: string;
   setVideoRef?: (video: HTMLVideoElement | null) => void;
 }) {
@@ -154,7 +152,7 @@ function FeatureMedia({
     <div
       className={cx(
         "overflow-hidden rounded-box",
-        videoSrc ? cx("w-full md:w-fit", videoHeightClassName ?? "md:h-[480px]") : "aspect-[2/1] w-full shrink-0 lg:w-[790px] lg:max-w-[65%]",
+        videoSrc ? "w-full shrink-0 lg:w-[790px] lg:max-w-[65%]" : "aspect-[2/1] w-full shrink-0 lg:w-[790px] lg:max-w-[65%]",
         className,
       )}
     >
@@ -187,7 +185,7 @@ function FeatureVideoPlayer({
   return (
     <video
       aria-label={title}
-      className="block h-auto w-full bg-black md:h-full md:w-auto"
+      className="block h-auto w-full"
       loop
       muted
       playsInline
@@ -302,7 +300,6 @@ export default function FeatureMediaList({
                       }
                     : undefined
                 }
-                videoHeightClassName={item.videoHeightClassName}
                 videoSrc={item.videoSrc}
               />
             </div>

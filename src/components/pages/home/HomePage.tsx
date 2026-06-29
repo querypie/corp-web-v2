@@ -23,7 +23,6 @@ type FeatureItem = {
   imageSrc?: string;
   reverse?: boolean;
   title: string[];
-  videoHeightClassName?: string;
   videoSrc?: string;
 };
 

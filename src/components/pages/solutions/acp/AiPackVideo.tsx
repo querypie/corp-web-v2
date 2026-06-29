@@ -56,7 +56,7 @@ export default function AiPackVideo({ title }: AiPackVideoProps) {
   return (
     <video
       aria-label={title}
-      className="block h-auto w-full bg-black md:h-full md:w-auto md:max-w-full"
+      className="block h-auto w-full"
       loop
       muted
       playsInline
