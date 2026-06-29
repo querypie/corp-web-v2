@@ -569,6 +569,7 @@ type PendingImageUpload = {
 };
 
 const LOCALES = ["en", "ko", "ja"] as const;
+const EXTERNAL_IMAGE_PROTOCOLS = new Set(["http:", "https:"]);
 
 function replaceAllExact(value: string, search: string, replacement: string) {
   return value.split(search).join(replacement);
@@ -579,6 +580,80 @@ function formContainsText(form: ManagedContentEntry, value: string) {
     form.bodyRichText[locale].includes(value) ||
     form.bodyHtml[locale].includes(value),
   );
+}
+
+function isExternalImageSrc(value: unknown) {
+  if (typeof value !== "string" || !value.trim()) {
+    return false;
+  }
+
+  try {
+    return EXTERNAL_IMAGE_PROTOCOLS.has(new URL(value).protocol);
+  } catch {
+    return false;
+  }
+}
+
+function collectExternalImageSrcsFromJson(node: unknown, srcs: Set<string>) {
+  if (!node || typeof node !== "object") {
+    return;
+  }
+
+  const candidate = node as {
+    attrs?: { src?: unknown };
+    content?: unknown;
+    type?: unknown;
+  };
+
+  if (candidate.type === "image" && isExternalImageSrc(candidate.attrs?.src)) {
+    srcs.add(candidate.attrs?.src as string);
+  }
+
+  if (Array.isArray(candidate.content)) {
+    for (const child of candidate.content) {
+      collectExternalImageSrcsFromJson(child, srcs);
+    }
+  }
+}
+
+function collectExternalImageSrcsFromValue(value: string, srcs: Set<string>) {
+  const trimmedValue = value.trim();
+
+  if (!trimmedValue) {
+    return;
+  }
+
+  try {
+    collectExternalImageSrcsFromJson(JSON.parse(trimmedValue), srcs);
+    return;
+  } catch {
+    // Existing migrated content can still be HTML. Fall through to DOM parsing.
+  }
+
+  if (!trimmedValue.startsWith("<") || typeof window === "undefined") {
+    return;
+  }
+
+  const document = new DOMParser().parseFromString(trimmedValue, "text/html");
+
+  for (const image of Array.from(document.querySelectorAll("img"))) {
+    const src = image.getAttribute("src");
+
+    if (typeof src === "string" && isExternalImageSrc(src)) {
+      srcs.add(src);
+    }
+  }
+}
+
+function collectExternalImageSrcs(form: ManagedContentEntry) {
+  const srcs = new Set<string>();
+
+  for (const locale of LOCALES) {
+    collectExternalImageSrcsFromValue(form.bodyRichText[locale], srcs);
+    collectExternalImageSrcsFromValue(form.bodyHtml[locale], srcs);
+  }
+
+  return Array.from(srcs);
 }
 
 export default function AdminManagedContentDetailPage({
@@ -1143,6 +1218,30 @@ export default function AdminManagedContentDetailPage({
     return payload.src;
   }
 
+  async function uploadExternalImage(sourceUrl: string) {
+    const formData = new FormData();
+    formData.append("sourceUrl", sourceUrl);
+    formData.append("section", section);
+    formData.append("categorySlug", categorySlug);
+
+    const response = await fetch("/api/admin/uploads", {
+      body: formData,
+      method: "POST",
+    });
+
+    if (!response.ok) {
+      throw new Error("external image upload failed");
+    }
+
+    const payload = (await response.json()) as { src?: string };
+
+    if (!payload.src) {
+      throw new Error("missing external image src");
+    }
+
+    return payload.src;
+  }
+
   function prepareImagePreview(file: File, replaceSrc?: string) {
     const previewSrc = URL.createObjectURL(file);
     const normalizedReplaceSrc = replaceSrc ?? "";
@@ -1288,6 +1387,53 @@ export default function AdminManagedContentDetailPage({
     return {
       finalizedForm,
       oldImageSrcs,
+      uploadedImageSrcs,
+    };
+  }
+
+  async function finalizeExternalImages(currentForm: ManagedContentEntry) {
+    const externalImageSrcs = collectExternalImageSrcs(currentForm);
+
+    if (externalImageSrcs.length === 0) {
+      return {
+        finalizedForm: currentForm,
+        uploadedImageSrcs: [] as string[],
+      };
+    }
+
+    let finalizedForm: ManagedContentEntry = {
+      ...currentForm,
+      bodyHtml: { ...currentForm.bodyHtml },
+      bodyRichText: { ...currentForm.bodyRichText },
+    };
+    const uploadedImageSrcs: string[] = [];
+
+    try {
+      for (const externalSrc of externalImageSrcs) {
+        const uploadedSrc = await uploadExternalImage(externalSrc);
+        uploadedImageSrcs.push(uploadedSrc);
+
+        finalizedForm = {
+          ...finalizedForm,
+          bodyHtml: {
+            en: replaceAllExact(finalizedForm.bodyHtml.en, externalSrc, uploadedSrc),
+            ko: replaceAllExact(finalizedForm.bodyHtml.ko, externalSrc, uploadedSrc),
+            ja: replaceAllExact(finalizedForm.bodyHtml.ja, externalSrc, uploadedSrc),
+          },
+          bodyRichText: {
+            en: replaceAllExact(finalizedForm.bodyRichText.en, externalSrc, uploadedSrc),
+            ko: replaceAllExact(finalizedForm.bodyRichText.ko, externalSrc, uploadedSrc),
+            ja: replaceAllExact(finalizedForm.bodyRichText.ja, externalSrc, uploadedSrc),
+          },
+        };
+      }
+    } catch (error) {
+      await Promise.all(uploadedImageSrcs.map((src) => deleteUploadedFile(src)));
+      throw error;
+    }
+
+    return {
+      finalizedForm,
       uploadedImageSrcs,
     };
   }
@@ -1447,6 +1593,21 @@ export default function AdminManagedContentDetailPage({
       setDialog({
         description: "이미지를 저장하지 못했습니다. 다시 시도해 주세요.",
         title: "이미지 업로드에 실패했습니다.",
+        type: "alert",
+      });
+      setIsSaving(false);
+      return;
+    }
+
+    try {
+      const finalizedExternalImages = await finalizeExternalImages(finalizedContentForm);
+      finalizedContentForm = finalizedExternalImages.finalizedForm;
+      uploadedImageSrcs = [...uploadedImageSrcs, ...finalizedExternalImages.uploadedImageSrcs];
+    } catch {
+      await Promise.all(uploadedImageSrcs.map((src) => deleteUploadedFile(src)));
+      setDialog({
+        description: "외부 이미지를 가져와 저장하지 못했습니다. 이미지 URL을 확인한 뒤 다시 시도해 주세요.",
+        title: "외부 이미지 저장에 실패했습니다.",
         type: "alert",
       });
       setIsSaving(false);

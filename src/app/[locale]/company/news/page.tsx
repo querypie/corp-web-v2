@@ -1,9 +1,15 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getLocalePath, isLocale } from "@/constants/i18n";
+import { isLocale } from "@/constants/i18n";
 import NewsListClientPage from "@/components/pages/news/NewsListClientPage";
 import { getNewsPageCopy } from "@/copy/company";
-import { formatPublicDate, getLocalizedContent, getPublicDetailHref, isPublishedContentVisible } from "@/features/content/data";
+import {
+  formatPublicDate,
+  getLocalizedContent,
+  getPublicDetailHref,
+  getPublicListHref,
+  isPublishedContentVisible,
+} from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
 import { withDynamicOgImage } from "@/features/seo/metadata";
 
@@ -43,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: metadataTitle,
     description: metadataDescription,
     alternates: {
-      canonical: getLocalePath(locale, "/company/news"),
+      canonical: getPublicListHref("news", locale),
     },
   }, { locale, title: metadataTitle, description: metadataDescription });
 }

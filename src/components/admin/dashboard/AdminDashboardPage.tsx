@@ -148,7 +148,7 @@ function buildTopContentPages(
     }
 
     for (const locale of item.visibleLocales) {
-      contentByPath.set(normalizePath(getPublicDetailHref(item.section, locale, item.id)), {
+      contentByPath.set(normalizePath(getPublicDetailHref(item.section, locale, item.id, item.categorySlug)), {
         item,
         locale,
       });
@@ -164,7 +164,7 @@ function buildTopContentPages(
 
       return {
         category: getManagedCategoryLabel(matched.item.section, matched.item.categorySlug, contentLocale),
-        href: getPublicDetailHref(matched.item.section, contentLocale, matched.item.id),
+        href: getPublicDetailHref(matched.item.section, contentLocale, matched.item.id, matched.item.categorySlug),
         imageSrc: matched.item.imageSrc,
         pageViews: page.value,
         title: getLocalizedContent(matched.item.title, contentLocale),
@@ -217,6 +217,7 @@ export default async function AdminDashboardPage() {
   const topCountry = getTopItem(analytics.countries);
   const topDevice = getTopItem(analytics.devices);
   const pageViewChange = getChangePercent(analytics.pageViews, analytics.previousPageViews);
+  const trendMaxValue = Math.max(...analytics.trend.map((entry) => entry.value), 1);
 
   return (
     <section className="mx-auto flex w-full max-w-[1000px] flex-col gap-5 py-5 md:gap-6 md:py-8">
@@ -274,8 +275,7 @@ export default async function AdminDashboardPage() {
                 <div className="flex h-[160px] items-end gap-1 rounded-box bg-bg px-5 py-5">
                   {analytics.trend.length > 0 ? (
                     analytics.trend.map((item) => {
-                      const maxValue = Math.max(...analytics.trend.map((entry) => entry.value), 1);
-                      const height = Math.max(4, Math.round((item.value / maxValue) * 100));
+                      const height = Math.max(4, Math.round((item.value / trendMaxValue) * 100));
 
                       return (
                         <div key={item.label} className="flex min-w-0 flex-1 items-end">

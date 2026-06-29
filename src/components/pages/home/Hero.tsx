@@ -59,11 +59,8 @@ export default function Hero({
                 </div>
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-1/2 top-full h-[100px] w-full -translate-x-1/2 overflow-hidden rounded-t-[14px]"
-                >
-                  <div className="absolute inset-x-0 top-0 h-[100px] rounded-t-[14px] bg-[linear-gradient(180deg,rgba(18,18,18,0.38)_0%,rgba(18,18,18,0.26)_34%,rgba(18,18,18,0.1)_68%,rgba(18,18,18,0)_100%)] shadow-[0_-10px_28px_rgba(18,18,18,0.32)] blur-[10px]" />
-                  <div className="absolute inset-x-[18px] top-0 h-[92px] rounded-t-[14px] bg-[linear-gradient(180deg,rgba(255,255,255,0.07)_0%,rgba(255,255,255,0.025)_30%,rgba(255,255,255,0)_100%)] blur-[18px]" />
-                </div>
+                  className="pointer-events-none absolute left-1/2 top-full h-[100px] w-full -translate-x-1/2 rounded-t-[14px] bg-[linear-gradient(180deg,rgba(18,18,18,0.36)_0%,rgba(18,18,18,0.24)_32%,rgba(18,18,18,0.11)_68%,rgba(18,18,18,0)_100%)]"
+                />
               </div>
             </div>
           </div>

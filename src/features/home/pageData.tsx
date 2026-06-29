@@ -7,6 +7,7 @@ import {
   getManagedCategoryLabel,
   getLocalizedContent,
   getPublicDetailHref,
+  getPublicListHref,
   isPublishedContentVisible,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
@@ -72,7 +73,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
 
         return {
           category: getManagedCategoryLabel(item.section, item.categorySlug, locale),
-          href: isExternal ? item.externalUrl : getPublicDetailHref(item.section, locale, item.id),
+          href: isExternal ? item.externalUrl : getPublicDetailHref(item.section, locale, item.id, item.categorySlug),
           imageSrc: getContentThumbnailSrc(item.imageSrc),
           isExternal,
           title,
@@ -101,7 +102,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
 
         return {
           category: getManagedCategoryLabel(item.section, item.categorySlug, locale),
-          href: isExternal ? item.externalUrl : getPublicDetailHref(item.section, locale, item.id),
+          href: isExternal ? item.externalUrl : getPublicDetailHref(item.section, locale, item.id, item.categorySlug),
           imageSrc: getContentThumbnailSrc(item.imageSrc),
           isExternal,
           title,
@@ -115,11 +116,11 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
 
     const contentListLinks = [
       {
-        href: getLocalePath(locale, "/features/demo"),
+        href: getPublicListHref("demo", locale),
         label: locale === "ko" ? "데모" : locale === "ja" ? "デモ" : "Demo",
       },
       {
-        href: getLocalePath(locale, "/features/documentation"),
+        href: getPublicListHref("documentation", locale),
         label: locale === "ko" ? "다큐멘테이션" : locale === "ja" ? "ドキュメンテーション" : "Documentation",
       },
     ];

@@ -93,7 +93,7 @@ export default function DocsDetailClientPage({
           category: previousLabel,
           href: previousItem.contentType === "outlink"
             ? previousItem.externalUrl
-            : getPublicDetailHref(section, locale, previousItem.id),
+            : getPublicDetailHref(section, locale, previousItem.id, previousItem.categorySlug),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
           isExternal: previousItem.contentType === "outlink",
           title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
@@ -104,7 +104,7 @@ export default function DocsDetailClientPage({
           category: nextLabel,
           href: nextItem.contentType === "outlink"
             ? nextItem.externalUrl
-            : getPublicDetailHref(section, locale, nextItem.id),
+            : getPublicDetailHref(section, locale, nextItem.id, nextItem.categorySlug),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
           isExternal: nextItem.contentType === "outlink",
           title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
@@ -132,8 +132,8 @@ export default function DocsDetailClientPage({
       downloadHref={
         currentItem.section !== "news" &&
         currentItem.enableDownloadButton &&
-        currentItem.downloadPdfSrc
-          ? getPublicDetailHref(section, locale, `${currentItem.id}/download`)
+          currentItem.downloadPdfSrc
+          ? `${getPublicDetailHref(section, locale, currentItem.id, currentItem.categorySlug)}/download`
           : undefined
       }
       docsHref={getCategoryHref(docsCategoryConfigs, currentItem.categorySlug, locale)}

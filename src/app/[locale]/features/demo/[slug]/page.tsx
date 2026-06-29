@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
-import { getLocalePath, isLocale } from "@/constants/i18n";
+import { isLocale } from "@/constants/i18n";
 import DemoDetailPage from "@/components/pages/demo/DemoDetailPage";
 import ContentGateOverlay from "@/components/pages/documentation/ContentGateOverlay";
 import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
@@ -73,7 +73,7 @@ export default async function DemoDetailRoute({ params }: Props) {
           category: getAdjacentContentLabel("previous", locale),
           href: previousItem.contentType === "outlink"
             ? previousItem.externalUrl
-            : getPublicDetailHref("demo", locale, previousItem.id),
+            : getPublicDetailHref("demo", locale, previousItem.id, previousItem.categorySlug),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
           isExternal: previousItem.contentType === "outlink",
           title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
@@ -84,7 +84,7 @@ export default async function DemoDetailRoute({ params }: Props) {
           category: getAdjacentContentLabel("next", locale),
           href: nextItem.contentType === "outlink"
             ? nextItem.externalUrl
-            : getPublicDetailHref("demo", locale, nextItem.id),
+            : getPublicDetailHref("demo", locale, nextItem.id, nextItem.categorySlug),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
           isExternal: nextItem.contentType === "outlink",
           title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
@@ -119,7 +119,7 @@ export default async function DemoDetailRoute({ params }: Props) {
         date: formatPublicDate(locale, currentEntry.dateIso),
         downloadHref:
           currentEntry.enableDownloadButton && currentEntry.downloadPdfSrc
-            ? getLocalePath(locale, `/features/demo/${resolvedSlug}/download`)
+            ? `${getPublicDetailHref("demo", locale, resolvedSlug, currentEntry.categorySlug)}/download`
             : undefined,
         hideHeroImage: currentEntry.hideHeroImage,
         heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),
@@ -163,7 +163,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title,
     description,
     alternates: {
-      canonical: getLocalePath(locale, `/features/demo/${resolvedSlug}`),
+      canonical: getPublicDetailHref("demo", locale, resolvedSlug, currentEntry.categorySlug),
     },
   }, { locale, title, description });
 }

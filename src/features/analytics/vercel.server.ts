@@ -111,23 +111,43 @@ function sumRows(rows: VercelAggregateRow[]) {
   return rows.reduce((total, row) => total + getMetricValue(row), 0);
 }
 
+export function aggregateAnalyticsItems<TItem extends VercelAnalyticsListItem>(items: TItem[]): TItem[] {
+  const itemsByLabel = new Map<string, TItem>();
+
+  for (const item of items) {
+    const existing = itemsByLabel.get(item.label);
+
+    if (existing) {
+      existing.value += item.value;
+    } else {
+      itemsByLabel.set(item.label, { ...item });
+    }
+  }
+
+  return Array.from(itemsByLabel.values());
+}
+
 function toListItems(rows: VercelAggregateRow[], dimension: string, limit: number): VercelAnalyticsListItem[] {
-  return rows
+  const items = rows
     .map((row) => ({
       label: getDimensionLabel(row, dimension),
       value: getMetricValue(row),
     }))
-    .filter((item) => item.value > 0)
+    .filter((item) => item.value > 0);
+
+  return aggregateAnalyticsItems(items)
     .sort((left, right) => right.value - left.value)
     .slice(0, limit);
 }
 
 function toTrendItems(rows: VercelAggregateRow[]): VercelAnalyticsTrendItem[] {
-  return rows
+  const items = rows
     .map((row) => ({
       label: getDimensionLabel(row, "day"),
       value: getMetricValue(row),
-    }))
+    }));
+
+  return aggregateAnalyticsItems(items)
     .sort((left, right) => left.label.localeCompare(right.label));
 }
 

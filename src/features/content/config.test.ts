@@ -4,82 +4,96 @@ import { getDocumentationSidebarMenuItems } from "./config";
 describe("getDocumentationSidebarMenuItems", () => {
   it("blogs 활성 상태에서 Documentation CMS 카테고리 메뉴를 반환한다", () => {
     expect(getDocumentationSidebarMenuItems("ko", "blogs")).toEqual([
-      { href: "/ko/features/documentation", isActive: false, kind: "link", label: "전체", slug: "all" },
+      { href: "/ko/documentation", isActive: false, kind: "link", label: "전체", slug: "all" },
       {
-        href: "/ko/features/documentation?category=introduction",
+        href: "/ko/introduction-deck",
         isActive: false,
         kind: "link",
-        label: "소개",
+        label: "Introduction Decks",
         slug: "introduction",
       },
       {
-        href: "/ko/features/documentation?category=glossary",
+        href: "/ko/glossary",
         isActive: false,
         kind: "link",
         label: "용어집",
         slug: "glossary",
       },
       {
-        href: "/ko/features/documentation?category=manuals",
+        href: "/ko/manuals",
         isActive: false,
         kind: "link",
         label: "매뉴얼",
         slug: "manuals",
       },
       {
-        href: "/ko/features/documentation?category=white-papers",
+        href: "/ko/whitepapers",
         isActive: false,
         kind: "link",
         label: "화이트페이퍼",
         slug: "white-papers",
       },
       {
-        href: "/ko/features/documentation?category=blogs",
+        href: "/ko/blog",
         isActive: true,
         kind: "link",
         label: "블로그",
         slug: "blogs",
+      },
+      {
+        href: "/ko/events",
+        isActive: false,
+        kind: "link",
+        label: "이벤트",
+        slug: "events",
       },
     ]);
   });
 
   it("white-papers 활성 상태에서 Documentation CMS 카테고리 메뉴를 반환한다", () => {
     expect(getDocumentationSidebarMenuItems("en", "white-papers")).toEqual([
-      { href: "/en/features/documentation", isActive: false, kind: "link", label: "All", slug: "all" },
+      { href: "/en/documentation", isActive: false, kind: "link", label: "All", slug: "all" },
       {
-        href: "/en/features/documentation?category=introduction",
+        href: "/en/introduction-deck",
         isActive: false,
         kind: "link",
-        label: "Introduction",
+        label: "Introduction Decks",
         slug: "introduction",
       },
       {
-        href: "/en/features/documentation?category=glossary",
+        href: "/en/glossary",
         isActive: false,
         kind: "link",
         label: "Glossary",
         slug: "glossary",
       },
       {
-        href: "/en/features/documentation?category=manuals",
+        href: "/en/manuals",
         isActive: false,
         kind: "link",
         label: "Manuals",
         slug: "manuals",
       },
       {
-        href: "/en/features/documentation?category=white-papers",
+        href: "/en/whitepapers",
         isActive: true,
         kind: "link",
         label: "White Papers",
         slug: "white-papers",
       },
       {
-        href: "/en/features/documentation?category=blogs",
+        href: "/en/blog",
         isActive: false,
         kind: "link",
-        label: "Blogs",
+        label: "Blog",
         slug: "blogs",
+      },
+      {
+        href: "/en/events",
+        isActive: false,
+        kind: "link",
+        label: "Events",
+        slug: "events",
       },
     ]);
   });

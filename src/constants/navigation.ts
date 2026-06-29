@@ -3,7 +3,9 @@ import {
   demoCategoryConfigs,
   docsCategoryConfigs,
   getCategoryHref,
+  getCategoryLabel,
 } from "@/features/content/config";
+import { getPublicCategoryHref } from "@/features/content/publicPaths";
 import { getSolutionHref } from "@/features/solutions/routes";
 
 export type NavigationSubItem = {
@@ -104,8 +106,8 @@ export function getFeaturesSubItems(locale: string): NavigationSubItem[] {
   }[locale] ?? ["Demo", "Documentation"];
 
   return [
-    { label: copy[0], href: getLocalePath(locale as Locale, "/features/demo") },
-    { label: copy[1], href: getLocalePath(locale as Locale, "/features/documentation") },
+    { label: copy[0], href: getCategoryHref(demoCategoryConfigs, "all", locale as Locale) },
+    { label: copy[1], href: getCategoryHref(docsCategoryConfigs, "all", locale as Locale) },
   ];
 }
 
@@ -113,11 +115,30 @@ export function getResourcesSubItems(locale: string): NavigationSubItem[] {
   const resolvedLocale = locale as Locale;
 
   return [
-    { label: "Introduction", href: getCategoryHref(docsCategoryConfigs, "introduction", resolvedLocale) },
-    { label: "Glossary", href: getCategoryHref(docsCategoryConfigs, "glossary", resolvedLocale) },
-    { label: "Manuals", href: getCategoryHref(docsCategoryConfigs, "manuals", resolvedLocale) },
-    { label: "White Papers", href: getCategoryHref(docsCategoryConfigs, "white-papers", resolvedLocale) },
-    { label: "Blog", href: getCategoryHref(docsCategoryConfigs, "blogs", resolvedLocale) },
+    {
+      label: getCategoryLabel(docsCategoryConfigs, "introduction", resolvedLocale),
+      href: getCategoryHref(docsCategoryConfigs, "introduction", resolvedLocale),
+    },
+    {
+      label: getCategoryLabel(docsCategoryConfigs, "glossary", resolvedLocale),
+      href: getCategoryHref(docsCategoryConfigs, "glossary", resolvedLocale),
+    },
+    {
+      label: getCategoryLabel(docsCategoryConfigs, "manuals", resolvedLocale),
+      href: getCategoryHref(docsCategoryConfigs, "manuals", resolvedLocale),
+    },
+    {
+      label: getCategoryLabel(docsCategoryConfigs, "white-papers", resolvedLocale),
+      href: getCategoryHref(docsCategoryConfigs, "white-papers", resolvedLocale),
+    },
+    {
+      label: getCategoryLabel(docsCategoryConfigs, "blogs", resolvedLocale),
+      href: getCategoryHref(docsCategoryConfigs, "blogs", resolvedLocale),
+    },
+    {
+      label: getCategoryLabel(docsCategoryConfigs, "events", resolvedLocale),
+      href: getCategoryHref(docsCategoryConfigs, "events", resolvedLocale),
+    },
   ];
 }
 
@@ -131,7 +152,7 @@ export function getCompanySubItems(locale: string): NavigationSubItem[] {
   return [
     { label: copy[0], href: getLocalePath(locale as Locale, "/company/about-us") },
     { label: copy[1], href: getLocalePath(locale as Locale, "/company/certifications") },
-    { label: copy[2], href: getLocalePath(locale as Locale, "/company/news") },
+    { label: copy[2], href: getPublicCategoryHref("news", locale as Locale, "news") },
     { label: copy[3], href: getLocalePath(locale as Locale, "/company/contact-us") },
   ];
 }
@@ -192,7 +213,7 @@ export function getFooterHref(item: string, locale: string) {
   }
 
   if (item === "Demo" || item === "데모" || item === "デモ") {
-    return getLocalePath(locale as Locale, "/features/demo");
+    return getCategoryHref(demoCategoryConfigs, "all", locale as Locale);
   }
 
   if (item === "Contact Us" || item === "문의하기" || item === "お問い合わせ") {
@@ -200,11 +221,11 @@ export function getFooterHref(item: string, locale: string) {
   }
 
   if (item === "News" || item === "뉴스" || item === "ニュース") {
-    return getLocalePath(locale as Locale, "/company/news");
+    return getPublicCategoryHref("news", locale as Locale, "news");
   }
 
   if (item === "Documentation" || item === "문서" || item === "ドキュメント") {
-    return getLocalePath(locale as Locale, "/features/documentation");
+    return getCategoryHref(docsCategoryConfigs, "all", locale as Locale);
   }
 
   if (item === "Try AIP Now" || item === "AIP 바로 시작하기" || item === "AIP 시작하기" || item === "AIPを今すぐ試す" || item === "AIPを始める") {

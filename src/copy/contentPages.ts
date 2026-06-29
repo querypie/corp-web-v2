@@ -10,19 +10,19 @@ export function getDemoPageCopy(locale: Locale): ContentListPageCopy {
   return {
     en: {
       metadataDescription:
-        "Explore QueryPie AI product demos, use cases, and webinars for enterprise AI and access control workflows.",
+        "Explore QueryPie AI product demos and use cases for enterprise AI and access control workflows.",
       metadataTitle: "Demo",
       title: "Demo",
     },
     ko: {
       metadataDescription:
-        "엔터프라이즈 AI와 접근 제어 워크플로를 위한 QueryPie AI 제품 데모, 활용 사례, 웨비나를 확인하세요.",
+        "엔터프라이즈 AI와 접근 제어 워크플로를 위한 QueryPie AI 제품 데모와 활용 사례를 확인하세요.",
       metadataTitle: "데모",
       title: "데모",
     },
     ja: {
       metadataDescription:
-        "エンタープライズ AI とアクセス制御ワークフローに関する QueryPie AI のデモ、ユースケース、ウェビナーをご覧ください。",
+        "エンタープライズ AI とアクセス制御ワークフローに関する QueryPie AI のデモとユースケースをご覧ください。",
       metadataTitle: "デモ",
       title: "デモ",
     },
@@ -33,19 +33,19 @@ export function getDocumentationPageCopy(locale: Locale): ContentListPageCopy {
   return {
     en: {
       metadataDescription:
-        "Read QueryPie AI documentation, guides, white papers, blogs, manuals, and product resources.",
+        "Read QueryPie AI documentation, guides, white papers, blogs, events, manuals, and product resources.",
       metadataTitle: "Documentation",
       title: "Documentation",
     },
     ko: {
       metadataDescription:
-        "QueryPie AI 문서, 가이드, 백서, 블로그, 매뉴얼과 제품 자료를 확인하세요.",
+        "QueryPie AI 문서, 가이드, 백서, 블로그, 이벤트, 매뉴얼과 제품 자료를 확인하세요.",
       metadataTitle: "문서",
       title: "문서",
     },
     ja: {
       metadataDescription:
-        "QueryPie AI のドキュメント、ガイド、ホワイトペーパー、ブログ、マニュアル、製品資料をご覧ください。",
+        "QueryPie AI のドキュメント、ガイド、ホワイトペーパー、ブログ、イベント、マニュアル、製品資料をご覧ください。",
       metadataTitle: "ドキュメント",
       title: "ドキュメント",
     },

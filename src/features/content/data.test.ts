@@ -8,6 +8,8 @@ import {
   getContentThumbnailSrc,
   getLocalizedContent,
   getNewsFormatLabel,
+  getPublicDetailHref,
+  getPublicListHref,
   getWriterLabel,
   hasLocalizedTitle,
   isPublishedContentVisible,
@@ -106,6 +108,13 @@ describe("isPublishedContentVisible", () => {
   it("해당 locale이 노출 대상으로 체크되어 있지 않으면 false를 반환한다", () => {
     const item = { status: "published" as const, visibleLocales: ["en" as const] };
     expect(isPublishedContentVisible(item, "ko")).toBe(false);
+  });
+});
+
+describe("public content hrefs", () => {
+  it("news 공개 목록과 상세 경로는 /news를 사용한다", () => {
+    expect(getPublicListHref("news", "ko")).toBe("/ko/news");
+    expect(getPublicDetailHref("news", "ko", "launch-update")).toBe("/ko/news/launch-update");
   });
 });
 

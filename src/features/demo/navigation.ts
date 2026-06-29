@@ -11,7 +11,6 @@ const demoCmsCategorySlugs: DemoCategorySlug[] = [
   "use-cases",
   "aip-features",
   "acp-features",
-  "webinars",
 ];
 
 export function getDemoSidebarMenuItems(
