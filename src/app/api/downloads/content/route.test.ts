@@ -2,33 +2,13 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 const {
-  mockExistsSync,
-  mockMkdir,
   mockReadContentItem,
-  mockReadFile,
-  mockRename,
   mockResolveMx,
   mockSlackPostMessage,
-  mockWriteFile,
 } = vi.hoisted(() => ({
-  mockExistsSync: vi.fn(),
-  mockMkdir: vi.fn().mockResolvedValue(undefined),
   mockReadContentItem: vi.fn(),
-  mockReadFile: vi.fn(),
-  mockRename: vi.fn().mockResolvedValue(undefined),
   mockResolveMx: vi.fn(),
   mockSlackPostMessage: vi.fn().mockResolvedValue({ ok: true }),
-  mockWriteFile: vi.fn().mockResolvedValue(undefined),
-}));
-
-vi.mock("fs", () => ({
-  existsSync: mockExistsSync,
-  promises: {
-    mkdir: mockMkdir,
-    readFile: mockReadFile,
-    rename: mockRename,
-    writeFile: mockWriteFile,
-  },
 }));
 
 vi.mock("@/features/content/contentState.server", () => ({
@@ -60,10 +40,7 @@ function stubMxRecord(valid: boolean) {
 
 afterEach(() => {
   vi.clearAllMocks();
-  mockMkdir.mockResolvedValue(undefined);
-  mockRename.mockResolvedValue(undefined);
   mockSlackPostMessage.mockResolvedValue({ ok: true });
-  mockWriteFile.mockResolvedValue(undefined);
   vi.unstubAllEnvs();
 });
 
@@ -143,11 +120,6 @@ describe("POST /api/downloads/content", () => {
   });
 
   describe("다운로드 모드", () => {
-    beforeEach(() => {
-      mockExistsSync.mockReturnValue(false);
-      mockReadFile.mockResolvedValue("[]");
-    });
-
     it("성공 시 downloadUrl과 previewUrl을 반환한다", async () => {
       const request = new Request("http://localhost/api/downloads/content", {
         method: "POST",
@@ -162,41 +134,7 @@ describe("POST /api/downloads/content", () => {
       expect(data.previewUrl).toBe(BASE_DOWNLOAD_PAYLOAD.pdfPreviewUrl);
     });
 
-    it("리드 데이터를 파일에 저장한다", async () => {
-      const request = new Request("http://localhost/api/downloads/content", {
-        method: "POST",
-        body: JSON.stringify(BASE_DOWNLOAD_PAYLOAD),
-      });
-      await POST(request);
-
-      expect(mockWriteFile).toHaveBeenCalledOnce();
-      const writtenContent = JSON.parse(mockWriteFile.mock.calls[0][1] as string) as unknown[];
-      expect(writtenContent).toHaveLength(1);
-      expect((writtenContent[0] as Record<string, unknown>).form).toEqual(BASE_DOWNLOAD_PAYLOAD.form);
-      expect(mockRename).toHaveBeenCalledOnce();
-    });
-
-    it("기존 리드가 있으면 앞에 추가한다", async () => {
-      const existingLead = { form: { email: "old@example.com" }, createdAt: "2026-01-01T00:00:00.000Z" };
-      mockExistsSync.mockReturnValue(true);
-      mockReadFile.mockResolvedValue(JSON.stringify([existingLead]));
-
-      const request = new Request("http://localhost/api/downloads/content", {
-        method: "POST",
-        body: JSON.stringify(BASE_DOWNLOAD_PAYLOAD),
-      });
-      await POST(request);
-
-      const writtenContent = JSON.parse(mockWriteFile.mock.calls[0][1] as string) as unknown[];
-      expect(writtenContent).toHaveLength(2);
-      // 새 리드가 앞에 온다
-      expect((writtenContent[0] as Record<string, unknown>).form).toEqual(BASE_DOWNLOAD_PAYLOAD.form);
-    });
-
     it("unlockCookieName이 있으면 쿠키를 설정한다", async () => {
-      mockExistsSync.mockReturnValue(false);
-      mockReadFile.mockResolvedValue("[]");
-
       const request = new Request("http://localhost/api/downloads/content", {
         method: "POST",
         body: JSON.stringify({
@@ -211,7 +149,6 @@ describe("POST /api/downloads/content", () => {
     });
 
     it("contentId와 section이 있으면 서버의 콘텐츠 메타로 다운로드 URL과 쿠키를 만든다", async () => {
-      mockExistsSync.mockReturnValue(false);
       mockReadContentItem.mockResolvedValue(BASE_CONTENT_ITEM);
 
       const request = new Request("http://localhost/api/downloads/content", {
@@ -252,14 +189,23 @@ describe("POST /api/downloads/content", () => {
       const response = await POST(request);
 
       expect(response.status).toBe(404);
-      expect(mockWriteFile).not.toHaveBeenCalled();
     });
 
     it("Slack 환경변수가 있으면 게이팅 폼 알림을 보낸다", async () => {
       vi.stubEnv("SLACK_BOT_OAUTH_TOKEN", "xoxb-test-token");
       vi.stubEnv("SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES", "C123TEST");
-      mockExistsSync.mockReturnValue(false);
-      mockReadFile.mockResolvedValue("[]");
+      mockReadContentItem.mockResolvedValue(BASE_CONTENT_ITEM);
+      const utmAttribution = encodeURIComponent(JSON.stringify({
+        first: { source: "google", landing: "/en/whitepapers", ts: "2026-01-01T00:00:00.000Z" },
+        recent: [{
+          source: "newsletter",
+          medium: "email",
+          campaign: "whitepaper",
+          content: "hero",
+          landing: "/en/whitepapers/test",
+          ts: "2026-01-02T00:00:00.000Z",
+        }],
+      }));
 
       const request = new Request("http://localhost/api/downloads/content", {
         method: "POST",
@@ -282,6 +228,7 @@ describe("POST /api/downloads/content", () => {
           referrerURL: "https://www.querypie.com/en/whitepapers/test",
           section: "documentation",
           title: "Test Whitepaper",
+          utmAttribution,
         }),
       });
 
@@ -291,18 +238,18 @@ describe("POST /api/downloads/content", () => {
       expect(mockSlackPostMessage).toHaveBeenCalledOnce();
       const slackPayload = mockSlackPostMessage.mock.calls[0][0] as { text: string; blocks: Array<{ text: { text: string } }> };
       expect(slackPayload.text).toContain("New Gating Form To Unlock Document Received");
-      expect(slackPayload.blocks[0].text.text).toContain("GatedContentKey: documentation:doc");
+      expect(slackPayload.blocks[0].text.text).toContain("New Gating Form To Unlock Document Received(whitepapers)");
+      expect(slackPayload.blocks[0].text.text).toContain("GatedContentKey: whitepapers:doc");
       expect(slackPayload.blocks[0].text.text).toContain("Product: AI Platform QueryPie AIP");
+      expect(slackPayload.blocks[0].text.text).toContain("MobilePhone");
+      expect(slackPayload.blocks[0].text.text).toContain("UTM Source");
+      expect(slackPayload.blocks[0].text.text).toContain("newsletter");
+      expect(slackPayload.blocks[0].text.text).toContain("UTM Last Landing URL");
       expect(slackPayload.blocks[0].text.text).toContain("RequestURI");
     });
   });
 
   describe("잠금 해제(unlock) 모드", () => {
-    beforeEach(() => {
-      mockExistsSync.mockReturnValue(false);
-      mockReadFile.mockResolvedValue("[]");
-    });
-
     it("attachment 필드 없이도 성공한다", async () => {
       const request = new Request("http://localhost/api/downloads/content", {
         method: "POST",

@@ -4,6 +4,7 @@ import {
   updateUtmAttribution,
   toSalesforceFields,
   UTM_ATTRIBUTION_COOKIE_KEY,
+  buildUtmSlackFields,
   readUtmCookie,
 } from "./utm";
 import { getCookie } from "./cookie";
@@ -109,6 +110,41 @@ describe("toSalesforceFields", () => {
     const fields = toSalesforceFields(encodeURIComponent(JSON.stringify(attribution)));
     expect(fields).not.toHaveProperty("pi__utm_source__c");
     expect(fields["pi__first_touch_url__c"]).toBe("/");
+  });
+});
+
+describe("buildUtmSlackFields", () => {
+  it("정상 쿠키에서 Slack 표시용 UTM 필드를 매핑한다", () => {
+    const attribution = {
+      first: { source: "google", landing: "/en/", ts: "2026-01-01T00:00:00Z" },
+      recent: [
+        {
+          source: "linkedin",
+          medium: "paid",
+          campaign: "q1",
+          content: "v2",
+          term: "data",
+          landing: "/en/contact",
+          ts: "2026-03-01T00:00:00Z",
+        },
+      ],
+    };
+    const encoded = encodeURIComponent(JSON.stringify(attribution));
+
+    expect(buildUtmSlackFields(encoded)).toEqual({
+      "UTM Source": "linkedin",
+      "UTM Medium": "paid",
+      "UTM Campaign": "q1",
+      "UTM Term": "data",
+      "UTM Content": "v2",
+      "UTM First Landing URL": "/en/",
+      "UTM Last Landing URL": "/en/contact",
+    });
+  });
+
+  it("쿠키가 없거나 손상되면 빈 객체를 반환한다", () => {
+    expect(buildUtmSlackFields(undefined)).toEqual({});
+    expect(buildUtmSlackFields("not-valid-json%%%")).toEqual({});
   });
 });
 

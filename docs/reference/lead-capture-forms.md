@@ -123,7 +123,6 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 Salesforce 
 | `src/features/content/gating.ts` | 언락 쿠키 상수·유틸 (`CONTENT_UNLOCK_COOKIE_PREFIX`, `getContentUnlockCookieName`) |
 | `src/components/pages/documentation/ContentLeadForm.tsx` | Client Component — 폼 상태 관리, submit 핸들러 |
 | `src/app/api/downloads/content/route.ts` | `POST /api/downloads/content` 핸들러 |
-| `src/content/state/content-download-leads.json` | 수집된 리드 저장 파일 (로컬 파일시스템) |
 
 ### 모드
 
@@ -143,9 +142,8 @@ Contact Us 폼과 동일한 필드 구성 (`src/features/contact/copy.ts` 공유
 1. **페이로드 검증** — `form` 누락 시 `400` 반환; `download` 모드에서 `attachmentUrl`, `attachmentFileName`, `returnUrl`, `pdfPreviewUrl` 중 하나라도 없으면 `400` 반환
 2. **콘텐츠 검증** — `contentId`, `section`이 있으면 실제 게시 콘텐츠와 PDF 첨부 상태를 서버에서 재확인
 3. **이메일 검증** — 제출 이메일 domain의 MX record 확인. 실패 시 `400` 반환
-4. **리드 저장** — `src/content/state/content-download-leads.json`에 append (createdAt, form, locale, mode, 콘텐츠 메타 포함)
-5. **Slack 알림** — 환경변수가 있으면 `Gating Form To Unlock/Download Document` 알림 전송. 실패해도 제출 성공은 막지 않음
-6. **응답**
+4. **Slack 알림** — 환경변수가 있으면 `Gating Form To Unlock/Download Document` 알림 전송. 실패해도 제출 성공은 막지 않음
+5. **응답**
    - `download` 모드: `{ downloadUrl, previewUrl }` 반환 (`downloadUrl`은 `/api/downloads/file` 프록시 경유)
    - `unlock` 모드: `{ unlocked: true }` 반환 + `unlockCookieName` 쿠키 설정
 
@@ -190,22 +188,4 @@ PDF 버튼 동작:
 | `SLACK_BOT_OAUTH_TOKEN` | Slack 알림 전송 | — |
 | `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | Slack 알림 채널 | — |
 
-Slack 환경변수가 없거나 전송에 실패해도 리드 저장과 언락 성공은 유지한다.
-
-### 리드 데이터 스키마
-
-`src/content/state/content-download-leads.json` 에 저장되는 항목 구조:
-
-```json
-{
-  "createdAt": "2026-04-16T00:00:00.000Z",
-  "form": { "firstName": "...", "email": "...", "products": ["..."], ... },
-  "locale": "en",
-  "mode": "download",
-  "title": "콘텐츠 제목",
-  "attachmentFileName": "report.pdf",
-  "attachmentUrl": "https://...",
-  "pdfPreviewUrl": "https://...",
-  "returnUrl": "/en/whitepapers/..."
-}
-```
+Slack 환경변수가 없거나 전송에 실패해도 언락 성공은 유지한다.
