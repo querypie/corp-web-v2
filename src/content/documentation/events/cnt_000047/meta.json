@@ -1,0 +1,45 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "events",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "downloadCoverImageSrc": "/documentation/events/3dk-ep4-ja.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "querypie-kubernetes-management-ja",
+  "imageSrc": "/documentation/events/3dk-ep4-ja.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 11,
+  "status": "published",
+  "storageId": "cnt_000047",
+  "summary": {
+    "en": "エピソード 4では、QueryPie のクーバネティスアクセス制御ソリューションである “QueryPie KAC (Kubernetes Access Controller)” を活用して、クーバネティス環境でも堅固なセキュリティ環境を維持する方法について掘り下げてみました。",
+    "ko": "エピソード 4では、QueryPie のクーバネティスアクセス制御ソリューションである “QueryPie KAC (Kubernetes Access Controller)” を活用して、クーバネティス環境でも堅固なセキュリティ環境を維持する方法について掘り下げてみました。",
+    "ja": "エピソード 4では、QueryPie のクーバネティスアクセス制御ソリューションである “QueryPie KAC (Kubernetes Access Controller)” を活用して、クーバネティス環境でも堅固なセキュリティ環境を維持する方法について掘り下げてみました。"
+  },
+  "title": {
+    "en": "エピソード 4 QueryPie KAC: クーバネティスをノックアウト！ - マルチ クーバネティス クラスタ、クーバネティス リソース、Podアクセス履歴",
+    "ko": "エピソード 4 QueryPie KAC: クーバネティスをノックアウト！ - マルチ クーバネティス クラスタ、クーバネティス リソース、Podアクセス履歴",
+    "ja": "エピソード 4 QueryPie KAC: クーバネティスをノックアウト！ - マルチ クーバネティス クラスタ、クーバネティス リソース、Podアクセス履歴"
+  },
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/events/cnt_000047/en.html",
+      "jsonPath": "src/content/documentation/events/cnt_000047/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/events/cnt_000047/ko.html",
+      "jsonPath": "src/content/documentation/events/cnt_000047/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/events/cnt_000047/ja.html",
+      "jsonPath": "src/content/documentation/events/cnt_000047/ja.tiptap.json"
+    }
+  }
+}

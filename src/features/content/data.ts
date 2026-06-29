@@ -1,4 +1,4 @@
-import { getLocalePath, type Locale } from "@/constants/i18n";
+import type { Locale } from "@/constants/i18n";
 import {
   demoCategoryConfigs,
   docsCategoryConfigs,
@@ -6,6 +6,7 @@ import {
   type DocsCategorySlug,
   type NewsCategorySlug,
 } from "./config";
+import { getPublicCategoryHref } from "./publicPaths";
 
 export type ManagedContentSection = "demo" | "documentation" | "news";
 export type ManagedContentStatus = "hidden" | "published";
@@ -444,24 +445,45 @@ export function getAdminDetailHref(
   return `/admin/${section}/${categorySlug}/${slug}`;
 }
 
-export function getPublicListHref(section: ManagedContentSection, locale: Locale) {
-  if (section === "demo") return getLocalePath(locale, "/features/demo");
-  if (section === "documentation") return getLocalePath(locale, "/features/documentation");
-  return getLocalePath(locale, "/company/news");
+export function getPublicListHref(
+  section: ManagedContentSection,
+  locale: Locale,
+  categorySlug?: DemoCategorySlug | DocsCategorySlug | ManagedContentCategorySlug,
+) {
+  if (section === "demo") {
+    return getPublicCategoryHref(
+      "demo",
+      locale,
+      categorySlug && categorySlug !== "news" ? categorySlug as DemoCategorySlug : "all",
+    );
+  }
+
+  if (section === "documentation") {
+    return getPublicCategoryHref(
+      "documentation",
+      locale,
+      categorySlug && categorySlug !== "news" ? categorySlug as DocsCategorySlug : "all",
+    );
+  }
+
+  return getPublicCategoryHref("news", locale, "news");
 }
 
 export function getPublicDetailHref(
   section: ManagedContentSection,
   locale: Locale,
   slug: string,
+  categorySlug?: ManagedContentCategorySlug,
 ) {
   if (section === "demo") {
-    return getLocalePath(locale, `/features/demo/${slug}`);
+    const listHref = getPublicListHref(section, locale, categorySlug);
+    return `${listHref}/${slug}`;
   }
 
   if (section === "documentation") {
-    return getLocalePath(locale, `/features/documentation/${slug}`);
+    const listHref = getPublicListHref(section, locale, categorySlug);
+    return `${listHref}/${slug}`;
   }
 
-  return getLocalePath(locale, `/company/news/${slug}`);
+  return `${getPublicListHref(section, locale)}/${slug}`;
 }

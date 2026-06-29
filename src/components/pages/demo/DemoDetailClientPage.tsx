@@ -92,7 +92,7 @@ export default function DemoDetailClientPage({
           category: previousLabel,
           href: previousItem.contentType === "outlink"
             ? previousItem.externalUrl
-            : getPublicDetailHref("demo", locale, previousItem.id),
+            : getPublicDetailHref("demo", locale, previousItem.id, previousItem.categorySlug),
           imageSrc: getContentThumbnailSrc(previousItem.imageSrc),
           isExternal: previousItem.contentType === "outlink",
           title: getLocalizedContent(previousItem.title, getResolvedContentLocale(previousItem, locale)),
@@ -103,7 +103,7 @@ export default function DemoDetailClientPage({
           category: nextLabel,
           href: nextItem.contentType === "outlink"
             ? nextItem.externalUrl
-            : getPublicDetailHref("demo", locale, nextItem.id),
+            : getPublicDetailHref("demo", locale, nextItem.id, nextItem.categorySlug),
           imageSrc: getContentThumbnailSrc(nextItem.imageSrc),
           isExternal: nextItem.contentType === "outlink",
           title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
@@ -130,7 +130,7 @@ export default function DemoDetailClientPage({
       contentListItems={relatedPublishedItems}
       downloadHref={
         currentUseCase.enableDownloadButton && currentUseCase.downloadPdfSrc
-          ? getPublicDetailHref("demo", locale, `${currentUseCase.id}/download`)
+          ? `${getPublicDetailHref("demo", locale, currentUseCase.id, currentUseCase.categorySlug)}/download`
           : undefined
       }
       docsHref={getCategoryHref(demoCategoryConfigs, currentUseCase.categorySlug, locale)}

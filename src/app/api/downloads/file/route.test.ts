@@ -39,13 +39,13 @@ describe("GET /api/downloads/file", () => {
     mockReadFile.mockResolvedValue(Buffer.from("pdf-data"));
 
     const request = new Request(
-      "http://localhost/api/downloads/file?src=/demo/webinars/sample.pdf&fileName=sample.pdf",
+      "http://localhost/api/downloads/file?src=/demo/use-cases/sample.pdf&fileName=sample.pdf",
     );
     const response = await GET(request);
 
     expect(response.status).toBe(200);
     expect(mockReadFile).toHaveBeenCalledWith(
-      path.join(process.cwd(), "public", "demo", "webinars", "sample.pdf"),
+      path.join(process.cwd(), "public", "demo", "use-cases", "sample.pdf"),
     );
   });
 

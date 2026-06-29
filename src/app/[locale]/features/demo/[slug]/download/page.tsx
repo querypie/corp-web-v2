@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import ContentDownloadPage from "@/components/pages/documentation/ContentDownloadPage";
-import { isLocale, getLocalePath } from "@/constants/i18n";
+import { isLocale } from "@/constants/i18n";
 import { getContactPageCopy } from "@/copy/contact";
-import { getLocalizedContent, getResolvedContentLocale, isPublishedContentAccessible } from "@/features/content/data";
+import { getLocalizedContent, getPublicDetailHref, getResolvedContentLocale, isPublishedContentAccessible } from "@/features/content/data";
 import { readContentItem } from "@/features/content/contentState.server";
 import { getContentUnlockCookieName } from "@/features/content/gating";
 import { withDynamicOgImage } from "@/features/seo/metadata";
@@ -38,7 +38,7 @@ export default async function DemoDownloadRoute({ params }: DemoDownloadRoutePro
       coverImageSrc={currentEntry.downloadCoverImageSrc || currentEntry.imageSrc || "/assets/common/fallback-contents.jpg"}
       locale={locale}
       pdfPreviewUrl={currentEntry.downloadPdfSrc}
-      returnUrl={getLocalePath(locale, `/features/demo/${resolvedSlug}`)}
+      returnUrl={getPublicDetailHref("demo", locale, resolvedSlug, currentEntry.categorySlug)}
       section="demo"
       title={getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale))}
       unlockCookieName={getContentUnlockCookieName(currentEntry.id, "demo")}
@@ -70,7 +70,7 @@ export async function generateMetadata({ params }: DemoDownloadRouteProps): Prom
     title,
     description,
     alternates: {
-      canonical: getLocalePath(locale, `/features/demo/${resolvedSlug}/download`),
+      canonical: `${getPublicDetailHref("demo", locale, resolvedSlug, currentEntry.categorySlug)}/download`,
     },
   }, { locale, title, description });
 }

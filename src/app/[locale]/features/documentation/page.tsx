@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getLocalePath, isLocale } from "@/constants/i18n";
+import { isLocale } from "@/constants/i18n";
 import DocsListClientPage from "@/components/pages/documentation/DocumentationListClientPage";
 import { getDocumentationPageCopy } from "@/copy/contentPages";
 import {
@@ -13,6 +13,7 @@ import {
   getLocalizedContent,
   isPublishedContentVisible,
   getPublicDetailHref,
+  getPublicListHref,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
 import { withDynamicOgImage } from "@/features/seo/metadata";
@@ -40,9 +41,11 @@ export default async function DocumentationPage({ params, searchParams }: DocsPa
 
   const fallbackItems = docsItems.map((item) => ({
     category: getCategoryLabel(docsCategoryConfigs, item.categorySlug, locale),
-    date: item.categorySlug === "blogs" ? formatPublicDate(locale, item.dateIso) : undefined,
+    date: item.categorySlug === "blogs" || item.categorySlug === "events"
+      ? formatPublicDate(locale, item.dateIso)
+      : undefined,
     description: getLocalizedContent(item.summary, locale),
-    href: item.contentType === "outlink" ? item.externalUrl : getPublicDetailHref("documentation", locale, item.id),
+    href: item.contentType === "outlink" ? item.externalUrl : getPublicDetailHref("documentation", locale, item.id, item.categorySlug),
     imageSrc: item.imageSrc,
     isExternal: item.contentType === "outlink",
     title: getLocalizedContent(item.title, locale),
@@ -60,18 +63,23 @@ export default async function DocumentationPage({ params, searchParams }: DocsPa
   );
 }
 
-export async function generateMetadata({ params }: DocsPageProps): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: DocsPageProps): Promise<Metadata> {
   const { locale } = await params;
+  const { category } = await searchParams;
 
   if (!isLocale(locale)) return {};
 
   const { metadataDescription, metadataTitle } = getDocumentationPageCopy(locale);
+  const selectedCategory: DocsCategorySlug =
+    category && category !== "all" && docsCategoryConfigs.some((config) => config.slug === category)
+      ? category as DocsCategorySlug
+      : "all";
 
   return withDynamicOgImage({
     title: metadataTitle,
     description: metadataDescription,
     alternates: {
-      canonical: getLocalePath(locale, "/features/documentation"),
+      canonical: getPublicListHref("documentation", locale, selectedCategory),
     },
   }, { locale, title: metadataTitle, description: metadataDescription });
 }

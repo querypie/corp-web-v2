@@ -1,11 +1,11 @@
-import { getLocalePath, type Locale } from "@/constants/i18n";
+import type { Locale } from "@/constants/i18n";
+import { getPublicCategoryHref } from "@/features/content/publicPaths";
 
 export type DemoCategorySlug =
   | "all"
   | "use-cases"
   | "aip-features"
-  | "acp-features"
-  | "webinars";
+  | "acp-features";
 
 export type DocsCategorySlug =
   | "all"
@@ -13,7 +13,8 @@ export type DocsCategorySlug =
   | "glossary"
   | "manuals"
   | "white-papers"
-  | "blogs";
+  | "blogs"
+  | "events";
 
 export type NewsCategorySlug = "news";
 
@@ -55,62 +56,62 @@ type AdminCategoryConfig<TSlug extends string> = {
 
 export const demoCategoryConfigs: CategoryConfig<DemoCategorySlug>[] = [
   {
-    href: (locale) => getLocalePath(locale, "/features/demo"),
+    href: (locale) => getPublicCategoryHref("demo", locale, "all"),
     label: { en: "All", ko: "전체", ja: "すべて" },
     slug: "all",
   },
   {
-    href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=use-cases`,
+    href: (locale) => getPublicCategoryHref("demo", locale, "use-cases"),
     label: { en: "Use Cases", ko: "활용 사례", ja: "ユースケース" },
     slug: "use-cases",
   },
   {
-    href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=aip-features`,
+    href: (locale) => getPublicCategoryHref("demo", locale, "aip-features"),
     label: { en: "AIP Features", ko: "AIP 기능", ja: "AIP機能" },
     slug: "aip-features",
   },
   {
-    href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=acp-features`,
+    href: (locale) => getPublicCategoryHref("demo", locale, "acp-features"),
     label: { en: "ACP Features", ko: "ACP 기능", ja: "ACP機能" },
     slug: "acp-features",
-  },
-  {
-    href: (locale) => `${getLocalePath(locale, "/features/demo")}?category=webinars`,
-    label: { en: "Webinars", ko: "웨비나", ja: "ウェビナー" },
-    slug: "webinars",
   },
 ];
 
 export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
   {
-    href: (locale) => getLocalePath(locale, "/features/documentation"),
+    href: (locale) => getPublicCategoryHref("documentation", locale, "all"),
     label: { en: "All", ko: "전체", ja: "すべて" },
     slug: "all",
   },
   {
-    href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=introduction`,
-    label: { en: "Introduction", ko: "소개", ja: "紹介" },
+    href: (locale) => getPublicCategoryHref("documentation", locale, "introduction"),
+    label: { en: "Introduction Decks", ko: "Introduction Decks", ja: "Introduction Decks" },
     slug: "introduction",
   },
   {
-    href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=glossary`,
+    href: (locale) => getPublicCategoryHref("documentation", locale, "glossary"),
     label: { en: "Glossary", ko: "용어집", ja: "用語集" },
     slug: "glossary",
   },
   {
-    href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=manuals`,
+    href: (locale) => getPublicCategoryHref("documentation", locale, "manuals"),
     label: { en: "Manuals", ko: "매뉴얼", ja: "マニュアル" },
     slug: "manuals",
   },
   {
-    href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=white-papers`,
+    href: (locale) => getPublicCategoryHref("documentation", locale, "white-papers"),
     label: { en: "White Papers", ko: "화이트페이퍼", ja: "ホワイトペーパー" },
     slug: "white-papers",
   },
   {
-    href: (locale) => `${getLocalePath(locale, "/features/documentation")}?category=blogs`,
-    label: { en: "Blogs", ko: "블로그", ja: "ブログ" },
+    href: (locale) => getPublicCategoryHref("documentation", locale, "blogs"),
+    label: { en: "Blog", ko: "블로그", ja: "ブログ" },
     slug: "blogs",
+  },
+  {
+    href: (locale) => getPublicCategoryHref("documentation", locale, "events"),
+    label: { en: "Events", ko: "이벤트", ja: "イベント" },
+    slug: "events",
   },
 ];
 
@@ -143,13 +144,6 @@ const demoAdminCategoryConfigs: AdminCategoryConfig<DemoCategorySlug>[] = [
     slug: "acp-features",
     title: "ACP Features",
   },
-  {
-    description: "웨비나 데모, 다시보기 링크, 후속 안내 콘텐츠를 관리합니다.",
-    href: "/admin/demo/webinars",
-    label: "Webinars",
-    slug: "webinars",
-    title: "Webinars",
-  },
 ];
 
 const docsAdminCategoryConfigs: AdminCategoryConfig<DocsCategorySlug>[] = [
@@ -163,9 +157,9 @@ const docsAdminCategoryConfigs: AdminCategoryConfig<DocsCategorySlug>[] = [
   {
     description: "소개 덱 콘텐츠와 노출 순서를 관리합니다.",
     href: "/admin/documentation/introduction",
-    label: "Introduction",
+    label: "Introduction Decks",
     slug: "introduction",
-    title: "Introduction",
+    title: "Introduction Decks",
   },
   {
     description: "용어집 콘텐츠와 게시 노출 상태를 관리합니다.",
@@ -191,9 +185,16 @@ const docsAdminCategoryConfigs: AdminCategoryConfig<DocsCategorySlug>[] = [
   {
     description: "블로그 문서의 게시 상태와 노출 순서를 관리합니다.",
     href: "/admin/documentation/blogs",
-    label: "Blogs",
+    label: "Blog",
     slug: "blogs",
-    title: "Blogs",
+    title: "Blog",
+  },
+  {
+    description: "이벤트, 웨비나, 세미나 콘텐츠와 게시 상태를 관리합니다.",
+    href: "/admin/documentation/events",
+    label: "Events",
+    slug: "events",
+    title: "Events",
   },
 ];
 
@@ -246,6 +247,7 @@ const docsCmsCategorySlugs: DocsCategorySlug[] = [
   "manuals",
   "white-papers",
   "blogs",
+  "events",
 ];
 
 export function getDocumentationSidebarMenuItems(

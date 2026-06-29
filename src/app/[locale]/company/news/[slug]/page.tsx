@@ -1,6 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
-import { getLocalePath, isLocale } from "@/constants/i18n";
+import { isLocale } from "@/constants/i18n";
 import NewsDetailPage from "@/components/pages/news/NewsDetailPage";
 import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
 import {
@@ -10,6 +10,7 @@ import {
   getLocalizedContent,
   getNewsFormatLabel,
   getPublicDetailHref,
+  getPublicListHref,
   getResolvedContentLocale,
   isPublishedContentAccessible,
 } from "@/features/content/data";
@@ -82,7 +83,7 @@ export default async function NewsDetailRoute({ params }: Props) {
   return (
     <NewsDetailPage
       {...({
-        docsHref: getLocalePath(locale, "/company/news"),
+        docsHref: getPublicListHref("news", locale),
         slug: decodedSlug,
         bodyHtml: getLocalizedContent(currentEntry.bodyHtml, contentLocale),
         category: "News",

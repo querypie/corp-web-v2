@@ -3,7 +3,7 @@ import { locales, type Locale } from "@/constants/i18n";
 import { getLocalePath } from "@/constants/i18n";
 import { siteUrl } from "@/constants/site";
 import { readContentState } from "@/features/content/contentState.server";
-import { getPublicDetailHref, isPublishedContentVisible } from "@/features/content/data";
+import { getPublicDetailHref, getPublicListHref, isPublishedContentVisible } from "@/features/content/data";
 
 function absolute(path: string) {
   return new URL(path, siteUrl).toString();
@@ -24,9 +24,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const staticEntries = [
     ...perLocale("/"),
-    ...perLocale("/features/demo"),
-    ...perLocale("/features/documentation"),
-    ...perLocale("/company/news"),
+    ...perLocale("/demo"),
+    ...perLocale("/demo/use-cases"),
+    ...perLocale("/demo/aip"),
+    ...perLocale("/demo/acp"),
+    ...perLocale("/documentation"),
+    ...perLocale("/introduction-deck"),
+    ...perLocale("/glossary"),
+    ...perLocale("/manuals"),
+    ...perLocale("/whitepapers"),
+    ...perLocale("/blog"),
+    ...perLocale("/events"),
+    ...locales.map((locale) => ({
+      url: absolute(getPublicListHref("news", locale)),
+    })),
     ...perLocale("/company/certifications"),
     ...perLocale("/company/about-us"),
     ...perLocale("/company/contact-us"),
@@ -38,7 +49,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     demoItems
       .filter((item) => isPublishedContentVisible(item, locale as Locale) && item.contentType !== "outlink")
       .map((item) => ({
-        url: absolute(getPublicDetailHref("demo", locale as Locale, item.id)),
+        url: absolute(getPublicDetailHref("demo", locale as Locale, item.id, item.categorySlug)),
         lastModified: item.dateIso || undefined,
       })),
   );
@@ -47,7 +58,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     docsItems
       .filter((item) => isPublishedContentVisible(item, locale as Locale) && item.contentType !== "outlink")
       .map((item) => ({
-        url: absolute(getPublicDetailHref("documentation", locale as Locale, item.id)),
+        url: absolute(getPublicDetailHref("documentation", locale as Locale, item.id, item.categorySlug)),
         lastModified: item.dateIso || undefined,
       })),
   );

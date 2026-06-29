@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { getLocalePath, isLocale } from "@/constants/i18n";
+import { isLocale } from "@/constants/i18n";
 import DemoListClientPage from "@/components/pages/demo/DemoListClientPage";
 import { getDemoPageCopy } from "@/copy/contentPages";
 import {
@@ -10,10 +10,10 @@ import {
   type DemoCategorySlug,
 } from "@/features/content/config";
 import {
-  formatPublicDate,
   getLocalizedContent,
   isPublishedContentVisible,
   getPublicDetailHref,
+  getPublicListHref,
   sortPublicContentItems,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
@@ -42,9 +42,9 @@ export default async function DemoPage({ params, searchParams }: Props) {
 
   const fallbackItems = sortedDemoItems.map((item) => ({
     category: getCategoryLabel(demoCategoryConfigs, item.categorySlug, locale),
-    date: item.categorySlug === "webinars" ? formatPublicDate(locale, item.dateIso) : undefined,
+    date: undefined,
     description: getLocalizedContent(item.summary, locale),
-    href: item.contentType === "outlink" ? item.externalUrl : getPublicDetailHref("demo", locale, item.id),
+    href: item.contentType === "outlink" ? item.externalUrl : getPublicDetailHref("demo", locale, item.id, item.categorySlug),
     imageSrc: item.imageSrc,
     isExternal: item.contentType === "outlink",
     title: getLocalizedContent(item.title, locale),
@@ -62,18 +62,21 @@ export default async function DemoPage({ params, searchParams }: Props) {
   );
 }
 
-export async function generateMetadata({ params }: Pick<Props, "params">): Promise<Metadata> {
+export async function generateMetadata({ params, searchParams }: Props): Promise<Metadata> {
   const { locale } = await params;
+  const { category } = await searchParams;
 
   if (!isLocale(locale)) return {};
 
   const { metadataDescription, metadataTitle } = getDemoPageCopy(locale);
+  const selectedCategory: DemoCategorySlug =
+    isDemoCategorySlug(category) && category !== "all" ? category : "all";
 
   return withDynamicOgImage({
     title: metadataTitle,
     description: metadataDescription,
     alternates: {
-      canonical: getLocalePath(locale, "/features/demo"),
+      canonical: getPublicListHref("demo", locale, selectedCategory),
     },
   }, { locale, title: metadataTitle, description: metadataDescription });
 }

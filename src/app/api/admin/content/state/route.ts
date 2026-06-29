@@ -8,7 +8,7 @@ import {
   updateAuthoredContentMeta,
 } from "@/features/content/authored.server";
 import { readContentState } from "@/features/content/contentState.server";
-import { stripManagedContentBodies } from "@/features/content/data";
+import { getPublicDetailHref, getPublicListHref, stripManagedContentBodies } from "@/features/content/data";
 import type {
   ManagedContentCategorySlug,
   ManagedContentEntry,
@@ -99,12 +99,12 @@ function isManagedContentCategorySlug(value: unknown): value is ManagedContentCa
     value === "use-cases" ||
     value === "aip-features" ||
     value === "acp-features" ||
-    value === "webinars" ||
     value === "introduction" ||
     value === "glossary" ||
     value === "manuals" ||
     value === "white-papers" ||
     value === "blogs" ||
+    value === "events" ||
     value === "news"
   );
 }
@@ -125,8 +125,7 @@ function isCategorySlugAllowedForSection(
     return (
       categorySlug === "use-cases" ||
       categorySlug === "aip-features" ||
-      categorySlug === "acp-features" ||
-      categorySlug === "webinars"
+      categorySlug === "acp-features"
     );
   }
 
@@ -135,7 +134,8 @@ function isCategorySlugAllowedForSection(
     categorySlug === "glossary" ||
     categorySlug === "manuals" ||
     categorySlug === "white-papers" ||
-    categorySlug === "blogs"
+    categorySlug === "blogs" ||
+    categorySlug === "events"
   );
 }
 
@@ -280,9 +280,14 @@ function revalidateAdminPaths(item: Pick<ManagedContentEntry, "section" | "categ
   revalidatePath(`/admin/${item.section}/${item.categorySlug}/${item.id}`);
 }
 
-function revalidatePublicPaths(item: Pick<ManagedContentEntry, "section" | "id">) {
+function revalidatePublicPaths(item: Pick<ManagedContentEntry, "section" | "categorySlug" | "id">) {
   for (const locale of locales) {
     if (item.section === "documentation") {
+      const detailHref = getPublicDetailHref(item.section, locale, item.id, item.categorySlug);
+      revalidatePath(getPublicListHref(item.section, locale));
+      revalidatePath(getPublicListHref(item.section, locale, item.categorySlug));
+      revalidatePath(detailHref);
+      revalidatePath(`${detailHref}/download`);
       revalidatePath(getLocalePath(locale, "/features/documentation"));
       revalidatePath(getLocalePath(locale, `/features/documentation/${item.id}`));
       revalidatePath(getLocalePath(locale, `/features/documentation/${item.id}/download`));
@@ -290,12 +295,19 @@ function revalidatePublicPaths(item: Pick<ManagedContentEntry, "section" | "id">
     }
 
     if (item.section === "demo") {
+      const detailHref = getPublicDetailHref(item.section, locale, item.id, item.categorySlug);
+      revalidatePath(getPublicListHref(item.section, locale));
+      revalidatePath(getPublicListHref(item.section, locale, item.categorySlug));
+      revalidatePath(detailHref);
+      revalidatePath(`${detailHref}/download`);
       revalidatePath(getLocalePath(locale, "/features/demo"));
       revalidatePath(getLocalePath(locale, `/features/demo/${item.id}`));
       revalidatePath(getLocalePath(locale, `/features/demo/${item.id}/download`));
       continue;
     }
 
+    revalidatePath(getPublicListHref(item.section, locale, item.categorySlug));
+    revalidatePath(getPublicDetailHref(item.section, locale, item.id, item.categorySlug));
     revalidatePath(getLocalePath(locale, "/company/news"));
     revalidatePath(getLocalePath(locale, `/company/news/${item.id}`));
   }
