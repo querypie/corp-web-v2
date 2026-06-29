@@ -97,10 +97,10 @@ Salesforce는 리드 데이터를 보관하지만 알림 경로가 아니다. �
 
 | 상황 | HTTP | 본문 |
 |------|------|------|
-| Slack 환경변수 미설정 | 500 | `{ success: false, errorMessage: "Server configuration error. Please contact support." }` |
-| 필수 필드 누락 | 400 | `{ success: false, errorMessage: "Required fields are missing." }` |
-| MX 레코드 없음 | 200 | `{ success: false, errorMessage: "Please enter a valid email address." }` |
-| Slack 실패 | 200 | `{ success: false }` |
+| 필수 필드 누락 | 400 | `{ success: false, errorCode: "missing_required_fields", errorMessage: "Required fields are missing." }` |
+| MX 레코드 없음 | 200 | `{ success: false, errorCode: "invalid_email", errorMessage: "Please enter a valid email address." }` |
+| Slack 환경변수 미설정 | 200 | Slack 알림 skip, `{ success: true }` |
+| Slack 실패 | 200 | 에러 로그만 남기고 `{ success: true }` |
 | 성공 | 200 | `{ success: true }` |
 
 ---
@@ -109,8 +109,8 @@ Salesforce는 리드 데이터를 보관하지만 알림 경로가 아니다. �
 
 | 변수 | 필수 여부 | 미설정 시 동작 |
 |------|-----------|--------------|
-| `SLACK_BOT_OAUTH_TOKEN` | **필수** | 요청마다 `500` + "Server configuration error" |
-| `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | **필수** | 요청마다 `500` + "Server configuration error" |
+| `SLACK_BOT_OAUTH_TOKEN` | 선택 | Slack 알림 skip |
+| `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | 선택 | Slack 알림 skip |
 | `SALESFORCE_ENDPOINT` | 선택 | Salesforce 단계 skip, Slack 성공 시 정상 응답 |
 
 Community License 폼과 동일한 변수를 공유한다.
@@ -125,9 +125,11 @@ handleSubmit()
   → utmAttribution = readUtmCookie()
   → POST /api/contact-us
   → success:true  → status = "success"  (성공 화면)
-  → success:false → status = "error"    (errorMessage 또는 errorGeneral 표시)
-  → 네트워크 오류 → status = "error"    (errorGeneral 표시)
+  → success:false → status = "error"    (errorCode를 locale별 사용자 문구로 변환)
+  → 네트워크 오류 → status = "error"    (locale별 네트워크 오류 문구 표시)
 ```
+
+클라이언트는 서버의 영문 `errorMessage`를 그대로 노출하지 않는다. `errorCode`를 기준으로 `en / ko / ja` 안내 문구를 표시하고, 알 수 없는 오류는 locale별 일반 실패 문구로 fallback한다.
 
 ### 성공 화면 UX
 

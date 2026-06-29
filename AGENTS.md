@@ -32,6 +32,7 @@ src/
 ├── components/
 │   ├── ui/             # Button, Input, Select 등 순수 UI primitive
 │   ├── content/        # 콘텐츠 미리보기, Tiptap, rich text 렌더링
+│   ├── mockups/        # 제품 화면 mockup 컴포넌트
 │   ├── sections/       # 페이지 섹션, common에는 여러 페이지 공유 섹션
 │   │   ├── common/     # Cta, DetailContentList, FeatureMediaList 등 공유 섹션
 │   │   └── *.tsx       # Home*, Aip* 등 페이지/도메인 접두사 섹션
@@ -43,6 +44,7 @@ src/
 ├── constants/          # i18n, navigation, plans, legal 등
 ├── copy/               # 정적 페이지 문구와 metadata copy
 ├── content/            # demo, documentation, news, legal 원본
+├── public/assets/      # 이미지, mockup asset 등 정적 리소스
 └── features/           # content, seo, utm 등 동작 로직
 ```
 
@@ -139,7 +141,6 @@ npm run test:run
 
 브라우저 검증:
 
-- 로컬 E2E 참고: `docs/reference/local-e2e.md`
 - Playwright Chromium은 `/Users/vin/Library/Caches/ms-playwright/`에 설치되어 있습니다.
 - `browser-harness` 실행 파일은 `/Users/vin/.local/bin/browser-harness`입니다. 새 셸은 `/Users/vin/.zshenv`에서 PATH를 받습니다.
 - Codex 샌드박스에서 Playwright 또는 하네스가 `bootstrap_check_in ... Permission denied`, `kill EPERM`, `Target page, context or browser has been closed` 같은 macOS 브라우저 프로세스 권한 오류를 내면 설치 문제가 아닙니다. 같은 명령을 `sandbox_permissions: require_escalated`로 즉시 재시도합니다.
@@ -183,9 +184,9 @@ Figma 디자인 구현 요청이 있으면 일반 Figma Remote MCP가 아니라 
 ## 관련 문서 / 스킬
 
 - `README.md` — 프로젝트 개요와 실행 방법
-- `docs/reference/test-coverage.md` — 테스트 현황과 mock 패턴
-- `docs/reference/local-e2e.md` — 로컬 Playwright E2E
 - `docs/reference/vercel-deployment.md` — 배포 정보
+- `docs/reference/lead-capture-forms.md` — 리드폼 / 게이팅폼 흐름
+- `docs/reference/utm-attribution.md` — UTM 저장과 전송 흐름
 - `.claude/skills/branch/SKILL.md` — 작업 브랜치 생성
 - `.claude/skills/worktree/SKILL.md` — worktree 작업
 - `.claude/skills/pr/SKILL.md` — PR 작성
