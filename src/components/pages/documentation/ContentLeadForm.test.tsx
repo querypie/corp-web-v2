@@ -81,7 +81,7 @@ describe("ContentLeadForm", () => {
   it("API 실패 시 에러 메시지를 표시한다", async () => {
     vi.mocked(fetch).mockResolvedValue({
       ok: false,
-      json: async () => ({ error: "server error" }),
+      json: async () => ({ error: "server error", errorCode: "server_error" }),
     } as unknown as Response);
 
     render(
@@ -104,6 +104,29 @@ describe("ContentLeadForm", () => {
     });
   });
 
+  it("API가 invalid_email errorCode를 반환하면 locale에 맞는 메시지를 표시한다", async () => {
+    vi.mocked(fetch).mockResolvedValue({
+      ok: false,
+      json: async () => ({ error: "Please enter a valid email address.", errorCode: "invalid_email" }),
+    } as unknown as Response);
+
+    const koCopy = getContactPageCopy("ko");
+    render(
+      <ContentLeadForm
+        contactCopy={koCopy}
+        locale="ko"
+        mode="unlock"
+        title="테스트 문서"
+      />,
+    );
+    fillRequiredFields(koCopy);
+    fireEvent.submit(screen.getByRole("button").closest("form")!);
+
+    await waitFor(() => {
+      expect(screen.getByText(/이메일 주소를 확인해 주세요/)).toBeInTheDocument();
+    });
+  });
+
   it("unlock 모드에서 성공 시 onSuccess 콜백을 호출한다", async () => {
     vi.mocked(fetch).mockResolvedValue({
       ok: true,
@@ -122,6 +145,30 @@ describe("ContentLeadForm", () => {
     );
     fillRequiredFields();
     fireEvent.submit(screen.getByRole("button").closest("form")!);
+
+    await waitFor(() => {
+      expect(onSuccess).toHaveBeenCalledOnce();
+    });
+  });
+
+  it("unlock 모드에서 제출 버튼 클릭 시 onSuccess 콜백을 호출한다", async () => {
+    vi.mocked(fetch).mockResolvedValue({
+      ok: true,
+      json: async () => ({ unlocked: true }),
+    } as unknown as Response);
+
+    const onSuccess = vi.fn();
+    render(
+      <ContentLeadForm
+        contactCopy={contactCopy}
+        locale="en"
+        mode="unlock"
+        title="Test Doc"
+        onSuccess={onSuccess}
+      />,
+    );
+    fillRequiredFields();
+    fireEvent.click(screen.getByRole("button", { name: "Unlock Content" }));
 
     await waitFor(() => {
       expect(onSuccess).toHaveBeenCalledOnce();

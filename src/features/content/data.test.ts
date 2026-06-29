@@ -3,6 +3,7 @@ import {
   createLocalizedContent,
   ensureUniqueSlug,
   formatPublicDate,
+  getAdminCreateHref,
   getDateIsoSortValue,
   getAdjacentContentLabel,
   getContentThumbnailSrc,
@@ -115,6 +116,29 @@ describe("public content hrefs", () => {
   it("news 공개 목록과 상세 경로는 /news를 사용한다", () => {
     expect(getPublicListHref("news", "ko")).toBe("/ko/news");
     expect(getPublicDetailHref("news", "ko", "launch-update")).toBe("/ko/news/launch-update");
+  });
+});
+
+describe("getAdminCreateHref", () => {
+  it("news 작성 경로를 반환한다", () => {
+    expect(getAdminCreateHref("news", "news")).toBe("/admin/news/new");
+  });
+
+  it("demo 전체 목록에서는 use-cases 작성 경로를 기본값으로 사용한다", () => {
+    expect(getAdminCreateHref("demo", "all")).toBe("/admin/demo/use-cases/new");
+  });
+
+  it("demo 카테고리별 작성 경로를 반환한다", () => {
+    expect(getAdminCreateHref("demo", "use-cases")).toBe("/admin/demo/use-cases/new");
+    expect(getAdminCreateHref("demo", "aip-features")).toBe("/admin/demo/aip-features/new");
+  });
+
+  it("documentation 전체 목록에서는 blogs 작성 경로를 기본값으로 사용한다", () => {
+    expect(getAdminCreateHref("documentation", "all")).toBe("/admin/documentation/blogs/new");
+  });
+
+  it("documentation 카테고리별 작성 경로를 반환한다", () => {
+    expect(getAdminCreateHref("documentation", "white-papers")).toBe("/admin/documentation/white-papers/new");
   });
 });
 

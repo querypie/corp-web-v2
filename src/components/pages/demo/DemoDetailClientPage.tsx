@@ -35,6 +35,8 @@ type DemoDetailClientPageProps = {
   slug: string;
 };
 
+const CONTENT_GATE_FORM_ID = "content-gate-form";
+
 export default function DemoDetailClientPage({
   contactCopy,
   fallbackProps,
@@ -120,6 +122,7 @@ export default function DemoDetailClientPage({
         <ContentGateOverlay
           contactCopy={contactCopy}
           contentId={currentUseCase.id}
+          id={CONTENT_GATE_FORM_ID}
           locale={locale}
           onUnlock={() => setIsUnlocked(true)}
           section="demo"
@@ -130,15 +133,19 @@ export default function DemoDetailClientPage({
       contentListItems={relatedPublishedItems}
       downloadHref={
         currentUseCase.enableDownloadButton && currentUseCase.downloadPdfSrc
-          ? `${getPublicDetailHref("demo", locale, currentUseCase.id, currentUseCase.categorySlug)}/download`
+          ? currentUseCase.downloadPdfSrc
           : undefined
       }
+      downloadFormTargetId={CONTENT_GATE_FORM_ID}
+      downloadRequiresUnlock={isGateActive}
       docsHref={getCategoryHref(demoCategoryConfigs, currentUseCase.categorySlug, locale)}
       date={formatPublicDate(locale, currentUseCase.dateIso)}
       hideHeroImage={currentUseCase.hideHeroImage}
       heroImageAlt={getLocalizedContent(currentUseCase.title, contentLocale)}
       heroImageSrc={currentUseCase.imageSrc}
+      locale={locale}
       title={getLocalizedContent(currentUseCase.title, contentLocale)}
+      unlockCookieName={getContentUnlockCookieName(currentUseCase.id, "demo")}
       writer={getWriterLabel(currentUseCase)}
     />
   );

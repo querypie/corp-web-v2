@@ -104,6 +104,7 @@ export default function AdminContentPreview({
         heroImageAlt={heroImageAlt}
         heroImageSrc={heroImageSrc}
         hideHeroImage={hideHeroImage}
+        locale="en"
         title={title}
         writer={writer}
       />
