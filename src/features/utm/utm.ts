@@ -43,21 +43,61 @@ export function updateUtmAttribution(
   return { first: current.first, recent: [...current.recent, newTouch].slice(-2) };
 }
 
-export function toSalesforceFields(encodedAttribution: string): Record<string, string> {
+function parseUtmAttributionCookie(encodedAttribution: string): UtmAttribution | null {
   try {
-    const attribution: UtmAttribution = JSON.parse(decodeURIComponent(encodedAttribution));
-    const fields: Record<string, string> = {};
-    const lastTouch = attribution.recent[attribution.recent.length - 1];
-    if (lastTouch?.source)          fields["pi__utm_source__c"]      = lastTouch.source;
-    if (lastTouch?.medium)          fields["pi__utm_medium__c"]      = lastTouch.medium;
-    if (lastTouch?.campaign)        fields["pi__utm_campaign__c"]    = lastTouch.campaign;
-    if (lastTouch?.content)         fields["pi__utm_content__c"]     = lastTouch.content;
-    if (lastTouch?.term)            fields["pi__utm_term__c"]        = lastTouch.term;
-    if (attribution.first?.landing) fields["pi__first_touch_url__c"] = attribution.first.landing;
-    return fields;
+    const parsed = JSON.parse(decodeURIComponent(encodedAttribution)) as Partial<UtmAttribution>;
+
+    if (!parsed || typeof parsed !== "object" || !parsed.first || !Array.isArray(parsed.recent)) {
+      return null;
+    }
+
+    return parsed as UtmAttribution;
   } catch {
+    return null;
+  }
+}
+
+export function toSalesforceFields(encodedAttribution: string): Record<string, string> {
+  const attribution = parseUtmAttributionCookie(encodedAttribution);
+
+  if (!attribution) {
     return {};
   }
+
+  const fields: Record<string, string> = {};
+  const lastTouch = attribution.recent[attribution.recent.length - 1];
+  if (lastTouch?.source)          fields["pi__utm_source__c"]      = lastTouch.source;
+  if (lastTouch?.medium)          fields["pi__utm_medium__c"]      = lastTouch.medium;
+  if (lastTouch?.campaign)        fields["pi__utm_campaign__c"]    = lastTouch.campaign;
+  if (lastTouch?.content)         fields["pi__utm_content__c"]     = lastTouch.content;
+  if (lastTouch?.term)            fields["pi__utm_term__c"]        = lastTouch.term;
+  if (attribution.first?.landing) fields["pi__first_touch_url__c"] = attribution.first.landing;
+  return fields;
+}
+
+export function buildUtmSlackFields(encodedAttribution: string | undefined): Record<string, string> {
+  if (!encodedAttribution) {
+    return {};
+  }
+
+  const attribution = parseUtmAttributionCookie(encodedAttribution);
+
+  if (!attribution) {
+    return {};
+  }
+
+  const lastTouch = attribution.recent[attribution.recent.length - 1];
+  const fields: Record<string, string> = {};
+
+  if (lastTouch?.source) fields["UTM Source"] = lastTouch.source;
+  if (lastTouch?.medium) fields["UTM Medium"] = lastTouch.medium;
+  if (lastTouch?.campaign) fields["UTM Campaign"] = lastTouch.campaign;
+  if (lastTouch?.term) fields["UTM Term"] = lastTouch.term;
+  if (lastTouch?.content) fields["UTM Content"] = lastTouch.content;
+  if (attribution.first?.landing) fields["UTM First Landing URL"] = attribution.first.landing;
+  if (lastTouch?.landing) fields["UTM Last Landing URL"] = lastTouch.landing;
+
+  return fields;
 }
 
 export function readUtmCookie(): string | undefined {

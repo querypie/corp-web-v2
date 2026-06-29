@@ -1,6 +1,4 @@
 import dns from "dns";
-import { existsSync, promises as fs } from "fs";
-import path from "path";
 import { NextResponse } from "next/server";
 import { WebClient } from "@slack/web-api";
 import { filterXSS } from "xss";
@@ -16,7 +14,7 @@ import {
   isPublishedContentAccessible,
   type ManagedContentSection,
 } from "@/features/content/data";
-import { toSalesforceFields } from "@/features/utm/utm";
+import { buildUtmSlackFields } from "@/features/utm/utm";
 
 type DownloadLeadPayload = {
   attachmentFileName?: string;
@@ -34,10 +32,6 @@ type DownloadLeadPayload = {
   utmAttribution?: string;
   unlockCookieName?: string;
 };
-
-const leadsDir = path.join(process.cwd(), "src", "content", "state");
-const leadsPath = path.join(leadsDir, "content-download-leads.json");
-let leadWriteQueue = Promise.resolve();
 
 function isDownloadSection(section: unknown): section is Exclude<ManagedContentSection, "news"> {
   return section === "demo" || section === "documentation";
@@ -100,6 +94,25 @@ function getStringArrayField(form: Record<string, unknown>, key: string) {
   return value.filter((item): item is string => typeof item === "string" && item.trim().length > 0);
 }
 
+function getLeadNotificationSource(section: ManagedContentSection | undefined, categorySlug?: string) {
+  if (section === "documentation") {
+    if (categorySlug === "white-papers") return "whitepapers";
+    if (categorySlug === "introduction") return "introduction-deck";
+    if (categorySlug === "blogs") return "blog";
+    if (categorySlug === "events") return "events";
+    if (categorySlug === "manuals") return "manuals";
+    if (categorySlug === "glossary") return "glossary";
+  }
+
+  if (section === "demo") {
+    if (categorySlug === "use-cases") return "use-cases";
+    if (categorySlug === "aip-features") return "aip";
+    if (categorySlug === "acp-features") return "acp";
+  }
+
+  return section;
+}
+
 function buildSlackNotificationBody(formData: Record<string, unknown>) {
   const requestUri =
     typeof formData.Referrer_URL__c === "string" && formData.Referrer_URL__c
@@ -122,25 +135,25 @@ function buildLeadNotificationPayload(
   const form = payload.form ?? {};
   const products = getStringArrayField(form, "products");
   const plannedImplementationDate = getStringField(form, "plannedImplementationDate");
-  const contentKey = payload.contentId && payload.section ? `${payload.section}:${payload.contentId}` : payload.contentId;
+  const contentKey = payload.contentId && resolvedPayload.notificationSource
+    ? `${resolvedPayload.notificationSource}:${payload.contentId}`
+    : payload.contentId;
   const referrerUrl = payload.referrerURL ?? payload.referrerUrl ?? request.headers.get("referer") ?? "";
+  const phoneNumber = getStringField(form, "phoneNumber");
   const requestBody: Record<string, unknown> = {
     FirstName: filterXSS(getStringField(form, "firstName")),
     LastName: filterXSS(getStringField(form, "lastName")),
     Email: filterXSS(getStringField(form, "email")),
     Company: filterXSS(getStringField(form, "company")) || "None",
     Title: filterXSS(getStringField(form, "departmentTitle")),
+    MobilePhone: filterXSS(phoneNumber),
     Objective__c: filterXSS(getStringField(form, "inquiryType")),
     HasOptedInMarketing__c: getBooleanField(form, "marketingConsent"),
     Referrer_URL__c: filterXSS(referrerUrl),
   };
 
-  const phoneNumber = getStringField(form, "phoneNumber");
-  if (phoneNumber) requestBody.MobilePhone = filterXSS(phoneNumber);
-
   const descriptionParts = [
     contentKey ? `GatedContentKey: ${filterXSS(contentKey)}` : "",
-    resolvedPayload.title ? `ContentTitle: ${filterXSS(resolvedPayload.title)}` : "",
     products.length ? `Product: ${products.map((product) => filterXSS(product)).join(", ")}` : "",
     plannedImplementationDate ? `PlannedImplementationDate: ${filterXSS(plannedImplementationDate)}` : "",
   ].filter(Boolean);
@@ -150,7 +163,7 @@ function buildLeadNotificationPayload(
   }
 
   if (payload.utmAttribution) {
-    Object.assign(requestBody, toSalesforceFields(payload.utmAttribution));
+    Object.assign(requestBody, buildUtmSlackFields(payload.utmAttribution));
   }
 
   return requestBody;
@@ -171,7 +184,7 @@ async function validateLeadEmail(form: Record<string, unknown>) {
 async function sendLeadNotificationToSlack(
   requestBody: Record<string, unknown>,
   mode: NonNullable<DownloadLeadPayload["mode"]>,
-  from?: ManagedContentSection,
+  from?: string,
 ) {
   const token = process.env.SLACK_BOT_OAUTH_TOKEN;
   const channel = process.env.SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES;
@@ -204,6 +217,7 @@ async function resolvePayload(payload: DownloadLeadPayload, mode: NonNullable<Do
       attachmentFileName: payload.attachmentFileName,
       attachmentUrl: payload.attachmentUrl,
       cookieName: getFallbackCookieName(payload),
+      notificationSource: getLeadNotificationSource(payload.section),
       pdfPreviewUrl: payload.pdfPreviewUrl,
       returnUrl: payload.returnUrl,
       title: payload.title ?? "",
@@ -234,40 +248,11 @@ async function resolvePayload(payload: DownloadLeadPayload, mode: NonNullable<Do
     attachmentFileName,
     attachmentUrl,
     cookieName: getContentUnlockCookieName(item.id, item.section),
+    notificationSource: getLeadNotificationSource(item.section, item.categorySlug),
     pdfPreviewUrl: attachmentUrl,
     returnUrl: payload.returnUrl,
     title: payload.title ?? getLocalizedContent(item.title, "en"),
   };
-}
-
-async function readLeads() {
-  if (!existsSync(leadsPath)) {
-    return [];
-  }
-
-  try {
-    const raw = await fs.readFile(leadsPath, "utf8");
-    const parsed = JSON.parse(raw) as unknown[];
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (error) {
-    throw new Error("Failed to read content download leads.");
-  }
-}
-
-async function writeLeads(nextLead: Record<string, unknown>) {
-  const writeTask = leadWriteQueue
-    .catch(() => undefined)
-    .then(async () => {
-      await fs.mkdir(leadsDir, { recursive: true });
-      const currentLeads = await readLeads();
-      const tempPath = `${leadsPath}.tmp-${process.pid}-${Date.now()}`;
-
-      await fs.writeFile(tempPath, `${JSON.stringify([nextLead, ...currentLeads], null, 2)}\n`, "utf8");
-      await fs.rename(tempPath, leadsPath);
-    });
-
-  leadWriteQueue = writeTask.then(() => undefined, () => undefined);
-  return writeTask;
 }
 
 export async function POST(request: Request) {
@@ -328,31 +313,8 @@ export async function POST(request: Request) {
     );
   }
 
-  const nextLead = {
-    attachmentFileName: resolvedPayload.attachmentFileName,
-    attachmentUrl: resolvedPayload.attachmentUrl,
-    contentId: payload.contentId,
-    createdAt: new Date().toISOString(),
-    form: payload.form,
-    locale: payload.locale ?? "en",
-    mode,
-    pdfPreviewUrl: resolvedPayload.pdfPreviewUrl,
-    returnUrl: resolvedPayload.returnUrl,
-    section: payload.section,
-    title: resolvedPayload.title,
-  };
-
-  try {
-    await writeLeads(nextLead);
-  } catch {
-    return NextResponse.json(
-      { error: "Failed to save download lead.", errorCode: "server_error" },
-      { status: 500 },
-    );
-  }
-
   const notificationPayload = buildLeadNotificationPayload(payload, resolvedPayload, request);
-  await sendLeadNotificationToSlack(notificationPayload, mode, payload.section);
+  await sendLeadNotificationToSlack(notificationPayload, mode, resolvedPayload.notificationSource);
 
   const response =
     mode === "download"

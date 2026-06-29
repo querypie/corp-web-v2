@@ -395,8 +395,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
       },
       ja: {
         nav: ["ソリューション", "機能", "会社", "プラン"],
-        heroHeading: "新しいAIビジネスを体験するなら、",
-        heroDescription: "QueryPie AIが最適です。",
+        heroHeading: "エンタープライズ向け Agentic AI Platform",
+        heroDescription:
+          "すべてのデータとシステムを安全に接続し、\nセキュリティとガバナンスを内蔵した信頼できる AI を運用しましょう。",
         heroPrimaryCtaLabel: "無料で始める",
         heroImageAlt: "QueryPie AI ワークスペースプレビュー",
         clientCaption: "世界最高水準のソフトウェアチームが毎日信頼するプラットフォーム",

@@ -6,6 +6,9 @@ const MOCKUP_ORIGINAL_HEIGHT = 720;
 const MOCKUP_DISPLAY_WIDTH = 1000;
 const MOCKUP_DISPLAY_SCALE = MOCKUP_DISPLAY_WIDTH / MOCKUP_ORIGINAL_WIDTH;
 const MOCKUP_DISPLAY_HEIGHT = Math.round((MOCKUP_ORIGINAL_HEIGHT / MOCKUP_ORIGINAL_WIDTH) * MOCKUP_DISPLAY_WIDTH);
+const MOCKUP_MOBILE_DISPLAY_HEIGHT = 440;
+const MOCKUP_MOBILE_SCALE = 0.86;
+const MOCKUP_MOBILE_FRAME_HEIGHT = Math.round(MOCKUP_MOBILE_DISPLAY_HEIGHT / MOCKUP_MOBILE_SCALE);
 
 type HeroProps = {
   ctaLabel: string;
@@ -40,9 +43,30 @@ export default function Hero({
               </a>
             </div>
 
-            <div className="mt-[60px] flex w-full justify-center" aria-label={imageAlt}>
+            <div className="mt-8 flex w-full justify-center md:mt-10" aria-label={imageAlt}>
               <div
-                className="relative mb-[100px] w-full"
+                className="relative mb-12 w-full md:hidden"
+                style={{ height: MOCKUP_MOBILE_DISPLAY_HEIGHT }}
+              >
+                <div className="relative z-10 h-full overflow-hidden">
+                  <div
+                    style={{
+                      height: MOCKUP_MOBILE_FRAME_HEIGHT,
+                      transform: `scale(${MOCKUP_MOBILE_SCALE})`,
+                      transformOrigin: "top left",
+                      width: `${100 / MOCKUP_MOBILE_SCALE}%`,
+                    }}
+                  >
+                    <AipMockupShell className="homepage-aip-mockup homepage-aip-mockup-mobile" frameHeight={MOCKUP_MOBILE_FRAME_HEIGHT} withShadow={false} />
+                  </div>
+                </div>
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-1/2 top-full h-12 w-full -translate-x-1/2 rounded-t-[20px] bg-[linear-gradient(180deg,rgba(18,18,18,0.28)_0%,rgba(18,18,18,0.14)_56%,rgba(18,18,18,0)_100%)]"
+                />
+              </div>
+              <div
+                className="relative mb-[100px] hidden w-full md:block"
                 style={{ height: MOCKUP_DISPLAY_HEIGHT, maxWidth: MOCKUP_DISPLAY_WIDTH }}
               >
                 <div className="relative z-10 h-full overflow-hidden">
