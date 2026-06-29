@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "kubernetes-manager-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case-9.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 21,
