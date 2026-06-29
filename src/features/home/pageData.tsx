@@ -89,9 +89,10 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
       category: string;
       href: string;
       imageSrc: string;
+      isExternal?: boolean;
       title: string;
     }> = visiblePublishedItems
-      .filter((item) => item.section !== "news")
+      .filter((item) => item.section === "demo" || item.section === "documentation")
       .map((item) => {
         const title = getLocalizedContent(item.title, locale);
         const isExternal = item.contentType === "outlink" && Boolean(item.externalUrl.trim());
@@ -104,6 +105,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           category: getManagedCategoryLabel(item.section, item.categorySlug, locale),
           href: isExternal ? item.externalUrl : getPublicDetailHref(item.section, locale, item.id),
           imageSrc: getContentThumbnailSrc(item.imageSrc),
+          isExternal,
           title,
           dateIso: item.dateIso,
         };
@@ -232,16 +234,19 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
             imageSrc: "/assets/common/fallback-contents.jpg",
+            isExternal: true,
             title: "TerraSky’s MCP-Compatible AI Platform ‘mitoco Buddy’ Officially Launched",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
             imageSrc: "/assets/common/fallback-contents.jpg",
+            isExternal: true,
             title: "Payroll Partners with QueryPie on AI Security Solutions",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
             imageSrc: "/assets/common/fallback-contents.jpg",
+            isExternal: true,
             title:
               "Security Solution Playing the Role of a “Door Lock” in the Cloud — Expanding to Japan and Europe",
           },
@@ -366,16 +371,19 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
             imageSrc: "/assets/common/fallback-contents.jpg",
+            isExternal: true,
             title: "TerraSky의 MCP 호환 AI 플랫폼 ‘mitoco Buddy’ 공식 출시",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
             imageSrc: "/assets/common/fallback-contents.jpg",
+            isExternal: true,
             title: "Payroll, QueryPie와 AI 보안 솔루션 협력",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
             imageSrc: "/assets/common/fallback-contents.jpg",
+            isExternal: true,
             title:
               "클라우드의 ‘도어락’ 역할을 하는 보안 솔루션 — 일본과 유럽으로 확장",
           },
@@ -499,16 +507,19 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
             imageSrc: "/assets/common/fallback-contents.jpg",
+            isExternal: true,
             title: "TerraSky の MCP 対応 AI プラットフォーム『mitoco Buddy』が正式リリース",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
             imageSrc: "/assets/common/fallback-contents.jpg",
+            isExternal: true,
             title: "Payroll が QueryPie と AI セキュリティソリューションで提携",
           },
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
             imageSrc: "/assets/common/fallback-contents.jpg",
+            isExternal: true,
             title:
               "クラウドの“ドアロック”として機能するセキュリティソリューション — 日本とヨーロッパへ拡大",
           },
@@ -542,7 +553,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
   return {
     clientCaption: copy.clientCaption,
     contentListDescription: copy.contentListDescription,
-    contentListItems: copy.contentListItems,
+    contentListItems: contentListItems.length > 0 ? contentListItems : copy.contentListItems,
     contentListLinks: copy.contentListLinks,
     contentListTitle: copy.contentListTitle,
     ctaActionLabel: copy.ctaActionLabel,
