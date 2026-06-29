@@ -1,6 +1,6 @@
 "use client";
 
-import type { MouseEvent as ReactMouseEvent, ReactNode } from "react";
+import type { FocusEvent as ReactFocusEvent, MouseEvent as ReactMouseEvent, ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
@@ -56,6 +56,7 @@ export default function Gnb({
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
   const [plansOpen, setPlansOpen] = useState(false);
   const [mobileLocaleOpen, setMobileLocaleOpen] = useState(false);
+  const [desktopPopoverOpen, setDesktopPopoverOpen] = useState<string | null>(null);
   const [currentSearch, setCurrentSearch] = useState("");
   const pathname = usePathname();
   const mobileLocaleRef = useRef<HTMLDivElement | null>(null);
@@ -90,6 +91,7 @@ export default function Gnb({
   useEffect(() => {
     setMobileMenuOpen(false);
     setMobileLocaleOpen(false);
+    setDesktopPopoverOpen(null);
   }, [pathname]);
 
   useEffect(() => {
@@ -149,7 +151,18 @@ export default function Gnb({
 
     event.preventDefault();
     setMobileLocaleOpen(false);
+    setDesktopPopoverOpen(null);
     router.push(href, { scroll: false });
+  };
+  const closeDesktopPopover = () => {
+    setDesktopPopoverOpen(null);
+  };
+  const handleDesktopPopoverBlur = (event: ReactFocusEvent<HTMLDivElement>) => {
+    const nextTarget = event.relatedTarget;
+
+    if (!(nextTarget instanceof Node) || !event.currentTarget.contains(nextTarget)) {
+      closeDesktopPopover();
+    }
   };
   const mobileSections = [
     { title: items[0], items: getSolutionsSubItems(locale) },
@@ -157,6 +170,7 @@ export default function Gnb({
     { title: items[2], items: getCompanySubItems(locale) },
     { title: items[3], items: getPlansSubItems(locale) },
   ];
+  const isDesktopLocaleOpen = desktopPopoverOpen === "locale";
 
   return (
     <>
@@ -189,20 +203,34 @@ export default function Gnb({
                 const navSlot = index;
 
                 if (navSlot === 0) {
+                  const isOpen = desktopPopoverOpen === item;
+
                   return (
                     <div
                       key={item}
-                      className="group/nav relative"
+                      className="relative"
+                      onBlur={handleDesktopPopoverBlur}
+                      onMouseEnter={() => setDesktopPopoverOpen(item)}
+                      onMouseLeave={closeDesktopPopover}
                     >
                       <button
-                        className="type-body-md text-fg transition-colors hover:text-mute group-hover/nav:text-mute group-focus-within/nav:text-mute"
+                        className={cx(
+                          "type-body-md transition-colors hover:text-mute",
+                          isOpen ? "text-mute" : "text-fg",
+                        )}
+                        onFocus={() => setDesktopPopoverOpen(item)}
                         type="button"
                       >
                         {item}
                       </button>
 
                       <div
-                        className="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 -translate-y-1 pt-3 opacity-0 transition-all duration-200 group-hover/nav:pointer-events-auto group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:pointer-events-auto group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100"
+                        className={cx(
+                          "absolute left-1/2 top-full -translate-x-1/2 pt-3 transition-all duration-200",
+                          isOpen
+                            ? "pointer-events-auto translate-y-0 opacity-100"
+                            : "pointer-events-none -translate-y-1 opacity-0",
+                        )}
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getSolutionsSubItems(locale).map((sub) => (
@@ -210,6 +238,7 @@ export default function Gnb({
                               key={sub.label}
                               className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
+                              onClick={closeDesktopPopover}
                             >
                               {sub.label}
                             </Link>
@@ -221,20 +250,34 @@ export default function Gnb({
                 }
 
                 if (navSlot === 1) {
+                  const isOpen = desktopPopoverOpen === item;
+
                   return (
                     <div
                       key={item}
-                      className="group/nav relative"
+                      className="relative"
+                      onBlur={handleDesktopPopoverBlur}
+                      onMouseEnter={() => setDesktopPopoverOpen(item)}
+                      onMouseLeave={closeDesktopPopover}
                     >
                       <button
-                        className="type-body-md text-fg transition-colors hover:text-mute group-hover/nav:text-mute group-focus-within/nav:text-mute"
+                        className={cx(
+                          "type-body-md transition-colors hover:text-mute",
+                          isOpen ? "text-mute" : "text-fg",
+                        )}
+                        onFocus={() => setDesktopPopoverOpen(item)}
                         type="button"
                       >
                         {item}
                       </button>
 
                       <div
-                        className="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 -translate-y-1 pt-3 opacity-0 transition-all duration-200 group-hover/nav:pointer-events-auto group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:pointer-events-auto group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100"
+                        className={cx(
+                          "absolute left-1/2 top-full -translate-x-1/2 pt-3 transition-all duration-200",
+                          isOpen
+                            ? "pointer-events-auto translate-y-0 opacity-100"
+                            : "pointer-events-none -translate-y-1 opacity-0",
+                        )}
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getFeaturesSubItems(locale).map((sub) => (
@@ -242,6 +285,7 @@ export default function Gnb({
                               key={sub.label}
                               className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
+                              onClick={closeDesktopPopover}
                             >
                               {sub.label}
                             </Link>
@@ -253,20 +297,34 @@ export default function Gnb({
                 }
 
                 if (navSlot === 2) {
+                  const isOpen = desktopPopoverOpen === item;
+
                   return (
                     <div
                       key={item}
-                      className="group/nav relative"
+                      className="relative"
+                      onBlur={handleDesktopPopoverBlur}
+                      onMouseEnter={() => setDesktopPopoverOpen(item)}
+                      onMouseLeave={closeDesktopPopover}
                     >
                       <button
-                        className="type-body-md text-fg transition-colors hover:text-mute group-hover/nav:text-mute group-focus-within/nav:text-mute"
+                        className={cx(
+                          "type-body-md transition-colors hover:text-mute",
+                          isOpen ? "text-mute" : "text-fg",
+                        )}
+                        onFocus={() => setDesktopPopoverOpen(item)}
                         type="button"
                       >
                         {item}
                       </button>
 
                       <div
-                        className="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 -translate-y-1 pt-3 opacity-0 transition-all duration-200 group-hover/nav:pointer-events-auto group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:pointer-events-auto group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100"
+                        className={cx(
+                          "absolute left-1/2 top-full -translate-x-1/2 pt-3 transition-all duration-200",
+                          isOpen
+                            ? "pointer-events-auto translate-y-0 opacity-100"
+                            : "pointer-events-none -translate-y-1 opacity-0",
+                        )}
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getCompanySubItems(locale).map((sub) => (
@@ -274,6 +332,7 @@ export default function Gnb({
                               key={sub.label}
                               className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
+                              onClick={closeDesktopPopover}
                             >
                               {sub.label}
                             </Link>
@@ -301,11 +360,15 @@ export default function Gnb({
               })}
             </nav>
             <div
-              className="group/nav relative hidden md:inline-flex"
+              className="relative hidden md:inline-flex"
+              onBlur={handleDesktopPopoverBlur}
+              onMouseEnter={() => setDesktopPopoverOpen("locale")}
+              onMouseLeave={closeDesktopPopover}
             >
               <button
                 aria-label="Change language"
                 className="group transition-colors duration-300"
+                onFocus={() => setDesktopPopoverOpen("locale")}
                 type="button"
               >
                 {localeIcon ?? (
@@ -319,7 +382,12 @@ export default function Gnb({
               </button>
 
               <div
-                className="pointer-events-none absolute left-1/2 top-full -translate-x-1/2 -translate-y-1 pt-3 opacity-0 transition-all duration-200 group-hover/nav:pointer-events-auto group-hover/nav:translate-y-0 group-hover/nav:opacity-100 group-focus-within/nav:pointer-events-auto group-focus-within/nav:translate-y-0 group-focus-within/nav:opacity-100"
+                className={cx(
+                  "absolute left-1/2 top-full -translate-x-1/2 pt-3 transition-all duration-200",
+                  isDesktopLocaleOpen
+                    ? "pointer-events-auto translate-y-0 opacity-100"
+                    : "pointer-events-none -translate-y-1 opacity-0",
+                )}
               >
                 <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                   {localeSubItems.map((sub) => (
