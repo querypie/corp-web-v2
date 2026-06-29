@@ -1,4 +1,4 @@
-import { publicCategoryPaths } from "./publicPaths";
+import { publicCategoryPaths } from "./publicPathConfig";
 
 const legacyFolderRedirectBasePaths = [
   ...Object.entries(publicCategoryPaths.demo)
