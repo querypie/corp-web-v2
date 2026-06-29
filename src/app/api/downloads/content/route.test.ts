@@ -1,12 +1,23 @@
 // @vitest-environment node
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-const { mockExistsSync, mockMkdir, mockReadContentItem, mockReadFile, mockRename, mockWriteFile } = vi.hoisted(() => ({
+const {
+  mockExistsSync,
+  mockMkdir,
+  mockReadContentItem,
+  mockReadFile,
+  mockRename,
+  mockResolveMx,
+  mockSlackPostMessage,
+  mockWriteFile,
+} = vi.hoisted(() => ({
   mockExistsSync: vi.fn(),
   mockMkdir: vi.fn().mockResolvedValue(undefined),
   mockReadContentItem: vi.fn(),
   mockReadFile: vi.fn(),
   mockRename: vi.fn().mockResolvedValue(undefined),
+  mockResolveMx: vi.fn(),
+  mockSlackPostMessage: vi.fn().mockResolvedValue({ ok: true }),
   mockWriteFile: vi.fn().mockResolvedValue(undefined),
 }));
 
@@ -24,13 +35,36 @@ vi.mock("@/features/content/contentState.server", () => ({
   readContentItem: mockReadContentItem,
 }));
 
+vi.mock("dns", () => ({
+  default: { resolveMx: mockResolveMx },
+}));
+
+vi.mock("@slack/web-api", () => {
+  class WebClient {
+    chat = { postMessage: mockSlackPostMessage };
+  }
+  return { WebClient };
+});
+
 import { POST } from "./route";
+
+function stubMxRecord(valid: boolean) {
+  mockResolveMx.mockImplementation(
+    (_domain: string, callback: (error: Error | null, addresses: object[]) => void) => {
+      valid
+        ? callback(null, [{ exchange: "mx.example.com", priority: 10 }])
+        : callback(new Error("ENODATA"), []);
+    },
+  );
+}
 
 afterEach(() => {
   vi.clearAllMocks();
   mockMkdir.mockResolvedValue(undefined);
   mockRename.mockResolvedValue(undefined);
+  mockSlackPostMessage.mockResolvedValue({ ok: true });
   mockWriteFile.mockResolvedValue(undefined);
+  vi.unstubAllEnvs();
 });
 
 const BASE_DOWNLOAD_PAYLOAD = {
@@ -57,6 +91,10 @@ const BASE_CONTENT_ITEM = {
 };
 
 describe("POST /api/downloads/content", () => {
+  beforeEach(() => {
+    stubMxRecord(true);
+  });
+
   describe("입력 검증", () => {
     it("form이 없으면 400을 반환한다", async () => {
       const request = new Request("http://localhost/api/downloads/content", {
@@ -82,6 +120,25 @@ describe("POST /api/downloads/content", () => {
       const response = await POST(request);
 
       expect(response.status).toBe(400);
+    });
+
+    it("MX 레코드가 없으면 400을 반환한다", async () => {
+      vi.useFakeTimers();
+      stubMxRecord(false);
+
+      const request = new Request("http://localhost/api/downloads/content", {
+        method: "POST",
+        body: JSON.stringify(BASE_DOWNLOAD_PAYLOAD),
+      });
+      const responsePromise = POST(request);
+      await vi.runAllTimersAsync();
+      const response = await responsePromise;
+      vi.useRealTimers();
+
+      expect(response.status).toBe(400);
+      const data = await response.json() as { error: string; errorCode: string };
+      expect(data.errorCode).toBe("invalid_email");
+      expect(data.error).toBe("Please enter a valid email address.");
     });
   });
 
@@ -196,6 +253,47 @@ describe("POST /api/downloads/content", () => {
 
       expect(response.status).toBe(404);
       expect(mockWriteFile).not.toHaveBeenCalled();
+    });
+
+    it("Slack 환경변수가 있으면 게이팅 폼 알림을 보낸다", async () => {
+      vi.stubEnv("SLACK_BOT_OAUTH_TOKEN", "xoxb-test-token");
+      vi.stubEnv("SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES", "C123TEST");
+      mockExistsSync.mockReturnValue(false);
+      mockReadFile.mockResolvedValue("[]");
+
+      const request = new Request("http://localhost/api/downloads/content", {
+        method: "POST",
+        headers: { referer: "https://www.querypie.com/en/whitepapers/test" },
+        body: JSON.stringify({
+          ...BASE_DOWNLOAD_PAYLOAD,
+          contentId: "doc",
+          form: {
+            company: "QueryPie",
+            departmentTitle: "Marketing",
+            email: "reader@example.com",
+            firstName: "Reader",
+            inquiryType: "Request for Product Demo",
+            lastName: "Kim",
+            marketingConsent: "true",
+            plannedImplementationDate: "Within 3 months",
+            products: ["AI Platform QueryPie AIP"],
+          },
+          mode: "unlock",
+          referrerURL: "https://www.querypie.com/en/whitepapers/test",
+          section: "documentation",
+          title: "Test Whitepaper",
+        }),
+      });
+
+      const response = await POST(request);
+
+      expect(response.status).toBe(200);
+      expect(mockSlackPostMessage).toHaveBeenCalledOnce();
+      const slackPayload = mockSlackPostMessage.mock.calls[0][0] as { text: string; blocks: Array<{ text: { text: string } }> };
+      expect(slackPayload.text).toContain("New Gating Form To Unlock Document Received");
+      expect(slackPayload.blocks[0].text.text).toContain("GatedContentKey: documentation:doc");
+      expect(slackPayload.blocks[0].text.text).toContain("Product: AI Platform QueryPie AIP");
+      expect(slackPayload.blocks[0].text.text).toContain("RequestURI");
     });
   });
 

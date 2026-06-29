@@ -95,6 +95,7 @@ export default async function NewsDetailRoute({ params }: Props) {
         hideHeroImage: currentEntry.hideHeroImage,
         heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),
         heroImageSrc: currentEntry.imageSrc,
+        locale,
         title: getLocalizedContent(currentEntry.title, contentLocale),
         writer: getNewsFormatLabel(currentEntry, locale),
       } satisfies DocsDetailPageProps)}

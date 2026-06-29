@@ -35,6 +35,8 @@ type DocsDetailClientPageProps = {
   section?: "demo" | "documentation";
 };
 
+const CONTENT_GATE_FORM_ID = "content-gate-form";
+
 export default function DocsDetailClientPage({
   contactCopy,
   fallbackProps,
@@ -121,6 +123,7 @@ export default function DocsDetailClientPage({
         <ContentGateOverlay
           contactCopy={contactCopy}
           contentId={currentItem.id}
+          id={CONTENT_GATE_FORM_ID}
           locale={locale}
           onUnlock={() => setIsUnlocked(true)}
           section={section}
@@ -133,15 +136,19 @@ export default function DocsDetailClientPage({
         currentItem.section !== "news" &&
         currentItem.enableDownloadButton &&
           currentItem.downloadPdfSrc
-          ? `${getPublicDetailHref(section, locale, currentItem.id, currentItem.categorySlug)}/download`
+          ? currentItem.downloadPdfSrc
           : undefined
       }
+      downloadFormTargetId={CONTENT_GATE_FORM_ID}
+      downloadRequiresUnlock={isGateActive}
       docsHref={getCategoryHref(docsCategoryConfigs, currentItem.categorySlug, locale)}
       date={formatPublicDate(locale, currentItem.dateIso)}
       hideHeroImage={currentItem.hideHeroImage}
       heroImageAlt={getLocalizedContent(currentItem.title, contentLocale)}
       heroImageSrc={currentItem.imageSrc}
+      locale={locale}
       title={getLocalizedContent(currentItem.title, contentLocale)}
+      unlockCookieName={getContentUnlockCookieName(currentItem.id, section)}
       writer={getWriterLabel(currentItem)}
     />
   );

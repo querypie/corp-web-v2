@@ -15,8 +15,8 @@ vi.mock("@/features/utm/utm", () => ({
 
 const contactCopy = getContactPageCopy("en");
 
-function fillRequiredFields() {
-  const requiredFields = contactCopy.formFields.filter((f) => f.required);
+function fillRequiredFields(copy = contactCopy) {
+  const requiredFields = copy.formFields.filter((f) => f.required);
   for (const field of requiredFields) {
     const input = document.querySelector(`[name="${field.name}"]`) as HTMLInputElement | HTMLSelectElement | null;
     if (!input) continue;
@@ -27,12 +27,12 @@ function fillRequiredFields() {
       fireEvent.change(input, { target: { value: "Test Value" } });
     }
   }
-  const firstProductCheckbox = document.querySelector(`[name="product:${contactCopy.productOptions[0]}"]`) as HTMLInputElement | null;
+  const firstProductCheckbox = document.querySelector(`[name="product:${copy.productOptions[0]}"]`) as HTMLInputElement | null;
   if (firstProductCheckbox) {
     fireEvent.click(firstProductCheckbox);
   }
   const messageField = document.querySelector('[name="message"]') as HTMLTextAreaElement | null;
-  if (messageField && contactCopy.messageField.required) {
+  if (messageField && copy.messageField.required) {
     fireEvent.change(messageField, { target: { value: "Test message" } });
   }
 }
@@ -105,6 +105,9 @@ describe("ContactForm", () => {
         }),
       );
     });
+
+    const payload = JSON.parse(fetchMock.mock.calls[0][1]?.body as string) as Record<string, unknown>;
+    expect(payload.referrerURL).toBe(window.location.href);
   });
 
   it("제출 시 /api/contact-us로 POST 요청을 보낸다", async () => {
@@ -193,24 +196,24 @@ describe("ContactForm", () => {
     expect(pushMock).toHaveBeenCalled();
   });
 
-  it("API { success: false, errorMessage: 'custom error' } → errorMessage가 표시된다", async () => {
-    const customError = "Custom error message";
+  it("API가 invalid_email errorCode를 반환하면 사용자 친화적인 다국어 메시지를 표시한다", async () => {
     vi.mocked(fetch).mockResolvedValue({
       ok: true,
-      json: async () => ({ success: false, errorMessage: customError }),
+      json: async () => ({ success: false, errorCode: "invalid_email" }),
     } as unknown as Response);
 
+    const koCopy = getContactPageCopy("ko");
     render(
       <ContactForm
-        {...contactCopy}
-        locale="en"
+        {...koCopy}
+        locale="ko"
       />,
     );
-    fillRequiredFields();
+    fillRequiredFields(koCopy);
     fireEvent.submit(screen.getByRole("button").closest("form")!);
 
     await waitFor(() => {
-      expect(screen.getByText(customError)).toBeInTheDocument();
+      expect(screen.getByText(/이메일 주소를 확인해 주세요/)).toBeInTheDocument();
     });
   });
 
@@ -234,7 +237,7 @@ describe("ContactForm", () => {
     });
   });
 
-  it("fetch 예외 발생 → errorGeneral이 표시된다", async () => {
+  it("fetch 예외 발생 → 네트워크 오류 메시지가 표시된다", async () => {
     vi.mocked(fetch).mockRejectedValue(new Error("Network error"));
 
     render(
@@ -247,7 +250,7 @@ describe("ContactForm", () => {
     fireEvent.submit(screen.getByRole("button").closest("form")!);
 
     await waitFor(() => {
-      expect(screen.getByText(contactCopy.errorGeneral)).toBeInTheDocument();
+      expect(screen.getByText(/couldn't connect to the server/i)).toBeInTheDocument();
     });
   });
 });

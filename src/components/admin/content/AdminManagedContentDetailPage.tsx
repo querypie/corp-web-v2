@@ -570,6 +570,7 @@ type PendingImageUpload = {
 
 const LOCALES = ["en", "ko", "ja"] as const;
 const EXTERNAL_IMAGE_PROTOCOLS = new Set(["http:", "https:"]);
+const LOCAL_IMAGE_PATH_PREFIXES = ["/demo/", "/documentation/", "/news/", "/uploads/"];
 
 function replaceAllExact(value: string, search: string, replacement: string) {
   return value.split(search).join(replacement);
@@ -654,6 +655,66 @@ function collectExternalImageSrcs(form: ManagedContentEntry) {
   }
 
   return Array.from(srcs);
+}
+
+function getLocalAbsoluteImagePath(value: string) {
+  try {
+    const url = new URL(value);
+    const isLoopbackHost =
+      url.hostname === "localhost" ||
+      url.hostname.endsWith(".localhost") ||
+      url.hostname === "127.0.0.1" ||
+      url.hostname === "0.0.0.0" ||
+      url.hostname === "::1";
+    const isSameOrigin = typeof window !== "undefined" && url.origin === window.location.origin;
+
+    if (!isLoopbackHost && !isSameOrigin) {
+      return null;
+    }
+
+    if (!LOCAL_IMAGE_PATH_PREFIXES.some((prefix) => url.pathname.startsWith(prefix))) {
+      return null;
+    }
+
+    return `${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return null;
+  }
+}
+
+function normalizeLocalAbsoluteImageSrcs(form: ManagedContentEntry) {
+  const externalImageSrcs = collectExternalImageSrcs(form);
+  const replacements = externalImageSrcs
+    .map((src) => ({ nextSrc: getLocalAbsoluteImagePath(src), src }))
+    .filter((item): item is { nextSrc: string; src: string } => Boolean(item.nextSrc));
+
+  if (replacements.length === 0) {
+    return form;
+  }
+
+  let finalizedForm: ManagedContentEntry = {
+    ...form,
+    bodyHtml: { ...form.bodyHtml },
+    bodyRichText: { ...form.bodyRichText },
+  };
+
+  for (const { nextSrc, src } of replacements) {
+    finalizedForm = {
+      ...finalizedForm,
+      bodyHtml: {
+        en: replaceAllExact(finalizedForm.bodyHtml.en, src, nextSrc),
+        ko: replaceAllExact(finalizedForm.bodyHtml.ko, src, nextSrc),
+        ja: replaceAllExact(finalizedForm.bodyHtml.ja, src, nextSrc),
+      },
+      bodyRichText: {
+        en: replaceAllExact(finalizedForm.bodyRichText.en, src, nextSrc),
+        ko: replaceAllExact(finalizedForm.bodyRichText.ko, src, nextSrc),
+        ja: replaceAllExact(finalizedForm.bodyRichText.ja, src, nextSrc),
+      },
+    };
+  }
+
+  return finalizedForm;
 }
 
 export default function AdminManagedContentDetailPage({
@@ -1392,20 +1453,16 @@ export default function AdminManagedContentDetailPage({
   }
 
   async function finalizeExternalImages(currentForm: ManagedContentEntry) {
-    const externalImageSrcs = collectExternalImageSrcs(currentForm);
+    let finalizedForm = normalizeLocalAbsoluteImageSrcs(currentForm);
+    const externalImageSrcs = collectExternalImageSrcs(finalizedForm);
 
     if (externalImageSrcs.length === 0) {
       return {
-        finalizedForm: currentForm,
+        finalizedForm,
         uploadedImageSrcs: [] as string[],
       };
     }
 
-    let finalizedForm: ManagedContentEntry = {
-      ...currentForm,
-      bodyHtml: { ...currentForm.bodyHtml },
-      bodyRichText: { ...currentForm.bodyRichText },
-    };
     const uploadedImageSrcs: string[] = [];
 
     try {
@@ -1911,7 +1968,7 @@ export default function AdminManagedContentDetailPage({
                       onChange={(event) => updateForm("enableDownloadButton", event.target.checked)}
                       type="checkbox"
                     />
-                    <span>다운로드 버튼</span>
+                    <span>PDF 버튼</span>
                   </label>
                 ) : null}
                 <input className="sr-only" onChange={(event) => updateForm("dateIso", event.target.value)} ref={dateInputRef} type="date" value={form.dateIso} />

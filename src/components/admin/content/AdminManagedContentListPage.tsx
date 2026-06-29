@@ -22,7 +22,7 @@ import {
 } from "@/features/content/clientStore";
 import {
   formatPublicDate,
-  getAdminCategoryHref,
+  getAdminCreateHref,
   getAdminDetailHref,
   getDownloadPreviewProps,
   getManagedCategoryLabel,
@@ -542,11 +542,7 @@ export default function AdminManagedContentListPage({
       : getManagedCategoryLabel(section, categorySlug, activeLocale);
 
   const writeHref =
-    section === "news"
-      ? "/admin/news/new"
-        : categorySlug === "all"
-          ? getAdminCategoryHref(section, section === "demo" ? "use-cases" : "blogs") + "/new"
-          : getAdminCategoryHref(section, categorySlug) + "/new";
+    getAdminCreateHref(section, categorySlug);
 
   function moveItem(itemId: string, direction: "down" | "up") {
     previousPositions.current = new Map(

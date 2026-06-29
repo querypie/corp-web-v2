@@ -51,7 +51,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       metadataTitle: "QueryPie Contacts",
       titleLines: ["Connect with our experts.", "Accelerate your success."],
       formDescription:
-        "We're here to help with product consultations, resource requests, and technical inquiries. Fill out the form on the right, and our team will review your inquiry and contact you within one business week.",
+        "We're here to help with product consultations, resource requests, and technical inquiries. Fill out the form, and our team will review your inquiry and contact you within one business week.",
       contactHighlights: [
         "Talk with the right team for your product and rollout stage.",
         "Receive introduction materials and implementation consultation tailored to your inquiry.",
@@ -122,7 +122,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       metadataTitle: "QueryPie Contacts",
       titleLines: ["전문가와 연결하세요.", "더 빠르게 성과를 만드세요."],
       formDescription:
-        "제품 상담, 자료 요청, 기술 문의가 필요하시면 도와드리겠습니다. 오른쪽 양식을 작성해 주시면 담당자가 문의 내용을 검토한 뒤 영업일 기준 1주일 이내에 연락드립니다.",
+        "제품 상담, 자료 요청, 기술 문의가 필요하시면 도와드리겠습니다. 양식을 작성해 주시면 담당자가 문의 내용을 검토한 뒤 영업일 기준 1주일 이내에 연락드립니다.",
       contactHighlights: [
         "제품과 도입 단계에 맞는 담당 팀과 상담할 수 있습니다.",
         "문의 내용에 맞춘 소개 자료와 도입 컨설팅을 받을 수 있습니다.",
@@ -193,7 +193,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       metadataTitle: "QueryPie: お問い合わせ",
       titleLines: ["専門家にご相談ください。", "成功までのスピードを高めます。"],
       formDescription:
-        "製品相談、資料請求、技術的なお問い合わせについてサポートします。右側のフォームにご記入いただくと、担当チームが内容を確認し、1営業週以内にご連絡します。",
+        "製品相談、資料請求、技術的なお問い合わせについてサポートします。フォームにご記入いただくと、担当チームが内容を確認し、1営業週以内にご連絡します。",
       contactHighlights: [
         "製品や導入フェーズに合った担当チームにご相談いただけます。",
         "お問い合わせ内容に合わせた紹介資料と導入コンサルティングをご案内します。",

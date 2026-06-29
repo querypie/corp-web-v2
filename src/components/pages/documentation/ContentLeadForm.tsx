@@ -12,6 +12,7 @@ import {
   FieldLabel,
   splitContactFields,
 } from "@/components/forms/ContactFormParts";
+import { readUtmCookie } from "@/features/utm/utm";
 
 type ContentLeadFormMode = "download" | "unlock";
 
@@ -33,11 +34,25 @@ type ContentLeadFormProps = {
 
 type FormState = Record<string, string>;
 
+type LeadFormErrorCode =
+  | "content_unavailable"
+  | "download_unavailable"
+  | "invalid_email"
+  | "invalid_mode"
+  | "invalid_request"
+  | "missing_required_fields"
+  | "network"
+  | "server_error";
+
 type LeadFormResponse = {
   downloadUrl?: string;
+  error?: string;
+  errorCode?: LeadFormErrorCode;
   previewUrl?: string;
   unlocked?: boolean;
 };
+
+class LeadFormSubmitError extends Error {}
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -106,6 +121,54 @@ function getLocalizedCopy(locale: "en" | "ko" | "ja", mode: ContentLeadFormMode,
   };
 }
 
+function getLeadFormErrorMessage(
+  locale: "en" | "ko" | "ja",
+  mode: ContentLeadFormMode,
+  code: LeadFormErrorCode | undefined,
+  fallback: string,
+) {
+  const messages: Record<"en" | "ko" | "ja", Record<LeadFormErrorCode, string>> = {
+    en: {
+      content_unavailable: "This content is no longer available. Please go back to the list and choose another item.",
+      download_unavailable: "The PDF file is not ready for download yet. Please try again later.",
+      invalid_email: "Please check your email address. We couldn't verify that this email domain can receive messages.",
+      invalid_mode: "We couldn't process this request. Please refresh the page and try again.",
+      invalid_request: "Some information could not be submitted. Please refresh the page and try again.",
+      missing_required_fields: "Please complete all required fields and select at least one product or service.",
+      network: "We couldn't connect to the server. Please check your connection and try again.",
+      server_error: mode === "download"
+        ? "We couldn't prepare the PDF due to a temporary server issue. Please try again later."
+        : "We couldn't unlock this content due to a temporary server issue. Please try again later.",
+    },
+    ko: {
+      content_unavailable: "현재 이 콘텐츠를 이용할 수 없습니다. 목록으로 돌아가 다른 콘텐츠를 선택해 주세요.",
+      download_unavailable: "PDF 파일이 아직 다운로드 가능한 상태가 아닙니다. 잠시 후 다시 시도해 주세요.",
+      invalid_email: "이메일 주소를 확인해 주세요. 입력한 이메일 도메인으로 메일을 받을 수 있는지 확인하지 못했습니다.",
+      invalid_mode: "요청을 처리하지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.",
+      invalid_request: "입력한 정보를 제출하지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.",
+      missing_required_fields: "필수 항목을 모두 입력하고 관심 제품 또는 서비스를 1개 이상 선택해 주세요.",
+      network: "서버에 연결하지 못했습니다. 네트워크 상태를 확인한 뒤 다시 시도해 주세요.",
+      server_error: mode === "download"
+        ? "일시적인 서버 문제로 PDF를 준비하지 못했습니다. 잠시 후 다시 시도해 주세요."
+        : "일시적인 서버 문제로 콘텐츠를 열지 못했습니다. 잠시 후 다시 시도해 주세요.",
+    },
+    ja: {
+      content_unavailable: "このコンテンツは現在利用できません。一覧に戻って別のコンテンツを選択してください。",
+      download_unavailable: "PDFファイルはまだダウンロードできる状態ではありません。しばらくしてからもう一度お試しください。",
+      invalid_email: "メールアドレスをご確認ください。入力されたメールドメインで受信できるか確認できませんでした。",
+      invalid_mode: "リクエストを処理できませんでした。ページを再読み込みしてもう一度お試しください。",
+      invalid_request: "入力内容を送信できませんでした。ページを再読み込みしてもう一度お試しください。",
+      missing_required_fields: "必須項目をすべて入力し、興味のある製品・サービスを1つ以上選択してください。",
+      network: "サーバーに接続できませんでした。ネットワーク状況を確認してもう一度お試しください。",
+      server_error: mode === "download"
+        ? "一時的なサーバーの問題によりPDFを準備できませんでした。しばらくしてからもう一度お試しください。"
+        : "一時的なサーバーの問題によりコンテンツを開放できませんでした。しばらくしてからもう一度お試しください。",
+    },
+  };
+
+  return code ? messages[locale][code] ?? fallback : fallback;
+}
+
 export default function ContentLeadForm({
   attachmentFileName,
   attachmentUrl,
@@ -145,6 +208,7 @@ export default function ContentLeadForm({
 
     try {
       const selectedProducts = contactCopy.productOptions.filter((option) => form[`product:${option}`] === "true");
+      const utmAttribution = readUtmCookie();
       const response = await fetch("/api/downloads/content", {
         body: JSON.stringify({
           attachmentFileName,
@@ -157,9 +221,11 @@ export default function ContentLeadForm({
           locale,
           mode,
           pdfPreviewUrl,
+          referrerURL: window.location.href,
           returnUrl,
           section,
           title,
+          utmAttribution,
           unlockCookieName,
         }),
         headers: {
@@ -171,12 +237,14 @@ export default function ContentLeadForm({
       const payload = (await response.json()) as LeadFormResponse;
 
       if (!response.ok) {
-        throw new Error(localized.submitError);
+        throw new LeadFormSubmitError(getLeadFormErrorMessage(locale, mode, payload.errorCode, localized.submitError));
       }
 
       if (mode === "download") {
         if (!payload.downloadUrl || !payload.previewUrl || !attachmentFileName || !returnUrl) {
-          throw new Error(localized.submitError);
+          throw new LeadFormSubmitError(
+            getLeadFormErrorMessage(locale, mode, "download_unavailable", localized.submitError),
+          );
         }
 
         const link = document.createElement("a");
@@ -195,7 +263,7 @@ export default function ContentLeadForm({
       }
 
       if (!payload.unlocked) {
-        throw new Error(localized.submitError);
+        throw new LeadFormSubmitError(getLeadFormErrorMessage(locale, mode, payload.errorCode, localized.submitError));
       }
 
       onSuccess?.();
@@ -204,7 +272,11 @@ export default function ContentLeadForm({
         previewWindow.close();
       }
 
-      setErrorMessage(error instanceof Error ? error.message : localized.submitError);
+      setErrorMessage(
+        error instanceof LeadFormSubmitError
+          ? error.message
+          : getLeadFormErrorMessage(locale, mode, "network", localized.submitError),
+      );
       setIsSubmitting(false);
     }
   }
@@ -295,6 +367,7 @@ export default function ContentLeadForm({
           disabled={!canSubmit}
           size="large"
           style="full"
+          type="submit"
           variant="secondary"
         >
           {isSubmitting ? localized.processing : localized.submitLabel}

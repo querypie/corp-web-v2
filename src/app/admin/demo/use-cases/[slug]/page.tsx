@@ -10,6 +10,11 @@ type Props = {
 export default async function AdminDemoUseCaseDetailRoute({ params }: Props) {
   const { slug } = await params;
   const resolvedSlug = decodeURIComponent(slug);
+
+  if (resolvedSlug === "new") {
+    return <AdminManagedContentDetailPage categorySlug="use-cases" itemId="new" section="demo" />;
+  }
+
   const [initialItem, initialItems] = await Promise.all([
     readContentItem("demo", resolvedSlug, { categorySlug: "use-cases" }),
     readContentState("demo", { includeBodies: false }),

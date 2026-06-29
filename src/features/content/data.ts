@@ -53,7 +53,7 @@ export function stripManagedContentBodies(item: ManagedContentEntry): ManagedCon
 
 export const MANAGED_CONTENT_STORAGE_KEY = "querypie-admin-managed-content";
 export const MANAGED_CONTENT_STORE_EVENT = "querypie:managed-content:changed";
-export const CONTENT_DOWNLOAD_BUTTON_LABEL = "Download File";
+export const CONTENT_DOWNLOAD_BUTTON_LABEL = "View the PDF white paper";
 export const CONTENT_UNLOCK_BUTTON_LABEL = "Unlock Content";
 export const NEWS_FORMATS: NewsFormat[] = [
   "Press Release",
@@ -378,6 +378,14 @@ export function getAdjacentContentLabel(direction: "next" | "previous", locale: 
   return ADJACENT_CONTENT_LABELS[direction][locale];
 }
 
+export function getPdfWhitePaperButtonLabel(locale: Locale) {
+  return {
+    en: "View the PDF white paper",
+    ja: "PDFホワイトペーパーを見る",
+    ko: "PDF 백서 보기",
+  }[locale];
+}
+
 export function getDownloadPreviewProps(
   item: Pick<
     ManagedContentEntry,
@@ -443,6 +451,20 @@ export function getAdminDetailHref(
     return `/admin/news/${slug}`;
   }
   return `/admin/${section}/${categorySlug}/${slug}`;
+}
+
+export function getAdminCreateHref(
+  section: ManagedContentSection,
+  categorySlug: ManagedContentCategorySlug | "all",
+) {
+  if (section === "news") {
+    return getAdminDetailHref("news", "news", "new");
+  }
+
+  const defaultCategorySlug = section === "demo" ? "use-cases" : "blogs";
+  const targetCategorySlug = categorySlug === "all" ? defaultCategorySlug : categorySlug;
+
+  return getAdminDetailHref(section, targetCategorySlug, "new");
 }
 
 export function getPublicListHref(

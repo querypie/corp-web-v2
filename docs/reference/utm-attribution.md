@@ -39,7 +39,7 @@
 
 ## 캡처 메커니즘
 
-`UtmCapture` (`src/components/common/UtmCapture.tsx`) Client Component가 레이아웃(`src/app/[locale]/layout.tsx`)의 Suspense 경계 안에 전역 등록되어 있다. 페이지 로드 시 URL의 UTM 파라미터를 읽어 쿠키를 갱신한다.
+`UtmCapture` (`src/components/site/UtmCapture.tsx`) Client Component가 레이아웃(`src/app/[locale]/layout.tsx`)의 Suspense 경계 안에 전역 등록되어 있다. 페이지 로드 시 URL의 UTM 파라미터를 읽어 쿠키를 갱신한다.
 
 `useSearchParams()`를 사용하므로 반드시 `<Suspense>` 안에 위치해야 한다.
 
@@ -66,6 +66,6 @@
 |----|---------|
 | Contact Us | ✅ 적용 완료 |
 | Community License | ❌ 미적용 |
-| 콘텐츠 다운로드 / 언락 | ❌ 미적용 (Salesforce 연동 없음) |
+| 콘텐츠 PDF 언락 | ✅ 적용 완료 (Slack payload에 포함) |
 
 Community License 폼에 UTM을 적용하려면 `ContactForm.tsx`의 패턴을 참조한다 — `readUtmCookie()`로 쿠키를 읽어 API 요청에 포함하고, 서버에서 `toSalesforceFields()`로 변환해 Salesforce 요청 본문에 merge한다.

@@ -9,6 +9,7 @@ import type { ManagedContentSection } from "@/features/content/data";
 type ContentGateOverlayProps = {
   contactCopy: ContactPageCopy;
   contentId: string;
+  id?: string;
   locale: "en" | "ko" | "ja";
   onUnlock?: () => void;
   section: Exclude<ManagedContentSection, "news">;
@@ -34,6 +35,7 @@ function getLocalizedCopy(locale: "en" | "ko" | "ja") {
 export default function ContentGateOverlay({
   contactCopy,
   contentId,
+  id,
   locale,
   onUnlock,
   section,
@@ -51,7 +53,7 @@ export default function ContentGateOverlay({
   }
 
   return (
-    <div className="relative z-10 mt-[-200px]">
+    <div className="relative z-10 mt-[-200px] scroll-mt-24" id={id}>
       <div className="h-[220px] bg-[linear-gradient(180deg,rgba(0,0,0,0)_0%,var(--color-bg)_78%)]" />
       <div className="w-full bg-bg">
         <div className="mx-auto flex w-full max-w-[400px] flex-col gap-6 pb-8">

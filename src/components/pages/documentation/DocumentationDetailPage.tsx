@@ -1,9 +1,10 @@
 import { pageXPaddingClassName } from "@/constants/layout";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import type { Locale } from "@/constants/i18n";
 import ContentArticlePreview from "@/components/content/ContentArticlePreview";
 import DetailContentList from "@/components/sections/DetailContentList";
-import { CONTENT_DOWNLOAD_BUTTON_LABEL } from "@/features/content/data";
+import { getPdfWhitePaperButtonLabel } from "@/features/content/data";
 
 export type DocsDetailPageProps = {
   bodyHtml?: string;
@@ -20,17 +21,21 @@ export type DocsDetailPageProps = {
   contentListLinks: string[];
   contentListTitle: string;
   date: string;
+  downloadFormTargetId?: string;
   downloadHref?: string;
   downloadLabel?: string;
+  downloadRequiresUnlock?: boolean;
   docsHref: string;
   hideHeroImage?: boolean;
   heroImageAlt: string;
   heroImageSrc: string;
+  locale: Locale;
   parentLabel?: string;
   shareLinks?: Array<{ href: string; iconSrc: string; label: string }>;
   showSidebarNav?: boolean;
   slug: string;
   title: string;
+  unlockCookieName?: string;
   writer: string;
 };
 
@@ -44,12 +49,15 @@ export default function DocsDetailPage({
   contentOverlay,
   contentListItems,
   date,
+  downloadFormTargetId,
   downloadHref,
-  downloadLabel = CONTENT_DOWNLOAD_BUTTON_LABEL,
+  downloadLabel,
+  downloadRequiresUnlock = false,
   docsHref,
   hideHeroImage = false,
   heroImageAlt,
   heroImageSrc,
+  locale,
   parentLabel = "Documentation",
   shareLinks = [
     { href: "/", iconSrc: "/assets/brand/icons/linkedin.svg", label: "LinkedIn" },
@@ -58,6 +66,7 @@ export default function DocsDetailPage({
   ],
   showSidebarNav = true,
   title,
+  unlockCookieName,
   writer,
 }: DocsDetailPageProps) {
   return (
@@ -95,12 +104,16 @@ export default function DocsDetailPage({
               bodyHtml={bodyHtml}
               contentOverlay={contentOverlay}
               date={date}
+              downloadFormTargetId={downloadFormTargetId}
               downloadHref={downloadHref}
-              downloadLabel={downloadLabel}
+              downloadLabel={downloadLabel ?? getPdfWhitePaperButtonLabel(locale)}
+              downloadRequiresUnlock={downloadRequiresUnlock}
               heroImageAlt={heroImageAlt}
               heroImageSrc={heroImageSrc}
               hideHeroImage={hideHeroImage}
+              locale={locale}
               title={title}
+              unlockCookieName={unlockCookieName}
               writer={writer}
             />
 

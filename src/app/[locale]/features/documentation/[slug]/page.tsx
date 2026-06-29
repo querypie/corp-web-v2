@@ -31,6 +31,8 @@ type DocsDetailRouteProps = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+const CONTENT_GATE_FORM_ID = "content-gate-form";
+
 export default async function DocumentationDetailRoute({ params }: DocsDetailRouteProps) {
   const { locale, slug } = await params;
   const resolvedSlug = decodeURIComponent(slug);
@@ -112,15 +114,19 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
         contentListLinks: [],
         contentListTitle: "Contents List",
         date: formatPublicDate(locale, currentEntry.dateIso),
+        downloadFormTargetId: CONTENT_GATE_FORM_ID,
         downloadHref:
           currentEntry.enableDownloadButton && currentEntry.downloadPdfSrc
-            ? `${getPublicDetailHref("documentation", locale, resolvedSlug, currentEntry.categorySlug)}/download`
+            ? currentEntry.downloadPdfSrc
             : undefined,
+        downloadRequiresUnlock: isGateActive,
         hideHeroImage: currentEntry.hideHeroImage,
         heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),
         heroImageSrc: currentEntry.imageSrc,
+        locale,
         parentLabel: copy.title,
         title: getLocalizedContent(currentEntry.title, contentLocale),
+        unlockCookieName: getContentUnlockCookieName(currentEntry.id, "documentation"),
         writer: currentEntry.authorRole
           ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
           : currentEntry.authorName,
@@ -129,6 +135,7 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
         <ContentGateOverlay
           contactCopy={getContactPageCopy(locale)}
           contentId={currentEntry.id}
+          id={CONTENT_GATE_FORM_ID}
           locale={locale}
           section="documentation"
           title={getLocalizedContent(currentEntry.title, contentLocale)}

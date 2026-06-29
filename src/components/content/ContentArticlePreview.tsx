@@ -1,18 +1,23 @@
 import type { ReactNode } from "react";
-import Button from "@/components/ui/Button";
+import type { Locale } from "@/constants/i18n";
 import ContentBodyPreview from "./ContentBodyPreview";
+import ContentPdfActionButton from "./ContentPdfActionButton";
 import ContentPreviewImage from "./ContentPreviewImage";
 
 type ContentArticlePreviewProps = {
   bodyHtml?: string;
   contentOverlay?: ReactNode;
   date: string;
+  downloadFormTargetId?: string;
   downloadHref?: string;
   downloadLabel: string;
+  downloadRequiresUnlock?: boolean;
   heroImageAlt: string;
   heroImageSrc: string;
   hideHeroImage?: boolean;
+  locale: Locale;
   title: string;
+  unlockCookieName?: string;
   writer: string;
 };
 
@@ -24,12 +29,16 @@ export default function ContentArticlePreview({
   bodyHtml = "",
   contentOverlay,
   date,
+  downloadFormTargetId,
   downloadHref,
   downloadLabel,
+  downloadRequiresUnlock = false,
   heroImageAlt,
   heroImageSrc,
   hideHeroImage = false,
+  locale,
   title,
+  unlockCookieName,
   writer,
 }: ContentArticlePreviewProps) {
   const resolvedHeroImageSrc = heroImageSrc.trim();
@@ -53,21 +62,29 @@ export default function ContentArticlePreview({
           />
           {downloadHref ? (
             <div className="flex">
-              <a className="w-full" href={downloadHref}>
-                <Button arrow={false} className="w-full justify-center" size="large" style="full" variant="secondary">
-                  {downloadLabel}
-                </Button>
-              </a>
+              <ContentPdfActionButton
+                className="w-full justify-center"
+                formTargetId={downloadFormTargetId}
+                href={downloadHref}
+                label={downloadLabel}
+                locale={locale}
+                requiresUnlock={downloadRequiresUnlock}
+                unlockCookieName={unlockCookieName}
+              />
             </div>
           ) : null}
         </div>
       ) : downloadHref ? (
         <div className="mb-[-40px] flex">
-          <a className="w-full" href={downloadHref}>
-            <Button arrow={false} className="w-full justify-center" size="large" style="full" variant="secondary">
-              {downloadLabel}
-            </Button>
-          </a>
+          <ContentPdfActionButton
+            className="w-full justify-center"
+            formTargetId={downloadFormTargetId}
+            href={downloadHref}
+            label={downloadLabel}
+            locale={locale}
+            requiresUnlock={downloadRequiresUnlock}
+            unlockCookieName={unlockCookieName}
+          />
         </div>
       ) : null}
 
