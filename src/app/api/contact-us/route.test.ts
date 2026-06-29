@@ -29,7 +29,10 @@ function stubMxRecord(valid: boolean) {
 function makeRequest(body: Record<string, unknown>) {
   return new Request("http://localhost/api/contact-us", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      referer: "https://www.querypie.com/ko/company/contact-us",
+    },
     body: JSON.stringify(body),
   });
 }
@@ -45,6 +48,7 @@ const validBody = {
   products: ["AI Platform QueryPie AIP"],
   message: "I have a question.",
   marketingConsent: false,
+  referrerURL: "https://www.querypie.com/ko/company/contact-us",
 };
 
 describe("POST /api/contact-us", () => {
@@ -63,26 +67,26 @@ describe("POST /api/contact-us", () => {
   });
 
   describe("서버 설정 검증", () => {
-    it("SLACK_BOT_OAUTH_TOKEN 미설정 시 500과 서버 오류 메시지를 반환한다", async () => {
+    it("SLACK_BOT_OAUTH_TOKEN 미설정 시에도 success:true를 반환한다", async () => {
       vi.unstubAllEnvs();
       vi.stubEnv("SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES", "C123TEST");
 
       const res = await POST(makeRequest(validBody));
-      expect(res.status).toBe(500);
+      expect(res.status).toBe(200);
       const body = await res.json();
-      expect(body.success).toBe(false);
-      expect(body.errorMessage).toContain("Server configuration error");
+      expect(body.success).toBe(true);
+      expect(postMessageMock).not.toHaveBeenCalled();
     });
 
-    it("SLACK_CHANNEL 미설정 시 500과 서버 오류 메시지를 반환한다", async () => {
+    it("SLACK_CHANNEL 미설정 시에도 success:true를 반환한다", async () => {
       vi.unstubAllEnvs();
       vi.stubEnv("SLACK_BOT_OAUTH_TOKEN", "xoxb-test");
 
       const res = await POST(makeRequest(validBody));
-      expect(res.status).toBe(500);
+      expect(res.status).toBe(200);
       const body = await res.json();
-      expect(body.success).toBe(false);
-      expect(body.errorMessage).toContain("Server configuration error");
+      expect(body.success).toBe(true);
+      expect(postMessageMock).not.toHaveBeenCalled();
     });
   });
 
@@ -91,6 +95,8 @@ describe("POST /api/contact-us", () => {
       const { firstName: _, ...rest } = validBody;
       const res = await POST(makeRequest(rest));
       expect(res.status).toBe(400);
+      const body = await res.json();
+      expect(body.errorCode).toBe("missing_required_fields");
     });
 
     it("departmentTitle 누락 시 400을 반환한다", async () => {
@@ -130,11 +136,12 @@ describe("POST /api/contact-us", () => {
 
       const body = await res.json();
       expect(body.success).toBe(false);
+      expect(body.errorCode).toBe("invalid_email");
       expect(body.errorMessage).toBe("Please enter a valid email address.");
     });
   });
 
-  describe("Slack 필수 알림", () => {
+  describe("Slack best-effort 알림", () => {
     it("Slack 성공 시 success:true를 반환한다", async () => {
       vi.spyOn(global, "fetch").mockResolvedValueOnce({
         ok: true,
@@ -144,9 +151,14 @@ describe("POST /api/contact-us", () => {
       const res = await POST(makeRequest(validBody));
       const body = await res.json();
       expect(body.success).toBe(true);
+      expect(postMessageMock).toHaveBeenCalledOnce();
+      const slackPayload = postMessageMock.mock.calls[0][0] as { blocks: Array<{ text: { text: string } }> };
+      expect(slackPayload.blocks[0].text.text).toContain("New Contact Sales Received(contact-us)");
+      expect(slackPayload.blocks[0].text.text).toContain("RequestURI");
+      expect(slackPayload.blocks[0].text.text).toContain("https://www.querypie.com/ko/company/contact-us");
     });
 
-    it("Slack 실패 시 success:false를 반환한다", async () => {
+    it("Slack 실패 시에도 success:true를 반환한다", async () => {
       vi.spyOn(global, "fetch").mockResolvedValueOnce({
         ok: true,
         json: async () => ({ recordUUID: "abc-123" }),
@@ -156,7 +168,7 @@ describe("POST /api/contact-us", () => {
 
       const res = await POST(makeRequest(validBody));
       const body = await res.json();
-      expect(body.success).toBe(false);
+      expect(body.success).toBe(true);
     });
   });
 

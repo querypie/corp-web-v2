@@ -16,6 +16,8 @@ type ContactUsBody = {
   products?: string[];
   message?: string;
   marketingConsent?: boolean;
+  referrerURL?: string;
+  referrerUrl?: string;
   utmAttribution?: string;
 };
 
@@ -29,45 +31,57 @@ function hasValidMXRecord(domain: string): Promise<boolean> {
 }
 
 async function sendToSlack(requestBody: Record<string, unknown>): Promise<void> {
-  const web = new WebClient(process.env.SLACK_BOT_OAUTH_TOKEN);
+  const token = process.env.SLACK_BOT_OAUTH_TOKEN;
+  const channel = process.env.SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES;
+
+  if (!token || !channel) {
+    return;
+  }
+
+  const web = new WebClient(token);
   const isProduction = process.env.VERCEL_TARGET_ENV === "production";
   const environmentTag = isProduction ? "" : "[TEST] ";
 
-  const formattedData = Object.entries(requestBody)
-    .filter(([key]) => !key.startsWith("Has") && !key.startsWith("Referrer") && !key.startsWith("pi__"))
-    .map(([key, value]) => `• *${key}*: ${value || "-"}`)
-    .join("\n");
+  const requestUri =
+    typeof requestBody.Referrer_URL__c === "string" && requestBody.Referrer_URL__c
+      ? requestBody.Referrer_URL__c
+      : "-";
 
-  const text = `${environmentTag}*New Contact Sales Received*\n\n${formattedData}`;
+  const visibleEntries = Object.entries(requestBody)
+    .filter(([key]) => !key.startsWith("Has") && !key.startsWith("Referrer"))
+    .map(([key, value]) => `• *${key}*: ${value || "-"}`);
+
+  visibleEntries.push(`• *RequestURI*: ${requestUri}`);
+
+  const text = `${environmentTag}*New Contact Sales Received(contact-us)*\n\n${visibleEntries.join("\n")}`;
 
   await web.chat.postMessage({
-    channel: process.env.SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES as string,
+    channel,
     blocks: [{ type: "section", text: { type: "mrkdwn", text } }],
     text: `${environmentTag}New Contact Sales Received`,
   });
 }
 
 export async function POST(request: Request) {
-  // 1. Slack 환경변수 검증 (필수)
-  if (!process.env.SLACK_BOT_OAUTH_TOKEN || !process.env.SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES) {
-    console.error("[contact-us] Slack environment variables not configured");
+  const body = (await request.json().catch(() => null)) as ContactUsBody | null;
+
+  if (!body) {
     return NextResponse.json(
-      { success: false, errorMessage: "Server configuration error. Please contact support." },
-      { status: 500 },
+      { success: false, errorCode: "invalid_request", errorMessage: "Invalid request payload." },
+      { status: 400 },
     );
   }
 
-  const body = (await request.json()) as ContactUsBody;
   const {
     firstName, lastName, email, company, departmentTitle,
-    phoneNumber, inquiryType, plannedImplementationDate,
+    phoneNumber, inquiryType, plannedImplementationDate, referrerURL, referrerUrl,
     products, message, marketingConsent, utmAttribution,
   } = body;
 
   // 2. 필수 필드 검증
   if (!firstName || !lastName || !email || !company || !departmentTitle) {
     return NextResponse.json(
-      { success: false, errorMessage: "Required fields are missing." },
+      { success: false, errorCode: "missing_required_fields", errorMessage: "Required fields are missing." },
       { status: 400 },
     );
   }
@@ -78,6 +92,7 @@ export async function POST(request: Request) {
     await new Promise((resolve) => setTimeout(resolve, 2000));
     return NextResponse.json({
       success: false,
+      errorCode: "invalid_email",
       errorMessage: "Please enter a valid email address.",
     });
   }
@@ -92,7 +107,7 @@ export async function POST(request: Request) {
     Objective__c: filterXSS(inquiryType ?? ""),
     Questions__c: filterXSS(message ?? ""),
     HasOptedInMarketing__c: marketingConsent ?? false,
-    Referrer_URL__c: request.headers.get("referer") ?? "",
+    Referrer_URL__c: filterXSS(referrerURL ?? referrerUrl ?? request.headers.get("referer") ?? ""),
   };
 
   if (phoneNumber) requestBody.MobilePhone = filterXSS(phoneNumber);
@@ -142,12 +157,11 @@ export async function POST(request: Request) {
     console.warn("[contact-us] salesforce: skipped (env not set)");
   }
 
-  // 7. Slack 알림 (필수 — 실패 시 success:false)
+  // 7. Slack 알림 (best-effort)
   try {
     await sendToSlack(requestBody);
   } catch (error) {
     console.error("[contact-us] slack: failed", error);
-    return NextResponse.json({ success: false });
   }
 
   return NextResponse.json({ success: true });
