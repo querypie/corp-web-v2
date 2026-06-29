@@ -6,7 +6,7 @@
     "delete-deploy": "node delete-deploy.js"
   },
   "dependencies": {
-    "@vercel/sdk": "^1.19.1",
+    "@vercel/sdk": "^1.19.40",
     "dotenv": "^17.2.3"
   }
 }
