@@ -15,7 +15,7 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function NewsCard({ href, imageSrc, isExternal = true, title }: NewsItem) {
+function NewsCard({ href, imageSrc, isExternal = false, title }: NewsItem) {
   return (
     /* 뉴스 카드 1개 */
     <a className="group flex w-full cursor-pointer flex-col gap-5 md:flex-1" href={href} rel={isExternal ? "noreferrer noopener" : undefined} target={isExternal ? "_blank" : undefined}>
