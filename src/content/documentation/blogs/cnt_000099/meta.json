@@ -10,7 +10,7 @@
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
-  "hideHeroImage": true,
+  "hideHeroImage": false,
   "id": "ai-security-threat-map-2026-cxo",
   "imageSrc": "/documentation/blogs/thumbnail-5.webp",
   "relatedIds": [],
