@@ -12,7 +12,7 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "security-audit-agent",
-  "imageSrc": "/demo/use-cases/aip-use-case.webp",
+  "imageSrc": "/demo/use-cases/aip-use-case-10.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 22,
