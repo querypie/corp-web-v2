@@ -393,7 +393,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Community",
           description: "Download and secure a free license for the Community edition with the same quality",
           priceLabel: "Free",
-          href: "/documentation",
+          href: "https://docs.querypie.com/en/installation/querypie-acp-community-edition",
           ctaLabel: "Install Now",
           features: [
             "Limited to 5 Users",
@@ -410,7 +410,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Standard",
           description: "Offered exclusively to users who are satisfied with the Community edition; billed annually",
           priceLabel: "$50/mo/user",
-          href: "/documentation",
+          href: "https://docs.querypie.com/ko/support/standard-edition",
           ctaLabel: "Contact Us",
           features: [
             "At least 10 users",
@@ -431,7 +431,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "Recommended for teams seeking professional deployment support and services",
           priceLabel: "Let's Talk",
-          href: "/documentation",
+          href: "/company/contact-us",
           ctaLabel: "Contact Us",
           tone: "primary",
           features: [
@@ -706,7 +706,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "커뮤니티",
           description: "동일한 품질의 Community 에디션 무료 라이선스를 다운로드하세요",
           priceLabel: "무료",
-          href: "/documentation",
+          href: "https://docs.querypie.com/ko/installation/querypie-acp-community-edition",
           ctaLabel: "지금 설치하기",
           features: [
             "최대 5명 사용자",
@@ -723,7 +723,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "스탠다드",
           description: "Community 에디션에 만족하신 사용자에게만 제공되며, 연간 결제만 가능합니다",
           priceLabel: "$50/월/사용자",
-          href: "/documentation",
+          href: "https://docs.querypie.com/ko/support/standard-edition",
           ctaLabel: "문의하기",
           features: [
             "최소 10명 사용자",
@@ -744,7 +744,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "전문적인 도입 지원과 서비스를 원하는 팀에 추천합니다",
           priceLabel: "별도 문의",
-          href: "/documentation",
+          href: "/company/contact-us",
           ctaLabel: "문의하기",
           tone: "primary",
           features: [
