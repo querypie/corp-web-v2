@@ -410,7 +410,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Standard",
           description: "Offered exclusively to users who are satisfied with the Community edition; billed annually",
           priceLabel: "$50/mo/user",
-          href: "https://docs.querypie.com/ko/support/standard-edition",
+          href: "/company/contact-us",
           ctaLabel: "Contact Us",
           features: [
             "At least 10 users",
