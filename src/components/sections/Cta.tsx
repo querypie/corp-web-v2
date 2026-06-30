@@ -23,7 +23,6 @@ function cx(...values: Array<string | false | null | undefined>) {
 const defaultCopyByLocale = {
   en: {
     actionLabel: "Agentic AI Platform",
-    description: "Sign up in seconds and secure your 14-day free trial now.",
     eyebrow: "Stop Thinking.",
     secondaryActionHref: "https://docs.querypie.com/en/installation/querypie-acp-community-edition",
     secondaryActionLabel: "ACP Community Edition",
@@ -31,7 +30,6 @@ const defaultCopyByLocale = {
   },
   ko: {
     actionLabel: "Agentic AI Platform",
-    description: "지금 가입하고 14일 무료 체험을 바로 시작하세요.",
     eyebrow: "생각은 멈추고.",
     secondaryActionHref: "https://docs.querypie.com/ko/installation/querypie-acp-community-edition",
     secondaryActionLabel: "ACP Community Edition",
@@ -39,7 +37,6 @@ const defaultCopyByLocale = {
   },
   ja: {
     actionLabel: "Agentic AI Platform",
-    description: "今すぐ登録して、14日間の無料トライアルを始めましょう。",
     eyebrow: "考え続けるのをやめて。",
     secondaryActionHref: "https://docs.querypie.com/ja/installation/querypie-acp-community-edition",
     secondaryActionLabel: "ACP Community Edition",
@@ -49,7 +46,6 @@ const defaultCopyByLocale = {
   Locale,
   {
     actionLabel: string;
-    description: string;
     eyebrow: string;
     secondaryActionHref: string;
     secondaryActionLabel: string;
@@ -88,9 +84,9 @@ export default function Cta({
           <p className="mb-0 text-mute">{eyebrow ?? defaultCopy.eyebrow}</p>
           <p className="mb-0 text-fg">{title ?? defaultCopy.title}</p>
         </div>
-        <p className="m-0 min-w-full type-body-md text-mute">
-          {description ?? defaultCopy.description}
-        </p>
+        {description ? (
+          <p className="m-0 min-w-full type-body-md text-mute">{description}</p>
+        ) : null}
         <div
           className={cx(
             "flex flex-wrap items-center justify-center",

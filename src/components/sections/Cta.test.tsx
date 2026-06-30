@@ -14,6 +14,9 @@ describe("Cta", () => {
       "href",
       "https://docs.querypie.com/ko/installation/querypie-acp-community-edition",
     );
+    expect(
+      screen.queryByText("Sign up in seconds and secure your 14-day free trial now."),
+    ).not.toBeInTheDocument();
   });
 
   it("allows pages to hide the secondary action explicitly", () => {
