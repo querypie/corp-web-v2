@@ -12,6 +12,7 @@ import { docsCategoryConfigs, getCategoryHref } from "@/features/content/config"
 import {
   formatPublicDate,
   getAdjacentContentLabel,
+  getContentDownloadPdfSrc,
   getManagedCategoryLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
@@ -103,6 +104,7 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
       : localizedBodyHtml;
   const copy = getDocumentationPageCopy(locale);
   const detailHref = getPublicDetailHref("documentation", locale, resolvedSlug, currentEntry.categorySlug);
+  const downloadHref = getContentDownloadPdfSrc(currentEntry, locale);
 
   return (
     <DocsDetailPage
@@ -117,10 +119,7 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
         contentListTitle: "Contents List",
         date: formatPublicDate(locale, currentEntry.dateIso),
         downloadFormTargetId: CONTENT_GATE_FORM_ID,
-        downloadHref:
-          currentEntry.enableDownloadButton && currentEntry.downloadPdfSrc
-            ? currentEntry.downloadPdfSrc
-            : undefined,
+        downloadHref: downloadHref || undefined,
         downloadRequiresUnlock: isGateActive,
         hideHeroImage: currentEntry.hideHeroImage,
         heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),

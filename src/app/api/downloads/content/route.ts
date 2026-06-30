@@ -2,6 +2,7 @@ import dns from "dns";
 import { NextResponse } from "next/server";
 import { WebClient } from "@slack/web-api";
 import { filterXSS } from "xss";
+import { isLocale } from "@/constants/i18n";
 import {
   CONTENT_UNLOCK_COOKIE_MAX_AGE,
   CONTENT_UNLOCK_COOKIE_PREFIX,
@@ -9,7 +10,10 @@ import {
 } from "@/features/content/gating";
 import { readContentItem } from "@/features/content/contentState.server";
 import {
+  getContentDownloadPdfFileName,
+  getContentDownloadPdfSrc,
   getLocalizedContent,
+  getResolvedContentLocale,
   isDownloadableContentPdfSrc,
   isPublishedContentAccessible,
   type ManagedContentSection,
@@ -39,6 +43,11 @@ function isDownloadSection(section: unknown): section is Exclude<ManagedContentS
 
 function isLeadMode(mode: unknown): mode is NonNullable<DownloadLeadPayload["mode"]> {
   return mode === "download" || mode === "unlock";
+}
+
+function getPayloadLocale(payload: DownloadLeadPayload) {
+  const locale = payload.locale;
+  return typeof locale === "string" && isLocale(locale) ? locale : "en";
 }
 
 function isSafeCookieName(value: string) {
@@ -234,8 +243,9 @@ async function resolvePayload(payload: DownloadLeadPayload, mode: NonNullable<Do
     return null;
   }
 
-  const attachmentUrl = item.downloadPdfSrc.trim();
-  const attachmentFileName = item.downloadPdfFileName || `${item.id}.pdf`;
+  const locale = getPayloadLocale(payload);
+  const attachmentUrl = getContentDownloadPdfSrc(item, locale);
+  const attachmentFileName = getContentDownloadPdfFileName(item, locale);
 
   if (
     mode === "download" &&
@@ -251,7 +261,7 @@ async function resolvePayload(payload: DownloadLeadPayload, mode: NonNullable<Do
     notificationSource: getLeadNotificationSource(item.section, item.categorySlug),
     pdfPreviewUrl: attachmentUrl,
     returnUrl: payload.returnUrl,
-    title: payload.title ?? getLocalizedContent(item.title, "en"),
+    title: payload.title ?? getLocalizedContent(item.title, getResolvedContentLocale(item, locale)),
   };
 }
 

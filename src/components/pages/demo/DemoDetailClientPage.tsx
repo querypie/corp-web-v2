@@ -12,6 +12,7 @@ import { demoCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/featur
 import {
   formatPublicDate,
   getAdjacentContentLabel,
+  getContentDownloadPdfSrc,
   getContentThumbnailSrc,
   getLocalizedContent,
   getPublicDetailHref,
@@ -111,7 +112,8 @@ export default function DemoDetailClientPage({
           title: getLocalizedContent(nextItem.title, getResolvedContentLocale(nextItem, locale)),
         }
       : null,
-  ].filter((item): item is NonNullable<typeof item> => !!item);
+ ].filter((item): item is NonNullable<typeof item> => !!item);
+  const downloadHref = getContentDownloadPdfSrc(currentUseCase, locale);
 
   return (
     <DemoDetailPage
@@ -131,11 +133,7 @@ export default function DemoDetailClientPage({
         />
       ) : undefined}
       contentListItems={relatedPublishedItems}
-      downloadHref={
-        currentUseCase.enableDownloadButton && currentUseCase.downloadPdfSrc
-          ? currentUseCase.downloadPdfSrc
-          : undefined
-      }
+      downloadHref={downloadHref || undefined}
       downloadFormTargetId={CONTENT_GATE_FORM_ID}
       downloadRequiresUnlock={isGateActive}
       docsHref={getCategoryHref(demoCategoryConfigs, currentUseCase.categorySlug, locale)}

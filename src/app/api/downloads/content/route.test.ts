@@ -58,7 +58,9 @@ const BASE_CONTENT_ITEM = {
   categorySlug: "white-papers",
   contentType: "content",
   downloadPdfFileName: "server-doc.pdf",
+  downloadPdfFileNameByLocale: { en: "", ko: "", ja: "" },
   downloadPdfSrc: "/documentation/white-papers/server-doc.pdf",
+  downloadPdfSrcByLocale: { en: "", ko: "", ja: "" },
   enableDownloadButton: true,
   id: "server-doc",
   section: "documentation",
@@ -169,6 +171,40 @@ describe("POST /api/downloads/content", () => {
       expect(data.downloadUrl).toContain("server-doc.pdf");
       expect(data.downloadUrl).not.toContain("client-doc.pdf");
       expect(response.headers.get("set-cookie")).toContain("querypie_content_unlocked_documentation_server-doc=true");
+    });
+
+    it("locale별 PDF가 있으면 요청 locale의 파일을 우선 사용한다", async () => {
+      mockReadContentItem.mockResolvedValue({
+        ...BASE_CONTENT_ITEM,
+        downloadPdfFileName: "",
+        downloadPdfFileNameByLocale: {
+          en: "",
+          ko: "",
+          ja: "server-doc-ja.pdf",
+        },
+        downloadPdfSrc: "",
+        downloadPdfSrcByLocale: {
+          en: "",
+          ko: "",
+          ja: "/documentation/white-papers/server-doc-ja.pdf",
+        },
+      });
+
+      const request = new Request("http://localhost/api/downloads/content", {
+        method: "POST",
+        body: JSON.stringify({
+          ...BASE_DOWNLOAD_PAYLOAD,
+          contentId: "server-doc",
+          locale: "ja",
+          section: "documentation",
+        }),
+      });
+      const response = await POST(request);
+      const data = await response.json() as { downloadUrl: string; previewUrl: string };
+
+      expect(response.status).toBe(200);
+      expect(data.downloadUrl).toContain("server-doc-ja.pdf");
+      expect(data.previewUrl).toBe("/documentation/white-papers/server-doc-ja.pdf");
     });
 
     it("contentId가 가리키는 콘텐츠가 다운로드 불가이면 404를 반환한다", async () => {
