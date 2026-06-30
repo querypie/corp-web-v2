@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { Locale } from "@/constants/i18n";
 import ContentArticlePreview from "@/components/content/ContentArticlePreview";
 import DetailContentList from "@/components/sections/DetailContentList";
+import ContentShareActions from "./ContentShareActions";
 import { getPdfWhitePaperButtonLabel } from "@/features/content/data";
 
 export type DocsDetailPageProps = {
@@ -31,7 +32,7 @@ export type DocsDetailPageProps = {
   heroImageSrc: string;
   locale: Locale;
   parentLabel?: string;
-  shareLinks?: Array<{ href: string; iconSrc: string; label: string }>;
+  shareUrl?: string;
   showSidebarNav?: boolean;
   slug: string;
   title: string;
@@ -59,11 +60,7 @@ export default function DocsDetailPage({
   heroImageSrc,
   locale,
   parentLabel = "Documentation",
-  shareLinks = [
-    { href: "/", iconSrc: "/assets/brand/icons/linkedin.svg", label: "LinkedIn" },
-    { href: "/", iconSrc: "/assets/brand/icons/x.svg", label: "X" },
-    { href: "/", iconSrc: "/assets/ui/icons/URL.svg", label: "Copy URL" },
-  ],
+  shareUrl,
   showSidebarNav = true,
   title,
   unlockCookieName,
@@ -117,18 +114,7 @@ export default function DocsDetailPage({
               writer={writer}
             />
 
-            <div className="flex w-full justify-end gap-[10px]">
-              {shareLinks.map((link) => (
-                <a
-                  key={link.label}
-                  aria-label={link.label}
-                  className="inline-flex h-7 w-7 items-center justify-center opacity-100 transition-opacity hover:opacity-60"
-                  href={link.href}
-                >
-                  <img alt="" aria-hidden="true" className="h-7 w-7 object-contain" src={link.iconSrc} />
-                </a>
-              ))}
-            </div>
+            <ContentShareActions locale={locale} shareUrl={shareUrl} title={title} />
 
             <DetailContentList className="pt-2" items={contentListItems} />
           </div>

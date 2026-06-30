@@ -7,6 +7,7 @@ import ContentGateOverlay from "@/components/pages/documentation/ContentGateOver
 import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
 import { getContactPageCopy } from "@/copy/contact";
 import { getDemoPageCopy } from "@/copy/contentPages";
+import { getAbsolutePublicUrl } from "@/constants/site";
 import { demoCategoryConfigs, getCategoryHref } from "@/features/content/config";
 import {
   formatPublicDate,
@@ -104,6 +105,7 @@ export default async function DemoDetailRoute({ params }: Props) {
     : false;
   const isGateActive = isGateEnabled && !isContentUnlocked;
   const copy = getDemoPageCopy(locale);
+  const detailHref = getPublicDetailHref("demo", locale, resolvedSlug, currentEntry.categorySlug);
 
   return (
     <DemoDetailPage
@@ -130,6 +132,7 @@ export default async function DemoDetailRoute({ params }: Props) {
         heroImageSrc: currentEntry.imageSrc,
         locale,
         parentLabel: copy.title,
+        shareUrl: getAbsolutePublicUrl(detailHref),
         title: getLocalizedContent(currentEntry.title, contentLocale),
         unlockCookieName: getContentUnlockCookieName(currentEntry.id, "demo"),
         writer: currentEntry.authorRole
@@ -165,6 +168,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale));
   const description = getLocalizedContent(currentEntry.summary, getResolvedContentLocale(currentEntry, locale));
+  const imageUrl = getContentThumbnailSrc(currentEntry.imageSrc);
 
   return withDynamicOgImage({
     title,
@@ -172,5 +176,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: getPublicDetailHref("demo", locale, resolvedSlug, currentEntry.categorySlug),
     },
-  }, { locale, title, description });
+  }, {
+    locale,
+    title,
+    description,
+    image: {
+      url: imageUrl,
+      alt: title,
+    },
+  });
 }

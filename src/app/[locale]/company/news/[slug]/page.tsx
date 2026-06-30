@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { isLocale } from "@/constants/i18n";
+import { getAbsolutePublicUrl } from "@/constants/site";
 import NewsDetailPage from "@/components/pages/news/NewsDetailPage";
 import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
 import {
@@ -51,6 +52,7 @@ export default async function NewsDetailRoute({ params }: Props) {
   }
 
   const contentLocale = getResolvedContentLocale(currentEntry, locale);
+  const detailHref = getPublicDetailHref("news", locale, decodedSlug);
 
   const previousItem = currentIndex > 0 ? accessibleNewsItems[currentIndex - 1] : null;
   const nextItem = currentIndex < accessibleNewsItems.length - 1 ? accessibleNewsItems[currentIndex + 1] : null;
@@ -96,6 +98,7 @@ export default async function NewsDetailRoute({ params }: Props) {
         heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),
         heroImageSrc: currentEntry.imageSrc,
         locale,
+        shareUrl: getAbsolutePublicUrl(detailHref),
         title: getLocalizedContent(currentEntry.title, contentLocale),
         writer: getNewsFormatLabel(currentEntry, locale),
       } satisfies DocsDetailPageProps)}
