@@ -26,6 +26,7 @@ function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContent
     downloadCoverImageSrc: "",
     downloadPdfFileName: "",
     downloadPdfFileNameByLocale: createLocalizedContent(),
+    downloadPdfMode: "none",
     downloadPdfSrc: "",
     downloadPdfSrcByLocale: createLocalizedContent(),
     enableDownloadButton: false,

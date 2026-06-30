@@ -7,19 +7,20 @@
   "downloadCoverImageSrc": "/documentation/introduction/acp-introduction.webp",
   "downloadPdfFileName": "",
   "downloadPdfFileNameByLocale": {
-    "en": "",
-    "ko": "",
-    "ja": "querypie-acp-product-introduction-ja.pdf"
+    "en": "querypie-acp-intro-en.pdf",
+    "ko": "querypie-acp-intro-ko.pdf",
+    "ja": "querypie-acp-intro-jp.pdf"
   },
+  "downloadPdfMode": "localized",
   "downloadPdfSrc": "",
   "downloadPdfSrcByLocale": {
-    "en": "",
-    "ko": "",
-    "ja": "/documentation/introduction/querypie-acp-product-introduction-ja.pdf"
+    "en": "/documentation/introduction/querypie-acp-intro-en.pdf",
+    "ko": "/documentation/introduction/querypie-acp-intro-ko.pdf",
+    "ja": "/documentation/introduction/querypie-acp-intro-jp.pdf"
   },
   "enableDownloadButton": true,
   "externalUrl": "",
-  "gatingLevel": "50",
+  "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "querypie-acp",
   "imageSrc": "/documentation/introduction/acp-introduction.webp",

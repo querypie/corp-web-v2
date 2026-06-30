@@ -26,6 +26,7 @@ type AuthoredContentMeta = {
   downloadCoverImageSrc?: string;
   downloadPdfFileName?: string;
   downloadPdfFileNameByLocale?: Partial<Record<Locale, string>>;
+  downloadPdfMode?: ManagedContentEntry["downloadPdfMode"];
   downloadPdfSrc?: string;
   downloadPdfSrcByLocale?: Partial<Record<Locale, string>>;
   enableDownloadButton: boolean;
@@ -57,6 +58,7 @@ type SaveAuthoredContentInput = Pick<
   | "downloadCoverImageSrc"
   | "downloadPdfFileName"
   | "downloadPdfFileNameByLocale"
+  | "downloadPdfMode"
   | "downloadPdfSrc"
   | "downloadPdfSrcByLocale"
   | "enableDownloadButton"
@@ -264,6 +266,21 @@ function normalizeLocalizedRecord(value: Partial<Record<Locale, string>> | undef
   };
 }
 
+function resolveDownloadPdfMode(meta: Pick<AuthoredContentMeta, "downloadPdfMode" | "downloadPdfSrcByLocale" | "enableDownloadButton">) {
+  if (meta.downloadPdfMode === "none" || meta.downloadPdfMode === "single" || meta.downloadPdfMode === "localized") {
+    return meta.downloadPdfMode;
+  }
+
+  if (!meta.enableDownloadButton) {
+    return "none";
+  }
+
+  const localizedSrcs = normalizeLocalizedRecord(meta.downloadPdfSrcByLocale);
+  return localizedSrcs.en.trim() || localizedSrcs.ko.trim() || localizedSrcs.ja.trim()
+    ? "localized"
+    : "single";
+}
+
 async function ensureDir(dirPath: string) {
   await fs.mkdir(dirPath, { recursive: true });
 }
@@ -451,6 +468,7 @@ async function createManagedContentEntry(
     downloadCoverImageSrc: meta.downloadCoverImageSrc ?? "",
     downloadPdfFileName: meta.downloadPdfFileName ?? "",
     downloadPdfFileNameByLocale: normalizeLocalizedRecord(meta.downloadPdfFileNameByLocale),
+    downloadPdfMode: resolveDownloadPdfMode(meta),
     downloadPdfSrc: meta.downloadPdfSrc ?? "",
     downloadPdfSrcByLocale: normalizeLocalizedRecord(meta.downloadPdfSrcByLocale),
     enableDownloadButton: meta.enableDownloadButton ?? false,
@@ -687,6 +705,7 @@ export async function saveAuthoredContent(
     downloadCoverImageSrc: input.downloadCoverImageSrc,
     downloadPdfFileName: input.downloadPdfFileName,
     downloadPdfFileNameByLocale: input.downloadPdfFileNameByLocale,
+    downloadPdfMode: input.downloadPdfMode,
     downloadPdfSrc: input.downloadPdfSrc,
     downloadPdfSrcByLocale: input.downloadPdfSrcByLocale,
     enableDownloadButton: input.enableDownloadButton,

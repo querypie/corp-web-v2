@@ -5,7 +5,7 @@ import type { Locale } from "@/constants/i18n";
 import ContentArticlePreview from "@/components/content/ContentArticlePreview";
 import DetailContentList from "@/components/sections/DetailContentList";
 import ContentShareActions from "./ContentShareActions";
-import { getPdfWhitePaperButtonLabel } from "@/features/content/data";
+import { getLockedPdfButtonLabel, getPdfWhitePaperButtonLabel } from "@/features/content/data";
 
 export type DocsDetailPageProps = {
   bodyHtml?: string;
@@ -25,7 +25,10 @@ export type DocsDetailPageProps = {
   downloadFormTargetId?: string;
   downloadHref?: string;
   downloadLabel?: string;
+  downloadLockedLabel?: string;
+  downloadRequiresLeadCapture?: boolean;
   downloadRequiresUnlock?: boolean;
+  downloadUnlockForm?: (props: { onDirtyChange: (isDirty: boolean) => void; onSuccess: () => void }) => ReactNode;
   docsHref: string;
   hideHeroImage?: boolean;
   heroImageAlt: string;
@@ -53,7 +56,10 @@ export default function DocsDetailPage({
   downloadFormTargetId,
   downloadHref,
   downloadLabel,
+  downloadLockedLabel,
+  downloadRequiresLeadCapture = false,
   downloadRequiresUnlock = false,
+  downloadUnlockForm,
   docsHref,
   hideHeroImage = false,
   heroImageAlt,
@@ -104,7 +110,10 @@ export default function DocsDetailPage({
               downloadFormTargetId={downloadFormTargetId}
               downloadHref={downloadHref}
               downloadLabel={downloadLabel ?? getPdfWhitePaperButtonLabel(locale)}
+              downloadLockedLabel={downloadLockedLabel ?? getLockedPdfButtonLabel(locale)}
+              downloadRequiresLeadCapture={downloadRequiresLeadCapture}
               downloadRequiresUnlock={downloadRequiresUnlock}
+              downloadUnlockForm={downloadUnlockForm}
               heroImageAlt={heroImageAlt}
               heroImageSrc={heroImageSrc}
               hideHeroImage={hideHeroImage}

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import DocsDetailPage, { type DocsDetailPageProps } from "./DocumentationDetailPage";
 import ContentGateOverlay from "./ContentGateOverlay";
+import ContentLeadForm from "./ContentLeadForm";
 import type { Locale } from "@/constants/i18n";
 import { useManagedContents } from "@/features/content/clientStore";
 import type { ContactPageCopy } from "@/copy/contact";
@@ -136,7 +137,24 @@ export default function DocsDetailClientPage({
       contentListItems={relatedItems}
       downloadHref={downloadHref || undefined}
       downloadFormTargetId={CONTENT_GATE_FORM_ID}
+      downloadRequiresLeadCapture={Boolean(downloadHref)}
       downloadRequiresUnlock={isGateActive}
+      downloadUnlockForm={({ onDirtyChange, onSuccess }) => (
+        <ContentLeadForm
+          contactCopy={contactCopy}
+          contentId={currentItem.id}
+          locale={locale}
+          mode="unlock"
+          onDirtyChange={onDirtyChange}
+          onSuccess={() => {
+            setIsUnlocked(true);
+            onSuccess();
+          }}
+          section={section}
+          title={getLocalizedContent(currentItem.title, contentLocale)}
+          unlockCookieName={getContentUnlockCookieName(currentItem.id, section)}
+        />
+      )}
       docsHref={getCategoryHref(docsCategoryConfigs, currentItem.categorySlug, locale)}
       date={formatPublicDate(locale, currentItem.dateIso)}
       hideHeroImage={currentItem.hideHeroImage}
