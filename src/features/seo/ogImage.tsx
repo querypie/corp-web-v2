@@ -6,7 +6,6 @@ export const ogImageSize = {
   width: 1200,
   height: 630,
 } as const;
-
 const ogImagePaddingX = 68;
 
 type OgImageProps = {
@@ -93,7 +92,7 @@ function getLocaleTextStyle(locale: Locale) {
 
 export async function createOgImage({ description, locale, origin, title }: OgImageProps) {
   const [backgroundImageUrl, fonts] = await Promise.all([
-    Promise.resolve(new URL("/assets/og/base.png", origin).toString()),
+    Promise.resolve(new URL("/assets/og/base.jpg", origin).toString()),
     getOgFonts(origin, locale),
   ]);
   const textStyle = getLocaleTextStyle(locale);
@@ -142,6 +141,7 @@ export async function createOgImage({ description, locale, origin, title }: OgIm
               display: "flex",
               flexDirection: "column",
               fontFamily,
+              fontFeatureSettings: '"ss01" on, "ss09" on',
               fontSize: textStyle.titleSize,
               fontWeight: 400,
               letterSpacing: "-0.5px",
@@ -175,7 +175,7 @@ export async function createOgImage({ description, locale, origin, title }: OgIm
               fontWeight: 400,
               letterSpacing: "-0.2px",
               lineHeight: `${textStyle.descriptionLineHeight}px`,
-              marginTop: 46,
+              marginTop: 32,
               width: "100%",
               whiteSpace: "pre-wrap",
               wordBreak: "keep-all",
