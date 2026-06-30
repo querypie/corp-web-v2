@@ -123,7 +123,7 @@ export default function ContentShareActions({
   }, [copy.facebookLabel, copy.linkedinLabel, copy.xLabel, shareUrl, title]);
 
   async function handleCopyUrl() {
-    const url = shareUrl || getCurrentPageUrl();
+    const url = getCurrentPageUrl();
     await copyToClipboard(url);
     setCopied(true);
   }

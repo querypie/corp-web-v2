@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 
 import type { Locale } from "@/constants/i18n";
-import { getAbsolutePublicUrl } from "@/constants/site";
 
 type DynamicOgImageOptions = {
   description?: string | null;
@@ -60,10 +59,9 @@ export function withDynamicOgImage(
 ): Metadata {
   const description = options.description ?? defaultOgDescription[options.locale];
   const imageUrl = createDynamicOgImageUrl({ ...options, description });
-  const canonicalUrl = metadata.openGraph?.url?.toString() ?? getCanonicalUrl(metadata);
-  const absoluteCanonicalUrl = canonicalUrl ? getAbsolutePublicUrl(canonicalUrl) : undefined;
+  const canonicalUrl = getCanonicalUrl(metadata);
   const ogImage = {
-    url: getAbsolutePublicUrl(options.image?.url ?? imageUrl),
+    url: options.image?.url ?? imageUrl,
     width: options.image?.width ?? defaultOgImageSize.width,
     height: options.image?.height ?? defaultOgImageSize.height,
     alt: options.image?.alt ?? options.title,
@@ -76,7 +74,7 @@ export function withDynamicOgImage(
       ...metadata.openGraph,
       title: options.title,
       description,
-      url: absoluteCanonicalUrl,
+      url: metadata.openGraph?.url ?? canonicalUrl,
       images: [ogImage],
     },
     twitter: {

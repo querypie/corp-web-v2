@@ -18,21 +18,21 @@ describe("withDynamicOgImage", () => {
       },
     );
 
-    expect(metadata.openGraph?.url).toBe("https://www.querypie.com/ko/news/product-update");
+    expect(metadata.openGraph?.url).toBe("/ko/news/product-update");
     expect(metadata.openGraph?.images).toEqual([
       {
-        url: "https://www.querypie.com/api/og?locale=ko&title=QueryPie+news&description=QueryPie+update",
+        url: "/api/og?locale=ko&title=QueryPie+news&description=QueryPie+update",
         width: 1600,
         height: 840,
         alt: "QueryPie news",
       },
     ]);
     expect(metadata.twitter?.images).toEqual([
-      "https://www.querypie.com/api/og?locale=ko&title=QueryPie+news&description=QueryPie+update",
+      "/api/og?locale=ko&title=QueryPie+news&description=QueryPie+update",
     ]);
   });
 
-  it("기존 openGraph.url이 있으면 운영 도메인 절대 URL로 반영한다", () => {
+  it("기존 openGraph.url이 있으면 덮어쓰지 않는다", () => {
     const metadata = withDynamicOgImage(
       {
         alternates: {
@@ -48,10 +48,10 @@ describe("withDynamicOgImage", () => {
       },
     );
 
-    expect(metadata.openGraph?.url).toBe("https://www.querypie.com/custom-og-url");
+    expect(metadata.openGraph?.url).toBe("/custom-og-url");
   });
 
-  it("콘텐츠 이미지도 운영 도메인 절대 URL로 반영한다", () => {
+  it("콘텐츠 이미지를 OG image로 반영한다", () => {
     const metadata = withDynamicOgImage(
       {
         title: "QueryPie news",
@@ -72,14 +72,14 @@ describe("withDynamicOgImage", () => {
 
     expect(metadata.openGraph?.images).toEqual([
       {
-        url: "https://www.querypie.com/uploads/product-update.webp",
+        url: "/uploads/product-update.webp",
         width: 1600,
         height: 840,
         alt: "Product update",
       },
     ]);
     expect(metadata.twitter?.images).toEqual([
-      "https://www.querypie.com/uploads/product-update.webp",
+      "/uploads/product-update.webp",
     ]);
   });
 });
