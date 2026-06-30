@@ -3,10 +3,16 @@ import type { Locale } from "@/constants/i18n";
 import { getOgDescriptionLines, getOgTitleLines } from "@/features/seo/ogTitle";
 
 export const ogImageSize = {
-  width: 1200,
-  height: 630,
+  width: 1600,
+  height: 840,
 } as const;
-const ogImagePaddingX = 68;
+const ogImageScale = ogImageSize.width / 1200;
+
+function scaleOgValue(value: number) {
+  return Math.round(value * ogImageScale);
+}
+
+const ogImagePaddingX = scaleOgValue(68);
 
 type OgImageProps = {
   description: string;
@@ -77,16 +83,16 @@ function getOgFontFamily(locale: Locale) {
 function getLocaleTextStyle(locale: Locale) {
   if (locale === "en" || locale === "ko") {
     return {
-      titleSize: 64,
-      descriptionSize: 36,
-      descriptionLineHeight: 52,
+      titleSize: scaleOgValue(64),
+      descriptionSize: scaleOgValue(36),
+      descriptionLineHeight: scaleOgValue(52),
     };
   }
 
   return {
-    titleSize: 64,
-    descriptionSize: 34,
-    descriptionLineHeight: 52,
+    titleSize: scaleOgValue(64),
+    descriptionSize: scaleOgValue(34),
+    descriptionLineHeight: scaleOgValue(52),
   };
 }
 
@@ -132,7 +138,7 @@ export async function createOgImage({ description, locale, origin, title }: OgIm
             flexDirection: "column",
             left: ogImagePaddingX,
             position: "absolute",
-            top: 220,
+            top: scaleOgValue(220),
             width: ogImageSize.width - ogImagePaddingX * 2,
           }}
         >
@@ -175,7 +181,7 @@ export async function createOgImage({ description, locale, origin, title }: OgIm
               fontWeight: 400,
               letterSpacing: "-0.2px",
               lineHeight: `${textStyle.descriptionLineHeight}px`,
-              marginTop: 32,
+              marginTop: scaleOgValue(32),
               width: "100%",
               whiteSpace: "pre-wrap",
               wordBreak: "keep-all",

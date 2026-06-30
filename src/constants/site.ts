@@ -15,4 +15,10 @@ export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ||
     ? siteUrlByTarget[process.env.VERCEL_TARGET_ENV]
     : "https://www.querypie.com");
 
+export const publicSiteUrl = "https://www.querypie.com";
+
+export function getAbsolutePublicUrl(pathOrUrl: string) {
+  return new URL(pathOrUrl, publicSiteUrl).toString();
+}
+
 export const siteTitle = "QueryPie AI: AI That Gets How You Work";
