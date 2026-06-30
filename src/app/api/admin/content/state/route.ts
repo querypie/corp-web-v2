@@ -104,6 +104,7 @@ function isManagedContentCategorySlug(value: unknown): value is ManagedContentCa
     value === "manuals" ||
     value === "white-papers" ||
     value === "blogs" ||
+    value === "voc" ||
     value === "events" ||
     value === "news"
   );
@@ -135,6 +136,7 @@ function isCategorySlugAllowedForSection(
     categorySlug === "manuals" ||
     categorySlug === "white-papers" ||
     categorySlug === "blogs" ||
+    categorySlug === "voc" ||
     categorySlug === "events"
   );
 }

@@ -39,6 +39,7 @@ type McpAction = {
 type ReviewItem = {
   body: string;
   company: string;
+  href: string;
   imageSrc: string;
   role: string;
 };
@@ -72,6 +73,8 @@ export type HomePageProps = {
   ctaActionLabel: string;
   ctaDescription: string;
   ctaEyebrow: string;
+  ctaSecondaryActionHref: string;
+  ctaSecondaryActionLabel: string;
   ctaTitle: string;
   featureItems: FeatureItem[];
   heroDescription: string;
@@ -99,6 +102,8 @@ export default function HomePage({
   ctaActionLabel,
   ctaDescription,
   ctaEyebrow,
+  ctaSecondaryActionHref,
+  ctaSecondaryActionLabel,
   ctaTitle,
   featureItems,
   heroDescription,
@@ -157,6 +162,8 @@ export default function HomePage({
           actionLabel={ctaActionLabel}
           description={ctaDescription}
           eyebrow={ctaEyebrow}
+          secondaryActionHref={ctaSecondaryActionHref}
+          secondaryActionLabel={ctaSecondaryActionLabel}
           title={ctaTitle}
         />
       </div>

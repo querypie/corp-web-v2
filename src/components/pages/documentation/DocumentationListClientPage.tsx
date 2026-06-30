@@ -18,6 +18,7 @@ type DocsListClientPageProps = {
   locale: Locale;
   selectedCategory: DocsCategorySlug;
   title: string;
+  visibleCategorySlugs: DocsCategorySlug[];
 };
 
 export default function DocsListClientPage({
@@ -25,12 +26,13 @@ export default function DocsListClientPage({
   locale,
   selectedCategory,
   title,
+  visibleCategorySlugs,
 }: DocsListClientPageProps) {
   return (
     <DocsListPage
       items={fallbackItems}
       locale={locale}
-      menu={getDocumentationSidebarMenuItems(locale, selectedCategory)}
+      menu={getDocumentationSidebarMenuItems(locale, selectedCategory, visibleCategorySlugs)}
       showCategory={selectedCategory === "all"}
       title={title}
     />

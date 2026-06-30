@@ -212,19 +212,21 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         mcpTitle: "Works with Almost All MCP Servers",
         reviewItems: [
           {
-            body: "It was night and day from one batch to another, adoption went from single digits to over 80%. It just spread like wildfire, all the best builders were using AIP.",
-            company: "TerraSky",
-            imageSrc: "/assets/pages/home/reviews/reviewer-01.png",
-            role: "General Partner, Y Combinator",
+            body: "\"Managing our company's scattered, complex DB access permissions efficiently from a single, secure place really gives us great peace of mind.\nWith real-time auditing and automated data masking handling the rest, it significantly eases our worries regarding security and compliance.\"",
+            company: "Mori Takeshi",
+            href: getLocalePath(locale, "/voc/air-company-mori-takeshi"),
+            imageSrc: "/assets/pages/home/reviews/voc1.png",
+            role: "CEO of AIR Company",
           },
           {
-            body: "My favorite enterprise AI service is Cursor. Every one of our engineers, some 40,000, are now assisted by AI and our productivity has gone up incredibly.",
-            company: "TerraSky",
-            imageSrc: "/assets/pages/home/reviews/reviewer-02.png",
-            role: "General Partner, Y Combinator",
+            body: "\"Our engineering team can now deploy resources with agility while maintaining ironclad control over our cloud infrastructure access.\nBy unifying multi-cloud environments and Kubernetes access into one platform, it has beautifully streamlined both our security operations and developer productivity.\"",
+            company: "Daniel Ku",
+            href: getLocalePath(locale, "/voc/lg-uplus-daniel-ku"),
+            imageSrc: "/assets/pages/home/reviews/voc2.png",
+            role: "LG U+ Engineer",
           },
         ],
-        reviewTitle: "Trusted by the world's best developers",
+        reviewTitle: "Voice of the Customer",
         newsItems: [
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
@@ -247,7 +249,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
         ],
         newsTitle: "Lastest News",
-        ctaActionLabel: "Make It Happen",
+        ctaActionLabel: "Agentic AI Platform",
         ctaSection: [
           "Stop Thinking.",
           "Start Transforming.",
@@ -345,19 +347,21 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         mcpTitle: "거의 모든 MCP 서버와 연동됩니다",
         reviewItems: [
           {
-            body: "배치가 한 번 바뀌자 도입률이 한 자릿수에서 80% 이상으로 뛰었습니다. 최고의 빌더들이 AIP를 쓰기 시작하면서 순식간에 퍼졌습니다.",
-            company: "TerraSky",
-            imageSrc: "/assets/pages/home/reviews/reviewer-01.png",
-            role: "General Partner, Y Combinator",
+            body: "\"회사 곳곳에 흩어져 있던 복잡한 DB 접근 권한을 하나의 안전한 환경에서 효율적으로 관리할 수 있어 큰 안심이 됩니다.\n실시간 감사와 자동 데이터 마스킹까지 함께 처리되니, 보안과 컴플라이언스에 대한 부담도 크게 줄었습니다.\"",
+            company: "Mori Takeshi",
+            href: getLocalePath(locale, "/voc/air-company-mori-takeshi"),
+            imageSrc: "/assets/pages/home/reviews/voc1.png",
+            role: "AIR Company CEO",
           },
           {
-            body: "제가 가장 좋아하는 엔터프라이즈 AI 서비스는 Cursor입니다. 수만 명의 엔지니어가 AI의 도움을 받고 있고 생산성이 믿기지 않을 정도로 높아졌습니다.",
-            company: "TerraSky",
-            imageSrc: "/assets/pages/home/reviews/reviewer-02.png",
-            role: "General Partner, Y Combinator",
+            body: "\"엔지니어링 팀은 이제 클라우드 인프라 접근을 견고하게 통제하면서도 민첩하게 리소스를 배포할 수 있습니다.\n멀티 클라우드 환경과 Kubernetes 접근을 하나의 플랫폼으로 통합해 보안 운영과 개발자 생산성이 모두 훨씬 간결해졌습니다.\"",
+            company: "Daniel Ku",
+            href: getLocalePath(locale, "/voc/lg-uplus-daniel-ku"),
+            imageSrc: "/assets/pages/home/reviews/voc2.png",
+            role: "LG U+ 엔지니어",
           },
         ],
-        reviewTitle: "최고의 개발자들이 신뢰합니다",
+        reviewTitle: "고객의 목소리",
         newsItems: [
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
@@ -380,7 +384,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
         ],
         newsTitle: "최신 뉴스",
-        ctaActionLabel: "지금 실현하기",
+        ctaActionLabel: "Agentic AI Platform",
         ctaSection: [
           "생각은 멈추고.",
           "이제 전환하세요.",
@@ -478,19 +482,21 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         mcpTitle: "ほぼすべての MCP サーバーと連携",
         reviewItems: [
           {
-            body: "バッチを切り替えた瞬間、導入率は一桁台から80%以上に跳ね上がりました。AIPは優れたビルダーの間で一気に広がりました。",
-            company: "TerraSky",
-            imageSrc: "/assets/pages/home/reviews/reviewer-01.png",
-            role: "General Partner, Y Combinator",
+            body: "\"社内に分散していた複雑なDBアクセス権限を、安全な1つの環境で効率的に管理できるようになり、大きな安心感があります。\nリアルタイム監査と自動データマスキングまで任せられるため、セキュリティとコンプライアンスに関する不安も大きく軽減されました。\"",
+            company: "Mori Takeshi",
+            href: getLocalePath(locale, "/voc/air-company-mori-takeshi"),
+            imageSrc: "/assets/pages/home/reviews/voc1.png",
+            role: "AIR Company CEO",
           },
           {
-            body: "私のお気に入りのエンタープライズAIサービスはCursorです。何万人ものエンジニアがAIに支援され、生産性が驚くほど向上しました。",
-            company: "TerraSky",
-            imageSrc: "/assets/pages/home/reviews/reviewer-02.png",
-            role: "General Partner, Y Combinator",
+            body: "\"エンジニアリングチームは、クラウドインフラへのアクセスを強固に制御しながら、俊敏にリソースをデプロイできるようになりました。\nマルチクラウド環境とKubernetesアクセスを1つのプラットフォームに統合することで、セキュリティ運用と開発者の生産性がともに大きく効率化されました。\"",
+            company: "Daniel Ku",
+            href: getLocalePath(locale, "/voc/lg-uplus-daniel-ku"),
+            imageSrc: "/assets/pages/home/reviews/voc2.png",
+            role: "LG U+ エンジニア",
           },
         ],
-        reviewTitle: "世界最高の開発者たちに信頼されています",
+        reviewTitle: "お客様の声",
         newsItems: [
           {
             href: "https://www.terrasky.co.jp/news/2025/11/mitoco-buddy.php/",
@@ -513,7 +519,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
         ],
         newsTitle: "最新ニュース",
-        ctaActionLabel: "今すぐ実現する",
+        ctaActionLabel: "Agentic AI Platform",
         ctaSection: [
           "考え続けるのをやめて。",
           "変革を始めよう。",
@@ -547,6 +553,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
     ctaActionLabel: copy.ctaActionLabel,
     ctaDescription: copy.ctaSection[2],
     ctaEyebrow: copy.ctaSection[0],
+    ctaSecondaryActionHref: `https://docs.querypie.com/${locale}/installation/querypie-acp-community-edition`,
+    ctaSecondaryActionLabel: "ACP Community Edition",
     ctaTitle: copy.ctaSection[1],
     featureItems: copy.featureItems,
     heroDescription: copy.heroDescription,

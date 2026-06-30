@@ -14,6 +14,7 @@ export type DocsCategorySlug =
   | "manuals"
   | "white-papers"
   | "blogs"
+  | "voc"
   | "events";
 
 export type NewsCategorySlug = "news";
@@ -109,6 +110,11 @@ export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
     slug: "blogs",
   },
   {
+    href: (locale) => getPublicCategoryHref("documentation", locale, "voc"),
+    label: { en: "VOC", ko: "VOC", ja: "VOC" },
+    slug: "voc",
+  },
+  {
     href: (locale) => getPublicCategoryHref("documentation", locale, "events"),
     label: { en: "Events", ko: "이벤트", ja: "イベント" },
     slug: "events",
@@ -190,6 +196,13 @@ const docsAdminCategoryConfigs: AdminCategoryConfig<DocsCategorySlug>[] = [
     title: "Blog",
   },
   {
+    description: "Voice of the Customer 콘텐츠의 게시 상태와 노출 순서를 관리합니다.",
+    href: "/admin/documentation/voc",
+    label: "VOC",
+    slug: "voc",
+    title: "VOC",
+  },
+  {
     description: "이벤트, 웨비나, 세미나 콘텐츠와 게시 상태를 관리합니다.",
     href: "/admin/documentation/events",
     label: "Events",
@@ -247,15 +260,24 @@ const docsCmsCategorySlugs: DocsCategorySlug[] = [
   "manuals",
   "white-papers",
   "blogs",
+  "voc",
   "events",
 ];
 
 export function getDocumentationSidebarMenuItems(
   locale: Locale,
   activeSlug: DocsCategorySlug,
+  visibleCategorySlugs?: readonly DocsCategorySlug[],
 ): PublicMenuItem<DocsCategorySlug>[] {
+  const visibleCategorySlugSet = visibleCategorySlugs ? new Set<DocsCategorySlug>(visibleCategorySlugs) : null;
+
   return getPublicMenuItems(
-    docsCategoryConfigs.filter((config) => docsCmsCategorySlugs.includes(config.slug)),
+    docsCategoryConfigs.filter((config) => {
+      if (!docsCmsCategorySlugs.includes(config.slug)) return false;
+      if (config.slug === "all") return true;
+
+      return !visibleCategorySlugSet || visibleCategorySlugSet.has(config.slug);
+    }),
     locale,
     activeSlug,
   );

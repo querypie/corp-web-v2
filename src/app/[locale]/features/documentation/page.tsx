@@ -35,13 +35,17 @@ export default async function DocumentationPage({ params, searchParams }: DocsPa
       ? normalizedCategory as DocsCategorySlug
       : "all";
 
-  const docsItems = (await readContentState("documentation", { includeBodies: false }))
-    .filter((item) => isPublishedContentVisible(item, locale))
+  const publicDocsItems = (await readContentState("documentation", { includeBodies: false }))
+    .filter((item) => isPublishedContentVisible(item, locale));
+  const visibleCategorySlugs = Array.from(
+    new Set(publicDocsItems.map((item) => item.categorySlug as DocsCategorySlug)),
+  );
+  const docsItems = publicDocsItems
     .filter((item) => selectedCategory === "all" || item.categorySlug === selectedCategory);
 
   const fallbackItems = docsItems.map((item) => ({
     category: getCategoryLabel(docsCategoryConfigs, item.categorySlug, locale),
-    date: item.categorySlug === "blogs" || item.categorySlug === "events"
+    date: item.categorySlug === "blogs" || item.categorySlug === "voc" || item.categorySlug === "events"
       ? formatPublicDate(locale, item.dateIso)
       : undefined,
     description: getLocalizedContent(item.summary, locale),
@@ -59,6 +63,7 @@ export default async function DocumentationPage({ params, searchParams }: DocsPa
       locale={locale}
       selectedCategory={selectedCategory}
       title={copy.title}
+      visibleCategorySlugs={visibleCategorySlugs}
     />
   );
 }

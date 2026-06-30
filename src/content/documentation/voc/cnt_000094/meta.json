@@ -1,10 +1,10 @@
 {
   "authorName": "",
   "authorRole": "",
-  "categorySlug": "use-cases",
+  "categorySlug": "voc",
   "contentType": "content",
   "dateIso": "2024-11-29",
-  "downloadCoverImageSrc": "/demo/use-cases/cs-thumb-lovo.webp",
+  "downloadCoverImageSrc": "/documentation/voc/cs-thumb-lovo.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
@@ -12,9 +12,9 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "lovo-ai-tom-lee",
-  "imageSrc": "/demo/use-cases/cs-thumb-lovo-2.webp",
+  "imageSrc": "/documentation/voc/cs-thumb-lovo-2.webp",
   "relatedIds": [],
-  "section": "demo",
+  "section": "documentation",
   "sortOrder": 28,
   "status": "published",
   "storageId": "cnt_000094",
@@ -35,16 +35,16 @@
   ],
   "locales": {
     "en": {
-      "htmlPath": "src/content/demo/use-cases/cnt_000094/en.html",
-      "jsonPath": "src/content/demo/use-cases/cnt_000094/en.tiptap.json"
+      "htmlPath": "src/content/documentation/voc/cnt_000094/en.html",
+      "jsonPath": "src/content/documentation/voc/cnt_000094/en.tiptap.json"
     },
     "ko": {
-      "htmlPath": "src/content/demo/use-cases/cnt_000094/ko.html",
-      "jsonPath": "src/content/demo/use-cases/cnt_000094/ko.tiptap.json"
+      "htmlPath": "src/content/documentation/voc/cnt_000094/ko.html",
+      "jsonPath": "src/content/documentation/voc/cnt_000094/ko.tiptap.json"
     },
     "ja": {
-      "htmlPath": "src/content/demo/use-cases/cnt_000094/ja.html",
-      "jsonPath": "src/content/demo/use-cases/cnt_000094/ja.tiptap.json"
+      "htmlPath": "src/content/documentation/voc/cnt_000094/ja.html",
+      "jsonPath": "src/content/documentation/voc/cnt_000094/ja.tiptap.json"
     }
   }
 }
