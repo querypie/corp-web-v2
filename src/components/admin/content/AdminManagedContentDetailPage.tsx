@@ -30,6 +30,7 @@ import {
   NEWS_FORMATS,
   resolveManagedContentSlug,
   type ContentGatingLevel,
+  type DownloadPdfMode,
   type ManagedContentCategorySlug,
   type ManagedContentEntry,
   type ManagedContentSection,
@@ -73,6 +74,11 @@ const CONTENT_GATING_OPTIONS: Array<{ label: string; value: ContentGatingLevel }
   { label: "Gating 10%", value: "10" },
   { label: "Gating 30%", value: "30" },
   { label: "Gating 50%", value: "50" },
+];
+const PDF_BUTTON_OPTIONS: Array<{ label: string; value: DownloadPdfMode }> = [
+  { label: "PDF 버튼 없음", value: "none" },
+  { label: "단일 PDF", value: "single" },
+  { label: "언어별 PDF", value: "localized" },
 ];
 const TRANSLATION_REQUEST_TIMEOUT_MS = 900000;
 
@@ -221,7 +227,10 @@ function serializeDirtyCheckTarget(form: ManagedContentEntry) {
     dateIso: form.dateIso,
     downloadCoverImageSrc: form.downloadCoverImageSrc,
     downloadPdfFileName: form.downloadPdfFileName,
+    downloadPdfFileNameByLocale: form.downloadPdfFileNameByLocale,
+    downloadPdfMode: form.downloadPdfMode,
     downloadPdfSrc: form.downloadPdfSrc,
+    downloadPdfSrcByLocale: form.downloadPdfSrcByLocale,
     enableDownloadButton: form.enableDownloadButton,
     externalUrl: form.externalUrl,
     gatingLevel: form.gatingLevel,
@@ -579,6 +588,18 @@ function getConfiguredDownloadPdfSrcs(entry: ManagedContentEntry) {
   ].filter(Boolean);
 }
 
+function getInitialPdfButtonMode(entry: ManagedContentEntry): DownloadPdfMode {
+  return entry.downloadPdfMode;
+}
+
+function hasPendingLocalizedPdfFiles(files: Partial<Record<Locale, File>>) {
+  return LOCALES.some((locale) => Boolean(files[locale]));
+}
+
+function hasLocalizedPdfSrcs(srcs: ManagedContentEntry["downloadPdfSrcByLocale"]) {
+  return LOCALES.some((locale) => Boolean(srcs[locale]?.trim()));
+}
+
 function replaceAllExact(value: string, search: string, replacement: string) {
   return value.split(search).join(replacement);
 }
@@ -735,6 +756,11 @@ export default function AdminManagedContentDetailPage({
   const { allowNextNavigation, setHasUnsavedChanges } = useAdminNavigationGuard();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const pdfInputRef = useRef<HTMLInputElement | null>(null);
+  const localizedPdfInputRefs = useRef<Record<Locale, HTMLInputElement | null>>({
+    en: null,
+    ja: null,
+    ko: null,
+  });
   const dateInputRef = useRef<HTMLInputElement | null>(null);
   const stickyToolbarRef = useRef<HTMLElement | null>(null);
   const pendingDeletedImageSrcsRef = useRef(new Set<string>());
@@ -748,9 +774,12 @@ export default function AdminManagedContentDetailPage({
   const [dialog, setDialog] = useState<DialogState | null>(null);
   const [pendingThumbnailFile, setPendingThumbnailFile] = useState<File | null>(null);
   const [pendingPdfFile, setPendingPdfFile] = useState<File | null>(null);
+  const [pendingPdfFilesByLocale, setPendingPdfFilesByLocale] = useState<Partial<Record<Locale, File>>>({});
   const [pendingThumbnailPreviewSrc, setPendingThumbnailPreviewSrc] = useState("");
   const [thumbnailName, setThumbnailName] = useState("");
   const [pdfName, setPdfName] = useState("");
+  const [pdfNamesByLocale, setPdfNamesByLocale] = useState(() => createEmptyManagedContentDraft(section, categorySlug).downloadPdfSrcByLocale);
+  const [pdfButtonMode, setPdfButtonMode] = useState<DownloadPdfMode>("none");
   const [activeLocale, setActiveLocale] = useState<Locale>("en");
   const [translationSourceLocale, setTranslationSourceLocale] = useState<Locale>("en");
   const [translationTargetLocale, setTranslationTargetLocale] = useState<Locale>("ko");
@@ -764,6 +793,7 @@ export default function AdminManagedContentDetailPage({
     serializeDirtyCheckTarget(form) !== initialFormSnapshot ||
     Boolean(pendingThumbnailFile) ||
     Boolean(pendingPdfFile) ||
+    hasPendingLocalizedPdfFiles(pendingPdfFilesByLocale) ||
     pendingImageUploadsRef.current.size > 0 ||
     pendingVideoUploadsRef.current.size > 0;
   const isContentType = form.contentType === "content";
@@ -818,6 +848,7 @@ export default function AdminManagedContentDetailPage({
     pendingDeletedVideoSrcsRef.current.clear();
     setPendingThumbnailFile(null);
     setPendingPdfFile(null);
+    setPendingPdfFilesByLocale({});
 
     if (currentItem) {
       const hydratedItem = hydrateRichTextFromHtml(currentItem);
@@ -825,6 +856,12 @@ export default function AdminManagedContentDetailPage({
       setInitialFormSnapshot(serializeDirtyCheckTarget(hydratedItem));
       setThumbnailName(hydratedItem.imageSrc);
       setPdfName(hydratedItem.downloadPdfFileName || hydratedItem.downloadPdfSrc);
+      setPdfNamesByLocale({
+        en: hydratedItem.downloadPdfFileNameByLocale.en || hydratedItem.downloadPdfSrcByLocale.en,
+        ko: hydratedItem.downloadPdfFileNameByLocale.ko || hydratedItem.downloadPdfSrcByLocale.ko,
+        ja: hydratedItem.downloadPdfFileNameByLocale.ja || hydratedItem.downloadPdfSrcByLocale.ja,
+      });
+      setPdfButtonMode(getInitialPdfButtonMode(hydratedItem));
       return;
     }
     const initialDraft = createEmptyManagedContentDraft(section, categorySlug);
@@ -832,6 +869,8 @@ export default function AdminManagedContentDetailPage({
     setInitialFormSnapshot(serializeDirtyCheckTarget(initialDraft));
     setThumbnailName("");
     setPdfName("");
+    setPdfNamesByLocale(initialDraft.downloadPdfSrcByLocale);
+    setPdfButtonMode("none");
   }, [categorySlug, currentItem, section]);
 
   useEffect(() => {
@@ -1208,6 +1247,14 @@ export default function AdminManagedContentDetailPage({
     setPdfName(file.name);
   }
 
+  function handleLocalizedPdfChange(locale: Locale, event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setPendingPdfFilesByLocale((current) => ({ ...current, [locale]: file }));
+    setPdfNamesByLocale((current) => ({ ...current, [locale]: file.name }));
+  }
+
   function clearPdf() {
     setPendingPdfFile(null);
     setPdfName("");
@@ -1220,11 +1267,64 @@ export default function AdminManagedContentDetailPage({
     }
   }
 
+  function clearLocalizedPdf(locale: Locale) {
+    setPendingPdfFilesByLocale((current) => {
+      const next = { ...current };
+      delete next[locale];
+      return next;
+    });
+    setPdfNamesByLocale((current) => ({ ...current, [locale]: "" }));
+    setForm((current) => ({
+      ...current,
+      downloadPdfFileNameByLocale: {
+        ...current.downloadPdfFileNameByLocale,
+        [locale]: "",
+      },
+      downloadPdfSrcByLocale: {
+        ...current.downloadPdfSrcByLocale,
+        [locale]: "",
+      },
+    }));
+
+    if (localizedPdfInputRefs.current[locale]) {
+      localizedPdfInputRefs.current[locale]!.value = "";
+    }
+  }
+
   function handlePdfInputChange(value: string) {
     setPendingPdfFile(null);
     updateForm("downloadPdfFileName", value ? pathSafeBaseName(value) : "");
     updateForm("downloadPdfSrc", value);
     setPdfName(value);
+  }
+
+  function handleLocalizedPdfInputChange(locale: Locale, value: string) {
+    setPendingPdfFilesByLocale((current) => {
+      const next = { ...current };
+      delete next[locale];
+      return next;
+    });
+    setForm((current) => ({
+      ...current,
+      downloadPdfFileNameByLocale: {
+        ...current.downloadPdfFileNameByLocale,
+        [locale]: value ? pathSafeBaseName(value) : "",
+      },
+      downloadPdfSrcByLocale: {
+        ...current.downloadPdfSrcByLocale,
+        [locale]: value,
+      },
+    }));
+    setPdfNamesByLocale((current) => ({ ...current, [locale]: value }));
+  }
+
+  function handlePdfButtonModeChange(nextMode: DownloadPdfMode) {
+    setPdfButtonMode(nextMode);
+    setForm((current) => ({
+      ...current,
+      downloadPdfMode: nextMode,
+      enableDownloadButton: nextMode !== "none",
+    }));
   }
 
   async function uploadPdf(file: File) {
@@ -1242,7 +1342,7 @@ export default function AdminManagedContentDetailPage({
       throw new Error("pdf upload failed");
     }
 
-    const payload = (await response.json()) as { coverSrc?: string; fileName?: string; src?: string };
+    const payload = (await response.json()) as { fileName?: string; src?: string };
 
     if (!payload.src || !payload.fileName) {
       throw new Error("missing pdf src");
@@ -1562,15 +1662,31 @@ export default function AdminManagedContentDetailPage({
         missing.push(`${getLocaleLabel(locale)} 제목`);
       }
     }
-    const configuredDownloadPdfSrcs = getConfiguredDownloadPdfSrcs(targetForm);
-    if (supportsLeadGate && targetForm.enableDownloadButton && configuredDownloadPdfSrcs.length === 0 && !pendingPdfFile) {
+    const configuredDownloadPdfSrcs = pdfButtonMode === "localized"
+      ? LOCALES.map((locale) => targetForm.downloadPdfSrcByLocale?.[locale]?.trim() ?? "").filter(Boolean)
+      : getConfiguredDownloadPdfSrcs(targetForm);
+    const hasPendingPdf = pdfButtonMode === "localized"
+      ? hasPendingLocalizedPdfFiles(pendingPdfFilesByLocale)
+      : Boolean(pendingPdfFile);
+
+    if (supportsLeadGate && pdfButtonMode === "single" && configuredDownloadPdfSrcs.length === 0 && !hasPendingPdf) {
       missing.push("PDF");
+    }
+    if (supportsLeadGate && pdfButtonMode === "localized") {
+      for (const locale of LOCALES) {
+        const configuredSrc = targetForm.downloadPdfSrcByLocale?.[locale]?.trim() ?? "";
+        const hasPendingFile = Boolean(pendingPdfFilesByLocale[locale]);
+
+        if (configuredSrc && !hasPendingFile && !isDownloadableContentPdfSrc(section, configuredSrc)) {
+          missing.push(`PDF (${locale}) 경로`);
+        }
+      }
     }
     if (
       supportsLeadGate &&
-      targetForm.enableDownloadButton &&
+      pdfButtonMode === "single" &&
       configuredDownloadPdfSrcs.some((src) => !isDownloadableContentPdfSrc(section, src)) &&
-      !pendingPdfFile
+      !hasPendingPdf
     ) {
       missing.push("PDF 경로 (/documentation/...pdf 또는 /demo/...pdf)");
     }
@@ -1610,7 +1726,8 @@ export default function AdminManagedContentDetailPage({
     let nextImageSrc = currentForm.imageSrc;
     let nextDownloadPdfSrc = currentForm.downloadPdfSrc;
     let nextDownloadPdfFileName = currentForm.downloadPdfFileName;
-    let nextDownloadCoverImageSrc = currentForm.downloadCoverImageSrc;
+    let nextDownloadPdfSrcByLocale = currentForm.downloadPdfSrcByLocale;
+    let nextDownloadPdfFileNameByLocale = currentForm.downloadPdfFileNameByLocale;
     let finalizedContentForm = currentForm;
     let oldImageSrcs: string[] = [];
     let uploadedImageSrcs: string[] = [];
@@ -1631,15 +1748,44 @@ export default function AdminManagedContentDetailPage({
       }
     }
 
-    if (pendingPdfFile) {
+    if (pdfButtonMode === "single" && pendingPdfFile) {
       try {
         const uploadedPdf = await uploadPdf(pendingPdfFile);
         nextDownloadPdfSrc = uploadedPdf.src ?? "";
         nextDownloadPdfFileName = uploadedPdf.fileName ?? "";
-        nextDownloadCoverImageSrc = uploadedPdf.coverSrc || nextImageSrc;
       } catch {
         setDialog({
           description: "PDF를 저장하지 못했습니다. 다시 시도해 주세요.",
+          title: "PDF 업로드에 실패했습니다.",
+          type: "alert",
+        });
+        setIsSaving(false);
+        return;
+      }
+    }
+
+    if (pdfButtonMode === "localized" && hasPendingLocalizedPdfFiles(pendingPdfFilesByLocale)) {
+      try {
+        const nextSrcByLocale = { ...nextDownloadPdfSrcByLocale };
+        const nextFileNameByLocale = { ...nextDownloadPdfFileNameByLocale };
+
+        for (const locale of LOCALES) {
+          const pendingFile = pendingPdfFilesByLocale[locale];
+
+          if (!pendingFile) {
+            continue;
+          }
+
+          const uploadedPdf = await uploadPdf(pendingFile);
+          nextSrcByLocale[locale] = uploadedPdf.src ?? "";
+          nextFileNameByLocale[locale] = uploadedPdf.fileName ?? "";
+        }
+
+        nextDownloadPdfSrcByLocale = nextSrcByLocale;
+        nextDownloadPdfFileNameByLocale = nextFileNameByLocale;
+      } catch {
+        setDialog({
+          description: "언어별 PDF를 저장하지 못했습니다. 다시 시도해 주세요.",
           title: "PDF 업로드에 실패했습니다.",
           type: "alert",
         });
@@ -1709,9 +1855,18 @@ export default function AdminManagedContentDetailPage({
       ...finalizedContentForm,
       categorySlug,
       id: nextId,
-      downloadCoverImageSrc: nextDownloadCoverImageSrc || nextImageSrc,
+      downloadCoverImageSrc: finalizedContentForm.downloadCoverImageSrc,
       downloadPdfFileName: nextDownloadPdfFileName,
+      downloadPdfFileNameByLocale: nextDownloadPdfFileNameByLocale,
+      downloadPdfMode: pdfButtonMode,
       downloadPdfSrc: nextDownloadPdfSrc,
+      downloadPdfSrcByLocale: nextDownloadPdfSrcByLocale,
+      enableDownloadButton:
+        pdfButtonMode === "single"
+          ? Boolean(nextDownloadPdfSrc.trim())
+          : pdfButtonMode === "localized"
+            ? hasLocalizedPdfSrcs(nextDownloadPdfSrcByLocale)
+            : false,
       gatingLevel:
         section !== "news" && finalizedContentForm.contentType === "content"
           ? finalizedContentForm.gatingLevel
@@ -1771,6 +1926,7 @@ export default function AdminManagedContentDetailPage({
 
     setPendingThumbnailFile(null);
     setPendingPdfFile(null);
+    setPendingPdfFilesByLocale({});
     setPendingThumbnailPreviewSrc("");
     setHasUnsavedChanges(false);
     allowNextNavigation();
@@ -1806,6 +1962,15 @@ export default function AdminManagedContentDetailPage({
                   onChange={(event) => updateForm("gatingLevel", event.target.value as ContentGatingLevel)}
                   options={CONTENT_GATING_OPTIONS}
                   value={form.gatingLevel}
+                />
+              </div>
+            ) : null}
+            {supportsLeadGate ? (
+              <div className="w-[180px] min-w-[140px] shrink">
+                <Select
+                  onChange={(event) => handlePdfButtonModeChange(event.target.value as DownloadPdfMode)}
+                  options={PDF_BUTTON_OPTIONS}
+                  value={pdfButtonMode}
                 />
               </div>
             ) : null}
@@ -1967,21 +2132,10 @@ export default function AdminManagedContentDetailPage({
                   ) : null}
                 </div>
                 <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={handleDateButtonClick} style="round" variant="outline">선택</Button>
-                {supportsLeadGate ? (
-                  <label className="flex items-center gap-2 type-body-sm text-mute sm:ml-5">
-                    <input
-                      checked={form.enableDownloadButton}
-                      className="h-4 w-4 rounded border-border bg-bg-content accent-[var(--color-success)]"
-                      onChange={(event) => updateForm("enableDownloadButton", event.target.checked)}
-                      type="checkbox"
-                    />
-                    <span>PDF 버튼</span>
-                  </label>
-                ) : null}
                 <input className="sr-only" onChange={(event) => updateForm("dateIso", event.target.value)} ref={dateInputRef} type="date" value={form.dateIso} />
               </div>
             </InlineField>
-            {supportsLeadGate && form.enableDownloadButton ? (
+            {supportsLeadGate && pdfButtonMode === "single" ? (
               <InlineField label="PDF">
                 <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
                   <div className="flex min-w-0 flex-1 items-center gap-3">
@@ -2003,6 +2157,59 @@ export default function AdminManagedContentDetailPage({
                   </div>
                   <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => pdfInputRef.current?.click()} style="round" variant="outline">추가</Button>
                   <input accept="application/pdf" className="sr-only" onChange={handlePdfChange} ref={pdfInputRef} type="file" />
+                </div>
+              </InlineField>
+            ) : null}
+            {supportsLeadGate && pdfButtonMode === "localized" ? (
+              <InlineField label="PDF">
+                <div className="grid gap-3">
+                  {LOCALES.map((locale) => {
+                    const pdfValue = pendingPdfFilesByLocale[locale]
+                      ? pdfNamesByLocale[locale]
+                      : form.downloadPdfSrcByLocale[locale];
+                    const hasPdfValue = Boolean(pdfNamesByLocale[locale] || form.downloadPdfSrcByLocale[locale]);
+
+                    return (
+                      <div className="flex flex-col gap-3 lg:flex-row lg:items-center" key={locale}>
+                        <div className="flex min-w-0 flex-1 items-center gap-3">
+                          <span className="w-[64px] shrink-0 type-body-sm text-mute">PDF({locale})</span>
+                          <Input
+                            className="w-full"
+                            onChange={(event) => handleLocalizedPdfInputChange(locale, event.target.value)}
+                            type="text"
+                            value={pdfValue}
+                          />
+                          {hasPdfValue ? (
+                            <button
+                              className="shrink-0 bg-transparent p-0 type-body-md text-mute transition-colors hover:text-fg"
+                              onClick={() => clearLocalizedPdf(locale)}
+                              type="button"
+                            >
+                              삭제
+                            </button>
+                          ) : null}
+                        </div>
+                        <Button
+                          arrow={false}
+                          className="w-full justify-center sm:w-auto"
+                          onClick={() => localizedPdfInputRefs.current[locale]?.click()}
+                          style="round"
+                          variant="outline"
+                        >
+                          추가
+                        </Button>
+                        <input
+                          accept="application/pdf"
+                          className="sr-only"
+                          onChange={(event) => handleLocalizedPdfChange(locale, event)}
+                          ref={(node) => {
+                            localizedPdfInputRefs.current[locale] = node;
+                          }}
+                          type="file"
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
               </InlineField>
             ) : null}

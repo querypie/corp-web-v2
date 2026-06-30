@@ -7,19 +7,20 @@
   "downloadCoverImageSrc": "/documentation/introduction/aip-introduction.webp",
   "downloadPdfFileName": "",
   "downloadPdfFileNameByLocale": {
-    "en": "",
-    "ko": "",
-    "ja": "querypie-aip-product-introduction-ja.pdf"
+    "en": "querypie-aip-intro-en.pdf",
+    "ko": "querypie-aip-intro-ko.pdf",
+    "ja": "querypie-aip-intro-jp.pdf"
   },
+  "downloadPdfMode": "localized",
   "downloadPdfSrc": "",
   "downloadPdfSrcByLocale": {
-    "en": "",
-    "ko": "",
-    "ja": "/documentation/introduction/querypie-aip-product-introduction-ja.pdf"
+    "en": "/documentation/introduction/querypie-aip-intro-en.pdf",
+    "ko": "/documentation/introduction/querypie-aip-intro-ko.pdf",
+    "ja": "/documentation/introduction/querypie-aip-intro-jp.pdf"
   },
   "enableDownloadButton": true,
   "externalUrl": "",
-  "gatingLevel": "50",
+  "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "querypie-aip",
   "imageSrc": "/documentation/introduction/aip-introduction.webp",

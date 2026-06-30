@@ -11,7 +11,10 @@ type ContentArticlePreviewProps = {
   downloadFormTargetId?: string;
   downloadHref?: string;
   downloadLabel: string;
+  downloadLockedLabel?: string;
+  downloadRequiresLeadCapture?: boolean;
   downloadRequiresUnlock?: boolean;
+  downloadUnlockForm?: (props: { onDirtyChange: (isDirty: boolean) => void; onSuccess: () => void }) => ReactNode;
   heroImageAlt: string;
   heroImageSrc: string;
   hideHeroImage?: boolean;
@@ -32,7 +35,10 @@ export default function ContentArticlePreview({
   downloadFormTargetId,
   downloadHref,
   downloadLabel,
+  downloadLockedLabel,
+  downloadRequiresLeadCapture = false,
   downloadRequiresUnlock = false,
+  downloadUnlockForm,
   heroImageAlt,
   heroImageSrc,
   hideHeroImage = false,
@@ -67,7 +73,10 @@ export default function ContentArticlePreview({
                 formTargetId={downloadFormTargetId}
                 href={downloadHref}
                 label={downloadLabel}
+                lockedLabel={downloadLockedLabel}
                 locale={locale}
+                renderUnlockForm={downloadUnlockForm}
+                requiresLeadCapture={downloadRequiresLeadCapture}
                 requiresUnlock={downloadRequiresUnlock}
                 unlockCookieName={unlockCookieName}
               />
@@ -81,7 +90,10 @@ export default function ContentArticlePreview({
             formTargetId={downloadFormTargetId}
             href={downloadHref}
             label={downloadLabel}
+            lockedLabel={downloadLockedLabel}
             locale={locale}
+            renderUnlockForm={downloadUnlockForm}
+            requiresLeadCapture={downloadRequiresLeadCapture}
             requiresUnlock={downloadRequiresUnlock}
             unlockCookieName={unlockCookieName}
           />

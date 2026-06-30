@@ -5,6 +5,7 @@ import DemoDetailPage from "./DemoDetailPage";
 import type { Locale } from "@/constants/i18n";
 import type { DocsDetailPageProps } from "../documentation/DocumentationDetailPage";
 import ContentGateOverlay from "../documentation/ContentGateOverlay";
+import ContentLeadForm from "../documentation/ContentLeadForm";
 import { useManagedContents } from "@/features/content/clientStore";
 import type { ContactPageCopy } from "@/copy/contact";
 import useHydrated from "@/hooks/useHydrated";
@@ -135,7 +136,24 @@ export default function DemoDetailClientPage({
       contentListItems={relatedPublishedItems}
       downloadHref={downloadHref || undefined}
       downloadFormTargetId={CONTENT_GATE_FORM_ID}
+      downloadRequiresLeadCapture={Boolean(downloadHref)}
       downloadRequiresUnlock={isGateActive}
+      downloadUnlockForm={({ onDirtyChange, onSuccess }) => (
+        <ContentLeadForm
+          contactCopy={contactCopy}
+          contentId={currentUseCase.id}
+          locale={locale}
+          mode="unlock"
+          onDirtyChange={onDirtyChange}
+          onSuccess={() => {
+            setIsUnlocked(true);
+            onSuccess();
+          }}
+          section="demo"
+          title={getLocalizedContent(currentUseCase.title, contentLocale)}
+          unlockCookieName={getContentUnlockCookieName(currentUseCase.id, "demo")}
+        />
+      )}
       docsHref={getCategoryHref(demoCategoryConfigs, currentUseCase.categorySlug, locale)}
       date={formatPublicDate(locale, currentUseCase.dateIso)}
       hideHeroImage={currentUseCase.hideHeroImage}

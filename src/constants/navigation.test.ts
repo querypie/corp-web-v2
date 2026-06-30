@@ -79,7 +79,7 @@ describe("getResourcesSubItems", () => {
 
   it("locale별 prefix를 붙인다", () => {
     expect(getResourcesSubItems("ko")).toEqual([
-      { label: "Introduction Decks", href: "/ko/introduction-deck" },
+      { label: "제품 소개", href: "/ko/introduction-deck" },
       { label: "용어집", href: "/ko/glossary" },
       { label: "매뉴얼", href: "/ko/manuals" },
       { label: "화이트페이퍼", href: "/ko/whitepapers" },

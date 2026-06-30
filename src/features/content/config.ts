@@ -86,7 +86,7 @@ export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
   },
   {
     href: (locale) => getPublicCategoryHref("documentation", locale, "introduction"),
-    label: { en: "Introduction Decks", ko: "Introduction Decks", ja: "Introduction Decks" },
+    label: { en: "Introduction Decks", ko: "제품 소개", ja: "製品紹介" },
     slug: "introduction",
   },
   {
@@ -111,7 +111,7 @@ export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
   },
   {
     href: (locale) => getPublicCategoryHref("documentation", locale, "voc"),
-    label: { en: "VOC", ko: "VOC", ja: "VOC" },
+    label: { en: "VOC", ko: "고객의 목소리", ja: "お客様の声" },
     slug: "voc",
   },
   {

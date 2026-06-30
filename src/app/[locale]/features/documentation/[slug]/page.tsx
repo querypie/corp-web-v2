@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { isLocale } from "@/constants/i18n";
-import DocsDetailPage from "@/components/pages/documentation/DocumentationDetailPage";
+import DocumentationDetailClientPage from "@/components/pages/documentation/DocumentationDetailClientPage";
 import ContentGateOverlay from "@/components/pages/documentation/ContentGateOverlay";
 import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
 import { getContactPageCopy } from "@/copy/contact";
@@ -88,12 +88,13 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
       : null,
   ].filter((item): item is NonNullable<typeof item> => !!item);
 
+  const downloadHref = getContentDownloadPdfSrc(currentEntry, locale);
   const isGateEnabled = isContentGatingEnabled(currentEntry);
-  const cookieStore = isGateEnabled ? await cookies() : null;
+  const requiresLeadCapture = Boolean(downloadHref);
+  const cookieStore = isGateEnabled || requiresLeadCapture ? await cookies() : null;
   const isContentUnlocked = cookieStore
     ? hasUnlockedContentAccess(
-        cookieStore.get(getContentUnlockCookieName(currentEntry.id, "documentation"))?.value ??
-          cookieStore.get(getContentUnlockCookieName(currentEntry.id))?.value,
+        cookieStore.get(getContentUnlockCookieName(currentEntry.id, "documentation"))?.value,
       )
     : false;
   const isGateActive = isGateEnabled && !isContentUnlocked;
@@ -104,46 +105,55 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
       : localizedBodyHtml;
   const copy = getDocumentationPageCopy(locale);
   const detailHref = getPublicDetailHref("documentation", locale, resolvedSlug, currentEntry.categorySlug);
-  const downloadHref = getContentDownloadPdfSrc(currentEntry, locale);
+  const fallbackProps = {
+    docsHref: getCategoryHref(docsCategoryConfigs, currentEntry.categorySlug, locale),
+    slug: resolvedSlug,
+    bodyHtml: previewBodyHtml,
+    category: getManagedCategoryLabel("documentation", currentEntry.categorySlug, locale),
+    contentListDescription: "",
+    contentListItems: relatedItems,
+    contentListLinks: [],
+    contentListTitle: "Contents List",
+    date: formatPublicDate(locale, currentEntry.dateIso),
+    downloadFormTargetId: CONTENT_GATE_FORM_ID,
+    downloadHref: downloadHref || undefined,
+    downloadRequiresLeadCapture: requiresLeadCapture,
+    downloadRequiresUnlock: isGateActive,
+    hideHeroImage: currentEntry.hideHeroImage,
+    heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),
+    heroImageSrc: currentEntry.imageSrc,
+    locale,
+    parentLabel: copy.title,
+    shareUrl: getAbsolutePublicUrl(detailHref),
+    title: getLocalizedContent(currentEntry.title, contentLocale),
+    unlockCookieName: getContentUnlockCookieName(currentEntry.id, "documentation"),
+    writer: currentEntry.authorRole
+      ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
+      : currentEntry.authorName,
+  } satisfies DocsDetailPageProps;
 
   return (
-    <DocsDetailPage
-      {...({
-        docsHref: getCategoryHref(docsCategoryConfigs, currentEntry.categorySlug, locale),
-        slug: resolvedSlug,
-        bodyHtml: previewBodyHtml,
-        category: getManagedCategoryLabel("documentation", currentEntry.categorySlug, locale),
-        contentListDescription: "",
-        contentListItems: relatedItems,
-        contentListLinks: [],
-        contentListTitle: "Contents List",
-        date: formatPublicDate(locale, currentEntry.dateIso),
-        downloadFormTargetId: CONTENT_GATE_FORM_ID,
-        downloadHref: downloadHref || undefined,
-        downloadRequiresUnlock: isGateActive,
-        hideHeroImage: currentEntry.hideHeroImage,
-        heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),
-        heroImageSrc: currentEntry.imageSrc,
-        locale,
-        parentLabel: copy.title,
-        shareUrl: getAbsolutePublicUrl(detailHref),
-        title: getLocalizedContent(currentEntry.title, contentLocale),
-        unlockCookieName: getContentUnlockCookieName(currentEntry.id, "documentation"),
-        writer: currentEntry.authorRole
-          ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
-          : currentEntry.authorName,
-      } satisfies DocsDetailPageProps)}
-      contentOverlay={isGateActive ? (
-        <ContentGateOverlay
-          contactCopy={getContactPageCopy(locale)}
-          contentId={currentEntry.id}
-          id={CONTENT_GATE_FORM_ID}
-          locale={locale}
-          section="documentation"
-          title={getLocalizedContent(currentEntry.title, contentLocale)}
-          unlockCookieName={getContentUnlockCookieName(currentEntry.id, "documentation")}
-        />
-      ) : undefined}
+    <DocumentationDetailClientPage
+      contactCopy={getContactPageCopy(locale)}
+      fallbackProps={{
+        ...fallbackProps,
+        contentOverlay: isGateActive ? (
+          <ContentGateOverlay
+            contactCopy={getContactPageCopy(locale)}
+            contentId={currentEntry.id}
+            id={CONTENT_GATE_FORM_ID}
+            locale={locale}
+            section="documentation"
+            title={getLocalizedContent(currentEntry.title, contentLocale)}
+            unlockCookieName={getContentUnlockCookieName(currentEntry.id, "documentation")}
+          />
+        ) : undefined,
+      }}
+      initialContentUnlocked={isContentUnlocked}
+      initialItems={accessibleDocsItems}
+      locale={locale}
+      slug={resolvedSlug}
+      section="documentation"
     />
   );
 }

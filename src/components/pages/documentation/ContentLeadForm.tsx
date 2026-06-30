@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Button from "@/components/ui/Button";
 import type { ContactField, ContactPageCopy } from "@/copy/contact";
 import type { ManagedContentSection } from "@/features/content/data";
@@ -24,6 +24,7 @@ type ContentLeadFormProps = {
   contentId?: string;
   locale: "en" | "ko" | "ja";
   mode: ContentLeadFormMode;
+  onDirtyChange?: (isDirty: boolean) => void;
   onSuccess?: () => void;
   pdfPreviewUrl?: string;
   returnUrl?: string;
@@ -84,6 +85,10 @@ function isRequiredSatisfied(copy: ContactPageCopy, form: FormState) {
   const hasProduct = copy.productOptions.some((option) => form[`product:${option}`] === "true");
 
   return hasRequiredFields && hasProduct;
+}
+
+function isFormDirty(form: FormState) {
+  return Object.values(form).some((value) => value.trim().length > 0);
 }
 
 function getLocalizedCopy(locale: "en" | "ko" | "ja", mode: ContentLeadFormMode, buttonLabel?: string) {
@@ -177,6 +182,7 @@ export default function ContentLeadForm({
   contentId,
   locale,
   mode,
+  onDirtyChange,
   onSuccess,
   pdfPreviewUrl,
   returnUrl,
@@ -193,6 +199,11 @@ export default function ContentLeadForm({
     () => splitContactFields(contactCopy.formFields),
     [contactCopy.formFields],
   );
+  const isDirty = useMemo(() => isFormDirty(form), [form]);
+
+  useEffect(() => {
+    onDirtyChange?.(isDirty);
+  }, [isDirty, onDirtyChange]);
 
   function updateValue(name: string, value: string) {
     setForm((current) => ({ ...current, [name]: value }));
@@ -241,7 +252,7 @@ export default function ContentLeadForm({
       }
 
       if (mode === "download") {
-        if (!payload.downloadUrl || !payload.previewUrl || !attachmentFileName || !returnUrl) {
+        if (!payload.downloadUrl || !payload.previewUrl || !attachmentFileName) {
           throw new LeadFormSubmitError(
             getLeadFormErrorMessage(locale, mode, "download_unavailable", localized.submitError),
           );
@@ -258,7 +269,9 @@ export default function ContentLeadForm({
           previewWindow.location.href = payload.previewUrl;
         }
 
-        window.location.replace(returnUrl);
+        if (returnUrl) {
+          window.location.replace(returnUrl);
+        }
         return;
       }
 

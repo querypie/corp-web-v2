@@ -37,6 +37,7 @@ function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContent
     downloadCoverImageSrc: "",
     downloadPdfFileName: "",
     downloadPdfFileNameByLocale: createLocalizedContent(),
+    downloadPdfMode: "none",
     downloadPdfSrc: "",
     downloadPdfSrcByLocale: createLocalizedContent(),
     enableDownloadButton: false,
@@ -101,6 +102,7 @@ describe("content download PDF helpers", () => {
         ko: "",
         ja: "/demo/use-cases/ja.pdf",
       },
+      downloadPdfMode: "localized",
       enableDownloadButton: true,
     });
 
@@ -111,12 +113,42 @@ describe("content download PDF helpers", () => {
   it("locale별 PDF가 없으면 기존 전역 PDF를 사용한다", () => {
     const item = makeEntry({
       downloadPdfFileName: "global.pdf",
+      downloadPdfMode: "single",
       downloadPdfSrc: "/demo/use-cases/global.pdf",
       enableDownloadButton: true,
     });
 
     expect(getContentDownloadPdfSrc(item, "ko")).toBe("/demo/use-cases/global.pdf");
     expect(getContentDownloadPdfFileName(item, "ko")).toBe("global.pdf");
+  });
+
+  it("언어별 PDF 요청 locale에 파일이 없으면 en, ko, ja 순서로 fallback한다", () => {
+    const item = makeEntry({
+      downloadPdfFileNameByLocale: {
+        en: "",
+        ko: "ko.pdf",
+        ja: "ja.pdf",
+      },
+      downloadPdfMode: "localized",
+      downloadPdfSrcByLocale: {
+        en: "",
+        ko: "/demo/use-cases/ko.pdf",
+        ja: "/demo/use-cases/ja.pdf",
+      },
+      enableDownloadButton: true,
+    });
+
+    expect(getContentDownloadPdfSrc(item, "en")).toBe("/demo/use-cases/ko.pdf");
+    expect(getContentDownloadPdfFileName(item, "en")).toBe("ko.pdf");
+  });
+
+  it("언어별 PDF가 하나도 없으면 다운로드 href를 반환하지 않는다", () => {
+    const item = makeEntry({
+      downloadPdfMode: "localized",
+      enableDownloadButton: true,
+    });
+
+    expect(getContentDownloadPdfSrc(item, "ja")).toBe("");
   });
 });
 

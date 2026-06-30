@@ -59,6 +59,7 @@ const BASE_CONTENT_ITEM = {
   contentType: "content",
   downloadPdfFileName: "server-doc.pdf",
   downloadPdfFileNameByLocale: { en: "", ko: "", ja: "" },
+  downloadPdfMode: "single",
   downloadPdfSrc: "/documentation/white-papers/server-doc.pdf",
   downloadPdfSrcByLocale: { en: "", ko: "", ja: "" },
   enableDownloadButton: true,
@@ -182,6 +183,7 @@ describe("POST /api/downloads/content", () => {
           ko: "",
           ja: "server-doc-ja.pdf",
         },
+        downloadPdfMode: "localized",
         downloadPdfSrc: "",
         downloadPdfSrcByLocale: {
           en: "",

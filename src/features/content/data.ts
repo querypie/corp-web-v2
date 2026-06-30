@@ -13,6 +13,7 @@ export type ManagedContentStatus = "hidden" | "published";
 export type ManagedContentCategorySlug = Exclude<DemoCategorySlug | DocsCategorySlug, "all"> | NewsCategorySlug;
 export type ManagedContentType = "content" | "outlink";
 export type ContentGatingLevel = "none" | "10" | "30" | "50";
+export type DownloadPdfMode = "none" | "single" | "localized";
 export type NewsFormat = "Press Release" | "Official Announcement" | "Media Coverage";
 export type LocalizedContent = Record<Locale, string>;
 
@@ -27,6 +28,7 @@ export type ManagedContentEntry = {
   downloadCoverImageSrc: string;
   downloadPdfFileName: string;
   downloadPdfFileNameByLocale: LocalizedContent;
+  downloadPdfMode: DownloadPdfMode;
   downloadPdfSrc: string;
   downloadPdfSrcByLocale: LocalizedContent;
   enableDownloadButton: boolean;
@@ -108,6 +110,7 @@ export function createEmptyManagedContentDraft(
     downloadCoverImageSrc: "",
     downloadPdfFileName: "",
     downloadPdfFileNameByLocale: createLocalizedContent(),
+    downloadPdfMode: "none",
     downloadPdfSrc: "",
     downloadPdfSrcByLocale: createLocalizedContent(),
     enableDownloadButton: false,
@@ -384,16 +387,24 @@ export function getAdjacentContentLabel(direction: "next" | "previous", locale: 
 
 export function getPdfWhitePaperButtonLabel(locale: Locale) {
   return {
-    en: "View the PDF white paper",
-    ja: "PDFホワイトペーパーを見る",
-    ko: "PDF 백서 보기",
+    en: "View PDF",
+    ko: "PDF 보기",
+    ja: "PDFを見る",
+  }[locale];
+}
+
+export function getLockedPdfButtonLabel(locale: Locale) {
+  return {
+    en: "Unlock PDF",
+    ko: "PDF 잠금 해제",
+    ja: "PDFのロック解除",
   }[locale];
 }
 
 export function getDownloadPreviewProps(
   item: Pick<
     ManagedContentEntry,
-    "downloadPdfSrc" | "downloadPdfSrcByLocale" | "enableDownloadButton" | "section"
+    "downloadPdfMode" | "downloadPdfSrc" | "downloadPdfSrcByLocale" | "enableDownloadButton" | "section"
   >,
   locale: Locale = "en",
 ) {
@@ -408,7 +419,7 @@ export function getDownloadPreviewProps(
 export function getContentDownloadPdfSrc(
   item: Pick<
     ManagedContentEntry,
-    "downloadPdfSrc" | "downloadPdfSrcByLocale" | "enableDownloadButton" | "section"
+    "downloadPdfMode" | "downloadPdfSrc" | "downloadPdfSrcByLocale" | "enableDownloadButton" | "section"
   >,
   locale: Locale,
 ) {
@@ -416,14 +427,37 @@ export function getContentDownloadPdfSrc(
     return "";
   }
 
-  return item.downloadPdfSrcByLocale?.[locale]?.trim() || item.downloadPdfSrc.trim();
+  if (item.downloadPdfMode === "localized") {
+    const resolvedLocale = getContentDownloadPdfLocale(item, locale);
+    return resolvedLocale ? item.downloadPdfSrcByLocale?.[resolvedLocale]?.trim() ?? "" : "";
+  }
+
+  return item.downloadPdfSrc.trim();
+}
+
+function getContentDownloadPdfLocale(
+  item: Pick<ManagedContentEntry, "downloadPdfSrcByLocale">,
+  locale: Locale,
+) {
+  const fallbackLocales = Array.from(new Set<Locale>([locale, "en", "ko", "ja"]));
+
+  return fallbackLocales.find((fallbackLocale) =>
+    Boolean(item.downloadPdfSrcByLocale?.[fallbackLocale]?.trim()),
+  );
 }
 
 export function getContentDownloadPdfFileName(
-  item: Pick<ManagedContentEntry, "downloadPdfFileName" | "downloadPdfFileNameByLocale" | "id">,
+  item: Pick<ManagedContentEntry, "downloadPdfFileName" | "downloadPdfFileNameByLocale" | "downloadPdfMode" | "downloadPdfSrcByLocale" | "id">,
   locale: Locale,
 ) {
-  return item.downloadPdfFileNameByLocale?.[locale]?.trim() || item.downloadPdfFileName || `${item.id}.pdf`;
+  if (item.downloadPdfMode === "localized") {
+    const resolvedLocale = getContentDownloadPdfLocale(item, locale);
+    return resolvedLocale
+      ? item.downloadPdfFileNameByLocale?.[resolvedLocale]?.trim() || `${item.id}.pdf`
+      : `${item.id}.pdf`;
+  }
+
+  return item.downloadPdfFileName || `${item.id}.pdf`;
 }
 
 export function isDownloadableContentPdfSrc(

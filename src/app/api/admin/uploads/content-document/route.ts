@@ -1,12 +1,7 @@
 import { promises as fs } from "fs";
-import os from "os";
 import path from "path";
-import { execFile } from "child_process";
-import { promisify } from "util";
 import { NextResponse } from "next/server";
-import sharp from "sharp";
 
-const execFileAsync = promisify(execFile);
 const ALLOWED_MIME_TYPES = new Set(["application/pdf"]);
 
 function sanitizeBaseName(fileName: string) {
@@ -34,31 +29,6 @@ async function createUniqueFilePath(dirPath: string, baseName: string, extension
     } catch {
       return { fileName: nextName, filePath: nextPath };
     }
-  }
-}
-
-async function generatePdfCover({
-  baseName,
-  pdfPath,
-  uploadsDir,
-}: {
-  baseName: string;
-  pdfPath: string;
-  uploadsDir: string;
-}) {
-  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "querypie-pdf-cover-"));
-  const tempPngPath = path.join(tempDir, `${baseName}.png`);
-
-  try {
-    await execFileAsync("/usr/bin/sips", ["-s", "format", "png", pdfPath, "--out", tempPngPath]);
-    const coverBuffer = await sharp(tempPngPath).webp({ effort: 4, quality: 86 }).toBuffer();
-    const { fileName, filePath } = await createUniqueFilePath(uploadsDir, `${baseName}-cover`, ".webp");
-    await fs.writeFile(filePath, coverBuffer);
-    return `/${path.relative(path.join(process.cwd(), "public"), filePath).split(path.sep).join("/")}`;
-  } catch {
-    return "";
-  } finally {
-    await fs.rm(tempDir, { force: true, recursive: true });
   }
 }
 
@@ -92,14 +62,8 @@ export async function POST(request: Request) {
   await fs.writeFile(filePath, bytes);
 
   const pdfSrc = `/${path.relative(path.join(process.cwd(), "public"), filePath).split(path.sep).join("/")}`;
-  const coverSrc = await generatePdfCover({
-    baseName: path.basename(fileName, ".pdf"),
-    pdfPath: filePath,
-    uploadsDir,
-  });
 
   return NextResponse.json({
-    coverSrc,
     fileName,
     src: pdfSrc,
   });

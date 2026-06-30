@@ -9,7 +9,7 @@ describe("getDocumentationSidebarMenuItems", () => {
         href: "/ko/introduction-deck",
         isActive: false,
         kind: "link",
-        label: "Introduction Decks",
+        label: "제품 소개",
         slug: "introduction",
       },
       {
@@ -44,7 +44,7 @@ describe("getDocumentationSidebarMenuItems", () => {
         href: "/ko/voc",
         isActive: false,
         kind: "link",
-        label: "VOC",
+        label: "고객의 목소리",
         slug: "voc",
       },
       {
