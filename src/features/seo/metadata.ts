@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import type { Locale } from "@/constants/i18n";
+import { getAbsolutePublicUrl } from "@/constants/site";
 
 type DynamicOgImageOptions = {
   description?: string | null;
@@ -21,8 +22,8 @@ const defaultOgDescription: Record<Locale, string> = {
 };
 
 const defaultOgImageSize = {
-  width: 1200,
-  height: 630,
+  width: 1600,
+  height: 840,
 } as const;
 
 function createDynamicOgImageUrl({ description, locale, title }: DynamicOgImageOptions) {
@@ -38,14 +39,31 @@ function createDynamicOgImageUrl({ description, locale, title }: DynamicOgImageO
   return `/api/og?${params.toString()}`;
 }
 
+function getCanonicalUrl(metadata: Metadata) {
+  const canonical = metadata.alternates?.canonical;
+
+  if (!canonical) return undefined;
+  if (typeof canonical === "string") return canonical;
+  if (canonical instanceof URL) return canonical.toString();
+  if (typeof canonical === "object" && "url" in canonical) {
+    const url = canonical.url;
+    if (typeof url === "string") return url;
+    if (url instanceof URL) return url.toString();
+  }
+
+  return undefined;
+}
+
 export function withDynamicOgImage(
   metadata: Metadata,
   options: DynamicOgImageOptions,
 ): Metadata {
   const description = options.description ?? defaultOgDescription[options.locale];
   const imageUrl = createDynamicOgImageUrl({ ...options, description });
+  const canonicalUrl = metadata.openGraph?.url?.toString() ?? getCanonicalUrl(metadata);
+  const absoluteCanonicalUrl = canonicalUrl ? getAbsolutePublicUrl(canonicalUrl) : undefined;
   const ogImage = {
-    url: options.image?.url ?? imageUrl,
+    url: getAbsolutePublicUrl(options.image?.url ?? imageUrl),
     width: options.image?.width ?? defaultOgImageSize.width,
     height: options.image?.height ?? defaultOgImageSize.height,
     alt: options.image?.alt ?? options.title,
@@ -58,6 +76,7 @@ export function withDynamicOgImage(
       ...metadata.openGraph,
       title: options.title,
       description,
+      url: absoluteCanonicalUrl,
       images: [ogImage],
     },
     twitter: {
