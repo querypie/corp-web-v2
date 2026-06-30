@@ -50,7 +50,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Starter",
           description: "Build your first AI workflow",
           priceLabel: "$20/mo",
-          href: "/documentation",
+          href: "https://app.querypie.com/",
           ctaLabel: "Subscribe",
           features: [
             "800 monthly credits",
@@ -66,7 +66,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Team",
           description: "Collaborate and innovate together",
           priceLabel: "$500/mo",
-          href: "/documentation",
+          href: "https://app.querypie.com/",
           ctaLabel: "Subscribe",
           features: [
             "20,000 monthly credits",
@@ -82,7 +82,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "Enterprise power unleashed",
           priceLabel: "Let's Talk",
-          href: "/documentation",
+          href: "/company/contact-us",
           ctaLabel: "Try Now",
           tone: "primary",
           features: [
@@ -545,7 +545,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Starter",
           description: "첫 AI 워크플로우를 구축하세요",
           priceLabel: "$20/월",
-          href: "/documentation",
+          href: "https://app.querypie.com/",
           ctaLabel: "구독하기",
           features: [
             "월간 800 크레딧",
@@ -561,7 +561,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Team",
           description: "함께 협업하고 혁신하세요",
           priceLabel: "$500/월",
-          href: "/documentation",
+          href: "https://app.querypie.com/",
           ctaLabel: "구독하기",
           features: [
             "월간 20,000 크레딧",
@@ -577,7 +577,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "대규모 조직을 위한 맞춤 플랜",
           priceLabel: "별도 문의",
-          href: "/documentation",
+          href: "/company/contact-us",
           ctaLabel: "지금 시작하기",
           tone: "primary",
           features: [
