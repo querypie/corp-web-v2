@@ -12,6 +12,7 @@ export const publicCategoryPaths = {
     manuals: "/manuals",
     "white-papers": "/whitepapers",
     blogs: "/blog",
+    voc: "/voc",
     events: "/events",
   },
   news: {

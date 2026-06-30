@@ -108,6 +108,7 @@ function getLeadNotificationSource(section: ManagedContentSection | undefined, c
     if (categorySlug === "white-papers") return "whitepapers";
     if (categorySlug === "introduction") return "introduction-deck";
     if (categorySlug === "blogs") return "blog";
+    if (categorySlug === "voc") return "voc";
     if (categorySlug === "events") return "events";
     if (categorySlug === "manuals") return "manuals";
     if (categorySlug === "glossary") return "glossary";

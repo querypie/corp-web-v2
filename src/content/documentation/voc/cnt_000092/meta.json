@@ -1,10 +1,10 @@
 {
   "authorName": "",
   "authorRole": "",
-  "categorySlug": "use-cases",
+  "categorySlug": "voc",
   "contentType": "content",
   "dateIso": "2025-03-24",
-  "downloadCoverImageSrc": "/demo/use-cases/cs-thumb-lguplus.webp",
+  "downloadCoverImageSrc": "/documentation/voc/cs-thumb-lguplus.webp",
   "downloadPdfFileName": "",
   "downloadPdfSrc": "",
   "enableDownloadButton": false,
@@ -12,9 +12,9 @@
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "lg-uplus-daniel-ku",
-  "imageSrc": "/demo/use-cases/cs-thumb-lguplus-2.webp",
+  "imageSrc": "/documentation/voc/cs-thumb-lguplus-2.webp",
   "relatedIds": [],
-  "section": "demo",
+  "section": "documentation",
   "sortOrder": 25,
   "status": "published",
   "storageId": "cnt_000092",
@@ -35,16 +35,16 @@
   ],
   "locales": {
     "en": {
-      "htmlPath": "src/content/demo/use-cases/cnt_000092/en.html",
-      "jsonPath": "src/content/demo/use-cases/cnt_000092/en.tiptap.json"
+      "htmlPath": "src/content/documentation/voc/cnt_000092/en.html",
+      "jsonPath": "src/content/documentation/voc/cnt_000092/en.tiptap.json"
     },
     "ko": {
-      "htmlPath": "src/content/demo/use-cases/cnt_000092/ko.html",
-      "jsonPath": "src/content/demo/use-cases/cnt_000092/ko.tiptap.json"
+      "htmlPath": "src/content/documentation/voc/cnt_000092/ko.html",
+      "jsonPath": "src/content/documentation/voc/cnt_000092/ko.tiptap.json"
     },
     "ja": {
-      "htmlPath": "src/content/demo/use-cases/cnt_000092/ja.html",
-      "jsonPath": "src/content/demo/use-cases/cnt_000092/ja.tiptap.json"
+      "htmlPath": "src/content/documentation/voc/cnt_000092/ja.html",
+      "jsonPath": "src/content/documentation/voc/cnt_000092/ja.tiptap.json"
     }
   }
 }

@@ -33,8 +33,12 @@ export default async function DemoPage({ params, searchParams }: Props) {
   const selectedCategory: DemoCategorySlug =
     isDemoCategorySlug(category) && category !== "all" ? category : "all";
 
-  const demoItems = (await readContentState("demo", { includeBodies: false }))
-    .filter((item) => isPublishedContentVisible(item, locale))
+  const publicDemoItems = (await readContentState("demo", { includeBodies: false }))
+    .filter((item) => isPublishedContentVisible(item, locale));
+  const visibleCategorySlugs = Array.from(
+    new Set(publicDemoItems.map((item) => item.categorySlug as DemoCategorySlug)),
+  );
+  const demoItems = publicDemoItems
     .filter((item) => selectedCategory === "all" || item.categorySlug === selectedCategory);
   const sortedDemoItems = sortPublicContentItems(demoItems, {
     preferManualOrder: selectedCategory !== "all",
@@ -58,6 +62,7 @@ export default async function DemoPage({ params, searchParams }: Props) {
       locale={locale}
       selectedCategory={selectedCategory}
       title={copy.title}
+      visibleCategorySlugs={visibleCategorySlugs}
     />
   );
 }

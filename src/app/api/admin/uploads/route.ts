@@ -10,6 +10,7 @@ const UPLOAD_DIR_PATHS = {
   news: path.join(process.cwd(), "public", "news"),
   documentation: path.join(process.cwd(), "public", "documentation"),
   "documentation/blogs": path.join(process.cwd(), "public", "documentation", "blogs"),
+  "documentation/voc": path.join(process.cwd(), "public", "documentation", "voc"),
   "documentation/events": path.join(process.cwd(), "public", "documentation", "events"),
   "documentation/white-papers": path.join(process.cwd(), "public", "documentation", "white-papers"),
   "documentation/glossary": path.join(process.cwd(), "public", "documentation", "glossary"),
@@ -205,6 +206,7 @@ function resolveUploadDirName(section: string | null, categorySlug: string | nul
 
   if (section === "documentation") {
     if (categorySlug === "blogs") return "documentation/blogs";
+    if (categorySlug === "voc") return "documentation/voc";
     if (categorySlug === "events") return "documentation/events";
     if (categorySlug === "white-papers") return "documentation/white-papers";
     if (categorySlug === "glossary") return "documentation/glossary";

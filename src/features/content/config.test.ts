@@ -41,6 +41,13 @@ describe("getDocumentationSidebarMenuItems", () => {
         slug: "blogs",
       },
       {
+        href: "/ko/voc",
+        isActive: false,
+        kind: "link",
+        label: "VOC",
+        slug: "voc",
+      },
+      {
         href: "/ko/events",
         isActive: false,
         kind: "link",
@@ -89,10 +96,37 @@ describe("getDocumentationSidebarMenuItems", () => {
         slug: "blogs",
       },
       {
+        href: "/en/voc",
+        isActive: false,
+        kind: "link",
+        label: "VOC",
+        slug: "voc",
+      },
+      {
         href: "/en/events",
         isActive: false,
         kind: "link",
         label: "Events",
+        slug: "events",
+      },
+    ]);
+  });
+
+  it("공개 게시물이 있는 Documentation 카테고리만 메뉴에 노출한다", () => {
+    expect(getDocumentationSidebarMenuItems("ko", "all", ["blogs", "events"])).toEqual([
+      { href: "/ko/documentation", isActive: true, kind: "link", label: "전체", slug: "all" },
+      {
+        href: "/ko/blog",
+        isActive: false,
+        kind: "link",
+        label: "블로그",
+        slug: "blogs",
+      },
+      {
+        href: "/ko/events",
+        isActive: false,
+        kind: "link",
+        label: "이벤트",
         slug: "events",
       },
     ]);

@@ -1,15 +1,18 @@
 import type { Locale } from "@/constants/i18n";
 import type { ReactNode } from "react";
-import { getButtonStyle, type ButtonSize } from "@/components/ui/Button";
+import { getButtonStyle, type ButtonSize, type ButtonStyle } from "@/components/ui/Button";
 
 type CtaProps = {
   actionLabel?: string;
   actionHref?: string;
+  actionShape?: ButtonStyle;
   actionSize?: ButtonSize;
   className?: string;
   eyebrow?: ReactNode;
   description?: ReactNode;
   locale?: Locale;
+  secondaryActionLabel?: string;
+  secondaryActionHref?: string;
   title?: ReactNode;
 };
 
@@ -49,16 +52,23 @@ const defaultCopyByLocale = {
 export default function Cta({
   actionLabel,
   actionHref = "https://app.querypie.com/",
+  actionShape = "full",
   actionSize = "large",
   className,
   description,
   eyebrow,
   locale = "en",
+  secondaryActionHref,
+  secondaryActionLabel,
   title,
 }: CtaProps) {
   const defaultCopy = defaultCopyByLocale[locale];
   const resolvedActionLabel = actionLabel ?? defaultCopy.actionLabel;
-  const actionStyles = getButtonStyle("secondary", "full", actionSize, "default");
+  const resolvedSecondaryActionLabel = secondaryActionLabel ?? "";
+  // 보조 버튼이 있으면 두 버튼을 가로로 나란히 배치
+  const hasSecondaryAction = resolvedSecondaryActionLabel.length > 0;
+  const actionStyles = getButtonStyle("secondary", actionShape, actionSize, "default");
+  const secondaryStyles = getButtonStyle("secondary", actionShape, actionSize, "default");
 
   return (
     /* 페이지 하단 전환 유도용 CTA 섹션 */
@@ -71,16 +81,39 @@ export default function Cta({
         <p className="m-0 min-w-full type-body-md text-mute">
           {description ?? defaultCopy.description}
         </p>
-        <a
-          className={cx(actionStyles.container, actionStyles.text, "group cursor-pointer")}
-          href={actionHref}
-          rel="noreferrer noopener"
-          target="_blank"
+        <div
+          className={cx(
+            "flex flex-wrap items-center justify-center",
+            hasSecondaryAction ? "gap-3 md:gap-4" : "min-w-full",
+          )}
         >
-          <span className="inline-flex items-center justify-center gap-2 text-center">
-            {resolvedActionLabel}
-          </span>
-        </a>
+          <a
+            className={cx(actionStyles.container, actionStyles.text, "group cursor-pointer")}
+            href={actionHref}
+            rel="noreferrer noopener"
+            target="_blank"
+          >
+            <span className="inline-flex items-center justify-center gap-2 text-center">
+              {resolvedActionLabel}
+            </span>
+          </a>
+          {hasSecondaryAction ? (
+            <a
+              className={cx(
+                secondaryStyles.container,
+                secondaryStyles.text,
+                "group cursor-pointer",
+              )}
+              href={secondaryActionHref}
+              rel="noreferrer noopener"
+              target="_blank"
+            >
+              <span className="inline-flex items-center justify-center gap-2 text-center">
+                {resolvedSecondaryActionLabel}
+              </span>
+            </a>
+          ) : null}
+        </div>
       </div>
     </section>
   );

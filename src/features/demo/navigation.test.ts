@@ -55,4 +55,24 @@ describe("getDemoSidebarMenuItems", () => {
       },
     ]);
   });
+
+  it("공개 게시물이 있는 Demo 카테고리만 메뉴에 노출한다", () => {
+    expect(getDemoSidebarMenuItems("ko", "all", ["use-cases", "aip-features"])).toEqual([
+      { href: "/ko/demo", isActive: true, kind: "link", label: "전체", slug: "all" },
+      {
+        href: "/ko/demo/use-cases",
+        isActive: false,
+        kind: "link",
+        label: "활용 사례",
+        slug: "use-cases",
+      },
+      {
+        href: "/ko/demo/aip",
+        isActive: false,
+        kind: "link",
+        label: "AIP 기능",
+        slug: "aip-features",
+      },
+    ]);
+  });
 });

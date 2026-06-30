@@ -12,6 +12,10 @@ describe("legacyContentRedirects", () => {
       destination: "/:locale/whitepapers/:slug",
     });
     expect(legacyContentRedirects).toContainEqual({
+      source: "/:locale(en|ko|ja)/voc/:legacyFolder/:slug",
+      destination: "/:locale/voc/:slug",
+    });
+    expect(legacyContentRedirects).toContainEqual({
       source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug",
       destination: "/:locale/demo/use-cases/:slug",
     });
@@ -40,6 +44,6 @@ describe("legacyContentRedirects", () => {
   });
 
   it("keeps the redirect list scoped to public content categories", () => {
-    expect(legacyContentRedirects).toHaveLength(10);
+    expect(legacyContentRedirects).toHaveLength(11);
   });
 });
