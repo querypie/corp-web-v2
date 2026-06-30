@@ -55,8 +55,8 @@ describe("content detail metadata", () => {
     expect(metadata.openGraph?.images).toEqual([
       {
         url: "/uploads/security-guide.webp",
-        width: 1600,
-        height: 840,
+        width: 1200,
+        height: 630,
         alt: "Security Guide",
       },
     ]);
@@ -81,8 +81,8 @@ describe("content detail metadata", () => {
     expect(metadata.openGraph?.images).toEqual([
       {
         url: "/demo/aip-thumbnail.webp",
-        width: 1600,
-        height: 840,
+        width: 1200,
+        height: 630,
         alt: "AIP Demo",
       },
     ]);

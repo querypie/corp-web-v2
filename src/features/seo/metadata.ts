@@ -21,8 +21,8 @@ const defaultOgDescription: Record<Locale, string> = {
 };
 
 const defaultOgImageSize = {
-  width: 1600,
-  height: 840,
+  width: 1200,
+  height: 630,
 } as const;
 
 function createDynamicOgImageUrl({ description, locale, title }: DynamicOgImageOptions) {

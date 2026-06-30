@@ -35,6 +35,7 @@ tsconfig.tsbuildinfo
 
 # Claude Code local settings
 .claude/settings.json
+AGENTS.md
 
 # 콘텐츠 다운로드 리드 런타임 데이터
 src/content/state/

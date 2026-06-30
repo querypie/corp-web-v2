@@ -22,8 +22,8 @@ describe("withDynamicOgImage", () => {
     expect(metadata.openGraph?.images).toEqual([
       {
         url: "/api/og?locale=ko&title=QueryPie+news&description=QueryPie+update",
-        width: 1600,
-        height: 840,
+        width: 1200,
+        height: 630,
         alt: "QueryPie news",
       },
     ]);
@@ -73,8 +73,8 @@ describe("withDynamicOgImage", () => {
     expect(metadata.openGraph?.images).toEqual([
       {
         url: "/uploads/product-update.webp",
-        width: 1600,
-        height: 840,
+        width: 1200,
+        height: 630,
         alt: "Product update",
       },
     ]);
