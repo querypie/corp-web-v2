@@ -4,6 +4,12 @@ import type { Locale } from "@/constants/i18n";
 
 type DynamicOgImageOptions = {
   description?: string | null;
+  image?: {
+    alt?: string;
+    height?: number;
+    url: string;
+    width?: number;
+  };
   locale: Locale;
   title: string;
 };
@@ -13,6 +19,11 @@ const defaultOgDescription: Record<Locale, string> = {
   ko: "QueryPie AI는 기업이 AI로 일하는 방식을 새롭게 바꿉니다.",
   ja: "QueryPie AI は、企業の AI 活用と働き方を変革します。",
 };
+
+const defaultOgImageSize = {
+  width: 1200,
+  height: 630,
+} as const;
 
 function createDynamicOgImageUrl({ description, locale, title }: DynamicOgImageOptions) {
   const params = new URLSearchParams({
@@ -33,6 +44,12 @@ export function withDynamicOgImage(
 ): Metadata {
   const description = options.description ?? defaultOgDescription[options.locale];
   const imageUrl = createDynamicOgImageUrl({ ...options, description });
+  const ogImage = {
+    url: options.image?.url ?? imageUrl,
+    width: options.image?.width ?? defaultOgImageSize.width,
+    height: options.image?.height ?? defaultOgImageSize.height,
+    alt: options.image?.alt ?? options.title,
+  };
 
   return {
     ...metadata,
@@ -41,21 +58,14 @@ export function withDynamicOgImage(
       ...metadata.openGraph,
       title: options.title,
       description,
-      images: [
-        {
-          url: imageUrl,
-          width: 1200,
-          height: 630,
-          alt: options.title,
-        },
-      ],
+      images: [ogImage],
     },
     twitter: {
       ...metadata.twitter,
       card: "summary_large_image",
       title: options.title,
       description,
-      images: [imageUrl],
+      images: [ogImage.url],
     },
   };
 }

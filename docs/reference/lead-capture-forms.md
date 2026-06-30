@@ -189,3 +189,5 @@ PDF 버튼 동작:
 | `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | Slack 알림 채널 | — |
 
 Slack 환경변수가 없거나 전송에 실패해도 언락 성공은 유지한다.
+
+Staging 환경에 전달할 값은 [`staging-lead-form.env.example`](./staging-lead-form.env.example)을 기준으로 준비한다. Contact Us와 게이팅 폼의 Slack 알림은 `SLACK_BOT_OAUTH_TOKEN`, `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` 두 값만 있으면 동작한다.

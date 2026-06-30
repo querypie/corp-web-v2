@@ -117,6 +117,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const title = getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale));
   const description = getLocalizedContent(currentEntry.summary, getResolvedContentLocale(currentEntry, locale));
+  const imageUrl = getContentThumbnailSrc(currentEntry.imageSrc);
 
   return withDynamicOgImage({
     title,
@@ -124,5 +125,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     alternates: {
       canonical: getPublicDetailHref("news", locale, decodedSlug),
     },
-  }, { locale, title, description });
+  }, {
+    locale,
+    title,
+    description,
+    image: {
+      url: imageUrl,
+      alt: title,
+    },
+  });
 }
