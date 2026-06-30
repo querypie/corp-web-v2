@@ -26,6 +26,14 @@ function withLocaleHref(locale: string, href: string) {
   return getLocalePath(locale as Locale, href.startsWith("/") ? href : `/${href}`);
 }
 
+function getExternalLinkProps(href: string) {
+  if (!href.startsWith("http")) return {};
+  return {
+    rel: "noreferrer noopener",
+    target: "_blank",
+  };
+}
+
 function isPlanFeatureDivider(feature: PlanFeature): feature is Extract<PlanFeature, { type: "divider" }> {
   return typeof feature === "object" && "type" in feature && feature.type === "divider";
 }
@@ -83,7 +91,7 @@ function PlanSummaryCard({
       </div>
 
       <div className="pt-8">
-        <a className="inline-flex" href={href}>
+        <a className="inline-flex" href={href} {...getExternalLinkProps(href)}>
           <Button
             arrow
             className="min-w-[126px]"

@@ -1,0 +1,40 @@
+{
+  "authorName": "Press Release",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "content",
+  "dateIso": "2026-06-30",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-expands-access-control-platform-ai-capabilities",
+  "imageSrc": "/news/ai-pack-en.png",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000212",
+  "summary": {
+    "en": "QueryPie has unveiled AI Pack, an AI extension package that brings AI capabilities to its Access Control Platform, enabling natural language-driven management of enterprise infrastructure. In addition, QueryPie offers its Access Control Platform as an MCP, allowing AI agents to securely operate within existing access control policies.",
+    "ko": "",
+    "ja": ""
+  },
+  "title": {
+    "en": "QueryPie Expands Its Access Control Platform with AI Capabilities",
+    "ko": "",
+    "ja": ""
+  },
+  "visibleLocales": [
+    "en"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/news/cnt_000212/en.html",
+      "jsonPath": "src/content/news/cnt_000212/en.tiptap.json"
+    }
+  }
+}
