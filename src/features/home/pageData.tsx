@@ -249,12 +249,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
         ],
         newsTitle: "Lastest News",
-        ctaActionLabel: "Agentic AI Platform",
-        ctaSection: [
-          "Stop Thinking.",
-          "Start Transforming.",
-          "Sign up in seconds and secure your 14-day free trial now.",
-        ],
         footerSections: [
           { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
           { title: "Features", items: ["Demo", "Documentation"] },
@@ -384,12 +378,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
         ],
         newsTitle: "최신 뉴스",
-        ctaActionLabel: "Agentic AI Platform",
-        ctaSection: [
-          "생각은 멈추고.",
-          "이제 전환하세요.",
-          "지금 가입하고 14일 무료 체험을 바로 시작하세요.",
-        ],
         footerSections: [
           { title: "솔루션", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
           { title: "기능", items: ["데모", "문서"] },
@@ -519,12 +507,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
         ],
         newsTitle: "最新ニュース",
-        ctaActionLabel: "Agentic AI Platform",
-        ctaSection: [
-          "考え続けるのをやめて。",
-          "変革を始めよう。",
-          "今すぐ登録して、14日間の無料トライアルを始めましょう。",
-        ],
         footerSections: [
           { title: "ソリューション", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
           { title: "機能", items: ["デモ", "ドキュメント"] },
@@ -550,12 +532,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
     contentListItems: contentListItems.length > 0 ? contentListItems : copy.contentListItems,
     contentListLinks: copy.contentListLinks,
     contentListTitle: copy.contentListTitle,
-    ctaActionLabel: copy.ctaActionLabel,
-    ctaDescription: copy.ctaSection[2],
-    ctaEyebrow: copy.ctaSection[0],
-    ctaSecondaryActionHref: `https://docs.querypie.com/${locale}/installation/querypie-acp-community-edition`,
-    ctaSecondaryActionLabel: "ACP Community Edition",
-    ctaTitle: copy.ctaSection[1],
     featureItems: copy.featureItems,
     heroDescription: copy.heroDescription,
     heroHeading: copy.heroHeading,

@@ -70,12 +70,6 @@ export type HomePageProps = {
   contentListItems: FeaturedContentItem[];
   contentListLinks: ContentListLink[];
   contentListTitle: string;
-  ctaActionLabel: string;
-  ctaDescription: string;
-  ctaEyebrow: string;
-  ctaSecondaryActionHref: string;
-  ctaSecondaryActionLabel: string;
-  ctaTitle: string;
   featureItems: FeatureItem[];
   heroDescription: string;
   heroHeading: string;
@@ -99,12 +93,6 @@ export default function HomePage({
   contentListItems,
   contentListLinks,
   contentListTitle,
-  ctaActionLabel,
-  ctaDescription,
-  ctaEyebrow,
-  ctaSecondaryActionHref,
-  ctaSecondaryActionLabel,
-  ctaTitle,
   featureItems,
   heroDescription,
   heroHeading,
@@ -158,14 +146,7 @@ export default function HomePage({
         <News items={newsItems} title={newsTitle} />
       </div>
       <div>
-        <Cta
-          actionLabel={ctaActionLabel}
-          description={ctaDescription}
-          eyebrow={ctaEyebrow}
-          secondaryActionHref={ctaSecondaryActionHref}
-          secondaryActionLabel={ctaSecondaryActionLabel}
-          title={ctaTitle}
-        />
+        <Cta locale={locale} />
       </div>
     </div>
   );
