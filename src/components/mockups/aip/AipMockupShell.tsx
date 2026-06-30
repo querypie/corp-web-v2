@@ -136,6 +136,25 @@ const menuIconById: Record<string, MenuIconName> = {
   skills: "puzzle",
 };
 
+type AutoMenuStep =
+  | { kind: "agent"; agentId: string }
+  | { kind: "chat"; chatTitle: string }
+  | { kind: "menu"; menu: string };
+
+const autoMenuSteps: AutoMenuStep[] = [
+  { kind: "menu", menu: "chat" },
+  { kind: "menu", menu: "agents" },
+  { kind: "agent", agentId: "data-analysis" },
+  { kind: "menu", menu: "mcp" },
+  { kind: "menu", menu: "automation" },
+  { kind: "menu", menu: "my-drive" },
+  { kind: "menu", menu: "skills" },
+  { kind: "menu", menu: "apps" },
+  ...aipMockupChats.map((chatTitle) => ({ kind: "chat" as const, chatTitle })),
+];
+const autoMenuIntervalMs = 4000;
+const autoMenuResumeDelayMs = 4000;
+
 const adminMenuGroups: AdminMenuGroup[] = [
   {
     id: "main",
@@ -648,7 +667,7 @@ function Sidebar({
                     <button
                       aria-current={isActive ? "page" : undefined}
                       className={[
-                        "group flex h-9 w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none",
+                        "group flex h-9 w-full min-w-0 items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none transition-colors duration-200",
                         isActive ? activeMenuItemClassName : inactiveMenuItemClassName,
                       ].join(" ")}
                       onClick={() => (item.id === "chat" ? onNewChatClick() : onMenuClick(item.id))}
@@ -672,7 +691,7 @@ function Sidebar({
                 {aipMockupChats.map((chat) => (
                   <button
                     className={[
-                      "group relative flex h-9 w-full items-center rounded-lg text-left text-sm",
+                      "group relative flex h-9 w-full items-center rounded-lg text-left text-sm transition-colors duration-200",
                       activeMenu === "chat" && activeChatTitle === chat ? activeMenuItemClassName : inactiveMenuItemClassName,
                     ].join(" ")}
                     aria-current={activeMenu === "chat" && activeChatTitle === chat ? "page" : undefined}
@@ -878,7 +897,7 @@ function SidebarAgentSubMenu({
               <button
                 aria-current={activeAgentId === agent.id ? "page" : undefined}
                 className={[
-                  "flex h-9 min-w-0 w-full items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none",
+                  "flex h-9 min-w-0 w-full items-center gap-2.5 overflow-hidden rounded-md pl-3 pr-2 text-left text-sm outline-none transition-colors duration-200",
                   activeAgentId === agent.id ? activeMenuItemClassName : inactiveMenuItemClassName,
                 ].join(" ")}
                 key={agent.id}
@@ -6945,20 +6964,8 @@ function McpScreen() {
         </button>
       </div>
 
-      <div className="mb-4 flex items-center justify-between gap-3">
-        <div className="relative w-64 shrink-0">
-          <Icon
-            className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#8f8f8f]"
-            name="search"
-          />
-          <input
-            className="flex h-10 w-full rounded-md border border-[#ffffff1a] bg-[#171717] px-3 py-2 pl-9 text-base text-[#fafafa] outline-none placeholder:text-[#737373] focus-visible:ring-2 focus-visible:ring-[#0090FF] focus-visible:ring-offset-2 focus-visible:ring-offset-[#171717] md:text-sm"
-            placeholder="Search integrations"
-            readOnly
-            type="search"
-          />
-        </div>
-        {activeTab === "installed" ? (
+      {activeTab === "installed" ? (
+        <div className="mb-4 flex items-center justify-end">
           <div
             aria-label="View mode"
             className="inline-flex h-9 items-center rounded-lg border border-[#ffffff1a] bg-[#1f1f1f] p-1"
@@ -6987,10 +6994,8 @@ function McpScreen() {
               <Icon className="size-4" name="grid" />
             </button>
           </div>
-        ) : (
-          <span />
-        )}
-      </div>
+        </div>
+      ) : null}
 
       <div className="mt-5 flex min-h-0 flex-1 gap-x-10 gap-y-[30px]">
         {activeTab === "all" ? (
@@ -7199,6 +7204,69 @@ export default function AipMockupShell({
   const [activeAdminPage, setActiveAdminPage] = useState("dashboard");
   const [activeAgentId, setActiveAgentId] = useState<string | null>(null);
   const [activeChatTitle, setActiveChatTitle] = useState<string | null>(null);
+  const [, setAutoMenuIndex] = useState(0);
+  const [isAutoMenuPaused, setIsAutoMenuPaused] = useState(false);
+  const autoMenuResumeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const selectAutoMenuStep = (step: AutoMenuStep) => {
+    if (step.kind === "agent") {
+      setActiveAgentId(step.agentId);
+      setActiveChatTitle(null);
+      setActiveMenu("chat");
+      return;
+    }
+
+    if (step.kind === "chat") {
+      setActiveAgentId(null);
+      setActiveChatTitle(step.chatTitle);
+      setActiveMenu("chat");
+      return;
+    }
+
+    setActiveAgentId(null);
+    setActiveChatTitle(null);
+    setActiveMenu(step.menu);
+  };
+
+  const resumeAutoMenuFromStart = () => {
+    setAutoMenuIndex(0);
+    selectAutoMenuStep(autoMenuSteps[0]);
+    setIsAutoMenuPaused(false);
+  };
+
+  const pauseAutoMenuForUserControl = () => {
+    setIsAutoMenuPaused(true);
+
+    if (autoMenuResumeTimeoutRef.current) {
+      clearTimeout(autoMenuResumeTimeoutRef.current);
+    }
+
+    autoMenuResumeTimeoutRef.current = setTimeout(resumeAutoMenuFromStart, autoMenuResumeDelayMs);
+  };
+
+  useEffect(() => {
+    if (isAutoMenuPaused) return;
+
+    const autoMenuInterval = setInterval(() => {
+      setAutoMenuIndex((currentIndex) => {
+        const nextIndex = (currentIndex + 1) % autoMenuSteps.length;
+        selectAutoMenuStep(autoMenuSteps[nextIndex]);
+        return nextIndex;
+      });
+    }, autoMenuIntervalMs);
+
+    return () => {
+      clearInterval(autoMenuInterval);
+    };
+  }, [isAutoMenuPaused]);
+
+  useEffect(() => {
+    return () => {
+      if (autoMenuResumeTimeoutRef.current) {
+        clearTimeout(autoMenuResumeTimeoutRef.current);
+      }
+    };
+  }, []);
 
   const openMenu = (menu: string) => {
     if (menu === "admin") {
@@ -7233,7 +7301,16 @@ export default function AipMockupShell({
   };
 
   return (
-    <div className={["w-full", className].filter(Boolean).join(" ")} data-aip-mockup onWheelCapture={handleMockupWheel}>
+    <div
+      className={["w-full", className].filter(Boolean).join(" ")}
+      data-aip-mockup
+      onKeyDownCapture={pauseAutoMenuForUserControl}
+      onPointerDownCapture={pauseAutoMenuForUserControl}
+      onWheelCapture={(event) => {
+        pauseAutoMenuForUserControl();
+        handleMockupWheel(event);
+      }}
+    >
       <div
         className={[
           "mx-auto flex h-[720px] w-full max-w-[1200px] overflow-hidden rounded-[14px] border border-[#2f2f2f] bg-[#121212] text-[#f4f4f5] md:h-[720px]",
