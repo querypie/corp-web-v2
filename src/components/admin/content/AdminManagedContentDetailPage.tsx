@@ -572,6 +572,13 @@ const LOCALES = ["en", "ko", "ja"] as const;
 const EXTERNAL_IMAGE_PROTOCOLS = new Set(["http:", "https:"]);
 const LOCAL_IMAGE_PATH_PREFIXES = ["/demo/", "/documentation/", "/news/", "/uploads/"];
 
+function getConfiguredDownloadPdfSrcs(entry: ManagedContentEntry) {
+  return [
+    entry.downloadPdfSrc.trim(),
+    ...LOCALES.map((locale) => entry.downloadPdfSrcByLocale?.[locale]?.trim() ?? ""),
+  ].filter(Boolean);
+}
+
 function replaceAllExact(value: string, search: string, replacement: string) {
   return value.split(search).join(replacement);
 }
@@ -1555,15 +1562,15 @@ export default function AdminManagedContentDetailPage({
         missing.push(`${getLocaleLabel(locale)} 제목`);
       }
     }
-    if (supportsLeadGate && targetForm.enableDownloadButton && !targetForm.downloadPdfSrc.trim() && !pendingPdfFile) {
+    const configuredDownloadPdfSrcs = getConfiguredDownloadPdfSrcs(targetForm);
+    if (supportsLeadGate && targetForm.enableDownloadButton && configuredDownloadPdfSrcs.length === 0 && !pendingPdfFile) {
       missing.push("PDF");
     }
     if (
       supportsLeadGate &&
       targetForm.enableDownloadButton &&
-      targetForm.downloadPdfSrc.trim() &&
-      !pendingPdfFile &&
-      !isDownloadableContentPdfSrc(section, targetForm.downloadPdfSrc)
+      configuredDownloadPdfSrcs.some((src) => !isDownloadableContentPdfSrc(section, src)) &&
+      !pendingPdfFile
     ) {
       missing.push("PDF 경로 (/documentation/...pdf 또는 /demo/...pdf)");
     }

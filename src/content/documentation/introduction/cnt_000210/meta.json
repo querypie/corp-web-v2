@@ -6,8 +6,18 @@
   "dateIso": "2025-10-29",
   "downloadCoverImageSrc": "/documentation/introduction/aip-introduction.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": "querypie-aip-product-introduction-ja.pdf"
+  },
   "downloadPdfSrc": "",
-  "enableDownloadButton": false,
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": "/documentation/introduction/querypie-aip-product-introduction-ja.pdf"
+  },
+  "enableDownloadButton": true,
   "externalUrl": "",
   "gatingLevel": "50",
   "hideHeroImage": false,

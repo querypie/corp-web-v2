@@ -12,6 +12,7 @@ import { demoCategoryConfigs, getCategoryHref } from "@/features/content/config"
 import {
   formatPublicDate,
   getAdjacentContentLabel,
+  getContentDownloadPdfSrc,
   getManagedCategoryLabel,
   getContentThumbnailSrc,
   getLocalizedContent,
@@ -106,6 +107,7 @@ export default async function DemoDetailRoute({ params }: Props) {
   const isGateActive = isGateEnabled && !isContentUnlocked;
   const copy = getDemoPageCopy(locale);
   const detailHref = getPublicDetailHref("demo", locale, resolvedSlug, currentEntry.categorySlug);
+  const downloadHref = getContentDownloadPdfSrc(currentEntry, locale);
 
   return (
     <DemoDetailPage
@@ -122,10 +124,7 @@ export default async function DemoDetailRoute({ params }: Props) {
         contentListTitle: "Demo List",
         date: formatPublicDate(locale, currentEntry.dateIso),
         downloadFormTargetId: CONTENT_GATE_FORM_ID,
-        downloadHref:
-          currentEntry.enableDownloadButton && currentEntry.downloadPdfSrc
-            ? currentEntry.downloadPdfSrc
-            : undefined,
+        downloadHref: downloadHref || undefined,
         downloadRequiresUnlock: isGateActive,
         hideHeroImage: currentEntry.hideHeroImage,
         heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),

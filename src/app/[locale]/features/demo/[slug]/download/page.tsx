@@ -3,7 +3,14 @@ import type { Metadata } from "next";
 import ContentDownloadPage from "@/components/pages/documentation/ContentDownloadPage";
 import { isLocale } from "@/constants/i18n";
 import { getContactPageCopy } from "@/copy/contact";
-import { getLocalizedContent, getPublicDetailHref, getResolvedContentLocale, isPublishedContentAccessible } from "@/features/content/data";
+import {
+  getContentDownloadPdfFileName,
+  getContentDownloadPdfSrc,
+  getLocalizedContent,
+  getPublicDetailHref,
+  getResolvedContentLocale,
+  isPublishedContentAccessible,
+} from "@/features/content/data";
 import { readContentItem } from "@/features/content/contentState.server";
 import { getContentUnlockCookieName } from "@/features/content/gating";
 import { withDynamicOgImage } from "@/features/seo/metadata";
@@ -19,25 +26,26 @@ export default async function DemoDownloadRoute({ params }: DemoDownloadRoutePro
   if (!isLocale(locale)) notFound();
 
   const currentEntry = await readContentItem("demo", resolvedSlug, { includeBodies: false });
+  const downloadPdfSrc = currentEntry ? getContentDownloadPdfSrc(currentEntry, locale) : "";
+  const downloadPdfFileName = currentEntry ? getContentDownloadPdfFileName(currentEntry, locale) : "";
 
   if (
     !currentEntry ||
     !isPublishedContentAccessible(currentEntry) ||
-    !currentEntry.enableDownloadButton ||
-    !currentEntry.downloadPdfSrc
+    !downloadPdfSrc
   ) {
     notFound();
   }
 
   return (
     <ContentDownloadPage
-      attachmentFileName={currentEntry.downloadPdfFileName || `${currentEntry.id}.pdf`}
-      attachmentUrl={currentEntry.downloadPdfSrc}
+      attachmentFileName={downloadPdfFileName}
+      attachmentUrl={downloadPdfSrc}
       contactCopy={getContactPageCopy(locale)}
       contentId={currentEntry.id}
       coverImageSrc={currentEntry.downloadCoverImageSrc || currentEntry.imageSrc || "/assets/common/fallback-contents.jpg"}
       locale={locale}
-      pdfPreviewUrl={currentEntry.downloadPdfSrc}
+      pdfPreviewUrl={downloadPdfSrc}
       returnUrl={getPublicDetailHref("demo", locale, resolvedSlug, currentEntry.categorySlug)}
       section="demo"
       title={getLocalizedContent(currentEntry.title, getResolvedContentLocale(currentEntry, locale))}
@@ -53,12 +61,12 @@ export async function generateMetadata({ params }: DemoDownloadRouteProps): Prom
   if (!isLocale(locale)) return {};
 
   const currentEntry = await readContentItem("demo", resolvedSlug, { includeBodies: false });
+  const downloadPdfSrc = currentEntry ? getContentDownloadPdfSrc(currentEntry, locale) : "";
 
   if (
     !currentEntry ||
     !isPublishedContentAccessible(currentEntry) ||
-    !currentEntry.enableDownloadButton ||
-    !currentEntry.downloadPdfSrc
+    !downloadPdfSrc
   ) {
     return {};
   }

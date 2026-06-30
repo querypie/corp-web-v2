@@ -26,7 +26,9 @@ export type ManagedContentEntry = {
   dateIso: string;
   downloadCoverImageSrc: string;
   downloadPdfFileName: string;
+  downloadPdfFileNameByLocale: LocalizedContent;
   downloadPdfSrc: string;
+  downloadPdfSrcByLocale: LocalizedContent;
   enableDownloadButton: boolean;
   externalUrl: string;
   gatingLevel: ContentGatingLevel;
@@ -105,7 +107,9 @@ export function createEmptyManagedContentDraft(
     dateIso: "",
     downloadCoverImageSrc: "",
     downloadPdfFileName: "",
+    downloadPdfFileNameByLocale: createLocalizedContent(),
     downloadPdfSrc: "",
+    downloadPdfSrcByLocale: createLocalizedContent(),
     enableDownloadButton: false,
     externalUrl: "",
     gatingLevel: "none",
@@ -389,15 +393,37 @@ export function getPdfWhitePaperButtonLabel(locale: Locale) {
 export function getDownloadPreviewProps(
   item: Pick<
     ManagedContentEntry,
-    "downloadPdfSrc" | "enableDownloadButton" | "section"
+    "downloadPdfSrc" | "downloadPdfSrcByLocale" | "enableDownloadButton" | "section"
   >,
+  locale: Locale = "en",
 ) {
-  const shouldShow = item.section !== "news" && item.enableDownloadButton;
+  const downloadHref = getContentDownloadPdfSrc(item, locale);
 
   return {
-    downloadHref: shouldShow ? item.downloadPdfSrc || "#" : undefined,
+    downloadHref: downloadHref || undefined,
     downloadLabel: CONTENT_DOWNLOAD_BUTTON_LABEL,
   };
+}
+
+export function getContentDownloadPdfSrc(
+  item: Pick<
+    ManagedContentEntry,
+    "downloadPdfSrc" | "downloadPdfSrcByLocale" | "enableDownloadButton" | "section"
+  >,
+  locale: Locale,
+) {
+  if (item.section === "news" || !item.enableDownloadButton) {
+    return "";
+  }
+
+  return item.downloadPdfSrcByLocale?.[locale]?.trim() || item.downloadPdfSrc.trim();
+}
+
+export function getContentDownloadPdfFileName(
+  item: Pick<ManagedContentEntry, "downloadPdfFileName" | "downloadPdfFileNameByLocale" | "id">,
+  locale: Locale,
+) {
+  return item.downloadPdfFileNameByLocale?.[locale]?.trim() || item.downloadPdfFileName || `${item.id}.pdf`;
 }
 
 export function isDownloadableContentPdfSrc(

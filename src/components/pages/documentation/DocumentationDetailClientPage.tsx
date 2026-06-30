@@ -11,6 +11,7 @@ import { docsCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/featur
 import {
   formatPublicDate,
   getAdjacentContentLabel,
+  getContentDownloadPdfSrc,
   getContentThumbnailSrc,
   getLocalizedContent,
   getPublicDetailHref,
@@ -113,6 +114,7 @@ export default function DocsDetailClientPage({
         }
       : null,
   ].filter((item): item is NonNullable<typeof item> => !!item);
+  const downloadHref = getContentDownloadPdfSrc(currentItem, locale);
 
   return (
     <DocsDetailPage
@@ -132,13 +134,7 @@ export default function DocsDetailClientPage({
         />
       ) : undefined}
       contentListItems={relatedItems}
-      downloadHref={
-        currentItem.section !== "news" &&
-        currentItem.enableDownloadButton &&
-          currentItem.downloadPdfSrc
-          ? currentItem.downloadPdfSrc
-          : undefined
-      }
+      downloadHref={downloadHref || undefined}
       downloadFormTargetId={CONTENT_GATE_FORM_ID}
       downloadRequiresUnlock={isGateActive}
       docsHref={getCategoryHref(docsCategoryConfigs, currentItem.categorySlug, locale)}

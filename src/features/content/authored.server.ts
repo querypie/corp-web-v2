@@ -25,7 +25,9 @@ type AuthoredContentMeta = {
   dateIso: string;
   downloadCoverImageSrc?: string;
   downloadPdfFileName?: string;
+  downloadPdfFileNameByLocale?: Partial<Record<Locale, string>>;
   downloadPdfSrc?: string;
+  downloadPdfSrcByLocale?: Partial<Record<Locale, string>>;
   enableDownloadButton: boolean;
   externalUrl: string;
   gatingLevel?: ManagedContentEntry["gatingLevel"];
@@ -54,7 +56,9 @@ type SaveAuthoredContentInput = Pick<
   | "dateIso"
   | "downloadCoverImageSrc"
   | "downloadPdfFileName"
+  | "downloadPdfFileNameByLocale"
   | "downloadPdfSrc"
+  | "downloadPdfSrcByLocale"
   | "enableDownloadButton"
   | "externalUrl"
   | "gatingLevel"
@@ -446,7 +450,9 @@ async function createManagedContentEntry(
     dateIso: normalizeDateIso(meta.dateIso),
     downloadCoverImageSrc: meta.downloadCoverImageSrc ?? "",
     downloadPdfFileName: meta.downloadPdfFileName ?? "",
+    downloadPdfFileNameByLocale: normalizeLocalizedRecord(meta.downloadPdfFileNameByLocale),
     downloadPdfSrc: meta.downloadPdfSrc ?? "",
+    downloadPdfSrcByLocale: normalizeLocalizedRecord(meta.downloadPdfSrcByLocale),
     enableDownloadButton: meta.enableDownloadButton ?? false,
     externalUrl: meta.externalUrl,
     gatingLevel: meta.gatingLevel ?? "none",
@@ -680,7 +686,9 @@ export async function saveAuthoredContent(
     dateIso: normalizedDateIso,
     downloadCoverImageSrc: input.downloadCoverImageSrc,
     downloadPdfFileName: input.downloadPdfFileName,
+    downloadPdfFileNameByLocale: input.downloadPdfFileNameByLocale,
     downloadPdfSrc: input.downloadPdfSrc,
+    downloadPdfSrcByLocale: input.downloadPdfSrcByLocale,
     enableDownloadButton: input.enableDownloadButton,
     externalUrl: input.externalUrl,
     gatingLevel: input.gatingLevel,

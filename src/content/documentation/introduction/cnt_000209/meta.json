@@ -6,8 +6,18 @@
   "dateIso": "2025-10-30",
   "downloadCoverImageSrc": "/documentation/introduction/acp-introduction.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": "querypie-acp-product-introduction-ja.pdf"
+  },
   "downloadPdfSrc": "",
-  "enableDownloadButton": false,
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": "/documentation/introduction/querypie-acp-product-introduction-ja.pdf"
+  },
+  "enableDownloadButton": true,
   "externalUrl": "",
   "gatingLevel": "50",
   "hideHeroImage": false,
