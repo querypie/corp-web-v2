@@ -3,8 +3,8 @@ import type { Locale } from "@/constants/i18n";
 import { getOgDescriptionLines, getOgTitleLines } from "@/features/seo/ogTitle";
 
 export const ogImageSize = {
-  width: 1600,
-  height: 840,
+  width: 1200,
+  height: 630,
 } as const;
 const ogImageScale = ogImageSize.width / 1200;
 
