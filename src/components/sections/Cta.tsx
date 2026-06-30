@@ -22,21 +22,27 @@ function cx(...values: Array<string | false | null | undefined>) {
 
 const defaultCopyByLocale = {
   en: {
-    actionLabel: "Make It Happen",
+    actionLabel: "Agentic AI Platform",
     description: "Sign up in seconds and secure your 14-day free trial now.",
     eyebrow: "Stop Thinking.",
+    secondaryActionHref: "https://docs.querypie.com/en/installation/querypie-acp-community-edition",
+    secondaryActionLabel: "ACP Community Edition",
     title: "Start Transforming.",
   },
   ko: {
-    actionLabel: "지금 실현하기",
+    actionLabel: "Agentic AI Platform",
     description: "지금 가입하고 14일 무료 체험을 바로 시작하세요.",
     eyebrow: "생각은 멈추고.",
+    secondaryActionHref: "https://docs.querypie.com/ko/installation/querypie-acp-community-edition",
+    secondaryActionLabel: "ACP Community Edition",
     title: "이제 전환하세요.",
   },
   ja: {
-    actionLabel: "今すぐ実現する",
+    actionLabel: "Agentic AI Platform",
     description: "今すぐ登録して、14日間の無料トライアルを始めましょう。",
     eyebrow: "考え続けるのをやめて。",
+    secondaryActionHref: "https://docs.querypie.com/ja/installation/querypie-acp-community-edition",
+    secondaryActionLabel: "ACP Community Edition",
     title: "変革を始めよう。",
   },
 } satisfies Record<
@@ -45,6 +51,8 @@ const defaultCopyByLocale = {
     actionLabel: string;
     description: string;
     eyebrow: string;
+    secondaryActionHref: string;
+    secondaryActionLabel: string;
     title: string;
   }
 >;
@@ -64,9 +72,11 @@ export default function Cta({
 }: CtaProps) {
   const defaultCopy = defaultCopyByLocale[locale];
   const resolvedActionLabel = actionLabel ?? defaultCopy.actionLabel;
-  const resolvedSecondaryActionLabel = secondaryActionLabel ?? "";
+  const resolvedSecondaryActionHref = secondaryActionHref ?? defaultCopy.secondaryActionHref;
+  const resolvedSecondaryActionLabel = secondaryActionLabel ?? defaultCopy.secondaryActionLabel;
   // 보조 버튼이 있으면 두 버튼을 가로로 나란히 배치
-  const hasSecondaryAction = resolvedSecondaryActionLabel.length > 0;
+  const hasSecondaryAction =
+    resolvedSecondaryActionHref.length > 0 && resolvedSecondaryActionLabel.length > 0;
   const actionStyles = getButtonStyle("secondary", actionShape, actionSize, "default");
   const secondaryStyles = getButtonStyle("secondary", actionShape, actionSize, "default");
 
@@ -104,7 +114,7 @@ export default function Cta({
                 secondaryStyles.text,
                 "group cursor-pointer",
               )}
-              href={secondaryActionHref}
+              href={resolvedSecondaryActionHref}
               rel="noreferrer noopener"
               target="_blank"
             >
