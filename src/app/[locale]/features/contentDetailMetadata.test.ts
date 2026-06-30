@@ -54,14 +54,14 @@ describe("content detail metadata", () => {
 
     expect(metadata.openGraph?.images).toEqual([
       {
-        url: "https://www.querypie.com/uploads/security-guide.webp",
+        url: "/uploads/security-guide.webp",
         width: 1600,
         height: 840,
         alt: "Security Guide",
       },
     ]);
-    expect(metadata.openGraph?.url).toBe("https://www.querypie.com/en/blog/security-guide");
-    expect(metadata.twitter?.images).toEqual(["https://www.querypie.com/uploads/security-guide.webp"]);
+    expect(metadata.openGraph?.url).toBe("/en/blog/security-guide");
+    expect(metadata.twitter?.images).toEqual(["/uploads/security-guide.webp"]);
   });
 
   it("demo 상세 OG image에 콘텐츠 섬네일을 사용한다", async () => {
@@ -80,13 +80,13 @@ describe("content detail metadata", () => {
 
     expect(metadata.openGraph?.images).toEqual([
       {
-        url: "https://www.querypie.com/demo/aip-thumbnail.webp",
+        url: "/demo/aip-thumbnail.webp",
         width: 1600,
         height: 840,
         alt: "AIP Demo",
       },
     ]);
-    expect(metadata.openGraph?.url).toBe("https://www.querypie.com/en/demo/use-cases/aip-demo");
-    expect(metadata.twitter?.images).toEqual(["https://www.querypie.com/demo/aip-thumbnail.webp"]);
+    expect(metadata.openGraph?.url).toBe("/en/demo/use-cases/aip-demo");
+    expect(metadata.twitter?.images).toEqual(["/demo/aip-thumbnail.webp"]);
   });
 });

@@ -72,7 +72,7 @@ describe("ContentShareActions", () => {
     expect(screen.getByRole("status")).toHaveTextContent("URL copied");
   });
 
-  it("공개 공유 URL을 받으면 소셜 링크와 URL 복사에 같은 URL을 사용한다", async () => {
+  it("공개 공유 URL을 받으면 소셜 공유 새창 링크에만 해당 URL을 사용한다", async () => {
     window.history.replaceState(null, "", "/ko/news/local-preview");
     const writeText = vi.fn().mockResolvedValue(undefined);
     Object.defineProperty(navigator, "clipboard", {
@@ -99,7 +99,7 @@ describe("ContentShareActions", () => {
       fireEvent.click(screen.getByLabelText("URL 복사"));
     });
 
-    expect(writeText).toHaveBeenCalledWith("https://www.querypie.com/ko/news/product-update");
+    expect(writeText).toHaveBeenCalledWith("http://localhost:3000/ko/news/local-preview");
   });
 
   it("한국어 페이지에서는 복사 완료 팝오버를 한국어로 표시한다", async () => {
