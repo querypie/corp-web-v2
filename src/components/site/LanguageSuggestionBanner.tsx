@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
+import { getLocalePath, isLocale, stripLocalePrefix, type Locale } from "@/constants/i18n";
 import Button from "@/components/ui/Button";
 import Select from "@/components/ui/Select";
 
@@ -82,6 +82,7 @@ export default function LanguageSuggestionBanner({
 }: LanguageSuggestionBannerProps) {
   const pathname = usePathname();
   const bannerRef = useRef<HTMLElement | null>(null);
+  const isJapanHome = currentLocale === "ja" && stripLocalePrefix(pathname) === "/";
   const [visible, setVisible] = useState(false);
   const [recommendedLocale, setRecommendedLocale] = useState<Locale>("en");
   const [selectedLocale, setSelectedLocale] = useState<Locale>("en");
@@ -113,6 +114,11 @@ export default function LanguageSuggestionBanner({
   }, [visible]);
 
   useEffect(() => {
+    if (isJapanHome) {
+      setVisible(false);
+      return;
+    }
+
     if (document.cookie.includes(`${BANNER_COOKIE}=`)) {
       setVisible(false);
       return;
@@ -146,9 +152,9 @@ export default function LanguageSuggestionBanner({
     return () => {
       controller.abort();
     };
-  }, [currentLocale]);
+  }, [currentLocale, isJapanHome]);
 
-  if (!visible || currentLocale === recommendedLocale) {
+  if (isJapanHome || !visible || currentLocale === recommendedLocale) {
     return null;
   }
 
