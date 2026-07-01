@@ -16,10 +16,10 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
   if (!isLocale(locale)) return {};
 
   const title = getHomeMetadataTitle();
-  const description = getHomeMetadataDescription();
+  const description = getHomeMetadataDescription(locale);
 
   return withDynamicOgImage({
-    title: getHomeMetadataTitle(),
+    title,
     description,
     alternates: {
       canonical: locale === "en" ? "/" : `/${locale}`,

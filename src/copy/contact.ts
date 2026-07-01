@@ -119,7 +119,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       successButton: "Go to Home",
     },
     ko: {
-      metadataTitle: "QueryPie Contacts",
+      metadataTitle: "QueryPie 문의",
       titleLines: ["전문가와 연결하세요.", "더 빠르게 성과를 만드세요."],
       formDescription:
         "제품 상담, 자료 요청, 기술 문의가 필요하시면 도와드리겠습니다. 양식을 작성해 주시면 담당자가 문의 내용을 검토한 뒤 영업일 기준 1주일 이내에 연락드립니다.",
