@@ -155,14 +155,13 @@ Vercel 프로젝트에 등록된 환경변수 목록. Vercel 대시보드 또는
 
 | 변수 | Production | Staging | Preview | Development |
 |------|------------|---------|---------|-------------|
-| `SALESFORCE_ENDPOINT` | production | sandbox | sandbox | sandbox |
 | `QUERYPIE_LICENSE_ISSUE_API_ENDPOINT` | `https://license.querypie.com/license/community` | ← 동일 | ← 동일 | — |
 | `QUERYPIE_LICENSE_ISSUE_API_KEY` | Encrypted | ← 동일 | ← 동일 | — |
 | `SLACK_BOT_OAUTH_TOKEN` | Encrypted | Encrypted | Encrypted | — |
 | `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | `C08JNAZDU5A` (#alert-website-business-inquiries) | `C083Y0300M7` (#alert-website-form-submission-testing) | ← 동일 | ← 동일 |
 
 **참고:**
-- `QUERYPIE_LICENSE_ISSUE_API_*` 미설정 시 라이선스 발급 단계를 skip하고 Salesforce로 진행한다.
+- `QUERYPIE_LICENSE_ISSUE_API_*` 미설정 시 라이선스 발급 단계를 skip하고 Slack 알림만 진행한다.
 - 테스트/개발용 라이선스 API(`https://licensepie.dev.querypie.io`)는 인터넷 접근 불가로 Vercel 환경에서 사용할 수 없다. Staging/Preview는 Production과 동일한 엔드포인트를 사용하며, Development(로컬)에서만 라이선스 발급 단계를 skip한다.
 - `SLACK_BOT_OAUTH_TOKEN`은 Vercel 정책상 `development` 환경에 sensitive 타입으로 설정 불가. 로컬 개발 시 Slack 알림은 skip된다.
 - `Staging`은 custom environment(`main` 브랜치)로, 표준 `preview` 환경변수를 상속하지 않는다. `customEnvironmentIds`로 별도 등록되어 있다.

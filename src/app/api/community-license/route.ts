@@ -25,19 +25,31 @@ function hasValidMXRecord(domain: string): Promise<boolean> {
 
 async function sendToSlack(formData: Record<string, unknown>): Promise<void> {
   try {
-    const web = new WebClient(process.env.SLACK_BOT_OAUTH_TOKEN);
+    const token = process.env.SLACK_BOT_OAUTH_TOKEN;
+    const channel = process.env.SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES;
+
+    if (!token || !channel) {
+      return;
+    }
+
+    const web = new WebClient(token);
     const isProduction = process.env.VERCEL_TARGET_ENV === "production";
     const environmentTag = isProduction ? "" : "[TEST] ";
+    const requestUri =
+      typeof formData.Referrer_URL__c === "string" && formData.Referrer_URL__c
+        ? formData.Referrer_URL__c
+        : "-";
 
-    const formattedData = Object.entries(formData)
+    const visibleEntries = Object.entries(formData)
       .filter(([key]) => !key.startsWith("Has") && !key.startsWith("Referrer"))
-      .map(([key, value]) => `• *${key}*: ${value || "-"}`)
-      .join("\n");
+      .map(([key, value]) => `• *${key}*: ${value || "-"}`);
 
-    const text = `${environmentTag}*New Request QueryPie Community License Received*\n\n${formattedData}`;
+    visibleEntries.push(`• *RequestURI*: ${requestUri}`);
+
+    const text = `${environmentTag}*New Request QueryPie Community License Received*\n\n${visibleEntries.join("\n")}`;
 
     await web.chat.postMessage({
-      channel: process.env.SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES as string,
+      channel,
       blocks: [{ type: "section", text: { type: "mrkdwn", text } }],
       text: `${environmentTag}New Request QueryPie Community License Received`,
     });
@@ -76,7 +88,7 @@ export async function POST(request: Request) {
     Email: filterXSS(Email),
     Company: filterXSS(Company) || "None",
     HasOptedInMarketing__c: HasOptedInMarketing__c ?? false,
-    Referrer_URL__c: request.headers.get("referer") ?? "",
+    Referrer_URL__c: request.headers.get("referer") ?? request.referrer ?? "",
   };
 
   if (Title) requestBody.Title = filterXSS(Title);
@@ -89,42 +101,10 @@ export async function POST(request: Request) {
       requestBody.Email as string,
     );
 
-    // 4. Salesforce POST (환경변수 없으면 skip)
-    if (!process.env.SALESFORCE_ENDPOINT) {
-      console.warn("[community-license] salesforce: skipped (env not set)");
-      await sendToSlack(requestBody);
-      return NextResponse.json({ success: true });
-    }
-
-    const sfResult = await fetch(process.env.SALESFORCE_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        charset: "utf-8",
-      },
-      body: JSON.stringify({ requestBody, processType: "LEAD_MS" }),
-    });
-
-    try {
-      const json = (await sfResult.json()) as { recordUUID?: string };
-      if (!json.recordUUID) {
-        console.error("[community-license] salesforce: failed - no recordUUID in response");
-        return NextResponse.json({ success: false });
-      }
-      console.info(`[community-license] salesforce: success recordUUID=${json.recordUUID}`);
-    } catch (error) {
-      console.error("[community-license] salesforce: failed - JSON parse error", error);
-    }
-
-    if (!sfResult.ok) {
-      console.error(`[community-license] salesforce: failed - HTTP ${sfResult.status}`);
-      return NextResponse.json({ success: false });
-    }
-
-    // 5. Slack 알림 (실패해도 무시)
+    // 4. Slack 알림 (실패해도 무시)
     await sendToSlack(requestBody);
 
-    // 6. 성공
+    // 5. 성공
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Community license apply error:", error);

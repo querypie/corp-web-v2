@@ -1,5 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { getCommunityLicensePageCopy } from "./communityLicense";
+import {
+  getCommunityLicenseApplyPageCopy,
+  getCommunityLicensePageCopy,
+} from "./communityLicense";
 
 describe("getCommunityLicensePageCopy", () => {
   describe("필드 순서", () => {
@@ -77,5 +80,31 @@ describe("getCommunityLicensePageCopy", () => {
         expect(copy.errorGeneral).toBeTruthy();
       }
     });
+  });
+});
+
+describe("getCommunityLicenseApplyPageCopy", () => {
+  it("locale별 title과 homeHref를 반환한다", () => {
+    expect(getCommunityLicenseApplyPageCopy("en").titleLines.join(" ")).toContain("Request");
+    expect(getCommunityLicenseApplyPageCopy("ko").titleLines.join(" ")).toContain("신청");
+    expect(getCommunityLicenseApplyPageCopy("ja").titleLines.join(" ")).toContain("申請");
+
+    expect(getCommunityLicenseApplyPageCopy("en").homeHref).toBe("/en");
+    expect(getCommunityLicenseApplyPageCopy("ko").homeHref).toBe("/ko");
+    expect(getCommunityLicenseApplyPageCopy("ja").homeHref).toBe("/ja");
+  });
+
+  it("locale별 필드 순서를 기존 Community License copy와 맞춘다", () => {
+    for (const locale of ["en", "ko", "ja"] as const) {
+      expect(getCommunityLicenseApplyPageCopy(locale).fields.map((field) => field.name)).toEqual(
+        getCommunityLicensePageCopy(locale).fields.map((field) => field.name),
+      );
+    }
+  });
+
+  it("locale별 legal link를 반환한다", () => {
+    expect(getCommunityLicenseApplyPageCopy("en").privacyPolicyHref).toBe("/en/privacy-policy");
+    expect(getCommunityLicenseApplyPageCopy("ko").privacyPolicyHref).toBe("/ko/privacy-policy");
+    expect(getCommunityLicenseApplyPageCopy("ja").privacyPolicyHref).toBe("/ja/privacy-policy");
   });
 });
