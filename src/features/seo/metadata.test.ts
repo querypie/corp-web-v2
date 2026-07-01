@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { withDynamicOgImage } from "./metadata";
+import { ogImageCacheVersion } from "./ogImageConfig";
 
 describe("withDynamicOgImage", () => {
   it("canonical URL을 og:url로 반영한다", () => {
@@ -21,14 +22,14 @@ describe("withDynamicOgImage", () => {
     expect(metadata.openGraph?.url).toBe("/ko/news/product-update");
     expect(metadata.openGraph?.images).toEqual([
       {
-        url: "/api/og?locale=ko&title=QueryPie+news&description=QueryPie+update",
+        url: `/api/og?locale=ko&title=QueryPie+news&v=${ogImageCacheVersion}&description=QueryPie+update`,
         width: 1200,
         height: 630,
         alt: "QueryPie news",
       },
     ]);
     expect(metadata.twitter?.images).toEqual([
-      "/api/og?locale=ko&title=QueryPie+news&description=QueryPie+update",
+      `/api/og?locale=ko&title=QueryPie+news&v=${ogImageCacheVersion}&description=QueryPie+update`,
     ]);
   });
 

@@ -1,11 +1,8 @@
 import { ImageResponse } from "next/og";
 import type { Locale } from "@/constants/i18n";
+import { ogImageCacheVersion, ogImageSize } from "@/features/seo/ogImageConfig";
 import { getOgDescriptionLines, getOgTitleLines } from "@/features/seo/ogTitle";
 
-export const ogImageSize = {
-  width: 1200,
-  height: 630,
-} as const;
 const ogImageScale = ogImageSize.width / 1200;
 
 function scaleOgValue(value: number) {
@@ -97,8 +94,11 @@ function getLocaleTextStyle(locale: Locale) {
 }
 
 export async function createOgImage({ description, locale, origin, title }: OgImageProps) {
+  const backgroundImage = new URL("/assets/og/base.jpg", origin);
+  backgroundImage.searchParams.set("v", ogImageCacheVersion);
+
   const [backgroundImageUrl, fonts] = await Promise.all([
-    Promise.resolve(new URL("/assets/og/base.jpg", origin).toString()),
+    Promise.resolve(backgroundImage.toString()),
     getOgFonts(origin, locale),
   ]);
   const textStyle = getLocaleTextStyle(locale);
