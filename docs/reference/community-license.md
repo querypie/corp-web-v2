@@ -29,7 +29,6 @@ Contact Us 폼 UI 기반 신청 경로: `/en/querypie/license/community/apply`, 
 | `src/app/[locale]/community-license/page.tsx` | 라우트 진입점 |
 | `src/components/pages/community-license/apply/*` | Contact Us 폼 UI 기반 신청 페이지/폼 |
 | `src/app/[locale]/querypie/license/community/apply/page.tsx` | Contact Us 폼 UI 기반 locale 신청 라우트 |
-| `src/app/querypie/license/community/apply/page.tsx` | Contact Us 폼 UI 기반 신청 라우트 |
 
 ---
 
