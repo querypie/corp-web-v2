@@ -6,7 +6,18 @@
   "dateIso": "2026-06-30",
   "downloadCoverImageSrc": "",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -20,21 +31,31 @@
   "storageId": "cnt_000212",
   "summary": {
     "en": "QueryPie has unveiled AI Pack, an AI extension package that brings AI capabilities to its Access Control Platform, enabling natural language-driven management of enterprise infrastructure. In addition, QueryPie offers its Access Control Platform as an MCP, allowing AI agents to securely operate within existing access control policies.",
-    "ko": "",
-    "ja": ""
+    "ko": "QueryPie는 엔터프라이즈 인프라를 자연어 기반으로 관리할 수 있도록 액세스 제어 플랫폼에 AI 기능을 추가하는 AI 확장 패키지인 AI Pack을 공개했습니다. 또한 QueryPie는 액세스 제어 플랫폼을 MCP로 제공하여 AI 에이전트가 기존 액세스 제어 정책 내에서 안전하게 작동할 수 있도록 지원합니다.",
+    "ja": "QueryPieは、Access Control PlatformにAI機能を提供するAI拡張パッケージ「AI Pack」を発表しました。これにより、自然言語によるエンタープライズインフラの管理が可能になります。さらに、QueryPieはAccess Control PlatformをMCPとして提供し、AIエージェントが既存のアクセス制御ポリシー内で安全に操作できるようにします。"
   },
   "title": {
     "en": "QueryPie Expands Its Access Control Platform with AI Capabilities",
-    "ko": "",
-    "ja": ""
+    "ko": "QueryPie, AI 기능으로 액세스 제어 플랫폼 확장",
+    "ja": "QueryPie、AI機能によりアクセス制御プラットフォームを拡張"
   },
   "visibleLocales": [
-    "en"
+    "en",
+    "ko",
+    "ja"
   ],
   "locales": {
     "en": {
       "htmlPath": "src/content/news/cnt_000212/en.html",
       "jsonPath": "src/content/news/cnt_000212/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/news/cnt_000212/ko.html",
+      "jsonPath": "src/content/news/cnt_000212/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/news/cnt_000212/ja.html",
+      "jsonPath": "src/content/news/cnt_000212/ja.tiptap.json"
     }
   }
 }
