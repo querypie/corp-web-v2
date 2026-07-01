@@ -1,17 +1,16 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
-// dns 모듈 mock — 실제 DNS 조회를 하지 않는다
+const slackPostMessage = vi.hoisted(() => vi.fn().mockResolvedValue({ ok: true }));
+
 vi.mock("dns", () => ({
   default: {
     resolveMx: vi.fn(),
   },
 }));
 
-// @slack/web-api mock — 실제 Slack 메시지를 보내지 않는다
 vi.mock("@slack/web-api", () => {
-  const postMessage = vi.fn().mockResolvedValue({ ok: true });
   class WebClient {
-    chat = { postMessage };
+    chat = { postMessage: slackPostMessage };
   }
   return { WebClient };
 });
@@ -19,15 +18,15 @@ vi.mock("@slack/web-api", () => {
 import dns from "dns";
 import { POST } from "./route";
 
-// MX 레코드 응답 헬퍼
 function stubMxRecord(valid: boolean) {
   (dns.resolveMx as unknown as ReturnType<typeof vi.fn>).mockImplementation(
     (_domain: string, callback: (err: Error | null, addresses: object[]) => void) => {
       if (valid) {
         callback(null, [{ exchange: "mx.example.com", priority: 10 }]);
-      } else {
-        callback(new Error("ENODATA"), []);
+        return;
       }
+
+      callback(new Error("ENODATA"), []);
     },
   );
 }
@@ -36,6 +35,7 @@ function makeRequest(body: Record<string, unknown>, headers: Record<string, stri
   return new Request("http://localhost/api/community-license", {
     method: "POST",
     headers: { "Content-Type": "application/json", ...headers },
+    referrer: headers.Referer ?? headers.referer,
     body: JSON.stringify(body),
   });
 }
@@ -50,29 +50,15 @@ const validBody = {
 describe("POST /api/community-license", () => {
   beforeEach(() => {
     vi.unstubAllEnvs();
-    vi.stubEnv("SALESFORCE_ENDPOINT", "https://sf.example.com");
-    // 라이선스 발급 API 환경변수 미설정 → issueLicense skip
+    vi.stubEnv("SLACK_BOT_OAUTH_TOKEN", "test-slack-token");
+    vi.stubEnv("SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES", "C123");
+    slackPostMessage.mockClear();
     stubMxRecord(true);
   });
 
   afterEach(() => {
     vi.restoreAllMocks();
-  });
-
-  describe("Salesforce 환경변수 미설정", () => {
-    it("SALESFORCE_ENDPOINT가 없으면 success:true를 반환하고 Salesforce를 호출하지 않는다", async () => {
-      vi.unstubAllEnvs();
-      // SALESFORCE_ENDPOINT 미설정
-      stubMxRecord(true);
-
-      const fetchSpy = vi.spyOn(global, "fetch");
-
-      const res = await POST(makeRequest(validBody));
-      const body = await res.json();
-
-      expect(body.success).toBe(true);
-      expect(fetchSpy).not.toHaveBeenCalled();
-    });
+    vi.useRealTimers();
   });
 
   describe("입력 검증", () => {
@@ -106,7 +92,6 @@ describe("POST /api/community-license", () => {
       const resPromise = POST(makeRequest(validBody));
       await vi.runAllTimersAsync();
       const res = await resPromise;
-      vi.useRealTimers();
 
       const body = await res.json();
       expect(body.success).toBe(false);
@@ -114,95 +99,72 @@ describe("POST /api/community-license", () => {
     });
   });
 
-  describe("Salesforce 연동", () => {
-    it("Salesforce가 recordUUID를 반환하면 success:true를 반환한다", async () => {
-      vi.spyOn(global, "fetch").mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ recordUUID: "abc-123" }),
-      } as Response);
+  describe("Slack 연동", () => {
+    it("유효한 신청이면 success:true를 반환하고 Slack 메시지를 보낸다", async () => {
+      const fetchSpy = vi.spyOn(global, "fetch");
 
-      const res = await POST(makeRequest(validBody));
+      const res = await POST(
+        makeRequest(validBody, {
+          Referer: "https://www.querypie.com/querypie/license/community/apply",
+        }),
+      );
       const body = await res.json();
+
       expect(body.success).toBe(true);
+      expect(fetchSpy).not.toHaveBeenCalled();
+      expect(slackPostMessage).toHaveBeenCalledTimes(1);
+      expect(slackPostMessage.mock.calls[0][0].channel).toBe("C123");
+      expect(slackPostMessage.mock.calls[0][0].blocks[0].text.text).toContain(
+        "New Request QueryPie Community License Received",
+      );
+      expect(slackPostMessage.mock.calls[0][0].blocks[0].text.text).toContain(
+        "*RequestURI*:",
+      );
     });
 
-    it("Salesforce 응답에 recordUUID가 없으면 success:false를 반환한다", async () => {
-      vi.spyOn(global, "fetch").mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ error: "something went wrong" }),
-      } as Response);
+    it("XSS 필터링된 값을 Slack에 전송한다", async () => {
+      await POST(
+        makeRequest({
+          ...validBody,
+          FirstName: "<script>alert(1)</script>",
+          Company: "<b>Evil Corp</b>",
+        }),
+      );
+
+      const text = slackPostMessage.mock.calls[0][0].blocks[0].text.text as string;
+      expect(text).not.toContain("<script>");
+      expect(text).toContain("Evil Corp");
+    });
+
+    it("Title과 Website는 값이 있을 때만 Slack 메시지에 포함된다", async () => {
+      await POST(makeRequest(validBody));
+      const textWithoutOptional = slackPostMessage.mock.calls[0][0].blocks[0].text.text as string;
+      expect(textWithoutOptional).not.toContain("*Title*");
+      expect(textWithoutOptional).not.toContain("*Website*");
+
+      slackPostMessage.mockClear();
+
+      await POST(
+        makeRequest({
+          ...validBody,
+          Title: "Security Engineer",
+          Website: "https://example.com",
+        }),
+      );
+      const textWithOptional = slackPostMessage.mock.calls[0][0].blocks[0].text.text as string;
+      expect(textWithOptional).toContain("*Title*: Security Engineer");
+      expect(textWithOptional).toContain("*Website*: https://example.com");
+    });
+
+    it("Slack 환경변수가 없으면 Slack 전송 없이 success:true를 반환한다", async () => {
+      vi.unstubAllEnvs();
+      stubMxRecord(true);
 
       const res = await POST(makeRequest(validBody));
       const body = await res.json();
-      expect(body.success).toBe(false);
-    });
 
-    it("Salesforce HTTP 응답이 ok:false이면 success:false를 반환한다", async () => {
-      vi.spyOn(global, "fetch").mockResolvedValueOnce({
-        ok: false,
-        json: async () => ({ recordUUID: "abc" }),
-      } as Response);
-
-      const res = await POST(makeRequest(validBody));
-      const body = await res.json();
-      expect(body.success).toBe(false);
-    });
-
-    it("XSS 필터링된 값을 Salesforce에 전송한다", async () => {
-      const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ recordUUID: "abc-123" }),
-      } as Response);
-
-      const xssBody = {
-        ...validBody,
-        FirstName: "<script>alert(1)</script>",
-        Company: "<b>Evil Corp</b>",
-      };
-      await POST(makeRequest(xssBody));
-
-      const sfCall = fetchSpy.mock.calls[0];
-      const sentBody = JSON.parse(sfCall[1]?.body as string);
-      expect(sentBody.requestBody.FirstName).not.toContain("<script>");
-      expect(sentBody.requestBody.Company).not.toContain("<script>");
-    });
-
-    it("Company가 없으면 'None'으로 대체한다", async () => {
-      const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ recordUUID: "abc-123" }),
-      } as Response);
-
-      // Company를 빈 문자열로 보내면 필수 필드 검증에 걸리므로 의도적으로 공백 우회
-      // → Company가 없으면 issueLicense에서도 'None'이 전달되어야 한다
-      // (이미 route.ts에서 filterXSS(Company) || 'None'으로 처리됨)
-      await POST(makeRequest({ ...validBody, Company: "Test Corp" }));
-      const sentBody = JSON.parse(fetchSpy.mock.calls[0][1]?.body as string);
-      expect(sentBody.requestBody.Company).toBe("Test Corp");
-    });
-
-    it("Title과 Website는 값이 있을 때만 포함된다", async () => {
-      const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ recordUUID: "abc-123" }),
-      } as Response);
-
-      // Title/Website 없이 제출
-      await POST(makeRequest(validBody));
-      const sentBody = JSON.parse(fetchSpy.mock.calls[0][1]?.body as string);
-      expect(sentBody.requestBody).not.toHaveProperty("Title");
-      expect(sentBody.requestBody).not.toHaveProperty("Website");
-    });
-
-    it("processType은 항상 LEAD_MS이다", async () => {
-      const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ recordUUID: "abc-123" }),
-      } as Response);
-
-      await POST(makeRequest(validBody));
-      const sentBody = JSON.parse(fetchSpy.mock.calls[0][1]?.body as string);
-      expect(sentBody.processType).toBe("LEAD_MS");
+      expect(body.success).toBe(true);
+      expect(slackPostMessage).not.toHaveBeenCalled();
     });
   });
 
@@ -212,67 +174,42 @@ describe("POST /api/community-license", () => {
       vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_KEY", "test-key");
     });
 
-    it("issueLicense API가 실패하면 success:false를 반환하고 Salesforce를 호출하지 않는다", async () => {
-      const fetchSpy = vi
-        .spyOn(global, "fetch")
-        // 첫 번째 fetch = issueLicense API (실패)
-        .mockResolvedValueOnce({
-          ok: false,
-          status: 500,
-          json: async () => ({}),
-        } as Response);
+    it("issueLicense API가 실패하면 success:false를 반환하고 Slack을 호출하지 않는다", async () => {
+      const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValueOnce({
+        ok: false,
+        status: 500,
+        json: async () => ({}),
+      } as Response);
 
       const res = await POST(makeRequest(validBody));
       const body = await res.json();
 
       expect(body.success).toBe(false);
-      // issueLicense 실패 후 Salesforce fetch가 호출되지 않아야 한다
       expect(fetchSpy).toHaveBeenCalledTimes(1);
+      expect(slackPostMessage).not.toHaveBeenCalled();
     });
 
-    it("issueLicense 성공 후 Salesforce를 호출한다", async () => {
-      const fetchSpy = vi
-        .spyOn(global, "fetch")
-        // 첫 번째 fetch = issueLicense
-        .mockResolvedValueOnce({
-          ok: true,
-          json: async () => ({ status: true, errorMessage: "" }),
-        } as Response)
-        // 두 번째 fetch = Salesforce
-        .mockResolvedValueOnce({
-          ok: true,
-          json: async () => ({ recordUUID: "abc-123" }),
-        } as Response);
+    it("issueLicense 성공 후 Slack 메시지를 보내고 success:true를 반환한다", async () => {
+      const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ status: true, errorMessage: "" }),
+      } as Response);
 
       const res = await POST(makeRequest(validBody));
       const body = await res.json();
 
       expect(body.success).toBe(true);
-      expect(fetchSpy).toHaveBeenCalledTimes(2);
+      expect(fetchSpy).toHaveBeenCalledTimes(1);
+      expect(slackPostMessage).toHaveBeenCalledTimes(1);
     });
   });
 
   describe("마케팅 동의", () => {
-    it("HasOptedInMarketing__c 값이 requestBody에 포함된다", async () => {
-      const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ recordUUID: "abc-123" }),
-      } as Response);
-
+    it("HasOptedInMarketing__c 값은 Slack 표시 항목에서 제외된다", async () => {
       await POST(makeRequest({ ...validBody, HasOptedInMarketing__c: true }));
-      const sentBody = JSON.parse(fetchSpy.mock.calls[0][1]?.body as string);
-      expect(sentBody.requestBody.HasOptedInMarketing__c).toBe(true);
-    });
 
-    it("HasOptedInMarketing__c 미전송 시 false로 기본값이 된다", async () => {
-      const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ recordUUID: "abc-123" }),
-      } as Response);
-
-      await POST(makeRequest(validBody));
-      const sentBody = JSON.parse(fetchSpy.mock.calls[0][1]?.body as string);
-      expect(sentBody.requestBody.HasOptedInMarketing__c).toBe(false);
+      const text = slackPostMessage.mock.calls[0][0].blocks[0].text.text as string;
+      expect(text).not.toContain("HasOptedInMarketing__c");
     });
   });
 });

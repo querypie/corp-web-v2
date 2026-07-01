@@ -4,7 +4,7 @@
 
 | 폼 | 라우트 | 제출 상태 | 외부 연동 |
 |----|--------|----------|---------|
-| [Community License 신청](#1-community-license-신청) | `/en/community-license` | ✅ 구현 완료 | Salesforce, Slack |
+| [Community License 신청](#1-community-license-신청) | `/en/community-license`, `/en/querypie/license/community/apply` | ✅ 구현 완료 | 라이선스 발급 API, Slack |
 | [Contact Us](#2-contact-us) | `/en/company/contact-us` | ✅ 구현 완료 | Salesforce (best-effort), Slack (best-effort) |
 | [콘텐츠 PDF 언락 (Gating)](#3-콘텐츠-pdf-언락-gating) | `/en/whitepapers/[slug]` 등 콘텐츠 상세 | ✅ 구현 완료 | 로컬 JSON, Slack (best-effort) |
 
@@ -12,7 +12,7 @@
 
 ## 1. Community License 신청
 
-QueryPie Community License를 신청·발급하는 폼. 백엔드는 Salesforce 리드 전송 + 라이선스 자동 발급 + Slack 알림으로 구성된다.
+QueryPie Community License를 신청·발급하는 폼. 백엔드는 라이선스 자동 발급 + Slack 알림으로 구성된다.
 
 > **상세 레퍼런스:** [`docs/reference/community-license.md`](./community-license.md)
 >
@@ -22,11 +22,11 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 Salesforce 
 
 | 항목 | 내용 |
 |------|------|
-| 라우트 | `/en/community-license`, `/ko/community-license`, `/ja/community-license` |
+| 라우트 | `/en/community-license`, `/ko/community-license`, `/ja/community-license`, `/en/querypie/license/community/apply`, `/ko/querypie/license/community/apply`, `/ja/querypie/license/community/apply` |
 | API | `POST /api/community-license` |
-| 주요 컴포넌트 | `src/components/pages/community-license/CommunityLicenseForm.tsx` |
+| 주요 컴포넌트 | `src/components/pages/community-license/CommunityLicenseForm.tsx`, `src/components/pages/community-license/apply/CommunityLicenseApplyForm.tsx` |
 | 수집 필드 | FirstName, LastName, Email, Company (필수) / Title, Website (선택) / 마케팅 동의 |
-| 외부 연동 | Salesforce (선택), Slack 알림 (선택), 라이선스 발급 API (선택) |
+| 외부 연동 | Slack 알림 (선택), 라이선스 발급 API (선택) |
 
 ---
 

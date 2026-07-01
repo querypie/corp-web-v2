@@ -1,6 +1,6 @@
 # Community License 신청 기능
 
-`corp-web-app`의 Community License 신청/발급 기능을 이식한 구현. v2에서는 API Route 기반으로 처리하며, 외부 연동 환경변수가 없으면 설정된 단계만 skip한다.
+`corp-web-app`의 Community License 신청/발급 기능을 이식한 구현. v2에서는 API Route 기반으로 처리하며, 라이선스 발급과 Slack 알림을 사용한다.
 
 ---
 
@@ -12,6 +12,8 @@
 | Production | `https://www-v2.querypie.com/en/community-license` |
 
 다국어: `/en/community-license`, `/ko/community-license`, `/ja/community-license`
+
+Contact Us 폼 UI 기반 신청 경로: `/en/querypie/license/community/apply`, `/ko/querypie/license/community/apply`, `/ja/querypie/license/community/apply`
 
 ---
 
@@ -25,6 +27,9 @@
 | `src/components/pages/community-license/CommunityLicensePage.tsx` | Server Component — 두 컬럼 레이아웃 |
 | `src/components/pages/community-license/CommunityLicenseForm.tsx` | Client Component — 폼 상태 관리, submit 핸들러 |
 | `src/app/[locale]/community-license/page.tsx` | 라우트 진입점 |
+| `src/components/pages/community-license/apply/*` | Contact Us 폼 UI 기반 신청 페이지/폼 |
+| `src/app/[locale]/querypie/license/community/apply/page.tsx` | Contact Us 폼 UI 기반 locale 신청 라우트 |
+| `src/app/querypie/license/community/apply/page.tsx` | Contact Us 폼 UI 기반 신청 라우트 |
 
 ---
 
@@ -36,9 +41,8 @@
 2. **MX 레코드 검증** — 이메일 도메인의 MX 레코드가 없으면 `{success: false, errorMessage: "Please enter a valid email address."}` 반환 (2초 딜레이 포함)
 3. **XSS 필터링** — `xss` 패키지의 `filterXSS`로 모든 텍스트 필드 처리; `Company`가 빈 값이면 `"None"` 대입
 4. **라이선스 발급** (`issueLicense`) — `QUERYPIE_LICENSE_ISSUE_API_ENDPOINT`, `QUERYPIE_LICENSE_ISSUE_API_KEY` 미설정 시 skip; 설정된 경우 API 호출 실패 시 전체 흐름 중단
-5. **Salesforce POST** — `SALESFORCE_ENDPOINT` 미설정 시 skip; 설정된 경우 `{requestBody, processType: "LEAD_MS"}` 전송; 응답에 `recordUUID` 없거나 `ok: false`이면 `{success: false}` 반환
-6. **Slack 알림** — 실패해도 전체 흐름에 영향 없음 (에러 swallow)
-7. **응답** — `{success: true}`
+5. **Slack 알림** — 실패해도 전체 흐름에 영향 없음 (에러 swallow)
+6. **응답** — `{success: true}`
 
 ---
 
@@ -46,7 +50,6 @@
 
 | 변수 | 필수 | 설명 |
 |------|------|------|
-| `SALESFORCE_ENDPOINT` | 선택 | Salesforce 리드 전달 URL. 미설정 시 Salesforce 단계 skip |
 | `QUERYPIE_LICENSE_ISSUE_API_ENDPOINT` | 선택 | 라이선스 발급 API URL. 미설정 시 발급 단계 skip |
 | `QUERYPIE_LICENSE_ISSUE_API_KEY` | 선택 | 라이선스 발급 API 키. 미설정 시 발급 단계 skip |
 | `SLACK_BOT_OAUTH_TOKEN` | 선택 | Slack Bot 토큰. 미설정 시 Slack 알림 skip |
