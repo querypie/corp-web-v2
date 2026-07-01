@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
@@ -16,6 +16,8 @@ type FormState =
   | { status: "submitting" }
   | { status: "success" }
   | { status: "error"; message: string };
+
+type FormValues = Record<string, string>;
 
 type CommunityLicenseApplyFormProps = Pick<
   CommunityLicenseApplyPageCopy,
@@ -37,10 +39,27 @@ type CommunityLicenseApplyFormProps = Pick<
 export default function CommunityLicenseApplyForm(copy: CommunityLicenseApplyFormProps) {
   const router = useRouter();
   const [marketing, setMarketing] = useState(false);
+  const [formValues, setFormValues] = useState<FormValues>(() =>
+    Object.fromEntries(copy.fields.map((field) => [field.name, ""])),
+  );
   const [formState, setFormState] = useState<FormState>({ status: "idle" });
+
+  const canSubmit = useMemo(() => {
+    const requiredSatisfied = copy.fields
+      .filter((field) => field.required)
+      .every((field) => formValues[field.name]?.trim());
+
+    return requiredSatisfied && formState.status !== "submitting";
+  }, [copy.fields, formState.status, formValues]);
+
+  function updateValue(name: string, value: string) {
+    setFormValues((current) => ({ ...current, [name]: value }));
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (!canSubmit) return;
+
     setFormState({ status: "submitting" });
 
     const formData = new FormData(event.currentTarget);
@@ -109,9 +128,11 @@ export default function CommunityLicenseApplyForm(copy: CommunityLicenseApplyFor
             aria-label={field.label}
             className="w-full"
             name={field.name}
+            onChange={(event) => updateValue(field.name, event.target.value)}
             placeholder={field.placeholder}
             required={field.required}
             type={field.type}
+            value={formValues[field.name]}
           />
         </div>
       ))}
@@ -140,7 +161,7 @@ export default function CommunityLicenseApplyForm(copy: CommunityLicenseApplyFor
       <div className="flex">
         <Button
           arrow={false}
-          disabled={formState.status === "submitting"}
+          disabled={!canSubmit}
           style="full"
           type="submit"
           variant="secondary"
