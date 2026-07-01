@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 import type { Locale } from "@/constants/i18n";
+import { ogImageCacheVersion } from "@/features/seo/ogImageConfig";
 
 type DynamicOgImageOptions = {
   description?: string | null;
@@ -29,6 +30,7 @@ function createDynamicOgImageUrl({ description, locale, title }: DynamicOgImageO
   const params = new URLSearchParams({
     locale,
     title,
+    v: ogImageCacheVersion,
   });
 
   if (description) {
