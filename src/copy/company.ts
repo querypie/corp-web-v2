@@ -41,7 +41,7 @@ export type CompanyNewsPageCopy = {
 export function getAboutUsMetadataTitle(locale: Locale) {
   return {
     en: "About Us",
-    ko: "About Us",
+    ko: "회사 소개",
     ja: "会社概要",
   }[locale];
 }
@@ -57,7 +57,7 @@ export function getAboutUsMetadataDescription(locale: Locale) {
 export function getCertificationsMetadataTitle(locale: Locale) {
   return {
     en: "QueryPie AI Certifications",
-    ko: "QueryPie AI Certifications",
+    ko: "QueryPie AI 인증",
     ja: "QueryPie AI: 認証",
   }[locale];
 }
@@ -359,7 +359,7 @@ export function getNewsPageCopy(locale: Locale): CompanyNewsPageCopy {
     ko: {
       metadataDescription:
         "QueryPie AI의 최신 뉴스, 제품 발표, 회사 소식과 엔터프라이즈 AI 인사이트를 확인하세요.",
-      metadataTitle: "QueryPie News",
+      metadataTitle: "QueryPie 뉴스",
       title: "뉴스",
     },
     ja: {
