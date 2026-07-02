@@ -19,6 +19,7 @@ export type VercelAnalyticsSummary = {
   pageViews: number;
   previousPageViews: number;
   referrers: VercelAnalyticsListItem[];
+  targetHost: string;
   topPages: VercelAnalyticsListItem[];
   trend: VercelAnalyticsTrendItem[];
 };
@@ -32,6 +33,8 @@ type VercelAggregateResponse = {
 const VERCEL_ANALYTICS_ENDPOINT = "https://api.vercel.com/v1/query/web-analytics/visits/aggregate";
 const DEFAULT_PROJECT_ID = "prj_xeobCehIxv13fSJdlEprUfdqRlTd";
 const DEFAULT_TEAM_ID = "team_8DsCdrF1uCfwY30OS8F8lREn";
+const DEFAULT_TARGET_HOST = "www.querypie.com";
+const PRODUCTION_ANALYTICS_FILTER = "environment eq 'production'";
 const metricFieldCandidates = ["visits", "pageviews", "pageViews", "count", "value", "total", "events"];
 const dimensionFields = new Set([
   "browserName",
@@ -45,6 +48,7 @@ const dimensionFields = new Set([
   "referrerHostname",
   "requestPath",
   "route",
+  "timestamp",
   "utmCampaign",
   "utmContent",
   "utmMedium",
@@ -57,6 +61,7 @@ const dimensionFields = new Set([
 function getAnalyticsConfig() {
   return {
     projectId: process.env.VERCEL_ANALYTICS_PROJECT_ID || DEFAULT_PROJECT_ID,
+    targetHost: process.env.VERCEL_ANALYTICS_TARGET_HOST || DEFAULT_TARGET_HOST,
     teamId: process.env.VERCEL_ANALYTICS_TEAM_ID || DEFAULT_TEAM_ID,
     token: process.env.VERCEL_ACCESS_TOKEN || process.env.VERCEL_TOKEN || "",
   };
@@ -98,6 +103,10 @@ function getDimensionLabel(row: VercelAggregateRow, dimension: string) {
   const value = row[dimension];
   if (typeof value === "string" && value.trim()) {
     return value;
+  }
+
+  if (dimension === "day" && typeof row.timestamp === "string" && row.timestamp.trim()) {
+    return row.timestamp.split("T")[0] || row.timestamp;
   }
 
   if (typeof value === "number") {
@@ -171,6 +180,7 @@ async function fetchAggregate({
   url.searchParams.set("since", since);
   url.searchParams.set("until", until);
   url.searchParams.set("limit", String(limit));
+  url.searchParams.set("filter", PRODUCTION_ANALYTICS_FILTER);
   url.searchParams.append("by", by);
 
   const response = await fetch(url, {
@@ -190,7 +200,7 @@ async function fetchAggregate({
 }
 
 export async function readVercelAnalyticsSummary(): Promise<VercelAnalyticsSummary> {
-  const { token } = getAnalyticsConfig();
+  const { targetHost, token } = getAnalyticsConfig();
 
   if (!token) {
     return {
@@ -202,6 +212,7 @@ export async function readVercelAnalyticsSummary(): Promise<VercelAnalyticsSumma
       pageViews: 0,
       previousPageViews: 0,
       referrers: [],
+      targetHost,
       topPages: [],
       trend: [],
     };
@@ -232,6 +243,7 @@ export async function readVercelAnalyticsSummary(): Promise<VercelAnalyticsSumma
       pageViews: sumRows(currentRows),
       previousPageViews: sumRows(previousRows),
       referrers: toListItems(referrerRows, "referrerHostname", 6),
+      targetHost,
       topPages: toListItems(pageRows, "requestPath", 8),
       trend: toTrendItems(currentRows),
     };
@@ -245,6 +257,7 @@ export async function readVercelAnalyticsSummary(): Promise<VercelAnalyticsSumma
       pageViews: 0,
       previousPageViews: 0,
       referrers: [],
+      targetHost,
       topPages: [],
       trend: [],
     };
