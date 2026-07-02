@@ -109,16 +109,13 @@ export default function JapanLocalSiteBanner({
           target="_blank"
         >
           <Button
-            arrow={false}
-            className="h-8 px-4 md:h-10 md:px-5"
+            arrow
+            className="px-4 [&>svg]:hidden md:px-5 md:[&>svg]:block"
             size="default"
             style="full"
             variant="secondary"
           >
-            <span className="inline-flex items-center justify-center gap-2">
-              訪問する
-              <span aria-hidden="true" className="hidden md:inline">→</span>
-            </span>
+            訪問する
           </Button>
         </a>
       </div>

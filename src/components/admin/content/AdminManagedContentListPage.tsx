@@ -539,7 +539,7 @@ export default function AdminManagedContentListPage({
         : section === "documentation"
           ? "Documentation"
           : "News"
-      : getManagedCategoryLabel(section, categorySlug, activeLocale);
+      : getManagedCategoryLabel(section, categorySlug, "en");
 
   const writeHref =
     getAdminCreateHref(section, categorySlug);
