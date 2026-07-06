@@ -15,4 +15,18 @@ const legacyFolderRedirects = legacyFolderRedirectBasePaths.map((basePath) => ({
   destination: `/:locale${basePath}/:slug`,
 }));
 
-export const legacyContentRedirects = legacyFolderRedirects;
+const legacyFolderDownloadRedirects = legacyFolderRedirectBasePaths.flatMap((basePath) => [
+  {
+    source: `/:locale(en|ko|ja)${basePath}/:legacyFolder/:slug/download`,
+    destination: `/:locale${basePath}/:slug/download`,
+  },
+  {
+    source: `/:locale(en|ko|ja)${basePath}/:legacyFolder/:slug/pdf`,
+    destination: `/:locale${basePath}/:slug/download`,
+  },
+]);
+
+export const legacyContentRedirects = [
+  ...legacyFolderRedirects,
+  ...legacyFolderDownloadRedirects,
+];
