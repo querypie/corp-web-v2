@@ -25,6 +25,36 @@ describe("legacyContentRedirects", () => {
     });
   });
 
+  it("removes one legacy folder segment from category download URLs", () => {
+    expect(legacyContentRedirects).toContainEqual({
+      source: "/:locale(en|ko|ja)/blog/:legacyFolder/:slug/download",
+      destination: "/:locale/blog/:slug/download",
+    });
+    expect(legacyContentRedirects).toContainEqual({
+      source: "/:locale(en|ko|ja)/whitepapers/:legacyFolder/:slug/download",
+      destination: "/:locale/whitepapers/:slug/download",
+    });
+    expect(legacyContentRedirects).toContainEqual({
+      source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug/download",
+      destination: "/:locale/demo/use-cases/:slug/download",
+    });
+  });
+
+  it("maps legacy pdf URLs to current download URLs", () => {
+    expect(legacyContentRedirects).toContainEqual({
+      source: "/:locale(en|ko|ja)/blog/:legacyFolder/:slug/pdf",
+      destination: "/:locale/blog/:slug/download",
+    });
+    expect(legacyContentRedirects).toContainEqual({
+      source: "/:locale(en|ko|ja)/whitepapers/:legacyFolder/:slug/pdf",
+      destination: "/:locale/whitepapers/:slug/download",
+    });
+    expect(legacyContentRedirects).toContainEqual({
+      source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug/pdf",
+      destination: "/:locale/demo/use-cases/:slug/download",
+    });
+  });
+
   it("does not redirect valid demo category detail URLs as section-level legacy URLs", () => {
     expect(legacyContentRedirects).not.toContainEqual({
       source: "/:locale(en|ko|ja)/demo/:legacyFolder/:slug",
@@ -44,6 +74,6 @@ describe("legacyContentRedirects", () => {
   });
 
   it("keeps the redirect list scoped to public content categories", () => {
-    expect(legacyContentRedirects).toHaveLength(11);
+    expect(legacyContentRedirects).toHaveLength(33);
   });
 });

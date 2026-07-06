@@ -100,12 +100,12 @@ export default function NotFoundPage({}: NotFoundPageProps) {
       {/* 404 중앙 메시지 영역 */}
       <main className="flex flex-1 px-5 pt-[100px] text-fg md:px-10 md:pt-[120px]">
         <section className="mx-auto flex w-full max-w-[1200px] flex-1 items-center justify-center pb-10">
-          <div className="flex w-full max-w-[488px] flex-col items-center gap-8 md:flex-row md:items-start md:gap-[60px]">
+          <div className="flex w-full max-w-[760px] flex-col items-center gap-8 md:flex-row md:items-start md:gap-[60px]">
             <div className="shrink-0">
               <BowingBotIcon />
             </div>
 
-            <div className="flex w-full max-w-[340px] flex-col items-start gap-5 text-left">
+            <div className="flex w-full max-w-[600px] flex-col items-start gap-5 text-left">
               <h1 className="m-0 type-h1 text-fg">{copy.title}</h1>
               <div className="flex w-full flex-col gap-[10px]">
                 {copy.messageLines.map((line) => (
