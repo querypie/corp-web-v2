@@ -249,6 +249,7 @@ function ConfirmDialog({
   cancelLabel = "닫기",
   confirmLabel,
   description,
+  detail,
   highlightedLines,
   hideCancel = false,
   onCancel,
@@ -259,6 +260,7 @@ function ConfirmDialog({
   cancelLabel?: string;
   confirmLabel: string;
   description: string;
+  detail?: string;
   highlightedLines?: string[];
   hideCancel?: boolean;
   onCancel: () => void;
@@ -280,6 +282,14 @@ function ConfirmDialog({
                     {line}
                   </p>
                 ))}
+              </div>
+            ) : null}
+            {detail ? (
+              <div className="w-full max-w-[320px] rounded-box border border-border bg-bg-content p-3 text-left">
+                <p className="m-0 mb-1 type-caption text-mute">진단 정보</p>
+                <pre className="m-0 max-h-[132px] overflow-auto whitespace-pre-wrap break-words font-mono text-[11px] leading-5 text-mute">
+                  {detail}
+                </pre>
               </div>
             ) : null}
           </div>
@@ -2372,6 +2382,7 @@ export default function AdminManagedContentDetailPage({
           cancelLabel="닫기"
           confirmLabel={dialog.canRetry ? "다시 시도" : "확인"}
           description={dialog.description}
+          detail={dialog.detail}
           onCancel={() => setDialog(null)}
           onConfirm={() => {
             if (!dialog.canRetry) {
