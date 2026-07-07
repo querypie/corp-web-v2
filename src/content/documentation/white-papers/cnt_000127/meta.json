@@ -1,12 +1,23 @@
 {
-  "authorName": "terazawa",
+  "authorName": "Terazawa",
   "authorRole": "Marketing Consultant",
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2026-03-12",
   "downloadCoverImageSrc": "/documentation/white-papers/qp-whitepaper-the-evolution-of-saas-en-cover.webp",
   "downloadPdfFileName": "qp-whitepaper-the-evolution-of-saas-en.pdf",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "single",
   "downloadPdfSrc": "/documentation/white-papers/qp-whitepaper-the-evolution-of-saas-en.pdf",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": true,
   "externalUrl": "",
   "gatingLevel": "10",

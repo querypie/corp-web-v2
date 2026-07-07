@@ -1,12 +1,23 @@
 {
-  "authorName": "fabian",
-  "authorRole": "",
+  "authorName": "Fabian",
+  "authorRole": "Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2025-01-23",
   "downloadCoverImageSrc": "/documentation/white-papers/wp-thumb-11.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "50",

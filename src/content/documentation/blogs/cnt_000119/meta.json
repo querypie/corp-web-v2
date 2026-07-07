@@ -1,12 +1,23 @@
 {
-  "authorName": "regan",
-  "authorRole": "",
+  "authorName": "Regan Park",
+  "authorRole": "Product Manager",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2024-11-22",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-12.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-12.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 20,
+  "sortOrder": 21,
   "status": "published",
   "storageId": "cnt_000119",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "개인정보 유출: 내부에서 시작된 작은 틈, 데이터 재앙으로 번지다",
     "ja": "個人情報漏洩: 小さな内部違反が大惨事に発展するまで"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000119/en.html",

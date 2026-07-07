@@ -1,0 +1,61 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2026-06-11",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "claude-fable-5-management-strategy",
+  "imageSrc": "/documentation/blogs/fable5.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000213",
+  "summary": {
+    "en": "How will the arrival of Claude Fable 5 change the nature of management decision-making? This article explains five strategies for CxOs to turn this \"mythical\" AI with PhD-level reasoning into an organizational weapon while mitigating risk. It also covers the frontlines of governance and security.",
+    "ko": "Claude Fable 5의 등장으로 경영 판단의 방식이 어떻게 변화하는가. 박사 학위 수준의 추론 능력을 가진 '신화급' AI를 리스크를 억제하면서 조직의 무기로 만들기 위한 5가지 전략을 CxO 대상으로 해설. 거버넌스와 보안의 최전선을 소개합니다.",
+    "ja": "Claude Fable 5の登場により、経営判断のあり方がどう変わるのか。博士号レベルの推論力を持つ「神話級」AIを、リスクを抑えつつ組織の武器にするための5つの戦略をCxO向けに解説。ガバナンスとセキュリティの最前線を紹介します。"
+  },
+  "title": {
+    "en": "Claude Fable 5's Challenge of \"Redefining Management\": 5 Strategies for Integrating Mythical AI into Organizational Decision-Making",
+    "ko": "Claude Fable 5가 제시하는 '경영의 재정의': 신화급 AI를 조직의 의사결정에 통합하기 위한 5가지 전략",
+    "ja": "Claude Fable 5が突きつける「経営の再定義」：神話級AIを組織の意思決定に組み込むための5つの戦略"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000213/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000213/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000213/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000213/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000213/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000213/ja.tiptap.json"
+    }
+  }
+}

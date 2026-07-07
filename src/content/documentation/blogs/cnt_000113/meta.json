@@ -1,12 +1,23 @@
 {
-  "authorName": "brant",
-  "authorRole": "",
+  "authorName": "Brant Hwang",
+  "authorRole": "CEO, Founder",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2025-01-09",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-14.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-14.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 18,
+  "sortOrder": 19,
   "status": "published",
   "storageId": "cnt_000113",
   "summary": {
@@ -28,6 +39,9 @@
     "ko": "",
     "ja": ""
   },
+  "visibleLocales": [
+    "en"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000113/en.html",

@@ -1,12 +1,23 @@
 {
-  "authorName": "jk",
-  "authorRole": "",
+  "authorName": "Jk Kim",
+  "authorRole": "Software Engineer",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2025-02-04",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-18.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-18.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 14,
+  "sortOrder": 15,
   "status": "published",
   "storageId": "cnt_000109",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "SSO, 왜 그렇게 중요할까요?",
     "ja": "SSOはなぜ重要なのか？"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000109/en.html",

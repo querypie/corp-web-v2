@@ -1,12 +1,23 @@
 {
-  "authorName": "kris",
-  "authorRole": "",
+  "authorName": "Kris Park",
+  "authorRole": "CPO",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2024-11-22",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-2.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-2.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 30,
+  "sortOrder": 31,
   "status": "published",
   "storageId": "cnt_000121",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "가장 어렵다는 글로벌 진출, QueryPie는 왜 확신하나?",
     "ja": "最も難しいと言われるグローバル展開、QueryPieはなぜ確信しているのか？"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000121/en.html",

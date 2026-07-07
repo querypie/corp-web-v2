@@ -6,7 +6,18 @@
   "dateIso": "2024-11-29",
   "downloadCoverImageSrc": "/documentation/events/3dk-ep3-ja.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -19,15 +30,20 @@
   "status": "published",
   "storageId": "cnt_000049",
   "summary": {
-    "en": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。",
-    "ko": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。",
+    "en": "In Episode 3, we will explain in detail how to efficiently manage numerous permissions across a large number of servers and multi-cloud environments using QueryPie's system access control solution, \"QueryPie SAC (System Access Controller).\"",
+    "ko": "에피소드 3에서는 QueryPie의 시스템 액세스 제어 솔루션인 \"QueryPie SAC (System Access Controller)\"를 활용하여 대량의 서버와 멀티클라우드 환경에 걸친 수많은 권한을 효율적으로 관리하는 방법에 대해 자세히 설명합니다.",
     "ja": "エピソード3では、QueryPieのシステムアクセス制御ソリューションである「QueryPie SAC (System Access Controller)」を活用し、大量のサーバとマルチクラウド環境にわたる多数の権限を効率的に管理する方法について詳しく説明します。"
   },
   "title": {
-    "en": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー",
-    "ko": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー",
+    "en": "Episode 3 QueryPie SAC: Breaking Down the Barriers of Server Management! - Large-Scale Server Management, Auto-Scaling, Permissions and Policies",
+    "ko": "에피소드 3 QueryPie SAC: 서버 관리의 장벽을 허물다! - 대규모 서버 관리, 자동 스케일링, 권한 및 정책",
     "ja": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/events/cnt_000049/en.html",

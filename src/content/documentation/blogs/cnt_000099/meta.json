@@ -6,7 +6,18 @@
   "dateIso": "2026-03-03",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-28.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,21 +26,22 @@
   "imageSrc": "/documentation/blogs/thumbnail-5.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 4,
+  "sortOrder": 5,
   "status": "published",
   "storageId": "cnt_000099",
   "summary": {
     "en": "AI security is not an extension of traditional cybersecurity—it requires an additional defense layer. Explore 7 AI-specific attack vectors including prompt injection and model supply chain threats, with an OWASP and NIST-aligned governance framework for CxOs.",
-    "ko": "AI security is not an extension of traditional cybersecurity—it requires an additional defense layer. Explore 7 AI-specific attack vectors including prompt injection and model supply chain threats, with an OWASP and NIST-aligned governance framework for CxOs.",
+    "ko": "AI 보안은 전통적인 사이버 보안의 확장이 아닙니다—추가적인 방어 계층이 필요합니다. 프롬프트 인젝션과 모델 공급망 위협을 포함한 7가지 AI 특화 공격 벡터와 CxO를 위한 OWASP 및 NIST 기반 거버넌스 프레임워크를 살펴보세요.",
     "ja": "AIセキュリティは従来のサイバー対策の延長ではなく「追加層」です。プロンプトインジェクション、データポイズニング、モデルサプライチェーン攻撃など7つの攻撃ベクトルと、OWASP・NIST準拠の実務対策フレームワークをCxO向けに体系解説します。"
   },
   "title": {
     "en": "AI Security Threat Map 2026 | 7 Attack Vectors and Practical Defense Framework for CxOs",
-    "ko": "",
+    "ko": "AI 보안 위협 지도 2026 | CxO를 위한 7가지 공격 벡터와 실전 방어 프레임워크",
     "ja": "AIセキュリティ脅威マップ2026｜CxOが備えるべき7つの攻撃ベクトルと実務対策フレームワーク"
   },
   "visibleLocales": [
     "en",
+    "ko",
     "ja"
   ],
   "locales": {

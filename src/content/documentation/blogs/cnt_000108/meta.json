@@ -1,21 +1,32 @@
 {
-  "authorName": "robb",
-  "authorRole": "",
+  "authorName": "Robb Lee",
+  "authorRole": "Technical Project Manager",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2025-02-07",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-19.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
-  "hideHeroImage": true,
+  "hideHeroImage": false,
   "id": "optimize-ec2-costs",
   "imageSrc": "/documentation/blogs/b-thumb-19.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 13,
+  "sortOrder": 14,
   "status": "published",
   "storageId": "cnt_000108",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "EC2 자동화를 통한 비용 절감: AWS Lambda와 EventBridge 활용법",
     "ja": "EC2 自動化によるコスト削減：AWS Lambda と EventBridge の活用方法"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000108/en.html",

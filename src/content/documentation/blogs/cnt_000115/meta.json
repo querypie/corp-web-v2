@@ -1,12 +1,23 @@
 {
-  "authorName": "allen",
-  "authorRole": "",
+  "authorName": "Allen Kim",
+  "authorRole": "Product Manager",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2024-11-22",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-7.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-7.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 25,
+  "sortOrder": 26,
   "status": "published",
   "storageId": "cnt_000115",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "모두가 묵인하던 명령어 우회, 이제 터놓고 얘기해봅시다!",
     "ja": "誰もが見過ごしていたコマンド回避、今こそ正直に話そう！"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000115/en.html",

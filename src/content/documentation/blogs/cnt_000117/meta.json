@@ -1,12 +1,23 @@
 {
-  "authorName": "brendon",
-  "authorRole": "",
+  "authorName": "Brendon Choi",
+  "authorRole": "Product Manager",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2024-11-22",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-9.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-9.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 23,
+  "sortOrder": 24,
   "status": "published",
   "storageId": "cnt_000117",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "개인정보 보호·관리의 新 조력자: Data Discovery",
     "ja": "個人情報保護・管理の新しい助っ人: データディスカバリー"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000117/en.html",

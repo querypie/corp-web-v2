@@ -1,12 +1,23 @@
 {
-  "authorName": "vin",
-  "authorRole": "",
+  "authorName": " Vin Jeong",
+  "authorRole": "Design Team Lead",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2024-11-22",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-11.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-11.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 21,
+  "sortOrder": 22,
   "status": "published",
   "storageId": "cnt_000124",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "QueryPie와 Figma, 딱 맞아떨어지는 협업의 정석",
     "ja": "QueryPie と Figma、ぴったりと合った協力の極意"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000124/en.html",

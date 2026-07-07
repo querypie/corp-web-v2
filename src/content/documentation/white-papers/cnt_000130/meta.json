@@ -1,12 +1,23 @@
 {
-  "authorName": "edwin",
-  "authorRole": "Software Engineer, QueryPie, Inc.",
+  "authorName": "Edwin Park",
+  "authorRole": "Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2026-02-13",
   "downloadCoverImageSrc": "/documentation/white-papers/wp-thumb-26.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -20,16 +31,17 @@
   "storageId": "cnt_000130",
   "summary": {
     "en": "Do not blindly trust LLM benchmarks. Evaluate and select the LLM best suited to your domain yourself. This is the first part of a study that systematically compares 13 LLM configurations on a real Japanese payroll-system pipeline.",
-    "ko": "LLMのベンチマークを信じないでください。ドメインに最適化されたLLMを自ら評価・選定しましょう。日本の給与システムの実パイプラインを対象に、13のLLM構成を体系的に比較評価した研究の前編です。",
+    "ko": "LLM 벤치마크를 맹신하지 마세요. 귀하의 도메인에 가장 적합한 LLM을 직접 평가하고 선택하세요. 이 글은 실제 일본 급여 시스템 파이프라인에서 13개의 LLM 구성을 체계적으로 비교하는 연구의 첫 번째 부분입니다.",
     "ja": "LLMのベンチマークを信じないでください。ドメインに最適化されたLLMを自ら評価・選定しましょう。日本の給与システムの実パイプラインを対象に、13のLLM構成を体系的に比較評価した研究の前編です。"
   },
   "title": {
     "en": "Comparative Evaluation of LLMs for a Domain-Specific Pipeline Focused on Code Generation and Agentic RAG [Part 1]",
-    "ko": "",
+    "ko": "코드 생성 및 에이전틱 RAG에 중점을 둔 도메인 특화 파이프라인을 위한 LLM 비교 평가 [1부]",
     "ja": "コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【前編】"
   },
   "visibleLocales": [
     "en",
+    "ko",
     "ja"
   ],
   "locales": {

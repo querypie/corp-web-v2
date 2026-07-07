@@ -6,7 +6,18 @@
   "dateIso": "2025-01-23",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-17.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,19 +26,24 @@
   "imageSrc": "/documentation/blogs/b-thumb-17.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 15,
+  "sortOrder": 16,
   "status": "published",
   "storageId": "cnt_000110",
   "summary": {
     "en": "Discover how PAM strengthens security by managing and monitoring privileged access, reducing risks to critical data.",
-    "ko": "Discover how PAM strengthens security by managing and monitoring privileged access, reducing risks to critical data.",
-    "ja": "Discover how PAM strengthens security by managing and monitoring privileged access, reducing risks to critical data."
+    "ko": "PAM이 권한 있는 액세스를 관리하고 모니터링하여 중요 데이터에 대한 위험을 줄이고 보안을 강화하는 방법을 알아보세요.",
+    "ja": "PAMが特権アクセスを管理および監視し、重要なデータに対するリスクを減らし、セキュリティを強化する方法をご覧ください。"
   },
   "title": {
     "en": "Demystifying Privileged Access Management: Insights, Comparisons, and Practical Applications",
-    "ko": "",
-    "ja": ""
+    "ko": "권한 있는 액세스 관리(PAM)의 이해: 인사이트, 비교 및 실제 적용 사례",
+    "ja": "特権アクセス管理（PAM）の理解：インサイト、比較、実際の適用事例"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000110/en.html",

@@ -6,7 +6,18 @@
   "dateIso": "2026-03-09",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-29.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,21 +26,22 @@
   "imageSrc": "/documentation/blogs/thumbnail-4.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 3,
+  "sortOrder": 4,
   "status": "published",
   "storageId": "cnt_000007",
   "summary": {
     "en": "An AI-powered open-source attack platform breached 600+ FortiGate firewalls across 55 countries. An unskilled threat actor leveraged AI to execute attacks at scale. This article analyzes the CyberStrikeAI incident and presents a defense-in-depth framework for CxOs to protect data beyond the firewall.",
-    "ko": "An AI-powered open-source attack platform breached 600+ FortiGate firewalls across 55 countries. An unskilled threat actor leveraged AI to execute attacks at scale. This article analyzes the CyberStrikeAI incident and presents a defense-in-depth framework for CxOs to protect data beyond the firewall.",
+    "ko": "AI 기반 오픈소스 공격 플랫폼이 55개국 600개 이상의 FortiGate 방화벽을 침해했습니다. 숙련되지 않은 위협 행위자가 AI를 활용하여 대규모 공격을 실행했습니다. 이 글에서는 CyberStrikeAI 사건을 분석하고 CxO가 방화벽 너머의 데이터를 보호하기 위한 심층 방어 프레임워크를 제시합니다.",
     "ja": "AI攻撃ツールCyberStrikeAIが55カ国のファイアウォール600台を突破。技術的に未熟な攻撃者がAIで大規模攻撃を実行した事件を分析し、ファイアウォールの先にあるデータを守る多層防御フレームワークをCxO向けに解説します。"
   },
   "title": {
     "en": "AI Attack Tools Breach 600 Firewalls Across 55 Countries: How to Protect the Data Beyond the Firewall",
-    "ko": "",
+    "ko": "AI 공격 도구, 55개국 600개 방화벽 침해: 방화벽 너머의 데이터를 보호하는 방법",
     "ja": "AI攻撃ツールが55カ国のファイアウォール600台を突破──ファイアウォールの先にある\\\"データ\\\"をどう守るか"
   },
   "visibleLocales": [
     "en",
+    "ko",
     "ja"
   ],
   "locales": {

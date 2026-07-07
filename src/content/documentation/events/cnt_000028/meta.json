@@ -6,7 +6,18 @@
   "dateIso": "2024-12-05",
   "downloadCoverImageSrc": "/documentation/events/wb-thumb-15.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -19,15 +30,20 @@
   "status": "published",
   "storageId": "cnt_000028",
   "summary": {
-    "en": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！",
-    "ko": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！",
+    "en": "Are your information leakage prevention measures sufficient? It will be too late after an incident occurs!",
+    "ko": "정보 유출 대책은 충분히 이루어지고 있습니까? 사고가 발생한 후에는 늦습니다!",
     "ja": "情報漏洩対策は十分にされていますか？事故が起きてからは遅い！"
   },
   "title": {
-    "en": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
-    "ko": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー",
-    "ja": ""
+    "en": "Webinar Registration: Information Leakage Prevention and Internal Security Measures Seminar",
+    "ko": "웨비나 참가 신청 정보 유출 대책, 내부 보안 대책 세미나",
+    "ja": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/events/cnt_000028/en.html",
