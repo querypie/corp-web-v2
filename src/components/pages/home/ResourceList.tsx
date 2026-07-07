@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import TextButton from "@/components/ui/TextButton";
 
 type ResourceListItem = {
@@ -16,8 +19,21 @@ type ResourceListProps = {
   title: string;
 };
 
+const resourceListDisplayCount = 3;
+
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
+}
+
+function pickRandomItems<T>(items: readonly T[], count: number): T[] {
+  const shuffledItems = [...items];
+
+  for (let index = shuffledItems.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffledItems[index], shuffledItems[randomIndex]] = [shuffledItems[randomIndex], shuffledItems[index]];
+  }
+
+  return shuffledItems.slice(0, count);
 }
 
 function ResourceListCard({
@@ -56,6 +72,12 @@ export default function ResourceList({
   links,
   title,
 }: ResourceListProps) {
+  const [visibleItems, setVisibleItems] = useState(() => items.slice(0, resourceListDisplayCount));
+
+  useEffect(() => {
+    setVisibleItems(pickRandomItems(items, resourceListDisplayCount));
+  }, [items]);
+
   return (
     /* 홈 하단용 콘텐츠 리스트 섹션 */
     <section className={cx("flex w-full justify-center overflow-hidden bg-bg-deep py-14 md:py-[100px]", className)}>
@@ -78,7 +100,7 @@ export default function ResourceList({
 
         {/* 우측 카드 리스트 */}
         <div className="flex min-w-0 flex-1 flex-col justify-center gap-8 md:min-w-[460px] md:gap-[30px]">
-          {items.map((item) => (
+          {visibleItems.map((item) => (
             <ResourceListCard key={`${item.category}-${item.title}`} {...item} />
           ))}
         </div>
