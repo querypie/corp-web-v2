@@ -189,7 +189,7 @@ function FeatureVideoPlayer({
       loop
       muted
       playsInline
-      preload="metadata"
+      preload="auto"
       ref={setVideoRef}
       src={src}
     />
@@ -214,7 +214,7 @@ export default function FeatureMediaList({
         }
 
         const viewportCenter = window.innerHeight / 2;
-        const activationDistance = Math.min(window.innerHeight * 0.34, 280);
+        const activationDistance = Math.min(window.innerHeight * 0.48, 420);
         let activeIndex: number | null = null;
         let closestDistance = Number.POSITIVE_INFINITY;
 

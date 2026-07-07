@@ -57,6 +57,20 @@ const mcpItems = mcpIconSources.map(({ className, label, src }) => ({
   label,
 }));
 
+const resourceListCandidateCount = 10;
+const resourceListDisplayCount = 3;
+
+function pickRandomItems<T>(items: readonly T[], count: number): T[] {
+  const shuffledItems = [...items];
+
+  for (let index = shuffledItems.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffledItems[index], shuffledItems[randomIndex]] = [shuffledItems[randomIndex], shuffledItems[index]];
+  }
+
+  return shuffledItems.slice(0, count);
+}
+
 export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
   const publishedItems = await readContentState(undefined, { includeBodies: false });
     const visiblePublishedItems = publishedItems.filter((item) =>
@@ -84,7 +98,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
       .sort((left, right) => compareDateIsoDesc(left.dateIso, right.dateIso))
       .slice(0, 3)
       .map(({ dateIso: _dateIso, ...item }) => item);
-    const contentListItems: Array<{
+    const contentListCandidates: Array<{
       category: string;
       href: string;
       imageSrc: string;
@@ -111,8 +125,9 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
       })
       .filter((item): item is NonNullable<typeof item> => Boolean(item))
       .sort((left, right) => compareDateIsoDesc(left.dateIso, right.dateIso))
-      .slice(0, 3)
+      .slice(0, resourceListCandidateCount)
       .map(({ dateIso: _dateIso, ...item }) => item);
+    const contentListItems = pickRandomItems(contentListCandidates, resourceListDisplayCount);
 
     const contentListLinks = [
       {

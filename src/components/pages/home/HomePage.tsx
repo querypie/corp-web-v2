@@ -1,13 +1,13 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import Cta from "@/components/sections/Cta";
 import Clients from "./Clients";
-import FeaturedContent from "./FeaturedContent";
 import FeatureMediaList from "@/components/sections/FeatureMediaList";
 import Mcps from "./Mcps";
 import News from "./News";
 import Review from "./Review";
 import Hero from "./Hero";
 import NoticePopover, { type NoticeItem } from "./NoticePopover";
+import ResourceList from "./ResourceList";
 import type { Locale } from "@/constants/i18n";
 
 type FeatureItem = {
@@ -51,7 +51,7 @@ type NewsItem = {
   title: string;
 };
 
-type FeaturedContentItem = {
+type ResourceListItem = {
   category: string;
   href: string;
   imageSrc: string;
@@ -67,7 +67,7 @@ type ContentListLink = {
 export type HomePageProps = {
   clientCaption: string;
   contentListDescription: string;
-  contentListItems: FeaturedContentItem[];
+  contentListItems: ResourceListItem[];
   contentListLinks: ContentListLink[];
   contentListTitle: string;
   featureItems: FeatureItem[];
@@ -135,7 +135,7 @@ export default function HomePage({
       </div>
       <div><Review items={reviewItems} title={reviewTitle} /></div>
       <div className="-mx-5 md:-mx-10">
-        <FeaturedContent
+        <ResourceList
           description={contentListDescription}
           items={contentListItems}
           links={contentListLinks}
