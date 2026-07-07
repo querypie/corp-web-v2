@@ -1,12 +1,23 @@
 {
-  "authorName": "Jessica Kim",
+  "authorName": "",
   "authorRole": "",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2024-11-22",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-5.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-5.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 27,
+  "sortOrder": 28,
   "status": "published",
   "storageId": "cnt_000125",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "쿼리파이 헝거게임: 기술을 아는 사람들이 ‘사람을 이롭게하는 기술’로 세상과 통(通)하다!",
     "ja": "QueryPieハンガーゲーム: 技術を知る人々が「人を幸せにする技術」で世界と通じる！"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000125/en.html",

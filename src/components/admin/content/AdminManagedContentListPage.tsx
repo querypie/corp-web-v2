@@ -153,6 +153,28 @@ function ActionIcon({
   );
 }
 
+function getItemDisplayLocale(item: ManagedContentEntry): Locale {
+  const locales = ["en", "ko", "ja"] as const;
+  return (
+    locales.find((locale) => item.title[locale].trim()) ??
+    item.visibleLocales[0] ??
+    "en"
+  );
+}
+
+function matchesQuery(item: ManagedContentEntry, query: string) {
+  const normalized = query.trim().toLowerCase();
+
+  if (!normalized) {
+    return true;
+  }
+
+  return (["en", "ko", "ja"] as const).some((locale) =>
+    item.title[locale].toLowerCase().includes(normalized) ||
+    item.summary[locale].toLowerCase().includes(normalized),
+  );
+}
+
 export function PreviewModal({
   item,
   initialLocale = "en",
@@ -506,7 +528,6 @@ export default function AdminManagedContentListPage({
   const [isStatusUpdating, setIsStatusUpdating] = useState(false);
   const [isDuplicating, setIsDuplicating] = useState(false);
   const [isReorderMode, setIsReorderMode] = useState(false);
-  const [activeLocale, setActiveLocale] = useState<"en" | "ko" | "ja">("en");
   const [draftItems, setDraftItems] = useState<ManagedContentEntry[]>([]);
   const rowRefs = useRef(new Map<string, HTMLDivElement>());
   const previousPositions = useRef(new Map<string, number>());
@@ -522,16 +543,9 @@ export default function AdminManagedContentListPage({
   );
 
   const filteredItems = useMemo(() => {
-    /* 카테고리와 검색어 기준으로 화면에 보여줄 항목을 계산한다 */
-    const normalized = query.trim().toLowerCase();
-    const localeVisibleItems = categoryItems.filter((item) => item.visibleLocales.includes(activeLocale));
-
-    if (!normalized) return localeVisibleItems;
-
-    return localeVisibleItems.filter((item) =>
-      item.title[activeLocale].toLowerCase().includes(normalized),
-    );
-  }, [activeLocale, categoryItems, query]);
+    /* 카테고리와 검색어 기준으로 화면에 보여줄 항목을 계산한다. 언어 노출 상태로 리스트 항목을 숨기지 않는다. */
+    return categoryItems.filter((item) => matchesQuery(item, query));
+  }, [categoryItems, query]);
   const listCountLabel =
     categorySlug === "all"
       ? section === "demo"
@@ -699,20 +713,9 @@ export default function AdminManagedContentListPage({
       <header className="sticky top-[60px] z-30 -mx-5 overflow-x-auto bg-bg px-5 py-3 md:top-0 md:-mx-10 md:px-10">
         <div className="flex w-full min-w-0 flex-nowrap items-center justify-between gap-3">
           <div className="flex min-w-0 flex-1 flex-nowrap items-center gap-3">
-            <div className="w-[240px] min-w-[140px] shrink">
+            <div className="w-[220px] min-w-[140px] shrink">
               <SearchField onChange={setQuery} value={query} />
             </div>
-            <TabGroup className="shrink-0 self-start">
-              {(["en", "ko", "ja"] as const).map((locale) => (
-                <Tab
-                  key={locale}
-                  onClick={() => setActiveLocale(locale)}
-                  state={activeLocale === locale ? "on" : "off"}
-                >
-                  {locale.toUpperCase()}
-                </Tab>
-              ))}
-            </TabGroup>
           </div>
           <div className="flex shrink-0 flex-nowrap items-center justify-end gap-3">
             {categorySlug !== "all" ? (
@@ -797,7 +800,7 @@ export default function AdminManagedContentListPage({
           ) : displayedItems.length > 0 ? (
             displayedItems.map((item, index) => (
               <ContentRow
-                activeLocale={activeLocale}
+                activeLocale={getItemDisplayLocale(item)}
                 isReorderMode={isReorderMode}
                 isTogglePending={isStatusUpdating}
                 key={item.id}
@@ -868,7 +871,7 @@ export default function AdminManagedContentListPage({
 
       {previewItem ? (
         <PreviewModal
-          initialLocale={activeLocale}
+          initialLocale={getItemDisplayLocale(previewItem)}
           isLoading={isPreviewLoading}
           item={previewItem}
           onClose={() => {

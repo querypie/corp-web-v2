@@ -1,12 +1,23 @@
 {
-  "authorName": "kenny",
+  "authorName": "Kenny Park",
   "authorRole": "",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2025-06-10",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-21.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-21.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 11,
+  "sortOrder": 12,
   "status": "published",
   "storageId": "cnt_000106",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "AI가 말을 듣지 않는다. 이제 AI Red Teaming이 필요하다.",
     "ja": "AIが命令を聞かなかった：なぜAI Red Teamingが必要なのか"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000106/en.html",

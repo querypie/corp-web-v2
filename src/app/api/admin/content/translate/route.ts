@@ -20,14 +20,17 @@ type TranslationErrorPayload = {
   error: string;
 };
 
+type TranslationResponseFormat = "json" | "tsv";
+
 const MAX_TRANSLATION_CHARACTERS = 60000;
-const DEFAULT_TRANSLATION_CHUNK_CHARACTERS = 3000;
-const DEFAULT_TRANSLATION_CHUNK_ITEMS = 80;
-const DEFAULT_TRANSLATION_PROVIDER_ATTEMPT_TIMEOUT_MS = 60000;
-const DEFAULT_TRANSLATION_CHUNK_CONCURRENCY = 1;
-const TRANSLATION_PROVIDER_MAX_ATTEMPTS = 3;
+const DEFAULT_TRANSLATION_CHUNK_CHARACTERS = 2400;
+const DEFAULT_TRANSLATION_CHUNK_ITEMS = 15;
+const DEFAULT_TRANSLATION_PROVIDER_ATTEMPT_TIMEOUT_MS = 45000;
+const DEFAULT_TRANSLATION_CHUNK_CONCURRENCY = 2;
+const TRANSLATION_PROVIDER_MAX_ATTEMPTS = 2;
 const TRANSLATION_PROVIDER_RETRY_DELAY_MS = 700;
 const DEFAULT_TRANSLATION_PROVIDER_MAX_OUTPUT_TOKENS = 16000;
+const DEFAULT_GLM_DISABLE_REASONING = true;
 
 function jsonError(
   code: TranslationErrorCode,
@@ -52,6 +55,24 @@ function getPositiveIntegerEnv(name: string, fallback: number) {
 
   if (Number.isFinite(configuredValue) && configuredValue > 0) {
     return Math.floor(configuredValue);
+  }
+
+  return fallback;
+}
+
+function getBooleanEnv(name: string, fallback: boolean) {
+  const configuredValue = process.env[name]?.trim().toLowerCase();
+
+  if (!configuredValue) {
+    return fallback;
+  }
+
+  if (["1", "true", "yes", "on"].includes(configuredValue)) {
+    return true;
+  }
+
+  if (["0", "false", "no", "off"].includes(configuredValue)) {
+    return false;
   }
 
   return fallback;
@@ -176,11 +197,22 @@ async function retryProviderTranslation(
 }
 
 function extractOpenAIChoice(payload: unknown) {
-  const choices = (payload as { choices?: Array<{ finish_reason?: string; message?: { content?: string } }> }).choices;
+  const choices = (payload as {
+    choices?: Array<{
+      finish_reason?: string;
+      message?: {
+        content?: string | null;
+        reasoning?: string | null;
+        reasoning_content?: string | null;
+      };
+    }>;
+  }).choices;
   const choice = choices?.[0];
+  const reasoning = choice?.message?.reasoning ?? choice?.message?.reasoning_content ?? "";
 
   return {
     finishReason: choice?.finish_reason,
+    reasoningLength: reasoning.length,
     text: choice?.message?.content ?? "",
   };
 }
@@ -190,7 +222,47 @@ function extractAnthropicText(payload: unknown) {
   return content?.find((item) => item.type === "text" || typeof item.text === "string")?.text ?? "";
 }
 
-function parseTranslations(value: string, expectedLength: number) {
+type TranslationParseResult =
+  | { translations: string[] }
+  | { failure: string };
+
+function normalizeTranslationItems(translations: unknown[], expectedLength: number): TranslationParseResult {
+  if (translations.every((item) => typeof item === "string")) {
+    return { translations: translations as string[] };
+  }
+
+  const keyedTranslations = new Map<number, string>();
+
+  for (const item of translations) {
+    if (!item || typeof item !== "object") {
+      return { failure: "translations contained an unsupported item" };
+    }
+
+    const translationItem = item as { index?: unknown; text?: unknown; translation?: unknown };
+    const index = typeof translationItem.index === "number" ? translationItem.index : null;
+    const text = typeof translationItem.translation === "string"
+      ? translationItem.translation
+      : typeof translationItem.text === "string"
+      ? translationItem.text
+      : null;
+
+    if (!index || index < 1 || index > expectedLength || !text) {
+      return { failure: "translations contained an invalid indexed item" };
+    }
+
+    keyedTranslations.set(index, text);
+  }
+
+  if (keyedTranslations.size !== expectedLength) {
+    return { failure: `indexed translations length ${keyedTranslations.size} did not match expected ${expectedLength}` };
+  }
+
+  return {
+    translations: Array.from({ length: expectedLength }, (_, index) => keyedTranslations.get(index + 1) ?? ""),
+  };
+}
+
+function parseTranslations(value: string, expectedLength: number): TranslationParseResult {
   const trimmedValue = value.trim();
   const jsonValue = extractJsonObject(trimmedValue);
 
@@ -201,18 +273,56 @@ function parseTranslations(value: string, expectedLength: number) {
     };
     const translations = parsed.translations ?? parsed.outputFormat?.translations;
 
-    if (!Array.isArray(translations) || translations.length !== expectedLength) {
-      return null;
+    if (!Array.isArray(translations)) {
+      return { failure: "translations is not an array" };
     }
 
-    if (!translations.every((item) => typeof item === "string")) {
-      return null;
+    if (translations.length !== expectedLength) {
+      return { failure: `translations length ${translations.length} did not match expected ${expectedLength}` };
     }
 
-    return translations as string[];
-  } catch {
-    return null;
+    return normalizeTranslationItems(translations, expectedLength);
+  } catch (error) {
+    return {
+      failure: error instanceof Error ? `invalid JSON: ${error.message}` : "invalid JSON",
+    };
   }
+}
+
+function parseTsvTranslations(value: string, expectedLength: number): TranslationParseResult {
+  const textValue = extractPlainTextBlock(value).trim();
+  const keyedTranslations = new Map<number, string>();
+
+  for (const rawLine of textValue.split(/\r?\n/)) {
+    const line = rawLine.trimEnd();
+
+    if (!line.trim()) {
+      continue;
+    }
+
+    const separatorIndex = line.indexOf("\t");
+
+    if (separatorIndex <= 0) {
+      return { failure: `invalid TSV line: ${line.slice(0, 120)}` };
+    }
+
+    const index = Number(line.slice(0, separatorIndex).trim());
+    const translation = line.slice(separatorIndex + 1);
+
+    if (!Number.isInteger(index) || index < 1 || index > expectedLength) {
+      return { failure: `invalid TSV index: ${line.slice(0, 120)}` };
+    }
+
+    keyedTranslations.set(index, translation);
+  }
+
+  if (keyedTranslations.size !== expectedLength) {
+    return { failure: `TSV translations length ${keyedTranslations.size} did not match expected ${expectedLength}` };
+  }
+
+  return {
+    translations: Array.from({ length: expectedLength }, (_, index) => keyedTranslations.get(index + 1) ?? ""),
+  };
 }
 
 function extractJsonObject(value: string) {
@@ -232,18 +342,41 @@ function extractJsonObject(value: string) {
   return value;
 }
 
-function createTranslationMessages(texts: string[], locale: Locale) {
+function extractPlainTextBlock(value: string) {
+  const fencedMatch = value.match(/```(?:tsv|text|txt)?\s*([\s\S]*?)\s*```/i);
+
+  if (fencedMatch?.[1]) {
+    return fencedMatch[1].trim();
+  }
+
+  return value;
+}
+
+function createTranslationMessages(
+  texts: string[],
+  locale: Locale,
+  responseFormat: TranslationResponseFormat,
+) {
+  const indexedTexts = texts.map((text, index) => ({
+    index: index + 1,
+    text,
+  }));
+  const isTsv = responseFormat === "tsv";
+
   return [
     {
-      content:
-        "You translate CMS content. Return strict JSON only. Preserve product names, URLs, code, placeholders, and markdown-like tokens. Do not add commentary.",
+      content: isTsv
+        ? "You translate CMS content. Return plain TSV only. Preserve product names, URLs, code, placeholders, and markdown-like tokens. Do not add commentary. Return exactly one line for every input item, preserving each index. Each line must be: index, a single tab character, translated text. Do not quote or JSON-escape the translated text."
+        : "You translate CMS content. Return strict JSON only. Preserve product names, URLs, code, placeholders, and markdown-like tokens. Do not add commentary. Return exactly one translation item for every input item, preserving each index.",
       role: "system",
     },
     {
       content: JSON.stringify({
-        outputFormat: { translations: ["translated text in the same order"] },
+        outputFormat: isTsv
+          ? "1\ttranslated text"
+          : { translations: [{ index: 1, translation: "translated text" }] },
         targetLanguage: getTargetLanguage(locale),
-        texts,
+        texts: indexedTexts,
       }),
       role: "user",
     },
@@ -285,6 +418,40 @@ function getTranslationChunkConcurrency() {
   );
 }
 
+function shouldDisableGlmReasoning() {
+  return getBooleanEnv("TRANSLATION_GLM_DISABLE_REASONING", DEFAULT_GLM_DISABLE_REASONING);
+}
+
+function createOpenAICompatibleRequestBody({
+  disableReasoning,
+  locale,
+  model,
+  responseFormat,
+  texts,
+  useResponseFormat,
+}: {
+  disableReasoning: boolean;
+  locale: Locale;
+  model: string;
+  responseFormat: TranslationResponseFormat;
+  texts: string[];
+  useResponseFormat: boolean;
+}) {
+  return {
+    max_tokens: getTranslationProviderMaxOutputTokens(),
+    messages: createTranslationMessages(texts, locale, responseFormat),
+    model,
+    ...(useResponseFormat ? { response_format: { type: "json_object" } } : {}),
+    ...(disableReasoning
+      ? {
+          chat_template_kwargs: { enable_thinking: false },
+          thinking: { type: "disabled" },
+        }
+      : {}),
+    temperature: 0.2,
+  };
+}
+
 async function callOpenAICompatibleTranslation(
   endpoint: string,
   token: string,
@@ -294,26 +461,50 @@ async function callOpenAICompatibleTranslation(
   signal: AbortSignal,
   useResponseFormat: boolean,
   provider: string,
+  disableReasoning = false,
+  responseFormat: TranslationResponseFormat = "json",
 ) {
   return retryProviderTranslation(
     async () => {
-      const response = await fetchWithTimeout(endpoint, {
-        body: JSON.stringify({
-          max_tokens: getTranslationProviderMaxOutputTokens(),
-          messages: createTranslationMessages(texts, locale),
-          model,
-          ...(useResponseFormat ? { response_format: { type: "json_object" } } : {}),
-          temperature: 0.2,
-        }),
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        method: "POST",
-        signal,
-      }, getTranslationProviderAttemptTimeoutMs());
+      async function requestProvider(shouldDisableReasoning: boolean) {
+        const response = await fetchWithTimeout(endpoint, {
+          body: JSON.stringify(createOpenAICompatibleRequestBody({
+            disableReasoning: shouldDisableReasoning,
+            locale,
+            model,
+            responseFormat,
+            texts,
+            useResponseFormat,
+          })),
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          method: "POST",
+          signal,
+        }, getTranslationProviderAttemptTimeoutMs());
 
-      const payload = (await response.json().catch(() => ({}))) as unknown;
+        const payload = (await response.json().catch(() => ({}))) as unknown;
+        return { payload, response };
+      }
+
+      let { payload, response } = await requestProvider(disableReasoning);
+
+      if (disableReasoning && response.status === 400) {
+        const firstPayload = JSON.stringify(payload).slice(0, 500);
+        ({ payload, response } = await requestProvider(false));
+
+        if (!response.ok) {
+          throw Object.assign(new Error(`Translation provider failed with HTTP ${response.status}.`), {
+            detail: [
+              "reasoning suppression retry failed",
+              `first_response=${firstPayload}`,
+              `fallback_response=${JSON.stringify(payload).slice(0, 500)}`,
+            ].join("\n"),
+            translationCode: "PROVIDER_ERROR" satisfies TranslationErrorCode,
+          });
+        }
+      }
 
       if (!response.ok) {
         if (response.status === 401 || response.status === 403) {
@@ -335,7 +526,13 @@ async function callOpenAICompatibleTranslation(
       }
 
       const providerChoice = extractOpenAIChoice(payload);
-      return parseProviderTranslations(providerChoice.text, texts.length, providerChoice.finishReason);
+      return parseProviderTranslations(
+        providerChoice.text,
+        texts.length,
+        providerChoice.finishReason,
+        providerChoice.reasoningLength,
+        responseFormat,
+      );
     },
     {
       locale,
@@ -383,6 +580,8 @@ async function callGlmTranslation(texts: string[], locale: Locale, signal: Abort
     signal,
     false,
     "GLM-compatible",
+    shouldDisableGlmReasoning(),
+    "tsv",
   );
 }
 
@@ -462,20 +661,32 @@ async function callAnthropicTranslation(texts: string[], locale: Locale, signal:
   );
 }
 
-function parseProviderTranslations(providerText: string, expectedLength: number, finishReason?: string) {
-  const translations = parseTranslations(providerText, expectedLength);
+function parseProviderTranslations(
+  providerText: string,
+  expectedLength: number,
+  finishReason?: string,
+  reasoningLength?: number,
+  responseFormat: TranslationResponseFormat = "json",
+) {
+  const result = responseFormat === "tsv"
+    ? parseTsvTranslations(providerText, expectedLength)
+    : parseTranslations(providerText, expectedLength);
 
-  if (!translations) {
+  if ("failure" in result) {
     throw Object.assign(new Error("Translation provider returned an invalid response."), {
       detail: [
+        `response_format=${responseFormat}`,
         finishReason ? `finish_reason=${finishReason}` : null,
+        typeof reasoningLength === "number" ? `reasoning_length=${reasoningLength}` : null,
+        `content_length=${providerText.length}`,
+        `parse_failure=${result.failure}`,
         `response=${providerText.slice(0, 500)}`,
       ].filter(Boolean).join("\n"),
       translationCode: "INVALID_RESPONSE" satisfies TranslationErrorCode,
     });
   }
 
-  return translations;
+  return result.translations;
 }
 
 function chunkTexts(texts: string[]) {

@@ -6,7 +6,18 @@
   "dateIso": "2024-11-29",
   "downloadCoverImageSrc": "/documentation/events/3dk-ep2-ja.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -19,15 +30,20 @@
   "status": "published",
   "storageId": "cnt_000043",
   "summary": {
-    "en": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。",
-    "ko": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。",
+    "en": "QueryPie's DB Access Control (QueryPie DAC) plays a central role in strengthening security for accumulated sensitive information, simplifying access control and management, and ensuring security stability. We will explain how to safely manage vast amounts of sensitive information and data in a multi-cloud environment.",
+    "ko": "축적된 민감 정보에 대해 보안을 강화하고, 액세스 제어와 관리를 간편하게 수행하며, 보안의 안정성을 확보할 수 있도록 QueryPie의 DB 액세스 제어(QueryPie DAC)가 핵심적인 역할을 수행하고 있습니다. 멀티 클라우드 환경에서 방대한 민감 정보와 데이터를 안전하게 관리하는 방법에 대해 설명해 드리겠습니다.",
     "ja": "蓄積された機密情報に対して、セキュリティを強化し、アクセス制御と管理を簡便に行い、セキュリティの安定性を確保できるように、QueryPieのDBアクセス制御 (QueryPie DAC) が中枢的な役割を果たしています。マルチクラウド環境の中で、膨大な機密情報とデータを安全に管理する方法について説明いたします。"
   },
   "title": {
-    "en": "エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ",
-    "ko": "エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ",
+    "en": "Episode 2 QueryPie DAC: Solving Database Challenges! - Database Integrated Management, NoSQL, Ledger Data",
+    "ko": "에피소드 2 QueryPie DAC: 데이터베이스 고민 해결! - 데이터베이스 통합 관리, NoSQL, 원장 데이터",
     "ja": "エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/events/cnt_000043/en.html",

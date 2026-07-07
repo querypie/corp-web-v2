@@ -6,7 +6,18 @@
   "dateIso": "2025-08-05",
   "downloadCoverImageSrc": "/news/news-10.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,19 +26,24 @@
   "imageSrc": "/news/news-23.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 9,
-  "status": "published",
+  "sortOrder": 10,
+  "status": "hidden",
   "storageId": "cnt_000104",
   "summary": {
-    "en": "株式会社ペイロール(本社:東京都江東区、代表取締役社長:湯浅 哲哉、以下「ペイロール」)と、統合データガバナンスプラットフォームを提供するQueryPie, Inc.(本社:米国カリフォルニア州、CEO:Brant Hwang)およびその日本法人であるQueryPie Japan合同会社(本社:東京都港区、代表:有延 敬三、以下「QueryPie」)は、AIとセキュリティ分野における技術提携に合意したことをお知らせいたします。",
-    "ko": "株式会社ペイロール(本社:東京都江東区、代表取締役社長:湯浅 哲哉、以下「ペイロール」)と、統合データガバナンスプラットフォームを提供するQueryPie, Inc.(本社:米国カリフォルニア州、CEO:Brant Hwang)およびその日本法人であるQueryPie Japan合同会社(本社:東京都港区、代表:有延 敬三、以下「QueryPie」)は、AIとセキュリティ分野における技術提携に合意したことをお知らせいたします。",
+    "en": "Payroll Co., Ltd. (Headquarters: Koto-ku, Tokyo; President and Representative Director: Tetsuya Yuasa; hereinafter \"Payroll\") and QueryPie, Inc. (Headquarters: California, USA; CEO: Brant Hwang), a provider of an integrated data governance platform, along with its Japanese subsidiary QueryPie Japan LLC (Headquarters: Minato-ku, Tokyo; Representative: Keizo Arienobu; hereinafter \"QueryPie\"), are pleased to announce that they have agreed to a technical partnership in the fields of AI and security.",
+    "ko": "주식회사 페이롤(본사: 도쿄도 고토구, 대표이사 사장: 유아사 데쓰야, 이하 '페이롤')과 통합 데이터 거버넌스 플랫폼을 제공하는 QueryPie, Inc.(본사: 미국 캘리포니아주, CEO: Brant Hwang) 및 그 일본 법인인 QueryPie Japan 유한회사(본사: 도쿄도 미나토구, 대표: 아리노부 게이조, 이하 'QueryPie')는 AI와 보안 분야에서의 기술 제휴에 합의한 것을 알려드립니다.",
     "ja": "株式会社ペイロール(本社:東京都江東区、代表取締役社長:湯浅 哲哉、以下「ペイロール」)と、統合データガバナンスプラットフォームを提供するQueryPie, Inc.(本社:米国カリフォルニア州、CEO:Brant Hwang)およびその日本法人であるQueryPie Japan合同会社(本社:東京都港区、代表:有延 敬三、以下「QueryPie」)は、AIとセキュリティ分野における技術提携に合意したことをお知らせいたします。"
   },
   "title": {
-    "en": "",
-    "ko": "",
+    "en": "Payroll Co., Ltd. and QueryPie Enter Technical Partnership in AI Security Field",
+    "ko": "주식회사 페이롤과 QueryPie가 AI 보안 분야에서 기술 제휴",
     "ja": "株式会社ペイロールとQueryPieがAIセキュリティ分野で技術提携"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000104/en.html",

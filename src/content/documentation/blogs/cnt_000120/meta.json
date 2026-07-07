@@ -1,12 +1,23 @@
 {
-  "authorName": "sam",
-  "authorRole": "",
+  "authorName": "Sam Kim",
+  "authorRole": "CTO",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2024-11-22",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-4.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-4.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 28,
+  "sortOrder": 29,
   "status": "published",
   "storageId": "cnt_000120",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "혼돈에서 질서로: 멀티클라우드 Kubernetes 접근제어 혁신",
     "ja": "混沌から秩序へ: マルチクラウドKubernetesアクセス制御の革新"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000120/en.html",

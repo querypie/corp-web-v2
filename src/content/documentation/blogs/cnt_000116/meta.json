@@ -1,12 +1,23 @@
 {
-  "authorName": "skipper",
-  "authorRole": "",
+  "authorName": "Skipper Moon",
+  "authorRole": "SVP of Engineering",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2024-11-22",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-10.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-10.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 22,
+  "sortOrder": 23,
   "status": "published",
   "storageId": "cnt_000116",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "QueryPie TPM 팀의 하루 엿보기: 고객을 사로잡는 비법 공개",
     "ja": "QueryPie TPM チームの一日を覗いてみよう: 顧客獲得の秘訣公開"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000116/en.html",

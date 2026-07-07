@@ -6,7 +6,18 @@
   "dateIso": "2024-11-29",
   "downloadCoverImageSrc": "/documentation/events/3dk-ep3-ko.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -19,15 +30,20 @@
   "status": "published",
   "storageId": "cnt_000050",
   "summary": {
-    "en": "3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다.",
+    "en": "In Episode 3, we took a close look at how to efficiently manage numerous permissions across a large number of servers and multi-cloud environments using QueryPie's system access control solution, 'QueryPie SAC (System Access Controller)'.",
     "ko": "3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다.",
-    "ja": "3편에서는 쿼리파이의 시스텝 접근제어 솔루션인 ‘쿼리파이 SAC(System Access Controller)’를 활용해 다량의 서버와 멀티 클라우드 환경 속에서 수많은 권한을 효율적으로 관리할 수 있는 방법에 대해 깐깐하게 살펴봤습니다."
+    "ja": "第3回では、クエリパイのシステムアクセス制御ソリューションである「クエリパイ SAC（System Access Controller）」を活用し、大量のサーバーやマルチクラウド環境において数多くの権限を効率的に管理する方法について厳しく検証しました。"
   },
   "title": {
-    "en": "Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!",
+    "en": "Ep. 3 QueryPie SAC: Smashing Server Management Hurdles!—Mass Server Management, Yap! Auto-Scaling, Yap! Permissions and Policies, Yap!",
     "ko": "Ep. 3 쿼리파이 SAC: 서버 관리 허들 박살내기!—대량 서버 관리, 얍! Auto-Scaling, 얍! 권한 및 정책, 얍!",
-    "ja": ""
+    "ja": "Ep. 3 クエリパイ SAC: サーバー管理の壁をぶっ壊せ！—大量サーバー管理、ヤプ！Auto-Scaling、ヤプ！権限とポリシー、ヤプ！"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/events/cnt_000050/en.html",

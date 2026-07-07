@@ -1,12 +1,23 @@
 {
-  "authorName": "teddy",
-  "authorRole": "",
+  "authorName": "Teddy Kim",
+  "authorRole": "Software Engineer",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2025-03-20",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-20.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-20.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 12,
+  "sortOrder": 13,
   "status": "published",
   "storageId": "cnt_000107",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "Next.js Server Action과 프론트엔드 보안",
     "ja": "Next.js Server Actionとフロントエンドセキュリティ"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000107/en.html",

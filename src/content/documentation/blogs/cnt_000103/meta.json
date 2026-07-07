@@ -6,7 +6,18 @@
   "dateIso": "2025-08-11",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-24.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,19 +26,24 @@
   "imageSrc": "/documentation/blogs/b-thumb-24.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 8,
+  "sortOrder": 9,
   "status": "published",
   "storageId": "cnt_000103",
   "summary": {
     "en": "Discover the top 10 Privileged Access Management (PAM) solutions that are essential for modern enterprise security, featuring comprehensive leading platforms that provide advanced credential management, zero-trust access control, and automated security features to protect your organization's critical IT infrastructure in today's rapidly evolving digital landscape.",
     "ko": "현대 기업 보안에 필수적인 접근제어 솔루션(PAM) 톱 5 지금 살펴보세요. 고도화된 자격 증명 관리, 제로 트러스트 접근 제어, 자동화된 보안 기능을 제공하는 포괄적인 주요 플랫폼들을 통해 급속히 변화하는 디지털 환경에서 조직의 핵심 IT 인프라를 보호할 수 있습니다.",
-    "ja": "Discover the top 10 Privileged Access Management (PAM) solutions that are essential for modern enterprise security, featuring comprehensive leading platforms that provide advanced credential management, zero-trust access control, and automated security features to protect your organization's critical IT infrastructure in today's rapidly evolving digital landscape."
+    "ja": "現代の企業セキュリティに不可欠なアクセス制御ソリューション（PAM）トップ5を今すぐご確認ください。高度な資格情報管理、ゼロトラストアクセス制御、自動化されたセキュリティ機能を提供する包括的な主要プラットフォームを通じて、急速に変化するデジタル環境において組織の中核ITインフラを保護することができます。"
   },
   "title": {
     "en": "Top 10 Privileged Access Management (PAM) Solutions You Should Know",
     "ko": "기업 보안의 핵심, 접근제어 솔루션(PAM) Top 5",
-    "ja": ""
+    "ja": "企業セキュリティの中核、アクセス制御ソリューション（PAM）Top 5"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000103/en.html",

@@ -1,12 +1,23 @@
 {
-  "authorName": "edwin",
-  "authorRole": "Software Engineer, QueryPie, Inc.",
+  "authorName": "Edwin Park",
+  "authorRole": "Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2026-02-13",
   "downloadCoverImageSrc": "/documentation/white-papers/wp-thumb-27.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -19,17 +30,18 @@
   "status": "published",
   "storageId": "cnt_000131",
   "summary": {
-    "en": "13のLLM構成による実験結果を徹底分析。Thinkingモードの意外な落とし穴、GPTの安定性問題、そして60%のコスト削減を実現する最適パイプライン構成を明らかにします。",
-    "ko": "13のLLM構成による実験結果を徹底分析。Thinkingモードの意外な落とし穴、GPTの安定性問題、そして60%のコスト削減を実現する最適パイプライン構成を明らかにします。",
+    "en": "We present a comprehensive analysis of experimental results across 13 LLM configurations. We reveal unexpected pitfalls in \"Thinking\" mode, stability issues with GPT, and the optimal pipeline setup that achieves a 60% cost reduction.",
+    "ko": "13가지 LLM 구성에 대한 실험 결과를 종합적으로 분석합니다. \"Thinking\" 모드의 예상치 못한 함정, GPT의 안정성 문제, 그리고 60%의 비용 절감을 달성하는 최적의 파이프라인 설정을 공개합니다.",
     "ja": "13のLLM構成による実験結果を徹底分析。Thinkingモードの意外な落とし穴、GPTの安定性問題、そして60%のコスト削減を実現する最適パイプライン構成を明らかにします。"
   },
   "title": {
     "en": "Comparative Evaluation of LLMs for a Domain-Specific Pipeline Focused on Code Generation and Agentic RAG [Part 2]",
-    "ko": "",
+    "ko": "코드 생성 및 에이전틱 RAG에 중점을 둔 도메인 특화 파이프라인을 위한 LLM 비교 평가 [2부]",
     "ja": "コード生成およびAgentic RAGタスクを中心とした特定ドメインのためのLLM比較評価【後編】"
   },
   "visibleLocales": [
     "en",
+    "ko",
     "ja"
   ],
   "locales": {

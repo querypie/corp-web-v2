@@ -6,7 +6,18 @@
   "dateIso": "2024-11-29",
   "downloadCoverImageSrc": "/documentation/events/3dk-ep4-ja.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -19,15 +30,20 @@
   "status": "published",
   "storageId": "cnt_000047",
   "summary": {
-    "en": "エピソード 4では、QueryPie のクーバネティスアクセス制御ソリューションである “QueryPie KAC (Kubernetes Access Controller)” を活用して、クーバネティス環境でも堅固なセキュリティ環境を維持する方法について掘り下げてみました。",
-    "ko": "エピソード 4では、QueryPie のクーバネティスアクセス制御ソリューションである “QueryPie KAC (Kubernetes Access Controller)” を活用して、クーバネティス環境でも堅固なセキュリティ環境を維持する方法について掘り下げてみました。",
+    "en": "In Episode 4, we explored how to maintain a robust security environment even in Kubernetes environments by utilizing \"QueryPie KAC (Kubernetes Access Controller),\" QueryPie's Kubernetes access control solution.",
+    "ko": "에피소드 4에서는 QueryPie의 쿠버네티스 액세스 제어 솔루션인 \"QueryPie KAC (Kubernetes Access Controller)\"를 활용하여 쿠버네티스 환경에서도 견고한 보안 환경을 유지하는 방법에 대해 깊이 있게 살펴보았습니다.",
     "ja": "エピソード 4では、QueryPie のクーバネティスアクセス制御ソリューションである “QueryPie KAC (Kubernetes Access Controller)” を活用して、クーバネティス環境でも堅固なセキュリティ環境を維持する方法について掘り下げてみました。"
   },
   "title": {
-    "en": "エピソード 4 QueryPie KAC: クーバネティスをノックアウト！ - マルチ クーバネティス クラスタ、クーバネティス リソース、Podアクセス履歴",
-    "ko": "エピソード 4 QueryPie KAC: クーバネティスをノックアウト！ - マルチ クーバネティス クラスタ、クーバネティス リソース、Podアクセス履歴",
+    "en": "Episode 4 QueryPie KAC: Knockout Kubernetes! - Multi Kubernetes Clusters, Kubernetes Resources, Pod Access History",
+    "ko": "에피소드 4 QueryPie KAC: 쿠버네티스를 노크아웃! - 멀티 쿠버네티스 클러스터, 쿠버네티스 리소스, Pod 액세스 이력",
     "ja": "エピソード 4 QueryPie KAC: クーバネティスをノックアウト！ - マルチ クーバネティス クラスタ、クーバネティス リソース、Podアクセス履歴"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/events/cnt_000047/en.html",

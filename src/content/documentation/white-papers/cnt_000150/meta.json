@@ -1,12 +1,23 @@
 {
-  "authorName": "kurt",
-  "authorRole": "",
+  "authorName": "Kurt",
+  "authorRole": "Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2024-11-22",
   "downloadCoverImageSrc": "/documentation/white-papers/wp-thumb-1.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "50",
@@ -20,16 +31,18 @@
   "storageId": "cnt_000150",
   "summary": {
     "en": "Utilize QueryPie's AI to analyze personal data, ensuring better privacy management and regulatory compliance.",
-    "ko": "쿼리파이의 AI를 활용하여 개인 데이터를 분석하고, 더 나은 프라이버시 관리와 규제 준수를 보장하는 방법을 알아보세요.",
-    "ja": "QueryPie の AI を活用して個人データを分析し、より優れたプライバシー管理と規制遵守を実現します。"
+    "ko": "QueryPie의 AI를 활용하여 개인정보를 분석하고, 더 나은 개인정보 보호 관리와 규제 준수를 보장합니다.",
+    "ja": "QueryPieのAIを活用して個人情報を分析し、より優れたプライバシー管理と規制コンプライアンスを確保します。"
   },
   "title": {
     "en": "Improving Personal Data Identification and Analysis with AI",
-    "ko": "",
-    "ja": ""
+    "ko": "AI를 활용한 개인정보 식별 및 분석 개선",
+    "ja": "AIによる個人情報の識別と分析の改善"
   },
   "visibleLocales": [
-    "en"
+    "en",
+    "ko",
+    "ja"
   ],
   "locales": {
     "en": {

@@ -1,12 +1,23 @@
 {
-  "authorName": "keira",
-  "authorRole": "",
+  "authorName": "Keira Yoon",
+  "authorRole": "Product Manager",
   "categorySlug": "blogs",
   "contentType": "content",
   "dateIso": "2024-11-22",
   "downloadCoverImageSrc": "/documentation/blogs/b-thumb-8.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -15,7 +26,7 @@
   "imageSrc": "/documentation/blogs/b-thumb-8.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 24,
+  "sortOrder": 25,
   "status": "published",
   "storageId": "cnt_000122",
   "summary": {
@@ -28,6 +39,11 @@
     "ko": "QueryPie PM의 일잘러 스킬셋, 올라운더로 거듭나기",
     "ja": "QueryPie PMの仕事力スキルセット、オールラウンダーとして成長する方法"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/blogs/cnt_000122/en.html",

@@ -6,7 +6,18 @@
   "dateIso": "2024-11-29",
   "downloadCoverImageSrc": "/documentation/events/3dk-ep4-ko.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -19,15 +30,20 @@
   "status": "published",
   "storageId": "cnt_000048",
   "summary": {
-    "en": "4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다.",
+    "en": "In Episode 4, we explored how to maintain a robust security environment in Kubernetes using QueryPie's Kubernetes access control solution, 'QueryPie KAC (Kubernetes Access Controller)'.",
     "ko": "4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다.",
-    "ja": "4편에서는 쿼리파이의 쿠버네티스 접근 제어 솔루션인 ‘쿼리파이 KAC(Kubernetes Access Controller)’를 활용해 쿠버네티스 환경에서도 탄탄한 보안 환경을 유지할 수 있는 방법에 대해 파헤쳐 보았습니다."
+    "ja": "第4話では、QueryPieのKubernetesアクセス制御ソリューションである「QueryPie KAC（Kubernetes Access Controller）」を活用して、Kubernetes環境でも堅牢なセキュリティ環境を維持する方法について掘り下げてみました。"
   },
   "title": {
-    "en": "Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!",
+    "en": "Ep. 4 QueryPie KAC: Kubernetes One Strike!—Multi K8s clusters, yap! K8s resources, yap! Pod access history, yap!",
     "ko": "Ep. 4 쿼리파이 KAC: 쿠버네티스 일격필살!—멀티 K8s 클러스터, 얍! K8s 리소스, 얍! Pod 접근 이력, 얍!",
-    "ja": ""
+    "ja": "Ep. 4 QueryPie KAC: Kubernetes 一撃必殺！—マルチK8sクラスタ、ヤップ！K8sリソース、ヤップ！Podアクセス履歴、ヤップ！"
   },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
   "locales": {
     "en": {
       "htmlPath": "src/content/documentation/events/cnt_000048/en.html",
