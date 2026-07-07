@@ -1,6 +1,6 @@
 import TextButton from "@/components/ui/TextButton";
 
-type FeaturedContentItem = {
+type ResourceListItem = {
   category: string;
   href: string;
   imageSrc: string;
@@ -8,10 +8,10 @@ type FeaturedContentItem = {
   title: string;
 };
 
-type FeaturedContentProps = {
+type ResourceListProps = {
   className?: string;
   description: string;
-  items: FeaturedContentItem[];
+  items: ResourceListItem[];
   links: Array<{ href: string; label: string }>;
   title: string;
 };
@@ -20,13 +20,13 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function FeaturedContentCard({
+function ResourceListCard({
   category,
   href,
   imageSrc,
   isExternal = false,
   title,
-}: FeaturedContentItem) {
+}: ResourceListItem) {
   return (
     /* 홈 전용 콘텐츠 리스트 카드 1개 */
     <a
@@ -49,13 +49,13 @@ function FeaturedContentCard({
   );
 }
 
-export default function FeaturedContent({
+export default function ResourceList({
   className,
   description,
   items,
   links,
   title,
-}: FeaturedContentProps) {
+}: ResourceListProps) {
   return (
     /* 홈 하단용 콘텐츠 리스트 섹션 */
     <section className={cx("flex w-full justify-center overflow-hidden bg-bg-deep py-14 md:py-[100px]", className)}>
@@ -79,7 +79,7 @@ export default function FeaturedContent({
         {/* 우측 카드 리스트 */}
         <div className="flex min-w-0 flex-1 flex-col justify-center gap-8 md:min-w-[460px] md:gap-[30px]">
           {items.map((item) => (
-            <FeaturedContentCard key={`${item.category}-${item.title}`} {...item} />
+            <ResourceListCard key={`${item.category}-${item.title}`} {...item} />
           ))}
         </div>
         </div>
