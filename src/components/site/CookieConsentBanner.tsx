@@ -90,7 +90,7 @@ export default function CookieConsentBanner({ locale }: CookieConsentBannerProps
           <p className="m-0 type-body-md text-mute">
             {copy.sentenceBeforePrivacy}{" "}
             <a
-              className="text-fg underline underline-offset-4 transition-colors hover:text-brand"
+              className="text-brand transition-colors hover:text-fg"
               href={getLocalePath(locale, "/privacy-policy")}
             >
               {copy.privacyPolicyLinkLabel}
@@ -99,7 +99,7 @@ export default function CookieConsentBanner({ locale }: CookieConsentBannerProps
             <br />
             {copy.sentenceBeforeCookiePreference}{" "}
             <a
-              className="text-fg underline underline-offset-4 transition-colors hover:text-brand"
+              className="text-brand transition-colors hover:text-fg"
               href={getLocalePath(locale, "/cookie-preference")}
             >
               {copy.cookiePreferenceLinkLabel}

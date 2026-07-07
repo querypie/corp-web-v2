@@ -508,7 +508,7 @@ export function buildSolutionContentComponents({
     }) => (
       <a
         href={resolveHref(locale, href)}
-        className="font-medium text-[#2563eb] underline underline-offset-4 hover:text-[#1d4ed8]"
+        className="font-medium text-[#2563eb] hover:text-[#1d4ed8]"
         {...maybeOpenInNewTab(href, external)}
       >
         {children}

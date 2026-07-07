@@ -29,7 +29,7 @@ export default function LegalContentBody({
         "[&_h3]:m-0 [&_h3]:mt-7 [&_h3:first-of-type]:mt-0 [&_h3]:type-h3 [&_h3]:text-fg",
         "[&_p]:m-0 [&_p]:mt-4 [&_p:first-child]:mt-0 [&_p]:type-body-lg [&_p]:leading-8 [&_p]:whitespace-pre-wrap [&_p]:text-fg",
         "[&_strong]:font-semibold [&_strong]:text-fg",
-        "[&_a]:text-brand [&_a]:underline [&_a]:decoration-border [&_a]:underline-offset-4 [&_a]:transition-colors hover:[&_a]:text-fg",
+        "[&_a]:text-brand [&_a]:transition-colors hover:[&_a]:text-fg",
         "[&_ul]:m-0 [&_ul]:mt-4 [&_ul]:flex [&_ul]:list-disc [&_ul]:flex-col [&_ul]:gap-2 [&_ul]:pl-6",
         "[&_ol]:m-0 [&_ol]:mt-4 [&_ol]:flex [&_ol]:list-decimal [&_ol]:flex-col [&_ol]:gap-2 [&_ol]:pl-6",
         "[&_li]:type-body-lg [&_li]:leading-8 [&_li]:text-fg",

@@ -557,16 +557,16 @@ textarea:-webkit-autofill:focus {
     font-variant-ligatures: none;
   }
 
-  .code-block-shell [data-node-view-content],
-  .code-block-shell [data-node-view-content] *,
-  .code-block-shell .ProseMirror,
-  .code-block-shell .ProseMirror * {
-    font-family: var(--font-mono) !important;
-    font-size: inherit !important;
-    line-height: inherit !important;
-    letter-spacing: inherit !important;
-    font-weight: inherit !important;
-    font-style: normal !important;
+  .code-block-shell :is(
+    [data-node-view-content],
+    [data-node-view-content] *,
+    .ProseMirror,
+    .ProseMirror *
+  ) {
+    font: inherit;
+    letter-spacing: inherit;
+    font-style: normal;
+    color: inherit;
   }
 
   .code-block-shell [data-node-view-content] {
@@ -577,12 +577,8 @@ textarea:-webkit-autofill:focus {
     min-height: 22px;
   }
 
-  .editor-code-block-shell .ProseMirror,
-  .editor-code-block-shell .ProseMirror *,
-  .editor-code-block-shell [data-node-view-content],
-  .editor-code-block-shell [data-node-view-content] * {
+  .editor-code-block-shell {
     color: var(--color-code-block-fg);
-    font-style: normal !important;
   }
 
   /* ========================================================================
