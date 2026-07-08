@@ -11,11 +11,11 @@
 ## 목적과 범위
 
 비즈니스 문의(데모 요청, 요금제 상담, 기술 문의, 파트너십 등)를 수신하는 폼이다.
-제출 시 Slack 채널로 알림을 보내고, Salesforce와 DeskPie에 리드를 저장한다.
+제출 시 Slack 채널로 알림을 보내고, DeskPie에 리드를 저장한다.
 
 **범위에 포함:**
 - `POST /api/contact-us` 서버 처리
-- UTM attribution 쿠키 수집 및 Salesforce 전달
+- UTM attribution 쿠키 수집 및 DeskPie 전달 payload 반영
 - 성공/실패 UI (다국어)
 
 **범위 제외:**
@@ -34,7 +34,7 @@
   → ContactForm (Client Component)
       → readUtmCookie()로 attribution 쿠키 읽기
       → POST /api/contact-us
-          → MX 검증 → XSS 필터링 → Salesforce (best-effort) + DeskPie (after hook, best-effort) → Slack (best-effort)
+          → MX 검증 → XSS 필터링 → DeskPie (after hook, best-effort) → Slack (best-effort)
           → { success: true } 또는 { success: false, errorMessage }
 ```
 
@@ -63,22 +63,23 @@
 
 ### 처리 순서
 
-1. **Slack 환경변수 검증** — 미설정 시 즉시 `500` 반환. Slack 없이는 운영 불가.
+1. **Slack 환경변수 확인** — 미설정 시 Slack 알림만 skip.
 2. **필수 필드 검증** — `firstName`, `lastName`, `email`, `company`, `departmentTitle` 중 누락 시 `400`.
 3. **MX 레코드 검증** — 이메일 도메인의 MX 레코드 확인. 실패 시 2초 딜레이 후 에러 반환 (brute-force 완화).
 4. **XSS 필터링** — 모든 문자열 필드에 적용.
-5. **DeskPie Lead API 전송** (best-effort) — 환경변수가 있으면 기존 Salesforce-style payload를 Next.js `after()`로 등록해 전송한다. 실패해도 흐름 중단 없이 에러 로그만 남김.
-6. **Salesforce 전송** (best-effort) — 실패해도 흐름 중단 없이 에러 로그만 남김.
-7. **Slack 알림** (best-effort) — 실패해도 흐름 중단 없이 에러 로그만 남김.
-8. **성공 응답** — `{ success: true }`.
+5. **DeskPie Lead API 전송** (best-effort) — 환경변수 2개가 모두 있으면 기존 Salesforce-style field name payload를 Next.js `after()`로 등록해 전송한다. 실패해도 흐름 중단 없이 에러 로그만 남김.
+6. **Slack 알림** (best-effort) — 실패해도 흐름 중단 없이 에러 로그만 남김.
+7. **성공 응답** — `{ success: true }`.
 
-### 설계 결정: 외부 리드 sink는 best-effort
+### 설계 결정: DeskPie sink는 best-effort
 
-Salesforce와 DeskPie는 리드 데이터를 보관하는 외부 sink다. 한쪽 실패가 다른 쪽이나 사용자 제출 성공을 막지 않는다. Slack 알림도 best-effort로 유지해 외부 연동 장애가 Contact Us 제출 UX를 깨지 않게 한다.
+DeskPie는 리드 데이터를 보관하는 외부 sink다. DeskPie 장애가 Contact Us 제출 UX를 깨지 않게 한다. Slack 알림도 best-effort로 유지한다.
 
-### Salesforce 필드 매핑
+### DeskPie 전달 field 매핑
 
-| 요청 필드 | Salesforce 필드 | 비고 |
+DeskPie API가 corp 기존 payload 호환을 위해 Salesforce-style field name을 수용한다.
+
+| 요청 필드 | 전달 필드 | 비고 |
 |-----------|----------------|------|
 | `firstName` | `FirstName` | |
 | `lastName` | `LastName` | |
@@ -102,8 +103,8 @@ Salesforce와 DeskPie는 리드 데이터를 보관하는 외부 sink다. 한쪽
 | MX 레코드 없음 | 200 | `{ success: false, errorCode: "invalid_email", errorMessage: "Please enter a valid email address." }` |
 | Slack 환경변수 미설정 | 200 | Slack 알림 skip, `{ success: true }` |
 | Slack 실패 | 200 | 에러 로그만 남기고 `{ success: true }` |
-| Salesforce/DeskPie 환경변수 미설정 | 200 | 해당 연동 skip, `{ success: true }` |
-| Salesforce/DeskPie 실패 | 200 | 에러 로그만 남기고 `{ success: true }` |
+| DeskPie 환경변수 미설정 | 200 | `DESKPIE_LEAD_API_ENDPOINT`, `DESKPIE_LEAD_API_KEY` 중 하나라도 없으면 DeskPie 연동 skip, `{ success: true }` |
+| DeskPie 실패 | 200 | 에러 로그만 남기고 `{ success: true }` |
 | 성공 | 200 | `{ success: true }` |
 
 ---
@@ -114,11 +115,10 @@ Salesforce와 DeskPie는 리드 데이터를 보관하는 외부 sink다. 한쪽
 |------|-----------|--------------|
 | `SLACK_BOT_OAUTH_TOKEN` | 선택 | Slack 알림 skip |
 | `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | 선택 | Slack 알림 skip |
-| `SALESFORCE_ENDPOINT` | 선택 | Salesforce 단계 skip |
 | `DESKPIE_LEAD_API_ENDPOINT` | 선택 | DeskPie 단계 skip |
 | `DESKPIE_LEAD_API_KEY` | 선택 | DeskPie 단계 skip |
 
-Community License 폼과 동일한 변수를 공유한다.
+Contact Us는 Salesforce를 직접 호출하지 않는다.
 
 ---
 
@@ -151,5 +151,5 @@ handleSubmit()
 | 파일 | 범위 |
 |------|------|
 | `src/features/utm/utm.test.ts` | UTM 순수함수 + `readUtmCookie` 유닛 테스트 |
-| `src/app/api/contact-us/route.test.ts` | API Route 통합 테스트 (Slack/Salesforce mock) |
+| `src/app/api/contact-us/route.test.ts` | API Route 통합 테스트 (Slack/DeskPie mock) |
 | `src/components/pages/contact/ContactForm.test.tsx` | ContactForm 컴포넌트 렌더링·제출·상태 테스트 |

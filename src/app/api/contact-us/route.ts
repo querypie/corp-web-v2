@@ -128,7 +128,7 @@ export async function POST(request: Request) {
     });
   }
 
-  // 4. XSS 필터링 + Salesforce 필드 빌드
+  // 4. XSS 필터링 + DeskPie 전달 payload 빌드
   const requestBody: Record<string, unknown> = {
     FirstName: filterXSS(firstName),
     LastName: filterXSS(lastName),
@@ -160,37 +160,7 @@ export async function POST(request: Request) {
 
   after(() => sendToDeskPieLead({ requestBody, processType: "LEAD_MS" }));
 
-  // 6. Salesforce POST (best-effort)
-  if (process.env.SALESFORCE_ENDPOINT) {
-    try {
-      const sfResult = await fetch(process.env.SALESFORCE_ENDPOINT, {
-        method: "POST",
-        headers: { "content-type": "application/json", charset: "utf-8" },
-        body: JSON.stringify({ requestBody, processType: "LEAD_MS" }),
-      });
-
-      try {
-        const json = (await sfResult.json()) as { recordUUID?: string };
-        if (!json.recordUUID) {
-          console.error("[contact-us] salesforce: no recordUUID in response");
-        } else {
-          console.info(`[contact-us] salesforce: success recordUUID=${json.recordUUID}`);
-        }
-      } catch {
-        console.error("[contact-us] salesforce: JSON parse error");
-      }
-
-      if (!sfResult.ok) {
-        console.error(`[contact-us] salesforce: HTTP ${sfResult.status}`);
-      }
-    } catch (error) {
-      console.error("[contact-us] salesforce: request error", error);
-    }
-  } else {
-    console.warn("[contact-us] salesforce: skipped (env not set)");
-  }
-
-  // 7. Slack 알림 (best-effort)
+  // 6. Slack 알림 (best-effort)
   try {
     await sendToSlack(requestBody);
   } catch (error) {
