@@ -62,6 +62,24 @@ Admin 진입점: `/admin`
 - `en.html`, `ko.html`, `ja.html`: locale별 본문
 - `*.tiptap.json`: Admin editor 원본 데이터
 
+### 개인정보처리방침 구조
+
+```text
+src/content/legal/privacy-policy/
+├── en/
+│   ├── 2026-06-01.md
+│   └── ...
+└── ko/
+    ├── 2026-06-01.md
+    └── ...
+```
+
+- 파일명: 적용일 기준 `YYYY-MM-DD.md`
+- 추가 경로: `src/content/legal/privacy-policy/{en|ko}/YYYY-MM-DD.md`
+- 최신 파일이 `/[locale]/privacy-policy`에 표시됩니다.
+- 버전 URL: `/[locale]/privacy-policy/YYYY-MM-DD`
+- `ja`는 `en` 파일을 fallback으로 사용합니다.
+
 ---
 
 ## 라우팅 / 다국어
