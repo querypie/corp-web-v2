@@ -12,8 +12,17 @@ vi.mock("@slack/web-api", () => {
   return { WebClient };
 });
 
+vi.mock("next/server", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("next/server")>();
+  return {
+    ...actual,
+    after: (callback: () => void | Promise<void>) => {
+      void callback();
+    },
+  };
+});
+
 import dns from "dns";
-import { WebClient } from "@slack/web-api";
 import { POST } from "./route";
 
 function stubMxRecord(valid: boolean) {
@@ -50,6 +59,19 @@ const validBody = {
   marketingConsent: false,
   referrerURL: "https://www.querypie.com/ko/company/contact-us",
 };
+
+function mockFetchByUrl() {
+  return vi.spyOn(global, "fetch").mockImplementation(async (input) => {
+    const url = String(input);
+    if (url === "https://sf.example.com") {
+      return { ok: true, json: async () => ({ recordUUID: "abc-123" }) } as Response;
+    }
+    if (url === "https://api.deskpie.example/api/v1/public/leads") {
+      return { ok: true, json: async () => ({ leadId: "lead-123" }) } as Response;
+    }
+    throw new Error(`unexpected fetch ${url}`);
+  });
+}
 
 describe("POST /api/contact-us", () => {
   beforeEach(() => {
@@ -206,6 +228,77 @@ describe("POST /api/contact-us", () => {
 
       expect(body.success).toBe(true);
       expect(fetchSpy).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("DeskPie Lead API best-effort", () => {
+    it("DeskPie env가 있으면 기존 Salesforce-style payload를 after hook으로 전송한다", async () => {
+      vi.stubEnv("DESKPIE_LEAD_API_ENDPOINT", "https://api.deskpie.example/api/v1/public/leads");
+      vi.stubEnv("DESKPIE_LEAD_API_KEY", "deskpie-key");
+      const fetchSpy = mockFetchByUrl();
+
+      const res = await POST(makeRequest({ ...validBody, phoneNumber: "01012345678" }));
+
+      expect(res.status).toBe(200);
+      await vi.waitFor(() => {
+        expect(fetchSpy).toHaveBeenCalledWith(
+          "https://api.deskpie.example/api/v1/public/leads",
+          expect.objectContaining({ method: "POST" }),
+        );
+      });
+      const deskPieCall = fetchSpy.mock.calls.find(([url]) => url === "https://api.deskpie.example/api/v1/public/leads");
+      expect(deskPieCall?.[1]?.headers).toMatchObject({
+        "content-type": "application/json",
+        "X-API-KEY": "deskpie-key",
+      });
+      const sent = JSON.parse(deskPieCall?.[1]?.body as string);
+      expect(sent.processType).toBe("LEAD_MS");
+      expect(sent.requestBody.MobilePhone).toBe("01012345678");
+      expect(sent.requestBody.Objective__c).toBe("Request for Product Demo");
+      expect(sent.requestBody.Description).toContain("Product: AI Platform QueryPie AIP");
+      expect(sent.requestBody.Description).toContain("PlannedImplementationDate: Within 3 months");
+    });
+
+    it("DeskPie network 실패는 Contact Us 성공 응답을 막지 않는다", async () => {
+      vi.stubEnv("DESKPIE_LEAD_API_ENDPOINT", "https://api.deskpie.example/api/v1/public/leads");
+      vi.stubEnv("DESKPIE_LEAD_API_KEY", "deskpie-key");
+      vi.spyOn(global, "fetch").mockImplementation(async (input) => {
+        const url = String(input);
+        if (url === "https://sf.example.com") {
+          return { ok: true, json: async () => ({ recordUUID: "abc-123" }) } as Response;
+        }
+        if (url === "https://api.deskpie.example/api/v1/public/leads") {
+          throw new Error("DeskPie down");
+        }
+        throw new Error(`unexpected fetch ${url}`);
+      });
+
+      const res = await POST(makeRequest(validBody));
+      const body = await res.json();
+
+      expect(res.status).toBe(200);
+      expect(body.success).toBe(true);
+    });
+
+    it("DeskPie HTTP 실패도 Contact Us 성공 응답을 막지 않는다", async () => {
+      vi.stubEnv("DESKPIE_LEAD_API_ENDPOINT", "https://api.deskpie.example/api/v1/public/leads");
+      vi.stubEnv("DESKPIE_LEAD_API_KEY", "deskpie-key");
+      vi.spyOn(global, "fetch").mockImplementation(async (input) => {
+        const url = String(input);
+        if (url === "https://sf.example.com") {
+          return { ok: true, json: async () => ({ recordUUID: "abc-123" }) } as Response;
+        }
+        if (url === "https://api.deskpie.example/api/v1/public/leads") {
+          return { ok: false, status: 500, json: async () => ({}) } as Response;
+        }
+        throw new Error(`unexpected fetch ${url}`);
+      });
+
+      const res = await POST(makeRequest(validBody));
+      const body = await res.json();
+
+      expect(res.status).toBe(200);
+      expect(body.success).toBe(true);
     });
   });
 

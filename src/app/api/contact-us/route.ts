@@ -1,7 +1,7 @@
 import dns from "dns";
 import { filterXSS } from "xss";
 import { WebClient } from "@slack/web-api";
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { toSalesforceFields } from "@/features/utm/utm";
 
 type ContactUsBody = {
@@ -28,6 +28,37 @@ function hasValidMXRecord(domain: string): Promise<boolean> {
       resolve(addresses && addresses.length > 0);
     });
   });
+}
+
+type DeskPieLeadPayload = {
+  processType: string;
+  requestBody: Record<string, unknown>;
+};
+
+async function sendToDeskPieLead(payload: DeskPieLeadPayload): Promise<void> {
+  const endpoint = process.env.DESKPIE_LEAD_API_ENDPOINT;
+  const apiKey = process.env.DESKPIE_LEAD_API_KEY;
+
+  if (!endpoint || !apiKey) {
+    return;
+  }
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      console.error(`[contact-us] deskpie: HTTP ${response.status}`);
+    }
+  } catch (error) {
+    console.error("[contact-us] deskpie: request error", error);
+  }
 }
 
 async function sendToSlack(requestBody: Record<string, unknown>): Promise<void> {
@@ -126,6 +157,8 @@ export async function POST(request: Request) {
   if (utmAttribution) {
     Object.assign(requestBody, toSalesforceFields(utmAttribution));
   }
+
+  after(() => sendToDeskPieLead({ requestBody, processType: "LEAD_MS" }));
 
   // 6. Salesforce POST (best-effort)
   if (process.env.SALESFORCE_ENDPOINT) {
