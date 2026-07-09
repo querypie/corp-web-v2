@@ -5,7 +5,7 @@
 | 폼 | 라우트 | 제출 상태 | 외부 연동 |
 |----|--------|----------|---------|
 | [Community License 신청](#1-community-license-신청) | `/en/community-license`, `/en/querypie/license/community/apply` | ✅ 구현 완료 | 라이선스 발급 API, Slack |
-| [Contact Us](#2-contact-us) | `/en/company/contact-us` | ✅ 구현 완료 | Salesforce (best-effort), Slack (best-effort) |
+| [Contact Us](#2-contact-us) | `/en/company/contact-us` | ✅ 구현 완료 | DeskPie Lead API (best-effort), Slack (best-effort) |
 | [콘텐츠 PDF 언락 (Gating)](#3-콘텐츠-pdf-언락-gating) | `/en/whitepapers/[slug]` 등 콘텐츠 상세 | ✅ 구현 완료 | 로컬 JSON, Slack (best-effort) |
 
 ---
@@ -36,7 +36,7 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 라이선�
 
 > **상세 레퍼런스:** [`docs/reference/contact-us-api.md`](./contact-us-api.md)
 >
-> UTM attribution 설계, API 처리 순서, Salesforce 필드 매핑, 환경변수, UX 동작은 위 문서를 참조한다.
+> UTM attribution 설계, API 처리 순서, DeskPie 전달 field 매핑, 환경변수, UX 동작은 위 문서를 참조한다.
 
 ### API
 
@@ -44,9 +44,9 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 라이선�
 |------|------|
 | 엔드포인트 | `POST /api/contact-us` |
 | 주요 컴포넌트 | `src/components/pages/contact/ContactForm.tsx` |
-| 환경변수 | `SLACK_BOT_OAUTH_TOKEN`, `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` (선택), `SALESFORCE_ENDPOINT` (선택) |
+| 환경변수 | `SLACK_BOT_OAUTH_TOKEN`, `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES`, `DESKPIE_LEAD_API_ENDPOINT`, `DESKPIE_LEAD_API_KEY` (모두 선택) |
 | 성공 조건 | 입력 검증 통과 |
-| Salesforce | best-effort (실패해도 성공 응답 유지) |
+| DeskPie | best-effort (실패해도 성공 응답 유지) |
 
 ### 파일 구조
 

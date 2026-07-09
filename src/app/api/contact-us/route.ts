@@ -1,7 +1,7 @@
 import dns from "dns";
 import { filterXSS } from "xss";
 import { WebClient } from "@slack/web-api";
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { toSalesforceFields } from "@/features/utm/utm";
 
 type ContactUsBody = {
@@ -28,6 +28,37 @@ function hasValidMXRecord(domain: string): Promise<boolean> {
       resolve(addresses && addresses.length > 0);
     });
   });
+}
+
+type DeskPieLeadPayload = {
+  processType: string;
+  requestBody: Record<string, unknown>;
+};
+
+async function sendToDeskPieLead(payload: DeskPieLeadPayload): Promise<void> {
+  const endpoint = process.env.DESKPIE_LEAD_API_ENDPOINT;
+  const apiKey = process.env.DESKPIE_LEAD_API_KEY;
+
+  if (!endpoint || !apiKey) {
+    return;
+  }
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "X-API-KEY": apiKey,
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!response.ok) {
+      console.error(`[contact-us] deskpie: HTTP ${response.status}`);
+    }
+  } catch (error) {
+    console.error("[contact-us] deskpie: request error", error);
+  }
 }
 
 async function sendToSlack(requestBody: Record<string, unknown>): Promise<void> {
@@ -97,7 +128,7 @@ export async function POST(request: Request) {
     });
   }
 
-  // 4. XSS 필터링 + Salesforce 필드 빌드
+  // 4. XSS 필터링 + DeskPie 전달 payload 빌드
   const requestBody: Record<string, unknown> = {
     FirstName: filterXSS(firstName),
     LastName: filterXSS(lastName),
@@ -127,37 +158,9 @@ export async function POST(request: Request) {
     Object.assign(requestBody, toSalesforceFields(utmAttribution));
   }
 
-  // 6. Salesforce POST (best-effort)
-  if (process.env.SALESFORCE_ENDPOINT) {
-    try {
-      const sfResult = await fetch(process.env.SALESFORCE_ENDPOINT, {
-        method: "POST",
-        headers: { "content-type": "application/json", charset: "utf-8" },
-        body: JSON.stringify({ requestBody, processType: "LEAD_MS" }),
-      });
+  after(() => sendToDeskPieLead({ requestBody, processType: "LEAD_MS" }));
 
-      try {
-        const json = (await sfResult.json()) as { recordUUID?: string };
-        if (!json.recordUUID) {
-          console.error("[contact-us] salesforce: no recordUUID in response");
-        } else {
-          console.info(`[contact-us] salesforce: success recordUUID=${json.recordUUID}`);
-        }
-      } catch {
-        console.error("[contact-us] salesforce: JSON parse error");
-      }
-
-      if (!sfResult.ok) {
-        console.error(`[contact-us] salesforce: HTTP ${sfResult.status}`);
-      }
-    } catch (error) {
-      console.error("[contact-us] salesforce: request error", error);
-    }
-  } else {
-    console.warn("[contact-us] salesforce: skipped (env not set)");
-  }
-
-  // 7. Slack 알림 (best-effort)
+  // 6. Slack 알림 (best-effort)
   try {
     await sendToSlack(requestBody);
   } catch (error) {
