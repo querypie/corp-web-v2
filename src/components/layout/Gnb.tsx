@@ -27,6 +27,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 const mobileMenuBackdropClassName = "bg-bg";
+const desktopPopoverCloseDelayMs = 160;
 
 function getLocaleHref(pathname: string, locale: string, search: string) {
   /* 현재 경로를 유지한 채 locale만 교체한다. 기본 locale(en)는 접두를 숨긴다. */
@@ -60,7 +61,35 @@ export default function Gnb({
   const [currentSearch, setCurrentSearch] = useState("");
   const pathname = usePathname();
   const mobileLocaleRef = useRef<HTMLDivElement | null>(null);
+  const desktopPopoverCloseTimeoutRef = useRef<number | null>(null);
   const homeHref = getLocalePath(locale as Locale, "/");
+
+  const clearDesktopPopoverCloseTimeout = () => {
+    if (desktopPopoverCloseTimeoutRef.current === null) {
+      return;
+    }
+
+    window.clearTimeout(desktopPopoverCloseTimeoutRef.current);
+    desktopPopoverCloseTimeoutRef.current = null;
+  };
+
+  const openDesktopPopover = (key: string) => {
+    clearDesktopPopoverCloseTimeout();
+    setDesktopPopoverOpen(key);
+  };
+
+  const closeDesktopPopover = () => {
+    clearDesktopPopoverCloseTimeout();
+    setDesktopPopoverOpen(null);
+  };
+
+  const scheduleDesktopPopoverClose = () => {
+    clearDesktopPopoverCloseTimeout();
+    desktopPopoverCloseTimeoutRef.current = window.setTimeout(() => {
+      desktopPopoverCloseTimeoutRef.current = null;
+      setDesktopPopoverOpen(null);
+    }, desktopPopoverCloseDelayMs);
+  };
 
   useEffect(() => {
     document.body.style.overflow = mobileMenuOpen ? "hidden" : "";
@@ -89,10 +118,17 @@ export default function Gnb({
   }, [mobileMenuOpen, mobileMenuVisible]);
 
   useEffect(() => {
+    clearDesktopPopoverCloseTimeout();
     setMobileMenuOpen(false);
     setMobileLocaleOpen(false);
     setDesktopPopoverOpen(null);
   }, [pathname]);
+
+  useEffect(() => {
+    return () => {
+      clearDesktopPopoverCloseTimeout();
+    };
+  }, []);
 
   useEffect(() => {
     if (!mobileLocaleOpen) {
@@ -154,8 +190,21 @@ export default function Gnb({
     setDesktopPopoverOpen(null);
     router.push(href, { scroll: false });
   };
-  const closeDesktopPopover = () => {
-    setDesktopPopoverOpen(null);
+  const handleDesktopSubItemMouseDown = (event: ReactMouseEvent<HTMLAnchorElement>, href: string) => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
+    }
+
+    event.preventDefault();
+    closeDesktopPopover();
+    router.push(href);
   };
   const handleDesktopPopoverBlur = (event: ReactFocusEvent<HTMLDivElement>) => {
     const nextTarget = event.relatedTarget;
@@ -210,15 +259,15 @@ export default function Gnb({
                       key={item}
                       className="relative"
                       onBlur={handleDesktopPopoverBlur}
-                      onMouseEnter={() => setDesktopPopoverOpen(item)}
-                      onMouseLeave={closeDesktopPopover}
+                      onMouseEnter={() => openDesktopPopover(item)}
+                      onMouseLeave={scheduleDesktopPopoverClose}
                     >
                       <button
                         className={cx(
                           "type-body-md transition-colors hover:text-mute",
                           isOpen ? "text-mute" : "text-fg",
                         )}
-                        onFocus={() => setDesktopPopoverOpen(item)}
+                        onFocus={() => openDesktopPopover(item)}
                         type="button"
                       >
                         {item}
@@ -226,11 +275,12 @@ export default function Gnb({
 
                       <div
                         className={cx(
-                          "absolute left-1/2 top-full -translate-x-1/2 pt-3 transition-all duration-200",
+                          "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3 transition-opacity duration-150",
                           isOpen
-                            ? "pointer-events-auto translate-y-0 opacity-100"
-                            : "pointer-events-none -translate-y-1 opacity-0",
+                            ? "pointer-events-auto opacity-100"
+                            : "pointer-events-none opacity-0",
                         )}
+                        onMouseEnter={() => openDesktopPopover(item)}
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getSolutionsSubItems(locale).map((sub) => (
@@ -239,6 +289,7 @@ export default function Gnb({
                               className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
                               onClick={closeDesktopPopover}
+                              onMouseDown={(event) => handleDesktopSubItemMouseDown(event, sub.href)}
                             >
                               {sub.label}
                             </Link>
@@ -257,15 +308,15 @@ export default function Gnb({
                       key={item}
                       className="relative"
                       onBlur={handleDesktopPopoverBlur}
-                      onMouseEnter={() => setDesktopPopoverOpen(item)}
-                      onMouseLeave={closeDesktopPopover}
+                      onMouseEnter={() => openDesktopPopover(item)}
+                      onMouseLeave={scheduleDesktopPopoverClose}
                     >
                       <button
                         className={cx(
                           "type-body-md transition-colors hover:text-mute",
                           isOpen ? "text-mute" : "text-fg",
                         )}
-                        onFocus={() => setDesktopPopoverOpen(item)}
+                        onFocus={() => openDesktopPopover(item)}
                         type="button"
                       >
                         {item}
@@ -273,11 +324,12 @@ export default function Gnb({
 
                       <div
                         className={cx(
-                          "absolute left-1/2 top-full -translate-x-1/2 pt-3 transition-all duration-200",
+                          "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3 transition-opacity duration-150",
                           isOpen
-                            ? "pointer-events-auto translate-y-0 opacity-100"
-                            : "pointer-events-none -translate-y-1 opacity-0",
+                            ? "pointer-events-auto opacity-100"
+                            : "pointer-events-none opacity-0",
                         )}
+                        onMouseEnter={() => openDesktopPopover(item)}
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getFeaturesSubItems(locale).map((sub) => (
@@ -286,6 +338,7 @@ export default function Gnb({
                               className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
                               onClick={closeDesktopPopover}
+                              onMouseDown={(event) => handleDesktopSubItemMouseDown(event, sub.href)}
                             >
                               {sub.label}
                             </Link>
@@ -304,15 +357,15 @@ export default function Gnb({
                       key={item}
                       className="relative"
                       onBlur={handleDesktopPopoverBlur}
-                      onMouseEnter={() => setDesktopPopoverOpen(item)}
-                      onMouseLeave={closeDesktopPopover}
+                      onMouseEnter={() => openDesktopPopover(item)}
+                      onMouseLeave={scheduleDesktopPopoverClose}
                     >
                       <button
                         className={cx(
                           "type-body-md transition-colors hover:text-mute",
                           isOpen ? "text-mute" : "text-fg",
                         )}
-                        onFocus={() => setDesktopPopoverOpen(item)}
+                        onFocus={() => openDesktopPopover(item)}
                         type="button"
                       >
                         {item}
@@ -320,11 +373,12 @@ export default function Gnb({
 
                       <div
                         className={cx(
-                          "absolute left-1/2 top-full -translate-x-1/2 pt-3 transition-all duration-200",
+                          "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3 transition-opacity duration-150",
                           isOpen
-                            ? "pointer-events-auto translate-y-0 opacity-100"
-                            : "pointer-events-none -translate-y-1 opacity-0",
+                            ? "pointer-events-auto opacity-100"
+                            : "pointer-events-none opacity-0",
                         )}
+                        onMouseEnter={() => openDesktopPopover(item)}
                       >
                         <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getCompanySubItems(locale).map((sub) => (
@@ -333,6 +387,7 @@ export default function Gnb({
                               className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
                               href={sub.href}
                               onClick={closeDesktopPopover}
+                              onMouseDown={(event) => handleDesktopSubItemMouseDown(event, sub.href)}
                             >
                               {sub.label}
                             </Link>
@@ -362,13 +417,13 @@ export default function Gnb({
             <div
               className="relative hidden md:inline-flex"
               onBlur={handleDesktopPopoverBlur}
-              onMouseEnter={() => setDesktopPopoverOpen("locale")}
-              onMouseLeave={closeDesktopPopover}
+              onMouseEnter={() => openDesktopPopover("locale")}
+              onMouseLeave={scheduleDesktopPopoverClose}
             >
               <button
                 aria-label="Change language"
                 className="group transition-colors duration-300"
-                onFocus={() => setDesktopPopoverOpen("locale")}
+                onFocus={() => openDesktopPopover("locale")}
                 type="button"
               >
                 {localeIcon ?? (
@@ -383,11 +438,12 @@ export default function Gnb({
 
               <div
                 className={cx(
-                  "absolute left-1/2 top-full -translate-x-1/2 pt-3 transition-all duration-200",
+                  "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3 transition-opacity duration-150",
                   isDesktopLocaleOpen
-                    ? "pointer-events-auto translate-y-0 opacity-100"
-                    : "pointer-events-none -translate-y-1 opacity-0",
+                    ? "pointer-events-auto opacity-100"
+                    : "pointer-events-none opacity-0",
                 )}
+                onMouseEnter={() => openDesktopPopover("locale")}
               >
                 <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                   {localeSubItems.map((sub) => (
