@@ -51,7 +51,7 @@ export default function ContentArticlePreview({
   const shouldRenderHero = Boolean(resolvedHeroImageSrc) && !hideHeroImage;
 
   return (
-    <div className="flex flex-col gap-[80px]">
+    <div className="flex flex-col gap-[40px] md:gap-[60px]">
       <div className="flex flex-col gap-[10px]">
         <h1 className="m-0 type-h1 leading-[42px] text-fg">{title}</h1>
         {writer ? <div className="type-body-md text-fg">{writer}</div> : null}
