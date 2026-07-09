@@ -42,7 +42,7 @@ export default function CommunityLicenseForm({ copy }: { copy: FormCopy }) {
     for (const [key, value] of data.entries()) {
       body[key] = value as string;
     }
-    body.HasOptedInMarketing__c = marketing;
+    body.marketingConsent = marketing;
 
     try {
       const response = await fetch("/api/community-license", {
@@ -109,7 +109,7 @@ export default function CommunityLicenseForm({ copy }: { copy: FormCopy }) {
       <ContactCheckboxRow
         checked={marketing}
         label={copy.marketingLabel}
-        name="HasOptedInMarketing__c"
+        name="marketingConsent"
         onChange={setMarketing}
       />
 

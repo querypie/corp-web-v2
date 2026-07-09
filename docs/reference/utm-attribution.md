@@ -1,12 +1,12 @@
 # UTM Attribution 레퍼런스
 
-방문자의 유입 경로를 추적해 리드 캡처 폼 제출 시 외부 lead payload에 함께 전달하는 시스템.
+방문자의 유입 경로를 추적해 리드 캡처 폼 제출 시 외부 lead payload 또는 Slack 알림 payload에 함께 포함하는 시스템.
 
 ---
 
 ## 목적
 
-폼을 제출한 방문자가 어떤 채널·캠페인을 통해 유입됐는지를 lead 데이터에 기록한다. 이를 통해 마케팅 채널별 전환 성과를 측정할 수 있다.
+폼을 제출한 방문자가 어떤 채널·캠페인을 통해 유입됐는지를 lead 데이터와 Slack 알림 payload에 포함한다. 이를 통해 문의 확인 시 유입 맥락을 함께 볼 수 있다.
 
 ---
 
@@ -45,18 +45,39 @@
 
 ---
 
-## Lead payload 필드 매핑
+## 서버 payload 매핑
 
-폼 제출 시 `readUtmCookie()`로 쿠키를 읽어 API 요청 본문에 포함한다. 서버에서 `toSalesforceFields()`로 변환한다. 함수명은 legacy지만 현재 Contact Us에서는 DeskPie가 수용하는 Salesforce-style field name payload에 merge한다.
+폼 제출 시 클라이언트가 `readUtmCookie()`로 쿠키를 읽어 API 요청 본문에 포함한다. 서버는 폼 목적에 맞는 payload 필드로 변환한다.
 
-| UTM 값 | 전달 필드 |
-|--------|----------------|
+| 폼 | 변환 함수 | payload 필드 |
+|----|----------|----------------|
+| Contact Us | `buildLeadUtmFields()` | `pi__utm_source__c`, `pi__utm_medium__c`, `pi__utm_campaign__c`, `pi__utm_term__c`, `pi__utm_content__c`, `pi__first_touch_url__c` |
+| 콘텐츠 PDF 언락/다운로드 | `buildUtmSlackFields()` | `UTM Source`, `UTM Medium`, `UTM Campaign`, `UTM Term`, `UTM Content`, `UTM First Landing URL`, `UTM Last Landing URL` |
+
+Contact Us는 DeskPie가 수용하는 legacy-compatible field name을 사용하며, Slack 알림도 같은 payload를 표시한다.
+
+Contact Us payload key:
+
+| UTM 값 | 필드 |
+|--------|------|
 | `recent` 마지막 `source` | `pi__utm_source__c` |
 | `recent` 마지막 `medium` | `pi__utm_medium__c` |
 | `recent` 마지막 `campaign` | `pi__utm_campaign__c` |
 | `recent` 마지막 `content` | `pi__utm_content__c` |
 | `recent` 마지막 `term` | `pi__utm_term__c` |
 | `first.landing` | `pi__first_touch_url__c` |
+
+콘텐츠 PDF 언락/다운로드 Slack payload key:
+
+| UTM 값 | 필드 |
+|--------|------|
+| `recent` 마지막 `source` | `UTM Source` |
+| `recent` 마지막 `medium` | `UTM Medium` |
+| `recent` 마지막 `campaign` | `UTM Campaign` |
+| `recent` 마지막 `content` | `UTM Content` |
+| `recent` 마지막 `term` | `UTM Term` |
+| `first.landing` | `UTM First Landing URL` |
+| `recent` 마지막 `landing` | `UTM Last Landing URL` |
 
 ---
 
@@ -68,4 +89,4 @@
 | Community License | ❌ 미적용 |
 | 콘텐츠 PDF 언락 | ✅ 적용 완료 (Slack payload에 포함) |
 
-Community License 폼에 UTM을 적용하려면 `ContactForm.tsx`의 패턴을 참조한다 — `readUtmCookie()`로 쿠키를 읽어 API 요청에 포함하고, 서버에서 `toSalesforceFields()`로 변환해 외부 lead payload에 merge한다.
+Community License 폼에 UTM을 적용하려면 `ContactForm.tsx`의 패턴을 참조한다. `readUtmCookie()`로 쿠키를 읽어 API 요청에 포함하고, 서버에서 목적에 맞는 payload로 변환해 merge한다.

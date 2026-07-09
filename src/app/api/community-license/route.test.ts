@@ -205,11 +205,11 @@ describe("POST /api/community-license", () => {
   });
 
   describe("마케팅 동의", () => {
-    it("HasOptedInMarketing__c 값은 Slack 표시 항목에서 제외된다", async () => {
-      await POST(makeRequest({ ...validBody, HasOptedInMarketing__c: true }));
+    it("marketingConsent 값은 Slack 표시 항목에서 제외된다", async () => {
+      await POST(makeRequest({ ...validBody, marketingConsent: true }));
 
       const text = slackPostMessage.mock.calls[0][0].blocks[0].text.text as string;
-      expect(text).not.toContain("HasOptedInMarketing__c");
+      expect(text).not.toContain("Marketing Consent");
     });
   });
 });

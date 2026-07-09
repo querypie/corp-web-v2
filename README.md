@@ -119,6 +119,6 @@ SEO 메타데이터와 OG 이미지는 `src/features/seo`에서 관리합니다.
 |------|------|
 | [Vercel 배포](docs/reference/vercel-deployment.md) | GitHub Actions / Vercel 배포 구조 |
 | [Lead Capture Forms](docs/reference/lead-capture-forms.md) | Contact Us, Community License, 콘텐츠 게이팅 폼 흐름 |
-| [Contact Us API](docs/reference/contact-us-api.md) | Contact Us 폼 API 처리, Slack/Salesforce 연동, UTM 전달 |
+| [Contact Us API](docs/reference/contact-us-api.md) | Contact Us 폼 API 처리, Slack/DeskPie 연동, UTM 전달 |
 | [Community License](docs/reference/community-license.md) | Community License 신청·발급 API와 외부 연동 |
 | [UTM Attribution](docs/reference/utm-attribution.md) | UTM 쿠키 저장과 리드폼 전달 흐름 |

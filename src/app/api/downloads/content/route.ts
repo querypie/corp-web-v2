@@ -18,6 +18,7 @@ import {
   isPublishedContentAccessible,
   type ManagedContentSection,
 } from "@/features/content/data";
+import { getLeadFormSlackChannel } from "@/features/slack/lead-form-channel";
 import { buildUtmSlackFields } from "@/features/utm/utm";
 
 type DownloadLeadPayload = {
@@ -125,12 +126,12 @@ function getLeadNotificationSource(section: ManagedContentSection | undefined, c
 
 function buildSlackNotificationBody(formData: Record<string, unknown>) {
   const requestUri =
-    typeof formData.Referrer_URL__c === "string" && formData.Referrer_URL__c
-      ? formData.Referrer_URL__c
+    typeof formData["Referrer URL"] === "string" && formData["Referrer URL"]
+      ? formData["Referrer URL"]
       : "-";
 
   const visibleEntries = Object.entries(formData)
-    .filter(([key]) => !key.startsWith("Has") && !key.startsWith("Referrer"))
+    .filter(([key]) => key !== "Marketing Consent" && key !== "Referrer URL")
     .map(([key, value]) => `• *${key}*: ${value || "-"}`);
 
   visibleEntries.push(`• *RequestURI*: ${requestUri}`);
@@ -151,15 +152,15 @@ function buildLeadNotificationPayload(
   const referrerUrl = payload.referrerURL ?? payload.referrerUrl ?? request.headers.get("referer") ?? "";
   const phoneNumber = getStringField(form, "phoneNumber");
   const requestBody: Record<string, unknown> = {
-    FirstName: filterXSS(getStringField(form, "firstName")),
-    LastName: filterXSS(getStringField(form, "lastName")),
+    "First Name": filterXSS(getStringField(form, "firstName")),
+    "Last Name": filterXSS(getStringField(form, "lastName")),
     Email: filterXSS(getStringField(form, "email")),
     Company: filterXSS(getStringField(form, "company")) || "None",
     Title: filterXSS(getStringField(form, "departmentTitle")),
-    MobilePhone: filterXSS(phoneNumber),
-    Objective__c: filterXSS(getStringField(form, "inquiryType")),
-    HasOptedInMarketing__c: getBooleanField(form, "marketingConsent"),
-    Referrer_URL__c: filterXSS(referrerUrl),
+    "Mobile Phone": filterXSS(phoneNumber),
+    "Inquiry Type": filterXSS(getStringField(form, "inquiryType")),
+    "Marketing Consent": getBooleanField(form, "marketingConsent"),
+    "Referrer URL": filterXSS(referrerUrl),
   };
 
   const descriptionParts = [
@@ -197,7 +198,7 @@ async function sendLeadNotificationToSlack(
   from?: string,
 ) {
   const token = process.env.SLACK_BOT_OAUTH_TOKEN;
-  const channel = process.env.SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES;
+  const channel = getLeadFormSlackChannel();
 
   if (!token || !channel) {
     return;

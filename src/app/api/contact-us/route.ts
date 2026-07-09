@@ -2,7 +2,8 @@ import dns from "dns";
 import { filterXSS } from "xss";
 import { WebClient } from "@slack/web-api";
 import { after, NextResponse } from "next/server";
-import { toSalesforceFields } from "@/features/utm/utm";
+import { getLeadFormSlackChannel } from "@/features/slack/lead-form-channel";
+import { buildLeadUtmFields } from "@/features/utm/utm";
 
 type ContactUsBody = {
   firstName?: string;
@@ -63,7 +64,7 @@ async function sendToDeskPieLead(payload: DeskPieLeadPayload): Promise<void> {
 
 async function sendToSlack(requestBody: Record<string, unknown>): Promise<void> {
   const token = process.env.SLACK_BOT_OAUTH_TOKEN;
-  const channel = process.env.SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES;
+  const channel = getLeadFormSlackChannel();
 
   if (!token || !channel) {
     return;
@@ -155,7 +156,7 @@ export async function POST(request: Request) {
 
   // 5. UTM 필드 merge
   if (utmAttribution) {
-    Object.assign(requestBody, toSalesforceFields(utmAttribution));
+    Object.assign(requestBody, buildLeadUtmFields(utmAttribution));
   }
 
   after(() => sendToDeskPieLead({ requestBody, processType: "LEAD_MS" }));
