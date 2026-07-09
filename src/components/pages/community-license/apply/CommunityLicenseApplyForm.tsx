@@ -64,7 +64,7 @@ export default function CommunityLicenseApplyForm(copy: CommunityLicenseApplyFor
 
     const formData = new FormData(event.currentTarget);
     const body: Record<string, string | boolean> = {
-      HasOptedInMarketing__c: marketing,
+      marketingConsent: marketing,
     };
 
     for (const [key, value] of formData.entries()) {
@@ -141,7 +141,7 @@ export default function CommunityLicenseApplyForm(copy: CommunityLicenseApplyFor
         <ContactCheckboxRow
           checked={marketing}
           label={copy.marketingLabel}
-          name="HasOptedInMarketing__c"
+          name="marketingConsent"
           onChange={setMarketing}
         />
       </div>

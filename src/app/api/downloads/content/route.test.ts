@@ -279,7 +279,7 @@ describe("POST /api/downloads/content", () => {
       expect(slackPayload.blocks[0].text.text).toContain("New Gating Form To Unlock Document Received(whitepapers)");
       expect(slackPayload.blocks[0].text.text).toContain("GatedContentKey: whitepapers:doc");
       expect(slackPayload.blocks[0].text.text).toContain("Product: AI Platform QueryPie AIP");
-      expect(slackPayload.blocks[0].text.text).toContain("MobilePhone");
+      expect(slackPayload.blocks[0].text.text).toContain("Mobile Phone");
       expect(slackPayload.blocks[0].text.text).toContain("UTM Source");
       expect(slackPayload.blocks[0].text.text).toContain("newsletter");
       expect(slackPayload.blocks[0].text.text).toContain("UTM Last Landing URL");

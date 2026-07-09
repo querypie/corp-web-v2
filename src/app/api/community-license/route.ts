@@ -3,6 +3,7 @@ import { filterXSS } from "xss";
 import { WebClient } from "@slack/web-api";
 import { NextResponse } from "next/server";
 import { issueLicense } from "@/features/community-license/license-service";
+import { getLeadFormSlackChannel } from "@/features/slack/lead-form-channel";
 
 type ApplyBody = {
   FirstName?: string;
@@ -11,7 +12,7 @@ type ApplyBody = {
   Company?: string;
   Title?: string;
   Website?: string;
-  HasOptedInMarketing__c?: boolean;
+  marketingConsent?: boolean;
 };
 
 function hasValidMXRecord(domain: string): Promise<boolean> {
@@ -26,7 +27,7 @@ function hasValidMXRecord(domain: string): Promise<boolean> {
 async function sendToSlack(formData: Record<string, unknown>): Promise<void> {
   try {
     const token = process.env.SLACK_BOT_OAUTH_TOKEN;
-    const channel = process.env.SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES;
+    const channel = getLeadFormSlackChannel();
 
     if (!token || !channel) {
       return;
@@ -36,12 +37,12 @@ async function sendToSlack(formData: Record<string, unknown>): Promise<void> {
     const isProduction = process.env.VERCEL_TARGET_ENV === "production";
     const environmentTag = isProduction ? "" : "[TEST] ";
     const requestUri =
-      typeof formData.Referrer_URL__c === "string" && formData.Referrer_URL__c
-        ? formData.Referrer_URL__c
+      typeof formData["Referrer URL"] === "string" && formData["Referrer URL"]
+        ? formData["Referrer URL"]
         : "-";
 
     const visibleEntries = Object.entries(formData)
-      .filter(([key]) => !key.startsWith("Has") && !key.startsWith("Referrer"))
+      .filter(([key]) => key !== "Marketing Consent" && key !== "Referrer URL")
       .map(([key, value]) => `• *${key}*: ${value || "-"}`);
 
     visibleEntries.push(`• *RequestURI*: ${requestUri}`);
@@ -61,7 +62,7 @@ async function sendToSlack(formData: Record<string, unknown>): Promise<void> {
 
 export async function POST(request: Request) {
   const body = (await request.json()) as ApplyBody;
-  const { FirstName, LastName, Email, Company, Title, Website, HasOptedInMarketing__c } = body;
+  const { FirstName, LastName, Email, Company, Title, Website, marketingConsent } = body;
 
   // 1. 필수 필드 검증
   if (!FirstName || !LastName || !Email || !Company) {
@@ -83,12 +84,12 @@ export async function POST(request: Request) {
 
   // XSS 필터링 및 requestBody 구성
   const requestBody: Record<string, unknown> = {
-    FirstName: filterXSS(FirstName),
-    LastName: filterXSS(LastName),
+    "First Name": filterXSS(FirstName),
+    "Last Name": filterXSS(LastName),
     Email: filterXSS(Email),
     Company: filterXSS(Company) || "None",
-    HasOptedInMarketing__c: HasOptedInMarketing__c ?? false,
-    Referrer_URL__c: request.headers.get("referer") ?? request.referrer ?? "",
+    "Marketing Consent": marketingConsent ?? false,
+    "Referrer URL": request.headers.get("referer") ?? request.referrer ?? "",
   };
 
   if (Title) requestBody.Title = filterXSS(Title);
