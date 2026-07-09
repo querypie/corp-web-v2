@@ -7,8 +7,10 @@ import LanguageSuggestionBanner from "@/components/site/LanguageSuggestionBanner
 import JapanLocalSiteBanner from "@/components/site/JapanLocalSiteBanner";
 import Footer from "@/components/layout/Footer";
 import Gnb from "@/components/layout/Gnb";
+import GoogleAnalytics from "@/components/site/GoogleAnalytics";
 import UtmCapture from "@/components/site/UtmCapture";
 import CookieConsentBanner from "@/components/site/CookieConsentBanner";
+import { GOOGLE_ANALYTICS_ID } from "@/features/analytics/google";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -38,6 +40,7 @@ export default async function LocaleLayout({
         <LanguageSuggestionBanner currentLocale={locale as Locale} />
         <Gnb actionLabel={shellCopy.navActionLabel} items={shellCopy.navItems} locale={locale} />
         <UtmCapture />
+        <GoogleAnalytics measurementId={GOOGLE_ANALYTICS_ID} />
       </Suspense>
       <main className={`flex-1 ${pageTopPaddingClassName} text-fg`}>
         {children}
