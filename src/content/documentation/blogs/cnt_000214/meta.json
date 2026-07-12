@@ -1,0 +1,58 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2026-07-12",
+  "downloadCoverImageSrc": "/news/isoiec42001.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "iso-iec-42001-getting-started",
+  "imageSrc": "/news/isoiec42001.webp",
+  "relatedIds": [
+    "iso-42001-certification-announcement"
+  ],
+  "section": "documentation",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000214",
+  "summary": {
+    "en": "A practical starting guide for ISO/IEC 42001 certification, covering the standard's perspective, scope definition, and stakeholder identification before building an AI management system.",
+    "ko": "ISO/IEC 42001 인증 준비를 시작하는 담당자를 위해 표준의 관점, 적용 범위 정의, 이해관계자 식별 등 가장 먼저 점검해야 할 실무 포인트를 정리합니다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "ISO/IEC 42001 — Where Do I Even Start? What Comes First?",
+    "ko": "ISO/IEC 42001, 어디서부터 시작해야 하지?",
+    "ja": ""
+  },
+  "visibleLocales": [
+    "en",
+    "ko"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000214/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000214/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000214/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000214/ko.tiptap.json"
+    }
+  }
+}
