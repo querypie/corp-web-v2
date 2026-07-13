@@ -3592,6 +3592,7 @@ function SkillsScreen() {
 
 type AipAppItem = {
   description: string;
+  href: string;
   gradient: string;
   iconUrl: string;
   id: string;
@@ -3603,6 +3604,7 @@ const aipAppItems: AipAppItem[] = [
   {
     id: "lingo",
     name: "Lingo",
+    href: "https://lingo.querypie.com/",
     gradient: "linear-gradient(135deg, #0a2e2e 0%, #135e5e 50%, #14b8a6 100%)",
     iconUrl: "/assets/aip-apps/icon-lingo.svg",
     tagline: "Speak freely. Understand instantly.",
@@ -3612,6 +3614,7 @@ const aipAppItems: AipAppItem[] = [
   {
     id: "notepie",
     name: "NotePie",
+    href: "https://notepie.app.querypie.com/",
     gradient: "linear-gradient(135deg, #0d1b3e 0%, #1a3a70 50%, #2c74e1 100%)",
     iconUrl: "/assets/aip-apps/icon-notepie.svg",
     tagline: "Turn any source into knowledge.",
@@ -3683,9 +3686,8 @@ function AppsFeaturedBanner() {
             "absolute inset-0 flex items-center transition-opacity duration-500",
             slideIndex === index ? "pointer-events-auto z-10 opacity-100" : "pointer-events-none z-0 opacity-0",
           ].join(" ")}
-          href="#"
+          href={app.href}
           key={app.id}
-          onClick={(event) => event.preventDefault()}
           rel="noopener noreferrer"
           style={{ background: app.gradient }}
           target="_blank"
@@ -3965,9 +3967,8 @@ function AppsScreen() {
           {aipAppItems.map((app) => (
             <a
               className="group flex flex-col gap-4 rounded-[10px] border border-[#ffffff1a] bg-[#ffffff0d] p-5 text-left no-underline transition-colors hover:border-[#fafafa]/30"
-              href="#"
+              href={app.href}
               key={app.id}
-              onClick={(event) => event.preventDefault()}
               rel="noopener noreferrer"
               target="_blank"
             >
