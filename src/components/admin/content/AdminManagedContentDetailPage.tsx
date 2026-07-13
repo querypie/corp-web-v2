@@ -80,6 +80,9 @@ const PDF_BUTTON_OPTIONS: Array<{ label: string; value: DownloadPdfMode }> = [
   { label: "단일 PDF", value: "single" },
   { label: "언어별 PDF", value: "localized" },
 ];
+const TOOLBAR_CONTENT_TYPE_PICKER_CLASS_NAME = "w-[132px] min-w-[124px] shrink-0";
+const TOOLBAR_GATING_PICKER_CLASS_NAME = "w-[128px] min-w-[124px] shrink-0";
+const TOOLBAR_PDF_PICKER_CLASS_NAME = "w-[144px] min-w-[132px] shrink-0";
 const TRANSLATION_REQUEST_TIMEOUT_MS = 900000;
 
 const NEWS_FORMAT_LABELS: Record<NewsFormat, Record<Locale, string>> = {
@@ -1956,7 +1959,7 @@ export default function AdminManagedContentDetailPage({
       <header className="sticky top-[60px] z-30 -mx-5 overflow-x-auto bg-bg px-5 py-3 md:top-0 md:-mx-10 md:px-10" ref={stickyToolbarRef}>
         <div className="flex w-full min-w-0 flex-nowrap items-center justify-between gap-3">
           <div className="flex min-w-0 flex-1 flex-nowrap items-center gap-3">
-            <div className="w-[180px] min-w-[140px] shrink">
+            <div className={TOOLBAR_CONTENT_TYPE_PICKER_CLASS_NAME}>
               <Select
                 onChange={(event) => handleContentTypeChange(event.target.value as ManagedContentType)}
                 options={[
@@ -1967,7 +1970,7 @@ export default function AdminManagedContentDetailPage({
               />
             </div>
             {supportsLeadGate ? (
-              <div className="w-[180px] min-w-[140px] shrink">
+              <div className={TOOLBAR_GATING_PICKER_CLASS_NAME}>
                 <Select
                   onChange={(event) => updateForm("gatingLevel", event.target.value as ContentGatingLevel)}
                   options={CONTENT_GATING_OPTIONS}
@@ -1976,7 +1979,7 @@ export default function AdminManagedContentDetailPage({
               </div>
             ) : null}
             {supportsLeadGate ? (
-              <div className="w-[180px] min-w-[140px] shrink">
+              <div className={TOOLBAR_PDF_PICKER_CLASS_NAME}>
                 <Select
                   onChange={(event) => handlePdfButtonModeChange(event.target.value as DownloadPdfMode)}
                   options={PDF_BUTTON_OPTIONS}
