@@ -1,6 +1,7 @@
 import type { Locale } from "./i18n";
 
 export type PlanCard = {
+  billingLabel?: string;
   ctaLabel: string;
   description: string;
   features: PlanFeature[];
@@ -50,6 +51,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Starter",
           description: "Build your first AI workflow",
           priceLabel: "$20/mo",
+          billingLabel: "Billed annually at $240",
           href: "https://app.querypie.com/",
           ctaLabel: "Subscribe",
           features: [
@@ -60,12 +62,17 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             { type: "divider" },
             "Audit logs (max 30 days)",
             "Login IP ACL",
+            { value: "SSO", tone: "danger" },
+            { value: "DLP", tone: "danger" },
+            { value: "Real-time Customer Support", tone: "danger" },
+            { value: "Advanced AI Security Features", tone: "danger" },
           ],
         },
         {
           name: "Team",
           description: "Collaborate and innovate together",
           priceLabel: "$500/mo",
+          billingLabel: "Billed annually at $6,000",
           href: "https://app.querypie.com/",
           ctaLabel: "Subscribe",
           features: [
@@ -76,6 +83,10 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             { type: "divider" },
             "Audit logs (max 90 days)",
             "Login IP ACL",
+            { value: "SSO", tone: "danger" },
+            { value: "DLP", tone: "danger" },
+            { value: "Real-time Customer Support", tone: "danger" },
+            { value: "Advanced AI Security Features", tone: "danger" },
           ],
         },
         {
@@ -545,6 +556,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Starter",
           description: "첫 AI 워크플로우를 구축하세요",
           priceLabel: "$20/월",
+          billingLabel: "연간 청구 금액 $240",
           href: "https://app.querypie.com/",
           ctaLabel: "구독하기",
           features: [
@@ -555,12 +567,17 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             { type: "divider" },
             "감사 로그 (최대 30일)",
             "로그인 IP ACL",
+            { value: "SSO", tone: "danger" },
+            { value: "DLP", tone: "danger" },
+            { value: "실시간 고객 지원", tone: "danger" },
+            { value: "고급 AI 보안 기능", tone: "danger" },
           ],
         },
         {
           name: "Team",
           description: "함께 협업하고 혁신하세요",
           priceLabel: "$500/월",
+          billingLabel: "연간 청구 금액 $6,000",
           href: "https://app.querypie.com/",
           ctaLabel: "구독하기",
           features: [
@@ -571,6 +588,10 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             { type: "divider" },
             "감사 로그 (최대 90일)",
             "로그인 IP ACL",
+            { value: "SSO", tone: "danger" },
+            { value: "DLP", tone: "danger" },
+            { value: "실시간 고객 지원", tone: "danger" },
+            { value: "고급 AI 보안 기능", tone: "danger" },
           ],
         },
         {
@@ -823,6 +844,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Starter",
           description: "はじめての利用に最適",
           priceLabel: "$20/月",
+          billingLabel: "年間請求額 $240",
           href: "/documentation",
           ctaLabel: "利用を開始する",
           features: [
@@ -833,12 +855,17 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             { type: "divider" },
             "操作履歴の記録\n(最大30日間)",
             "IPアドレス制限 (ACL)",
+            { value: "シングルサインオン (SSO)", tone: "danger" },
+            { value: "データ漏洩防止 (DLP)", tone: "danger" },
+            { value: "リアルタイムカスタマーサポート", tone: "danger" },
+            { value: "高度な AI セキュリティ機能", tone: "danger" },
           ],
         },
         {
           name: "Team",
           description: "チームでの協働作業に最適",
           priceLabel: "$500/月",
+          billingLabel: "年間請求額 $6,000",
           href: "/documentation",
           ctaLabel: "利用を開始する",
           features: [
@@ -849,6 +876,10 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             { type: "divider" },
             "操作履歴の記録\n(最大90日間)",
             "IPアドレス制限 (ACL)",
+            { value: "シングルサインオン (SSO)", tone: "danger" },
+            { value: "データ漏洩防止 (DLP)", tone: "danger" },
+            { value: "リアルタイムカスタマーサポート", tone: "danger" },
+            { value: "高度な AI セキュリティ機能", tone: "danger" },
           ],
         },
         {
