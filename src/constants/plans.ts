@@ -1,6 +1,7 @@
 import type { Locale } from "./i18n";
 
 export type PlanCard = {
+  billingLabel?: string;
   ctaLabel: string;
   description: string;
   features: PlanFeature[];
@@ -50,6 +51,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Starter",
           description: "Build your first AI workflow",
           priceLabel: "$20/mo",
+          billingLabel: "Billed annually at $240",
           href: "https://app.querypie.com/",
           ctaLabel: "Subscribe",
           features: [
@@ -60,12 +62,17 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             { type: "divider" },
             "Audit logs (max 30 days)",
             "Login IP ACL",
+            { value: "SSO", tone: "danger" },
+            { value: "DLP", tone: "danger" },
+            { value: "Real-time Customer Support", tone: "danger" },
+            { value: "Advanced AI Security Features", tone: "danger" },
           ],
         },
         {
           name: "Team",
           description: "Collaborate and innovate together",
           priceLabel: "$500/mo",
+          billingLabel: "Billed annually at $6,000",
           href: "https://app.querypie.com/",
           ctaLabel: "Subscribe",
           features: [
@@ -76,6 +83,10 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             { type: "divider" },
             "Audit logs (max 90 days)",
             "Login IP ACL",
+            { value: "SSO", tone: "danger" },
+            { value: "DLP", tone: "danger" },
+            { value: "Real-time Customer Support", tone: "danger" },
+            { value: "Advanced AI Security Features", tone: "danger" },
           ],
         },
         {
