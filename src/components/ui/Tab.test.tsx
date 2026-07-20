@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import Tab from "@/components/ui/Tab";
+import Tab, { TabLink } from "@/components/ui/Tab";
 
 describe("Tab", () => {
   it("기본 텍스트로 렌더링된다", () => {
@@ -42,5 +42,18 @@ describe("Tab", () => {
   it("type 기본값은 button이다", () => {
     render(<Tab>Click</Tab>);
     expect(screen.getByRole("button")).toHaveAttribute("type", "button");
+  });
+
+  it("link tab reuses the button tab visual classes", () => {
+    render(
+      <>
+        <Tab className="shrink-0" state="off">Button tab</Tab>
+        <TabLink className="shrink-0" href="/plans/acp" state="off">Link tab</TabLink>
+      </>,
+    );
+
+    expect(screen.getByRole("link", { name: "Link tab" })).toHaveClass(
+      ...screen.getByRole("button", { name: "Button tab" }).className.split(" "),
+    );
   });
 });

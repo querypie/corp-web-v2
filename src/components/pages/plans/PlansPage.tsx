@@ -2,9 +2,8 @@
 
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { useMemo } from "react";
-import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
-import Tab from "@/components/ui/Tab";
+import { TabLink } from "@/components/ui/Tab";
 import TabGroup from "@/components/ui/TabGroup";
 import Cta from "@/components/sections/Cta";
 import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PlanFeature, type PricingProduct } from "@/constants/plans";
@@ -26,6 +25,14 @@ function withLocaleHref(locale: string, href: string) {
   // 플랜 CTA가 현재 언어 경로를 유지하도록 locale prefix 보정
   if (href.startsWith("http")) return href;
   return getLocalePath(locale as Locale, href.startsWith("/") ? href : `/${href}`);
+}
+
+function getProductHref(
+  locale: Locale,
+  productKey: "aip" | "acp",
+  productHrefOverrides?: Partial<Record<"aip" | "acp", string>>,
+) {
+  return getLocalePath(locale, productHrefOverrides?.[productKey] ?? `/plans/${productKey}`);
 }
 
 function getExternalLinkProps(href: string) {
@@ -275,7 +282,6 @@ export default function PlansPage({
 }: PlansPageProps) {
   const pricingProducts = pricingProductsByLocale[locale];
   const pageCopy = getPlansPageCopy(locale);
-  const router = useRouter();
   const activeProductKey: keyof typeof pricingProducts =
     productKey in pricingProducts ? productKey : "aip";
   const activeProduct = useMemo(
@@ -293,18 +299,6 @@ export default function PlansPage({
   const activeProductCaption =
     activeProductKey === "aip" ? "AI Platform" : "Access Control Platform";
 
-  function handleProductChange(nextKey: keyof typeof pricingProducts) {
-    if (nextKey === activeProductKey) return;
-
-    const overrideHref = productHrefOverrides?.[nextKey];
-    if (overrideHref) {
-      router.push(getLocalePath(locale, overrideHref), { scroll: false });
-      return;
-    }
-
-    router.push(getLocalePath(locale, `/plans/${nextKey}`), { scroll: false });
-  }
-
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
       <section className="flex w-full justify-center">
@@ -316,14 +310,16 @@ export default function PlansPage({
             <TabGroup>
               {(Object.entries(pricingProducts) as Array<[keyof typeof pricingProducts, PricingProduct]>).map(
                 ([key, product]) => (
-                  <Tab
+                  <TabLink
+                    aria-current={activeProductKey === key ? "page" : undefined}
+                    href={getProductHref(locale, key, productHrefOverrides)}
                     key={key}
                     className="shrink-0"
-                    onClick={() => handleProductChange(key)}
+                    scroll={false}
                     state={activeProductKey === key ? "on" : "off"}
                   >
                     {product.tabLabel}
-                  </Tab>
+                  </TabLink>
                 ),
               )}
             </TabGroup>
