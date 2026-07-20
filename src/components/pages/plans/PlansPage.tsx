@@ -2,7 +2,7 @@
 
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { useMemo } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Button from "@/components/ui/Button";
 import Tab from "@/components/ui/Tab";
 import TabGroup from "@/components/ui/TabGroup";
@@ -12,6 +12,7 @@ import { getLocalePath, type Locale } from "@/constants/i18n";
 import { getPlansPageCopy } from "@/copy/contentPages";
 
 type PlansPageProps = {
+  enterpriseOnly?: boolean;
   productKey?: "aip" | "acp";
   locale: Locale;
 };
@@ -110,6 +111,73 @@ function PlanSummaryCard({
   );
 }
 
+function EnterpriseSummaryCard({
+  billingLabel,
+  ctaLabel,
+  description,
+  features,
+  href,
+  name,
+  priceLabel,
+  tone = "secondary",
+}: PlanCard) {
+  return (
+    <article className="grid w-full gap-8 rounded-box bg-bg-content p-[30px] md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:items-start">
+      <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-1">
+          <h2 className={cx("m-0 type-h2", tone === "primary" ? "text-brand" : "text-fg")}>{name}</h2>
+          <p className="m-0 type-body-md text-mute">{description}</p>
+        </div>
+
+        <div className="flex flex-col gap-1">
+          <p className="m-0 type-h2 text-fg">{priceLabel}</p>
+          {billingLabel ? <p className="m-0 type-body-lg text-fg">{billingLabel}</p> : null}
+        </div>
+
+        <a className="inline-flex" href={href} {...getExternalLinkProps(href)}>
+          <Button
+            arrow
+            className="min-w-[126px]"
+            style="full"
+            variant="primary"
+          >
+            {ctaLabel}
+          </Button>
+        </a>
+      </div>
+
+      <ul className="m-0 grid list-none gap-x-8 gap-y-2 p-0 sm:grid-cols-2">
+        {features.map((feature, index) => {
+          if (isPlanFeatureDivider(feature)) {
+            return (
+              <li
+                aria-hidden="true"
+                className="col-span-full my-2 h-px w-full bg-border"
+                key={`divider-${index}`}
+              />
+            );
+          }
+
+          return (
+            <li
+              key={`${typeof feature === "string" ? feature : feature.value}-${index}`}
+              className="flex items-start gap-1.5 type-body-md text-fg"
+            >
+              <span className={cx(
+                "inline-flex w-4 shrink-0 justify-center",
+                typeof feature === "string" || feature.tone !== "danger" ? "text-success" : "text-destructive",
+              )}>
+                {typeof feature === "string" || feature.tone !== "danger" ? "✓" : "✕"}
+              </span>
+              <span>{typeof feature === "string" ? feature : feature.value}</span>
+            </li>
+          );
+        })}
+      </ul>
+    </article>
+  );
+}
+
 function getValueToneClass(tone?: ComparisonValue["tone"]) {
   if (tone === "success") return "text-success";
   if (tone === "danger") return "text-destructive";
@@ -199,23 +267,44 @@ function ComparisonTable({
 }
 
 export default function PlansPage({
+  enterpriseOnly = false,
   productKey = "aip",
   locale,
 }: PlansPageProps) {
   const pricingProducts = pricingProductsByLocale[locale];
   const pageCopy = getPlansPageCopy(locale);
   const router = useRouter();
+  const searchParams = useSearchParams();
   const activeProductKey: keyof typeof pricingProducts =
     productKey in pricingProducts ? productKey : "aip";
   const activeProduct = useMemo(
     () => pricingProducts[activeProductKey],
     [activeProductKey, pricingProducts],
   );
+  const planCards = useMemo(
+    () => (
+      enterpriseOnly
+        ? activeProduct.cards.filter((card) => card.name === "Enterprise")
+        : activeProduct.cards
+    ),
+    [activeProduct.cards, enterpriseOnly],
+  );
   const activeProductCaption =
     activeProductKey === "aip" ? "AI Platform" : "Access Control Platform";
 
   function handleProductChange(nextKey: keyof typeof pricingProducts) {
     if (nextKey === activeProductKey) return;
+
+    if (enterpriseOnly && nextKey === "acp") {
+      router.push(getLocalePath(locale, "/plans/acp?returnTo=aip-enterprise"), { scroll: false });
+      return;
+    }
+
+    if (searchParams.get("returnTo") === "aip-enterprise" && nextKey === "aip") {
+      router.push(getLocalePath(locale, "/plans/aip-enterprise"), { scroll: false });
+      return;
+    }
+
     router.push(getLocalePath(locale, `/plans/${nextKey}`), { scroll: false });
   }
 
@@ -247,17 +336,30 @@ export default function PlansPage({
 
           {/* 선택된 제품군에 맞는 카드/비교표 렌더링 */}
           <div className="flex flex-col items-center gap-[60px] md:gap-[80px]">
-            <div className="grid w-full gap-5 md:grid-cols-3">
-              {activeProduct.cards.map((plan, index) => (
-                <PlanSummaryCard
-                  key={`${activeProductKey}-${plan.name}`}
-                  {...plan}
-                  href={withLocaleHref(locale, plan.href)}
-                />
-              ))}
+            <div className={cx(
+              "grid w-full gap-5",
+              !enterpriseOnly && "md:grid-cols-3",
+            )}>
+              {planCards.map((plan) => {
+                const href = withLocaleHref(locale, plan.href);
+
+                return enterpriseOnly ? (
+                  <EnterpriseSummaryCard
+                    key={`${activeProductKey}-${plan.name}`}
+                    {...plan}
+                    href={href}
+                  />
+                ) : (
+                  <PlanSummaryCard
+                    key={`${activeProductKey}-${plan.name}`}
+                    {...plan}
+                    href={href}
+                  />
+                );
+              })}
             </div>
 
-            {activeProductKey === "aip" ? (
+            {activeProductKey === "aip" && !enterpriseOnly ? (
               <ComparisonTable
                 comparisonGroups={activeProduct.comparisonGroups}
                 plans={activeProduct.plans}
@@ -266,7 +368,7 @@ export default function PlansPage({
           </div>
         </div>
       </section>
-      <Cta locale={locale} />
+      {!enterpriseOnly ? <Cta locale={locale} /> : null}
     </div>
   );
 }
