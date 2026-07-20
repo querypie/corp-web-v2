@@ -34,7 +34,6 @@ export default async function AipEnterprisePlansRoute({ params }: AipEnterpriseP
     <PlansPage
       enterpriseOnly
       locale={locale as Locale}
-      productHrefOverrides={{ acp: "/plans/acp-enterprise" }}
       productKey="aip"
     />
   );
