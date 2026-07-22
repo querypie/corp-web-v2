@@ -180,6 +180,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "As an AI-based real-time interpretation service, it supports real-time subtitling and translation in various environments, including in-person meetings as well as Google Meet, Zoom, Teams, and more.",
             ],
+            excludeFromSearchSnippet: true,
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP workspace preview",
             videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
@@ -309,6 +310,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "AI 기반 실시간 통역 서비스로, 대면 회의는 물론 Google Meet, Zoom, Teams 등 다양한 환경에서 실시간 자막과 번역을 지원합니다.",
             ],
+            excludeFromSearchSnippet: true,
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP 워크스페이스 미리보기",
             videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
@@ -438,6 +440,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             body: [
               "AIベースのリアルタイム通訳サービスとして、対面会議に加え、Google Meet、Zoom、Teamsなど多様な環境でリアルタイム字幕と翻訳をサポートします。",
             ],
+            excludeFromSearchSnippet: true,
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
             imageAlt: "AIP ワークスペースプレビュー",
             videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
