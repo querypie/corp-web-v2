@@ -16,6 +16,7 @@ type FeatureItem = {
   imageAlt: string;
   imageClassName?: string;
   imageSrc?: string;
+  excludeFromSearchSnippet?: boolean;
   mediaClassName?: string;
   reverse?: boolean;
   title: string[];
@@ -274,6 +275,7 @@ export default function FeatureMediaList({
                 shouldReverse && "lg:flex-row-reverse",
               )}
               data-reveal
+              data-nosnippet={item.excludeFromSearchSnippet || undefined}
               style={{ transitionDelay: `${index * 90}ms` }}
             >
               <FeatureCopy

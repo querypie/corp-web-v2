@@ -21,6 +21,7 @@ type FeatureItem = {
   iconSrc?: string;
   imageAlt: string;
   imageSrc?: string;
+  excludeFromSearchSnippet?: boolean;
   reverse?: boolean;
   title: string[];
   videoSrc?: string;
