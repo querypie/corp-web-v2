@@ -183,6 +183,8 @@ function FeatureVideoPlayer({
   src: string;
   title: string;
 }) {
+  const previewSrc = `${src}#t=0.001`;
+
   return (
     <video
       aria-label={title}
@@ -190,9 +192,9 @@ function FeatureVideoPlayer({
       loop
       muted
       playsInline
-      preload="auto"
+      preload="metadata"
       ref={setVideoRef}
-      src={src}
+      src={previewSrc}
     />
   );
 }

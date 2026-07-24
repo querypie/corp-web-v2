@@ -407,9 +407,9 @@ export function getAboutUsPageCopy(locale: Locale): AboutUsPageCopy {
       journeyTitle: "Our Journey",
       locations: [
         {
-          addressLines: ["3003 North 1st Street, Suite 221, San Jose, CA 95134"],
-          city: "San Francisco, CA",
-          country: "San Francisco, USA",
+          addressLines: ["2525 West 8th Street, Suite 300, Los Angeles, CA 90057"],
+          city: "Los Angeles, CA",
+          country: "Los Angeles, USA",
           iconSrc: "/assets/pages/company/about-us/icon-us.svg",
         },
         {
@@ -476,9 +476,9 @@ export function getAboutUsPageCopy(locale: Locale): AboutUsPageCopy {
       journeyTitle: "연혁",
       locations: [
         {
-          addressLines: ["3003 North 1st Street, Suite 221, San Jose, CA 95134"],
-          city: "San Francisco, CA",
-          country: "San Francisco, USA",
+          addressLines: ["2525 West 8th Street, Suite 300, Los Angeles, CA 90057"],
+          city: "Los Angeles, CA",
+          country: "Los Angeles, USA",
           iconSrc: "/assets/pages/company/about-us/icon-us.svg",
         },
         {
@@ -548,9 +548,9 @@ export function getAboutUsPageCopy(locale: Locale): AboutUsPageCopy {
       journeyTitle: "歩み",
       locations: [
         {
-          addressLines: ["3003 North 1st Street, Suite 221, San Jose, CA 95134"],
-          city: "San Francisco, CA",
-          country: "San Francisco, USA",
+          addressLines: ["2525 West 8th Street, Suite 300, Los Angeles, CA 90057"],
+          city: "Los Angeles, CA",
+          country: "Los Angeles, USA",
           iconSrc: "/assets/pages/company/about-us/icon-us.svg",
         },
         {

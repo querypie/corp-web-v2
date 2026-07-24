@@ -62,7 +62,7 @@ export default function AiPackVideo({ title }: AiPackVideoProps) {
       playsInline
       preload="metadata"
       ref={videoRef}
-      src="/assets/pages/home/features/Home-ACP.mp4"
+      src="/assets/pages/home/features/Home-ACP.mp4#t=0.001"
     />
   );
 }
