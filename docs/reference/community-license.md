@@ -40,7 +40,7 @@ Contact Us 폼 UI 기반 신청 경로: `/en/querypie/license/community/apply`, 
 1. **필수 필드 검증** — `FirstName`, `LastName`, `Email`, `Company` 누락 시 `400` 반환
 2. **MX 레코드 검증** — 이메일 도메인의 MX 레코드가 없으면 `{success: false, errorMessage: "Please enter a valid email address."}` 반환 (2초 딜레이 포함)
 3. **XSS 필터링** — `xss` 패키지의 `filterXSS`로 모든 텍스트 필드 처리; `Company`가 빈 값이면 `"None"` 대입
-4. **라이선스 발급** (`issueLicense`) — `DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT`, `PUBLIC_API_KEY` 미설정 시 skip; 설정된 경우 API 호출 실패 시 전체 흐름 중단
+4. **라이선스 발급** (`issueLicense`) — `DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT`, `PUBLIC_API_KEY` 미설정 시 skip; 설정된 경우 `201` 응답은 `licenseId`, `customerCompanyId`를 반환하며 validation/business 실패는 non-2xx로 전체 흐름 중단
 5. **Slack 알림** — 실패해도 전체 흐름에 영향 없음 (에러 swallow)
 6. **응답** — `{success: true}`
 

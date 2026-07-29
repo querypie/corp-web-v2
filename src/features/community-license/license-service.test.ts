@@ -60,7 +60,8 @@ describe("issueLicense", () => {
     it("API 성공 시 {status:'success'}를 반환한다", async () => {
       vi.spyOn(global, "fetch").mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ status: true, errorMessage: "" }),
+        status: 201,
+        json: async () => ({ licenseId: "license-id", customerCompanyId: "company-id" }),
       } as Response);
 
       const result = await issueLicense("TestOrg", "test@example.com");
@@ -70,7 +71,8 @@ describe("issueLicense", () => {
     it("올바른 엔드포인트와 헤더로 요청한다", async () => {
       const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ status: true, errorMessage: "" }),
+        status: 201,
+        json: async () => ({ licenseId: "license-id", customerCompanyId: "company-id" }),
       } as Response);
 
       await issueLicense("TestOrg", "test@example.com");

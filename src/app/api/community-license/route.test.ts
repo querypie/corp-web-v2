@@ -192,7 +192,8 @@ describe("POST /api/community-license", () => {
     it("issueLicense 성공 후 Slack 메시지를 보내고 success:true를 반환한다", async () => {
       const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ status: true, errorMessage: "" }),
+        status: 201,
+        json: async () => ({ licenseId: "license-id", customerCompanyId: "company-id" }),
       } as Response);
 
       const res = await POST(makeRequest(validBody));
