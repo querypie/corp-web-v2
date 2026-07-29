@@ -34,7 +34,7 @@ const copy = {
         title: ["Forward Deployed", "Engineer (FDE) Service"],
         description: [
           "Complete AI transformation from strategy consulting to custom AI agent development through our expert team.",
-          "Accelerate your AI journey with dedicated Forward Deployed Engineers (FDE) who deliver tailored, production-ready solutions for your business.",
+          "Accelerate your AI journey with dedicated Forward Deployed Engineers (FDEs) who deliver tailored, production-ready solutions for your business.",
         ],
       },
     ],
@@ -65,7 +65,7 @@ const copy = {
         title: ["Forward Deployed", "Engineer (FDE) Service"],
         description: [
           "전략 컨설팅부터 맞춤형 AI 에이전트 개발까지 전문가 팀을 통해 완전한 AI 전환을 지원합니다.",
-          "전담 Forward Deployed Engineers가 비즈니스에 맞춘 프로덕션 준비 솔루션을 제공해 AI 여정을 가속합니다.",
+          "전담 Forward Deployed Engineer가 비즈니스에 맞춘 프로덕션 준비 솔루션을 제공해 AI 여정을 가속합니다.",
         ],
       },
     ],
@@ -96,7 +96,7 @@ const copy = {
         title: ["Forward Deployed", "Engineer (FDE) Service"],
         description: [
           "戦略コンサルティングからカスタムAIエージェント開発まで、専門チームがAI変革を包括的に支援します。",
-          "専任のForward Deployed Engineersが、事業に合わせた本番対応ソリューションを提供し、AI活用を加速します。",
+          "専任のForward Deployed Engineerが、事業に合わせた本番対応ソリューションを提供し、AI活用を加速します。",
         ],
       },
     ],

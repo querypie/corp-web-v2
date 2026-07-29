@@ -107,7 +107,7 @@ export default function AipJASolutionContent({ locale }: Props) {
               <p className="m-0 max-w-[720px] type-body-lg leading-relaxed text-fg">
                 経済的でエンタープライズ対応のソリューションにより、企業のAI変革を実現する
                 プラットフォームです。使用量ベースのLLMデプロイと包括的なMCPゲートウェイを
-                備え、Forward Deployed Engineers (FDE) がカスタムAIエージェントを通じて
+                備え、Forward Deployed Engineer (FDE)がカスタムAIエージェントを通じて
                 変革を完遂します。
               </p>
             </header>

@@ -106,7 +106,7 @@ export default function AipENSolutionContent({ locale }: Props) {
               <p className="m-0 max-w-[720px] type-body-lg leading-relaxed text-fg">
                 The platform that delivers enterprise AI transformation through economical,
                 enterprise-ready solutions—featuring usage-based LLM deployment and comprehensive MCP
-                gateway. Complete transformation through Forward Deployed Engineers (FDE) delivering
+                gateway. Complete transformation through Forward Deployed Engineers (FDEs) delivering
                 tailored AI agents.
               </p>
             </header>
