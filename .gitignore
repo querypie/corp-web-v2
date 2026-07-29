@@ -22,20 +22,17 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# env files
-.env
-.env*.local
+# environment
+.env*
+!.env.example
 
 # typescript
-tsconfig.tsbuildinfo
 *.tsbuildinfo
-.worktrees/
-.vercel/README.txt
-.vercel/output/
 
-# Claude Code local settings
-.claude/settings.json
-AGENTS.md
+# local tooling
+.worktrees/
+.vercel/
+.claude/settings.local.json
 
 # 콘텐츠 다운로드 리드 런타임 데이터
 src/content/state/

@@ -106,7 +106,7 @@ export default function AipKOSolutionContent({ locale }: Props) {
               <p className="m-0 max-w-[720px] type-body-lg leading-relaxed text-fg">
                 경제적이고 엔터프라이즈에 적합한 솔루션으로 기업의 AI 전환을 구현하는
                 플랫폼입니다. 사용량 기반 LLM 배포와 포괄적인 MCP 게이트웨이를 제공하며,
-                Forward Deployed Engineers (FDE)가 맞춤형 AI 에이전트를 통해 완전한 전환을
+                Forward Deployed Engineer (FDE)가 맞춤형 AI 에이전트를 통해 완전한 전환을
                 지원합니다.
               </p>
             </header>

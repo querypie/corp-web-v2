@@ -149,7 +149,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
               label: "Learn more",
             },
             body: [
-              "It is an economical AI innovation platform optimized for enterprise environments. It supports usage-based LLM deployment and MCP gateways, and Field Deployment Engineers (FDEs) provide customized AI agents to facilitate complete innovation.",
+              "It is an economical AI innovation platform optimized for enterprise environments. It supports usage-based LLM deployment and MCP gateways, and Forward Deployed Engineers (FDEs) provide customized AI agents to facilitate complete innovation.",
             ],
             iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP workspace preview",
@@ -279,7 +279,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
               label: "자세히 보기",
             },
             body: [
-              "엔터프라이즈 환경에 최적화된 경제적인 AI 혁신 플랫폼입니다. 사용량 기반 LLM 배포와 MCP 게이트웨이를 지원하며, Field Deployment Engineer(FDE)가 맞춤형 AI Agent를 제공해 완전한 혁신을 돕습니다.",
+              "엔터프라이즈 환경에 최적화된 경제적인 AI 혁신 플랫폼입니다. 사용량 기반 LLM 배포와 MCP 게이트웨이를 지원하며, Forward Deployed Engineer (FDE)가 맞춤형 AI Agent를 제공해 완전한 혁신을 돕습니다.",
             ],
             iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP 워크스페이스 미리보기",
@@ -409,7 +409,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
               label: "詳しく見る",
             },
             body: [
-              "エンタープライズ環境に最適化された、経済的なAIイノベーションプラットフォームです。使用量ベースのLLMデプロイとMCP Gatewayをサポートし、Field Deployment Engineer(FDE)がカスタムAI Agentを提供して包括的な革新を支援します。",
+              "エンタープライズ環境に最適化された、経済的なAIイノベーションプラットフォームです。使用量ベースのLLMデプロイとMCP Gatewayをサポートし、Forward Deployed Engineer (FDE)がカスタムAI Agentを提供して包括的な革新を支援します。",
             ],
             iconSrc: "/assets/pages/home/features/icon-aip.png",
             imageAlt: "AIP ワークスペースプレビュー",

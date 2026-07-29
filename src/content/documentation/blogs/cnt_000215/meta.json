@@ -1,0 +1,61 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2026-07-23",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "what-is-forward-deployed-engineer-fde",
+  "imageSrc": "/documentation/blogs/fde.webp",
+  "relatedIds": [],
+  "section": "documentation",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000215",
+  "summary": {
+    "en": "This article explains the meaning, role, background of attention, required skills, and differences from IT consultants and SES of an FDE (Forward Deployed Engineer) in an easy-to-understand manner.",
+    "ko": "FDE(Forward Deployed Engineer)의 의미, 역할, 주목받는 배경, 필요한 스킬, IT 컨설턴트 및 SES와의 차이점을 알기 쉽게 해설합니다.",
+    "ja": "FDE（Forward Deployed Engineer）の意味、役割、注目される背景、必要なスキル、ITコンサルタントやSESとの違いをわかりやすく解説します。"
+  },
+  "title": {
+    "en": "What is an FDE (Forward Deployed Engineer)? Explaining the new engineer role gaining attention in the generative AI era",
+    "ko": "FDE(Forward Deployed Engineer)란? 생성 AI 시대에 주목받는 새로운 엔지니어 직무 해설",
+    "ja": "FDE（Forward Deployed Engineer）とは？生成AI時代に注目される新しいエンジニア職を解説"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000215/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000215/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000215/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000215/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000215/ja.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000215/ja.tiptap.json"
+    }
+  }
+}
