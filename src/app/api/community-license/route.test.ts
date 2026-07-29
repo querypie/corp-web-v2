@@ -170,8 +170,8 @@ describe("POST /api/community-license", () => {
 
   describe("issueLicense 연동", () => {
     beforeEach(() => {
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_ENDPOINT", "https://license.example.com");
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_KEY", "test-key");
+      vi.stubEnv("DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT", "https://license.example.com");
+      vi.stubEnv("PUBLIC_API_KEY", "test-key");
     });
 
     it("issueLicense API가 실패하면 success:false를 반환하고 Slack을 호출하지 않는다", async () => {

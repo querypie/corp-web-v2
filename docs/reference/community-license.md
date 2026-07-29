@@ -40,7 +40,7 @@ Contact Us 폼 UI 기반 신청 경로: `/en/querypie/license/community/apply`, 
 1. **필수 필드 검증** — `FirstName`, `LastName`, `Email`, `Company` 누락 시 `400` 반환
 2. **MX 레코드 검증** — 이메일 도메인의 MX 레코드가 없으면 `{success: false, errorMessage: "Please enter a valid email address."}` 반환 (2초 딜레이 포함)
 3. **XSS 필터링** — `xss` 패키지의 `filterXSS`로 모든 텍스트 필드 처리; `Company`가 빈 값이면 `"None"` 대입
-4. **라이선스 발급** (`issueLicense`) — `QUERYPIE_LICENSE_ISSUE_API_ENDPOINT`, `QUERYPIE_LICENSE_ISSUE_API_KEY` 미설정 시 skip; 설정된 경우 API 호출 실패 시 전체 흐름 중단
+4. **라이선스 발급** (`issueLicense`) — `DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT`, `PUBLIC_API_KEY` 미설정 시 skip; 설정된 경우 API 호출 실패 시 전체 흐름 중단
 5. **Slack 알림** — 실패해도 전체 흐름에 영향 없음 (에러 swallow)
 6. **응답** — `{success: true}`
 
@@ -50,8 +50,8 @@ Contact Us 폼 UI 기반 신청 경로: `/en/querypie/license/community/apply`, 
 
 | 변수 | 필수 | 설명 |
 |------|------|------|
-| `QUERYPIE_LICENSE_ISSUE_API_ENDPOINT` | 선택 | 라이선스 발급 API URL. 미설정 시 발급 단계 skip |
-| `QUERYPIE_LICENSE_ISSUE_API_KEY` | 선택 | 라이선스 발급 API 키. 미설정 시 발급 단계 skip |
+| `DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT` | 선택 | 라이선스 발급 API URL. 미설정 시 발급 단계 skip |
+| `PUBLIC_API_KEY` | 선택 | 라이선스 발급 API 키. 미설정 시 발급 단계 skip |
 | `SLACK_BOT_OAUTH_TOKEN` | 선택 | Slack Bot 토큰. 미설정 시 Slack 알림 skip |
 | `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | 선택 | Slack 채널 ID |
 | `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING` | 선택 | non-production 입력폼 알림 채널 ID |

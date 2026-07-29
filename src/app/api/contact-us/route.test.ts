@@ -62,7 +62,7 @@ const validBody = {
 
 function stubDeskPieEnv() {
   vi.stubEnv("DESKPIE_LEAD_API_ENDPOINT", "https://api.deskpie.example/api/v1/public/leads");
-  vi.stubEnv("DESKPIE_LEAD_API_KEY", "deskpie-key");
+  vi.stubEnv("PUBLIC_API_KEY", "deskpie-key");
 }
 
 function mockDeskPieFetch() {
@@ -240,7 +240,7 @@ describe("POST /api/contact-us", () => {
     });
 
     it("DeskPie API key만 있으면 DeskPie를 호출하지 않는다", async () => {
-      vi.stubEnv("DESKPIE_LEAD_API_KEY", "deskpie-key");
+      vi.stubEnv("PUBLIC_API_KEY", "deskpie-key");
       const fetchSpy = vi.spyOn(global, "fetch");
 
       const res = await POST(makeRequest(validBody));

@@ -38,7 +38,7 @@ type DeskPieLeadPayload = {
 
 async function sendToDeskPieLead(payload: DeskPieLeadPayload): Promise<void> {
   const endpoint = process.env.DESKPIE_LEAD_API_ENDPOINT;
-  const apiKey = process.env.DESKPIE_LEAD_API_KEY;
+  const apiKey = process.env.PUBLIC_API_KEY;
 
   if (!endpoint || !apiKey) {
     return;

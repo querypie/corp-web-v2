@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { issueLicense } from "./license-service";
 
-const ENDPOINT = "https://license.example.com/license/community";
+const ENDPOINT = "https://api.deskpie.example/api/v1/public/community-licenses";
 const API_KEY = "test-api-key";
 
 describe("issueLicense", () => {
@@ -20,13 +20,13 @@ describe("issueLicense", () => {
     });
 
     it("ENDPOINT만 없어도 skip을 반환한다", async () => {
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_KEY", API_KEY);
+      vi.stubEnv("PUBLIC_API_KEY", API_KEY);
       const result = await issueLicense("TestOrg", "test@example.com");
       expect(result).toEqual({ status: "skip" });
     });
 
     it("KEY만 없어도 skip을 반환한다", async () => {
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_ENDPOINT", ENDPOINT);
+      vi.stubEnv("DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT", ENDPOINT);
       const result = await issueLicense("TestOrg", "test@example.com");
       expect(result).toEqual({ status: "skip" });
     });
@@ -34,8 +34,8 @@ describe("issueLicense", () => {
 
   describe("필수 파라미터 검증", () => {
     beforeEach(() => {
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_ENDPOINT", ENDPOINT);
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_KEY", API_KEY);
+      vi.stubEnv("DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT", ENDPOINT);
+      vi.stubEnv("PUBLIC_API_KEY", API_KEY);
     });
 
     it("organization이 없으면 throw한다", async () => {
@@ -53,8 +53,8 @@ describe("issueLicense", () => {
 
   describe("API 호출", () => {
     beforeEach(() => {
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_ENDPOINT", ENDPOINT);
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_KEY", API_KEY);
+      vi.stubEnv("DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT", ENDPOINT);
+      vi.stubEnv("PUBLIC_API_KEY", API_KEY);
     });
 
     it("API 성공 시 {status:'success'}를 반환한다", async () => {
@@ -97,15 +97,16 @@ describe("issueLicense", () => {
       );
     });
 
-    it("응답 status가 false이면 errorMessage로 throw한다", async () => {
+    it("201 응답 body와 무관하게 성공한다", async () => {
       vi.spyOn(global, "fetch").mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ status: false, errorMessage: "License limit exceeded" }),
+        status: 201,
+        json: async () => ({ licenseId: "license-id", customerCompanyId: "company-id" }),
       } as Response);
 
-      await expect(issueLicense("TestOrg", "test@example.com")).rejects.toThrow(
-        "License limit exceeded",
-      );
+      await expect(issueLicense("TestOrg", "test@example.com")).resolves.toEqual({
+        status: "success",
+      });
     });
   });
 });
