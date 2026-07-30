@@ -26,30 +26,14 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 function pickRandomItems<T>(items: readonly T[], count: number): T[] {
-  const [firstItem, ...restItems] = items;
-
-  if (!firstItem || count <= 0) {
-    return [];
-  }
-
-  if (items.length <= count) {
-    return [...items];
-  }
-
-  const pinnedCount = 1;
-  const randomCount = count - pinnedCount;
-  const shuffledItems = [...restItems];
+  const shuffledItems = [...items];
 
   for (let index = shuffledItems.length - 1; index > 0; index -= 1) {
     const randomIndex = Math.floor(Math.random() * (index + 1));
     [shuffledItems[index], shuffledItems[randomIndex]] = [shuffledItems[randomIndex], shuffledItems[index]];
   }
 
-  return [firstItem, ...shuffledItems.slice(0, randomCount)];
-}
-
-function pickInitialItems<T>(items: readonly T[], count: number): T[] {
-  return items.slice(0, count);
+  return shuffledItems.slice(0, count);
 }
 
 function ResourceListCard({
@@ -88,7 +72,7 @@ export default function ResourceList({
   links,
   title,
 }: ResourceListProps) {
-  const [visibleItems, setVisibleItems] = useState(() => pickInitialItems(items, resourceListDisplayCount));
+  const [visibleItems, setVisibleItems] = useState(() => items.slice(0, resourceListDisplayCount));
 
   useEffect(() => {
     setVisibleItems(pickRandomItems(items, resourceListDisplayCount));
