@@ -4,6 +4,16 @@ import { legacyContentRedirects } from "./src/features/content/legacyRedirects";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      {
+        source: "/ja",
+        destination: "https://querypie.ai/",
+        permanent: true,
+      },
+      {
+        source: "/ja/:path*",
+        destination: "https://querypie.ai/",
+        permanent: true,
+      },
       ...legacyContentRedirects.map((redirect) => ({
         ...redirect,
         permanent: true,
