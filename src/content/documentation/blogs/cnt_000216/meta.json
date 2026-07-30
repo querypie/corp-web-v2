@@ -1,0 +1,58 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2026-07-31",
+  "downloadCoverImageSrc": "/news/isoiec42001.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "iso-iec-42001-ai-inventory-control-tower",
+  "imageSrc": "/news/isoiec42001.webp",
+  "relatedIds": [
+    "iso-iec-42001-getting-started"
+  ],
+  "section": "documentation",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000216",
+  "summary": {
+    "en": "This article introduces a practical approach to identifying AI assets, building an AI inventory, and evolving it into an AI Control Tower from the perspective of ISO/IEC 42001.",
+    "ko": "ISO/IEC 42001 관점에서 AI 자산을 식별하고 AI 인벤토리를 구축해 AI Control Tower로 발전시키는 실무 방법을 소개합니다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "[Part 2] ISO/IEC 42001 — Where Do I Even Start? What Comes First?",
+    "ko": "[2부] ISO/IEC 42001, 어디서부터 시작해야 하지?",
+    "ja": ""
+  },
+  "visibleLocales": [
+    "en",
+    "ko"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000216/ko.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000216/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/documentation/blogs/cnt_000216/en.html",
+      "jsonPath": "src/content/documentation/blogs/cnt_000216/en.tiptap.json"
+    }
+  }
+}
