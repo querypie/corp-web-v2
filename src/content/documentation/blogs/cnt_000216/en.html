@@ -1,0 +1,85 @@
+<p>In Part 1, we discussed the groundwork organizations should complete before beginning their ISO/IEC 42001 journey. This includes understanding how the standard views AI, defining the scope of the AI management system, and identifying relevant interested parties.</p>
+<p>So, where should the actual implementation begin?</p>
+<p>You could start by drafting an AI policy and management guidelines. You could also develop AI ethics guidelines or begin with AI risk and impact assessments.</p>
+<p>All of these are valid starting points. Ideally, an organization should begin in an area where it already has confidence, experience, and relevant materials.</p>
+<p>However, if you are unsure where to begin, I recommend starting by identifying the AI assets within your organization and building an AI inventory.</p>
+<h2>What Is an AI Inventory?</h2>
+<p>An AI inventory is a structured system of record used to identify the AI systems and use cases an organization develops, provides, purchases, or uses, and to manage their purpose, ownership, data, relationships, risks, and operational status.</p>
+<p>Put simply, it should answer the following question:</p>
+<blockquote>
+<p>What AI is operating within our organization, for what purpose, under whose responsibility, and using which data and models?</p>
+</blockquote>
+<p>The term “AI inventory” does not appear explicitly in ISO/IEC 42001. However, Annex A control A.4, “Resources for AI systems,” requires organizations to identify and document AI system components and assets, data resources, tool resources, system and computing resources, and human resources.</p>
+<p>Organizations need to understand which AI systems exist and how they are being used before they can define the management scope or determine which AI assets should undergo risk and impact assessments. In this sense, an AI inventory is a practical foundation for implementing ISO/IEC 42001.</p>
+<p>The following stages outline how an organization can manage and progressively expand its AI inventory.</p>
+<h2>Step 1: Identify the Organization’s AI Assets</h2>
+<p>The first question to answer is:</p>
+<blockquote>
+<p>What AI assets exist within our organization?</p>
+</blockquote>
+<p>The scope should not be limited to LLMs.</p>
+<ul>
+<li><strong>AI systems and use cases:</strong> customer support chatbots, document summarization, recommendation systems</li>
+<li><strong>AI models:</strong> LLMs, embedding models, internally developed or fine-tuned models</li>
+<li><strong>AI execution resources:</strong> agents, apps, chat interfaces, workflows, and automations</li>
+<li><strong>AI integration resources:</strong> MCP servers, tools, external APIs, and SaaS services</li>
+<li><strong>AI knowledge resources:</strong> prompts, knowledge bases, RAG pipelines, and vector databases</li>
+<li><strong>Data resources:</strong> training, validation, and production data, documents, and personal data</li>
+<li><strong>Operational resources:</strong> cloud infrastructure, databases, logs, and monitoring systems</li>
+<li><strong>Responsible parties:</strong> system owners, operators, and external providers</li>
+</ul>
+<p>As organizations build more agentic AI systems and AI workflows, they also create more API keys and secrets. This can leave credentials that are unauthorized, unmanaged, or no longer used but never revoked. These assets should also be identified. The inventory should not store the secret values themselves; it should record which systems use them, who manages them, and where they are securely stored.</p>
+<p>You do not need to discover every asset perfectly from the outset. Start with core AI systems or key products that directly affect customers, then expand the scope gradually.</p>
+<h2>Step 2: Structure Asset Relationships and Responsibilities</h2>
+<p>Once AI assets have been identified, the next step is to add management context and structure the relationships between them.</p>
+<p>Registering asset names alone does not provide enough information to understand how an AI system operates or what risks it creates. The same LLM may be used by several agents and services, while a single agent may access multiple data sources, MCP servers, and external APIs.</p>
+<p>An AI inventory should therefore capture each asset’s purpose, owner, operational status, data usage, external providers, and relationships with other AI assets.</p>
+<p>It should help answer questions such as:</p>
+<ul>
+<li>What business function does this AI asset support?</li>
+<li>Who owns and operates it?</li>
+<li>How is it connected to other agents, models, MCP servers, and tools?</li>
+<li>Is it currently in development, validation, production, or retirement?</li>
+</ul>
+<p>The purpose of an AI inventory is not to register as many assets as possible. Its real value lies in understanding <strong>the role each AI asset plays within the organization and how those assets are connected</strong>.</p>
+<h2>Step 3: Assess Risks and Impacts for Each Asset</h2>
+<p>Once AI assets and their relationships become visible, the scope of AI risk and impact assessments becomes more concrete.</p>
+<p>For example, tools provided by the same MCP server may carry very different risks. A tool that only reads information is not equivalent to one that creates, modifies, or deletes data. Likewise, an agent that uses only public documents should not be managed at the same level as an agent with access to a database containing personal data.</p>
+<p>Risks and impacts should be assessed based on the AI system’s purpose, users, models, data, permissions, external connections, and potential consequences. The AI inventory provides the foundation for those assessments.</p>
+<h2>Step 4: Determine the Appropriate Controls</h2>
+<p>After assessing risks and impacts, the organization should determine controls appropriate to the results.</p>
+<p>For example, a tool capable of modifying or deleting data in an external system may require least-privilege access, user approval, execution logging, or dual confirmation for critical actions.</p>
+<p>Not every AI system requires the same controls. Controls should be selected according to each system’s purpose, data, permissions, and level of impact.</p>
+<p>The purpose of AI governance is not to prevent AI use. It is to help the organization use AI responsibly with a clear understanding of the associated risks.</p>
+<h2>Ultimately, Expand into an AI Control Tower</h2><figure data-width="100%" style="width:100%;"><img src="/documentation/blogs/iso_iec_42001_blog.png" style="width:100%;"></figure>
+<p>An AI inventory is not a document that is completed once and then left unchanged.</p>
+<p>AI technology continues to evolve rapidly. Organizations introduce new models, build new agents and workflows, and connect additional MCP servers and external AI services. The data, permissions, and relationships of existing systems also continue to change.</p>
+<p>Organizations must therefore continuously discover new AI assets, update the inventory, and reassess risks and impacts when changes occur.</p>
+<p>An <strong>AI Control Tower</strong> is a management framework that brings these activities together and operates them continuously in one place.</p>
+<blockquote>
+<p>An AI Control Tower is an AI governance framework that provides an integrated view of the organization’s AI systems and related resources, manages asset relationships and accountability, and supports risk, impact, and control decisions.</p>
+</blockquote>
+<p>An AI Control Tower does not necessarily control or block every AI system directly. Its purpose is to provide integrated visibility across the organization’s AI environment and continuously answer questions such as:</p>
+<ul>
+<li>What AI exists within our organization?</li>
+<li>What is it connected to, and who is responsible for it?</li>
+<li>What risks and impacts does it create?</li>
+<li>Which controls are needed, and what should be improved first?</li>
+</ul>
+<p>The overall journey can be summarized as follows:</p>
+<blockquote>
+<p><strong>Identify → Inventory → Assess → Govern → AI Control Tower</strong></p>
+</blockquote>
+<p>An AI Control Tower is not a separate feature added at the final stage. It represents a mature operating model in which the organization repeatedly identifies assets, manages them through an inventory, assesses risks and impacts, and determines appropriate controls.</p>
+<p>No organization begins with a fully developed AI Control Tower. The practical approach is to identify critical AI assets, build an inventory within a manageable scope, and progressively connect it to assessment and governance processes.</p>
+<h2>Beyond AI Inventory: Building an AI Control Tower with QueryPie AIP</h2>
+<p>If an organization’s use of AI is still limited, it can begin with documents, spreadsheets, or an existing asset management system.</p>
+<p>However, as the number of AI assets grows and the relationships between cloud services, agents, MCP servers, workflows, and external systems become more complex, keeping the inventory current through manual work alone becomes increasingly difficult. As we have learned from operating information security management systems, the more assets an organization manages, the harder it becomes to maintain centralized visibility. Assets that fall outside that visibility can introduce new risks.</p>
+<p>QueryPie AIP supports the management framework needed to address this challenge. It can automatically discover AI-related resources through cloud APIs, while external AI SaaS services and other resources that cannot be discovered automatically can be registered and managed in the same place.</p>
+<p>The scope is not limited to LLMs. AI systems, agents, MCP servers and tools, workflows, knowledge resources, data, external APIs, and their relationships can all be managed through a unified inventory.</p>
+<p>Discovered AI assets can then be connected to risk and impact assessments. Based on the assessment results, QueryPie AIP can also provide guidance on controls the organization should consider, such as least privilege, user approval, and execution logging.</p>
+<p>This enables the organization’s AI management framework to evolve beyond a simple asset list into an AI Control Tower that provides a unified view of the AI environment.</p>
+<p>Are you unsure where to begin identifying AI assets, how to manage discovered assets and assess their risks, how to launch your organization’s AI transformation, how to build a safe and responsible AI environment, or how to begin preparing for ISO/IEC 42001? Contact QueryPie.</p>
+<p>Drawing on our experience preparing for ISO/IEC 42001 and other security certifications and operating an AI management system, QueryPie will work with your organization to design a practical path for managing AI assets and the connected IT and data assets, assessing risks and impacts, and progressively developing your AI management framework into an AI Control Tower.</p>
+<hr>
+<p><code>#QueryPie</code> <code>#ISOIEC42001</code> <code>#AIInventory</code> <code>#AIControlTower</code> <code>#AIGovernance</code></p>
