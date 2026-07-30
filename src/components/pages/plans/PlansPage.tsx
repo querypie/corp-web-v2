@@ -73,7 +73,7 @@ function PlanSummaryCard({
           {billingLabel ? <p className="m-0 type-body-lg text-fg">{billingLabel}</p> : null}
         </div>
 
-        <ul className={cx("m-0 flex list-none flex-col gap-1.5 p-0", name === "Enterprise" && "mt-5")}>
+        <ul className="m-0 flex list-none flex-col gap-1.5 p-0">
           {features.map((feature, index) => {
             if (isPlanFeatureDivider(feature)) {
               return (
