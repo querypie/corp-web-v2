@@ -225,10 +225,8 @@ function ComparisonTable({
     <div className="w-full">
       <div className="overflow-x-auto">
         <div className={cx("mx-auto", plans.length === 2 ? "min-w-[640px] max-w-[960px]" : "min-w-[760px]")}>
-          <div className={cx(
-            "grid w-full items-center py-4",
-            plans.length === 2 ? "grid-cols-2 gap-5" : "",
-          )} style={plans.length === 2 ? undefined : { gridTemplateColumns }}>
+          <div className="grid w-full items-center py-4" style={{ gridTemplateColumns }}>
+            <div />
             {plans.map((plan) => (
               <h2
                 key={plan}

@@ -103,7 +103,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               label: "Monthly Billing",
               values: [
                 { value: "$20/month" },
-                { value: "$500/month" },
+                { value: "$650/month" },
                 { value: "Custom Pricing" },
               ],
             },
@@ -591,7 +591,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               label: "월간 요금",
               values: [
                 { value: "$20/월" },
-                { value: "$500/월" },
+                { value: "$650/월" },
                 { value: "별도 문의" },
               ],
             },
@@ -862,7 +862,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               label: "料金",
               values: [
                 { value: "$20/月" },
-                { value: "$500/月" },
+                { value: "$650/月" },
                 { value: "カスタム価格 (年間契約)" },
               ],
             },
