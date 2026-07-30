@@ -218,12 +218,14 @@ function ComparisonTable({
   comparisonGroups: ComparisonGroup[];
   plans: PricingProduct["plans"];
 }) {
+  const gridTemplateColumns = `minmax(180px, 0.9fr) repeat(${plans.length}, minmax(220px, 1fr))`;
+
   return (
     /* 하단 플랜 비교표 */
     <div className="w-full">
       <div className="overflow-x-auto">
-        <div className="min-w-[760px]">
-          <div className="grid w-full grid-cols-4 items-center py-4">
+        <div className={cx("mx-auto", plans.length === 2 ? "min-w-[640px] max-w-[960px]" : "min-w-[760px]")}>
+          <div className="grid w-full items-center py-4" style={{ gridTemplateColumns }}>
             <div />
             {plans.map((plan) => (
               <h2
@@ -249,13 +251,14 @@ function ComparisonTable({
                   <div
                     key={row.label}
                     className={cx(
-                      "grid grid-cols-4 items-center py-4",
+                      "grid items-center py-4",
                       rowIndex !== group.rows.length - 1 && "border-b border-border",
                     )}
+                    style={{ gridTemplateColumns }}
                   >
                     <div className="px-5 type-body-md text-fg">{row.label}</div>
 
-                    {row.values.map((cell, index) => (
+                    {row.values.slice(-plans.length).map((cell, index) => (
                       <div
                         key={`${row.label}-${plans[index]}`}
                         className="px-5 text-center type-body-md"
@@ -331,7 +334,8 @@ export default function PlansPage({
           <div className="flex flex-col items-center gap-[60px] md:gap-[80px]">
             <div className={cx(
               "grid w-full gap-5",
-              !enterpriseOnly && "md:grid-cols-3",
+              !enterpriseOnly && planCards.length === 2 && "mx-auto md:max-w-[960px] md:grid-cols-2",
+              !enterpriseOnly && planCards.length !== 2 && "md:grid-cols-3",
             )}>
               {planCards.map((plan) => {
                 const href = withLocaleHref(locale, plan.href);

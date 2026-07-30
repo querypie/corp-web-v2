@@ -45,34 +45,13 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
   en: {
     aip: {
       tabLabel: "QueryPie AIP",
-      plans: ["Starter", "Team", "Enterprise"],
+      plans: ["Business", "Enterprise"],
       cards: [
         {
-          name: "Starter",
-          description: "Build your first AI workflow",
-          priceLabel: "$20/mo",
-          billingLabel: "Billed annually at $240",
-          href: "https://app.querypie.com/",
-          ctaLabel: "Subscribe",
-          features: [
-            "800 monthly credits",
-            { type: "divider" },
-            "Up to 5 custom AI agents",
-            "3 RAG knowledge bundles",
-            { type: "divider" },
-            "Audit logs (max 30 days)",
-            "Login IP ACL",
-            { value: "SSO", tone: "danger" },
-            { value: "DLP", tone: "danger" },
-            { value: "Real-time Customer Support", tone: "danger" },
-            { value: "Advanced AI Security Features", tone: "danger" },
-          ],
-        },
-        {
-          name: "Team",
+          name: "Business",
           description: "Collaborate and innovate together",
-          priceLabel: "$500/mo",
-          billingLabel: "Billed annually at $6,000",
+          priceLabel: "$650/mo",
+          billingLabel: "Billed annually at $7,800",
           href: "https://app.querypie.com/",
           ctaLabel: "Subscribe",
           features: [
@@ -557,34 +536,13 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
   ko: {
     aip: {
       tabLabel: "QueryPie AIP",
-      plans: ["Starter", "Team", "Enterprise"],
+      plans: ["Business", "Enterprise"],
       cards: [
         {
-          name: "Starter",
-          description: "첫 AI 워크플로우를 구축하세요",
-          priceLabel: "$20/월",
-          billingLabel: "연간 청구 금액 $240",
-          href: "https://app.querypie.com/",
-          ctaLabel: "구독하기",
-          features: [
-            "월간 800 크레딧",
-            { type: "divider" },
-            "커스텀 AI 에이전트 최대 5개",
-            "RAG 지식 번들 3개",
-            { type: "divider" },
-            "감사 로그 (최대 30일)",
-            "로그인 IP ACL",
-            { value: "SSO", tone: "danger" },
-            { value: "DLP", tone: "danger" },
-            { value: "실시간 고객 지원", tone: "danger" },
-            { value: "고급 AI 보안 기능", tone: "danger" },
-          ],
-        },
-        {
-          name: "Team",
+          name: "Business",
           description: "함께 협업하고 혁신하세요",
-          priceLabel: "$500/월",
-          billingLabel: "연간 청구 금액 $6,000",
+          priceLabel: "$650/월",
+          billingLabel: "연간 청구 금액 $7,800",
           href: "https://app.querypie.com/",
           ctaLabel: "구독하기",
           features: [
@@ -852,34 +810,13 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
   ja: {
     aip: {
       tabLabel: "QueryPie AIP",
-      plans: ["Starter", "Team", "Enterprise"],
+      plans: ["Business", "Enterprise"],
       cards: [
         {
-          name: "Starter",
-          description: "はじめての利用に最適",
-          priceLabel: "$20/月",
-          billingLabel: "年間請求額 $240",
-          href: "/documentation",
-          ctaLabel: "利用を開始する",
-          features: [
-            "月間800クレジット",
-            { type: "divider" },
-            "カスタムAIエージェント\n最大5個まで",
-            "社内文書学習 (RAG) 3つまで",
-            { type: "divider" },
-            "操作履歴の記録\n(最大30日間)",
-            "IPアドレス制限 (ACL)",
-            { value: "シングルサインオン (SSO)", tone: "danger" },
-            { value: "データ漏洩防止 (DLP)", tone: "danger" },
-            { value: "リアルタイムカスタマーサポート", tone: "danger" },
-            { value: "高度な AI セキュリティ機能", tone: "danger" },
-          ],
-        },
-        {
-          name: "Team",
+          name: "Business",
           description: "チームでの協働作業に最適",
-          priceLabel: "$500/月",
-          billingLabel: "年間請求額 $6,000",
+          priceLabel: "$650/月",
+          billingLabel: "年間請求額 $7,800",
           href: "/documentation",
           ctaLabel: "利用を開始する",
           features: [
