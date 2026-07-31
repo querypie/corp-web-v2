@@ -8,27 +8,8 @@ describe("ContentPdfActionButton", () => {
     document.body.innerHTML = "";
   });
 
-  it("게이트가 잠겨 있으면 native confirm 대신 커스텀 확인 모달을 보여준다", () => {
+  it("게이트가 잠겨 있으면 별도 확인 모달 없이 게이팅 폼으로 스크롤한다", async () => {
     const confirmSpy = vi.spyOn(window, "confirm");
-
-    render(
-      <ContentPdfActionButton
-        formTargetId="content-gate-form"
-        href="/whitepaper.pdf"
-        label="View PDF"
-        locale="ko"
-        requiresUnlock
-        unlockCookieName="content-unlocked"
-      />,
-    );
-
-    fireEvent.click(screen.getByRole("button", { name: "PDF 잠금 해제" }));
-
-    expect(confirmSpy).not.toHaveBeenCalled();
-    expect(screen.getByRole("dialog")).toHaveTextContent("독점 콘텐츠를 이용하시려면 양식을 작성해 주세요!");
-  });
-
-  it("확인을 누르면 게이팅 폼으로 스크롤한다", async () => {
     const scrollIntoView = vi.fn();
     const target = document.createElement("div");
     target.id = "content-gate-form";
@@ -47,14 +28,15 @@ describe("ContentPdfActionButton", () => {
     );
 
     fireEvent.click(screen.getByRole("button", { name: "PDF 잠금 해제" }));
-    fireEvent.click(screen.getByRole("button", { name: "확인" }));
 
+    expect(confirmSpy).not.toHaveBeenCalled();
+    expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
     await waitFor(() => {
       expect(scrollIntoView).toHaveBeenCalledWith({ behavior: "smooth", block: "start" });
     });
   });
 
-  it("게이팅 폼 target이 없으면 확인 후 전달받은 폼 모달을 보여준다", () => {
+  it("잠금 해제 버튼을 누르면 입력폼 모달을 바로 보여준다", () => {
     render(
       <ContentPdfActionButton
         href="/whitepaper.pdf"
@@ -67,9 +49,29 @@ describe("ContentPdfActionButton", () => {
     );
 
     fireEvent.click(screen.getByRole("button", { name: "PDF 잠금 해제" }));
-    fireEvent.click(screen.getByRole("button", { name: "확인" }));
 
+    expect(screen.getByText("독점 콘텐츠를 이용하시려면 양식을 작성해 주세요.")).toHaveClass("text-left");
     expect(screen.getByRole("dialog")).toHaveTextContent("Lead form");
+  });
+
+  it("입력폼 모달은 낮은 화면에서도 상하단을 모두 스크롤할 수 있는 구조를 사용한다", () => {
+    render(
+      <ContentPdfActionButton
+        href="/whitepaper.pdf"
+        label="View PDF"
+        locale="ko"
+        renderUnlockForm={() => <div>Lead form</div>}
+        requiresLeadCapture
+        unlockCookieName="content-unlocked"
+      />,
+    );
+
+    fireEvent.click(screen.getByRole("button", { name: "PDF 잠금 해제" }));
+
+    const dialog = screen.getByRole("dialog");
+    expect(dialog).toHaveClass("overflow-y-auto");
+    expect(dialog.firstElementChild).toHaveClass("min-h-full", "items-start");
+    expect(dialog.firstElementChild?.firstElementChild).toHaveClass("my-auto");
   });
 
   it("다운로드 입력폼 외곽을 클릭해도 모달을 닫지 않는다", () => {
@@ -85,7 +87,6 @@ describe("ContentPdfActionButton", () => {
     );
 
     fireEvent.click(screen.getByRole("button", { name: "PDF 잠금 해제" }));
-    fireEvent.click(screen.getByRole("button", { name: "확인" }));
     fireEvent.click(screen.getByRole("dialog"));
 
     expect(screen.getByRole("dialog")).toHaveTextContent("Lead form");
@@ -111,7 +112,6 @@ describe("ContentPdfActionButton", () => {
     );
 
     fireEvent.click(screen.getByRole("button", { name: "PDF 잠금 해제" }));
-    fireEvent.click(screen.getByRole("button", { name: "확인" }));
     fireEvent.change(screen.getByLabelText("이름"), { target: { value: "Mina" } });
     fireEvent.click(screen.getAllByRole("button", { name: "닫기" }).at(-1)!);
 
