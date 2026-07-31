@@ -154,7 +154,7 @@ function ComparisonTable({
     /* 하단 플랜 비교표 */
     <div className="w-full">
       <div className="overflow-x-auto">
-        <div className={cx("mx-auto", plans.length === 2 ? "min-w-[640px] max-w-[960px]" : "min-w-[760px]")}>
+        <div className={cx("mx-auto", plans.length === 2 ? "min-w-[640px] max-w-[900px]" : "min-w-[760px]")}>
           <div className="grid w-full items-center py-4" style={{ gridTemplateColumns }}>
             <div />
             {plans.map((plan) => (
@@ -254,7 +254,7 @@ export default function PlansPage({
           <div className="flex flex-col items-center gap-[60px] md:gap-[80px]">
             <div className={cx(
               "grid w-full gap-5",
-              activeProduct.cards.length === 2 && "mx-auto md:max-w-[960px] md:grid-cols-2",
+              activeProduct.cards.length === 2 && "mx-auto md:max-w-[900px] md:grid-cols-2",
               activeProduct.cards.length !== 2 && "md:grid-cols-3",
             )}>
               {activeProduct.cards.map((plan) => {
@@ -279,7 +279,7 @@ export default function PlansPage({
           </div>
         </div>
       </section>
-      <Cta locale={locale} />
+      <Cta className="!pt-0" locale={locale} />
     </div>
   );
 }
