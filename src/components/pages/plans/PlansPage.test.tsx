@@ -19,22 +19,10 @@ describe("PlansPage", () => {
     );
   });
 
-  it("keeps the ACP tab on the standard plans route for enterprise AIP content", () => {
-    render(
-      <PlansPage
-        enterpriseOnly
-        locale="en"
-        productKey="aip"
-      />,
-    );
+  it("renders every standard AIP plan", () => {
+    render(<PlansPage locale="en" productKey="aip" />);
 
-    expect(screen.getByRole("link", { name: "QueryPie AIP" })).toHaveAttribute(
-      "href",
-      "/en/plans/aip",
-    );
-    expect(screen.getByRole("link", { name: "QueryPie ACP" })).toHaveAttribute(
-      "href",
-      "/en/plans/acp",
-    );
+    expect(screen.getByText("Collaborate and innovate together")).toBeInTheDocument();
+    expect(screen.getByText("Enterprise power unleashed")).toBeInTheDocument();
   });
 });

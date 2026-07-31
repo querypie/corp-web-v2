@@ -11,8 +11,6 @@ import { getLocalePath, type Locale } from "@/constants/i18n";
 import { getPlansPageCopy } from "@/copy/contentPages";
 
 type PlansPageProps = {
-  enterpriseOnly?: boolean;
-  productHrefOverrides?: Partial<Record<"aip" | "acp", string>>;
   productKey?: "aip" | "acp";
   locale: Locale;
 };
@@ -30,9 +28,8 @@ function withLocaleHref(locale: string, href: string) {
 function getProductHref(
   locale: Locale,
   productKey: "aip" | "acp",
-  productHrefOverrides?: Partial<Record<"aip" | "acp", string>>,
 ) {
-  return getLocalePath(locale, productHrefOverrides?.[productKey] ?? `/plans/${productKey}`);
+  return getLocalePath(locale, `/plans/${productKey}`);
 }
 
 function getExternalLinkProps(href: string) {
@@ -115,73 +112,6 @@ function PlanSummaryCard({
           </Button>
         </a>
       </div>
-    </article>
-  );
-}
-
-function EnterpriseSummaryCard({
-  billingLabel,
-  ctaLabel,
-  description,
-  features,
-  href,
-  name,
-  priceLabel,
-  tone = "secondary",
-}: PlanCard) {
-  return (
-    <article className="grid w-full gap-8 rounded-box bg-bg-content p-[30px] md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] md:items-start">
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-1">
-          <h2 className={cx("m-0 type-h2", tone === "primary" ? "text-brand" : "text-fg")}>{name}</h2>
-          <p className="m-0 type-body-md text-mute">{description}</p>
-        </div>
-
-        <div className="flex flex-col gap-1">
-          <p className="m-0 type-h2 text-fg">{priceLabel}</p>
-          {billingLabel ? <p className="m-0 type-body-lg text-fg">{billingLabel}</p> : null}
-        </div>
-
-        <a className="inline-flex" href={href} {...getExternalLinkProps(href)}>
-          <Button
-            arrow
-            className="min-w-[126px]"
-            style="full"
-            variant="primary"
-          >
-            {ctaLabel}
-          </Button>
-        </a>
-      </div>
-
-      <ul className="m-0 grid list-none gap-x-8 gap-y-2 p-0 sm:grid-cols-2">
-        {features.map((feature, index) => {
-          if (isPlanFeatureDivider(feature)) {
-            return (
-              <li
-                aria-hidden="true"
-                className="col-span-full my-2 h-px w-full bg-border"
-                key={`divider-${index}`}
-              />
-            );
-          }
-
-          return (
-            <li
-              key={`${typeof feature === "string" ? feature : feature.value}-${index}`}
-              className="flex items-start gap-1.5 type-body-md text-fg"
-            >
-              <span className={cx(
-                "inline-flex w-4 shrink-0 justify-center",
-                typeof feature === "string" || feature.tone !== "danger" ? "text-success" : "text-destructive",
-              )}>
-                {typeof feature === "string" || feature.tone !== "danger" ? "✓" : "✕"}
-              </span>
-              <span>{typeof feature === "string" ? feature : feature.value}</span>
-            </li>
-          );
-        })}
-      </ul>
     </article>
   );
 }
@@ -278,8 +208,6 @@ function ComparisonTable({
 }
 
 export default function PlansPage({
-  enterpriseOnly = false,
-  productHrefOverrides,
   productKey = "aip",
   locale,
 }: PlansPageProps) {
@@ -290,14 +218,6 @@ export default function PlansPage({
   const activeProduct = useMemo(
     () => pricingProducts[activeProductKey],
     [activeProductKey, pricingProducts],
-  );
-  const planCards = useMemo(
-    () => (
-      enterpriseOnly
-        ? activeProduct.cards.filter((card) => card.name === "Enterprise")
-        : activeProduct.cards
-    ),
-    [activeProduct.cards, enterpriseOnly],
   );
   const activeProductCaption =
     activeProductKey === "aip" ? "AI Platform" : "Access Control Platform";
@@ -315,7 +235,7 @@ export default function PlansPage({
                 ([key, product]) => (
                   <TabLink
                     aria-current={activeProductKey === key ? "page" : undefined}
-                    href={getProductHref(locale, key, productHrefOverrides)}
+                    href={getProductHref(locale, key)}
                     key={key}
                     className="shrink-0"
                     scroll={false}
@@ -334,19 +254,13 @@ export default function PlansPage({
           <div className="flex flex-col items-center gap-[60px] md:gap-[80px]">
             <div className={cx(
               "grid w-full gap-5",
-              !enterpriseOnly && planCards.length === 2 && "mx-auto md:max-w-[960px] md:grid-cols-2",
-              !enterpriseOnly && planCards.length !== 2 && "md:grid-cols-3",
+              activeProduct.cards.length === 2 && "mx-auto md:max-w-[960px] md:grid-cols-2",
+              activeProduct.cards.length !== 2 && "md:grid-cols-3",
             )}>
-              {planCards.map((plan) => {
+              {activeProduct.cards.map((plan) => {
                 const href = withLocaleHref(locale, plan.href);
 
-                return enterpriseOnly ? (
-                  <EnterpriseSummaryCard
-                    key={`${activeProductKey}-${plan.name}`}
-                    {...plan}
-                    href={href}
-                  />
-                ) : (
+                return (
                   <PlanSummaryCard
                     key={`${activeProductKey}-${plan.name}`}
                     {...plan}
@@ -356,7 +270,7 @@ export default function PlansPage({
               })}
             </div>
 
-            {activeProductKey === "aip" && !enterpriseOnly ? (
+            {activeProductKey === "aip" ? (
               <ComparisonTable
                 comparisonGroups={activeProduct.comparisonGroups}
                 plans={activeProduct.plans}
@@ -365,7 +279,7 @@ export default function PlansPage({
           </div>
         </div>
       </section>
-      {!enterpriseOnly ? <Cta locale={locale} /> : null}
+      <Cta locale={locale} />
     </div>
   );
 }
