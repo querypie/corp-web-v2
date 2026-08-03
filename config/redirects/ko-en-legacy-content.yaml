@@ -1,0 +1,24 @@
+# Human-maintained source of truth for Korean and English legacy content URLs.
+#
+# - Segment alternation keeps /features/documentation and /resources/discover
+#   coverage within the remaining Next.js custom-route budget.
+# - Unprefixed sources first use the existing bare-path redirect to /en, then
+#   match these localized rules.
+# - Keep slug or content-family moves ahead of the generic rules.
+version: 1
+
+redirects:
+  - source: "/:locale(en|ko)/:legacyRoot(features|resources)/:legacySection(documentation|discover)/blog/23/:legacySlug"
+    destination: "/:locale/news/payroll-partners-with-querypie-on-ai-security-solutions"
+  - source: "/:locale(en|ko)/:legacyRoot(features|resources)/:legacySection(documentation|discover)/blog/25/:legacySlug"
+    destination: "/:locale/news/terrasky-and-querypie-ai-unveil-mitoco-buddy-for-work"
+  - source: "/:locale(en|ko)/:legacyRoot(features|resources)/:legacySection(documentation|discover)/blog/26/:legacySlug"
+    destination: "/:locale/news/terrasky-and-querypie-ai-unveil-mitoco-buddy-for-work-2"
+  - source: "/:locale(en|ko)/:legacyRoot(features|resources)/:legacySection(documentation|discover)/white-paper/2/shell-native-command-control"
+    destination: "/:locale/whitepapers/shell-native-command-control-ssh-proxy-architecture"
+  - source: "/:locale(en|ko)/:legacyRoot(features|resources)/:legacySection(documentation|discover)/white-paper/17/mcp-security-threats"
+    destination: "/:locale/whitepapers/uncovering-mcp-security"
+  - source: "/:locale(en|ko)/:legacyRoot(features|resources)/:legacySection(documentation|discover)/blog/:legacyId/:legacySlug"
+    destination: "/:locale/blog/:legacySlug"
+  - source: "/:locale(en|ko)/:legacyRoot(features|resources)/:legacySection(documentation|discover)/white-paper/:legacyId/:legacySlug"
+    destination: "/:locale/whitepapers/:legacySlug"
