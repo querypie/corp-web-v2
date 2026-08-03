@@ -57,6 +57,43 @@ describe("japaneseRedirects", () => {
     );
   });
 
+  it("maps ID-based legacy documentation detail paths to canonical content", () => {
+    expectRedirect(
+      "/ja/features/documentation/blog/7/command-bypass-prevention-control",
+      "/blog/7/command-bypass-prevention-control",
+    );
+    expectRedirect(
+      "/ja/features/documentation/white-paper/26/llm-evaluation-agentic-rag-part1",
+      "/whitepapers/26/llm-evaluation-agentic-rag-part1",
+    );
+    expectRedirect(
+      "/ja/features/documentation/white-paper/27/llm-evaluation-agentic-rag-part2",
+      "/whitepapers/27/llm-evaluation-agentic-rag-part2",
+    );
+    expectRedirect(
+      "/ja/resources/discover/blog/20/nextjs-server-action-security",
+      "/blog/20/nextjs-server-action-security",
+    );
+    expectRedirect(
+      "/ja/resources/discover/white-paper/2/shell-native-command-control-ssh-proxy-architecture",
+      "/whitepapers/2/shell-native-command-control-ssh-proxy-architecture",
+    );
+  });
+
+  it("preserves known legacy content aliases and family context", () => {
+    expectRedirect(
+      "/ja/features/documentation/white-paper/17/mcp-security-threats",
+      "/whitepapers/18/uncovering-mcp-security",
+    );
+    expectRedirect(
+      "/ja/resources/discover/white-paper/25/ai-transformation-japan",
+      "/whitepapers/24/ai-transformation-japan",
+    );
+    expectRedirect("/ja/features/documentation/blog/999/missing", "/blog");
+    expectRedirect("/ja/resources/discover/white-paper/999/missing", "/whitepapers");
+    expectRedirect("/ja/resources", "/resources");
+  });
+
   it("falls back unknown family paths and final unknown Japanese paths", () => {
     expectRedirect("/ja/blog/unknown-source", "/blog");
     expectRedirect("/ja/whitepapers/unknown-source", "/whitepapers");

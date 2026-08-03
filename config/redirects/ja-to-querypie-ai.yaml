@@ -1,6 +1,7 @@
 # Human-maintained source of truth for querypie.com /ja redirects.
 #
-# - Keep static page moves in static_redirects.
+# - Keep page moves and bounded legacy route patterns in static_redirects.
+# - Put one-off legacy aliases before broader parameterized rules.
 # - Add content by source slug and the querypie.ai ID/slug in the matching family.
 # - Family fallbacks preserve context for retired or unknown content.
 # - final_fallback must remain last and sends any other /ja path to the Japanese home.
@@ -28,8 +29,19 @@ static_redirects:
   - { source: /ja/demo/aip, destination: /demo/aip }
   - { source: /ja/demo/acp, destination: /demo/acp }
   - { source: /ja/documentation, destination: /resources }
+  - { source: /ja/resources, destination: /resources }
   - { source: /ja/features/documentation, destination: /resources }
   - { source: /ja/documentation/features/documentation, destination: /resources }
+  - { source: /ja/features/documentation/white-paper/17/mcp-security-threats, destination: /whitepapers/18/uncovering-mcp-security }
+  - { source: /ja/resources/discover/white-paper/17/mcp-security-threats, destination: /whitepapers/18/uncovering-mcp-security }
+  - { source: /ja/features/documentation/white-paper/25/:slug, destination: /whitepapers/24/ai-transformation-japan }
+  - { source: /ja/resources/discover/white-paper/25/:slug, destination: /whitepapers/24/ai-transformation-japan }
+  - { source: /ja/features/documentation/blog/30/ai-work-os-enterprise-intelligence, destination: /blog/32/ai-work-os-enterprise-intelligence }
+  - { source: /ja/resources/discover/blog/30/ai-work-os-enterprise-intelligence, destination: /blog/32/ai-work-os-enterprise-intelligence }
+  - { source: "/ja/features/documentation/blog/:id([1-9]|[12][0-9]|30)/:slug", destination: "/blog/:id/:slug" }
+  - { source: "/ja/resources/discover/blog/:id([1-9]|[12][0-9]|30)/:slug", destination: "/blog/:id/:slug" }
+  - { source: "/ja/features/documentation/white-paper/:id([1-9]|[12][0-9]|30)/:slug", destination: "/whitepapers/:id/:slug" }
+  - { source: "/ja/resources/discover/white-paper/:id([1-9]|[12][0-9]|30)/:slug", destination: "/whitepapers/:id/:slug" }
   - { source: /ja/blog, destination: /blog }
   - { source: /ja/whitepapers, destination: /whitepapers }
   - { source: /ja/events, destination: /events }
@@ -103,31 +115,38 @@ content_families:
       - { source_slug: "ai-agent-security-replit-case", target_id: "22", target_slug: "ai-agent-security-replit-case" }
       - { source_slug: "ai-attack-tool-firewall-breach-data-protection", target_id: "29", target_slug: "ai-attack-tool-firewall-breach-data-protection" }
       - { source_slug: "ai-security-threat-map-2026-cxo", target_id: "28", target_slug: "ai-security-threat-map-2026-cxo" }
-      - { source_slug: "ai-work-os-enterprise-intelligence", destination: /blog }
+      - { source_slug: "ai-work-os-enterprise-intelligence", target_id: "32", target_slug: "ai-work-os-enterprise-intelligence" }
       - { source_slug: "claude-fable-5-management-strategy", target_id: "30", target_slug: "claude-fable-5-management-strategy" }
       - { source_slug: "command-bypass-prevention-control", target_id: "7", target_slug: "command-bypass-prevention-control" }
       - { source_slug: "customer-centric-tpm-life", target_id: "10", target_slug: "customer-centric-tpm-life" }
       - { source_slug: "data-discovery-privacy-management", target_id: "9", target_slug: "data-discovery-privacy-management" }
+      - { source_slug: "data-observability", target_id: "14", target_slug: "data-observability" }
       - { source_slug: "healthcare-data-security", target_id: "16", target_slug: "healthcare-data-security" }
       - { source_slug: "integration-connection-paradigm", target_id: "6", target_slug: "integration-connection-paradigm" }
       - { source_slug: "internal-data-leaks", target_id: "12", target_slug: "internal-data-leaks" }
-      - { source_slug: "iso-iec-42001-getting-started", destination: /blog }
+      - { source_slug: "iso-iec-42001-getting-started", target_id: "31", target_slug: "iso-iec-42001-getting-started" }
+      - { source_slug: "mitoco-buddy-release", destination: /news/14/mitoco-buddy-official-launch }
       - { source_slug: "multi-cloud-kubernetes-access-control", target_id: "4", target_slug: "multi-cloud-kubernetes-access-control" }
       - { source_slug: "nextjs-server-action-security", target_id: "20", target_slug: "nextjs-server-action-security" }
       - { source_slug: "optimize-ec2-costs", target_id: "19", target_slug: "optimize-ec2-costs" }
       - { source_slug: "privileged-access-management-pam", target_id: "17", target_slug: "privileged-access-management-pam" }
       - { source_slug: "querypie-cracking-global-markets", target_id: "2", target_slug: "querypie-cracking-global-markets" }
+      - { source_slug: "querypie-payroll-partnership", destination: /news/12/payroll-querypie-ai-security-partnership }
       - { source_slug: "querypie-product-managers", target_id: "8", target_slug: "querypie-product-managers" }
       - { source_slug: "querypie-team-success-secrets", target_id: "3", target_slug: "querypie-team-success-secrets" }
       - { source_slug: "seamless-figma-querypie-collaboration", target_id: "11", target_slug: "seamless-figma-querypie-collaboration" }
       - { source_slug: "shadow-ai-risk-cxo-countermeasures", target_id: "27", target_slug: "shadow-ai-risk-cxo-countermeasures" }
       - { source_slug: "technology-humanity-convergence", target_id: "5", target_slug: "technology-humanity-convergence" }
+      - { source_slug: "terrasky-mitoco-buddy", destination: /news/13/terrasky-mitoco-buddy-announcement }
       - { source_slug: "top-pam-solutions", target_id: "24", target_slug: "top-pam-solutions" }
       - { source_slug: "what-businesses-can-learn-from-sentiment-analysis", target_id: "13", target_slug: "what-businesses-can-learn-from-sentiment-analysis" }
-      - { source_slug: "what-is-forward-deployed-engineer-fde", destination: /blog }
+      - { source_slug: "what-is-forward-deployed-engineer-fde", target_id: "33", target_slug: "what-is-forward-deployed-engineer-fde" }
       - { source_slug: "why-is-sso-important", target_id: "18", target_slug: "why-is-sso-important" }
       - { source_slug: "why-we-need-ai-red-teaming", target_id: "21", target_slug: "why-we-need-ai-red-teaming" }
       - { source_slug: "zero-trust-security", target_id: "15", target_slug: "zero-trust-security" }
+    legacy_fallbacks:
+      - { source: /ja/features/documentation/blog/:path*, destination: /blog }
+      - { source: /ja/resources/discover/blog/:path*, destination: /blog }
     fallback: { source: /ja/blog/:path*, destination: /blog }
 
   - name: whitepapers
@@ -174,6 +193,9 @@ content_families:
       - { source_slug: "uncovering-mcp-security", target_id: "18", target_slug: "uncovering-mcp-security" }
       - { source_slug: "welcome-to-the-age-of-agentsecops", target_id: "21", target_slug: "welcome-to-the-age-of-agentsecops" }
       - { source_slug: "your-architect-vs-ai-agents", target_id: "22", target_slug: "your-architect-vs-ai-agents" }
+    legacy_fallbacks:
+      - { source: /ja/features/documentation/white-paper/:path*, destination: /whitepapers }
+      - { source: /ja/resources/discover/white-paper/:path*, destination: /whitepapers }
     fallback: { source: /ja/whitepapers/:path*, destination: /whitepapers }
 
   - name: events
