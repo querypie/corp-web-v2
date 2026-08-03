@@ -4,12 +4,14 @@ import {
   japaneseExactRedirects,
   japaneseFallbackRedirects,
 } from "./src/features/routing/jaRedirects";
+import { koEnLegacyRedirects } from "./src/features/routing/koEnLegacyRedirects";
 
 const nextConfig: NextConfig = {
   async redirects() {
     return [
       ...japaneseExactRedirects,
       ...japaneseFallbackRedirects,
+      ...koEnLegacyRedirects,
       ...legacyContentRedirects.map((redirect) => ({
         ...redirect,
         permanent: true,

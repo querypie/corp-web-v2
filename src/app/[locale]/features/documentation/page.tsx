@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import type { Metadata } from "next";
 import { isLocale } from "@/constants/i18n";
 import DocsListClientPage from "@/components/pages/documentation/DocumentationListClientPage";
@@ -23,11 +23,22 @@ type DocsPageProps = {
   searchParams: Promise<{ category?: string }>;
 };
 
+const legacyCategoryRedirects: Partial<Record<string, DocsCategorySlug>> = {
+  blog: "blogs",
+  whitepaper: "white-papers",
+  "white-paper": "white-papers",
+};
+
 export default async function DocumentationPage({ params, searchParams }: DocsPageProps) {
   const { locale } = await params;
   const { category } = await searchParams;
 
   if (!isLocale(locale)) notFound();
+
+  const legacyCategory = category ? legacyCategoryRedirects[category] : undefined;
+  if (locale !== "ja" && legacyCategory) {
+    permanentRedirect(getPublicListHref("documentation", locale, legacyCategory));
+  }
 
   const normalizedCategory = category;
   const selectedCategory: DocsCategorySlug =
