@@ -1,0 +1,314 @@
+# Human-maintained source of truth for querypie.com /ja redirects.
+#
+# - Keep static page moves in static_redirects.
+# - Add content by source slug and the querypie.ai ID/slug in the matching family.
+# - Family fallbacks preserve context for retired or unknown content.
+# - final_fallback must remain last and sends any other /ja path to the Japanese home.
+# - Run `npm run validate:ja-redirects` after editing to compare both live sitemaps.
+version: 1
+destination_origin: https://querypie.ai
+
+static_redirects:
+  - { source: /ja, destination: / }
+  - { source: /ja/company, destination: /about-us }
+  - { source: /ja/company/about-us, destination: /about-us }
+  - { source: /ja/company/certifications, destination: /certifications }
+  - { source: /ja/company/contact-us, destination: /contact-us }
+  - { source: /ja/company/news, destination: /news }
+  - { source: /ja/solutions/aip, destination: /platforms/aip }
+  - { source: /ja/solutions/aip/mcp-gateway, destination: /platforms/aip/mcp-gateway }
+  - { source: /ja/solutions/aip/usage-based-llm, destination: /platforms/aip/usage-based-llm }
+  - { source: /ja/solutions/aip/integrations, destination: /platforms/aip/integrations }
+  - { source: /ja/solutions/aip/fde-services, destination: /services/fde }
+  - { source: /ja/solutions/acp, destination: /platforms/acp }
+  - { source: /ja/solutions/acp/integrations, destination: /platforms/acp/integrations }
+  - { source: /ja/demo, destination: /use-cases }
+  - { source: /ja/features/demo, destination: /use-cases }
+  - { source: /ja/demo/use-cases, destination: /use-cases }
+  - { source: /ja/demo/aip, destination: /demo/aip }
+  - { source: /ja/demo/acp, destination: /demo/acp }
+  - { source: /ja/documentation, destination: /resources }
+  - { source: /ja/features/documentation, destination: /resources }
+  - { source: /ja/documentation/features/documentation, destination: /resources }
+  - { source: /ja/blog, destination: /blog }
+  - { source: /ja/whitepapers, destination: /whitepapers }
+  - { source: /ja/events, destination: /events }
+  - { source: /ja/news, destination: /news }
+  - { source: /ja/introduction-deck, destination: /introduction-deck }
+  - { source: /ja/glossary, destination: /glossary }
+  - { source: /ja/manuals, destination: /manuals }
+  - { source: /ja/voc, destination: /use-cases }
+  - { source: /ja/apps/slack, destination: /apps }
+  - { source: /ja/community-license, destination: /platforms/acp }
+  - { source: /ja/querypie/license/community/apply, destination: /contact-us }
+  - { source: /ja/plans, destination: /plans }
+  - { source: /ja/plans/aip, destination: /plans/aip }
+  - { source: /ja/plans/acp, destination: /plans/acp }
+  - { source: /ja/privacy-policy, destination: /privacy-policy }
+  - { source: /ja/privacy-policy/:version, destination: /privacy-policy/:version }
+  - { source: /ja/terms-of-service, destination: /terms-of-service }
+  - { source: /ja/eula, destination: /eula }
+  - { source: /ja/cookie-preference, destination: /cookie-preference }
+
+content_families:
+  - name: use-cases
+    source_templates:
+      - /ja/demo/use-cases/{source_slug}
+      - /ja/features/demo/use-cases/{source_slug}
+      - /ja/demo/use-cases/:legacyFolder/{source_slug}
+      - /ja/features/demo/use-cases/:legacyFolder/{source_slug}
+    destination_template: /use-cases/{target_id}/{target_slug}
+    download_source_templates:
+      - /ja/demo/use-cases/{source_slug}/download
+      - /ja/demo/use-cases/{source_slug}/pdf
+    rows:
+      - { source_slug: "aircraft-maintenance-ai-agent", target_id: "17", target_slug: "aircraft-maintenance-ai-agent" }
+      - { source_slug: "aircrew-scheduler-ai-agent", target_id: "19", target_slug: "aircrew-scheduler-ai-agent" }
+      - { source_slug: "aws-inspector-ai-agent", target_id: "23", target_slug: "aws-inspector-ai-agent" }
+      - { source_slug: "aws-log-analytics-agent", target_id: "22", target_slug: "aws-log-analytics-agent" }
+      - { source_slug: "aws-solutions-architect-ai-agent", target_id: "24", target_slug: "aws-solutions-architect-ai-agent" }
+      - { source_slug: "baggage-operations-ai-agent", target_id: "18", target_slug: "baggage-operations-ai-agent" }
+      - { source_slug: "credit-check-ai-agent", target_id: "14", target_slug: "credit-check-ai-agent" }
+      - { source_slug: "data-analytics-agent", target_id: "7", target_slug: "data-analytics-agent" }
+      - { source_slug: "data-analytics-agent-2", target_id: "8", target_slug: "data-analytics-agent-2" }
+      - { source_slug: "dev-insight-ai-agent", target_id: "16", target_slug: "dev-insight-ai-agent" }
+      - { source_slug: "factory-iot-ai-agent", target_id: "15", target_slug: "factory-iot-ai-agent" }
+      - { source_slug: "incident-mgmt-ai-agent", target_id: "21", target_slug: "incident-mgmt-ai-agent" }
+      - { source_slug: "investment-analyst-ai-agent", target_id: "26", target_slug: "investment-analyst-ai-agent" }
+      - { source_slug: "kubernetes-manager-agent", target_id: "10", target_slug: "kubernetes-manager-agent" }
+      - { source_slug: "m365-ai-agent", target_id: "13", target_slug: "m365-ai-agent" }
+      - { source_slug: "military-hr-ai-agent", target_id: "20", target_slug: "military-hr-ai-agent" }
+      - { source_slug: "portfolio-insight-ai-agent", target_id: "25", target_slug: "portfolio-insight-ai-agent" }
+      - { source_slug: "querypie-ai-agent-demo", target_id: "6", target_slug: "querypie-ai-agent-demo" }
+      - { source_slug: "quotation-ai-agent", target_id: "27", target_slug: "quotation-ai-agent" }
+      - { source_slug: "quotation-analyze-ai-agent", target_id: "28", target_slug: "quotation-analyze-ai-agent" }
+      - { source_slug: "security-audit-agent", target_id: "11", target_slug: "security-audit-agent" }
+      - { source_slug: "seo-analyst", target_id: "29", target_slug: "seo-analyst" }
+      - { source_slug: "server-access-agent", target_id: "9", target_slug: "server-access-agent" }
+      - { source_slug: "work-collaboration-agent", target_id: "12", target_slug: "work-collaboration-agent" }
+    fallback: { source: /ja/demo/use-cases/:path*, destination: /use-cases }
+
+  - name: blog
+    source_templates:
+      - /ja/blog/{source_slug}
+      - /ja/features/documentation/blog/{source_slug}
+      - /ja/documentation/features/blog/{source_slug}
+      - /ja/blog/:legacyFolder/{source_slug}
+    destination_template: /blog/{target_id}/{target_slug}
+    download_source_templates:
+      - /ja/blog/{source_slug}/download
+      - /ja/blog/{source_slug}/pdf
+    rows:
+      - { source_slug: "agentless-philosophy", target_id: "1", target_slug: "agentless-philosophy" }
+      - { source_slug: "ai-agent-security-replit-case", target_id: "22", target_slug: "ai-agent-security-replit-case" }
+      - { source_slug: "ai-attack-tool-firewall-breach-data-protection", target_id: "29", target_slug: "ai-attack-tool-firewall-breach-data-protection" }
+      - { source_slug: "ai-security-threat-map-2026-cxo", target_id: "28", target_slug: "ai-security-threat-map-2026-cxo" }
+      - { source_slug: "ai-work-os-enterprise-intelligence", destination: /blog }
+      - { source_slug: "claude-fable-5-management-strategy", target_id: "30", target_slug: "claude-fable-5-management-strategy" }
+      - { source_slug: "command-bypass-prevention-control", target_id: "7", target_slug: "command-bypass-prevention-control" }
+      - { source_slug: "customer-centric-tpm-life", target_id: "10", target_slug: "customer-centric-tpm-life" }
+      - { source_slug: "data-discovery-privacy-management", target_id: "9", target_slug: "data-discovery-privacy-management" }
+      - { source_slug: "healthcare-data-security", target_id: "16", target_slug: "healthcare-data-security" }
+      - { source_slug: "integration-connection-paradigm", target_id: "6", target_slug: "integration-connection-paradigm" }
+      - { source_slug: "internal-data-leaks", target_id: "12", target_slug: "internal-data-leaks" }
+      - { source_slug: "iso-iec-42001-getting-started", destination: /blog }
+      - { source_slug: "multi-cloud-kubernetes-access-control", target_id: "4", target_slug: "multi-cloud-kubernetes-access-control" }
+      - { source_slug: "nextjs-server-action-security", target_id: "20", target_slug: "nextjs-server-action-security" }
+      - { source_slug: "optimize-ec2-costs", target_id: "19", target_slug: "optimize-ec2-costs" }
+      - { source_slug: "privileged-access-management-pam", target_id: "17", target_slug: "privileged-access-management-pam" }
+      - { source_slug: "querypie-cracking-global-markets", target_id: "2", target_slug: "querypie-cracking-global-markets" }
+      - { source_slug: "querypie-product-managers", target_id: "8", target_slug: "querypie-product-managers" }
+      - { source_slug: "querypie-team-success-secrets", target_id: "3", target_slug: "querypie-team-success-secrets" }
+      - { source_slug: "seamless-figma-querypie-collaboration", target_id: "11", target_slug: "seamless-figma-querypie-collaboration" }
+      - { source_slug: "shadow-ai-risk-cxo-countermeasures", target_id: "27", target_slug: "shadow-ai-risk-cxo-countermeasures" }
+      - { source_slug: "technology-humanity-convergence", target_id: "5", target_slug: "technology-humanity-convergence" }
+      - { source_slug: "top-pam-solutions", target_id: "24", target_slug: "top-pam-solutions" }
+      - { source_slug: "what-businesses-can-learn-from-sentiment-analysis", target_id: "13", target_slug: "what-businesses-can-learn-from-sentiment-analysis" }
+      - { source_slug: "what-is-forward-deployed-engineer-fde", destination: /blog }
+      - { source_slug: "why-is-sso-important", target_id: "18", target_slug: "why-is-sso-important" }
+      - { source_slug: "why-we-need-ai-red-teaming", target_id: "21", target_slug: "why-we-need-ai-red-teaming" }
+      - { source_slug: "zero-trust-security", target_id: "15", target_slug: "zero-trust-security" }
+    fallback: { source: /ja/blog/:path*, destination: /blog }
+
+  - name: whitepapers
+    source_templates:
+      - /ja/whitepapers/{source_slug}
+      - /ja/features/documentation/white-paper/{source_slug}
+      - /ja/features/documentation/whitepapers/{source_slug}
+      - /ja/documentation/features/white-paper/{source_slug}
+      - /ja/whitepapers/:legacyFolder/{source_slug}
+    destination_template: /whitepapers/{target_id}/{target_slug}
+    download_source_templates:
+      - /ja/whitepapers/{source_slug}/download
+      - /ja/whitepapers/{source_slug}/pdf
+      - /ja/features/documentation/white-paper/{source_slug}/download
+      - /ja/features/documentation/white-paper/{source_slug}/pdf
+    download_destination_template: /whitepapers/{target_id}/{target_slug}/pdf
+    rows:
+      - { source_slug: "ai-agent-guardrails-governance-2026", target_id: "28", target_slug: "ai-agent-guardrails-governance-2026" }
+      - { source_slug: "ai-agent-guardrails-governance-2026-implementation", target_id: "29", target_slug: "ai-agent-guardrails-governance-2026-implementation" }
+      - { source_slug: "ai-autonomous-access-control", target_id: "17", target_slug: "ai-autonomous-access-control" }
+      - { source_slug: "ai-transformation-japan", target_id: "24", target_slug: "ai-transformation-japan" }
+      - { source_slug: "beyond-mcp-to-mcps", target_id: "20", target_slug: "beyond-mcp-to-mcps" }
+      - { source_slug: "efficient-audit-log-management", target_id: "11", target_slug: "efficient-audit-log-management" }
+      - { source_slug: "google-agentspace-vs-querypie-mcp-pam", target_id: "19", target_slug: "google-agentspace-vs-querypie-mcp-pam" }
+      - { source_slug: "kubernetes-access-control", target_id: "6", target_slug: "kubernetes-access-control" }
+      - { source_slug: "llm-evaluation-agentic-rag-part1", target_id: "26", target_slug: "llm-evaluation-agentic-rag-part1" }
+      - { source_slug: "llm-evaluation-agentic-rag-part2", target_id: "27", target_slug: "llm-evaluation-agentic-rag-part2" }
+      - { source_slug: "next-step-mcp-pam", target_id: "16", target_slug: "next-step-mcp-pam" }
+      - { source_slug: "pac-policy-as-code", target_id: "7", target_slug: "pac-policy-as-code" }
+      - { source_slug: "parsing-sql-query-structural-interface", target_id: "3", target_slug: "parsing-sql-query-structural-interface" }
+      - { source_slug: "penetration-testing-standard", target_id: "9", target_slug: "penetration-testing-standard" }
+      - { source_slug: "personal-data-identification-analysis-ai", target_id: "1", target_slug: "personal-data-identification-analysis-ai" }
+      - { source_slug: "preventing-command-bypass", target_id: "5", target_slug: "preventing-command-bypass" }
+      - { source_slug: "querypie-devsecops-pipeline", target_id: "10", target_slug: "querypie-devsecops-pipeline" }
+      - { source_slug: "querypie-grpc-dast-security", target_id: "12", target_slug: "querypie-grpc-dast-security" }
+      - { source_slug: "rag-security-querypie-builds-the-bridge", target_id: "23", target_slug: "rag-security-querypie-builds-the-bridge" }
+      - { source_slug: "redefining-pam-for-the-mcp-era", target_id: "15", target_slug: "redefining-pam-for-the-mcp-era" }
+      - { source_slug: "reverse-tunneling-jumphost-solution", target_id: "14", target_slug: "reverse-tunneling-jumphost-solution" }
+      - { source_slug: "saas-end-or-evolution", target_id: "30", target_slug: "saas-end-or-evolution" }
+      - { source_slug: "seamless-ssh-connection", target_id: "13", target_slug: "seamless-ssh-connection" }
+      - { source_slug: "secure-login-token-management", target_id: "8", target_slug: "secure-login-token-management" }
+      - { source_slug: "shell-native-command-control-ssh-proxy-architecture", target_id: "2", target_slug: "shell-native-command-control-ssh-proxy-architecture" }
+      - { source_slug: "transaction-free-change-data-capture-system", target_id: "4", target_slug: "transaction-free-change-data-capture-system" }
+      - { source_slug: "uncovering-mcp-security", target_id: "18", target_slug: "uncovering-mcp-security" }
+      - { source_slug: "welcome-to-the-age-of-agentsecops", target_id: "21", target_slug: "welcome-to-the-age-of-agentsecops" }
+      - { source_slug: "your-architect-vs-ai-agents", target_id: "22", target_slug: "your-architect-vs-ai-agents" }
+    fallback: { source: /ja/whitepapers/:path*, destination: /whitepapers }
+
+  - name: events
+    source_templates:
+      - /ja/events/{source_slug}
+      - /ja/features/documentation/events/{source_slug}
+      - /ja/documentation/features/events/{source_slug}
+      - /ja/events/:legacyFolder/{source_slug}
+    destination_template: /events/{target_id}/{target_slug}
+    download_source_templates:
+      - /ja/events/{source_slug}/download
+      - /ja/events/{source_slug}/pdf
+    rows:
+      - { source_slug: "air-company-ai-agent-security-webinar", target_id: "27", target_slug: "air-company-ai-agent-security-webinar" }
+      - { source_slug: "air-company-querypie-ai-usecase-webinar", target_id: "26", target_slug: "air-company-querypie-ai-usecase-webinar" }
+      - { source_slug: "air-company-querypie-ai-usecase-webinar-2", target_id: "25", target_slug: "air-company-querypie-ai-usecase-webinar" }
+      - { source_slug: "air-company-querypie-ai-webinar", target_id: "24", target_slug: "air-company-querypie-ai-webinar" }
+      - { source_slug: "air-company-querypie-ai-webinar-2", target_id: "23", target_slug: "air-company-querypie-ai-webinar" }
+      - { source_slug: "air-company-querypie-ai-webinar-3", target_id: "21", target_slug: "air-company-querypie-ai-webinar" }
+      - { source_slug: "air-company-querypie-mcp-webinar", target_id: "22", target_slug: "air-company-querypie-mcp-webinar" }
+      - { source_slug: "cloud-certification-shortest-path", target_id: "1", target_slug: "cloud-certification-shortest-path" }
+      - { source_slug: "device-security-mdm-kandji", target_id: "3", target_slug: "device-security-mdm-kandji" }
+      - { source_slug: "findy-querypie-mcp-webinar", target_id: "17", target_slug: "findy-querypie-mcp-webinar" }
+      - { source_slug: "flex-querypie-secrets", target_id: "4", target_slug: "flex-querypie-secrets" }
+      - { source_slug: "okta-paloalto-querypie-webinar", target_id: "2", target_slug: "okta-paloalto-querypie-webinar" }
+      - { source_slug: "querypie-databases-nosql-ledger-ja", target_id: "10", target_slug: "querypie-databases-nosql-ledger-ja" }
+      - { source_slug: "querypie-databases-nosql-ledger-ko", target_id: "9", target_slug: "querypie-databases-nosql-ledger-ko" }
+      - { source_slug: "querypie-integrations-scim-slack-vault-ja", target_id: "8", target_slug: "querypie-integrations-scim-slack-vault-ja" }
+      - { source_slug: "querypie-integrations-scim-slack-vault-ko", target_id: "7", target_slug: "querypie-integrations-scim-slack-vault-ko" }
+      - { source_slug: "querypie-japan-webinar-security", target_id: "15", target_slug: "querypie-japan-webinar-security" }
+      - { source_slug: "querypie-kubernetes-management-ja", target_id: "14", target_slug: "querypie-kubernetes-management-ja" }
+      - { source_slug: "querypie-kubernetes-management-ko", target_id: "13", target_slug: "querypie-kubernetes-management-ko" }
+      - { source_slug: "querypie-server-management-ja", target_id: "12", target_slug: "querypie-server-management-ja" }
+      - { source_slug: "querypie-server-management-ko", target_id: "11", target_slug: "querypie-server-management-ko" }
+      - { source_slug: "querypie-side-kick-teaser-ko", destination: /events }
+      - { source_slug: "ztna-security-prisma-access", target_id: "5", target_slug: "ztna-security-prisma-access" }
+    fallback: { source: /ja/events/:path*, destination: /events }
+
+  - name: introduction-deck
+    source_templates:
+      - /ja/introduction-deck/{source_slug}
+      - /ja/features/documentation/introduction/{source_slug}
+      - /ja/introduction-deck/:legacyFolder/{source_slug}
+    destination_template: /introduction-deck/{target_id}/{target_slug}
+    download_source_templates:
+      - /ja/introduction-deck/{source_slug}/download
+      - /ja/introduction-deck/{source_slug}/pdf
+    rows:
+      - { source_slug: "querypie-acp", target_id: "2", target_slug: "querypie-acp" }
+      - { source_slug: "querypie-aip", target_id: "1", target_slug: "querypie-aip" }
+    fallback: { source: /ja/introduction-deck/:path*, destination: /introduction-deck }
+
+  - name: manuals
+    source_templates:
+      - /ja/manuals/{source_slug}
+      - /ja/features/documentation/manuals/{source_slug}
+      - /ja/manuals/:legacyFolder/{source_slug}
+    destination_template: /manuals/{target_id}/{target_slug}
+    download_source_templates:
+      - /ja/manuals/{source_slug}/download
+      - /ja/manuals/{source_slug}/pdf
+    rows:
+      - { source_slug: "acp-community-install-guide", target_id: "1", target_slug: "acp-community-install-guide" }
+      - { source_slug: "querypie-acp-administrator-manual", target_id: "2", target_slug: "acp-administrator-manual" }
+      - { source_slug: "querypie-acp-manual", target_id: "5", target_slug: "acp-manual" }
+      - { source_slug: "querypie-acp-openapi-reference", target_id: "4", target_slug: "acp-api-reference" }
+      - { source_slug: "querypie-acp-release-notes", target_id: "7", target_slug: "acp-release-notes" }
+      - { source_slug: "querypie-acp-user-manual", target_id: "3", target_slug: "acp-user-manual" }
+      - { source_slug: "querypie-aip-manual", target_id: "6", target_slug: "aip-manual" }
+    fallback: { source: /ja/manuals/:path*, destination: /manuals }
+
+  - name: glossary
+    source_templates:
+      - /ja/glossary/{source_slug}
+      - /ja/features/documentation/{source_slug}
+      - /ja/documentation/features/{source_slug}
+      - /ja/glossary/:legacyFolder/{source_slug}
+    destination_template: /glossary/{target_id}/{target_slug}
+    download_source_templates:
+      - /ja/glossary/{source_slug}/download
+      - /ja/glossary/{source_slug}/pdf
+    rows:
+      - { source_slug: "glossary-items", target_id: "1", target_slug: "querypie-ai-glossary" }
+    fallback: { source: /ja/glossary/:path*, destination: /glossary }
+
+  - name: voc
+    source_templates:
+      - /ja/voc/{source_slug}
+      - /ja/voc/:legacyFolder/{source_slug}
+    destination_template: /use-cases/{target_id}/{target_slug}
+    download_source_templates:
+      - /ja/voc/{source_slug}/download
+      - /ja/voc/{source_slug}/pdf
+    rows:
+      - { source_slug: "air-company-mori-takeshi", target_id: "3", target_slug: "air-company-mori-takeshi" }
+      - { source_slug: "allganize-changsu-lee", target_id: "1", target_slug: "allganize-changsu-lee" }
+      - { source_slug: "lg-uplus-daniel-ku", target_id: "5", target_slug: "lg-uplus-daniel-ku" }
+      - { source_slug: "lovo-ai-tom-lee", target_id: "2", target_slug: "lovo-ai-tom-lee" }
+      - { source_slug: "superb-ai-hyun-kim", target_id: "4", target_slug: "superb-ai-hyun-kim" }
+    fallback: { source: /ja/voc/:path*, destination: /use-cases }
+
+  - name: news
+    source_templates:
+      - /ja/news/{source_slug}
+      - /ja/company/news/{source_slug}
+      - /ja/news/:legacyFolder/{source_slug}
+    destination_template: /news/{target_id}/{target_slug}
+    rows:
+      - { source_slug: "data-governance-and-security-solutions-provider-querypie-partners-with-collaborative-documentation-tool-typed-to-enhance-productivity-and-streamline-collaboration", target_id: "4", target_slug: "querypie-partners-with-typed" }
+      - { source_slug: "data-governance-and-security-solutions-provider-querypie-partners-with-collaborative-documentation-tool-typed-to-enhance-productivity-and-streamline-collaboration-2", target_id: "6", target_slug: "kodit-backs-querypie-and-three-startups" }
+      - { source_slug: "interview-with-brant-hwang-founder-of-querypie", target_id: "8", target_slug: "interview-with-brant-hwang-founder-of-querypie" }
+      - { source_slug: "iso-42001-certification-announcement", target_id: "16", target_slug: "iso-42001-certification-announcement" }
+      - { source_slug: "lingo-launch", target_id: "17", target_slug: "lingo-launch" }
+      - { source_slug: "notepie-launch", target_id: "18", target_slug: "notepie-launch" }
+      - { source_slug: "payroll-partners-with-querypie-on-ai-security-solutions", target_id: "12", target_slug: "payroll-querypie-ai-security-partnership" }
+      - { source_slug: "querypie-becomes-okta-integration-network-partner-in-korea", target_id: "1", target_slug: "okta-integration-network-partner-korea" }
+      - { source_slug: "querypie-closes-usd-1775-million-in-oversubscribed-preferred-series-seed-round-co-led-by-atinum-investment-and-murex-partners", target_id: "3", target_slug: "querypie-series-seed-round-17-75-million" }
+      - { source_slug: "querypie-expands-access-control-platform-ai-capabilities", target_id: "15", target_slug: "iso-42001-certification-press-release" }
+      - { source_slug: "querypie-participates-in-isec-2023-with-orca-security", target_id: "7", target_slug: "querypie-participates-in-isec-2023-with-orca-security" }
+      - { source_slug: "querypie-selected-for-real-madrid-next-accelerator-program", target_id: "9", target_slug: "real-madrid-next-accelerator-program" }
+      - { source_slug: "querypie-signed-a-contract-to-supply-ai-and-data-security-solutions-to-vessl-ai", target_id: "5", target_slug: "querypie-supplies-ai-and-data-security-to-vessl-ai" }
+      - { source_slug: "security-solution-playing-the-role-of-a-door-lock-in-the-cloud-expanding-to-japan-and-europe", target_id: "11", target_slug: "cloud-security-expanding-to-japan-and-europe" }
+      - { source_slug: "terrasky-and-querypie-ai-unveil-mitoco-buddy-for-work", target_id: "13", target_slug: "terrasky-mitoco-buddy-announcement" }
+      - { source_slug: "terrasky-and-querypie-ai-unveil-mitoco-buddy-for-work-2", target_id: "14", target_slug: "mitoco-buddy-official-launch" }
+      - { source_slug: "the-top-50-software-ceos-of-2024", target_id: "10", target_slug: "top-50-software-ceos-of-2024" }
+      - { source_slug: "yanolja-taps-querypie-to-firm-up-data-governance", target_id: "2", target_slug: "yanolja-taps-querypie-for-data-governance" }
+      - { source_slug: "유니콘-80가-고객보안-솔루션에-ai비서도-지원", destination: /news }
+      - { source_slug: "쿼리파이-ai-기반-데이터-보안-솔루션-버전-공개1년간-무료-사용-가능", destination: /news }
+      - { source_slug: "쿼리파이-ai-시대-안전한-데이터-환경-실현한다-서울-세미나-성료", destination: /news }
+      - { source_slug: "쿼리파이-mcp에-보안-기능-탑재해-자유로운-ai-사용-지원", destination: /news }
+      - { source_slug: "쿼리파이-강원대-차세대-사이버-보안-전문가-양성-추진", destination: /news }
+      - { source_slug: "쿼리파이-글로벌-탑-100-소프트웨어-기업-선정", destination: /news }
+      - { source_slug: "쿼리파이-싱가포르-정부-지원-글로벌-사이버보안-프로그램-선정", destination: /news }
+      - { source_slug: "쿼리파이-아시아-최대-보안-행사-isec-2024-참가", destination: /news }
+      - { source_slug: "쿼리파이-일본-hr-saas-기업과-ai-보안-협력-체계-구축", destination: /news }
+    fallback: { source: /ja/news/:path*, destination: /news }
+
+final_fallback: { source: /ja/:path*, destination: / }
