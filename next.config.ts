@@ -1,19 +1,15 @@
 import type { NextConfig } from "next";
 import { legacyContentRedirects } from "./src/features/content/legacyRedirects";
+import {
+  japaneseExactRedirects,
+  japaneseFallbackRedirects,
+} from "./src/features/routing/jaRedirects";
 
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      {
-        source: "/ja",
-        destination: "https://querypie.ai/",
-        permanent: true,
-      },
-      {
-        source: "/ja/:path*",
-        destination: "https://querypie.ai/",
-        permanent: true,
-      },
+      ...japaneseExactRedirects,
+      ...japaneseFallbackRedirects,
       ...legacyContentRedirects.map((redirect) => ({
         ...redirect,
         permanent: true,
