@@ -32,6 +32,7 @@ type ContentFamilyConfig = {
   download_source_templates?: string[];
   download_destination_template?: string;
   rows: ContentRowConfig[];
+  legacy_fallbacks?: ContentFamilyFallbackConfig[];
   fallback: ContentFamilyFallbackConfig;
 };
 
@@ -202,6 +203,17 @@ function parseContentFamily(value: unknown, index: number): ContentFamilyConfig 
     return row;
   });
 
+  const legacyFallbacks = value.legacy_fallbacks === undefined
+    ? undefined
+    : (() => {
+      if (!Array.isArray(value.legacy_fallbacks)) {
+        throw new Error(`Invalid Japanese redirect config: ${label}.legacy_fallbacks must be an array.`);
+      }
+
+      return value.legacy_fallbacks.map((fallback, fallbackIndex) =>
+        parseStaticRedirect(fallback, `${label}.legacy_fallbacks[${fallbackIndex}]`),
+      );
+    })();
   const fallback = parseStaticRedirect(value.fallback, `${label}.fallback`);
 
   return {
@@ -211,6 +223,7 @@ function parseContentFamily(value: unknown, index: number): ContentFamilyConfig 
     download_source_templates: downloadSourceTemplates,
     download_destination_template: downloadDestinationTemplate,
     rows,
+    legacy_fallbacks: legacyFallbacks,
     fallback,
   };
 }
@@ -290,6 +303,9 @@ export function createJapaneseRedirects(config = loadJapaneseRedirectConfig()): 
   });
 
   config.content_families.forEach((family) => {
+    family.legacy_fallbacks?.forEach((fallback) => {
+      addRedirect(fallback.source, fallback.destination);
+    });
     addRedirect(family.fallback.source, family.fallback.destination);
   });
   addRedirect(config.final_fallback.source, config.final_fallback.destination);
@@ -301,11 +317,10 @@ function sourcePatternToRegExp(source: string) {
   const pattern = source
     .split("/")
     .map((segment) => {
-      if (segment.startsWith(":") && segment.endsWith("*")) {
-        return ".+";
-      }
-      if (segment.startsWith(":")) {
-        return "[^/]+";
+      const parameter = segment.match(/^:([A-Za-z][A-Za-z0-9_]*)(?:\((.+)\))?(\*)?$/);
+      if (parameter) {
+        const [, name, customPattern, modifier] = parameter;
+        return `(?<${name}>${customPattern ?? (modifier === "*" ? ".+" : "[^/]+")})`;
       }
 
       return segment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -316,12 +331,29 @@ function sourcePatternToRegExp(source: string) {
 }
 
 export function resolveJapaneseRedirectSource(sourcePath: string, redirects = japaneseRedirects) {
-  return redirects.find((redirect) => sourcePatternToRegExp(redirect.source).test(sourcePath)) ?? null;
+  for (const redirect of redirects) {
+    const match = sourcePath.match(sourcePatternToRegExp(redirect.source));
+    if (!match) {
+      continue;
+    }
+
+    const destination = Object.entries(match.groups ?? {}).reduce(
+      (resolved, [name, value]) => resolved.replaceAll(`:${name}`, value),
+      redirect.destination,
+    );
+
+    return { ...redirect, destination };
+  }
+
+  return null;
 }
 
 export const japaneseRedirectConfig = loadJapaneseRedirectConfig();
 const expandedJapaneseRedirects = createJapaneseRedirects(japaneseRedirectConfig);
-const japaneseFallbackCount = japaneseRedirectConfig.content_families.length + 1;
+const japaneseFallbackCount = japaneseRedirectConfig.content_families.reduce(
+  (count, family) => count + 1 + (family.legacy_fallbacks?.length ?? 0),
+  1,
+);
 
 export const japaneseExactRedirects = expandedJapaneseRedirects.slice(0, -japaneseFallbackCount);
 export const japaneseFallbackRedirects = expandedJapaneseRedirects.slice(-japaneseFallbackCount);
