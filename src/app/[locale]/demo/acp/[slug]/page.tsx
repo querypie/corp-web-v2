@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import DemoDetailRoute, { generateMetadata as generateDemoMetadata } from "@/app/[locale]/features/demo/[slug]/page";
 import { readContentItem, readContentState } from "@/features/content/contentState.server";
 import { isPublishedContentAccessible } from "@/features/content/data";
@@ -26,6 +26,12 @@ export async function generateStaticParams() {
 }
 
 export default async function AcpDemoDetailPage(props: Props) {
+  const { locale, slug } = await props.params;
+
+  if (decodeURIComponent(slug) === "integrate-sso-with-okta") {
+    permanentRedirect(`/${locale}/demo/acp`);
+  }
+
   const currentItem = await getCurrentItem(props);
 
   if (!currentItem || currentItem.categorySlug !== categorySlug) {
