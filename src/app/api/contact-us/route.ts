@@ -37,15 +37,15 @@ type DeskPieLeadPayload = {
 };
 
 async function sendToDeskPieLead(payload: DeskPieLeadPayload): Promise<void> {
-  const endpoint = process.env.DESKPIE_LEAD_API_ENDPOINT;
-  const apiKey = process.env.DESKPIE_LEAD_API_KEY;
+  const endpoint = process.env.DESKPIE_API_BASE_URL;
+  const apiKey = process.env.DESKPIE_API_KEY;
 
   if (!endpoint || !apiKey) {
     return;
   }
 
   try {
-    const response = await fetch(endpoint, {
+    const response = await fetch(new URL("/api/v1/public/leads", endpoint).toString(), {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { issueLicense } from "./license-service";
+import { DeskPieApiConfigurationError, issueLicense } from "./license-service";
 
-const ENDPOINT = "https://license.example.com/license/community";
+const ENDPOINT = "https://api.deskpie.example";
 const API_KEY = "test-api-key";
 
 describe("issueLicense", () => {
@@ -13,29 +13,32 @@ describe("issueLicense", () => {
     vi.restoreAllMocks();
   });
 
-  describe("환경변수 미설정 시 skip", () => {
-    it("ENDPOINT와 KEY 모두 없으면 {status:'skip'}을 반환한다", async () => {
-      const result = await issueLicense("TestOrg", "test@example.com");
-      expect(result).toEqual({ status: "skip" });
+  describe("환경변수 검증", () => {
+    it("ENDPOINT와 KEY 모두 없으면 configuration error를 throw한다", async () => {
+      await expect(issueLicense("TestOrg", "test@example.com")).rejects.toBeInstanceOf(
+        DeskPieApiConfigurationError,
+      );
     });
 
-    it("ENDPOINT만 없어도 skip을 반환한다", async () => {
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_KEY", API_KEY);
-      const result = await issueLicense("TestOrg", "test@example.com");
-      expect(result).toEqual({ status: "skip" });
+    it("ENDPOINT만 없어도 configuration error를 throw한다", async () => {
+      vi.stubEnv("DESKPIE_API_KEY", API_KEY);
+      await expect(issueLicense("TestOrg", "test@example.com")).rejects.toBeInstanceOf(
+        DeskPieApiConfigurationError,
+      );
     });
 
-    it("KEY만 없어도 skip을 반환한다", async () => {
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_ENDPOINT", ENDPOINT);
-      const result = await issueLicense("TestOrg", "test@example.com");
-      expect(result).toEqual({ status: "skip" });
+    it("KEY만 없어도 configuration error를 throw한다", async () => {
+      vi.stubEnv("DESKPIE_API_BASE_URL", ENDPOINT);
+      await expect(issueLicense("TestOrg", "test@example.com")).rejects.toBeInstanceOf(
+        DeskPieApiConfigurationError,
+      );
     });
   });
 
   describe("필수 파라미터 검증", () => {
     beforeEach(() => {
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_ENDPOINT", ENDPOINT);
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_KEY", API_KEY);
+      vi.stubEnv("DESKPIE_API_BASE_URL", ENDPOINT);
+      vi.stubEnv("DESKPIE_API_KEY", API_KEY);
     });
 
     it("organization이 없으면 throw한다", async () => {
@@ -53,14 +56,15 @@ describe("issueLicense", () => {
 
   describe("API 호출", () => {
     beforeEach(() => {
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_ENDPOINT", ENDPOINT);
-      vi.stubEnv("QUERYPIE_LICENSE_ISSUE_API_KEY", API_KEY);
+      vi.stubEnv("DESKPIE_API_BASE_URL", ENDPOINT);
+      vi.stubEnv("DESKPIE_API_KEY", API_KEY);
     });
 
     it("API 성공 시 {status:'success'}를 반환한다", async () => {
       vi.spyOn(global, "fetch").mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ status: true, errorMessage: "" }),
+        status: 201,
+        json: async () => ({ licenseId: "license-id", customerCompanyId: "company-id" }),
       } as Response);
 
       const result = await issueLicense("TestOrg", "test@example.com");
@@ -70,12 +74,13 @@ describe("issueLicense", () => {
     it("올바른 엔드포인트와 헤더로 요청한다", async () => {
       const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ status: true, errorMessage: "" }),
+        status: 201,
+        json: async () => ({ licenseId: "license-id", customerCompanyId: "company-id" }),
       } as Response);
 
       await issueLicense("TestOrg", "test@example.com");
 
-      expect(fetchSpy).toHaveBeenCalledWith(ENDPOINT, {
+      expect(fetchSpy).toHaveBeenCalledWith("https://api.deskpie.example/api/v1/public/community-licenses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -97,15 +102,16 @@ describe("issueLicense", () => {
       );
     });
 
-    it("응답 status가 false이면 errorMessage로 throw한다", async () => {
+    it("201 응답 body와 무관하게 성공한다", async () => {
       vi.spyOn(global, "fetch").mockResolvedValueOnce({
         ok: true,
-        json: async () => ({ status: false, errorMessage: "License limit exceeded" }),
+        status: 201,
+        json: async () => ({ licenseId: "license-id", customerCompanyId: "company-id" }),
       } as Response);
 
-      await expect(issueLicense("TestOrg", "test@example.com")).rejects.toThrow(
-        "License limit exceeded",
-      );
+      await expect(issueLicense("TestOrg", "test@example.com")).resolves.toEqual({
+        status: "success",
+      });
     });
   });
 });
