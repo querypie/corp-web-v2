@@ -2,8 +2,6 @@
  * @param organization 회사명
  * @param requestedBy 요청자 이메일
  */
-import { createHash } from "node:crypto";
-
 const COMMUNITY_LICENSE_PATH = "/api/v1/public/community-licenses";
 
 export class DeskPieApiConfigurationError extends Error {
@@ -38,13 +36,6 @@ export const issueLicense = async (organization?: string, requestedBy?: string) 
     });
 
     if (!response.ok) {
-      console.error("[community-license] DeskPie request rejected", {
-        status: response.status,
-        endpoint: new URL(endpoint).origin,
-        vercelEnv: process.env.VERCEL_ENV ?? "local",
-        keyLength: apiKey.length,
-        keyFingerprint: createHash("sha256").update(apiKey).digest("hex").slice(0, 12),
-      });
       throw new Error(`Failed to issue license: ${response.status}`);
     }
 
