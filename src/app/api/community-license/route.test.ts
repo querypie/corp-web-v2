@@ -52,6 +52,13 @@ describe("POST /api/community-license", () => {
     vi.unstubAllEnvs();
     vi.stubEnv("SLACK_BOT_OAUTH_TOKEN", "test-slack-token");
     vi.stubEnv("SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES", "C123");
+    vi.stubEnv("DESKPIE_API_BASE_URL", "https://license.example.com");
+    vi.stubEnv("DESKPIE_API_KEY", "test-key");
+    vi.spyOn(global, "fetch").mockResolvedValue({
+      ok: true,
+      status: 201,
+      json: async () => ({ licenseId: "license-id", customerCompanyId: "company-id" }),
+    } as Response);
     slackPostMessage.mockClear();
     stubMxRecord(true);
   });
@@ -111,7 +118,7 @@ describe("POST /api/community-license", () => {
       const body = await res.json();
 
       expect(body.success).toBe(true);
-      expect(fetchSpy).not.toHaveBeenCalled();
+      expect(fetchSpy).toHaveBeenCalledTimes(1);
       expect(slackPostMessage).toHaveBeenCalledTimes(1);
       expect(slackPostMessage.mock.calls[0][0].channel).toBe("C123");
       expect(slackPostMessage.mock.calls[0][0].blocks[0].text.text).toContain(
@@ -158,6 +165,8 @@ describe("POST /api/community-license", () => {
 
     it("Slack 환경변수가 없으면 Slack 전송 없이 success:true를 반환한다", async () => {
       vi.unstubAllEnvs();
+      vi.stubEnv("DESKPIE_API_BASE_URL", "https://license.example.com");
+      vi.stubEnv("DESKPIE_API_KEY", "test-key");
       stubMxRecord(true);
 
       const res = await POST(makeRequest(validBody));
@@ -169,9 +178,17 @@ describe("POST /api/community-license", () => {
   });
 
   describe("issueLicense 연동", () => {
-    beforeEach(() => {
-      vi.stubEnv("DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT", "https://license.example.com");
-      vi.stubEnv("PUBLIC_API_KEY", "test-key");
+
+    it("DeskPie 설정이 없으면 503을 반환하고 Slack을 호출하지 않는다", async () => {
+      vi.unstubAllEnvs();
+      stubMxRecord(true);
+
+      const res = await POST(makeRequest(validBody));
+      const body = await res.json();
+
+      expect(res.status).toBe(503);
+      expect(body.success).toBe(false);
+      expect(slackPostMessage).not.toHaveBeenCalled();
     });
 
     it("issueLicense API가 실패하면 success:false를 반환하고 Slack을 호출하지 않는다", async () => {

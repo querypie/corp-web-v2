@@ -2,7 +2,10 @@ import dns from "dns";
 import { filterXSS } from "xss";
 import { WebClient } from "@slack/web-api";
 import { NextResponse } from "next/server";
-import { issueLicense } from "@/features/community-license/license-service";
+import {
+  DeskPieApiConfigurationError,
+  issueLicense,
+} from "@/features/community-license/license-service";
 import { getLeadFormSlackChannel } from "@/features/slack/lead-form-channel";
 
 type ApplyBody = {
@@ -109,6 +112,9 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Community license apply error:", error);
+    if (error instanceof DeskPieApiConfigurationError) {
+      return NextResponse.json({ success: false, errorMessage: "License service is unavailable." }, { status: 503 });
+    }
     return NextResponse.json({ success: false });
   }
 }

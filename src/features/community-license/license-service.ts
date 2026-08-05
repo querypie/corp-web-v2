@@ -2,25 +2,35 @@
  * @param organization 회사명
  * @param requestedBy 요청자 이메일
  */
+const COMMUNITY_LICENSE_PATH = "/api/v1/public/community-licenses";
+
+export class DeskPieApiConfigurationError extends Error {
+  constructor() {
+    super("DeskPie API is not configured");
+  }
+}
+
+/**
+ * @param organization 회사명
+ * @param requestedBy 요청자 이메일
+ */
 export const issueLicense = async (organization?: string, requestedBy?: string) => {
   try {
     if (!organization || !requestedBy) {
       throw new Error("Missing required parameters");
     }
 
-    if (
-      !process.env.DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT ||
-      !process.env.PUBLIC_API_KEY
-    ) {
-      console.warn("[community-license] license issue: skipped (env not set)");
-      return { status: "skip" };
+    const endpoint = process.env.DESKPIE_API_BASE_URL;
+    const apiKey = process.env.DESKPIE_API_KEY;
+    if (!endpoint || !apiKey) {
+      throw new DeskPieApiConfigurationError();
     }
 
-    const response = await fetch(process.env.DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT, {
+    const response = await fetch(new URL(COMMUNITY_LICENSE_PATH, endpoint).toString(), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-API-KEY": process.env.PUBLIC_API_KEY,
+        "X-API-KEY": apiKey,
       },
       body: JSON.stringify({ organization, requestedBy }),
     });
