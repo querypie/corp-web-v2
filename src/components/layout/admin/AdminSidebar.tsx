@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import { getLocalePath } from "@/constants/i18n";
 import { adminNavGroups, adminPrimaryNavItems } from "@/constants/admin";
 import { useAdminNavigationGuard } from "./AdminNavigationGuard";
+import ThemeSwitch from "@/components/site/ThemeSwitch";
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -26,7 +27,7 @@ export default function AdminSidebar({
     /* 어드민 전용 좌측 네비게이션 */
     <aside
       className={cx(
-        "group relative hidden w-full flex-col bg-bg-deep px-3 py-2 transition-[width,padding] duration-200 md:flex md:px-3 md:py-3",
+        "group relative hidden w-full flex-col bg-bg-deep px-3 py-2 transition-[width,padding] duration-200 md:sticky md:top-0 md:flex md:h-screen md:overflow-y-auto md:px-3 md:py-3",
         isCollapsed ? "md:w-[52px] md:px-2" : "md:w-[200px] md:px-3",
       )}
       onMouseMove={(event) => {
@@ -48,7 +49,7 @@ export default function AdminSidebar({
             className="absolute left-1/2 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100"
             style={{ top: `${hoverY}px` }}
           >
-            <img alt="" aria-hidden="true" className="h-4 w-4 object-contain" src="/assets/ui/icons/arrow-right.svg" />
+            <img alt="" aria-hidden="true" className="theme-icon h-4 w-4 object-contain" src="/assets/ui/icons/arrow-right.svg" />
           </span>
         </button>
       ) : null}
@@ -74,7 +75,7 @@ export default function AdminSidebar({
             alt=""
             aria-hidden="true"
             className={cx(
-              "h-5 w-5 object-contain transition-opacity duration-200",
+              "theme-icon h-5 w-5 object-contain transition-opacity duration-200",
               isCollapsed ? "opacity-100 group-hover:opacity-0" : "opacity-100",
             )}
             src="/assets/brand/logos/querypie-symbol.svg"
@@ -93,7 +94,7 @@ export default function AdminSidebar({
           onClick={onToggleCollapse}
           type="button"
         >
-          <img alt="" aria-hidden="true" className="h-4 w-4 object-contain" src="/assets/ui/icons/panel-left.svg" />
+          <img alt="" aria-hidden="true" className="theme-icon h-4 w-4 object-contain" src="/assets/ui/icons/panel-left.svg" />
         </button>
       </div>
 
@@ -118,7 +119,7 @@ export default function AdminSidebar({
                 key={item.href}
                 className={cx(
                   "inline-flex items-center rounded-button px-3 py-2 type-body-md transition-colors",
-                  isActive ? "bg-secondary text-fg" : "text-mute hover:bg-[#242426] hover:text-fg",
+                  isActive ? "bg-secondary text-fg" : "text-mute hover:bg-bg-hover hover:text-fg",
                 )}
                 href={item.href}
                 onClick={(event) => {
@@ -154,7 +155,7 @@ export default function AdminSidebar({
                     key={item.href}
                     className={cx(
                       "inline-flex items-center rounded-button px-3 py-2 type-body-md transition-colors",
-                      isActive ? "bg-secondary text-fg" : "text-mute hover:bg-[#242426] hover:text-fg",
+                      isActive ? "bg-secondary text-fg" : "text-mute hover:bg-bg-hover hover:text-fg",
                     )}
                     href={item.href}
                     onClick={(event) => {
@@ -171,8 +172,13 @@ export default function AdminSidebar({
         ))}
       </nav>
 
-      {!isCollapsed ? (
-        <div className="mt-5 pt-5 md:mt-auto md:block">
+      <div className={cx("relative z-20 mt-5 pt-5 md:mt-auto", isCollapsed ? "flex justify-center" : "flex flex-col gap-2")}>
+        <ThemeSwitch
+          className={cx(isCollapsed ? "h-11 w-9" : "w-full px-3")}
+          compact={isCollapsed}
+          locale="ko"
+        />
+        {isCollapsed ? null : (
           <Button
             arrow={false}
             className="w-full justify-center"
@@ -182,8 +188,8 @@ export default function AdminSidebar({
           >
             Go Homepage
           </Button>
-        </div>
-      ) : null}
+        )}
+      </div>
 
     </aside>
   );

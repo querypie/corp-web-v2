@@ -1,18 +1,32 @@
-import type { ButtonHTMLAttributes, ReactNode } from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
 
 export type ButtonVariant = "primary" | "secondary" | "outline";
 export type ButtonStyle = "round" | "full";
 export type ButtonSize = "xsmall" | "small" | "default" | "large";
 export type ButtonState = "default" | "hover" | "disable";
 
-export type ButtonProps = Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "style"> & {
+type ButtonBaseProps = {
   arrow?: boolean;
   children?: ReactNode;
+  className?: string;
+  disabled?: boolean;
   size?: ButtonSize;
   style?: ButtonStyle;
   state?: ButtonState;
   variant?: ButtonVariant;
 };
+
+type ButtonElementProps = ButtonBaseProps &
+  Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "className" | "disabled" | "style"> & {
+    href?: undefined;
+  };
+
+type ButtonLinkProps = ButtonBaseProps &
+  Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "children" | "className" | "href" | "style"> & {
+    href: string;
+  };
+
+export type ButtonProps = ButtonElementProps | ButtonLinkProps;
 
 type ButtonStyleConfig = {
   container: string;
@@ -35,20 +49,20 @@ export function getButtonStyle(
     container: cx(
       "pressable inline-flex items-center justify-center rounded-button",
       shape === "full" ? "rounded-full" : "rounded-button",
-      size === "xsmall" && "h-[26px] gap-1.5 px-3",
-      size === "small" && "h-8 gap-1.5 px-4",
-      size === "default" && "h-10 gap-1.5 px-5",
-      size === "large" && "h-12 gap-2 px-6",
+      size === "xsmall" && cx("h-[26px] gap-1.5", shape === "round" ? "px-2" : "px-3"),
+      size === "small" && cx("h-[34px] gap-1.5", shape === "round" ? "px-3" : "px-4"),
+      size === "default" && cx("h-10 gap-1.5", shape === "round" ? "px-4" : "px-5"),
+      size === "large" && cx("h-12 gap-2", shape === "round" ? "px-5" : "px-6"),
       variant === "outline" &&
         cx(
-          "border border-secondary",
-          state === "hover" ? "bg-[#242426]" : "bg-transparent",
-          "hover:bg-[#242426]",
+          "border border-border",
+          state === "hover" ? "bg-secondary" : "bg-transparent",
+          "hover:bg-secondary",
         ),
       variant === "primary" &&
-        cx(state === "hover" ? "bg-[#ABABAB]" : "bg-primary", "hover:bg-[#ABABAB]"),
+        cx(state === "hover" ? "bg-primary-hover" : "bg-primary", "hover:bg-primary-hover"),
       variant === "secondary" &&
-        cx(state === "hover" ? "bg-[#343434]" : "bg-secondary", "hover:bg-[#343434]"),
+        cx(state === "hover" ? "bg-secondary-hover" : "bg-secondary", "hover:bg-secondary-hover"),
       state === "disable" && "opacity-40",
     ),
     text: cx(
@@ -94,10 +108,10 @@ export default function Button({
   children = "Button",
   className,
   disabled,
+  href,
   size = "default",
   style = "round",
   state = "default",
-  type = "button",
   variant = "secondary",
   ...props
 }: ButtonProps) {
@@ -105,18 +119,8 @@ export default function Button({
   const resolvedState = disabled ? "disable" : state;
   const styles = getButtonStyle(variant, style, size, resolvedState);
 
-  return (
-    <button
-      className={cx(
-        styles.container,
-        styles.text,
-        "group cursor-pointer disabled:cursor-not-allowed",
-        className,
-      )}
-      disabled={resolvedState === "disable"}
-      type={type}
-      {...props}
-    >
+  const content = (
+    <>
       {/* 버튼 텍스트 */}
       <span className="inline-flex items-center justify-center gap-2 text-center">{children}</span>
       {/* arrow가 켜진 경우만 아이콘 노출 */}
@@ -128,6 +132,39 @@ export default function Button({
           )}
         />
       ) : null}
+    </>
+  );
+
+  const buttonClassName = cx(
+    styles.container,
+    styles.text,
+    "group cursor-pointer disabled:cursor-not-allowed",
+    className,
+  );
+
+  if (href) {
+    const anchorProps = props as AnchorHTMLAttributes<HTMLAnchorElement>;
+    return (
+      <a
+        {...anchorProps}
+        aria-disabled={resolvedState === "disable" || undefined}
+        className={buttonClassName}
+        href={resolvedState === "disable" ? undefined : href}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  const { type = "button", ...buttonProps } = props as ButtonHTMLAttributes<HTMLButtonElement>;
+  return (
+    <button
+      {...buttonProps}
+      className={buttonClassName}
+      disabled={resolvedState === "disable"}
+      type={type}
+    >
+      {content}
     </button>
   );
 }

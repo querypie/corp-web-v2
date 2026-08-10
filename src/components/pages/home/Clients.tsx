@@ -44,7 +44,7 @@ export default function Clients({
                   <img
                     key={`${groupIndex}-${logo.alt}`}
                     alt={logo.alt}
-                    className={`${logo.className} block w-auto shrink-0`}
+                    className={`theme-icon ${logo.className} block w-auto shrink-0`}
                     height={logo.height}
                     src={logo.src}
                     width={logo.width}
@@ -54,8 +54,8 @@ export default function Clients({
             ))}
           </div>
           {/* 양 끝 fade 처리로 루프 경계가 덜 보이게 함 */}
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-[120px] bg-gradient-to-r from-[rgba(8,9,10,0)] to-bg" />
-          <div className="pointer-events-none absolute inset-y-0 left-0 w-[120px] bg-gradient-to-r from-bg to-[rgba(8,9,10,0)]" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-[120px] bg-gradient-to-r from-transparent to-bg" />
+          <div className="pointer-events-none absolute inset-y-0 left-0 w-[120px] bg-gradient-to-r from-bg to-transparent" />
         </div>
       </div>
     </section>

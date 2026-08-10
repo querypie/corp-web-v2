@@ -9,9 +9,9 @@
    ========================================================================== */
 :root {
   /* 폰트 토큰: 기본 / 한글 / 일본어 / 모노 */
-  --font-sans: var(--font-mona-sans), var(--font-pretendard), var(--font-m-plus-1), "SF Pro Display", -apple-system, system-ui, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
-  --font-sans-ko: var(--font-mona-sans), var(--font-pretendard), sans-serif;
-  --font-sans-ja: var(--font-mona-sans), var(--font-m-plus-1), "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
+  --font-sans: var(--font-mona-sans), var(--font-pretendard), var(--font-pretendard-jp), "SF Pro Display", -apple-system, system-ui, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Open Sans", "Helvetica Neue", sans-serif;
+  --font-sans-ko: var(--font-mona-sans), -apple-system-body, var(--font-pretendard), sans-serif;
+  --font-sans-ja: var(--font-mona-sans), var(--font-pretendard-jp), "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
   --font-mono: var(--font-jetbrains-mono), monospace;
 
   /* 라운드 토큰: rounded-* 유틸리티가 이 값을 사용한다. */
@@ -21,43 +21,6 @@
   --radius-modal: 20px;
   --radius-full: 9999px;
 
-  /* 공통 컬러: 전역 fg/bg/border 및 상태 색상 */
-  --color-fg: #EEEEEE;
-  --color-mute: #909090;
-  --color-placeholder: #505050;
-  --color-bg-content: #1D1D1D;
-  --color-bg-deep: #1A1A1A;
-  --color-bg: #0F0F0F;
-  --color-bg-modal: #0F0F0F;
-  --color-overlay-rgb: 8 9 10;
-  --color-border: #2B2B2B;
-  --color-primary: #EEEEEE;
-  --color-secondary: #2E2E2E;
-  --color-bg-gnb-popover-rgb: 36 36 36;
-  --color-white: #FFFFFF;
-  --color-point: #C0E136;
-  --color-success: #22C55E;
-  --color-warning: #CA8A04;
-  --color-destructive: #EF4444;
-  --color-brand: #EF612E;
-  --gradient-ai: linear-gradient(90deg, #FF7051 0%, #BA709F 30%, #456BF0 100%);
-
-  /* 컨텐츠 컬러: 본문 코드/테이블/캡션 등 컨텐츠 전용 색상 */
-  --color-code-inline-fg: #cccccc;
-  --color-code-block-fg: #cccccc;
-  --color-code-line-number-fg: #8C9099;
-  --color-content-image-caption-fg: #8C9099;
-  --color-content-table-header-fg: #F1F1F2;
-  --color-content-table-cell-fg: #F1F1F2;
-  --color-code-token-tag: #56b6c2;
-  --color-code-token-attr: #d19a66;
-  --color-code-token-string: #98c379;
-  --color-code-token-keyword: #c678dd;
-  --color-code-token-number: #d19a66;
-  --color-code-token-comment: #7f848e;
-  --color-code-token-variable: #61afef;
-  --color-code-token-punctuation: #abb2bf;
-
   /* 썸네일 공통 비율: 카드/리스트 이미지에서 재사용 */
   --content-thumbnail-aspect: 16 / 9;
 
@@ -65,6 +28,128 @@
   --motion-press-scale: 0.98;
   --motion-press-duration: 160ms;
   --motion-press-ease: ease;
+}
+
+/* 라이트 모드가 CSS 기본값이다. 자바스크립트가 비활성화되어도 흰 배경으로 읽을 수 있다. */
+:root,
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-fg: #2F2D29;
+  --color-mute: #888888;
+  --color-placeholder: #aaaaaa;
+  --color-bg-content: #f5f5f4;
+  --color-bg-deep: #f5f5f4;
+  --color-bg-tab-group: #f7f7f7;
+  --color-bg-hover: #ebeaea;
+  --color-bg: #FFFFFF;
+  --color-bg-modal: #FFFFFF;
+  --color-overlay-rgb: 15 15 15;
+  --color-chrome-rgb: 255 255 255;
+  --color-shadow-rgb: 15 15 15;
+  --color-border: #e3e3e3;
+  --color-border-strong: #B8B8B8;
+  --color-primary: #2F2D29;
+  --color-primary-hover: #44423e;
+  --color-secondary: #f1f0f0;
+  --color-secondary-hover: #ebeaea;
+  --color-bg-gnb-popover-rgb: 242 242 242;
+  --color-surface-popover-rgb: 242 242 242;
+  --opacity-popover-surface: 0.9;
+  --color-white: #FFFFFF;
+  --color-point: #567000;
+  --color-success: #1db153;
+  --color-warning: #9A6700;
+  --color-destructive: #D52B2B;
+  --color-chart-primary: #AED629;
+  --color-chart-secondary: #20A957;
+  --color-brand: #dc4e1a;
+  --color-on-brand: #FFFFFF;
+  --color-link: #2859B8;
+  --color-link-hover: #18438F;
+  --color-info-surface: #EEF5FF;
+  --color-inverse-bg: #2F2D29;
+  --color-inverse-fg: #F7F7F7;
+  --color-inverse-muted: #B8B8B8;
+  --color-inverse-border: rgb(255 255 255 / 0.14);
+  --color-switch-track: #D8D8D8;
+  --color-scrollbar-track: #FFFFFF;
+  --color-scrollbar-thumb: #C7C7C7;
+  --color-scrollbar-thumb-hover: #AFAFAF;
+  --color-feature-media-frame: #F0F0F0;
+  --color-code-bg: #1D1D1D;
+  --color-code-inline-fg: #303030;
+  --color-code-block-fg: #E6E6E6;
+  --color-code-line-number-fg: #8C8C8C;
+  --color-content-image-caption-fg: #686868;
+  --color-content-table-header-fg: #262626;
+  --color-content-table-cell-fg: #3E3E3E;
+  --gradient-ai: linear-gradient(90deg, #D94C2B 0%, #9E4F7F 34%, #3158CF 100%);
+  --gradient-home-hero: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg) 24%, #E6E6E6 100%);
+  --gradient-mockup-shadow-mobile: linear-gradient(180deg, rgba(15, 15, 15, 0.16) 0%, rgba(15, 15, 15, 0.08) 56%, rgba(15, 15, 15, 0) 100%);
+  --gradient-mockup-shadow-desktop: linear-gradient(180deg, rgba(15, 15, 15, 0.2) 0%, rgba(15, 15, 15, 0.12) 32%, rgba(15, 15, 15, 0.05) 68%, rgba(15, 15, 15, 0) 100%);
+  --gradient-footer: none;
+  --icon-outlink-mask: url("/assets/ui/icons/Outlink-bold.svg");
+}
+
+:root[data-theme="dark"],
+.theme-dark {
+  color-scheme: dark;
+  --font-weight-regular: 300;
+  --color-fg: #EEEEEE;
+  --color-mute: #909090;
+  --color-placeholder: #555555;
+  --color-bg-content: #1D1D1D;
+  --color-bg-deep: #1D1D1D;
+  --color-bg-tab-group: #1A1A1A;
+  --color-bg-hover: #2A2A2A;
+  --color-bg: #0F0F0F;
+  --color-bg-modal: #0F0F0F;
+  --color-overlay-rgb: 8 8 8;
+  --color-chrome-rgb: 8 8 8;
+  --color-shadow-rgb: 0 0 0;
+  --color-border: #2B2B2B;
+  --color-border-strong: #555555;
+  --color-primary: #EEEEEE;
+  --color-primary-hover: #ABABAB;
+  --color-secondary: #2E2E2E;
+  --color-secondary-hover: #3a3a3a;
+  --color-bg-gnb-popover-rgb: 40 40 40;
+  --color-surface-popover-rgb: 40 40 40;
+  --opacity-popover-surface: 0.9;
+  --color-white: #FFFFFF;
+  --color-point: #C0E136;
+  --color-success: #22C55E;
+  --color-warning: #D9A31A;
+  --color-destructive: #EF4444;
+  --color-chart-primary: #C0E136;
+  --color-chart-secondary: #22C55E;
+  --color-brand: #EF7442;
+  --color-on-brand: #0F0F0F;
+  --color-link: #7EA2FF;
+  --color-link-hover: #A9C0FF;
+  --color-info-surface: #172238;
+  --color-inverse-bg: #EEEEEE;
+  --color-inverse-fg: #0F0F0F;
+  --color-inverse-muted: #555555;
+  --color-inverse-border: rgb(15 15 15 / 0.1);
+  --color-switch-track: #3A3A3A;
+  --color-scrollbar-track: #141414;
+  --color-scrollbar-thumb: #4A4A4A;
+  --color-scrollbar-thumb-hover: #5A5A5A;
+  --color-feature-media-frame: transparent;
+  --color-code-bg: #1D1D1D;
+  --color-code-inline-fg: #CCCCCC;
+  --color-code-block-fg: #CCCCCC;
+  --color-code-line-number-fg: #8C8C8C;
+  --color-content-image-caption-fg: #8C8C8C;
+  --color-content-table-header-fg: #F1F1F1;
+  --color-content-table-cell-fg: #F1F1F1;
+  --gradient-ai: linear-gradient(90deg, #FF7051 0%, #BA709F 30%, #456BF0 100%);
+  --gradient-home-hero: linear-gradient(180deg, var(--color-bg) 0%, var(--color-bg) 24%, #444444 100%);
+  --gradient-mockup-shadow-mobile: linear-gradient(180deg, rgba(18, 18, 18, 0.28) 0%, rgba(18, 18, 18, 0.14) 56%, rgba(18, 18, 18, 0) 100%);
+  --gradient-mockup-shadow-desktop: linear-gradient(180deg, rgba(18, 18, 18, 0.36) 0%, rgba(18, 18, 18, 0.24) 32%, rgba(18, 18, 18, 0.11) 68%, rgba(18, 18, 18, 0) 100%);
+  --gradient-footer: radial-gradient(93.31% 130% at 50% 118%, rgba(255, 132, 64, 0.58) 0%, rgba(255, 112, 48, 0.34) 24%, rgba(255, 94, 38, 0.18) 48%, rgba(255, 94, 38, 0) 72%);
+  --icon-outlink-mask: url("/assets/ui/icons/Outlink.svg");
 }
 
 * {
@@ -106,6 +191,39 @@ body {
   font-synthesis-weight: none;
 }
 
+.homepage-aip-mockup {
+  --mockup-scrollbar-track: #171717;
+  --mockup-scrollbar-thumb: #4A4A4A;
+  --mockup-scrollbar-thumb-hover: #5A5A5A;
+  scrollbar-color: var(--mockup-scrollbar-thumb) var(--mockup-scrollbar-track);
+}
+
+.homepage-aip-mockup * {
+  scrollbar-color: var(--mockup-scrollbar-thumb) var(--mockup-scrollbar-track);
+}
+
+.homepage-aip-mockup *::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.homepage-aip-mockup *::-webkit-scrollbar-track {
+  background: var(--mockup-scrollbar-track);
+}
+
+.homepage-aip-mockup *::-webkit-scrollbar-thumb {
+  background: var(--mockup-scrollbar-thumb);
+  border-color: var(--mockup-scrollbar-track);
+}
+
+.homepage-aip-mockup *::-webkit-scrollbar-thumb:hover {
+  background: var(--mockup-scrollbar-thumb-hover);
+}
+
+.homepage-aip-mockup *::-webkit-scrollbar-corner {
+  background: var(--mockup-scrollbar-track);
+}
+
 .homepage-aip-mockup :where([class~="font-normal"], [class~="font-medium"]) {
   font-weight: 350;
 }
@@ -138,12 +256,25 @@ body {
   background: transparent;
 }
 
+.feature-gif-frame {
+  box-shadow: 0 0 0 4px var(--color-feature-media-frame);
+}
+
+/* 불투명한 흰 배경을 가진 홈 제품 아이콘을 라이트 테마 표면색과 합성한다. */
+.home-feature-icon-surface img {
+  mix-blend-mode: multiply;
+}
+
+:root[data-theme="dark"] .home-feature-icon-surface img {
+  mix-blend-mode: normal;
+}
+
 /* ==========================================================================
    Global Scrollbar
    공통 스크롤바 톤. 데스크톱 브라우저 전반에 적용된다.
    ========================================================================== */
 html {
-  scrollbar-color: #4a4c50 #141516;
+  scrollbar-color: var(--color-scrollbar-thumb) var(--color-scrollbar-track);
 }
 
 *::-webkit-scrollbar {
@@ -152,21 +283,53 @@ html {
 }
 
 *::-webkit-scrollbar-track {
-  background: #141516;
+  background: var(--color-scrollbar-track);
 }
 
 *::-webkit-scrollbar-thumb {
-  background: #4a4c50;
-  border: 2px solid #141516;
+  background: var(--color-scrollbar-thumb);
+  border: 2px solid var(--color-scrollbar-track);
   border-radius: 999px;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  background: #5a5d62;
+  background: var(--color-scrollbar-thumb-hover);
 }
 
 *::-webkit-scrollbar-corner {
-  background: #141516;
+  background: var(--color-scrollbar-track);
+}
+
+.theme-icon {
+  filter: brightness(0) saturate(100%);
+}
+
+:root[data-theme="dark"] .theme-icon {
+  filter: none;
+}
+
+.theme-invert-on-dark,
+.theme-enhance-on-dark {
+  filter: none;
+}
+
+:root[data-theme="dark"] .theme-invert-on-dark {
+  filter: invert(1) grayscale(1) brightness(1.25);
+}
+
+:root[data-theme="dark"] .theme-enhance-on-dark {
+  filter: grayscale(1) brightness(1.85) contrast(1.25);
+}
+
+.theme-dark-icon-plate {
+  border-radius: 10px;
+  background: var(--color-inverse-bg);
+  padding: 8px;
+}
+
+:root[data-theme="dark"] .theme-dark-icon-plate {
+  background: transparent;
+  padding: 0;
 }
 
 a {
@@ -260,8 +423,16 @@ textarea:-webkit-autofill:focus {
   .icon-outlink-mask {
     display: inline-block;
     background-color: currentColor;
-    -webkit-mask: url("/assets/ui/icons/Outlink.svg") center / contain no-repeat;
-    mask: url("/assets/ui/icons/Outlink.svg") center / contain no-repeat;
+    -webkit-mask: var(--icon-outlink-mask) center / contain no-repeat;
+    mask: var(--icon-outlink-mask) center / contain no-repeat;
+  }
+
+  .gnb-popover-surface {
+    background-color: rgb(var(--color-bg-gnb-popover-rgb) / var(--opacity-popover-surface));
+  }
+
+  .site-popover-surface {
+    background-color: rgb(var(--color-surface-popover-rgb) / var(--opacity-popover-surface));
   }
 
   .group\/nav:hover .group-hover\/nav\:text-mute,
@@ -282,8 +453,8 @@ textarea:-webkit-autofill:focus {
 
   .ui-field:focus,
   .ui-field:focus-visible {
-    border-color: rgba(255, 137, 47, 0.42);
-    box-shadow: 0 0 0 3px rgba(255, 137, 47, 0.12);
+    border-color: transparent;
+    box-shadow: none;
   }
 
   /* 래퍼형 입력 필드 공통 스타일.
@@ -294,8 +465,8 @@ textarea:-webkit-autofill:focus {
   }
 
   .ui-field-shell:focus-within {
-    border-color: rgba(255, 137, 47, 0.42);
-    box-shadow: 0 0 0 3px rgba(255, 137, 47, 0.12);
+    border-color: transparent;
+    box-shadow: none;
   }
 
   /* 관리 카드 hover/focus 가이드:
@@ -305,7 +476,7 @@ textarea:-webkit-autofill:focus {
   }
 
   .card-hover:focus-visible {
-    background-color: #2A2A2A;
+    background-color: var(--color-bg-hover);
   }
 
   /* 퍼블릭 컨텐츠 카드 제목 공통 스타일:
@@ -331,14 +502,10 @@ textarea:-webkit-autofill:focus {
     transition-timing-function: var(--motion-press-ease);
   }
 
-  .pressable:not(:disabled):not([aria-disabled="true"]):active {
-    transform: translateZ(0) scale(var(--motion-press-scale));
-  }
-
   /* 마우스가 있는 환경에서만 hover 반응을 강하게 준다. */
   @media (hover: hover) and (pointer: fine) {
     .card-hover:hover {
-      background-color: #2A2A2A;
+      background-color: var(--color-bg-hover);
     }
 
     .group:hover .card-media-motion {
@@ -379,42 +546,42 @@ textarea:-webkit-autofill:focus {
     font-size: 26px;
     line-height: 32px;
     letter-spacing: 0;
-    font-weight: 300;
+    font-weight: var(--font-weight-regular);
   }
 
   .type-h2 {
     font-size: 20px;
     line-height: 28px;
-    letter-spacing: +0.2px;
-    font-weight: 300;
+    letter-spacing: 0;
+    font-weight: var(--font-weight-regular);
   }
 
   .type-h3 {
     font-size: 16px;
     line-height: 24px;
     letter-spacing: 0;
-    font-weight: 300;
+    font-weight: var(--font-weight-regular);
   }
 
   .type-body-lg {
     font-size: 15px;
     line-height: 24px;
-    letter-spacing: +0.2px;
-    font-weight: 300;
+    letter-spacing: 0;
+    font-weight: var(--font-weight-regular);
   }
 
   .type-body-md {
     font-size: 14px;
     line-height: 22px;
-    letter-spacing: +0.2px;
-    font-weight: 300;
+    letter-spacing: 0;
+    font-weight: var(--font-weight-regular);
   }
 
   .type-body-sm {
     font-size: 12px;
     line-height: 20px;
-    letter-spacing: +0.2px;
-    font-weight: 300;
+    letter-spacing: 0;
+    font-weight: var(--font-weight-regular);
   }
 
 
@@ -424,7 +591,7 @@ textarea:-webkit-autofill:focus {
     font-size: 13px;
     line-height: 20px;
     letter-spacing: 0;
-    font-weight: 300;
+    font-weight: var(--font-weight-regular);
   }
 
   /* 콘텐츠 본문 전용 타이포 */
@@ -432,42 +599,42 @@ textarea:-webkit-autofill:focus {
     font-size: 24px;
     line-height: 34px;
     letter-spacing: 0;
-    font-weight: 300;
+    font-weight: var(--font-weight-regular);
   }
 
   .type-content-h2 {
     font-size: 20px;
     line-height: 30px;
     letter-spacing: 0;
-    font-weight: 300;
+    font-weight: var(--font-weight-regular);
   }
 
   .type-content-h3 {
     font-size: 16px;
     line-height: 26px;
     letter-spacing: 0;
-    font-weight: 300;
+    font-weight: var(--font-weight-regular);
   }
 
   .type-content-body {
     font-size: 15px;
     line-height: 26px;
-    letter-spacing: +0.2px;
-    font-weight: 300;
+    letter-spacing: +0.1px;
+    font-weight: var(--font-weight-regular);
   }
 
   .type-content-table {
     font-size: 13px;
     line-height: 22px;
-    letter-spacing: +0.2px;
-    font-weight: 300;
+    letter-spacing: +0.1px;
+    font-weight: var(--font-weight-regular);
   }
 
   .type-content-caption {
     font-size: 13px;
     line-height: 20px;
-    letter-spacing: +0.2px;
-    font-weight: 300;
+    letter-spacing: +0.1px;
+    font-weight: var(--font-weight-regular);
   }
 
   .type-content-mono {
@@ -475,7 +642,7 @@ textarea:-webkit-autofill:focus {
     font-size: 12px;
     line-height: 20px;
     letter-spacing: 0;
-    font-weight: 300;
+    font-weight: var(--font-weight-regular);
   }
 
   .content-inline-code {
@@ -495,7 +662,7 @@ textarea:-webkit-autofill:focus {
     font-family: var(--font-mono) !important;
     font-size: 12px;
     letter-spacing: 0;
-    font-weight: 300;
+    font-weight: var(--font-weight-regular);
     color: var(--color-code-inline-fg);
     overflow-wrap: anywhere;
     white-space: normal;
@@ -515,7 +682,7 @@ textarea:-webkit-autofill:focus {
     overflow-x: auto;
     overflow-y: hidden;
     border-radius: 10px;
-    background: var(--color-bg-content);
+    background: var(--color-code-bg);
   }
 
   .code-block-gutter {
@@ -660,6 +827,13 @@ textarea:-webkit-autofill:focus {
     }
 
   }
+}
+
+/* 포커스 후 남는 브라우저/Tailwind 외곽 링을 전역에서 숨긴다. */
+:where(*:focus, *:focus-visible, *:focus-within) {
+  --tw-ring-offset-shadow: 0 0 #0000 !important;
+  --tw-ring-shadow: 0 0 #0000 !important;
+  outline: none !important;
 }
 
 /* ==========================================================================

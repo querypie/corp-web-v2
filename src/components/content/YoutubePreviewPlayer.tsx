@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MediaPlayButton from "@/components/ui/MediaPlayButton";
 
 type YoutubePreviewPlayerProps = {
+  autoplayOnView?: boolean;
   embedSrc?: string;
   thumbnailAlt: string;
   thumbnailSrc: string;
@@ -23,6 +24,7 @@ function withPlaybackParams(src: string) {
 }
 
 export default function YoutubePreviewPlayer({
+  autoplayOnView = false,
   embedSrc,
   thumbnailAlt,
   thumbnailSrc,
@@ -30,10 +32,70 @@ export default function YoutubePreviewPlayer({
   videoSrc,
 }: YoutubePreviewPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (!autoplayOnView || !videoSrc) return;
+
+    let rafId = 0;
+
+    function updatePlayback() {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const video = videoRef.current;
+        if (!video) return;
+
+        if (document.visibilityState !== "visible") {
+          video.pause();
+          return;
+        }
+
+        const rect = video.getBoundingClientRect();
+        const viewportCenter = window.innerHeight / 2;
+        const videoCenter = rect.top + rect.height / 2;
+        const activationDistance = Math.min(window.innerHeight * 0.48, 420);
+        const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
+        const isFocused = Math.abs(videoCenter - viewportCenter) <= activationDistance;
+
+        if (isVisible && isFocused) {
+          void video.play();
+          return;
+        }
+
+        video.pause();
+      });
+    }
+
+    updatePlayback();
+    window.addEventListener("scroll", updatePlayback, { passive: true });
+    window.addEventListener("resize", updatePlayback);
+    document.addEventListener("visibilitychange", updatePlayback);
+
+    return () => {
+      cancelAnimationFrame(rafId);
+      window.removeEventListener("scroll", updatePlayback);
+      window.removeEventListener("resize", updatePlayback);
+      document.removeEventListener("visibilitychange", updatePlayback);
+      videoRef.current?.pause();
+    };
+  }, [autoplayOnView, videoSrc]);
 
   return (
     <div className="aspect-video w-full max-w-[1080px] overflow-hidden rounded-box bg-bg-content">
-      {isPlaying && videoSrc ? (
+      {autoplayOnView && videoSrc ? (
+        <video
+          aria-label={title}
+          className="block h-full w-full bg-black object-cover"
+          controls
+          loop
+          muted
+          playsInline
+          poster={thumbnailSrc}
+          preload="metadata"
+          ref={videoRef}
+          src={`${videoSrc}#t=0.001`}
+        />
+      ) : isPlaying && videoSrc ? (
         <video
           autoPlay
           className="block h-full w-full bg-black object-cover"

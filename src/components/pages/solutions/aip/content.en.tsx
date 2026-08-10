@@ -97,7 +97,7 @@ export default function AipENSolutionContent({ locale }: Props) {
   const featureItems = getFeatureItems(locale);
 
   return (
-    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
       <div className="flex flex-col gap-14 md:gap-20">
         <div>
           <section className="flex w-full justify-center">
@@ -116,6 +116,7 @@ export default function AipENSolutionContent({ locale }: Props) {
         <div>
           <section className="flex w-full justify-center">
             <YoutubePreviewPlayer
+              autoplayOnView
               thumbnailAlt="QueryPie AI Platform video thumbnail"
               thumbnailSrc="/assets/products/aip/aip-cover.png"
               title="QueryPie AI Platform video"
@@ -134,7 +135,7 @@ export default function AipENSolutionContent({ locale }: Props) {
       </div>
 
       <div>
-        <Cta locale={locale} />
+        <Cta locale={locale} secondaryActionHref="" secondaryActionLabel="" />
       </div>
     </div>
   );

@@ -4,6 +4,7 @@ type FooterSection = {
 };
 import { getFooterHref, getLegalHref } from "@/constants/navigation";
 import { getLocalePath, type Locale } from "@/constants/i18n";
+import ThemeSwitch from "@/components/site/ThemeSwitch";
 
 type FooterProps = {
   addressLines?: string[];
@@ -53,10 +54,9 @@ const socialLinks = [
 export default function Footer({
   addressLines = [
     "© 2017-2026 QueryPie, Inc. All rights reserved.",
-    "Headquarter : 2525 West 8th Street, Suite 300, Los Angeles, CA 90057",
-    "Seoul Magok Office : 7F, 26, Magokjungang 1-ro, Gangseo-gu, Seoul, Republic of Korea",
-    "Seoul Gangnam Office : 3F, 464, Gangnam-daero, Gangnam-gu, Seoul, Republic of Korea",
-    "Japan Office : 15F, 1 Chome-17-1 Toranomon, Minato City, Tokyo 105-6490",
+    "Headquarters : CHEQUER Global, Inc., 2525 West 8th Street, Suite 300, Los Angeles, CA 90057",
+    "R&D : 주식회사 쿼리파이, 7F, 26, Magokjungang 1-ro, Gangseo-gu, Seoul 07807",
+    "Japan : QueryPie AI合同会社, 〒105-6490 東京都港区虎ノ門1丁目17番1号 虎ノ門ヒルズビジネスタワー15階",
   ],
   className,
   legalLinks = ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"],
@@ -73,7 +73,7 @@ export default function Footer({
   return (
     <footer
       className={cx(
-        "relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10 md:bg-[radial-gradient(93.31%_130%_at_50%_118%,rgba(255,132,64,0.58)_0%,rgba(255,112,48,0.34)_24%,rgba(255,94,38,0.18)_48%,rgba(255,94,38,0.00)_72%)]",
+        "relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10 md:bg-[image:var(--gradient-footer)]",
         className,
       )}
     >
@@ -84,7 +84,7 @@ export default function Footer({
           <a aria-label="QueryPie AI" className="inline-flex h-5 w-[116px] shrink-0 items-center" href={getLocalePath(locale as Locale, "/")}>
             <img
               alt="QueryPie AI"
-              className="block h-5 w-[116px]"
+              className="theme-icon block h-5 w-[116px]"
               src="/assets/brand/logos/querypie-ai-logo.svg"
             />
           </a>
@@ -112,18 +112,11 @@ export default function Footer({
                   {section.items.map((item) => {
                     const href = getFooterHref(item, locale);
                     const isExternal = href.startsWith("http");
-                    const isSolutionsSection =
-                      section.title === "Solutions" ||
-                      section.title === "ソリューション" ||
-                      section.title === "솔루션";
 
                     return (
                       <a
                         key={item}
-                        className={cx(
-                          "inline-flex items-center gap-1.5 transition-colors hover:text-mute",
-                          isSolutionsSection && "whitespace-nowrap md:whitespace-normal",
-                        )}
+                        className="inline-flex self-start items-center gap-1.5 whitespace-nowrap transition-colors hover:text-mute"
                         href={href}
                         rel={isExternal ? "noreferrer noopener" : undefined}
                         target={isExternal ? "_blank" : undefined}
@@ -145,24 +138,27 @@ export default function Footer({
         <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-5">
               {/* SNS 링크 */}
-              <div className="flex items-center gap-[14px]">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    aria-label={link.label}
-                    className="inline-flex h-7 w-7 items-center justify-center opacity-100 transition-opacity hover:opacity-50"
-                    href={link.href}
-                    rel={link.href.startsWith("http") ? "noreferrer noopener" : undefined}
-                    target={link.href.startsWith("http") ? "_blank" : undefined}
-                  >
-                    <img
-                      alt=""
-                      aria-hidden="true"
-                      className={link.className}
-                      src={link.src}
-                    />
-                  </a>
-                ))}
+              <div className="flex flex-wrap items-center justify-between gap-5">
+                <div className="flex items-center gap-[14px]">
+                  {socialLinks.map((link) => (
+                    <a
+                      key={link.label}
+                      aria-label={link.label}
+                      className="inline-flex h-7 w-7 items-center justify-center opacity-100 transition-opacity hover:opacity-50"
+                      href={link.href}
+                      rel={link.href.startsWith("http") ? "noreferrer noopener" : undefined}
+                      target={link.href.startsWith("http") ? "_blank" : undefined}
+                    >
+                      <img
+                        alt=""
+                        aria-hidden="true"
+                        className={`theme-icon ${link.className}`}
+                        src={link.src}
+                      />
+                    </a>
+                  ))}
+                </div>
+                <ThemeSwitch className="md:min-w-[132px]" locale={locale as Locale} />
               </div>
 
               {/* 법적 링크 */}

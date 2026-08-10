@@ -1,0 +1,180 @@
+.root {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+.diagram {
+  position: relative;
+  overflow: visible;
+  padding: 0;
+}
+
+.diagramGrid {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  gap: 16px;
+}
+
+.ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  display: none;
+  aspect-ratio: 1;
+  border-radius: var(--radius-full);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+.ring {
+  border: 1px solid var(--color-border-strong);
+}
+
+.ringOuter { width: 520px; }
+
+.core {
+  display: flex;
+  min-height: 210px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-modal);
+  background: var(--color-inverse-bg);
+  box-shadow: 0 24px 70px -50px rgb(var(--color-shadow-rgb) / 0.24);
+  padding: 24px;
+  text-align: center;
+}
+
+.coreContent { padding: 0; }
+
+.coreKicker {
+  margin: 0;
+  color: var(--color-inverse-muted);
+}
+
+.coreTitle {
+  margin: 8px 0 0;
+  color: var(--color-inverse-fg);
+  white-space: nowrap;
+}
+
+.coreBody {
+  margin: 8px 0 0;
+  color: var(--color-inverse-muted);
+}
+
+.card {
+  width: 100%;
+  border-radius: var(--radius-modal);
+  background: var(--color-bg);
+  box-shadow: 0 20px 54px -48px rgb(var(--color-shadow-rgb) / 0.18);
+  padding: 24px;
+  text-align: left;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.iconBox {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-box);
+  background: var(--color-bg-content);
+  color: var(--color-fg);
+}
+
+.icon { width: 18px; height: 18px; }
+
+.cardTitle {
+  display: flex;
+  min-width: 0;
+  align-items: flex-end;
+  gap: 6px;
+  margin: 0;
+  color: var(--color-fg);
+}
+
+.cardTitle span {
+  padding-bottom: 2px;
+  color: var(--color-mute);
+}
+
+.tag {
+  margin: 2px 0 0 52px;
+}
+
+.points {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 0;
+  padding: 20px 0 0;
+  color: var(--color-fg);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+}
+
+.points li { display: flex; gap: 8px; }
+
+.bullet {
+  width: 6px;
+  height: 6px;
+  flex: none;
+  margin-top: 7px;
+  border-radius: var(--radius-full);
+  background: var(--color-brand);
+}
+
+@media (min-width: 768px) {
+  .diagramGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .core { grid-column: span 2; }
+}
+
+@media (min-width: 1024px) {
+  .diagram {
+    height: 620px;
+    padding: 20px 40px;
+  }
+
+  .diagramGrid {
+    display: block;
+    height: 100%;
+  }
+
+  .ring { display: block; }
+
+  .core {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 218px;
+    height: 218px;
+    min-height: 0;
+    border-radius: var(--radius-full);
+    padding: 24px;
+    transform: translate(-50%, -50%);
+  }
+
+  .card {
+    position: absolute;
+    width: 300px;
+    min-height: 146px;
+  }
+
+  .top { left: 50%; top: 0; transform: translateX(-50%); }
+  .right { right: 72px; top: 50%; transform: translateY(-50%); }
+  .bottom { bottom: 0; left: 50%; transform: translateX(-50%); }
+  .left { left: 72px; top: 50%; transform: translateY(-50%); }
+}

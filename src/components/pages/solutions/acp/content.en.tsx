@@ -25,7 +25,8 @@ const featureItems = [
       "It automatically identifies sensitive data and personal information, ensuring robust security for your assets.",
     ],
     imageAlt: "Database access control preview",
-    title: ["DAC -", "Database Access Control"],
+    title: ["DAC", "Database Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-dac.mp4",
   },
   {
@@ -35,7 +36,8 @@ const featureItems = [
     ],
     imageAlt: "System access control preview",
     reverse: true,
-    title: ["SAC -", "System Access Control"],
+    title: ["SAC", "System Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-sac.mp4",
   },
   {
@@ -44,7 +46,8 @@ const featureItems = [
       "Administrators can manage access, monitor API requests, and replay container command executions.",
     ],
     imageAlt: "Kubernetes access control preview",
-    title: ["KAC -", "Kubernetes Access Control"],
+    title: ["KAC", "Kubernetes Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-kac.mp4",
   },
   {
@@ -54,7 +57,8 @@ const featureItems = [
     ],
     imageAlt: "Web access control preview",
     reverse: true,
-    title: ["WAC -", "Web Access Control"],
+    title: ["WAC", "Web Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-wac.mp4",
   },
   {
@@ -63,14 +67,15 @@ const featureItems = [
       "Beyond blocking: intelligent access that adapts to context and compliance.",
     ],
     imageAlt: "Managed access control preview",
-    title: ["MAC -", "MCP Access Controller"],
+    title: ["MAC", "MCP Access Controller"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-mac.mp4",
   },
 ];
 
 export default function AcpENSolutionContent({ locale }: Props) {
   return (
-    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
       <div className="flex flex-col gap-14 md:gap-20">
         <div>
           <section className="flex w-full justify-center">
@@ -103,7 +108,13 @@ export default function AcpENSolutionContent({ locale }: Props) {
       </div>
 
       <div>
-        <Cta locale={locale} />
+        <Cta
+          actionHref="https://docs.querypie.com/ko/installation/querypie-acp-community-edition"
+          actionLabel="ACP Community Edition"
+          locale={locale}
+          secondaryActionHref=""
+          secondaryActionLabel=""
+        />
       </div>
     </div>
   );

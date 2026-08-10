@@ -117,7 +117,7 @@ const comparisonCopy: ComparisonCopy = {
 
 export default function UsageBasedLlmENSolutionContent({ locale }: Props) {
   return (
-    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
       <div className="flex w-full flex-col gap-10 md:gap-[80px]">
         <section className="flex w-full justify-center">
           <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">

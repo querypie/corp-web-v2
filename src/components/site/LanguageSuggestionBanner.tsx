@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { getLocalePath, isLocale, stripLocalePrefix, type Locale } from "@/constants/i18n";
+import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
 import Button from "@/components/ui/Button";
 import Select from "@/components/ui/Select";
 
@@ -82,7 +82,6 @@ export default function LanguageSuggestionBanner({
 }: LanguageSuggestionBannerProps) {
   const pathname = usePathname();
   const bannerRef = useRef<HTMLElement | null>(null);
-  const isJapanHome = currentLocale === "ja" && stripLocalePrefix(pathname) === "/";
   const [visible, setVisible] = useState(false);
   const [recommendedLocale, setRecommendedLocale] = useState<Locale>("en");
   const [selectedLocale, setSelectedLocale] = useState<Locale>("en");
@@ -114,11 +113,6 @@ export default function LanguageSuggestionBanner({
   }, [visible]);
 
   useEffect(() => {
-    if (isJapanHome) {
-      setVisible(false);
-      return;
-    }
-
     if (document.cookie.includes(`${BANNER_COOKIE}=`)) {
       setVisible(false);
       return;
@@ -152,9 +146,9 @@ export default function LanguageSuggestionBanner({
     return () => {
       controller.abort();
     };
-  }, [currentLocale, isJapanHome]);
+  }, [currentLocale]);
 
-  if (isJapanHome || !visible || currentLocale === recommendedLocale) {
+  if (!visible || currentLocale === recommendedLocale) {
     return null;
   }
 
@@ -177,7 +171,7 @@ export default function LanguageSuggestionBanner({
   return (
     <aside
       aria-label={localizedCopy.bannerLabel}
-      className="fixed inset-x-0 top-0 z-[60] flex items-center justify-center border-b border-border bg-bg px-3 py-2 pr-12 text-fg shadow-[0_10px_24px_rgba(var(--color-overlay-rgb)/0.22)] md:px-10 md:pr-18"
+      className="fixed inset-x-0 top-0 z-[60] flex items-center justify-center border-b border-border bg-bg px-3 py-2 pr-12 text-fg md:px-10 md:pr-18"
       ref={bannerRef}
     >
       <div className="flex w-full max-w-[1120px] flex-nowrap items-center justify-center gap-2 md:gap-3">
@@ -201,7 +195,7 @@ export default function LanguageSuggestionBanner({
 
           <Button
             arrow={false}
-            className="min-w-[64px] shrink-0 whitespace-nowrap px-4"
+            className="shrink-0 whitespace-nowrap"
             onClick={() => changeLanguage(selectedLocale)}
             size="default"
             type="button"

@@ -14,7 +14,7 @@ export default function TabGroup({
   className,
 }: TabGroupProps) {
   return (
-    <div className={cx("inline-flex rounded-full bg-bg-deep p-0.5", className)}>
+    <div className={cx("inline-flex rounded-full border border-border bg-transparent p-0.5", className)}>
       <div className="inline-flex items-center rounded-full">
         {children}
       </div>

@@ -7,8 +7,8 @@ import {
 } from "./routes";
 
 describe("solutionEntries", () => {
-  it("공개 solution 7개 경로를 유지한다", () => {
-    expect(solutionEntries).toHaveLength(7);
+  it("공개 solution 9개 경로를 유지한다", () => {
+    expect(solutionEntries).toHaveLength(9);
   });
 });
 
@@ -21,6 +21,10 @@ describe("getSolutionEntryById", () => {
     expect(getSolutionEntryById("aip-integrations")?.slug).toEqual(["aip", "integrations"]);
     expect(getSolutionEntryById("acp")?.slug).toEqual(["acp"]);
     expect(getSolutionEntryById("acp-integrations")?.slug).toEqual(["acp", "integrations"]);
+    expect(getSolutionEntryById("ai-crew")).toMatchObject({ slug: ["ai-crew"] });
+    expect(getSolutionEntryById("ai-crew")?.locales).toBeUndefined();
+    expect(getSolutionEntryById("ai-dashi")).toMatchObject({ slug: ["ai-dashi"] });
+    expect(getSolutionEntryById("ai-dashi")?.locales).toBeUndefined();
   });
 });
 
@@ -39,6 +43,8 @@ describe("getSolutionEntryBySlug", () => {
   it("ACP slug 경로를 canonical entry로 찾는다", () => {
     expect(getSolutionEntryBySlug(["acp"])?.id).toBe("acp");
     expect(getSolutionEntryBySlug(["acp", "integrations"])?.id).toBe("acp-integrations");
+    expect(getSolutionEntryBySlug(["ai-crew"])?.id).toBe("ai-crew");
+    expect(getSolutionEntryBySlug(["ai-dashi"])?.id).toBe("ai-dashi");
   });
 
   it("없는 slug는 null을 반환한다", () => {
@@ -55,5 +61,9 @@ describe("getSolutionHref", () => {
     expect(getSolutionHref("en", "aip-integrations")).toBe("/en/solutions/aip/integrations");
     expect(getSolutionHref("ja", "acp")).toBe("/ja/solutions/acp");
     expect(getSolutionHref("ko", "acp-integrations")).toBe("/ko/solutions/acp/integrations");
+    expect(getSolutionHref("ja", "ai-crew")).toBe("/ja/solutions/ai-crew");
+    expect(getSolutionHref("ja", "ai-dashi")).toBe("/ja/solutions/ai-dashi");
+    expect(getSolutionHref("en", "ai-crew")).toBe("/en/solutions/ai-crew");
+    expect(getSolutionHref("ko", "ai-dashi")).toBe("/ko/solutions/ai-dashi");
   });
 });

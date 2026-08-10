@@ -112,7 +112,7 @@ function DistributionSummary({
                   <span className="min-w-0 truncate type-body-sm text-mute">{item.label}</span>
                   <span className="shrink-0 type-body-sm text-fg">{formatPercent(percent)}</span>
                 </div>
-                <div className="h-1 overflow-hidden rounded-full bg-black">
+                <div className="h-1 overflow-hidden rounded-full bg-secondary">
                   <div className="h-full rounded-full bg-success" style={{ width: `${Math.max(3, Math.round(percent))}%` }} />
                 </div>
               </div>
@@ -192,9 +192,9 @@ function SourceSummary({
         </div>
       </div>
       <div className="flex flex-col gap-2">
-        <div className="flex h-1.5 overflow-hidden rounded-full bg-black" aria-label={`Direct ${formatPercent(directPercent)}, referred ${formatPercent(referredPercent)}`}>
-          <div className="h-full bg-success" style={{ width: `${Math.round(directPercent)}%` }} />
-          <div className="h-full bg-point" style={{ width: `${Math.round(referredPercent)}%` }} />
+        <div className="flex h-1.5 overflow-hidden rounded-full bg-secondary" aria-label={`Direct ${formatPercent(directPercent)}, referred ${formatPercent(referredPercent)}`}>
+          <div className="h-full bg-chart-secondary" style={{ width: `${Math.round(directPercent)}%` }} />
+          <div className="h-full bg-chart-primary" style={{ width: `${Math.round(referredPercent)}%` }} />
         </div>
         {visibleSources.length > 0 ? (
           <div className="flex flex-col gap-1.5">
@@ -356,7 +356,7 @@ function MetricList({
               </span>
               <span className="shrink-0 type-body-sm text-mute">{formatNumber(item.value)}</span>
             </div>
-            <div className="h-1.5 overflow-hidden rounded-full bg-black">
+            <div className="h-1.5 overflow-hidden rounded-full bg-secondary">
               <div className="h-full rounded-full bg-success" style={{ width: `${width}%` }} />
             </div>
           </div>

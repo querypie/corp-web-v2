@@ -52,7 +52,7 @@ export default function TrafficTrendChart({ items }: { items: TrafficTrendPoint[
                   <button
                     aria-label={`${item.label}: ${item.value} page views`}
                     className={`w-full min-w-[8px] rounded-t-sm border-0 p-0 outline-none ring-offset-2 ring-offset-bg transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-border ${
-                      isPeak ? "bg-point" : item.value > 0 ? "bg-success" : "bg-border"
+                      isPeak ? "bg-chart-primary" : item.value > 0 ? "bg-chart-secondary" : "bg-border"
                     }`}
                     style={{ height: `${height}%` }}
                     type="button"

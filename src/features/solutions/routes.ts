@@ -7,8 +7,11 @@ export type SolutionEntry = {
     | "usage-based-llm"
     | "mcp-gateway"
     | "fde-services"
+    | "ai-crew"
+    | "ai-dashi"
     | "aip-integrations"
     | "acp-integrations";
+  locales?: Locale[];
   slug: string[];
 };
 
@@ -20,6 +23,8 @@ export const solutionEntries: SolutionEntry[] = [
   { id: "aip-integrations", slug: ["aip", "integrations"] },
   { id: "acp", slug: ["acp"] },
   { id: "acp-integrations", slug: ["acp", "integrations"] },
+  { id: "ai-crew", slug: ["ai-crew"] },
+  { id: "ai-dashi", slug: ["ai-dashi"] },
 ];
 
 export function getSolutionEntryById(id: SolutionEntry["id"]): SolutionEntry | null {

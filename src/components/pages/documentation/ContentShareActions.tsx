@@ -141,7 +141,7 @@ export default function ContentShareActions({
           target="_blank"
           title={link.label}
         >
-          <img alt="" aria-hidden="true" className="h-7 w-7 object-contain" src={link.iconSrc} />
+          <img alt="" aria-hidden="true" className="theme-icon h-7 w-7 object-contain" src={link.iconSrc} />
         </a>
       ))}
       <div className="relative inline-flex h-7 w-7 items-center justify-center">
@@ -152,7 +152,7 @@ export default function ContentShareActions({
           title={copied ? copy.copiedLabel : copy.copyLabel}
           type="button"
         >
-          <img alt="" aria-hidden="true" className="h-7 w-7 object-contain" src="/assets/ui/icons/URL.svg" />
+          <img alt="" aria-hidden="true" className="theme-icon h-7 w-7 object-contain" src="/assets/ui/icons/URL.svg" />
         </button>
         {copied ? (
           <div

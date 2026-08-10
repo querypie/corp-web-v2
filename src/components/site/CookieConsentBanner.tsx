@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Button from "@/components/ui/Button";
+import ButtonGroup from "@/components/ui/ButtonGroup";
 import { getLocalePath, type Locale } from "@/constants/i18n";
 import {
   acceptAllCookiePreferences,
@@ -82,7 +83,7 @@ export default function CookieConsentBanner({ locale }: CookieConsentBannerProps
   return (
     <aside
       aria-label={copy.title}
-      className="fixed inset-x-0 bottom-0 z-50 bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-5 py-6 backdrop-blur-[18px] md:px-10"
+      className="site-popover-surface fixed inset-x-0 bottom-0 z-50 px-5 py-6 backdrop-blur-[18px] md:px-10"
     >
       <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex max-w-[760px] flex-col gap-2">
@@ -107,7 +108,7 @@ export default function CookieConsentBanner({ locale }: CookieConsentBannerProps
             {copy.sentenceAfterCookiePreference}
           </p>
         </div>
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center lg:shrink-0">
+        <ButtonGroup className="flex-col sm:flex-row sm:items-center lg:shrink-0">
           <Button
             arrow={false}
             onClick={() => closeWith(acceptAllCookiePreferences)}
@@ -124,7 +125,7 @@ export default function CookieConsentBanner({ locale }: CookieConsentBannerProps
           >
             {copy.decline}
           </Button>
-        </div>
+        </ButtonGroup>
       </div>
     </aside>
   );

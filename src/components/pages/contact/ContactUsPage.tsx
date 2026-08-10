@@ -55,7 +55,7 @@ export default function ContactUsPage(props: ContactUsPageProps) {
             <div className="flex flex-col gap-2">
               <p className="m-0 type-body-md text-mute">{supportLink.title}</p>
               <a
-                className="inline-flex items-center gap-1.5 type-body-md text-brand transition-colors hover:text-fg"
+                className="inline-flex self-start items-center gap-1.5 type-body-md text-brand transition-colors hover:text-fg"
                 href={supportLink.href}
                 rel="noreferrer noopener"
                 target="_blank"

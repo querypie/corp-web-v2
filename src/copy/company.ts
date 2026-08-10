@@ -8,7 +8,7 @@ export type AboutUsPageCopy = {
   journeyDescription: string;
   journeyItems: Array<{ details: string[]; year: string }>;
   journeyTitle: string;
-  locations: Array<{ addressLines: string[]; city: string; country: string; iconSrc: string }>;
+  locations: Array<{ addressLines: string[]; city: string; iconSrc: string; purpose: string }>;
   locationsTitle: string;
   mapImageSrc: string;
   teamDescription: string[];
@@ -86,6 +86,7 @@ export function getCertificationsPageCopy(locale: Locale): CertificationsPageCop
       {
         description: ["Security, Trust, Assurance and", "Risk", "(Level 1 - Bronze)"],
         imageAlt: "CSA-STAR Level 1",
+        imageClassName: "theme-icon",
         imageContainerClassName: "size-[90px]",
         imageSrc: "/assets/pages/company/certifications/csa-star-level1.png",
         title: "CSA-STAR",
@@ -177,6 +178,7 @@ export function getCertificationsPageCopy(locale: Locale): CertificationsPageCop
       {
         description: ["보안, 신뢰, 보증 및", "위험", "(레벨 1 - 브론즈)"],
         imageAlt: "CSA-STAR Level 1",
+        imageClassName: "theme-icon",
         imageContainerClassName: "size-[90px]",
         imageSrc: "/assets/pages/company/certifications/csa-star-level1.png",
         title: "CSA-STAR",
@@ -268,6 +270,7 @@ export function getCertificationsPageCopy(locale: Locale): CertificationsPageCop
       {
         description: ["セキュリティ、信頼、保証と", "リスク", "(レベル 1 - ブロンズ)"],
         imageAlt: "CSA-STAR Level 1",
+        imageClassName: "theme-icon",
         imageContainerClassName: "size-[90px]",
         imageSrc: "/assets/pages/company/certifications/csa-star-level1.png",
         title: "CSA-STAR",
@@ -403,32 +406,61 @@ export function getAboutUsPageCopy(locale: Locale): AboutUsPageCopy {
           ],
           year: "2024",
         },
+        {
+          details: [
+            "Launched QueryPie AIP (AI Platform)",
+            "Launched FDE (Forward Deployed Engineer) Services",
+          ],
+          year: "2025",
+        },
+        {
+          details: [
+            "Launched QueryPie AIP apps “Lingo” and “NotePie”",
+            "Launched QueryPie ACP AI Pack",
+          ],
+          year: "2026",
+        },
       ],
       journeyTitle: "Our Journey",
       locations: [
         {
-          addressLines: ["2525 West 8th Street, Suite 300, Los Angeles, CA 90057"],
-          city: "Los Angeles, CA",
-          country: "Los Angeles, USA",
+          addressLines: [
+            "CHEQUER Global, Inc.",
+            "2525 West 8th Street, Suite 300,",
+            "Los Angeles, CA 90057",
+          ],
+          city: "Los Angeles, USA",
           iconSrc: "/assets/pages/company/about-us/icon-us.svg",
+          purpose: "Global Headquarters",
         },
         {
-          addressLines: ["7F, 26, Magokjungang 1-ro, Gangseo-gu, Seoul, Republic of Korea"],
+          addressLines: [
+            "주식회사 쿼리파이",
+            "7F, 26, Magokjungang 1-ro, Gangseo-gu,",
+            "Seoul 07807",
+          ],
           city: "Seoul, South Korea",
-          country: "Seoul Magok Office",
           iconSrc: "/assets/pages/company/about-us/icon-kr.svg",
+          purpose: "R&D Office",
         },
         {
-          addressLines: ["15F, Toranomon Hills Business Tower", "1 Chome-17-1 Toranomon, Minato City, Tokyo 105-6490"],
+          addressLines: [
+            "QueryPie AI合同会社",
+            "〒105-6490 東京都港区虎ノ門1丁目17番1号",
+            "虎ノ門ヒルズビジネスタワー15階",
+          ],
           city: "Tokyo, Japan",
-          country: "Tokyo, Japan",
           iconSrc: "/assets/pages/company/about-us/icon-ja.svg",
+          purpose: "Japan Office",
         },
         {
-          addressLines: ["Office Park Harapan Indah OP 2 No 20,", "Medan Satria, Bekasi, West Java 17132"],
-          city: "Indonesia",
-          country: "Office Park Harapan Indah",
+          addressLines: [
+            "Office Park Harapan Indah OP 2 No 20,",
+            "Medan Satria, Bekasi, West Java 17132",
+          ],
+          city: "Bekasi, Indonesia",
           iconSrc: "/assets/pages/company/about-us/icon-id.svg",
+          purpose: "Indonesia Office",
         },
       ],
       locationsTitle: "Our Locations",
@@ -472,32 +504,61 @@ export function getAboutUsPageCopy(locale: Locale): AboutUsPageCopy {
         { details: ["Preferred Seed Round로 1,775만 달러 투자 유치"], year: "2021" },
         { details: ["신용보증기금으로부터 581만 달러 확보"], year: "2023" },
         { details: ["QueryPie Japan 출범", "Salesforce Ventures, Z Venture Capital 등 전략적 투자 유치"], year: "2024" },
+        {
+          details: [
+            "QueryPie AIP(AI 플랫폼) 출시",
+            "FDE(Forward Deployed Engineer) 서비스 출시",
+          ],
+          year: "2025",
+        },
+        {
+          details: [
+            "QueryPie AIP 앱 ‘Lingo’, ‘NotePie’ 출시",
+            "QueryPie ACP AI Pack 출시",
+          ],
+          year: "2026",
+        },
       ],
       journeyTitle: "연혁",
       locations: [
         {
-          addressLines: ["2525 West 8th Street, Suite 300, Los Angeles, CA 90057"],
-          city: "Los Angeles, CA",
-          country: "Los Angeles, USA",
+          addressLines: [
+            "CHEQUER Global, Inc.",
+            "2525 West 8th Street, Suite 300,",
+            "Los Angeles, CA 90057",
+          ],
+          city: "Los Angeles, USA",
           iconSrc: "/assets/pages/company/about-us/icon-us.svg",
+          purpose: "Global Headquarters",
         },
         {
-          addressLines: ["7F, 26, Magokjungang 1-ro, Gangseo-gu, Seoul, Republic of Korea"],
+          addressLines: [
+            "주식회사 쿼리파이",
+            "7F, 26, Magokjungang 1-ro, Gangseo-gu,",
+            "Seoul 07807",
+          ],
           city: "Seoul, South Korea",
-          country: "Seoul Magok Office",
           iconSrc: "/assets/pages/company/about-us/icon-kr.svg",
+          purpose: "R&D Office",
         },
         {
-          addressLines: ["15F, Toranomon Hills Business Tower", "1 Chome-17-1 Toranomon, Minato City, Tokyo 105-6490"],
+          addressLines: [
+            "QueryPie AI合同会社",
+            "〒105-6490 東京都港区虎ノ門1丁目17番1号",
+            "虎ノ門ヒルズビジネスタワー15階",
+          ],
           city: "Tokyo, Japan",
-          country: "Tokyo, Japan",
           iconSrc: "/assets/pages/company/about-us/icon-ja.svg",
+          purpose: "Japan Office",
         },
         {
-          addressLines: ["Office Park Harapan Indah OP 2 No 20,", "Medan Satria, Bekasi, West Java 17132"],
-          city: "Indonesia",
-          country: "Office Park Harapan Indah",
+          addressLines: [
+            "Office Park Harapan Indah OP 2 No 20,",
+            "Medan Satria, Bekasi, West Java 17132",
+          ],
+          city: "Bekasi, Indonesia",
           iconSrc: "/assets/pages/company/about-us/icon-id.svg",
+          purpose: "Indonesia Office",
         },
       ],
       locationsTitle: "거점",
@@ -544,32 +605,61 @@ export function getAboutUsPageCopy(locale: Locale): AboutUsPageCopy {
           details: ["QueryPie Japan を設立（東京）", "Salesforce Ventures、Z Venture Capital、Murex Partners、Shinhan Venture Investment から戦略的投資を獲得"],
           year: "2024",
         },
+        {
+          details: [
+            "QueryPie AIP（AIプラットフォーム）提供開始",
+            "FDE（フォワードデプロイエンジニア）サービス提供開始",
+          ],
+          year: "2025",
+        },
+        {
+          details: [
+            "QueryPie AIPアプリ「Lingo」「NotePie」を提供開始",
+            "QueryPie ACP AI Packを提供開始",
+          ],
+          year: "2026",
+        },
       ],
       journeyTitle: "歩み",
       locations: [
         {
-          addressLines: ["2525 West 8th Street, Suite 300, Los Angeles, CA 90057"],
-          city: "Los Angeles, CA",
-          country: "Los Angeles, USA",
+          addressLines: [
+            "CHEQUER Global, Inc.",
+            "2525 West 8th Street, Suite 300,",
+            "Los Angeles, CA 90057",
+          ],
+          city: "Los Angeles, USA",
           iconSrc: "/assets/pages/company/about-us/icon-us.svg",
+          purpose: "Global Headquarters",
         },
         {
-          addressLines: ["7F, 26, Magokjungang 1-ro, Gangseo-gu, Seoul, Republic of Korea"],
+          addressLines: [
+            "주식회사 쿼리파이",
+            "7F, 26, Magokjungang 1-ro, Gangseo-gu,",
+            "Seoul 07807",
+          ],
           city: "Seoul, South Korea",
-          country: "Seoul Magok Office",
           iconSrc: "/assets/pages/company/about-us/icon-kr.svg",
+          purpose: "R&D Office",
         },
         {
-          addressLines: ["15F, Toranomon Hills Business Tower", "1 Chome-17-1 Toranomon, Minato City, Tokyo 105-6490"],
+          addressLines: [
+            "QueryPie AI合同会社",
+            "〒105-6490 東京都港区虎ノ門1丁目17番1号",
+            "虎ノ門ヒルズビジネスタワー15階",
+          ],
           city: "Tokyo, Japan",
-          country: "Tokyo, Japan",
           iconSrc: "/assets/pages/company/about-us/icon-ja.svg",
+          purpose: "Japan Office",
         },
         {
-          addressLines: ["Office Park Harapan Indah OP 2 No 20,", "Medan Satria, Bekasi, West Java 17132"],
-          city: "Indonesia",
-          country: "Office Park Harapan Indah",
+          addressLines: [
+            "Office Park Harapan Indah OP 2 No 20,",
+            "Medan Satria, Bekasi, West Java 17132",
+          ],
+          city: "Bekasi, Indonesia",
           iconSrc: "/assets/pages/company/about-us/icon-id.svg",
+          purpose: "Indonesia Office",
         },
       ],
       locationsTitle: "拠点",

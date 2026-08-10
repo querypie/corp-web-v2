@@ -1,6 +1,8 @@
 import type { ComponentProps } from "react";
 import HomePage from "@/components/pages/home/HomePage";
+import IntegrationIcon from "@/components/sections/common/IntegrationIcon";
 import { getLocalePath, type Locale } from "@/constants/i18n";
+import { integrationItems } from "@/components/pages/solutions/aip/integrations/integrationData";
 import {
   compareDateIsoDesc,
   getContentThumbnailSrc,
@@ -14,48 +16,52 @@ import { readContentState } from "@/features/content/contentState.server";
 
 type HomePageProps = ComponentProps<typeof HomePage>;
 
-type McpIconSource = {
-  className?: string;
+type HomeMcpIcon = {
   label: string;
-  src: string;
+  name: string;
 };
 
-const mcpIconSources: readonly McpIconSource[] = [
-  { label: "Slack", src: "/assets/products/aip/integrations/slack.svg" },
-  { label: "Discord", src: "/assets/products/aip/integrations/discord.svg" },
-  {
-    className: "invert grayscale brightness-125",
-    label: "GitHub",
-    src: "/assets/products/aip/integrations/github.svg",
-  },
-  { label: "Notion", src: "/assets/products/aip/integrations/notion.svg" },
-  { label: "Confluence", src: "/assets/products/aip/integrations/confluence.svg" },
-  { label: "Snowflake", src: "/assets/products/aip/integrations/snowflake.svg" },
-  { label: "Google Calendar", src: "/assets/products/aip/integrations/google-calendar.svg" },
-  { label: "Google Drive", src: "/assets/products/aip/integrations/google-drive.svg" },
-  { label: "Gmail", src: "/assets/products/aip/integrations/google-gmail.svg" },
-  { label: "Google Sheets", src: "/assets/products/aip/integrations/google-sheets.svg" },
-  { label: "Microsoft 365", src: "/assets/products/aip/integrations/microsoft-365.svg" },
-  { label: "Salesforce", src: "/assets/products/aip/integrations/salesforce.svg" },
-  { label: "AWS", src: "/assets/products/aip/integrations/aws.svg" },
-  { label: "Kubernetes", src: "/assets/products/aip/integrations/kubernetes.svg" },
-  { label: "Datadog", src: "/assets/products/aip/integrations/datadog.svg" },
-  { label: "PostgreSQL", src: "/assets/products/aip/integrations/postgresql.svg" },
-  { label: "MySQL", src: "/assets/products/aip/integrations/mysql.svg" },
-  { label: "Redis", src: "/assets/products/aip/integrations/redis.svg" },
+const homeMcpIcons: readonly HomeMcpIcon[] = [
+  { label: "Slack", name: "Slack" },
+  { label: "Discord", name: "Discord" },
+  { label: "GitHub", name: "GitHub" },
+  { label: "Notion", name: "Notion" },
+  { label: "Confluence", name: "Confluence Cloud" },
+  { label: "Snowflake", name: "Snowflake" },
+  { label: "Google Calendar", name: "Google Calendar" },
+  { label: "Google Drive", name: "Google Drive" },
+  { label: "Gmail", name: "Google Gmail" },
+  { label: "Google Sheets", name: "Google Sheets" },
+  { label: "Microsoft 365", name: "Microsoft 365" },
+  { label: "Salesforce", name: "Salesforce" },
+  { label: "AWS", name: "AWS" },
+  { label: "Kubernetes", name: "Kubernetes" },
+  { label: "Datadog", name: "Datadog" },
+  { label: "PostgreSQL", name: "PostgreSQL" },
+  { label: "MySQL", name: "MySQL" },
+  { label: "Redis", name: "Redis" },
 ];
 
-const mcpItems = mcpIconSources.map(({ className, label, src }) => ({
-  icon: (
-    <img
-      alt=""
-      aria-hidden="true"
-      className={["h-8 w-8 object-contain md:h-12 md:w-12", className].filter(Boolean).join(" ")}
-      src={src}
-    />
-  ),
-  label,
-}));
+const integrationItemByName = new Map(integrationItems.map((item) => [item.name, item]));
+
+const mcpItems = homeMcpIcons.flatMap(({ label, name }) => {
+  const item = integrationItemByName.get(name);
+
+  if (!item) return [];
+
+  return [{
+    icon: (
+      <IntegrationIcon
+        className="h-8 w-8 md:h-12 md:w-12"
+        darkPlate={item.darkPlate}
+        enhanceIconContrast={item.enhanceIconContrast}
+        icon={item.icon}
+        invertIcon={item.invertIcon}
+      />
+    ),
+    label,
+  }];
+});
 
 const resourceListCandidateCount = 10;
 
@@ -182,6 +188,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             excludeFromSearchSnippet: true,
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
+            iconSurface: true,
             imageAlt: "AIP workspace preview",
             videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
             title: ["Lingo"],
@@ -196,6 +203,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
               "Experience an innovative feature where AI directly learns from user-uploaded documents or web links and processes them into various forms of data.",
             ],
             iconSrc: "/assets/pages/home/features/icon-notepie.png",
+            iconSurface: true,
             imageAlt: "Model selector preview",
             reverse: true,
             title: ["NotePie"],
@@ -312,6 +320,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             excludeFromSearchSnippet: true,
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
+            iconSurface: true,
             imageAlt: "AIP 워크스페이스 미리보기",
             videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
             title: ["Lingo"],
@@ -326,6 +335,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
               "사용자가 업로드한 문서나 웹 링크를 AI가 직접 학습하고, 다양한 형태의 데이터로 가공하는 혁신적인 기능을 경험할 수 있습니다.",
             ],
             iconSrc: "/assets/pages/home/features/icon-notepie.png",
+            iconSurface: true,
             imageAlt: "모델 셀렉터 미리보기",
             reverse: true,
             title: ["NotePie"],
@@ -442,6 +452,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             excludeFromSearchSnippet: true,
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
+            iconSurface: true,
             imageAlt: "AIP ワークスペースプレビュー",
             videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
             title: ["Lingo"],
@@ -456,6 +467,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
               "ユーザーがアップロードしたドキュメントやWebリンクをAIが直接学習し、さまざまな形式のデータへ加工する革新的な機能を体験できます。",
             ],
             iconSrc: "/assets/pages/home/features/icon-notepie.png",
+            iconSurface: true,
             imageAlt: "モデルセレクタープレビュー",
             reverse: true,
             title: ["NotePie"],

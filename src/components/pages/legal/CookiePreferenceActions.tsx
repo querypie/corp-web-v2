@@ -1,6 +1,7 @@
 "use client";
 
 import Button from "@/components/ui/Button";
+import ButtonGroup from "@/components/ui/ButtonGroup";
 import {
   acceptAllCookiePreferences,
   declineAllCookiePreferences,
@@ -16,7 +17,7 @@ export default function CookiePreferenceActions({
   declineLabel,
 }: CookiePreferenceActionsProps) {
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+    <ButtonGroup className="flex-col sm:flex-row sm:items-center">
       <Button
         arrow={false}
         onClick={acceptAllCookiePreferences}
@@ -35,6 +36,6 @@ export default function CookiePreferenceActions({
       >
         {declineLabel}
       </Button>
-    </div>
+    </ButtonGroup>
   );
 }

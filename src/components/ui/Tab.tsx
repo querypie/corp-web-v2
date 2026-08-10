@@ -30,10 +30,10 @@ function getTabClassName({
   return cx(
     "inline-flex h-10 items-center justify-center rounded-full px-5 text-center transition-colors duration-200",
     "text-[14px] leading-5 font-normal",
-    state === "on" && "bg-secondary text-fg",
-    state === "hover" && "bg-transparent text-fg",
-    state === "off" && "bg-transparent text-mute hover:text-fg",
-    "cursor-pointer disabled:cursor-not-allowed",
+    state === "on" && "bg-secondary text-fg hover:bg-secondary-hover",
+    state === "hover" && "bg-secondary text-fg",
+    state === "off" && "bg-transparent text-fg hover:bg-secondary",
+    "cursor-pointer disabled:cursor-not-allowed disabled:hover:bg-transparent",
     className,
   );
 }

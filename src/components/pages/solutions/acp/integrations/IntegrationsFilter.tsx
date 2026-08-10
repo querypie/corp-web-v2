@@ -28,8 +28,8 @@ function IntegrationCard({ enhanceIconContrast, icon, invertIcon, name }: Integr
           aria-hidden="true"
           className={cx(
             "block h-auto max-h-full w-auto max-w-full object-contain",
-            invertIcon && "invert grayscale brightness-125",
-            enhanceIconContrast && "grayscale brightness-[1.85] contrast-125",
+            invertIcon && "theme-invert-on-dark",
+            enhanceIconContrast && "theme-enhance-on-dark",
           )}
           src={icon}
         />
@@ -67,7 +67,7 @@ export default function IntegrationsFilter({ locale }: IntegrationsFilterProps) 
                   "pressable inline-flex min-h-8 items-center justify-center rounded-full border px-3 py-1.5 type-body-sm sm:min-h-10 sm:px-4 sm:py-2 sm:type-body-md",
                   isActive
                     ? "border-fg bg-fg text-bg"
-                    : "border-border bg-transparent text-mute hover:border-[#555555] hover:text-fg",
+                    : "border-border bg-transparent text-mute hover:border-border-strong hover:text-fg",
                 )}
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}

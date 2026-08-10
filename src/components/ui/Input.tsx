@@ -58,7 +58,7 @@ export default function Input({
           <img
             alt=""
             aria-hidden="true"
-            className="h-[14px] w-[14px] shrink-0 object-contain"
+            className="theme-icon h-[14px] w-[14px] shrink-0 object-contain"
             src="/assets/ui/icons/chevron-down.svg"
           />
         </>

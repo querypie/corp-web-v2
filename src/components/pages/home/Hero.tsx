@@ -26,7 +26,7 @@ export default function Hero({
   locale,
 }: HeroProps) {
   return (
-    <section className="relative overflow-visible bg-gradient-to-b from-[rgba(68,69,71,0)] to-[#444547] text-fg">
+    <section className="relative overflow-visible bg-bg bg-[image:var(--gradient-home-hero)] pt-[100px] text-fg md:pt-[140px]">
       <div className="relative flex w-full justify-center px-5 md:px-10">
         <div className="flex w-full max-w-[1200px] flex-col items-start gap-6 sm:gap-8 md:gap-10 xl:gap-12">
           <div className="w-full">
@@ -62,7 +62,7 @@ export default function Hero({
                 </div>
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-1/2 top-full h-12 w-full -translate-x-1/2 rounded-t-[20px] bg-[linear-gradient(180deg,rgba(18,18,18,0.28)_0%,rgba(18,18,18,0.14)_56%,rgba(18,18,18,0)_100%)]"
+                  className="pointer-events-none absolute left-1/2 top-full h-12 w-full -translate-x-1/2 rounded-t-[20px] bg-[image:var(--gradient-mockup-shadow-mobile)]"
                 />
               </div>
               <div
@@ -83,7 +83,7 @@ export default function Hero({
                 </div>
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute left-1/2 top-full h-[100px] w-full -translate-x-1/2 rounded-t-[14px] bg-[linear-gradient(180deg,rgba(18,18,18,0.36)_0%,rgba(18,18,18,0.24)_32%,rgba(18,18,18,0.11)_68%,rgba(18,18,18,0)_100%)]"
+                  className="pointer-events-none absolute left-1/2 top-full h-[100px] w-full -translate-x-1/2 rounded-t-[14px] bg-[image:var(--gradient-mockup-shadow-desktop)]"
                 />
               </div>
             </div>

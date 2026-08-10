@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import IntegrationIcon from "@/components/sections/common/IntegrationIcon";
 import type { Locale } from "@/constants/i18n";
 import {
   integrationCategories,
@@ -19,21 +20,16 @@ function getCategoryCount(id: IntegrationCategoryId) {
   return integrationItems.filter((item) => item.categories.includes(id)).length;
 }
 
-function IntegrationCard({ enhanceIconContrast, icon, invertIcon, name }: IntegrationItem) {
+function IntegrationCard({ darkPlate, enhanceIconContrast, icon, invertIcon, name }: IntegrationItem) {
   return (
     <article className="flex min-h-[128px] flex-col items-center justify-center gap-4 rounded-box bg-bg-content px-3 py-5 text-center md:min-h-[140px]">
-      <div className="flex h-[52px] w-[52px] items-center justify-center overflow-hidden">
-        <img
-          alt=""
-          aria-hidden="true"
-          className={cx(
-            "block h-auto max-h-full w-auto max-w-full object-contain",
-            invertIcon && "invert grayscale brightness-125",
-            enhanceIconContrast && "grayscale brightness-[1.85] contrast-125",
-          )}
-          src={icon}
-        />
-      </div>
+      <IntegrationIcon
+        className="h-[52px] w-[52px]"
+        darkPlate={darkPlate}
+        enhanceIconContrast={enhanceIconContrast}
+        icon={icon}
+        invertIcon={invertIcon}
+      />
       <p className="m-0 w-full truncate type-body-sm text-fg" title={name}>
         {name}
       </p>
@@ -67,7 +63,7 @@ export default function IntegrationsFilter({ locale }: IntegrationsFilterProps) 
                   "pressable inline-flex min-h-8 items-center justify-center rounded-full border px-3 py-1.5 type-body-sm sm:min-h-10 sm:px-4 sm:py-2 sm:type-body-md",
                   isActive
                     ? "border-fg bg-fg text-bg"
-                    : "border-border bg-transparent text-mute hover:border-[#555555] hover:text-fg",
+                    : "border-border bg-transparent text-mute hover:border-border-strong hover:text-fg",
                 )}
                 key={category.id}
                 onClick={() => setActiveCategory(category.id)}

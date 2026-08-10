@@ -43,19 +43,19 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
   }[locale] ?? "Free start!";
   const footerSections = {
     en: [
-      { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
+      { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Workplace Productivity | AI Crew", "AI for Your Service | AI Dashi"] },
       { title: "Features", items: ["Demo", "Documentation", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
       { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
       { title: "Plans", items: ["AIP", "ACP"] },
     ],
     ko: [
-      { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)"] },
+      { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "사내 업무 효율화 | AI Crew", "자사 서비스 AI화 | AI Dashi"] },
       { title: "기능", items: ["데모", "문서", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: ["AIP", "ACP"] },
     ],
     ja: [
-      { title: "ソリューション", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)"] },
+      { title: "ソリューション", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"] },
       { title: "機能", items: ["デモ", "ドキュメント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
       { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ"] },
       { title: "価格・プラン", items: ["AIP", "ACP"] },
@@ -77,15 +77,19 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
 
 export function getSolutionsSubItems(locale: string): NavigationSubItem[] {
   const copy = {
-    en: ["AI Platform (AIP)", "Access Control Platform (ACP)"],
-    ko: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)"],
-    ja: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)"],
-  }[locale] ?? ["AI Platform (AIP)", "Access Control Platform (ACP)"];
+    en: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Workplace Productivity | AI Crew", "AI for Your Service | AI Dashi"],
+    ko: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "사내 업무 효율화 | AI Crew", "자사 서비스 AI화 | AI Dashi"],
+    ja: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"],
+  }[locale] ?? ["AI Platform (AIP)", "Access Control Platform (ACP)", "Workplace Productivity | AI Crew", "AI for Your Service | AI Dashi"];
 
-  return [
+  const items = [
     { label: copy[0], href: getSolutionHref(locale as Locale, "aip") },
     { label: copy[1], href: getSolutionHref(locale as Locale, "acp") },
+    { label: copy[2], href: getSolutionHref(locale as Locale, "ai-crew") },
+    { label: copy[3], href: getSolutionHref(locale as Locale, "ai-dashi") },
   ];
+
+  return items;
 }
 
 export function getDemoSubItems(locale: string): NavigationSubItem[] {
@@ -202,6 +206,14 @@ export function getFooterHref(item: string, locale: string) {
 
   if (item === "Access Control Platform (ACP)" || item === "접근 제어 플랫폼 (ACP)" || item === "アクセス制御プラットフォーム (ACP)") {
     return getSolutionHref(locale as Locale, "acp");
+  }
+
+  if (item === "Workplace Productivity | AI Crew" || item === "사내 업무 효율화 | AI Crew" || item === "社内業務効率化｜AI Crew") {
+    return getSolutionHref(locale as Locale, "ai-crew");
+  }
+
+  if (item === "AI for Your Service | AI Dashi" || item === "자사 서비스 AI화 | AI Dashi" || item === "自社サービスAI化｜AI Dashi") {
+    return getSolutionHref(locale as Locale, "ai-dashi");
   }
 
   if (item === "About Us" || item === "회사 소개" || item === "会社概要") {

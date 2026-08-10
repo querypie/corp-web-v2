@@ -4,6 +4,7 @@ import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { siteTitle, siteUrl } from "@/constants/site";
+import { themeInitializationScript } from "@/features/theme/themeScript";
 import "../styles/globals.css";
 
 const jetBrainsMono = JetBrains_Mono({
@@ -29,11 +30,11 @@ const pretendard = localFont({
   preload: false,
 });
 
-const mPlus1 = localFont({
-  src: "../../public/assets/fonts/MPLUS1-Regular.woff2",
+const pretendardJp = localFont({
+  src: "../../public/assets/fonts/PretendardJPVariable.woff2",
   display: "swap",
-  variable: "--font-m-plus-1",
-  weight: "400",
+  variable: "--font-pretendard-jp",
+  weight: "45 920",
   style: "normal",
   preload: false,
 });
@@ -50,7 +51,11 @@ type RootLayoutProps = {
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html className={`${jetBrainsMono.variable} ${monaSans.variable} ${pretendard.variable} ${mPlus1.variable}`} lang="en">
+    <html className={`${jetBrainsMono.variable} ${monaSans.variable} ${pretendard.variable} ${pretendardJp.variable}`} lang="en" suppressHydrationWarning>
+      <head>
+        <meta content="#FFFFFF" name="theme-color" />
+        <script dangerouslySetInnerHTML={{ __html: themeInitializationScript }} />
+      </head>
       <body className="bg-bg">
         {children}
         <Analytics />

@@ -173,7 +173,7 @@ function ComparisonTable({
           <div className="flex flex-col gap-5">
             {comparisonGroups.map((group) => (
               <div key={group.title} className="flex flex-col gap-0">
-                <div className="rounded-button bg-bg-content px-5 py-[10px] type-body-md text-mute">
+                <div className="rounded-button bg-primary px-5 py-1.5 type-body-sm text-bg">
                   {group.title}
                 </div>
 
@@ -219,11 +219,8 @@ export default function PlansPage({
     () => pricingProducts[activeProductKey],
     [activeProductKey, pricingProducts],
   );
-  const activeProductCaption =
-    activeProductKey === "aip" ? "AI Platform" : "Access Control Platform";
-
   return (
-    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
       <section className="flex w-full justify-center">
         <div className="flex w-full max-w-[1200px] flex-col gap-[60px] md:gap-[80px]">
           <div className="flex flex-col items-center gap-3">
@@ -246,8 +243,6 @@ export default function PlansPage({
                 ),
               )}
             </TabGroup>
-
-            <p className="m-0 text-center type-body-md text-mute">{activeProductCaption}</p>
           </div>
 
           {/* 선택된 제품군에 맞는 카드/비교표 렌더링 */}
@@ -279,7 +274,7 @@ export default function PlansPage({
           </div>
         </div>
       </section>
-      <Cta className="!pt-0" locale={locale} />
+      <Cta locale={locale} />
     </div>
   );
 }

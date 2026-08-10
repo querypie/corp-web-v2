@@ -16,14 +16,20 @@ describe("Tab", () => {
   it("state=on 이면 활성 스타일 클래스를 적용한다", () => {
     render(<Tab state="on">Active</Tab>);
     const btn = screen.getByRole("button");
-    expect(btn.className).toContain("bg-secondary");
+    expect(btn).toHaveClass("bg-secondary", "text-fg", "hover:bg-secondary-hover");
   });
 
   it("state=off 이면 비활성 스타일 클래스를 적용한다", () => {
     render(<Tab state="off">Inactive</Tab>);
     const btn = screen.getByRole("button");
-    expect(btn.className).toContain("bg-transparent");
-    expect(btn.className).toContain("text-mute");
+    expect(btn).toHaveClass("bg-transparent", "text-fg", "hover:bg-secondary");
+    expect(btn).not.toHaveClass("text-mute");
+  });
+
+  it("state=hover 이면 secondary 캡슐 스타일을 적용한다", () => {
+    render(<Tab state="hover">Hovered</Tab>);
+
+    expect(screen.getByRole("button")).toHaveClass("rounded-full", "bg-secondary", "text-fg");
   });
 
   it("disabled이면 버튼이 비활성화되고 off 스타일을 적용한다", () => {
@@ -31,7 +37,7 @@ describe("Tab", () => {
     const btn = screen.getByRole("button");
     expect(btn).toBeDisabled();
     // disabled 시 state=on이어도 off 스타일로 처리
-    expect(btn.className).not.toContain("bg-secondary");
+    expect(btn).not.toHaveClass("bg-secondary");
   });
 
   it("className prop을 추가 클래스로 적용한다", () => {

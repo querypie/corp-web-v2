@@ -42,13 +42,13 @@ export default function IntegrationSection({ locale }: IntegrationSectionProps) 
     <section className="flex w-full justify-center">
       <div className="flex w-full max-w-[1200px] flex-col items-start gap-10 lg:flex-row lg:gap-[60px]">
         <div className="flex min-w-0 flex-1 flex-col items-start gap-5">
-          <h2 className="m-0 min-w-full type-h2 font-normal text-fg">
+          <h1 className="m-0 min-w-full type-h1 font-normal text-fg">
             {content.title.map((line) => (
               <span className="block" key={line}>
                 {line}
               </span>
             ))}
-          </h2>
+          </h1>
           <p className="m-0 min-w-full type-body-lg leading-[26px] text-mute">
             {content.body}
           </p>

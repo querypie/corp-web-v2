@@ -17,7 +17,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 const fieldShellClassName =
-  "ui-field-shell inline-flex h-10 w-full items-center overflow-hidden rounded-button bg-bg-content px-3 transition-colors hover:bg-[#242426]";
+  "ui-field-shell inline-flex h-10 w-full items-center overflow-hidden rounded-button bg-bg-content px-3 transition-colors hover:bg-bg-hover";
 
 const fieldTextClassName =
   "min-w-0 flex-1 border-0 bg-transparent type-body-md text-fg outline-none";
@@ -63,7 +63,7 @@ export default function Select({
       <img
         alt=""
         aria-hidden="true"
-        className="pointer-events-none absolute right-3 top-1/2 h-[14px] w-[14px] -translate-y-1/2 object-contain"
+        className="theme-icon pointer-events-none absolute right-3 top-1/2 h-[14px] w-[14px] -translate-y-1/2 object-contain"
         src="/assets/ui/icons/chevron-down.svg"
       />
     </div>
