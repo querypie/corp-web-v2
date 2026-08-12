@@ -43,7 +43,7 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 라이선�
 |------|------|
 | 주요 컴포넌트 | `src/components/pages/contact/ContactForm.tsx` |
 | copy 원본 | `src/copy/contact.ts` |
-| 환경변수 | `SLACK_BOT_OAUTH_TOKEN`, `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES`, `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`, `DESKPIE_LEAD_API_ENDPOINT`, `PUBLIC_API_KEY` (모두 선택) |
+| 환경변수 | `SLACK_BOT_OAUTH_TOKEN`, `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES`, `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`, `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY` (모두 선택) |
 | 성공 조건 | 필수값 검증과 MX 검증 통과 |
 | DeskPie | best-effort (실패해도 성공 응답 유지) |
 | UTM | `utm-attribution` 쿠키를 읽어 DeskPie/Slack payload에 포함 |
@@ -167,8 +167,8 @@ PDF 버튼 동작:
 | `SLACK_BOT_OAUTH_TOKEN` | Slack 알림 전송 | — |
 | `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | Slack 알림 채널 | — |
 | `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING` | non-production 입력폼 알림 채널 override | — |
-| `DESKPIE_LEAD_API_ENDPOINT` | Contact Us DeskPie Lead API endpoint | — |
-| `PUBLIC_API_KEY` | Contact Us DeskPie Lead API key | — |
+| `DESKPIE_API_BASE_URL` | DeskPie public API base URL | — |
+| `DESKPIE_API_KEY` | DeskPie public API key | — |
 
 Slack/DeskPie 환경변수가 없거나 전송에 실패해도 제출 성공은 유지한다.
 
