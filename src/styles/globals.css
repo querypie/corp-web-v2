@@ -65,6 +65,9 @@
   --motion-press-scale: 0.98;
   --motion-press-duration: 160ms;
   --motion-press-ease: ease;
+
+  /* 고정 GNB와 fragment navigation이 공유하는 높이. */
+  --gnb-height: theme(spacing.16);
 }
 
 * {
@@ -84,6 +87,7 @@ html,
 }
 
 html {
+  scroll-padding-top: calc(var(--gnb-height) + var(--language-banner-offset, 0px) + theme(spacing.5));
   scrollbar-gutter: stable;
 }
 
