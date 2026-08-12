@@ -155,14 +155,14 @@ Vercel 프로젝트에 설정해야 하는 기준값. 실제 등록값은 Vercel
 
 | 변수 | Production | Staging | Preview | Development |
 |------|------------|---------|---------|-------------|
-| `DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT` | `https://api.deskpie.querypie.com/api/v1/public/community-licenses` | ← 동일 | ← 동일 | — |
-| `PUBLIC_API_KEY` | Encrypted | ← 동일 | ← 동일 | — |
+| `DESKPIE_API_BASE_URL` | `https://api.deskpie.querypie.com` | ← 동일 | ← 동일 | — |
+| `DESKPIE_API_KEY` | Encrypted | ← 동일 | ← 동일 | — |
 | `SLACK_BOT_OAUTH_TOKEN` | Encrypted | Encrypted | Encrypted | — |
 | `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | `C08JNAZDU5A` (#alert-website-business-inquiries) | `C083Y0300M7` (#alert-website-form-submission-testing) | ← 동일 | ← 동일 |
 | `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING` | — | `C083Y0300M7` (#alert-website-form-submission-testing) | ← 동일 | — |
 
 **참고:**
-- `DESKPIE_COMMUNITY_LICENSE_API_ENDPOINT` 또는 shared `PUBLIC_API_KEY` 미설정 시 라이선스 발급 단계를 skip하고 Slack 알림만 진행한다.
+- `DESKPIE_API_BASE_URL` 또는 `DESKPIE_API_KEY` 미설정 시 라이선스 발급 단계를 skip하고 Slack 알림만 진행한다.
 - 테스트/개발용 라이선스 API(`https://licensepie.dev.querypie.io`)는 인터넷 접근 불가로 Vercel 환경에서 사용할 수 없다. Staging/Preview는 Production과 동일한 엔드포인트를 사용하며, Development(로컬)에서만 라이선스 발급 단계를 skip한다.
 - `SLACK_BOT_OAUTH_TOKEN`은 Vercel 정책상 `development` 환경에 sensitive 타입으로 설정 불가. 로컬 개발 시 Slack 알림은 skip된다.
 - 앱 코드는 `VERCEL_TARGET_ENV !== "production"`일 때 `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`을 우선 사용하고, 미설정 시 `C083Y0300M7`로 fallback한다. Staging/Preview 입력폼이 production 영업 문의 채널로 전송되지 않게 하는 보호장치다.
@@ -172,11 +172,11 @@ Vercel 프로젝트에 설정해야 하는 기준값. 실제 등록값은 Vercel
 
 | 변수 | Production | Staging | Preview | Development |
 |------|------------|---------|---------|-------------|
-| `DESKPIE_LEAD_API_ENDPOINT` | Encrypted | Encrypted | Encrypted | — |
-| `PUBLIC_API_KEY` | Encrypted | Encrypted | Encrypted | — |
+| `DESKPIE_API_BASE_URL` | `https://api.deskpie.querypie.com` | ← 동일 | ← 동일 | — |
+| `DESKPIE_API_KEY` | Encrypted | Encrypted | Encrypted | — |
 
 **참고:**
-- `DESKPIE_LEAD_API_ENDPOINT`, `PUBLIC_API_KEY` 중 하나라도 없으면 Contact Us의 DeskPie 전송 단계는 skip된다.
+- `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY` 중 하나라도 없으면 Contact Us와 Content Gating의 DeskPie 전송 단계는 skip된다.
 - DeskPie 전송은 best-effort이므로 실패해도 Contact Us 제출 응답은 `{ success: true }`를 유지한다.
 
 ### 환경변수 pull (로컬 개발)
