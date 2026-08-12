@@ -6,7 +6,7 @@
 |----|------------|-----|---------|
 | [Community License 신청](#1-community-license-신청) | `/en/community-license`, `/en/querypie/license/community/apply` | `POST /api/community-license` | 라이선스 발급 API, Slack |
 | [Contact Us](#2-contact-us) | `/en/company/contact-us` | `POST /api/contact-us` | DeskPie Lead API, Slack |
-| [콘텐츠 PDF 언락/다운로드](#3-콘텐츠-pdf-언락다운로드) | `/en/whitepapers/[slug]` 등 콘텐츠 상세 | `POST /api/downloads/content` | Slack |
+| [콘텐츠 PDF 언락/다운로드](#3-콘텐츠-pdf-언락다운로드) | `/en/whitepapers/[slug]` 등 콘텐츠 상세 | `POST /api/downloads/content` | DeskPie Lead API, Slack |
 
 ---
 
@@ -43,7 +43,7 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 라이선�
 |------|------|
 | 주요 컴포넌트 | `src/components/pages/contact/ContactForm.tsx` |
 | copy 원본 | `src/copy/contact.ts` |
-| 환경변수 | `SLACK_BOT_OAUTH_TOKEN`, `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES`, `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`, `DESKPIE_LEAD_API_ENDPOINT`, `PUBLIC_API_KEY` (모두 선택) |
+| 환경변수 | `SLACK_BOT_OAUTH_TOKEN`, `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES`, `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`, `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY` (모두 선택) |
 | 성공 조건 | 필수값 검증과 MX 검증 통과 |
 | DeskPie | best-effort (실패해도 성공 응답 유지) |
 | UTM | `utm-attribution` 쿠키를 읽어 DeskPie/Slack payload에 포함 |
@@ -100,6 +100,7 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 라이선�
 | `src/features/content/gating.ts` | 언락 쿠키 상수·유틸 (`CONTENT_UNLOCK_COOKIE_PREFIX`, `getContentUnlockCookieName`) |
 | `src/components/pages/documentation/ContentLeadForm.tsx` | Client Component — 폼 상태 관리, submit 핸들러 |
 | `src/app/api/downloads/content/route.ts` | `POST /api/downloads/content` 핸들러 |
+| `src/features/deskpie/lead.ts` | Contact Us/Gating 공용 DeskPie Lead sender |
 
 ### 모드
 
@@ -119,8 +120,9 @@ Contact Us 폼과 같은 copy를 공유한다. 단, `message` 필드는 사용�
 1. **페이로드 검증** — `form` 누락 시 `400` 반환; `download` 모드에서 `attachmentUrl`, `attachmentFileName`, `returnUrl`, `pdfPreviewUrl` 중 하나라도 없으면 `400` 반환
 2. **콘텐츠 검증** — `contentId`, `section`이 있으면 실제 게시 콘텐츠와 PDF 첨부 상태를 서버에서 재확인
 3. **이메일 검증** — 제출 이메일 domain의 MX record 확인. 실패 시 `400` 반환
-4. **Slack 알림** — 환경변수가 있으면 `Gating Form To Unlock/Download Document` 알림 전송. 실패해도 제출 성공은 막지 않음
-5. **응답**
+4. **DeskPie Lead API 전송** — 환경변수가 있으면 `CONTENT_GATING` payload를 Next.js `after()`로 전송한다. 실패해도 제출 성공은 막지 않는다.
+5. **Slack 알림** — 환경변수가 있으면 `Gating Form To Unlock/Download Document` 알림 전송. 실패해도 제출 성공은 막지 않음
+6. **응답**
    - `download` 모드: `{ downloadUrl, previewUrl }` 반환 (`downloadUrl`은 `/api/downloads/file` 프록시 경유)
    - `unlock` 모드: `{ unlocked: true }` 반환 + `unlockCookieName` 쿠키 설정
 
@@ -165,8 +167,8 @@ PDF 버튼 동작:
 | `SLACK_BOT_OAUTH_TOKEN` | Slack 알림 전송 | — |
 | `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | Slack 알림 채널 | — |
 | `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING` | non-production 입력폼 알림 채널 override | — |
-| `DESKPIE_LEAD_API_ENDPOINT` | Contact Us DeskPie Lead API endpoint | — |
-| `PUBLIC_API_KEY` | Contact Us DeskPie Lead API key | — |
+| `DESKPIE_API_BASE_URL` | DeskPie public API base URL | — |
+| `DESKPIE_API_KEY` | DeskPie public API key | — |
 
 Slack/DeskPie 환경변수가 없거나 전송에 실패해도 제출 성공은 유지한다.
 

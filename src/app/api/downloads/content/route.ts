@@ -1,5 +1,5 @@
 import dns from "dns";
-import { NextResponse } from "next/server";
+import { after, NextResponse } from "next/server";
 import { WebClient } from "@slack/web-api";
 import { filterXSS } from "xss";
 import { isLocale } from "@/constants/i18n";
@@ -18,8 +18,9 @@ import {
   isPublishedContentAccessible,
   type ManagedContentSection,
 } from "@/features/content/data";
+import { sendDeskPieLead } from "@/features/deskpie/lead";
 import { getLeadFormSlackChannel } from "@/features/slack/lead-form-channel";
-import { buildUtmSlackFields } from "@/features/utm/utm";
+import { buildLeadUtmFields, buildUtmSlackFields } from "@/features/utm/utm";
 
 type DownloadLeadPayload = {
   attachmentFileName?: string;
@@ -138,7 +139,7 @@ function buildSlackNotificationBody(formData: Record<string, unknown>) {
   return visibleEntries.join("\n");
 }
 
-function buildLeadNotificationPayload(
+function buildLeadPayload(
   payload: DownloadLeadPayload,
   resolvedPayload: Awaited<ReturnType<typeof resolvePayload>> & {},
   request: Request,
@@ -178,6 +179,44 @@ function buildLeadNotificationPayload(
   }
 
   return requestBody;
+}
+
+function buildDeskPieLeadPayload(
+  payload: DownloadLeadPayload,
+  resolvedPayload: Awaited<ReturnType<typeof resolvePayload>> & {},
+  request: Request,
+) {
+  const form = payload.form ?? {};
+  const products = getStringArrayField(form, "products");
+  const plannedImplementationDate = getStringField(form, "plannedImplementationDate");
+  const contentKey = payload.contentId && resolvedPayload.notificationSource
+    ? `${resolvedPayload.notificationSource}:${payload.contentId}`
+    : payload.contentId;
+  const descriptionParts = [
+    contentKey ? `GatedContentKey: ${filterXSS(contentKey)}` : "",
+    products.length ? `Product: ${products.map((product) => filterXSS(product)).join(", ")}` : "",
+    plannedImplementationDate ? `PlannedImplementationDate: ${filterXSS(plannedImplementationDate)}` : "",
+  ].filter(Boolean);
+  const requestBody: Record<string, unknown> = {
+    FirstName: filterXSS(getStringField(form, "firstName")),
+    LastName: filterXSS(getStringField(form, "lastName")),
+    Email: filterXSS(getStringField(form, "email")),
+    Company: filterXSS(getStringField(form, "company")) || "None",
+    Title: filterXSS(getStringField(form, "departmentTitle")),
+    MobilePhone: filterXSS(getStringField(form, "phoneNumber")),
+    Objective__c: filterXSS(getStringField(form, "inquiryType")),
+    HasOptedInMarketing__c: getBooleanField(form, "marketingConsent"),
+    Referrer_URL__c: filterXSS(payload.referrerURL ?? payload.referrerUrl ?? request.headers.get("referer") ?? ""),
+  };
+
+  if (descriptionParts.length) {
+    requestBody.Description = descriptionParts.join("\n");
+  }
+  if (payload.utmAttribution) {
+    Object.assign(requestBody, buildLeadUtmFields(payload.utmAttribution));
+  }
+
+  return { processType: "CONTENT_GATING" as const, requestBody };
 }
 
 async function validateLeadEmail(form: Record<string, unknown>) {
@@ -325,7 +364,8 @@ export async function POST(request: Request) {
     );
   }
 
-  const notificationPayload = buildLeadNotificationPayload(payload, resolvedPayload, request);
+  const notificationPayload = buildLeadPayload(payload, resolvedPayload, request);
+  after(() => sendDeskPieLead(buildDeskPieLeadPayload(payload, resolvedPayload, request), "content-downloads"));
   await sendLeadNotificationToSlack(notificationPayload, mode, resolvedPayload.notificationSource);
 
   const response =

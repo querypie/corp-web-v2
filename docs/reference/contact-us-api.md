@@ -66,7 +66,7 @@
 1. **필수 필드 검증** — `firstName`, `lastName`, `email`, `company`, `departmentTitle` 중 누락 시 `400`.
 2. **MX 레코드 검증** — 이메일 도메인의 MX 레코드 확인. 실패 시 2초 딜레이 후 에러 반환 (brute-force 완화).
 3. **XSS 필터링** — 모든 문자열 필드에 적용.
-4. **DeskPie Lead API 전송** (best-effort) — `DESKPIE_LEAD_API_ENDPOINT`, `PUBLIC_API_KEY`가 모두 있으면 Next.js `after()`로 전송한다. 실패해도 에러 로그만 남긴다.
+4. **DeskPie Lead API 전송** (best-effort) — `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY`가 모두 있으면 Next.js `after()`로 전송한다. 실패해도 에러 로그만 남긴다.
 5. **Slack 알림** (best-effort) — 환경변수가 없거나 전송에 실패해도 에러 로그만 남기고 성공 응답 유지.
 6. **성공 응답** — `{ success: true }`.
 
@@ -100,7 +100,7 @@ DeskPie API는 기존 lead field name과 호환되는 payload를 받는다. Slac
 |------|------|------|
 | 필수 필드 누락 | 400 | `{ success: false, errorCode: "missing_required_fields", errorMessage: "Required fields are missing." }` |
 | MX 레코드 없음 | 200 | `{ success: false, errorCode: "invalid_email", errorMessage: "Please enter a valid email address." }` |
-| DeskPie 환경변수 미설정 | 200 | `DESKPIE_LEAD_API_ENDPOINT`, `PUBLIC_API_KEY` 중 하나라도 없으면 DeskPie 연동 skip, `{ success: true }` |
+| DeskPie 환경변수 미설정 | 200 | `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY` 중 하나라도 없으면 DeskPie 연동 skip, `{ success: true }` |
 | DeskPie 실패 | 200 | 에러 로그만 남기고 `{ success: true }` |
 | Slack 환경변수 미설정 | 200 | Slack 알림 skip, `{ success: true }` |
 | Slack 실패 | 200 | 에러 로그만 남기고 `{ success: true }` |
@@ -115,8 +115,8 @@ DeskPie API는 기존 lead field name과 호환되는 payload를 받는다. Slac
 | `SLACK_BOT_OAUTH_TOKEN` | 선택 | Slack 알림 skip |
 | `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | 선택 | Slack 알림 skip |
 | `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING` | 선택 | non-production에서 미설정 시 `C083Y0300M7` fallback |
-| `DESKPIE_LEAD_API_ENDPOINT` | 선택 | DeskPie 단계 skip |
-| `PUBLIC_API_KEY` | 선택 | DeskPie 단계 skip |
+| `DESKPIE_API_BASE_URL` | 선택 | DeskPie 단계 skip |
+| `DESKPIE_API_KEY` | 선택 | DeskPie 단계 skip |
 
 Slack 알림 채널 선택은 Community License, 콘텐츠 게이팅 폼과 같은 resolver를 공유한다.
 
