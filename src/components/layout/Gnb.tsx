@@ -230,7 +230,7 @@ export default function Gnb({
           className,
         )}
       >
-        <div className="flex h-16 w-full max-w-[1200px] items-center justify-between gap-6 text-fg transition-colors duration-300">
+        <div className="flex h-[var(--gnb-height)] w-full max-w-[1200px] items-center justify-between gap-6 text-fg transition-colors duration-300">
           <Link
             aria-label="QueryPie AI"
             className="inline-flex h-5 w-[116px] shrink-0 items-center text-fg transition-colors duration-300"
@@ -527,7 +527,7 @@ export default function Gnb({
 
       {mobileMenuVisible ? (
         <div className={cx(
-          "fixed inset-x-0 bottom-0 top-[calc(64px+var(--language-banner-offset,0px))] z-40 overflow-y-auto transition-[top] duration-300 md:hidden",
+          "fixed inset-x-0 bottom-0 top-[calc(var(--gnb-height)+var(--language-banner-offset,0px))] z-40 overflow-y-auto transition-[top] duration-300 md:hidden",
           mobileMenuOpen
             ? "animate-[mobile-menu-sheet-enter_320ms_cubic-bezier(0.22,1,0.36,1)_both]"
             : "animate-[mobile-menu-sheet-exit_280ms_cubic-bezier(0.4,0,0.2,1)_both]",

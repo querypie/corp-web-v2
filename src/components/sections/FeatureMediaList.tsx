@@ -13,6 +13,7 @@ type FeatureItem = {
   body: string[];
   desktopTitle?: string[];
   iconSrc?: string;
+  id?: string;
   imageAlt: string;
   imageClassName?: string;
   imageSrc?: string;
@@ -272,6 +273,7 @@ export default function FeatureMediaList({
             /* 모바일: 미디어 먼저, 데스크탑: 가로 배치 (reverse 시 미디어/텍스트 순서 교차) */
             <div
               key={`${item.videoSrc ?? item.imageSrc}-${index}`}
+              id={item.id}
               className={cx(
                 "flex min-w-0 flex-col items-start gap-5 lg:flex-row lg:gap-[60px]",
                 shouldReverse && "lg:flex-row-reverse",
