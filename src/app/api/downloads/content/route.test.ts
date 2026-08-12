@@ -19,6 +19,16 @@ vi.mock("dns", () => ({
   default: { resolveMx: mockResolveMx },
 }));
 
+vi.mock("next/server", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("next/server")>();
+  return {
+    ...actual,
+    after: (callback: () => void | Promise<void>) => {
+      void callback();
+    },
+  };
+});
+
 vi.mock("@slack/web-api", () => {
   class WebClient {
     chat = { postMessage: mockSlackPostMessage };
@@ -227,6 +237,51 @@ describe("POST /api/downloads/content", () => {
       const response = await POST(request);
 
       expect(response.status).toBe(404);
+    });
+
+    it("DeskPie env가 있으면 Content Gating Lead를 전송한다", async () => {
+      vi.stubEnv("DESKPIE_API_BASE_URL", "https://api.deskpie.example");
+      vi.stubEnv("DESKPIE_API_KEY", "deskpie-key");
+      mockReadContentItem.mockResolvedValue(BASE_CONTENT_ITEM);
+      const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValue({ ok: true } as Response);
+
+      const response = await POST(new Request("http://localhost/api/downloads/content", {
+        method: "POST",
+        headers: { referer: "https://www.querypie.com/ko/whitepapers/server-doc" },
+        body: JSON.stringify({
+          ...BASE_DOWNLOAD_PAYLOAD,
+          contentId: "server-doc",
+          form: {
+            company: "QueryPie",
+            departmentTitle: "Marketing",
+            email: "reader@example.com",
+            firstName: "Reader",
+            inquiryType: "Other",
+            lastName: "Kim",
+            plannedImplementationDate: "Consideration stage",
+            products: ["AI Platform QueryPie AIP"],
+          },
+          mode: "unlock",
+          section: "documentation",
+          utmAttribution: encodeURIComponent(JSON.stringify({
+            first: { landing: "/ko/whitepapers/server-doc", ts: "2026-01-01T00:00:00.000Z" },
+            recent: [{ source: "newsletter", landing: "/ko/whitepapers/server-doc", ts: "2026-01-01T00:00:00.000Z" }],
+          })),
+        }),
+      }));
+
+      expect(response.status).toBe(200);
+      await vi.waitFor(() => expect(fetchSpy).toHaveBeenCalledOnce());
+      expect(fetchSpy).toHaveBeenCalledWith(
+        "https://api.deskpie.example/api/v1/public/leads",
+        expect.objectContaining({ method: "POST" }),
+      );
+      const payload = JSON.parse(fetchSpy.mock.calls[0][1]?.body as string);
+      expect(payload.processType).toBe("CONTENT_GATING");
+      expect(payload.requestBody.Description).toContain("GatedContentKey: whitepapers:server-doc");
+      expect(payload.requestBody.Referrer_URL__c).toBe("https://www.querypie.com/ko/whitepapers/server-doc");
+      expect(payload.requestBody.pi__utm_source__c).toBe("newsletter");
+      expect(payload.requestBody).not.toHaveProperty("UTM Source");
     });
 
     it("Slack 환경변수가 있으면 게이팅 폼 알림을 보낸다", async () => {

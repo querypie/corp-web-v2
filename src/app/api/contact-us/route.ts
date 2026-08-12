@@ -2,6 +2,7 @@ import dns from "dns";
 import { filterXSS } from "xss";
 import { WebClient } from "@slack/web-api";
 import { after, NextResponse } from "next/server";
+import { sendDeskPieLead } from "@/features/deskpie/lead";
 import { getLeadFormSlackChannel } from "@/features/slack/lead-form-channel";
 import { buildLeadUtmFields } from "@/features/utm/utm";
 
@@ -29,37 +30,6 @@ function hasValidMXRecord(domain: string): Promise<boolean> {
       resolve(addresses && addresses.length > 0);
     });
   });
-}
-
-type DeskPieLeadPayload = {
-  processType: string;
-  requestBody: Record<string, unknown>;
-};
-
-async function sendToDeskPieLead(payload: DeskPieLeadPayload): Promise<void> {
-  const endpoint = process.env.DESKPIE_API_BASE_URL;
-  const apiKey = process.env.DESKPIE_API_KEY;
-
-  if (!endpoint || !apiKey) {
-    return;
-  }
-
-  try {
-    const response = await fetch(new URL("/api/v1/public/leads", endpoint).toString(), {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        "X-API-KEY": apiKey,
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      console.error(`[contact-us] deskpie: HTTP ${response.status}`);
-    }
-  } catch (error) {
-    console.error("[contact-us] deskpie: request error", error);
-  }
 }
 
 async function sendToSlack(requestBody: Record<string, unknown>): Promise<void> {
@@ -159,7 +129,7 @@ export async function POST(request: Request) {
     Object.assign(requestBody, buildLeadUtmFields(utmAttribution));
   }
 
-  after(() => sendToDeskPieLead({ requestBody, processType: "LEAD_MS" }));
+  after(() => sendDeskPieLead({ requestBody, processType: "LEAD_MS" }, "contact-us"));
 
   // 6. Slack 알림 (best-effort)
   try {
