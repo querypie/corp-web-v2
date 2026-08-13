@@ -22,8 +22,8 @@ type TeamMember = {
 type LocationItem = {
   addressLines: string[];
   city: string;
-  country: string;
   iconSrc: string;
+  purpose: string;
 };
 
 type AboutUsPageProps = {
@@ -49,9 +49,18 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 function InvestorLogo({ alt, imageSrc }: Investor) {
+  const isMonochromeLightLogo = imageSrc.endsWith("/logo-zventurecapital.svg");
+
   return (
     <div className="flex h-auto w-full max-w-[200px] items-center justify-start">
-      <img alt={alt} className="block h-auto w-full max-w-[200px] object-contain" src={imageSrc} />
+      <img
+        alt={alt}
+        className={cx(
+          "block h-auto w-full max-w-[200px] object-contain",
+          isMonochromeLightLogo && "theme-icon",
+        )}
+        src={imageSrc}
+      />
     </div>
   );
 }
@@ -71,7 +80,7 @@ function TeamCard({ imageSrc, linkedinHref, name, role }: TeamMember) {
           <p className="m-0 type-body-md text-mute">{role}</p>
         </div>
         <span className="inline-flex h-6 w-6 opacity-30 transition-opacity group-hover:opacity-100">
-          <img alt="LinkedIn" className="h-6 w-6 object-contain" src="/assets/brand/icons/linkedin.svg" />
+          <img alt="LinkedIn" className="theme-icon h-6 w-6 object-contain" src="/assets/brand/icons/linkedin.svg" />
         </span>
       </div>
       <div className="h-[88px] w-[88px] overflow-hidden rounded-thumb bg-bg-deep md:h-[100px] md:w-[100px]">
@@ -85,7 +94,7 @@ function TeamCard({ imageSrc, linkedinHref, name, role }: TeamMember) {
   );
 }
 
-function LocationCard({ addressLines, city, country, iconSrc }: LocationItem) {
+function LocationCard({ addressLines, city, iconSrc, purpose }: LocationItem) {
   return (
     /* 지역 정보 카드 */
     <div className="flex flex-col gap-[10px]">
@@ -93,13 +102,15 @@ function LocationCard({ addressLines, city, country, iconSrc }: LocationItem) {
         <img alt="" aria-hidden="true" className="h-[18px] w-6 object-contain" src={iconSrc} />
         <p className="m-0 type-body-lg text-fg">{city}</p>
       </div>
-      <div className="type-body-sm text-mute">
-        <p className="m-0">{country}</p>
-        {addressLines.map((line) => (
-          <p key={line} className="m-0">
-            {line}
-          </p>
-        ))}
+      <div className="flex flex-col gap-[10px] type-body-sm text-mute">
+        <p className="m-0">{purpose}</p>
+        <div>
+          {addressLines.map((line) => (
+            <p key={line} className="m-0">
+              {line}
+            </p>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -123,7 +134,7 @@ export default function AboutUsPage({
   title,
 }: AboutUsPageProps) {
   return (
-    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
       <section className="flex w-full justify-center">
         <div className={`flex w-full max-w-[1200px] flex-col ${pageSectionGapClassName}`}>
         {/* 회사 소개 상단 */}
@@ -204,7 +215,7 @@ export default function AboutUsPage({
           <h2 className="m-0 type-h1 text-fg">{locationsTitle}</h2>
           <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-4 md:gap-[30px]">
             {locations.map((location) => (
-              <LocationCard key={`${location.city}-${location.country}`} {...location} />
+              <LocationCard key={`${location.city}-${location.purpose}`} {...location} />
             ))}
           </div>
           <div className="relative aspect-[1000/480] w-full overflow-hidden md:aspect-[1000/400]">

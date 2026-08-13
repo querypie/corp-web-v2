@@ -15,6 +15,7 @@ export type IntegrationCategoryId =
 
 export type IntegrationItem = {
   categories: Exclude<IntegrationCategoryId, "all">[];
+  darkPlate?: boolean;
   enhanceIconContrast?: boolean;
   icon: string;
   invertIcon?: boolean;
@@ -83,13 +84,13 @@ const iconBasePath = "/assets/products/aip/integrations";
 
 export const integrationItems: IntegrationItem[] = [
   { name: "AirTable", icon: `${iconBasePath}/airtable.svg`, categories: ["database-connections"] },
-  { name: "AWS", icon: `${iconBasePath}/aws.svg`, categories: ["development-devops"] },
+  { name: "AWS", icon: `${iconBasePath}/aws.svg`, darkPlate: true, categories: ["development-devops"] },
   { name: "Brave Search", icon: `${iconBasePath}/brave-search.svg`, categories: ["search-navigation"] },
   { name: "ClickHouse", icon: `${iconBasePath}/clickhouse.svg`, categories: ["database-connections"] },
   { name: "Code Executor", icon: `${iconBasePath}/querypie.svg`, categories: ["development-devops"] },
   { name: "Confluence Cloud", icon: `${iconBasePath}/confluence.svg`, categories: ["project-management"] },
   { name: "Context7", icon: `${iconBasePath}/context7.svg`, categories: ["development-devops"] },
-  { name: "Datadog", icon: `${iconBasePath}/datadog.svg`, categories: ["development-devops"] },
+  { name: "Datadog", icon: `${iconBasePath}/datadog.svg`, darkPlate: true, categories: ["development-devops"] },
   { name: "Daum Search", icon: `${iconBasePath}/daum-search.svg`, invertIcon: true, categories: ["search-navigation"] },
   { name: "Dify API Access", icon: `${iconBasePath}/dify.svg`, categories: ["workflow-automation"] },
   { name: "Discord", icon: `${iconBasePath}/discord.svg`, categories: ["communication-collaboration"] },
@@ -108,7 +109,7 @@ export const integrationItems: IntegrationItem[] = [
   { name: "Kubernetes", icon: `${iconBasePath}/kubernetes.svg`, categories: ["development-devops"] },
   { name: "MariaDB", icon: `${iconBasePath}/maria-db.svg`, categories: ["database-connections"] },
   { name: "Microsoft 365", icon: `${iconBasePath}/microsoft-365.svg`, categories: ["microsoft-services"] },
-  { name: "MySQL", icon: `${iconBasePath}/mysql.svg`, categories: ["database-connections"] },
+  { name: "MySQL", icon: `${iconBasePath}/mysql.svg`, darkPlate: true, categories: ["database-connections"] },
   { name: "n8n Chat", icon: `${iconBasePath}/n8n-chat.svg`, invertIcon: true, categories: ["workflow-automation"] },
   { name: "n8n Webhook", icon: `${iconBasePath}/n8n-webhook.svg`, invertIcon: true, categories: ["workflow-automation"] },
   { name: "Naver Search", icon: `${iconBasePath}/naver-search.svg`, categories: ["search-navigation"] },

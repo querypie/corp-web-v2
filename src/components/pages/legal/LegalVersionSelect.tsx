@@ -37,7 +37,7 @@ export default function LegalVersionSelect({
         <img
           alt=""
           aria-hidden="true"
-          className="pointer-events-none h-[14px] w-[14px] object-contain"
+          className="theme-icon pointer-events-none h-[14px] w-[14px] object-contain"
           src="/assets/ui/icons/chevron-down.svg"
         />
       </div>

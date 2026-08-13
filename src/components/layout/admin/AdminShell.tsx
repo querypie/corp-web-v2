@@ -5,8 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import AdminSidebar from "./AdminSidebar";
 import Button from "@/components/ui/Button";
+import ButtonGroup from "@/components/ui/ButtonGroup";
 import { AdminNavigationGuardContext } from "./AdminNavigationGuard";
 import { adminNavGroups, adminPrimaryNavItems } from "@/constants/admin";
+import ThemeSwitch from "@/components/site/ThemeSwitch";
 
 type AdminShellProps = {
   children: ReactNode;
@@ -104,14 +106,14 @@ export default function AdminShell({ children }: AdminShellProps) {
     >
       {/* 어드민 공통 셸: 좌측 사이드바 + 우측 본문 */}
       <div className="flex min-h-screen flex-col bg-bg text-fg md:flex-row">
-        <header className="fixed inset-x-0 top-0 z-40 flex h-[60px] items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.9)] px-5 backdrop-blur-[10px] md:hidden">
+        <header className="fixed inset-x-0 top-0 z-40 flex h-[60px] items-center justify-center bg-[rgb(var(--color-chrome-rgb)/0.9)] px-5 backdrop-blur-[10px] md:hidden">
           <div className="flex w-full items-center justify-between">
             <button
               className="inline-flex items-center gap-2"
               onClick={() => requestNavigation("/admin")}
               type="button"
             >
-              <img alt="" aria-hidden="true" className="h-5 w-5 object-contain" src="/assets/brand/logos/querypie-symbol.svg" />
+              <img alt="" aria-hidden="true" className="theme-icon h-5 w-5 object-contain" src="/assets/brand/logos/querypie-symbol.svg" />
               <span className="type-h3 text-fg">CMS</span>
             </button>
             <button
@@ -124,7 +126,7 @@ export default function AdminShell({ children }: AdminShellProps) {
               <img
                 alt=""
                 aria-hidden="true"
-                className="h-10 w-10 object-contain"
+                className="theme-icon h-10 w-10 object-contain"
                 src={mobileMenuOpen ? "/assets/ui/icons/m-Close.svg" : "/assets/ui/icons/m-Menu.svg"}
               />
             </button>
@@ -139,7 +141,7 @@ export default function AdminShell({ children }: AdminShellProps) {
       </div>
 
       {mobileMenuOpen ? (
-        <div className="fixed inset-x-0 bottom-0 top-[60px] z-30 overflow-y-auto bg-[rgb(var(--color-overlay-rgb)/0.9)] backdrop-blur-[10px] md:hidden">
+        <div className="fixed inset-x-0 bottom-0 top-[60px] z-30 overflow-y-auto bg-[rgb(var(--color-chrome-rgb)/0.96)] backdrop-blur-[10px] md:hidden">
           <nav className="flex w-full flex-col gap-[30px] px-5 py-[30px]" aria-label="Mobile admin">
             <div className="flex flex-col gap-[10px]">
               {adminPrimaryNavItems.map((item) => (
@@ -176,6 +178,9 @@ export default function AdminShell({ children }: AdminShellProps) {
                 </div>
               </div>
             ))}
+            <div className="mt-auto border-t border-border pt-5">
+              <ThemeSwitch className="w-full px-1" locale="ko" />
+            </div>
           </nav>
         </div>
       ) : null}
@@ -196,7 +201,7 @@ export default function AdminShell({ children }: AdminShellProps) {
                   저장하지 않은 내용은 사라집니다.
                 </p>
               </div>
-              <div className="flex w-full flex-col justify-center gap-3 sm:flex-row">
+              <ButtonGroup className="w-full flex-col justify-center sm:flex-row">
                 <Button
                   arrow={false}
                   className="w-full justify-center sm:w-auto"
@@ -234,7 +239,7 @@ export default function AdminShell({ children }: AdminShellProps) {
                 >
                   나가기
                 </Button>
-              </div>
+              </ButtonGroup>
             </div>
           </div>
         </div>

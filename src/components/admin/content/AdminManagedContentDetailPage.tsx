@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
+import ButtonGroup from "@/components/ui/ButtonGroup";
 import Input from "@/components/ui/Input";
 import LoadingText from "@/components/ui/LoadingText";
 import Select from "@/components/ui/Select";
@@ -296,7 +297,7 @@ function ConfirmDialog({
               </div>
             ) : null}
           </div>
-          <div className="flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
+          <ButtonGroup className="w-full flex-col justify-center sm:w-auto sm:flex-row">
             {hideCancel ? null : (
               <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
                 {cancelLabel}
@@ -305,7 +306,7 @@ function ConfirmDialog({
             <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onConfirm} style="round" variant="secondary">
               {confirmLabel}
             </Button>
-          </div>
+          </ButtonGroup>
         </div>
       </div>
     </div>
@@ -478,14 +479,14 @@ function TranslationSourceDialog({
               />
             </label>
           </div>
-          <div className="flex w-full flex-col justify-center gap-3 sm:flex-row">
+          <ButtonGroup className="w-full flex-col justify-center sm:flex-row">
             <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
               취소
             </Button>
             <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onConfirm} style="round" variant="secondary">
               번역하기
             </Button>
-          </div>
+          </ButtonGroup>
         </div>
       </div>
     </div>
@@ -2012,7 +2013,7 @@ export default function AdminManagedContentDetailPage({
                       <input
                         aria-label={`${locale.toUpperCase()} 노출`}
                         checked={form.visibleLocales.includes(locale)}
-                        className="ml-1 h-3.5 w-3.5 shrink-0 self-center rounded border-border bg-bg-content accent-[var(--color-success)] disabled:opacity-40"
+                        className="ml-1 h-3.5 w-3.5 shrink-0 self-center disabled:opacity-40"
                         disabled={!canToggleLocale}
                         onChange={(event) => toggleVisibleLocale(locale, event.target.checked)}
                         onClick={(event) => event.stopPropagation()}
@@ -2023,17 +2024,17 @@ export default function AdminManagedContentDetailPage({
                 );
               })}
             </TabGroup>
-            <Button
-              arrow={false}
-              className="shrink-0 justify-center whitespace-nowrap"
-              disabled={!canTranslateAnyLocale || dialog?.type === "translate-loading"}
-              onClick={openTranslationConfirm}
-              style="round"
-              variant="outline"
-            >
-              번역
-            </Button>
-            <div className="flex shrink-0 flex-nowrap items-center gap-3">
+            <ButtonGroup className="shrink-0 flex-nowrap items-center">
+              <Button
+                arrow={false}
+                className="shrink-0 justify-center whitespace-nowrap"
+                disabled={!canTranslateAnyLocale || dialog?.type === "translate-loading"}
+                onClick={openTranslationConfirm}
+                style="round"
+                variant="outline"
+              >
+                번역
+              </Button>
               <Button arrow={false} className="shrink-0 justify-center whitespace-nowrap" onClick={() => setPreviewOpen(true)} style="round" variant="outline">
                 미리보기
               </Button>
@@ -2062,9 +2063,9 @@ export default function AdminManagedContentDetailPage({
                 style="round"
                 variant="primary"
               >
-                {isSaving ? <LoadingText text="저장 중..." tone="dark" /> : "저장"}
+                {isSaving ? <LoadingText text="저장 중..." tone="primary" /> : "저장"}
               </Button>
-            </div>
+            </ButtonGroup>
           </div>
         </div>
       </header>

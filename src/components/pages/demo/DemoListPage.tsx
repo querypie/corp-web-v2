@@ -99,7 +99,7 @@ export default function DemoListPage({
     )[locale];
 
   return (
-    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
       <section className="flex w-full justify-center">
         <div className="flex w-full max-w-[1200px] flex-col gap-6 md:gap-10">
           <header className="flex w-full items-center">

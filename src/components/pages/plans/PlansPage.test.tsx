@@ -25,4 +25,16 @@ describe("PlansPage", () => {
     expect(screen.getByText("Collaborate and innovate together")).toBeInTheDocument();
     expect(screen.getByText("Enterprise power unleashed")).toBeInTheDocument();
   });
+
+  it("renders comparison group headlines with contrasting text on the primary background", () => {
+    render(<PlansPage locale="en" productKey="aip" />);
+
+    expect(screen.getByText("General")).toHaveClass(
+      "bg-primary",
+      "py-1.5",
+      "type-body-sm",
+      "text-bg",
+    );
+    expect(screen.getByText("General")).not.toHaveClass("theme-dark");
+  });
 });

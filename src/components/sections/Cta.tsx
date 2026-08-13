@@ -1,18 +1,26 @@
 import type { Locale } from "@/constants/i18n";
 import type { ReactNode } from "react";
-import { getButtonStyle, type ButtonSize, type ButtonStyle } from "@/components/ui/Button";
+import {
+  getButtonStyle,
+  type ButtonSize,
+  type ButtonStyle,
+  type ButtonVariant,
+} from "@/components/ui/Button";
+import ButtonGroup from "@/components/ui/ButtonGroup";
 
 type CtaProps = {
   actionLabel?: string;
   actionHref?: string;
   actionShape?: ButtonStyle;
   actionSize?: ButtonSize;
-  className?: string;
+  compactHeading?: boolean;
   eyebrow?: ReactNode;
   description?: ReactNode;
+  hideEyebrow?: boolean;
   locale?: Locale;
   secondaryActionLabel?: string;
   secondaryActionHref?: string;
+  secondaryActionVariant?: ButtonVariant;
   title?: ReactNode;
 };
 
@@ -58,12 +66,14 @@ export default function Cta({
   actionHref = "https://app.querypie.com/",
   actionShape = "full",
   actionSize = "large",
-  className,
+  compactHeading = false,
   description,
   eyebrow,
+  hideEyebrow = false,
   locale = "en",
   secondaryActionHref,
   secondaryActionLabel,
+  secondaryActionVariant = "secondary",
   title,
 }: CtaProps) {
   const defaultCopy = defaultCopyByLocale[locale];
@@ -74,23 +84,41 @@ export default function Cta({
   const hasSecondaryAction =
     resolvedSecondaryActionHref.length > 0 && resolvedSecondaryActionLabel.length > 0;
   const actionStyles = getButtonStyle("secondary", actionShape, actionSize, "default");
-  const secondaryStyles = getButtonStyle("secondary", actionShape, actionSize, "default");
+  const secondaryStyles = getButtonStyle(
+    secondaryActionVariant,
+    actionShape,
+    actionSize,
+    "default",
+  );
+  const heading = (
+    <div className="min-w-full type-h1">
+      {hideEyebrow ? null : <p className="mb-0 text-mute">{eyebrow ?? defaultCopy.eyebrow}</p>}
+      <p className="mb-0 text-fg">{title ?? defaultCopy.title}</p>
+    </div>
+  );
+  const descriptionContent = description ? (
+    <p className="m-0 min-w-full type-body-md text-mute">{description}</p>
+  ) : null;
 
   return (
     /* 페이지 하단 전환 유도용 CTA 섹션 */
-    <section className={cx("flex w-full justify-center pt-14 md:pt-20", className)}>
+    <section className="flex w-full justify-center pb-5 pt-10 md:pb-10 md:pt-20">
       <div className="flex w-full max-w-[1200px] flex-col items-center gap-6 text-center md:gap-[30px]">
-        <div className="min-w-full type-h1">
-          <p className="mb-0 text-mute">{eyebrow ?? defaultCopy.eyebrow}</p>
-          <p className="mb-0 text-fg">{title ?? defaultCopy.title}</p>
-        </div>
-        {description ? (
-          <p className="m-0 min-w-full type-body-md text-mute">{description}</p>
-        ) : null}
-        <div
+        {compactHeading && descriptionContent ? (
+          <div className="flex min-w-full flex-col items-center gap-3 md:gap-5">
+            {heading}
+            {descriptionContent}
+          </div>
+        ) : (
+          <>
+            {heading}
+            {descriptionContent}
+          </>
+        )}
+        <ButtonGroup
           className={cx(
-            "flex flex-wrap items-center justify-center",
-            hasSecondaryAction ? "gap-3 md:gap-4" : "min-w-full",
+            "flex-wrap items-center justify-center",
+            !hasSecondaryAction && "min-w-full",
           )}
         >
           <a
@@ -119,7 +147,7 @@ export default function Cta({
               </span>
             </a>
           ) : null}
-        </div>
+        </ButtonGroup>
       </div>
     </section>
   );

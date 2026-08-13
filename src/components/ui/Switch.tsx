@@ -71,7 +71,7 @@ export default function Switch({
         className={cx(
           "relative inline-flex items-center rounded-full transition-colors",
           styles.shell,
-          checked ? "bg-success" : "bg-[#3A3A3A]",
+          checked ? "bg-success" : "bg-[var(--color-switch-track)]",
         )}
       >
         <span
@@ -79,7 +79,7 @@ export default function Switch({
             "inline-block rounded-full transition-transform",
             styles.knob,
             checked ? styles.knobOffsetOn : styles.knobOffsetOff,
-            "bg-white",
+            "bg-[var(--color-white)]",
           )}
         />
       </span>

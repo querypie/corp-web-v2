@@ -28,7 +28,7 @@ type OgFontConfig = {
 const ogFontConfigs = {
   mona: { path: "/assets/fonts/og/MonaSans-Regular.ttf", name: "Mona Sans" },
   pretendard: { path: "/assets/fonts/og/Pretendard-Regular.ttf", name: "Pretendard" },
-  mPlus1: { path: "/assets/fonts/og/MPLUS1-Regular.ttf", name: "M PLUS 1" },
+  pretendardJp: { path: "/assets/fonts/og/PretendardJP-Regular.ttf", name: "Pretendard JP" },
 } as const;
 
 const fontDataCache = new Map<string, Promise<ArrayBuffer>>();
@@ -62,7 +62,7 @@ async function loadOgFont(
 async function getOgFonts(origin: string, locale: Locale): Promise<OgFontConfig[]> {
   const localeFallbackFont =
     locale === "ko" ? ogFontConfigs.pretendard :
-    locale === "ja" ? ogFontConfigs.mPlus1 :
+    locale === "ja" ? ogFontConfigs.pretendardJp :
     undefined;
   const configs = localeFallbackFont
     ? [ogFontConfigs.mona, localeFallbackFont]
@@ -73,7 +73,7 @@ async function getOgFonts(origin: string, locale: Locale): Promise<OgFontConfig[
 
 function getOgFontFamily(locale: Locale) {
   if (locale === "ko") return "Mona Sans, Pretendard";
-  if (locale === "ja") return "Mona Sans, M PLUS 1";
+  if (locale === "ja") return "Mona Sans, Pretendard JP";
   return "Mona Sans";
 }
 

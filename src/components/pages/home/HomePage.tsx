@@ -19,6 +19,7 @@ type FeatureItem = {
   body: string[];
   desktopTitle?: string[];
   iconSrc?: string;
+  iconSurface?: boolean;
   imageAlt: string;
   imageSrc?: string;
   excludeFromSearchSnippet?: boolean;
@@ -111,44 +112,46 @@ export default function HomePage({
   reviewTitle,
 }: HomePageProps) {
   return (
-    <div className={`flex flex-col ${pageSectionGapClassName} overflow-x-hidden bg-bg ${pageXPaddingClassName} pb-10 text-fg`}>
+    <>
       <NoticePopover items={noticeItems} locale={locale} />
 
-      <div className="relative -mx-5 md:-mx-10">
-        <Hero
-          ctaLabel={heroPrimaryCtaLabel}
-          description={heroDescription}
-          heroHeading={heroHeading}
-          imageAlt={heroImageAlt}
-          locale={locale}
-        />
-      </div>
+      <div className={`-mt-[100px] flex flex-col ${pageSectionGapClassName} overflow-x-hidden bg-bg ${pageXPaddingClassName} text-fg md:-mt-[140px]`}>
+        <div className="relative -mx-5 md:-mx-10">
+          <Hero
+            ctaLabel={heroPrimaryCtaLabel}
+            description={heroDescription}
+            heroHeading={heroHeading}
+            imageAlt={heroImageAlt}
+            locale={locale}
+          />
+        </div>
 
-      <div><Clients caption={clientCaption} /></div>
-      <div><FeatureMediaList items={featureItems} /></div>
-      <div>
-        <Mcps
-          action={mcpAction}
-          description={mcpDescription}
-          items={mcpItems}
-          title={mcpTitle}
-        />
+        <div><Clients caption={clientCaption} /></div>
+        <div><FeatureMediaList items={featureItems} /></div>
+        <div>
+          <Mcps
+            action={mcpAction}
+            description={mcpDescription}
+            items={mcpItems}
+            title={mcpTitle}
+          />
+        </div>
+        <div><Review items={reviewItems} title={reviewTitle} /></div>
+        <div className="-mx-5 md:-mx-10">
+          <ResourceList
+            description={contentListDescription}
+            items={contentListItems}
+            links={contentListLinks}
+            title={contentListTitle}
+          />
+        </div>
+        <div>
+          <News items={newsItems} title={newsTitle} />
+        </div>
+        <div>
+          <Cta locale={locale} />
+        </div>
       </div>
-      <div><Review items={reviewItems} title={reviewTitle} /></div>
-      <div className="-mx-5 md:-mx-10">
-        <ResourceList
-          description={contentListDescription}
-          items={contentListItems}
-          links={contentListLinks}
-          title={contentListTitle}
-        />
-      </div>
-      <div>
-        <News items={newsItems} title={newsTitle} />
-      </div>
-      <div>
-        <Cta locale={locale} />
-      </div>
-    </div>
+    </>
   );
 }

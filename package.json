@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit",
-    "validate:ja-redirects": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/validate-ja-redirects.mjs",
     "audit:public-assets": "node scripts/find-unused-public-assets.mjs",
     "test": "vitest",
     "test:run": "vitest run"

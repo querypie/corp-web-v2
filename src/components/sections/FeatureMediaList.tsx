@@ -13,6 +13,7 @@ type FeatureItem = {
   body: string[];
   desktopTitle?: string[];
   iconSrc?: string;
+  iconSurface?: boolean;
   imageAlt: string;
   imageClassName?: string;
   imageSrc?: string;
@@ -20,6 +21,7 @@ type FeatureItem = {
   mediaClassName?: string;
   reverse?: boolean;
   title: string[];
+  titleLeadAsH1?: boolean;
   videoSrc?: string;
 };
 
@@ -83,26 +85,50 @@ function FeatureCopy({
   className,
   desktopTitle,
   iconSrc,
+  iconSurface,
   title,
-}: Pick<FeatureItem, "action" | "body" | "desktopTitle" | "iconSrc" | "title"> & { className?: string }) {
+  titleLeadAsH1,
+}: Pick<FeatureItem, "action" | "body" | "desktopTitle" | "iconSrc" | "iconSurface" | "title" | "titleLeadAsH1"> & { className?: string }) {
   return (
     /* 기능 설명 텍스트 블록 */
     <div className={cx("flex w-full min-w-0 flex-1 flex-col gap-3 not-italic md:gap-5 lg:min-w-[200px]", className)}>
       <div className="order-1 flex w-full min-w-0 items-center gap-3 md:contents">
         {iconSrc ? (
-          <img
-            alt=""
-            aria-hidden="true"
-            className="h-10 w-10 shrink-0 rounded-[10px] object-contain md:h-15 md:w-15 md:rounded-[14px]"
-            src={iconSrc}
-          />
+          <span
+            className={cx(
+              "inline-flex h-10 w-10 shrink-0 overflow-hidden rounded-[10px] md:h-15 md:w-15 md:rounded-[14px]",
+              iconSurface && "home-feature-icon-surface bg-secondary",
+            )}
+          >
+            <img
+              alt=""
+              aria-hidden="true"
+              className="h-full w-full object-contain"
+              src={iconSrc}
+            />
+          </span>
         ) : null}
-        <div className={cx("min-w-0 flex-1 break-words text-pretty type-h3 font-normal leading-6 tracking-[0] text-fg md:w-full md:flex-none md:type-h2 md:leading-8", desktopTitle && "md:hidden")}>
-          {title.map((line) => (
-            <p key={line} className="m-0">
-              {line}
-            </p>
-          ))}
+        <div
+          className={cx(
+            "min-w-0 flex-1 break-words text-pretty font-normal tracking-[0] text-fg md:w-full md:flex-none",
+            !titleLeadAsH1 && "type-h3 leading-6 md:type-h2 md:leading-8",
+            desktopTitle && "md:hidden",
+          )}
+        >
+          {title.map((line, index) =>
+            titleLeadAsH1 && index === 0 ? (
+              <h1 key={line} className="m-0 type-h1">
+                {line}
+              </h1>
+            ) : (
+              <p
+                key={line}
+                className={cx("m-0", titleLeadAsH1 && "type-h3 leading-6")}
+              >
+                {line}
+              </p>
+            ),
+          )}
         </div>
         {desktopTitle ? (
           <div className="hidden min-w-0 flex-1 break-words text-pretty font-normal tracking-[0] text-fg md:block md:w-full md:flex-none md:type-h2 md:leading-8">
@@ -147,6 +173,7 @@ function FeatureMedia({
   setVideoRef?: (video: HTMLVideoElement | null) => void;
 }) {
   if (!videoSrc && !imageSrc) return null;
+  const isGif = imageSrc?.toLowerCase().endsWith(".gif") ?? false;
 
   return (
     /* 기능 소개용 비주얼 패널 */
@@ -154,6 +181,7 @@ function FeatureMedia({
       className={cx(
         "overflow-hidden rounded-box",
         videoSrc ? "w-full shrink-0 lg:w-[790px] lg:max-w-[65%]" : "aspect-[2/1] w-full shrink-0 lg:w-[790px] lg:max-w-[65%]",
+        isGif && "feature-gif-frame",
         className,
       )}
     >
@@ -286,7 +314,9 @@ export default function FeatureMediaList({
                 className="order-2 lg:order-none"
                 desktopTitle={item.desktopTitle}
                 iconSrc={item.iconSrc}
+                iconSurface={item.iconSurface}
                 title={item.title}
+                titleLeadAsH1={item.titleLeadAsH1}
               />
               <FeatureMedia
                 className={cx("order-1 lg:order-none", item.mediaClassName)}

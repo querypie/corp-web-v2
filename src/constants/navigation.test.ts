@@ -16,6 +16,8 @@ describe("getSolutionsSubItems", () => {
     expect(getSolutionsSubItems("en")).toEqual([
       { label: "AI Platform (AIP)", href: "/en/solutions/aip" },
       { label: "Access Control Platform (ACP)", href: "/en/solutions/acp" },
+      { label: "Workplace Productivity | AI Crew", href: "/en/solutions/ai-crew" },
+      { label: "AI for Your Service | AI Dashi", href: "/en/solutions/ai-dashi" },
     ]);
   });
 
@@ -23,10 +25,14 @@ describe("getSolutionsSubItems", () => {
     expect(getSolutionsSubItems("ko")).toEqual([
       { label: "AI 플랫폼 (AIP)", href: "/ko/solutions/aip" },
       { label: "접근 제어 플랫폼 (ACP)", href: "/ko/solutions/acp" },
+      { label: "사내 업무 효율화 | AI Crew", href: "/ko/solutions/ai-crew" },
+      { label: "자사 서비스 AI화 | AI Dashi", href: "/ko/solutions/ai-dashi" },
     ]);
     expect(getSolutionsSubItems("ja")).toEqual([
       { label: "AIプラットフォーム (AIP)", href: "/ja/solutions/aip" },
       { label: "アクセス制御プラットフォーム (ACP)", href: "/ja/solutions/acp" },
+      { label: "社内業務効率化｜AI Crew", href: "/ja/solutions/ai-crew" },
+      { label: "自社サービスAI化｜AI Dashi", href: "/ja/solutions/ai-dashi" },
     ]);
   });
 });
@@ -110,13 +116,13 @@ describe("getShellMenuCopy", () => {
 
   it("푸터 메뉴를 locale별로 반환한다", () => {
     expect(getShellMenuCopy("ko").footerSections).toEqual([
-      { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)"] },
+      { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "사내 업무 효율화 | AI Crew", "자사 서비스 AI화 | AI Dashi"] },
       { title: "기능", items: ["데모", "문서", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: ["AIP", "ACP"] },
     ]);
     expect(getShellMenuCopy("ja").footerSections).toEqual([
-      { title: "ソリューション", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)"] },
+      { title: "ソリューション", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"] },
       { title: "機能", items: ["デモ", "ドキュメント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
       { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ"] },
       { title: "価格・プラン", items: ["AIP", "ACP"] },
@@ -149,6 +155,12 @@ describe("getFooterHref", () => {
     expect(getFooterHref("AI Platform (AIP)", "en")).toBe("/en/solutions/aip");
     expect(getFooterHref("접근 제어 플랫폼 (ACP)", "ko")).toBe("/ko/solutions/acp");
     expect(getFooterHref("AIプラットフォーム (AIP)", "ja")).toBe("/ja/solutions/aip");
+    expect(getFooterHref("社内業務効率化｜AI Crew", "ja")).toBe("/ja/solutions/ai-crew");
+    expect(getFooterHref("自社サービスAI化｜AI Dashi", "ja")).toBe("/ja/solutions/ai-dashi");
+    expect(getFooterHref("Workplace Productivity | AI Crew", "en")).toBe("/en/solutions/ai-crew");
+    expect(getFooterHref("AI for Your Service | AI Dashi", "en")).toBe("/en/solutions/ai-dashi");
+    expect(getFooterHref("사내 업무 효율화 | AI Crew", "ko")).toBe("/ko/solutions/ai-crew");
+    expect(getFooterHref("자사 서비스 AI화 | AI Dashi", "ko")).toBe("/ko/solutions/ai-dashi");
   });
 
   it("다국어 footer feature 링크를 올바른 대상에 연결한다", () => {

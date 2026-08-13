@@ -62,6 +62,7 @@ export default function Gnb({
   const pathname = usePathname();
   const mobileLocaleRef = useRef<HTMLDivElement | null>(null);
   const desktopPopoverCloseTimeoutRef = useRef<number | null>(null);
+  const desktopPopoverItemPressRef = useRef(false);
   const homeHref = getLocalePath(locale as Locale, "/");
 
   const clearDesktopPopoverCloseTimeout = () => {
@@ -80,15 +81,31 @@ export default function Gnb({
 
   const closeDesktopPopover = () => {
     clearDesktopPopoverCloseTimeout();
+    desktopPopoverItemPressRef.current = false;
     setDesktopPopoverOpen(null);
   };
 
   const scheduleDesktopPopoverClose = () => {
     clearDesktopPopoverCloseTimeout();
+
+    if (desktopPopoverItemPressRef.current) {
+      return;
+    }
+
     desktopPopoverCloseTimeoutRef.current = window.setTimeout(() => {
       desktopPopoverCloseTimeoutRef.current = null;
+
+      if (desktopPopoverItemPressRef.current) {
+        return;
+      }
+
       setDesktopPopoverOpen(null);
     }, desktopPopoverCloseDelayMs);
+  };
+
+  const handleDesktopPopoverItemPointerDown = () => {
+    clearDesktopPopoverCloseTimeout();
+    desktopPopoverItemPressRef.current = true;
   };
 
   useEffect(() => {
@@ -125,8 +142,17 @@ export default function Gnb({
   }, [pathname]);
 
   useEffect(() => {
+    const releaseDesktopPopoverItemPress = () => {
+      desktopPopoverItemPressRef.current = false;
+    };
+
+    window.addEventListener("pointerup", releaseDesktopPopoverItemPress);
+    window.addEventListener("pointercancel", releaseDesktopPopoverItemPress);
+
     return () => {
       clearDesktopPopoverCloseTimeout();
+      window.removeEventListener("pointerup", releaseDesktopPopoverItemPress);
+      window.removeEventListener("pointercancel", releaseDesktopPopoverItemPress);
     };
   }, []);
 
@@ -190,23 +216,11 @@ export default function Gnb({
     setDesktopPopoverOpen(null);
     router.push(href, { scroll: false });
   };
-  const handleDesktopSubItemMouseDown = (event: ReactMouseEvent<HTMLAnchorElement>, href: string) => {
-    if (
-      event.defaultPrevented ||
-      event.button !== 0 ||
-      event.metaKey ||
-      event.ctrlKey ||
-      event.shiftKey ||
-      event.altKey
-    ) {
+  const handleDesktopPopoverBlur = (event: ReactFocusEvent<HTMLDivElement>) => {
+    if (desktopPopoverItemPressRef.current) {
       return;
     }
 
-    event.preventDefault();
-    closeDesktopPopover();
-    router.push(href);
-  };
-  const handleDesktopPopoverBlur = (event: ReactFocusEvent<HTMLDivElement>) => {
     const nextTarget = event.relatedTarget;
 
     if (!(nextTarget instanceof Node) || !event.currentTarget.contains(nextTarget)) {
@@ -241,7 +255,7 @@ export default function Gnb({
           >
             <img
               alt="QueryPie AI"
-              className="block h-5 w-[116px] transition-[filter,opacity] duration-300"
+              className="theme-icon block h-5 w-[116px] transition-[filter,opacity] duration-300"
               src="/assets/brand/logos/querypie-ai-logo.svg"
             />
           </Link>
@@ -275,21 +289,21 @@ export default function Gnb({
 
                       <div
                         className={cx(
-                          "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3 transition-opacity duration-150",
+                          "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3",
                           isOpen
                             ? "pointer-events-auto opacity-100"
                             : "pointer-events-none opacity-0",
                         )}
                         onMouseEnter={() => openDesktopPopover(item)}
                       >
-                        <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+                        <div className="gnb-popover-surface relative overflow-hidden rounded-[8px] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getSolutionsSubItems(locale).map((sub) => (
                             <Link
                               key={sub.label}
-                              className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
+                              className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
                               href={sub.href}
                               onClick={closeDesktopPopover}
-                              onMouseDown={(event) => handleDesktopSubItemMouseDown(event, sub.href)}
+                              onPointerDown={handleDesktopPopoverItemPointerDown}
                             >
                               {sub.label}
                             </Link>
@@ -324,21 +338,21 @@ export default function Gnb({
 
                       <div
                         className={cx(
-                          "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3 transition-opacity duration-150",
+                          "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3",
                           isOpen
                             ? "pointer-events-auto opacity-100"
                             : "pointer-events-none opacity-0",
                         )}
                         onMouseEnter={() => openDesktopPopover(item)}
                       >
-                        <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+                        <div className="gnb-popover-surface relative overflow-hidden rounded-[8px] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getFeaturesSubItems(locale).map((sub) => (
                             <Link
                               key={sub.label}
-                              className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
+                              className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
                               href={sub.href}
                               onClick={closeDesktopPopover}
-                              onMouseDown={(event) => handleDesktopSubItemMouseDown(event, sub.href)}
+                              onPointerDown={handleDesktopPopoverItemPointerDown}
                             >
                               {sub.label}
                             </Link>
@@ -373,21 +387,21 @@ export default function Gnb({
 
                       <div
                         className={cx(
-                          "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3 transition-opacity duration-150",
+                          "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3",
                           isOpen
                             ? "pointer-events-auto opacity-100"
                             : "pointer-events-none opacity-0",
                         )}
                         onMouseEnter={() => openDesktopPopover(item)}
                       >
-                        <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+                        <div className="gnb-popover-surface relative overflow-hidden rounded-[8px] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                           {getCompanySubItems(locale).map((sub) => (
                             <Link
                               key={sub.label}
-                              className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
+                              className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
                               href={sub.href}
                               onClick={closeDesktopPopover}
-                              onMouseDown={(event) => handleDesktopSubItemMouseDown(event, sub.href)}
+                              onPointerDown={handleDesktopPopoverItemPointerDown}
                             >
                               {sub.label}
                             </Link>
@@ -430,7 +444,7 @@ export default function Gnb({
                   <img
                     alt=""
                     aria-hidden="true"
-                    className="h-7 w-7 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
+                    className="theme-icon h-7 w-7 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
                     src="/assets/ui/icons/global.svg"
                   />
                 )}
@@ -438,20 +452,21 @@ export default function Gnb({
 
               <div
                 className={cx(
-                  "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3 transition-opacity duration-150",
+                  "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3",
                   isDesktopLocaleOpen
                     ? "pointer-events-auto opacity-100"
                     : "pointer-events-none opacity-0",
                 )}
                 onMouseEnter={() => openDesktopPopover("locale")}
               >
-                <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+                <div className="gnb-popover-surface relative overflow-hidden rounded-[8px] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                   {localeSubItems.map((sub) => (
                     <a
                       key={sub.label}
-                      className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
+                      className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
                       href={sub.href}
                       onClick={(event) => handleLocaleClick(event, sub.href)}
+                      onPointerDown={handleDesktopPopoverItemPointerDown}
                     >
                       {sub.label}
                     </a>
@@ -471,7 +486,7 @@ export default function Gnb({
                   <img
                     alt=""
                     aria-hidden="true"
-                    className="h-6 w-6 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
+                    className="theme-icon h-6 w-6 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
                     src="/assets/ui/icons/global.svg"
                   />
                 )}
@@ -483,11 +498,11 @@ export default function Gnb({
                   mobileLocaleOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                 )}
               >
-                <div className="relative overflow-hidden rounded-[8px] bg-[rgb(var(--color-bg-gnb-popover-rgb)/0.8)] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+                <div className="gnb-popover-surface relative overflow-hidden rounded-[8px] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
                   {localeSubItems.map((sub) => (
                     <a
                       key={sub.label}
-                      className="flex items-center whitespace-nowrap py-1 type-body-md text-fg transition-colors hover:text-mute"
+                      className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
                       href={sub.href}
                       onClick={(event) => handleLocaleClick(event, sub.href)}
                     >
@@ -507,7 +522,7 @@ export default function Gnb({
               <img
                 alt=""
                 aria-hidden="true"
-                className="h-9 w-9 object-contain"
+                className="theme-icon h-9 w-9 object-contain"
                 src={mobileMenuOpen ? "/assets/ui/icons/m-Close.svg" : "/assets/ui/icons/m-Menu.svg"}
               />
             </button>

@@ -80,7 +80,7 @@ export default function ResourceList({
 
   return (
     /* 홈 하단용 콘텐츠 리스트 섹션 */
-    <section className={cx("flex w-full justify-center overflow-hidden bg-bg-deep py-14 md:py-[100px]", className)}>
+    <section className={cx("flex w-full justify-center overflow-hidden bg-bg-deep py-14 md:py-20", className)}>
       <div className="flex w-full justify-center px-5 md:px-10">
         <div
           className="flex w-full max-w-[1200px] flex-col gap-8 md:flex-row md:items-start md:gap-[60px]"

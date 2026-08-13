@@ -74,7 +74,7 @@ export default function UsageBasedLlmComparisonTable({ copy }: UsageBasedLlmComp
 
         <div className="grid gap-4 lg:hidden">
           <article className="overflow-hidden rounded-box bg-bg">
-            <div className="bg-brand px-5 py-5 text-center type-body-lg text-fg">
+            <div className="bg-brand px-5 py-5 text-center type-body-lg text-on-brand">
               {copy.queryPie.name} AI
             </div>
             <div className="grid gap-0">
@@ -148,7 +148,7 @@ export default function UsageBasedLlmComparisonTable({ copy }: UsageBasedLlmComp
               </div>
             ))}
 
-            <div className="rounded-r-box bg-brand px-5 py-5 text-center type-body-lg text-fg">
+            <div className="rounded-r-box bg-brand px-5 py-5 text-center type-body-lg text-on-brand">
               {copy.queryPie.name} AI
             </div>
 

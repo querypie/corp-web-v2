@@ -25,7 +25,8 @@ const featureItems = [
       "機密データや個人情報を自動で識別し、重要なデータ資産を堅牢に保護します。",
     ],
     imageAlt: "データベースアクセス制御プレビュー",
-    title: ["DAC -", "Database Access Control"],
+    title: ["DAC", "Database Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-dac.mp4",
   },
   {
@@ -35,7 +36,8 @@ const featureItems = [
     ],
     imageAlt: "システムアクセス制御プレビュー",
     reverse: true,
-    title: ["SAC -", "System Access Control"],
+    title: ["SAC", "System Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-sac.mp4",
   },
   {
@@ -44,7 +46,8 @@ const featureItems = [
       "管理者はアクセス権限の管理、APIリクエストの監視、コンテナコマンド実行の再生を行えます。",
     ],
     imageAlt: "Kubernetesアクセス制御プレビュー",
-    title: ["KAC -", "Kubernetes Access Control"],
+    title: ["KAC", "Kubernetes Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-kac.mp4",
   },
   {
@@ -54,7 +57,8 @@ const featureItems = [
     ],
     imageAlt: "Webアクセス制御プレビュー",
     reverse: true,
-    title: ["WAC -", "Web Access Control"],
+    title: ["WAC", "Web Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-wac.mp4",
   },
   {
@@ -63,14 +67,15 @@ const featureItems = [
       "単なるブロックにとどまらず、状況とコンプライアンス要件に適応するインテリジェントなアクセス制御を実現します。",
     ],
     imageAlt: "マネージドアクセス制御プレビュー",
-    title: ["MAC -", "MCP Access Controller"],
+    title: ["MAC", "MCP Access Controller"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-mac.mp4",
   },
 ];
 
 export default function AcpJASolutionContent({ locale }: Props) {
   return (
-    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
       <div className="flex flex-col gap-14 md:gap-20">
         <div>
           <section className="flex w-full justify-center">
@@ -103,7 +108,13 @@ export default function AcpJASolutionContent({ locale }: Props) {
       </div>
 
       <div>
-        <Cta locale={locale} />
+        <Cta
+          actionHref="https://docs.querypie.com/ko/installation/querypie-acp-community-edition"
+          actionLabel="ACP Community Edition"
+          locale={locale}
+          secondaryActionHref=""
+          secondaryActionLabel=""
+        />
       </div>
     </div>
   );

@@ -41,7 +41,13 @@ describe("Button", () => {
   it("variant=outline이면 border 클래스를 적용한다", () => {
     render(<Button variant="outline">Outline</Button>);
     expect(screen.getByRole("button").className).toContain("border");
-    expect(screen.getByRole("button").className).toContain("border-secondary");
+    expect(screen.getByRole("button").className).toContain("border-border");
+    expect(screen.getByRole("button").className).toContain("hover:bg-secondary");
+  });
+
+  it("outline hover 상태에는 secondary 배경을 적용한다", () => {
+    render(<Button state="hover" variant="outline">Outline hover</Button>);
+    expect(screen.getByRole("button").className).toContain("bg-secondary");
   });
 
   it("type 기본값은 button이다", () => {
@@ -49,20 +55,42 @@ describe("Button", () => {
     expect(screen.getByRole("button")).toHaveAttribute("type", "button");
   });
 
+  it("href가 있으면 동일한 스타일의 링크로 렌더링된다", () => {
+    render(<Button href="/demo">View demo</Button>);
+    const link = screen.getByRole("link", { name: /View demo/ });
+    expect(link).toHaveAttribute("href", "/demo");
+    expect(link.className).toContain("bg-secondary");
+  });
+
+  it("링크 버튼이 disabled이면 href를 제거한다", () => {
+    render(<Button disabled href="/demo">View demo</Button>);
+    const link = screen.getByText("View demo").closest("a");
+    expect(link).not.toHaveAttribute("href");
+    expect(link).toHaveAttribute("aria-disabled", "true");
+  });
+
   it("size=large이면 h-12 클래스를 적용한다", () => {
     render(<Button size="large">Large</Button>);
     expect(screen.getByRole("button").className).toContain("h-12");
   });
 
-  it("size=small이면 h-8 클래스를 적용한다", () => {
+  it("size=small이면 위아래 여백을 1px씩 늘린 34px 높이를 적용한다", () => {
     render(<Button size="small">Small</Button>);
-    expect(screen.getByRole("button").className).toContain("h-8");
+    expect(screen.getByRole("button").className).toContain("h-[34px]");
   });
 
   it("size=xsmall이면 Figma xsmall 크기와 sm 텍스트를 적용한다", () => {
     render(<Button size="xsmall">XSmall</Button>);
     expect(screen.getByRole("button").className).toContain("h-[26px]");
-    expect(screen.getByRole("button").className).toContain("px-3");
+    expect(screen.getByRole("button").className).toContain("px-2");
     expect(screen.getByRole("button").className).toContain("type-body-sm");
+  });
+
+  it("round 버튼만 좌우 패딩을 줄이고 full 버튼은 기존 패딩을 유지한다", () => {
+    const { rerender } = render(<Button size="default" style="round">Round</Button>);
+    expect(screen.getByRole("button").className).toContain("px-4");
+
+    rerender(<Button size="default" style="full">Full</Button>);
+    expect(screen.getByRole("button").className).toContain("px-5");
   });
 });

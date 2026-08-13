@@ -1,0 +1,55 @@
+.afterCard {
+  background: color-mix(in srgb, var(--color-code-bg) 92%, var(--color-white));
+}
+
+.afterPanel {
+  background: rgb(255 255 255 / 0.14);
+}
+
+.afterTask {
+  background: rgb(255 255 255 / 0.1);
+  color: var(--color-code-block-fg);
+}
+
+.afterMuted {
+  color: var(--color-code-line-number-fg);
+}
+
+.afterForeground {
+  color: var(--color-code-block-fg);
+}
+
+.afterCore {
+  background: var(--color-white);
+  color: var(--color-code-bg);
+}
+
+.afterCoreIcon {
+  color: var(--color-code-bg);
+}
+
+.afterCoreMuted {
+  color: var(--color-code-bg);
+  opacity: 0.68;
+}
+
+.afterOrbit {
+  background: rgb(var(--color-overlay-rgb));
+  color: var(--color-code-block-fg);
+}
+
+.afterGhost {
+  background: rgb(255 255 255 / 0.06);
+  color: var(--color-code-block-fg);
+}
+
+.afterRing {
+  border-color: rgb(255 255 255 / 0.16);
+  background: radial-gradient(
+    circle,
+    #f7fbff 0%,
+    #eef4fb 52%,
+    rgb(255 255 255 / 0.06) 72%,
+    rgb(255 255 255 / 0) 100%
+  );
+}

@@ -1,6 +1,56 @@
+.diagram {
+  --acp-active-lime: #c7ef4a;
+  --acp-badge-active-bg: #ecf9c3;
+  --acp-badge-glow-primary: rgb(182 222 54 / 34%);
+  --acp-badge-glow-secondary: rgb(182 222 54 / 42%);
+  --acp-controller-active: color-mix(in srgb, #c7ef4a 66%, #0c77e5);
+  --acp-flow-color: #9fc91f;
+  --acp-flow-core: #dcff72;
+  --acp-flow-core-glow: rgb(220 255 114 / 88%);
+  --acp-flow-glow: rgb(178 220 49 / 68%);
+  --acp-title-glow-primary: rgb(174 216 43 / 34%);
+  --acp-title-glow-secondary: rgb(174 216 43 / 22%);
+}
+
+:global(:root[data-theme="dark"]) .diagram {
+  --acp-active-lime: color-mix(in srgb, var(--color-point) 78%, var(--color-secondary));
+  --acp-badge-active-bg: color-mix(in srgb, var(--color-point) 26%, var(--color-bg));
+  --acp-badge-glow-primary: color-mix(in srgb, var(--color-fg) 28%, transparent);
+  --acp-badge-glow-secondary: color-mix(in srgb, var(--color-point) 38%, transparent);
+  --acp-controller-active: color-mix(in srgb, var(--color-point) 66%, #0c77e5);
+  --acp-flow-color: var(--color-point);
+  --acp-flow-core: var(--color-fg);
+  --acp-flow-core-glow: color-mix(in srgb, var(--color-fg) 88%, transparent);
+  --acp-flow-glow: color-mix(in srgb, var(--color-point) 72%, transparent);
+  --acp-title-glow-primary: color-mix(in srgb, var(--color-fg) 82%, transparent);
+  --acp-title-glow-secondary: color-mix(in srgb, var(--color-point) 74%, transparent);
+}
+
+.connections {
+  filter: brightness(0);
+  opacity: 0.12;
+}
+
+:global(:root[data-theme="dark"]) .connections {
+  filter: none;
+  opacity: 1;
+}
+
+.capabilityIcon,
+.targetIcon {
+  filter: brightness(0);
+  opacity: 0.68;
+}
+
+:global(:root[data-theme="dark"]) .capabilityIcon,
+:global(:root[data-theme="dark"]) .targetIcon {
+  filter: none;
+  opacity: 1;
+}
+
 .connectionFlow {
   --acp-flow-duration: 4.8s;
-  color: var(--color-point);
+  color: var(--acp-flow-color);
   overflow: visible;
 }
 
@@ -9,10 +59,10 @@
 }
 
 .flowPulse {
-  color: var(--color-point);
+  color: var(--acp-flow-color);
   filter:
-    drop-shadow(0 0 3px color-mix(in srgb, var(--color-fg) 88%, transparent))
-    drop-shadow(0 0 9px color-mix(in srgb, var(--color-point) 72%, transparent));
+    drop-shadow(0 0 3px var(--acp-flow-core-glow))
+    drop-shadow(0 0 9px var(--acp-flow-glow));
   opacity: 0;
 }
 
@@ -24,7 +74,7 @@
 }
 
 .flowPulseCore {
-  stroke: var(--color-fg);
+  stroke: var(--acp-flow-core);
   stroke-linecap: round;
   stroke-width: 2;
 }
@@ -118,7 +168,7 @@
   }
 
   34% {
-    fill: color-mix(in srgb, var(--color-point) 78%, var(--color-secondary));
+    fill: var(--acp-active-lime);
   }
 }
 
@@ -129,10 +179,10 @@
   }
 
   52% {
-    background-color: color-mix(in srgb, var(--color-point) 26%, var(--color-bg));
+    background-color: var(--acp-badge-active-bg);
     box-shadow:
-      0 0 10px color-mix(in srgb, var(--color-fg) 28%, transparent),
-      0 0 18px color-mix(in srgb, var(--color-point) 38%, transparent);
+      0 0 10px var(--acp-badge-glow-primary),
+      0 0 18px var(--acp-badge-glow-secondary);
   }
 }
 
@@ -158,7 +208,7 @@
   }
 
   52% {
-    fill: color-mix(in srgb, var(--color-point) 66%, #0c77e5);
+    fill: var(--acp-controller-active);
   }
 }
 
@@ -171,8 +221,8 @@
   52% {
     color: var(--color-fg);
     text-shadow:
-      0 0 8px color-mix(in srgb, var(--color-fg) 82%, transparent),
-      0 0 18px color-mix(in srgb, var(--color-point) 74%, transparent);
+      0 0 8px var(--acp-title-glow-primary),
+      0 0 18px var(--acp-title-glow-secondary);
   }
 }
 
@@ -182,6 +232,6 @@
   }
 
   68% {
-    fill: color-mix(in srgb, var(--color-point) 78%, var(--color-secondary));
+    fill: var(--acp-active-lime);
   }
 }

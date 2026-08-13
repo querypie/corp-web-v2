@@ -64,7 +64,7 @@ export default function CertificationsPage({
   title,
 }: CertificationsPageProps) {
   return (
-    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
       <section className="flex w-full justify-center">
         <div className="flex w-full max-w-[1200px] flex-col gap-10 sm:gap-8 md:gap-10 lg:gap-[60px]">
         {/* Figma 기준으로 좌측 제목 / 우측 소개 문구 2열 헤더를 구성 */}

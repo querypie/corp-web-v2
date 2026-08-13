@@ -30,6 +30,14 @@ import Content6KO, { metadata as Metadata6KO } from "@/components/pages/solution
 import Content6JA, { metadata as Metadata6JA } from "@/components/pages/solutions/acp/content.ja";
 import { generateMetadata as g7 } from "./acp/integrations/page";
 import Page7 from "./acp/integrations/page";
+import { generateMetadata as g8 } from "./ai-crew/page";
+import Page8 from "./ai-crew/page";
+import { metadata as Metadata8JA } from "@/components/pages/solutions/japan/AiCrewPage";
+import { aiCrewCopy } from "@/components/pages/solutions/japan/aiCrewCopy";
+import { generateMetadata as g9 } from "./ai-dashi/page";
+import Page9 from "./ai-dashi/page";
+import { metadata as Metadata9JA } from "@/components/pages/solutions/japan/AiDashiPage";
+import { aiDashiCopy } from "@/components/pages/solutions/japan/aiDashiCopy";
 
 const routeModules = {
   "aip": {
@@ -70,6 +78,16 @@ const routeModules = {
     page: Page7,
     generateMetadata: g7,
   },
+  "ai-crew": {
+    page: Page8,
+    generateMetadata: g8,
+    metadata: { en: aiCrewCopy.en.metadata, ko: aiCrewCopy.ko.metadata, ja: Metadata8JA },
+  },
+  "ai-dashi": {
+    page: Page9,
+    generateMetadata: g9,
+    metadata: { en: aiDashiCopy.en.metadata, ko: aiDashiCopy.ko.metadata, ja: Metadata9JA },
+  },
 } as const;
 
 describe("solutions solution route modules", () => {
@@ -95,25 +113,16 @@ describe("solutions solution route modules", () => {
   it("모든 canonical solution entry에 대해 route-local generateMetadata를 제공한다", async () => {
     for (const entry of solutionEntries) {
       const modules = routeModules[entry.id as keyof typeof routeModules];
-      const metadata = await modules.generateMetadata({ params: Promise.resolve({ locale: "en" }) });
-      const localizedMetadata = await modules.generateMetadata({ params: Promise.resolve({ locale: "ko" }) });
-      const japaneseMetadata = await modules.generateMetadata({ params: Promise.resolve({ locale: "ja" }) });
+      const supportedLocales = entry.locales ?? (["en", "ko", "ja"] as const);
 
-      expect(metadata).toMatchObject({
-        title: expect.any(String),
-        description: expect.any(String),
-        alternates: { canonical: getSolutionHref("en", entry.id) },
-      });
-      expect(localizedMetadata).toMatchObject({
-        title: expect.any(String),
-        description: expect.any(String),
-        alternates: { canonical: getSolutionHref("ko", entry.id) },
-      });
-      expect(japaneseMetadata).toMatchObject({
-        title: expect.any(String),
-        description: expect.any(String),
-        alternates: { canonical: getSolutionHref("ja", entry.id) },
-      });
+      for (const locale of supportedLocales) {
+        const metadata = await modules.generateMetadata({ params: Promise.resolve({ locale }) });
+        expect(metadata).toMatchObject({
+          title: expect.any(String),
+          description: expect.any(String),
+          alternates: { canonical: getSolutionHref(locale, entry.id) },
+        });
+      }
     }
   });
 });

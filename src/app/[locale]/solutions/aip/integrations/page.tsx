@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Cta from "@/components/sections/Cta";
 import { isLocale, type Locale } from "@/constants/i18n";
-import { pageXPaddingClassName } from "@/constants/layout";
+import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { getSolutionHref } from "@/features/solutions/routes";
 import { withDynamicOgImage } from "@/features/seo/metadata";
 import IntegrationsFilter from "@/components/pages/solutions/aip/integrations/IntegrationsFilter";
@@ -73,7 +73,7 @@ export default async function AipIntegrationsPage({ params }: PageProps) {
   const copy = copyByLocale[locale];
 
   return (
-    <div className={`flex w-full flex-col gap-14 ${pageXPaddingClassName} pb-10 md:gap-20`}>
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
       <section className="flex w-full justify-center">
         <header className="grid w-full max-w-[1200px] gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
           <h1 className="m-0 type-h1 text-fg">{copy.headline}</h1>

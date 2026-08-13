@@ -139,7 +139,11 @@ function SidePanel({
               <img
                 alt=""
                 aria-hidden="true"
-                className={cx("block object-contain", item.padded ? "size-6" : "size-8")}
+                className={cx(
+                  "block object-contain",
+                  variant === "target" && styles.targetIcon,
+                  item.padded ? "size-6" : "size-8",
+                )}
                 height={32}
                 src={iconSrc(item.icon)}
                 width={32}
@@ -180,7 +184,7 @@ function ShieldPanel({ className, subtitle, capabilities }: { className?: string
               <img
                 alt=""
                 aria-hidden="true"
-                className="size-[18px] shrink-0"
+                className={cx(styles.capabilityIcon, "size-[18px] shrink-0")}
                 height={18}
                 src={iconSrc(item.icon)}
                 width={18}
@@ -373,6 +377,7 @@ export default function Diagram({ locale }: { locale: Locale }) {
           >
             <div
               className={cx(
+                styles.diagram,
                 "absolute left-0 top-0 h-[480px] w-[1080px] origin-top-left",
                 !isAnimationActive && styles.paused,
               )}
@@ -389,7 +394,7 @@ export default function Diagram({ locale }: { locale: Locale }) {
               <img
                 alt=""
                 aria-hidden="true"
-                className="absolute left-[220px] top-[88px] z-10 h-[264px] w-[640px]"
+                className={cx(styles.connections, "absolute left-[220px] top-[88px] z-10 h-[264px] w-[640px]")}
                 height={264}
                 src={iconSrc("connections.svg")}
                 width={640}

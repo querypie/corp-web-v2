@@ -214,7 +214,7 @@ export default function NoticePopover({ items, locale }: NoticePopoverProps) {
   return (
     <aside
       aria-label={copy.noticeLabel}
-      className="fixed bottom-5 left-1/2 z-[55] w-[300px] max-w-[calc(100vw-40px)] -translate-x-1/2 overflow-hidden rounded-box bg-bg-deep shadow-[0_18px_48px_rgba(var(--color-overlay-rgb)/0.42)] md:bottom-auto md:left-auto md:right-10 md:top-[80%] md:-translate-x-0 md:-translate-y-1/2"
+      className="theme-dark fixed bottom-5 left-1/2 z-[55] w-[300px] max-w-[calc(100vw-40px)] -translate-x-1/2 overflow-hidden rounded-box bg-bg-content shadow-[0_18px_48px_rgba(var(--color-overlay-rgb)/0.42)] md:bottom-auto md:left-auto md:right-10 md:top-[80%] md:-translate-x-0 md:-translate-y-1/2"
       data-node-id="810:1450"
     >
       <a
@@ -233,7 +233,7 @@ export default function NoticePopover({ items, locale }: NoticePopoverProps) {
         rel={activeItem.isExternal ? "noreferrer noopener" : undefined}
         target={activeItem.isExternal ? "_blank" : undefined}
       >
-        <div className="aspect-video w-full overflow-hidden bg-bg-content">
+        <div className="aspect-video w-full overflow-hidden bg-white">
           <div
             className="flex h-full"
             style={{
@@ -260,7 +260,7 @@ export default function NoticePopover({ items, locale }: NoticePopoverProps) {
             })}
           </div>
         </div>
-        <div className="flex w-full flex-col gap-2.5 p-5">
+        <div className="relative -mt-px flex w-full flex-col gap-2.5 bg-bg-content p-5">
           <div className="flex h-[66px] flex-col gap-1 break-words">
             <p className="m-0 type-body-sm text-mute">{activeItem.category}</p>
             <p className="m-0 h-[44px] line-clamp-2 text-[14px] font-normal leading-[22px] text-fg">
@@ -278,7 +278,9 @@ export default function NoticePopover({ items, locale }: NoticePopoverProps) {
               aria-pressed={index === normalizedActiveIndex}
               className={cx(
                 "h-2 rounded-full transition-all",
-                index === normalizedActiveIndex ? "w-5 bg-fg" : "w-2 bg-placeholder hover:bg-mute",
+                index === normalizedActiveIndex
+                  ? "w-5 bg-fg"
+                  : "w-2 bg-mute opacity-60 hover:opacity-100",
               )}
               key={`${item.href}-${index}`}
               onClick={() => goToIndex(index)}

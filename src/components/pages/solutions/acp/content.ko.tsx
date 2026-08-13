@@ -25,7 +25,8 @@ const featureItems = [
       "민감 데이터와 개인정보를 자동으로 식별해 핵심 데이터 자산을 견고하게 보호합니다.",
     ],
     imageAlt: "데이터베이스 접근 제어 미리보기",
-    title: ["DAC -", "Database Access Control"],
+    title: ["DAC", "Database Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-dac.mp4",
   },
   {
@@ -35,7 +36,8 @@ const featureItems = [
     ],
     imageAlt: "시스템 접근 제어 미리보기",
     reverse: true,
-    title: ["SAC -", "System Access Control"],
+    title: ["SAC", "System Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-sac.mp4",
   },
   {
@@ -44,7 +46,8 @@ const featureItems = [
       "관리자는 접근 권한을 관리하고 API 요청을 모니터링하며 컨테이너 명령 실행을 재생할 수 있습니다.",
     ],
     imageAlt: "Kubernetes 접근 제어 미리보기",
-    title: ["KAC -", "Kubernetes Access Control"],
+    title: ["KAC", "Kubernetes Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-kac.mp4",
   },
   {
@@ -54,7 +57,8 @@ const featureItems = [
     ],
     imageAlt: "웹 접근 제어 미리보기",
     reverse: true,
-    title: ["WAC -", "Web Access Control"],
+    title: ["WAC", "Web Access Control"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-wac.mp4",
   },
   {
@@ -63,14 +67,15 @@ const featureItems = [
       "단순 차단을 넘어, 상황과 컴플라이언스 요구에 맞춰 적응하는 지능형 접근 제어를 제공합니다.",
     ],
     imageAlt: "관리형 접근 제어 미리보기",
-    title: ["MAC -", "MCP Access Controller"],
+    title: ["MAC", "MCP Access Controller"],
+    titleLeadAsH1: true,
     videoSrc: "/assets/products/acp/acp-mac.mp4",
   },
 ];
 
 export default function AcpKOSolutionContent({ locale }: Props) {
   return (
-    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName} pb-10`}>
+    <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
       <div className="flex flex-col gap-14 md:gap-20">
         <div>
           <section className="flex w-full justify-center">
@@ -103,7 +108,13 @@ export default function AcpKOSolutionContent({ locale }: Props) {
       </div>
 
       <div>
-        <Cta locale={locale} />
+        <Cta
+          actionHref="https://docs.querypie.com/ko/installation/querypie-acp-community-edition"
+          actionLabel="ACP Community Edition"
+          locale={locale}
+          secondaryActionHref=""
+          secondaryActionLabel=""
+        />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 
-type LoadingTextTone = "dark" | "light";
+type LoadingTextTone = "primary" | "theme";
 
 type LoadingTextProps = {
   className?: string;
@@ -13,20 +13,20 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 const toneStyles: Record<LoadingTextTone, CSSProperties> = {
-  dark: {
-    ["--loading-text-base" as string]: "rgba(0, 0, 0, 0.68)",
-    ["--loading-text-highlight" as string]: "rgba(255, 255, 255, 0.72)",
+  primary: {
+    ["--loading-text-base" as string]: "color-mix(in srgb, var(--color-bg) 68%, transparent)",
+    ["--loading-text-highlight" as string]: "var(--color-bg)",
   },
-  light: {
-    ["--loading-text-base" as string]: "rgba(241, 241, 242, 0.52)",
-    ["--loading-text-highlight" as string]: "rgba(255, 255, 255, 0.96)",
+  theme: {
+    ["--loading-text-base" as string]: "color-mix(in srgb, var(--color-fg) 52%, transparent)",
+    ["--loading-text-highlight" as string]: "var(--color-fg)",
   },
 };
 
 export default function LoadingText({
   className,
   text,
-  tone = "light",
+  tone = "theme",
 }: LoadingTextProps) {
   return (
     <span

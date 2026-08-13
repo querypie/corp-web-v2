@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import Button from "@/components/ui/Button";
+import ButtonGroup from "@/components/ui/ButtonGroup";
 import ContentPreviewImage from "@/components/content/ContentPreviewImage";
 import Input from "@/components/ui/Input";
 import LoadingText from "@/components/ui/LoadingText";
@@ -80,14 +81,14 @@ function DeleteConfirmDialog({
             <h2 className="m-0 type-h3 text-fg">삭제하시겠습니까?</h2>
             <p className="m-0 type-body-md text-mute">이 작업은 되돌릴 수 없습니다.</p>
           </div>
-          <div className="flex justify-center gap-3">
+          <ButtonGroup className="justify-center">
             <Button arrow={false} onClick={onCancel} style="round" variant="outline">
               취소
             </Button>
             <Button arrow={false} onClick={onConfirm} style="round" variant="secondary">
               확인
             </Button>
-          </div>
+          </ButtonGroup>
         </div>
       </div>
     </div>
@@ -115,14 +116,14 @@ function DuplicateConfirmDialog({
               변경된 slug(URL) 확인해 주세요.
             </p>
           </div>
-          <div className="flex justify-center gap-3">
+          <ButtonGroup className="justify-center">
             <Button arrow={false} onClick={onCancel} style="round" variant="outline">
               취소
             </Button>
             <Button arrow={false} disabled={isSubmitting} onClick={onConfirm} style="round" variant="secondary">
               {isSubmitting ? <LoadingText text="복제 중..." /> : "복제하기"}
             </Button>
-          </div>
+          </ButtonGroup>
         </div>
       </div>
     </div>
@@ -719,7 +720,7 @@ export default function AdminManagedContentListPage({
           </div>
           <div className="flex shrink-0 flex-nowrap items-center justify-end gap-3">
             {categorySlug !== "all" ? (
-              <div className="flex shrink-0 flex-nowrap items-center gap-3">
+              <ButtonGroup className="shrink-0 flex-nowrap items-center">
                 {isReorderMode ? (
                   <>
                     <Button arrow={false} className="shrink-0 justify-center whitespace-nowrap" onClick={() => {
@@ -779,7 +780,7 @@ export default function AdminManagedContentListPage({
                     </a>
                   </>
                 )}
-              </div>
+              </ButtonGroup>
             ) : null}
           </div>
         </div>
