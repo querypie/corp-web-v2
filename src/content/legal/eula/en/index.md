@@ -210,7 +210,7 @@ Except as otherwise expressly contemplated in this EULA, this EULA may not be mo
 
 ### (9.2) Notices
 
-Notices of termination, material breach, or your insolvency ("Legal Notices") must be clearly identified as Legal Notices and sent via overnight courier or certified mail with proof of delivery to the following addresses: For us: 3003 North 1st Street, Suite 221, San Jose, CA 95134, Attention: Legal. For you: your address set out in the Quote. Legal Notices sent in accordance with the above will be effective upon the five business days after mailing.
+Notices of termination, material breach, or your insolvency ("Legal Notices") must be clearly identified as Legal Notices and sent via overnight courier or certified mail with proof of delivery to the following addresses: For us: 2525 West 8th Street, Suite 300, Los Angeles, CA 90057, Attention: Legal. For you: your address set out in the Quote. Legal Notices sent in accordance with the above will be effective upon the five business days after mailing.
 
 Either party may change its address for receipt of notices upon written notice to the other party.
 
