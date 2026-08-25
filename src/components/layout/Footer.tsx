@@ -158,7 +158,7 @@ export default function Footer({
                     </a>
                   ))}
                 </div>
-                <ThemeSwitch className="md:min-w-[132px]" locale={locale as Locale} />
+                <ThemeSwitch locale={locale as Locale} />
               </div>
 
               {/* 법적 링크 */}

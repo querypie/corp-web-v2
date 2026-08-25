@@ -5,7 +5,7 @@ import TextButton from "./TextButton";
 describe("TextButton", () => {
   it("기본으로 more 텍스트 버튼 스타일과 화살표 아이콘을 렌더링한다", () => {
     const { container } = render(<TextButton>More</TextButton>);
-    expect(screen.getByRole("button", { name: /More/ }).className).toContain("text-brand");
+    expect(screen.getByRole("button", { name: /More/ }).className).toContain("text-link");
     expect(container.querySelector("svg")).toBeInTheDocument();
   });
 

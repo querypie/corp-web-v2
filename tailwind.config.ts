@@ -58,6 +58,7 @@ const config: Config = {
         "primary-hover": "var(--color-primary-hover)",
         secondary: "var(--color-secondary)",
         "secondary-hover": "var(--color-secondary-hover)",
+        "outline-hover": "var(--color-outline-hover)",
         white: "var(--color-white)",
         point: "var(--color-point)",
         success: "var(--color-success)",

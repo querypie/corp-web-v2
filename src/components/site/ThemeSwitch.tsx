@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import {
   isTheme,
-  isThemePreference,
   resolveTheme,
   THEME_CHANGE_EVENT,
   THEME_STORAGE_KEY,
@@ -97,6 +96,7 @@ export default function ThemeSwitch({
   locale = "en",
 }: ThemeSwitchProps) {
   const [preference, setPreference] = useState<ThemePreference>("system");
+  const groupName = useId();
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -134,62 +134,63 @@ export default function ThemeSwitch({
   }, []);
 
   const copy = themeCopy[locale];
+  const preferences: ThemePreference[] = ["system", "light", "dark"];
+
+  const selectTheme = (nextPreference: ThemePreference) => {
+    if (nextPreference === "system") {
+      localStorage.removeItem(THEME_STORAGE_KEY);
+    } else {
+      localStorage.setItem(THEME_STORAGE_KEY, nextPreference);
+    }
+
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    applyTheme(resolveTheme(nextPreference, prefersDark));
+    setPreference(nextPreference);
+    window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
+  };
 
   return (
     <div
       className={cx(
-        "group relative inline-flex min-h-11 items-center gap-0 rounded-button text-fg outline-none transition-colors md:gap-2",
+        "inline-flex items-center text-fg",
         compact ? "justify-center" : "justify-start",
         className,
       )}
-      title={copy[preference]}
     >
-      {compact ? null : (
-        <span className="hidden type-body-md text-mute transition-colors md:inline">
-          {copy[preference]}
-        </span>
-      )}
-      <span
-        aria-hidden="true"
-        className={cx(
-          "pointer-events-none inline-flex h-8 shrink-0 items-center justify-center rounded-full bg-secondary text-fg transition-colors group-hover:bg-secondary-hover",
-          compact ? "w-9" : "w-14 gap-1.5",
-        )}
-      >
-        <ThemePreferenceIcon preference={preference} />
-        {compact ? null : (
-          <svg className="h-3.5 w-3.5 text-mute" fill="none" viewBox="0 0 12 12">
-            <path d="m3 4.5 3 3 3-3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" />
-          </svg>
-        )}
-      </span>
-      <select
+      <div
         aria-label={copy.selectLabel}
-        className="absolute inset-0 h-full w-full cursor-pointer appearance-none opacity-0"
-        onChange={(event) => {
-          const nextPreference = event.currentTarget.value;
-
-          if (!isThemePreference(nextPreference)) {
-            return;
-          }
-
-          if (nextPreference === "system") {
-            localStorage.removeItem(THEME_STORAGE_KEY);
-          } else {
-            localStorage.setItem(THEME_STORAGE_KEY, nextPreference);
-          }
-
-          const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-          applyTheme(resolveTheme(nextPreference, prefersDark));
-          setPreference(nextPreference);
-          window.dispatchEvent(new Event(THEME_CHANGE_EVENT));
-        }}
-        value={preference}
+        className={cx(
+          "inline-flex rounded-full bg-secondary p-0.5",
+          compact ? "flex-col" : "items-center",
+        )}
+        role="radiogroup"
       >
-        <option value="system">{copy.system}</option>
-        <option value="light">{copy.light}</option>
-        <option value="dark">{copy.dark}</option>
-      </select>
+        {preferences.map((option) => (
+          <label
+            key={option}
+            className="relative cursor-pointer rounded-full"
+            title={copy[option]}
+          >
+            <input
+              checked={preference === option}
+              className="peer sr-only"
+              name={groupName}
+              onChange={() => selectTheme(option)}
+              type="radio"
+              value={option}
+            />
+            <span
+              className={cx(
+                "inline-flex h-8 w-9 items-center justify-center rounded-full text-mute transition-[background-color,color,transform] duration-150 hover:text-fg peer-focus-visible:outline peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-fg active:scale-[0.96]",
+                preference === option && "bg-[var(--color-switch-track)] text-fg",
+              )}
+            >
+              <ThemePreferenceIcon preference={option} />
+              <span className="sr-only">{copy[option]}</span>
+            </span>
+          </label>
+        ))}
+      </div>
     </div>
   );
 }

@@ -56,8 +56,8 @@ export function getButtonStyle(
       variant === "outline" &&
         cx(
           "border border-border",
-          state === "hover" ? "bg-secondary" : "bg-transparent",
-          "hover:bg-secondary",
+          state === "hover" ? "bg-outline-hover" : "bg-transparent",
+          "hover:bg-outline-hover",
         ),
       variant === "primary" &&
         cx(state === "hover" ? "bg-primary-hover" : "bg-primary", "hover:bg-primary-hover"),

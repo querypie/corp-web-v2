@@ -43,7 +43,7 @@ export default function AiCrewWhitepaperSection({
           </div>
           <h2 className="mb-3 mt-5 max-w-[760px] break-keep text-pretty type-h2 text-fg">{title}</h2>
           <p className="m-0 max-w-[760px] type-body-md text-mute">{description}</p>
-          <span className="mt-6 inline-flex items-center justify-center gap-1.5 type-body-md text-brand transition-colors group-hover:text-fg">
+          <span className="mt-6 inline-flex items-center justify-center gap-1.5 type-body-md text-link transition-colors group-hover:text-link-hover">
             <span>{action}</span>
             <svg aria-hidden="true" className="h-4 w-4 text-mute group-hover:animate-[button-arrow-nudge_220ms_ease-out_forwards]" fill="none" viewBox="0 0 24 24">
               <path d="M15.5 6.5L21.5 12.5M21.5 12.5L15.5 18.5M21.5 12.5H3.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />

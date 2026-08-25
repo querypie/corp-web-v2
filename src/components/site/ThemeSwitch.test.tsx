@@ -30,24 +30,26 @@ describe("ThemeSwitch", () => {
   it("시스템, 라이트, 다크 옵션을 표시하고 선택한 테마를 저장한다", async () => {
     render(<ThemeSwitch locale="ko" />);
 
-    const themeSelect = screen.getByRole("combobox", { name: "컬러 테마 선택" });
-    expect(themeSelect).toHaveValue("system");
-    expect(screen.getByRole("option", { name: "시스템 모드" })).toBeInTheDocument();
-    expect(screen.getByRole("option", { name: "라이트 모드" })).toBeInTheDocument();
-    expect(screen.getByRole("option", { name: "다크 모드" })).toBeInTheDocument();
+    const systemTheme = screen.getByRole("radio", { name: "시스템 모드" });
+    const lightTheme = screen.getByRole("radio", { name: "라이트 모드" });
+    const darkTheme = screen.getByRole("radio", { name: "다크 모드" });
+    expect(screen.getByRole("radiogroup", { name: "컬러 테마 선택" })).toBeInTheDocument();
+    expect(systemTheme).toBeChecked();
+    expect(lightTheme).not.toBeChecked();
+    expect(darkTheme).not.toBeChecked();
 
-    fireEvent.change(themeSelect, { target: { value: "dark" } });
+    fireEvent.click(darkTheme);
 
     await waitFor(() => {
-      expect(themeSelect).toHaveValue("dark");
+      expect(darkTheme).toBeChecked();
     });
     expect(document.documentElement.dataset.theme).toBe("dark");
     expect(localStorage.getItem(THEME_STORAGE_KEY)).toBe("dark");
 
-    fireEvent.change(themeSelect, { target: { value: "system" } });
+    fireEvent.click(systemTheme);
 
     await waitFor(() => {
-      expect(themeSelect).toHaveValue("system");
+      expect(systemTheme).toBeChecked();
     });
     expect(document.documentElement.dataset.theme).toBe("light");
     expect(localStorage.getItem(THEME_STORAGE_KEY)).toBeNull();
@@ -60,7 +62,7 @@ describe("ThemeSwitch", () => {
     render(<ThemeSwitch locale="en" />);
 
     await waitFor(() => {
-      expect(screen.getByRole("combobox", { name: "Select color theme" })).toHaveValue("system");
+      expect(screen.getByRole("radio", { name: "System mode" })).toBeChecked();
     });
     expect(document.documentElement.dataset.theme).toBe("dark");
   });
@@ -71,7 +73,7 @@ describe("ThemeSwitch", () => {
     render(<ThemeSwitch locale="en" />);
 
     await waitFor(() => {
-      expect(screen.getByRole("combobox", { name: "Select color theme" })).toHaveValue("system");
+      expect(screen.getByRole("radio", { name: "System mode" })).toBeChecked();
     });
 
     const changeHandler = addEventListener.mock.calls.find(([eventName]) => eventName === "change")?.[1];

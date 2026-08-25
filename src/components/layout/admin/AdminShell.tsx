@@ -179,7 +179,7 @@ export default function AdminShell({ children }: AdminShellProps) {
               </div>
             ))}
             <div className="mt-auto border-t border-border pt-5">
-              <ThemeSwitch className="w-full px-1" locale="ko" />
+              <ThemeSwitch className="w-full justify-center" locale="ko" />
             </div>
           </nav>
         </div>

@@ -127,7 +127,7 @@ export default function HomePage({
         </div>
 
         <div><Clients caption={clientCaption} /></div>
-        <div><FeatureMediaList items={featureItems} /></div>
+        <div><FeatureMediaList className="home-feature-media-list" items={featureItems} /></div>
         <div>
           <Mcps
             action={mcpAction}

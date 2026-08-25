@@ -71,4 +71,21 @@ describe("YoutubePreviewPlayer", () => {
     act(() => window.dispatchEvent(new Event("scroll")));
     expect(pause).toHaveBeenCalled();
   });
+
+  it("cropEdges가 설정되면 영상의 가장자리 픽셀을 확대해 잘라낸다", () => {
+    const { container } = render(
+      <YoutubePreviewPlayer
+        autoplayOnView
+        cropEdges
+        framed
+        thumbnailAlt="AIP thumbnail"
+        thumbnailSrc="/aip-cover.png"
+        title="Cropped AIP video"
+        videoSrc="/aip.mp4"
+      />,
+    );
+
+    expect(screen.getByLabelText("Cropped AIP video")).toHaveClass("scale-[1.01]");
+    expect(container.firstElementChild).toHaveClass("feature-gif-frame");
+  });
 });

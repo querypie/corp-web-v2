@@ -38,7 +38,7 @@ export default function CommunityLicenseApplyPage(copy: CommunityLicenseApplyPag
                   <p key={item.label} className="m-0">
                     <span className="text-fg">{item.label}:</span>{" "}
                     <a
-                      className="text-brand transition-colors hover:text-fg"
+                      className="text-link transition-colors hover:text-link-hover"
                       href={item.href}
                     >
                       {item.value}
@@ -51,7 +51,7 @@ export default function CommunityLicenseApplyPage(copy: CommunityLicenseApplyPag
             <div className="flex flex-col gap-2">
               <p className="m-0 type-body-md text-mute">{supportLink.title}</p>
               <a
-                className="inline-flex items-center gap-1.5 type-body-md text-brand transition-colors hover:text-fg"
+                className="inline-flex items-center gap-1.5 type-body-md text-link transition-colors hover:text-link-hover"
                 href={supportLink.href}
                 rel="noreferrer noopener"
                 target="_blank"
