@@ -168,7 +168,15 @@ export default function Footer({
               {/* 법적 링크 */}
             <div className="flex w-full flex-wrap items-center gap-x-5 gap-y-[10px] whitespace-nowrap type-body-md leading-5 text-fg">
               {legalLinks.map((item) => (
-                <a key={item} className="transition-colors hover:text-mute" href={getLegalHref(item, locale)}>
+                <a
+                  key={item}
+                  className={cx(
+                    "transition-colors hover:text-mute",
+                    ["Privacy Policy", "개인정보처리방침", "プライバシーポリシー"].includes(item) &&
+                      "font-bold",
+                  )}
+                  href={getLegalHref(item, locale)}
+                >
                   {item}
                 </a>
               ))}
