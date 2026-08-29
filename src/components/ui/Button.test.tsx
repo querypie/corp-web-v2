@@ -42,12 +42,12 @@ describe("Button", () => {
     render(<Button variant="outline">Outline</Button>);
     expect(screen.getByRole("button").className).toContain("border");
     expect(screen.getByRole("button").className).toContain("border-border");
-    expect(screen.getByRole("button").className).toContain("hover:bg-secondary");
+    expect(screen.getByRole("button").className).toContain("hover:bg-outline-hover");
   });
 
-  it("outline hover 상태에는 secondary 배경을 적용한다", () => {
+  it("outline hover 상태에는 옅은 outline hover 배경을 적용한다", () => {
     render(<Button state="hover" variant="outline">Outline hover</Button>);
-    expect(screen.getByRole("button").className).toContain("bg-secondary");
+    expect(screen.getByRole("button").className).toContain("bg-outline-hover");
   });
 
   it("type 기본값은 button이다", () => {

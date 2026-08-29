@@ -34,8 +34,8 @@
 :root,
 :root[data-theme="light"] {
   color-scheme: light;
-  --color-fg: #2F2D29;
-  --color-mute: #888888;
+  --color-fg: #26251E;
+  --color-mute: #787471;
   --color-placeholder: #aaaaaa;
   --color-bg-content: #f5f5f4;
   --color-bg-deep: #f5f5f4;
@@ -48,12 +48,13 @@
   --color-shadow-rgb: 15 15 15;
   --color-border: #e3e3e3;
   --color-border-strong: #B8B8B8;
-  --color-primary: #2F2D29;
+  --color-primary: #26251E;
   --color-primary-hover: #44423e;
   --color-secondary: #f1f0f0;
   --color-secondary-hover: #ebeaea;
-  --color-bg-gnb-popover-rgb: 242 242 242;
-  --color-surface-popover-rgb: 242 242 242;
+  --color-outline-hover: #F8F7F5;
+  --color-bg-gnb-popover-rgb: 242 241 238;
+  --color-surface-popover-rgb: 242 241 238;
   --opacity-popover-surface: 0.9;
   --color-white: #FFFFFF;
   --color-point: #567000;
@@ -64,8 +65,8 @@
   --color-chart-secondary: #20A957;
   --color-brand: #dc4e1a;
   --color-on-brand: #FFFFFF;
-  --color-link: #2859B8;
-  --color-link-hover: #18438F;
+  --color-link: var(--color-brand);
+  --color-link-hover: #F07848;
   --color-info-surface: #EEF5FF;
   --color-inverse-bg: #2F2D29;
   --color-inverse-fg: #F7F7F7;
@@ -113,6 +114,7 @@
   --color-primary-hover: #ABABAB;
   --color-secondary: #2E2E2E;
   --color-secondary-hover: #3a3a3a;
+  --color-outline-hover: #1F1F1F;
   --color-bg-gnb-popover-rgb: 40 40 40;
   --color-surface-popover-rgb: 40 40 40;
   --opacity-popover-surface: 0.9;
@@ -125,8 +127,8 @@
   --color-chart-secondary: #22C55E;
   --color-brand: #EF7442;
   --color-on-brand: #0F0F0F;
-  --color-link: #7EA2FF;
-  --color-link-hover: #A9C0FF;
+  --color-link: var(--color-brand);
+  --color-link-hover: #FFA078;
   --color-info-surface: #172238;
   --color-inverse-bg: #EEEEEE;
   --color-inverse-fg: #0F0F0F;
@@ -258,6 +260,12 @@ body {
 
 .feature-gif-frame {
   box-shadow: 0 0 0 4px var(--color-feature-media-frame);
+}
+
+@media (min-width: 1024px) {
+  .home-feature-media-list .feature-video-frame {
+    width: min(681.333px, 65%);
+  }
 }
 
 /* 불투명한 흰 배경을 가진 홈 제품 아이콘을 라이트 테마 표면색과 합성한다. */

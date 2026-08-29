@@ -5,7 +5,9 @@ import MediaPlayButton from "@/components/ui/MediaPlayButton";
 
 type YoutubePreviewPlayerProps = {
   autoplayOnView?: boolean;
+  cropEdges?: boolean;
   embedSrc?: string;
+  framed?: boolean;
   thumbnailAlt: string;
   thumbnailSrc: string;
   title: string;
@@ -25,7 +27,9 @@ function withPlaybackParams(src: string) {
 
 export default function YoutubePreviewPlayer({
   autoplayOnView = false,
+  cropEdges = false,
   embedSrc,
+  framed = false,
   thumbnailAlt,
   thumbnailSrc,
   title,
@@ -33,6 +37,7 @@ export default function YoutubePreviewPlayer({
 }: YoutubePreviewPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const videoClassName = `block h-full w-full bg-black object-cover ${cropEdges ? "scale-[1.01]" : ""}`;
 
   useEffect(() => {
     if (!autoplayOnView || !videoSrc) return;
@@ -81,11 +86,11 @@ export default function YoutubePreviewPlayer({
   }, [autoplayOnView, videoSrc]);
 
   return (
-    <div className="aspect-video w-full max-w-[1080px] overflow-hidden rounded-box bg-bg-content">
+    <div className={`aspect-video w-full max-w-[1080px] overflow-hidden rounded-box bg-bg-content ${framed ? "feature-gif-frame" : ""}`}>
       {autoplayOnView && videoSrc ? (
         <video
           aria-label={title}
-          className="block h-full w-full bg-black object-cover"
+          className={videoClassName}
           controls
           loop
           muted
@@ -98,7 +103,7 @@ export default function YoutubePreviewPlayer({
       ) : isPlaying && videoSrc ? (
         <video
           autoPlay
-          className="block h-full w-full bg-black object-cover"
+          className={videoClassName}
           controls
           playsInline
           poster={thumbnailSrc}

@@ -55,9 +55,9 @@ export default function TextButton({
 }: TextButtonProps) {
   const resolvedState = disabled ? "disable" : state;
   const classes = cx(
-    "pressable group inline-flex items-center justify-center gap-1.5 bg-transparent p-0 text-brand hover:text-fg",
+    "pressable group inline-flex items-center justify-center gap-1.5 bg-transparent p-0 text-link hover:text-link-hover",
     !className?.includes("type-") && "type-body-md",
-    resolvedState === "hover" && "text-fg",
+    resolvedState === "hover" && "text-link-hover",
     resolvedState === "disable" && "cursor-not-allowed opacity-40",
     !disabled && "cursor-pointer",
     className,

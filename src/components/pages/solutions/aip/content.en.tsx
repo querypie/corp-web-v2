@@ -117,6 +117,8 @@ export default function AipENSolutionContent({ locale }: Props) {
           <section className="flex w-full justify-center">
             <YoutubePreviewPlayer
               autoplayOnView
+              cropEdges
+              framed
               thumbnailAlt="QueryPie AI Platform video thumbnail"
               thumbnailSrc="/assets/products/aip/aip-cover.png"
               title="QueryPie AI Platform video"

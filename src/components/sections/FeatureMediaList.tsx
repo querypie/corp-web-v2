@@ -180,6 +180,7 @@ function FeatureMedia({
     <div
       className={cx(
         "overflow-hidden rounded-box",
+        videoSrc && "feature-video-frame",
         videoSrc ? "w-full shrink-0 lg:w-[790px] lg:max-w-[65%]" : "aspect-[2/1] w-full shrink-0 lg:w-[790px] lg:max-w-[65%]",
         isGif && "feature-gif-frame",
         className,
@@ -301,7 +302,7 @@ export default function FeatureMediaList({
             <div
               key={`${item.videoSrc ?? item.imageSrc}-${index}`}
               className={cx(
-                "flex min-w-0 flex-col items-start gap-5 lg:flex-row lg:gap-[60px]",
+                "flex min-w-0 flex-col items-start gap-5 lg:flex-row lg:gap-[40px]",
                 shouldReverse && "lg:flex-row-reverse",
               )}
               data-reveal

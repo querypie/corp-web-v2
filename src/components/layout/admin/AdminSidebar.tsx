@@ -174,7 +174,7 @@ export default function AdminSidebar({
 
       <div className={cx("relative z-20 mt-5 pt-5 md:mt-auto", isCollapsed ? "flex justify-center" : "flex flex-col gap-2")}>
         <ThemeSwitch
-          className={cx(isCollapsed ? "h-11 w-9" : "w-full px-3")}
+          className={cx(isCollapsed ? "w-9" : "w-full justify-center")}
           compact={isCollapsed}
           locale="ko"
         />
