@@ -303,7 +303,7 @@ export function buildSolutionContentComponents({
           {learnMoreButton ? (
             <a
               href={resolveHref(locale, learnMoreButton.href)}
-              className="inline-flex w-fit items-center text-sm font-semibold text-link hover:text-link-hover"
+              className="inline-flex w-fit items-center text-sm font-semibold text-brand decoration-1 underline-offset-4 hover:underline"
               {...maybeOpenInNewTab(learnMoreButton.href, learnMoreButton.external)}
             >
               {learnMoreButton.label}
@@ -366,7 +366,7 @@ export function buildSolutionContentComponents({
                 {item.learnMoreButton ? (
                   <a
                     href={resolveHref(locale, item.learnMoreButton.href)}
-                    className="inline-flex w-fit items-center text-sm font-semibold text-[var(--color-inverse-fg)] hover:text-[var(--color-inverse-muted)]"
+                    className="inline-flex w-fit items-center text-sm font-semibold text-brand decoration-1 underline-offset-4 hover:underline"
                     {...maybeOpenInNewTab(item.learnMoreButton.href, item.learnMoreButton.external)}
                   >
                     {item.learnMoreButton.label}
@@ -490,7 +490,7 @@ export function buildSolutionContentComponents({
       <a
         href={resolveHref(locale, href)}
         style={style}
-        className="inline-flex items-center text-sm font-semibold text-link hover:text-link-hover"
+        className="inline-flex items-center text-sm font-semibold text-brand decoration-1 underline-offset-4 hover:underline"
         {...maybeOpenInNewTab(href, external)}
       >
         {children}
@@ -508,7 +508,7 @@ export function buildSolutionContentComponents({
     }) => (
       <a
         href={resolveHref(locale, href)}
-        className="font-medium text-link hover:text-link-hover"
+        className="font-medium text-brand decoration-1 underline-offset-4 hover:underline"
         {...maybeOpenInNewTab(href, external)}
       >
         {children}

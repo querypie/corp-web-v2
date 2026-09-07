@@ -17,7 +17,6 @@ const UPLOAD_DIR_PATHS = {
   "documentation/manuals": path.join(process.cwd(), "public", "documentation", "manuals"),
   "documentation/introduction": path.join(process.cwd(), "public", "documentation", "introduction"),
   demo: path.join(process.cwd(), "public", "demo"),
-  "demo/use-cases": path.join(process.cwd(), "public", "demo", "use-cases"),
   "demo/aip-features": path.join(process.cwd(), "public", "demo", "aip-features"),
   "demo/acp-features": path.join(process.cwd(), "public", "demo", "acp-features"),
 } as const;
@@ -216,7 +215,6 @@ function resolveUploadDirName(section: string | null, categorySlug: string | nul
   }
 
   if (section === "demo") {
-    if (categorySlug === "use-cases") return "demo/use-cases";
     if (categorySlug === "aip-features") return "demo/aip-features";
     if (categorySlug === "acp-features") return "demo/acp-features";
     return "demo";

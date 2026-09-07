@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getLocalePath, isLocale, stripLocalePrefix } from "./i18n";
+import { getLocalePath, getLocaleSwitchPath, isLocale, stripLocalePrefix } from "./i18n";
 
 describe("isLocale", () => {
   it("supported locales를 인식한다", () => {
@@ -61,5 +61,18 @@ describe("getLocalePath", () => {
   it("locale 경로가 포함된 경우 중복 없이 반환한다", () => {
     expect(getLocalePath("ko", "/ko/plans")).toBe("/ko/plans");
     expect(getLocalePath("en", "/en/plans")).toBe("/en/plans");
+  });
+});
+
+describe("getLocaleSwitchPath", () => {
+  it("영어·한국어 Plans 페이지에서 일본어로 변경하면 일본어 홈으로 이동한다", () => {
+    expect(getLocaleSwitchPath("/en/plans/aip", "ja")).toBe("/ja");
+    expect(getLocaleSwitchPath("/ko/plans/acp", "ja")).toBe("/ja");
+  });
+
+  it("Plans의 영어·한국어 전환과 다른 페이지의 일본어 전환은 현재 경로를 유지한다", () => {
+    expect(getLocaleSwitchPath("/en/plans/aip", "ko")).toBe("/ko/plans/aip");
+    expect(getLocaleSwitchPath("/ko/plans/acp", "en")).toBe("/en/plans/acp");
+    expect(getLocaleSwitchPath("/en/solutions/aip", "ja")).toBe("/ja/solutions/aip");
   });
 });

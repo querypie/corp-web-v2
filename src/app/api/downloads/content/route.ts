@@ -117,7 +117,6 @@ function getLeadNotificationSource(section: ManagedContentSection | undefined, c
   }
 
   if (section === "demo") {
-    if (categorySlug === "use-cases") return "use-cases";
     if (categorySlug === "aip-features") return "aip";
     if (categorySlug === "acp-features") return "acp";
   }

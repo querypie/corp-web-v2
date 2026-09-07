@@ -96,7 +96,6 @@ function isManagedContentSection(value: unknown): value is ManagedContentSection
 
 function isManagedContentCategorySlug(value: unknown): value is ManagedContentCategorySlug {
   return (
-    value === "use-cases" ||
     value === "aip-features" ||
     value === "acp-features" ||
     value === "introduction" ||
@@ -124,7 +123,6 @@ function isCategorySlugAllowedForSection(
 
   if (section === "demo") {
     return (
-      categorySlug === "use-cases" ||
       categorySlug === "aip-features" ||
       categorySlug === "acp-features"
     );

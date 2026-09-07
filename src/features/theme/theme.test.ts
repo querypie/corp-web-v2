@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
   getNextTheme,
+  getPublicTheme,
   getSystemTheme,
   isTheme,
   isThemePreference,
@@ -8,6 +9,12 @@ import {
 } from "./theme";
 
 describe("theme", () => {
+  it("resolves the public theme from the locale", () => {
+    expect(getPublicTheme("en")).toBe("dark");
+    expect(getPublicTheme("ko")).toBe("dark");
+    expect(getPublicTheme("ja")).toBe("light");
+  });
+
   it("accepts only supported theme values", () => {
     expect(isTheme("light")).toBe(true);
     expect(isTheme("dark")).toBe(true);

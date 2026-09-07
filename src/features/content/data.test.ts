@@ -31,7 +31,7 @@ function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContent
     authorRole: "",
     bodyHtml: createLocalizedContent("<p>body</p>"),
     bodyRichText: createLocalizedContent("{}"),
-    categorySlug: "use-cases",
+    categorySlug: "aip-features",
     contentType: "content",
     dateIso: "2026-01-01",
     downloadCoverImageSrc: "",
@@ -96,17 +96,17 @@ describe("content download PDF helpers", () => {
         ko: "",
         ja: "ja.pdf",
       },
-      downloadPdfSrc: "/demo/use-cases/global.pdf",
+      downloadPdfSrc: "/demo/aip-features/global.pdf",
       downloadPdfSrcByLocale: {
         en: "",
         ko: "",
-        ja: "/demo/use-cases/ja.pdf",
+        ja: "/demo/aip-features/ja.pdf",
       },
       downloadPdfMode: "localized",
       enableDownloadButton: true,
     });
 
-    expect(getContentDownloadPdfSrc(item, "ja")).toBe("/demo/use-cases/ja.pdf");
+    expect(getContentDownloadPdfSrc(item, "ja")).toBe("/demo/aip-features/ja.pdf");
     expect(getContentDownloadPdfFileName(item, "ja")).toBe("ja.pdf");
   });
 
@@ -114,11 +114,11 @@ describe("content download PDF helpers", () => {
     const item = makeEntry({
       downloadPdfFileName: "global.pdf",
       downloadPdfMode: "single",
-      downloadPdfSrc: "/demo/use-cases/global.pdf",
+      downloadPdfSrc: "/demo/aip-features/global.pdf",
       enableDownloadButton: true,
     });
 
-    expect(getContentDownloadPdfSrc(item, "ko")).toBe("/demo/use-cases/global.pdf");
+    expect(getContentDownloadPdfSrc(item, "ko")).toBe("/demo/aip-features/global.pdf");
     expect(getContentDownloadPdfFileName(item, "ko")).toBe("global.pdf");
   });
 
@@ -132,13 +132,13 @@ describe("content download PDF helpers", () => {
       downloadPdfMode: "localized",
       downloadPdfSrcByLocale: {
         en: "",
-        ko: "/demo/use-cases/ko.pdf",
-        ja: "/demo/use-cases/ja.pdf",
+        ko: "/demo/aip-features/ko.pdf",
+        ja: "/demo/aip-features/ja.pdf",
       },
       enableDownloadButton: true,
     });
 
-    expect(getContentDownloadPdfSrc(item, "en")).toBe("/demo/use-cases/ko.pdf");
+    expect(getContentDownloadPdfSrc(item, "en")).toBe("/demo/aip-features/ko.pdf");
     expect(getContentDownloadPdfFileName(item, "en")).toBe("ko.pdf");
   });
 
@@ -194,12 +194,11 @@ describe("getAdminCreateHref", () => {
     expect(getAdminCreateHref("news", "news")).toBe("/admin/news/new");
   });
 
-  it("demo 전체 목록에서는 use-cases 작성 경로를 기본값으로 사용한다", () => {
-    expect(getAdminCreateHref("demo", "all")).toBe("/admin/demo/use-cases/new");
+  it("demo 전체 목록에서는 AIP Features 작성 경로를 기본값으로 사용한다", () => {
+    expect(getAdminCreateHref("demo", "all")).toBe("/admin/demo/aip-features/new");
   });
 
   it("demo 카테고리별 작성 경로를 반환한다", () => {
-    expect(getAdminCreateHref("demo", "use-cases")).toBe("/admin/demo/use-cases/new");
     expect(getAdminCreateHref("demo", "aip-features")).toBe("/admin/demo/aip-features/new");
   });
 

@@ -3,7 +3,6 @@ import { getPublicCategoryHref } from "@/features/content/publicPaths";
 
 export type DemoCategorySlug =
   | "all"
-  | "use-cases"
   | "aip-features"
   | "acp-features";
 
@@ -62,18 +61,13 @@ export const demoCategoryConfigs: CategoryConfig<DemoCategorySlug>[] = [
     slug: "all",
   },
   {
-    href: (locale) => getPublicCategoryHref("demo", locale, "use-cases"),
-    label: { en: "Use Cases", ko: "활용 사례", ja: "ユースケース" },
-    slug: "use-cases",
-  },
-  {
     href: (locale) => getPublicCategoryHref("demo", locale, "aip-features"),
-    label: { en: "AIP Features", ko: "AIP 기능", ja: "AIP機能" },
+    label: { en: "AIP Use Cases", ko: "AIP 활용", ja: "AIP機能" },
     slug: "aip-features",
   },
   {
     href: (locale) => getPublicCategoryHref("demo", locale, "acp-features"),
-    label: { en: "ACP Features", ko: "ACP 기능", ja: "ACP機能" },
+    label: { en: "ACP Use Cases", ko: "ACP 활용", ja: "ACP機能" },
     slug: "acp-features",
   },
 ];
@@ -130,25 +124,18 @@ const demoAdminCategoryConfigs: AdminCategoryConfig<DemoCategorySlug>[] = [
     title: "Demo",
   },
   {
-    description: "홈페이지 활용 사례 콘텐츠의 노출 상태와 게시 흐름을 관리합니다.",
-    href: "/admin/demo/use-cases",
-    label: "Use Cases",
-    slug: "use-cases",
-    title: "Use Cases",
-  },
-  {
     description: "AIP 기능 데모 콘텐츠와 문구, 노출 순서를 관리합니다.",
     href: "/admin/demo/aip-features",
-    label: "AIP Features",
+    label: "AIP Use Cases",
     slug: "aip-features",
-    title: "AIP Features",
+    title: "AIP Use Cases",
   },
   {
     description: "ACP 기능 데모 콘텐츠와 문구, 노출 순서를 관리합니다.",
     href: "/admin/demo/acp-features",
-    label: "ACP Features",
+    label: "ACP Use Cases",
     slug: "acp-features",
-    title: "ACP Features",
+    title: "ACP Use Cases",
   },
 ];
 
@@ -284,11 +271,13 @@ export function getDocumentationSidebarMenuItems(
 }
 
 export function getAdminSectionMenuItems(section: "demo" | "documentation") {
-  return getAdminCategoryConfigs(section).map(({ href, label, slug }) => ({
-    href,
-    label,
-    slug,
-  }));
+  return getAdminCategoryConfigs(section)
+    .filter((item) => section !== "demo" || item.slug !== "all")
+    .map(({ href, label, slug }) => ({
+      href,
+      label,
+      slug,
+    }));
 }
 
 export function getAdminCategoryPageMeta(

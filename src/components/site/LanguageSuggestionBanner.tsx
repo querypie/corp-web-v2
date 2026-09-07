@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
+import { getLocaleSwitchPath, type Locale } from "@/constants/i18n";
 import Button from "@/components/ui/Button";
 import Select from "@/components/ui/Select";
 
@@ -59,12 +59,7 @@ type LanguageSuggestionResponse = {
 };
 
 function getLocaleHref(pathname: string, locale: Locale) {
-  const segments = pathname.split("/").filter(Boolean);
-  const pathWithoutLocale = isLocale(segments[0] ?? "")
-    ? `/${segments.slice(1).join("/")}`
-    : pathname;
-
-  const nextPathname = getLocalePath(locale, pathWithoutLocale || "/");
+  const nextPathname = getLocaleSwitchPath(pathname, locale);
 
   if (typeof window === "undefined" || !window.location.search) {
     return nextPathname;

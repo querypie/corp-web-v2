@@ -1,5 +1,5 @@
-import AdminDemoPage from "@/components/admin/content/AdminDemoPage";
+import { permanentRedirect } from "next/navigation";
 
 export default function AdminDemoUseCasesPage() {
-  return <AdminDemoPage categorySlug="use-cases" />;
+  permanentRedirect("/admin/demo/aip-features");
 }

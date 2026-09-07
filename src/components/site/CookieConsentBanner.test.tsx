@@ -33,10 +33,14 @@ describe("CookieConsentBanner", () => {
       "동의합니다",
       "거부",
     ]);
-    expect(screen.getByRole("link", { name: "개인정보처리방침" })).toHaveAttribute(
+    const privacyLink = screen.getByRole("link", { name: "개인정보처리방침" });
+
+    expect(privacyLink).toHaveAttribute(
       "href",
       "/ko/privacy-policy",
     );
+    expect(privacyLink).toHaveClass("text-brand", "hover:underline");
+    expect(privacyLink).not.toHaveClass("hover:text-fg");
     expect(screen.getByRole("link", { name: "쿠키 설정" })).toHaveAttribute(
       "href",
       "/ko/cookie-preference",

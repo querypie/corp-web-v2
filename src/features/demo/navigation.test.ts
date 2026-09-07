@@ -2,28 +2,21 @@ import { describe, expect, it } from "vitest";
 import { getDemoSidebarMenuItems } from "./navigation";
 
 describe("getDemoSidebarMenuItems", () => {
-  it("Demo CMS 카테고리 메뉴를 반환한다", () => {
-    expect(getDemoSidebarMenuItems("en", "use-cases")).toEqual([
-      { href: "/en/demo", isActive: false, kind: "link", label: "All", slug: "all" },
-      {
-        href: "/en/demo/use-cases",
-        isActive: true,
-        kind: "link",
-        label: "Use Cases",
-        slug: "use-cases",
-      },
+  it("공개 Demo 좌측 메뉴를 locale별 카테고리명으로 반환한다", () => {
+    expect(getDemoSidebarMenuItems("en", "all")).toEqual([
+      { href: "/en/demo", isActive: true, kind: "link", label: "All", slug: "all" },
       {
         href: "/en/demo/aip",
         isActive: false,
         kind: "link",
-        label: "AIP Features",
+        label: "AIP Use Cases",
         slug: "aip-features",
       },
       {
         href: "/en/demo/acp",
         isActive: false,
         kind: "link",
-        label: "ACP Features",
+        label: "ACP Use Cases",
         slug: "acp-features",
       },
     ]);
@@ -32,13 +25,6 @@ describe("getDemoSidebarMenuItems", () => {
   it("locale에 맞는 Demo 카테고리 라벨을 반환한다", () => {
     expect(getDemoSidebarMenuItems("ja", "acp-features")).toEqual([
       { href: "/ja/demo", isActive: false, kind: "link", label: "すべて", slug: "all" },
-      {
-        href: "/ja/demo/use-cases",
-        isActive: false,
-        kind: "link",
-        label: "ユースケース",
-        slug: "use-cases",
-      },
       {
         href: "/ja/demo/aip",
         isActive: false,
@@ -56,22 +42,22 @@ describe("getDemoSidebarMenuItems", () => {
     ]);
   });
 
-  it("공개 게시물이 있는 Demo 카테고리만 메뉴에 노출한다", () => {
-    expect(getDemoSidebarMenuItems("ko", "all", ["use-cases", "aip-features"])).toEqual([
+  it("게시물 수와 관계없이 모든 공개 카테고리를 항상 노출한다", () => {
+    expect(getDemoSidebarMenuItems("ko", "all")).toEqual([
       { href: "/ko/demo", isActive: true, kind: "link", label: "전체", slug: "all" },
-      {
-        href: "/ko/demo/use-cases",
-        isActive: false,
-        kind: "link",
-        label: "활용 사례",
-        slug: "use-cases",
-      },
       {
         href: "/ko/demo/aip",
         isActive: false,
         kind: "link",
-        label: "AIP 기능",
+        label: "AIP 활용",
         slug: "aip-features",
+      },
+      {
+        href: "/ko/demo/acp",
+        isActive: false,
+        kind: "link",
+        label: "ACP 활용",
+        slug: "acp-features",
       },
     ]);
   });

@@ -32,10 +32,10 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
     ja: ["クッキー設定", "利用規約", "プライバシーポリシー", "EULA"],
   }[locale] ?? ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"];
   const navItems = {
-    en: ["Solutions", "Features", "Company", "Plans"],
-    ko: ["솔루션", "기능", "회사", "가격 · 플랜"],
-    ja: ["ソリューション", "機能", "会社", "価格・プラン"],
-  }[locale] ?? ["Solutions", "Features", "Company", "Plans"];
+    en: ["Solutions", "Demo", "Resource", "Company", "Plans"],
+    ko: ["솔루션", "데모", "자료", "회사", "가격 · 플랜"],
+    ja: ["ソリューション", "デモ", "リソース", "会社"],
+  }[locale] ?? ["Solutions", "Demo", "Resource", "Company", "Plans"];
   const navActionLabel = {
     en: "Free start!",
     ko: "무료로 시작하기",
@@ -43,26 +43,29 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
   }[locale] ?? "Free start!";
   const footerSections = {
     en: [
-      { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Workplace Productivity | AI Crew", "AI for Your Service | AI Dashi"] },
-      { title: "Features", items: ["Demo", "Documentation", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
+      { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
+      { title: "Demo", items: ["AIP Use Cases", "ACP Use Cases"] },
+      { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
       { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
       { title: "Plans", items: ["AIP", "ACP"] },
     ],
     ko: [
-      { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "사내 업무 효율화 | AI Crew", "자사 서비스 AI화 | AI Dashi"] },
-      { title: "기능", items: ["데모", "문서", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
+      { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)"] },
+      { title: "데모", items: ["AIP 활용", "ACP 활용"] },
+      { title: "자료", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: ["AIP", "ACP"] },
     ],
     ja: [
       { title: "ソリューション", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"] },
-      { title: "機能", items: ["デモ", "ドキュメント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
+      { title: "デモ", items: ["AIP機能", "ACP機能"] },
+      { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
       { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ"] },
-      { title: "価格・プラン", items: ["AIP", "ACP"] },
     ],
   }[locale] ?? [
     { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
-    { title: "Features", items: ["Demo", "Documentation", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
+    { title: "Demo", items: ["AIP Use Cases", "ACP Use Cases"] },
+    { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
     { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
     { title: "Plans", items: ["AIP", "ACP"] },
   ];
@@ -82,12 +85,17 @@ export function getSolutionsSubItems(locale: string): NavigationSubItem[] {
     ja: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"],
   }[locale] ?? ["AI Platform (AIP)", "Access Control Platform (ACP)", "Workplace Productivity | AI Crew", "AI for Your Service | AI Dashi"];
 
-  const items = [
+  const items: NavigationSubItem[] = [
     { label: copy[0], href: getSolutionHref(locale as Locale, "aip") },
     { label: copy[1], href: getSolutionHref(locale as Locale, "acp") },
-    { label: copy[2], href: getSolutionHref(locale as Locale, "ai-crew") },
-    { label: copy[3], href: getSolutionHref(locale as Locale, "ai-dashi") },
   ];
+
+  if (locale === "ja") {
+    items.push(
+      { label: copy[2], href: getSolutionHref(locale, "ai-crew") },
+      { label: copy[3], href: getSolutionHref(locale, "ai-dashi") },
+    );
+  }
 
   return items;
 }
@@ -96,9 +104,14 @@ export function getDemoSubItems(locale: string): NavigationSubItem[] {
   const resolvedLocale = locale as Locale;
 
   return [
-    { label: "Use Cases", href: getCategoryHref(demoCategoryConfigs, "use-cases", resolvedLocale) },
-    { label: "AIP Features", href: getCategoryHref(demoCategoryConfigs, "aip-features", resolvedLocale) },
-    { label: "ACP Features", href: getCategoryHref(demoCategoryConfigs, "acp-features", resolvedLocale) },
+    {
+      label: getCategoryLabel(demoCategoryConfigs, "aip-features", resolvedLocale),
+      href: getCategoryHref(demoCategoryConfigs, "aip-features", resolvedLocale),
+    },
+    {
+      label: getCategoryLabel(demoCategoryConfigs, "acp-features", resolvedLocale),
+      href: getCategoryHref(demoCategoryConfigs, "acp-features", resolvedLocale),
+    },
   ];
 }
 
@@ -138,6 +151,10 @@ export function getResourcesSubItems(locale: string): NavigationSubItem[] {
     {
       label: getCategoryLabel(docsCategoryConfigs, "blogs", resolvedLocale),
       href: getCategoryHref(docsCategoryConfigs, "blogs", resolvedLocale),
+    },
+    {
+      label: getCategoryLabel(docsCategoryConfigs, "voc", resolvedLocale),
+      href: getCategoryHref(docsCategoryConfigs, "voc", resolvedLocale),
     },
     {
       label: getCategoryLabel(docsCategoryConfigs, "events", resolvedLocale),
@@ -198,6 +215,42 @@ export function getFooterHref(item: string, locale: string) {
 
   if (item === "ACP") {
     return getLocalePath(locale as Locale, "/plans/acp");
+  }
+
+  if (item === "AIP Features" || item === "AIP Use Cases" || item === "AIP 활용" || item === "AIP機能") {
+    return getCategoryHref(demoCategoryConfigs, "aip-features", locale as Locale);
+  }
+
+  if (item === "ACP Features" || item === "ACP Use Cases" || item === "ACP 활용" || item === "ACP機能") {
+    return getCategoryHref(demoCategoryConfigs, "acp-features", locale as Locale);
+  }
+
+  if (item === "Introduction Decks" || item === "제품 소개" || item === "製品紹介") {
+    return getCategoryHref(docsCategoryConfigs, "introduction", locale as Locale);
+  }
+
+  if (item === "Glossary" || item === "용어집" || item === "用語集") {
+    return getCategoryHref(docsCategoryConfigs, "glossary", locale as Locale);
+  }
+
+  if (item === "Manuals" || item === "매뉴얼" || item === "マニュアル") {
+    return getCategoryHref(docsCategoryConfigs, "manuals", locale as Locale);
+  }
+
+  if (item === "White Papers" || item === "화이트페이퍼" || item === "ホワイトペーパー") {
+    return getCategoryHref(docsCategoryConfigs, "white-papers", locale as Locale);
+  }
+
+  if (item === "Blog" || item === "블로그" || item === "ブログ") {
+    return getCategoryHref(docsCategoryConfigs, "blogs", locale as Locale);
+  }
+
+  if (item === "VOC" || item === "고객의 목소리" || item === "お客様の声") {
+    return getCategoryHref(docsCategoryConfigs, "voc", locale as Locale);
+  }
+
+  if (item === "Events" || item === "이벤트" || item === "イベント") {
+    return getCategoryHref(docsCategoryConfigs, "events", locale as Locale);
   }
 
   if (item === "AI Platform (AIP)" || item === "AI 플랫폼 (AIP)" || item === "AIプラットフォーム (AIP)") {

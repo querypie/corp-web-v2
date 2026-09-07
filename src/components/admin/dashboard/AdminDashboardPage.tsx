@@ -15,6 +15,9 @@ import {
   type ManagedContentEntry,
 } from "@/features/content/data";
 import { isContentGatingEnabled } from "@/features/content/gating";
+import { translateAdminCopy } from "@/features/admin/i18n";
+import { getAdminRequestLocale } from "@/features/admin/locale.server";
+import type { AdminLocale } from "@/features/admin/preferences";
 
 type SummaryCard = {
   description: string;
@@ -126,34 +129,37 @@ function DistributionSummary({
 
 function PageViewsSummary({
   activeDayCount,
+  locale,
   pageViews,
   peak,
   totalDays,
 }: {
   activeDayCount: number;
+  locale: AdminLocale;
   pageViews: number;
   peak: VercelAnalyticsListItem | null;
   totalDays: number;
 }) {
+  const t = (copy: string) => translateAdminCopy(locale, copy);
   const averagePerDay = totalDays > 0 ? Math.round(pageViews / totalDays) : 0;
 
   return (
     <div className="flex min-h-[132px] flex-col justify-between gap-4 bg-bg px-5 py-5">
       <div className="flex flex-col gap-2">
-        <p className="m-0 type-body-sm text-mute">Page views · 30d</p>
+        <p className="m-0 type-body-sm text-mute">{t("Page views · 30d")}</p>
         <p className="m-0 type-h2 text-fg">{formatNumber(pageViews)}</p>
       </div>
       <div className="grid grid-cols-2 gap-x-3 gap-y-2">
         <div className="flex flex-col gap-0.5">
-          <span className="type-body-sm text-mute">Avg/day</span>
+          <span className="type-body-sm text-mute">{t("Avg/day")}</span>
           <span className="type-body-sm text-fg">{formatNumber(averagePerDay)}</span>
         </div>
         <div className="flex flex-col gap-0.5">
-          <span className="type-body-sm text-mute">Active</span>
+          <span className="type-body-sm text-mute">{t("Active")}</span>
           <span className="type-body-sm text-fg">{activeDayCount}/{totalDays}</span>
         </div>
         <div className="col-span-2 flex items-center justify-between gap-3 border-t border-border pt-2">
-          <span className="type-body-sm text-mute">Peak</span>
+          <span className="type-body-sm text-mute">{t("Peak")}</span>
           <span className="shrink-0 whitespace-nowrap type-body-sm text-fg">
             {peak ? `${formatTrendDate(peak.label)} · ${formatNumber(peak.value)}` : "-"}
           </span>
@@ -164,12 +170,15 @@ function PageViewsSummary({
 }
 
 function SourceSummary({
+  locale,
   pageViews,
   referrers,
 }: {
+  locale: AdminLocale;
   pageViews: number;
   referrers: VercelAnalyticsListItem[];
 }) {
+  const t = (copy: string) => translateAdminCopy(locale, copy);
   const directValue = referrers.find((item) => isDirectSource(item.label))?.value ?? 0;
   const referredValue = Math.max(pageViews - directValue, 0);
   const directPercent = pageViews > 0 ? (directValue / pageViews) * 100 : 0;
@@ -179,20 +188,20 @@ function SourceSummary({
   return (
     <div className="flex min-h-[132px] flex-col justify-between gap-4 bg-bg px-5 py-5">
       <div className="flex flex-col gap-2">
-        <p className="m-0 type-body-sm text-mute">Sources · 30d</p>
+        <p className="m-0 type-body-sm text-mute">{t("Sources · 30d")}</p>
         <div className="grid grid-cols-2 gap-3">
           <div className="flex flex-col gap-0.5">
-            <span className="type-body-sm text-mute">Direct</span>
+            <span className="type-body-sm text-mute">{t("Direct")}</span>
             <span className="type-body-md text-fg">{formatPercent(directPercent)}</span>
           </div>
           <div className="flex flex-col gap-0.5">
-            <span className="type-body-sm text-mute">Referred</span>
+            <span className="type-body-sm text-mute">{t("Referred")}</span>
             <span className="type-body-md text-fg">{formatPercent(referredPercent)}</span>
           </div>
         </div>
       </div>
       <div className="flex flex-col gap-2">
-        <div className="flex h-1.5 overflow-hidden rounded-full bg-secondary" aria-label={`Direct ${formatPercent(directPercent)}, referred ${formatPercent(referredPercent)}`}>
+        <div className="flex h-1.5 overflow-hidden rounded-full bg-secondary" aria-label={`${t("Direct")} ${formatPercent(directPercent)}, ${t("Referred")} ${formatPercent(referredPercent)}`}>
           <div className="h-full bg-chart-secondary" style={{ width: `${Math.round(directPercent)}%` }} />
           <div className="h-full bg-chart-primary" style={{ width: `${Math.round(referredPercent)}%` }} />
         </div>
@@ -206,7 +215,7 @@ function SourceSummary({
             ))}
           </div>
         ) : (
-          <p className="m-0 type-body-sm text-mute">표시할 유입 소스가 없습니다.</p>
+          <p className="m-0 type-body-sm text-mute">{t("표시할 유입 소스가 없습니다.")}</p>
         )}
       </div>
     </div>
@@ -218,12 +227,12 @@ function normalizePath(value: string) {
   return path.length > 1 ? path.replace(/\/+$/, "") : path;
 }
 
-function getTopPageDisplay(item: VercelAnalyticsListItem) {
+function getTopPageDisplay(item: VercelAnalyticsListItem, locale: AdminLocale) {
   const path = normalizePath(item.label);
 
   if (/^\/(?:en|ko|ja)\/chat\/publication\/[^/]+$/.test(path)) {
     return {
-      label: "Unmapped chat publication",
+      label: translateAdminCopy(locale, "Unmapped chat publication"),
       sublabel: path,
     };
   }
@@ -250,7 +259,8 @@ function getGatedContentCount(items: ManagedContentEntry[]) {
   ).length;
 }
 
-function buildDashboardData(items: ManagedContentEntry[]) {
+function buildDashboardData(items: ManagedContentEntry[], locale: AdminLocale) {
+  const t = (copy: string) => translateAdminCopy(locale, copy);
   const publishedCount = getVisibleItemCount(items);
   const gatedContentCount = getGatedContentCount(items);
   const missingLocaleCount = getMissingLocaleCount(items);
@@ -258,24 +268,24 @@ function buildDashboardData(items: ManagedContentEntry[]) {
 
   const summaryCards: SummaryCard[] = [
     {
-      label: "Live content",
+      label: t("Live content"),
       value: String(publishedCount),
-      description: "게시 상태이며 하나 이상의 locale에 노출되는 콘텐츠",
+      description: t("게시 상태이며 하나 이상의 locale에 노출되는 콘텐츠"),
     },
     {
-      label: "Locale gaps",
+      label: t("Locale gaps"),
       value: String(missingLocaleCount),
-      description: "게시되었지만 EN/KO/JA 중 일부 locale이 빠진 콘텐츠",
+      description: t("게시되었지만 EN/KO/JA 중 일부 locale이 빠진 콘텐츠"),
     },
     {
-      label: "Gated content",
+      label: t("Gated content"),
       value: String(gatedContentCount),
-      description: "게시 상태이며 게이팅이 적용된 콘텐츠",
+      description: t("게시 상태이며 게이팅이 적용된 콘텐츠"),
     },
     {
-      label: "Downloads",
+      label: t("Downloads"),
       value: String(downloadableCount),
-      description: "다운로드 버튼 또는 PDF 파일이 연결된 콘텐츠",
+      description: t("다운로드 버튼 또는 PDF 파일이 연결된 콘텐츠"),
     },
   ];
 
@@ -325,16 +335,19 @@ function buildTopContentPages(
 function MetricList({
   getItemDisplay,
   items,
+  locale,
 }: {
   getItemDisplay?: (item: VercelAnalyticsListItem) => { label: string; sublabel?: string };
   items: VercelAnalyticsListItem[];
+  locale: AdminLocale;
 }) {
+  const t = (copy: string) => translateAdminCopy(locale, copy);
   const maxValue = Math.max(...items.map((item) => item.value), 1);
 
   if (items.length === 0) {
     return (
       <div className="flex min-h-[120px] items-center justify-center rounded-box bg-bg px-5 py-5 text-center type-body-md text-mute">
-        표시할 Analytics 데이터가 없습니다.
+        {t("표시할 Analytics 데이터가 없습니다.")}
       </div>
     );
   }
@@ -388,11 +401,13 @@ function AnalyticsPanel({
 
 export default async function AdminDashboardPage() {
   noStore();
-  const [items, analytics] = await Promise.all([
+  const [items, analytics, locale] = await Promise.all([
     readContentState(undefined, { includeBodies: false }),
     readVercelAnalyticsSummary(),
+    getAdminRequestLocale(),
   ]);
-  const data = buildDashboardData(items);
+  const t = (copy: string) => translateAdminCopy(locale, copy);
+  const data = buildDashboardData(items, locale);
   const topContentPages = buildTopContentPages(items, analytics.contentPages);
   const trendItems = analytics.trend;
   const trendTotal = trendItems.reduce((total, entry) => total + entry.value, 0);
@@ -407,28 +422,28 @@ export default async function AdminDashboardPage() {
 
   return (
     <section className="mx-auto flex w-full max-w-[1000px] flex-col gap-5 py-5 md:gap-6 md:py-8">
-      <DashboardSection title="Vercel Web Analytics">
+      <DashboardSection title={t("Vercel Web Analytics")}>
         <DashboardCard className="p-[30px]">
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
               <div className="flex flex-col gap-2">
                 <div className="inline-flex w-fit items-center gap-2 rounded-full bg-bg px-3 py-1 type-body-sm text-mute">
                   <span aria-hidden="true" className="h-2 w-2 rounded-full bg-success" />
-                  Production Analytics · {analytics.targetHost}
+                  {t("Production Analytics")} · {analytics.targetHost}
                 </div>
                 <p className="m-0 type-body-md text-mute">
-                  최근 30일 기준 프로덕션 방문 흐름입니다. 배포 전이거나 방문이 없으면 빈 상태로 표시됩니다.
+                  {t("최근 30일 기준 프로덕션 방문 흐름입니다. 배포 전이거나 방문이 없으면 빈 상태로 표시됩니다.")}
                 </p>
               </div>
               <TextButton className="w-fit shrink-0" href={vercelAnalyticsHref} rel="noreferrer" target="_blank">
-                Open Vercel Analytics
+                {t("Open Vercel Analytics")}
               </TextButton>
             </div>
 
             {analytics.error ? (
               <div className="rounded-box bg-bg px-5 py-5">
                 <p className="m-0 type-body-md text-fg">
-                  {analytics.isConfigured ? "Vercel Analytics fetch failed" : "Vercel Analytics setup required"}
+                  {t(analytics.isConfigured ? "Vercel Analytics fetch failed" : "Vercel Analytics setup required")}
                 </p>
                 <p className="m-0 type-body-sm text-mute">{analytics.error}</p>
               </div>
@@ -437,48 +452,49 @@ export default async function AdminDashboardPage() {
             <div className="grid overflow-hidden rounded-box bg-bg divide-y divide-border md:grid-cols-4 md:divide-x md:divide-y-0">
               <PageViewsSummary
                 activeDayCount={activeDayCount}
+                locale={locale}
                 pageViews={analytics.pageViews}
                 peak={peakTrendItem}
                 totalDays={totalTrendDays}
               />
-              <SourceSummary pageViews={analytics.pageViews} referrers={analytics.referrers} />
-              <DistributionSummary items={analytics.countries} title="Countries" />
-              <DistributionSummary items={analytics.devices} title="Devices" />
+              <SourceSummary locale={locale} pageViews={analytics.pageViews} referrers={analytics.referrers} />
+              <DistributionSummary items={analytics.countries} title={t("Countries")} />
+              <DistributionSummary items={analytics.devices} title={t("Devices")} />
             </div>
 
             <div className="grid gap-5">
               <AnalyticsPanel
                 meta={(
                   <div className="flex flex-wrap items-center gap-x-5 gap-y-1">
-                    <span>{activeDayCount} active days</span>
-                    <span>Active PV {formatNumber(trendTotal)}</span>
+                    <span>{activeDayCount} {t("active days")}</span>
+                    <span>{t("Active PV")} {formatNumber(trendTotal)}</span>
                     <span>
-                      Peak {peakTrendItem ? `${formatTrendDate(peakTrendItem.label)} · ${formatNumber(peakTrendItem.value)}` : "-"}
+                      {t("Peak")} {peakTrendItem ? `${formatTrendDate(peakTrendItem.label)} · ${formatNumber(peakTrendItem.value)}` : "-"}
                     </span>
                   </div>
                 )}
-                title="Traffic trend"
+                title={t("Traffic trend")}
               >
-                <TrafficTrendChart items={trendItems} />
+                <TrafficTrendChart items={trendItems} locale={locale} />
               </AnalyticsPanel>
 
               <div className="grid gap-5 lg:grid-cols-2">
-                <AnalyticsPanel meta={`${visibleTopPages.length} paths`} title="Top pages">
-                  <MetricList getItemDisplay={getTopPageDisplay} items={visibleTopPages} />
+                <AnalyticsPanel meta={`${visibleTopPages.length} ${t("paths")}`} title={t("Top pages")}>
+                  <MetricList getItemDisplay={(item) => getTopPageDisplay(item, locale)} items={visibleTopPages} locale={locale} />
                   {groupedOtherPages ? (
                     <div className="border-t border-border pt-3">
                       <div className="flex items-center justify-between gap-4">
-                        <span className="type-body-sm text-mute">Other paths</span>
+                        <span className="type-body-sm text-mute">{t("Other paths")}</span>
                         <span className="shrink-0 type-body-sm text-mute">{formatNumber(groupedOtherPages.value)}</span>
                       </div>
                       <p className="m-0 mt-1 type-body-sm text-mute">
-                        Vercel이 상위 목록 밖의 낮은 트래픽 경로를 합산한 값입니다.
+                        {t("Vercel이 상위 목록 밖의 낮은 트래픽 경로를 합산한 값입니다.")}
                       </p>
                     </div>
                   ) : null}
                 </AnalyticsPanel>
-                <AnalyticsPanel meta={`${analytics.referrers.length} sources`} title="Referrers">
-                  <MetricList items={analytics.referrers} />
+                <AnalyticsPanel meta={`${analytics.referrers.length} ${t("sources")}`} title={t("Referrers")}>
+                  <MetricList items={analytics.referrers} locale={locale} />
                 </AnalyticsPanel>
               </div>
             </div>
@@ -486,7 +502,7 @@ export default async function AdminDashboardPage() {
         </DashboardCard>
       </DashboardSection>
 
-      <DashboardSection title="Content operations">
+      <DashboardSection title={t("Content operations")}>
         <DashboardCard className="p-[30px]">
           <div className="flex flex-col gap-5">
             <div className="grid overflow-hidden rounded-box bg-bg divide-y divide-border md:grid-cols-4 md:divide-x md:divide-y-0">
@@ -502,7 +518,7 @@ export default async function AdminDashboardPage() {
             </div>
 
             <div className="flex flex-col gap-3">
-              <p className="m-0 type-body-md text-fg">Top viewed content</p>
+              <p className="m-0 type-body-md text-fg">{t("Top viewed content")}</p>
               <div className="flex flex-col overflow-hidden rounded-box bg-bg divide-y divide-border">
                 {topContentPages.length > 0 ? (
                   topContentPages.map((item, index) => (
@@ -520,16 +536,16 @@ export default async function AdminDashboardPage() {
                         <p className="m-0 line-clamp-2 type-body-md text-fg">{item.title}</p>
                       </div>
                       <div className="type-body-sm text-mute md:text-right">
-                        {formatNumber(item.pageViews)} views
+                        {formatNumber(item.pageViews)} {t("views")}
                       </div>
                       <TextButton className="w-fit justify-self-start type-body-sm md:justify-self-end" href={item.href} target="_blank" rel="noreferrer">
-                        바로가기
+                        {t("바로가기")}
                       </TextButton>
                     </div>
                   ))
                 ) : (
                   <div className="flex min-h-[160px] items-center justify-center px-5 py-6 text-center type-body-md text-mute">
-                    페이지뷰가 집계된 콘텐츠가 없습니다.
+                    {t("페이지뷰가 집계된 콘텐츠가 없습니다.")}
                   </div>
                 )}
               </div>

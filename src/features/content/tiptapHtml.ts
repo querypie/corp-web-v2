@@ -6,6 +6,7 @@ import { TableKit } from "@tiptap/extension-table";
 import Youtube from "@tiptap/extension-youtube";
 import StarterKit from "@tiptap/starter-kit";
 import { parseTiptapJson, type TiptapJsonNode } from "@/features/content/translation/tiptap";
+import { normalizeYoutubeEmbedUrl } from "@/features/content/youtubeUrl";
 
 const ResizableImage = Image.extend({
   addAttributes() {
@@ -254,8 +255,13 @@ function renderNode(node: TiptapJsonNode): string {
       const imageHtml = `<img${renderAttributes(attrs, ["alt", "src", "title"])} style="width:100%;">`;
       return renderFigureMedia(node, imageHtml);
     }
-    case "youtube":
-      return `<iframe${renderAttributes(attrs, ["src"])} title="Watch video"></iframe>`;
+    case "youtube": {
+      const youtubeAttrs = {
+        ...attrs,
+        src: typeof attrs.src === "string" ? normalizeYoutubeEmbedUrl(attrs.src) : attrs.src,
+      };
+      return `<iframe${renderAttributes(youtubeAttrs, ["src"])} title="Watch video"></iframe>`;
+    }
     case "video": {
       const videoAttrs = {
         controls: attrs.controls === false ? undefined : true,

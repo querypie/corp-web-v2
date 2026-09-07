@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { getDocumentationSidebarMenuItems } from "./config";
+import { getAdminSectionMenuItems, getDocumentationSidebarMenuItems } from "./config";
+
+describe("getAdminSectionMenuItems", () => {
+  it("Demo CMS 메뉴에는 AIP/ACP Use Cases만 노출한다", () => {
+    expect(getAdminSectionMenuItems("demo")).toEqual([
+      { href: "/admin/demo/aip-features", label: "AIP Use Cases", slug: "aip-features" },
+      { href: "/admin/demo/acp-features", label: "ACP Use Cases", slug: "acp-features" },
+    ]);
+  });
+});
 
 describe("getDocumentationSidebarMenuItems", () => {
   it("blogs 활성 상태에서 Documentation CMS 카테고리 메뉴를 반환한다", () => {

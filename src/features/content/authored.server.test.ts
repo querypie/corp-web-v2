@@ -26,7 +26,7 @@ function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContent
         ],
       }),
     ),
-    categorySlug: "use-cases",
+    categorySlug: "aip-features",
     contentType: "content",
     dateIso: "2026-01-01",
     downloadCoverImageSrc: "",
@@ -84,8 +84,8 @@ async function writeExistingContent(entry: ManagedContentEntry) {
       visibleLocales: entry.visibleLocales,
       locales: {
         en: {
-          htmlPath: "src/content/demo/use-cases/cnt_000001/en.html",
-          jsonPath: "src/content/demo/use-cases/cnt_000001/en.tiptap.json",
+          htmlPath: "src/content/demo/aip-features/cnt_000001/en.html",
+          jsonPath: "src/content/demo/aip-features/cnt_000001/en.tiptap.json",
         },
       },
     }, null, 2)}\n`,

@@ -21,7 +21,7 @@ export default function AiCrewLocalizedPage({ locale }: { locale: Exclude<Locale
   if (!copy) return null;
 
   const contactHref = getLocalePath(locale, "/company/contact-us");
-  const demoHref = getLocalePath(locale, "/demo/use-cases");
+  const demoHref = getLocalePath(locale, "/demo/aip");
   const whitepaperHref = getPublicDetailHref("documentation", locale, "ai-transformation-japan", "white-papers");
   const [heroTitleBefore, heroTitleAfter] = copy.hero.title[1].split("AI Crew");
 
@@ -64,7 +64,7 @@ export default function AiCrewLocalizedPage({ locale }: { locale: Exclude<Locale
           {copy.useCases.items.map((item) => (
             <AiCrewUseCaseCard
               body={item.body}
-              href={getPublicDetailHref("demo", locale, item.id, "use-cases")}
+              href={getPublicDetailHref("demo", locale, item.id, "aip-features")}
               key={item.id}
               imageSrc={item.imageSrc}
               tags={item.tags}

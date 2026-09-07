@@ -1,0 +1,50 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "aip-features",
+  "contentType": "content",
+  "dateIso": "2026-03-02",
+  "downloadCoverImageSrc": "/demo/aip-features/aip-use-case-thumb-28-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "quotation-analyze-ai-agent",
+  "imageSrc": "/demo/aip-features/aip-use-case-1.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 2,
+  "status": "published",
+  "storageId": "cnt_000069",
+  "summary": {
+    "en": "Are you spending valuable time opening and organizing hundreds of local files and password-protected quotations one by one? With AIP, analysis is completed on the spot — without uploads and without data exposure.",
+    "ko": "수백 개의 로컬 파일과 비밀번호로 보호된 견적서를 하나씩 열고 정리하는 데 귀중한 시간을 낭비하고 계신가요? AIP를 사용하면 업로드나 데이터 노출 없이 즉석에서 분석이 완료됩니다.",
+    "ja": "何百ものローカルファイルやパスワードで保護された見積書を一つずつ開いて整理するのに、貴重な時間を費やしていませんか？AIPを使えば、アップロードやデータの公開なしに、その場で分析が完了します。"
+  },
+  "title": {
+    "en": "AIP Use Case: Quotation Analysis AI Agent",
+    "ko": "AIP 사용 사례: 견적 분석 AI 에이전트",
+    "ja": "AIP ユースケース：見積書分析 AI エージェント"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000069/en.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000069/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000069/ko.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000069/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000069/ja.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000069/ja.tiptap.json"
+    }
+  }
+}

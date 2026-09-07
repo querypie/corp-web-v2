@@ -27,6 +27,18 @@ const legacyFolderDownloadRedirects = legacyFolderRedirectBasePaths.flatMap((bas
 ]);
 
 export const legacyContentRedirects = [
+  {
+    source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug",
+    destination: "/:locale/demo/aip/:slug",
+  },
+  {
+    source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug/download",
+    destination: "/:locale/demo/aip/:slug/download",
+  },
+  {
+    source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug/pdf",
+    destination: "/:locale/demo/aip/:slug/download",
+  },
   ...legacyFolderRedirects,
   ...legacyFolderDownloadRedirects,
 ];

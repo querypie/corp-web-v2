@@ -38,5 +38,8 @@ describe("ContentBodyPreview", () => {
     const { container } = render(<ContentBodyPreview bodyHtml="<p>Content</p>" />);
     const wrapper = container.firstChild as HTMLElement;
     expect(wrapper?.className).toContain("rich-content");
+    expect(wrapper?.className).toContain("[&_a]:text-brand");
+    expect(wrapper?.className).toContain("[&_a:hover]:underline");
+    expect(wrapper?.className).not.toContain("[&_a:hover]:text-fg");
   });
 });

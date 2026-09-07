@@ -26,7 +26,7 @@
   "imageSrc": "/documentation/events/3dk-ep3-ja.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 13,
+  "sortOrder": 20,
   "status": "published",
   "storageId": "cnt_000049",
   "summary": {
@@ -40,8 +40,6 @@
     "ja": "エピソード 3 QueryPie SAC: サーバー管理のハードルを打ち破る！- 大規模サーバー管理、自動スケーリング、権限とポリシー"
   },
   "visibleLocales": [
-    "en",
-    "ko",
     "ja"
   ],
   "locales": {
