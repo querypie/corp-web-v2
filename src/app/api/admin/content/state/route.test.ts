@@ -53,7 +53,7 @@ function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContent
     authorRole: "",
     bodyHtml: createLocalizedContent("<p>body</p>"),
     bodyRichText: createLocalizedContent("{}"),
-    categorySlug: "use-cases",
+    categorySlug: "aip-features",
     contentType: "content",
     dateIso: "2026-01-01",
     downloadCoverImageSrc: "",

@@ -12,10 +12,14 @@ describe("buildSolutionContentComponents", () => {
 
     render(<Link href="/solutions/aip">AIP</Link>);
 
-    expect(screen.getByRole("link", { name: "AIP" })).toHaveAttribute(
+    const link = screen.getByRole("link", { name: "AIP" });
+
+    expect(link).toHaveAttribute(
       "href",
       "/ko/solutions/aip",
     );
+    expect(link).toHaveClass("text-brand", "hover:underline");
+    expect(link).not.toHaveClass("hover:text-link-hover");
   });
 
   it("Integrations는 현재 category에 맞는 product만 노출한다", () => {

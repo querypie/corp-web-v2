@@ -26,7 +26,7 @@
   "imageSrc": "/documentation/events/3dk-ep2-ja.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 15,
+  "sortOrder": 22,
   "status": "published",
   "storageId": "cnt_000043",
   "summary": {
@@ -40,8 +40,6 @@
     "ja": "エピソード 2 QueryPie DAC: データベースの悩みを解決！- データベース統合管理、NoSQL、元帳データ"
   },
   "visibleLocales": [
-    "en",
-    "ko",
     "ja"
   ],
   "locales": {

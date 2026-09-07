@@ -25,7 +25,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticEntries = [
     ...perLocale("/"),
     ...perLocale("/demo"),
-    ...perLocale("/demo/use-cases"),
     ...perLocale("/demo/aip"),
     ...perLocale("/demo/acp"),
     ...perLocale("/documentation"),

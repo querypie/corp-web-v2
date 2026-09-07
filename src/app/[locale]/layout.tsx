@@ -9,6 +9,7 @@ import Gnb from "@/components/layout/Gnb";
 import GoogleAnalytics from "@/components/site/GoogleAnalytics";
 import UtmCapture from "@/components/site/UtmCapture";
 import CookieConsentBanner from "@/components/site/CookieConsentBanner";
+import PublicThemeSync from "@/components/site/PublicThemeSync";
 import { GOOGLE_ANALYTICS_ID } from "@/features/analytics/google";
 
 export function generateStaticParams() {
@@ -34,6 +35,7 @@ export default async function LocaleLayout({
 
   return (
     <div className="flex min-h-screen flex-col bg-bg" data-locale={locale as Locale} lang={locale}>
+      <PublicThemeSync locale={locale} />
       <Suspense fallback={null}>
         <LanguageSuggestionBanner currentLocale={locale as Locale} />
         <Gnb actionLabel={shellCopy.navActionLabel} items={shellCopy.navItems} locale={locale} />

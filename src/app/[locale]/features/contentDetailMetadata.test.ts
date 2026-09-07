@@ -70,7 +70,7 @@ describe("content detail metadata", () => {
   it("demo 상세 OG image에 콘텐츠 섬네일을 사용한다", async () => {
     const { generateMetadata } = await import("./demo/[slug]/page");
     mockReadContentItem.mockResolvedValueOnce(makeEntry({
-      categorySlug: "use-cases",
+      categorySlug: "aip-features",
       id: "aip-demo",
       imageSrc: "/demo/aip-thumbnail.webp",
       section: "demo",
@@ -89,7 +89,7 @@ describe("content detail metadata", () => {
         alt: "AIP Demo",
       },
     ]);
-    expect(metadata.openGraph?.url).toBe("/en/demo/use-cases/aip-demo");
+    expect(metadata.openGraph?.url).toBe("/en/demo/aip/aip-demo");
     expect(metadata.twitter?.images).toEqual(["/demo/aip-thumbnail.webp"]);
   });
 });

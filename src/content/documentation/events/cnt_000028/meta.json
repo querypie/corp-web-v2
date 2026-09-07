@@ -3,7 +3,7 @@
   "authorRole": "",
   "categorySlug": "events",
   "contentType": "content",
-  "dateIso": "2024-12-05",
+  "dateIso": "2024-12-18",
   "downloadCoverImageSrc": "/documentation/events/wb-thumb-15.webp",
   "downloadPdfFileName": "",
   "downloadPdfFileNameByLocale": {
@@ -26,7 +26,7 @@
   "imageSrc": "/documentation/events/wb-thumb-15.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 10,
+  "sortOrder": 17,
   "status": "published",
   "storageId": "cnt_000028",
   "summary": {
@@ -40,8 +40,6 @@
     "ja": "ウェビナー参加申し込み情報漏洩対策、内部セキュリティ対策セミナー"
   },
   "visibleLocales": [
-    "en",
-    "ko",
     "ja"
   ],
   "locales": {

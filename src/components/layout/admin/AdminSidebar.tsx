@@ -6,7 +6,8 @@ import Button from "@/components/ui/Button";
 import { getLocalePath } from "@/constants/i18n";
 import { adminNavGroups, adminPrimaryNavItems } from "@/constants/admin";
 import { useAdminNavigationGuard } from "./AdminNavigationGuard";
-import ThemeSwitch from "@/components/site/ThemeSwitch";
+import AdminPreferences from "./AdminPreferences";
+import { useAdminLocale } from "./AdminLocaleProvider";
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -21,6 +22,7 @@ export default function AdminSidebar({
 }) {
   const pathname = usePathname();
   const { requestNavigation } = useAdminNavigationGuard();
+  const { t } = useAdminLocale();
   const [hoverY, setHoverY] = useState(24);
 
   return (
@@ -39,10 +41,10 @@ export default function AdminSidebar({
     >
       {isCollapsed ? (
         <button
-          aria-label="사이드바 펼치기"
+          aria-label={t("사이드바 펼치기")}
           className="absolute inset-0 z-10 hidden cursor-pointer md:block"
           onClick={onToggleCollapse}
-          title="펼침"
+          title={t("펼침")}
           type="button"
         >
           <span
@@ -86,7 +88,7 @@ export default function AdminSidebar({
         </button>
 
         <button
-          aria-label={isCollapsed ? "사이드바 펼치기" : "사이드바 접기"}
+          aria-label={t(isCollapsed ? "사이드바 펼치기" : "사이드바 접기")}
           className={cx(
             "inline-flex h-8 w-8 items-center justify-center rounded-button opacity-60 transition-opacity hover:opacity-100 md:mr-[-4px]",
             isCollapsed && "md:hidden",
@@ -119,7 +121,7 @@ export default function AdminSidebar({
                 key={item.href}
                 className={cx(
                   "inline-flex items-center rounded-button px-3 py-2 type-body-md transition-colors",
-                  isActive ? "bg-secondary text-fg" : "text-mute hover:bg-bg-hover hover:text-fg",
+                  isActive ? "bg-[var(--color-admin-nav-active)] text-fg" : "text-fg hover:bg-bg-hover",
                 )}
                 href={item.href}
                 onClick={(event) => {
@@ -127,7 +129,7 @@ export default function AdminSidebar({
                   requestNavigation(item.href);
                 }}
               >
-                {item.label}
+                {t(item.label)}
               </a>
             );
           })}
@@ -136,6 +138,9 @@ export default function AdminSidebar({
         {adminNavGroups.map((group) => (
           <div key={group.label} className="flex flex-col gap-px">
             <div aria-hidden="true" className="mx-3 my-1.5 h-px bg-border" />
+            <h2 className="m-0 px-3 pb-1.5 pt-2 type-body-sm font-semibold text-mute">
+              {t(group.label)}
+            </h2>
             <div className="flex flex-col gap-px">
               {group.items
                 .filter(
@@ -155,7 +160,7 @@ export default function AdminSidebar({
                     key={item.href}
                     className={cx(
                       "inline-flex items-center rounded-button px-3 py-2 type-body-md transition-colors",
-                      isActive ? "bg-secondary text-fg" : "text-mute hover:bg-bg-hover hover:text-fg",
+                      isActive ? "bg-[var(--color-admin-nav-active)] text-fg" : "text-fg hover:bg-bg-hover",
                     )}
                     href={item.href}
                     onClick={(event) => {
@@ -163,7 +168,7 @@ export default function AdminSidebar({
                       requestNavigation(item.href);
                     }}
                   >
-                    {item.label}
+                    {t(item.label)}
                   </a>
                 );
               })}
@@ -172,12 +177,8 @@ export default function AdminSidebar({
         ))}
       </nav>
 
-      <div className={cx("relative z-20 mt-5 pt-5 md:mt-auto", isCollapsed ? "flex justify-center" : "flex flex-col gap-2")}>
-        <ThemeSwitch
-          className={cx(isCollapsed ? "h-11 w-9" : "w-full px-3")}
-          compact={isCollapsed}
-          locale="ko"
-        />
+      <div className={cx("relative z-20 mt-5 pt-5 md:mt-auto", isCollapsed ? "flex justify-center" : "flex flex-col items-center gap-5")}>
+        <AdminPreferences compact={isCollapsed} />
         {isCollapsed ? null : (
           <Button
             arrow={false}
@@ -186,7 +187,7 @@ export default function AdminSidebar({
             style="round"
             variant="secondary"
           >
-            Go Homepage
+            {t("Go Homepage")}
           </Button>
         )}
       </div>

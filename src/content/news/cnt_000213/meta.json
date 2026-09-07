@@ -31,15 +31,18 @@
   "storageId": "cnt_000213",
   "summary": {
     "en": "QueryPie AI has begun a strategic collaboration with Ashisuto AI Terasu to strengthen the delivery, sales, and implementation support of QueryPie AIP in Japan, while jointly building a secure environment for AI agents and MCP use.",
-    "ko": "QueryPie AI는 Ashisuto AI Terasu와 전략적 협업을 시작해 일본 시장에서 QueryPie AIP의 제공·판매와 도입 지원을 강화하고, AI 에이전트와 MCP를 안전하게 활용할 수 있는 환경을 함께 구축한다."
+    "ko": "QueryPie AI는 Ashisuto AI Terasu와 전략적 협업을 시작해 일본 시장에서 QueryPie AIP의 제공·판매와 도입 지원을 강화하고, AI 에이전트와 MCP를 안전하게 활용할 수 있는 환경을 함께 구축한다.",
+    "ja": "QueryPie AI合同会社は、株式会社アシストAIテラスと、企業の安全で実践的なAI活用の推進に向けた戦略的協業を開始しました。"
   },
   "title": {
     "en": "QueryPie AI Announces Strategic Partnership with Japanese AI Consulting Firm Ashisuto AI Terasu to Accelerate Enterprise AI Adoption",
-    "ko": "QueryPie AI, 일본 AI 컨설팅 전문 기업 AI Terasu와 AI 비즈니스 추진 협력 개시"
+    "ko": "QueryPie AI, 일본 AI 컨설팅 전문 기업 AI Terasu와 AI 비즈니스 추진 협력 개시",
+    "ja": "QueryPie AI、アシストAIテラスとAIビジネス推進に向けた戦略的協業を開始"
   },
   "visibleLocales": [
     "en",
-    "ko"
+    "ko",
+    "ja"
   ],
   "locales": {
     "en": {
@@ -49,6 +52,10 @@
     "ko": {
       "htmlPath": "src/content/news/cnt_000213/ko.html",
       "jsonPath": "src/content/news/cnt_000213/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/news/cnt_000213/ja.html",
+      "jsonPath": "src/content/news/cnt_000213/ja.tiptap.json"
     }
   }
 }

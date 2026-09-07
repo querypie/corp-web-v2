@@ -55,16 +55,23 @@ export default function TextButton({
 }: TextButtonProps) {
   const resolvedState = disabled ? "disable" : state;
   const classes = cx(
-    "pressable group inline-flex items-center justify-center gap-1.5 bg-transparent p-0 text-brand hover:text-fg",
+    "pressable group inline-flex items-center justify-center gap-1.5 bg-transparent p-0 text-brand",
     !className?.includes("type-") && "type-body-md",
-    resolvedState === "hover" && "text-fg",
     resolvedState === "disable" && "cursor-not-allowed opacity-40",
     !disabled && "cursor-pointer",
     className,
   );
   const content = (
     <>
-      <span>{children}</span>
+      <span
+        className={cx(
+          "decoration-1 underline-offset-4",
+          resolvedState !== "disable" && "group-hover:underline",
+          resolvedState === "hover" && "underline",
+        )}
+      >
+        {children}
+      </span>
       <ArrowRightIcon className="h-4 w-4 text-mute group-hover:animate-[button-arrow-nudge_220ms_ease-out_forwards]" />
     </>
   );

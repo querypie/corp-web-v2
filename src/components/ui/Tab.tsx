@@ -1,5 +1,10 @@
 import Link from "next/link";
-import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ReactNode } from "react";
+import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  MouseEvent,
+  ReactNode,
+} from "react";
 
 type TabState = "on" | "off" | "hover";
 
@@ -25,15 +30,16 @@ function cx(...values: Array<string | false | null | undefined>) {
 
 function getTabClassName({
   className,
+  disabled,
   state,
-}: Pick<TabProps, "className" | "state">) {
+}: Pick<TabProps, "className" | "disabled" | "state">) {
   return cx(
     "inline-flex h-10 items-center justify-center rounded-full px-5 text-center transition-colors duration-200",
     "text-[14px] leading-5 font-normal",
-    state === "on" && "bg-secondary text-fg hover:bg-secondary-hover",
-    state === "hover" && "bg-secondary text-fg",
-    state === "off" && "bg-transparent text-fg hover:bg-secondary",
-    "cursor-pointer disabled:cursor-not-allowed disabled:hover:bg-transparent",
+    state === "on" && "cursor-default bg-secondary text-fg",
+    state === "hover" && "cursor-pointer bg-transparent text-fg",
+    state === "off" && !disabled && "cursor-pointer bg-transparent text-mute hover:text-fg",
+    state === "off" && disabled && "cursor-not-allowed bg-transparent text-mute",
     className,
   );
 }
@@ -42,17 +48,29 @@ export default function Tab({
   children = "Tab",
   className,
   disabled,
+  onClick,
   state = "on",
   type = "button",
   ...props
 }: TabProps) {
   // disabled면 항상 off 스타일로 처리
   const resolvedState = disabled ? "off" : state;
+  const isSelected = resolvedState === "on";
+
+  const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
+    if (isSelected) {
+      event.preventDefault();
+      return;
+    }
+
+    onClick?.(event);
+  };
 
   return (
     <button
-      className={getTabClassName({ className, state: resolvedState })}
+      className={getTabClassName({ className, disabled, state: resolvedState })}
       disabled={disabled}
+      onClick={handleClick}
       type={type}
       {...props}
     >
@@ -65,16 +83,35 @@ export function TabLink({
   children = "Tab",
   className,
   href,
+  onClick,
   scroll,
   state = "on",
+  tabIndex,
   ...props
 }: TabLinkProps) {
+  const isSelected = state === "on";
+
+  const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (isSelected) {
+      event.preventDefault();
+      return;
+    }
+
+    onClick?.(event);
+  };
+
   return (
     <Link
       {...props}
-      className={getTabClassName({ className, state })}
+      aria-disabled={isSelected ? true : props["aria-disabled"]}
+      className={cx(
+        getTabClassName({ className, disabled: isSelected, state }),
+        isSelected && "pointer-events-none",
+      )}
       href={href}
+      onClick={handleClick}
       scroll={scroll}
+      tabIndex={isSelected ? -1 : tabIndex}
     >
       <span className="inline-flex items-center justify-center">{children}</span>
     </Link>

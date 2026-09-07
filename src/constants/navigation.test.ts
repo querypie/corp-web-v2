@@ -16,8 +16,6 @@ describe("getSolutionsSubItems", () => {
     expect(getSolutionsSubItems("en")).toEqual([
       { label: "AI Platform (AIP)", href: "/en/solutions/aip" },
       { label: "Access Control Platform (ACP)", href: "/en/solutions/acp" },
-      { label: "Workplace Productivity | AI Crew", href: "/en/solutions/ai-crew" },
-      { label: "AI for Your Service | AI Dashi", href: "/en/solutions/ai-dashi" },
     ]);
   });
 
@@ -25,8 +23,6 @@ describe("getSolutionsSubItems", () => {
     expect(getSolutionsSubItems("ko")).toEqual([
       { label: "AI 플랫폼 (AIP)", href: "/ko/solutions/aip" },
       { label: "접근 제어 플랫폼 (ACP)", href: "/ko/solutions/acp" },
-      { label: "사내 업무 효율화 | AI Crew", href: "/ko/solutions/ai-crew" },
-      { label: "자사 서비스 AI화 | AI Dashi", href: "/ko/solutions/ai-dashi" },
     ]);
     expect(getSolutionsSubItems("ja")).toEqual([
       { label: "AIプラットフォーム (AIP)", href: "/ja/solutions/aip" },
@@ -40,17 +36,15 @@ describe("getSolutionsSubItems", () => {
 describe("getDemoSubItems", () => {
   it("Demo 메뉴를 CMS demo 경로로 연결한다", () => {
     expect(getDemoSubItems("en")).toEqual([
-      { label: "Use Cases", href: "/en/demo/use-cases" },
-      { label: "AIP Features", href: "/en/demo/aip" },
-      { label: "ACP Features", href: "/en/demo/acp" },
+      { label: "AIP Use Cases", href: "/en/demo/aip" },
+      { label: "ACP Use Cases", href: "/en/demo/acp" },
     ]);
   });
 
   it("locale별 prefix를 붙인다", () => {
     expect(getDemoSubItems("ko")).toEqual([
-      { label: "Use Cases", href: "/ko/demo/use-cases" },
-      { label: "AIP Features", href: "/ko/demo/aip" },
-      { label: "ACP Features", href: "/ko/demo/acp" },
+      { label: "AIP 활용", href: "/ko/demo/aip" },
+      { label: "ACP 활용", href: "/ko/demo/acp" },
     ]);
   });
 });
@@ -79,6 +73,7 @@ describe("getResourcesSubItems", () => {
       { label: "Manuals", href: "/en/manuals" },
       { label: "White Papers", href: "/en/whitepapers" },
       { label: "Blog", href: "/en/blog" },
+      { label: "VOC", href: "/en/voc" },
       { label: "Events", href: "/en/events" },
     ]);
   });
@@ -90,6 +85,7 @@ describe("getResourcesSubItems", () => {
       { label: "매뉴얼", href: "/ko/manuals" },
       { label: "화이트페이퍼", href: "/ko/whitepapers" },
       { label: "블로그", href: "/ko/blog" },
+      { label: "고객의 목소리", href: "/ko/voc" },
       { label: "이벤트", href: "/ko/events" },
     ]);
   });
@@ -102,10 +98,10 @@ describe("getCompanySubItems", () => {
 });
 
 describe("getShellMenuCopy", () => {
-  it("GNB 상위 메뉴를 Solutions / Features / Company / Plans 순서로 반환한다", () => {
-    expect(getShellMenuCopy("en").navItems).toEqual(["Solutions", "Features", "Company", "Plans"]);
-    expect(getShellMenuCopy("ko").navItems).toEqual(["솔루션", "기능", "회사", "가격 · 플랜"]);
-    expect(getShellMenuCopy("ja").navItems).toEqual(["ソリューション", "機能", "会社", "価格・プラン"]);
+  it("GNB 상위 메뉴를 Solutions / Demo / Resource / Company / Plans 순서로 반환한다", () => {
+    expect(getShellMenuCopy("en").navItems).toEqual(["Solutions", "Demo", "Resource", "Company", "Plans"]);
+    expect(getShellMenuCopy("ko").navItems).toEqual(["솔루션", "데모", "자료", "회사", "가격 · 플랜"]);
+    expect(getShellMenuCopy("ja").navItems).toEqual(["ソリューション", "デモ", "リソース", "会社"]);
   });
 
   it("GNB CTA 라벨을 locale별로 반환한다", () => {
@@ -116,16 +112,17 @@ describe("getShellMenuCopy", () => {
 
   it("푸터 메뉴를 locale별로 반환한다", () => {
     expect(getShellMenuCopy("ko").footerSections).toEqual([
-      { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "사내 업무 효율화 | AI Crew", "자사 서비스 AI화 | AI Dashi"] },
-      { title: "기능", items: ["데모", "문서", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
+      { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)"] },
+      { title: "데모", items: ["AIP 활용", "ACP 활용"] },
+      { title: "자료", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: ["AIP", "ACP"] },
     ]);
     expect(getShellMenuCopy("ja").footerSections).toEqual([
       { title: "ソリューション", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"] },
-      { title: "機能", items: ["デモ", "ドキュメント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
+      { title: "デモ", items: ["AIP機能", "ACP機能"] },
+      { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
       { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ"] },
-      { title: "価格・プラン", items: ["AIP", "ACP"] },
     ]);
   });
 });
@@ -163,9 +160,15 @@ describe("getFooterHref", () => {
     expect(getFooterHref("자사 서비스 AI화 | AI Dashi", "ko")).toBe("/ko/solutions/ai-dashi");
   });
 
-  it("다국어 footer feature 링크를 올바른 대상에 연결한다", () => {
-    expect(getFooterHref("데모", "ko")).toBe("/ko/demo");
-    expect(getFooterHref("ドキュメント", "ja")).toBe("/ja/documentation");
+  it("다국어 footer Demo / Resource 링크를 올바른 대상에 연결한다", () => {
+    expect(getFooterHref("AIP 활용", "ko")).toBe("/ko/demo/aip");
+    expect(getFooterHref("ACP機能", "ja")).toBe("/ja/demo/acp");
+    expect(getFooterHref("제품 소개", "ko")).toBe("/ko/introduction-deck");
+    expect(getFooterHref("お客様の声", "ja")).toBe("/ja/voc");
+    expect(getFooterHref("Events", "en")).toBe("/en/events");
+  });
+
+  it("다국어 footer 기능 링크를 올바른 대상에 연결한다", () => {
     expect(getFooterHref("AIP 시작하기", "ko")).toBe("https://app.querypie.com/");
     expect(getFooterHref("AIPを始める", "ja")).toBe("https://app.querypie.com/");
     expect(getFooterHref("ACP 커뮤니티 에디션", "ko")).toBe(

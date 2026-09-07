@@ -17,7 +17,7 @@ describe("legacyContentRedirects", () => {
     });
     expect(legacyContentRedirects).toContainEqual({
       source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug",
-      destination: "/:locale/demo/use-cases/:slug",
+      destination: "/:locale/demo/aip/:slug",
     });
     expect(legacyContentRedirects).toContainEqual({
       source: "/:locale(en|ko|ja)/news/:legacyFolder/:slug",
@@ -36,7 +36,7 @@ describe("legacyContentRedirects", () => {
     });
     expect(legacyContentRedirects).toContainEqual({
       source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug/download",
-      destination: "/:locale/demo/use-cases/:slug/download",
+      destination: "/:locale/demo/aip/:slug/download",
     });
   });
 
@@ -51,7 +51,7 @@ describe("legacyContentRedirects", () => {
     });
     expect(legacyContentRedirects).toContainEqual({
       source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug/pdf",
-      destination: "/:locale/demo/use-cases/:slug/download",
+      destination: "/:locale/demo/aip/:slug/download",
     });
   });
 

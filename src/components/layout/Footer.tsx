@@ -4,7 +4,6 @@ type FooterSection = {
 };
 import { getFooterHref, getLegalHref } from "@/constants/navigation";
 import { getLocalePath, type Locale } from "@/constants/i18n";
-import ThemeSwitch from "@/components/site/ThemeSwitch";
 
 type FooterProps = {
   addressLines?: string[];
@@ -63,7 +62,8 @@ export default function Footer({
   locale = "en",
   sections = [
     { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
-    { title: "Features", items: ["Demo", "Documentation", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
+    { title: "Demo", items: ["AIP Use Cases", "ACP Use Cases"] },
+    { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
     { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
     { title: "Pricing & Plans", items: ["AIP", "ACP"] },
   ],
@@ -90,14 +90,16 @@ export default function Footer({
           </a>
 
           {/* 우측 섹션 링크 묶음 */}
-          <div className="flex flex-wrap items-start gap-8 md:gap-[60px] md:px-5">
+          <div className="flex flex-wrap items-start gap-8 md:px-5 xl:gap-10">
             {sections.map((section) => (
               <div
                 key={section.title}
                 className={cx(
                   "flex flex-col gap-5 type-body-md leading-5",
-                  (section.title === "Solutions" || section.title === "ソリューション" || section.title === "솔루션") && "w-[191px]",
-                  (section.title === "Features" || section.title === "機能" || section.title === "기능") && "w-[180px]",
+                  (section.title === "Solutions" || section.title === "솔루션") && "w-[191px]",
+                  section.title === "ソリューション" && "w-max max-w-full",
+                  (section.title === "Demo" || section.title === "デモ" || section.title === "데모") && "w-[110px]",
+                  (section.title === "Resource" || section.title === "リソース" || section.title === "자료") && "w-[180px]",
                   (section.title === "Company" || section.title === "회사" || section.title === "会社") && "w-[84px]",
                   (section.title === "Plans" ||
                     section.title === "Pricing & Plans" ||
@@ -158,7 +160,6 @@ export default function Footer({
                     </a>
                   ))}
                 </div>
-                <ThemeSwitch className="md:min-w-[132px]" locale={locale as Locale} />
               </div>
 
               {/* 법적 링크 */}

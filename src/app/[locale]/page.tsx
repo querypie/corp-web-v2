@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { isLocale } from "@/constants/i18n";
 import HomePage from "@/components/pages/home/HomePage";
+import JapanHomePage from "@/components/pages/home/japan/JapanHomePage";
 import { getHomeMetadataDescription, getHomeMetadataTitle } from "@/copy/homeMetadata";
 import { withDynamicOgImage } from "@/features/seo/metadata";
 import { getHomePageProps } from "@/features/home/pageData";
@@ -34,5 +35,11 @@ export default async function LocaleHomePage({ params }: LocalePageProps) {
     notFound();
   }
 
-  return <HomePage {...await getHomePageProps(locale)} />;
+  const homePageProps = await getHomePageProps(locale);
+
+  if (locale === "ja") {
+    return <JapanHomePage {...homePageProps} />;
+  }
+
+  return <HomePage {...homePageProps} />;
 }

@@ -8,13 +8,16 @@ import Button from "@/components/ui/Button";
 import ButtonGroup from "@/components/ui/ButtonGroup";
 import { AdminNavigationGuardContext } from "./AdminNavigationGuard";
 import { adminNavGroups, adminPrimaryNavItems } from "@/constants/admin";
-import ThemeSwitch from "@/components/site/ThemeSwitch";
+import type { AdminLocale } from "@/features/admin/preferences";
+import AdminLocaleProvider, { useAdminLocale } from "./AdminLocaleProvider";
+import AdminPreferences from "./AdminPreferences";
 
 type AdminShellProps = {
   children: ReactNode;
+  initialLocale: AdminLocale;
 };
 
-export default function AdminShell({ children }: AdminShellProps) {
+function AdminShellContent({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -24,6 +27,7 @@ export default function AdminShell({ children }: AdminShellProps) {
   const [pendingBackNavigation, setPendingBackNavigation] = useState(false);
   const allowBrowserNavigationRef = useRef(false);
   const allowNextNavigationRef = useRef(false);
+  const { t } = useAdminLocale();
 
   function requestNavigation(href: string) {
     if (!hasUnsavedChanges) {
@@ -118,7 +122,7 @@ export default function AdminShell({ children }: AdminShellProps) {
             </button>
             <button
               aria-expanded={mobileMenuOpen}
-              aria-label={mobileMenuOpen ? "메뉴 닫기" : "메뉴 열기"}
+              aria-label={t(mobileMenuOpen ? "메뉴 닫기" : "메뉴 열기")}
               className="inline-flex h-10 w-10 items-center justify-center"
               onClick={() => setMobileMenuOpen((current) => !current)}
               type="button"
@@ -151,13 +155,16 @@ export default function AdminShell({ children }: AdminShellProps) {
                   onClick={() => requestNavigation(item.href)}
                   type="button"
                 >
-                  {item.label}
+                  {t(item.label)}
                 </button>
               ))}
             </div>
 
             {adminNavGroups.map((group) => (
               <div key={group.label} className="flex flex-col gap-[10px]">
+                <h2 className="m-0 type-body-sm font-semibold text-mute">
+                  {t(group.label)}
+                </h2>
                 <div className="flex flex-col gap-[10px]">
                   {group.items
                     .filter(
@@ -172,14 +179,14 @@ export default function AdminShell({ children }: AdminShellProps) {
                         onClick={() => requestNavigation(item.href)}
                         type="button"
                       >
-                        {item.label}
+                        {t(item.label)}
                       </button>
                     ))}
                 </div>
               </div>
             ))}
             <div className="mt-auto border-t border-border pt-5">
-              <ThemeSwitch className="w-full px-1" locale="ko" />
+              <AdminPreferences />
             </div>
           </nav>
         </div>
@@ -196,9 +203,9 @@ export default function AdminShell({ children }: AdminShellProps) {
           <div className="w-full max-w-[300px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-8" onClick={(event) => event.stopPropagation()}>
             <div className="flex flex-col items-center gap-5 text-center">
               <div className="flex flex-col items-center gap-2 text-center">
-                <h2 className="m-0 type-h3 text-fg">페이지를 벗어나시겠습니까?</h2>
+                <h2 className="m-0 type-h3 text-fg">{t("페이지를 벗어나시겠습니까?")}</h2>
                 <p className="m-0 whitespace-pre-line type-body-md text-mute">
-                  저장하지 않은 내용은 사라집니다.
+                  {t("저장하지 않은 내용은 사라집니다.")}
                 </p>
               </div>
               <ButtonGroup className="w-full flex-col justify-center sm:flex-row">
@@ -212,7 +219,7 @@ export default function AdminShell({ children }: AdminShellProps) {
                   style="round"
                   variant="outline"
                 >
-                  계속 작성
+                  {t("계속 작성")}
                 </Button>
                 <Button
                   arrow={false}
@@ -237,7 +244,7 @@ export default function AdminShell({ children }: AdminShellProps) {
                   style="round"
                   variant="secondary"
                 >
-                  나가기
+                  {t("나가기")}
                 </Button>
               </ButtonGroup>
             </div>
@@ -245,5 +252,13 @@ export default function AdminShell({ children }: AdminShellProps) {
         </div>
       ) : null}
     </AdminNavigationGuardContext.Provider>
+  );
+}
+
+export default function AdminShell({ children, initialLocale }: AdminShellProps) {
+  return (
+    <AdminLocaleProvider initialLocale={initialLocale}>
+      <AdminShellContent>{children}</AdminShellContent>
+    </AdminLocaleProvider>
   );
 }

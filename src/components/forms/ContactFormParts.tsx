@@ -143,11 +143,11 @@ export function ContactPrivacyNotice({
   return (
     <p className="m-0 type-body-md leading-5 text-fg">
       {privacyText}{" "}
-      <a className="text-brand transition-colors hover:text-fg" href={privacyTermsHref}>
+      <a className="text-brand decoration-1 underline-offset-4 hover:underline" href={privacyTermsHref}>
         {privacyTermsLabel}
       </a>{" "}
       &{" "}
-      <a className="text-brand transition-colors hover:text-fg" href={privacyPolicyHref}>
+      <a className="text-brand decoration-1 underline-offset-4 hover:underline" href={privacyPolicyHref}>
         {privacyPolicyLabel}
       </a>
       .

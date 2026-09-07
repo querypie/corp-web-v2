@@ -35,3 +35,12 @@ export function getLocalePath(locale: Locale, pathname = "/") {
     ? `/${locale}`
     : `/${locale}${pathWithoutLocale}`;
 }
+
+export function getLocaleSwitchPath(pathname: string, locale: Locale) {
+  const pathWithoutLocale = stripLocalePrefix(pathname);
+  const nextPathname = locale === "ja" && /^\/plans(?:\/|$)/.test(pathWithoutLocale)
+    ? "/"
+    : pathWithoutLocale;
+
+  return getLocalePath(locale, nextPathname);
+}

@@ -1,0 +1,50 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "aip-features",
+  "contentType": "content",
+  "dateIso": "2025-10-15",
+  "downloadCoverImageSrc": "/demo/aip-features/aip-use-case-thumb-11-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "aircraft-maintenance-ai-agent",
+  "imageSrc": "/demo/aip-features/aip-use-case-13.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 11,
+  "status": "published",
+  "storageId": "cnt_000080",
+  "summary": {
+    "en": "An AI agent that accelerates aircraft maintenance by turning logs, manuals, and sensor data into diagnostic insights and work orders—improving safety, uptime, and compliance.",
+    "ko": "로그, 매뉴얼 및 센서 데이터를 진단 인사이트와 작업 지시서로 전환하여 항공기 정비를 가속화하고 안전성, 가동 시간 및 규정 준수를 향상시키는 AI 에이전트입니다.",
+    "ja": "ログ、マニュアル、センサーデータを診断インサイトと作業指示書に変換することで航空機のメンテナンスを加速し、安全性、稼働時間、コンプライアンスを向上させる AI エージェント。"
+  },
+  "title": {
+    "en": "AIP Use Case: Aircraft Maintenance AI Agent",
+    "ko": "AIP 사용 사례: 항공기 정비 AI 에이전트",
+    "ja": "AIP ユースケース：航空機メンテナンス AI エージェント"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000080/en.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000080/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000080/ko.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000080/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000080/ja.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000080/ja.tiptap.json"
+    }
+  }
+}

@@ -42,7 +42,7 @@ export default function ContactUsPage(props: ContactUsPageProps) {
                   <p key={item.label} className="m-0">
                     <span className="text-fg">{item.label}:</span>{" "}
                     <a
-                      className="text-brand transition-colors hover:text-fg"
+                      className="text-brand decoration-1 underline-offset-4 hover:underline"
                       href={item.href}
                     >
                       {item.value}
@@ -55,7 +55,7 @@ export default function ContactUsPage(props: ContactUsPageProps) {
             <div className="flex flex-col gap-2">
               <p className="m-0 type-body-md text-mute">{supportLink.title}</p>
               <a
-                className="inline-flex self-start items-center gap-1.5 type-body-md text-brand transition-colors hover:text-fg"
+                className="inline-flex self-start items-center gap-1.5 type-body-md text-brand decoration-1 underline-offset-4 hover:underline"
                 href={supportLink.href}
                 rel="noreferrer noopener"
                 target="_blank"
