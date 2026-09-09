@@ -114,6 +114,34 @@ describe("AI 제품 상담", () => {
     expect(screen.getByRole("button", { name: aiChatCopy.ko.send })).toBeEnabled();
   });
 
+  it("Preview에서는 공개 근거를 받아 사내 LLM에 키 없이 직접 요청한다", async () => {
+    const prepared = {
+      transport: "browser", endpoint: "https://internal-llm.querypie.io/v1/chat/completions",
+      body: { model: "glm-5.3-flash", max_tokens: 4096, temperature: 0.2, response_format: { type: "json_object" }, messages: [{ role: "user", content: "AIP 소개" }] },
+      references: [{ id: "S1", ...reply.sources[0] }],
+    };
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify(prepared)));
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ choices: [{ finish_reason: "stop", message: { content: JSON.stringify({ answer: reply.answer, sourceIds: ["S1"], answered: true }) } }] })));
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 소개" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    expect(await screen.findByText(reply.answer)).toBeVisible();
+    const [endpoint, options] = vi.mocked(fetch).mock.calls[1];
+    expect(endpoint).toBe(prepared.endpoint);
+    expect(options?.headers).toEqual({ "Content-Type": "application/json" });
+    expect(options?.credentials).toBe("omit");
+    expect(screen.getByRole("link", { name: "AIP 공식 문서" })).toHaveAttribute("href", reply.sources[0].url);
+  });
+
+  it("허용하지 않은 브라우저 모델 주소로 요청을 전달하지 않는다", async () => {
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ transport: "browser", endpoint: "https://other.example" })));
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 소개" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByRole("alert");
+    expect(fetch).toHaveBeenCalledOnce();
+  });
+
   it("초기화 이후 늦게 도착한 응답이 새 대화에 들어오지 않는다", async () => {
     let resolve!: (value: ReturnType<typeof response>) => void;
     vi.mocked(fetch).mockReturnValueOnce(new Promise((done) => { resolve = done; }) as Promise<Response>);

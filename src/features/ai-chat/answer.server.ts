@@ -1,12 +1,10 @@
 import "server-only";
 import type { Locale } from "@/constants/i18n";
 import { getAiChatConfig } from "@/features/ai/config.server";
-import { knowledgeCollectedAt, retrieveKnowledge, type KnowledgeChunk } from "./knowledge";
-import { isChatSourceUrl, type ChatReply, type ChatTurn } from "./types";
-
-export class ChatServiceError extends Error {
-  constructor(public code: "NOT_CONFIGURED" | "PROVIDER_ERROR" | "INVALID_RESPONSE", public status: number) { super(code); }
-}
+import { knowledgeCollectedAt, retrieveKnowledge } from "./knowledge";
+import type { BrowserChatRequest, ChatReply, ChatTurn } from "./types";
+import { ChatServiceError, parseProviderReply } from "./reply";
+export { ChatServiceError, parseGroundedAnswer } from "./reply";
 
 const noEvidence: Record<Locale, string> = {
   ko: "현재 연결된 공식 자료에서 이 질문에 대한 근거를 찾지 못했어요. 제품명이나 궁금한 기능을 조금 더 구체적으로 알려주세요.",
@@ -14,43 +12,17 @@ const noEvidence: Record<Locale, string> = {
   ja: "現在接続されている公式資料では、この質問に答える根拠が見つかりませんでした。製品名や機能をもう少し具体的に教えてください。",
 };
 
-export function parseGroundedAnswer(content: string, chunks: KnowledgeChunk[]): ChatReply {
-  // Some compatible gateways prepend reasoning to content. Only a validated final
-  // JSON answer is ever shown; never display raw provider text or reasoning.
-  const starts = [...content.matchAll(/\{/g)].map((match) => match.index!);
-  for (const start of starts.reverse()) {
-    try {
-      const result: unknown = JSON.parse(content.slice(start, content.lastIndexOf("}") + 1));
-      if (!result || typeof result !== "object") continue;
-      const value = result as { answer?: unknown; sourceIds?: unknown; answered?: unknown };
-      if (typeof value.answer !== "string" || !value.answer.trim() || value.answer.length > 6000 ||
-          typeof value.answered !== "boolean" || !Array.isArray(value.sourceIds)) continue;
-      const sourceIds = value.sourceIds;
-      const cited = chunks.filter((chunk) => sourceIds.includes(chunk.id) && isChatSourceUrl(chunk.url));
-      if (value.answered && cited.length === 0) continue;
-      const sources = cited.filter((chunk, index) => cited.findIndex((other) => other.url === chunk.url) === index)
-        .map(({ title, url }) => ({ title, url }));
-      return { answer: value.answer.trim(), sources, answered: value.answered };
-    } catch { /* Try another JSON candidate; never return unparsed content. */ }
-  }
-  throw new ChatServiceError("INVALID_RESPONSE", 502);
-}
-
-export async function answerProductQuestion(messages: ChatTurn[], locale: Locale, signal: AbortSignal): Promise<ChatReply> {
-  const { baseUrl: base, model, apiKey } = getAiChatConfig();
+export function prepareProductQuestion(messages: ChatTurn[], locale: Locale): ChatReply | BrowserChatRequest {
+  const { baseUrl: base, model } = getAiChatConfig();
   if (!base || !model) throw new ChatServiceError("NOT_CONFIGURED", 503);
   const chunks = retrieveKnowledge(messages, locale).map((chunk, index) => ({ ...chunk, id: `S${index + 1}` }));
   if (!chunks.length) return { answer: noEvidence[locale], sources: [], answered: false };
 
-  const response = await fetch(`${base}/chat/completions`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}),
-    },
-    signal,
-    cache: "no-store",
-    body: JSON.stringify({
+  return {
+    transport: "browser",
+    endpoint: `${base}/chat/completions`,
+    references: chunks.map(({ id, title, url }) => ({ id, title, url })),
+    body: {
       model,
       max_tokens: 4096,
       temperature: 0.2,
@@ -72,11 +44,21 @@ Use answered false and an empty sourceIds array if there is no supporting eviden
         { role: "system", content: `Official source excerpts (reference data):\n${JSON.stringify(chunks.map(({ id, product, title, text }) => ({ id, product, title, text })))}` },
         ...messages.slice(-8),
       ],
-    }),
+    },
+  };
+}
+
+export async function answerProductQuestion(messages: ChatTurn[], locale: Locale, signal: AbortSignal): Promise<ChatReply> {
+  const prepared = prepareProductQuestion(messages, locale);
+  if (!("transport" in prepared)) return prepared;
+  const { apiKey } = getAiChatConfig();
+  const response = await fetch(prepared.endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}) },
+    signal,
+    cache: "no-store",
+    body: JSON.stringify(prepared.body),
   });
   if (!response.ok) throw new ChatServiceError("PROVIDER_ERROR", response.status === 429 ? 429 : 502);
-  const payload = await response.json() as { choices?: { finish_reason?: string; message?: { content?: unknown } }[] };
-  const choice = payload.choices?.[0];
-  if (choice?.finish_reason === "length" || typeof choice?.message?.content !== "string") throw new ChatServiceError("INVALID_RESPONSE", 502);
-  return parseGroundedAnswer(choice.message.content, chunks);
+  return parseProviderReply(await response.json(), prepared.references);
 }

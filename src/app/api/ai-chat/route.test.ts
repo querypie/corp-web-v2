@@ -3,19 +3,35 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 vi.mock("@/features/ai-chat/answer.server", () => ({
   answerProductQuestion: vi.fn(),
+  prepareProductQuestion: vi.fn(),
   ChatServiceError: class extends Error {},
 }));
-import { answerProductQuestion } from "@/features/ai-chat/answer.server";
+import { answerProductQuestion, prepareProductQuestion } from "@/features/ai-chat/answer.server";
 import { POST } from "./route";
 
 const payload = { locale: "ko", messages: [{ role: "user", content: "AIP 설명해줘" }] };
 const request = (body: unknown = payload, origin?: string) => new Request("http://localhost:3000/api/ai-chat", {
   method: "POST", headers: { "Content-Type": "application/json", ...(origin ? { Origin: origin } : {}) }, body: JSON.stringify(body),
 });
-beforeEach(() => { vi.stubEnv("AI_CHAT_ENABLED", "true"); vi.mocked(answerProductQuestion).mockReset(); });
+beforeEach(() => {
+  vi.stubEnv("AI_CHAT_ENABLED", "true");
+  vi.stubEnv("VERCEL_TARGET_ENV", undefined);
+  vi.mocked(answerProductQuestion).mockReset();
+  vi.mocked(prepareProductQuestion).mockReset();
+});
 afterEach(() => vi.unstubAllEnvs());
 
 describe("제품 상담 API", () => {
+  it("Preview에서는 Vercel에서 모델을 호출하지 않고 브라우저용 근거를 준비한다", async () => {
+    vi.stubEnv("VERCEL_TARGET_ENV", "preview");
+    vi.stubEnv("AI_CHAT_BASE_URL", undefined);
+    vi.stubEnv("AI_CHAT_API_KEY", "");
+    vi.mocked(prepareProductQuestion).mockReturnValue({ answer: "확인 가능한 근거가 없습니다.", sources: [], answered: false });
+    const result = await POST(request());
+    expect(result.status).toBe(200);
+    expect(prepareProductQuestion).toHaveBeenCalledOnce();
+    expect(answerProductQuestion).not.toHaveBeenCalled();
+  });
   it("명시적으로 활성화한 환경에서만 AI를 호출한다", async () => {
     vi.stubEnv("AI_CHAT_ENABLED", "false");
     expect((await POST(request())).status).toBe(503);

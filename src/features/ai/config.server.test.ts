@@ -1,8 +1,14 @@
 import { describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
-import { getAiChatConfig, getCmsTranslationConfig } from "./config.server";
+import { getAiChatConfig, getCmsTranslationConfig, useBrowserPreviewChat } from "./config.server";
 
 describe("Preview AI 기본 설정", () => {
+  it("브라우저 직접 호출은 Preview의 키 없는 사내 서버에만 허용한다", () => {
+    expect(useBrowserPreviewChat({ VERCEL_TARGET_ENV: "preview" })).toBe(true);
+    expect(useBrowserPreviewChat({ VERCEL_TARGET_ENV: "preview", AI_CHAT_API_KEY: "private-key" })).toBe(false);
+    expect(useBrowserPreviewChat({ VERCEL_TARGET_ENV: "preview", AI_CHAT_BASE_URL: "https://other.example/v1" })).toBe(false);
+    expect(useBrowserPreviewChat({ VERCEL_TARGET_ENV: "production", AI_CHAT_ENABLED: "true" })).toBe(false);
+  });
   it("Preview에서는 별도 AI 환경변수 없이 키 없는 사내 서버를 사용한다", () => {
     const env = { VERCEL_TARGET_ENV: "preview" };
     const config = { baseUrl: "https://internal-llm.querypie.io/v1", model: "glm-5.3-flash", apiKey: "" };

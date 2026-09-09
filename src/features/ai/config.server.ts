@@ -30,3 +30,9 @@ export function getAiChatConfig(env: AiEnvironment = process.env) {
 export function getCmsTranslationConfig(env: AiEnvironment = process.env) {
   return modelConfig(env, "CMS_TRANSLATION");
 }
+
+export function useBrowserPreviewChat(env: AiEnvironment = process.env) {
+  const config = getAiChatConfig(env);
+  return env.VERCEL_TARGET_ENV === "preview" && config.enabled && !config.apiKey &&
+    config.baseUrl === previewModel.baseUrl;
+}
