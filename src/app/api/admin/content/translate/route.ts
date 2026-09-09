@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { isLocale, type Locale } from "@/constants/i18n";
+import { getCmsTranslationConfig } from "@/features/ai/config.server";
 import {
   collectTranslatableTextRefs,
   localeDisplayNames,
@@ -477,7 +478,7 @@ async function callOpenAICompatibleTranslation(
             useResponseFormat,
           })),
           headers: {
-            Authorization: `Bearer ${token}`,
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
             "Content-Type": "application/json",
           },
           method: "POST",
@@ -541,6 +542,27 @@ async function callOpenAICompatibleTranslation(
       textCount: texts.length,
     },
     signal,
+  );
+}
+
+async function callCmsTranslation(texts: string[], locale: Locale, signal: AbortSignal) {
+  const { baseUrl, model, apiKey } = getCmsTranslationConfig();
+
+  if (!baseUrl || !model) {
+    throw Object.assign(new Error("CMS translation provider is not configured."), {
+      translationCode: "CONFIGURATION_ERROR" satisfies TranslationErrorCode,
+    });
+  }
+
+  return callOpenAICompatibleTranslation(
+    `${baseUrl}/chat/completions`,
+    apiKey,
+    model,
+    texts,
+    locale,
+    signal,
+    true,
+    "CMS-compatible",
   );
 }
 
@@ -759,6 +781,10 @@ async function translateTexts(texts: string[], locale: Locale, signal: AbortSign
   }
 
   const chunks = chunkTexts(texts);
+
+  if (getCmsTranslationConfig().baseUrl) {
+    return translateChunks(chunks, (chunk) => callCmsTranslation(chunk, locale, signal));
+  }
 
   if (process.env.ANTHROPIC_BASE_URL) {
     return translateChunks(chunks, (chunk) => callGlmTranslation(chunk, locale, signal));

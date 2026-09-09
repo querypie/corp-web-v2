@@ -8,9 +8,22 @@ describe("JapanAxContent", () => {
     const { container } = render(<JapanAxContent />);
 
     expect(screen.getByRole("heading", { name: "企業のAXを、難しく始める必要はありません。" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "会議そのものより、会議のための作業に時間を使っていませんか？" })).toBeInTheDocument();
+    const meetingHeading = screen.getByRole("heading", {
+      name: /会議そのものより、\s+会議のための作業に時間を使っていませんか？/,
+    });
+    expect(meetingHeading).toHaveClass("type-h2");
+    expect(meetingHeading).not.toHaveClass("type-h1");
+    expect(meetingHeading.closest("header")).toHaveClass("md:grid-cols-2");
+    expect(meetingHeading.parentElement).toHaveClass("flex", "items-start", "gap-4");
+    expect(meetingHeading.querySelectorAll("span.block")).toHaveLength(2);
+    const lingoIcon = screen.getByRole("img", { name: "Lingo" });
+    expect(lingoIcon).toHaveAttribute("src", expect.stringContaining("icon-lingo.png"));
+    expect(lingoIcon.parentElement).toHaveClass("home-feature-icon-surface", "bg-secondary");
     expect(screen.getByRole("heading", { name: "日常のAIをつなぎ、企業のAXへ拡張します。" })).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "企業が信頼できる、実績あるAI" })).toBeInTheDocument();
+    const trustedAiHeading = screen.getByRole("heading", { name: "企業が信頼できる、実績あるAI" });
+    expect(trustedAiHeading).toHaveClass("type-h2");
+    expect(trustedAiHeading).not.toHaveClass("type-h1");
+    expect(trustedAiHeading.closest("header")).toHaveClass("md:grid-cols-2");
     expect(
       screen.getByRole("img", { name: "会議から始める企業のAX活用イメージ" }).getAttribute("src"),
     ).toContain("ax-introduction.webp");
@@ -36,6 +49,13 @@ describe("JapanAxContent", () => {
       "ISO 27018",
       "ISMS-P",
     ]);
+
+    const meetingSection = screen
+      .getByRole("heading", {
+        name: /会議そのものより、\s+会議のための作業に時間を使っていませんか？/,
+      })
+      .closest("section");
+    expect(meetingSection).toContainElement(screen.getByTestId("japan-lingo-faq"));
   });
 
   it("프로젝트 공통 섹션 간격을 사용한다", () => {

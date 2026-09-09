@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { getLocaleSwitchPath, type Locale } from "@/constants/i18n";
 import Button from "@/components/ui/Button";
 import Select from "@/components/ui/Select";
+import { setLocalePreferenceCookie } from "@/features/routing/localePreference.client";
 
 const BANNER_COOKIE = "querypie_language_banner_dismissed";
 const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 730;
@@ -157,6 +158,7 @@ export default function LanguageSuggestionBanner({
       return;
     }
 
+    setLocalePreferenceCookie(locale);
     setDismissedCookie();
     setVisible(false);
     window.location.href = getLocaleHref(pathname, locale);

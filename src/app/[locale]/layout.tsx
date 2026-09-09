@@ -10,6 +10,7 @@ import GoogleAnalytics from "@/components/site/GoogleAnalytics";
 import UtmCapture from "@/components/site/UtmCapture";
 import CookieConsentBanner from "@/components/site/CookieConsentBanner";
 import PublicThemeSync from "@/components/site/PublicThemeSync";
+import AiChatWidget from "@/components/site/ai-chat/AiChatWidget";
 import { GOOGLE_ANALYTICS_ID } from "@/features/analytics/google";
 
 export function generateStaticParams() {
@@ -47,6 +48,7 @@ export default async function LocaleLayout({
       </main>
       <Footer className="mt-10 md:mt-20" legalLinks={shellCopy.footerLegalLinks} locale={locale} sections={shellCopy.footerSections} />
       <CookieConsentBanner locale={locale as Locale} />
+      <AiChatWidget locale={locale} />
     </div>
   );
 }

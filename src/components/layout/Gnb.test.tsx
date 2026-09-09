@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import Gnb from "./Gnb";
 
 const routerPush = vi.fn();
@@ -10,6 +10,11 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("Gnb", () => {
+  beforeEach(() => {
+    routerPush.mockClear();
+    document.cookie = "querypie_locale_preference=; max-age=0; path=/";
+  });
+
   it("상위 메뉴와 데모·자료 팝오버를 요청한 구조로 노출한다", () => {
     render(<Gnb locale="ko" items={["솔루션", "데모", "자료", "회사", "가격 · 플랜"]} />);
 
@@ -67,5 +72,14 @@ describe("Gnb", () => {
     expect(screen.queryByText("価格・プラン")).not.toBeInTheDocument();
     expect(screen.getAllByText("社内業務効率化｜AI Crew")).not.toHaveLength(0);
     expect(screen.getAllByText("自社サービスAI化｜AI Dashi")).not.toHaveLength(0);
+  });
+
+  it("사용자가 선택한 언어를 쿠키에 저장한다", () => {
+    render(<Gnb locale="en" />);
+
+    fireEvent.click(screen.getAllByRole("link", { name: "日本語" })[0]);
+
+    expect(document.cookie).toContain("querypie_locale_preference=ja");
+    expect(routerPush).toHaveBeenCalledWith("/ja", { scroll: false });
   });
 });

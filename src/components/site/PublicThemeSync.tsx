@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect } from "react";
+import { defaultLocale, isLocale } from "@/constants/i18n";
 import { getPublicTheme } from "@/features/theme/theme";
 
 type PublicThemeSyncProps = {
@@ -12,6 +13,7 @@ export default function PublicThemeSync({ locale }: PublicThemeSyncProps) {
     const theme = getPublicTheme(locale);
     const root = document.documentElement;
 
+    root.lang = isLocale(locale) ? locale : defaultLocale;
     root.dataset.theme = theme;
     root.style.colorScheme = theme;
     document.querySelector('meta[name="theme-color"]')?.setAttribute(

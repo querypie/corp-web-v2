@@ -14,6 +14,7 @@ import {
   getSolutionsSubItems,
 } from "@/constants/navigation";
 import { getLocalePath, getLocaleSwitchPath, type Locale } from "@/constants/i18n";
+import { setLocalePreferenceCookie } from "@/features/routing/localePreference.client";
 
 type GnbProps = {
   actionLabel?: string;
@@ -185,11 +186,11 @@ export default function Gnb({
 
   /* 언어 드롭다운은 현재 페이지를 유지한 채 locale만 변경 */
   const localeSubItems = [
-    { label: "English", href: getLocaleHref(pathname, "en", currentSearch) },
-    { label: "日本語", href: getLocaleHref(pathname, "ja", currentSearch) },
-    { label: "한국어", href: getLocaleHref(pathname, "ko", currentSearch) },
+    { label: "English", href: getLocaleHref(pathname, "en", currentSearch), locale: "en" as const },
+    { label: "日本語", href: getLocaleHref(pathname, "ja", currentSearch), locale: "ja" as const },
+    { label: "한국어", href: getLocaleHref(pathname, "ko", currentSearch), locale: "ko" as const },
   ];
-  const handleLocaleClick = (event: ReactMouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleLocaleClick = (event: ReactMouseEvent<HTMLAnchorElement>, href: string, nextLocale: Locale) => {
     if (
       event.defaultPrevented ||
       event.button !== 0 ||
@@ -202,6 +203,7 @@ export default function Gnb({
     }
 
     event.preventDefault();
+    setLocalePreferenceCookie(nextLocale);
     setMobileLocaleOpen(false);
     setDesktopPopoverOpen(null);
     router.push(href, { scroll: false });
@@ -360,7 +362,7 @@ export default function Gnb({
                       key={sub.label}
                       className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
                       href={sub.href}
-                      onClick={(event) => handleLocaleClick(event, sub.href)}
+                      onClick={(event) => handleLocaleClick(event, sub.href, sub.locale)}
                       onPointerDown={handleDesktopPopoverItemPointerDown}
                     >
                       {sub.label}
@@ -399,7 +401,7 @@ export default function Gnb({
                       key={sub.label}
                       className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
                       href={sub.href}
-                      onClick={(event) => handleLocaleClick(event, sub.href)}
+                      onClick={(event) => handleLocaleClick(event, sub.href, sub.locale)}
                     >
                       {sub.label}
                     </a>

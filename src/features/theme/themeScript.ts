@@ -16,12 +16,20 @@ export const themeInitializationScript = `
         ? "light"
         : "dark";
     const root = document.documentElement;
+    const documentLocale = locale === "en" || locale === "ko" || locale === "ja"
+      ? locale
+      : "en";
+    root.lang = documentLocale;
     root.dataset.theme = theme;
     root.style.colorScheme = theme;
     const themeColor = document.querySelector('meta[name="theme-color"]');
     themeColor?.setAttribute("content", theme === "dark" ? "#0F0F0F" : "#FFFFFF");
   } catch {
+    const locale = window.location.pathname.split("/")[1];
     const fallbackTheme = window.location.pathname.split("/")[1] === "ja" ? "light" : "dark";
+    document.documentElement.lang = locale === "en" || locale === "ko" || locale === "ja"
+      ? locale
+      : "en";
     document.documentElement.dataset.theme = fallbackTheme;
     document.documentElement.style.colorScheme = fallbackTheme;
   }

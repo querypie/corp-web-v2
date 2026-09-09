@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { ReactNode } from "react";
 import { CertificationCard } from "@/components/pages/company/CertificationsPage";
 import Button from "@/components/ui/Button";
 import ButtonGroup from "@/components/ui/ButtonGroup";
@@ -7,6 +8,8 @@ import { getLocalePath } from "@/constants/i18n";
 import { pageSectionGapClassName } from "@/constants/layout";
 import { getCertificationsPageCopy } from "@/copy/company";
 import { japanHomeAxCopy } from "@/copy/homeJapan";
+import JapanLingoFaq from "./JapanLingoFaq";
+import { JapanLingoProductIcon } from "./JapanHeroProductIcons";
 
 const japanCertificationItems = getCertificationsPageCopy("ja").items.slice(0, 10);
 
@@ -24,6 +27,30 @@ function SectionHeading({
         {description.map((line) => (
           <span className="block" key={line}>{line}</span>
         ))}
+      </p>
+    </header>
+  );
+}
+
+function SplitSectionHeading({
+  description,
+  icon,
+  title,
+}: {
+  description: readonly string[];
+  icon?: ReactNode;
+  title: string | readonly string[];
+}) {
+  return (
+    <header className="grid gap-4 sm:gap-5 md:grid-cols-2 md:gap-[30px]">
+      <div className={`flex items-start ${icon ? "gap-4" : ""}`}>
+        {icon}
+        <h2 className="m-0 text-pretty type-h2 leading-7 tracking-[-0.3px] text-fg">
+          {typeof title === "string" ? title : title.map((line) => <span className="block" key={line}>{line}</span>)}
+        </h2>
+      </div>
+      <p className="m-0 max-w-[720px] text-pretty type-body-lg leading-6 text-mute">
+        {description.join(" ")}
       </p>
     </header>
   );
@@ -86,11 +113,13 @@ export default function JapanAxContent() {
       </section>
 
       <section className="mx-auto flex w-full max-w-[1200px] flex-col gap-10">
-        <SectionHeading
+        <SplitSectionHeading
           description={japanHomeAxCopy.meeting.description}
+          icon={<JapanLingoProductIcon />}
           title={japanHomeAxCopy.meeting.title}
         />
         <CapabilityGrid emphasizeIcons />
+        <JapanLingoFaq />
       </section>
 
       <section className="-mx-5 bg-bg-deep px-5 py-20 md:-mx-10 md:px-10 md:py-24">
@@ -111,7 +140,7 @@ export default function JapanAxContent() {
       </section>
 
       <section className="mx-auto flex w-full max-w-[1200px] flex-col gap-10">
-        <SectionHeading
+        <SplitSectionHeading
           description={japanHomeAxCopy.trustedAi.description}
           title={japanHomeAxCopy.trustedAi.title}
         />
