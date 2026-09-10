@@ -1,0 +1,50 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "aip-features",
+  "contentType": "content",
+  "dateIso": "2025-11-11",
+  "downloadCoverImageSrc": "/demo/aip-features/aip-use-case-thumb-20-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "investment-analyst-ai-agent",
+  "imageSrc": "/demo/aip-features/aip-use-case-3.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000072",
+  "summary": {
+    "en": "An AI agent that accelerates investment research—screening, modeling, and coverage updates—by turning natural language into analyst-grade insights and artifacts.",
+    "ko": "자연어를 분석가 수준의 인사이트와 산출물로 변환하여 스크리닝, 모델링 및 커버리지 업데이트를 가속화하는 투자 리서치 AI 에이전트입니다.",
+    "ja": "自然言語をアナリストレベルのインサイトと成果物に変換することで、スクリーニング、モデリング、カバレッジ更新などの投資調査を加速するAIエージェント。"
+  },
+  "title": {
+    "en": "AIP Use Case: Investment Analyst AI Agent",
+    "ko": "AIP 사용 사례: 투자 분석가 AI 에이전트",
+    "ja": "AIP ユースケース: インベストメント・アナリスト AI エージェント"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000072/en.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000072/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000072/ko.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000072/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000072/ja.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000072/ja.tiptap.json"
+    }
+  }
+}

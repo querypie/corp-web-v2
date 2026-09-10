@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import Button from "@/components/ui/Button";
 import AipMockupShell from "@/components/mockups/aip/AipMockupShell";
 
@@ -14,6 +15,7 @@ type HeroProps = {
   ctaLabel: string;
   description: string;
   heroHeading: string;
+  headingAccessory?: ReactNode;
   imageAlt: string;
   locale: string;
 };
@@ -22,6 +24,7 @@ export default function Hero({
   ctaLabel,
   description,
   heroHeading,
+  headingAccessory,
   imageAlt,
   locale,
 }: HeroProps) {
@@ -31,9 +34,12 @@ export default function Hero({
         <div className="flex w-full max-w-[1200px] flex-col items-start gap-6 sm:gap-8 md:gap-10 xl:gap-12">
           <div className="w-full">
             <div className="flex w-full max-w-[1200px] flex-col items-start gap-5 sm:gap-6">
-              <div className="w-full max-w-[720px]">
-                <h2 className="m-0 type-h2 text-fg">{heroHeading}</h2>
-                <p className="m-0 mt-2.5 whitespace-pre-line type-body-lg text-mute">{description}</p>
+              <div className="flex w-full items-start gap-15">
+                <div className="min-w-0 w-full lg:w-fit lg:max-w-[720px] lg:flex-none">
+                  <h2 className="m-0 type-h2 text-fg">{heroHeading}</h2>
+                  <p className="m-0 mt-2.5 whitespace-pre-line type-body-lg text-mute">{description}</p>
+                </div>
+                {headingAccessory}
               </div>
 
               <a href="https://app.querypie.com/" rel="noreferrer noopener" target="_blank">

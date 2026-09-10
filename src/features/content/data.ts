@@ -521,7 +521,7 @@ export function getAdminCreateHref(
     return getAdminDetailHref("news", "news", "new");
   }
 
-  const defaultCategorySlug = section === "demo" ? "use-cases" : "blogs";
+  const defaultCategorySlug = section === "demo" ? "aip-features" : "blogs";
   const targetCategorySlug = categorySlug === "all" ? defaultCategorySlug : categorySlug;
 
   return getAdminDetailHref(section, targetCategorySlug, "new");

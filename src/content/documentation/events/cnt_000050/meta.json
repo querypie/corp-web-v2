@@ -26,7 +26,7 @@
   "imageSrc": "/documentation/events/3dk-ep3-ko.webp",
   "relatedIds": [],
   "section": "documentation",
-  "sortOrder": 14,
+  "sortOrder": 21,
   "status": "published",
   "storageId": "cnt_000050",
   "summary": {
@@ -41,8 +41,7 @@
   },
   "visibleLocales": [
     "en",
-    "ko",
-    "ja"
+    "ko"
   ],
   "locales": {
     "en": {

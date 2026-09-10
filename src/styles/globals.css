@@ -41,6 +41,7 @@
   --color-bg-deep: #f5f5f4;
   --color-bg-tab-group: #f7f7f7;
   --color-bg-hover: #ebeaea;
+  --color-admin-nav-active: #e2e1df;
   --color-bg: #FFFFFF;
   --color-bg-modal: #FFFFFF;
   --color-overlay-rgb: 15 15 15;
@@ -102,6 +103,7 @@
   --color-bg-deep: #1D1D1D;
   --color-bg-tab-group: #1A1A1A;
   --color-bg-hover: #2A2A2A;
+  --color-admin-nav-active: #2E2E2E;
   --color-bg: #0F0F0F;
   --color-bg-modal: #0F0F0F;
   --color-overlay-rgb: 8 8 8;

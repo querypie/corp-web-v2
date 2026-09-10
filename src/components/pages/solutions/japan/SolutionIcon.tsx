@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-type IconName = "analysis" | "brain" | "calendar" | "check" | "connect" | "document" | "folder" | "knowledge" | "layers" | "message" | "people" | "search" | "shield" | "spark";
+type IconName = "analysis" | "brain" | "calendar" | "check" | "connect" | "document" | "folder" | "headphones" | "knowledge" | "languages" | "layers" | "message" | "people" | "search" | "shield" | "spark";
 
 type Props = {
   className?: string;
@@ -15,7 +15,9 @@ const paths: Record<IconName, ReactNode> = {
   connect: <><path d="M8 12h8M12 8v8" /><circle cx="5" cy="12" r="3" /><circle cx="19" cy="12" r="3" /></>,
   document: <><path d="M6 3h8l4 4v14H6z" /><path d="M14 3v5h5M9 12h6M9 16h6" /></>,
   folder: <><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z" /><path d="M8 10v4M12 10v2M16 10v6" /></>,
+  headphones: <><path d="M4 14a8 8 0 0 1 16 0v5a2 2 0 0 1-2 2h-3v-8h5M4 13h5v8H6a2 2 0 0 1-2-2v-5Z" /></>,
   knowledge: <><path d="M4 9V5a1 1 0 0 1 1-1h4m6 0h4a1 1 0 0 1 1 1v4M4 15v4a1 1 0 0 0 1 1h4m6 0h4a1 1 0 0 0 1-1v-4" /><circle cx="11" cy="11" r="3.5" /><path d="m13.5 13.5 3 3" /></>,
+  languages: <><path d="m5 8 6 6M4 14l6-6 2-3M2 5h12M7 2h1M22 22l-5-10-5 10M14 18h6" /></>,
   layers: <><path d="m12 3 9 5-9 5-9-5z" /><path d="m3 12 9 5 9-5M3 16l9 5 9-5" /></>,
   message: <><path d="M22 17a2 2 0 0 1-2 2H6.8a2 2 0 0 0-1.4.6l-2.2 2.2A.7.7 0 0 1 2 21.3V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2Z" /><path d="M7 7h10M7 11h10M7 15h6" /></>,
   people: <><circle cx="9" cy="8" r="3" /><path d="M3 20c0-4 2-7 6-7s6 3 6 7" /><path d="M16 5a3 3 0 0 1 0 6M18 14c2 .8 3 2.8 3 6" /></>,

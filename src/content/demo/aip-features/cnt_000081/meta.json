@@ -1,0 +1,50 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "aip-features",
+  "contentType": "content",
+  "dateIso": "2025-10-14",
+  "downloadCoverImageSrc": "/demo/aip-features/aip-use-case-thumb-10-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "dev-insight-ai-agent",
+  "imageSrc": "/demo/aip-features/aip-use-case-15.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 12,
+  "status": "published",
+  "storageId": "cnt_000081",
+  "summary": {
+    "en": "An AI agent that turns engineering exhaust—code, PRs, issues, builds, and incidents—into actionable insights and summaries through natural language.",
+    "ko": "코드, PR, 이슈, 빌드 및 인시던트와 같은 엔지니어링 부산물을 자연어를 통해 실행 가능한 인사이트와 요약으로 변환하는 AI 에이전트입니다.",
+    "ja": "コード、PR、課題、ビルド、インシデントといったエンジニアリングの副産物を、自然言語を通じて実行可能なインサイトと要約に変換するAIエージェント。"
+  },
+  "title": {
+    "en": "AIP Use Case: Development Insight AI Agent",
+    "ko": "AIP 사용 사례: Development Insight AI Agent",
+    "ja": "AIPユースケース：Development Insight AI Agent"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000081/en.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000081/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000081/ko.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000081/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000081/ja.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000081/ja.tiptap.json"
+    }
+  }
+}

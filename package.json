@@ -8,6 +8,7 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "audit:public-assets": "node scripts/find-unused-public-assets.mjs",
+    "chat:collect-knowledge": "node scripts/ai-chat/collect-test-knowledge.mjs",
     "test": "vitest",
     "test:run": "vitest run"
   },

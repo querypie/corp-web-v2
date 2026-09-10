@@ -14,6 +14,7 @@ import TiptapEditor from "@/components/content/TiptapEditor";
 import Tooltip from "@/components/ui/Tooltip";
 import { PreviewModal } from "./AdminManagedContentListPage";
 import { useAdminNavigationGuard } from "../../layout/admin/AdminNavigationGuard";
+import { useAdminLocale } from "@/components/layout/admin/AdminLocaleProvider";
 import {
   upsertManagedContent,
   useManagedContents,
@@ -271,26 +272,28 @@ function ConfirmDialog({
   onConfirm: () => void;
   title: string;
 }) {
+  const { t } = useAdminLocale();
+
   return (
     /* 취소/검증 경고에 공통으로 쓰는 확인 모달 */
     <div className={cx("fixed inset-0 z-50 flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5", className)} onClick={onCancel}>
       <div className="w-full max-w-[380px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-6 py-8" onClick={(event) => event.stopPropagation()}>
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="flex flex-col items-center gap-2 text-center">
-            <h2 className="m-0 type-h3 text-fg">{title}</h2>
-            <p className="m-0 max-w-[320px] whitespace-pre-line type-body-md leading-7 text-mute">{description}</p>
+            <h2 className="m-0 type-h3 text-fg">{t(title)}</h2>
+            <p className="m-0 max-w-[320px] whitespace-pre-line type-body-md leading-7 text-mute">{t(description)}</p>
             {highlightedLines?.length ? (
               <div className="flex flex-col items-center gap-1 text-center">
                 {highlightedLines.map((line) => (
                   <p key={line} className="m-0 type-body-md text-fg">
-                    {line}
+                    {t(line)}
                   </p>
                 ))}
               </div>
             ) : null}
             {detail ? (
               <div className="w-full max-w-[320px] rounded-box border border-border bg-bg-content p-3 text-left">
-                <p className="m-0 mb-1 type-caption text-mute">진단 정보</p>
+                <p className="m-0 mb-1 type-caption text-mute">{t("진단 정보")}</p>
                 <pre className="m-0 max-h-[132px] overflow-auto whitespace-pre-wrap break-words font-mono text-[11px] leading-5 text-mute">
                   {detail}
                 </pre>
@@ -300,11 +303,11 @@ function ConfirmDialog({
           <ButtonGroup className="w-full flex-col justify-center sm:w-auto sm:flex-row">
             {hideCancel ? null : (
               <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
-                {cancelLabel}
+                {t(cancelLabel)}
               </Button>
             )}
             <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onConfirm} style="round" variant="secondary">
-              {confirmLabel}
+              {t(confirmLabel)}
             </Button>
           </ButtonGroup>
         </div>
@@ -328,6 +331,7 @@ function TranslationProgressDialog({
   targetLocales?: Locale[];
   onCancel?: () => void;
 }) {
+  const { locale: adminLocale, t } = useAdminLocale();
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
   const targetLocales = completedLocales ?? requestedTargetLocales ?? (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
   const isSuccess = status === "success";
@@ -380,20 +384,24 @@ function TranslationProgressDialog({
             )}
           </div>
           <div className="flex flex-col gap-2">
-            <h2 className="m-0 type-h3 text-fg">{isSuccess ? "번역 완료" : "번역 중"}</h2>
+            <h2 className="m-0 type-h3 text-fg">{t(isSuccess ? "번역 완료" : "번역 중")}</h2>
             <p className="m-0 type-body-md text-mute">
               {isSuccess
-                ? `${targetLocales.map((locale) => localeDisplayNames[locale]).join(", ")} 내용이 입력되었습니다.`
-                : `${targetLocales.map((locale) => localeDisplayNames[locale]).join(", ")}를 작성하고 있습니다.`}
+                ? adminLocale === "ja"
+                  ? `${targetLocales.map((locale) => localeDisplayNames[locale]).join("、")}の内容を入力しました。`
+                  : `${targetLocales.map((locale) => localeDisplayNames[locale]).join(", ")} 내용이 입력되었습니다.`
+                : adminLocale === "ja"
+                  ? `${targetLocales.map((locale) => localeDisplayNames[locale]).join("、")}を翻訳しています。`
+                  : `${targetLocales.map((locale) => localeDisplayNames[locale]).join(", ")}를 작성하고 있습니다.`}
             </p>
           </div>
           <div className="flex w-full flex-col gap-3">
             <div className="flex items-center justify-between type-body-sm">
-              <span className="text-mute">{progressLabel}</span>
+              <span className="text-mute">{t(progressLabel)}</span>
               <span className="text-fg">{progress}%</span>
             </div>
             <div
-              aria-label="번역 진행률"
+              aria-label={t("번역 진행률")}
               aria-valuemax={100}
               aria-valuemin={0}
               aria-valuenow={progress}
@@ -406,16 +414,16 @@ function TranslationProgressDialog({
               />
             </div>
             <div className="flex items-center justify-center type-body-sm text-mute">
-              <span>{isSuccess ? "번역된 제목이 있는 언어는 노출 탭에 체크되었습니다." : `경과 ${elapsedSeconds}초`}</span>
+              <span>{isSuccess ? t("번역된 제목이 있는 언어는 노출 탭에 체크되었습니다.") : adminLocale === "ja" ? `経過 ${elapsedSeconds}秒` : `경과 ${elapsedSeconds}초`}</span>
             </div>
           </div>
           {isSuccess ? (
             <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onConfirm} style="round" variant="secondary">
-              확인
+              {t("확인")}
             </Button>
           ) : (
             <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
-              취소
+              {t("취소")}
             </Button>
           )}
         </div>
@@ -441,6 +449,7 @@ function TranslationSourceDialog({
   sourceLocales: Locale[];
   targetLocale: Locale;
 }) {
+  const { t } = useAdminLocale();
   const targetLocales = (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
 
   return (
@@ -448,16 +457,14 @@ function TranslationSourceDialog({
       <div className="w-full max-w-[420px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-6 py-8" onClick={(event) => event.stopPropagation()}>
         <div className="flex flex-col gap-5">
           <div className="flex flex-col items-center gap-2 text-center">
-            <h2 className="m-0 type-h3 text-fg">번역 언어 선택</h2>
+            <h2 className="m-0 type-h3 text-fg">{t("번역 언어 선택")}</h2>
             <p className="m-0 max-w-[340px] whitespace-pre-line type-body-md leading-7 text-mute">
-              기준 언어를 타겟 언어로 번역합니다.
-              {"\n"}타겟 언어의 기존 내용은 대체됩니다.
-              {"\n"}실행 전 저장을 권장합니다.
+              {t("기준 언어를 타겟 언어로 번역합니다.\n타겟 언어의 기존 내용은 대체됩니다.\n실행 전 저장을 권장합니다.")}
             </p>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             <label className="flex flex-col gap-2 type-body-md text-fg">
-              <span>기준</span>
+              <span>{t("기준")}</span>
               <Select
                 onChange={(event) => onSourceLocaleChange(event.target.value as Locale)}
                 options={sourceLocales.map((locale) => ({
@@ -468,7 +475,7 @@ function TranslationSourceDialog({
               />
             </label>
             <label className="flex flex-col gap-2 type-body-md text-fg">
-              <span>타겟</span>
+              <span>{t("타겟")}</span>
               <Select
                 onChange={(event) => onTargetLocaleChange(event.target.value as Locale)}
                 options={targetLocales.map((locale) => ({
@@ -481,10 +488,10 @@ function TranslationSourceDialog({
           </div>
           <ButtonGroup className="w-full flex-col justify-center sm:flex-row">
             <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onCancel} style="round" variant="outline">
-              취소
+              {t("취소")}
             </Button>
             <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={onConfirm} style="round" variant="secondary">
-              번역하기
+              {t("번역하기")}
             </Button>
           </ButtonGroup>
         </div>
@@ -504,10 +511,12 @@ function TextField({
   placeholder?: string;
   value: string;
 }) {
+  const { t } = useAdminLocale();
+
   return (
     /* 단일 줄 텍스트 입력 필드 */
     <div className="flex w-full flex-col gap-[10px]">
-      <label className="type-body-md text-fg">{label}</label>
+      <label className="type-body-md text-fg">{t(label)}</label>
       <Input
         className="w-full"
         onChange={(event) => onChange(event.target.value)}
@@ -539,12 +548,14 @@ function TextAreaField({
   rowsClassName?: string;
   value: string;
 }) {
+  const { t } = useAdminLocale();
+
   return (
     /* 마크다운 본문 입력 영역 */
     <div className={cx("flex w-full flex-col gap-[10px]", containerClassName)}>
       <div className="flex items-end justify-between gap-4">
-        <label className="type-body-md text-fg">{label}</label>
-        {helperText ? <span className="type-body-sm text-mute">{helperText}</span> : null}
+        <label className="type-body-md text-fg">{t(label)}</label>
+        {helperText ? <span className="type-body-sm text-mute">{t(helperText)}</span> : null}
       </div>
       <div className={cx("relative", textareaWrapperClassName)}>
         <Textarea
@@ -565,9 +576,11 @@ function InlineField({
   children: React.ReactNode;
   label: React.ReactNode;
 }) {
+  const { t } = useAdminLocale();
+
   return (
-    <div className="grid items-center gap-2 md:grid-cols-[60px_minmax(0,1fr)]">
-      <label className="type-body-md text-fg">{label}</label>
+    <div className="grid items-center gap-3 md:grid-cols-[88px_minmax(0,1fr)]">
+      <label className="whitespace-nowrap type-body-md text-fg">{typeof label === "string" ? t(label) : label}</label>
       {children}
     </div>
   );
@@ -767,6 +780,7 @@ export default function AdminManagedContentDetailPage({
   section,
 }: Props) {
   const router = useRouter();
+  const { locale: adminLocale, t } = useAdminLocale();
   const { allowNextNavigation, setHasUnsavedChanges } = useAdminNavigationGuard();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const pdfInputRef = useRef<HTMLInputElement | null>(null);
@@ -969,6 +983,14 @@ export default function AdminManagedContentDetailPage({
     setForm((current) => {
       if (checked && !hasLocaleVisibleTitle(current, locale)) {
         return normalizeVisibleLocalesByTitle(current);
+      }
+
+      if (
+        !checked &&
+        current.visibleLocales.includes(locale) &&
+        current.visibleLocales.length <= 1
+      ) {
+        return current;
       }
 
       return {
@@ -1964,8 +1986,8 @@ export default function AdminManagedContentDetailPage({
               <Select
                 onChange={(event) => handleContentTypeChange(event.target.value as ManagedContentType)}
                 options={[
-                  { label: "컨텐츠(기본)", value: "content" },
-                  { label: "아웃링크", value: "outlink" },
+                  { label: t("컨텐츠(기본)"), value: "content" },
+                  { label: t("아웃링크"), value: "outlink" },
                 ]}
                 value={form.contentType}
               />
@@ -1974,7 +1996,7 @@ export default function AdminManagedContentDetailPage({
               <div className={TOOLBAR_GATING_PICKER_CLASS_NAME}>
                 <Select
                   onChange={(event) => updateForm("gatingLevel", event.target.value as ContentGatingLevel)}
-                  options={CONTENT_GATING_OPTIONS}
+                  options={CONTENT_GATING_OPTIONS.map((option) => ({ ...option, label: t(option.label) }))}
                   value={form.gatingLevel}
                 />
               </div>
@@ -1983,7 +2005,7 @@ export default function AdminManagedContentDetailPage({
               <div className={TOOLBAR_PDF_PICKER_CLASS_NAME}>
                 <Select
                   onChange={(event) => handlePdfButtonModeChange(event.target.value as DownloadPdfMode)}
-                  options={PDF_BUTTON_OPTIONS}
+                  options={PDF_BUTTON_OPTIONS.map((option) => ({ ...option, label: t(option.label) }))}
                   value={pdfButtonMode}
                 />
               </div>
@@ -1993,6 +2015,8 @@ export default function AdminManagedContentDetailPage({
             <TabGroup className="shrink-0 self-start">
               {(["en", "ko", "ja"] as const).map((locale) => {
                 const canToggleLocale = hasLocaleVisibleTitle(form, locale);
+                const isVisibleLocale = form.visibleLocales.includes(locale);
+                const isLastVisibleLocale = isVisibleLocale && form.visibleLocales.length === 1;
 
                 return (
                   <Tab
@@ -2004,19 +2028,28 @@ export default function AdminManagedContentDetailPage({
                     <span>{locale.toUpperCase()}</span>
                     <Tooltip
                       content={
-                        canToggleLocale
-                          ? "해당 언어를 노출하려면 체크하세요."
-                          : "해당 탭에 내용을 입력해야 노출할 수 있습니다."
+                        t(!canToggleLocale
+                          ? "해당 탭에 내용을 입력해야 노출할 수 있습니다."
+                          : isLastVisibleLocale
+                            ? "최소 1개 언어는 노출해야 합니다."
+                            : "해당 언어의 노출 여부를 선택하세요.")
                       }
                       placement="bottom"
                     >
                       <input
+                        aria-disabled={!canToggleLocale || isLastVisibleLocale}
                         aria-label={`${locale.toUpperCase()} 노출`}
-                        checked={form.visibleLocales.includes(locale)}
+                        checked={isVisibleLocale}
                         className="ml-1 h-3.5 w-3.5 shrink-0 self-center disabled:opacity-40"
                         disabled={!canToggleLocale}
                         onChange={(event) => toggleVisibleLocale(locale, event.target.checked)}
-                        onClick={(event) => event.stopPropagation()}
+                        onClick={(event) => {
+                          event.stopPropagation();
+
+                          if (isLastVisibleLocale) {
+                            event.preventDefault();
+                          }
+                        }}
                         type="checkbox"
                       />
                     </Tooltip>
@@ -2033,10 +2066,10 @@ export default function AdminManagedContentDetailPage({
                 style="round"
                 variant="outline"
               >
-                번역
+                {t("번역")}
               </Button>
               <Button arrow={false} className="shrink-0 justify-center whitespace-nowrap" onClick={() => setPreviewOpen(true)} style="round" variant="outline">
-                미리보기
+                {t("미리보기")}
               </Button>
               <Button
                 arrow={false}
@@ -2053,7 +2086,7 @@ export default function AdminManagedContentDetailPage({
                 style="round"
                 variant="outline"
               >
-                취소
+                {t("취소")}
               </Button>
               <Button
                 arrow={false}
@@ -2063,7 +2096,7 @@ export default function AdminManagedContentDetailPage({
                 style="round"
                 variant="primary"
               >
-                {isSaving ? <LoadingText text="저장 중..." tone="primary" /> : "저장"}
+                {isSaving ? <LoadingText text={t("저장 중...")} tone="primary" /> : t("저장")}
               </Button>
             </ButtonGroup>
           </div>
@@ -2107,7 +2140,7 @@ export default function AdminManagedContentDetailPage({
               <InlineField label="형식">
                 <Select
                   onChange={(event) => updateForm("authorName", event.target.value as NewsFormat)}
-                  options={getNewsFormatOptions(activeLocale)}
+                  options={getNewsFormatOptions(adminLocale)}
                   value={getNewsFormatLabel(form)}
                 />
               </InlineField>
@@ -2141,11 +2174,11 @@ export default function AdminManagedContentDetailPage({
                       onClick={clearDate}
                       type="button"
                     >
-                      삭제
+                      {t("삭제")}
                     </button>
                   ) : null}
                 </div>
-                <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={handleDateButtonClick} style="round" variant="outline">선택</Button>
+                <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={handleDateButtonClick} style="round" variant="outline">{t("선택")}</Button>
                 <input className="sr-only" onChange={(event) => updateForm("dateIso", event.target.value)} ref={dateInputRef} type="date" value={form.dateIso} />
               </div>
             </InlineField>
@@ -2165,11 +2198,11 @@ export default function AdminManagedContentDetailPage({
                         onClick={clearPdf}
                         type="button"
                       >
-                        삭제
+                        {t("삭제")}
                       </button>
                     ) : null}
                   </div>
-                  <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => pdfInputRef.current?.click()} style="round" variant="outline">추가</Button>
+                  <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => pdfInputRef.current?.click()} style="round" variant="outline">{t("추가")}</Button>
                   <input accept="application/pdf" className="sr-only" onChange={handlePdfChange} ref={pdfInputRef} type="file" />
                 </div>
               </InlineField>
@@ -2199,7 +2232,7 @@ export default function AdminManagedContentDetailPage({
                               onClick={() => clearLocalizedPdf(locale)}
                               type="button"
                             >
-                              삭제
+                              {t("삭제")}
                             </button>
                           ) : null}
                         </div>
@@ -2210,7 +2243,7 @@ export default function AdminManagedContentDetailPage({
                           style="round"
                           variant="outline"
                         >
-                          추가
+                          {t("추가")}
                         </Button>
                         <input
                           accept="application/pdf"
@@ -2251,11 +2284,11 @@ export default function AdminManagedContentDetailPage({
                         onClick={clearThumbnail}
                         type="button"
                       >
-                        삭제
+                        {t("삭제")}
                       </button>
                     ) : null}
                   </div>
-                  <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} style="round" variant="outline">추가</Button>
+                  <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} style="round" variant="outline">{t("추가")}</Button>
                   <label className="flex items-center gap-2 type-body-sm text-mute lg:ml-1">
                     <input
                       checked={form.hideHeroImage}
@@ -2263,7 +2296,7 @@ export default function AdminManagedContentDetailPage({
                       onChange={(event) => updateForm("hideHeroImage", event.target.checked)}
                       type="checkbox"
                     />
-                    <span>본문 노출 제외</span>
+                    <span>{t("본문 노출 제외")}</span>
                   </label>
                   <input accept="image/png,image/jpeg,image/webp" className="sr-only" onChange={handleThumbnailChange} ref={fileInputRef} type="file" />
                 </div>
@@ -2285,11 +2318,11 @@ export default function AdminManagedContentDetailPage({
                         onClick={clearThumbnail}
                         type="button"
                       >
-                        삭제
+                        {t("삭제")}
                       </button>
                     ) : null}
                   </div>
-                  <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} style="round" variant="outline">추가</Button>
+                  <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => fileInputRef.current?.click()} style="round" variant="outline">{t("추가")}</Button>
                 </div>
                 <input accept="image/png,image/jpeg,image/webp" className="sr-only" onChange={handleThumbnailChange} ref={fileInputRef} type="file" />
               </InlineField>
@@ -2314,6 +2347,7 @@ export default function AdminManagedContentDetailPage({
                   onRemoveImage={trackRemovedImage}
                   onPrepareVideo={prepareVideoPreview}
                   toolbarStickyTop={editorToolbarTop}
+                  uiLocale={adminLocale}
                   value={getEditingLocalizedValue(form.bodyRichText, activeLocale)}
                 />
               </div>

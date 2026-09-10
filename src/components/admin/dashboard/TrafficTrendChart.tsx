@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo } from "react";
+import { translateAdminCopy } from "@/features/admin/i18n";
+import type { AdminLocale } from "@/features/admin/preferences";
 
 export type TrafficTrendPoint = {
   label: string;
@@ -16,7 +18,14 @@ function formatTrendDate(value: string) {
   return month && day ? `${month}/${day}` : value;
 }
 
-export default function TrafficTrendChart({ items }: { items: TrafficTrendPoint[] }) {
+export default function TrafficTrendChart({
+  items,
+  locale,
+}: {
+  items: TrafficTrendPoint[];
+  locale: AdminLocale;
+}) {
+  const t = (copy: string) => translateAdminCopy(locale, copy);
   const displayItems = useMemo(() => [...items].reverse(), [items]);
   const maxValue = useMemo(() => Math.max(...items.map((item) => item.value), 1), [items]);
   const peakLabel = useMemo(() => {
@@ -30,7 +39,7 @@ export default function TrafficTrendChart({ items }: { items: TrafficTrendPoint[
   if (items.length === 0) {
     return (
       <div className="flex h-[260px] w-full items-center justify-center rounded-box bg-bg text-center type-body-md text-mute">
-        Analytics 데이터가 아직 없습니다.
+        {t("Analytics 데이터가 아직 없습니다.")}
       </div>
     );
   }
@@ -50,7 +59,7 @@ export default function TrafficTrendChart({ items }: { items: TrafficTrendPoint[
                 </div>
                 <div className="flex min-h-0 flex-1 items-end">
                   <button
-                    aria-label={`${item.label}: ${item.value} page views`}
+                    aria-label={`${item.label}: ${item.value} ${t("page views")}`}
                     className={`w-full min-w-[8px] rounded-t-sm border-0 p-0 outline-none ring-offset-2 ring-offset-bg transition-opacity hover:opacity-80 focus-visible:ring-2 focus-visible:ring-border ${
                       isPeak ? "bg-chart-primary" : item.value > 0 ? "bg-chart-secondary" : "bg-border"
                     }`}

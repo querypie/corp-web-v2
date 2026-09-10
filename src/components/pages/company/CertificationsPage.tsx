@@ -22,7 +22,7 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-function CertificationCard({
+export function CertificationCard({
   description,
   imageAlt,
   imageClassName,

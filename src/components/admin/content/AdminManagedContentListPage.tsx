@@ -35,6 +35,11 @@ import {
 } from "@/features/content/data";
 import { cloneAsAuthoredContent } from "@/features/content/cloneToAuthored";
 import { renderTiptapHtml } from "@/features/content/tiptapHtml";
+import {
+  getAdminContentListDisplayLocale,
+  getOrderedVisibleLocales,
+} from "./adminContentListLocale";
+import { useAdminLocale } from "@/components/layout/admin/AdminLocaleProvider";
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -53,12 +58,14 @@ function SearchField({
   onChange: (value: string) => void;
   value: string;
 }) {
+  const { t } = useAdminLocale();
+
   return (
     /* 리스트 상단 검색 필드 */
     <Input
       className="w-full min-w-[140px]"
       onChange={(event) => onChange(event.target.value)}
-      placeholder="Search content"
+      placeholder={t("Search content")}
       type="text"
       value={value}
     />
@@ -72,21 +79,23 @@ function DeleteConfirmDialog({
   onCancel: () => void;
   onConfirm: () => void;
 }) {
+  const { t } = useAdminLocale();
+
   return (
     /* 리스트/미리보기에서 공통으로 쓰는 삭제 확인 모달 */
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5" onClick={onCancel}>
       <div className="w-full max-w-[300px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-8" onClick={(event) => event.stopPropagation()}>
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="flex flex-col items-center gap-2 text-center">
-            <h2 className="m-0 type-h3 text-fg">삭제하시겠습니까?</h2>
-            <p className="m-0 type-body-md text-mute">이 작업은 되돌릴 수 없습니다.</p>
+            <h2 className="m-0 type-h3 text-fg">{t("삭제하시겠습니까?")}</h2>
+            <p className="m-0 type-body-md text-mute">{t("이 작업은 되돌릴 수 없습니다.")}</p>
           </div>
           <ButtonGroup className="justify-center">
             <Button arrow={false} onClick={onCancel} style="round" variant="outline">
-              취소
+              {t("취소")}
             </Button>
             <Button arrow={false} onClick={onConfirm} style="round" variant="secondary">
-              확인
+              {t("확인")}
             </Button>
           </ButtonGroup>
         </div>
@@ -104,24 +113,24 @@ function DuplicateConfirmDialog({
   onCancel: () => void;
   onConfirm: () => void;
 }) {
+  const { t } = useAdminLocale();
+
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5" onClick={onCancel}>
       <div className="w-full max-w-[320px] rounded-modal border border-border bg-[var(--color-bg-modal)] px-5 py-8" onClick={(event) => event.stopPropagation()}>
         <div className="flex flex-col items-center gap-5 text-center">
           <div className="flex flex-col items-center gap-2 text-center">
-            <h2 className="m-0 type-h3 text-fg">게시물을 복제할까요?</h2>
+            <h2 className="m-0 type-h3 text-fg">{t("게시물을 복제할까요?")}</h2>
             <p className="m-0 whitespace-pre-line type-body-md text-mute">
-              복사된 게시물은 비노출 상태로 저장됩니다.
-              {"\n"}
-              변경된 slug(URL) 확인해 주세요.
+              {t("복사된 게시물은 비노출 상태로 저장됩니다.\n변경된 slug(URL) 확인해 주세요.")}
             </p>
           </div>
           <ButtonGroup className="justify-center">
             <Button arrow={false} onClick={onCancel} style="round" variant="outline">
-              취소
+              {t("취소")}
             </Button>
             <Button arrow={false} disabled={isSubmitting} onClick={onConfirm} style="round" variant="secondary">
-              {isSubmitting ? <LoadingText text="복제 중..." /> : "복제하기"}
+              {isSubmitting ? <LoadingText text={t("복제 중...")} /> : t("복제하기")}
             </Button>
           </ButtonGroup>
         </div>
@@ -154,15 +163,6 @@ function ActionIcon({
   );
 }
 
-function getItemDisplayLocale(item: ManagedContentEntry): Locale {
-  const locales = ["en", "ko", "ja"] as const;
-  return (
-    locales.find((locale) => item.title[locale].trim()) ??
-    item.visibleLocales[0] ??
-    "en"
-  );
-}
-
 function matchesQuery(item: ManagedContentEntry, query: string) {
   const normalized = query.trim().toLowerCase();
 
@@ -187,6 +187,7 @@ export function PreviewModal({
   isLoading?: boolean;
   onClose: () => void;
 }) {
+  const { t } = useAdminLocale();
   const [activeLocale, setActiveLocale] = useState<Locale>(initialLocale);
   const localizedRichTextHtml = renderTiptapHtml(item.bodyRichText[activeLocale] ?? "");
   const localizedBodyHtml = localizedRichTextHtml || (item.bodyHtml[activeLocale] ?? "");
@@ -218,7 +219,7 @@ export function PreviewModal({
               ))}
             </TabGroup>
             <button
-              aria-label="미리보기 닫기"
+              aria-label={t("미리보기 닫기")}
               className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-button text-mute transition-colors hover:bg-bg-content hover:text-fg"
               onClick={onClose}
               type="button"
@@ -233,7 +234,7 @@ export function PreviewModal({
         <div className="overflow-auto px-5 py-5 md:px-6">
           {isLoading ? (
             <div className="flex min-h-[320px] items-center justify-center">
-              <LoadingText className="type-body-md" text="불러오는 중..." />
+              <LoadingText className="type-body-md" text={t("불러오는 중...")} />
             </div>
           ) : (
             <AdminContentPreview
@@ -291,6 +292,7 @@ function ContentRow({
   onTogglePublished: () => void;
   showCategory: boolean;
 }) {
+  const { t } = useAdminLocale();
   const isPublished = item.status === "published";
   const statusLabel = isPublished ? "On" : "Off";
   const localizedTitle = item.title[activeLocale].trim();
@@ -381,7 +383,7 @@ function ContentRow({
       <div className="flex items-center justify-between gap-4 md:contents">
         <div className="flex flex-col gap-2 md:self-center md:whitespace-nowrap">
           <div className="flex flex-wrap gap-1">
-            {item.visibleLocales.slice(0, 3).map((locale) => (
+            {getOrderedVisibleLocales(item.visibleLocales).map((locale) => (
               <span
                 key={locale}
                 className={cx(
@@ -417,7 +419,7 @@ function ContentRow({
             <div className="relative" ref={menuRef}>
               <button
                 aria-expanded={menuOpen}
-                aria-label="더보기"
+                aria-label={t("더보기")}
                 className="inline-flex h-10 w-10 items-center justify-center rounded-button text-mute transition-colors hover:bg-bg hover:text-fg"
                 onClick={(event) => {
                   event.preventDefault();
@@ -456,7 +458,7 @@ function ContentRow({
                         <circle cx="12" cy="12" r="2.5" stroke="currentColor" strokeWidth="1.75" />
                       </svg>
                     </MenuIcon>
-                    미리보기
+                    {t("미리보기")}
                   </button>
                   <button
                     className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute"
@@ -474,7 +476,7 @@ function ContentRow({
                         <rect x="5" y="5" width="10" height="10" rx="2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
                       </svg>
                     </MenuIcon>
-                    복제
+                    {t("복제")}
                   </button>
                   <button
                     className="flex items-center gap-2 whitespace-nowrap py-1 text-left type-body-md text-fg transition-colors hover:text-mute"
@@ -495,7 +497,7 @@ function ContentRow({
                         <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
                       </svg>
                     </MenuIcon>
-                    삭제
+                    {t("삭제")}
                   </button>
                 </div>
               ) : null}
@@ -518,6 +520,7 @@ export default function AdminManagedContentListPage({
   initialItems,
   section,
 }: Props) {
+  const { locale, t } = useAdminLocale();
   const scopedCategorySlug = categorySlug === "all" ? "all" : categorySlug;
   const items = useManagedContents(section, initialItems, scopedCategorySlug, "list");
   const isLoading = useManagedContentsLoading(section, initialItems, scopedCategorySlug, "list");
@@ -727,7 +730,7 @@ export default function AdminManagedContentListPage({
                       setDraftItems(categoryItems);
                       setIsReorderMode(false);
                     }} style="round" variant="outline">
-                      취소
+                      {t("취소")}
                     </Button>
                     <Button arrow={false} className="shrink-0 justify-center whitespace-nowrap" onClick={() => {
                       void reorderManagedContents(draftItems)
@@ -738,11 +741,11 @@ export default function AdminManagedContentListPage({
                           window.alert(
                             error instanceof Error
                               ? error.message
-                              : "순서를 저장하지 못했습니다. 다시 시도해 주세요.",
+                              : t("순서를 저장하지 못했습니다. 다시 시도해 주세요."),
                           );
                         });
                     }} style="round" variant="secondary">
-                      확인
+                      {t("확인")}
                     </Button>
                   </>
                 ) : (
@@ -765,7 +768,7 @@ export default function AdminManagedContentListPage({
                           <path d="M17.5 6v12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
                         </svg>
                       </ActionIcon>
-                      순서변경
+                      {t("순서변경")}
                     </Button>
                     <a className="shrink-0" href={writeHref}>
                       <Button arrow={false} className="shrink-0 justify-center whitespace-nowrap" style="round" variant="secondary">
@@ -775,7 +778,7 @@ export default function AdminManagedContentListPage({
                             <path d="M5 12h14" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
                           </svg>
                         </ActionIcon>
-                        글 작성
+                        {t("글 작성")}
                       </Button>
                     </a>
                   </>
@@ -788,20 +791,20 @@ export default function AdminManagedContentListPage({
 
       <div className="mx-auto flex w-full max-w-[1000px] flex-col gap-4">
         <p className="m-0 flex items-center gap-2 type-body-md text-mute">
-          <span>{listCountLabel}</span>
-          <span className="text-fg">{displayedItems.length}개</span>
+          <span>{t(listCountLabel)}</span>
+          <span className="text-fg">{displayedItems.length}{locale === "ja" ? "件" : "개"}</span>
         </p>
 
         {/* 실제 콘텐츠 리스트 / 빈 상태 영역 */}
         <div className="flex flex-col gap-3">
           {isLoading ? (
             <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
-              <LoadingText className="type-body-md" text="불러오는 중..." />
+              <LoadingText className="type-body-md" text={t("불러오는 중...")} />
             </div>
           ) : displayedItems.length > 0 ? (
             displayedItems.map((item, index) => (
               <ContentRow
-                activeLocale={getItemDisplayLocale(item)}
+                activeLocale={getAdminContentListDisplayLocale(item)}
                 isReorderMode={isReorderMode}
                 isTogglePending={isStatusUpdating}
                 key={item.id}
@@ -827,7 +830,7 @@ export default function AdminManagedContentListPage({
                     window.alert(
                       error instanceof Error
                         ? error.message
-                        : "게시 상태를 변경하지 못했습니다. 다시 시도해 주세요.",
+                        : t("게시 상태를 변경하지 못했습니다. 다시 시도해 주세요."),
                     );
                   });
                 }}
@@ -836,7 +839,7 @@ export default function AdminManagedContentListPage({
             ))
           ) : (
             <div className="flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
-              <p className="m-0 type-body-md text-mute">게시물이 없습니다.</p>
+              <p className="m-0 type-body-md text-mute">{t("게시물이 없습니다.")}</p>
             </div>
           )}
         </div>
@@ -855,7 +858,7 @@ export default function AdminManagedContentListPage({
                 window.alert(
                   error instanceof Error
                     ? error.message
-                    : "콘텐츠를 삭제하지 못했습니다. 다시 시도해 주세요.",
+                    : t("콘텐츠를 삭제하지 못했습니다. 다시 시도해 주세요."),
                 );
               });
           }}
@@ -872,7 +875,7 @@ export default function AdminManagedContentListPage({
 
       {previewItem ? (
         <PreviewModal
-          initialLocale={getItemDisplayLocale(previewItem)}
+          initialLocale={getAdminContentListDisplayLocale(previewItem)}
           isLoading={isPreviewLoading}
           item={previewItem}
           onClose={() => {

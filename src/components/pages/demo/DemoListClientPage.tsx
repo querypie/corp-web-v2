@@ -16,7 +16,6 @@ type DemoListClientPageProps = {
   locale: Locale;
   selectedCategory: DemoCategorySlug;
   title: string;
-  visibleCategorySlugs: DemoCategorySlug[];
 };
 
 export default function DemoListClientPage({
@@ -24,13 +23,12 @@ export default function DemoListClientPage({
   locale,
   selectedCategory,
   title,
-  visibleCategorySlugs,
 }: DemoListClientPageProps) {
   return (
     <DemoListPage
       items={fallbackItems}
       locale={locale}
-      menu={getDemoSidebarMenuItems(locale, selectedCategory, visibleCategorySlugs)}
+      menu={getDemoSidebarMenuItems(locale, selectedCategory)}
       showCategory={selectedCategory === "all"}
       title={title}
     />

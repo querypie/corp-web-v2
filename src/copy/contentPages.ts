@@ -34,20 +34,20 @@ export function getDocumentationPageCopy(locale: Locale): ContentListPageCopy {
     en: {
       metadataDescription:
         "Read QueryPie AI documentation, guides, white papers, blogs, events, manuals, and product resources.",
-      metadataTitle: "Documentation",
-      title: "Documentation",
+      metadataTitle: "Resource",
+      title: "Resource",
     },
     ko: {
       metadataDescription:
         "QueryPie AI 문서, 가이드, 백서, 블로그, 이벤트, 매뉴얼과 제품 자료를 확인하세요.",
-      metadataTitle: "문서",
-      title: "문서",
+      metadataTitle: "자료",
+      title: "자료",
     },
     ja: {
       metadataDescription:
         "QueryPie AI のドキュメント、ガイド、ホワイトペーパー、ブログ、イベント、マニュアル、製品資料をご覧ください。",
-      metadataTitle: "ドキュメント",
-      title: "ドキュメント",
+      metadataTitle: "リソース",
+      title: "リソース",
     },
   }[locale];
 }

@@ -31,12 +31,12 @@ const introductionSteps = [
 const introductionStepIcons = ["search", "folder", "spark", "check", "connect"] as const;
 
 const useCases = [
-  { id: "seo-analyst", imageSrc: "/demo/use-cases/aip-use-case-2.webp", tags: ["マーケティング", "SEO"], title: "SEO分析", body: "サイト分析、改善ポイントの整理、ダッシュボード化を支援し、次の打ち手を見えやすくします。" },
-  { id: "quotation-analyze-ai-agent", imageSrc: "/demo/use-cases/aip-use-case-1.webp", tags: ["見積・営業", "見積分析"], title: "見積業務", body: "見積書の分析・比較・作成を支援し、確認や転記にかかる時間を減らします。" },
-  { id: "dev-insight-ai-agent", imageSrc: "/demo/use-cases/aip-use-case-15.webp", tags: ["開発", "DevOps"], title: "開発インサイト", body: "Git、PR、チケット、CI/CD、インシデントを横断し、状況とリスクを会話型で可視化します。" },
-  { id: "data-analytics-agent", imageSrc: "/demo/use-cases/aip-use-case-6.webp", tags: ["分析・経営", "データ可視化"], title: "データ分析", body: "自然言語の質問からデータ抽出、可視化、インサイト整理までを支援します。" },
-  { id: "work-collaboration-agent", imageSrc: "/demo/use-cases/aip-use-case-11.webp", tags: ["コラボレーション", "業務自動化"], title: "業務コラボレーション", body: "Slack、Jira、Confluenceを連携し、反復的な調整業務とチーム間の情報共有を自動化します。" },
-  { id: "security-audit-agent", imageSrc: "/demo/use-cases/aip-use-case-10.webp", tags: ["セキュリティ", "監査"], title: "セキュリティ監査", body: "自然言語でアクセスパターンを調査し、異常を検知してコンプライアンスレポートを生成します。" },
+  { id: "seo-analyst", imageSrc: "/demo/aip-features/aip-use-case-2.webp", tags: ["マーケティング", "SEO"], title: "SEO分析", body: "サイト分析、改善ポイントの整理、ダッシュボード化を支援し、次の打ち手を見えやすくします。" },
+  { id: "quotation-analyze-ai-agent", imageSrc: "/demo/aip-features/aip-use-case-1.webp", tags: ["見積・営業", "見積分析"], title: "見積業務", body: "見積書の分析・比較・作成を支援し、確認や転記にかかる時間を減らします。" },
+  { id: "dev-insight-ai-agent", imageSrc: "/demo/aip-features/aip-use-case-15.webp", tags: ["開発", "DevOps"], title: "開発インサイト", body: "Git、PR、チケット、CI/CD、インシデントを横断し、状況とリスクを会話型で可視化します。" },
+  { id: "data-analytics-agent", imageSrc: "/demo/aip-features/aip-use-case-6.webp", tags: ["分析・経営", "データ可視化"], title: "データ分析", body: "自然言語の質問からデータ抽出、可視化、インサイト整理までを支援します。" },
+  { id: "work-collaboration-agent", imageSrc: "/demo/aip-features/aip-use-case-11.webp", tags: ["コラボレーション", "業務自動化"], title: "業務コラボレーション", body: "Slack、Jira、Confluenceを連携し、反復的な調整業務とチーム間の情報共有を自動化します。" },
+  { id: "security-audit-agent", imageSrc: "/demo/aip-features/aip-use-case-10.webp", tags: ["セキュリティ", "監査"], title: "セキュリティ監査", body: "自然言語でアクセスパターンを調査し、異常を検知してコンプライアンスレポートを生成します。" },
 ] as const;
 
 const voices = [
@@ -48,7 +48,7 @@ const voices = [
 
 export default function AiCrewPage() {
   const contactHref = getLocalePath("ja", "/company/contact-us");
-  const demoHref = getLocalePath("ja", "/demo/use-cases");
+  const demoHref = getLocalePath("ja", "/demo/aip");
   const whitepaperHref = getPublicDetailHref("documentation", "ja", "ai-transformation-japan", "white-papers");
 
   return (
@@ -114,7 +114,7 @@ export default function AiCrewPage() {
           {useCases.map((item) => (
             <AiCrewUseCaseCard
               body={item.body}
-              href={getPublicDetailHref("demo", "ja", item.id, "use-cases")}
+              href={getPublicDetailHref("demo", "ja", item.id, "aip-features")}
               key={item.id}
               imageSrc={item.imageSrc}
               tags={item.tags}

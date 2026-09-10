@@ -7,12 +7,14 @@ import { usePathname, useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import {
   getCompanySubItems,
-  getFeaturesSubItems,
+  getDemoSubItems,
   getPlansSubItems,
   getPrimaryNavHref,
+  getResourcesSubItems,
   getSolutionsSubItems,
 } from "@/constants/navigation";
-import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
+import { getLocalePath, getLocaleSwitchPath, type Locale } from "@/constants/i18n";
+import { setLocalePreferenceCookie } from "@/features/routing/localePreference.client";
 
 type GnbProps = {
   actionLabel?: string;
@@ -30,25 +32,14 @@ const mobileMenuBackdropClassName = "bg-bg";
 const desktopPopoverCloseDelayMs = 160;
 
 function getLocaleHref(pathname: string, locale: string, search: string) {
-  /* 현재 경로를 유지한 채 locale만 교체한다. 기본 locale(en)는 접두를 숨긴다. */
-  const segments = pathname.split("/").filter(Boolean);
-
-  if (segments.length === 0) {
-    const nextHref = getLocalePath(locale as Locale, "/");
-    return search ? `${nextHref}?${search}` : nextHref;
-  }
-
-  const pathWithoutLocale = isLocale(segments[0])
-    ? `/${segments.slice(1).join("/")}`
-    : pathname;
-  const nextPathname = getLocalePath(locale as Locale, pathWithoutLocale || "/");
+  const nextPathname = getLocaleSwitchPath(pathname, locale as Locale);
   return search ? `${nextPathname}?${search}` : nextPathname;
 }
 
 export default function Gnb({
   actionLabel = "Free start!",
   className,
-  items = ["Solutions", "Features", "Company", "Plans"],
+  items = ["Solutions", "Demo", "Resource", "Company", "Plans"],
   locale = "en",
   localeIcon,
 }: GnbProps) {
@@ -195,11 +186,11 @@ export default function Gnb({
 
   /* 언어 드롭다운은 현재 페이지를 유지한 채 locale만 변경 */
   const localeSubItems = [
-    { label: "English", href: getLocaleHref(pathname, "en", currentSearch) },
-    { label: "日本語", href: getLocaleHref(pathname, "ja", currentSearch) },
-    { label: "한국어", href: getLocaleHref(pathname, "ko", currentSearch) },
+    { label: "English", href: getLocaleHref(pathname, "en", currentSearch), locale: "en" as const },
+    { label: "日本語", href: getLocaleHref(pathname, "ja", currentSearch), locale: "ja" as const },
+    { label: "한국어", href: getLocaleHref(pathname, "ko", currentSearch), locale: "ko" as const },
   ];
-  const handleLocaleClick = (event: ReactMouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleLocaleClick = (event: ReactMouseEvent<HTMLAnchorElement>, href: string, nextLocale: Locale) => {
     if (
       event.defaultPrevented ||
       event.button !== 0 ||
@@ -212,6 +203,7 @@ export default function Gnb({
     }
 
     event.preventDefault();
+    setLocalePreferenceCookie(nextLocale);
     setMobileLocaleOpen(false);
     setDesktopPopoverOpen(null);
     router.push(href, { scroll: false });
@@ -227,12 +219,15 @@ export default function Gnb({
       closeDesktopPopover();
     }
   };
-  const mobileSections = [
+  const navigationSections = [
     { title: items[0], items: getSolutionsSubItems(locale) },
-    { title: items[1], items: getFeaturesSubItems(locale) },
-    { title: items[2], items: getCompanySubItems(locale) },
-    { title: items[3], items: getPlansSubItems(locale) },
+    { title: items[1], items: getDemoSubItems(locale) },
+    { title: items[2], items: getResourcesSubItems(locale) },
+    { title: items[3], items: getCompanySubItems(locale) },
   ];
+  const mobileSections = items[4]
+    ? [...navigationSections, { title: items[4], items: getPlansSubItems(locale) }]
+    : navigationSections;
   const isDesktopLocaleOpen = desktopPopoverOpen === "locale";
 
   return (
@@ -263,9 +258,9 @@ export default function Gnb({
             {/* 데스크톱 전용 글로벌 네비게이션 */}
             <nav aria-label="Global" className="hidden items-center gap-[30px] md:flex">
               {items.map((item, index) => {
-                const navSlot = index;
+                const section = navigationSections[index];
 
-                if (navSlot === 0) {
+                if (section) {
                   const isOpen = desktopPopoverOpen === item;
 
                   return (
@@ -297,105 +292,7 @@ export default function Gnb({
                         onMouseEnter={() => openDesktopPopover(item)}
                       >
                         <div className="gnb-popover-surface relative overflow-hidden rounded-[8px] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
-                          {getSolutionsSubItems(locale).map((sub) => (
-                            <Link
-                              key={sub.label}
-                              className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
-                              href={sub.href}
-                              onClick={closeDesktopPopover}
-                              onPointerDown={handleDesktopPopoverItemPointerDown}
-                            >
-                              {sub.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-
-                if (navSlot === 1) {
-                  const isOpen = desktopPopoverOpen === item;
-
-                  return (
-                    <div
-                      key={item}
-                      className="relative"
-                      onBlur={handleDesktopPopoverBlur}
-                      onMouseEnter={() => openDesktopPopover(item)}
-                      onMouseLeave={scheduleDesktopPopoverClose}
-                    >
-                      <button
-                        className={cx(
-                          "type-body-md transition-colors hover:text-mute",
-                          isOpen ? "text-mute" : "text-fg",
-                        )}
-                        onFocus={() => openDesktopPopover(item)}
-                        type="button"
-                      >
-                        {item}
-                      </button>
-
-                      <div
-                        className={cx(
-                          "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3",
-                          isOpen
-                            ? "pointer-events-auto opacity-100"
-                            : "pointer-events-none opacity-0",
-                        )}
-                        onMouseEnter={() => openDesktopPopover(item)}
-                      >
-                        <div className="gnb-popover-surface relative overflow-hidden rounded-[8px] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
-                          {getFeaturesSubItems(locale).map((sub) => (
-                            <Link
-                              key={sub.label}
-                              className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
-                              href={sub.href}
-                              onClick={closeDesktopPopover}
-                              onPointerDown={handleDesktopPopoverItemPointerDown}
-                            >
-                              {sub.label}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                }
-
-                if (navSlot === 2) {
-                  const isOpen = desktopPopoverOpen === item;
-
-                  return (
-                    <div
-                      key={item}
-                      className="relative"
-                      onBlur={handleDesktopPopoverBlur}
-                      onMouseEnter={() => openDesktopPopover(item)}
-                      onMouseLeave={scheduleDesktopPopoverClose}
-                    >
-                      <button
-                        className={cx(
-                          "type-body-md transition-colors hover:text-mute",
-                          isOpen ? "text-mute" : "text-fg",
-                        )}
-                        onFocus={() => openDesktopPopover(item)}
-                        type="button"
-                      >
-                        {item}
-                      </button>
-
-                      <div
-                        className={cx(
-                          "absolute left-1/2 top-full z-[60] -translate-x-1/2 pt-3",
-                          isOpen
-                            ? "pointer-events-auto opacity-100"
-                            : "pointer-events-none opacity-0",
-                        )}
-                        onMouseEnter={() => openDesktopPopover(item)}
-                      >
-                        <div className="gnb-popover-surface relative overflow-hidden rounded-[8px] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
-                          {getCompanySubItems(locale).map((sub) => (
+                          {section.items.map((sub) => (
                             <Link
                               key={sub.label}
                               className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
@@ -465,7 +362,7 @@ export default function Gnb({
                       key={sub.label}
                       className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
                       href={sub.href}
-                      onClick={(event) => handleLocaleClick(event, sub.href)}
+                      onClick={(event) => handleLocaleClick(event, sub.href, sub.locale)}
                       onPointerDown={handleDesktopPopoverItemPointerDown}
                     >
                       {sub.label}
@@ -504,7 +401,7 @@ export default function Gnb({
                       key={sub.label}
                       className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
                       href={sub.href}
-                      onClick={(event) => handleLocaleClick(event, sub.href)}
+                      onClick={(event) => handleLocaleClick(event, sub.href, sub.locale)}
                     >
                       {sub.label}
                     </a>

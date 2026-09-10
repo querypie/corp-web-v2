@@ -89,6 +89,14 @@ src/content/legal/privacy-policy/
 - locale 없는 public path는 `/en/...`으로 redirect
 - 콘텐츠 legacy redirect: `src/features/content/legacyRedirects.ts`, `next.config.ts`
 
+### 일본어 홈 구성 방침
+
+- `/en`, `/ko` 홈은 공통 `src/components/pages/home/HomePage.tsx`를 사용합니다.
+- `/ja` 홈은 일본 시장에 맞춘 별도 `src/components/pages/home/japan/JapanHomePage.tsx`로 구성합니다.
+- locale 선택은 `src/app/[locale]/page.tsx`에서 수행하며 `/ja` URL, 공통 GNB, Footer, locale 전환 구조는 그대로 유지합니다.
+- 일본어 홈 전용 섹션은 `src/components/pages/home/japan`, 정적 문구와 metadata copy는 `src/copy/homeJapan.ts`, CMS 조회와 데이터 조합은 필요할 때 `src/features/home/japanPageData.ts`에 둡니다.
+- 공통 UI와 재사용 가능한 섹션은 기존 컴포넌트를 사용하되, 일본어 홈의 서로 다른 레이아웃을 공통 `HomePage`의 조건문으로 누적하지 않습니다.
+
 ---
 
 ## SEO

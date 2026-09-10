@@ -1,0 +1,50 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "aip-features",
+  "contentType": "content",
+  "dateIso": "2025-10-15",
+  "downloadCoverImageSrc": "/demo/aip-features/aip-use-case-thumb-13-en.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "aircrew-scheduler-ai-agent",
+  "imageSrc": "/demo/aip-features/aip-use-case-18.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000079",
+  "summary": {
+    "en": "An AI agent that optimizes crew pairing, rostering, and recovery from disruptions—turning policies, qualifications, and schedules into fast, compliant decisions through natural language.",
+    "ko": "승무원 페어링, 로스터링 및 운항 차질 복구를 최적화하는 AI 에이전트 — 정책, 자격 요건 및 스케줄을 자연어를 통해 빠르고 규정을 준수하는 의사결정으로 전환합니다.",
+    "ja": "乗員ペアリング、ロスター作成、および障害からの復旧を最適化し、ポリシー、資格、スケジュールを自然言語による迅速かつコンプライアンスに準拠した意思決定に変換するAIエージェント。"
+  },
+  "title": {
+    "en": "AIP Use Case: AirCrew Scheduler AI Agent",
+    "ko": "AIP 사용 사례: AirCrew Scheduler AI Agent",
+    "ja": "AIPユースケース：AirCrew Scheduler AI Agent"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000079/en.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000079/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000079/ko.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000079/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/demo/aip-features/cnt_000079/ja.html",
+      "jsonPath": "src/content/demo/aip-features/cnt_000079/ja.tiptap.json"
+    }
+  }
+}

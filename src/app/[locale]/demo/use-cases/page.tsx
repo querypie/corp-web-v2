@@ -1,15 +1,6 @@
-import DemoPage, { generateMetadata as generateDemoMetadata } from "@/app/[locale]/features/demo/page";
+import { permanentRedirect } from "next/navigation";
 
-type Props = {
-  params: Promise<{ locale: string }>;
-};
-
-const searchParams = Promise.resolve({ category: "use-cases" });
-
-export default function UseCasesPage({ params }: Props) {
-  return DemoPage({ params, searchParams });
-}
-
-export function generateMetadata({ params }: Props) {
-  return generateDemoMetadata({ params, searchParams });
+export default async function LegacyUseCasesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  permanentRedirect(`/${locale}/demo/aip`);
 }

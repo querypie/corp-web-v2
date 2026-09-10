@@ -4,6 +4,10 @@ export const THEME_CHANGE_EVENT = "querypie-theme-change";
 export type Theme = "dark" | "light";
 export type ThemePreference = Theme | "system";
 
+export function getPublicTheme(locale: string): Theme {
+  return locale === "ja" ? "light" : "dark";
+}
+
 export function isTheme(value: unknown): value is Theme {
   return value === "dark" || value === "light";
 }

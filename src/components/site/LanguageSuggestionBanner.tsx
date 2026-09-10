@@ -2,9 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
+import { getLocaleSwitchPath, type Locale } from "@/constants/i18n";
 import Button from "@/components/ui/Button";
 import Select from "@/components/ui/Select";
+import { setLocalePreferenceCookie } from "@/features/routing/localePreference.client";
 
 const BANNER_COOKIE = "querypie_language_banner_dismissed";
 const COOKIE_MAX_AGE_SECONDS = 60 * 60 * 24 * 730;
@@ -59,12 +60,7 @@ type LanguageSuggestionResponse = {
 };
 
 function getLocaleHref(pathname: string, locale: Locale) {
-  const segments = pathname.split("/").filter(Boolean);
-  const pathWithoutLocale = isLocale(segments[0] ?? "")
-    ? `/${segments.slice(1).join("/")}`
-    : pathname;
-
-  const nextPathname = getLocalePath(locale, pathWithoutLocale || "/");
+  const nextPathname = getLocaleSwitchPath(pathname, locale);
 
   if (typeof window === "undefined" || !window.location.search) {
     return nextPathname;
@@ -162,6 +158,7 @@ export default function LanguageSuggestionBanner({
       return;
     }
 
+    setLocalePreferenceCookie(locale);
     setDismissedCookie();
     setVisible(false);
     window.location.href = getLocaleHref(pathname, locale);

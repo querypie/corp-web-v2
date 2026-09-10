@@ -35,9 +35,6 @@ export default async function DemoPage({ params, searchParams }: Props) {
 
   const publicDemoItems = (await readContentState("demo", { includeBodies: false }))
     .filter((item) => isPublishedContentVisible(item, locale));
-  const visibleCategorySlugs = Array.from(
-    new Set(publicDemoItems.map((item) => item.categorySlug as DemoCategorySlug)),
-  );
   const demoItems = publicDemoItems
     .filter((item) => selectedCategory === "all" || item.categorySlug === selectedCategory);
   const sortedDemoItems = sortPublicContentItems(demoItems, {
@@ -62,7 +59,6 @@ export default async function DemoPage({ params, searchParams }: Props) {
       locale={locale}
       selectedCategory={selectedCategory}
       title={copy.title}
-      visibleCategorySlugs={visibleCategorySlugs}
     />
   );
 }

@@ -1,7 +1,6 @@
 export const publicCategoryPaths = {
   demo: {
     all: "/demo",
-    "use-cases": "/demo/use-cases",
     "aip-features": "/demo/aip",
     "acp-features": "/demo/acp",
   },
