@@ -24,6 +24,24 @@ export const japanHomeAxCopy = {
       "すべてがつながるひとつのAI Platformで、あらゆる体験を。",
     ],
     imageAlt: "日常のAIを企業のAXへつなぐAI Platform構成図",
+    diagram: {
+      platformName: "AIP",
+      platformDescription: ["すべてのデータとシステムを", "つなぐ企業のAIプラットフォーム"],
+      products: [
+        { id: "lingo", name: "Lingo", category: "AI 会議", features: ["会議の進行・リアルタイム記録", "多言語翻訳・要約", "会議の文脈を他の業務へ連携"] },
+        { id: "notepie", name: "NotePie", category: "ドキュメント", features: ["会議記録をもとに文書を作成", "テンプレート・社内文書の活用", "作成した文書の共有・共同作業"] },
+        { id: "corpnavi", name: "CorpNavi", category: "企業インテリジェンス", features: ["EDINET・TDnetの開示データ", "AIによる企業・競合分析", "財務レポート・Excelの作成"] },
+        { id: "linkpie", name: "LinkPie", category: "ビジネスデータ", features: ["名刺・連絡先のアップロード・管理", "AIによる顧客・担当者情報の検索", "CRMデータ連携"] },
+      ],
+      integrations: [
+        { id: "internal-data", lines: ["社内データ"] },
+        { id: "salesforce", lines: ["CRM", "(Salesforce など)"] },
+        { id: "jira", lines: ["業務システム", "(Jira など)"] },
+        { id: "microsoft-365", lines: ["Microsoft 365"] },
+        { id: "slack", lines: ["コミュニケーション", "(Slack など)"] },
+        { id: "systems", lines: ["その他のさまざまなシステム"] },
+      ],
+    },
   },
   trustedAi: {
     title: "企業が信頼できる、実績あるAI",

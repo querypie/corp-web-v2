@@ -1,0 +1,19 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="28" height="29" viewBox="0 0 28 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="logo-CorpNavi" clip-path="url(#clip0_1019_2519)">
+<path id="Ellipse 9" d="M8.77348 14.9825C12.6693 9.10599 19.4407 5.34336 23.8978 6.57842C28.3549 7.81347 28.8098 13.5785 24.914 19.455C21.0182 25.3315 14.2468 29.0941 9.78973 27.8591C5.33264 26.624 4.87766 20.859 8.77348 14.9825Z" fill="url(#paint0_linear_1019_2519)"/>
+<path id="Ellipse 8" d="M19.2265 14.0175C15.3307 19.894 8.55931 23.6566 4.10223 22.4216C-0.354856 21.1865 -0.809844 15.4215 3.08598 9.54498C6.98181 3.66849 13.7532 -0.0941428 18.2103 1.14092C22.6674 2.37597 23.1223 8.14103 19.2265 14.0175Z" fill="url(#paint1_linear_1019_2519)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_1019_2519" x1="7.39912" y1="25.2695" x2="17.8818" y2="18.0121" gradientUnits="userSpaceOnUse">
+<stop stop-color="#E94197" stop-opacity="0.05"/>
+<stop offset="1" stop-color="#E94197"/>
+</linearGradient>
+<linearGradient id="paint1_linear_1019_2519" x1="23.5156" y1="8.38281" x2="13.0125" y2="14.0037" gradientUnits="userSpaceOnUse">
+<stop stop-color="#7457F1" stop-opacity="0.07"/>
+<stop offset="1" stop-color="#7457F1"/>
+</linearGradient>
+<clipPath id="clip0_1019_2519">
+<rect width="28" height="29" fill="white"/>
+</clipPath>
+</defs>
+</svg>

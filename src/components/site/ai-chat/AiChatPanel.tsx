@@ -143,6 +143,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
   return (
     <dialog
       aria-labelledby={titleId}
+      autoFocus
       className={styles.panel}
       lang={locale}
       onCancel={(event) => { event.preventDefault(); onClose(); }}
@@ -152,6 +153,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
         if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) onClose();
       }}
       ref={dialogRef}
+      tabIndex={-1}
     >
       <header className="flex shrink-0 items-center justify-between gap-3 border-b border-border px-5 py-2">
         <h2 className="type-body-lg min-w-0 !font-medium" id={titleId}>{copy.title}</h2>
@@ -168,7 +170,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
               <path d="M3 10a9 9 0 1 1 2.6 8.4M3 4v6h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </Button>
-          <Button aria-label={copy.close} arrow={false} autoFocus className="!h-11 !w-11 shrink-0 !bg-transparent !p-0 hover:!bg-bg-hover" onClick={onClose} style="full">
+          <Button aria-label={copy.close} arrow={false} className="!h-11 !w-11 shrink-0 !bg-transparent !p-0 hover:!bg-bg-hover" onClick={onClose} style="full">
             <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
               <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
             </svg>
@@ -208,7 +210,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
         <div className={`${styles.composer} flex min-w-0 flex-1 items-center rounded-[28px] border border-transparent bg-bg-content px-4 py-2.5 transition-colors`}>
           <label className="sr-only" htmlFor={inputId}>{copy.placeholder}</label>
           <textarea
-            className="block max-h-[120px] min-h-6 w-full resize-none bg-transparent text-sm leading-6 text-fg"
+            className="block max-h-[120px] min-h-6 w-full resize-none bg-transparent text-base leading-6 text-fg sm:text-sm"
             id={inputId}
             maxLength={MAX_MESSAGE_LENGTH}
             onChange={(event) => setSession((current) => ({ ...current, draft: event.target.value }))}

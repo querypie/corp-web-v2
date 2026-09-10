@@ -9,6 +9,7 @@ import { pageSectionGapClassName } from "@/constants/layout";
 import { getCertificationsPageCopy } from "@/copy/company";
 import { japanHomeAxCopy } from "@/copy/homeJapan";
 import JapanLingoFaq from "./JapanLingoFaq";
+import JapanPlatformDiagram from "./JapanPlatformDiagram";
 import { JapanLingoProductIcon } from "./JapanHeroProductIcons";
 
 const japanCertificationItems = getCertificationsPageCopy("ja").items.slice(0, 10);
@@ -128,14 +129,7 @@ export default function JapanAxContent() {
             description={japanHomeAxCopy.connectedPlatform.description}
             title={japanHomeAxCopy.connectedPlatform.title}
           />
-          <Image
-            alt={japanHomeAxCopy.connectedPlatform.imageAlt}
-            className="h-auto w-full max-w-[900px] rounded-box"
-            height={975}
-            sizes="(min-width: 1200px) 900px, 100vw"
-            src="/assets/pages/home/japan/ai-platform-diagram.webp"
-            width={1463}
-          />
+          <JapanPlatformDiagram />
         </div>
       </section>
 

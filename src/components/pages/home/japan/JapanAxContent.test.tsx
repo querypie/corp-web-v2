@@ -27,9 +27,11 @@ describe("JapanAxContent", () => {
     expect(
       screen.getByRole("img", { name: "会議から始める企業のAX活用イメージ" }).getAttribute("src"),
     ).toContain("ax-introduction.webp");
-    expect(
-      screen.getByRole("img", { name: "日常のAIを企業のAXへつなぐAI Platform構成図" }).getAttribute("src"),
-    ).toContain("ai-platform-diagram.webp");
+    const diagram = screen.getByRole("figure", { name: "日常のAIを企業のAXへつなぐAI Platform構成図" });
+    expect(within(diagram).getAllByRole("heading", { level: 3 }).map((heading) => heading.textContent))
+      .toEqual(["Lingo", "NotePie", "CorpNavi", "LinkPie"]);
+    expect(within(diagram).getByText("Microsoft 365")).toBeInTheDocument();
+    expect(within(diagram).getByText("(Salesforce など)")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /Lingo 製品紹介資料を見る/ })).toHaveClass("rounded-full");
     expect(screen.getByRole("link", { name: /お問い合わせ/ })).toHaveClass("rounded-full");
     expect(container.querySelectorAll(".bg-brand.text-white")).toHaveLength(5);

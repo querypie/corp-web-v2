@@ -1,0 +1,110 @@
+.container {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 940px;
+  margin: 0;
+}
+
+@media (max-width: 767px) {
+  .container {
+    /* Expand into the section's 20px side padding; retain the Figma canvas ratio. */
+    width: calc(100% + 40px);
+    margin-inline: -20px;
+  }
+}
+
+/* 16px at Figma's 940px width. Every em scales together, including type and shadows. */
+.canvas {
+  --platform-accent: var(--color-brand);
+  --platform-core-start: color-mix(in srgb, var(--platform-accent), #ff8e47 40%);
+  --platform-core-end: color-mix(in srgb, var(--platform-accent), #633f30 50%);
+  position: relative;
+  width: 100%;
+  aspect-ratio: 940 / 600;
+  font-size: calc(100cqw * 16 / 940);
+  font-weight: 400;
+  letter-spacing: -0.0125em;
+}
+
+.orbit {
+  position: absolute;
+  left: 15.625em;
+  top: 5em;
+  width: 27.5em;
+  height: 27.5em;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, #000, transparent);
+}
+
+/* Keep the fade fixed while only the dashed ring rotates. */
+.orbitRing {
+  position: absolute;
+  inset: 0;
+  color: color-mix(in srgb, var(--platform-accent) 55%, transparent);
+  animation: orbit-rotation 60s linear infinite;
+}
+
+@keyframes orbit-rotation {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .orbitRing { animation: none; }
+}
+
+.platform {
+  position: absolute;
+  left: 22.5em;
+  top: 11.875em;
+  display: flex;
+  width: 13.75em;
+  height: 13.75em;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, var(--platform-core-start), var(--platform-core-end));
+  box-shadow: 0 0 3.75em 0.3125em color-mix(in srgb, var(--platform-accent) 85%, transparent);
+  color: var(--color-white);
+  text-align: center;
+}
+
+.platformName { margin: 0; font-size: 2.5em; line-height: 1.2; }
+.platformDescription { margin: 0; font-size: 0.6875em; line-height: 1.363636; }
+
+.product {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625em;
+  width: 13.75em;
+  height: 8.4375em;
+  padding: 1em 0.75em 1.25em;
+  border-radius: min(var(--radius-modal), 1.25em);
+  box-shadow: 0 1.25em 0.625em rgb(var(--color-shadow-rgb) / 0.05);
+}
+
+.productHeader { display: flex; align-items: center; gap: 1.0625em; }
+.productIcon { display: flex; align-items: center; justify-content: center; width: 2.75em; height: 2.75em; flex-shrink: 0; }
+.productTitle { display: flex; flex-direction: column; gap: 0.25em; min-width: 0; }
+.productTitle h3 { margin: 0; font-size: 1em; font-weight: 600; line-height: 1.1875; }
+.productTitle p { margin: 0; font-size: 0.6875em; line-height: 1.181818; }
+.features { margin: 0; padding-left: 1.5em; list-style: disc; font-size: 0.6875em; line-height: 1.363636; letter-spacing: -0.018182em; }
+
+.connections { position: absolute; left: 9.1875em; top: 25.625em; color: var(--platform-accent); }
+.integrations { position: absolute; top: 28.6875em; left: 5.4375em; display: flex; gap: 0.625em; margin: 0; padding: 0; list-style: none; }
+.integration {
+  display: flex;
+  width: 7.5em;
+  height: 6.75em;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75em;
+  padding: 0.875em 0.75em;
+  border-radius: min(var(--radius-modal), 1.25em);
+  box-shadow: 0 0.625em 0.625em rgb(var(--color-shadow-rgb) / 0.1);
+}
+.integrationIcon { display: flex; align-items: center; justify-content: center; width: 1.625em; height: 1.625em; flex-shrink: 0; }
+.integration:first-child .integrationIcon { height: 1.8125em; }
+.integration p { margin: 0; width: 100%; font-size: 0.75em; line-height: 1.166667; text-align: center; overflow-wrap: anywhere; }
