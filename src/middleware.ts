@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { shouldBlockAdminAccess } from "./src/features/admin/access";
-import { LOCALE_PREFERENCE_COOKIE, resolveRootLocale } from "./src/features/routing/localePreference";
+import { shouldBlockAdminAccess } from "./features/admin/access";
+import { LOCALE_PREFERENCE_COOKIE, resolveRootLocale } from "./features/routing/localePreference";
 
 export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/") {

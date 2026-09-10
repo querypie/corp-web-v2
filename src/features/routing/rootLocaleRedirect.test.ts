@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { describe, expect, it } from "vitest";
-import { middleware } from "../../../middleware";
+import { middleware } from "@/middleware";
 
 describe("root locale redirect", () => {
   it("최초 루트 진입은 브라우저 언어로 임시 이동한다", () => {
