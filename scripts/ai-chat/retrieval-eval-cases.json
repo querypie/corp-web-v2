@@ -1,0 +1,18 @@
+[
+  { "id": "aip-definition", "locale": "ko", "question": "AIP는 무엇이고 어떤 문제를 해결하나요?", "urlIncludes": "/ko/user-guide", "textIncludes": "AI Playground" },
+  { "id": "aip-edge-tunnel", "locale": "ko", "question": "AIP가 사내 VPN 안의 개발 서버에 연결할 수 있나요?", "urlIncludes": "/ko/user-guide/special-features/edge-tunnel", "textIncludes": "VPN" },
+  { "id": "aip-price", "locale": "ko", "question": "AIP Business 가격과 크레딧은 얼마인가요?", "urlIncludes": "/ko/plans/aip", "textIncludes": "$650" },
+  { "id": "aip-automation", "locale": "ko", "question": "AIP 에이전트를 매일 자동으로 실행할 수 있나요?", "urlIncludes": "/ko/user-guide/automation", "textIncludes": "Automation" },
+  { "id": "acp-authentication", "locale": "ko", "question": "ACP에서 SSO와 MFA를 지원하나요?", "urlIncludes": "/ko/administrator-manual/general/user-management/authentication", "textIncludes": "MFA" },
+  { "id": "acp-web-rbac", "locale": "ko", "question": "ACP로 웹 애플리케이션에 RBAC를 적용할 수 있나요?", "urlIncludes": "/ko/user-manual/web-access-control", "textIncludes": "RBAC" },
+  { "id": "acp-workflow", "locale": "ko", "question": "ACP에서 권한 요청과 승인은 어떻게 하나요?", "urlIncludes": "/ko/user-manual/workflow", "textIncludes": "승인" },
+  { "id": "lingo-languages", "locale": "ko", "question": "Lingo는 어떤 언어를 지원하나요?", "urlIncludes": "/ko/resources/help", "textIncludes": "베트남" },
+  { "id": "lingo-price", "locale": "ko", "question": "Lingo Enterprise의 120만엔 24만 크레딧 패키지를 알려줘.", "urlIncludes": "lingo.querypie.ai/ko/pricing", "textIncludes": "240,000크레딧" },
+  { "id": "lingo-voice", "locale": "ko", "question": "Lingo Voice로 한국어를 일본어 음성으로 통역할 수 있나요?", "urlIncludes": "/ko/apps/lingo/real-time-interpreter", "textIncludes": "일본어 번역 음성" },
+  { "id": "notepie", "locale": "ko", "question": "NotePie에 PDF와 URL을 넣고 답변을 받을 수 있나요?", "urlIncludes": "/ko/news/notepie-launch", "textIncludes": "PDF" },
+  { "id": "linkpie", "locale": "ko", "question": "LinkPie로 명함을 관리할 수 있나요?", "urlIncludes": "/ko/user-guide/apps", "textIncludes": "명함 이미지" },
+  { "id": "fde", "locale": "ko", "question": "AIP 위에서 제공하는 FDE 서비스가 뭐고 QueryPie의 강점은 무엇인가요?", "urlIncludes": "/ko/solutions/aip/fde-services", "textIncludes": "전담 엔지니어 동반 서비스" },
+  { "id": "fde-acp", "locale": "ko", "question": "FDE에서 ACP를 연계하면 보안과 인증은 어떻게 설계할 수 있나요?", "urlIncludes": "docs.querypie.com/ko/overview", "textIncludes": "SSO와 MFA" },
+  { "id": "certifications", "locale": "ko", "question": "QueryPie가 보유한 보안 인증은 무엇인가요?", "urlIncludes": "/ko/company/certifications", "textIncludes": "SOC 2 Type II" },
+  { "id": "lingo-follow-up", "locale": "ko", "history": ["Lingo가 뭐야?"], "question": "그럼 요금은?", "urlIncludes": "lingo.querypie.ai/ko/pricing", "textIncludes": "크레딧" }
+]

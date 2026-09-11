@@ -1,0 +1,325 @@
+{
+  "updatedAt": "2026-09-11T00:00:00.000Z",
+  "documents": [
+    {
+      "id": "lingo-enterprise-credit-packages-ko",
+      "product": "lingo",
+      "locale": "ko",
+      "title": "Lingo Enterprise 선불 크레딧 패키지",
+      "url": "https://lingo.querypie.ai/ko/pricing",
+      "chunks": [
+        {
+          "heading": "Enterprise 선불 AIP 크레딧",
+          "text": "Lingo Enterprise에서 이용할 수 있는 선불 AIP 크레딧 패키지는 두 가지입니다. ¥360,000에 72,000크레딧, ¥1,200,000에 240,000크레딧을 제공합니다. 크레딧은 Lingo 사용량에 따라 차감됩니다. Enterprise 도입 문의는 QueryPie 홈페이지의 가격·플랜 페이지에서 문의 버튼을 이용하거나 sales@querypie.com으로 이메일을 보내면 됩니다."
+        }
+      ]
+    },
+    {
+      "id": "notepie-enterprise-credit-packages-ko",
+      "product": "notepie",
+      "locale": "ko",
+      "title": "NotePie Enterprise 선불 크레딧 패키지",
+      "url": "https://www.querypie.com/ko/plans/aip",
+      "chunks": [
+        {
+          "heading": "Enterprise 선불 AIP 크레딧",
+          "text": "NotePie Enterprise에서 이용할 수 있는 선불 AIP 크레딧 패키지는 두 가지입니다. ¥360,000에 72,000크레딧, ¥1,200,000에 240,000크레딧을 제공합니다. 크레딧은 문서 처리, 임베딩, 콘텐츠 생성 등 NotePie 사용량에 따라 차감됩니다. Enterprise 도입 문의는 QueryPie 홈페이지의 가격·플랜 페이지에서 문의 버튼을 이용하거나 sales@querypie.com으로 이메일을 보내면 됩니다."
+        }
+      ]
+    },
+    {
+      "id": "lingo-enterprise-credit-packages-en",
+      "product": "lingo",
+      "locale": "en",
+      "title": "Lingo Enterprise prepaid credit packages",
+      "url": "https://lingo.querypie.ai/en/pricing",
+      "chunks": [
+        {
+          "heading": "Prepaid AIP credits for Enterprise",
+          "text": "Lingo Enterprise offers two prepaid AIP credit packages: ¥360,000 includes 72,000 credits, and ¥1,200,000 includes 240,000 credits. Credits are consumed according to Lingo usage. For Enterprise adoption inquiries, use the inquiry button on the QueryPie website's pricing and plans page or email sales@querypie.com."
+        }
+      ]
+    },
+    {
+      "id": "notepie-enterprise-credit-packages-en",
+      "product": "notepie",
+      "locale": "en",
+      "title": "NotePie Enterprise prepaid credit packages",
+      "url": "https://www.querypie.com/en/plans/aip",
+      "chunks": [
+        {
+          "heading": "Prepaid AIP credits for Enterprise",
+          "text": "NotePie Enterprise offers two prepaid AIP credit packages: ¥360,000 includes 72,000 credits, and ¥1,200,000 includes 240,000 credits. Credits are consumed for NotePie usage such as document processing, embeddings, and content generation. For Enterprise adoption inquiries, use the inquiry button on the QueryPie website's pricing and plans page or email sales@querypie.com."
+        }
+      ]
+    },
+    {
+      "id": "lingo-enterprise-credit-packages-ja",
+      "product": "lingo",
+      "locale": "ja",
+      "title": "Lingo Enterprise 前払いクレジットパッケージ",
+      "url": "https://lingo.querypie.ai/ja/pricing",
+      "chunks": [
+        {
+          "heading": "Enterprise向け前払いAIPクレジット",
+          "text": "Lingo Enterpriseで利用できる前払いAIPクレジットパッケージは2種類です。¥360,000で72,000クレジット、¥1,200,000で240,000クレジットを提供します。クレジットはLingoの利用量に応じて消費されます。Enterprise導入に関するお問い合わせは、QueryPieホームページの価格・プランページにあるお問い合わせボタン、またはsales@querypie.comをご利用ください。"
+        }
+      ]
+    },
+    {
+      "id": "notepie-enterprise-credit-packages-ja",
+      "product": "notepie",
+      "locale": "ja",
+      "title": "NotePie Enterprise 前払いクレジットパッケージ",
+      "url": "https://www.querypie.com/ja/plans/aip",
+      "chunks": [
+        {
+          "heading": "Enterprise向け前払いAIPクレジット",
+          "text": "NotePie Enterpriseで利用できる前払いAIPクレジットパッケージは2種類です。¥360,000で72,000クレジット、¥1,200,000で240,000クレジットを提供します。クレジットはドキュメント処理、埋め込み、コンテンツ生成などのNotePie利用量に応じて消費されます。Enterprise導入に関するお問い合わせは、QueryPieホームページの価格・プランページにあるお問い合わせボタン、またはsales@querypie.comをご利用ください。"
+        }
+      ]
+    },
+    {
+      "id": "aip-fde-services-ko",
+      "product": "aip",
+      "locale": "ko",
+      "title": "AIP FDE(Forward Deployed Engineer) 서비스",
+      "url": "https://www.querypie.com/ko/solutions/aip/fde-services",
+      "chunks": [
+        {
+          "heading": "FDE 서비스의 역할과 강점",
+          "text": "FDE(Forward Deployed Engineer)는 QueryPie AIP 위에서 제공되는 전담 엔지니어 동반 서비스이며, Enterprise 플랜의 Add-on입니다. FDE는 고객 조직의 업무 흐름과 AI 전환을 가로막는 문제를 함께 발굴하고, 실행 가능한 계획을 설계하며, AIP 기반의 맞춤형 AI 에이전트 구축부터 실제 운영까지 지원합니다. QueryPie의 강점은 AIP 플랫폼과 전문 엔지니어 지원이 끊기지 않는다는 점입니다. 고객 업무에 맞는 AI 에이전트를 설계·구축한 뒤에도 운영 환경에서 작동하도록 지속 지원하므로, 전략 제안에만 그치지 않고 도입과 운영을 함께 연결합니다."
+        }
+      ]
+    },
+    {
+      "id": "aip-fde-services-en",
+      "product": "aip",
+      "locale": "en",
+      "title": "AIP FDE (Forward Deployed Engineer) Services",
+      "url": "https://www.querypie.com/en/solutions/aip/fde-services",
+      "chunks": [
+        {
+          "heading": "What FDE services do and their strengths",
+          "text": "A Forward Deployed Engineer (FDE) is a dedicated-engineer service delivered on top of QueryPie AIP and available as an Enterprise add-on. FDEs work with a customer's organization to identify workflow problems, create an actionable plan, build tailored AI agents on AIP, and support production operations. QueryPie's strength is the continuity between the AIP platform and specialist delivery: the same engagement connects business-specific agent design and implementation with ongoing help to make it work in production, rather than ending at a strategy proposal."
+        }
+      ]
+    },
+    {
+      "id": "aip-fde-services-ja",
+      "product": "aip",
+      "locale": "ja",
+      "title": "AIP FDE（Forward Deployed Engineer）サービス",
+      "url": "https://www.querypie.com/ja/solutions/aip/fde-services",
+      "chunks": [
+        {
+          "heading": "FDEサービスの役割と強み",
+          "text": "FDE（Forward Deployed Engineer）は、QueryPie AIP上で提供する専任エンジニア伴走サービスであり、EnterpriseプランのAdd-onです。FDEは顧客組織の業務フローとAI変革を妨げる課題を共に見つけ、実行可能な計画を設計し、AIPを基盤としたカスタムAIエージェントの構築から本番運用まで支援します。QueryPieの強みは、AIPプラットフォームと専門エンジニアの支援が途切れないことです。業務に合うAIエージェントを設計・構築した後も、本番環境で機能するよう継続的に支援するため、戦略提案だけにとどまらず、導入と運用をつなげます。"
+        }
+      ]
+    },
+    {
+      "id": "aip-fde-acp-security-ko",
+      "product": "aip",
+      "locale": "ko",
+      "title": "AIP FDE와 ACP 보안·인증 연계",
+      "url": "https://docs.querypie.com/ko/overview",
+      "chunks": [
+        {
+          "heading": "FDE 도입에서 ACP를 활용하는 보안 강점",
+          "text": "FDE가 AIP 기반 AI 에이전트나 업무 워크플로를 설계·구축할 때, 고객 요구사항에 따라 QueryPie ACP를 함께 연계할 수 있습니다. ACP는 SSO와 MFA를 통한 인증, 역할 기반 접근 제어(RBAC)와 세분화된 권한 관리, 권한 요청·승인 워크플로, 감사 로그와 실시간 모니터링을 제공합니다. 따라서 FDE는 AI 기능 구현뿐 아니라 데이터베이스·시스템·Kubernetes·웹 애플리케이션에 대한 접근 통제와 감사 요건까지 고려해 엔터프라이즈 환경에 맞는 도입을 지원할 수 있습니다. ACP 연계 범위와 적용 정책은 고객의 시스템·보안 요구사항 및 계약 범위에 따라 설계합니다."
+        }
+      ]
+    },
+    {
+      "id": "aip-fde-acp-security-en",
+      "product": "aip",
+      "locale": "en",
+      "title": "AIP FDE and ACP security and authentication integration",
+      "url": "https://docs.querypie.com/en/overview",
+      "chunks": [
+        {
+          "heading": "Security strength of using ACP in an FDE engagement",
+          "text": "When FDEs design and build AIP-based AI agents or workflows, they can integrate QueryPie ACP where customer requirements call for it. ACP provides authentication through SSO and MFA, role-based access control (RBAC) and granular permissions, request-and-approval workflows, audit logs, and real-time monitoring. This lets an FDE engagement consider controls and audit requirements for databases, systems, Kubernetes, and web applications alongside the AI implementation. The ACP integration scope and applicable policies are designed for each customer's systems, security requirements, and contract scope."
+        }
+      ]
+    },
+    {
+      "id": "aip-fde-acp-security-ja",
+      "product": "aip",
+      "locale": "ja",
+      "title": "AIP FDEとACPのセキュリティ・認証連携",
+      "url": "https://docs.querypie.com/ja/overview",
+      "chunks": [
+        {
+          "heading": "FDE導入でACPを活用するセキュリティ上の強み",
+          "text": "FDEがAIPを基盤とするAIエージェントや業務ワークフローを設計・構築する際、顧客要件に応じてQueryPie ACPを連携できます。ACPはSSOとMFAによる認証、ロールベースのアクセス制御（RBAC）ときめ細かな権限管理、権限リクエスト・承認ワークフロー、監査ログ、リアルタイムモニタリングを提供します。そのためFDEはAI機能の実装だけでなく、データベース、システム、Kubernetes、Webアプリケーションのアクセス制御と監査要件も考慮し、エンタープライズ環境に合う導入を支援できます。ACPの連携範囲と適用ポリシーは、顧客のシステム・セキュリティ要件および契約範囲に合わせて設計します。"
+        }
+      ]
+    },
+    {
+      "id": "lingo-business-plan-ko",
+      "product": "lingo",
+      "locale": "ko",
+      "title": "Lingo Business 플랜",
+      "url": "https://lingo.querypie.ai/ko/pricing",
+      "chunks": [
+        {
+          "heading": "Business 월 구독과 제공 크레딧",
+          "text": "Lingo Business 플랜은 월 $650이며 매월 20,000크레딧을 제공합니다. 무료 체험은 14일이고 신규 계정에는 800크레딧이 제공되며, 체험 크레딧은 체험 종료와 함께 만료됩니다. Business 플랜의 기본 제공 크레딧을 모두 사용하면 추가 크레딧을 구매할 수 있습니다. 실시간 번역 회의는 1시간당 200크레딧을 사용합니다."
+        }
+      ]
+    },
+    {
+      "id": "lingo-business-plan-en",
+      "product": "lingo",
+      "locale": "en",
+      "title": "Lingo Business plan",
+      "url": "https://lingo.querypie.ai/en/pricing",
+      "chunks": [
+        {
+          "heading": "Monthly subscription and included credits",
+          "text": "The Lingo Business plan costs $650 per month and includes 20,000 credits each month. The free trial lasts 14 days and gives new accounts 800 credits; trial credits expire when the trial ends. Additional credits can be purchased after the monthly included credits are used. A one-hour real-time translated meeting uses 200 credits."
+        }
+      ]
+    },
+    {
+      "id": "lingo-business-plan-ja",
+      "product": "lingo",
+      "locale": "ja",
+      "title": "Lingo Businessプラン",
+      "url": "https://lingo.querypie.ai/ja/pricing",
+      "chunks": [
+        {
+          "heading": "月額料金と付与クレジット",
+          "text": "Lingo Businessプランは月額$650で、毎月20,000クレジットが付与されます。無料トライアルは14日間で、新規アカウントには800クレジットが付与され、トライアルクレジットは期間終了時に失効します。毎月の付与クレジットを使い切った後は、追加クレジットを購入できます。リアルタイム翻訳会議は1時間あたり200クレジットを使用します。"
+        }
+      ]
+    },
+    {
+      "id": "notepie-business-plan-ko",
+      "product": "notepie",
+      "locale": "ko",
+      "title": "NotePie Business 플랜",
+      "url": "https://www.querypie.com/ko/plans/aip",
+      "chunks": [
+        {
+          "heading": "Business 월 구독과 제공 크레딧",
+          "text": "NotePie Business 플랜은 Lingo와 동일하게 월 $650이며 매월 20,000크레딧을 제공합니다. 무료 체험은 14일이고 신규 계정에는 800크레딧이 제공되며, 체험 크레딧은 체험 종료와 함께 만료됩니다. Business 플랜의 기본 제공 크레딧을 모두 사용하면 추가 크레딧을 구매할 수 있습니다."
+        }
+      ]
+    },
+    {
+      "id": "notepie-business-plan-en",
+      "product": "notepie",
+      "locale": "en",
+      "title": "NotePie Business plan",
+      "url": "https://www.querypie.com/en/plans/aip",
+      "chunks": [
+        {
+          "heading": "Monthly subscription and included credits",
+          "text": "Like Lingo, the NotePie Business plan costs $650 per month and includes 20,000 credits each month. The free trial lasts 14 days and gives new accounts 800 credits; trial credits expire when the trial ends. Additional credits can be purchased after the monthly included credits are used."
+        }
+      ]
+    },
+    {
+      "id": "notepie-business-plan-ja",
+      "product": "notepie",
+      "locale": "ja",
+      "title": "NotePie Businessプラン",
+      "url": "https://www.querypie.com/ja/plans/aip",
+      "chunks": [
+        {
+          "heading": "月額料金と付与クレジット",
+          "text": "NotePie BusinessプランはLingoと同じく月額$650で、毎月20,000クレジットが付与されます。無料トライアルは14日間で、新規アカウントには800クレジットが付与され、トライアルクレジットは期間終了時に失効します。毎月の付与クレジットを使い切った後は、追加クレジットを購入できます。"
+        }
+      ]
+    },
+    {
+      "id": "acp-dac-ai-chat-boundary-ko",
+      "product": "acp",
+      "locale": "ko",
+      "title": "DAC와 AI Chat의 AI Preview 기능 구분",
+      "url": "https://docs.querypie.com/ko/user-manual/ai-chat",
+      "chunks": [
+        {
+          "heading": "DAC와 AI Preview의 역할",
+          "text": "DAC(Database Access Control)는 QueryPie ACP에서 데이터베이스 접근을 제어하는 기능으로, DB 접근 권한, SQL 실행과 승인, 정책, 감사 이력을 관리합니다. AI Preview는 DAC 기능이 아니라 QueryPie AI Chat 기능입니다. DAC Web SQL Editor에서 AI Preview 버튼을 열 수 있지만, 분석은 AI Chat이 수행합니다. AI Preview를 사용하면 SQL을 실제로 실행하지 않고 대상 스키마 구조, 예상 행 수와 성능, 잠재 오류와 개선 사항을 분석할 수 있습니다."
+        }
+      ]
+    },
+    {
+      "id": "acp-dac-ai-chat-boundary-en",
+      "product": "acp",
+      "locale": "en",
+      "title": "Product boundary between DAC and AI Chat AI Preview",
+      "url": "https://docs.querypie.com/en/user-manual/ai-chat",
+      "chunks": [
+        {
+          "heading": "Roles of DAC and AI Preview",
+          "text": "DAC (Database Access Control) is a QueryPie ACP capability for controlling database access, including DB permissions, SQL execution and approval, policies, and audit history. AI Preview is a QueryPie AI Chat feature, not a DAC capability. Its button can be opened from the DAC Web SQL Editor, but AI Chat performs the analysis. AI Preview analyzes the target schema structure, estimated row count and performance, and potential errors and improvements without executing the SQL."
+        }
+      ]
+    },
+    {
+      "id": "acp-mac-remote-mcp-ko",
+      "product": "acp",
+      "locale": "ko",
+      "title": "MAC을 통한 Remote MCP Server 사용",
+      "url": "https://docs.querypie.com/ko/user-manual/mcp-access-control/using-remote-mcp-servers-through-mac",
+      "chunks": [
+        {
+          "heading": "MAC 개요와 이용 조건",
+          "text": "MAC(MCP Access Control)는 QueryPie ACP에서 Remote MCP Server에 대한 사용자 접근을 Role과 Policy로 제어하는 기능입니다. 사용자는 MCP Servers 화면에서 자신에게 허용된 Remote MCP Server만 확인하고, QueryPie가 제공하는 MCP Endpoint를 외부 MCP Client에 연결합니다. 사용하려면 ACP의 MAC 라이선스, 관리자가 부여한 Role, 그리고 하나 이상의 MCP Server 사용을 허용하는 Policy가 필요합니다."
+        },
+        {
+          "heading": "접속 정보, 허용 도구와 OAuth",
+          "text": "MCP Server 상세 화면에서 Basic Info, Tools, Accessible Roles를 확인할 수 있으며, Available Tools에는 현재 사용자의 Role과 Policy가 허용한 도구만 표시됩니다. QueryPie Endpoint의 루트 URL 형식은 <QueryPie Instance FQDN>/mac/mcp이며, 지원하는 MCP Client에 따라 One-click, Command, Terminal URL 또는 Connector Step 방식으로 연결할 수 있습니다. Credential Mode가 User OAuth인 서버는 사용자가 Connect로 인증하고 Reset Token으로 연결을 초기화할 수 있습니다. Role이 있는데도 서버가 보이지 않으면 관리자가 Policy와 서버 허용 범위를 확인해야 합니다."
+        }
+      ]
+    },
+    {
+      "id": "acp-mac-remote-mcp-en",
+      "product": "acp",
+      "locale": "en",
+      "title": "Using Remote MCP Servers through MAC",
+      "url": "https://docs.querypie.com/en/user-manual/mcp-access-control/using-remote-mcp-servers-through-mac",
+      "chunks": [
+        {
+          "heading": "MAC overview and prerequisites",
+          "text": "MAC (MCP Access Control) controls user access to Remote MCP Servers in QueryPie ACP through Roles and Policies. On the MCP Servers screen, users see only the Remote MCP Servers allowed for them and connect external MCP clients through an MCP Endpoint provided by QueryPie. Use requires an ACP MAC license, a Role assigned by an administrator, and a Policy that allows at least one MCP Server."
+        },
+        {
+          "heading": "Connection details, allowed tools, and OAuth",
+          "text": "The MCP Server detail screen shows Basic Info, Tools, and Accessible Roles, while Available Tools contains only tools allowed by the current user's Role and Policy. The QueryPie Endpoint root URL follows <QueryPie Instance FQDN>/mac/mcp, with connection methods such as One-click, Command, Terminal URL, or Connector Step depending on the MCP client. For servers using User OAuth credential mode, users authenticate with Connect and can initialize the connection with Reset Token. If a user has a Role but sees no server, an administrator should check the Policy and allowed server scope."
+        }
+      ]
+    },
+    {
+      "id": "corpnavi-approved-product-overview-ko",
+      "product": "corpnavi",
+      "locale": "ko",
+      "title": "CorpNavi 제품 개요와 기능 방향",
+      "url": "urn:querypie:approved:corpnavi-product-brief",
+      "chunks": [
+        {
+          "heading": "제품 정의와 핵심 경험",
+          "text": "CorpNavi는 이전 제품명 YuhoNavi에서 이어진 기업·금융 리서치 워크벤치입니다. 고정된 기업분석 리포트만 보여주는 서비스가 아니라, 사용자가 자기 회사와 관심 기업을 등록하고 AI 채팅으로 분석 위젯을 생성·편집한 뒤 위젯을 조합해 자신만의 기업 리포트를 구성하고 재사용하는 제품입니다."
+        }
+      ]
+    },
+    {
+      "id": "acp-module-boundaries-ko",
+      "product": "acp",
+      "locale": "ko",
+      "title": "ACP 기능 경계 기준표",
+      "url": "https://docs.querypie.com/ko/",
+      "chunks": [
+        {
+          "heading": "접근 대상별 ACP 모듈",
+          "text": "QueryPie ACP의 접근 제어 모듈은 보호하는 자원에 따라 구분합니다. DAC(Database Access Control)는 데이터베이스 접근, SAC(Server Access Control)는 서버 접근, KAC(Kubernetes Access Control)는 Kubernetes 접근, WAC(Web Access Control)는 웹 애플리케이션 접근, MAC(MCP Access Control)는 Remote MCP Server와 허용 도구에 대한 접근을 제어합니다. 한 모듈의 기능을 다른 모듈의 기능으로 설명하지 않습니다."
+        }
+      ]
+    }
+  ]
+}

@@ -13,6 +13,7 @@ export type AdminNavGroup = {
 export const adminPrimaryNavItems: AdminNavItem[] = [
   { href: "/admin", label: "Dashboard" },
   { href: "/admin/news", label: "News" },
+  { href: "/admin/ai-chat", label: "AI Chat" },
 ];
 
 export const adminNavGroups: AdminNavGroup[] = [

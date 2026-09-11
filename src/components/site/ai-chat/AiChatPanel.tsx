@@ -4,8 +4,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import Button from "@/components/ui/Button";
 import type { Locale } from "@/constants/i18n";
 import { aiChatCopy } from "@/copy/aiChat";
-import { isBrowserChatRequest, isChatReply, type ChatMessage } from "@/features/ai-chat/types";
-import { parseProviderReply } from "@/features/ai-chat/reply";
+import { isChatReply, type ChatMessage } from "@/features/ai-chat/types";
 import {
   MAX_MESSAGE_LENGTH,
   MAX_PREVIEW_MESSAGES,
@@ -105,17 +104,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
         body: JSON.stringify({ locale, messages: messages.slice(-8).map((message) => ({ role: message.role, content: message.text })) }),
         signal,
       });
-      let result: unknown = await response.json();
-      if (generation !== generationRef.current) return;
-      if (response.ok && isBrowserChatRequest(result)) {
-        const prepared = result;
-        const upstream = await fetch(prepared.endpoint, {
-          method: "POST", headers: { "Content-Type": "application/json" },
-          credentials: "omit", body: JSON.stringify(prepared.body), signal,
-        });
-        if (!upstream.ok) throw new Error("error");
-        result = parseProviderReply(await upstream.json(), prepared.references);
-      }
+      const result: unknown = await response.json();
       if (generation !== generationRef.current) return;
       if (!response.ok || !isChatReply(result)) {
         const code = result && typeof result === "object" && "code" in result ? result.code : null;
@@ -125,7 +114,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
         ...current,
         messages: [...current.messages, {
           id: `${Date.now()}-${generation}-assistant`, role: "assistant" as const,
-          text: result.answer, locale, sources: result.sources, answered: result.answered,
+          text: result.answer, locale, sources: result.sources, answered: result.answered, status: result.status,
         }].slice(-MAX_PREVIEW_MESSAGES),
       }));
     } catch (cause) {

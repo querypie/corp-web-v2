@@ -36,3 +36,9 @@ yarn-error.log*
 
 # 콘텐츠 다운로드 리드 런타임 데이터
 src/content/state/
+
+# 내부 RAG 리서치와 로컬 검토 기록은 공개 저장소에 올리지 않습니다.
+docs/reference/ai-product-rag-research.md
+docs/reference/ai-product-rag-review-candidates.json
+docs/reference/rag-content-audit-*.md
+docs/reference/rag-evidence-cleanup-*.md

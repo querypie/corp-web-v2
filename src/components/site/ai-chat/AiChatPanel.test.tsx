@@ -4,10 +4,10 @@ import { aiChatCopy } from "@/copy/aiChat";
 import { readPreviewSession } from "@/features/ai-chat/previewSession";
 import AiChatPanel from "./AiChatPanel";
 
-const reply = { answer: "공식 문서를 바탕으로 한 답변입니다.", answered: true, sources: [{ title: "AIP 공식 문서", url: "https://aip-docs.app.querypie.com/ko" }] };
+const reply = { answer: "공식 문서를 바탕으로 한 답변입니다.", answered: true, status: "answered", sources: [{ title: "AIP 공식 문서", url: "https://aip-docs.app.querypie.com/ko" }] };
 const response = () => new Response(JSON.stringify(reply), { headers: { "Content-Type": "application/json" } });
 
-describe("AI 제품 상담", () => {
+describe("QueryPie Bot", () => {
   beforeEach(() => {
     sessionStorage.clear();
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue(response()));
@@ -28,6 +28,7 @@ describe("AI 제품 상담", () => {
   it.each(["en", "ko", "ja"] as const)("%s 문구와 기본 채팅 컨트롤을 표시한다", (locale) => {
     render(<AiChatPanel locale={locale} onClose={vi.fn()} open />);
     const copy = aiChatCopy[locale];
+    expect(copy.title).toBe("QueryPie Bot");
     expect(screen.getByRole("dialog", { name: copy.title })).toHaveAttribute("lang", locale);
     expect(screen.getByRole("textbox", { name: copy.placeholder })).toBeVisible();
     expect(screen.getByRole("button", { name: copy.send })).toBeDisabled();
@@ -112,34 +113,6 @@ describe("AI 제품 상담", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(aiChatCopy.ko.error);
     expect(screen.getByRole("textbox")).toHaveValue("Lingo 지원 언어");
     expect(screen.getByRole("button", { name: aiChatCopy.ko.send })).toBeEnabled();
-  });
-
-  it("Preview에서는 공개 근거를 받아 사내 LLM에 키 없이 직접 요청한다", async () => {
-    const prepared = {
-      transport: "browser", endpoint: "https://internal-llm.querypie.io/v1/chat/completions",
-      body: { model: "glm-5.3-flash", max_tokens: 4096, temperature: 0.2, response_format: { type: "json_object" }, messages: [{ role: "user", content: "AIP 소개" }] },
-      references: [{ id: "S1", ...reply.sources[0] }],
-    };
-    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify(prepared)));
-    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ choices: [{ finish_reason: "stop", message: { content: JSON.stringify({ answer: reply.answer, sourceIds: ["S1"], answered: true }) } }] })));
-    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
-    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 소개" } });
-    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
-    expect(await screen.findByText(reply.answer)).toBeVisible();
-    const [endpoint, options] = vi.mocked(fetch).mock.calls[1];
-    expect(endpoint).toBe(prepared.endpoint);
-    expect(options?.headers).toEqual({ "Content-Type": "application/json" });
-    expect(options?.credentials).toBe("omit");
-    expect(screen.getByRole("link", { name: "AIP 공식 문서" })).toHaveAttribute("href", reply.sources[0].url);
-  });
-
-  it("허용하지 않은 브라우저 모델 주소로 요청을 전달하지 않는다", async () => {
-    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ transport: "browser", endpoint: "https://other.example" })));
-    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
-    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 소개" } });
-    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
-    await screen.findByRole("alert");
-    expect(fetch).toHaveBeenCalledOnce();
   });
 
   it("초기화 이후 늦게 도착한 응답이 새 대화에 들어오지 않는다", async () => {

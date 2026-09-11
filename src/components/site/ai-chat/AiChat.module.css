@@ -4,7 +4,8 @@
   position: fixed;
   right: max(24px, env(safe-area-inset-right));
   bottom: max(24px, env(safe-area-inset-bottom));
-  z-index: 40;
+  /* Stay clickable above the homepage's floating promo cards. */
+  z-index: 60;
 }
 
 :global(:root[data-theme="dark"]) .launcher {

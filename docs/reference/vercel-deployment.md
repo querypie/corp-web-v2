@@ -185,6 +185,10 @@ Vercel 프로젝트에 설정해야 하는 기준값. 실제 등록값은 Vercel
 vercel env pull .env.local --environment=development -y
 ```
 
+### AI 제품 상담
+
+운영 AI 상담에는 `AI_CHAT_ENABLED`, `AI_CHAT_BASE_URL`, `AI_CHAT_MODEL`, `AI_CHAT_API_KEY`, `AI_CHAT_EMBEDDING_BASE_URL`, `AI_CHAT_EMBEDDING_MODEL`, `AI_CHAT_EMBEDDING_API_KEY`, `AI_CHAT_DATABASE_URL`, `AI_CHAT_RATE_LIMIT_SALT`, `AI_CHAT_RATE_LIMIT_PER_MINUTE`, `AI_CHAT_REPORT_API_KEY`, `CRON_SECRET`, `SLACK_USER_ALERT_AI_CHAT_UNANSWERED`, `SLACK_CHANNEL_ALERT_AI_CHAT_UNANSWERED_TESTING`을 환경별로 설정한다. `AI_CHAT_DATABASE_URL`은 pgvector 확장을 지원해야 한다. 운영 미답변 보고는 지정 사용자의 Slack DM으로 보내고 비운영 보고만 테스트 채널로 보낸다. 외부 MCP가 미답변을 직접 조회할 때는 `AI_CHAT_REPORT_API_KEY`로 보호된 읽기 전용 API를 사용한다. 브라우저 직접 모델 호출은 지원하지 않으므로 모델과 임베딩 endpoint는 Vercel 서버에서 접근 가능한 HTTPS 주소여야 한다. DB 스키마와 상세 운영 절차는 `docs/reference/ai-product-chat-test.md`를 따른다.
+
 ### 환경변수 추가/수정
 
 `production` / `development` 환경변수는 Vercel CLI로 추가 가능하다:

@@ -7,6 +7,12 @@
   "outputDirectory": ".next",
   "regions": ["icn1"],
   "trailingSlash": false,
+  "crons": [
+    {
+      "path": "/api/cron/ai-chat-unanswered",
+      "schedule": "0 0 * * *"
+    }
+  ],
   "git": {
     "deploymentEnabled": false
   }

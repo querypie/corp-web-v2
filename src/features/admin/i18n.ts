@@ -3,6 +3,7 @@ import type { AdminLocale } from "./preferences";
 const koreanCopy: Record<string, string> = {
   Dashboard: "대시보드",
   News: "뉴스",
+  "AI Chat": "AI 상담",
   Demo: "데모",
   Documentation: "자료",
   All: "전체",
@@ -52,6 +53,7 @@ const koreanCopy: Record<string, string> = {
 const japaneseCopy: Record<string, string> = {
   Dashboard: "ダッシュボード",
   News: "ニュース",
+  "AI Chat": "AI相談",
   Demo: "デモ",
   Documentation: "リソース",
   All: "すべて",

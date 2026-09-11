@@ -1,14 +1,14 @@
 import { NextResponse } from "next/server";
 import { isLocale } from "@/constants/i18n";
-import { getAiChatConfig, useBrowserPreviewChat } from "@/features/ai/config.server";
-import { answerProductQuestion, prepareProductQuestion, ChatServiceError } from "@/features/ai-chat/answer.server";
+import { getAiChatConfig } from "@/features/ai/config.server";
+import { answerProductQuestion, ChatServiceError } from "@/features/ai-chat/answer.server";
+import { retrieveKnowledge } from "@/features/ai-chat/knowledge";
+import { acquireAiChatRequest } from "@/features/ai-chat/rateLimit.server";
+import { recordUnansweredQuestion } from "@/features/ai-chat/unanswered.server";
 import type { ChatTurn } from "@/features/ai-chat/types";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
-let windowStart = 0;
-let requests = 0;
-let active = 0;
 
 const error = (code: string, status: number) => NextResponse.json({ code }, { status, headers: { "Cache-Control": "no-store" } });
 
@@ -44,23 +44,24 @@ export async function POST(request: Request) {
         typeof message.content === "string" && message.content.trim().length > 0 && message.content.length <= 6000) ||
       messages.at(-1).role !== "user" || messages.at(-1).content.length > 2000) return error("INVALID_REQUEST", 400);
 
-  // Small single-instance budget for internal testing, not a production rate limiter.
-  const now = Date.now();
-  if (now - windowStart >= 60000) { windowStart = now; requests = 0; }
-  if (requests >= 30 || active >= 3) return error("RATE_LIMITED", 429);
-  requests++;
-  active++;
+  const budget = await acquireAiChatRequest(request);
+  if (!budget.allowed) return error("RATE_LIMITED", 429);
+  const turns = messages as ChatTurn[];
   try {
-    if (useBrowserPreviewChat()) {
-      // Keyless, CORS-enabled internal endpoint: staff browsers can reach it even
-      // when Vercel's outbound network cannot. Only public source excerpts are sent.
-      return NextResponse.json(prepareProductQuestion(messages as ChatTurn[], locale), { headers: { "Cache-Control": "no-store" } });
+    const reply = await answerProductQuestion(turns, locale, AbortSignal.any([request.signal, AbortSignal.timeout(55000)]));
+    if (reply.status === "insufficient_evidence") {
+      const candidates = retrieveKnowledge(turns, locale).map(({ title, url }) => ({ title, url }));
+      await recordUnansweredQuestion({
+        question: turns.at(-1)!.content,
+        locale,
+        reason: candidates.length ? "model_insufficient_evidence" : "no_relevant_source",
+        candidateSources: candidates,
+      });
     }
-    const reply = await answerProductQuestion(messages as ChatTurn[], locale, AbortSignal.any([request.signal, AbortSignal.timeout(55000)]));
     return NextResponse.json(reply, { headers: { "Cache-Control": "no-store" } });
   } catch (cause) {
     if (cause instanceof ChatServiceError) return error(cause.code, cause.status);
     if (cause instanceof Error && ["TimeoutError", "AbortError"].includes(cause.name)) return error("TIMEOUT", 504);
     return error("PROVIDER_ERROR", 502);
-  } finally { active--; }
+  } finally { budget.release(); }
 }

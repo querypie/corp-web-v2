@@ -83,7 +83,7 @@ export default function CookieConsentBanner({ locale }: CookieConsentBannerProps
   return (
     <aside
       aria-label={copy.title}
-      className="site-popover-surface fixed inset-x-0 bottom-0 z-50 px-5 py-6 backdrop-blur-[18px] md:px-10"
+      className="site-popover-surface fixed inset-x-0 bottom-0 z-[70] px-5 py-6 backdrop-blur-[18px] md:px-10"
     >
       <div className="mx-auto flex w-full max-w-[1180px] flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex max-w-[760px] flex-col gap-2">
