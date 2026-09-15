@@ -1,6 +1,6 @@
 # Vercel 배포 구현 현황
 
-**최종 업데이트**: 2026-06-25
+**최종 업데이트**: 2026-09-15
 
 corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 
@@ -8,13 +8,57 @@ corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 
 ## 배포 환경
 
-| 환경 | 도메인 | 트리거 |
-|------|--------|--------|
-| Staging | `stage-v2.querypie.com` | `main` 브랜치 push 시 자동 배포 |
-| Production | `www-v2.querypie.com` | `workflow_dispatch` 수동 실행 |
-| Preview | Vercel 자동 발급 URL | PR open/sync 시 자동 배포 |
+| 환경 | 직접 서비스 도메인 | 트리거 |
+|------|---------------------|--------|
+| Staging | `stage.querypie.com`<br>`stage-v2.querypie.com`<br>`stage-v2.querypie.ai` | `main` 브랜치 push 시 자동 배포 |
+| Production | `www.querypie.com`<br>`www-v2.querypie.com`<br>`www-v2.querypie.ai` | `workflow_dispatch` 수동 실행 |
+| Preview | 배포별 Vercel Preview URL | PR open/sync 시 자동 배포 |
 
 `stage` 브랜치는 존재하지 않는다. Staging 환경은 `main` 브랜치 기준으로 자동 배포된다.
+
+### 현재 도메인 매핑
+
+아래 도메인은 redirect가 아니라 해당 환경의 동일한 배포를 직접 서비스한다.
+
+| 환경 | 도메인 | Vercel 연결 | 상태 |
+|------|--------|-------------|------|
+| Production | `www.querypie.com` | Production | Verified / 정상 서비스 |
+| Production | `www-v2.querypie.com` | Production | Verified / 정상 서비스 |
+| Production | `www-v2.querypie.ai` | Production | Verified / 정상 서비스 |
+| Staging | `stage.querypie.com` | Custom Environment `staging` | Verified / 정상 서비스 |
+| Staging | `stage-v2.querypie.com` | Custom Environment `staging` | Verified / 정상 서비스 |
+| Staging | `stage-v2.querypie.ai` | Custom Environment `staging` | Verified / 정상 서비스 |
+
+Staging custom environment의 ID는 `env_HGojlWaENVScWZk7uFjJUhtDyx4n`이며
+`main` 브랜치와 연결되어 있다. Production 도메인은 custom environment ID 없이
+Production target에 연결된다.
+
+현재는 환경별 도메인이 모두 같은 배포와 콘텐츠를 제공한다. `.com`과 `.ai` 요청에
+따른 콘텐츠 분기는 아직 구현되어 있지 않다.
+
+### Redirect 도메인
+
+다음 도메인은 별도 서비스를 제공하지 않고 Vercel에서 `www.querypie.com`으로 redirect한다.
+
+| 도메인 | 대상 | 상태 코드 |
+|--------|------|-----------|
+| `querypie.com` | `www.querypie.com` | 308 |
+| `blog.querypie.com` | `www.querypie.com` | 308 |
+| `chequer.io` | `www.querypie.com` | 301 |
+| `www.chequer.io` | `www.querypie.com` | 301 |
+
+`querypie.ai`와 `www.querypie.ai`는 `corp-web-japan` 프로젝트의 도메인이므로 이 프로젝트의
+Production 도메인에 포함하지 않는다.
+
+### Vercel 시스템 도메인
+
+- Production 기본 도메인: `corp-web-v2.vercel.app`
+- Production 자동 alias: `corp-web-v2-querypie.vercel.app`,
+  `corp-web-v2-git-main-querypie.vercel.app`
+- Staging 자동 alias: `corp-web-v2-env-staging-querypie.vercel.app`
+- Preview: 배포마다 별도 `*.vercel.app` URL이 생성된다.
+
+Vercel 시스템 도메인은 배포 확인용이며 외부에 안내하는 서비스 URL로 간주하지 않는다.
 
 ---
 
@@ -98,6 +142,9 @@ scripts/deploy/
 | `preview` | `https://www-v2.querypie.com` |
 | `production` | `https://www.querypie.com` |
 
+추가된 `.ai` 도메인도 위 기본 site URL을 사용하므로 canonical URL과 OG 절대 URL은
+기존 `.com` 기준을 유지한다.
+
 ### `vercel.json`
 
 ```json
@@ -117,7 +164,14 @@ scripts/deploy/
 
 ## DNS 설정 (Route53)
 
-`querypie.com`은 AWS Route53으로 관리된다. 아래 레코드 등록이 필요하다.
+`querypie.com`과 `querypie.ai`는 AWS Route53으로 관리된다.
+
+### Terraform 관리 위치
+
+| Hosted Zone | 저장소 | 파일 |
+|-------------|--------|------|
+| `querypie.com` | `chequer-io/cloud-platform` | `terraform/aws/chequer-inc/record_querypie_com.tf` |
+| `querypie.ai` | `chequer-io/aws-resource` | `tf/account_shared/record_querypie_ai.tf` |
 
 ### 도메인 인증 (TXT)
 
@@ -126,14 +180,22 @@ scripts/deploy/
 | `_vercel.querypie.com` | `vc-domain-verify=www-v2.querypie.com,a044783bea27666ce9d8` |
 | `_vercel.querypie.com` | `vc-domain-verify=stage-v2.querypie.com,030aee6c0d76e6de9a8c` |
 
+`querypie.ai`는 QueryPie Vercel 팀이 소유한 도메인이므로 `stage-v2.querypie.ai`와
+`www-v2.querypie.ai`에는 별도의 `vc-domain-verify` TXT 레코드가 필요하지 않다.
+
 ### 도메인 연결 (CNAME)
 
-| Name | Value |
-|------|-------|
-| `www-v2.querypie.com` | `cname.vercel-dns.com` |
-| `stage-v2.querypie.com` | `cname.vercel-dns.com` |
+| 환경 | Name | Value |
+|------|------|-------|
+| Production | `www.querypie.com` | `30b9851d69a3855d.vercel-dns-016.com.` |
+| Production | `www-v2.querypie.com` | `82199b027e940a05.vercel-dns-016.com.` |
+| Production | `www-v2.querypie.ai` | `82199b027e940a05.vercel-dns-016.com.` |
+| Staging | `stage.querypie.com` | `30b9851d69a3855d.vercel-dns-016.com.` |
+| Staging | `stage-v2.querypie.com` | `82199b027e940a05.vercel-dns-016.com.` |
+| Staging | `stage-v2.querypie.ai` | `82199b027e940a05.vercel-dns-016.com.` |
 
-→ Route53 등록 PR: [chequer-io/cloud-platform#610](https://github.com/chequer-io/cloud-platform/pulls/610)
+- `querypie.com` v2 Route53 등록: [chequer-io/cloud-platform#610](https://github.com/chequer-io/cloud-platform/pulls/610)
+- `querypie.ai` v2 Route53 등록: [chequer-io/aws-resource#768](https://github.com/chequer-io/aws-resource/pull/768)
 
 ---
 
