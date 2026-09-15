@@ -111,10 +111,10 @@ SEO 메타데이터와 OG 이미지는 `src/features/seo`에서 관리합니다.
 
 ## 배포
 
-| 환경 | 도메인 | 트리거 |
-|------|--------|--------|
-| Staging | `stage-v2.querypie.com` | `main` push |
-| Production | `www-v2.querypie.com` | `workflow_dispatch` |
+| 환경 | 직접 서비스 도메인 | 트리거 |
+|------|---------------------|--------|
+| Staging | `stage.querypie.com`<br>`stage-v2.querypie.com`<br>`stage-v2.querypie.ai` | `main` push |
+| Production | `www.querypie.com`<br>`www-v2.querypie.com`<br>`www-v2.querypie.ai` | `workflow_dispatch` |
 | Preview | Vercel preview URL | PR open / sync |
 
 상세 내용은 `docs/reference/vercel-deployment.md`를 확인합니다.
