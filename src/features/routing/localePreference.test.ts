@@ -19,7 +19,14 @@ describe("localePreference", () => {
   });
 
   it("사용자가 저장한 언어를 브라우저 언어보다 우선한다", () => {
-    expect(resolveRootLocale("ja", "ko-KR,ko;q=0.9")).toBe("ja");
+    expect(resolveRootLocale("en", "ko-KR,ko;q=0.9")).toBe("en");
     expect(resolveRootLocale("invalid", "ko-KR,ko;q=0.9")).toBe("ko");
+  });
+
+  it("글로벌 사이트는 일본어 쿠키와 브라우저 언어로 일본어를 선택하지 않는다", () => {
+    expect(resolveRootLocale("ja", "ko-KR,ko;q=0.9")).toBe("ko");
+    expect(resolveRootLocale("ja", "ja-JP")).toBe("en");
+    expect(getRecommendedLocale("ja-JP,ko;q=0.8,en;q=0.7")).toBe("ko");
+    expect(getRecommendedLocale("ja-JP")).toBe("en");
   });
 });

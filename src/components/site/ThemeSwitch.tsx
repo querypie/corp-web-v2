@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ChevronDown, Monitor, Moon, Sun } from "lucide-react";
 import {
   isTheme,
   isThemePreference,
@@ -66,29 +67,8 @@ function applyTheme(theme: Theme) {
 }
 
 function ThemePreferenceIcon({ preference }: { preference: ThemePreference }) {
-  if (preference === "system") {
-    return (
-      <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 16 16">
-        <rect height="9" rx="1.5" stroke="currentColor" strokeWidth="1.3" width="13" x="1.5" y="2" />
-        <path d="M5.5 14h5M8 11v3" stroke="currentColor" strokeLinecap="round" strokeWidth="1.3" />
-      </svg>
-    );
-  }
-
-  if (preference === "dark") {
-    return (
-      <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 16 16">
-        <path d="M11.9 10.3A5 5 0 0 1 5.7 4.1 5 5 0 1 0 11.9 10.3Z" fill="currentColor" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg aria-hidden="true" className="h-4 w-4" fill="none" viewBox="0 0 16 16">
-      <circle cx="8" cy="8" r="2.6" fill="currentColor" />
-      <path d="M8 1.2v1.4M8 13.4v1.4M1.2 8h1.4M13.4 8h1.4M3.2 3.2l1 1M11.8 11.8l1 1M12.8 3.2l-1 1M4.2 11.8l-1 1" stroke="currentColor" strokeLinecap="round" strokeWidth="1.2" />
-    </svg>
-  );
+  const Icon = preference === "system" ? Monitor : preference === "dark" ? Moon : Sun;
+  return <Icon aria-hidden="true" className="h-4 w-4" />;
 }
 
 export default function ThemeSwitch({
@@ -158,9 +138,7 @@ export default function ThemeSwitch({
       >
         <ThemePreferenceIcon preference={preference} />
         {compact ? null : (
-          <svg className="h-3.5 w-3.5 text-mute" fill="none" viewBox="0 0 12 12">
-            <path d="m3 4.5 3 3 3-3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.2" />
-          </svg>
+          <ChevronDown aria-hidden="true" className="h-3.5 w-3.5 text-mute" />
         )}
       </span>
       <select

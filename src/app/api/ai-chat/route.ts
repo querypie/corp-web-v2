@@ -54,7 +54,7 @@ export async function POST(request: Request) {
     if (useBrowserPreviewChat()) {
       // Keyless, CORS-enabled internal endpoint: staff browsers can reach it even
       // when Vercel's outbound network cannot. Only public source excerpts are sent.
-      return NextResponse.json(prepareProductQuestion(messages as ChatTurn[], locale), { headers: { "Cache-Control": "no-store" } });
+      return NextResponse.json(await prepareProductQuestion(messages as ChatTurn[], locale, AbortSignal.any([request.signal, AbortSignal.timeout(25000)])), { headers: { "Cache-Control": "no-store" } });
     }
     const reply = await answerProductQuestion(messages as ChatTurn[], locale, AbortSignal.any([request.signal, AbortSignal.timeout(55000)]));
     return NextResponse.json(reply, { headers: { "Cache-Control": "no-store" } });

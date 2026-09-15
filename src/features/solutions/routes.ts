@@ -1,30 +1,15 @@
 import { getLocalePath, type Locale } from "@/constants/i18n";
 
 export type SolutionEntry = {
-  id:
-    | "aip"
-    | "acp"
-    | "usage-based-llm"
-    | "mcp-gateway"
-    | "fde-services"
-    | "ai-crew"
-    | "ai-dashi"
-    | "aip-integrations"
-    | "acp-integrations";
+  id: "ai-crew" | "ai-dashi" | "as400-cobol";
   locales?: Locale[];
   slug: string[];
 };
 
 export const solutionEntries: SolutionEntry[] = [
-  { id: "aip", slug: ["aip"] },
-  { id: "usage-based-llm", slug: ["aip", "usage-based-llm"] },
-  { id: "mcp-gateway", slug: ["aip", "mcp-gateway"] },
-  { id: "fde-services", slug: ["aip", "fde-services"] },
-  { id: "aip-integrations", slug: ["aip", "integrations"] },
-  { id: "acp", slug: ["acp"] },
-  { id: "acp-integrations", slug: ["acp", "integrations"] },
   { id: "ai-crew", slug: ["ai-crew"] },
   { id: "ai-dashi", slug: ["ai-dashi"] },
+  { id: "as400-cobol", slug: ["as400-cobol"], locales: ["ja"] },
 ];
 
 export function getSolutionEntryById(id: SolutionEntry["id"]): SolutionEntry | null {

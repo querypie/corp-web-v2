@@ -2434,16 +2434,16 @@ function ChatAddonMenu() {
 }
 
 const mcpItems = [
-  { id: "gmail", name: "Gmail", iconUrl: "/assets/products/aip/integrations/google-gmail.svg" },
-  { id: "google-drive", name: "Google Drive", iconUrl: "/assets/products/aip/integrations/google-drive.svg" },
-  { id: "google-calendar", name: "Google Calendar", iconUrl: "/assets/products/aip/integrations/google-calendar.svg" },
-  { id: "google-sheets", name: "Google Sheets", iconUrl: "/assets/products/aip/integrations/google-sheets.svg" },
-  { id: "slack", name: "Slack", iconUrl: "/assets/products/aip/integrations/slack.svg" },
-  { id: "jira", name: "Jira", iconUrl: "/assets/products/aip/integrations/jira.svg" },
-  { id: "github", name: "GitHub", iconUrl: "/assets/products/aip/integrations/github.svg" },
-  { id: "notion", name: "Notion", iconUrl: "/assets/products/aip/integrations/notion.svg" },
-  { id: "salesforce", name: "Salesforce", iconUrl: "/assets/products/aip/integrations/salesforce.svg" },
-  { id: "confluence", name: "Confluence", iconUrl: "/assets/products/aip/integrations/confluence.svg" },
+  { id: "gmail", name: "Gmail", iconUrl: "/assets/pages/platforms/aip/integrations/google-gmail.svg" },
+  { id: "google-drive", name: "Google Drive", iconUrl: "/assets/pages/platforms/aip/integrations/google-drive.svg" },
+  { id: "google-calendar", name: "Google Calendar", iconUrl: "/assets/pages/platforms/aip/integrations/google-calendar.svg" },
+  { id: "google-sheets", name: "Google Sheets", iconUrl: "/assets/pages/platforms/aip/integrations/google-sheets.svg" },
+  { id: "slack", name: "Slack", iconUrl: "/assets/pages/platforms/aip/integrations/slack.svg" },
+  { id: "jira", name: "Jira", iconUrl: "/assets/pages/platforms/aip/integrations/jira.svg" },
+  { id: "github", name: "GitHub", iconUrl: "/assets/pages/platforms/aip/integrations/github.svg" },
+  { id: "notion", name: "Notion", iconUrl: "/assets/pages/platforms/aip/integrations/notion.svg" },
+  { id: "salesforce", name: "Salesforce", iconUrl: "/assets/pages/platforms/aip/integrations/salesforce.svg" },
+  { id: "confluence", name: "Confluence", iconUrl: "/assets/pages/platforms/aip/integrations/confluence.svg" },
 ];
 
 type ManagedMcpItem = {
@@ -4855,7 +4855,7 @@ function IntegrationNameCellMock({
     <div className="flex min-w-0 items-center gap-3">
       <div className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#f5f5f5]">
         {iconId ? (
-          <img alt="" className="size-7 object-contain" src={`/assets/products/aip/integrations/${iconId}.svg`} />
+          <img alt="" className="size-7 object-contain" src={`/assets/pages/platforms/aip/integrations/${iconId}.svg`} />
         ) : (
           <AdminMenuIcon className="size-4 text-[#8f8f8f]" name="puzzle" />
         )}
@@ -7032,7 +7032,7 @@ function McpScreen() {
                               alt=""
                               className="size-7 object-contain"
                               loading="lazy"
-                              src={`/assets/products/aip/integrations/${item.id}.svg`}
+                              src={`/assets/pages/platforms/aip/integrations/${item.id}.svg`}
                             />
                           </div>
                           <div className="min-w-0 flex-1 overflow-hidden">
@@ -7060,7 +7060,7 @@ function McpScreen() {
                 rows={installedMcpItems.map((item, index) => [
                   <div className="flex min-w-0 items-center gap-3" key="name">
                     <div className="relative flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-[#f5f5f5]">
-                      <img alt="" className="size-7 object-contain" src={`/assets/products/aip/integrations/${item.id}.svg`} />
+                      <img alt="" className="size-7 object-contain" src={`/assets/pages/platforms/aip/integrations/${item.id}.svg`} />
                     </div>
                     <span className="line-clamp-2 font-medium text-[#fafafa]">{item.name}</span>
                   </div>,
@@ -7099,7 +7099,7 @@ function McpScreen() {
                               alt=""
                               className="size-7 object-contain"
                               loading="lazy"
-                              src={`/assets/products/aip/integrations/${item.id}.svg`}
+                              src={`/assets/pages/platforms/aip/integrations/${item.id}.svg`}
                             />
                           </div>
                           <div className="min-w-0 flex-1 overflow-hidden">

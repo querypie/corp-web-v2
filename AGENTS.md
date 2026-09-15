@@ -82,12 +82,14 @@ src/
 - `src/app`에서 `components`, `constants`, `features`, `copy`를 import할 때는 깊은 상대경로 대신 `@/...` alias를 우선 사용합니다.
 - `src/components/ui`에는 도메인 의존성이 없는 UI primitive만 둡니다. 콘텐츠/Tiptap 관련은 `components/content`, 페이지 섹션은 `components/sections`, 전역 사이트 동작은 `components/site`에 둡니다.
 - 여러 페이지에서 공유하는 섹션은 `src/components/sections/common`에 둡니다. 특정 페이지나 도메인에 가까운 섹션은 `Home*`, `Aip*`처럼 접두사를 붙여 `src/components/sections`에 둡니다.
-- 솔루션 페이지의 locale별 JSX 본문, 섹션 컴포넌트, 통합 필터/데이터는 `src/components/pages/solutions`에 둡니다. `src/app/[locale]/solutions`에는 route `page.tsx`와 route 테스트만 둡니다.
+- 플랫폼(AIP·ACP·FDE 및 하위 페이지)의 locale별 JSX 본문, 섹션 컴포넌트, 통합 필터/데이터는 `src/components/pages/platforms`에, 솔루션(AI Crew·AI Dashi·COBOL)은 `src/components/pages/solutions`에 둡니다. `src/app/[locale]/platforms`와 `src/app/[locale]/solutions`에는 각 영역의 route `page.tsx`와 route 테스트만 둡니다. 경로 헬퍼도 `src/features/platforms/routes.ts`와 `src/features/solutions/routes.ts`로 분리합니다.
 - 홈 페이지는 `en`, `ko`가 공통 `HomePage`를 사용하고, `ja`는 일본 시장에 맞춘 별도 `JapanHomePage`를 사용합니다. 일본어 홈의 섹션 구성이나 레이아웃 차이를 공통 `HomePage`의 locale 조건문과 옵션으로 누적하지 않습니다.
 - 일본어 홈 페이지와 전용 섹션은 `src/components/pages/home/japan`에, 정적 문구와 metadata copy는 `src/copy/homeJapan.ts`에, CMS 조회나 데이터 조합이 필요하면 `src/features/home/japanPageData.ts`에 둡니다. 공통 UI primitive와 재사용 가능한 섹션은 기존 컴포넌트를 우선 사용합니다.
 - `src/app/[locale]/page.tsx`는 locale을 확인한 뒤 `ja`에는 `JapanHomePage`, `en`과 `ko`에는 공통 `HomePage`를 연결합니다. `/ja` URL과 공통 GNB, Footer, locale 전환 구조는 유지하며 일본어 홈 metadata는 전용 copy를 사용합니다.
 - 카테고리명, 공개 경로, locale 경로는 하드코딩하지 말고 기존 헬퍼와 설정을 사용합니다.
 - UI 변경은 기존 컴포넌트와 Tailwind 유틸리티를 우선 사용합니다.
+- 공개 사이트와 Admin의 일반 UI 아이콘은 `lucide-react`의 Lucide 아이콘을 사용합니다. 아이콘을 인라인 SVG, 유니코드 기호, CSS 마스크로 새로 만들지 않습니다. 브랜드 로고, 소셜 로고, 제품 고유 자산, 데이터 시각화와 구조를 표현하는 다이어그램은 예외입니다.
+- Lucide 아이콘은 용도에 맞는 이름의 컴포넌트를 직접 import하고, 장식용이면 `aria-hidden="true"`를 적용합니다. 아이콘만 있는 버튼과 링크에는 의미를 설명하는 `aria-label`을 둡니다.
 - B2B SaaS/보안/엔터프라이즈 화면은 신뢰감, 명확한 정보 구조, 절제된 시각 표현을 우선합니다.
 - 다국어 화면에서는 긴 한국어·일본어 문구로 인한 줄바꿈과 overflow를 확인합니다.
 - git에 올릴 때 commit message, PR 제목, PR 설명은 한국어로 작성합니다.

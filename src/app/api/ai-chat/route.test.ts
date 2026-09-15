@@ -26,7 +26,7 @@ describe("제품 상담 API", () => {
     vi.stubEnv("VERCEL_TARGET_ENV", "preview");
     vi.stubEnv("AI_CHAT_BASE_URL", undefined);
     vi.stubEnv("AI_CHAT_API_KEY", "");
-    vi.mocked(prepareProductQuestion).mockReturnValue({ answer: "확인 가능한 근거가 없습니다.", sources: [], answered: false });
+    vi.mocked(prepareProductQuestion).mockResolvedValue({ answer: "확인 가능한 근거가 없습니다.", sources: [], answered: false });
     const result = await POST(request());
     expect(result.status).toBe(200);
     expect(prepareProductQuestion).toHaveBeenCalledOnce();

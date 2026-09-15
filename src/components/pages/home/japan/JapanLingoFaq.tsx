@@ -1,26 +1,12 @@
 "use client";
 
 import { type KeyboardEvent, useRef, useState } from "react";
+import { Minus, Plus } from "lucide-react";
 import { japanHomeFaqCopy } from "@/copy/homeJapan";
 
 function ExpandIcon({ isOpen }: { isOpen: boolean }) {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-5 w-5 shrink-0"
-      fill="none"
-      viewBox="0 0 20 20"
-    >
-      <path d="M4 10h12" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" />
-      <path
-        className={`origin-center transition-transform duration-200 motion-reduce:transition-none ${isOpen ? "scale-y-0" : "scale-y-100"}`}
-        d="M10 4v12"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="1.5"
-      />
-    </svg>
-  );
+  const Icon = isOpen ? Minus : Plus;
+  return <Icon aria-hidden="true" className="h-5 w-5 shrink-0" />;
 }
 
 export default function JapanLingoFaq() {

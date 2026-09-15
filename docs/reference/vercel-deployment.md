@@ -33,8 +33,10 @@ Staging custom environment의 ID는 `env_HGojlWaENVScWZk7uFjJUhtDyx4n`이며
 `main` 브랜치와 연결되어 있다. Production 도메인은 custom environment ID 없이
 Production target에 연결된다.
 
-현재는 환경별 도메인이 모두 같은 배포와 콘텐츠를 제공한다. `.com`과 `.ai` 요청에
-따른 콘텐츠 분기는 아직 구현되어 있지 않다.
+위 표는 2026-09-15에 확인된 배포 연결 현황이다. `www-v2.querypie.ai`와
+`stage-v2.querypie.ai`는 같은 환경의 `.com` 도메인과 동일한 콘텐츠를 제공한다.
+이 작업에서 준비한 `querypie.ai`·`www.querypie.ai`의 일본어 전용 라우팅은 아래
+「일본 / 글로벌 도메인 연결」을 따르며, 운영 적용에는 코드 배포와 도메인 이전이 필요하다.
 
 ### Redirect 도메인
 
@@ -47,8 +49,8 @@ Production target에 연결된다.
 | `chequer.io` | `www.querypie.com` | 301 |
 | `www.chequer.io` | `www.querypie.com` | 301 |
 
-`querypie.ai`와 `www.querypie.ai`는 `corp-web-japan` 프로젝트의 도메인이므로 이 프로젝트의
-Production 도메인에 포함하지 않는다.
+위 연결 현황 확인 시점에 `querypie.ai`와 `www.querypie.ai`는 `corp-web-japan` 프로젝트의
+도메인이다. 이 프로젝트의 일본 사이트로 전환할 때 Vercel 담당자가 Production 배포로 이전해야 한다.
 
 ### Vercel 시스템 도메인
 
@@ -131,6 +133,16 @@ scripts/deploy/
 ---
 
 ## Vercel 프로젝트 설정
+
+### 일본 / 글로벌 도메인 연결
+
+- `querypie.ai`(사용 시 `www.querypie.ai`도)는 이 앱의 Production 배포에 연결한다. 글로벌 도메인으로 보내는 Vercel 도메인 리디렉션은 설정하지 않는다.
+- `www.querypie.com`은 글로벌 사이트로 연결한다.
+- 레포의 `next.config.ts`가 일본 도메인의 `/`와 locale 없는 공개 경로를 내부 `/ja`·`/ja/...`로 rewrite한다. 주소창에는 `/ja`가 표시되지 않는다. `/ja/...`·`/en/...`·`/ko/...` 접근은 prefix 없는 경로로 영구 리디렉션하며 쿼리스트링을 유지한다.
+- 일본어 화면에서는 GNB 언어 선택과 언어 추천 배너가 숨겨진다. 영어·한국어 화면에서는 두 언어만 선택·추천하며, 글로벌 루트의 자동 언어 선택에서도 일본어를 제외한다.
+- 기존 `/ja` 경로는 로컬·Preview·글로벌 도메인에서도 직접 확인할 수 있다.
+- GNB·푸터의 내부 링크는 상대 경로로 현재 도메인을 유지한다. CMS 본문과 AI 채팅 출처의 `querypie.com`·`querypie.ai` 절대 링크도 렌더링 시 현재 도메인·언어의 상대 경로로 변환한다. 로그인·외부 문서·SNS 등 다른 서비스의 링크는 원래 목적지를 유지한다.
+- 배포 후 `https://querypie.ai/`, `https://querypie.ai/en/demo/aip?utm_source=test`, `https://www.querypie.com/`를 확인한다. 도메인 연결과 DNS 설정은 Vercel 담당자가 수행해야 한다.
 
 `VERCEL_TEAM_ID`, `VERCEL_PROJECT_ID`는 각 배포 워크플로우 파일에 직접 명시되어 있다. 리전 및 Git 설정은 `vercel.json`에서 관리한다.
 

@@ -101,7 +101,7 @@ export default function ContentArticlePreview({
       ) : null}
 
       <div>
-        <ContentBodyPreview bodyHtml={bodyHtml} />
+        <ContentBodyPreview bodyHtml={bodyHtml} locale={locale} />
         {contentOverlay}
       </div>
     </div>

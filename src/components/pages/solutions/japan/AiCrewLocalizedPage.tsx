@@ -30,7 +30,7 @@ export default function AiCrewLocalizedPage({ locale }: { locale: Exclude<Locale
       <section className="mx-auto grid w-full max-w-[1200px] items-start gap-10 md:grid-cols-2 md:items-center md:gap-[30px]">
         <div className="flex flex-col items-start gap-6">
           <h1 className="m-0 text-pretty type-h1 text-fg">{copy.hero.title[0]}<br />{heroTitleBefore}<span className="text-brand">AI Crew</span>{heroTitleAfter}</h1>
-          <div className="max-w-[560px] space-y-3 type-body-lg text-mute">
+          <div className="max-w-[560px] space-y-3 type-body-lg text-fg">
             {copy.hero.descriptions.map((description) => <p className="m-0" key={description}>{description}</p>)}
           </div>
           <ButtonGroup className="flex-wrap"><SolutionActionLink href={contactHref}>{copy.hero.primaryAction}</SolutionActionLink><SolutionActionLink href={demoHref} variant="outline">{copy.hero.secondaryAction}</SolutionActionLink></ButtonGroup>

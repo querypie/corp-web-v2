@@ -1,5 +1,6 @@
 import Link from "next/link";
 import ContentPreviewImage from "@/components/content/ContentPreviewImage";
+import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";
 
 type DetailContentItem = {
   category: string;
@@ -39,7 +40,7 @@ function DetailContentCard({
         <p className="m-0 type-body-md text-mute">{category}</p>
         <p className="content-hover-title m-0 type-body-lg text-fg">
           <span>{title}</span>
-          {isExternal ? <span aria-hidden="true" className="icon-outlink-mask ml-1 h-3.5 w-3.5 shrink-0 align-[-2px] text-mute" /> : null}
+          {isExternal ? <ExternalLinkIcon className="ml-1 h-3.5 w-3.5 shrink-0 align-[-2px] text-mute" /> : null}
         </p>
       </div>
     </>

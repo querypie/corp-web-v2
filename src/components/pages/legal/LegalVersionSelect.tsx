@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Select from "@/components/ui/Select";
 
@@ -34,11 +35,9 @@ export default function LegalVersionSelect({
         <span className="min-w-0 flex-1 type-body-md text-fg">
           {selected?.label ?? value}
         </span>
-        <img
-          alt=""
+        <ChevronDown
           aria-hidden="true"
-          className="theme-icon pointer-events-none h-[14px] w-[14px] object-contain"
-          src="/assets/ui/icons/chevron-down.svg"
+          className="pointer-events-none h-[14px] w-[14px]"
         />
       </div>
     );

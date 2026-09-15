@@ -4,6 +4,12 @@ import { LOCALE_PREFERENCE_COOKIE, resolveRootLocale } from "./features/routing/
 
 export function middleware(request: NextRequest) {
   if (request.nextUrl.pathname === "/") {
+    // next.config rewrites the Japanese root to /ja without changing the URL.
+    const hostname = (request.headers.get("host") ?? request.nextUrl.hostname).split(":")[0].toLowerCase();
+    if (["querypie.ai", "www.querypie.ai"].includes(hostname)) {
+      return NextResponse.next();
+    }
+
     const locale = resolveRootLocale(
       request.cookies.get(LOCALE_PREFERENCE_COOKIE)?.value,
       request.headers.get("accept-language"),

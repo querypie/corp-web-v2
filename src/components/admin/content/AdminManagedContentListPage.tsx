@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
+import { ArrowDown, ArrowUp, ArrowUpDown, Copy, Eye, MoreVertical, Plus, Trash2, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import ButtonGroup from "@/components/ui/ButtonGroup";
 import ContentPreviewImage from "@/components/content/ContentPreviewImage";
@@ -9,6 +10,7 @@ import LoadingText from "@/components/ui/LoadingText";
 import Switch from "@/components/ui/Switch";
 import Tab from "@/components/ui/Tab";
 import TabGroup from "@/components/ui/TabGroup";
+import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";
 import AdminContentPreview from "./AdminContentPreview";
 import type { Locale } from "@/constants/i18n";
 import {
@@ -224,10 +226,7 @@ export function PreviewModal({
               onClick={onClose}
               type="button"
             >
-              <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 24 24" fill="none">
-                <path d="M6 6l12 12" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
-                <path d="M18 6 6 18" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
-              </svg>
+              <X aria-hidden="true" className="h-5 w-5" />
             </button>
           </div>
         </div>
@@ -351,11 +350,11 @@ function ContentRow({
             event.stopPropagation();
           }}
         >
-          <button className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-button text-[15px] leading-none text-mute transition-colors hover:bg-bg hover:text-fg" onClick={onMoveUp} type="button">
-            ↑
+          <button aria-label={t("위로 이동")} className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-button text-mute transition-colors hover:bg-bg hover:text-fg" onClick={onMoveUp} type="button">
+            <ArrowUp aria-hidden="true" className="h-4 w-4" />
           </button>
-          <button className="ml-3 flex h-7 w-7 cursor-pointer items-center justify-center rounded-button text-[15px] leading-none text-mute transition-colors hover:bg-bg hover:text-fg md:ml-0" onClick={onMoveDown} type="button">
-            ↓
+          <button aria-label={t("아래로 이동")} className="ml-3 flex h-7 w-7 cursor-pointer items-center justify-center rounded-button text-mute transition-colors hover:bg-bg hover:text-fg md:ml-0" onClick={onMoveDown} type="button">
+            <ArrowDown aria-hidden="true" className="h-4 w-4" />
           </button>
         </div>
       ) : null}
@@ -376,7 +375,7 @@ function ContentRow({
         ) : null}
         <p className="m-0 type-body-md text-fg">
           <span>{localizedTitle}</span>
-          {item.contentType === "outlink" ? <span aria-hidden="true" className="icon-outlink-mask ml-1 h-3.5 w-3.5 shrink-0 align-[-2px] text-mute" /> : null}
+          {item.contentType === "outlink" ? <ExternalLinkIcon className="ml-1 h-3.5 w-3.5 shrink-0 align-[-2px] text-mute" /> : null}
         </p>
       </div>
 
@@ -428,11 +427,7 @@ function ContentRow({
                 }}
                 type="button"
               >
-                <svg aria-hidden="true" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <circle cx="10" cy="4" r="1.5" />
-                  <circle cx="10" cy="10" r="1.5" />
-                  <circle cx="10" cy="16" r="1.5" />
-                </svg>
+                <MoreVertical aria-hidden="true" className="h-5 w-5" />
               </button>
 
               {menuOpen ? (
@@ -453,10 +448,7 @@ function ContentRow({
                     type="button"
                   >
                     <MenuIcon>
-                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                        <path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                        <circle cx="12" cy="12" r="2.5" stroke="currentColor" strokeWidth="1.75" />
-                      </svg>
+                      <Eye aria-hidden="true" className="h-4 w-4" />
                     </MenuIcon>
                     {t("미리보기")}
                   </button>
@@ -471,10 +463,7 @@ function ContentRow({
                     type="button"
                   >
                     <MenuIcon>
-                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                        <rect x="9" y="9" width="10" height="10" rx="2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                        <rect x="5" y="5" width="10" height="10" rx="2" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                      </svg>
+                      <Copy aria-hidden="true" className="h-4 w-4" />
                     </MenuIcon>
                     {t("복제")}
                   </button>
@@ -489,13 +478,7 @@ function ContentRow({
                     type="button"
                   >
                     <MenuIcon>
-                      <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                        <path d="M4 7h16" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                        <path d="M10 11v6" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                        <path d="M14 11v6" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                        <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                        <path d="M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                      </svg>
+                      <Trash2 aria-hidden="true" className="h-4 w-4" />
                     </MenuIcon>
                     {t("삭제")}
                   </button>
@@ -761,22 +744,14 @@ export default function AdminManagedContentListPage({
                       variant="outline"
                     >
                       <ActionIcon>
-                        <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                          <path d="M6.5 8.5 9.5 5.5l3 3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                          <path d="M9.5 6v12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                          <path d="M14.5 15.5 17.5 18.5l3-3" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                          <path d="M17.5 6v12" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" />
-                        </svg>
+                        <ArrowUpDown aria-hidden="true" className="h-4 w-4" />
                       </ActionIcon>
                       {t("순서변경")}
                     </Button>
                     <a className="shrink-0" href={writeHref}>
                       <Button arrow={false} className="shrink-0 justify-center whitespace-nowrap" style="round" variant="secondary">
                         <ActionIcon>
-                          <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 24 24" fill="none">
-                            <path d="M12 5v14" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
-                            <path d="M5 12h14" stroke="currentColor" strokeLinecap="round" strokeWidth="1.75" />
-                          </svg>
+                          <Plus aria-hidden="true" className="h-4 w-4" />
                         </ActionIcon>
                         {t("글 작성")}
                       </Button>

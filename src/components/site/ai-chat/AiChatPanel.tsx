@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
+import { RotateCcw, Send, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import type { Locale } from "@/constants/i18n";
+import { getSameSiteHref } from "@/features/routing/siteLinks";
 import { aiChatCopy } from "@/copy/aiChat";
 import { isBrowserChatRequest, isChatReply, type ChatMessage } from "@/features/ai-chat/types";
 import { parseProviderReply } from "@/features/ai-chat/reply";
@@ -166,14 +168,10 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
             style="full"
             title={copy.reset}
           >
-            <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none">
-              <path d="M3 10a9 9 0 1 1 2.6 8.4M3 4v6h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+            <RotateCcw aria-hidden="true" className="h-[18px] w-[18px]" />
           </Button>
           <Button aria-label={copy.close} arrow={false} className="!h-11 !w-11 shrink-0 !bg-transparent !p-0 hover:!bg-bg-hover" onClick={onClose} style="full">
-            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none">
-              <path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
+            <X aria-hidden="true" className="h-5 w-5" />
           </Button>
         </div>
       </header>
@@ -194,7 +192,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
                   <div className="flex w-full flex-col gap-1.5 border-t border-border pt-3">
                     <span className={`${styles.muted} type-body-sm`}>{copy.sources}</span>
                     {message.sources.map((source) => (
-                      <a className="type-body-sm text-link underline decoration-border-strong underline-offset-4 hover:decoration-current [overflow-wrap:anywhere]" href={source.url} key={source.url} rel="noopener noreferrer" target="_blank">{source.title}</a>
+                      <a className="type-body-sm text-link underline decoration-border-strong underline-offset-4 hover:decoration-current [overflow-wrap:anywhere]" href={getSameSiteHref(source.url, locale)} key={source.url} rel="noopener noreferrer" target="_blank">{source.title}</a>
                     ))}
                   </div>
                 ) : null}
@@ -236,9 +234,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
           style="full"
           type="submit"
         >
-          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="m21 3-6.5 18-4-7.5L3 9.5 21 3ZM21 3 10.5 13.5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
+          <Send aria-hidden="true" className="h-6 w-6" />
         </Button>
       </form>
       <footer className="flex shrink-0 flex-col items-center gap-2 bg-bg-content px-4 py-3 text-center">

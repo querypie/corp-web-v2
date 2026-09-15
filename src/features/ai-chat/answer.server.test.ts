@@ -1,7 +1,12 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 import { answerProductQuestion, parseGroundedAnswer } from "./answer.server";
-import { knowledgeChunks } from "./knowledge";
+import { makeChunk } from "./knowledge";
+import { retrieveLiveKnowledge } from "./liveKnowledge.server";
+vi.mock("./liveKnowledge.server", () => ({ retrieveLiveKnowledge: vi.fn(async () => [
+  { id: "aip", product: "aip", locale: "ko", title: "AIP", url: "https://aip-docs.app.querypie.com/ko", text: "최신 공식 본문", searchable: "aip", heading: "aip" },
+]) }));
+const knowledgeChunks = [makeChunk("site", "ko", "https://www.querypie.com/ko", "소개", "공식 자료")];
 
 afterEach(() => { vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
 
@@ -31,5 +36,15 @@ describe("근거 기반 AI 답변", () => {
     expect(init.headers.Authorization).toBeUndefined();
     expect(JSON.parse(init.body).model).toBe("glm-5.3-flash");
     expect(JSON.parse(init.body).messages[1].content).toContain("Official source excerpts");
+  });
+  it("최신 원문을 읽지 못하면 모델을 호출하지 않고 근거 부족을 안내한다", async () => {
+    vi.stubEnv("AI_CHAT_BASE_URL", "https://internal-llm.querypie.io/v1");
+    vi.stubEnv("AI_CHAT_MODEL", "glm-5.3-flash");
+    vi.mocked(retrieveLiveKnowledge).mockResolvedValueOnce([]);
+    const fetcher = vi.fn();
+    vi.stubGlobal("fetch", fetcher);
+    const reply = await answerProductQuestion([{ role: "user", content: "AIP 요금" }], "ko", AbortSignal.timeout(1000));
+    expect(reply).toMatchObject({ answered: false, sources: [] });
+    expect(fetcher).not.toHaveBeenCalled();
   });
 });

@@ -52,7 +52,7 @@ export default function SlackAppPage({
         </header>
 
         <div className="flex flex-col gap-[30px]">
-          <img alt="Slack" className="size-16" height="64" src="/assets/products/acp/integrations/slack.svg" width="64" />
+          <img alt="Slack" className="size-16" height="64" src="/assets/pages/platforms/acp/integrations/slack.svg" width="64" />
 
           <section className="flex flex-col gap-6 md:gap-8">
             <SectionItem title={overviewTitle}><p className="m-0">{overview}</p></SectionItem>

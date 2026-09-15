@@ -38,7 +38,9 @@ export function getLocalePath(locale: Locale, pathname = "/") {
 
 export function getLocaleSwitchPath(pathname: string, locale: Locale) {
   const pathWithoutLocale = stripLocalePrefix(pathname);
-  const nextPathname = locale === "ja" && /^\/plans(?:\/|$)/.test(pathWithoutLocale)
+  const unavailableInJapanese = locale === "ja" && /^\/plans(?:\/|$)/.test(pathWithoutLocale);
+  const japaneseOnlySolution = locale !== "ja" && /^\/solutions\/as400-cobol(?:\/|$)/.test(pathWithoutLocale);
+  const nextPathname = unavailableInJapanese || japaneseOnlySolution
     ? "/"
     : pathWithoutLocale;
 

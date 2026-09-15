@@ -35,7 +35,7 @@
 :root[data-theme="light"] {
   color-scheme: light;
   --color-fg: #2F2D29;
-  --color-mute: #888888;
+  --color-mute: #767676;
   --color-placeholder: #aaaaaa;
   --color-bg-content: #f5f5f4;
   --color-bg-deep: #f5f5f4;
@@ -89,7 +89,6 @@
   --gradient-mockup-shadow-mobile: linear-gradient(180deg, rgba(15, 15, 15, 0.16) 0%, rgba(15, 15, 15, 0.08) 56%, rgba(15, 15, 15, 0) 100%);
   --gradient-mockup-shadow-desktop: linear-gradient(180deg, rgba(15, 15, 15, 0.2) 0%, rgba(15, 15, 15, 0.12) 32%, rgba(15, 15, 15, 0.05) 68%, rgba(15, 15, 15, 0) 100%);
   --gradient-footer: none;
-  --icon-outlink-mask: url("/assets/ui/icons/Outlink-bold.svg");
 }
 
 :root[data-theme="dark"],
@@ -151,7 +150,6 @@
   --gradient-mockup-shadow-mobile: linear-gradient(180deg, rgba(18, 18, 18, 0.28) 0%, rgba(18, 18, 18, 0.14) 56%, rgba(18, 18, 18, 0) 100%);
   --gradient-mockup-shadow-desktop: linear-gradient(180deg, rgba(18, 18, 18, 0.36) 0%, rgba(18, 18, 18, 0.24) 32%, rgba(18, 18, 18, 0.11) 68%, rgba(18, 18, 18, 0) 100%);
   --gradient-footer: radial-gradient(93.31% 130% at 50% 118%, rgba(255, 132, 64, 0.58) 0%, rgba(255, 112, 48, 0.34) 24%, rgba(255, 94, 38, 0.18) 48%, rgba(255, 94, 38, 0) 72%);
-  --icon-outlink-mask: url("/assets/ui/icons/Outlink.svg");
 }
 
 * {
@@ -420,13 +418,6 @@ textarea:-webkit-autofill:focus {
 
   .group:hover .group-hover\:text-mute {
     color: var(--color-mute);
-  }
-
-  .icon-outlink-mask {
-    display: inline-block;
-    background-color: currentColor;
-    -webkit-mask: var(--icon-outlink-mask) center / contain no-repeat;
-    mask: var(--icon-outlink-mask) center / contain no-repeat;
   }
 
   .gnb-popover-surface {

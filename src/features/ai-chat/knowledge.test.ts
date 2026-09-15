@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { retrieveKnowledge } from "./knowledge";
+import { makeChunk, retrieveKnowledge as search } from "./knowledge";
+import type { ChatTurn } from "./types";
+import type { Locale } from "@/constants/i18n";
+const fixtures = [
+  makeChunk("aip", "ko", "https://aip-docs.app.querypie.com/ko", "AIP 소개", "AIP는 AI 플랫폼입니다."),
+  makeChunk("acp", "ko", "https://docs.querypie.com/ko", "ACP 소개", "ACP는 접근 제어 플랫폼입니다."),
+  makeChunk("lingo", "ko", "https://lingo.querypie.ai/ko/faq", "지원 언어", "링고는 베트남어 등 여러 언어를 지원합니다."),
+  makeChunk("lingo", "ko", "https://lingo.querypie.ai/ko/pricing", "Lingo 요금", "요금 및 크레딧"),
+];
+const retrieveKnowledge = (messages: ChatTurn[], locale: Locale) => search(messages, locale, fixtures);
 
 describe("테스트 문서 검색", () => {
   it("AIP·ACP 비교 질문에서 양쪽 제품의 근거를 확보한다", () => {

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowRight, PanelLeftClose } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Button from "@/components/ui/Button";
 import { getLocalePath } from "@/constants/i18n";
@@ -51,7 +52,7 @@ export default function AdminSidebar({
             className="absolute left-1/2 flex h-8 w-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center opacity-0 transition-opacity duration-200 group-hover:opacity-100"
             style={{ top: `${hoverY}px` }}
           >
-            <img alt="" aria-hidden="true" className="theme-icon h-4 w-4 object-contain" src="/assets/ui/icons/arrow-right.svg" />
+            <ArrowRight aria-hidden="true" className="h-4 w-4" />
           </span>
         </button>
       ) : null}
@@ -96,7 +97,7 @@ export default function AdminSidebar({
           onClick={onToggleCollapse}
           type="button"
         >
-          <img alt="" aria-hidden="true" className="theme-icon h-4 w-4 object-contain" src="/assets/ui/icons/panel-left.svg" />
+          <PanelLeftClose aria-hidden="true" className="h-4 w-4" />
         </button>
       </div>
 

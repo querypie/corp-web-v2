@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { Link as LinkIcon } from "lucide-react";
 
 import type { Locale } from "@/constants/i18n";
 
@@ -152,7 +153,7 @@ export default function ContentShareActions({
           title={copied ? copy.copiedLabel : copy.copyLabel}
           type="button"
         >
-          <img alt="" aria-hidden="true" className="theme-icon h-7 w-7 object-contain" src="/assets/ui/icons/URL.svg" />
+          <LinkIcon aria-hidden="true" className="h-6 w-6" />
         </button>
         {copied ? (
           <div

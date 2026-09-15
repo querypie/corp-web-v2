@@ -4,7 +4,7 @@ import { getShellMenuCopy } from "@/constants/navigation";
 import Footer from "./Footer";
 
 describe("Footer", () => {
-  it("Demo를 독립 섹션으로 노출하고 기존 기능 링크를 자료 섹션에 합친다", () => {
+  it("Demo를 독립 섹션으로 노출하고 기존 기능 링크를 리소스 섹션에 합친다", () => {
     const copy = getShellMenuCopy("ko");
 
     render(
@@ -16,7 +16,10 @@ describe("Footer", () => {
     );
 
     expect(screen.getByText("데모")).toBeInTheDocument();
-    expect(screen.getByText("자료")).toBeInTheDocument();
+    expect(screen.getByText("플랫폼")).toBeInTheDocument();
+    expect(screen.queryByText("솔루션")).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "FDE 서비스" })).toHaveAttribute("href", "/ko/platforms/aip/fde-services");
+    expect(screen.getByText("리소스")).toBeInTheDocument();
     expect(screen.queryByText("기능")).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "AIP 활용" })).toHaveAttribute("href", "/ko/demo/aip");
     expect(screen.getByRole("link", { name: "ACP 활용" })).toHaveAttribute("href", "/ko/demo/acp");
@@ -44,5 +47,6 @@ describe("Footer", () => {
     expect(screen.getByRole("link", { name: "社内業務効率化｜AI Crew" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "自社サービスAI化｜AI Dashi" })).toBeInTheDocument();
     expect(screen.getByText("ソリューション").parentElement).toHaveClass("w-max", "max-w-full");
+    expect(screen.getByRole("link", { name: "FDEサービス" })).toHaveAttribute("href", "/ja/platforms/aip/fde-services");
   });
 });

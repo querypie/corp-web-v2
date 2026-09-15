@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { locales, type Locale } from "@/constants/i18n";
 import { getLocalePath } from "@/constants/i18n";
 import { siteUrl } from "@/constants/site";
+import { getSolutionHref } from "@/features/solutions/routes";
 import { readContentState } from "@/features/content/contentState.server";
 import { getPublicDetailHref, getPublicListHref, isPublishedContentVisible } from "@/features/content/data";
 
@@ -43,6 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...perLocale("/apps/slack"),
     ...perLocale("/plans/aip"),
     ...perLocale("/plans/acp"),
+    { url: absolute(getSolutionHref("ja", "as400-cobol")) },
   ];
 
   const demoEntries = locales.flatMap((locale) =>

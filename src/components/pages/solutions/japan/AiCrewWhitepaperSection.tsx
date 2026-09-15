@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowRight } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 
 type Props = {
@@ -45,9 +46,7 @@ export default function AiCrewWhitepaperSection({
           <p className="m-0 max-w-[760px] type-body-md text-mute">{description}</p>
           <span className="mt-6 inline-flex items-center justify-center gap-1.5 type-body-md text-brand">
             <span className="decoration-1 underline-offset-4 group-hover:underline">{action}</span>
-            <svg aria-hidden="true" className="h-4 w-4 text-mute group-hover:animate-[button-arrow-nudge_220ms_ease-out_forwards]" fill="none" viewBox="0 0 24 24">
-              <path d="M15.5 6.5L21.5 12.5M21.5 12.5L15.5 18.5M21.5 12.5H3.5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" />
-            </svg>
+            <ArrowRight aria-hidden="true" className="h-4 w-4 text-mute group-hover:animate-[button-arrow-nudge_220ms_ease-out_forwards]" />
           </span>
         </div>
       </a>

@@ -2,8 +2,9 @@ type FooterSection = {
   items: string[];
   title: string;
 };
-import { getFooterHref, getLegalHref } from "@/constants/navigation";
+import { getFooterHref, getLegalHref, getShellMenuCopy } from "@/constants/navigation";
 import { getLocalePath, type Locale } from "@/constants/i18n";
+import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";
 
 type FooterProps = {
   addressLines?: string[];
@@ -60,13 +61,7 @@ export default function Footer({
   className,
   legalLinks = ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"],
   locale = "en",
-  sections = [
-    { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
-    { title: "Demo", items: ["AIP Use Cases", "ACP Use Cases"] },
-    { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
-    { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
-    { title: "Pricing & Plans", items: ["AIP", "ACP"] },
-  ],
+  sections = getShellMenuCopy(locale).footerSections,
 }: FooterProps) {
   const [copyright, ...officeLines] = addressLines;
 
@@ -96,10 +91,10 @@ export default function Footer({
                 key={section.title}
                 className={cx(
                   "flex flex-col gap-5 type-body-md leading-5",
-                  (section.title === "Solutions" || section.title === "솔루션") && "w-[191px]",
-                  section.title === "ソリューション" && "w-max max-w-full",
+                  (section.title === "Platform" || section.title === "플랫폼") && "w-[191px]",
+                  (section.title === "プラットフォーム" || section.title === "ソリューション") && "w-max max-w-full",
                   (section.title === "Demo" || section.title === "デモ" || section.title === "데모") && "w-[110px]",
-                  (section.title === "Resource" || section.title === "リソース" || section.title === "자료") && "w-[180px]",
+                  (section.title === "Resource" || section.title === "リソース" || section.title === "리소스") && "w-[180px]",
                   (section.title === "Company" || section.title === "회사" || section.title === "会社") && "w-[84px]",
                   (section.title === "Plans" ||
                     section.title === "Pricing & Plans" ||
@@ -125,7 +120,7 @@ export default function Footer({
                       >
                         <span>{item}</span>
                         {isExternal ? (
-                          <span aria-hidden="true" className="icon-outlink-mask h-3.5 w-3.5 shrink-0 text-mute" />
+                          <ExternalLinkIcon className="h-3.5 w-3.5 shrink-0 text-mute" />
                         ) : null}
                       </a>
                     );

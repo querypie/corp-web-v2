@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import TextButton from "@/components/ui/TextButton";
+import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";
 
 type ResourceListItem = {
   category: string;
@@ -58,7 +59,7 @@ function ResourceListCard({
         <p className="m-0 type-body-sm text-mute">{category}</p>
         <p className="content-hover-title m-0 type-h3 text-fg">
           <span>{title}</span>
-          {isExternal ? <span aria-hidden="true" className="icon-outlink-mask ml-1.5 h-4 w-4 shrink-0 align-[-2px] text-mute" /> : null}
+          {isExternal ? <ExternalLinkIcon className="ml-1.5 h-4 w-4 shrink-0 align-[-2px] text-mute" /> : null}
         </p>
       </div>
     </a>

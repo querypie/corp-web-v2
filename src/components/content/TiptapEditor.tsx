@@ -1,6 +1,22 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  Bold,
+  Clapperboard,
+  Code,
+  FileCode2,
+  ImagePlus,
+  Italic,
+  Link as LinkIcon,
+  List,
+  ListOrdered,
+  Minus,
+  Quote,
+  Strikethrough,
+  Table2,
+  Video,
+} from "lucide-react";
 import { mergeAttributes, Node as TiptapNode } from "@tiptap/core";
 import { EditorContent, ReactNodeViewRenderer, useEditor } from "@tiptap/react";
 import CodeBlock from "@tiptap/extension-code-block";
@@ -1163,126 +1179,49 @@ export default function TiptapEditor({
             </ToolButton>
             <span aria-hidden="true" className="mx-1.5 h-4 w-px bg-border" />
             <ToolButton isActive={editor.isActive("bold")} onClick={() => editor.chain().focus().toggleBold().run()} tooltip={t("Bold")}>
-              <ToolbarIcon>
-                <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <path d="M4 3.5H8.6C10.4 3.5 11.5 4.4 11.5 5.9C11.5 7 10.8 7.8 9.7 8.1C11.1 8.3 12 9.3 12 10.7C12 12.4 10.7 13.5 8.7 13.5H4V3.5ZM6 7.3H8.2C9.2 7.3 9.8 6.8 9.8 5.9C9.8 5 9.2 4.6 8.2 4.6H6V7.3ZM6 12.4H8.5C9.7 12.4 10.3 11.8 10.3 10.8C10.3 9.7 9.6 9.1 8.3 9.1H6V12.4Z" fill="currentColor"/>
-              </svg>
-            </ToolbarIcon>
+              <ToolbarIcon><Bold aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
           </ToolButton>
           <ToolButton isActive={editor.isActive("italic")} onClick={() => editor.chain().focus().toggleItalic().run()} tooltip={t("Italic")}>
-            <ToolbarIcon>
-              <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <path d="M6.5 3.5H11.5V4.8H9.6L7.5 11.2H9.5V12.5H4.5V11.2H6.4L8.5 4.8H6.5V3.5Z" fill="currentColor"/>
-              </svg>
-            </ToolbarIcon>
+            <ToolbarIcon><Italic aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
           </ToolButton>
             <ToolButton isActive={editor.isActive("strike")} onClick={() => editor.chain().focus().toggleStrike().run()} tooltip={t("Strikethrough")}>
-              <ToolbarIcon>
-                <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <path d="M4 4.6C4 3.6 5.2 3 7.1 3C8.9 3 10.1 3.5 11 4.3L10.1 5.2C9.4 4.6 8.3 4.2 7.1 4.2C5.9 4.2 5.3 4.5 5.3 5C5.3 5.6 6 5.8 7.6 6.1C9.7 6.5 11.4 7 11.4 8.9C11.4 10.4 10.1 11.6 8 11.9V13.2H6.8V11.9C5.2 11.7 3.9 11.1 3 10.1L3.9 9.2C4.8 10 5.9 10.5 7.2 10.7H8C9.4 10.7 10.1 10.1 10.1 9.3C10.1 8.5 9.2 8.2 7.6 7.9C5.5 7.5 4 7 4 5.2V4.6ZM2.5 7.2H13.5V8.4H2.5V7.2Z" fill="currentColor"/>
-                </svg>
-              </ToolbarIcon>
+              <ToolbarIcon><Strikethrough aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
             </ToolButton>
             <span aria-hidden="true" className="mx-1.5 h-4 w-px bg-border" />
             <ToolButton isActive={editor.isActive("bulletList")} onClick={() => editor.chain().focus().toggleBulletList().run()} tooltip={t("Bullet List")}>
-              <ToolbarIcon>
-                <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <circle cx="3.25" cy="4.25" r="1.25" fill="currentColor"/>
-                <circle cx="3.25" cy="8" r="1.25" fill="currentColor"/>
-                <circle cx="3.25" cy="11.75" r="1.25" fill="currentColor"/>
-                <path d="M6 4.25H13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-                <path d="M6 8H13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-                <path d="M6 11.75H13" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-              </svg>
-            </ToolbarIcon>
+              <ToolbarIcon><List aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
           </ToolButton>
             <ToolButton isActive={editor.isActive("orderedList")} onClick={() => editor.chain().focus().toggleOrderedList().run()} tooltip={t("Numbered List")}>
-              <ToolbarIcon>
-                <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <path d="M2.8 3.2H4V8H2.8V4.5H2V3.6L2.8 3.2Z" fill="currentColor"/>
-                <path d="M2 10.1C2 9.1 2.8 8.4 4 8.4C5.2 8.4 6 9.1 6 10C6 10.7 5.7 11.1 4.9 11.7L3.3 12.9H6V14H2.1V13C2.1 12.4 2.4 12 3.2 11.4L4.2 10.7C4.7 10.4 4.9 10.2 4.9 9.9C4.9 9.5 4.5 9.2 4 9.2C3.4 9.2 3 9.5 3 10.1H2Z" fill="currentColor"/>
-                <path d="M8 4.25H14" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-                <path d="M8 8H14" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-                <path d="M8 11.75H14" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-                </svg>
-              </ToolbarIcon>
+              <ToolbarIcon><ListOrdered aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
             </ToolButton>
             <ToolButton isActive={editor.isActive("blockquote")} onClick={() => editor.chain().focus().toggleBlockquote().run()} tooltip={t("Blockquote")}>
-              <ToolbarIcon>
-                <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                  <path d="M3 5.5H6.2V8.7H4.7C4.7 10 5.4 10.8 6.6 11.2L6 12.3C4 11.7 3 10.1 3 8V5.5ZM9.8 5.5H13V8.7H11.5C11.5 10 12.2 10.8 13.4 11.2L12.8 12.3C10.8 11.7 9.8 10.1 9.8 8V5.5Z" fill="currentColor"/>
-                </svg>
-              </ToolbarIcon>
+              <ToolbarIcon><Quote aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
             </ToolButton>
             <ToolButton onClick={() => editor.chain().focus().setHorizontalRule().run()} tooltip={t("Horizontal Rule")}>
-              <ToolbarIcon>
-                <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                  <path d="M2.5 8H13.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-                </svg>
-              </ToolbarIcon>
+              <ToolbarIcon><Minus aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
             </ToolButton>
             <span aria-hidden="true" className="mx-1.5 h-4 w-px bg-border" />
             <ToolButton isActive={editor.isActive("code")} onClick={() => editor.chain().focus().toggleCode().run()} tooltip={t("Inline Code")}>
-              <ToolbarIcon>
-                <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <path d="M5.5 4L2.5 8L5.5 12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M10.5 4L13.5 8L10.5 12" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </ToolbarIcon>
+              <ToolbarIcon><Code aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
           </ToolButton>
           <ToolButton isActive={editor.isActive("codeBlock")} onClick={() => editor.chain().focus().toggleCodeBlock().run()} tooltip={t("Code Block")}>
-            <ToolbarIcon>
-              <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <rect x="2.25" y="3" width="11.5" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.3"/>
-                <path d="M5.2 6L4 7.6L5.2 9.2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M10.8 6L12 7.6L10.8 9.2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                <path d="M8.8 5.8L7.2 9.4" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round"/>
-                </svg>
-              </ToolbarIcon>
+            <ToolbarIcon><FileCode2 aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
             </ToolButton>
             <span aria-hidden="true" className="mx-1.5 h-4 w-px bg-border" />
             <ToolButton isActive={editor.isActive("link")} onClick={promptLink} tooltip={t("Insert Link")}>
-              <ToolbarIcon>
-                <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <path d="M5.6 8.7L9.8 4.5C10.8 3.5 12.4 3.5 13.4 4.5C14.4 5.5 14.4 7.1 13.4 8.1L8.1 13.4C6.8 14.7 4.7 14.7 3.4 13.4C2.1 12.1 2.1 10 3.4 8.7L8 4.1" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </ToolbarIcon>
+              <ToolbarIcon><LinkIcon aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
           </ToolButton>
           <ToolButton disabled={!onPrepareImage} onClick={() => imageInputRef.current?.click()} tooltip={t("Insert Image")}>
-            <ToolbarIcon>
-              <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <rect x="2.25" y="3" width="11.5" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.3"/>
-                <circle cx="5.5" cy="6" r="1.1" fill="currentColor"/>
-                <path d="M4 11L7.1 8.3C7.5 7.95 8.1 7.96 8.5 8.32L10 9.6L11 8.7C11.4 8.34 11.98 8.33 12.4 8.68L13 9.2" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </ToolbarIcon>
+            <ToolbarIcon><ImagePlus aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
           </ToolButton>
           <ToolButton disabled={!onPrepareVideo} onClick={() => videoInputRef.current?.click()} tooltip={t("Insert Video")}>
-            <ToolbarIcon>
-              <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <rect x="2.25" y="3.25" width="11.5" height="9.5" rx="1.4" stroke="currentColor" strokeWidth="1.3"/>
-                <path d="M7 6.1V9.9L10.2 8L7 6.1Z" fill="currentColor"/>
-                <path d="M3.2 5.4H12.8" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round"/>
-              </svg>
-            </ToolbarIcon>
+            <ToolbarIcon><Video aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
           </ToolButton>
           <ToolButton onClick={promptYoutube} tooltip={t("Embed YouTube")}>
-            <ToolbarIcon>
-              <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <path d="M13.8 5.1C13.65 4.45 13.15 3.95 12.5 3.8C11.35 3.5 8 3.5 8 3.5C8 3.5 4.65 3.5 3.5 3.8C2.85 3.95 2.35 4.45 2.2 5.1C2 6.25 2 8 2 8C2 8 2 9.75 2.2 10.9C2.35 11.55 2.85 12.05 3.5 12.2C4.65 12.5 8 12.5 8 12.5C8 12.5 11.35 12.5 12.5 12.2C13.15 12.05 13.65 11.55 13.8 10.9C14 9.75 14 8 14 8C14 8 14 6.25 13.8 5.1Z" stroke="currentColor" strokeWidth="1.2"/>
-                <path d="M6.8 10.1V5.9L10.4 8L6.8 10.1Z" fill="currentColor"/>
-              </svg>
-            </ToolbarIcon>
+            <ToolbarIcon><Clapperboard aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
           </ToolButton>
             <ToolButton onClick={() => editor.chain().focus().insertTable({ cols: 3, rows: 3, withHeaderRow: true }).run()} tooltip={t("Insert Table")}>
-              <ToolbarIcon>
-                <svg aria-hidden="true" className="h-4 w-4" viewBox="0 0 16 16" fill="none">
-                <rect x="2.25" y="3" width="11.5" height="10" rx="1.2" stroke="currentColor" strokeWidth="1.3"/>
-                <path d="M2.5 6.5H13.5" stroke="currentColor" strokeWidth="1.2"/>
-                <path d="M2.5 9.5H13.5" stroke="currentColor" strokeWidth="1.2"/>
-                <path d="M7.75 3.2V12.8" stroke="currentColor" strokeWidth="1.2"/>
-              </svg>
-            </ToolbarIcon>
+              <ToolbarIcon><Table2 aria-hidden="true" className="h-4 w-4" /></ToolbarIcon>
           </ToolButton>
           </div>
         </div>
