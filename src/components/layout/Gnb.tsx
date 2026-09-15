@@ -9,6 +9,8 @@ import {
   getCompanySubItems,
   getDemoSubItems,
   getPlansSubItems,
+  getPlatformSubItems,
+  getShellMenuCopy,
   getPrimaryNavHref,
   getResourcesSubItems,
   getSolutionsSubItems,
@@ -39,10 +41,11 @@ function getLocaleHref(pathname: string, locale: string, search: string) {
 export default function Gnb({
   actionLabel = "Free start!",
   className,
-  items = ["Solutions", "Demo", "Resource", "Company", "Plans"],
+  items: providedItems,
   locale = "en",
   localeIcon,
 }: GnbProps) {
+  const items = providedItems ?? getShellMenuCopy(locale).navItems;
   const router = useRouter();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false);
@@ -187,7 +190,6 @@ export default function Gnb({
   /* 언어 드롭다운은 현재 페이지를 유지한 채 locale만 변경 */
   const localeSubItems = [
     { label: "English", href: getLocaleHref(pathname, "en", currentSearch), locale: "en" as const },
-    { label: "日本語", href: getLocaleHref(pathname, "ja", currentSearch), locale: "ja" as const },
     { label: "한국어", href: getLocaleHref(pathname, "ko", currentSearch), locale: "ko" as const },
   ];
   const handleLocaleClick = (event: ReactMouseEvent<HTMLAnchorElement>, href: string, nextLocale: Locale) => {
@@ -219,14 +221,20 @@ export default function Gnb({
       closeDesktopPopover();
     }
   };
-  const navigationSections = [
-    { title: items[0], items: getSolutionsSubItems(locale) },
-    { title: items[1], items: getDemoSubItems(locale) },
-    { title: items[2], items: getResourcesSubItems(locale) },
-    { title: items[3], items: getCompanySubItems(locale) },
+  const sectionItems = [
+    getPlatformSubItems(locale),
+    ...(locale === "ja" ? [getSolutionsSubItems(locale)] : []),
+    getDemoSubItems(locale),
+    getResourcesSubItems(locale),
+    getCompanySubItems(locale),
   ];
-  const mobileSections = items[4]
-    ? [...navigationSections, { title: items[4], items: getPlansSubItems(locale) }]
+  const navigationSections = sectionItems.map((subItems, index) => ({
+    title: items[index],
+    items: subItems,
+  }));
+  const plansTitle = items[navigationSections.length];
+  const mobileSections = plansTitle
+    ? [...navigationSections, { title: plansTitle, items: getPlansSubItems(locale) }]
     : navigationSections;
   const isDesktopLocaleOpen = desktopPopoverOpen === "locale";
 
@@ -325,7 +333,7 @@ export default function Gnb({
                 );
               })}
             </nav>
-            <div
+            {locale !== "ja" && <div
               className="relative hidden md:inline-flex"
               onBlur={handleDesktopPopoverBlur}
               onMouseEnter={() => openDesktopPopover("locale")}
@@ -370,8 +378,8 @@ export default function Gnb({
                   ))}
                 </div>
               </div>
-            </div>
-            <div className="relative z-50 md:hidden" ref={mobileLocaleRef}>
+            </div>}
+            {locale !== "ja" && <div className="relative z-50 md:hidden" ref={mobileLocaleRef}>
               <button
                 aria-expanded={mobileLocaleOpen}
                 aria-label="Change language"
@@ -408,7 +416,7 @@ export default function Gnb({
                   ))}
                 </div>
               </div>
-            </div>
+            </div>}
             <button
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}

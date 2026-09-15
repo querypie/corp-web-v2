@@ -3,6 +3,13 @@ import { describe, expect, it } from "vitest";
 import ContentBodyPreview from "./ContentBodyPreview";
 
 describe("ContentBodyPreview", () => {
+  it("일본어 화면의 본문 링크는 현재 도메인의 일본어 경로를 사용한다", () => {
+    const { container } = render(
+      <ContentBodyPreview locale="ja" bodyHtml='<a href="https://www.querypie.com/en/demo/aip">Demo</a>' />,
+    );
+    expect(container.querySelector("a")).toHaveAttribute("href", "/ja/demo/aip");
+  });
+
   it("bodyHtml이 없으면 null을 렌더링한다", () => {
     const { container } = render(<ContentBodyPreview bodyHtml="" />);
     expect(container.firstChild).toBeNull();

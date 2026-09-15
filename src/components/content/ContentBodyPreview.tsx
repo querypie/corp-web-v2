@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import type { Locale } from "@/constants/i18n";
+import { localizeContentLinks } from "@/features/routing/siteLinks";
 import {
   CONTENT_PREVIEW_RICH_CLASS,
 } from "@/features/content/previewStyles";
@@ -15,10 +17,12 @@ function normalizeContentHtml(html: string) {
 
 type ContentBodyPreviewProps = {
   bodyHtml?: string;
+  locale?: Locale;
 };
 
 export default function ContentBodyPreview({
   bodyHtml = "",
+  locale,
 }: ContentBodyPreviewProps) {
   const contentRef = useRef<HTMLDivElement | null>(null);
 
@@ -79,7 +83,7 @@ export default function ContentBodyPreview({
   return (
     <div
       className={CONTENT_PREVIEW_RICH_CLASS}
-      dangerouslySetInnerHTML={{ __html: normalizeContentHtml(bodyHtml) }}
+      dangerouslySetInnerHTML={{ __html: normalizeContentHtml(locale ? localizeContentLinks(bodyHtml, locale) : bodyHtml) }}
       ref={contentRef}
     />
   );

@@ -6,7 +6,9 @@ import {
   getCategoryLabel,
 } from "@/features/content/config";
 import { getPublicCategoryHref } from "@/features/content/publicPaths";
+import { getPlatformHref } from "@/features/platforms/routes";
 import { getSolutionHref } from "@/features/solutions/routes";
+import { as400CobolMenuLabel } from "@/copy/as400Cobol";
 
 export type NavigationSubItem = {
   href: string;
@@ -32,10 +34,10 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
     ja: ["クッキー設定", "利用規約", "プライバシーポリシー", "EULA"],
   }[locale] ?? ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"];
   const navItems = {
-    en: ["Solutions", "Demo", "Resource", "Company", "Plans"],
-    ko: ["솔루션", "데모", "자료", "회사", "가격 · 플랜"],
-    ja: ["ソリューション", "デモ", "リソース", "会社"],
-  }[locale] ?? ["Solutions", "Demo", "Resource", "Company", "Plans"];
+    en: ["Platform", "Demo", "Resource", "Company", "Plans"],
+    ko: ["플랫폼", "데모", "리소스", "회사", "가격 · 플랜"],
+    ja: ["プラットフォーム", "ソリューション", "デモ", "リソース", "会社"],
+  }[locale] ?? ["Platform", "Demo", "Resource", "Company", "Plans"];
   const navActionLabel = {
     en: "Free start!",
     ko: "무료로 시작하기",
@@ -43,27 +45,28 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
   }[locale] ?? "Free start!";
   const footerSections = {
     en: [
-      { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
+      { title: "Platform", items: getPlatformSubItems("en").map((item) => item.label) },
       { title: "Demo", items: ["AIP Use Cases", "ACP Use Cases"] },
       { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
       { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
       { title: "Plans", items: ["AIP", "ACP"] },
     ],
     ko: [
-      { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)"] },
+      { title: "플랫폼", items: getPlatformSubItems("ko").map((item) => item.label) },
       { title: "데모", items: ["AIP 활용", "ACP 활용"] },
-      { title: "자료", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
+      { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: ["AIP", "ACP"] },
     ],
     ja: [
-      { title: "ソリューション", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"] },
+      { title: "プラットフォーム", items: getPlatformSubItems("ja").map((item) => item.label) },
+      { title: "ソリューション", items: getSolutionsSubItems("ja").map((item) => item.label) },
       { title: "デモ", items: ["AIP機能", "ACP機能"] },
       { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
       { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ"] },
     ],
   }[locale] ?? [
-    { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
+    { title: "Platform", items: getPlatformSubItems("en").map((item) => item.label) },
     { title: "Demo", items: ["AIP Use Cases", "ACP Use Cases"] },
     { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
     { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
@@ -78,26 +81,28 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
   };
 }
 
-export function getSolutionsSubItems(locale: string): NavigationSubItem[] {
+export function getPlatformSubItems(locale: string): NavigationSubItem[] {
   const copy = {
-    en: ["AI Platform (AIP)", "Access Control Platform (ACP)", "Workplace Productivity | AI Crew", "AI for Your Service | AI Dashi"],
-    ko: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "사내 업무 효율화 | AI Crew", "자사 서비스 AI화 | AI Dashi"],
-    ja: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"],
-  }[locale] ?? ["AI Platform (AIP)", "Access Control Platform (ACP)", "Workplace Productivity | AI Crew", "AI for Your Service | AI Dashi"];
+    en: ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services"],
+    ko: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "FDE 서비스"],
+    ja: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "FDEサービス"],
+  }[locale] ?? ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services"];
 
-  const items: NavigationSubItem[] = [
-    { label: copy[0], href: getSolutionHref(locale as Locale, "aip") },
-    { label: copy[1], href: getSolutionHref(locale as Locale, "acp") },
+  return [
+    { label: copy[0], href: getPlatformHref(locale as Locale, "aip") },
+    { label: copy[1], href: getPlatformHref(locale as Locale, "acp") },
+    { label: copy[2], href: getPlatformHref(locale as Locale, "fde-services") },
   ];
+}
 
-  if (locale === "ja") {
-    items.push(
-      { label: copy[2], href: getSolutionHref(locale, "ai-crew") },
-      { label: copy[3], href: getSolutionHref(locale, "ai-dashi") },
-    );
-  }
+export function getSolutionsSubItems(locale: string): NavigationSubItem[] {
+  if (locale !== "ja") return [];
 
-  return items;
+  return [
+    { label: "社内業務効率化｜AI Crew", href: getSolutionHref(locale, "ai-crew") },
+    { label: "自社サービスAI化｜AI Dashi", href: getSolutionHref(locale, "ai-dashi") },
+    { label: as400CobolMenuLabel, href: getSolutionHref(locale, "as400-cobol") },
+  ];
 }
 
 export function getDemoSubItems(locale: string): NavigationSubItem[] {
@@ -209,6 +214,10 @@ export function getPrimaryNavHref(item: string, locale: string) {
 }
 
 export function getFooterHref(item: string, locale: string) {
+  if (item === "FDE Services" || item === "FDE 서비스" || item === "FDEサービス") {
+    return getPlatformHref(locale as Locale, "fde-services");
+  }
+
   if (item === "AIP") {
     return getLocalePath(locale as Locale, "/plans/aip");
   }
@@ -254,11 +263,11 @@ export function getFooterHref(item: string, locale: string) {
   }
 
   if (item === "AI Platform (AIP)" || item === "AI 플랫폼 (AIP)" || item === "AIプラットフォーム (AIP)") {
-    return getSolutionHref(locale as Locale, "aip");
+    return getPlatformHref(locale as Locale, "aip");
   }
 
   if (item === "Access Control Platform (ACP)" || item === "접근 제어 플랫폼 (ACP)" || item === "アクセス制御プラットフォーム (ACP)") {
-    return getSolutionHref(locale as Locale, "acp");
+    return getPlatformHref(locale as Locale, "acp");
   }
 
   if (item === "Workplace Productivity | AI Crew" || item === "사내 업무 효율화 | AI Crew" || item === "社内業務効率化｜AI Crew") {
@@ -267,6 +276,10 @@ export function getFooterHref(item: string, locale: string) {
 
   if (item === "AI for Your Service | AI Dashi" || item === "자사 서비스 AI화 | AI Dashi" || item === "自社サービスAI化｜AI Dashi") {
     return getSolutionHref(locale as Locale, "ai-dashi");
+  }
+
+  if (item === as400CobolMenuLabel && locale === "ja") {
+    return getSolutionHref(locale, "as400-cobol");
   }
 
   if (item === "About Us" || item === "회사 소개" || item === "会社概要") {

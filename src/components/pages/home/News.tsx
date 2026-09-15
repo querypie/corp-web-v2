@@ -30,7 +30,7 @@ function NewsCard({ href, imageSrc, isExternal = false, title }: NewsItem) {
       </div>
       <p className="content-hover-title m-0 type-body-lg text-fg">
         <span>{title}</span>
-        {isExternal ? <span aria-hidden="true" className="icon-outlink-mask ml-1 h-3.5 w-3.5 shrink-0 align-[-2px] text-mute" /> : null}
+        {isExternal ? <ExternalLinkIcon className="ml-1 h-3.5 w-3.5 shrink-0 align-[-2px] text-mute" /> : null}
       </p>
     </a>
   );
@@ -55,3 +55,4 @@ export default function News({
     </section>
   );
 }
+import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";

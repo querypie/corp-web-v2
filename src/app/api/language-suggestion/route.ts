@@ -18,6 +18,7 @@ export async function GET(request: NextRequest) {
   return NextResponse.json({
     recommendedLocale,
     visible:
+      currentLocale !== "ja" &&
       !cookieStore.has(LANGUAGE_BANNER_COOKIE) &&
       currentLocale !== recommendedLocale,
   });

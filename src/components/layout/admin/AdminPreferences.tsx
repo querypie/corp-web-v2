@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
 import { getNextTheme, isTheme, type Theme } from "@/features/theme/theme";
 import { ADMIN_THEME_STORAGE_KEY, adminLocales } from "@/features/admin/preferences";
 import { useAdminLocale } from "./AdminLocaleProvider";
@@ -16,20 +17,8 @@ function applyTheme(theme: Theme) {
 }
 
 function ThemeIcon({ theme }: { theme: Theme }) {
-  if (theme === "dark") {
-    return (
-      <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="3.25" stroke="currentColor" strokeWidth="1.7" />
-        <path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.28 5.28 6.7 6.7M17.3 17.3l1.42 1.42M18.72 5.28 17.3 6.7M6.7 17.3l-1.42 1.42" stroke="currentColor" strokeLinecap="round" strokeWidth="1.7" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-      <path d="M19.2 15.2A7.5 7.5 0 0 1 8.8 4.8a7.5 7.5 0 1 0 10.4 10.4Z" fill="currentColor" />
-    </svg>
-  );
+  const Icon = theme === "dark" ? Sun : Moon;
+  return <Icon aria-hidden="true" className="h-5 w-5" />;
 }
 
 export default function AdminPreferences({ compact = false }: { compact?: boolean }) {

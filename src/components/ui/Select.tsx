@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, type SelectHTMLAttributes } from "react";
+import { ChevronDown } from "lucide-react";
 
 type SelectOption = {
   label: string;
@@ -60,11 +61,9 @@ export default function Select({
           </option>
         ))}
       </select>
-      <img
-        alt=""
+      <ChevronDown
         aria-hidden="true"
-        className="theme-icon pointer-events-none absolute right-3 top-1/2 h-[14px] w-[14px] -translate-y-1/2 object-contain"
-        src="/assets/ui/icons/chevron-down.svg"
+        className="pointer-events-none absolute right-3 top-1/2 h-[14px] w-[14px] -translate-y-1/2"
       />
     </div>
   );

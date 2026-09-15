@@ -4,7 +4,9 @@ export const themeInitializationScript = `
 (() => {
   try {
     const isAdmin = /^\\/admin(?:\\/|$)/.test(window.location.pathname);
-    const locale = window.location.pathname.split("/")[1];
+    const locale = ["querypie.ai", "www.querypie.ai"].includes(window.location.hostname)
+      ? "ja"
+      : window.location.pathname.split("/")[1];
     const savedAdminTheme = isAdmin
       ? localStorage.getItem(${JSON.stringify(ADMIN_THEME_STORAGE_KEY)})
       : null;
@@ -25,8 +27,10 @@ export const themeInitializationScript = `
     const themeColor = document.querySelector('meta[name="theme-color"]');
     themeColor?.setAttribute("content", theme === "dark" ? "#0F0F0F" : "#FFFFFF");
   } catch {
-    const locale = window.location.pathname.split("/")[1];
-    const fallbackTheme = window.location.pathname.split("/")[1] === "ja" ? "light" : "dark";
+    const locale = ["querypie.ai", "www.querypie.ai"].includes(window.location.hostname)
+      ? "ja"
+      : window.location.pathname.split("/")[1];
+    const fallbackTheme = locale === "ja" ? "light" : "dark";
     document.documentElement.lang = locale === "en" || locale === "ko" || locale === "ja"
       ? locale
       : "en";

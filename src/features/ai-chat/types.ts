@@ -1,4 +1,5 @@
 import type { Locale } from "@/constants/i18n";
+import { isOfficialChatUrl } from "./sources";
 
 export type ChatSource = { title: string; url: string };
 export type ChatMessage = {
@@ -40,12 +41,7 @@ export function isBrowserChatRequest(value: unknown): value is BrowserChatReques
 }
 
 export function isChatSourceUrl(value: string) {
-  if (/^\/(en|ko|ja)(\/|$)/.test(value)) return true;
-  try {
-    const url = new URL(value);
-    return url.protocol === "https:" && !url.username && !url.password && !url.port &&
-      ["aip-docs.app.querypie.com", "docs.querypie.com", "lingo.querypie.ai"].includes(url.hostname);
-  } catch { return false; }
+  return isOfficialChatUrl(value);
 }
 
 export function isChatReply(value: unknown): value is ChatReply {

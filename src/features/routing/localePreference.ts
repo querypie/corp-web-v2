@@ -3,7 +3,10 @@ import { defaultLocale, isLocale, type Locale } from "@/constants/i18n";
 export const LOCALE_PREFERENCE_COOKIE = "querypie_locale_preference";
 export const LOCALE_PREFERENCE_MAX_AGE_SECONDS = 60 * 60 * 24 * 365;
 
-export function getLocaleFromAcceptLanguage(acceptLanguage: string | null): Locale | null {
+export function getLocaleFromAcceptLanguage(
+  acceptLanguage: string | null,
+  supportedLocales: readonly Locale[] = ["en", "ko", "ja"],
+): Locale | null {
   const languageRanges = (acceptLanguage?.split(",") ?? [])
     .map((range, index) => {
       const [languageRange, ...parameters] = range.trim().split(";");
@@ -25,21 +28,21 @@ export function getLocaleFromAcceptLanguage(acceptLanguage: string | null): Loca
     if (!language) continue;
 
     const baseLanguage = language.split("-")[0];
-    if (baseLanguage && isLocale(baseLanguage)) return baseLanguage;
+    if (baseLanguage && isLocale(baseLanguage) && supportedLocales.includes(baseLanguage)) return baseLanguage;
   }
 
   return null;
 }
 
 export function getRecommendedLocale(acceptLanguage: string | null): Locale {
-  return getLocaleFromAcceptLanguage(acceptLanguage) ?? defaultLocale;
+  return getLocaleFromAcceptLanguage(acceptLanguage, ["en", "ko"]) ?? defaultLocale;
 }
 
 export function resolveRootLocale(
   savedLocale: string | undefined,
   acceptLanguage: string | null,
 ): Locale {
-  return savedLocale && isLocale(savedLocale)
+  return savedLocale && isLocale(savedLocale) && savedLocale !== "ja"
     ? savedLocale
     : getRecommendedLocale(acceptLanguage);
 }

@@ -58,7 +58,7 @@ export default function AiCrewPage() {
           <h1 className="m-0 text-pretty type-h1 text-fg">
             AIを単なるツールではなく、<br />共に働く<span className="text-brand">AI Crew</span>へ。
           </h1>
-          <div className="max-w-[560px] space-y-3 type-body-lg text-mute">
+          <div className="max-w-[560px] space-y-3 type-body-lg text-fg">
             <p className="m-0">AIを単なる便利なツールではなく、貴社のチームに加わる「新しい同僚」として迎える。それがQueryPie AIの考え方です。</p>
             <p className="m-0">QueryPie AIPは、貴社の業務フローやルールを理解する業務別AIエージェントを構築します。現場のAI Crewとして情報収集・データ整理・下書きなどの準備業務を自律的に分担し、人は判断と創造に集中することで、チーム全体の生産性と成果を高めます。</p>
           </div>

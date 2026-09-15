@@ -1,4 +1,3 @@
-import snapshot from "./knowledge.snapshot.json";
 import type { Locale } from "@/constants/i18n";
 import type { ChatTurn } from "./types";
 
@@ -22,18 +21,15 @@ const concepts = [
 const stopWords = new Set(["what", "is", "are", "the", "a", "an", "and", "or", "how", "do", "does", "can", "you", "me", "tell", "about", "it", "please", "this", "that", "무엇", "어떤", "알려줘", "알려주세요", "설명해줘", "있나요", "있어", "뭐야", "무엇인가요"]);
 const normalize = (text: string) => text.normalize("NFKC").toLowerCase();
 
-export const knowledgeCollectedAt = snapshot.collectedAt;
-export const knowledgeChunks = snapshot.documents.flatMap((document) => document.chunks.map((chunk, index) => ({
-  id: `${document.id}-${index}`,
-  product: document.product,
-  locale: document.locale,
-  title: `${document.title} — ${chunk.heading}`,
-  url: document.url,
-  text: chunk.text,
-  searchable: normalize(`${document.title} ${chunk.heading} ${chunk.text}`),
-  heading: normalize(chunk.heading),
-})));
-export type KnowledgeChunk = typeof knowledgeChunks[number];
+export type KnowledgeChunk = {
+  id: string; product: string; locale: string; title: string; url: string;
+  text: string; searchable: string; heading: string;
+};
+
+export function makeChunk(product: string, locale: string, url: string, title: string, text: string, index = 0): KnowledgeChunk {
+  return { id: `${url}#${index}`, product, locale, url, title, text,
+    searchable: normalize(`${url} ${title} ${text}`), heading: normalize(title) };
+}
 
 function productsIn(text: string) {
   const value = normalize(text);
@@ -55,7 +51,7 @@ function searchTerms(text: string) {
   return [...terms].slice(0, 100);
 }
 
-export function retrieveKnowledge(messages: ChatTurn[], locale: Locale): KnowledgeChunk[] {
+export function retrieveKnowledge(messages: ChatTurn[], locale: Locale, knowledgeChunks: KnowledgeChunk[], limit = 8): KnowledgeChunk[] {
   const questions = messages.filter((message) => message.role === "user").slice(-3).map((message) => message.content);
   const latest = questions.at(-1) ?? "";
   const explicit = productsIn(latest);
@@ -79,6 +75,6 @@ export function retrieveKnowledge(messages: ChatTurn[], locale: Locale): Knowled
   // Comparisons must have evidence for both products, even if one has more documents.
   for (const product of products) ranked.filter(({ chunk }) => chunk.product === product ||
     (chunk.product === "site" && chunk.searchable.includes(product))).slice(0, 2).forEach(({ chunk }) => add(chunk));
-  for (const { chunk } of ranked) { if (selected.length >= 8) break; add(chunk); }
-  return selected.slice(0, 8);
+  for (const { chunk } of ranked) { if (selected.length >= limit) break; add(chunk); }
+  return selected.slice(0, limit);
 }

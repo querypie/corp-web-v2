@@ -3,6 +3,7 @@ import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layo
 import type { Locale } from "@/constants/i18n";
 import ContentPreviewImage from "@/components/content/ContentPreviewImage";
 import Cta from "@/components/sections/Cta";
+import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";
 
 type NewsListItem = {
   date: string;
@@ -42,7 +43,7 @@ export function NewsListCard({
         <p className="m-0 type-body-md text-mute">{date}</p>
         <h2 className="content-hover-title m-0 type-h3 text-fg">
           <span>{title}</span>
-          {isExternal ? <span aria-hidden="true" className="icon-outlink-mask ml-1.5 h-4 w-4 shrink-0 align-[-2px] text-mute" /> : null}
+          {isExternal ? <ExternalLinkIcon className="ml-1.5 h-4 w-4 shrink-0 align-[-2px] text-mute" /> : null}
         </h2>
         <p className="m-0 hidden type-body-md text-mute md:block">{summary}</p>
       </div>

@@ -2,6 +2,7 @@
 
 import type { ReactNode } from "react";
 import { useEffect, useRef, useState } from "react";
+import { Menu, X } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 import AdminSidebar from "./AdminSidebar";
 import Button from "@/components/ui/Button";
@@ -127,12 +128,11 @@ function AdminShellContent({ children }: { children: ReactNode }) {
               onClick={() => setMobileMenuOpen((current) => !current)}
               type="button"
             >
-              <img
-                alt=""
-                aria-hidden="true"
-                className="theme-icon h-10 w-10 object-contain"
-                src={mobileMenuOpen ? "/assets/ui/icons/m-Close.svg" : "/assets/ui/icons/m-Menu.svg"}
-              />
+              {mobileMenuOpen ? (
+                <X aria-hidden="true" className="h-7 w-7" />
+              ) : (
+                <Menu aria-hidden="true" className="h-7 w-7" />
+              )}
             </button>
           </div>
         </header>

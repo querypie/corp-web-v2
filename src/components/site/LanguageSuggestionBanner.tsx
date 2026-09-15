@@ -109,7 +109,7 @@ export default function LanguageSuggestionBanner({
   }, [visible]);
 
   useEffect(() => {
-    if (document.cookie.includes(`${BANNER_COOKIE}=`)) {
+    if (currentLocale === "ja" || document.cookie.includes(`${BANNER_COOKIE}=`)) {
       setVisible(false);
       return;
     }
@@ -144,7 +144,7 @@ export default function LanguageSuggestionBanner({
     };
   }, [currentLocale]);
 
-  if (!visible || currentLocale === recommendedLocale) {
+  if (!visible || currentLocale === "ja" || currentLocale === recommendedLocale) {
     return null;
   }
 
@@ -184,7 +184,6 @@ export default function LanguageSuggestionBanner({
             onChange={(event) => setSelectedLocale(event.target.value as Locale)}
             options={[
               { label: labels.ko, value: "ko" },
-              { label: labels.ja, value: "ja" },
               { label: labels.en, value: "en" },
             ]}
             value={selectedLocale}

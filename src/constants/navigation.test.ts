@@ -5,30 +5,32 @@ import {
   getFeaturesSubItems,
   getFooterHref,
   getPlansSubItems,
+  getPlatformSubItems,
   getPrimaryNavHref,
   getResourcesSubItems,
   getShellMenuCopy,
   getSolutionsSubItems,
 } from "./navigation";
 
-describe("getSolutionsSubItems", () => {
-  it("Solutions 메뉴를 canonical solutions 경로로 연결한다", () => {
-    expect(getSolutionsSubItems("en")).toEqual([
-      { label: "AI Platform (AIP)", href: "/en/solutions/aip" },
-      { label: "Access Control Platform (ACP)", href: "/en/solutions/acp" },
+describe("플랫폼과 일본 전용 솔루션", () => {
+  it.each(["en", "ko", "ja"])("%s 플랫폼은 AIP, ACP, FDE 순서로 연결한다", (locale) => {
+    expect(getPlatformSubItems(locale).map((item) => item.href)).toEqual([
+      `/${locale}/platforms/aip`,
+      `/${locale}/platforms/acp`,
+      `/${locale}/platforms/aip/fde-services`,
     ]);
+    for (const item of getPlatformSubItems(locale)) {
+      expect(getFooterHref(item.label, locale)).toBe(item.href);
+    }
   });
 
-  it("locale별 prefix를 붙인다", () => {
-    expect(getSolutionsSubItems("ko")).toEqual([
-      { label: "AI 플랫폼 (AIP)", href: "/ko/solutions/aip" },
-      { label: "접근 제어 플랫폼 (ACP)", href: "/ko/solutions/acp" },
-    ]);
+  it("솔루션은 일본어에만 세 메뉴를 표시한다", () => {
+    expect(getSolutionsSubItems("en")).toEqual([]);
+    expect(getSolutionsSubItems("ko")).toEqual([]);
     expect(getSolutionsSubItems("ja")).toEqual([
-      { label: "AIプラットフォーム (AIP)", href: "/ja/solutions/aip" },
-      { label: "アクセス制御プラットフォーム (ACP)", href: "/ja/solutions/acp" },
       { label: "社内業務効率化｜AI Crew", href: "/ja/solutions/ai-crew" },
       { label: "自社サービスAI化｜AI Dashi", href: "/ja/solutions/ai-dashi" },
+      { label: "AS/400・COBOLモダナイゼーション", href: "/ja/solutions/as400-cobol" },
     ]);
   });
 });
@@ -98,10 +100,10 @@ describe("getCompanySubItems", () => {
 });
 
 describe("getShellMenuCopy", () => {
-  it("GNB 상위 메뉴를 Solutions / Demo / Resource / Company / Plans 순서로 반환한다", () => {
-    expect(getShellMenuCopy("en").navItems).toEqual(["Solutions", "Demo", "Resource", "Company", "Plans"]);
-    expect(getShellMenuCopy("ko").navItems).toEqual(["솔루션", "데모", "자료", "회사", "가격 · 플랜"]);
-    expect(getShellMenuCopy("ja").navItems).toEqual(["ソリューション", "デモ", "リソース", "会社"]);
+  it("GNB 상위 메뉴를 Platform / 일본 전용 Solutions / Demo / Resource / Company / Plans 순서로 반환한다", () => {
+    expect(getShellMenuCopy("en").navItems).toEqual(["Platform", "Demo", "Resource", "Company", "Plans"]);
+    expect(getShellMenuCopy("ko").navItems).toEqual(["플랫폼", "데모", "리소스", "회사", "가격 · 플랜"]);
+    expect(getShellMenuCopy("ja").navItems).toEqual(["プラットフォーム", "ソリューション", "デモ", "リソース", "会社"]);
   });
 
   it("GNB CTA 라벨을 locale별로 반환한다", () => {
@@ -112,14 +114,15 @@ describe("getShellMenuCopy", () => {
 
   it("푸터 메뉴를 locale별로 반환한다", () => {
     expect(getShellMenuCopy("ko").footerSections).toEqual([
-      { title: "솔루션", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)"] },
+      { title: "플랫폼", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "FDE 서비스"] },
       { title: "데모", items: ["AIP 활용", "ACP 활용"] },
-      { title: "자료", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
+      { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: ["AIP", "ACP"] },
     ]);
     expect(getShellMenuCopy("ja").footerSections).toEqual([
-      { title: "ソリューション", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"] },
+      { title: "プラットフォーム", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "FDEサービス"] },
+      { title: "ソリューション", items: ["社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi", "AS/400・COBOLモダナイゼーション"] },
       { title: "デモ", items: ["AIP機能", "ACP機能"] },
       { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
       { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ"] },
@@ -149,11 +152,12 @@ describe("plans navigation", () => {
 
 describe("getFooterHref", () => {
   it("footer solutions 링크도 canonical solutions 경로를 사용한다", () => {
-    expect(getFooterHref("AI Platform (AIP)", "en")).toBe("/en/solutions/aip");
-    expect(getFooterHref("접근 제어 플랫폼 (ACP)", "ko")).toBe("/ko/solutions/acp");
-    expect(getFooterHref("AIプラットフォーム (AIP)", "ja")).toBe("/ja/solutions/aip");
+    expect(getFooterHref("AI Platform (AIP)", "en")).toBe("/en/platforms/aip");
+    expect(getFooterHref("접근 제어 플랫폼 (ACP)", "ko")).toBe("/ko/platforms/acp");
+    expect(getFooterHref("AIプラットフォーム (AIP)", "ja")).toBe("/ja/platforms/aip");
     expect(getFooterHref("社内業務効率化｜AI Crew", "ja")).toBe("/ja/solutions/ai-crew");
     expect(getFooterHref("自社サービスAI化｜AI Dashi", "ja")).toBe("/ja/solutions/ai-dashi");
+    expect(getFooterHref("AS/400・COBOLモダナイゼーション", "ja")).toBe("/ja/solutions/as400-cobol");
     expect(getFooterHref("Workplace Productivity | AI Crew", "en")).toBe("/en/solutions/ai-crew");
     expect(getFooterHref("AI for Your Service | AI Dashi", "en")).toBe("/en/solutions/ai-dashi");
     expect(getFooterHref("사내 업무 효율화 | AI Crew", "ko")).toBe("/ko/solutions/ai-crew");

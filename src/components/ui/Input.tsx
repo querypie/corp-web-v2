@@ -1,4 +1,5 @@
 import type { InputHTMLAttributes } from "react";
+import { ChevronDown } from "lucide-react";
 
 type InputVariant = "input" | "dropdown";
 type InputState = "default" | "focus" | "disable";
@@ -55,11 +56,9 @@ export default function Input({
           <span className="min-w-0 flex-1 type-body-md text-fg">
             {label ?? "dropdown"}
           </span>
-          <img
-            alt=""
+          <ChevronDown
             aria-hidden="true"
-            className="theme-icon h-[14px] w-[14px] shrink-0 object-contain"
-            src="/assets/ui/icons/chevron-down.svg"
+            className="h-[14px] w-[14px] shrink-0"
           />
         </>
       ) : (

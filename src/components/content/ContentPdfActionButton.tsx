@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactNode, useEffect, useState } from "react";
+import { FileText, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import type { Locale } from "@/constants/i18n";
 
@@ -49,34 +50,7 @@ function hasCookie(name: string) {
 }
 
 function PdfIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="h-5 w-5 shrink-0"
-      fill="none"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M5.5 2.5h5.75L15.5 6.75V16a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 16V4a1.5 1.5 0 0 1 1.5-1.5Z"
-        stroke="currentColor"
-        strokeLinejoin="round"
-        strokeWidth="1.4"
-      />
-      <path
-        d="M11 2.75V6.5a.5.5 0 0 0 .5.5h3.75"
-        stroke="currentColor"
-        strokeLinejoin="round"
-        strokeWidth="1.4"
-      />
-      <path
-        d="M6.75 11.75h6.5M6.75 14h4.5"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeWidth="1.4"
-      />
-    </svg>
-  );
+  return <FileText aria-hidden="true" className="h-5 w-5 shrink-0" />;
 }
 
 export default function ContentPdfActionButton({
@@ -185,7 +159,7 @@ export default function ContentPdfActionButton({
                 onClick={handleRequestFormClose}
                 type="button"
               >
-                <span aria-hidden="true" className="text-[24px] leading-none">×</span>
+                <X aria-hidden="true" className="h-5 w-5" />
               </button>
               <p className="m-0 text-left type-body-md leading-7 text-mute">
                 {EXCLUSIVE_CONTENT_FORM_MESSAGE[locale]}

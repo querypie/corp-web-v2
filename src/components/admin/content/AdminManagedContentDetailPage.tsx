@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Check } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import ButtonGroup from "@/components/ui/ButtonGroup";
@@ -376,9 +377,7 @@ function TranslationProgressDialog({
             isSuccess ? "border-success text-success" : "border-border text-fg",
           )}>
             {isSuccess ? (
-              <svg aria-hidden="true" className="h-5 w-5" fill="none" viewBox="0 0 24 24">
-                <path d="m6 12 4 4 8-8" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-              </svg>
+              <Check aria-hidden="true" className="h-5 w-5" />
             ) : (
               <span className="h-4 w-4 animate-spin rounded-full border-2 border-fg border-t-transparent" />
             )}

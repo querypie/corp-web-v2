@@ -65,6 +65,12 @@ describe("getLocalePath", () => {
 });
 
 describe("getLocaleSwitchPath", () => {
+  it("일본어 전용 COBOL 페이지에서 다른 언어로 변경하면 해당 언어 홈으로 이동한다", () => {
+    expect(getLocaleSwitchPath("/ja/solutions/as400-cobol", "en")).toBe("/en");
+    expect(getLocaleSwitchPath("/ja/solutions/as400-cobol", "ko")).toBe("/ko");
+    expect(getLocaleSwitchPath("/ja/solutions/as400-cobol", "ja")).toBe("/ja/solutions/as400-cobol");
+  });
+
   it("영어·한국어 Plans 페이지에서 일본어로 변경하면 일본어 홈으로 이동한다", () => {
     expect(getLocaleSwitchPath("/en/plans/aip", "ja")).toBe("/ja");
     expect(getLocaleSwitchPath("/ko/plans/acp", "ja")).toBe("/ja");
@@ -73,6 +79,6 @@ describe("getLocaleSwitchPath", () => {
   it("Plans의 영어·한국어 전환과 다른 페이지의 일본어 전환은 현재 경로를 유지한다", () => {
     expect(getLocaleSwitchPath("/en/plans/aip", "ko")).toBe("/ko/plans/aip");
     expect(getLocaleSwitchPath("/ko/plans/acp", "en")).toBe("/en/plans/acp");
-    expect(getLocaleSwitchPath("/en/solutions/aip", "ja")).toBe("/ja/solutions/aip");
+    expect(getLocaleSwitchPath("/en/platforms/aip", "ja")).toBe("/ja/platforms/aip");
   });
 });
