@@ -57,8 +57,8 @@ export VERCEL_TOKEN=<발급받은_토큰>
 ### 기본 조회
 
 ```bash
-# 최근 에러 로그 (staging)
-vercel logs --environment preview --level error --since 1h
+# 최근 에러 로그 (Stage = main Preview)
+vercel logs --environment preview --branch main --level error --since 1h
 
 # 최근 에러 로그 (production)
 vercel logs --environment production --level error --since 1h
@@ -157,12 +157,14 @@ cat .vercel/project.json
 | 환경 | 도메인 | 트리거 |
 |------|--------|--------|
 | Development | `localhost:3000` | 로컬 `npm run dev` |
-| Preview / Stage / Staging | main: `stage-v2.querypie.com` / PR: Vercel Preview URL | `main` push / PR open·sync (GHA 자동) |
+| Preview / Stage / Staging | main: `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai` / PR: Vercel Preview URL | `main` push / PR open·sync (GHA 자동) |
 | Production | `www-v2.querypie.com` | `workflow_dispatch` 수동 실행 |
 
-Preview, Stage, Staging은 같은 환경을 뜻한다. main 배포는 고정 Stage 도메인을 사용한다.
+Preview, Stage, Staging은 같은 환경을 뜻한다.
+Stage 또는 Staging 배포는 특히 `main` 브랜치의 Preview Deployment를 가리키며, 위 세 고정 도메인을 사용한다.
 Production은 입력 소스 브랜치로 release를 먼저 갱신하고 release를 배포한다.
-현재 custom staging의 built-in Preview 이전은 계획 단계다. 실제 조회 시에는 연결된 배포의 환경을 확인한다.
+Vercel Production Branch는 `release`다.
+전환 진행 상태는 배포 문서를 확인한다.
 
 > **참고:** `vercel.json`의 `"git": { "deploymentEnabled": false }` 설정으로 Vercel 자동 git 배포는 비활성화되어 있다. 모든 배포는 GitHub Actions(`.github/workflows/`)가 트리거한다.
 

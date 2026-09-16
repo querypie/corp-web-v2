@@ -173,12 +173,15 @@ Figma 디자인 구현 요청이 있으면 일반 Figma Remote MCP가 아니라 
 | 환경 | 도메인 | 트리거 |
 |------|--------|--------|
 | Development | `localhost:3000` | 로컬 `npm run dev` |
-| Preview / Stage / Staging | main: `stage-v2.querypie.com` / PR: Vercel Preview URL | `main` push / PR open·sync |
+| Preview / Stage / Staging | main: `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai` / PR: Vercel Preview URL | `main` push / PR open·sync |
 | Production | `www-v2.querypie.com` | `workflow_dispatch` |
 
-Preview, Stage, Staging은 같은 환경의 이름입니다. main과 PR은 이 환경 안의 개별 배포입니다.
+Preview, Stage, Staging은 같은 환경의 이름입니다.
+운영 문서에서 Stage 또는 Staging 배포는 특히 `main` 브랜치의 Preview Deployment를 가리킵니다.
+PR 배포도 같은 Preview 환경을 사용하며, 각 배포의 Vercel URL로 확인합니다.
 Production은 소스 브랜치(기본 main)로 release를 먼저 갱신한 뒤 release를 배포합니다.
-현재 Vercel custom staging의 built-in Preview 이전은 계획 단계입니다. 상세 배포 정보는 `docs/reference/vercel-deployment.md`를 확인합니다.
+Vercel Production Branch는 `release`이며, Git 자동 배포는 끄고 GitHub Actions로 배포합니다.
+전환 진행 상태와 상세 배포 정보는 `docs/reference/vercel-deployment.md`를 확인합니다.
 
 ---
 

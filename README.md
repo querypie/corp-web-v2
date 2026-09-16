@@ -204,15 +204,15 @@ API 주소와 모델은 서버 전용 `src/features/ai/config.server.ts`의 이�
 | `AI_CHAT_BASE_URL` | `https://ai-gateway.stg.querypie.com/v1` |
 | `AI_CHAT_MODEL` | `querypie-internal/glm53-flash/glm-5.3-flash` |
 
-브라우저는 `/api/ai-chat`에 질문을 보내고 답변과 출처를 받습니다. 공식 페이지 조회와 Gateway의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. Vercel custom `staging`에는 두 환경변수를 별도로 등록하고 재배포합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
+브라우저는 `/api/ai-chat`에 질문을 보내고 답변과 출처를 받습니다. 공식 페이지 조회와 Gateway의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. Preview의 `main` 브랜치에는 기존 Stage용 AI 설정을 등록하고 재배포합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
 
-환경은 Development, Preview(= Stage = Staging), Production 세 가지로 구분합니다. 아래는 전환 전 Vercel 등록 위치이며, 기존 custom `staging` 설정은 Preview의 `main` 브랜치 범위로 이전할 예정입니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
+환경은 Development, Preview(= Stage = Staging), Production 세 가지로 구분합니다. Preview 공통 설정은 PR 배포에 사용하고, `main` 브랜치에는 기존 Stage 설정을 우선 적용합니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
 
-| 현재 Vercel 등록 위치 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |
+| Vercel 등록 위치 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |
 |-------------|------------------------|-----------|-------------------|
 | Development | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | encrypted | `true` |
-| Preview | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | sensitive | `true` |
-| custom `staging` | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-stage` | sensitive | `true` |
+| Preview 공통 (PR) | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | sensitive | `true` |
+| Preview (`main`) | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-stage` | sensitive | `true` |
 | Production | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-production` | sensitive | `false` |
 
 Development는 로컬 pull을 위해 `encrypted`로 등록합니다. Vercel은 Development에서 `sensitive` 타입을 지원하지 않습니다. [공식 문서](https://vercel.com/docs/environment-variables/sensitive-environment-variables)
@@ -246,9 +246,13 @@ vercel env pull .env.vercel-development.local --environment=development
 | Preview / Stage / Staging | main: `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai`<br>PR: Vercel Preview URL | `main` push / PR open·sync |
 | Production | `www.querypie.com`<br>`www-v2.querypie.com`<br>`www-v2.querypie.ai` | `workflow_dispatch` |
 
-Preview, Stage, Staging은 같은 환경을 뜻합니다. 그 안에서 main 배포는 고정 Stage 도메인을, PR 배포는 각각의 Preview URL을 사용합니다. 현재 Vercel custom `staging`을 built-in Preview로 옮기는 작업은 아직 진행 전입니다.
+Preview, Stage, Staging은 같은 환경을 뜻합니다.
+Stage 또는 Staging 배포는 특히 `main` 브랜치의 Preview Deployment를 가리키며 위 세 고정 도메인을 사용합니다.
+PR 배포는 같은 Preview 환경에서 각각의 Vercel URL을 사용합니다.
+`deploy-staging.yml`은 `main` push 또는 수동 실행 시 항상 `main`을 Preview에 배포합니다.
 
 Production은 선택한 소스 브랜치(기본 `main`)로 `release`를 먼저 갱신한 뒤 `release`를 배포합니다. 배포가 실패해도 `release`는 갱신된 상태로 남습니다.
+Vercel Production Branch는 `release`로 지정하고, Git 자동 배포는 끄고 모든 배포를 GitHub Actions로 실행합니다.
 
 상세 내용은 [Vercel 배포 문서](docs/reference/vercel-deployment.md)를 확인합니다.
 
