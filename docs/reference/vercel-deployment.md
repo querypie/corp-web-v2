@@ -1,6 +1,6 @@
 # Vercel 배포 구현 현황
 
-**최종 업데이트**: 2026-09-15
+**최종 업데이트**: 2026-09-16
 
 corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 
@@ -8,13 +8,21 @@ corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 
 ## 배포 환경
 
-| 환경 | 직접 서비스 도메인 | 트리거 |
-|------|---------------------|--------|
-| Staging | `stage.querypie.com`<br>`stage-v2.querypie.com`<br>`stage-v2.querypie.ai` | `main` 브랜치 push 시 자동 배포 |
-| Production | `www.querypie.com`<br>`www-v2.querypie.com`<br>`www-v2.querypie.ai` | `workflow_dispatch` 수동 실행 |
-| Preview | 배포별 Vercel Preview URL | PR open/sync 시 자동 배포 |
+환경은 **Development / Preview / Production** 세 가지다. **Preview = Stage = Staging**은
+같은 환경을 뜻한다. main 배포와 PR 배포는 Preview 환경 안의 서로 다른 배포다.
 
-`stage` 브랜치는 존재하지 않는다. Staging 환경은 `main` 브랜치 기준으로 자동 배포된다.
+| 환경 | 접속 주소 | 트리거 |
+|------|---------------------|--------|
+| Development | `http://localhost:3000` | 로컬 개발 서버 실행 |
+| Preview (= Stage = Staging) | main: `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai`<br>PR: 배포별 Vercel Preview URL | `main` push 또는 PR open/sync 시 자동 배포 |
+| Production | `www.querypie.com`<br>`www-v2.querypie.com`<br>`www-v2.querypie.ai` | `workflow_dispatch` 수동 실행 |
+
+현재 Vercel 설정에는 main용 Custom Environment `staging`이 남아 있다. 이를 표준
+Preview에 통합하는 작업은 아래 전환 계획을 따른다. `stage` 브랜치는 존재하지 않는다.
+
+Production 수동 실행은 `BRANCH` 입력(기본값 `main`)의 HEAD로 `release`를 먼저 갱신한 뒤,
+`release`에서 배포한다. 배포가 실패해도 `release`는 시도한 소스를
+가리킨다. 실제 서비스 중인 Production 버전은 Vercel의 현재 배포 SHA로 확인한다.
 
 ### 현재 도메인 매핑
 
@@ -25,11 +33,11 @@ corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 | Production | `www.querypie.com` | Production | Verified / 정상 서비스 |
 | Production | `www-v2.querypie.com` | Production | Verified / 정상 서비스 |
 | Production | `www-v2.querypie.ai` | Production | Verified / 정상 서비스 |
-| Staging | `stage.querypie.com` | Custom Environment `staging` | Verified / 정상 서비스 |
-| Staging | `stage-v2.querypie.com` | Custom Environment `staging` | Verified / 정상 서비스 |
-| Staging | `stage-v2.querypie.ai` | Custom Environment `staging` | Verified / 정상 서비스 |
+| Preview (= Stage = Staging) | `stage.querypie.com` | Custom Environment `staging` (통합 예정) | Verified / 정상 서비스 |
+| Preview (= Stage = Staging) | `stage-v2.querypie.com` | Custom Environment `staging` (통합 예정) | Verified / 정상 서비스 |
+| Preview (= Stage = Staging) | `stage-v2.querypie.ai` | Custom Environment `staging` (통합 예정) | Verified / 정상 서비스 |
 
-Staging custom environment의 ID는 `env_HGojlWaENVScWZk7uFjJUhtDyx4n`이며
+현재 `staging` custom environment의 ID는 `env_HGojlWaENVScWZk7uFjJUhtDyx4n`이며
 `main` 브랜치와 연결되어 있다. Production 도메인은 custom environment ID 없이
 Production target에 연결된다.
 
@@ -57,8 +65,8 @@ Production target에 연결된다.
 - Production 기본 도메인: `corp-web-v2.vercel.app`
 - Production 자동 alias: `corp-web-v2-querypie.vercel.app`,
   `corp-web-v2-git-main-querypie.vercel.app`
-- Staging 자동 alias: `corp-web-v2-env-staging-querypie.vercel.app`
-- Preview: 배포마다 별도 `*.vercel.app` URL이 생성된다.
+- 현재 main 배포 자동 alias: `corp-web-v2-env-staging-querypie.vercel.app`
+- PR 배포: 배포마다 별도 `*.vercel.app` URL이 생성된다.
 
 Vercel 시스템 도메인은 배포 확인용이며 외부에 안내하는 서비스 URL로 간주하지 않는다.
 
@@ -73,7 +81,7 @@ Vercel 시스템 도메인은 배포 확인용이며 외부에 안내하는 서�
   ci.yml                # PR → main 빌드 + 타입체크 검증
   create-pr.yml         # 수동(workflow_dispatch) PR 생성
   deploy-preview.yml    # PR open/sync 시 Preview 배포
-  deploy-staging.yml    # main push 시 Staging 자동 배포
+  deploy-staging.yml    # main push 시 고정 도메인용 Preview(현재 target staging) 배포
   deploy-production.yml # 수동(workflow_dispatch) Production 배포
   delete-deploy.yml     # 브랜치 삭제 시 Preview 배포 정리
 ```
@@ -87,17 +95,28 @@ Vercel 시스템 도메인은 배포 확인용이며 외부에 안내하는 서�
   - `validate-test` — `npm run test:run`
   - lint — 스크립트 구현 후 주석 해제 예정
 
-### `deploy-staging.yml` — Staging 자동 배포
+### `deploy-staging.yml` — main 자동 배포
 
 - **트리거**: push to `main` + `workflow_dispatch`
 - **concurrency**: `staging-{ref}` (cancel-in-progress)
 - `TARGET_ENV=staging`, `BRANCH=main`
+- 현재 Vercel custom environment를 사용하며, 전환 시 target을 `preview`로 통합한다.
 
 ### `deploy-production.yml` — Production 수동 배포
 
 - **트리거**: `workflow_dispatch` (input: BRANCH, 기본값 `main`)
 - **GitHub environment**: `production` (보호 규칙 적용 가능)
-- `TARGET_ENV=production`
+- **순서**: 입력 `BRANCH`의 HEAD fetch → `release` 갱신 → `release`에서 Production 배포
+- **배포 소스**: `TARGET_ENV=production`, `BRANCH=release`
+- **동시 실행**: `release` 준비부터 Production 배포까지 같은 concurrency 그룹에서 직렬화하며, 실행 중인 배포를 취소하지 않는다(`cancel-in-progress: false`).
+- **`release` 갱신**: 원격 `release`와 입력 브랜치를 fetch한 뒤 `--force-with-lease`로 push한다. 조회 후 다른 실행이 `release`를 변경하면 갱신을 거부한다.
+- **인증**: Production job의 `contents: write` 권한과 checkout의 기본 `GITHUB_TOKEN`을 사용한다. 별도 GitHub secret은 필요하지 않다.
+- 입력은 `main` 외의 브랜치도 허용한다. 이전 커밋을 배포하는 롤백에서는 `release` 갱신이 non-fast-forward일 수 있다.
+- `release` 갱신이 실패하면 배포를 시작하지 않는다. 배포가 실패하면 이미 갱신한 `release`는 유지되며, 실제 Production은 이전 배포를 서비스할 수 있다. 실패 후에는 Vercel의 현재 Production 배포 SHA와 상태를 확인하여 재배포할 소스를 결정한다.
+
+`release`는 Production에 배포할 소스를 준비하는 브랜치다. 직접 개발하거나 일반 PR을 병합하는
+브랜치로 사용하지 않으며, 브랜치 보호 규칙을 추가할 때 워크플로우의 갱신 권한과
+롤백에 필요한 non-fast-forward 갱신을 함께 고려한다.
 
 ### `deploy-preview.yml` — PR Preview 배포
 
@@ -125,14 +144,41 @@ scripts/deploy/
 
 **배포 흐름** (`index.js`):
 
-1. `createDeployment` API 호출 (gitSource: `querypie/corp-web-v2`, ref: BRANCH)
-2. `getDeployment`로 5초 간격 폴링 (최대 10분)
+1. `createDeployment` API 호출 (gitSource: `querypie/corp-web-v2`, ref: BRANCH). Production은 먼저 갱신한 `release`를 사용
+2. `getDeployment`로 5초 간격 폴링 (기본 최대 20분, `DEPLOY_POLL_TIMEOUT_MS`로 조정)
 3. `READY` 확인 후 URL 출력
-4. 취소/실패 시 최대 2회 재시도 (15초 대기)
+4. 취소된 배포만 15초 후 1회 재시도 (총 최대 2회 시도). 그 외 실패는 즉시 종료
 
 ---
 
 ## Vercel 프로젝트 설정
+
+### 기존 custom environment를 표준 Preview로 통합하는 계획
+
+현재 Vercel Production Branch는 `main`이고, main 배포는 Custom Environment
+`staging`을 사용한다. `release` 준비 후 Production을 배포하는 워크플로우와 별개로,
+아래 Vercel 설정과 main 배포 target 변경은 후속 작업으로 진행한다.
+
+1. Vercel Production Branch를 `release`로 변경한다. Production 수동 배포는 입력 소스로
+   `release`를 먼저 갱신한 뒤 `production` target으로 배포한다.
+2. Staging 전용 환경변수를 Preview의 `main` 브랜치 범위로 옮기고, main 자동 배포의
+   target을 `staging`에서 `preview`로 변경한다. `NEXT_PUBLIC_SITE_URL`은 main 전용으로
+   `https://stage-v2.querypie.com`을 설정하고 기존 Staging AI 연동 설정도 유지한다.
+3. `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai`를 모두
+   Preview의 `main` 브랜치에 연결한다. GitHub Actions/API 배포에서도 세 도메인이 매번
+   새 배포로 갱신되는지 확인하고, 필요하면 배포 후 명시적 alias 할당을 추가한다.
+   환경변수, 접근 보호와 연속 main 배포의 도메인 갱신을 검증한 뒤 기존 Custom Environment
+   `staging`을 제거한다.
+
+전환 후 main과 PR 배포 모두 같은 **Preview (= Stage = Staging)** 환경을 사용한다.
+main 배포에는 위 세 고정 도메인을, PR 배포에는 각각의 Preview URL을 사용한다.
+`git.deploymentEnabled: false`도 유지하여 Git 자동 배포를 켜지 않고 GitHub Actions가
+배포를 수행한다.
+
+Vercel은 Production Branch를 Preview 도메인·환경변수의 특정 브랜치로 지정하는 것을
+제한하므로 Production Branch 변경이 먼저 필요하다.
+([공식 제약](https://vercel.com/docs/errors/error-list#production-branch-used-as-preview-branch),
+[Preview 도메인 연결](https://vercel.com/docs/domains/working-with-domains/assign-domain-to-a-git-branch))
 
 ### 일본 / 글로벌 도메인 연결
 
@@ -202,9 +248,9 @@ scripts/deploy/
 | Production | `www.querypie.com` | `30b9851d69a3855d.vercel-dns-016.com.` |
 | Production | `www-v2.querypie.com` | `82199b027e940a05.vercel-dns-016.com.` |
 | Production | `www-v2.querypie.ai` | `82199b027e940a05.vercel-dns-016.com.` |
-| Staging | `stage.querypie.com` | `30b9851d69a3855d.vercel-dns-016.com.` |
-| Staging | `stage-v2.querypie.com` | `82199b027e940a05.vercel-dns-016.com.` |
-| Staging | `stage-v2.querypie.ai` | `82199b027e940a05.vercel-dns-016.com.` |
+| Preview (= Stage = Staging) | `stage.querypie.com` | `30b9851d69a3855d.vercel-dns-016.com.` |
+| Preview (= Stage = Staging) | `stage-v2.querypie.com` | `82199b027e940a05.vercel-dns-016.com.` |
+| Preview (= Stage = Staging) | `stage-v2.querypie.ai` | `82199b027e940a05.vercel-dns-016.com.` |
 
 - `querypie.com` v2 Route53 등록: [chequer-io/cloud-platform#610](https://github.com/chequer-io/cloud-platform/pulls/610)
 - `querypie.ai` v2 Route53 등록: [chequer-io/aws-resource#768](https://github.com/chequer-io/aws-resource/pull/768)
@@ -224,30 +270,33 @@ scripts/deploy/
 ## 환경변수 기준값
 
 Vercel 프로젝트에 설정해야 하는 기준값. 실제 등록값은 Vercel 대시보드 또는 `vercel env ls`로 확인한다.
+현재 main용 custom environment `staging`과 PR용 `preview`의 등록 범위는 분리되어 있으므로
+전환 전에는 양쪽에 Preview 기준값을 등록한다. 통합 후 main 전용 값은 Preview의 브랜치
+범위로 지정한다.
 
 ### Community License 기능
 
-| 변수 | Production | Staging | Preview | Development |
-|------|------------|---------|---------|-------------|
-| `DESKPIE_API_BASE_URL` | `https://api.deskpie.querypie.com` | ← 동일 | ← 동일 | — |
-| `DESKPIE_API_KEY` | Encrypted | ← 동일 | ← 동일 | — |
-| `SLACK_BOT_OAUTH_TOKEN` | Encrypted | Encrypted | Encrypted | — |
-| `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | `C08JNAZDU5A` (#alert-website-business-inquiries) | `C083Y0300M7` (#alert-website-form-submission-testing) | ← 동일 | ← 동일 |
-| `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING` | — | `C083Y0300M7` (#alert-website-form-submission-testing) | ← 동일 | — |
+| 변수 | Development | Preview (= Stage = Staging) | Production |
+|------|-------------|----------------------------|------------|
+| `DESKPIE_API_BASE_URL` | — | `https://api.deskpie.querypie.com` | `https://api.deskpie.querypie.com` |
+| `DESKPIE_API_KEY` | — | Encrypted | Encrypted |
+| `SLACK_BOT_OAUTH_TOKEN` | — | Encrypted | Encrypted |
+| `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES` | `C083Y0300M7` | `C083Y0300M7` (#alert-website-form-submission-testing) | `C08JNAZDU5A` (#alert-website-business-inquiries) |
+| `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING` | — | `C083Y0300M7` (#alert-website-form-submission-testing) | — |
 
 **참고:**
 - `DESKPIE_API_BASE_URL` 또는 `DESKPIE_API_KEY` 미설정 시 라이선스 발급 단계를 skip하고 Slack 알림만 진행한다.
-- 테스트/개발용 라이선스 API(`https://licensepie.dev.querypie.io`)는 인터넷 접근 불가로 Vercel 환경에서 사용할 수 없다. Staging/Preview는 Production과 동일한 엔드포인트를 사용하며, Development(로컬)에서만 라이선스 발급 단계를 skip한다.
+- 테스트/개발용 라이선스 API(`https://licensepie.dev.querypie.io`)는 인터넷 접근 불가로 Vercel 환경에서 사용할 수 없다. Preview는 Production과 동일한 엔드포인트를 사용하며, Development(로컬)에서만 라이선스 발급 단계를 skip한다.
 - `SLACK_BOT_OAUTH_TOKEN`은 Vercel 정책상 `development` 환경에 sensitive 타입으로 설정 불가. 로컬 개발 시 Slack 알림은 skip된다.
-- 앱 코드는 `VERCEL_TARGET_ENV !== "production"`일 때 `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`을 우선 사용하고, 미설정 시 `C083Y0300M7`로 fallback한다. Staging/Preview 입력폼이 production 영업 문의 채널로 전송되지 않게 하는 보호장치다.
-- `Staging`은 custom environment(`main` 브랜치)로, 표준 `preview` 환경변수를 상속하지 않는다. `customEnvironmentIds`로 별도 등록되어 있다.
+- 앱 코드는 `VERCEL_TARGET_ENV !== "production"`일 때 `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`을 우선 사용하고, 미설정 시 `C083Y0300M7`로 fallback한다. Preview 입력폼이 production 영업 문의 채널로 전송되지 않게 하는 보호장치다.
+- 현재 main용 custom environment `staging`은 표준 `preview` 환경변수를 상속하지 않으며, `customEnvironmentIds`로 별도 등록되어 있다.
 
 ### Contact Us DeskPie 연동
 
-| 변수 | Production | Staging | Preview | Development |
-|------|------------|---------|---------|-------------|
-| `DESKPIE_API_BASE_URL` | `https://api.deskpie.querypie.com` | ← 동일 | ← 동일 | — |
-| `DESKPIE_API_KEY` | Encrypted | Encrypted | Encrypted | — |
+| 변수 | Development | Preview (= Stage = Staging) | Production |
+|------|-------------|----------------------------|------------|
+| `DESKPIE_API_BASE_URL` | — | `https://api.deskpie.querypie.com` | `https://api.deskpie.querypie.com` |
+| `DESKPIE_API_KEY` | — | Encrypted | Encrypted |
 
 **참고:**
 - `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY` 중 하나라도 없으면 Contact Us와 Content Gating의 DeskPie 전송 단계는 skip된다.
