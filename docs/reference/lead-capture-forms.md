@@ -172,4 +172,5 @@ PDF 버튼 동작:
 
 Slack/DeskPie 환경변수가 없거나 전송에 실패해도 제출 성공은 유지한다.
 
-Staging 환경에 전달할 값은 [`staging-lead-form.env.example`](./staging-lead-form.env.example)을 기준으로 준비한다. `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`은 non-production 채널을 명시적으로 분리하고 싶을 때 사용한다.
+Staging은 `main` 브랜치의 Preview Deployment를 뜻한다.
+Preview 환경에 전달할 값은 [`staging-lead-form.env.example`](./staging-lead-form.env.example)을 기준으로 준비한다. `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`은 non-production 채널을 명시적으로 분리하고 싶을 때 사용한다.
