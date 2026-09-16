@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { afterEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
-import { logAiChatDiagnostic, safeErrorInfo } from "./diagnostics.server";
+import { logAiChatDiagnostic, safeErrorInfo, safeResponseInfo } from "./diagnostics.server";
 
 afterEach(() => { vi.restoreAllMocks(); });
 
@@ -18,5 +18,22 @@ describe("AI Chat 서버 진단", () => {
     expect(printed).not.toContain("stage-secret");
     expect(printed).not.toContain("upstream body");
     expect(printed).not.toContain("token abc123");
+  });
+  it("HTTP 오류 응답 헤더는 정해진 분류값만 기록한다", () => {
+    const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const response = new Response("secret html", {
+      status: 403,
+      headers: { "content-type": "text/html; charset=utf-8", server: "awselb/2.0", "x-debug": "secret-header" },
+    });
+    expect(safeResponseInfo(response)).toEqual({ contentType: "html", server: "awselb" });
+    logAiChatDiagnostic("provider_http_error", { ...safeResponseInfo(response), rawHeaders: "secret-header" });
+    const printed = JSON.stringify(warning.mock.calls);
+    expect(printed).toContain("html");
+    expect(printed).toContain("awselb");
+    expect(printed).not.toContain("awselb/2.0");
+    expect(printed).not.toContain("secret-header");
+    expect(safeResponseInfo(new Response(null, {
+      headers: { "content-type": "application/octet-stream", server: "secret-origin-prod" },
+    }))).toEqual({ contentType: "other", server: "other" });
   });
 });

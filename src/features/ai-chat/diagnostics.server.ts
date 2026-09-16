@@ -8,6 +8,8 @@ type SafeErrorInfo = {
 
 type DiagnosticFields = {
   provider?: "ai-gateway";
+  contentType?: "html" | "json" | "other";
+  server?: "awselb" | "other";
   status?: number;
   durationMs?: number;
   chunks?: number;
@@ -48,9 +50,19 @@ export function safeErrorInfo(error: unknown): SafeErrorInfo {
   };
 }
 
+export function safeResponseInfo(response: Response): Pick<DiagnosticFields, "contentType" | "server"> {
+  const contentType = response.headers.get("content-type") ?? "";
+  return {
+    contentType: contentType.includes("json") ? "json" : contentType.includes("html") ? "html" : "other",
+    server: response.headers.get("server")?.toLowerCase() === "awselb/2.0" ? "awselb" : "other",
+  };
+}
+
 export function logAiChatDiagnostic(event: string, fields: DiagnosticFields & Record<string, unknown> = {}) {
   const entry: DiagnosticFields & { event: string } = { event };
   if (fields.provider === "ai-gateway") entry.provider = fields.provider;
+  if (fields.contentType) entry.contentType = fields.contentType;
+  if (fields.server) entry.server = fields.server;
   for (const key of ["status", "durationMs", "chunks", "references", "requestBytes", "messageCount"] as const) {
     if (typeof fields[key] === "number" && Number.isFinite(fields[key])) entry[key] = fields[key];
   }

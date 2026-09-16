@@ -3,7 +3,7 @@ import type { Locale } from "@/constants/i18n";
 import { getAiChatConfig } from "@/features/ai/config.server";
 import { retrieveLiveKnowledge } from "./liveKnowledge.server";
 import type { ChatReply, ChatSource, ChatTurn } from "./types";
-import { logAiChatDiagnostic, safeErrorInfo } from "./diagnostics.server";
+import { logAiChatDiagnostic, safeErrorInfo, safeResponseInfo } from "./diagnostics.server";
 import { ChatServiceError, parseProviderReply } from "./reply";
 export { ChatServiceError, parseGroundedAnswer } from "./reply";
 
@@ -89,7 +89,7 @@ export async function answerProductQuestion(messages: ChatTurn[], locale: Locale
     throw cause;
   }
   if (!response.ok) {
-    logAiChatDiagnostic("provider_http_error", { provider: "ai-gateway", status: response.status, durationMs: Date.now() - started });
+    logAiChatDiagnostic("provider_http_error", { provider: "ai-gateway", status: response.status, durationMs: Date.now() - started, ...safeResponseInfo(response) });
     throw new ChatServiceError("PROVIDER_ERROR", response.status === 429 ? 429 : 502);
   }
   let payload: unknown;

@@ -80,7 +80,10 @@ describe("근거 기반 AI 답변", () => {
     vi.stubEnv("AI_CHAT_ENABLED", "true");
     vi.stubEnv("AI_CHAT_API_KEY", "stage-secret");
     const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response("upstream secret body", { status: 504 })));
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response("upstream secret body", {
+      status: 504,
+      headers: { "content-type": "text/html", server: "awselb/2.0" },
+    })));
     await expect(answerProductQuestion([{ role: "user", content: "AIP가 무엇인가요?" }], "ko", new AbortController().signal)).rejects.toMatchObject({
       code: "PROVIDER_ERROR",
       status: 502,
@@ -89,6 +92,8 @@ describe("근거 기반 AI 답변", () => {
       event: "provider_http_error",
       status: 504,
       provider: "ai-gateway",
+      contentType: "html",
+      server: "awselb",
     }));
     expect(JSON.stringify(warn.mock.calls)).not.toContain("stage-secret");
     expect(JSON.stringify(warn.mock.calls)).not.toContain("upstream secret body");
