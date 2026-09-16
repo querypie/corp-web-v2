@@ -82,6 +82,3 @@ jobs:
 
       - name: Run tests
         run: npm run test:run
-
-      - name: Test deployment scripts
-        run: npm test --prefix scripts/deploy

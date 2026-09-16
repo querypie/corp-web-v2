@@ -206,9 +206,9 @@ API 주소와 모델은 서버 전용 `src/features/ai/config.server.ts`의 이�
 
 브라우저는 `/api/ai-chat`에 질문을 보내고 답변과 출처를 받습니다. 공식 페이지 조회와 Gateway의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. Vercel custom `staging`에는 두 환경변수를 별도로 등록하고 재배포합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
 
-Vercel Project에는 환경별로 다음 키를 등록합니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
+환경은 Development, Preview(= Stage = Staging), Production 세 가지로 구분합니다. 아래는 전환 전 Vercel 등록 위치이며, 기존 custom `staging` 설정은 Preview의 `main` 브랜치 범위로 이전할 예정입니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
 
-| Vercel 환경 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |
+| 현재 Vercel 등록 위치 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |
 |-------------|------------------------|-----------|-------------------|
 | Development | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | encrypted | `true` |
 | Preview | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | sensitive | `true` |
@@ -242,11 +242,15 @@ vercel env pull .env.vercel-development.local --environment=development
 
 | 환경 | 직접 서비스 도메인 | 트리거 |
 |------|---------------------|--------|
-| Staging | `stage.querypie.com`<br>`stage-v2.querypie.com`<br>`stage-v2.querypie.ai` | `main` push |
+| Development | `localhost:3000` | 로컬 `npm run dev` |
+| Preview / Stage / Staging | main: `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai`<br>PR: Vercel Preview URL | `main` push / PR open·sync |
 | Production | `www.querypie.com`<br>`www-v2.querypie.com`<br>`www-v2.querypie.ai` | `workflow_dispatch` |
-| Preview | Vercel preview URL | PR open / sync |
 
-상세 내용은 `docs/reference/vercel-deployment.md`를 확인합니다.
+Preview, Stage, Staging은 같은 환경을 뜻합니다. 그 안에서 main 배포는 고정 Stage 도메인을, PR 배포는 각각의 Preview URL을 사용합니다. 현재 Vercel custom `staging`을 built-in Preview로 옮기는 작업은 아직 진행 전입니다.
+
+Production은 선택한 소스 브랜치(기본 `main`)로 `release`를 먼저 갱신한 뒤 `release`를 배포합니다. 배포가 실패해도 `release`는 갱신된 상태로 남습니다.
+
+상세 내용은 [Vercel 배포 문서](docs/reference/vercel-deployment.md)를 확인합니다.
 
 ---
 
