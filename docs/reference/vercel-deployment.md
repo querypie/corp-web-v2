@@ -19,8 +19,8 @@ main 배포와 PR 배포는 Preview 환경 안의 서로 다른 배포다.
 | Preview (= Stage = Staging) | main: `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai`<br>PR: 배포별 Vercel Preview URL | `main` push 또는 PR open/sync 시 자동 배포 |
 | Production | `www.querypie.com`<br>`www-v2.querypie.com`<br>`www-v2.querypie.ai` | `workflow_dispatch` 수동 실행 |
 
-기존 Custom Environment `staging`은 main 배포 워크플로우 변경의 병합 후 정리를 위해 잠시 유지한다.
-전환 진행 상태는 아래 「표준 Preview 전환과 완료 확인」을 따른다.
+기존 Custom Environment `staging`은 삭제했으며, built-in Preview로 전환을 완료했다.
+전환 결과는 아래 「표준 Preview 전환 완료」를 따른다.
 `stage` 브랜치는 존재하지 않는다.
 
 Production 수동 실행은 `BRANCH` 입력(기본값 `main`)의 HEAD로 `release`를 먼저 갱신한 뒤,
@@ -68,7 +68,7 @@ Production 도메인은 Production target에 연결된다.
 - Production 기본 도메인: `corp-web-v2.vercel.app`
 - Production 자동 alias: `corp-web-v2-querypie.vercel.app`
 - main Preview 브랜치 alias: `corp-web-v2-git-main-querypie.vercel.app`
-- 기존 custom staging alias: `corp-web-v2-env-staging-querypie.vercel.app` (이전 배포 확인용)
+- 기존 custom staging alias: `corp-web-v2-env-staging-querypie.vercel.app` (과거 배포 확인용이며 현재 Stage 배포가 아님)
 - PR 배포: 배포마다 별도 `*.vercel.app` URL이 생성된다.
 
 Vercel 시스템 도메인은 배포 확인용이며 외부에 안내하는 서비스 URL로 간주하지 않는다.
@@ -158,9 +158,9 @@ scripts/deploy/
 
 ## Vercel 프로젝트 설정
 
-### 표준 Preview 전환과 완료 확인
+### 표준 Preview 전환 완료
 
-2026-09-16 Vercel 설정 변경과 첫 main Preview 배포를 완료했다.
+2026-09-16 PR #174 병합 후 main 자동 배포와 기존 Custom Environment 정리까지 완료했다.
 
 - Vercel Production Branch는 `release`다.
   Production 워크플로우가 입력 소스로 `release`를 먼저 갱신한 뒤 `production` target으로 배포한다.
@@ -172,14 +172,13 @@ scripts/deploy/
   배포 스크립트에 별도 alias 명령은 추가하지 않는다.
 - 세 도메인의 `/en` 응답은 HTTP 200이며, canonical URL은 기존 기준인
   `https://stage-v2.querypie.com`을 유지하는 것을 확인했다.
-- 기존 Custom Environment `staging`의 도메인과 브랜치 매칭은 해제했다.
-  환경 자체는 이전 워크플로우와의 호환을 위해 잠시 유지한다.
+- PR #174 병합 커밋 `adba7d60`의 [main 자동 배포](https://github.com/querypie/corp-web-v2/actions/runs/35071982744)가 성공했다.
+  built-in Preview 배포 `dpl_BY52P6gDeeDjvKVsvEQjt8Hun9pP`의 `READY`와 Stage 세 도메인 연결을 확인했다.
+- 기존 Custom Environment `staging`을 삭제했다. 기존 Stage와 연결되어 있던 환경변수 12개의
+  Preview 범위와 값·타입을 보존했으며, 삭제된 custom environment 연결은 남아 있지 않다.
 
-이 변경의 `deploy-staging.yml`은 main push와 수동 실행 모두 `BRANCH=main`,
+`deploy-staging.yml`은 main push와 수동 실행 모두 `BRANCH=main`,
 `TARGET_ENV=preview`를 사용한다.
-main push 자동 전환은 이 워크플로우 변경을 main에 병합한 뒤 적용된다.
-병합 후 자동 배포가 `READY`이고 Stage 세 도메인이 해당 배포를 가리키는지 확인한 다음,
-기존 Custom Environment `staging` (`env_HGojlWaENVScWZk7uFjJUhtDyx4n`)을 제거한다.
 
 main과 PR 배포 모두 같은 **Preview (= Stage = Staging)** 환경을 사용한다.
 main 배포에는 위 세 고정 도메인을, PR 배포에는 각각의 Preview URL을 사용한다.
@@ -291,7 +290,7 @@ main과 PR 모두 `corp-web-v2-stage`의 Gateway Key를 사용하며, 기존 Dev
 `QUERYPIE_LICENSE_ISSUE_API_ENDPOINT`, `QUERYPIE_LICENSE_ISSUE_API_KEY`, `SALESFORCE_ENDPOINT`, `SLACK_BOT_OAUTH_TOKEN`,
 `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES`다.
 기존 Stage와 Preview 공통으로 등록된 `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY`,
-`DESKPIE_LEAD_API_KEY`, `DESKPIE_LEAD_API_ENDPOINT`는 기존 범위를 유지한다.
+`DESKPIE_LEAD_API_KEY`, `DESKPIE_LEAD_API_ENDPOINT`는 기존 Preview 범위를 유지한다.
 `NEXT_PUBLIC_SITE_URL=https://stage-v2.querypie.com`은 Preview / `main`에 추가했다.
 
 ### Community License 기능
@@ -309,7 +308,7 @@ main과 PR 모두 `corp-web-v2-stage`의 Gateway Key를 사용하며, 기존 Dev
 - 테스트/개발용 라이선스 API(`https://licensepie.dev.querypie.io`)는 인터넷 접근 불가로 Vercel 환경에서 사용할 수 없다. Preview는 Production과 동일한 엔드포인트를 사용하며, Development(로컬)에서만 라이선스 발급 단계를 skip한다.
 - `SLACK_BOT_OAUTH_TOKEN`은 Vercel 정책상 `development` 환경에 sensitive 타입으로 설정 불가. 로컬 개발 시 Slack 알림은 skip된다.
 - 앱 코드는 `VERCEL_TARGET_ENV !== "production"`일 때 `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`을 우선 사용하고, 미설정 시 `C083Y0300M7`로 fallback한다. Preview 입력폼이 production 영업 문의 채널로 전송되지 않게 하는 보호장치다.
-- Stage 전용 변수는 기존 `customEnvironmentIds`도 유지하므로, 워크플로우 전환이 병합될 때까지 기존 custom `staging` 배포도 같은 값을 사용한다.
+- 기존 custom `staging` 삭제 후에도 Preview 공통 및 `main` 전용 환경변수는 보존되어 있다.
 
 ### Contact Us DeskPie 연동
 
