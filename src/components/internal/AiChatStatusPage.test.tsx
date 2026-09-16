@@ -44,7 +44,7 @@ const koreanCopy: AiChatStatusPageCopy = {
     disabled: "AI Chat이 비활성화되어 있어 진단 요청을 실행하지 않습니다.",
     missingKey: "AI_CHAT_API_KEY가 설정되지 않았습니다.",
     productionDisabled: "Production 환경에서는 probe를 실행하지 않습니다.",
-    rateLimit: "서버 인스턴스별 호출 제한은 분당 2회, 동시 실행 1회입니다.",
+    rateLimit: "서버 인스턴스별 호출 제한은 분당 30회, 동시 실행 1회입니다.",
   },
   errors: {
     rateLimited: "호출 횟수 제한에 걸렸습니다.",

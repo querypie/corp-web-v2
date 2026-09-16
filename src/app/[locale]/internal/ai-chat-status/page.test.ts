@@ -12,6 +12,7 @@ type RouteCopy = Record<"en" | "ko" | "ja", {
   title: string;
   description: string;
   action: string;
+  notices: { rateLimit: string };
   errors: { albForbidden: string };
 }>;
 
@@ -39,6 +40,7 @@ describe("locale별 AI Chat 상태 진단 문구", () => {
       action: "Run basic request",
     });
     expect(en.description).toContain("The browser is not used as a proxy.");
+    expect(en.notices.rateLimit).toContain("30 requests per minute");
     expect(en.errors.albForbidden).toContain("ALB/WAF");
 
     expect(ko).toMatchObject({
@@ -46,11 +48,13 @@ describe("locale별 AI Chat 상태 진단 문구", () => {
       title: "AI Chat 상태 진단",
       action: "기본 요청 테스트",
     });
+    expect(ko.notices.rateLimit).toContain("분당 30회");
     expect(ja).toMatchObject({
       metadataTitle: "AI Chat ステータス診断",
       title: "AI Chat ステータス診断",
       action: "基本リクエストをテスト",
     });
+    expect(ja.notices.rateLimit).toContain("1分あたり30回");
     expect(collectStrings(en).join(" ")).not.toMatch(/[가-힣]/);
     expect(collectStrings(ja).join(" ")).not.toMatch(/[가-힣]/);
   });
