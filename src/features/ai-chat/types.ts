@@ -2,6 +2,7 @@ import type { Locale } from "@/constants/i18n";
 import { isOfficialChatUrl } from "./sources";
 
 export type ChatSource = { title: string; url: string };
+export const MAX_SLACK_THREAD_TOKEN_LENGTH = 512;
 export type ChatMessage = {
   id: string;
   role: "user" | "assistant";
@@ -10,11 +11,15 @@ export type ChatMessage = {
   sources?: ChatSource[];
   answered?: boolean;
 };
-export type ChatReply = { answer: string; sources: ChatSource[]; answered: boolean };
+export type ChatReply = { answer: string; sources: ChatSource[]; answered: boolean; slackThreadToken?: string };
 export type ChatTurn = { role: "user" | "assistant"; content: string };
 
 export function isChatSourceUrl(value: string) {
   return isOfficialChatUrl(value);
+}
+
+export function isSlackThreadToken(value: unknown): value is string {
+  return typeof value === "string" && value.length > 0 && value.length <= MAX_SLACK_THREAD_TOKEN_LENGTH;
 }
 
 export function isChatReply(value: unknown): value is ChatReply {

@@ -14,11 +14,25 @@ describe("AI 상담 미리보기 세션", () => {
     sessionStorage.setItem("querypie-ai-chat:v1", JSON.stringify({
       draft: "x".repeat(MAX_MESSAGE_LENGTH + 1),
       messages: [null, { text: "bad locale", locale: "fr" }, ...Array.from({ length: 25 }, (_, i) => ({ id: String(i), role: "user", text: `message ${i}`, locale: "ko" }))],
+      slackThreadToken: "thread-token-1",
     }));
     const session = readPreviewSession();
     expect(session.draft).toHaveLength(MAX_MESSAGE_LENGTH);
     expect(session.messages).toHaveLength(MAX_PREVIEW_MESSAGES);
     expect(session.messages[0].text).toBe("message 5");
+    expect(session.slackThreadToken).toBe("thread-token-1");
+  });
+
+  it("Slack thread token은 유효한 bounded 문자열만 복원한다", () => {
+    sessionStorage.setItem("querypie-ai-chat:v1", JSON.stringify({
+      draft: "",
+      messages: [],
+      slackThreadToken: "x".repeat(513),
+    }));
+    expect(readPreviewSession()).toEqual({ draft: "", messages: [] });
+
+    savePreviewSession({ draft: "질문", messages: [], slackThreadToken: "thread-token-2" });
+    expect(readPreviewSession()).toEqual({ draft: "질문", messages: [], slackThreadToken: "thread-token-2" });
   });
 
   it("브라우저가 저장소 접근을 차단해도 예외를 전파하지 않는다", () => {

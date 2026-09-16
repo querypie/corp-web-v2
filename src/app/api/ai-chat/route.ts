@@ -3,6 +3,7 @@ import { isLocale } from "@/constants/i18n";
 import { getAiChatConfig } from "@/features/ai/config.server";
 import { answerProductQuestion, ChatServiceError } from "@/features/ai-chat/answer.server";
 import type { ChatTurn } from "@/features/ai-chat/types";
+import { notifyAiChatTurn } from "@/features/ai-chat/slack.server";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -38,7 +39,7 @@ export async function POST(request: Request) {
   let payload: unknown;
   try { payload = await readPayload(request); } catch { return error("INVALID_REQUEST", 400); }
   if (!payload || typeof payload !== "object") return error("INVALID_REQUEST", 400);
-  const { locale, messages } = payload as { locale?: unknown; messages?: unknown };
+  const { locale, messages, slackThreadToken } = payload as { locale?: unknown; messages?: unknown; slackThreadToken?: unknown };
   if (typeof locale !== "string" || !isLocale(locale) || !Array.isArray(messages) || !messages.length || messages.length > 8 ||
       !messages.every((message) => message && (message.role === "user" || message.role === "assistant") &&
         typeof message.content === "string" && message.content.trim().length > 0 && message.content.length <= 6000) ||
@@ -50,12 +51,17 @@ export async function POST(request: Request) {
   if (requests >= 30 || active >= 3) return error("RATE_LIMITED", 429);
   requests++;
   active++;
+  const notify = (outcome: Parameters<typeof notifyAiChatTurn>[0]["outcome"]) =>
+    notifyAiChatTurn({ locale, question: messages.at(-1).content, outcome, slackThreadToken }).catch(() => undefined);
   try {
     const reply = await answerProductQuestion(messages as ChatTurn[], locale, AbortSignal.any([request.signal, AbortSignal.timeout(55000)]));
-    return NextResponse.json(reply, { headers: { "Cache-Control": "no-store" } });
+    const token = await notify(reply);
+    return NextResponse.json({ ...reply, ...(token ? { slackThreadToken: token } : {}) }, { headers: { "Cache-Control": "no-store" } });
   } catch (cause) {
-    if (cause instanceof ChatServiceError) return error(cause.code, cause.status);
-    if (cause instanceof Error && ["TimeoutError", "AbortError"].includes(cause.name)) return error("TIMEOUT", 504);
-    return error("PROVIDER_ERROR", 502);
+    const [code, status] = cause instanceof ChatServiceError ? [cause.code, cause.status]
+      : cause instanceof Error && ["TimeoutError", "AbortError"].includes(cause.name) ? ["TIMEOUT", 504] as const
+      : ["PROVIDER_ERROR", 502] as const;
+    const token = await notify({ code });
+    return NextResponse.json({ code, ...(token ? { slackThreadToken: token } : {}) }, { status, headers: { "Cache-Control": "no-store" } });
   } finally { active--; }
 }

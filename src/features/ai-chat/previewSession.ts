@@ -1,12 +1,12 @@
 import { isLocale, type Locale } from "@/constants/i18n";
-import { isChatSourceUrl, type ChatMessage, type ChatSource } from "./types";
+import { isChatSourceUrl, isSlackThreadToken, type ChatMessage, type ChatSource } from "./types";
 
 const STORAGE_KEY = "querypie-ai-chat:v1";
 export const MAX_MESSAGE_LENGTH = 2000;
 export const MAX_PREVIEW_MESSAGES = 20;
 
 export type PreviewMessage = ChatMessage;
-export type PreviewSession = { draft: string; messages: PreviewMessage[] };
+export type PreviewSession = { draft: string; messages: PreviewMessage[]; slackThreadToken?: string };
 
 // Completed conversation history is kept in this tab; the API receives only
 // the recent turns needed for the next answer. Old unsent preview sessions are ignored.
@@ -14,6 +14,7 @@ export function readPreviewSession(): PreviewSession {
   try {
     const value: unknown = JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? "null");
     if (value && typeof value === "object" && "draft" in value && "messages" in value) {
+      const session = value as { draft?: unknown; messages?: unknown; slackThreadToken?: unknown };
       const draft = typeof value.draft === "string" ? value.draft.slice(0, MAX_MESSAGE_LENGTH) : "";
       const messages = Array.isArray(value.messages)
         ? value.messages.filter((message): message is PreviewMessage =>
@@ -28,7 +29,7 @@ export function readPreviewSession(): PreviewSession {
           ).slice(0, 8) : [],
         }))
         : [];
-      return { draft, messages };
+      return isSlackThreadToken(session.slackThreadToken) ? { draft, messages, slackThreadToken: session.slackThreadToken } : { draft, messages };
     }
   } catch {
     // Storage may be unavailable or contain an older, invalid session.

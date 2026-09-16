@@ -82,6 +82,47 @@ describe("AI 제품 상담", () => {
     expect(screen.getByText(reply.answer)).toBeVisible();
   });
 
+  it("Slack thread token을 저장하고 다음 요청에 함께 보낸다", async () => {
+    vi.mocked(fetch)
+      .mockResolvedValueOnce(new Response(JSON.stringify({ ...reply, slackThreadToken: "thread-token-1" })))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ ...reply, answer: "연속 답변입니다.", slackThreadToken: "thread-token-1" })));
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 소개" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByText(reply.answer);
+
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "이전 답변에 이어 설명해줘" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByText("연속 답변입니다.");
+
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).toEqual({
+      locale: "ko",
+      messages: [
+        { role: "user", content: "AIP 소개" },
+        { role: "assistant", content: reply.answer },
+        { role: "user", content: "이전 답변에 이어 설명해줘" },
+      ],
+      slackThreadToken: "thread-token-1",
+    });
+  });
+
+  it("저장된 Slack thread token을 remount 이후 요청에도 사용한다", async () => {
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ ...reply, slackThreadToken: "thread-token-1" })));
+    const { unmount } = render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 소개" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByText(reply.answer);
+
+    unmount();
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "이어지는 질문" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findAllByText(reply.answer);
+
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).toMatchObject({ slackThreadToken: "thread-token-1" });
+  });
+
   it("초기화하면 대화·초안·저장된 세션을 비우고 입력창에 포커스를 둔다", async () => {
     const onClose = vi.fn();
     const { unmount } = render(<AiChatPanel locale="ko" onClose={onClose} open />);
@@ -104,6 +145,25 @@ describe("AI 제품 상담", () => {
     expect(screen.getByRole("textbox")).toHaveValue("");
   });
 
+  it("초기화하면 Slack thread token도 지운다", async () => {
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ ...reply, slackThreadToken: "thread-token-1" })));
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 소개" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByText(reply.answer);
+
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.reset }));
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "새 대화" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByText(reply.answer);
+
+    expect(readPreviewSession()).toEqual({ draft: "", messages: [
+      expect.objectContaining({ role: "user", text: "새 대화" }),
+      expect.objectContaining({ role: "assistant", text: reply.answer }),
+    ] });
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).not.toHaveProperty("slackThreadToken");
+  });
+
   it("연결 실패 시 질문을 입력창에 복원하고 재전송할 수 있게 한다", async () => {
     vi.mocked(fetch).mockRejectedValueOnce(new Error("Network unavailable"));
     render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
@@ -112,6 +172,22 @@ describe("AI 제품 상담", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(aiChatCopy.ko.error);
     expect(screen.getByRole("textbox")).toHaveValue("Lingo 지원 언어");
     expect(screen.getByRole("button", { name: aiChatCopy.ko.send })).toBeEnabled();
+  });
+
+  it("서버 에러 응답에 Slack thread token이 있으면 실패 후에도 유지한다", async () => {
+    vi.mocked(fetch)
+      .mockResolvedValueOnce(new Response(JSON.stringify({ code: "PROVIDER_ERROR", slackThreadToken: "thread-token-error" }), { status: 502 }))
+      .mockResolvedValueOnce(response());
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 소개" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    expect(await screen.findByRole("alert")).toHaveTextContent(aiChatCopy.ko.error);
+
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByText(reply.answer);
+
+    expect(readPreviewSession().slackThreadToken).toBe("thread-token-error");
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).toMatchObject({ slackThreadToken: "thread-token-error" });
   });
 
   it("서버가 예전 브라우저 전달 payload를 반환해도 외부 LLM으로 직접 요청하지 않는다", async () => {
