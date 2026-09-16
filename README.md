@@ -202,7 +202,7 @@ API 주소와 모델은 서버 전용 `src/features/ai/config.server.ts`의 이�
 | 코드 상수 | 값 |
 |-----------|----|
 | `AI_CHAT_BASE_URL` | `https://ai-gateway.stg.querypie.com/v1` |
-| `AI_CHAT_MODEL` | `querypie-internal/glm53/glm-5.3` |
+| `AI_CHAT_MODEL` | `querypie-internal/glm53-flash/glm-5.3-flash` |
 
 브라우저는 `/api/ai-chat`에 질문을 보내고 답변과 출처를 받습니다. 공식 페이지 조회와 Gateway의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. Vercel custom `staging`에는 두 환경변수를 별도로 등록하고 재배포합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
 

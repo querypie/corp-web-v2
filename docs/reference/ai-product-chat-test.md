@@ -9,9 +9,9 @@
 | 코드 상수 | 값 |
 |-----------|----|
 | `AI_CHAT_BASE_URL` | `https://ai-gateway.stg.querypie.com/v1` |
-| `AI_CHAT_MODEL` | `querypie-internal/glm53/glm-5.3` |
+| `AI_CHAT_MODEL` | `querypie-internal/glm53-flash/glm-5.3-flash` |
 
-`querypie-internal`은 Gateway Provider 이름이며, `glm53/glm-5.3`은 Provider 내부 모델 이름입니다. 모델을 변경할 때는 Gateway의 `GET /v1/models`가 반환하는 전체 ID를 사용합니다.
+`querypie-internal`은 Gateway Provider 이름이며, `glm53-flash/glm-5.3-flash`는 Provider 내부 모델 이름입니다. 모델을 변경할 때는 Gateway의 `GET /v1/models`가 반환하는 전체 ID를 사용합니다.
 
 Vercel Project에는 다음 두 환경변수만 설정합니다. 로컬 개발에서는 Vercel Development 환경 값을 git에 포함되지 않는 `.env.local`로 가져와 사용합니다.
 
@@ -63,7 +63,7 @@ npm run build
 npm run typecheck
 ```
 
-GLM-5.3 요청에는 `reasoning_effort: "low"`를 명시합니다. [모델 공식 문서](https://huggingface.co/zai-org/GLM-5.3/blob/main/README.md)에 따르면 생략 시 기본값은 `max`입니다. 동일한 제품 질문·공식 근거 요청이 기본값에서는 Gateway의 `504 UPSTREAM_TIMEOUT`으로 30초 후 실패했고, `low`에서는 약 5초 만에 답변을 반환한 것을 확인했습니다. 모델과 Gateway 주소는 바꾸지 않습니다.
+기본 모델은 응답 지연을 줄이기 위해 GLM-5.3 Flash를 사용하고, `reasoning_effort: "low"`를 명시합니다. Development 키로 동일 Gateway의 Flash 모델에 고정 요청을 보내 HTTP 200 / `OK` 응답을 약 443ms에 확인했습니다. 실제 소요 시간은 부하와 요청에 따라 달라집니다.
 
 `domRuntime.test.ts`는 `require(ESM)`이 비활성화된 Node 프로세스에서 HTML·XML 파서 로딩을 확인합니다. `jsdom` 버전을 변경할 때는 이 테스트와 실제 Vercel Function의 cold start를 함께 확인합니다.
 
@@ -78,3 +78,13 @@ GLM-5.3 요청에는 `reasoning_effort: "low"`를 명시합니다. [모델 공�
 Vercel Runtime Logs의 `[ai-chat]` 이벤트로 자료 조회, Gateway 요청, 연결 실패, HTTP 오류, 응답 해석 실패를 구분합니다. 로그에는 단계·소요 시간·HTTP 상태·허용된 오류 코드와 자료/메시지 개수만 남기며, API Key·질문·공식 자료 본문·모델 원문·내부 추론은 기록하지 않습니다. `provider_fetch_error`는 Gateway 응답을 받기 전 연결 단계 오류이며, `provider_http_error`는 Gateway가 오류 상태를 반환한 경우입니다.
 
 질문 예시: `AIP와 ACP는 어떤 차이가 있나요?`, `Lingoをどうやって始めますか？`.
+
+## 공개 상태 페이지
+
+`/internal/ai-chat-status`에서 현재 서버의 모델·Gateway 주소·활성화 상태·키 설정 여부를 확인하고 **기본 요청 테스트**를 실행할 수 있습니다. 키 값은 표시하지 않습니다. 공개 경로이며 기존 `/admin`의 로컬 접근 제한과 별개입니다.
+
+테스트는 `POST /api/internal/ai-chat-status`에서 서버에 고정된 `Reply with exactly OK and no other text.`만 전송합니다. 사용자 지정 프롬프트·모델·주소·키를 받지 않으며, 공식 자료 검색을 거치지 않아 LLM 연결 자체를 분리해서 검사할 수 있습니다. 화면에는 upstream HTTP 상태, 소요 시간, 최종 응답과 성공·실패를 표시합니다. HTTP 403의 HTML/ALB 응답은 Gateway 앞단 접근 거부로 안내하며, 특정 WAF 규칙까지 판정하지 않습니다.
+
+호출은 버튼을 눌렀을 때만 실행하고, 서버 인스턴스당 분당 2회·동시 1회로 제한합니다. 제한 초과에는 `429`와 `Retry-After`를 반환합니다. 이 제한은 서버 메모리 기반이며 여러 인스턴스 간에 공유되는 전역 한도는 아닙니다. 페이지는 검색 색인과 응답 캐시를 사용하지 않습니다.
+
+`AI_CHAT_ENABLED=false` 또는 키 미설정이면 진단 요청도 LLM을 호출하지 않습니다. 따라서 Production의 비활성화 정책은 진단 페이지에서도 유지됩니다.

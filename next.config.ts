@@ -39,7 +39,7 @@ const nextConfig: NextConfig = {
       })),
       {
         // Redirect bare public routes to the explicit default locale.
-        source: "/:path((?!$|admin(?:/|$)|api(?:/|$)|mockups(?:/|$)|_next(?:/|$)|en(?:/|$)|ko(?:/|$)|ja(?:/|$)|.*\\..*).*)",
+        source: "/:path((?!$|admin(?:/|$)|internal/ai-chat-status/?$|api(?:/|$)|mockups(?:/|$)|_next(?:/|$)|en(?:/|$)|ko(?:/|$)|ja(?:/|$)|.*\\..*).*)",
         missing: [{ type: "host", value: "(?:www\\.)?querypie\\.ai" }],
         destination: "/en/:path",
         permanent: true,
@@ -55,7 +55,7 @@ const nextConfig: NextConfig = {
           destination: "/ja",
         },
         {
-          source: "/:path((?!$|admin(?:/|$)|api(?:/|$)|mockups(?:/|$)|_next(?:/|$)|en(?:/|$)|ko(?:/|$)|ja(?:/|$)|.*\\..*).*)",
+          source: "/:path((?!$|admin(?:/|$)|internal/ai-chat-status/?$|api(?:/|$)|mockups(?:/|$)|_next(?:/|$)|en(?:/|$)|ko(?:/|$)|ja(?:/|$)|.*\\..*).*)",
           has: [{ type: "host" as const, value: host.replaceAll(".", "\\.") }],
           destination: "/ja/:path",
         },

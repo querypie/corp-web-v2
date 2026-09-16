@@ -3,7 +3,7 @@ import "server-only";
 type AiEnvironment = Readonly<Record<string, string | undefined>>;
 
 export const AI_CHAT_BASE_URL = "https://ai-gateway.stg.querypie.com/v1";
-export const AI_CHAT_MODEL = "querypie-internal/glm53/glm-5.3";
+export const AI_CHAT_MODEL = "querypie-internal/glm53-flash/glm-5.3-flash";
 
 // Non-secret defaults for CMS translation on Vercel Preview only.
 const cmsPreviewModel = {

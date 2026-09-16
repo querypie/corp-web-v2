@@ -12,7 +12,7 @@ describe("AI Chat Stage 설정", () => {
       AI_CHAT_API_KEY: "test-key",
     };
     expect(AI_CHAT_BASE_URL).toBe("https://ai-gateway.stg.querypie.com/v1");
-    expect(AI_CHAT_MODEL).toBe("querypie-internal/glm53/glm-5.3");
+    expect(AI_CHAT_MODEL).toBe("querypie-internal/glm53-flash/glm-5.3-flash");
     expect(getAiChatConfig(env)).toEqual({
       baseUrl: AI_CHAT_BASE_URL,
       model: AI_CHAT_MODEL,

@@ -44,3 +44,15 @@ describe("일본 사이트 도메인 라우팅", () => {
     expect(response.headers.get("location")).toBe(`https://${host}/en/contact-us`);
   });
 });
+
+describe("공개 AI Chat 진단 경로", () => {
+  it.each(["www.querypie.com", "stage-v2.querypie.com", "preview.vercel.app", "querypie.ai", "www.querypie.ai", "localhost:3000"])("%s에서 진단 페이지를 locale 경로로 보내지 않는다", async (host) => {
+    const response = await unstable_getResponseFromNextConfig({ url: `https://${host}/internal/ai-chat-status`, nextConfig });
+    expect(response.headers.get("location")).toBeNull();
+    expect(response.headers.get("x-middleware-rewrite")).toBeNull();
+  });
+  it("다른 internal 경로는 기존 공개 경로 규칙을 유지한다", async () => {
+    const response = await unstable_getResponseFromNextConfig({ url: "https://www.querypie.com/internal/unknown", nextConfig });
+    expect(response.headers.get("location")).toBe("https://www.querypie.com/en/internal/unknown");
+  });
+});
