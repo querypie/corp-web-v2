@@ -204,15 +204,14 @@ API 주소와 모델은 서버 전용 `src/features/ai/config.server.ts`의 이�
 | `AI_CHAT_BASE_URL` | `https://ai-gateway.stg.querypie.com/v1` |
 | `AI_CHAT_MODEL` | `querypie-internal/glm53-flash/glm-5.3-flash` |
 
-브라우저는 `/api/ai-chat`에 질문을 보내고 답변과 출처를 받습니다. 공식 페이지 조회와 Gateway의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. Preview의 `main` 브랜치에는 기존 Stage용 AI 설정을 등록하고 재배포합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
+브라우저는 `/api/ai-chat`에 질문을 보내고 답변과 출처를 받습니다. 공식 페이지 조회와 Gateway의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. Preview에는 기존 Stage용 AI 설정을 공통으로 등록하고 재배포합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
 
-환경은 Development, Preview(= Stage = Staging), Production 세 가지로 구분합니다. Preview 공통 설정은 PR 배포에 사용하고, `main` 브랜치에는 기존 Stage 설정을 우선 적용합니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
+환경은 Development, Preview(= Stage = Staging), Production 세 가지로 구분합니다. Preview의 PR 배포와 `main` 배포는 모두 같은 Stage Gateway Key를 사용합니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
 
 | Vercel 등록 위치 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |
 |-------------|------------------------|-----------|-------------------|
 | Development | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | encrypted | `true` |
-| Preview 공통 (PR) | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | sensitive | `true` |
-| Preview (`main`) | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-stage` | sensitive | `true` |
+| Preview (= Stage = Staging, main 및 PR) | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-stage` | sensitive | `true` |
 | Production | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-production` | sensitive | `false` |
 
 Development는 로컬 pull을 위해 `encrypted`로 등록합니다. Vercel은 Development에서 `sensitive` 타입을 지원하지 않습니다. [공식 문서](https://vercel.com/docs/environment-variables/sensitive-environment-variables)

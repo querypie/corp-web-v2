@@ -26,14 +26,13 @@ AI_CHAT_API_KEY=<Gateway Key>
 | Vercel 환경 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |
 |-------------|------------------------|-----------|-------------------|
 | Development | `corp-web-v2-development` | encrypted | `true` |
-| Preview 공통 (PR) | `corp-web-v2-development` | sensitive | `true` |
-| Preview (`main`) | `corp-web-v2-stage` | sensitive | `true` |
+| Preview (= Stage = Staging, main 및 PR) | `corp-web-v2-stage` | sensitive | `true` |
 | Production | `corp-web-v2-production` | sensitive | `false` |
 
 Development는 로컬 pull을 위해 `encrypted`로 등록합니다. Vercel은 Development에서 `sensitive` 타입을 지원하지 않습니다. [공식 문서](https://vercel.com/docs/environment-variables/sensitive-environment-variables)
 
 Preview, Stage, Staging은 같은 환경을 뜻하며, Stage 배포는 `main`의 Preview Deployment입니다.
-Preview 공통 설정은 Development와 같은 Gateway Key를 사용하고, `main` 브랜치 범위에는 기존 Stage 키를 등록합니다. 키가 없으면 공식 자료나 모델을 호출하기 전에 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역은 기존 `CMS_TRANSLATION_*` 설정을 사용합니다.
+Preview의 PR 배포와 `main` 배포는 모두 `corp-web-v2-stage`의 Gateway Key를 사용합니다. 키는 Preview 공통 범위에 등록하며 브랜치별로 구분하지 않습니다. 키가 없으면 공식 자료나 모델을 호출하기 전에 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역은 기존 `CMS_TRANSLATION_*` 설정을 사용합니다.
 
 로컬 개발용 `.env.local`이 이미 있다면 `vercel env pull .env.local --environment=development`가 파일 전체를 바꿀 수 있으므로 임시 파일로 받은 뒤 필요한 값만 병합합니다.
 

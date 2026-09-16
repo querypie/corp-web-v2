@@ -164,7 +164,8 @@ scripts/deploy/
 
 - Vercel Production Branch는 `release`다.
   Production 워크플로우가 입력 소스로 `release`를 먼저 갱신한 뒤 `production` target으로 배포한다.
-- 기존 Stage 전용 환경변수는 값을 유지하면서 Preview의 `main` 브랜치에도 적용했다.
+- 기존 Stage 전용 환경변수는 값을 유지하면서 Preview에 적용했다.
+  AI Gateway Key는 Preview 전체에서 Stage 키를 사용하며, 나머지는 `main` 브랜치 범위에 등록했다.
   `NEXT_PUBLIC_SITE_URL=https://stage-v2.querypie.com`도 같은 범위에 등록했다.
 - 기존 `deploy-preview.yml`을 `BRANCH=main`으로 실행하여 built-in Preview 배포의 `READY`를 확인했다.
 - Stage 세 도메인을 Preview / `main`에 연결하자 새 Preview 배포로 alias가 자동 갱신됐다.
@@ -282,15 +283,16 @@ main Preview에는 `https://stage-v2.querypie.com`을 명시하여 기존 Stage 
 ## 환경변수 기준값
 
 Vercel 프로젝트에 설정해야 하는 기준값. 실제 등록값은 Vercel 대시보드 또는 `vercel env ls`로 확인한다.
-Preview 공통 값은 PR 배포에 사용하고, `main` 전용 값은 Preview의 브랜치 범위로 지정한다.
-기존 Stage 전용 환경변수 8개는 원래 레코드의 값과 타입을 유지하면서 Preview / `main` 범위를 추가했다.
-대상은 `AI_CHAT_ENABLED`, `AI_CHAT_API_KEY`, `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`,
+Preview 공통 값은 main과 PR 배포에 사용하고, `main` 전용 값은 Preview의 브랜치 범위로 지정한다.
+`AI_CHAT_API_KEY`는 기존 Stage 레코드의 값과 타입을 유지하면서 Preview 공통 범위로 옮겼다.
+main과 PR 모두 `corp-web-v2-stage`의 Gateway Key를 사용하며, 기존 Development 키를 사용하던 Preview 항목은 제거했다.
+나머지 Stage 전용 환경변수 7개는 원래 레코드의 값과 타입을 유지하면서 Preview / `main` 범위를 추가했다.
+대상은 `AI_CHAT_ENABLED`, `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`,
 `QUERYPIE_LICENSE_ISSUE_API_ENDPOINT`, `QUERYPIE_LICENSE_ISSUE_API_KEY`, `SALESFORCE_ENDPOINT`, `SLACK_BOT_OAUTH_TOKEN`,
 `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES`다.
 기존 Stage와 Preview 공통으로 등록된 `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY`,
 `DESKPIE_LEAD_API_KEY`, `DESKPIE_LEAD_API_ENDPOINT`는 기존 범위를 유지한다.
 `NEXT_PUBLIC_SITE_URL=https://stage-v2.querypie.com`은 Preview / `main`에 추가했다.
-Preview 공통 값은 덮어쓰지 않는다.
 
 ### Community License 기능
 
