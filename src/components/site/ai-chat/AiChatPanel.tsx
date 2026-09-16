@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import type { Locale } from "@/constants/i18n";
 import { getSameSiteHref } from "@/features/routing/siteLinks";
 import { aiChatCopy } from "@/copy/aiChat";
-import { isChatReply, type ChatMessage } from "@/features/ai-chat/types";
+import { isChatReply, isSlackThreadToken, type ChatMessage } from "@/features/ai-chat/types";
 import {
   MAX_MESSAGE_LENGTH,
   MAX_PREVIEW_MESSAGES,
@@ -16,6 +16,12 @@ import {
 import styles from "./AiChat.module.css";
 
 type AiChatPanelProps = { locale: Locale; open: boolean; onClose: () => void };
+
+function extractSlackThreadToken(value: unknown) {
+  return value && typeof value === "object" && "slackThreadToken" in value && isSlackThreadToken(value.slackThreadToken)
+    ? value.slackThreadToken
+    : undefined;
+}
 
 export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps) {
   const copy = aiChatCopy[locale];
@@ -95,25 +101,32 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
     const messages = [...session.messages, userMessage].slice(-MAX_PREVIEW_MESSAGES);
     // If navigation interrupts the request, restore the draft rather than an orphaned turn.
     savePreviewSession({ ...session, draft: text });
-    setSession({ draft: "", messages });
+    setSession({ draft: "", messages, ...(session.slackThreadToken ? { slackThreadToken: session.slackThreadToken } : {}) });
     setPending(true);
     setError(null);
     const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(60000)]);
+    let nextSlackThreadToken: string | undefined;
     try {
       const response = await fetch("/api/ai-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ locale, messages: messages.slice(-8).map((message) => ({ role: message.role, content: message.text })) }),
+        body: JSON.stringify({
+          locale,
+          messages: messages.slice(-8).map((message) => ({ role: message.role, content: message.text })),
+          ...(session.slackThreadToken ? { slackThreadToken: session.slackThreadToken } : {}),
+        }),
         signal,
       });
       let result: unknown = await response.json();
       if (generation !== generationRef.current) return;
+      nextSlackThreadToken = extractSlackThreadToken(result);
       if (!response.ok || !isChatReply(result)) {
         const code = result && typeof result === "object" && "code" in result ? result.code : null;
         throw new Error(code === "NOT_CONFIGURED" ? "unavailable" : "error");
       }
       setSession((current) => ({
         ...current,
+        ...(nextSlackThreadToken ? { slackThreadToken: nextSlackThreadToken } : {}),
         messages: [...current.messages, {
           id: `${Date.now()}-${generation}-assistant`, role: "assistant" as const,
           text: result.answer, locale, sources: result.sources, answered: result.answered,
@@ -122,7 +135,11 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
     } catch (cause) {
       if (generation !== generationRef.current) return;
       setError(cause instanceof Error && cause.message === "unavailable" ? "unavailable" : "error");
-      setSession((current) => ({ draft: text, messages: current.messages.filter((message) => message.id !== userMessage.id) }));
+      setSession((current) => ({
+        draft: text,
+        messages: current.messages.filter((message) => message.id !== userMessage.id),
+        ...(nextSlackThreadToken ? { slackThreadToken: nextSlackThreadToken } : current.slackThreadToken ? { slackThreadToken: current.slackThreadToken } : {}),
+      }));
     } finally {
       if (generation === generationRef.current) {
         requestRef.current = null;
