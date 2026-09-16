@@ -16,18 +16,19 @@
 Vercel Project에는 다음 두 환경변수만 설정합니다. 로컬 개발에서는 Vercel Development 환경 값을 git에 포함되지 않는 `.env.local`로 가져와 사용합니다.
 
 ```dotenv
+# Development / Preview / staging 예시. Production은 false로 설정합니다.
 AI_CHAT_ENABLED=true
 AI_CHAT_API_KEY=<Gateway Key>
 ```
 
 `AI_CHAT_API_KEY`는 서버 전용 비밀 환경변수로 등록합니다. 키 값은 1Password의 `corp-web-v2 AI Chat` 항목에서 가져오며, 코드, PR, 로그, 브라우저 응답에 포함하지 않습니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 Vercel 환경변수나 비밀정보가 아니라 서버 코드의 상수입니다.
 
-| Vercel 환경 | `AI_CHAT_API_KEY` 출처 | 등록 타입 |
-|-------------|------------------------|-----------|
-| Development | `corp-web-v2-development` | encrypted |
-| Preview | `corp-web-v2-development` | sensitive |
-| custom `staging` | `corp-web-v2-stage` | sensitive |
-| Production | `corp-web-v2-production` | sensitive |
+| Vercel 환경 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |
+|-------------|------------------------|-----------|-------------------|
+| Development | `corp-web-v2-development` | encrypted | `true` |
+| Preview | `corp-web-v2-development` | sensitive | `true` |
+| custom `staging` | `corp-web-v2-stage` | sensitive | `true` |
+| Production | `corp-web-v2-production` | sensitive | `false` |
 
 Development는 로컬 pull을 위해 `encrypted`로 등록합니다. Vercel은 Development에서 `sensitive` 타입을 지원하지 않습니다. [공식 문서](https://vercel.com/docs/environment-variables/sensitive-environment-variables)
 

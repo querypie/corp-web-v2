@@ -208,12 +208,12 @@ API 주소와 모델은 서버 전용 `src/features/ai/config.server.ts`의 이�
 
 Vercel Project에는 환경별로 다음 키를 등록합니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
 
-| Vercel 환경 | `AI_CHAT_API_KEY` 출처 | 등록 타입 |
-|-------------|------------------------|-----------|
-| Development | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | encrypted |
-| Preview | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | sensitive |
-| custom `staging` | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-stage` | sensitive |
-| Production | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-production` | sensitive |
+| Vercel 환경 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |
+|-------------|------------------------|-----------|-------------------|
+| Development | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | encrypted | `true` |
+| Preview | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | sensitive | `true` |
+| custom `staging` | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-stage` | sensitive | `true` |
+| Production | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-production` | sensitive | `false` |
 
 Development는 로컬 pull을 위해 `encrypted`로 등록합니다. Vercel은 Development에서 `sensitive` 타입을 지원하지 않습니다. [공식 문서](https://vercel.com/docs/environment-variables/sensitive-environment-variables)
 
