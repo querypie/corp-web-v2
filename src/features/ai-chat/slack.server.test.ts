@@ -56,6 +56,23 @@ describe("AI 챗 Slack 알림", () => {
     expect(await notifyAiChatTurn(input)).toBeUndefined();
     expect(postMessage).not.toHaveBeenCalled();
   });
+  it("역할 제목과 본문을 분리하고 구분선과 하단 보조정보를 표시한다", async () => {
+    await notifyAiChatTurn(input);
+    expect(postMessage.mock.calls[0][0].blocks).toEqual([
+      { type: "header", text: { type: "plain_text", text: "사용자 질문", emoji: false } },
+      { type: "section", text: { type: "plain_text", text: input.question, emoji: false } },
+      { type: "divider" },
+      { type: "header", text: { type: "plain_text", text: "AI 답변", emoji: false } },
+      { type: "section", text: { type: "plain_text", text: input.outcome.answer, emoji: false } },
+      { type: "context", elements: [{ type: "plain_text", text: "Preview · 한국어", emoji: false }] },
+    ]);
+  });
+  it("응답 실패는 정상 답변과 다른 제목으로 표시한다", async () => {
+    await notifyAiChatTurn({ ...input, outcome: { code: "INVALID_RESPONSE" } });
+    const blocks = postMessage.mock.calls[0][0].blocks;
+    expect(blocks[3]).toMatchObject({ type: "header", text: { text: "AI 응답 실패" } });
+    expect(blocks[4]).toMatchObject({ type: "section", text: { type: "plain_text", text: "INVALID_RESPONSE" } });
+  });
   it("서버 인스턴스가 바뀌어도 같은 대화는 응답 후 부모 스레드에 추가한다", async () => {
     const token = await notifyAiChatTurn(input);
     vi.resetModules();
@@ -89,9 +106,10 @@ describe("AI 챗 Slack 알림", () => {
     await notifyAiChatTurn({ ...input, question, outcome: { ...input.outcome, answer } });
     const payload = postMessage.mock.calls[0][0];
     expect(payload).toMatchObject({ mrkdwn: false, parse: "none", link_names: false, unfurl_links: false, unfurl_media: false });
-    const blocks = payload.blocks as Array<{ text: { type: string; text: string } }>;
-    expect(blocks.every((block) => block.text.type === "plain_text" && block.text.text.length <= 2800)).toBe(true);
-    const text = blocks.map((block) => block.text.text).join("");
+    const blocks = payload.blocks as Array<{ type: string; text?: { type: string; text: string } }>;
+    const bodies = blocks.filter((block) => block.type === "section");
+    expect(bodies.every((block) => block.text?.type === "plain_text" && block.text.text.length <= 2800)).toBe(true);
+    const text = bodies.map((block) => block.text!.text).join("");
     expect(text).toContain(question);
     expect(text).toContain(answer);
   });

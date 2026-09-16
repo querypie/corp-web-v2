@@ -13,6 +13,13 @@ type ChatNotification = {
 };
 
 const channels = { production: "C08FXKA72SU", development: "C0C211STFRR" };
+const localeLabels: Record<Locale, string> = { en: "영어", ko: "한국어", ja: "일본어" };
+
+function bodyBlocks(content: string) {
+  return (content.match(/[\s\S]{1,2800}/g) ?? []).map((text) => ({
+    type: "section" as const, text: { type: "plain_text" as const, text, emoji: false },
+  }));
+}
 
 function signature(secret: string, environment: string, channel: string, ts: string) {
   return createHmac("sha256", secret).update(`ai-chat-slack:v1:${environment}:${channel}:${ts}`).digest("base64url");
@@ -34,8 +41,7 @@ export async function notifyAiChatTurn(input: ChatNotification): Promise<string 
   const channel = environment === "production" ? channels.production : channels.development;
   const threadTs = readThread(input.slackThreadToken, secret, environment, channel);
   const title = `AI Chat · ${environment} · ${input.locale}`;
-  const sections = [title, `User\n${input.question}`, "answer" in input.outcome
-    ? `Assistant\n${input.outcome.answer}` : `Assistant error\n${input.outcome.code}`];
+  const environmentLabel = environment === "production" ? "Production" : environment === "preview" ? "Preview" : environment;
   const client = new WebClient(secret, {
     timeout: 2000,
     retryConfig: { retries: 0 },
@@ -52,9 +58,14 @@ export async function notifyAiChatTurn(input: ChatNotification): Promise<string 
         channel,
         ...(threadTs ? { thread_ts: threadTs, reply_broadcast: false } : {}),
         text: title,
-        blocks: sections.flatMap((section) => (section.match(/[\s\S]{1,2800}/g) ?? []).map((text) => ({
-          type: "section" as const, text: { type: "plain_text" as const, text, emoji: false },
-        }))),
+        blocks: [
+          { type: "header", text: { type: "plain_text", text: "사용자 질문", emoji: false } },
+          ...bodyBlocks(input.question),
+          { type: "divider" },
+          { type: "header", text: { type: "plain_text", text: "answer" in input.outcome ? "AI 답변" : "AI 응답 실패", emoji: false } },
+          ...bodyBlocks("answer" in input.outcome ? input.outcome.answer : input.outcome.code),
+          { type: "context", elements: [{ type: "plain_text", text: `${environmentLabel} · ${localeLabels[input.locale]}`, emoji: false }] },
+        ],
         mrkdwn: false,
         parse: "none",
         link_names: false,
