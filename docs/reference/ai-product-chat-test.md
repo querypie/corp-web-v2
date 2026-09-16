@@ -13,16 +13,35 @@
 
 `querypie-internal`은 Gateway Provider 이름이며, `glm53/glm-5.3`은 Provider 내부 모델 이름입니다. 모델을 변경할 때는 Gateway의 `GET /v1/models`가 반환하는 전체 ID를 사용합니다.
 
-Vercel Project에는 다음 두 환경변수를 설정합니다. 로컬 개발에서는 git에 포함되지 않는 `.env.local`을 사용합니다.
+Vercel Project에는 다음 두 환경변수만 설정합니다. 로컬 개발에서는 Vercel Development 환경 값을 git에 포함되지 않는 `.env.local`로 가져와 사용합니다.
 
 ```dotenv
 AI_CHAT_ENABLED=true
 AI_CHAT_API_KEY=<Gateway Key>
 ```
 
-`AI_CHAT_API_KEY`는 서버 전용 비밀 환경변수로 등록합니다. Staging 키는 1Password의 `corp-web-v2 AI Chat` 항목에서 `corp-web-v2-stage` 필드를 사용합니다. 키 값을 코드, PR, 로그, 브라우저 응답에 포함하지 않습니다.
+`AI_CHAT_API_KEY`는 서버 전용 비밀 환경변수로 등록합니다. 키 값은 1Password의 `corp-web-v2 AI Chat` 항목에서 가져오며, 코드, PR, 로그, 브라우저 응답에 포함하지 않습니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 Vercel 환경변수나 비밀정보가 아니라 서버 코드의 상수입니다.
 
-Vercel의 일반 Preview와 custom `staging`은 별개 환경이므로 검증할 환경에 각각 설정하고 재배포해야 합니다. Preview에서도 명시적으로 활성화해야 하며, 키가 없으면 공식 자료나 모델을 호출하기 전에 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역은 기존 `CMS_TRANSLATION_*` 설정을 사용합니다.
+| Vercel 환경 | `AI_CHAT_API_KEY` 출처 | 등록 타입 |
+|-------------|------------------------|-----------|
+| Development | `corp-web-v2-development` | encrypted |
+| Preview | `corp-web-v2-development` | sensitive |
+| custom `staging` | `corp-web-v2-stage` | sensitive |
+| Production | `corp-web-v2-production` | sensitive |
+
+Development는 로컬 pull을 위해 `encrypted`로 등록합니다. Vercel은 Development에서 `sensitive` 타입을 지원하지 않습니다. [공식 문서](https://vercel.com/docs/environment-variables/sensitive-environment-variables)
+
+Preview와 custom `staging`은 별개 환경이므로 각각 설정하고 재배포해야 합니다. Preview는 Development와 같은 Gateway Key를 사용하지만 Vercel Preview 환경에 별도로 등록합니다. 키가 없으면 공식 자료나 모델을 호출하기 전에 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역은 기존 `CMS_TRANSLATION_*` 설정을 사용합니다.
+
+로컬 개발용 `.env.local`이 이미 있다면 `vercel env pull .env.local --environment=development`가 파일 전체를 바꿀 수 있으므로 임시 파일로 받은 뒤 필요한 값만 병합합니다.
+
+```bash
+vercel env pull .env.vercel-development.local --environment=development
+```
+
+그 다음 임시 파일의 `AI_CHAT_ENABLED`와 `AI_CHAT_API_KEY`만 `.env.local`에 병합하고 임시 파일을 삭제합니다.
+
+`.env.local`이 비어 있거나 새로 만드는 경우에는 곧바로 `.env.local`로 pull할 수 있습니다.
 
 ## 자료 조회와 응답
 

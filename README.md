@@ -206,6 +206,27 @@ API 주소와 모델은 서버 전용 `src/features/ai/config.server.ts`의 이�
 
 브라우저는 `/api/ai-chat`에 질문을 보내고 답변과 출처를 받습니다. 공식 페이지 조회와 Gateway의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. Vercel custom `staging`에는 두 환경변수를 별도로 등록하고 재배포합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
 
+Vercel Project에는 환경별로 다음 키를 등록합니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
+
+| Vercel 환경 | `AI_CHAT_API_KEY` 출처 | 등록 타입 |
+|-------------|------------------------|-----------|
+| Development | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | encrypted |
+| Preview | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | sensitive |
+| custom `staging` | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-stage` | sensitive |
+| Production | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-production` | sensitive |
+
+Development는 로컬 pull을 위해 `encrypted`로 등록합니다. Vercel은 Development에서 `sensitive` 타입을 지원하지 않습니다. [공식 문서](https://vercel.com/docs/environment-variables/sensitive-environment-variables)
+
+로컬 개발은 Vercel Development 환경 값을 사용합니다. 기존 `.env.local`을 덮어쓰지 않으려면 임시 gitignored 파일로 받은 뒤 필요한 두 줄만 병합합니다.
+
+```bash
+vercel env pull .env.vercel-development.local --environment=development
+```
+
+그 다음 임시 파일의 `AI_CHAT_ENABLED`와 `AI_CHAT_API_KEY`만 `.env.local`에 병합하고 임시 파일을 삭제합니다.
+
+`.env.local`이 비어 있거나 새로 만드는 경우에는 `vercel env pull .env.local --environment=development`를 사용할 수 있습니다.
+
 - URL 발견·본문 조회: `src/features/ai-chat/liveKnowledge.server.ts`
 - 관련 문단 검색: `src/features/ai-chat/knowledge.ts`
 - 답변 프롬프트·모델 호출: `src/features/ai-chat/answer.server.ts`
