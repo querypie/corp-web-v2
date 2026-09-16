@@ -169,6 +169,8 @@ scripts/deploy/
 - 기존 `deploy-preview.yml`을 `BRANCH=main`으로 실행하여 built-in Preview 배포의 `READY`를 확인했다.
 - Stage 세 도메인을 Preview / `main`에 연결하자 새 Preview 배포로 alias가 자동 갱신됐다.
   배포 스크립트에 별도 alias 명령은 추가하지 않는다.
+- 세 도메인의 `/en` 응답은 HTTP 200이며, canonical URL은 기존 기준인
+  `https://stage-v2.querypie.com`을 유지하는 것을 확인했다.
 - 기존 Custom Environment `staging`의 도메인과 브랜치 매칭은 해제했다.
   환경 자체는 이전 워크플로우와의 호환을 위해 잠시 유지한다.
 
