@@ -225,7 +225,7 @@ export default function AiChatStatusPage({ config }: AiChatStatusPageProps) {
   const isProduction = config.environment.toLowerCase() === "production";
 
   return (
-    <main className="min-h-screen bg-bg px-5 py-8 text-fg sm:px-8 lg:px-10" lang="ko">
+    <div className="min-h-screen bg-bg px-5 py-8 text-fg sm:px-8 lg:px-10" lang="ko">
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-6">
         <header className="flex flex-col gap-3">
           <div className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-bg-content px-3 py-1 type-body-sm text-mute">
@@ -361,6 +361,6 @@ export default function AiChatStatusPage({ config }: AiChatStatusPageProps) {
           ) : null}
         </section>
       </div>
-    </main>
+    </div>
   );
 }

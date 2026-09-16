@@ -81,7 +81,7 @@ Vercel Runtime Logs의 `[ai-chat]` 이벤트로 자료 조회, Gateway 요청, �
 
 ## 공개 상태 페이지
 
-`/internal/ai-chat-status`에서 현재 서버의 모델·Gateway 주소·활성화 상태·키 설정 여부를 확인하고 **기본 요청 테스트**를 실행할 수 있습니다. 키 값은 표시하지 않습니다. 공개 경로이며 기존 `/admin`의 로컬 접근 제한과 별개입니다.
+`/{locale}/internal/ai-chat-status`에서 현재 서버의 모델·Gateway 주소·활성화 상태·키 설정 여부를 확인하고 **기본 요청 테스트**를 실행할 수 있습니다. `locale`은 `en`, `ko`, `ja`를 사용합니다. locale 없는 `/internal/ai-chat-status`는 기존 공개 경로 규칙에 따라 기본 locale로 이동합니다. 키 값은 표시하지 않습니다. 공개 경로이며 기존 `/admin`의 로컬 접근 제한과 별개입니다.
 
 테스트는 `POST /api/internal/ai-chat-status`에서 서버에 고정된 `Reply with exactly OK and no other text.`만 전송합니다. 사용자 지정 프롬프트·모델·주소·키를 받지 않으며, 공식 자료 검색을 거치지 않아 LLM 연결 자체를 분리해서 검사할 수 있습니다. 화면에는 upstream HTTP 상태, 소요 시간, 최종 응답과 성공·실패를 표시합니다. HTTP 403의 HTML/ALB 응답은 Gateway 앞단 접근 거부로 안내하며, 특정 WAF 규칙까지 판정하지 않습니다.
 

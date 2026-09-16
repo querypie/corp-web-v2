@@ -48,6 +48,7 @@ describe("AI Chat 상태 진단 페이지", () => {
     render(<AiChatStatusPage config={readyConfig} />);
 
     expect(screen.getByRole("heading", { name: "AI Chat 상태 진단" })).toBeVisible();
+    expect(screen.queryByRole("main")).not.toBeInTheDocument();
     expect(screen.getByText("Preview")).toBeVisible();
     expect(screen.getByText("활성화됨")).toBeVisible();
     expect(screen.getByText("설정됨")).toBeVisible();
