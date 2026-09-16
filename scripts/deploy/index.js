@@ -1,5 +1,6 @@
 import { Vercel } from '@vercel/sdk';
 import dotenv from 'dotenv';
+import { writeProductionDeploymentOutput } from './release.js';
 
 dotenv.config({ path: '.env' });
 
@@ -82,7 +83,7 @@ async function pollDeployment(deploymentId) {
       throw error;
     }
 
-    const { status, url } = statusResponse;
+    const { status } = statusResponse;
     console.log(`Deployment status: ${status}`);
 
     if (IN_PROGRESS_STATUSES.has(status)) {
@@ -90,7 +91,11 @@ async function pollDeployment(deploymentId) {
     }
 
     if (status === 'READY') {
-      return url;
+      if (targetEnv === 'production' && !statusResponse.aliasAssigned) {
+        console.log('Waiting for Production domain assignment');
+        continue;
+      }
+      return statusResponse;
     }
 
     const err = new Error(`Deployment ended with status: ${status}`);
@@ -105,8 +110,11 @@ async function createAndCheckDeployment() {
   const createResponse = await createDeployment();
   console.log(`Deployment created: ID ${createResponse.id}, status ${createResponse.status}`);
 
-  const url = await pollDeployment(createResponse.id);
-  console.log(`Deployment successful: ${url}`);
+  const deployment = await pollDeployment(createResponse.id);
+  console.log(`Deployment successful: ${deployment.url}`);
+  if (targetEnv === 'production' && process.env.GITHUB_OUTPUT) {
+    writeProductionDeploymentOutput(deployment, process.env.GITHUB_OUTPUT);
+  }
 }
 
 (async () => {

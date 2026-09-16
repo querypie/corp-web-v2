@@ -2,6 +2,7 @@
   "name": "corp-web-v2-deploy",
   "type": "module",
   "scripts": {
+    "test": "node --test *.test.js",
     "deploy": "node index.js",
     "delete-deploy": "node delete-deploy.js"
   },

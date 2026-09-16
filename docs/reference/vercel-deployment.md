@@ -1,6 +1,6 @@
 # Vercel 배포 구현 현황
 
-**최종 업데이트**: 2026-09-15
+**최종 업데이트**: 2026-09-16
 
 corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 
@@ -15,6 +15,8 @@ corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 | Preview | 배포별 Vercel Preview URL | PR open/sync 시 자동 배포 |
 
 `stage` 브랜치는 존재하지 않는다. Staging 환경은 `main` 브랜치 기준으로 자동 배포된다.
+`release` 브랜치는 마지막으로 성공한 Production 배포의 Git SHA를 가리킨다.
+배포할 소스는 수동 실행의 `BRANCH` 입력으로 선택하며, 기본값은 계속 `main`이다.
 
 ### 현재 도메인 매핑
 
@@ -84,7 +86,7 @@ Vercel 시스템 도메인은 배포 확인용이며 외부에 안내하는 서�
 - **검증 항목**:
   - `validate-next-build` — `npm run build`
   - `validate-typecheck` — `npm run typecheck`
-  - `validate-test` — `npm run test:run`
+  - `validate-test` — `npm run test:run` + `npm test --prefix scripts/deploy`
   - lint — 스크립트 구현 후 주석 해제 예정
 
 ### `deploy-staging.yml` — Staging 자동 배포
@@ -98,6 +100,16 @@ Vercel 시스템 도메인은 배포 확인용이며 외부에 안내하는 서�
 - **트리거**: `workflow_dispatch` (input: BRANCH, 기본값 `main`)
 - **GitHub environment**: `production` (보호 규칙 적용 가능)
 - `TARGET_ENV=production`
+- **동시 실행**: Production 배포와 `release` 갱신을 같은 concurrency 그룹에서 직렬화하며, 실행 중인 배포를 취소하지 않는다(`cancel-in-progress: false`).
+- **`release` 갱신**: Vercel의 `READY`와 `aliasAssigned`를 확인한 뒤 `deployment.gitSource.sha`를 `deployment_sha` output으로 전달하고 `release` HEAD를 해당 SHA로 이동한다. 워크플로우 checkout SHA나 배포 후 다시 조회한 입력 브랜치의 HEAD를 사용하지 않는다.
+- `node release.js`는 `DEPLOYED_SHA`를 받아 기존 원격 `release` SHA를 조회하고, 배포 SHA를 정확히 fetch한 뒤 `--force-with-lease=refs/heads/release:<조회한 SHA>`로 push한다. `release`는 미리 존재해야 하며, 조회 후 다른 실행이 HEAD를 변경하면 갱신을 거부한다.
+- **인증**: Production job의 `contents: write` 권한과 checkout의 기본 `GITHUB_TOKEN`을 사용한다. 별도 GitHub secret은 필요하지 않다.
+- 입력은 `main` 외의 브랜치도 허용한다. 이전 커밋을 배포하는 롤백에서는 `release` 갱신이 non-fast-forward일 수 있다.
+- 배포 실패 시 `release`는 갱신하지 않는다. 배포 성공 후 브랜치 갱신이 실패하면 워크플로우는 실패하지만 Production은 이미 새 배포를 서비스할 수 있다. 이 경우 Vercel의 현재 Production 배포 SHA와 `release`를 대조해 수동으로 일치시킨다.
+
+`release`는 Production 배포 결과를 기록하는 브랜치다. 직접 개발하거나 일반 PR을 병합하는
+브랜치로 사용하지 않으며, 브랜치 보호 규칙을 추가할 때 워크플로우의 갱신 권한과
+롤백에 필요한 non-fast-forward 갱신을 함께 고려한다.
 
 ### `deploy-preview.yml` — PR Preview 배포
 
@@ -119,6 +131,7 @@ Vercel 시스템 도메인은 배포 확인용이며 외부에 안내하는 서�
 ```
 scripts/deploy/
   index.js          # 배포 생성 + 상태 폴링
+  release.js        # 실제 배포 SHA output + release HEAD 갱신
   delete-deploy.js  # Preview 배포 삭제
   package.json      # 전용 의존성 (@vercel/sdk, dotenv)
 ```
@@ -126,13 +139,39 @@ scripts/deploy/
 **배포 흐름** (`index.js`):
 
 1. `createDeployment` API 호출 (gitSource: `querypie/corp-web-v2`, ref: BRANCH)
-2. `getDeployment`로 5초 간격 폴링 (최대 10분)
-3. `READY` 확인 후 URL 출력
-4. 취소/실패 시 최대 2회 재시도 (15초 대기)
+2. `getDeployment`로 5초 간격 폴링 (기본 최대 20분, `DEPLOY_POLL_TIMEOUT_MS`로 조정)
+3. `READY` 확인 후 URL 출력. Production은 `aliasAssigned`까지 확인하고 실제 배포 Git SHA를 검증해 후속 `release` 갱신에 전달
+4. 취소된 배포만 15초 후 1회 재시도 (총 최대 2회 시도). 그 외 실패는 즉시 종료
 
 ---
 
 ## Vercel 프로젝트 설정
+
+### Staging을 Preview로 전환하는 계획
+
+현재 Vercel Production Branch는 `main`이고, Staging은 별도 Custom Environment
+`staging`이다. `release` 브랜치 생성과 Production 워크플로우의 HEAD 동기화는
+전환을 위한 준비이며, 아래 Vercel 설정과 Staging 배포 변경은 별도 작업으로 진행한다.
+
+1. Vercel Production Branch를 `release`로 변경한다. Production 수동 배포는 계속
+   `BRANCH` 입력의 소스를 `production` target으로 배포한다.
+2. Staging 전용 환경변수를 Preview의 `main` 브랜치 범위로 옮기고, main 자동 배포의
+   target을 `staging`에서 `preview`로 변경한다. `NEXT_PUBLIC_SITE_URL`은 main 전용으로
+   `https://stage-v2.querypie.com`을 설정하고 기존 Staging AI 연동 설정도 유지한다.
+3. `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai`를 모두
+   Preview의 `main` 브랜치에 연결한다. GitHub Actions/API 배포에서도 세 도메인이 매번
+   새 배포로 갱신되는지 확인하고, 필요하면 배포 후 명시적 alias 할당을 추가한다.
+   환경변수, 접근 보호와 연속 main 배포의 도메인 갱신을 검증한 뒤 기존 Custom Environment
+   `staging`을 제거한다.
+
+전환 후 운영상 **Staging**은 위 세 도메인으로 서비스하는 **main Preview**를 뜻한다.
+PR 브랜치별 Preview는 별도로 유지한다. `git.deploymentEnabled: false`도 유지하여
+Git 자동 배포를 켜지 않고 GitHub Actions가 배포를 수행한다.
+
+Vercel은 Production Branch를 Preview 도메인·환경변수의 특정 브랜치로 지정하는 것을
+제한하므로 Production Branch 변경이 먼저 필요하다.
+([공식 제약](https://vercel.com/docs/errors/error-list#production-branch-used-as-preview-branch),
+[Preview 도메인 연결](https://vercel.com/docs/domains/working-with-domains/assign-domain-to-a-git-branch))
 
 ### 일본 / 글로벌 도메인 연결
 
