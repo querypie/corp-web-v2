@@ -120,14 +120,15 @@ describe("AI Chat 상태 점검 API", () => {
     expect(await result.json()).toEqual(upstream403);
   });
 
-  it("분당 2회와 동시 1회 제한을 Retry-After와 함께 반환한다", async () => {
+  it("분당 30회와 동시 1회 제한을 Retry-After와 함께 반환한다", async () => {
     const limited = await loadRoute();
-    expect((await limited.route.POST(request())).status).toBe(200);
-    expect((await limited.route.POST(request())).status).toBe(200);
-    const third = await limited.route.POST(request());
-    expect(third.status).toBe(429);
-    expect(third.headers.get("retry-after")).toBeTruthy();
-    expect(await third.json()).toMatchObject({ code: "RATE_LIMITED", retryAfterSeconds: expect.any(Number) });
+    for (let count = 0; count < 30; count++) {
+      expect((await limited.route.POST(request())).status).toBe(200);
+    }
+    const thirtyFirst = await limited.route.POST(request());
+    expect(thirtyFirst.status).toBe(429);
+    expect(thirtyFirst.headers.get("retry-after")).toBeTruthy();
+    expect(await thirtyFirst.json()).toMatchObject({ code: "RATE_LIMITED", retryAfterSeconds: expect.any(Number) });
 
     const concurrent = await loadRoute({ pending: true });
     void concurrent.route.POST(request());

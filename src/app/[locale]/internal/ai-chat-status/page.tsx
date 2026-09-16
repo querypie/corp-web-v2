@@ -54,7 +54,7 @@ const copyByLocale = {
       missingKey: "AI_CHAT_API_KEY is not configured.",
       productionDisabled: "Production keeps AI Chat Enabled=false, so the probe is not sent.",
       rateLimit:
-        "The limit is 2 requests per minute and 1 concurrent request per server instance. Try again after Retry-After.",
+        "The limit is 30 requests per minute and 1 concurrent request per server instance. Try again after Retry-After.",
     },
     errors: {
       rateLimited: "The request rate limit has been reached.",
@@ -111,7 +111,7 @@ const copyByLocale = {
       missingKey: "AI_CHAT_API_KEY가 설정되지 않았습니다.",
       productionDisabled: "Production 환경은 AI Chat Enabled=false 설정을 유지하므로 probe를 실행하지 않습니다.",
       rateLimit:
-        "서버 인스턴스별 호출 제한은 분당 2회, 동시 실행 1회입니다. Retry-After 이후 다시 시도해 주세요.",
+        "서버 인스턴스별 호출 제한은 분당 30회, 동시 실행 1회입니다. Retry-After 이후 다시 시도해 주세요.",
     },
     errors: {
       rateLimited: "호출 횟수 제한에 걸렸습니다.",
@@ -168,7 +168,7 @@ const copyByLocale = {
       missingKey: "AI_CHAT_API_KEY が設定されていません。",
       productionDisabled: "Production 環境では AI Chat Enabled=false を維持するため、プローブを実行しません。",
       rateLimit:
-        "サーバーインスタンスごとの上限は1分あたり2回、同時実行1回です。Retry-After の後に再試行してください。",
+        "サーバーインスタンスごとの上限は1分あたり30回、同時実行1回です。Retry-After の後に再試行してください。",
     },
     errors: {
       rateLimited: "リクエスト回数の上限に達しました。",

@@ -9,7 +9,7 @@ let requests = 0;
 let active = 0;
 
 const windowMs = 60000;
-const maxRequests = 2;
+const maxRequests = 30;
 const maxActive = 1;
 
 function json(body: unknown, status: number, extraHeaders: Record<string, string> = {}) {
