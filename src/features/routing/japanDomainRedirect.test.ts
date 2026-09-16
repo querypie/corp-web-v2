@@ -44,3 +44,20 @@ describe("일본 사이트 도메인 라우팅", () => {
     expect(response.headers.get("location")).toBe(`https://${host}/en/contact-us`);
   });
 });
+
+describe("공개 AI Chat 진단 경로", () => {
+  it.each(["www.querypie.com", "stage-v2.querypie.com", "preview.vercel.app", "localhost:3000"])("%s에서 진단 페이지를 영어 locale 경로로 보낸다", async (host) => {
+    const response = await unstable_getResponseFromNextConfig({ url: `https://${host}/internal/ai-chat-status`, nextConfig });
+    expect(response.headers.get("location")).toBe(`https://${host}/en/internal/ai-chat-status`);
+  });
+  it.each(["querypie.ai", "www.querypie.ai"])("%s에서 진단 페이지를 일본어 locale 경로로 렌더링한다", async (host) => {
+    const response = await unstable_getResponseFromNextConfig({ url: `https://${host}/internal/ai-chat-status`, nextConfig });
+    expect(response.headers.get("location")).toBeNull();
+    expect(response.headers.get("x-middleware-rewrite")).toBe(`https://${host}/ja/internal/ai-chat-status`);
+  });
+  it.each(["en", "ko", "ja"])("명시한 %s locale 진단 경로를 유지한다", async (locale) => {
+    const response = await unstable_getResponseFromNextConfig({ url: `https://www.querypie.com/${locale}/internal/ai-chat-status`, nextConfig });
+    expect(response.headers.get("location")).toBeNull();
+    expect(response.headers.get("x-middleware-rewrite")).toBeNull();
+  });
+});

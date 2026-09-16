@@ -188,18 +188,44 @@ SEO 메타데이터와 OG 이미지는 `src/features/seo`에서 관리합니다.
 - 최신 질문은 최대 2,000자, 전달 대화는 최대 8개(메시지당 6,000자), 요청 본문은 최대 64,000바이트로 제한합니다.
 - JSON 요청만 받으며, `Origin` 헤더가 있을 때 API와 다른 origin이면 차단합니다. 헤더가 없는 직접 호출까지 막는 인증 기능은 아닙니다.
 
-현재 제한은 인스턴스 메모리 기준의 간단한 보호입니다. IP별 제한·서버 간 공유 카운터·일일 전체 한도·CAPTCHA는 없습니다. 키 없는 Preview에서는 동시 처리 제한이 서버의 근거 준비까지만 적용되며 브라우저의 모델 호출은 포함하지 않습니다.
+현재 제한은 인스턴스 메모리 기준의 간단한 보호입니다. IP별 제한·서버 간 공유 카운터·일일 전체 한도·CAPTCHA는 없습니다. 동시 처리 제한은 공식 자료 조회부터 Gateway 응답 처리까지 적용됩니다.
 
 ### 실행 설정 및 구현
 
 | 환경 변수 | 용도 |
 |-----------|------|
 | `AI_CHAT_ENABLED` | `true`로 챗봇 활성화 |
-| `AI_CHAT_BASE_URL` | 모델 API의 base URL |
-| `AI_CHAT_MODEL` | 사용할 모델 이름 |
-| `AI_CHAT_API_KEY` | 필요할 경우 모델 인증 키, 서버에서만 관리 |
+| `AI_CHAT_API_KEY` | AI Gateway Key, Vercel의 서버 전용 비밀 환경변수 |
 
-일반 환경은 명시적 설정이 필요합니다. `VERCEL_TARGET_ENV=preview`에서는 `src/features/ai/config.server.ts`의 사내 테스트 모델 기본값을 사용합니다. 기존 키 없는 Preview 전송 방식에서도 공식 페이지 조회는 서버가 수행하고 모델 요청만 직원 브라우저에서 수행합니다. 배포 서버에서 공식 사이트로의 HTTPS 접근이 가능해야 합니다.
+API 주소와 모델은 서버 전용 `src/features/ai/config.server.ts`의 이름 있는 상수로 고정합니다.
+
+| 코드 상수 | 값 |
+|-----------|----|
+| `AI_CHAT_BASE_URL` | `https://ai-gateway.stg.querypie.com/v1` |
+| `AI_CHAT_MODEL` | `querypie-internal/glm53-flash/glm-5.3-flash` |
+
+브라우저는 `/api/ai-chat`에 질문을 보내고 답변과 출처를 받습니다. 공식 페이지 조회와 Gateway의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. Vercel custom `staging`에는 두 환경변수를 별도로 등록하고 재배포합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
+
+Vercel Project에는 환경별로 다음 키를 등록합니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
+
+| Vercel 환경 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |
+|-------------|------------------------|-----------|-------------------|
+| Development | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | encrypted | `true` |
+| Preview | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-development` | sensitive | `true` |
+| custom `staging` | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-stage` | sensitive | `true` |
+| Production | 1Password `corp-web-v2 AI Chat`의 `corp-web-v2-production` | sensitive | `false` |
+
+Development는 로컬 pull을 위해 `encrypted`로 등록합니다. Vercel은 Development에서 `sensitive` 타입을 지원하지 않습니다. [공식 문서](https://vercel.com/docs/environment-variables/sensitive-environment-variables)
+
+로컬 개발은 Vercel Development 환경 값을 사용합니다. 기존 `.env.local`을 덮어쓰지 않으려면 임시 gitignored 파일로 받은 뒤 필요한 두 줄만 병합합니다.
+
+```bash
+vercel env pull .env.vercel-development.local --environment=development
+```
+
+그 다음 임시 파일의 `AI_CHAT_ENABLED`와 `AI_CHAT_API_KEY`만 `.env.local`에 병합하고 임시 파일을 삭제합니다.
+
+`.env.local`이 비어 있거나 새로 만드는 경우에는 `vercel env pull .env.local --environment=development`를 사용할 수 있습니다.
 
 - URL 발견·본문 조회: `src/features/ai-chat/liveKnowledge.server.ts`
 - 관련 문단 검색: `src/features/ai-chat/knowledge.ts`

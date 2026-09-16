@@ -6,8 +6,7 @@ import Button from "@/components/ui/Button";
 import type { Locale } from "@/constants/i18n";
 import { getSameSiteHref } from "@/features/routing/siteLinks";
 import { aiChatCopy } from "@/copy/aiChat";
-import { isBrowserChatRequest, isChatReply, type ChatMessage } from "@/features/ai-chat/types";
-import { parseProviderReply } from "@/features/ai-chat/reply";
+import { isChatReply, type ChatMessage } from "@/features/ai-chat/types";
 import {
   MAX_MESSAGE_LENGTH,
   MAX_PREVIEW_MESSAGES,
@@ -108,16 +107,6 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
         signal,
       });
       let result: unknown = await response.json();
-      if (generation !== generationRef.current) return;
-      if (response.ok && isBrowserChatRequest(result)) {
-        const prepared = result;
-        const upstream = await fetch(prepared.endpoint, {
-          method: "POST", headers: { "Content-Type": "application/json" },
-          credentials: "omit", body: JSON.stringify(prepared.body), signal,
-        });
-        if (!upstream.ok) throw new Error("error");
-        result = parseProviderReply(await upstream.json(), prepared.references);
-      }
       if (generation !== generationRef.current) return;
       if (!response.ok || !isChatReply(result)) {
         const code = result && typeof result === "object" && "code" in result ? result.code : null;
