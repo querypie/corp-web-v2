@@ -3,11 +3,70 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Activity, AlertTriangle, CheckCircle2, Clock, Server } from "lucide-react";
 import Button from "@/components/ui/Button";
-import { aiChatStatusCopy as copy } from "@/copy/aiChatStatus";
+import type { Locale } from "@/constants/i18n";
 import type { AiChatProbeResult, AiChatStatusConfig } from "@/features/ai-chat/status";
+
+export type AiChatStatusPageCopy = {
+  metadataTitle: string;
+  title: string;
+  description: string;
+  configTitle: string;
+  probeTitle: string;
+  resultTitle: string;
+  eyebrow: string;
+  fixedRequestLabel: string;
+  action: string;
+  loading: string;
+  retryAfter: string;
+  status: {
+    enabled: string;
+    disabled: string;
+    configured: string;
+    missing: string;
+    success: string;
+    failure: string;
+    idle: string;
+  };
+  labels: {
+    environment: string;
+    enabled: string;
+    keyConfigured: string;
+    baseUrl: string;
+    model: string;
+    upstreamStatus: string;
+    elapsed: string;
+    finishReason: string;
+    responseType: string;
+    responseServer: string;
+    checkedAt: string;
+    result: string;
+    finalAnswer: string;
+  };
+  values: {
+    other: string;
+  };
+  notices: {
+    disabled: string;
+    missingKey: string;
+    productionDisabled: string;
+    rateLimit: string;
+  };
+  errors: {
+    rateLimited: string;
+    albForbidden: string;
+    disabled: string;
+    notConfigured: string;
+    invalidResponse: string;
+    timeout: string;
+    network: string;
+    generic: string;
+  };
+};
 
 type AiChatStatusPageProps = {
   config: AiChatStatusConfig;
+  copy: AiChatStatusPageCopy;
+  locale: Locale;
 };
 
 type ProbeState =
@@ -64,12 +123,12 @@ function formatResponseType(value: AiChatProbeResult["responseType"]) {
   return value.toUpperCase();
 }
 
-function formatResponseServer(value: AiChatProbeResult["responseServer"]) {
+function formatResponseServer(value: AiChatProbeResult["responseServer"], copy: AiChatStatusPageCopy) {
   if (!value) return "-";
   return value === "awselb" ? "AWS ALB" : copy.values.other;
 }
 
-function getProbeMessage(result: AiChatProbeResult) {
+function getProbeMessage(result: AiChatProbeResult, copy: AiChatStatusPageCopy) {
   if (result.ok) return null;
   if (
     result.code === "UPSTREAM_HTTP_ERROR" &&
@@ -140,7 +199,7 @@ async function readJson(response: Response): Promise<unknown> {
   }
 }
 
-export default function AiChatStatusPage({ config }: AiChatStatusPageProps) {
+export default function AiChatStatusPage({ config, copy, locale }: AiChatStatusPageProps) {
   const [probe, setProbe] = useState<ProbeState>({ status: "idle" });
   const [retryAfterSeconds, setRetryAfterSeconds] = useState(0);
   const abortControllerRef = useRef<AbortController | null>(null);
@@ -153,7 +212,9 @@ export default function AiChatStatusPage({ config }: AiChatStatusPageProps) {
 
   const isLoading = probe.status === "loading";
   const isButtonDisabled = Boolean(disabledReason) || isLoading || retryAfterSeconds > 0;
-  const buttonLabel = retryAfterSeconds > 0 ? copy.retryAfter(retryAfterSeconds) : copy.action;
+  const buttonLabel = retryAfterSeconds > 0
+    ? copy.retryAfter.replace("{seconds}", String(retryAfterSeconds))
+    : copy.action;
 
   useEffect(() => {
     return () => {
@@ -220,12 +281,12 @@ export default function AiChatStatusPage({ config }: AiChatStatusPageProps) {
   }
 
   const completedResult = probe.status === "complete" ? probe.result : null;
-  const probeMessage = completedResult ? getProbeMessage(completedResult) : null;
+  const probeMessage = completedResult ? getProbeMessage(completedResult, copy) : null;
   const hasFailure = Boolean(probeMessage) || probe.status === "error";
   const isProduction = config.environment.toLowerCase() === "production";
 
   return (
-    <div className="min-h-screen bg-bg px-5 py-8 text-fg sm:px-8 lg:px-10" lang="ko">
+    <div className="min-h-screen bg-bg px-5 py-8 text-fg sm:px-8 lg:px-10" lang={locale}>
       <div className="mx-auto flex w-full max-w-4xl flex-col gap-6">
         <header className="flex flex-col gap-3">
           <div className="inline-flex w-fit items-center gap-2 rounded-full border border-border bg-bg-content px-3 py-1 type-body-sm text-mute">
@@ -345,7 +406,7 @@ export default function AiChatStatusPage({ config }: AiChatStatusPageProps) {
                 <Field label={copy.labels.elapsed} value={formatDuration(completedResult.durationMs)} />
                 <Field label={copy.labels.finishReason} value={completedResult.finishReason ?? "-"} />
                 <Field label={copy.labels.responseType} value={formatResponseType(completedResult.responseType)} />
-                <Field label={copy.labels.responseServer} value={formatResponseServer(completedResult.responseServer)} />
+                <Field label={copy.labels.responseServer} value={formatResponseServer(completedResult.responseServer, copy)} />
                 <div className="lg:col-span-3">
                   <Field label={copy.labels.checkedAt} value={completedResult.checkedAt} />
                 </div>
