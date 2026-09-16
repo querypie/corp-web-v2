@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { isLocale } from "@/constants/i18n";
-import { getAiChatConfig, useBrowserPreviewChat } from "@/features/ai/config.server";
-import { answerProductQuestion, prepareProductQuestion, ChatServiceError } from "@/features/ai-chat/answer.server";
+import { getAiChatConfig } from "@/features/ai/config.server";
+import { answerProductQuestion, ChatServiceError } from "@/features/ai-chat/answer.server";
 import type { ChatTurn } from "@/features/ai-chat/types";
 
 export const runtime = "nodejs";
@@ -51,11 +51,6 @@ export async function POST(request: Request) {
   requests++;
   active++;
   try {
-    if (useBrowserPreviewChat()) {
-      // Keyless, CORS-enabled internal endpoint: staff browsers can reach it even
-      // when Vercel's outbound network cannot. Only public source excerpts are sent.
-      return NextResponse.json(await prepareProductQuestion(messages as ChatTurn[], locale, AbortSignal.any([request.signal, AbortSignal.timeout(25000)])), { headers: { "Cache-Control": "no-store" } });
-    }
     const reply = await answerProductQuestion(messages as ChatTurn[], locale, AbortSignal.any([request.signal, AbortSignal.timeout(55000)]));
     return NextResponse.json(reply, { headers: { "Cache-Control": "no-store" } });
   } catch (cause) {

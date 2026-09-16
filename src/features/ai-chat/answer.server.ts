@@ -2,7 +2,7 @@ import "server-only";
 import type { Locale } from "@/constants/i18n";
 import { getAiChatConfig } from "@/features/ai/config.server";
 import { retrieveLiveKnowledge } from "./liveKnowledge.server";
-import type { BrowserChatRequest, ChatReply, ChatTurn } from "./types";
+import type { ChatReply, ChatSource, ChatTurn } from "./types";
 import { ChatServiceError, parseProviderReply } from "./reply";
 export { ChatServiceError, parseGroundedAnswer } from "./reply";
 
@@ -12,14 +12,25 @@ const noEvidence: Record<Locale, string> = {
   ja: "現在接続されている公式資料では、この質問に答える根拠が見つかりませんでした。製品名や機能をもう少し具体的に教えてください。",
 };
 
-export async function prepareProductQuestion(messages: ChatTurn[], locale: Locale, signal: AbortSignal = AbortSignal.timeout(25000)): Promise<ChatReply | BrowserChatRequest> {
-  const { baseUrl: base, model } = getAiChatConfig();
-  if (!base || !model) throw new ChatServiceError("NOT_CONFIGURED", 503);
+type PreparedChatRequest = {
+  endpoint: string;
+  body: {
+    model: string;
+    max_tokens: number;
+    temperature: number;
+    response_format: { type: "json_object" };
+    messages: { role: string; content: string }[];
+  };
+  references: (ChatSource & { id: string })[];
+};
+
+async function prepareProductQuestion(messages: ChatTurn[], locale: Locale, signal: AbortSignal = AbortSignal.timeout(25000)): Promise<ChatReply | PreparedChatRequest> {
+  const { baseUrl: base, model, apiKey } = getAiChatConfig();
+  if (!base || !model || !apiKey) throw new ChatServiceError("NOT_CONFIGURED", 503);
   const chunks = (await retrieveLiveKnowledge(messages, locale, signal)).map((chunk, index) => ({ ...chunk, id: `S${index + 1}` }));
   if (!chunks.length) return { answer: noEvidence[locale], sources: [], answered: false };
 
   return {
-    transport: "browser",
     endpoint: `${base}/chat/completions`,
     references: chunks.map(({ id, title, url }) => ({ id, title, url })),
     body: {
@@ -50,11 +61,11 @@ Use answered false and an empty sourceIds array if there is no supporting eviden
 
 export async function answerProductQuestion(messages: ChatTurn[], locale: Locale, signal: AbortSignal): Promise<ChatReply> {
   const prepared = await prepareProductQuestion(messages, locale, signal);
-  if (!("transport" in prepared)) return prepared;
+  if (!("endpoint" in prepared)) return prepared;
   const { apiKey } = getAiChatConfig();
   const response = await fetch(prepared.endpoint, {
     method: "POST",
-    headers: { "Content-Type": "application/json", ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}) },
+    headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
     signal,
     cache: "no-store",
     body: JSON.stringify(prepared.body),

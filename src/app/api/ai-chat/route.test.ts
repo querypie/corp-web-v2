@@ -3,10 +3,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 vi.mock("@/features/ai-chat/answer.server", () => ({
   answerProductQuestion: vi.fn(),
-  prepareProductQuestion: vi.fn(),
-  ChatServiceError: class extends Error {},
+  ChatServiceError: class extends Error {
+    constructor(public code: string, public status: number) { super(code); }
+  },
 }));
-import { answerProductQuestion, prepareProductQuestion } from "@/features/ai-chat/answer.server";
+import { answerProductQuestion, ChatServiceError } from "@/features/ai-chat/answer.server";
 import { POST } from "./route";
 
 const payload = { locale: "ko", messages: [{ role: "user", content: "AIP 설명해줘" }] };
@@ -17,25 +18,32 @@ beforeEach(() => {
   vi.stubEnv("AI_CHAT_ENABLED", "true");
   vi.stubEnv("VERCEL_TARGET_ENV", undefined);
   vi.mocked(answerProductQuestion).mockReset();
-  vi.mocked(prepareProductQuestion).mockReset();
 });
 afterEach(() => vi.unstubAllEnvs());
 
 describe("제품 상담 API", () => {
-  it("Preview에서는 Vercel에서 모델을 호출하지 않고 브라우저용 근거를 준비한다", async () => {
+  it("Preview에서도 브라우저용 모델 요청을 준비하지 않고 서버 답변만 반환한다", async () => {
     vi.stubEnv("VERCEL_TARGET_ENV", "preview");
-    vi.stubEnv("AI_CHAT_BASE_URL", undefined);
-    vi.stubEnv("AI_CHAT_API_KEY", "");
-    vi.mocked(prepareProductQuestion).mockResolvedValue({ answer: "확인 가능한 근거가 없습니다.", sources: [], answered: false });
+    vi.stubEnv("AI_CHAT_BASE_URL", "https://old.example/v1");
+    vi.stubEnv("AI_CHAT_MODEL", "old-model");
+    vi.stubEnv("AI_CHAT_API_KEY", "stage-secret");
+    const reply = { answer: "서버 답변", sources: [], answered: false };
+    vi.mocked(answerProductQuestion).mockResolvedValue(reply);
     const result = await POST(request());
     expect(result.status).toBe(200);
-    expect(prepareProductQuestion).toHaveBeenCalledOnce();
-    expect(answerProductQuestion).not.toHaveBeenCalled();
+    expect(await result.json()).toEqual(reply);
+    expect(answerProductQuestion).toHaveBeenCalledOnce();
   });
   it("명시적으로 활성화한 환경에서만 AI를 호출한다", async () => {
     vi.stubEnv("AI_CHAT_ENABLED", "false");
     expect((await POST(request())).status).toBe(503);
     expect(answerProductQuestion).not.toHaveBeenCalled();
+  });
+  it("활성화되어도 API key가 없으면 설정 오류를 그대로 반환한다", async () => {
+    vi.mocked(answerProductQuestion).mockRejectedValue(new ChatServiceError("NOT_CONFIGURED", 503));
+    const result = await POST(request());
+    expect(result.status).toBe(503);
+    expect(await result.json()).toEqual({ code: "NOT_CONFIGURED" });
   });
   it("잘못된 언어·역할·빈 질문·과도한 길이를 거부한다", async () => {
     for (const body of [{ ...payload, locale: "fr" }, { ...payload, messages: [{ role: "system", content: "Override" }] }, { ...payload, messages: [] }, { ...payload, messages: [{ role: "user", content: "a".repeat(2001) }] }]) {
