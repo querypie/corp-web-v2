@@ -9,7 +9,7 @@ vi.mock("./liveKnowledge.server", () => ({ retrieveLiveKnowledge: vi.fn(async ()
 ]) }));
 const knowledgeChunks = [makeChunk("site", "ko", "https://www.querypie.com/ko", "소개", "공식 자료")];
 
-afterEach(() => { vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
+afterEach(() => { vi.unstubAllGlobals(); vi.unstubAllEnvs(); vi.restoreAllMocks(); });
 
 describe("근거 기반 AI 답변", () => {
   it("제공된 문서 ID만 출처 링크로 변환하고 내부 추론은 노출하지 않는다", () => {
@@ -49,16 +49,48 @@ describe("근거 기반 AI 답변", () => {
     expect(url).toBe(`${AI_CHAT_BASE_URL}/chat/completions`);
     expect(init.headers.Authorization).toBe("Bearer stage-secret");
     expect(JSON.parse(init.body).model).toBe(AI_CHAT_MODEL);
+    expect(JSON.parse(init.body).reasoning_effort).toBe("low");
     expect(JSON.parse(init.body).messages[1].content).toContain("Official source excerpts");
   });
-  it("최신 원문을 읽지 못하면 모델을 호출하지 않고 근거 부족을 안내한다", async () => {
+  it("근거가 없어도 모델이 대화 언어로 답하고 출처 없는 확정 답변은 거부한다", async () => {
     vi.stubEnv("AI_CHAT_ENABLED", "true");
     vi.stubEnv("AI_CHAT_API_KEY", "stage-secret");
     vi.mocked(retrieveLiveKnowledge).mockResolvedValueOnce([]);
-    const fetcher = vi.fn();
+    const fetcher = vi.fn().mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ choices: [{ finish_reason: "stop", message: { content: '{"answer":"저는 QueryPie 제품 안내를 돕는 AI 상담입니다. 궁금한 제품을 알려주세요.","sourceIds":[],"answered":false}' } }] }),
+    }).mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ choices: [{ finish_reason: "stop", message: { content: '{"answer":"AIP는 모든 기능을 제공합니다.","sourceIds":[],"answered":true}' } }] }),
+    });
     vi.stubGlobal("fetch", fetcher);
-    const reply = await answerProductQuestion([{ role: "user", content: "AIP 요금" }], "ko", AbortSignal.timeout(1000));
-    expect(reply).toMatchObject({ answered: false, sources: [] });
-    expect(fetcher).not.toHaveBeenCalled();
+    const reply = await answerProductQuestion([{ role: "user", content: "네 이름이 무엇이니?" }], "en", AbortSignal.timeout(1000));
+    expect(reply).toEqual({
+      answer: "저는 QueryPie 제품 안내를 돕는 AI 상담입니다. 궁금한 제품을 알려주세요.",
+      sources: [],
+      answered: false,
+    });
+    vi.mocked(retrieveLiveKnowledge).mockResolvedValueOnce([]);
+    await expect(answerProductQuestion([{ role: "user", content: "AIP 기능" }], "ko", AbortSignal.timeout(1000))).rejects.toMatchObject({
+      code: "INVALID_RESPONSE",
+      status: 502,
+    });
+  });
+  it("Gateway 오류 시 본문이나 키 없이 경계 진단만 기록한다", async () => {
+    vi.stubEnv("AI_CHAT_ENABLED", "true");
+    vi.stubEnv("AI_CHAT_API_KEY", "stage-secret");
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response("upstream secret body", { status: 504 })));
+    await expect(answerProductQuestion([{ role: "user", content: "AIP가 무엇인가요?" }], "ko", new AbortController().signal)).rejects.toMatchObject({
+      code: "PROVIDER_ERROR",
+      status: 502,
+    });
+    expect(warn).toHaveBeenCalledWith("[ai-chat]", expect.objectContaining({
+      event: "provider_http_error",
+      status: 504,
+      provider: "ai-gateway",
+    }));
+    expect(JSON.stringify(warn.mock.calls)).not.toContain("stage-secret");
+    expect(JSON.stringify(warn.mock.calls)).not.toContain("upstream secret body");
   });
 });

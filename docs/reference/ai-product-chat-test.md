@@ -50,7 +50,7 @@ vercel env pull .env.vercel-development.local --environment=development
 - URL 목록은 서버 인스턴스 메모리에 캐시하며, 본문은 질문마다 조회합니다. 조회 범위·시간·크기와 리다이렉트 출처를 제한합니다. 상세 흐름·제한은 README의 홈페이지 AI 챗봇 설명을 참고합니다.
 - 근거 최대 8개와 최근 대화 최대 8개를 Gateway에 전달합니다. 답변 언어는 사용자의 질문을 따릅니다.
 - 서버가 모델 응답 JSON과 출처 ID를 검증합니다. 원시 모델 요청·응답과 내부 추론은 브라우저에 반환하지 않습니다.
-- 근거가 없으면 모델 호출 없이 근거 부족 안내를 반환합니다.
+- 검색된 근거가 없어도 모델을 호출해 인사·자기소개·상담 범위 질문에 사용자의 언어로 답변합니다. 근거 없는 제품 사실은 추정하지 않고, 출처 없는 `answered: true` 응답은 서버 검증에서 거부합니다.
 - 대화는 현재 탭의 sessionStorage에 저장합니다. 초기화 시 진행 중인 요청을 취소하고 대화·초안을 지웁니다.
 - 요청 실패 시 질문을 입력창에 복원합니다. 요청 중 페이지를 떠나면 저장된 초안을 다시 사용할 수 있습니다.
 - 서버 인스턴스당 분당 30회, 동시 3회의 제한이 자료 조회와 모델 호출 전체에 적용됩니다. 다중 인스턴스에 공유되는 사용량 제한은 아닙니다.
@@ -63,6 +63,8 @@ npm run build
 npm run typecheck
 ```
 
+GLM-5.3 요청에는 `reasoning_effort: "low"`를 명시합니다. [모델 공식 문서](https://huggingface.co/zai-org/GLM-5.3/blob/main/README.md)에 따르면 생략 시 기본값은 `max`입니다. 동일한 제품 질문·공식 근거 요청이 기본값에서는 Gateway의 `504 UPSTREAM_TIMEOUT`으로 30초 후 실패했고, `low`에서는 약 5초 만에 답변을 반환한 것을 확인했습니다. 모델과 Gateway 주소는 바꾸지 않습니다.
+
 `domRuntime.test.ts`는 `require(ESM)`이 비활성화된 Node 프로세스에서 HTML·XML 파서 로딩을 확인합니다. `jsdom` 버전을 변경할 때는 이 테스트와 실제 Vercel Function의 cold start를 함께 확인합니다.
 
 배포 검증은 다음 순서로 진행합니다.
@@ -72,5 +74,7 @@ npm run typecheck
 3. Vercel 서버에서 Gateway로 실제 요청이 전달됐는지 Gateway 호출 기록 등과 대조합니다. 근거 부족 응답도 HTTP 200이므로 상태 코드만으로 LLM 호출 성공을 판단하지 않습니다.
 4. 브라우저 네트워크에서 모델 호출이 없고 `/api/ai-chat`만 호출되는지 확인합니다. 응답은 `answer`, `sources`, `answered`를 사용합니다.
 5. 비활성화·키 누락, Gateway 오류와 시간 초과 시 안전한 오류 응답 및 입력 복원을 확인합니다.
+
+Vercel Runtime Logs의 `[ai-chat]` 이벤트로 자료 조회, Gateway 요청, 연결 실패, HTTP 오류, 응답 해석 실패를 구분합니다. 로그에는 단계·소요 시간·HTTP 상태·허용된 오류 코드와 자료/메시지 개수만 남기며, API Key·질문·공식 자료 본문·모델 원문·내부 추론은 기록하지 않습니다. `provider_fetch_error`는 Gateway 응답을 받기 전 연결 단계 오류이며, `provider_http_error`는 Gateway가 오류 상태를 반환한 경우입니다.
 
 질문 예시: `AIP와 ACP는 어떤 차이가 있나요?`, `Lingoをどうやって始めますか？`.

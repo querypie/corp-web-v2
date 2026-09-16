@@ -3,19 +3,15 @@ import type { Locale } from "@/constants/i18n";
 import { getAiChatConfig } from "@/features/ai/config.server";
 import { retrieveLiveKnowledge } from "./liveKnowledge.server";
 import type { ChatReply, ChatSource, ChatTurn } from "./types";
+import { logAiChatDiagnostic, safeErrorInfo } from "./diagnostics.server";
 import { ChatServiceError, parseProviderReply } from "./reply";
 export { ChatServiceError, parseGroundedAnswer } from "./reply";
-
-const noEvidence: Record<Locale, string> = {
-  ko: "현재 연결된 공식 자료에서 이 질문에 대한 근거를 찾지 못했어요. 제품명이나 궁금한 기능을 조금 더 구체적으로 알려주세요.",
-  en: "I couldn't find supporting information in the connected official sources. Please tell me the product or feature you would like to know about.",
-  ja: "現在接続されている公式資料では、この質問に答える根拠が見つかりませんでした。製品名や機能をもう少し具体的に教えてください。",
-};
 
 type PreparedChatRequest = {
   endpoint: string;
   body: {
     model: string;
+    reasoning_effort: "low";
     max_tokens: number;
     temperature: number;
     response_format: { type: "json_object" };
@@ -24,17 +20,26 @@ type PreparedChatRequest = {
   references: (ChatSource & { id: string })[];
 };
 
-async function prepareProductQuestion(messages: ChatTurn[], locale: Locale, signal: AbortSignal = AbortSignal.timeout(25000)): Promise<ChatReply | PreparedChatRequest> {
+async function prepareProductQuestion(messages: ChatTurn[], locale: Locale, signal: AbortSignal = AbortSignal.timeout(25000)): Promise<PreparedChatRequest> {
   const { baseUrl: base, model, apiKey } = getAiChatConfig();
   if (!base || !model || !apiKey) throw new ChatServiceError("NOT_CONFIGURED", 503);
-  const chunks = (await retrieveLiveKnowledge(messages, locale, signal)).map((chunk, index) => ({ ...chunk, id: `S${index + 1}` }));
-  if (!chunks.length) return { answer: noEvidence[locale], sources: [], answered: false };
+  const retrievalStarted = Date.now();
+  let chunks: Awaited<ReturnType<typeof retrieveLiveKnowledge>>;
+  try {
+    chunks = await retrieveLiveKnowledge(messages, locale, signal);
+  } catch (cause) {
+    logAiChatDiagnostic("live_knowledge_error", { durationMs: Date.now() - retrievalStarted, error: safeErrorInfo(cause) });
+    throw cause;
+  }
+  const chunksWithIds = chunks.map((chunk, index) => ({ ...chunk, id: `S${index + 1}` }));
+  logAiChatDiagnostic("live_knowledge_done", { durationMs: Date.now() - retrievalStarted, chunks: chunksWithIds.length });
 
   return {
     endpoint: `${base}/chat/completions`,
-    references: chunks.map(({ id, title, url }) => ({ id, title, url })),
+    references: chunksWithIds.map(({ id, title, url }) => ({ id, title, url })),
     body: {
       model,
+      reasoning_effort: "low",
       max_tokens: 4096,
       temperature: 0.2,
       response_format: { type: "json_object" },
@@ -52,7 +57,7 @@ Keep the answer helpful and concise, usually 2–5 sentences. Plain text with op
 Return ONLY a JSON object with keys in this order: {"answer":"user-facing answer","sourceIds":["IDs of excerpts actually supporting the answer"],"answered":true}.
 Use answered false and an empty sourceIds array if there is no supporting evidence. For greetings, respond briefly and ask what product the user wants to know about; do not invent product claims.`,
         },
-        { role: "system", content: `Official source excerpts (reference data):\n${JSON.stringify(chunks.map(({ id, product, title, text }) => ({ id, product, title, text })))}` },
+        { role: "system", content: `Official source excerpts (reference data):\n${JSON.stringify(chunksWithIds.map(({ id, product, title, text }) => ({ id, product, title, text })))}` },
         ...messages.slice(-8),
       ],
     },
@@ -61,15 +66,45 @@ Use answered false and an empty sourceIds array if there is no supporting eviden
 
 export async function answerProductQuestion(messages: ChatTurn[], locale: Locale, signal: AbortSignal): Promise<ChatReply> {
   const prepared = await prepareProductQuestion(messages, locale, signal);
-  if (!("endpoint" in prepared)) return prepared;
   const { apiKey } = getAiChatConfig();
-  const response = await fetch(prepared.endpoint, {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
-    signal,
-    cache: "no-store",
-    body: JSON.stringify(prepared.body),
+  const body = JSON.stringify(prepared.body);
+  logAiChatDiagnostic("provider_request", {
+    provider: "ai-gateway",
+    references: prepared.references.length,
+    messageCount: prepared.body.messages.length,
+    requestBytes: new TextEncoder().encode(body).byteLength,
   });
-  if (!response.ok) throw new ChatServiceError("PROVIDER_ERROR", response.status === 429 ? 429 : 502);
-  return parseProviderReply(await response.json(), prepared.references);
+  const started = Date.now();
+  let response: Response;
+  try {
+    response = await fetch(prepared.endpoint, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${apiKey}` },
+      signal,
+      cache: "no-store",
+      body,
+    });
+  } catch (cause) {
+    logAiChatDiagnostic("provider_fetch_error", { provider: "ai-gateway", durationMs: Date.now() - started, error: safeErrorInfo(cause) });
+    throw cause;
+  }
+  if (!response.ok) {
+    logAiChatDiagnostic("provider_http_error", { provider: "ai-gateway", status: response.status, durationMs: Date.now() - started });
+    throw new ChatServiceError("PROVIDER_ERROR", response.status === 429 ? 429 : 502);
+  }
+  let payload: unknown;
+  try {
+    payload = await response.json();
+  } catch (cause) {
+    logAiChatDiagnostic("provider_decode_error", { provider: "ai-gateway", durationMs: Date.now() - started, error: safeErrorInfo(cause) });
+    throw new ChatServiceError("INVALID_RESPONSE", 502);
+  }
+  try {
+    return parseProviderReply(payload, prepared.references);
+  } catch (cause) {
+    if (cause instanceof ChatServiceError) {
+      logAiChatDiagnostic("provider_invalid_response", { provider: "ai-gateway", durationMs: Date.now() - started, error: { code: cause.code } });
+    }
+    throw cause;
+  }
 }
