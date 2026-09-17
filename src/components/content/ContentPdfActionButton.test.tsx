@@ -1,15 +1,21 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { beforeEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import ContentPdfActionButton from "./ContentPdfActionButton";
 
 describe("ContentPdfActionButton", () => {
   beforeEach(() => {
     vi.restoreAllMocks();
+    vi.stubGlobal("confirm", vi.fn());
     document.body.innerHTML = "";
   });
 
+  afterEach(() => {
+    vi.restoreAllMocks();
+    vi.unstubAllGlobals();
+  });
+
   it("게이트가 잠겨 있으면 별도 확인 모달 없이 게이팅 폼으로 스크롤한다", async () => {
-    const confirmSpy = vi.spyOn(window, "confirm");
+    const confirmSpy = vi.mocked(window.confirm);
     const scrollIntoView = vi.fn();
     const target = document.createElement("div");
     target.id = "content-gate-form";
@@ -93,7 +99,7 @@ describe("ContentPdfActionButton", () => {
   });
 
   it("다운로드 입력폼에 값이 있으면 닫기 전에 확인창을 띄운다", () => {
-    const confirmSpy = vi.spyOn(window, "confirm").mockReturnValue(false);
+    const confirmSpy = vi.mocked(window.confirm).mockReturnValue(false);
 
     render(
       <ContentPdfActionButton
