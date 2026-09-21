@@ -1,24 +1,43 @@
-const siteUrlByTarget = {
-  preview: "https://www-v2.querypie.com",
-  production: "https://www.querypie.com",
-  staging: "https://stage-v2.querypie.com",
-} as const;
+type HeaderReader = Pick<Headers, "get">;
 
-type SiteUrlTarget = keyof typeof siteUrlByTarget;
-
-function isSiteUrlTarget(value: string | undefined): value is SiteUrlTarget {
-  return Boolean(value && value in siteUrlByTarget);
+function getFirstHeaderValue(value: string | null) {
+  return value?.split(",", 1)[0]?.trim() || undefined;
 }
 
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ||
-  (isSiteUrlTarget(process.env.VERCEL_TARGET_ENV)
-    ? siteUrlByTarget[process.env.VERCEL_TARGET_ENV]
-    : "https://www.querypie.com");
+export function getSiteOrigin(headerStore: HeaderReader) {
+  const host = getFirstHeaderValue(headerStore.get("x-forwarded-host")) ||
+    getFirstHeaderValue(headerStore.get("host"));
 
-export const publicSiteUrl = "https://www.querypie.com";
+  if (!host) {
+    throw new Error("Request host header is required to determine the site origin");
+  }
 
-export function getAbsolutePublicUrl(pathOrUrl: string) {
-  return new URL(pathOrUrl, publicSiteUrl).toString();
+  const forwardedProtocol = getFirstHeaderValue(headerStore.get("x-forwarded-proto"));
+  const localHostname = host.replace(/^\[|\](?::\d+)?$/g, "").split(":", 1)[0];
+  const fallbackProtocol = localHostname === "localhost" || localHostname === "127.0.0.1"
+    ? "http"
+    : "https";
+  const protocol = forwardedProtocol === "http" || forwardedProtocol === "https"
+    ? forwardedProtocol
+    : fallbackProtocol;
+
+  const origin = new URL(`${protocol}://${host}`);
+
+  if (
+    origin.username ||
+    origin.password ||
+    origin.pathname !== "/" ||
+    origin.search ||
+    origin.hash
+  ) {
+    throw new Error("Request host header must contain a valid HTTP host");
+  }
+
+  return origin;
+}
+
+export function getAbsoluteSiteUrl(pathOrUrl: string, origin: string | URL) {
+  return new URL(pathOrUrl, origin).toString();
 }
 
 export const siteTitle = "QueryPie AI: AI That Gets How You Work";

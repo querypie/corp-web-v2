@@ -1,6 +1,6 @@
 # Vercel 배포 구현 현황
 
-**최종 업데이트**: 2026-09-16
+**최종 업데이트**: 2026-09-21
 
 corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 
@@ -17,7 +17,7 @@ main 배포와 PR 배포는 Preview 환경 안의 서로 다른 배포다.
 |------|---------------------|--------|
 | Development | `http://localhost:3000` | 로컬 개발 서버 실행 |
 | Preview (= Stage = Staging) | main: `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai`<br>PR: 배포별 Vercel Preview URL | `main` push 또는 PR open/sync 시 자동 배포 |
-| Production | `www.querypie.com`<br>`www-v2.querypie.com`<br>`www-v2.querypie.ai` | `workflow_dispatch` 수동 실행 |
+| Production | 정규: `www.querypie.com`, `querypie.ai`<br>별칭 FQDN은 Vercel redirect | `workflow_dispatch` 수동 실행 |
 
 기존 Custom Environment `staging`은 삭제했으며, built-in Preview로 전환을 완료했다.
 전환 결과는 아래 「표준 Preview 전환 완료」를 따른다.
@@ -29,7 +29,9 @@ Production 수동 실행은 `BRANCH` 입력(기본값 `main`)의 HEAD로 `releas
 
 ### 현재 도메인 매핑
 
-아래 도메인은 redirect가 아니라 해당 환경의 동일한 배포를 직접 서비스한다.
+아래 표는 2026-09-16에 확인한 Vercel 연결 현황이다.
+정규 FQDN 정책 적용 전의 관측값이므로, Production 별칭의 최종 동작은 아래
+「FQDN 정규화 및 Redirect 도메인」을 기준으로 갱신한다.
 
 | 환경 | 도메인 | Vercel 연결 | 상태 |
 |------|--------|-------------|------|
@@ -44,24 +46,38 @@ Stage 세 도메인은 `gitBranch=main`, `customEnvironmentId=null`로 등록되
 `main`의 Preview Deployment를 서비스한다.
 Production 도메인은 Production target에 연결된다.
 
-위 표는 2026-09-16에 확인된 배포 연결 현황이다. `www-v2.querypie.ai`와
-`stage-v2.querypie.ai`는 같은 환경의 `.com` 도메인과 동일한 콘텐츠를 제공한다.
-이 작업에서 준비한 `querypie.ai`·`www.querypie.ai`의 일본어 전용 라우팅은 아래
-「일본 / 글로벌 도메인 연결」을 따르며, 운영 적용에는 코드 배포와 도메인 이전이 필요하다.
+애플리케이션의 호스트·locale 동작은 [사이트 도메인 라우팅](site-domain-routing.md)을 따른다.
 
-### Redirect 도메인
+### FQDN 정규화 및 Redirect 도메인
 
-다음 도메인은 별도 서비스를 제공하지 않고 Vercel에서 `www.querypie.com`으로 redirect한다.
+Production의 정규 FQDN은 다국어 사이트 `www.querypie.com`과 일본어 전용 사이트 `querypie.ai`다.
+정규 FQDN은 Vercel Project의 Production Deployment에 연결한다.
+별칭 FQDN은 같은 Deployment에 연결하되 Vercel의 영구 redirect 대상으로 설정한다.
+Route53 DNS 레코드는 각 FQDN을 Vercel이 제공한 도메인 대상으로 연결한다.
+웹사이트 코드에는 FQDN 간 redirect를 구현하지 않는다.
 
-| 도메인 | 대상 | 상태 코드 |
-|--------|------|-----------|
+Preview에는 FQDN 정규화와 호스트 간 redirect를 적용하지 않는다.
+main Preview의 `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai`와
+PR별 Vercel Preview FQDN은 요청받은 각 FQDN으로 직접 서비스한다.
+
+| Production 별칭 FQDN | 정규 FQDN | 상태 코드 |
+|----------------------|-----------|-----------|
 | `querypie.com` | `www.querypie.com` | 308 |
+| `www-v2.querypie.com` | `www.querypie.com` | 308 |
 | `blog.querypie.com` | `www.querypie.com` | 308 |
+| `www.querypie.ai` | `querypie.ai` | 308 |
+| `www-v2.querypie.ai` | `querypie.ai` | 308 |
 | `chequer.io` | `www.querypie.com` | 301 |
 | `www.chequer.io` | `www.querypie.com` | 301 |
 
-위 연결 현황 확인 시점에 `querypie.ai`와 `www.querypie.ai`는 `corp-web-japan` 프로젝트의
-도메인이다. 이 프로젝트의 일본 사이트로 전환할 때 Vercel 담당자가 Production 배포로 이전해야 한다.
+`querypie.ai`와 그 별칭은 일본어 전용 사이트를 제공하는 동일한 Vercel Production Deployment에 연결한다.
+`www.querypie.com`과 그 별칭은 다국어 사이트를 제공하는 동일한 Vercel Production Deployment에 연결한다.
+실제 Vercel Project와 DNS 설정이 이 정책과 다르면 설정을 먼저 정규화한 뒤 서비스한다.
+
+Production의 정규화 redirect를 통과한 요청과 정규화를 적용하지 않는 Preview 요청 모두
+웹사이트 코드가 현재 요청의 protocol과 host FQDN을 사용하여 sitemap, robots sitemap URL,
+canonical, Open Graph, SNS 공유 URL을 생성한다.
+웹사이트 코드에서 `.com` 또는 `.ai` 정규 FQDN을 다른 사이트의 URL로 치환하지 않는다.
 
 ### Vercel 시스템 도메인
 
@@ -166,12 +182,9 @@ scripts/deploy/
   Production 워크플로우가 입력 소스로 `release`를 먼저 갱신한 뒤 `production` target으로 배포한다.
 - 기존 Stage 전용 환경변수는 값을 유지하면서 Preview에 적용했다.
   AI Gateway Key는 Preview 전체에서 Stage 키를 사용하며, 나머지는 `main` 브랜치 범위에 등록했다.
-  `NEXT_PUBLIC_SITE_URL=https://stage-v2.querypie.com`도 같은 범위에 등록했다.
 - 기존 `deploy-preview.yml`을 `BRANCH=main`으로 실행하여 built-in Preview 배포의 `READY`를 확인했다.
 - Stage 세 도메인을 Preview / `main`에 연결하자 새 Preview 배포로 alias가 자동 갱신됐다.
   배포 스크립트에 별도 alias 명령은 추가하지 않는다.
-- 세 도메인의 `/en` 응답은 HTTP 200이며, canonical URL은 기존 기준인
-  `https://stage-v2.querypie.com`을 유지하는 것을 확인했다.
 - PR #174 병합 커밋 `adba7d60`의 [main 자동 배포](https://github.com/querypie/corp-web-v2/actions/runs/35071982744)가 성공했다.
   built-in Preview 배포 `dpl_BY52P6gDeeDjvKVsvEQjt8Hun9pP`의 `READY`와 Stage 세 도메인 연결을 확인했다.
 - 기존 Custom Environment `staging`을 삭제했다. 기존 Stage와 연결되어 있던 환경변수 12개의
@@ -190,30 +203,7 @@ Vercel은 Production Branch를 Preview 도메인·환경변수의 특정 브랜�
 ([공식 제약](https://vercel.com/docs/errors/error-list#production-branch-used-as-preview-branch),
 [Preview 도메인 연결](https://vercel.com/docs/domains/working-with-domains/assign-domain-to-a-git-branch))
 
-### 일본 / 글로벌 도메인 연결
-
-- `querypie.ai`(사용 시 `www.querypie.ai`도)는 이 앱의 Production 배포에 연결한다. 글로벌 도메인으로 보내는 Vercel 도메인 리디렉션은 설정하지 않는다.
-- `www.querypie.com`은 글로벌 사이트로 연결한다.
-- 레포의 `next.config.ts`가 일본 도메인의 `/`와 locale 없는 공개 경로를 내부 `/ja`·`/ja/...`로 rewrite한다. 주소창에는 `/ja`가 표시되지 않는다. `/ja/...`·`/en/...`·`/ko/...` 접근은 prefix 없는 경로로 영구 리디렉션하며 쿼리스트링을 유지한다.
-- 일본어 화면에서는 GNB 언어 선택과 언어 추천 배너가 숨겨진다. 영어·한국어 화면에서는 두 언어만 선택·추천하며, 글로벌 루트의 자동 언어 선택에서도 일본어를 제외한다.
-- 기존 `/ja` 경로는 로컬·Preview·글로벌 도메인에서도 직접 확인할 수 있다.
-- GNB·푸터의 내부 링크는 상대 경로로 현재 도메인을 유지한다. CMS 본문과 AI 채팅 출처의 `querypie.com`·`querypie.ai` 절대 링크도 렌더링 시 현재 도메인·언어의 상대 경로로 변환한다. 로그인·외부 문서·SNS 등 다른 서비스의 링크는 원래 목적지를 유지한다.
-- 배포 후 `https://querypie.ai/`, `https://querypie.ai/en/demo/aip?utm_source=test`, `https://www.querypie.com/`를 확인한다. 도메인 연결과 DNS 설정은 Vercel 담당자가 수행해야 한다.
-
 `VERCEL_TEAM_ID`, `VERCEL_PROJECT_ID`는 각 배포 워크플로우 파일에 직접 명시되어 있다. 리전 및 Git 설정은 `vercel.json`에서 관리한다.
-
-`NEXT_PUBLIC_SITE_URL`이 설정되어 있으면 해당 값을 canonical / OG 절대 URL의 기준으로 사용한다.
-main Preview에는 `https://stage-v2.querypie.com`을 명시하여 기존 Stage 기준을 유지한다.
-미설정 시 `VERCEL_TARGET_ENV` 기준으로 자동 결정한다.
-
-| `VERCEL_TARGET_ENV` | 기본 site URL |
-|---------------------|---------------|
-| `staging` | `https://stage-v2.querypie.com` |
-| `preview` | `https://www-v2.querypie.com` |
-| `production` | `https://www.querypie.com` |
-
-추가된 `.ai` 도메인도 위 기본 site URL을 사용하므로 canonical URL과 OG 절대 URL은
-기존 `.com` 기준을 유지한다.
 
 ### `vercel.json`
 
@@ -255,9 +245,17 @@ main Preview에는 `https://stage-v2.querypie.com`을 명시하여 기존 Stage 
 
 ### 도메인 연결 (CNAME)
 
+Production 정규 FQDN과 별칭 FQDN 모두 Vercel Project에 연결한다.
+apex 도메인은 Vercel이 안내하는 apex용 레코드를 사용한다.
+서브도메인은 Vercel이 안내하는 CNAME 대상을 사용한다.
+아래 표의 DNS 대상은 Vercel Project에서 확인한 값을 Route53에 반영한다.
+
 | 환경 | Name | Value |
 |------|------|-------|
+| Production | `querypie.com` | Vercel 제공 apex 레코드 |
 | Production | `www.querypie.com` | `30b9851d69a3855d.vercel-dns-016.com.` |
+| Production | `querypie.ai` | Vercel 제공 apex 레코드 |
+| Production | `www.querypie.ai` | Vercel 제공 CNAME 대상 |
 | Production | `www-v2.querypie.com` | `82199b027e940a05.vercel-dns-016.com.` |
 | Production | `www-v2.querypie.ai` | `82199b027e940a05.vercel-dns-016.com.` |
 | Preview (= Stage = Staging) | `stage.querypie.com` | `30b9851d69a3855d.vercel-dns-016.com.` |
@@ -291,8 +289,6 @@ main과 PR 모두 `corp-web-v2-stage`의 Gateway Key를 사용하며, 기존 Dev
 `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES`다.
 기존 Stage와 Preview 공통으로 등록된 `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY`,
 `DESKPIE_LEAD_API_KEY`, `DESKPIE_LEAD_API_ENDPOINT`는 기존 Preview 범위를 유지한다.
-`NEXT_PUBLIC_SITE_URL=https://stage-v2.querypie.com`은 Preview / `main`에 추가했다.
-
 ### Community License 기능
 
 | 변수 | Development | Preview (= Stage = Staging) | Production |

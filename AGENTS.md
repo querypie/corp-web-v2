@@ -189,6 +189,7 @@ Vercel Production Branch는 `release`이며, Git 자동 배포는 끄고 GitHub 
 
 - `README.md` — 프로젝트 개요와 실행 방법
 - `docs/reference/vercel-deployment.md` — 배포 정보
+- `docs/reference/site-domain-routing.md` — 사이트 도메인·locale 라우팅 명세
 - `docs/reference/lead-capture-forms.md` — 리드폼 / 게이팅폼 흐름
 - `docs/reference/utm-attribution.md` — UTM 저장과 전송 흐름
 - `.claude/skills/branch/SKILL.md` — 작업 브랜치 생성

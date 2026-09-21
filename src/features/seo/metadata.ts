@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import type { Locale } from "@/constants/i18n";
 import { ogImageCacheVersion } from "@/features/seo/ogImageConfig";
+import { getRequestPublicUrl } from "@/features/seo/requestUrl.server";
 
 type DynamicOgImageOptions = {
   description?: string | null;
@@ -55,13 +56,20 @@ function getCanonicalUrl(metadata: Metadata) {
   return undefined;
 }
 
-export function withDynamicOgImage(
+export async function withDynamicOgImage(
   metadata: Metadata,
   options: DynamicOgImageOptions,
-): Metadata {
+): Promise<Metadata> {
   const description = options.description ?? defaultOgDescription[options.locale];
   const imageUrl = createDynamicOgImageUrl({ ...options, description });
-  const canonicalUrl = getCanonicalUrl(metadata);
+  const canonicalPath = getCanonicalUrl(metadata);
+  const canonicalUrl = canonicalPath
+    ? await getRequestPublicUrl(canonicalPath)
+    : undefined;
+  const openGraphPath = metadata.openGraph?.url?.toString();
+  const openGraphUrl = openGraphPath
+    ? await getRequestPublicUrl(openGraphPath)
+    : canonicalUrl;
   const ogImage = {
     url: options.image?.url ?? imageUrl,
     width: options.image?.width ?? defaultOgImageSize.width,
@@ -72,11 +80,17 @@ export function withDynamicOgImage(
   return {
     ...metadata,
     description: metadata.description ?? description,
+    alternates: canonicalUrl
+      ? {
+          ...metadata.alternates,
+          canonical: canonicalUrl,
+        }
+      : metadata.alternates,
     openGraph: {
       ...metadata.openGraph,
       title: options.title,
       description,
-      url: metadata.openGraph?.url ?? canonicalUrl,
+      url: openGraphUrl,
       images: [ogImage],
     },
     twitter: {

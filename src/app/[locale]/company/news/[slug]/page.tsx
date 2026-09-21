@@ -1,7 +1,6 @@
 import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { isLocale } from "@/constants/i18n";
-import { getAbsolutePublicUrl } from "@/constants/site";
 import NewsDetailPage from "@/components/pages/news/NewsDetailPage";
 import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
 import {
@@ -17,6 +16,7 @@ import {
 } from "@/features/content/data";
 import { readContentItem, readContentState } from "@/features/content/contentState.server";
 import { withDynamicOgImage } from "@/features/seo/metadata";
+import { getRequestPublicUrl } from "@/features/seo/requestUrl.server";
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -98,7 +98,7 @@ export default async function NewsDetailRoute({ params }: Props) {
         heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),
         heroImageSrc: currentEntry.imageSrc,
         locale,
-        shareUrl: getAbsolutePublicUrl(detailHref),
+        shareUrl: await getRequestPublicUrl(detailHref),
         title: getLocalizedContent(currentEntry.title, contentLocale),
         writer: getNewsFormatLabel(currentEntry, locale),
       } satisfies DocsDetailPageProps)}

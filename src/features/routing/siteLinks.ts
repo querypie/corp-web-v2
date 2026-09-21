@@ -7,7 +7,7 @@ export function getSameSiteHref(href: string, locale: Locale): string {
   if (!/^(https?:)?\/\//i.test(href)) return href;
 
   try {
-    const url = new URL(href, "https://www.querypie.com");
+    const url = new URL(href, "https://site.invalid");
     if (!websiteHosts.has(url.hostname) || url.username || url.password || url.port) return href;
 
     const isAsset = /\.[^/]+$/.test(url.pathname);

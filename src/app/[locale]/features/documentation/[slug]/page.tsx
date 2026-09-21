@@ -7,7 +7,6 @@ import ContentGateOverlay from "@/components/pages/documentation/ContentGateOver
 import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
 import { getContactPageCopy } from "@/copy/contact";
 import { getDocumentationPageCopy } from "@/copy/contentPages";
-import { getAbsolutePublicUrl } from "@/constants/site";
 import { docsCategoryConfigs, getCategoryHref } from "@/features/content/config";
 import {
   formatPublicDate,
@@ -22,6 +21,7 @@ import {
 } from "@/features/content/data";
 import { readContentItem, readContentState } from "@/features/content/contentState.server";
 import { withDynamicOgImage } from "@/features/seo/metadata";
+import { getRequestPublicUrl } from "@/features/seo/requestUrl.server";
 import {
   buildContentPreviewHtml,
   getContentUnlockCookieName,
@@ -124,7 +124,7 @@ export default async function DocumentationDetailRoute({ params }: DocsDetailRou
     heroImageSrc: currentEntry.imageSrc,
     locale,
     parentLabel: copy.title,
-    shareUrl: getAbsolutePublicUrl(detailHref),
+    shareUrl: await getRequestPublicUrl(detailHref),
     title: getLocalizedContent(currentEntry.title, contentLocale),
     unlockCookieName: getContentUnlockCookieName(currentEntry.id, "documentation"),
     writer: currentEntry.authorRole

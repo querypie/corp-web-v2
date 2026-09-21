@@ -3,12 +3,12 @@ import { describe, expect, it } from "vitest";
 import { middleware } from "@/middleware";
 
 describe("root locale redirect", () => {
-  it.each(["querypie.ai", "www.querypie.ai"])("일본 루트 %s는 쿠키·브라우저 언어와 관계없이 rewrite로 넘긴다", (host) => {
+  it("querypie.ai subdomains leave the root for the Japanese rewrite", () => {
     const request = new NextRequest("http://localhost:3000/?utm_source=test", {
       headers: { "accept-language": "ko-KR" },
     });
     // happy-dom removes Host/Cookie from Request constructor headers.
-    request.headers.set("host", host);
+    request.headers.set("host", "stage-v2.querypie.ai");
     request.cookies.set("querypie_locale_preference", "en");
     const response = middleware(request);
     expect(response.headers.get("location")).toBeNull();
