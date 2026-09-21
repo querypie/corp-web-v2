@@ -1,6 +1,6 @@
 # Vercel 배포 구현 현황
 
-**최종 업데이트**: 2026-09-16
+**최종 업데이트**: 2026-09-21
 
 corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 
@@ -17,7 +17,7 @@ main 배포와 PR 배포는 Preview 환경 안의 서로 다른 배포다.
 |------|---------------------|--------|
 | Development | `http://localhost:3000` | 로컬 개발 서버 실행 |
 | Preview (= Stage = Staging) | main: `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai`<br>PR: 배포별 Vercel Preview URL | `main` push 또는 PR open/sync 시 자동 배포 |
-| Production | `www.querypie.com`<br>`www-v2.querypie.com`<br>`www-v2.querypie.ai` | `workflow_dispatch` 수동 실행 |
+| Production | 정규: `www.querypie.com`, `querypie.ai`<br>별칭 FQDN은 Vercel redirect | `workflow_dispatch` 수동 실행 |
 
 기존 Custom Environment `staging`은 삭제했으며, built-in Preview로 전환을 완료했다.
 전환 결과는 아래 「표준 Preview 전환 완료」를 따른다.
@@ -29,7 +29,9 @@ Production 수동 실행은 `BRANCH` 입력(기본값 `main`)의 HEAD로 `releas
 
 ### 현재 도메인 매핑
 
-아래 도메인은 redirect가 아니라 해당 환경의 동일한 배포를 직접 서비스한다.
+아래 표는 2026-09-16에 확인한 Vercel 연결 현황이다.
+정규 FQDN 정책 적용 전의 관측값이므로, Production 별칭의 최종 동작은 아래
+「FQDN 정규화 및 Redirect 도메인」을 기준으로 갱신한다.
 
 | 환경 | 도메인 | Vercel 연결 | 상태 |
 |------|--------|-------------|------|
@@ -44,22 +46,38 @@ Stage 세 도메인은 `gitBranch=main`, `customEnvironmentId=null`로 등록되
 `main`의 Preview Deployment를 서비스한다.
 Production 도메인은 Production target에 연결된다.
 
-위 표는 2026-09-16에 확인된 배포 연결 현황이다.
 애플리케이션의 호스트·locale 동작은 [사이트 도메인 라우팅](site-domain-routing.md)을 따른다.
 
-### Redirect 도메인
+### FQDN 정규화 및 Redirect 도메인
 
-다음 도메인은 별도 서비스를 제공하지 않고 Vercel에서 `www.querypie.com`으로 redirect한다.
+Production의 정규 FQDN은 다국어 사이트 `www.querypie.com`과 일본어 전용 사이트 `querypie.ai`다.
+정규 FQDN은 Vercel Project의 Production Deployment에 연결한다.
+별칭 FQDN은 같은 Deployment에 연결하되 Vercel의 영구 redirect 대상으로 설정한다.
+Route53 DNS 레코드는 각 FQDN을 Vercel이 제공한 도메인 대상으로 연결한다.
+웹사이트 코드에는 FQDN 간 redirect를 구현하지 않는다.
 
-| 도메인 | 대상 | 상태 코드 |
-|--------|------|-----------|
+Preview에는 FQDN 정규화와 호스트 간 redirect를 적용하지 않는다.
+main Preview의 `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai`와
+PR별 Vercel Preview FQDN은 요청받은 각 FQDN으로 직접 서비스한다.
+
+| Production 별칭 FQDN | 정규 FQDN | 상태 코드 |
+|----------------------|-----------|-----------|
 | `querypie.com` | `www.querypie.com` | 308 |
+| `www-v2.querypie.com` | `www.querypie.com` | 308 |
 | `blog.querypie.com` | `www.querypie.com` | 308 |
+| `www.querypie.ai` | `querypie.ai` | 308 |
+| `www-v2.querypie.ai` | `querypie.ai` | 308 |
 | `chequer.io` | `www.querypie.com` | 301 |
 | `www.chequer.io` | `www.querypie.com` | 301 |
 
-위 연결 현황 확인 시점에 `querypie.ai`와 `www.querypie.ai`는 `corp-web-japan` 프로젝트의
-도메인이다. 이 프로젝트의 일본 사이트로 전환할 때 Vercel 담당자가 Production 배포로 이전해야 한다.
+`querypie.ai`와 그 별칭은 일본어 전용 사이트를 제공하는 동일한 Vercel Production Deployment에 연결한다.
+`www.querypie.com`과 그 별칭은 다국어 사이트를 제공하는 동일한 Vercel Production Deployment에 연결한다.
+실제 Vercel Project와 DNS 설정이 이 정책과 다르면 설정을 먼저 정규화한 뒤 서비스한다.
+
+Production의 정규화 redirect를 통과한 요청과 정규화를 적용하지 않는 Preview 요청 모두
+웹사이트 코드가 현재 요청의 protocol과 host FQDN을 사용하여 sitemap, robots sitemap URL,
+canonical, Open Graph, SNS 공유 URL을 생성한다.
+웹사이트 코드에서 `.com` 또는 `.ai` 정규 FQDN을 다른 사이트의 URL로 치환하지 않는다.
 
 ### Vercel 시스템 도메인
 
@@ -227,9 +245,17 @@ Vercel은 Production Branch를 Preview 도메인·환경변수의 특정 브랜�
 
 ### 도메인 연결 (CNAME)
 
+Production 정규 FQDN과 별칭 FQDN 모두 Vercel Project에 연결한다.
+apex 도메인은 Vercel이 안내하는 apex용 레코드를 사용한다.
+서브도메인은 Vercel이 안내하는 CNAME 대상을 사용한다.
+아래 표의 DNS 대상은 Vercel Project에서 확인한 값을 Route53에 반영한다.
+
 | 환경 | Name | Value |
 |------|------|-------|
+| Production | `querypie.com` | Vercel 제공 apex 레코드 |
 | Production | `www.querypie.com` | `30b9851d69a3855d.vercel-dns-016.com.` |
+| Production | `querypie.ai` | Vercel 제공 apex 레코드 |
+| Production | `www.querypie.ai` | Vercel 제공 CNAME 대상 |
 | Production | `www-v2.querypie.com` | `82199b027e940a05.vercel-dns-016.com.` |
 | Production | `www-v2.querypie.ai` | `82199b027e940a05.vercel-dns-016.com.` |
 | Preview (= Stage = Staging) | `stage.querypie.com` | `30b9851d69a3855d.vercel-dns-016.com.` |

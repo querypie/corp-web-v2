@@ -224,15 +224,16 @@ vercel env pull .env.vercel-development.local --environment=development
 
 ## 배포
 
-| 환경 | 직접 서비스 도메인 | 트리거 |
+| 환경 | 정규 FQDN 및 별칭 처리 | 트리거 |
 |------|---------------------|--------|
 | Development | `localhost:3000` | 로컬 `npm run dev` |
 | Preview / Stage / Staging | main: `stage.querypie.com`, `stage-v2.querypie.com`, `stage-v2.querypie.ai`<br>PR: Vercel Preview URL | `main` push / PR open·sync |
-| Production | `www.querypie.com`<br>`www-v2.querypie.com`<br>`www-v2.querypie.ai` | `workflow_dispatch` |
+| Production | 정규: `www.querypie.com`, `querypie.ai`<br>별칭 FQDN은 Vercel에서 정규 FQDN으로 redirect | `workflow_dispatch` |
 
 Preview, Stage, Staging은 같은 환경을 뜻합니다.
 Stage 또는 Staging 배포는 특히 `main` 브랜치의 Preview Deployment를 가리키며 위 세 고정 도메인을 사용합니다.
 PR 배포는 같은 Preview 환경에서 각각의 Vercel URL을 사용합니다.
+Preview에는 FQDN 정규화 redirect를 적용하지 않으며, 각 Preview FQDN을 그대로 사용합니다.
 `deploy-staging.yml`은 `main` push 또는 수동 실행 시 항상 `main`을 Preview에 배포합니다.
 
 Production은 선택한 소스 브랜치(기본 `main`)로 `release`를 먼저 갱신한 뒤 `release`를 배포합니다. 배포가 실패해도 `release`는 갱신된 상태로 남습니다.
