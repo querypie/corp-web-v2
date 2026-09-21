@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
-import { locales, type Locale } from "@/constants/i18n";
-import { getLocalePath } from "@/constants/i18n";
-import { getSolutionHref } from "@/features/solutions/routes";
+
+import { getLocalePath, type Locale } from "@/constants/i18n";
 import { readContentState } from "@/features/content/contentState.server";
 import { getPublicDetailHref, getPublicListHref, isPublishedContentVisible } from "@/features/content/data";
-import { getPublicSitePathname, isJapaneseSiteHostname } from "@/features/routing/siteDomainRouting";
+import { getPublicSitePathname } from "@/features/routing/siteDomainRouting";
 import { getRequestSiteOrigin } from "@/features/seo/requestUrl.server";
+import { getSolutionHref } from "@/features/solutions/routes";
 
 function absolute(path: string, origin: URL) {
   const url = new URL(path, origin);
@@ -19,16 +19,15 @@ function perLocale(pathname: string, origin: URL, sitemapLocales: readonly Local
   }));
 }
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+export async function createSiteSitemap(
+  sitemapLocales: readonly Locale[],
+): Promise<MetadataRoute.Sitemap> {
   const [origin, demoItems, docsItems, newsItems] = await Promise.all([
     getRequestSiteOrigin(),
     readContentState("demo", { includeBodies: false }),
     readContentState("documentation", { includeBodies: false }),
     readContentState("news", { includeBodies: false }),
   ]);
-  const sitemapLocales: readonly Locale[] = isJapaneseSiteHostname(origin.hostname)
-    ? ["ja"]
-    : locales;
 
   const staticEntries = [
     ...perLocale("/", origin, sitemapLocales),
@@ -56,27 +55,27 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const demoEntries = sitemapLocales.flatMap((locale) =>
     demoItems
-      .filter((item) => isPublishedContentVisible(item, locale as Locale) && item.contentType !== "outlink")
+      .filter((item) => isPublishedContentVisible(item, locale) && item.contentType !== "outlink")
       .map((item) => ({
-        url: absolute(getPublicDetailHref("demo", locale as Locale, item.id, item.categorySlug), origin),
+        url: absolute(getPublicDetailHref("demo", locale, item.id, item.categorySlug), origin),
         lastModified: item.dateIso || undefined,
       })),
   );
 
   const docsEntries = sitemapLocales.flatMap((locale) =>
     docsItems
-      .filter((item) => isPublishedContentVisible(item, locale as Locale) && item.contentType !== "outlink")
+      .filter((item) => isPublishedContentVisible(item, locale) && item.contentType !== "outlink")
       .map((item) => ({
-        url: absolute(getPublicDetailHref("documentation", locale as Locale, item.id, item.categorySlug), origin),
+        url: absolute(getPublicDetailHref("documentation", locale, item.id, item.categorySlug), origin),
         lastModified: item.dateIso || undefined,
       })),
   );
 
   const newsEntries = sitemapLocales.flatMap((locale) =>
     newsItems
-      .filter((item) => isPublishedContentVisible(item, locale as Locale) && item.contentType !== "outlink")
+      .filter((item) => isPublishedContentVisible(item, locale) && item.contentType !== "outlink")
       .map((item) => ({
-        url: absolute(getPublicDetailHref("news", locale as Locale, item.id), origin),
+        url: absolute(getPublicDetailHref("news", locale, item.id), origin),
         lastModified: item.dateIso || undefined,
       })),
   );

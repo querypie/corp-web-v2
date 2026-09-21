@@ -28,6 +28,12 @@ canonical URL, Open Graph URL, sitemap, robots의 sitemap URL, 소셜 공유 URL
 `NEXT_PUBLIC_SITE_URL`과 배포 환경별 기본 URL은 요청 host를 알 수 없는 실행 문맥의 fallback일 뿐이며,
 실제 요청의 host를 대체하지 않습니다.
 
+## Sitemap 경로
+
+다국어 사이트는 `/sitemaps/multilingual/sitemap.xml`, 일본어 전용 사이트는
+`/sitemaps/japanese/sitemap.xml`에서 sitemap을 각각 생성합니다.
+각 sitemap 안의 URL과 `robots.txt`가 안내하는 sitemap URL은 현재 요청의 protocol과 host를 사용합니다.
+
 ## 호스트 간 redirect 금지
 
 웹사이트 코드는 요청을 다른 호스트로 redirect하지 않습니다.

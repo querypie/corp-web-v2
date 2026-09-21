@@ -1,14 +1,10 @@
 import { headers } from "next/headers";
 
-import { getAbsoluteSiteUrl, getSiteOrigin } from "@/constants/site";
+import { getSiteOrigin } from "@/constants/site";
 import { getPublicSitePathname } from "@/features/routing/siteDomainRouting";
 
 export async function getRequestSiteOrigin() {
   return getSiteOrigin(await headers());
-}
-
-export async function getRequestAbsoluteUrl(pathOrUrl: string) {
-  return getAbsoluteSiteUrl(pathOrUrl, await getRequestSiteOrigin());
 }
 
 export async function getRequestPublicUrl(pathOrUrl: string) {

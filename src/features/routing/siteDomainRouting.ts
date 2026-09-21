@@ -3,6 +3,11 @@ const japaneseSiteHostnamePattern = new RegExp(`^(?:${japaneseSiteHostPattern})$
 const localePathPrefixPattern = /^\/(?:en|ko|ja)(?=\/|$)/;
 const publicPathPattern = "/:path((?!$|admin(?:/|$)|api(?:/|$)|mockups(?:/|$)|_next(?:/|$)|en(?:/|$)|ko(?:/|$)|ja(?:/|$)|.*\\..*).*)";
 
+const sitemapPathnameBySite = {
+  japanese: "/sitemaps/japanese/sitemap.xml",
+  multilingual: "/sitemaps/multilingual/sitemap.xml",
+} as const;
+
 export function isJapaneseSiteHostname(hostname: string) {
   return japaneseSiteHostnamePattern.test(hostname.split(":")[0]);
 }
@@ -13,6 +18,12 @@ export function getPublicSitePathname(hostname: string, pathname: string) {
   }
 
   return pathname.replace(localePathPrefixPattern, "") || "/";
+}
+
+export function getSiteSitemapPathname(hostname: string) {
+  return isJapaneseSiteHostname(hostname)
+    ? sitemapPathnameBySite.japanese
+    : sitemapPathnameBySite.multilingual;
 }
 
 export function getJapaneseSiteHostnameCheckScript() {
