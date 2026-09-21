@@ -25,9 +25,6 @@ canonical URL, Open Graph URL, sitemap, robots의 sitemap URL, 소셜 공유 URL
 웹사이트가 생성하는 절대 URL은 현재 요청의 protocol과 host를 그대로 사용합니다.
 `*.querypie.ai` 요청을 `*.querypie.com` URL로 바꾸거나 그 반대로 바꾸지 않습니다.
 
-`NEXT_PUBLIC_SITE_URL`과 배포 환경별 기본 URL은 요청 host를 알 수 없는 실행 문맥의 fallback일 뿐이며,
-실제 요청의 host를 대체하지 않습니다.
-
 ## Sitemap 경로
 
 다국어 사이트는 `/sitemaps/multilingual/sitemap.xml`, 일본어 전용 사이트는

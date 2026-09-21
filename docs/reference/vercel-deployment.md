@@ -164,7 +164,6 @@ scripts/deploy/
   Production 워크플로우가 입력 소스로 `release`를 먼저 갱신한 뒤 `production` target으로 배포한다.
 - 기존 Stage 전용 환경변수는 값을 유지하면서 Preview에 적용했다.
   AI Gateway Key는 Preview 전체에서 Stage 키를 사용하며, 나머지는 `main` 브랜치 범위에 등록했다.
-  `NEXT_PUBLIC_SITE_URL=https://stage-v2.querypie.com`도 같은 범위에 등록했다.
 - 기존 `deploy-preview.yml`을 `BRANCH=main`으로 실행하여 built-in Preview 배포의 `READY`를 확인했다.
 - Stage 세 도메인을 Preview / `main`에 연결하자 새 Preview 배포로 alias가 자동 갱신됐다.
   배포 스크립트에 별도 alias 명령은 추가하지 않는다.
@@ -187,16 +186,6 @@ Vercel은 Production Branch를 Preview 도메인·환경변수의 특정 브랜�
 [Preview 도메인 연결](https://vercel.com/docs/domains/working-with-domains/assign-domain-to-a-git-branch))
 
 `VERCEL_TEAM_ID`, `VERCEL_PROJECT_ID`는 각 배포 워크플로우 파일에 직접 명시되어 있다. 리전 및 Git 설정은 `vercel.json`에서 관리한다.
-
-`NEXT_PUBLIC_SITE_URL`과 `VERCEL_TARGET_ENV`별 기본 site URL은 요청 host를 사용할 수 없는
-실행 문맥의 fallback 설정이다. canonical과 자동 생성 절대 URL 정책은
-[`site-domain-routing.md`](./site-domain-routing.md)에서만 정의한다.
-
-| `VERCEL_TARGET_ENV` | 기본 site URL |
-|---------------------|---------------|
-| `staging` | `https://stage-v2.querypie.com` |
-| `preview` | `https://www-v2.querypie.com` |
-| `production` | `https://www.querypie.com` |
 
 ### `vercel.json`
 
@@ -274,8 +263,6 @@ main과 PR 모두 `corp-web-v2-stage`의 Gateway Key를 사용하며, 기존 Dev
 `SLACK_CHANNEL_ALERT_WEBSITE_BUSINESS_INQUIRIES`다.
 기존 Stage와 Preview 공통으로 등록된 `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY`,
 `DESKPIE_LEAD_API_KEY`, `DESKPIE_LEAD_API_ENDPOINT`는 기존 Preview 범위를 유지한다.
-`NEXT_PUBLIC_SITE_URL=https://stage-v2.querypie.com`은 Preview / `main`에 추가했다.
-
 ### Community License 기능
 
 | 변수 | Development | Preview (= Stage = Staging) | Production |
