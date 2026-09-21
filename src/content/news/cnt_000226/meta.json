@@ -1,0 +1,56 @@
+{
+  "authorName": "Press Release",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "content",
+  "dateIso": "2026-09-19",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-open-multilingual-dlp-ai-models",
+  "imageSrc": "/news/dlp-ueba-ai-security.png",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000226",
+  "summary": {
+    "en": "With support from NIPA's Advanced GPU Support Program, QueryPie has trained multilingual DLP models for planned release on Hugging Face. Its CPU-capable lightweight detection and ongoing UEBA research address enterprise security needs without assuming dedicated GPUs.",
+    "ko": "QueryPie가 NIPA 주관 첨단 GPU 지원사업으로 학습한 다국어 DLP 모델을 Hugging Face에 곧 공개할 예정입니다. CPU 활용이 가능한 경량 탐지와 UEBA 연구로 GPU 인프라가 없는 기업까지 고려합니다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "QueryPie Prepares to Release Multilingual DLP Models Trained with NIPA GPU Support, Advances UEBA Research",
+    "ko": "QueryPie, NIPA 첨단 GPU 지원사업 성과로 DLP 모델 공개 예정·UEBA 연구 구체화",
+    "ja": ""
+  },
+  "visibleLocales": [
+    "en",
+    "ko"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/news/cnt_000226/en.html",
+      "jsonPath": "src/content/news/cnt_000226/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/news/cnt_000226/ko.html",
+      "jsonPath": "src/content/news/cnt_000226/ko.tiptap.json"
+    }
+  }
+}
