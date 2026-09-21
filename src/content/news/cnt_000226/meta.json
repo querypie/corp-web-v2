@@ -27,7 +27,7 @@
   "relatedIds": [],
   "section": "news",
   "sortOrder": 0,
-  "status": "published",
+  "status": "hidden",
   "storageId": "cnt_000226",
   "summary": {
     "en": "With support from NIPA's Advanced GPU Support Program, QueryPie has trained multilingual DLP models for planned release on Hugging Face. Its CPU-capable lightweight detection and ongoing UEBA research address enterprise security needs without assuming dedicated GPUs.",
