@@ -1,10 +1,14 @@
 import { ADMIN_THEME_STORAGE_KEY } from "@/features/admin/preferences";
+import { getJapaneseSiteHostnameCheckScript } from "@/features/routing/siteDomainRouting";
+
+const japaneseSiteHostnameCheck = getJapaneseSiteHostnameCheckScript();
 
 export const themeInitializationScript = `
 (() => {
+  const isJapaneseSite = ${japaneseSiteHostnameCheck};
   try {
     const isAdmin = /^\\/admin(?:\\/|$)/.test(window.location.pathname);
-    const locale = ["querypie.ai", "www.querypie.ai"].includes(window.location.hostname)
+    const locale = isJapaneseSite
       ? "ja"
       : window.location.pathname.split("/")[1];
     const savedAdminTheme = isAdmin
@@ -27,7 +31,7 @@ export const themeInitializationScript = `
     const themeColor = document.querySelector('meta[name="theme-color"]');
     themeColor?.setAttribute("content", theme === "dark" ? "#0F0F0F" : "#FFFFFF");
   } catch {
-    const locale = ["querypie.ai", "www.querypie.ai"].includes(window.location.hostname)
+    const locale = isJapaneseSite
       ? "ja"
       : window.location.pathname.split("/")[1];
     const fallbackTheme = locale === "ja" ? "light" : "dark";

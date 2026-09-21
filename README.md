@@ -85,30 +85,15 @@ src/content/legal/privacy-policy/
 ## 라우팅 / 다국어
 
 - 지원 locale: `en`, `ko`, `ja`
-- 글로벌 공개 URL은 locale prefix를 사용합니다. 예: `/en/platforms/aip`. 일본 도메인은 `/platforms/aip`, `/solutions/ai-crew`처럼 prefix 없이 일본어 페이지를 표시합니다.
-- locale 없는 public path는 글로벌 도메인에서 `/en/...`으로 redirect합니다. 일본 도메인에서는 주소를 유지하고 내부적으로 `/ja/...`를 렌더링합니다. 루트(`/`)의 언어 선택은 아래 정책을 따릅니다.
+- 사이트 도메인과 locale 라우팅의 유일한 명세는 [사이트 도메인 라우팅](docs/reference/site-domain-routing.md)을 따릅니다.
 - 콘텐츠 legacy redirect: `src/features/content/legacyRedirects.ts`, `next.config.ts`
-
-### 일본 / 글로벌 사이트 운영 정책
-
-| 구분 | 도메인 | 언어 | GNB 언어 선택 | 언어 추천 배너 |
-|------|--------|------|---------------|----------------|
-| 일본 사이트 | `https://querypie.ai` | 일본어 | 숨김 | 숨김, 추천 API 호출 생략 |
-| 글로벌 사이트 | `https://www.querypie.com` | 영어·한국어 | 영어·한국어만 표시 | 영어·한국어만 추천·선택 |
-
-- 일본 도메인의 `/`는 주소 변경 없이 일본어 홈을 표시합니다. `/solutions/ai-crew`는 내부적으로 `/ja/solutions/ai-crew`를 렌더링합니다. `/ja/...`, `/en/...`, `/ko/...`으로 직접 접근하면 locale prefix 없는 경로로 영구 리디렉션하며 쿼리스트링을 유지합니다. `www.querypie.ai`에도 같은 규칙을 적용합니다.
-- 글로벌 루트(`/`)는 저장된 영어·한국어 선택을 우선하고, 없으면 브라우저의 지원 언어를 사용합니다. 일본어는 자동 선택·추천에서 제외하며, 지원 언어가 없으면 영어를 사용합니다.
-- 일본어 화면에서는 도메인과 관계없이 GNB 언어 선택과 언어 추천 배너를 숨깁니다. 기존 `/ja` 경로는 로컬·Preview·글로벌 도메인에서도 직접 확인할 수 있습니다.
-- 사이트 내부 이동은 현재 도메인을 유지합니다. GNB·푸터는 상대 경로를 사용하며, CMS 본문과 AI 채팅 출처의 `querypie.com`·`querypie.ai` 절대 링크도 렌더링 시 현재 도메인·언어의 상대 경로로 변환합니다. 로그인·외부 문서·SNS 등 다른 서비스 링크는 원래 목적지로 이동합니다.
-- 도메인 리디렉션은 `next.config.ts`, 자동 언어 선택은 `src/features/routing/localePreference.ts`, 본문·출처 링크 변환은 `src/features/routing/siteLinks.ts`에서 관리합니다.
-- 운영 적용 시 Vercel 담당자가 `querypie.ai`와 `www.querypie.com`을 이 앱의 Production 배포에 연결해야 합니다. 일본 도메인을 글로벌 도메인으로 보내는 Vercel 리디렉션은 설정하지 않습니다. 상세 연결 지침은 [Vercel 배포 문서](docs/reference/vercel-deployment.md)를 참고합니다.
 
 ### GNB / 푸터 메뉴
 
 - 공통 메뉴 순서는 **플랫폼 → 데모 → 리소스 → 회사 → 가격·플랜**입니다. 일본어에서는 **플랫폼 → 솔루션 → 데모 → 리소스 → 회사** 순서로 표시합니다.
 - 플랫폼에는 AIP, ACP, FDE 서비스를 배치합니다. 기본 경로는 `/platforms/aip`, `/platforms/acp`, `/platforms/aip/fde-services`이며 AIP·ACP의 하위 페이지도 `/platforms` 아래에 둡니다.
 - 솔루션 메뉴는 일본어에만 표시하며 AI Crew, AI Dashi, AS/400·COBOL을 포함합니다. 경로는 `/solutions/ai-crew`, `/solutions/ai-dashi`, `/solutions/as400-cobol`을 유지합니다.
-- 기존 `/solutions/aip...`·`/solutions/acp...` 주소는 새 `/platforms/...` 주소로 영구 리디렉션합니다. 글로벌 도메인은 `/en`·`/ko` prefix를 유지하고, 일본 도메인은 prefix를 숨깁니다.
+- 기존 `/solutions/aip...`·`/solutions/acp...` 주소는 새 `/platforms/...` 주소로 영구 리디렉션합니다.
 - 메뉴 구성은 `src/constants/navigation.ts`, 플랫폼 경로는 `src/features/platforms/routes.ts`, 솔루션 경로는 `src/features/solutions/routes.ts`에서 관리합니다.
 
 플랫폼·솔루션 폴더는 공개 경로와 같은 기준으로 분리합니다.
