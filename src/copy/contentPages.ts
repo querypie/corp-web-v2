@@ -41,7 +41,7 @@ export function getDocumentationPageCopy(locale: Locale): ContentListPageCopy {
       metadataDescription:
         "QueryPie AI 문서, 가이드, 백서, 블로그, 이벤트, 매뉴얼과 제품 자료를 확인하세요.",
       metadataTitle: "자료",
-      title: "자료",
+      title: "리소스",
     },
     ja: {
       metadataDescription:
