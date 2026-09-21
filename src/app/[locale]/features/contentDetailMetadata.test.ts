@@ -14,6 +14,10 @@ vi.mock("next/navigation", () => ({
   redirect: vi.fn(),
 }));
 
+vi.mock("next/headers", () => ({
+  headers: async () => new Headers({ host: "www.querypie.com" }),
+}));
+
 function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContentEntry {
   return {
     authorName: "QueryPie",
@@ -63,7 +67,7 @@ describe("content detail metadata", () => {
         alt: "Security Guide",
       },
     ]);
-    expect(metadata.openGraph?.url).toBe("/en/blog/security-guide");
+    expect(metadata.openGraph?.url).toBe("https://www.querypie.com/en/blog/security-guide");
     expect(metadata.twitter?.images).toEqual(["/uploads/security-guide.webp"]);
   });
 
@@ -89,7 +93,7 @@ describe("content detail metadata", () => {
         alt: "AIP Demo",
       },
     ]);
-    expect(metadata.openGraph?.url).toBe("/en/demo/aip/aip-demo");
+    expect(metadata.openGraph?.url).toBe("https://www.querypie.com/en/demo/aip/aip-demo");
     expect(metadata.twitter?.images).toEqual(["/demo/aip-thumbnail.webp"]);
   });
 });

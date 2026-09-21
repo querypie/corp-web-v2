@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { getPlatformHref, platformEntries } from "@/features/platforms/routes";
 
 import { generateMetadata as g1 } from "./aip/page";
@@ -30,6 +30,10 @@ import Content6KO, { metadata as Metadata6KO } from "@/components/pages/platform
 import Content6JA, { metadata as Metadata6JA } from "@/components/pages/platforms/acp/content.ja";
 import { generateMetadata as g7 } from "./acp/integrations/page";
 import Page7 from "./acp/integrations/page";
+
+vi.mock("next/headers", () => ({
+  headers: async () => new Headers({ host: "www.querypie.com" }),
+}));
 
 const routeModules = {
   "aip": {
@@ -102,7 +106,9 @@ describe("platforms route modules", () => {
         expect(metadata).toMatchObject({
           title: expect.any(String),
           description: expect.any(String),
-          alternates: { canonical: getPlatformHref(locale, entry.id) },
+          alternates: {
+            canonical: new URL(getPlatformHref(locale, entry.id), "https://www.querypie.com").toString(),
+          },
         });
       }
     }

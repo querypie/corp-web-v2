@@ -1,9 +1,18 @@
 const japaneseSiteHostPattern = "(?:[^.]+\\.)*querypie\\.ai";
 const japaneseSiteHostnamePattern = new RegExp(`^(?:${japaneseSiteHostPattern})$`, "i");
+const localePathPrefixPattern = /^\/(?:en|ko|ja)(?=\/|$)/;
 const publicPathPattern = "/:path((?!$|admin(?:/|$)|api(?:/|$)|mockups(?:/|$)|_next(?:/|$)|en(?:/|$)|ko(?:/|$)|ja(?:/|$)|.*\\..*).*)";
 
-function isJapaneseSiteHostname(hostname: string) {
+export function isJapaneseSiteHostname(hostname: string) {
   return japaneseSiteHostnamePattern.test(hostname.split(":")[0]);
+}
+
+export function getPublicSitePathname(hostname: string, pathname: string) {
+  if (!isJapaneseSiteHostname(hostname)) {
+    return pathname;
+  }
+
+  return pathname.replace(localePathPrefixPattern, "") || "/";
 }
 
 export function getJapaneseSiteHostnameCheckScript() {

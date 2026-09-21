@@ -3,7 +3,8 @@ import type { ReactNode } from "react";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
-import { siteTitle, siteUrl } from "@/constants/site";
+import { siteTitle } from "@/constants/site";
+import { getRequestSiteOrigin } from "@/features/seo/requestUrl.server";
 import { themeInitializationScript } from "@/features/theme/themeScript";
 import "../styles/globals.css";
 
@@ -39,11 +40,13 @@ const pretendardJp = localFont({
   preload: false,
 });
 
-export const metadata: Metadata = {
-  title: siteTitle,
-  description: "QueryPie AI transforms how enterprises work with AI.",
-  metadataBase: new URL(siteUrl),
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: siteTitle,
+    description: "QueryPie AI transforms how enterprises work with AI.",
+    metadataBase: await getRequestSiteOrigin(),
+  };
+}
 
 type RootLayoutProps = {
   children: ReactNode;

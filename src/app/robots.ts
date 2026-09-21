@@ -1,12 +1,12 @@
 import type { MetadataRoute } from "next";
-import { siteUrl } from "@/constants/site";
+import { getRequestAbsoluteUrl } from "@/features/seo/requestUrl.server";
 
-export default function robots(): MetadataRoute.Robots {
+export default async function robots(): Promise<MetadataRoute.Robots> {
   return {
     rules: {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${siteUrl}/sitemap.xml`,
+    sitemap: await getRequestAbsoluteUrl("/sitemap.xml"),
   };
 }

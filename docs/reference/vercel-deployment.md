@@ -168,8 +168,6 @@ scripts/deploy/
 - 기존 `deploy-preview.yml`을 `BRANCH=main`으로 실행하여 built-in Preview 배포의 `READY`를 확인했다.
 - Stage 세 도메인을 Preview / `main`에 연결하자 새 Preview 배포로 alias가 자동 갱신됐다.
   배포 스크립트에 별도 alias 명령은 추가하지 않는다.
-- 세 도메인의 `/en` 응답은 HTTP 200이며, canonical URL은 기존 기준인
-  `https://stage-v2.querypie.com`을 유지하는 것을 확인했다.
 - PR #174 병합 커밋 `adba7d60`의 [main 자동 배포](https://github.com/querypie/corp-web-v2/actions/runs/35071982744)가 성공했다.
   built-in Preview 배포 `dpl_BY52P6gDeeDjvKVsvEQjt8Hun9pP`의 `READY`와 Stage 세 도메인 연결을 확인했다.
 - 기존 Custom Environment `staging`을 삭제했다. 기존 Stage와 연결되어 있던 환경변수 12개의
@@ -190,18 +188,15 @@ Vercel은 Production Branch를 Preview 도메인·환경변수의 특정 브랜�
 
 `VERCEL_TEAM_ID`, `VERCEL_PROJECT_ID`는 각 배포 워크플로우 파일에 직접 명시되어 있다. 리전 및 Git 설정은 `vercel.json`에서 관리한다.
 
-`NEXT_PUBLIC_SITE_URL`이 설정되어 있으면 해당 값을 canonical / OG 절대 URL의 기준으로 사용한다.
-main Preview에는 `https://stage-v2.querypie.com`을 명시하여 기존 Stage 기준을 유지한다.
-미설정 시 `VERCEL_TARGET_ENV` 기준으로 자동 결정한다.
+`NEXT_PUBLIC_SITE_URL`과 `VERCEL_TARGET_ENV`별 기본 site URL은 요청 host를 사용할 수 없는
+실행 문맥의 fallback 설정이다. canonical과 자동 생성 절대 URL 정책은
+[`site-domain-routing.md`](./site-domain-routing.md)에서만 정의한다.
 
 | `VERCEL_TARGET_ENV` | 기본 site URL |
 |---------------------|---------------|
 | `staging` | `https://stage-v2.querypie.com` |
 | `preview` | `https://www-v2.querypie.com` |
 | `production` | `https://www.querypie.com` |
-
-추가된 `.ai` 도메인도 위 기본 site URL을 사용하므로 canonical URL과 OG 절대 URL은
-기존 `.com` 기준을 유지한다.
 
 ### `vercel.json`
 

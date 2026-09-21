@@ -1,8 +1,16 @@
 import { unstable_getResponseFromNextConfig } from "next/experimental/testing/server";
 import { describe, expect, it } from "vitest";
 import nextConfig from "../../../next.config";
+import { getPublicSitePathname } from "./siteDomainRouting";
 
 describe("site domain routing", () => {
+  it("일본어 사이트의 내부 locale 경로만 공개 경로로 정규화한다", () => {
+    expect(getPublicSitePathname("stage-v2.querypie.ai", "/ja/company/about-us"))
+      .toBe("/company/about-us");
+    expect(getPublicSitePathname("stage-v2.querypie.com", "/ja/company/about-us"))
+      .toBe("/ja/company/about-us");
+  });
+
   it.each(["querypie.ai", "stage-v2.querypie.ai", "preview.branch.querypie.ai"])(
     "%s renders public paths in Japanese without changing the URL",
     async (host) => {

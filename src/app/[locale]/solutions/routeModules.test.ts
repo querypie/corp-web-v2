@@ -1,4 +1,4 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import { getSolutionHref, solutionEntries } from "@/features/solutions/routes";
 
 import { generateMetadata as g8 } from "./ai-crew/page";
@@ -10,6 +10,10 @@ import Page9 from "./ai-dashi/page";
 import { metadata as Metadata9JA } from "@/components/pages/solutions/japan/AiDashiPage";
 import { aiDashiCopy } from "@/components/pages/solutions/japan/aiDashiCopy";
 import As400CobolPage, { generateMetadata as as400CobolMetadata } from "./as400-cobol/page";
+
+vi.mock("next/headers", () => ({
+  headers: async () => new Headers({ host: "www.querypie.com" }),
+}));
 
 const routeModules = {
   "ai-crew": {
@@ -52,7 +56,9 @@ describe("solutions route modules", () => {
         expect(metadata).toMatchObject({
           title: expect.any(String),
           description: expect.any(String),
-          alternates: { canonical: getSolutionHref(locale, entry.id) },
+          alternates: {
+            canonical: new URL(getSolutionHref(locale, entry.id), "https://www.querypie.com").toString(),
+          },
         });
       }
     }
