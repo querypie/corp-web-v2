@@ -46,9 +46,9 @@ export async function createSiteSitemap(
     ...sitemapLocales.map((locale) => ({
       url: absolute(getPublicListHref("news", locale), origin),
     })),
-    ...perLocale("/company/certifications", origin, sitemapLocales),
-    ...perLocale("/company/about-us", origin, sitemapLocales),
-    ...perLocale("/company/contact-us", origin, sitemapLocales),
+    ...perLocale("/certifications", origin, sitemapLocales),
+    ...perLocale("/about-us", origin, sitemapLocales),
+    ...perLocale("/contact-us", origin, sitemapLocales),
     ...perLocale("/apps/slack", origin, sitemapLocales),
     ...perLocale("/plans/aip", origin, sitemapLocales),
     ...perLocale("/plans/acp", origin, sitemapLocales),

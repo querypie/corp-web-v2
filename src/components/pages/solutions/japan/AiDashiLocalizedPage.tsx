@@ -17,7 +17,7 @@ export default function AiDashiLocalizedPage({ locale }: { locale: Exclude<Local
   const copy = getAiDashiCopy(locale);
   if (!copy) return null;
 
-  const contactHref = getLocalePath(locale, "/company/contact-us");
+  const contactHref = getLocalePath(locale, "/contact-us");
   const whitepaperHref = getPublicDetailHref("resources", locale, "saas-end-or-evolution", "white-papers");
   const [conceptTitleBefore, conceptTitleAfter] = copy.concept.title.split("AI Dashi");
 

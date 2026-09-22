@@ -47,7 +47,7 @@ const voices = [
 ] as const;
 
 export default function AiCrewPage() {
-  const contactHref = getLocalePath("ja", "/company/contact-us");
+  const contactHref = getLocalePath("ja", "/contact-us");
   const demoHref = getLocalePath("ja", "/demo/aip");
   const whitepaperHref = getPublicDetailHref("resources", "ja", "ai-transformation-japan", "white-papers");
 

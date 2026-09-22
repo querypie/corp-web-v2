@@ -40,7 +40,7 @@ function makeRequest(body: Record<string, unknown>) {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      referer: "https://www.querypie.com/ko/company/contact-us",
+      referer: "https://www.querypie.com/ko/contact-us",
     },
     body: JSON.stringify(body),
   });
@@ -57,7 +57,7 @@ const validBody = {
   products: ["AI Platform QueryPie AIP"],
   message: "I have a question.",
   marketingConsent: false,
-  referrerURL: "https://www.querypie.com/ko/company/contact-us",
+  referrerURL: "https://www.querypie.com/ko/contact-us",
 };
 
 function stubDeskPieEnv() {
@@ -177,7 +177,7 @@ describe("POST /api/contact-us", () => {
       const slackPayload = postMessageMock.mock.calls[0][0] as { blocks: Array<{ text: { text: string } }> };
       expect(slackPayload.blocks[0].text.text).toContain("New Contact Sales Received(contact-us)");
       expect(slackPayload.blocks[0].text.text).toContain("RequestURI");
-      expect(slackPayload.blocks[0].text.text).toContain("https://www.querypie.com/ko/company/contact-us");
+      expect(slackPayload.blocks[0].text.text).toContain("https://www.querypie.com/ko/contact-us");
     });
 
     it("Slack 실패 시에도 success:true를 반환한다", async () => {

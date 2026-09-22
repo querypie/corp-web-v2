@@ -45,7 +45,7 @@ export default function SlackAppPage({
           </div>
           <div className="flex flex-col items-start gap-4 sm:gap-5">
             <p className="m-0 type-body-lg leading-relaxed text-fg">{description}</p>
-            <a className={`${contactButton.container} ${contactButton.text} group cursor-pointer`} href={getLocalePath(locale, "/company/contact-us")}>
+            <a className={`${contactButton.container} ${contactButton.text} group cursor-pointer`} href={getLocalePath(locale, "/contact-us")}>
               {contactCta}
             </a>
           </div>

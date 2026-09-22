@@ -10,44 +10,44 @@ describe("site domain routing", () => {
   });
 
   it("일본어 사이트의 내부 locale 경로만 공개 경로로 정규화한다", () => {
-    expect(getPublicSitePathname("stage-v2.querypie.ai", "/ja/company/about-us"))
-      .toBe("/company/about-us");
-    expect(getPublicSitePathname("stage-v2.querypie.com", "/ja/company/about-us"))
-      .toBe("/ja/company/about-us");
+    expect(getPublicSitePathname("stage-v2.querypie.ai", "/ja/about-us"))
+      .toBe("/about-us");
+    expect(getPublicSitePathname("stage-v2.querypie.com", "/ja/about-us"))
+      .toBe("/ja/about-us");
   });
 
   it.each(["querypie.ai", "stage-v2.querypie.ai", "preview.branch.querypie.ai"])(
     "%s renders public paths in Japanese without changing the URL",
     async (host) => {
       const response = await unstable_getResponseFromNextConfig({
-        url: `https://${host}/company/about-us`,
+        url: `https://${host}/about-us`,
         nextConfig,
       });
 
       expect(response.headers.get("location")).toBeNull();
-      expect(response.headers.get("x-middleware-rewrite")).toBe(`https://${host}/ja/company/about-us`);
+      expect(response.headers.get("x-middleware-rewrite")).toBe(`https://${host}/ja/about-us`);
     },
   );
 
   it("normalizes locale-prefixed Japanese URLs without changing the hostname", async () => {
     const response = await unstable_getResponseFromNextConfig({
-      url: "https://www.querypie.ai/en/company/about-us?utm_source=test",
+      url: "https://www.querypie.ai/en/about-us?utm_source=test",
       nextConfig,
     });
 
     expect(response.status).toBe(308);
-    expect(response.headers.get("location")).toBe("https://www.querypie.ai/company/about-us?utm_source=test");
+    expect(response.headers.get("location")).toBe("https://www.querypie.ai/about-us?utm_source=test");
   });
 
   it.each(["www.querypie.com", "querypie.ai.example.com"])(
     "%s uses the multilingual URL structure",
     async (host) => {
       const response = await unstable_getResponseFromNextConfig({
-        url: `https://${host}/company/about-us`,
+        url: `https://${host}/about-us`,
         nextConfig,
       });
 
-      expect(response.headers.get("location")).toBe(`https://${host}/en/company/about-us`);
+      expect(response.headers.get("location")).toBe(`https://${host}/en/about-us`);
     },
   );
 

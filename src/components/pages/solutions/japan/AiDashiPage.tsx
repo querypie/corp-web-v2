@@ -60,7 +60,7 @@ const steps = [
 ] as const;
 
 export default function AiDashiPage() {
-  const contactHref = getLocalePath("ja", "/company/contact-us");
+  const contactHref = getLocalePath("ja", "/contact-us");
   const whitepaperHref = getPublicDetailHref("resources", "ja", "saas-end-or-evolution", "white-papers");
 
   return (

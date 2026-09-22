@@ -5,7 +5,7 @@
 | 폼 | 대표 라우트 | API | 외부 연동 |
 |----|------------|-----|---------|
 | [Community License 신청](#1-community-license-신청) | `/en/community-license`, `/en/querypie/license/community/apply` | `POST /api/community-license` | 라이선스 발급 API, Slack |
-| [Contact Us](#2-contact-us) | `/en/company/contact-us` | `POST /api/contact-us` | DeskPie Lead API, Slack |
+| [Contact Us](#2-contact-us) | `/en/contact-us` | `POST /api/contact-us` | DeskPie Lead API, Slack |
 | [콘텐츠 PDF 언락/다운로드](#3-콘텐츠-pdf-언락다운로드) | `/en/whitepapers/[slug]` 등 콘텐츠 상세 | `POST /api/downloads/content` | DeskPie Lead API, Slack |
 
 ---
@@ -60,7 +60,7 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 라이선�
 | `src/components/pages/contact/ContactForm.tsx` | Client Component — 폼 상태 관리, 제출 핸들러 |
 | `src/components/forms/ContactFormParts.tsx` | 재사용 폼 컴포넌트 (TextField, SelectField, CheckboxRow, PrivacyNotice 등) |
 | `src/app/api/contact-us/route.ts` | `POST /api/contact-us` 핸들러 |
-| `src/app/[locale]/company/contact-us/page.tsx` | 라우트 진입점 |
+| `src/app/[locale]/contact-us/page.tsx` | 라우트 진입점 |
 
 ### 수집 필드
 

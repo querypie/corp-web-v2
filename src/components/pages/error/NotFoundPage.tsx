@@ -5,9 +5,13 @@ import Button from "@/components/ui/Button";
 import Footer from "../../layout/Footer";
 import Gnb from "../../layout/Gnb";
 import { defaultLocale, getLocalePath, isLocale, type Locale } from "@/constants/i18n";
+import PublicThemeSync from "@/components/site/PublicThemeSync";
+import { notFoundCopy } from "@/copy/notFound";
 import { getShellMenuCopy } from "@/constants/navigation";
 
-type NotFoundPageProps = {};
+type NotFoundPageProps = {
+  japaneseSite?: boolean;
+};
 
 function BowingBotIcon() {
   return (
@@ -55,47 +59,20 @@ function BowingBotIcon() {
   );
 }
 
-export default function NotFoundPage({}: NotFoundPageProps) {
+export default function NotFoundPage({ japaneseSite = false }: NotFoundPageProps) {
   const pathname = usePathname();
   const firstSegment = pathname.split("/").filter(Boolean)[0];
-  const locale: Locale = firstSegment && isLocale(firstSegment) ? firstSegment : defaultLocale;
+  const locale: Locale = japaneseSite ? "ja" : firstSegment && isLocale(firstSegment) ? firstSegment : defaultLocale;
 
-  // 현재 locale 기준으로 404 카피와 링크를 분기
   const copy = {
-    en: {
-      ctaHref: getLocalePath("en", "/"),
-      ctaLabel: "Back to home",
-      ...getShellMenuCopy("en"),
-      messageLines: [
-        "The page you’re looking for has wandered off, but don’t worry!",
-        "Let’s get you back on track.",
-      ],
-      title: "404",
-    },
-    ko: {
-      ctaHref: getLocalePath("ko", "/"),
-      ctaLabel: "홈으로 돌아가기",
-      ...getShellMenuCopy("ko"),
-      messageLines: [
-        "찾으시는 페이지가 다른 곳으로 이동했거나 사라졌습니다.",
-        "홈으로 돌아가 다시 시작해 보세요.",
-      ],
-      title: "404",
-    },
-    ja: {
-      ctaHref: getLocalePath("ja", "/"),
-      ctaLabel: "ホームへ戻る",
-      ...getShellMenuCopy("ja"),
-      messageLines: [
-        "お探しのページは移動したか、見つかりませんでした。",
-        "ホームに戻ってもう一度お試しください。",
-      ],
-      title: "404",
-    },
-  }[locale];
+    ...notFoundCopy[locale],
+    ...getShellMenuCopy(locale),
+    ctaHref: japaneseSite ? "/" : getLocalePath(locale, "/"),
+  };
 
   return (
-    <div className="flex min-h-screen flex-col bg-bg">
+    <div className="flex min-h-screen flex-col bg-bg" data-locale={locale} lang={locale}>
+      <PublicThemeSync locale={locale} />
       <Gnb actionLabel={copy.navActionLabel} items={copy.navItems} locale={locale} />
       {/* 404 중앙 메시지 영역 */}
       <main className="flex flex-1 px-5 pt-[100px] text-fg md:px-10 md:pt-[120px]">

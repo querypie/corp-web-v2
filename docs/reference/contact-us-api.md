@@ -1,6 +1,6 @@
 # Contact Us API 레퍼런스
 
-`/company/contact-us` 페이지 폼 제출 기능의 설계 및 동작 방식.
+`/contact-us` 페이지 폼 제출 기능의 설계 및 동작 방식.
 
 > **파일 구조·폼 필드·다국어 정보:** [`docs/reference/lead-capture-forms.md`](./lead-capture-forms.md) 참조
 >

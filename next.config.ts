@@ -18,13 +18,13 @@ const nextConfig: NextConfig = {
         permanent: true,
       },
       {
-        source: "/certifications",
-        destination: "/company/certifications",
+        source: "/company/:page(certifications|contact-us|about-us)",
+        destination: "/:page",
         permanent: true,
       },
       {
-        source: "/:locale(en|ko|ja)/certifications",
-        destination: "/:locale/company/certifications",
+        source: "/:locale(en|ko|ja)/company/:page(certifications|contact-us|about-us)",
+        destination: "/:locale/:page",
         permanent: true,
       },
       {
