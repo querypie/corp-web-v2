@@ -27,7 +27,7 @@
   "relatedIds": [],
   "section": "documentation",
   "sortOrder": 0,
-  "status": "hidden",
+  "status": "published",
   "storageId": "cnt_000225",
   "summary": {
     "en": "A technical account of multilingual sensitive-data detection: dataset design, lightweight risk screening, precise extraction, the correction of character-offset errors, and comparative model evaluation.",
