@@ -50,9 +50,13 @@ canonical·Open Graph·robots의 sitemap URL도 같은 규칙을 따릅니다.
 
 ## Sitemap 경로
 
-다국어 사이트는 `/sitemaps/multilingual/sitemap.xml`, 일본어 전용 사이트는
-`/sitemaps/japanese/sitemap.xml`에서 sitemap을 각각 생성합니다.
-각 sitemap 안의 URL과 `robots.txt`가 안내하는 sitemap URL은 현재 요청의 protocol과 host를 사용합니다.
+모든 사이트의 canonical sitemap은 `/sitemap.xml`입니다.
+`querypie.ai` 및 하위 도메인에서는 일본어(`ja`) 콘텐츠만 생성하고, 그 외 다국어 사이트에서는
+영어(`en`)와 한국어(`ko`) 콘텐츠만 생성합니다.
+Sitemap 안의 URL과 `robots.txt`가 안내하는 sitemap URL은 현재 요청의 protocol과 host를 사용합니다.
+
+기존 `/sitemaps/multilingual/sitemap.xml` 및 `/sitemaps/japanese/sitemap.xml` 경로는 호환성을 위해
+유지되며, 각각 다국어(`en`·`ko`)와 일본어(`ja`) sitemap을 제공합니다.
 
 ## 호스트 간 redirect 금지
 

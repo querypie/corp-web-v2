@@ -12,9 +12,9 @@ vi.mock("@/features/content/contentState.server", () => ({
   readContentState: async () => [],
 }));
 
-import { createSiteSitemap } from "./sitemap.server";
+import sitemap from "./sitemap";
 
-describe("site sitemap", () => {
+describe("sitemap route", () => {
   beforeEach(() => {
     requestHeaders.current = new Headers({
       host: "www.querypie.com",
@@ -22,8 +22,8 @@ describe("site sitemap", () => {
     });
   });
 
-  it("현재 다국어 사이트 origin과 locale 경로를 사용한다", async () => {
-    const urls = (await createSiteSitemap(["en", "ko"])).map((entry) => entry.url);
+  it("다국어 사이트에서는 영어와 한국어 URL만 노출한다", async () => {
+    const urls = (await sitemap()).map((entry) => entry.url);
 
     expect(urls).toContain("https://www.querypie.com/en");
     expect(urls).toContain("https://www.querypie.com/ko");
@@ -31,16 +31,16 @@ describe("site sitemap", () => {
     expect(urls).not.toContain("https://www.querypie.com/ja/solutions/as400-cobol");
   });
 
-  it("현재 일본어 사이트 origin과 prefix 없는 경로를 사용한다", async () => {
+  it("일본어 전용 사이트에서는 일본어 URL만 노출한다", async () => {
     requestHeaders.current = new Headers({
       host: "stage-v2.querypie.ai",
       "x-forwarded-proto": "https",
     });
 
-    const urls = (await createSiteSitemap(["ja"])).map((entry) => entry.url);
+    const urls = (await sitemap()).map((entry) => entry.url);
 
     expect(urls).toContain("https://stage-v2.querypie.ai/");
-    expect(urls.every((url) => url.startsWith("https://stage-v2.querypie.ai/"))).toBe(true);
-    expect(urls.some((url) => new URL(url).pathname.startsWith("/ja"))).toBe(false);
+    expect(urls).toContain("https://stage-v2.querypie.ai/solutions/as400-cobol");
+    expect(urls.every((url) => !new URL(url).pathname.startsWith("/ja"))).toBe(true);
   });
 });

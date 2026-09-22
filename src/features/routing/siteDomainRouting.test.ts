@@ -1,9 +1,14 @@
 import { unstable_getResponseFromNextConfig } from "next/experimental/testing/server";
 import { describe, expect, it } from "vitest";
 import nextConfig from "../../../next.config";
-import { getPublicSitePathname } from "./siteDomainRouting";
+import { getPublicSitePathname, getSiteSitemapLocales } from "./siteDomainRouting";
 
 describe("site domain routing", () => {
+  it("selects Japanese-only or English/Korean sitemap locales by hostname", () => {
+    expect(getSiteSitemapLocales("stage-v2.querypie.ai")).toEqual(["ja"]);
+    expect(getSiteSitemapLocales("www.querypie.com")).toEqual(["en", "ko"]);
+  });
+
   it("일본어 사이트의 내부 locale 경로만 공개 경로로 정규화한다", () => {
     expect(getPublicSitePathname("stage-v2.querypie.ai", "/ja/company/about-us"))
       .toBe("/company/about-us");

@@ -1,9 +1,11 @@
+import type { Locale } from "@/constants/i18n";
+
 const japaneseSiteHostPattern = "(?:[^.]+\\.)*querypie\\.ai";
 const japaneseSiteHostnamePattern = new RegExp(`^(?:${japaneseSiteHostPattern})$`, "i");
 const localePathPrefixPattern = /^\/(?:en|ko|ja)(?=\/|$)/;
 const publicPathPattern = "/:path((?!$|admin(?:/|$)|api(?:/|$)|mockups(?:/|$)|_next(?:/|$)|en(?:/|$)|ko(?:/|$)|ja(?:/|$)|.*\\..*).*)";
 
-const sitemapPathnameBySite = {
+const compatibilitySitemapPathnameBySite = {
   japanese: "/sitemaps/japanese/sitemap.xml",
   multilingual: "/sitemaps/multilingual/sitemap.xml",
 } as const;
@@ -20,10 +22,14 @@ export function getPublicSitePathname(hostname: string, pathname: string) {
   return pathname.replace(localePathPrefixPattern, "") || "/";
 }
 
+export function getSiteSitemapLocales(hostname: string): readonly Locale[] {
+  return isJapaneseSiteHostname(hostname) ? ["ja"] : ["en", "ko"];
+}
+
 export function getSiteSitemapPathname(hostname: string) {
   return isJapaneseSiteHostname(hostname)
-    ? sitemapPathnameBySite.japanese
-    : sitemapPathnameBySite.multilingual;
+    ? compatibilitySitemapPathnameBySite.japanese
+    : compatibilitySitemapPathnameBySite.multilingual;
 }
 
 export function getJapaneseSiteHostnameCheckScript() {
