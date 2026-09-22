@@ -49,7 +49,7 @@ const voices = [
 export default function AiCrewPage() {
   const contactHref = getLocalePath("ja", "/company/contact-us");
   const demoHref = getLocalePath("ja", "/demo/aip");
-  const whitepaperHref = getPublicDetailHref("documentation", "ja", "ai-transformation-japan", "white-papers");
+  const whitepaperHref = getPublicDetailHref("resources", "ja", "ai-transformation-japan", "white-papers");
 
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>

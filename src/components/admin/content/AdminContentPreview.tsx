@@ -1,6 +1,6 @@
 import ContentArticlePreview from "@/components/content/ContentArticlePreview";
 import { DemoListCard } from "@/components/pages/demo/DemoListPage";
-import { DocsListCard } from "@/components/pages/documentation/DocumentationListPage";
+import { DocsListCard } from "@/components/pages/resources/ResourcesListPage";
 import { NewsListCard } from "@/components/pages/news/NewsListPage";
 import type { ContentGatingLevel } from "@/features/content/data";
 import { buildContentPreviewHtml, isContentGatingEnabled } from "@/features/content/gating";
@@ -16,7 +16,7 @@ type AdminContentPreviewProps = {
   hideHeroImage?: boolean;
   heroImageAlt: string;
   heroImageSrc: string;
-  section: "demo" | "documentation" | "news";
+  section: "demo" | "resources" | "news";
   summary?: string;
   title: string;
   url?: string;
@@ -62,7 +62,7 @@ export default function AdminContentPreview({
     );
   }
 
-  if (contentType === "outlink" && section === "documentation") {
+  if (contentType === "outlink" && section === "resources") {
     return (
       <div className="mx-auto w-full max-w-[380px] py-5">
         <DocsListCard

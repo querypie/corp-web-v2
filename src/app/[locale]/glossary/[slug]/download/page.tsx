@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import DocumentationDownloadRoute, { generateMetadata as generateDocumentationDownloadMetadata } from "@/app/[locale]/features/documentation/[slug]/download/page";
+import ResourcesDownloadRoute, { generateMetadata as generateResourcesDownloadMetadata } from "@/app/[locale]/features/resources/[slug]/download/page";
 import { readContentItem } from "@/features/content/contentState.server";
 
 type Props = {
@@ -10,7 +10,7 @@ const categorySlug = "glossary";
 
 async function assertCategory({ params }: Props) {
   const { slug } = await params;
-  const currentItem = await readContentItem("documentation", decodeURIComponent(slug), { includeBodies: false });
+  const currentItem = await readContentItem("resources", decodeURIComponent(slug), { includeBodies: false });
 
   if (!currentItem || currentItem.categorySlug !== categorySlug) {
     notFound();
@@ -19,10 +19,10 @@ async function assertCategory({ params }: Props) {
 
 export default async function GlossaryDownloadPage(props: Props) {
   await assertCategory(props);
-  return DocumentationDownloadRoute(props);
+  return ResourcesDownloadRoute(props);
 }
 
 export async function generateMetadata(props: Props) {
   await assertCategory(props);
-  return generateDocumentationDownloadMetadata(props);
+  return generateResourcesDownloadMetadata(props);
 }

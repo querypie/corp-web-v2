@@ -122,10 +122,10 @@ export function getDemoSubItems(locale: string): NavigationSubItem[] {
 
 export function getFeaturesSubItems(locale: string): NavigationSubItem[] {
   const copy = {
-    en: ["Demo", "Documentation"],
-    ko: ["데모", "문서"],
-    ja: ["デモ", "ドキュメント"],
-  }[locale] ?? ["Demo", "Documentation"];
+    en: ["Demo", "Resources"],
+    ko: ["데모", "리소스"],
+    ja: ["デモ", "リソース"],
+  }[locale] ?? ["Demo", "Resources"];
 
   return [
     { label: copy[0], href: getCategoryHref(demoCategoryConfigs, "all", locale as Locale) },
@@ -302,7 +302,7 @@ export function getFooterHref(item: string, locale: string) {
     return getPublicCategoryHref("news", locale as Locale, "news");
   }
 
-  if (item === "Documentation" || item === "문서" || item === "ドキュメント") {
+  if (item === "Resources" || item === "리소스" || item === "リソース") {
     return getCategoryHref(docsCategoryConfigs, "all", locale as Locale);
   }
 

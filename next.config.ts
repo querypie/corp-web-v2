@@ -1,11 +1,32 @@
 import type { NextConfig } from "next";
 import { legacyContentRedirects } from "./src/features/content/legacyRedirects";
+import { publicCategoryPaths } from "./src/features/content/publicPathConfig";
 import { koEnLegacyRedirects } from "./src/features/routing/koEnLegacyRedirects";
 import { getSiteDomainRedirects, getSiteDomainRewrites } from "./src/features/routing/siteDomainRouting";
 
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      {
+        source: "/use-cases",
+        destination: publicCategoryPaths.demo.all,
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|ko|ja)/use-cases",
+        destination: `/:locale${publicCategoryPaths.demo.all}`,
+        permanent: true,
+      },
+      {
+        source: "/certifications",
+        destination: "/company/certifications",
+        permanent: true,
+      },
+      {
+        source: "/:locale(en|ko|ja)/certifications",
+        destination: "/:locale/company/certifications",
+        permanent: true,
+      },
       {
         source: "/assets/products/:path*",
         destination: "/assets/pages/platforms/:path*",

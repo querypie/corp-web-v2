@@ -40,7 +40,7 @@ function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContent
     id: "security-guide",
     imageSrc: "/images/content/security-guide.webp",
     relatedIds: [],
-    section: "documentation",
+    section: "resources",
     sortOrder: 0,
     status: "published",
     summary: createLocalizedContent("Summary"),
@@ -51,8 +51,8 @@ function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContent
 }
 
 describe("content detail metadata", () => {
-  it("documentation 상세 OG image에 콘텐츠 섬네일을 사용한다", async () => {
-    const { generateMetadata } = await import("./documentation/[slug]/page");
+  it("resources 상세 OG image에 콘텐츠 섬네일을 사용한다", async () => {
+    const { generateMetadata } = await import("./resources/[slug]/page");
     mockReadContentItem.mockResolvedValueOnce(makeEntry());
 
     const metadata = await generateMetadata({

@@ -6,9 +6,9 @@
 
 ## 프로젝트 개요
 
-`corp-web-v2`는 QueryPie 회사 홍보·소개 웹사이트입니다. 제품 소개, Demo, Documentation, Company, Plans, Legal 문서를 `en / ko / ja` 다국어로 제공합니다.
+`corp-web-v2`는 QueryPie 회사 홍보·소개 웹사이트입니다. 제품 소개, Demo, Resources, Company, Plans, Legal 문서를 `en / ko / ja` 다국어로 제공합니다.
 
-Admin CMS는 Demo / Documentation / News 콘텐츠를 편집·게시하기 위한 보조 기능입니다. 공개 웹사이트의 안정성과 콘텐츠 일관성이 우선입니다.
+Admin CMS는 Demo / Resources / News 콘텐츠를 편집·게시하기 위한 보조 기능입니다. 공개 웹사이트의 안정성과 콘텐츠 일관성이 우선입니다.
 
 ---
 
@@ -43,7 +43,7 @@ src/
 │   └── pages/          # 공개 페이지 조립 컴포넌트
 ├── constants/          # i18n, navigation, plans, legal 등
 ├── copy/               # 정적 페이지 문구와 metadata copy
-├── content/            # demo, documentation, news, legal 원본
+├── content/            # demo, resources, news, legal 원본
 ├── public/assets/      # 이미지, mockup asset 등 정적 리소스
 └── features/           # content, seo, utm 등 동작 로직
 ```
@@ -98,7 +98,7 @@ src/
 
 ## 콘텐츠 규칙
 
-관리형 콘텐츠 원본은 `src/content/{demo,documentation,news}/**/cnt_xxxxxx/` 아래 파일입니다.
+관리형 콘텐츠 원본은 `src/content/{demo,resources,news}/**/cnt_xxxxxx/` 아래 파일입니다.
 
 - 메타데이터: `meta.json`
 - locale 본문: `en.html`, `ko.html`, `ja.html`

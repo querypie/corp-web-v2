@@ -142,12 +142,12 @@ describe("GET /api/admin/content/state", () => {
       },
       categorySlug: "blogs",
       id: "same-slug",
-      section: "documentation",
+      section: "resources",
       storageId: "cnt_000002",
     });
     mockReadContentState.mockResolvedValue([wrongIdItem, targetItem]);
 
-    const response = await GET(makeRequest("http://localhost/api/admin/content/state?section=documentation&id=same-slug&storageId=cnt_000002"));
+    const response = await GET(makeRequest("http://localhost/api/admin/content/state?section=resources&id=same-slug&storageId=cnt_000002"));
     const data = await response.json() as { item: ManagedContentEntry };
 
     expect(data.item.storageId).toBe("cnt_000002");
@@ -375,7 +375,7 @@ describe("PATCH /api/admin/content/state", () => {
 
   it("storageId와 status가 있으면 상태를 업데이트한다", async () => {
     const wrongIdItem = makeEntry({ id: "same-slug", storageId: "cnt_000001", status: "hidden" });
-    const targetItem = makeEntry({ categorySlug: "blogs", id: "same-slug", section: "documentation", storageId: "cnt_000002" });
+    const targetItem = makeEntry({ categorySlug: "blogs", id: "same-slug", section: "resources", storageId: "cnt_000002" });
     mockReadContentState.mockResolvedValue([wrongIdItem, targetItem]);
     mockUpdateAuthoredContentMeta.mockResolvedValue({} as never);
 
@@ -390,7 +390,7 @@ describe("PATCH /api/admin/content/state", () => {
     expect(data.ok).toBe(true);
     expect(mockUpdateAuthoredContentMeta).toHaveBeenCalledWith(expect.objectContaining({
       id: "same-slug",
-      section: "documentation",
+      section: "resources",
       storageId: "cnt_000002",
       updates: { status: "published" },
     }));
@@ -422,7 +422,7 @@ describe("PATCH /api/admin/content/state", () => {
 
   it("sortOrders가 있으면 순서를 업데이트한다", async () => {
     const wrongIdItem = makeEntry({ id: "item-a", sortOrder: 1, storageId: "cnt_000001" });
-    const item = makeEntry({ categorySlug: "blogs", id: "item-a", section: "documentation", sortOrder: 1, storageId: "cnt_000002" });
+    const item = makeEntry({ categorySlug: "blogs", id: "item-a", section: "resources", sortOrder: 1, storageId: "cnt_000002" });
     mockReadContentState.mockResolvedValue([wrongIdItem, item]);
     mockUpdateAuthoredContentMeta.mockResolvedValue({} as never);
 
@@ -435,7 +435,7 @@ describe("PATCH /api/admin/content/state", () => {
     expect(response.status).toBe(200);
     expect(mockUpdateAuthoredContentMeta).toHaveBeenCalledWith(expect.objectContaining({
       id: "item-a",
-      section: "documentation",
+      section: "resources",
       storageId: "cnt_000002",
       updates: { sortOrder: 2 },
     }));
@@ -455,7 +455,7 @@ describe("DELETE /api/admin/content/state", () => {
 
   it("storageId가 있으면 해당 콘텐츠를 삭제한다", async () => {
     const wrongIdItem = makeEntry({ id: "to-delete", storageId: "cnt_000001" });
-    const item = makeEntry({ categorySlug: "blogs", id: "to-delete", section: "documentation", storageId: "cnt_000002" });
+    const item = makeEntry({ categorySlug: "blogs", id: "to-delete", section: "resources", storageId: "cnt_000002" });
     mockReadContentState.mockResolvedValue([wrongIdItem, item]);
     mockDeleteAuthoredContent.mockResolvedValue({ deleted: true });
 
@@ -470,7 +470,7 @@ describe("DELETE /api/admin/content/state", () => {
     expect(data.ok).toBe(true);
     expect(mockDeleteAuthoredContent).toHaveBeenCalledWith(expect.objectContaining({
       id: "to-delete",
-      section: "documentation",
+      section: "resources",
       storageId: "cnt_000002",
     }));
   });

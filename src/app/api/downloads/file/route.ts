@@ -3,9 +3,14 @@ import path from "path";
 import { NextResponse } from "next/server";
 
 const DOWNLOADABLE_PUBLIC_ROOTS = [
+  // Old download links pass the asset URL as a query parameter, bypassing redirects.
   {
     prefix: "/documentation/",
-    root: path.join(process.cwd(), "public", "documentation"),
+    root: path.join(process.cwd(), "public", "resources"),
+  },
+  {
+    prefix: "/resources/",
+    root: path.join(process.cwd(), "public", "resources"),
   },
   {
     prefix: "/demo/",

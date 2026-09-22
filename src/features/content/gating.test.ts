@@ -8,6 +8,10 @@ import {
 } from "./gating";
 
 describe("getContentUnlockCookieName", () => {
+  it("resources에서도 기존 콘텐츠 열람 쿠키를 유지한다", () => {
+    expect(getContentUnlockCookieName("my-content", "resources"))
+      .toBe("querypie_content_unlocked_documentation_my-content");
+  });
   it("id를 기반으로 쿠키 이름을 생성한다", () => {
     expect(getContentUnlockCookieName("my-content")).toBe("querypie_content_unlocked_my-content");
   });
@@ -37,7 +41,7 @@ describe("isContentGatingEnabled", () => {
 
   it("demo 섹션의 content 타입이고 gatingLevel이 있으면 게이팅을 적용한다", () => {
     expect(isContentGatingEnabled({ section: "demo", contentType: "content", gatingLevel: "30" })).toBe(true);
-    expect(isContentGatingEnabled({ section: "documentation", contentType: "content", gatingLevel: "50" })).toBe(true);
+    expect(isContentGatingEnabled({ section: "resources", contentType: "content", gatingLevel: "50" })).toBe(true);
   });
 });
 

@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { isLocale } from "@/constants/i18n";
 import NewsDetailPage from "@/components/pages/news/NewsDetailPage";
-import type { DocsDetailPageProps } from "@/components/pages/documentation/DocumentationDetailPage";
+import type { DocsDetailPageProps } from "@/components/pages/resources/ResourcesDetailPage";
 import {
   formatPublicDate,
   getAdjacentContentLabel,

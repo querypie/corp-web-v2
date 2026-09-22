@@ -18,7 +18,7 @@ export default function AiDashiLocalizedPage({ locale }: { locale: Exclude<Local
   if (!copy) return null;
 
   const contactHref = getLocalePath(locale, "/company/contact-us");
-  const whitepaperHref = getPublicDetailHref("documentation", locale, "saas-end-or-evolution", "white-papers");
+  const whitepaperHref = getPublicDetailHref("resources", locale, "saas-end-or-evolution", "white-papers");
   const [conceptTitleBefore, conceptTitleAfter] = copy.concept.title.split("AI Dashi");
 
   return (
@@ -74,7 +74,7 @@ export default function AiDashiLocalizedPage({ locale }: { locale: Exclude<Local
       <AiCrewWhitepaperSection
         {...copy.whitepaper}
         href={whitepaperHref}
-        imageSrc="/documentation/white-papers/thumbnail-26.webp"
+        imageSrc="/resources/white-papers/thumbnail-26.webp"
       />
 
       <Cta actionHref={contactHref} actionLabel={copy.cta.action} compactHeading description={copy.cta.description} hideEyebrow locale={locale} secondaryActionHref="" secondaryActionLabel="" title={copy.cta.title} />

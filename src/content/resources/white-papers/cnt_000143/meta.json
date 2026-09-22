@@ -1,0 +1,61 @@
+{
+  "authorName": "Ryan",
+  "authorRole": "Software Engineer",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2025-03-10",
+  "downloadCoverImageSrc": "/resources/white-papers/wp-thumb-13.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "50",
+  "hideHeroImage": false,
+  "id": "seamless-ssh-connection",
+  "imageSrc": "/resources/white-papers/thumbnail-18.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 19,
+  "status": "published",
+  "storageId": "cnt_000143",
+  "summary": {
+    "en": "Discover an optimal method for seamless SSH connections that enhances security without disrupting the CLI workflow. Learn how QueryPie’s approach eliminates the need for additional agents while maintaining robust access control.",
+    "ko": "CLI 워크플로우를 방해하지 않으면서도 보안을 강화하는 매끄러운 SSH 연결을 위한 최적의 방법을 알아보세요. 추가 에이전트 없이 강력한 접근 제어를 유지하는 QueryPie의 접근 방법을 설명합니다.",
+    "ja": "CLIワークフローを妨げることなくセキュリティを高める、シームレスなSSH接続の最適な方法をご紹介します。追加エージェントを必要とせずに強力なアクセス制御を実現する、QueryPieのアプローチを解説します。"
+  },
+  "title": {
+    "en": "Optimal Method for Using a Terminal with Seamless SSH Connection",
+    "ko": "보안성과 업무 효율성을 동시에 높이는 Seamless SSH Connection 전략",
+    "ja": "シームレスなSSH接続でターミナルを使う最適な方法"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/resources/white-papers/cnt_000143/en.html",
+      "jsonPath": "src/content/resources/white-papers/cnt_000143/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/resources/white-papers/cnt_000143/ko.html",
+      "jsonPath": "src/content/resources/white-papers/cnt_000143/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/white-papers/cnt_000143/ja.html",
+      "jsonPath": "src/content/resources/white-papers/cnt_000143/ja.tiptap.json"
+    }
+  }
+}

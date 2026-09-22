@@ -1,0 +1,50 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "voc",
+  "contentType": "content",
+  "dateIso": "2024-11-29",
+  "downloadCoverImageSrc": "/resources/voc/cs-thumb-lovo.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfSrc": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "lovo-ai-tom-lee",
+  "imageSrc": "/resources/voc/cs-thumb-lovo-2.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 28,
+  "status": "published",
+  "storageId": "cnt_000094",
+  "summary": {
+    "en": "Today, we have a special guest with us: Tom Lee, the CEO and Co-founder of LOVO AI.",
+    "ko": "이 영상에서 Tom은 통합 사이버보안 솔루션으로서 QueryPie가 기업에 제공하는 중요한 가치를 공유합니다.",
+    "ja": "LOVO AIのCEO兼共同創設者であるTom Lee氏をご招待します。"
+  },
+  "title": {
+    "en": "\"QueryPie' s like a tailor shop almost for security.\"",
+    "ko": "\"QueryPie는 마치 보안을 위한 맞춤 테일러샵 같아요.\"",
+    "ja": "「QueryPieはまるでセキュリティのためのオーダーメードテイラーショップのようです。」"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/resources/voc/cnt_000094/en.html",
+      "jsonPath": "src/content/resources/voc/cnt_000094/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/resources/voc/cnt_000094/ko.html",
+      "jsonPath": "src/content/resources/voc/cnt_000094/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/voc/cnt_000094/ja.html",
+      "jsonPath": "src/content/resources/voc/cnt_000094/ja.tiptap.json"
+    }
+  }
+}

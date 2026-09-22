@@ -19,11 +19,11 @@ afterEach(() => {
 });
 
 describe("GET /api/downloads/file", () => {
-  it("documentation PDF는 읽어서 attachment 응답을 반환한다", async () => {
+  it.each(["resources", "documentation"])("%s PDF는 새 폴더에서 읽어서 attachment 응답을 반환한다", async (section) => {
     mockReadFile.mockResolvedValue(Buffer.from("pdf-data"));
 
     const request = new Request(
-      "http://localhost/api/downloads/file?src=/documentation/white-papers/sample.pdf&fileName=sample.pdf",
+      `http://localhost/api/downloads/file?src=/${section}/white-papers/sample.pdf&fileName=sample.pdf`,
     );
     const response = await GET(request);
 
@@ -31,7 +31,7 @@ describe("GET /api/downloads/file", () => {
     expect(response.headers.get("content-type")).toBe("application/pdf");
     expect(response.headers.get("content-disposition")).toContain('filename="sample.pdf"');
     expect(mockReadFile).toHaveBeenCalledWith(
-      path.join(process.cwd(), "public", "documentation", "white-papers", "sample.pdf"),
+      path.join(process.cwd(), "public", "resources", "white-papers", "sample.pdf"),
     );
   });
 
@@ -63,7 +63,7 @@ describe("GET /api/downloads/file", () => {
 
   it("PDF가 아니면 400을 반환한다", async () => {
     const request = new Request(
-      "http://localhost/api/downloads/file?src=/documentation/white-papers/sample.png&fileName=sample.png",
+      "http://localhost/api/downloads/file?src=/resources/white-papers/sample.png&fileName=sample.png",
     );
     const response = await GET(request);
 

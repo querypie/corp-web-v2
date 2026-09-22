@@ -91,7 +91,7 @@ function parseView(url: string) {
 }
 
 function isManagedContentSection(value: unknown): value is ManagedContentSection {
-  return value === "demo" || value === "documentation" || value === "news";
+  return value === "demo" || value === "resources" || value === "news";
 }
 
 function isManagedContentCategorySlug(value: unknown): value is ManagedContentCategorySlug {
@@ -282,15 +282,15 @@ function revalidateAdminPaths(item: Pick<ManagedContentEntry, "section" | "categ
 
 function revalidatePublicPaths(item: Pick<ManagedContentEntry, "section" | "categorySlug" | "id">) {
   for (const locale of locales) {
-    if (item.section === "documentation") {
+    if (item.section === "resources") {
       const detailHref = getPublicDetailHref(item.section, locale, item.id, item.categorySlug);
       revalidatePath(getPublicListHref(item.section, locale));
       revalidatePath(getPublicListHref(item.section, locale, item.categorySlug));
       revalidatePath(detailHref);
       revalidatePath(`${detailHref}/download`);
-      revalidatePath(getLocalePath(locale, "/features/documentation"));
-      revalidatePath(getLocalePath(locale, `/features/documentation/${item.id}`));
-      revalidatePath(getLocalePath(locale, `/features/documentation/${item.id}/download`));
+      revalidatePath(getLocalePath(locale, "/features/resources"));
+      revalidatePath(getLocalePath(locale, `/features/resources/${item.id}`));
+      revalidatePath(getLocalePath(locale, `/features/resources/${item.id}/download`));
       continue;
     }
 

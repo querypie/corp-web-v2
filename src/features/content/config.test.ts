@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getAdminSectionMenuItems, getDocumentationSidebarMenuItems } from "./config";
+import { getAdminSectionMenuItems, getResourcesSidebarMenuItems } from "./config";
 
 describe("getAdminSectionMenuItems", () => {
   it("Demo CMS 메뉴에는 AIP/ACP Use Cases만 노출한다", () => {
@@ -10,10 +10,10 @@ describe("getAdminSectionMenuItems", () => {
   });
 });
 
-describe("getDocumentationSidebarMenuItems", () => {
-  it("blogs 활성 상태에서 Documentation CMS 카테고리 메뉴를 반환한다", () => {
-    expect(getDocumentationSidebarMenuItems("ko", "blogs")).toEqual([
-      { href: "/ko/documentation", isActive: false, kind: "link", label: "전체", slug: "all" },
+describe("getResourcesSidebarMenuItems", () => {
+  it("blogs 활성 상태에서 Resources CMS 카테고리 메뉴를 반환한다", () => {
+    expect(getResourcesSidebarMenuItems("ko", "blogs")).toEqual([
+      { href: "/ko/resources", isActive: false, kind: "link", label: "전체", slug: "all" },
       {
         href: "/ko/introduction-deck",
         isActive: false,
@@ -66,9 +66,9 @@ describe("getDocumentationSidebarMenuItems", () => {
     ]);
   });
 
-  it("white-papers 활성 상태에서 Documentation CMS 카테고리 메뉴를 반환한다", () => {
-    expect(getDocumentationSidebarMenuItems("en", "white-papers")).toEqual([
-      { href: "/en/documentation", isActive: false, kind: "link", label: "All", slug: "all" },
+  it("white-papers 활성 상태에서 Resources CMS 카테고리 메뉴를 반환한다", () => {
+    expect(getResourcesSidebarMenuItems("en", "white-papers")).toEqual([
+      { href: "/en/resources", isActive: false, kind: "link", label: "All", slug: "all" },
       {
         href: "/en/introduction-deck",
         isActive: false,
@@ -121,9 +121,9 @@ describe("getDocumentationSidebarMenuItems", () => {
     ]);
   });
 
-  it("공개 게시물이 있는 Documentation 카테고리만 메뉴에 노출한다", () => {
-    expect(getDocumentationSidebarMenuItems("ko", "all", ["blogs", "events"])).toEqual([
-      { href: "/ko/documentation", isActive: true, kind: "link", label: "전체", slug: "all" },
+  it("공개 게시물이 있는 Resources 카테고리만 메뉴에 노출한다", () => {
+    expect(getResourcesSidebarMenuItems("ko", "all", ["blogs", "events"])).toEqual([
+      { href: "/ko/resources", isActive: true, kind: "link", label: "전체", slug: "all" },
       {
         href: "/ko/blog",
         isActive: false,

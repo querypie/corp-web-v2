@@ -25,7 +25,7 @@ export async function createSiteSitemap(
   const [origin, demoItems, docsItems, newsItems] = await Promise.all([
     getRequestSiteOrigin(),
     readContentState("demo", { includeBodies: false }),
-    readContentState("documentation", { includeBodies: false }),
+    readContentState("resources", { includeBodies: false }),
     readContentState("news", { includeBodies: false }),
   ]);
 
@@ -34,7 +34,9 @@ export async function createSiteSitemap(
     ...perLocale("/demo", origin, sitemapLocales),
     ...perLocale("/demo/aip", origin, sitemapLocales),
     ...perLocale("/demo/acp", origin, sitemapLocales),
-    ...perLocale("/documentation", origin, sitemapLocales),
+    ...sitemapLocales.map((locale) => ({
+      url: absolute(getPublicListHref("resources", locale), origin),
+    })),
     ...perLocale("/introduction-deck", origin, sitemapLocales),
     ...perLocale("/glossary", origin, sitemapLocales),
     ...perLocale("/manuals", origin, sitemapLocales),
@@ -68,7 +70,7 @@ export async function createSiteSitemap(
     docsItems
       .filter((item) => isPublishedContentVisible(item, locale) && item.contentType !== "outlink")
       .map((item) => ({
-        url: absolute(getPublicDetailHref("documentation", locale, item.id, item.categorySlug), origin),
+        url: absolute(getPublicDetailHref("resources", locale, item.id, item.categorySlug), origin),
         lastModified: item.dateIso || undefined,
       })),
   );

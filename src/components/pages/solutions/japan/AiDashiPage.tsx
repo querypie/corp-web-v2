@@ -61,7 +61,7 @@ const steps = [
 
 export default function AiDashiPage() {
   const contactHref = getLocalePath("ja", "/company/contact-us");
-  const whitepaperHref = getPublicDetailHref("documentation", "ja", "saas-end-or-evolution", "white-papers");
+  const whitepaperHref = getPublicDetailHref("resources", "ja", "saas-end-or-evolution", "white-papers");
 
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
@@ -125,7 +125,7 @@ export default function AiDashiPage() {
         description="AIエージェントがSaaSビジネスに与える影響と、SaaS企業が取るべき戦略、AI Native企業への変革の視点をまとめました。"
         href={whitepaperHref}
         imageAlt="SaaSの終焉か、進化か ホワイトペーパー"
-        imageSrc="/documentation/white-papers/thumbnail-26.webp"
+        imageSrc="/resources/white-papers/thumbnail-26.webp"
         title="SaaSの終焉か、進化か"
       />
 

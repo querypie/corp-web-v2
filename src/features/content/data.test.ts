@@ -202,12 +202,12 @@ describe("getAdminCreateHref", () => {
     expect(getAdminCreateHref("demo", "aip-features")).toBe("/admin/demo/aip-features/new");
   });
 
-  it("documentation 전체 목록에서는 blogs 작성 경로를 기본값으로 사용한다", () => {
-    expect(getAdminCreateHref("documentation", "all")).toBe("/admin/documentation/blogs/new");
+  it("resources 전체 목록에서는 blogs 작성 경로를 기본값으로 사용한다", () => {
+    expect(getAdminCreateHref("resources", "all")).toBe("/admin/resources/blogs/new");
   });
 
-  it("documentation 카테고리별 작성 경로를 반환한다", () => {
-    expect(getAdminCreateHref("documentation", "white-papers")).toBe("/admin/documentation/white-papers/new");
+  it("resources 카테고리별 작성 경로를 반환한다", () => {
+    expect(getAdminCreateHref("resources", "white-papers")).toBe("/admin/resources/white-papers/new");
   });
 });
 

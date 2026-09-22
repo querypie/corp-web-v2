@@ -51,8 +51,8 @@ export async function POST(request: Request) {
   }
 
   const uploadsDir =
-    section === "documentation"
-      ? path.join(process.cwd(), "public", "documentation", categorySlug)
+    section === "resources"
+      ? path.join(process.cwd(), "public", "resources", categorySlug)
       : path.join(process.cwd(), "public", "demo", categorySlug);
   const baseName = sanitizeBaseName(file.name);
   const bytes = Buffer.from(await file.arrayBuffer());

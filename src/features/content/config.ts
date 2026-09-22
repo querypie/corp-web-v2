@@ -74,42 +74,42 @@ export const demoCategoryConfigs: CategoryConfig<DemoCategorySlug>[] = [
 
 export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
   {
-    href: (locale) => getPublicCategoryHref("documentation", locale, "all"),
+    href: (locale) => getPublicCategoryHref("resources", locale, "all"),
     label: { en: "All", ko: "전체", ja: "すべて" },
     slug: "all",
   },
   {
-    href: (locale) => getPublicCategoryHref("documentation", locale, "introduction"),
+    href: (locale) => getPublicCategoryHref("resources", locale, "introduction"),
     label: { en: "Introduction Decks", ko: "제품 소개", ja: "製品紹介" },
     slug: "introduction",
   },
   {
-    href: (locale) => getPublicCategoryHref("documentation", locale, "glossary"),
+    href: (locale) => getPublicCategoryHref("resources", locale, "glossary"),
     label: { en: "Glossary", ko: "용어집", ja: "用語集" },
     slug: "glossary",
   },
   {
-    href: (locale) => getPublicCategoryHref("documentation", locale, "manuals"),
+    href: (locale) => getPublicCategoryHref("resources", locale, "manuals"),
     label: { en: "Manuals", ko: "매뉴얼", ja: "マニュアル" },
     slug: "manuals",
   },
   {
-    href: (locale) => getPublicCategoryHref("documentation", locale, "white-papers"),
+    href: (locale) => getPublicCategoryHref("resources", locale, "white-papers"),
     label: { en: "White Papers", ko: "화이트페이퍼", ja: "ホワイトペーパー" },
     slug: "white-papers",
   },
   {
-    href: (locale) => getPublicCategoryHref("documentation", locale, "blogs"),
+    href: (locale) => getPublicCategoryHref("resources", locale, "blogs"),
     label: { en: "Blog", ko: "블로그", ja: "ブログ" },
     slug: "blogs",
   },
   {
-    href: (locale) => getPublicCategoryHref("documentation", locale, "voc"),
+    href: (locale) => getPublicCategoryHref("resources", locale, "voc"),
     label: { en: "VOC", ko: "고객의 목소리", ja: "お客様の声" },
     slug: "voc",
   },
   {
-    href: (locale) => getPublicCategoryHref("documentation", locale, "events"),
+    href: (locale) => getPublicCategoryHref("resources", locale, "events"),
     label: { en: "Events", ko: "이벤트", ja: "イベント" },
     slug: "events",
   },
@@ -142,63 +142,63 @@ const demoAdminCategoryConfigs: AdminCategoryConfig<DemoCategorySlug>[] = [
 const docsAdminCategoryConfigs: AdminCategoryConfig<DocsCategorySlug>[] = [
   {
     description: "문서 콘텐츠 목록과 상세 페이지, 관련 콘텐츠 흐름을 관리합니다.",
-    href: "/admin/documentation",
+    href: "/admin/resources",
     label: "All",
     slug: "all",
-    title: "Documentation",
+    title: "Resources",
   },
   {
     description: "소개 덱 콘텐츠와 노출 순서를 관리합니다.",
-    href: "/admin/documentation/introduction",
+    href: "/admin/resources/introduction",
     label: "Introduction Decks",
     slug: "introduction",
     title: "Introduction Decks",
   },
   {
     description: "용어집 콘텐츠와 게시 노출 상태를 관리합니다.",
-    href: "/admin/documentation/glossary",
+    href: "/admin/resources/glossary",
     label: "Glossary",
     slug: "glossary",
     title: "Glossary",
   },
   {
     description: "매뉴얼 문서와 정렬 순서, 관련 콘텐츠 흐름을 관리합니다.",
-    href: "/admin/documentation/manuals",
+    href: "/admin/resources/manuals",
     label: "Manuals",
     slug: "manuals",
     title: "Manuals",
   },
   {
     description: "화이트페이퍼 문서와 게시 상태, 노출 순서를 관리합니다.",
-    href: "/admin/documentation/white-papers",
+    href: "/admin/resources/white-papers",
     label: "White Papers",
     slug: "white-papers",
     title: "White Papers",
   },
   {
     description: "블로그 문서의 게시 상태와 노출 순서를 관리합니다.",
-    href: "/admin/documentation/blogs",
+    href: "/admin/resources/blogs",
     label: "Blog",
     slug: "blogs",
     title: "Blog",
   },
   {
     description: "Voice of the Customer 콘텐츠의 게시 상태와 노출 순서를 관리합니다.",
-    href: "/admin/documentation/voc",
+    href: "/admin/resources/voc",
     label: "VOC",
     slug: "voc",
     title: "VOC",
   },
   {
     description: "이벤트, 웨비나, 세미나 콘텐츠와 게시 상태를 관리합니다.",
-    href: "/admin/documentation/events",
+    href: "/admin/resources/events",
     label: "Events",
     slug: "events",
     title: "Events",
   },
 ];
 
-function getAdminCategoryConfigs(section: "demo" | "documentation") {
+function getAdminCategoryConfigs(section: "demo" | "resources") {
   return section === "demo" ? demoAdminCategoryConfigs : docsAdminCategoryConfigs;
 }
 
@@ -251,7 +251,7 @@ const docsCmsCategorySlugs: DocsCategorySlug[] = [
   "events",
 ];
 
-export function getDocumentationSidebarMenuItems(
+export function getResourcesSidebarMenuItems(
   locale: Locale,
   activeSlug: DocsCategorySlug,
   visibleCategorySlugs?: readonly DocsCategorySlug[],
@@ -270,7 +270,7 @@ export function getDocumentationSidebarMenuItems(
   );
 }
 
-export function getAdminSectionMenuItems(section: "demo" | "documentation") {
+export function getAdminSectionMenuItems(section: "demo" | "resources") {
   return getAdminCategoryConfigs(section)
     .filter((item) => section !== "demo" || item.slug !== "all")
     .map(({ href, label, slug }) => ({
@@ -285,11 +285,11 @@ export function getAdminCategoryPageMeta(
   categorySlug: DemoCategorySlug,
 ): Pick<AdminCategoryConfig<DemoCategorySlug>, "description" | "title">;
 export function getAdminCategoryPageMeta(
-  section: "documentation",
+  section: "resources",
   categorySlug: DocsCategorySlug,
 ): Pick<AdminCategoryConfig<DocsCategorySlug>, "description" | "title">;
 export function getAdminCategoryPageMeta(
-  section: "demo" | "documentation",
+  section: "demo" | "resources",
   categorySlug: DemoCategorySlug | DocsCategorySlug,
 ) {
   const config = getAdminCategoryConfigs(section).find((item) => item.slug === categorySlug);
@@ -305,11 +305,11 @@ export function isAdminSectionCategory(
   categorySlug: string,
 ): categorySlug is DemoCategorySlug;
 export function isAdminSectionCategory(
-  section: "documentation",
+  section: "resources",
   categorySlug: string,
 ): categorySlug is DocsCategorySlug;
 export function isAdminSectionCategory(
-  section: "demo" | "documentation",
+  section: "demo" | "resources",
   categorySlug: string,
 ) {
   return getAdminCategoryConfigs(section).some((item) => item.slug === categorySlug);

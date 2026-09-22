@@ -29,13 +29,13 @@ export function getDemoPageCopy(locale: Locale): ContentListPageCopy {
   }[locale];
 }
 
-export function getDocumentationPageCopy(locale: Locale): ContentListPageCopy {
+export function getResourcesPageCopy(locale: Locale): ContentListPageCopy {
   return {
     en: {
       metadataDescription:
         "Read QueryPie AI documentation, guides, white papers, blogs, events, manuals, and product resources.",
-      metadataTitle: "Resource",
-      title: "Resource",
+      metadataTitle: "Resources",
+      title: "Resources",
     },
     ko: {
       metadataDescription:

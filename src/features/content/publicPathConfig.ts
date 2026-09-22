@@ -4,8 +4,8 @@ export const publicCategoryPaths = {
     "aip-features": "/demo/aip",
     "acp-features": "/demo/acp",
   },
-  documentation: {
-    all: "/documentation",
+  resources: {
+    all: "/resources",
     introduction: "/introduction-deck",
     glossary: "/glossary",
     manuals: "/manuals",

@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import DemoDetailPage from "./DemoDetailPage";
 import type { Locale } from "@/constants/i18n";
-import type { DocsDetailPageProps } from "../documentation/DocumentationDetailPage";
-import ContentGateOverlay from "../documentation/ContentGateOverlay";
-import ContentLeadForm from "../documentation/ContentLeadForm";
+import type { DocsDetailPageProps } from "../resources/ResourcesDetailPage";
+import ContentGateOverlay from "../resources/ContentGateOverlay";
+import ContentLeadForm from "../resources/ContentLeadForm";
 import { useManagedContents } from "@/features/content/clientStore";
 import type { ContactPageCopy } from "@/copy/contact";
 import useHydrated from "@/hooks/useHydrated";

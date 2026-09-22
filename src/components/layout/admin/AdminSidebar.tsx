@@ -147,13 +147,13 @@ export default function AdminSidebar({
                 .filter(
                   (item) =>
                     item.href !== "/admin/demo" &&
-                    item.href !== "/admin/documentation",
+                    item.href !== "/admin/resources",
                 )
                 .map((item) => {
                 const isActive =
                   pathname === item.href ||
                   (item.href !== "/admin/demo" &&
-                    item.href !== "/admin/documentation" &&
+                    item.href !== "/admin/resources" &&
                     pathname.startsWith(`${item.href}/`));
 
                 return (

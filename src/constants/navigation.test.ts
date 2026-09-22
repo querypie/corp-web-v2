@@ -52,23 +52,23 @@ describe("getDemoSubItems", () => {
 });
 
 describe("getFeaturesSubItems", () => {
-  it("Features 메뉴를 Demo / Documentation 목록 경로로 연결한다", () => {
+  it("Features 메뉴를 Demo / Resources 목록 경로로 연결한다", () => {
     expect(getFeaturesSubItems("en")).toEqual([
       { label: "Demo", href: "/en/demo" },
-      { label: "Documentation", href: "/en/documentation" },
+      { label: "Resources", href: "/en/resources" },
     ]);
   });
 
   it("locale별 prefix를 붙인다", () => {
     expect(getFeaturesSubItems("ko")).toEqual([
       { label: "데모", href: "/ko/demo" },
-      { label: "문서", href: "/ko/documentation" },
+      { label: "리소스", href: "/ko/resources" },
     ]);
   });
 });
 
 describe("getResourcesSubItems", () => {
-  it("Resources 메뉴를 CMS documentation 경로로 연결한다", () => {
+  it("Resources 메뉴를 CMS resources 경로로 연결한다", () => {
     expect(getResourcesSubItems("en")).toEqual([
       { label: "Introduction Decks", href: "/en/introduction-deck" },
       { label: "Glossary", href: "/en/glossary" },

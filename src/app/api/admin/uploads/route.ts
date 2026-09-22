@@ -8,14 +8,14 @@ import sharp from "sharp";
 const UPLOAD_DIR_PATHS = {
   uploads: path.join(process.cwd(), "public", "uploads"),
   news: path.join(process.cwd(), "public", "news"),
-  documentation: path.join(process.cwd(), "public", "documentation"),
-  "documentation/blogs": path.join(process.cwd(), "public", "documentation", "blogs"),
-  "documentation/voc": path.join(process.cwd(), "public", "documentation", "voc"),
-  "documentation/events": path.join(process.cwd(), "public", "documentation", "events"),
-  "documentation/white-papers": path.join(process.cwd(), "public", "documentation", "white-papers"),
-  "documentation/glossary": path.join(process.cwd(), "public", "documentation", "glossary"),
-  "documentation/manuals": path.join(process.cwd(), "public", "documentation", "manuals"),
-  "documentation/introduction": path.join(process.cwd(), "public", "documentation", "introduction"),
+  resources: path.join(process.cwd(), "public", "resources"),
+  "resources/blogs": path.join(process.cwd(), "public", "resources", "blogs"),
+  "resources/voc": path.join(process.cwd(), "public", "resources", "voc"),
+  "resources/events": path.join(process.cwd(), "public", "resources", "events"),
+  "resources/white-papers": path.join(process.cwd(), "public", "resources", "white-papers"),
+  "resources/glossary": path.join(process.cwd(), "public", "resources", "glossary"),
+  "resources/manuals": path.join(process.cwd(), "public", "resources", "manuals"),
+  "resources/introduction": path.join(process.cwd(), "public", "resources", "introduction"),
   demo: path.join(process.cwd(), "public", "demo"),
   "demo/aip-features": path.join(process.cwd(), "public", "demo", "aip-features"),
   "demo/acp-features": path.join(process.cwd(), "public", "demo", "acp-features"),
@@ -203,15 +203,15 @@ function resolveUploadDirName(section: string | null, categorySlug: string | nul
     return "news";
   }
 
-  if (section === "documentation") {
-    if (categorySlug === "blogs") return "documentation/blogs";
-    if (categorySlug === "voc") return "documentation/voc";
-    if (categorySlug === "events") return "documentation/events";
-    if (categorySlug === "white-papers") return "documentation/white-papers";
-    if (categorySlug === "glossary") return "documentation/glossary";
-    if (categorySlug === "manuals") return "documentation/manuals";
-    if (categorySlug === "introduction") return "documentation/introduction";
-    return "documentation";
+  if (section === "resources") {
+    if (categorySlug === "blogs") return "resources/blogs";
+    if (categorySlug === "voc") return "resources/voc";
+    if (categorySlug === "events") return "resources/events";
+    if (categorySlug === "white-papers") return "resources/white-papers";
+    if (categorySlug === "glossary") return "resources/glossary";
+    if (categorySlug === "manuals") return "resources/manuals";
+    if (categorySlug === "introduction") return "resources/introduction";
+    return "resources";
   }
 
   if (section === "demo") {

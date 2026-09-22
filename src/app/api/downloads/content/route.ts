@@ -40,7 +40,7 @@ type DownloadLeadPayload = {
 };
 
 function isDownloadSection(section: unknown): section is Exclude<ManagedContentSection, "news"> {
-  return section === "demo" || section === "documentation";
+  return section === "demo" || section === "resources";
 }
 
 function isLeadMode(mode: unknown): mode is NonNullable<DownloadLeadPayload["mode"]> {
@@ -69,7 +69,7 @@ function isFallbackDownloadablePdfSrc(section: ManagedContentSection | undefined
     return isDownloadableContentPdfSrc(section, src);
   }
 
-  return isDownloadableContentPdfSrc("documentation", src) || isDownloadableContentPdfSrc("demo", src);
+  return isDownloadableContentPdfSrc("resources", src) || isDownloadableContentPdfSrc("demo", src);
 }
 
 function hasValidMXRecord(domain: string): Promise<boolean> {
@@ -106,7 +106,7 @@ function getStringArrayField(form: Record<string, unknown>, key: string) {
 }
 
 function getLeadNotificationSource(section: ManagedContentSection | undefined, categorySlug?: string) {
-  if (section === "documentation") {
+  if (section === "resources") {
     if (categorySlug === "white-papers") return "whitepapers";
     if (categorySlug === "introduction") return "introduction-deck";
     if (categorySlug === "blogs") return "blog";

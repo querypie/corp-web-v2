@@ -1,0 +1,61 @@
+{
+  "authorName": "David",
+  "authorRole": "Software Engineer",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "/resources/white-papers/wp-thumb-6.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "50",
+  "hideHeroImage": false,
+  "id": "kubernetes-access-control",
+  "imageSrc": "/resources/white-papers/thumbnail-30.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 25,
+  "status": "published",
+  "storageId": "cnt_000146",
+  "summary": {
+    "en": "QueryPie ensures secure Kubernetes access control for improved cloud cluster management and operational security.",
+    "ko": "안전한 Kubernetes 접근 제어를 통해 클라우드 클러스터 관리와 운영 보안을 강화하는 방법을 알아보세요.",
+    "ja": "QueryPie は、クラウドクラスタ管理と運用セキュリティを強化するために、安全な Kubernetes アクセス制御を保証します。"
+  },
+  "title": {
+    "en": "Access Control for Secure Operation of Kubernetes Clusters",
+    "ko": "Kubernetes 클러스터의 안전한 운영을 위한 접근 제어",
+    "ja": "Kubernetesクラスターの安全な運用のためのアクセス制御"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/resources/white-papers/cnt_000146/en.html",
+      "jsonPath": "src/content/resources/white-papers/cnt_000146/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/resources/white-papers/cnt_000146/ko.html",
+      "jsonPath": "src/content/resources/white-papers/cnt_000146/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/white-papers/cnt_000146/ja.html",
+      "jsonPath": "src/content/resources/white-papers/cnt_000146/ja.tiptap.json"
+    }
+  }
+}
