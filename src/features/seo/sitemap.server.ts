@@ -50,7 +50,9 @@ export async function createSiteSitemap(
     ...perLocale("/apps/slack", origin, sitemapLocales),
     ...perLocale("/plans/aip", origin, sitemapLocales),
     ...perLocale("/plans/acp", origin, sitemapLocales),
-    { url: absolute(getSolutionHref("ja", "as400-cobol"), origin) },
+    ...(sitemapLocales.includes("ja")
+      ? [{ url: absolute(getSolutionHref("ja", "as400-cobol"), origin) }]
+      : []),
   ];
 
   const demoEntries = sitemapLocales.flatMap((locale) =>

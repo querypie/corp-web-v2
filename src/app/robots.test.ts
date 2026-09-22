@@ -18,9 +18,9 @@ describe("robots sitemap", () => {
     });
   });
 
-  it("사이트 종류에 맞는 분리된 sitemap URL을 제공한다", async () => {
+  it("모든 사이트에서 현재 host의 canonical sitemap URL을 제공한다", async () => {
     expect((await robots()).sitemap)
-      .toBe("https://www.querypie.com/sitemaps/multilingual/sitemap.xml");
+      .toBe("https://www.querypie.com/sitemap.xml");
 
     requestHeaders.current = new Headers({
       host: "stage-v2.querypie.ai",
@@ -28,6 +28,6 @@ describe("robots sitemap", () => {
     });
 
     expect((await robots()).sitemap)
-      .toBe("https://stage-v2.querypie.ai/sitemaps/japanese/sitemap.xml");
+      .toBe("https://stage-v2.querypie.ai/sitemap.xml");
   });
 });
