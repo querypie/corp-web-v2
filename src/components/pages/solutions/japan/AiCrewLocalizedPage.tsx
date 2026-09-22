@@ -20,7 +20,7 @@ export default function AiCrewLocalizedPage({ locale }: { locale: Exclude<Locale
   const copy = getAiCrewCopy(locale);
   if (!copy) return null;
 
-  const contactHref = getLocalePath(locale, "/company/contact-us");
+  const contactHref = getLocalePath(locale, "/contact-us");
   const demoHref = getLocalePath(locale, "/demo/aip");
   const whitepaperHref = getPublicDetailHref("resources", locale, "ai-transformation-japan", "white-papers");
   const [heroTitleBefore, heroTitleAfter] = copy.hero.title[1].split("AI Crew");

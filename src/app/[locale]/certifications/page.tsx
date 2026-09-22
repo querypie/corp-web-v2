@@ -35,7 +35,7 @@ export async function generateMetadata({ params }: CertificationsRouteProps): Pr
     title,
     description,
     alternates: {
-      canonical: getLocalePath(locale, "/company/certifications"),
+      canonical: getLocalePath(locale, "/certifications"),
     },
   }, { locale, title, description });
 }

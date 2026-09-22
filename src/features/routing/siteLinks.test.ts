@@ -9,7 +9,7 @@ describe("사이트 도메인 유지", () => {
   });
 
   it("글로벌 본문의 일본 절대 URL도 현재 언어로 바꾼다", () => {
-    expect(getSameSiteHref("https://www.querypie.ai/ja/company/about-us", "ko")).toBe("/ko/company/about-us");
+    expect(getSameSiteHref("https://www.querypie.ai/ja/about-us", "ko")).toBe("/ko/about-us");
     expect(getSameSiteHref("//querypie.ai/ja", "en")).toBe("/en");
   });
 

@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: metadataTitle,
     description: formDescription,
     alternates: {
-      canonical: getLocalePath(locale, "/company/contact-us"),
+      canonical: getLocalePath(locale, "/contact-us"),
     },
   }, { locale, title: metadataTitle, description: formDescription });
 }

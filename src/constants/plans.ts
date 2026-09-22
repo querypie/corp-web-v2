@@ -75,7 +75,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "Enterprise power unleashed",
           priceLabel: "Let's Talk",
-          href: "/company/contact-us",
+          href: "/contact-us",
           ctaLabel: "Try Now",
           tone: "primary",
           features: [
@@ -405,7 +405,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Standard",
           description: "Offered exclusively to users who are satisfied with the Community edition; billed annually",
           priceLabel: "$50/mo/user",
-          href: "/company/contact-us",
+          href: "/contact-us",
           ctaLabel: "Contact Us",
           features: [
             "At least 10 users",
@@ -426,7 +426,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "Recommended for teams seeking professional deployment support and services",
           priceLabel: "Let's Talk",
-          href: "/company/contact-us",
+          href: "/contact-us",
           ctaLabel: "Contact Us",
           tone: "primary",
           features: [
@@ -563,7 +563,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "대규모 조직을 위한 맞춤 플랜",
           priceLabel: "별도 문의",
-          href: "/company/contact-us",
+          href: "/contact-us",
           ctaLabel: "지금 시작하기",
           tone: "primary",
           features: [
@@ -732,7 +732,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "전문적인 도입 지원과 서비스를 원하는 팀에 추천합니다",
           priceLabel: "별도 문의",
-          href: "/company/contact-us",
+          href: "/contact-us",
           ctaLabel: "문의하기",
           tone: "primary",
           features: [

@@ -125,7 +125,7 @@ function ContentSection({ section, shaded }: { section: As400CobolSection; shade
 }
 
 export default function As400CobolPage() {
-  const contactHref = getLocalePath("ja", "/company/contact-us");
+  const contactHref = getLocalePath("ja", "/contact-us");
 
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>

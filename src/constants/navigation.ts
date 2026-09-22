@@ -176,10 +176,10 @@ export function getCompanySubItems(locale: string): NavigationSubItem[] {
   }[locale] ?? ["About Us", "Certifications", "News", "Contact Us"];
 
   return [
-    { label: copy[0], href: getLocalePath(locale as Locale, "/company/about-us") },
-    { label: copy[1], href: getLocalePath(locale as Locale, "/company/certifications") },
+    { label: copy[0], href: getLocalePath(locale as Locale, "/about-us") },
+    { label: copy[1], href: getLocalePath(locale as Locale, "/certifications") },
     { label: copy[2], href: getPublicCategoryHref("news", locale as Locale, "news") },
-    { label: copy[3], href: getLocalePath(locale as Locale, "/company/contact-us") },
+    { label: copy[3], href: getLocalePath(locale as Locale, "/contact-us") },
   ];
 }
 
@@ -283,11 +283,11 @@ export function getFooterHref(item: string, locale: string) {
   }
 
   if (item === "About Us" || item === "회사 소개" || item === "会社概要") {
-    return getLocalePath(locale as Locale, "/company/about-us");
+    return getLocalePath(locale as Locale, "/about-us");
   }
 
   if (item === "Certifications" || item === "인증" || item === "認証") {
-    return getLocalePath(locale as Locale, "/company/certifications");
+    return getLocalePath(locale as Locale, "/certifications");
   }
 
   if (item === "Demo" || item === "데모" || item === "デモ") {
@@ -295,7 +295,7 @@ export function getFooterHref(item: string, locale: string) {
   }
 
   if (item === "Contact Us" || item === "문의하기" || item === "お問い合わせ") {
-    return getLocalePath(locale as Locale, "/company/contact-us");
+    return getLocalePath(locale as Locale, "/contact-us");
   }
 
   if (item === "News" || item === "뉴스" || item === "ニュース") {
