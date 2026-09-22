@@ -11,7 +11,7 @@ describe("admin i18n", () => {
     expect(translateAdminCopy("ko", "Demo")).toBe("데모");
     expect(translateAdminCopy("ko", "AIP Use Cases")).toBe("AIP 활용");
     expect(translateAdminCopy("ko", "ACP Use Cases")).toBe("ACP 활용");
-    expect(translateAdminCopy("ko", "Documentation")).toBe("자료");
+    expect(translateAdminCopy("ko", "Resources")).toBe("자료");
     expect(translateAdminCopy("ko", "White Papers")).toBe("화이트페이퍼");
     expect(translateAdminCopy("ko", "VOC")).toBe("고객의 목소리");
     expect(translateAdminCopy("ko", "Content operations")).toBe("콘텐츠 운영");
@@ -24,7 +24,7 @@ describe("admin i18n", () => {
     expect(translateAdminCopy("ja", "Demo")).toBe("デモ");
     expect(translateAdminCopy("ja", "AIP Use Cases")).toBe("AIP機能");
     expect(translateAdminCopy("ja", "ACP Use Cases")).toBe("ACP機能");
-    expect(translateAdminCopy("ja", "Documentation")).toBe("リソース");
+    expect(translateAdminCopy("ja", "Resources")).toBe("リソース");
     expect(translateAdminCopy("ja", "Vercel Web Analytics")).toBe("Vercelウェブアナリティクス");
   });
 

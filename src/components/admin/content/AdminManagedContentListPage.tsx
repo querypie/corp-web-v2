@@ -537,8 +537,8 @@ export default function AdminManagedContentListPage({
     categorySlug === "all"
       ? section === "demo"
         ? "Demo"
-        : section === "documentation"
-          ? "Documentation"
+        : section === "resources"
+          ? "Resources"
           : "News"
       : getManagedCategoryLabel(section, categorySlug, "en");
 

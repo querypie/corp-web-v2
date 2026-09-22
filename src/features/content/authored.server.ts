@@ -227,8 +227,8 @@ function normalizeBodyHtmlForSave(richText: string, html: string, locale: Locale
 }
 
 function getAuthoredSectionRoot(section: ManagedContentSection) {
-  if (section === "documentation") {
-    return path.join(contentRoot, "documentation");
+  if (section === "resources") {
+    return path.join(contentRoot, "resources");
   }
 
   return path.join(contentRoot, section);
@@ -395,7 +395,7 @@ async function readAuthoredMetaFilesUncached() {
   }
 
   await Promise.all(
-    (["demo", "documentation", "news"] as const).map((section) =>
+    (["demo", "resources", "news"] as const).map((section) =>
       walk(getAuthoredSectionRoot(section)),
     ),
   );
@@ -619,7 +619,7 @@ export async function readAuthoredManagedContents(options?: { includeBodies?: bo
 
 async function readAuthoredManagedContentsUncached(includeBodies: boolean) {
   await Promise.all(
-    (["demo", "documentation", "news"] as const).map((section) =>
+    (["demo", "resources", "news"] as const).map((section) =>
       ensureDir(getAuthoredSectionRoot(section)),
     ),
   );

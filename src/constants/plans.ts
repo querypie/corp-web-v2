@@ -1,3 +1,4 @@
+import { publicCategoryPaths } from "@/features/content/publicPathConfig";
 import type { Locale } from "./i18n";
 
 export type PlanCard = {
@@ -810,7 +811,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Business",
           description: "チームでの協働作業に最適",
           priceLabel: "$650/月",
-          href: "/documentation",
+          href: publicCategoryPaths.resources.all,
           ctaLabel: "利用を開始する",
           features: [
             "月間20,000クレジット",
@@ -833,7 +834,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "大規模組織向けの包括的プラン",
           priceLabel: "個別見積もり",
-          href: "/documentation",
+          href: publicCategoryPaths.resources.all,
           ctaLabel: "今すぐ試す",
           tone: "primary",
           features: [
@@ -964,7 +965,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "コミュニティ",
           description: "同じ品質のCommunity版の無料ライセンスをダウンロードして取得",
           priceLabel: "$0/月",
-          href: "/documentation",
+          href: publicCategoryPaths.resources.all,
           ctaLabel: "今すぐダウンロード",
           features: [
             "最大5ユーザーまで利用可能",
@@ -981,7 +982,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "スタンダード",
           description: "コミュニティ版にご満足の利用者に限定して提供。年間契約のみ。",
           priceLabel: "$50/人・月",
-          href: "/documentation",
+          href: publicCategoryPaths.resources.all,
           ctaLabel: "お問い合わせ",
           features: [
             "10ユーザー以上",
@@ -1002,7 +1003,7 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
           name: "Enterprise",
           description: "プロフェッショナルな導入サポートとサービスを求めるチームにおすすめ",
           priceLabel: "個別見積もり",
-          href: "/documentation",
+          href: publicCategoryPaths.resources.all,
           ctaLabel: "お問い合わせ",
           tone: "primary",
           features: [

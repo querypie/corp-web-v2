@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import DocumentationDetailRoute, { generateMetadata as generateDocumentationMetadata } from "@/app/[locale]/features/documentation/[slug]/page";
+import ResourcesDetailRoute, { generateMetadata as generateResourcesMetadata } from "@/app/[locale]/features/resources/[slug]/page";
 import { readContentItem } from "@/features/content/contentState.server";
 
 type Props = {
@@ -10,7 +10,7 @@ const categorySlug = "events";
 
 async function getCurrentItem({ params }: Props) {
   const { slug } = await params;
-  return readContentItem("documentation", decodeURIComponent(slug), { includeBodies: false });
+  return readContentItem("resources", decodeURIComponent(slug), { includeBodies: false });
 }
 
 export default async function EventsDetailPage(props: Props) {
@@ -20,7 +20,7 @@ export default async function EventsDetailPage(props: Props) {
     notFound();
   }
 
-  return DocumentationDetailRoute(props);
+  return ResourcesDetailRoute(props);
 }
 
 export async function generateMetadata(props: Props) {
@@ -30,5 +30,5 @@ export async function generateMetadata(props: Props) {
     return {};
   }
 
-  return generateDocumentationMetadata(props);
+  return generateResourcesMetadata(props);
 }

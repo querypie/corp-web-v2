@@ -21,7 +21,7 @@ export const adminNavGroups: AdminNavGroup[] = [
     items: getAdminSectionMenuItems("demo"),
   },
   {
-    label: "Documentation",
-    items: getAdminSectionMenuItems("documentation"),
+    label: "Resources",
+    items: getAdminSectionMenuItems("resources"),
   },
 ];

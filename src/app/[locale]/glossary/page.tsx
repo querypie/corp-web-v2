@@ -1,4 +1,4 @@
-import DocumentationPage, { generateMetadata as generateDocumentationMetadata } from "@/app/[locale]/features/documentation/page";
+import ResourcesPage, { generateMetadata as generateResourcesMetadata } from "@/app/[locale]/features/resources/page";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -7,9 +7,9 @@ type Props = {
 const searchParams = Promise.resolve({ category: "glossary" });
 
 export default function GlossaryPage({ params }: Props) {
-  return DocumentationPage({ params, searchParams });
+  return ResourcesPage({ params, searchParams });
 }
 
 export function generateMetadata({ params }: Props) {
-  return generateDocumentationMetadata({ params, searchParams });
+  return generateResourcesMetadata({ params, searchParams });
 }

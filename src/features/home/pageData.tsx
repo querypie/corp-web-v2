@@ -99,7 +99,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
       isExternal?: boolean;
       title: string;
     }> = visiblePublishedItems
-      .filter((item) => item.section === "demo" || item.section === "documentation")
+      .filter((item) => item.section === "demo" || item.section === "resources")
       .map((item) => {
         const title = getLocalizedContent(item.title, locale);
         const isExternal = item.contentType === "outlink" && Boolean(item.externalUrl.trim());
@@ -128,8 +128,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         label: locale === "ko" ? "데모" : locale === "ja" ? "デモ" : "Demo",
       },
       {
-        href: getPublicListHref("documentation", locale),
-        label: locale === "ko" ? "다큐멘테이션" : locale === "ja" ? "ドキュメンテーション" : "Documentation",
+        href: getPublicListHref("resources", locale),
+        label: locale === "ko" ? "다큐멘테이션" : locale === "ja" ? "ドキュメンテーション" : "Resources",
       },
     ];
 
@@ -144,7 +144,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         heroImageAlt: "QueryPie AI workspace preview",
         clientCaption: "Trusted every day by teams that build world-class software",
         contentListDescription:
-          "Explore the latest demos and documentation for building governed AI workflows and secure enterprise access.",
+          "Explore the latest demos and resources for building governed AI workflows and secure enterprise access.",
         contentListItems,
         contentListLinks,
         contentListTitle: "QueryPie Resources",
@@ -262,7 +262,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         newsTitle: "Lastest News",
         footerSections: [
           { title: "Solutions", items: ["AI Platform (AIP)", "Access Control Platform (ACP)"] },
-          { title: "Features", items: ["Demo", "Documentation"] },
+          { title: "Features", items: ["Demo", "Resources"] },
           { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us", "Plans"] },
         ],
         legal: ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"],

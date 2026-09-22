@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import ContentDownloadPage from "@/components/pages/documentation/ContentDownloadPage";
+import ContentDownloadPage from "@/components/pages/resources/ContentDownloadPage";
 import { isLocale } from "@/constants/i18n";
 import { getContactPageCopy } from "@/copy/contact";
 import {

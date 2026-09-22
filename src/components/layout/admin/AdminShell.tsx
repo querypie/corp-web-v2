@@ -170,7 +170,7 @@ function AdminShellContent({ children }: { children: ReactNode }) {
                     .filter(
                       (item) =>
                         item.href !== "/admin/demo" &&
-                        item.href !== "/admin/documentation",
+                        item.href !== "/admin/resources",
                     )
                     .map((item) => (
                       <button

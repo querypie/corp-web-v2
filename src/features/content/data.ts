@@ -8,7 +8,7 @@ import {
 } from "./config";
 import { getPublicCategoryHref } from "./publicPaths";
 
-export type ManagedContentSection = "demo" | "documentation" | "news";
+export type ManagedContentSection = "demo" | "resources" | "news";
 export type ManagedContentStatus = "hidden" | "published";
 export type ManagedContentCategorySlug = Exclude<DemoCategorySlug | DocsCategorySlug, "all"> | NewsCategorySlug;
 export type ManagedContentType = "content" | "outlink";
@@ -466,8 +466,8 @@ export function isDownloadableContentPdfSrc(
 ) {
   const trimmedSrc = src.trim();
   const expectedPrefix =
-    section === "documentation"
-      ? "/documentation/"
+    section === "resources"
+      ? "/resources/"
       : section === "demo"
         ? "/demo/"
         : "";
@@ -540,9 +540,9 @@ export function getPublicListHref(
     );
   }
 
-  if (section === "documentation") {
+  if (section === "resources") {
     return getPublicCategoryHref(
-      "documentation",
+      "resources",
       locale,
       categorySlug && categorySlug !== "news" ? categorySlug as DocsCategorySlug : "all",
     );
@@ -562,7 +562,7 @@ export function getPublicDetailHref(
     return `${listHref}/${slug}`;
   }
 
-  if (section === "documentation") {
+  if (section === "resources") {
     const listHref = getPublicListHref(section, locale, categorySlug);
     return `${listHref}/${slug}`;
   }

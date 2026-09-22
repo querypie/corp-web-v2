@@ -218,10 +218,10 @@ describe("saveAuthoredContent", () => {
     await saveAuthoredContent({
       ...existing,
       categorySlug: "blogs",
-      section: "documentation",
+      section: "resources",
     });
 
-    const nextEntryDir = path.join(tempDir, "src", "content", "documentation", "blogs", "cnt_000001");
+    const nextEntryDir = path.join(tempDir, "src", "content", "resources", "blogs", "cnt_000001");
 
     await expect(fs.access(oldEntryDir)).rejects.toThrow();
     await expect(fs.access(path.join(nextEntryDir, "meta.json"))).resolves.toBeUndefined();
@@ -233,7 +233,7 @@ describe("saveAuthoredContent", () => {
     };
     expect(meta).toMatchObject({
       categorySlug: "blogs",
-      section: "documentation",
+      section: "resources",
       storageId: "cnt_000001",
     });
   });

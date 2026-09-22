@@ -2,7 +2,7 @@
 
 import NewsDetailPage from "./NewsDetailPage";
 import { type Locale } from "@/constants/i18n";
-import type { DocsDetailPageProps } from "../documentation/DocumentationDetailPage";
+import type { DocsDetailPageProps } from "../resources/ResourcesDetailPage";
 import { useManagedContents } from "@/features/content/clientStore";
 import {
   formatPublicDate,

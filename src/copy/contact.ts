@@ -1,4 +1,5 @@
-import { getLocalePath, type Locale } from "@/constants/i18n";
+import { getPublicListHref } from "@/features/content/data";
+import type { Locale } from "@/constants/i18n";
 
 export type ContactLink = {
   href: string;
@@ -110,9 +111,9 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       errorGeneral: "Failed to submit the form. Please try again later.",
       privacyText: "QueryPie values your privacy. Please check out our",
       privacyTermsLabel: "Terms",
-      privacyTermsHref: getLocalePath("en", "/documentation"),
+      privacyTermsHref: getPublicListHref("resources", "en"),
       privacyPolicyLabel: "Privacy Policy",
-      privacyPolicyHref: getLocalePath("en", "/documentation"),
+      privacyPolicyHref: getPublicListHref("resources", "en"),
       submitLabel: "Proceed",
       successTitle: "Submission Complete",
       successDescription: "Thank you for your application!\nOur team will review it and get back to you shortly.",
@@ -181,9 +182,9 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       errorGeneral: "폼 제출에 실패했습니다. 다시 시도해 주세요.",
       privacyText: "QueryPie는 고객의 개인정보를 중요하게 생각합니다. 자세한 내용은",
       privacyTermsLabel: "이용약관",
-      privacyTermsHref: getLocalePath("ko", "/documentation"),
+      privacyTermsHref: getPublicListHref("resources", "ko"),
       privacyPolicyLabel: "개인정보처리방침",
-      privacyPolicyHref: getLocalePath("ko", "/documentation"),
+      privacyPolicyHref: getPublicListHref("resources", "ko"),
       submitLabel: "Proceed",
       successTitle: "제출이 완료되었습니다.",
       successDescription: "문의해 주셔서 감사합니다!\n담당자가 검토 후 빠르게 연락드리겠습니다.",
@@ -254,9 +255,9 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       errorGeneral: "フォームの送信に失敗しました。もう一度お試しください。",
       privacyText: "QueryPie はお客様のプライバシーを尊重します。詳しくは",
       privacyTermsLabel: "利用規約",
-      privacyTermsHref: getLocalePath("ja", "/documentation"),
+      privacyTermsHref: getPublicListHref("resources", "ja"),
       privacyPolicyLabel: "プライバシーポリシー",
-      privacyPolicyHref: getLocalePath("ja", "/documentation"),
+      privacyPolicyHref: getPublicListHref("resources", "ja"),
       submitLabel: "送信する",
       successTitle: "送信が完了しました。",
       successDescription: "お問い合わせいただきありがとうございます。\n担当者が確認後、速やかにご連絡いたします。",

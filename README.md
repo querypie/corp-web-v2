@@ -5,8 +5,8 @@
 - QueryPie 회사 홍보·소개 웹사이트
 - Next.js App Router 기반 다국어 사이트
 - 지원 locale: `en`, `ko`, `ja`
-- 주요 공개 영역: Product, Features, Demo, Documentation, Company, Plans, Legal
-- Admin CMS: Demo / Documentation / News 콘텐츠 편집·게시
+- 주요 공개 영역: Product, Features, Demo, Resources, Company, Plans, Legal
+- Admin CMS: Demo / Resources / News 콘텐츠 편집·게시
 
 ---
 
@@ -44,7 +44,7 @@ src/
 │   ├── admin/          # Admin 전용 화면 컴포넌트
 │   └── pages/          # 공개 페이지 조립 컴포넌트
 ├── features/           # content, seo, contact 등 도메인 로직
-├── content/            # demo, documentation, news, legal 콘텐츠
+├── content/            # demo, resources, news, legal 콘텐츠
 ├── constants/          # i18n, navigation, plans, legal 등
 ├── public/assets/      # 이미지, mockup asset 등 정적 리소스
 └── styles/             # 전역 스타일
@@ -56,7 +56,7 @@ src/
 
 Admin 진입점: `/admin`
 
-관리형 콘텐츠는 `src/content/{demo,documentation,news}/**/cnt_xxxxxx/` 아래 파일로 저장됩니다.
+관리형 콘텐츠는 `src/content/{demo,resources,news}/**/cnt_xxxxxx/` 아래 파일로 저장됩니다.
 
 - `meta.json`: 제목, slug, 카테고리, 게시 상태 등 메타데이터
 - `en.html`, `ko.html`, `ja.html`: locale별 본문

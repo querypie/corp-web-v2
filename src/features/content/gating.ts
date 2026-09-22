@@ -24,7 +24,9 @@ export function getContentUnlockCookieName(
   id: string,
   section?: ManagedContentEntry["section"],
 ) {
-  const scopedId = section ? `${section}_${id}` : id;
+  // Preserve existing unlock cookies after the resources section migration.
+  const cookieSection = section === "resources" ? "documentation" : section;
+  const scopedId = cookieSection ? `${cookieSection}_${id}` : id;
   return `${CONTENT_UNLOCK_COOKIE_PREFIX}_${scopedId.replace(/[^a-zA-Z0-9_-]/g, "_")}`;
 }
 

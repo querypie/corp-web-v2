@@ -605,7 +605,7 @@ type PendingImageUpload = {
 
 const LOCALES = ["en", "ko", "ja"] as const;
 const EXTERNAL_IMAGE_PROTOCOLS = new Set(["http:", "https:"]);
-const LOCAL_IMAGE_PATH_PREFIXES = ["/demo/", "/documentation/", "/news/", "/uploads/"];
+const LOCAL_IMAGE_PATH_PREFIXES = ["/demo/", "/resources/", "/news/", "/uploads/"];
 
 function getConfiguredDownloadPdfSrcs(entry: ManagedContentEntry) {
   return [
@@ -1723,7 +1723,7 @@ export default function AdminManagedContentDetailPage({
       configuredDownloadPdfSrcs.some((src) => !isDownloadableContentPdfSrc(section, src)) &&
       !hasPendingPdf
     ) {
-      missing.push("PDF 경로 (/documentation/...pdf 또는 /demo/...pdf)");
+      missing.push("PDF 경로 (/resources/...pdf 또는 /demo/...pdf)");
     }
     if (isOutlinkType) {
       if (!targetForm.summary.en.trim()) missing.push("설명 (EN)");

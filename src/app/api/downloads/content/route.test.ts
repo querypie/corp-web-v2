@@ -56,10 +56,10 @@ afterEach(() => {
 
 const BASE_DOWNLOAD_PAYLOAD = {
   form: { email: "test@example.com", name: "Test User" },
-  attachmentUrl: "/documentation/white-papers/doc.pdf",
+  attachmentUrl: "/resources/white-papers/doc.pdf",
   attachmentFileName: "doc.pdf",
-  returnUrl: "/features/documentation/my-doc",
-  pdfPreviewUrl: "/documentation/white-papers/doc.pdf",
+  returnUrl: "/features/resources/my-doc",
+  pdfPreviewUrl: "/resources/white-papers/doc.pdf",
 };
 
 const BASE_CONTENT_ITEM = {
@@ -70,11 +70,11 @@ const BASE_CONTENT_ITEM = {
   downloadPdfFileName: "server-doc.pdf",
   downloadPdfFileNameByLocale: { en: "", ko: "", ja: "" },
   downloadPdfMode: "single",
-  downloadPdfSrc: "/documentation/white-papers/server-doc.pdf",
+  downloadPdfSrc: "/resources/white-papers/server-doc.pdf",
   downloadPdfSrcByLocale: { en: "", ko: "", ja: "" },
   enableDownloadButton: true,
   id: "server-doc",
-  section: "documentation",
+  section: "resources",
   status: "published",
   title: { en: "Server Doc", ko: "", ja: "" },
   visibleLocales: ["en"],
@@ -168,10 +168,10 @@ describe("POST /api/downloads/content", () => {
         method: "POST",
         body: JSON.stringify({
           ...BASE_DOWNLOAD_PAYLOAD,
-          attachmentUrl: "/documentation/white-papers/client-doc.pdf",
+          attachmentUrl: "/resources/white-papers/client-doc.pdf",
           attachmentFileName: "client-doc.pdf",
           contentId: "server-doc",
-          section: "documentation",
+          section: "resources",
           unlockCookieName: "querypie_content_unlocked_client-doc",
         }),
       });
@@ -198,7 +198,7 @@ describe("POST /api/downloads/content", () => {
         downloadPdfSrcByLocale: {
           en: "",
           ko: "",
-          ja: "/documentation/white-papers/server-doc-ja.pdf",
+          ja: "/resources/white-papers/server-doc-ja.pdf",
         },
       });
 
@@ -208,7 +208,7 @@ describe("POST /api/downloads/content", () => {
           ...BASE_DOWNLOAD_PAYLOAD,
           contentId: "server-doc",
           locale: "ja",
-          section: "documentation",
+          section: "resources",
         }),
       });
       const response = await POST(request);
@@ -216,7 +216,7 @@ describe("POST /api/downloads/content", () => {
 
       expect(response.status).toBe(200);
       expect(data.downloadUrl).toContain("server-doc-ja.pdf");
-      expect(data.previewUrl).toBe("/documentation/white-papers/server-doc-ja.pdf");
+      expect(data.previewUrl).toBe("/resources/white-papers/server-doc-ja.pdf");
     });
 
     it("contentId가 가리키는 콘텐츠가 다운로드 불가이면 404를 반환한다", async () => {
@@ -231,7 +231,7 @@ describe("POST /api/downloads/content", () => {
         body: JSON.stringify({
           ...BASE_DOWNLOAD_PAYLOAD,
           contentId: "server-doc",
-          section: "documentation",
+          section: "resources",
         }),
       });
       const response = await POST(request);
@@ -262,7 +262,7 @@ describe("POST /api/downloads/content", () => {
             products: ["AI Platform QueryPie AIP"],
           },
           mode: "unlock",
-          section: "documentation",
+          section: "resources",
           utmAttribution: encodeURIComponent(JSON.stringify({
             first: { landing: "/ko/whitepapers/server-doc", ts: "2026-01-01T00:00:00.000Z" },
             recent: [{ source: "newsletter", landing: "/ko/whitepapers/server-doc", ts: "2026-01-01T00:00:00.000Z" }],
@@ -319,7 +319,7 @@ describe("POST /api/downloads/content", () => {
           },
           mode: "unlock",
           referrerURL: "https://www.querypie.com/en/whitepapers/test",
-          section: "documentation",
+          section: "resources",
           title: "Test Whitepaper",
           utmAttribution,
         }),

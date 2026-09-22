@@ -18,7 +18,7 @@ export default function AiCrewWhitepaperSection({
   description,
   href,
   imageAlt,
-  imageSrc = "/documentation/white-papers/thumbnail-25.webp",
+  imageSrc = "/resources/white-papers/thumbnail-25.webp",
   title,
 }: Props) {
   return (

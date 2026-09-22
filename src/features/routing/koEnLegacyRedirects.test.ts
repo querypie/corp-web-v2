@@ -65,11 +65,13 @@ describe("Korean and English legacy content redirects", () => {
       (redirect) => redirect.source === "/:locale(en|ko)/:legacyRoot(features|resources)/:legacySection(documentation|discover)/blog/:legacyId/:legacySlug",
     );
     const genericLegacyIndex = redirects.findIndex(
-      (redirect) => redirect.source === "/:locale(en|ko|ja)/blog/:legacyFolder/:slug",
+      (redirect) => redirect.source.startsWith("/:locale(en|ko|ja)/blog/:legacyFolder/:slug")
+        && redirect.destination === "/:locale/blog/:slug",
     );
     const bareLocaleIndex = redirects.findIndex((redirect) => redirect.destination === "/en/:path");
 
     expect(localizedRecoveryIndex).toBeGreaterThanOrEqual(0);
+    expect(genericLegacyIndex).toBeGreaterThanOrEqual(0);
     expect(localizedRecoveryIndex).toBeLessThan(genericLegacyIndex);
     expect(localizedRecoveryIndex).toBeLessThan(bareLocaleIndex);
     expect(redirects.length).toBeLessThan(1_000);

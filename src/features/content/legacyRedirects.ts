@@ -4,41 +4,55 @@ const legacyFolderRedirectBasePaths = [
   ...Object.entries(publicCategoryPaths.demo)
     .filter(([categorySlug]) => categorySlug !== "all")
     .map(([, path]) => path),
-  ...Object.entries(publicCategoryPaths.documentation)
+  ...Object.entries(publicCategoryPaths.resources)
     .filter(([categorySlug]) => categorySlug !== "all")
     .map(([, path]) => path),
   ...Object.values(publicCategoryPaths.news),
 ];
 
-const legacyFolderRedirects = legacyFolderRedirectBasePaths.map((basePath) => ({
-  source: `/:locale(en|ko|ja)${basePath}/:legacyFolder/:slug`,
-  destination: `/:locale${basePath}/:slug`,
-}));
-
-const legacyFolderDownloadRedirects = legacyFolderRedirectBasePaths.flatMap((basePath) => [
-  {
-    source: `/:locale(en|ko|ja)${basePath}/:legacyFolder/:slug/download`,
-    destination: `/:locale${basePath}/:slug/download`,
-  },
-  {
-    source: `/:locale(en|ko|ja)${basePath}/:legacyFolder/:slug/pdf`,
-    destination: `/:locale${basePath}/:slug/download`,
-  },
-]);
+// Redirects run before the Japanese site's locale rewrite. Match both URL forms.
+// Exclude file paths and valid /:slug/download URLs from folder removal.
+const legacySlug = ":slug((?!download(?:/|$)|pdf(?:/|$))[^/.]+)";
+const legacyContentBases = [
+  ...legacyFolderRedirectBasePaths.map((basePath) => ({ source: basePath, destination: basePath })),
+  { source: "/demo/use-cases", destination: publicCategoryPaths.demo["aip-features"] },
+];
+const legacyFolderRedirects = legacyContentBases.flatMap((basePath) =>
+  [
+    { source: "/:locale(en|ko|ja)", destination: "/:locale" },
+    { source: "", destination: "" },
+  ].flatMap((prefix) =>
+    [
+      { source: "", destination: "" },
+      { source: "/download", destination: "/download" },
+      { source: "/pdf", destination: "/download" },
+    ].map((suffix) => ({
+      source: `${prefix.source}${basePath.source}/:legacyFolder/${legacySlug}${suffix.source}`,
+      destination: `${prefix.destination}${basePath.destination}/:slug${suffix.destination}`,
+    })),
+  ),
+);
 
 export const legacyContentRedirects = [
   {
-    source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug",
-    destination: "/:locale/demo/aip/:slug",
+    source: "/admin/documentation/:path*",
+    destination: "/admin/resources/:path*",
   },
   {
-    source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug/download",
-    destination: "/:locale/demo/aip/:slug/download",
+    source: "/:locale(en|ko|ja)/features/documentation/:path*",
+    destination: "/:locale/features/resources/:path*",
   },
   {
-    source: "/:locale(en|ko|ja)/demo/use-cases/:legacyFolder/:slug/pdf",
-    destination: "/:locale/demo/aip/:slug/download",
+    source: "/features/documentation/:path*",
+    destination: "/features/resources/:path*",
+  },
+  {
+    source: "/documentation/:path*",
+    destination: `${publicCategoryPaths.resources.all}/:path*`,
+  },
+  {
+    source: "/:locale(en|ko|ja)/documentation/:path*",
+    destination: `/:locale${publicCategoryPaths.resources.all}/:path*`,
   },
   ...legacyFolderRedirects,
-  ...legacyFolderDownloadRedirects,
 ];

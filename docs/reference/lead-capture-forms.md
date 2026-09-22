@@ -98,7 +98,7 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 라이선�
 |------|------|
 | `src/copy/contact.ts` | 폼 필드 정의 (Contact Us와 공유) |
 | `src/features/content/gating.ts` | 언락 쿠키 상수·유틸 (`CONTENT_UNLOCK_COOKIE_PREFIX`, `getContentUnlockCookieName`) |
-| `src/components/pages/documentation/ContentLeadForm.tsx` | Client Component — 폼 상태 관리, submit 핸들러 |
+| `src/components/pages/resources/ContentLeadForm.tsx` | Client Component — 폼 상태 관리, submit 핸들러 |
 | `src/app/api/downloads/content/route.ts` | `POST /api/downloads/content` 핸들러 |
 | `src/features/deskpie/lead.ts` | Contact Us/Gating 공용 DeskPie Lead sender |
 

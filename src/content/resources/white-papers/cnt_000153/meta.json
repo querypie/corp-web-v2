@@ -1,0 +1,61 @@
+{
+  "authorName": "Zac",
+  "authorRole": "Software Engineer",
+  "categorySlug": "white-papers",
+  "contentType": "content",
+  "dateIso": "2024-11-22",
+  "downloadCoverImageSrc": "/resources/white-papers/wp-thumb-8.webp",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "50",
+  "hideHeroImage": false,
+  "id": "secure-login-token-management",
+  "imageSrc": "/resources/white-papers/thumbnail-13.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 23,
+  "status": "published",
+  "storageId": "cnt_000153",
+  "summary": {
+    "en": "Secure user authentication with QueryPie's login token management, enhancing frontend security and data protection.",
+    "ko": "쿼리파이의 로그인 토큰 관리로 사용자 인증을 안전하게 처리하며, 프론트엔드 보안과 데이터 보호를 강화하는 방법을 소개합니다.",
+    "ja": "QueryPieのログイントークン管理による安全なユーザー認証により、フロントエンドのセキュリティとデータ保護が強化されます。"
+  },
+  "title": {
+    "en": "Secure Login Token Management: An Essential Frontend Strategy",
+    "ko": "안전한 로그인 토큰 관리, 프론트엔드의 필수 전략",
+    "ja": "安全なログイントークン管理、フロントエンドの必須戦略"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/resources/white-papers/cnt_000153/en.html",
+      "jsonPath": "src/content/resources/white-papers/cnt_000153/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/resources/white-papers/cnt_000153/ko.html",
+      "jsonPath": "src/content/resources/white-papers/cnt_000153/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/white-papers/cnt_000153/ja.html",
+      "jsonPath": "src/content/resources/white-papers/cnt_000153/ja.tiptap.json"
+    }
+  }
+}

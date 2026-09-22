@@ -16,6 +16,11 @@ apex, 한 단계 서브도메인, 다단계 서브도메인에 모두 같은 규
 일본어 전용 사이트의 locale 없는 공개 경로는 주소를 바꾸지 않고 내부 `/ja` 경로로 rewrite합니다.
 locale prefix가 들어온 일본어 사이트 URL은 같은 호스트의 prefix 없는 경로로 정규화합니다.
 
+콘텐츠의 이전 폴더형 URL(예: `/blog/27/shadow-ai-risk-cxo-countermeasures`)은
+locale prefix 유무와 관계없이 폴더를 제거한 URL로 308 redirect합니다.
+데모·리소스의 모든 카테고리와 뉴스에 적용하며, 이전 `/pdf` 경로는 `/download`로 연결합니다.
+이 규칙은 일본어 `/ja` rewrite보다 먼저 적용해야 하며, 정상 다운로드 URL과 정적 파일은 제외합니다.
+
 다국어 사이트의 공개 URL은 locale prefix를 사용합니다.
 루트 언어는 저장된 선택과 브라우저 언어를 기준으로 결정합니다.
 
