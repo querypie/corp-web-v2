@@ -32,16 +32,17 @@
   "summary": {
     "en": "A technical account of multilingual sensitive-data detection: dataset design, lightweight risk screening, precise extraction, the correction of character-offset errors, and comparative model evaluation.",
     "ko": "한국어·영어·일본어 민감정보 탐지 모델의 데이터 구성, 경량 분류와 정밀 추출의 역할 분리, 위치 오류를 줄이기 위한 출력 구조 변경과 평가 결과를 설명합니다.",
-    "ja": ""
+    "ja": "韓国語・英語・日本語の機密情報検知モデルにおけるデータ構成、軽量分類と高精度抽出の役割分担、位置ずれを減らす出力構造の変更、評価結果について解説します。"
   },
   "title": {
     "en": "Design and Evaluation of DLP AI Models for Multilingual Sensitive Data Detection",
     "ko": "다국어 민감정보 탐지를 위한 DLP AI 모델 설계와 평가",
-    "ja": ""
+    "ja": "多言語の機密情報検知に向けたDLP AIモデルの設計と評価"
   },
   "visibleLocales": [
     "en",
-    "ko"
+    "ko",
+    "ja"
   ],
   "locales": {
     "en": {
@@ -51,6 +52,10 @@
     "ko": {
       "htmlPath": "src/content/resources/white-papers/cnt_000225/ko.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000225/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/white-papers/cnt_000225/ja.html",
+      "jsonPath": "src/content/resources/white-papers/cnt_000225/ja.tiptap.json"
     }
   }
 }
