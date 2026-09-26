@@ -1,0 +1,24 @@
+{
+  "type": "doc",
+  "content": [
+    {"type":"paragraph","content":[{"type":"text","marks":[{"type":"bold"}],"text":"NIPAの先端GPU支援事業の成果――多言語DLPモデルを公開し、UEBA研究を具体化"}]},
+    {"type":"paragraph","content":[{"type":"text","text":"QueryPieは、韓国情報通信産業振興院（NIPA）が主導する先端GPU支援事業の計算資源を活用して学習した多言語DLP（Data Loss Prevention）"},{"type":"text","marks":[{"type":"link","attrs":{"href":"https://huggingface.co/querypieai","target":"_blank","rel":"noopener noreferrer"}}],"text":"AIモデルをHugging Faceで公開した"},{"type":"text","text":"。韓国語・英語・日本語の機密情報データを精製・拡張し、複数のモデルを繰り返し学習・比較することで、企業のAI活用環境に必要な検知技術を具体化した成果である。"}]},
+    {"type":"paragraph","content":[{"type":"text","text":"韓国企業のセキュリティ担当者との最近の議論で共通課題として挙がったのが、DLPとUEBAである。AIエージェントやMCPベースのツールの利用が広がる中、外部AIへ送信されるデータから機密情報を見つけて保護することと、急増するアクティビティログから通常と異なる行動を選別することが同時に重要になっている。現場では、"},{"type":"text","marks":[{"type":"bold"}],"text":"どのデータを保護するか"},{"type":"text","text":"を識別するDLPと、"},{"type":"text","marks":[{"type":"bold"}],"text":"どの行動を優先して確認するか"},{"type":"text","text":"を判断するUEBAをともに強化したいというニーズが明確になった。"}]},
+    {"type":"paragraph","content":[{"type":"text","text":"DLPでは、業務文書、会話、コード、AIプロンプトに含まれる機密情報を文脈の中で見つける必要がある。UEBAでは、急増するアクティビティログを時間の流れと業務文脈に沿って解釈しなければならない。すべての入力を大規模AIモデルで分析すると、推論コストと常時稼働のGPU基盤が負担になる。専用GPUを持たない企業でも利用できるよう、大量の入力を軽量に選別し、必要な対象だけを高精度に分析する構造が求められる。"}]},
+    {"type":"paragraph","content":[{"type":"text","text":"QueryPieは、この課題をSLMベースのデータ保護を担うDLPと、行動リスク検知を担うUEBAという2つの研究開発軸として具体化している。"}]},
+    {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"機密情報を迅速に選別し、該当フレーズまで正確に特定するDLP"}]},
+    {"type":"paragraph","content":[{"type":"text","text":"DLPの前段では、正規表現による検査とELECTRAベースの軽量モデルが、大量の入力から機密情報リスクを迅速に選別する。CPU環境でも利用できる韓国語軽量モデルは、社内評価で精度約92％、再現率約97％、F1約94％を記録し、平均応答時間は約17.3msだった。韓国語に加えて英語と日本語のモデルも学習・評価し、多言語の業務環境に対応する基盤を整えた。"}]},
+    {"type":"paragraph","content":[{"type":"text","text":"Gemma系12Bの高精度小規模言語モデル（SLM）は、機密情報の種類と原文中の該当フレーズを抽出する。モデルが見つけたフレーズの位置は、別プログラムが原文と照合して算出するよう役割を分担した。NIPA支援GPUを用いて多言語データを学習し、候補モデルを比較した結果、この高精度モデルは社内総合評価で最高となる92.64点を記録した。"}]},
+    {"type":"paragraph","content":[{"type":"text","text":"企業の現場では、機密性の高い原文を外部AIへそのまま送信せずに、情報間の関係や業務文脈を維持したいという動的DLPへのニーズも確認された。QueryPieは、高精度SLMが機密情報の種類と原文フレーズを特定し、プログラムが正確な位置を算出した結果を企業ごとの保護ポリシーに連携する方向で開発を進めている。動的DLPのロードマップには、外部送信のブロック、画面上での機密情報の強調表示・マスキング、ユーザーへの警告と管理者レビュー、セキュリティシステムへの通知など、リスクとポリシーに応じた後続措置が含まれる。"}]},
+    {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"分散したログを行動の流れとして判断するUEBA"}]},
+    {"type":"paragraph","content":[{"type":"text","text":"AIエージェントやMCPベースのツールが監査対象に加わると、企業が確認すべきログは大幅に増加する。顧客企業との議論でも、すべての記録を人が直接読んだり、汎用AIへ送ったりするのではなく、重要な行動を先に選別してセキュリティ担当者が確認できるようにしてほしいという要望が強かった。"}]},
+    {"type":"paragraph","content":[{"type":"text","text":"QueryPieが研究開発中のUEBA（User and Entity Behavior Analytics）は、個別のログ1行ではなく、ユーザーと端末の活動を時系列にまとめて判断することに重点を置く。アクセス時刻や場所、アクセス対象、データ使用量など、単独では通常に見える記録を組み合わせ、業務文脈と連続した事象をもとにリスクと判断根拠を提示するモデル構造を開発している。"}]},
+    {"type":"paragraph","content":[{"type":"text","text":"UEBAも、すべてのログを高コストな汎用モデルへ渡すのではなく、重要なシグナルを先に絞り込む構造を目指す。顧客企業ごとに異なるログ形式とセキュリティ基準を反映できるよう、入力形式を標準化し、組織ごとの勤務時間やアクセスポリシーなどの文脈を判断に組み込む方法を研究している。軽量SLMを中心に推論コストを抑え、CPU中心の企業環境でも適用範囲を広げることが目標である。"}]},
+    {"type":"paragraph","content":[{"type":"text","text":"QueryPieは、NIPA主導の先端GPU支援事業による多言語DLPモデルの学習・公開成果を基盤に、企業の現場で必要性が確認されたUEBAの研究開発も具体化し、AI活用プロセスにおけるデータと行動の両方を捉える技術基盤を拡充している。"}]},
+    {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"モデルおよびダウンロード情報"}]},
+    {"type":"bulletList","content":[
+      {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"QueryPie Hugging Face: "},{"type":"text","marks":[{"type":"link","attrs":{"href":"https://huggingface.co/querypieai","target":"_blank","rel":"noopener noreferrer"}}],"text":"https://huggingface.co/querypieai"}]}]},
+      {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"How to Download from Hugging Face: "},{"type":"text","marks":[{"type":"link","attrs":{"href":"https://youtu.be/uNi4kYGPPUA","target":"_blank","rel":"noopener noreferrer"}}],"text":"https://youtu.be/uNi4kYGPPUA"}]}]}
+    ]}
+  ]
+}
