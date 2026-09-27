@@ -19,6 +19,8 @@
     {"type":"bulletList","content":[
       {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"QueryPie Hugging Face: "},{"type":"text","marks":[{"type":"link","attrs":{"href":"https://huggingface.co/querypieai","target":"_blank","rel":"noopener noreferrer"}}],"text":"https://huggingface.co/querypieai"}]}]},
       {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"How to Download from Hugging Face: "},{"type":"text","marks":[{"type":"link","attrs":{"href":"https://youtu.be/uNi4kYGPPUA","target":"_blank","rel":"noopener noreferrer"}}],"text":"https://youtu.be/uNi4kYGPPUA"}]}]}
-    ]}
+    ]},
+    {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"DLP 데모"}]},
+    {"type":"bulletList","content":[{"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"link","attrs":{"href":"/ko/platforms/dlp/demo","target":"_blank","rel":"noopener noreferrer"}}],"text":"QueryPie DLP 탐지 데모 바로가기"}]}]}]}
   ]
 }
