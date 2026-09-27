@@ -33,3 +33,7 @@ export function getPlatformHref(locale: Locale, id: PlatformEntry["id"]): string
 
   return getLocalePath(locale, `/platforms/${entry.slug.join("/")}`);
 }
+
+export function getDlpPlatformHref(locale: Locale): string {
+  return getLocalePath(locale, "/platforms/dlp");
+}

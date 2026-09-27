@@ -24,6 +24,17 @@ describe("플랫폼과 일본 전용 솔루션", () => {
     }
   });
 
+  it.each([
+    ["en", "Data Loss Prevention (DLP)"],
+    ["ko", "데이터 손실 방지 (DLP)"],
+    ["ja", "データ損失防止 (DLP)"],
+  ])("%s Preview 메뉴에는 DLP 제품 소개를 추가한다", (locale, label) => {
+    const items = getPlatformSubItems(locale, { includeDlpPlatform: true });
+
+    expect(items.at(-1)).toEqual({ label, href: `/${locale}/platforms/dlp` });
+    expect(getFooterHref(label, locale)).toBe(`/${locale}/platforms/dlp`);
+  });
+
   it("솔루션은 일본어에만 세 메뉴를 표시한다", () => {
     expect(getSolutionsSubItems("en")).toEqual([]);
     expect(getSolutionsSubItems("ko")).toEqual([]);
@@ -127,6 +138,16 @@ describe("getShellMenuCopy", () => {
       { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
       { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ"] },
     ]);
+  });
+
+  it("Preview 푸터의 플랫폼 섹션에만 DLP를 포함한다", () => {
+    const publicPlatformSection = getShellMenuCopy("en").footerSections[0];
+    const previewPlatformSection = getShellMenuCopy("en", {
+      includeDlpPlatform: true,
+    }).footerSections[0];
+
+    expect(publicPlatformSection.items).not.toContain("Data Loss Prevention (DLP)");
+    expect(previewPlatformSection.items).toContain("Data Loss Prevention (DLP)");
   });
 });
 

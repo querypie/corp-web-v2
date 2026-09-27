@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getPlatformHref, getPlatformEntryById, getPlatformEntryBySlug, platformEntries } from "./routes";
+import { getDlpPlatformHref, getPlatformHref, getPlatformEntryById, getPlatformEntryBySlug, platformEntries } from "./routes";
 
 describe("platform routes", () => {
   it("locale별 canonical URL을 유지한다", () => {
@@ -10,6 +10,7 @@ describe("platform routes", () => {
     expect(getPlatformHref("en", "aip-integrations")).toBe("/en/platforms/aip/integrations");
     expect(getPlatformHref("ja", "acp")).toBe("/ja/platforms/acp");
     expect(getPlatformHref("ko", "acp-integrations")).toBe("/ko/platforms/acp/integrations");
+    expect(getDlpPlatformHref("en")).toBe("/en/platforms/dlp");
   });
 
   it("등록된 경로를 ID와 slug로 조회한다", () => {
