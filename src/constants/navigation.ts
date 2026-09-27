@@ -83,16 +83,15 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
 
 export function getPlatformSubItems(locale: string): NavigationSubItem[] {
   const copy = {
-    en: ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services", "Data Loss Prevention (DLP)"],
-    ko: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "FDE 서비스", "데이터 손실 방지 (DLP)"],
-    ja: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "FDEサービス", "データ損失防止 (DLP)"],
-  }[locale] ?? ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services", "Data Loss Prevention (DLP)"];
+    en: ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services"],
+    ko: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "FDE 서비스"],
+    ja: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "FDEサービス"],
+  }[locale] ?? ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services"];
 
   return [
     { label: copy[0], href: getPlatformHref(locale as Locale, "aip") },
     { label: copy[1], href: getPlatformHref(locale as Locale, "acp") },
     { label: copy[2], href: getPlatformHref(locale as Locale, "fde-services") },
-    { label: copy[3], href: getPlatformHref(locale as Locale, "dlp") },
   ];
 }
 
@@ -217,10 +216,6 @@ export function getPrimaryNavHref(item: string, locale: string) {
 export function getFooterHref(item: string, locale: string) {
   if (item === "FDE Services" || item === "FDE 서비스" || item === "FDEサービス") {
     return getPlatformHref(locale as Locale, "fde-services");
-  }
-
-  if (item === "Data Loss Prevention (DLP)" || item === "데이터 손실 방지 (DLP)" || item === "データ損失防止 (DLP)") {
-    return getPlatformHref(locale as Locale, "dlp");
   }
 
   if (item === "AIP") {
