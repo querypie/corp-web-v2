@@ -13,12 +13,11 @@ import {
 } from "./navigation";
 
 describe("플랫폼과 일본 전용 솔루션", () => {
-  it.each(["en", "ko", "ja"])("%s 플랫폼은 AIP, ACP, FDE, DLP 순서로 연결한다", (locale) => {
+  it.each(["en", "ko", "ja"])("%s 플랫폼은 AIP, ACP, FDE 순서로 연결한다", (locale) => {
     expect(getPlatformSubItems(locale).map((item) => item.href)).toEqual([
       `/${locale}/platforms/aip`,
       `/${locale}/platforms/acp`,
       `/${locale}/platforms/aip/fde-services`,
-      `/${locale}/platforms/dlp`,
     ]);
     for (const item of getPlatformSubItems(locale)) {
       expect(getFooterHref(item.label, locale)).toBe(item.href);
@@ -115,14 +114,14 @@ describe("getShellMenuCopy", () => {
 
   it("푸터 메뉴를 locale별로 반환한다", () => {
     expect(getShellMenuCopy("ko").footerSections).toEqual([
-      { title: "플랫폼", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "FDE 서비스", "데이터 손실 방지 (DLP)"] },
+      { title: "플랫폼", items: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "FDE 서비스"] },
       { title: "데모", items: ["AIP 활용", "ACP 활용"] },
       { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: ["AIP", "ACP"] },
     ]);
     expect(getShellMenuCopy("ja").footerSections).toEqual([
-      { title: "プラットフォーム", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "FDEサービス", "データ損失防止 (DLP)"] },
+      { title: "プラットフォーム", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "FDEサービス"] },
       { title: "ソリューション", items: ["社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi", "AS/400・COBOLモダナイゼーション"] },
       { title: "デモ", items: ["AIP機能", "ACP機能"] },
       { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
@@ -155,7 +154,6 @@ describe("getFooterHref", () => {
   it("footer solutions 링크도 canonical solutions 경로를 사용한다", () => {
     expect(getFooterHref("AI Platform (AIP)", "en")).toBe("/en/platforms/aip");
     expect(getFooterHref("접근 제어 플랫폼 (ACP)", "ko")).toBe("/ko/platforms/acp");
-    expect(getFooterHref("데이터 손실 방지 (DLP)", "ko")).toBe("/ko/platforms/dlp");
     expect(getFooterHref("AIプラットフォーム (AIP)", "ja")).toBe("/ja/platforms/aip");
     expect(getFooterHref("社内業務効率化｜AI Crew", "ja")).toBe("/ja/solutions/ai-crew");
     expect(getFooterHref("自社サービスAI化｜AI Dashi", "ja")).toBe("/ja/solutions/ai-dashi");

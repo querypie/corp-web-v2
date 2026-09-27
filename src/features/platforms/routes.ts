@@ -1,7 +1,7 @@
 import { getLocalePath, type Locale } from "@/constants/i18n";
 
 export type PlatformEntry = {
-  id: "aip" | "acp" | "dlp" | "usage-based-llm" | "mcp-gateway" | "fde-services" | "aip-integrations" | "acp-integrations";
+  id: "aip" | "acp" | "usage-based-llm" | "mcp-gateway" | "fde-services" | "aip-integrations" | "acp-integrations";
   locales?: Locale[];
   slug: string[];
 };
@@ -14,7 +14,6 @@ export const platformEntries: PlatformEntry[] = [
   { id: "aip-integrations", slug: ["aip", "integrations"] },
   { id: "acp", slug: ["acp"] },
   { id: "acp-integrations", slug: ["acp", "integrations"] },
-  { id: "dlp", slug: ["dlp"] },
 ];
 
 export function getPlatformEntryById(id: PlatformEntry["id"]): PlatformEntry | null {
