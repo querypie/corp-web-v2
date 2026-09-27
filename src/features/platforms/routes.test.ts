@@ -10,10 +10,11 @@ describe("platform routes", () => {
     expect(getPlatformHref("en", "aip-integrations")).toBe("/en/platforms/aip/integrations");
     expect(getPlatformHref("ja", "acp")).toBe("/ja/platforms/acp");
     expect(getPlatformHref("ko", "acp-integrations")).toBe("/ko/platforms/acp/integrations");
+    expect(getPlatformHref("en", "dlp")).toBe("/en/platforms/dlp");
   });
 
   it("등록된 경로를 ID와 slug로 조회한다", () => {
-    expect(platformEntries).toHaveLength(7);
+    expect(platformEntries).toHaveLength(8);
     for (const entry of platformEntries) {
       expect(getPlatformEntryById(entry.id)).toEqual(entry);
       expect(getPlatformEntryBySlug(entry.slug)).toEqual(entry);

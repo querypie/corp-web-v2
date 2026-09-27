@@ -30,6 +30,11 @@ import Content6KO, { metadata as Metadata6KO } from "@/components/pages/platform
 import Content6JA, { metadata as Metadata6JA } from "@/components/pages/platforms/acp/content.ja";
 import { generateMetadata as g7 } from "./acp/integrations/page";
 import Page7 from "./acp/integrations/page";
+import { generateMetadata as g8 } from "./dlp/page";
+import Page8 from "./dlp/page";
+import Content8EN, { metadata as Metadata8EN } from "@/components/pages/platforms/dlp/content.en";
+import Content8KO, { metadata as Metadata8KO } from "@/components/pages/platforms/dlp/content.ko";
+import Content8JA, { metadata as Metadata8JA } from "@/components/pages/platforms/dlp/content.ja";
 
 vi.mock("next/headers", () => ({
   headers: async () => new Headers({ host: "www.querypie.com" }),
@@ -73,6 +78,12 @@ const routeModules = {
   "acp-integrations": {
     page: Page7,
     generateMetadata: g7,
+  },
+  "dlp": {
+    page: Page8,
+    generateMetadata: g8,
+    content: { en: Content8EN, ko: Content8KO, ja: Content8JA },
+    metadata: { en: Metadata8EN, ko: Metadata8KO, ja: Metadata8JA },
   },
 } as const;
 

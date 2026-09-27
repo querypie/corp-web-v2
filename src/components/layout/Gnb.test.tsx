@@ -18,7 +18,7 @@ describe("Gnb", () => {
     ]);
     const platform = within(nav).getByRole("button", { name: "プラットフォーム" }).parentElement!;
     expect(within(platform).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      "/ja/platforms/aip", "/ja/platforms/acp", "/ja/platforms/aip/fde-services",
+      "/ja/platforms/aip", "/ja/platforms/acp", "/ja/platforms/aip/fde-services", "/ja/platforms/dlp",
     ]);
     const solutions = within(nav).getByRole("button", { name: "ソリューション" }).parentElement!;
     expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
@@ -26,6 +26,7 @@ describe("Gnb", () => {
     ]);
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
     expect(screen.getAllByRole("link", { name: "FDEサービス" })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "データ損失防止 (DLP)" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "AS/400・COBOLモダナイゼーション" })).toHaveLength(2);
   });
 
