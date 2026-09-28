@@ -32,10 +32,6 @@ export default function DlpKOSolutionContent({ locale }: Props) {
             body: "한국어·영어·일본어 업무 문장과 코드, 표기 변형 사례를 반영해 21개 민감정보 유형을 정리했습니다. 내부 평가에서 한국어 경량 모델은 약 17.3ms의 평균 응답 시간과 약 94% F1을 기록했습니다.",
           },
         ],
-        demoDescription:
-          "이중 스크롤 없이 다국어 민감정보 탐지 데모를 전용 전체 화면으로 실행할 수 있습니다.",
-        demoLaunchLabel: "전체 화면 데모 실행",
-        demoTitle: "DLP 탐지 데모 바로 사용하기",
         description:
           "생성형 AI를 업무에 활용할수록 대화, 문서, 코드, 프롬프트에 섞인 민감정보를 맥락 속에서 찾아야 합니다. QueryPie는 빠른 위험 선별과 정확한 원문 문구 추출을 분리한 다국어 DLP 연구로, 필요한 입력에만 정밀 분석을 적용하는 구조를 설계했습니다.",
         featureBody:
@@ -44,6 +40,10 @@ export default function DlpKOSolutionContent({ locale }: Props) {
         featureImageSrc: "/resources/white-papers/dlp-detection-architecture-ko.png",
         featureTitle: "빠른 위험 선별과 정밀 원문 추출을 함께 설계합니다.",
         heading: "데이터 손실 방지",
+        huggingFaceDescription:
+          "QueryPie가 공개한 다국어 민감정보 탐지 모델과 모델 카드, 사용 자료를 Hugging Face에서 확인하고 활용할 수 있습니다.",
+        huggingFaceLabel: "Hugging Face 바로가기",
+        huggingFaceTitle: "Hugging Face에서 DLP 모델 사용하기",
         label: "QueryPie DLP Research",
         tutorialTitle: "DLP 데모 영상",
       }}

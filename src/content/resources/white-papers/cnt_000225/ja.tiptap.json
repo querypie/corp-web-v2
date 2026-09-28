@@ -30,7 +30,10 @@
     {"type":"heading","attrs":{"level":1},"content":[{"type":"text","text":"結論"}]},
     {"type":"paragraph","content":[{"type":"text","text":"多言語DLPモデル開発の要点は3つです。実際の業務文と表記変形の事例を反映した学習データ、迅速なリスク選別と機密情報フレーズ抽出の役割分担、生成モデルが誤りやすい文字位置のプログラム処理です。この設計により、種類・フレーズの抽出性能を高め、原文位置の正確性を確保しました。"}]},
     {"type":"paragraph","content":[{"type":"text","text":"リスク判定構造では、ルールとCPUベースの軽量モデルで入力を先に選別し、グレーゾーンだけを追加判定します。別系統の高精度抽出では、Gemmaが機密情報の種類と原文フレーズを特定し、プログラムが正確な位置を算出します。次の開発段階は、検知結果を企業ごとのポリシーへ連携する動的DLPです。外部送信のブロック、画面上での強調表示・マスキング、ユーザーへの警告と管理者レビュー、セキュリティシステムへの通知へつながるポリシー実行体系を構築し、データ保護の範囲を拡大します。"}]},
-    {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"DLPデモ"}]},
-    {"type":"bulletList","content":[{"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","marks":[{"type":"link","attrs":{"href":"/ja/platforms/dlp/demo","target":"_blank","rel":"noopener noreferrer"}}],"text":"QueryPie DLP検出デモを試す"}]}]}]}
+    {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"モデルおよびダウンロード情報"}]},
+    {"type":"bulletList","content":[
+      {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"QueryPie Hugging Face: "},{"type":"text","marks":[{"type":"link","attrs":{"href":"https://huggingface.co/querypieai","target":"_blank","rel":"noopener noreferrer"}}],"text":"https://huggingface.co/querypieai"}]}]},
+      {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Hugging Faceからのダウンロード方法: "},{"type":"text","marks":[{"type":"link","attrs":{"href":"https://youtu.be/uNi4kYGPPUA","target":"_blank","rel":"noopener noreferrer"}}],"text":"https://youtu.be/uNi4kYGPPUA"}]}]}
+    ]}
   ]
 }

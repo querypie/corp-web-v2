@@ -6,15 +6,15 @@ import { Play } from "lucide-react";
 
 export type DlpCopy = {
   benefitItems: Array<{ body: string; title: string }>;
-  demoDescription: string;
-  demoLaunchLabel: string;
-  demoTitle: string;
   description: string;
   featureBody: string;
   featureImageAlt: string;
   featureImageSrc: string;
   featureTitle: string;
   heading: string;
+  huggingFaceDescription: string;
+  huggingFaceLabel: string;
+  huggingFaceTitle: string;
   label: string;
   tutorialTitle: string;
 };
@@ -65,17 +65,19 @@ export default function DlpSolutionContent({ copy, locale }: Props) {
         <div className="w-full max-w-[1600px]">
           <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between md:gap-6">
             <div>
-              <h2 className="m-0 type-h2 text-fg">{copy.demoTitle}</h2>
+              <h2 className="m-0 type-h2 text-fg">{copy.huggingFaceTitle}</h2>
               <p className="mb-0 mt-2 max-w-[760px] type-body-md leading-relaxed text-mute">
-                {copy.demoDescription}
+                {copy.huggingFaceDescription}
               </p>
             </div>
             <div className="flex shrink-0 flex-wrap items-center gap-4">
               <a
                 className="inline-flex min-h-11 items-center justify-center rounded-button bg-primary px-5 type-body-md text-bg transition-opacity hover:opacity-80"
-                href={`/${locale}/platforms/dlp/demo`}
+                href="https://huggingface.co/querypieai"
+                rel="noreferrer noopener"
+                target="_blank"
               >
-                {copy.demoLaunchLabel}
+                {copy.huggingFaceLabel}
               </a>
               <a
                 className="inline-flex min-h-11 items-center justify-center gap-2 rounded-button border border-border-strong px-5 type-body-md text-fg transition-colors hover:bg-bg-content"
@@ -87,16 +89,6 @@ export default function DlpSolutionContent({ copy, locale }: Props) {
                 {copy.tutorialTitle}
               </a>
             </div>
-          </div>
-          <div className="mt-8 overflow-hidden rounded-box border border-border bg-bg-content">
-            <iframe
-              allow="clipboard-read; clipboard-write; fullscreen"
-              className="block h-[1200px] w-full border-0 bg-bg md:h-[1500px] xl:h-[1800px]"
-              loading="lazy"
-              referrerPolicy="strict-origin-when-cross-origin"
-              src={`https://querypie--dlp-demo.srv.kpb4r.mlxp.ncloud.com/?lang=${locale}`}
-              title={copy.demoTitle}
-            />
           </div>
         </div>
       </section>

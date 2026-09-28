@@ -32,10 +32,6 @@ export default function DlpJASolutionContent({ locale }: Props) {
             body: "韓国語・英語・日本語の業務文、コード、表記の揺れを反映し、21種類の機密情報タイプを整理しています。韓国語の軽量モデルは内部評価で平均約17.3ms、F1約94%を記録しました。",
           },
         ],
-        demoDescription:
-          "二重スクロールを避けるため、多言語の機密情報検出デモを専用の全画面ビューで実行できます。",
-        demoLaunchLabel: "全画面デモを起動",
-        demoTitle: "DLP検出デモを試す",
         description:
           "生成AIを業務で利用するほど、会話、文書、コード、プロンプトに含まれる機密情報を文脈の中で探す必要があります。QueryPieは、高速なリスク選別と原文フレーズの精密抽出を分け、多言語DLP研究として必要な入力だけに深い分析を適用する構造を設計しています。",
         featureBody:
@@ -44,6 +40,10 @@ export default function DlpJASolutionContent({ locale }: Props) {
         featureImageSrc: "/resources/white-papers/dlp-detection-architecture-ja.png",
         featureTitle: "高速なリスク選別と精密な原文抽出を組み合わせます。",
         heading: "データ損失防止",
+        huggingFaceDescription:
+          "QueryPieが公開した多言語の機密情報検出モデル、モデルカード、利用資料をHugging Faceで確認して活用できます。",
+        huggingFaceLabel: "Hugging Faceを開く",
+        huggingFaceTitle: "Hugging FaceでDLPモデルを利用する",
         label: "QueryPie DLP Research",
         tutorialTitle: "DLPデモ動画",
       }}

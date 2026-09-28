@@ -32,10 +32,6 @@ export default function DlpENSolutionContent({ locale }: Props) {
             body: "The research covers Korean, English, and Japanese business text, code, and altered formats across 21 sensitive-data types. In internal evaluation, the Korean lightweight model reached approximately 94% F1 with a 17.3 ms average response time.",
           },
         ],
-        demoDescription:
-          "Open the multilingual sensitive-data detection demo in a dedicated full-screen view to avoid nested scrolling.",
-        demoLaunchLabel: "Launch full-screen demo",
-        demoTitle: "Try the DLP detection demo",
         description:
           "Generative AI moves information through conversations, documents, code, and prompts—often with sensitive data embedded in ordinary language. QueryPie’s multilingual DLP research separates fast risk screening from precise source-phrase extraction, reserving deeper analysis for the inputs that need it.",
         featureBody:
@@ -44,6 +40,10 @@ export default function DlpENSolutionContent({ locale }: Props) {
         featureImageSrc: "/resources/white-papers/dlp-detection-architecture-en.png",
         featureTitle: "Design fast risk screening and precise source extraction together.",
         heading: "Data Loss Prevention",
+        huggingFaceDescription:
+          "Explore QueryPie's multilingual sensitive-data detection models, model cards, and usage resources on Hugging Face.",
+        huggingFaceLabel: "Open Hugging Face",
+        huggingFaceTitle: "Use the DLP models on Hugging Face",
         label: "QueryPie DLP Research",
         tutorialTitle: "DLP demo video",
       }}

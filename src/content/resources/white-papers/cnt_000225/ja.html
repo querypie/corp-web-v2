@@ -27,7 +27,8 @@
 <h1>結論</h1>
 <p>多言語DLPモデル開発の要点は3つです。実際の業務文と表記変形の事例を反映した学習データ、迅速なリスク選別と機密情報フレーズ抽出の役割分担、生成モデルが誤りやすい文字位置のプログラム処理です。この設計により、種類・フレーズの抽出性能を高め、原文位置の正確性を確保しました。</p>
 <p>リスク判定構造では、ルールとCPUベースの軽量モデルで入力を先に選別し、グレーゾーンだけを追加判定します。別系統の高精度抽出では、Gemmaが機密情報の種類と原文フレーズを特定し、プログラムが正確な位置を算出します。次の開発段階は、検知結果を企業ごとのポリシーへ連携する動的DLPです。外部送信のブロック、画面上での強調表示・マスキング、ユーザーへの警告と管理者レビュー、セキュリティシステムへの通知へつながるポリシー実行体系を構築し、データ保護の範囲を拡大します。</p>
-<h2>DLPデモ</h2>
+<h2>モデルおよびダウンロード情報</h2>
 <ul>
-<li><a target="_blank" rel="noopener noreferrer" href="/ja/platforms/dlp/demo">QueryPie DLP検出デモを試す</a></li>
+<li>QueryPie Hugging Face: <a target="_blank" rel="noopener noreferrer" href="https://huggingface.co/querypieai">https://huggingface.co/querypieai</a></li>
+<li>Hugging Faceからのダウンロード方法: <a target="_blank" rel="noopener noreferrer" href="https://youtu.be/uNi4kYGPPUA">https://youtu.be/uNi4kYGPPUA</a></li>
 </ul>
