@@ -21,8 +21,8 @@ describe("AI Chat 환경별 baseUrl", () => {
     expect(getAiChatConfig({ VERCEL_TARGET_ENV: "preview", VERCEL_GIT_COMMIT_REF: "feat/my-feature" }).baseUrl).toBe(AI_CHAT_BASE_URL_DEV);
   });
 
-  it("Preview Main (VERCEL_TARGET_ENV=preview, VERCEL_GIT_COMMIT_REF=main)에서는 prod URL을 사용한다", () => {
-    expect(getAiChatConfig({ VERCEL_TARGET_ENV: "preview", VERCEL_GIT_COMMIT_REF: "main" }).baseUrl).toBe(AI_CHAT_BASE_URL_PROD);
+  it("Preview Main (Stage)에서는 네트워크 우회를 위해 임시로 dev URL을 사용한다", () => {
+    expect(getAiChatConfig({ VERCEL_TARGET_ENV: "preview", VERCEL_GIT_COMMIT_REF: "main" }).baseUrl).toBe(AI_CHAT_BASE_URL_DEV);
   });
 
   it("Production (VERCEL_TARGET_ENV=production)에서는 prod URL을 사용한다", () => {
