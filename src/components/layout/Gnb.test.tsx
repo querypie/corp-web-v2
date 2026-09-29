@@ -71,6 +71,13 @@ describe("Gnb", () => {
     }
   });
 
+  it("Preview에서도 일본어 플랫폼 메뉴에는 DLP를 표시하지 않는다", () => {
+    render(<Gnb locale="ja" platformItems={getPlatformSubItems("ja", { includeDlpPlatform: true })} />);
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+
+    expect(screen.queryByRole("link", { name: "データ損失防止 (DLP)" })).not.toBeInTheDocument();
+  });
+
   it("팝오버 메뉴를 누르는 동안 blur가 발생해도 click 전에는 닫히지 않는다", () => {
     render(<Gnb locale="en" />);
 

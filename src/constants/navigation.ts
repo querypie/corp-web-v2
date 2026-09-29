@@ -101,7 +101,7 @@ export function getPlatformSubItems(
     { label: copy[2], href: getPlatformHref(locale as Locale, "fde-services") },
   ];
 
-  if (includeDlpPlatform) {
+  if (includeDlpPlatform && locale !== "ja") {
     items.push({ label: copy[3], href: getDlpPlatformHref(locale as Locale) });
   }
 

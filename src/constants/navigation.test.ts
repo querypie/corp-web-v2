@@ -27,12 +27,21 @@ describe("플랫폼과 일본 전용 솔루션", () => {
   it.each([
     ["en", "Data Loss Prevention (DLP)"],
     ["ko", "데이터 손실 방지 (DLP)"],
-    ["ja", "データ損失防止 (DLP)"],
   ])("%s Preview 메뉴에는 DLP 제품 소개를 추가한다", (locale, label) => {
     const items = getPlatformSubItems(locale, { includeDlpPlatform: true });
 
     expect(items.at(-1)).toEqual({ label, href: `/${locale}/platforms/dlp` });
     expect(getFooterHref(label, locale)).toBe(`/${locale}/platforms/dlp`);
+  });
+
+  it("일본어 Preview 메뉴와 푸터에서는 DLP 제품 소개를 숨긴다", () => {
+    expect(getPlatformSubItems("ja", { includeDlpPlatform: true }).map((item) => item.href)).toEqual([
+      "/ja/platforms/aip",
+      "/ja/platforms/acp",
+      "/ja/platforms/aip/fde-services",
+    ]);
+    expect(getShellMenuCopy("ja", { includeDlpPlatform: true }).footerSections[0].items)
+      .not.toContain("データ損失防止 (DLP)");
   });
 
   it("솔루션은 일본어에만 세 메뉴를 표시한다", () => {

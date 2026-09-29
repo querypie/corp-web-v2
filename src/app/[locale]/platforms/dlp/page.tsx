@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { getDlpPlatformHref } from "@/features/platforms/routes";
-import { isDlpPlatformPreviewEnabled } from "@/features/platforms/visibility";
+import { isDlpPlatformVisible } from "@/features/platforms/visibility";
 import { withDynamicOgImage } from "@/features/seo/metadata";
 import ContentEN, { metadata as metadataEN } from "@/components/pages/platforms/dlp/content.en";
 import ContentKO, { metadata as metadataKO } from "@/components/pages/platforms/dlp/content.ko";
@@ -26,10 +26,8 @@ const metadataByLocale: Record<Locale, SolutionStaticMetadata> = {
 };
 
 export async function generateMetadata({ params }: Pick<PageProps, "params">): Promise<Metadata> {
-  if (!isDlpPlatformPreviewEnabled()) return {};
-
   const { locale } = await params;
-  if (!isLocale(locale)) return {};
+  if (!isLocale(locale) || !isDlpPlatformVisible(locale)) return {};
 
   const meta = metadataByLocale[locale];
 
@@ -44,10 +42,8 @@ export async function generateMetadata({ params }: Pick<PageProps, "params">): P
 }
 
 export default async function DlpPlatformPage({ params, searchParams }: PageProps) {
-  if (!isDlpPlatformPreviewEnabled()) notFound();
-
   const { locale } = await params;
-  if (!isLocale(locale)) notFound();
+  if (!isLocale(locale) || !isDlpPlatformVisible(locale)) notFound();
 
   const Content = {
     en: ContentEN,

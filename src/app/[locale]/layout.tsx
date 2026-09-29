@@ -13,7 +13,7 @@ import PublicThemeSync from "@/components/site/PublicThemeSync";
 import AiChatWidget from "@/components/site/ai-chat/AiChatWidget";
 import { GOOGLE_ANALYTICS_ID } from "@/features/analytics/google";
 import { getAiChatConfig } from "@/features/ai/config.server";
-import { isDlpPlatformPreviewEnabled } from "@/features/platforms/visibility";
+import { isDlpPlatformVisible } from "@/features/platforms/visibility";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -34,7 +34,7 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  const includeDlpPlatform = isDlpPlatformPreviewEnabled();
+  const includeDlpPlatform = isDlpPlatformVisible(locale);
   const shellCopy = getShellMenuCopy(locale, { includeDlpPlatform });
 
   return (

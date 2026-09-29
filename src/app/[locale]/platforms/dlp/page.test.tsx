@@ -41,6 +41,15 @@ describe("DLP 제품 소개 route", () => {
     expect(navigationMocks.notFound).not.toHaveBeenCalled();
   });
 
+  it("Preview에서도 일본어 제품 페이지와 metadata는 숨긴다", async () => {
+    vi.stubEnv("VERCEL_TARGET_ENV", "preview");
+    const jaProps = { ...pageProps, params: Promise.resolve({ locale: "ja" }) };
+
+    await expect(generateMetadata(jaProps)).resolves.toEqual({});
+    await expect(DlpPlatformPage(jaProps)).rejects.toThrow("NEXT_NOT_FOUND");
+    expect(navigationMocks.notFound).toHaveBeenCalledOnce();
+  });
+
   it.each(["production", undefined])("%s 환경에서는 페이지를 숨긴다", async (environment) => {
     vi.stubEnv("VERCEL_TARGET_ENV", environment);
 
