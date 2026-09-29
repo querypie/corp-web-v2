@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
-import { AI_CHAT_BASE_URL, AI_CHAT_MODEL } from "@/features/ai/config.server";
+import { AI_CHAT_BASE_URL_DEV, AI_CHAT_MODEL } from "@/features/ai/config.server";
 import { answerProductQuestion, parseGroundedAnswer } from "./answer.server";
 import { makeChunk } from "./knowledge";
 import { retrieveLiveKnowledge } from "./liveKnowledge.server";
@@ -46,10 +46,10 @@ describe("근거 기반 AI 답변", () => {
     const result = await answerProductQuestion([{ role: "user", content: "AIP가 무엇인가요?" }], "ko", new AbortController().signal);
     expect(result.answered).toBe(false);
     const [url, init] = fetchMock.mock.calls[0];
-    expect(url).toBe(`${AI_CHAT_BASE_URL}/chat/completions`);
+    expect(url).toBe(`${AI_CHAT_BASE_URL_DEV}/chat/completions`);
     expect(init.headers.Authorization).toBe("Bearer stage-secret");
     expect(JSON.parse(init.body).model).toBe(AI_CHAT_MODEL);
-    expect(JSON.parse(init.body).reasoning_effort).toBe("low");
+    expect(JSON.parse(init.body).reasoning_effort).toBeUndefined();
     expect(JSON.parse(init.body).messages[1].content).toContain("Official source excerpts");
   });
   it("근거가 없어도 모델이 대화 언어로 답하고 출처 없는 확정 답변은 거부한다", async () => {
