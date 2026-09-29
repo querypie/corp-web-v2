@@ -2,8 +2,7 @@ import "server-only";
 
 type AiEnvironment = Readonly<Record<string, string | undefined>>;
 
-// Development / PR Preview / Preview Main (Stage) → dev partner-portal (temporary)
-// Production → prod partner-portal
+// All environments use dev partner-portal temporarily due to network access policy.
 export const AI_CHAT_BASE_URL_DEV = "https://partner-portal.app.dev.querypie.io/api/hermes/v1";
 export const AI_CHAT_BASE_URL_PROD = "https://partner-portal.app.querypie.com/api/hermes/v1";
 export const AI_CHAT_MODEL = "querypie-product-guide";
@@ -15,12 +14,10 @@ const cmsPreviewModel = {
 };
 
 /**
- * Preview Main (Stage)는 네트워크 접근 정책 우회가 필요한 동안 dev partner-portal을
- * 임시 사용한다. Production은 prod partner-portal을 유지한다.
+ * Preview Main (Stage)와 Production 모두 네트워크 접근 정책 우회가 필요한 동안
+ * dev partner-portal을 임시 사용한다.
  */
 function getAiChatBaseUrl(env: AiEnvironment): string {
-  const target = env.VERCEL_TARGET_ENV;
-  if (target === "production") return AI_CHAT_BASE_URL_PROD;
   return AI_CHAT_BASE_URL_DEV;
 }
 
