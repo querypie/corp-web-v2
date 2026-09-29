@@ -33,7 +33,8 @@
     {"type":"heading","attrs":{"level":2},"content":[{"type":"text","text":"モデルおよびダウンロード情報"}]},
     {"type":"bulletList","content":[
       {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"QueryPie Hugging Face: "},{"type":"text","marks":[{"type":"link","attrs":{"href":"https://huggingface.co/querypieai","target":"_blank","rel":"noopener noreferrer"}}],"text":"https://huggingface.co/querypieai"}]}]},
-      {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Hugging Faceからのダウンロード方法: "},{"type":"text","marks":[{"type":"link","attrs":{"href":"https://youtu.be/uNi4kYGPPUA","target":"_blank","rel":"noopener noreferrer"}}],"text":"https://youtu.be/uNi4kYGPPUA"}]}]}
+      {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"Hugging Faceからのダウンロード方法: "},{"type":"text","marks":[{"type":"link","attrs":{"href":"https://youtu.be/uNi4kYGPPUA","target":"_blank","rel":"noopener noreferrer"}}],"text":"https://youtu.be/uNi4kYGPPUA"}]}]},
+      {"type":"listItem","content":[{"type":"paragraph","content":[{"type":"text","text":"DLP検出デモ："},{"type":"text","marks":[{"type":"link","attrs":{"href":"/ja/platforms/dlp/demo","target":"_blank","rel":"noopener noreferrer"}}],"text":"全画面デモを起動"}]}]}
     ]}
   ]
 }
