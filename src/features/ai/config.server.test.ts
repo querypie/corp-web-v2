@@ -5,7 +5,7 @@ import { AI_CHAT_BASE_URL_DEV, AI_CHAT_BASE_URL_PROD, AI_CHAT_MODEL, getAiChatCo
 describe("AI Chat URL 상수", () => {
   it("dev URL은 partner-portal.app.dev, prod URL은 partner-portal.app를 사용한다", () => {
     expect(AI_CHAT_BASE_URL_DEV).toBe("https://partner-portal.app.dev.querypie.io/api/hermes/v1");
-    expect(AI_CHAT_BASE_URL_PROD).toBe("https://partner-portal.app.querypie.io/api/hermes/v1");
+    expect(AI_CHAT_BASE_URL_PROD).toBe("https://partner-portal.app.querypie.com/api/hermes/v1");
     expect(AI_CHAT_MODEL).toBe("querypie-product-guide");
   });
 });

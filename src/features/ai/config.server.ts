@@ -5,7 +5,7 @@ type AiEnvironment = Readonly<Record<string, string | undefined>>;
 // Development / PR Preview → dev partner-portal
 // Preview Main (stage.querypie.com) / Production → prod partner-portal
 export const AI_CHAT_BASE_URL_DEV = "https://partner-portal.app.dev.querypie.io/api/hermes/v1";
-export const AI_CHAT_BASE_URL_PROD = "https://partner-portal.app.querypie.io/api/hermes/v1";
+export const AI_CHAT_BASE_URL_PROD = "https://partner-portal.app.querypie.com/api/hermes/v1";
 export const AI_CHAT_MODEL = "querypie-product-guide";
 
 // Non-secret defaults for CMS translation on Vercel Preview only.
