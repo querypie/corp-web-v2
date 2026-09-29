@@ -27,6 +27,16 @@ Production 수동 실행은 `BRANCH` 입력(기본값 `main`)의 HEAD로 `releas
 `release`에서 배포한다. 배포가 실패해도 `release`는 시도한 소스를
 가리킨다. 실제 서비스 중인 Production 버전은 Vercel의 현재 배포 SHA로 확인한다.
 
+### AI Chat Stage 임시 우회
+
+2026-09-29 기준 Preview Main(Stage)과 Production의 AI Chat은 네트워크 접근
+정책으로 `partner-portal.app.querypie.com` upstream에 연결할 수 없어,
+`partner-portal.app.dev.querypie.io`를 임시 사용한다.
+
+네트워크 정책이 정리되면 `src/features/ai/config.server.ts`를 환경별 Prod 주소로
+되돌리고, Vercel Preview Main과 Production의 `AI_CHAT_API_KEY`도 Production
+토큰으로 되돌린다.
+
 ### 현재 도메인 매핑
 
 아래 표는 2026-09-16에 확인한 Vercel 연결 현황이다.
