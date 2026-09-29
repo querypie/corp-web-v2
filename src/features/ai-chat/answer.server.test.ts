@@ -49,7 +49,7 @@ describe("근거 기반 AI 답변", () => {
     expect(url).toBe(`${AI_CHAT_BASE_URL}/chat/completions`);
     expect(init.headers.Authorization).toBe("Bearer stage-secret");
     expect(JSON.parse(init.body).model).toBe(AI_CHAT_MODEL);
-    expect(JSON.parse(init.body).reasoning_effort).toBe("low");
+    expect(JSON.parse(init.body).reasoning_effort).toBeUndefined();
     expect(JSON.parse(init.body).messages[1].content).toContain("Official source excerpts");
   });
   it("근거가 없어도 모델이 대화 언어로 답하고 출처 없는 확정 답변은 거부한다", async () => {
