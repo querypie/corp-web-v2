@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">QueryPie DLP 데모 썸네일</title>
+  <desc id="desc">입력 문장의 이름, 이메일, 전화번호가 탐지 결과에서 각각 다른 색으로 강조되는 모습</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#101725"/>
+      <stop offset="1" stop-color="#0B0E15"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#70E2CC"/>
+      <stop offset="1" stop-color="#7D9FFF"/>
+    </linearGradient>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="150%">
+      <feDropShadow dx="0" dy="20" stdDeviation="30" flood-color="#000000" flood-opacity=".26"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#background)"/>
+  <circle cx="1403" cy="54" r="385" fill="#183652" opacity=".28"/>
+  <circle cx="98" cy="883" r="315" fill="#135B57" opacity=".18"/>
+
+  <rect x="64" y="61" width="10" height="62" rx="5" fill="url(#accent)"/>
+  <text x="100" y="111" fill="#F8FAFC" font-size="63" font-weight="700" font-family="Inter, Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">QueryPie DLP</text>
+  <text x="104" y="157" fill="#A7B7CA" font-size="27" font-weight="500" letter-spacing="2" font-family="Inter, Pretendard, sans-serif">SENSITIVE DATA DETECTION</text>
+  <rect x="1307" y="84" width="227" height="49" rx="24.5" fill="#20394A" stroke="#4C8690" stroke-width="2"/>
+  <circle cx="1336" cy="108" r="7" fill="#70E2CC"/>
+  <text x="1355" y="117" fill="#CFFAF1" font-size="22" font-weight="700" letter-spacing="1" font-family="Inter, Pretendard, sans-serif">LIVE DEMO</text>
+
+  <g filter="url(#shadow)">
+    <rect x="64" y="206" width="677" height="597" rx="31" fill="#FFFFFF"/>
+    <rect x="859" y="206" width="677" height="597" rx="31" fill="#FFFFFF"/>
+  </g>
+
+  <rect x="104" y="248" width="91" height="45" rx="14" fill="#E8EEF3"/>
+  <text x="122" y="280" fill="#48596E" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">01</text>
+  <text x="211" y="283" fill="#18243A" font-size="39" font-weight="700" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">입력 문서</text>
+  <rect x="104" y="320" width="597" height="2" fill="#E8EDF2"/>
+  <rect x="104" y="347" width="597" height="333" rx="20" fill="#F8FAFC" stroke="#DCE5EC" stroke-width="2"/>
+  <text x="136" y="416" fill="#28364A" font-size="37" font-weight="500" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">담당자 김민수의 이메일은</text>
+  <text x="136" y="483" fill="#28364A" font-size="36" font-weight="500" font-family="Inter, Pretendard, sans-serif">minsu.kim@example.com</text>
+  <text x="136" y="550" fill="#28364A" font-size="37" font-weight="500" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">연락처는 010-1234-5678</text>
+  <text x="136" y="617" fill="#28364A" font-size="37" font-weight="500" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">입니다.</text>
+  <circle cx="117" cy="740" r="5" fill="#91A1B3"/>
+  <text x="138" y="749" fill="#7F90A4" font-size="25" font-weight="600" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">문장을 입력하면</text>
+
+  <circle cx="800" cy="503" r="37" fill="#153C46" stroke="#519D9A" stroke-width="3"/>
+  <path d="M784 503h33m-12-12 12 12-12 12" fill="none" stroke="#91F0DC" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"/>
+
+  <rect x="899" y="248" width="91" height="45" rx="14" fill="#E8F7F3"/>
+  <text x="918" y="280" fill="#168578" font-size="24" font-weight="700" font-family="Inter, Pretendard, sans-serif">02</text>
+  <text x="1005" y="283" fill="#18243A" font-size="39" font-weight="700" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">탐지 결과</text>
+  <rect x="899" y="320" width="597" height="2" fill="#E8EDF2"/>
+  <rect x="899" y="347" width="597" height="333" rx="20" fill="#F8FAFC" stroke="#DCE5EC" stroke-width="2"/>
+
+  <text x="930" y="411" fill="#28364A" font-size="35" font-weight="500" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">담당자</text>
+  <rect x="1068" y="369" width="137" height="57" rx="9" fill="#FDE5D9"/>
+  <text x="1080" y="409" fill="#71351F" font-size="35" font-weight="700" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">김민수</text>
+  <text x="1217" y="411" fill="#28364A" font-size="35" font-weight="500" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">의</text>
+  <rect x="1068" y="433" width="167" height="29" rx="7" fill="#BD4F23"/>
+  <text x="1080" y="454" fill="#FFFFFF" font-size="17" font-weight="700" font-family="Inter, Pretendard, sans-serif">PERSON NAME</text>
+
+  <rect x="930" y="480" width="526" height="57" rx="9" fill="#ECE2FF"/>
+  <text x="942" y="520" fill="#443078" font-size="34" font-weight="600" font-family="Inter, Pretendard, sans-serif">minsu.kim@example.com</text>
+  <rect x="930" y="544" width="199" height="29" rx="7" fill="#8048C6"/>
+  <text x="941" y="565" fill="#FFFFFF" font-size="17" font-weight="700" font-family="Inter, Pretendard, sans-serif">EMAIL ADDRESS</text>
+
+  <text x="930" y="630" fill="#28364A" font-size="35" font-weight="500" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">연락처</text>
+  <rect x="1068" y="589" width="388" height="57" rx="9" fill="#D5F4ED"/>
+  <text x="1078" y="629" fill="#105C56" font-size="36" font-weight="700" font-family="Inter, Pretendard, sans-serif">010-1234-5678</text>
+  <rect x="1068" y="651" width="197" height="29" rx="7" fill="#137A70"/>
+  <text x="1079" y="672" fill="#FFFFFF" font-size="17" font-weight="700" font-family="Inter, Pretendard, sans-serif">PHONE NUMBER</text>
+
+  <circle cx="912" cy="740" r="5" fill="#34BDA7"/>
+  <text x="934" y="749" fill="#417F7B" font-size="25" font-weight="600" font-family="Pretendard, Apple SD Gothic Neo, Noto Sans KR, sans-serif">민감정보의 위치와 유형을 확인</text>
+</svg>

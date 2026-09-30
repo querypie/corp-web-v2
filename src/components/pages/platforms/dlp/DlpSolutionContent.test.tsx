@@ -1,16 +1,21 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import DlpSolutionContent, { type DlpCopy } from "./DlpSolutionContent";
+import DlpENSolutionContent from "./content.en";
+import DlpKOSolutionContent from "./content.ko";
 
 vi.mock("@/components/sections/Cta", () => ({
   default: () => <div>CTA</div>,
 }));
 
 const copy: DlpCopy = {
-  benefitItems: [{ body: "Benefit body", title: "Benefit title" }],
-  demoEmbedTitle: "DLP detection demo",
+  demoItems: [
+    { description: "See risk scoring.", imageSrc: "/demo/dlp-electra-thumbnail.png", title: "ELECTRA risk screening demo" },
+    { description: "See sensitive data.", imageSrc: "/demo/dlp-demo-thumbnail.png", title: "SLM extraction demo" },
+  ],
+  demoLinkLabel: "Try the external demo",
+  demoTitle: "DLP detection demo",
   description: "Description",
-  fullScreenDemoLabel: "Launch full-screen demo",
   heading: "Data Loss Prevention",
   huggingFaceDescription: "Use the published models.",
   huggingFaceLabel: "Open Hugging Face",
@@ -50,22 +55,44 @@ const copy: DlpCopy = {
 };
 
 describe("DlpSolutionContent", () => {
-  it("Hugging Face 모델 링크와 하단 라이브 데모를 함께 제공한다", () => {
-    const { container } = render(<DlpSolutionContent copy={copy} demoUrl="about:blank" locale="en" />);
+  it("영어 페이지는 영어 데모 이미지를, 한국어 페이지는 한국어 데모 이미지를 보여준다", () => {
+    const { unmount } = render(<DlpENSolutionContent locale="en" />);
+    expect(screen.getByRole("img", { name: "ELECTRA-based risk screening demo" }))
+      .toHaveAttribute("src", "/demo/dlp-electra-thumbnail-en.png");
+    expect(screen.getByRole("img", { name: "SLM-based sensitive-data extraction demo" }))
+      .toHaveAttribute("src", "/demo/dlp-demo-thumbnail-en.png");
+
+    unmount();
+    render(<DlpKOSolutionContent locale="ko" />);
+    expect(screen.getByRole("img", { name: "ELECTRA 기반 위험 선별 데모" }))
+      .toHaveAttribute("src", "/demo/dlp-electra-thumbnail.png");
+    expect(screen.getByRole("img", { name: "SLM 기반 민감정보 추출 데모" }))
+      .toHaveAttribute("src", "/demo/dlp-demo-thumbnail.png");
+  });
+
+  it("Hugging Face 링크와 외부 데모 콘텐츠 카드를 제공하고 임베드는 사용하지 않는다", () => {
+    const { container } = render(<DlpSolutionContent copy={copy} demoUrl="https://example.com/?lang=en" locale="en" />);
 
     expect(screen.getByRole("link", { name: "Open Hugging Face" })).toHaveAttribute(
       "href",
       "https://huggingface.co/querypieai",
     );
-    expect(screen.getByRole("link", { name: "Launch full-screen demo" })).toHaveAttribute(
-      "href",
-      "/en/platforms/dlp/demo",
-    );
-    expect(screen.queryByRole("link", { name: "DLP demo video" })).not.toBeInTheDocument();
-    expect(container.querySelector("iframe")).toHaveAttribute(
-      "src",
-      "about:blank",
-    );
+    const demoLinks = screen.getAllByRole("link", { name: /Try the external demo/ });
+    expect(demoLinks).toHaveLength(2);
+    for (const link of demoLinks) {
+      expect(link).toHaveAttribute("href", "https://example.com/?lang=en");
+      expect(link).toHaveAttribute("target", "_blank");
+    }
+    expect(screen.getByRole("img", { name: "ELECTRA risk screening demo" }))
+      .toHaveAttribute("src", "/demo/dlp-electra-thumbnail.png");
+    expect(screen.getByRole("img", { name: "SLM extraction demo" }))
+      .toHaveAttribute("src", "/demo/dlp-demo-thumbnail.png");
+    const electraHeading = screen.getByRole("heading", { name: "ELECTRA risk screening demo" });
+    const slmHeading = screen.getByRole("heading", { name: "SLM extraction demo" });
+    const huggingFaceHeading = screen.getByRole("heading", { name: "Use the DLP models on Hugging Face" });
+    expect(electraHeading.compareDocumentPosition(slmHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(slmHeading.compareDocumentPosition(huggingFaceHeading) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container.querySelector("iframe")).toBeNull();
   });
 
   it("제품 기능을 번호 없는 독립된 섹션으로 설명한다", () => {

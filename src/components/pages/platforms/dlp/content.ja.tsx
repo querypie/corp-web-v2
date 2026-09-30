@@ -18,24 +18,22 @@ export default function DlpJASolutionContent({ locale }: Props) {
     <DlpSolutionContent
       locale={locale}
       copy={{
-        benefitItems: [
+        demoItems: [
           {
-            title: "ルールと軽量AIで高速に選別",
-            body: "形式が明確な値は正規表現・キーワードルールで先に確認し、ルールに一致しない入力はELECTRAベースの軽量モデルがリスクスコアで選別します。CPU環境での大量入力処理も想定しています。",
+            title: "ELECTRAベースのリスク選別デモ",
+            description: "文章を入力すると、軽量モデルが算出したリスクスコアとブロック判定を確認できます。",
+            imageSrc: "/demo/dlp-electra-thumbnail.png",
           },
           {
-            title: "機密情報の種類と実際の記載内容を特定",
-            body: "高精度な小型言語モデルが機密情報の種類と入力に実際に記載された内容を見つけます。別のプログラムが原文と照合し、正確な位置を計算します。",
-          },
-          {
-            title: "多言語の業務データに対応した検出",
-            body: "韓国語・英語・日本語の業務文、コード、表記の揺れを考慮し、21種類の機密情報を扱います。韓国語の軽量モデルは内部評価で平均約17.3ms、F1約94%を記録しました。",
+            title: "SLMベースの機密情報抽出デモ",
+            description: "文章を入力すると、氏名、メールアドレス、電話番号などの種類と実際に記載された内容を確認できます。",
+            imageSrc: "/demo/dlp-demo-thumbnail.png",
           },
         ],
-        demoEmbedTitle: "DLP検出デモ",
+        demoLinkLabel: "外部デモを試す",
+        demoTitle: "DLP検出デモ",
         description:
           "生成AIを業務で利用するほど、会話、文書、コード、プロンプトに含まれる機密情報を文脈の中で見つける必要があります。QueryPie DLPは、韓国語・英語・日本語の入力からリスクをすばやく選別し、必要な入力だけを詳しく分析して機密情報の種類と実際に記載された内容を見つけます。",
-        fullScreenDemoLabel: "全画面デモを起動",
         heading: "データ損失防止",
         huggingFaceDescription:
           "QueryPieが公開した多言語の機密情報検出モデル、モデルカード、利用資料をHugging Faceで確認して活用できます。",

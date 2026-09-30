@@ -18,24 +18,22 @@ export default function DlpENSolutionContent({ locale }: Props) {
     <DlpSolutionContent
       locale={locale}
       copy={{
-        benefitItems: [
+        demoItems: [
           {
-            title: "Screen quickly with rules and lightweight AI",
-            body: "Regular-expression and keyword rules check predictable values first. For unmatched inputs, an ELECTRA-based lightweight model assigns a risk score and supports high-throughput screening on CPUs.",
+            title: "ELECTRA-based risk screening demo",
+            description: "Enter a sentence to see the lightweight model's risk score and block decision.",
+            imageSrc: "/demo/dlp-electra-thumbnail-en.png",
           },
           {
-            title: "Find the kind of sensitive data and its exact text",
-            body: "A precision small language model identifies what kind of sensitive information appears and the text as written in the input. A separate program checks the source to calculate its exact position.",
-          },
-          {
-            title: "Detection for multilingual business data",
-            body: "QueryPie DLP covers 21 sensitive-data types in Korean, English, and Japanese business text, code, and altered formats. In internal evaluation, the Korean lightweight model reached approximately 94% F1 with a 17.3 ms average response time.",
+            title: "SLM-based sensitive-data extraction demo",
+            description: "Enter a sentence to see the kinds of sensitive data found and the exact text for names, email addresses, phone numbers, and more.",
+            imageSrc: "/demo/dlp-demo-thumbnail-en.png",
           },
         ],
-        demoEmbedTitle: "DLP detection demo",
+        demoLinkLabel: "Try the demo",
+        demoTitle: "DLP detection demo",
         description:
           "Generative AI moves information through conversations, documents, code, and prompts—often with sensitive data embedded in ordinary language. QueryPie DLP quickly screens Korean, English, and Japanese inputs for risk, then identifies what kind of sensitive information appears and its exact text in the inputs that need deeper analysis.",
-        fullScreenDemoLabel: "Launch full-screen demo",
         heading: "Data Loss Prevention",
         huggingFaceDescription:
           "Explore QueryPie's multilingual sensitive-data detection models, model cards, and usage resources on Hugging Face.",

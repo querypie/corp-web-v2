@@ -18,24 +18,22 @@ export default function DlpKOSolutionContent({ locale }: Props) {
     <DlpSolutionContent
       locale={locale}
       copy={{
-        benefitItems: [
+        demoItems: [
           {
-            title: "규칙과 경량 AI로 빠르게 선별",
-            body: "형식이 분명한 값은 정규식·키워드 규칙으로 먼저 확인하고, 규칙에 맞지 않는 입력은 CPU 환경에서도 대량 처리 가능한 ELECTRA 기반 경량 모델이 위험 점수로 선별합니다.",
+            title: "ELECTRA 기반 위험 선별 데모",
+            description: "문장을 입력하면 경량 모델이 계산한 위험 점수와 차단 판정을 확인할 수 있습니다.",
+            imageSrc: "/demo/dlp-electra-thumbnail.png",
           },
           {
-            title: "민감정보의 종류와 실제 내용을 찾아냅니다",
-            body: "정밀 소형언어모델이 어떤 종류의 민감정보인지와 입력에 실제로 적힌 내용을 찾습니다. 별도 프로그램은 찾아낸 내용을 원문과 대조해 정확한 위치를 계산합니다.",
-          },
-          {
-            title: "다국어 업무 환경에 맞춘 탐지",
-            body: "한국어·영어·일본어의 업무 문장과 코드, 표기 변형을 고려해 21개 민감정보 유형을 다룹니다. 내부 평가에서 한국어 경량 모델은 약 17.3ms의 평균 응답 시간과 약 94% F1을 기록했습니다.",
+            title: "SLM 기반 민감정보 추출 데모",
+            description: "문장을 입력하면 이름, 이메일, 전화번호 등 민감정보의 종류와 실제 내용이 어떻게 표시되는지 확인할 수 있습니다.",
+            imageSrc: "/demo/dlp-demo-thumbnail.png",
           },
         ],
-        demoEmbedTitle: "DLP 탐지 데모",
+        demoLinkLabel: "외부 데모 바로 체험하기",
+        demoTitle: "DLP 탐지 데모",
         description:
           "생성형 AI를 업무에 활용할수록 대화, 문서, 코드, 프롬프트에 섞인 민감정보를 맥락 속에서 찾아야 합니다. QueryPie DLP는 한국어·영어·일본어 입력의 위험을 빠르게 선별하고, 필요한 입력만 정밀하게 분석해 민감정보의 종류와 실제 내용을 찾아냅니다.",
-        fullScreenDemoLabel: "전체 화면 데모 실행",
         heading: "데이터 손실 방지",
         huggingFaceDescription:
           "QueryPie가 공개한 다국어 민감정보 탐지 모델과 모델 카드, 사용 자료를 Hugging Face에서 확인하고 활용할 수 있습니다.",
