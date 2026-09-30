@@ -6,7 +6,7 @@ import {
   getCategoryLabel,
 } from "@/features/content/config";
 import { getPublicCategoryHref } from "@/features/content/publicPaths";
-import { getPlatformHref } from "@/features/platforms/routes";
+import { getDlpPlatformHref, getPlatformHref } from "@/features/platforms/routes";
 import { getSolutionHref } from "@/features/solutions/routes";
 import { as400CobolMenuLabel } from "@/copy/as400Cobol";
 
@@ -27,7 +27,11 @@ export type ShellMenuCopy = {
   navItems: string[];
 };
 
-export function getShellMenuCopy(locale: string): ShellMenuCopy {
+type PlatformMenuOptions = {
+  includeDlpPlatform?: boolean;
+};
+
+export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = {}): ShellMenuCopy {
   const footerLegalLinks = {
     en: ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"],
     ko: ["쿠키 설정", "이용약관", "개인정보처리방침", "EULA"],
@@ -45,28 +49,28 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
   }[locale] ?? "Free start!";
   const footerSections = {
     en: [
-      { title: "Platform", items: getPlatformSubItems("en").map((item) => item.label) },
+      { title: "Platform", items: getPlatformSubItems("en", options).map((item) => item.label) },
       { title: "Demo", items: ["AIP Use Cases", "ACP Use Cases"] },
       { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
       { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
       { title: "Plans", items: ["AIP", "ACP"] },
     ],
     ko: [
-      { title: "플랫폼", items: getPlatformSubItems("ko").map((item) => item.label) },
+      { title: "플랫폼", items: getPlatformSubItems("ko", options).map((item) => item.label) },
       { title: "데모", items: ["AIP 활용", "ACP 활용"] },
       { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: ["AIP", "ACP"] },
     ],
     ja: [
-      { title: "プラットフォーム", items: getPlatformSubItems("ja").map((item) => item.label) },
+      { title: "プラットフォーム", items: getPlatformSubItems("ja", options).map((item) => item.label) },
       { title: "ソリューション", items: getSolutionsSubItems("ja").map((item) => item.label) },
       { title: "デモ", items: ["AIP機能", "ACP機能"] },
       { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
       { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ"] },
     ],
   }[locale] ?? [
-    { title: "Platform", items: getPlatformSubItems("en").map((item) => item.label) },
+    { title: "Platform", items: getPlatformSubItems("en", options).map((item) => item.label) },
     { title: "Demo", items: ["AIP Use Cases", "ACP Use Cases"] },
     { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
     { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
@@ -81,18 +85,27 @@ export function getShellMenuCopy(locale: string): ShellMenuCopy {
   };
 }
 
-export function getPlatformSubItems(locale: string): NavigationSubItem[] {
+export function getPlatformSubItems(
+  locale: string,
+  { includeDlpPlatform = false }: PlatformMenuOptions = {},
+): NavigationSubItem[] {
   const copy = {
-    en: ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services"],
-    ko: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "FDE 서비스"],
-    ja: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "FDEサービス"],
-  }[locale] ?? ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services"];
+    en: ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services", "Data Loss Prevention (DLP)"],
+    ko: ["AI 플랫폼 (AIP)", "접근 제어 플랫폼 (ACP)", "FDE 서비스", "데이터 손실 방지 (DLP)"],
+    ja: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "FDEサービス", "データ損失防止 (DLP)"],
+  }[locale] ?? ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services", "Data Loss Prevention (DLP)"];
 
-  return [
+  const items = [
     { label: copy[0], href: getPlatformHref(locale as Locale, "aip") },
     { label: copy[1], href: getPlatformHref(locale as Locale, "acp") },
     { label: copy[2], href: getPlatformHref(locale as Locale, "fde-services") },
   ];
+
+  if (includeDlpPlatform && locale !== "ja") {
+    items.push({ label: copy[3], href: getDlpPlatformHref(locale as Locale) });
+  }
+
+  return items;
 }
 
 export function getSolutionsSubItems(locale: string): NavigationSubItem[] {
@@ -216,6 +229,10 @@ export function getPrimaryNavHref(item: string, locale: string) {
 export function getFooterHref(item: string, locale: string) {
   if (item === "FDE Services" || item === "FDE 서비스" || item === "FDEサービス") {
     return getPlatformHref(locale as Locale, "fde-services");
+  }
+
+  if (item === "Data Loss Prevention (DLP)" || item === "데이터 손실 방지 (DLP)" || item === "データ損失防止 (DLP)") {
+    return getDlpPlatformHref(locale as Locale);
   }
 
   if (item === "AIP") {

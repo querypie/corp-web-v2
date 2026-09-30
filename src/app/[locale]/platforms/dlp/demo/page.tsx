@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 import { isLocale, type Locale } from "@/constants/i18n";
-import DlpDemoPage from "@/components/pages/platforms/dlp/DlpDemoPage";
+import { getDlpDemoUrl } from "@/features/platforms/dlpDemo";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -22,5 +22,5 @@ export default async function DlpDemoRoute({ params }: PageProps) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
-  return <DlpDemoPage locale={locale} />;
+  redirect(getDlpDemoUrl(locale));
 }
