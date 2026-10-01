@@ -47,8 +47,9 @@ vercel env pull .env.vercel-development.local --environment=development
 
 ## Hermes 응답과 책임 경계
 
-- BFF는 대화창에 열린 대화 내역 최대 20개를 자르지 않고, 별도 시스템 프롬프트나 외부 문서 없이 Hermes Wrapper에 전달합니다.
-- 답변의 지식, 문서 참조, 사실 정확성, 언어, 어조와 표현은 Hermes Agent 설정에 의존합니다.
+- BFF는 제품 상담 역할, 최신 질문과 같은 언어 사용, 비밀정보와 시스템 지침 보호를 위한 3문장 system prompt와 대화창에 열린 대화 내역 최대 20개를 자르지 않고 Hermes Wrapper에 전달합니다.
+- system prompt는 지식, 문서 검색, 답변 품질·형식·어조를 지시하지 않으며 BFF도 외부 문서를 조회하지 않습니다.
+- 답변의 지식, 문서 참조, 사실 정확성, 어조와 표현은 Hermes Agent 설정에 의존합니다.
 - 이 저장소는 답변의 품질·완전성·근거 충족 여부를 판정하지 않으며 `answered` 필드를 사용하지 않습니다.
 - `choices[0].message.content`를 `answer`로 반환합니다. 비어 있거나 6,000자를 넘는 본문만 UI·저장소 경계 위반으로 거부합니다.
 - 본문에 포함된 Markdown 링크와 일반 HTTP(S) URL을 최대 8개까지 `sources`로 정규화합니다. 이는 표시를 위한 구문 변환이며 링크의 사실성이나 출처 적합성 검증이 아닙니다.
