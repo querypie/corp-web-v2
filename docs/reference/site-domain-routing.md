@@ -24,6 +24,10 @@ locale prefix 유무와 관계없이 폴더를 제거한 URL로 308 redirect합�
 다국어 사이트의 공개 URL은 locale prefix를 사용합니다.
 루트 언어는 저장된 선택과 브라우저 언어를 기준으로 결정합니다.
 
+Production의 `querypie.com/ja`와 `www.querypie.com/ja` 및 그 하위 경로는
+`https://querypie.ai`의 locale prefix 없는 경로로 308 redirect합니다.
+하위 경로와 query string을 유지하며, Preview·Stage·localhost에는 적용하지 않습니다.
+
 ## 생성 URL 기준
 
 canonical URL, Open Graph URL, sitemap, robots의 sitemap URL, 소셜 공유 URL처럼
@@ -46,7 +50,7 @@ main Preview의 고정 Stage FQDN과 PR별 Vercel Preview FQDN은 각각 독립�
 
 Production 정규 FQDN과 별칭 FQDN의 Deployment 연결, DNS 레코드, 영구 redirect는
 Vercel Project와 DNS 관리 영역에서 설정합니다.
-웹사이트 코드는 호스트 간 redirect를 구현하거나 정규 FQDN을 하드코딩하지 않습니다.
+웹사이트 코드는 아래 일본어 경로 예외를 제외하고 호스트 간 redirect를 구현하거나 정규 FQDN을 하드코딩하지 않습니다.
 
 Production에서는 Vercel redirect를 통과한 정규 FQDN을 현재 서비스 FQDN으로 사용합니다.
 Preview에서는 redirect 없이 요청받은 Preview FQDN을 현재 서비스 FQDN으로 사용합니다.
@@ -63,10 +67,11 @@ Sitemap 안의 URL과 `robots.txt`가 안내하는 sitemap URL은 현재 요청�
 기존 `/sitemaps/multilingual/sitemap.xml` 및 `/sitemaps/japanese/sitemap.xml` 경로는 호환성을 위해
 유지되며, 각각 다국어(`en`·`ko`)와 일본어(`ja`) sitemap을 제공합니다.
 
-## 호스트 간 redirect 금지
+## 호스트 간 redirect 제한
 
-웹사이트 코드는 요청을 다른 호스트로 redirect하지 않습니다.
-같은 호스트 안에서 경로를 정규화하는 redirect만 허용합니다.
+웹사이트 코드는 기본적으로 같은 호스트 안에서 경로를 정규화하는 redirect만 허용합니다.
+예외로 Production의 `querypie.com`과 `www.querypie.com`에서 `/ja` 및 그 하위 경로로
+들어온 요청은 `https://querypie.ai`로 redirect합니다. 이 규칙은 `siteDomainRouting.ts`에서 관리합니다.
 
 Production의 `querypie.com`에서 `www.querypie.com`으로의 redirect나
 `www.querypie.ai`에서 `querypie.ai`로의 redirect처럼 호스트를 바꾸는 규칙은 Vercel Hosting에서 관리합니다.

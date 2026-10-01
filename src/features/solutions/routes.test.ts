@@ -3,6 +3,8 @@ import { getSolutionHref, getSolutionEntryById, getSolutionEntryBySlug, solution
 
 describe("solution routes", () => {
   it("locale별 canonical URL을 유지한다", () => {
+    expect(getSolutionEntryById("local-llm")?.locales).toEqual(["ja"]);
+    expect(getSolutionHref("ja", "local-llm")).toBe("/ja/solutions/local-llm");
     expect(getSolutionHref("ja", "ai-crew")).toBe("/ja/solutions/ai-crew");
     expect(getSolutionHref("ja", "ai-dashi")).toBe("/ja/solutions/ai-dashi");
     expect(getSolutionHref("en", "ai-crew")).toBe("/en/solutions/ai-crew");
@@ -10,7 +12,7 @@ describe("solution routes", () => {
   });
 
   it("등록된 경로를 ID와 slug로 조회한다", () => {
-    expect(solutionEntries).toHaveLength(3);
+    expect(solutionEntries).toHaveLength(4);
     for (const entry of solutionEntries) {
       expect(getSolutionEntryById(entry.id)).toEqual(entry);
       expect(getSolutionEntryBySlug(entry.slug)).toEqual(entry);

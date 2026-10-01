@@ -26,11 +26,25 @@ describe("인증·문의 페이지 URL 이전", () => {
       expect(destination.headers.get("x-middleware-rewrite")).toBe(`https://${host}/ja/${page}`);
     });
 
-    it.each(["en", "ko", "ja"])(`/%s/${page}에 역방향 리다이렉트가 없다`, async (locale) => {
+    it.each(["en", "ko"])(`/%s/${page}에 역방향 리다이렉트가 없다`, async (locale) => {
       const response = await unstable_getResponseFromNextConfig({
         url: `https://www.querypie.com/${locale}/${page}`, nextConfig,
       });
       expect(response.headers.get("location")).toBeNull();
+    });
+
+    it(`/ja/${page}는 일본 도메인으로 이동하고 이전 company 경로로 돌아가지 않는다`, async () => {
+      const response = await unstable_getResponseFromNextConfig({
+        url: `https://www.querypie.com/ja/${page}`, nextConfig,
+      });
+      expect(response.status).toBe(308);
+      expect(response.headers.get("location")).toBe(`https://querypie.ai/${page}`);
+
+      const destination = await unstable_getResponseFromNextConfig({
+        url: response.headers.get("location")!, nextConfig,
+      });
+      expect(destination.headers.get("location")).toBeNull();
+      expect(destination.headers.get("x-middleware-rewrite")).toBe(`https://querypie.ai/ja/${page}`);
     });
   }
 });

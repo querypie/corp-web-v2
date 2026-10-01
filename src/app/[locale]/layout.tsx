@@ -2,7 +2,7 @@ import { Suspense, type ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { isLocale, locales, type Locale } from "@/constants/i18n";
 import { pageTopPaddingClassName } from "@/constants/layout";
-import { getShellMenuCopy } from "@/constants/navigation";
+import { getPlatformSubItems, getShellMenuCopy } from "@/constants/navigation";
 import LanguageSuggestionBanner from "@/components/site/LanguageSuggestionBanner";
 import Footer from "@/components/layout/Footer";
 import Gnb from "@/components/layout/Gnb";
@@ -13,6 +13,7 @@ import PublicThemeSync from "@/components/site/PublicThemeSync";
 import AiChatWidget from "@/components/site/ai-chat/AiChatWidget";
 import { GOOGLE_ANALYTICS_ID } from "@/features/analytics/google";
 import { getAiChatConfig } from "@/features/ai/config.server";
+import { isDlpPlatformVisible } from "@/features/platforms/visibility";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -33,14 +34,20 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  const shellCopy = getShellMenuCopy(locale);
+  const includeDlpPlatform = isDlpPlatformVisible(locale);
+  const shellCopy = getShellMenuCopy(locale, { includeDlpPlatform });
 
   return (
     <div className="flex min-h-screen flex-col bg-bg" data-locale={locale as Locale} lang={locale}>
       <PublicThemeSync locale={locale} />
       <Suspense fallback={null}>
         <LanguageSuggestionBanner currentLocale={locale as Locale} />
-        <Gnb actionLabel={shellCopy.navActionLabel} items={shellCopy.navItems} locale={locale} />
+        <Gnb
+          actionLabel={shellCopy.navActionLabel}
+          items={shellCopy.navItems}
+          locale={locale}
+          platformItems={getPlatformSubItems(locale, { includeDlpPlatform })}
+        />
         <UtmCapture />
         <GoogleAnalytics measurementId={GOOGLE_ANALYTICS_ID} />
       </Suspense>

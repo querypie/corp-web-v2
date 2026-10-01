@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { getPlatformSubItems } from "@/constants/navigation";
 import Gnb from "./Gnb";
 
 const routerPush = vi.fn();
@@ -22,10 +23,11 @@ describe("Gnb", () => {
     ]);
     const solutions = within(nav).getByRole("button", { name: "ソリューション" }).parentElement!;
     expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      "/ja/solutions/ai-crew", "/ja/solutions/ai-dashi", "/ja/solutions/as400-cobol",
+      "/ja/solutions/ai-crew", "/ja/solutions/ai-dashi", "/ja/solutions/local-llm", "/ja/solutions/as400-cobol",
     ]);
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
     expect(screen.getAllByRole("link", { name: "FDEサービス" })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "オンプレミスAI｜Local LLM" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "AS/400・COBOLモダナイゼーション" })).toHaveLength(2);
   });
 
@@ -47,6 +49,34 @@ describe("Gnb", () => {
     expect(screen.getByRole("link", { name: "ACP 활용" })).toHaveAttribute("href", "/ko/demo/acp");
     expect(screen.queryByRole("link", { name: "활용 사례" })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "고객의 목소리" })).toHaveAttribute("href", "/ko/voc");
+  });
+
+  it("서버가 전달한 Preview 플랫폼 메뉴를 데스크톱과 모바일에 표시한다", () => {
+    const { unmount } = render(<Gnb locale="en" />);
+
+    expect(screen.queryByRole("link", { name: "Data Loss Prevention (DLP)" })).not.toBeInTheDocument();
+    unmount();
+
+    render(
+      <Gnb
+        locale="en"
+        platformItems={getPlatformSubItems("en", { includeDlpPlatform: true })}
+      />,
+    );
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+
+    const dlpLinks = screen.getAllByRole("link", { name: "Data Loss Prevention (DLP)" });
+    expect(dlpLinks).toHaveLength(2);
+    for (const link of dlpLinks) {
+      expect(link).toHaveAttribute("href", "/en/platforms/dlp");
+    }
+  });
+
+  it("Preview에서도 일본어 플랫폼 메뉴에는 DLP를 표시하지 않는다", () => {
+    render(<Gnb locale="ja" platformItems={getPlatformSubItems("ja", { includeDlpPlatform: true })} />);
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+
+    expect(screen.queryByRole("link", { name: "データ損失防止 (DLP)" })).not.toBeInTheDocument();
   });
 
   it("팝오버 메뉴를 누르는 동안 blur가 발생해도 click 전에는 닫히지 않는다", () => {
