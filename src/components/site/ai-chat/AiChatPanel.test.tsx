@@ -6,10 +6,6 @@ import AiChatPanel from "./AiChatPanel";
 
 const reply = { answer: "Hermes Agent의 답변입니다.", sources: [{ title: "AIP 공식 문서", url: "https://aip-docs.app.querypie.com/ko" }] };
 const response = () => new Response(JSON.stringify(reply), { headers: { "Content-Type": "application/json" } });
-const urlOnlyReply = {
-  answer: "URL만 포함된 참고자료입니다.",
-  sources: [{ title: "https://www.querypie.com/ko/platforms/aip", url: "https://www.querypie.com/ko/platforms/aip" }],
-};
 
 describe("AI 제품 상담", () => {
   beforeEach(() => {
@@ -62,19 +58,19 @@ describe("AI 제품 상담", () => {
   });
 
   it("참고자료 제목이 전체 URL이면 URL만 표시한다", async () => {
-    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify(urlOnlyReply)));
+    const url = "https://www.querypie.com/en/platforms/aip";
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ ...reply, sources: [{ title: url, url }] })));
     render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
     fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 문서" } });
     fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
 
-    const referenceLink = await screen.findByRole("link", { name: urlOnlyReply.sources[0].url });
-    expect(referenceLink).toBeVisible();
-    expect(screen.queryByText(new URL(urlOnlyReply.sources[0].url).hostname)).not.toBeInTheDocument();
+    const referenceLink = await screen.findByRole("link", { name: url });
+    expect(referenceLink).toHaveAttribute("href", "/ko/platforms/aip");
   });
 
   it("Hermes 본문의 Markdown 링크와 일반 URL을 실제 링크로 렌더링한다", async () => {
     vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({
-      answer: "[AIP Docs](https://aip-docs.app.querypie.com/ko)와 https://www.querypie.com/ko/platforms/aip 를 확인하세요.",
+      answer: "[AIP Docs](https://aip-docs.app.querypie.com/ko)와 https://docs.querypie.com, https://example.test/제품/資料 를 확인하세요.",
       sources: [],
     })));
     render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
@@ -82,7 +78,8 @@ describe("AI 제품 상담", () => {
     fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
 
     expect(await screen.findByRole("link", { name: "AIP Docs" })).toHaveAttribute("href", "https://aip-docs.app.querypie.com/ko");
-    expect(screen.getByRole("link", { name: "https://www.querypie.com/ko/platforms/aip" })).toHaveAttribute("href", "https://www.querypie.com/ko/platforms/aip");
+    expect(screen.getByRole("link", { name: "https://docs.querypie.com" })).toHaveAttribute("href", "https://docs.querypie.com/");
+    expect(screen.getByRole("link", { name: "https://example.test/제품/資料" })).toHaveAttribute("href", "https://example.test/%EC%A0%9C%ED%92%88/%E8%B3%87%E6%96%99");
   });
 
   it("한·일 IME 조합과 Shift+Enter로는 전송하지 않고 Enter로만 전송한다", async () => {

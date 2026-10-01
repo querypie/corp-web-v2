@@ -33,14 +33,14 @@ export function findHermesLinks(content: string): HermesLink[] {
     const url = normalizeUrl(match[0]);
     if (!url) continue;
     const rawUrl = match[0].replace(/[.,!?;:]+$/g, "");
-    links.push({ title: url, url, start: match.index, end: match.index + rawUrl.length });
+    links.push({ title: rawUrl, url, start: match.index, end: match.index + rawUrl.length });
   }
   return links.sort((left, right) => left.start - right.start);
 }
 
 export function extractHermesSources(content: string): ChatSource[] {
   return findHermesLinks(content)
-    .map(({ title, url }) => ({ title, url }))
+    .map(({ title, url }) => ({ title: normalizeUrl(title) === url ? url : title, url }))
     .filter((source, index, sources) => sources.findIndex((candidate) => candidate.url === source.url) === index)
     .slice(0, maxSources);
 }
