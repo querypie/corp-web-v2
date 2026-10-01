@@ -18,21 +18,22 @@ Vercel Project에는 다음 두 환경변수만 설정합니다. 로컬 개발�
 ```dotenv
 # Development / Preview (= Stage = Staging) 예시. Production은 false로 설정합니다.
 AI_CHAT_ENABLED=true
-AI_CHAT_API_KEY=<Production Partner Portal Token>
+AI_CHAT_API_KEY=<Environment-specific Partner Portal Token>
 ```
 
 `AI_CHAT_API_KEY`는 서버 전용 비밀 환경변수로 등록합니다. 키 값은 1Password의 `corp-web-v2 AI Chat` 항목에서 가져오며, 코드, PR, 로그, 브라우저 응답에 포함하지 않습니다. `AI_CHAT_BASE_URL_PROD`와 `AI_CHAT_MODEL`은 Vercel 환경변수나 비밀정보가 아니라 서버 코드의 상수입니다.
 
 | Vercel 환경 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |
 |-------------|------------------------|-----------|-------------------|
-| Development | Production Partner Portal token | encrypted | `true` |
-| Preview (= Stage = Staging, main 및 PR) | Production Partner Portal token | sensitive | `true` |
-| Production | Production Partner Portal token | sensitive | `false` |
+| Development | `corp-web-v2-development` | encrypted | `true` |
+| Preview PR | `corp-web-v2-preview` | sensitive | `true` |
+| Preview Main (= Stage = Staging) | `corp-web-v2-stage` | sensitive | `true` |
+| Production | `corp-web-v2-production` | sensitive | `false` |
 
 Development는 로컬 pull을 위해 `encrypted`로 등록합니다. Vercel은 Development에서 `sensitive` 타입을 지원하지 않습니다. [공식 문서](https://vercel.com/docs/environment-variables/sensitive-environment-variables)
 
 Preview, Stage, Staging은 같은 환경을 뜻하며, Stage 배포는 `main`의 Preview Deployment입니다.
-Preview의 PR 배포와 `main` 배포는 모두 Preview 공통 범위에 등록한 Production Partner Portal token을 사용하며 브랜치별로 구분하지 않습니다. 키가 없으면 공식 자료나 모델을 호출하기 전에 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역은 기존 `CMS_TRANSLATION_*` 설정을 사용합니다.
+Preview PR은 Preview 공통 범위의 `corp-web-v2-preview` token을 사용하고, Preview Main은 `main` 브랜치 범위의 `corp-web-v2-stage` token을 우선 사용합니다. 키가 없으면 공식 자료나 모델을 호출하기 전에 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역은 기존 `CMS_TRANSLATION_*` 설정을 사용합니다.
 
 로컬 개발용 `.env.local`이 이미 있다면 `vercel env pull .env.local --environment=development`가 파일 전체를 바꿀 수 있으므로 임시 파일로 받은 뒤 필요한 값만 병합합니다.
 
