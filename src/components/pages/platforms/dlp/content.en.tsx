@@ -9,7 +9,7 @@ type Props = {
 export const metadata = {
   title: "QueryPie Data Loss Prevention (DLP)",
   description:
-    "QueryPie's multilingual DLP research combines rule checks, lightweight AI screening, and precise source-phrase extraction to identify sensitive-data risk in AI inputs.",
+    "QueryPie DLP uses rules and lightweight AI to screen multilingual inputs for sensitive-data risk, then identifies what kind of sensitive information appears and its exact text where deeper analysis is needed.",
   keywords: ["QueryPie DLP", "multilingual DLP", "Data Loss Prevention", "sensitive data detection", "AI security"],
 } as const;
 
@@ -18,34 +18,75 @@ export default function DlpENSolutionContent({ locale }: Props) {
     <DlpSolutionContent
       locale={locale}
       copy={{
-        benefitItems: [
+        demoItems: [
           {
-            title: "Screen quickly with rules and lightweight AI",
-            body: "Regular-expression and keyword rules check predictable values first. For unmatched inputs, an ELECTRA-based lightweight model assigns a risk score and supports high-throughput screening on CPUs.",
+            title: "ELECTRA-based risk screening demo",
+            description: "Enter a sentence to see the lightweight model's risk score and block decision.",
+            imageSrc: "/demo/dlp-electra-thumbnail-en.png",
           },
           {
-            title: "Extract types and source phrases precisely",
-            body: "A precision small language model identifies the sensitive-data type and the phrase as it appears in the source. A separate program verifies the original text and calculates exact positions for downstream policy actions.",
-          },
-          {
-            title: "Research for multilingual business data",
-            body: "The research covers Korean, English, and Japanese business text, code, and altered formats across 21 sensitive-data types. In internal evaluation, the Korean lightweight model reached approximately 94% F1 with a 17.3 ms average response time.",
+            title: "SLM-based sensitive-data extraction demo",
+            description: "Enter a sentence to see the kinds of sensitive data found and the exact text for names, email addresses, phone numbers, and more.",
+            imageSrc: "/demo/dlp-demo-thumbnail-en.png",
           },
         ],
-        demoDescription:
-          "Open the multilingual sensitive-data detection demo in a dedicated full-screen view to avoid nested scrolling.",
-        demoLaunchLabel: "Launch full-screen demo",
-        demoTitle: "Try the DLP detection demo",
+        demoLinkLabel: "Try the demo",
+        demoTitle: "DLP detection demo",
         description:
-          "Generative AI moves information through conversations, documents, code, and prompts—often with sensitive data embedded in ordinary language. QueryPie’s multilingual DLP research separates fast risk screening from precise source-phrase extraction, reserving deeper analysis for the inputs that need it.",
-        featureBody:
-          "The architecture considers names in context, credentials embedded in code, and known formats altered with spaces or special characters. Low-risk inputs can pass, while high-risk and ambiguous gray-zone inputs proceed to further judgment and precision extraction of data types and exact source phrases.",
-        featureImageAlt: "Data loss prevention detection architecture",
-        featureImageSrc: "/resources/white-papers/dlp-detection-architecture-en.png",
-        featureTitle: "Design fast risk screening and precise source extraction together.",
+          "Generative AI moves information through conversations, documents, code, and prompts—often with sensitive data embedded in ordinary language. QueryPie DLP quickly screens Korean, English, and Japanese inputs for risk, then identifies what kind of sensitive information appears and its exact text in the inputs that need deeper analysis.",
         heading: "Data Loss Prevention",
-        label: "QueryPie DLP Research",
-        tutorialTitle: "DLP demo video",
+        huggingFaceDescription:
+          "Explore QueryPie's multilingual sensitive-data detection models, model cards, and usage resources on Hugging Face.",
+        huggingFaceLabel: "Open Hugging Face",
+        huggingFaceTitle: "Use the DLP models on Hugging Face",
+        label: "QueryPie DLP",
+        modelSections: [
+          {
+            label: "ELECTRA",
+            sectionTitle: "ELECTRA-based DLP",
+            role: "Fast risk screening",
+            title: "Quickly filters risk signals from high-volume inputs.",
+            description:
+              "A lightweight ELECTRA-based model quickly evaluates sensitive-data risk in text that rules alone cannot assess. It identifies inputs that need closer review, even at high volume.",
+            flowTitle: "Fast risk-screening capabilities",
+            flow: [
+              { label: "Understand context", value: "Examines text that patterns and formats alone cannot classify." },
+              { label: "Show risk", value: "Scores the likelihood that the input contains sensitive data." },
+              { label: "Select for review", value: "Identifies high-risk or ambiguous inputs for closer review." },
+            ],
+          },
+          {
+            label: "SLM",
+            sectionTitle: "SLM-based DLP",
+            role: "Precise sensitive-data extraction",
+            title: "Finds the kind of sensitive data and its exact text.",
+            description:
+              "An SLM-based model analyzes context to identify the types of sensitive data and their exact text in the input. This makes it clear which parts need protection.",
+            flowTitle: "Precise extraction capabilities",
+            flow: [
+              { label: "Identify the kind of data", value: "Distinguishes names, account details, credentials, and other sensitive data." },
+              { label: "Find the exact text", value: "Shows how the sensitive information is written in the input." },
+              { label: "Consider context", value: "Reads the surrounding text to assess whether an expression outside a fixed pattern is sensitive." },
+            ],
+          },
+        ],
+        processTitle: "From rule checks to risk screening and sensitive-data extraction",
+        processDescription:
+          "Checks input with regular expressions, screens risk with an ELECTRA-based model, and extracts sensitive data with an SLM-based model.",
+        processSteps: [
+          {
+            title: "Check immediately with rules",
+            body: "Regular expressions and keywords find sensitive data with predictable formats first. Clear matches can be decided without waiting for AI analysis.",
+          },
+          {
+            title: "Screen risk with an ELECTRA-based model",
+            body: "A lightweight classifier reads text that did not match the rules and calculates a risk score. High-risk and ambiguous inputs are selected for closer review.",
+          },
+          {
+            title: "Extract sensitive data with an SLM-based model",
+            body: "For input that needs precision analysis, the model finds what kind of sensitive information appears and its exact text. A separate program checks the source to calculate its position.",
+          },
+        ],
       }}
     />
   );
