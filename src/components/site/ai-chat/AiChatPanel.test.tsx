@@ -6,6 +6,10 @@ import AiChatPanel from "./AiChatPanel";
 
 const reply = { answer: "Hermes Agent의 답변입니다.", sources: [{ title: "AIP 공식 문서", url: "https://aip-docs.app.querypie.com/ko" }] };
 const response = () => new Response(JSON.stringify(reply), { headers: { "Content-Type": "application/json" } });
+const urlOnlyReply = {
+  answer: "URL만 포함된 참고자료입니다.",
+  sources: [{ title: "https://www.querypie.com/ko/platforms/aip", url: "https://www.querypie.com/ko/platforms/aip" }],
+};
 
 describe("AI 제품 상담", () => {
   beforeEach(() => {
@@ -48,10 +52,24 @@ describe("AI 제품 상담", () => {
     expect(screen.getByRole("status")).toHaveTextContent(aiChatCopy.ko.loading);
     expect(send).toBeDisabled();
     expect(await screen.findByText(reply.answer)).toBeVisible();
-    expect(screen.getByRole("link", { name: "AIP 공식 문서" })).toHaveAttribute("href", reply.sources[0].url);
+    const referenceLink = screen.getByRole("link", { name: "AIP 공식 문서 aip-docs.app.querypie.com" });
+    expect(referenceLink).toHaveAttribute("href", reply.sources[0].url);
+    expect(referenceLink).toHaveAttribute("target", "_blank");
+    expect(referenceLink).toHaveAttribute("rel", "noopener noreferrer");
     expect(input).toHaveValue("");
     expect(fetch).toHaveBeenCalledOnce();
     expect(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string)).toEqual({ locale: "ko", messages: [{ role: "user", content: "AIP와 Lingo의 차이는 무엇인가요?" }] });
+  });
+
+  it("참고자료 제목이 전체 URL이면 URL만 표시한다", async () => {
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify(urlOnlyReply)));
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 문서" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+
+    const referenceLink = await screen.findByRole("link", { name: urlOnlyReply.sources[0].url });
+    expect(referenceLink).toBeVisible();
+    expect(screen.queryByText(new URL(urlOnlyReply.sources[0].url).hostname)).not.toBeInTheDocument();
   });
 
   it("Hermes 본문의 Markdown 링크와 일반 URL을 실제 링크로 렌더링한다", async () => {

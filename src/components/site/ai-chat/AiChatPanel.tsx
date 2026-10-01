@@ -201,7 +201,10 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
                   <div className="flex w-full flex-col gap-1.5 border-t border-border pt-3">
                     <span className={`${styles.muted} type-body-sm`}>{copy.sources}</span>
                     {message.sources.map((source) => (
-                      <a className="type-body-sm text-link underline decoration-border-strong underline-offset-4 hover:decoration-current [overflow-wrap:anywhere]" href={getSameSiteHref(source.url, locale)} key={source.url} rel="noopener noreferrer" target="_blank">{source.title}</a>
+                      <a className="type-body-sm text-link underline decoration-border-strong underline-offset-4 hover:decoration-current [overflow-wrap:anywhere]" href={getSameSiteHref(source.url, locale)} key={source.url} rel="noopener noreferrer" target="_blank">
+                        {source.title}
+                        {source.title === source.url ? null : <span className={`${styles.muted} block`}>{new URL(source.url).hostname}</span>}
+                      </a>
                     ))}
                   </div>
                 ) : null}
