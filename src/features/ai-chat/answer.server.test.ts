@@ -11,6 +11,9 @@ describe("Hermes Agent AI 답변", () => {
     const content = [
       "AIP 안내는 [공식 문서](https://aip-docs.app.querypie.com/ko)를 확인하세요.",
       "제품 페이지: https://www.querypie.com/ko/platforms/aip.",
+      "문서 홈: https://docs.querypie.com",
+      "빈 제목 링크: [](https://example.test)",
+      "문서 홈 반복: https://docs.querypie.com/",
     ].join("\n");
 
     expect(parseProviderReply({
@@ -19,7 +22,9 @@ describe("Hermes Agent AI 답변", () => {
       answer: content,
       sources: [
         { title: "공식 문서", url: "https://aip-docs.app.querypie.com/ko" },
-        { title: "www.querypie.com", url: "https://www.querypie.com/ko/platforms/aip" },
+        { title: "https://www.querypie.com/ko/platforms/aip", url: "https://www.querypie.com/ko/platforms/aip" },
+        { title: "https://docs.querypie.com/", url: "https://docs.querypie.com/" },
+        { title: "https://example.test/", url: "https://example.test/" },
       ],
     });
   });

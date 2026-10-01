@@ -6,7 +6,7 @@ export class ChatServiceError extends Error {
 
 const maxAnswerLength = 6000;
 const maxSources = 8;
-const markdownLinkPattern = /\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)/gi;
+const markdownLinkPattern = /\[([^\]\n]*)\]\((https?:\/\/[^\s)]+)\)/gi;
 const plainUrlPattern = /https?:\/\/[^\s<>"']+/gi;
 
 export type HermesLink = ChatSource & { start: number; end: number };
@@ -26,21 +26,21 @@ export function findHermesLinks(content: string): HermesLink[] {
   for (const match of content.matchAll(markdownLinkPattern)) {
     const url = normalizeUrl(match[2]);
     if (!url || match.index === undefined) continue;
-    links.push({ title: match[1].trim() || new URL(url).hostname, url, start: match.index, end: match.index + match[0].length });
+    links.push({ title: match[1].trim() || url, url, start: match.index, end: match.index + match[0].length });
   }
   for (const match of content.matchAll(plainUrlPattern)) {
     if (match.index === undefined || links.some((link) => match.index! >= link.start && match.index! < link.end)) continue;
     const url = normalizeUrl(match[0]);
     if (!url) continue;
     const rawUrl = match[0].replace(/[.,!?;:]+$/g, "");
-    links.push({ title: rawUrl, url, start: match.index, end: match.index + rawUrl.length });
+    links.push({ title: url, url, start: match.index, end: match.index + rawUrl.length });
   }
   return links.sort((left, right) => left.start - right.start);
 }
 
 export function extractHermesSources(content: string): ChatSource[] {
   return findHermesLinks(content)
-    .map(({ title, url }) => ({ title: title.startsWith("http") ? new URL(url).hostname : title, url }))
+    .map(({ title, url }) => ({ title, url }))
     .filter((source, index, sources) => sources.findIndex((candidate) => candidate.url === source.url) === index)
     .slice(0, maxSources);
 }
