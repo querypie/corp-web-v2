@@ -35,6 +35,28 @@ describe("AI 상담 미리보기 세션", () => {
     expect(readPreviewSession()).toEqual({ draft: "질문", messages: [], slackThreadToken: "thread-token-2" });
   });
 
+  it("이전 세션의 answered 품질 판정값을 복원하지 않는다", () => {
+    sessionStorage.setItem("querypie-ai-chat:v1", JSON.stringify({
+      draft: "",
+      messages: [{
+        id: "assistant-1",
+        role: "assistant",
+        text: "Hermes 답변",
+        locale: "ko",
+        answered: true,
+        sources: [{ title: "Docs", url: "https://example.com/docs" }],
+      }],
+    }));
+
+    expect(readPreviewSession().messages).toEqual([{
+      id: "assistant-1",
+      role: "assistant",
+      text: "Hermes 답변",
+      locale: "ko",
+      sources: [{ title: "Docs", url: "https://example.com/docs" }],
+    }]);
+  });
+
   it("브라우저가 저장소 접근을 차단해도 예외를 전파하지 않는다", () => {
     vi.spyOn(Storage.prototype, "getItem").mockImplementation(() => { throw new Error("unavailable"); });
     vi.spyOn(Storage.prototype, "setItem").mockImplementation(() => { throw new Error("unavailable"); });

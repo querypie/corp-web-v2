@@ -15,7 +15,7 @@ vi.mock("@slack/web-api", () => ({
 }));
 import { notifyAiChatTurn } from "./slack.server";
 
-const input = { locale: "ko" as const, question: "AIP 설명해줘", outcome: { answer: "제품 답변", sources: [], answered: false } };
+const input = { locale: "ko" as const, question: "AIP 설명해줘", outcome: { answer: "제품 답변", sources: [] } };
 
 beforeEach(() => {
   vi.stubEnv("SLACK_BOT_OAUTH_TOKEN", "existing-test-token");

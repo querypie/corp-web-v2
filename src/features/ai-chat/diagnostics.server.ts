@@ -7,7 +7,7 @@ type SafeErrorInfo = {
 };
 
 type DiagnosticFields = {
-  provider?: "ai-gateway";
+  provider?: "partner-portal";
   contentType?: "html" | "json" | "other";
   server?: "awselb" | "other";
   status?: number;
@@ -60,7 +60,7 @@ export function safeResponseInfo(response: Response): Pick<DiagnosticFields, "co
 
 export function logAiChatDiagnostic(event: string, fields: DiagnosticFields & Record<string, unknown> = {}) {
   const entry: DiagnosticFields & { event: string } = { event };
-  if (fields.provider === "ai-gateway") entry.provider = fields.provider;
+  if (fields.provider === "partner-portal") entry.provider = fields.provider;
   if (fields.contentType) entry.contentType = fields.contentType;
   if (fields.server) entry.server = fields.server;
   for (const key of ["status", "durationMs", "chunks", "references", "requestBytes", "messageCount"] as const) {

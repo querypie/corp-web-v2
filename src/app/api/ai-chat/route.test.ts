@@ -31,7 +31,7 @@ describe("제품 상담 API", () => {
     vi.stubEnv("AI_CHAT_BASE_URL", "https://old.example/v1");
     vi.stubEnv("AI_CHAT_MODEL", "old-model");
     vi.stubEnv("AI_CHAT_API_KEY", "stage-secret");
-    const reply = { answer: "서버 답변", sources: [], answered: false };
+    const reply = { answer: "서버 답변", sources: [] };
     vi.mocked(answerProductQuestion).mockResolvedValue(reply);
     const result = await POST(request());
     expect(result.status).toBe(200);
@@ -63,12 +63,29 @@ describe("제품 상담 API", () => {
     expect(notifyAiChatTurn).not.toHaveBeenCalled();
   });
   it("유효한 질문의 답변과 출처를 캐시 없이 반환한다", async () => {
-    const reply = { answer: "설명", sources: [], answered: false };
+    const reply = { answer: "설명", sources: [] };
     vi.mocked(answerProductQuestion).mockResolvedValue(reply);
     const result = await POST(request());
     expect(result.status).toBe(200);
     expect(result.headers.get("cache-control")).toBe("no-store");
     expect(await result.json()).toEqual(reply);
+  });
+  it("대화창에 열린 최대 20개 메시지를 모두 Hermes에 전달한다", async () => {
+    const messages = Array.from({ length: 20 }, (_, index) => ({
+      role: index === 19 || index % 2 === 0 ? "user" as const : "assistant" as const,
+      content: index === 19 ? "최신 질문" : "x".repeat(6000),
+    }));
+    vi.mocked(answerProductQuestion).mockResolvedValue({ answer: "Hermes 답변", sources: [] });
+
+    const result = await POST(request({ locale: "ko", messages }));
+
+    expect(result.status).toBe(200);
+    expect(answerProductQuestion).toHaveBeenCalledWith(messages, "ko", expect.any(AbortSignal));
+  });
+  it("열린 대화 상한을 넘는 21개 메시지는 거부한다", async () => {
+    const messages = Array.from({ length: 21 }, (_, index) => ({ role: "user", content: `질문 ${index}` }));
+    expect((await POST(request({ locale: "ko", messages }))).status).toBe(400);
+    expect(answerProductQuestion).not.toHaveBeenCalled();
   });
   it("서버 주소나 인증 정보가 포함된 오류 원문을 노출하지 않는다", async () => {
     vi.mocked(answerProductQuestion).mockRejectedValue(new Error("private upstream details"));
@@ -78,7 +95,7 @@ describe("제품 상담 API", () => {
     expect(notifyAiChatTurn).toHaveBeenCalledWith({ locale: "ko", question: "AIP 설명해줘", outcome: { code: "PROVIDER_ERROR" }, slackThreadToken: undefined });
   });
   it("최신 질문과 검증된 답변만 알리고 스레드 연결값을 반환한다", async () => {
-    const reply = { answer: "후속 답변", sources: [], answered: false };
+    const reply = { answer: "후속 답변", sources: [] };
     vi.mocked(answerProductQuestion).mockResolvedValue(reply);
     vi.mocked(notifyAiChatTurn).mockResolvedValue("signed-thread");
     const result = await POST(request({ ...payload, slackThreadToken: "signed-thread", messages: [
@@ -88,7 +105,7 @@ describe("제품 상담 API", () => {
     expect(await result.json()).toEqual({ ...reply, slackThreadToken: "signed-thread" });
   });
   it("알림 오류는 정상 AI 응답을 바꾸지 않는다", async () => {
-    const reply = { answer: "정상 답변", sources: [], answered: false };
+    const reply = { answer: "정상 답변", sources: [] };
     vi.mocked(answerProductQuestion).mockResolvedValue(reply);
     vi.mocked(notifyAiChatTurn).mockRejectedValue(new Error("Slack unavailable"));
     const result = await POST(request());

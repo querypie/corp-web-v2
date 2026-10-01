@@ -116,7 +116,7 @@ describe("AI Chat 상태 점검 서비스", () => {
     expect(JSON.stringify(result)).not.toContain("secret");
   });
 
-  it("OK 외 답변이나 stop 이외 종료는 제한된 답변만 담아 INVALID_RESPONSE로 반환한다", async () => {
+  it("응답 문구와 종료 사유를 품질 판정하지 않고 유효한 본문이면 연결 성공으로 처리한다", async () => {
     vi.stubEnv("AI_CHAT_ENABLED", "true");
     vi.stubEnv("AI_CHAT_API_KEY", "stage-secret");
     vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response(JSON.stringify({
@@ -126,12 +126,12 @@ describe("AI Chat 상태 점검 서비스", () => {
     const result = await probeAiChat(new AbortController().signal);
 
     expect(result).toMatchObject({
-      ok: false,
+      ok: true,
       upstreamStatus: 200,
       responseType: "json",
       responseServer: "other",
       finishReason: "length",
-      code: "INVALID_RESPONSE",
+      code: "OK",
     });
     expect(result.answer).toHaveLength(2000);
   });

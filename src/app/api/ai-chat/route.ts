@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { isLocale } from "@/constants/i18n";
 import { getAiChatConfig } from "@/features/ai/config.server";
 import { answerProductQuestion, ChatServiceError } from "@/features/ai-chat/answer.server";
-import type { ChatTurn } from "@/features/ai-chat/types";
+import { MAX_CHAT_MESSAGES, MAX_CHAT_REQUEST_BYTES, type ChatTurn } from "@/features/ai-chat/types";
 import { notifyAiChatTurn } from "@/features/ai-chat/slack.server";
 
 export const runtime = "nodejs";
@@ -24,7 +24,7 @@ async function readPayload(request: Request): Promise<unknown> {
       const { value, done } = await reader.read();
       if (done) break;
       size += value.byteLength;
-      if (size > 64000) { await reader.cancel(); throw new Error("Body too large"); }
+      if (size > MAX_CHAT_REQUEST_BYTES) { await reader.cancel(); throw new Error("Body too large"); }
       text += decoder.decode(value, { stream: true });
     }
     return JSON.parse(text + decoder.decode());
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
   try { payload = await readPayload(request); } catch { return error("INVALID_REQUEST", 400); }
   if (!payload || typeof payload !== "object") return error("INVALID_REQUEST", 400);
   const { locale, messages, slackThreadToken } = payload as { locale?: unknown; messages?: unknown; slackThreadToken?: unknown };
-  if (typeof locale !== "string" || !isLocale(locale) || !Array.isArray(messages) || !messages.length || messages.length > 8 ||
+  if (typeof locale !== "string" || !isLocale(locale) || !Array.isArray(messages) || !messages.length || messages.length > MAX_CHAT_MESSAGES ||
       !messages.every((message) => message && (message.role === "user" || message.role === "assistant") &&
         typeof message.content === "string" && message.content.trim().length > 0 && message.content.length <= 6000) ||
       messages.at(-1).role !== "user" || messages.at(-1).content.length > 2000) return error("INVALID_REQUEST", 400);
