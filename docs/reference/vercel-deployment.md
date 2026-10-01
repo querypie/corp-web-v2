@@ -292,8 +292,10 @@ apex 도메인은 Vercel이 안내하는 apex용 레코드를 사용한다.
 
 Vercel 프로젝트에 설정해야 하는 기준값. 실제 등록값은 Vercel 대시보드 또는 `vercel env ls`로 확인한다.
 Preview 공통 값은 main과 PR 배포에 사용하고, `main` 전용 값은 Preview의 브랜치 범위로 지정한다.
-`AI_CHAT_API_KEY`는 기존 Stage 레코드의 값과 타입을 유지하면서 Preview 공통 범위로 옮겼다.
-main과 PR 모두 `corp-web-v2-stage`의 Gateway Key를 사용하며, 기존 Development 키를 사용하던 Preview 항목은 제거했다.
+2026-10-01에 Development, Preview 공통, Preview `main`과 Production의
+`AI_CHAT_API_KEY`를 Production Partner Portal token으로 통일했다. Preview 공통과
+`main` 전용 레코드는 모두 `sensitive` 타입이며, Development는 로컬 pull을 위해
+`encrypted`, Production은 `sensitive` 타입을 유지한다.
 나머지 Stage 전용 환경변수 7개는 원래 레코드의 값과 타입을 유지하면서 Preview / `main` 범위를 추가했다.
 대상은 `AI_CHAT_ENABLED`, `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`,
 `QUERYPIE_LICENSE_ISSUE_API_ENDPOINT`, `QUERYPIE_LICENSE_ISSUE_API_KEY`, `SALESFORCE_ENDPOINT`, `SLACK_BOT_OAUTH_TOKEN`,
