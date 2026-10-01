@@ -48,15 +48,29 @@ describe("AI 제품 상담", () => {
     expect(screen.getByRole("status")).toHaveTextContent(aiChatCopy.ko.loading);
     expect(send).toBeDisabled();
     expect(await screen.findByText(reply.answer)).toBeVisible();
-    expect(screen.getByRole("link", { name: "AIP 공식 문서" })).toHaveAttribute("href", reply.sources[0].url);
+    const referenceLink = screen.getByRole("link", { name: "AIP 공식 문서 aip-docs.app.querypie.com" });
+    expect(referenceLink).toHaveAttribute("href", reply.sources[0].url);
+    expect(referenceLink).toHaveAttribute("target", "_blank");
+    expect(referenceLink).toHaveAttribute("rel", "noopener noreferrer");
     expect(input).toHaveValue("");
     expect(fetch).toHaveBeenCalledOnce();
     expect(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string)).toEqual({ locale: "ko", messages: [{ role: "user", content: "AIP와 Lingo의 차이는 무엇인가요?" }] });
   });
 
+  it("참고자료 제목이 전체 URL이면 URL만 표시한다", async () => {
+    const url = "https://www.querypie.com/en/platforms/aip";
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ ...reply, sources: [{ title: url, url }] })));
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 문서" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+
+    const referenceLink = await screen.findByRole("link", { name: url });
+    expect(referenceLink).toHaveAttribute("href", "/ko/platforms/aip");
+  });
+
   it("Hermes 본문의 Markdown 링크와 일반 URL을 실제 링크로 렌더링한다", async () => {
     vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({
-      answer: "[AIP Docs](https://aip-docs.app.querypie.com/ko)와 https://www.querypie.com/ko/platforms/aip 를 확인하세요.",
+      answer: "[AIP Docs](https://aip-docs.app.querypie.com/ko)와 https://docs.querypie.com, https://example.test/제품/資料 를 확인하세요.",
       sources: [],
     })));
     render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
@@ -64,7 +78,8 @@ describe("AI 제품 상담", () => {
     fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
 
     expect(await screen.findByRole("link", { name: "AIP Docs" })).toHaveAttribute("href", "https://aip-docs.app.querypie.com/ko");
-    expect(screen.getByRole("link", { name: "https://www.querypie.com/ko/platforms/aip" })).toHaveAttribute("href", "https://www.querypie.com/ko/platforms/aip");
+    expect(screen.getByRole("link", { name: "https://docs.querypie.com" })).toHaveAttribute("href", "https://docs.querypie.com/");
+    expect(screen.getByRole("link", { name: "https://example.test/제품/資料" })).toHaveAttribute("href", "https://example.test/%EC%A0%9C%ED%92%88/%E8%B3%87%E6%96%99");
   });
 
   it("한·일 IME 조합과 Shift+Enter로는 전송하지 않고 Enter로만 전송한다", async () => {

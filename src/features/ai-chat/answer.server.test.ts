@@ -11,6 +11,12 @@ describe("Hermes Agent AI 답변", () => {
     const content = [
       "AIP 안내는 [공식 문서](https://aip-docs.app.querypie.com/ko)를 확인하세요.",
       "제품 페이지: https://www.querypie.com/ko/platforms/aip.",
+      "문서 홈: https://docs.querypie.com",
+      "빈 제목 링크: [](https://example.test)",
+      "문서 홈 반복: https://docs.querypie.com/",
+      "다국어 URL: https://example.test/제품/資料.",
+      "URL 제목 링크: [https://example.test/URL/資料](https://example.test/URL/資料)",
+      "HTTP 제목 링크: [http로 시작하는 안내](https://example.test/http-guide)",
     ].join("\n");
 
     expect(parseProviderReply({
@@ -19,7 +25,12 @@ describe("Hermes Agent AI 답변", () => {
       answer: content,
       sources: [
         { title: "공식 문서", url: "https://aip-docs.app.querypie.com/ko" },
-        { title: "www.querypie.com", url: "https://www.querypie.com/ko/platforms/aip" },
+        { title: "https://www.querypie.com/ko/platforms/aip", url: "https://www.querypie.com/ko/platforms/aip" },
+        { title: "https://docs.querypie.com/", url: "https://docs.querypie.com/" },
+        { title: "https://example.test/", url: "https://example.test/" },
+        { title: "https://example.test/%EC%A0%9C%ED%92%88/%E8%B3%87%E6%96%99", url: "https://example.test/%EC%A0%9C%ED%92%88/%E8%B3%87%E6%96%99" },
+        { title: "https://example.test/URL/%E8%B3%87%E6%96%99", url: "https://example.test/URL/%E8%B3%87%E6%96%99" },
+        { title: "http로 시작하는 안내", url: "https://example.test/http-guide" },
       ],
     });
   });
