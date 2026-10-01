@@ -11,7 +11,7 @@ export async function answerProductQuestion(messages: ChatTurn[], _locale: Local
   if (!baseUrl || !model || !apiKey) throw new ChatServiceError("NOT_CONFIGURED", 503);
   const request = {
     model,
-    messages: messages.slice(-8),
+    messages,
   };
   const body = JSON.stringify(request);
   logAiChatDiagnostic("provider_request", {

@@ -57,11 +57,10 @@ describe("Hermes Agent AI 답변", () => {
     });
     vi.stubGlobal("fetch", fetchMock);
 
-    const messages = [
-      { role: "user" as const, content: "AIP가 무엇인가요?" },
-      { role: "assistant" as const, content: "이전 답변" },
-      { role: "user" as const, content: "공식 문서도 알려줘" },
-    ];
+    const messages = Array.from({ length: 12 }, (_, index) => ({
+      role: index % 2 === 0 ? "user" as const : "assistant" as const,
+      content: `대화 ${index + 1}`,
+    }));
     await expect(answerProductQuestion(messages, "ko", new AbortController().signal)).resolves.toEqual({
       answer: "Hermes 답변",
       sources: [],

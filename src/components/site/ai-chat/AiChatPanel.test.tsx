@@ -120,6 +120,23 @@ describe("AI 제품 상담", () => {
     });
   });
 
+  it("대화창에 열린 대화 내역을 자르지 않고 모두 전송한다", async () => {
+    const messages = Array.from({ length: 12 }, (_, index) => ({
+      id: `message-${index}`,
+      role: index % 2 === 0 ? "user" : "assistant",
+      text: `대화 ${index + 1}`,
+      locale: "ko",
+      sources: [],
+    }));
+    sessionStorage.setItem("querypie-ai-chat:v1", JSON.stringify({ draft: "", messages }));
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "새 질문" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByText(reply.answer);
+
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string).messages).toHaveLength(13);
+  });
+
   it("저장된 Slack thread token을 remount 이후 요청에도 사용한다", async () => {
     vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ ...reply, slackThreadToken: "thread-token-1" })));
     const { unmount } = render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);

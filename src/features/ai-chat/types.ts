@@ -2,6 +2,8 @@ import type { Locale } from "@/constants/i18n";
 
 export type ChatSource = { title: string; url: string };
 export const MAX_SLACK_THREAD_TOKEN_LENGTH = 512;
+export const MAX_CHAT_MESSAGES = 20;
+export const MAX_CHAT_REQUEST_BYTES = 128_000;
 export type ChatMessage = {
   id: string;
   role: "user" | "assistant";

@@ -70,6 +70,23 @@ describe("제품 상담 API", () => {
     expect(result.headers.get("cache-control")).toBe("no-store");
     expect(await result.json()).toEqual(reply);
   });
+  it("대화창에 열린 최대 20개 메시지를 모두 Hermes에 전달한다", async () => {
+    const messages = Array.from({ length: 20 }, (_, index) => ({
+      role: index === 19 || index % 2 === 0 ? "user" as const : "assistant" as const,
+      content: index === 19 ? "최신 질문" : "x".repeat(6000),
+    }));
+    vi.mocked(answerProductQuestion).mockResolvedValue({ answer: "Hermes 답변", sources: [] });
+
+    const result = await POST(request({ locale: "ko", messages }));
+
+    expect(result.status).toBe(200);
+    expect(answerProductQuestion).toHaveBeenCalledWith(messages, "ko", expect.any(AbortSignal));
+  });
+  it("열린 대화 상한을 넘는 21개 메시지는 거부한다", async () => {
+    const messages = Array.from({ length: 21 }, (_, index) => ({ role: "user", content: `질문 ${index}` }));
+    expect((await POST(request({ locale: "ko", messages }))).status).toBe(400);
+    expect(answerProductQuestion).not.toHaveBeenCalled();
+  });
   it("서버 주소나 인증 정보가 포함된 오류 원문을 노출하지 않는다", async () => {
     vi.mocked(answerProductQuestion).mockRejectedValue(new Error("private upstream details"));
     const result = await POST(request());

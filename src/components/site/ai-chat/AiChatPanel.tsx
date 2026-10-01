@@ -113,7 +113,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           locale,
-          messages: messages.slice(-8).map((message) => ({ role: message.role, content: message.text })),
+          messages: messages.map((message) => ({ role: message.role, content: message.text })),
           ...(session.slackThreadToken ? { slackThreadToken: session.slackThreadToken } : {}),
         }),
         signal,

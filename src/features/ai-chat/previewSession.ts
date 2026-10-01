@@ -1,9 +1,9 @@
 import { isLocale, type Locale } from "@/constants/i18n";
-import { isChatSourceUrl, isSlackThreadToken, type ChatMessage, type ChatSource } from "./types";
+import { MAX_CHAT_MESSAGES, isChatSourceUrl, isSlackThreadToken, type ChatMessage, type ChatSource } from "./types";
 
 const STORAGE_KEY = "querypie-ai-chat:v1";
 export const MAX_MESSAGE_LENGTH = 2000;
-export const MAX_PREVIEW_MESSAGES = 20;
+export const MAX_PREVIEW_MESSAGES = MAX_CHAT_MESSAGES;
 
 export type PreviewMessage = ChatMessage;
 export type PreviewSession = { draft: string; messages: PreviewMessage[]; slackThreadToken?: string };
