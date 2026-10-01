@@ -195,7 +195,7 @@ export default function AboutUsPage({
         <div className="flex flex-col gap-5 sm:gap-6 md:gap-[30px]">
           <div className="grid gap-[10px] md:grid-cols-2">
             <h2 className="m-0 type-h1 text-fg">{teamTitle}</h2>
-            <div className="type-body-md text-fg">
+            <div className="type-body-lg text-mute">
               {teamDescription.map((line) => (
                 <p key={line} className="m-0">
                   {line}

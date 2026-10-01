@@ -97,11 +97,11 @@ export default function AiPackSection({ locale }: AiPackSectionProps) {
   return (
     <section className="flex w-full justify-center bg-bg-deep px-5 py-14 md:px-10 md:py-[100px]">
       <div className="flex w-full max-w-[1200px] flex-col items-start gap-10 md:gap-[60px]">
-        <header className="flex w-full flex-col items-center gap-5 text-center">
-          <h2 className="m-0 w-full type-h1 font-normal tracking-[0] text-fg md:tracking-[-0.2px]">
+        <header className="grid w-full items-start gap-4 text-left sm:gap-5 md:grid-cols-2 md:gap-7.5">
+          <h2 className="m-0 min-w-0 text-pretty type-h1 text-fg">
             {content.title}
           </h2>
-          <p className="m-0 flex w-full flex-col text-pretty type-body-lg leading-[26px] text-mute">
+          <p className="m-0 flex min-w-0 flex-col whitespace-pre-line text-pretty type-body-lg leading-relaxed text-mute">
             {content.description.map((line) => (
               <span key={line}>{line}</span>
             ))}

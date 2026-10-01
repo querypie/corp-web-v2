@@ -34,12 +34,12 @@ function getTabClassName({
   state,
 }: Pick<TabProps, "className" | "disabled" | "state">) {
   return cx(
-    "inline-flex h-10 items-center justify-center rounded-full px-5 text-center transition-colors duration-200",
+    "inline-flex h-10 items-center justify-center rounded-full px-5 text-center transition-[color,background-color,opacity] duration-200",
     "text-[14px] leading-5 font-normal",
-    state === "on" && "cursor-default bg-secondary text-fg",
-    state === "hover" && "cursor-pointer bg-transparent text-fg",
-    state === "off" && !disabled && "cursor-pointer bg-transparent text-mute hover:text-fg",
-    state === "off" && disabled && "cursor-not-allowed bg-transparent text-mute",
+    state === "on" && "cursor-default bg-secondary text-fg opacity-100",
+    state === "hover" && "cursor-pointer bg-transparent text-fg opacity-100",
+    state === "off" && !disabled && "cursor-pointer bg-transparent text-fg opacity-40 hover:opacity-100 focus-visible:opacity-100",
+    state === "off" && disabled && "cursor-not-allowed bg-transparent text-fg opacity-40",
     className,
   );
 }
