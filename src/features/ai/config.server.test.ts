@@ -1,33 +1,23 @@
 import { describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
-import { AI_CHAT_BASE_URL_DEV, AI_CHAT_BASE_URL_PROD, AI_CHAT_MODEL, getAiChatConfig, getCmsTranslationConfig } from "./config.server";
+import { AI_CHAT_BASE_URL_PROD, AI_CHAT_MODEL, getAiChatConfig, getCmsTranslationConfig } from "./config.server";
 
 describe("AI Chat URL 상수", () => {
-  it("dev URL은 partner-portal.app.dev, prod URL은 partner-portal.app를 사용한다", () => {
-    expect(AI_CHAT_BASE_URL_DEV).toBe("https://partner-portal.app.dev.querypie.io/api/hermes/v1");
+  it("외부에서 접근 가능한 Production Partner Portal URL을 사용한다", () => {
     expect(AI_CHAT_BASE_URL_PROD).toBe("https://partner-portal.app.querypie.com/api/hermes/v1");
     expect(AI_CHAT_MODEL).toBe("querypie-product-guide");
   });
 });
 
 describe("AI Chat 환경별 baseUrl", () => {
-  it("Development (VERCEL_TARGET_ENV 없음)에서는 dev URL을 사용한다", () => {
-    expect(getAiChatConfig({}).baseUrl).toBe(AI_CHAT_BASE_URL_DEV);
-    expect(getAiChatConfig({ VERCEL_ENV: "development" }).baseUrl).toBe(AI_CHAT_BASE_URL_DEV);
-  });
-
-  it("PR Preview (VERCEL_TARGET_ENV=preview, main 아닌 브랜치)에서는 dev URL을 사용한다", () => {
-    expect(getAiChatConfig({ VERCEL_TARGET_ENV: "preview" }).baseUrl).toBe(AI_CHAT_BASE_URL_DEV);
-    expect(getAiChatConfig({ VERCEL_TARGET_ENV: "preview", VERCEL_GIT_COMMIT_REF: "feat/my-feature" }).baseUrl).toBe(AI_CHAT_BASE_URL_DEV);
-  });
-
-  it("Preview Main (Stage)에서는 네트워크 우회를 위해 임시로 dev URL을 사용한다", () => {
-    expect(getAiChatConfig({ VERCEL_TARGET_ENV: "preview", VERCEL_GIT_COMMIT_REF: "main" }).baseUrl).toBe(AI_CHAT_BASE_URL_DEV);
-  });
-
-  it("Production도 네트워크 우회를 위해 임시로 dev URL을 사용한다", () => {
-    expect(getAiChatConfig({ VERCEL_TARGET_ENV: "production" }).baseUrl).toBe(AI_CHAT_BASE_URL_DEV);
-    expect(getAiChatConfig({ VERCEL_TARGET_ENV: "production", VERCEL_GIT_COMMIT_REF: "release" }).baseUrl).toBe(AI_CHAT_BASE_URL_DEV);
+  it.each([
+    ["로컬 Development", {}],
+    ["Vercel Development", { VERCEL_ENV: "development" }],
+    ["PR Preview", { VERCEL_TARGET_ENV: "preview", VERCEL_GIT_COMMIT_REF: "feat/my-feature" }],
+    ["Preview Main", { VERCEL_TARGET_ENV: "preview", VERCEL_GIT_COMMIT_REF: "main" }],
+    ["Production", { VERCEL_TARGET_ENV: "production", VERCEL_GIT_COMMIT_REF: "release" }],
+  ])("%s에서 Production Partner Portal URL을 사용한다", (_name, env) => {
+    expect(getAiChatConfig(env).baseUrl).toBe(AI_CHAT_BASE_URL_PROD);
   });
 });
 

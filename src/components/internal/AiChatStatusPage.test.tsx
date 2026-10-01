@@ -67,11 +67,11 @@ const englishCopy: AiChatStatusPageCopy = {
 };
 
 const readyConfig = {
-  baseUrl: "https://ai-gateway.stg.querypie.com/v1",
+  baseUrl: "https://partner-portal.app.querypie.com/api/hermes/v1",
   enabled: true,
   environment: "Preview",
   keyConfigured: true,
-  model: "querypie-internal/glm53-flash/glm-5.3-flash",
+  model: "querypie-product-guide",
   samplePrompt: "QueryPie AI Chat 상태 확인용 고정 요청입니다.",
 };
 

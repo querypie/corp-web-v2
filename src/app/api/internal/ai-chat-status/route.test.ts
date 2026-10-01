@@ -32,8 +32,8 @@ async function loadRoute(options: {
   const getAiChatStatusConfig = vi.fn(() => ({
     enabled: options.config?.enabled ?? true,
     keyConfigured: options.config?.keyConfigured ?? true,
-    baseUrl: "https://ai-gateway.stg.querypie.com/v1",
-    model: "querypie-internal/glm53-flash/glm-5.3-flash",
+    baseUrl: "https://partner-portal.app.querypie.com/api/hermes/v1",
+    model: "querypie-product-guide",
     samplePrompt: "Reply with exactly OK and no other text.",
     environment: "preview",
   }));
