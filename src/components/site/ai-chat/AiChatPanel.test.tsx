@@ -4,7 +4,7 @@ import { aiChatCopy } from "@/copy/aiChat";
 import { readPreviewSession } from "@/features/ai-chat/previewSession";
 import AiChatPanel from "./AiChatPanel";
 
-const reply = { answer: "공식 문서를 바탕으로 한 답변입니다.", answered: true, sources: [{ title: "AIP 공식 문서", url: "https://aip-docs.app.querypie.com/ko" }] };
+const reply = { answer: "Hermes Agent의 답변입니다.", sources: [{ title: "AIP 공식 문서", url: "https://aip-docs.app.querypie.com/ko" }] };
 const response = () => new Response(JSON.stringify(reply), { headers: { "Content-Type": "application/json" } });
 
 describe("AI 제품 상담", () => {
@@ -36,7 +36,7 @@ describe("AI 제품 상담", () => {
     expect(document.querySelector('input[type="file"]')).toBeNull();
   });
 
-  it("빈 메시지를 막고 실제 API 답변과 검증된 출처를 표시한다", async () => {
+  it("빈 메시지를 막고 Hermes 답변과 응답에 포함된 링크를 표시한다", async () => {
     render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
     const input = screen.getByRole("textbox");
     const send = screen.getByRole("button", { name: aiChatCopy.ko.send });
@@ -52,6 +52,19 @@ describe("AI 제품 상담", () => {
     expect(input).toHaveValue("");
     expect(fetch).toHaveBeenCalledOnce();
     expect(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string)).toEqual({ locale: "ko", messages: [{ role: "user", content: "AIP와 Lingo의 차이는 무엇인가요?" }] });
+  });
+
+  it("Hermes 본문의 Markdown 링크와 일반 URL을 실제 링크로 렌더링한다", async () => {
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({
+      answer: "[AIP Docs](https://aip-docs.app.querypie.com/ko)와 https://www.querypie.com/ko/platforms/aip 를 확인하세요.",
+      sources: [],
+    })));
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 문서 링크" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+
+    expect(await screen.findByRole("link", { name: "AIP Docs" })).toHaveAttribute("href", "https://aip-docs.app.querypie.com/ko");
+    expect(screen.getByRole("link", { name: "https://www.querypie.com/ko/platforms/aip" })).toHaveAttribute("href", "https://www.querypie.com/ko/platforms/aip");
   });
 
   it("한·일 IME 조합과 Shift+Enter로는 전송하지 않고 Enter로만 전송한다", async () => {

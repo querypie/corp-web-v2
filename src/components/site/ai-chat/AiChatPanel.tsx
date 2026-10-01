@@ -13,6 +13,7 @@ import {
   readPreviewSession,
   savePreviewSession,
 } from "@/features/ai-chat/previewSession";
+import HermesAnswer from "./HermesAnswer";
 import styles from "./AiChat.module.css";
 
 type AiChatPanelProps = { locale: Locale; open: boolean; onClose: () => void };
@@ -129,7 +130,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
         ...(nextSlackThreadToken ? { slackThreadToken: nextSlackThreadToken } : {}),
         messages: [...current.messages, {
           id: `${Date.now()}-${generation}-assistant`, role: "assistant" as const,
-          text: result.answer, locale, sources: result.sources, answered: result.answered,
+          text: result.answer, locale, sources: result.sources,
         }].slice(-MAX_PREVIEW_MESSAGES),
       }));
     } catch (cause) {
@@ -193,7 +194,9 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
           <div className="flex flex-col gap-6">
             {session.messages.map((message) => (
               <div className={`flex flex-col gap-3 ${message.role === "user" ? "items-end" : "items-start"}`} key={message.id}>
-                <p className={`type-body-md whitespace-pre-wrap [overflow-wrap:anywhere] ${message.role === "user" ? "max-w-[88%] rounded-box bg-bg-content px-4 py-3" : "w-full"}`} lang={message.locale}>{message.text}</p>
+                <p className={`type-body-md whitespace-pre-wrap [overflow-wrap:anywhere] ${message.role === "user" ? "max-w-[88%] rounded-box bg-bg-content px-4 py-3" : "w-full"}`} lang={message.locale}>
+                  {message.role === "assistant" ? <HermesAnswer>{message.text}</HermesAnswer> : message.text}
+                </p>
                 {message.role === "assistant" && message.sources?.length ? (
                   <div className="flex w-full flex-col gap-1.5 border-t border-border pt-3">
                     <span className={`${styles.muted} type-body-sm`}>{copy.sources}</span>

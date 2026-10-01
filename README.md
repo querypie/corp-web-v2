@@ -140,32 +140,27 @@ SEO 메타데이터와 OG 이미지는 `src/features/seo`에서 관리합니다.
 
 ## 홈페이지 AI 챗봇
 
-공식 사이트에서 질문과 관련된 페이지의 최신 본문을 읽고, 근거 페이지 링크를 출처로 표시합니다. 회사 홈페이지 출처는 현재 도메인·언어의 상대 경로로 변환하고, 외부 서비스 출처는 절대 URL을 유지합니다. 문서 본문을 파일이나 데이터베이스에 사전 저장하지 않습니다.
+홈페이지는 Partner Portal의 Hermes Agent를 상담 주체로 사용합니다. 최근 대화 최대 8개를
+Hermes Wrapper에 전달하고 `choices[0].message.content`를 답변으로 반환합니다.
 
-### 공식 출처 관리
+### 책임 계약
 
-상위 URL은 **`src/features/ai-chat/sources.ts`의 `chatSources` 한곳**에서 관리합니다. 수집과 출처 링크 검증이 같은 설정을 사용합니다.
+답변의 지식, 문서 검색, 사실 정확성, 언어, 어조와 표현 방식은 Hermes Agent의 내부 설정과
+동작에 의존합니다. 이 저장소는 별도의 시스템 프롬프트를 주입하거나 외부 문서를 조회하지
+않으며, 답변의 완전성·품질·근거 충족 여부를 판정하지 않습니다.
 
-| 출처 | 상위 URL |
-|------|----------|
-| 회사 홈페이지 | `https://www.querypie.com` |
-| AIP 문서 | `https://aip-docs.app.querypie.com` |
-| ACP 문서 | `https://docs.querypie.com` |
-| Lingo | `https://lingo.querypie.ai` |
+웹사이트 BFF와 UI는 다음 책임만 가집니다.
 
-출처를 추가하거나 변경할 때 이 설정의 `product`, `url`을 수정하고 재배포합니다. 실제 운영 중인 HTTPS 공개 주소를 사용합니다. 회사 홈페이지도 로컬·Preview 주소가 아닌 위 공식 주소를 읽으므로, 아직 공식 사이트에 배포하지 않은 변경은 답변에 반영되지 않습니다. NotePie·CorpNavi는 현재 회사 홈페이지에서 발견되는 자료만 사용합니다.
+- 입력 크기·형식·origin과 요청 빈도·동시성·timeout을 제한합니다.
+- Partner Portal token을 브라우저에 노출하지 않고 안전한 공개 오류 코드만 반환합니다.
+- Hermes 본문을 답변으로 전달하고, 본문에 포함된 Markdown 링크와 일반 HTTP(S) URL을
+  최대 8개까지 `sources`로 구문적으로 정규화합니다.
+- `sources`는 Hermes가 응답에 포함한 링크이며 웹사이트가 사실성이나 출처 적합성을
+  검증했다는 의미가 아닙니다.
+- 답변 본문의 링크를 안전한 새 창 링크로 렌더링하고 대화 세션·입력 복원 UI를 관리합니다.
 
-### 페이지 발견 및 답변 흐름
-
-1. 각 사이트의 `/sitemap.xml`과 locale별 홈의 내부 링크에서 하위 페이지를 발견합니다. 사이트맵 인덱스도 따라갑니다.
-2. URL·제목만 서버 인스턴스 메모리에 1시간 동안 보관합니다. 만료 후 다음 질문에서 다시 발견하므로 사이트맵·내부 링크에 연결된 새 페이지가 자동 추가됩니다. 별도 cron이나 영구 저장소는 없으며 서버 재시작 시 다시 수집합니다.
-3. 최근 사용자 질문 3개의 제품명·키워드와 언어를 바탕으로 관련 URL을 최대 8개 선택합니다.
-4. 선택한 페이지를 `cache: no-store`로 다시 읽고 관련 본문 최대 8개와 최근 대화 최대 8개를 모델에 전달합니다. 본문은 해당 요청에서만 사용합니다.
-5. 모델이 사용한 근거의 출처 링크를 답변에 표시합니다. 근거가 없으면 확인할 수 없다고 안내하며 과거 스냅샷으로 대체하지 않습니다.
-
-탐색은 사이트·언어별 최대 사이트맵 8개, HTML 페이지 10개, URL 1,500개로 제한합니다. 사이트맵·링크에 없는 페이지, 제한을 초과한 영역, 로그인이나 JavaScript 실행이 필요한 본문은 발견·조회되지 않을 수 있습니다. 검색은 URL·제목 기반 키워드 방식이므로 본문에만 등장하는 주제를 놓칠 수 있습니다. 첫 질문과 목록 갱신 시에는 탐색으로 응답 시간이 늘어납니다.
-
-등록된 공식 도메인만 읽으며 리다이렉트도 매 단계 검증합니다. 수집 제한 시간은 12초, 답변용 페이지 조회는 페이지당 7초, 응답 크기는 3MB입니다. 일부 페이지 조회 실패 시 읽기에 성공한 자료만 사용합니다. URL 목록 전체 갱신 실패 시 이전 URL 목록을 재사용하되 본문은 다시 조회합니다.
+BFF 응답은 `answer`, `sources`, 선택적인 `slackThreadToken`으로 구성합니다. 품질 판정값인
+`answered`는 사용하지 않습니다.
 
 ### 현재 어뷰징 방지
 
@@ -173,7 +168,7 @@ SEO 메타데이터와 OG 이미지는 `src/features/seo`에서 관리합니다.
 - 최신 질문은 최대 2,000자, 전달 대화는 최대 8개(메시지당 6,000자), 요청 본문은 최대 64,000바이트로 제한합니다.
 - JSON 요청만 받으며, `Origin` 헤더가 있을 때 API와 다른 origin이면 차단합니다. 헤더가 없는 직접 호출까지 막는 인증 기능은 아닙니다.
 
-현재 제한은 인스턴스 메모리 기준의 간단한 보호입니다. IP별 제한·서버 간 공유 카운터·일일 전체 한도·CAPTCHA는 없습니다. 동시 처리 제한은 공식 자료 조회부터 Gateway 응답 처리까지 적용됩니다.
+현재 제한은 인스턴스 메모리 기준의 간단한 보호입니다. IP별 제한·서버 간 공유 카운터·일일 전체 한도·CAPTCHA는 없습니다. 동시 처리 제한은 Hermes Wrapper 응답 처리까지 적용됩니다.
 
 ### 실행 설정 및 구현
 
@@ -189,7 +184,7 @@ API 주소와 모델은 서버 전용 `src/features/ai/config.server.ts`의 이�
 | `AI_CHAT_BASE_URL_PROD` | `https://partner-portal.app.querypie.com/api/hermes/v1` |
 | `AI_CHAT_MODEL` | `querypie-product-guide` |
 
-브라우저는 `/api/ai-chat`에 질문을 보내고 답변과 출처를 받습니다. 공식 페이지 조회와 Partner Portal Wrapper의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
+브라우저는 `/api/ai-chat`에 질문을 보내고 Hermes 답변과 응답에 포함된 링크를 받습니다. Partner Portal Wrapper의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
 
 환경은 Development, Preview(= Stage = Staging), Production 세 가지로 구분합니다. 모든 환경은 외부에서 접근 가능한 Production Partner Portal URL을 사용하되, token은 Partner Portal에서 환경별로 발급한 값을 사용합니다. Dev Partner Portal URL은 외부 인터넷에서 접근할 수 없으므로 Vercel upstream으로 사용하지 않습니다. `AI_CHAT_BASE_URL_PROD`와 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
 
@@ -212,14 +207,11 @@ vercel env pull .env.vercel-development.local --environment=development
 
 `.env.local`이 비어 있거나 새로 만드는 경우에는 `vercel env pull .env.local --environment=development`를 사용할 수 있습니다.
 
-- URL 발견·본문 조회: `src/features/ai-chat/liveKnowledge.server.ts`
-- 관련 문단 검색: `src/features/ai-chat/knowledge.ts`
-- 답변 프롬프트·모델 호출: `src/features/ai-chat/answer.server.ts`
+- Hermes Wrapper 호출: `src/features/ai-chat/answer.server.ts`
+- 응답 본문·링크 정규화: `src/features/ai-chat/reply.ts`
+- 답변 링크 UI: `src/components/site/ai-chat/HermesAnswer.tsx`
 - API: `src/app/api/ai-chat/route.ts`
 - 검증: `npx vitest run src/features/ai-chat src/app/api/ai-chat`
-- 실제 공식 사이트 접속 검증(선택): `AI_CHAT_LIVE_SMOKE=1 npx vitest run src/features/ai-chat/liveKnowledge.smoke.test.ts`
-
-기존 `knowledge.snapshot.json`과 `chat:collect-knowledge` 수동 수집 명령은 제거했습니다.
 
 ---
 

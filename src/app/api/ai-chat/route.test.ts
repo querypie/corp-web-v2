@@ -31,7 +31,7 @@ describe("제품 상담 API", () => {
     vi.stubEnv("AI_CHAT_BASE_URL", "https://old.example/v1");
     vi.stubEnv("AI_CHAT_MODEL", "old-model");
     vi.stubEnv("AI_CHAT_API_KEY", "stage-secret");
-    const reply = { answer: "서버 답변", sources: [], answered: false };
+    const reply = { answer: "서버 답변", sources: [] };
     vi.mocked(answerProductQuestion).mockResolvedValue(reply);
     const result = await POST(request());
     expect(result.status).toBe(200);
@@ -63,7 +63,7 @@ describe("제품 상담 API", () => {
     expect(notifyAiChatTurn).not.toHaveBeenCalled();
   });
   it("유효한 질문의 답변과 출처를 캐시 없이 반환한다", async () => {
-    const reply = { answer: "설명", sources: [], answered: false };
+    const reply = { answer: "설명", sources: [] };
     vi.mocked(answerProductQuestion).mockResolvedValue(reply);
     const result = await POST(request());
     expect(result.status).toBe(200);
@@ -78,7 +78,7 @@ describe("제품 상담 API", () => {
     expect(notifyAiChatTurn).toHaveBeenCalledWith({ locale: "ko", question: "AIP 설명해줘", outcome: { code: "PROVIDER_ERROR" }, slackThreadToken: undefined });
   });
   it("최신 질문과 검증된 답변만 알리고 스레드 연결값을 반환한다", async () => {
-    const reply = { answer: "후속 답변", sources: [], answered: false };
+    const reply = { answer: "후속 답변", sources: [] };
     vi.mocked(answerProductQuestion).mockResolvedValue(reply);
     vi.mocked(notifyAiChatTurn).mockResolvedValue("signed-thread");
     const result = await POST(request({ ...payload, slackThreadToken: "signed-thread", messages: [
@@ -88,7 +88,7 @@ describe("제품 상담 API", () => {
     expect(await result.json()).toEqual({ ...reply, slackThreadToken: "signed-thread" });
   });
   it("알림 오류는 정상 AI 응답을 바꾸지 않는다", async () => {
-    const reply = { answer: "정상 답변", sources: [], answered: false };
+    const reply = { answer: "정상 답변", sources: [] };
     vi.mocked(answerProductQuestion).mockResolvedValue(reply);
     vi.mocked(notifyAiChatTurn).mockRejectedValue(new Error("Slack unavailable"));
     const result = await POST(request());

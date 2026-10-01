@@ -112,7 +112,7 @@ export async function probeAiChat(signal: AbortSignal): Promise<AiChatProbeResul
   const choice = payload.choices?.[0];
   const answer = boundedAnswer(choice?.message?.content);
   const finishReason = typeof choice?.finish_reason === "string" ? choice.finish_reason : null;
-  const valid = answer?.trim() === "OK" && finishReason === "stop";
+  const valid = !!answer?.trim();
   return {
     ...baseResult(started),
     ok: valid,
