@@ -88,8 +88,6 @@ describe("AI Chat 상태 점검 서비스", () => {
     const body = JSON.parse(init.body);
     expect(body).toEqual({
       model: AI_CHAT_MODEL,
-      max_tokens: 512,
-      temperature: 0,
       messages: [{ role: "user", content: "Reply with exactly OK and no other text." }],
     });
     expect(JSON.stringify(result)).not.toContain("stage-secret");

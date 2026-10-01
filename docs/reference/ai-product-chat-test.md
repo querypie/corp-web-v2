@@ -82,7 +82,9 @@ npm run build
 npm run typecheck
 ```
 
-기본 모델은 응답 지연을 줄이기 위해 GLM-5.3 Flash를 사용하고, `reasoning_effort: "low"`를 명시합니다. Development 키로 동일 Gateway의 Flash 모델에 고정 요청을 보내 HTTP 200 / `OK` 응답을 약 443ms에 확인했습니다. 실제 소요 시간은 부하와 요청에 따라 달라집니다.
+Partner Portal Wrapper는 현재 `model`, `messages`, `stream`만 허용하므로 홈페이지는
+모델과 메시지만 전송합니다. `max_tokens`, `temperature`, `response_format` 같은 추가
+생성 옵션은 Wrapper가 지원하기 전까지 전송하지 않습니다.
 
 `domRuntime.test.ts`는 `require(ESM)`이 비활성화된 Node 프로세스에서 HTML·XML 파서 로딩을 확인합니다. `jsdom` 버전을 변경할 때는 이 테스트와 실제 Vercel Function의 cold start를 함께 확인합니다.
 

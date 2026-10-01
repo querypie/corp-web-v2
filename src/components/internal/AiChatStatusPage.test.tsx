@@ -6,7 +6,7 @@ import AiChatStatusPage from "./AiChatStatusPage";
 const koreanCopy: AiChatStatusPageCopy = {
   metadataTitle: "AI Chat 상태 진단",
   title: "AI Chat 상태 진단",
-  description: "Vercel Server에서 AI Gateway Stage로 직접 연결되는지 확인합니다.",
+  description: "Vercel Server에서 Partner Portal Production으로 직접 연결되는지 확인합니다.",
   configTitle: "실행 설정",
   probeTitle: "기본 요청",
   resultTitle: "응답 결과",

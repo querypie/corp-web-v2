@@ -36,7 +36,7 @@ describe("근거 기반 AI 답변", () => {
     expect(retrieveLiveKnowledge).not.toHaveBeenCalled();
     expect(fetcher).not.toHaveBeenCalled();
   });
-  it("Stage Gateway를 서버에서 Bearer 인증으로 호출하고 원문 근거를 함께 제공한다", async () => {
+  it("Partner Portal Wrapper가 허용하는 필드만 전송하고 원문 근거를 함께 제공한다", async () => {
     vi.stubEnv("AI_CHAT_ENABLED", "true");
     vi.stubEnv("AI_CHAT_BASE_URL", "https://old.example/v1");
     vi.stubEnv("AI_CHAT_MODEL", "old-model");
@@ -48,9 +48,10 @@ describe("근거 기반 AI 답변", () => {
     const [url, init] = fetchMock.mock.calls[0];
     expect(url).toBe(`${AI_CHAT_BASE_URL_PROD}/chat/completions`);
     expect(init.headers.Authorization).toBe("Bearer stage-secret");
-    expect(JSON.parse(init.body).model).toBe(AI_CHAT_MODEL);
-    expect(JSON.parse(init.body).reasoning_effort).toBeUndefined();
-    expect(JSON.parse(init.body).messages[1].content).toContain("Official source excerpts");
+    const body = JSON.parse(init.body);
+    expect(Object.keys(body).sort()).toEqual(["messages", "model"]);
+    expect(body.model).toBe(AI_CHAT_MODEL);
+    expect(body.messages[1].content).toContain("Official source excerpts");
   });
   it("근거가 없어도 모델이 대화 언어로 답하고 출처 없는 확정 답변은 거부한다", async () => {
     vi.stubEnv("AI_CHAT_ENABLED", "true");
