@@ -39,6 +39,12 @@ export function getJapaneseSiteHostnameCheckScript() {
 export function getSiteDomainRedirects() {
   return [
     {
+      source: "/ja/:path*",
+      has: [{ type: "host" as const, value: "(?:www\\.)?querypie\\.com" }],
+      destination: "https://querypie.ai/:path*",
+      permanent: true,
+    },
+    {
       source: "/:locale(en|ko|ja)/:path*",
       has: [{ type: "host" as const, value: japaneseSiteHostPattern }],
       destination: "/:path*",

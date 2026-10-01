@@ -14,6 +14,7 @@ import {
   getPrimaryNavHref,
   getResourcesSubItems,
   getSolutionsSubItems,
+  type NavigationSubItem,
 } from "@/constants/navigation";
 import { getLocalePath, getLocaleSwitchPath, type Locale } from "@/constants/i18n";
 import { setLocalePreferenceCookie } from "@/features/routing/localePreference.client";
@@ -24,6 +25,7 @@ type GnbProps = {
   items?: string[];
   locale?: string;
   localeIcon?: ReactNode;
+  platformItems?: NavigationSubItem[];
 };
 
 function cx(...values: Array<string | false | null | undefined>) {
@@ -44,6 +46,7 @@ export default function Gnb({
   items: providedItems,
   locale = "en",
   localeIcon,
+  platformItems,
 }: GnbProps) {
   const items = providedItems ?? getShellMenuCopy(locale).navItems;
   const router = useRouter();
@@ -222,7 +225,7 @@ export default function Gnb({
     }
   };
   const sectionItems = [
-    getPlatformSubItems(locale),
+    platformItems ?? getPlatformSubItems(locale),
     ...(locale === "ja" ? [getSolutionsSubItems(locale)] : []),
     getDemoSubItems(locale),
     getResourcesSubItems(locale),

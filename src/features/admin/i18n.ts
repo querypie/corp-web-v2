@@ -4,7 +4,7 @@ const koreanCopy: Record<string, string> = {
   Dashboard: "대시보드",
   News: "뉴스",
   Demo: "데모",
-  Resources: "자료",
+  Resources: "리소스",
   All: "전체",
   "AIP Use Cases": "AIP 활용",
   "ACP Use Cases": "ACP 활용",

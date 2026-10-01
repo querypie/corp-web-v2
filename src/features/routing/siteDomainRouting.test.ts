@@ -4,6 +4,72 @@ import nextConfig from "../../../next.config";
 import { getPublicSitePathname, getSiteSitemapLocales } from "./siteDomainRouting";
 
 describe("site domain routing", () => {
+  it.each(["querypie.com", "www.querypie.com"])(
+    "%s의 일본어 홈과 하위 경로를 쿼리를 유지하며 일본 도메인으로 영구 이동한다",
+    async (host) => {
+      for (const [path, destination] of [
+        ["/ja", "/"],
+        ["/ja/about-us?utm_source=test", "/about-us?utm_source=test"],
+        ["/ja/platforms/aip?utm_campaign=japan", "/platforms/aip?utm_campaign=japan"],
+      ]) {
+        const response = await unstable_getResponseFromNextConfig({
+          url: `https://${host}${path}`,
+          nextConfig,
+        });
+
+        expect(response.status).toBe(308);
+        expect(response.headers.get("location")).toBe(`https://querypie.ai${destination}`);
+      }
+    },
+  );
+
+  it("끝에 슬래시가 있는 일본어 홈은 정규화 후 일본 도메인으로 이동한다", async () => {
+    const response = await unstable_getResponseFromNextConfig({
+      url: "https://querypie.com/ja/?utm_source=test",
+      nextConfig,
+    });
+    expect(response.status).toBe(308);
+    expect(response.headers.get("location")).toBe("https://querypie.com/ja?utm_source=test");
+
+    const destination = await unstable_getResponseFromNextConfig({
+      url: response.headers.get("location")!,
+      nextConfig,
+    });
+    expect(destination.status).toBe(308);
+    expect(destination.headers.get("location")).toBe("https://querypie.ai/?utm_source=test");
+
+    const japaneseHome = await unstable_getResponseFromNextConfig({
+      url: destination.headers.get("location")!,
+      nextConfig,
+    });
+    expect(japaneseHome.headers.get("location")).toBeNull();
+    expect(japaneseHome.headers.get("x-middleware-rewrite")).toBe("https://querypie.ai/ja?utm_source=test");
+  });
+
+  it.each([
+    "stage.querypie.com",
+    "stage-v2.querypie.com",
+    "branch.vercel.app",
+    "localhost:3000",
+    "querypie.com.example.com",
+  ])("%s의 일본어 경로는 운영 일본 도메인으로 이동하지 않는다", async (host) => {
+    const response = await unstable_getResponseFromNextConfig({
+      url: `https://${host}/ja/about-us`,
+      nextConfig,
+    });
+
+    expect(response.headers.get("location")).toBeNull();
+  });
+
+  it.each(["en", "ko"])("운영 .com의 %s 경로는 유지한다", async (locale) => {
+    const response = await unstable_getResponseFromNextConfig({
+      url: `https://www.querypie.com/${locale}/about-us`,
+      nextConfig,
+    });
+
+    expect(response.headers.get("location")).toBeNull();
+  });
+
   it("selects Japanese-only or English/Korean sitemap locales by hostname", () => {
     expect(getSiteSitemapLocales("stage-v2.querypie.ai")).toEqual(["ja"]);
     expect(getSiteSitemapLocales("www.querypie.com")).toEqual(["en", "ko"]);

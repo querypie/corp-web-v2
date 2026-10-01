@@ -32,7 +32,8 @@
 
 /* 라이트 모드가 CSS 기본값이다. 자바스크립트가 비활성화되어도 흰 배경으로 읽을 수 있다. */
 :root,
-:root[data-theme="light"] {
+:root[data-theme="light"],
+:root[data-theme="dark"] .theme-inverse {
   color-scheme: light;
   --color-fg: #2F2D29;
   --color-mute: #767676;
@@ -92,7 +93,8 @@
 }
 
 :root[data-theme="dark"],
-.theme-dark {
+.theme-dark,
+:root:not([data-theme="dark"]) .theme-inverse {
   color-scheme: dark;
   --font-weight-regular: 300;
   --color-fg: #EEEEEE;

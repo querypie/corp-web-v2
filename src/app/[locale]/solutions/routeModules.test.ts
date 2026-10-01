@@ -15,7 +15,10 @@ vi.mock("next/headers", () => ({
   headers: async () => new Headers({ host: "www.querypie.com" }),
 }));
 
+import LocalLlmPage, { generateMetadata as localLlmMetadata } from "./local-llm/page";
+
 const routeModules = {
+  "local-llm": { page: LocalLlmPage, generateMetadata: localLlmMetadata },
   "ai-crew": {
     page: Page8,
     generateMetadata: g8,
@@ -33,6 +36,12 @@ const routeModules = {
 } as const;
 
 describe("solutions route modules", () => {
+  it.each(["en", "ko"])("Local LLMページは%sで404を返す", async (locale) => {
+    const props = { params: Promise.resolve({ locale }) };
+    await expect(LocalLlmPage(props)).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
+    await expect(localLlmMetadata(props)).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
+  });
+
   it.each(["en", "ko"])("AS400/COBOL 페이지는 %s에서 404를 반환한다", async (locale) => {
     const props = { params: Promise.resolve({ locale }) };
     await expect(As400CobolPage(props)).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");

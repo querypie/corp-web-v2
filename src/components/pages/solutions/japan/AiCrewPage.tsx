@@ -72,7 +72,7 @@ export default function AiCrewPage() {
         </div>
       </section>
 
-      <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[90px]">
+      <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
         <div className="mx-auto w-full max-w-[1200px] space-y-10">
           <SolutionSectionHeading title={["AIに下準備を任せ、", "人は判断と創造に集中する"]} description="判断前の業務はAIに任せ、人は本質的な仕事に集中します。" />
           <AiCrewBeforeAfter
@@ -101,7 +101,7 @@ export default function AiCrewPage() {
         </ButtonGroup>
       </section>
 
-      <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[90px]">
+      <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
         <div className="mx-auto w-full max-w-[1200px] space-y-6">
           <SolutionSectionHeading title="実務での安全なAI活用を支える、QueryPie AIP" description="自律したAIエージェントの実務性能とガバナンスを支える、エンタープライズAI基盤です。" />
           <AiCrewPlatformDiagram />

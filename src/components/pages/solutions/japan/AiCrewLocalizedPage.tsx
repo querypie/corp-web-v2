@@ -38,7 +38,7 @@ export default function AiCrewLocalizedPage({ locale }: { locale: Exclude<Locale
         <div className="relative aspect-[16/9] overflow-hidden rounded-box bg-bg-content"><Image alt={copy.hero.imageAlt} className="object-cover" fill priority sizes="(min-width: 768px) 50vw, 100vw" src="/assets/pages/solutions/ai-crew/hero-visual.webp" /></div>
       </section>
 
-      <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[90px]">
+      <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
         <div className="mx-auto w-full max-w-[1200px] space-y-10">
           <SolutionSectionHeading title={copy.beforeAfter.titleLines} description={copy.beforeAfter.description} />
           <AiCrewBeforeAfter {...copy.beforeAfter} />
@@ -54,7 +54,7 @@ export default function AiCrewLocalizedPage({ locale }: { locale: Exclude<Locale
         </ButtonGroup>
       </section>
 
-      <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[90px]">
+      <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
         <div className="mx-auto w-full max-w-[1200px] space-y-6"><SolutionSectionHeading title={copy.platform.title} description={copy.platform.description} /><AiCrewPlatformDiagram coreBody={copy.platform.coreBody} items={copy.platform.items} /></div>
       </section>
 

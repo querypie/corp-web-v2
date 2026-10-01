@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Badge from "@/components/ui/Badge";
+import Button from "@/components/ui/Button";
 import { getLocalePath } from "@/constants/i18n";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import {
@@ -77,7 +78,7 @@ function ProcessFlow({ bordered = true, stages }: { bordered?: boolean; stages: 
 
 function ContentSection({ section, shaded }: { section: As400CobolSection; shaded: boolean }) {
   return (
-    <section className={shaded ? "-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[90px]" : "w-full"} id={section.id}>
+    <section className={shaded ? "-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]" : "w-full"} id={section.id}>
       <div className="mx-auto w-full max-w-[1200px] space-y-10">
         <div className="w-full space-y-4 text-center">
           <SolutionSectionHeading title={section.title} />
@@ -129,7 +130,7 @@ export default function As400CobolPage() {
 
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
-      <section className="mx-auto grid w-full max-w-[1200px] items-start gap-10 md:grid-cols-2 md:items-center md:gap-[30px]">
+      <section className="mx-auto grid w-full max-w-[1200px] items-start gap-10 md:grid-cols-2 md:gap-[30px]">
         <div className="flex flex-col items-start gap-6">
           <h1 className="m-0 text-pretty type-h1 text-fg">{copy.hero.title}</h1>
           <div className="max-w-[560px] space-y-3 type-body-lg text-fg">
@@ -155,7 +156,7 @@ export default function As400CobolPage() {
 
       <section className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-6 pb-5 pt-10 text-center md:pb-10 md:pt-20">
         <SolutionSectionHeading description={copy.contact.description} title={copy.contact.title} />
-        <SolutionActionLink href={contactHref}>{copy.contact.action}</SolutionActionLink>
+        <Button arrow={false} href={contactHref} size="large" style="full" variant="secondary">{copy.contact.action}</Button>
       </section>
     </div>
   );

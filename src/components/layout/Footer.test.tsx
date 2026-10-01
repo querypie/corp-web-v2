@@ -46,6 +46,7 @@ describe("Footer", () => {
     expect(screen.queryByText("価格・プラン")).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "社内業務効率化｜AI Crew" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "自社サービスAI化｜AI Dashi" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "オンプレミスAI｜Local LLM" })).toHaveAttribute("href", "/ja/solutions/local-llm");
     expect(screen.getByText("ソリューション").parentElement).toHaveClass("w-max", "max-w-full");
     expect(screen.getByRole("link", { name: "FDEサービス" })).toHaveAttribute("href", "/ja/platforms/aip/fde-services");
   });

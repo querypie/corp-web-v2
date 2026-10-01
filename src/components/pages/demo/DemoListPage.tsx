@@ -138,8 +138,8 @@ export default function DemoListPage({
                     <Link
                       key={`${item.label}-${item.href}`}
                       className={cx(
-                        "whitespace-nowrap transition-colors hover:text-fg",
-                        item.isActive ? "text-fg" : "text-mute",
+                        "whitespace-nowrap text-fg transition-opacity hover:opacity-100 focus-visible:opacity-100",
+                        item.isActive ? "opacity-100" : "opacity-40",
                       )}
                       href={item.href}
                     >

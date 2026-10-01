@@ -17,7 +17,7 @@ describe("Tab", () => {
     render(<Tab state="on">Active</Tab>);
     const btn = screen.getByRole("button");
     expect(btn).not.toBeDisabled();
-    expect(btn).toHaveClass("cursor-default", "bg-secondary", "text-fg");
+    expect(btn).toHaveClass("cursor-default", "bg-secondary", "text-fg", "opacity-100");
     expect(btn).not.toHaveClass("pointer-events-none");
     expect(btn).not.toHaveClass("hover:bg-secondary-hover", "hover:bg-bg-content");
   });
@@ -44,7 +44,7 @@ describe("Tab", () => {
   it("state=off 이면 비활성 스타일 클래스를 적용한다", () => {
     render(<Tab state="off">Inactive</Tab>);
     const btn = screen.getByRole("button");
-    expect(btn).toHaveClass("bg-transparent", "text-mute", "hover:text-fg");
+    expect(btn).toHaveClass("bg-transparent", "text-fg", "opacity-40", "hover:opacity-100", "focus-visible:opacity-100");
     expect(btn).not.toBeDisabled();
     expect(btn).not.toHaveClass("hover:bg-bg-content");
   });
@@ -52,7 +52,7 @@ describe("Tab", () => {
   it("state=hover 이면 배경 변화 없이 전경색을 적용한다", () => {
     render(<Tab state="hover">Hovered</Tab>);
 
-    expect(screen.getByRole("button")).toHaveClass("rounded-full", "bg-transparent", "text-fg");
+    expect(screen.getByRole("button")).toHaveClass("rounded-full", "bg-transparent", "text-fg", "opacity-100");
     expect(screen.getByRole("button")).not.toHaveClass("bg-bg-content");
   });
 
@@ -62,6 +62,8 @@ describe("Tab", () => {
     expect(btn).toBeDisabled();
     // disabled 시 state=on이어도 off 스타일로 처리
     expect(btn).not.toHaveClass("bg-secondary");
+    expect(btn).toHaveClass("text-fg", "opacity-40");
+    expect(btn).not.toHaveClass("hover:opacity-100", "focus-visible:opacity-100");
   });
 
   it("className prop을 추가 클래스로 적용한다", () => {

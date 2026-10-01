@@ -1,7 +1,7 @@
 import { getLocalePath, type Locale } from "@/constants/i18n";
 
 export type SolutionEntry = {
-  id: "ai-crew" | "ai-dashi" | "as400-cobol";
+  id: "ai-crew" | "ai-dashi" | "as400-cobol" | "local-llm";
   locales?: Locale[];
   slug: string[];
 };
@@ -10,6 +10,7 @@ export const solutionEntries: SolutionEntry[] = [
   { id: "ai-crew", slug: ["ai-crew"] },
   { id: "ai-dashi", slug: ["ai-dashi"] },
   { id: "as400-cobol", slug: ["as400-cobol"], locales: ["ja"] },
+  { id: "local-llm", slug: ["local-llm"], locales: ["ja"] },
 ];
 
 export function getSolutionEntryById(id: SolutionEntry["id"]): SolutionEntry | null {
