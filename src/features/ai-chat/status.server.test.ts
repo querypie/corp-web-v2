@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
-import { AI_CHAT_BASE_URL_DEV, AI_CHAT_MODEL } from "@/features/ai/config.server";
+import { AI_CHAT_BASE_URL_PROD, AI_CHAT_MODEL } from "@/features/ai/config.server";
 import { getAiChatStatusConfig, probeAiChat } from "./status.server";
 
 afterEach(() => {
@@ -18,7 +18,7 @@ describe("AI Chat 상태 점검 서비스", () => {
     expect(getAiChatStatusConfig()).toEqual({
       enabled: true,
       keyConfigured: true,
-      baseUrl: AI_CHAT_BASE_URL_DEV,
+      baseUrl: AI_CHAT_BASE_URL_PROD,
       model: AI_CHAT_MODEL,
       samplePrompt: "Reply with exactly OK and no other text.",
       environment: "preview",
@@ -83,13 +83,11 @@ describe("AI Chat 상태 점검 서비스", () => {
       code: "OK",
     });
     const [url, init] = fetcher.mock.calls[0];
-    expect(url).toBe(`${AI_CHAT_BASE_URL_DEV}/chat/completions`);
+    expect(url).toBe(`${AI_CHAT_BASE_URL_PROD}/chat/completions`);
     expect(init.headers.Authorization).toBe("Bearer stage-secret");
     const body = JSON.parse(init.body);
     expect(body).toEqual({
       model: AI_CHAT_MODEL,
-      max_tokens: 512,
-      temperature: 0,
       messages: [{ role: "user", content: "Reply with exactly OK and no other text." }],
     });
     expect(JSON.stringify(result)).not.toContain("stage-secret");

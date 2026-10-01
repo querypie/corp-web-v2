@@ -69,8 +69,6 @@ export async function probeAiChat(signal: AbortSignal): Promise<AiChatProbeResul
       cache: "no-store",
       body: JSON.stringify({
         model: config.model,
-        max_tokens: 512,
-        temperature: 0,
         messages: [{ role: "user", content: samplePrompt }],
       }),
     });

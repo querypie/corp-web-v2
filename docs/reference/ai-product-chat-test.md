@@ -1,6 +1,6 @@
 # AI 제품 상담 연결 및 검증
 
-브라우저는 같은 사이트의 `POST /api/ai-chat`만 호출합니다. Vercel 서버가 공식 자료를 조회하고 AI Gateway Stage에 모델 요청을 전송한 뒤, 검증된 답변과 출처만 반환합니다.
+브라우저는 같은 사이트의 `POST /api/ai-chat`만 호출합니다. Vercel 서버가 공식 자료를 조회하고 Partner Portal Production의 Hermes Wrapper에 모델 요청을 전송한 뒤, 검증된 답변과 출처만 반환합니다.
 
 ## 연결 설정
 
@@ -8,31 +8,32 @@
 
 | 코드 상수 | 값 |
 |-----------|----|
-| `AI_CHAT_BASE_URL` | `https://ai-gateway.stg.querypie.com/v1` |
-| `AI_CHAT_MODEL` | `querypie-internal/glm53-flash/glm-5.3-flash` |
+| `AI_CHAT_BASE_URL_PROD` | `https://partner-portal.app.querypie.com/api/hermes/v1` |
+| `AI_CHAT_MODEL` | `querypie-product-guide` |
 
-`querypie-internal`은 Gateway Provider 이름이며, `glm53-flash/glm-5.3-flash`는 Provider 내부 모델 이름입니다. 모델을 변경할 때는 Gateway의 `GET /v1/models`가 반환하는 전체 ID를 사용합니다.
+Vercel의 PR Preview, Preview Main과 Production은 모두 이 Production Wrapper URL을 사용합니다. `https://partner-portal.app.dev.querypie.io/api/hermes/v1`은 외부 인터넷에서 접근할 수 없는 Dev 내부 주소이므로 Vercel upstream으로 사용하지 않습니다. 모델을 변경할 때는 Wrapper의 `GET /models`가 반환하는 ID를 사용합니다.
 
 Vercel Project에는 다음 두 환경변수만 설정합니다. 로컬 개발에서는 Vercel Development 환경 값을 git에 포함되지 않는 `.env.local`로 가져와 사용합니다.
 
 ```dotenv
 # Development / Preview (= Stage = Staging) 예시. Production은 false로 설정합니다.
 AI_CHAT_ENABLED=true
-AI_CHAT_API_KEY=<Gateway Key>
+AI_CHAT_API_KEY=<Environment-specific Partner Portal Token>
 ```
 
-`AI_CHAT_API_KEY`는 서버 전용 비밀 환경변수로 등록합니다. 키 값은 1Password의 `corp-web-v2 AI Chat` 항목에서 가져오며, 코드, PR, 로그, 브라우저 응답에 포함하지 않습니다. `AI_CHAT_BASE_URL`과 `AI_CHAT_MODEL`은 Vercel 환경변수나 비밀정보가 아니라 서버 코드의 상수입니다.
+`AI_CHAT_API_KEY`는 서버 전용 비밀 환경변수로 등록합니다. 키 값은 1Password의 `corp-web-v2 AI Chat` 항목에서 가져오며, 코드, PR, 로그, 브라우저 응답에 포함하지 않습니다. `AI_CHAT_BASE_URL_PROD`와 `AI_CHAT_MODEL`은 Vercel 환경변수나 비밀정보가 아니라 서버 코드의 상수입니다.
 
 | Vercel 환경 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |
 |-------------|------------------------|-----------|-------------------|
 | Development | `corp-web-v2-development` | encrypted | `true` |
-| Preview (= Stage = Staging, main 및 PR) | `corp-web-v2-stage` | sensitive | `true` |
+| Preview PR | `corp-web-v2-preview` | sensitive | `true` |
+| Preview Main (= Stage = Staging) | `corp-web-v2-stage` | sensitive | `true` |
 | Production | `corp-web-v2-production` | sensitive | `false` |
 
 Development는 로컬 pull을 위해 `encrypted`로 등록합니다. Vercel은 Development에서 `sensitive` 타입을 지원하지 않습니다. [공식 문서](https://vercel.com/docs/environment-variables/sensitive-environment-variables)
 
 Preview, Stage, Staging은 같은 환경을 뜻하며, Stage 배포는 `main`의 Preview Deployment입니다.
-Preview의 PR 배포와 `main` 배포는 모두 `corp-web-v2-stage`의 Gateway Key를 사용합니다. 키는 Preview 공통 범위에 등록하며 브랜치별로 구분하지 않습니다. 키가 없으면 공식 자료나 모델을 호출하기 전에 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역은 기존 `CMS_TRANSLATION_*` 설정을 사용합니다.
+Preview PR은 Preview 공통 범위의 `corp-web-v2-preview` token을 사용하고, Preview Main은 `main` 브랜치 범위의 `corp-web-v2-stage` token을 우선 사용합니다. 키가 없으면 공식 자료나 모델을 호출하기 전에 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역은 기존 `CMS_TRANSLATION_*` 설정을 사용합니다.
 
 로컬 개발용 `.env.local`이 이미 있다면 `vercel env pull .env.local --environment=development`가 파일 전체를 바꿀 수 있으므로 임시 파일로 받은 뒤 필요한 값만 병합합니다.
 
@@ -82,7 +83,9 @@ npm run build
 npm run typecheck
 ```
 
-기본 모델은 응답 지연을 줄이기 위해 GLM-5.3 Flash를 사용하고, `reasoning_effort: "low"`를 명시합니다. Development 키로 동일 Gateway의 Flash 모델에 고정 요청을 보내 HTTP 200 / `OK` 응답을 약 443ms에 확인했습니다. 실제 소요 시간은 부하와 요청에 따라 달라집니다.
+Partner Portal Wrapper는 현재 `model`, `messages`, `stream`만 허용하므로 홈페이지는
+모델과 메시지만 전송합니다. `max_tokens`, `temperature`, `response_format` 같은 추가
+생성 옵션은 Wrapper가 지원하기 전까지 전송하지 않습니다.
 
 `domRuntime.test.ts`는 `require(ESM)`이 비활성화된 Node 프로세스에서 HTML·XML 파서 로딩을 확인합니다. `jsdom` 버전을 변경할 때는 이 테스트와 실제 Vercel Function의 cold start를 함께 확인합니다.
 

@@ -1,6 +1,6 @@
 # Vercel 배포 구현 현황
 
-**최종 업데이트**: 2026-09-21
+**최종 업데이트**: 2026-10-01
 
 corp-web-v2의 Vercel 배포 자동화 구현을 기술한다.
 
@@ -27,15 +27,17 @@ Production 수동 실행은 `BRANCH` 입력(기본값 `main`)의 HEAD로 `releas
 `release`에서 배포한다. 배포가 실패해도 `release`는 시도한 소스를
 가리킨다. 실제 서비스 중인 Production 버전은 Vercel의 현재 배포 SHA로 확인한다.
 
-### AI Chat Stage 임시 우회
+### AI Chat Partner Portal 연결
 
-2026-09-29 기준 Preview Main(Stage)과 Production의 AI Chat은 네트워크 접근
-정책으로 `partner-portal.app.querypie.com` upstream에 연결할 수 없어,
-`partner-portal.app.dev.querypie.io`를 임시 사용한다.
+Vercel의 PR Preview, Preview Main(Stage)과 Production은 모두 공개적으로 접근 가능한
+`https://partner-portal.app.querypie.com/api/hermes/v1`을 AI Chat upstream으로 사용한다.
+`https://partner-portal.app.dev.querypie.io/api/hermes/v1`은 외부 인터넷에서 접근할 수
+없는 Dev 내부 주소이므로 Vercel Function의 upstream으로 사용하지 않는다.
 
-네트워크 정책이 정리되면 `src/features/ai/config.server.ts`를 환경별 Prod 주소로
-되돌리고, Vercel Preview Main과 Production의 `AI_CHAT_API_KEY`도 Production
-토큰으로 되돌린다.
+URL은 모든 Vercel 배포에서 같지만 `AI_CHAT_API_KEY`는 Development, Preview PR,
+Preview Main과 Production별로 발급한 token을 사용한다. URL은
+`src/features/ai/config.server.ts`의 코드 상수로 관리하며 Vercel 환경변수로
+재정의하지 않는다.
 
 ### 현재 도메인 매핑
 
@@ -291,8 +293,11 @@ apex 도메인은 Vercel이 안내하는 apex용 레코드를 사용한다.
 
 Vercel 프로젝트에 설정해야 하는 기준값. 실제 등록값은 Vercel 대시보드 또는 `vercel env ls`로 확인한다.
 Preview 공통 값은 main과 PR 배포에 사용하고, `main` 전용 값은 Preview의 브랜치 범위로 지정한다.
-`AI_CHAT_API_KEY`는 기존 Stage 레코드의 값과 타입을 유지하면서 Preview 공통 범위로 옮겼다.
-main과 PR 모두 `corp-web-v2-stage`의 Gateway Key를 사용하며, 기존 Development 키를 사용하던 Preview 항목은 제거했다.
+2026-10-01에 `AI_CHAT_API_KEY`를 환경별 Partner Portal token으로 갱신했다.
+Development는 `corp-web-v2-development`, Preview 공통(PR)은 `corp-web-v2-preview`,
+Preview `main`은 `corp-web-v2-stage`, Production은 `corp-web-v2-production`을 사용한다.
+Preview 공통과 `main` 전용 레코드는 모두 `sensitive` 타입이며, Development는 로컬
+pull을 위해 `encrypted`, Production은 `sensitive` 타입을 유지한다.
 나머지 Stage 전용 환경변수 7개는 원래 레코드의 값과 타입을 유지하면서 Preview / `main` 범위를 추가했다.
 대상은 `AI_CHAT_ENABLED`, `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING`,
 `QUERYPIE_LICENSE_ISSUE_API_ENDPOINT`, `QUERYPIE_LICENSE_ISSUE_API_KEY`, `SALESFORCE_ENDPOINT`, `SLACK_BOT_OAUTH_TOKEN`,

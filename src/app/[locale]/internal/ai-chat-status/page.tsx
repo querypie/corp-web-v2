@@ -15,7 +15,7 @@ const copyByLocale = {
     metadataTitle: "AI Chat Status",
     title: "AI Chat Status",
     description:
-      "Checks whether the Vercel Server can connect directly to AI Gateway Stage. The browser is not used as a proxy.",
+      "Checks whether the Vercel Server can connect directly to Partner Portal Production. The browser is not used as a proxy.",
     configTitle: "Runtime configuration",
     probeTitle: "Basic request",
     resultTitle: "Response",
@@ -72,7 +72,7 @@ const copyByLocale = {
     metadataTitle: "AI Chat 상태 진단",
     title: "AI Chat 상태 진단",
     description:
-      "Vercel Server에서 AI Gateway Stage로 직접 연결되는지 확인합니다. 브라우저는 프록시로 사용하지 않습니다.",
+      "Vercel Server에서 Partner Portal Production으로 직접 연결되는지 확인합니다. 브라우저는 프록시로 사용하지 않습니다.",
     configTitle: "실행 설정",
     probeTitle: "기본 요청",
     resultTitle: "응답 결과",
@@ -129,7 +129,7 @@ const copyByLocale = {
     metadataTitle: "AI Chat ステータス診断",
     title: "AI Chat ステータス診断",
     description:
-      "Vercel Server から AI Gateway Stage に直接接続できるかを確認します。ブラウザをプロキシとして使用しません。",
+      "Vercel Server から Partner Portal Production に直接接続できるかを確認します。ブラウザをプロキシとして使用しません。",
     configTitle: "実行設定",
     probeTitle: "基本リクエスト",
     resultTitle: "応答結果",

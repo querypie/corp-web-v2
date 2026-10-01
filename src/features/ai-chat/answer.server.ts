@@ -11,9 +11,6 @@ type PreparedChatRequest = {
   endpoint: string;
   body: {
     model: string;
-    max_tokens: number;
-    temperature: number;
-    response_format: { type: "json_object" };
     messages: { role: string; content: string }[];
   };
   references: (ChatSource & { id: string })[];
@@ -38,9 +35,6 @@ async function prepareProductQuestion(messages: ChatTurn[], locale: Locale, sign
     references: chunksWithIds.map(({ id, title, url }) => ({ id, title, url })),
     body: {
       model,
-      max_tokens: 4096,
-      temperature: 0.2,
-      response_format: { type: "json_object" },
       messages: [
         {
           role: "system",
