@@ -140,6 +140,15 @@ describe("AI 챗 Slack 알림", () => {
     expect(postMessage.mock.calls[1][0]).not.toHaveProperty("thread_ts");
     expect(warning.mock.calls).toEqual([["[ai-chat]", { event: "slack_notification_error" }]]);
   });
+  it("첫 대화 기록 전송에 실패해도 별도 채널 오류 알림을 보낸다", async () => {
+    const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
+    postMessage.mockRejectedValueOnce(new Error("private Slack details"));
+    expect(await notifyAiChatTurn({ ...input, outcome: { code: "PROVIDER_ERROR" } })).toBeUndefined();
+    await expect(callbacks[0]()).resolves.toBeUndefined();
+    expect(postMessage).toHaveBeenCalledTimes(2);
+    expect(postMessage.mock.calls[1][0]).not.toHaveProperty("thread_ts");
+    expect(warning.mock.calls).toEqual([["[ai-chat]", { event: "slack_notification_error" }]]);
+  });
   it("별도 오류 알림 실패는 스레드 연결값과 대화 기록에 영향을 주지 않는다", async () => {
     const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
     const token = await notifyAiChatTurn({ ...input, outcome: { code: "PROVIDER_ERROR" } });

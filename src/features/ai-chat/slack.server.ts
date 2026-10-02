@@ -13,6 +13,13 @@ type ChatNotification = {
   slackThreadToken?: unknown;
 };
 
+type SlackMessage = {
+  text: string;
+  blocks: Extract<ChatPostMessageArguments, { blocks: unknown }>["blocks"];
+  thread_ts?: string;
+  reply_broadcast?: false;
+};
+
 const channels = { production: "C08FXKA72SU", development: "C0C211STFRR" };
 const localeLabels: Record<Locale, string> = { en: "영어", ko: "한국어", ja: "일본어" };
 const maxErrorQuestionLength = 80;
@@ -56,7 +63,7 @@ export async function notifyAiChatTurn(input: ChatNotification): Promise<string 
     type: "context" as const,
     elements: [{ type: "plain_text" as const, text: `${environmentLabel} · ${localeLabels[input.locale]} · ${durationText}`, emoji: false }],
   };
-  const turnMessage: Pick<ChatPostMessageArguments, "text" | "blocks" | "thread_ts" | "reply_broadcast"> = {
+  const turnMessage: SlackMessage = {
     ...(threadTs ? { thread_ts: threadTs, reply_broadcast: false } : {}),
     text: title,
     blocks: [
@@ -78,7 +85,7 @@ export async function notifyAiChatTurn(input: ChatNotification): Promise<string 
       getLevel: () => LogLevel.ERROR,
     },
   });
-  async function send(message: Pick<ChatPostMessageArguments, "text" | "blocks" | "thread_ts" | "reply_broadcast">) {
+  async function send(message: SlackMessage) {
     try {
       const result = await client.chat.postMessage({
         channel,
