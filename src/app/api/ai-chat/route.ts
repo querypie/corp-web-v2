@@ -51,17 +51,18 @@ export async function POST(request: Request) {
   if (requests >= 30 || active >= 3) return error("RATE_LIMITED", 429);
   requests++;
   active++;
-  const notify = (outcome: Parameters<typeof notifyAiChatTurn>[0]["outcome"]) =>
-    notifyAiChatTurn({ locale, question: messages.at(-1).content, outcome, slackThreadToken }).catch(() => undefined);
+  const notify = (outcome: Parameters<typeof notifyAiChatTurn>[0]["outcome"], upstreamDurationMs: number) =>
+    notifyAiChatTurn({ locale, question: messages.at(-1).content, outcome, slackThreadToken, upstreamDurationMs }).catch(() => undefined);
+  const upstreamStarted = performance.now();
   try {
     const reply = await answerProductQuestion(messages as ChatTurn[], locale, AbortSignal.any([request.signal, AbortSignal.timeout(55000)]));
-    const token = await notify(reply);
+    const token = await notify(reply, performance.now() - upstreamStarted);
     return NextResponse.json({ ...reply, ...(token ? { slackThreadToken: token } : {}) }, { headers: { "Cache-Control": "no-store" } });
   } catch (cause) {
     const [code, status] = cause instanceof ChatServiceError ? [cause.code, cause.status]
       : cause instanceof Error && ["TimeoutError", "AbortError"].includes(cause.name) ? ["TIMEOUT", 504] as const
       : ["PROVIDER_ERROR", 502] as const;
-    const token = await notify({ code });
+    const token = await notify({ code }, performance.now() - upstreamStarted);
     return NextResponse.json({ code, ...(token ? { slackThreadToken: token } : {}) }, { status, headers: { "Cache-Control": "no-store" } });
   } finally { active--; }
 }

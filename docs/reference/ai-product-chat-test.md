@@ -69,7 +69,11 @@ vercel env pull .env.vercel-development.local --environment=development
 
 환경은 `VERCEL_TARGET_ENV`, `VERCEL_ENV`, `development` 순서로 결정합니다. 기존 Bot이 대상 채널에 메시지를 쓸 수 있어야 하며, 토큰이 없는 환경에서는 Slack 알림을 건너뜁니다. Production의 기존 `AI_CHAT_ENABLED=false` 정책은 유지합니다.
 
-유효성 검사와 사용량 제한을 통과한 질문은 최신 사용자 메시지와 Hermes 답변을 기록합니다. AI 응답에 실패하면 질문과 공개 오류 코드만 기록합니다. 이전 대화 전체나 원시 Wrapper 응답 메타데이터를 재전송하지 않습니다.
+유효성 검사와 사용량 제한을 통과한 질문은 최신 사용자 메시지와 Hermes 답변을 기록합니다. 성공·실패 모두 Hermes 호출부터 전체 답변 해석 또는 오류까지의 시간을 `Upstream 응답 시간: 12.34초` 형식으로 표시합니다. 브라우저 전송 시간과 Slack 알림 대기는 측정에서 제외합니다.
+
+AI 응답에 실패하면 공개 오류 코드와 질문 앞부분 최대 80자만 대화 기록에 남깁니다. 80자를 넘는 질문은 생략 표시(`…`)를 붙이며, Unicode 코드 포인트 기준으로 잘라 이모지를 쪼개지 않습니다. 이전 대화 전체나 원시 Wrapper 응답 메타데이터를 재전송하지 않습니다.
+
+AI 응답 실패는 대화 기록과 별개로 같은 환경의 기존 채널에도 새 메시지로 알립니다. 이 알림에는 `thread_ts`를 지정하지 않고, 오류 코드·응답 시간·환경·언어·질문 미리보기만 표시합니다. Production은 `#alert-website-chatbot`, non-production은 `#alert-website-chatbot-dev`를 그대로 사용합니다. 별도 오류 알림은 Next.js `after()`에서 보내므로 브라우저 응답을 지연시키지 않고, 스레드 전송 실패와 별개로 시도합니다.
 
 첫 질문·답변은 Slack 부모 메시지로, 연속된 대화는 같은 부모의 `thread_ts`를 지정한 댓글로 보냅니다. 서버가 기존 Bot 토큰으로 서명한 `slackThreadToken`을 응답하며, 브라우저는 이를 탭의 대화와 함께 `sessionStorage`에 저장합니다. 페이지 이동·새로고침 후에도 이어지고, 대화 초기화 시 연결값도 지워집니다. 서버 메모리나 별도 DB에 의존하지 않으며, 서명과 환경·채널을 검증하므로 임의의 스레드 ID를 지정할 수 없습니다. Bot 토큰이 바뀌면 다음 대화부터 새 스레드로 기록합니다.
 

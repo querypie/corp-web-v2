@@ -15,7 +15,7 @@ vi.mock("@slack/web-api", () => ({
 }));
 import { notifyAiChatTurn } from "./slack.server";
 
-const input = { locale: "ko" as const, question: "AIP 설명해줘", outcome: { answer: "제품 답변", sources: [] } };
+const input = { locale: "ko" as const, question: "AIP 설명해줘", outcome: { answer: "제품 답변", sources: [] }, upstreamDurationMs: 1234 };
 
 beforeEach(() => {
   vi.stubEnv("SLACK_BOT_OAUTH_TOKEN", "existing-test-token");
@@ -64,7 +64,7 @@ describe("AI 챗 Slack 알림", () => {
       { type: "divider" },
       { type: "header", text: { type: "plain_text", text: "AI 답변", emoji: false } },
       { type: "section", text: { type: "plain_text", text: input.outcome.answer, emoji: false } },
-      { type: "context", elements: [{ type: "plain_text", text: "Preview · 한국어", emoji: false }] },
+      { type: "context", elements: [{ type: "plain_text", text: "Preview · 한국어 · Upstream 응답 시간: 1.23초", emoji: false }] },
     ]);
   });
   it("응답 실패는 정상 답변과 다른 제목으로 표시한다", async () => {
@@ -72,6 +72,81 @@ describe("AI 챗 Slack 알림", () => {
     const blocks = postMessage.mock.calls[0][0].blocks;
     expect(blocks[3]).toMatchObject({ type: "header", text: { text: "AI 응답 실패" } });
     expect(blocks[4]).toMatchObject({ type: "section", text: { type: "plain_text", text: "INVALID_RESPONSE" } });
+  });
+  it.each([[0, "0.00"], [5, "0.01"], [1999, "2.00"], [28125, "28.13"]])(
+    "upstream %dms를 %s초로 표시한다", async (upstreamDurationMs, seconds) => {
+      await notifyAiChatTurn({ ...input, upstreamDurationMs });
+      expect(JSON.stringify(postMessage.mock.calls[0][0].blocks)).toContain(`Upstream 응답 시간: ${seconds}초`);
+    },
+  );
+  it("첫 요청 오류도 대화 기록과 별개로 채널에 오류 코드와 지연시간을 알린다", async () => {
+    vi.stubEnv("VERCEL_TARGET_ENV", "production");
+    const failed = { ...input, outcome: { code: "PROVIDER_ERROR" }, upstreamDurationMs: 32936 };
+    const token = await notifyAiChatTurn(failed);
+    expect(token).toMatch(/^1234567890\.000001:[\w-]{43}$/);
+    expect(postMessage).toHaveBeenCalledTimes(1);
+    expect(callbacks).toHaveLength(1);
+    await callbacks[0]();
+    expect(postMessage).toHaveBeenCalledTimes(2);
+    const alert = postMessage.mock.calls[1][0];
+    expect(alert).toMatchObject({ channel: "C08FXKA72SU", mrkdwn: false, parse: "none", link_names: false });
+    expect(alert).not.toHaveProperty("thread_ts");
+    expect(alert.blocks[0]).toMatchObject({ type: "header", text: { type: "plain_text", text: "AI 응답 오류 발생" } });
+    const alertText = JSON.stringify(alert);
+    expect(alertText).toContain("PROVIDER_ERROR");
+    expect(alertText).toContain("32.94초");
+    expect(alertText).toContain("Production · 한국어");
+  });
+  it("후속 요청 오류는 같은 스레드와 별도 채널 메시지에 질문 앞부분 80자만 기록한다", async () => {
+    const token = await notifyAiChatTurn(input);
+    postMessage.mockClear();
+    const prefix = "가🙂".repeat(40);
+    const question = `${prefix}노출하지 않을 질문 뒷부분`;
+    expect(await notifyAiChatTurn({ ...input, question, outcome: { code: "TIMEOUT" }, upstreamDurationMs: 55000, slackThreadToken: token })).toBe(token);
+    expect(postMessage).not.toHaveBeenCalled();
+    await callbacks[0]();
+    expect(postMessage).toHaveBeenCalledTimes(2);
+    const payloads = postMessage.mock.calls.map(([message]) => message);
+    expect(payloads.filter((message) => message.thread_ts === "1234567890.000001")).toHaveLength(1);
+    expect(payloads.filter((message) => !("thread_ts" in message))).toHaveLength(1);
+    for (const message of payloads) {
+      const text = JSON.stringify(message);
+      expect(text).toContain(`${prefix}…`);
+      expect(text).not.toContain("노출하지 않을 질문 뒷부분");
+      expect(text).toContain("TIMEOUT");
+      expect(text).toContain("55.00초");
+      expect(message.channel).toBe("C0C211STFRR");
+      expect(message.blocks.filter((block: { type: string }) => block.type === "section")
+        .every((block: { text: { type: string } }) => block.text.type === "plain_text")).toBe(true);
+    }
+  });
+  it.each(["PROVIDER_ERROR", "INVALID_RESPONSE", "TIMEOUT"])("%s 오류의 짧은 질문은 생략 표시 없이 기록한다", async (code) => {
+    await notifyAiChatTurn({ ...input, outcome: { code } });
+    await callbacks[0]();
+    for (const [message] of postMessage.mock.calls) {
+      const text = JSON.stringify(message);
+      expect(text).toContain(input.question);
+      expect(text).not.toContain(`${input.question}…`);
+    }
+  });
+  it("스레드 전송 실패와 별개로 채널 오류 알림을 시도한다", async () => {
+    const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const token = await notifyAiChatTurn(input);
+    postMessage.mockReset().mockRejectedValueOnce(new Error("private Slack details"))
+      .mockResolvedValueOnce({ ok: true, ts: "1234567890.000002" });
+    await notifyAiChatTurn({ ...input, outcome: { code: "PROVIDER_ERROR" }, slackThreadToken: token });
+    await expect(callbacks[0]()).resolves.toBeUndefined();
+    expect(postMessage).toHaveBeenCalledTimes(2);
+    expect(postMessage.mock.calls[1][0]).not.toHaveProperty("thread_ts");
+    expect(warning.mock.calls).toEqual([["[ai-chat]", { event: "slack_notification_error" }]]);
+  });
+  it("별도 오류 알림 실패는 스레드 연결값과 대화 기록에 영향을 주지 않는다", async () => {
+    const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
+    const token = await notifyAiChatTurn({ ...input, outcome: { code: "PROVIDER_ERROR" } });
+    postMessage.mockRejectedValueOnce(new Error("private Slack details"));
+    await expect(callbacks[0]()).resolves.toBeUndefined();
+    expect(token).toMatch(/^1234567890\.000001:[\w-]{43}$/);
+    expect(warning.mock.calls).toEqual([["[ai-chat]", { event: "slack_notification_error" }]]);
   });
   it("서버 인스턴스가 바뀌어도 같은 대화는 응답 후 부모 스레드에 추가한다", async () => {
     const token = await notifyAiChatTurn(input);
