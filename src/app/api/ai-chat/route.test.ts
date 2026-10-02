@@ -23,7 +23,7 @@ beforeEach(() => {
   vi.mocked(notifyAiChatTurn).mockReset();
   vi.mocked(notifyAiChatTurn).mockResolvedValue(undefined);
 });
-afterEach(() => vi.unstubAllEnvs());
+afterEach(() => { vi.unstubAllEnvs(); vi.restoreAllMocks(); });
 
 describe("제품 상담 API", () => {
   it("Preview에서도 브라우저용 모델 요청을 준비하지 않고 서버 답변만 반환한다", async () => {
@@ -92,7 +92,7 @@ describe("제품 상담 API", () => {
     const result = await POST(request());
     expect(result.status).toBe(502);
     expect(await result.json()).toEqual({ code: "PROVIDER_ERROR" });
-    expect(notifyAiChatTurn).toHaveBeenCalledWith({ locale: "ko", question: "AIP 설명해줘", outcome: { code: "PROVIDER_ERROR" }, slackThreadToken: undefined });
+    expect(notifyAiChatTurn).toHaveBeenCalledWith({ locale: "ko", question: "AIP 설명해줘", outcome: { code: "PROVIDER_ERROR" }, slackThreadToken: undefined, upstreamDurationMs: expect.any(Number) });
   });
   it("최신 질문과 검증된 답변만 알리고 스레드 연결값을 반환한다", async () => {
     const reply = { answer: "후속 답변", sources: [] };
@@ -101,7 +101,7 @@ describe("제품 상담 API", () => {
     const result = await POST(request({ ...payload, slackThreadToken: "signed-thread", messages: [
       { role: "user", content: "이전 질문" }, { role: "assistant", content: "이전 답변" }, ...payload.messages,
     ] }));
-    expect(notifyAiChatTurn).toHaveBeenCalledExactlyOnceWith({ locale: "ko", question: "AIP 설명해줘", outcome: reply, slackThreadToken: "signed-thread" });
+    expect(notifyAiChatTurn).toHaveBeenCalledExactlyOnceWith({ locale: "ko", question: "AIP 설명해줘", outcome: reply, slackThreadToken: "signed-thread", upstreamDurationMs: expect.any(Number) });
     expect(await result.json()).toEqual({ ...reply, slackThreadToken: "signed-thread" });
   });
   it("알림 오류는 정상 AI 응답을 바꾸지 않는다", async () => {
@@ -118,5 +118,30 @@ describe("제품 상담 API", () => {
     const result = await POST(request());
     expect(result.status).toBe(502);
     expect(await result.json()).toEqual({ code: "PROVIDER_ERROR", slackThreadToken: "signed-thread" });
+  });
+  it("전체 upstream 답변까지 걸린 시간을 전달하고 Slack 대기시간은 제외한다", async () => {
+    let now = 1000;
+    vi.spyOn(performance, "now").mockImplementation(() => now);
+    const reply = { answer: "정상 답변", sources: [] };
+    vi.mocked(answerProductQuestion).mockImplementation(async () => { now += 1234; return reply; });
+    vi.mocked(notifyAiChatTurn).mockImplementation(async () => { now += 2000; return "signed-thread"; });
+    const result = await POST(request());
+    expect(notifyAiChatTurn).toHaveBeenCalledWith(expect.objectContaining({ upstreamDurationMs: 1234, outcome: reply }));
+    expect(await result.json()).toEqual({ ...reply, slackThreadToken: "signed-thread" });
+  });
+  it.each([
+    [new ChatServiceError("PROVIDER_ERROR", 502), "PROVIDER_ERROR", 502],
+    [new ChatServiceError("INVALID_RESPONSE", 502), "INVALID_RESPONSE", 502],
+    [new DOMException("private timeout details", "TimeoutError"), "TIMEOUT", 504],
+    [new TypeError("private network details"), "PROVIDER_ERROR", 502],
+  ])("upstream 실패(%s)에도 오류와 지연시간을 Slack에 전달한다", async (cause, code, status) => {
+    let now = 1000;
+    vi.spyOn(performance, "now").mockImplementation(() => now);
+    vi.mocked(answerProductQuestion).mockImplementation(async () => { now += 28125; throw cause; });
+    vi.mocked(notifyAiChatTurn).mockImplementation(async () => { now += 2000; return undefined; });
+    const result = await POST(request());
+    expect(notifyAiChatTurn).toHaveBeenCalledWith(expect.objectContaining({ upstreamDurationMs: 28125, outcome: { code } }));
+    expect(result.status).toBe(status);
+    expect(await result.json()).toEqual({ code });
   });
 });
