@@ -22,7 +22,7 @@
   "externalUrl": "",
   "gatingLevel": "none",
   "hideHeroImage": false,
-  "id": "digital-agency-gss-security-ai-era",
+  "id": "digital-agency-gss-vpn-access-governance",
   "imageSrc": "/resources/blogs/thumbnail-6.webp",
   "relatedIds": [],
   "section": "resources",
@@ -32,12 +32,12 @@
   "summary": {
     "en": "",
     "ko": "",
-    "ja": "デジタル庁のガバメントソリューションサービス（GSS）への不正アクセスで、職員等の個人情報が漏えいした可能性が公表されました。本件から、AI時代にCxOが見直すべきVPN脆弱性管理、アクセス制御、インシデント対応を解説します。"
+    "ja": "デジタル庁が公表したガバメントソリューションサービス（GSS）への不正アクセスを起点に、AI時代にCxOが見直すべきVPN脆弱性管理、アクセス統制、インシデント対応を解説します。"
   },
   "title": {
     "en": "",
     "ko": "",
-    "ja": "デジタル庁GSS情報漏洩から1週間——「政府クラウド」への信頼は今どこにあるのか｜AI時代のセキュリティ再考"
+    "ja": "デジタル庁GSSへの不正アクセスから考える——AI時代に見直すべきVPN脆弱性管理とアクセス統制"
   },
   "visibleLocales": [
     "ja"
