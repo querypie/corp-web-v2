@@ -3,7 +3,7 @@
   "authorRole": "AI Security Research",
   "categorySlug": "white-papers",
   "contentType": "content",
-  "dateIso": "2026-09-19",
+  "dateIso": "2026-10-03",
   "downloadCoverImageSrc": "/resources/white-papers/multilingual-dlp-ai-cover.png",
   "downloadPdfFileName": "",
   "downloadPdfFileNameByLocale": {
@@ -32,12 +32,12 @@
   "summary": {
     "en": "A technical account of multilingual sensitive-data detection: dataset design, lightweight risk screening, precise extraction, the correction of character-offset errors, and comparative model evaluation.",
     "ko": "한국어·영어·일본어 민감정보 탐지 모델의 데이터 구성, 경량 분류와 정밀 추출의 역할 분리, 위치 오류를 줄이기 위한 출력 구조 변경과 평가 결과를 설명합니다.",
-    "ja": "韓国語・英語・日本語の機密情報検知モデルにおけるデータ構成、軽量分類と高精度抽出の役割分担、位置ずれを減らす出力構造の変更、評価結果について解説します。"
+    "ja": "生成AI利用における機密情報保護を、リスク分類・高精度抽出・ポリシー実行の観点から整理します。公開ガイドラインと社内検証の評価方法を踏まえ、日本企業が多言語DLPを導入する際の設計判断と実装チェックリストを提供します。"
   },
   "title": {
     "en": "Design and Evaluation of DLP AI Models for Multilingual Sensitive Data Detection",
     "ko": "다국어 민감정보 탐지를 위한 DLP AI 모델 설계와 평가",
-    "ja": "多言語の機密情報検知に向けたDLP AIモデルの設計と評価"
+    "ja": "生成AI利用における多言語DLP設計ガイド──機密情報を守り、業務文脈を生かす"
   },
   "visibleLocales": [
     "en",
