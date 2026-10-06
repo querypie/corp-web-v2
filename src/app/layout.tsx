@@ -45,6 +45,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: siteTitle,
     description: "QueryPie AI transforms how enterprises work with AI.",
     metadataBase: await getRequestSiteOrigin(),
+    formatDetection: { telephone: false },
   };
 }
 

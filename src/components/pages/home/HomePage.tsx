@@ -77,6 +77,7 @@ export type HomePageProps = {
   heroHeading: string;
   heroImageAlt: string;
   heroPrimaryCtaLabel: string;
+  heroVideoSrc?: string;
   locale: Locale;
   mcpAction: McpAction;
   mcpDescription: string[];
@@ -100,6 +101,7 @@ export default function HomePage({
   heroHeading,
   heroImageAlt,
   heroPrimaryCtaLabel,
+  heroVideoSrc,
   locale,
   mcpAction,
   mcpDescription,
@@ -123,6 +125,7 @@ export default function HomePage({
             heroHeading={heroHeading}
             imageAlt={heroImageAlt}
             locale={locale}
+            videoSrc={heroVideoSrc}
           />
         </div>
 

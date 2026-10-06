@@ -208,13 +208,13 @@ function ComparisonTable({
 }
 
 export default function PlansPage({
-  productKey = "aip",
+  productKey = "acp",
   locale,
 }: PlansPageProps) {
   const pricingProducts = pricingProductsByLocale[locale];
   const pageCopy = getPlansPageCopy(locale);
   const activeProductKey: keyof typeof pricingProducts =
-    productKey in pricingProducts ? productKey : "aip";
+    productKey in pricingProducts ? productKey : "acp";
   const activeProduct = useMemo(
     () => pricingProducts[activeProductKey],
     [activeProductKey, pricingProducts],
@@ -228,8 +228,8 @@ export default function PlansPage({
 
             {/* 제품군 전환 탭 */}
             <TabGroup>
-              {(Object.entries(pricingProducts) as Array<[keyof typeof pricingProducts, PricingProduct]>).map(
-                ([key, product]) => (
+              {(["acp", "aip"] as const).map(
+                (key) => (
                   <TabLink
                     aria-current={activeProductKey === key ? "page" : undefined}
                     href={getProductHref(locale, key)}
@@ -238,7 +238,7 @@ export default function PlansPage({
                     scroll={false}
                     state={activeProductKey === key ? "on" : "off"}
                   >
-                    {product.tabLabel}
+                    {pricingProducts[key].tabLabel}
                   </TabLink>
                 ),
               )}

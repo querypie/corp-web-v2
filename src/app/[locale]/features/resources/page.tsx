@@ -16,6 +16,7 @@ import {
   getPublicListHref,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
+import { sortResourceCategoryItems } from "@/features/content/resourceListOrder";
 import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type DocsPageProps = {
@@ -51,8 +52,11 @@ export default async function ResourcesPage({ params, searchParams }: DocsPagePr
   const visibleCategorySlugs = Array.from(
     new Set(publicDocsItems.map((item) => item.categorySlug as DocsCategorySlug)),
   );
-  const docsItems = publicDocsItems
-    .filter((item) => selectedCategory === "all" || item.categorySlug === selectedCategory);
+  const docsItems = sortResourceCategoryItems(
+    publicDocsItems.filter((item) => selectedCategory === "all" || item.categorySlug === selectedCategory),
+    locale,
+    selectedCategory,
+  );
 
   const fallbackItems = docsItems.map((item) => ({
     category: getCategoryLabel(docsCategoryConfigs, item.categorySlug, locale),

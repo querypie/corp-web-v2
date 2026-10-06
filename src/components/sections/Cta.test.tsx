@@ -3,6 +3,24 @@ import { describe, expect, it } from "vitest";
 import Cta from "./Cta";
 
 describe("Cta", () => {
+  it.each(["en", "ko", "ja"] as const)("renders the CTA actions in the expected order for %s", (locale) => {
+    render(<Cta locale={locale} />);
+
+    expect(screen.getAllByRole("link").map((link) => link.textContent)).toEqual(
+      locale === "ja"
+        ? ["Agentic AI Platform", "ACP Community Edition"]
+        : ["ACP Community Edition", "Agentic AI Platform"],
+    );
+    expect(screen.getByRole("link", { name: "ACP Community Edition" })).toHaveAttribute(
+      "href",
+      `https://docs.querypie.com/${locale}/installation/querypie-acp-community-edition`,
+    );
+    expect(screen.getByRole("link", { name: "Agentic AI Platform" })).toHaveAttribute(
+      "href",
+      "https://app.querypie.com/",
+    );
+  });
+
   it("renders the shared primary and secondary actions by default", () => {
     const { container } = render(<Cta locale="ko" />);
 

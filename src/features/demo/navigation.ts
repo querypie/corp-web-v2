@@ -6,11 +6,11 @@ import {
   type PublicMenuItem,
 } from "@/features/content/config";
 
-const demoCmsCategorySlugs: DemoCategorySlug[] = [
-  "all",
-  "aip-features",
-  "acp-features",
-];
+const demoCmsCategorySlugs = {
+  en: ["all", "acp-features", "aip-features"],
+  ko: ["all", "acp-features", "aip-features"],
+  ja: ["all", "aip-features", "acp-features"],
+} satisfies Record<Locale, DemoCategorySlug[]>;
 
 export function getDemoSidebarMenuItems(
   locale: Locale,
@@ -20,7 +20,7 @@ export function getDemoSidebarMenuItems(
     getPublicMenuItems(demoCategoryConfigs, locale, activeSlug).map((item) => [item.slug, item]),
   );
 
-  return demoCmsCategorySlugs.flatMap((slug) => {
+  return demoCmsCategorySlugs[locale].flatMap((slug) => {
     const item = cmsLinkItemsBySlug.get(slug);
     return item ? [item] : [];
   });

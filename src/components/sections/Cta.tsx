@@ -90,6 +90,16 @@ export default function Cta({
     actionSize,
     "default",
   );
+  const actions = [
+    { key: "primary", href: actionHref, label: resolvedActionLabel, styles: actionStyles },
+    ...(hasSecondaryAction ? [{
+      key: "secondary",
+      href: resolvedSecondaryActionHref,
+      label: resolvedSecondaryActionLabel,
+      styles: secondaryStyles,
+    }] : []),
+  ];
+  if (locale === "en" || locale === "ko") actions.reverse();
   const heading = (
     <div className="min-w-full type-h1">
       {hideEyebrow ? null : <p className="mb-0 text-mute">{eyebrow ?? defaultCopy.eyebrow}</p>}
@@ -121,32 +131,23 @@ export default function Cta({
             !hasSecondaryAction && "min-w-full",
           )}
         >
-          <a
-            className={cx(actionStyles.container, actionStyles.text, "group cursor-pointer")}
-            href={actionHref}
-            rel="noreferrer noopener"
-            target="_blank"
-          >
-            <span className="inline-flex items-center justify-center gap-2 text-center">
-              {resolvedActionLabel}
-            </span>
-          </a>
-          {hasSecondaryAction ? (
+          {actions.map((action) => (
             <a
               className={cx(
-                secondaryStyles.container,
-                secondaryStyles.text,
+                action.styles.container,
+                action.styles.text,
                 "group cursor-pointer",
               )}
-              href={resolvedSecondaryActionHref}
+              href={action.href}
+              key={action.key}
               rel="noreferrer noopener"
               target="_blank"
             >
               <span className="inline-flex items-center justify-center gap-2 text-center">
-                {resolvedSecondaryActionLabel}
+                {action.label}
               </span>
             </a>
-          ) : null}
+          ))}
         </ButtonGroup>
       </div>
     </section>

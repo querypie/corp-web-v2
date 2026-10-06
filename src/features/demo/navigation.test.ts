@@ -6,18 +6,18 @@ describe("getDemoSidebarMenuItems", () => {
     expect(getDemoSidebarMenuItems("en", "all")).toEqual([
       { href: "/en/demo", isActive: true, kind: "link", label: "All", slug: "all" },
       {
-        href: "/en/demo/aip",
-        isActive: false,
-        kind: "link",
-        label: "AIP Use Cases",
-        slug: "aip-features",
-      },
-      {
         href: "/en/demo/acp",
         isActive: false,
         kind: "link",
         label: "ACP Use Cases",
         slug: "acp-features",
+      },
+      {
+        href: "/en/demo/aip",
+        isActive: false,
+        kind: "link",
+        label: "AIP Use Cases",
+        slug: "aip-features",
       },
     ]);
   });
@@ -46,18 +46,18 @@ describe("getDemoSidebarMenuItems", () => {
     expect(getDemoSidebarMenuItems("ko", "all")).toEqual([
       { href: "/ko/demo", isActive: true, kind: "link", label: "전체", slug: "all" },
       {
-        href: "/ko/demo/aip",
-        isActive: false,
-        kind: "link",
-        label: "AIP 활용",
-        slug: "aip-features",
-      },
-      {
         href: "/ko/demo/acp",
         isActive: false,
         kind: "link",
         label: "ACP 활용",
         slug: "acp-features",
+      },
+      {
+        href: "/ko/demo/aip",
+        isActive: false,
+        kind: "link",
+        label: "AIP 활용",
+        slug: "aip-features",
       },
     ]);
   });
