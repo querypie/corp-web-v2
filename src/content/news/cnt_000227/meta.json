@@ -1,0 +1,41 @@
+{
+  "authorName": "Press Release",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "content",
+  "dateIso": "2026-10-07",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": { "en": "", "ko": "", "ja": "" },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": { "en": "", "ko": "", "ja": "" },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "aru-desktop-ai-agent-launch",
+  "imageSrc": "/news/aru-launch/thumbnail.png",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000227",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": "QueryPie AI合同会社は、開発・制作・日々の業務を支援するデスクトップAIエージェント「Aru（アル）」の提供を開始しました。"
+  },
+  "title": {
+    "en": "",
+    "ko": "",
+    "ja": "QueryPie AI、デスクトップAIエージェント「Aru」を提供開始"
+  },
+  "visibleLocales": ["ja"],
+  "locales": {
+    "ja": {
+      "htmlPath": "src/content/news/cnt_000227/ja.html",
+      "jsonPath": "src/content/news/cnt_000227/ja.tiptap.json"
+    }
+  }
+}
