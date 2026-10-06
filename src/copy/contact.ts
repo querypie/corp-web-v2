@@ -1,6 +1,12 @@
 import { getPublicListHref } from "@/features/content/data";
 import type { Locale } from "@/constants/i18n";
 
+export const aruProductLabels: Record<Locale, string> = {
+  en: "AI Agent for Work - Aru",
+  ko: "업무 지원 AI 에이전트 - Aru",
+  ja: "業務を支援するAIエージェント - Aru",
+};
+
 export type ContactLink = {
   href: string;
   label: string;
@@ -94,6 +100,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       ],
       productFieldLabel: "Products/Services of Interest",
       productOptions: [
+        aruProductLabels.en,
         "Meeting Notes & Live Translation AI - Lingo",
         "Knowledge-based Content Creation AI - NotePie",
         "AI Platform QueryPie AIP",
@@ -165,6 +172,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       ],
       productFieldLabel: "관심 있는 제품・서비스",
       productOptions: [
+        aruProductLabels.ko,
         "회의기록 및 실시간번역 AI - Lingo",
         "지식 기반 콘텐츠 생성 AI - NotePie",
         "AI 플랫폼 QueryPie AIP",
@@ -201,8 +209,8 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "担当チームの確認後、メールでフォローアップをお送りします。",
       ],
       emailLinks: [
-        { label: "セールス", value: "sales@querypie.com", href: "mailto:sales@querypie.com" },
-        { label: "採用", value: "careers@querypie.com", href: "mailto:careers@querypie.com" },
+        { label: "セールス", value: "jp-sales@querypie.com", href: "mailto:jp-sales@querypie.com" },
+        { label: "採用", value: "jp-jobs@querypie.com", href: "mailto:jp-jobs@querypie.com" },
         { label: "PR/マーケティング", value: "pr@querypie.com", href: "mailto:pr@querypie.com" },
       ],
       supportLink: {
@@ -236,6 +244,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       ],
       productFieldLabel: "興味のある製品・サービス",
       productOptions: [
+        aruProductLabels.ja,
         "会議記録・リアルタイム翻訳AI - Lingo",
         "ナレッジベース コンテンツ生成AI - NotePie",
         "社内業務効率化｜AI Crew",

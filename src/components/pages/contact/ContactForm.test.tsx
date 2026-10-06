@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { getContactPageCopy } from "@/copy/contact";
+import { aruProductLabels, getContactPageCopy } from "@/copy/contact";
 import ContactForm from "./ContactForm";
 
 const pushMock = vi.fn();
@@ -28,7 +28,7 @@ function fillRequiredFields(copy = contactCopy) {
     }
   }
   const firstProductCheckbox = document.querySelector(`[name="product:${copy.productOptions[0]}"]`) as HTMLInputElement | null;
-  if (firstProductCheckbox) {
+  if (firstProductCheckbox && !firstProductCheckbox.checked) {
     fireEvent.click(firstProductCheckbox);
   }
   const messageField = document.querySelector('[name="message"]') as HTMLTextAreaElement | null;
@@ -47,6 +47,39 @@ describe("ContactForm", () => {
     vi.unstubAllGlobals();
     vi.restoreAllMocks();
     vi.clearAllMocks();
+  });
+
+  it.each(["en", "ko", "ja"] as const)("%s 폼 첫 번째에 Aru를 표시하며 일반 방문 시 선택하지 않는다", (locale) => {
+    render(<ContactForm {...getContactPageCopy(locale)} locale={locale} />);
+    const products = screen.getAllByRole("checkbox");
+    expect(products[0]).toHaveAccessibleName(aruProductLabels[locale]);
+    expect(products[0]).not.toBeChecked();
+  });
+
+  it.each(["en", "ko", "ja"] as const)("%s 기본 선택된 Aru는 해제하거나 다른 제품과 함께 선택할 수 있다", (locale) => {
+    const copy = getContactPageCopy(locale);
+    render(<ContactForm {...copy} initialProducts={[aruProductLabels[locale]]} locale={locale} />);
+    const aru = screen.getByRole("checkbox", { name: aruProductLabels[locale] });
+    const lingo = screen.getByRole("checkbox", { name: copy.productOptions[1] });
+    expect(aru).toBeChecked();
+    expect(lingo).not.toBeChecked();
+    fireEvent.click(lingo);
+    expect(aru).toBeChecked();
+    expect(lingo).toBeChecked();
+    fireEvent.click(aru);
+    expect(aru).not.toBeChecked();
+  });
+
+  it.each(["en", "ko", "ja"] as const)("%s Aru 기본 선택 상태로 제출하면 제품명과 유입 URL을 API로 전달한다", async (locale) => {
+    const fetchMock = vi.mocked(fetch).mockResolvedValue({ json: async () => ({ success: true }) } as Response);
+    const copy = getContactPageCopy(locale);
+    render(<ContactForm {...copy} initialProducts={[aruProductLabels[locale]]} locale={locale} />);
+    fillRequiredFields(copy);
+    fireEvent.click(screen.getByRole("button"));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledOnce());
+    const payload = JSON.parse(fetchMock.mock.calls[0][1]?.body as string);
+    expect(payload.products).toEqual([aruProductLabels[locale]]);
+    expect(payload.referrerURL).toBe(window.location.href);
   });
 
   it("폼 필드와 제출 버튼을 렌더링한다", () => {

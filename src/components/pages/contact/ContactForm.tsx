@@ -35,13 +35,13 @@ type ContactSubmitResponse = {
   errorMessage?: string;
 };
 
-function makeInitialForm(copy: ContactPageCopy): FormState {
+function makeInitialForm(copy: ContactPageCopy, initialProducts: string[] = []): FormState {
   const base: FormState = { marketingConsent: "", message: "" };
   for (const field of copy.formFields) {
     base[field.name] = "";
   }
   for (const option of copy.productOptions) {
-    base[`product:${option}`] = "";
+    base[`product:${option}`] = initialProducts.includes(option) ? "true" : "";
   }
   return base;
 }
@@ -86,13 +86,13 @@ function getContactErrorMessage(
   return code ? messages[locale][code] ?? fallback : fallback;
 }
 
-type ContactFormProps = ContactPageCopy & { locale: Locale };
+type ContactFormProps = ContactPageCopy & { locale: Locale; initialProducts?: string[] };
 
 export default function ContactForm(props: ContactFormProps) {
-  const { locale, ...copy } = props;
+  const { locale, initialProducts, ...copy } = props;
   const router = useRouter();
 
-  const [form, setForm] = useState<FormState>(() => makeInitialForm(copy));
+  const [form, setForm] = useState<FormState>(() => makeInitialForm(copy, initialProducts));
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
