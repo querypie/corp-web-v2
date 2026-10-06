@@ -51,17 +51,17 @@ export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = 
   const footerSections = {
     en: [
       { title: "Platform", items: getPlatformSubItems("en", options).map((item) => item.label) },
-      { title: "Demo", items: ["AIP Use Cases", "ACP Use Cases"] },
-      { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
+      { title: "Demo", items: getDemoSubItems("en").map((item) => item.label) },
+      { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "ACP Community Edition", "ACP Docs", "Try AIP Now", "AIP Docs"] },
       { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
-      { title: "Plans", items: ["AIP", "ACP"] },
+      { title: "Plans", items: getPlansSubItems("en").map((item) => item.label) },
     ],
     ko: [
       { title: "플랫폼", items: getPlatformSubItems("ko", options).map((item) => item.label) },
-      { title: "데모", items: ["AIP 활용", "ACP 활용"] },
-      { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "AIP 시작하기", "AIP 문서", "ACP 커뮤니티 에디션", "ACP 문서"] },
+      { title: "데모", items: getDemoSubItems("ko").map((item) => item.label) },
+      { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "ACP 커뮤니티 에디션", "ACP 문서", "AIP 시작하기", "AIP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
-      { title: "가격 · 플랜", items: ["AIP", "ACP"] },
+      { title: "가격 · 플랜", items: getPlansSubItems("ko").map((item) => item.label) },
     ],
     ja: [
       { title: "プラットフォーム", items: getPlatformSubItems("ja", options).map((item) => item.label) },
@@ -72,10 +72,10 @@ export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = 
     ],
   }[locale] ?? [
     { title: "Platform", items: getPlatformSubItems("en", options).map((item) => item.label) },
-    { title: "Demo", items: ["AIP Use Cases", "ACP Use Cases"] },
-    { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "Try AIP Now", "AIP Docs", "ACP Community Edition", "ACP Docs"] },
+    { title: "Demo", items: getDemoSubItems("en").map((item) => item.label) },
+    { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "ACP Community Edition", "ACP Docs", "Try AIP Now", "AIP Docs"] },
     { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
-    { title: "Plans", items: ["AIP", "ACP"] },
+    { title: "Plans", items: getPlansSubItems("en").map((item) => item.label) },
   ];
 
   return {
@@ -102,6 +102,10 @@ export function getPlatformSubItems(
     { label: copy[2], href: getPlatformHref(locale as Locale, "fde-services") },
   ];
 
+  if (locale === "en" || locale === "ko") {
+    [items[0], items[1]] = [items[1], items[0]];
+  }
+
   if (includeDlpPlatform && locale !== "ja") {
     items.push({ label: copy[3], href: getDlpPlatformHref(locale as Locale) });
   }
@@ -122,17 +126,14 @@ export function getSolutionsSubItems(locale: string): NavigationSubItem[] {
 
 export function getDemoSubItems(locale: string): NavigationSubItem[] {
   const resolvedLocale = locale as Locale;
+  const categories = locale === "en" || locale === "ko"
+    ? ["acp-features", "aip-features"]
+    : ["aip-features", "acp-features"];
 
-  return [
-    {
-      label: getCategoryLabel(demoCategoryConfigs, "aip-features", resolvedLocale),
-      href: getCategoryHref(demoCategoryConfigs, "aip-features", resolvedLocale),
-    },
-    {
-      label: getCategoryLabel(demoCategoryConfigs, "acp-features", resolvedLocale),
-      href: getCategoryHref(demoCategoryConfigs, "acp-features", resolvedLocale),
-    },
-  ];
+  return categories.map((category) => ({
+    label: getCategoryLabel(demoCategoryConfigs, category, resolvedLocale),
+    href: getCategoryHref(demoCategoryConfigs, category, resolvedLocale),
+  }));
 }
 
 export function getFeaturesSubItems(locale: string): NavigationSubItem[] {
@@ -199,10 +200,12 @@ export function getCompanySubItems(locale: string): NavigationSubItem[] {
 }
 
 export function getPlansSubItems(locale: string): NavigationSubItem[] {
-  return [
-    { label: "AIP", href: getLocalePath(locale as Locale, "/plans/aip") },
-    { label: "ACP", href: getLocalePath(locale as Locale, "/plans/acp") },
-  ];
+  const products = locale === "en" || locale === "ko" ? ["acp", "aip"] : ["aip", "acp"];
+
+  return products.map((product) => ({
+    label: product.toUpperCase(),
+    href: getLocalePath(locale as Locale, `/plans/${product}`),
+  }));
 }
 
 export function getPrimaryNavHref(item: string, locale: string) {
@@ -214,7 +217,7 @@ export function getPrimaryNavHref(item: string, locale: string) {
     item === "プラン" ||
     item === "価格・プラン"
   ) {
-    return getLocalePath(locale as Locale, "/plans/aip");
+    return getLocalePath(locale as Locale, "/plans/acp");
   }
 
   if (item === "AIP") {
@@ -353,7 +356,7 @@ export function getFooterHref(item: string, locale: string) {
     item === "プラン" ||
     item === "価格・プラン"
   ) {
-    return getLocalePath(locale as Locale, "/plans/aip");
+    return getLocalePath(locale as Locale, "/plans/acp");
   }
 
   return getLocalePath(locale as Locale, "/");

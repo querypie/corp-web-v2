@@ -13,6 +13,7 @@ import {
   isPublishedContentVisible,
 } from "@/features/content/data";
 import { readContentState } from "@/features/content/contentState.server";
+import { homeHeroCopyByLocale } from "@/copy/home";
 
 type HomePageProps = ComponentProps<typeof HomePage>;
 
@@ -129,7 +130,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
       },
       {
         href: getPublicListHref("resources", locale),
-        label: locale === "ko" ? "다큐멘테이션" : locale === "ja" ? "ドキュメンテーション" : "Resources",
+        label: locale === "ko" ? "리소스" : locale === "ja" ? "ドキュメンテーション" : "Resources",
       },
     ];
 
@@ -137,11 +138,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
     const copy = {
       en: {
         nav: ["Solutions", "Features", "Company", "Plans"],
-        heroHeading: "Agentic AI Platform for Enterprises",
-        heroDescription:
-          "Securely connect all your data and systems.\nOperate trusted AI with built-in security and governance.",
+        ...homeHeroCopyByLocale.en,
         heroPrimaryCtaLabel: "Free start!",
-        heroImageAlt: "QueryPie AI workspace preview",
         clientCaption: "Trusted every day by teams that build world-class software",
         contentListDescription:
           "Explore the latest demos and resources for building governed AI workflows and secure enterprise access.",
@@ -164,21 +162,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
           {
             action: {
-              href: getLocalePath(locale, "/platforms/acp"),
-              label: "Learn more",
-            },
-            body: [
-              "It supports authorization, monitoring, and audit-ready governance by centralizing access control for databases, systems, Kubernetes, and web applications.",
-            ],
-            desktopTitle: ["ACP -", "Access Control Platform"],
-            iconSrc: "/assets/pages/home/features/icon-acp.png",
-            imageAlt: "Model selector preview",
-            reverse: true,
-            title: ["ACP - Access Control Platform"],
-            videoSrc: "/assets/pages/home/features/Home-ACP.mp4",
-          },
-          {
-            action: {
               href: "https://lingo.querypie.com/",
               isExternal: true,
               label: "Learn more",
@@ -189,7 +172,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             excludeFromSearchSnippet: true,
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
             iconSurface: true,
-            imageAlt: "AIP workspace preview",
+            imageAlt: "Lingo real-time interpretation preview",
+            reverse: true,
             videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
             title: ["Lingo"],
           },
@@ -204,8 +188,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-notepie.png",
             iconSurface: true,
-            imageAlt: "Model selector preview",
-            reverse: true,
+            imageAlt: "NotePie document analysis preview",
+            reverse: false,
             title: ["NotePie"],
             videoSrc: "/assets/pages/home/features/Home-NotePie.mp4",
           },
@@ -269,11 +253,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
       },
       ko: {
         nav: ["솔루션", "기능", "회사", "요금제"],
-        heroHeading: "엔터프라이즈 기업을 위한 Agentic AI Platform",
-        heroDescription:
-          "모든 데이터와 시스템을 안전하게 연결하고,\n보안과 거버넌스를 기반으로 신뢰할 수 있는 AI를 운영하세요.",
+        ...homeHeroCopyByLocale.ko,
         heroPrimaryCtaLabel: "무료로 시작하기",
-        heroImageAlt: "QueryPie AI 워크스페이스 미리보기",
         clientCaption: "세계적인 소프트웨어 팀이 매일 신뢰하는 플랫폼",
         contentListDescription:
           "거버넌스가 적용된 AI 워크플로와 안전한 엔터프라이즈 접근 관리를 위한 최신 데모와 문서를 확인하세요.",
@@ -296,21 +277,6 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
           {
             action: {
-              href: getLocalePath(locale, "/platforms/acp"),
-              label: "자세히 보기",
-            },
-            body: [
-              "데이터베이스, 시스템, Kubernetes, 웹 애플리케이션의 접근 제어를 중앙화해 권한 관리, 모니터링, 감사 대응 거버넌스를 지원합니다.",
-            ],
-            desktopTitle: ["ACP -", "Access Control Platform"],
-            iconSrc: "/assets/pages/home/features/icon-acp.png",
-            imageAlt: "모델 셀렉터 미리보기",
-            reverse: true,
-            title: ["ACP - Access Control Platform"],
-            videoSrc: "/assets/pages/home/features/Home-ACP.mp4",
-          },
-          {
-            action: {
               href: "https://lingo.querypie.com/",
               isExternal: true,
               label: "자세히 보기",
@@ -321,7 +287,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             excludeFromSearchSnippet: true,
             iconSrc: "/assets/pages/home/features/icon-lingo.png",
             iconSurface: true,
-            imageAlt: "AIP 워크스페이스 미리보기",
+            imageAlt: "Lingo 실시간 통역 미리보기",
+            reverse: true,
             videoSrc: "/assets/pages/home/features/Home-Lingo.mp4",
             title: ["Lingo"],
           },
@@ -336,8 +303,8 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
             ],
             iconSrc: "/assets/pages/home/features/icon-notepie.png",
             iconSurface: true,
-            imageAlt: "모델 셀렉터 미리보기",
-            reverse: true,
+            imageAlt: "NotePie 문서 분석 미리보기",
+            reverse: false,
             title: ["NotePie"],
             videoSrc: "/assets/pages/home/features/Home-NotePie.mp4",
           },
@@ -554,6 +521,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
     heroHeading: copy.heroHeading,
     heroImageAlt: copy.heroImageAlt,
     heroPrimaryCtaLabel: copy.heroPrimaryCtaLabel,
+    heroVideoSrc: locale === "ja" ? undefined : homeHeroCopyByLocale[locale].heroVideoSrc,
     locale,
     mcpAction: copy.mcpAction,
     mcpDescription: copy.mcpDescription,

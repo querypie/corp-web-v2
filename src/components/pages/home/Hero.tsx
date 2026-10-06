@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Button from "@/components/ui/Button";
 import AipMockupShell from "@/components/mockups/aip/AipMockupShell";
+import HeroVideo from "./HeroVideo";
 
 const MOCKUP_ORIGINAL_WIDTH = 1200;
 const MOCKUP_ORIGINAL_HEIGHT = 720;
@@ -18,6 +19,7 @@ type HeroProps = {
   headingAccessory?: ReactNode;
   imageAlt: string;
   locale: string;
+  videoSrc?: string;
 };
 
 export default function Hero({
@@ -27,6 +29,7 @@ export default function Hero({
   headingAccessory,
   imageAlt,
   locale,
+  videoSrc,
 }: HeroProps) {
   return (
     <section className="relative overflow-visible bg-bg bg-[image:var(--gradient-home-hero)] pt-[100px] text-fg md:pt-[140px]">
@@ -42,7 +45,13 @@ export default function Hero({
                 {headingAccessory}
               </div>
 
-              <a href="https://app.querypie.com/" rel="noreferrer noopener" target="_blank">
+              <a
+                href={locale === "en" || locale === "ko"
+                  ? `https://docs.querypie.com/${locale}/installation/querypie-acp-community-edition`
+                  : "https://app.querypie.com/"}
+                rel="noreferrer noopener"
+                target="_blank"
+              >
                 <Button arrow={false} style="full" variant="secondary">
                   {ctaLabel}
                 </Button>
@@ -50,48 +59,56 @@ export default function Hero({
             </div>
 
             <div className="mt-8 flex w-full justify-center md:mt-10" aria-label={imageAlt}>
-              <div
-                className="relative mb-12 w-full md:hidden"
-                style={{ height: MOCKUP_MOBILE_DISPLAY_HEIGHT }}
-              >
-                <div className="relative z-10 h-full overflow-hidden">
-                  <div
-                    style={{
-                      height: MOCKUP_MOBILE_FRAME_HEIGHT,
-                      transform: `scale(${MOCKUP_MOBILE_SCALE})`,
-                      transformOrigin: "top left",
-                      width: `${100 / MOCKUP_MOBILE_SCALE}%`,
-                    }}
-                  >
-                    <AipMockupShell className="homepage-aip-mockup homepage-aip-mockup-mobile" frameHeight={MOCKUP_MOBILE_FRAME_HEIGHT} withShadow={false} />
-                  </div>
+              {videoSrc ? (
+                <div className="relative mb-12 w-full max-w-[1000px] md:mb-[100px]">
+                  <HeroVideo src={videoSrc} title={imageAlt} />
                 </div>
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute left-1/2 top-full h-12 w-full -translate-x-1/2 rounded-t-[20px] bg-[image:var(--gradient-mockup-shadow-mobile)]"
-                />
-              </div>
-              <div
-                className="relative mb-[100px] hidden w-full md:block"
-                style={{ height: MOCKUP_DISPLAY_HEIGHT, maxWidth: MOCKUP_DISPLAY_WIDTH }}
-              >
-                <div className="relative z-10 h-full overflow-hidden">
+              ) : (
+                <>
                   <div
-                    style={{
-                      height: MOCKUP_ORIGINAL_HEIGHT,
-                      transform: `scale(${MOCKUP_DISPLAY_SCALE})`,
-                      transformOrigin: "top left",
-                      width: MOCKUP_ORIGINAL_WIDTH,
-                    }}
+                    className="relative mb-12 w-full md:hidden"
+                    style={{ height: MOCKUP_MOBILE_DISPLAY_HEIGHT }}
                   >
-                    <AipMockupShell className="homepage-aip-mockup" frameHeight={MOCKUP_ORIGINAL_HEIGHT} withShadow={false} />
+                    <div className="relative z-10 h-full overflow-hidden">
+                      <div
+                        style={{
+                          height: MOCKUP_MOBILE_FRAME_HEIGHT,
+                          transform: `scale(${MOCKUP_MOBILE_SCALE})`,
+                          transformOrigin: "top left",
+                          width: `${100 / MOCKUP_MOBILE_SCALE}%`,
+                        }}
+                      >
+                        <AipMockupShell className="homepage-aip-mockup homepage-aip-mockup-mobile" frameHeight={MOCKUP_MOBILE_FRAME_HEIGHT} withShadow={false} />
+                      </div>
+                    </div>
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute left-1/2 top-full h-12 w-full -translate-x-1/2 rounded-t-[20px] bg-[image:var(--gradient-mockup-shadow-mobile)]"
+                    />
                   </div>
-                </div>
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute left-1/2 top-full h-[100px] w-full -translate-x-1/2 rounded-t-[14px] bg-[image:var(--gradient-mockup-shadow-desktop)]"
-                />
-              </div>
+                  <div
+                    className="relative mb-[100px] hidden w-full md:block"
+                    style={{ height: MOCKUP_DISPLAY_HEIGHT, maxWidth: MOCKUP_DISPLAY_WIDTH }}
+                  >
+                    <div className="relative z-10 h-full overflow-hidden">
+                      <div
+                        style={{
+                          height: MOCKUP_ORIGINAL_HEIGHT,
+                          transform: `scale(${MOCKUP_DISPLAY_SCALE})`,
+                          transformOrigin: "top left",
+                          width: MOCKUP_ORIGINAL_WIDTH,
+                        }}
+                      >
+                        <AipMockupShell className="homepage-aip-mockup" frameHeight={MOCKUP_ORIGINAL_HEIGHT} withShadow={false} />
+                      </div>
+                    </div>
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute left-1/2 top-full h-[100px] w-full -translate-x-1/2 rounded-t-[14px] bg-[image:var(--gradient-mockup-shadow-desktop)]"
+                    />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

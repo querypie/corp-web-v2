@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Pick<PlansRouteProps, "params
     title: metadataTitle,
     description: metadataDescription,
     alternates: {
-      canonical: getLocalePath(locale, "/plans/aip"),
+      canonical: getLocalePath(locale, "/plans/acp"),
     },
   }, { locale, title: metadataTitle, description: metadataDescription });
 }
@@ -29,5 +29,5 @@ export default async function PlansRoute({ params }: PlansRouteProps) {
 
   if (!isLocale(locale)) notFound();
 
-  permanentRedirect(getLocalePath(locale, "/plans/aip"));
+  permanentRedirect(getLocalePath(locale, "/plans/acp"));
 }

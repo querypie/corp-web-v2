@@ -434,7 +434,14 @@ export default function Gnb({
                 src={mobileMenuOpen ? "/assets/ui/icons/m-Close.svg" : "/assets/ui/icons/m-Menu.svg"}
               />
             </button>
-            <a className="hidden md:inline-flex" href="https://app.querypie.com/" rel="noreferrer noopener" target="_blank">
+            <a
+              className="hidden md:inline-flex"
+              href={locale === "en" || locale === "ko"
+                ? `https://docs.querypie.com/${locale}/installation/querypie-acp-community-edition`
+                : "https://app.querypie.com/"}
+              rel="noreferrer noopener"
+              target="_blank"
+            >
               <Button
                 arrow={false}
                 size="small"
