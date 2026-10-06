@@ -61,10 +61,17 @@ gh pr create \
   --base main \
   --head "<branch>" \
   --title "<type>: <subject>" \
-  --body-file "<body-file>"
+  --body "$(cat <<'EOF'
+## Summary
+- <변경 내용 요약>
+
+## Test plan
+- [ ] <테스트 항목>
+EOF
+)"
 ```
 
-Use a temporary body file to avoid shell quoting errors, then remove it after successful creation.
+Use the quoted heredoc delimiter to preserve the Markdown body without variable interpolation.
 
 - [ ] **Step 4: 작성자 검증 절차 추가**
 
@@ -138,7 +145,7 @@ Run: `test ! -e .github/workflows/create-pr.yml`
 
 Expected: PASS.
 
-Search the repository for removed Bot PR creation references.
+Search active workflows, skills, and reference documents for removed Bot PR creation references. Exclude this design and implementation history.
 
 Expected: no stale `create-pr.yml`, `gh workflow run create-pr.yml`, or `github-actions[bot]` PR creation references.
 
