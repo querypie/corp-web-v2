@@ -23,6 +23,7 @@ vi.mock("next/server", async (importOriginal) => {
 });
 
 import dns from "dns";
+import { aruProductLabels } from "@/copy/contact";
 import { POST } from "./route";
 
 function stubMxRecord(valid: boolean) {
@@ -169,6 +170,17 @@ describe("POST /api/contact-us", () => {
   });
 
   describe("Slack best-effort 알림", () => {
+    it.each(["en", "ko", "ja"] as const)("%s Aru 문의의 제품명과 CTA 유입 URL을 Slack으로 전달한다", async (locale) => {
+      const referrerURL = `https://www.querypie.com/${locale}/contact-us?utm_source=aru&utm_medium=web&utm_campaign=footer_contact`;
+      const res = await POST(makeRequest({ ...validBody, products: [aruProductLabels[locale]], referrerURL }));
+
+      expect((await res.json()).success).toBe(true);
+      expect(postMessageMock).toHaveBeenCalledOnce();
+      const slackPayload = postMessageMock.mock.calls[0][0] as { blocks: Array<{ text: { text: string } }> };
+      expect(slackPayload.blocks[0].text.text).toContain(`Product: ${aruProductLabels[locale]}`);
+      expect(slackPayload.blocks[0].text.text).toContain(referrerURL);
+    });
+
     it("Slack 성공 시 success:true를 반환한다", async () => {
       const res = await POST(makeRequest(validBody));
       const body = await res.json();

@@ -3,7 +3,7 @@ import type { ContactPageCopy } from "@/copy/contact";
 import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";
 import ContactForm from "./ContactForm";
 
-type ContactUsPageProps = ContactPageCopy & { locale: Locale };
+type ContactUsPageProps = ContactPageCopy & { locale: Locale; initialProducts?: string[] };
 
 export default function ContactUsPage(props: ContactUsPageProps) {
   const {
@@ -45,6 +45,8 @@ export default function ContactUsPage(props: ContactUsPageProps) {
                     <a
                       className="text-brand decoration-1 underline-offset-4 hover:underline"
                       href={item.href}
+                      rel="noreferrer noopener"
+                      target="_blank"
                     >
                       {item.value}
                     </a>

@@ -40,6 +40,8 @@
 
 `ContactUsPage`는 Server Component으로 히어로 카피를 렌더링하고, 폼 상태는 `ContactForm` Client Component가 관리한다.
 
+모든 언어의 문의 폼에서 Aru가 제품 목록의 첫 번째 항목으로 표시된다. 항목명은 한국어 `업무 지원 AI 에이전트 - Aru`, 영어 `AI Agent for Work - Aru`, 일본어 `業務を支援するAIエージェント - Aru`다. Aru 사이트의 도입문의 CTA가 사용하는 `utm_source=aru`로 `/{locale}/contact-us`에 방문하면 해당 언어의 Aru 항목이 기본 선택된다. 기존 `/{locale}/company/contact-us` 링크도 redirect 후 같은 쿼리를 유지한다. 일반 방문에는 기본 선택을 적용하지 않으며, 사용자는 선택을 해제하거나 다른 제품을 함께 선택할 수 있다. Aru 제품명은 다른 제품과 동일하게 Slack 및 DeskPie의 `Description`에 전달된다.
+
 ---
 
 ## API: `POST /api/contact-us`

@@ -4,18 +4,21 @@ import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
 import ContactUsPage from "@/components/pages/contact/ContactUsPage";
 import { getContactPageCopy } from "@/copy/contact";
 import { withDynamicOgImage } from "@/features/seo/metadata";
+import { getContactInitialProducts } from "@/features/contact/initialProducts";
 
 type Props = {
   params: Promise<{ locale: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function ContactUsRoute({ params }: Props) {
+export default async function ContactUsRoute({ params, searchParams }: Props) {
   const { locale } = await params;
 
   if (!isLocale(locale)) notFound();
 
   const copy = getContactPageCopy(locale);
-  return <ContactUsPage {...copy} locale={locale as Locale} />;
+  const initialProducts = getContactInitialProducts(locale, await searchParams);
+  return <ContactUsPage {...copy} initialProducts={initialProducts} locale={locale as Locale} />;
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
