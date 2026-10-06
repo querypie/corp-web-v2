@@ -110,7 +110,6 @@ Vercel 시스템 도메인은 배포 확인용이며 외부에 안내하는 서�
 ```
 .github/workflows/
   ci.yml                # PR → main 빌드 + 타입체크 검증
-  create-pr.yml         # 수동(workflow_dispatch) PR 생성
   deploy-preview.yml    # PR open/sync 시 Preview 배포
   deploy-staging.yml    # main push 시 고정 도메인용 Preview 배포
   deploy-production.yml # 수동(workflow_dispatch) Production 배포
