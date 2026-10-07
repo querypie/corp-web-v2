@@ -44,10 +44,10 @@ export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = 
     ja: ["プラットフォーム", "ソリューション", "デモ", "リソース", "会社"],
   }[locale] ?? ["Platform", "Demo", "Resource", "Company", "Plans"];
   const navActionLabel = {
-    en: "Free start!",
-    ko: "무료로 시작하기",
+    en: "View Pricing",
+    ko: "가격 알아보기",
     ja: "無料で始める",
-  }[locale] ?? "Free start!";
+  }[locale] ?? "View Pricing";
   const footerSections = {
     en: [
       { title: "Platform", items: getPlatformSubItems("en", options).map((item) => item.label) },

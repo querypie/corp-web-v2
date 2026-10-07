@@ -128,8 +128,8 @@ describe("getShellMenuCopy", () => {
   });
 
   it("GNB CTA 라벨을 locale별로 반환한다", () => {
-    expect(getShellMenuCopy("en").navActionLabel).toBe("Free start!");
-    expect(getShellMenuCopy("ko").navActionLabel).toBe("무료로 시작하기");
+    expect(getShellMenuCopy("en").navActionLabel).toBe("View Pricing");
+    expect(getShellMenuCopy("ko").navActionLabel).toBe("가격 알아보기");
     expect(getShellMenuCopy("ja").navActionLabel).toBe("無料で始める");
   });
 

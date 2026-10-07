@@ -139,7 +139,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
       en: {
         nav: ["Solutions", "Features", "Company", "Plans"],
         ...homeHeroCopyByLocale.en,
-        heroPrimaryCtaLabel: "Free start!",
+        heroPrimaryCtaLabel: homeHeroCopyByLocale.en.heroPrimaryCtaLabel,
         clientCaption: "Trusted every day by teams that build world-class software",
         contentListDescription:
           "Explore the latest demos and resources for building governed AI workflows and secure enterprise access.",
@@ -254,7 +254,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
       ko: {
         nav: ["솔루션", "기능", "회사", "요금제"],
         ...homeHeroCopyByLocale.ko,
-        heroPrimaryCtaLabel: "무료로 시작하기",
+        heroPrimaryCtaLabel: homeHeroCopyByLocale.ko.heroPrimaryCtaLabel,
         clientCaption: "세계적인 소프트웨어 팀이 매일 신뢰하는 플랫폼",
         contentListDescription:
           "거버넌스가 적용된 AI 워크플로와 안전한 엔터프라이즈 접근 관리를 위한 최신 데모와 문서를 확인하세요.",
