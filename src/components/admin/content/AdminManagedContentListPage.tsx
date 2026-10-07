@@ -31,6 +31,7 @@ import {
   getManagedCategoryLabel,
   getNewsFormatLabel,
   getWriterLabel,
+  normalizeDateIso,
   type ManagedContentCategorySlug,
   type ManagedContentEntry,
   type ManagedContentSection,
@@ -190,14 +191,18 @@ export function PreviewModal({
   onClose: () => void;
 }) {
   const { t } = useAdminLocale();
-  const [activeLocale, setActiveLocale] = useState<Locale>(initialLocale);
+  const [selectedLocale, setSelectedLocale] = useState<Locale>(initialLocale);
+  const visibleLocales = getOrderedVisibleLocales(item.visibleLocales);
+  const activeLocale = visibleLocales.includes(selectedLocale)
+    ? selectedLocale
+    : visibleLocales[0] ?? selectedLocale;
   const localizedRichTextHtml = renderTiptapHtml(item.bodyRichText[activeLocale] ?? "");
   const localizedBodyHtml = localizedRichTextHtml || (item.bodyHtml[activeLocale] ?? "");
   const localizedSummary = item.summary[activeLocale] ?? "";
   const localizedTitle = item.title[activeLocale] ?? "";
 
   useEffect(() => {
-    setActiveLocale(initialLocale);
+    setSelectedLocale(initialLocale);
   }, [initialLocale, item.id, item.storageId]);
 
   return (
@@ -209,20 +214,22 @@ export function PreviewModal({
       >
         <div className="border-b border-border px-5 py-4 md:px-6">
           <div className="flex items-center justify-between gap-4">
-            <TabGroup>
-              {(["en", "ko", "ja"] as const).map((locale) => (
-                <Tab
-                  key={locale}
-                  onClick={() => setActiveLocale(locale)}
-                  state={activeLocale === locale ? "on" : "off"}
-                >
-                  {locale.toUpperCase()}
-                </Tab>
-              ))}
-            </TabGroup>
+            {visibleLocales.length > 1 ? (
+              <TabGroup>
+                {visibleLocales.map((locale) => (
+                  <Tab
+                    key={locale}
+                    onClick={() => setSelectedLocale(locale)}
+                    state={activeLocale === locale ? "on" : "off"}
+                  >
+                    {locale.toUpperCase()}
+                  </Tab>
+                ))}
+              </TabGroup>
+            ) : null}
             <button
               aria-label={t("미리보기 닫기")}
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-button text-mute transition-colors hover:bg-bg-content hover:text-fg"
+              className="ml-auto inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-button text-mute transition-colors hover:bg-bg-content hover:text-fg"
               onClick={onClose}
               type="button"
             >
@@ -394,7 +401,7 @@ function ContentRow({
               </span>
             ))}
           </div>
-          <div className="type-body-md text-mute">{formatPublicDate(activeLocale, item.dateIso)}</div>
+          <div className="type-body-md text-mute">{normalizeDateIso(item.dateIso)}</div>
         </div>
 
         <div className="flex items-center justify-end gap-2 md:col-start-auto md:justify-between md:gap-3">
