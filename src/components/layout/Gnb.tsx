@@ -41,7 +41,7 @@ function getLocaleHref(pathname: string, locale: string, search: string) {
 }
 
 export default function Gnb({
-  actionLabel = "Free start!",
+  actionLabel,
   className,
   items: providedItems,
   locale = "en",
@@ -437,10 +437,10 @@ export default function Gnb({
             <a
               className="hidden md:inline-flex"
               href={locale === "en" || locale === "ko"
-                ? `https://docs.querypie.com/${locale}/installation/querypie-acp-community-edition`
+                ? getLocalePath(locale, "/plans/acp")
                 : "https://app.querypie.com/"}
-              rel="noreferrer noopener"
-              target="_blank"
+              rel={locale === "en" || locale === "ko" ? undefined : "noreferrer noopener"}
+              target={locale === "en" || locale === "ko" ? undefined : "_blank"}
             >
               <Button
                 arrow={false}
@@ -448,7 +448,7 @@ export default function Gnb({
                 style="full"
                 variant="primary"
               >
-                {actionLabel}
+                {actionLabel ?? getShellMenuCopy(locale).navActionLabel}
               </Button>
             </a>
           </div>

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { getLocalePath } from "@/constants/i18n";
 import Button from "@/components/ui/Button";
 import AipMockupShell from "@/components/mockups/aip/AipMockupShell";
 import HeroVideo from "./HeroVideo";
@@ -47,10 +48,10 @@ export default function Hero({
 
               <a
                 href={locale === "en" || locale === "ko"
-                  ? `https://docs.querypie.com/${locale}/installation/querypie-acp-community-edition`
+                  ? getLocalePath(locale, "/contact-us")
                   : "https://app.querypie.com/"}
-                rel="noreferrer noopener"
-                target="_blank"
+                rel={locale === "en" || locale === "ko" ? undefined : "noreferrer noopener"}
+                target={locale === "en" || locale === "ko" ? undefined : "_blank"}
               >
                 <Button arrow={false} style="full" variant="secondary">
                   {ctaLabel}

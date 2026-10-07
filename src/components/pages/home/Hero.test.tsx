@@ -12,7 +12,7 @@ describe("Hero", () => {
     const copy = homeHeroCopyByLocale[locale];
     render(
       <Hero
-        ctaLabel="Free start!"
+        ctaLabel={copy.heroPrimaryCtaLabel}
         description={copy.heroDescription}
         heroHeading={copy.heroHeading}
         imageAlt={copy.heroImageAlt}
@@ -29,10 +29,11 @@ describe("Hero", () => {
     expect(video).toHaveAttribute("loop");
     expect(video).toHaveAttribute("playsinline");
     expect(video.muted).toBe(true);
-    expect(screen.getByRole("link", { name: "Free start!" })).toHaveAttribute(
+    expect(screen.getByRole("link", { name: copy.heroPrimaryCtaLabel })).toHaveAttribute(
       "href",
-      `https://docs.querypie.com/${locale}/installation/querypie-acp-community-edition`,
+      `/${locale}/contact-us`,
     );
+    expect(screen.getByRole("link", { name: copy.heroPrimaryCtaLabel })).not.toHaveAttribute("target");
   });
 
   it("일본어 히어로는 기존 목업과 시작 링크를 유지한다", () => {
@@ -52,5 +53,6 @@ describe("Hero", () => {
       "href",
       "https://app.querypie.com/",
     );
+    expect(screen.getByRole("link", { name: "無料で始める" })).toHaveAttribute("target", "_blank");
   });
 });

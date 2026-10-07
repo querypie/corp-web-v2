@@ -11,15 +11,20 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("Gnb", () => {
-  it.each(["en", "ko", "ja"])("%s 무료 시작 버튼에 언어별 링크를 적용한다", (locale) => {
-    render(<Gnb locale={locale} actionLabel="무료로 시작하기" />);
+  it.each([
+    ["en", "View Pricing", "/en/plans/acp"],
+    ["ko", "가격 알아보기", "/ko/plans/acp"],
+    ["ja", "無料で始める", "https://app.querypie.com/"],
+  ])("%s CTA에 언어별 문구와 링크를 적용한다", (locale, label, href) => {
+    render(<Gnb locale={locale} />);
 
-    expect(screen.getByRole("link", { name: "무료로 시작하기" })).toHaveAttribute(
-      "href",
-      locale === "ja"
-        ? "https://app.querypie.com/"
-        : `https://docs.querypie.com/${locale}/installation/querypie-acp-community-edition`,
-    );
+    const link = screen.getByRole("link", { name: label });
+    expect(link).toHaveAttribute("href", href);
+    if (locale === "ja") {
+      expect(link).toHaveAttribute("target", "_blank");
+    } else {
+      expect(link).not.toHaveAttribute("target");
+    }
   });
 
   it("일본 GNB는 플랫폼 다음에 솔루션을 배치하고 모바일에도 같은 구성을 적용한다", () => {

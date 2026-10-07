@@ -10,6 +10,7 @@ describe("getHomePageProps", () => {
     const props = await getHomePageProps(locale);
 
     expect(props.heroVideoSrc).toBe("/assets/pages/home/features/Home-ACP.mp4");
+    expect(props.heroPrimaryCtaLabel).toBe(locale === "en" ? "Contact Us" : "문의하기");
     expect(props.heroDescription).toContain("QueryPie ACP");
     expect(props.featureItems.map((item) => item.videoSrc)).toEqual([
       "/assets/pages/home/features/Home-AIP.mp4",
@@ -25,6 +26,7 @@ describe("getHomePageProps", () => {
     const props = await getHomePageProps("ja");
 
     expect(props.heroVideoSrc).toBeUndefined();
+    expect(props.heroPrimaryCtaLabel).toBe("無料で始める");
     expect(props.heroHeading).toBe("エンタープライズ向け Agentic AI Platform");
     expect(props.heroImageAlt).toBe("QueryPie AI ワークスペースプレビュー");
     expect(props.featureItems.map((item) => item.videoSrc)).toEqual([
