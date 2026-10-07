@@ -1,0 +1,17 @@
+{
+  "type": "doc",
+  "content": [
+    {"type": "youtube", "attrs": {"src": "https://www.youtube.com/embed/lFX8ovpRGqc", "start": 0, "width": 640, "height": 480}},
+    {"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "MCP tool access control with MAC"}, {"type": "text", "text": " manages the tools each role needs as teams use AI for everyday work. Administrators configure permitted MCP tools and user roles, then review access decisions and execution results. Connected tools can be made available for specific tasks, with access scope and usage history managed as automation grows."}]},
+    {"type": "paragraph", "content": [{"type": "text", "text": "QueryPie ACP’s MCP Access Control (MAC) links tool access policies to user roles. This demo creates an MCP tool access policy, configures a role, and assigns it to a user. It then runs tool requests and checks allowed and denied access alongside execution results in Request Audit, bringing policy configuration and actual usage into the same review."}]},
+    {"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Workflow"}]},
+    {"type": "bulletList", "content": [
+      {"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "MCP tool access policies"}]}, {"type": "bulletList", "content": [{"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "text": "Create access policies for MCP tools and define the scope of permitted tool use."}]}]}]}]},
+      {"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Role-based user permissions"}]}, {"type": "bulletList", "content": [{"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "text": "Associate access policies with roles and assign those roles to users to manage tool permissions."}]}]}]}]},
+      {"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Access decisions and execution results"}]}, {"type": "bulletList", "content": [{"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "text": "Review allowed and denied requests and their execution results in Request Audit to examine policy enforcement and usage history."}]}]}]}]}
+    ]},
+    {"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "More ways to use this workflow"}]},
+    {"type": "paragraph", "content": [{"type": "text", "text": "For example, grant marketing teams tools for querying performance data, support teams tools for retrieving information needed to answer customer questions, and operations teams infrastructure inspection tools. By making connected MCP tools available according to each role’s work, teams can build AI workflows for data analysis, support preparation, and operational checks using permitted tools."}]},
+    {"type": "paragraph", "content": [{"type": "text", "text": "Use policies and roles to separate the tools each team needs and automate repeated access decisions. Business teams can expand automation within their scope, while administrators trace actual usage through Request Audit and review access exceptions or necessary permission changes."}]}
+  ]
+}

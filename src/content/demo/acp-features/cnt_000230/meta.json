@@ -1,0 +1,33 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "kac-acp-mcp-cluster-query",
+  "imageSrc": "/demo/acp-features/recordings/kac-acp-mcp.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 3,
+  "status": "published",
+  "storageId": "cnt_000230",
+  "summary": {
+    "en": "Connect permitted Kubernetes queries to an AI agent through ACP MCP and build workflows for deployment checks, resource reviews, and initial troubleshooting.",
+    "ko": "ACP MCP로 권한에 맞는 Kubernetes 조회를 AI 에이전트에 연결해, 클러스터 탐색에서 배포 점검·리소스 확인·장애 조사로 활용 범위를 넓힙니다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "ACP Use Case: KAC Cluster Queries through ACP MCP",
+    "ko": "ACP 사용 사례: ACP MCP로 KAC 클러스터 조회",
+    "ja": ""
+  },
+  "visibleLocales": ["en", "ko"],
+  "locales": {
+    "en": {"htmlPath": "src/content/demo/acp-features/cnt_000230/en.html", "jsonPath": "src/content/demo/acp-features/cnt_000230/en.tiptap.json"},
+    "ko": {"htmlPath": "src/content/demo/acp-features/cnt_000230/ko.html", "jsonPath": "src/content/demo/acp-features/cnt_000230/ko.tiptap.json"}
+  }
+}
