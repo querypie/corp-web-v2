@@ -1,0 +1,17 @@
+{
+  "type": "doc",
+  "content": [
+    {"type": "youtube", "attrs": {"src": "https://www.youtube.com/embed/ku3sydckiZw", "start": 0, "width": 640, "height": 480}},
+    {"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Server operations with AI Chat"}, {"type": "text", "text": " let teams collect and analyze information from accessible servers in natural language. Discovery, queries, and result preparation stay in one conversation, allowing developers and operators to delegate recurring information collection to AI. The approach can extend to other operational procedures within the user’s permissions and the capabilities of connected server tools."}]},
+    {"type": "paragraph", "content": [{"type": "text", "text": "Within QueryPie ACP’s Server Access Control (SAC) environment, AI Chat identifies the servers available to the user and connects to the selected server for inspection. This demo checks system information and memory usage, then presents memory usage as a chart. Server discovery, information retrieval, and visualization stay within the same conversation."}]},
+    {"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Workflow"}]},
+    {"type": "bulletList", "content": [
+      {"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Accessible server discovery"}]}, {"type": "bulletList", "content": [{"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "text": "List the servers the current user can access and select one for inspection."}]}]}]}]},
+      {"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "System and resource checks"}]}, {"type": "bulletList", "content": [{"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "text": "Connect to the selected server and review system information and memory usage to understand its current state."}]}]}]}]},
+      {"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Memory usage visualization"}]}, {"type": "bulletList", "content": [{"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "text": "Present the queried memory usage as a chart for a clear view of resource consumption."}]}]}]}]}
+    ]},
+    {"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "More ways to use this workflow"}]},
+    {"type": "paragraph", "content": [{"type": "text", "text": "Developers can use this approach to review resource usage before and after deployment, while operators can collect information for an initial incident investigation. Where connected tools and permissions support the necessary queries, the memory check shown in the video can extend to service status checks or log collection."}]},
+    {"type": "paragraph", "content": [{"type": "text", "text": "Connect the repeated work of accessing servers, collecting information, and organizing results into a conversational workflow. Automate preparation for routine checks, deployment reviews, and initial incident investigations so the operations team can spend more time deciding what action is needed."}]}
+  ]
+}

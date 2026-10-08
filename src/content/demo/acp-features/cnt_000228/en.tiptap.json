@@ -1,0 +1,17 @@
+{
+  "type": "doc",
+  "content": [
+    {"type": "youtube", "attrs": {"src": "https://www.youtube.com/embed/endkPbWZsuI", "start": 0, "width": 640, "height": 480}},
+    {"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Data workflow automation with AI Chat and Skills"}, {"type": "text", "text": " lets teams query and analyze database information in natural language, then turn the completed work into a workflow they can run again. Users ask questions within their access permissions, organize the results, and convert the work directly into a Skill. Business users can move from a question to analysis and recurring automation in one conversation."}]},
+    {"type": "paragraph", "content": [{"type": "text", "text": "The video queries user accounts in QueryPie ACP’s Database Access Control (DAC) environment, organizes the results, and turns the work into a Skill. Account review is one example of this approach. The same pattern can support other permitted data queries and analysis, with the steps established in conversation saved as a reusable workflow."}]},
+    {"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Workflow"}]},
+    {"type": "bulletList", "content": [
+      {"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Query account information through AI Chat"}]}, {"type": "bulletList", "content": [{"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "text": "Describe the database to connect to and the account information to retrieve in natural language."}]}]}]}]},
+      {"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Organize results for the task at hand"}]}, {"type": "bulletList", "content": [{"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "text": "The video groups and organizes queried accounts. Users can review the results and continue the conversation with comparisons or further analysis."}]}]}]}]},
+      {"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "Turn completed work directly into a Skill"}]}, {"type": "bulletList", "content": [{"type": "listItem", "content": [{"type": "paragraph", "content": [{"type": "text", "text": "Save the account queries and result preparation performed in conversation as a Skill workflow you can run again."}]}]}]}]}
+    ]},
+    {"type": "paragraph", "content": [{"type": "text", "marks": [{"type": "bold"}], "text": "More ways to use this workflow"}]},
+    {"type": "paragraph", "content": [{"type": "text", "text": "For example, a marketer with access to campaign data can ask AI Chat to compare conversion trends across last month’s campaigns. Queries run within the marketer’s permissions, and the results can be analyzed to inform the next campaign. Saving that query and analysis process as a Skill makes it reusable for recurring performance analysis and report preparation."}]},
+    {"type": "paragraph", "content": [{"type": "text", "text": "Apply this flow to marketing performance analysis, operational metrics, customer information queries, account reviews, and other work that requires database access. Automate data collection, result preparation, and repeated execution so each team can focus on interpretation and decisions within its permitted data scope."}]}
+  ]
+}
