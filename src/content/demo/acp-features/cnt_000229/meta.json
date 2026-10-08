@@ -4,12 +4,26 @@
   "categorySlug": "acp-features",
   "contentType": "content",
   "dateIso": "",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
   "hideHeroImage": true,
   "id": "sac-ai-server-health-check",
-  "imageSrc": "/demo/acp-features/recordings/sac-ai-chat.webp",
+  "imageSrc": "/demo/acp-features/acp-use-case2.webp",
   "relatedIds": [],
   "section": "demo",
   "sortOrder": 2,
@@ -25,9 +39,18 @@
     "ko": "ACP 사용 사례: AI Chat으로 SAC 서버 상태 점검",
     "ja": ""
   },
-  "visibleLocales": ["en", "ko"],
+  "visibleLocales": [
+    "en",
+    "ko"
+  ],
   "locales": {
-    "en": {"htmlPath": "src/content/demo/acp-features/cnt_000229/en.html", "jsonPath": "src/content/demo/acp-features/cnt_000229/en.tiptap.json"},
-    "ko": {"htmlPath": "src/content/demo/acp-features/cnt_000229/ko.html", "jsonPath": "src/content/demo/acp-features/cnt_000229/ko.tiptap.json"}
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000229/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000229/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000229/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000229/ko.tiptap.json"
+    }
   }
 }
