@@ -1,0 +1,56 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "sac-ai-server-health-check",
+  "imageSrc": "/demo/acp-features/acp-use-case2.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 2,
+  "status": "published",
+  "storageId": "cnt_000229",
+  "summary": {
+    "en": "Use AI Chat on servers you can access to collect operational information and extend routine checks into deployment reviews and initial incident investigations.",
+    "ko": "접근 가능한 서버의 정보를 자연어로 수집하고 분석해, 일상 점검부터 배포 전후 확인·장애 초기 조사까지 반복적인 운영 업무에 활용합니다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "ACP Use Case: SAC Server Health Checks with AI Chat",
+    "ko": "ACP 사용 사례: AI Chat으로 SAC 서버 상태 점검",
+    "ja": ""
+  },
+  "visibleLocales": [
+    "en",
+    "ko"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000229/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000229/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000229/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000229/ko.tiptap.json"
+    }
+  }
+}

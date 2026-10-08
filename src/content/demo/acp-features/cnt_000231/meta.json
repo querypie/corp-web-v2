@@ -1,0 +1,56 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "mac-mcp-access-control-audit",
+  "imageSrc": "/demo/acp-features/acp-use-case4.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000231",
+  "summary": {
+    "en": "Give each team access to the MCP tools it needs and trace usage as you expand AI workflows across marketing, support, and operations.",
+    "ko": "마케팅·고객 지원·운영 등 팀별 업무에 필요한 MCP 도구를 역할에 맞게 허용하고 사용 이력을 추적하며, 조직 전반의 AI 자동화를 확장합니다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "ACP Use Case: MAC Policies and MCP Audit Logs",
+    "ko": "ACP 사용 사례: MAC 접근 정책과 MCP 감사 로그",
+    "ja": ""
+  },
+  "visibleLocales": [
+    "en",
+    "ko"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000231/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000231/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000231/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000231/ko.tiptap.json"
+    }
+  }
+}

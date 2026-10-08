@@ -1,0 +1,56 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "acp-features",
+  "contentType": "content",
+  "dateIso": "",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "dac-ai-account-review",
+  "imageSrc": "/demo/acp-features/acp-use-case1.webp",
+  "relatedIds": [],
+  "section": "demo",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000228",
+  "summary": {
+    "en": "Query and analyze data through AI Chat within your access permissions, then turn the completed work into a Skill for recurring analysis, reporting, and reviews.",
+    "ko": "권한에 맞는 데이터 조회와 분석을 자연어로 수행하고, 작업을 Skill로 전환해 마케팅 분석·업무 보고·계정 점검 등 반복적인 데이터 업무를 자동화합니다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "ACP Use Case: Automate DAC Data Workflows with Skills",
+    "ko": "ACP 사용 사례: DAC 데이터 업무를 Skill로 자동화",
+    "ja": ""
+  },
+  "visibleLocales": [
+    "en",
+    "ko"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000228/en.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000228/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/demo/acp-features/cnt_000228/ko.html",
+      "jsonPath": "src/content/demo/acp-features/cnt_000228/ko.tiptap.json"
+    }
+  }
+}
