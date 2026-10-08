@@ -1,0 +1,33 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "events",
+  "contentType": "content",
+  "dateIso": "2026-10-08",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": { "en": "", "ko": "", "ja": "" },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": { "en": "", "ko": "", "ja": "" },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "air-company-multi-agent-a2a-webinar",
+  "imageSrc": "/resources/events/air-company-multi-agent-a2a-webinar-20261022.png",
+  "relatedIds": ["air-company-ai-agent-use-cases-webinar-2", "air-company-ai-agent-use-cases-webinar"],
+  "section": "resources",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000225",
+  "summary": { "en": "", "ko": "", "ja": "マルチエージェントのユースケースをもとに、活用できる業務と導入時に押さえるべきポイントを30分でご紹介します。" },
+  "title": { "en": "", "ko": "", "ja": "マルチエージェント入門｜A2Aから学ぶ、AIエージェントの次の潮流｜10/22(木)開催" },
+  "visibleLocales": ["ja"],
+  "locales": {
+    "ja": {
+      "htmlPath": "src/content/resources/events/cnt_000225/ja.html",
+      "jsonPath": "src/content/resources/events/cnt_000225/ja.tiptap.json"
+    }
+  }
+}

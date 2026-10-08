@@ -47,6 +47,8 @@ describe("ContentBodyPreview", () => {
     expect(wrapper?.className).toContain("rich-content");
     expect(wrapper?.className).toContain("[&_a]:text-brand");
     expect(wrapper?.className).toContain("[&_a:hover]:underline");
+    expect(wrapper?.className).toContain("[&_a.event-cta-button]:bg-primary");
+    expect(wrapper?.className).toContain("[&_a.event-cta-button]:text-bg");
     expect(wrapper?.className).not.toContain("[&_a:hover]:text-fg");
   });
 });
