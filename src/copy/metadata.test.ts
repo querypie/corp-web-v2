@@ -41,8 +41,8 @@ describe("metadata copy", () => {
 
   it("문의 메타데이터를 locale별로 반환한다", () => {
     expect(getContactPageCopy("ko").metadataTitle).toBe("QueryPie 문의");
-    expect(getContactPageCopy("ko").formDescription).toContain("제품 상담");
+    expect(getContactPageCopy("ko").formDescription).toContain("문의 전에 AI 상담사와 이야기해 보세요.\n추가 상담은");
     expect(getContactPageCopy("ja").metadataTitle).toBe("QueryPie: お問い合わせ");
-    expect(getContactPageCopy("ja").formDescription).toContain("製品相談");
+    expect(getContactPageCopy("ja").formDescription).toContain("お問い合わせ前に、AI相談員と話してみませんか。\n追加のご相談は");
   });
 });
