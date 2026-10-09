@@ -43,6 +43,6 @@ describe("metadata copy", () => {
     expect(getContactPageCopy("ko").metadataTitle).toBe("QueryPie 문의");
     expect(getContactPageCopy("ko").formDescription).toContain("문의 전에 AI 상담사와 이야기해 보세요.\n추가 상담은");
     expect(getContactPageCopy("ja").metadataTitle).toBe("QueryPie: お問い合わせ");
-    expect(getContactPageCopy("ja").formDescription).toContain("AIアドバイザーとお話ししてみませんか。\n追加のご相談は");
+    expect(getContactPageCopy("ja").formDescription).toContain("お問い合わせ前に、AI相談員と話してみませんか。\n追加のご相談は");
   });
 });
