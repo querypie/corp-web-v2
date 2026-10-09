@@ -20,7 +20,7 @@ import {
 } from "@/features/content/data";
 import { sendDeskPieLead } from "@/features/deskpie/lead";
 import { getLeadFormSlackChannel } from "@/features/slack/lead-form-channel";
-import { buildLeadUtmFields, buildUtmSlackFields } from "@/features/utm/utm";
+import { buildLeadUtmFields, buildUtmSlackFields } from "@/features/utm/attribution";
 
 type DownloadLeadPayload = {
   attachmentFileName?: string;

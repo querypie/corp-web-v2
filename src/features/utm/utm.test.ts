@@ -5,8 +5,8 @@ import {
   UTM_ATTRIBUTION_COOKIE_KEY,
   buildLeadUtmFields,
   buildUtmSlackFields,
-  readUtmCookie,
-} from "./utm";
+} from "./attribution";
+import { readUtmCookie } from "./utm";
 import { getCookie } from "./cookie";
 
 vi.mock("./cookie", () => ({

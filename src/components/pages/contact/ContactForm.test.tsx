@@ -71,7 +71,7 @@ describe("ContactForm", () => {
   });
 
   it.each(["en", "ko", "ja"] as const)("%s Aru 기본 선택 상태로 제출하면 제품명과 유입 URL을 API로 전달한다", async (locale) => {
-    const fetchMock = vi.mocked(fetch).mockResolvedValue({ json: async () => ({ success: true }) } as Response);
+    const fetchMock = vi.mocked(fetch).mockResolvedValue({ ok: true, json: async () => ({ success: true }) } as Response);
     const copy = getContactPageCopy(locale);
     render(<ContactForm {...copy} initialProducts={[aruProductLabels[locale]]} locale={locale} />);
     fillRequiredFields(copy);
@@ -285,5 +285,19 @@ describe("ContactForm", () => {
     await waitFor(() => {
       expect(screen.getByText(/couldn't connect to the server/i)).toBeInTheDocument();
     });
+  });
+
+  it.each(["en", "ko", "ja"] as const)("%s 빈 500 응답은 서버 오류로 표시한다", async (locale) => {
+    vi.mocked(fetch).mockResolvedValue(new Response(null, { status: 500 }));
+    const copy = getContactPageCopy(locale);
+    render(<ContactForm {...copy} locale={locale} />);
+    fillRequiredFields(copy);
+    fireEvent.submit(screen.getByRole("button").closest("form")!);
+    const messages = {
+      en: /temporary server issue/,
+      ko: /일시적인 서버 문제로 문의를 제출하지 못했습니다/,
+      ja: /一時的なサーバーの問題/,
+    };
+    await waitFor(() => expect(screen.getByText(messages[locale])).toBeInTheDocument());
   });
 });

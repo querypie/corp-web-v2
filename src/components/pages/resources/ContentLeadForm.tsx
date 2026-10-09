@@ -245,7 +245,14 @@ export default function ContentLeadForm({
         method: "POST",
       });
 
-      const payload = (await response.json()) as LeadFormResponse;
+      let payload: LeadFormResponse;
+      try {
+        payload = (await response.json()) as LeadFormResponse;
+      } catch {
+        throw new LeadFormSubmitError(
+          getLeadFormErrorMessage(locale, mode, "server_error", localized.submitError),
+        );
+      }
 
       if (!response.ok) {
         throw new LeadFormSubmitError(getLeadFormErrorMessage(locale, mode, payload.errorCode, localized.submitError));

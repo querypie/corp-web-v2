@@ -141,13 +141,24 @@ export default function ContactForm(props: ContactFormProps) {
         }),
       });
 
-      const result = (await response.json()) as ContactSubmitResponse;
+      let result: ContactSubmitResponse | null;
+      try {
+        result = (await response.json()) as ContactSubmitResponse | null;
+      } catch {
+        setStatus("error");
+        setErrorMessage(getContactErrorMessage(locale, "server_error", copy.errorGeneral));
+        return;
+      }
 
-      if (result.success) {
+      if (response.ok && result?.success) {
         setStatus("success");
       } else {
         setStatus("error");
-        setErrorMessage(getContactErrorMessage(locale, result.errorCode, copy.errorGeneral));
+        setErrorMessage(getContactErrorMessage(
+          locale,
+          result?.errorCode ?? (!response.ok ? "server_error" : undefined),
+          copy.errorGeneral,
+        ));
       }
     } catch {
       setStatus("error");

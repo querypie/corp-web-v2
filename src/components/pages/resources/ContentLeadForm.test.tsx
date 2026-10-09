@@ -127,6 +127,25 @@ describe("ContentLeadForm", () => {
     });
   });
 
+  it("빈 500 응답은 다운로드 준비 서버 오류로 표시한다", async () => {
+    vi.mocked(fetch).mockResolvedValue(new Response(null, { status: 500 }));
+    render(
+      <ContentLeadForm
+        contactCopy={contactCopy}
+        locale="en"
+        mode="download"
+        attachmentUrl="/uploads/doc.pdf"
+        attachmentFileName="doc.pdf"
+        returnUrl="/en/whitepapers/test"
+        pdfPreviewUrl="/uploads/doc-preview.pdf"
+        title="Test Doc"
+      />,
+    );
+    fillRequiredFields();
+    fireEvent.submit(screen.getByRole("button").closest("form")!);
+    await waitFor(() => expect(screen.getByText(/couldn't prepare/i)).toBeInTheDocument());
+  });
+
   it("unlock 모드에서 성공 시 onSuccess 콜백을 호출한다", async () => {
     vi.mocked(fetch).mockResolvedValue({
       ok: true,

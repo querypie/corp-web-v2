@@ -53,7 +53,8 @@ QueryPie Community License를 신청·발급하는 폼. 백엔드는 라이선�
 | 파일 | 역할 |
 |------|------|
 | `src/copy/contact.ts` | EN/KO/JA 다국어 copy (폼 필드, 레이블, 제품 옵션, 성공/실패 문구) |
-| `src/features/utm/utm.ts` | UTM attribution 타입·순수함수·hook |
+| `src/features/utm/attribution.ts` | 서버·브라우저 공용 UTM attribution 타입·순수함수 |
+| `src/features/utm/utm.ts` | 브라우저 쿠키 읽기·UTM 캡처 hook |
 | `src/features/utm/cookie.ts` | 브라우저 쿠키 유틸 |
 | `src/components/site/UtmCapture.tsx` | UTM 쿠키 캡처 전용 컴포넌트 (레이아웃에 전역 등록) |
 | `src/components/pages/contact/ContactUsPage.tsx` | Server Component — 히어로 카피 + ContactForm 렌더링 |
