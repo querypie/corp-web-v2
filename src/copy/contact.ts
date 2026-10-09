@@ -58,7 +58,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       metadataTitle: "QueryPie Contacts",
       titleLines: ["Connect with our experts.", "Accelerate your success."],
       formDescription:
-        "Chat with our AI advisor first.\nFor further help, submit the form and we’ll contact you within one business week.",
+        "You’re welcome to chat with our AI advisor before submitting an inquiry.\nFor further help, submit the form and we’ll contact you within one business week.",
       contactHighlights: [
         "Talk with the right team for your product and rollout stage.",
         "Receive introduction materials and implementation consultation tailored to your inquiry.",
@@ -202,7 +202,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       metadataTitle: "QueryPie: お問い合わせ",
       titleLines: ["専門家にご相談ください。", "成功までのスピードを高めます。"],
       formDescription:
-        "まずはAIアドバイザーにご相談ください。\n追加のご相談はフォームで受け付け、1営業週以内にご連絡します。",
+        "お問い合わせの前に、AIアドバイザーとお話ししてみませんか。\n追加のご相談はフォームで受け付け、1営業週以内にご連絡します。",
       contactHighlights: [
         "製品や導入フェーズに合った担当チームにご相談いただけます。",
         "お問い合わせ内容に合わせた紹介資料と導入コンサルティングをご案内します。",
