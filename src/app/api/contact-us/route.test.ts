@@ -338,19 +338,22 @@ describe("POST /api/contact-us", () => {
       expect(sent.requestBody.Questions__c).toBe("I have a question.");
     });
 
-    it("UTM 쿠키가 포함되면 pi__ 필드가 requestBody에 추가된다", async () => {
+    it.each(["en", "ko", "ja"] as const)("%s Aru와 UTM 쿠키를 함께 제출하면 성공하고 pi__ 필드를 전달한다", async (locale) => {
       const fetchSpy = mockDeskPieFetch();
 
       const attribution = {
         first: { landing: "/en/", ts: "2026-01-01T00:00:00Z" },
-        recent: [{ source: "linkedin", medium: "paid", landing: "/en/contact", ts: "2026-03-01T00:00:00Z" }],
+        recent: [{ source: "aru", medium: "web", landing: "/en/contact", ts: "2026-03-01T00:00:00Z" }],
       };
       const utmAttribution = encodeURIComponent(JSON.stringify(attribution));
 
-      await POST(makeRequest({ ...validBody, utmAttribution }));
+      const response = await POST(makeRequest({ ...validBody, products: [aruProductLabels[locale]], utmAttribution }));
+      expect(response.status).toBe(200);
+      expect(await response.json()).toEqual({ success: true });
       const sent = JSON.parse(findDeskPieCall(fetchSpy)?.[1]?.body as string);
-      expect(sent.requestBody["pi__utm_source__c"]).toBe("linkedin");
-      expect(sent.requestBody["pi__utm_medium__c"]).toBe("paid");
+      expect(sent.requestBody.Description).toContain(aruProductLabels[locale]);
+      expect(sent.requestBody["pi__utm_source__c"]).toBe("aru");
+      expect(sent.requestBody["pi__utm_medium__c"]).toBe("web");
       expect(sent.requestBody["pi__first_touch_url__c"]).toBe("/en/");
     });
 

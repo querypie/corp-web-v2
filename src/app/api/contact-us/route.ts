@@ -4,7 +4,7 @@ import { WebClient } from "@slack/web-api";
 import { after, NextResponse } from "next/server";
 import { sendDeskPieLead } from "@/features/deskpie/lead";
 import { getLeadFormSlackChannel } from "@/features/slack/lead-form-channel";
-import { buildLeadUtmFields } from "@/features/utm/utm";
+import { buildLeadUtmFields } from "@/features/utm/attribution";
 
 type ContactUsBody = {
   firstName?: string;

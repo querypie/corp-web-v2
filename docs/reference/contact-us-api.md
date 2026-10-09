@@ -133,10 +133,13 @@ handleSubmit()
   → POST /api/contact-us
   → success:true  → status = "success"  (성공 화면)
   → success:false → status = "error"    (errorCode를 locale별 사용자 문구로 변환)
+  → 빈 응답 / JSON 파싱 실패 → status = "error" (locale별 서버 오류 문구 표시)
   → 네트워크 오류 → status = "error"    (locale별 네트워크 오류 문구 표시)
 ```
 
 클라이언트는 서버의 영문 `errorMessage`를 그대로 노출하지 않는다. `errorCode`를 기준으로 `en / ko / ja` 안내 문구를 표시하고, 알 수 없는 오류는 locale별 일반 실패 문구로 fallback한다.
+
+서버 API는 UTM 변환 함수를 `src/features/utm/attribution.ts`에서 직접 가져온다. 이 공용 파일에는 `"use client"` 선언이나 브라우저 훅이 없다. 쿠키 읽기와 캡처 훅은 클라이언트 전용 `src/features/utm/utm.ts`에 둔다. 서버에서 클라이언트 전용 파일의 함수를 호출하면 UTM 쿠키가 포함된 제출이 500으로 실패할 수 있다.
 
 ### 성공 화면 UX
 
