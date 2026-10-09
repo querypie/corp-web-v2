@@ -29,7 +29,7 @@ export default function ContactUsPage(props: ContactUsPageProps) {
 
           <div className="flex flex-col gap-5">
             <div className="flex flex-col gap-5">
-              <p className="m-0 type-body-md text-mute">{formDescription}</p>
+              <p className="m-0 whitespace-pre-line type-body-md text-mute">{formDescription}</p>
               <ul className="m-0 flex list-disc flex-col gap-2 pl-5 type-body-md text-mute">
                 {contactHighlights.map((item) => (
                   <li key={item}>{item}</li>
