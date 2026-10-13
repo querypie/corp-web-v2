@@ -196,26 +196,26 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
               const inlineUrls = new Set(message.role === "assistant" ? findHermesLinks(message.text).map((link) => link.url) : []);
               const sources = message.sources?.filter((source) => !inlineUrls.has(new URL(source.url).href));
               return (
-              <div className={`flex min-w-0 flex-col gap-3 ${message.role === "user" ? "items-end" : "items-start"}`} key={message.id}>
-                {message.role === "assistant" ? (
-                  <div className="type-body-md min-w-0 w-full" lang={message.locale}>
-                    <HermesAnswer tableLabel={aiChatCopy[message.locale].table}>{message.text}</HermesAnswer>
-                  </div>
-                ) : (
-                  <p className="type-body-md max-w-[88%] whitespace-pre-wrap rounded-box bg-bg-content px-4 py-3 [overflow-wrap:anywhere]" lang={message.locale}>{message.text}</p>
-                )}
-                {message.role === "assistant" && sources?.length ? (
-                  <div className="flex w-full flex-col gap-1.5 border-t border-border pt-3">
-                    <span className={`${styles.muted} type-body-sm`}>{copy.sources}</span>
-                    {sources.map((source) => (
-                      <a className="type-body-sm text-link underline decoration-border-strong underline-offset-4 hover:decoration-current [overflow-wrap:anywhere]" href={source.url} key={source.url} rel="noopener noreferrer" target="_blank">
-                        {source.title}
-                        {source.title !== source.url && <span className={`${styles.muted} block`}>{new URL(source.url).hostname}</span>}
-                      </a>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
+                <div className={`flex min-w-0 flex-col gap-3 ${message.role === "user" ? "items-end" : "items-start"}`} key={message.id}>
+                  {message.role === "assistant" ? (
+                    <div className="type-body-md min-w-0 w-full" lang={message.locale}>
+                      <HermesAnswer tableLabel={aiChatCopy[message.locale].table}>{message.text}</HermesAnswer>
+                    </div>
+                  ) : (
+                    <p className="type-body-md max-w-[88%] whitespace-pre-wrap rounded-box bg-bg-content px-4 py-3 [overflow-wrap:anywhere]" lang={message.locale}>{message.text}</p>
+                  )}
+                  {message.role === "assistant" && sources?.length ? (
+                    <div className="flex w-full flex-col gap-1.5 border-t border-border pt-3">
+                      <span className={`${styles.muted} type-body-sm`}>{copy.sources}</span>
+                      {sources.map((source) => (
+                        <a className="type-body-sm text-link underline decoration-border-strong underline-offset-4 hover:decoration-current [overflow-wrap:anywhere]" href={source.url} key={source.url} rel="noopener noreferrer" target="_blank">
+                          {source.title}
+                          {source.title !== source.url && <span className={`${styles.muted} block`}>{new URL(source.url).hostname}</span>}
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
               );
             })}
             {pending ? <p className={`${styles.muted} type-body-sm`} role="status">{copy.loading}</p> : null}
