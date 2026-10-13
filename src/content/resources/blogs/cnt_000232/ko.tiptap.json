@@ -2,16 +2,13 @@
   "type": "doc",
   "content": [
     {
-      "type": "heading",
-      "attrs": {
-        "level": 2
-      },
+      "type": "paragraph",
       "content": [
         {
           "type": "text",
           "marks": [
             {
-              "type": "bold"
+              "type": "italic"
             }
           ],
           "text": "독자적인 AI 기술로 DLP 탐지 99.69% 세계 최고율 달성, JEV 대비 미탐 약 91% 감소"
