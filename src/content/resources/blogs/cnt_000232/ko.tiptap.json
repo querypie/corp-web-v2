@@ -2057,205 +2057,6 @@
               "type": "bold"
             }
           ],
-          "text": "우리 회사의 데이터로, 우리 업무에 맞는 판단을 만듭니다"
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "같은 문장이라도 업종과 업무에 따라 판단 기준은 달라집니다. 금융 업무의 내부 규정, 제조 현장의 전문 용어, 고객지원의 처리 정책처럼 기업 고유의 지식을 모델에 반영하면 필요한 판단에 더 집중할 수 있습니다."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "QueryPie AI는 고객의 "
-        },
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            }
-          ],
-          "text": "업무 데이터·전문 용어·사내 규정·도메인 지식"
-        },
-        {
-          "type": "text",
-          "text": "을 반영한 전용 Local LLM을 직접 개발하고 고도화합니다. 업무 목적에 맞춘 추가 학습과 평가를 통해 모델을 최적화하고, 기업의 보안 요건과 인프라에 적합한 운영 환경을 구성합니다."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "QEV의 DLP 성과도 이러한 도메인 특화의 한 사례입니다. 기업은 보호해야 할 정보와 분류 기준, 정책 적용 조건 등 반복적으로 필요한 판단을 정의하고, 실제 업무 데이터로 모델의 품질을 확인하며 개선할 수 있습니다."
-        }
-      ]
-    },
-    {
-      "type": "heading",
-      "attrs": {
-        "level": 3
-      },
-      "content": [
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            }
-          ],
-          "text": "도메인에 맞춘 모델, 기업 환경에 맞춘 운영"
-        }
-      ]
-    },
-    {
-      "type": "bulletList",
-      "content": [
-        {
-          "type": "listItem",
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "marks": [
-                    {
-                      "type": "bold"
-                    }
-                  ],
-                  "text": "업무 지식을 반영한 최적화:"
-                },
-                {
-                  "type": "text",
-                  "text": " 현장의 문서와 용어, 내부 규정을 바탕으로 모델을 추가 학습하고 업무 시나리오로 평가합니다."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "listItem",
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "marks": [
-                    {
-                      "type": "bold"
-                    }
-                  ],
-                  "text": "전용 모델의 지속적인 고도화:"
-                },
-                {
-                  "type": "text",
-                  "text": " 실제 업무의 판단 결과와 요구사항을 검토해 모델을 개선합니다."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "listItem",
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "marks": [
-                    {
-                      "type": "bold"
-                    }
-                  ],
-                  "text": "로컬·온프레미스 운영:"
-                },
-                {
-                  "type": "text",
-                  "text": " 기업의 보안 경계 안에서 데이터와 모델을 활용할 수 있도록 인프라와 운영 구성을 설계합니다."
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "listItem",
-          "content": [
-            {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "marks": [
-                    {
-                      "type": "bold"
-                    }
-                  ],
-                  "text": "업무 시스템과의 연결:"
-                },
-                {
-                  "type": "text",
-                  "text": " QueryPie AI Platform의 AI Agent·RAG·MCP와 연계해 판단 결과를 업무 흐름에 연결할 수 있습니다."
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "blockquote",
-      "content": [
-        {
-          "type": "paragraph",
-          "content": [
-            {
-              "type": "text",
-              "marks": [
-                {
-                  "type": "bold"
-                }
-              ],
-              "text": "기업의 데이터와 업무 지식이, 기업에 맞는 AI를 만듭니다."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "QueryPie AI는 자체 모델 개발부터 업무별 학습, 평가와 운영까지 지원하며, 기업이 필요로 하는 도메인 특화 AI를 구축합니다."
-        }
-      ]
-    },
-    {
-      "type": "heading",
-      "attrs": {
-        "level": 2
-      },
-      "content": [
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            }
-          ],
           "text": "위험을 선별하고, 민감정보의 종류와 내용을 찾아냅니다"
         }
       ]
@@ -2537,6 +2338,205 @@
         {
           "type": "text",
           "text": " QueryPie DLP는 이러한 흐름으로 기업의 보안 검토를 지원합니다. 이 섹션은 QueryPie DLP의 선별·추출 기능을 설명하며, 앞서 소개한 QEV의 탐지율 99.69%는 문서 단위 판단 평가 결과입니다."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "우리 회사의 데이터로, 우리 업무에 맞는 판단을 만듭니다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "같은 문장이라도 업종과 업무에 따라 판단 기준은 달라집니다. 금융 업무의 내부 규정, 제조 현장의 전문 용어, 고객지원의 처리 정책처럼 기업 고유의 지식을 모델에 반영하면 필요한 판단에 더 집중할 수 있습니다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie AI는 고객의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "업무 데이터·전문 용어·사내 규정·도메인 지식"
+        },
+        {
+          "type": "text",
+          "text": "을 반영한 전용 Local LLM을 직접 개발하고 고도화합니다. 업무 목적에 맞춘 추가 학습과 평가를 통해 모델을 최적화하고, 기업의 보안 요건과 인프라에 적합한 운영 환경을 구성합니다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QEV의 DLP 성과도 이러한 도메인 특화의 한 사례입니다. 기업은 보호해야 할 정보와 분류 기준, 정책 적용 조건 등 반복적으로 필요한 판단을 정의하고, 실제 업무 데이터로 모델의 품질을 확인하며 개선할 수 있습니다."
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "도메인에 맞춘 모델, 기업 환경에 맞춘 운영"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "업무 지식을 반영한 최적화:"
+                },
+                {
+                  "type": "text",
+                  "text": " 현장의 문서와 용어, 내부 규정을 바탕으로 모델을 추가 학습하고 업무 시나리오로 평가합니다."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "전용 모델의 지속적인 고도화:"
+                },
+                {
+                  "type": "text",
+                  "text": " 실제 업무의 판단 결과와 요구사항을 검토해 모델을 개선합니다."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "로컬·온프레미스 운영:"
+                },
+                {
+                  "type": "text",
+                  "text": " 기업의 보안 경계 안에서 데이터와 모델을 활용할 수 있도록 인프라와 운영 구성을 설계합니다."
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ],
+                  "text": "업무 시스템과의 연결:"
+                },
+                {
+                  "type": "text",
+                  "text": " QueryPie AI Platform의 AI Agent·RAG·MCP와 연계해 판단 결과를 업무 흐름에 연결할 수 있습니다."
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "기업의 데이터와 업무 지식이, 기업에 맞는 AI를 만듭니다."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie AI는 자체 모델 개발부터 업무별 학습, 평가와 운영까지 지원하며, 기업이 필요로 하는 도메인 특화 AI를 구축합니다."
         }
       ]
     },

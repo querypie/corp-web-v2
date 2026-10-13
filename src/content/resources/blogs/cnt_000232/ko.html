@@ -41,14 +41,6 @@
 <table aria-label="BF16과 INT8 GPU 메모리 사용량 비교"><thead><tr><th>모델·구성</th><th>GPU 메모리</th></tr></thead><tbody><tr><td>QEV · BF16</td><td><p><strong>22.60 GiB</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-border);border-radius:4px;overflow:hidden;"><div style="height:16px;width:100%;background:var(--color-mute);"></div></div></td></tr><tr><td>QEV · INT8</td><td><p><strong>12.38 GiB</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-border);border-radius:4px;overflow:hidden;"><div style="height:16px;width:54.78%;background:var(--color-link);"></div></div></td></tr></tbody></table>
 <p>막대는 0~22.60 GiB의 동일 범위로 표시했습니다. 회색은 기존 BF16, 파란색은 INT8 구성입니다.</p>
 <p>특히 QEV는 INT8 적용 이후에도 <strong>미탐 4건을 유지하고, F2 점수 99.02%</strong>를 기록했습니다. 다만 현재 H200 환경에서는 INT8의 응답시간이 증가했으므로, 실제 운영 시에는 응답 속도와 메모리 효율을 고려한 구성이 필요합니다.</p>
-<h2 style="font-weight:700;">우리 회사의 데이터로, 우리 업무에 맞는 판단을 만듭니다</h2>
-<p>같은 문장이라도 업종과 업무에 따라 판단 기준은 달라집니다. 금융 업무의 내부 규정, 제조 현장의 전문 용어, 고객지원의 처리 정책처럼 기업 고유의 지식을 모델에 반영하면 필요한 판단에 더 집중할 수 있습니다.</p>
-<p>QueryPie AI는 고객의 <strong>업무 데이터·전문 용어·사내 규정·도메인 지식</strong>을 반영한 전용 Local LLM을 직접 개발하고 고도화합니다. 업무 목적에 맞춘 추가 학습과 평가를 통해 모델을 최적화하고, 기업의 보안 요건과 인프라에 적합한 운영 환경을 구성합니다.</p>
-<p>QEV의 DLP 성과도 이러한 도메인 특화의 한 사례입니다. 기업은 보호해야 할 정보와 분류 기준, 정책 적용 조건 등 반복적으로 필요한 판단을 정의하고, 실제 업무 데이터로 모델의 품질을 확인하며 개선할 수 있습니다.</p>
-<h3 style="font-weight:700;">도메인에 맞춘 모델, 기업 환경에 맞춘 운영</h3>
-<ul><li><strong>업무 지식을 반영한 최적화:</strong> 현장의 문서와 용어, 내부 규정을 바탕으로 모델을 추가 학습하고 업무 시나리오로 평가합니다.</li><li><strong>전용 모델의 지속적인 고도화:</strong> 실제 업무의 판단 결과와 요구사항을 검토해 모델을 개선합니다.</li><li><strong>로컬·온프레미스 운영:</strong> 기업의 보안 경계 안에서 데이터와 모델을 활용할 수 있도록 인프라와 운영 구성을 설계합니다.</li><li><strong>업무 시스템과의 연결:</strong> QueryPie AI Platform의 AI Agent·RAG·MCP와 연계해 판단 결과를 업무 흐름에 연결할 수 있습니다.</li></ul>
-<blockquote><p><strong>기업의 데이터와 업무 지식이, 기업에 맞는 AI를 만듭니다.</strong></p></blockquote>
-<p>QueryPie AI는 자체 모델 개발부터 업무별 학습, 평가와 운영까지 지원하며, 기업이 필요로 하는 도메인 특화 AI를 구축합니다.</p>
 <h2 style="font-weight:700;">위험을 선별하고, 민감정보의 종류와 내용을 찾아냅니다</h2>
 <p>민감정보가 포함되어 있다는 판단 다음에는, 어떤 정보가 어디에 적혀 있는지 확인해야 합니다. QueryPie DLP는 한국어·영어·일본어 입력의 위험을 빠르게 선별하고, 정밀 분석이 필요한 입력에서 <strong>민감정보의 종류와 실제 내용</strong>을 찾아냅니다. 규칙 검사와 경량 모델의 위험 선별, SLM 기반 정밀 추출을 단계적으로 연결해 보호가 필요한 부분을 구체적으로 확인할 수 있습니다.</p>
 <ol><li><p><strong>규칙으로 즉시 확인</strong></p><p>정규식과 키워드로 형식이 분명한 민감정보를 먼저 찾습니다. 확실한 일치는 AI 분석을 기다리지 않고 바로 판단할 수 있습니다.</p></li><li><p><strong>위험 입력 선별</strong></p><p>ELECTRA 기반 경량 모델이 규칙만으로 판단하기 어려운 문장의 위험 점수를 계산합니다. 위험도가 높거나 판단이 애매한 입력을 추가 확인 대상으로 추립니다.</p></li><li><p><strong>민감정보 정밀 추출</strong></p><p>SLM 기반 정밀 모델이 이름·계좌정보·인증정보 등 민감정보의 종류와 실제 내용을 찾습니다. 별도 프로그램이 원문과 대조해 정확한 위치를 계산합니다.</p></li></ol>
@@ -61,6 +53,14 @@
 </div></div></div>
 <p>QueryPie DLP는 입력에 적힌 민감정보를 찾아 이름·이메일·전화번호 등 유형별로 구분해 표시합니다. 예를 들어 “담당자 김민수의 이메일은 minsu.kim@example.com, 연락처는 010-1234-5678입니다”라는 문장에서는 이름, 이메일 주소, 전화번호를 각각 구분해 표시합니다. 정해진 형식에 맞지 않는 표현도 주변 문맥을 함께 읽어 민감정보인지 판단합니다.</p>
 <p><strong>위험을 판단하고, 확인할 입력을 선별하고, 보호할 내용을 찾아내는 것.</strong> QueryPie DLP는 이러한 흐름으로 기업의 보안 검토를 지원합니다. 이 섹션은 QueryPie DLP의 선별·추출 기능을 설명하며, 앞서 소개한 QEV의 탐지율 99.69%는 문서 단위 판단 평가 결과입니다.</p>
+<h2 style="font-weight:700;">우리 회사의 데이터로, 우리 업무에 맞는 판단을 만듭니다</h2>
+<p>같은 문장이라도 업종과 업무에 따라 판단 기준은 달라집니다. 금융 업무의 내부 규정, 제조 현장의 전문 용어, 고객지원의 처리 정책처럼 기업 고유의 지식을 모델에 반영하면 필요한 판단에 더 집중할 수 있습니다.</p>
+<p>QueryPie AI는 고객의 <strong>업무 데이터·전문 용어·사내 규정·도메인 지식</strong>을 반영한 전용 Local LLM을 직접 개발하고 고도화합니다. 업무 목적에 맞춘 추가 학습과 평가를 통해 모델을 최적화하고, 기업의 보안 요건과 인프라에 적합한 운영 환경을 구성합니다.</p>
+<p>QEV의 DLP 성과도 이러한 도메인 특화의 한 사례입니다. 기업은 보호해야 할 정보와 분류 기준, 정책 적용 조건 등 반복적으로 필요한 판단을 정의하고, 실제 업무 데이터로 모델의 품질을 확인하며 개선할 수 있습니다.</p>
+<h3 style="font-weight:700;">도메인에 맞춘 모델, 기업 환경에 맞춘 운영</h3>
+<ul><li><strong>업무 지식을 반영한 최적화:</strong> 현장의 문서와 용어, 내부 규정을 바탕으로 모델을 추가 학습하고 업무 시나리오로 평가합니다.</li><li><strong>전용 모델의 지속적인 고도화:</strong> 실제 업무의 판단 결과와 요구사항을 검토해 모델을 개선합니다.</li><li><strong>로컬·온프레미스 운영:</strong> 기업의 보안 경계 안에서 데이터와 모델을 활용할 수 있도록 인프라와 운영 구성을 설계합니다.</li><li><strong>업무 시스템과의 연결:</strong> QueryPie AI Platform의 AI Agent·RAG·MCP와 연계해 판단 결과를 업무 흐름에 연결할 수 있습니다.</li></ul>
+<blockquote><p><strong>기업의 데이터와 업무 지식이, 기업에 맞는 AI를 만듭니다.</strong></p></blockquote>
+<p>QueryPie AI는 자체 모델 개발부터 업무별 학습, 평가와 운영까지 지원하며, 기업이 필요로 하는 도메인 특화 AI를 구축합니다.</p>
 <h2 style="font-weight:700;">QEV를 직접 경험해 보세요</h2>
 <p>QEV 데모에서는 미리 준비된 테스트 사례뿐 아니라 사용자가 직접 입력한 문장으로도 모델의 판단 결과를 확인할 수 있습니다. 한국어·영어·일본어를 지원하며, QEV가 문장을 어떻게 분류하고 선택지별 확률을 반환하는지 직접 체험할 수 있습니다.</p>
 <p><strong><a href="https://querypie--qev-int8-demo.srv.kpb4r.mlxp.ncloud.com/?lang=ko" target="_blank" rel="noopener noreferrer">QEV 데모 체험하기 →</a></strong></p>
