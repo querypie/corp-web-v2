@@ -2413,21 +2413,21 @@
       "content": [
         {
           "type": "text",
-          "text": "担当者キム・ミンスの"
+          "text": "担当者山田太郎の"
         },
         {
           "type": "hardBreak"
         },
         {
           "type": "text",
-          "text": "minsu.kim@example.com"
+          "text": "taro.yamada@example.com"
         },
         {
           "type": "hardBreak"
         },
         {
           "type": "text",
-          "text": "連絡先 010-1234-5678"
+          "text": "連絡先 090-1234-5678"
         }
       ]
     },
@@ -2454,7 +2454,7 @@
       "content": [
         {
           "type": "text",
-          "text": "キム・ミンス"
+          "text": "山田太郎"
         },
         {
           "type": "text",
@@ -2481,7 +2481,7 @@
       "content": [
         {
           "type": "text",
-          "text": "minsu.kim@example.com"
+          "text": "taro.yamada@example.com"
         },
         {
           "type": "text",
@@ -2508,7 +2508,7 @@
       "content": [
         {
           "type": "text",
-          "text": "010-1234-5678"
+          "text": "090-1234-5678"
         },
         {
           "type": "text",
@@ -2535,7 +2535,7 @@
       "content": [
         {
           "type": "text",
-          "text": "例えば、「担当者キム・ミンスのメールアドレスはminsu.kim@example.com、連絡先は010-1234-5678です」という文章では、氏名、メールアドレス、電話番号をそれぞれ区別して表示します。定められた形式に合わない表現も、周囲の文脈と併せて読み取り、機密情報かどうかを判断します。"
+          "text": "例えば、「担当者山田太郎のメールアドレスはtaro.yamada@example.com、連絡先は090-1234-5678です」という文章では、氏名、メールアドレス、電話番号をそれぞれ区別して表示します。定められた形式に合わない表現も、周囲の文脈と併せて読み取り、機密情報かどうかを判断します。"
         }
       ]
     },
