@@ -1,72 +1,48 @@
 <p style="word-break:keep-all;text-wrap:pretty;"><em>독자적인 AI 기술로 DLP 탐지 99.69% 세계 최고율 달성, JEV 대비 미탐 약 91% 감소</em></p>
 <figure data-qp-image style="margin:0 0 40px;"><img src="/resources/blogs/qev-decision-ai/thumbnail.png" alt="QEV가 한국어·영어·일본어 업무 입력에서 민감정보를 탐지하는 모습" style="display:block;width:100%;height:auto;border-radius:var(--radius-box,12px);" /></figure>
-<p>기업의 AI 활용이 확대되면서 개인정보와 내부 기밀 등 민감정보를 안전하게 처리하는 것이 더욱 중요해지고 있습니다.</p>
-<p>고객 정보가 포함된 이메일, 외부에 공개되지 않은 사업 계획, 기업 내부 문서까지. 이러한 정보가 외부로 전달되기 전에 AI가 민감정보 포함 여부를 판단할 수 있다면 어떨까요?</p>
-<p>QueryPie AI는 이러한 판단을 수행하는 <strong>자체 의사결정 AI 모델 ‘QEV’</strong>를 개발했습니다.</p>
-<p>특히 DLP(Data Loss Prevention, 정보 유출 방지)에 특화한 QEV는 사내 성능 평가에서 <strong>탐지율 99.69%</strong>를 기록하며, 민감 문서 1,281건 중 단 4건만을 놓치는 성과를 확인했습니다.</p>
+<p>기업의 AI 활용이 확대되면서 개인정보와 내부 기밀 등 민감정보를 안전하게 처리하는 것이 더욱 중요해지고 있습니다. 고객 정보가 포함된 이메일, 외부에 공개되지 않은 사업 계획, 기업 내부 문서까지. 이러한 정보가 외부로 전달되기 전에 AI가 민감정보 포함 여부를 판단할 수 있다면 어떨까요?</p>
+<p>QueryPie AI는 이러한 판단을 수행하는 <strong>자체 의사결정 AI 모델 ‘QEV’</strong>를 개발했습니다. 특히 DLP(Data Loss Prevention, 정보 유출 방지)에 특화한 QEV는 사내 성능 평가에서 <strong>탐지율 99.69%</strong>를 기록하며, 민감 문서 1,281건 중 단 4건만을 놓치는 성과를 확인했습니다.</p>
 <h2 style="font-weight:700;">QEV란 무엇인가요?</h2>
-<p>QEV는 입력된 문장을 이해하고, 미리 정의된 기준에 따라 판단 결과를 제공하는 의사결정 특화 AI 모델입니다.</p>
-<p>일반적인 생성형 LLM이 질문에 대한 답변이나 문서를 생성한다면, QEV는 주어진 정보를 분석하여 정해진 선택지 중 가장 적절한 결과와 확률을 반환하는 데 특화되어 있습니다.</p>
+<p>QEV는 입력된 문장을 이해하고, 미리 정의된 기준에 따라 판단 결과를 제공하는 의사결정 특화 AI 모델입니다. 일반적인 생성형 LLM이 질문에 대한 답변이나 문서를 생성한다면, QEV는 주어진 정보를 분석하여 정해진 선택지 중 가장 적절한 결과와 확률을 반환하는 데 특화되어 있습니다.</p>
 <p>예를 들어 다음과 같은 업무 요청이 있다고 가정해 보겠습니다.</p>
 <blockquote><p>“고객 연락처와 구매 내역, 아직 공개되지 않은 기업용 요금과 할인 제안을 정리해 줘.”</p></blockquote>
 <p>QEV에 이 문장의 민감정보 포함 여부를 판단하도록 요청하면 다음과 같은 결과를 얻을 수 있습니다.</p>
 <h3 style="font-weight:700;">실제 QEV 데모 결과</h3>
 <table><thead><tr><th>판단 항목</th><th>분석 결과</th></tr></thead><tbody><tr><td>개인정보</td><td>포함</td></tr><tr><td>내부 기밀</td><td>포함</td></tr><tr><td>최종 판단</td><td>개인정보와 내부 기밀 모두 포함</td></tr><tr><td>판단 확률</td><td>89.80%</td></tr></tbody></table>
 <p>영상의 해당 입력을 읽기 쉽게 풀어 썼습니다. 표의 개인정보·내부 기밀 항목은 하나의 선택 결과를 이해하기 쉽게 나눈 설명입니다.</p>
-<p>이처럼 QEV는 단순히 특정 단어나 숫자를 찾아내는 것을 넘어, 문장의 맥락을 바탕으로 개인정보와 내부 기밀을 구분하도록 학습된 모델입니다.</p>
-<p>기업은 이러한 판단 결과를 활용해 민감정보가 포함된 요청에 추가 검토나 승인 절차를 적용하는 등 보안 정책과 연계할 수 있습니다.</p>
+<p>이처럼 QEV는 단순히 특정 단어나 숫자를 찾아내는 것을 넘어, 문장의 맥락을 바탕으로 개인정보와 내부 기밀을 구분하도록 학습된 모델입니다. 기업은 이러한 판단 결과를 활용해 민감정보가 포함된 요청에 추가 검토나 승인 절차를 적용하는 등 보안 정책과 연계할 수 있습니다.</p>
 <h2 style="font-weight:700;">자체 기술로 구현한 QueryPie AI의 의사결정 모델</h2>
-<p>QEV는 기존 AI 서비스를 단순히 연결해 사용하는 솔루션이 아닙니다.</p>
-<p>QueryPie AI는 Gemma4 기반 모델의 개발과 평가를 진행하며 의사결정 모델을 독자적으로 구현하고, 기업의 업무 목적에 맞게 추가 학습하는 기술을 확보했습니다. <strong>공개 모델은 Gemma4 기반 12B 모델로, 민감정보 판단에 특화한 학습을 적용했습니다.</strong></p>
-<p>QEV는 기업의 업무 기준에 따라 문장을 분류하고, 조건 충족 여부와 선택지별 확률을 반환하는 자체 의사결정 모델입니다.</p>
-<p>특히 자체 개발한 모델에 DLP 업무 데이터를 추가 학습하면서 탐지 성능을 크게 향상시켰습니다.</p>
-<p>QEV는 사내 DLP 평가에서 <strong>탐지율 99.69%, F2 점수 98.98%</strong>를 기록했습니다.</p>
-<p>이는 QueryPie AI가 단순히 AI 모델을 활용하는 것을 넘어, 특정 업무에 최적화된 AI 모델을 직접 구현하고 성능을 고도화할 수 있다는 점을 보여줍니다.</p>
+<p>QEV는 기존 AI 서비스를 단순히 연결해 사용하는 솔루션이 아닙니다. QueryPie AI는 Gemma4 기반 모델의 개발과 평가를 진행하며 의사결정 모델을 독자적으로 구현하고, 기업의 업무 목적에 맞게 추가 학습하는 기술을 확보했습니다. <strong>공개 모델은 Gemma4 기반 12B 모델로, 민감정보 판단에 특화한 학습을 적용했습니다.</strong> QEV는 기업의 업무 기준에 따라 문장을 분류하고, 조건 충족 여부와 선택지별 확률을 반환하는 자체 의사결정 모델입니다.</p>
+<p>특히 자체 개발한 모델에 DLP 업무 데이터를 추가 학습하면서 탐지 성능을 크게 향상시켰습니다. QEV는 사내 DLP 평가에서 <strong>탐지율 99.69%, F2 점수 98.98%</strong>를 기록했습니다. 이는 QueryPie AI가 단순히 AI 모델을 활용하는 것을 넘어, 특정 업무에 최적화된 AI 모델을 직접 구현하고 성능을 고도화할 수 있다는 점을 보여줍니다.</p>
 <h2 style="font-weight:700;">DLP 탐지율 99.69% — 민감 문서 1,281건 중 미탐 단 4건</h2>
-<p>QueryPie AI는 한국어·영어·일본어로 구성된 사내 문서 3,167건을 대상으로 DLP 탐지 성능을 평가했습니다.</p>
-<p>그 결과, 자체 개발한 <strong>QEV는 탐지율 99.69%, F2 점수 98.98%</strong>를 기록했습니다.</p>
-<p>특히 민감정보가 포함된 문서 1,281건 중 탐지하지 못한 문서는 단 4건이었습니다.</p>
+<p>QueryPie AI는 한국어·영어·일본어로 구성된 사내 문서 3,167건을 대상으로 DLP 탐지 성능을 평가했습니다. 그 결과, 자체 개발한 <strong>QEV는 탐지율 99.69%, F2 점수 98.98%</strong>를 기록했습니다. 특히 민감정보가 포함된 문서 1,281건 중 탐지하지 못한 문서는 단 4건이었습니다.</p>
 <h3 style="font-weight:700;">상용 AI 모델과의 성능 비교</h3>
 <table><thead><tr><th>평가 항목</th><th>JEV API</th><th>QEV</th></tr></thead><tbody><tr><td>탐지율(Recall)</td><td>96.41%</td><td>99.69%</td></tr><tr><td>F2 점수</td><td>96.59%</td><td>98.98%</td></tr><tr><td>미탐 건수</td><td>46건</td><td>4건</td></tr></tbody></table>
 <h3 style="font-weight:700;">동일 DLP 평가의 미탐 건수</h3>
 <table aria-label="JEV API와 QEV의 미탐 건수 비교"><thead><tr><th>모델</th><th>미탐 건수 비교</th></tr></thead><tbody><tr><td>JEV API</td><td><p><strong>46건</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-border);border-radius:4px;overflow:hidden;"><div style="height:16px;width:100%;background:var(--color-warning);"></div></div></td></tr><tr><td>QEV</td><td><p><strong>4건</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-border);border-radius:4px;overflow:hidden;"><div style="height:16px;width:8.70%;background:var(--color-success);"></div></div></td></tr></tbody></table>
 <blockquote><p><strong>46건 → 4건 | 미탐 약 91.3% 감소</strong></p></blockquote>
 <p>동일 사내 DLP 문서 3,167건, 임계값 0.50에서 비교한 미탐 건수입니다.</p>
-<p>동일한 사내 평가 환경에서 상용 JEV API 대비 <strong>미탐 건수를 약 91.3% 줄인 결과</strong>입니다.</p>
-<p>이는 모델의 크기뿐 아니라 업무 목적에 맞춘 학습과 최적화가 AI 성능에 중요한 영향을 미칠 수 있다는 점을 보여줍니다.</p>
+<p>동일한 사내 평가 환경에서 상용 JEV API 대비 <strong>미탐 건수를 약 91.3% 줄인 결과</strong>입니다. 이는 모델의 크기뿐 아니라 업무 목적에 맞춘 학습과 최적화가 AI 성능에 중요한 영향을 미칠 수 있다는 점을 보여줍니다.</p>
 <p>본 결과는 동일한 사내 DLP 평가 데이터 3,167건과 임계값 0.50을 기준으로 측정한 문서 단위 분류 성능입니다.</p>
 <h2 style="font-weight:700;">메일과 AI 입력 속 개인정보·기밀을 구분합니다</h2>
-<p>QueryPie AI는 QEV INT8 모델을 활용해 이메일과 ChatGPT에 입력할 법한 가상의 업무 문장 10개를 테스트했습니다.</p>
-<p>테스트에서는 문장을 다음 네 가지 기준으로 분류했습니다.</p>
+<p>QueryPie AI는 QEV INT8 모델을 활용해 이메일과 ChatGPT에 입력할 법한 가상의 업무 문장 10개를 테스트했습니다. 테스트에서는 문장을 다음 네 가지 기준으로 분류했습니다.</p>
 <blockquote><p>민감정보 없음 / 개인정보 포함 / 내부 기밀 포함 / 개인정보와 내부 기밀 모두 포함</p></blockquote>
 <h3 style="font-weight:700;">실제 데모 테스트 결과</h3>
 <table><thead><tr><th>테스트 사례</th><th>QEV 판단 결과</th><th>판단 확률</th></tr></thead><tbody><tr><td>이름·전화번호·배송 주소가 포함된 배송 문의</td><td>개인정보 포함</td><td>99.63%</td></tr><tr><td>발표 전 기업 요금과 할인 조건</td><td>내부 기밀 포함</td><td>99.66%</td></tr><tr><td>고객 연락처와 미공개 기업 요금·할인 제안</td><td>개인정보 + 내부 기밀</td><td>89.80%</td></tr><tr><td>홈페이지에 공개된 독서 행사 안내</td><td>민감정보 없음</td><td>98.48%</td></tr></tbody></table>
 <p>10개 테스트 사례 모두 사전에 정의한 분류 기준에 부합하는 결과를 반환했습니다.</p>
 <h3 style="font-weight:700;">전체 10건의 분류 결과</h3>
 <table aria-label="가상 업무 입력 10건의 분류 분포"><thead><tr><th>분류</th><th>선택 건수</th></tr></thead><tbody><tr><td>민감정보 없음</td><td><p><strong>4건 · 40%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:var(--color-border);border-radius:4px;overflow:hidden;"><div style="height:12px;width:40%;background:var(--color-link);"></div></div></td></tr><tr><td>개인정보 포함</td><td><p><strong>2건 · 20%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:var(--color-border);border-radius:4px;overflow:hidden;"><div style="height:12px;width:20%;background:var(--color-link);"></div></div></td></tr><tr><td>내부 기밀 포함</td><td><p><strong>2건 · 20%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:var(--color-border);border-radius:4px;overflow:hidden;"><div style="height:12px;width:20%;background:var(--color-link);"></div></div></td></tr><tr><td>개인정보와 내부 기밀 모두 포함</td><td><p><strong>2건 · 20%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:var(--color-border);border-radius:4px;overflow:hidden;"><div style="height:12px;width:20%;background:var(--color-link);"></div></div></td></tr></tbody></table>
-<p>QEV INT8을 사용한 가상 업무 입력 10건의 선택 결과입니다.</p>
-<p>특히 공개된 행사 안내는 정상 정보로 분류하고, 미공개 요금과 할인 조건은 내부 기밀로 분류하는 등 정보의 내용과 맥락에 따른 판단 능력을 확인할 수 있었습니다.</p>
+<p>QEV INT8을 사용한 가상 업무 입력 10건의 선택 결과입니다. 특히 공개된 행사 안내는 정상 정보로 분류하고, 미공개 요금과 할인 조건은 내부 기밀로 분류하는 등 정보의 내용과 맥락에 따른 판단 능력을 확인할 수 있었습니다.</p>
 <p>또한 QEV는 민감정보 탐지뿐 아니라 조건 충족 여부, 우선순위 평가, 요청 분류 등 기업이 정의한 다양한 판단 업무에도 활용할 수 있습니다.</p>
 <p>표시된 확률은 모델이 선택한 결과에 부여한 확신도이며, 전체 탐지 정확도를 의미하지 않습니다. 위 사례는 기능을 보여주기 위한 데모로, 별도의 대규모 성능 평가와 구분됩니다.</p>
 <h2 style="font-weight:700;">높은 성능을 유지하면서 GPU 메모리도 절감했습니다</h2>
-<p>QueryPie AI는 자체 모델의 운영 효율을 높이기 위해 8bit 양자화(INT8) 기술도 검증했습니다.</p>
-<p>QEV의 기반 모델을 대상으로 한 실험에서 <strong>GPU 메모리 사용량이 22.60 GiB에서 12.38 GiB로 약 45.2% 감소</strong>했습니다. DLP 탐지 성능도 높은 수준을 유지했습니다.</p>
+<p>QueryPie AI는 자체 모델의 운영 효율을 높이기 위해 8bit 양자화(INT8) 기술도 검증했습니다. QEV의 기반 모델을 대상으로 한 실험에서 <strong>GPU 메모리 사용량이 22.60 GiB에서 12.38 GiB로 약 45.2% 감소</strong>했습니다. DLP 탐지 성능도 높은 수준을 유지했습니다.</p>
 <h3 style="font-weight:700;">기존 BF16과 INT8의 GPU 메모리 비교</h3>
 <table aria-label="BF16과 INT8 GPU 메모리 사용량 비교"><thead><tr><th>모델·구성</th><th>GPU 메모리</th></tr></thead><tbody><tr><td>QEV · BF16</td><td><p><strong>22.60 GiB</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-border);border-radius:4px;overflow:hidden;"><div style="height:16px;width:100%;background:var(--color-mute);"></div></div></td></tr><tr><td>QEV · INT8</td><td><p><strong>12.38 GiB</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-border);border-radius:4px;overflow:hidden;"><div style="height:16px;width:54.78%;background:var(--color-link);"></div></div></td></tr></tbody></table>
 <p>막대는 0~22.60 GiB의 동일 범위로 표시했습니다. 회색은 기존 BF16, 파란색은 INT8 구성입니다.</p>
-<p>특히 QEV는 INT8 적용 이후에도 <strong>미탐 4건을 유지하고, F2 점수 99.02%</strong>를 기록했습니다.</p>
-<p>다만 현재 H200 환경에서는 INT8의 응답시간이 증가했으므로, 실제 운영 시에는 응답 속도와 메모리 효율을 고려한 구성이 필요합니다.</p>
-<h2 style="font-weight:700;">우리 회사의 데이터로, 우리 업무에 맞는 판단을 만듭니다</h2>
-<p>같은 문장이라도 업종과 업무에 따라 판단 기준은 달라집니다. 금융 업무의 내부 규정, 제조 현장의 전문 용어, 고객지원의 처리 정책처럼 기업 고유의 지식을 모델에 반영하면 필요한 판단에 더 집중할 수 있습니다.</p>
-<p>QueryPie AI는 고객의 <strong>업무 데이터·전문 용어·사내 규정·도메인 지식</strong>을 반영한 전용 Local LLM을 직접 개발하고 고도화합니다. 업무 목적에 맞춘 추가 학습과 평가를 통해 모델을 최적화하고, 기업의 보안 요건과 인프라에 적합한 운영 환경을 구성합니다.</p>
-<p>QEV의 DLP 성과도 이러한 도메인 특화의 한 사례입니다. 기업은 보호해야 할 정보와 분류 기준, 정책 적용 조건 등 반복적으로 필요한 판단을 정의하고, 실제 업무 데이터로 모델의 품질을 확인하며 개선할 수 있습니다.</p>
-<h3 style="font-weight:700;">도메인에 맞춘 모델, 기업 환경에 맞춘 운영</h3>
-<ul><li><strong>업무 지식을 반영한 최적화:</strong> 현장의 문서와 용어, 내부 규정을 바탕으로 모델을 추가 학습하고 업무 시나리오로 평가합니다.</li><li><strong>전용 모델의 지속적인 고도화:</strong> 실제 업무의 판단 결과와 요구사항을 검토해 모델을 개선합니다.</li><li><strong>로컬·온프레미스 운영:</strong> 기업의 보안 경계 안에서 데이터와 모델을 활용할 수 있도록 인프라와 운영 구성을 설계합니다.</li><li><strong>업무 시스템과의 연결:</strong> QueryPie AI Platform의 AI Agent·RAG·MCP와 연계해 판단 결과를 업무 흐름에 연결할 수 있습니다.</li></ul>
-<blockquote><p><strong>기업의 데이터와 업무 지식이, 기업에 맞는 AI를 만듭니다.</strong></p></blockquote>
-<p>QueryPie AI는 자체 모델 개발부터 업무별 학습, 평가와 운영까지 지원하며, 기업이 필요로 하는 도메인 특화 AI를 구축합니다.</p>
+<p>특히 QEV는 INT8 적용 이후에도 <strong>미탐 4건을 유지하고, F2 점수 99.02%</strong>를 기록했습니다. 다만 현재 H200 환경에서는 INT8의 응답시간이 증가했으므로, 실제 운영 시에는 응답 속도와 메모리 효율을 고려한 구성이 필요합니다.</p>
 <h2 style="font-weight:700;">위험을 선별하고, 민감정보의 종류와 내용을 찾아냅니다</h2>
-<p>민감정보가 포함되어 있다는 판단 다음에는, 어떤 정보가 어디에 적혀 있는지 확인해야 합니다. QueryPie DLP는 한국어·영어·일본어 입력의 위험을 빠르게 선별하고, 정밀 분석이 필요한 입력에서 <strong>민감정보의 종류와 실제 내용</strong>을 찾아냅니다.</p>
-<p>규칙 검사와 경량 모델의 위험 선별, SLM 기반 정밀 추출을 단계적으로 연결해 보호가 필요한 부분을 구체적으로 확인할 수 있습니다.</p>
+<p>민감정보가 포함되어 있다는 판단 다음에는, 어떤 정보가 어디에 적혀 있는지 확인해야 합니다. QueryPie DLP는 한국어·영어·일본어 입력의 위험을 빠르게 선별하고, 정밀 분석이 필요한 입력에서 <strong>민감정보의 종류와 실제 내용</strong>을 찾아냅니다. 규칙 검사와 경량 모델의 위험 선별, SLM 기반 정밀 추출을 단계적으로 연결해 보호가 필요한 부분을 구체적으로 확인할 수 있습니다.</p>
 <ol><li><p><strong>규칙으로 즉시 확인</strong></p><p>정규식과 키워드로 형식이 분명한 민감정보를 먼저 찾습니다. 확실한 일치는 AI 분석을 기다리지 않고 바로 판단할 수 있습니다.</p></li><li><p><strong>위험 입력 선별</strong></p><p>ELECTRA 기반 경량 모델이 규칙만으로 판단하기 어려운 문장의 위험 점수를 계산합니다. 위험도가 높거나 판단이 애매한 입력을 추가 확인 대상으로 추립니다.</p></li><li><p><strong>민감정보 정밀 추출</strong></p><p>SLM 기반 정밀 모델이 이름·계좌정보·인증정보 등 민감정보의 종류와 실제 내용을 찾습니다. 별도 프로그램이 원문과 대조해 정확한 위치를 계산합니다.</p></li></ol>
 <div aria-label="입력 문서와 탐지 결과" style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
 <div style="flex:1 1 260px;min-width:0;padding:20px;border-radius:var(--radius-box,12px);background:var(--color-bg-content);"><span style="display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;height:26px;padding:0 10px;background:var(--color-secondary);color:var(--color-fg);font-size:14px;">입력 문서</span><p style="margin-top:16px;line-height:1.8;">담당자 김민수의<br><span style="word-break:break-all;">minsu.kim@example.com</span><br>연락처 010-1234-5678</p></div>
@@ -75,10 +51,16 @@
 <div style="display:flex;flex-direction:column;align-items:flex-start;min-width:0;"><span style="word-break:break-all;color:#7c43ce;">minsu.kim@example.com</span><span style="display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;height:14px;padding:0 4px;background:#7c43ce;color:white;font-size:10px;line-height:1;font-weight:700;">EMAIL ADDRESS</span></div>
 <div style="display:flex;align-items:flex-start;gap:8px;"><span style="flex-shrink:0;">연락처</span><div style="display:flex;flex-direction:column;align-items:flex-start;min-width:0;"><span style="color:#0f8b83;">010-1234-5678</span><span style="display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;height:14px;padding:0 4px;background:#0f8b83;color:white;font-size:10px;line-height:1;font-weight:700;">PHONE NUMBER</span></div></div>
 </div></div></div>
-<p>QueryPie DLP는 입력에 적힌 민감정보를 찾아 이름·이메일·전화번호 등 유형별로 구분해 표시합니다.</p>
-<p>예를 들어 “담당자 김민수의 이메일은 minsu.kim@example.com, 연락처는 010-1234-5678입니다”라는 문장에서는 이름, 이메일 주소, 전화번호를 각각 구분해 표시합니다. 정해진 형식에 맞지 않는 표현도 주변 문맥을 함께 읽어 민감정보인지 판단합니다.</p>
+<p>QueryPie DLP는 입력에 적힌 민감정보를 찾아 이름·이메일·전화번호 등 유형별로 구분해 표시합니다. 예를 들어 “담당자 김민수의 이메일은 minsu.kim@example.com, 연락처는 010-1234-5678입니다”라는 문장에서는 이름, 이메일 주소, 전화번호를 각각 구분해 표시합니다. 정해진 형식에 맞지 않는 표현도 주변 문맥을 함께 읽어 민감정보인지 판단합니다.</p>
 <p><strong>위험을 판단하고, 확인할 입력을 선별하고, 보호할 내용을 찾아내는 것.</strong> QueryPie DLP는 이러한 흐름으로 기업의 보안 검토를 지원합니다. 이 섹션은 QueryPie DLP의 선별·추출 기능을 설명하며, 앞서 소개한 QEV의 탐지율 99.69%는 문서 단위 판단 평가 결과입니다.</p>
+<h2 style="font-weight:700;">우리 회사의 데이터로, 우리 업무에 맞는 판단을 만듭니다</h2>
+<p>같은 문장이라도 업종과 업무에 따라 판단 기준은 달라집니다. 금융 업무의 내부 규정, 제조 현장의 전문 용어, 고객지원의 처리 정책처럼 기업 고유의 지식을 모델에 반영하면 필요한 판단에 더 집중할 수 있습니다.</p>
+<p>QueryPie AI는 고객의 <strong>업무 데이터·전문 용어·사내 규정·도메인 지식</strong>을 반영한 전용 Local LLM을 직접 개발하고 고도화합니다. 업무 목적에 맞춘 추가 학습과 평가를 통해 모델을 최적화하고, 기업의 보안 요건과 인프라에 적합한 운영 환경을 구성합니다.</p>
+<p>QEV의 DLP 성과도 이러한 도메인 특화의 한 사례입니다. 기업은 보호해야 할 정보와 분류 기준, 정책 적용 조건 등 반복적으로 필요한 판단을 정의하고, 실제 업무 데이터로 모델의 품질을 확인하며 개선할 수 있습니다.</p>
+<h3 style="font-weight:700;">도메인에 맞춘 모델, 기업 환경에 맞춘 운영</h3>
+<ul><li><strong>업무 지식을 반영한 최적화:</strong> 현장의 문서와 용어, 내부 규정을 바탕으로 모델을 추가 학습하고 업무 시나리오로 평가합니다.</li><li><strong>전용 모델의 지속적인 고도화:</strong> 실제 업무의 판단 결과와 요구사항을 검토해 모델을 개선합니다.</li><li><strong>로컬·온프레미스 운영:</strong> 기업의 보안 경계 안에서 데이터와 모델을 활용할 수 있도록 인프라와 운영 구성을 설계합니다.</li><li><strong>업무 시스템과의 연결:</strong> QueryPie AI Platform의 AI Agent·RAG·MCP와 연계해 판단 결과를 업무 흐름에 연결할 수 있습니다.</li></ul>
+<blockquote><p><strong>기업의 데이터와 업무 지식이, 기업에 맞는 AI를 만듭니다.</strong></p></blockquote>
+<p>QueryPie AI는 자체 모델 개발부터 업무별 학습, 평가와 운영까지 지원하며, 기업이 필요로 하는 도메인 특화 AI를 구축합니다.</p>
 <h2 style="font-weight:700;">QEV를 직접 경험해 보세요</h2>
-<p>QEV 데모에서는 미리 준비된 테스트 사례뿐 아니라 사용자가 직접 입력한 문장으로도 모델의 판단 결과를 확인할 수 있습니다.</p>
-<p>한국어·영어·일본어를 지원하며, QEV가 문장을 어떻게 분류하고 선택지별 확률을 반환하는지 직접 체험할 수 있습니다.</p>
+<p>QEV 데모에서는 미리 준비된 테스트 사례뿐 아니라 사용자가 직접 입력한 문장으로도 모델의 판단 결과를 확인할 수 있습니다. 한국어·영어·일본어를 지원하며, QEV가 문장을 어떻게 분류하고 선택지별 확률을 반환하는지 직접 체험할 수 있습니다.</p>
 <p><strong><a href="https://querypie--qev-int8-demo.srv.kpb4r.mlxp.ncloud.com/?lang=ko" target="_blank" rel="noopener noreferrer">QEV 데모 체험하기 →</a></strong></p>
