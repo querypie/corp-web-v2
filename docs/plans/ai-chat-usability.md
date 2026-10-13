@@ -2,7 +2,7 @@
 
 작성일: 2026-10-13
 
-상태: UI 구현·검증 완료, Hermes 답변 지침 구현 및 실제 답변 검증 진행 중. 병합·운영 배포 전.
+상태: UI와 Hermes 답변 정책 구현·검증 완료. 두 PR 검토 및 병합·운영 배포 전.
 
 ## 요구사항과 책임
 
@@ -45,5 +45,30 @@ UI 관련 테스트 33건, 전체 테스트 946건, typecheck와 build 통과. N
 Preview의 한국어·영어·일본어 × 모바일390px·데스크톱1280px 6개 화면에서 표 내부 스크롤·키보드 이동·링크 중복·언어 경로·정상 DOM을 확인했다. 채팅창 가로 overflow와 브라우저 오류는 없었다. fixture 대화만 표시하고 챗봇 API 호출은 0회였다. 쿠키 배너 이후 상담 버튼이 표시되는 기존 동작을 테스트에 반영했다.
 
 실제 답변 검증은 변경 전후 같은 고정 자료·모델·추론 low로 비교한다. 고정 출력 smoke를 실제 모델 품질 통과로 집계하지 않는다. 로컬 모델 실행은 운영 설정·배포·timeout 검증이 아니다.
+
+## Hermes 구현·실제 답변 평가
+
+Homepage SOUL·AGENTS에서 기본 답변은 한 문장과 필요한 2~3개 짧은 항목으로 작성하고 가격 단위·포함량·필수 조건을 보존하도록 정리했다. 상세 설명·절차·비교는 직접 요청한 만큼 답한다.
+
+확인한 상세 링크는 기본 1~2개, 더 많은 자료를 직접 요청하면 요청 범위에 맞게 제공한다. 원본 URL·route·같은 사이트의 host·locale을 확인하고 링크만으로 답을 대체하지 않는다. URL이 없으면 링크 미확인 설명 없이 생략한다. 기본 URL 금지 규칙은 제거했다.
+
+기존 답변 예산 플러그인의 최종 안내도 같은 원칙으로 맞췄으며 새 helper·검색 계층은 추가하지 않았다. Homepage의 DeepSeek 모델별 override를 none에서 low로 변경했다. none에서는 `/kr` 경로를 만들거나 AIP 요금을 일반 `/plans`로 연결하는 사례가 남았다. Default·Dedicated 설정은 유지했고 운영 배포는 하지 않았다.
+
+검증: Hermes 문법·비밀정보·정책·profile 계약·smoke 35건, profile 적용 27건 통과. Kimi judge는 설정 부재로 생략됐다. 최종 계약은 기존의 20,000자 SOUL 제한 안에 있다.
+
+native Hermes 0.21.3 + 실제 내부 DeepSeek V4.1 Flash, 고정 corpus·읽기 전용 도구·새 세션을 사용했다. 변경 전 low 기준은 aip-bot `8a3f53ab10de177baa6450bc3ace869c733fa1fc`, 최종 정책·모델은 PR #170에 반영했다.
+
+| 질문 | 이전 low | 최종 low |
+| --- | --- | --- |
+| SLM DLP 소개 | 335자, 6.55초, 링크 없음 | 300자, 13.33초, 관련 제품 링크 |
+| NotePie 요금 | 121자, 9.49초, 링크 없음 | 130자, 15.03초, 금액·단위·포함량 유지. URL을 확보하지 못해 조용히 생략 |
+| AIP 직원 ID 패턴 상세 절차 | 590자, 6.75초, 필수 입력·검증·저장 | 774자, 10.53초, 5단계와 관련 매뉴얼 링크. 상세 요청이므로 길이 절대 제한 없음 |
+| DLP 문의 → 2번 선택 | 322자, 7.03초, SLM 설명 | 299자, 11.40초, SLM 설명과 제품 링크 |
+
+시간은 선택 안내를 제외한 실행 시간이다. 최초 비교와 중간 일부 실행은 동시에 진행했으므로 속도 우열로 해석하지 않는다. 답변의 모든 글자 수에는 링크가 포함된다.
+
+최종 네 답변은 완료됐고 요청한 기능·가격·절차를 유지했다. 중간에는 답변이 길어지는 경우, 요청하지 않은 가격 공백, URL 미확인 설명, 영어 링크 안내, 잘못된 URL과 링크용 추가 조회가 있었다. 이를 발견한 뒤 지침을 보완하고 결과를 모두 보존했다. 최종 단일 표본의 결과를 일반 성공률·운영 timeout 보장으로 주장하지 않는다. 링크를 자주·정확히 제공하면서 추가 검색을 멈추는 동작은 모델 준수에 의존한다.
+
+평가 디렉터리: `hermes-channel-eval.P2SinY`. `usability-cases.json`과 `results/usability-before-*.json`, `usability-after-*.json`, `usability-final-*.json`, `usability-delivery-*.json`, `usability-verified-*.json`, `usability-release-*.json`에 원본·trace·effort·시간을 보존했다. 평가 도구는 native 도구 schema와 고정 corpus용 읽기/ripgrep/glob handler이며 전체 운영 memory·도구·fallback을 재현한 것은 아니다. 회사 사이트 corpus는 `1cb4b82a5fc2b678c185a300ff050b020ec86844`, AIP 매뉴얼은 `75974e53e3eddebf58d2d2240918ed8f354d38c2`, ACP 매뉴얼은 `10f5c84ff3a1c0a565fb9ab57788efabaf191bad`, Lingo는 이전 PR 자료 `88091b1fd7405b4caf876cae95d70d69c58baffe`이며 배포된 사실의 검증은 아니다.
 
 자세한 표시·연결 구조는 [AI 제품 상담 연결 및 검증](../reference/ai-product-chat-test.md)을 참고한다.
