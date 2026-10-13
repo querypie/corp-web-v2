@@ -459,17 +459,6 @@
       ]
     },
     {
-      "type": "image",
-      "attrs": {
-        "src": "/resources/blogs/qev-decision-ai/model-family.png",
-        "alt": "Qwen 기반 QEV와 Gemma4 기반 QEV2를 독자 개발하고, DLP 업무 데이터를 추가 학습한 모델 계열도",
-        "title": null,
-        "width": "100%",
-        "height": null,
-        "caption": "Qwen·Gemma4 기반 자체 의사결정 모델과 DLP 특화 모델"
-      }
-    },
-    {
       "type": "table",
       "content": [
         {
@@ -1024,15 +1013,194 @@
       ]
     },
     {
-      "type": "image",
+      "type": "heading",
       "attrs": {
-        "src": "/resources/blogs/qev-decision-ai/dlp-comparison.png",
-        "alt": "동일 DLP 평가에서 JEV API의 미탐 46건 대비 QEV2-DLP-12B는 4건으로 약 91.3% 감소",
-        "title": null,
-        "width": "100%",
-        "height": null,
-        "caption": "동일 사내 DLP 문서 3,167건, 임계값 0.50에서 비교한 미탐 건수"
-      }
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "동일 DLP 평가의 미탐 건수"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "content": [
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "모델"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "미탐 건수 비교"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "JEV API"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "46건"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "QEV2-DLP-12B"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "4건"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "46건 → 4건 | 미탐 약 91.3% 감소"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "동일 사내 DLP 문서 3,167건, 임계값 0.50에서 비교한 미탐 건수입니다."
+        }
+      ]
     },
     {
       "type": "paragraph",
@@ -1492,15 +1660,275 @@
       ]
     },
     {
-      "type": "image",
+      "type": "heading",
       "attrs": {
-        "src": "/resources/blogs/qev-decision-ai/demo-results.png",
-        "alt": "가상 입력 10건의 분류 결과: 민감정보 없음 4건, 개인정보 2건, 내부 기밀 2건, 두 유형 모두 포함 2건",
-        "title": null,
-        "width": "100%",
-        "height": null,
-        "caption": "QEV2-DLP-12B-INT8을 사용한 가상 업무 입력 10건의 선택 결과"
-      }
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "전체 10건의 분류 결과"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "content": [
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "분류"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "선택 건수"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "민감정보 없음"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "4건 · 40%"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "개인정보 포함"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "2건 · 20%"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "내부 기밀 포함"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "2건 · 20%"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "개인정보와 내부 기밀 모두 포함"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "2건 · 20%"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QEV2-DLP-12B-INT8을 사용한 가상 업무 입력 10건의 선택 결과입니다."
+        }
+      ]
     },
     {
       "type": "paragraph",
@@ -1573,15 +2001,275 @@
       ]
     },
     {
-      "type": "image",
+      "type": "heading",
       "attrs": {
-        "src": "/resources/blogs/qev-decision-ai/int8-memory.png",
-        "alt": "INT8 적용으로 QEV-9B GPU 메모리는 14.95에서 8.55GiB, QEV2-12B는 22.60에서 12.38GiB로 감소",
-        "title": null,
-        "width": "100%",
-        "height": null,
-        "caption": "기존 BF16과 INT8 구성의 GPU 메모리 사용량 비교"
-      }
+        "level": 3
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "기존 BF16과 INT8의 GPU 메모리 비교"
+        }
+      ]
+    },
+    {
+      "type": "table",
+      "content": [
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "모델·구성"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableHeader",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "GPU 메모리"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "QEV-9B · BF16"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "14.95 GiB"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "QEV-9B · INT8"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "8.55 GiB"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "QEV2-12B · BF16"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "22.60 GiB"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "tableRow",
+          "content": [
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "text": "QEV2-12B · INT8"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "tableCell",
+              "attrs": {
+                "colspan": 1,
+                "rowspan": 1,
+                "colwidth": null,
+                "align": null
+              },
+              "content": [
+                {
+                  "type": "paragraph",
+                  "content": [
+                    {
+                      "type": "text",
+                      "marks": [
+                        {
+                          "type": "bold"
+                        }
+                      ],
+                      "text": "12.38 GiB"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "막대는 0~22.60 GiB의 동일 범위로 표시했습니다. 회색은 기존 BF16, 진한 남색은 INT8 구성입니다."
+        }
+      ]
     },
     {
       "type": "paragraph",

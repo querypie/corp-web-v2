@@ -18,7 +18,6 @@
 <p>QEV는 기존 AI 서비스를 단순히 연결해 사용하는 솔루션이 아닙니다.</p>
 <p>QueryPie AI는 <strong>Qwen과 Gemma4를 기반으로 의사결정 모델을 독자적으로 구현</strong>하고, 기업의 업무 목적에 맞게 추가 학습하는 기술을 확보했습니다.</p>
 <p>현재 개발된 모델은 다음과 같습니다.</p>
-<figure data-qp-image="true" data-width="100%" style="width:100%;"><img src="/resources/blogs/qev-decision-ai/model-family.png" alt="Qwen 기반 QEV와 Gemma4 기반 QEV2를 독자 개발하고, DLP 업무 데이터를 추가 학습한 모델 계열도" style="width:100%;"><figcaption>Qwen·Gemma4 기반 자체 의사결정 모델과 DLP 특화 모델</figcaption></figure>
 <table><thead><tr><th>모델</th><th>특징</th></tr></thead><tbody><tr><td>QEV</td><td>Qwen 기반 자체 의사결정 모델</td></tr><tr><td>QEV2</td><td>Gemma4 기반 자체 의사결정 모델</td></tr><tr><td>QEV-DLP / QEV2-DLP</td><td>민감정보 탐지에 특화한 모델</td></tr></tbody></table>
 <p>특히 자체 개발한 모델에 DLP 업무 데이터를 추가 학습하면서 탐지 성능을 크게 향상시켰습니다.</p>
 <p>QEV-DLP-4B의 F2 점수는 <strong>92.09%에서 98.17%</strong>로 향상되었으며, QEV2-DLP-12B는 더욱 높은 탐지율을 기록했습니다.</p>
@@ -29,7 +28,10 @@
 <p>특히 민감정보가 포함된 문서 1,281건 중 탐지하지 못한 문서는 단 4건이었습니다.</p>
 <h3>상용 AI 모델과의 성능 비교</h3>
 <table><thead><tr><th>평가 항목</th><th>JEV API</th><th>QEV2-DLP-12B</th></tr></thead><tbody><tr><td>탐지율(Recall)</td><td>96.41%</td><td>99.69%</td></tr><tr><td>F2 점수</td><td>96.59%</td><td>98.98%</td></tr><tr><td>미탐 건수</td><td>46건</td><td>4건</td></tr></tbody></table>
-<figure data-qp-image="true" data-width="100%" style="width:100%;"><img src="/resources/blogs/qev-decision-ai/dlp-comparison.png" alt="동일 DLP 평가에서 JEV API의 미탐 46건 대비 QEV2-DLP-12B는 4건으로 약 91.3% 감소" style="width:100%;"><figcaption>동일 사내 DLP 문서 3,167건, 임계값 0.50에서 비교한 미탐 건수</figcaption></figure>
+<h3>동일 DLP 평가의 미탐 건수</h3>
+<table aria-label="JEV API와 QEV2-DLP-12B의 미탐 건수 비교"><thead><tr><th>모델</th><th>미탐 건수 비교</th></tr></thead><tbody><tr><td>JEV API</td><td><p><strong>46건</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:#E8EAED;border-radius:4px;overflow:hidden;"><div style="height:16px;width:100%;background:#697586;"></div></div></td></tr><tr><td>QEV2-DLP-12B</td><td><p><strong>4건</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:#E8EAED;border-radius:4px;overflow:hidden;"><div style="height:16px;width:8.70%;background:#142B49;"></div></div></td></tr></tbody></table>
+<blockquote><p><strong>46건 → 4건 | 미탐 약 91.3% 감소</strong></p></blockquote>
+<p>동일 사내 DLP 문서 3,167건, 임계값 0.50에서 비교한 미탐 건수입니다.</p>
 <p>동일한 사내 평가 환경에서 상용 JEV API 대비 <strong>미탐 건수를 약 91.3% 줄인 결과</strong>입니다.</p>
 <p>또한 상대적으로 작은 QEV-DLP-4B 모델은 <strong>정확도 98.58%</strong>를 기록하며, 평가 대상 모델 중 가장 높은 정확도를 보여주었습니다.</p>
 <p>이는 모델의 크기뿐 아니라 업무 목적에 맞춘 학습과 최적화가 AI 성능에 중요한 영향을 미칠 수 있다는 점을 보여줍니다.</p>
@@ -41,14 +43,18 @@
 <h3>실제 데모 테스트 결과</h3>
 <table><thead><tr><th>테스트 사례</th><th>QEV 판단 결과</th><th>판단 확률</th></tr></thead><tbody><tr><td>이름·전화번호·배송 주소가 포함된 배송 문의</td><td>개인정보 포함</td><td>99.63%</td></tr><tr><td>발표 전 기업 요금과 할인 조건</td><td>내부 기밀 포함</td><td>99.66%</td></tr><tr><td>고객 연락처와 미공개 기업 요금·할인 제안</td><td>개인정보 + 내부 기밀</td><td>89.80%</td></tr><tr><td>홈페이지에 공개된 독서 행사 안내</td><td>민감정보 없음</td><td>98.48%</td></tr></tbody></table>
 <p>10개 테스트 사례 모두 사전에 정의한 분류 기준에 부합하는 결과를 반환했습니다.</p>
-<figure data-qp-image="true" data-width="100%" style="width:100%;"><img src="/resources/blogs/qev-decision-ai/demo-results.png" alt="가상 입력 10건의 분류 결과: 민감정보 없음 4건, 개인정보 2건, 내부 기밀 2건, 두 유형 모두 포함 2건" style="width:100%;"><figcaption>QEV2-DLP-12B-INT8을 사용한 가상 업무 입력 10건의 선택 결과</figcaption></figure>
+<h3>전체 10건의 분류 결과</h3>
+<table aria-label="가상 업무 입력 10건의 분류 분포"><thead><tr><th>분류</th><th>선택 건수</th></tr></thead><tbody><tr><td>민감정보 없음</td><td><p><strong>4건 · 40%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:#E8EAED;border-radius:4px;overflow:hidden;"><div style="height:12px;width:40%;background:#142B49;"></div></div></td></tr><tr><td>개인정보 포함</td><td><p><strong>2건 · 20%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:#E8EAED;border-radius:4px;overflow:hidden;"><div style="height:12px;width:20%;background:#142B49;"></div></div></td></tr><tr><td>내부 기밀 포함</td><td><p><strong>2건 · 20%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:#E8EAED;border-radius:4px;overflow:hidden;"><div style="height:12px;width:20%;background:#142B49;"></div></div></td></tr><tr><td>개인정보와 내부 기밀 모두 포함</td><td><p><strong>2건 · 20%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:#E8EAED;border-radius:4px;overflow:hidden;"><div style="height:12px;width:20%;background:#142B49;"></div></div></td></tr></tbody></table>
+<p>QEV2-DLP-12B-INT8을 사용한 가상 업무 입력 10건의 선택 결과입니다.</p>
 <p>특히 공개된 행사 안내는 정상 정보로 분류하고, 미공개 요금과 할인 조건은 내부 기밀로 분류하는 등 정보의 내용과 맥락에 따른 판단 능력을 확인할 수 있었습니다.</p>
 <p>또한 QEV는 민감정보 탐지뿐 아니라 조건 충족 여부, 우선순위 평가, 요청 분류 등 기업이 정의한 다양한 판단 업무에도 활용할 수 있습니다.</p>
 <p>표시된 확률은 모델이 선택한 결과에 부여한 확신도이며, 전체 탐지 정확도를 의미하지 않습니다. 위 사례는 기능을 보여주기 위한 데모로, 별도의 대규모 성능 평가와 구분됩니다.</p>
 <h2>높은 성능을 유지하면서 GPU 메모리도 절감했습니다</h2>
 <p>QueryPie AI는 자체 모델의 운영 효율을 높이기 위해 8bit 양자화(INT8) 기술도 검증했습니다.</p>
 <p>8개 모델을 대상으로 한 실험에서 <strong>GPU 메모리 사용량을 27.5~45.2% 절감</strong>했으며, DLP 탐지 성능은 대체로 유지했습니다.</p>
-<figure data-qp-image="true" data-width="100%" style="width:100%;"><img src="/resources/blogs/qev-decision-ai/int8-memory.png" alt="INT8 적용으로 QEV-9B GPU 메모리는 14.95에서 8.55GiB, QEV2-12B는 22.60에서 12.38GiB로 감소" style="width:100%;"><figcaption>기존 BF16과 INT8 구성의 GPU 메모리 사용량 비교</figcaption></figure>
+<h3>기존 BF16과 INT8의 GPU 메모리 비교</h3>
+<table aria-label="BF16과 INT8 GPU 메모리 사용량 비교"><thead><tr><th>모델·구성</th><th>GPU 메모리</th></tr></thead><tbody><tr><td>QEV-9B · BF16</td><td><p><strong>14.95 GiB</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:#E8EAED;border-radius:4px;overflow:hidden;"><div style="height:16px;width:66.15%;background:#697586;"></div></div></td></tr><tr><td>QEV-9B · INT8</td><td><p><strong>8.55 GiB</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:#E8EAED;border-radius:4px;overflow:hidden;"><div style="height:16px;width:37.83%;background:#142B49;"></div></div></td></tr><tr><td>QEV2-12B · BF16</td><td><p><strong>22.60 GiB</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:#E8EAED;border-radius:4px;overflow:hidden;"><div style="height:16px;width:100%;background:#697586;"></div></div></td></tr><tr><td>QEV2-12B · INT8</td><td><p><strong>12.38 GiB</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:#E8EAED;border-radius:4px;overflow:hidden;"><div style="height:16px;width:54.78%;background:#142B49;"></div></div></td></tr></tbody></table>
+<p>막대는 0~22.60 GiB의 동일 범위로 표시했습니다. 회색은 기존 BF16, 진한 남색은 INT8 구성입니다.</p>
 <p>특히 QEV2-DLP-12B는 INT8 적용 이후에도 <strong>미탐 4건을 유지하고, F2 점수 99.02%</strong>를 기록했습니다.</p>
 <p>다만 현재 H200 환경에서는 INT8의 응답시간이 증가했으므로, 실제 운영 시에는 응답 속도와 메모리 효율을 고려한 구성이 필요합니다.</p>
 <h2>기업의 업무에 맞춰 진화하는 AI</h2>
