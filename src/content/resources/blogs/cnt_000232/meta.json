@@ -1,0 +1,39 @@
+{
+  "authorName": "QueryPie AI",
+  "authorRole": "",
+  "categorySlug": "blogs",
+  "contentType": "content",
+  "dateIso": "2026-10-13",
+  "downloadCoverImageSrc": "",
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfFileName": "",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "qev-decision-ai-dlp-detection",
+  "imageSrc": "/resources/blogs/qev-decision-ai/thumbnail.png",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000232",
+  "summary": {
+    "en": "",
+    "ko": "QueryPie AI가 Qwen·Gemma4 기반 자체 의사결정 모델 QEV를 개발했습니다. DLP 탐지율 99.69%와 JEV 대비 미탐 약 91.3% 감소를 확인한 사내 평가, 실제 데모 사례와 INT8 운영 효율을 소개합니다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "",
+    "ko": "QueryPie AI, 자체 의사결정 AI 모델 ‘QEV’ 개발",
+    "ja": ""
+  },
+  "visibleLocales": ["ko"],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/blogs/cnt_000232/ko.html",
+      "jsonPath": "src/content/resources/blogs/cnt_000232/ko.tiptap.json"
+    }
+  }
+}
