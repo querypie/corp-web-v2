@@ -11,7 +11,7 @@
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
-  "hideHeroImage": false,
+  "hideHeroImage": true,
   "id": "qev-decision-ai-dlp-detection",
   "imageSrc": "/resources/blogs/qev-decision-ai/thumbnail.png",
   "relatedIds": [],

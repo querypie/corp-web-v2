@@ -14,9 +14,20 @@
               "type": "bold"
             }
           ],
-          "text": "독자적인 AI 기술로 DLP 탐지율 99.69%, JEV 대비 미탐 약 91% 감소"
+          "text": "독자적인 AI 기술로 DLP 탐지 99.69% 세계 최고율 달성, JEV 대비 미탐 약 91% 감소"
         }
       ]
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/resources/blogs/qev-decision-ai/thumbnail.png",
+        "alt": "QEV가 한국어·영어·일본어 업무 입력에서 민감정보를 탐지하는 모습",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": ""
+      }
     },
     {
       "type": "paragraph",
