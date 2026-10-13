@@ -37,6 +37,21 @@ describe("PlansPage", () => {
     expect(screen.getByText("Enterprise power unleashed")).toBeInTheDocument();
   });
 
+  it.each([
+    ["en", "Monthly Billing", "$650/month", "Custom Pricing"],
+    ["ko", "월간 요금", "$650/월", "별도 문의"],
+    ["ja", "料金", "$650/月", "カスタム価格 (年間契約)"],
+  ] as const)("renders only current AIP comparison prices in %s", (locale, label, business, enterprise) => {
+    render(<PlansPage locale={locale} productKey="aip" />);
+
+    const priceRow = screen.getByText(label).parentElement;
+
+    expect(priceRow).toHaveTextContent(business);
+    expect(priceRow).toHaveTextContent(enterprise);
+    expect(priceRow?.children).toHaveLength(3);
+    expect(screen.queryByText(/\$20(?:\/| per)/)).not.toBeInTheDocument();
+  });
+
   it("renders comparison group headlines with contrasting text on the primary background", () => {
     render(<PlansPage locale="en" productKey="aip" />);
 
