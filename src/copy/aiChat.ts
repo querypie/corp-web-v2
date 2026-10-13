@@ -14,6 +14,7 @@ type AiChatCopy = {
   loading: string;
   error: string;
   sources: string;
+  table: string;
   disclaimer: string;
 };
 
@@ -32,6 +33,7 @@ export const aiChatCopy: Record<Locale, AiChatCopy> = {
     loading: "답변을 준비하고 있어요…",
     error: "답변을 가져오지 못했어요. 잠시 후 다시 보내주세요.",
     sources: "참고 자료",
+    table: "답변 표 · 좌우로 스크롤할 수 있습니다",
     disclaimer: "AI는 간혹 실수할 수 있습니다.",
   },
   en: {
@@ -48,6 +50,7 @@ export const aiChatCopy: Record<Locale, AiChatCopy> = {
     loading: "Preparing an answer…",
     error: "We couldn't get an answer. Please try sending your message again shortly.",
     sources: "Sources",
+    table: "Answer table · scroll horizontally",
     disclaimer: "AI can sometimes make mistakes.",
   },
   ja: {
@@ -64,6 +67,7 @@ export const aiChatCopy: Record<Locale, AiChatCopy> = {
     loading: "回答を準備しています…",
     error: "回答を取得できませんでした。しばらくしてから、もう一度送信してください。",
     sources: "参考資料",
+    table: "回答の表 · 横にスクロールできます",
     disclaimer: "AIの回答には誤りが含まれる場合があります。",
   },
 };
