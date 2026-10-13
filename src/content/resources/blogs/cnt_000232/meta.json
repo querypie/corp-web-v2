@@ -21,7 +21,7 @@
   "storageId": "cnt_000232",
   "summary": {
     "en": "",
-    "ko": "QueryPie AI가 Qwen·Gemma4 기반 자체 의사결정 모델 QEV를 개발했습니다. DLP 탐지율 99.69%와 JEV 대비 미탐 약 91.3% 감소를 확인한 사내 평가, 실제 데모 사례와 INT8 운영 효율을 소개합니다.",
+    "ko": "QueryPie AI가 독자 개발한 Gemma4 기반 자체 의사결정 모델 QEV. DLP 탐지율 99.69%와 JEV 대비 미탐 약 91.3% 감소를 확인한 사내 평가, 실제 데모 사례와 INT8 운영 효율을 소개합니다.",
     "ja": ""
   },
   "title": {
@@ -29,7 +29,9 @@
     "ko": "QueryPie AI, 자체 의사결정 AI 모델 ‘QEV’ 개발",
     "ja": ""
   },
-  "visibleLocales": ["ko"],
+  "visibleLocales": [
+    "ko"
+  ],
   "locales": {
     "ko": {
       "htmlPath": "src/content/resources/blogs/cnt_000232/ko.html",

@@ -14,7 +14,7 @@
               "type": "bold"
             }
           ],
-          "text": "독자적인 AI 기술로 DLP 탐지율 99.69% 달성"
+          "text": "독자적인 AI 기술로 DLP 탐지율 99.69%, JEV 대비 미탐 약 91% 감소"
         }
       ]
     },
@@ -63,7 +63,7 @@
       "content": [
         {
           "type": "text",
-          "text": "특히 DLP(Data Loss Prevention, 정보 유출 방지)에 특화한 QEV2-DLP는 사내 성능 평가에서 "
+          "text": "특히 DLP(Data Loss Prevention, 정보 유출 방지)에 특화한 QEV는 사내 성능 평가에서 "
         },
         {
           "type": "text",
@@ -452,7 +452,7 @@
       "content": [
         {
           "type": "text",
-          "text": "QueryPie AI는 "
+          "text": "QueryPie AI는 Qwen·Gemma4 기반 모델의 개발과 평가를 진행하며 의사결정 모델을 독자적으로 구현하고, 기업의 업무 목적에 맞게 추가 학습하는 기술을 확보했습니다. "
         },
         {
           "type": "text",
@@ -461,11 +461,7 @@
               "type": "bold"
             }
           ],
-          "text": "Qwen과 Gemma4를 기반으로 의사결정 모델을 독자적으로 구현"
-        },
-        {
-          "type": "text",
-          "text": "하고, 기업의 업무 목적에 맞게 추가 학습하는 기술을 확보했습니다."
+          "text": "공개 모델 QEV는 Gemma4 기반 12B 모델로, 민감정보 판단에 특화한 학습을 적용했습니다."
         }
       ]
     },
@@ -474,192 +470,7 @@
       "content": [
         {
           "type": "text",
-          "text": "현재 개발된 모델은 다음과 같습니다."
-        }
-      ]
-    },
-    {
-      "type": "table",
-      "content": [
-        {
-          "type": "tableRow",
-          "content": [
-            {
-              "type": "tableHeader",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "모델"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "tableHeader",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "특징"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "tableRow",
-          "content": [
-            {
-              "type": "tableCell",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "QEV"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "tableCell",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "Qwen 기반 자체 의사결정 모델"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "tableRow",
-          "content": [
-            {
-              "type": "tableCell",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "QEV2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "tableCell",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "Gemma4 기반 자체 의사결정 모델"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "tableRow",
-          "content": [
-            {
-              "type": "tableCell",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "QEV-DLP / QEV2-DLP"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "tableCell",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "민감정보 탐지에 특화한 모델"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "text": "QEV는 기업의 업무 기준에 따라 문장을 분류하고, 조건 충족 여부와 선택지별 확률을 반환하는 자체 의사결정 모델입니다."
         }
       ]
     },
@@ -677,7 +488,7 @@
       "content": [
         {
           "type": "text",
-          "text": "QEV-DLP-4B의 F2 점수는 "
+          "text": "QEV는 사내 DLP 평가에서 "
         },
         {
           "type": "text",
@@ -686,11 +497,11 @@
               "type": "bold"
             }
           ],
-          "text": "92.09%에서 98.17%"
+          "text": "탐지율 99.69%, F2 점수 98.98%"
         },
         {
           "type": "text",
-          "text": "로 향상되었으며, QEV2-DLP-12B는 더욱 높은 탐지율을 기록했습니다."
+          "text": "를 기록했습니다."
         }
       ]
     },
@@ -743,7 +554,7 @@
               "type": "bold"
             }
           ],
-          "text": "QEV2-DLP-12B는 탐지율 99.69%, F2 점수 98.98%"
+          "text": "QEV는 탐지율 99.69%, F2 점수 98.98%"
         },
         {
           "type": "text",
@@ -837,7 +648,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "QEV2-DLP-12B"
+                      "text": "QEV"
                     }
                   ]
                 }
@@ -1174,7 +985,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "QEV2-DLP-12B"
+                      "text": "QEV"
                     }
                   ]
                 }
@@ -1264,28 +1075,6 @@
       "content": [
         {
           "type": "text",
-          "text": "또한 상대적으로 작은 QEV-DLP-4B 모델은 "
-        },
-        {
-          "type": "text",
-          "marks": [
-            {
-              "type": "bold"
-            }
-          ],
-          "text": "정확도 98.58%"
-        },
-        {
-          "type": "text",
-          "text": "를 기록하며, 평가 대상 모델 중 가장 높은 정확도를 보여주었습니다."
-        }
-      ]
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
           "text": "이는 모델의 크기뿐 아니라 업무 목적에 맞춘 학습과 최적화가 AI 성능에 중요한 영향을 미칠 수 있다는 점을 보여줍니다."
         }
       ]
@@ -1295,7 +1084,7 @@
       "content": [
         {
           "type": "text",
-          "text": "본 결과는 동일한 사내 DLP 평가 데이터 3,167건과 임계값 0.50을 기준으로 측정한 문서 단위 분류 성능입니다. 정확도 최고는 비교 대상 9개 모델 기준입니다."
+          "text": "본 결과는 동일한 사내 DLP 평가 데이터 3,167건과 임계값 0.50을 기준으로 측정한 문서 단위 분류 성능입니다."
         }
       ]
     },
@@ -1321,7 +1110,7 @@
       "content": [
         {
           "type": "text",
-          "text": "QueryPie AI는 QEV2-DLP-12B-INT8 모델을 활용해 이메일과 ChatGPT에 입력할 법한 가상의 업무 문장 10개를 테스트했습니다."
+          "text": "QueryPie AI는 QEV INT8 모델을 활용해 이메일과 ChatGPT에 입력할 법한 가상의 업무 문장 10개를 테스트했습니다."
         }
       ]
     },
@@ -1976,7 +1765,7 @@
       "content": [
         {
           "type": "text",
-          "text": "QEV2-DLP-12B-INT8을 사용한 가상 업무 입력 10건의 선택 결과입니다."
+          "text": "QEV INT8을 사용한 가상 업무 입력 10건의 선택 결과입니다."
         }
       ]
     },
@@ -2038,7 +1827,7 @@
       "content": [
         {
           "type": "text",
-          "text": "8개 모델을 대상으로 한 실험에서 "
+          "text": "QEV의 기반 모델을 대상으로 한 실험에서 "
         },
         {
           "type": "text",
@@ -2047,11 +1836,11 @@
               "type": "bold"
             }
           ],
-          "text": "GPU 메모리 사용량을 27.5~45.2% 절감"
+          "text": "GPU 메모리 사용량이 22.60 GiB에서 12.38 GiB로 약 45.2% 감소"
         },
         {
           "type": "text",
-          "text": "했으며, DLP 탐지 성능은 대체로 유지했습니다."
+          "text": "했습니다. DLP 탐지 성능도 높은 수준을 유지했습니다."
         }
       ]
     },
@@ -2137,107 +1926,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "QEV-9B · BF16"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "tableCell",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "marks": [
-                        {
-                          "type": "bold"
-                        }
-                      ],
-                      "text": "14.95 GiB"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "tableRow",
-          "content": [
-            {
-              "type": "tableCell",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "QEV-9B · INT8"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "tableCell",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "marks": [
-                        {
-                          "type": "bold"
-                        }
-                      ],
-                      "text": "8.55 GiB"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "tableRow",
-          "content": [
-            {
-              "type": "tableCell",
-              "attrs": {
-                "colspan": 1,
-                "rowspan": 1,
-                "colwidth": null,
-                "align": null
-              },
-              "content": [
-                {
-                  "type": "paragraph",
-                  "content": [
-                    {
-                      "type": "text",
-                      "text": "QEV2-12B · BF16"
+                      "text": "QEV · BF16"
                     }
                   ]
                 }
@@ -2287,7 +1976,7 @@
                   "content": [
                     {
                       "type": "text",
-                      "text": "QEV2-12B · INT8"
+                      "text": "QEV · INT8"
                     }
                   ]
                 }
@@ -2336,7 +2025,7 @@
       "content": [
         {
           "type": "text",
-          "text": "특히 QEV2-DLP-12B는 INT8 적용 이후에도 "
+          "text": "특히 QEV는 INT8 적용 이후에도 "
         },
         {
           "type": "text",
@@ -2487,7 +2176,7 @@
       "content": [
         {
           "type": "text",
-          "text": "평가 출처: QueryPie AI 내부 「QEV2·QEV·KEV·JEV 성능 평가 및 종합 분석」(2026.10.08), QEV·QEV2 INT8 양자화 평가(2026.10.12), QEV DLP 10개 사례 데모 영상."
+          "text": "평가 출처: QueryPie AI 내부 DLP 성능 비교 평가(2026.10.08), INT8 양자화 평가(2026.10.12), QEV DLP 10개 사례 데모 영상."
         }
       ]
     },
