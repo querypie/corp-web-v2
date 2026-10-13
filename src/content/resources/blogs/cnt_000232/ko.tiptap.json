@@ -9,6 +9,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "독자적인 AI 기술로 DLP 탐지율 99.69% 달성"
         }
       ]
@@ -83,6 +88,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "QEV란 무엇인가요?"
         }
       ]
@@ -145,6 +155,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "실제 QEV 데모 결과"
         }
       ]
@@ -414,6 +429,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "자체 기술로 구현한 QueryPie AI의 의사결정 모델"
         }
       ]
@@ -691,6 +711,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "DLP 탐지율 99.69% — 민감 문서 1,281건 중 미탐 단 4건"
         }
       ]
@@ -743,6 +768,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "상용 AI 모델과의 성능 비교"
         }
       ]
@@ -1020,6 +1050,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "동일 DLP 평가의 미탐 건수"
         }
       ]
@@ -1272,6 +1307,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "실제 업무 문장을 QEV로 분석해 보았습니다"
         }
       ]
@@ -1316,6 +1356,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "실제 데모 테스트 결과"
         }
       ]
@@ -1667,6 +1712,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "전체 10건의 분류 결과"
         }
       ]
@@ -1965,6 +2015,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "높은 성능을 유지하면서 GPU 메모리도 절감했습니다"
         }
       ]
@@ -2008,6 +2063,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "기존 BF16과 INT8의 GPU 메모리 비교"
         }
       ]
@@ -2267,7 +2327,7 @@
       "content": [
         {
           "type": "text",
-          "text": "막대는 0~22.60 GiB의 동일 범위로 표시했습니다. 회색은 기존 BF16, 진한 남색은 INT8 구성입니다."
+          "text": "막대는 0~22.60 GiB의 동일 범위로 표시했습니다. 회색은 기존 BF16, 파란색은 INT8 구성입니다."
         }
       ]
     },
@@ -2310,6 +2370,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "기업의 업무에 맞춰 진화하는 AI"
         }
       ]
@@ -2363,6 +2428,11 @@
       "content": [
         {
           "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
           "text": "QEV를 직접 경험해 보세요"
         }
       ]
