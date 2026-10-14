@@ -50,4 +50,46 @@ describe("Hermes Markdown 답변", () => {
     expect(screen.queryByRole("link")).not.toBeInTheDocument();
     expect(findHermesLinks(content)).toEqual([]);
   });
+
+  it.each([
+    ["**ACP(Access Control Platform)**가 접근 제어를 담당합니다.", "ACP(Access Control Platform)", "가 접근 제어를 담당합니다."],
+    ["**ACP（アクセス制御）**は製品です。", "ACP（アクセス制御）", "は製品です。"],
+    ["**ACP（访问控制）**是产品。", "ACP（访问控制）", "是产品。"],
+    ["__ACP(Access Control Platform)__는 제품입니다.", "ACP(Access Control Platform)", "는 제품입니다."],
+    ["**ACP:**를 설명합니다.", "ACP:", "를 설명합니다."],
+  ])("문장부호 뒤 강조와 CJK 문자가 붙어도 정상 표시한다: %s", (content, title, suffix) => {
+    const { container } = render(<HermesAnswer tableLabel="표">{content}</HermesAnswer>);
+    expect(screen.getByText(title)).toHaveProperty("tagName", "STRONG");
+    expect(container.querySelector("p")?.textContent).toBe(title + suffix);
+  });
+
+  it("강조처럼 보이는 코드·이스케이프·URL 원문을 보존한다", () => {
+    const literal = "**ACP(Access Control Platform)**가";
+    const url = "https://example.test/**ACP(Access_Control_Platform)**가";
+    const content = `\`${literal}\`\n\n\`\`\`text\n${literal}\n\`\`\`\n\n\\*\\*ACP(Access Control Platform)\\*\\*가\n\n[문서](${url})`;
+    const { container } = render(<HermesAnswer tableLabel="표">{content}</HermesAnswer>);
+    expect(container.querySelector("strong")).toBeNull();
+    expect(container.querySelector("code")?.textContent).toBe(literal);
+    expect(container.querySelector("pre code")?.textContent).toBe(literal + "\n");
+    expect(container.textContent).toContain(literal);
+    expect(screen.getByRole("link", { name: "문서" })).toHaveAttribute("href", new URL(url).href);
+    expect(findHermesLinks(content)).toEqual([{ title: "문서", url: new URL(url).href }]);
+  });
+
+  it("강조된 링크 제목의 렌더링과 출처 추출이 일치한다", () => {
+    const content = "[**ACP(Access Control Platform)**의 문서](https://docs.querypie.com)";
+    render(<HermesAnswer tableLabel="표">{content}</HermesAnswer>);
+    expect(screen.getByText("ACP(Access Control Platform)")).toHaveProperty("tagName", "STRONG");
+    expect(findHermesLinks(content)).toEqual([{ title: "ACP(Access Control Platform)의 문서", url: "https://docs.querypie.com/" }]);
+    expect(screen.getByRole("link")).toHaveAttribute("href", "https://docs.querypie.com/");
+    expect(screen.getByRole("link").textContent).toBe("ACP(Access Control Platform)의 문서");
+  });
+
+  it("짝이 없는 강조와 영문 단어 경계의 원래 해석을 유지한다", () => {
+    const content = "ACP(Access Control Platform)**가\n\n**ACP(Access Control Platform)**is a platform.";
+    const { container } = render(<HermesAnswer tableLabel="표">{content}</HermesAnswer>);
+    expect(container.querySelector("strong")).toBeNull();
+    expect(container.textContent).toContain("ACP(Access Control Platform)**가");
+    expect(container.textContent).toContain("**ACP(Access Control Platform)**is a platform.");
+  });
 });
