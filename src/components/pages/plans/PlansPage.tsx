@@ -188,7 +188,7 @@ function ComparisonTable({
                   >
                     <div className="px-5 type-body-md text-fg">{row.label}</div>
 
-                    {row.values.slice(-plans.length).map((cell, index) => (
+                    {row.values.map((cell, index) => (
                       <div
                         key={`${row.label}-${plans[index]}`}
                         className="px-5 text-center type-body-md"

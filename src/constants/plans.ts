@@ -103,7 +103,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "Monthly Billing",
               values: [
-                { value: "$20/month" },
                 { value: "$650/month" },
                 { value: "Custom Pricing" },
               ],
@@ -111,7 +110,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "Monthly Credits",
               values: [
-                { value: "800 credits", tone: "muted" },
                 { value: "20,000 credits", tone: "muted" },
                 { value: "Custom Prepaid Credits", tone: "muted" },
               ],
@@ -119,7 +117,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "LLM Chat",
               values: [
-                { value: "Anthropic", tone: "muted" },
                 { value: "Anthropic / OpenAI / Gemini", tone: "muted" },
                 { value: "Any LLM Provider", tone: "muted" },
               ],
@@ -127,7 +124,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "Custom LLM Model",
               values: [
-                { value: "✕", tone: "danger" },
                 { value: "✕", tone: "danger" },
                 { value: "○ (Add-on)", tone: "success" },
               ],
@@ -142,13 +138,11 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               values: [
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
-                { value: "○", tone: "success" },
               ],
             },
             {
               label: "Insight Widgets",
               values: [
-                { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
               ],
@@ -158,13 +152,11 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               values: [
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
-                { value: "○", tone: "success" },
               ],
             },
             {
               label: "MCP Integrations",
               values: [
-                { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
               ],
@@ -174,13 +166,11 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               values: [
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
-                { value: "○", tone: "success" },
               ],
             },
             {
               label: "MCP Prompt Auto-Generation",
               values: [
-                { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
               ],
@@ -190,13 +180,11 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               values: [
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
-                { value: "○", tone: "success" },
               ],
             },
             {
               label: "Available Built-in Agents",
               values: [
-                { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
               ],
@@ -206,7 +194,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               values: [
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
-                { value: "○", tone: "success" },
               ],
             },
             {
@@ -214,13 +201,11 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               values: [
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
-                { value: "○", tone: "success" },
               ],
             },
             {
               label: "RAG Knowledge Bundle Limit",
               values: [
-                { value: "○ 3", tone: "success" },
                 { value: "○ 10", tone: "success" },
                 { value: "○ Unlimited", tone: "success" },
               ],
@@ -228,7 +213,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "Personal Edge Tunnels",
               values: [
-                { value: "○ 5", tone: "success" },
                 { value: "○ 20", tone: "success" },
                 { value: "○ Unlimited", tone: "success" },
               ],
@@ -236,7 +220,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "Agent Scheduling",
               values: [
-                { value: "○ 5", tone: "success" },
                 { value: "○ 10", tone: "success" },
                 { value: "○ Unlimited", tone: "success" },
               ],
@@ -244,7 +227,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "AI Agent Creation Limit",
               values: [
-                { value: "○ 5", tone: "success" },
                 { value: "○ 30", tone: "success" },
                 { value: "○ Unlimited", tone: "success" },
               ],
@@ -252,7 +234,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "My Drive",
               values: [
-                { value: "○ 100MB / user", tone: "success" },
                 { value: "○ 1GB / user", tone: "success" },
                 { value: "○ 10GB / user", tone: "success" },
               ],
@@ -266,7 +247,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               label: "SSO",
               values: [
                 { value: "✕", tone: "danger" },
-                { value: "✕", tone: "danger" },
                 { value: "○", tone: "success" },
               ],
             },
@@ -274,14 +254,12 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               label: "Chat Retention",
               values: [
                 { value: "✕", tone: "danger" },
-                { value: "✕", tone: "danger" },
                 { value: "○", tone: "success" },
               ],
             },
             {
               label: "DLP",
               values: [
-                { value: "✕", tone: "danger" },
                 { value: "✕", tone: "danger" },
                 { value: "○", tone: "success" },
               ],
@@ -291,13 +269,11 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               values: [
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
-                { value: "○", tone: "success" },
               ],
             },
             {
               label: "Audit Logs",
               values: [
-                { value: "○ 30 days", tone: "success" },
                 { value: "○ Max 90 days", tone: "success" },
                 { value: "○ Max 180 days", tone: "success" },
               ],
@@ -311,7 +287,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               label: "Pre-configured MCP Integration",
               values: [
                 { value: "✕", tone: "danger" },
-                { value: "✕", tone: "danger" },
                 { value: "○", tone: "success" },
               ],
             },
@@ -319,14 +294,12 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               label: "Organizational Edge Tunnels",
               values: [
                 { value: "✕", tone: "danger" },
-                { value: "✕", tone: "danger" },
                 { value: "○", tone: "success" },
               ],
             },
             {
               label: "MCP Access Control",
               values: [
-                { value: "✕", tone: "danger" },
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
               ],
@@ -334,7 +307,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "Agent Access Control",
               values: [
-                { value: "✕", tone: "danger" },
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
               ],
@@ -342,7 +314,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "LLM Model Control",
               values: [
-                { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
                 { value: "○", tone: "success" },
               ],
@@ -356,7 +327,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               label: "Custom Branding",
               values: [
                 { value: "✕", tone: "danger" },
-                { value: "✕", tone: "danger" },
                 { value: "○", tone: "success" },
               ],
             },
@@ -364,14 +334,12 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
               label: "FDE (Forward Deployed Engineer)",
               values: [
                 { value: "✕", tone: "danger" },
-                { value: "✕", tone: "danger" },
                 { value: "○ (Add-on)", tone: "success" },
               ],
             },
             {
               label: "Customer Support",
               values: [
-                { value: "Email support within 48 hrs", tone: "muted" },
                 { value: "Email support within 24 hrs", tone: "muted" },
                 { value: "Dedicated", tone: "muted" },
               ],
@@ -591,7 +559,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "월간 요금",
               values: [
-                { value: "$20/월" },
                 { value: "$650/월" },
                 { value: "별도 문의" },
               ],
@@ -599,7 +566,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "월간 크레딧",
               values: [
-                { value: "800 크레딧", tone: "muted" },
                 { value: "20,000 크레딧", tone: "muted" },
                 { value: "맞춤 선불 크레딧", tone: "muted" },
               ],
@@ -607,7 +573,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "LLM 채팅",
               values: [
-                { value: "Anthropic", tone: "muted" },
                 { value: "Anthropic / OpenAI / Gemini", tone: "muted" },
                 { value: "모든 LLM 제공사", tone: "muted" },
               ],
@@ -615,7 +580,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "커스텀 LLM 모델",
               values: [
-                { value: "✕", tone: "danger" },
                 { value: "✕", tone: "danger" },
                 { value: "○ (Add-on)", tone: "success" },
               ],
@@ -625,34 +589,33 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
         {
           title: "플랫폼 기능",
           rows: [
-            { label: "웹 검색", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "인사이트 위젯", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "코드 아티팩트", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "MCP 연동", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "MCP 프리셋 생성", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "MCP 프롬프트 자동 생성", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "서드파티 앱용 MCP 프리셋", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "빌트인 에이전트", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "스킬", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "이미지 생성", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "RAG 지식 번들 한도", values: [{ value: "○ 3", tone: "success" }, { value: "○ 10", tone: "success" }, { value: "○ 무제한", tone: "success" }] },
-            { label: "개인 엣지 터널", values: [{ value: "○ 5", tone: "success" }, { value: "○ 20", tone: "success" }, { value: "○ 무제한", tone: "success" }] },
-            { label: "에이전트 스케줄링", values: [{ value: "○ 5", tone: "success" }, { value: "○ 10", tone: "success" }, { value: "○ 무제한", tone: "success" }] },
-            { label: "AI 에이전트 생성 한도", values: [{ value: "○ 5", tone: "success" }, { value: "○ 30", tone: "success" }, { value: "○ 무제한", tone: "success" }] },
-            { label: "My Drive", values: [{ value: "○ 100MB / 사용자", tone: "success" }, { value: "○ 1GB / 사용자", tone: "success" }, { value: "○ 10GB / 사용자", tone: "success" }] },
+            { label: "웹 검색", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "인사이트 위젯", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "코드 아티팩트", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "MCP 연동", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "MCP 프리셋 생성", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "MCP 프롬프트 자동 생성", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "서드파티 앱용 MCP 프리셋", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "빌트인 에이전트", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "스킬", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "이미지 생성", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "RAG 지식 번들 한도", values: [ { value: "○ 10", tone: "success" }, { value: "○ 무제한", tone: "success" }] },
+            { label: "개인 엣지 터널", values: [ { value: "○ 20", tone: "success" }, { value: "○ 무제한", tone: "success" }] },
+            { label: "에이전트 스케줄링", values: [ { value: "○ 10", tone: "success" }, { value: "○ 무제한", tone: "success" }] },
+            { label: "AI 에이전트 생성 한도", values: [ { value: "○ 30", tone: "success" }, { value: "○ 무제한", tone: "success" }] },
+            { label: "My Drive", values: [ { value: "○ 1GB / 사용자", tone: "success" }, { value: "○ 10GB / 사용자", tone: "success" }] },
           ],
         },
         {
           title: "보안 기능",
           rows: [
-            { label: "SSO", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "채팅 보관", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "DLP", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "로그인 IP ACL", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "SSO", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "채팅 보관", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "DLP", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "로그인 IP ACL", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
             {
               label: "감사 로그",
               values: [
-                { value: "○ 30일", tone: "success" },
                 { value: "○ 최대 90일", tone: "success" },
                 { value: "○ 최대 180일", tone: "success" },
               ],
@@ -662,22 +625,21 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
         {
           title: "조직 기능",
           rows: [
-            { label: "사전 구성된 MCP 연동", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "조직 엣지 터널", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "MCP 접근 제어", values: [{ value: "✕", tone: "danger" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "에이전트 접근 제어", values: [{ value: "✕", tone: "danger" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "LLM 모델 제어", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "사전 구성된 MCP 연동", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "조직 엣지 터널", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "MCP 접근 제어", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "에이전트 접근 제어", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "LLM 모델 제어", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
           ],
         },
         {
           title: "브랜딩 및 지원",
           rows: [
-            { label: "커스텀 브랜딩", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "FDE (Forward Deployed Engineer)", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○ (Add-on)", tone: "success" }] },
+            { label: "커스텀 브랜딩", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "FDE (Forward Deployed Engineer)", values: [ { value: "✕", tone: "danger" }, { value: "○ (Add-on)", tone: "success" }] },
             {
               label: "고객 지원",
               values: [
-                { value: "48시간 내 이메일 지원", tone: "muted" },
                 { value: "24시간 내 이메일 지원", tone: "muted" },
                 { value: "전담 지원", tone: "muted" },
               ],
@@ -862,7 +824,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "料金",
               values: [
-                { value: "$20/月" },
                 { value: "$650/月" },
                 { value: "カスタム価格 (年間契約)" },
               ],
@@ -870,7 +831,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "AI利用クレジット",
               values: [
-                { value: "800クレジット/月", tone: "muted" },
                 { value: "20,000クレジット/月", tone: "muted" },
                 { value: "カスタム前払いクレジット", tone: "muted" },
               ],
@@ -878,7 +838,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "利用可能なAIモデル",
               values: [
-                { value: "Claude", tone: "muted" },
                 { value: "Claude / ChatGPT / Gemini", tone: "muted" },
                 { value: "主要LLMを自由に選択可", tone: "muted" },
               ],
@@ -886,7 +845,6 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
             {
               label: "独自AIモデルの利用",
               values: [
-                { value: "✕", tone: "danger" },
                 { value: "✕", tone: "danger" },
                 { value: "○ (Add-on)", tone: "success" },
               ],
@@ -896,34 +854,33 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
         {
           title: "プラットフォーム機能",
           rows: [
-            { label: "Web検索", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "データ可視化ウィジェット", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "コード生成・実行", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "外部ツール連携 (MCP)", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "MCP連携設定の作成", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "MCPプロンプト自動生成", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "外部アプリでの連携利用", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "組み込みエージェント利用", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "スキル", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "画像生成", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "文書学習の登録数 (RAG)", values: [{ value: "○ 3", tone: "success" }, { value: "○ 10", tone: "success" }, { value: "○ 無制限", tone: "success" }] },
-            { label: "Personal Edge Tunnels", values: [{ value: "○ 5", tone: "success" }, { value: "○ 20", tone: "success" }, { value: "○ 無制限", tone: "success" }] },
-            { label: "エージェント自動実行", values: [{ value: "○ 5", tone: "success" }, { value: "○ 10", tone: "success" }, { value: "○ 無制限", tone: "success" }] },
-            { label: "AIエージェント作成数", values: [{ value: "○ 5", tone: "success" }, { value: "○ 30", tone: "success" }, { value: "○ 無制限", tone: "success" }] },
-            { label: "My Drive", values: [{ value: "○ 100MB / user", tone: "success" }, { value: "○ 1GB / user", tone: "success" }, { value: "○ 10GB / user", tone: "success" }] },
+            { label: "Web検索", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "データ可視化ウィジェット", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "コード生成・実行", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "外部ツール連携 (MCP)", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "MCP連携設定の作成", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "MCPプロンプト自動生成", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "外部アプリでの連携利用", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "組み込みエージェント利用", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "スキル", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "画像生成", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "文書学習の登録数 (RAG)", values: [ { value: "○ 10", tone: "success" }, { value: "○ 無制限", tone: "success" }] },
+            { label: "Personal Edge Tunnels", values: [ { value: "○ 20", tone: "success" }, { value: "○ 無制限", tone: "success" }] },
+            { label: "エージェント自動実行", values: [ { value: "○ 10", tone: "success" }, { value: "○ 無制限", tone: "success" }] },
+            { label: "AIエージェント作成数", values: [ { value: "○ 30", tone: "success" }, { value: "○ 無制限", tone: "success" }] },
+            { label: "My Drive", values: [ { value: "○ 1GB / user", tone: "success" }, { value: "○ 10GB / user", tone: "success" }] },
           ],
         },
         {
           title: "セキュリティ機能",
           rows: [
-            { label: "シングルサインオン (SSO)", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "チャット保持", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "データ漏洩防止 (DLP)", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "IPアドレス制限 (ACL)", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "シングルサインオン (SSO)", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "チャット保持", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "データ漏洩防止 (DLP)", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "IPアドレス制限 (ACL)", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
             {
               label: "操作履歴の保存期間",
               values: [
-                { value: "○ 30日間", tone: "success" },
                 { value: "○ 最大90日間", tone: "success" },
                 { value: "○ 最大180日間", tone: "success" },
               ],
@@ -933,22 +890,21 @@ export const pricingProductsByLocale: Record<Locale, PricingProducts> = {
         {
           title: "組織機能",
           rows: [
-            { label: "組織共通の外部ツール連携設定", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "組織共通の社内システム暗号化接続", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "連携ツールのアクセス管理", values: [{ value: "✕", tone: "danger" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "エージェントのアクセス管理", values: [{ value: "✕", tone: "danger" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
-            { label: "LLMモデル制御", values: [{ value: "○", tone: "success" }, { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "組織共通の外部ツール連携設定", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "組織共通の社内システム暗号化接続", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "連携ツールのアクセス管理", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "エージェントのアクセス管理", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
+            { label: "LLMモデル制御", values: [ { value: "○", tone: "success" }, { value: "○", tone: "success" }] },
           ],
         },
         {
           title: "ブランディングとサポート",
           rows: [
-            { label: "カスタムブランディング", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
-            { label: "FDE (Forward Deployed Engineer)", values: [{ value: "✕", tone: "danger" }, { value: "✕", tone: "danger" }, { value: "○ (Add-on)", tone: "success" }] },
+            { label: "カスタムブランディング", values: [ { value: "✕", tone: "danger" }, { value: "○", tone: "success" }] },
+            { label: "FDE (Forward Deployed Engineer)", values: [ { value: "✕", tone: "danger" }, { value: "○ (Add-on)", tone: "success" }] },
             {
               label: "サポート体制",
               values: [
-                { value: "48時間以内のメールサポート", tone: "muted" },
                 { value: "24時間以内のメールサポート", tone: "muted" },
                 { value: "専任サポート", tone: "muted" },
               ],

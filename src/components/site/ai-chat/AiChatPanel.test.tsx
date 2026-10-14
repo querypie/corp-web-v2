@@ -57,7 +57,7 @@ describe("AI 제품 상담", () => {
     expect(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string)).toEqual({ locale: "ko", messages: [{ role: "user", content: "AIP와 Lingo의 차이는 무엇인가요?" }] });
   });
 
-  it("참고자료 제목이 전체 URL이면 URL만 표시한다", async () => {
+  it("참고자료 제목이 전체 URL이면 URL만 표시하고 확인한 언어 경로를 보존한다", async () => {
     const url = "https://www.querypie.com/en/platforms/aip";
     vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ ...reply, sources: [{ title: url, url }] })));
     render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
@@ -65,7 +65,7 @@ describe("AI 제품 상담", () => {
     fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
 
     const referenceLink = await screen.findByRole("link", { name: url });
-    expect(referenceLink).toHaveAttribute("href", "/ko/platforms/aip");
+    expect(referenceLink).toHaveAttribute("href", url);
   });
 
   it("Hermes 본문의 Markdown 링크와 일반 URL을 실제 링크로 렌더링한다", async () => {
@@ -80,6 +80,47 @@ describe("AI 제품 상담", () => {
     expect(await screen.findByRole("link", { name: "AIP Docs" })).toHaveAttribute("href", "https://aip-docs.app.querypie.com/ko");
     expect(screen.getByRole("link", { name: "https://docs.querypie.com" })).toHaveAttribute("href", "https://docs.querypie.com/");
     expect(screen.getByRole("link", { name: "https://example.test/제품/資料" })).toHaveAttribute("href", "https://example.test/%EC%A0%9C%ED%92%88/%E8%B3%87%E6%96%99");
+  });
+
+  it("본문의 링크는 참고자료에 반복하지 않고 별도 자료만 남긴다", async () => {
+    const url = "https://www.querypie.com/en/plans/aip";
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({
+      answer: `자세히 보기: [AIP 요금](${url})`,
+      sources: [{ title: "AIP 요금", url }, ...reply.sources],
+    })));
+    render(<AiChatPanel locale="ja" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 요금" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ja.send }));
+    expect(await screen.findByRole("link", { name: "AIP 요금" })).toHaveAttribute("href", url);
+    expect(screen.getAllByRole("link")).toHaveLength(2);
+    expect(screen.getByRole("link", { name: "AIP 공식 문서 aip-docs.app.querypie.com" })).toHaveAttribute("href", reply.sources[0].url);
+  });
+
+  it("링크가 모두 본문에 있으면 빈 참고자료 영역을 표시하지 않는다", async () => {
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({
+      answer: "[문서](https://docs.querypie.com)",
+      sources: [{ title: "문서", url: "https://docs.querypie.com/" }],
+    })));
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "문서" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByRole("link", { name: "문서" });
+    expect(screen.queryByText(aiChatCopy.ko.sources)).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link")).toHaveLength(1);
+  });
+
+  it("사용자 Markdown은 텍스트로 유지하고 답변의 표·목록은 블록으로 표시한다", async () => {
+    vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({
+      answer: "**플랜**\n\n- Business\n- Enterprise\n\n| 플랜 | 요금 |\n| --- | --- |\n| Business | $650/월 |",
+      sources: [],
+    })));
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "**가격** 알려줘" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    const table = await screen.findByRole("table");
+    expect(table.closest("p")).toBeNull();
+    expect(screen.getByRole("list")).toHaveTextContent("Enterprise");
+    expect(screen.getByText("**가격** 알려줘")).not.toContainHTML("<strong>");
   });
 
   it("한·일 IME 조합과 Shift+Enter로는 전송하지 않고 Enter로만 전송한다", async () => {
@@ -233,6 +274,28 @@ describe("AI 제품 상담", () => {
 
     expect(readPreviewSession().slackThreadToken).toBe("thread-token-error");
     expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).toMatchObject({ slackThreadToken: "thread-token-error" });
+  });
+
+  it.each(["en", "ko", "ja"] as const)("%s 미완료 안내를 표시하고 원래 질문과 스레드로 재시도한다", async (locale) => {
+    vi.mocked(fetch)
+      .mockResolvedValueOnce(Response.json({ code: "INCOMPLETE_RESPONSE", slackThreadToken: "incomplete-thread" }, { status: 502 }))
+      .mockResolvedValueOnce(response());
+    render(<AiChatPanel locale={locale} onClose={vi.fn()} open />);
+    const question = "Lingo 가격";
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: question } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy[locale].send }));
+
+    expect(await screen.findByRole("alert")).toHaveTextContent(aiChatCopy[locale].incomplete);
+    expect(screen.getByRole("textbox")).toHaveValue(question);
+    expect(screen.queryByText(question, { selector: "p" })).not.toBeInTheDocument();
+    expect(readPreviewSession()).toEqual({ draft: question, messages: [], slackThreadToken: "incomplete-thread" });
+
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy[locale].send }));
+    await screen.findByText(reply.answer);
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).toEqual({
+      locale, messages: [{ role: "user", content: question }], slackThreadToken: "incomplete-thread",
+    });
   });
 
   it("서버가 예전 브라우저 전달 payload를 반환해도 외부 LLM으로 직접 요청하지 않는다", async () => {

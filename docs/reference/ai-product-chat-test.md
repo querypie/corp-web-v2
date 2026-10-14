@@ -52,8 +52,10 @@ vercel env pull .env.vercel-development.local --environment=development
 - 답변의 지식, 문서 참조, 사실 정확성, 어조와 표현은 Hermes Agent 설정에 의존합니다.
 - 이 저장소는 답변의 품질·완전성·근거 충족 여부를 판정하지 않으며 `answered` 필드를 사용하지 않습니다.
 - `choices[0].message.content`를 `answer`로 반환합니다. 비어 있거나 6,000자를 넘는 본문만 UI·저장소 경계 위반으로 거부합니다.
-- 본문에 포함된 Markdown 링크와 일반 HTTP(S) URL을 최대 8개까지 `sources`로 정규화합니다. 이는 표시를 위한 구문 변환이며 링크의 사실성이나 출처 적합성 검증이 아닙니다.
-- UI는 본문 링크를 실제 링크로 렌더링하고 `sources`를 참고 링크 목록으로 표시합니다.
+- 본문을 `markdown-it`으로 해석해 HTTP(S) 링크를 최대 8개까지 `sources`로 정규화합니다. 일반 URL, Markdown 링크, 참조 링크를 같은 파서로 처리하며 코드·이미지 URL은 출처로 추출하지 않습니다. 이는 표시를 위한 구문 변환이며 링크의 사실성이나 출처 적합성 검증이 아닙니다.
+- UI는 답변의 문단·강조·글머리 목록·번호 목록·표·링크를 렌더링합니다. 임의 HTML은 텍스트로 표시하고 원격 이미지는 불러오지 않습니다. 사용자 메시지는 일반 텍스트로 유지합니다.
+- 표는 키보드로 접근할 수 있는 표 내부 가로 스크롤 영역에 표시하며 채팅창 전체의 가로 overflow를 만들지 않습니다.
+- 본문에 이미 표시된 URL은 참고 자료에서 반복하지 않고 별도로 남은 자료만 표시합니다. 본문과 참고 자료 모두 확인된 공개 URL의 언어 경로를 보존하며, 채팅 locale로 임의 변환하지 않습니다.
 - 대화는 현재 탭의 sessionStorage에 저장합니다. 초기화 시 진행 중인 요청을 취소하고 대화·초안을 지웁니다.
 - 요청 실패 시 질문을 입력창에 복원합니다. 요청 중 페이지를 떠나면 저장된 초안을 다시 사용할 수 있습니다.
 - 서버 인스턴스당 분당 30회, 동시 3회의 제한이 Hermes 호출에 적용됩니다. 다중 인스턴스에 공유되는 사용량 제한은 아닙니다.
@@ -104,6 +106,16 @@ Partner Portal Wrapper는 현재 `model`, `messages`, `stream`만 허용하므�
 Vercel Runtime Logs의 `[ai-chat]` 이벤트로 Wrapper 요청, 연결 실패, HTTP 오류, 응답 해석 실패를 구분합니다. 로그에는 단계·소요 시간·HTTP 상태·허용된 오류 코드와 메시지 개수만 남기며, API Key·질문·Hermes 답변은 기록하지 않습니다. `provider_fetch_error`는 Wrapper 응답을 받기 전 연결 단계 오류이며, `provider_http_error`는 Wrapper가 오류 상태를 반환한 경우입니다.
 
 질문 예시: `AIP와 ACP는 어떤 차이가 있나요?`, `Lingoをどうやって始めますか？`.
+
+Markdown 화면 검증은 준비된 Preview에 저장된 테스트 대화를 넣어 실행할 수 있습니다. API 요청을 차단하므로 Hermes·Slack에 질문을 보내지 않습니다.
+
+```bash
+npx playwright install chromium
+node scripts/check-ai-chat-ui.mjs <Preview URL> <스크린샷 저장 디렉터리>
+```
+
+한국어·영어·일본어를 각각 390px/1280px 폭에서 검사합니다. 표 내부 가로 스크롤과 키보드 이동, 채팅창·viewport 넘침, 링크 중복, 원래 언어 경로, 브라우저 오류를 확인합니다.
+로컬 Node 25의 기본 Web Storage가 happy-dom의 `localStorage`와 충돌하는 경우 `NODE_OPTIONS=--no-experimental-webstorage npm run test:run`으로 실행합니다. 제품 코드나 테스트 기대값을 바꾸는 우회가 아닙니다.
 
 ## 공개 상태 페이지
 
