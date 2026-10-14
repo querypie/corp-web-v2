@@ -1,4 +1,4 @@
-import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { act, cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { aiChatCopy } from "@/copy/aiChat";
 import { readPreviewSession } from "@/features/ai-chat/previewSession";
@@ -243,10 +243,10 @@ describe("AI 제품 상담", () => {
     fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
     await screen.findByText(reply.answer);
 
-    expect(readPreviewSession()).toEqual({ draft: "", messages: [
+    await waitFor(() => expect(readPreviewSession()).toEqual({ draft: "", messages: [
       expect.objectContaining({ role: "user", text: "새 대화" }),
       expect.objectContaining({ role: "assistant", text: reply.answer }),
-    ] });
+    ] }));
     expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).not.toHaveProperty("slackThreadToken");
   });
 
@@ -272,7 +272,7 @@ describe("AI 제품 상담", () => {
     fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
     await screen.findByText(reply.answer);
 
-    expect(readPreviewSession().slackThreadToken).toBe("thread-token-error");
+    await waitFor(() => expect(readPreviewSession().slackThreadToken).toBe("thread-token-error"));
     expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).toMatchObject({ slackThreadToken: "thread-token-error" });
   });
 
@@ -288,7 +288,7 @@ describe("AI 제품 상담", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(aiChatCopy[locale].incomplete);
     expect(screen.getByRole("textbox")).toHaveValue(question);
     expect(screen.queryByText(question, { selector: "p" })).not.toBeInTheDocument();
-    expect(readPreviewSession()).toEqual({ draft: question, messages: [], slackThreadToken: "incomplete-thread" });
+    await waitFor(() => expect(readPreviewSession()).toEqual({ draft: question, messages: [], slackThreadToken: "incomplete-thread" }));
 
     fireEvent.click(screen.getByRole("button", { name: aiChatCopy[locale].send }));
     await screen.findByText(reply.answer);
