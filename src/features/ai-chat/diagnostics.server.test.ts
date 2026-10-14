@@ -6,6 +6,12 @@ import { logAiChatDiagnostic, safeErrorInfo, safeResponseInfo } from "./diagnost
 afterEach(() => { vi.restoreAllMocks(); });
 
 describe("AI Chat 서버 진단", () => {
+  it.each(["INCOMPLETE_RESPONSE", "TIMEOUT"])("검증된 %s 코드를 진단에 유지한다", (code) => {
+    const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
+    logAiChatDiagnostic("provider_http_error", { error: safeErrorInfo(Object.assign(new Error("private runtime details"), { code })) });
+    expect(JSON.stringify(warning.mock.calls)).toContain(code);
+    expect(JSON.stringify(warning.mock.calls)).not.toContain("private runtime details");
+  });
   it("오류 이름과 cause code만 남기고 메시지·본문·키 후보는 기록하지 않는다", () => {
     const warning = vi.spyOn(console, "warn").mockImplementation(() => {});
     const cause = Object.assign(new Error("token abc123"), { code: "ECONNRESET" });

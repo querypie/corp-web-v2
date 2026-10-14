@@ -276,6 +276,28 @@ describe("AI 제품 상담", () => {
     expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).toMatchObject({ slackThreadToken: "thread-token-error" });
   });
 
+  it.each(["en", "ko", "ja"] as const)("%s 미완료 안내를 표시하고 원래 질문과 스레드로 재시도한다", async (locale) => {
+    vi.mocked(fetch)
+      .mockResolvedValueOnce(Response.json({ code: "INCOMPLETE_RESPONSE", slackThreadToken: "incomplete-thread" }, { status: 502 }))
+      .mockResolvedValueOnce(response());
+    render(<AiChatPanel locale={locale} onClose={vi.fn()} open />);
+    const question = "Lingo 가격";
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: question } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy[locale].send }));
+
+    expect(await screen.findByRole("alert")).toHaveTextContent(aiChatCopy[locale].incomplete);
+    expect(screen.getByRole("textbox")).toHaveValue(question);
+    expect(screen.queryByText(question, { selector: "p" })).not.toBeInTheDocument();
+    expect(readPreviewSession()).toEqual({ draft: question, messages: [], slackThreadToken: "incomplete-thread" });
+
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy[locale].send }));
+    await screen.findByText(reply.answer);
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).toEqual({
+      locale, messages: [{ role: "user", content: question }], slackThreadToken: "incomplete-thread",
+    });
+  });
+
   it("서버가 예전 브라우저 전달 payload를 반환해도 외부 LLM으로 직접 요청하지 않는다", async () => {
     const prepared = {
       transport: "browser", endpoint: "https://internal-llm.querypie.io/v1/chat/completions",

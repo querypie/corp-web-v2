@@ -35,6 +35,8 @@ const safeCodes = new Set([
   "NOT_CONFIGURED",
   "PROVIDER_ERROR",
   "INVALID_RESPONSE",
+  "INCOMPLETE_RESPONSE",
+  "TIMEOUT",
 ]);
 
 const safeCode = (value: unknown): string | undefined =>

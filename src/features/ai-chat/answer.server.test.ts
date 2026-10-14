@@ -35,10 +35,55 @@ describe("Hermes Agent AI 답변", () => {
     });
   });
 
-  it("finish_reason이나 출처 유무로 답변 품질을 판정하지 않는다", () => {
+  it("완료한 답변은 출처 유무로 품질을 판정하지 않는다", () => {
     expect(parseProviderReply({
-      choices: [{ finish_reason: "length", message: { content: "Hermes가 반환한 답변" } }],
+      choices: [{ finish_reason: "stop", message: { content: "Hermes가 반환한 답변" } }],
     })).toEqual({ answer: "Hermes가 반환한 답변", sources: [] });
+  });
+
+  it("완료한 Native 응답을 본문과 출처로 반환한다", () => {
+    expect(parseProviderReply({
+      hermes: { completed: true, partial: false, failed: false, error: null },
+      choices: [{ finish_reason: "stop", message: { content: "완료한 답변" } }],
+    })).toEqual({ answer: "완료한 답변", sources: [] });
+  });
+
+  it.each(["length", "tool_calls"])("finish_reason %s인 답변은 미완료로 거부한다", (finish_reason) => {
+    expect(() => parseProviderReply({ choices: [{ finish_reason, message: { content: "중간 답변" } }] })).toThrow("INCOMPLETE_RESPONSE");
+  });
+
+  it.each([
+    [{ completed: false, partial: false, failed: false, error: null }, "INCOMPLETE_RESPONSE"],
+    [{ completed: true, partial: true, failed: false, error: null }, "INCOMPLETE_RESPONSE"],
+    [{ completed: false, partial: false, failed: true, error: "private runtime error" }, "PROVIDER_ERROR"],
+    [{ completed: false, partial: false, failed: false, error: "private runtime error" }, "PROVIDER_ERROR"],
+    [{ completed: false, partial: true, failed: false, error: "private runtime error" }, "INCOMPLETE_RESPONSE"],
+    [{ completed: "false", partial: false, failed: false, error: null }, "INVALID_RESPONSE"],
+    [null, "INVALID_RESPONSE"],
+  ])("Native 상태가 finish_reason stop보다 우선한다", (hermes, code) => {
+    expect(() => parseProviderReply({ hermes, choices: [{ finish_reason: "stop", message: { content: "요약이 남아도 성공이 아님" } }] })).toThrow(code);
+  });
+
+  it.each([null, "invalid", 5, {}, { hermes: [] }])("잘못된 응답 구조를 거부한다", (payload) => {
+    expect(() => parseProviderReply(payload)).toThrow("INVALID_RESPONSE");
+  });
+
+  it.each([
+    ["upstream_incomplete", "INCOMPLETE_RESPONSE", 502],
+    ["upstream_failed", "PROVIDER_ERROR", 502],
+    ["upstream_invalid_response", "INVALID_RESPONSE", 502],
+    ["upstream_timeout", "TIMEOUT", 504],
+    ["secret-arbitrary-code", "PROVIDER_ERROR", 502],
+  ])("Portal 오류 %s를 안전한 홈페이지 코드 %s로 구분한다", async (upstreamCode, code, status) => {
+    vi.stubEnv("AI_CHAT_ENABLED", "true");
+    vi.stubEnv("AI_CHAT_API_KEY", "environment-secret");
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {});
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(Response.json({
+      error: { code: upstreamCode, message: "private runtime error", debug: "environment-secret" },
+    }, { status: 502 })));
+    await expect(answerProductQuestion([{ role: "user", content: "AIP 설명" }], "ko", new AbortController().signal))
+      .rejects.toMatchObject({ code, status });
+    expect(JSON.stringify(warn.mock.calls)).not.toMatch(/private runtime error|environment-secret|secret-arbitrary-code/);
   });
 
   it("빈 본문과 허용 길이를 넘는 본문만 안전하지 않은 응답으로 거부한다", () => {

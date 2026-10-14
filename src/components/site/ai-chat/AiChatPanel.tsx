@@ -33,7 +33,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
   const threadRef = useRef<HTMLDivElement>(null);
   const [session, setSession] = useState(readPreviewSession);
   const [pending, setPending] = useState(false);
-  const [error, setError] = useState<"unavailable" | "error" | null>(null);
+  const [error, setError] = useState<"unavailable" | "error" | "incomplete" | null>(null);
   const requestRef = useRef<AbortController | null>(null);
   const generationRef = useRef(0);
 
@@ -123,7 +123,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
       nextSlackThreadToken = extractSlackThreadToken(result);
       if (!response.ok || !isChatReply(result)) {
         const code = result && typeof result === "object" && "code" in result ? result.code : null;
-        throw new Error(code === "NOT_CONFIGURED" ? "unavailable" : "error");
+        throw new Error(code === "NOT_CONFIGURED" ? "unavailable" : code === "INCOMPLETE_RESPONSE" ? "incomplete" : "error");
       }
       setSession((current) => ({
         ...current,
@@ -135,7 +135,8 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
       }));
     } catch (cause) {
       if (generation !== generationRef.current) return;
-      setError(cause instanceof Error && cause.message === "unavailable" ? "unavailable" : "error");
+      setError(cause instanceof Error && cause.message === "unavailable" ? "unavailable"
+        : cause instanceof Error && cause.message === "incomplete" ? "incomplete" : "error");
       setSession((current) => ({
         draft: text,
         messages: current.messages.filter((message) => message.id !== userMessage.id),
