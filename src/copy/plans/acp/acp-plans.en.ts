@@ -1,5 +1,6 @@
 import type { PricingProduct } from "../types";
 
+// QueryPie ACP access control plans (en): public plan cards.
 export const acpPricingEn: PricingProduct<"acp"> = {
   productKey: "acp",
   locale: "en",

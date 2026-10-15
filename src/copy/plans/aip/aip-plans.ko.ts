@@ -1,5 +1,6 @@
 import type { PricingProduct } from "../types";
 
+// QueryPie AIP 구독 요금 원본 (ko): 공개 플랜 카드와 비교표 데이터.
 export const aipPricingKo: PricingProduct<"aip"> = {
   productKey: "aip",
   locale: "ko",

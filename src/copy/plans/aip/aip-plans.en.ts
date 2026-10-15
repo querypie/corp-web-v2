@@ -1,5 +1,6 @@
 import type { PricingProduct } from "../types";
 
+// QueryPie AIP subscription plans (en): public plan cards and comparison values.
 export const aipPricingEn: PricingProduct<"aip"> = {
   productKey: "aip",
   locale: "en",

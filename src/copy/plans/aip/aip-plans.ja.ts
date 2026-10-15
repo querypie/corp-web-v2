@@ -1,6 +1,7 @@
 import { publicCategoryPaths } from "@/features/content/publicPathConfig";
 import type { PricingProduct } from "../types";
 
+// QueryPie AIP サブスクリプション料金 (ja): 公開プランと比較表のデータ。
 export const aipPricingJa: PricingProduct<"aip"> = {
   productKey: "aip",
   locale: "ja",

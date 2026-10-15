@@ -1,6 +1,7 @@
 import { publicCategoryPaths } from "@/features/content/publicPathConfig";
 import type { PricingProduct } from "../types";
 
+// QueryPie ACP アクセス制御プラン (ja): 公開料金カードのデータ。
 export const acpPricingJa: PricingProduct<"acp"> = {
   productKey: "acp",
   locale: "ja",

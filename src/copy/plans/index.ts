@@ -1,10 +1,10 @@
 import type { Locale } from "@/constants/i18n";
-import { acpPricingEn } from "./acp/en";
-import { acpPricingJa } from "./acp/ja";
-import { acpPricingKo } from "./acp/ko";
-import { aipPricingEn } from "./aip/en";
-import { aipPricingJa } from "./aip/ja";
-import { aipPricingKo } from "./aip/ko";
+import { acpPricingEn } from "./acp/acp-plans.en";
+import { acpPricingJa } from "./acp/acp-plans.ja";
+import { acpPricingKo } from "./acp/acp-plans.ko";
+import { aipPricingEn } from "./aip/aip-plans.en";
+import { aipPricingJa } from "./aip/aip-plans.ja";
+import { aipPricingKo } from "./aip/aip-plans.ko";
 import type { PricingProducts } from "./types";
 
 export const pricingProductsByLocale: Record<Locale, PricingProducts> = {

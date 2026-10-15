@@ -1,5 +1,6 @@
 import type { PricingProduct } from "../types";
 
+// QueryPie ACP 접근 제어 요금 원본 (ko): 공개 플랜 카드 데이터.
 export const acpPricingKo: PricingProduct<"acp"> = {
   productKey: "acp",
   locale: "ko",

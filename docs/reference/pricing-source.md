@@ -1,7 +1,7 @@
 # 가격표 원본 구조
 
 공개 가격 카드·비교표의 단일 원본은 `src/copy/plans/`다. `aip/`와 `acp/`를 나누고
-각 폴더에 `en.ts`, `ko.ts`, `ja.ts`를 둔다. 각 원본에는 `productKey`, `locale`,
+각 폴더에 `aip-plans.ko.ts`처럼 제품·용도·언어를 드러내는 파일을 둔다. 각 원본에는 `productKey`, `locale`,
 제품명과 그 제품의 플랜·금액·조건만 함께 둔다.
 
 `index.ts`는 원본을 locale·제품별로 연결한다. `PlansPage`가 이 값을 직접 가져와
