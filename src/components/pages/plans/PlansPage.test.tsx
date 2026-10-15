@@ -38,6 +38,21 @@ describe("PlansPage", () => {
   });
 
   it.each([
+    ["en", "Free", "$50/mo/user", "Let's Talk"],
+    ["ko", "무료", "$50/월/사용자", "별도 문의"],
+    ["ja", "$0/月", "$50/人・月", "個別見積もり"],
+  ] as const)("preserves ACP card prices and omits unused comparison prices in %s", (locale, community, standard, enterprise) => {
+    const { container } = render(<PlansPage locale={locale} productKey="acp" />);
+
+    expect(screen.getByText(community)).toBeInTheDocument();
+    expect(screen.getByText(standard)).toBeInTheDocument();
+    expect(screen.getByText(enterprise)).toBeInTheDocument();
+    expect(container.querySelectorAll("article")).toHaveLength(3);
+    expect(container).not.toHaveTextContent(/\$(?:29|590|650)\//);
+    expect(container).not.toHaveTextContent(/productKey|pricingProductsByLocale/);
+  });
+
+  it.each([
     ["en", "Monthly Billing", "$650/month", "Custom Pricing"],
     ["ko", "월간 요금", "$650/월", "별도 문의"],
     ["ja", "料金", "$650/月", "カスタム価格 (年間契約)"],
