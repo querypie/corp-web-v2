@@ -1,0 +1,59 @@
+<p style="word-break:keep-all;text-wrap:pretty;"><em>独自のAI技術で世界最高のDLP検知率99.69%を達成、JEV比で見逃しを約91%削減</em></p>
+<figure data-qp-image style="margin:0 0 40px;"><img src="/resources/blogs/qev-decision-ai/thumbnail.png" alt="韓国語・英語・日本語の業務入力から機密情報を検知するQEV" style="display:block;width:100%;height:auto;border-radius:var(--radius-box,12px);" /></figure>
+<p>企業でのAI活用が広がるにつれ、個人情報や社内機密などの機密情報を安全に扱うことが、ますます重要になっています。 顧客情報を含むメール、外部に公開されていない事業計画、社内文書まで。こうした情報が外部に送信される前に、AIが機密情報の有無を判断できたらどうでしょうか。</p>
+<p>QueryPie AIは、こうした判断を行う<strong>独自の意思決定AIモデル「QEV」</strong>を開発しました。 特にDLP（Data Loss Prevention、情報漏えい防止）に特化したQEVは、社内の性能評価で<strong>検知率99.69%</strong>を記録し、機密情報を含む文書1,281件のうち、見逃しはわずか4件という成果を確認しました。</p>
+<h2 style="font-weight:700;">QEVとは？</h2>
+<p>QEVは、入力された文章を理解し、あらかじめ定義された基準に従って判断結果を提供する、意思決定に特化したAIモデルです。一般的な生成AIのLLMが質問への回答や文書を生成するのに対し、QEVは与えられた情報を分析し、定められた選択肢の中から最も適切な結果と選択肢ごとの確率を返すことに特化しています。</p>
+<p>企業の業務では、情報を生成することと同じくらい、一定の基準に従って判断するプロセスが必要です。文書に機密情報が含まれているか、依頼が社内ポリシーの条件を満たしているか、どの種類に分類すべきかなどが代表的な例です。QEVはこうした判断基準に基づいて入力を分類し、その結果を業務システムで活用できるように提供します。</p>
+<p>企業はQEVの判断結果をセキュリティポリシーと連携させ、機密情報を含む依頼を追加確認の対象に分類したり、承認手続きにつなげたりできます。条件を満たすかどうかの確認、依頼の分類、優先順位の評価など、企業が定義するさまざまな判断業務にも活用できます。</p>
+<h2 style="font-weight:700;">独自技術で実現したQueryPie AIの意思決定モデル</h2>
+<p>QEVは、既存のAIサービスを単に接続して利用するソリューションではありません。 QueryPie AIは、Gemma4ベースのモデルの開発と評価を進め、意思決定モデルを独自に実装するとともに、企業の業務目的に合わせて追加学習を行う技術を確立しました。 QEVは、企業の業務基準に従って文章を分類し、条件を満たすかどうかと選択肢ごとの確率を返す、独自の意思決定モデルです。</p>
+<p>特に、独自開発したモデルにDLPの業務データを追加学習させることで、検知性能を大きく向上させました。 QEVは社内のDLP評価で、<strong>検知率99.69%、F2スコア98.98%</strong>を記録しました。 これは、QueryPie AIがAIモデルの活用にとどまらず、特定の業務に最適化したAIモデルを自ら実装し、その性能を高められることを示しています。</p>
+<h2 style="font-weight:700;">DLP検知率99.69% — 機密情報を含む文書1,281件のうち見逃しはわずか4件</h2>
+<p>QueryPie AIは、韓国語・英語・日本語で構成された社内文書3,167件を対象に、DLPの検知性能を評価しました。 その結果、独自開発した<strong>QEVは検知率99.69%、F2スコア98.98%</strong>を記録しました。 特に、機密情報を含む文書1,281件のうち、検知できなかった文書はわずか4件でした。</p>
+<h3 style="font-weight:700;">商用AIモデルとの性能比較</h3>
+<table><thead><tr><th>評価項目</th><th>JEV API</th><th>QEV</th></tr></thead><tbody><tr><td>検知率（Recall）</td><td>96.41%</td><td>99.69%</td></tr><tr><td>F2スコア</td><td>96.59%</td><td>98.98%</td></tr><tr><td>見逃し件数</td><td>46件</td><td>4件</td></tr></tbody></table>
+<h3 style="font-weight:700;">同一のDLP評価における見逃し件数</h3>
+<table aria-label="JEV APIとQEVの見逃し件数の比較"><thead><tr><th>モデル</th><th>見逃し件数の比較</th></tr></thead><tbody><tr><td>JEV API</td><td><p><strong>46件</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-bg-content);border-radius:4px;overflow:hidden;"><div style="height:16px;width:100%;background:var(--color-mute);"></div></div></td></tr><tr><td>QEV</td><td><p><strong>4件</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-bg-content);border-radius:4px;overflow:hidden;"><div style="height:16px;width:8.70%;background:#6f8599;"></div></div></td></tr></tbody></table>
+<blockquote><p><strong>46件 → 4件 | 見逃しを約91.3%削減</strong></p></blockquote>
+<p>同一の社内DLP文書3,167件を、しきい値0.50で比較した見逃し件数です。</p>
+<p>同一の社内評価環境で、商用のJEV APIと比較して<strong>見逃し件数を約91.3%削減した結果</strong>です。</p>
+<p>本結果は、同一の社内DLP評価データ3,167件としきい値0.50を基準に測定した、文書単位の分類性能です。</p>
+<h2 style="font-weight:700;">メールやAIへの入力に含まれる個人情報・機密を区別します</h2>
+<p>QueryPie AIはQEVモデルを用いて、メールやChatGPTに入力しそうな架空の業務文章10件をテストしました。 テストでは、文章を次の4つの基準で分類しました。</p>
+<blockquote><p>機密情報なし / 個人情報あり / 社内機密あり / 個人情報と社内機密の両方あり</p></blockquote>
+<h3 style="font-weight:700;">実際のデモテスト結果</h3>
+<table><thead><tr><th>テスト事例</th><th>QEVの判断結果</th><th>判断確率</th></tr></thead><tbody><tr><td>氏名・電話番号・配送先住所を含む配送の問い合わせ</td><td>個人情報あり</td><td>99.63%</td></tr><tr><td>発表前の法人向け料金と割引条件</td><td>社内機密あり</td><td>99.66%</td></tr><tr><td>顧客の連絡先と未公開の法人向け料金・割引の提案</td><td>個人情報 + 社内機密</td><td>89.80%</td></tr><tr><td>ホームページで公開されている読書イベントの案内</td><td>機密情報なし</td><td>98.48%</td></tr></tbody></table>
+<p>10件のテスト事例すべてで、あらかじめ定義した分類基準に合致する結果を返しました。</p>
+<h3 style="font-weight:700;">全10件の分類結果</h3>
+<table aria-label="架空の業務入力10件の分類分布"><thead><tr><th>分類</th><th>選択件数</th></tr></thead><tbody><tr><td>機密情報なし</td><td><p><strong>4件 · 40%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:var(--color-bg-content);border-radius:4px;overflow:hidden;"><div style="height:12px;width:40%;background:#6f8599;"></div></div></td></tr><tr><td>個人情報あり</td><td><p><strong>2件 · 20%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:var(--color-bg-content);border-radius:4px;overflow:hidden;"><div style="height:12px;width:20%;background:#6f8599;"></div></div></td></tr><tr><td>社内機密あり</td><td><p><strong>2件 · 20%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:var(--color-bg-content);border-radius:4px;overflow:hidden;"><div style="height:12px;width:20%;background:#6f8599;"></div></div></td></tr><tr><td>個人情報と社内機密の両方あり</td><td><p><strong>2件 · 20%</strong></p><div aria-hidden="true" style="height:12px;width:100%;background:var(--color-bg-content);border-radius:4px;overflow:hidden;"><div style="height:12px;width:20%;background:#6f8599;"></div></div></td></tr></tbody></table>
+<p>QEVを使用した、架空の業務入力10件の選択結果です。 特に、公開されたイベントの案内は通常の情報に分類し、未公開の料金や割引条件は社内機密に分類するなど、情報の内容と文脈に応じた判断能力を確認できました。</p>
+<p>また、QEVは機密情報の検知だけでなく、条件を満たすかどうかの判定、優先順位の評価、依頼の分類など、企業が定義するさまざまな判断業務にも活用できます。</p>
+<p>表示されている確率は、モデルが選択した結果に対する確信度であり、検知全体の正解率を意味するものではありません。上記の事例は機能を紹介するためのデモであり、別途実施した大規模な性能評価とは区別されます。</p>
+<h2 style="font-weight:700;">高い性能を維持しながら、GPUメモリも削減しました</h2>
+<p>QueryPie AIは、独自モデルの運用効率を高めるため、8bit量子化（INT8）技術も検証しました。 QEVモデルを対象とした実験で、<strong>GPUメモリ使用量が22.60 GiBから12.38 GiBへ約45.2%減少</strong>しました。DLPの検知性能も高い水準を維持しました。</p>
+<h3 style="font-weight:700;">従来のBF16とINT8のGPUメモリ比較</h3>
+<table aria-label="BF16とINT8のGPUメモリ使用量の比較"><thead><tr><th>モデル・構成</th><th>GPUメモリ</th></tr></thead><tbody><tr><td>QEV · BF16</td><td><p><strong>22.60 GiB</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-bg-content);border-radius:4px;overflow:hidden;"><div style="height:16px;width:100%;background:var(--color-mute);"></div></div></td></tr><tr><td>QEV · INT8</td><td><p><strong>12.38 GiB</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-bg-content);border-radius:4px;overflow:hidden;"><div style="height:16px;width:54.78%;background:#6f8599;"></div></div></td></tr></tbody></table>
+<p>特にQEVは、INT8の適用後も<strong>見逃し4件を維持し、F2スコア99.02%</strong>を記録しました。</p>
+<h2 style="font-weight:700;">リスクを選別し、機密情報の種類と内容を特定します</h2>
+<p>機密情報が含まれていると判断した後は、どの情報がどこに記載されているかを確認する必要があります。QueryPieが保有する独自のDLP技術で、韓国語・英語・日本語の入力におけるリスクをすばやく選別し、詳細な分析が必要な入力から<strong>機密情報の種類と実際の内容</strong>を特定します。 ルールによるチェック、軽量モデルによるリスクの選別、SLMによる詳細な抽出を段階的につなげ、保護が必要な箇所を具体的に確認できます。</p>
+<ol><li><p><strong>ルールで即座に確認</strong></p><p>正規表現とキーワードを使い、形式が明確な機密情報を最初に検出します。確実に一致するものは、AIの分析を待たずに即座に判断できます。</p></li><li><p><strong>リスクのある入力を選別</strong></p><p>ELECTRAベースの軽量モデルが、ルールだけでは判断しにくい文章のリスクスコアを計算します。リスクが高い入力や判断が曖昧な入力を、追加確認の対象として絞り込みます。</p></li><li><p><strong>機密情報を詳細に抽出</strong></p><p>SLMベースの詳細分析モデルが、氏名・口座情報・認証情報など、機密情報の種類と実際の内容を特定します。別のプログラムが原文と照合し、正確な位置を算出します。</p></li></ol>
+<div aria-label="入力文書と検知結果" style="display:flex;flex-wrap:wrap;gap:8px;margin:16px 0;">
+<div style="flex:1 1 260px;min-width:0;padding:20px;border-radius:var(--radius-box,12px);background:var(--color-bg-content);"><span style="display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;height:26px;padding:0 10px;background:var(--color-secondary);color:var(--color-fg);font-size:14px;">入力文書</span><p style="margin-top:16px;line-height:1.8;">担当者山田太郎の<br><span style="word-break:break-all;">taro.yamada@example.com</span><br>連絡先 090-1234-5678</p></div>
+<div style="flex:1 1 260px;min-width:0;padding:20px;border-radius:var(--radius-box,12px);background:var(--color-bg-content);"><span style="display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;height:26px;padding:0 10px;background:var(--color-secondary);color:var(--color-fg);font-size:14px;">検知結果</span><div style="display:flex;flex-direction:column;gap:12px;margin-top:16px;color:var(--color-fg);line-height:1.5;">
+<div style="display:flex;align-items:flex-start;gap:8px;"><span style="flex-shrink:0;">担当者</span><div style="display:flex;flex-direction:column;align-items:flex-start;min-width:0;"><span style="color:#f36f45;">山田太郎</span><span style="display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;height:14px;padding:0 4px;background:#f36f45;color:white;font-size:10px;line-height:1;font-weight:700;">PERSON NAME</span></div><span>の</span></div>
+<div style="display:flex;flex-direction:column;align-items:flex-start;min-width:0;"><span style="word-break:break-all;color:#7c43ce;">taro.yamada@example.com</span><span style="display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;height:14px;padding:0 4px;background:#7c43ce;color:white;font-size:10px;line-height:1;font-weight:700;">EMAIL ADDRESS</span></div>
+<div style="display:flex;align-items:flex-start;gap:8px;"><span style="flex-shrink:0;">連絡先</span><div style="display:flex;flex-direction:column;align-items:flex-start;min-width:0;"><span style="color:#0f8b83;">090-1234-5678</span><span style="display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;border-radius:999px;height:14px;padding:0 4px;background:#0f8b83;color:white;font-size:10px;line-height:1;font-weight:700;">PHONE NUMBER</span></div></div>
+</div></div></div>
+<p>QueryPie DLPは、入力に記載された機密情報を検出し、氏名・メールアドレス・電話番号などの種類ごとに分けて表示します。 例えば、「担当者山田太郎のメールアドレスはtaro.yamada@example.com、連絡先は090-1234-5678です」という文章では、氏名、メールアドレス、電話番号をそれぞれ区別して表示します。定められた形式に合わない表現も、周囲の文脈と併せて読み取り、機密情報かどうかを判断します。</p>
+<p><strong>リスクを判断し、確認すべき入力を選別し、保護すべき内容を特定すること。</strong>QueryPie DLPは、こうした流れで企業のセキュリティ確認を支援します。</p>
+<h2 style="font-weight:700;">自社のデータで、自社の業務に合った判断を実現します</h2>
+<p>同じ文章でも、業種や業務によって判断基準は異なります。金融業務の内部規定、製造現場の専門用語、カスタマーサポートの対応方針など、企業固有の知識をモデルに反映することで、必要な判断により集中できます。</p>
+<p>QueryPie AIは、お客様の<strong>業務データ・専門用語・社内規定・ドメイン知識</strong>を反映した専用モデルを自ら開発し、その性能を高めることができます。業務目的に合わせた追加学習と評価を通じてモデルを最適化し、企業のセキュリティ要件とインフラに適した運用環境を構築します。</p>
+<p>QEVのDLPにおける成果も、こうしたドメイン特化の一例です。企業は、保護すべき情報や分類基準、ポリシーの適用条件など、繰り返し必要になる判断を定義し、実際の業務データでモデルの品質を確認しながら改善できます。</p>
+<h3 style="font-weight:700;">ドメインに合わせたモデル、企業環境に合わせた運用</h3>
+<ul><li><strong>業務知識を反映した最適化：</strong>現場の文書や用語、内部規定を基にモデルを追加学習させ、業務シナリオで評価します。</li><li><strong>専用モデルの継続的な改善：</strong>実際の業務における判断結果と要件を検討し、モデルを改善します。</li><li><strong>ローカル・オンプレミスでの運用：</strong>企業のセキュリティ境界内でデータとモデルを活用できるよう、インフラと運用構成を設計します。</li><li><strong>業務システムとの接続：</strong>QueryPie AI PlatformのAI Agent・RAG・MCPと連携し、判断結果を業務フローにつなげることができます。</li></ul>
+<p>QueryPie AIは、独自モデルの開発から業務ごとの学習、評価、運用までを支援し、企業が必要とするドメイン特化AIを構築します。</p>
+<h2 style="font-weight:700;">QEVを実際に体験してください</h2>
+<p>QEVのデモでは、あらかじめ用意されたテスト事例だけでなく、自分で入力した文章でもモデルの判断結果を確認できます。 韓国語・英語・日本語に対応しており、QEVが文章をどのように分類し、選択肢ごとの確率を返すのかを実際に体験できます。</p>
+<p><strong><a href="https://querypie--qev-int8-demo.srv.kpb4r.mlxp.ncloud.com/?lang=ja" target="_blank" rel="noopener noreferrer">QEVのデモを体験する →</a></strong></p>
