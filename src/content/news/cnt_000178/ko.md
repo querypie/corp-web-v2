@@ -4,7 +4,13 @@ The Software Report가 ‘2024년 소프트웨어 CEO 50인’을 발표했습�
 
 대표적으로 Cvent 창업자 Reggie Aggarwal은 전 세계 2만 2,000개 이상의 고객을 확보한 행사 관리 소프트웨어 기업을 구축해 조직 간 연결과 행사 기획의 효율화를 지원했습니다. Unit4 CEO Mike Ettling은 인사·재무·ERP 솔루션을 아우르는 클라우드 기업용 소프트웨어 기업으로의 전환을 이끌었습니다. Procore 창업자 Craig ‘Tooey’ Courtemanche는 건설 관리 소프트웨어를 150여 개국, 200만 명 이상의 사용자가 활용하는 플랫폼으로 성장시켜 건설 현장의 협업·계획·프로젝트 수행 방식을 바꿨습니다.
 
-수상자는 후보 추천 절차와 각 인물의 경력 및 소프트웨어 업계 기여도에 대한 검토를 거쳐 선정됐습니다. 아래에서는 원문의 순서에 따라 50명 전원을 소개합니다. 직책과 기업 정보는 기사 발표 당시를 기준으로 합니다.
+수상자는 후보 추천 절차와 각 인물의 경력 및 소프트웨어 업계 기여도에 대한 검토를 거쳐 선정됐습니다. 아래에서는 QueryPie의 Brant Hwang을 먼저 소개하고, 원문의 선정 번호를 유지해 50명 전원을 소개합니다. 직책과 기업 정보는 기사 발표 당시를 기준으로 합니다.
+
+## 40. Brant Hwang — QueryPie
+
+![Brant Hwang](/assets/news/top-50-software-ceos-2024/40.webp)
+
+Brant Hwang은 QueryPie의 창업자이자 CEO입니다. QueryPie는 기업이 다양한 데이터 소스와 환경에서 데이터를 관리·보호하고 접근을 제어하도록 돕는 현대적인 데이터 거버넌스 플랫폼입니다. Brant는 데이터 분석, 자동화, 최적화를 중심으로 15년 이상의 소프트웨어 개발 경험을 쌓았습니다. Y Combinator 출신이며 Oracle Certified Professional 자격과 Sun 공인 Java 프로그래머·네트워크 관리자 자격을 보유하고 있습니다. QueryPie 이전에는 Kakao Corp.에서 소프트웨어 엔지니어로 근무했으며, 그전에는 CNPTechnology에서 병역 복무의 일환으로 소프트웨어 엔지니어 업무를 수행했습니다. EugeneData의 주니어 소프트웨어 엔지니어로 경력을 시작했고, 한국과학기술원(KAIST)에서 전산학 학사 학위를 취득했습니다.
 
 ### 1. Reggie Aggarwal — Cvent
 
@@ -239,12 +245,6 @@ CEO. 건설·현장 중심 기업에 맞춘 인사관리 소프트웨어를 이�
 ![Marili Hooft-Bolle](/assets/news/top-50-software-ceos-2024/39.webp)
 
 CEO. 2023년부터 Trengo의 AI 기반 고객 소통 서비스 전환을 이끌었습니다. WeTransfer, Signal AI, InSided에서 운영 경력을 쌓았으며 TomTom 이사회에도 참여합니다. 20년 이상의 기술 업계 경력에는 McKinsey 컨설팅, Vonq 감독이사회 활동, OnePlanetCrowd 자문위원회 의장직도 포함됩니다. TomTom에서는 보수·선임위원회를 이끌고 Prins Bernhard Nature Fund의 재무 담당 이사도 맡고 있습니다. INSEAD MBA와 Leiden·Rotterdam의 법학 관련 석사 학위를 보유하고 있습니다.
-
-### 40. Brant Hwang — QueryPie
-
-![Brant Hwang](/assets/news/top-50-software-ceos-2024/40.webp)
-
-Brant Hwang은 QueryPie의 창업자이자 CEO입니다. QueryPie는 기업이 다양한 데이터 소스와 환경에서 데이터를 관리·보호하고 접근을 제어하도록 돕는 현대적인 데이터 거버넌스 플랫폼입니다. Brant는 데이터 분석, 자동화, 최적화를 중심으로 15년 이상의 소프트웨어 개발 경험을 쌓았습니다. Y Combinator 출신이며 Oracle Certified Professional 자격과 Sun 공인 Java 프로그래머·네트워크 관리자 자격을 보유하고 있습니다. QueryPie 이전에는 Kakao Corp.에서 소프트웨어 엔지니어로 근무했으며, 그전에는 CNPTechnology에서 병역 복무의 일환으로 소프트웨어 엔지니어 업무를 수행했습니다. EugeneData의 주니어 소프트웨어 엔지니어로 경력을 시작했고, 한국과학기술원(KAIST)에서 전산학 학사 학위를 취득했습니다.
 
 ### 41. Paige Schaffer — Iris Powered by Generali
 

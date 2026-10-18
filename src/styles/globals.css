@@ -671,6 +671,16 @@ textarea:-webkit-autofill:focus {
     max-width: 200px;
   }
 
+  .rich-content table[data-content-layout="profiles"] > tbody > tr > td:last-child > :first-child {
+    color: var(--color-brand);
+  }
+
+  .rich-content table[data-content-layout="profiles"] > tbody > tr > td > h2 {
+    padding-top: 0;
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+
   @media (max-width: 767px) {
     .rich-content table[data-content-layout="profiles"] {
       display: block;
