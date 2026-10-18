@@ -4,7 +4,13 @@ The Software Reportが「2024年のソフトウェアCEO 50人」を発表しま
 
 例えば、Cvent創業者のReggie Aggarwalは、世界で2万2,000以上の顧客を持つイベント管理ソフトウェア企業を築き、組織間のつながりとイベント企画の効率化を支援しました。Unit4のCEOであるMike Ettlingは、人事・財務・ERPを含むクラウド型企業向けソフトウェアへの転換を主導しました。Procore創業者のCraig “Tooey” Courtemancheは、建設管理ソフトウェアを150以上の国で200万人超が利用する基盤へと拡大し、現場の協働、計画、プロジェクト遂行のあり方を変えました。
 
-受賞者は、候補者の推薦と、それぞれの経歴およびソフトウェア業界への貢献の審査を経て選ばれました。以下では原文の順序に沿って50人全員を紹介します。役職や企業情報は記事発表時点のものです。
+受賞者は、候補者の推薦と、それぞれの経歴およびソフトウェア業界への貢献の審査を経て選ばれました。以下ではQueryPieのBrant Hwangを最初に紹介し、原文の選出番号を維持して50人全員を紹介します。役職や企業情報は記事発表時点のものです。
+
+## 40. Brant Hwang — QueryPie
+
+![Brant Hwang](/assets/news/top-50-software-ceos-2024/40.webp)
+
+Brant HwangはQueryPieの創業者兼CEOです。QueryPieは、複数のデータソースや環境にわたり、企業がデータを管理・保護し、アクセスを制御するための先進的なデータガバナンス基盤です。Brantはデータ分析、自動化、最適化を中心に15年以上のソフトウェア開発経験を持ちます。Y Combinator出身で、Oracle Certified Professionalに加え、Sun認定のJavaプログラマーとネットワーク管理者の資格を保有しています。以前はKakao Corp.のソフトウェアエンジニアを務め、その前には兵役の一環としてCNPTechnologyでソフトウェア開発に従事しました。EugeneDataのジュニアソフトウェアエンジニアとしてキャリアを始め、韓国科学技術院（KAIST）で計算機科学の学士号を取得しました。
 
 ### 1. Reggie Aggarwal — Cvent
 
@@ -239,12 +245,6 @@ CEO。建設業や現場中心の企業向け人事ソフトウェアを率い�
 ![Marili Hooft-Bolle](/assets/news/top-50-software-ceos-2024/39.webp)
 
 CEO。2023年からAIを活用した顧客対応分野への転換を進めました。WeTransfer、Signal AI、InSidedで運営経験を積み、TomTomの取締役も務めています。 20年以上の技術業界経験には、McKinseyでのコンサルティング、Vonqの監査役会、OnePlanetCrowdの諮問委員長も含まれます。TomTomでは報酬・選任委員会を率い、Prins Bernhard Nature Fundの会計役も担当。INSEADのMBAとLeiden・Rotterdamの法律関連の修士号を持ちます。
-
-### 40. Brant Hwang — QueryPie
-
-![Brant Hwang](/assets/news/top-50-software-ceos-2024/40.webp)
-
-Brant HwangはQueryPieの創業者兼CEOです。QueryPieは、複数のデータソースや環境にわたり、企業がデータを管理・保護し、アクセスを制御するための先進的なデータガバナンス基盤です。Brantはデータ分析、自動化、最適化を中心に15年以上のソフトウェア開発経験を持ちます。Y Combinator出身で、Oracle Certified Professionalに加え、Sun認定のJavaプログラマーとネットワーク管理者の資格を保有しています。以前はKakao Corp.のソフトウェアエンジニアを務め、その前には兵役の一環としてCNPTechnologyでソフトウェア開発に従事しました。EugeneDataのジュニアソフトウェアエンジニアとしてキャリアを始め、韓国科学技術院（KAIST）で計算機科学の学士号を取得しました。
 
 ### 41. Paige Schaffer — Iris Powered by Generali
 

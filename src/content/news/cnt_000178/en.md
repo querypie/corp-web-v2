@@ -4,7 +4,13 @@ Their influence extends beyond running a business. By inspiring teams, respondin
 
 Among them, Cvent founder Reggie Aggarwal has built an event management software company with more than 22,000 customers worldwide, helping organizations connect and simplify event planning. Unit4 CEO Mike Ettling has guided the company’s transformation toward cloud-based enterprise software across HR, finance, and ERP. Procore founder Craig “Tooey” Courtemanche has expanded construction management software to more than two million users in over 150 countries, changing how project teams collaborate, plan, and deliver their work.
 
-The honorees were chosen through a nomination process and a review of their career achievements and contributions to the software industry. The following profiles introduce all 50 leaders in the original order. Roles and company information reflect the article’s publication date.
+The honorees were chosen through a nomination process and a review of their career achievements and contributions to the software industry. The following profiles introduce all 50 leaders, starting with QueryPie’s Brant Hwang and retaining the original selection numbers. Roles and company information reflect the article’s publication date.
+
+## 40. Brant Hwang — QueryPie
+
+![Brant Hwang](/assets/news/top-50-software-ceos-2024/40.webp)
+
+Brant Hwang is QueryPie’s founder and CEO. QueryPie provides a modern data governance platform that enables businesses to manage and protect data, and control access to it, across different sources and environments. His software development career spans more than 15 years, with particular experience in data analysis, automation, and optimization. He is a Y Combinator alumnus and holds Oracle Certified Professional credentials, along with Sun certifications in Java programming and network administration. Before QueryPie, he worked as a software engineer at Kakao Corp., following an engineering role at CNPTechnology that formed part of his military service. He began his career as a junior software engineer at EugeneData and earned his undergraduate computer science degree at KAIST.
 
 ### 1. Reggie Aggarwal — Cvent
 
@@ -239,12 +245,6 @@ Founder and CEO. Built a cloud platform managing the complete product returns pr
 ![Marili Hooft-Bolle](/assets/news/top-50-software-ceos-2024/39.webp)
 
 CEO. Since 2023, has guided Trengo toward AI-powered customer engagement. Brings operating experience from WeTransfer, Signal AI, and InSided, and serves on TomTom’s board. Her more than two decades in technology also include consulting at McKinsey, supervisory work at Vonq, and advisory leadership at OnePlanetCrowd. At TomTom she leads the remuneration and selection committee, and she is treasurer of the Prins Bernhard Nature Fund. She holds an INSEAD MBA and law-related master’s degrees from Leiden and Rotterdam.
-
-### 40. Brant Hwang — QueryPie
-
-![Brant Hwang](/assets/news/top-50-software-ceos-2024/40.webp)
-
-Brant Hwang is QueryPie’s founder and CEO. QueryPie provides a modern data governance platform that enables businesses to manage and protect data, and control access to it, across different sources and environments. His software development career spans more than 15 years, with particular experience in data analysis, automation, and optimization. He is a Y Combinator alumnus and holds Oracle Certified Professional credentials, along with Sun certifications in Java programming and network administration. Before QueryPie, he worked as a software engineer at Kakao Corp., following an engineering role at CNPTechnology that formed part of his military service. He began his career as a junior software engineer at EugeneData and earned his undergraduate computer science degree at KAIST.
 
 ### 41. Paige Schaffer — Iris Powered by Generali
 
