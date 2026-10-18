@@ -1,17 +1,28 @@
 {
-  "authorName": "",
+  "authorName": "Media Coverage",
   "authorRole": "",
   "categorySlug": "news",
-  "contentType": "outlink",
+  "contentType": "content",
   "dateIso": "2025-01-07",
   "downloadCoverImageSrc": "/news/news-13.webp",
   "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
   "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "https://www.thesoftwarereport.com/the-top-50-software-ceos-of-2024/",
   "gatingLevel": "none",
   "hideHeroImage": false,
-  "id": "the-top-50-software-ceos-of-2024",
+  "id": "top-50-software-ceos-of-2024",
   "imageSrc": "/news/news-13.webp",
   "relatedIds": [],
   "section": "news",
@@ -20,13 +31,31 @@
   "storageId": "cnt_000178",
   "summary": {
     "en": "The Software Report is pleased to announce The Top 50 Software CEOs of 2024. The CEOs on this year’s list represent some of the most influential companies in the software industry, spanning from rapidly growing startups to established global leaders.",
-    "ko": "The Software Report is pleased to announce The Top 50 Software CEOs of 2024. The CEOs on this year’s list represent some of the most influential companies in the software industry, spanning from rapidly growing startups to established global leaders.",
-    "ja": "The Software Report is pleased to announce The Top 50 Software CEOs of 2024. The CEOs on this year’s list represent some of the most influential companies in the software industry, spanning from rapidly growing startups to established global leaders."
+    "ko": "The Software Report가 2024년 최고의 소프트웨어 CEO 50인을 발표했습니다. 빠르게 성장하는 스타트업부터 세계적인 선도 기업까지, 올해 선정된 CEO들은 소프트웨어 업계에서 큰 영향력을 발휘하는 기업들을 이끌고 있습니다.",
+    "ja": "The Software Reportが2024年のソフトウェアCEOトップ50を発表しました。急成長するスタートアップから世界をリードする企業まで、今年選出されたCEOは、ソフトウェア業界で大きな影響力を持つ企業を率いています。"
   },
   "title": {
     "en": "The Top 50 Software CEOs of 2024",
-    "ko": "The Top 50 Software CEOs of 2024",
-    "ja": "The Top 50 Software CEOs of 2024"
+    "ko": "2024년 최고의 소프트웨어 CEO 50인",
+    "ja": "2024年のソフトウェアCEOトップ50"
   },
-  "locales": {}
+  "visibleLocales": [
+    "ko",
+    "ja",
+    "en"
+  ],
+  "locales": {
+    "en": {
+      "htmlPath": "src/content/news/cnt_000178/en.html",
+      "jsonPath": "src/content/news/cnt_000178/en.tiptap.json"
+    },
+    "ko": {
+      "htmlPath": "src/content/news/cnt_000178/ko.html",
+      "jsonPath": "src/content/news/cnt_000178/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/news/cnt_000178/ja.html",
+      "jsonPath": "src/content/news/cnt_000178/ja.tiptap.json"
+    }
+  }
 }
