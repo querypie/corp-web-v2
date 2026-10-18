@@ -22,20 +22,25 @@
   "summary": {
     "en": "",
     "ko": "QueryPie AI가 독자 개발한 의사결정 AI 모델 ‘QEV’. 보안 특화 학습을 통해 DLP 탐지율 99.69%를 달성하고, 상용 AI 모델 JEV 대비 미탐 건수를 약 91.3% 줄였습니다. 실제 데모 사례를 통해 QEV의 기술력과 활용 가능성을 소개합니다.",
-    "ja": ""
+    "ja": "QueryPie AIが独自開発した意思決定AIモデル「QEV」。セキュリティに特化した学習によりDLP検知率99.69%を達成し、商用AIモデルJEVと比較して見逃し件数を約91.3%削減しました。実際のデモ事例を通じて、QEVの技術力と活用の可能性を紹介します。"
   },
   "title": {
     "en": "",
     "ko": "QueryPie AI, 자체 의사결정 AI 모델 ‘QEV’ 개발",
-    "ja": ""
+    "ja": "QueryPie AI、独自の意思決定AIモデル「QEV」を開発"
   },
   "visibleLocales": [
-    "ko"
+    "ko",
+    "ja"
   ],
   "locales": {
     "ko": {
       "htmlPath": "src/content/resources/blogs/cnt_000232/ko.html",
       "jsonPath": "src/content/resources/blogs/cnt_000232/ko.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/blogs/cnt_000232/ja.html",
+      "jsonPath": "src/content/resources/blogs/cnt_000232/ja.tiptap.json"
     }
   }
 }
