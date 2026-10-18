@@ -9,7 +9,7 @@
 <h2>独自技術で実現したQueryPie AIの意思決定モデル</h2>
 <p>QEVは、既存のAIサービスを単に接続して利用するソリューションではありません。 QueryPie AIは、Gemma4ベースのモデルの開発と評価を進め、意思決定モデルを独自に実装するとともに、企業の業務目的に合わせて追加学習を行う技術を確立しました。 QEVは、企業の業務基準に従って文章を分類し、条件を満たすかどうかと選択肢ごとの確率を返す、独自の意思決定モデルです。</p>
 <p>特に、独自開発したモデルにDLPの業務データを追加学習させることで、検知性能を大きく向上させました。 QEVは社内のDLP評価で、<strong>検知率99.69%、F2スコア98.98%</strong>を記録しました。 これは、QueryPie AIがAIモデルの活用にとどまらず、特定の業務に最適化したAIモデルを自ら実装し、その性能を高められることを示しています。</p>
-<h2>DLP検知率99.69% — 機密情報を含む文書1,281件のうち見逃しはわずか4件</h2>
+<h2>検知率99.69% — 機密情報を含む文書1,281件のうち見逃しはわずか4件</h2>
 <p>QueryPie AIは、日本語・英語・韓国語で構成された社内文書3,167件を対象に、DLPの検知性能を評価しました。 その結果、独自開発した<strong>QEVは検知率99.69%、F2スコア98.98%</strong>を記録しました。 特に、機密情報を含む文書1,281件のうち、検知できなかった文書はわずか4件でした。</p>
 <h3 style="font-weight:600;">商用AIモデルとの性能比較</h3>
 <p>比較対象の「JEV API」は、商用の外部AIモデルをAPI経由で利用したもので、QEVと同じ社内文書を使って機密情報の検知性能を評価しました。</p>
@@ -17,7 +17,7 @@
 <h3 style="font-weight:600;">同一のDLP評価における見逃し件数</h3>
 <table aria-label="JEV APIとQEVの見逃し件数の比較"><thead><tr><th>モデル</th><th>見逃し件数の比較</th></tr></thead><tbody><tr><td>JEV API</td><td><p><strong>46件</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-bg-content);border-radius:4px;overflow:hidden;"><div style="height:16px;width:100%;background:var(--color-mute);"></div></div></td></tr><tr><td>QEV</td><td><p><strong>4件</strong></p><div aria-hidden="true" style="height:16px;width:100%;background:var(--color-bg-content);border-radius:4px;overflow:hidden;"><div style="height:16px;width:8.70%;background:#6f8599;"></div></div></td></tr></tbody></table>
 <blockquote><p><strong>46件 → 4件 | 見逃しを約91.3%削減</strong></p></blockquote>
-<p>同一の社内DLP文書3,167件を、しきい値0.50で比較した見逃し件数です。</p>
+<p>同じ社内文書3,167件を対象に、しきい値0.50で比較した見逃し件数です。</p>
 <p>同一の社内評価環境で、商用のJEV APIと比較して<strong>見逃し件数を約91.3%削減した結果</strong>です。</p>
 <p>本結果は、同一の社内DLP評価データ3,167件としきい値0.50を基準に測定した、文書単位の分類性能です。</p>
 <h2>メールやAIへの入力に含まれる個人情報・機密を区別</h2>
