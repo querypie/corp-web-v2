@@ -3,7 +3,7 @@
   "authorRole": "",
   "categorySlug": "blogs",
   "contentType": "content",
-  "dateIso": "2026-10-13",
+  "dateIso": "2026-10-19",
   "downloadCoverImageSrc": "",
   "downloadPdfMode": "none",
   "downloadPdfSrc": "",
@@ -30,7 +30,6 @@
     "ja": "QueryPie AI、独自の意思決定AIモデル「QEV」を開発"
   },
   "visibleLocales": [
-    "ko",
     "ja"
   ],
   "locales": {
