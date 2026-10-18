@@ -31,13 +31,13 @@
   "storageId": "cnt_000178",
   "summary": {
     "en": "The Software Report is pleased to announce The Top 50 Software CEOs of 2024. The CEOs on this year’s list represent some of the most influential companies in the software industry, spanning from rapidly growing startups to established global leaders.",
-    "ko": "The Software Report is pleased to announce The Top 50 Software CEOs of 2024. The CEOs on this year’s list represent some of the most influential companies in the software industry, spanning from rapidly growing startups to established global leaders.",
-    "ja": "The Software Report is pleased to announce The Top 50 Software CEOs of 2024. The CEOs on this year’s list represent some of the most influential companies in the software industry, spanning from rapidly growing startups to established global leaders."
+    "ko": "The Software Report가 2024년 최고의 소프트웨어 CEO 50인을 발표했습니다. 빠르게 성장하는 스타트업부터 세계적인 선도 기업까지, 올해 선정된 CEO들은 소프트웨어 업계에서 큰 영향력을 발휘하는 기업들을 이끌고 있습니다.",
+    "ja": "The Software Reportが2024年のソフトウェアCEOトップ50を発表しました。急成長するスタートアップから世界をリードする企業まで、今年選出されたCEOは、ソフトウェア業界で大きな影響力を持つ企業を率いています。"
   },
   "title": {
     "en": "The Top 50 Software CEOs of 2024",
-    "ko": "The Top 50 Software CEOs of 2024",
-    "ja": "The Top 50 Software CEOs of 2024"
+    "ko": "2024년 최고의 소프트웨어 CEO 50인",
+    "ja": "2024年のソフトウェアCEOトップ50"
   },
   "visibleLocales": [
     "ko",
