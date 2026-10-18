@@ -663,6 +663,52 @@ textarea:-webkit-autofill:focus {
     white-space: normal;
   }
 
+  .rich-content table[data-content-layout="profiles"] > tbody > tr > td:first-child {
+    width: 225px;
+  }
+
+  .rich-content table[data-content-layout="profiles"] > tbody > tr > td:first-child figure {
+    max-width: 200px;
+  }
+
+  @media (max-width: 767px) {
+    .rich-content table[data-content-layout="profiles"] {
+      display: block;
+      min-width: 0 !important;
+      width: 100% !important;
+      border: 0;
+    }
+
+    .rich-content table[data-content-layout="profiles"] > colgroup {
+      display: none;
+    }
+
+    .rich-content table[data-content-layout="profiles"] > tbody {
+      display: block;
+    }
+
+    .rich-content table[data-content-layout="profiles"] > tbody > tr {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .rich-content table[data-content-layout="profiles"] > tbody > tr > td,
+    .rich-content table[data-content-layout="profiles"] > tbody > tr > td:first-child {
+      display: block;
+      width: 100%;
+      min-width: 0;
+      padding: 0;
+      border: 0;
+    }
+
+    .rich-content table[data-content-layout="profiles"] > tbody > tr > td:first-child img {
+      width: 100%;
+    }
+  }
+
   /* ========================================================================
      Code Block
      컨텐츠 본문/어드민 미리보기/에디터가 모두 공유하는 단순 코드블록 스타일.
