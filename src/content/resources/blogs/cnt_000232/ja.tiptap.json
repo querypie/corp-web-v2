@@ -11,7 +11,7 @@
               "type": "italic"
             }
           ],
-          "text": "独自のAI技術で世界最高のDLP検知率99.69%を達成、JEV比で見逃しを約91%削減"
+          "text": "独自のAI技術で世界最高レベルの機密情報検知率99.69%を達成、JEV比で見逃しを約91%削減"
         }
       ]
     },
@@ -19,7 +19,7 @@
       "type": "image",
       "attrs": {
         "src": "/resources/blogs/qev-decision-ai/thumbnail.png",
-        "alt": "韓国語・英語・日本語の業務入力から機密情報を検知するQEV",
+        "alt": "日本語・英語・韓国語の業務入力から機密情報を検知するQEV",
         "title": null,
         "width": "100%",
         "height": null,
@@ -232,7 +232,7 @@
       "content": [
         {
           "type": "text",
-          "text": "QueryPie AIは、韓国語・英語・日本語で構成された社内文書3,167件を対象に、DLPの検知性能を評価しました。"
+          "text": "QueryPie AIは、日本語・英語・韓国語で構成された社内文書3,167件を対象に、DLPの検知性能を評価しました。"
         },
         {
           "type": "text",
@@ -279,6 +279,15 @@
             }
           ],
           "text": "商用AIモデルとの性能比較"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "比較対象の「JEV API」は、商用の外部AIモデルをAPI経由で利用したもので、QEVと同じ社内文書を使って機密情報の検知性能を評価しました。"
         }
       ]
     },
@@ -1480,6 +1489,15 @@
       ]
     },
     {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "この判断を実際の業務で継続して使うには、検知性能に加えて、モデルを動かすためのGPUメモリ使用量も重要です。"
+        }
+      ]
+    },
+    {
       "type": "heading",
       "attrs": {
         "level": 2
@@ -1737,7 +1755,7 @@
       "content": [
         {
           "type": "text",
-          "text": "機密情報が含まれていると判断した後は、どの情報がどこに記載されているかを確認する必要があります。QueryPieが保有する独自のDLP技術で、韓国語・英語・日本語の入力におけるリスクをすばやく選別し、詳細な分析が必要な入力から"
+          "text": "機密情報が含まれていると判断した後は、どの情報がどこに記載されているかを確認する必要があります。QueryPie AIが保有する独自のDLP技術で、日本語・英語・韓国語の入力におけるリスクをすばやく選別し、詳細な分析が必要な入力から"
         },
         {
           "type": "text",
@@ -2222,7 +2240,7 @@
         },
         {
           "type": "text",
-          "text": "韓国語・英語・日本語に対応しており、QEVが文章をどのように分類し、選択肢ごとの確率を返すのかを実際に体験できます。"
+          "text": "日本語・英語・韓国語に対応しており、QEVが文章をどのように分類し、選択肢ごとの確率を返すのかを実際に体験できます。"
         }
       ]
     },
@@ -2238,12 +2256,9 @@
                 "href": "https://querypie--qev-int8-demo.srv.kpb4r.mlxp.ncloud.com/?lang=ja",
                 "target": "_blank",
                 "rel": "noopener noreferrer",
-                "class": null,
+                "class": "event-cta-button",
                 "title": null
               }
-            },
-            {
-              "type": "bold"
             }
           ],
           "text": "QEVのデモを体験する →"
