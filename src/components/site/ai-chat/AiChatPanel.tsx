@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 import { RotateCcw, Send, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import type { Locale } from "@/constants/i18n";
-import { getSameSiteHref } from "@/features/routing/siteLinks";
+import { findHermesLinks } from "@/features/ai-chat/markdown";
 import { aiChatCopy } from "@/copy/aiChat";
 import { isChatReply, isSlackThreadToken, type ChatMessage } from "@/features/ai-chat/types";
 import {
@@ -33,7 +33,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
   const threadRef = useRef<HTMLDivElement>(null);
   const [session, setSession] = useState(readPreviewSession);
   const [pending, setPending] = useState(false);
-  const [error, setError] = useState<"unavailable" | "error" | null>(null);
+  const [error, setError] = useState<"unavailable" | "error" | "incomplete" | null>(null);
   const requestRef = useRef<AbortController | null>(null);
   const generationRef = useRef(0);
 
@@ -123,7 +123,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
       nextSlackThreadToken = extractSlackThreadToken(result);
       if (!response.ok || !isChatReply(result)) {
         const code = result && typeof result === "object" && "code" in result ? result.code : null;
-        throw new Error(code === "NOT_CONFIGURED" ? "unavailable" : "error");
+        throw new Error(code === "NOT_CONFIGURED" ? "unavailable" : code === "INCOMPLETE_RESPONSE" ? "incomplete" : "error");
       }
       setSession((current) => ({
         ...current,
@@ -135,7 +135,8 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
       }));
     } catch (cause) {
       if (generation !== generationRef.current) return;
-      setError(cause instanceof Error && cause.message === "unavailable" ? "unavailable" : "error");
+      setError(cause instanceof Error && cause.message === "unavailable" ? "unavailable"
+        : cause instanceof Error && cause.message === "incomplete" ? "incomplete" : "error");
       setSession((current) => ({
         draft: text,
         messages: current.messages.filter((message) => message.id !== userMessage.id),
@@ -192,24 +193,32 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
           </div>
         ) : (
           <div className="flex flex-col gap-6">
-            {session.messages.map((message) => (
-              <div className={`flex flex-col gap-3 ${message.role === "user" ? "items-end" : "items-start"}`} key={message.id}>
-                <p className={`type-body-md whitespace-pre-wrap [overflow-wrap:anywhere] ${message.role === "user" ? "max-w-[88%] rounded-box bg-bg-content px-4 py-3" : "w-full"}`} lang={message.locale}>
-                  {message.role === "assistant" ? <HermesAnswer>{message.text}</HermesAnswer> : message.text}
-                </p>
-                {message.role === "assistant" && message.sources?.length ? (
-                  <div className="flex w-full flex-col gap-1.5 border-t border-border pt-3">
-                    <span className={`${styles.muted} type-body-sm`}>{copy.sources}</span>
-                    {message.sources.map((source) => (
-                      <a className="type-body-sm text-link underline decoration-border-strong underline-offset-4 hover:decoration-current [overflow-wrap:anywhere]" href={getSameSiteHref(source.url, locale)} key={source.url} rel="noopener noreferrer" target="_blank">
-                        {source.title}
-                        {source.title !== source.url && <span className={`${styles.muted} block`}>{new URL(source.url).hostname}</span>}
-                      </a>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            ))}
+            {session.messages.map((message) => {
+              const inlineUrls = new Set(message.role === "assistant" ? findHermesLinks(message.text).map((link) => link.url) : []);
+              const sources = message.sources?.filter((source) => !inlineUrls.has(new URL(source.url).href));
+              return (
+                <div className={`flex min-w-0 flex-col gap-3 ${message.role === "user" ? "items-end" : "items-start"}`} key={message.id}>
+                  {message.role === "assistant" ? (
+                    <div className="type-body-md min-w-0 w-full" lang={message.locale}>
+                      <HermesAnswer tableLabel={aiChatCopy[message.locale].table}>{message.text}</HermesAnswer>
+                    </div>
+                  ) : (
+                    <p className="type-body-md max-w-[88%] whitespace-pre-wrap rounded-box bg-bg-content px-4 py-3 [overflow-wrap:anywhere]" lang={message.locale}>{message.text}</p>
+                  )}
+                  {message.role === "assistant" && sources?.length ? (
+                    <div className="flex w-full flex-col gap-1.5 border-t border-border pt-3">
+                      <span className={`${styles.muted} type-body-sm`}>{copy.sources}</span>
+                      {sources.map((source) => (
+                        <a className="type-body-sm text-link underline decoration-border-strong underline-offset-4 hover:decoration-current [overflow-wrap:anywhere]" href={source.url} key={source.url} rel="noopener noreferrer" target="_blank">
+                          {source.title}
+                          {source.title !== source.url && <span className={`${styles.muted} block`}>{new URL(source.url).hostname}</span>}
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
             {pending ? <p className={`${styles.muted} type-body-sm`} role="status">{copy.loading}</p> : null}
           </div>
         )}

@@ -25,6 +25,7 @@ import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import Youtube from "@tiptap/extension-youtube";
 import { TableKit } from "@tiptap/extension-table";
+import { ContentTableLayout } from "@/features/content/tableLayout";
 import Input from "@/components/ui/Input";
 import Tab from "@/components/ui/Tab";
 import TabGroup from "@/components/ui/TabGroup";
@@ -741,6 +742,7 @@ export default function TiptapEditor({
         nocookie: true,
       }),
       TableKit,
+      ContentTableLayout,
     ],
     immediatelyRender: false,
     onCreate({ editor: currentEditor }) {

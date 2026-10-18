@@ -1,0 +1,73 @@
+import { publicCategoryPaths } from "@/features/content/publicPathConfig";
+import type { PricingProduct } from "../types";
+
+// QueryPie ACP アクセス制御プラン (ja): 公開料金カードのデータ。
+export const acpPricingJa: PricingProduct<"acp"> = {
+  productKey: "acp",
+  locale: "ja",
+  tabLabel: "QueryPie ACP",
+  plans: ["コミュニティ", "スタンダード", "エンタープライズ"],
+  cards: [
+    {
+      name: "コミュニティ",
+      description: "同じ品質のCommunity版の無料ライセンスをダウンロードして取得",
+      priceLabel: "$0/月",
+      href: publicCategoryPaths.resources.all,
+      ctaLabel: "今すぐダウンロード",
+      features: [
+        "最大5ユーザーまで利用可能",
+        "データベースアクセス制御",
+        "システムアクセス制御",
+        "Kubernetesアクセス制御",
+        { value: "Webアクセス制御", tone: "danger" },
+        "MCPアクセス制御",
+        "AI Extensions",
+        "申請・承認ワークフロー",
+      ],
+    },
+    {
+      name: "スタンダード",
+      description: "コミュニティ版にご満足の利用者に限定して提供。年間契約のみ。",
+      priceLabel: "$50/人・月",
+      href: publicCategoryPaths.resources.all,
+      ctaLabel: "お問い合わせ",
+      features: [
+        "10ユーザー以上",
+        "データベースアクセス制御",
+        "システムアクセス制御",
+        "Kubernetesアクセス制御",
+        { value: "Webアクセス制御", tone: "danger" },
+        "MCPアクセス制御",
+        "AI Extensions",
+        "申請・承認ワークフロー",
+        { type: "divider" },
+        "オンラインテクニカルサポート",
+        { value: "導入サポート・オンボーディング", tone: "danger" },
+        { value: "アップデートサポート", tone: "danger" },
+      ],
+    },
+    {
+      name: "Enterprise",
+      description: "プロフェッショナルな導入サポートとサービスを求めるチームにおすすめ",
+      priceLabel: "個別見積もり",
+      href: publicCategoryPaths.resources.all,
+      ctaLabel: "お問い合わせ",
+      tone: "primary",
+      features: [
+        "柔軟なユーザー数の設定",
+        "データベースアクセス制御",
+        "システムアクセス制御",
+        "Kubernetesアクセス制御",
+        "Webアクセス制御",
+        "MCPアクセス制御",
+        "AI Extensions",
+        "申請・承認ワークフロー",
+        { type: "divider" },
+        "テクニカルサポート",
+        "導入サポート・オンボーディング",
+        "アップデートサポート",
+      ],
+    },
+  ],
+  comparisonGroups: [],
+};
