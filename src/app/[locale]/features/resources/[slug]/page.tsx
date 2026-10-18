@@ -16,7 +16,7 @@ import {
   getContentThumbnailSrc,
   getLocalizedContent,
   getResolvedContentLocale,
-  isPublishedContentAccessible,
+  isPublishedContentAccessibleInLocale,
   getPublicDetailHref,
 } from "@/features/content/data";
 import { readContentItem, readContentState } from "@/features/content/contentState.server";
@@ -45,9 +45,9 @@ export default async function ResourcesDetailRoute({ params }: DocsDetailRoutePr
     readContentState("resources", { includeBodies: false }),
     readContentItem("resources", resolvedSlug, { includeBodies: true }),
   ]);
-  const accessibleDocsItems = allDocsItems.filter(isPublishedContentAccessible);
+  const accessibleDocsItems = allDocsItems.filter((item) => isPublishedContentAccessibleInLocale(item, locale));
 
-  if (!currentEntry || !isPublishedContentAccessible(currentEntry)) {
+  if (!currentEntry || !isPublishedContentAccessibleInLocale(currentEntry, locale)) {
     notFound();
   }
 
@@ -166,7 +166,7 @@ export async function generateMetadata({ params }: DocsDetailRouteProps): Promis
 
   const currentEntry = await readContentItem("resources", resolvedSlug, { includeBodies: false });
 
-  if (!currentEntry || !isPublishedContentAccessible(currentEntry)) {
+  if (!currentEntry || !isPublishedContentAccessibleInLocale(currentEntry, locale)) {
     return {};
   }
 

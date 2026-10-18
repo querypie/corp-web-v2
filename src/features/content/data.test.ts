@@ -15,6 +15,7 @@ import {
   getPublicListHref,
   getWriterLabel,
   hasLocalizedTitle,
+  isPublishedContentAccessibleInLocale,
   isPublishedContentVisible,
   normalizeDateIso,
   resolveManagedContentSlug,
@@ -179,6 +180,25 @@ describe("isPublishedContentVisible", () => {
   it("해당 locale이 노출 대상으로 체크되어 있지 않으면 false를 반환한다", () => {
     const item = { status: "published" as const, visibleLocales: ["en" as const] };
     expect(isPublishedContentVisible(item, "ko")).toBe(false);
+  });
+});
+
+describe("isPublishedContentAccessibleInLocale", () => {
+  it("serves the Japanese-first QEV article only in its visible locale", () => {
+    const article = makeEntry({
+      id: "qev-decision-ai-dlp-detection",
+      categorySlug: "blogs",
+      section: "resources",
+      visibleLocales: ["ja"],
+    });
+
+    expect(isPublishedContentAccessibleInLocale(article, "ja")).toBe(true);
+    expect(isPublishedContentAccessibleInLocale(article, "ko")).toBe(false);
+    expect(isPublishedContentAccessibleInLocale(article, "en")).toBe(false);
+  });
+
+  it("preserves locale fallback for other published content", () => {
+    expect(isPublishedContentAccessibleInLocale(makeEntry({ visibleLocales: ["ja"] }), "ko")).toBe(true);
   });
 });
 
