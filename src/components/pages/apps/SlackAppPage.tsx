@@ -20,6 +20,9 @@ function SectionItem({ children, title }: { children: ReactNode; title: string }
 export default function SlackAppPage({
   benefits,
   connectionSteps,
+  connectionDescription,
+  connectionAppLabel,
+  connectionAppUrl,
   connectionTitle,
   contactCta,
   description,
@@ -68,8 +71,13 @@ export default function SlackAppPage({
               </div>
             </SectionItem>
             <SectionItem title={connectionTitle}>
+              <p className="m-0">{connectionDescription}</p>
               <ol className="m-0 flex list-decimal flex-col gap-2 pl-5">
-                {connectionSteps.map((step) => <li key={step}>{step}</li>)}
+                {connectionSteps.map((step, index) => (
+                  <li key={step}>
+                    {index === 0 ? <><a className="underline" href={connectionAppUrl}>{connectionAppLabel}</a>{step}</> : step}
+                  </li>
+                ))}
               </ol>
             </SectionItem>
             <SectionItem title={supportTitle}>
