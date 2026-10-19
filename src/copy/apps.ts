@@ -3,6 +3,9 @@ import type { Locale } from "@/constants/i18n";
 export type SlackAppPageCopy = {
   benefits: Array<{ description: string; title: string }>;
   connectionSteps: string[];
+  connectionDescription: string;
+  connectionAppLabel: string;
+  connectionAppUrl: string;
   contactCta: string;
   description: string;
   metadataDescription: string;
@@ -37,7 +40,10 @@ export function getSlackAppPageCopy(locale: Locale): SlackAppPageCopy {
         { title: "Keep admin control", description: "Run the integration within Slack OAuth, workspace permissions, and QueryPie access controls." },
       ],
       connectionTitle: "How to connect Slack + QueryPie AIP",
-      connectionSteps: ["Select Add to Slack and sign in to the workspace you want to connect.", "Review the requested Slack permissions and approve the connection.", "Use approved QueryPie AIP agents with Slack context, messages, and notifications."],
+      connectionDescription: "A QueryPie AIP account is required. The Slack integration is available after you sign in.",
+      connectionAppLabel: "QueryPie AIP",
+      connectionAppUrl: "https://app.querypie.com",
+      connectionSteps: [" and sign in to your account.", "Select MCP from the left sidebar.", "Search for Slack and open the integration page.", "Select Install to start the Slack authorization process.", "Choose the Slack workspace you want to connect.", "Review the requested permissions and select Allow to complete the connection.", "Return to QueryPie AIP and open Chat.", "Connect the Slack MCP integration in the chat, then send a message to start using Slack."],
       supportTitle: "Learn more and get support",
       supportDescription: "For questions about installation or permissions, contact QueryPie.",
       noticeLabel: "AI accuracy notice:",
@@ -59,7 +65,10 @@ export function getSlackAppPageCopy(locale: Locale): SlackAppPageCopy {
         { title: "관리 통제 유지", description: "Slack OAuth, workspace permissions, QueryPie access controls 범위 안에서 연동을 운영합니다." },
       ],
       connectionTitle: "Slack + QueryPie AIP 연결 방법",
-      connectionSteps: ["Slack에 추가하기를 선택하고 연결할 workspace에 로그인합니다.", "요청된 Slack permissions를 검토한 뒤 연결을 승인합니다.", "승인된 QueryPie AIP agents로 Slack context, 메시지, 알림을 사용합니다."],
+      connectionDescription: "QueryPie AIP 계정이 필요합니다. 로그인하면 Slack 연동 기능을 사용할 수 있습니다.",
+      connectionAppLabel: "QueryPie AIP",
+      connectionAppUrl: "https://app.querypie.com",
+      connectionSteps: ["에 접속하여 계정에 로그인합니다.", "왼쪽 사이드바에서 MCP를 선택합니다.", "Slack을 검색하고 연동 페이지를 엽니다.", "Install을 선택하여 Slack 권한 승인 절차를 시작합니다.", "연결할 Slack workspace를 선택합니다.", "요청된 권한을 검토하고 Allow를 선택하여 연결을 완료합니다.", "QueryPie AIP로 돌아와 Chat을 엽니다.", "채팅에서 Slack MCP 연동을 연결한 후 메시지를 보내 Slack을 사용합니다."],
       supportTitle: "자세히 보기 및 지원",
       supportDescription: "설치 또는 권한 관련 질문은 QueryPie에 문의하세요.",
       noticeLabel: "AI 정확성 고지 :",
@@ -81,7 +90,10 @@ export function getSlackAppPageCopy(locale: Locale): SlackAppPageCopy {
         { title: "管理者の統制を維持", description: "Slack OAuth、workspace permissions、QueryPie access controls の範囲内で連携を運用します。" },
       ],
       connectionTitle: "Slack + QueryPie AIP の連携方法",
-      connectionSteps: ["Slack に追加を選択し、接続する workspace にログインします。", "要求された Slack permissions を確認し、連携を承認します。", "承認済みの QueryPie AIP agents で Slack context、メッセージ、通知を利用します。"],
+      connectionDescription: "QueryPie AIP アカウントが必要です。ログインすると Slack 連携を利用できます。",
+      connectionAppLabel: "QueryPie AIP",
+      connectionAppUrl: "https://app.querypie.com",
+      connectionSteps: [" にアクセスし、アカウントにログインします。", "左側のサイドバーから MCP を選択します。", "Slack を検索し、連携ページを開きます。", "Install を選択して Slack の認証プロセスを開始します。", "接続する Slack workspace を選択します。", "要求された権限を確認し、Allow を選択して接続を完了します。", "QueryPie AIP に戻り、Chat を開きます。", "チャットで Slack MCP 連携を接続し、メッセージを送信して Slack の利用を開始します。"],
       supportTitle: "詳細とサポート",
       supportDescription: "インストールまたは権限に関する質問は QueryPie にお問い合わせください。",
       noticeLabel: "AI 精度に関する注意:",
