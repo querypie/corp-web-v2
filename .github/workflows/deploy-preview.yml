@@ -25,7 +25,7 @@ concurrency:
 jobs:
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, ARM64, arch:arm64, os:ubuntu, purpose:build]
     env:
       VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }} # querypie organization secret
       VERCEL_TEAM_ID: team_8DsCdrF1uCfwY30OS8F8lREn

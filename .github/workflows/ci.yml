@@ -8,7 +8,7 @@ on:
 jobs:
   validate-next-build:
     name: Validate Next Build
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, ARM64, arch:arm64, os:ubuntu, purpose:build]
 
     steps:
       - name: Checkout repository
@@ -27,7 +27,7 @@ jobs:
 
   validate-typecheck:
     name: Validate Typecheck
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, ARM64, arch:arm64, os:ubuntu, purpose:ci]
 
     steps:
       - name: Checkout repository
@@ -47,7 +47,7 @@ jobs:
   # TODO: lint 스크립트 구현 후 아래 잡의 주석을 해제하세요.
   # validate-lint:
   #   name: Validate Lint
-  #   runs-on: ubuntu-latest
+  #   runs-on: [self-hosted, Linux, ARM64, arch:arm64, os:ubuntu, purpose:ci]
   #
   #   steps:
   #     - name: Checkout repository
@@ -66,7 +66,7 @@ jobs:
 
   validate-test:
     name: Validate Test
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, ARM64, arch:arm64, os:ubuntu, purpose:ci]
 
     steps:
       - name: Checkout repository
