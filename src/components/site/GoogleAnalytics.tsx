@@ -10,6 +10,7 @@ import {
 import {
   buildGoogleAnalyticsBootstrapScript,
   buildGoogleAnalyticsPagePath,
+  getGoogleAnalyticsMeasurementId,
 } from "@/features/analytics/google";
 
 type GoogleAnalyticsProps = {
@@ -22,7 +23,16 @@ function getGtag() {
   return typeof gtag === "function" ? gtag : null;
 }
 
-export default function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps) {
+export default function GoogleAnalytics({ measurementId: globalMeasurementId }: GoogleAnalyticsProps) {
+  const [hostname, setHostname] = useState<string | null>(null);
+  const measurementId = hostname === null
+    ? ""
+    : getGoogleAnalyticsMeasurementId(hostname, globalMeasurementId);
+
+  useEffect(() => {
+    setHostname(window.location.hostname);
+  }, []);
+
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [isBootstrapReady, setIsBootstrapReady] = useState(false);

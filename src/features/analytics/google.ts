@@ -1,9 +1,21 @@
 import { COOKIE_PREFERENCE_KEYS } from "@/features/cookie-preferences/preferences";
+import { isJapaneseSiteHostname } from "@/features/routing/siteDomainRouting";
 
 export const GOOGLE_ANALYTICS_ID =
   process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID ||
   process.env.NEXT_PUBLIC_GA_ID ||
   "";
+
+export const JAPAN_GOOGLE_ANALYTICS_ID =
+  process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_JAPAN_ID || "G-DGKPWV2DP2";
+
+export function getGoogleAnalyticsMeasurementId(
+  hostname: string,
+  globalMeasurementId: string,
+  japanMeasurementId = JAPAN_GOOGLE_ANALYTICS_ID,
+) {
+  return isJapaneseSiteHostname(hostname) ? japanMeasurementId : globalMeasurementId;
+}
 
 const deniedConsent = {
   ad_personalization: "denied",
