@@ -1,6 +1,6 @@
 # AI 제품 상담 연결 및 검증
 
-브라우저는 같은 사이트의 `POST /api/ai-chat/session`으로 대화를 시작하고 `POST /api/ai-chat`으로 현재 질문을 보냅니다. Vercel 서버가 Partner Portal Production의 Hermes Wrapper에 세션 식별자와 질문을 전달하고 Hermes Agent의 답변과 답변에 포함된 링크를 반환합니다.
+브라우저는 같은 사이트의 `POST /api/ai-chat`만 호출합니다. Vercel 서버가 Partner Portal Production의 Hermes Wrapper에 이번 요청의 대화를 전달하고 Hermes Agent의 답변과 답변에 포함된 링크를 반환합니다.
 
 ## 연결 설정
 
@@ -13,13 +13,12 @@
 
 Vercel의 PR Preview, Preview Main과 Production은 모두 이 Production Wrapper URL을 사용합니다. `https://partner-portal.app.dev.querypie.io/api/hermes/v1`은 외부 인터넷에서 접근할 수 없는 Dev 내부 주소이므로 Vercel upstream으로 사용하지 않습니다. 모델을 변경할 때는 Wrapper의 `GET /models`가 반환하는 ID를 사용합니다.
 
-Vercel Project에는 다음 서버 전용 환경변수를 설정합니다. 로컬 개발에서는 Vercel Development 환경 값을 git에 포함되지 않는 `.env.local`로 가져와 사용합니다.
+Vercel Project에는 다음 두 서버 전용 환경변수만 설정합니다. 로컬 개발에서는 Vercel Development 환경 값을 git에 포함되지 않는 `.env.local`로 가져와 사용합니다.
 
 ```dotenv
 # Development / Preview (= Stage = Staging) 예시. Production은 false로 설정합니다.
 AI_CHAT_ENABLED=true
 AI_CHAT_API_KEY=<Environment-specific Partner Portal Token>
-AI_CHAT_SESSION_SECRET=<At least 32 bytes of random signing key>
 ```
 
 `AI_CHAT_API_KEY`는 서버 전용 비밀 환경변수로 등록합니다. 키 값은 1Password의 `corp-web-v2 AI Chat` 항목에서 가져오며, 코드, PR, 로그, 브라우저 응답에 포함하지 않습니다. `AI_CHAT_BASE_URL_PROD`와 `AI_CHAT_MODEL`은 Vercel 환경변수나 비밀정보가 아니라 서버 코드의 상수입니다.
@@ -42,13 +41,13 @@ Preview PR은 Preview 공통 범위의 `corp-web-v2-preview` token을 사용하�
 vercel env pull .env.vercel-development.local --environment=development
 ```
 
-그 다음 임시 파일의 `AI_CHAT_ENABLED`, `AI_CHAT_API_KEY`, `AI_CHAT_SESSION_SECRET`을 `.env.local`에 병합하고 임시 파일을 삭제합니다.
+그 다음 임시 파일의 `AI_CHAT_ENABLED`와 `AI_CHAT_API_KEY`만 `.env.local`에 병합하고 임시 파일을 삭제합니다.
 
 `.env.local`이 비어 있거나 새로 만드는 경우에는 곧바로 `.env.local`로 pull할 수 있습니다.
 
 ## Hermes 응답과 책임 경계
 
-- BFF는 제품 상담 역할, 최신 질문과 같은 언어 사용, 비밀정보와 시스템 지침 보호를 위한 3문장 system prompt와 현재 사용자 질문 하나를 Hermes Wrapper에 전달합니다. 이력은 검증된 `X-Hermes-Session-Id`의 Native DB에서 읽습니다.
+- BFF는 제품 상담 역할, 최신 질문과 같은 언어 사용, 비밀정보와 시스템 지침 보호를 위한 3문장 system prompt와 이번 요청에 담긴 현재 창의 최근 대화 최대 20개를 Hermes Wrapper에 전달합니다. Native DB 이력을 이어 읽는 `X-Hermes-Session-Id`와 장기 기억 범위를 지정하는 `X-Hermes-Session-Key`는 보내지 않습니다.
 - system prompt는 지식, 문서 검색, 답변 품질·형식·어조를 지시하지 않으며 BFF도 외부 문서를 조회하지 않습니다.
 - 답변의 지식, 문서 참조, 사실 정확성, 어조와 표현은 Hermes Agent 설정에 의존합니다.
 - 이 저장소는 답변의 품질·완전성·근거 충족 여부를 판정하지 않으며 `answered` 필드를 사용하지 않습니다.
@@ -57,32 +56,33 @@ vercel env pull .env.vercel-development.local --environment=development
 - UI는 답변의 문단·강조·글머리 목록·번호 목록·표·링크를 렌더링합니다. 임의 HTML은 텍스트로 표시하고 원격 이미지는 불러오지 않습니다. 사용자 메시지는 일반 텍스트로 유지합니다.
 - 표는 키보드로 접근할 수 있는 표 내부 가로 스크롤 영역에 표시하며 채팅창 전체의 가로 overflow를 만들지 않습니다.
 - 본문에 이미 표시된 URL은 참고 자료에서 반복하지 않고 별도로 남은 자료만 표시합니다. 본문과 참고 자료 모두 확인된 공개 URL의 언어 경로를 보존하며, 채팅 locale로 임의 변환하지 않습니다.
-- 표시할 대화와 서명된 토큰은 현재 탭의 sessionStorage에 저장합니다. 초기화 시 진행 중인 요청을 취소하고 대화·초안·토큰을 지웁니다. 토큰이 없는 예전 저장 이력은 새 Native 세션에 연결하지 않고 초안만 보존합니다.
+- 대화·초안·재시도할 요청 ID는 현재 탭의 sessionStorage에 저장합니다. 초기화 시 진행 중인 요청을 취소하고 대화·초안·요청 ID·Slack 스레드 연결값을 지웁니다.
 - 요청 실패 시 질문을 입력창에 복원합니다. 요청 중 페이지를 떠나면 저장된 초안을 다시 사용할 수 있습니다.
 - 서버 인스턴스당 분당 30회, 동시 3회의 제한이 Hermes 호출에 적용됩니다. 다중 인스턴스에 공유되는 사용량 제한은 아닙니다.
 
-## 대화 분리와 재시도
+## 요청 이력과 재시도
 
-대화 시작 API는 LLM을 호출하지 않고 무작위 ID와 HMAC 서명으로 만든 토큰을 발급합니다.
-서명은 `AI_CHAT_SESSION_SECRET`, 현재 origin과 배포 환경에 연결됩니다. 키는 최소 32바이트의
-난수로 생성하고 같은 환경의 모든 인스턴스·배포에서 유지합니다. 키를 바꾸면 기존 토큰은
-사용할 수 없으므로 기존 대화를 초기화해야 합니다. Portal API 키를 서명 키로 재사용하지 않습니다.
+이번 요청에 담긴 최근 대화가 후속 질문의 맥락입니다. 번호 선택이나 `가격은?` 같은 질문도
+현재 창의 최근 질문·답변과 함께 전달합니다. BFF에서 특정 제품을 단어 매칭으로 선택하거나
+서버 DB 이력을 보충하지 않으며, 현재 요청의 제품·업무 해석과 근거 조회는 Hermes가 담당합니다.
+별도의 세션 발급 API나 `AI_CHAT_SESSION_SECRET`은 사용하지 않습니다.
 
-브라우저는 첫 질문 전에 토큰을 저장하고, BFF는 검증한 토큰으로 Native ID를 결정해
-`X-Hermes-Session-Id`를 보냅니다. raw Native ID를 브라우저 입력으로 받지 않습니다.
-같은 첫 질문도 대화마다 다른 세션을 사용하고, Vercel 메모리에 별도 세션 mapping을 두지 않습니다.
-현재 Portal의 Native 헤더 중계 버전이 전제입니다. 세션 헤더가 없는 과거 방식으로 fallback하지 않습니다.
+질문별 무작위 UUID `turnId`를 요청 전에 저장합니다. TIMEOUT·네트워크 오류 뒤 같은 질문을
+재전송하면 같은 대화 내용과 같은 ID로 만든 `Idempotency-Key`를 사용해 진행 중인 실행에
+다시 연결하거나 완료 응답을 재사용합니다. Native의 중복 방지 캐시는 현재 같은 프로세스에서
+5분 유효하며 재시작·캐시 만료를 넘는 중복 실행 방지는 보장하지 않습니다.
+명시적으로 반환된 미완료·실패 응답, 질문·언어 변경과 초기화 이후의 새 질문은 새 turnId를 사용합니다.
+초기화 후 늦게 온 답변은 새 대화에 넣지 않습니다. 요청 ID가 없는 기존 브라우저 요청도
+받지만 해당 요청에는 중복 방지 헤더를 추가하지 않습니다.
 
-Native가 서버 DB를 이력의 기준으로 삼으므로 질문 API는 사용자 메시지 하나만 받습니다.
-페이지 이동·언어 변경은 같은 토큰을 유지하고, 초기화는 토큰을 버립니다. 새 탭에서 기존
-sessionStorage를 복사해 연 경우 같은 대화를 이어갈 수 있으므로 독립 대화는 초기화로 구분합니다.
-
-질문별 `turnId`를 요청 전에 저장합니다. TIMEOUT·네트워크 오류 뒤 같은 질문을 재전송하면
-같은 ID로 만든 `Idempotency-Key`를 사용해 진행 중인 실행에 다시 연결하거나 완료 응답을
-재사용합니다. Native의 중복 방지 캐시는 현재 프로세스 내부·5분 유효이므로 재시작·캐시 만료를
-넘는 exactly-once 보장은 아닙니다. 명시적으로 반환된 미완료·실패 응답은 새 turnId로 재시도합니다.
-초기화 후 늦게 온 답변은 새 대화에 넣지 않으며, backend에서 이전 실행이 계속되더라도
-새 대화의 세션 lock이나 이력에는 연결되지 않습니다.
+**남는 Native 제약:** 운영 고정 버전 `345cd2b057a452236de401d3534b8502a7465e8d`에서
+세션 헤더가 없는 Chat 요청은 system prompt와 첫 사용자 메시지로 실행 ID를 만듭니다.
+동일한 첫 질문은 같은 ID를 사용합니다. 대기 없이 실행하면 본문의 이력을 사용하지만,
+같은 ID의 다른 실행을 기다린 경우 Native lease 처리에서 DB의 최신 이력으로 바꿉니다.
+이번 홈페이지 변경은 명시적 세션 헤더로 매번 누적 이력을 읽는 설계를 제거하고 같은 요청의
+재시도를 중복 실행하지 않도록 합니다. 서로 다른 대화의 동일 첫 질문 충돌이나 대기 후 DB 이력
+재조회까지 제거하는 변경은 포함하지 않습니다. 이를 완전히 막으려면 Native의 이력·실행 ID
+계약을 별도로 변경해야 합니다. 서버에 기록이 저장되지 않는다는 보장도 아닙니다.
 
 ## Slack 대화 알림
 
@@ -115,7 +115,7 @@ npm run build
 npm run typecheck
 ```
 
-홈페이지는 모델·현재 메시지와 세션/중복 방지 헤더만 전송합니다. 생성 옵션과 실제 모델
+홈페이지는 모델·현재 요청의 최근 메시지와 중복 방지 헤더만 전송합니다. 생성 옵션과 실제 모델
 선택은 Portal/Hermes가 관리합니다. 공개 연결 상태 테스트는 요청마다 별도 Native 세션을 씁니다.
 
 배포 검증은 다음 순서로 진행합니다.

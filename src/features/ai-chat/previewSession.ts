@@ -1,5 +1,5 @@
 import { isLocale, type Locale } from "@/constants/i18n";
-import { MAX_CHAT_MESSAGES, isChatSourceUrl, isSlackThreadToken, isConversationToken, isChatTurnId, type ChatMessage, type ChatSource } from "./types";
+import { MAX_CHAT_MESSAGES, isChatSourceUrl, isSlackThreadToken, isChatTurnId, type ChatMessage, type ChatSource } from "./types";
 
 const STORAGE_KEY = "querypie-ai-chat:v1";
 export const MAX_MESSAGE_LENGTH = 2000;
@@ -7,20 +7,18 @@ export const MAX_PREVIEW_MESSAGES = MAX_CHAT_MESSAGES;
 
 export type PreviewMessage = ChatMessage;
 export type PreviewSession = {
-  draft: string; messages: PreviewMessage[]; slackThreadToken?: string; conversationToken?: string;
+  draft: string; messages: PreviewMessage[]; slackThreadToken?: string;
   pendingTurn?: { id: string; text: string; locale: Locale };
 };
 
-// Messages restore this tab's display; Hermes owns the conversation history.
+// Only this tab's recent messages are sent as context for the current request.
 // A pending turn survives navigation so a retry keeps its idempotency key.
 export function readPreviewSession(): PreviewSession {
   try {
     const value: unknown = JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? "null");
     if (value && typeof value === "object" && "draft" in value && "messages" in value) {
-      const session = value as { draft?: unknown; messages?: unknown; slackThreadToken?: unknown; conversationToken?: unknown; pendingTurn?: unknown };
+      const session = value as { draft?: unknown; messages?: unknown; slackThreadToken?: unknown; pendingTurn?: unknown };
       const draft = typeof value.draft === "string" ? value.draft.slice(0, MAX_MESSAGE_LENGTH) : "";
-      // Legacy histories have no independently addressable Native session.
-      if (!isConversationToken(session.conversationToken)) return { draft, messages: [] };
       const messages = Array.isArray(value.messages)
         ? value.messages.filter((message): message is PreviewMessage =>
           message !== null && typeof message === "object" && typeof message.id === "string" &&
@@ -37,7 +35,7 @@ export function readPreviewSession(): PreviewSession {
           ).slice(0, 8) : [],
         }))
         : [];
-      const restored: PreviewSession = { draft, messages, conversationToken: session.conversationToken };
+      const restored: PreviewSession = { draft, messages };
       if (isSlackThreadToken(session.slackThreadToken)) restored.slackThreadToken = session.slackThreadToken;
       const pending = session.pendingTurn as Partial<NonNullable<PreviewSession["pendingTurn"]>> | undefined;
       if (pending && isChatTurnId(pending.id) && typeof pending.text === "string" && pending.text.length > 0 &&

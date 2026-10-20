@@ -177,7 +177,6 @@ BFF 응답은 `answer`, `sources`, 선택적인 `slackThreadToken`으로 구성�
 |-----------|------|
 | `AI_CHAT_ENABLED` | `true`로 챗봇 활성화 |
 | `AI_CHAT_API_KEY` | 환경별 Partner Portal token, Vercel의 서버 전용 비밀 환경변수 |
-| `AI_CHAT_SESSION_SECRET` | 32바이트 이상 난수로 만든 대화 토큰 서명 키. 같은 환경의 서버 인스턴스에서 동일하게 설정 |
 
 API 주소와 모델은 서버 전용 `src/features/ai/config.server.ts`의 이름 있는 상수로 고정합니다.
 
@@ -188,7 +187,7 @@ API 주소와 모델은 서버 전용 `src/features/ai/config.server.ts`의 이�
 
 브라우저는 `/api/ai-chat`에 질문을 보내고 Hermes 답변과 응답에 포함된 링크를 받습니다. Partner Portal Wrapper의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
 
-새 대화는 `POST /api/ai-chat/session`에서 서명된 토큰을 받은 뒤 시작합니다. 후속 요청은 같은 토큰과 현재 질문만 보내며 Hermes DB가 이력을 관리합니다. 초기화하면 새 토큰을 사용합니다. 서명 키는 모델 호출 전 발급 단계에서 필요하며, 대화 토큰·Native 세션 ID는 로그에 기록하지 않습니다. 재시도 중복 방지는 Hermes의 `Idempotency-Key` 캐시 범위(현재 같은 프로세스에서 5분)에 적용되며 재시작을 넘는 보장은 아닙니다.
+현재 창의 최근 대화 최대 20개를 요청에 담아 보내며, 서버 DB의 누적 이력을 불러오는 `X-Hermes-Session-Id`는 보내지 않습니다. 질문별 `turnId`를 저장해 타임아웃·네트워크 오류 뒤 같은 요청을 재전송하면 `Idempotency-Key`로 기존 실행에 다시 연결합니다. 별도의 세션 발급 API나 `AI_CHAT_SESSION_SECRET` 설정은 필요하지 않습니다. Native의 동일 첫 질문 ID 공유와 동시 실행 대기 후 DB 이력 재조회는 남는 한계이며 [검증 문서](docs/reference/ai-product-chat-test.md#요청-이력과-재시도)를 따릅니다.
 
 환경은 Development, Preview(= Stage = Staging), Production 세 가지로 구분합니다. 모든 환경은 외부에서 접근 가능한 Production Partner Portal URL을 사용하되, token은 Partner Portal에서 환경별로 발급한 값을 사용합니다. Dev Partner Portal URL은 외부 인터넷에서 접근할 수 없으므로 Vercel upstream으로 사용하지 않습니다. `AI_CHAT_BASE_URL_PROD`와 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
 
@@ -207,7 +206,7 @@ Development는 로컬 pull을 위해 `encrypted`로 등록합니다. Vercel은 D
 vercel env pull .env.vercel-development.local --environment=development
 ```
 
-그 다음 임시 파일의 `AI_CHAT_ENABLED`, `AI_CHAT_API_KEY`, `AI_CHAT_SESSION_SECRET`을 `.env.local`에 병합하고 임시 파일을 삭제합니다.
+그 다음 임시 파일의 `AI_CHAT_ENABLED`와 `AI_CHAT_API_KEY`만 `.env.local`에 병합하고 임시 파일을 삭제합니다.
 
 `.env.local`이 비어 있거나 새로 만드는 경우에는 `vercel env pull .env.local --environment=development`를 사용할 수 있습니다.
 

@@ -1,8 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { MAX_MESSAGE_LENGTH, MAX_PREVIEW_MESSAGES, readPreviewSession, savePreviewSession } from "./previewSession";
 
-const conversationToken = `v1.11111111-1111-4111-8111-111111111111.${"a".repeat(43)}`;
-
 describe("AI 상담 미리보기 세션", () => {
   beforeEach(() => sessionStorage.clear());
   afterEach(() => vi.restoreAllMocks());
@@ -17,7 +15,6 @@ describe("AI 상담 미리보기 세션", () => {
       draft: "x".repeat(MAX_MESSAGE_LENGTH + 1),
       messages: [null, { text: "bad locale", locale: "fr" }, ...Array.from({ length: 25 }, (_, i) => ({ id: String(i), role: "user", text: `message ${i}`, locale: "ko" }))],
       slackThreadToken: "thread-token-1",
-      conversationToken,
     }));
     const session = readPreviewSession();
     expect(session.draft).toHaveLength(MAX_MESSAGE_LENGTH);
@@ -34,14 +31,13 @@ describe("AI 상담 미리보기 세션", () => {
     }));
     expect(readPreviewSession()).toEqual({ draft: "", messages: [] });
 
-    savePreviewSession({ draft: "질문", messages: [], conversationToken, slackThreadToken: "thread-token-2" });
-    expect(readPreviewSession()).toEqual({ draft: "질문", messages: [], conversationToken, slackThreadToken: "thread-token-2" });
+    savePreviewSession({ draft: "질문", messages: [], slackThreadToken: "thread-token-2" });
+    expect(readPreviewSession()).toEqual({ draft: "질문", messages: [], slackThreadToken: "thread-token-2" });
   });
 
   it("이전 세션의 answered 품질 판정값을 복원하지 않는다", () => {
     sessionStorage.setItem("querypie-ai-chat:v1", JSON.stringify({
       draft: "",
-      conversationToken,
       messages: [{
         id: "assistant-1",
         role: "assistant",
@@ -61,17 +57,19 @@ describe("AI 상담 미리보기 세션", () => {
     }]);
   });
 
-  it("예전 공유 세션의 이력을 새 대화에 연결하지 않고 초안만 보존한다", () => {
+  it("현재 탭의 최근 대화와 초안을 세션 토큰 없이 복원한다", () => {
     sessionStorage.setItem("querypie-ai-chat:v1", JSON.stringify({ draft: "새 질문", messages: [{
-      id: "old", role: "assistant", text: "공유된 과거 답변", locale: "ko",
+      id: "old", role: "assistant", text: "현재 창의 이전 답변", locale: "ko",
     }], slackThreadToken: "old-thread" }));
-    expect(readPreviewSession()).toEqual({ draft: "새 질문", messages: [] });
+    expect(readPreviewSession()).toEqual({ draft: "새 질문", slackThreadToken: "old-thread", messages: [{
+      id: "old", role: "assistant", text: "현재 창의 이전 답변", locale: "ko", sources: [],
+    }] });
   });
 
   it("타임아웃·페이지 이동 뒤 재시도할 요청 ID를 복원한다", () => {
     const pendingTurn = { id: "11111111-1111-4111-8111-111111111111", text: "DLP 기능", locale: "ko" as const };
-    savePreviewSession({ draft: pendingTurn.text, messages: [], conversationToken, pendingTurn });
-    expect(readPreviewSession()).toEqual({ draft: pendingTurn.text, messages: [], conversationToken, pendingTurn });
+    savePreviewSession({ draft: pendingTurn.text, messages: [], pendingTurn });
+    expect(readPreviewSession()).toEqual({ draft: pendingTurn.text, messages: [], pendingTurn });
   });
 
   it("브라우저가 저장소 접근을 차단해도 예외를 전파하지 않는다", () => {

@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import type { Locale } from "@/constants/i18n";
 import { findHermesLinks } from "@/features/ai-chat/markdown";
 import { aiChatCopy } from "@/copy/aiChat";
-import { isChatReply, isSlackThreadToken, isConversationToken, type ChatMessage } from "@/features/ai-chat/types";
+import { isChatReply, isSlackThreadToken, type ChatMessage } from "@/features/ai-chat/types";
 import {
   MAX_MESSAGE_LENGTH,
   MAX_PREVIEW_MESSAGES,
@@ -104,7 +104,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
     const userMessage: ChatMessage = { id: `${pendingTurn.id}-user`, role: "user", text, locale };
     const messages = [...session.messages, userMessage].slice(-MAX_PREVIEW_MESSAGES);
     let currentSession: PreviewSession = { ...session, draft: text, pendingTurn };
-    // Persist before both calls. Navigation/retry must keep the same turn identity.
+    // Persist before the call. Navigation/retry must keep the same turn identity and context.
     savePreviewSession(currentSession);
     setSession({ ...currentSession, draft: "", messages });
     setPending(true);
@@ -112,25 +112,12 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
     const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(60000)]);
     let nextSlackThreadToken: string | undefined;
     try {
-      if (!currentSession.conversationToken) {
-        const response = await fetch("/api/ai-chat/session", { method: "POST", signal });
-        const result: unknown = await response.json();
-        if (generation !== generationRef.current) return;
-        if (!response.ok || !result || typeof result !== "object" || !("conversationToken" in result) ||
-          !isConversationToken(result.conversationToken)) {
-          throw new Error(response.status === 503 ? "unavailable" : "error");
-        }
-        currentSession = { ...currentSession, conversationToken: result.conversationToken };
-        savePreviewSession(currentSession);
-      }
-      setSession({ ...currentSession, draft: "", messages });
       const response = await fetch("/api/ai-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           locale,
-          messages: [{ role: "user", content: text }],
-          conversationToken: currentSession.conversationToken,
+          messages: messages.map((message) => ({ role: message.role, content: message.text })),
           turnId: pendingTurn.id,
           ...(currentSession.slackThreadToken ? { slackThreadToken: currentSession.slackThreadToken } : {}),
         }),
@@ -149,7 +136,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
         throw new Error(code === "NOT_CONFIGURED" ? "unavailable" : code === "INCOMPLETE_RESPONSE" ? "incomplete" : "error");
       }
       setSession({
-        draft: "", conversationToken: currentSession.conversationToken,
+        draft: "",
         ...(nextSlackThreadToken ? { slackThreadToken: nextSlackThreadToken } : currentSession.slackThreadToken ? { slackThreadToken: currentSession.slackThreadToken } : {}),
         messages: [...messages, {
           id: `${pendingTurn.id}-assistant`, role: "assistant" as const,

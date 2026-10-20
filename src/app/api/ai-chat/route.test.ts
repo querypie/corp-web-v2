@@ -11,21 +11,16 @@ vi.mock("@/features/ai-chat/answer.server", () => ({
 import { answerProductQuestion, ChatServiceError } from "@/features/ai-chat/answer.server";
 import { POST } from "./route";
 import { notifyAiChatTurn } from "@/features/ai-chat/slack.server";
-import { createConversationToken, resolveConversationId } from "@/features/ai-chat/conversation.server";
 
 const payload = { locale: "ko", messages: [{ role: "user", content: "AIP 설명해줘" }] };
 const turnId = "11111111-1111-4111-8111-111111111111";
-const origin = "http://localhost:3000";
-let conversationToken: string;
 const request = (body: unknown = payload, origin?: string) => new Request("http://localhost:3000/api/ai-chat", {
   method: "POST", headers: { "Content-Type": "application/json", ...(origin ? { Origin: origin } : {}) },
-  body: JSON.stringify(body && typeof body === "object" ? { conversationToken, turnId, ...body } : body),
+  body: JSON.stringify(body && typeof body === "object" ? { turnId, ...body } : body),
 });
 beforeEach(() => {
   vi.stubEnv("AI_CHAT_ENABLED", "true");
   vi.stubEnv("VERCEL_TARGET_ENV", undefined);
-  vi.stubEnv("AI_CHAT_SESSION_SECRET", "test-signing-key-with-at-least-32-bytes");
-  conversationToken = createConversationToken(origin);
   vi.mocked(answerProductQuestion).mockReset();
   vi.mocked(notifyAiChatTurn).mockReset();
   vi.mocked(notifyAiChatTurn).mockResolvedValue(undefined);
@@ -35,7 +30,6 @@ afterEach(() => { vi.unstubAllEnvs(); vi.restoreAllMocks(); });
 describe("제품 상담 API", () => {
   it("Preview에서도 브라우저용 모델 요청을 준비하지 않고 서버 답변만 반환한다", async () => {
     vi.stubEnv("VERCEL_TARGET_ENV", "preview");
-    conversationToken = createConversationToken(origin);
     vi.stubEnv("AI_CHAT_BASE_URL", "https://old.example/v1");
     vi.stubEnv("AI_CHAT_MODEL", "old-model");
     vi.stubEnv("AI_CHAT_API_KEY", "stage-secret");
@@ -78,43 +72,43 @@ describe("제품 상담 API", () => {
     expect(result.headers.get("cache-control")).toBe("no-store");
     expect(await result.json()).toEqual(reply);
   });
-  it("현재 질문만 검증된 세션·요청 ID와 함께 Hermes에 전달한다", async () => {
-    const messages = [{ role: "user", content: "최신 질문" }];
+  it("현재 요청에 담긴 최대 20개 메시지를 모두 Hermes에 전달한다", async () => {
+    const messages = Array.from({ length: 20 }, (_, index) => ({
+      role: index === 19 || index % 2 === 0 ? "user" as const : "assistant" as const,
+      content: index === 19 ? "최신 질문" : "x".repeat(6000),
+    }));
     vi.mocked(answerProductQuestion).mockResolvedValue({ answer: "Hermes 답변", sources: [] });
 
     const result = await POST(request({ locale: "ko", messages }));
 
     expect(result.status).toBe(200);
-    expect(answerProductQuestion).toHaveBeenCalledWith(messages, "ko", expect.any(AbortSignal), {
-      sessionId: resolveConversationId(conversationToken, origin), turnId,
-    });
+    expect(answerProductQuestion).toHaveBeenCalledWith(messages, "ko", expect.any(AbortSignal), turnId);
   });
-  it("서버 이력과 충돌할 수 있는 클라이언트 과거 이력은 거부한다", async () => {
-    const messages = [{ role: "user", content: "과거 질문" }, { role: "assistant", content: "과거 답변" }, ...payload.messages];
+  it("열린 대화 상한을 넘는 21개 메시지는 거부한다", async () => {
+    const messages = Array.from({ length: 21 }, (_, index) => ({ role: "user", content: `질문 ${index}` }));
     expect((await POST(request({ locale: "ko", messages }))).status).toBe(400);
     expect(answerProductQuestion).not.toHaveBeenCalled();
   });
   it.each([
-    { conversationToken: undefined }, { conversationToken: "api-other-session" },
-    { turnId: undefined }, { turnId: "invalid\r\nheader" },
-  ])("검증되지 않은 세션·요청 ID를 거부한다: %j", async (fields) => {
+    { turnId: null }, { turnId: "invalid\r\nheader" }, { turnId: 123 },
+  ])("잘못된 요청 ID를 거부한다: %j", async (fields) => {
     expect((await POST(request({ ...payload, ...fields }))).status).toBe(400);
     expect(answerProductQuestion).not.toHaveBeenCalled();
   });
-  it("같은 질문의 독립 대화를 동시에 다른 세션으로 전달하고 후속은 해당 세션을 유지한다", async () => {
+  it("요청 ID가 없는 기존 브라우저도 현재 요청의 대화를 전달할 수 있다", async () => {
+    vi.mocked(answerProductQuestion).mockResolvedValue({ answer: "답변", sources: [] });
+    expect((await POST(request({ ...payload, turnId: undefined }))).status).toBe(200);
+    expect(answerProductQuestion).toHaveBeenCalledWith(payload.messages, "ko", expect.any(AbortSignal), undefined);
+  });
+  it("번호 후속 질문은 이번 요청의 선택지와 함께 전달한다", async () => {
     vi.mocked(answerProductQuestion).mockResolvedValue({ answer: "두 선택지", sources: [] });
-    const a = conversationToken;
-    const b = createConversationToken(origin);
-    const first = await Promise.all([
-      POST(request({ ...payload, conversationToken: a })),
-      POST(request({ ...payload, conversationToken: b })),
-    ]);
-    expect(first.map((response) => response.status)).toEqual([200, 200]);
-    const identities = vi.mocked(answerProductQuestion).mock.calls.map((call) => call[3]);
-    expect(identities[0].sessionId).not.toBe(identities[1].sessionId);
-    await POST(request({ ...payload, conversationToken: a, messages: [{ role: "user", content: "1" }] }));
-    expect(vi.mocked(answerProductQuestion).mock.calls[2][3].sessionId).toBe(identities[0].sessionId);
-    expect(vi.mocked(answerProductQuestion).mock.calls[2][0]).toEqual([{ role: "user", content: "1" }]);
+    const messages = [
+      { role: "user", content: "DLP 기능 알려줘" },
+      { role: "assistant", content: "1. AIP Enterprise DLP 2. SLM-based DLP" },
+      { role: "user", content: "1" },
+    ];
+    expect((await POST(request({ ...payload, messages }))).status).toBe(200);
+    expect(vi.mocked(answerProductQuestion).mock.calls[0][0]).toEqual(messages);
   });
   it("서버 주소나 인증 정보가 포함된 오류 원문을 노출하지 않는다", async () => {
     vi.mocked(answerProductQuestion).mockRejectedValue(new Error("private upstream details"));
@@ -127,7 +121,9 @@ describe("제품 상담 API", () => {
     const reply = { answer: "후속 답변", sources: [] };
     vi.mocked(answerProductQuestion).mockResolvedValue(reply);
     vi.mocked(notifyAiChatTurn).mockResolvedValue("signed-thread");
-    const result = await POST(request({ ...payload, slackThreadToken: "signed-thread" }));
+    const result = await POST(request({ ...payload, slackThreadToken: "signed-thread", messages: [
+      { role: "user", content: "이전 질문" }, { role: "assistant", content: "이전 답변" }, ...payload.messages,
+    ] }));
     expect(notifyAiChatTurn).toHaveBeenCalledExactlyOnceWith({ locale: "ko", question: "AIP 설명해줘", outcome: reply, slackThreadToken: "signed-thread", upstreamDurationMs: expect.any(Number) });
     expect(await result.json()).toEqual({ ...reply, slackThreadToken: "signed-thread" });
   });
