@@ -17,11 +17,12 @@ try {
       let chatRequests = 0;
       const errors = [];
       page.on("pageerror", (error) => errors.push(error.message));
-      await page.route("**/api/ai-chat", async (route) => { chatRequests++; await route.abort(); });
+      await page.route("**/api/ai-chat{,/**}", async (route) => { chatRequests++; await route.abort(); });
       await page.addInitScript(({ locale }) => {
         document.cookie = "cookie-preference-set=1; path=/";
         const url = "https://www.querypie.com/en/plans/aip";
-        sessionStorage.setItem("querypie-ai-chat:v1", JSON.stringify({ draft: "", messages: [
+        const conversationToken = `v1.11111111-1111-4111-8111-111111111111.${"a".repeat(43)}`;
+        sessionStorage.setItem("querypie-ai-chat:v1", JSON.stringify({ draft: "", conversationToken, messages: [
           { id: "fixture-user", role: "user", locale, text: "**比較** / 플랜 비교 / Compare plans" },
           { id: "fixture-answer", role: "assistant", locale, text: [
             "**플랜 비교 · プラン比較 · Plan comparison**",

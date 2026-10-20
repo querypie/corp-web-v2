@@ -6,12 +6,13 @@ import Button from "@/components/ui/Button";
 import type { Locale } from "@/constants/i18n";
 import { findHermesLinks } from "@/features/ai-chat/markdown";
 import { aiChatCopy } from "@/copy/aiChat";
-import { isChatReply, isSlackThreadToken, type ChatMessage } from "@/features/ai-chat/types";
+import { isChatReply, isSlackThreadToken, isConversationToken, type ChatMessage } from "@/features/ai-chat/types";
 import {
   MAX_MESSAGE_LENGTH,
   MAX_PREVIEW_MESSAGES,
   readPreviewSession,
   savePreviewSession,
+  type PreviewSession,
 } from "@/features/ai-chat/previewSession";
 import HermesAnswer from "./HermesAnswer";
 import styles from "./AiChat.module.css";
@@ -98,23 +99,40 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
     const generation = ++generationRef.current;
     const controller = new AbortController();
     requestRef.current = controller;
-    const userMessage: ChatMessage = { id: `${Date.now()}-${generation}-user`, role: "user", text, locale };
+    const pendingTurn = session.pendingTurn?.text === text && session.pendingTurn.locale === locale
+      ? session.pendingTurn : { id: crypto.randomUUID(), text, locale };
+    const userMessage: ChatMessage = { id: `${pendingTurn.id}-user`, role: "user", text, locale };
     const messages = [...session.messages, userMessage].slice(-MAX_PREVIEW_MESSAGES);
-    // If navigation interrupts the request, restore the draft rather than an orphaned turn.
-    savePreviewSession({ ...session, draft: text });
-    setSession({ draft: "", messages, ...(session.slackThreadToken ? { slackThreadToken: session.slackThreadToken } : {}) });
+    let currentSession: PreviewSession = { ...session, draft: text, pendingTurn };
+    // Persist before both calls. Navigation/retry must keep the same turn identity.
+    savePreviewSession(currentSession);
+    setSession({ ...currentSession, draft: "", messages });
     setPending(true);
     setError(null);
     const signal = AbortSignal.any([controller.signal, AbortSignal.timeout(60000)]);
     let nextSlackThreadToken: string | undefined;
     try {
+      if (!currentSession.conversationToken) {
+        const response = await fetch("/api/ai-chat/session", { method: "POST", signal });
+        const result: unknown = await response.json();
+        if (generation !== generationRef.current) return;
+        if (!response.ok || !result || typeof result !== "object" || !("conversationToken" in result) ||
+          !isConversationToken(result.conversationToken)) {
+          throw new Error(response.status === 503 ? "unavailable" : "error");
+        }
+        currentSession = { ...currentSession, conversationToken: result.conversationToken };
+        savePreviewSession(currentSession);
+      }
+      setSession({ ...currentSession, draft: "", messages });
       const response = await fetch("/api/ai-chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           locale,
-          messages: messages.map((message) => ({ role: message.role, content: message.text })),
-          ...(session.slackThreadToken ? { slackThreadToken: session.slackThreadToken } : {}),
+          messages: [{ role: "user", content: text }],
+          conversationToken: currentSession.conversationToken,
+          turnId: pendingTurn.id,
+          ...(currentSession.slackThreadToken ? { slackThreadToken: currentSession.slackThreadToken } : {}),
         }),
         signal,
       });
@@ -123,25 +141,28 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
       nextSlackThreadToken = extractSlackThreadToken(result);
       if (!response.ok || !isChatReply(result)) {
         const code = result && typeof result === "object" && "code" in result ? result.code : null;
+        // An explicit failed/partial result is terminal; retry it as a new turn.
+        // Timeouts/network failures keep their identity to rejoin the Native run.
+        if (response.ok || ["INCOMPLETE_RESPONSE", "PROVIDER_ERROR", "INVALID_RESPONSE"].includes(String(code))) {
+          currentSession = { ...currentSession, pendingTurn: undefined };
+        }
         throw new Error(code === "NOT_CONFIGURED" ? "unavailable" : code === "INCOMPLETE_RESPONSE" ? "incomplete" : "error");
       }
-      setSession((current) => ({
-        ...current,
-        ...(nextSlackThreadToken ? { slackThreadToken: nextSlackThreadToken } : {}),
-        messages: [...current.messages, {
-          id: `${Date.now()}-${generation}-assistant`, role: "assistant" as const,
+      setSession({
+        draft: "", conversationToken: currentSession.conversationToken,
+        ...(nextSlackThreadToken ? { slackThreadToken: nextSlackThreadToken } : currentSession.slackThreadToken ? { slackThreadToken: currentSession.slackThreadToken } : {}),
+        messages: [...messages, {
+          id: `${pendingTurn.id}-assistant`, role: "assistant" as const,
           text: result.answer, locale, sources: result.sources,
         }].slice(-MAX_PREVIEW_MESSAGES),
-      }));
+      });
     } catch (cause) {
       if (generation !== generationRef.current) return;
       setError(cause instanceof Error && cause.message === "unavailable" ? "unavailable"
         : cause instanceof Error && cause.message === "incomplete" ? "incomplete" : "error");
-      setSession((current) => ({
-        draft: text,
-        messages: current.messages.filter((message) => message.id !== userMessage.id),
-        ...(nextSlackThreadToken ? { slackThreadToken: nextSlackThreadToken } : current.slackThreadToken ? { slackThreadToken: current.slackThreadToken } : {}),
-      }));
+      setSession({ ...currentSession,
+        ...(nextSlackThreadToken ? { slackThreadToken: nextSlackThreadToken } : {}),
+      });
     } finally {
       if (generation === generationRef.current) {
         requestRef.current = null;

@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { isLocale } from "@/constants/i18n";
 import { getAiChatConfig } from "@/features/ai/config.server";
 import { answerProductQuestion, ChatServiceError } from "@/features/ai-chat/answer.server";
-import { MAX_CHAT_MESSAGES, MAX_CHAT_REQUEST_BYTES, type ChatTurn } from "@/features/ai-chat/types";
+import { MAX_CHAT_REQUEST_BYTES, isChatTurnId, type ChatTurn } from "@/features/ai-chat/types";
 import { notifyAiChatTurn } from "@/features/ai-chat/slack.server";
+import { resolveConversationId } from "@/features/ai-chat/conversation.server";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -39,11 +40,17 @@ export async function POST(request: Request) {
   let payload: unknown;
   try { payload = await readPayload(request); } catch { return error("INVALID_REQUEST", 400); }
   if (!payload || typeof payload !== "object") return error("INVALID_REQUEST", 400);
-  const { locale, messages, slackThreadToken } = payload as { locale?: unknown; messages?: unknown; slackThreadToken?: unknown };
-  if (typeof locale !== "string" || !isLocale(locale) || !Array.isArray(messages) || !messages.length || messages.length > MAX_CHAT_MESSAGES ||
+  const { locale, messages, slackThreadToken, conversationToken, turnId } = payload as {
+    locale?: unknown; messages?: unknown; slackThreadToken?: unknown; conversationToken?: unknown; turnId?: unknown;
+  };
+  if (typeof locale !== "string" || !isLocale(locale) || !isChatTurnId(turnId) || !Array.isArray(messages) || messages.length !== 1 ||
       !messages.every((message) => message && (message.role === "user" || message.role === "assistant") &&
         typeof message.content === "string" && message.content.trim().length > 0 && message.content.length <= 6000) ||
       messages.at(-1).role !== "user" || messages.at(-1).content.length > 2000) return error("INVALID_REQUEST", 400);
+  let sessionId: string | undefined;
+  try { sessionId = resolveConversationId(conversationToken, new URL(request.url).origin); }
+  catch { return error("NOT_CONFIGURED", 503); }
+  if (!sessionId) return error("INVALID_REQUEST", 400);
 
   // Small single-instance budget for internal testing, not a production rate limiter.
   const now = Date.now();
@@ -55,7 +62,8 @@ export async function POST(request: Request) {
     notifyAiChatTurn({ locale, question: messages.at(-1).content, outcome, slackThreadToken, upstreamDurationMs }).catch(() => undefined);
   const upstreamStarted = performance.now();
   try {
-    const reply = await answerProductQuestion(messages as ChatTurn[], locale, AbortSignal.any([request.signal, AbortSignal.timeout(55000)]));
+    const reply = await answerProductQuestion(messages as ChatTurn[], locale,
+      AbortSignal.any([request.signal, AbortSignal.timeout(55000)]), { sessionId, turnId });
     const token = await notify(reply, performance.now() - upstreamStarted);
     return NextResponse.json({ ...reply, ...(token ? { slackThreadToken: token } : {}) }, { headers: { "Cache-Control": "no-store" } });
   } catch (cause) {

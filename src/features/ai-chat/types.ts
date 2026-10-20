@@ -13,6 +13,17 @@ export type ChatMessage = {
 };
 export type ChatReply = { answer: string; sources: ChatSource[]; slackThreadToken?: string };
 export type ChatTurn = { role: "user" | "assistant"; content: string };
+export type ChatRequestIdentity = { sessionId: string; turnId: string };
+
+export function isChatTurnId(value: unknown): value is string {
+  return typeof value === "string" && /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/.test(value);
+}
+
+export function isConversationToken(value: unknown): value is string {
+  if (typeof value !== "string") return false;
+  const parts = value.split(".");
+  return parts.length === 3 && parts[0] === "v1" && isChatTurnId(parts[1]) && /^[\w-]{43}$/.test(parts[2]);
+}
 
 export function isChatSourceUrl(value: string) {
   try {
