@@ -1,5 +1,13 @@
 # corp-web-v2
 
+QueryPie 공식 웹사이트의 현재 운영 저장소입니다.
+
+기존 [corp-web-app](https://github.com/querypie/corp-web-app)에서 이 저장소로 이전이 완료되었습니다.
+웹사이트 기능 개발, 오류 수정, 콘텐츠 추가·수정 및 PR은 모두 이 저장소에서 진행합니다.
+
+- 운영 사이트: https://www.querypie.com
+- 이전 저장소: [corp-web-app](https://github.com/querypie/corp-web-app) — 과거 코드와 변경 이력 보관용
+
 ## 프로젝트 개요
 
 - QueryPie 회사 홍보·소개 웹사이트
