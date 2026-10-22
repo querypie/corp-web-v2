@@ -650,6 +650,12 @@ textarea:-webkit-autofill:focus {
     white-space: normal;
   }
 
+  .rich-content .content-footnote {
+    color: var(--color-content-image-caption-fg);
+    font-size: 13px;
+    line-height: 20px;
+  }
+
   .rich-content :not(pre) > code {
     border-radius: 6px;
     background: var(--color-bg-content);
