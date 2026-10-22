@@ -1,181 +1,281 @@
-## Article 1 (Purpose)
+## 第1条（目的および適用範囲）
 
-These Terms of Use(hereinafter referred to as “Terms”) are intended to establish the basic matters regarding rights, obligations, and responsibilities between QueryPie Inc. (hereinafter referred to as “Company”) as the service provider and users in relation to the use of QueryPie AIP (hereinafter referred to as “Service”).
+1. 本利用規約（以下「本規約」といいます。）は、QueryPie AI（以下「当社」といいます。）が提供するQueryPie AIP、インストール型ソフトウェア（Aruを含みます。）ならびに関連するウェブサイト、アプリケーション、ソフトウェア、モデル、エージェント、ツールおよび機能へのアクセスおよびその利用について定めるものです。
 
-## Article 2 (Definitions)
+2. 本規約は、個人の利用者、無料サービスの利用者、および別途のエンタープライズ契約に基づかずに対象サービスを利用する企業または組織の利用者に適用されます。
 
-The definitions of key terms used in these Terms are as follows:
+3. 顧客または組織が、別途締結したエンタープライズ契約、エンドユーザーライセンス契約、注文書その他の書面による契約（以下「エンタープライズ契約」といいます。）に基づいてサービスを利用する場合、当該エンタープライズ契約の対象サービスについては、当該契約が適用され、本規約に優先します。本規約は、当該エンタープライズ契約の対象とならない事項またはサービスについてのみ適用されます。
 
-- **Service**: Refers to the “QueryPie AIP” service provided by the Company, which is a platform that includes MCP server integration, AI agent creation, and LLM chat functions.
-- **User (Member)**: Refers to an individual who agrees to these Terms and joins and uses the Service according to the prescribed procedures. The Service is intended only for individual users, and companies or organizations cannot join as users unless there is a separate contract.
-- **External Service**: Refers to third-party services and tools that users can integrate with this Service, such as GitHub, AWS, Slack, etc.
-- **MCP Server**: Refers to an external server that supports the Model Context Protocol, which is a platform that allows AI agents to connect with various external tools. This Service provides integration functions with such MCP servers through various authentication methods.
-- **User Content**: Collectively refers to all data and information that users create or input while using the Service (e.g., prompts entered in chat, uploaded materials, etc.) and the output results from the Service.
+4. 本規約は、適用される消費者保護、プライバシー、労働その他の法令に基づく強行法規上の権利を排除するものではありません。
 
-## Article 3 (Publication and Amendment of Terms)
+## 第2条（定義）
 
-1. The Company shall post these Terms on the initial service screen (front page) of the Service so that members can easily access them. However, the Company may make the Terms available for members to view through a linked page.
-2. The Company may revise these Terms within the scope that does not violate related laws such as the “Act on the Consumer Protection in Electronic Commerce”, “Act on the Regulation of Terms and Conditions”, “Framework Act on Electronic Documents and Transactions”, “Electronic Financial Transactions Act”, “Digital Signature Act”, “Act on Promotion of Information and Communications Network Utilization and Information Protection”, “Act on Door-to-Door Sales”, and “Framework Act on Consumers”.
-3. When the Company revises these Terms, it will announce the application date and reasons for revision along with the current Terms on the Company’s initial screen from 7 days before the application date until the day before the application date. However, when changing the Terms unfavorably to members, it will announce at least 30 days in advance.
-4. If a member does not explicitly express their intention to terminate the contract by the application date announced according to paragraph 3, it shall be deemed that they agree to the revised Terms.
-5. Matters not stipulated in these Terms and interpretation of these Terms shall be governed by the Act on Consumer Protection in Electronic Commerce, etc., the Act on the Regulation of Terms and Conditions, other related laws, or commercial practices.
-6. The Company may post ethical guidelines within the Service that the Company and members must comply with, containing content to prevent crime and respect social ethics in relation to service use, and such ethical guidelines constitute the content of these Terms. Members are deemed to have agreed to comply with the ethical guidelines by agreeing to these Terms.
+1. **「AIP」**とは、AIチャット、モデルへのアクセス、エージェント、MCP連携、自動化、ストレージ、アプリケーション、管理および関連機能を含む、当社のクラウド型AIプラットフォームをいいます。
 
-## Article 4 (Membership Registration and Management)
+2. **「インストール型ソフトウェア」**とは、AIPまたは関連機能へのアクセスまたはその利用を目的として、利用者が管理する端末にインストールし、または当該端末上で実行するために当社が提供するソフトウェアをいいます。インストール型ソフトウェアには、現在**「Aru」**の名称で提供されている当社のデスクトップエージェント、そのアップデートおよび構成要素、ならびに実質的に同一の目的のために当社が提供する後継または代替プログラムが含まれます。
 
-1. The usage contract is concluded when an applicant agrees to the content of these Terms in the membership registration guide, applies for service use through the registration procedure (completing the Company’s prescribed membership application form), and the Company approves the application.
-2. **Eligibility**: Users must be adults aged 19 or older. For minors aged 15 or older, consent from a legal representative must be obtained for service use and registration, and children under 14 cannot use or register for the Service. Additionally, users must have the qualification to enter into legally binding contracts.
-3. **Individual Members**: This Service supports OAuth-based login and registration through Google or GitHub accounts. Users must have a valid Google account or GitHub account and must complete the membership registration process by accessing this Service with that account. A membership registration method that directly sets email addresses and passwords is also provided.
-4. **Registration Procedure**: When users agree to the service terms of use, registration is completed. The Company may request additional information if necessary, and users must guarantee that the information provided is accurate and up-to-date. Acts of registering using another person’s name or information are strictly prohibited, and all responsibility for such acts lies with the user who committed them.
-5. **Account Management**: Users are responsible for maintaining the security of their external account (Google/GitHub) login information. If login credentials are leaked or unauthorized use is suspected, users must immediately take measures such as changing passwords and notify the Company. The Company is not responsible for account theft or unauthorized use due to user negligence.
-6. **Loss of Eligibility**: If a user violates these Terms or related laws, the Company may suspend the user’s service use or revoke membership without prior notice. Additionally, the Company may refuse approval or impose conditions on re-registration applications from those who have previously had their use restricted due to Terms violations.
+3. **「本サービス」**とは、AIP、インストール型ソフトウェア、および本規約に基づき提供される関連機能をいいます。利用者が利用できる機能は、適用されるプラン、地域、端末およびサービスドキュメントによって異なります。
 
-## Article 5 (Approval of Usage Applications)
+4. **「利用者」**とは、本サービスにアクセスし、または本サービスを利用する個人をいいます。利用者は、個人として、または正当な権限を有する場合には組織を代表して、本サービスを利用することができます。
 
-1. The Company may withhold approval until the limiting reasons are resolved in the following cases:
+5. **「組織」**とは、その利用者に対して本サービスへのアクセスを提供し、または管理する会社その他の団体をいいます。**「管理者」**とは、設定、利用者、権限、モデル、ツール、利用状況またはコンテンツを管理する権限を組織から付与された利用者をいいます。
 
-- When there is insufficient capacity in service-related facilities
-- When there are technical or business obstacles
-- When deemed necessary due to other Company circumstances
+6. **「入力」**とは、利用者が提供し、または利用者が許可した機能を通じて取得されるデータ、テキスト、音声、画像、ファイル、指示、認証情報その他の資料をいいます。**「出力」**とは、入力に応じて生成される結果をいいます。入力および出力を総称して**「利用者コンテンツ」**といいます。
 
-2. The Company may not approve in the following cases:
+7. **「エージェントアクション」**とは、利用者の指示または設定に基づき、ファイル、コマンド、ブラウザ、端末、アプリケーション、通信、外部システムまたは取引に関して、本サービスが実行する行為をいいます。
 
-- When applying using another person’s name
-- When applying with false member information
-- When applying for the purpose of harming social peace and order or public morals
-- Rental or resale of service usage rights
-- Re-registration within one year after membership disqualification due to Terms violation
-- When other usage application requirements set by the Company are not met
+8. **「外部サービス」**とは、本サービスに接続され、または本サービスを通じて利用される第三者のアプリケーション、ウェブサイト、MCPサーバー、プラグイン、モデル、データソースその他の製品をいいます。
 
-## Article 6 (Company’s Obligations)
+9. **「無償クレジット」**とは、販促目的で、または無償で付与される本サービスの利用単位をいいます。**「有償クレジット」**とは、本サービスの利用のために事前に購入する利用単位をいいます。
 
-1. The Company shall make its best efforts to provide the Service stably and continuously according to the content stipulated in these Terms.
-2. The Company must establish a security system to protect personal information so that members can use the Service safely, and must publish and comply with a privacy policy.
-3. When opinions or complaints raised by members are deemed legitimate, the Company must process them immediately. However, if immediate processing is difficult, the Company must notify the member of the reason and processing schedule.
+## 第3条（契約の成立および利用資格）
 
-## Article 7 (User’s Obligations)
+1. 本規約に基づく契約は、利用者が本規約の提示を受け、記録に残る電子的方法によって本規約に同意し、登録またはアクセスの申込みを行い、当社が当該申込みを承諾し、または本サービスへのアクセスを提供した時点で成立します。
 
-1. **Obligation to Comply with Laws and Terms**: Users must comply with related laws, these Terms, and policies announced by the Company within the Service when using the Service. Users must not engage in acts that violate these.
-2. Users may use the Service from the time the Company approves the user’s usage application. However, for some services, the Service may be used on a specified date or when certain requirements are met.
-3. Service use is available 24 hours a day, 365 days a year in principle. However, the Service may be temporarily suspended due to the Company’s business or technical reasons. In such cases, the Company will announce in advance, and if there are unavoidable reasons that cannot be announced in advance, it will announce afterwards. Service suspension may occur in the following cases:
+2. 組織を代表して同意する者は、当該組織を法的に拘束する**権限**を有することを表明するものとします。利用者による通常の機能利用のみをもって、当該利用者に付与された権限を超える追加購入または契約変更が承認されるものではありません。
 
-- When regular system maintenance, updates, or urgent server maintenance is required
-- When service provision is difficult due to unavoidable reasons such as equipment failure, overwhelming usage, natural disasters, etc.
-- When the Company deems it necessary for operational or technical reasons
+3. 利用者は、18歳以上、または利用者の法域における成年年齢に達している必要があります。法令上本サービスの利用が認められる未成年者は、親権者または法定後見人の同意を得なければなりません。13歳未満の者は、本サービスを利用することができません。
 
-4. The Company may set or change the types and number of devices available for service use by each member.
-5. **Account and Security**: Users must thoroughly manage their service usage account information, including their Google/GitHub accounts, and must not transfer or share them with third parties. Users are responsible for account theft, hacking, or unauthorized use due to their own negligence, and must notify the Company immediately when such problems occur.
-6. **Fair Use and Restrictions**: The Company may monitor usage to ensure all users can use the Service fairly. If a user engages in acts that overload the Service, such as generating abnormally excessive traffic or requests, the Company may take measures such as temporarily restricting the user’s usage or controlling speed. Such measures are to maintain service stability and quality, and the Company will notify users of such facts in advance or afterwards when necessary.
-7. **Prohibition of Fraudulent Use**: Users must not fraudulently use the Service in the following ways:
+4. 当社は、提供された情報が虚偽である場合、申込者に必要な法的能力もしくは**権限**がない場合、技術上の提供能力が不足している場合、申込者が過去に重大な違反を行った場合、またはアクセスの提供により重大な法的リスクもしくはセキュリティ上のリスクが生じる場合には、登録を拒否し、または登録に条件を付すことができます。
 
-- Acts of creating or transmitting illegal, defamatory, threatening, obscene, false, or content that infringes on others’ rights using the Service or provided AI
-- Acts of unauthorized collection or theft of others’ personal information or account information
-- Acts that interfere with normal service operation, such as exploiting service bugs or errors, or unauthorized access to hack, crawl, or decompile/reverse engineer the system
-- Acts of using the Service for commercial purposes without the Company’s prior permission, or unauthorized commercial sale/redistribution of service results
-- Other acts contrary to good customs and social order, and acts that infringe on the rights of the Company or others
+## 第4条（アカウントおよび組織の管理）
 
-8. **Compliance When Using External Services**: When users use external services integrated with the Service, they must comply with the terms of use, API policies, privacy policies, etc. of the relevant external services. Problems or disputes arising from violations of external service providers’ policies must be resolved between users and external service providers, and the Company is not responsible for this.
-9. **Responsibility**: The responsibility for the content of data imported or transmitted through integration with external services (e.g., Slack messages, GitHub repository content, etc.) lies with the users and external service providers who provide it. The Company does not censor or control data from integrated external services and does not guarantee the accuracy, currency, or legality of such data. Users must separately back up or verify such data when necessary.
+1. 利用者は、正確かつ最新の情報を提供し、**ログイン認証情報**を保護し、不正アクセスの疑いがある場合には速やかに当社に通知しなければなりません。
 
-## Article 8 (Beta Service)
+2. **個人アカウント**を複数人で共有することはできません。利用者は、当社が明示的に認める場合を除き、アカウント、アクセス認証情報、APIキーまたは利用権を販売、賃貸または譲渡してはなりません。
 
-The Company may release products and features that are currently being tested and evaluated (“**Beta Service**”).
+3. 組織は、自らが利用を許可した利用者について責任を負うとともに、その利用に適したアクセス、モデル、ツール、利用金額の上限およびセキュリティの設定について責任を負います。
 
-- Beta Services are marked with “Beta”, “Preview”, or similar phrases, and errors may occur in some or all functions of the Service or changes may be made without notice.
-- Functions provided during the Beta Service period may be changed or removed in the official service. During this process, even if users experience inconvenience in service use or data loss occurs, the Company bears only limited responsibility unless there is intent or gross negligence.
-- Beta Services are provided to collect user feedback, and by using Beta Services, users agree that the Company may contact them to collect feedback.
-- Some Beta Services may be marked as private until official release. When using such private Beta Services, you agree not to disclose information about such services to others without our permission.
+4. **管理者**は、利用者の追加、利用停止もしくは削除、利用可能なモデル、エージェント、MCP、スキルもしくは機能の設定、利用状況および監査情報の確認、ならびに本サービスが当該機能を明示的に提供している場合には、組織のコンテンツへのアクセス、共有、エクスポートもしくは削除を行うことができる場合があります。組織は、利用者に対して必要な通知を行い、必要な**権限**または同意を取得しなければなりません。
 
-## Article 9 (Pricing Plans and Usage Restrictions)
+5. **個人アカウント**が組織に移管され、または組織に関連付けられる場合、本サービスは、必要とされる通知を行います。移管後に**管理者**が行使できる管理**権限**には、適用される設定、通知および法令が適用されます。
 
-1. **Free Plan and Credit Provision**: Users may automatically receive a certain amount of free credits upon membership registration and can use the Service within this credit limit. **Important notes about free credits**:
+## 第5条（本サービスの提供および変更）
 
-- Free credits are not refunded in cash or converted to cash value
-- Credits represent users’ daily LLM usage limits and are reset every 24 hours from the time of registration
-- After exhausting daily credits, LLM service use may be partially restricted for that day, and credits will be provided again when the next cycle begins (The provision method and policy of credits may change according to service operation circumstances)
-- The Company may adjust the amount, provision, and provision cycle of free credits according to service operation policies without notice
+1. 本サービスの機能、モデル、利用上限、対応端末およびサポート水準は、適用されるプラン、購入画面、サービスドキュメント、および利用開始前に提示されるサービス固有の条件によって定まります。
 
-2. **Paid Plans**: The Company may provide all or part of the Company’s services to members for a fee, and specific matters regarding paid services shall be governed by paid service announcements or separate paid service operation policies.
+2. 当社は、モデルまたは機能の更新、追加、置換または提供終了を行うことができます。当社は、特定のモデル、機能、価格または**外部サービス**が恒久的に利用可能であることを保証しません。
 
-- **The Company clearly displays the following matters through announcements of the relevant paid services or separate paid service operation policies**:
-  - Name or title of paid services
-  - Content, usage method, fees, payment method, and other usage conditions of paid services
-  - Conditions and procedures for refunding paid service fees
-  - Matters regarding suspension and changes of paid services
-- Members who wish to use paid services must comply with paid service announcements or paid service operation policies, and when the content of these Terms conflicts with paid service announcements or paid service operation policies, the content of paid service announcements or paid service operation policies takes precedence.
+3. 当社は、有償機能を大幅に縮小する場合、合理的な期間を設けて事前に通知します。ただし、法令、セキュリティ、安全性または供給元のやむを得ない変更により事前通知が実行困難な場合は、この限りではありません。
 
-3. **Usage Restrictions**: When users’ service use is suspended or contracts are terminated due to violations of these Terms or operation policies, users cannot demand refunds for remaining credits or payment amounts. Additionally, free credits and services provided during the beta period are temporary benefits, and users do not object even if the Company arbitrarily stops or restricts their provision.
+4. マーケティング、営業、概念実証またはデモンストレーションに関する資料は、購入に係る契約またはエンタープライズ契約に明示的に組み込まれない限り、法的拘束力のある契約上の約束を構成しません。
 
-## Article 10 (External Service Integration and Scope of Responsibility)
+## 第6条（インストール型ソフトウェアのライセンスおよびアップデート）
 
-1. **External Service Integration Provision**: This Service provides integration functions with various external services such as GitHub, AWS, Slack, etc. for user convenience. Users can integrate services by authenticating to the relevant external services with their accounts and can use some functions or data of external services through this Service’s interface.
-2. **Authentication and Information Use Consent**: To integrate external services, users may need to provide authentication information such as API keys or OAuth tokens of the relevant services or grant authorization. Users understand and agree that the Company stores and uses such authentication information to communicate with external services during this authentication process. The Company does not arbitrarily store or use users’ authentication information or external service data for purposes other than integration. When users cancel integration or withdraw account connections, the Company immediately destroys related authentication information.
-3. **Compliance with External Service Terms**: When using external service integration functions, users must comply with the terms of use, API policies, privacy policies, etc. of the relevant external services. Problems or disputes arising from violations of external service providers’ policies must be resolved between users and external service providers, and the Company is not responsible for this.
-4. **External Service Problems**: Even if this Service’s integration functions do not operate smoothly or are interrupted due to external service failures, errors, API changes, user account problems, etc., the Company will make efforts to resolve this immediately but bears limited responsibility for problems in the external service domain. For example, if integration functions are disrupted due to changes in GitHub API, the Company will respond through service updates, etc., but will not compensate users for temporary functional failures due to GitHub’s problems.
-5. **External Service Data and Content**: The responsibility for the content of data imported or transmitted through integration with external services (e.g., Slack messages, GitHub repository content, etc.) lies with the users and external service providers who provide it. The Company does not censor or control data from integrated external services and does not guarantee the accuracy, currency, or legality of such data. Users must separately back up or verify such data when necessary.
-6. **Costs and Billing**: If charges are incurred from the external service side due to external service integration use (e.g., AWS resource usage fees, etc.), such costs are entirely borne by users. Free credits or pricing plans of this Service do not include costs incurred from external services, and the Company does not intervene in cost billing due to external service use.
-7. **Scope of Responsibility**: The Company makes no warranties regarding results obtained by users through external service integration. Problems arising during the process of using external service functions or data (e.g., data loss, account suspension, third-party rights infringement, etc.) must be resolved by users in consultation with the relevant external services. However, if such problems arise due to this Service’s fault, responsibility will be considered accordingly.
+1. 当社は、利用者が対象サービスを利用する**権限**を有する期間中、許容された本サービスの利用のみを目的として、利用者が管理する権限を有する端末においてインストール型ソフトウェアをダウンロード、複製、インストールおよび使用するための、**限定的、非独占的、譲渡不能かつ再許諾不能のライセンス**を利用者に付与します。
 
-## Article 11 (Privacy and Data Protection)
+2. 利用者は、適用法令、または適用されるオープンソースもしくは第三者の構成要素のライセンスにより明示的に認められる範囲を除き、インストール型ソフトウェアの改変、再配布、販売、再許諾、または当該ソフトウェアの技術的保護措置の回避を行ってはなりません。インストール型ソフトウェアのリバースエンジニアリングおよび関連する解析に関する制限、その例外、ならびに通常の利用との区別については、第11条第6項から第8項までに定めます。
 
-1. [**Privacy Policy**](/ja/privacy-policy): The Company values users’ personal information and collects, uses, stores, and deletes personal information according to a separate privacy policy. Users are deemed to have agreed to the Company’s privacy policy by using the Service. The privacy policy specifies the collection items, usage purposes, retention periods, third-party provision, user rights, etc. of personal information provided by users. For more information, including the efforts the Company makes to ensure the security of your personal information, please see our [Privacy Policy](/ja/privacy-policy).
-2. **Data Collection**: The Company collects only the minimum information necessary to provide the Service. This may include basic profile information provided by users and logs and usage pattern data generated during service use. Such information is used only for service provision and quality improvement and is not sold or rented to third parties without user consent.
-3. **AI Performance Improvement**: User Content may be used for AI performance improvement after de-identification. AI performance improvement includes system prompt tuning, tool call accuracy improvement, and other services provided using AI. De-identified data does not contain information that can identify individual users.
-4. **De-identification and Statistical Use**: The Company may convert user data into forms that cannot identify individuals (anonymization/de-identification) for service performance improvement, quality enhancement, and usage statistics analysis. Statistical data or analysis results generated at this time cannot specify individuals and are used for internal research for service improvement, product enhancement, usage status announcements, etc. The Company may disclose such de-identified statistical data to cooperation partners or the public when necessary, but in no case will it include information that can identify individual users.
-5. **Data Storage and Security**: Users’ personal information and service usage data are stored and transmitted securely, and the Company protects them from unauthorized access, leakage, and alteration through industry-standard security measures. However, complete security cannot be guaranteed due to the nature of the Internet, so the Company does its best for reasonably required levels of security. Users also have an obligation to protect their personal information, and the Company is not responsible for damages due to negligence such as sharing external account login information with others.
-6. **Data Deletion and Destruction**: When users delete content within the Service or terminate use through account withdrawal, etc., the Company immediately deletes or anonymizes users’ personal information and content according to related laws and privacy policies. However, information required to be retained for a certain period by law or minimum information necessary for dispute resolution and legal obligation fulfillment is safely stored for the legal period and then deleted. For User Content such as AI chat conversation content, if users do not separately request deletion, it may be stored on servers for a certain period for service operation, but it is automatically deleted after the retention period determined by Company policy. When users withdraw their accounts, all personally identifiable information associated with that account is deleted and cannot be recovered thereafter.
+3. インストール型ソフトウェアには、別途のライセンス表示が適用されるオープンソースまたは第三者の構成要素が含まれる場合があります。これらのライセンスが本規約によって制限できない権利を付与する範囲においては、当該ライセンスが優先します。
 
-## Article 12 (User Content and Intellectual Property Rights)
+4. インストール型ソフトウェアは、新機能の提供、互換性の維持、またはセキュリティおよび信頼性に関する問題への対応のため、自動的にアップデートされる場合があります。対応するオペレーティングシステム、最小要件およびサポート終了に関する情報は、サービスドキュメントに記載される場合があります。
 
-1. **Responsibility for User Content**: All content that users input or upload on the Service (sentences, questions, data files, etc.) and output results generated from the Service and provided to users (chatbot responses, AI-generated content, etc.) correspond to User Content. Users must not input personal information as User Content. Additionally, users must have legitimate rights to the content they provide and must not provide content that infringes third-party rights or violates laws. Legal responsibility arising from User Content lies entirely with the user who provided the content. The Company may verify the illegality or Terms violation of User Content when necessary and may delete the content or restrict the user’s service use if violations are confirmed.
-2. **Ownership of Rights**: All rights, including copyright, to input content provided by users through this Service shall remain with the users. Additionally, rights to output content (results) generated by the Service’s AI and delivered to users shall belong to the users to the extent permitted by applicable laws. The Company does not claim any separate copyright or ownership over the output content, and should the Company acquire any intellectual property rights to such output, it shall transfer those rights to the users. However, output content is generated by AI models based on user input and does not guarantee complete originality or exclusive rights. This Service may provide similar output to other users with identical or similar input, which may result from coincidental similarity or common AI model reference materials. In such cases, rights to the output shall belong to each user respectively, and users shall have rights only to the output they have received. The Company does not grant users exclusive rights to similar output obtained by other users.
-3. **License Grant to Company**: When users upload or input content (e.g., questions, data, files, etc.) to the Service, they are deemed to grant the Company a non-exclusive, worldwide license to use that content for service operation and improvement. Accordingly, the Company may access/use the content only for the purposes of service provision, maintenance, function enhancement, legal compliance, and security maintenance. The Company does not use user content for purposes other than those specified in this paragraph or provide it to third parties. (However, as specified in Article 8, it is not used for AI model training purposes without users’ prior consent.) When users delete the content from the Service or withdraw their accounts, the Company’s license authority also expires for the deleted content. However, immediate removal may not be possible for backup copies already created before deletion or content remaining due to re-sharing by other users, and in such cases, the Company takes deletion measures within the possible scope.
-4. **Company’s Intellectual Property Rights**: All rights and intellectual property rights related to this Service and software, algorithms, designs, logos, trademarks, service names, etc. included therein belong to the Company. Users cannot copy, modify, distribute, sell, reverse compile, or create derivative works of service components without the Company’s prior consent. Names and logos such as “QueryPie" and “QueryPie AIP" are the Company’s trademarks or registered trademarks, and users must not use them arbitrarily except in accordance with the Company’s brand policy. Unless otherwise specified in these Terms, the Company grants users only non-exclusive and limited usage rights within the scope necessary for service use, and users cannot transfer or re-license these.
-5. **Feedback**: Opinions, suggestions, proposed improvements, etc. provided by users to the Company for service improvement are entirely voluntary. The Company appreciates users’ feedback and may freely use it for service improvement without providing any obligations or compensation for such feedback. Users agree not to claim any intellectual property rights to their feedback.
-6. **Third-Party Rights**: Users must be careful not to infringe third-party copyrights and other intellectual property rights when using content obtained through this Service. Some AI-generated output may reflect publicly available information or content included in training data, and such content may include similar expressions based on third-party works. The Company is making efforts to prevent AI output from infringing third-party rights, but legal responsibility for the final use of output lies with users. When users share or publish service results externally, they must verify that they have the right to use such results.
+5. 端末の**権限**、データ収集、外部への送信または有償利用の範囲を大幅に拡大するプログラムまたはアップデートには、適用される通知および同意の要件が適用され、本規約における単なる通常のアップデート、後継プログラムまたは代替プログラムとしては取り扱われません。
 
-## Article 13 (AI Service Characteristics and Disclaimer)
+## 第7条（端末の権限およびローカルリソース）
 
-1. **Recognition of AI Output Limitations**: Users understand and agree that this Service is based on artificial intelligence technology (LLM, etc.) and that its output results may not always be accurate or complete. Due to the characteristics of AI models, responses that do not accurately reflect real facts or latest information may sometimes be generated, and inappropriate or unexpected content may be included. Due to the probabilistic limitations of machine learning technology, different outputs may result from the same question depending on circumstances, which is subject to continuous research and improvement.
-2. **Cannot Replace Professional Advice**: All information and responses provided by this Service are for general information provision purposes only and cannot replace professional advice or opinions in specialized fields such as law, medicine, finance, etc. Users must not regard information provided by AI as absolute and must undergo additional review and (if necessary, professional) judgment when making important decisions. In particular, service output should not be used as the sole source of truth or facts or as a substitute for professional opinions.
-3. **User’s Verification Responsibility**: Users must verify the accuracy and appropriateness of output results provided by the Service before using them or sharing them externally. Although the Company is also making efforts to ensure AI output is error-free, ultimately utilizing such output is at the user’s discretion. For example, before actually using AI-generated code or documents in work, errors should be tested or reviewed, and users have primary responsibility for damages arising from trusting AI responses as is.
-4. **Restrictions on Using Information About Others**: When output obtained by users from this Service mentions specific individuals or contains information related to such individuals, users must not use this for important decisions about those people (hiring, credit, medical, legal decisions, etc.). AI output may sometimes contain inaccurate information about actual individuals or organizations, and judgments based on such information may lead to wrong results or legal problems. Even if this Service’s output mentions third-party products or services, this does not mean the Company or the relevant third party endorses or recommends them, nor does it imply any partnership relationship.
-5. **Harmful or Inappropriate Content**: The Company is making efforts to provide safe services to users and has monitoring and filtering systems for AI output. Nevertheless, AI output may occasionally generate content that could be inappropriate or offensive. Users may ignore or delete such content when encountered and may report it to the Company if necessary. The Company will review reported output and take appropriate measures, and will improve AI models and filtering systems to prevent similar cases in the future. Users also have the responsibility not to distribute or misuse inappropriate results obtained during service use.
-6. **Service Provision Form**: The Company provides this Service as is and makes no explicit or implicit warranties regarding the completeness, accuracy, reliability, or fitness for specific purposes of the Service. During the beta service period and even after conversion to official service, the Company does not guarantee that the Service will always be provided safely without interruption. However, the Company will make efforts to provide the most stable service possible within reasonable limits.
-7. **Disclaimer**: Within the limits permitted by related laws, the Company is not responsible for direct, indirect, incidental, or consequential damages (data loss, business loss, loss of expected profits, etc.) that users may suffer by using the Service, unless there is intent or gross negligence. **In particular, the Company does not bear responsibility for**:
+1. インストール型ソフトウェアは、有効化された機能に必要な範囲で、利用者が選択したファイルおよびフォルダ、ローカルコマンド、ターミナル、ブラウザ、画面の内容、キーボードもしくはポインティングデバイスの操作、マイク、音声、アプリケーション、ローカルモデルその他の端末リソースへのアクセスを要求する場合があります。
 
-- Damages arising from decisions or actions made by users relying on AI output
-- Damages due to inaccuracy of information obtained through external service integration
-- Damages arising from account leakage or unauthorized use due to user negligence
-In some countries or jurisdictions, liability limitations for certain damages may not be permitted, so the above disclaimer is valid only within the scope where such laws apply to users. In such cases, the Company limits responsibility to the maximum extent legally permitted.
+2. 利用者または**管理者**は、付与する**権限**を決定し、オペレーティングシステムまたは本サービスの設定を通じて権限を取り消すことができます。権限を取り消すと、関連機能が制限され、または利用できなくなる場合があります。
 
-8. **Claims from Third Parties**: If lawsuits, claims, or disputes arise from other users or third parties during the process of users using this Service, users must resolve them at their own responsibility and cost. If the Company suffers direct or indirect damages or incurs costs due to such disputes, users must compensate the Company for such damages or costs. The Company may cooperate in resolving such disputes when necessary, but this does not mean the Company acknowledges responsibility for such disputes.
+3. 本規約への同意は、オペレーティングシステムの**権限**確認画面、または録音・録画・記録、監視、端末管理、雇用、プライバシーもしくは第三者のデータへのアクセスに必要な別途の通知、同意もしくは許可に代わるものではありません。
 
-## Article 14 (Service Changes, Suspension, and Termination)
+4. 利用者は、インストール型ソフトウェアが利用できる状態にするすべての端末、ファイル、アカウント、システム、通信およびデータにアクセスする**権限**を有していなければなりません。
 
-1. **Service Content Changes**: The Company may change service content (functions, UI, technical specifications, etc.) or add/delete new functions according to continuous service improvement and operational needs. When such changes significantly affect users, the Company will notify the changes and implementation dates through appropriate methods such as in-service announcements and email notifications in advance. However, minor changes that do not significantly affect user rights, such as minor bug fixes or emergency updates, may be made from time to time without separate notice.
-2. **Service Suspension and Termination**: The Company may temporarily suspend or permanently suspend (service termination) all or part of the Service in unavoidable cases such as business circumstances or technical situations.
+## 第8条（エージェントアクション、監督および重大な影響を及ぼすタスク）
 
-- **Temporary Suspension**: When there is planned service suspension for server maintenance or upgrades, the Company announces the suspension schedule and impact in advance. If suspension occurs without notice due to unavoidable reasons, the Company will provide guidance on the reasons and measures afterwards.
-- **Service Termination**: When the Company decides to abolish or suspend the Service for a long period, it will notify users with a reasonably possible substantial advance notice period. During the notice period, users can take necessary measures such as backing up their data. For paid services, settlement or refund procedures for paid users with remaining usage periods will be provided upon termination.
+1. 利用者は、エージェントに与えるアクセス、**権限**、指示、ツールおよび制限を決定します。利用者は、当社が本規約および適用法令に基づき負う義務を前提として、自らの意思により付与した権限の範囲内で実行されるエージェントアクションおよび通信を確認する責任を負います。
 
-3. **Notice to Users**: Notice of service content changes or suspension according to this Article is made through reasonable methods such as posting announcements on the Service’s official website or notification to users’ registered emails. The Company is not responsible for damages arising from users not providing up-to-date email addresses or not checking announcements. The Company will strive to deliver important announcements through clear and sufficient methods.
+2. 利用者は、明確な指示、適切な作業範囲および予算の制限、テスト、ならびに**人による確認**を含め、タスクおよびその潜在的な影響に応じた監督を行わなければなりません。
 
-## Article 15 (Member Withdrawal and Loss of Qualification)
+3. 利用者は、恒久的な削除、一括変更、本番環境へのデプロイ、外部との通信、アカウントもしくはセキュリティの変更、購入、支払、または他者に重大な影響を及ぼす行為など、重大な影響を及ぼす行為について、確認または**管理者**が事前承認したポリシーを用いることが推奨されます。
 
-1. **User Service Withdrawal**: Users may request termination of the usage contract at any time, and the Company processes this immediately. Upon account withdrawal, users’ personal information and content are processed according to procedures under Article 11, and service use is immediately suspended after withdrawal and cannot be recovered. If users wish to re-register, it may be possible after a certain period according to the Company’s policy, and existing data will not be restored.
-2. **Termination Upon Violation**: When users violate these Terms or related laws and cause damage to the Company, other users, or third parties, the Company may suspend the user’s service use or terminate the usage contract (process member withdrawal) without prior notice. In such cases, the Company will provide post-notification to the user when necessary, and if usage fees have already been imposed, they belong to the Company without refund. In cases of serious violations, the Company may report to relevant authorities or take legal action.
-3. **Surviving Provisions**: Even after service use termination (user withdrawal or Company contract termination, etc.), provisions that should remain effective after usage contract termination by nature, such as intellectual property provisions, disclaimer provisions, liability limitations, dispute resolution and governing law provisions, maintain their effectiveness.
+4. 自動実行タスク、スケジュール実行タスクまたはバックグラウンドタスクを有効化する場合は、意図的に行わなければなりません。利用者は、その範囲、頻度、実行期間、トークン数または利用金額の予算、次回実行時刻および停止条件を確認しなければなりません。利用者は、利用可能な操作機能を用いて、これらのタスクを停止し、または無効化することができます。
 
-## Article 16 (Notice to Members)
+5. 利用者は、本サービスに提供するアカウントまたは支払手段を使用する許可を得ていなければなりません。利用者は、購入の指示および取引の監視について責任を負います。第三者である販売者、金融機関および決済事業者の条件が適用される場合があります。
 
-1. When the Company provides notice to members, it may be done to the member’s email address.
-2. For notice to an unspecified number of members, posting on the Company homepage for 7 days or more may substitute for individual notice. However, individual notice is provided for matters that significantly affect the member’s own transactions.
+6. 利用者は、人に対して法的効果またはこれに類する重大な影響を及ぼし得る判断について、適切な**人による確認**を行わず、または適用法令を遵守せずに、エージェントアクションのみに依拠してはなりません。
 
-## Article 17 (Governing Law and Jurisdiction)
+## 第9条（ローカルファイル、ブラウザ、録音・録画・記録およびメモリ）
 
-1. These Terms shall be governed and construed in accordance with the laws of the Republic of Korea.
-2. The Company and members shall make all necessary efforts to amicably resolve any disputes arising in connection with the use of this Service.
-3. In the event that a lawsuit is filed for disputes between the Company and members, the court having jurisdiction under the Civil Procedure Act shall be the competent court.
+1. エージェントアクションにより、ファイルが作成、変更、移動、上書きまたは削除される場合があります。利用者は、影響を受けるデータの重要性に応じて、**バックアップおよびバージョン管理**を行うことが推奨されます。プレビュー、差分表示またはロールバックの機能は、完全な復元を保証するものではありません。
 
-**Revised**: June 5, 2025
+2. ブラウザ操作機能またはコンピュータ操作機能は、有効化された**権限**の範囲内で、ページ、セッション、ログイン済みアカウント、Cookieまたは画面に表示された内容を操作し、またはこれらとやり取りする場合があります。利用者は、金融、医療、雇用、法律、セキュリティまたは管理に関する機微なワークフローを監督しなければなりません。
+
+3. 利用者は、他のサービスが設けるアクセス制御、CAPTCHA、レート制限、セキュリティ警告または制約を回避するために本サービスを利用してはなりません。
+
+4. 音声、会議、画面またはアクティビティの録音・録画・記録機能は、利用者が参加者、従業員その他の影響を受ける者に必要な通知を行い、必要な権利、許可および同意を取得した場合に限り利用することができます。
+
+5. 録音・録画・記録機能またはメモリ機能が利用可能な場合、本サービスは、設定またはサービスドキュメントを通じて、有効化、保存場所、保存期間、アクセス、一時停止および削除に関する情報を提供します。利用者は、これらの機能を適切に設定する責任を負います。
+
+## 第10条（MCP、スキル、プラグイン、ローカルモデルおよび外部サービス）
+
+1. 利用者は、**外部サービス**の接続、またはMCP、スキル、プラグイン、ローカルコードもしくはローカルモデルの有効化を選択することができます。利用者は、要求される**権限**、利用条件およびプライバシーに関する取扱いを確認したうえで、自らが把握し信頼する構成要素および提供者のみを有効化することが推奨されます。
+
+2. 接続された構成要素は、依頼されたタスクの実行に必要な**利用者コンテンツ**の一部およびその他の情報を受け取る場合があります。第三者が取り扱うデータには、送信後は当該第三者の条件が適用されます。ただし、当該第三者が当社のデータ処理受託者として行為する範囲、または適用法令に基づき当社が別途責任を負う範囲については、この限りではありません。
+
+3. 利用者または第三者が提供する構成要素は、当社が特定の検証またはサポートの提供を明示的に約束している場合を除き、当社による管理または保証の対象ではありません。当社は、法令、セキュリティ、安全性または運用上の理由により、構成要素をブロックし、または無効化することができます。
+
+4. 利用者は、自らが提供するローカルモデル、プラグイン、コードおよびデータのライセンスならびに利用権について責任を負います。サービスドキュメントでは、必要に応じて、ローカル処理と、AIP、モデル提供者または**外部サービス**へのデータ送信とを区別して説明します。
+
+5. **外部サービス**が課す料金は、購入内容に明示的に含まれている場合を除き、利用者の負担とします。
+
+## 第11条（適正利用）
+
+1. 利用者は、適用法令、本規約、サービス固有のポリシーおよび他者の権利を遵守しなければなりません。
+
+2. 利用者は、不正アクセス、マルウェアの配布、他のシステムの侵害、他者に関する違法な監視もしくは情報収集、**知的財産権**、プライバシーその他の権利の侵害、利用量、支払もしくは安全性に関する制御の回避、本サービスの妨害、または詐欺、暴力、搾取その他の違法な加害行為の助長のために、本サービスを利用してはなりません。
+
+3. 利用者は、許可なく本サービスへのアクセスを再販売し、または再許諾してはなりません。この制限は、**出力**の適法な事業上の利用、または適用されるプランで認められる通常の社内業務上の利用を禁止するものではありません。
+
+4. 利用開始前に提示されたサービス固有の制限が当該行為を禁止している場合、利用者は、競合する汎用AIモデルの開発のために**出力**を使用してはなりません。法令、オープンソースライセンスまたは当社の明示的な許可により認められる利用は、制限されません。
+
+5. 当社は、利用者および本サービスを保護するため、利用量、再帰処理、リクエスト頻度、同時実行数またはセキュリティに関する合理的な制限を適用することができます。継続的に適用される重要な制限は、プランまたはサービスドキュメントを通じて開示します。
+
+6. 利用者は、AIPおよびインストール型ソフトウェアを含む本サービスについて、リバースエンジニアリング、逆コンパイルもしくは逆アセンブルを行い、またはその他の方法により、ソースコード、アルゴリズム、アーキテクチャ、内部APIもしくは通信プロトコル、モデルパラメータ、システムプロンプトなどの非公開の実装に関する詳細情報を導出、抽出もしくは再構築し、またはこれらを試みてはなりません。この禁止には、当該非公開の実装に関する詳細情報の導出、抽出または再構築を目的とした、バイナリもしくはアプリケーションパッケージの静的もしくは動的解析、実行時の計測もしくは介入、メモリの調査、または通信、**入力**、**出力**もしくは挙動の解析、およびこれらの行為を通じて得た情報を用いて本サービスの全部または重要な部分を再現することが含まれます。
+
+7. 前項の制限は、当該行為が手作業で行われるか、AIエージェント、MCP、プラグイン、自動化ツールその他の手段を通じて行われるかを問わず適用されます。利用者は、これらの禁止行為を行うよう第三者に指示し、依頼し、または許可してはなりません。前項および本項の制限は、当該行為が、記録に残る方法により当社から事前に明示的な許可を受けている場合（合意された範囲内のセキュリティテストを含みます。）、適用法令により認められ契約によって制限することができない場合、または適用されるオープンソースもしくは第三者の構成要素のライセンスに基づき認められる場合には、その範囲で適用されません。
+
+8. 第6項および第7項は、本規約により認められる通常の利用、公開された仕様およびドキュメントに従ったAPIおよび連携機能の利用、利用者自身のシステムを運用するための通常のトラブルシューティングもしくは性能評価、またはソフトウェア開発その他の事業目的のための**利用者コンテンツ**の適法な利用を制限するものではありません。また、禁止行為を伴わない独自開発も制限しません。ただし、これらの利用または開発行為を、第6項で禁止する行為の口実としてはなりません。
+
+## 第12条（利用者コンテンツおよび知的財産）
+
+1. 利用者は、**入力**に関して有する権利を保持します。当社は、法令で認められる範囲で、**出力**について当社が有する権利がある場合、その権利を利用者に譲渡します。既存の第三者の権利およびライセンスには影響を及ぼしません。
+
+2. **出力**は独自のものとは限らず、他の利用者が類似の出力を受け取る場合があります。当社は、独創性、独占性、非侵害性、正確性または特定目的への適合性を保証しません。
+
+3. 利用者は、第13条に従い、本サービスの提供、維持、保護およびサポート、法令の遵守、ならびに本規約の履行確保のために合理的に必要な権利のみを当社に付与します。
+
+4. 利用者は、**入力**、接続先のデータ、録音・録画・記録、指示およびエージェントアクションに必要なすべての権利および許可を有していなければなりません。
+
+5. コードその他の**出力**には、オープンソースまたは第三者のライセンスが適用される場合があります。利用者は、使用または配布の前に、適用される表示および条件を確認しなければなりません。
+
+6. 当社および当社のライセンサーは、ソフトウェア、モデル、デザイン、ブランドおよびドキュメントを含む、本サービスに関するすべての権利を保持します。フィードバックは、制限なく、かつ対価を支払うことなく利用することができます。ただし、フィードバックの提供は、**利用者コンテンツ**、秘密情報または個人データを当該フィードバックと関係のない目的で利用することを許可するものではありません。
+
+## 第13条（プライバシー、データの利用およびセキュリティ）
+
+1. 当社は、適用される[**プライバシー通知**](/ja/privacy-policy)、および該当する場合にはエンタープライズ契約またはデータ処理補足契約に基づき、個人データを処理します。利用者は、自らが提出し、または利用可能な状態にする個人データについて、必要な通知を行い、必要な法的根拠を確保しなければなりません。プライバシー、データ処理および越境移転に関するお問い合わせは、legal@querypie.aiにお送りいただけます。
+
+2. 利用者は、対象サービスが機微なデータまたは法令上の制限があるデータに対応していることが明示され、かつ適用される要件を満たしている場合を除き、当該データを提供しないことが推奨されます。
+
+3. エンタープライズ契約が適用されるサービスについては、当該契約に定めるとおり、当社は、顧客の明示的な同意なく、汎用の生成AIモデルの学習のために顧客のコンテンツを利用しません。
+
+4. エンタープライズ契約が適用されない個人向けまたは無料のサービスについて、当社は、適用されるプライバシー通知またはサービス設定において開示された内容に従う場合に限り、本サービスの開発または改善のために**利用者コンテンツ**を利用することができます。当社は、法令上必要な場合、または対象サービスがその選択肢を提供している場合には、オプトアウトの手段を提供し、または同意を取得します。
+
+5. 当社は、利用者を識別せず、秘密性のある**利用者コンテンツ**を開示しない、集計済みまたは適切に匿名化された運用統計を利用することができます。
+
+6. インストール型ソフトウェアを通じて処理されるデータがローカルで処理されるか、またはAIP、モデル提供者、**外部サービス**もしくは組織に送信されるかに関する情報は、[プライバシー通知](/ja/privacy-policy)、設定またはサービスドキュメントで提供します。
+
+7. 当社は、合理的な技術的および組織的保護措置を維持します。インターネットまたは端末を利用するサービスにおいて完全なセキュリティを保証することはできず、利用者は、端末、アカウント、ソフトウェアの更新、アクセス制御およびバックアップについて、合理的な管理を継続しなければなりません。
+
+## 第14条（プラン、料金、クレジットおよび利用量の計測）
+
+1. 有償サービスの価格、税金、請求方法、プランの契約期間、更新、利用上限、および解約または返金の条件は、購入前に表示し、または適用される注文書に記載します。
+
+2. 従量制料金の対象には、モデルへの**入力**およびモデルからの**出力**、複数回のモデル呼出し、エージェントのループ処理、並列または委任されたタスク、ツール呼出し、再試行、自動実行タスク、スケジュール実行タスク、ならびに購入画面またはドキュメントに記載されたその他の計量対象処理が含まれる場合があります。
+
+3. 利用者および**管理者**は、利用可能な場合には、利用量表示、警告、予算、再帰処理の上限およびキャンセル機能を用いることが推奨されます。自動追加購入または合意された上限を超える支出を有効化できるのは、適切な購入**権限**を有する者に限られます。
+
+4. **無償クレジット**には金銭的価値はなく、譲渡することはできず、有効期限の到来により失効し、または変更もしくは廃止される場合があります。当社は、明示的な合意なく、過去に付与した無償クレジットについて遡及的に請求しません。
+
+5. **有償クレジット**には、購入時に提示された条件が適用されます。料金および有償クレジットは、法令により返金が義務付けられる場合、本規約もしくは購入条件に明示されている場合、または確認された請求誤りもしくは二重請求の訂正に必要な場合を除き、返金されません。
+
+6. 適用法令または適用される購入条件が別の取扱いを求める場合、当社は、アクセスの停止または終了のみを理由として、未使用の**有償クレジット**残高を自動的に没収することはありません。
+
+7. 有償タスクがクレジットを消費した後、確認された当社の技術的エラーにより失敗した場合、当社は、適用されるサポートまたはクレジットに関するポリシーに従い、該当するクレジットを返還することができます。**出力**の品質に対する不満のみをもって、請求誤りが認められるものではありません。
+
+8. 法令上認められる場合、利用者は、請求書または請求に関する異議を、対象となる課金または請求書の発行から30日以内に申し立てなければならず、争いのない金額については支払わなければなりません。当社による直接販売に関する請求および返金のお問い合わせは、billing@querypie.aiにお送りいただけます。
+
+## 第15条（ベータ版、プレビュー版および無料サービス）
+
+1. **ベータ版**、アルファ版、プレビュー版、評価用、実験的または無料の機能は、変更、停止または提供終了となる場合があり、一般提供されている有償機能と比べて信頼性またはセキュリティが低い場合があります。
+
+2. 法令で禁止される場合を除き、これらの機能は、サービス水準の保証および一般提供の確約を伴わずに提供されます。
+
+3. 当社は、一般提供されている有償機能について、既に合意した義務を回避することのみを目的として、当該機能を**ベータ版**として扱い直すことはありません。
+
+4. 秘密保持、プライバシーおよびセキュリティに関する義務、ならびに法令上制限することのできない責任は、引き続き適用されます。
+
+## 第16条（AIの特性および利用者による確認）
+
+1. AIの**出力**およびエージェントアクションには、誤り、欠落、偏り、古い情報または予期しない結果が含まれる場合があります。利用者は、使用または配布の前に、正確性、適合性、適法性および安全性を評価しなければなりません。
+
+2. 本サービスは、法律、医療、金融、雇用、セキュリティその他の規制対象となる事項または重大な影響を及ぼす事項に関する、独立した専門的判断に代わるものではありません。
+
+3. 利用者は、ある人に関する**出力**を、その人に対して法的効果またはこれに類する重大な影響を及ぼす判断の唯一の根拠として使用してはなりません。
+
+4. 本条の規定は、当社が合意したサービス、セキュリティもしくはデータ保護に関する義務、または当社の違反もしくは帰責事由に起因するエージェントアクションについての責任を免除するものではありません。
+
+## 第17条（可用性、サポートおよびサービスの変更）
+
+1. 当社は、合理的な注意および技能をもって、適用されるサービスドキュメントに重要な点において適合するよう、本サービスを提供し、維持します。
+
+2. 当社は、24時間365日、中断やエラーのない運用を約束するものではありません。保守、セキュリティ対応、供給元で生じた事象、ネットワークの状況、端末の状況または不可抗力により、可用性が影響を受ける場合があります。
+
+3. サービス水準、サポートの応答目標またはサービスクレジットは、有償プラン、エンタープライズ契約またはサービスレベル契約に明示的に含まれる場合に限り適用されます。技術サポート、インシデント報告およびサービスクレジットの請求に関する当社の公式窓口は、https://www.querypie.aiです。
+
+4. 当社が有償サービスの提供を恒久的に終了する場合、実行可能な範囲で合理的な期間を設けて事前に通知し、法令または適用される購入条件に従って、未使用の前払料金を取り扱います。
+
+## 第18条（利用停止および契約終了）
+
+1. 当社は、利用者が本規約に重大な違反をした場合、争いのない料金を支払わない場合、具体的なセキュリティ上もしくは安全上のリスクを生じさせた場合、または法令上制限が必要な場合には、**アクセスを制限し、または停止**することができます。
+
+2. 当社は、実行可能な場合には、その理由および是正方法を示し、是正のための合理的な機会を提供します。緊急の対応を要する場合には直ちに措置を講じることができ、その後、許容される範囲で説明を行います。
+
+3. 利用者は、いつでも無料サービスの利用を中止でき、適用される購入条件に従って有償サービスを解約することができます。強行法規に基づく解約権またはクーリング・オフの権利には影響を及ぼしません。
+
+4. 利用者は、利用停止または**契約終了**について再審査を求めることができます。当社は、当該申出について合理的な調査を行います。
+
+5. 契約が終了するとアクセス権は消滅し、既に発生した料金の支払義務は存続し、利用者は、必要に応じて当社ソフトウェアの使用を中止し、その複製物を削除しなければなりません。利用者が所有するファイル、プロジェクトおよび**出力**は、**契約終了**のみを理由として没収されることはありません。
+
+6. 当社は、適用されるプライバシー通知、設定、エンタープライズ契約または法令に従い、クラウドデータのエクスポート、保存および削除を行います。**契約終了**、アカウント削除またはインストール型ソフトウェアのアンインストールによっても、利用者の端末上で作成され、または使用されたすべてのローカルファイル、キャッシュ、メモリ、ログ、認証情報またはスケジュール実行タスクが自動的に削除されるとは限りません。利用者は、利用可能な設定、アンインストール手順またはオペレーティングシステムの操作機能を用いて、これらを確認し、削除しなければなりません。
+
+7. 所有権、秘密保持、支払、責任、紛争解決、およびその性質上保持する必要があるデータに関する規定は、**契約終了**後も存続します。
+
+## 第19条（保証および責任）
+
+1. 本規約、購入に係る契約またはエンタープライズ契約における明示的な約束を除き、本サービスは、法令で認められる範囲で、「現状有姿」かつ「提供可能な状態」で提供されます。当社は、すべての**出力**、エージェントアクション、**外部サービス**または第三者の構成要素について、正確であること、中断しないこと、安全であること、または特定の目的に適合することを保証しません。
+
+2. いずれの当事者も、法令で認められる範囲で、逸失利益を含む間接損害、付随的損害、特別損害、懲罰的損害または結果的損害について責任を負いません。ただし、法令上当該責任を制限することができない場合には、この免責は適用されません。
+
+3. エンタープライズ契約が適用されない有償サービスについて、本サービスに起因する当社の**責任の総額**は、責任の原因となった事由の発生直前の12か月間に、請求者が対象サービスについて実際に支払った料金を超えないものとします。
+
+4. 無料サービスについて、当社の**責任の総額**は、日本円で10,000円または請求通貨におけるその相当額を超えないものとします。ただし、適用法令により、これを上回る最低限の救済が義務付けられる場合は、この限りではありません。
+
+5. 本条の責任制限は、詐欺、故意の不正行為、重過失、過失により生じた死亡もしくは身体傷害、消費者に対する強行法規上の責任、または適用法令が制限を禁じるその他の責任には適用されません。
+
+6. 損害が両当事者の作為または不作為によって生じた場合、責任は、損害に対する各当事者の寄与の程度に応じて配分されます。
+
+## 第20条（第三者からの請求）
+
+1. 本規約に基づき本サービスを利用する事業者または組織は、違法な**入力**、**権限**のないエージェントアクション、または本規約に重大に違反する本サービスの利用を理由とする第三者からの請求に起因する合理的な損害および防御費用について、自己の違反または帰責事由によって生じた範囲で責任を負います。
+
+2. 本条は、個人の消費者に対し、適用法令で認められる責任を超えて、事業者向けの補償義務を課すものではありません。
+
+3. 補償を求める当事者は、相手方に速やかに通知し、合理的な協力を行い、損害を軽減するための合理的な措置を講じなければなりません。相手方の事前の同意なく、和解によって相手方に責任、自認または追加の義務を負わせることはできません。
+
+## 第21条（本規約の変更および通知）
+
+1. 当社は、法令、セキュリティ、安全性、技術、運用または本サービスの変更に伴い、本規約を変更することができます。当社は、重要な変更の内容および効力発生日を明示します。
+
+2. 利用者の権利または義務に重大な不利益を及ぼす変更について、当社は、合理的に実行可能な場合には、電子メール、本サービス内の通知その他の記録に残る方法により、**少なくとも30日前までに通知**します。ただし、法令、またはセキュリティもしくは安全上の緊急の必要性により、より早い効力発生が必要な場合は、この限りではありません。
+
+3. 利用者が重要な変更に同意しない場合、適用される購入条件で認められる範囲で、対象サービスの利用を中止し、解約することができます。効力発生日後の継続利用は、適用法令で認められる範囲でのみ、当該変更への同意を構成します。
+
+4. 本規約の変更は、署名済みのエンタープライズ契約が明示的に認める場合を除き、当該契約を変更するものではありません。新たに提供を開始したサービスに固有の条件は、**権限**を有する利用者が当該新サービスを初めて有効化する際に適用される場合があります。
+
+5. 利用者は、連絡先情報を最新の状態に保たなければなりません。重要な通知は、登録された電子メールアドレス宛てに送信し、または本サービス内に表示することがあります。適用法令または取引上、個別の通知が必要な場合、ウェブサイト上の一般的な告知のみをもって個別の通知に代えることはありません。当社への通知ならびに契約または法務に関するお問い合わせは、legal@querypie.aiにお送りいただけます。
+
+## 第22条（準拠法および一般条項）
+
+1. 本規約は日本法に準拠し、東京地方裁判所を第一審の専属的合意管轄裁判所とします。ただし、消費者が強行法規に基づき有する裁判管轄に関する権利を妨げるものではありません。
+
+2. 両当事者は、正式な法的手続に先立ち、誠実に紛争を解決するための合理的な努力を行います。
+
+3. いずれの当事者も、自己の合理的な支配を超える事由により生じた遅延または不履行について責任を負いません。ただし、既に発生した支払義務、または法令上必要な保護措置を講じなかったことについては、免責されません。
+
+4. 利用者は、当社の事前の同意なく、本規約に基づく契約上の地位を譲渡することはできません。当社は、適用される通知および消費者保護の要件に従い、組織再編または関連事業の譲渡に伴い、関連会社または承継者に当該契約上の地位を譲渡することができます。
+
+5. 本規約、適用されるサービス固有の条件、購入条件および組み込まれたポリシーは、エンタープライズ契約が適用されないサービスに関する契約を構成します。これらの間に矛盾がある場合、個別の購入条件またはサービス固有の条件は、そこに定める対象事項について本規約に優先します。
+
+**改定日**: 2026年10月19日
