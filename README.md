@@ -187,6 +187,8 @@ API 주소와 모델은 서버 전용 `src/features/ai/config.server.ts`의 이�
 
 브라우저는 `/api/ai-chat`에 질문을 보내고 Hermes 답변과 응답에 포함된 링크를 받습니다. Partner Portal Wrapper의 `/chat/completions` 호출은 Vercel 서버에서 수행합니다. 모든 환경에서 `AI_CHAT_ENABLED=true`와 API 키가 필요하며, 미설정 시 API는 `503 NOT_CONFIGURED`를 반환합니다. CMS 번역 설정은 `CMS_TRANSLATION_*`로 별도 관리합니다.
 
+현재 창의 최근 대화 최대 20개를 요청에 담아 보내며, 서버 DB의 누적 이력을 불러오는 `X-Hermes-Session-Id`는 보내지 않습니다. 질문별 `turnId`를 저장해 타임아웃·네트워크 오류 뒤 같은 요청을 재전송하면 `Idempotency-Key`로 기존 실행에 다시 연결합니다. 별도의 세션 발급 API나 `AI_CHAT_SESSION_SECRET` 설정은 필요하지 않습니다. Native의 동일 첫 질문 ID 공유와 동시 실행 대기 후 DB 이력 재조회는 남는 한계이며 [검증 문서](docs/reference/ai-product-chat-test.md#요청-이력과-재시도)를 따릅니다.
+
 환경은 Development, Preview(= Stage = Staging), Production 세 가지로 구분합니다. 모든 환경은 외부에서 접근 가능한 Production Partner Portal URL을 사용하되, token은 Partner Portal에서 환경별로 발급한 값을 사용합니다. Dev Partner Portal URL은 외부 인터넷에서 접근할 수 없으므로 Vercel upstream으로 사용하지 않습니다. `AI_CHAT_BASE_URL_PROD`와 `AI_CHAT_MODEL`은 환경변수로 등록하지 않고 위 코드 상수를 사용합니다.
 
 | Vercel 등록 위치 | `AI_CHAT_API_KEY` 출처 | 등록 타입 | `AI_CHAT_ENABLED` |

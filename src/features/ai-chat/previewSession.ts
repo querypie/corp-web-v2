@@ -1,20 +1,23 @@
 import { isLocale, type Locale } from "@/constants/i18n";
-import { MAX_CHAT_MESSAGES, isChatSourceUrl, isSlackThreadToken, type ChatMessage, type ChatSource } from "./types";
+import { MAX_CHAT_MESSAGES, isChatSourceUrl, isSlackThreadToken, isChatTurnId, type ChatMessage, type ChatSource } from "./types";
 
 const STORAGE_KEY = "querypie-ai-chat:v1";
 export const MAX_MESSAGE_LENGTH = 2000;
 export const MAX_PREVIEW_MESSAGES = MAX_CHAT_MESSAGES;
 
 export type PreviewMessage = ChatMessage;
-export type PreviewSession = { draft: string; messages: PreviewMessage[]; slackThreadToken?: string };
+export type PreviewSession = {
+  draft: string; messages: PreviewMessage[]; slackThreadToken?: string;
+  pendingTurn?: { id: string; text: string; locale: Locale };
+};
 
-// Completed conversation history is kept in this tab; the API receives only
-// the recent turns needed for the next answer. Old unsent preview sessions are ignored.
+// Only this tab's recent messages are sent as context for the current request.
+// A pending turn survives navigation so a retry keeps its idempotency key.
 export function readPreviewSession(): PreviewSession {
   try {
     const value: unknown = JSON.parse(sessionStorage.getItem(STORAGE_KEY) ?? "null");
     if (value && typeof value === "object" && "draft" in value && "messages" in value) {
-      const session = value as { draft?: unknown; messages?: unknown; slackThreadToken?: unknown };
+      const session = value as { draft?: unknown; messages?: unknown; slackThreadToken?: unknown; pendingTurn?: unknown };
       const draft = typeof value.draft === "string" ? value.draft.slice(0, MAX_MESSAGE_LENGTH) : "";
       const messages = Array.isArray(value.messages)
         ? value.messages.filter((message): message is PreviewMessage =>
@@ -32,7 +35,14 @@ export function readPreviewSession(): PreviewSession {
           ).slice(0, 8) : [],
         }))
         : [];
-      return isSlackThreadToken(session.slackThreadToken) ? { draft, messages, slackThreadToken: session.slackThreadToken } : { draft, messages };
+      const restored: PreviewSession = { draft, messages };
+      if (isSlackThreadToken(session.slackThreadToken)) restored.slackThreadToken = session.slackThreadToken;
+      const pending = session.pendingTurn as Partial<NonNullable<PreviewSession["pendingTurn"]>> | undefined;
+      if (pending && isChatTurnId(pending.id) && typeof pending.text === "string" && pending.text.length > 0 &&
+        pending.text.length <= MAX_MESSAGE_LENGTH && typeof pending.locale === "string" && isLocale(pending.locale)) {
+        restored.pendingTurn = { id: pending.id, text: pending.text, locale: pending.locale };
+      }
+      return restored;
     }
   } catch {
     // Storage may be unavailable or contain an older, invalid session.

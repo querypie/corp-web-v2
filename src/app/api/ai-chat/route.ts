@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { isLocale } from "@/constants/i18n";
 import { getAiChatConfig } from "@/features/ai/config.server";
 import { answerProductQuestion, ChatServiceError } from "@/features/ai-chat/answer.server";
-import { MAX_CHAT_MESSAGES, MAX_CHAT_REQUEST_BYTES, type ChatTurn } from "@/features/ai-chat/types";
+import { MAX_CHAT_MESSAGES, MAX_CHAT_REQUEST_BYTES, isChatTurnId, type ChatTurn } from "@/features/ai-chat/types";
 import { notifyAiChatTurn } from "@/features/ai-chat/slack.server";
 
 export const runtime = "nodejs";
@@ -39,8 +39,11 @@ export async function POST(request: Request) {
   let payload: unknown;
   try { payload = await readPayload(request); } catch { return error("INVALID_REQUEST", 400); }
   if (!payload || typeof payload !== "object") return error("INVALID_REQUEST", 400);
-  const { locale, messages, slackThreadToken } = payload as { locale?: unknown; messages?: unknown; slackThreadToken?: unknown };
-  if (typeof locale !== "string" || !isLocale(locale) || !Array.isArray(messages) || !messages.length || messages.length > MAX_CHAT_MESSAGES ||
+  const { locale, messages, slackThreadToken, turnId } = payload as {
+    locale?: unknown; messages?: unknown; slackThreadToken?: unknown; turnId?: unknown;
+  };
+  if (typeof locale !== "string" || !isLocale(locale) || (turnId !== undefined && !isChatTurnId(turnId)) ||
+      !Array.isArray(messages) || messages.length < 1 || messages.length > MAX_CHAT_MESSAGES ||
       !messages.every((message) => message && (message.role === "user" || message.role === "assistant") &&
         typeof message.content === "string" && message.content.trim().length > 0 && message.content.length <= 6000) ||
       messages.at(-1).role !== "user" || messages.at(-1).content.length > 2000) return error("INVALID_REQUEST", 400);
@@ -55,7 +58,8 @@ export async function POST(request: Request) {
     notifyAiChatTurn({ locale, question: messages.at(-1).content, outcome, slackThreadToken, upstreamDurationMs }).catch(() => undefined);
   const upstreamStarted = performance.now();
   try {
-    const reply = await answerProductQuestion(messages as ChatTurn[], locale, AbortSignal.any([request.signal, AbortSignal.timeout(55000)]));
+    const reply = await answerProductQuestion(messages as ChatTurn[], locale,
+      AbortSignal.any([request.signal, AbortSignal.timeout(55000)]), turnId);
     const token = await notify(reply, performance.now() - upstreamStarted);
     return NextResponse.json({ ...reply, ...(token ? { slackThreadToken: token } : {}) }, { headers: { "Cache-Control": "no-store" } });
   } catch (cause) {
