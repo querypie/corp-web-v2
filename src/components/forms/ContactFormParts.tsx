@@ -128,12 +128,14 @@ export function ContactCheckboxRow({
 }
 
 export function ContactPrivacyNotice({
+  conjunction = "&",
   privacyPolicyHref,
   privacyPolicyLabel,
   privacyTermsHref,
   privacyTermsLabel,
   privacyText,
 }: {
+  conjunction?: string;
   privacyPolicyHref: string;
   privacyPolicyLabel: string;
   privacyTermsHref: string;
@@ -146,7 +148,7 @@ export function ContactPrivacyNotice({
       <a className="text-brand decoration-1 underline-offset-4 hover:underline" href={privacyTermsHref}>
         {privacyTermsLabel}
       </a>{" "}
-      &{" "}
+      {conjunction}{" "}
       <a className="text-brand decoration-1 underline-offset-4 hover:underline" href={privacyPolicyHref}>
         {privacyPolicyLabel}
       </a>
