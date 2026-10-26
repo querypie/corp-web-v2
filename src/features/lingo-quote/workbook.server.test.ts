@@ -19,6 +19,7 @@ describe("createLingoQuoteWorkbook", () => {
       contactName: "山田太郎",
       department: "営業部",
       plan,
+      locale: "ja",
       issuedAt: new Date("2026-10-24T00:00:00.000Z"),
     });
 
@@ -39,13 +40,41 @@ describe("createLingoQuoteWorkbook", () => {
     expect(sheet).toMatch(new RegExp(`<c r="H8"[^>]*><f>H6\\+H7<\\/f><v>${total}<\\/v><\\/c>`));
     expect(sheet).toMatch(new RegExp(`<c r="C3"[^>]*><f>H8<\\/f><v>${total}<\\/v><\\/c>`));
     expect(result.total).toBe(total);
-    expect(result.fileName).toContain(`${plan}.xlsx`);
+    expect(result.fileName).toContain(`${plan}_ja.xlsx`);
   });
 
   it("neutralizes formula-like company input", async () => {
-    const result = await createLingoQuoteWorkbook({ companyName: "=HYPERLINK(\"https://evil.example\")", plan: "application" });
+    const result = await createLingoQuoteWorkbook({
+      companyName: "=HYPERLINK(\"https://evil.example\")",
+      contactName: "테스트 담당자",
+      department: "테스트 부서",
+      plan: "application",
+      locale: "ja",
+    });
     const zip = await JSZip.loadAsync(result.bytes);
     const sharedStrings = await zip.file("xl/sharedStrings.xml")?.async("text");
     expect(sharedStrings).toContain("&apos;=HYPERLINK(&quot;https://evil.example&quot;) 御中");
+  });
+
+  it.each([
+    ["ko", "견적서", "발주 회사", "2026-10-24"],
+    ["en", "Quotation", "Ordering Company", "2026-10-24"],
+  ] as const)("localizes the %s workbook labels", async (locale, title, companyLabel, date) => {
+    const result = await createLingoQuoteWorkbook({
+      companyName: "Sample Company",
+      contactName: "Sample Contact",
+      department: "Staff",
+      plan: "application",
+      locale,
+      issuedAt: new Date("2026-10-24T00:00:00.000Z"),
+    });
+    const zip = await JSZip.loadAsync(result.bytes);
+    const sheet = await zip.file("xl/worksheets/sheet1.xml")?.async("text");
+    const sharedStrings = await zip.file("xl/sharedStrings.xml")?.async("text");
+    expect(sharedStrings).toContain(title);
+    expect(sharedStrings).toContain(companyLabel);
+    expect(sharedStrings).toContain(date);
+    expect(sheet).toContain("<c r=\"B15\" s=\"43\" t=\"s\">");
+    expect(result.fileName).toContain(`_${locale}.xlsx`);
   });
 });

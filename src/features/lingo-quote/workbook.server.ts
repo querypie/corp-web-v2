@@ -4,16 +4,18 @@ import JSZip from "jszip";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { randomInt } from "node:crypto";
-import { formatJapaneseDate, formatQuoteNumber, LINGO_QUOTE_SKUS, type LingoQuotePlan } from "./catalog";
+import type { Locale } from "@/constants/i18n";
+import { formatQuoteNumber, LINGO_QUOTE_SKUS, type LingoQuotePlan } from "./catalog";
 
 const TEMPLATE_PATH = path.join(process.cwd(), "src/features/lingo-quote/template.xlsx");
 const TAX_RATE = 0.1;
 
 export type LingoQuoteInput = {
   companyName: string;
-  contactName?: string;
-  department?: string;
+  contactName: string;
+  department: string;
   plan: LingoQuotePlan;
+  locale: Locale;
   issuedAt?: Date;
 };
 
@@ -117,6 +119,16 @@ function replaceLastSharedStringText(sharedStringsXml: string, index: number, va
   return sharedStringsXml.replace(entry, nextEntry);
 }
 
+function replaceFirstSharedStringText(sharedStringsXml: string, index: number, value: string) {
+  const entries = [...sharedStringsXml.matchAll(/<si>[\s\S]*?<\/si>/g)];
+  const entry = entries[index]?.[0];
+  if (!entry) throw new Error(`Quotation template shared string is missing: ${index}`);
+  const firstRun = [...entry.matchAll(/<t(?:\s[^>]*)?>[\s\S]*?<\/t>/g)][0]?.[0];
+  if (!firstRun) throw new Error(`Quotation template shared string has no text: ${index}`);
+  const nextEntry = entry.replace(firstRun, firstRun.replace(/(<t(?:\s[^>]*)?>)[\s\S]*?(<\/t>)/, `$1${escapeXml(value)}$2`));
+  return sharedStringsXml.replace(entry, nextEntry);
+}
+
 function repairDrawingIds(drawingXml: string) {
   const used = new Set<number>();
   let nextId = 1;
@@ -132,8 +144,81 @@ function repairDrawingIds(drawingXml: string) {
 }
 
 function excelDateSerial(dateText: string) {
-  const [year, month, day] = dateText.split("/").map(Number);
+  const [year, month, day] = dateText.split(/[/-]/).map(Number);
   return Math.floor((Date.UTC(year, month - 1, day) - Date.UTC(1899, 11, 30)) / 86_400_000);
+}
+
+function formatQuoteDate(locale: Locale, date: Date) {
+  const parts = new Intl.DateTimeFormat(locale === "ja" ? "ja-JP" : locale === "ko" ? "ko-KR" : "en-CA", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return locale === "ja" ? `${values.year}/${values.month}/${values.day}` : `${values.year}-${values.month}-${values.day}`;
+}
+
+type LocalizedWorkbookCopy = {
+  title: string;
+  suffix: string;
+  issueDate: string;
+  validUntil: string;
+  quoteNumber: string;
+  paymentTerms: string;
+  total: string;
+  item: string;
+  description: string;
+  quantity: string;
+  credit: string;
+  unitPrice: string;
+  sum: string;
+  remarks: string;
+  tax: string;
+  totalLabel: string;
+  conditions: string;
+  orderDate: string;
+  deliveryDate: string;
+  orderingCompany: string;
+  contact: string;
+  signature: string;
+  department: string;
+  notes: string;
+  descriptionValue: string;
+};
+
+function getLocalizedWorkbookCopy(locale: Locale, plan: LingoQuotePlan): LocalizedWorkbookCopy {
+  if (locale === "ja") {
+    return {
+      title: "発注書  ORDER", suffix: " 御中", issueDate: "発行日", validUntil: "有効期限", quoteNumber: "見積もりNO#",
+      paymentTerms: "支払い期日 :            請求書発行月締め、翌月末支払い", total: "総合計（税込）", item: "項目名", description: "詳細",
+      quantity: "Qty", credit: "Credit", unitPrice: "単価", sum: "合計", remarks: "備考", tax: "消費税", totalLabel: "TOTAL",
+      conditions: "記載条件で発注いたします。", orderDate: "発注日：", deliveryDate: "希望納期：", orderingCompany: "発注者会社：",
+      contact: "ご担当者：", signature: "署名", department: "部署：",
+      notes: ["●利用期間：12か月", "●利用ユーザー：無制限", "●クレジットは１年間有効", "● LLM+AWSなど利用料も含む", "●クレジット残は次年度への繰り越しは不可"].join("\n"),
+      descriptionValue: plan === "production" ? "AIP Production Credit" : "AIP Application Credit (Lingo or NotePie)",
+    };
+  }
+  if (locale === "ko") {
+    return {
+      title: "견적서  QUOTATION", suffix: " 귀중", issueDate: "발행일", validUntil: "유효기간", quoteNumber: "견적번호",
+      paymentTerms: "지급기한 : 청구서 발행월 말일 기준, 익월 말 지급", total: "총합계 (부가세 포함)", item: "항목명", description: "상세",
+      quantity: "수량", credit: "크레딧", unitPrice: "단가", sum: "합계", remarks: "비고", tax: "소비세", totalLabel: "합계",
+      conditions: "상기 조건에 따른 견적입니다.", orderDate: "견적 발행일:", deliveryDate: "희망 납기:", orderingCompany: "발주 회사:",
+      contact: "담당자:", signature: "서명", department: "부서:",
+      notes: ["● 이용 기간: 12개월", "● 사용자 수: 무제한", "● 크레딧은 1년간 유효", "● LLM·AWS 등의 이용료 포함", "● 잔여 크레딧은 다음 연도로 이월되지 않음"].join("\n"),
+      descriptionValue: plan === "production" ? "AIP 프로덕션 크레딧" : "AIP 애플리케이션 크레딧 (Lingo 또는 NotePie)",
+    };
+  }
+  return {
+    title: "Quotation  ORDER", suffix: "", issueDate: "Issue Date", validUntil: "Valid Until", quoteNumber: "Quotation No#",
+    paymentTerms: "Payment Terms: Invoice month-end, payment by the end of the following month", total: "Grand Total (incl. tax)", item: "Item", description: "Description",
+    quantity: "Qty", credit: "Credit", unitPrice: "Unit Price", sum: "Total", remarks: "Remarks", tax: "Consumption Tax", totalLabel: "TOTAL",
+    conditions: "This quotation is based on the conditions stated above.", orderDate: "Quotation Date:", deliveryDate: "Requested Delivery Date:", orderingCompany: "Ordering Company:",
+    contact: "Contact Person:", signature: "Signature", department: "Department:",
+    notes: ["● Term: 12 months", "● Users: Unlimited", "● Credits are valid for one year", "● Includes LLM and AWS usage fees", "● Unused credits cannot be carried over to the next year"].join("\n"),
+    descriptionValue: plan === "production" ? "AIP Production Credit" : "AIP Application Credit (Lingo or NotePie)",
+  };
 }
 
 function safeCellText(value: string | undefined) {
@@ -144,21 +229,12 @@ function safeCellText(value: string | undefined) {
   return /^[=+\-@]/.test(trimmed) ? `'${trimmed}` : trimmed;
 }
 
-function buildRemarks() {
-  return [
-    "●利用期間：12か月",
-    "●利用ユーザー：無制限",
-    "●クレジットは１年間有効",
-    "● LLM+AWSなど利用料も含む",
-    "●クレジット残は次年度への繰り越しは不可",
-  ].join("\n");
-}
-
 export async function createLingoQuoteWorkbook(input: LingoQuoteInput): Promise<LingoQuoteWorkbook> {
   const plan = LINGO_QUOTE_SKUS[input.plan];
   const issuedAt = input.issuedAt ?? new Date();
-  const issuedDate = formatJapaneseDate(issuedAt);
-  const validUntil = formatJapaneseDate(new Date(issuedAt.getTime() + 30 * 24 * 60 * 60 * 1000));
+  const copy = getLocalizedWorkbookCopy(input.locale, input.plan);
+  const issuedDate = formatQuoteDate(input.locale, issuedAt);
+  const validUntil = formatQuoteDate(input.locale, new Date(issuedAt.getTime() + 30 * 24 * 60 * 60 * 1000));
   const quoteNumber = formatQuoteNumber(issuedAt, randomInt(1, 1000));
   const subtotal = plan.retailPrice;
   const tax = Math.round(subtotal * TAX_RATE);
@@ -177,8 +253,9 @@ export async function createLingoQuoteWorkbook(input: LingoQuoteInput): Promise<
   sharedStringsXml = replaceLastSharedStringText(
     sharedStringsXml,
     sharedStringIndex(sheetXml, "A1"),
-    `${safeCellText(input.companyName)} 御中`,
+    `${safeCellText(input.companyName)}${copy.suffix}`,
   );
+  sharedStringsXml = replaceFirstSharedStringText(sharedStringsXml, sharedStringIndex(sheetXml, "A1"), copy.title);
 
   const strings = new Map<string, number>();
   function addString(value: string) {
@@ -191,13 +268,13 @@ export async function createLingoQuoteWorkbook(input: LingoQuoteInput): Promise<
   }
 
   sheetXml = setSharedStringCell(sheetXml, "A2", addString([
-    `発行日 :                   ${issuedDate}`,
-    `有効期限 :               ${validUntil}`,
-    `見積もりNO# :         ${quoteNumber}`,
-    "支払い期日 :            請求書発行月締め、翌月末支払い",
+    `${copy.issueDate} :                   ${issuedDate}`,
+    `${copy.validUntil} :               ${validUntil}`,
+    `${copy.quoteNumber} :         ${quoteNumber}`,
+    copy.paymentTerms,
   ].join("\n")));
   sheetXml = setSharedStringCell(sheetXml, "A6", addString(plan.sku));
-  sheetXml = setSharedStringCell(sheetXml, "B6", addString(plan.description));
+  sheetXml = setSharedStringCell(sheetXml, "B6", addString(copy.descriptionValue));
   sheetXml = setNumericCell(sheetXml, "E6", 1);
   sheetXml = setNumericCell(sheetXml, "F6", plan.credit);
   sheetXml = setNumericCell(sheetXml, "G6", plan.retailPrice);
@@ -205,9 +282,18 @@ export async function createLingoQuoteWorkbook(input: LingoQuoteInput): Promise<
   sheetXml = setNumericCell(sheetXml, "H7", tax);
   sheetXml = setNumericCell(sheetXml, "H8", total);
   sheetXml = setNumericCell(sheetXml, "C3", total);
-  sheetXml = setSharedStringCell(sheetXml, "I6", addString(buildRemarks()));
+  sheetXml = setSharedStringCell(sheetXml, "I6", addString(copy.notes));
+  for (const [cell, value] of Object.entries({
+    B3: copy.total, A5: copy.item, B5: copy.description, E5: copy.quantity, F5: copy.credit,
+    G5: copy.unitPrice, H5: copy.sum, I5: copy.remarks, A7: copy.tax, A8: copy.totalLabel,
+    A9: copy.remarks, A12: copy.conditions, A14: copy.orderDate, A15: copy.deliveryDate,
+    A16: copy.orderingCompany, A17: copy.contact, C17: copy.signature, A18: copy.department,
+  })) {
+    sheetXml = setSharedStringCell(sheetXml, cell, addString(value));
+  }
   sheetXml = setSharedStringCell(sheetXml, "B14", addString(issuedDate));
-  sheetXml = setNumericCell(sheetXml, "B15", excelDateSerial(issuedDate));
+  if (input.locale === "ja") sheetXml = setNumericCell(sheetXml, "B15", excelDateSerial(issuedDate));
+  else sheetXml = setSharedStringCell(sheetXml, "B15", addString(issuedDate));
   sheetXml = setSharedStringCell(sheetXml, "B16", addString(safeCellText(input.companyName)));
   sheetXml = setSharedStringCell(sheetXml, "B17", addString(safeCellText(input.contactName)));
   sheetXml = setSharedStringCell(sheetXml, "B18", addString(safeCellText(input.department)));
@@ -216,7 +302,7 @@ export async function createLingoQuoteWorkbook(input: LingoQuoteInput): Promise<
   zip.file("xl/sharedStrings.xml", sharedStringsXml);
   zip.file("xl/drawings/drawing1.xml", repairDrawingIds(await drawingFile.async("text")));
   const bytes = await zip.generateAsync({ type: "nodebuffer", compression: "DEFLATE" });
-  const fileDate = issuedDate.replaceAll("/", "");
-  const fileName = `QP_Quotation_${fileDate}_${input.plan}.xlsx`;
+  const fileDate = issuedDate.replaceAll("/", "").replaceAll("-", "");
+  const fileName = `QP_Quotation_${fileDate}_${input.plan}_${input.locale}.xlsx`;
   return { bytes, fileName, plan: input.plan, total };
 }

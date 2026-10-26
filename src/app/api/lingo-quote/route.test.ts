@@ -40,10 +40,12 @@ describe("POST /api/lingo-quote", () => {
       department: "営業部",
       plan: "application",
       privacyConsent: true,
+      locale: "ko",
     }));
     expect(response.status).toBe(200);
     expect(response.headers.get("content-type")).toContain("spreadsheetml.sheet");
     expect(response.headers.get("content-disposition")).toContain("QP_Quotation");
+    expect(response.headers.get("content-disposition")).toContain("_ko.xlsx");
 
     const bytes = await response.arrayBuffer();
     const zip = await JSZip.loadAsync(bytes);
