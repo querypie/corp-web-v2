@@ -80,7 +80,7 @@ export async function POST(request: Request) {
   const contactName = readText(payload.contactName, 80);
   const department = readText(payload.department, 80);
   const plan = getLingoQuotePlan(payload.plan);
-  if (!companyName || !plan || payload.privacyConsent !== true) {
+  if (!companyName || !contactName || !department || !plan || payload.privacyConsent !== true) {
     return jsonError("MISSING_REQUIRED_FIELDS", 400);
   }
 

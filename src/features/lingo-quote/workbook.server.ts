@@ -11,8 +11,8 @@ const TAX_RATE = 0.1;
 
 export type LingoQuoteInput = {
   companyName: string;
-  contactName?: string;
-  department?: string;
+  contactName: string;
+  department: string;
   plan: LingoQuotePlan;
   issuedAt?: Date;
 };
