@@ -31,6 +31,8 @@ describe("createLingoQuoteWorkbook", () => {
     expect(sharedStrings).toContain(sku);
     expect(sharedStrings).toContain("山田太郎");
     expect(sharedStrings).toContain("営業部");
+    expect(sharedStrings).toContain("2026/10/24");
+    expect(sheet).toMatch(/<c r="B15"[^>]*><v>46319<\/v><\/c>/);
     expect(sheet).toMatch(new RegExp(`<c r="F6"[^>]*><v>${credit}<\\/v><\\/c>`));
     expect(sheet).toMatch(new RegExp(`<c r="G6"[^>]*><v>${subtotal}<\\/v><\\/c>`));
     expect(sheet).toMatch(new RegExp(`<c r="H7"[^>]*><f>H6\\*0\\.1<\\/f><v>${subtotal * 0.1}<\\/v><\\/c>`));

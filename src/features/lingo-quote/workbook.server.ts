@@ -38,7 +38,7 @@ function escapeXml(value: string) {
 }
 
 function cellXml(sheetXml: string, cell: string) {
-  const match = sheetXml.match(new RegExp(`<c\\b[^>]*\\br="${cell}"[^>]*(?:/>|>[\\s\\S]*?<\\/c>)`));
+  const match = sheetXml.match(new RegExp(`<c\\b(?=[^>]*\\br="${cell}")[^>]*?(?:\\/>|>[\\s\\S]*?<\\/c>)`));
   if (!match) throw new Error(`Quotation template cell is missing: ${cell}`);
   return match[0];
 }
@@ -55,8 +55,21 @@ function replaceCellXml(sheetXml: string, cell: string, next: string) {
   return sheetXml.replace(current, next);
 }
 
+function addCellXml(sheetXml: string, cell: string, next: string) {
+  const row = cell.match(/\d+$/)?.[0];
+  if (!row) throw new Error(`Quotation template cell has invalid address: ${cell}`);
+  const rowPattern = new RegExp(`(<row\\b[^>]*\\br="${row}"[^>]*>)([\\s\\S]*?)(</row>)`);
+  if (!rowPattern.test(sheetXml)) throw new Error(`Quotation template row is missing: ${row}`);
+  return sheetXml.replace(rowPattern, `$1$2${next}$3`);
+}
+
 function setSharedStringCell(sheetXml: string, cell: string, index: number) {
-  const current = cellXml(sheetXml, cell);
+  let current: string;
+  try {
+    current = cellXml(sheetXml, cell);
+  } catch {
+    return addCellXml(sheetXml, cell, `<c r="${cell}" t="s"><v>${index}</v></c>`);
+  }
   const openTag = current.match(/^<c\b[^>]*?(?:\/>|>)/)?.[0];
   if (!openTag) throw new Error(`Quotation template cell has invalid XML: ${cell}`);
   const nextOpenTag = openTag.includes('t="s"')
@@ -68,10 +81,17 @@ function setSharedStringCell(sheetXml: string, cell: string, index: number) {
 }
 
 function setNumericCell(sheetXml: string, cell: string, value: number) {
-  const current = cellXml(sheetXml, cell);
-  const next = current.includes("<v>")
-    ? current.replace(/<v>[\s\S]*?<\/v>/, `<v>${value}</v>`)
-    : current.replace(/<\/c>$/, `<v>${value}</v></c>`);
+  let current: string;
+  try {
+    current = cellXml(sheetXml, cell);
+  } catch {
+    return addCellXml(sheetXml, cell, `<c r="${cell}"><v>${value}</v></c>`);
+  }
+  const next = current.endsWith("/>")
+    ? `${current.slice(0, -2)}><v>${value}</v></c>`
+    : current.includes("<v>")
+      ? current.replace(/<v>[\s\S]*?<\/v>/, `<v>${value}</v>`)
+      : current.replace(/<\/c>$/, `<v>${value}</v></c>`);
   return replaceCellXml(sheetXml, cell, next);
 }
 
@@ -109,6 +129,11 @@ function repairDrawingIds(drawingXml: string) {
     used.add(id);
     return `${prefix}${id}${suffix}`;
   });
+}
+
+function excelDateSerial(dateText: string) {
+  const [year, month, day] = dateText.split("/").map(Number);
+  return Math.floor((Date.UTC(year, month - 1, day) - Date.UTC(1899, 11, 30)) / 86_400_000);
 }
 
 function safeCellText(value: string | undefined) {
@@ -181,6 +206,8 @@ export async function createLingoQuoteWorkbook(input: LingoQuoteInput): Promise<
   sheetXml = setNumericCell(sheetXml, "H8", total);
   sheetXml = setNumericCell(sheetXml, "C3", total);
   sheetXml = setSharedStringCell(sheetXml, "I6", addString(buildRemarks()));
+  sheetXml = setSharedStringCell(sheetXml, "B14", addString(issuedDate));
+  sheetXml = setNumericCell(sheetXml, "B15", excelDateSerial(issuedDate));
   sheetXml = setSharedStringCell(sheetXml, "B16", addString(safeCellText(input.companyName)));
   sheetXml = setSharedStringCell(sheetXml, "B17", addString(safeCellText(input.contactName)));
   sheetXml = setSharedStringCell(sheetXml, "B18", addString(safeCellText(input.department)));
