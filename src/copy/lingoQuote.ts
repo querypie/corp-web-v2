@@ -50,7 +50,7 @@ export function getLingoQuotePageCopy(locale: Locale): LingoQuotePageCopy {
       successDescription: "Your quotation download has started. Use the button below if you need to download it again.",
       downloadLabel: "Download quotation again",
       errorGeneral: "We could not create the quotation. Please try again.",
-      errorRequired: "Enter the ordering company, select a credit plan and agree to the privacy notice.",
+      errorRequired: "Enter the ordering company, contact person and department, select a credit plan, and agree to the privacy notice.",
       errorRateLimited: "Too many requests. Please wait a moment and try again.",
     },
     ko: {
@@ -74,7 +74,7 @@ export function getLingoQuotePageCopy(locale: Locale): LingoQuotePageCopy {
       successDescription: "견적서 다운로드가 시작되었습니다. 다시 받으려면 아래 버튼을 눌러주세요.",
       downloadLabel: "견적서 다시 다운로드",
       errorGeneral: "견적서를 생성하지 못했습니다. 잠시 후 다시 시도해주세요.",
-      errorRequired: "발주 회사명과 크레딧 상품을 입력하고 개인정보 수집 및 이용에 동의해주세요.",
+      errorRequired: "발주 회사명·담당자명·부서와 크레딧 상품을 입력하고 개인정보 수집 및 이용에 동의해주세요.",
       errorRateLimited: "요청이 너무 많습니다. 잠시 후 다시 시도해주세요.",
     },
     ja: {
@@ -98,7 +98,7 @@ export function getLingoQuotePageCopy(locale: Locale): LingoQuotePageCopy {
       successDescription: "見積書のダウンロードが始まりました。もう一度ダウンロードする場合は下のボタンをご利用ください。",
       downloadLabel: "見積書を再ダウンロード",
       errorGeneral: "見積書を作成できませんでした。しばらくしてからもう一度お試しください。",
-      errorRequired: "発注会社名とクレジット商品を入力し、個人情報の収集・利用に同意してください。",
+      errorRequired: "発注会社名・担当者名・部署とクレジット商品を入力し、個人情報の収集・利用に同意してください。",
       errorRateLimited: "リクエストが多すぎます。しばらくしてからもう一度お試しください。",
     },
   };
