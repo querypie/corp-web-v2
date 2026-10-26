@@ -6,16 +6,24 @@
   "dateIso": "2026-10-25",
   "downloadCoverImageSrc": "",
   "downloadPdfFileName": "",
-  "downloadPdfFileNameByLocale": { "en": "", "ko": "", "ja": "" },
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "downloadPdfMode": "none",
   "downloadPdfSrc": "",
-  "downloadPdfSrcByLocale": { "en": "", "ko": "", "ja": "" },
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "enableDownloadButton": false,
   "externalUrl": "https://www.mt.co.kr/index.php/stock/2026/10/25/2026102315235731274",
   "gatingLevel": "none",
   "hideHeroImage": false,
   "id": "querypie-ai-security-terminator-interview-mt",
-  "imageSrc": "",
+  "imageSrc": "/news/querypie-ceo-cto-interview.png",
   "relatedIds": [],
   "section": "news",
   "sortOrder": 0,
@@ -31,6 +39,8 @@
     "ko": "영화 '터미네이터'가 현실로?…쿼리파이 \"AI의 습격, 기술로 대비\"",
     "ja": ""
   },
-  "visibleLocales": ["ko"],
+  "visibleLocales": [
+    "ko"
+  ],
   "locales": {}
 }
