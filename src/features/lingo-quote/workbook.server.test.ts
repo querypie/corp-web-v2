@@ -33,7 +33,9 @@ describe("createLingoQuoteWorkbook", () => {
     expect(sharedStrings).toContain("山田太郎");
     expect(sharedStrings).toContain("営業部");
     expect(sharedStrings).toContain("2026/10/24");
-    expect(sheet).toMatch(/<c r="B15"[^>]*><v>46319<\/v><\/c>/);
+    expect(sharedStrings).toContain("2026/11/23");
+    expect(sheet).toMatch(/<c\b(?=[^>]*\br="B14")(?=[^>]*\bs="46")(?=[^>]*\bt="s")[^>]*>/);
+    expect(sheet).toMatch(/<c r="B15"[^>]*><v>46349<\/v><\/c>/);
     expect(sheet).toMatch(new RegExp(`<c r="F6"[^>]*><v>${credit}<\\/v><\\/c>`));
     expect(sheet).toMatch(new RegExp(`<c r="G6"[^>]*><v>${subtotal}<\\/v><\\/c>`));
     expect(sheet).toMatch(new RegExp(`<c r="H7"[^>]*><f>H6\\*0\\.1<\\/f><v>${subtotal * 0.1}<\\/v><\\/c>`));
@@ -76,5 +78,27 @@ describe("createLingoQuoteWorkbook", () => {
     expect(sharedStrings).toContain(date);
     expect(sheet).toContain("<c r=\"B15\" s=\"43\" t=\"s\">");
     expect(result.fileName).toContain(`_${locale}.xlsx`);
+  });
+
+  it.each([
+    ["ko", "주식회사 쿼리파이", "유효기간:", "2026-11-23"],
+    ["en", "CHEQUER Global, Inc.", "Valid Until:", "2026-11-23"],
+    ["ja", "QueryPie AI合同会社", "有効期限：", "2026/11/23"],
+  ] as const)("uses the %s issuer name and validity date", async (locale, issuerName, validityLabel, validityDate) => {
+    const result = await createLingoQuoteWorkbook({
+      companyName: "Sample Company",
+      contactName: "Sample Contact",
+      department: "Staff",
+      plan: "application",
+      locale,
+      issuedAt: new Date("2026-10-24T00:00:00.000Z"),
+    });
+    const zip = await JSZip.loadAsync(result.bytes);
+    const sheet = await zip.file("xl/worksheets/sheet1.xml")?.async("text");
+    const sharedStrings = await zip.file("xl/sharedStrings.xml")?.async("text");
+    expect(sharedStrings).toContain(issuerName);
+    expect(sharedStrings).toContain(validityLabel);
+    expect(sharedStrings).toContain(validityDate);
+    expect(sheet).toMatch(/<row r="3" ht="33" customHeight="1">/);
   });
 });
