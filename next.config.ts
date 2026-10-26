@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
   outputFileTracingExcludes: {
     "/api/admin/uploads": ["./public/**/*"],
   },
+  outputFileTracingIncludes: {
+    "/api/lingo-quote": ["./src/features/lingo-quote/template.xlsx"],
+  },
   async redirects() {
     return [
       {
