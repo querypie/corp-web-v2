@@ -34,10 +34,10 @@ type PlatformMenuOptions = {
 
 export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = {}): ShellMenuCopy {
   const footerLegalLinks = {
-    en: ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"],
-    ko: ["쿠키 설정", "이용약관", "개인정보처리방침", "EULA"],
-    ja: ["クッキー設定", "利用規約", "プライバシーポリシー", "EULA"],
-  }[locale] ?? ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"];
+    en: ["Cookie Preference", "Terms of Service", "Privacy Policy"],
+    ko: ["쿠키 설정", "이용약관", "개인정보처리방침"],
+    ja: ["クッキー設定", "利用規約", "プライバシーポリシー"],
+  }[locale] ?? ["Cookie Preference", "Terms of Service", "Privacy Policy"];
   const navItems = {
     en: ["Platform", "Demo", "Resource", "Company", "Plans"],
     ko: ["플랫폼", "데모", "리소스", "회사", "가격 · 플랜"],

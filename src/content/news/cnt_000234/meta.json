@@ -1,0 +1,46 @@
+{
+  "authorName": "머니투데이",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "outlink",
+  "dateIso": "2026-10-25",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "enableDownloadButton": false,
+  "externalUrl": "https://www.mt.co.kr/index.php/stock/2026/10/25/2026102315235731274",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "querypie-ai-security-terminator-interview-mt",
+  "imageSrc": "/news/querypie-ceo-cto-interview.png",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000234",
+  "summary": {
+    "en": "",
+    "ko": "쿼리파이 황인서 대표와 김삼영 CTO는 머니투데이 인터뷰를 통해 AI 에이전트 확산에 따른 보안 위협과 기업의 안전한 AI 활용을 위한 보안 전략을 소개했습니다. 특히 신규 제품 AI Gateway 출시 계획을 공개하며, 기존 보안 플랫폼 ACP와 AI 플랫폼 AIP를 기반으로 기업의 AI 도입과 활용을 지원하고 글로벌 시장 확대를 추진하겠다는 비전을 밝혔습니다.",
+    "ja": ""
+  },
+  "title": {
+    "en": "",
+    "ko": "영화 '터미네이터'가 현실로?…쿼리파이 \"AI의 습격, 기술로 대비\"",
+    "ja": ""
+  },
+  "visibleLocales": [
+    "ko"
+  ],
+  "locales": {}
+}
