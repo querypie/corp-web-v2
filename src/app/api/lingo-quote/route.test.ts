@@ -19,8 +19,12 @@ function request(body: unknown, headers: Record<string, string> = {}) {
 }
 
 describe("POST /api/lingo-quote", () => {
-  it("rejects a missing company or plan", async () => {
-    const response = await POST(request({ companyName: "株式会社テスト", privacyConsent: true }));
+  it("rejects a missing required ordering field", async () => {
+    const response = await POST(request({
+      companyName: "株式会社テスト",
+      contactName: "山田太郎",
+      privacyConsent: true,
+    }));
     expect(response.status).toBe(400);
     await expect(response.json()).resolves.toEqual({ code: "MISSING_REQUIRED_FIELDS" });
   });
