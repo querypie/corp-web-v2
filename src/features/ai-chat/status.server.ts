@@ -1,4 +1,5 @@
 import "server-only";
+import { randomUUID } from "node:crypto";
 import { getAiChatConfig } from "@/features/ai/config.server";
 import { safeErrorInfo, safeResponseInfo } from "./diagnostics.server";
 import type { AiChatProbeResult, AiChatStatusConfig } from "./status";
@@ -64,7 +65,10 @@ export async function probeAiChat(signal: AbortSignal): Promise<AiChatProbeResul
   try {
     response = await fetch(`${config.baseUrl}/chat/completions`, {
       method: "POST",
-      headers: { "Content-Type": "application/json", Authorization: `Bearer ${config.apiKey}` },
+      headers: {
+        "Content-Type": "application/json", Authorization: `Bearer ${config.apiKey}`,
+        "X-Hermes-Session-Id": `webchat-probe-${randomUUID()}`,
+      },
       signal,
       cache: "no-store",
       body: JSON.stringify({

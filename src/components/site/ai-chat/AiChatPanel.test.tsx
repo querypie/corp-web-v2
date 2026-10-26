@@ -10,7 +10,7 @@ const response = () => new Response(JSON.stringify(reply), { headers: { "Content
 describe("AI 제품 상담", () => {
   beforeEach(() => {
     sessionStorage.clear();
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(response()));
+    vi.stubGlobal("fetch", vi.fn().mockImplementation(async () => response()));
     vi.spyOn(HTMLDialogElement.prototype, "showModal").mockImplementation(function (this: HTMLDialogElement) {
       this.setAttribute("open", "");
     });
@@ -54,7 +54,10 @@ describe("AI 제품 상담", () => {
     expect(referenceLink).toHaveAttribute("rel", "noopener noreferrer");
     expect(input).toHaveValue("");
     expect(fetch).toHaveBeenCalledOnce();
-    expect(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string)).toEqual({ locale: "ko", messages: [{ role: "user", content: "AIP와 Lingo의 차이는 무엇인가요?" }] });
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string)).toEqual({
+      locale: "ko", messages: [{ role: "user", content: "AIP와 Lingo의 차이는 무엇인가요?" }],
+      turnId: expect.any(String),
+    });
   });
 
   it("참고자료 제목이 전체 URL이면 URL만 표시하고 확인한 언어 경로를 보존한다", async () => {
@@ -172,11 +175,12 @@ describe("AI 제품 상담", () => {
         { role: "assistant", content: reply.answer },
         { role: "user", content: "이전 답변에 이어 설명해줘" },
       ],
+      turnId: expect.any(String),
       slackThreadToken: "thread-token-1",
     });
   });
 
-  it("대화창에 열린 대화 내역을 자르지 않고 모두 전송한다", async () => {
+  it("현재 창의 최근 대화를 현재 질문과 함께 전송한다", async () => {
     const messages = Array.from({ length: 12 }, (_, index) => ({
       id: `message-${index}`,
       role: index % 2 === 0 ? "user" : "assistant",
@@ -190,7 +194,25 @@ describe("AI 제품 상담", () => {
     fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
     await screen.findByText(reply.answer);
 
-    expect(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string).messages).toHaveLength(13);
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string)).toMatchObject({
+      messages: [...messages.map((message) => ({ role: message.role, content: message.text })), { role: "user", content: "새 질문" }],
+    });
+  });
+
+  it("오래된 대화는 제외하고 현재 질문을 포함한 최근 20개만 전송한다", async () => {
+    const messages = Array.from({ length: 20 }, (_, index) => ({
+      id: `message-${index}`, role: index % 2 === 0 ? "user" : "assistant",
+      text: `대화 ${index + 1}`, locale: "ko",
+    }));
+    sessionStorage.setItem("querypie-ai-chat:v1", JSON.stringify({ draft: "", messages }));
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "가격 말고 Aru 기능" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByText(reply.answer);
+    const sent = JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string);
+    expect(sent.messages).toHaveLength(20);
+    expect(sent.messages[0]).toEqual({ role: "assistant", content: "대화 2" });
+    expect(sent.messages.at(-1)).toEqual({ role: "user", content: "가격 말고 Aru 기능" });
   });
 
   it("저장된 Slack thread token을 remount 이후 요청에도 사용한다", async () => {
@@ -247,6 +269,8 @@ describe("AI 제품 상담", () => {
       expect.objectContaining({ role: "user", text: "새 대화" }),
       expect.objectContaining({ role: "assistant", text: reply.answer }),
     ] }));
+    expect(vi.mocked(fetch).mock.calls[1][0]).toBe("/api/ai-chat");
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).toMatchObject({ messages: [{ role: "user", content: "새 대화" }] });
     expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).not.toHaveProperty("slackThreadToken");
   });
 
@@ -258,6 +282,50 @@ describe("AI 제품 상담", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(aiChatCopy.ko.error);
     expect(screen.getByRole("textbox")).toHaveValue("Lingo 지원 언어");
     expect(screen.getByRole("button", { name: aiChatCopy.ko.send })).toBeEnabled();
+  });
+
+  it("후속 요청 전 ID를 저장하고 실패·remount 후 같은 ID와 선택지로 재전송한다", async () => {
+    sessionStorage.setItem("querypie-ai-chat:v1", JSON.stringify({ draft: "", messages: [
+      { id: "first-user", role: "user", text: "DLP 기능 알려줘", locale: "ko" },
+      { id: "first-answer", role: "assistant", text: "1. AIP Enterprise DLP 2. SLM-based DLP", locale: "ko" },
+    ] }));
+    vi.mocked(fetch).mockRejectedValueOnce(new TypeError("connection interrupted"));
+    const first = render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "1" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByRole("alert");
+    expect(vi.mocked(fetch).mock.calls[0][0]).toBe("/api/ai-chat");
+    const original = JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string);
+    expect(original).not.toHaveProperty("conversationToken");
+    expect(original.messages).toEqual([
+      { role: "user", content: "DLP 기능 알려줘" },
+      { role: "assistant", content: "1. AIP Enterprise DLP 2. SLM-based DLP" },
+      { role: "user", content: "1" },
+    ]);
+    expect(readPreviewSession()).toMatchObject({ pendingTurn: { id: original.turnId } });
+    first.unmount();
+
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByText(reply.answer);
+    const retried = JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string);
+    expect(retried).toEqual(original);
+    expect(readPreviewSession().pendingTurn).toBeUndefined();
+  });
+
+  it("새 대화는 같은 첫 질문에도 다른 재시도 ID를 사용한다", async () => {
+    sessionStorage.clear();
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    for (const index of [0, 1]) {
+      if (index) fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.reset }));
+      fireEvent.change(screen.getByRole("textbox"), { target: { value: "DLP 기능 알려줘" } });
+      fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+      await screen.findByText(reply.answer);
+    }
+    const a = JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string);
+    const b = JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string);
+    expect(a.messages).toEqual(b.messages);
+    expect(a.turnId).not.toBe(b.turnId);
   });
 
   it("서버 에러 응답에 Slack thread token이 있으면 실패 후에도 유지한다", async () => {
@@ -274,6 +342,22 @@ describe("AI 제품 상담", () => {
 
     await waitFor(() => expect(readPreviewSession().slackThreadToken).toBe("thread-token-error"));
     expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).toMatchObject({ slackThreadToken: "thread-token-error" });
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string).turnId)
+      .not.toBe(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string).turnId);
+  });
+
+  it("명시적 TIMEOUT 후 재전송은 진행 중인 요청 ID를 유지한다", async () => {
+    vi.mocked(fetch)
+      .mockResolvedValueOnce(Response.json({ code: "TIMEOUT" }, { status: 504 }))
+      .mockResolvedValueOnce(response());
+    render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
+    fireEvent.change(screen.getByRole("textbox"), { target: { value: "DLP 기능 알려줘" } });
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByRole("alert");
+    fireEvent.click(screen.getByRole("button", { name: aiChatCopy.ko.send }));
+    await screen.findByText(reply.answer);
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string))
+      .toEqual(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string));
   });
 
   it.each(["en", "ko", "ja"] as const)("%s 미완료 안내를 표시하고 원래 질문과 스레드로 재시도한다", async (locale) => {
@@ -288,14 +372,17 @@ describe("AI 제품 상담", () => {
     expect(await screen.findByRole("alert")).toHaveTextContent(aiChatCopy[locale].incomplete);
     expect(screen.getByRole("textbox")).toHaveValue(question);
     expect(screen.queryByText(question, { selector: "p" })).not.toBeInTheDocument();
-    await waitFor(() => expect(readPreviewSession()).toEqual({ draft: question, messages: [], slackThreadToken: "incomplete-thread" }));
+    await waitFor(() => expect(readPreviewSession()).toMatchObject({ draft: question, messages: [], slackThreadToken: "incomplete-thread" }));
 
     fireEvent.click(screen.getByRole("button", { name: aiChatCopy[locale].send }));
     await screen.findByText(reply.answer);
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
     expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string)).toEqual({
       locale, messages: [{ role: "user", content: question }], slackThreadToken: "incomplete-thread",
+      turnId: expect.any(String),
     });
+    expect(JSON.parse(vi.mocked(fetch).mock.calls[1][1]!.body as string).turnId)
+      .not.toBe(JSON.parse(vi.mocked(fetch).mock.calls[0][1]!.body as string).turnId);
   });
 
   it("서버가 예전 브라우저 전달 payload를 반환해도 외부 LLM으로 직접 요청하지 않는다", async () => {

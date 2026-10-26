@@ -85,6 +85,7 @@ describe("AI Chat 상태 점검 서비스", () => {
     const [url, init] = fetcher.mock.calls[0];
     expect(url).toBe(`${AI_CHAT_BASE_URL_PROD}/chat/completions`);
     expect(init.headers.Authorization).toBe("Bearer stage-secret");
+    expect(init.headers["X-Hermes-Session-Id"]).toMatch(/^webchat-probe-[0-9a-f-]{36}$/);
     const body = JSON.parse(init.body);
     expect(body).toEqual({
       model: AI_CHAT_MODEL,
