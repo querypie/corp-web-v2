@@ -62,8 +62,8 @@ export default function ContentArticlePreview({
         <div className={cx("flex flex-col gap-[40px]", downloadHref && "mb-[-40px]")}>
           <ContentPreviewImage
             alt={heroImageAlt}
-            className="block h-auto w-full"
-            containerClassName="w-full overflow-hidden rounded-box bg-bg-content"
+            className="block h-full w-full object-cover"
+            containerClassName="content-thumbnail-frame w-full overflow-hidden rounded-box bg-bg-content"
             src={resolvedHeroImageSrc}
           />
           {downloadHref ? (
