@@ -1,0 +1,41 @@
+{
+  "authorName": "Press Release",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "content",
+  "dateIso": "2026-10-19",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": { "en": "", "ko": "", "ja": "" },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": { "en": "", "ko": "", "ja": "" },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "qev-decision-ai-dlp-press-release",
+  "imageSrc": "/resources/blogs/qev-decision-ai/thumbnail.png",
+  "relatedIds": ["qev-decision-ai-dlp-detection"],
+  "section": "news",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000233",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": "QueryPie AIは、機密情報の検知に特化した意思決定AIモデル「QEV」を開発。社内評価で検知率99.69％を記録し、商用AIモデルと比較して検知漏れを約91.3％低減しました。"
+  },
+  "title": {
+    "en": "",
+    "ko": "",
+    "ja": "QueryPie AI、機密情報の検知に特化した意思決定AIモデル「QEV」を開発"
+  },
+  "visibleLocales": ["ja"],
+  "locales": {
+    "ja": {
+      "htmlPath": "src/content/news/cnt_000233/ja.html",
+      "jsonPath": "src/content/news/cnt_000233/ja.tiptap.json"
+    }
+  }
+}

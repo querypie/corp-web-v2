@@ -5,6 +5,14 @@ import { koEnLegacyRedirects } from "./src/features/routing/koEnLegacyRedirects"
 import { getSiteDomainRedirects, getSiteDomainRewrites } from "./src/features/routing/siteDomainRouting";
 
 const nextConfig: NextConfig = {
+  // Static media is served separately; the upload handler only needs its code
+  // and image-processing dependencies in the serverless function bundle.
+  outputFileTracingExcludes: {
+    "/api/admin/uploads": ["./public/**/*"],
+  },
+  outputFileTracingIncludes: {
+    "/api/lingo-quote": ["./src/features/lingo-quote/template.xlsx"],
+  },
   async redirects() {
     return [
       {

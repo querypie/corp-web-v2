@@ -132,6 +132,8 @@ describe("제품 상담 API", () => {
   it.each([
     [new ChatServiceError("PROVIDER_ERROR", 502), "PROVIDER_ERROR", 502],
     [new ChatServiceError("INVALID_RESPONSE", 502), "INVALID_RESPONSE", 502],
+    [new ChatServiceError("INCOMPLETE_RESPONSE", 502), "INCOMPLETE_RESPONSE", 502],
+    [new ChatServiceError("TIMEOUT", 504), "TIMEOUT", 504],
     [new DOMException("private timeout details", "TimeoutError"), "TIMEOUT", 504],
     [new TypeError("private network details"), "PROVIDER_ERROR", 502],
   ])("upstream 실패(%s)에도 오류와 지연시간을 Slack에 전달한다", async (cause, code, status) => {

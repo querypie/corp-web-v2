@@ -7,6 +7,7 @@ import Youtube from "@tiptap/extension-youtube";
 import StarterKit from "@tiptap/starter-kit";
 import { parseTiptapJson, type TiptapJsonNode } from "@/features/content/translation/tiptap";
 import { normalizeYoutubeEmbedUrl } from "@/features/content/youtubeUrl";
+import { ContentTableLayout } from "@/features/content/tableLayout";
 
 const ResizableImage = Image.extend({
   addAttributes() {
@@ -141,6 +142,7 @@ const renderExtensions = [
     nocookie: true,
   }),
   TableKit,
+  ContentTableLayout,
 ];
 
 function escapeHtml(value: string) {
@@ -281,7 +283,7 @@ function renderNode(node: TiptapJsonNode): string {
       return renderFigureMedia(node, videoHtml);
     }
     case "table":
-      return `<table><tbody>${children}</tbody></table>`;
+      return `<table${attrs.layout === "profiles" ? ' data-content-layout="profiles"' : ""}><tbody>${children}</tbody></table>`;
     case "tableRow":
       return `<tr>${children}</tr>`;
     case "tableCell":

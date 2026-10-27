@@ -173,6 +173,16 @@ export function isPublishedContentAccessible(
   return item.status === "published" && item.visibleLocales.length > 0;
 }
 
+// QEV is being released in Japanese first. Other content keeps its existing locale fallback.
+export function isPublishedContentAccessibleInLocale(
+  item: Pick<ManagedContentEntry, "id" | "status" | "visibleLocales">,
+  locale: Locale,
+) {
+  return isPublishedContentAccessible(item) && (
+    item.id !== "qev-decision-ai-dlp-detection" || isPublishedContentVisible(item, locale)
+  );
+}
+
 export function getDefaultVisibleLocales(title: LocalizedContent) {
   return (["en", "ko", "ja"] as const).filter((locale) => title[locale]?.trim());
 }

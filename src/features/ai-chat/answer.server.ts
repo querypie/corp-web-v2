@@ -3,7 +3,7 @@ import type { Locale } from "@/constants/i18n";
 import { getAiChatConfig } from "@/features/ai/config.server";
 import type { ChatReply, ChatTurn } from "./types";
 import { logAiChatDiagnostic, safeErrorInfo, safeResponseInfo } from "./diagnostics.server";
-import { ChatServiceError, parseProviderReply } from "./reply";
+import { ChatServiceError, parseProviderErrorCode, parseProviderReply } from "./reply";
 export { ChatServiceError } from "./reply";
 
 const systemPrompt = [
@@ -40,8 +40,13 @@ export async function answerProductQuestion(messages: ChatTurn[], _locale: Local
     throw cause;
   }
   if (!response.ok) {
-    logAiChatDiagnostic("provider_http_error", { provider: "partner-portal", status: response.status, durationMs: Date.now() - started, ...safeResponseInfo(response) });
-    throw new ChatServiceError("PROVIDER_ERROR", response.status === 429 ? 429 : 502);
+    let payload: unknown;
+    if (response.headers.get("content-type")?.includes("json")) {
+      try { payload = await response.json(); } catch (cause) { if (signal.aborted) throw cause; }
+    }
+    const code = parseProviderErrorCode(payload);
+    logAiChatDiagnostic("provider_http_error", { provider: "partner-portal", status: response.status, durationMs: Date.now() - started, error: { code }, ...safeResponseInfo(response) });
+    throw new ChatServiceError(code, response.status === 429 ? 429 : code === "TIMEOUT" ? 504 : 502);
   }
   let payload: unknown;
   try {

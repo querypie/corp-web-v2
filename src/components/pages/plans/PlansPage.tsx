@@ -6,7 +6,7 @@ import Button from "@/components/ui/Button";
 import { TabLink } from "@/components/ui/Tab";
 import TabGroup from "@/components/ui/TabGroup";
 import Cta from "@/components/sections/Cta";
-import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PlanFeature, type PricingProduct } from "@/constants/plans";
+import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PlanFeature, type PricingProduct } from "@/copy/plans";
 import { getLocalePath, type Locale } from "@/constants/i18n";
 import { getPlansPageCopy } from "@/copy/contentPages";
 
@@ -188,7 +188,7 @@ function ComparisonTable({
                   >
                     <div className="px-5 type-body-md text-fg">{row.label}</div>
 
-                    {row.values.slice(-plans.length).map((cell, index) => (
+                    {row.values.map((cell, index) => (
                       <div
                         key={`${row.label}-${plans[index]}`}
                         className="px-5 text-center type-body-md"
