@@ -12,6 +12,7 @@ type AiChatCopy = {
   conversation: string;
   unavailable: string;
   loading: string;
+  loadingSteps: string[];
   error: string;
   sources: string;
   disclaimer: string;
@@ -30,6 +31,7 @@ export const aiChatCopy: Record<Locale, AiChatCopy> = {
     conversation: "상담 대화",
     unavailable: "이 환경에서는 AI 상담 연결이 아직 설정되지 않았습니다.",
     loading: "답변을 준비하고 있어요…",
+    loadingSteps: ["답변을 준비하고 있어요…", "관련 내용을 확인하고 있어요…", "답변을 정리하고 있어요…"],
     error: "답변을 가져오지 못했어요. 잠시 후 다시 보내주세요.",
     sources: "참고 자료",
     disclaimer: "AI는 간혹 실수할 수 있습니다.",
@@ -46,6 +48,7 @@ export const aiChatCopy: Record<Locale, AiChatCopy> = {
     conversation: "Conversation",
     unavailable: "The AI advisor is not connected in this environment yet.",
     loading: "Preparing an answer…",
+    loadingSteps: ["Preparing an answer…", "Checking relevant information…", "Putting the answer together…"],
     error: "We couldn't get an answer. Please try sending your message again shortly.",
     sources: "Sources",
     disclaimer: "AI can sometimes make mistakes.",
@@ -62,6 +65,7 @@ export const aiChatCopy: Record<Locale, AiChatCopy> = {
     conversation: "会話履歴",
     unavailable: "この環境ではAI相談への接続がまだ設定されていません。",
     loading: "回答を準備しています…",
+    loadingSteps: ["回答を準備しています…", "関連する情報を確認しています…", "回答をまとめています…"],
     error: "回答を取得できませんでした。しばらくしてから、もう一度送信してください。",
     sources: "参考資料",
     disclaimer: "AIの回答には誤りが含まれる場合があります。",

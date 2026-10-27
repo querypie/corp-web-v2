@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
-import { RotateCcw, Send, X } from "lucide-react";
+import { LoaderCircle, RotateCcw, Send, X } from "lucide-react";
 import Button from "@/components/ui/Button";
 import type { Locale } from "@/constants/i18n";
 import { getSameSiteHref } from "@/features/routing/siteLinks";
@@ -33,6 +33,7 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
   const threadRef = useRef<HTMLDivElement>(null);
   const [session, setSession] = useState(readPreviewSession);
   const [pending, setPending] = useState(false);
+  const [loadingStage, setLoadingStage] = useState(0);
   const [error, setError] = useState<"unavailable" | "error" | null>(null);
   const requestRef = useRef<AbortController | null>(null);
   const generationRef = useRef(0);
@@ -81,11 +82,21 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
     if (thread && open) thread.scrollTop = thread.scrollHeight;
   }, [session.messages, open]);
 
+  useEffect(() => {
+    if (!pending) return;
+    setLoadingStage(0);
+    const timer = window.setInterval(() => {
+      setLoadingStage((current) => Math.min(current + 1, copy.loadingSteps.length - 1));
+    }, 1600);
+    return () => window.clearInterval(timer);
+  }, [copy.loadingSteps.length, pending]);
+
   function reset() {
     generationRef.current++;
     requestRef.current?.abort();
     requestRef.current = null;
     setPending(false);
+    setLoadingStage(0);
     setError(null);
     setSession({ draft: "", messages: [] });
     inputRef.current?.focus();
@@ -210,7 +221,12 @@ export default function AiChatPanel({ locale, open, onClose }: AiChatPanelProps)
                 ) : null}
               </div>
             ))}
-            {pending ? <p className={`${styles.muted} type-body-sm`} role="status">{copy.loading}</p> : null}
+            {pending ? (
+              <p className={`${styles.muted} type-body-sm flex items-center gap-2`} role="status">
+                <LoaderCircle aria-hidden="true" className="h-4 w-4 shrink-0 animate-spin" />
+                <span>{copy.loadingSteps[loadingStage] ?? copy.loading}</span>
+              </p>
+            ) : null}
           </div>
         )}
       </div>
