@@ -16,6 +16,11 @@ describe("verifyTurnstileToken", () => {
     await expect(verifyTurnstileToken("token")).resolves.toEqual({ ok: false, reason: "misconfigured" });
   });
 
+  it("Secret Key만 있으면 잘못된 설정으로 거부한다", async () => {
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "secret-key");
+    await expect(verifyTurnstileToken("token")).resolves.toEqual({ ok: false, reason: "misconfigured" });
+  });
+
   it("유효한 토큰은 Cloudflare 검증 API를 통과한다", async () => {
     vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "site-key");
     vi.stubEnv("TURNSTILE_SECRET_KEY", "secret-key");
