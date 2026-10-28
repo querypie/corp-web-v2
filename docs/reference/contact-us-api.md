@@ -67,7 +67,7 @@
 ### 처리 순서
 
 1. **필수 필드 검증** — `firstName`, `lastName`, `email`, `company`, `departmentTitle` 중 누락 시 `400`.
-2. **Turnstile 검증** — `TURNSTILE_SECRET_KEY` 또는 `NEXT_PUBLIC_TURNSTILE_SITE_KEY`가 설정된 환경에서는 Cloudflare Siteverify API 검증을 통과해야 한다. 누락·실패·설정 오류는 `400`으로 처리한다.
+2. **Turnstile 검증** — `TURNSTILE_SECRET_KEY`와 `NEXT_PUBLIC_TURNSTILE_SITE_KEY`가 모두 설정된 환경에서는 Cloudflare Siteverify API 검증을 통과해야 한다. 토큰 누락·검증 실패·키 설정 오류는 `400`으로 처리한다.
 3. **MX 레코드 검증** — 이메일 도메인의 MX 레코드 확인. 실패 시 2초 딜레이 후 에러 반환 (brute-force 완화).
 4. **XSS 필터링** — 모든 문자열 필드에 적용.
 5. **DeskPie Lead API 전송** (best-effort) — `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY`가 모두 있으면 Next.js `after()`로 전송한다. 실패해도 에러 로그만 남긴다.
