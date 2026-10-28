@@ -17,7 +17,7 @@ export async function verifyTurnstileToken(
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   if (!secret && !siteKey) return { ok: true, configured: false };
-  if (!secret) return { ok: false, reason: "misconfigured" };
+  if (!secret || !siteKey) return { ok: false, reason: "misconfigured" };
   if (!token) return { ok: false, reason: "missing" };
 
   try {

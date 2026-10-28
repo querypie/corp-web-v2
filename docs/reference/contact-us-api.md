@@ -122,7 +122,7 @@ DeskPie API는 기존 lead field name과 호환되는 payload를 받는다. Slac
 | `DESKPIE_API_BASE_URL` | 선택 | DeskPie 단계 skip |
 | `DESKPIE_API_KEY` | 선택 | DeskPie 단계 skip |
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | 선택 | Contact Us 브라우저 위젯 비활성화 |
-| `TURNSTILE_SECRET_KEY` | 선택 | 두 Turnstile 키가 모두 없으면 검증 비활성화; Site Key만 있으면 설정 오류로 거부 |
+| `TURNSTILE_SECRET_KEY` | 선택 | 두 Turnstile 키가 모두 없으면 검증 비활성화; 한쪽만 있으면 설정 오류로 거부 |
 
 Slack 알림 채널 선택은 Community License, 콘텐츠 게이팅 폼과 같은 resolver를 공유한다.
 
