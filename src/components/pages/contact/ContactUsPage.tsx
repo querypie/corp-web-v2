@@ -1,6 +1,7 @@
 import type { Locale } from "@/constants/i18n";
 import type { ContactPageCopy } from "@/copy/contact";
 import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";
+import Script from "next/script";
 import ContactForm from "./ContactForm";
 
 type ContactUsPageProps = ContactPageCopy & { locale: Locale; initialProducts?: string[] };
@@ -15,7 +16,11 @@ export default function ContactUsPage(props: ContactUsPageProps) {
   } = props;
 
   return (
-    <div className="flex w-full justify-center px-5 md:px-10">
+    <>
+      {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ? (
+        <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" strategy="afterInteractive" />
+      ) : null}
+      <div className="flex w-full justify-center px-5 md:px-10">
       <section className="mx-auto flex w-full max-w-[1200px] flex-col gap-20 pb-10 md:flex-row md:items-start md:gap-[80px]">
         {/* 좌측 히어로/안내 카피 */}
         <div className="flex min-w-0 flex-1 basis-1/2 flex-col gap-5">
@@ -73,6 +78,7 @@ export default function ContactUsPage(props: ContactUsPageProps) {
         {/* 우측 폼 */}
         <ContactForm {...props} />
       </section>
-    </div>
+      </div>
+    </>
   );
 }

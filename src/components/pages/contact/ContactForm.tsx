@@ -7,6 +7,7 @@ import type { ContactField, ContactPageCopy } from "@/copy/contact";
 import type { Locale } from "@/constants/i18n";
 import { getLocalePath } from "@/constants/i18n";
 import { readUtmCookie } from "@/features/utm/utm";
+import TurnstileWidget from "./TurnstileWidget";
 import {
   ContactCheckboxRow,
   ContactPrivacyNotice,
@@ -22,6 +23,7 @@ type FormState = Record<string, string>;
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
 
 type ContactSubmitErrorCode =
+  | "turnstile_failed"
   | "invalid_email"
   | "invalid_request"
   | "missing_required_fields"
@@ -61,6 +63,7 @@ function getContactErrorMessage(
 ) {
   const messages: Record<Locale, Record<ContactFormErrorCode, string>> = {
     en: {
+      turnstile_failed: "Please complete the security verification and try again.",
       invalid_email: "Please check your email address. We couldn't verify that this email domain can receive messages.",
       invalid_request: "Some information could not be submitted. Please refresh the page and try again.",
       missing_required_fields: "Please complete all required fields and select at least one product or service.",
@@ -68,6 +71,7 @@ function getContactErrorMessage(
       server_error: "We couldn't submit your inquiry due to a temporary server issue. Please try again later.",
     },
     ko: {
+      turnstile_failed: "보안 확인을 완료한 뒤 다시 시도해 주세요.",
       invalid_email: "이메일 주소를 확인해 주세요. 입력한 이메일 도메인으로 메일을 받을 수 있는지 확인하지 못했습니다.",
       invalid_request: "입력한 정보를 제출하지 못했습니다. 페이지를 새로고침한 뒤 다시 시도해 주세요.",
       missing_required_fields: "필수 항목을 모두 입력하고 관심 제품 또는 서비스를 1개 이상 선택해 주세요.",
@@ -75,6 +79,7 @@ function getContactErrorMessage(
       server_error: "일시적인 서버 문제로 문의를 제출하지 못했습니다. 잠시 후 다시 시도해 주세요.",
     },
     ja: {
+      turnstile_failed: "セキュリティ確認を完了して、もう一度お試しください。",
       invalid_email: "メールアドレスをご確認ください。入力されたメールドメインで受信できるか確認できませんでした。",
       invalid_request: "入力内容を送信できませんでした。ページを再読み込みしてもう一度お試しください。",
       missing_required_fields: "必須項目をすべて入力し、興味のある製品・サービスを1つ以上選択してください。",
@@ -95,6 +100,8 @@ export default function ContactForm(props: ContactFormProps) {
   const [form, setForm] = useState<FormState>(() => makeInitialForm(copy, initialProducts));
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [turnstileToken, setTurnstileToken] = useState<string>();
+  const turnstileConfigured = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
   const canSubmit = useMemo(
     () => isRequiredSatisfied(copy, form) && status !== "submitting",
@@ -119,6 +126,11 @@ export default function ContactForm(props: ContactFormProps) {
 
     const selectedProducts = copy.productOptions.filter((o) => form[`product:${o}`] === "true");
     const utmAttribution = readUtmCookie();
+    if (turnstileConfigured && !turnstileToken) {
+      setStatus("error");
+      setErrorMessage(getContactErrorMessage(locale, "turnstile_failed", copy.errorGeneral));
+      return;
+    }
 
     try {
       const response = await fetch("/api/contact-us", {
@@ -138,6 +150,7 @@ export default function ContactForm(props: ContactFormProps) {
           marketingConsent: form.marketingConsent === "true",
           referrerURL: window.location.href,
           utmAttribution,
+          turnstileToken,
         }),
       });
 
@@ -266,6 +279,8 @@ export default function ContactForm(props: ContactFormProps) {
         privacyTermsLabel={copy.privacyTermsLabel}
         privacyText={copy.privacyText}
       />
+
+      <TurnstileWidget onToken={setTurnstileToken} />
 
       {errorMessage ? (
         <p className="m-0 type-body-sm text-[var(--color-destructive)]">{errorMessage}</p>
