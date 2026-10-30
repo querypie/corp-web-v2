@@ -51,8 +51,9 @@ describe("채팅 브라우저 진단 API", () => {
     expect(console.error).not.toHaveBeenCalled();
   });
 
-  it("인스턴스별 기록량을 제한한다", async () => {
+  it("잘못된 요청은 예산을 소모하지 않고 유효한 기록량만 제한한다", async () => {
     const { POST } = await import("./route");
+    for (let i = 0; i < 20; i++) expect((await POST(request({ invalid: true }))).status).toBe(400);
     for (let i = 0; i < 20; i++) expect((await POST(request())).status).toBe(204);
     expect((await POST(request())).status).toBe(429);
     expect(console.error).toHaveBeenCalledTimes(20);

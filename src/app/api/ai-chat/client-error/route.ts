@@ -8,12 +8,6 @@ const reply = (status: number) => new Response(null, { status, headers: { "Cache
 export async function POST(request: Request) {
   if (request.headers.get("origin") !== new URL(request.url).origin) return reply(403);
   if (!request.headers.get("content-type")?.includes("application/json")) return reply(400);
-  // Best-effort per-instance cap on public diagnostic log volume.
-  const now = Date.now();
-  if (now - windowStart >= 60000) { windowStart = now; reports = 0; }
-  if (reports >= 20) return reply(429);
-  reports++;
-
   const reader = request.body?.getReader();
   if (!reader) return reply(400);
   let size = 0;
@@ -29,6 +23,12 @@ export async function POST(request: Request) {
     }
     const report = parseClientDiagnostic(JSON.parse(text + decoder.decode()));
     if (!report) return reply(400);
+    // Invalid reports must not consume the budget for useful diagnostic logs.
+    // Check after the asynchronous read so concurrent valid reports share the cap.
+    const now = Date.now();
+    if (now - windowStart >= 60000) { windowStart = now; reports = 0; }
+    if (reports >= 20) return reply(429);
+    reports++;
     console.error("[ai-chat-client-error]", JSON.stringify({
       ...report,
       receivedAt: new Date().toISOString(),
