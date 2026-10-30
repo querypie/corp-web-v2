@@ -471,9 +471,8 @@ export function getAboutUsPageCopy(locale: Locale): AboutUsPageCopy {
       ],
       teamMembers: [
         { imageSrc: "/assets/pages/company/about-us/brant.webp", linkedinHref: "https://www.linkedin.com/in/ishwang/", name: "Brant Hwang", role: "Founder & CEO" },
-        { imageSrc: "/assets/pages/company/about-us/paul.webp", linkedinHref: "https://www.linkedin.com/in/paul-hong-bb0983216/", name: "Paul Hong", role: "Co-Founder & CFO" },
+        { imageSrc: "/assets/pages/company/about-us/paul.webp", linkedinHref: "https://www.linkedin.com/in/paul-hong-bb0983216/", name: "Paul Hong", role: "Co-Founder & CFO & CISO & CPO" },
         { imageSrc: "/assets/pages/company/about-us/sam.webp", linkedinHref: "https://www.linkedin.com/in/sam0-kim/", name: "Sam Kim", role: "CTO" },
-        { imageSrc: "/assets/pages/company/about-us/jake.webp", linkedinHref: "https://www.linkedin.com/in/binlim/", name: "Jake Im", role: "CISO & CPO" },
         { imageSrc: "/assets/pages/company/about-us/kris.webp", linkedinHref: "https://www.linkedin.com/in/kris-park-89a83b19/", name: "Kris Park", role: "CSO" },
         { imageSrc: "/assets/pages/company/about-us/keizo.webp", linkedinHref: "https://www.linkedin.com/in/keizo-arinobu-b40769/", name: "Keizo Arinobu", role: "CGO & Japan Country Manager" },
       ],
@@ -569,9 +568,8 @@ export function getAboutUsPageCopy(locale: Locale): AboutUsPageCopy {
       ],
       teamMembers: [
         { imageSrc: "/assets/pages/company/about-us/brant.webp", linkedinHref: "https://www.linkedin.com/in/ishwang/", name: "Brant Hwang", role: "Founder & CEO" },
-        { imageSrc: "/assets/pages/company/about-us/paul.webp", linkedinHref: "https://www.linkedin.com/in/paul-hong-bb0983216/", name: "Paul Hong", role: "Co-Founder & CFO" },
+        { imageSrc: "/assets/pages/company/about-us/paul.webp", linkedinHref: "https://www.linkedin.com/in/paul-hong-bb0983216/", name: "Paul Hong", role: "Co-Founder & CFO & CISO & CPO" },
         { imageSrc: "/assets/pages/company/about-us/sam.webp", linkedinHref: "https://www.linkedin.com/in/sam0-kim/", name: "Sam Kim", role: "CTO" },
-        { imageSrc: "/assets/pages/company/about-us/jake.webp", linkedinHref: "https://www.linkedin.com/in/binlim/", name: "Jake Im", role: "CISO & CPO" },
         { imageSrc: "/assets/pages/company/about-us/kris.webp", linkedinHref: "https://www.linkedin.com/in/kris-park-89a83b19/", name: "Kris Park", role: "CSO" },
         { imageSrc: "/assets/pages/company/about-us/keizo.webp", linkedinHref: "https://www.linkedin.com/in/keizo-arinobu-b40769/", name: "Keizo Arinobu", role: "CGO & Japan Country Manager" },
       ],
@@ -670,9 +668,8 @@ export function getAboutUsPageCopy(locale: Locale): AboutUsPageCopy {
       ],
       teamMembers: [
         { imageSrc: "/assets/pages/company/about-us/brant.webp", linkedinHref: "https://www.linkedin.com/in/ishwang/", name: "Brant Hwang", role: "Founder & CEO" },
-        { imageSrc: "/assets/pages/company/about-us/paul.webp", linkedinHref: "https://www.linkedin.com/in/paul-hong-bb0983216/", name: "Paul Hong", role: "Co-Founder & CFO" },
+        { imageSrc: "/assets/pages/company/about-us/paul.webp", linkedinHref: "https://www.linkedin.com/in/paul-hong-bb0983216/", name: "Paul Hong", role: "Co-Founder & CFO & CISO & CPO" },
         { imageSrc: "/assets/pages/company/about-us/sam.webp", linkedinHref: "https://www.linkedin.com/in/sam0-kim/", name: "Sam Kim", role: "CTO" },
-        { imageSrc: "/assets/pages/company/about-us/jake.webp", linkedinHref: "https://www.linkedin.com/in/binlim/", name: "Jake Im", role: "CISO & CPO" },
         { imageSrc: "/assets/pages/company/about-us/kris.webp", linkedinHref: "https://www.linkedin.com/in/kris-park-89a83b19/", name: "Kris Park", role: "CSO" },
         { imageSrc: "/assets/pages/company/about-us/keizo.webp", linkedinHref: "https://www.linkedin.com/in/keizo-arinobu-b40769/", name: "Keizo Arinobu", role: "CGO & Japan Country Manager" },
       ],
