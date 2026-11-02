@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { headers } from "next/headers";
 import { JetBrains_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import { Analytics } from "@vercel/analytics/next";
 import { siteTitle } from "@/constants/site";
+import { defaultLocale, isLocale } from "@/constants/i18n";
+import { DOCUMENT_LOCALE_HEADER } from "@/features/routing/documentLocale";
 import { getRequestSiteOrigin } from "@/features/seo/requestUrl.server";
 import { themeInitializationScript } from "@/features/theme/themeScript";
 import "../styles/globals.css";
@@ -53,9 +56,12 @@ type RootLayoutProps = {
   children: ReactNode;
 };
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
+  const requestLocale = (await headers()).get(DOCUMENT_LOCALE_HEADER);
+  const locale = requestLocale && isLocale(requestLocale) ? requestLocale : defaultLocale;
+
   return (
-    <html className={`${jetBrainsMono.variable} ${monaSans.variable} ${pretendard.variable} ${pretendardJp.variable}`} lang="en" suppressHydrationWarning>
+    <html className={`${jetBrainsMono.variable} ${monaSans.variable} ${pretendard.variable} ${pretendardJp.variable}`} lang={locale} suppressHydrationWarning>
       <head>
         <meta content="#FFFFFF" name="theme-color" />
         <script dangerouslySetInnerHTML={{ __html: themeInitializationScript }} />

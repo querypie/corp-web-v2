@@ -2,10 +2,14 @@ import { NextResponse, type NextRequest } from "next/server";
 import { shouldBlockAdminAccess } from "./features/admin/access";
 import { LOCALE_PREFERENCE_COOKIE, resolveRootLocale } from "./features/routing/localePreference";
 import { resolveRootSiteRouting } from "./features/routing/siteDomainRouting";
+import { DOCUMENT_LOCALE_HEADER, getDocumentLocale } from "./features/routing/documentLocale";
 
 export function middleware(request: NextRequest) {
+  const hostname = request.headers.get("host") ?? request.nextUrl.hostname;
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set(DOCUMENT_LOCALE_HEADER, getDocumentLocale(hostname, request.nextUrl.pathname));
+
   if (request.nextUrl.pathname === "/") {
-    const hostname = request.headers.get("host") ?? request.nextUrl.hostname;
     const routing = resolveRootSiteRouting(
       hostname,
       () => resolveRootLocale(
@@ -14,7 +18,7 @@ export function middleware(request: NextRequest) {
       ),
     );
     if (routing.kind === "japanese") {
-      return NextResponse.next();
+      return NextResponse.next({ request: { headers: requestHeaders } });
     }
 
     const destination = request.nextUrl.clone();
@@ -32,9 +36,9 @@ export function middleware(request: NextRequest) {
     });
   }
 
-  return NextResponse.next();
+  return NextResponse.next({ request: { headers: requestHeaders } });
 }
 
 export const config = {
-  matcher: ["/", "/admin/:path*", "/api/admin/:path*"],
+  matcher: ["/((?!api(?:/|$)|_next(?:/|$)|.*\\..*).*)", "/admin/:path*", "/api/admin/:path*"],
 };
