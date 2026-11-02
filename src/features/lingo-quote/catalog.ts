@@ -19,6 +19,20 @@ export const LINGO_QUOTE_SKUS = {
 
 export type LingoQuotePlan = keyof typeof LINGO_QUOTE_SKUS;
 
+export const MAX_LINGO_QUOTE_QUANTITY = 999;
+
+export function isLingoQuoteQuantity(value: unknown): value is number {
+  return typeof value === "number" && Number.isInteger(value) && value >= 1 && value <= MAX_LINGO_QUOTE_QUANTITY;
+}
+
+export function getLingoQuoteTotals(plan: LingoQuotePlan, quantity: number) {
+  if (!isLingoQuoteQuantity(quantity)) throw new RangeError("Invalid quotation quantity");
+  const product = LINGO_QUOTE_SKUS[plan];
+  const subtotal = product.retailPrice * quantity;
+  const tax = Math.round(subtotal * 0.1);
+  return { subtotal, tax, total: subtotal + tax, credits: product.credit * quantity };
+}
+
 export function isLingoQuotePlan(value: unknown): value is LingoQuotePlan {
   return value === "production" || value === "application";
 }
@@ -41,16 +55,4 @@ export function formatJapaneseDate(date: Date) {
   }).formatToParts(date);
   const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
   return `${values.year}/${values.month}/${values.day}`;
-}
-
-export function formatQuoteNumber(date: Date, sequence: number) {
-  const parts = new Intl.DateTimeFormat("ja-JP", {
-    timeZone: "Asia/Tokyo",
-    year: "2-digit",
-    month: "2-digit",
-    day: "2-digit",
-  }).formatToParts(date);
-  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
-  const suffix = String(Math.max(0, Math.min(999, sequence))).padStart(3, "0");
-  return `QPJ-${values.year}${values.month}${values.day}-${suffix}`;
 }

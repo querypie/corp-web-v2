@@ -10,7 +10,13 @@ import {
   FieldLabel,
 } from "@/components/forms/ContactFormParts";
 import type { LingoQuotePageCopy } from "@/copy/lingoQuote";
-import { LINGO_QUOTE_SKUS, type LingoQuotePlan } from "@/features/lingo-quote/catalog";
+import {
+  getLingoQuoteTotals,
+  isLingoQuoteQuantity,
+  LINGO_QUOTE_SKUS,
+  MAX_LINGO_QUOTE_QUANTITY,
+  type LingoQuotePlan,
+} from "@/features/lingo-quote/catalog";
 import type { Locale } from "@/constants/i18n";
 
 type FormState = "idle" | "submitting" | "success";
@@ -70,6 +76,7 @@ export default function LingoQuoteForm({
   initialPlan?: LingoQuotePlan;
 }) {
   const [plan, setPlan] = useState<LingoQuotePlan>(initialPlan);
+  const [quantity, setQuantity] = useState("1");
   const [companyName, setCompanyName] = useState("");
   const [contactName, setContactName] = useState("");
   const [department, setDepartment] = useState("");
@@ -78,11 +85,18 @@ export default function LingoQuoteForm({
   const [error, setError] = useState("");
   const [downloadUrl, setDownloadUrl] = useState("");
   const [downloadName, setDownloadName] = useState("QP_Quotation.xlsx");
+  const parsedQuantity = Number(quantity);
+  const totals = isLingoQuoteQuantity(parsedQuantity) ? getLingoQuoteTotals(plan, parsedQuantity) : undefined;
+  const currency = new Intl.NumberFormat(locale, { style: "currency", currency: "JPY", maximumFractionDigits: 0 });
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!companyName.trim() || !contactName.trim() || !department.trim() || !consent || status === "submitting") {
       setError(copy.errorRequired);
+      return;
+    }
+    if (!isLingoQuoteQuantity(parsedQuantity)) {
+      setError(copy.errorQuantity);
       return;
     }
 
@@ -92,7 +106,7 @@ export default function LingoQuoteForm({
       const response = await fetch("/api/lingo-quote", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan, companyName, contactName, department, locale, privacyConsent: consent }),
+        body: JSON.stringify({ plan, quantity: parsedQuantity, companyName, contactName, department, locale, privacyConsent: consent }),
       });
       if (!response.ok) {
         let code = "";
@@ -102,7 +116,7 @@ export default function LingoQuoteForm({
           // Keep the localized generic error.
         }
         setStatus("idle");
-        setError(errorMessages[locale][code] ?? copy.errorGeneral);
+        setError(code === "INVALID_QUANTITY" ? copy.errorQuantity : errorMessages[locale][code] ?? copy.errorGeneral);
         return;
       }
       const blob = await response.blob();
@@ -150,6 +164,41 @@ export default function LingoQuoteForm({
           value={plan}
         />
       </div>
+      <div className="flex w-full flex-col gap-[10px]">
+        <FieldLabel label={copy.quantityLabel} required />
+        <Input
+          aria-describedby="quote-quantity-hint"
+          aria-label={copy.quantityLabel}
+          className="w-full"
+          inputMode="numeric"
+          max={MAX_LINGO_QUOTE_QUANTITY}
+          min={1}
+          name="quantity"
+          onChange={(event) => setQuantity(event.target.value)}
+          required
+          step={1}
+          type="number"
+          value={quantity}
+        />
+        <p className="m-0 type-body-sm text-mute" id="quote-quantity-hint">{copy.quantityHint}</p>
+      </div>
+      {totals ? (
+        <dl className="m-0 flex flex-col gap-2 rounded-box bg-bg-content p-4 type-body-md text-fg">
+          {[
+            [copy.creditsLabel, totals.credits.toLocaleString(locale)],
+            [copy.subtotalLabel, currency.format(totals.subtotal)],
+            [copy.taxLabel, currency.format(totals.tax)],
+          ].map(([label, value]) => (
+            <div className="flex justify-between gap-3" key={label}>
+              <dt>{label}</dt><dd className="m-0">{value}</dd>
+            </div>
+          ))}
+          <div className="flex justify-between gap-3 font-semibold">
+            <dt>{copy.totalLabel}</dt>
+            <dd className="m-0"><output aria-label={copy.totalLabel}>{currency.format(totals.total)}</output></dd>
+          </div>
+        </dl>
+      ) : null}
       <div className="flex w-full flex-col gap-[10px]">
         <FieldLabel label={copy.companyLabel} required />
         <Input

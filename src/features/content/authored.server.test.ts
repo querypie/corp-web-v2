@@ -99,7 +99,10 @@ beforeEach(async () => {
   vi.resetModules();
   tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "querypie-authored-test-"));
   process.chdir(tempDir);
-});
+  // Transform the server/Tiptap dependencies before the test timeout starts.
+  // A timed-out import must not resume writes after this test's cwd is cleaned up.
+  await import("./authored.server");
+}, 30_000);
 
 afterEach(async () => {
   process.chdir(originalCwd);
