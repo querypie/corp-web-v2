@@ -3,9 +3,8 @@ import "server-only";
 import JSZip from "jszip";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import { randomInt } from "node:crypto";
 import type { Locale } from "@/constants/i18n";
-import { formatQuoteNumber, LINGO_QUOTE_SKUS, type LingoQuotePlan } from "./catalog";
+import { LINGO_QUOTE_SKUS, type LingoQuotePlan } from "./catalog";
 
 const TEMPLATE_PATH = path.join(process.cwd(), "src/features/lingo-quote/template.xlsx");
 const TAX_RATE = 0.1;
@@ -199,7 +198,6 @@ type LocalizedWorkbookCopy = {
   issuerName: string;
   issueDate: string;
   validUntil: string;
-  quoteNumber: string;
   paymentTerms: string;
   total: string;
   item: string;
@@ -225,7 +223,7 @@ type LocalizedWorkbookCopy = {
 function getLocalizedWorkbookCopy(locale: Locale, plan: LingoQuotePlan): LocalizedWorkbookCopy {
   if (locale === "ja") {
     return {
-      title: "発注書  ORDER", suffix: " 御中", issuerName: "QueryPie AI合同会社", issueDate: "発行日", validUntil: "有効期限", quoteNumber: "見積もりNO#",
+      title: "発注書  ORDER", suffix: " 御中", issuerName: "QueryPie AI合同会社", issueDate: "発行日", validUntil: "有効期限",
       paymentTerms: "支払い期日 :            請求書発行月締め、翌月末支払い", total: "総合計（税込）", item: "項目名", description: "詳細",
       quantity: "Qty", credit: "Credit", unitPrice: "単価", sum: "合計", remarks: "備考", tax: "消費税", totalLabel: "TOTAL",
       conditions: "記載条件で発注いたします。", orderDate: "発注日：", validityDate: "有効期限：", orderingCompany: "発注者会社：",
@@ -236,7 +234,7 @@ function getLocalizedWorkbookCopy(locale: Locale, plan: LingoQuotePlan): Localiz
   }
   if (locale === "ko") {
     return {
-      title: "견적서  QUOTATION", suffix: " 귀중", issuerName: "주식회사 쿼리파이", issueDate: "발행일", validUntil: "유효기간", quoteNumber: "견적번호",
+      title: "견적서  QUOTATION", suffix: " 귀중", issuerName: "주식회사 쿼리파이", issueDate: "발행일", validUntil: "유효기간",
       paymentTerms: "지급기한 : 청구서 발행월 말일 기준, 익월 말 지급", total: "총합계 (부가세 포함)", item: "항목명", description: "상세",
       quantity: "수량", credit: "크레딧", unitPrice: "단가", sum: "합계", remarks: "비고", tax: "소비세", totalLabel: "합계",
       conditions: "상기 조건에 따른 견적입니다.", orderDate: "견적 발행일:", validityDate: "유효기간:", orderingCompany: "발주 회사:",
@@ -246,7 +244,7 @@ function getLocalizedWorkbookCopy(locale: Locale, plan: LingoQuotePlan): Localiz
     };
   }
   return {
-    title: "Quotation  ORDER", suffix: "", issuerName: "CHEQUER Global, Inc.", issueDate: "Issue Date", validUntil: "Valid Until", quoteNumber: "Quotation No#",
+    title: "Quotation  ORDER", suffix: "", issuerName: "CHEQUER Global, Inc.", issueDate: "Issue Date", validUntil: "Valid Until",
     paymentTerms: "Payment Terms: Invoice month-end, payment by the end of the following month", total: "Grand Total (incl. tax)", item: "Item", description: "Description",
     quantity: "Qty", credit: "Credit", unitPrice: "Unit Price", sum: "Total", remarks: "Remarks", tax: "Consumption Tax", totalLabel: "TOTAL",
     conditions: "This quotation is based on the conditions stated above.", orderDate: "Quotation Date:", validityDate: "Valid Until:", orderingCompany: "Ordering Company:",
@@ -270,7 +268,6 @@ export async function createLingoQuoteWorkbook(input: LingoQuoteInput): Promise<
   const copy = getLocalizedWorkbookCopy(input.locale, input.plan);
   const issuedDate = formatQuoteDate(input.locale, issuedAt);
   const validUntil = formatQuoteDate(input.locale, new Date(issuedAt.getTime() + 30 * 24 * 60 * 60 * 1000));
-  const quoteNumber = formatQuoteNumber(issuedAt, randomInt(1, 1000));
   const subtotal = plan.retailPrice;
   const tax = Math.round(subtotal * TAX_RATE);
   const total = subtotal + tax;
@@ -307,12 +304,15 @@ export async function createLingoQuoteWorkbook(input: LingoQuoteInput): Promise<
     return appended.index;
   }
 
-  sheetXml = setSharedStringCell(sheetXml, "A2", addString([
-    `${copy.issueDate} :                   ${issuedDate}`,
-    `${copy.validUntil} :               ${validUntil}`,
-    `${copy.quoteNumber} :         ${quoteNumber}`,
-    copy.paymentTerms,
-  ].join("\n")));
+  sharedStringsXml = replaceSharedStringWithText(
+    sharedStringsXml,
+    sharedStringIndex(sheetXml, "A2"),
+    [
+      `${copy.issueDate} :                   ${issuedDate}`,
+      `${copy.validUntil} :               ${validUntil}`,
+      copy.paymentTerms,
+    ].join("\n"),
+  );
   sheetXml = setSharedStringCell(sheetXml, "A6", addString(plan.sku));
   sheetXml = setSharedStringCell(sheetXml, "B6", addString(copy.descriptionValue));
   sheetXml = setNumericCell(sheetXml, "E6", 1);

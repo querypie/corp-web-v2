@@ -42,15 +42,3 @@ export function formatJapaneseDate(date: Date) {
   const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
   return `${values.year}/${values.month}/${values.day}`;
 }
-
-export function formatQuoteNumber(date: Date, sequence: number) {
-  const parts = new Intl.DateTimeFormat("ja-JP", {
-    timeZone: "Asia/Tokyo",
-    year: "2-digit",
-    month: "2-digit",
-    day: "2-digit",
-  }).formatToParts(date);
-  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
-  const suffix = String(Math.max(0, Math.min(999, sequence))).padStart(3, "0");
-  return `QPJ-${values.year}${values.month}${values.day}-${suffix}`;
-}

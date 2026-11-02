@@ -101,4 +101,28 @@ describe("createLingoQuoteWorkbook", () => {
     expect(sharedStrings).toContain(validityDate);
     expect(sheet).toMatch(/<row r="3" ht="33" customHeight="1">/);
   });
+
+  it.each(["ko", "en", "ja"] as const)("omits the quotation number while keeping %s quotation terms", async (locale) => {
+    const result = await createLingoQuoteWorkbook({
+      companyName: "Sample Company",
+      contactName: "Sample Contact",
+      department: "Sales",
+      plan: "application",
+      locale,
+      issuedAt: new Date("2026-10-24T00:00:00.000Z"),
+    });
+    const zip = await JSZip.loadAsync(result.bytes);
+    const sheet = await zip.file("xl/worksheets/sheet1.xml")!.async("text");
+    const sharedStrings = await zip.file("xl/sharedStrings.xml")!.async("text");
+    const metadataCell = sheet.match(/<c\b(?=[^>]*\br="A2")[^>]*>[\s\S]*?<\/c>/)![0];
+    const metadataIndex = Number(metadataCell.match(/<v>(\d+)<\/v>/)![1]);
+    const metadata = [...sharedStrings.matchAll(/<si>[\s\S]*?<\/si>/g)][metadataIndex][0];
+    const lines = metadata.match(/<t[^>]*>([\s\S]*?)<\/t>/)![1].split("\n");
+
+    expect(lines).toHaveLength(3);
+    expect(lines[0]).toContain(locale === "ja" ? "2026/10/24" : "2026-10-24");
+    expect(lines[1]).toContain(locale === "ja" ? "2026/11/23" : "2026-11-23");
+    expect(lines[2]).toContain({ ko: "지급기한", en: "Payment Terms", ja: "支払い期日" }[locale]);
+    expect(sharedStrings).not.toMatch(/QPJ-|견적번호|Quotation No#|見積もりNO#/);
+  });
 });
