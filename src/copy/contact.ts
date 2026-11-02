@@ -106,6 +106,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "AI Platform QueryPie AIP",
         "Access Control Platform QueryPie ACP",
         "AI Expert Support (FDE) Service",
+        "Penetration Testing Service",
         "Partnership",
       ],
       messageField: {
@@ -178,6 +179,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "AI 플랫폼 QueryPie AIP",
         "액세스 제어 플랫폼 QueryPie ACP",
         "AI 전문가 지원 (FDE) 서비스",
+        "모의 해킹 서비스",
         "파트너십",
       ],
       messageField: {
@@ -252,6 +254,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "AIプラットフォーム QueryPie AIP",
         "アクセス制御プラットフォーム QueryPie ACP",
         "AI専門家伴走 (FDE) サービス",
+        "ペネトレーションテストサービス",
         "パートナーシップ",
       ],
       messageField: {
