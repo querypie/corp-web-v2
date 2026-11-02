@@ -10,6 +10,8 @@ export default defineConfig({
     },
   },
   test: {
+    // Bound cold module transforms on shared CI runners to avoid resource contention.
+    maxWorkers: process.env.CI ? 2 : undefined,
     environment: "happy-dom",
     globals: true,
     include: ["src/**/*.test.ts", "src/**/*.test.tsx"],
