@@ -5,6 +5,13 @@ export type LingoQuotePageCopy = {
   title: string;
   description: string;
   planLabel: string;
+  quantityLabel: string;
+  quantityHint: string;
+  creditsLabel: string;
+  subtotalLabel: string;
+  taxLabel: string;
+  totalLabel: string;
+  errorQuantity: string;
   companyLabel: string;
   companyPlaceholder: string;
   contactLabel: string;
@@ -34,6 +41,13 @@ export function getLingoQuotePageCopy(locale: Locale): LingoQuotePageCopy {
       title: "Request a Lingo quotation",
       description: "Choose a credit plan and enter the ordering company information. We will create the quotation as an Excel file.",
       planLabel: "Credit plan",
+      quantityLabel: "Quantity",
+      quantityHint: "Enter the number of credit packages to purchase (1–999).",
+      creditsLabel: "Total credits",
+      subtotalLabel: "Subtotal",
+      taxLabel: "Tax (10%)",
+      totalLabel: "Total (incl. tax)",
+      errorQuantity: "Enter a whole number between 1 and 999 for the quantity.",
       companyLabel: "Ordering company",
       companyPlaceholder: "Enter the company name",
       contactLabel: "Contact person",
@@ -58,6 +72,13 @@ export function getLingoQuotePageCopy(locale: Locale): LingoQuotePageCopy {
       title: "링고 견적서 발급",
       description: "크레딧 상품을 선택하고 발주 회사 정보를 입력하면 Excel 견적서를 바로 다운로드할 수 있습니다.",
       planLabel: "크레딧 상품",
+      quantityLabel: "수량",
+      quantityHint: "구매할 크레딧 상품의 개수를 입력해주세요 (1~999개).",
+      creditsLabel: "총 크레딧",
+      subtotalLabel: "공급가액",
+      taxLabel: "세금 (10%)",
+      totalLabel: "총액 (세금 포함)",
+      errorQuantity: "수량은 1~999 사이의 정수로 입력해주세요.",
       companyLabel: "발주 회사명",
       companyPlaceholder: "회사명을 입력해주세요.",
       contactLabel: "담당자명",
@@ -82,6 +103,13 @@ export function getLingoQuotePageCopy(locale: Locale): LingoQuotePageCopy {
       title: "Lingo 見積書の発行",
       description: "クレジット商品と発注会社の情報を入力すると、Excel形式の見積書をダウンロードできます。",
       planLabel: "クレジット商品",
+      quantityLabel: "数量",
+      quantityHint: "購入するクレジット商品の個数を入力してください（1～999個）。",
+      creditsLabel: "合計クレジット",
+      subtotalLabel: "小計",
+      taxLabel: "消費税（10%）",
+      totalLabel: "合計（税込）",
+      errorQuantity: "数量は1～999の整数で入力してください。",
       companyLabel: "発注会社名",
       companyPlaceholder: "会社名を入力してください。",
       contactLabel: "担当者名",

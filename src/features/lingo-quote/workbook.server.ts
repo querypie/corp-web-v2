@@ -4,16 +4,16 @@ import JSZip from "jszip";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import type { Locale } from "@/constants/i18n";
-import { LINGO_QUOTE_SKUS, type LingoQuotePlan } from "./catalog";
+import { getLingoQuoteTotals, LINGO_QUOTE_SKUS, type LingoQuotePlan } from "./catalog";
 
 const TEMPLATE_PATH = path.join(process.cwd(), "src/features/lingo-quote/template.xlsx");
-const TAX_RATE = 0.1;
 
 export type LingoQuoteInput = {
   companyName: string;
   contactName: string;
   department: string;
   plan: LingoQuotePlan;
+  quantity?: number;
   locale: Locale;
   issuedAt?: Date;
 };
@@ -225,7 +225,7 @@ function getLocalizedWorkbookCopy(locale: Locale, plan: LingoQuotePlan): Localiz
     return {
       title: "発注書  ORDER", suffix: " 御中", issuerName: "QueryPie AI合同会社", issueDate: "発行日", validUntil: "有効期限",
       paymentTerms: "支払い期日 :            請求書発行月締め、翌月末支払い", total: "総合計（税込）", item: "項目名", description: "詳細",
-      quantity: "Qty", credit: "Credit", unitPrice: "単価", sum: "合計", remarks: "備考", tax: "消費税", totalLabel: "TOTAL",
+      quantity: "Qty", credit: "クレジット/個", unitPrice: "単価", sum: "合計", remarks: "備考", tax: "消費税", totalLabel: "TOTAL",
       conditions: "記載条件で発注いたします。", orderDate: "発注日：", validityDate: "有効期限：", orderingCompany: "発注者会社：",
       contact: "ご担当者：", signature: "署名", department: "部署：",
       notes: ["●利用期間：12か月", "●利用ユーザー：無制限", "●クレジットは１年間有効", "● LLM+AWSなど利用料も含む", "●クレジット残は次年度への繰り越しは不可"].join("\n"),
@@ -236,7 +236,7 @@ function getLocalizedWorkbookCopy(locale: Locale, plan: LingoQuotePlan): Localiz
     return {
       title: "견적서  QUOTATION", suffix: " 귀중", issuerName: "주식회사 쿼리파이", issueDate: "발행일", validUntil: "유효기간",
       paymentTerms: "지급기한 : 청구서 발행월 말일 기준, 익월 말 지급", total: "총합계 (부가세 포함)", item: "항목명", description: "상세",
-      quantity: "수량", credit: "크레딧", unitPrice: "단가", sum: "합계", remarks: "비고", tax: "소비세", totalLabel: "합계",
+      quantity: "수량", credit: "개당 크레딧", unitPrice: "단가", sum: "합계", remarks: "비고", tax: "소비세", totalLabel: "합계",
       conditions: "상기 조건에 따른 견적입니다.", orderDate: "견적 발행일:", validityDate: "유효기간:", orderingCompany: "발주 회사:",
       contact: "담당자:", signature: "서명", department: "부서:",
       notes: ["● 이용 기간: 12개월", "● 사용자 수: 무제한", "● 크레딧은 1년간 유효", "● LLM·AWS 등의 이용료 포함", "● 잔여 크레딧은 다음 연도로 이월되지 않음"].join("\n"),
@@ -246,7 +246,7 @@ function getLocalizedWorkbookCopy(locale: Locale, plan: LingoQuotePlan): Localiz
   return {
     title: "Quotation  ORDER", suffix: "", issuerName: "CHEQUER Global, Inc.", issueDate: "Issue Date", validUntil: "Valid Until",
     paymentTerms: "Payment Terms: Invoice month-end, payment by the end of the following month", total: "Grand Total (incl. tax)", item: "Item", description: "Description",
-    quantity: "Qty", credit: "Credit", unitPrice: "Unit Price", sum: "Total", remarks: "Remarks", tax: "Consumption Tax", totalLabel: "TOTAL",
+    quantity: "Qty", credit: "Credits / unit", unitPrice: "Unit Price", sum: "Total", remarks: "Remarks", tax: "Consumption Tax", totalLabel: "TOTAL",
     conditions: "This quotation is based on the conditions stated above.", orderDate: "Quotation Date:", validityDate: "Valid Until:", orderingCompany: "Ordering Company:",
     contact: "Contact Person:", signature: "Signature", department: "Department:",
     notes: ["● Term: 12 months", "● Users: Unlimited", "● Credits are valid for one year", "● Includes LLM and AWS usage fees", "● Unused credits cannot be carried over to the next year"].join("\n"),
@@ -264,13 +264,12 @@ function safeCellText(value: string | undefined) {
 
 export async function createLingoQuoteWorkbook(input: LingoQuoteInput): Promise<LingoQuoteWorkbook> {
   const plan = LINGO_QUOTE_SKUS[input.plan];
+  const quantity = input.quantity ?? 1;
+  const { subtotal, tax, total } = getLingoQuoteTotals(input.plan, quantity);
   const issuedAt = input.issuedAt ?? new Date();
   const copy = getLocalizedWorkbookCopy(input.locale, input.plan);
   const issuedDate = formatQuoteDate(input.locale, issuedAt);
   const validUntil = formatQuoteDate(input.locale, new Date(issuedAt.getTime() + 30 * 24 * 60 * 60 * 1000));
-  const subtotal = plan.retailPrice;
-  const tax = Math.round(subtotal * TAX_RATE);
-  const total = subtotal + tax;
 
   const zip = await JSZip.loadAsync(await readFile(TEMPLATE_PATH));
   const sheetFile = zip.file("xl/worksheets/sheet1.xml");
@@ -315,7 +314,7 @@ export async function createLingoQuoteWorkbook(input: LingoQuoteInput): Promise<
   );
   sheetXml = setSharedStringCell(sheetXml, "A6", addString(plan.sku));
   sheetXml = setSharedStringCell(sheetXml, "B6", addString(copy.descriptionValue));
-  sheetXml = setNumericCell(sheetXml, "E6", 1);
+  sheetXml = setNumericCell(sheetXml, "E6", quantity);
   sheetXml = setNumericCell(sheetXml, "F6", plan.credit);
   sheetXml = setNumericCell(sheetXml, "G6", plan.retailPrice);
   sheetXml = setNumericCell(sheetXml, "H6", subtotal);

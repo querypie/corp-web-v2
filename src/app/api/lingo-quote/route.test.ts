@@ -51,5 +51,38 @@ describe("POST /api/lingo-quote", () => {
     const zip = await JSZip.loadAsync(bytes);
     const sharedStrings = await zip.file("xl/sharedStrings.xml")?.async("text");
     expect(sharedStrings).toContain("QP-AIP0615APP-Credit");
+    const sheet = await zip.file("xl/worksheets/sheet1.xml")?.async("text");
+    expect(sheet).toMatch(/<c r="E6"[^>]*><v>1<\/v><\/c>/);
+    expect(sheet).toMatch(/<c r="H8"[^>]*><f>H6\+H7<\/f><v>396000<\/v><\/c>/);
+  });
+
+  it.each([2, 3, 999])("generates the selected quantity %i", async (quantity) => {
+    const response = await POST(request({
+      companyName: "Example Company",
+      contactName: "Alex Smith",
+      department: "Sales",
+      plan: "application",
+      quantity,
+      privacyConsent: true,
+      locale: "en",
+    }));
+    expect(response.status).toBe(200);
+    const zip = await JSZip.loadAsync(await response.arrayBuffer());
+    const sheet = await zip.file("xl/worksheets/sheet1.xml")!.async("text");
+    expect(sheet).toMatch(new RegExp(`<c r="E6"[^>]*><v>${quantity}<\\/v><\\/c>`));
+    expect(sheet).toMatch(new RegExp(`<c r="H8"[^>]*><f>H6\\+H7<\\/f><v>${396_000 * quantity}<\\/v><\\/c>`));
+  });
+
+  it.each([0, -1, 1.5, 1000, "2", null, true, {}])("rejects invalid quantity %j", async (quantity) => {
+    const response = await POST(request({
+      companyName: "Example Company",
+      contactName: "Alex Smith",
+      department: "Sales",
+      plan: "application",
+      quantity,
+      privacyConsent: true,
+    }));
+    expect(response.status).toBe(400);
+    await expect(response.json()).resolves.toEqual({ code: "INVALID_QUANTITY" });
   });
 });

@@ -11,6 +11,34 @@ beforeAll(() => {
 
 describe("createLingoQuoteWorkbook", () => {
   it.each([
+    ["application", 2, 72_000, 360_000, 720_000, 72_000, 792_000],
+    ["application", 3, 72_000, 360_000, 1_080_000, 108_000, 1_188_000],
+    ["production", 2, 240_000, 1_200_000, 2_400_000, 240_000, 2_640_000],
+    ["production", 3, 240_000, 1_200_000, 3_600_000, 360_000, 3_960_000],
+  ] as const)("calculates %s × %i with live formulas and correct cached totals", async (plan, quantity, credit, unitPrice, subtotal, tax, total) => {
+    const result = await createLingoQuoteWorkbook({
+      companyName: "Example Company",
+      contactName: "Alex Smith",
+      department: "Sales",
+      plan,
+      quantity,
+      locale: "en",
+    });
+    const zip = await JSZip.loadAsync(result.bytes);
+    const sheet = await zip.file("xl/worksheets/sheet1.xml")!.async("text");
+    for (const [cell, value] of [["E6", quantity], ["F6", credit], ["G6", unitPrice]] as const) {
+      expect(sheet).toMatch(new RegExp(`<c r="${cell}"[^>]*><v>${value}<\\/v><\\/c>`));
+    }
+    for (const [cell, formula, value] of [
+      ["H6", "G6*E6", subtotal], ["H7", "H6*0.1", tax], ["H8", "H6+H7", total], ["C3", "H8", total],
+    ] as const) {
+      const cellXml = sheet.match(new RegExp(`<c r="${cell}"[^>]*>[\\s\\S]*?<\\/c>`))![0];
+      expect(cellXml).toContain(`<f>${formula}</f><v>${value}</v>`);
+    }
+    expect(result.total).toBe(total);
+  });
+
+  it.each([
     ["application", "QP-AIP0615APP-Credit", 72_000, 360_000, 396_000],
     ["production", "QP-AIP0615Prod-Credit", 240_000, 1_200_000, 1_320_000],
   ] as const)("fills the %s SKU and totals", async (plan, sku, credit, subtotal, total) => {
