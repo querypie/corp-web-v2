@@ -1,0 +1,75 @@
+export const aiGatewayContentCopy = {
+  challenges: {
+    title: "AIの利用が広がるほど、\n管理は複雑になっていませんか。",
+    items: [
+      { title: "APIキーがあちこちに", body: "プロバイダーごとのキーが、アプリや担当者ごとに分散。安全な管理が難しくなります。" },
+      { title: "ツールの権限がばらばらに", body: "エージェントごとに設定が異なり、誰がどのツールを使えるのか把握しにくくなります。" },
+      { title: "コストは使った後に判明", body: "どのチームが、何に、どれだけ使ったのか。支出の内訳が見えにくくなります。" },
+      { title: "モデル変更のたびに再設定", body: "モデルやプロバイダーを変えるたびに、各アプリの接続設定を見直す必要があります。" },
+    ],
+  },
+  features: {
+    title: "接続も、権限も、利用状況も。\n一つのゲートウェイで。",
+    description: "開発者は使い慣れたツールでAIを利用。管理者は、その接続先と利用ルールをまとめて管理できます。",
+    cards: [
+      {
+        id: "connection",
+        title: "複数のモデルを一つのAPIで接続",
+        body: "OpenAI・Anthropic・Geminiなどのモデルを、OpenAI・Anthropic互換APIで利用できます。プロバイダーごとに異なる接続方式をまとめ、アプリからの利用をシンプルにします。",
+      },
+      {
+        id: "routing",
+        title: "再デプロイなしでモデルを切り替え",
+        body: "アプリが使うモデルの別名と、実際のモデルをGatewayで紐づけます。接続先を変えるときも、アプリ側のモデル名を修正せず、ルーティングの設定で切り替えられます。",
+      },
+      {
+        id: "credentials",
+        title: "APIキーを安全に一元管理",
+        body: "プロバイダーのAPIキーは暗号化して保管。利用者はプロジェクトに紐づくGateway Keyで接続するため、元のAPIキーを各アプリや利用者に配る必要がありません。",
+      },
+      {
+        id: "tools",
+        title: "必要なMCPツールを一つに集約",
+        body: "AIが外部サービスを操作するためのMCPツールを、複数のサーバーから選んで一つの接続先にまとめます。実行時にはプロジェクトのポリシーを確認し、許可されたツールだけを利用できます。",
+      },
+      {
+        id: "budget",
+        title: "コストと使用量を制御",
+        body: "プロジェクトごとにリクエスト数・トークン数・月間予算・レート制限を設定できます。予算は単価表に基づく見積コストで管理し、価格情報がないモデルは「確認不可」と表示します。",
+      },
+      {
+        id: "audit",
+        title: "LLM・MCPのログをまとめて記録",
+        body: "誰が、どのモデルやツールを使い、どんな結果になったかを記録。トークン数・見積コスト・応答時間も確認でき、ログとダッシュボードで日々の運用や監査を支えます。",
+      },
+    ],
+  },
+  policy: {
+    title: "役割に応じた権限を割り当てる",
+    description: "ユーザーやチームに役割を割り当て、組織とプロジェクトで操作できる範囲を定めます。",
+    roles: [
+      { name: "組織管理者", code: "org-admin", body: "プロバイダー・MCPサーバーを登録し、組織全体を管理。", organization: true, project: false },
+      { name: "プロジェクト管理者", code: "project-admin", body: "プロジェクトの利用ポリシー・予算・上限を設定。", organization: false, project: true },
+      { name: "AI利用者", code: "ai-user", body: "Gateway Keyを発行し、許可されたAIを利用。", organization: false, project: true },
+      { name: "監査担当者", code: "audit-viewer", body: "ログとダッシュボードを読み取り専用で確認。", organization: true, project: true },
+    ],
+    scopeTitle: "役割ごとの権限範囲",
+    columns: ["役割", "組織", "プロジェクト"],
+    assigned: "割り当て可能",
+    unassigned: "対象外",
+  },
+  toolset: {
+    title: "必要なツールを選んで、自分のツールセットを作成",
+    description: "複数のMCPサーバーから選んだツールを、一つのMCPエンドポイントにまとめます。",
+    diagramLabel: "GitHub・Slack・Notion・Google Driveから選択したツールを、一つのMCPエンドポイントにまとめる構成図",
+    endpoint: "Toolset Endpoint",
+    selected: "選択したツール",
+    notSelected: "未選択のツール",
+    sources: [
+      { id: "github", name: "GitHub", tools: ["コード", "ブランチ", "その他"] },
+      { id: "slack", name: "Slack", tools: ["メッセージ", "メンバー", "その他"] },
+      { id: "notion", name: "Notion", tools: ["ドキュメント", "検索", "その他"] },
+      { id: "google-drive", name: "Google Drive", tools: ["ファイル", "メンバー", "その他"] },
+    ],
+  },
+};
