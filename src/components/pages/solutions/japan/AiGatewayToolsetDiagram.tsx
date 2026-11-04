@@ -1,4 +1,4 @@
-import { Check, Circle, CodeXml, Ellipsis, FileText, Files, GitBranch, Layers, MessageSquare, Search, Users } from "lucide-react";
+import { Check, Circle, CodeXml, Ellipsis, FileText, Files, GitBranch, MessageSquare, Search, Users } from "lucide-react";
 import { aiGatewayContentCopy } from "@/copy/aiGateway";
 import styles from "./AiGatewayToolsetDiagram.module.css";
 
@@ -14,11 +14,17 @@ export default function AiGatewayToolsetDiagram() {
   return (
     <figure className={styles.diagram} aria-label={text.diagramLabel}>
       <div className={styles.canvas}>
-        <svg className={styles.connections} viewBox="0 0 960 380" preserveAspectRatio="none" fill="none" aria-hidden="true">
-          <path d="M269 70 C312 70 306 150 346 150" />
-          <path d="M269 270 C312 270 306 230 346 230" />
-          <path d="M691 70 C648 70 654 150 614 150" />
-          <path d="M691 270 C648 270 654 230 614 230" />
+        <svg className={styles.connections} viewBox="0 0 1000 380" preserveAspectRatio="none" fill="none" aria-hidden="true">
+          <path d="M300 90 C346 90 346 152 392 152" />
+          <path d="M300 290 C346 290 346 228 392 228" />
+          <path d="M700 90 C654 90 654 152 608 152" />
+          <path d="M700 290 C654 290 654 228 608 228" />
+        </svg>
+        <svg className={`${styles.connections} ${styles.mobileConnections}`} viewBox="0 0 400 620" preserveAspectRatio="none" fill="none" aria-hidden="true">
+          <path d="M96 180 C96 205 170 204 170 229" />
+          <path d="M304 180 C304 205 230 204 230 229" />
+          <path d="M96 440 C96 415 170 416 170 391" />
+          <path d="M304 440 C304 415 230 416 230 391" />
         </svg>
         {text.sources.map((source, sourceIndex) => (
           <div className={`${styles.source} ${styles[source.id]}`} key={source.id}>
@@ -42,13 +48,13 @@ export default function AiGatewayToolsetDiagram() {
           </div>
         ))}
         <div className={styles.endpoint}>
-          <span className={`${styles.port} ${styles.portTopLeft}`} aria-hidden="true" />
-          <span className={`${styles.port} ${styles.portBottomLeft}`} aria-hidden="true" />
-          <Layers className={styles.layers} aria-hidden="true" />
+          <span className={`${styles.connector} ${styles.connectorTopLeft}`} aria-hidden="true" />
+          <span className={`${styles.connector} ${styles.connectorBottomLeft}`} aria-hidden="true" />
+          <span className={`${styles.connector} ${styles.connectorTopRight}`} aria-hidden="true" />
+          <span className={`${styles.connector} ${styles.connectorBottomRight}`} aria-hidden="true" />
+          <img className={styles.mcpIcon} src="/assets/pages/platforms/acp/diagram/target-mcp.svg" width={32} height={32} alt="" />
           <strong className="type-h2">MCP</strong>
           <span className="type-body-md">{text.endpoint}</span>
-          <span className={`${styles.port} ${styles.portTopRight}`} aria-hidden="true" />
-          <span className={`${styles.port} ${styles.portBottomRight}`} aria-hidden="true" />
         </div>
       </div>
     </figure>
