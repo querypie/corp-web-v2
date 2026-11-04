@@ -7,14 +7,14 @@ import AiGatewayFeatureVisual, { type AiGatewayFeatureId } from "./AiGatewayFeat
 import styles from "./AiGatewayContent.module.css";
 
 function Heading({ title, description }: { title: string; description: string }) {
-  return <SolutionSectionHeading title={title.replaceAll("\n", " ")} description={description} />;
+  return <SolutionSectionHeading title={title} description={description} layout="split" />;
 }
 
 function Challenges() {
   const text = copy.challenges;
   return (
     <section className={pageContentWidthClassName}>
-      <h2 className="m-0 text-center text-pretty type-h2 text-fg">{text.title.replaceAll("\n", " ")}</h2>
+      <Heading {...text} />
       <div className={styles.challengeGrid}>
         {text.items.map(item => (
           <article key={item.title} className={styles.challenge}>
