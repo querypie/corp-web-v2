@@ -1,0 +1,28 @@
+.diagram { display: grid; grid-template-columns: 1fr 32px 1.1fr 32px .8fr; align-items: center; gap: 20px; max-width: 1000px; margin: 0 auto; padding: 24px 0; color: var(--color-fg); }
+.targetGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.target, .hub { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 22px; box-shadow: 0 10px 24px -18px rgb(0 0 0 / .16); text-align: center; }
+.target { min-height: 112px; padding: 16px 8px; }
+.target svg { width: 28px; height: 28px; stroke-width: 1.5; }
+.target span, .hub > span { font-size: 11px; color: var(--color-mute); }
+.outputs { display: grid; gap: 12px; }
+.hub { min-height: 260px; padding: 24px 12px; border: 0; border-radius: 40px; box-shadow: 0 0 80px 12px color-mix(in srgb, var(--color-brand) 10%, transparent); }
+.hub > svg { width: 36px; height: 36px; stroke-width: 1.5; color: var(--color-brand); }
+.desktopArrow, .mobileArrow { width: 24px; height: 24px; color: var(--color-brand); stroke-width: 1.5; }
+.mobileArrow { display: none; }
+.featureVisual { display: grid; place-items: center; height: 180px; margin-bottom: 28px; background: radial-gradient(ellipse, color-mix(in srgb, var(--color-brand) 7%, transparent), transparent 70%); }
+.featureVisual > span { display: grid; place-items: center; width: 80px; height: 80px; border: 1px solid var(--color-border); border-radius: 24px; background: var(--color-bg); box-shadow: 0 12px 26px -16px rgb(0 0 0 / .2); }
+.featureVisual svg { width: 32px; height: 32px; stroke-width: 1.5; color: var(--color-brand); }
+.process { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 0 auto; padding: 0; list-style: none; width: 100%; max-width: 1000px; }
+.process li { position: relative; display: flex; flex-direction: column; align-items: center; gap: 16px; padding: 28px 12px; border: 1px solid var(--color-border); border-radius: 22px; background: var(--color-bg); text-align: center; }
+.process li:not(:last-child)::after { position: absolute; top: 50%; left: 100%; width: 24px; border-top: 1px dashed var(--color-brand); content: ""; }
+.process svg { width: 28px; height: 28px; stroke-width: 1.5; }
+.step { color: var(--color-brand); font-size: 11px; }
+@media (max-width: 767px) {
+  .diagram { display: flex; flex-direction: column; max-width: 420px; }
+  .targetGrid, .outputs { width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .hub { width: 100%; max-width: 300px; min-height: 220px; }
+  .desktopArrow { display: none; }
+  .mobileArrow { display: block; }
+  .process { grid-template-columns: minmax(0, 1fr); max-width: 420px; }
+  .process li:not(:last-child)::after { top: 100%; left: 50%; width: 0; height: 24px; border-top: 0; border-left: 1px dashed var(--color-brand); }
+}

@@ -13,6 +13,7 @@ import As400CobolPage, { generateMetadata as as400CobolMetadata } from "./as400-
 import AiGatewayPage, { generateMetadata as aiGatewayMetadata } from "./ai-gateway/page";
 import QlmPage, { generateMetadata as qlmMetadata } from "./qlm/page";
 import QevPage, { generateMetadata as qevMetadata } from "./qev/page";
+import PenetrationTestingPage, { generateMetadata as penetrationTestingMetadata } from "./penetration-testing/page";
 
 vi.mock("next/headers", () => ({
   headers: async () => new Headers({ host: "www.querypie.com" }),
@@ -21,6 +22,7 @@ vi.mock("next/headers", () => ({
 import LocalLlmPage, { generateMetadata as localLlmMetadata } from "./local-llm/page";
 
 const routeModules = {
+  "penetration-testing": { page: PenetrationTestingPage, generateMetadata: penetrationTestingMetadata },
   "local-llm": { page: LocalLlmPage, generateMetadata: localLlmMetadata },
   "ai-crew": {
     page: Page8,
@@ -51,6 +53,11 @@ const routeModules = {
 } as const;
 
 describe("solutions route modules", () => {
+  it.each(["en", "ko"])("모의 해킹 페이지는 %s에서 404를 반환한다", async (locale) => {
+    const props = { params: Promise.resolve({ locale }) };
+    await expect(PenetrationTestingPage(props)).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
+    await expect(penetrationTestingMetadata(props)).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
+  });
   it.each(["en", "ko"])("Local LLMページは%sで404を返す", async (locale) => {
     const props = { params: Promise.resolve({ locale }) };
     await expect(LocalLlmPage(props)).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
