@@ -1,6 +1,7 @@
 export const aiGatewayContentCopy = {
   challenges: {
-    title: "AIの利用が広がるほど、\n管理は複雑になっていませんか。",
+    title: "AI運用の課題",
+    description: "AIの利用が広がるにつれ、接続先やAPIキー、ツールの権限が分散します。利用状況とコストを把握し、一貫したルールで管理する仕組みが必要です。",
     items: [
       { title: "APIキーがあちこちに", body: "プロバイダーごとのキーが、アプリや担当者ごとに分散。安全な管理が難しくなります。" },
       { title: "ツールの権限がばらばらに", body: "エージェントごとに設定が異なり、誰がどのツールを使えるのか把握しにくくなります。" },
@@ -35,8 +36,8 @@ export const aiGatewayContentCopy = {
       allowed: "許可",
       denied: "拒否",
     },
-    title: "接続も、権限も、利用状況も。\n一つのゲートウェイで。",
-    description: "開発者は使い慣れたツールでAIを利用。管理者は、その接続先と利用ルールをまとめて管理できます。",
+    title: "AI接続を一元管理",
+    description: "モデルへの接続からAPIキー、利用上限、ログまで、一つのゲートウェイで管理。開発者は使い慣れたツールで、組織のルールに沿ってAIを利用できます。",
     cards: [
       {
         id: "connection",
@@ -71,8 +72,8 @@ export const aiGatewayContentCopy = {
     ],
   },
   policy: {
-    title: "役割に応じた権限を割り当てる",
-    description: "ユーザーやチームに役割を割り当て、組織とプロジェクトで操作できる範囲を定めます。",
+    title: "役割に応じたアクセス制御",
+    description: "ユーザーやチームに役割を割り当て、組織・プロジェクトごとに操作範囲を設定。管理者、利用者、監査担当者に必要な権限を付与します。",
     roles: [
       { name: "組織管理者", code: "org-admin", body: "プロバイダー・MCPサーバーを登録し、組織全体を管理。", organization: true, project: false },
       { name: "プロジェクト管理者", code: "project-admin", body: "プロジェクトの利用ポリシー・予算・上限を設定。", organization: false, project: true },
@@ -85,8 +86,8 @@ export const aiGatewayContentCopy = {
     unassigned: "対象外",
   },
   toolset: {
-    title: "必要なツールを選んで、自分のツールセットを作成",
-    description: "複数のMCPサーバーから選んだツールを、一つのMCPエンドポイントにまとめます。",
+    title: "MCPツールを集約",
+    description: "複数のMCPサーバーから業務に必要なツールを選び、一つのエンドポイントに集約。エージェントごとに、利用するツールをまとめて提供できます。",
     diagramLabel: "GitHub・Slack・Notion・Google Driveから選択したツールを、一つのMCPエンドポイントにまとめる構成図",
     endpoint: "Toolset Endpoint",
     selected: "選択したツール",

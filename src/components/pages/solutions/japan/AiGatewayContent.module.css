@@ -1,4 +1,4 @@
-.section { display: flex; flex-direction: column; gap: 48px; }
+.section { display: flex; flex-direction: column; gap: 40px; }
 .challengeGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
 .challenge { min-width: 0; border-radius: var(--radius-box); background: var(--color-bg-content); padding: 28px 24px; }
 .band { margin-inline: -20px; padding: 88px 20px; background: var(--color-bg-content); }
