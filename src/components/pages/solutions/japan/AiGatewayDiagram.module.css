@@ -1,81 +1,59 @@
-.diagram { --aig-title-size: 14px; --aig-body-size: 12px; margin: 0; color: var(--color-fg); }
-.canvas {
-  --aig-surface: var(--color-bg);
-  position: relative; isolation: isolate; padding: 30px 24px 0;
+.diagram { --aig-icon-size: 28px; --aig-icon-gap: 8px; width: 100%; max-width: 1000px; margin: 0 auto; padding: 12px 0; color: var(--color-fg); }
+.architecture { position: relative; display: grid; grid-template-columns: 22% 36% 22%; align-items: center; justify-content: space-between; height: 360px; }
+.side { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 16px; }
+.node, .gateway {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0;
+  border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
+  background: var(--color-bg);
+  box-shadow: 0 2px 5px rgb(0 0 0 / .025), 0 12px 30px -15px rgb(0 0 0 / .09);
 }
-.architecture { position: relative; display: grid; grid-template-columns: 22% 42% 22%; justify-content: space-between; align-items: center; min-height: 520px; }
-.connections { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.lineBase { stroke: var(--color-border-strong); stroke-width: 2; vector-effect: non-scaling-stroke; }
-.lineFlow { stroke: url(#aig-line); stroke-width: 2; stroke-dasharray: 14 180; stroke-linecap: round; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--color-brand) 40%, transparent)); }
-.side { position: relative; z-index: 1; display: flex; flex-direction: column; justify-content: space-between; gap: 24px; min-height: 480px; }
-.node { display: flex; min-width: 0; min-height: 212px; flex-direction: column; justify-content: center; gap: 16px; border: 1px solid var(--color-border); border-radius: 16px; background: linear-gradient(155deg, var(--aig-surface), var(--color-bg-content)); padding: 20px 16px; box-shadow: 0 1px 2px rgb(0 0 0 / .03), 0 8px 16px -10px rgb(0 0 0 / .2), inset 0 1px 0 color-mix(in srgb, var(--color-white) 70%, transparent); }
-.nodeHeading { display: flex; align-items: center; gap: 10px; }
-.nodeHeading h3 { margin: 0; font-size: var(--aig-title-size); font-weight: 600; line-height: 1.5; }
-.nodeIcon { display: flex; flex: none; align-items: center; justify-content: center; width: 32px; height: 32px; border: 1px solid var(--color-border); border-radius: 9px; background: var(--aig-surface); box-shadow: 0 2px 3px rgb(0 0 0 / .04); }
-.nodeIcon svg { width: 17px; height: 17px; }
-.node p { margin: 0; color: var(--color-mute); font-size: var(--aig-body-size); line-height: 1.65; }
-.agentLogos { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); justify-items: center; gap: 6px; margin: 4px 0 0; padding: 0; list-style: none; }
-.agentLogos li { display: flex; align-items: center; justify-content: center; min-width: 0; }
-.agentLogos img { width: 24px; max-width: 100%; height: 24px; object-fit: contain; color-scheme: light; }
-.identityServices { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 24px; }
-.oktaLogo { width: 48px; height: 48px; object-fit: contain; }
-.identityServices > span { display: flex; flex-direction: column; align-items: center; gap: 5px; font-size: var(--aig-body-size); color: var(--color-mute); }
-.identityServices > span svg { width: 24px; height: 24px; color: var(--color-fg); }
-.gateway { --aig-surface: var(--color-bg-content); --aig-muted: color-mix(in srgb, var(--color-fg) 72%, var(--color-bg)); position: relative; z-index: 1; color: var(--color-fg); border: 1px solid var(--color-border-strong); border-radius: 24px; padding: 24px 20px; background: linear-gradient(150deg, color-mix(in srgb, var(--color-bg-content) 88%, var(--color-fg)), var(--color-bg-content) 50%, var(--color-bg)); box-shadow: 0 0 0 5px rgb(0 0 0 / .035), 0 0 0 6px rgb(0 0 0 / .07), 0 20px 40px -20px rgb(0 0 0 / .4), inset 0 1px 0 rgb(255 255 255 / .12); }
-.gatewayHeader { position: relative; display: flex; align-items: center; justify-content: center; gap: 12px; padding-inline: 14px; }
-.gatewayLogo { width: 30px; height: 32px; flex: none; object-fit: contain; color-scheme: dark; }
-.gatewayHeader h2 { margin: 0; }
-.solution { margin: 18px 0 12px; color: var(--aig-muted); font-size: var(--aig-body-size); line-height: 1.65; text-align: center; }
-.modules { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 18px; }
-.module { min-width: 0; border: 1px solid color-mix(in srgb, var(--color-fg) 14%, var(--color-bg-content)); border-radius: 12px; background: linear-gradient(150deg, color-mix(in srgb, var(--aig-surface) 96%, var(--color-fg)), var(--aig-surface)); padding: 14px 12px; box-shadow: 0 3px 6px rgb(0 0 0 / .12), inset 0 1px 0 rgb(255 255 255 / .025); }
-.moduleTop { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; }
-.moduleIcon { display: flex; flex: none; color: var(--color-brand); }
-.moduleIcon svg { width: 20px; height: 20px; }
-.module h4 { margin: 0; font-size: var(--aig-title-size); font-weight: 600; line-height: 1.5; }
-.module p { margin: 0; color: var(--aig-muted); font-size: var(--aig-body-size); line-height: 1.65; }
-.providerGroups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-.providerGroup { display: flex; flex-direction: column; align-items: center; gap: 12px; }
-.providerGroup > span { color: var(--color-mute); font-size: var(--aig-body-size); line-height: 1.65; text-align: center; }
-.providers { display: flex; align-items: center; justify-content: center; gap: 12px; min-height: 36px; }
-.providers > div { display: flex; align-items: center; justify-content: center; }
-.providers img { width: 28px; height: 28px; object-fit: contain; }
-.localModel { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border: 1px solid var(--color-border-strong); border-radius: 8px; background: var(--aig-surface); box-shadow: 0 3px 6px rgb(0 0 0 / .06); }
-.localModel svg { width: 24px; height: 24px; }
-.serverRack { display: flex; flex-direction: column; align-self: center; gap: 4px; width: 88px; border: 1px solid #454545; border-radius: 6px; background: #242424; padding: 7px 6px; }
-.serverRack > div { display: flex; align-items: center; gap: 3px; height: 18px; border: 1px solid #515151; border-radius: 2px; background: #353535; padding: 0 6px; }
-.serverRack span { width: 3px; height: 3px; margin-right: auto; border-radius: 50%; background: var(--color-brand); }
-.serverRack i { width: 2px; height: 7px; border-radius: 1px; background: #939393; }
-.roleSection { margin-top: 18px; padding-top: 14px; }
-.roles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 0; }
-.roles > div { display: flex; flex-direction: column; align-items: center; gap: 3px; text-align: center; }
-.roles dt { display: flex; flex-direction: column; align-items: center; gap: 7px; font-size: var(--aig-title-size); font-weight: 600; line-height: 1.5; }
-.roles dt svg { width: 20px; height: 20px; flex: none; color: var(--color-fg); }
-.roles dd { margin: 0; color: var(--aig-muted); font-size: var(--aig-body-size); line-height: 1.65; }
+.node { height: 156px; gap: 16px; padding: 16px 12px; border-radius: 22px; }
+.node h3 { margin: 0; font-size: 14px; line-height: 1.5; font-weight: 500; text-align: center; }
+.agentLogos { display: grid; grid-template-columns: repeat(3, minmax(0, 48px)); max-width: 100%; margin: 0; padding: 0; list-style: none; gap: var(--aig-icon-gap); }
+.agentLogos li { display: flex; align-items: center; justify-content: center; }
+.agentLogos img { width: var(--aig-icon-size); height: var(--aig-icon-size); object-fit: contain; }
+.serviceList { display: flex; justify-content: center; align-items: flex-start; gap: var(--aig-icon-gap); width: 100%; margin: 0; padding: 0; list-style: none; }
+.serviceList li { display: flex; flex: 0 1 48px; min-width: 0; flex-direction: column; align-items: center; gap: 8px; font-size: 10px; line-height: 1.5; text-align: center; color: var(--color-mute); }
+.serviceList svg, .serviceList img { width: var(--aig-icon-size); height: var(--aig-icon-size); object-fit: contain; flex: none; stroke-width: 1.5; }
+.serviceList svg { color: var(--color-fg); }
+.gateway {
+  position: relative; z-index: 1; width: 100%; max-width: 300px; justify-self: center; aspect-ratio: 1; padding: 24px 20px; border-radius: 40px;
+  border: 0;
+  background: linear-gradient(160deg, var(--color-bg) 55%, color-mix(in srgb, var(--color-brand) 3%, var(--color-bg)));
+  box-shadow: 0 20px 44px -20px color-mix(in srgb, var(--color-fg) 24%, transparent), 0 0 90px 24px color-mix(in srgb, var(--color-brand) 12%, transparent);
+}
+.gatewayHeading { display: flex; align-items: center; gap: 12px; }
+.gatewayLogo { width: var(--aig-icon-size); height: var(--aig-icon-size); object-fit: contain; }
+.gateway h2 { margin: 0; }
+.gatewayKey { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 10px 0 28px; font-size: 11px; color: var(--color-fg); }
+.gatewayKey svg { width: 14px; height: 14px; flex: none; stroke-width: 1.5; color: var(--color-brand); }
+.modules { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; max-width: 220px; gap: var(--aig-icon-gap); }
+.module { min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 12px 6px; border-radius: 12px; background: var(--color-bg-content); }
+.module > svg { width: 24px; height: 24px; stroke-width: 1.5; color: var(--color-fg); }
+.module h3 { margin: 8px 0 0; font-size: 10px; font-weight: 400; line-height: 1.5; color: var(--color-mute); }
+.connections { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; color: var(--color-mute); }
+.lineFlow { stroke: var(--color-brand); stroke-width: 2; stroke-dasharray: 4 6; stroke-dashoffset: 0; stroke-linecap: round; vector-effect: non-scaling-stroke; opacity: 1; }
+.mobileConnections { display: none; color: var(--color-mute); }
 @media (prefers-reduced-motion: no-preference) {
-  .lineFlow { animation: request-flow 6s linear infinite; }
+  .lineFlow { animation: request-flow 1.2s linear infinite; }
+  .outgoing { animation-delay: .6s; }
 }
-@keyframes request-flow { to { stroke-dashoffset: -388; } }
+@keyframes request-flow {
+  to { stroke-dashoffset: -10; }
+}
 @media (max-width: 1023px) {
-  .canvas { padding: 24px 20px 0; }
-  .architecture { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .diagram { max-width: 560px; padding: 8px 0; }
+  .architecture { height: auto; display: flex; flex-direction: column; }
   .connections { display: none; }
-  .side { min-height: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-  .gateway::before, .gateway::after { position: absolute; left: 50%; width: 2px; height: 36px; background: var(--color-border-strong); content: ""; }
-  .gateway::before { bottom: calc(100% + 1px); }
-  .gateway::after { top: calc(100% + 1px); }
-  .gateway { padding: 24px; }
-  .module { padding: 20px; }
+  .side { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .node { height: 156px; gap: 14px; padding: 16px 10px; border-radius: 18px; }
+  .node h3 { font-size: 12px; }
+  .mobileConnections { display: block; width: 100%; height: 64px; overflow: visible; }
+  .gateway { width: 80%; max-width: 300px; }
 }
 @media (max-width: 539px) {
-  .canvas { padding: 20px 14px 0; border-radius: 18px; }
-  .side { grid-template-columns: minmax(0, 1fr); gap: 12px; }
-  .node { min-height: 0; padding: 18px; gap: 12px; }
-  .gateway { padding: 20px 14px; border-radius: 18px; }
-  .modules { gap: 10px; }
-  .module { padding: 14px 10px; }
-  .moduleTop { flex-wrap: wrap; gap: 6px; }
-}
-@media (max-width: 374px) {
-  .modules { grid-template-columns: minmax(0, 1fr); }
-  .moduleTop { flex-wrap: nowrap; }
+  .gateway { width: 100%; padding: 24px 16px; }
+  .diagram { --aig-icon-size: 26px; --aig-icon-gap: 6px; }
+  .serviceList li { font-size: 9px; gap: 8px; }
+  .module h3 { font-size: 9px; }
 }

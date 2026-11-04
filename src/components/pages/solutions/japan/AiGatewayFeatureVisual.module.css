@@ -1,0 +1,82 @@
+.visual {
+  position: relative; display: flex; align-items: center; justify-content: center; height: 216px; margin-bottom: 28px; isolation: isolate; container-type: inline-size;
+  background: radial-gradient(ellipse at 50% 55%, color-mix(in srgb, var(--color-brand) 7%, transparent), transparent 70%);
+  color: var(--color-fg); font-size: 11px; line-height: 1.5;
+}
+.visual svg { width: 20px; height: 20px; flex: none; stroke-width: 1.5; }
+.visual img { object-fit: contain; flex: none; }
+.visual small { font-size: 9px; color: var(--color-mute); }
+.logoTile, .pill, .alias, .destination, .vault, .toolTile, .dashboard, .log {
+  border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent); background: var(--color-bg);
+  box-shadow: 0 2px 3px rgb(0 0 0 / .025), 0 10px 22px -14px rgb(0 0 0 / .2);
+}
+.network { position: relative; width: 100%; max-width: 300px; height: 180px; }
+.network .wires { position: absolute; inset: 0; width: 100%; height: 100%; }
+.wires path { stroke: color-mix(in srgb, var(--color-brand) 45%, var(--color-border)); stroke-width: 1.25; }
+.providers, .toolSources { position: absolute; inset: 5px 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; }
+.logoTile { width: 54px; height: 54px; border-radius: 16px; display: grid; place-items: center; }
+.providers .logoTile:nth-child(2) { transform: translateY(-7px); }
+.pill { display: flex; align-items: center; justify-content: center; gap: 10px; border-radius: 14px; padding: 13px 18px; white-space: nowrap; }
+.pill > svg { color: var(--color-brand); }
+.api { position: absolute; left: 50%; top: 115px; transform: translateX(-50%); }
+.statusDot { width: 6px; height: 6px; border-radius: 50%; background: var(--color-success); flex: none; }
+.routing { display: flex; align-items: center; gap: 10px; width: 100%; }
+.alias { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 17px 10px; border-radius: 16px; }
+.alias > svg { margin-bottom: 6px; color: var(--color-brand); width: 25px; height: 25px; }
+.alias > span { font-size: 10px; white-space: nowrap; }
+.routing .arrow { width: 18px; color: var(--color-brand); }
+.destinations { display: flex; flex: 1; flex-direction: column; gap: 12px; }
+.destination { display: flex; align-items: center; gap: 8px; padding: 12px 10px; border-radius: 12px; }
+.destination > div { display: flex; flex-direction: column; }
+.destination > svg { width: 13px; height: 13px; margin-left: auto; color: var(--color-success); }
+.active { border-color: color-mix(in srgb, var(--color-brand) 32%, var(--color-border)); }
+.credentials { display: flex; flex-direction: column; align-items: center; width: 100%; }
+.vault { width: 86%; border-radius: 16px; padding: 14px 16px 24px; }
+.panelHeading { display: flex; align-items: center; gap: 7px; font-size: 10px; font-weight: 500; }
+.panelHeading > svg { width: 15px; height: 15px; color: var(--color-brand); }
+.panelHeading small { margin-left: auto; font-weight: 400; }
+.secret { display: flex; align-items: center; gap: 12px; margin-top: 12px; }
+.secret > span { color: var(--color-mute); letter-spacing: 2px; font-size: 10px; }
+.secret > svg { width: 14px; height: 14px; color: var(--color-success); margin-left: auto; }
+.key { position: relative; margin-top: -13px; padding: 10px 18px; }
+.key > svg:last-child { width: 14px; height: 14px; color: var(--color-success); }
+.protected { color: var(--color-mute); margin-top: 10px; font-size: 9px; }
+.toolTile { position: relative; display: flex; flex-direction: column; align-items: center; gap: 9px; padding: 12px 8px; border-radius: 14px; min-width: 76px; }
+.toolTile > span { display: flex; align-items: center; gap: 4px; font-size: 9px; color: var(--color-mute); }
+.toolTile > span svg { width: 12px; height: 12px; }
+.toolTile .toolCheck { position: absolute; top: -5px; right: -5px; width: 16px; height: 16px; padding: 2px; border: 2px solid var(--color-bg); border-radius: 50%; color: var(--color-bg); background: var(--color-success); }
+.toolset { position: absolute; left: 50%; top: 128px; transform: translateX(-50%); padding: 10px 18px; }
+.count { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 6px; color: var(--color-brand); background: color-mix(in srgb, var(--color-brand) 8%, var(--color-bg)); font-size: 9px; }
+.dashboard, .log { width: 100%; max-width: 280px; border-radius: 16px; padding: 16px; }
+.amount { display: flex; align-items: baseline; gap: 6px; margin: 12px 0; }
+.amount strong { font-size: 24px; font-weight: 500; letter-spacing: -.04em; }
+.amount > span { color: var(--color-mute); font-size: 10px; }
+.amount > small { margin-left: auto; color: var(--color-brand); }
+.meter { height: 4px; border-radius: 4px; background: var(--color-bg-content); overflow: hidden; }
+.meter > span { display: block; width: 64%; height: 100%; border-radius: inherit; background: var(--color-brand); }
+.chart { position: relative; display: flex; align-items: flex-end; gap: 6px; height: 52px; margin-top: 9px; }
+.chart > span { flex: 1; background: color-mix(in srgb, var(--color-brand) 20%, var(--color-bg)); border-radius: 3px 3px 0 0; }
+.chart > span:nth-last-of-type(-n+3) { background: color-mix(in srgb, var(--color-brand) 48%, var(--color-bg)); }
+.limit { position: absolute; top: 8px; width: 100%; border-top: 1px dashed var(--color-border-strong); }
+.log { width: calc(100% - 12px); transform: rotate(-2deg); }
+.logHeader, .logRow { display: grid; grid-template-columns: 1.4fr .8fr .8fr; align-items: center; gap: 8px; font-size: 9px; }
+.logHeader { margin-top: 15px; padding-bottom: 8px; color: var(--color-mute); border-bottom: 1px solid var(--color-border); }
+.logRow { padding: 10px 0; border-bottom: 1px solid var(--color-border); }
+.logRow:last-child { border: 0; padding-bottom: 0; }
+.logRow > span:last-child { color: var(--color-mute); text-align: right; }
+.logHeader > span:last-child { text-align: right; }
+.allowed, .denied { display: flex; align-items: center; gap: 3px; }
+.allowed { color: color-mix(in srgb, var(--color-success) 70%, var(--color-fg)); }
+.denied { color: var(--color-mute); }
+.logRow svg { width: 11px; height: 11px; }
+@container (max-width: 270px) {
+  .routing { gap: 6px; }
+  .destination { padding: 10px 7px; gap: 5px; font-size: 10px; }
+  .destination img { width: 18px; height: 18px; }
+  .destination > svg { width: 11px; }
+  .alias { padding-inline: 7px; }
+  .alias > span { font-size: 9px; }
+  .routing .arrow { width: 14px; }
+  .toolTile { min-width: 0; width: calc(100% - 10px); padding-inline: 5px; }
+  .toolTile > span { gap: 3px; font-size: 8px; }
+}
