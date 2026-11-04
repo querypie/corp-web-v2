@@ -10,6 +10,8 @@ import { getDlpPlatformHref, getPlatformHref } from "@/features/platforms/routes
 import { getSolutionHref } from "@/features/solutions/routes";
 import { localLlmMenuLabel } from "@/copy/localLlm";
 import { as400CobolMenuLabel } from "@/copy/as400Cobol";
+import { japanAiSolutionsCopy } from "@/copy/japanAiSolutions";
+import { penetrationTestingMenuLabel } from "@/copy/penetrationTestingMenu";
 
 export type NavigationSubItem = {
   href: string;
@@ -99,8 +101,13 @@ export function getPlatformSubItems(
   const items = [
     { label: copy[0], href: getPlatformHref(locale as Locale, "aip") },
     { label: copy[1], href: getPlatformHref(locale as Locale, "acp") },
-    { label: copy[2], href: getPlatformHref(locale as Locale, "fde-services") },
   ];
+
+  if (locale === "ja") {
+    items.push({ label: japanAiSolutionsCopy["ai-gateway"].menuLabel, href: getSolutionHref(locale, "ai-gateway") });
+  } else {
+    items.push({ label: copy[2], href: getPlatformHref(locale as Locale, "fde-services") });
+  }
 
   if (locale === "en" || locale === "ko") {
     [items[0], items[1]] = [items[1], items[0]];
@@ -117,10 +124,12 @@ export function getSolutionsSubItems(locale: string): NavigationSubItem[] {
   if (locale !== "ja") return [];
 
   return [
+    { label: penetrationTestingMenuLabel, href: getSolutionHref(locale, "penetration-testing") },
+    { label: localLlmMenuLabel, href: getSolutionHref(locale, "local-llm") },
+    { label: "専任エンジニア｜FDEサービス", href: getPlatformHref(locale as Locale, "fde-services") },
+    { label: as400CobolMenuLabel, href: getSolutionHref(locale, "as400-cobol") },
     { label: "社内業務効率化｜AI Crew", href: getSolutionHref(locale, "ai-crew") },
     { label: "自社サービスAI化｜AI Dashi", href: getSolutionHref(locale, "ai-dashi") },
-    { label: localLlmMenuLabel, href: getSolutionHref(locale, "local-llm") },
-    { label: as400CobolMenuLabel, href: getSolutionHref(locale, "as400-cobol") },
   ];
 }
 
@@ -232,7 +241,7 @@ export function getPrimaryNavHref(item: string, locale: string) {
 }
 
 export function getFooterHref(item: string, locale: string) {
-  if (item === "FDE Services" || item === "FDE 서비스" || item === "FDEサービス") {
+  if (item === "FDE Services" || item === "FDE 서비스" || item === "FDEサービス" || item === "専任エンジニア｜FDE" || item === "専任エンジニア｜FDEサービス") {
     return getPlatformHref(locale as Locale, "fde-services");
   }
 
@@ -302,6 +311,14 @@ export function getFooterHref(item: string, locale: string) {
 
   if (item === localLlmMenuLabel && locale === "ja") {
     return getSolutionHref(locale, "local-llm");
+  }
+
+  if (item === japanAiSolutionsCopy["ai-gateway"].menuLabel && locale === "ja") {
+    return getSolutionHref(locale, "ai-gateway");
+  }
+
+  if (item === penetrationTestingMenuLabel && locale === "ja") {
+    return getSolutionHref(locale, "penetration-testing");
   }
 
   if (item === as400CobolMenuLabel && locale === "ja") {

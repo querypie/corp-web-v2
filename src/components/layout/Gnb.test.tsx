@@ -35,14 +35,18 @@ describe("Gnb", () => {
     ]);
     const platform = within(nav).getByRole("button", { name: "プラットフォーム" }).parentElement!;
     expect(within(platform).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      "/ja/platforms/aip", "/ja/platforms/acp", "/ja/platforms/aip/fde-services",
+      "/ja/platforms/aip", "/ja/platforms/acp", "/ja/solutions/ai-gateway",
     ]);
     const solutions = within(nav).getByRole("button", { name: "ソリューション" }).parentElement!;
     expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      "/ja/solutions/ai-crew", "/ja/solutions/ai-dashi", "/ja/solutions/local-llm", "/ja/solutions/as400-cobol",
+      "/ja/solutions/penetration-testing", "/ja/solutions/local-llm", "/ja/platforms/aip/fde-services", "/ja/solutions/as400-cobol", "/ja/solutions/ai-crew", "/ja/solutions/ai-dashi",
     ]);
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
-    expect(screen.getAllByRole("link", { name: "FDEサービス" })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "ペネトレーションテスト" })).toHaveLength(2);
+    expect(screen.queryByRole("link", { name: "QueryPie LLM｜QLM" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "QueryPie Decision Model｜QEV" })).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "専任エンジニア｜FDEサービス" })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "AI Gateway (AIG)" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "オンプレミスAI｜Local LLM" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "AS/400・COBOLモダナイゼーション" })).toHaveLength(2);
   });
