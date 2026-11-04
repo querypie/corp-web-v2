@@ -10,6 +10,9 @@ import Page9 from "./ai-dashi/page";
 import { metadata as Metadata9JA } from "@/components/pages/solutions/japan/AiDashiPage";
 import { aiDashiCopy } from "@/components/pages/solutions/japan/aiDashiCopy";
 import As400CobolPage, { generateMetadata as as400CobolMetadata } from "./as400-cobol/page";
+import AiGatewayPage, { generateMetadata as aiGatewayMetadata } from "./ai-gateway/page";
+import QlmPage, { generateMetadata as qlmMetadata } from "./qlm/page";
+import QevPage, { generateMetadata as qevMetadata } from "./qev/page";
 
 vi.mock("next/headers", () => ({
   headers: async () => new Headers({ host: "www.querypie.com" }),
@@ -32,6 +35,18 @@ const routeModules = {
   "as400-cobol": {
     page: As400CobolPage,
     generateMetadata: as400CobolMetadata,
+  },
+  "ai-gateway": {
+    page: AiGatewayPage,
+    generateMetadata: aiGatewayMetadata,
+  },
+  qlm: {
+    page: QlmPage,
+    generateMetadata: qlmMetadata,
+  },
+  qev: {
+    page: QevPage,
+    generateMetadata: qevMetadata,
   },
 } as const;
 
