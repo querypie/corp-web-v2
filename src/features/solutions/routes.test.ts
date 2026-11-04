@@ -12,7 +12,7 @@ describe("solution routes", () => {
   });
 
   it("등록된 경로를 ID와 slug로 조회한다", () => {
-    expect(solutionEntries).toHaveLength(4);
+    expect(solutionEntries).toHaveLength(8);
     for (const entry of solutionEntries) {
       expect(getSolutionEntryById(entry.id)).toEqual(entry);
       expect(getSolutionEntryBySlug(entry.slug)).toEqual(entry);

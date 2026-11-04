@@ -92,6 +92,7 @@ export default function Footer({
                 className={cx(
                   "flex flex-col gap-5 type-body-md leading-5",
                   (section.title === "Platform" || section.title === "플랫폼") && "w-[191px]",
+                  (section.title === "Solutions" || section.title === "솔루션") && "w-max max-w-full",
                   (section.title === "プラットフォーム" || section.title === "ソリューション") && "w-max max-w-full",
                   (section.title === "Demo" || section.title === "デモ" || section.title === "데모") && "w-[110px]",
                   (section.title === "Resource" || section.title === "リソース" || section.title === "리소스") && "w-[180px]",

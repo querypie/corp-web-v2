@@ -26,6 +26,7 @@ type GnbProps = {
   locale?: string;
   localeIcon?: ReactNode;
   platformItems?: NavigationSubItem[];
+  solutionItems?: NavigationSubItem[];
 };
 
 function cx(...values: Array<string | false | null | undefined>) {
@@ -47,6 +48,7 @@ export default function Gnb({
   locale = "en",
   localeIcon,
   platformItems,
+  solutionItems,
 }: GnbProps) {
   const items = providedItems ?? getShellMenuCopy(locale).navItems;
   const router = useRouter();
@@ -226,7 +228,7 @@ export default function Gnb({
   };
   const sectionItems = [
     platformItems ?? getPlatformSubItems(locale),
-    ...(locale === "ja" ? [getSolutionsSubItems(locale)] : []),
+    solutionItems ?? getSolutionsSubItems(locale),
     getDemoSubItems(locale),
     getResourcesSubItems(locale),
     getCompanySubItems(locale),

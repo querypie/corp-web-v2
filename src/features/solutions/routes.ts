@@ -1,7 +1,7 @@
 import { getLocalePath, type Locale } from "@/constants/i18n";
 
 export type SolutionEntry = {
-  id: "ai-crew" | "ai-dashi" | "as400-cobol" | "local-llm";
+  id: "ai-crew" | "ai-dashi" | "ai-gateway" | "qlm" | "qev" | "as400-cobol" | "local-llm" | "penetration-testing";
   locales?: Locale[];
   slug: string[];
 };
@@ -9,6 +9,10 @@ export type SolutionEntry = {
 export const solutionEntries: SolutionEntry[] = [
   { id: "ai-crew", slug: ["ai-crew"] },
   { id: "ai-dashi", slug: ["ai-dashi"] },
+  { id: "ai-gateway", slug: ["ai-gateway"], locales: ["ja"] },
+  { id: "penetration-testing", slug: ["penetration-testing"], locales: ["ja"] },
+  { id: "qlm", slug: ["qlm"], locales: ["ja"] },
+  { id: "qev", slug: ["qev"], locales: ["ja"] },
   { id: "as400-cobol", slug: ["as400-cobol"], locales: ["ja"] },
   { id: "local-llm", slug: ["local-llm"], locales: ["ja"] },
 ];

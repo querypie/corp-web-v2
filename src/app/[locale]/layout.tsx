@@ -2,7 +2,7 @@ import { Suspense, type ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { isLocale, locales, type Locale } from "@/constants/i18n";
 import { pageTopPaddingClassName } from "@/constants/layout";
-import { getPlatformSubItems, getShellMenuCopy } from "@/constants/navigation";
+import { getPlatformSubItems, getShellMenuCopy, getSolutionsSubItems } from "@/constants/navigation";
 import LanguageSuggestionBanner from "@/components/site/LanguageSuggestionBanner";
 import Footer from "@/components/layout/Footer";
 import Gnb from "@/components/layout/Gnb";
@@ -47,6 +47,7 @@ export default async function LocaleLayout({
           items={shellCopy.navItems}
           locale={locale}
           platformItems={getPlatformSubItems(locale, { includeDlpPlatform })}
+          solutionItems={getSolutionsSubItems(locale, { includeDlpPlatform })}
         />
         <UtmCapture />
         <GoogleAnalytics measurementId={GOOGLE_ANALYTICS_ID} />
