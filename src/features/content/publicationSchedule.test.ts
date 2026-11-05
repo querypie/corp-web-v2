@@ -33,6 +33,10 @@ describe("scheduled publication", () => {
     expect(isPublishedContentAccessible({ ...scheduled, publishAt })).toBe(false);
   });
 
+  it.each([null, false, 0, ""])("does not treat malformed values as unscheduled: %s", (publishAt) => {
+    expect(isPublishedContentAccessible({ ...scheduled, publishAt: publishAt as unknown as string })).toBe(false);
+  });
+
   it("keeps existing unscheduled articles available", () => {
     expect(isPublishedContentAccessible({ status: "published", visibleLocales: ["ja"] })).toBe(true);
   });

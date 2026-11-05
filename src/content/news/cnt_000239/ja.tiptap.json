@@ -441,7 +441,7 @@
         },
         {
           "type": "text",
-          "text": "https://www.npa.go.jp/publications/statistics/cybersecurity/index.html",
+          "text": "警察庁の公表資料",
           "marks": [
             {
               "type": "link",
@@ -468,7 +468,7 @@
         },
         {
           "type": "text",
-          "text": "https://www.ipa.go.jp/security/10threats/10threats2026.html",
+          "text": "IPAの公表資料",
           "marks": [
             {
               "type": "link",
