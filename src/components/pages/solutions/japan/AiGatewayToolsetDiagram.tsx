@@ -1,5 +1,7 @@
 import { Check, Circle, CodeXml, Ellipsis, FileText, Files, GitBranch, MessageSquare, Search, Users } from "lucide-react";
-import { aiGatewayContentCopy } from "@/copy/aiGateway";
+import type { Locale } from "@/constants/i18n";
+import { aiGatewayCopy } from "@/copy/aiGatewayLocalized";
+import IntegrationBrandIcon from "@/components/sections/common/IntegrationBrandIcon";
 import styles from "./AiGatewayToolsetDiagram.module.css";
 
 const toolIcons = [
@@ -9,8 +11,8 @@ const toolIcons = [
   [Files, Users, Ellipsis],
 ];
 
-export default function AiGatewayToolsetDiagram() {
-  const text = aiGatewayContentCopy.toolset;
+export default function AiGatewayToolsetDiagram({ locale = "ja" }: { locale?: Locale }) {
+  const text = aiGatewayCopy[locale].toolset;
   return (
     <figure className={styles.diagram} aria-label={text.diagramLabel}>
       <div className={styles.canvas}>
@@ -29,7 +31,7 @@ export default function AiGatewayToolsetDiagram() {
         {text.sources.map((source, sourceIndex) => (
           <div className={`${styles.source} ${styles[source.id]}`} key={source.id}>
             <div className={styles.sourceHeading}>
-              <img src={`/assets/pages/platforms/acp/integrations/${source.id}.svg`} width={28} height={28} alt="" />
+              <IntegrationBrandIcon name={source.name} className="h-6 w-6 md:h-7 md:w-7" />
               <h3 className="m-0 type-body-md text-fg">{source.name}</h3>
             </div>
             <ul className={styles.tools}>

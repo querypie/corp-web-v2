@@ -1,6 +1,7 @@
 import { Building2, Check, FileSearch, KeyRound, Minus, SlidersHorizontal } from "lucide-react";
 import { pageContentWidthClassName } from "@/constants/layout";
-import { aiGatewayContentCopy as copy } from "@/copy/aiGateway";
+import type { Locale } from "@/constants/i18n";
+import { aiGatewayCopy } from "@/copy/aiGatewayLocalized";
 import SolutionSectionHeading from "./SolutionSectionHeading";
 import AiGatewayToolsetDiagram from "./AiGatewayToolsetDiagram";
 import AiGatewayFeatureVisual, { type AiGatewayFeatureId } from "./AiGatewayFeatureVisual";
@@ -10,8 +11,8 @@ function Heading({ title, description }: { title: string; description: string })
   return <SolutionSectionHeading title={title} description={description} layout="split" />;
 }
 
-function Challenges() {
-  const text = copy.challenges;
+function Challenges({ locale }: { locale: Locale }) {
+  const text = aiGatewayCopy[locale].challenges;
   return (
     <section className={pageContentWidthClassName}>
       <Heading {...text} />
@@ -27,8 +28,8 @@ function Challenges() {
   );
 }
 
-function Features() {
-  const text = copy.features;
+function Features({ locale }: { locale: Locale }) {
+  const text = aiGatewayCopy[locale].features;
 
   return (
     <section className={styles.band}>
@@ -38,7 +39,7 @@ function Features() {
           {text.cards.map(card => {
             return (
               <article className={styles.feature} key={card.id}>
-                <AiGatewayFeatureVisual id={card.id as AiGatewayFeatureId} />
+                <AiGatewayFeatureVisual id={card.id as AiGatewayFeatureId} locale={locale} />
                 <h3 className="m-0 text-pretty type-h3 text-fg">{card.title}</h3>
                 <p className="mb-0 mt-4 type-body-md text-mute">{card.body}</p>
               </article>
@@ -50,8 +51,8 @@ function Features() {
   );
 }
 
-function AccessPolicy() {
-  const text = copy.policy;
+function AccessPolicy({ locale }: { locale: Locale }) {
+  const text = aiGatewayCopy[locale].policy;
   const roleIcons = { "org-admin": Building2, "project-admin": SlidersHorizontal, "ai-user": KeyRound, "audit-viewer": FileSearch };
   return (
     <section className={`${pageContentWidthClassName} ${styles.section}`}>
@@ -94,18 +95,18 @@ function AccessPolicy() {
   );
 }
 
-function McpToolset() {
-  const text = copy.toolset;
+function McpToolset({ locale }: { locale: Locale }) {
+  const text = aiGatewayCopy[locale].toolset;
   return (
     <section className={styles.band}>
       <div className={`${pageContentWidthClassName} ${styles.section}`}>
         <Heading {...text} />
-        <AiGatewayToolsetDiagram />
+        <AiGatewayToolsetDiagram locale={locale} />
       </div>
     </section>
   );
 }
 
-export default function AiGatewayContent() {
-  return <><Challenges /><Features /><AccessPolicy /><McpToolset /></>;
+export default function AiGatewayContent({ locale = "ja" }: { locale?: Locale }) {
+  return <><Challenges locale={locale} /><Features locale={locale} /><AccessPolicy locale={locale} /><McpToolset locale={locale} /></>;
 }

@@ -24,6 +24,9 @@
 }
 .gatewayHeading { display: flex; align-items: center; gap: 12px; }
 .gatewayLogo { width: var(--aig-icon-size); height: var(--aig-icon-size); object-fit: contain; }
+:global(:root[data-theme="dark"]) .diagram img[src$="llm-gpt-color.svg"],
+:global(:root[data-theme="dark"]) .diagram img[src$="agent-cursor.webp"],
+:global(:root[data-theme="dark"]) .diagram img[src$="agent-pi.webp"] { filter: invert(1); }
 .gateway h2 { margin: 0; }
 .gatewayKey { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 10px 0 28px; font-size: 11px; color: var(--color-fg); }
 .gatewayKey svg { width: 14px; height: 14px; flex: none; stroke-width: 1.5; color: var(--color-brand); }

@@ -9,10 +9,10 @@ export type SolutionEntry = {
 export const solutionEntries: SolutionEntry[] = [
   { id: "ai-crew", slug: ["ai-crew"] },
   { id: "ai-dashi", slug: ["ai-dashi"] },
-  { id: "ai-gateway", slug: ["ai-gateway"], locales: ["ja"] },
-  { id: "penetration-testing", slug: ["penetration-testing"], locales: ["ja"] },
-  { id: "qlm", slug: ["qlm"], locales: ["ja"] },
-  { id: "qev", slug: ["qev"], locales: ["ja"] },
+  { id: "ai-gateway", slug: ["ai-gateway"] },
+  { id: "penetration-testing", slug: ["penetration-testing"] },
+  { id: "qlm", slug: ["qlm"] },
+  { id: "qev", slug: ["qev"] },
   { id: "as400-cobol", slug: ["as400-cobol"], locales: ["ja"] },
   { id: "local-llm", slug: ["local-llm"], locales: ["ja"] },
 ];

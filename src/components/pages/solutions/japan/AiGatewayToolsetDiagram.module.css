@@ -9,7 +9,6 @@
 .notion { grid-column: 3; grid-row: 1; }
 .google-drive { grid-column: 3; grid-row: 2; }
 .sourceHeading { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-.sourceHeading img { flex: none; width: 28px; height: 28px; object-fit: contain; }
 .sourceHeading h3 { font-weight: 600; }
 .tools { display: grid; gap: 6px; list-style: none; margin: 0; padding: 0; }
 .tools li { display: flex; align-items: center; gap: 8px; min-width: 0; height: 28px; border-radius: 6px; padding: 3px 8px; }
@@ -54,6 +53,5 @@
   .connections { display: none; }
   .mobileConnections { display: block; }
   .sourceHeading { gap: 6px; }
-  .sourceHeading img { width: 24px; height: 24px; }
   .tools li { gap: 6px; padding-inline: 6px; }
 }

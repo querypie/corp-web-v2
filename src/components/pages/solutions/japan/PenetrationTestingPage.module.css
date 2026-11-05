@@ -39,6 +39,14 @@
 .denseNode > p { margin: 0 0 7px; height: 30px; overflow: hidden; color: #aabdd0; font-size: 8px; line-height: 1.8; }
 .denseNode > code { display: block; padding: 6px; border-radius: 4px; background: #1a2a3b; font-size: 7px; color: #b8cbdf; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .denseNodeFoot { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; font-size: 7px; color: #8da4bd; }
+:global(:root[data-theme="dark"]) .report { background: var(--color-bg-content); }
+:global(:root[data-theme="dark"]) .risk { color: #ffa2b5; background: #54283a; }
+:global(:root[data-theme="dark"]) .response > span:last-child { color: #ffa2b5; }
+:global(:root[data-theme="dark"]) .resolved > span:last-child { color: #95dbbd; }
+.report, .process li, .infrastructureNodes > div { min-width: 0; }
+.infrastructureNodes svg { flex-shrink: 0; }
+.response { flex-wrap: wrap; }
+.legend { flex-wrap: wrap; }
 @media (prefers-reduced-motion: reduce) { .denseNode { transition: none; } }
 .mockTop { flex-wrap: wrap; }
 .mockTop .legend { margin-left: auto; color: #91a7be; font-size: 10px; }

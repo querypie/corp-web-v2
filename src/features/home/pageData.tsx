@@ -1,6 +1,6 @@
 import type { ComponentProps } from "react";
 import HomePage from "@/components/pages/home/HomePage";
-import IntegrationIcon from "@/components/sections/common/IntegrationIcon";
+import IntegrationBrandIcon from "@/components/sections/common/IntegrationBrandIcon";
 import { getLocalePath, type Locale } from "@/constants/i18n";
 import { integrationItems } from "@/components/pages/platforms/aip/integrations/integrationData";
 import {
@@ -52,12 +52,9 @@ const mcpItems = homeMcpIcons.flatMap(({ label, name }) => {
 
   return [{
     icon: (
-      <IntegrationIcon
+      <IntegrationBrandIcon
         className="h-8 w-8 md:h-12 md:w-12"
-        darkPlate={item.darkPlate}
-        enhanceIconContrast={item.enhanceIconContrast}
-        icon={item.icon}
-        invertIcon={item.invertIcon}
+        name={name}
       />
     ),
     label,

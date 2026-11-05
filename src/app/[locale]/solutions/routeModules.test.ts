@@ -53,10 +53,21 @@ const routeModules = {
 } as const;
 
 describe("solutions route modules", () => {
-  it.each(["en", "ko"])("모의 해킹 페이지는 %s에서 404를 반환한다", async (locale) => {
+  it.each(["en", "ko", "ja"])("AI 솔루션과 모의 해킹 페이지는 %s 언어를 유지한다", async (locale) => {
     const props = { params: Promise.resolve({ locale }) };
-    await expect(PenetrationTestingPage(props)).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
-    await expect(penetrationTestingMetadata(props)).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
+    for (const id of ["ai-gateway", "penetration-testing", "qlm", "qev"] as const) {
+      const element = await routeModules[id].page(props);
+      expect(element.props.locale).toBe(locale);
+      const metadata = await routeModules[id].generateMetadata(props);
+      expect(metadata.alternates?.canonical).toBe(`https://www.querypie.com/${locale}/solutions/${id}`);
+    }
+  });
+  it("AI 솔루션은 지원하지 않는 언어에 404를 반환한다", async () => {
+    for (const id of ["ai-gateway", "penetration-testing", "qlm", "qev"] as const) {
+      const props = { params: Promise.resolve({ locale: "fr" }) };
+      await expect(routeModules[id].page(props)).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
+      await expect(routeModules[id].generateMetadata(props)).rejects.toThrow("NEXT_HTTP_ERROR_FALLBACK;404");
+    }
   });
   it.each(["en", "ko"])("Local LLMページは%sで404を返す", async (locale) => {
     const props = { params: Promise.resolve({ locale }) };

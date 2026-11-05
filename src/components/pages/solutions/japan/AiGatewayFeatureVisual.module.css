@@ -5,6 +5,7 @@
 }
 .visual svg { width: 20px; height: 20px; flex: none; stroke-width: 1.5; }
 .visual img { object-fit: contain; flex: none; }
+:global(:root[data-theme="dark"]) .visual img[src$="llm-gpt-color.svg"] { filter: invert(1); }
 .visual small { font-size: 9px; color: var(--color-mute); }
 .logoTile, .pill, .alias, .destination, .vault, .toolTile, .dashboard, .log {
   border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent); background: var(--color-bg);

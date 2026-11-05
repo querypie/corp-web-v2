@@ -11,7 +11,7 @@ import { getSolutionHref } from "@/features/solutions/routes";
 import { localLlmMenuLabel } from "@/copy/localLlm";
 import { as400CobolMenuLabel } from "@/copy/as400Cobol";
 import { japanAiSolutionsCopy } from "@/copy/japanAiSolutions";
-import { penetrationTestingMenuLabel } from "@/copy/penetrationTestingMenu";
+import { penetrationTestingMenuLabel, penetrationTestingMenuLabels } from "@/copy/penetrationTestingMenu";
 
 export type NavigationSubItem = {
   href: string;
@@ -106,7 +106,7 @@ export function getPlatformSubItems(
     { label: copy[1], href: getPlatformHref(locale as Locale, "acp") },
   ];
 
-  items.push({ label: japanAiSolutionsCopy["ai-gateway"].menuLabel, href: getSolutionHref("ja", "ai-gateway") });
+  items.push({ label: japanAiSolutionsCopy["ai-gateway"].menuLabel, href: getSolutionHref(locale as Locale, "ai-gateway") });
 
   if (locale === "en" || locale === "ko") {
     [items[0], items[1]] = [items[1], items[0]];
@@ -121,6 +121,9 @@ export function getSolutionsSubItems(
 ): NavigationSubItem[] {
   if (locale !== "ja") {
     const items = [{
+      label: locale === "ko" ? penetrationTestingMenuLabels.ko : penetrationTestingMenuLabels.en,
+      href: getSolutionHref(locale as Locale, "penetration-testing"),
+    }, {
       label: locale === "ko" ? "FDE 서비스" : "FDE Services",
       href: getPlatformHref(locale as Locale, "fde-services"),
     }];
@@ -324,11 +327,11 @@ export function getFooterHref(item: string, locale: string) {
   }
 
   if (item === japanAiSolutionsCopy["ai-gateway"].menuLabel) {
-    return getSolutionHref("ja", "ai-gateway");
+    return getSolutionHref(locale as Locale, "ai-gateway");
   }
 
-  if (item === penetrationTestingMenuLabel && locale === "ja") {
-    return getSolutionHref(locale, "penetration-testing");
+  if (Object.values(penetrationTestingMenuLabels).includes(item)) {
+    return getSolutionHref(locale as Locale, "penetration-testing");
   }
 
   if (item === as400CobolMenuLabel && locale === "ja") {

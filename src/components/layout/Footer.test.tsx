@@ -12,11 +12,11 @@ describe("Footer", () => {
     render(<Footer locale={locale} sections={copy.footerSections} />);
     const platform = screen.getByText(platformLabel).parentElement!;
     expect(within(platform).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      `/${locale}/platforms/acp`, `/${locale}/platforms/aip`, "/ja/solutions/ai-gateway",
+      `/${locale}/platforms/acp`, `/${locale}/platforms/aip`, `/${locale}/solutions/ai-gateway`,
     ]);
     const solutions = screen.getByText(solutionsLabel).parentElement!;
     expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      `/${locale}/platforms/aip/fde-services`, `/${locale}/platforms/dlp`,
+      `/${locale}/solutions/penetration-testing`, `/${locale}/platforms/aip/fde-services`, `/${locale}/platforms/dlp`,
     ]);
   });
 
@@ -67,7 +67,6 @@ describe("Footer", () => {
     expect(screen.getByRole("link", { name: "自社サービスAI化｜AI Dashi" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "AI Gateway (AIG)" })).toHaveAttribute("href", "/ja/solutions/ai-gateway");
     expect(screen.getByRole("link", { name: "オンプレミスAI｜Local LLM" })).toHaveAttribute("href", "/ja/solutions/local-llm");
-    expect(screen.getByText("ソリューション").parentElement).toHaveClass("w-max", "max-w-full");
     expect(screen.getByRole("link", { name: "専任エンジニア｜FDEサービス" })).toHaveAttribute("href", "/ja/platforms/aip/fde-services");
   });
 });

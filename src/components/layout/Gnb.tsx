@@ -267,9 +267,9 @@ export default function Gnb({
               src="/assets/brand/logos/querypie-ai-logo.svg"
             />
           </Link>
-          <div className="flex items-center gap-[10px] md:gap-[30px]">
+          <div className="flex items-center gap-[10px] lg:gap-5 xl:gap-[30px]">
             {/* 데스크톱 전용 글로벌 네비게이션 */}
-            <nav aria-label="Global" className="hidden items-center gap-[30px] md:flex">
+            <nav aria-label="Global" className="hidden items-center gap-5 lg:flex xl:gap-[30px]">
               {items.map((item, index) => {
                 const section = navigationSections[index];
 
@@ -339,7 +339,7 @@ export default function Gnb({
               })}
             </nav>
             {locale !== "ja" && <div
-              className="relative hidden md:inline-flex"
+              className="relative hidden shrink-0 lg:inline-flex"
               onBlur={handleDesktopPopoverBlur}
               onMouseEnter={() => openDesktopPopover("locale")}
               onMouseLeave={scheduleDesktopPopoverClose}
@@ -384,7 +384,7 @@ export default function Gnb({
                 </div>
               </div>
             </div>}
-            {locale !== "ja" && <div className="relative z-50 md:hidden" ref={mobileLocaleRef}>
+            {locale !== "ja" && <div className="relative z-50 lg:hidden" ref={mobileLocaleRef}>
               <button
                 aria-expanded={mobileLocaleOpen}
                 aria-label="Change language"
@@ -425,7 +425,7 @@ export default function Gnb({
             <button
               aria-expanded={mobileMenuOpen}
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className="inline-flex h-9 w-9 items-center justify-center md:hidden"
+              className="inline-flex h-9 w-9 items-center justify-center lg:hidden"
               onClick={() => setMobileMenuOpen((current) => !current)}
               type="button"
             >
@@ -437,7 +437,7 @@ export default function Gnb({
               />
             </button>
             <a
-              className="hidden md:inline-flex"
+              className="hidden shrink-0 whitespace-nowrap lg:inline-flex"
               href={locale === "en" || locale === "ko"
                 ? getLocalePath(locale, "/plans/acp")
                 : "https://app.querypie.com/"}
@@ -459,7 +459,7 @@ export default function Gnb({
 
       {mobileMenuVisible ? (
         <div className={cx(
-          "fixed inset-x-0 bottom-0 top-[calc(64px+var(--language-banner-offset,0px))] z-40 overflow-y-auto transition-[top] duration-300 md:hidden",
+          "fixed inset-x-0 bottom-0 top-[calc(64px+var(--language-banner-offset,0px))] z-40 overflow-y-auto transition-[top] duration-300 lg:hidden",
           mobileMenuOpen
             ? "animate-[mobile-menu-sheet-enter_320ms_cubic-bezier(0.22,1,0.36,1)_both]"
             : "animate-[mobile-menu-sheet-exit_280ms_cubic-bezier(0.4,0,0.2,1)_both]",
@@ -471,12 +471,12 @@ export default function Gnb({
                 key={section.title}
                 className="flex w-full flex-col gap-[10px]"
               >
-                <p className="m-0 type-body-md text-mute">{section.title}</p>
+                <p className="m-0 type-body-sm text-mute">{section.title}</p>
                 <div className="flex w-full flex-col gap-[10px]">
                   {section.items.map((item) => (
                     <Link
                       key={item.label}
-                      className="pressable type-h2 text-fg"
+                      className="pressable type-h3 text-fg"
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                     >

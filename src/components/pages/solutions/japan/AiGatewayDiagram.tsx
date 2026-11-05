@@ -1,8 +1,8 @@
 import { Activity, Cloud, Cpu, KeyRound, Network, Plug, Server, ShieldCheck, Users } from "lucide-react";
-import { aiGatewayVisualCopy } from "@/copy/japanAiSolutions";
+import type { Locale } from "@/constants/i18n";
+import { aiGatewayArchitectureCopy } from "@/copy/aiGatewayLocalized";
 import styles from "./AiGatewayDiagram.module.css";
 
-const copy = aiGatewayVisualCopy.architecture;
 const moduleIcons = [Network, Plug, ShieldCheck, Activity];
 const agentLogos = [
   { label: "Claude Code", src: "/assets/icons/llm-claude-color.svg" },
@@ -22,7 +22,8 @@ function Connections({ outgoing = false, mobile = false }: { outgoing?: boolean;
   </svg>;
 }
 
-export default function AiGatewayDiagram() {
+export default function AiGatewayDiagram({ locale = "ja" }: { locale?: Locale }) {
+  const copy = aiGatewayArchitectureCopy[locale];
   return <figure className={styles.diagram} aria-label={copy.diagramLabel}>
     <div className={styles.architecture}>
       <Connections />

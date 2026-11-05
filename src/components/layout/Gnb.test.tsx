@@ -19,11 +19,11 @@ describe("Gnb", () => {
     const nav = screen.getByRole("navigation", { name: "Global" });
     const platform = within(nav).getByRole("button", { name: platformLabel }).parentElement!;
     expect(within(platform).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      `/${locale}/platforms/acp`, `/${locale}/platforms/aip`, "/ja/solutions/ai-gateway",
+      `/${locale}/platforms/acp`, `/${locale}/platforms/aip`, `/${locale}/solutions/ai-gateway`,
     ]);
     const solutions = within(nav).getByRole("button", { name: solutionsLabel }).parentElement!;
     expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      `/${locale}/platforms/aip/fde-services`, `/${locale}/platforms/dlp`,
+      `/${locale}/solutions/penetration-testing`, `/${locale}/platforms/aip/fde-services`, `/${locale}/platforms/dlp`,
     ]);
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
     for (const item of [...getPlatformSubItems(locale), ...getSolutionsSubItems(locale, { includeDlpPlatform: true })]) {

@@ -17,7 +17,7 @@ describe("플랫폼과 일본 전용 솔루션", () => {
     expect(getPlatformSubItems(locale).map((item) => item.href)).toEqual([
       `/${locale}/platforms/${locale === "ja" ? "aip" : "acp"}`,
       `/${locale}/platforms/${locale === "ja" ? "acp" : "aip"}`,
-      "/ja/solutions/ai-gateway",
+      `/${locale}/solutions/ai-gateway`,
     ]);
     for (const item of getPlatformSubItems(locale)) {
       expect(getFooterHref(item.label, locale)).toBe(item.href);
@@ -35,7 +35,7 @@ describe("플랫폼과 일본 전용 솔루션", () => {
     expect(getPlatformSubItems(locale, { includeDlpPlatform: true }).map((item) => item.href))
       .not.toContain(`/${locale}/platforms/dlp`);
     expect(getSolutionsSubItems(locale).map((item) => item.href))
-      .toEqual([`/${locale}/platforms/aip/fde-services`]);
+      .toEqual([`/${locale}/solutions/penetration-testing`, `/${locale}/platforms/aip/fde-services`]);
   });
 
   it("일본어 Preview 메뉴와 푸터에서는 DLP 제품 소개를 숨긴다", () => {
@@ -140,7 +140,7 @@ describe("getShellMenuCopy", () => {
   it("푸터 메뉴를 locale별로 반환한다", () => {
     expect(getShellMenuCopy("ko").footerSections).toEqual([
       { title: "플랫폼", items: ["접근 제어 플랫폼 (ACP)", "AI 플랫폼 (AIP)", "AI Gateway (AIG)"] },
-      { title: "솔루션", items: ["FDE 서비스"] },
+      { title: "솔루션", items: ["모의 해킹 서비스", "FDE 서비스"] },
       { title: "데모", items: ["ACP 활용", "AIP 활용"] },
       { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "ACP 커뮤니티 에디션", "ACP 문서", "AIP 시작하기", "AIP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
