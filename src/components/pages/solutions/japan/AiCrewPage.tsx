@@ -2,6 +2,7 @@ import Image from "next/image";
 import Cta from "@/components/sections/Cta";
 import Badge from "@/components/ui/Badge";
 import ButtonGroup from "@/components/ui/ButtonGroup";
+import { getContactHref } from "@/features/contact/prefill";
 import { getLocalePath } from "@/constants/i18n";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { getPublicDetailHref } from "@/features/content/data";
@@ -47,7 +48,7 @@ const voices = [
 ] as const;
 
 export default function AiCrewPage() {
-  const contactHref = getLocalePath("ja", "/contact-us");
+  const contactHref = getContactHref("ja", "ai-crew");
   const demoHref = getLocalePath("ja", "/demo/aip");
   const whitepaperHref = getPublicDetailHref("resources", "ja", "ai-transformation-japan", "white-papers");
 

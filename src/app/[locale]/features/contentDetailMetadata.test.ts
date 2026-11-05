@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from "vitest";
+import { beforeAll, describe, expect, it, vi } from "vitest";
 
 import { createLocalizedContent, type ManagedContentEntry } from "@/features/content/data";
 
@@ -49,6 +49,14 @@ function makeEntry(overrides: Partial<ManagedContentEntry> = {}): ManagedContent
     ...overrides,
   };
 }
+
+beforeAll(async () => {
+  // Route dependencies are expensive to transform on a cold CI worker.
+  await Promise.all([
+    import("./resources/[slug]/page"),
+    import("./demo/[slug]/page"),
+  ]);
+}, 30_000);
 
 describe("content detail metadata", () => {
   it("resources 상세 OG image에 콘텐츠 섬네일을 사용한다", async () => {

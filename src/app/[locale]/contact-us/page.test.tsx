@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from "vitest";
-import { aruProductLabels } from "@/copy/contact";
+import { aruProductLabels, contactInquiryLabels, contactProductLabels } from "@/copy/contact";
 
 vi.mock("next/navigation", () => ({
   notFound: () => { throw new Error("NEXT_NOT_FOUND"); },
@@ -11,13 +11,41 @@ vi.mock("next/headers", () => ({
 
 import ContactUsRoute, { generateMetadata } from "./page";
 
+describe("ContactUsRoute", () => {
+  it("일본어 침투 테스트 상담 URL에서 기존 문의 종류와 서비스를 선택한다", async () => {
+    const page = await ContactUsRoute({
+      params: Promise.resolve({ locale: "ja" }),
+      searchParams: Promise.resolve({ inquiry: "ai-consulting", product: "penetrationtest" }),
+    });
+    expect(page.props.initialInquiry).toBe("AI導入・活用について相談");
+    expect(page.props.initialProducts).toEqual(["ペネトレーションテストサービス"]);
+  });
+
+  it.each(["en", "ko", "ja"] as const)("%s 문의 URL의 옵션을 폼에 전달한다", async (locale) => {
+    const page = await ContactUsRoute({
+      params: Promise.resolve({ locale }),
+      searchParams: Promise.resolve({ inquiry: "pricing", product: "aip" }),
+    });
+    expect(page.props.initialInquiry).toBe(contactInquiryLabels.pricing[locale]);
+    expect(page.props.initialProducts).toEqual([contactProductLabels.aip[locale]]);
+  });
+
+  it("일반 문의 페이지는 기본 선택 없이 열린다", async () => {
+    const page = await ContactUsRoute({
+      params: Promise.resolve({ locale: "ja" }),
+      searchParams: Promise.resolve({}),
+    });
+    expect(page.props.initialInquiry).toBeUndefined();
+    expect(page.props.initialProducts).toEqual([]);
+  });
+});
+
 describe("문의 route의 Aru 선택", () => {
   it.each(["en", "ko", "ja"] as const)("%s 에서 Aru를 첫 번째에 표시하고 CTA 유입 시 기본 선택한다", async (locale) => {
     const page = await ContactUsRoute({
       params: Promise.resolve({ locale }),
       searchParams: Promise.resolve({ utm_source: "aru", utm_medium: "web", utm_campaign: "footer_contact" }),
     });
-
     expect(page.props.initialProducts).toEqual([aruProductLabels[locale]]);
     expect(page.props.productOptions[0]).toBe(aruProductLabels[locale]);
   });
@@ -35,7 +63,7 @@ describe("문의 route의 Aru 선택", () => {
   it("CTA 쿼리가 canonical URL에 포함되지 않는다", async () => {
     const metadata = await generateMetadata({
       params: Promise.resolve({ locale: "ja" }),
-      searchParams: Promise.resolve({ utm_source: "aru" }),
+      searchParams: Promise.resolve({ utm_source: "aru", inquiry: "ai-consulting", product: "ai-crew" }),
     });
     expect(metadata.alternates?.canonical).toBe("https://www.querypie.com/ja/contact-us");
   });

@@ -10,6 +10,7 @@ import {
   hasCookiePreferenceSet,
 } from "@/features/cookie-preferences/preferences";
 import styles from "./AiChat.module.css";
+import AiChatErrorBoundary from "./AiChatErrorBoundary";
 
 const AiChatPanel = dynamic(() => import("./AiChatPanel"), { ssr: false });
 
@@ -46,7 +47,11 @@ export default function AiChatWidget({ locale }: { locale: Locale }) {
           <img alt="" aria-hidden="true" className="relative h-10 w-10 -translate-y-px" height={40} src="/assets/brand/icons/BotFace.svg" width={40} />
         </Button>
       ) : null}
-      {activated ? <AiChatPanel locale={locale} onClose={() => setOpen(false)} open={open} /> : null}
+      {activated ? (
+        <AiChatErrorBoundary locale={locale} onClose={() => setOpen(false)} open={open}>
+          <AiChatPanel locale={locale} onClose={() => setOpen(false)} open={open} />
+        </AiChatErrorBoundary>
+      ) : null}
     </>
   );
 }

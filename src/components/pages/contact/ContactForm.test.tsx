@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { aruProductLabels, getContactPageCopy } from "@/copy/contact";
+import { aruProductLabels, contactInquiryLabels, contactProductLabels, getContactPageCopy } from "@/copy/contact";
 import ContactForm from "./ContactForm";
 
 const pushMock = vi.fn();
@@ -38,6 +38,19 @@ function fillRequiredFields(copy = contactCopy) {
 }
 
 describe("ContactForm", () => {
+  it.each(["en", "ko", "ja"] as const)("%s 문의 종류와 제품을 기본 선택하고 사용자가 변경할 수 있다", (locale) => {
+    const copy = getContactPageCopy(locale);
+    render(<ContactForm {...copy} locale={locale} initialInquiry={contactInquiryLabels.demo[locale]} initialProducts={[contactProductLabels.aip[locale]]} />);
+    const inquiry = document.querySelector('[name="inquiryType"]')!;
+    expect(inquiry).toHaveValue(contactInquiryLabels.demo[locale]);
+    const product = screen.getByRole("checkbox", { name: contactProductLabels.aip[locale] });
+    expect(product).toBeChecked();
+    fireEvent.change(inquiry, { target: { value: contactInquiryLabels.pricing[locale] } });
+    fireEvent.click(product);
+    expect(inquiry).toHaveValue(contactInquiryLabels.pricing[locale]);
+    expect(product).not.toBeChecked();
+  });
+
   beforeEach(() => {
     vi.stubGlobal("fetch", vi.fn());
   });

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { isLocale, type Locale } from "@/constants/i18n";
-import { getLingoQuotePlan } from "@/features/lingo-quote/catalog";
+import { getLingoQuotePlan, isLingoQuoteQuantity } from "@/features/lingo-quote/catalog";
 import { createLingoQuoteWorkbook } from "@/features/lingo-quote/workbook.server";
 
 export const runtime = "nodejs";
@@ -15,6 +15,7 @@ type QuotePayload = {
   contactName?: unknown;
   department?: unknown;
   plan?: unknown;
+  quantity?: unknown;
   privacyConsent?: unknown;
   locale?: unknown;
 };
@@ -86,9 +87,11 @@ export async function POST(request: Request) {
   if (!companyName || !contactName || !department || !plan || payload.privacyConsent !== true) {
     return jsonError("MISSING_REQUIRED_FIELDS", 400);
   }
+  const quantity = payload.quantity === undefined ? 1 : payload.quantity;
+  if (!isLingoQuoteQuantity(quantity)) return jsonError("INVALID_QUANTITY", 400);
 
   try {
-    const quote = await createLingoQuoteWorkbook({ companyName, contactName, department, plan, locale });
+    const quote = await createLingoQuoteWorkbook({ companyName, contactName, department, plan, quantity, locale });
     const encodedFileName = encodeURIComponent(quote.fileName);
     return new NextResponse(new Uint8Array(quote.bytes), {
       headers: {

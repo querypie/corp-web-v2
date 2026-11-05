@@ -99,7 +99,10 @@ beforeEach(async () => {
   vi.resetModules();
   tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "querypie-authored-test-"));
   process.chdir(tempDir);
-});
+  // Transform the server/Tiptap dependencies before the test timeout starts.
+  // A timed-out import must not resume writes after this test's cwd is cleaned up.
+  await import("./authored.server");
+}, 30_000);
 
 afterEach(async () => {
   process.chdir(originalCwd);
@@ -107,6 +110,23 @@ afterEach(async () => {
 });
 
 describe("saveAuthoredContent", () => {
+  it("예약 공개 시각을 저장하고 목록과 본문 조회에서 유지한다", async () => {
+    const { saveAuthoredContent, readAuthoredManagedContents, readAuthoredManagedContentItem } = await import("./authored.server");
+    const entry = makeEntry({
+      section: "news",
+      categorySlug: "news",
+      publishAt: "2026-11-06T08:00:00+09:00",
+    });
+    const saved = await saveAuthoredContent(entry);
+    const list = await readAuthoredManagedContents({ includeBodies: false });
+    const detail = await readAuthoredManagedContentItem("news", entry.id, { includeBodies: true });
+    expect(list[0].publishAt).toBe(entry.publishAt);
+    expect(detail?.publishAt).toBe(entry.publishAt);
+    await saveAuthoredContent({ ...saved, authorName: "Updated author" });
+    const updated = await readAuthoredManagedContentItem("news", entry.id);
+    expect(updated?.publishAt).toBe(entry.publishAt);
+  });
+
   it("dateIso를 YYYY-MM-DD 형식으로 정규화해서 저장한다", async () => {
     const existing = makeEntry({ dateIso: "2026-1-15", storageId: "cnt_000001" });
     const entryDir = await writeExistingContent(existing);

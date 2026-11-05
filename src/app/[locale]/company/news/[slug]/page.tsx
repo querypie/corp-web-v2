@@ -22,6 +22,8 @@ type Props = {
   params: Promise<{ locale: string; slug: string }>;
 };
 
+export const dynamic = "force-dynamic";
+
 export async function generateStaticParams() {
   const newsItems = await readContentState("news", { includeBodies: false });
 

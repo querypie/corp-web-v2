@@ -1,11 +1,26 @@
-import { getPublicListHref } from "@/features/content/data";
-import type { Locale } from "@/constants/i18n";
+import { getLocalePath, type Locale } from "@/constants/i18n";
 
 export const aruProductLabels: Record<Locale, string> = {
   en: "AI Agent for Work - Aru",
   ko: "업무 지원 AI 에이전트 - Aru",
   ja: "業務を支援するAIエージェント - Aru",
 };
+
+export const contactProductLabels = {
+  aru: aruProductLabels,
+  "ai-crew": { ja: "社内業務効率化｜AI Crew" },
+  "ai-dashi": { ja: "自社サービスAI化｜AI Dashi" },
+  aip: { en: "AI Platform QueryPie AIP", ko: "AI 플랫폼 QueryPie AIP", ja: "AIプラットフォーム QueryPie AIP" },
+  acp: { en: "Access Control Platform QueryPie ACP", ko: "액세스 제어 플랫폼 QueryPie ACP", ja: "アクセス制御プラットフォーム QueryPie ACP" },
+  fde: { en: "AI Expert Support (FDE) Service", ko: "AI 전문가 지원 (FDE) 서비스", ja: "AI専門家伴走 (FDE) サービス" },
+  penetrationtest: { en: "Penetration Testing Service", ko: "모의 해킹 서비스", ja: "ペネトレーションテストサービス" },
+} satisfies Record<string, Partial<Record<Locale, string>>>;
+
+export const contactInquiryLabels = {
+  "ai-consulting": { ja: "AI導入・活用について相談" },
+  pricing: { en: "Pricing Plan Discussion", ko: "요금제 상담", ja: "お見積もり依頼" },
+  demo: { en: "Request for Product Demo", ko: "제품 데모 요청", ja: "デモを依頼" },
+} satisfies Record<string, Partial<Record<Locale, string>>>;
 
 export type ContactLink = {
   href: string;
@@ -106,6 +121,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "AI Platform QueryPie AIP",
         "Access Control Platform QueryPie ACP",
         "AI Expert Support (FDE) Service",
+        "Penetration Testing Service",
         "Partnership",
       ],
       messageField: {
@@ -118,9 +134,9 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       errorGeneral: "Failed to submit the form. Please try again later.",
       privacyText: "QueryPie values your privacy. Please check out our",
       privacyTermsLabel: "Terms",
-      privacyTermsHref: getPublicListHref("resources", "en"),
+      privacyTermsHref: getLocalePath("en", "/terms-of-service"),
       privacyPolicyLabel: "Privacy Policy",
-      privacyPolicyHref: getPublicListHref("resources", "en"),
+      privacyPolicyHref: getLocalePath("en", "/privacy-policy"),
       submitLabel: "Proceed",
       successTitle: "Submission Complete",
       successDescription: "Thank you for your application!\nOur team will review it and get back to you shortly.",
@@ -178,6 +194,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "AI 플랫폼 QueryPie AIP",
         "액세스 제어 플랫폼 QueryPie ACP",
         "AI 전문가 지원 (FDE) 서비스",
+        "모의 해킹 서비스",
         "파트너십",
       ],
       messageField: {
@@ -190,9 +207,9 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       errorGeneral: "폼 제출에 실패했습니다. 다시 시도해 주세요.",
       privacyText: "QueryPie는 고객의 개인정보를 중요하게 생각합니다. 자세한 내용은",
       privacyTermsLabel: "이용약관",
-      privacyTermsHref: getPublicListHref("resources", "ko"),
+      privacyTermsHref: getLocalePath("ko", "/terms-of-service"),
       privacyPolicyLabel: "개인정보처리방침",
-      privacyPolicyHref: getPublicListHref("resources", "ko"),
+      privacyPolicyHref: getLocalePath("ko", "/privacy-policy"),
       submitLabel: "Proceed",
       successTitle: "제출이 완료되었습니다.",
       successDescription: "문의해 주셔서 감사합니다!\n담당자가 검토 후 빠르게 연락드리겠습니다.",
@@ -252,6 +269,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "AIプラットフォーム QueryPie AIP",
         "アクセス制御プラットフォーム QueryPie ACP",
         "AI専門家伴走 (FDE) サービス",
+        "ペネトレーションテストサービス",
         "パートナーシップ",
       ],
       messageField: {
@@ -264,9 +282,9 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       errorGeneral: "フォームの送信に失敗しました。もう一度お試しください。",
       privacyText: "QueryPie はお客様のプライバシーを尊重します。詳しくは",
       privacyTermsLabel: "利用規約",
-      privacyTermsHref: getPublicListHref("resources", "ja"),
+      privacyTermsHref: getLocalePath("ja", "/terms-of-service"),
       privacyPolicyLabel: "プライバシーポリシー",
-      privacyPolicyHref: getPublicListHref("resources", "ja"),
+      privacyPolicyHref: getLocalePath("ja", "/privacy-policy"),
       submitLabel: "送信する",
       successTitle: "送信が完了しました。",
       successDescription: "お問い合わせいただきありがとうございます。\n担当者が確認後、速やかにご連絡いたします。",

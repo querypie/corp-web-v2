@@ -15,6 +15,8 @@ type AiChatCopy = {
   loadingSteps: string[];
   error: string;
   incomplete: string;
+  openError: string;
+  reload: string;
   sources: string;
   table: string;
   disclaimer: string;
@@ -36,6 +38,8 @@ export const aiChatCopy: Record<Locale, AiChatCopy> = {
     loadingSteps: ["답변을 준비하고 있어요…", "관련 내용을 확인하고 있어요…", "답변을 정리하고 있어요…"],
     error: "답변을 가져오지 못했어요. 잠시 후 다시 보내주세요.",
     incomplete: "답변을 끝까지 작성하지 못했어요. 잠시 후 다시 보내주세요.",
+    openError: "상담창을 열지 못했어요. 페이지를 새로고침한 뒤 다시 시도해 주세요.",
+    reload: "새로고침",
     sources: "참고 자료",
     table: "답변 표 · 좌우로 스크롤할 수 있습니다",
     disclaimer: "AI는 간혹 실수할 수 있습니다.",
@@ -55,6 +59,8 @@ export const aiChatCopy: Record<Locale, AiChatCopy> = {
     loadingSteps: ["Preparing an answer…", "Checking relevant information…", "Putting the answer together…"],
     error: "We couldn't get an answer. Please try sending your message again shortly.",
     incomplete: "The answer couldn't be completed. Please try sending your message again shortly.",
+    openError: "We couldn't open the chat. Please refresh the page and try again.",
+    reload: "Refresh page",
     sources: "Sources",
     table: "Answer table · scroll horizontally",
     disclaimer: "AI can sometimes make mistakes.",
@@ -74,6 +80,8 @@ export const aiChatCopy: Record<Locale, AiChatCopy> = {
     loadingSteps: ["回答を準備しています…", "関連する情報を確認しています…", "回答をまとめています…"],
     error: "回答を取得できませんでした。しばらくしてから、もう一度送信してください。",
     incomplete: "回答を最後まで作成できませんでした。しばらくしてから、もう一度送信してください。",
+    openError: "チャットを開けませんでした。ページを再読み込みしてから、もう一度お試しください。",
+    reload: "再読み込み",
     sources: "参考資料",
     table: "回答の表 · 横にスクロールできます",
     disclaimer: "AIの回答には誤りが含まれる場合があります。",
