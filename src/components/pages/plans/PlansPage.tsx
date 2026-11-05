@@ -9,6 +9,7 @@ import Cta from "@/components/sections/Cta";
 import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PlanFeature, type PricingProduct } from "@/copy/plans";
 import { getLocalePath, type Locale } from "@/constants/i18n";
 import { getPlansPageCopy } from "@/copy/contentPages";
+import { getContactHref } from "@/features/contact/prefill";
 
 type PlansPageProps = {
   productKey?: "aip" | "acp";
@@ -253,7 +254,9 @@ export default function PlansPage({
               activeProduct.cards.length !== 2 && "md:grid-cols-3",
             )}>
               {activeProduct.cards.map((plan) => {
-                const href = withLocaleHref(locale, plan.href);
+                const href = plan.href === "/contact-us"
+                  ? getContactHref(locale, activeProductKey, "pricing")
+                  : withLocaleHref(locale, plan.href);
 
                 return (
                   <PlanSummaryCard

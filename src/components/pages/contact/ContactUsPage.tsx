@@ -3,7 +3,7 @@ import type { ContactPageCopy } from "@/copy/contact";
 import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";
 import ContactForm from "./ContactForm";
 
-type ContactUsPageProps = ContactPageCopy & { locale: Locale; initialProducts?: string[] };
+type ContactUsPageProps = ContactPageCopy & { locale: Locale; initialProducts?: string[]; initialInquiry?: string };
 
 export default function ContactUsPage(props: ContactUsPageProps) {
   const {
@@ -71,7 +71,7 @@ export default function ContactUsPage(props: ContactUsPageProps) {
         </div>
 
         {/* 우측 폼 */}
-        <ContactForm {...props} />
+        <ContactForm key={JSON.stringify([props.locale, props.initialInquiry, props.initialProducts])} {...props} />
       </section>
     </div>
   );
