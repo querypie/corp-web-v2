@@ -108,7 +108,7 @@
       "content": [
         {
           "type": "text",
-          "text": "AIエージェントがサービスの構造、API、認証・権限の仕組みを把握し、攻撃の仮説を立てて検証を繰り返します。アクセスを遮断されても応答を分析し、リクエストの方法や条件を変えて迂回経路を探ります。個々の脆弱性だけでは見えない複数段階の攻撃経路を、最終的な影響までつないで確認します。稼働中のサービスに対する動的解析（DAST）に加え、ソースコードをご提供いただく場合は静的解析（SAST）も組み合わせて検証します。"
+          "text": "AIエージェントがサービスの構造、API、認証・権限の仕組みを把握し、攻撃の仮説を立てて検証を繰り返します。アクセスを遮断されても応答を分析し、リクエストの方法や条件を変えて迂回経路を探ります。個々の脆弱性だけでは見えない複数段階の攻撃経路を、最終的な影響までつないで確認する動的解析（DAST）を実施します。"
         }
       ]
     },
@@ -269,39 +269,20 @@
       ]
     },
     {
-      "type": "bulletList",
+      "type": "paragraph",
       "content": [
         {
-          "type": "listItem",
-          "content": [
+          "type": "text",
+          "text": "AIペネトレーションテストについて相談する",
+          "marks": [
             {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "ペネトレーションテストサービスへのお問い合わせ：",
-                  "marks": [
-                    {
-                      "type": "bold"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "text": "https://querypie.ai/contact-us",
-                  "marks": [
-                    {
-                      "type": "link",
-                      "attrs": {
-                        "href": "/ja/contact-us",
-                        "target": null,
-                        "rel": null,
-                        "class": null
-                      }
-                    }
-                  ]
-                }
-              ]
+              "type": "link",
+              "attrs": {
+                "href": "https://querypie.ai/contact-us?inquiry=ai-consulting&product=penetrationtest",
+                "target": null,
+                "rel": null,
+                "class": "event-cta-button"
+              }
             }
           ]
         }
