@@ -13,6 +13,7 @@ export const contactProductLabels = {
   aip: { en: "AI Platform QueryPie AIP", ko: "AI 플랫폼 QueryPie AIP", ja: "AIプラットフォーム QueryPie AIP" },
   acp: { en: "Access Control Platform QueryPie ACP", ko: "액세스 제어 플랫폼 QueryPie ACP", ja: "アクセス制御プラットフォーム QueryPie ACP" },
   fde: { en: "AI Expert Support (FDE) Service", ko: "AI 전문가 지원 (FDE) 서비스", ja: "AI専門家伴走 (FDE) サービス" },
+  penetrationtest: { en: "Penetration Testing Service", ko: "모의 해킹 서비스", ja: "ペネトレーションテストサービス" },
 } satisfies Record<string, Partial<Record<Locale, string>>>;
 
 export const contactInquiryLabels = {

@@ -12,6 +12,15 @@ vi.mock("next/headers", () => ({
 import ContactUsRoute, { generateMetadata } from "./page";
 
 describe("ContactUsRoute", () => {
+  it("일본어 침투 테스트 상담 URL에서 기존 문의 종류와 서비스를 선택한다", async () => {
+    const page = await ContactUsRoute({
+      params: Promise.resolve({ locale: "ja" }),
+      searchParams: Promise.resolve({ inquiry: "ai-consulting", product: "penetrationtest" }),
+    });
+    expect(page.props.initialInquiry).toBe("AI導入・活用について相談");
+    expect(page.props.initialProducts).toEqual(["ペネトレーションテストサービス"]);
+  });
+
   it.each(["en", "ko", "ja"] as const)("%s 문의 URL의 옵션을 폼에 전달한다", async (locale) => {
     const page = await ContactUsRoute({
       params: Promise.resolve({ locale }),
