@@ -4,6 +4,17 @@ import { getContactInitialProducts } from "./initialProducts";
 import { getContactHref, getContactInitialInquiry } from "./prefill";
 
 describe("contact prefill", () => {
+  it.each([
+    ["en", "Penetration Testing Service", 8],
+    ["ko", "모의 해킹 서비스", 8],
+    ["ja", "ペネトレーションテストサービス", 10],
+  ] as const)("%s penetrationtest는 기존 서비스 옵션을 선택한다", (locale, label, optionCount) => {
+    const copy = getContactPageCopy(locale);
+    expect(getContactInitialProducts(locale, { product: "penetrationtest" })).toEqual([label]);
+    expect(copy.productOptions).toContain(label);
+    expect(copy.productOptions).toHaveLength(optionCount);
+  });
+
   it.each(["en", "ko", "ja"] as const)("%s CTA 파라미터를 실제 폼 옵션으로 변환한다", (locale) => {
     const copy = getContactPageCopy(locale);
     for (const product of Object.keys(contactProductLabels) as (keyof typeof contactProductLabels)[]) {
