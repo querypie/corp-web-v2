@@ -379,49 +379,6 @@
       "content": [
         {
           "type": "text",
-          "text": "【本件に関するお問い合わせ先】"
-        }
-      ],
-      "attrs": {
-        "level": 2
-      }
-    },
-    {
-      "type": "paragraph",
-      "content": [
-        {
-          "type": "text",
-          "text": "QueryPie AI合同会社 広報担当"
-        },
-        {
-          "type": "hardBreak"
-        },
-        {
-          "type": "text",
-          "text": "Email："
-        },
-        {
-          "type": "text",
-          "text": "pr@querypie.com",
-          "marks": [
-            {
-              "type": "link",
-              "attrs": {
-                "href": "mailto:pr@querypie.com",
-                "target": null,
-                "rel": null,
-                "class": null
-              }
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "type": "heading",
-      "content": [
-        {
-          "type": "text",
           "text": "【出典】"
         }
       ],
