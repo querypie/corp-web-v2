@@ -5,6 +5,13 @@ import PenetrationTestingPage from "./japan/PenetrationTestingPage";
 import { aiSolutionsCopy } from "@/copy/aiSolutions";
 
 describe("영어·한국어 AI 솔루션", () => {
+  it.each(["en", "ko", "ja"] as const)("%s AIG 문의 CTA는 AI 상담과 AIG를 전달하며 현재 탭에서 열린다", (locale) => {
+    render(<AiSolutionPage id="ai-gateway" locale={locale} />);
+    const link = screen.getByRole("link");
+    expect(link).toHaveAttribute("href", `/${locale}/contact-us?inquiry=ai-consulting&product=aig`);
+    expect(link).not.toHaveAttribute("target");
+  });
+
   it.each(["en", "ko", "ja"] as const)("%s QEV·QLM은 구성도 없이 같은 더미 레이아웃을 사용한다", (locale) => {
     for (const id of ["qev", "qlm"] as const) {
       const { container } = render(<AiSolutionPage id={id} locale={locale} />);
@@ -28,13 +35,13 @@ describe("영어·한국어 AI 솔루션", () => {
       else expect(screen.queryByRole("figure")).not.toBeInTheDocument();
       expect(container.textContent).not.toMatch(/[\u3040-\u30ff]/);
       for (const link of screen.queryAllByRole("link")) {
-        expect(link).toHaveAttribute("href", `/${locale}/contact-us`);
+        expect(link).toHaveAttribute("href", id === "ai-gateway" ? `/${locale}/contact-us?inquiry=ai-consulting&product=aig` : `/${locale}/contact-us`);
       }
       cleanup();
     }
     const { container } = render(<PenetrationTestingPage locale={locale} />);
     expect(screen.getAllByRole("button")).toHaveLength(30);
-    expect(screen.getByRole("link")).toHaveAttribute("href", `/${locale}/contact-us`);
+    expect(screen.getByRole("link")).toHaveAttribute("href", `/${locale}/contact-us?inquiry=ai-consulting&product=penetrationtest`);
     expect(container.textContent).not.toMatch(/[\u3040-\u30ff]/);
   });
 });

@@ -16,9 +16,14 @@ const agentLogos = [
 function Connections({ outgoing = false, mobile = false }: { outgoing?: boolean; mobile?: boolean }) {
   const paths = mobile
     ? outgoing ? ["M170 0 C170 32 100 24 100 60", "M230 0 C230 32 300 24 300 60"] : ["M100 0 C100 36 170 28 170 60", "M300 0 C300 36 230 28 230 60"]
-    : ["M264 104 C344 104 344 174 426 174", "M264 296 C344 296 344 226 426 226", "M774 174 C856 174 856 104 934 104", "M774 226 C856 226 856 296 934 296"];
+    : [
+      "M276 104 C340 104 340 200 400 200",
+      "M276 296 C340 296 340 200 400 200",
+      "M800 200 C860 200 860 104 924 104",
+      "M800 200 C860 200 860 296 924 296",
+    ];
   return <svg className={mobile ? styles.mobileConnections : styles.connections} viewBox={mobile ? "0 0 400 64" : "0 0 1200 400"} preserveAspectRatio="none" fill="none" aria-hidden="true">
-    {paths.map((d, index) => <path key={d} className={`${styles.lineFlow} ${index > 1 || outgoing ? styles.outgoing : ""}`} d={d} />)}
+    {paths.map((d, index) => <path key={d} className={`${styles.lineFlow} ${mobile ? outgoing ? styles.outgoing : "" : index >= 2 ? styles.outgoing : ""}`} d={d} />)}
   </svg>;
 }
 

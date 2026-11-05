@@ -4,14 +4,14 @@ import { aiGatewayVisualCopy } from "./japanAiSolutions";
 
 type Content = typeof aiGatewayContentCopy;
 const en: Content = {
-  challenges: { title: "AI adoption brings new operational challenges", description: "As AI usage grows, connections, API keys, and tool permissions become fragmented. Teams need a consistent way to manage usage, costs, and access.", items: [
+  challenges: { title: "AI operational challenges", description: "As AI usage grows, connections, API keys, and tool permissions become fragmented. Teams need a consistent way to manage usage, costs, and access.", items: [
     { title: "API keys everywhere", body: "Provider keys spread across applications and teams, making secure management difficult." },
     { title: "Inconsistent tool permissions", body: "Each agent has its own configuration. It becomes hard to know who can use which tools." },
     { title: "Costs visible only after use", body: "Understanding which team used which resources—and at what cost—takes extra effort." },
     { title: "Model changes mean reconfiguration", body: "Switching models or providers requires reviewing connections across applications." },
   ] },
   features: {
-    title: "One place to manage AI connectivity", description: "Manage model connections, API keys, usage limits, and logs through one gateway. Developers keep their familiar tools while working within your organization’s policies.",
+    title: "Unified AI management", description: "Manage model connections, API keys, usage limits, and logs through one gateway. Developers keep their familiar tools while working within your organization’s policies.",
     visuals: { ...aiGatewayContentCopy.features.visuals, active: "Connected", standby: "Alternative", protected: "Provider keys protected", budget: "Monthly budget", budgetUsage: "64% used", example: "Example", logColumns: ["Target", "Result", "Latency"], allowed: "Allowed", denied: "Denied" },
     cards: [
       { id: "connection", title: "Multiple models, one API", body: "Access models from OpenAI, Anthropic, and Gemini through OpenAI- and Anthropic-compatible APIs. Standardize connections across providers and simplify application integration." },
@@ -36,14 +36,14 @@ const en: Content = {
   ] },
 };
 const ko: Content = {
-  challenges: { title: "AI 활용이 늘수록 복잡해지는 운영", description: "AI 사용이 확대되면 연결 대상, API 키, 도구 권한이 분산됩니다. 사용 현황과 비용을 파악하고 일관된 정책으로 관리할 체계가 필요합니다.", items: [
+  challenges: { title: "AI 운영의 과제", description: "AI 사용이 확대되면 연결 대상, API 키, 도구 권한이 분산됩니다. 사용 현황과 비용을 파악하고 일관된 정책으로 관리할 체계가 필요합니다.", items: [
     { title: "곳곳에 흩어진 API 키", body: "프로바이더별 키가 애플리케이션과 담당자마다 분산되어 안전한 관리가 어려워집니다." },
     { title: "제각각인 도구 권한", body: "에이전트마다 설정이 달라 누가 어떤 도구를 사용할 수 있는지 파악하기 어렵습니다." },
     { title: "사용 후에야 드러나는 비용", body: "어떤 팀이 무엇을 얼마나 사용했는지, 지출 내역을 한눈에 파악하기 어렵습니다." },
     { title: "모델을 바꿀 때마다 재설정", body: "모델이나 프로바이더를 변경할 때마다 각 애플리케이션의 연결 설정을 점검해야 합니다." },
   ] },
   features: {
-    title: "AI 연결을 한곳에서 관리하세요", description: "모델 연결부터 API 키, 사용 한도, 로그까지 하나의 게이트웨이에서 관리합니다. 개발자는 익숙한 도구로 조직의 정책에 맞게 AI를 사용할 수 있습니다.",
+    title: "AI 통합 관리", description: "모델 연결부터 API 키, 사용 한도, 로그까지 하나의 게이트웨이에서 관리합니다. 개발자는 익숙한 도구로 조직의 정책에 맞게 AI를 사용할 수 있습니다.",
     visuals: { ...en.features.visuals, alias: "모델 별칭", active: "연결 중", standby: "전환 대상", protected: "프로바이더 키 보호", toolset: "내 도구 모음", tools: ["코드", "메시지", "문서"], budget: "월간 예산", budgetUsage: "64% 사용", example: "표시 예시", logs: "활동 로그", logColumns: ["대상", "결과", "응답 시간"], allowed: "허용", denied: "거부" },
     cards: [
       { id: "connection", title: "여러 모델을 하나의 API로 연결", body: "OpenAI·Anthropic·Gemini 등의 모델을 OpenAI·Anthropic 호환 API로 이용할 수 있습니다. 프로바이더마다 다른 연결 방식을 통합해 애플리케이션 연동을 단순화합니다." },

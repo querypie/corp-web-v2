@@ -36,7 +36,7 @@ export const aiGatewayContentCopy = {
       allowed: "許可",
       denied: "拒否",
     },
-    title: "AI接続を一元管理",
+    title: "AIの一元管理",
     description: "モデルへの接続からAPIキー、利用上限、ログまで、一つのゲートウェイで管理。開発者は使い慣れたツールで、組織のルールに沿ってAIを利用できます。",
     cards: [
       {

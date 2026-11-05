@@ -5,9 +5,9 @@ import { getContactHref, getContactInitialInquiry } from "./prefill";
 
 describe("contact prefill", () => {
   it.each([
-    ["en", "Penetration Testing Service", 8],
-    ["ko", "모의 해킹 서비스", 8],
-    ["ja", "ペネトレーションテストサービス", 10],
+    ["en", "Penetration Testing Service", 9],
+    ["ko", "모의 해킹 서비스", 9],
+    ["ja", "ペネトレーションテストサービス", 11],
   ] as const)("%s penetrationtest는 기존 서비스 옵션을 선택한다", (locale, label, optionCount) => {
     const copy = getContactPageCopy(locale);
     expect(getContactInitialProducts(locale, { product: "penetrationtest" })).toEqual([label]);
@@ -47,9 +47,8 @@ describe("contact prefill", () => {
     for (const product of ["ai-crew", "ai-dashi"]) {
       expect(getContactInitialProducts(locale, { product })).toEqual([]);
     }
-    expect(getContactInitialInquiry(locale, { inquiry: "ai-consulting" })).toBeUndefined();
     const copy = getContactPageCopy(locale);
-    expect(copy.productOptions).toHaveLength(8);
-    expect(copy.formFields.find((field) => field.name === "inquiryType")?.options).toHaveLength(5);
+    expect(copy.productOptions).toHaveLength(9);
+    expect(copy.formFields.find((field) => field.name === "inquiryType")?.options).toHaveLength(6);
   });
 });

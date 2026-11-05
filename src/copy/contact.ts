@@ -8,6 +8,7 @@ export const aruProductLabels: Record<Locale, string> = {
 
 export const contactProductLabels = {
   aru: aruProductLabels,
+  aig: { en: "AI Gateway QueryPie AIG", ko: "AI 게이트웨이 QueryPie AIG", ja: "AIゲートウェイ QueryPie AIG" },
   "ai-crew": { ja: "社内業務効率化｜AI Crew" },
   "ai-dashi": { ja: "自社サービスAI化｜AI Dashi" },
   aip: { en: "AI Platform QueryPie AIP", ko: "AI 플랫폼 QueryPie AIP", ja: "AIプラットフォーム QueryPie AIP" },
@@ -17,7 +18,7 @@ export const contactProductLabels = {
 } satisfies Record<string, Partial<Record<Locale, string>>>;
 
 export const contactInquiryLabels = {
-  "ai-consulting": { ja: "AI導入・活用について相談" },
+  "ai-consulting": { en: "AI Implementation Consultation", ko: "AI 도입·활용 상담", ja: "AI導入・活用について相談" },
   pricing: { en: "Pricing Plan Discussion", ko: "요금제 상담", ja: "お見積もり依頼" },
   demo: { en: "Request for Product Demo", ko: "제품 데모 요청", ja: "デモを依頼" },
 } satisfies Record<string, Partial<Record<Locale, string>>>;
@@ -99,7 +100,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         {
           label: "Inquiry Type",
           name: "inquiryType",
-          options: ["Request for Product Demo", "Pricing Plan Discussion", "Technical Question", "Partnership", "Other"],
+          options: [contactInquiryLabels["ai-consulting"].en, "Request for Product Demo", "Pricing Plan Discussion", "Technical Question", "Partnership", "Other"],
           placeholder: "Please select the type of inquiry.",
           required: true,
           type: "select" as const,
@@ -120,6 +121,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "Knowledge-based Content Creation AI - NotePie",
         "AI Platform QueryPie AIP",
         "Access Control Platform QueryPie ACP",
+        contactProductLabels.aig.en,
         "AI Expert Support (FDE) Service",
         "Penetration Testing Service",
         "Partnership",
@@ -172,7 +174,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         {
           label: "문의 종류",
           name: "inquiryType",
-          options: ["제품 데모 요청", "요금제 상담", "기술적 문의", "파트너십", "기타"],
+          options: [contactInquiryLabels["ai-consulting"].ko, "제품 데모 요청", "요금제 상담", "기술적 문의", "파트너십", "기타"],
           placeholder: "문의 유형을 선택해주세요.",
           required: true,
           type: "select" as const,
@@ -193,6 +195,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "지식 기반 콘텐츠 생성 AI - NotePie",
         "AI 플랫폼 QueryPie AIP",
         "액세스 제어 플랫폼 QueryPie ACP",
+        contactProductLabels.aig.ko,
         "AI 전문가 지원 (FDE) 서비스",
         "모의 해킹 서비스",
         "파트너십",
@@ -268,6 +271,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "自社サービスAI化｜AI Dashi",
         "AIプラットフォーム QueryPie AIP",
         "アクセス制御プラットフォーム QueryPie ACP",
+        contactProductLabels.aig.ja,
         "AI専門家伴走 (FDE) サービス",
         "ペネトレーションテストサービス",
         "パートナーシップ",

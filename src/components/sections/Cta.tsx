@@ -140,8 +140,8 @@ export default function Cta({
               )}
               href={action.href}
               key={action.key}
-              rel="noreferrer noopener"
-              target="_blank"
+              rel={/^(https?:)?\/\//i.test(action.href) ? "noreferrer noopener" : undefined}
+              target={/^(https?:)?\/\//i.test(action.href) ? "_blank" : undefined}
             >
               <span className="inline-flex items-center justify-center gap-2 text-center">
                 {action.label}

@@ -1,6 +1,7 @@
 import { Check, CircleCheck, FileCheck2, Globe, LockKeyhole, Network, Server, ShieldCheck } from "lucide-react";
 import Cta from "@/components/sections/Cta";
-import { getLocalePath, type Locale } from "@/constants/i18n";
+import type { Locale } from "@/constants/i18n";
+import { getContactHref } from "@/features/contact/prefill";
 import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { penetrationTestingLocalizedCopy, pentestLocalizedMockCopy } from "@/copy/penetrationTestingLocalized";
 import PentestExplorationMockup from "./PentestExplorationMockup";
@@ -66,6 +67,6 @@ export default function PenetrationTestingPage({ locale = "ja" }: { locale?: Loc
       </div>
     </section>
 
-    <Cta actionHref={getLocalePath(locale, "/contact-us")} actionLabel={copy.cta.action} compactHeading description={copy.cta.description} hideEyebrow locale={locale} secondaryActionLabel="" title={copy.cta.title} />
+    <Cta actionHref={getContactHref(locale, "penetrationtest")} actionLabel={copy.cta.action} compactHeading description={copy.cta.description} hideEyebrow locale={locale} secondaryActionLabel="" title={copy.cta.title} />
   </div>;
 }

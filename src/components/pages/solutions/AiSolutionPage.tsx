@@ -1,5 +1,6 @@
 import Cta from "@/components/sections/Cta";
 import { getLocalePath, type Locale } from "@/constants/i18n";
+import { getContactHref } from "@/features/contact/prefill";
 import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import type { JapanAiSolutionId } from "@/copy/japanAiSolutions";
 import { aiSolutionsCopy, aiSolutionAction } from "@/copy/aiSolutions";
@@ -9,7 +10,7 @@ import SolutionSectionHeading from "./japan/SolutionSectionHeading";
 
 export default function AiSolutionPage({ id, locale }: { id: JapanAiSolutionId; locale: Locale }) {
   const copy = aiSolutionsCopy[locale][id];
-  const contactHref = getLocalePath(locale, "/contact-us");
+  const contactHref = id === "ai-gateway" ? getContactHref(locale, "aig") : getLocalePath(locale, "/contact-us");
 
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>

@@ -7,7 +7,7 @@ const en: Record<JapanAiSolutionId, JapanAiSolutionCopy> = {
     metadata: { title: "AI Gateway | Secure enterprise AI connectivity | QueryPie AI", description: "Connect LLMs and MCP tools through one gateway. Manage access, model routing, usage costs, and audit logs across your organization." },
     hero: { eyebrow: "AI Gateway", title: "Every AI request.", accent: "One gateway.", description: ["Scattered API keys, unclear model usage and costs, and separate tool permissions make AI difficult to govern. AI Gateway sits between your agents and LLMs or MCP servers, bringing connectivity, control, and visibility together."], imageLabel: "AI Gateway architecture" },
     sections: [],
-    cta: { title: "Build AI governance around your business", description: "Explore a deployment and operating model that fits your LLM and MCP usage, access policies, and cost management needs." },
+    cta: { title: "Start with AI Gateway", description: "Explore a deployment and operating model that fits your LLM and MCP usage, access policies, and cost management needs." },
   },
   qlm: {
     menuLabel: "QueryPie LLM | QLM",
@@ -53,7 +53,7 @@ const ko: Record<JapanAiSolutionId, JapanAiSolutionCopy> = {
     metadata: { title: "AI Gateway | 기업 AI 연결과 통합 관리 | QueryPie AI", description: "LLM과 MCP 도구를 하나의 게이트웨이로 연결하세요. 접근 권한, 모델 라우팅, 사용 비용, 감사 로그를 통합 관리합니다." },
     hero: { eyebrow: "AI Gateway", title: "모든 AI 요청을,", accent: "하나의 게이트웨이로.", description: ["흩어진 API 키, 파악하기 어려운 모델 사용량과 비용, 제각각 설정된 도구 권한. AI Gateway는 AI 에이전트와 LLM·MCP 사이에 공통 관리 지점을 두어 연결·제어·가시성을 하나로 통합합니다."], imageLabel: "AI Gateway 아키텍처" },
     sections: [],
-    cta: { title: "우리 조직에 맞는 AI 거버넌스의 시작", description: "LLM·MCP 활용 현황과 접근 제어, 비용 관리 과제에 맞춰 도입 구성과 운영 방법을 제안합니다." },
+    cta: { title: "AI Gateway로 시작하세요", description: "LLM·MCP 활용 현황과 접근 제어, 비용 관리 과제에 맞춰 도입 구성과 운영 방법을 제안합니다." },
   },
   qlm: {
     menuLabel: "QueryPie LLM | QLM",

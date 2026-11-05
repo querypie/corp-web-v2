@@ -112,7 +112,7 @@ export const japanAiSolutionsCopy: Record<JapanAiSolutionId, JapanAiSolutionCopy
       imageLabel: "AI Gatewayのアーキテクチャビジュアル（準備中）",
     },
     sections: [],
-    cta: { title: "AI Gatewayで、自社に合ったAIガバナンスを実現", description: "LLM・MCPの利用状況や、アクセス制御・コスト管理の課題に合わせて、導入構成と運用方法をご提案します。" },
+    cta: { title: "AI Gatewayをはじめましょう", description: "LLM・MCPの利用状況や、アクセス制御・コスト管理の課題に合わせて、導入構成と運用方法をご提案します。" },
   },
   qlm: {
     menuLabel: "QueryPie LLM｜QLM",

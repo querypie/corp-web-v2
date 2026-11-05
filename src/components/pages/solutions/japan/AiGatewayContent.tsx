@@ -1,9 +1,8 @@
-import { Building2, Check, FileSearch, KeyRound, Minus, SlidersHorizontal } from "lucide-react";
 import { pageContentWidthClassName } from "@/constants/layout";
 import type { Locale } from "@/constants/i18n";
 import { aiGatewayCopy } from "@/copy/aiGatewayLocalized";
 import SolutionSectionHeading from "./SolutionSectionHeading";
-import AiGatewayToolsetDiagram from "./AiGatewayToolsetDiagram";
+import AiGatewaySecurity from "./AiGatewaySecurity";
 import AiGatewayFeatureVisual, { type AiGatewayFeatureId } from "./AiGatewayFeatureVisual";
 import styles from "./AiGatewayContent.module.css";
 
@@ -51,62 +50,6 @@ function Features({ locale }: { locale: Locale }) {
   );
 }
 
-function AccessPolicy({ locale }: { locale: Locale }) {
-  const text = aiGatewayCopy[locale].policy;
-  const roleIcons = { "org-admin": Building2, "project-admin": SlidersHorizontal, "ai-user": KeyRound, "audit-viewer": FileSearch };
-  return (
-    <section className={`${pageContentWidthClassName} ${styles.section}`}>
-      <Heading {...text} />
-      <div className={styles.accessLayout}>
-        <div className={styles.roleGrid}>
-          {text.roles.map(role => {
-            const Icon = roleIcons[role.code as keyof typeof roleIcons];
-            return (
-              <article className={styles.roleCard} key={role.code}>
-                <div className={styles.roleVisual} aria-hidden="true"><Icon className={styles.roleIcon} /></div>
-                <h3 className="m-0 text-pretty type-h3 text-fg">{role.name}</h3>
-                <p className="mb-0 mt-3 type-body-md text-mute">{role.body}</p>
-              </article>
-            );
-          })}
-        </div>
-        <div className={styles.scopePanel}>
-          <h3 className="m-0 type-h3 text-fg">{text.scopeTitle}</h3>
-          <table className={styles.scopeTable}>
-            <caption className="sr-only">{text.scopeTitle}</caption>
-            <thead><tr>{text.columns.map(column => <th className="type-body-md text-fg" scope="col" key={column}>{column}</th>)}</tr></thead>
-            <tbody>{text.roles.map(role => (
-              <tr key={role.code}>
-                <th scope="row" className="type-body-md text-fg">{role.code}</th>
-                {[role.organization, role.project].map((available, index) => (
-                  <td key={index}>
-                    <span className={available ? styles.scopeAllowed : styles.scopeEmpty}>
-                      {available ? <Check aria-hidden="true" /> : <Minus aria-hidden="true" />}
-                      <span className="sr-only">{available ? text.assigned : text.unassigned}</span>
-                    </span>
-                  </td>
-                ))}
-              </tr>
-            ))}</tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function McpToolset({ locale }: { locale: Locale }) {
-  const text = aiGatewayCopy[locale].toolset;
-  return (
-    <section className={styles.band}>
-      <div className={`${pageContentWidthClassName} ${styles.section}`}>
-        <Heading {...text} />
-        <AiGatewayToolsetDiagram locale={locale} />
-      </div>
-    </section>
-  );
-}
-
 export default function AiGatewayContent({ locale = "ja" }: { locale?: Locale }) {
-  return <><Challenges locale={locale} /><Features locale={locale} /><AccessPolicy locale={locale} /><McpToolset locale={locale} /></>;
+  return <><Challenges locale={locale} /><Features locale={locale} /><AiGatewaySecurity locale={locale} /></>;
 }

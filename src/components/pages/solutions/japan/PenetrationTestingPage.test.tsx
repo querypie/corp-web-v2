@@ -28,7 +28,8 @@ describe("PenetrationTestingPage", () => {
     for (const title of ["攻撃経路の探索・検証", "報告から修正・再検証へ", "安全な運用とデータ保護", "実際のサービスでの活用", "ご利用の流れ"]) {
       expect(screen.getByRole("heading", { name: title, level: 2 })).toBeInTheDocument();
     }
-    expect(screen.getByRole("link", { name: "お問い合わせ" })).toHaveAttribute("href", "/ja/contact-us");
+    expect(screen.getByRole("link", { name: "お問い合わせ" })).toHaveAttribute("href", "/ja/contact-us?inquiry=ai-consulting&product=penetrationtest");
+    expect(screen.getByRole("link", { name: "お問い合わせ" })).not.toHaveAttribute("target");
     expect(screen.queryByText(/1,500,000|料金/)).not.toBeInTheDocument();
   });
 
