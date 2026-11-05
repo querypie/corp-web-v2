@@ -25,6 +25,8 @@ export type ManagedContentEntry = {
   categorySlug: ManagedContentCategorySlug;
   contentType: ManagedContentType;
   dateIso: string;
+  /** Optional publication instant with an explicit timezone; dateIso remains the display date. */
+  publishAt?: string;
   downloadCoverImageSrc: string;
   downloadPdfFileName: string;
   downloadPdfFileNameByLocale: LocalizedContent;
@@ -161,21 +163,27 @@ export function hasAnyLocalizedTitle(content: LocalizedContent) {
 }
 
 export function isPublishedContentVisible(
-  item: Pick<ManagedContentEntry, "status" | "visibleLocales">,
+  item: Pick<ManagedContentEntry, "status" | "visibleLocales" | "publishAt">,
   locale: Locale,
 ) {
-  return item.status === "published" && item.visibleLocales.includes(locale);
+  return isPublishedContentAccessible(item) && item.visibleLocales.includes(locale);
 }
 
 export function isPublishedContentAccessible(
-  item: Pick<ManagedContentEntry, "status" | "visibleLocales">,
+  item: Pick<ManagedContentEntry, "status" | "visibleLocales" | "publishAt">,
 ) {
-  return item.status === "published" && item.visibleLocales.length > 0;
+  if (item.status !== "published" || item.visibleLocales.length === 0) return false;
+  if (!item.publishAt) return true;
+
+  // Reject ambiguous/invalid schedules rather than exposing content early.
+  if (!/(?:Z|[+-]\d{2}:\d{2})$/.test(item.publishAt)) return false;
+  const publishTime = Date.parse(item.publishAt);
+  return Number.isFinite(publishTime) && Date.now() >= publishTime;
 }
 
 // QEV is being released in Japanese first. Other content keeps its existing locale fallback.
 export function isPublishedContentAccessibleInLocale(
-  item: Pick<ManagedContentEntry, "id" | "status" | "visibleLocales">,
+  item: Pick<ManagedContentEntry, "id" | "status" | "visibleLocales" | "publishAt">,
   locale: Locale,
 ) {
   return isPublishedContentAccessible(item) && (

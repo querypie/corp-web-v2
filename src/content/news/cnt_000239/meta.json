@@ -1,0 +1,42 @@
+{
+  "authorName": "Press Release",
+  "authorRole": "",
+  "categorySlug": "news",
+  "contentType": "content",
+  "dateIso": "2026-11-06",
+  "publishAt": "2026-11-06T08:00:00+09:00",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": { "en": "", "ko": "", "ja": "" },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": { "en": "", "ko": "", "ja": "" },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "ai-penetration-testing-service-launch",
+  "imageSrc": "/news/ai-pentesting/thumbnail.png",
+  "relatedIds": [],
+  "section": "news",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000239",
+  "summary": {
+    "en": "",
+    "ko": "",
+    "ja": "QueryPie AIは、自社開発のセキュリティ特化型AIモデル「QLM」と自社データセンターで運用する「AIペネトレーションテストサービス」を提供開始。診断データを外部のAIに送ることなく、脆弱性の発見から修正支援・再検証まで一貫して支援します。"
+  },
+  "title": {
+    "en": "",
+    "ko": "",
+    "ja": "QueryPie AI、AIが攻撃者の視点で侵入リスクを検証する「AIペネトレーションテストサービス」を提供開始"
+  },
+  "visibleLocales": ["ja"],
+  "locales": {
+    "ja": {
+      "htmlPath": "src/content/news/cnt_000239/ja.html",
+      "jsonPath": "src/content/news/cnt_000239/ja.tiptap.json"
+    }
+  }
+}

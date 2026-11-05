@@ -1,0 +1,487 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "〜自社開発LLMと自社データセンターで運用。診断データを外部のAIに送ることなく、低価格で、脆弱性の発見から修正支援、修正後の再検証まで一貫して支援〜"
+        }
+      ],
+      "attrs": {
+        "level": 2
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "（2026年11月6日　QueryPie AI合同会社）"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie AI合同会社（所在地：東京都港区、代表：有延 敬三、以下「QueryPie AI」）は、AIが攻撃者の視点で企業のWebサービスやAPIを探索し、不正アクセスや情報漏えいにつながる弱点を実際に検証する「AIペネトレーションテストサービス」を、日本企業向けに提供開始しました。本サービスは、自社開発のセキュリティ特化型AIモデル「QLM」および独自のGPUインフラを用いて、攻撃経路の探索から、検証結果の報告、修正支援、修正後の再検証までを担います。診断データが外部のAIサービスに送信されることなく、自社完結型で機密性を維持したまま高精度な脆弱性診断を提供します。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "■ 背景：AIで高度化する攻撃と、追いつかない診断体制"
+        }
+      ],
+      "attrs": {
+        "level": 2
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "国内では、サイバー攻撃による情報漏えいやサービス停止が、事業継続と企業の信頼を揺るがす経営課題となっています。警察庁によると、2026年上半期のランサムウェア被害報告件数は123件でした。統計を取り始めた2020年下半期以降、半期として過去最多です［1］。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "独立行政法人情報処理推進機構（IPA）の「情報セキュリティ10大脅威 2026」では、組織向けの1位が「ランサム攻撃による被害」、2位が「サプライチェーンや委託先を狙った攻撃」です。さらに今年初めて「AIの利用をめぐるサイバーリスク」が3位に入り、「システムの脆弱性を悪用した攻撃」も4位となりました［2］。AIによって攻撃が高速化・巧妙化する一方、企業側の診断は年1回程度・特定の範囲に限られることが多く、セキュリティ人材やコストの制約から、診断の間にサービスが変更されても確認が追いつかないという課題があります。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie AIは、脆弱性があるかどうかを調べるだけでは不十分だと考えています。認証・権限の不備や、複数の弱点の組み合わせが、実際にどのような被害につながるかを、攻撃者より先に確かめることが重要です。本サービスは、その検証を可能にします。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "■「AIペネトレーションテストサービス」の特長"
+        }
+      ],
+      "attrs": {
+        "level": 2
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "ペネトレーションテストとは、攻撃者と同じ手法を使って、システムへの侵入や重要情報へのアクセスができるかを確認するテストです。本サービスでは、お客様と合意した診断範囲と実行ルールのもとで、実際に稼働しているWebサービスやAPIを検証します。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "1．AIが攻撃経路を自律的に探索し、実際の被害可能性まで検証"
+        }
+      ],
+      "attrs": {
+        "level": 3
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "AIエージェントがサービスの構造、API、認証・権限の仕組みを把握し、攻撃の仮説を立てて検証を繰り返します。アクセスを遮断されても応答を分析し、リクエストの方法や条件を変えて迂回経路を探ります。個々の脆弱性だけでは見えない複数段階の攻撃経路を、最終的な影響までつないで確認します。稼働中のサービスに対する動的解析（DAST）に加え、ソースコードをご提供いただく場合は静的解析（SAST）も組み合わせて検証します。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "2．証拠付きのレポートと、修正後の再検証まで"
+        }
+      ],
+      "attrs": {
+        "level": 3
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "レポートには、脆弱性の深刻度、影響範囲、実際のリクエスト・応答などの検証の証拠、再現手順（PoC）、原因分析、具体的な修正案を記載します。Devin、Codex、Claude Codeなどのコーディングエージェントとの連携で修正を支援し、修正後には同じ脆弱性が再び起きないかを再検証します。経営層向けの要約や監査対応資料も、社内の書式に合わせて作成します。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "3．診断データを外部のAIに送らない、自社完結の診断環境"
+        }
+      ],
+      "attrs": {
+        "level": 3
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "診断に使うAIは、自社開発のセキュリティ特化型モデル「QLM」です。QLMは、AIエージェントが脆弱性を分析・再現する能力を測る評価「CyberGym」の社内比較評価で88.1点を記録し、比較した主要なLLMの中で最も高い成功率でした。QLMはQueryPie AIの自社データセンターのGPU上で動いており、外部のLLMサービスは使いません。そのため、システム情報や脆弱性の情報が外部のAIサービスに送られることはありません。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "4．診断データはモデル学習に利用せず、終了後に全廃棄"
+        }
+      ],
+      "attrs": {
+        "level": 3
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "診断過程で処理される関連ログを任意に閲覧したり、モデル学習に利用したりすることは一切ありません。危険なコマンドは実行ルールで事前にブロックし、サービス終了後は診断過程で生成・収集されたデータをすべて廃棄します。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "5．明確なスコープ設計と柔軟な料金体系"
+        }
+      ],
+      "attrs": {
+        "level": 3
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "お客様からご提供いただくのは診断対象のIPアドレスまたはURLのみ。QueryPie AIがペネトレーションテストを実施し、結果報告書をご提出します。料金体系は固定型・時間単位型の2プランを用意しており、お客様のニーズに合わせて柔軟に対応いたします。詳細はお問い合わせください。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "6．無料トライアルでまず体験"
+        }
+      ],
+      "attrs": {
+        "level": 3
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "導入前にサービスの品質を確認していただけるよう、無料トライアルを提供しております。まず体験してから、導入をご判断いただけます。詳細はお問い合わせください。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "自社サービスでの活用事例"
+        }
+      ],
+      "attrs": {
+        "level": 3
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie AIは、AI Platform（AIP）、ACP、AI Gatewayなど、自社の全製品を本サービスで診断しています。ある診断では、内部管理機能への外部アクセスを遮断していたにもかかわらず、AIがリクエストの経路を変えて検証を重ね、遮断ルールの迂回経路を見つけました。担当チームはすぐに内部APIの認証とアクセス制御を強化しました。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "■ ご利用の流れと今後の展開"
+        }
+      ],
+      "attrs": {
+        "level": 2
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "ご準備いただくのは、診断対象のURLかIPアドレスだけです。アクセス制限がある環境でも、当社の診断用IPアドレスを許可していただければ診断できます。診断範囲と実行ルールを合意したうえで、AIによる診断を行い、結果と修正案をレポートでお届けします。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie AIは、AIによる脆弱性の探索・検証と修正支援を通じて、日本企業の情報漏えい・不正アクセスのリスク低減を支援します。今後も独自のセキュリティAI技術を高度化し、企業がサービスの安全性を確かめながら開発・運用を進められる環境づくりに取り組みます。"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "ペネトレーションテストサービスへのお問い合わせ：",
+                  "marks": [
+                    {
+                      "type": "bold"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "text": "https://querypie.ai/contact-us",
+                  "marks": [
+                    {
+                      "type": "link",
+                      "attrs": {
+                        "href": "/ja/contact-us",
+                        "target": null,
+                        "rel": null,
+                        "class": null
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "■ 代表コメント"
+        }
+      ],
+      "attrs": {
+        "level": 2
+      }
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "「AIを使う攻撃者は、今この瞬間も新たな侵入経路を探し続けています。人の手による診断だけでは、複雑な攻撃経路や迂回手法をすべて洗い出すことは困難です。企業もAIを活用して見えない弱点を継続的に探し、実際に侵入できるかを確かめ、攻撃者より先にリスクを取り除く必要があります。独自のセキュリティAI技術を磨き続け、日本企業が安心して任せられるセキュリティ診断を提供してまいります。」"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie, Inc. 創業者 兼 CEO　Brant Hwang（ブラント・ファン）"
+        }
+      ]
+    },
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "「企業がAIセキュリティ診断を導入しようとする際、最も多くいただくご懸念が『診断データはどこに行くのか』という点です。QueryPie AIは、自社開発のLLMと独自のGPUインフラを持つからこそ、この問いに明確にお答えできます。診断データを外部のAIサービスに送ることなく、脆弱性の発見から修正支援・再検証まで一貫して担います。攻撃者より先に弱点に気づける環境を、ともにつくってまいります。」"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie AI合同会社　代表社員　有延 敬三"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "※本文中の会社名・サービス名は、各社の登録商標です。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "【本件に関するお問い合わせ先】"
+        }
+      ],
+      "attrs": {
+        "level": 2
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie AI合同会社 広報担当"
+        },
+        {
+          "type": "hardBreak"
+        },
+        {
+          "type": "text",
+          "text": "Email："
+        },
+        {
+          "type": "text",
+          "text": "pr@querypie.com",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "mailto:pr@querypie.com",
+                "target": null,
+                "rel": null,
+                "class": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "content": [
+        {
+          "type": "text",
+          "text": "【出典】"
+        }
+      ],
+      "attrs": {
+        "level": 2
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "［1］警察庁「令和8年上半期におけるサイバー空間をめぐる脅威の情勢等について」（2026年9月）"
+        },
+        {
+          "type": "hardBreak"
+        },
+        {
+          "type": "text",
+          "text": "https://www.npa.go.jp/publications/statistics/cybersecurity/index.html",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://www.npa.go.jp/publications/statistics/cybersecurity/index.html",
+                "target": null,
+                "rel": null,
+                "class": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "［2］IPA「情報セキュリティ10大脅威 2026」組織向け脅威"
+        },
+        {
+          "type": "hardBreak"
+        },
+        {
+          "type": "text",
+          "text": "https://www.ipa.go.jp/security/10threats/10threats2026.html",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://www.ipa.go.jp/security/10threats/10threats2026.html",
+                "target": null,
+                "rel": null,
+                "class": null
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
