@@ -1,0 +1,33 @@
+{
+  "authorName": "",
+  "authorRole": "",
+  "categorySlug": "events",
+  "contentType": "content",
+  "dateIso": "2026-11-05",
+  "downloadCoverImageSrc": "",
+  "downloadPdfFileName": "",
+  "downloadPdfFileNameByLocale": { "en": "", "ko": "", "ja": "" },
+  "downloadPdfMode": "none",
+  "downloadPdfSrc": "",
+  "downloadPdfSrcByLocale": { "en": "", "ko": "", "ja": "" },
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": false,
+  "id": "air-company-ai-tools-comparison-webinar",
+  "imageSrc": "/resources/events/air-company-ai-tools-comparison-webinar-20261119.png",
+  "relatedIds": ["air-company-multi-agent-a2a-webinar", "air-company-ai-agent-use-cases-webinar-2"],
+  "section": "resources",
+  "sortOrder": 0,
+  "status": "published",
+  "storageId": "cnt_000238",
+  "summary": { "en": "", "ko": "", "ja": "業務で使えるAIツール5選の特徴や違いを徹底比較。自社に合ったツールの選び方、便利な機能、導入の進め方とリスクを30分で解説します。" },
+  "title": { "en": "", "ko": "", "ja": "【2026年最新版】業務で使えるAIツール5選 徹底比較ウェビナー｜11/19(木)開催" },
+  "visibleLocales": ["ja"],
+  "locales": {
+    "ja": {
+      "htmlPath": "src/content/resources/events/cnt_000238/ja.html",
+      "jsonPath": "src/content/resources/events/cnt_000238/ja.tiptap.json"
+    }
+  }
+}
