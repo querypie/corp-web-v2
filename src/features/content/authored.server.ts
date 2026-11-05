@@ -23,6 +23,7 @@ type AuthoredContentMeta = {
   categorySlug: ManagedContentCategorySlug;
   contentType: "content" | "outlink";
   dateIso: string;
+  publishAt?: string;
   downloadCoverImageSrc?: string;
   downloadPdfFileName?: string;
   downloadPdfFileNameByLocale?: Partial<Record<Locale, string>>;
@@ -55,6 +56,7 @@ type SaveAuthoredContentInput = Pick<
   | "categorySlug"
   | "contentType"
   | "dateIso"
+  | "publishAt"
   | "downloadCoverImageSrc"
   | "downloadPdfFileName"
   | "downloadPdfFileNameByLocale"
@@ -465,6 +467,7 @@ async function createManagedContentEntry(
     categorySlug: meta.categorySlug,
     contentType: meta.contentType ?? "content",
     dateIso: normalizeDateIso(meta.dateIso),
+    publishAt: meta.publishAt,
     downloadCoverImageSrc: meta.downloadCoverImageSrc ?? "",
     downloadPdfFileName: meta.downloadPdfFileName ?? "",
     downloadPdfFileNameByLocale: normalizeLocalizedRecord(meta.downloadPdfFileNameByLocale),
@@ -702,6 +705,7 @@ export async function saveAuthoredContent(
     categorySlug: input.categorySlug,
     contentType: input.contentType,
     dateIso: normalizedDateIso,
+    publishAt: input.publishAt,
     downloadCoverImageSrc: input.downloadCoverImageSrc,
     downloadPdfFileName: input.downloadPdfFileName,
     downloadPdfFileNameByLocale: input.downloadPdfFileNameByLocale,
