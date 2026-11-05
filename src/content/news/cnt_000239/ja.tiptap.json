@@ -269,39 +269,20 @@
       ]
     },
     {
-      "type": "bulletList",
+      "type": "paragraph",
       "content": [
         {
-          "type": "listItem",
-          "content": [
+          "type": "text",
+          "text": "AIペネトレーションテストについて相談する",
+          "marks": [
             {
-              "type": "paragraph",
-              "content": [
-                {
-                  "type": "text",
-                  "text": "ペネトレーションテストサービスへのお問い合わせ：",
-                  "marks": [
-                    {
-                      "type": "bold"
-                    }
-                  ]
-                },
-                {
-                  "type": "text",
-                  "text": "https://querypie.ai/contact-us",
-                  "marks": [
-                    {
-                      "type": "link",
-                      "attrs": {
-                        "href": "/ja/contact-us",
-                        "target": null,
-                        "rel": null,
-                        "class": null
-                      }
-                    }
-                  ]
-                }
-              ]
+              "type": "link",
+              "attrs": {
+                "href": "https://querypie.ai/contact-us?inquiry=ai-consulting&product=penetrationtest",
+                "target": null,
+                "rel": null,
+                "class": "event-cta-button"
+              }
             }
           ]
         }
