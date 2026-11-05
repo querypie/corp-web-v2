@@ -1,0 +1,340 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 1
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "選び方のポイントから、知らないと損する機能までまるごと解説"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "「AIツールが多すぎて、何を選べばよいか分からない……」"
+        },
+        {
+          "type": "hardBreak"
+        },
+        {
+          "type": "text",
+          "text": "「各ツールの違いや、自社の業務に合うものを知りたい……」"
+        },
+        {
+          "type": "hardBreak"
+        },
+        {
+          "type": "text",
+          "text": "「次々と登場するAIツールの情報を追いきれず、何から押さえればよいか分からない……」"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "本ウェビナーでは、業務で使えるAIツールを5つ厳選し、最新動向を踏まえながら、それぞれの特徴や違い、機能、業務での活用方法を分かりやすくご紹介します。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "自社に合ったツールを選ぶためのポイントや、知らないと損する便利な機能に加え、導入に向けた進め方や注意すべきリスクも解説します。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "複数の企業のAI活用を支援してきた株式会社エアーの知見を交えながら、自社に合った活用方法を考えるためのヒントを30分にまとめてお届けします。情報収集のきっかけとして、お気軽にご参加ください。"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "【こんな方におすすめ】"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "AIツールが多く、何を選べばよいか迷っている方"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "各ツールの違いや業務での活用方法を知りたい方"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "自社に合ったAIツールの導入を検討している方"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "AI活用の最新動向や、導入の進め方・リスクを整理したい方"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "【ウェビナー概要】"
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "タイトル：【2026年最新版】業務で使えるAIツール5選 徹底比較ウェビナー 選び方のポイントから、知らないと損する機能までまるごと解説"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "日時：2026年11月19日（木）13:00～13:30（日本時間）"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "形式：Zoomによるオンライン開催"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "参加費：無料（事前登録制）"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "主催："
+                },
+                {
+                  "type": "text",
+                  "text": "株式会社エアー",
+                  "marks": [
+                    {
+                      "type": "link",
+                      "attrs": {
+                        "href": "https://air.co.jp/",
+                        "target": "_blank",
+                        "rel": "noopener noreferrer nofollow",
+                        "class": null,
+                        "title": null
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "協力："
+                },
+                {
+                  "type": "text",
+                  "text": "QueryPie AI合同会社",
+                  "marks": [
+                    {
+                      "type": "link",
+                      "attrs": {
+                        "href": "/ja",
+                        "target": null,
+                        "rel": null,
+                        "class": null,
+                        "title": null
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "【講師】"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "高橋 良汰 氏（株式会社エアー データソリューション事業部 データ活用営業部）"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie AIの戦略パートナーである株式会社エアーでプリセールスを担当。実際にQueryPie AI 韓国R&Dオフィスに滞在し、認定プログラムを修了されました。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "※会社メールアドレスでのお申し込みをお願いします。"
+        },
+        {
+          "type": "hardBreak"
+        },
+        {
+          "type": "text",
+          "text": "※エアー社の判断によりウェビナーへの参加をお断りする場合があります。予めご了承ください。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "ウェビナーに申し込む（無料）",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://us02web.zoom.us/webinar/register/7317561140884/WN_W_791oqHQAamgxQ1atmBiw",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": "event-cta-button",
+                "title": null
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
