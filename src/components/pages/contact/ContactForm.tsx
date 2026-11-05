@@ -35,10 +35,10 @@ type ContactSubmitResponse = {
   errorMessage?: string;
 };
 
-function makeInitialForm(copy: ContactPageCopy, initialProducts: string[] = []): FormState {
+function makeInitialForm(copy: ContactPageCopy, initialProducts: string[] = [], initialInquiry?: string): FormState {
   const base: FormState = { marketingConsent: "", message: "" };
   for (const field of copy.formFields) {
-    base[field.name] = "";
+    base[field.name] = field.name === "inquiryType" && initialInquiry && field.options?.includes(initialInquiry) ? initialInquiry : "";
   }
   for (const option of copy.productOptions) {
     base[`product:${option}`] = initialProducts.includes(option) ? "true" : "";
@@ -86,13 +86,13 @@ function getContactErrorMessage(
   return code ? messages[locale][code] ?? fallback : fallback;
 }
 
-type ContactFormProps = ContactPageCopy & { locale: Locale; initialProducts?: string[] };
+type ContactFormProps = ContactPageCopy & { locale: Locale; initialProducts?: string[]; initialInquiry?: string };
 
 export default function ContactForm(props: ContactFormProps) {
-  const { locale, initialProducts, ...copy } = props;
+  const { locale, initialProducts, initialInquiry, ...copy } = props;
   const router = useRouter();
 
-  const [form, setForm] = useState<FormState>(() => makeInitialForm(copy, initialProducts));
+  const [form, setForm] = useState<FormState>(() => makeInitialForm(copy, initialProducts, initialInquiry));
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 

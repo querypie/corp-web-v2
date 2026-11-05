@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Cta from "@/components/sections/Cta";
 import Badge from "@/components/ui/Badge";
-import { getLocalePath } from "@/constants/i18n";
+import { getContactHref } from "@/features/contact/prefill";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { getPublicDetailHref } from "@/features/content/data";
 import AiCrewWhitepaperSection from "./AiCrewWhitepaperSection";
@@ -60,7 +60,7 @@ const steps = [
 ] as const;
 
 export default function AiDashiPage() {
-  const contactHref = getLocalePath("ja", "/contact-us");
+  const contactHref = getContactHref("ja", "ai-dashi");
   const whitepaperHref = getPublicDetailHref("resources", "ja", "saas-end-or-evolution", "white-papers");
 
   return (

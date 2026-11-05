@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
-import { getLocalePath } from "@/constants/i18n";
+import { getContactHref } from "@/features/contact/prefill";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import {
   as400CobolCopy as copy,
@@ -126,7 +126,7 @@ function ContentSection({ section, shaded }: { section: As400CobolSection; shade
 }
 
 export default function As400CobolPage() {
-  const contactHref = getLocalePath("ja", "/contact-us");
+  const contactHref = getContactHref("ja", "fde");
 
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>

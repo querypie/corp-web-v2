@@ -7,6 +7,21 @@ export const aruProductLabels: Record<Locale, string> = {
   ja: "業務を支援するAIエージェント - Aru",
 };
 
+export const contactProductLabels = {
+  aru: aruProductLabels,
+  "ai-crew": { ja: "社内業務効率化｜AI Crew" },
+  "ai-dashi": { ja: "自社サービスAI化｜AI Dashi" },
+  aip: { en: "AI Platform QueryPie AIP", ko: "AI 플랫폼 QueryPie AIP", ja: "AIプラットフォーム QueryPie AIP" },
+  acp: { en: "Access Control Platform QueryPie ACP", ko: "액세스 제어 플랫폼 QueryPie ACP", ja: "アクセス制御プラットフォーム QueryPie ACP" },
+  fde: { en: "AI Expert Support (FDE) Service", ko: "AI 전문가 지원 (FDE) 서비스", ja: "AI専門家伴走 (FDE) サービス" },
+} satisfies Record<string, Partial<Record<Locale, string>>>;
+
+export const contactInquiryLabels = {
+  "ai-consulting": { ja: "AI導入・活用について相談" },
+  pricing: { en: "Pricing Plan Discussion", ko: "요금제 상담", ja: "お見積もり依頼" },
+  demo: { en: "Request for Product Demo", ko: "제품 데모 요청", ja: "デモを依頼" },
+} satisfies Record<string, Partial<Record<Locale, string>>>;
+
 export type ContactLink = {
   href: string;
   label: string;

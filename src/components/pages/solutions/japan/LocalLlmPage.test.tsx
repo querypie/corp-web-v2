@@ -15,7 +15,7 @@ describe("LocalLlmPage", () => {
     const contactLinks = screen.getAllByRole("link", { name: copy.action });
     expect(contactLinks).toHaveLength(2);
     for (const link of contactLinks) {
-      expect(link).toHaveAttribute("href", "/ja/contact-us");
+      expect(link).toHaveAttribute("href", "/ja/contact-us?inquiry=ai-consulting&product=fde");
     }
   });
 });

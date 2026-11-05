@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Cta from "@/components/sections/Cta";
-import { getLocalePath } from "@/constants/i18n";
+import { getContactHref } from "@/features/contact/prefill";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { localLlmCopy as copy } from "@/copy/localLlm";
 import LocalLlmAgentFlow from "./LocalLlmAgentFlow";
@@ -11,7 +11,7 @@ import SolutionActionLink from "./SolutionActionLink";
 import SolutionSectionHeading from "./SolutionSectionHeading";
 
 export default function LocalLlmPage() {
-  const contactHref = getLocalePath("ja", "/contact-us");
+  const contactHref = getContactHref("ja", "fde");
 
   return (
     <div className={`flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
