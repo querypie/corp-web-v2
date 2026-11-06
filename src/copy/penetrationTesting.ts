@@ -1,0 +1,128 @@
+import { penetrationTestingMenuLabel } from "./penetrationTestingMenu";
+
+export const penetrationTestingCopy = {
+  metadata: {
+    title: `AI ${penetrationTestingMenuLabel} | QueryPie AI`,
+    description: "AIが攻撃経路を探索し、実際のサービスで脆弱性を検証。証拠に基づく報告から修正支援・再検証まで、QueryPie AIが一貫して支援します。",
+  },
+  hero: {
+    eyebrow: "AI PENTESTING",
+    title: "AIが探し、攻撃し、",
+    accent: "リスクを確かめる。",
+    description: "WebサービスやAPIの構造を理解し、攻撃者の視点で侵入経路を探索。実際のリクエストで脆弱性を検証し、発見から修正・再検証までつなげます。",
+  },
+  exploration: {
+    eyebrow: "01 / AUTONOMOUS EXPLORATION",
+    title: "攻撃経路の探索・検証",
+    description: "AIが仮説を立て、応答を分析しながら次のテストを選択。複数の経路とアクセス条件を組み合わせ、個別の脆弱性だけでは見えない影響まで検証します。",
+    methods: [
+      { label: "SAST", kind: "静的解析", title: "コードから手がかりを得る", body: "ソースコードとデータフローを分析し、セキュリティ上の欠陥を確認。" },
+      { label: "DAST", kind: "動的解析", title: "動くサービスで確かめる", body: "稼働中のWebサービスやAPIにリクエストを送り、実際の応答から認証・権限の問題を検証。" },
+    ],
+    visual: {
+      link: "解析結果を連携",
+      request: "リクエスト",
+      response: "レスポンス",
+    },
+  },
+  remediation: {
+    eyebrow: "02 / EVIDENCE TO RESOLUTION",
+    title: "報告から修正・再検証へ",
+    description: "影響範囲や再現方法、検証証拠と修正案をレポートに整理。開発ツールと連携して対応を支援し、修正後のテストで問題が解消されたかを確かめます。",
+    report: "脆弱性レポート / サンプル",
+    finding: "注文APIのアクセス制御不備",
+    severity: "高リスク",
+    endpoint: "GET /api/orders/1042",
+    evidence: "別アカウントの注文情報へのアクセスを確認",
+    before: "修正前",
+    after: "再検証",
+    beforeResult: "200 OK · アクセス可能",
+    afterResult: "403 Forbidden · アクセス拒否",
+    steps: [
+      { title: "証拠と再現手順で把握", body: "リクエスト・応答とPoCを示し、影響と対応の優先順位を明確にします。" },
+      { title: "開発ツールとつないで修正", body: "Devin、Codex、Claude Codeなどのコーディングエージェントと連携し、修正を支援します。" },
+      { title: "同じ問題が起きないか再検証", body: "修正後のサービスを再度テスト。検証結果と根拠を確認し、対応状況を管理します。" },
+    ],
+    formats: "経営報告・監査対応・定期共有など、目的に合わせた形式で提供。",
+  },
+  security: {
+    eyebrow: "03 / CONTROLLED & PRIVATE",
+    title: "安全な運用とデータ保護",
+    description: "自社開発LLM「QLM」を自社データセンターで運用し、外部AIにデータを送信せずに分析。合意した実行ルールで操作を制御し、終了後は収集データを破棄します。",
+    boundary: "QUERYPIE AI / 自社データセンター",
+    infrastructure: ["専用GPU基盤", "自社開発 QLM", "セキュリティエージェント"],
+    private: "外部LLMサービスへのデータ送信なし",
+    items: [
+      { title: "実行権限を制御", body: "お客様と合意した対象・安全基準に沿って実行ルールを適用。データ削除など危険な操作を事前にブロックします。" },
+      { title: "外部AIに送信しない", body: "分析に用いるデータはQueryPie AIの内部インフラで処理。外部LLMサービスを呼び出しません。" },
+      { title: "終了後のデータを破棄", body: "サービス終了後、検証で収集したデータと資料は破棄し、別途保管しません。" },
+    ],
+  },
+  cases: {
+    eyebrow: "04 / IN PRACTICE",
+    title: "実際のサービスでの活用",
+    description: "QueryPie AIの製品に加え、日本のVision、韓国のGowidのサービスにも適用。実際の環境で見つけた攻撃経路を、認証やアクセス制御の改善につなげています。",
+    exampleLabel: "自社サービスでの検証事例",
+    exampleTitle: "遮断された管理機能にも、回り込む経路があった。",
+    steps: [
+      { title: "通常のアクセスは遮断", body: "内部管理機能には外部からのアクセスを制限するルールを適用。" },
+      { title: "AIが迂回経路を発見", body: "遮断後もリクエスト経路を変えて探索し、ルールとサーバーの経路解釈の差を確認。" },
+      { title: "認証・アクセス制御を強化", body: "検証証拠を担当チームに共有し、内部API認証と遮断ルールを改善。" },
+    ],
+    customers: [
+      { name: "Vision", label: "JAPAN / 通信・旅行サービス", body: "グローバルWiFi・eSIMなどの旅行通信サービス、法人向け情報通信ソリューション。" },
+      { name: "Gowid", label: "KOREA / フィンテック", body: "成長企業向けの法人カードや支出管理など、企業の経費管理を支えるサービス。" },
+    ],
+  },
+  process: {
+    eyebrow: "05 / GETTING STARTED",
+    title: "ご利用の流れ",
+    description: "対象のURLまたはIPアドレスを共有いただき、範囲と実施条件を確認。アクセス制限がある場合は検証用IPを許可し、探索から結果報告までQueryPie AIが進めます。",
+    steps: [
+      { owner: "お客様", title: "対象を共有", body: "検証したいURLまたはIPアドレスを共有し、対象範囲を確認。" },
+      { owner: "お客様", title: "アクセスを準備", body: "アクセス制限がある場合は、当社の検証用IPを許可。" },
+      { owner: "QueryPie AI", title: "AIが探索・検証", body: "接続を確認し、合意した条件に沿って侵入の可能性を検証。" },
+      { owner: "QueryPie AI", title: "結果をご報告", body: "検証証拠と修正案を整理したレポートをお届け。" },
+    ],
+  },
+  cta: {
+    title: "攻撃される前に、AIで確かめる。",
+    description: "検証したいサービスや、セキュリティ上の課題をお聞かせください。",
+    action: "お問い合わせ",
+  },
+};
+
+export const pentestMockCopy = {
+  label: "AIペネトレーションテストの探索・検証画面サンプル",
+  title: "探索マップ",
+  sample: "検証画面のサンプル",
+  running: "検証中",
+  evidence: "検証記録",
+  selected: "選択中の記録",
+  types: ["検査項目", "ヒント", "分析結果", "脆弱性"],
+  services: ["認証サービス", "注文API", "ファイルサービス", "管理コンソール", "パートナーAPI", "決済サービス"],
+  checks: [
+    { type: 0, title: "サービス構造を探索", endpoint: "GET /v1/openapi.json", detail: "公開APIと認証フローを収集し、追加の検証対象を確認。" },
+    { type: 1, title: "関連するパスを発見", endpoint: "GET /v1/profile", detail: "応答から追加のパラメータを発見。役割別の後続検証へ。" },
+    { type: 2, title: "アカウント間の応答を比較", endpoint: "GET /v1/orders/1042", detail: "所有者と別アカウントで応答を比較し、アクセス条件を記録。" },
+    { type: 0, title: "添付ファイルの権限を検証", endpoint: "GET /v1/orders/1042/files", detail: "関連APIをたどり、別アカウントからの取得可否を確認。" },
+    { type: 2, title: "セッションの有効性を確認", endpoint: "POST /oauth/token", detail: "失効したセッションと更新トークンの応答を比較。" },
+    { type: 0, title: "管理APIへのアクセスを検証", endpoint: "GET /v1/admin/users", detail: "役割・組織・セッションの条件を変え、権限境界を検証。" },
+    { type: 1, title: "内部パスの手がかり", endpoint: "GET /v1/reports/export", detail: "エラー応答に内部パスを確認。関連する経路を追加探索。" },
+    { type: 2, title: "ファイルの応答を分析", endpoint: "POST /v1/uploads", detail: "拡張子とMIMEタイプを変え、保存結果と公開範囲を確認。" },
+    { type: 3, title: "オブジェクトの認可不備", endpoint: "GET /v1/payments/204", detail: "別アカウントの情報へのアクセスを確認。再現条件を記録。" },
+    { type: 0, title: "トークンの再利用を検証", endpoint: "POST /v1/password/reset", detail: "使用済みトークンの再送信で、認証状態の変化を確認。" },
+    { type: 1, title: "組織切り替えの追加検証", endpoint: "POST /v1/organizations/switch", detail: "組織の切り替えと照会APIを組み合わせ、アクセスを比較。" },
+    { type: 2, title: "CORSと認証条件を記録", endpoint: "OPTIONS /v1/profile", detail: "許可オリジンと認証ヘッダーの応答を確認し、証拠を保存。" },
+  ],
+  nodes: [
+    { type: 0, title: "サービス構造を探索", endpoint: "GET /api", detail: "公開APIの応答からエンドポイントと認証フローを収集。", x: 30, y: 35 },
+    { type: 1, title: "注文APIへの手がかり", endpoint: "GET /api/orders", detail: "応答に注文IDを確認。アカウントごとのアクセス権限を追加検証。", x: 320, y: 20 },
+    { type: 0, title: "アカウント間の権限を検証", endpoint: "GET /api/orders/1042", detail: "アカウントA・Bで同じ注文へのリクエストを実行し、応答を比較。", x: 610, y: 45 },
+    { type: 3, title: "注文のアクセス制御不備", endpoint: "200 OK · account_b", detail: "別アカウントの注文情報が返されることを確認。再現手順と応答を証拠として記録。", x: 900, y: 25 },
+    { type: 2, title: "認証の応答を記録", endpoint: "401 Unauthorized", detail: "匿名リクエストは拒否。ログイン後のオブジェクト単位の権限確認へ。", x: 30, y: 240 },
+    { type: 0, title: "関連APIへ検証を拡張", endpoint: "GET /api/orders/1042/items", detail: "注文に紐づく明細と添付ファイルにも同じ権限条件でアクセス。", x: 320, y: 225 },
+    { type: 2, title: "影響する範囲を確認", endpoint: "GET /api/attachments/204", detail: "関連APIの応答と所有者情報を比較し、影響範囲を整理。", x: 610, y: 250 },
+    { type: 1, title: "次の検証を計画", endpoint: "Planner → Worker", detail: "得られた証拠をもとに、ファイル取得時の認可条件を追加で検証。", x: 900, y: 230 },
+  ],
+};

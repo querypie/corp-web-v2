@@ -3,6 +3,27 @@ import { describe, expect, it } from "vitest";
 import Cta from "./Cta";
 
 describe("Cta", () => {
+  it("내부 문의 링크는 현재 탭에서 열고 외부 문서는 새 탭에서 연다", () => {
+    render(<Cta actionHref="/ja/contact-us?inquiry=ai-consulting&product=penetrationtest" actionLabel="문의하기" locale="ja" />);
+    const internal = screen.getByRole("link", { name: "문의하기" });
+    expect(internal).not.toHaveAttribute("target");
+    expect(internal).not.toHaveAttribute("rel");
+    const external = screen.getByRole("link", { name: "ACP Community Edition" });
+    expect(external).toHaveAttribute("target", "_blank");
+    expect(external).toHaveAttribute("rel", "noreferrer noopener");
+  });
+
+  it("보조 내부 링크도 현재 탭에서 연다", () => {
+    render(<Cta secondaryActionHref="/ja/demo/aip" secondaryActionLabel="데모" />);
+    expect(screen.getByRole("link", { name: "데모" })).not.toHaveAttribute("target");
+    expect(screen.getByRole("link", { name: "Agentic AI Platform" })).toHaveAttribute("target", "_blank");
+  });
+
+  it.each(["https://app.querypie.com/", "http://example.com", "//docs.querypie.com/guide"])("외부 URL %s는 새 탭에서 연다", (href) => {
+    render(<Cta actionHref={href} actionLabel="외부" secondaryActionLabel="" />);
+    expect(screen.getByRole("link", { name: "외부" })).toHaveAttribute("target", "_blank");
+  });
+
   it.each(["en", "ko", "ja"] as const)("renders the CTA actions in the expected order for %s", (locale) => {
     render(<Cta locale={locale} />);
 

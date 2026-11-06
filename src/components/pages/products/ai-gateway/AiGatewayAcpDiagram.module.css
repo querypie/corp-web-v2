@@ -1,0 +1,66 @@
+.diagram { width: 100%; max-width: 940px; margin: 0 auto; color: var(--color-fg); }
+.flow { display: grid; grid-template-columns: 12% 5.5% 21% 8.5% 21% 9% 23%; grid-template-rows: 100px 16px 200px; align-items: center; padding: 8px 0 24px; }
+.node, .models, .resources > div, .user { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent); background: var(--color-bg); box-shadow: 0 2px 5px rgb(0 0 0 / .025), 0 12px 30px -15px rgb(0 0 0 / .09); }
+.node { height: 144px; border-radius: 26px; gap: 12px; padding: 16px 10px; }
+.node h3 { margin: 0; text-align: center; white-space: nowrap; }
+.node img { width: 36px; height: 36px; object-fit: contain; }
+:global(:root[data-theme="dark"]) :is(.acp, .models, .resources > div, .user) {
+  box-shadow: 0 3px 7px rgb(0 0 0 / .2), 0 14px 28px -10px rgb(0 0 0 / .45);
+}
+.gateway { grid-column: 3; grid-row: 3; border: 1px solid color-mix(in srgb, var(--color-brand) 32%, var(--color-border)); background: linear-gradient(160deg, var(--color-bg) 55%, color-mix(in srgb, var(--color-brand) 3%, var(--color-bg))); box-shadow: 0 20px 44px -20px color-mix(in srgb, var(--color-fg) 24%, transparent), 0 0 90px 24px color-mix(in srgb, var(--color-brand) 12%, transparent); }
+.gatewayLogo { color-scheme: light; }
+:global(:root[data-theme="dark"]) .gatewayLogo { color-scheme: dark; }
+.acp { grid-column: 5; grid-row: 3; }
+.acp > img { width: calc(36px * 40 / 46); height: 36px; }
+.models { grid-column: 3; grid-row: 1; height: 100%; border-radius: 22px; gap: 16px; padding: 16px 12px; }
+.models h3 { margin: 0; font-size: 14px; line-height: 1.5; font-weight: 500; }
+.models ul { display: flex; justify-content: center; gap: 12px; margin: 0; padding: 0; list-style: none; }
+.models li { display: flex; align-items: center; }
+.models img, .models svg { width: 24px; height: 24px; object-fit: contain; stroke-width: 1.5; }
+:global(:root[data-theme="dark"]) .models img[src$="llm-gpt-color.svg"] { filter: invert(1); }
+.user { grid-column: 1; grid-row: 3; height: 120px; gap: 12px; padding: 18px 8px; border-radius: 22px; text-align: center; font-size: 12px; }
+.user svg { width: 36px; height: 36px; stroke-width: 1.5; }
+.userLine { grid-column: 2; grid-row: 3; height: 1px; background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-brand) 60%, var(--color-border)) 0 4px, transparent 4px 8px); background-size: 8px 1px; }
+.modelLine { grid-column: 3; grid-row: 2; width: 1px; height: calc(100% + 28px); align-self: start; justify-self: center; background: color-mix(in srgb, var(--color-brand) 60%, var(--color-border)); }
+.mcp { position: relative; grid-column: 4; grid-row: 3; align-self: stretch; display: flex; align-items: center; }
+.mcpLabel { position: absolute; bottom: calc(50% + 12px); width: 100%; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 10px; text-align: center; color: var(--color-mute); }
+.mcpLabel img { filter: brightness(0); object-fit: contain; }
+:global(:root[data-theme="dark"]) .mcpLabel img { filter: brightness(0) invert(1); }
+.mcpLine { width: 100%; height: 1px; background: repeating-linear-gradient(90deg, color-mix(in srgb, var(--color-brand) 60%, var(--color-border)) 0 4px, transparent 4px 8px); background-size: 8px 1px; }
+.branches { grid-column: 6; grid-row: 3; width: 100%; height: 200px; overflow: visible; }
+.branches path, .mobileBranches path { stroke: color-mix(in srgb, var(--color-brand) 60%, var(--color-border)); stroke-width: 1.25; stroke-dasharray: 4 4; stroke-linecap: round; vector-effect: non-scaling-stroke; }
+.mobileBranches { display: none; }
+.userLine, .modelLine, .mcpLine { position: relative; color: color-mix(in srgb, var(--color-brand) 60%, var(--color-border)); }
+.arrowhead { position: absolute; right: 0; top: -3.5px; width: 8px; height: 8px; }
+.marker { fill: color-mix(in srgb, var(--color-brand) 60%, var(--color-border)); }
+.resources { grid-column: 7; grid-row: 3; display: grid; grid-template-rows: repeat(4, 44px); gap: 8px; }
+.resources > div { flex-direction: row; justify-content: flex-start; gap: 10px; border-radius: 14px; padding: 8px 12px; font-size: 14px; line-height: 1.5; }
+.resources svg { width: 18px; height: 18px; flex: none; stroke-width: 1.5; }
+.diagram figcaption { margin-top: 20px; text-align: center; }
+@media (prefers-reduced-motion: no-preference) {
+  .branches path, .mobileBranches path { animation: resource-flow 1.2s linear infinite; }
+  .userLine, .mcpLine { animation: line-flow-horizontal .8s linear infinite; }
+}
+@keyframes resource-flow { to { stroke-dashoffset: -8; } }
+@keyframes line-flow-horizontal { to { background-position: 8px 0; } }
+@media (max-width: 1023px) {
+  .diagram { max-width: 560px; }
+  .flow { grid-template-columns: 64px 32px minmax(0, 1fr); grid-template-rows: 100px 16px 140px 72px 140px 64px auto; max-width: 360px; margin: 0 auto; }
+  .models { width: 100%; max-width: 240px; justify-self: center; }
+  .modelLine { height: 100%; }
+  .node { width: 100%; max-width: 240px; height: 140px; justify-self: center; border-radius: 24px; }
+  .mcp { grid-column: 3; grid-row: 4; justify-content: center; }
+  .mcpLine .arrowhead { top: auto; bottom: 0; right: -3.5px; transform: rotate(90deg); }
+  .mcpLine { height: 100%; width: 1px; background: repeating-linear-gradient(180deg, color-mix(in srgb, var(--color-brand) 60%, var(--color-border)) 0 4px, transparent 4px 8px); background-size: 1px 8px; }
+  .mcpLabel { bottom: auto; left: calc(50% + 16px); width: auto; }
+  .acp { grid-column: 3; grid-row: 5; }
+  .branches { display: none; }
+  .mobileBranches { display: block; grid-column: 1 / -1; grid-row: 6; width: 100%; height: 64px; overflow: visible; }
+  .resources { grid-column: 1 / -1; grid-row: 7; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: auto; gap: 8px; }
+  .resources > div { flex-direction: column; justify-content: flex-start; text-align: center; padding: 12px 4px; gap: 8px; font-size: 10px; overflow-wrap: anywhere; }
+  .models ul { gap: 10px; }
+  @media (prefers-reduced-motion: no-preference) {
+    .mcpLine { animation-name: line-flow-vertical; }
+  }
+}
+@keyframes line-flow-vertical { to { background-position: 0 8px; } }

@@ -186,6 +186,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
   }, {
     locale,
+    supportedLocales: currentEntry.visibleLocales,
+    contentLocale: getResolvedContentLocale(currentEntry, locale),
     title,
     description,
     image: {

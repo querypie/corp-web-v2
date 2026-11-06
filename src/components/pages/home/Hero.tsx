@@ -40,7 +40,7 @@ export default function Hero({
             <div className="flex w-full max-w-[1200px] flex-col items-start gap-5 sm:gap-6">
               <div className="flex w-full items-start gap-15">
                 <div className="min-w-0 w-full lg:w-fit lg:max-w-[720px] lg:flex-none">
-                  <h2 className="m-0 type-h2 text-fg">{heroHeading}</h2>
+                  <h1 className="m-0 type-h2 text-fg">{heroHeading}</h1>
                   <p className="m-0 mt-2.5 whitespace-pre-line type-body-lg text-mute">{description}</p>
                 </div>
                 {headingAccessory}

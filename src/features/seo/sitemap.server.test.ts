@@ -28,7 +28,11 @@ describe("site sitemap", () => {
     expect(urls).toContain("https://www.querypie.com/en");
     expect(urls).toContain("https://www.querypie.com/ko");
     expect(urls).not.toContain("https://www.querypie.com/ja");
-    expect(urls).not.toContain("https://www.querypie.com/ja/solutions/as400-cobol");
+    expect(urls).not.toContain("https://www.querypie.com/ja/as400-cobol");
+    expect(urls).toContain("https://www.querypie.com/ko/ai-gateway");
+    expect(urls).toContain("https://www.querypie.com/en/fde-services");
+    expect(urls).not.toContain("https://www.querypie.com/en/local-llm");
+    expect(urls.some(url => /\/(platforms|solutions)\//.test(url))).toBe(false);
   });
 
   it("현재 일본어 사이트 origin과 prefix 없는 경로를 사용한다", async () => {
@@ -42,5 +46,8 @@ describe("site sitemap", () => {
     expect(urls).toContain("https://stage-v2.querypie.ai/");
     expect(urls.every((url) => url.startsWith("https://stage-v2.querypie.ai/"))).toBe(true);
     expect(urls.some((url) => new URL(url).pathname.startsWith("/ja"))).toBe(false);
+    expect(urls).toContain("https://stage-v2.querypie.ai/ai-gateway");
+    expect(urls).toContain("https://stage-v2.querypie.ai/as400-cobol");
+    expect(urls).not.toContain("https://stage-v2.querypie.ai/dlp");
   });
 });

@@ -15,7 +15,7 @@ describe("metadata copy", () => {
     expect(getHomeMetadataTitle()).toBe("QueryPie AI");
     expect(getHomeMetadataDescription("en")).toContain("Agentic AI Platform for Enterprises");
     expect(getHomeMetadataDescription("ko")).toContain("엔터프라이즈 기업을 위한 Agentic AI Platform");
-    expect(getHomeMetadataDescription("ja")).toContain("エンタープライズ向け Agentic AI Platform");
+    expect(getHomeMetadataDescription("ja")).toContain("会議から始まる企業のAX");
   });
 
   it("회사 소개 메타데이터를 locale별로 반환한다", () => {

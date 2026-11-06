@@ -59,6 +59,15 @@ beforeAll(async () => {
 }, 30_000);
 
 describe("content detail metadata", () => {
+  it("번역이 없는 대체 언어 화면은 색인하지 않고 실제 번역만 연결한다", async () => {
+    const { generateMetadata } = await import("./resources/[slug]/page");
+    mockReadContentItem.mockResolvedValueOnce(makeEntry({ visibleLocales: ["en"] }));
+    const metadata = await generateMetadata({ params: Promise.resolve({ locale: "ko", slug: "security-guide" }) });
+    expect(metadata.robots).toMatchObject({ index: false });
+    expect(metadata.openGraph).toMatchObject({ locale: "en_US", type: "article" });
+    expect(metadata.alternates?.languages).toEqual({ en: "https://www.querypie.com/en/blog/security-guide", "x-default": "https://www.querypie.com/en/blog/security-guide" });
+  });
+
   it("resources 상세 OG image에 콘텐츠 섬네일을 사용한다", async () => {
     const { generateMetadata } = await import("./resources/[slug]/page");
     mockReadContentItem.mockResolvedValueOnce(makeEntry());

@@ -1,3 +1,8 @@
+export const japanHomeMetadata = {
+  title: "QueryPie AI | 企業のAI活用とAXを支えるプラットフォーム",
+  description: "会議から始まる企業のAX。QueryPie AIは、AIエージェントと業務データを安全につなぎ、日々の仕事の効率化から企業全体のAI活用まで支えます。",
+};
+
 export const japanHomeAxCopy = {
   introduction: {
     title: "企業のAXを、難しく始める必要はありません。",

@@ -10,7 +10,7 @@ describe("Hermes Agent AI 답변", () => {
   it("Hermes 본문을 그대로 반환하고 Markdown 링크와 일반 URL을 sources로 정규화한다", () => {
     const content = [
       "AIP 안내는 [공식 문서](https://aip-docs.app.querypie.com/ko)를 확인하세요.",
-      "제품 페이지: https://www.querypie.com/ko/platforms/aip.",
+      "제품 페이지: https://www.querypie.com/ko/aip.",
       "문서 홈: https://docs.querypie.com",
       "빈 제목 링크: [](https://example.test)",
       "문서 홈 반복: https://docs.querypie.com/",
@@ -25,7 +25,7 @@ describe("Hermes Agent AI 답변", () => {
       answer: content,
       sources: [
         { title: "공식 문서", url: "https://aip-docs.app.querypie.com/ko" },
-        { title: "https://www.querypie.com/ko/platforms/aip", url: "https://www.querypie.com/ko/platforms/aip" },
+        { title: "https://www.querypie.com/ko/aip", url: "https://www.querypie.com/ko/aip" },
         { title: "https://docs.querypie.com/", url: "https://docs.querypie.com/" },
         { title: "https://example.test/", url: "https://example.test/" },
         { title: "https://example.test/%EC%A0%9C%ED%92%88/%E8%B3%87%E6%96%99", url: "https://example.test/%EC%A0%9C%ED%92%88/%E8%B3%87%E6%96%99" },

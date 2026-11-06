@@ -74,8 +74,8 @@ export default function Footer({
     >
       {/* 실제 푸터 콘텐츠 래퍼 */}
       <div className="relative flex w-full max-w-[1200px] flex-col gap-[60px] border-t border-border py-[60px]">
-        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between">
-          {/* 좌측 로고 */}
+        <div className="flex flex-col gap-10 md:gap-12">
+          {/* 메뉴와 분리해 모든 언어에서 링크 열의 너비를 확보한다. */}
           <a aria-label="QueryPie AI" className="inline-flex h-5 w-[116px] shrink-0 items-center" href={getLocalePath(locale as Locale, "/")}>
             <img
               alt="QueryPie AI"
@@ -84,25 +84,17 @@ export default function Footer({
             />
           </a>
 
-          {/* 우측 섹션 링크 묶음 */}
-          <div className="flex flex-wrap items-start gap-8 md:px-5 xl:gap-10">
+          {/* 모바일 2열, 태블릿 3열, 데스크톱은 전체 메뉴를 한 줄로 배치한다. */}
+          <div className={cx(
+            "grid grid-cols-2 items-start gap-x-6 gap-y-10 md:grid-cols-3 md:gap-x-8 md:gap-y-12 xl:gap-x-6",
+            sections.length === 5
+              ? "xl:grid-cols-[1.2fr_1.6fr_0.8fr_1.3fr_0.8fr]"
+              : "xl:grid-cols-[1.25fr_1.3fr_0.8fr_1.3fr_0.8fr_0.55fr]",
+          )}>
             {sections.map((section) => (
               <div
                 key={section.title}
-                className={cx(
-                  "flex flex-col gap-5 type-body-md leading-5",
-                  (section.title === "Platform" || section.title === "플랫폼") && "w-[191px]",
-                  (section.title === "プラットフォーム" || section.title === "ソリューション") && "w-max max-w-full",
-                  (section.title === "Demo" || section.title === "デモ" || section.title === "데모") && "w-[110px]",
-                  (section.title === "Resource" || section.title === "リソース" || section.title === "리소스") && "w-[180px]",
-                  (section.title === "Company" || section.title === "회사" || section.title === "会社") && "w-[84px]",
-                  (section.title === "Plans" ||
-                    section.title === "Pricing & Plans" ||
-                    section.title === "プラン" ||
-                    section.title === "価格・プラン" ||
-                    section.title === "요금제" ||
-                    section.title === "가격 · 플랜") && "w-[84px]",
-                )}
+                className="flex min-w-0 flex-col gap-5 type-body-md leading-6"
               >
                 <p className="m-0 text-mute">{section.title}</p>
                 <div className="flex flex-col gap-[10px] text-fg">
@@ -113,14 +105,14 @@ export default function Footer({
                     return (
                       <a
                         key={item}
-                        className="inline-flex self-start items-center gap-1.5 whitespace-nowrap transition-colors hover:text-mute"
+                        className="inline-flex max-w-full self-start items-start gap-1.5 transition-colors hover:text-mute"
                         href={href}
                         rel={isExternal ? "noreferrer noopener" : undefined}
                         target={isExternal ? "_blank" : undefined}
                       >
-                        <span>{item}</span>
+                        <span className="min-w-0 [overflow-wrap:anywhere]">{item}</span>
                         {isExternal ? (
-                          <ExternalLinkIcon className="h-3.5 w-3.5 shrink-0 text-mute" />
+                          <ExternalLinkIcon className="mt-[5px] h-3.5 w-3.5 shrink-0 text-mute" />
                         ) : null}
                       </a>
                     );
@@ -132,8 +124,8 @@ export default function Footer({
         </div>
 
         {/* 하단 메타 영역: SNS / 법적 링크 / 주소 */}
-        <div className="flex flex-col gap-5">
-            <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-6 pt-8">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               {/* SNS 링크 */}
               <div className="flex flex-wrap items-center justify-between gap-5">
                 <div className="flex items-center gap-[14px]">
@@ -158,7 +150,7 @@ export default function Footer({
               </div>
 
               {/* 법적 링크 */}
-            <div className="flex w-full flex-wrap items-center gap-x-5 gap-y-[10px] whitespace-nowrap type-body-md leading-5 text-fg">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-[10px] type-body-md leading-5 text-fg">
               {legalLinks.map((item) => (
                 <a
                   key={item}

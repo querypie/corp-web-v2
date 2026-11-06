@@ -82,7 +82,8 @@ src/
 - `src/app`에서 `components`, `constants`, `features`, `copy`를 import할 때는 깊은 상대경로 대신 `@/...` alias를 우선 사용합니다.
 - `src/components/ui`에는 도메인 의존성이 없는 UI primitive만 둡니다. 콘텐츠/Tiptap 관련은 `components/content`, 페이지 섹션은 `components/sections`, 전역 사이트 동작은 `components/site`에 둡니다.
 - 여러 페이지에서 공유하는 섹션은 `src/components/sections/common`에 둡니다. 특정 페이지나 도메인에 가까운 섹션은 `Home*`, `Aip*`처럼 접두사를 붙여 `src/components/sections`에 둡니다.
-- 플랫폼(AIP·ACP·FDE 및 하위 페이지)의 locale별 JSX 본문, 섹션 컴포넌트, 통합 필터/데이터는 `src/components/pages/platforms`에, 솔루션(AI Crew·AI Dashi·COBOL)은 `src/components/pages/solutions`에 둡니다. `src/app/[locale]/platforms`와 `src/app/[locale]/solutions`에는 각 영역의 route `page.tsx`와 route 테스트만 둡니다. 경로 헬퍼도 `src/features/platforms/routes.ts`와 `src/features/solutions/routes.ts`로 분리합니다.
+- 제품 구현은 `src/components/pages/products/{제품}`, 서비스는 `src/components/pages/services/{서비스}`, 활용 솔루션은 `src/components/pages/solutions/{솔루션}`에 둡니다. 다국어 공용 코드를 `japan` 폴더에 넣지 않습니다. 페이지 간 공용 구성요소는 `components/pages/shared`, 정적 문구는 `src/copy`에서 관리합니다. 일본 시장 전용 홈의 별도 구조는 유지합니다.
+- 제품·서비스 URL은 메뉴 분류와 독립된 고유 주소(`/aip`, `/ai-gateway`, `/fde-services` 등)를 사용합니다. 실제 제품 하위 페이지만 `/aip/integrations`처럼 계층을 둡니다. `src/constants/offerings.ts`에 페이지 ID·주소·지원 언어·이전 주소를 등록하고 `src/features/offerings/routes.ts`의 `getOfferingHref()`로 링크를 생성합니다. GNB 변경만으로 URL이나 구현 폴더를 이동하지 않습니다. 구조와 이전 절차는 `docs/reference/page-architecture.md`를 참고합니다.
 - 홈 페이지는 `en`, `ko`가 공통 `HomePage`를 사용하고, `ja`는 일본 시장에 맞춘 별도 `JapanHomePage`를 사용합니다. 일본어 홈의 섹션 구성이나 레이아웃 차이를 공통 `HomePage`의 locale 조건문과 옵션으로 누적하지 않습니다.
 - 일본어 홈 페이지와 전용 섹션은 `src/components/pages/home/japan`에, 정적 문구와 metadata copy는 `src/copy/homeJapan.ts`에, CMS 조회나 데이터 조합이 필요하면 `src/features/home/japanPageData.ts`에 둡니다. 공통 UI primitive와 재사용 가능한 섹션은 기존 컴포넌트를 우선 사용합니다.
 - `src/app/[locale]/page.tsx`는 locale을 확인한 뒤 `ja`에는 `JapanHomePage`, `en`과 `ko`에는 공통 `HomePage`를 연결합니다. `/ja` URL과 공통 GNB, Footer, locale 전환 구조는 유지하며 일본어 홈 metadata는 전용 copy를 사용합니다.

@@ -77,6 +77,7 @@ export async function generateMetadata({ params }: DemoDownloadRouteProps): Prom
   return withDynamicOgImage({
     title,
     description,
+    robots: { index: false, follow: true },
     alternates: {
       canonical: `${getPublicDetailHref("demo", locale, resolvedSlug, currentEntry.categorySlug)}/download`,
     },

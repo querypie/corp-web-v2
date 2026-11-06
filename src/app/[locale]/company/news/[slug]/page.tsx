@@ -127,11 +127,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return withDynamicOgImage({
     title,
     description,
+    openGraph: { type: "article", ...(currentEntry.dateIso && !Number.isNaN(Date.parse(currentEntry.dateIso)) ? { publishedTime: currentEntry.dateIso } : {}), ...(currentEntry.authorName ? { authors: [currentEntry.authorName] } : {}) },
     alternates: {
       canonical: getPublicDetailHref("news", locale, decodedSlug),
     },
   }, {
     locale,
+    supportedLocales: currentEntry.visibleLocales,
+    contentLocale: getResolvedContentLocale(currentEntry, locale),
     title,
     description,
     image: {

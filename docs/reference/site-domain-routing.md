@@ -13,6 +13,8 @@ apex, 한 단계 서브도메인, 다단계 서브도메인에 모두 같은 규
 
 ## URL 동작
 
+제품·서비스의 고유 주소와 이전 `/platforms/...`, `/solutions/...` 경로의 호환 정책은 [페이지 구조와 URL 관리](page-architecture.md)를 따른다. 해당 리디렉션은 아래 도메인별 locale 정규화 전에 적용된다.
+
 일본어 전용 사이트의 locale 없는 공개 경로는 주소를 바꾸지 않고 내부 `/ja` 경로로 rewrite합니다.
 locale prefix가 들어온 일본어 사이트 URL은 같은 호스트의 prefix 없는 경로로 정규화합니다.
 
@@ -56,6 +58,13 @@ Production에서는 Vercel redirect를 통과한 정규 FQDN을 현재 서비스
 Preview에서는 redirect 없이 요청받은 Preview FQDN을 현재 서비스 FQDN으로 사용합니다.
 웹사이트 코드가 생성하는 sitemap과 소셜 공유 URL은 현재 서비스의 protocol·host FQDN을 사용합니다.
 canonical·Open Graph·robots의 sitemap URL도 같은 규칙을 따릅니다.
+
+언어 대체 링크(`hreflang`)는 Production에서 예외적으로 실제 언어별 도메인을 연결합니다.
+영어·한국어는 `https://www.querypie.com/en|ko/...`, 일본어는 `https://querypie.ai/...`를 사용하며,
+해당 페이지에 실제로 제공되는 언어만 포함합니다. 이 SEO 링크 정책은 `src/features/seo/languages.ts`에서 관리합니다.
+Preview에서는 현재 호스트를 유지하며 일본어 전용 호스트는 일본어 링크만 제공합니다.
+Preview·Stage·로컬은 robots와 페이지의 noindex로 검색 노출을 제한합니다.
+번역이 없는 CMS 콘텐츠의 대체 언어 화면과 미완성 제품 페이지, 다운로드 화면도 noindex 처리합니다.
 
 ## Sitemap 경로
 

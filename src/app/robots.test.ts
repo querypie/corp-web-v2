@@ -21,6 +21,7 @@ describe("robots sitemap", () => {
   it("모든 사이트에서 현재 host의 canonical sitemap URL을 제공한다", async () => {
     expect((await robots()).sitemap)
       .toBe("https://www.querypie.com/sitemap.xml");
+    expect((await robots()).rules).toMatchObject({ allow: "/", disallow: "/api/" });
 
     requestHeaders.current = new Headers({
       host: "stage-v2.querypie.ai",
@@ -29,5 +30,6 @@ describe("robots sitemap", () => {
 
     expect((await robots()).sitemap)
       .toBe("https://stage-v2.querypie.ai/sitemap.xml");
+    expect((await robots()).rules).toEqual({ userAgent: "*", disallow: "/" });
   });
 });

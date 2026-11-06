@@ -1,3 +1,5 @@
+import { offeringEntries } from "./offerings";
+
 export const locales = ["en", "ko", "ja"] as const;
 
 export type Locale = (typeof locales)[number];
@@ -39,8 +41,9 @@ export function getLocalePath(locale: Locale, pathname = "/") {
 export function getLocaleSwitchPath(pathname: string, locale: Locale) {
   const pathWithoutLocale = stripLocalePrefix(pathname);
   const unavailableInJapanese = locale === "ja" && /^\/plans(?:\/|$)/.test(pathWithoutLocale);
-  const japaneseOnlySolution = locale !== "ja" && /^\/solutions\/as400-cobol(?:\/|$)/.test(pathWithoutLocale);
-  const nextPathname = unavailableInJapanese || japaneseOnlySolution
+  const offering = offeringEntries.find(entry => [entry.path, ...entry.legacyPaths].some(path => pathWithoutLocale === path));
+  const unavailableOffering = offering?.locales && !offering.locales.includes(locale);
+  const nextPathname = unavailableInJapanese || unavailableOffering
     ? "/"
     : pathWithoutLocale;
 

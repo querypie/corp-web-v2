@@ -77,6 +77,7 @@ export async function generateMetadata({ params }: WhitePaperDownloadRouteProps)
   return withDynamicOgImage({
     title,
     description,
+    robots: { index: false, follow: true },
     alternates: {
       canonical: `${getPublicDetailHref("resources", locale, resolvedSlug, currentEntry.categorySlug)}/download`,
     },
