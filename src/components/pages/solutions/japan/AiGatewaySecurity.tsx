@@ -1,4 +1,3 @@
-import { CalendarClock, FileSearch, ScanText } from "lucide-react";
 import type { Locale } from "@/constants/i18n";
 import { pageContentWidthClassName } from "@/constants/layout";
 import { aiGatewaySecurityCopy } from "@/copy/aiGatewaySecurity";
@@ -7,21 +6,18 @@ import AiGatewayAcpDiagram from "./AiGatewayAcpDiagram";
 import contentStyles from "./AiGatewayContent.module.css";
 import styles from "./AiGatewaySecurity.module.css";
 
-const pointIcons = [ScanText, FileSearch, CalendarClock];
-
 export default function AiGatewaySecurity({ locale }: { locale: Locale }) {
   const { dlp, acp } = aiGatewaySecurityCopy[locale];
   return <>
     <section className={`${pageContentWidthClassName} ${contentStyles.section}`}>
       <SolutionSectionHeading title={dlp.title} description={dlp.description} layout="split" />
       <div className={styles.dlpLayout}>
-        <div className={styles.points}>{dlp.points.map((point, index) => {
-          const Icon = pointIcons[index];
-          return <article className={styles.point} key={point.title}>
-            <span className={styles.icon}><Icon aria-hidden="true" /></span>
+        <ol className={styles.points}>{dlp.points.map((point, index) => {
+          return <li className={styles.point} key={point.title}>
+            <span className={styles.stepNumber} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
             <div><h3 className="m-0 type-h3 text-fg">{point.title}</h3><p className="mb-0 mt-3 type-body-md text-mute">{point.body}</p></div>
-          </article>;
-        })}</div>
+          </li>;
+        })}</ol>
         <figure className={styles.scanCanvas} aria-label={dlp.label}>
           <div className={styles.scanCard}>
             <table className={styles.results}>

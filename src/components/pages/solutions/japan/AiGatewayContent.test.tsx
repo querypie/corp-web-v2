@@ -20,7 +20,13 @@ describe("AiGatewayContent", () => {
   it.each(["ko", "en", "ja"] as const)("%s에서 DLP와 ACP 연동을 설명한다", locale => {
     render(<AiGatewayContent locale={locale} />);
     const { dlp, acp } = aiGatewaySecurityCopy[locale];
-    expect(screen.getByRole("heading", { name: dlp.title })).toBeInTheDocument();
+    const dlpSection = screen.getByRole("heading", { name: dlp.title }).closest("section")!;
+    const steps = within(within(dlpSection).getByRole("list")).getAllByRole("listitem");
+    expect(steps).toHaveLength(3);
+    dlp.points.forEach((point, index) => {
+      expect(within(steps[index]).getByRole("heading", { name: point.title })).toBeInTheDocument();
+      expect(within(steps[index]).getByText(point.body)).toBeInTheDocument();
+    });
     const scan = screen.getByRole("figure", { name: dlp.label });
     expect(within(scan).getByRole("table", { name: dlp.scan })).toBeInTheDocument();
     dlp.rows.forEach(row => expect(within(scan).getByText(row.preview)).toBeInTheDocument());

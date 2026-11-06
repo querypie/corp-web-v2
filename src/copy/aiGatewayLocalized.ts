@@ -16,7 +16,7 @@ const en: Content = {
     cards: [
       { id: "connection", title: "Multiple models, one API", body: "Access models from OpenAI, Anthropic, and Gemini through OpenAI- and Anthropic-compatible APIs. Standardize connections across providers and simplify application integration." },
       { id: "routing", title: "Switch models without redeploying", body: "Map the model alias used by your application to an underlying model in the gateway. Update routing without changing the model name in your application." },
-      { id: "credentials", title: "Secure API key management", body: "Store provider API keys in an encrypted vault. Users connect with project-specific Gateway Keys, so you do not need to distribute provider credentials." },
+      { id: "credentials", title: "Secure API key management", body: "Store provider API keys encrypted. Users connect with project-specific Gateway Keys, so you do not need to distribute provider credentials." },
       { id: "tools", title: "Bring MCP tools together", body: "Select tools from multiple MCP servers and expose them through one endpoint. Project policies are checked at execution so only permitted tools can run." },
       { id: "budget", title: "Control usage and costs", body: "Set project limits for requests, tokens, monthly budgets, and request rates. Budgets use estimated costs from pricing tables; models without pricing are marked as unavailable for cost verification." },
       { id: "audit", title: "Unified LLM and MCP logs", body: "Record who used which model or tool and the outcome. Review tokens, estimated costs, and latency in logs and dashboards for daily operations and audits." },

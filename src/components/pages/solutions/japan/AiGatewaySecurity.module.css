@@ -1,8 +1,8 @@
 .dlpLayout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; align-items: start; }
-.points { display: grid; gap: 32px; }
-.point { display: flex; align-items: flex-start; gap: 20px; }
-.icon { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; border-radius: 14px; color: var(--color-brand); background: color-mix(in srgb, var(--color-brand) 7%, var(--color-bg)); }
-.icon svg { width: 24px; height: 24px; stroke-width: 1.5; }
+.points { display: grid; gap: 32px; margin: 0; padding: 0 34px 0 0; list-style: none; }
+.point { position: relative; display: flex; align-items: flex-start; gap: 20px; }
+.point:not(:last-child)::after { content: ""; position: absolute; top: 52px; bottom: -24px; left: 21px; width: 1px; background: var(--color-border); }
+.stepNumber { display: inline-flex; align-items: center; justify-content: center; flex: none; width: 44px; height: 44px; border-radius: 50%; color: var(--color-brand); background: color-mix(in srgb, var(--color-brand) 7%, var(--color-bg)); font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
 .scanCanvas { min-width: 0; width: 100%; max-width: 540px; justify-self: start; margin: 0; }
 .scanCard { border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent); background: var(--color-bg); box-shadow: 0 2px 5px rgb(0 0 0 / .025), 0 12px 30px -15px rgb(0 0 0 / .09); }
 .scanCard { border-radius: 20px; padding: 8px 18px; }
@@ -24,6 +24,7 @@
 :global(:root[data-theme="dark"]) .highScore { color: #f28c9d; background: #f28c9d16; }
 .pattern { color: var(--color-mute); font-size: 11px; line-height: 1.8; overflow-wrap: anywhere; }
 @media (max-width: 1023px) {
+  .points { padding-right: 0; }
   .dlpLayout { gap: 32px; }
   .dlpLayout { grid-template-columns: minmax(0, 1fr); }
 }

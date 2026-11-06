@@ -1,8 +1,21 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import PenetrationTestingPage from "./PenetrationTestingPage";
+import { pentestProcessCopy } from "@/copy/pentestProcess";
 
 describe("PenetrationTestingPage", () => {
+  it.each(["ko", "en", "ja"] as const)("%s에서 에이전트 프로세스와 반복 검증을 설명한다", locale => {
+    render(<PenetrationTestingPage locale={locale} />);
+    const copy = pentestProcessCopy[locale];
+    const diagram = screen.getByRole("figure", { name: copy.label });
+    const steps = within(diagram).getAllByRole("listitem");
+    expect(steps).toHaveLength(3);
+    copy.steps.forEach((step, index) => {
+      expect(within(steps[index]).getByRole("heading", { name: step.agent })).toBeInTheDocument();
+      expect(within(steps[index]).getByText(step.body)).toBeInTheDocument();
+    });
+    expect(within(diagram).getByText(copy.loopBody)).toBeInTheDocument();
+  });
   it("3초마다 다른 검사 경로를 선택하고 언마운트 시 반복을 해제한다", () => {
     vi.useFakeTimers();
     const view = render(<PenetrationTestingPage />);

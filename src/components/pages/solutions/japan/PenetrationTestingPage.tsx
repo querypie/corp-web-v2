@@ -5,6 +5,7 @@ import { getContactHref } from "@/features/contact/prefill";
 import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { penetrationTestingLocalizedCopy, pentestLocalizedMockCopy } from "@/copy/penetrationTestingLocalized";
 import PentestExplorationMockup from "./PentestExplorationMockup";
+import PentestProcessDiagram from "./PentestProcessDiagram";
 import PentestMethods from "./PentestMethods";
 import SolutionSectionHeading from "./SolutionSectionHeading";
 import styles from "./PenetrationTestingPage.module.css";
@@ -21,7 +22,8 @@ export default function PenetrationTestingPage({ locale = "ja" }: { locale?: Loc
         <h1 className="m-0 text-pretty type-h1 text-fg">{copy.hero.title}<br />{copy.hero.accent}</h1>
         <p className="m-0 type-body-lg leading-relaxed text-mute">{copy.hero.description}</p>
       </header>
-      <div className="mt-10 md:mt-14"><PentestExplorationMockup copy={pentestLocalizedMockCopy[locale]} /></div>
+      <div className="mt-14 md:mt-20"><PentestProcessDiagram locale={locale} /></div>
+      <div className="mt-14 md:mt-20"><PentestExplorationMockup copy={pentestLocalizedMockCopy[locale]} /></div>
     </section>
 
     <section className={styles.band}>

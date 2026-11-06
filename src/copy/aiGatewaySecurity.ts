@@ -2,12 +2,12 @@ import type { Locale } from "@/constants/i18n";
 
 const ko = {
   dlp: {
-    title: "DLP 민감정보 탐지",
-    description: "AI 사용 기록에 포함된 개인정보와 기밀정보를 찾아보세요. 필요한 범위를 선택하거나 정기 점검을 예약해 정보 유출 위험을 살필 수 있습니다.",
+    title: "DLP로 기밀정보 보호",
+    description: "보호할 정보와 대응 정책을 설정하고, AI 입력에 포함된 기밀정보를 감지해 제어합니다. 탐지 내역은 감사 로그로 확인하며 조직의 데이터 보안 정책을 한곳에서 관리합니다.",
     points: [
-      { title: "민감정보 탐지", body: "개인정보·인사·기밀 문서부터 API 키까지, 점검이 필요한 내용을 찾습니다." },
-      { title: "가려서 확인하는 결과", body: "탐지된 패턴의 민감한 값은 가리고, 주변 내용만 미리보기로 보여줍니다." },
-      { title: "반복 점검도 간편하게", body: "기간과 프로젝트를 지정해 점검하고, 예약 실행으로 꾸준히 확인합니다." },
+      { title: "보호할 정보와 정책 설정", body: "개인정보와 기밀정보 등 탐지할 대상과 감지 시 대응 방침을 정하고, 조직의 데이터 보안 정책을 한곳에서 관리합니다." },
+      { title: "기밀정보 감지·제어", body: "AI 입력에 포함된 민감정보를 감지하고, 설정한 정책에 따라 대응해 기밀정보 유출 위험을 줄입니다." },
+      { title: "감사 로그로 결과 확인", body: "탐지 내역을 감사 로그에서 확인합니다. 민감한 값은 가린 채 결과를 검토하고, 후속 점검과 정책 개선에 활용합니다." },
     ],
     label: "프롬프트 DLP 점검 결과 예시: 개인정보와 API 키를 탐지하고 민감한 값을 가린 미리보기",
     example: "표시 예시", scan: "스캔 결과", columns: ["사용자", "탐지 결과", "패턴"], scoreNote: "점수는 해당 카테고리에 포함될 가능성을 나타냅니다.",
@@ -31,12 +31,12 @@ export const aiGatewaySecurityCopy: Record<Locale, SecurityCopy> = {
   ko,
   en: {
     dlp: {
-      title: "Data detection with DLP",
-      description: "Find personal and confidential information in AI usage logs. Review a selected scope or schedule regular scans to spot potential data exposure.",
+      title: "Data protection with DLP",
+      description: "Define what to protect and how to respond, then detect and control confidential information in AI inputs. Review findings in audit logs and manage your organization’s data security policies in one place.",
       points: [
-        { title: "Detect sensitive information", body: "Find content that needs review, from personal and HR data to confidential documents and API keys." },
-        { title: "Review masked previews", body: "Sensitive pattern matches are masked, with only the surrounding context shown in previews." },
-        { title: "Make reviews routine", body: "Choose a date range and project, or schedule recurring scans to keep track." },
+        { title: "Define protection policies", body: "Choose the personal and confidential information to detect and how to respond. Manage your organization’s data security policies in one place." },
+        { title: "Detect and control sensitive data", body: "Detect sensitive information in AI inputs and respond according to your policies to reduce the risk of confidential data exposure." },
+        { title: "Review results in audit logs", body: "Review findings in audit logs with sensitive values masked. Use the results for follow-up reviews and policy improvements." },
       ],
       label: "Example Prompt DLP results showing personal information and API key detection with a masked preview",
       example: "Example", scan: "Scan results", columns: ["User", "Findings", "Patterns"], scoreNote: "Scores indicate how likely the content is to match a category.",
@@ -56,12 +56,12 @@ export const aiGatewaySecurityCopy: Record<Locale, SecurityCopy> = {
   },
   ja: {
     dlp: {
-      title: "DLPで機密情報を検出",
-      description: "AIの利用ログに含まれる個人情報や機密情報を検出。対象を絞ったスキャンや定期チェックで、情報流出のリスクを把握できます。",
+      title: "DLPで機密情報を保護",
+      description: "保護する情報と対応方針を設定し、AIへの入力に含まれる機密情報を検知・制御。検知結果を監査ログで確認し、組織のデータセキュリティポリシーを一元管理します。",
       points: [
-        { title: "機密情報を検出", body: "個人情報・人事情報・機密文書からAPIキーまで、確認が必要な内容を見つけます。" },
-        { title: "マスキングして確認", body: "パターンに一致した機密情報を隠し、前後の内容だけをプレビューに表示します。" },
-        { title: "定期チェックも手軽に", body: "期間やプロジェクトを指定してスキャン。予約実行で継続的に確認できます。" },
+        { title: "保護する情報とポリシーを設定", body: "個人情報や機密情報など、検知対象と検知時の対応方針を設定。組織のデータセキュリティポリシーを一か所で管理します。" },
+        { title: "機密情報を検知・制御", body: "AIへの入力に含まれる機密情報を検知。設定したポリシーに沿って対応し、機密情報の漏えいリスクを抑えます。" },
+        { title: "監査ログで結果を確認", body: "検知結果を監査ログから確認。機密情報をマスキングした状態で結果を確認し、継続的な点検やポリシーの改善に活用します。" },
       ],
       label: "プロンプトDLPの検出結果例：個人情報とAPIキーの検出、マスキングされたプレビュー",
       example: "表示例", scan: "スキャン結果", columns: ["ユーザー", "検出結果", "パターン"], scoreNote: "スコアはカテゴリに該当する可能性を示します。",

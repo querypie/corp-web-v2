@@ -17,7 +17,7 @@ export const aiGatewayContentCopy = {
       active: "接続中",
       standby: "切り替え先",
       key: "Gateway Key",
-      vault: "Encrypted vault",
+      vault: "Encrypted storage",
       protected: "プロバイダーキーを保護",
       toolset: "My toolset",
       tools: ["Code", "Messages", "Docs"],
