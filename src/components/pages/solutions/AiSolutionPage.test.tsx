@@ -2,14 +2,19 @@ import { render, screen, cleanup } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import AiSolutionPage from "./AiSolutionPage";
 import PenetrationTestingPage from "./japan/PenetrationTestingPage";
-import { aiSolutionsCopy } from "@/copy/aiSolutions";
+import { aiSolutionsCopy, aiSolutionAction } from "@/copy/aiSolutions";
+import { aiGatewayManualLabel } from "@/copy/aiGatewayLocalized";
 
 describe("영어·한국어 AI 솔루션", () => {
   it.each(["en", "ko", "ja"] as const)("%s AIG 문의 CTA는 AI 상담과 AIG를 전달하며 현재 탭에서 열린다", (locale) => {
     render(<AiSolutionPage id="ai-gateway" locale={locale} />);
-    const link = screen.getByRole("link");
+    const link = screen.getByRole("link", { name: aiSolutionAction[locale] });
     expect(link).toHaveAttribute("href", `/${locale}/contact-us?inquiry=ai-consulting&product=aig`);
     expect(link).not.toHaveAttribute("target");
+    const manual = screen.getByRole("link", { name: aiGatewayManualLabel[locale] });
+    expect(manual).toHaveAttribute("href", `https://ai-gateway.dev.querypie.io/manual/${locale === "en" ? "" : `${locale}/`}`);
+    expect(manual).toHaveAttribute("target", "_blank");
+    expect(screen.getAllByRole("link")).toEqual([link, manual]);
   });
 
   it.each(["en", "ko", "ja"] as const)("%s QEV·QLM은 구성도 없이 같은 더미 레이아웃을 사용한다", (locale) => {
@@ -35,6 +40,7 @@ describe("영어·한국어 AI 솔루션", () => {
       else expect(screen.queryByRole("figure")).not.toBeInTheDocument();
       expect(container.textContent).not.toMatch(/[\u3040-\u30ff]/);
       for (const link of screen.queryAllByRole("link")) {
+        if (id === "ai-gateway" && link.textContent === aiGatewayManualLabel[locale]) continue;
         expect(link).toHaveAttribute("href", id === "ai-gateway" ? `/${locale}/contact-us?inquiry=ai-consulting&product=aig` : `/${locale}/contact-us`);
       }
       cleanup();

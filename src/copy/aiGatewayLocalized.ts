@@ -69,6 +69,7 @@ const ko: Content = {
 };
 
 export const aiGatewayCopy: Record<Locale, Content> = { en, ko, ja: aiGatewayContentCopy };
+export const aiGatewayManualLabel: Record<Locale, string> = { en: "AI Gateway Manual", ko: "AI Gateway 매뉴얼", ja: "AI Gateway マニュアル" };
 type Architecture = Pick<typeof aiGatewayVisualCopy.architecture, "diagramLabel" | "agents" | "organization" | "sso" | "sync" | "rbac" | "key" | "modules" | "providerLabel" | "localLlm" | "remote" | "saas" | "internalTools">;
 export const aiGatewayArchitectureCopy: Record<Locale, Architecture> = {
   ja: aiGatewayVisualCopy.architecture,

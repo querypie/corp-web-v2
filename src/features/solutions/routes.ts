@@ -34,3 +34,7 @@ export function getSolutionHref(locale: Locale, id: SolutionEntry["id"]): string
 
   return getLocalePath(locale, `/solutions/${entry.slug.join("/")}`);
 }
+
+export function getAiGatewayManualHref(locale: Locale): string {
+  return `https://ai-gateway.dev.querypie.io/manual/${locale === "en" ? "" : `${locale}/`}`;
+}

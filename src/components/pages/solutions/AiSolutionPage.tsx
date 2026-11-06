@@ -4,6 +4,8 @@ import { getContactHref } from "@/features/contact/prefill";
 import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import type { JapanAiSolutionId } from "@/copy/japanAiSolutions";
 import { aiSolutionsCopy, aiSolutionAction } from "@/copy/aiSolutions";
+import { aiGatewayManualLabel } from "@/copy/aiGatewayLocalized";
+import { getAiGatewayManualHref } from "@/features/solutions/routes";
 import AiGatewayDiagram from "./japan/AiGatewayDiagram";
 import AiGatewayContent from "./japan/AiGatewayContent";
 import SolutionSectionHeading from "./japan/SolutionSectionHeading";
@@ -47,7 +49,7 @@ export default function AiSolutionPage({ id, locale }: { id: JapanAiSolutionId; 
         </section>
       ))}
 
-      <Cta actionHref={contactHref} actionLabel={aiSolutionAction[locale]} compactHeading description={copy.cta.description} hideEyebrow locale={locale} secondaryActionLabel="" title={copy.cta.title} />
+      <Cta actionHref={contactHref} actionLabel={aiSolutionAction[locale]} compactHeading description={copy.cta.description} hideEyebrow locale={locale} preserveActionOrder={id === "ai-gateway"} secondaryActionLabel={id === "ai-gateway" ? aiGatewayManualLabel[locale] : ""} secondaryActionHref={id === "ai-gateway" ? getAiGatewayManualHref(locale) : undefined} title={copy.cta.title} />
     </div>
   );
 }
