@@ -71,7 +71,7 @@ const ko: Copy = {
 };
 export const penetrationTestingLocalizedCopy: Record<Locale, Copy> = { en, ko, ja: penetrationTestingCopy };
 
-type MockCopy = Pick<typeof pentestMockCopy, "label" | "title" | "sample" | "evidence" | "types" | "services" | "checks">;
+type MockCopy = Pick<typeof pentestMockCopy, "label" | "title" | "sample" | "evidence" | "types" | "services" | "checks"> & { overview: string; viewport: string };
 const checksEn = [
   ["Explore the service", "Collect public APIs and authentication flows to identify further tests."],
   ["Discover related paths", "Find additional parameters in responses and plan role-specific tests."],
@@ -101,7 +101,7 @@ const checksKo = [
   ["CORS·인증 조건 기록", "허용 출처와 인증 헤더의 응답을 확인하고 증거를 저장합니다."],
 ];
 export const pentestLocalizedMockCopy: Record<Locale, MockCopy> = {
-  ja: pentestMockCopy,
-  en: { label: "Sample AI penetration testing exploration and validation screen", title: "Exploration map", sample: "Sample testing screen", evidence: "Evidence", types: ["Test", "Clue", "Analysis", "Vulnerability"], services: ["Authentication", "Orders API", "File service", "Admin console", "Partner API", "Payments"], checks: pentestMockCopy.checks.map((check, i) => ({ ...check, title: checksEn[i][0], detail: checksEn[i][1] })) },
-  ko: { label: "AI 모의 해킹 탐색·검증 화면 예시", title: "탐색 지도", sample: "검증 화면 예시", evidence: "검증 기록", types: ["검사 항목", "단서", "분석 결과", "취약점"], services: ["인증 서비스", "주문 API", "파일 서비스", "관리 콘솔", "파트너 API", "결제 서비스"], checks: pentestMockCopy.checks.map((check, i) => ({ ...check, title: checksKo[i][0], detail: checksKo[i][1] })) },
+  ja: { ...pentestMockCopy, title: "探索経路", overview: "探索経路の全体像", viewport: "表示範囲" },
+  en: { overview: "All exploration paths", viewport: "Current view", label: "Sample AI penetration testing exploration and validation screen", title: "Exploration paths", sample: "Sample testing screen", evidence: "Evidence", types: ["Test", "Clue", "Analysis", "Vulnerability"], services: ["Authentication", "Orders API", "File service", "Admin console", "Partner API", "Payments"], checks: pentestMockCopy.checks.map((check, i) => ({ ...check, title: checksEn[i][0], detail: checksEn[i][1] })) },
+  ko: { overview: "전체 탐색 경로", viewport: "현재 보는 영역", label: "AI 모의 해킹 탐색·검증 화면 예시", title: "탐색 경로", sample: "검증 화면 예시", evidence: "검증 기록", types: ["검사 항목", "단서", "분석 결과", "취약점"], services: ["인증 서비스", "주문 API", "파일 서비스", "관리 콘솔", "파트너 API", "결제 서비스"], checks: pentestMockCopy.checks.map((check, i) => ({ ...check, title: checksKo[i][0], detail: checksKo[i][1] })) },
 };

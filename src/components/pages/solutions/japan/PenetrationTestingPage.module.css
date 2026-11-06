@@ -51,11 +51,19 @@
 .response { flex-wrap: wrap; }
 .legend { flex-wrap: wrap; }
 @media (prefers-reduced-motion: reduce) { .denseNode { transition: none; } }
+.mapWithOverview { position: relative; }
+.overviewOverlay { position: absolute; left: 18px; top: 18px; z-index: 1; width: 350px; padding: 12px 12px 5px; background: #151515f5; border: 1px solid #505050; border-radius: 8px; box-shadow: 0 8px 28px #0008; pointer-events: none; }
+.overviewHeader { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.overviewHeader strong { color: #d4d4d4; font-size: 10px; font-weight: 500; }
+.overviewHeader span { display: flex; align-items: center; gap: 5px; color: #a3a3a3; font-size: 9px; }
+.overviewHeader i { width: 9px; height: 7px; border: 1px solid #dedede; border-radius: 1px; }
+.overviewOverlay svg { display: block; width: 100%; height: auto; }
+@media (max-width: 767px) { .overviewOverlay { left: 10px; top: 10px; width: 225px; max-width: calc(100% - 20px); padding: 9px 9px 3px; }.overviewHeader { gap: 6px; }.overviewHeader strong { font-size: 9px; }.overviewHeader span { font-size: 8px; } }
 .mockTop { flex-wrap: wrap; }
 .mockTop .legend { margin-left: auto; color: #909090; font-size: 10px; }
 @media (max-width: 767px) {
   .mapScroll {
-    height: 320px;
+    height: 440px;
     overflow-x: auto;
     overflow-y: auto;
     overscroll-behavior: contain;
