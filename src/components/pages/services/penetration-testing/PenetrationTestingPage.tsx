@@ -16,7 +16,7 @@ export default function PenetrationTestingPage({ locale = "ja" }: { locale?: Loc
     <section className={pageContentWidthClassName}>
       <header className="grid items-start gap-6 md:grid-cols-2 md:gap-12">
         <h1 className="m-0 text-pretty type-h1 text-fg">{copy.hero.title}<br />{copy.hero.accent}</h1>
-        <p className="m-0 type-body-lg leading-relaxed text-mute">{copy.hero.description}</p>
+        <p className="m-0 type-body-lg leading-relaxed text-fg">{copy.hero.description}</p>
       </header>
       <div className="mt-14 md:mt-20"><PentestProcessDiagram locale={locale} /></div>
       <div className="mt-14 md:mt-20"><PentestExplorationMockup copy={pentestLocalizedMockCopy[locale]} /></div>
