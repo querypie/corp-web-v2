@@ -13,7 +13,7 @@ import PublicThemeSync from "@/components/site/PublicThemeSync";
 import AiChatWidget from "@/components/site/ai-chat/AiChatWidget";
 import { GOOGLE_ANALYTICS_ID } from "@/features/analytics/google";
 import { getAiChatConfig } from "@/features/ai/config.server";
-import { isDlpPlatformVisible } from "@/features/platforms/visibility";
+import { isDlpPlatformVisible } from "@/features/products/dlp/visibility";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));

@@ -21,7 +21,7 @@ type FeatureItem = {
   mediaClassName?: string;
   reverse?: boolean;
   title: string[];
-  titleLeadAsH1?: boolean;
+  titleLeadLarge?: boolean;
   videoSrc?: string;
 };
 
@@ -87,8 +87,8 @@ function FeatureCopy({
   iconSrc,
   iconSurface,
   title,
-  titleLeadAsH1,
-}: Pick<FeatureItem, "action" | "body" | "desktopTitle" | "iconSrc" | "iconSurface" | "title" | "titleLeadAsH1"> & { className?: string }) {
+  titleLeadLarge,
+}: Pick<FeatureItem, "action" | "body" | "desktopTitle" | "iconSrc" | "iconSurface" | "title" | "titleLeadLarge"> & { className?: string }) {
   return (
     /* 기능 설명 텍스트 블록 */
     <div className={cx("flex w-full min-w-0 flex-1 flex-col gap-3 not-italic md:gap-5 lg:min-w-[200px]", className)}>
@@ -111,19 +111,19 @@ function FeatureCopy({
         <div
           className={cx(
             "min-w-0 flex-1 break-words text-pretty font-normal tracking-[0] text-fg md:w-full md:flex-none",
-            !titleLeadAsH1 && "type-h3 leading-6 md:type-h2 md:leading-8",
+            !titleLeadLarge && "type-h3 leading-6 md:type-h2 md:leading-8",
             desktopTitle && "md:hidden",
           )}
         >
           {title.map((line, index) =>
-            titleLeadAsH1 && index === 0 ? (
-              <h1 key={line} className="m-0 type-h1">
+            titleLeadLarge && index === 0 ? (
+              <h2 key={line} className="m-0 type-h1">
                 {line}
-              </h1>
+              </h2>
             ) : (
               <p
                 key={line}
-                className={cx("m-0", titleLeadAsH1 && "type-h3 leading-6")}
+                className={cx("m-0", titleLeadLarge && "type-h3 leading-6")}
               >
                 {line}
               </p>
@@ -316,7 +316,7 @@ export default function FeatureMediaList({
                 iconSrc={item.iconSrc}
                 iconSurface={item.iconSurface}
                 title={item.title}
-                titleLeadAsH1={item.titleLeadAsH1}
+                titleLeadLarge={item.titleLeadLarge}
               />
               <FeatureMedia
                 className={cx("order-1 lg:order-none", item.mediaClassName)}

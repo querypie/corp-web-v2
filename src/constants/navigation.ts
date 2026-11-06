@@ -1,3 +1,4 @@
+import { getOfferingHref } from "@/features/offerings/routes";
 import { getLocalePath, type Locale } from "./i18n";
 import {
   demoCategoryConfigs,
@@ -6,11 +7,9 @@ import {
   getCategoryLabel,
 } from "@/features/content/config";
 import { getPublicCategoryHref } from "@/features/content/publicPaths";
-import { getDlpPlatformHref, getPlatformHref } from "@/features/platforms/routes";
-import { getSolutionHref } from "@/features/solutions/routes";
 import { localLlmMenuLabel } from "@/copy/localLlm";
 import { as400CobolMenuLabel } from "@/copy/as400Cobol";
-import { japanAiSolutionsCopy } from "@/copy/japanAiSolutions";
+import { aiProductsCopy } from "@/copy/aiProducts";
 import { penetrationTestingMenuLabel, penetrationTestingMenuLabels } from "@/copy/penetrationTestingMenu";
 
 export type NavigationSubItem = {
@@ -102,11 +101,11 @@ export function getPlatformSubItems(
   }[locale] ?? ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services", "Data Loss Prevention (DLP)"];
 
   const items = [
-    { label: copy[0], href: getPlatformHref(locale as Locale, "aip") },
-    { label: copy[1], href: getPlatformHref(locale as Locale, "acp") },
+    { label: copy[0], href: getOfferingHref(locale as Locale, "aip") },
+    { label: copy[1], href: getOfferingHref(locale as Locale, "acp") },
   ];
 
-  items.push({ label: japanAiSolutionsCopy["ai-gateway"].menuLabel, href: getSolutionHref(locale as Locale, "ai-gateway") });
+  items.push({ label: aiProductsCopy[locale as Locale]["ai-gateway"].menuLabel, href: getOfferingHref(locale as Locale, "ai-gateway") });
 
   if (locale === "en" || locale === "ko") {
     [items[0], items[1]] = [items[1], items[0]];
@@ -122,27 +121,27 @@ export function getSolutionsSubItems(
   if (locale !== "ja") {
     const items = [{
       label: locale === "ko" ? penetrationTestingMenuLabels.ko : penetrationTestingMenuLabels.en,
-      href: getSolutionHref(locale as Locale, "penetration-testing"),
+      href: getOfferingHref(locale as Locale, "penetration-testing"),
     }, {
       label: locale === "ko" ? "FDE 서비스" : "FDE Services",
-      href: getPlatformHref(locale as Locale, "fde-services"),
+      href: getOfferingHref(locale as Locale, "fde-services"),
     }];
     if (includeDlpPlatform) {
       items.push({
         label: locale === "ko" ? "데이터 손실 방지 (DLP)" : "Data Loss Prevention (DLP)",
-        href: getDlpPlatformHref(locale as Locale),
+        href: getOfferingHref(locale as Locale, "dlp"),
       });
     }
     return items;
   }
 
   return [
-    { label: penetrationTestingMenuLabel, href: getSolutionHref(locale, "penetration-testing") },
-    { label: localLlmMenuLabel, href: getSolutionHref(locale, "local-llm") },
-    { label: "専任エンジニア｜FDEサービス", href: getPlatformHref(locale as Locale, "fde-services") },
-    { label: as400CobolMenuLabel, href: getSolutionHref(locale, "as400-cobol") },
-    { label: "社内業務効率化｜AI Crew", href: getSolutionHref(locale, "ai-crew") },
-    { label: "自社サービスAI化｜AI Dashi", href: getSolutionHref(locale, "ai-dashi") },
+    { label: penetrationTestingMenuLabel, href: getOfferingHref(locale, "penetration-testing") },
+    { label: localLlmMenuLabel, href: getOfferingHref(locale, "local-llm") },
+    { label: "専任エンジニア｜FDEサービス", href: getOfferingHref(locale as Locale, "fde-services") },
+    { label: as400CobolMenuLabel, href: getOfferingHref(locale, "as400-cobol") },
+    { label: "社内業務効率化｜AI Crew", href: getOfferingHref(locale, "ai-crew") },
+    { label: "自社サービスAI化｜AI Dashi", href: getOfferingHref(locale, "ai-dashi") },
   ];
 }
 
@@ -255,11 +254,11 @@ export function getPrimaryNavHref(item: string, locale: string) {
 
 export function getFooterHref(item: string, locale: string) {
   if (item === "FDE Services" || item === "FDE 서비스" || item === "FDEサービス" || item === "専任エンジニア｜FDE" || item === "専任エンジニア｜FDEサービス") {
-    return getPlatformHref(locale as Locale, "fde-services");
+    return getOfferingHref(locale as Locale, "fde-services");
   }
 
   if (item === "Data Loss Prevention (DLP)" || item === "데이터 손실 방지 (DLP)" || item === "データ損失防止 (DLP)") {
-    return getDlpPlatformHref(locale as Locale);
+    return getOfferingHref(locale as Locale, "dlp");
   }
 
   if (item === "AIP") {
@@ -307,35 +306,35 @@ export function getFooterHref(item: string, locale: string) {
   }
 
   if (item === "AI Platform (AIP)" || item === "AI 플랫폼 (AIP)" || item === "AIプラットフォーム (AIP)") {
-    return getPlatformHref(locale as Locale, "aip");
+    return getOfferingHref(locale as Locale, "aip");
   }
 
   if (item === "Access Control Platform (ACP)" || item === "접근 제어 플랫폼 (ACP)" || item === "アクセス制御プラットフォーム (ACP)") {
-    return getPlatformHref(locale as Locale, "acp");
+    return getOfferingHref(locale as Locale, "acp");
   }
 
   if (item === "Workplace Productivity | AI Crew" || item === "사내 업무 효율화 | AI Crew" || item === "社内業務効率化｜AI Crew") {
-    return getSolutionHref(locale as Locale, "ai-crew");
+    return getOfferingHref(locale as Locale, "ai-crew");
   }
 
   if (item === "AI for Your Service | AI Dashi" || item === "자사 서비스 AI화 | AI Dashi" || item === "自社サービスAI化｜AI Dashi") {
-    return getSolutionHref(locale as Locale, "ai-dashi");
+    return getOfferingHref(locale as Locale, "ai-dashi");
   }
 
   if (item === localLlmMenuLabel && locale === "ja") {
-    return getSolutionHref(locale, "local-llm");
+    return getOfferingHref(locale, "local-llm");
   }
 
-  if (item === japanAiSolutionsCopy["ai-gateway"].menuLabel) {
-    return getSolutionHref(locale as Locale, "ai-gateway");
+  if (item === aiProductsCopy[locale as Locale]["ai-gateway"].menuLabel) {
+    return getOfferingHref(locale as Locale, "ai-gateway");
   }
 
   if (Object.values(penetrationTestingMenuLabels).includes(item)) {
-    return getSolutionHref(locale as Locale, "penetration-testing");
+    return getOfferingHref(locale as Locale, "penetration-testing");
   }
 
   if (item === as400CobolMenuLabel && locale === "ja") {
-    return getSolutionHref(locale, "as400-cobol");
+    return getOfferingHref(locale, "as400-cobol");
   }
 
   if (item === "About Us" || item === "회사 소개" || item === "会社概要") {

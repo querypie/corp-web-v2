@@ -1,4 +1,4 @@
-import { integrationItems } from "@/components/pages/platforms/aip/integrations/integrationData";
+import { integrationItems } from "@/components/pages/products/aip/integrations/integrationData";
 import IntegrationIcon from "./IntegrationIcon";
 
 const itemsByName = new Map(integrationItems.map(item => [item.name, item]));

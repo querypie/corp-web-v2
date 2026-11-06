@@ -90,33 +90,33 @@ src/content/legal/privacy-policy/
 
 ### GNB / 푸터 메뉴
 
-- 공통 메뉴 순서는 **플랫폼 → 데모 → 리소스 → 회사 → 가격·플랜**입니다. 일본어에서는 **플랫폼 → 솔루션 → 데모 → 리소스 → 회사** 순서로 표시합니다.
-- 플랫폼에는 AIP, ACP, FDE 서비스를 배치합니다. 기본 경로는 `/platforms/aip`, `/platforms/acp`, `/platforms/aip/fde-services`이며 AIP·ACP의 하위 페이지도 `/platforms` 아래에 둡니다.
-- 솔루션 메뉴는 일본어에만 표시하며 AI Crew, AI Dashi, AS/400·COBOL을 포함합니다. 경로는 `/solutions/ai-crew`, `/solutions/ai-dashi`, `/solutions/as400-cobol`을 유지합니다.
-- 기존 `/solutions/aip...`·`/solutions/acp...` 주소는 새 `/platforms/...` 주소로 영구 리디렉션합니다.
-- 메뉴 구성은 `src/constants/navigation.ts`, 플랫폼 경로는 `src/features/platforms/routes.ts`, 솔루션 경로는 `src/features/solutions/routes.ts`에서 관리합니다.
+- 공통 메뉴는 **플랫폼 → 솔루션 → 데모 → 리소스 → 회사 → 가격·플랜**입니다. 일본어에서는 가격·플랜을 표시하지 않습니다.
+- 플랫폼 메뉴는 AIP·ACP·AI Gateway를, 솔루션 메뉴는 모의해킹·FDE와 locale별 솔루션을 연결합니다. 정확한 표시 항목과 순서는 `src/constants/navigation.ts`에서 관리합니다.
+- 메뉴 배치와 공개 URL은 독립적입니다. 제품·서비스는 `/aip`, `/acp`, `/ai-gateway`, `/penetration-testing`, `/fde-services`처럼 고유 주소를 사용합니다. 실제 제품 하위 내용만 `/aip/integrations`처럼 계층을 가집니다.
+- 페이지 ID·주소·지원 언어·이전 주소는 `src/constants/offerings.ts` 한 곳에서 관리하고, 링크는 `getOfferingHref(locale, id)`로 생성합니다.
+- 기존 `/platforms/...`, `/solutions/...` 주소는 `src/features/routing/offeringRedirects.ts`에서 새 주소로 308 리디렉션합니다. 데모·블로그·자료 URL과 정적 자산 URL은 유지합니다.
 
-플랫폼·솔루션 폴더는 공개 경로와 같은 기준으로 분리합니다.
+내부 구현은 제품·서비스별로 묶고 다국어 공용 코드를 지역 폴더에 두지 않습니다. 메뉴 위치를 바꿀 때 파일이나 주소를 옮기지 않습니다.
 
 ```text
 src/app/[locale]/
-├── platforms/          # AIP·ACP 및 하위 페이지, 플랫폼 route 테스트
-└── solutions/          # AI Crew·AI Dashi·COBOL, 솔루션 route 테스트
+├── aip/, acp/, ai-gateway/  # 제품 route
+├── penetration-testing/    # 서비스 route
+└── fde-services/           # 서비스 route
 src/components/pages/
-├── platforms/
-│   ├── aip/            # FDE·MCP Gateway·LLM·통합 포함
-│   ├── acp/
-│   └── common/         # 플랫폼 본문 공통 렌더링 컴포넌트
-└── solutions/japan/    # AI Crew·AI Dashi·COBOL 컴포넌트
+├── products/           # aip, acp, ai-gateway, dlp
+├── services/           # penetration-testing, fde
+├── solutions/          # ai-crew, ai-dashi, local-llm, as400-cobol
+└── shared/             # 공용 제목·본문·카드·다이어그램 스타일
 src/features/
-├── platforms/routes.ts
-└── solutions/routes.ts
+└── offerings/routes.ts # 메뉴 분류와 독립된 경로 헬퍼
 public/assets/pages/
 ├── platforms/          # AIP·ACP 이미지, 영상 및 통합 로고
 └── solutions/          # AI Crew·AI Dashi·COBOL 전용 자산
 ```
 
 기존 `/assets/products/...`와 `/assets/platforms/...` 자산 URL은 `/assets/pages/platforms/...`로 영구 리디렉션합니다.
+새 페이지를 추가할 때는 [페이지 구조와 URL 관리](docs/reference/page-architecture.md)를 참고합니다.
 
 ### 일본어 홈 구성 방침
 

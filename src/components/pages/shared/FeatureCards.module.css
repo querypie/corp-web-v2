@@ -1,0 +1,44 @@
+.section { display: flex; flex-direction: column; gap: 40px; }
+.splitLayout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 30px; align-items: start; }
+@media (max-width: 1023px) { .splitLayout { grid-template-columns: 1fr; } }
+.challengeGrid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 40px; }
+.challenge { min-width: 0; border-radius: var(--radius-box); background: var(--color-bg-content); padding: 28px 24px; }
+.band { margin-inline: -20px; padding: 88px 20px; background: var(--color-bg-content); }
+.featureGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.feature { min-width: 0; padding: 24px 28px 30px; border: 1px solid color-mix(in srgb, var(--color-border) 60%, transparent); border-radius: 24px; background: var(--color-bg); }
+.accessLayout { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr); align-items: start; gap: 56px; }
+.roleGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.roleCard { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid var(--color-border); border-radius: var(--radius-box); background: var(--color-bg); padding: 20px; }
+.roleVisual {
+  display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; flex: none; margin-bottom: 16px; border-radius: 14px;
+  background: linear-gradient(145deg, color-mix(in srgb, var(--color-brand) 5%, var(--color-bg)), color-mix(in srgb, var(--color-brand) 13%, var(--color-bg)));
+}
+.roleIcon { width: 24px; height: 24px; color: var(--color-brand); stroke-width: 1.5; }
+.scopePanel { min-width: 0; }
+.scopeTable { width: 100%; margin-top: 24px; border-collapse: collapse; text-align: center; }
+.scopeTable th, .scopeTable td { padding: 10px 12px; border-bottom: 1px solid var(--color-border); }
+.scopeTable th { font-weight: 400; }
+.scopeTable th:first-child { text-align: left; }
+.scopeTable thead th { padding-block: 12px; background: var(--color-bg-content); font-weight: 600; border-top: 1px solid var(--color-border); }
+.scopeAllowed, .scopeEmpty { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; vertical-align: middle; }
+.scopeAllowed { background: var(--color-bg-content); color: var(--color-brand); }
+.scopeEmpty { color: var(--color-mute); }
+.scopeAllowed svg, .scopeEmpty svg { width: 18px; height: 18px; }
+@media (min-width: 768px) { .band { margin-inline: -40px; padding-inline: 40px; } }
+@media (max-width: 1023px) {
+  .challengeGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .accessLayout { grid-template-columns: minmax(0, 1fr); gap: 36px; }
+  .feature { padding: 28px; }
+  .featureGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 639px) {
+  .section { gap: 32px; }
+  .challengeGrid { grid-template-columns: minmax(0, 1fr); gap: 16px; margin-top: 32px; }
+  .challenge { padding: 24px; }
+  .band { padding-block: 56px; }
+  .featureGrid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .feature { padding: 24px 20px; }
+  .roleGrid { gap: 12px; }
+  .roleCard { padding: 16px 12px; }
+  .scopeTable th, .scopeTable td { padding: 10px 8px; }
+}

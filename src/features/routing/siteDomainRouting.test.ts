@@ -10,7 +10,7 @@ describe("site domain routing", () => {
       for (const [path, destination] of [
         ["/ja", "/"],
         ["/ja/about-us?utm_source=test", "/about-us?utm_source=test"],
-        ["/ja/platforms/aip?utm_campaign=japan", "/platforms/aip?utm_campaign=japan"],
+        ["/ja/aip?utm_campaign=japan", "/aip?utm_campaign=japan"],
       ]) {
         const response = await unstable_getResponseFromNextConfig({
           url: `https://${host}${path}`,

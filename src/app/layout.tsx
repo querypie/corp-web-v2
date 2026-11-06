@@ -9,6 +9,8 @@ import { defaultLocale, isLocale } from "@/constants/i18n";
 import { DOCUMENT_LOCALE_HEADER } from "@/features/routing/documentLocale";
 import { getRequestSiteOrigin } from "@/features/seo/requestUrl.server";
 import { themeInitializationScript } from "@/features/theme/themeScript";
+import { isPreviewSeoHost } from "@/features/seo/languages";
+import { getHomeMetadataDescription } from "@/copy/homeMetadata";
 import "../styles/globals.css";
 
 const jetBrainsMono = JetBrains_Mono({
@@ -44,10 +46,14 @@ const pretendardJp = localFont({
 });
 
 export async function generateMetadata(): Promise<Metadata> {
+  const origin = await getRequestSiteOrigin();
+  const requestLocale = (await headers()).get(DOCUMENT_LOCALE_HEADER);
+  const locale = requestLocale && isLocale(requestLocale) ? requestLocale : defaultLocale;
   return {
     title: siteTitle,
-    description: "QueryPie AI transforms how enterprises work with AI.",
-    metadataBase: await getRequestSiteOrigin(),
+    description: getHomeMetadataDescription(locale),
+    metadataBase: origin,
+    ...(isPreviewSeoHost(origin.hostname) ? { robots: { index: false, follow: true } } : {}),
     formatDetection: { telephone: false },
   };
 }

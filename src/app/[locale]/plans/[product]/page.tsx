@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import PlansPage from "@/components/pages/plans/PlansPage";
 import { getLocalePath, isLocale, type Locale } from "@/constants/i18n";
-import { getPlansPageCopy } from "@/copy/contentPages";
+import { getPlanSeoCopy } from "@/copy/seo";
 import { withDynamicOgImage } from "@/features/seo/metadata";
 
 const planProducts = ["aip", "acp"] as const;
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: PlansProductRouteProps): Prom
 
   if (!isLocale(locale) || !isPlanProduct(product)) return {};
 
-  const { metadataDescription, metadataTitle } = getPlansPageCopy(locale);
+  const { description: metadataDescription, title: metadataTitle } = getPlanSeoCopy(locale, product);
 
   return withDynamicOgImage({
     title: metadataTitle,

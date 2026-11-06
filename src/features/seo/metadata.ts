@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 import type { Locale } from "@/constants/i18n";
 import { ogImageCacheVersion } from "@/features/seo/ogImageConfig";
-import { getRequestPublicUrl } from "@/features/seo/requestUrl.server";
+import { getRequestPublicUrl, getRequestSiteOrigin } from "@/features/seo/requestUrl.server";
+import { getLanguageAlternates, getPageSeoLocales, isPreviewSeoHost } from "./languages";
 
 type DynamicOgImageOptions = {
   description?: string | null;
@@ -13,6 +14,8 @@ type DynamicOgImageOptions = {
     width?: number;
   };
   locale: Locale;
+  supportedLocales?: readonly Locale[];
+  contentLocale?: Locale;
   title: string;
 };
 
@@ -60,9 +63,17 @@ export async function withDynamicOgImage(
   metadata: Metadata,
   options: DynamicOgImageOptions,
 ): Promise<Metadata> {
-  const description = options.description ?? defaultOgDescription[options.locale];
+  const description = options.description?.trim() || metadata.description?.trim() || defaultOgDescription[options.locale];
   const imageUrl = createDynamicOgImageUrl({ ...options, description });
   const canonicalPath = getCanonicalUrl(metadata);
+  const origin = await getRequestSiteOrigin();
+  const pathname = canonicalPath ? new URL(canonicalPath, origin).pathname : undefined;
+  const supportedLocales = options.supportedLocales ?? (pathname ? getPageSeoLocales(pathname) : undefined);
+  const languages = pathname && supportedLocales
+    ? getLanguageAlternates(origin, pathname, supportedLocales)
+    : undefined;
+  const fallbackContent = options.contentLocale && options.contentLocale !== options.locale;
+  const noindex = isPreviewSeoHost(origin.hostname) || fallbackContent || (supportedLocales && !supportedLocales.includes(options.locale));
   const canonicalUrl = canonicalPath
     ? await getRequestPublicUrl(canonicalPath)
     : undefined;
@@ -79,15 +90,20 @@ export async function withDynamicOgImage(
 
   return {
     ...metadata,
-    description: metadata.description ?? description,
+    description: metadata.description?.trim() || description,
+    ...(noindex ? { robots: { follow: true, ...(typeof metadata.robots === "object" ? metadata.robots : {}), index: false } } : {}),
     alternates: canonicalUrl
       ? {
           ...metadata.alternates,
           canonical: canonicalUrl,
+          ...(languages ? { languages } : {}),
         }
       : metadata.alternates,
     openGraph: {
       ...metadata.openGraph,
+      type: metadata.openGraph && "type" in metadata.openGraph ? metadata.openGraph.type : "website",
+      siteName: "QueryPie AI",
+      locale: { en: "en_US", ko: "ko_KR", ja: "ja_JP" }[options.contentLocale ?? options.locale],
       title: options.title,
       description,
       url: openGraphUrl,

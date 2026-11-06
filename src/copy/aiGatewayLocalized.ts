@@ -1,6 +1,6 @@
 import type { Locale } from "@/constants/i18n";
 import { aiGatewayContentCopy } from "./aiGateway";
-import { aiGatewayVisualCopy } from "./japanAiSolutions";
+import { aiGatewayVisualCopy } from "./aiProducts.ja";
 
 type Content = typeof aiGatewayContentCopy;
 const en: Content = {

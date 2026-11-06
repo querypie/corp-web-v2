@@ -11,6 +11,17 @@ vi.mock("next/headers", () => ({
 }));
 
 describe("withDynamicOgImage", () => {
+  it("빈 설명을 보완하고 Preview의 검색 노출을 차단한다", async () => {
+    const metadata = await withDynamicOgImage(
+      { description: " ", alternates: { canonical: "/ja/acp" } },
+      { locale: "ja", title: "ACP", description: "" },
+    );
+    expect(metadata.description).toContain("企業");
+    expect(metadata.robots).toMatchObject({ index: false });
+    expect(metadata.openGraph).toMatchObject({ locale: "ja_JP", siteName: "QueryPie AI", type: "website" });
+    expect(metadata.alternates?.languages).toHaveProperty("ja", "https://stage-v2.querypie.ai/acp");
+  });
+
   it("현재 일본어 사이트 URL을 canonical과 og:url로 반영한다", async () => {
     const metadata = await withDynamicOgImage(
       {

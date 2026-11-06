@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 import HomePage from "@/components/pages/home/HomePage";
 import IntegrationBrandIcon from "@/components/sections/common/IntegrationBrandIcon";
 import { getLocalePath, type Locale } from "@/constants/i18n";
-import { integrationItems } from "@/components/pages/platforms/aip/integrations/integrationData";
+import { integrationItems } from "@/components/pages/products/aip/integrations/integrationData";
 import {
   compareDateIsoDesc,
   getContentThumbnailSrc,
@@ -146,7 +146,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         featureItems: [
           {
             action: {
-              href: getLocalePath(locale, "/platforms/aip"),
+              href: getOfferingHref(locale, "aip"),
               label: "Learn more",
             },
             body: [
@@ -197,7 +197,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           "management, visibility, policy controls, and audit logs.",
         ],
         mcpAction: {
-          href: getLocalePath(locale, "/platforms/aip/integrations"),
+          href: getOfferingHref(locale, "aip-integrations"),
           label: "See All Available AIP Integrations",
         },
         mcpItems,
@@ -261,7 +261,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         featureItems: [
           {
             action: {
-              href: getLocalePath(locale, "/platforms/aip"),
+              href: getOfferingHref(locale, "aip"),
               label: "자세히 보기",
             },
             body: [
@@ -312,7 +312,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           "감사 로그까지 함께 제공합니다.",
         ],
         mcpAction: {
-          href: getLocalePath(locale, "/platforms/aip/integrations"),
+          href: getOfferingHref(locale, "aip-integrations"),
           label: "사용 가능한 AIP 연동 모두 보기",
         },
         mcpItems,
@@ -379,7 +379,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
         featureItems: [
           {
             action: {
-              href: getLocalePath(locale, "/platforms/aip"),
+              href: getOfferingHref(locale, "aip"),
               label: "詳しく見る",
             },
             body: [
@@ -392,7 +392,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           },
           {
             action: {
-              href: getLocalePath(locale, "/platforms/acp"),
+              href: getOfferingHref(locale, "acp"),
               label: "詳しく見る",
             },
             body: [
@@ -444,7 +444,7 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
           "監査ログまで提供します。",
         ],
         mcpAction: {
-          href: getLocalePath(locale, "/platforms/aip/integrations"),
+          href: getOfferingHref(locale, "aip-integrations"),
           label: "利用可能なAIP連携をすべて見る",
         },
         mcpItems,
@@ -531,3 +531,4 @@ export async function getHomePageProps(locale: Locale): Promise<HomePageProps> {
     reviewTitle: copy.reviewTitle,
   };
 }
+import { getOfferingHref } from "@/features/offerings/routes";

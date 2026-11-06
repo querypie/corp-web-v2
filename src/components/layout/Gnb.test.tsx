@@ -19,11 +19,11 @@ describe("Gnb", () => {
     const nav = screen.getByRole("navigation", { name: "Global" });
     const platform = within(nav).getByRole("button", { name: platformLabel }).parentElement!;
     expect(within(platform).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      `/${locale}/platforms/acp`, `/${locale}/platforms/aip`, `/${locale}/solutions/ai-gateway`,
+      `/${locale}/acp`, `/${locale}/aip`, `/${locale}/ai-gateway`,
     ]);
     const solutions = within(nav).getByRole("button", { name: solutionsLabel }).parentElement!;
     expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      `/${locale}/solutions/penetration-testing`, `/${locale}/platforms/aip/fde-services`, `/${locale}/platforms/dlp`,
+      `/${locale}/penetration-testing`, `/${locale}/fde-services`, `/${locale}/dlp`,
     ]);
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
     for (const item of [...getPlatformSubItems(locale), ...getSolutionsSubItems(locale, { includeDlpPlatform: true })]) {
@@ -55,11 +55,11 @@ describe("Gnb", () => {
     ]);
     const platform = within(nav).getByRole("button", { name: "プラットフォーム" }).parentElement!;
     expect(within(platform).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      "/ja/platforms/aip", "/ja/platforms/acp", "/ja/solutions/ai-gateway",
+      "/ja/aip", "/ja/acp", "/ja/ai-gateway",
     ]);
     const solutions = within(nav).getByRole("button", { name: "ソリューション" }).parentElement!;
     expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      "/ja/solutions/penetration-testing", "/ja/solutions/local-llm", "/ja/platforms/aip/fde-services", "/ja/solutions/as400-cobol", "/ja/solutions/ai-crew", "/ja/solutions/ai-dashi",
+      "/ja/penetration-testing", "/ja/local-llm", "/ja/fde-services", "/ja/as400-cobol", "/ja/ai-crew", "/ja/ai-dashi",
     ]);
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
     expect(screen.getAllByRole("link", { name: "ペネトレーションテスト" })).toHaveLength(2);
@@ -109,7 +109,7 @@ describe("Gnb", () => {
     const dlpLinks = screen.getAllByRole("link", { name: "Data Loss Prevention (DLP)" });
     expect(dlpLinks).toHaveLength(2);
     for (const link of dlpLinks) {
-      expect(link).toHaveAttribute("href", "/en/platforms/dlp");
+      expect(link).toHaveAttribute("href", "/en/dlp");
     }
   });
 

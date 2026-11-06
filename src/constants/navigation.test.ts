@@ -15,9 +15,9 @@ import {
 describe("플랫폼과 일본 전용 솔루션", () => {
   it.each(["en", "ko", "ja"])("%s 플랫폼은 언어별 제품 순서로 연결한다", (locale) => {
     expect(getPlatformSubItems(locale).map((item) => item.href)).toEqual([
-      `/${locale}/platforms/${locale === "ja" ? "aip" : "acp"}`,
-      `/${locale}/platforms/${locale === "ja" ? "acp" : "aip"}`,
-      `/${locale}/solutions/ai-gateway`,
+      `/${locale}/${locale === "ja" ? "aip" : "acp"}`,
+      `/${locale}/${locale === "ja" ? "acp" : "aip"}`,
+      `/${locale}/ai-gateway`,
     ]);
     for (const item of getPlatformSubItems(locale)) {
       expect(getFooterHref(item.label, locale)).toBe(item.href);
@@ -30,19 +30,19 @@ describe("플랫폼과 일본 전용 솔루션", () => {
   ])("%s Preview 메뉴에는 DLP 제품 소개를 추가한다", (locale, label) => {
     const items = getSolutionsSubItems(locale, { includeDlpPlatform: true });
 
-    expect(items.at(-1)).toEqual({ label, href: `/${locale}/platforms/dlp` });
-    expect(getFooterHref(label, locale)).toBe(`/${locale}/platforms/dlp`);
+    expect(items.at(-1)).toEqual({ label, href: `/${locale}/dlp` });
+    expect(getFooterHref(label, locale)).toBe(`/${locale}/dlp`);
     expect(getPlatformSubItems(locale, { includeDlpPlatform: true }).map((item) => item.href))
-      .not.toContain(`/${locale}/platforms/dlp`);
+      .not.toContain(`/${locale}/dlp`);
     expect(getSolutionsSubItems(locale).map((item) => item.href))
-      .toEqual([`/${locale}/solutions/penetration-testing`, `/${locale}/platforms/aip/fde-services`]);
+      .toEqual([`/${locale}/penetration-testing`, `/${locale}/fde-services`]);
   });
 
   it("일본어 Preview 메뉴와 푸터에서는 DLP 제품 소개를 숨긴다", () => {
     expect(getPlatformSubItems("ja", { includeDlpPlatform: true }).map((item) => item.href)).toEqual([
-      "/ja/platforms/aip",
-      "/ja/platforms/acp",
-      "/ja/solutions/ai-gateway",
+      "/ja/aip",
+      "/ja/acp",
+      "/ja/ai-gateway",
     ]);
     expect(getShellMenuCopy("ja", { includeDlpPlatform: true }).footerSections[0].items)
       .not.toContain("データ損失防止 (DLP)");
@@ -50,12 +50,12 @@ describe("플랫폼과 일본 전용 솔루션", () => {
 
   it("일본어 솔루션은 모의 해킹을 첫 메뉴로 표시하고 QLM·QEV는 숨긴다", () => {
     expect(getSolutionsSubItems("ja")).toEqual([
-      { label: "ペネトレーションテスト", href: "/ja/solutions/penetration-testing" },
-      { label: "オンプレミスAI｜Local LLM", href: "/ja/solutions/local-llm" },
-      { label: "専任エンジニア｜FDEサービス", href: "/ja/platforms/aip/fde-services" },
-      { label: "AS/400・COBOLモダナイゼーション", href: "/ja/solutions/as400-cobol" },
-      { label: "社内業務効率化｜AI Crew", href: "/ja/solutions/ai-crew" },
-      { label: "自社サービスAI化｜AI Dashi", href: "/ja/solutions/ai-dashi" },
+      { label: "ペネトレーションテスト", href: "/ja/penetration-testing" },
+      { label: "オンプレミスAI｜Local LLM", href: "/ja/local-llm" },
+      { label: "専任エンジニア｜FDEサービス", href: "/ja/fde-services" },
+      { label: "AS/400・COBOLモダナイゼーション", href: "/ja/as400-cobol" },
+      { label: "社内業務効率化｜AI Crew", href: "/ja/ai-crew" },
+      { label: "自社サービスAI化｜AI Dashi", href: "/ja/ai-dashi" },
     ]);
   });
 });
@@ -188,19 +188,19 @@ describe("plans navigation", () => {
 
 describe("getFooterHref", () => {
   it("footer solutions 링크도 canonical solutions 경로를 사용한다", () => {
-    expect(getFooterHref("AI Platform (AIP)", "en")).toBe("/en/platforms/aip");
-    expect(getFooterHref("접근 제어 플랫폼 (ACP)", "ko")).toBe("/ko/platforms/acp");
-    expect(getFooterHref("AIプラットフォーム (AIP)", "ja")).toBe("/ja/platforms/aip");
-    expect(getFooterHref("社内業務効率化｜AI Crew", "ja")).toBe("/ja/solutions/ai-crew");
-    expect(getFooterHref("自社サービスAI化｜AI Dashi", "ja")).toBe("/ja/solutions/ai-dashi");
-    expect(getFooterHref("オンプレミスAI｜Local LLM", "ja")).toBe("/ja/solutions/local-llm");
-    expect(getFooterHref("AI Gateway (AIG)", "ja")).toBe("/ja/solutions/ai-gateway");
-    expect(getFooterHref("ペネトレーションテスト", "ja")).toBe("/ja/solutions/penetration-testing");
-    expect(getFooterHref("AS/400・COBOLモダナイゼーション", "ja")).toBe("/ja/solutions/as400-cobol");
-    expect(getFooterHref("Workplace Productivity | AI Crew", "en")).toBe("/en/solutions/ai-crew");
-    expect(getFooterHref("AI for Your Service | AI Dashi", "en")).toBe("/en/solutions/ai-dashi");
-    expect(getFooterHref("사내 업무 효율화 | AI Crew", "ko")).toBe("/ko/solutions/ai-crew");
-    expect(getFooterHref("자사 서비스 AI화 | AI Dashi", "ko")).toBe("/ko/solutions/ai-dashi");
+    expect(getFooterHref("AI Platform (AIP)", "en")).toBe("/en/aip");
+    expect(getFooterHref("접근 제어 플랫폼 (ACP)", "ko")).toBe("/ko/acp");
+    expect(getFooterHref("AIプラットフォーム (AIP)", "ja")).toBe("/ja/aip");
+    expect(getFooterHref("社内業務効率化｜AI Crew", "ja")).toBe("/ja/ai-crew");
+    expect(getFooterHref("自社サービスAI化｜AI Dashi", "ja")).toBe("/ja/ai-dashi");
+    expect(getFooterHref("オンプレミスAI｜Local LLM", "ja")).toBe("/ja/local-llm");
+    expect(getFooterHref("AI Gateway (AIG)", "ja")).toBe("/ja/ai-gateway");
+    expect(getFooterHref("ペネトレーションテスト", "ja")).toBe("/ja/penetration-testing");
+    expect(getFooterHref("AS/400・COBOLモダナイゼーション", "ja")).toBe("/ja/as400-cobol");
+    expect(getFooterHref("Workplace Productivity | AI Crew", "en")).toBe("/en/ai-crew");
+    expect(getFooterHref("AI for Your Service | AI Dashi", "en")).toBe("/en/ai-dashi");
+    expect(getFooterHref("사내 업무 효율화 | AI Crew", "ko")).toBe("/ko/ai-crew");
+    expect(getFooterHref("자사 서비스 AI화 | AI Dashi", "ko")).toBe("/ko/ai-dashi");
   });
 
   it("다국어 footer Demo / Resource 링크를 올바른 대상에 연결한다", () => {

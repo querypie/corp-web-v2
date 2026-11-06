@@ -139,10 +139,10 @@ export default function AboutUsPage({
         <div className={`flex w-full max-w-[1200px] flex-col ${pageSectionGapClassName}`}>
         {/* 회사 소개 상단 */}
         <div className="grid gap-5 sm:gap-6 md:grid-cols-2 md:gap-[30px]">
-          <div className="type-h1 text-fg">
-            <p className="m-0 text-mute">{title[0]}</p>
-            <p className="m-0">{title[1]}</p>
-          </div>
+          <h1 className="m-0 type-h1 text-fg">
+            <span className="block text-mute">{title[0]}</span>
+            <span className="block">{title[1]}</span>
+          </h1>
           <div className="flex flex-col gap-5 sm:gap-6 md:gap-[30px]">
             {companyDescription.map((paragraph) => (
               <p key={paragraph} className="m-0 type-body-lg text-fg">
