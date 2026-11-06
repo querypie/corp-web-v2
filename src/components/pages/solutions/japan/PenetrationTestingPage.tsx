@@ -1,4 +1,3 @@
-import { CircleCheck, Globe, Network, ShieldCheck } from "lucide-react";
 import Cta from "@/components/sections/Cta";
 import type { Locale } from "@/constants/i18n";
 import { getContactHref } from "@/features/contact/prefill";
@@ -7,13 +6,9 @@ import { penetrationTestingLocalizedCopy, pentestLocalizedMockCopy } from "@/cop
 import PentestExplorationMockup from "./PentestExplorationMockup";
 import PentestProcessDiagram from "./PentestProcessDiagram";
 import PentestDeliverables from "./PentestDeliverables";
-import PentestPlaceholder from "./PentestPlaceholder";
-import SolutionSectionHeading from "./SolutionSectionHeading";
+import PentestFeatures from "./PentestFeatures";
+import PentestCaseStudy from "./PentestCaseStudy";
 import styles from "./PenetrationTestingPage.module.css";
-
-function Heading({ content }: { content: { title: string; description: string } }) {
-  return <div className={styles.heading}><SolutionSectionHeading {...content} layout="split" /></div>;
-}
 
 export default function PenetrationTestingPage({ locale = "ja" }: { locale?: Locale }) {
   const copy = penetrationTestingLocalizedCopy[locale];
@@ -29,7 +24,7 @@ export default function PenetrationTestingPage({ locale = "ja" }: { locale?: Loc
 
     <section className={styles.band}>
       <div className={pageContentWidthClassName}>
-        <PentestPlaceholder locale={locale} />
+        <PentestFeatures locale={locale} />
       </div>
     </section>
 
@@ -39,8 +34,7 @@ export default function PenetrationTestingPage({ locale = "ja" }: { locale?: Loc
 
     <section className={styles.band}>
       <div className={pageContentWidthClassName}>
-      <Heading content={copy.process} />
-      <ol className={styles.process}>{copy.process.steps.map((step, i) => { const Icon = [Globe, ShieldCheck, Network, CircleCheck][i]; return <li key={step.title}><div className={styles.processTop}><span>0{i + 1}</span><span>{step.owner}</span></div><Icon aria-hidden="true" /><h3 className="mb-3 mt-5 type-h3">{step.title}</h3><p className="m-0 type-body-md text-mute">{step.body}</p></li>; })}</ol>
+        <PentestCaseStudy locale={locale} />
       </div>
     </section>
 

@@ -4,6 +4,7 @@ import PenetrationTestingPage from "./PenetrationTestingPage";
 import { pentestProcessCopy } from "@/copy/pentestProcess";
 import { pentestLocalizedMockCopy } from "@/copy/penetrationTestingLocalized";
 import { pentestDeliverablesCopy } from "@/copy/pentestDeliverables";
+import { pentestCaseStudyCopy } from "@/copy/pentestCaseStudy";
 
 describe("PenetrationTestingPage", () => {
   it.each(["ko", "en", "ja"] as const)("%s에서 에이전트 프로세스와 반복 검증을 설명한다", locale => {
@@ -65,13 +66,22 @@ describe("PenetrationTestingPage", () => {
     expect(node).toHaveAttribute("aria-pressed", "true");
     expect(node).toHaveAttribute("data-dimmed", "false");
   });
-  it("검증 결과와 진행 절차, 가격 없는 일본어 문의 동선을 제공한다", () => {
+  it.each(["ko", "en", "ja"] as const)("%s 실제 검증 사례에서 완료 조치와 대응 방안을 구분한다", locale => {
+    render(<PenetrationTestingPage locale={locale} />);
+    const copy = pentestCaseStudyCopy[locale];
+    const section = screen.getByRole("heading", { name: copy.title }).closest("section")!;
+    expect(within(section).getAllByRole("article")).toHaveLength(3);
+    expect(within(section).getByText(copy.description)).toBeInTheDocument();
+    expect(within(section).getAllByText(copy.visual.completed)).toHaveLength(2);
+    expect(within(section).getByText(copy.visual.proposed)).toBeInTheDocument();
+  });
+  it("검증 결과와 실제 사례, 가격 없는 일본어 문의 동선을 제공한다", () => {
     render(<PenetrationTestingPage />);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("AIが探し、攻撃し、");
-    for (const title of [pentestDeliverablesCopy.ja.title, "ご利用の流れ"]) {
+    for (const title of [pentestDeliverablesCopy.ja.title, pentestCaseStudyCopy.ja.title]) {
       expect(screen.getByRole("heading", { name: title, level: 2 })).toBeInTheDocument();
     }
-    for (const title of ["報告から修正・再検証へ", "安全な運用とデータ保護", "実際のサービスでの活用"]) {
+    for (const title of ["ご利用の流れ", "報告から修正・再検証へ", "安全な運用とデータ保護", "実際のサービスでの活用"]) {
       expect(screen.queryByRole("heading", { name: title, level: 2 })).not.toBeInTheDocument();
     }
     expect(screen.getByRole("link", { name: "お問い合わせ" })).toHaveAttribute("href", "/ja/contact-us?inquiry=ai-consulting&product=penetrationtest");
