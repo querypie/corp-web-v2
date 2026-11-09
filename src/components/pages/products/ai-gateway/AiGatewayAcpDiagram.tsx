@@ -3,6 +3,7 @@ import { Cpu, Database, Globe, Layers, Server, UserRound } from "lucide-react";
 import type { Locale } from "@/constants/i18n";
 import { aiGatewaySecurityCopy } from "@/copy/aiGatewaySecurity";
 import { aiGatewayArchitectureCopy } from "@/copy/aiGatewayLocalized";
+import AiGatewayLogo from "./AiGatewayLogo";
 import styles from "./AiGatewayAcpDiagram.module.css";
 
 const resourceIcons = [Database, Server, Layers, Globe];
@@ -27,7 +28,7 @@ export default function AiGatewayAcpDiagram({ locale }: { locale: Locale }) {
       </div>
       <div className={styles.modelLine} aria-hidden="true" />
       <div className={`${styles.node} ${styles.gateway}`}>
-        <img className={styles.gatewayLogo} src="/assets/icons/logo-AIG.svg" alt="" width={28} height={28} />
+        <AiGatewayLogo className={styles.gatewayLogo} />
         <h3 className="type-h3">AI Gateway</h3>
       </div>
       <div className={styles.mcp}>

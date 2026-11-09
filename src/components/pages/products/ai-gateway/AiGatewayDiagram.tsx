@@ -2,6 +2,7 @@ import { useId } from "react";
 import { Activity, Cloud, Cpu, KeyRound, Network, Plug, Server, ShieldCheck, Users } from "lucide-react";
 import type { Locale } from "@/constants/i18n";
 import { aiGatewayArchitectureCopy } from "@/copy/aiGatewayLocalized";
+import AiGatewayLogo from "./AiGatewayLogo";
 import styles from "./AiGatewayDiagram.module.css";
 
 const moduleIcons = [Network, Plug, ShieldCheck, Activity];
@@ -52,7 +53,7 @@ export default function AiGatewayDiagram({ locale = "ja" }: { locale?: Locale })
       <Connections mobile />
       <section className={styles.gateway}>
         <div className={styles.gatewayHeading}>
-          <img className={styles.gatewayLogo} src="/assets/icons/logo-AIG.svg" alt="" width={30} height={32} />
+          <AiGatewayLogo className={styles.gatewayLogo} />
           <h2 className="type-h2">AI Gateway</h2>
         </div>
         <p className={styles.gatewayKey}><KeyRound aria-hidden="true" />{copy.key}</p>

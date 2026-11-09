@@ -19,17 +19,20 @@
 .gateway {
   position: relative; z-index: 1; width: 100%; max-width: 300px; justify-self: center; aspect-ratio: 1; padding: 24px 20px; border-radius: 40px;
   border: 1px solid color-mix(in srgb, var(--color-brand) 32%, var(--color-border));
-  background: linear-gradient(160deg, var(--color-bg) 55%, color-mix(in srgb, var(--color-brand) 3%, var(--color-bg)));
-  box-shadow: 0 20px 44px -20px color-mix(in srgb, var(--color-fg) 24%, transparent), 0 0 90px 24px color-mix(in srgb, var(--color-brand) 12%, transparent);
+  background: var(--color-bg);
+  box-shadow: 0 2px 5px rgb(0 0 0 / .025), 0 12px 30px -15px rgb(0 0 0 / .09), 0 0 56px 12px color-mix(in srgb, var(--color-brand) 22%, transparent);
 }
 .gatewayHeading { display: flex; align-items: center; gap: 12px; }
-.gatewayLogo { width: var(--aig-icon-size); height: var(--aig-icon-size); object-fit: contain; }
+.gatewayLogo { width: var(--aig-icon-size); height: var(--aig-icon-size); color: var(--color-fg); }
 :global(:root[data-theme="dark"]) .diagram img[src$="llm-gpt-color.svg"],
 :global(:root[data-theme="dark"]) .diagram img[src$="agent-cursor.webp"],
 :global(:root[data-theme="dark"]) .diagram img[src$="agent-pi.webp"] { filter: invert(1); }
 .gateway h2 { margin: 0; }
 :global(:root[data-theme="dark"]) .node {
   box-shadow: 0 3px 7px rgb(0 0 0 / .2), 0 14px 28px -10px rgb(0 0 0 / .45);
+}
+:global(:root[data-theme="dark"]) .gateway {
+  box-shadow: 0 3px 7px rgb(0 0 0 / .2), 0 14px 28px -10px rgb(0 0 0 / .45), 0 0 56px 12px color-mix(in srgb, var(--color-brand) 22%, transparent);
 }
 .gatewayKey { display: flex; align-items: center; justify-content: center; gap: 6px; margin: 10px 0 28px; font-size: 11px; color: var(--color-fg); }
 .gatewayKey svg { width: 14px; height: 14px; flex: none; stroke-width: 1.5; color: var(--color-brand); }

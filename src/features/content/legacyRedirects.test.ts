@@ -18,6 +18,20 @@ async function responseFor(host: string, path: string) {
 }
 
 describe("콘텐츠 레거시 폴더 URL", () => {
+  for (const host of ["www.querypie.com", "querypie.ai", "stage-v2.querypie.ai"]) {
+    for (const prefix of ["", "/en", "/ko", "/ja"]) {
+      it(`${host}${prefix}의 LOVO 이전 주소를 고객 사례로 직접 복구한다`, async () => {
+        for (const source of ["/demo/use-cases/2/lovo-ai-tom-lee", "/demo/use-cases/lovo-ai-tom-lee", "/demo/aip/lovo-ai-tom-lee"]) {
+          const response = await responseFor(host, `${prefix}${source}?utm_source=test`);
+          expect(response.status).toBe(308);
+          expect(response.headers.get("location")).toBe(
+            `https://${host}${prefix}${publicCategoryPaths.resources.voc}/lovo-ai-tom-lee?utm_source=test`,
+          );
+        }
+      });
+    }
+  }
+
   for (const host of ["querypie.ai", "stage-v2.querypie.ai", "www.querypie.com"]) {
     for (const prefix of ["", "/en", "/ko", "/ja"]) {
       it.each(categories)(`${host}${prefix}%s의 상세·다운로드·PDF 폴더를 제거한다`, async (source, destination) => {

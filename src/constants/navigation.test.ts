@@ -143,7 +143,7 @@ describe("getShellMenuCopy", () => {
       { title: "솔루션", items: ["모의 해킹 서비스", "FDE 서비스"] },
       { title: "데모", items: ["ACP 활용", "AIP 활용"] },
       { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "ACP 커뮤니티 에디션", "ACP 문서", "AIP 시작하기", "AIP 문서"] },
-      { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
+      { title: "회사", items: ["회사 소개", "인증", "Trust Center", "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: ["ACP", "AIP"] },
     ]);
     expect(getShellMenuCopy("ja").footerSections).toEqual([
@@ -151,7 +151,7 @@ describe("getShellMenuCopy", () => {
       { title: "ソリューション", items: ["ペネトレーションテスト", "オンプレミスAI｜Local LLM", "専任エンジニア｜FDEサービス", "AS/400・COBOLモダナイゼーション", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"] },
       { title: "デモ", items: ["AIP機能", "ACP機能"] },
       { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
-      { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ"] },
+      { title: "会社", items: ["会社概要", "認証", "Trust Center", "ニュース", "お問い合わせ"] },
     ]);
   });
 

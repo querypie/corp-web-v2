@@ -34,6 +34,17 @@ const legacyFolderRedirects = legacyContentBases.flatMap((basePath) =>
 );
 
 export const legacyContentRedirects = [
+  // Recover the customer story before generic use-case redirects send it to AIP.
+  ...["/:locale(en|ko|ja)", ""].flatMap((prefix) =>
+    [
+      "/demo/use-cases/:legacyFolder/lovo-ai-tom-lee",
+      "/demo/use-cases/lovo-ai-tom-lee",
+      "/demo/aip/lovo-ai-tom-lee",
+    ].map((source) => ({
+      source: `${prefix}${source}`,
+      destination: `${prefix ? "/:locale" : ""}${publicCategoryPaths.resources.voc}/lovo-ai-tom-lee`,
+    })),
+  ),
   {
     source: "/admin/documentation/:path*",
     destination: "/admin/resources/:path*",

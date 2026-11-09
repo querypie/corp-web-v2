@@ -7,9 +7,9 @@
 :global(:root[data-theme="dark"]) :is(.acp, .models, .resources > div, .user) {
   box-shadow: 0 3px 7px rgb(0 0 0 / .2), 0 14px 28px -10px rgb(0 0 0 / .45);
 }
-.gateway { grid-column: 3; grid-row: 3; border: 1px solid color-mix(in srgb, var(--color-brand) 32%, var(--color-border)); background: linear-gradient(160deg, var(--color-bg) 55%, color-mix(in srgb, var(--color-brand) 3%, var(--color-bg))); box-shadow: 0 20px 44px -20px color-mix(in srgb, var(--color-fg) 24%, transparent), 0 0 90px 24px color-mix(in srgb, var(--color-brand) 12%, transparent); }
-.gatewayLogo { color-scheme: light; }
-:global(:root[data-theme="dark"]) .gatewayLogo { color-scheme: dark; }
+.gateway { grid-column: 3; grid-row: 3; border: 1px solid color-mix(in srgb, var(--color-brand) 32%, var(--color-border)); background: var(--color-bg); box-shadow: 0 2px 5px rgb(0 0 0 / .025), 0 12px 30px -15px rgb(0 0 0 / .09), 0 0 56px 12px color-mix(in srgb, var(--color-brand) 22%, transparent); }
+:global(:root[data-theme="dark"]) .gateway { box-shadow: 0 3px 7px rgb(0 0 0 / .2), 0 14px 28px -10px rgb(0 0 0 / .45), 0 0 56px 12px color-mix(in srgb, var(--color-brand) 22%, transparent); }
+.gatewayLogo { width: 28px; height: 28px; color: var(--color-fg); }
 .acp { grid-column: 5; grid-row: 3; }
 .acp > img { width: calc(36px * 40 / 46); height: 36px; }
 .models { grid-column: 3; grid-row: 1; height: 100%; border-radius: 22px; gap: 16px; padding: 16px 12px; }
