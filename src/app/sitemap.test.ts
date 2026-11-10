@@ -27,8 +27,10 @@ describe("sitemap route", () => {
 
     expect(urls).toContain("https://www.querypie.com/en");
     expect(urls).toContain("https://www.querypie.com/ko");
+    expect(urls).toContain("https://www.querypie.com/ko/community-license");
+    expect(urls).toContain("https://www.querypie.com/en/plans/aip");
     expect(urls).not.toContain("https://www.querypie.com/ja");
-    expect(urls).not.toContain("https://www.querypie.com/ja/solutions/as400-cobol");
+    expect(urls).not.toContain("https://www.querypie.com/ja/as400-cobol");
   });
 
   it("일본어 전용 사이트에서는 일본어 URL만 노출한다", async () => {
@@ -40,7 +42,8 @@ describe("sitemap route", () => {
     const urls = (await sitemap()).map((entry) => entry.url);
 
     expect(urls).toContain("https://stage-v2.querypie.ai/");
-    expect(urls).toContain("https://stage-v2.querypie.ai/solutions/as400-cobol");
+    expect(urls).toContain("https://stage-v2.querypie.ai/as400-cobol");
+    expect(urls).not.toContain("https://stage-v2.querypie.ai/plans/aip");
     expect(urls.every((url) => !new URL(url).pathname.startsWith("/ja"))).toBe(true);
   });
 });

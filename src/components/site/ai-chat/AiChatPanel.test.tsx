@@ -58,7 +58,7 @@ describe("AI 제품 상담", () => {
   });
 
   it("참고자료 제목이 전체 URL이면 URL만 표시하고 확인한 언어 경로를 보존한다", async () => {
-    const url = "https://www.querypie.com/en/platforms/aip";
+    const url = "https://www.querypie.com/en/aip";
     vi.mocked(fetch).mockResolvedValueOnce(new Response(JSON.stringify({ ...reply, sources: [{ title: url, url }] })));
     render(<AiChatPanel locale="ko" onClose={vi.fn()} open />);
     fireEvent.change(screen.getByRole("textbox"), { target: { value: "AIP 문서" } });

@@ -1,6 +1,6 @@
 import { fireEvent, render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { getPlatformSubItems } from "@/constants/navigation";
+import { getPlatformSubItems, getSolutionsSubItems } from "@/constants/navigation";
 import Gnb from "./Gnb";
 
 const routerPush = vi.fn();
@@ -11,6 +11,26 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("Gnb", () => {
+  it.each([
+    ["en", "Platform", "Solutions"],
+    ["ko", "플랫폼", "솔루션"],
+  ])("%s GNB는 AIG를 플랫폼 세 번째에, FDE·DLP를 솔루션에 표시한다", (locale, platformLabel, solutionsLabel) => {
+    render(<Gnb locale={locale} solutionItems={getSolutionsSubItems(locale, { includeDlpPlatform: true })} />);
+    const nav = screen.getByRole("navigation", { name: "Global" });
+    const platform = within(nav).getByRole("button", { name: platformLabel }).parentElement!;
+    expect(within(platform).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
+      `/${locale}/acp`, `/${locale}/aip`, `/${locale}/ai-gateway`,
+    ]);
+    const solutions = within(nav).getByRole("button", { name: solutionsLabel }).parentElement!;
+    expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
+      `/${locale}/penetration-testing`, `/${locale}/fde-services`, `/${locale}/dlp`,
+    ]);
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+    for (const item of [...getPlatformSubItems(locale), ...getSolutionsSubItems(locale, { includeDlpPlatform: true })]) {
+      expect(screen.getAllByRole("link", { name: item.label })).toHaveLength(2);
+    }
+  });
+
   it.each([
     ["en", "View Pricing", "/en/plans/acp"],
     ["ko", "가격 알아보기", "/ko/plans/acp"],
@@ -35,14 +55,18 @@ describe("Gnb", () => {
     ]);
     const platform = within(nav).getByRole("button", { name: "プラットフォーム" }).parentElement!;
     expect(within(platform).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      "/ja/platforms/aip", "/ja/platforms/acp", "/ja/platforms/aip/fde-services",
+      "/ja/aip", "/ja/acp", "/ja/ai-gateway",
     ]);
     const solutions = within(nav).getByRole("button", { name: "ソリューション" }).parentElement!;
     expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      "/ja/solutions/ai-crew", "/ja/solutions/ai-dashi", "/ja/solutions/local-llm", "/ja/solutions/as400-cobol",
+      "/ja/penetration-testing", "/ja/local-llm", "/ja/fde-services", "/ja/as400-cobol", "/ja/ai-crew", "/ja/ai-dashi",
     ]);
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
-    expect(screen.getAllByRole("link", { name: "FDEサービス" })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "ペネトレーションテスト" })).toHaveLength(2);
+    expect(screen.queryByRole("link", { name: "QueryPie LLM｜QLM" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "QueryPie Decision Model｜QEV" })).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "専任エンジニア｜FDEサービス" })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "AI Gateway (AIG)" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "オンプレミスAI｜Local LLM" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "AS/400・COBOLモダナイゼーション" })).toHaveLength(2);
   });
@@ -53,21 +77,21 @@ describe("Gnb", () => {
   });
 
   it("상위 메뉴와 데모·리소스 팝오버를 요청한 구조로 노출한다", () => {
-    render(<Gnb locale="ko" items={["플랫폼", "데모", "리소스", "회사", "가격 · 플랜"]} />);
+    render(<Gnb locale="ko" />);
 
     const globalNav = screen.getByRole("navigation", { name: "Global" });
     const topLevelLabels = Array.from(globalNav.children).map(
       (item) => (item.matches("button, a") ? item : item.querySelector(":scope > button, :scope > a"))?.textContent,
     );
 
-    expect(topLevelLabels).toEqual(["플랫폼", "데모", "리소스", "회사", "가격 · 플랜"]);
+    expect(topLevelLabels).toEqual(["플랫폼", "솔루션", "데모", "리소스", "회사", "가격 · 플랜"]);
     expect(screen.getByRole("link", { name: "AIP 활용" })).toHaveAttribute("href", "/ko/demo/aip");
     expect(screen.getByRole("link", { name: "ACP 활용" })).toHaveAttribute("href", "/ko/demo/acp");
     expect(screen.queryByRole("link", { name: "활용 사례" })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "고객의 목소리" })).toHaveAttribute("href", "/ko/voc");
   });
 
-  it("서버가 전달한 Preview 플랫폼 메뉴를 데스크톱과 모바일에 표시한다", () => {
+  it("서버가 전달한 Preview 솔루션 메뉴를 데스크톱과 모바일에 표시한다", () => {
     const { unmount } = render(<Gnb locale="en" />);
 
     expect(screen.queryByRole("link", { name: "Data Loss Prevention (DLP)" })).not.toBeInTheDocument();
@@ -77,6 +101,7 @@ describe("Gnb", () => {
       <Gnb
         locale="en"
         platformItems={getPlatformSubItems("en", { includeDlpPlatform: true })}
+        solutionItems={getSolutionsSubItems("en", { includeDlpPlatform: true })}
       />,
     );
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
@@ -84,7 +109,7 @@ describe("Gnb", () => {
     const dlpLinks = screen.getAllByRole("link", { name: "Data Loss Prevention (DLP)" });
     expect(dlpLinks).toHaveLength(2);
     for (const link of dlpLinks) {
-      expect(link).toHaveAttribute("href", "/en/platforms/dlp");
+      expect(link).toHaveAttribute("href", "/en/dlp");
     }
   });
 
@@ -125,7 +150,7 @@ describe("Gnb", () => {
 
   it("locale별 공개 메뉴 노출 규칙을 적용한다", () => {
     const { rerender } = render(
-      <Gnb locale="en" items={["Platform", "Demo", "Resource", "Company", "Plans"]} />,
+      <Gnb locale="en" />,
     );
 
     expect(screen.queryByText("Workplace Productivity | AI Crew")).not.toBeInTheDocument();

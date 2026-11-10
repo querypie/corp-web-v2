@@ -1,3 +1,5 @@
+import { getOfferingHref } from "@/features/offerings/routes";
+import { trustCenterCopy, trustCenterHref } from "@/copy/trustCenter";
 import { getLocalePath, type Locale } from "./i18n";
 import {
   demoCategoryConfigs,
@@ -6,10 +8,10 @@ import {
   getCategoryLabel,
 } from "@/features/content/config";
 import { getPublicCategoryHref } from "@/features/content/publicPaths";
-import { getDlpPlatformHref, getPlatformHref } from "@/features/platforms/routes";
-import { getSolutionHref } from "@/features/solutions/routes";
 import { localLlmMenuLabel } from "@/copy/localLlm";
 import { as400CobolMenuLabel } from "@/copy/as400Cobol";
+import { aiProductsCopy } from "@/copy/aiProducts";
+import { penetrationTestingMenuLabel, penetrationTestingMenuLabels } from "@/copy/penetrationTestingMenu";
 
 export type NavigationSubItem = {
   href: string;
@@ -39,10 +41,10 @@ export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = 
     ja: ["クッキー設定", "利用規約", "プライバシーポリシー"],
   }[locale] ?? ["Cookie Preference", "Terms of Service", "Privacy Policy"];
   const navItems = {
-    en: ["Platform", "Demo", "Resource", "Company", "Plans"],
-    ko: ["플랫폼", "데모", "리소스", "회사", "가격 · 플랜"],
+    en: ["Platform", "Solutions", "Demo", "Resource", "Company", "Plans"],
+    ko: ["플랫폼", "솔루션", "데모", "리소스", "회사", "가격 · 플랜"],
     ja: ["プラットフォーム", "ソリューション", "デモ", "リソース", "会社"],
-  }[locale] ?? ["Platform", "Demo", "Resource", "Company", "Plans"];
+  }[locale] ?? ["Platform", "Solutions", "Demo", "Resource", "Company", "Plans"];
   const navActionLabel = {
     en: "View Pricing",
     ko: "가격 알아보기",
@@ -51,16 +53,18 @@ export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = 
   const footerSections = {
     en: [
       { title: "Platform", items: getPlatformSubItems("en", options).map((item) => item.label) },
+      { title: "Solutions", items: getSolutionsSubItems("en", options).map((item) => item.label) },
       { title: "Demo", items: getDemoSubItems("en").map((item) => item.label) },
       { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "ACP Community Edition", "ACP Docs", "Try AIP Now", "AIP Docs"] },
-      { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
+      { title: "Company", items: ["About Us", "Certifications", trustCenterCopy.en.label, "News", "Contact Us"] },
       { title: "Plans", items: getPlansSubItems("en").map((item) => item.label) },
     ],
     ko: [
       { title: "플랫폼", items: getPlatformSubItems("ko", options).map((item) => item.label) },
+      { title: "솔루션", items: getSolutionsSubItems("ko", options).map((item) => item.label) },
       { title: "데모", items: getDemoSubItems("ko").map((item) => item.label) },
       { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "ACP 커뮤니티 에디션", "ACP 문서", "AIP 시작하기", "AIP 문서"] },
-      { title: "회사", items: ["회사 소개", "인증", "뉴스", "문의하기"] },
+      { title: "회사", items: ["회사 소개", "인증", trustCenterCopy.ko.label, "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: getPlansSubItems("ko").map((item) => item.label) },
     ],
     ja: [
@@ -68,13 +72,14 @@ export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = 
       { title: "ソリューション", items: getSolutionsSubItems("ja").map((item) => item.label) },
       { title: "デモ", items: ["AIP機能", "ACP機能"] },
       { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
-      { title: "会社", items: ["会社概要", "認証", "ニュース", "お問い合わせ"] },
+      { title: "会社", items: ["会社概要", "認証", trustCenterCopy.ja.label, "ニュース", "お問い合わせ"] },
     ],
   }[locale] ?? [
     { title: "Platform", items: getPlatformSubItems("en", options).map((item) => item.label) },
+    { title: "Solutions", items: getSolutionsSubItems("en", options).map((item) => item.label) },
     { title: "Demo", items: getDemoSubItems("en").map((item) => item.label) },
     { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "ACP Community Edition", "ACP Docs", "Try AIP Now", "AIP Docs"] },
-    { title: "Company", items: ["About Us", "Certifications", "News", "Contact Us"] },
+    { title: "Company", items: ["About Us", "Certifications", trustCenterCopy.en.label, "News", "Contact Us"] },
     { title: "Plans", items: getPlansSubItems("en").map((item) => item.label) },
   ];
 
@@ -88,7 +93,7 @@ export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = 
 
 export function getPlatformSubItems(
   locale: string,
-  { includeDlpPlatform = false }: PlatformMenuOptions = {},
+  _options: PlatformMenuOptions = {},
 ): NavigationSubItem[] {
   const copy = {
     en: ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services", "Data Loss Prevention (DLP)"],
@@ -97,30 +102,47 @@ export function getPlatformSubItems(
   }[locale] ?? ["AI Platform (AIP)", "Access Control Platform (ACP)", "FDE Services", "Data Loss Prevention (DLP)"];
 
   const items = [
-    { label: copy[0], href: getPlatformHref(locale as Locale, "aip") },
-    { label: copy[1], href: getPlatformHref(locale as Locale, "acp") },
-    { label: copy[2], href: getPlatformHref(locale as Locale, "fde-services") },
+    { label: copy[0], href: getOfferingHref(locale as Locale, "aip") },
+    { label: copy[1], href: getOfferingHref(locale as Locale, "acp") },
   ];
+
+  items.push({ label: aiProductsCopy[locale as Locale]["ai-gateway"].menuLabel, href: getOfferingHref(locale as Locale, "ai-gateway") });
 
   if (locale === "en" || locale === "ko") {
     [items[0], items[1]] = [items[1], items[0]];
   }
 
-  if (includeDlpPlatform && locale !== "ja") {
-    items.push({ label: copy[3], href: getDlpPlatformHref(locale as Locale) });
-  }
-
   return items;
 }
 
-export function getSolutionsSubItems(locale: string): NavigationSubItem[] {
-  if (locale !== "ja") return [];
+export function getSolutionsSubItems(
+  locale: string,
+  { includeDlpPlatform = false }: PlatformMenuOptions = {},
+): NavigationSubItem[] {
+  if (locale !== "ja") {
+    const items = [{
+      label: locale === "ko" ? penetrationTestingMenuLabels.ko : penetrationTestingMenuLabels.en,
+      href: getOfferingHref(locale as Locale, "penetration-testing"),
+    }, {
+      label: locale === "ko" ? "FDE 서비스" : "FDE Services",
+      href: getOfferingHref(locale as Locale, "fde-services"),
+    }];
+    if (includeDlpPlatform) {
+      items.push({
+        label: locale === "ko" ? "데이터 손실 방지 (DLP)" : "Data Loss Prevention (DLP)",
+        href: getOfferingHref(locale as Locale, "dlp"),
+      });
+    }
+    return items;
+  }
 
   return [
-    { label: "社内業務効率化｜AI Crew", href: getSolutionHref(locale, "ai-crew") },
-    { label: "自社サービスAI化｜AI Dashi", href: getSolutionHref(locale, "ai-dashi") },
-    { label: localLlmMenuLabel, href: getSolutionHref(locale, "local-llm") },
-    { label: as400CobolMenuLabel, href: getSolutionHref(locale, "as400-cobol") },
+    { label: penetrationTestingMenuLabel, href: getOfferingHref(locale, "penetration-testing") },
+    { label: localLlmMenuLabel, href: getOfferingHref(locale, "local-llm") },
+    { label: "専任エンジニア｜FDEサービス", href: getOfferingHref(locale as Locale, "fde-services") },
+    { label: as400CobolMenuLabel, href: getOfferingHref(locale, "as400-cobol") },
+    { label: "社内業務効率化｜AI Crew", href: getOfferingHref(locale, "ai-crew") },
+    { label: "自社サービスAI化｜AI Dashi", href: getOfferingHref(locale, "ai-dashi") },
   ];
 }
 
@@ -232,12 +254,15 @@ export function getPrimaryNavHref(item: string, locale: string) {
 }
 
 export function getFooterHref(item: string, locale: string) {
-  if (item === "FDE Services" || item === "FDE 서비스" || item === "FDEサービス") {
-    return getPlatformHref(locale as Locale, "fde-services");
+  if (Object.values(trustCenterCopy).some(copy => copy.label === item)) {
+    return trustCenterHref;
+  }
+  if (item === "FDE Services" || item === "FDE 서비스" || item === "FDEサービス" || item === "専任エンジニア｜FDE" || item === "専任エンジニア｜FDEサービス") {
+    return getOfferingHref(locale as Locale, "fde-services");
   }
 
   if (item === "Data Loss Prevention (DLP)" || item === "데이터 손실 방지 (DLP)" || item === "データ損失防止 (DLP)") {
-    return getDlpPlatformHref(locale as Locale);
+    return getOfferingHref(locale as Locale, "dlp");
   }
 
   if (item === "AIP") {
@@ -285,27 +310,35 @@ export function getFooterHref(item: string, locale: string) {
   }
 
   if (item === "AI Platform (AIP)" || item === "AI 플랫폼 (AIP)" || item === "AIプラットフォーム (AIP)") {
-    return getPlatformHref(locale as Locale, "aip");
+    return getOfferingHref(locale as Locale, "aip");
   }
 
   if (item === "Access Control Platform (ACP)" || item === "접근 제어 플랫폼 (ACP)" || item === "アクセス制御プラットフォーム (ACP)") {
-    return getPlatformHref(locale as Locale, "acp");
+    return getOfferingHref(locale as Locale, "acp");
   }
 
   if (item === "Workplace Productivity | AI Crew" || item === "사내 업무 효율화 | AI Crew" || item === "社内業務効率化｜AI Crew") {
-    return getSolutionHref(locale as Locale, "ai-crew");
+    return getOfferingHref(locale as Locale, "ai-crew");
   }
 
   if (item === "AI for Your Service | AI Dashi" || item === "자사 서비스 AI화 | AI Dashi" || item === "自社サービスAI化｜AI Dashi") {
-    return getSolutionHref(locale as Locale, "ai-dashi");
+    return getOfferingHref(locale as Locale, "ai-dashi");
   }
 
   if (item === localLlmMenuLabel && locale === "ja") {
-    return getSolutionHref(locale, "local-llm");
+    return getOfferingHref(locale, "local-llm");
+  }
+
+  if (item === aiProductsCopy[locale as Locale]["ai-gateway"].menuLabel) {
+    return getOfferingHref(locale as Locale, "ai-gateway");
+  }
+
+  if (Object.values(penetrationTestingMenuLabels).includes(item)) {
+    return getOfferingHref(locale as Locale, "penetration-testing");
   }
 
   if (item === as400CobolMenuLabel && locale === "ja") {
-    return getSolutionHref(locale, "as400-cobol");
+    return getOfferingHref(locale, "as400-cobol");
   }
 
   if (item === "About Us" || item === "회사 소개" || item === "会社概要") {

@@ -177,11 +177,14 @@ export async function generateMetadata({ params }: DocsDetailRouteProps): Promis
   return withDynamicOgImage({
     title,
     description,
+    openGraph: { type: "article", ...(currentEntry.dateIso && !Number.isNaN(Date.parse(currentEntry.dateIso)) ? { publishedTime: currentEntry.dateIso } : {}), ...(currentEntry.authorName ? { authors: [currentEntry.authorName] } : {}) },
     alternates: {
       canonical: getPublicDetailHref("resources", locale, resolvedSlug, currentEntry.categorySlug),
     },
   }, {
     locale,
+    supportedLocales: currentEntry.visibleLocales,
+    contentLocale: getResolvedContentLocale(currentEntry, locale),
     title,
     description,
     image: {

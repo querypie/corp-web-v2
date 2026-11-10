@@ -21,6 +21,7 @@ type CtaProps = {
   secondaryActionLabel?: string;
   secondaryActionHref?: string;
   secondaryActionVariant?: ButtonVariant;
+  preserveActionOrder?: boolean;
   title?: ReactNode;
 };
 
@@ -74,6 +75,7 @@ export default function Cta({
   secondaryActionHref,
   secondaryActionLabel,
   secondaryActionVariant = "secondary",
+  preserveActionOrder = false,
   title,
 }: CtaProps) {
   const defaultCopy = defaultCopyByLocale[locale];
@@ -99,7 +101,7 @@ export default function Cta({
       styles: secondaryStyles,
     }] : []),
   ];
-  if (locale === "en" || locale === "ko") actions.reverse();
+  if (!preserveActionOrder && (locale === "en" || locale === "ko")) actions.reverse();
   const heading = (
     <div className="min-w-full type-h1">
       {hideEyebrow ? null : <p className="mb-0 text-mute">{eyebrow ?? defaultCopy.eyebrow}</p>}
@@ -140,8 +142,8 @@ export default function Cta({
               )}
               href={action.href}
               key={action.key}
-              rel="noreferrer noopener"
-              target="_blank"
+              rel={/^(https?:)?\/\//i.test(action.href) ? "noreferrer noopener" : undefined}
+              target={/^(https?:)?\/\//i.test(action.href) ? "_blank" : undefined}
             >
               <span className="inline-flex items-center justify-center gap-2 text-center">
                 {action.label}

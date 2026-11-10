@@ -1,3 +1,5 @@
+import { getOfferingHref } from "@/features/offerings/routes";
+import { offeringEntries } from "@/constants/offerings";
 import type { MetadataRoute } from "next";
 
 import { getLocalePath, type Locale } from "@/constants/i18n";
@@ -5,7 +7,6 @@ import { readContentState } from "@/features/content/contentState.server";
 import { getPublicDetailHref, getPublicListHref, isPublishedContentVisible } from "@/features/content/data";
 import { getPublicSitePathname } from "@/features/routing/siteDomainRouting";
 import { getRequestSiteOrigin } from "@/features/seo/requestUrl.server";
-import { getSolutionHref } from "@/features/solutions/routes";
 
 function absolute(path: string, origin: URL) {
   const url = new URL(path, origin);
@@ -50,11 +51,13 @@ export async function createSiteSitemap(
     ...perLocale("/about-us", origin, sitemapLocales),
     ...perLocale("/contact-us", origin, sitemapLocales),
     ...perLocale("/apps/slack", origin, sitemapLocales),
-    ...perLocale("/plans/aip", origin, sitemapLocales),
-    ...perLocale("/plans/acp", origin, sitemapLocales),
-    ...(sitemapLocales.includes("ja")
-      ? [{ url: absolute(getSolutionHref("ja", "as400-cobol"), origin) }]
-      : []),
+    ...perLocale("/community-license", origin, sitemapLocales),
+    ...perLocale("/plans/aip", origin, sitemapLocales.filter(locale => locale !== "ja")),
+    ...perLocale("/plans/acp", origin, sitemapLocales.filter(locale => locale !== "ja")),
+    ...offeringEntries.filter(entry => entry.sitemap !== false).flatMap(entry =>
+      sitemapLocales.filter(locale => !entry.locales || entry.locales.includes(locale)).map(locale => ({
+        url: absolute(getOfferingHref(locale, entry.id), origin),
+      }))),
   ];
 
   const demoEntries = sitemapLocales.flatMap((locale) =>

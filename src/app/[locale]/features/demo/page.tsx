@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { isLocale } from "@/constants/i18n";
 import DemoListClientPage from "@/components/pages/demo/DemoListClientPage";
 import { getDemoPageCopy } from "@/copy/contentPages";
+import { getCategorySeoCopy } from "@/copy/seo";
 import {
   demoCategoryConfigs,
   getCategoryLabel,
@@ -69,9 +70,10 @@ export async function generateMetadata({ params, searchParams }: Props): Promise
 
   if (!isLocale(locale)) return {};
 
-  const { metadataDescription, metadataTitle } = getDemoPageCopy(locale);
   const selectedCategory: DemoCategorySlug =
     isDemoCategorySlug(category) && category !== "all" ? category : "all";
+
+  const { metadataDescription, metadataTitle } = getCategorySeoCopy(locale, selectedCategory, getCategoryLabel(demoCategoryConfigs, selectedCategory, locale), getDemoPageCopy(locale));
 
   return withDynamicOgImage({
     title: metadataTitle,

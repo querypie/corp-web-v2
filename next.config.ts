@@ -2,6 +2,7 @@ import type { NextConfig } from "next";
 import { legacyContentRedirects } from "./src/features/content/legacyRedirects";
 import { publicCategoryPaths } from "./src/features/content/publicPathConfig";
 import { koEnLegacyRedirects } from "./src/features/routing/koEnLegacyRedirects";
+import { offeringRedirects } from "./src/features/routing/offeringRedirects";
 import { getSiteDomainRedirects, getSiteDomainRewrites } from "./src/features/routing/siteDomainRouting";
 
 const nextConfig: NextConfig = {
@@ -45,16 +46,7 @@ const nextConfig: NextConfig = {
         destination: "/assets/pages/platforms/:path*",
         permanent: true,
       },
-      {
-        source: "/:locale(en|ko|ja)/solutions/:platform(aip|acp)/:path*",
-        destination: "/:locale/platforms/:platform/:path*",
-        permanent: true,
-      },
-      {
-        source: "/solutions/:platform(aip|acp)/:path*",
-        destination: "/platforms/:platform/:path*",
-        permanent: true,
-      },
+      ...offeringRedirects,
       ...koEnLegacyRedirects,
       ...legacyContentRedirects.map((redirect) => ({
         ...redirect,

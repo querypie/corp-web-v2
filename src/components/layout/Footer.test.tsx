@@ -1,9 +1,25 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import { getShellMenuCopy } from "@/constants/navigation";
 import Footer from "./Footer";
 
 describe("Footer", () => {
+  it.each([
+    ["en", "Platform", "Solutions"],
+    ["ko", "플랫폼", "솔루션"],
+  ])("%s 푸터에서 AIG는 플랫폼에, FDE·DLP는 솔루션에 표시한다", (locale, platformLabel, solutionsLabel) => {
+    const copy = getShellMenuCopy(locale, { includeDlpPlatform: true });
+    render(<Footer locale={locale} sections={copy.footerSections} />);
+    const platform = screen.getByText(platformLabel).parentElement!;
+    expect(within(platform).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
+      `/${locale}/acp`, `/${locale}/aip`, `/${locale}/ai-gateway`,
+    ]);
+    const solutions = screen.getByText(solutionsLabel).parentElement!;
+    expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
+      `/${locale}/penetration-testing`, `/${locale}/fde-services`, `/${locale}/dlp`,
+    ]);
+  });
+
   it("Demo를 독립 섹션으로 노출하고 기존 기능 링크를 리소스 섹션에 합친다", () => {
     const copy = getShellMenuCopy("ko");
 
@@ -17,8 +33,8 @@ describe("Footer", () => {
 
     expect(screen.getByText("데모")).toBeInTheDocument();
     expect(screen.getByText("플랫폼")).toBeInTheDocument();
-    expect(screen.queryByText("솔루션")).not.toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "FDE 서비스" })).toHaveAttribute("href", "/ko/platforms/aip/fde-services");
+    expect(screen.getByText("솔루션")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "FDE 서비스" })).toHaveAttribute("href", "/ko/fde-services");
     expect(screen.getByText("리소스")).toBeInTheDocument();
     expect(screen.queryByText("기능")).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "AIP 활용" })).toHaveAttribute("href", "/ko/demo/aip");
@@ -44,10 +60,13 @@ describe("Footer", () => {
     rerender(<Footer locale="ja" sections={japaneseCopy.footerSections} />);
 
     expect(screen.queryByText("価格・プラン")).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "ペネトレーションテスト" })).toHaveAttribute("href", "/ja/penetration-testing");
+    expect(screen.queryByRole("link", { name: "QueryPie LLM｜QLM" })).not.toBeInTheDocument();
+    expect(screen.queryByRole("link", { name: "QueryPie Decision Model｜QEV" })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "社内業務効率化｜AI Crew" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "自社サービスAI化｜AI Dashi" })).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "オンプレミスAI｜Local LLM" })).toHaveAttribute("href", "/ja/solutions/local-llm");
-    expect(screen.getByText("ソリューション").parentElement).toHaveClass("w-max", "max-w-full");
-    expect(screen.getByRole("link", { name: "FDEサービス" })).toHaveAttribute("href", "/ja/platforms/aip/fde-services");
+    expect(screen.getByRole("link", { name: "AI Gateway (AIG)" })).toHaveAttribute("href", "/ja/ai-gateway");
+    expect(screen.getByRole("link", { name: "オンプレミスAI｜Local LLM" })).toHaveAttribute("href", "/ja/local-llm");
+    expect(screen.getByRole("link", { name: "専任エンジニア｜FDEサービス" })).toHaveAttribute("href", "/ja/fde-services");
   });
 });

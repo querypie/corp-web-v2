@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { CertificationCard } from "@/components/pages/company/CertificationsPage";
 import Button from "@/components/ui/Button";
 import ButtonGroup from "@/components/ui/ButtonGroup";
-import SolutionIcon from "@/components/pages/solutions/japan/SolutionIcon";
+import SolutionIcon from "@/components/pages/shared/SolutionIcon";
 import { getLocalePath } from "@/constants/i18n";
 import { pageSectionGapClassName } from "@/constants/layout";
 import { getCertificationsPageCopy } from "@/copy/company";

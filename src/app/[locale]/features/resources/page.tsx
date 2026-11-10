@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { isLocale } from "@/constants/i18n";
 import DocsListClientPage from "@/components/pages/resources/ResourcesListClientPage";
 import { getResourcesPageCopy } from "@/copy/contentPages";
+import { getCategorySeoCopy } from "@/copy/seo";
 import {
   docsCategoryConfigs,
   getCategoryLabel,
@@ -89,11 +90,12 @@ export async function generateMetadata({ params, searchParams }: DocsPageProps):
 
   if (!isLocale(locale)) return {};
 
-  const { metadataDescription, metadataTitle } = getResourcesPageCopy(locale);
   const selectedCategory: DocsCategorySlug =
     category && category !== "all" && docsCategoryConfigs.some((config) => config.slug === category)
       ? category as DocsCategorySlug
       : "all";
+
+  const { metadataDescription, metadataTitle } = getCategorySeoCopy(locale, selectedCategory, getCategoryLabel(docsCategoryConfigs, selectedCategory, locale), getResourcesPageCopy(locale));
 
   return withDynamicOgImage({
     title: metadataTitle,

@@ -2,6 +2,8 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { aruProductLabels, contactInquiryLabels, contactProductLabels, getContactPageCopy } from "@/copy/contact";
 import ContactForm from "./ContactForm";
+import { getContactInitialProducts } from "@/features/contact/initialProducts";
+import { getContactInitialInquiry } from "@/features/contact/prefill";
 
 const pushMock = vi.fn();
 vi.mock("next/navigation", () => ({
@@ -38,6 +40,16 @@ function fillRequiredFields(copy = contactCopy) {
 }
 
 describe("ContactForm", () => {
+  it.each(["en", "ko", "ja"] as const)("%s AIG·침투 테스트 문의는 해당 제품과 AI 상담을 기본 선택한다", (locale) => {
+    for (const product of ["aig", "penetrationtest"] as const) {
+      const query = { inquiry: "ai-consulting", product };
+      const view = render(<ContactForm {...getContactPageCopy(locale)} locale={locale} initialProducts={getContactInitialProducts(locale, query)} initialInquiry={getContactInitialInquiry(locale, query)} />);
+      expect(screen.getByRole("checkbox", { name: contactProductLabels[product][locale] })).toBeChecked();
+      expect(document.querySelector('[name="inquiryType"]')).toHaveValue(contactInquiryLabels["ai-consulting"][locale]);
+      view.unmount();
+    }
+  });
+
   it.each(["en", "ko", "ja"] as const)("%s 문의 종류와 제품을 기본 선택하고 사용자가 변경할 수 있다", (locale) => {
     const copy = getContactPageCopy(locale);
     render(<ContactForm {...copy} locale={locale} initialInquiry={contactInquiryLabels.demo[locale]} initialProducts={[contactProductLabels.aip[locale]]} />);

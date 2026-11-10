@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { isLocale } from "@/constants/i18n";
+import { getLocalePath, isLocale } from "@/constants/i18n";
 import HomePage from "@/components/pages/home/HomePage";
 import JapanHomePage from "@/components/pages/home/japan/JapanHomePage";
 import { getHomeMetadataDescription, getHomeMetadataTitle } from "@/copy/homeMetadata";
@@ -16,14 +16,14 @@ export async function generateMetadata({ params }: LocalePageProps): Promise<Met
 
   if (!isLocale(locale)) return {};
 
-  const title = getHomeMetadataTitle();
+  const title = getHomeMetadataTitle(locale);
   const description = getHomeMetadataDescription(locale);
 
   return withDynamicOgImage({
     title,
     description,
     alternates: {
-      canonical: locale === "en" ? "/" : `/${locale}`,
+      canonical: getLocalePath(locale),
     },
   }, { locale, title, description });
 }
