@@ -44,6 +44,10 @@ function createDynamicOgImageUrl({ description, locale, title }: DynamicOgImageO
   return `/api/og?${params.toString()}`;
 }
 
+function getShareTitle(title: string) {
+  return title.replace(/\s*[|｜]\s*QueryPie AI$/, "").trim();
+}
+
 function getCanonicalUrl(metadata: Metadata) {
   const canonical = metadata.alternates?.canonical;
 
@@ -64,7 +68,8 @@ export async function withDynamicOgImage(
   options: DynamicOgImageOptions,
 ): Promise<Metadata> {
   const description = options.description?.trim() || metadata.description?.trim() || defaultOgDescription[options.locale];
-  const imageUrl = createDynamicOgImageUrl({ ...options, description });
+  const shareTitle = getShareTitle(options.title);
+  const imageUrl = createDynamicOgImageUrl({ ...options, title: shareTitle, description });
   const canonicalPath = getCanonicalUrl(metadata);
   const origin = await getRequestSiteOrigin();
   const pathname = canonicalPath ? new URL(canonicalPath, origin).pathname : undefined;
@@ -85,7 +90,7 @@ export async function withDynamicOgImage(
     url: options.image?.url ?? imageUrl,
     width: options.image?.width ?? defaultOgImageSize.width,
     height: options.image?.height ?? defaultOgImageSize.height,
-    alt: options.image?.alt ?? options.title,
+    alt: options.image?.alt ?? shareTitle,
   };
 
   return {
@@ -104,7 +109,7 @@ export async function withDynamicOgImage(
       type: metadata.openGraph && "type" in metadata.openGraph ? metadata.openGraph.type : "website",
       siteName: "QueryPie AI",
       locale: { en: "en_US", ko: "ko_KR", ja: "ja_JP" }[options.contentLocale ?? options.locale],
-      title: options.title,
+      title: shareTitle,
       description,
       url: openGraphUrl,
       images: [ogImage],
@@ -112,7 +117,7 @@ export async function withDynamicOgImage(
     twitter: {
       ...metadata.twitter,
       card: "summary_large_image",
-      title: options.title,
+      title: shareTitle,
       description,
       images: [ogImage.url],
     },

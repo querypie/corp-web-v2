@@ -71,6 +71,27 @@ describe("withDynamicOgImage", () => {
     expect(metadata.openGraph?.url).toBe("https://stage-v2.querypie.ai/custom-og-url");
   });
 
+  it.each([
+    ["ko", "AI Gateway | 기업 AI 연결과 통합 관리 | QueryPie AI", "AI Gateway | 기업 AI 연결과 통합 관리"],
+    ["ja", "AI Gateway｜企業のAIサービスを安全につなぐ統合基盤 | QueryPie AI", "AI Gateway｜企業のAIサービスを安全につなぐ統合基盤"],
+    ["en", "AI Penetration Testing Services | QueryPie AI", "AI Penetration Testing Services"],
+  ] as const)("%s 공유 제목과 이미지에서 반복 브랜드 접미사를 제거한다", async (locale, title, shareTitle) => {
+    const metadata = await withDynamicOgImage(
+      { title, alternates: { canonical: `/${locale}/ai-gateway` } },
+      { locale, title, description: "Description" },
+    );
+
+    expect(metadata.title).toBe(title);
+    expect(metadata.openGraph?.title).toBe(shareTitle);
+    expect(metadata.twitter?.title).toBe(shareTitle);
+    expect(metadata.openGraph?.images).toEqual([{
+      url: `/api/og?locale=${locale}&title=${encodeURIComponent(shareTitle).replace(/%20/g, "+")}&v=${ogImageCacheVersion}&description=Description`,
+      width: 1200,
+      height: 630,
+      alt: shareTitle,
+    }]);
+  });
+
   it("콘텐츠 이미지를 OG image로 반영한다", async () => {
     const metadata = await withDynamicOgImage(
       {
