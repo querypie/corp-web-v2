@@ -15,7 +15,7 @@ describe("ACP 실습 노트 이관", () => {
   it("썸네일은 기존 본문 WebP를 재사용하며 별도 표지 파일을 남기지 않는다", () => {
     for (const note of notes) {
       expect(note.imageSrc).toMatch(/^\/assets\/content\/acp-lab-notes\/[\w-]+\/\d+\.webp$/);
-      const files = readdirSync(path.resolve("public/assets/content/acp-lab-notes", note.id));
+      const files = readdirSync(path.dirname(path.join("public", note.imageSrc)));
       expect(files.every((file) => file.endsWith(".webp"))).toBe(true);
       expect(files).not.toContain("cover.png");
       expect(files).not.toContain("thumbnail.webp");
