@@ -121,9 +121,9 @@ describe("saveAuthoredContent", () => {
     const read = await readAuthoredManagedContentItem("resources", entry.id, { includeBodies: true });
     expect(getLabNote(read!)).toEqual({ episode: 7, topics: ["DB 접근 제어"] });
     expect(read?.bodyHtml.ko).toContain("<figcaption>화면 1. 수정한 캡션</figcaption>");
-    await saveAuthoredContent({ ...saved, sortOrder: 8, authorName: "DB 접근 제어 · 감사", authorRole: "" });
+    await saveAuthoredContent({ ...saved, sortOrder: 8, authorName: "DB 접근 제어 · 운영 관리", authorRole: "" });
     const list = await readAuthoredManagedContents({ includeBodies: false });
-    expect(getLabNote(list[0])).toEqual({ episode: 8, topics: ["DB 접근 제어", "감사"] });
+    expect(getLabNote(list[0])).toEqual({ episode: 8, topics: ["DB 접근 제어", "운영 관리"] });
   });
   it("예약 공개 시각을 저장하고 목록과 본문 조회에서 유지한다", async () => {
     const { saveAuthoredContent, readAuthoredManagedContents, readAuthoredManagedContentItem } = await import("./authored.server");

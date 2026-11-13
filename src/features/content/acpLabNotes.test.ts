@@ -4,10 +4,45 @@ import { describe, it, expect } from "vitest";
 import { renderTiptapHtml } from "./tiptapHtml";
 import { getLabNote, getLocalizedLabNote, getLabNoteWriterLabel, sortLabNotes } from "./acpLabNotes";
 import { getPublicDetailHref } from "./data";
+import { acpLabNoteTopics } from "@/copy/acpLabNotes";
 
 const root = path.resolve("src/content/resources/acp-lab-notes");
 const notes = readdirSync(root).map((directory) => ({ directory, ...JSON.parse(readFileSync(path.join(root, directory, "meta.json"), "utf8")) }));
 describe("ACP 실습 노트 이관", () => {
+  it("모든 글은 번역 가능한 주제를 가지며 서로 다른 태그가 같은 목록을 중복 노출하지 않는다", () => {
+    const memberships = new Map<string, string[]>();
+    for (const note of sortLabNotes(notes)) {
+      const topics = getLabNote(note)!.topics;
+      expect(topics.length, note.id).toBeGreaterThan(0);
+      expect(new Set(topics).size, note.id).toBe(topics.length);
+      for (const topic of topics) {
+        expect(acpLabNoteTopics, note.id).toHaveProperty(topic);
+        memberships.set(topic, [...(memberships.get(topic) ?? []), note.id]);
+      }
+      for (const locale of ["en", "ko", "ja"] as const) {
+        const localized = getLocalizedLabNote(note, locale)!.topics;
+        expect(new Set(localized).size).toBe(topics.length);
+        if (locale !== "ko") expect(localized.join(" ")).not.toMatch(/[가-힣]/);
+      }
+    }
+    expect([...memberships.keys()].sort()).toEqual(Object.keys(acpLabNoteTopics).sort());
+    expect(memberships.size).toBe(5);
+    expect(new Set([...memberships.values()].map((ids) => ids.join(","))).size).toBe(memberships.size);
+  });
+  it.each([
+    [8, ["DB 접근 제어", "운영 관리"]],
+    [18, ["DB 접근 제어", "운영 관리"]],
+    [24, ["운영 관리", "서버 접근 제어"]],
+    [25, ["DB 접근 제어"]],
+    [32, ["DB 접근 제어", "운영 관리"]],
+    [42, ["DB 접근 제어", "운영 관리"]],
+    [45, ["운영 관리", "Kubernetes 접근 제어"]],
+    [47, ["DB 접근 제어", "운영 관리"]],
+    [49, ["DB 접근 제어", "운영 관리"]],
+    [50, ["도입 가이드"]],
+  ])("%i편은 본문의 주요 실습에 해당하는 주제만 갖는다", (episode, topics) => {
+    expect(getLabNote(notes.find((note) => note.sortOrder === episode))?.topics).toEqual(topics);
+  });
   it("1~50편이 중복 없이 존재하고 회차 기준으로 정렬된다", () => {
     expect(sortLabNotes(notes).map((note) => getLabNote(note)?.episode)).toEqual(Array.from({ length: 50 }, (_, index) => index + 1));
     expect(new Set(notes.map((note) => note.id)).size).toBe(50);
@@ -74,17 +109,17 @@ describe("ACP 실습 노트 이관", () => {
 });
 
 describe("기존 작성자·직책 필드로 연재 정보 읽기", () => {
-  const entry = { categorySlug: "acp-lab-notes" as const, authorName: "시작하기 · DB 접근 제어", authorRole: "", sortOrder: 3 };
+  const entry = { categorySlug: "acp-lab-notes" as const, authorName: "도입 가이드 · DB 접근 제어", authorRole: "", sortOrder: 3 };
   it("공용 작성자 UI와 필터에 언어별 연재 정보를 제공한다", () => {
-    expect(getLocalizedLabNote(entry, "en")?.topics).toEqual(["Getting started", "Database access control"]);
-    expect(getLabNoteWriterLabel(entry, "en")).toBe("Getting started · Database access control");
-    expect(getLabNoteWriterLabel(entry, "ko")).toBe("시작하기 · DB 접근 제어");
-    expect(getLabNoteWriterLabel(entry, "ja")).toBe("はじめに · DBアクセス制御");
+    expect(getLocalizedLabNote(entry, "en")?.topics).toEqual(["Adoption guide", "Database access control"]);
+    expect(getLabNoteWriterLabel(entry, "en")).toBe("Adoption guide · Database access control");
+    expect(getLabNoteWriterLabel(entry, "ko")).toBe("도입 가이드 · DB 접근 제어");
+    expect(getLabNoteWriterLabel(entry, "ja")).toBe("導入ガイド · DBアクセス制御");
     expect(getLabNoteWriterLabel(entry, "ja")).not.toMatch(/[가-힣]/);
   });
   it("정렬 순서의 회차와 작성자의 주제를 읽고 쉼표로 구분한 주제도 처리한다", () => {
-    expect(getLabNote(entry)).toEqual({ episode: 3, topics: ["시작하기", "DB 접근 제어"] });
-    expect(getLabNote({ ...entry, authorName: " 시작하기, DB 접근 제어 " })?.topics).toEqual(["시작하기", "DB 접근 제어"]);
+    expect(getLabNote(entry)).toEqual({ episode: 3, topics: ["도입 가이드", "DB 접근 제어"] });
+    expect(getLabNote({ ...entry, authorName: " 도입 가이드, DB 접근 제어 " })?.topics).toEqual(["도입 가이드", "DB 접근 제어"]);
   });
   it("작성자 없이도 회차를 유지하고 다른 카테고리는 처리하지 않는다", () => {
     expect(getLabNote({ ...entry, authorName: "" })).toEqual({ episode: 3, topics: [] });

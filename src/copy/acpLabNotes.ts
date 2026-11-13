@@ -49,12 +49,9 @@ export function getAcpLabNotesCopy(locale: Locale) {
 }
 
 export const acpLabNoteTopics: Record<string, Record<Locale, string>> = {
-  "시작하기": { ko: "시작하기", en: "Getting started", ja: "はじめに" },
+  "도입 가이드": { ko: "도입 가이드", en: "Adoption guide", ja: "導入ガイド" },
   "DB 접근 제어": { ko: "DB 접근 제어", en: "Database access control", ja: "DBアクセス制御" },
-  "승인": { ko: "승인", en: "Approvals", ja: "承認" },
-  "감사": { ko: "감사", en: "Auditing", ja: "監査" },
-  "운영": { ko: "운영", en: "Operations", ja: "運用" },
+  "운영 관리": { ko: "운영 관리", en: "Operations management", ja: "運用管理" },
   "서버 접근 제어": { ko: "서버 접근 제어", en: "Server access control", ja: "サーバーアクセス制御" },
-  "MCP 연동": { ko: "MCP 연동", en: "MCP integration", ja: "MCP連携" },
   "Kubernetes 접근 제어": { ko: "Kubernetes 접근 제어", en: "Kubernetes access control", ja: "Kubernetesアクセス制御" },
 };
