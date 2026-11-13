@@ -1,0 +1,47 @@
+{
+  "authorName": "서버 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "password-provisioning",
+  "imageSrc": "/assets/content/acp-lab-notes/password-provisioning/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 46,
+  "status": "published",
+  "storageId": "cnt_000285",
+  "summary": {
+    "en": "A password change includes verifying access afterward and helping users reconnect, not just pressing a button. As servers grow, tracking rotations becomes difficult. I tried Password Provisioning on a test account, then connected and ran commands through QueryPie.",
+    "ko": "서버 계정 비밀번호를 바꾸는 일은 변경 버튼을 누르는 것으로 끝나지 않는다. 바뀐 비밀번호로 접속할 수 있는지 확인하고, 작업하는 사람에게도 새 접속 방법을 알려줘야 한다. 서버가 늘어나면 어느 계정을 언제 바꿨는지 챙기는 일도 만만치 않다. 이번에는 QueryPie의 Password Provisioning으로 테스트 서",
+    "ja": "変更はボタンを押すだけでなく疎通と利用者の再接続も必要だ。台数が増えると更新把握も難しい。Password Provisioningでテストアカウントを変更し、接続と実行まで確認した。"
+  },
+  "title": {
+    "en": "[Part 46] Changing a Server Account Password in QueryPie",
+    "ko": "[46편] 서버 계정 비밀번호를 QueryPie에서 바꿔봤다",
+    "ja": "[第46回] QueryPieでサーバーアカウントのパスワードを変更する"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000285/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000285/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000285/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000285/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000285/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000285/ja.tiptap.json"
+    }
+  }
+}

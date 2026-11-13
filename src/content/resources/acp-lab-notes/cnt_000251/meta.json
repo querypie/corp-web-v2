@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "sql-export",
+  "imageSrc": "/assets/content/acp-lab-notes/sql-export/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 12,
+  "status": "published",
+  "storageId": "cnt_000251",
+  "summary": {
+    "en": "Query results sometimes need to become a report. A file makes shipping summaries and amount comparisons easier, but operators also want to know who downloaded what and why. I tried SQL Export Request for an order summary.",
+    "ko": "DB에서 조회한 내용을 보고서에 옮겨야 할 때가 있다. 배송 현황을 정리하거나 주문 금액을 비교하려면 파일로 받아서 작업하는 편이 편하다. 도입 담당자라면 이때 누가 어떤 데이터를 어떤 목적으로 내려받았는지도 함께 관리하고 싶을 것이다. 이번에는 QueryPie의 SQL Export Request로 주문 요약 자료를 내보",
+    "ja": "参照結果を報告書へ移すことがある。配送状況の整理や金額比較はファイルが便利だが、誰が何を何の目的で取得したかも管理したい。今回はSQL Export Requestで注文概要を出力した。"
+  },
+  "title": {
+    "en": "[Part 12] Exporting Database Data with Approval — QueryPie SQL Export in Practice",
+    "ko": "[12편] DB 자료도 승인받고 내보냈다 — QueryPie SQL Export 실습",
+    "ja": "[第12回] DB資料も承認を受けてエクスポートする — QueryPie SQL Export実習"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000251/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000251/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000251/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000251/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000251/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000251/ja.tiptap.json"
+    }
+  }
+}

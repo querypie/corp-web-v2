@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "query-rules",
+  "imageSrc": "/assets/content/acp-lab-notes/query-rules/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 10,
+  "status": "published",
+  "storageId": "cnt_000249",
+  "summary": {
+    "en": "‘Specify only the columns you need.’ Teams sharing a database often adopt this rule. Habitual SELECT * retrieves extra fields such as amounts even when only order status is needed. I tried enforcing that guideline through QueryPie Query Rules.",
+    "ko": "“조회할 때는 필요한 컬럼만 적어 주세요.” DB를 함께 사용하는 팀이라면 한 번쯤 정해 봤을 규칙이다. 주문 상태만 확인하면 되는데 습관적으로 SELECT *를 쓰면 금액 같은 다른 컬럼까지 함께 가져오게 된다. 이런 사용 규칙을 QueryPie에서 적용해 보면 어떨까. 이번에는 Query Rules를 열어, 실습용 주",
+    "ja": "「参照には必要な列だけを指定する」。DBを共有するチームなら決めたことがあるルールだ。状態だけ必要でもSELECT *では金額なども取得してしまう。今回はQueryPie Query Rulesでこの方針を適用した。"
+  },
+  "title": {
+    "en": "[Part 10] ‘Select Only the Columns You Need’ — Enforcing SQL Guidelines with QueryPie Query Rules",
+    "ko": "[10편] “필요한 컬럼만 조회해 주세요” — QueryPie Query Rules로 SQL 사용 규칙 적용하기",
+    "ja": "[第10回] 「必要な列だけを参照してください」— QueryPie Query RulesでSQL利用ルールを適用する"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000249/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000249/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000249/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000249/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000249/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000249/ja.tiptap.json"
+    }
+  }
+}

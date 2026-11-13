@@ -1,0 +1,47 @@
+{
+  "authorName": "MCP 연동 · DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "community-mcp",
+  "imageSrc": "/assets/content/acp-lab-notes/community-mcp/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 25,
+  "status": "published",
+  "storageId": "cnt_000264",
+  "summary": {
+    "en": "When connecting AI tools to a database, I first wanted to know who could see what. Orders should be accessible for work while settlements retain their restrictions. I connected MCP Inspector to QueryPie Community and tested both.",
+    "ko": "AI 도구에 DB를 연결할 때는 누가 어떤 데이터를 볼 수 있는지가 먼저 궁금했다. 업무에 필요한 주문 정보는 조회하되, 정산 자료처럼 따로 관리하는 데이터는 기존 권한에 맞춰 보호하고 싶었다. QueryPie Community에는 MCP 서버가 들어 있다. 이번에는 MCP Inspector를 연결해 주문을 조회하고, 같",
+    "ja": "AIツールとDBをつなぐとき、まず誰が何を見られるかが気になる。注文は参照し、精算は既存権限で保護したい。QueryPie CommunityへMCP Inspectorを接続して両方を試した。"
+  },
+  "title": {
+    "en": "[Part 25] Database Queries Through MCP Keep Existing Permissions — QueryPie Community MCP",
+    "ko": "[25편] MCP로 DB를 조회해도, 정해 둔 권한은 그대로였다 — QueryPie Community MCP",
+    "ja": "[第25回] MCP経由のDB参照でも権限は維持された — QueryPie Community MCP"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000264/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000264/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000264/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000264/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000264/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000264/ja.tiptap.json"
+    }
+  }
+}

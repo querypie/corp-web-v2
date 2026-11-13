@@ -1,0 +1,47 @@
+{
+  "authorName": "Kubernetes 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "kubectl-access-control",
+  "imageSrc": "/assets/content/acp-lab-notes/kubectl-access-control/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 44,
+  "status": "published",
+  "storageId": "cnt_000283",
+  "summary": {
+    "en": "Kubernetes teams use kubectl daily and should not need a web UI for every check. I connected through Multi Agent, read a ConfigMap, attempted a change, and checked role-based handling in QueryPie.",
+    "ko": "쿠버네티스를 운영하는 팀이라면 kubectl을 자주 쓸 것이다. 설정을 확인할 때마다 웹 화면으로 옮겨가기보다, 평소 쓰던 명령으로 필요한 내용을 바로 보고 싶다. 이번에는 Multi Agent와 kubectl로 실습 클러스터에 접속해봤다. 같은 ConfigMap을 읽고 값을 바꾸는 요청을 차례로 보낸 뒤, QueryPi",
+    "ja": "Kubernetes運用ではkubectlが日常の道具だ。確認ごとにWebへ移らず、Multi Agent経由でConfigMapの参照・変更を試し、役割ごとの処理を確認した。"
+  },
+  "title": {
+    "en": "[Part 44] Separating Access Scope While Keeping kubectl",
+    "ko": "[44편] kubectl을 그대로 쓰면서 접근 범위를 나눠봤다",
+    "ja": "[第44回] kubectlを使い続けながらアクセス範囲を分ける"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000283/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000283/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000283/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000283/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000283/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000283/ja.tiptap.json"
+    }
+  }
+}

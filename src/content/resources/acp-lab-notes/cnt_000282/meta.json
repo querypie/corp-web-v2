@@ -1,0 +1,47 @@
+{
+  "authorName": "서버 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "native-ssh-terminal",
+  "imageSrc": "/assets/content/acp-lab-notes/native-ssh-terminal/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 43,
+  "status": "published",
+  "storageId": "cnt_000282",
+  "summary": {
+    "en": "I wanted to keep inspecting accounts, files, and commands in my familiar terminal. I connected through Multi Agent from the Mac, tested normal commands and a restricted deletion, then reviewed connection and command audits in QueryPie.",
+    "ko": "서버에 접속할 때는 터미널이 가장 익숙하다. 계정을 확인하고, 파일을 살펴보고, 필요한 명령을 입력하는 작업을 매일 쓰던 도구에서 이어가고 싶었다. 이번에는 Mac 터미널에서 Multi Agent를 거쳐 실습 서버에 접속해봤다. 접속한 뒤에는 간단한 점검 명령을 실행하고, 관리자가 제한한 삭제 명령도 입력했다. 마지막으로",
+    "ja": "慣れたターミナルでアカウント・ファイル・コマンドを確認したい。MacからMulti Agent経由で接続し、通常操作と制限削除を試して接続・コマンド監査を確認した。"
+  },
+  "title": {
+    "en": "[Part 43] Connecting to Servers from My Everyday Mac Terminal",
+    "ko": "[43편] 평소 쓰던 Mac 터미널로 서버에 접속해봤다",
+    "ja": "[第43回] 普段のMacターミナルからサーバーへ接続する"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000282/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000282/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000282/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000282/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000282/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000282/ja.tiptap.json"
+    }
+  }
+}

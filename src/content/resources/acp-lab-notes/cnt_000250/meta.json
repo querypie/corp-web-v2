@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "unmasking-approval",
+  "imageSrc": "/assets/content/acp-lab-notes/unmasking-approval/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 11,
+  "status": "published",
+  "storageId": "cnt_000250",
+  "summary": {
+    "en": "Masking let us keep order information visible while hiding phone numbers and emails. But staff handling delivery inquiries sometimes need to contact a customer. Must the administrator change the entire masking policy each time? I tried QueryPie Unmasking Request instead.",
+    "ko": "지난번에는 고객 연락처를 마스킹해서 조회해 봤다. 주문 정보는 그대로 확인하면서 전화번호와 이메일은 가릴 수 있었다. 그런데 배송 문의를 처리하는 담당자라면 고객에게 연락해야 할 때도 있다. 그때마다 관리자에게 전체 마스킹 설정을 바꿔 달라고 해야 할까? 이번에는 QueryPie의 마스킹 해제 요청(Unmasking Re",
+    "ja": "マスキングでは注文を見せたまま電話・メールを隠せた。しかし配送問い合わせ担当者は顧客へ連絡する必要もある。その都度管理者に全体設定の変更を頼むのか。今回はQueryPieの解除申請を試した。"
+  },
+  "title": {
+    "en": "[Part 11] When a Masked Phone Number Is Needed — QueryPie Unmasking Requests and Approvals",
+    "ko": "[11편] 가려진 전화번호가 필요할 때 — QueryPie 마스킹 해제 요청과 승인 실습",
+    "ja": "[第11回] 隠された電話番号が必要なとき — QueryPieのマスキング解除申請と承認"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000250/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000250/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000250/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000250/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000250/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000250/ja.tiptap.json"
+    }
+  }
+}

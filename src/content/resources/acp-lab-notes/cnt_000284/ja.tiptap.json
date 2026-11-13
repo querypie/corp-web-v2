@@ -1,0 +1,794 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "コンテナ接続の後に、どのファイルを読み何が表示されたか分かれば、作業を理解しやすい。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "テストPodで短く点検し、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Pod Session Recordingsで再生すること"
+        },
+        {
+          "type": "text",
+          "text": "を試した。接続記録と実際の画面を併せて見られる点が印象的だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "クラスターの録画設定を確認する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "acp-kac-labのLogging Optionsでは "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Pod Session RecordingがOn"
+        },
+        {
+          "type": "text",
+          "text": "で、Request Auditも有効だった。要求と録画を併せて確認できる状態だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/01.webp",
+        "alt": "画面1. 両記録設定をクラスターで確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. 両記録設定をクラスターで確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "実習専用の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ep45-session-demo"
+        },
+        {
+          "type": "text",
+          "text": "を用意し、service・environment・statusの架空ファイルを入れた。実サービスデータはない。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPieでは "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Orders Lab Pod Inspector"
+        },
+        {
+          "type": "text",
+          "text": " を作り、orders-labのPod参照と、このPodの "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "pods/exec"
+        },
+        {
+          "type": "text",
+          "text": " を許可してテストアカウントへ付与した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/02.webp",
+        "alt": "画面2. 対象Podの参照・シェル用ポリシーを作った。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. 対象Podの参照・シェル用ポリシーを作った。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Pod内で普段の点検を行う"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "テストアカウントでQueryPieの "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Web Client"
+        },
+        {
+          "type": "text",
+          "text": "を開き、orders-labのep45-session-demoを選ぶとRunning・Readyだった。詳細の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Shell"
+        },
+        {
+          "type": "text",
+          "text": " で接続した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/03.webp",
+        "alt": "画面3. 正常稼働を確認してShellを開いた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. 正常稼働を確認してShellを開いた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "idとhostnameはUID・GID 10001、ep45-session-demo。続いて "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "cat /lab/health.txt"
+        },
+        {
+          "type": "text",
+          "text": "で読み、service orders-demo、environment lab、statusは "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "READY"
+        },
+        {
+          "type": "text",
+          "text": "だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "録画で識別できるようEP45_POD_CHECK_COMPLETEを出し、exitで正常終了した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/04.webp",
+        "alt": "画面4. コンテナ内でアカウント・ホスト・状態・完了印を確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. コンテナ内でアカウント・ホスト・状態・完了印を確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "作業後に録画一覧を開く"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Audit → Kubernetes → Pod Session Recordings"
+        },
+        {
+          "type": "text",
+          "text": "に移るとDemo Approver、acp-kac-lab、Orders Lab Pod Inspectorがあった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "対象は "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "12時54分50秒開始のセッション"
+        },
+        {
+          "type": "text",
+          "text": "だ。時刻・人・役割があり容易に特定できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/05.webp",
+        "alt": "画面5. 実習ユーザーと時刻が一致する録画を探した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. 実習ユーザーと時刻が一致する録画を探した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "入力と出力がそのまま見える"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "時刻を押すと "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Pod Session Record"
+        },
+        {
+          "type": "text",
+          "text": " が開き、人・開始・Request Source・CommandとReplayがあった。経路Web Client、シェルshだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "再生で入力が順に現れ、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "idの結果、Pod名、ファイルのREADY"
+        },
+        {
+          "type": "text",
+          "text": "まで見えた。操作だけでなく何を見て判断したかも分かった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/06.webp",
+        "alt": "画面6. 録画に実コマンドと状態ファイルが現れた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. 録画に実コマンドと状態ファイルが現れた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "最後に完了印とexitが残った。約14秒で、再生バーの任意位置から見直せた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/07.webp",
+        "alt": "画面7. 完了表示と終了コマンドも録画で確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. 完了表示と終了コマンドも録画で確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "引き継ぎでも手順と結果を管理者が同じ画面で理解でき、便利そうだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "監査から同じ録画へ直接つながる"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Request Audit"
+        },
+        {
+          "type": "text",
+          "text": "でも開始12:54:50と終了12:55:04が残り、終了には "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Success, ALLOW"
+        },
+        {
+          "type": "text",
+          "text": "とexit code 0、13.82秒があった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "人・ロール・orders-lab・pods/exec・ep45-session-demoもあり、詳細の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Session Recording"
+        },
+        {
+          "type": "text",
+          "text": " で同じ録画を再び開けた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/08.webp",
+        "alt": "画面8. 正常終了と対象を確認し、詳細リンクから同録画を開いた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面8. 正常終了と対象を確認し、詳細リンクから同録画を開いた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "よかったのは、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "アクセス権管理と実作業の記録がつながっている点"
+        },
+        {
+          "type": "text",
+          "text": "だ。誰が入ったかから、中で何をして何を見たかまで追えた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "運用を説明する具体的資料が残る点は魅力的だ。人・役割・コマンド・出力・正常終了を一つの作業として確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie Community 11.6.7 Web ClientとK3s 1.36.6で実施。人・Pod・ファイルは実習用で、終了後ロールを回収した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "参考： "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/audit/kubernetes-logs/pod-session-recordings",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "QueryPie Pod Session Recordings案内"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

@@ -16,6 +16,7 @@ import Tooltip from "@/components/ui/Tooltip";
 import { PreviewModal } from "./AdminManagedContentListPage";
 import { useAdminNavigationGuard } from "../../layout/admin/AdminNavigationGuard";
 import { useAdminLocale } from "@/components/layout/admin/AdminLocaleProvider";
+import { adminContentLocales } from "@/features/admin/preferences";
 import {
   upsertManagedContent,
   useManagedContents,
@@ -193,7 +194,7 @@ function normalizeVisibleLocalesByTitle(form: ManagedContentEntry): ManagedConte
 }
 
 function syncVisibleLocalesByTitle(form: ManagedContentEntry): ManagedContentEntry {
-  const visibleLocales = (["en", "ko", "ja"] as const).filter((locale) => hasLocaleVisibleTitle(form, locale));
+  const visibleLocales = adminContentLocales.filter((locale) => hasLocaleVisibleTitle(form, locale));
 
   if (
     visibleLocales.length === form.visibleLocales.length &&
@@ -334,7 +335,7 @@ function TranslationProgressDialog({
 }) {
   const { locale: adminLocale, t } = useAdminLocale();
   const [elapsedSeconds, setElapsedSeconds] = useState(0);
-  const targetLocales = completedLocales ?? requestedTargetLocales ?? (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
+  const targetLocales = completedLocales ?? requestedTargetLocales ?? adminContentLocales.filter((locale) => locale !== sourceLocale);
   const isSuccess = status === "success";
   const progress = isSuccess ? 100 : Math.min(98, Math.max(8, Math.round((elapsedSeconds / 300) * 90) + 8));
   const progressLabel =
@@ -449,7 +450,7 @@ function TranslationSourceDialog({
   targetLocale: Locale;
 }) {
   const { t } = useAdminLocale();
-  const targetLocales = (["en", "ko", "ja"] as const).filter((locale) => locale !== sourceLocale);
+  const targetLocales = adminContentLocales.filter((locale) => locale !== sourceLocale);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-[rgb(var(--color-overlay-rgb)/0.6)] px-5" onClick={onCancel}>
@@ -578,7 +579,7 @@ function InlineField({
   const { t } = useAdminLocale();
 
   return (
-    <div className="grid items-center gap-3 md:grid-cols-[88px_minmax(0,1fr)]">
+    <div className="grid min-w-0 grid-cols-1 items-center gap-3 md:grid-cols-[88px_minmax(0,1fr)]">
       <label className="whitespace-nowrap type-body-md text-fg">{typeof label === "string" ? t(label) : label}</label>
       {children}
     </div>
@@ -603,7 +604,7 @@ type PendingImageUpload = {
   replaceSrc: string;
 };
 
-const LOCALES = ["en", "ko", "ja"] as const;
+const LOCALES = adminContentLocales;
 const EXTERNAL_IMAGE_PROTOCOLS = new Set(["http:", "https:"]);
 const LOCAL_IMAGE_PATH_PREFIXES = ["/demo/", "/resources/", "/news/", "/uploads/"];
 
@@ -827,10 +828,10 @@ export default function AdminManagedContentDetailPage({
   const isOutlinkType = form.contentType === "outlink";
   const supportsLeadGate = section !== "news" && isContentType;
   const useRichEditor = isContentType;
-  const translationSourceLocales = (["en", "ko", "ja"] as const).filter((locale) =>
+  const translationSourceLocales = adminContentLocales.filter((locale) =>
     hasLocaleTranslationSource(form, locale, isContentType),
   );
-  const translationTargetLocales = (["en", "ko", "ja"] as const).filter((locale) => locale !== translationSourceLocale);
+  const translationTargetLocales = adminContentLocales.filter((locale) => locale !== translationSourceLocale);
   const canTranslateAnyLocale = translationSourceLocales.length > 0;
 
   useLayoutEffect(() => {
@@ -1052,7 +1053,7 @@ export default function AdminManagedContentDetailPage({
       ? activeLocale
       : translationSourceLocales[0];
     const nextTargetLocale = translationTargetLocale === nextSourceLocale
-      ? (["en", "ko", "ja"] as const).find((locale) => locale !== nextSourceLocale) ?? "en"
+      ? adminContentLocales.find((locale) => locale !== nextSourceLocale) ?? "en"
       : translationTargetLocale;
 
     setTranslationSourceLocale(nextSourceLocale);
@@ -1064,7 +1065,7 @@ export default function AdminManagedContentDetailPage({
     setTranslationSourceLocale(locale);
 
     if (translationTargetLocale === locale) {
-      setTranslationTargetLocale((["en", "ko", "ja"] as const).find((item) => item !== locale) ?? "en");
+      setTranslationTargetLocale(adminContentLocales.find((item) => item !== locale) ?? "en");
     }
   }
 
@@ -1691,7 +1692,7 @@ export default function AdminManagedContentDetailPage({
   function validateForm(targetForm: ManagedContentEntry = form) {
     /* 저장/게시 전 필수 입력값만 간단히 검증한다 */
     const missing: string[] = [];
-    if (!hasAnyLocalizedTitle(targetForm.title)) missing.push("제목 (EN/KO/JA 중 1개)");
+    if (!hasAnyLocalizedTitle(targetForm.title)) missing.push("제목 (KO/JA/EN 중 1개)");
     for (const locale of targetForm.visibleLocales) {
       if (!targetForm.title[locale]?.trim()) {
         missing.push(`${getLocaleLabel(locale)} 제목`);
@@ -2012,7 +2013,7 @@ export default function AdminManagedContentDetailPage({
           </div>
           <div className="flex shrink-0 flex-nowrap items-center justify-end gap-3">
             <TabGroup className="shrink-0 self-start">
-              {(["en", "ko", "ja"] as const).map((locale) => {
+              {adminContentLocales.map((locale) => {
                 const canToggleLocale = hasLocaleVisibleTitle(form, locale);
                 const isVisibleLocale = form.visibleLocales.includes(locale);
                 const isLastVisibleLocale = isVisibleLocale && form.visibleLocales.length === 1;
@@ -2102,10 +2103,10 @@ export default function AdminManagedContentDetailPage({
         </div>
       </header>
 
-      <div className="mx-auto w-full max-w-[720px]">
+      <div className="mx-auto min-w-0 w-full max-w-[720px]">
         <div className="flex min-w-0 w-full flex-col gap-5 overflow-visible">
           {/* 좌측 작성 폼 본문 */}
-          <div className="grid gap-5 pt-3">
+          <div className="grid min-w-0 grid-cols-1 gap-5 pt-3">
             <InlineField label="제목">
               <div className="flex items-center gap-3">
                 <Input

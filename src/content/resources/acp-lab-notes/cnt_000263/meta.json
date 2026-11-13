@@ -1,0 +1,47 @@
+{
+  "authorName": "서버 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "session-recording",
+  "imageSrc": "/assets/content/acp-lab-notes/session-recording/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 24,
+  "status": "published",
+  "storageId": "cnt_000263",
+  "summary": {
+    "en": "Previously, command audits showed who attempted rm and that it was blocked. Now I replayed the terminal session from Session Logs, jumping to the restriction and the subsequent file checks. Direct replay from Command Audit was especially convenient.",
+    "ko": "지난 글에서는 서버의 rm 명령을 제한하고 감사 기록까지 확인했다. 기록에는 누가 어떤 명령을 입력했고, 그 명령이 차단됐는지가 남아 있었다. 이번에는 그때 사용했던 터미널 화면을 다시 열어 봤다. QueryPie의 Session Logs에서 작업 세션을 골라 재생하니, 접속 당시 화면과 명령 결과가 다시 나타났다. 삭제",
+    "ja": "前回はrmの入力者と遮断を監査で確認した。今回はSession Logsでターミナルを再生し、制限された瞬間とその後の確認を見た。Command Auditから該当時点へ直接開ける点が便利だった。"
+  },
+  "title": {
+    "en": "[Part 24] Replaying Work Done on a Server — QueryPie Session Recording",
+    "ko": "[24편] 서버에서 한 작업을 다시 재생해봤다 — QueryPie 세션 녹화",
+    "ja": "[第24回] サーバー作業を再生して確認する — QueryPieセッション録画"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000263/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000263/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000263/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000263/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000263/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000263/ja.tiptap.json"
+    }
+  }
+}

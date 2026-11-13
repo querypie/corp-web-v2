@@ -5,6 +5,7 @@ import type { Locale } from "@/constants/i18n";
 import AiPackSection from "./AiPackSection";
 import Diagram from "./Diagram";
 import IntegrationSection from "./IntegrationSection";
+import AcpLabNotesLink from "@/components/sections/common/AcpLabNotesLink";
 
 type Props = {
   locale: Locale;
@@ -106,6 +107,7 @@ export default function AcpENSolutionContent({ locale }: Props) {
       <div>
         <IntegrationSection locale={locale} />
       </div>
+      <AcpLabNotesLink locale={locale} />
 
       <div>
         <Cta

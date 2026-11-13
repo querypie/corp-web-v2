@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "prevent-unsafe-sql",
+  "imageSrc": "/assets/content/acp-lab-notes/prevent-unsafe-sql/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 35,
+  "status": "published",
+  "storageId": "cnt_000274",
+  "summary": {
+    "en": "Forgetting WHERE while changing one order can affect every row; DELETE may remove the whole table’s data. I enabled QueryPie’s safeguard and compared scoped SQL with missing-WHERE SQL using an account allowed to update and delete.",
+    "ko": "주문 한 건의 상태를 바꾸려고 UPDATE를 작성했다가 WHERE 조건을 빠뜨리면 어떻게 될까. 실행 버튼을 누르는 순간 다른 주문까지 함께 바뀔 수 있다. DELETE라면 테이블에 남아 있는 데이터를 모두 지울 수도 있다. 이번에는 QueryPie에서 이런 조건 누락을 막는 설정을 켜 봤다. 수정과 삭제 권한이 있는 계",
+    "ja": "1件変更のUPDATEでWHEREを忘れると全体に影響し、DELETEなら全行を消しかねない。変更・削除可能アカウントでQueryPieの保護を有効にし、条件あり・なしを比較した。"
+  },
+  "title": {
+    "en": "[Part 35] Blocking UPDATE and DELETE Without WHERE",
+    "ko": "[35편] WHERE를 빠뜨린 UPDATE와 DELETE를 막아봤다",
+    "ja": "[第35回] WHEREを忘れたUPDATEとDELETEを止める"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000274/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000274/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000274/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000274/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000274/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000274/ja.tiptap.json"
+    }
+  }
+}

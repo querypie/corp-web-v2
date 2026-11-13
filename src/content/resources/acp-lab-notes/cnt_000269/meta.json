@@ -1,0 +1,47 @@
+{
+  "authorName": "서버 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "terminate-server-session",
+  "imageSrc": "/assets/content/acp-lab-notes/terminate-server-session/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 30,
+  "status": "published",
+  "storageId": "cnt_000269",
+  "summary": {
+    "en": "Access management continues after login: operators need to see who is connected and end a specific session when necessary. Part 24 replayed completed work; this time I found and terminated an active SSH session, then checked reconnection with the same role.",
+    "ko": "서버 접속을 허용한 뒤에도 관리할 일은 남는다. 지금 누가 접속해 있는지 확인하고, 필요할 때는 특정 연결을 끝낼 수 있어야 한다. 접근 권한을 정하는 것과 이미 열려 있는 연결을 관리하는 것은 서로 다른 일이기 때문이다. 24편에서는 서버에서 했던 작업을 녹화로 다시 확인했다. 이번에는 접속 중인 SSH 세션을 관리자 ",
+    "ja": "ログイン後も誰が接続中か確認し、必要なら特定接続を終える管理が必要だ。第24回の終了作業再生に続き、今回は稼働SSHを終了し、同じロールで再接続できるか確かめた。"
+  },
+  "title": {
+    "en": "[Part 30] Finding and Terminating an Active Server Session",
+    "ko": "[30편] 지금 연결된 서버 세션을 찾아 종료해봤다",
+    "ja": "[第30回] 接続中のサーバーセッションを見つけて終了する"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000269/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000269/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000269/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000269/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000269/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000269/ja.tiptap.json"
+    }
+  }
+}

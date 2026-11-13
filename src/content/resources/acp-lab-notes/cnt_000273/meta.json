@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "database-permissions-by-task",
+  "imageSrc": "/assets/content/acp-lab-notes/database-permissions-by-task/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 34,
+  "status": "published",
+  "storageId": "cnt_000273",
+  "summary": {
+    "en": "Multiple business databases may share a server, but order staff do not need all settlement data. After table-level restrictions, I tested logical-database permissions: allow the orders database on one MySQL server while excluding finance.",
+    "ko": "같은 DB 서버에 여러 업무의 데이터베이스를 함께 두는 경우가 있다. 그렇다고 주문을 확인하는 담당자에게 정산 자료까지 모두 열어 줄 필요는 없다. 이번에는 QueryPie에서 담당자가 조회할 수 있는 DB를 따로 정해 봤다. 앞서 테이블별 접근 제한을 다뤘다면, 이번에는 DB 자체를 나누는 설정이다. 하나의 MySQL ",
+    "ja": "同じサーバーに複数業務のDBがあっても、注文担当に精算まで開く必要はない。テーブル制限に続き、今回は一つのMySQLで注文DBだけを許可する論理DB権限を試した。"
+  },
+  "title": {
+    "en": "[Part 34] Separating Database Access by Task on the Same Server",
+    "ko": "[34편] 같은 서버에 있는 DB도 업무별로 권한을 나눠봤다",
+    "ja": "[第34回] 同じサーバーのDBも業務別に権限を分ける"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000273/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000273/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000273/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000273/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000273/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000273/ja.tiptap.json"
+    }
+  }
+}

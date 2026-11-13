@@ -1,0 +1,47 @@
+{
+  "authorName": "승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "administrator-roles",
+  "imageSrc": "/assets/content/acp-lab-notes/administrator-roles/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 21,
+  "status": "published",
+  "storageId": "cnt_000260",
+  "summary": {
+    "en": "Previously, an administrator reviewed and exported database audits. In production, configuration and audit review may belong to different people. I created an auditor role that could inspect changes, DML snapshots, and downloads, while database configuration remained inaccessible.",
+    "ko": "앞선 글에서는 관리자 계정으로 DB 감사 기록을 보고 파일로 내려받았다. 실제 운영에서는 DB를 설정하는 사람과 그 기록을 점검하는 사람이 다를 수 있다. 감사 담당자가 자기 계정으로 필요한 자료를 확인할 수 있으면 좋겠다는 생각이 들었다. 이번에는 QueryPie에 감사 담당자 역할을 따로 만들었다. 그 계정으로 주문 ",
+    "ja": "前回は管理者で監査閲覧・出力を行った。実運用では設定者と点検者は別かもしれない。今回は変更記録、DML Snapshot、取得を行える監査ロールを作り、DB設定は開けないことを確認した。"
+  },
+  "title": {
+    "en": "[Part 21] Giving Auditors Only the Access They Need — Separating QueryPie Administrator Roles",
+    "ko": "[21편] 감사 담당자에게 필요한 권한만 맡겨봤다 — QueryPie 관리자 역할 분리",
+    "ja": "[第21回] 監査担当に必要な権限だけを渡す — QueryPie管理者ロールの分離"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000260/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000260/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000260/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000260/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000260/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000260/ja.tiptap.json"
+    }
+  }
+}

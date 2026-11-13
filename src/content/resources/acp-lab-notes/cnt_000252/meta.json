@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "restricted-data-approval",
+  "imageSrc": "/assets/content/acp-lab-notes/restricted-data-approval/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 13,
+  "status": "published",
+  "storageId": "cnt_000252",
+  "summary": {
+    "en": "Part 9 allowed order queries while restricting settlements. A developer normally checking status did not need settlement data. But reconciliation can require it. I tried Restricted Data Access Request to obtain approved, time-limited access without removing the policy.",
+    "ko": "9편에서는 주문 테이블은 조회할 수 있게 두고, 정산 테이블은 접근을 제한했다. 평소 주문 상태만 확인하는 개발자에게 정산 정보까지 열어 줄 필요는 없었다. 그런데 주문 금액과 정산 내역을 대조해야 하는 업무가 생기면 어떨까? 이번에는 QueryPie의 Restricted Data Access Request로 제한된 정산",
+    "ja": "第9回では注文を許可し精算を制限した。普段は不要でも金額照合には必要になる。今回はRestricted Data Access Requestでポリシーを維持したまま、期間を定めて承認を受けた。"
+  },
+  "title": {
+    "en": "[Part 13] When Settlement Data Is Needed — Approving Restricted Data Access in QueryPie",
+    "ko": "[13편] 정산 정보가 필요할 때 — QueryPie 제한 데이터 접근 승인 실습",
+    "ja": "[第13回] 精算情報が必要なとき — QueryPieの制限データアクセス承認"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000252/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000252/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000252/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000252/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000252/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000252/ja.tiptap.json"
+    }
+  }
+}

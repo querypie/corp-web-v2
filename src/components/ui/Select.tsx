@@ -34,15 +34,23 @@ export default function Select({
 }: SelectProps) {
   const [selectedValue, setSelectedValue] = useState(String(value ?? defaultValue));
   const resolvedValue = value ?? selectedValue;
+  const selectedOption = options.find((option) => option.value === String(resolvedValue));
+  const selectedLabel = selectedOption?.label ?? placeholder ?? options[0]?.label;
 
   return (
     <div className={cx(fieldShellClassName, "relative", className)}>
-      <select
+      <span
+        aria-hidden="true"
         className={cx(
           fieldTextClassName,
-          "h-10 w-full appearance-none px-0 pr-7 leading-[40px]",
+          "pointer-events-none truncate pr-7",
           resolvedValue ? "text-fg" : "text-placeholder",
         )}
+      >
+        {selectedLabel}
+      </span>
+      <select
+        className="absolute inset-0 h-full w-full cursor-pointer opacity-0 disabled:cursor-not-allowed"
         onChange={(event) => {
           setSelectedValue(event.target.value);
           onChange?.(event);

@@ -110,6 +110,21 @@ afterEach(async () => {
 });
 
 describe("saveAuthoredContent", () => {
+  it("ACP 실습 노트의 작성자 주제·회차와 수정한 이미지 캡션을 저장하고 다시 읽는다", async () => {
+    const { saveAuthoredContent, readAuthoredManagedContentItem, readAuthoredManagedContents } = await import("./authored.server");
+    const { getLabNote } = await import("./acpLabNotes");
+    const entry = makeEntry({ section: "resources", categorySlug: "acp-lab-notes", authorName: "DB 접근 제어", authorRole: "", sortOrder: 7,
+      bodyRichText: { en: "", ja: "", ko: JSON.stringify({ type: "doc", content: [{ type: "image", attrs: { src: "/assets/test.png", caption: "화면 1. 수정한 캡션", width: "100%" } }] }) },
+      bodyHtml: { en: "", ja: "", ko: "" }, visibleLocales: ["ko"],
+    });
+    const saved = await saveAuthoredContent(entry);
+    const read = await readAuthoredManagedContentItem("resources", entry.id, { includeBodies: true });
+    expect(getLabNote(read!)).toEqual({ episode: 7, topics: ["DB 접근 제어"] });
+    expect(read?.bodyHtml.ko).toContain("<figcaption>화면 1. 수정한 캡션</figcaption>");
+    await saveAuthoredContent({ ...saved, sortOrder: 8, authorName: "DB 접근 제어 · 감사", authorRole: "" });
+    const list = await readAuthoredManagedContents({ includeBodies: false });
+    expect(getLabNote(list[0])).toEqual({ episode: 8, topics: ["DB 접근 제어", "감사"] });
+  });
   it("예약 공개 시각을 저장하고 목록과 본문 조회에서 유지한다", async () => {
     const { saveAuthoredContent, readAuthoredManagedContents, readAuthoredManagedContentItem } = await import("./authored.server");
     const entry = makeEntry({

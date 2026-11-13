@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "sql-execution-plan",
+  "imageSrc": "/assets/content/acp-lab-notes/sql-execution-plan/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 37,
+  "status": "published",
+  "storageId": "cnt_000276",
+  "summary": {
+    "en": "SQL approval reviews the statement and reason. An execution plan adds table/index context. I attached a plan to SQL Request and checked that the approver could inspect the same evidence inside the request.",
+    "ko": "SQL을 승인할 때는 쿼리 내용과 작업 사유를 읽게 된다. 여기에 DB의 실행 계획도 함께 있으면 어떤 테이블과 인덱스를 사용할지 살펴보며 검토할 수 있다. 이번에는 QueryPie의 SQL Request에 실행 계획을 붙여 보냈다. 작성자가 확인한 자료를 승인자도 같은 요청 안에서 열어 볼 수 있는지 직접 확인했다.",
+    "ja": "SQL承認では本文と理由を見る。計画があればテーブルやインデックスも確認できる。SQL Requestに添付し、承認者も同じ資料を開けるか試した。"
+  },
+  "title": {
+    "en": "[Part 37] Reviewing the Execution Plan Before Approving SQL",
+    "ko": "[37편] SQL을 승인하기 전에 실행 계획도 함께 봤다",
+    "ja": "[第37回] SQL承認前に実行計画も確認する"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000276/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000276/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000276/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000276/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000276/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000276/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "sql-approval",
+  "imageSrc": "/assets/content/acp-lab-notes/sql-approval/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 6,
+  "status": "published",
+  "storageId": "cnt_000245",
+  "summary": {
+    "en": "While querying a production database, sometimes one or two records need correcting: an order may still show an old status after delivery, or an incorrect value needs fixing. Even a simple production change should clearly record who changed it and why. After access approval in Part 5, this time I tried SQL approval.",
+    "ko": "운영 DB를 조회하다 보면 데이터를 한두 건 고쳐야 할 때가 있다. 배송은 끝났는데 주문 상태가 그대로이거나, 잘못 들어간 값을 정정해야 하는 경우다. 수정할 내용은 간단해도 운영 데이터인 만큼 누가 어떤 이유로 바꾸는지는 분명하게 남기고 싶다. 지난 5편에서는 필요한 DB 접근 권한을 요청하고 승인받아 봤다. 이번에는 ",
+    "ja": "本番DBを参照していると、配送済みなのに状態が古いなど、1、2件を修正したい場面がある。簡単な変更でも本番データなら誰が何のために変えたかを残したい。第5回のアクセス承認に続き、今回はSQL承認を試した。"
+  },
+  "title": {
+    "en": "[Part 6] Approving SQL and Updating Data in QueryPie ACP — Keeping Read Access, Authorizing Only the Task",
+    "ko": "[6편] QueryPie ACP에서 SQL 승인받고 데이터 수정하기 — 조회 권한은 그대로, 필요한 작업만",
+    "ja": "[第6回] QueryPie ACPでSQLを承認してデータを変更する — 通常の参照権限を維持し、必要な作業だけ実行"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000245/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000245/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000245/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000245/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000245/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000245/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,766 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "サーバーにはターミナルが最も慣れている。日常の道具でアカウントやファイルを確認し、必要コマンドを続けたかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "今回は "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "MacターミナルからMulti Agent経由で実習サーバーへ接続すること"
+        },
+        {
+          "type": "text",
+          "text": "を試した。確認と制限削除を入力し、最後に管理者で接続・コマンド記録を探した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "ターミナル接続用ロールを準備する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "実習ポリシーの対象を "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "SSH Operations Lab"
+        },
+        {
+          "type": "text",
+          "text": " サーバー、アカウントを "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "labops"
+        },
+        {
+          "type": "text",
+          "text": "とし、SSHを許可してrm制限のLab - Block Deleteを接続した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Multi Agent用に "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "useProxyをtrue"
+        },
+        {
+          "type": "text",
+          "text": "とし、監査・録画も有効にした。接続対象とコマンド制御を一つにまとめられた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/01.webp",
+        "alt": "画面1. SSHポリシーにProxy・監査・録画を設定した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. SSHポリシーにProxy・監査・録画を設定した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Operations Lab Agent Terminal Operatorへ接続し、開発者へ当日期限で付与した。利用者が個別設定を持つより役割に範囲を定められて便利だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/02.webp",
+        "alt": "画面2. 利用者へ接続ロールと期限を設定した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. 利用者へ接続ロールと期限を設定した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Multi Agentで役割を選んで接続する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Macで開発者としてログインし、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Servers"
+        },
+        {
+          "type": "text",
+          "text": " タブで新ロールを選ぶとSSH Operations Labが現れ、役割と接続先を確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/03.webp",
+        "alt": "画面3. Multi Agentでロールを選ぶと対象が表示された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. Multi Agentでロールを選ぶと対象が表示された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Agentの "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Setting → Servers"
+        },
+        {
+          "type": "text",
+          "text": "にはSSH設定案内がある。通常のsshをQueryPie経由へつなぐ方式で、今回はProxyCommandをsshオプションに指定した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/04.webp",
+        "alt": "画面4. AgentでProxyCommandと接続例を確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. AgentでProxyCommandと接続例を確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "実際のコマンドは "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ssh -o \"ProxyCommand=qpctl ssh-proxy %r %h %p localhost\" labops@acp-ssh-lab"
+        },
+        {
+          "type": "text",
+          "text": "で、実習用ホストとサーバーを使った。接続後はlabops@acp-ssh-labとなった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "慣れた確認コマンドをそのまま使える"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "まず "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "whoami"
+        },
+        {
+          "type": "text",
+          "text": "でlabopsを確認。hostnameはacp-ssh-lab、pwdは/home/labopsで、lsでも所有者とサイズを確認した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/05.webp",
+        "alt": "画面5. Macターミナルで人・サーバー・パス・ファイルを確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. Macターミナルで人・サーバー・パス・ファイルを確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "操作感は通常SSHと同じで、対象とアカウントはQueryPieのロールに合わせて使えた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "削除はターミナル上で制限される"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "今回の実習用 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ep43-check.txt"
+        },
+        {
+          "type": "text",
+          "text": " ファイルへrmを入力すると、端末に "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "[QueryPie] Restricted"
+        },
+        {
+          "type": "text",
+          "text": " と出て、セキュリティポリシーによる制限と表示された。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/06.webp",
+        "alt": "画面6. 実習ファイル削除をQueryPieが制限した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. 実習ファイル削除をQueryPieが制限した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "直後のcatでも実習文2行はそのまま読めた。参照は続き、制限した削除で消えていなかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/07.webp",
+        "alt": "画面7. 制限後もファイル内容を参照できた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. 制限後もファイル内容を参照できた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "入れるかと中で何を使えるかを併せて管理でき、点検に必要な接続と制限を役割で適用できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "端末作業も管理画面へ残る"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "exit後に管理者の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Server Access History"
+        },
+        {
+          "type": "text",
+          "text": "で接続を見ると人・ロール・アカウントがあり、Connected Fromは "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Proxy"
+        },
+        {
+          "type": "text",
+          "text": "、Client Nameは "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "login/zsh/ssh"
+        },
+        {
+          "type": "text",
+          "text": "だった。終了もSuccessで残った。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/08.webp",
+        "alt": "画面8. Proxy SSHに利用者・役割・アカウント・クライアントが記録された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面8. Proxy SSHに利用者・役割・アカウント・クライアントが記録された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "接続詳細の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Go to Command Audit"
+        },
+        {
+          "type": "text",
+          "text": "を押すと同セッションの入力を追えた。確認はNot Restricted、削除は "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Restricted"
+        },
+        {
+          "type": "text",
+          "text": "で、時刻と実入力パスも分かった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/09.webp",
+        "alt": "画面9. 削除はRestrictedで、実コマンドも確認できた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面9. 削除はRestrictedで、実コマンドも確認できた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "運用者はMacターミナルで作業し、管理者はQueryPieで接続とコマンドを確認する。 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "慣れた道具を維持して役割別制御と監査を適用できる点"
+        },
+        {
+          "type": "text",
+          "text": "が今回最もよかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie Community 11.6.7、Multi Agent、Ubuntu 24.04で実施し、人とファイルは実習用だ。終了後ロールを回収した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "参考： "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/multi-agent",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "QueryPie Multi Agentユーザー案内"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

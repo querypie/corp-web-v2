@@ -1,0 +1,47 @@
+{
+  "authorName": "Kubernetes 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "pod-shell-access",
+  "imageSrc": "/assets/content/acp-lab-notes/pod-shell-access/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 29,
+  "status": "published",
+  "storageId": "cnt_000268",
+  "summary": {
+    "en": "Troubleshooting starts with logs, but not every log reader needs to execute commands in a container. Following Part 26’s read/change distinction, I separated log access from shell access on the same Pod in QueryPie.",
+    "ko": "장애가 나면 가장 먼저 로그부터 확인하게 된다. 그런데 로그를 보는 사람 모두에게 컨테이너 안에서 명령을 실행할 권한까지 필요한 것은 아니다. 원인을 살펴보는 일과 직접 조치하는 일을 나눠 맡기는 경우도 많다. 26편에서는 쿠버네티스 설정을 읽는 권한과 바꾸는 권한을 구분해 봤다. 이번에는 같은 Pod에서 로그 조회와 셸",
+    "ja": "障害調査はログから始まるが、見る人全員にコンテナ内コマンド実行権限が必要とは限らない。第26回に続き、同じPodでログ参照とシェル接続をQueryPieで分けた。"
+  },
+  "title": {
+    "en": "[Part 29] Reading Logs While Restricting Container Shell Access",
+    "ko": "[29편] 로그는 확인하고, 컨테이너 셸 접속은 제한해봤다",
+    "ja": "[第29回] ログは確認し、コンテナのシェル接続は制限する"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000268/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000268/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000268/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000268/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000268/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000268/ja.tiptap.json"
+    }
+  }
+}

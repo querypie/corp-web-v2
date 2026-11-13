@@ -1,0 +1,930 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "지난 6편에서는 조회 권한을 유지한 채, 승인을 받은 SQL로 필요한 데이터만 수정해 봤다. 이번에는 조회할 때 보이는 정보에 관심이 갔다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "배송 상태를 확인하려고 DB를 열었는데 고객의 전화번호와 이메일까지 함께 보인다면 어떨까. 주문이 정상적으로 처리됐는지 확인하는 데 연락처 전체가 꼭 필요한 것은 아니다. 그렇다고 주문 조회를 막을 수도 없다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "그래서 이번에는 QueryPie ACP의 데이터 마스킹을 써봤다. "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "주문번호와 배송 상태는 그대로 보고, 전화번호와 이메일만 가리는 것"
+        },
+        {
+          "type": "text",
+          "text": "이 목표다. 고객에게 직접 연락해야 하는 담당자에게는 원문을 볼 수 있도록 예외도 설정했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "주문을 조회하니 연락처까지 함께 보였다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "앞선 실습에서 사용한 주문 3건에 가상 고객 연락처를 연결했다. 이름은 Demo Customer A·B·C, 이메일은 example.test 주소를 사용했다. 이 글에 나오는 이름과 연락처는 모두 실습용 데이터다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "환경은 기존과 같다. Mac에 설치한 QueryPie ACP Community 11.6.7과 MySQL을 사용했고, 개발자 계정은 QueryPie를 거쳐 DBeaver로 접속했다. DB 권한은 조회 전용이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "주문 테이블과 고객 연락처 테이블을 JOIN해 주문번호, 배송 상태, 고객명, 전화번호, 이메일을 한 번에 조회했다. 마스킹을 설정하기 전에는 연락처가 모두 원문으로 나왔다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/01.webp",
+        "alt": "화면 1. QueryPie를 통해 접속한 DBeaver에서 주문 3건과 가상 고객 연락처를 조회했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 1. QueryPie를 통해 접속한 DBeaver에서 주문 3건과 가상 고객 연락처를 조회했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "여기서 구분할 부분이 있었다. 조회 전용 권한은 데이터를 수정하지 못하게 해주지만, 조회 결과에 어떤 정보가 보이는지는 별도로 정할 필요가 있다. 이번에는 그 부분을 마스킹 정책으로 설정해 보기로 했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "전화번호와 이메일에만 마스킹을 걸었다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "관리자 화면에서 Databases → Policies → Data Masking으로 이동했다. 정책 이름은 ‘Orders Lab - Contact Masking’으로 정하고, 대상 연결은 ‘Orders Control Lab’을 선택했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "그다음 Add Rule List에서 orders_control DB의 customer_contacts 테이블을 지정했다. 첫 번째 규칙은 phone 컬럼이다. Masking Pattern에는 기본으로 제공되는 phone 패턴을 선택했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/02.webp",
+        "alt": "화면 2. 전화번호 컬럼에 기본 phone 마스킹 패턴을 지정했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 2. 전화번호 컬럼에 기본 phone 마스킹 패턴을 지정했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이메일도 같은 방식으로 추가했다. 대상 컬럼을 email로 지정하고, 패턴은 email1을 선택했다. 처음에는 Allowed Users를 비워 두고 두 컬럼에 마스킹이 적용되는지 먼저 확인했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/03.webp",
+        "alt": "화면 3. 이메일 컬럼에는 email1 패턴을 적용했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 3. 이메일 컬럼에는 email1 패턴을 적용했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "저장한 뒤에는 두 규칙이 한 정책 안에 나란히 표시됐다. 어느 DB의 어떤 컬럼에 어떤 패턴을 적용했는지 한 화면에서 확인할 수 있었다. 이번처럼 가릴 항목이 명확하면 전화번호와 이메일만 골라서 설정하면 된다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/04.webp",
+        "alt": "화면 4. 연락처 테이블의 phone과 email 컬럼에 각각 마스킹 규칙을 등록했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 4. 연락처 테이블의 phone과 email 컬럼에 각각 마스킹 규칙을 등록했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "DBeaver에서 같은 SQL을 다시 실행했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "설정을 마친 뒤 DBeaver로 돌아왔다. 연결과 SQL은 그대로 두고 같은 조회문을 다시 실행했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에는 전화번호가 010-****-1001처럼 표시됐다. 이메일에도 별표가 적용돼 주소 전체를 읽을 수 없었다. 반면 주문번호, 배송 상태, 고객명은 이전과 같았고, 조회된 주문도 그대로 3건이었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/05.webp",
+        "alt": "화면 5. 동일한 SQL을 실행했지만 연락처에는 마스킹이 적용됐다. 주문번호와 배송 상태는 그대로 확인할 수 있었다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 5. 동일한 SQL을 실행했지만 연락처에는 마스킹이 적용됐다. 주문번호와 배송 상태는 그대로 확인할 수 있었다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "직접 써보니 이 부분이 가장 편했다. 개발자가 익숙한 DBeaver를 계속 쓰면서 주문 처리 상태를 확인할 수 있었다. SQL에 별도로 문자열을 가리는 함수를 넣지도 않았다. 관리자가 QueryPie에서 정한 정책이 조회 결과에 반영됐다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "업무에 필요한 주문 정보는 확인하면서, 불필요하게 연락처 전체를 보게 되는 상황은 줄일 수 있었다."
+        },
+        {
+          "type": "text",
+          "text": " 도입 담당자 입장에서는 기존 DB 도구를 유지하면서 개인정보 보호 정책을 적용할 수 있다는 점이 눈에 들어왔다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "누구의 조회에 마스킹이 적용됐는지도 남았다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "결과 화면을 확인한 뒤 관리자 화면의 Logs 탭도 열어봤다. 방금 실행한 조회가 Data Masked로 기록돼 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "로그에는 Demo Developer라는 사용자명, Orders Control Lab 연결, customer_contacts 테이블, phone과 email 컬럼이 표시됐다. 각 컬럼에 대해 3행이 처리됐고, 실행 시각도 함께 남았다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/06.webp",
+        "alt": "화면 6. 마스킹 로그에서 사용자, 대상 컬럼, 처리된 행 수와 시각을 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 6. 마스킹 로그에서 사용자, 대상 컬럼, 처리된 행 수와 시각을 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "설정만 해두는 데서 끝나지 않고, 실제 사용자의 조회에 정책이 적용됐는지 확인할 수 있었다. 운영 담당자가 적용 현황을 살펴보거나 관련 이력을 찾을 때 유용하겠다는 생각이 들었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "고객에게 연락해야 하는 담당자에게는 원문을 허용했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "모든 업무에서 연락처를 가릴 수는 없다. 배송 문제로 고객에게 직접 연락하는 담당자는 전화번호와 이메일 원문이 필요하다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번 실습에서는 기존 Demo Approver 계정을 연락처 확인 담당자로 사용했다. 이 계정에도 Orders Control Lab의 조회 전용 권한을 부여하고, 전화번호와 이메일 규칙의 Allowed Users에 각각 추가했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/07.webp",
+        "alt": "화면 7. 원문 확인이 필요한 담당자만 Allowed Users에 추가했다. 이메일 규칙에도 같은 담당자를 지정했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 7. 원문 확인이 필요한 담당자만 Allowed Users에 추가했다. 이메일 규칙에도 같은 담당자를 지정했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이후 해당 계정으로 QueryPie 웹 SQL Editor에 접속해 같은 SQL을 실행했다. 이번에는 전화번호와 이메일이 원문으로 표시됐다. 별도로 DB 관리자 권한이나 데이터 수정 권한을 부여하지 않고도 연락처 확인 업무를 할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/08.webp",
+        "alt": "화면 8. 허용된 담당자의 웹 SQL Editor에서는 같은 주문 3건의 연락처 원문을 확인할 수 있었다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 8. 허용된 담당자의 웹 SQL Editor에서는 같은 주문 3건의 연락처 원문을 확인할 수 있었다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "담당자 예외를 추가한 뒤 개발자의 DBeaver에서도 다시 조회했다. 개발자에게는 여전히 마스킹된 연락처가 보였다. 원문을 볼 사람을 추가했다고 해서 다른 사용자의 마스킹까지 풀리는 것은 아니었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "원본 DB에 저장된 값도 별도로 조회해 봤다. 전화번호와 이메일은 처음 넣은 값 그대로였다. 이번 마스킹은 원본 연락처를 별표로 바꾸는 작업 없이, 사용자에게 보여주는 조회 결과에 적용됐다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "도입 담당자 입장에서 좋았던 점"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번 실습을 하면서 DB 접근 권한을 조금 더 세밀하게 나눠볼 수 있었다. 같은 주문 데이터를 조회하더라도, 배송 상태를 확인하는 개발자와 고객에게 연락하는 담당자에게 필요한 정보는 달랐다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie에서는 컬럼별 마스킹과 사용자 예외를 함께 설정할 수 있어서 이 차이를 정책으로 정리하기 좋았다. 개발자는 DBeaver에서 하던 조회를 계속하고, 연락처가 필요한 담당자는 허용된 원문을 확인했다. 관리자는 그 사이에서 적용할 규칙과 이력을 한곳에서 관리할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "앞선 글에서 접속 권한, 쿼리 차단, 승인 절차를 살펴봤다면, 이번에는 접속한 뒤 실제로 보이는 정보까지 다뤄봤다. "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "DB를 사용할 수 있게 하면서도, 업무에 꼭 필요한 범위로 정보 노출을 줄일 수 있다는 점"
+        },
+        {
+          "type": "text",
+          "text": "이 이번 데이터 마스킹 실습에서 가장 인상적이었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "참고: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/en/administrator-manual/databases/policies/data-masking",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "QueryPie 공식 문서 — Data Masking"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

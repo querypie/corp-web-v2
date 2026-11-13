@@ -1,0 +1,766 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The terminal is my familiar server tool. I wanted account checks, file inspection, and commands to stay in the tool I use daily."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "This time I tried "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "connecting to the lab server from Mac Terminal through Multi Agent"
+        },
+        {
+          "type": "text",
+          "text": ". I ran inspection commands and a denied deletion, then reviewed access and command records as administrator."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Preparing a Terminal-Access Role"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I created a lab policy targeting "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "SSH Operations Lab"
+        },
+        {
+          "type": "text",
+          "text": " with server account "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "labops"
+        },
+        {
+          "type": "text",
+          "text": ", allowing SSH and attaching Lab - Block Delete with restricted keyword rm."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "For Multi Agent access, I set "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "useProxy to true"
+        },
+        {
+          "type": "text",
+          "text": ", also enabling command audits and session recordings. Server, account, and command control stayed in one policy."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/01.webp",
+        "alt": "Screen 1. SSH policy enables proxy access, command audit, and recording.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 1. SSH policy enables proxy access, command audit, and recording."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I attached it to Operations Lab Agent Terminal Operator and granted Demo Developer access expiring that day. Administrators define role scope rather than users managing each server separately."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/02.webp",
+        "alt": "Screen 2. Terminal role assigned to the test user with expiration.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 2. Terminal role assigned to the test user with expiration."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Selecting the Role in Multi Agent"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "After signing in as Demo Developer on the Mac, I opened "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Servers"
+        },
+        {
+          "type": "text",
+          "text": " and selected the new role. SSH Operations Lab appeared, confirming both role and destination."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/03.webp",
+        "alt": "Screen 3. The assigned terminal role reveals its server in Multi Agent.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 3. The assigned terminal role reveals its server in Multi Agent."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The agent’s "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Setting → Servers"
+        },
+        {
+          "type": "text",
+          "text": " also explains SSH configuration. It routes the ordinary ssh command through QueryPie. I passed the shown ProxyCommand as an ssh option."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/04.webp",
+        "alt": "Screen 4. ProxyCommand and SSH examples in the agent.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 4. ProxyCommand and SSH examples in the agent."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The actual command was "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ssh -o \"ProxyCommand=qpctl ssh-proxy %r %h %p localhost\" labops@acp-ssh-lab"
+        },
+        {
+          "type": "text",
+          "text": ", using this lab’s QueryPie host and server address. The prompt became labops@acp-ssh-lab."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Familiar Inspection Commands Still Work"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "First I ran "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "whoami"
+        },
+        {
+          "type": "text",
+          "text": ", which returned labops. hostname was acp-ssh-lab and pwd /home/labops. ls showed the lab file’s owner and size."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/05.webp",
+        "alt": "Screen 5. Account, server, path, and file inspected in Mac Terminal.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 5. Account, server, path, and file inspected in Mac Terminal."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The session felt like normal SSH while using the server and account defined by the QueryPie role."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Deletion Is Restricted Directly in the Terminal"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "For the lab-created "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ep43-check.txt"
+        },
+        {
+          "type": "text",
+          "text": " file, I entered rm. The terminal showed "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "[QueryPie] Restricted"
+        },
+        {
+          "type": "text",
+          "text": " and explained that security policy denied the command."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/06.webp",
+        "alt": "Screen 6. QueryPie restricts deletion of the test file.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 6. QueryPie restricts deletion of the test file."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "cat immediately read the same two lines. Reads continued and the denied attempt had not removed the file."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/07.webp",
+        "alt": "Screen 7. File contents remain readable after the denied deletion.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 7. File contents remain readable after the denied deletion."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I could govern both entry and available commands: allow inspection access and apply selected restrictions through the role."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Terminal Activity Appears in Administration Records"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "After exit, I opened the session in "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Server Access History"
+        },
+        {
+          "type": "text",
+          "text": " and saw user, role, and account. Connected From was "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Proxy"
+        },
+        {
+          "type": "text",
+          "text": ", Client Name "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "login/zsh/ssh"
+        },
+        {
+          "type": "text",
+          "text": ", and disconnection Success."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/08.webp",
+        "alt": "Screen 8. Proxied SSH retains user, role, server account, and client details.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 8. Proxied SSH retains user, role, server account, and client details."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Clicking "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Go to Command Audit"
+        },
+        {
+          "type": "text",
+          "text": " in session details opened commands from the same session. whoami and file reads were Not Restricted; deletion was "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Restricted"
+        },
+        {
+          "type": "text",
+          "text": ", including time and entered file path."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/native-ssh-terminal/09.webp",
+        "alt": "Screen 9. Deletion recorded as Restricted with the actual command.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 9. Deletion recorded as Restricted with the actual command."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Operators work in Mac Terminal; administrators inspect access and commands in QueryPie. "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Keeping familiar tools while applying role-based controls and audits"
+        },
+        {
+          "type": "text",
+          "text": " was the highlight."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "This lab used QueryPie Community 11.6.7, Multi Agent, and Ubuntu 24.04. Users/files were for testing, and I revoked the added role afterward."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Reference: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/multi-agent",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "QueryPie Multi Agent user guide"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

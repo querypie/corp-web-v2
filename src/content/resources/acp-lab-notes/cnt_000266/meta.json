@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "database-connection-path",
+  "imageSrc": "/assets/content/acp-lab-notes/database-connection-path/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 27,
+  "status": "published",
+  "storageId": "cnt_000266",
+  "summary": {
+    "en": "QueryPie manages permissions and records, but an old direct database route needs separate attention. I compared direct and proxy queries in DBeaver, closed the direct port, and verified a new QueryPie connection still worked and produced audits.",
+    "ko": "QueryPie로 DB 권한을 관리하고 작업 기록을 남겨도, 사용자가 예전 DB 주소로 직접 접속한다면 그 경로는 따로 정리해야 한다. 도입을 준비하는 입장에서는 “앞으로 어디로 접속하게 할 것인가”도 중요한 문제다. 이번에는 DBeaver에서 같은 DB에 두 가지 방법으로 접속해 봤다. 먼저 DB에 직접 연결하고, 다음",
+    "ja": "権限と記録をQueryPieで管理しても、旧DBへの直接経路は別途整理が必要だ。DBeaverで直接・Proxyを比較して直結ポートを閉じ、新しいQueryPie接続と監査が使えることを確認した。"
+  },
+  "title": {
+    "en": "[Part 27] Keeping DBeaver, Closing Direct Database Access — Organizing QueryPie Connection Paths",
+    "ko": "[27편] DBeaver는 그대로, DB 직접 접속은 닫아봤다 — QueryPie 접속 경로 정리",
+    "ja": "[第27回] DBeaverはそのまま、DB直接接続は閉じる — QueryPie接続経路の整理"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000266/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000266/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000266/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000266/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000266/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000266/ja.tiptap.json"
+    }
+  }
+}

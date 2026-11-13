@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "sql-execution-reason",
+  "imageSrc": "/assets/content/acp-lab-notes/sql-execution-reason/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 32,
+  "status": "published",
+  "storageId": "cnt_000271",
+  "summary": {
+    "en": "SQL audits show who queried what, but not whether a lookup answered a shipping inquiry or reconciled processing. I required execution reasons in QueryPie and queried two orders for different purposes, then checked their audit records.",
+    "ko": "감사 기록을 보면 누가 어떤 SQL을 실행했는지 알 수 있다. 그런데 같은 주문 조회라도 배송 문의 때문에 봤는지, 처리 내역을 맞춰 보려던 것인지는 SQL만으로 알기 어렵다. 이번에는 조회할 때 그 이유도 함께 남겨 봤다. QueryPie에서 SQL 실행 사유를 입력하도록 설정하고, 서로 다른 업무를 가정해 주문 두 건",
+    "ja": "SQL監査は誰が何を実行したか分かるが、配送問い合わせか処理照合かまでは分かりにくい。QueryPieで実行理由を必須にし、異なる目的の2件を参照して監査を確認した。"
+  },
+  "title": {
+    "en": "[Part 32] Recording the Reason Alongside the SQL",
+    "ko": "[32편] 조회한 이유를 SQL과 함께 남겨봤다",
+    "ja": "[第32回] 参照理由をSQLと一緒に残す"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000271/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000271/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000271/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000271/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000271/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000271/ja.tiptap.json"
+    }
+  }
+}

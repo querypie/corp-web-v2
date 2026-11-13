@@ -1,0 +1,47 @@
+{
+  "authorName": "승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "audit-log-export",
+  "imageSrc": "/assets/content/acp-lab-notes/audit-log-export/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 20,
+  "status": "published",
+  "storageId": "cnt_000259",
+  "summary": {
+    "en": "Part 19 inspected order values before and after a change. Here, I exported the activity records to support an audit or internal review of a particular user’s database work. Filtering by period and user gathered both the read and approved update, with SQL, outcomes, and workflow UUID.",
+    "ko": "19편에서는 주문 상태를 바꾼 뒤 DML Snapshot으로 변경 전후 값을 확인했다. 이번에는 그 작업 기록을 파일로 꺼내 봤다. 감사나 내부 점검 때 특정 사용자가 어느 DB에서 어떤 작업을 했는지 자료로 전달해야 하는 상황을 생각했다. QueryPie의 Audit Log Export에서 기간과 사용자를 지정하니, 주",
+    "ja": "第19回では注文の変更前後を確認した。今回は特定ユーザーのDB作業を監査や内部点検に渡すため、記録を出力した。期間と人で絞ると参照と承認UPDATEがまとまり、SQL、結果、申請UUIDまで含まれた。"
+  },
+  "title": {
+    "en": "[Part 20] Selecting the Records an Audit Needs — QueryPie Audit Log Export",
+    "ko": "[20편] 감사 자료를 준비할 때, 필요한 기록만 골라봤다 — QueryPie Audit Log Export",
+    "ja": "[第20回] 監査に必要な記録だけを抽出する — QueryPie Audit Log Export"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000259/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000259/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000259/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000259/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000259/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000259/ja.tiptap.json"
+    }
+  }
+}

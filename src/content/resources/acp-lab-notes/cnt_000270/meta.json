@@ -1,0 +1,47 @@
+{
+  "authorName": "서버 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "server-file-transfer",
+  "imageSrc": "/assets/content/acp-lab-notes/server-file-transfer/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 31,
+  "status": "published",
+  "storageId": "cnt_000270",
+  "summary": {
+    "en": "Inspecting production status files need not include upload rights. I used QueryPie web SFTP to transfer files with one user/account, then restricted only uploads and checked that downloads remained available.",
+    "ko": "운영 서버에서 상태 파일이나 점검 자료를 내려받아야 할 때가 있다. 자료를 확인하는 업무라면 파일을 올리는 권한까지 함께 줄 필요는 없을 것이다. 이번에는 QueryPie의 웹 SFTP로 이 두 작업을 나눠 봤다. 같은 사용자와 서버 계정으로 파일을 주고받아 본 뒤, 업로드만 제한했다. 필요한 파일은 계속 내려받을 수 있",
+    "ja": "本番の状態ファイル確認にアップロード権限まで必要とは限らない。QueryPieのWeb SFTPで転送後、アップロードだけを禁止し、取得を続けられるか確認した。"
+  },
+  "title": {
+    "en": "[Part 31] Downloading Server Files While Blocking Uploads",
+    "ko": "[31편] 서버 파일은 내려받고, 업로드는 막아봤다",
+    "ja": "[第31回] サーバーファイルは取得し、アップロードは止める"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000270/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000270/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000270/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000270/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000270/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000270/ja.tiptap.json"
+    }
+  }
+}

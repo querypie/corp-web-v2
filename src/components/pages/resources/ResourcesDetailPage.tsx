@@ -1,13 +1,17 @@
 import { pageXPaddingClassName } from "@/constants/layout";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";
 import type { Locale } from "@/constants/i18n";
 import ContentArticlePreview from "@/components/content/ContentArticlePreview";
 import DetailContentList from "@/components/sections/DetailContentList";
 import ContentShareActions from "./ContentShareActions";
+import { getAcpLabNotesCopy } from "@/copy/acpLabNotes";
+import type { LabNote } from "@/features/content/acpLabNotes";
 import { getLockedPdfButtonLabel, getPdfWhitePaperButtonLabel } from "@/features/content/data";
 
 export type DocsDetailPageProps = {
+  labNote?: LabNote;
   bodyHtml?: string;
   category: string;
   contentOverlay?: ReactNode;
@@ -48,6 +52,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 }
 
 export default function DocsDetailPage({
+  labNote,
   bodyHtml = "",
   category,
   contentOverlay,
@@ -72,6 +77,7 @@ export default function DocsDetailPage({
   unlockCookieName,
   writer,
 }: DocsDetailPageProps) {
+  const labCopy = getAcpLabNotesCopy(locale);
   return (
     <div className={`flex w-full justify-center ${pageXPaddingClassName} pb-10`}>
       <article className="flex w-full max-w-[1200px] flex-col gap-[120px]">
@@ -87,13 +93,13 @@ export default function DocsDetailPage({
             <div className="flex items-start gap-[6px] type-body-md leading-5 md:sticky md:top-[80px] md:justify-self-start md:self-start">
               {parentLabel ? (
                 <>
-                  <p className="m-0 text-mute">{parentLabel}</p>
+                  <Link className="text-mute transition-colors duration-200 hover:text-fg focus-visible:text-fg" href={docsHref}>
+                    {parentLabel}
+                  </Link>
                   <p className="m-0 text-mute">/</p>
                 </>
               ) : null}
-              <Link className="text-fg transition-colors duration-200 hover:text-mute" href={docsHref}>
-                {category}
-              </Link>
+              <p className="m-0 text-fg">{category}</p>
             </div>
           ) : null}
 
@@ -124,6 +130,17 @@ export default function DocsDetailPage({
             />
 
             <ContentShareActions locale={locale} shareUrl={shareUrl} title={title} />
+            {labNote ? (
+              <nav className="flex flex-wrap gap-5 type-body-md" aria-label={labCopy.label}>
+                <Link className="underline underline-offset-4" href={docsHref}>{labCopy.contents}</Link>
+                <a className="underline underline-offset-4" href={labCopy.tryHref} target="_blank" rel="noopener noreferrer">
+                  {labCopy.tryLabel}<ExternalLinkIcon className="ml-1.5 h-4 w-4 align-[-2px]" />
+                </a>
+                <a className="underline underline-offset-4" href={labCopy.docsHref} target="_blank" rel="noopener noreferrer">
+                  {labCopy.docsLabel}<ExternalLinkIcon className="ml-1.5 h-4 w-4 align-[-2px]" />
+                </a>
+              </nav>
+            ) : null}
 
             <DetailContentList className="pt-2" items={contentListItems} />
           </div>

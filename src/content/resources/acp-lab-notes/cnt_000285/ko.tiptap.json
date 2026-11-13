@@ -1,0 +1,544 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "서버 계정 비밀번호를 바꾸는 일은 변경 버튼을 누르는 것으로 끝나지 않는다. 바뀐 비밀번호로 접속할 수 있는지 확인하고, 작업하는 사람에게도 새 접속 방법을 알려줘야 한다. 서버가 늘어나면 어느 계정을 언제 바꿨는지 챙기는 일도 만만치 않다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에는 QueryPie의 Password Provisioning으로 테스트 서버 계정 비밀번호를 바꿔봤다. 관리자 화면에서 변경 작업을 실행한 뒤, 사용자 화면에서 그 계정으로 접속해 명령을 실행하는 데까지 진행했다. 직접 해보니 비밀번호 변경과 사용자의 접속을 같은 관리 체계 안에서 처리할 수 있다는 점이 편했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "변경할 서버와 계정부터 정했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "실습에는 별도 Ubuntu 서버와 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "rotateops"
+        },
+        {
+          "type": "text",
+          "text": " 계정을 준비했다. Servers의 Configurations에서 Password Provisioning을 켜니 비밀번호 변경 작업과 계정 현황을 관리하는 메뉴를 사용할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/01.webp",
+        "alt": "화면 1. Password Provisioning을 활성화하고 서버 계정 관리 메뉴를 열었다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 1. Password Provisioning을 활성화하고 서버 계정 관리 메뉴를 열었다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "전용 서버 그룹에는 이번에 사용할 서버 한 대만 넣었다. 계정은 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "QueryPie - Provisioning"
+        },
+        {
+          "type": "text",
+          "text": " 유형으로 등록했다. 저장된 화면에는 인증 방식이 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Managed by Job"
+        },
+        {
+          "type": "text",
+          "text": "으로 표시됐다. 이 계정의 비밀번호를 변경 작업으로 관리한다는 뜻이 화면에서도 분명했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/02.webp",
+        "alt": "화면 2. rotateops 계정을 비밀번호 변경 작업으로 관리하도록 등록했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 2. rotateops 계정을 비밀번호 변경 작업으로 관리하도록 등록했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "서버 한 대, 계정 하나를 대상으로 작업을 만들었다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Password Provisioning에서 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "EP46 Rotate Test Account"
+        },
+        {
+          "type": "text",
+          "text": "라는 작업을 만들었다. 대상에는 방금 만든 서버 그룹을 선택했다. Target Server는 1, Target Accounts에는 rotateops가 표시돼 실행 전에 범위를 확인할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "비밀번호 변경을 수행할 계정과 사용자가 접속할 계정은 따로 두었다. 이번에는 격리된 실습 서버의 관리 계정으로 변경을 수행하고, 실제 접속에는 rotateops를 사용했다. 실행 주기는 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Manual"
+        },
+        {
+          "type": "text",
+          "text": "로 정했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/03.webp",
+        "alt": "화면 3. 대상 서버와 계정을 확인한 뒤 수동 실행 작업으로 저장했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 3. 대상 서버와 계정을 확인한 뒤 수동 실행 작업으로 저장했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "변경 결과를 계정 단위로 확인했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Run Job을 실행하고 History에서 결과를 열어봤다. 작업은 Completed로 끝났고, 상세 화면에서 rotateops 계정의 결과가 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Success"
+        },
+        {
+          "type": "text",
+          "text": "로 표시됐다. 서버 쪽에서도 해당 계정의 비밀번호가 실제로 바뀐 것을 확인했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/04.webp",
+        "alt": "화면 4. 대상 계정의 비밀번호 변경이 Success로 완료됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 4. 대상 계정의 비밀번호 변경이 Success로 완료됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Account Management에도 같은 계정이 나타났다. 서버 이름, 사용 계정, 용도와 함께 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Last Password Updated At"
+        },
+        {
+          "type": "text",
+          "text": "을 볼 수 있었다. 이번 변경 시각은 13시 16분 4초였다. 계정별로 마지막 변경 시점을 찾아볼 수 있으니, 비밀번호 변경 현황을 따로 취합할 때보다 관리하기 수월해 보였다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/05.webp",
+        "alt": "화면 5. 계정 관리 화면에 마지막 비밀번호 변경 시각이 남았다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 5. 계정 관리 화면에 마지막 비밀번호 변경 시각이 남았다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "새 비밀번호를 입력하지 않고 서버에 접속했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이제 사용자 화면으로 넘어갔다. 테스트 사용자에게 부여한 역할로 서버를 선택하니 rotateops 계정과 Active 상태가 보였다. 여기서 Connect를 눌렀다. 새로 바뀐 서버 비밀번호를 찾아서 입력하는 과정은 없었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/06.webp",
+        "alt": "화면 6. 권한이 있는 사용자는 관리되는 rotateops 계정으로 접속했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 6. 권한이 있는 사용자는 관리되는 rotateops 계정으로 접속했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "터미널이 열린 뒤 whoami, hostname, pwd를 차례로 실행했다. 접속 계정은 rotateops, 서버는 acp-ep46-password-lab, 작업 위치는 /home/rotateops로 나왔다. 비밀번호 변경 후에도 권한을 가진 사용자가 정상적으로 작업할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/07.webp",
+        "alt": "화면 7. 변경된 인증 정보로 접속해 계정과 서버 이름을 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 7. 변경된 인증 정보로 접속해 계정과 서버 이름을 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이 부분이 가장 마음에 들었다. 관리자는 서버 계정의 비밀번호를 변경하고, 사용자는 QueryPie에서 부여받은 접근 권한으로 작업을 이어갔다. 새 비밀번호를 사용자마다 전달하는 수고를 줄일 수 있는 방식이었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "비밀번호 관리와 접속 기록이 함께 남았다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "마지막으로 Server Access History를 열었다. 13시 17분 24초에 Demo Developer가 EP46 Rotation Operator 역할로 접속한 기록이 있었고, 실제 서버 계정은 rotateops, 결과는 Success였다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/08.webp",
+        "alt": "화면 8. 접속한 사람, 사용한 역할, 실제 서버 계정이 감사 기록에 함께 남았다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 8. 접속한 사람, 사용한 역할, 실제 서버 계정이 감사 기록에 함께 남았다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "비밀번호를 바꾼 기록은 Password Provisioning과 Account Management에서, 그 계정을 사용한 사람은 Server Access History에서 확인할 수 있었다. 서버 계정을 여러 사람이 업무에 사용하더라도 누가 접속했는지를 QueryPie 사용자 기준으로 살펴볼 수 있다는 점이 좋았다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번 실습에서는 서버 계정 하나의 비밀번호를 바꾸고 새 연결까지 확인했다. 도입 담당자 입장에서 보면 비밀번호 변경 업무, 사용자 접근 권한, 접속 이력을 한곳에서 관리할 수 있다는 점이 실용적이었다. 비밀번호를 주기적으로 관리하면서도 작업자의 접속 절차는 간단하게 유지할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

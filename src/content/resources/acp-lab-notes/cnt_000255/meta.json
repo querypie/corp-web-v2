@@ -1,0 +1,47 @@
+{
+  "authorName": "승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "administrator-audit",
+  "imageSrc": "/assets/content/acp-lab-notes/administrator-audit/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 16,
+  "status": "published",
+  "storageId": "cnt_000255",
+  "summary": {
+    "en": "After creating an analysts group and adding a user, I wondered whether a future operator could explain how the current privileges came about. I searched QueryPie audits for the group creation, access grant, and membership change.",
+    "ko": "지난 글에서는 주문 분석팀 그룹을 만들고, 새 담당자를 추가해 DB를 조회해봤다. 설정이 잘 적용되는 것을 확인하고 나니 한 가지가 더 궁금했다. 나중에 다른 담당자가 이 환경을 넘겨받으면, 지금의 권한이 어떻게 만들어졌는지도 알 수 있을까. 이번에는 QueryPie의 감사 메뉴에서 내가 조금 전 했던 작업을 찾아봤다. ",
+    "ja": "分析グループを作って利用者を追加した後、引き継ぐ担当者も今の権限の経緯を説明できるかが気になった。QueryPieの監査でグループ作成、権限付与、構成員追加を探した。"
+  },
+  "title": {
+    "en": "[Part 16] Who Granted This Database Access? — QueryPie Administrator Change History",
+    "ko": "[16편] 이 DB 권한은 누가 줬을까? — QueryPie 관리자 변경 이력",
+    "ja": "[第16回] このDB権限は誰が付与したのか — QueryPie管理者の変更履歴"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000255/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000255/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000255/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000255/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000255/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000255/ja.tiptap.json"
+    }
+  }
+}

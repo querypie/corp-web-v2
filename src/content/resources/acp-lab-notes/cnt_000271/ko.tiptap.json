@@ -1,0 +1,743 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "감사 기록을 보면 누가 어떤 SQL을 실행했는지 알 수 있다. 그런데 같은 주문 조회라도 배송 문의 때문에 봤는지, 처리 내역을 맞춰 보려던 것인지는 SQL만으로 알기 어렵다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에는 조회할 때 그 이유도 함께 남겨 봤다. QueryPie에서 SQL 실행 사유를 입력하도록 설정하고, 서로 다른 업무를 가정해 주문 두 건을 조회했다. 마지막에는 감사 기록에 어떤 내용이 남았는지 확인했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "기존 조회 권한으로 시작했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "앞서 사용했던 DB Route Lab의 가상 주문 데이터를 그대로 이용했다. Demo Developer에게는 이 연결의 Read-Only 권한이 있었고, 허용된 작업은 Select였다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "웹 SQL Editor에서 주문 한 건을 조회해 데이터가 나오는 것을 확인했다. 이번에 추가할 것은 조회할 때 적는 업무 사유다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-reason/01.webp",
+        "alt": "화면 1. 기존 DB Route Lab의 Read-Only·Select 권한으로 실습했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 1. 기존 DB Route Lab의 Read-Only·Select 권한으로 실습했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "조회할 때 사유를 받도록 설정했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "관리자 화면에서 DB Route Lab의 Additional Information을 열었다. User Action Purpose Required 항목에서 SQL Execution을 선택했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "같은 세션에서 사유를 재사용하는 옵션은 선택하지 않았다. 이번에는 두 조회에 서로 다른 이유를 남겨 보고 싶었다. 설정을 저장한 뒤 사용자 화면에서 새로 연결했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-reason/02.webp",
+        "alt": "화면 2. 이 DB 연결에서 SQL 실행 사유를 입력하도록 설정했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 2. 이 DB 연결에서 SQL 실행 사유를 입력하도록 설정했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "배송 문의를 확인한다는 사유를 적었다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SELECT를 작성하고 Run SQL을 누르자 사유 입력창이 나왔다. 아무것도 적지 않고 OK를 눌러 보니 “Enter a reason.” 안내가 표시됐다. 사유를 입력해야 조회를 진행할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-reason/03.webp",
+        "alt": "화면 3. 사유를 비워 두면 입력 안내가 나왔다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 3. 사유를 비워 두면 입력 안내가 나왔다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이 시도는 취소하고, 주문 27002를 조회하는 SQL을 실행했다. 가상 배송 문의에 답하기 위해 현재 배송 상태와 주문 금액을 확인한다는 사유를 적었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-reason/04.webp",
+        "alt": "화면 4. 주문 27002를 조회할 업무 사유를 입력했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 4. 주문 27002를 조회할 업무 사유를 입력했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "OK를 누르자 주문 상태 SHIPPED와 금액 18,500.00이 나왔다. SQL을 작성하고 조회하는 방법은 그대로였다. 실행 전에 이유를 적으면 곧바로 결과를 볼 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-reason/05.webp",
+        "alt": "화면 5. 사유를 입력한 뒤 주문 상태와 금액을 조회했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 5. 사유를 입력한 뒤 주문 상태와 금액을 조회했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "다른 업무에는 다른 사유를 남겼다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에는 주문 27003을 조회했다. 같은 연결에서 실행했지만 사유 입력창이 다시 열렸다. 앞에서 사유 재사용을 선택하지 않은 설정이 실제 조회에도 적용됐다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "두 번째에는 가상 주문 처리 내역을 대조하려고 배송 완료 상태와 금액을 확인한다는 사유를 넣었다. 실행 결과는 DELIVERED, 32,000.00이었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-reason/06.webp",
+        "alt": "화면 6. 주문 처리 내역 확인에는 별도의 사유를 남겼다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 6. 주문 처리 내역 확인에는 별도의 사유를 남겼다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "둘 다 주문을 읽는 SELECT지만, 업무 목적은 달랐다. 조회하는 사람이 그때의 이유를 적어 두니 나중에 기록을 볼 때 구분하기 좋겠다는 생각이 들었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "감사 기록에서 SQL과 사유를 같이 확인했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "관리자 화면의 Query Audit에서 Demo Developer, DB Route Lab, Web Editor로 범위를 좁혔다. 두 조회는 모두 Success로 남아 있었고, 실행자와 조회 시각, 사용한 DB 계정도 확인할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "주문 27002의 상세 기록을 열었다. Query에는 조금 전 실행한 SELECT가, Execution Reason에는 배송 문의를 확인한다는 사유가 그대로 들어 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-reason/07.webp",
+        "alt": "화면 7. 주문 27002의 SQL과 배송 문의 사유가 같은 감사 기록에 남았다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 7. 주문 27002의 SQL과 배송 문의 사유가 같은 감사 기록에 남았다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "주문 27003의 기록에는 두 번째로 입력한 처리 내역 확인 사유가 붙어 있었다. 같은 사용자가 같은 테이블을 조회해도, 각 SQL이 어떤 업무로 실행됐는지 구분할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-reason/08.webp",
+        "alt": "화면 8. 주문 27003에는 별도로 입력한 업무 사유가 기록됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 8. 주문 27003에는 별도로 입력한 업무 사유가 기록됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이 기능이 있으면 감사 기록을 검토할 때 SQL만 보고 조회 이유를 짐작할 필요가 줄어든다. 누가 무엇을 조회했는지에 더해, 사용자가 남긴 업무 설명까지 한곳에서 살펴볼 수 있다. 사유를 따로 받아 SQL 이력과 맞춰 보는 일을 줄여 준다는 점이 좋았다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "실습은 QueryPie Community 11.6.7의 Web SQL Editor에서 진행했다. 화면의 사용자와 주문, 업무 사유는 모두 실습용이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "참고: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/databases/connection-management/db-connections",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "DB Connections"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/database-access-control/using-web-sql-editor",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Web SQL Editor"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/audit/database-logs/query-audit",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Query Audit"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

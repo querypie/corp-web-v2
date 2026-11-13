@@ -1,7 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { getAdminSectionMenuItems, getResourcesSidebarMenuItems } from "./config";
+import { docsCategoryConfigs, getAdminSectionMenuItems, getResourcesSidebarMenuItems } from "./config";
 
 describe("getAdminSectionMenuItems", () => {
+  it("Resources 관리자 메뉴 순서는 공개 리소스 카테고리 순서와 같다", () => {
+    expect(getAdminSectionMenuItems("resources").map((item) => item.slug)).toEqual(docsCategoryConfigs.map((item) => item.slug));
+  });
   it("Demo CMS 메뉴에는 AIP/ACP Use Cases만 노출한다", () => {
     expect(getAdminSectionMenuItems("demo")).toEqual([
       { href: "/admin/demo/aip-features", label: "AIP Use Cases", slug: "aip-features" },
@@ -49,6 +52,7 @@ describe("getResourcesSidebarMenuItems", () => {
         label: "블로그",
         slug: "blogs",
       },
+      { href: "/ko/acp-lab-notes", isActive: false, kind: "link", label: "ACP 실습 노트", slug: "acp-lab-notes" },
       {
         href: "/ko/voc",
         isActive: false,
@@ -104,6 +108,7 @@ describe("getResourcesSidebarMenuItems", () => {
         label: "Blog",
         slug: "blogs",
       },
+      { href: "/en/acp-lab-notes", isActive: false, kind: "link", label: "ACP Lab Notes", slug: "acp-lab-notes" },
       {
         href: "/en/voc",
         isActive: false,

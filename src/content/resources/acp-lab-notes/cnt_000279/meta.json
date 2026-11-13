@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "database-ip-restrictions",
+  "imageSrc": "/assets/content/acp-lab-notes/database-ip-restrictions/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 40,
+  "status": "published",
+  "storageId": "cnt_000279",
+  "summary": {
+    "en": "A user may need read access only from an approved network. I tried Allowed Zone, changing only allowed IPs while retaining user privileges, then restoring the original setting to verify access returned.",
+    "ko": "DB 조회 권한을 받은 사람이라도 접속할 수 있는 IP까지 함께 정해 두고 싶을 때가 있다. 업무에 필요한 권한은 주되, 정해진 네트워크에서만 DB를 사용하게 하는 방식이다. 이번에는 QueryPie의 Allowed Zone을 써봤다. 같은 사용자에게 같은 조회 권한을 둔 채 허용 IP만 바꿔 보고, 다시 원래 값으로 되",
+    "ja": "参照権限があっても指定ネットワークだけで使わせたい場合がある。Allowed Zoneで人と権限を維持したままIPだけ変更し、復元後に参照が戻るか試した。"
+  },
+  "title": {
+    "en": "[Part 40] Keeping Database Privileges and Defining Allowed IPs",
+    "ko": "[40편] DB 접속 권한은 그대로 두고 허용 IP를 정해봤다",
+    "ja": "[第40回] DB権限を維持し、許可IPを定める"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000279/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000279/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000279/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000279/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000279/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000279/ja.tiptap.json"
+    }
+  }
+}

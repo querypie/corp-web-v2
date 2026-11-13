@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "database-account-mapping",
+  "imageSrc": "/assets/content/acp-lab-notes/database-account-mapping/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 41,
+  "status": "published",
+  "storageId": "cnt_000280",
+  "summary": {
+    "en": "Database teams often separate read accounts from operational accounts. I mapped that distinction to QueryPie Advanced Privilege, verifying that the actual account changes with privileges and both identities remain in audits.",
+    "ko": "DB를 운영하다 보면 조회용 계정과 작업용 계정을 따로 두게 된다. 주문 내역을 확인하는 사람에게는 조회 권한만 주고, 상태를 바꾸는 담당자에게는 필요한 변경 권한을 주는 식이다. 이번에는 이렇게 나눠 둔 DB 계정을 QueryPie 권한에 연결해봤다. Advanced Privilege를 사용하면 같은 DB 연결에서도 권",
+    "ja": "DBでは参照と作業のアカウントを分けることがある。その区別をAdvanced Privilegeへ接続し、権限で実アカウントが変わるか、両者が監査へどう残るかを試した。"
+  },
+  "title": {
+    "en": "[Part 41] Mapping Read and Operational Privileges to Different Database Accounts",
+    "ko": "[41편] 조회용 권한과 작업용 권한에 서로 다른 DB 계정을 연결해봤다",
+    "ja": "[第41回] 参照用・作業用権限へ異なるDBアカウントを接続する"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000280/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000280/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000280/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000280/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000280/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000280/ja.tiptap.json"
+    }
+  }
+}

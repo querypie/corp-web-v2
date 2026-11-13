@@ -1,0 +1,47 @@
+{
+  "authorName": "시작하기 · DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-07",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "first-database-connection",
+  "imageSrc": "/assets/content/acp-lab-notes/first-database-connection/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 3,
+  "status": "published",
+  "storageId": "cnt_000242",
+  "summary": {
+    "en": "In Part 2, I installed QueryPie ACP Community Edition on my Mac and signed in. Now I want to connect a database and query real test data. What interested me was the developer experience: once an administrator registers a database, where does a developer run SQL? Is access limited to the browser, or can an existing database client be used?",
+    "ko": "지난 2편에서 Mac에 QueryPie ACP 커뮤니티 버전을 설치했다. 로그인까지 해봤으니, 이번에는 DB를 연결해서 실제로 데이터를 조회해 보려고 한다. 궁금했던 건 개발자가 쓰는 화면이었다. 관리자가 DB를 등록해 주면 개발자는 어디로 들어가서 SQL을 실행할까? 웹에서만 써야 할까, 쓰던 DB 클라이언트로도 접속할",
+    "ja": "第2回ではMacにQueryPie ACP Community Editionを導入してログインした。今回はDBを接続し、実際にデータを参照する。気になったのは開発者側の操作だ。管理者がDBを登録したら、開発者はどこでSQLを実行するのか。Webだけなのか、使い慣れたDBクライアントでも接続できるのか。"
+  },
+  "title": {
+    "en": "[Part 3] Connecting the First Database to QueryPie ACP — What Changes for Developers?",
+    "ko": "[3편] QueryPie ACP에 첫 DB 연결하기 — 개발자의 접속 방식은 어떻게 바뀔까?",
+    "ja": "[第3回] QueryPie ACPに最初のDBを接続する — 開発者の接続方法はどう変わるか"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000242/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000242/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000242/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000242/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000242/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000242/ja.tiptap.json"
+    }
+  }
+}

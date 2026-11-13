@@ -1,0 +1,47 @@
+{
+  "authorName": "시작하기 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "lab-notes-retrospective",
+  "imageSrc": "/assets/content/acp-lab-notes/lab-notes-retrospective/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 50,
+  "status": "published",
+  "storageId": "cnt_000289",
+  "summary": {
+    "en": "I began this series wondering how far an incident could spread after one account was compromised. After 50 hands-on posts covering databases, servers, and Kubernetes, I reflect on the controls I configured and the results I observed.",
+    "ko": "첫 글을 쓸 때 가장 마음에 걸렸던 것은 계정 하나가 노출된 다음의 일이었다. 그 계정으로 다른 서버에 들어갈 수 있다면, 필요한 것보다 많은 데이터를 읽을 수 있다면, 한 번의 사고가 어디까지 커질까. 그래서 QueryPie ACP 커뮤니티 버전을 직접 설치했다. Mac에서 테스트 DB를 연결하는 것부터 시작해 서버와 ",
+    "ja": "この連載は、アカウントが1つ漏えいしたあと、被害がどこまで広がるのかという疑問から始まった。DB、サーバー、Kubernetesを試した全50回を振り返り、実際に設定した制御と確認できた結果を整理する。"
+  },
+  "title": {
+    "en": "[Part 50] After a breach, how far can an attacker go? Reflections on the first ACP series",
+    "ko": "[50편] 해킹 이후, 공격자는 어디까지 갈 수 있을까 — ACP 첫 연재를 마치며",
+    "ja": "[第50回] 侵入後、攻撃者はどこまで進めるのか — ACP最初の連載を終えて"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000289/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000289/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000289/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000289/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000289/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000289/ja.tiptap.json"
+    }
+  }
+}
