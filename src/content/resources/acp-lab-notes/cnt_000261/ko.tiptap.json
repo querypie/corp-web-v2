@@ -1,0 +1,937 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "지금까지는 DB에 접속하고 데이터를 조회하거나 변경하는 과정을 살펴봤다. 이번에는 서버로 넘어가 봤다. 서버에 접속할 사람이 늘어날 때마다 비밀번호를 따로 알려 주는 대신, QueryPie에서 권한을 주고 접속하게 해 보고 싶었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "실습용 Ubuntu 서버를 등록하고 개발자 계정에 SSH 접속 역할을 부여했다. 개발자는 QueryPie에 로그인한 뒤 서버와 계정을 선택하기만 하면 됐다. 서버 비밀번호를 입력하는 단계 없이 브라우저에 터미널이 열렸다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "먼저 SSH로 접속할 서버를 등록했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "관리자 화면의 Servers에서 실습 서버를 추가했다. 이름은 SSH Operations Lab, 주소는 acp-ssh-lab, 운영체제는 Ubuntu로 입력했다. 접속 프로토콜은 SSH, 포트는 22번이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/web-terminal/01.webp",
+        "alt": "화면 1. 실습용 Ubuntu 서버를 SSH Operations Lab이라는 이름으로 등록했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 1. 실습용 Ubuntu 서버를 SSH Operations Lab이라는 이름으로 등록했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "서버 이름을 알아보기 쉽게 정해 두니 사용자 화면에서도 주소를 외울 필요 없이 대상을 고를 수 있었다. 이번에는 이 서버를 Operations Lab Servers라는 서버 그룹에 넣었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "서버 계정의 비밀번호는 QueryPie에 등록했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "서버 그룹에 labops 계정을 추가하고, 계정 관리 방식은 QueryPie - Password로 선택했다. 서버에 접속할 때 사용할 비밀번호는 관리자가 이곳에 등록했다. 개발자에게 비밀번호를 따로 전달하지 않아도 되는 구성이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/web-terminal/02.webp",
+        "alt": "화면 2. 서버 그룹에 labops 계정과 접속 정보를 등록했다. 비밀번호는 화면에서도 가려져 있다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 2. 서버 그룹에 labops 계정과 접속 정보를 등록했다. 비밀번호는 화면에서도 가려져 있다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "계정을 등록한 다음 Test Connection을 눌렀다. 결과는 Success였다. SSH Operations Lab에 SSH 프로토콜과 labops 계정으로 연결됐다는 메시지를 확인했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/web-terminal/03.webp",
+        "alt": "화면 3. Test Connection에서 서버와 계정의 연결이 성공했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 3. Test Connection에서 서버와 계정의 연결이 성공했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "사용자에게 권한을 주기 전에 관리자가 연결 상태를 확인할 수 있어 편했다. 서버 주소와 계정 정보를 준비하는 일은 여기서 마쳤다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "접속 정책을 만들면서 작업 기록도 켰다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Operations Lab SSH Policy라는 정책을 만들었다. Operations Lab Servers 그룹의 labops 계정으로 SSH 접속을 허용하는 내용이다. 서버와 계정, 접속 방식을 한 정책 안에 지정했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에는 commandAudit와 sessionRecording도 true로 설정했다. 서버에서 실행한 명령과 터미널 작업 내용을 기록하도록 켜 둔 것이다. 정책 편집기의 검증 결과가 Errors(0)인 것을 확인하고 저장했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/web-terminal/04.webp",
+        "alt": "화면 4. SSH 접속 정책에 명령 감사와 세션 녹화 설정을 함께 넣었다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 4. SSH 접속 정책에 명령 감사와 세션 녹화 설정을 함께 넣었다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이렇게 만든 정책을 Operations Lab Operator 역할에 연결했다. 사용자에게 권한을 줄 때는 이 역할을 선택하면 된다. 어떤 서버와 계정으로 접속하게 할지 역할에 담아 둘 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/web-terminal/05.webp",
+        "alt": "화면 5. Operations Lab Operator 역할에 SSH 접속 정책을 연결했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 5. Operations Lab Operator 역할에 SSH 접속 정책을 연결했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "개발자에게 서버 접속 역할을 부여했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Access Control에서 기존 실습 계정인 Demo Developer를 열고, Roles에서 Operations Lab Operator를 부여했다. DB 실습에 쓰던 QueryPie 계정에 서버 접속 권한을 추가한 셈이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/web-terminal/06.webp",
+        "alt": "화면 6. Demo Developer에게 Operations Lab Operator 역할을 부여했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 6. Demo Developer에게 Operations Lab Operator 역할을 부여했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "서버마다 사용자에게 접속 정보를 알려 주는 대신, QueryPie에서 사용자와 역할을 연결했다. 담당자가 바뀌거나 접속할 서버가 늘어날 때도 누가 어떤 역할을 갖고 있는지 이 화면에서 관리할 수 있겠다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "개발자는 서버와 계정을 고르고 접속했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이제 Demo Developer로 로그인했다. Servers 화면에서 Operations Lab Operator를 선택하니 Operations Lab Servers 그룹과 SSH Operations Lab이 보였다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "서버를 선택하자 접속 화면에 labops 계정과 SSH가 표시됐다. 서버 비밀번호를 입력하는 칸은 없었다. Connect를 누르자 새 탭에 웹 터미널이 열렸다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/web-terminal/07.webp",
+        "alt": "화면 7. 개발자는 부여받은 역할에서 서버와 계정을 선택해 접속했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 7. 개발자는 부여받은 역할에서 서버와 계정을 선택해 접속했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "관리자가 등록해 둔 서버 접속 정보를 QueryPie가 사용하는 방식이다. 개발자는 자신의 QueryPie 계정으로 로그인하고, 허용된 서버에 접속했다. 서버 비밀번호를 따로 받아 보관하는 과정이 없어졌다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "브라우저 터미널에서 실제 서버를 확인했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "터미널에서 whoami를 입력하니 labops가 나왔다. hostname은 acp-ssh-lab, pwd는 /home/labops였다. 실습용 파일도 ls 명령으로 확인했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/web-terminal/08.webp",
+        "alt": "화면 8. 웹 터미널에서 접속 계정과 서버 이름, 작업 경로를 직접 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 8. 웹 터미널에서 접속 계정과 서버 이름, 작업 경로를 직접 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "별도 SSH 프로그램을 열지 않고도 브라우저에서 서버에 들어가 명령을 실행할 수 있었다. 접속할 수 있는 서버와 계정이 화면에 정리돼 있고, Connect를 누르면 바로 터미널이 열려 편했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "접속한 사람과 사용한 서버 계정이 함께 남았다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "작업을 마치고 exit로 접속을 종료했다. 관리자 화면의 Server Access History에서 Demo Developer를 검색하니 접속과 종료 기록이 모두 Success로 남아 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/web-terminal/09.webp",
+        "alt": "화면 9. 서버 접속 이력에서 사용자, 역할, 서버 계정과 접속 대상을 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 9. 서버 접속 이력에서 사용자, 역할, 서버 계정과 접속 대상을 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "03:30:01에 접속해 03:31:59에 종료한 기록이었다. QueryPie 사용자는 Demo Developer, 역할은 Operations Lab Operator, 서버에서 사용한 계정은 labops로 표시됐다. 접속 경로도 Web(Connection)으로 남았다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "서버 안에서는 labops로 작업했지만, 감사 기록에서는 실제로 접속한 QueryPie 사용자를 함께 확인할 수 있었다. 서버 계정 이름만 보고 작업자를 찾는 수고를 줄여 주는 부분이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번 실습에서 가장 마음에 든 점은 서버 비밀번호를 개발자에게 알려 주지 않고도 필요한 접속을 제공할 수 있었다는 것이다. 관리자는 서버와 계정을 등록하고 역할로 권한을 부여했다. 개발자는 자기 계정으로 로그인해 웹 터미널을 사용했다. 접속이 끝난 뒤에는 누가 어느 서버 계정으로 들어갔는지 이력에서 확인할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "다음에는 같은 서버에서 조회 명령은 사용하면서 특정 명령은 제한해 볼 예정이다. 서버에 들어온 뒤 할 수 있는 일도 QueryPie에서 정해 보려 한다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번 실습은 QueryPie Community 11.6.7과 별도로 준비한 Ubuntu 24.04 서버에서 진행했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "참고: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/servers/connection-management/servers/manually-registering-individual-servers",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "서버 수동 등록"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/servers/connection-management/server-groups/managing-servers-as-groups",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "서버 그룹과 계정 관리"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/server-access-control/connecting-to-authorized-servers",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "허가된 서버에 접속하기"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

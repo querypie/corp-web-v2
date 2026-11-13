@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "database-access-request",
+  "imageSrc": "/assets/content/acp-lab-notes/database-access-request/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 5,
+  "status": "published",
+  "storageId": "cnt_000244",
+  "summary": {
+    "en": "‘I need to check order settlements. Could I have read access to the database until tomorrow?’ Database operators often receive requests like this. They need to establish which database, what privileges, and how long access is needed; as teams grow, recording who received access and why becomes important.",
+    "ko": "“주문 정산 내역을 확인해야 하는데, 내일까지 DB 조회 권한을 받을 수 있을까요?” DB를 운영하다 보면 이런 요청을 자주 받게 된다. 어떤 DB가 필요한지, 조회만 하면 되는지, 언제까지 쓸 것인지 확인하고 권한을 열어주는 일이다. 요청이 몇 건 없을 때는 메신저로도 처리할 수 있지만, 사람이 늘어나면 누가 어떤 이유",
+    "ja": "「注文の精算明細を確認したいので、明日までDBの参照権限をもらえますか」。DB運用ではこうした依頼をよく受ける。対象DB、必要権限、利用期間を確認する仕事だ。人数が増えるほど、誰が何のために権限を得たかの管理が重要になる。"
+  },
+  "title": {
+    "en": "[Part 5] Requesting and Approving Database Access in QueryPie ACP — Through to Queries in DBeaver",
+    "ko": "[5편] QueryPie ACP에서 DB 권한 요청하고 승인받기 — DBeaver 조회까지 직접 해봤다",
+    "ja": "[第5回] QueryPie ACPでDB権限を申請・承認する — DBeaverでの参照まで試した"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000244/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000244/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000244/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000244/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000244/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000244/ja.tiptap.json"
+    }
+  }
+}

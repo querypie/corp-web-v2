@@ -43,6 +43,7 @@ export async function createSiteSitemap(
     ...perLocale("/manuals", origin, sitemapLocales),
     ...perLocale("/whitepapers", origin, sitemapLocales),
     ...perLocale("/blog", origin, sitemapLocales),
+    ...sitemapLocales.map((locale) => ({ url: absolute(getPublicListHref("resources", locale, "acp-lab-notes"), origin) })),
     ...perLocale("/events", origin, sitemapLocales),
     ...sitemapLocales.map((locale) => ({
       url: absolute(getPublicListHref("news", locale), origin),

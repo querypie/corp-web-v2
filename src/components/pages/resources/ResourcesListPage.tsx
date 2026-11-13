@@ -1,4 +1,5 @@
 import Link from "next/link";
+import type { ReactNode } from "react";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import type { Locale } from "@/constants/i18n";
 import type { PublicMenuItem } from "@/features/content/config";
@@ -17,6 +18,8 @@ type DocsListItem = {
 };
 
 type DocsListPageProps = {
+  filters?: ReactNode;
+  cardImageClassName?: string;
   emptyMessage?: string;
   items: DocsListItem[];
   locale: Locale;
@@ -38,13 +41,14 @@ export function DocsListCard({
   isExternal = false,
   showCategory,
   title,
-}: DocsListItem & { showCategory: boolean }) {
+  imageClassName,
+}: DocsListItem & { showCategory: boolean; imageClassName?: string }) {
   const cardClassName = "group flex w-full cursor-pointer flex-col gap-5";
   const cardContent = (
     <>
       <ContentPreviewImage
         alt={title}
-        className="card-media-motion block h-full w-full object-cover"
+        className={cx("card-media-motion block h-full w-full object-cover", imageClassName)}
         containerClassName="content-thumbnail-frame w-full overflow-hidden rounded-thumb bg-bg-content"
         src={imageSrc}
         useThumbnailFallback
@@ -82,6 +86,8 @@ export function DocsListCard({
 }
 
 export default function DocsListPage({
+  filters,
+  cardImageClassName,
   emptyMessage,
   items,
   locale,
@@ -149,16 +155,19 @@ export default function DocsListPage({
               </nav>
             </div>
 
-            <div className="grid min-w-0 w-full grid-cols-1 gap-x-[40px] gap-y-[60px] md:max-w-[840px] md:grid-cols-2 md:gap-y-16">
-              {items.length > 0 ? (
-                items.map((item, index) => (
-                  <DocsListCard key={`${item.title}-${index}`} {...item} showCategory={showCategory} />
-                ))
-              ) : (
-                <div className="col-span-full flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
-                  <p className="m-0 type-body-md text-mute">{resolvedEmptyMessage}</p>
-                </div>
-              )}
+            <div className="flex min-w-0 w-full flex-col gap-6 md:max-w-[840px]">
+              {filters}
+              <div className="grid min-w-0 w-full grid-cols-1 gap-x-[40px] gap-y-[60px] md:grid-cols-2 md:gap-y-16">
+                {items.length > 0 ? (
+                  items.map((item, index) => (
+                    <DocsListCard key={`${item.title}-${index}`} {...item} showCategory={showCategory} imageClassName={cardImageClassName} />
+                  ))
+                ) : (
+                  <div className="col-span-full flex min-h-[240px] items-center justify-center px-5 py-6 text-center">
+                    <p className="m-0 type-body-md text-mute">{resolvedEmptyMessage}</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

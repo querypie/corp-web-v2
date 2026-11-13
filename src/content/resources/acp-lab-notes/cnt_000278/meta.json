@@ -1,0 +1,47 @@
+{
+  "authorName": "승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "approval-rules",
+  "imageSrc": "/assets/content/acp-lab-notes/approval-rules/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 39,
+  "status": "published",
+  "storageId": "cnt_000278",
+  "summary": {
+    "en": "Approval rules route SQL requests to reviewers, but must each rule be edited when the database owner changes? I used Connection Owner, processed one request, changed only the connection owner, and checked the next request’s assigned approver.",
+    "ko": "SQL 승인 규칙을 만들어 두면 요청을 정해진 담당자에게 보낼 수 있다. 그런데 DB 담당자가 바뀌면 결재 규칙에 들어 있는 승인자도 다시 고쳐야 할까? 이번에는 QueryPie의 Connection Owner를 승인자로 사용하는 규칙을 만들어 봤다. 첫 요청을 처리한 뒤 DB 연결의 담당자만 바꾸고, 같은 규칙으로 올린",
+    "ja": "DB担当変更のたび規則の人名も直す必要があるのか。Connection Ownerを使い、最初の申請を処理した後、接続担当だけを変えて次の配属先を確認した。"
+  },
+  "title": {
+    "en": "[Part 39] Changing the Database Owner Without Rewriting Approval Rules",
+    "ko": "[39편] DB 담당자가 바뀌어도 결재 규칙은 그대로였다",
+    "ja": "[第39回] DB担当者が変わっても承認規則はそのまま"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000278/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000278/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000278/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000278/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000278/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000278/ja.tiptap.json"
+    }
+  }
+}

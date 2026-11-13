@@ -1,0 +1,47 @@
+{
+  "authorName": "승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "temporary-policy-exceptions",
+  "imageSrc": "/assets/content/acp-lab-notes/temporary-policy-exceptions/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 18,
+  "status": "published",
+  "storageId": "cnt_000257",
+  "summary": {
+    "en": "‘I just need a quick look at settlement amounts.’ Once access is granted, its end time needs managing too, so exceptions do not remain after work ends.",
+    "ko": "“정산 금액만 잠깐 확인하고 싶습니다.” 이런 요청을 받아 권한을 열어 줬다면, 그다음에는 언제까지 허용할지도 챙겨야 한다. 업무는 끝났는데 예외 권한은 계속 남아 있는 상황을 피하고 싶어서다.",
+    "ja": "「精算金額だけ少し確認したい」。権限を開いた後はいつまで許可するかも管理したい。業務が終わって例外だけ残る事態を避けるためだ。"
+  },
+  "title": {
+    "en": "[Part 18] Temporary Access Needs an End Time Too — QueryPie Policy Exceptions",
+    "ko": "[18편] 임시 권한에도 끝나는 시간이 필요했다 — QueryPie 정책 예외 관리",
+    "ja": "[第18回] 一時権限にも終了時刻が必要だった — QueryPieポリシー例外管理"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000257/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000257/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000257/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000257/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000257/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000257/ja.tiptap.json"
+    }
+  }
+}

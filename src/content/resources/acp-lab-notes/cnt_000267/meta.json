@@ -1,0 +1,47 @@
+{
+  "authorName": "서버 접근 제어 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "command-approval",
+  "imageSrc": "/assets/content/acp-lab-notes/command-approval/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 28,
+  "status": "published",
+  "storageId": "cnt_000267",
+  "summary": {
+    "en": "Part 23 blocked deletion despite allowing server login. Operations sometimes require restricted commands, such as cleaning old files. I requested five minutes of rm through Server Privilege Request, keeping the normal restriction intact.",
+    "ko": "23편에서는 서버에 접속할 수 있어도 삭제 명령은 실행하지 못하도록 막아 봤다. 그런데 운영하다 보면 오래된 파일을 정리하는 것처럼, 평소 제한한 명령을 꼭 써야 할 때가 있다. 이번에는 기존 제한을 그대로 두고 필요한 시간만 승인받아 작업해 봤다. QueryPie의 Server Privilege Request로 rm 사",
+    "ja": "第23回では接続を許可しても削除は禁止した。ただ、古いファイル整理などで必要な場合もある。通常制限を維持し、Server Privilege Requestでrmを5分だけ申請した。"
+  },
+  "title": {
+    "en": "[Part 28] When a Blocked Delete Command Is Needed — Using It Only During an Approved Window",
+    "ko": "[28편] 막아 둔 삭제 명령이 필요할 때 — 승인받은 시간 동안만 사용해 봤다",
+    "ja": "[第28回] 禁止した削除コマンドが必要なとき — 承認された時間だけ使う"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000267/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000267/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000267/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000267/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000267/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000267/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "query-monitoring",
+  "imageSrc": "/assets/content/acp-lab-notes/query-monitoring/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 14,
+  "status": "published",
+  "storageId": "cnt_000253",
+  "summary": {
+    "en": "Even with access controls and approvals, operators sometimes need to inspect SQL already running. A slow-query report starts with identifying who ran what and where. I tried Running Queries to locate and stop a web-editor test query.",
+    "ko": "DB 접근 권한을 정하고 승인 절차를 마련해도, 운영하다 보면 이미 실행 중인 SQL을 살펴봐야 할 때가 있다. 조회가 평소보다 오래 걸린다는 연락을 받으면 누가 어느 DB에서 어떤 SQL을 실행했는지부터 찾게 된다. 이번에는 QueryPie의 Running Queries를 열어봤다. 개발자 계정으로 웹 SQL 편집기에서",
+    "ja": "権限や承認を整えても、実行中SQLを確認する場面はある。遅いとの連絡があれば誰がどのDBで何を実行したかを調べる。今回はRunning QueriesでWebエディターのテストSQLを見つけて止めた。"
+  },
+  "title": {
+    "en": "[Part 14] Stopping a Running SQL Statement — QueryPie Query Monitoring",
+    "ko": "[14편] 실행 중인 SQL을 멈춰봤다 — QueryPie 쿼리 모니터링",
+    "ja": "[第14回] 実行中のSQLを止める — QueryPieクエリモニタリング"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000253/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000253/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000253/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000253/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000253/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000253/ja.tiptap.json"
+    }
+  }
+}

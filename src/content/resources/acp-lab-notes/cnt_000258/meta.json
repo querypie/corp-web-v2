@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "dml-snapshot",
+  "imageSrc": "/assets/content/acp-lab-notes/dml-snapshot/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 19,
+  "status": "published",
+  "storageId": "cnt_000258",
+  "summary": {
+    "en": "Part 6 executed approved SQL without granting ongoing write access. Now I wanted to see not only who ran SQL, but how the data actually changed. I changed a fictional order from PENDING to DELIVERED and inspected DML Snapshot.",
+    "ko": "6편에서는 개발자에게 수정 권한을 계속 열어 주지 않고, 필요한 SQL만 승인받아 실행해 봤다. 이번에는 실행이 끝난 뒤의 기록을 살펴봤다. 누가 어떤 SQL을 실행했는지에 더해, 실제 데이터가 어떻게 바뀌었는지도 보고 싶었다. 가상 주문 한 건의 상태를 PENDING에서 DELIVERED로 바꾸고 QueryPie의 DM",
+    "ja": "第6回では常時書き込み権限を与えず承認SQLを実行した。今回は誰が何を実行したかに加え、実データの変化も見たい。架空注文をPENDINGからDELIVEREDへ変えてDML Snapshotを確認した。"
+  },
+  "title": {
+    "en": "[Part 19] Finding the Previous Value After an Order Update — QueryPie DML Snapshot",
+    "ko": "[19편] 주문 상태를 바꾼 뒤, 이전 값까지 찾아봤다 — QueryPie DML Snapshot",
+    "ja": "[第19回] 注文変更後に元の値も確認する — QueryPie DML Snapshot"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000258/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000258/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000258/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000258/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000258/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000258/ja.tiptap.json"
+    }
+  }
+}

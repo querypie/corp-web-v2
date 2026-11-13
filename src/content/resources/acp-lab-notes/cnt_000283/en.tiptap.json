@@ -1,0 +1,844 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Kubernetes teams often use kubectl. I wanted to inspect settings with familiar commands rather than switch to a web screen every time."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I tried "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "connecting to the lab cluster with Multi Agent and kubectl"
+        },
+        {
+          "type": "text",
+          "text": " and sent reads and modifications for the same ConfigMap to verify role-based control: reads allowed, changes denied."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Choosing a Read-Only Configuration Role"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I used the existing "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Orders Lab Viewer"
+        },
+        {
+          "type": "text",
+          "text": " role, whose policy allows ConfigMap reads in acp-kac-lab/orders-lab. For "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "kac-fixture"
+        },
+        {
+          "type": "text",
+          "text": ", patch and update are explicitly denied."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Reviewing the policy confirmed separate resources/actions for Allow and Deny, scoped to an operator inspecting settings."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/kubectl-access-control/01.webp",
+        "alt": "Screen 1. Reads allowed; patch/update denied on the lab configuration.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 1. Reads allowed; patch/update denied on the lab configuration."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Connecting kubectl with Agent Authentication"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In Mac Multi Agent I opened "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Kubernetes"
+        },
+        {
+          "type": "text",
+          "text": " and chose Orders Lab Viewer. Manual Clusters showed acp-kac-lab, exposing permitted role and target as in the server exercises."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/kubectl-access-control/02.webp",
+        "alt": "Screen 2. Read role and lab cluster in Multi Agent.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 2. Read role and lab cluster in Multi Agent."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The agent’s "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Setting → Kubernetes"
+        },
+        {
+          "type": "text",
+          "text": " documents kubeconfig paths and setup. kubeconfig tells kubectl its cluster and authentication method."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Using the agent-generated authentication settings, I prepared a separate "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "lab client.kubeconfig"
+        },
+        {
+          "type": "text",
+          "text": " with the local QueryPie proxy and qpctl authentication. Each command selected it with --kubeconfig."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/kubectl-access-control/03.webp",
+        "alt": "Screen 3. Lab context and local QueryPie proxy address.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 3. Lab context and local QueryPie proxy address."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "localhost:16444 is this Mac lab’s QueryPie proxy, distinct from the Kubernetes API endpoint. With setup complete, familiar kubectl commands worked."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Reading ConfigMap as Usual"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "First I ran "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "kubectl get configmap"
+        },
+        {
+          "type": "text",
+          "text": " for orders-lab/kac-fixture. Name and data count appeared, and data.status was "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "READY"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/kubectl-access-control/04.webp",
+        "alt": "Screen 4. kubectl reads the ConfigMap and its READY value.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 4. kubectl reads the ConfigMap and its READY value."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Normal output-format options also worked. No new command system was needed; the existing CLI now used QueryPie authentication and policy."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "A Change to the Same Resource Is Denied"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I sent a request to change status to the lab-only EP44_CHANGE using "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "kubectl patch"
+        },
+        {
+          "type": "text",
+          "text": " against the same ConfigMap, not production settings."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The terminal returned "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Forbidden"
+        },
+        {
+          "type": "text",
+          "text": " with "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "“QueryPie - Denied by policy to access the resource.”"
+        },
+        {
+          "type": "text",
+          "text": ". Read access did not permit the role’s denied modification."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/kubectl-access-control/05.webp",
+        "alt": "Screen 5. QueryPie policy rejects the ConfigMap change.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 5. QueryPie policy rejects the ConfigMap change."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "A new get showed status "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "READY"
+        },
+        {
+          "type": "text",
+          "text": " and resource version "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "559"
+        },
+        {
+          "type": "text",
+          "text": ", unchanged from before. Necessary reads continued."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/kubectl-access-control/06.webp",
+        "alt": "Screen 6. Configuration and resource version remain unchanged.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 6. Configuration and resource version remain unchanged."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I could delegate inspection while managing changes to the same resource separately through roles."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Auditing Requests Sent from kubectl"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Finally, I opened the administrator’s "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Audit → Request Audit"
+        },
+        {
+          "type": "text",
+          "text": ". The recent modification showed "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Event Type DENY"
+        },
+        {
+          "type": "text",
+          "text": " and Verb patch, alongside user, role, cluster, namespace, and ConfigMap."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Client Name was "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "kubectl/v1.36.1"
+        },
+        {
+          "type": "text",
+          "text": ", Request Source "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Third-Party Tool"
+        },
+        {
+          "type": "text",
+          "text": ". Request Body retained EP44_CHANGE."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/kubectl-access-control/07.webp",
+        "alt": "Screen 7. kubectl change request retains role, target, denial reason, and body.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 7. kubectl change request retains role, target, denial reason, and body."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The subsequent read of the same ConfigMap by the same user/role was a "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "successful, ALLOW get request"
+        },
+        {
+          "type": "text",
+          "text": ", matching the terminal result."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/kubectl-access-control/08.webp",
+        "alt": "Screen 8. Subsequent get recorded under the same role as ALLOW.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 8. Subsequent get recorded under the same role as ALLOW."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The convenience was "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "retaining kubectl while separating work scope and keeping history"
+        },
+        {
+          "type": "text",
+          "text": ". Operators keep the CLI; administrators trace who read or attempted changes, under which role, in QueryPie."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "This lab used QueryPie Community 11.6.7, Multi Agent, kubectl 1.36.1, and K3s 1.36.6 with test users and ConfigMap."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "References: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/multi-agent",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "QueryPie Multi Agent user guide"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/kubernetes/k8s-access-control/policies/kubernetes-policy-yaml-code-syntax-guide",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Kubernetes policy YAML syntax guide"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

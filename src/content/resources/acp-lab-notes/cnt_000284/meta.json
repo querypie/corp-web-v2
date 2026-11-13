@@ -1,0 +1,47 @@
+{
+  "authorName": "Kubernetes 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "pod-session-recording",
+  "imageSrc": "/assets/content/acp-lab-notes/pod-session-recording/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 45,
+  "status": "published",
+  "storageId": "cnt_000284",
+  "summary": {
+    "en": "Knowing someone entered a container raises the next question: what did they do and see? I performed a short test-Pod inspection and replayed Pod Session Recordings, linking access records to the actual terminal view.",
+    "ko": "컨테이너에 접속했다는 기록을 보고 나면, 그 안에서 무슨 작업을 했는지도 궁금해진다. 장애를 점검하다 어떤 파일을 읽었는지, 화면에는 어떤 값이 나왔는지까지 확인할 수 있으면 작업 내용을 훨씬 쉽게 이해할 수 있다. 이번에는 테스트 Pod에 들어가 짧은 점검을 하고, Pod Session Recordings에서 그 작업을",
+    "ja": "コンテナに入った記録の次は、何をして何を見たか知りたい。テストPodで短く点検し、Pod Session Recordingsで接続と実画面をつなげて確認した。"
+  },
+  "title": {
+    "en": "[Part 45] Replaying Work Inside a Container",
+    "ko": "[45편] 컨테이너 안에서 한 작업도 다시 재생해봤다",
+    "ja": "[第45回] コンテナ内の作業も再生して確認する"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000284/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000284/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000284/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000284/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000284/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000284/ja.tiptap.json"
+    }
+  }
+}

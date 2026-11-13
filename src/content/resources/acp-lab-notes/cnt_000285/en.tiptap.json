@@ -1,0 +1,544 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Changing passwords also requires checking new access and informing operators. At scale, tracking which account changed when is challenging."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I changed a test password with Password Provisioning, then connected as a user and ran commands. Managing rotation and access in the same system was convenient."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Choosing the Server and Account"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I prepared a separate Ubuntu server and "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "rotateops"
+        },
+        {
+          "type": "text",
+          "text": " account. Enabling Password Provisioning in Servers → Configurations exposed jobs and account-status management."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/01.webp",
+        "alt": "Screen 1. Password Provisioning enabled with account-management menus.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 1. Password Provisioning enabled with account-management menus."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "A dedicated group contained only this server. I registered the account as "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "QueryPie - Provisioning"
+        },
+        {
+          "type": "text",
+          "text": " . The saved authentication method was "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Managed by Job"
+        },
+        {
+          "type": "text",
+          "text": ", clearly indicating management through password-rotation jobs."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/02.webp",
+        "alt": "Screen 2. rotateops registered for password-provisioning management.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 2. rotateops registered for password-provisioning management."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Creating a Job for One Server and Account"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In Password Provisioning, I created "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "EP46 Rotate Test Account"
+        },
+        {
+          "type": "text",
+          "text": " for the dedicated group. Target Server 1 and Target Accounts rotateops confirmed scope before execution."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The password-changing account was separate from the login account: an isolated-server administrator performed rotation, while users connected as rotateops. Execution was "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Manual"
+        },
+        {
+          "type": "text",
+          "text": "."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/03.webp",
+        "alt": "Screen 3. Target scope verified and job saved for manual execution.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 3. Target scope verified and job saved for manual execution."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Checking Results per Account"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Run Job finished Completed. History details showed rotateops "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Success"
+        },
+        {
+          "type": "text",
+          "text": ". I also verified the password changed on the server itself."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/04.webp",
+        "alt": "Screen 4. Target account password change succeeds.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 4. Target account password change succeeds."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Account Management listed server, account, purpose, and "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Last Password Updated At"
+        },
+        {
+          "type": "text",
+          "text": ", recording this change at 13:16:04. Last-rotation times per account avoid separate manual tracking."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/05.webp",
+        "alt": "Screen 5. Last password-change timestamp in account management.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 5. Last password-change timestamp in account management."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Connecting Without Entering the New Password"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The assigned user role showed rotateops Active. Connect worked without finding and typing the newly changed server password."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/06.webp",
+        "alt": "Screen 6. Authorized user connects with managed rotateops.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 6. Authorized user connects with managed rotateops."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "whoami, hostname, and pwd returned rotateops, acp-ep46-password-lab, and /home/rotateops. Authorized work remained possible after rotation."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/07.webp",
+        "alt": "Screen 7. Account and server verified using the updated credentials.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 7. Account and server verified using the updated credentials."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The administrator rotates credentials while users continue through assigned QueryPie access, reducing redistribution of each new password."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Password Management and Access History Together"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Server Access History showed Demo Developer at 13:17:24 using EP46 Rotation Operator and rotateops, result Success."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/08.webp",
+        "alt": "Screen 8. Person, role, and actual server account in the audit.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 8. Person, role, and actual server account in the audit."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Rotation was visible in Password Provisioning/Account Management; the person using it was visible in access history, even with a server account shared for work."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "One account’s rotation and fresh connection showed a practical combination: password jobs, user access, and history together, with simple user connection steps even under regular password management."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

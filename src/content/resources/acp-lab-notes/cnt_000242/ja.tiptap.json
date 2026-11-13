@@ -1,0 +1,1925 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "第2回ではMacにQueryPie ACP Community Editionを導入してログインした。今回はDBを接続し、実際にデータを参照する。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "気になったのは開発者側の操作だ。管理者がDBを登録したら、開発者はどこでSQLを実行するのか。Webだけなのか、使い慣れたDBクライアントでも接続できるのか。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "テスト用の注文DBを作り、まずQueryPieのWeb画面で参照した。続いてDBeaverにProxy接続情報を直接入力する方法と、PCにMulti Agentを導入して接続する方法も試した。三つの方法ですべて同じ5件の注文が返ることまで確認した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "使用したのはQueryPie ACP Community 11.6.7とMySQL 8.0.42。以下の画面にある顧客・注文はすべて実習用の架空データだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "1. DBを接続して参照する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "まずMySQLコンテナをもう一つ起動した。QueryPie内部のDBと混在しないよう、実習用DBを別に用意した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DB名はorders_demoとした。customersに顧客4人、ordersに注文12件を入れた。配送待ち注文の検索や状態別件数の集計で、接続と参照を確認するには十分だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "MySQLにorders_readerを作り、orders_demoへのSELECTだけを許可した。今回は参照のみなのでDBアカウントもその権限に限定した。これは後で設定するQueryPieユーザーの権限とは別だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "準備ができたので、管理者としてDBを登録し、開発者アカウントに切り替えて接続する。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "2. QueryPieにMySQLを登録する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者でログインし、Databases → Connection Management → DB ConnectionsでMySQL接続を作成した。入力値は次のとおりだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "接続名：Orders Demo MySQL"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "DB種別：MySQL"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Host / Port: orders-db / 3306"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Database Name: orders_demo"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "DBアカウント：orders_reader"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Hostにはlocalhostではなくorders-dbを指定した。同じDockerネットワーク上なのでコンテナ名で接続できる。ここでlocalhostを指定するとQueryPieコンテナ自身を指してしまう。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "社内DBを接続するときも先に確認したい。自分のPCから接続できるかより、QueryPieサーバーからそのDBへ到達できるかが重要だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/01.webp",
+        "alt": "画面1. Test Connectionを押すと接続成功のメッセージが表示された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. Test Connectionを押すと接続成功のメッセージが表示された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DBアカウントとパスワードを入力し、Test Connectionで成功を確認して保存した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "下部のHide this credential from Connection List pageにもチェックを入れた。ユーザーの接続一覧で元DBの認証情報を隠す設定だ。開発者にパスワードがどう見えるかは、そのアカウントで確認することにした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/02.webp",
+        "alt": "画面2. Orders Demo MySQLの登録完了。次はこのDBを使う開発者アカウントを作る。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. Orders Demo MySQLの登録完了。次はこのDBを使う開発者アカウントを作る。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "3. 開発者には読み取り専用権限を付与する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者だけで試すと開発者が実際に見る画面を見落としかねない。General → User Management → UsersでDemo Developer、ログインID demo-devを作成し、管理者ロールはNoneにした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/03.webp",
+        "alt": "画面3. 既存管理者qp-adminの下に開発者demo-devを追加した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. 既存管理者qp-adminの下に開発者demo-devを追加した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "続いてDatabases → DB Access Control → Access Controlを開き、Demo Developerを選択した。Grant PrivilegeでOrders Demo MySQLへのRead-Onlyを付与した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/04.webp",
+        "alt": "画面4. demo-devにOrders Demo MySQLのRead-Onlyを付与した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. demo-devにOrders Demo MySQLのRead-Onlyを付与した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DB登録とユーザーへのアクセス権付与は別の作業だった。今回は一人へ直接付与したが、人数が増えればチームのグループ管理がよさそうだ。一時的なアクセスには有効期限も検討したい。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "4. 開発者としてログインし、注文を参照する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "demo-devでログインし、初回に求められたパスワード変更を済ませた。DatabasesのQueryPie Connectionsを展開するとOrders Demo MySQLが表示された。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "接続を選択するとRead-Only (User)、Select権限、Active状態が表示された。ここまで開発者が元のMySQLパスワードを入力する場面はなかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/05.webp",
+        "alt": "画面5. 開発者画面でDBと権限を確認し、Connectを押した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. 開発者画面でDBと権限を確認し、Connectを押した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "ConnectでWeb SQLエディターが開いた。orders_demoから配送待ちの注文を検索した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "SELECT order_id, customer_id, order_date, status, total_amount\nFROM orders\nWHERE status = 'PENDING'\nORDER BY order_date, order_id\nLIMIT 20;"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/06.webp",
+        "alt": "画面6. 配送待ちの5件。注文番号は1001、1003、1006、1009、1012。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. 配送待ちの5件。注文番号は1001、1003、1006、1009、1012。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "一覧が正常に返ることを確認し、状態別の件数も集計した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "SELECT status, COUNT(*) AS order_count\nFROM orders\nGROUP BY status\nORDER BY status;"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/07.webp",
+        "alt": "画面7. CANCELLED 2件、DELIVERED 3件、PENDING 5件、SHIPPED 2件。合計12件で投入したデータと一致する。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. CANCELLED 2件、DELIVERED 3件、PENDING 5件、SHIPPED 2件。合計12件で投入したデータと一致する。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "開発者側の操作はQueryPieにログインし、DBを選び、SQLを実行する程度だった。MySQLのアカウントとパスワードを別途受け取らずに参照できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "もちろん参照だけで業務は完結しない。このアカウントでは結果のコピー・エクスポートやトランザクション関連の権限は未チェックだった。実運用では必要な機能を許可し、別途検証する必要がある。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "5. DBeaverでも接続する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "次はDBeaverで同じ注文を参照した。QueryPie Proxyを経由すれば、既存のDBクライアントでもSQLを実行できる。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "使ったのはAgentless Proxy。エージェントを別途導入せず、DBクライアントからQueryPie Proxyへ接続する方式だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者画面でDB接続詳細のProxy Usageを有効にし、Use QueryPie registered accountを選んで保存した。この設定でQueryPieは登録済みDBアカウントを使ってMySQLへ接続する。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/08.webp",
+        "alt": "画面8. Proxy Usageを有効にし、登録済みDBアカウントの利用を設定。Query AuditもOnと表示されている。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面8. Proxy Usageを有効にし、登録済みDBアカウントの利用を設定。Query AuditもOnと表示されている。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "開発者画面のProxy Infoには40000番ポートが割り当てられていた。Create Tokenで接続用UsernameとPasswordを発行した。DBeaverには元のMySQLパスワードではなく、このトークンを入力する。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "トークンは発行時にしか表示されないため安全に保管した。紛失した場合は既存トークンを破棄して再発行する。以下は値を含まない案内画面だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/09.webp",
+        "alt": "画面9. Proxy Infoで接続ポートとトークン発行メニューを確認できる。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面9. Proxy Infoで接続ポートとトークン発行メニューを確認できる。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DBeaverを開いてMySQL接続を新規作成した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "bulletList",
+      "content": [
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Host: 127.0.0.1"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Port: 40000"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Database: orders_demo"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "listItem",
+          "content": [
+            {
+              "type": "paragraph",
+              "content": [
+                {
+                  "type": "text",
+                  "text": "Username / Password：開発者アカウントで発行したProxyトークン"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "127.0.0.1はQueryPieとDBeaverが同じMacで動くための指定だ。社内で複数人が接続する場合は各PCから到達できるQueryPie Proxyのアドレスを使い、ファイアウォールでポートが許可されているかも確認する。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Test ConnectionでMySQL 8.0.42への接続を確認した。続いてWebで使った配送待ち注文のクエリをそのまま貼り付けた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/10.webp",
+        "alt": "画面10. DBeaverにもWebと同じ5件が表示された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面10. DBeaverにもWebと同じ5件が表示された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "WebとDBeaverのSQLは同じだった。DBeaverではアドレス、ポート、認証情報だけをQueryPie Proxyに合わせた。少なくとも今回のMySQL参照ではDBツールを変えずに使えた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "6. PCにMulti Agentを導入して接続する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "接続情報を直接入力するほかに、PCにエージェントを導入する方法もある。今回はQueryPie Multi Agentを導入し、そのDB一覧からDBeaverを開いた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "右上のプロフィールからDownload & Support → Multi-Agentを選択した。Mac・Windows・Linux向けがあり、自分のMacに合うApple Silicon版を取得した。このサーバーが提供するエージェントはv9だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/11.webp",
+        "alt": "画面11. OSに合うインストーラーを取得し、下部のQueryPieアドレスもコピーした。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面11. OSに合うインストーラーを取得し、下部のQueryPieアドレスもコピーした。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "取得したdmgを開き、QueryPieMultiAgentをApplicationsへコピーして導入した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/12.webp",
+        "alt": "画面12. Macのインストール画面。アプリをApplicationsへ入れて起動する。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面12. Macのインストール画面。アプリをApplicationsへ入れて起動する。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "エージェントに登録するのはDBではなくQueryPieのWebアドレスだ。今回はhttp://localhost:8000を登録した。既存ホストがある場合はSettings → Add New Hostから追加できる。複数のQueryPieサーバーを登録できるためMulti Agentという名前だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/13.webp",
+        "alt": "画面13. QueryPie Hostに実習サーバーのアドレスを入力した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面13. QueryPie Hostに実習サーバーのアドレスを入力した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "サーバーを選ぶとログイン画面が開いた。Webと同じ開発者アカウントdemo-devでログインした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/14.webp",
+        "alt": "画面14. エージェントでも開発者自身のQueryPieアカウントでログインする。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面14. エージェントでも開発者自身のQueryPieアカウントでログインする。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者が先に行う設定もある。エージェント用Proxyアドレスをサーバーに登録する必要がある。同じMacで動かす今回は公式初期設定ガイドに従って127.0.0.1を登録した。社内サーバーなら社員PCから到達できるIPやドメインを指定する。これは管理者の初期設定であり、開発者が個々のDBで行うものではない。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DatabasesのQueryPie Connectionsを展開するとOrders Demo MySQLが表示され、その下にorders-dbとRead-Only (User)があった。Webで付与した権限をエージェントでも確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/15.webp",
+        "alt": "画面15. 開発者に許可したDBと参照権限がエージェントの一覧に表示された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面15. 開発者に許可したDBと参照権限がエージェントの一覧に表示された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "orders-dbを右クリックしてOpen Connection With → DBeaverを選ぶと、DBeaverにOrders Demo MySQL接続が追加された。Webでトークンを発行し、接続情報を一つずつ入力する必要はなかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/16.webp",
+        "alt": "画面16. DB一覧から直接DBeaverを開ける。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面16. DB一覧から直接DBeaverを開ける。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "追加された接続を開き、新しいSQLエディターで同じ配送待ちクエリを実行した。今回も1001、1003、1006、1009、1012が返った。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/first-database-connection/17.webp",
+        "alt": "画面17. Multi Agentが作成した接続での結果。先ほどの5件と一致する。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面17. Multi Agentが作成した接続での結果。先ほどの5件と一致する。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "違いは接続準備にあった。エージェントなしではトークンと接続情報を手入力した。Multi Agentではログイン後、DBを選んでDBeaverで開くだけだった。毎日多くのDBに接続するチームなら、両方試して比較する価値がありそうだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "7. 社内利用に向けてさらに確認すること"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "実際に接続すると、導入時に誰と何を話すべきかが少し具体的になった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "まずDB登録と権限付与の担当を決める必要がある。今回は一人で役割を切り替えたが、社内では開発者の申請を誰が承認・付与するか決めておかなければならない。異動や退職時の取り消しも同じだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "実際に使うツールでの検証も必要だ。今回はMySQLとDBeaverで簡単なSELECTを実行した。DataGripや別DBを使うならその組み合わせで試す必要がある。大量参照やトランザクションでも同じ結果になるかは未確認だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "セキュリティ機能も設定画面だけでは判断できない。Read-Onlyが実際に変更を防ぐか、権限を取り消すと接続済みセッションはどうなるかを試したい。Query AuditはOnだったが、ユーザーとSQLがどう記録されるかは次回確認する。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "8. DBへの直接接続経路も確認する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "ここで第1回の「侵入後の制御」を思い出した。QueryPie経由では接続できたが、元DBへ直接入れる経路が残っていたらどうだろう。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "今回の環境にもその経路が残っている。比較・点検用にMacの127.0.0.1:13306からMySQLへ直接接続できるようにした。DBeaverで使ったQueryPie Proxyは40000番だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "社内導入ではここも整理したい。接続元を制限し、元のDBアカウントを誰が持つか確認する。接続一覧の認証情報を隠すだけでは、直接アクセスまで遮断されるわけではない。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DBパスワードや開発者PCが侵害されてもQueryPieの制御を通すには、このような接続経路まで管理する必要があると感じた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "次は変更クエリを試す"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "今回はDB登録、開発者ログイン、WebとDBeaverでの注文参照を行った。DBeaverでは手入力とMulti Agentの両方を試した。使い慣れたツールでSQLを実行しながら、QueryPieで付与された権限でDBを利用できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "第4回では、読み取り専用で変更しようとしたときのメッセージ、権限取り消し後の接続、記録の場所を確認する。元DBもSELECT限定なので、どちらの層で遮断されるかも切り分ける予定だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "参考ドキュメント： "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/overview/proxy-management/enable-database-proxy",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Database Proxyの有効化"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/database-access-control/connecting-to-proxy-without-agent",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "エージェントなしでのProxy接続"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/multi-agent",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Multi Agentユーザーガイド"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/installation/post-installation-setup",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "インストール後の初期設定"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "order-change-audit",
+  "imageSrc": "/assets/content/acp-lab-notes/order-change-audit/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 49,
+  "status": "published",
+  "storageId": "cnt_000288",
+  "summary": {
+    "en": "Changing a value in a production database often requires more than saying it is done. I followed one order correction through its justification, SQL approval, execution, before-and-after snapshots, and audit export.",
+    "ko": "운영 DB의 값을 바꾼 뒤에는 “변경했습니다”라는 말만으로 설명이 끝나지 않을 때가 많다. 왜 바꿨는지, 누가 확인했는지, 실제로 어느 값이 달라졌는지를 함께 봐야 작업 경위가 분명해진다. 앞선 글에서 SQL 승인, DML Snapshot, 감사 로그 내보내기를 각각 써봤다. 이번에는 주문 한 건을 정정하는 작업으로 묶어",
+    "ja": "本番DBの値を変更したときは、変更したという報告だけでは経緯を説明しきれないことがある。今回は注文1件の訂正を通じて、変更理由、SQL承認、実行、変更前後の値、監査ファイルの出力までを確認した。"
+  },
+  "title": {
+    "en": "[Part 49] What records remain after changing a single order?",
+    "ko": "[49편] 주문 한 건을 바꾸는 데 어떤 기록이 남았을까",
+    "ja": "[第49回] 注文を1件変更すると、どのような記録が残るのか"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000288/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000288/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000288/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000288/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000288/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000288/ja.tiptap.json"
+    }
+  }
+}

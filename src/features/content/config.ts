@@ -13,6 +13,7 @@ export type DocsCategorySlug =
   | "manuals"
   | "white-papers"
   | "blogs"
+  | "acp-lab-notes"
   | "voc"
   | "events";
 
@@ -104,6 +105,11 @@ export const docsCategoryConfigs: CategoryConfig<DocsCategorySlug>[] = [
     slug: "blogs",
   },
   {
+    href: (locale) => getPublicCategoryHref("resources", locale, "acp-lab-notes"),
+    label: { en: "ACP Lab Notes", ko: "ACP 실습 노트", ja: "ACP 実習ノート" },
+    slug: "acp-lab-notes",
+  },
+  {
     href: (locale) => getPublicCategoryHref("resources", locale, "voc"),
     label: { en: "VOC", ko: "고객의 목소리", ja: "お客様の声" },
     slug: "voc",
@@ -183,6 +189,13 @@ const docsAdminCategoryConfigs: AdminCategoryConfig<DocsCategorySlug>[] = [
     title: "Blog",
   },
   {
+    description: "ACP 실습 연재의 본문, 이미지, 회차와 주제를 관리합니다.",
+    href: "/admin/resources/acp-lab-notes",
+    label: "ACP 실습 노트",
+    slug: "acp-lab-notes",
+    title: "ACP 실습 노트",
+  },
+  {
     description: "Voice of the Customer 콘텐츠의 게시 상태와 노출 순서를 관리합니다.",
     href: "/admin/resources/voc",
     label: "VOC",
@@ -241,6 +254,7 @@ export function getPublicMenuItems<TSlug extends string>(
 }
 
 const docsCmsCategorySlugs: DocsCategorySlug[] = [
+  "acp-lab-notes",
   "all",
   "introduction",
   "glossary",

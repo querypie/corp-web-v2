@@ -1,0 +1,47 @@
+{
+  "authorName": "승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "database-audit-reports",
+  "imageSrc": "/assets/content/acp-lab-notes/database-audit-reports/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 33,
+  "status": "published",
+  "storageId": "cnt_000272",
+  "summary": {
+    "en": "Access reviews ask what privileges a person holds now and which databases they used recently. I combined both in QueryPie Reports for Demo Developer, then inspected the downloaded summary and detailed files.",
+    "ko": "DB 권한을 점검할 때는 두 가지가 궁금하다. 이 사람에게 지금 어떤 권한이 있는지, 최근에는 어느 DB에 접속했는지다. 권한 목록과 접속 기록을 함께 보면 사용 현황을 파악하기가 한결 쉽다. 이번에는 QueryPie의 Reports로 이 두 자료를 묶어 봤다. 앞선 실습에 사용한 Demo Developer 한 명을 골라",
+    "ja": "点検では現在の権限と最近どのDBを使ったかを知りたい。QueryPie ReportsでDemo Developerの両資料をまとめ、概要と詳細ファイルを確認した。"
+  },
+  "title": {
+    "en": "[Part 33] Combining Database Privileges and Access History in a Report",
+    "ko": "[33편] DB 권한과 접속 이력을 보고서로 묶어봤다",
+    "ja": "[第33回] DB権限と接続履歴を一つの報告書にまとめる"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000272/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000272/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000272/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000272/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000272/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000272/ja.tiptap.json"
+    }
+  }
+}

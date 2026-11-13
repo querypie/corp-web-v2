@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "data-masking",
+  "imageSrc": "/assets/content/acp-lab-notes/data-masking/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 7,
+  "status": "published",
+  "storageId": "cnt_000246",
+  "summary": {
+    "en": "In Part 6, I changed only necessary data through approved SQL while keeping read access. Now I wanted to control what query results reveal. Checking delivery status does not always require the customer’s full phone number and email, but blocking order queries altogether is not practical either.",
+    "ko": "지난 6편에서는 조회 권한을 유지한 채, 승인을 받은 SQL로 필요한 데이터만 수정해 봤다. 이번에는 조회할 때 보이는 정보에 관심이 갔다. 배송 상태를 확인하려고 DB를 열었는데 고객의 전화번호와 이메일까지 함께 보인다면 어떨까. 주문이 정상적으로 처리됐는지 확인하는 데 연락처 전체가 꼭 필요한 것은 아니다. 그렇다고 ",
+    "ja": "第6回では参照権限を維持し、承認済みSQLで必要なデータだけを変更した。今回は参照結果に何が見えるかを考えた。配送状態の確認に顧客の電話番号やメール全体は必須ではないが、注文参照そのものを止めるわけにもいかない。"
+  },
+  "title": {
+    "en": "[Part 7] Allowing Database Queries While Hiding Personal Data — QueryPie Data Masking in Practice",
+    "ko": "[7편] DB 조회는 허용하고 개인정보는 가려봤다 — QueryPie 데이터 마스킹 실습",
+    "ja": "[第7回] DB参照は許可し、個人情報を隠す — QueryPieデータマスキング実習"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000246/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000246/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000246/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000246/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000246/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000246/ja.tiptap.json"
+    }
+  }
+}

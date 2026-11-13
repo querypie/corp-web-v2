@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "export-permissions",
+  "imageSrc": "/assets/content/acp-lab-notes/export-permissions/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 36,
+  "status": "published",
+  "storageId": "cnt_000275",
+  "summary": {
+    "en": "Sometimes viewing orders on screen is enough for shipping checks. I separated read and export privileges in the web SQL editor: first download three orders to CSV, then disable only Can Export and compare the UI.",
+    "ko": "배송 상태를 확인하는 업무는 화면에서 주문을 조회하는 것으로 충분할 때가 있다. 조회한 데이터를 파일로 내려받는 기능은 업무에 따라 따로 허용하고 싶었다. 이번에는 QueryPie 웹 SQL 에디터에서 조회 권한과 파일 내보내기 권한을 나눠 봤다. 먼저 주문 세 건을 CSV로 내려받은 다음, 같은 권한에서 Can Expo",
+    "ja": "配送確認は画面参照だけで足りる場合もある。Web SQLで参照と出力を分け、3件をCSV取得した後、Can Exportだけを外して画面の差を確認した。"
+  },
+  "title": {
+    "en": "[Part 36] Allowing Reads and Managing File Export Separately",
+    "ko": "[36편] 조회는 허용하고 파일 내보내기는 따로 관리해봤다",
+    "ja": "[第36回] 参照は許可しファイル出力は別に管理する"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000275/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000275/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000275/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000275/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000275/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000275/ja.tiptap.json"
+    }
+  }
+}

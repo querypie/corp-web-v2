@@ -43,6 +43,7 @@ import {
   getOrderedVisibleLocales,
 } from "./adminContentListLocale";
 import { useAdminLocale } from "@/components/layout/admin/AdminLocaleProvider";
+import { adminContentLocales } from "@/features/admin/preferences";
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -173,7 +174,7 @@ function matchesQuery(item: ManagedContentEntry, query: string) {
     return true;
   }
 
-  return (["en", "ko", "ja"] as const).some((locale) =>
+  return adminContentLocales.some((locale) =>
     item.title[locale].toLowerCase().includes(normalized) ||
     item.summary[locale].toLowerCase().includes(normalized),
   );
@@ -547,7 +548,7 @@ export default function AdminManagedContentListPage({
         : section === "resources"
           ? "Resources"
           : "News"
-      : getManagedCategoryLabel(section, categorySlug, "en");
+      : getManagedCategoryLabel(section, categorySlug, locale);
 
   const writeHref =
     getAdminCreateHref(section, categorySlug);
@@ -786,7 +787,7 @@ export default function AdminManagedContentListPage({
           ) : displayedItems.length > 0 ? (
             displayedItems.map((item, index) => (
               <ContentRow
-                activeLocale={getAdminContentListDisplayLocale(item)}
+                activeLocale={getAdminContentListDisplayLocale(item, locale)}
                 isReorderMode={isReorderMode}
                 isTogglePending={isStatusUpdating}
                 key={item.id}
@@ -857,7 +858,7 @@ export default function AdminManagedContentListPage({
 
       {previewItem ? (
         <PreviewModal
-          initialLocale={getAdminContentListDisplayLocale(previewItem)}
+          initialLocale={getAdminContentListDisplayLocale(previewItem, locale)}
           isLoading={isPreviewLoading}
           item={previewItem}
           onClose={() => {

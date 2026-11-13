@@ -1,0 +1,47 @@
+{
+  "authorName": "서버 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "web-terminal",
+  "imageSrc": "/assets/content/acp-lab-notes/web-terminal/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 22,
+  "status": "published",
+  "storageId": "cnt_000261",
+  "summary": {
+    "en": "After exploring database work, I moved to servers. Instead of distributing passwords to each new operator, I registered a test Ubuntu server and assigned an SSH role in QueryPie. The developer signed in, chose server and account, and opened a browser terminal without entering its password.",
+    "ko": "지금까지는 DB에 접속하고 데이터를 조회하거나 변경하는 과정을 살펴봤다. 이번에는 서버로 넘어가 봤다. 서버에 접속할 사람이 늘어날 때마다 비밀번호를 따로 알려 주는 대신, QueryPie에서 권한을 주고 접속하게 해 보고 싶었다. 실습용 Ubuntu 서버를 등록하고 개발자 계정에 SSH 접속 역할을 부여했다. 개발자는 ",
+    "ja": "DBに続いてサーバーを試した。接続者へ都度パスワードを伝える代わりに、Ubuntuを登録してSSHロールを付与した。開発者はログインしてサーバーとアカウントを選び、パスワード入力なしでWebターミナルを開けた。"
+  },
+  "title": {
+    "en": "[Part 22] Connecting to SSH Without Entering the Server Password — QueryPie Web Terminal",
+    "ko": "[22편] 서버 비밀번호를 입력하지 않고 SSH에 접속했다 — QueryPie 웹 터미널",
+    "ja": "[第22回] サーバーパスワードを入力せずSSH接続する — QueryPie Webターミナル"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000261/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000261/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000261/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000261/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000261/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000261/ja.tiptap.json"
+    }
+  }
+}

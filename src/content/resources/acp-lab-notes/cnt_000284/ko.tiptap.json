@@ -1,0 +1,794 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "컨테이너에 접속했다는 기록을 보고 나면, 그 안에서 무슨 작업을 했는지도 궁금해진다. 장애를 점검하다 어떤 파일을 읽었는지, 화면에는 어떤 값이 나왔는지까지 확인할 수 있으면 작업 내용을 훨씬 쉽게 이해할 수 있다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에는 테스트 Pod에 들어가 짧은 점검을 하고, "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Pod Session Recordings에서 그 작업을 다시 재생"
+        },
+        {
+          "type": "text",
+          "text": "해봤다. 접속 기록과 실제 터미널 화면을 함께 볼 수 있다는 점이 가장 인상적이었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "실습 클러스터의 녹화 설정부터 확인했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "관리자 화면에서 acp-kac-lab 클러스터를 열었다. Logging Options의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Pod Session Recording은 On"
+        },
+        {
+          "type": "text",
+          "text": "이었다. Request Audit도 켜져 있어, 셸 접속 요청과 세션 녹화를 함께 살펴볼 수 있는 상태였다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/01.webp",
+        "alt": "화면 1. 클러스터 설정에서 Pod Session Recording과 Request Audit을 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 1. 클러스터 설정에서 Pod Session Recording과 Request Audit을 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "실습에는 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ep45-session-demo"
+        },
+        {
+          "type": "text",
+          "text": "라는 Pod를 따로 준비했다. 컨테이너 안에는 service, environment, status가 적힌 가상 상태 파일을 넣었다. 실제 서비스 데이터 없이 점검 과정을 확인하기 위한 구성이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie에는 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Orders Lab Pod Inspector"
+        },
+        {
+          "type": "text",
+          "text": " 역할을 만들었다. 연결한 정책에서 orders-lab의 Pod 조회와, 이 테스트 Pod의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "pods/exec"
+        },
+        {
+          "type": "text",
+          "text": " 작업을 허용했다. 점검에 사용할 테스트 계정에는 이 역할을 부여했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/02.webp",
+        "alt": "화면 2. 테스트 Pod를 조회하고 셸에 접속할 수 있도록 전용 정책을 만들었다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 2. 테스트 Pod를 조회하고 셸에 접속할 수 있도록 전용 정책을 만들었다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Pod 안에서 평소 하던 점검을 해봤다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "테스트 계정으로 QueryPie의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Web Client"
+        },
+        {
+          "type": "text",
+          "text": "를 열었다. orders-lab에서 ep45-session-demo를 선택하니 Pod 상태는 Running, diagnostics 컨테이너는 Ready로 표시됐다. 상세 화면의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Shell"
+        },
+        {
+          "type": "text",
+          "text": " 버튼을 눌러 접속했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/03.webp",
+        "alt": "화면 3. 실습 Pod와 컨테이너가 정상 실행 중인 것을 확인하고 Shell을 열었다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 3. 실습 Pod와 컨테이너가 정상 실행 중인 것을 확인하고 Shell을 열었다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "셸에서 id와 hostname을 실행했다. uid와 gid는 10001이었고, 호스트 이름은 ep45-session-demo였다. 이어서 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "cat /lab/health.txt"
+        },
+        {
+          "type": "text",
+          "text": "로 상태 파일을 읽었다. service는 orders-demo, environment는 lab, status는 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "READY"
+        },
+        {
+          "type": "text",
+          "text": "로 나왔다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "마지막으로 EP45_POD_CHECK_COMPLETE라는 문구를 출력했다. 나중에 녹화를 볼 때 이번 점검을 바로 알아볼 수 있도록 넣은 표시다. 확인을 마친 뒤 exit로 셸을 정상 종료했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/04.webp",
+        "alt": "화면 4. 컨테이너 안에서 계정과 호스트, 상태 파일을 확인하고 점검 완료 문구를 출력했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 4. 컨테이너 안에서 계정과 호스트, 상태 파일을 확인하고 점검 완료 문구를 출력했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "작업이 끝난 뒤 녹화 목록을 열었다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "관리자 화면의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Audit → Kubernetes → Pod Session Recordings"
+        },
+        {
+          "type": "text",
+          "text": "로 이동했다. 방금 사용한 테스트 계정 Demo Approver의 세션이 목록에 있었다. 클러스터는 acp-kac-lab, 역할은 Orders Lab Pod Inspector로 기록됐다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에 확인할 항목은 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "12시 54분 50초에 시작한 세션"
+        },
+        {
+          "type": "text",
+          "text": "이었다. 접속 시각과 사용자, 역할을 함께 볼 수 있어서 어느 작업을 열어야 할지 쉽게 찾을 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/05.webp",
+        "alt": "화면 5. 녹화 목록에서 실습 사용자와 작업 시각이 맞는 세션을 찾았다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 5. 녹화 목록에서 실습 사용자와 작업 시각이 맞는 세션을 찾았다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "입력한 명령과 출력 결과가 그대로 보였다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "시각을 클릭하자 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Pod Session Record"
+        },
+        {
+          "type": "text",
+          "text": " 창이 열렸다. 사용자 이름, 시작 시각, Request Source와 Command가 위쪽에 나오고, 아래에는 Replay 화면이 있었다. 이번 기록의 접속 방식은 Web Client, 실행한 셸은 sh였다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "재생 버튼을 누르니 조금 전 입력했던 명령이 순서대로 나타났다. "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "id의 실행 결과, Pod 이름, 상태 파일의 READY 값"
+        },
+        {
+          "type": "text",
+          "text": "까지 확인할 수 있었다. 어떤 명령을 썼는지와 그때 무엇을 보고 판단했는지가 함께 보였다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/06.webp",
+        "alt": "화면 6. 녹화를 재생하자 실제 점검 때 입력한 명령과 상태 파일의 내용이 나타났다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 6. 녹화를 재생하자 실제 점검 때 입력한 명령과 상태 파일의 내용이 나타났다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "마지막에는 점검 완료 문구와 exit도 남아 있었다. 재생 시간은 약 14초였다. 재생 막대에서 앞부분을 선택해 해당 시점부터 다시 볼 수도 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/07.webp",
+        "alt": "화면 7. 점검 완료 표시와 셸을 종료한 명령까지 녹화에서 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 7. 점검 완료 표시와 셸을 종료한 명령까지 녹화에서 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "작업 내용을 인수인계할 때도 이런 기록이 있으면 편하겠다. 담당자가 어떤 순서로 상태를 확인했고 어떤 결과를 봤는지, 관리자가 같은 화면을 보며 이해할 수 있기 때문이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "감사 기록에서 해당 녹화로 바로 이어졌다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Request Audit"
+        },
+        {
+          "type": "text",
+          "text": "에서도 같은 작업을 찾아봤다. 12시 54분 50초의 셸 시작과 12시 55분 4초의 종료가 각각 기록돼 있었다. 종료 기록에는 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Success, ALLOW"
+        },
+        {
+          "type": "text",
+          "text": "와 함께 exit code 0, 13.82초라는 결과가 표시됐다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "사용자와 역할뿐 아니라 orders-lab 네임스페이스, pods/exec, ep45-session-demo도 확인할 수 있었다. 상세 화면의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Session Recording"
+        },
+        {
+          "type": "text",
+          "text": " 링크를 누르니 방금 재생한 세션이 다시 열렸다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-session-recording/08.webp",
+        "alt": "화면 8. 정상 종료 결과와 작업 대상을 확인하고, 감사 상세의 링크로 같은 녹화를 열었다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 8. 정상 종료 결과와 작업 대상을 확인하고, 감사 상세의 링크로 같은 녹화를 열었다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "직접 써보니 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "접근 권한을 관리하는 화면과 실제 작업을 확인하는 기록이 이어져 있다는 점"
+        },
+        {
+          "type": "text",
+          "text": "이 좋았다. 누가 컨테이너에 들어갔는지 확인한 다음, 그 안에서 무엇을 했고 어떤 결과를 봤는지까지 자연스럽게 따라갈 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "도입 담당자 입장에서는 운영 작업을 설명할 자료가 구체적으로 남는다는 점이 매력적이다. 이번 실습에서도 접속한 사용자, 부여된 역할, 점검 명령과 출력, 정상 종료 결과를 하나의 작업으로 연결해 확인할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "실습은 QueryPie Community 11.6.7의 Web Client와 K3s 1.36.6에서 진행했다. 사용자와 Pod, 상태 파일은 모두 실습용이며, 작업 후 추가한 점검 역할은 회수했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "참고: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/audit/kubernetes-logs/pod-session-recordings",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "QueryPie Pod Session Recordings 안내"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

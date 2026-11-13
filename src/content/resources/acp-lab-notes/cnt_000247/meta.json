@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어 · 승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "database-audit-logs",
+  "imageSrc": "/assets/content/acp-lab-notes/database-audit-logs/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 8,
+  "status": "published",
+  "storageId": "cnt_000247",
+  "summary": {
+    "en": "Part 7 masked phone numbers and emails for developers, with exceptions for staff needing original values. Now suppose someone asks who queried order 4002 after a delivery inquiry. Where should an administrator look, and what can the records tell us?",
+    "ko": "지난 7편에서는 고객의 전화번호와 이메일에 마스킹을 적용했다. 개발자는 가려진 연락처를 보고, 원문이 필요한 담당자에게만 예외를 주는 것까지 확인했다. 이번에는 그다음 상황을 생각해 봤다. 배송 문의를 처리한 뒤 “4002번 주문은 누가 조회했나요?”라는 확인 요청이 들어온다면, 관리자는 어디에서 무엇을 찾아보면 될까.",
+    "ja": "第7回では電話・メールを開発者向けに隠し、原文が必要な担当者だけを例外にした。今回は配送問い合わせの後で「4002番を誰が参照したか」と聞かれたら、管理者はどこで何を確認できるかを試す。"
+  },
+  "title": {
+    "en": "[Part 8] Who Queried Customer Information? — Tracing Database Activity with QueryPie Audit Logs",
+    "ko": "[8편] 누가 고객 정보를 조회했을까? — QueryPie 감사 로그로 DB 사용 이력 찾아보기",
+    "ja": "[第8回] 誰が顧客情報を参照したのか — QueryPie監査ログでDB利用履歴をたどる"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000247/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000247/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000247/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000247/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000247/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000247/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "read-only-permissions",
+  "imageSrc": "/assets/content/acp-lab-notes/read-only-permissions/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 4,
+  "status": "published",
+  "storageId": "cnt_000243",
+  "summary": {
+    "en": "Previously, I registered a database in QueryPie and queried orders in DBeaver, both with manual connection settings and Multi Agent. With reads working, I wanted to try the opposite: what happens when a read-only developer runs UPDATE, or an administrator revokes access?",
+    "ko": "지난 편에서는 QueryPie에 DB를 등록하고 DBeaver로 주문 데이터를 조회했다. 접속 정보를 직접 넣는 방법과 Multi Agent에서 DBeaver를 여는 방법까지 써봤다. 조회가 되는 건 확인했으니, 이번에는 반대로 해보고 싶었다. 읽기 권한만 받은 개발자가 UPDATE를 실행하면 어떻게 될까? 관리자가 접근",
+    "ja": "前回はQueryPieにDBを登録し、DBeaverで注文を参照した。接続情報の手入力とMulti Agentの両方を試した。参照できたので、今回は逆を試したい。読み取り専用の開発者がUPDATEしたり、管理者がアクセス権を取り消したりするとどうなるだろう。"
+  },
+  "title": {
+    "en": "[Part 4] Running UPDATE with QueryPie ACP Read-Only Access — Blocking Queries, Revoking Access, and Reviewing Audits",
+    "ko": "[4편] QueryPie ACP 읽기 권한으로 UPDATE를 실행해 보면? — 쿼리 차단부터 권한 회수, 감사 로그까지",
+    "ja": "[第4回] QueryPie ACPの読み取り専用権限でUPDATEを実行したら — クエリ遮断、権限取り消し、監査ログまで"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000243/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000243/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000243/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000243/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000243/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000243/ja.tiptap.json"
+    }
+  }
+}

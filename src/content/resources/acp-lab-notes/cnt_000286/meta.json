@@ -1,0 +1,47 @@
+{
+  "authorName": "승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "blocked-sql-alerts",
+  "imageSrc": "/assets/content/acp-lab-notes/blocked-sql-alerts/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 47,
+  "status": "published",
+  "storageId": "cnt_000286",
+  "summary": {
+    "en": "Unauthorized SQL was already blocked, but could operators learn about attempts without constantly checking audits? I used Alerts, ran UPDATE with read-only access, and compared the delivered message with the audit.",
+    "ko": "앞선 실습에서 권한 없는 SQL이 차단되는 것은 확인했다. 운영하는 입장에서는 그다음도 궁금했다. 누군가 권한 밖의 작업을 시도했을 때, 담당자가 감사 화면을 열어보지 않아도 알 수 있을까? 이번에는 QueryPie의 Alerts로 차단된 SQL 실행을 알림으로 받아봤다. 조회만 허용된 계정으로 UPDATE를 실행하고, ",
+    "ja": "SQL遮断は確認済みだが監査を常時見ずに試行を知れるだろうか。Alertsで読み取り専用UPDATEの通知を受け、監査と照合した。"
+  },
+  "title": {
+    "en": "[Part 47] Receiving Alerts for Blocked SQL",
+    "ko": "[47편] 차단된 SQL 실행을 알림으로 받아봤다",
+    "ja": "[第47回] 遮断されたSQL実行を通知で受け取る"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000286/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000286/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000286/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000286/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000286/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000286/ja.tiptap.json"
+    }
+  }
+}

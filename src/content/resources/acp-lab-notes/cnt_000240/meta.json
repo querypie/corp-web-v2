@@ -1,0 +1,47 @@
+{
+  "authorName": "시작하기",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-07",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "why-access-control",
+  "imageSrc": "/assets/content/acp-lab-notes/community-edition-installation/14.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 1,
+  "status": "published",
+  "storageId": "cnt_000240",
+  "summary": {
+    "en": "Recent security incident reports keep bringing me back to the same question: ‘If an attacker is already inside, what can we still stop?’",
+    "ko": "최근 보안 사고 뉴스를 보면서 자꾸 같은 질문을 하게 된다. “공격자가 이미 내부에 들어왔다면, 우리는 무엇을 막을 수 있을까?”",
+    "ja": "最近のセキュリティ事故のニュースを見ていると、同じ問いが繰り返し浮かぶ。「攻撃者がすでに内部に侵入していたら、私たちは何を防げるのだろうか」"
+  },
+  "title": {
+    "en": "[Part 1] After a Breach, How Far Can an Attacker Go? — Why I Want to Try ACP Firsthand",
+    "ko": "[1편] 해킹 이후, 공격자는 어디까지 갈 수 있을까 — 내가 ACP를 직접 써보려는 이유",
+    "ja": "[第1回] 侵入後、攻撃者はどこまでアクセスできるのか — ACPを自分で試してみたい理由"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000240/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000240/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000240/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000240/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000240/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000240/ja.tiptap.json"
+    }
+  }
+}

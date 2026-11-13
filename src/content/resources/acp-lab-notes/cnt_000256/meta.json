@@ -1,0 +1,47 @@
+{
+  "authorName": "승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "user-timeline",
+  "imageSrc": "/assets/content/acp-lab-notes/user-timeline/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 17,
+  "status": "published",
+  "storageId": "cnt_000256",
+  "summary": {
+    "en": "‘I can connect to the database, but one operation fails.’ Operators must distinguish login problems, connection issues, and blocked SQL. I used User Timeline to follow Demo Analyst’s successful read and blocked UPDATE in one sequence.",
+    "ko": "“DB에는 접속됐는데 작업 하나가 안 됩니다.” 운영 담당자라면 이런 문의를 받았을 때 로그인부터 실패한 것인지, DB 연결 문제인지, 특정 SQL만 막힌 것인지 먼저 확인하게 된다. 이번에는 QueryPie의 User Timeline을 열어봤다. 지난 실습에서 주문을 조회하고 UPDATE는 차단됐던 Demo Analys",
+    "ja": "「DBには接続できるのに一つの操作ができない」。ログイン、接続、SQL制限を切り分けたい。今回はUser TimelineでDemo Analystの参照成功とUPDATE遮断を一つの流れで追った。"
+  },
+  "title": {
+    "en": "[Part 17] What Did This User Do? — QueryPie User Timeline",
+    "ko": "[17편] 이 사용자는 무슨 작업을 했을까? — QueryPie 사용자 타임라인",
+    "ja": "[第17回] このユーザーは何をしたのか — QueryPieユーザータイムライン"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000256/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000256/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000256/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000256/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000256/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000256/ja.tiptap.json"
+    }
+  }
+}

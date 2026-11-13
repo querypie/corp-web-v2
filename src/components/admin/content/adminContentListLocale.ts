@@ -1,20 +1,20 @@
 import type { Locale } from "@/constants/i18n";
 import type { ManagedContentEntry } from "@/features/content/data";
-
-const ADMIN_CONTENT_LOCALE_ORDER = ["en", "ko", "ja"] as const;
+import { adminContentLocales } from "@/features/admin/preferences";
 
 export function getOrderedVisibleLocales(visibleLocales: Locale[]): Locale[] {
-  return ADMIN_CONTENT_LOCALE_ORDER.filter((locale) => visibleLocales.includes(locale));
+  return adminContentLocales.filter((locale) => visibleLocales.includes(locale));
 }
 
 export function getAdminContentListDisplayLocale(
   item: Pick<ManagedContentEntry, "title" | "visibleLocales">,
+  preferredLocale: Locale = "en",
 ): Locale {
-  const [firstVisibleLocale] = getOrderedVisibleLocales(item.visibleLocales);
+  const localeOrder = [preferredLocale, ...adminContentLocales.filter((locale) => locale !== preferredLocale)];
 
   return (
-    firstVisibleLocale ??
-    ADMIN_CONTENT_LOCALE_ORDER.find((locale) => item.title[locale].trim()) ??
-    "en"
+    localeOrder.find((locale) => item.visibleLocales.includes(locale) && item.title[locale].trim()) ??
+    localeOrder.find((locale) => item.title[locale].trim()) ??
+    preferredLocale
   );
 }

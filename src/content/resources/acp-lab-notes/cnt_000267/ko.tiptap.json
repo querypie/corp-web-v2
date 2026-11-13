@@ -1,0 +1,779 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "23편에서는 서버에 접속할 수 있어도 삭제 명령은 실행하지 못하도록 막아 봤다. 그런데 운영하다 보면 오래된 파일을 정리하는 것처럼, 평소 제한한 명령을 꼭 써야 할 때가 있다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에는 기존 제한을 그대로 두고 필요한 시간만 승인받아 작업해 봤다. QueryPie의 Server Privilege Request로 rm 사용을 5분 동안 요청했다. 승인 전에는 막혔던 삭제가 승인 후에는 실행됐고, 시간이 지난 뒤 새로 접속하니 다시 제한됐다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "평소에는 막아 둔 삭제 명령"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "앞서 등록한 SSH Operations Lab과 labops 계정을 그대로 사용했다. Demo Developer에게 부여한 Operations Lab Operator 역할도 유지했다. 이 역할에 연결된 정책은 Lab - Block Delete 명령 템플릿으로 rm을 제한한다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에 지울 시험 파일은 별도로 준비했다. 웹 터미널에서 파일 목록을 확인한 뒤 삭제 명령을 입력하자 QueryPie의 Restricted 메시지가 나왔다. 다시 조회해 보니 파일은 그대로 남아 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/command-approval/01.webp",
+        "alt": "화면 1. 서버 접속과 파일 조회는 가능했지만, 승인 전 삭제 명령은 차단됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 1. 서버 접속과 파일 조회는 가능했지만, 승인 전 삭제 명령은 차단됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "제한 메시지에는 Request Server Privilege라는 안내도 있었다. 업무상 필요한 명령이라면 승인 절차를 거쳐 사용할 수 있게 이어져 있었다. 이 흐름을 직접 따라가 보기로 했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "서버와 명령을 고르고 5분을 요청했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Workflow에서 Server Privilege Request를 열었다. 대상 역할은 Operations Lab Operator, 서버와 계정은 SSH Operations Lab의 labops 하나를 선택했다. Commands의 Keyword에는 rm을 넣었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "사용 시간은 5분으로 정했다. Privilege Start Trigger는 Grant로 선택해 권한이 부여되는 시점부터 시간이 흐르도록 했다. 요청 사유에는 시험 파일 정리에 필요하다는 내용을 적었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/command-approval/02.webp",
+        "alt": "화면 2. 대상 서버·계정과 rm 명령, 승인 시점부터 5분이라는 조건으로 요청했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 2. 대상 서버·계정과 rm 명령, 승인 시점부터 5분이라는 조건으로 요청했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "승인 규칙에는 Demo Approver를 지정했고, 자기 요청을 스스로 승인하는 옵션은 꺼 뒀다. 이어서 승인자 계정으로 들어가 대상과 명령, 사용 시간을 확인한 뒤 승인 의견을 남겼다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/command-approval/03.webp",
+        "alt": "화면 3. 별도 승인자 계정에서 처리한 요청이 Approved로 표시됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 3. 별도 승인자 계정에서 처리한 요청이 Approved로 표시됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "요청 화면에 작업 대상과 필요한 명령, 시간이 함께 들어가니 승인하는 쪽에서도 무엇을 허용하는지 확인하기 편했다. 이번 요청은 선택한 서버 계정에서 rm을 5분간 사용할 수 있게 하는 조건이었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "승인받은 뒤 같은 파일을 정리했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "개발자 계정으로 돌아와 서버 연결 화면을 열었다. View Server Privilege에 rm과 시작 조건 Grant가 표시됐고, 남은 시간이 줄어들고 있었다. 요청을 승인받은 결과를 접속 화면에서도 확인할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/command-approval/04.webp",
+        "alt": "화면 4. 사용자 화면에서 승인된 명령과 남은 사용 시간을 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 4. 사용자 화면에서 승인된 명령과 남은 사용 시간을 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "새 웹 터미널로 접속해 앞서 지우지 못했던 파일을 다시 조회했다. 파일이 있는 것을 확인한 뒤 같은 rm 명령을 실행했다. 이번에는 제한 메시지가 나오지 않았다. 다시 조회하자 No such file or directory가 표시돼 실제로 삭제된 것을 확인했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/command-approval/05.webp",
+        "alt": "화면 5. 승인된 시간 안에서는 삭제 명령이 실행됐고, 해당 시험 파일이 사라졌다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 5. 승인된 시간 안에서는 삭제 명령이 실행됐고, 해당 시험 파일이 사라졌다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "기존 삭제 제한 정책을 수정하지 않아도 요청한 작업을 처리할 수 있었다. 관리자가 일반 정책에서 rm을 뺐다가 다시 넣는 과정도 필요하지 않았다. 원본과 다음 확인에 사용할 두 번째 시험 파일은 그대로 두고 접속을 종료했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "시간이 지나자 삭제 명령이 다시 제한됐다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "사용자 화면의 남은 시간이 00:00:00이 된 것을 확인한 뒤 새로 접속했다. 서버에는 정상적으로 들어갈 수 있었고, 파일 목록도 조회됐다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에는 남겨 둔 두 번째 시험 파일에 rm을 실행했다. 처음 보았던 QueryPie Restricted 메시지가 다시 나왔다. 이어서 조회한 파일 목록에도 해당 파일이 그대로 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/command-approval/06.webp",
+        "alt": "화면 6. 승인 시간이 지난 뒤 새 연결에서는 삭제 명령이 다시 차단됐고 파일이 보존됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 6. 승인 시간이 지난 뒤 새 연결에서는 삭제 명령이 다시 차단됐고 파일이 보존됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "별도로 권한 회수 버튼을 누르지는 않았다. 승인받은 시간이 끝난 뒤에는 새 연결에 원래 명령 제한이 적용됐다. 평소 사용하는 서버 접근 권한을 유지하면서, 추가로 허용한 명령의 사용 시간만 관리할 수 있다는 점이 좋았다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "승인한 사람과 실제 작업 기록까지 확인했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "마지막으로 관리자 화면의 Command Audit에서 이번 삭제 명령을 검색했다. 승인 전 시도는 Restricted, 승인 후 실행은 Not Restricted, 시간이 지난 뒤의 시도는 다시 Restricted로 남아 있었다. 세 기록 모두 같은 사용자와 역할, labops 계정, SSH Operations Lab을 가리켰다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/command-approval/07.webp",
+        "alt": "화면 7. 삭제 명령의 차단 여부가 승인 전·승인 후·만료 후 순서에 맞게 기록됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 7. 삭제 명령의 차단 여부가 승인 전·승인 후·만료 후 순서에 맞게 기록됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Workflow Logs에는 요청과 승인 기록이 각각 남았다. Demo Developer가 요청한 시각과 Demo Approver가 승인한 시각을 확인할 수 있었고, 요청 사유와 승인 의견도 보관돼 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/command-approval/08.webp",
+        "alt": "화면 8. 누가 요청하고 승인했는지, 언제 처리했는지를 Workflow Logs에서 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 8. 누가 요청하고 승인했는지, 언제 처리했는지를 Workflow Logs에서 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "도입 담당자 입장에서 눈에 들어온 것은 임시 작업을 처리하는 방식이었다. 평소의 제한을 유지한 채 필요한 서버 계정과 명령, 시간을 정해 승인받고, 실제 사용 기록까지 남길 수 있었다. 예외가 필요한 업무를 처리하면서도 권한을 계속 열어 두는 일을 줄일 수 있겠다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번 실습은 QueryPie Community 11.6.7과 별도로 구성한 Ubuntu 서버에서 진행했다. 승인 전·후·만료 후에는 각각 새 웹 터미널로 접속했으며, 삭제 대상은 실습을 위해 만든 파일의 복사본이었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "참고: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/workflow/requesting-server-privilege",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Server Privilege Request"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/servers/server-access-control/access-control/granting-server-privilege",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Server Privilege 관리"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/audit/server-logs/command-audit",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Command Audit"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

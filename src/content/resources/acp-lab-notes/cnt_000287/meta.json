@@ -1,0 +1,47 @@
+{
+  "authorName": "승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "external-maintenance-access",
+  "imageSrc": "/assets/content/acp-lab-notes/external-maintenance-access/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 48,
+  "status": "published",
+  "storageId": "cnt_000287",
+  "summary": {
+    "en": "External database checks need careful scope: order inspection does not require changes, and access should not remain after work ends. I followed a test contractor from read-access request through approval, inspection, revocation, and verification.",
+    "ko": "외부 유지보수 담당자에게 DB 점검을 맡길 때면 권한을 어디까지 열어줘야 할지부터 고민하게 된다. 주문 상태를 확인하는 일인데 데이터를 바꿀 권한까지 줄 필요는 없고, 작업이 끝난 뒤에도 접속 권한을 남겨둘 이유는 없다. 이번에는 QueryPie에서 이 과정을 처음부터 끝까지 해봤다. 테스트 사용자에게 외부 유지보수 담당",
+    "ja": "外部保守のDB点検では範囲が重要だ。注文確認に変更権限は不要で、終了後もアクセスを残したくない。テスト担当者の参照申請から承認、点検、回収、確認まで行った。"
+  },
+  "title": {
+    "en": "[Part 48] Delegating Only Necessary Work to External Maintenance Staff",
+    "ko": "[48편] 외부 유지보수 담당자에게 필요한 작업만 맡겨봤다",
+    "ja": "[第48回] 外部保守担当には必要な作業だけを任せる"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000287/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000287/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000287/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000287/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000287/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000287/ja.tiptap.json"
+    }
+  }
+}

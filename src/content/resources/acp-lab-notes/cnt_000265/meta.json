@@ -1,0 +1,47 @@
+{
+  "authorName": "Kubernetes 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "kubernetes-policies",
+  "imageSrc": "/assets/content/acp-lab-notes/kubernetes-policies/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 26,
+  "status": "published",
+  "storageId": "cnt_000265",
+  "summary": {
+    "en": "Checking production Kubernetes settings does not always require permission to change them. I granted ConfigMap reads in QueryPie Community and denied changes, then reviewed both operations in the same audit screen.",
+    "ko": "운영 중인 Kubernetes 설정을 확인해야 한다고 해서, 그 설정을 바꾸는 권한까지 필요한 것은 아니다. 장애를 살펴보거나 배포 상태를 점검할 때도 현재 값을 읽는 것만으로 충분한 일이 많다. 이번에는 QueryPie Community에서 개발자에게 ConfigMap 조회 권한을 주고, 설정값을 바꾸는 요청은 막아 봤",
+    "ja": "稼働中Kubernetesの確認に変更権限まで必要とは限らない。QueryPie CommunityでConfigMap参照を許可し変更は拒否した。両操作を同じ監査画面で確認した。"
+  },
+  "title": {
+    "en": "[Part 26] Reading Kubernetes Configuration While Blocking Changes — QueryPie Roles and Policies",
+    "ko": "[26편] Kubernetes 설정은 읽고, 변경은 막아봤다 — QueryPie 역할과 접근 정책",
+    "ja": "[第26回] Kubernetes設定は読み、変更は止める — QueryPieのロールとアクセスポリシー"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000265/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000265/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000265/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000265/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000265/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000265/ja.tiptap.json"
+    }
+  }
+}

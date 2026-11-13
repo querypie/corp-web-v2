@@ -1,0 +1,47 @@
+{
+  "authorName": "시작하기",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-07",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "community-edition-installation",
+  "imageSrc": "/assets/content/acp-lab-notes/community-edition-installation/13.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 2,
+  "status": "published",
+  "storageId": "cnt_000241",
+  "summary": {
+    "en": "To explore what can be controlled after an intrusion, I installed QueryPie ACP Community Edition on my Mac. This first lab records the installation steps, issues encountered, and the checks completed before testing access policies.",
+    "ko": "지난 글에서 던진 질문은 “공격자가 이미 내부에 들어왔다면, 어디까지 움직일 수 있을까?”였다. 그 질문에 답하려면 접근통제 제품의 기능 목록을 읽는 것에서 한 걸음 더 나아가야 한다. 실제 환경에 올려 보고, 계정과 권한을 설정하고, 허용한 작업과 차단한 작업이 어떻게 기록되는지 확인해야 한다. 이번에는 그 출발점으로 ",
+    "ja": "侵入後に何を制御できるのかを確かめるため、MacにQueryPie ACP Community Editionをインストールした。アクセス制御の検証に進む前の準備として、導入手順、遭遇した問題、確認できた範囲を記録する。"
+  },
+  "title": {
+    "en": "[Part 2] Installing QueryPie ACP Community Edition — A First Lab Environment for Evaluating Adoption",
+    "ko": "[2편] QueryPie ACP 커뮤니티 버전 설치하기 — 도입 검토를 위한 첫 실습 환경 만들기",
+    "ja": "[第2回] QueryPie ACP Community Editionをインストールする — 導入検討のための最初の実習環境"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000241/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000241/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000241/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000241/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000241/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000241/ja.tiptap.json"
+    }
+  }
+}

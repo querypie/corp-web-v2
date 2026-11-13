@@ -1,0 +1,47 @@
+{
+  "authorName": "서버 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "command-control",
+  "imageSrc": "/assets/content/acp-lab-notes/command-control/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 23,
+  "status": "published",
+  "storageId": "cnt_000262",
+  "summary": {
+    "en": "After password-free web-terminal access, I restricted commands after login. The operator should inspect account and file contents but not delete files with rm. I prepared a test file and applied Command Templates.",
+    "ko": "지난 글에서는 개발자 계정으로 웹 터미널에 접속했다. 서버 비밀번호를 따로 알려 주지 않아도 접속할 수 있었다. 이번에는 서버에 들어온 뒤 실행하는 명령을 제한해 봤다. 상황은 간단하게 잡았다. 담당자는 서버의 계정과 파일 내용을 확인할 수 있지만, 파일을 지우는 rm 명령은 사용하지 못하게 하는 것이다. 실습용 파일 하",
+    "ja": "パスワードを渡さないWeb接続に続き、ログイン後のコマンドを制限した。アカウントとファイルは確認できるがrmで消せない設定だ。テストファイルとCommand Templatesで試した。"
+  },
+  "title": {
+    "en": "[Part 23] Allowing Server Access but Blocking Deletion — QueryPie Command Control",
+    "ko": "[23편] 서버 접속은 허용하고, 삭제 명령은 막았다 — QueryPie 명령어 통제",
+    "ja": "[第23回] サーバー接続を許可し削除コマンドを止める — QueryPieコマンド制御"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000262/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000262/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000262/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000262/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000262/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000262/ja.tiptap.json"
+    }
+  }
+}

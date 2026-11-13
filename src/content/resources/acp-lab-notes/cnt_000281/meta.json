@@ -1,0 +1,47 @@
+{
+  "authorName": "승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-13",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "multi-step-approval",
+  "imageSrc": "/assets/content/acp-lab-notes/multi-step-approval/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 42,
+  "status": "published",
+  "storageId": "cnt_000281",
+  "summary": {
+    "en": "Some database tasks need more than one reviewer: development checks SQL, then operations checks target and purpose. I built two sequential SQL Request approvals with different reviewers, then executed a one-order SELECT.",
+    "ko": "운영 DB 작업을 승인할 때 한 사람의 확인만으로 끝내기 어려운 경우가 있다. 개발 담당자가 SQL과 조회 조건을 먼저 살펴보고, 운영 담당자가 대상과 작업 목적을 확인한 뒤 최종 승인하는 식이다. 이번에는 그 순서를 QueryPie에 넣어봤다. SQL Request에 승인 단계를 두 개 만들고, 서로 다른 담당자가 차례",
+    "ja": "DB作業は一人の確認だけでは不十分な場合がある。開発がSQLを、運用が対象と目的を確認する二段階をSQL Requestに設け、注文1件のSELECTを実行した。"
+  },
+  "title": {
+    "en": "[Part 42] Adding Two-Step Approval to Database Work",
+    "ko": "[42편] 운영 DB 작업에 두 단계 승인을 붙여봤다",
+    "ja": "[第42回] 運用DB作業に二段階承認を付ける"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000281/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000281/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000281/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000281/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000281/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000281/ja.tiptap.json"
+    }
+  }
+}

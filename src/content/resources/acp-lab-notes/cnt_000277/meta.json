@@ -1,0 +1,47 @@
+{
+  "authorName": "서버 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-09",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "server-tag-groups",
+  "imageSrc": "/assets/content/acp-lab-notes/server-tag-groups/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 38,
+  "status": "published",
+  "storageId": "cnt_000277",
+  "summary": {
+    "en": "After registration and access grants, I explored grouping servers. QueryPie Server Groups can use tag conditions. I put the same server into a tag-based group and a manual group, then changed its tag to compare membership.",
+    "ko": "서버를 등록하고 접속 권한을 정하는 것까지는 앞선 글에서 해 봤다. 이번에는 등록한 서버들을 어떻게 묶어 관리할 수 있는지 살펴봤다. 서버의 용도나 분류가 달라질 때 그룹 목록도 하나씩 고쳐야 하는지 궁금했다. QueryPie의 Server Groups에는 태그 조건으로 서버를 포함하는 기능이 있다. 같은 실습 서버를 태",
+    "ja": "登録・付与に続きサーバーの分類管理を試した。Server Groupsはタグ条件を使える。同じサーバーをタグと手動の両グループに入れ、タグ変更時の構成を比較した。"
+  },
+  "title": {
+    "en": "[Part 38] Changing a Server Tag Also Changes Group Membership",
+    "ko": "[38편] 서버 태그를 바꾸니 그룹 구성도 따라 바뀌었다",
+    "ja": "[第38回] サーバータグを変えるとグループ構成も変わった"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000277/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000277/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000277/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000277/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000277/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000277/ja.tiptap.json"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "authorName": "DB 접근 제어",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "table-access-control",
+  "imageSrc": "/assets/content/acp-lab-notes/table-access-control/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 9,
+  "status": "published",
+  "storageId": "cnt_000248",
+  "summary": {
+    "en": "Allowing a database connection does not mean every table is needed. A developer checking orders does not necessarily need settlement amounts or internal notes. I put both tables in one database and tried allowing order queries while restricting settlements in QueryPie ACP.",
+    "ko": "DB 접속을 허용했다고 해서 그 안의 모든 데이터를 볼 필요는 없다. 주문 상태를 확인하는 개발자에게 정산 금액이나 내부 메모까지 필요한 것은 아니기 때문이다. 이번에는 그 구분을 QueryPie ACP에서 직접 해봤다. 같은 DB 안에 주문 테이블과 정산 테이블을 두고, 개발자는 주문을 계속 조회하되 정산 정보에는 접근",
+    "ja": "DB接続を許可しても全データを見る必要はない。注文を確認する開発者に精算金額や内部メモまで必要とは限らない。同じDBに両テーブルを置き、QueryPie ACPで注文参照を維持しながら精算を制限した。"
+  },
+  "title": {
+    "en": "[Part 9] Allowing Order Queries While Protecting Settlements — QueryPie Table Access Restrictions",
+    "ko": "[9편] 주문 조회는 허용하고 정산 정보는 보호했다 — QueryPie 테이블 접근 제한 실습",
+    "ja": "[第9回] 注文参照は許可し、精算情報は保護する — QueryPieのテーブルアクセス制限"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000248/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000248/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000248/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000248/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000248/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000248/ja.tiptap.json"
+    }
+  }
+}

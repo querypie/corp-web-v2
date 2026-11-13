@@ -1,0 +1,742 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "最初の記事を書いたとき、一番気になっていたのは、アカウントが1つ漏えいしたあとのことだった。そのアカウントで別のサーバーに入れたり、必要以上のデータを読めたりしたら、1つの事故がどこまで広がるのだろうか。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "そこでQueryPie ACPのコミュニティ版を自分でインストールした。MacからテストDBを接続するところから始め、サーバーやKubernetesも試した。権限を申請して承認を受ける利用者にも、作業を許可したり権限を取り消したりする管理者にもなってみた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "50回目を迎えて印象に残った場面を振り返ると、共通点があった。注文ステータスは確認できても、許可していない変更は止められた。サーバーのファイルは読めても、制限した削除コマンドは実行されなかった。Kubernetesでも設定は参照できる一方、変更リクエストは拒否された。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "任せた仕事はできるようにし、その仕事を超える権限は与えない。最初の記事で必要だと考えていた制御を、自分で設定して結果まで確かめたことになる。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "参照は任せ、変更には承認を求められた"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "データベースアクセス制御のDACで特によかったのは、業務をかなり具体的に分けられることだった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "例えば、注文が正しく処理されたかを確認する担当者には、注文番号と配送ステータスが必要だ。顧客の電話番号やメールアドレスの全体まで、常に必要とは限らない。実習ではDBeaverで普段どおり参照しながら、連絡先をマスキングできた。注文確認は続けつつ、元の値が必要な担当者にだけ例外を設ける形だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "「参照だけにしてください」という依頼も、実際の実行権限として設定できた。読み取り専用ユーザーがUPDATEを実行すると遮断され、同じ接続でもSELECTは正常に実行された。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "必要な変更は承認手続きで対応した。第49回では普段の接続権限をRead-Onlyのままにして、注文1件を変更するSQLを別途承認してもらい実行した。変更理由と承認者が記録され、DML SnapshotではステータスがPENDINGからDELIVEREDに変わったことも確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "導入を担当するなら、まずこの場面を同僚に見せたい。参照業務と変更業務を分けながら必要な訂正は進められ、あとから変更理由と変わった値まで説明できるからだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/lab-notes-retrospective/01.webp",
+        "alt": "注文確認に必要な情報は見えるまま、連絡先にマスキングを適用した場面。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "注文確認に必要な情報は見えるまま、連絡先にマスキングを適用した場面。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "サーバーのパスワードを渡さずに作業を任せられた"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "サーバーアクセス制御のSACを使うと、そもそも利用者へ接続情報を渡す方法から考え直すことになった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者がサーバーアカウントを登録してロールを割り当てると、利用者は自分のQueryPieアカウントでログインし、許可されたサーバーに接続した。サーバーのパスワードを別途受け取って入力する手順はなかった。監査記録では、実際に作業したQueryPieユーザーと、サーバー上で使用したアカウントの両方を確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "サーバーパスワードを変更する実習も印象的だった。QueryPieでテストアカウントのパスワードを変更してから再接続したが、利用者が新しいパスワードを調べて入力する必要はなかった。担当者ごとに新しいパスワードを伝えて保管してもらう手間を減らせそうだと感じた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "作業には使い慣れたMacのターミナルを引き続き利用できた。Multi Agent経由でSSH接続してファイルを確認し、ポリシーに指定したrmコマンドを実行すると、その場で制限された。再度ファイルを読むと内容はそのままで、コマンド監査には削除の試みがRestrictedとして残った。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SACの魅力は、サーバーに入る人と、その中で行う作業を併せて確認できる点にあった。点検に必要な接続を提供しながら制限するコマンドを決め、作業後は記録とセッション再生で当時の状況を確認できた。外部の保守担当者や運用点検を任せる場面が自然と思い浮かんだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/lab-notes-retrospective/02.webp",
+        "alt": "普段使うMacのターミナルでも、設定したコマンド制限が適用された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "普段使うMacのターミナルでも、設定したコマンド制限が適用された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "kubectlをそのまま使えることで、KACを身近に感じた"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Kubernetesアクセス制御のKACでは、設定を確認する作業と変更する作業を分けてみた。テスト用NamespaceのConfigMapは参照可能にし、同じ設定の変更は制限した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Multi Agent認証を使う接続設定を用意したあとは、使い慣れたkubectlコマンドで作業した。getで現在値を読むことはできたが、patchで変更しようとするとQueryPieのポリシーにより拒否された。再度確認した設定値もリソースバージョンも変わっていなかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者画面では、誰がどのクラスターのどのリソースに変更を要求し、リクエストにどの値を含めたかまで確認できた。KubernetesのNamespace、リソース、操作の種類に合わせて権限を分け、その結果をユーザー単位で探せる点がよかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "コンテナ内の作業を再生した経験も記憶に残っている。テストPodに入り、状態ファイルを読んで退出したあとに録画を開くと、入力したコマンドと当時画面に表示された値が再び見えた。接続リクエストを探し、同じ作業の録画まで続けて確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Kubernetesを導入すると、運用対象も作業方法も変わる。今回はDBやサーバーで重視した「誰がどの権限で作業し、何をしたか」を、Kubernetesでも同じ製品内で確認できた。運用者がkubectlを使い続けられる点も加わり、実務への適用をより具体的にイメージできた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/lab-notes-retrospective/03.webp",
+        "alt": "作業後に、Pod内で入力したコマンドと出力結果を再確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "作業後に、Pod内で入力したコマンドと出力結果を再確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "DB、サーバー、Kubernetesを一か所で管理してみて"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DBからサーバー、Kubernetesまで試すと、1つの製品でまとめて管理する意味が思った以上に大きく感じられた。会社の重要なデータはDBにあり、サービスを動かすサーバーやKubernetesにもアクセス権限が必要になる。QueryPieではそれらを一か所に登録し、業務に合わせてアクセス範囲を定め、実際の作業記録まで確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DBでは実行されたSQL、サーバーでは入力されたコマンド、Kubernetesでは操作を要求されたリソースを確認した。実習を重ねるほど、「誰がどの権限で入り、何をしたか」という問いへの答えを同じ製品内で探せることに魅力を感じた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "導入担当者にとっても注目したい点だ。DBアクセス制御から始め、サーバーやKubernetesへ管理範囲を広げる姿を描けるからだ。作業者はDBeaver、ターミナル、kubectlを使い続け、管理者は主要資産のアクセス権限と作業履歴を一か所で確認する。実際に使って感じたQueryPie ACPの大きな魅力の1つだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "最初の記事の問いに、具体的な場面で答えられるようになった"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "主要な資産をまとめて管理する中で、最初の記事で投げかけた問いも思い出した。「攻撃者がすでに内部に入っていたら、私たちは何を止められるのか」。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "連載の最後の実習では、ログイン済みのテストアカウントで、注文参照、精算情報の参照、注文変更を順に試した。注文は参照でき、許可範囲外の精算情報の参照と変更は遮断された。その試みは監査記録に残り、管理者がDB権限を取り消すと、開いたままの接続でも参照できなくなった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "この結果を見て、アカウントに与える権限の範囲がどれほど重要かを改めて感じた。ログインしたアカウントが使える範囲を普段から絞り、必要なときにアクセスを止め、それまでの作業を確認できた。第1回で述べた「侵入後の制御」を、どのような設定と運用につなげるべきかが、ずっと明確になった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "導入担当者には、必要な業務を続けながら制御の結果まで示せることが、大きな説得材料になると思う。開発・運用チームには慣れたツールで作業する様子を、セキュリティ担当者には許可・制限された操作の記録を示せる。会社の主要資産にこうした基準を共通して適用できることも確認でき、QueryPie ACPを検討する理由がより具体的になった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "最初の実習はテストDBを1つ用意するところから"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "この記事を読んで自分でも試したくなったら、最初からDB、サーバー、Kubernetesをすべて用意する必要はない。私もテストDBを1つ用意し、管理者と作業者のアカウントを分けるところから始めた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "作業者に参照権限を与えてデータを読み、そのあと同じアカウントで変更を試してみる。続いて管理者画面で、両方の操作記録を探してみよう。許可した作業は実行でき、制限した作業は止まり、その結果が残る様子を見ると、自分の業務でアクセス制御が果たす役割をつかめる。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "次は、自社でよく悩む状況を1つ持ち込むとよさそうだ。外部担当者に点検を任せることかもしれないし、サーバーのパスワードを渡さずに接続を提供することかもしれない。Kubernetesの設定は読めても変更はできないようにしたいチームなら、KACから見てもよいだろう。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "コミュニティ版で自分で試せたおかげで、製品説明を読みながら浮かんだ疑問を、テスト環境で1つずつ確かめられた。DB接続から始まった実習は、そうしてサーバーやKubernetesまで広がった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "ここで最初の連載を終える。第1回では、アカウントが1つ漏えいしたあとに何が起きるのかが心配だった。今は、自分たちのチームにどこまで権限を与え、その基準をDB、サーバー、Kubernetesへどう一貫して適用するかを考えるようになった。主要資産のアクセス権限と作業履歴を一か所で管理してみて、自社でも実現したい運用の姿がより具体的になった。QueryPie ACPを自分で使って得た、一番大きな変化だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "インストールから試す場合は、この連載の第2回と、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/installation/querypie-acp-community-edition",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "QueryPie ACPコミュニティ版の公式インストールガイド"
+        },
+        {
+          "type": "text",
+          "text": "を参考にしてほしい。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "この記事は、QueryPie ACP Community 11.6.7と、別途用意したテスト用DB・サーバー・Kubernetes環境で実施した実習を振り返ったものだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

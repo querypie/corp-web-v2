@@ -1,0 +1,661 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "서버 접속을 허용한 뒤에도 관리할 일은 남는다. 지금 누가 접속해 있는지 확인하고, 필요할 때는 특정 연결을 끝낼 수 있어야 한다. 접근 권한을 정하는 것과 이미 열려 있는 연결을 관리하는 것은 서로 다른 일이기 때문이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "24편에서는 서버에서 했던 작업을 녹화로 다시 확인했다. 이번에는 접속 중인 SSH 세션을 관리자 화면에서 찾아 종료해 봤다. 종료한 뒤 같은 역할로 다시 접속할 수 있는지도 함께 확인했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "실습 서버에 새 연결을 열었다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "앞서 사용한 SSH Operations Lab 서버를 그대로 이용했다. Demo Developer 계정에서 Operations Lab Operator 역할을 고르고, labops 계정으로 웹 터미널에 접속했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "터미널에서 whoami와 hostname으로 계정과 서버를 확인했다. 이어 현재 시각과 접속한 터미널을 확인하고, 이번 연결을 알아볼 수 있도록 짧은 문구를 출력했다. 서버에 파일을 만들거나 설정을 바꿀 필요는 없었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/terminate-server-session/01.webp",
+        "alt": "화면 1. 실습용 SSH 연결을 새로 열고 계정과 서버, 명령 실행 결과를 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 1. 실습용 SSH 연결을 새로 열고 계정과 서버, 명령 실행 결과를 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "현재 연결된 사용자를 한눈에 확인했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "관리자 화면의 Servers에서 Monitoring 아래 Session Monitoring을 열었다. 접속 전에는 비어 있던 목록에 방금 연 연결이 나타났다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SSH Operations Lab 아래에 Demo Developer가 표시됐고, 계정은 labops, 프로토콜은 SSH, 접속 방식은 Web이었다. 연결 시각도 12:25:54로 확인됐다. 서버 이름만 보는 것이 아니라 사용자와 계정, 접속 시각을 함께 볼 수 있어 종료할 대상을 구분하기 편했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/terminate-server-session/02.webp",
+        "alt": "화면 2. Session Monitoring에서 접속한 사용자와 서버 계정, 연결 시각을 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 2. Session Monitoring에서 접속한 사용자와 서버 계정, 연결 시각을 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "사용자 터미널로 돌아가 짧은 명령을 한 번 더 실행했다. 아직 정상 응답이 오는 것을 확인한 뒤 관리자 화면에서 해당 연결을 선택했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "선택한 연결 하나를 종료했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Demo Developer가 접속한 행의 체크박스를 선택하니 Kill Session 버튼이 나타났다. 버튼을 누른 뒤 확인창에서 OK를 눌렀다. 이번 실습에서는 방금 연 세션 한 개만 선택했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/terminate-server-session/03.webp",
+        "alt": "화면 3. 대상 세션을 선택하고 Kill Session 확인창을 열었다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 3. 대상 세션을 선택하고 Kill Session 확인창을 열었다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "사용자 터미널에는 Connection closed by foreign host.라는 메시지가 표시됐다. 조금 전까지 명령을 실행하던 연결이 끝난 것이다. 서버에 따로 접속해 운영체제 명령을 실행하지 않아도 QueryPie 관리자 화면에서 처리할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/terminate-server-session/04.webp",
+        "alt": "화면 4. 관리자 종료 후 사용자 터미널에서도 연결이 끝난 것을 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 4. 관리자 종료 후 사용자 터미널에서도 연결이 끝난 것을 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "관리자 목록에서도 해당 세션이 사라졌다. 현재 연결을 확인하던 화면에서 대상을 선택하고, 종료 결과까지 확인하는 과정이 간단했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/terminate-server-session/05.webp",
+        "alt": "화면 5. 종료한 연결은 현재 세션 목록에서 사라졌다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 5. 종료한 연결은 현재 세션 목록에서 사라졌다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "접속과 종료 시각도 기록으로 남았다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Audit의 Server Access History에서 방금 접속한 기록을 찾아봤다. 12:25:54의 Connect와 12:27:04의 Disconnect가 모두 Success로 남아 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "종료 기록을 열어 보니 Demo Developer, Operations Lab Operator, labops와 SSH Operations Lab이 함께 표시됐다. Message에는 Successfully Disconnected가 남았다. 현재 연결을 관리한 뒤 접속 이력에서 누가 어느 서버에 언제 들어오고 나갔는지 이어서 확인할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/terminate-server-session/06.webp",
+        "alt": "화면 6. 같은 사용자·역할·서버 계정의 종료 시각과 결과를 접속 이력에서 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 6. 같은 사용자·역할·서버 계정의 종료 시각과 결과를 접속 이력에서 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "접속 권한은 유지하고 현재 연결만 끝냈다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "마지막으로 사용자 화면에서 같은 역할과 계정으로 새 연결을 열었다. 별도로 권한을 다시 부여하거나 계정 설정을 바꾸지 않았는데도 정상 접속됐다. 새 터미널에서 계정과 시각을 확인하고 EP30_NEW_CONNECTION_OK를 출력한 뒤 exit로 마쳤다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/terminate-server-session/07.webp",
+        "alt": "화면 7. 기존 접근 권한을 그대로 사용해 새 SSH 연결을 열고 명령을 실행했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 7. 기존 접근 권한을 그대로 사용해 새 SSH 연결을 열고 명령을 실행했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "직접 해보니 현재 연결을 끝내는 일과 사용자의 접근 권한을 관리하는 일이 분명하게 나뉘었다. 필요한 연결에만 대응할 수 있고, 계속 업무를 해야 하는 사용자의 권한은 유지할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "실습은 QueryPie Community 11.6.7과 별도로 구성한 Ubuntu 서버에서 진행했다. 화면의 사용자와 서버는 실습용이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "참고: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/servers/session-monitoring",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Session Monitoring"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/audit/server-logs/server-access-history",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Server Access History"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

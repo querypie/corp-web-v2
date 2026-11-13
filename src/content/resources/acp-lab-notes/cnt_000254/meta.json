@@ -1,0 +1,47 @@
+{
+  "authorName": "승인 · 감사 · 운영",
+  "authorRole": "",
+  "categorySlug": "acp-lab-notes",
+  "contentType": "content",
+  "dateIso": "2026-11-08",
+  "enableDownloadButton": false,
+  "externalUrl": "",
+  "gatingLevel": "none",
+  "hideHeroImage": true,
+  "id": "group-permissions",
+  "imageSrc": "/assets/content/acp-lab-notes/group-permissions/01.webp",
+  "relatedIds": [],
+  "section": "resources",
+  "sortOrder": 15,
+  "status": "published",
+  "storageId": "cnt_000254",
+  "summary": {
+    "en": "Granting one user access was enough at first, but individually checking privileges becomes tedious as a team grows. I created an order-analysis group, granted read-only access to the group, and added a new analyst without assigning individual database privileges.",
+    "ko": "처음에는 사용자 한 명에게 DB 권한을 주는 것만으로도 충분했다. 그런데 같은 일을 하는 팀원이 늘어난다면 어떨까. 누구에게 어떤 권한을 줬는지 한 사람씩 확인하는 일이 점점 번거로워질 것 같았다. 이번에는 QueryPie에서 주문 분석팀을 만들어봤다. 팀에 읽기 전용 권한을 먼저 정해두고, 새 담당자를 그 팀에 추가했다",
+    "ja": "最初は一人への権限付与で十分でも、チームが増えると個別確認は煩雑になる。注文分析グループに参照権限を設定し、個人へ直接付与せず新担当者を追加して試した。"
+  },
+  "title": {
+    "en": "[Part 15] Join the Team, Receive Database Access — QueryPie Group Management",
+    "ko": "[15편] 팀에 들어오면 DB 권한도 함께 — QueryPie 그룹 관리 실습",
+    "ja": "[第15回] チームに加わるとDB権限も付く — QueryPieグループ管理実習"
+  },
+  "visibleLocales": [
+    "en",
+    "ko",
+    "ja"
+  ],
+  "locales": {
+    "ko": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000254/ko.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000254/ko.tiptap.json"
+    },
+    "en": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000254/en.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000254/en.tiptap.json"
+    },
+    "ja": {
+      "htmlPath": "src/content/resources/acp-lab-notes/cnt_000254/ja.html",
+      "jsonPath": "src/content/resources/acp-lab-notes/cnt_000254/ja.tiptap.json"
+    }
+  }
+}
