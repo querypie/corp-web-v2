@@ -930,13 +930,18 @@ export default function AdminManagedContentDetailPage({
 
   useEffect(() => {
     return () => {
-      translationAbortControllerRef.current?.abort();
       if (pendingThumbnailPreviewSrc) {
         URL.revokeObjectURL(pendingThumbnailPreviewSrc);
       }
       if (pendingProfilePreviewSrc) {
         URL.revokeObjectURL(pendingProfilePreviewSrc);
       }
+    };
+  }, [pendingThumbnailPreviewSrc, pendingProfilePreviewSrc]);
+
+  useEffect(() => {
+    return () => {
+      translationAbortControllerRef.current?.abort();
       for (const previewSrc of pendingImageUploadsRef.current.keys()) {
         URL.revokeObjectURL(previewSrc);
       }
@@ -948,7 +953,7 @@ export default function AdminManagedContentDetailPage({
       pendingVideoUploadsRef.current.clear();
       pendingDeletedVideoSrcsRef.current.clear();
     };
-  }, [pendingThumbnailPreviewSrc, pendingProfilePreviewSrc]);
+  }, []);
 
   useEffect(() => {
     if (!translationSourceLocales.includes(translationSourceLocale)) {
