@@ -1,6 +1,6 @@
 {
-  "authorName": "Kurt",
-  "authorRole": "Software Engineer",
+  "authorName": "Kurt Yoo",
+  "authorRole": "AI Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2024-11-22",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000150/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000150/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Kurt Yoo",
+    "ko": "Kurt Yoo",
+    "ja": "Kurt Yoo"
+  },
+  "authorRoleByLocale": {
+    "en": "AI Software Engineer",
+    "ko": "AI 소프트웨어 엔지니어",
+    "ja": "AI Software Engineer"
+  },
+  "authorIntroduction": {
+    "en": "Kurt is a software engineer focused on developing and maintaining advanced data management solutions. At QueryPie, he developed core AI for AI data discovery and helped advance intelligent data classification. His experience building scalable, secure platforms supports enterprise data governance needs.",
+    "ko": "첨단 데이터 관리 솔루션의 개발과 유지보수에 전문성을 가진 소프트웨어 엔지니어입니다. QueryPie에서 AI 데이터 탐색을 위한 핵심 AI를 개발하고 지능형 데이터 분류 기능을 발전시켰습니다. 확장 가능하고 안전한 플랫폼 구축 경험으로 기업의 데이터 거버넌스 요구에 대응합니다.",
+    "ja": "Kurtは、最先端のデータ管理ソリューションを開発および保守することに専門的な知識を持つ優れたソフトウェアエンジニアです。QueryPieでは、AIデータ発見のためのコアAIを発明し、インテリジェントなデータ分類機能を進展させる重要な役割を果たしました。スケーラブルで安全なプラットフォーム構築に関する専門知識をもとに、KurtはQueryPieのソリューションが企業クライアントの動的なニーズを満たすことを確実にし、データガバナンス技術におけるリーダーシップを強化しています。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/kurt.png"
 }

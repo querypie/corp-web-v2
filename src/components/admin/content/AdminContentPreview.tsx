@@ -6,6 +6,7 @@ import type { ContentGatingLevel } from "@/features/content/data";
 import { buildContentPreviewHtml, isContentGatingEnabled } from "@/features/content/gating";
 
 type AdminContentPreviewProps = {
+  authorProfileImageSrc?: string;
   bodyHtml?: string;
   category: string;
   contentType: "content" | "outlink";
@@ -16,14 +17,17 @@ type AdminContentPreviewProps = {
   hideHeroImage?: boolean;
   heroImageAlt: string;
   heroImageSrc: string;
+  introduction?: string;
   section: "demo" | "resources" | "news";
   summary?: string;
   title: string;
   url?: string;
   writer?: string;
+  writerRole?: string;
 };
 
 export default function AdminContentPreview({
+  authorProfileImageSrc,
   bodyHtml = "",
   category,
   contentType,
@@ -34,11 +38,13 @@ export default function AdminContentPreview({
   hideHeroImage = false,
   heroImageAlt,
   heroImageSrc,
+  introduction,
   section,
   summary = "",
   title,
   url = "#",
   writer = "",
+  writerRole,
 }: AdminContentPreviewProps) {
   const isGateActive = isContentGatingEnabled({ contentType, gatingLevel, section });
   const visibleBodyHtml = isGateActive
@@ -96,6 +102,7 @@ export default function AdminContentPreview({
   return (
     <div className="mx-auto w-full max-w-[680px] py-5">
       <ContentArticlePreview
+        authorProfileImageSrc={authorProfileImageSrc}
         bodyHtml={visibleBodyHtml}
         contentOverlay={isGateActive ? <AdminGatePreviewOverlay /> : undefined}
         date={date}
@@ -104,9 +111,11 @@ export default function AdminContentPreview({
         heroImageAlt={heroImageAlt}
         heroImageSrc={heroImageSrc}
         hideHeroImage={hideHeroImage}
+        introduction={introduction}
         locale="en"
         title={title}
         writer={writer}
+        writerRole={writerRole}
       />
     </div>
   );

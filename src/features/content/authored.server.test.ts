@@ -110,20 +110,46 @@ afterEach(async () => {
 });
 
 describe("saveAuthoredContent", () => {
-  it("ACP 실습 노트의 작성자 주제·회차와 수정한 이미지 캡션을 저장하고 다시 읽는다", async () => {
+  it("화이트페이퍼의 언어별 작성자와 프로필 사진·소개를 저장하고 다시 읽는다", async () => {
+    const { saveAuthoredContent, readAuthoredManagedContentItem } = await import("./authored.server");
+    const entry = makeEntry({
+      section: "resources",
+      categorySlug: "white-papers",
+      authorName: "David Choi",
+      authorNameByLocale: { en: "David Choi", ko: "David Choi", ja: "デイビッド・チェ" },
+      authorRole: "Software Engineer",
+      authorRoleByLocale: { en: "Software Engineer", ko: "소프트웨어 엔지니어", ja: "ソフトウェアエンジニア" },
+      authorIntroduction: { en: "Developer bio", ko: "개발자 소개", ja: "開発者紹介" },
+      authorProfileImageSrc: "/assets/content/author-profiles/david.png",
+    });
+    await saveAuthoredContent(entry);
+    const read = await readAuthoredManagedContentItem("resources", entry.id);
+    expect(read).toMatchObject({
+      authorName: entry.authorName,
+      authorNameByLocale: entry.authorNameByLocale,
+      authorRole: entry.authorRole,
+      authorRoleByLocale: entry.authorRoleByLocale,
+      authorIntroduction: entry.authorIntroduction,
+      authorProfileImageSrc: entry.authorProfileImageSrc,
+    });
+  });
+  it("ACP 실습 노트의 작성자·태그·회차와 수정한 이미지 캡션을 저장하고 다시 읽는다", async () => {
     const { saveAuthoredContent, readAuthoredManagedContentItem, readAuthoredManagedContents } = await import("./authored.server");
     const { getLabNote } = await import("./acpLabNotes");
-    const entry = makeEntry({ section: "resources", categorySlug: "acp-lab-notes", authorName: "DB 접근 제어", authorRole: "", sortOrder: 7,
+    const entry = makeEntry({ section: "resources", categorySlug: "acp-lab-notes", authorName: "QueryPie 기술 검증 팀", authorRole: "", labNoteTopics: ["DB 접근 제어"], labNoteIntroduction: { en: "Validation notes", ko: "검증 로그", ja: "検証ログ" }, dateIso: "", sortOrder: 7,
       bodyRichText: { en: "", ja: "", ko: JSON.stringify({ type: "doc", content: [{ type: "image", attrs: { src: "/assets/test.png", caption: "화면 1. 수정한 캡션", width: "100%" } }] }) },
       bodyHtml: { en: "", ja: "", ko: "" }, visibleLocales: ["ko"],
     });
     const saved = await saveAuthoredContent(entry);
     const read = await readAuthoredManagedContentItem("resources", entry.id, { includeBodies: true });
     expect(getLabNote(read!)).toEqual({ episode: 7, topics: ["DB 접근 제어"] });
+    expect(read?.dateIso).toBe("");
+    expect(read?.labNoteIntroduction).toEqual(entry.labNoteIntroduction);
     expect(read?.bodyHtml.ko).toContain("<figcaption>화면 1. 수정한 캡션</figcaption>");
-    await saveAuthoredContent({ ...saved, sortOrder: 8, authorName: "DB 접근 제어 · 운영 관리", authorRole: "" });
+    await saveAuthoredContent({ ...saved, sortOrder: 8, labNoteTopics: ["DB 접근 제어", "운영 관리"] });
     const list = await readAuthoredManagedContents({ includeBodies: false });
     expect(getLabNote(list[0])).toEqual({ episode: 8, topics: ["DB 접근 제어", "운영 관리"] });
+    expect(list[0].labNoteIntroduction).toEqual(entry.labNoteIntroduction);
   });
   it("예약 공개 시각을 저장하고 목록과 본문 조회에서 유지한다", async () => {
     const { saveAuthoredContent, readAuthoredManagedContents, readAuthoredManagedContentItem } = await import("./authored.server");

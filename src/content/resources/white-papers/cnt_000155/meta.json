@@ -1,5 +1,5 @@
 {
-  "authorName": "Mason",
+  "authorName": "Mason Oh",
   "authorRole": "Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000155/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000155/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Mason Oh",
+    "ko": "Mason Oh",
+    "ja": "Mason Oh"
+  },
+  "authorRoleByLocale": {
+    "en": "Software Engineer",
+    "ko": "소프트웨어 엔지니어",
+    "ja": "Software Engineer"
+  },
+  "authorIntroduction": {
+    "en": "Mason develops database access control servers, proxies, and SQL parsers at QueryPie using .NET Core 8 and Antlr. He uses tools such as Wireshark, dotnet-dump, and APM to investigate TCP packets, memory leaks, and CPU performance. He also has experience with AWS, NLB networking, Docker, and Kubernetes.",
+    "ko": "QueryPie에서 데이터베이스 접근 제어 서버, 프록시와 SQL 파서(.NET Core 8 및 Antlr)를 개발합니다. Wireshark, dotnet-dump, APM 등으로 TCP 패킷, 메모리 누수, CPU 성능 문제를 해결합니다. AWS, NLB 네트워크, Docker 경험을 갖추고 Kubernetes 역량도 넓히고 있습니다.",
+    "ja": "MasonはQueryPieでデータベースアクセス制御サーバー、プロキシ開発、SQLパーシング（.NET Core 8およびAntlr）を専門とする熟練のエンジニアです。Wireshark、dotnet-dump、APMなどのツールを使用して、TCPパケット解析、メモリリーク、CPUの最適化といった複雑な問題を解決することに優れています。AWSの専門知識を持ち、NLB関連のネットワーク問題の解決経験があり、Dockerにも精通しており、Kubernetesの知識を積極的に拡大しています。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/mason.png"
 }

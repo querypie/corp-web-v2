@@ -1,4 +1,5 @@
 import type { Locale } from "@/constants/i18n";
+import { getAcpLabNotesCopy } from "@/copy/acpLabNotes";
 import {
   demoCategoryConfigs,
   docsCategoryConfigs,
@@ -19,7 +20,11 @@ export type LocalizedContent = Record<Locale, string>;
 
 export type ManagedContentEntry = {
   authorName: string;
+  authorNameByLocale?: LocalizedContent;
+  authorIntroduction?: LocalizedContent;
+  authorProfileImageSrc?: string;
   authorRole: string;
+  authorRoleByLocale?: LocalizedContent;
   bodyHtml: LocalizedContent;
   bodyRichText: LocalizedContent;
   categorySlug: ManagedContentCategorySlug;
@@ -39,6 +44,8 @@ export type ManagedContentEntry = {
   hideHeroImage: boolean;
   id: string;
   imageSrc: string;
+  labNoteIntroduction?: LocalizedContent;
+  labNoteTopics?: string[];
   relatedIds: string[];
   section: ManagedContentSection;
   sortOrder: number;
@@ -102,7 +109,7 @@ export function createEmptyManagedContentDraft(
   categorySlug: ManagedContentCategorySlug,
 ): ManagedContentEntry {
   return {
-    authorName: section === "news" ? DEFAULT_NEWS_FORMAT : "",
+    authorName: section === "news" ? DEFAULT_NEWS_FORMAT : categorySlug === "acp-lab-notes" ? getAcpLabNotesCopy("ko").writer : "",
     authorRole: "",
     bodyHtml: createLocalizedContent(createEmptyTiptapHtml()),
     bodyRichText: createLocalizedContent(createEmptyTiptapJson()),
@@ -121,6 +128,12 @@ export function createEmptyManagedContentDraft(
     hideHeroImage: false,
     id: "new",
     imageSrc: "",
+    labNoteIntroduction: categorySlug === "acp-lab-notes" ? {
+      en: getAcpLabNotesCopy("en").introduction,
+      ko: getAcpLabNotesCopy("ko").introduction,
+      ja: getAcpLabNotesCopy("ja").introduction,
+    } : undefined,
+    labNoteTopics: categorySlug === "acp-lab-notes" ? [] : undefined,
     relatedIds: [],
     section,
     sortOrder: 0,
@@ -392,6 +405,14 @@ export function getWriterLabel(item: Pick<ManagedContentEntry, "authorName" | "a
   return item.authorRole.trim()
     ? `${item.authorName.trim()} / ${item.authorRole.trim()}`
     : item.authorName.trim();
+}
+
+export function getLocalizedAuthorName(item: Pick<ManagedContentEntry, "authorName" | "authorNameByLocale">, locale: Locale) {
+  return item.authorNameByLocale?.[locale] ?? item.authorName;
+}
+
+export function getLocalizedAuthorRole(item: Pick<ManagedContentEntry, "authorRole" | "authorRoleByLocale">, locale: Locale) {
+  return item.authorRoleByLocale?.[locale] ?? item.authorRole;
 }
 
 export function getNewsFormatLabel(item: Pick<ManagedContentEntry, "authorName">, locale?: Locale) {

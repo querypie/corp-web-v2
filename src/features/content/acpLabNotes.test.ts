@@ -4,7 +4,7 @@ import { describe, it, expect } from "vitest";
 import { renderTiptapHtml } from "./tiptapHtml";
 import { getLabNote, getLocalizedLabNote, getLabNoteWriterLabel, sortLabNotes } from "./acpLabNotes";
 import { getPublicDetailHref } from "./data";
-import { acpLabNoteTopics } from "@/copy/acpLabNotes";
+import { acpLabNoteTopics, getAcpLabNotesCopy } from "@/copy/acpLabNotes";
 
 const root = path.resolve("src/content/resources/acp-lab-notes");
 const notes = readdirSync(root).map((directory) => ({ directory, ...JSON.parse(readFileSync(path.join(root, directory, "meta.json"), "utf8")) }));
@@ -80,7 +80,14 @@ describe("ACP 실습 노트 이관", () => {
         expect(href).not.toContain("acp-lab-notes.tistory.com");
         if (/^\/(ko|en|ja)\/acp-lab-notes\//.test(href)) expect(notes.some((target) => getPublicDetailHref("resources", locale, target.id, "acp-lab-notes") === href)).toBe(true);
       }
-      expect(note.authorName).not.toMatch(/\d+편|ACP Community/);
+      expect(note.authorName).toBe("QueryPie 기술 검증 팀");
+      expect(note.labNoteTopics).toEqual(getLabNote(note)?.topics);
+      expect(note.dateIso).toBe("");
+      expect(note.labNoteIntroduction).toEqual({
+        en: getAcpLabNotesCopy("en").introduction,
+        ko: getAcpLabNotesCopy("ko").introduction,
+        ja: getAcpLabNotesCopy("ja").introduction,
+      });
       expect(note.authorRole).toBe("");
       const prefix = { ko: `[${note.sortOrder}편] `, en: `[Part ${note.sortOrder}] `, ja: `[第${note.sortOrder}回] ` }[locale];
       expect(note.title[locale].startsWith(prefix)).toBe(true);
@@ -108,21 +115,21 @@ describe("ACP 실습 노트 이관", () => {
   });
 });
 
-describe("기존 작성자·직책 필드로 연재 정보 읽기", () => {
-  const entry = { categorySlug: "acp-lab-notes" as const, authorName: "도입 가이드 · DB 접근 제어", authorRole: "", sortOrder: 3 };
-  it("공용 작성자 UI와 필터에 언어별 연재 정보를 제공한다", () => {
+describe("작성자와 태그를 분리한 ACP 실습 노트", () => {
+  const entry = { categorySlug: "acp-lab-notes" as const, authorName: "QueryPie 기술 검증 팀", authorRole: "", labNoteTopics: ["도입 가이드", "DB 접근 제어"], sortOrder: 3 };
+  it("작성자와 주제 필터에 언어별 텍스트를 제공한다", () => {
     expect(getLocalizedLabNote(entry, "en")?.topics).toEqual(["Adoption guide", "Database access control"]);
-    expect(getLabNoteWriterLabel(entry, "en")).toBe("Adoption guide · Database access control");
-    expect(getLabNoteWriterLabel(entry, "ko")).toBe("도입 가이드 · DB 접근 제어");
-    expect(getLabNoteWriterLabel(entry, "ja")).toBe("導入ガイド · DBアクセス制御");
+    expect(getLabNoteWriterLabel(entry, "en")).toBe("QueryPie Technical Validation Team");
+    expect(getLabNoteWriterLabel(entry, "ko")).toBe("QueryPie 기술 검증 팀");
+    expect(getLabNoteWriterLabel(entry, "ja")).toBe("QueryPie 技術検証チーム");
     expect(getLabNoteWriterLabel(entry, "ja")).not.toMatch(/[가-힣]/);
   });
-  it("정렬 순서의 회차와 작성자의 주제를 읽고 쉼표로 구분한 주제도 처리한다", () => {
+  it("정렬 순서의 회차와 별도 태그를 읽으며 기존 작성자 태그도 처리한다", () => {
     expect(getLabNote(entry)).toEqual({ episode: 3, topics: ["도입 가이드", "DB 접근 제어"] });
-    expect(getLabNote({ ...entry, authorName: " 도입 가이드, DB 접근 제어 " })?.topics).toEqual(["도입 가이드", "DB 접근 제어"]);
+    expect(getLabNote({ ...entry, authorName: " 도입 가이드, DB 접근 제어 ", labNoteTopics: undefined })?.topics).toEqual(["도입 가이드", "DB 접근 제어"]);
   });
-  it("작성자 없이도 회차를 유지하고 다른 카테고리는 처리하지 않는다", () => {
-    expect(getLabNote({ ...entry, authorName: "" })).toEqual({ episode: 3, topics: [] });
+  it("태그 없이도 회차를 유지하고 다른 카테고리는 처리하지 않는다", () => {
+    expect(getLabNote({ ...entry, labNoteTopics: [] })).toEqual({ episode: 3, topics: [] });
     expect(getLabNote({ ...entry, categorySlug: "blogs" })).toBeUndefined();
   });
   it("CMS 정렬 순서로 연재 순서를 유지한다", () => {

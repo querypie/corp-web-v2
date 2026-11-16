@@ -1,5 +1,5 @@
 {
-  "authorName": "Ryan, Kevin",
+  "authorName": "Ryan Chae",
   "authorRole": "Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000154/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000154/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Ryan Chae",
+    "ko": "Ryan Chae",
+    "ja": "Ryan Chae"
+  },
+  "authorRoleByLocale": {
+    "en": "Software Engineer",
+    "ko": "소프트웨어 엔지니어",
+    "ja": "Software Engineer"
+  },
+  "authorIntroduction": {
+    "en": "Ryan is a software engineer experienced in building secure, scalable systems. At QueryPie, he helped design shell-native command control through an SSH proxy architecture, improving platform security and efficiency. His systems expertise supports robust solutions for evolving enterprise needs.",
+    "ko": "안전하고 확장 가능한 시스템 개발 경험이 풍부한 소프트웨어 엔지니어입니다. QueryPie에서 SSH 프록시 아키텍처를 통한 셸 네이티브 명령 제어를 설계해 플랫폼의 보안성과 효율성을 높였습니다. 시스템 아키텍처 전문성을 바탕으로 변화하는 기업 고객의 요구에 맞는 솔루션을 개발합니다.",
+    "ja": "Ryanは、セキュアでスケーラブルなシステムの開発に豊富な経験を持つソフトウェアエンジニアです。QueryPieでの重要な貢献者として、SSHプロキシアーキテクチャによるシェルネイティブなコマンド制御の設計において重要な役割を果たし、プラットフォームのセキュリティと効率を向上させました。システムアーキテクチャの専門知識とイノベーションへのコミットメントが、進化するエンタープライズクライアントのニーズに応える堅実なソリューションの開発を推進しています。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/ryan.png"
 }

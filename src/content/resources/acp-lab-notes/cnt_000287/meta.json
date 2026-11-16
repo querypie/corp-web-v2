@@ -1,9 +1,9 @@
 {
-  "authorName": "DB 접근 제어 · 운영 관리",
+  "authorName": "QueryPie 기술 검증 팀",
   "authorRole": "",
   "categorySlug": "acp-lab-notes",
   "contentType": "content",
-  "dateIso": "2026-11-13",
+  "dateIso": "",
   "enableDownloadButton": false,
   "externalUrl": "",
   "gatingLevel": "none",
@@ -43,5 +43,14 @@
       "htmlPath": "src/content/resources/acp-lab-notes/cnt_000287/ja.html",
       "jsonPath": "src/content/resources/acp-lab-notes/cnt_000287/ja.tiptap.json"
     }
+  },
+  "labNoteTopics": [
+    "DB 접근 제어",
+    "운영 관리"
+  ],
+  "labNoteIntroduction": {
+    "en": "Drawing on real-world database and server security challenges, we share how we tested QueryPie and what we found.",
+    "ko": "기업의 DB·서버 보안 현장에서 마주하는 과제를 바탕으로, QueryPie를 직접 검증한 과정과 결과를 공유합니다.",
+    "ja": "企業のデータベースやサーバーのセキュリティ課題を題材に、QueryPieを実際に検証した過程と結果をお届けします。"
   }
 }

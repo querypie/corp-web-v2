@@ -6,6 +6,8 @@ import ContentPreviewImage from "./ContentPreviewImage";
 
 type ContentArticlePreviewProps = {
   bodyHtml?: string;
+  bodyFooter?: ReactNode;
+  authorProfileImageSrc?: string;
   contentOverlay?: ReactNode;
   date: string;
   downloadFormTargetId?: string;
@@ -18,10 +20,12 @@ type ContentArticlePreviewProps = {
   heroImageAlt: string;
   heroImageSrc: string;
   hideHeroImage?: boolean;
+  introduction?: string;
   locale: Locale;
   title: string;
   unlockCookieName?: string;
   writer: string;
+  writerRole?: string;
 };
 
 function cx(...values: Array<string | false | null | undefined>) {
@@ -30,6 +34,8 @@ function cx(...values: Array<string | false | null | undefined>) {
 
 export default function ContentArticlePreview({
   bodyHtml = "",
+  bodyFooter,
+  authorProfileImageSrc,
   contentOverlay,
   date,
   downloadFormTargetId,
@@ -42,10 +48,12 @@ export default function ContentArticlePreview({
   heroImageAlt,
   heroImageSrc,
   hideHeroImage = false,
+  introduction,
   locale,
   title,
   unlockCookieName,
   writer,
+  writerRole,
 }: ContentArticlePreviewProps) {
   const resolvedHeroImageSrc = heroImageSrc.trim();
   const shouldRenderHero = Boolean(resolvedHeroImageSrc) && !hideHeroImage;
@@ -53,8 +61,18 @@ export default function ContentArticlePreview({
   return (
     <div className="flex flex-col gap-[40px] md:gap-[60px]">
       <div className="flex flex-col gap-[10px]">
-        <h1 className="m-0 type-h1 leading-[42px] text-fg">{title}</h1>
-        {writer ? <div className="type-body-md text-fg">{writer}</div> : null}
+        <h1 className={cx("m-0 type-h1 leading-[42px] text-fg", (writer || introduction || date) && "mb-2")}>{title}</h1>
+        {writer || introduction ? (
+          <div className="flex items-start gap-4">
+            {authorProfileImageSrc ? (
+              <img alt={writer} className="mt-1.5 h-11 w-11 shrink-0 rounded-full object-cover" decoding="async" height="44" loading="lazy" src={authorProfileImageSrc} width="44" />
+            ) : null}
+            <div className="flex min-w-0 flex-col gap-1">
+              {writer ? <div className="type-body-md text-fg">{writer}{writerRole ? ` / ${writerRole}` : ""}</div> : null}
+              {introduction ? <p className="m-0 type-body-sm text-mute">{introduction}</p> : null}
+            </div>
+          </div>
+        ) : null}
         {date ? <p className="m-0 type-body-md text-mute">{date}</p> : null}
       </div>
 
@@ -102,6 +120,7 @@ export default function ContentArticlePreview({
 
       <div>
         <ContentBodyPreview bodyHtml={bodyHtml} locale={locale} />
+        {bodyFooter}
         {contentOverlay}
       </div>
     </div>

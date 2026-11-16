@@ -15,6 +15,8 @@ import {
   getAdjacentContentLabel,
   getContentDownloadPdfSrc,
   getContentThumbnailSrc,
+  getLocalizedAuthorName,
+  getLocalizedAuthorRole,
   getLocalizedContent,
   getPublicDetailHref,
   getResolvedContentLocale,
@@ -122,6 +124,7 @@ export default function DocsDetailClientPage({
   return (
     <DocsDetailPage
       {...fallbackProps}
+      authorProfileImageSrc={currentItem.categorySlug === "white-papers" ? currentItem.authorProfileImageSrc : undefined}
       labNote={getLabNote(currentItem)}
       bodyHtml={visibleBodyHtml}
       category={getCategoryLabel(docsCategoryConfigs, currentItem.categorySlug, locale)}
@@ -163,10 +166,12 @@ export default function DocsDetailClientPage({
       hideHeroImage={currentItem.hideHeroImage}
       heroImageAlt={getLocalizedContent(currentItem.title, contentLocale)}
       heroImageSrc={currentItem.imageSrc}
+      introduction={currentItem.categorySlug === "acp-lab-notes" ? currentItem.labNoteIntroduction?.[locale] : currentItem.categorySlug === "white-papers" ? currentItem.authorIntroduction?.[locale] : undefined}
       locale={locale}
       title={getLocalizedContent(currentItem.title, contentLocale)}
       unlockCookieName={getContentUnlockCookieName(currentItem.id, section)}
-      writer={currentItem.categorySlug === "acp-lab-notes" ? getLabNoteWriterLabel(currentItem, locale) : getWriterLabel(currentItem)}
+      writer={currentItem.categorySlug === "acp-lab-notes" ? getLabNoteWriterLabel(currentItem, locale) : currentItem.categorySlug === "white-papers" || currentItem.categorySlug === "blogs" ? getLocalizedAuthorName(currentItem, locale) : getWriterLabel(currentItem)}
+      writerRole={currentItem.categorySlug === "white-papers" || currentItem.categorySlug === "blogs" ? getLocalizedAuthorRole(currentItem, locale) : undefined}
     />
   );
 }

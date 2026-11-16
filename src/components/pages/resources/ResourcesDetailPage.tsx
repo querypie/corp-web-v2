@@ -1,7 +1,6 @@
 import { pageXPaddingClassName } from "@/constants/layout";
 import type { ReactNode } from "react";
 import Link from "next/link";
-import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";
 import type { Locale } from "@/constants/i18n";
 import ContentArticlePreview from "@/components/content/ContentArticlePreview";
 import DetailContentList from "@/components/sections/DetailContentList";
@@ -12,6 +11,7 @@ import { getLockedPdfButtonLabel, getPdfWhitePaperButtonLabel } from "@/features
 
 export type DocsDetailPageProps = {
   labNote?: LabNote;
+  authorProfileImageSrc?: string;
   bodyHtml?: string;
   category: string;
   contentOverlay?: ReactNode;
@@ -37,6 +37,7 @@ export type DocsDetailPageProps = {
   hideHeroImage?: boolean;
   heroImageAlt: string;
   heroImageSrc: string;
+  introduction?: string;
   locale: Locale;
   parentLabel?: string;
   shareUrl?: string;
@@ -45,6 +46,7 @@ export type DocsDetailPageProps = {
   title: string;
   unlockCookieName?: string;
   writer: string;
+  writerRole?: string;
 };
 
 function cx(...values: Array<string | false | null | undefined>) {
@@ -53,6 +55,7 @@ function cx(...values: Array<string | false | null | undefined>) {
 
 export default function DocsDetailPage({
   labNote,
+  authorProfileImageSrc,
   bodyHtml = "",
   category,
   contentOverlay,
@@ -69,6 +72,7 @@ export default function DocsDetailPage({
   hideHeroImage = false,
   heroImageAlt,
   heroImageSrc,
+  introduction,
   locale,
   parentLabel = "Resources",
   shareUrl,
@@ -76,6 +80,7 @@ export default function DocsDetailPage({
   title,
   unlockCookieName,
   writer,
+  writerRole,
 }: DocsDetailPageProps) {
   const labCopy = getAcpLabNotesCopy(locale);
   return (
@@ -83,20 +88,20 @@ export default function DocsDetailPage({
       <article className="flex w-full max-w-[1200px] flex-col gap-[120px]">
         <div
           className={cx(
-            "flex w-full flex-col gap-6",
+            "flex w-full flex-col items-center gap-6",
             showSidebarNav
-              ? "md:grid md:grid-cols-[1fr_minmax(0,680px)_1fr] md:gap-x-5 md:gap-y-0"
-              : "items-center",
+              ? "xl:grid xl:grid-cols-[minmax(0,1fr)_minmax(0,680px)_minmax(0,1fr)] xl:items-start xl:gap-x-5 xl:gap-y-0"
+              : "",
           )}
         >
           {showSidebarNav ? (
-            <div className="flex items-start gap-[6px] type-body-md leading-5 md:sticky md:top-[80px] md:justify-self-start md:self-start">
+            <div className="flex w-full max-w-[680px] items-start gap-[6px] type-body-md leading-5 xl:sticky xl:top-[80px] xl:max-w-none xl:justify-self-start xl:self-start">
               {parentLabel ? (
                 <>
-                  <Link className="text-mute transition-colors duration-200 hover:text-fg focus-visible:text-fg" href={docsHref}>
+                  <Link className="shrink-0 text-mute transition-colors duration-200 hover:text-fg focus-visible:text-fg" href={docsHref}>
                     {parentLabel}
                   </Link>
-                  <p className="m-0 text-mute">/</p>
+                  <p className="m-0 shrink-0 text-mute">/</p>
                 </>
               ) : null}
               <p className="m-0 text-fg">{category}</p>
@@ -105,12 +110,25 @@ export default function DocsDetailPage({
 
           <div
             className={cx(
-              "flex w-full max-w-[680px] flex-col gap-14 md:gap-20",
-              showSidebarNav && "md:justify-self-center",
+              "flex min-w-0 w-full max-w-[680px] flex-col gap-14 md:gap-20",
+              showSidebarNav && "xl:justify-self-center",
             )}
           >
             <ContentArticlePreview
+              authorProfileImageSrc={authorProfileImageSrc}
               bodyHtml={bodyHtml}
+              bodyFooter={labNote ? (
+                <p className="mb-0 mt-10 type-content-body text-fg">
+                  {labCopy.resourcesLabel}{" "}
+                  <a className="text-brand" href={labCopy.tryHref} rel="noopener noreferrer" target="_blank">
+                    {labCopy.tryLabel}
+                  </a>
+                  {" · "}
+                  <a className="text-brand" href={labCopy.docsHref} rel="noopener noreferrer" target="_blank">
+                    {labCopy.docsLabel}
+                  </a>
+                </p>
+              ) : undefined}
               contentOverlay={contentOverlay}
               date={date}
               downloadFormTargetId={downloadFormTargetId}
@@ -123,24 +141,15 @@ export default function DocsDetailPage({
               heroImageAlt={heroImageAlt}
               heroImageSrc={heroImageSrc}
               hideHeroImage={hideHeroImage}
+              introduction={introduction}
               locale={locale}
               title={title}
               unlockCookieName={unlockCookieName}
               writer={writer}
+              writerRole={writerRole}
             />
 
             <ContentShareActions locale={locale} shareUrl={shareUrl} title={title} />
-            {labNote ? (
-              <nav className="flex flex-wrap gap-5 type-body-md" aria-label={labCopy.label}>
-                <Link className="underline underline-offset-4" href={docsHref}>{labCopy.contents}</Link>
-                <a className="underline underline-offset-4" href={labCopy.tryHref} target="_blank" rel="noopener noreferrer">
-                  {labCopy.tryLabel}<ExternalLinkIcon className="ml-1.5 h-4 w-4 align-[-2px]" />
-                </a>
-                <a className="underline underline-offset-4" href={labCopy.docsHref} target="_blank" rel="noopener noreferrer">
-                  {labCopy.docsLabel}<ExternalLinkIcon className="ml-1.5 h-4 w-4 align-[-2px]" />
-                </a>
-              </nav>
-            ) : null}
 
             <DetailContentList className="pt-2" items={contentListItems} />
           </div>

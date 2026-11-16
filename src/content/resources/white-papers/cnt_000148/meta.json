@@ -1,5 +1,5 @@
 {
-  "authorName": "Evan",
+  "authorName": "Evan Choi",
   "authorRole": "Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000148/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000148/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Evan Choi",
+    "ko": "Evan Choi",
+    "ja": "Evan Choi"
+  },
+  "authorRoleByLocale": {
+    "en": "Software Engineer",
+    "ko": "소프트웨어 엔지니어",
+    "ja": "Software Engineer"
+  },
+  "authorIntroduction": {
+    "en": "Evan is an experienced software engineer who builds and maintains complex systems. At QueryPie, he develops scalable, secure data management solutions for enterprise clients. His systems architecture background and interest in .NET and Rust drive performance and innovation.",
+    "ko": "복잡한 시스템 개발과 운영에 능숙한 소프트웨어 엔지니어입니다. QueryPie에서 기업 고객을 위한 확장 가능하고 안전한 데이터 관리 솔루션을 구축합니다. 시스템 아키텍처 경험과 .NET, Rust에 대한 관심을 바탕으로 성능과 혁신을 추구합니다.",
+    "ja": "Evanは複雑なシステムの開発および維持に精通した経験豊富なソフトウェアエンジニアで、QueryPieではエンタープライズクライアント向けのスケーラブルでセキュアなデータ管理ソリューションを構築しています。システムアーキテクチャに強いバックグラウンドを持ち、.NETやRustに対する情熱がイノベーションとパフォーマンスを推進し、QueryPieの最前線で重要な役割を担っています。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/evan.png"
 }
