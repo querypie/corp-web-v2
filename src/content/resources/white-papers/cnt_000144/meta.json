@@ -1,6 +1,6 @@
 {
-  "authorName": "Noah",
-  "authorRole": "Software Engineer",
+  "authorName": "Noah Kim",
+  "authorRole": "Security Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2025-02-06",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000144/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000144/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Noah Kim",
+    "ko": "Noah Kim",
+    "ja": "Noah Kim"
+  },
+  "authorRoleByLocale": {
+    "en": "Security Engineer",
+    "ko": "보안 엔지니어",
+    "ja": "Security Engineer"
+  },
+  "authorIntroduction": {
+    "en": "Noah has conducted comprehensive vulnerability assessments as a penetration testing consultant and an in-house penetration tester. He helps maintain product stability and security by integrating SAST and DAST solutions into CI/CD pipelines and managing vulnerabilities in company products.",
+    "ko": "모의 해킹 컨설턴트와 사내 침투 테스터로서 종합적인 취약점 평가를 수행해 제품의 안정성과 보안을 확보합니다. SAST와 DAST 솔루션을 CI/CD 파이프라인에 통합하고 제품 취약점을 관리합니다.",
+    "ja": "ノアは、ペネトレーションテストのコンサルタントおよび社内ペネトレーションテスターとして、包括的な脆弱性評価を実施し、安定性とセキュリティを確保しています。SASTやDASTなどのソリューションをCI/CDパイプラインに統合し、会社の製品に対する脆弱性管理を行っています。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/noah.png"
 }

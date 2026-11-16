@@ -1,6 +1,6 @@
 {
-  "authorName": "Jake, Ravi, Noah",
-  "authorRole": "Software Engineer",
+  "authorName": "Jake Im",
+  "authorRole": "Security Team Lead",
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2024-11-22",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000149/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000149/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Jake Im",
+    "ko": "Jake Im",
+    "ja": "Jake Im"
+  },
+  "authorRoleByLocale": {
+    "en": "Security Team Lead",
+    "ko": "보안팀 리드",
+    "ja": "Security Team Lead"
+  },
+  "authorIntroduction": {
+    "en": "Jake is a security professional with more than 16 years of experience managing security operations in demanding environments, including finance and the military. As QueryPie's security team lead, he protects critical assets against evolving threats.",
+    "ko": "금융과 군을 포함한 까다로운 환경에서 16년 넘게 보안 운영을 관리한 보안 전문가입니다. QueryPie 보안팀 리드로서 중요 자산을 보호하고 변화하는 위협에 대응합니다.",
+    "ja": "ジェイクはセキュリティ専門家で、金融および軍事環境を含む厳しい分野でセキュリティ運用を管理してきた16年以上の経験を持っています。QueryPieのセキュリティチームリーダーとして、重要な資産を保護し、進化する脅威から強固な保護を提供しています。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/jake.png"
 }

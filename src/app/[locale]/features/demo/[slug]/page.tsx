@@ -147,6 +147,7 @@ export default async function DemoDetailRoute({ params }: Props) {
             contactCopy={getContactPageCopy(locale)}
             contentId={currentEntry.id}
             id={CONTENT_GATE_FORM_ID}
+            key={currentEntry.id}
             locale={locale}
             section="demo"
             title={getLocalizedContent(currentEntry.title, contentLocale)}

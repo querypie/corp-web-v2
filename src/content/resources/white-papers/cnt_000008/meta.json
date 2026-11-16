@@ -1,5 +1,5 @@
 {
-  "authorName": "Kenny",
+  "authorName": "QueryPie Editorial Team",
   "authorRole": "",
   "categorySlug": "white-papers",
   "contentType": "content",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000008/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000008/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "QueryPie Editorial Team",
+    "ko": "QueryPie 편집부",
+    "ja": "QueryPie編集部"
+  },
+  "authorRoleByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "authorIntroduction": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "authorProfileImageSrc": ""
 }

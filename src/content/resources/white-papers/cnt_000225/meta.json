@@ -1,6 +1,22 @@
 {
-  "authorName": "QueryPie AI Research",
-  "authorRole": "AI Security Research",
+  "authorName": "QueryPie Editorial Team",
+  "authorProfileImageSrc": "",
+  "authorRole": "",
+  "authorRoleByLocale": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "authorNameByLocale": {
+    "en": "QueryPie Editorial Team",
+    "ko": "QueryPie 편집부",
+    "ja": "QueryPie編集部"
+  },
+  "authorIntroduction": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2026-09-19",

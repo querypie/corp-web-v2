@@ -1,6 +1,6 @@
 {
   "authorName": "Edwin Park",
-  "authorRole": "Software Engineer",
+  "authorRole": "Software Engineer, QueryPie, Inc.",
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2026-02-13",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000131/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000131/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Edwin Park",
+    "ko": "Edwin Park",
+    "ja": "Edwin Park (エドウィン・パーク)"
+  },
+  "authorRoleByLocale": {
+    "en": "Software Engineer, QueryPie, Inc.",
+    "ko": "소프트웨어 엔지니어, QueryPie, Inc.",
+    "ja": "Software Engineer, QueryPie, Inc."
+  },
+  "authorIntroduction": {
+    "en": "Edwin is a software engineer on the QueryPie AI Service team. He develops enterprise AI services, builds domain-specific systems with LLMs, designs AI solutions for B2C, B2B, and B2B2C clients, and researches independent AI agent business models.",
+    "ko": "QueryPie AI Service 팀의 소프트웨어 엔지니어로 기업용 AI 서비스를 개발합니다. LLM 기반 도메인 특화 시스템 구축, B2C·B2B·B2B2C 고객을 위한 AI 솔루션 설계, 독립형 AI 에이전트 사업 모델 연구개발을 담당합니다.",
+    "ja": "QueryPie AI Service チーム所属のソフトウェアエンジニア。企業向けAIサービス開発を担当し、LLMベースのドメイン特化システム構築、B2C/B2B/B2B2Cクライアント向けのAIソリューション設計、および独立型AIエージェント事業モデルの研究開発に従事。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/edwin.png"
 }

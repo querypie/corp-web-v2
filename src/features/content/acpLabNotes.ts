@@ -1,16 +1,16 @@
 import type { ManagedContentEntry } from "./data";
 import type { Locale } from "@/constants/i18n";
-import { acpLabNoteTopics } from "@/copy/acpLabNotes";
+import { acpLabNoteTopics, getAcpLabNotesCopy } from "@/copy/acpLabNotes";
 
-type LabNoteEntry = Pick<ManagedContentEntry, "categorySlug" | "authorName" | "authorRole" | "sortOrder">;
+type LabNoteEntry = Pick<ManagedContentEntry, "categorySlug" | "authorName" | "labNoteTopics" | "sortOrder">;
 export type LabNote = { episode: number; topics: string[] };
 
-// ACP notes store topics in authorName; sortOrder retains the episode number.
+// Older notes stored topics in authorName. Keep reading them during migration.
 export function getLabNote(item: LabNoteEntry): LabNote | undefined {
   if (item.categorySlug !== "acp-lab-notes") return undefined;
   return {
     episode: item.sortOrder,
-    topics: item.authorName.split(/[·,|]/).map((topic) => topic.trim()).filter(Boolean),
+    topics: (item.labNoteTopics ?? item.authorName.split(/[·,|]/)).map((topic) => topic.trim()).filter(Boolean),
   };
 }
 
@@ -24,7 +24,5 @@ export function getLocalizedLabNote(item: LabNoteEntry, locale: Locale): LabNote
 }
 
 export function getLabNoteWriterLabel(item: LabNoteEntry, locale: Locale) {
-  const note = getLocalizedLabNote(item, locale);
-  if (!note) return "";
-  return note.topics.join(" · ");
+  return getLabNote(item) ? getAcpLabNotesCopy(locale).writer : "";
 }

@@ -22,6 +22,7 @@ import {
   useManagedContents,
 } from "@/features/content/clientStore";
 import type { Locale } from "@/constants/i18n";
+import { getAcpLabNotesCopy } from "@/copy/acpLabNotes";
 import {
   createEmptyManagedContentDraft,
   DEFAULT_NEWS_FORMAT,
@@ -227,7 +228,13 @@ function hydrateRichTextFromHtml(entry: ManagedContentEntry): ManagedContentEntr
 function serializeDirtyCheckTarget(form: ManagedContentEntry) {
   return JSON.stringify({
     authorName: form.authorName,
+    authorNameByLocale: form.authorNameByLocale,
+    authorIntroduction: form.authorIntroduction,
+    authorProfileImageSrc: form.authorProfileImageSrc,
     authorRole: form.authorRole,
+    authorRoleByLocale: form.authorRoleByLocale,
+    labNoteTopics: form.labNoteTopics,
+    labNoteIntroduction: form.labNoteIntroduction,
     bodyHtml: form.bodyHtml,
     bodyRichText: form.bodyRichText,
     contentType: form.contentType,
@@ -783,6 +790,7 @@ export default function AdminManagedContentDetailPage({
   const { locale: adminLocale, t } = useAdminLocale();
   const { allowNextNavigation, setHasUnsavedChanges } = useAdminNavigationGuard();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const profileInputRef = useRef<HTMLInputElement | null>(null);
   const pdfInputRef = useRef<HTMLInputElement | null>(null);
   const localizedPdfInputRefs = useRef<Record<Locale, HTMLInputElement | null>>({
     en: null,
@@ -801,10 +809,13 @@ export default function AdminManagedContentDetailPage({
   const [form, setForm] = useState<ManagedContentEntry>(() => createEmptyManagedContentDraft(section, categorySlug));
   const [dialog, setDialog] = useState<DialogState | null>(null);
   const [pendingThumbnailFile, setPendingThumbnailFile] = useState<File | null>(null);
+  const [pendingProfileFile, setPendingProfileFile] = useState<File | null>(null);
   const [pendingPdfFile, setPendingPdfFile] = useState<File | null>(null);
   const [pendingPdfFilesByLocale, setPendingPdfFilesByLocale] = useState<Partial<Record<Locale, File>>>({});
   const [pendingThumbnailPreviewSrc, setPendingThumbnailPreviewSrc] = useState("");
+  const [pendingProfilePreviewSrc, setPendingProfilePreviewSrc] = useState("");
   const [thumbnailName, setThumbnailName] = useState("");
+  const [profileName, setProfileName] = useState("");
   const [pdfName, setPdfName] = useState("");
   const [pdfNamesByLocale, setPdfNamesByLocale] = useState(() => createEmptyManagedContentDraft(section, categorySlug).downloadPdfSrcByLocale);
   const [pdfButtonMode, setPdfButtonMode] = useState<DownloadPdfMode>("none");
@@ -820,6 +831,7 @@ export default function AdminManagedContentDetailPage({
   const hasUnsavedChanges =
     serializeDirtyCheckTarget(form) !== initialFormSnapshot ||
     Boolean(pendingThumbnailFile) ||
+    Boolean(pendingProfileFile) ||
     Boolean(pendingPdfFile) ||
     hasPendingLocalizedPdfFiles(pendingPdfFilesByLocale) ||
     pendingImageUploadsRef.current.size > 0 ||
@@ -864,6 +876,10 @@ export default function AdminManagedContentDetailPage({
       URL.revokeObjectURL(pendingThumbnailPreviewSrc);
       setPendingThumbnailPreviewSrc("");
     }
+    if (pendingProfilePreviewSrc) {
+      URL.revokeObjectURL(pendingProfilePreviewSrc);
+      setPendingProfilePreviewSrc("");
+    }
     for (const previewSrc of pendingImageUploadsRef.current.keys()) {
       URL.revokeObjectURL(previewSrc);
     }
@@ -875,6 +891,7 @@ export default function AdminManagedContentDetailPage({
     pendingVideoUploadsRef.current.clear();
     pendingDeletedVideoSrcsRef.current.clear();
     setPendingThumbnailFile(null);
+    setPendingProfileFile(null);
     setPendingPdfFile(null);
     setPendingPdfFilesByLocale({});
 
@@ -883,6 +900,7 @@ export default function AdminManagedContentDetailPage({
       setForm(hydratedItem);
       setInitialFormSnapshot(serializeDirtyCheckTarget(hydratedItem));
       setThumbnailName(hydratedItem.imageSrc);
+      setProfileName(hydratedItem.authorProfileImageSrc ?? "");
       setPdfName(hydratedItem.downloadPdfFileName || hydratedItem.downloadPdfSrc);
       setPdfNamesByLocale({
         en: hydratedItem.downloadPdfFileNameByLocale.en || hydratedItem.downloadPdfSrcByLocale.en,
@@ -896,6 +914,7 @@ export default function AdminManagedContentDetailPage({
     setForm(initialDraft);
     setInitialFormSnapshot(serializeDirtyCheckTarget(initialDraft));
     setThumbnailName("");
+    setProfileName("");
     setPdfName("");
     setPdfNamesByLocale(initialDraft.downloadPdfSrcByLocale);
     setPdfButtonMode("none");
@@ -911,10 +930,18 @@ export default function AdminManagedContentDetailPage({
 
   useEffect(() => {
     return () => {
-      translationAbortControllerRef.current?.abort();
       if (pendingThumbnailPreviewSrc) {
         URL.revokeObjectURL(pendingThumbnailPreviewSrc);
       }
+      if (pendingProfilePreviewSrc) {
+        URL.revokeObjectURL(pendingProfilePreviewSrc);
+      }
+    };
+  }, [pendingThumbnailPreviewSrc, pendingProfilePreviewSrc]);
+
+  useEffect(() => {
+    return () => {
+      translationAbortControllerRef.current?.abort();
       for (const previewSrc of pendingImageUploadsRef.current.keys()) {
         URL.revokeObjectURL(previewSrc);
       }
@@ -926,7 +953,7 @@ export default function AdminManagedContentDetailPage({
       pendingVideoUploadsRef.current.clear();
       pendingDeletedVideoSrcsRef.current.clear();
     };
-  }, [pendingThumbnailPreviewSrc]);
+  }, []);
 
   useEffect(() => {
     if (!translationSourceLocales.includes(translationSourceLocale)) {
@@ -949,7 +976,7 @@ export default function AdminManagedContentDetailPage({
   }
 
   function updateLocalizedField(
-    key: "title" | "summary",
+    key: "title" | "summary" | "labNoteIntroduction" | "authorIntroduction",
     locale: "en" | "ko" | "ja",
     value: string,
   ) {
@@ -977,6 +1004,15 @@ export default function AdminManagedContentDetailPage({
         visibleLocales: [...normalizedForm.visibleLocales, locale],
       };
     });
+  }
+
+  function updateLocalizedAuthorField(key: "authorName" | "authorRole", locale: Locale, value: string) {
+    const localizedKey = key === "authorName" ? "authorNameByLocale" : "authorRoleByLocale";
+    setForm((current) => ({
+      ...current,
+      [key]: locale === "en" ? value : current[key],
+      [localizedKey]: { ...current[localizedKey], [locale]: value },
+    }));
   }
 
   function toggleVisibleLocale(locale: "en" | "ko" | "ja", checked: boolean) {
@@ -1273,6 +1309,28 @@ export default function AdminManagedContentDetailPage({
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
     }
+  }
+
+  function handleProfileChange(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    if (pendingProfilePreviewSrc) URL.revokeObjectURL(pendingProfilePreviewSrc);
+    setPendingProfileFile(file);
+    setPendingProfilePreviewSrc(URL.createObjectURL(file));
+    setProfileName(file.name);
+  }
+
+  function handleProfileInputChange(value: string) {
+    if (pendingProfilePreviewSrc) URL.revokeObjectURL(pendingProfilePreviewSrc);
+    setPendingProfileFile(null);
+    setPendingProfilePreviewSrc("");
+    updateForm("authorProfileImageSrc", value);
+    setProfileName(value);
+  }
+
+  function clearProfile() {
+    handleProfileInputChange("");
+    if (profileInputRef.current) profileInputRef.current.value = "";
   }
 
   function handlePdfChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -1760,6 +1818,7 @@ export default function AdminManagedContentDetailPage({
     }
 
     let nextImageSrc = currentForm.imageSrc;
+    let nextProfileImageSrc = currentForm.authorProfileImageSrc ?? "";
     let nextDownloadPdfSrc = currentForm.downloadPdfSrc;
     let nextDownloadPdfFileName = currentForm.downloadPdfFileName;
     let nextDownloadPdfSrcByLocale = currentForm.downloadPdfSrcByLocale;
@@ -1769,6 +1828,7 @@ export default function AdminManagedContentDetailPage({
     let uploadedImageSrcs: string[] = [];
     let oldVideoSrcs: string[] = [];
     let uploadedVideoSrcs: string[] = [];
+    let uploadedProfileImageSrc = "";
 
     if (pendingThumbnailFile) {
       try {
@@ -1875,6 +1935,22 @@ export default function AdminManagedContentDetailPage({
       return;
     }
 
+    if (pendingProfileFile) {
+      try {
+        uploadedProfileImageSrc = await uploadThumbnail(pendingProfileFile);
+        nextProfileImageSrc = uploadedProfileImageSrc;
+      } catch {
+        await Promise.all([...uploadedImageSrcs, ...uploadedVideoSrcs].map((src) => deleteUploadedFile(src)));
+        setDialog({
+          description: "프로필 사진을 저장하지 못했습니다. 다시 시도해 주세요.",
+          title: "프로필 업로드에 실패했습니다.",
+          type: "alert",
+        });
+        setIsSaving(false);
+        return;
+      }
+    }
+
     const nextId = resolveManagedContentSlug({
       currentId: itemId === "new" ? undefined : itemId,
       enteredSlug: finalizedContentForm.id,
@@ -1908,6 +1984,7 @@ export default function AdminManagedContentDetailPage({
           ? finalizedContentForm.gatingLevel
           : "none",
       imageSrc: nextImageSrc,
+      authorProfileImageSrc: nextProfileImageSrc,
       section,
       sortOrder: nextSortOrder,
       status,
@@ -1922,6 +1999,7 @@ export default function AdminManagedContentDetailPage({
         { shiftSiblingsForNew: itemId === "new" },
       );
     } catch (error) {
+      if (uploadedProfileImageSrc) await deleteUploadedFile(uploadedProfileImageSrc);
       await Promise.all(uploadedImageSrcs.map((src) => deleteUploadedFile(src)));
       await Promise.all(uploadedVideoSrcs.map((src) => deleteUploadedFile(src)));
       setDialog({
@@ -1939,6 +2017,7 @@ export default function AdminManagedContentDetailPage({
     if (pendingThumbnailPreviewSrc) {
       URL.revokeObjectURL(pendingThumbnailPreviewSrc);
     }
+    if (pendingProfilePreviewSrc) URL.revokeObjectURL(pendingProfilePreviewSrc);
     const imageSrcsToDelete = Array.from(new Set([
       ...oldImageSrcs,
       ...pendingDeletedImageSrcsRef.current,
@@ -1961,9 +2040,11 @@ export default function AdminManagedContentDetailPage({
     pendingDeletedVideoSrcsRef.current.clear();
 
     setPendingThumbnailFile(null);
+    setPendingProfileFile(null);
     setPendingPdfFile(null);
     setPendingPdfFilesByLocale({});
     setPendingThumbnailPreviewSrc("");
+    setPendingProfilePreviewSrc("");
     setHasUnsavedChanges(false);
     allowNextNavigation();
     window.location.assign(getAdminCategoryHref(section, categorySlug));
@@ -1974,6 +2055,7 @@ export default function AdminManagedContentDetailPage({
     bodyHtml: isOutlinkType ? { en: "", ko: "", ja: "" } : form.bodyHtml,
     bodyRichText: isOutlinkType ? { en: "", ko: "", ja: "" } : form.bodyRichText,
     imageSrc: pendingThumbnailPreviewSrc || form.imageSrc,
+    authorProfileImageSrc: pendingProfilePreviewSrc || form.authorProfileImageSrc,
   };
 
   return (
@@ -2145,24 +2227,75 @@ export default function AdminManagedContentDetailPage({
                 />
               </InlineField>
             ) : isContentType ? (
-              <div className="grid gap-3 md:grid-cols-2">
-                <InlineField label="작성자">
-                  <Input
-                    className="w-full"
-                    onChange={(event) => updateForm("authorName", event.target.value)}
-                    type="text"
-                    value={form.authorName}
-                  />
-                </InlineField>
-                <InlineField label="직책">
-                  <Input
-                    className="w-full"
-                    onChange={(event) => updateForm("authorRole", event.target.value)}
-                    type="text"
-                    value={form.authorRole}
-                  />
-                </InlineField>
-              </div>
+              <>
+                {form.categorySlug === "white-papers" ? (
+                  <InlineField label="프로필">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                      <div className="flex min-w-0 flex-1 items-center gap-3">
+                        <Input
+                          className="w-full"
+                          onChange={(event) => handleProfileInputChange(event.target.value)}
+                          type="text"
+                          value={pendingProfileFile ? profileName : form.authorProfileImageSrc ?? ""}
+                        />
+                        {profileName ? (
+                          <button className="shrink-0 bg-transparent p-0 type-body-md text-mute transition-colors hover:text-fg" onClick={clearProfile} type="button">{t("삭제")}</button>
+                        ) : null}
+                      </div>
+                      <Button arrow={false} className="w-full justify-center sm:w-auto" onClick={() => profileInputRef.current?.click()} style="round" variant="outline">{t("추가")}</Button>
+                      <input accept="image/png,image/jpeg,image/webp" className="sr-only" onChange={handleProfileChange} ref={profileInputRef} type="file" />
+                    </div>
+                  </InlineField>
+                ) : null}
+                <div className="grid gap-3 md:grid-cols-2">
+                  <InlineField label="작성자">
+                    <Input
+                      className="w-full"
+                      onChange={(event) => form.categorySlug === "white-papers" || form.categorySlug === "blogs" ? updateLocalizedAuthorField("authorName", activeLocale, event.target.value) : updateForm("authorName", event.target.value)}
+                      readOnly={form.categorySlug === "acp-lab-notes"}
+                      type="text"
+                      value={form.categorySlug === "acp-lab-notes" ? getAcpLabNotesCopy(activeLocale).writer : form.categorySlug === "white-papers" || form.categorySlug === "blogs" ? form.authorNameByLocale?.[activeLocale] ?? form.authorName : form.authorName}
+                    />
+                  </InlineField>
+                  {form.categorySlug === "acp-lab-notes" ? (
+                    <InlineField label="태그 (쉼표로 구분)">
+                      <Input
+                        className="w-full"
+                        onChange={(event) => updateForm("labNoteTopics", event.target.value.split(",").map((topic) => topic.trim()))}
+                        type="text"
+                        value={form.labNoteTopics?.join(", ") ?? ""}
+                      />
+                    </InlineField>
+                  ) : (
+                    <InlineField label="직책">
+                      <Input
+                        className="w-full"
+                        onChange={(event) => form.categorySlug === "white-papers" || form.categorySlug === "blogs" ? updateLocalizedAuthorField("authorRole", activeLocale, event.target.value) : updateForm("authorRole", event.target.value)}
+                        type="text"
+                        value={form.categorySlug === "white-papers" || form.categorySlug === "blogs" ? form.authorRoleByLocale?.[activeLocale] ?? form.authorRole : form.authorRole}
+                      />
+                    </InlineField>
+                  )}
+                </div>
+              </>
+            ) : null}
+            {form.categorySlug === "white-papers" && isContentType ? (
+              <InlineField label="소개">
+                <Textarea
+                  className="min-h-[88px] resize-y bg-bg-content"
+                  onChange={(event) => updateLocalizedField("authorIntroduction", activeLocale, event.target.value)}
+                  value={form.authorIntroduction?.[activeLocale] ?? ""}
+                />
+              </InlineField>
+            ) : null}
+            {form.categorySlug === "acp-lab-notes" ? (
+              <InlineField label="소개">
+                <Textarea
+                  className="min-h-[88px] resize-y bg-bg-content"
+                  onChange={(event) => updateLocalizedField("labNoteIntroduction", activeLocale, event.target.value)}
+                  value={form.labNoteIntroduction?.[activeLocale] ?? ""}
+                />
+              </InlineField>
             ) : null}
             <InlineField label="날짜">
               <div className="flex flex-col gap-3 sm:flex-row sm:items-center">

@@ -30,6 +30,8 @@ import {
   getDownloadPreviewProps,
   getManagedCategoryLabel,
   getNewsFormatLabel,
+  getLocalizedAuthorName,
+  getLocalizedAuthorRole,
   getWriterLabel,
   normalizeDateIso,
   type ManagedContentCategorySlug,
@@ -37,6 +39,7 @@ import {
   type ManagedContentSection,
 } from "@/features/content/data";
 import { cloneAsAuthoredContent } from "@/features/content/cloneToAuthored";
+import { getLabNoteWriterLabel } from "@/features/content/acpLabNotes";
 import { renderTiptapHtml } from "@/features/content/tiptapHtml";
 import {
   getAdminContentListDisplayLocale,
@@ -246,6 +249,7 @@ export function PreviewModal({
           ) : (
             <AdminContentPreview
               key={`${item.id}-${activeLocale}`}
+              authorProfileImageSrc={item.categorySlug === "white-papers" ? item.authorProfileImageSrc : undefined}
               bodyHtml={localizedBodyHtml}
               category={getManagedCategoryLabel(item.section, item.categorySlug, activeLocale)}
               contentType={item.contentType}
@@ -255,11 +259,13 @@ export function PreviewModal({
               heroImageAlt={localizedTitle}
               heroImageSrc={item.imageSrc}
               hideHeroImage={item.hideHeroImage}
+              introduction={item.categorySlug === "acp-lab-notes" ? item.labNoteIntroduction?.[activeLocale] : item.categorySlug === "white-papers" ? item.authorIntroduction?.[activeLocale] : undefined}
               section={item.section}
               summary={localizedSummary}
               title={localizedTitle}
               url={item.externalUrl || "#"}
-              writer={item.section === "news" ? getNewsFormatLabel(item, activeLocale) : getWriterLabel(item)}
+              writer={item.section === "news" ? getNewsFormatLabel(item, activeLocale) : item.categorySlug === "acp-lab-notes" ? getLabNoteWriterLabel(item, activeLocale) : item.categorySlug === "white-papers" || item.categorySlug === "blogs" ? getLocalizedAuthorName(item, activeLocale) : getWriterLabel(item)}
+              writerRole={item.categorySlug === "white-papers" || item.categorySlug === "blogs" ? getLocalizedAuthorRole(item, activeLocale) : undefined}
             />
           )}
         </div>

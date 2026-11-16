@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000136/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000136/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Brant Hwang",
+    "ko": "Brant Hwang",
+    "ja": "Brant Hwang"
+  },
+  "authorRoleByLocale": {
+    "en": "CEO, Founder",
+    "ko": "CEO, 창업자",
+    "ja": "CEO, Founder"
+  },
+  "authorIntroduction": {
+    "en": "Brant is the founder and CEO of QueryPie, which provides AI-powered privileged access management solutions. He earned a master's degree in computer science from KAIST and has more than 17 years of software experience across enterprise software, embedded systems, internet portals, and commerce platforms. Before founding QueryPie, he worked on platform development at Kakao. He believes software should serve people and focuses on solving problems simply and effectively.",
+    "ko": "QueryPie의 창업자이자 CEO로 AI 기반 특권 접근 관리 솔루션을 제공하고 있습니다. KAIST에서 컴퓨터공학 석사 학위를 받고 기업용 소프트웨어, 임베디드 시스템, 인터넷 포털, 커머스 플랫폼 등에서 17년 넘게 일했습니다. 창업 전에는 카카오에서 플랫폼 개발을 담당했습니다. 소프트웨어는 사람을 위해 존재한다는 믿음으로 문제를 단순하고 효율적으로 해결하는 데 집중합니다.",
+    "ja": "QueryPieの創業者兼CEOであるBrantは、AIを活用した特権アクセス管理（PAM）ソリューションを提供しています。BrantはKAISTでコンピュータサイエンスの修士号を取得し、17年以上のソフトウェア分野の経験を有しています。彼は、エンタープライズソフトウェア、組み込みシステム、インターネットポータル、コマースプラットフォームなど、さまざまな分野で経験を積んできました。起業を考える前には、カカオでプラットフォーム開発に携わっていました。Brantは、ソフトウェアの核心はそれが提供する人々にあると信じており、問題をシンプルかつ効率的に解決することに注力しています。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/brant.png"
 }

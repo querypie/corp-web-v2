@@ -14,6 +14,8 @@ import {
   getContentDownloadPdfSrc,
   getManagedCategoryLabel,
   getContentThumbnailSrc,
+  getLocalizedAuthorName,
+  getLocalizedAuthorRole,
   getLocalizedContent,
   getResolvedContentLocale,
   isPublishedContentAccessibleInLocale,
@@ -110,6 +112,7 @@ export default async function ResourcesDetailRoute({ params }: DocsDetailRoutePr
   const detailHref = getPublicDetailHref("resources", locale, resolvedSlug, currentEntry.categorySlug);
   const fallbackProps = {
     labNote: getLabNote(currentEntry),
+    authorProfileImageSrc: currentEntry.categorySlug === "white-papers" ? currentEntry.authorProfileImageSrc : undefined,
     docsHref: getCategoryHref(docsCategoryConfigs, currentEntry.categorySlug, locale),
     slug: resolvedSlug,
     bodyHtml: previewBodyHtml,
@@ -126,14 +129,16 @@ export default async function ResourcesDetailRoute({ params }: DocsDetailRoutePr
     hideHeroImage: currentEntry.hideHeroImage,
     heroImageAlt: getLocalizedContent(currentEntry.title, contentLocale),
     heroImageSrc: currentEntry.imageSrc,
+    introduction: currentEntry.categorySlug === "acp-lab-notes" ? currentEntry.labNoteIntroduction?.[locale] : currentEntry.categorySlug === "white-papers" ? currentEntry.authorIntroduction?.[locale] : undefined,
     locale,
     parentLabel: copy.title,
     shareUrl: await getRequestPublicUrl(detailHref),
     title: getLocalizedContent(currentEntry.title, contentLocale),
     unlockCookieName: getContentUnlockCookieName(currentEntry.id, "resources"),
-    writer: currentEntry.categorySlug === "acp-lab-notes" ? getLabNoteWriterLabel(currentEntry, locale) : currentEntry.authorRole
+    writer: currentEntry.categorySlug === "acp-lab-notes" ? getLabNoteWriterLabel(currentEntry, locale) : currentEntry.categorySlug === "white-papers" || currentEntry.categorySlug === "blogs" ? getLocalizedAuthorName(currentEntry, locale) : currentEntry.authorRole
       ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
       : currentEntry.authorName,
+    writerRole: currentEntry.categorySlug === "white-papers" || currentEntry.categorySlug === "blogs" ? getLocalizedAuthorRole(currentEntry, locale) : undefined,
   } satisfies DocsDetailPageProps;
 
   return (
@@ -146,6 +151,7 @@ export default async function ResourcesDetailRoute({ params }: DocsDetailRoutePr
             contactCopy={getContactPageCopy(locale)}
             contentId={currentEntry.id}
             id={CONTENT_GATE_FORM_ID}
+            key={currentEntry.id}
             locale={locale}
             section="resources"
             title={getLocalizedContent(currentEntry.title, contentLocale)}
@@ -182,7 +188,7 @@ export async function generateMetadata({ params }: DocsDetailRouteProps): Promis
   return withDynamicOgImage({
     title,
     description,
-    openGraph: { type: "article", ...(currentEntry.dateIso && !Number.isNaN(Date.parse(currentEntry.dateIso)) ? { publishedTime: currentEntry.dateIso } : {}), ...(currentEntry.authorName && currentEntry.categorySlug !== "acp-lab-notes" ? { authors: [currentEntry.authorName] } : {}) },
+    openGraph: { type: "article", ...(currentEntry.dateIso && !Number.isNaN(Date.parse(currentEntry.dateIso)) ? { publishedTime: currentEntry.dateIso } : {}), ...(currentEntry.authorName ? { authors: [currentEntry.categorySlug === "acp-lab-notes" ? getLabNoteWriterLabel(currentEntry, locale) : currentEntry.categorySlug === "white-papers" || currentEntry.categorySlug === "blogs" ? getLocalizedAuthorName(currentEntry, locale) : currentEntry.authorName] } : {}) },
     alternates: {
       canonical: getPublicDetailHref("resources", locale, resolvedSlug, currentEntry.categorySlug),
     },
