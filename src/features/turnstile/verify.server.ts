@@ -16,7 +16,12 @@ export async function verifyTurnstileToken(
   const secret = process.env.TURNSTILE_SECRET_KEY;
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
-  if (!secret && !siteKey) return { ok: true, configured: false };
+  if (!secret && !siteKey) {
+    if (process.env.VERCEL_ENV === "production" || process.env.VERCEL_ENV === "preview") {
+      return { ok: false, reason: "misconfigured" };
+    }
+    return { ok: true, configured: false };
+  }
   if (!secret || !siteKey) return { ok: false, reason: "misconfigured" };
   if (!token) return { ok: false, reason: "missing" };
 
@@ -28,6 +33,7 @@ export async function verifyTurnstileToken(
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body,
+      signal: AbortSignal.timeout(5000),
     });
     if (!response.ok) return { ok: false, reason: "failed" };
 

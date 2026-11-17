@@ -8,7 +8,17 @@ describe("verifyTurnstileToken", () => {
   });
 
   it("Turnstile 환경 변수가 없으면 검증을 건너뛴다", async () => {
+    vi.stubEnv("VERCEL_ENV", "development");
+    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "");
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "");
     await expect(verifyTurnstileToken(undefined)).resolves.toEqual({ ok: true, configured: false });
+  });
+
+  it.each(["preview", "production"])("%s에서 키가 모두 없으면 거부한다", async (environment) => {
+    vi.stubEnv("VERCEL_ENV", environment);
+    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "");
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "");
+    await expect(verifyTurnstileToken(undefined)).resolves.toEqual({ ok: false, reason: "misconfigured" });
   });
 
   it("Site Key만 있으면 잘못된 설정으로 거부한다", async () => {
@@ -43,5 +53,13 @@ describe("verifyTurnstileToken", () => {
 
     await expect(verifyTurnstileToken(undefined)).resolves.toEqual({ ok: false, reason: "missing" });
     expect(fetchSpy).not.toHaveBeenCalled();
+  });
+
+  it("Cloudflare 요청 실패 시 거부한다", async () => {
+    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "site-key");
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "secret-key");
+    vi.spyOn(global, "fetch").mockRejectedValue(new Error("timeout"));
+    vi.spyOn(console, "error").mockImplementation(() => {});
+    await expect(verifyTurnstileToken("token")).resolves.toEqual({ ok: false, reason: "failed" });
   });
 });

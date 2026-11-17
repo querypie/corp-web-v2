@@ -67,7 +67,7 @@
 ### 처리 순서
 
 1. **필수 필드 검증** — `firstName`, `lastName`, `email`, `company`, `departmentTitle` 중 누락 시 `400`.
-2. **Turnstile 검증** — `TURNSTILE_SECRET_KEY`와 `NEXT_PUBLIC_TURNSTILE_SITE_KEY`가 모두 설정된 환경에서는 Cloudflare Siteverify API 검증을 통과해야 한다. 토큰 누락·검증 실패·키 설정 오류는 `400`으로 처리한다.
+2. **Turnstile 검증** — Preview·Production에서는 두 키가 필수이며 Cloudflare Siteverify API 검증을 통과해야 한다. 로컬에서는 두 키가 없을 때 검증을 건너뛴다. 토큰 누락·검증 실패·키 설정 오류는 `400`으로 처리하며 검증 요청은 5초로 제한한다.
 3. **MX 레코드 검증** — 이메일 도메인의 MX 레코드 확인. 실패 시 2초 딜레이 후 에러 반환 (brute-force 완화).
 4. **XSS 필터링** — 모든 문자열 필드에 적용.
 5. **DeskPie Lead API 전송** (best-effort) — `DESKPIE_API_BASE_URL`, `DESKPIE_API_KEY`가 모두 있으면 Next.js `after()`로 전송한다. 실패해도 에러 로그만 남긴다.
@@ -121,8 +121,8 @@ DeskPie API는 기존 lead field name과 호환되는 payload를 받는다. Slac
 | `SLACK_CHANNEL_ALERT_WEBSITE_FORM_SUBMISSION_TESTING` | 선택 | non-production에서 미설정 시 `C083Y0300M7` fallback |
 | `DESKPIE_API_BASE_URL` | 선택 | DeskPie 단계 skip |
 | `DESKPIE_API_KEY` | 선택 | DeskPie 단계 skip |
-| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | 선택 | Contact Us 브라우저 위젯 비활성화 |
-| `TURNSTILE_SECRET_KEY` | 선택 | 두 Turnstile 키가 모두 없으면 검증 비활성화; 한쪽만 있으면 설정 오류로 거부 |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | Preview·Production 필수 | 미설정 시 브라우저 위젯 비활성화; Preview·Production의 API 요청은 거부 |
+| `TURNSTILE_SECRET_KEY` | Preview·Production 필수 | Preview·Production에서는 키가 없으면 거부한다. 로컬에서 두 키가 모두 없으면 검증을 건너뛰며, 한쪽만 있으면 거부한다. |
 
 Cloudflare 계정 정보와 Turnstile 환경변수는 [1Password 항목](https://start.1password.com/open/i?a=W2QE5422ENEWNN6FOEG6XAW6VY&v=6pb3pjtcelwh4r7xjhvm23qcwa&i=h3hwo4craznlpablziv4myfstq&h=chequer.1password.com)을 참고한다. 실제 키 값은 저장소에 기록하지 않는다. Vercel의 Production과 Preview에는 해당 환경의 Site Key와 Secret Key를 함께 설정하고, 변경 후 새로 배포한다. Site Key는 빌드 시 클라이언트에 반영된다.
 

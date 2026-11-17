@@ -28,6 +28,7 @@ export default function TurnstileWidget({ onToken }: { onToken: (token: string |
     if (!siteKey || !containerRef.current) return;
 
     let cancelled = false;
+    let timer: number | undefined;
     const renderWidget = () => {
       if (cancelled || !containerRef.current || !window.turnstile || widgetIdRef.current) return;
       widgetIdRef.current = window.turnstile.render(containerRef.current, {
@@ -36,14 +37,15 @@ export default function TurnstileWidget({ onToken }: { onToken: (token: string |
         "expired-callback": () => onToken(undefined),
         "error-callback": () => onToken(undefined),
       });
+      if (timer !== undefined) window.clearInterval(timer);
     };
 
     renderWidget();
-    const timer = window.setInterval(renderWidget, 200);
+    if (!widgetIdRef.current) timer = window.setInterval(renderWidget, 200);
 
     return () => {
       cancelled = true;
-      window.clearInterval(timer);
+      if (timer !== undefined) window.clearInterval(timer);
       if (widgetIdRef.current && window.turnstile) window.turnstile.remove(widgetIdRef.current);
       widgetIdRef.current = undefined;
     };
