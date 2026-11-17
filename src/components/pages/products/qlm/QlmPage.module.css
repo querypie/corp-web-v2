@@ -1,0 +1,72 @@
+.page h1, .page h2, .page h3 { word-break: keep-all; overflow-wrap: anywhere; }
+.tableWrap { margin-top: 32px; overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; line-height: 1.5; }
+.table th, .table td { padding: 11px 16px; border-bottom: 1px solid var(--color-border); }
+.table thead th { border-top: 1px solid var(--color-border); background: var(--color-bg-content); color: var(--color-mute); font-weight: 400; }
+.table tbody th { font-weight: 500; }
+.table td { color: var(--color-mute); }
+.table th:last-child, .table td:last-child { text-align: right; white-space: nowrap; }
+.table td:last-child { color: var(--color-fg); font-variant-numeric: tabular-nums; }
+.notes { margin: 16px 0 0; color: var(--color-mute); font-size: 12px; line-height: 1.8; }
+.routing { --flow-color: color-mix(in srgb, var(--color-brand) 65%, var(--color-border)); --slot-on: var(--color-brand); max-width: 900px; margin: 64px auto 0; padding-top: 12px; }
+.flow { display: grid; grid-template-columns: 1fr 48px 1.05fr 48px 1.15fr; align-items: center; }
+.gateway, .destinations > div { position: relative; min-width: 0; border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent); background: var(--color-bg); box-shadow: 0 2px 5px rgb(0 0 0 / .025), 0 12px 30px -15px rgb(0 0 0 / .09); }
+.gateway { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; height: 210px; padding: 24px 16px; border-radius: 26px; text-align: center; }
+.gateway > svg { width: 28px; height: 28px; }
+.gateway > strong { font-size: 20px; font-weight: var(--font-weight-regular); }
+.gateway > span { display: flex; align-items: center; justify-content: center; padding: 10px 16px; border-radius: 10px; background: var(--color-bg-content); font-size: 12px; line-height: 1.7; color: var(--color-fg); }
+.branches { position: relative; height: 116px; }
+.branches svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.branches .branchMobile { display: none; }
+.flowLine { stroke: var(--flow-color); stroke-width: 1; stroke-dasharray: 4 4; vector-effect: non-scaling-stroke; }
+.arrowhead { fill: var(--flow-color); }
+@media (prefers-reduced-motion: no-preference) { .flowLine { animation: qlm-flow .8s linear infinite; } }
+@keyframes qlm-flow { to { stroke-dashoffset: -8; } }
+.destinations { display: grid; gap: 16px; }
+.destinations > div { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-content: center; align-items: center; gap: 10px 12px; min-height: 100px; border-radius: 12px; padding: 18px; }
+.destinations svg { width: 24px; height: 24px; stroke-width: 1.5; }
+.destinations strong { min-width: 0; overflow-wrap: anywhere; font-size: 20px; font-weight: 500; }
+.destinations span { grid-column: 2 / -1; font-size: 11px; line-height: 1.7; color: var(--color-mute); }
+.hardware { display: flex; align-items: center; gap: 12px; }
+.vents { display: flex; gap: 3px; }
+.vents i { width: 2px; height: 17px; background: var(--color-border); }
+.status { width: 5px; height: 5px; flex: none; border-radius: 50%; background: var(--color-success); }
+.destinations > div::after { content: ""; position: absolute; inset: -1px; border: 1px solid color-mix(in srgb, var(--color-brand) 32%, var(--color-border)); border-radius: inherit; box-shadow: 0 0 56px 12px color-mix(in srgb, var(--color-brand) 22%, transparent); opacity: 0; pointer-events: none; }
+.destinations > div > svg { color: var(--color-fg); }
+@media (prefers-reduced-motion: no-preference) {
+  .destinations > div::after { animation: model-selected 6s ease-in-out infinite; }
+  .destinations > div > svg { animation: model-icon 6s ease-in-out infinite; }
+  .destinations > div .status { animation: model-status 6s ease-in-out infinite; }
+  .destinations > div .powerSlot { animation: slot-power 6s ease-in-out infinite; }
+  .destinations > div .powerSlot:nth-child(2) { animation-name: slot-power-two; }
+  .destinations > div .powerSlot:nth-child(3) { animation-name: slot-power-three; }
+  .destinations > div .powerSlot:nth-child(4) { animation-name: slot-power-four; }
+  .destinations > div:nth-child(2)::after,
+  .destinations > div:nth-child(2) > svg,
+  .destinations > div:nth-child(2) .status,
+  .destinations > div:nth-child(2) .powerSlot { animation-delay: -3s; }
+}
+@keyframes model-selected { 0%, 50%, 95%, 100% { opacity: 0; } 5%, 45% { opacity: 1; } }
+@keyframes model-icon { 0%, 50%, 95%, 100% { color: var(--color-fg); } 5%, 45% { color: var(--color-brand); } }
+@keyframes model-status { 0%, 50%, 95%, 100% { background: var(--color-border); } 5%, 45% { background: var(--color-success); } }
+@keyframes slot-power { 0%, 50%, 100% { background: var(--color-border); } 5%, 45% { background: var(--slot-on); } }
+@keyframes slot-power-two { 0%, 5%, 50%, 100% { background: var(--color-border); } 10%, 45% { background: var(--slot-on); } }
+@keyframes slot-power-three { 0%, 10%, 50%, 100% { background: var(--color-border); } 15%, 45% { background: var(--slot-on); } }
+@keyframes slot-power-four { 0%, 15%, 50%, 100% { background: var(--color-border); } 20%, 45% { background: var(--slot-on); } }
+:global(:root[data-theme="dark"]) :is(.gateway, .destinations > div) { box-shadow: 0 3px 7px rgb(0 0 0 / .2), 0 14px 28px -10px rgb(0 0 0 / .45); }
+.routing figcaption { margin-top: 32px; color: var(--color-mute); font-size: 12px; line-height: 1.8; text-align: center; }
+@media (min-width: 768px) and (max-width: 1023px) { .flow { grid-template-columns: 1fr 28px 1fr 28px 1.1fr; } .destinations > div { padding-inline: 12px; gap: 8px; } }
+@media (max-width: 767px) {
+  .table th, .table td { padding: 10px 8px; font-size: 12px; }
+  .routing { max-width: 360px; margin-top: 40px; }
+  .flow { grid-template-columns: 1fr; }
+  .gateway { width: 100%; height: 190px; border-radius: 22px; }
+  .branches { height: 36px; width: 10px; justify-self: center; }
+  .branches .branchDesktop { display: none; }
+  .branches .branchMobile { display: block; }
+  .destinations { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .destinations > div { display: flex; flex-direction: column; justify-content: center; text-align: center; padding: 18px 12px; min-height: 174px; border-radius: 12px; }
+  .hardware { order: 1; margin-top: 4px; }
+  .destinations strong { font-size: 19px; }
+  .destinations span { font-size: 11px; }
+}

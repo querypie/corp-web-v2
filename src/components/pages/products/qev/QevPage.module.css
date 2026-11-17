@@ -1,4 +1,5 @@
-.page { --qev-accent: var(--color-brand); color: var(--color-fg); }
+.page { --qev-accent: var(--color-brand); --qev-node-shadow: 0 2px 3px rgb(0 0 0 / .025), 0 10px 22px -14px rgb(0 0 0 / .2); color: var(--color-fg); }
+:global(:root[data-theme="dark"]) .page { --qev-node-shadow: 0 2px 5px rgb(0 0 0 / .2), 0 10px 20px -7px rgb(0 0 0 / .45); }
 .page h1, .page h2, .page h3 { word-break: keep-all; overflow-wrap: anywhere; }
 .page h2 { white-space: pre-line; }
 .page figure { margin-left: 0; margin-right: 0; }
@@ -70,7 +71,7 @@
 .modelBank { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
 .modelTile { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 15px 6px; border: 1px solid var(--color-border); border-radius: 16px; background: var(--color-bg); color: var(--color-mute); font-size: 12px; }
 .modelTile > svg { width: 26px; height: 26px; stroke-width: 1.5; }
-.activeTile { color: var(--color-fg); border-color: color-mix(in srgb, var(--qev-accent) 60%, var(--color-border)); box-shadow: 0 0 32px color-mix(in srgb, var(--qev-accent) 10%, transparent); }
+.activeTile { color: var(--color-fg); border-color: color-mix(in srgb, var(--qev-accent) 60%, var(--color-border)); }
 .activeTile > svg { color: var(--qev-accent); }
 .modelTile .selectionBadge { position: absolute; bottom: -12px; display: flex; align-items: center; gap: 4px; padding: 4px 8px; border: 1px solid var(--color-border); border-radius: 20px; background: var(--color-bg); font-size: 10px; white-space: nowrap; }
 .selectionBadge svg { width: 12px; height: 12px; color: #22c55e; }
@@ -166,8 +167,10 @@
 .route svg { width: 18px; color: var(--color-mute); }
 .routerCore { display: flex; justify-content: center; align-items: center; gap: 16px; padding: 20px 0; border-top: 1px solid var(--color-border); font-size: 14px; }
 .routerCore svg { width: 20px; color: var(--qev-accent); }
+.promptStrip, .decisionStrip, .documentPanel, .detectionBadge, .modelTile, .selectionBadge { box-shadow: var(--qev-node-shadow); }
+.activeTile { box-shadow: var(--qev-node-shadow), 0 0 32px color-mix(in srgb, var(--qev-accent) 10%, transparent); }
 .metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 32px; gap: 32px; }
-.metric { margin: 0 0 16px; font-size: clamp(40px, 5.5vw, 72px); font-weight: 500; letter-spacing: 0; line-height: 1.1; }
+.metric { margin: 0 0 16px; font-size: clamp(36px, 5vw, 64px); font-weight: 500; letter-spacing: 0; line-height: 1.1; }
 .metric span { font-size: .42em; margin-left: 4px; color: var(--qev-accent); }
 .metrics h3 { font-size: 16px; font-weight: 500; margin: 0 0 8px; }
 .metrics > div > p:last-child { margin: 0; font-size: 13px; color: var(--color-mute); }
@@ -204,7 +207,7 @@
   .branchOutputs > div::before { width: 18px; }
   .branchOutputs > div:first-child::after { right: calc(100% + 17px); }
   .metrics { grid-template-columns: 1fr; gap: 28px; }
-  .metric { font-size: 64px; }
+  .metric { font-size: 56px; }
   .table th, .table td { padding: 16px 12px; font-size: 12px; overflow-wrap: anywhere; }
   .tableWrap { margin-top: 32px; }
 }

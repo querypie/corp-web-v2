@@ -61,8 +61,8 @@ describe("Footer", () => {
 
     expect(screen.queryByText("価格・プラン")).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "ペネトレーションテスト" })).toHaveAttribute("href", "/ja/penetration-testing");
-    expect(screen.getByRole("link", { name: "意思決定AIモデル｜QEV" })).toHaveAttribute("href", "/ja/qev");
-    expect(screen.getByRole("link", { name: "企業向けLLM｜QLM" })).toHaveAttribute("href", "/ja/qlm");
+    expect(screen.getByRole("link", { name: "意思決定AIモデル (QEV)" })).toHaveAttribute("href", "/ja/qev");
+    expect(screen.getByRole("link", { name: "QueryPie LLM (QLM)" })).toHaveAttribute("href", "/ja/qlm");
     expect(screen.getByRole("link", { name: "社内業務効率化｜AI Crew" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "自社サービスAI化｜AI Dashi" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "AI Gateway (AIG)" })).toHaveAttribute("href", "/ja/ai-gateway");

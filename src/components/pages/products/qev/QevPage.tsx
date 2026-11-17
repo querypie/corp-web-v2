@@ -3,8 +3,9 @@ import Cta from "@/components/sections/Cta";
 import Button from "@/components/ui/Button";
 import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
 import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import { getLocalePath } from "@/constants/i18n";
-import { qevKoCopy as copy } from "@/copy/qev";
+import type { Locale } from "@/constants/i18n";
+import { getContactHref } from "@/features/contact/prefill";
+import { qevCopy } from "@/copy/qevLocalized";
 import styles from "./QevPage.module.css";
 import AiGatewayLogo from "../ai-gateway/AiGatewayLogo";
 
@@ -20,7 +21,8 @@ function ComparisonTable({ headers, rows }: { headers: string[]; rows: string[][
   return <div className={styles.tableWrap}><table className={styles.table}><thead><tr>{headers.map(text => <th scope="col" key={text}>{text}</th>)}</tr></thead><tbody>{rows.map(row => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th scope="row" key={text}>{text}</th> : <td key={text}>{text}</td>)}</tr>)}</tbody></table></div>;
 }
 
-function UseCaseDiagram({ kind }: { kind: "dlp" | "router" }) {
+function UseCaseDiagram({ kind, locale }: { kind: "dlp" | "router"; locale: Locale }) {
+  const copy = qevCopy[locale];
   const text = copy.useCases[kind];
   const example = copy.useCases.example;
   return <figure className={`${styles.useVisual} ${kind === "dlp" ? styles.dlpVisual : ""}`} aria-label={text.label}>
@@ -39,14 +41,15 @@ function UseCaseDiagram({ kind }: { kind: "dlp" | "router" }) {
   </figure>;
 }
 
-export default function QevPage() {
+export default function QevPage({ locale }: { locale: Locale }) {
+  const copy = qevCopy[locale];
   const icons = [ShieldCheck, Cpu, SlidersHorizontal];
   return <div className={`${styles.page} flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
     <section className={pageContentWidthClassName}>
       <header className="grid items-start gap-6 md:grid-cols-2 md:gap-12"><h1 className="m-0 text-pretty type-h1 text-fg">{copy.hero.title}<br />{copy.hero.accent}</h1><p className="m-0 type-body-lg leading-relaxed text-fg">{copy.hero.description}</p></header>
       <figure className={styles.heroDiagram} aria-label={copy.flow.label}>
         <div className={styles.flow}>
-          <div className={styles.input}><h3 className="type-h3">{copy.flow.input}</h3><ul className={styles.agentLogos}>{agentLogos.map(({ label, src }) => <li key={label} title={label}><img src={src} alt={label} width={28} height={28} /></li>)}<li title="애플리케이션"><AppWindow role="img" aria-label="애플리케이션" /></li><li title="사용자"><UserRound role="img" aria-label="사용자" /></li></ul></div>
+          <div className={styles.input}><h3 className="type-h3">{copy.flow.input}</h3><ul className={styles.agentLogos}>{agentLogos.map(({ label, src }) => <li key={label} title={label}><img src={src} alt={label} width={28} height={28} /></li>)}<li title={copy.flow.application}><AppWindow role="img" aria-label={copy.flow.application} /></li><li title={copy.flow.user}><UserRound role="img" aria-label={copy.flow.user} /></li></ul></div>
           <span className={styles.connector} aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" /></svg></span>
           <div className={styles.core}><BrainCircuit aria-hidden="true" /><h2 className={`${styles.wordmark} type-h1`}><strong>QEV</strong></h2><span>{copy.flow.core}</span><div className={styles.decisions}>{copy.flow.decisions.map((text, i) => <div key={text}>{i === 0 ? <ShieldCheck aria-hidden="true" /> : <GitBranch aria-hidden="true" />}<span>{text}</span></div>)}</div></div>
           <span className={styles.connector} aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" /></svg></span>
@@ -58,8 +61,8 @@ export default function QevPage() {
     <section className={styles.band}><div className={pageContentWidthClassName}>
       <h2 className="m-0 type-h1 text-fg">{copy.uses.title}</h2>
       <div className={styles.useGrid}>
-        <article className={styles.useCard}><h2 className={`${styles.useHeading} type-h2`}><ShieldCheck aria-hidden="true" />{copy.useCases.dlp.title}</h2><p>{copy.useCases.dlp.description}</p><UseCaseDiagram kind="dlp" /></article>
-        <article className={styles.useCard}><h2 className={`${styles.useHeading} type-h2`}><GitBranch aria-hidden="true" />{copy.useCases.router.title}</h2><p>{copy.useCases.router.description}</p><UseCaseDiagram kind="router" /></article>
+        <article className={styles.useCard}><h2 className={`${styles.useHeading} type-h2`}><ShieldCheck aria-hidden="true" />{copy.useCases.dlp.title}</h2><p>{copy.useCases.dlp.description}</p><UseCaseDiagram kind="dlp" locale={locale} /></article>
+        <article className={styles.useCard}><h2 className={`${styles.useHeading} type-h2`}><GitBranch aria-hidden="true" />{copy.useCases.router.title}</h2><p>{copy.useCases.router.description}</p><UseCaseDiagram kind="router" locale={locale} /></article>
       </div>
     </div></section>
 
@@ -85,6 +88,6 @@ export default function QevPage() {
         <Button arrow={false} className="self-start shrink-0 md:self-center" href={copy.explore.modelHref} target="_blank" rel="noreferrer noopener" size="default" style="full" variant="secondary">{copy.explore.modelLabel}</Button>
       </div>
     </section>
-    <Cta locale="ko" title={copy.cta.title} description={copy.cta.description} actionLabel={copy.cta.action} actionHref={getLocalePath("ko", "/contact-us")} compactHeading hideEyebrow secondaryActionLabel="" />
+    <Cta locale={locale} title={copy.cta.title} description={copy.cta.description} actionLabel={copy.cta.action} actionHref={getContactHref(locale)} compactHeading hideEyebrow secondaryActionLabel="" />
   </div>;
 }

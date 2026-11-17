@@ -30,7 +30,7 @@ function fillRequiredFields(copy = contactCopy) {
     }
   }
   const firstProductCheckbox = document.querySelector(`[name="product:${copy.productOptions[0]}"]`) as HTMLInputElement | null;
-  if (firstProductCheckbox && !firstProductCheckbox.checked) {
+  if (firstProductCheckbox && !document.querySelector('input[name^="product:"]:checked')) {
     fireEvent.click(firstProductCheckbox);
   }
   const messageField = document.querySelector('[name="message"]') as HTMLTextAreaElement | null;
@@ -74,10 +74,10 @@ describe("ContactForm", () => {
     vi.clearAllMocks();
   });
 
-  it.each(["en", "ko", "ja"] as const)("%s 폼 첫 번째에 Aru를 표시하며 일반 방문 시 선택하지 않는다", (locale) => {
+  it.each(["en", "ko", "ja"] as const)("%s 폼 첫 번째에 모의 해킹 서비스를 표시하며 일반 방문 시 선택하지 않는다", (locale) => {
     render(<ContactForm {...getContactPageCopy(locale)} locale={locale} />);
     const products = screen.getAllByRole("checkbox");
-    expect(products[0]).toHaveAccessibleName(aruProductLabels[locale]);
+    expect(products[0]).toHaveAccessibleName(contactProductLabels.penetrationtest[locale]);
     expect(products[0]).not.toBeChecked();
   });
 
@@ -85,7 +85,7 @@ describe("ContactForm", () => {
     const copy = getContactPageCopy(locale);
     render(<ContactForm {...copy} initialProducts={[aruProductLabels[locale]]} locale={locale} />);
     const aru = screen.getByRole("checkbox", { name: aruProductLabels[locale] });
-    const lingo = screen.getByRole("checkbox", { name: copy.productOptions[1] });
+    const lingo = screen.getByRole("checkbox", { name: /Lingo/ });
     expect(aru).toBeChecked();
     expect(lingo).not.toBeChecked();
     fireEvent.click(lingo);

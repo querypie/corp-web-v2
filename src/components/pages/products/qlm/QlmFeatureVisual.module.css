@@ -1,0 +1,74 @@
+.visual { min-width: 0; }
+.visual strong { font-weight: 500; }
+.tile, .pill, .rack, .server, .answer, .prompt, .router, .workload, .tuningPanel, .tunedModel { background: var(--color-bg); border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent); }
+.tile, .pill, .rack, .server, .answer, .prompt, .router, .workload, .tuningPanel, .tunedModel, .secureModel { box-shadow: 0 2px 3px rgb(0 0 0 / .025), 0 10px 22px -14px rgb(0 0 0 / .2); }
+:global(:root[data-theme="dark"]) :is(.tile, .pill, .rack, .server, .answer, .prompt, .router, .workload, .tuningPanel, .tunedModel, .secureModel) { box-shadow: 0 2px 5px rgb(0 0 0 / .2), 0 10px 20px -7px rgb(0 0 0 / .45); }
+.heading { display: flex; align-items: center; gap: 7px; font-size: 10px; }
+.heading svg { width: 15px; height: 15px; color: var(--color-brand); }
+.dot { width: 5px; height: 5px; border-radius: 50%; background: var(--color-success); flex: none; }
+.selection { width: 100%; max-width: 280px; }
+.candidates { display: grid; grid-template-columns: repeat(3, 1fr); justify-items: center; }
+.tile { position: relative; width: 48px; height: 48px; display: grid; place-items: center; border-radius: 14px; color: var(--color-mute); }
+.tile.selected { color: var(--color-brand); border-color: color-mix(in srgb, var(--color-brand) 45%, var(--color-border)); }
+.tile .check { position: absolute; right: -5px; top: -5px; width: 15px; height: 15px; padding: 2px; border-radius: 50%; background: var(--color-success); color: var(--color-bg); }
+.selection .wires { display: block; width: 100%; height: 42px; }
+.wires path, .allocationWires path { stroke: color-mix(in srgb, var(--color-brand) 50%, var(--color-border)); stroke-width: 1.2; }
+.selectionResult { display: flex; align-items: center; justify-content: center; gap: 14px; }
+.selectionResult > span { font-size: 10px; color: var(--color-mute); }
+.pill { display: flex; align-items: center; gap: 10px; padding: 13px 18px; border-radius: 14px; }
+.pill > svg:first-child { color: var(--color-brand); }
+.pill > svg:last-child { width: 13px; color: var(--color-success); }
+.infrastructure { width: 85%; max-width: 250px; }
+.rack { padding: 12px; border-radius: 15px; }
+.rack .heading { justify-content: space-between; margin: 0 4px 10px; }
+.server { display: flex; align-items: center; gap: 10px; border-radius: 6px; padding: 9px 10px; margin-top: 5px; font-size: 9px; }
+.server > svg { width: 17px; height: 17px; color: var(--color-brand); }
+.vents { display: flex; gap: 3px; margin-left: auto; }
+.vents i { width: 2px; height: 14px; background: var(--color-border); }
+.rackBase { display: flex; justify-content: space-around; padding-top: 8px; }
+.rackBase span { width: 28px; height: 3px; border-radius: 2px; background: var(--color-border); }
+.boundary { width: 94%; max-width: 280px; padding: 16px; border: 1px dashed color-mix(in srgb, var(--color-brand) 45%, var(--color-border)); border-radius: 20px; background: color-mix(in srgb, var(--color-brand) 3%, transparent); }
+.boundary .heading > svg:last-child { margin-left: auto; width: 12px; }
+.secureFlow { display: flex; align-items: center; justify-content: center; gap: 17px; margin: 20px 0; }
+.secureFlow > div { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.secureFlow > svg { width: 18px; color: var(--color-mute); }
+.secureFlow .secureModel { padding: 12px 18px; background: var(--color-bg); border: 1px solid var(--color-border); border-radius: 12px; }
+.secureModel svg { color: var(--color-brand); }
+.policy { display: flex; align-items: center; justify-content: center; gap: 6px; color: var(--color-mute); font-size: 9px; }
+.policy svg { color: var(--color-success); width: 12px; height: 12px; }
+.response { width: 95%; max-width: 280px; }
+.prompt { display: flex; align-items: center; gap: 8px; padding: 10px 12px; border-radius: 12px; margin: 0 0 10px 28px; font-size: 10px; }
+.prompt svg { width: 14px; height: 14px; color: var(--color-mute); }
+.answer { margin-right: 20px; border-radius: 12px; padding: 14px; }
+.responseStatus { margin-left: auto; color: var(--color-brand); font-size: 9px; }
+.textLines { display: grid; gap: 7px; margin-top: 14px; }
+.textLines > i, .textLines > div > i { display: block; height: 4px; background: var(--color-border); border-radius: 3px; }
+.textLines > i:nth-child(2) { width: 85%; }
+.textLines > div { display: flex; align-items: center; gap: 4px; }
+.textLines > div > i { width: 55%; }
+.textLines > div > span { width: 2px; height: 10px; background: var(--color-brand); }
+.tokens { display: flex; gap: 5px; margin: 10px 0 0 14px; }
+.tokens span { padding: 3px 7px; font-size: 9px; border-radius: 4px; color: var(--color-brand); background: color-mix(in srgb, var(--color-brand) 8%, transparent); }
+.allocation { display: flex; align-items: center; width: 100%; max-width: 290px; }
+.router { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 9px; border-radius: 13px; font-size: 9px; white-space: nowrap; }
+.router svg { color: var(--color-brand); }
+.allocation .allocationWires { width: 26px; height: 112px; flex: 0 0 26px; }
+.workloads { display: grid; gap: 14px; flex: 1; min-width: 0; }
+.workload { padding: 11px 10px; border-radius: 12px; }
+.workloadTitle { display: flex; align-items: center; gap: 6px; font-size: 10px; }
+.workloadTitle svg { width: 14px; height: 14px; color: var(--color-brand); }
+.resource { display: flex; justify-content: space-between; gap: 8px; margin-top: 8px; font-size: 9px; color: var(--color-mute); }
+.resource > div { display: flex; gap: 3px; align-items: center; }
+.resource i { width: 6px; height: 9px; border-radius: 2px; background: var(--color-border); }
+.resource .used { background: var(--color-brand); }
+.tuning { width: 90%; max-width: 270px; }
+.tuningPanel { padding: 15px 16px 26px; border-radius: 14px; }
+.setting { display: grid; grid-template-columns: 60px 1fr; align-items: center; gap: 12px; margin-top: 14px; color: var(--color-mute); font-size: 9px; }
+.setting > div { position: relative; height: 3px; background: var(--color-border); border-radius: 2px; }
+.setting i { position: absolute; top: -4px; width: 10px; height: 10px; border: 2px solid var(--color-brand); background: var(--color-bg); border-radius: 50%; }
+.tunedModel { position: relative; margin: -12px 10px 0 40px; display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 12px; }
+.tunedModel > svg { color: var(--color-brand); }
+.tunedModel > div { display: flex; flex-direction: column; gap: 2px; }
+.tunedModel span { font-size: 9px; color: var(--color-mute); }
+.tunedModel > svg:last-child { width: 13px; color: var(--color-success); margin-left: auto; }
+@container (max-width: 260px) { .router { padding-inline: 6px; font-size: 8px; } .allocation .allocationWires { flex-basis: 18px; } .workload { padding-inline: 8px; } .resource { gap: 4px; } .resource i { width: 5px; } .vents { gap: 2px; } }

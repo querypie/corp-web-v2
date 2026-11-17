@@ -1,0 +1,25 @@
+export const qlmKoCopy = {
+  visuals: { selection: "선정 · 최적화", infrastructure: "QueryPie GPU 인프라", boundary: "QueryPie 관리 환경", data: "기업 데이터", policy: "보안 정책 적용", request: "업무 내용을 요약해 줘", response: "응답 생성 중", tokens: ["요청 분석", "추론", "스트리밍"], workloads: [{ title: "일상 업무", model: "경량 모델" }, { title: "복합 업무", model: "QLM" }], tuning: "기업별 응답 설정", settings: ["업무 맥락", "전문 용어", "응답 기준"], customized: "기업별 최적화" },
+  metadata: { title: "QueryPie LLM (QLM) | QueryPie AI", description: "QueryPie가 직접 선택하고 운영하는 기업용 LLM 서비스, QueryPie LLM (QLM). 자체 GPU 인프라와 업무별 모델 라우팅으로 성능, 데이터 보호, 비용 효율을 함께 설계합니다." },
+  hero: { title: "기업의 AI를 위한", accent: "QueryPie LLM", description: "QLM은 QueryPie가 직접 선택하고 운영하는 LLM 서비스입니다. 검증된 오픈소스 기반 모델에 자체 GPU 인프라와 기업별 최적화를 더해, 복잡한 업무도 안심하고 맡길 수 있는 AI를 제공합니다." },
+  features: { title: "QLM이 만드는 차이", description: "모델 선정부터 인프라 운영, 업무별 최적화까지. QueryPie가 기업의 AI 활용에 필요한 성능과 운영 환경을 함께 제공합니다.", cards: [
+    { title: "QueryPie가 선택하고 운영하는 모델", body: "검증된 오픈소스 기반 모델을 직접 선정하고 최적화합니다. 기반 모델이 발전해도 고객은 QLM이라는 하나의 브랜드로 서비스를 이용합니다.", labels: ["모델 선정", "최적화", "QLM"] },
+    { title: "자체 GPU 인프라", body: "QueryPie가 운영하는 GPU 인프라에서 모델을 실행합니다. 추론 환경과 운영 자원을 직접 관리해 기업의 AI 워크로드에 대응합니다.", labels: ["GPU", "GPU", "GPU"] },
+    { title: "데이터 경로에 대한 통제", body: "외부 모델 제공사의 API에 의존하는 경로를 줄입니다. QueryPie가 관리하는 추론 환경과 기업의 보안 정책을 연결해 데이터 유출 우려를 낮춥니다.", labels: ["기업 데이터", "관리 환경", "응답"] },
+    { title: "빠른 응답을 위한 최적화", body: "모델 특성과 추론 환경을 함께 조정합니다. 반복적인 업무부터 복잡한 요청까지, 응답 품질과 속도의 균형을 맞춥니다.", labels: ["요청", "추론", "응답"] },
+    { title: "업무에 맞춘 비용 효율", body: "모든 요청에 고성능 모델을 사용할 필요는 없습니다. AI Gateway와 함께 작업 난이도에 맞는 모델을 선택해 품질과 비용을 함께 관리합니다.", labels: ["일상 업무", "복합 업무", "자원 배분"] },
+    { title: "엔터프라이즈 전용 튜닝", body: "기업의 용어, 업무 맥락, 응답 기준에 맞춘 최적화를 지원합니다. 조직마다 다른 요구를 반영해 실제 업무에 활용할 수 있는 AI를 설계합니다.", labels: ["업무 맥락", "응답 기준", "최적화"] },
+  ] },
+  performance: { title: "합리적인 비용, 뛰어난 성능", description: "QLM은 기업의 AI 운영 비용을 최적화하면서도 복잡한 업무에 필요한 성능을 제공합니다. 추론부터 코드 작업, 업무 자동화까지, 기반 모델의 공개 벤치마크로 그 역량을 확인하세요.", tableLabel: "모델 벤치마크", headers: ["벤치마크", "평가 영역", "측정 지표", "결과"], metrics: [
+    { value: "90.9", title: "전문 지식과 추론", benchmark: "GPQA Diamond", metric: "Pass@1", detail: "과학 분야의 고난도 질문에 대한 추론 평가" },
+    { value: "65.6", title: "수학 추론", benchmark: "MathArena Apex", metric: "Pass@1" },
+    { value: "90.6", title: "터미널 기반 작업 수행", benchmark: "Terminal-Bench 2.1", metric: "Pass@1", detail: "터미널 환경에서 도구를 활용한 작업 평가" },
+    { value: "30.0", title: "터미널 기반 작업 수행", benchmark: "Terminal-Bench 3.0", metric: "Pass@1" },
+    { value: "31.2", title: "터미널 기반 작업 수행", benchmark: "Terminal-Bench 4.0", metric: "Pass@1" },
+    { value: "74.2", title: "소프트웨어 문제 해결", benchmark: "DeepSWE v1.1", metric: "Resolved", detail: "실제 코드 저장소의 문제 해결 평가" },
+    { value: "64.0", title: "저장소 단위 개발", benchmark: "NL2Repo-Bench", metric: "Score" },
+    { value: "54.8", title: "업무 자동화", benchmark: "AutomationBench", metric: "Pass@1" },
+  ], note: "출처: 기반 모델의 공개 모델 카드(2026. 11. 17. 확인). QLM 실측값이 아니며, 운영 환경에 따라 달라질 수 있습니다." },
+  routing: { title: "간단한 업무는 가볍게,\n복잡한 업무는 QLM으로", description: "AI Gateway가 요청을 연결하고, QEV가 요청의 목적과 특성을 판단합니다. 일상적인 작업은 경량 모델로, 복잡한 분석과 추론은 QLM으로 연결하는 운영 전략을 구성할 수 있습니다.", input: "사용자 · AI 에이전트", application: "애플리케이션", user: "사용자", gateway: "AI Gateway", decision: "QEV · 요청 특성 판단", light: "경량 모델", lightTasks: "요약 · 분류 · 간단한 질의", qlm: "QLM", qlmTasks: "복합 추론 · 분석 · 코드 작업", note: "업무별 라우팅 구성 예시입니다. 모델 선택 기준과 대상은 기업의 운영 정책에 따라 설정합니다." },
+  cta: { title: "우리 기업의 AI,\nQLM으로 시작하세요", description: "업무에 필요한 성능부터 데이터 처리 환경과 비용까지. 기업에 맞는 QLM 도입 방안을 함께 설계합니다.", action: "도입 문의" },
+};

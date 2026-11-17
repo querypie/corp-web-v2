@@ -63,8 +63,8 @@ describe("Gnb", () => {
     ]);
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
     expect(screen.getAllByRole("link", { name: "ペネトレーションテスト" })).toHaveLength(2);
-    expect(screen.getAllByRole("link", { name: "意思決定AIモデル｜QEV" })).toHaveLength(2);
-    expect(screen.getAllByRole("link", { name: "企業向けLLM｜QLM" })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "意思決定AIモデル (QEV)" })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "QueryPie LLM (QLM)" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "専任エンジニア｜FDEサービス" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "AI Gateway (AIG)" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "オンプレミスAI｜Local LLM" })).toHaveLength(2);

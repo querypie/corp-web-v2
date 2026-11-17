@@ -41,13 +41,13 @@ describe("ContactUsRoute", () => {
 });
 
 describe("문의 route의 Aru 선택", () => {
-  it.each(["en", "ko", "ja"] as const)("%s 에서 Aru를 첫 번째에 표시하고 CTA 유입 시 기본 선택한다", async (locale) => {
+  it.each(["en", "ko", "ja"] as const)("%s 에서 모의 해킹을 첫 번째에 표시하고 Aru CTA 유입 시 Aru를 기본 선택한다", async (locale) => {
     const page = await ContactUsRoute({
       params: Promise.resolve({ locale }),
       searchParams: Promise.resolve({ utm_source: "aru", utm_medium: "web", utm_campaign: "footer_contact" }),
     });
     expect(page.props.initialProducts).toEqual([aruProductLabels[locale]]);
-    expect(page.props.productOptions[0]).toBe(aruProductLabels[locale]);
+    expect(page.props.productOptions[0]).toBe(contactProductLabels.penetrationtest[locale]);
   });
 
   describe.each(["en", "ko", "ja"])("%s 기본 선택", (locale) => {
