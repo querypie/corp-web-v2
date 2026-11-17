@@ -101,6 +101,7 @@ export default function ContactForm(props: ContactFormProps) {
   const [status, setStatus] = useState<SubmitStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [turnstileToken, setTurnstileToken] = useState<string>();
+  const [turnstileAttempt, setTurnstileAttempt] = useState(0);
   const turnstileConfigured = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
   const canSubmit = useMemo(
@@ -176,6 +177,11 @@ export default function ContactForm(props: ContactFormProps) {
     } catch {
       setStatus("error");
       setErrorMessage(getContactErrorMessage(locale, "network", copy.errorGeneral));
+    } finally {
+      if (turnstileConfigured) {
+        setTurnstileToken(undefined);
+        setTurnstileAttempt((attempt) => attempt + 1);
+      }
     }
   }
 
@@ -280,7 +286,7 @@ export default function ContactForm(props: ContactFormProps) {
         privacyText={copy.privacyText}
       />
 
-      <TurnstileWidget onToken={setTurnstileToken} />
+      <TurnstileWidget key={turnstileAttempt} onToken={setTurnstileToken} />
 
       {errorMessage ? (
         <p className="m-0 type-body-sm text-[var(--color-destructive)]">{errorMessage}</p>
