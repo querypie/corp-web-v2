@@ -124,6 +124,8 @@ DeskPie API는 기존 lead field name과 호환되는 payload를 받는다. Slac
 | `NEXT_PUBLIC_TURNSTILE_SITE_KEY` | 선택 | Contact Us 브라우저 위젯 비활성화 |
 | `TURNSTILE_SECRET_KEY` | 선택 | 두 Turnstile 키가 모두 없으면 검증 비활성화; 한쪽만 있으면 설정 오류로 거부 |
 
+Cloudflare 계정 정보와 Turnstile 환경변수는 [1Password 항목](https://start.1password.com/open/i?a=W2QE5422ENEWNN6FOEG6XAW6VY&v=6pb3pjtcelwh4r7xjhvm23qcwa&i=h3hwo4craznlpablziv4myfstq&h=chequer.1password.com)을 참고한다. 실제 키 값은 저장소에 기록하지 않는다. Vercel의 Production과 Preview에는 해당 환경의 Site Key와 Secret Key를 함께 설정하고, 변경 후 새로 배포한다. Site Key는 빌드 시 클라이언트에 반영된다.
+
 Slack 알림 채널 선택은 Community License, 콘텐츠 게이팅 폼과 같은 resolver를 공유한다.
 
 ---
