@@ -4,10 +4,12 @@ import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassNa
 import type { AiProductId } from "@/copy/aiProducts.ja";
 import { aiProductsCopy, aiProductAction } from "@/copy/aiProducts";
 import AiGatewayPage from "./ai-gateway/AiGatewayPage";
+import QevPage from "./qev/QevPage";
 import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
 
 export default function AiProductPage({ id, locale }: { id: AiProductId; locale: Locale }) {
   if (id === "ai-gateway") return <AiGatewayPage locale={locale} />;
+  if (id === "qev" && locale === "ko") return <QevPage />;
   const copy = aiProductsCopy[locale][id];
   const contactHref = getLocalePath(locale, "/contact-us");
 

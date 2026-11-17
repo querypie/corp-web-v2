@@ -19,8 +19,8 @@ export const offerings = {
   "as400-cobol": { path: "/as400-cobol", locales: ["ja"], legacyPaths: ["/solutions/as400-cobol"] },
   dlp: { path: "/dlp", locales: ["en", "ko"], legacyPaths: ["/platforms/dlp"] },
   "dlp-demo": { path: "/dlp/demo", locales: ["en", "ko"], legacyPaths: ["/platforms/dlp/demo"], sitemap: false },
-  qlm: { path: "/qlm", legacyPaths: ["/solutions/qlm"], sitemap: false },
-  qev: { path: "/qev", legacyPaths: ["/solutions/qev"], sitemap: false },
+  qlm: { path: "/qlm", legacyPaths: ["/solutions/qlm"] },
+  qev: { path: "/qev", legacyPaths: ["/solutions/qev"] },
 } as const satisfies Record<string, OfferingEntry>;
 
 export type OfferingId = keyof typeof offerings;

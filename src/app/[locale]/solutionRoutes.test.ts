@@ -61,6 +61,7 @@ describe("solutions route modules", () => {
       expect(element.props.locale).toBe(locale);
       const metadata = await routeModules[id].generateMetadata(props);
       expect(metadata.alternates?.canonical).toBe(`https://www.querypie.com/${locale}/${id}`);
+      if (id === "qev" || id === "qlm") expect(metadata.robots).not.toMatchObject({ index: false });
     }
   });
   it("AI 솔루션은 지원하지 않는 언어에 404를 반환한다", async () => {

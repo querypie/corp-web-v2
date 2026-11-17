@@ -1,4 +1,5 @@
 import type { Locale } from "@/constants/i18n";
+import { qevKoCopy } from "./qev";
 import { aiProductsJapaneseCopy, type AiProductCopy, type AiProductId } from "./aiProducts.ja";
 
 const en: Record<AiProductId, AiProductCopy> = {
@@ -99,12 +100,18 @@ const placeholderCopy = {
   ja: { description: "サービスの紹介内容を準備しています。", visual: "ビジュアル準備中", sections: ["サービス紹介", "活用シーン"], cards: ["コンテンツ 01", "コンテンツ 02", "コンテンツ 03"], pending: "コンテンツ準備中", cta: "CTAコピー準備中" },
 };
 
+const modelMenuLabels: Record<Locale, Record<"qlm" | "qev", string>> = {
+  en: { qev: "Decision AI Model | QEV", qlm: "Enterprise LLM | QLM" },
+  ko: { qev: "의사결정 AI 모델 | QEV", qlm: "기업용 LLM | QLM" },
+  ja: { qev: "意思決定AIモデル｜QEV", qlm: "企業向けLLM｜QLM" },
+};
+
 function modelPlaceholder(locale: Locale, id: "qlm" | "qev"): AiProductCopy {
   const text = placeholderCopy[locale];
   const name = id === "qlm" ? "QueryPie LLM" : "QueryPie Decision Model";
   const label = id.toUpperCase();
   return {
-    menuLabel: `${name} | ${label}`,
+    menuLabel: modelMenuLabels[locale][id],
     metadata: { title: `${label} | ${name} | QueryPie AI`, description: text.description },
     hero: { eyebrow: name, title: label, accent: name, description: [text.description], imageLabel: text.visual },
     sections: text.sections.map(title => ({ title, description: [text.description], cards: text.cards.map(title => ({ title, body: text.pending })) })),
@@ -114,7 +121,7 @@ function modelPlaceholder(locale: Locale, id: "qlm" | "qev"): AiProductCopy {
 
 export const aiProductsCopy: Record<Locale, Record<AiProductId, AiProductCopy>> = {
   en: { "ai-gateway": en["ai-gateway"], qlm: modelPlaceholder("en", "qlm"), qev: modelPlaceholder("en", "qev") },
-  ko: { "ai-gateway": ko["ai-gateway"], qlm: modelPlaceholder("ko", "qlm"), qev: modelPlaceholder("ko", "qev") },
+  ko: { "ai-gateway": ko["ai-gateway"], qlm: modelPlaceholder("ko", "qlm"), qev: { ...modelPlaceholder("ko", "qev"), metadata: qevKoCopy.metadata, hero: { ...ko.qev.hero, title: qevKoCopy.hero.title, accent: qevKoCopy.hero.accent, accentAfter: "", description: [qevKoCopy.hero.description] } } },
   ja: { "ai-gateway": aiProductsJapaneseCopy["ai-gateway"], qlm: modelPlaceholder("ja", "qlm"), qev: modelPlaceholder("ja", "qev") },
 };
 export const aiProductAction = { en: "Talk to us", ko: "도입 문의", ja: "相談する" };

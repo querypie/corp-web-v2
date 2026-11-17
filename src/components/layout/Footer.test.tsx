@@ -16,7 +16,7 @@ describe("Footer", () => {
     ]);
     const solutions = screen.getByText(solutionsLabel).parentElement!;
     expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      `/${locale}/penetration-testing`, `/${locale}/fde-services`, `/${locale}/dlp`,
+      `/${locale}/penetration-testing`, `/${locale}/qev`, `/${locale}/qlm`, `/${locale}/fde-services`, `/${locale}/dlp`,
     ]);
   });
 
@@ -61,8 +61,8 @@ describe("Footer", () => {
 
     expect(screen.queryByText("価格・プラン")).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "ペネトレーションテスト" })).toHaveAttribute("href", "/ja/penetration-testing");
-    expect(screen.queryByRole("link", { name: "QueryPie LLM｜QLM" })).not.toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: "QueryPie Decision Model｜QEV" })).not.toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "意思決定AIモデル｜QEV" })).toHaveAttribute("href", "/ja/qev");
+    expect(screen.getByRole("link", { name: "企業向けLLM｜QLM" })).toHaveAttribute("href", "/ja/qlm");
     expect(screen.getByRole("link", { name: "社内業務効率化｜AI Crew" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "自社サービスAI化｜AI Dashi" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "AI Gateway (AIG)" })).toHaveAttribute("href", "/ja/ai-gateway");

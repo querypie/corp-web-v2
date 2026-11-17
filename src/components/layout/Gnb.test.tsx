@@ -23,7 +23,7 @@ describe("Gnb", () => {
     ]);
     const solutions = within(nav).getByRole("button", { name: solutionsLabel }).parentElement!;
     expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      `/${locale}/penetration-testing`, `/${locale}/fde-services`, `/${locale}/dlp`,
+      `/${locale}/penetration-testing`, `/${locale}/qev`, `/${locale}/qlm`, `/${locale}/fde-services`, `/${locale}/dlp`,
     ]);
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
     for (const item of [...getPlatformSubItems(locale), ...getSolutionsSubItems(locale, { includeDlpPlatform: true })]) {
@@ -59,12 +59,12 @@ describe("Gnb", () => {
     ]);
     const solutions = within(nav).getByRole("button", { name: "ソリューション" }).parentElement!;
     expect(within(solutions).getAllByRole("link").map((link) => link.getAttribute("href"))).toEqual([
-      "/ja/penetration-testing", "/ja/local-llm", "/ja/fde-services", "/ja/as400-cobol", "/ja/ai-crew", "/ja/ai-dashi",
+      "/ja/penetration-testing", "/ja/qev", "/ja/qlm", "/ja/local-llm", "/ja/fde-services", "/ja/as400-cobol", "/ja/ai-crew", "/ja/ai-dashi",
     ]);
     fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
     expect(screen.getAllByRole("link", { name: "ペネトレーションテスト" })).toHaveLength(2);
-    expect(screen.queryByRole("link", { name: "QueryPie LLM｜QLM" })).not.toBeInTheDocument();
-    expect(screen.queryByRole("link", { name: "QueryPie Decision Model｜QEV" })).not.toBeInTheDocument();
+    expect(screen.getAllByRole("link", { name: "意思決定AIモデル｜QEV" })).toHaveLength(2);
+    expect(screen.getAllByRole("link", { name: "企業向けLLM｜QLM" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "専任エンジニア｜FDEサービス" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "AI Gateway (AIG)" })).toHaveLength(2);
     expect(screen.getAllByRole("link", { name: "オンプレミスAI｜Local LLM" })).toHaveLength(2);
