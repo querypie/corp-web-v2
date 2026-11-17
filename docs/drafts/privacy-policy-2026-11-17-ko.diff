@@ -1,0 +1,32 @@
+diff --git a/src/content/legal/privacy-policy/ko/2026-10-31.md b/src/content/legal/privacy-policy/ko/2026-11-17.md
+index 88489307..ad0aeea2 100644
+--- a/src/content/legal/privacy-policy/ko/2026-10-31.md
++++ b/src/content/legal/privacy-policy/ko/2026-11-17.md
+@@ -3 +3 @@
+-- 이 개인정보처리방침은 2026년 10월 31일부터 적용됩니다.
++- 이 개인정보처리방침은 2026년 11월 17일부터 적용됩니다.
+@@ -23 +23 @@
+-      <td>- QueryPie 의 홈페이지에 게시된 컨텐츠를 이용하기 위한 이용자 식별 및 서비스 부정이용 방지 목적으로 개인정보를 처리합니다.<br>- QueryPie 기업 견적 문의, 서비스 문의 등 전반 문의를 받기 위한 목적으로 개인정보를 처리 합니다.</td>
++      <td>- QueryPie 의 홈페이지에 게시된 컨텐츠를 이용하기 위한 이용자 식별 및 서비스 부정이용 방지 목적으로 개인정보를 처리합니다.<br>- QueryPie 기업 견적 문의, 서비스 문의 등 전반 문의를 받기 위한 목적으로 개인정보를 처리합니다.<br>- 문의 기능을 안전하게 운영하기 위해 자동화된 악성 요청과 부정 이용을 탐지·방지하고 보안 확인을 수행합니다.</td>
+@@ -125,0 +126 @@
++| Cloudflare, Inc. | Contact Us 보안 확인 및 자동화된 악성 요청 탐지·차단 |
+@@ -179 +180 @@
+-     - 홈페이지의 Contact Us 페이지에서 개인정보를 직접 입력하고 수집에 대한 동의를 하는 경우
++     - 홈페이지의 Contact Us 페이지에서 문의 양식을 작성하고 제출하는 경우
+@@ -205,2 +206,2 @@
+-      <td>이름(First Name)<br>성(Last Name)<br>회사이메일(Business Emai)<br>휴대폰번호(Phone Number)<br>직급(Job Title)<br>회사명(Company Name)</td>
+-      <td>1) Contact Us</td>
++      <td>이름(First Name)<br>성(Last Name)<br>회사 이메일(Business Email)<br>회사명(Company Name)<br>부서·직책(Department / Title)<br>문의 종류<br>도입 예정 시기<br>관심 제품·서비스<br>문의 내용</td>
++      <td>1) 문의 접수 및 응대, 제품·서비스 안내</td>
+@@ -210,0 +212,2 @@
++   - 선택 항목: 전화번호, 마케팅 정보 수신 동의 여부. 마케팅 정보 수신에 동의한 경우 뉴스, 이벤트 및 제품 정보를 안내합니다.
++
+@@ -401,0 +405,2 @@
++회사는 Contact Us 페이지의 보안 확인과 자동화된 악성 요청 방지를 위해 Cloudflare, Inc.의 Turnstile을 사용합니다. 이 과정에서 IP 주소, 브라우저 및 연결 관련 정보(User-Agent, TLS 지문 등), 사이트 키와 접속 출처 등의 정보가 Cloudflare에 의해 처리될 수 있습니다. Cloudflare는 해당 정보를 회사 웹사이트의 봇 탐지·차단 서비스 제공과 Turnstile의 봇 탐지 기능 개선을 위해 처리한다고 안내하고 있습니다. 자세한 내용은 [Cloudflare Turnstile 개인정보 부속서](https://www.cloudflare.com/turnstile-privacy-policy/)를 확인해 주세요.
++
+@@ -486,0 +492,2 @@
++회사는 Contact Us 보안 확인을 위해 Cloudflare, Inc.의 Turnstile을 이용합니다. 문의 페이지를 불러오고 보안 확인을 수행하는 과정에서 IP 주소, 브라우저 User-Agent, TLS 지문, 사이트 키와 접속 출처 등의 정보가 네트워크를 통해 Cloudflare에 전송·처리될 수 있습니다. Cloudflare는 회사의 웹사이트 보호를 위한 서비스를 제공하며, 별도로 Turnstile의 봇 탐지 기능 개선을 위한 처리도 수행합니다. Cloudflare 개인정보 관련 연락처는 dpo@cloudflare.com입니다. 해당 정보는 처리 목적과 적용되는 계약 및 법령에 필요한 기간 동안 처리됩니다. 이전 국가 및 구체적인 보유 기간은 확인 후 안내합니다.
++
+@@ -679 +686 @@
+-- 이 개인정보처리방침은 2026년 10월 31일부터 적용됩니다.
++- 이 개인정보처리방침은 2026년 11월 17일부터 적용됩니다.
