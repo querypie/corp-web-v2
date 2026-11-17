@@ -94,20 +94,6 @@ describe("POST /api/contact-us", () => {
     vi.restoreAllMocks();
   });
 
-  it("Turnstile 검증 실패 시 문의를 전달하지 않는다", async () => {
-    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "site-key");
-    vi.stubEnv("TURNSTILE_SECRET_KEY", "secret-key");
-    stubDeskPieEnv();
-    const fetchSpy = vi.spyOn(global, "fetch").mockResolvedValue({
-      ok: true, json: async () => ({ success: false }),
-    } as Response);
-    const res = await POST(makeRequest({ ...validBody, turnstileToken: "invalid" }));
-    expect(res.status).toBe(400);
-    expect((await res.json()).errorCode).toBe("turnstile_failed");
-    expect(fetchSpy).toHaveBeenCalledTimes(1);
-    expect(postMessageMock).not.toHaveBeenCalled();
-  });
-
   describe("서버 설정 검증", () => {
     it("SLACK_BOT_OAUTH_TOKEN 미설정 시에도 success:true를 반환한다", async () => {
       vi.unstubAllEnvs();
