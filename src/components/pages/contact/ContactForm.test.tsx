@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { aruProductLabels, contactInquiryLabels, contactProductLabels, getContactPageCopy } from "@/copy/contact";
 import ContactForm from "./ContactForm";
@@ -72,6 +72,32 @@ describe("ContactForm", () => {
     vi.unstubAllGlobals();
     vi.restoreAllMocks();
     vi.clearAllMocks();
+    vi.unstubAllEnvs();
+  });
+
+  it("제출 실패 후 새 보안 토큰으로 다시 제출한다", async () => {
+    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "test-site-key");
+    let issueToken: ((token: string) => void) | undefined;
+    const renderWidget = vi.fn((_container, options) => {
+      issueToken = options.callback;
+      return "widget";
+    });
+    vi.stubGlobal("turnstile", { render: renderWidget, remove: vi.fn() });
+    const fetchMock = vi.mocked(fetch)
+      .mockResolvedValueOnce({ ok: false, json: async () => ({ success: false, errorCode: "turnstile_failed" }) } as Response)
+      .mockResolvedValueOnce({ ok: true, json: async () => ({ success: true }) } as Response);
+    render(<ContactForm {...contactCopy} locale="en" />);
+    fillRequiredFields();
+    await waitFor(() => expect(issueToken).toBeDefined());
+    fireEvent.click(screen.getByRole("button"));
+    expect(fetchMock).not.toHaveBeenCalled();
+    act(() => issueToken!("first-token"));
+    fireEvent.click(screen.getByRole("button"));
+    await waitFor(() => expect(renderWidget).toHaveBeenCalledTimes(2));
+    act(() => issueToken!("second-token"));
+    fireEvent.click(screen.getByRole("button"));
+    await waitFor(() => expect(fetchMock).toHaveBeenCalledTimes(2));
+    expect(JSON.parse(fetchMock.mock.calls[1][1]?.body as string).turnstileToken).toBe("second-token");
   });
 
   it.each(["en", "ko", "ja"] as const)("%s 폼 첫 번째에 Aru를 표시하며 일반 방문 시 선택하지 않는다", (locale) => {
