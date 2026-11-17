@@ -1,0 +1,866 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SQLと理由に加えて実行計画があれば、対象テーブルやインデックスも見ながら検討できる。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SQL Requestへ計画を添付し、作成者の資料を承認者も同じ申請で確認できるか試した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "実行計画を添付できるよう準備する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者の全体設定で "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Use \"Attach Explain Results\" feature in SQL Request"
+        },
+        {
+          "type": "text",
+          "text": "を有効にした。申請ごとのAttach Explain Resultsは初期Offで、必要時に作成者が有効にする。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-plan/01.webp",
+        "alt": "画面1. SQL Requestの計画添付を利用可能にした。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. SQL Requestの計画添付を利用可能にした。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SQL Explain Labを作り、開発者に "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Lab - Explain Review"
+        },
+        {
+          "type": "text",
+          "text": " を付与し、SelectとExplainを選んだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-plan/02.webp",
+        "alt": "画面2. 今回のSelectとExplainを用意した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. 今回のSelectとExplainを用意した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "既存のOrders Lab - SQL Change Approvalで、開発者が申請・実行、担当者が承認する。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "注文1件を取得するSQLの計画を見る"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "新SQL Requestで接続・route_lab・Textを選び、27002の状態と金額のSELECTを入力した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Attach Explain Resultsを有効にし、Tableを選んでExplainを押した。"
+        },
+        {
+          "type": "text",
+          "text": " 結果にはSQLとMySQLの実行計画が並んだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-plan/03.webp",
+        "alt": "画面3. 申請画面で計画を確認し、添付を選んだ。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. 申請画面で計画を確認し、添付を選んだ。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "orders、type const、key PRIMARY、rows 1だった。rowsはMySQLの予測で、番号条件の主キー利用を申請段階で確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "計画を添付し、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "注文参照SQLの計画確認 — 第37回"
+        },
+        {
+          "type": "text",
+          "text": "というタイトルで提出した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "承認者も同じ計画を確認する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Demo Approverで申請を開き、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Explain Results"
+        },
+        {
+          "type": "text",
+          "text": " タブを選ぶと同じSELECTとorders、PRIMARY、予測1行が表示された。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-plan/04.webp",
+        "alt": "画面4. 承認者もSQLと計画を同じ画面で確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. 承認者もSQLと計画を同じ画面で確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "「番号条件、PRIMARYを使う計画、予測1行を確認。架空注文参照を承認します」と実確認内容を残して承認した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-plan/05.webp",
+        "alt": "画面5. 計画の確認内容をコメントに残した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. 計画の確認内容をコメントに残した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "資料を別送・別画面検索せず、SQLと計画が同じ申請にあり照合しやすかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "承認済みSQLを実行する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "開発者が承認済みを開きExecuteを一度押すと、Resultsに "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "1 Rows selected, in 10 ms"
+        },
+        {
+          "type": "text",
+          "text": "と表示された。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-plan/06.webp",
+        "alt": "画面6. 承認SELECT実行後に1行取得と確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. 承認SELECT実行後に1行取得と確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "前のrows 1は予測で、1 Rows selectedは実件数だ。計画確認から承認・実行までつながった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "検討した申請と実行記録を確認する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Query Auditに開発者、SQL Explain Lab、Lab - Explain Review、成功と経路 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "SQL Request"
+        },
+        {
+          "type": "text",
+          "text": "が表示され、route_lab.ordersとSQLは申請どおりだった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-plan/07.webp",
+        "alt": "画面7. 承認SELECTはSQL Request経由の成功記録となった。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. 承認SELECTはSQL Request経由の成功記録となった。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Workflow Logsには提出・承認・実行とコメントが残り、計画を見てどう承認し、その後動いたかを追えた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-execution-plan/08.webp",
+        "alt": "画面8. 同じ申請の提出・承認・実行をまとめて確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面8. 同じ申請の提出・承認・実行をまとめて確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "終了後に権限を回収し全体設定をOffへ戻しても、完了申請のExplain Resultsは残っていた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SQL・理由・計画を一つの申請で検討し意見を残せるため、承認資料を別々にやり取りする手間が減った。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie Community 11.6.7とMySQL 8.0.42で実習ユーザー・注文を使った。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "参考： "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/workflow/requesting-sql/using-execution-plan-explain-feature",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "実行計画（Explain）の利用"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/general/company-management/general",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "General設定"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/workflow/requesting-sql",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "SQL Request"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

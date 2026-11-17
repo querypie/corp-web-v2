@@ -19,7 +19,11 @@ type AuthoredLocaleRecord = {
 
 type AuthoredContentMeta = {
   authorName: string;
+  authorNameByLocale?: Record<Locale, string>;
+  authorIntroduction?: Record<Locale, string>;
+  authorProfileImageSrc?: string;
   authorRole: string;
+  authorRoleByLocale?: Record<Locale, string>;
   categorySlug: ManagedContentCategorySlug;
   contentType: "content" | "outlink";
   dateIso: string;
@@ -36,6 +40,8 @@ type AuthoredContentMeta = {
   hideHeroImage: boolean;
   id: string;
   imageSrc: string;
+  labNoteIntroduction?: Record<Locale, string>;
+  labNoteTopics?: string[];
   relatedIds: string[];
   section: ManagedContentSection;
   sortOrder: number;
@@ -50,7 +56,11 @@ type AuthoredContentMeta = {
 type SaveAuthoredContentInput = Pick<
   ManagedContentEntry,
   | "authorName"
+  | "authorNameByLocale"
+  | "authorIntroduction"
+  | "authorProfileImageSrc"
   | "authorRole"
+  | "authorRoleByLocale"
   | "bodyHtml"
   | "bodyRichText"
   | "categorySlug"
@@ -69,6 +79,8 @@ type SaveAuthoredContentInput = Pick<
   | "hideHeroImage"
   | "id"
   | "imageSrc"
+  | "labNoteIntroduction"
+  | "labNoteTopics"
   | "relatedIds"
   | "section"
   | "sortOrder"
@@ -461,7 +473,11 @@ async function createManagedContentEntry(
 
   return {
     authorName: meta.authorName,
+    authorNameByLocale: meta.authorNameByLocale ? normalizeLocalizedRecord(meta.authorNameByLocale) : undefined,
+    authorIntroduction: meta.authorIntroduction ? normalizeLocalizedRecord(meta.authorIntroduction) : undefined,
+    authorProfileImageSrc: meta.authorProfileImageSrc ?? "",
     authorRole: meta.authorRole,
+    authorRoleByLocale: meta.authorRoleByLocale ? normalizeLocalizedRecord(meta.authorRoleByLocale) : undefined,
     bodyHtml: bodies.bodyHtml,
     bodyRichText: bodies.bodyRichText,
     categorySlug: meta.categorySlug,
@@ -480,6 +496,8 @@ async function createManagedContentEntry(
     hideHeroImage: meta.hideHeroImage,
     id: meta.id,
     imageSrc: meta.imageSrc,
+    labNoteIntroduction: meta.labNoteIntroduction ? normalizeLocalizedRecord(meta.labNoteIntroduction) : undefined,
+    labNoteTopics: meta.labNoteTopics,
     relatedIds: meta.relatedIds ?? [],
     section: meta.section,
     sortOrder: meta.sortOrder,
@@ -701,7 +719,11 @@ export async function saveAuthoredContent(
   const normalizedDateIso = normalizeDateIso(input.dateIso);
   const meta: AuthoredContentMeta = {
     authorName: input.authorName,
+    authorNameByLocale: input.authorNameByLocale,
+    authorIntroduction: input.authorIntroduction,
+    authorProfileImageSrc: input.authorProfileImageSrc,
     authorRole: input.authorRole,
+    authorRoleByLocale: input.authorRoleByLocale,
     categorySlug: input.categorySlug,
     contentType: input.contentType,
     dateIso: normalizedDateIso,
@@ -718,6 +740,8 @@ export async function saveAuthoredContent(
     hideHeroImage: input.hideHeroImage,
     id: input.id,
     imageSrc: input.imageSrc,
+    labNoteIntroduction: input.labNoteIntroduction,
+    labNoteTopics: input.labNoteTopics,
     relatedIds: input.relatedIds,
     section: input.section,
     sortOrder: input.sortOrder,

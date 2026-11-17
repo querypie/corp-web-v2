@@ -1,5 +1,5 @@
 {
-  "authorName": "David",
+  "authorName": "David Choi",
   "authorRole": "Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000146/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000146/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "David Choi",
+    "ko": "David Choi",
+    "ja": "David Choi"
+  },
+  "authorRoleByLocale": {
+    "en": "Software Engineer",
+    "ko": "소프트웨어 엔지니어",
+    "ja": "Software Engineer"
+  },
+  "authorIntroduction": {
+    "en": "David is a developer driven by curiosity about how software works. At QueryPie, he played a key role in developing Kubernetes Access Control (KAC) and Web Access Control (WAC). He draws on technical expertise and a love of Golang to solve complex problems and advance security solutions.",
+    "ko": "소프트웨어의 복잡한 작동 원리를 탐구하는 개발자입니다. QueryPie에서 Kubernetes 접근 제어(KAC)와 웹 접근 제어(WAC) 솔루션 개발에 중요한 역할을 했습니다. 기술 전문성과 Golang에 대한 관심을 바탕으로 복잡한 문제를 해결하고 보안 솔루션을 발전시킵니다.",
+    "ja": "Davidは、ソフトウェアの複雑な仕組みを理解することに深い好奇心を持つ情熱的な開発者です。QueryPieでは、Kubernetesアクセス制御（KAC）とWebアクセス制御（WAC）ソリューションの開発において重要な役割を果たしました。技術的な専門知識とGolangへの愛情をもって、複雑な課題に取り組み、革新的なセキュリティソリューションに貢献しています。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/david.png"
 }

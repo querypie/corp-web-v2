@@ -1,6 +1,6 @@
 {
-  "authorName": "Logan",
-  "authorRole": "",
+  "authorName": "Logan Chae",
+  "authorRole": "Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
   "dateIso": "2024-11-22",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000151/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000151/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Logan Chae",
+    "ko": "Logan Chae",
+    "ja": "Logan Chae"
+  },
+  "authorRoleByLocale": {
+    "en": "Software Engineer",
+    "ko": "소프트웨어 엔지니어",
+    "ja": "Software Engineer"
+  },
+  "authorIntroduction": {
+    "en": "Logan is a software developer with more than 20 years of experience in backend systems, cloud infrastructure, and large-scale applications. He works with Java, TypeScript, Python, and C#, and has deep expertise in Spring Boot and ASP.NET. He has led projects including AI services and blockchain platforms, delivering high-performance solutions.",
+    "ko": "백엔드 시스템, 클라우드 인프라와 대규모 애플리케이션 분야에서 20년 넘게 일한 소프트웨어 개발자입니다. Java, TypeScript, Python, C#과 Spring Boot, ASP.NET에 전문성이 있습니다. AI 서비스와 블록체인 플랫폼을 포함한 프로젝트를 이끌며 고성능 솔루션을 제공했습니다.",
+    "ja": "Loganは、20年以上の経験を持つ熟練のソフトウェア開発者で、バックエンドシステム、クラウドインフラ、および大規模なアプリケーションに専門的な知識を持っています。Java、TypeScript、Python、C#を使いこなし、Spring BootやASP.NETといったフレームワークに深い専門知識を持っています。AIサービスやブロックチェーンプラットフォームを含むプロジェクトを成功裏にリードし、革新を促進する高性能なソリューションを提供した経験があります。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/logan.png"
 }

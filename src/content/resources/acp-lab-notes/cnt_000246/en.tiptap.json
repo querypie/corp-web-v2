@@ -1,0 +1,930 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In Part 6, I changed necessary data through approved SQL while retaining read access. This time, I focused on what information appears in query results."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "What if opening the database to check shipping status also reveals customers’ phone numbers and emails? Full contact details are not always needed to verify order processing, yet order queries cannot simply be blocked."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I therefore tried QueryPie ACP data masking, aiming to "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "keep order IDs and shipping status visible while masking only phone numbers and emails"
+        },
+        {
+          "type": "text",
+          "text": ". I also configured exceptions for staff who need original contact details to reach customers."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Order Queries Also Revealed Contact Details"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I added fictional contact details to the three lab orders, using Demo Customer A, B, and C and example.test emails. All names and contacts here are test data."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The environment was unchanged: QueryPie ACP Community 11.6.7 and MySQL on the Mac. The developer connected through QueryPie in DBeaver with read-only access."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I joined orders and customer contacts to query order ID, shipping status, customer name, phone, and email together. Before masking, all contact details appeared in full."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/01.webp",
+        "alt": "Screen 1. Three orders and fictional contact details queried in DBeaver through QueryPie.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 1. Three orders and fictional contact details queried in DBeaver through QueryPie."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Read-only access prevents changes, but which information appears in results needs separate controls. I would configure that with a masking policy."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Masking Only Phone Numbers and Emails"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Under Databases → Policies → Data Masking, I created Orders Lab - Contact Masking for Orders Control Lab."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In Add Rule List, I selected customer_contacts in orders_control. The first rule targeted phone using the built-in phone masking pattern."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/02.webp",
+        "alt": "Screen 2. Applying the built-in phone pattern to the phone column.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 2. Applying the built-in phone pattern to the phone column."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I added email similarly with pattern email1. Initially, Allowed Users was empty so I could first verify masking on both columns."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/03.webp",
+        "alt": "Screen 3. Applying email1 to the email column.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 3. Applying email1 to the email column."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "After saving, the two rules appeared side by side in one policy. Database, column, and pattern were visible together. With clear requirements like these, I could target only phone and email."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/04.webp",
+        "alt": "Screen 4. Separate masking rules for phone and email in the contact table.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 4. Separate masking rules for phone and email in the contact table."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Running the Same SQL Again in DBeaver"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I returned to DBeaver and reran the same query without changing the connection or SQL."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Phone numbers now appeared as 010-****-1001. Emails were partly replaced with asterisks too. Order IDs, shipping status, and customer names were unchanged, and the same three orders were returned."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/05.webp",
+        "alt": "Screen 5. The same SQL now returns masked contacts while order IDs and shipping status stay visible.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 5. The same SQL now returns masked contacts while order IDs and shipping status stay visible."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "This was particularly convenient: the developer kept using DBeaver to check order progress. No masking functions were added to SQL. The administrator’s QueryPie policy changed the returned results."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Necessary order information remained available while unnecessary exposure of full contact details was reduced."
+        },
+        {
+          "type": "text",
+          "text": " For adoption evaluation, applying personal-data protection while retaining existing database tools stood out."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "A Record of Whose Query Was Masked"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I opened the administrator’s Logs tab after checking the result. The recent query was recorded as Data Masked."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The log showed Demo Developer, Orders Control Lab, customer_contacts, and phone and email. It recorded three processed rows per column and the execution time."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/06.webp",
+        "alt": "Screen 6. Masking logs identify the user, columns, processed row counts, and time.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 6. Masking logs identify the user, columns, processed row counts, and time."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Beyond configuring a policy, I could verify it had applied to a real user query. This seems useful for reviewing deployment status and finding relevant history."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Allowing Original Values for Staff Who Contact Customers"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Not every task can use masked contacts. Staff handling delivery issues need the full phone number and email."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I used Demo Approver as the contact-handling staff account, granted it read-only access to Orders Control Lab, and added it to Allowed Users in both rules."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/07.webp",
+        "alt": "Screen 7. Adding only the staff member who needs original values to Allowed Users, in both phone and email rules.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 7. Adding only the staff member who needs original values to Allowed Users, in both phone and email rules."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I signed in with that account and ran the same SQL in the web SQL Editor. Phone and email appeared in full, without granting database-administrator or modification privileges."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/data-masking/08.webp",
+        "alt": "Screen 8. The allowed staff account sees original contact details for the same three orders in the web SQL Editor.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 8. The allowed staff account sees original contact details for the same three orders in the web SQL Editor."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "After adding the exception, I queried again as the developer in DBeaver. Contacts were still masked. Allowing one user did not remove masking for everyone else."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I separately checked the source database: phone and email values remained as inserted. Masking affected the user-facing results without replacing stored contacts with asterisks."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "What Stood Out When Evaluating Adoption"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The exercise made access more granular. A developer checking shipping status and staff contacting customers need different information from the same orders."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Column masking plus user exceptions made that distinction straightforward to express as policy. The developer kept querying in DBeaver; contact-handling staff saw allowed original values. Administrators could manage rules and history in one place."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "After exploring access permissions, blocked SQL, and approvals, I have now examined the information actually visible after connecting. "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Allowing database use while limiting information exposure to what the task needs"
+        },
+        {
+          "type": "text",
+          "text": " was the most memorable part of this masking exercise."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Reference: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/en/administrator-manual/databases/policies/data-masking",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "QueryPie documentation — Data Masking"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,816 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DB接続が許可されても、すべてのデータが必要とは限らない。注文状態を確認する開発者に精算金額や内部メモまで必要ではないからだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "その区別をQueryPie ACPで試した。同じDBに注文・精算テーブルを置き、開発者は注文を引き続き参照できるが精算にはアクセスできない設定にした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "普段の参照を維持しながら、保護するテーブルだけを制限できるだろうか。"
+        },
+        {
+          "type": "text",
+          "text": " DBeaverで適用前後に同じSQLを実行した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "まず精算情報を参照できる状態を確認する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie ACP Community 11.6.7のOrders Control Labで、ordersの隣にsettlement_detailsを作った。架空の精算番号、注文番号、金額、内部メモを3件投入した。実際の顧客・会社の精算資料は使っていない。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Demo DeveloperがQueryPie経由のDBeaverで接続した。登録済みDBアカウントには両テーブルの参照権限を用意した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "設定前は9001〜9003の3件と金額・メモが返った。これを適用後との比較基準にした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/table-access-control/01.webp",
+        "alt": "画面1. 適用前は開発者が精算金額と内部メモを参照できた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. 適用前は開発者が精算金額と内部メモを参照できた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "精算テーブルを保護するポリシーを作る"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Databases → Policies → Data AccessのCreate PolicyでOrders Lab - Settlement Accessを作り、Orders Control Labを指定した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/table-access-control/02.webp",
+        "alt": "画面2. 実習接続を対象にData Accessポリシーを作成した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. 実習接続を対象にData Accessポリシーを作成した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Add Rule Listでorders_controlとsettlement_detailsを選択した。テーブル全体を保護するためColumn Nameは指定せず、Allowed Usersにも例外は追加しなかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/table-access-control/03.webp",
+        "alt": "画面3. 同じDB内で保護する精算テーブルを選んだ。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. 同じDB内で保護する精算テーブルを選んだ。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "保存後の一覧にDBとテーブルが表示された。ordersは対象に含めていない。何を制限するかが一覧で分かり、設定を確認しやすかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/table-access-control/04.webp",
+        "alt": "画面4. orders_controlのsettlement_details用規則が登録された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. orders_controlのsettlement_details用規則が登録された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "同じSQLでも精算参照が遮断された"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DBeaverで同じ精算SQLを実行すると、データではなくアクセス権の確認を求めるメッセージが出た。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "「You don't have permission to access the table 'orders_control.settlement_details'」と対象も表示された。適用前に見えた精算情報は取得できなくなった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/table-access-control/05.webp",
+        "alt": "画面5. 同じ精算SQLが遮断され、メッセージで対象テーブルを確認できた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. 同じ精算SQLが遮断され、メッセージで対象テーブルを確認できた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DBeaverの接続情報もDB側SELECTも変えていない。追加したData Access規則がQueryPie経由の参照に適用された。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "接続権限があっても業務に不要なテーブルまでは読めないよう範囲を絞れた。接続許可後の権限設計を具体的に確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "注文参照はそのまま続けられた"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "遮断確認後、同じDBeaver接続でordersの番号と状態を参照すると、4001・4003はPENDING、4002はDELIVEREDと正常に返った。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/table-access-control/06.webp",
+        "alt": "画面6. 精算を制限しても注文3件は正常に参照できた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. 精算を制限しても注文3件は正常に参照できた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ここが今回いちばんよかった点だ。"
+        },
+        {
+          "type": "text",
+          "text": " 開発者は注文状態の確認を続けながら、精算だけを別に保護できた。利用者はDBeaverを維持し、管理者はQueryPieで保護対象を選ぶ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "部門間で同じDBを使う場面が浮かんだ。接続許可に加えて見られるテーブルを決めれば、業務別のデータ範囲を細かく管理できそうだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "遮断された参照も記録される"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "ポリシーのLogsにはAccess Deniedがあり、Demo Developer、settlement_details、実行時刻が表示された。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/table-access-control/07.webp",
+        "alt": "画面7. 精算参照の遮断がユーザーと時刻付きで記録された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. 精算参照の遮断がユーザーと時刻付きで記録された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Query Detailsを開くと接続、テーブル、ユーザーに加えてDBeaverの実行SQLもあり、Rowsは0だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/table-access-control/08.webp",
+        "alt": "画面8. 詳細で制限テーブルと実際のSQLを併せて確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面8. 詳細で制限テーブルと実際のSQLを併せて確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "「なぜ参照できないのか」という問い合わせにも根拠を示せる。ユーザーと時刻、SQLの対象テーブルを確認して適用結果を説明できそうだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "接続を許可した後もデータ範囲を定められる"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "小さな設定で違いが明確に出た。適用前は注文も精算も参照でき、適用後は精算だけが遮断され、注文は利用できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "第7回は連絡先の一部を隠し、今回はテーブル自体を制限した。データと業務の性質に合わせて保護方式を変えられる点がよかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "必要な業務を続け、見る必要のないデータを保護する。"
+        },
+        {
+          "type": "text",
+          "text": " Data Accessではその区別を管理者画面で設定し、利用者のツールで結果を見て、履歴まで確認できた。業務に合わせてDB権限を分けたい担当者に紹介したい機能だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

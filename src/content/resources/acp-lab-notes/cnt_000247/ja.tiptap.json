@@ -1,0 +1,816 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "第7回では顧客の電話とメールをマスキングした。開発者には伏せた連絡先を表示し、原文が必要な担当者だけを例外にした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "次は配送問い合わせの後で「4002番は誰が参照しましたか」と確認された場面を考えた。管理者はどこで何を探せばよいのだろう。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie ACPの監査ログを調べた。開発者はDBeaverで配送待ち一覧を、顧客担当者はWeb SQL Editorで特定注文の連絡先を参照した。その上で、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "異なるツールで行った作業が管理画面にどう残るかを"
+        },
+        {
+          "type": "text",
+          "text": " 確認した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "普段どおりの注文参照から始める"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Orders Control Labと架空の注文・連絡先を使った。QueryPie ACP Community 11.6.7で二人とも読み取り専用だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "開発者としてDBeaverで番号と状態をstatus = 'PENDING'で検索すると、4001と4003が返った。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/01.webp",
+        "alt": "画面1. 開発者がDBeaverで配送待ち2件を参照した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. 開発者がDBeaverで配送待ち2件を参照した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "顧客担当のDemo ApproverはWeb SQL Editorを使い、注文と連絡先をJOINしてWHERE o.order_id = 4002で1件を取得した。第7回の原文確認例外が適用されている。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "開発者も4002の連絡先を参照したが、電話とメールは隠れたままだった。配送待ち一覧、担当者の連絡先参照、開発者のマスキング参照という三つの記録を作った。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "日付とDB接続で記録を探す"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Audit → Databases → Query Auditで当日の記録を選び、Connection NameをOrders Control Labにした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "直前の操作が時刻、成否、ユーザー名・メール、接続名、権限とともに並んだ。二人の記録が同じ一覧に集まり、各画面を行き来せずに済んだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/02.webp",
+        "alt": "画面2. 日付と実習DB接続で絞ったQuery Audit。直前の作業がユーザー別に残った。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. 日付と実習DB接続で絞ったQuery Audit。直前の作業がユーザー別に残った。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "次にNameでDemo Developerを検索した。開発者の記録だけに絞られ、DBeaverの実行時刻から配送待ち参照を見つけられた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "DBeaverのSQLを管理者画面で確認する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "15時48分39秒の記録を開くと、Demo Developer、Success、Read-Only、Executed From: Agentless Proxyと表示された。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/03.webp",
+        "alt": "画面3. 詳細に開発者、成否、参照権限、時刻、Proxy経由の経路が表示された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. 詳細に開発者、成否、参照権限、時刻、Proxy経由の経路が表示された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "下部にはorders_control.ordersへのSQLがあり、WHERE status = 'PENDING'とDBeaverのApplicationNameコメントも残っていた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/04.webp",
+        "alt": "画面4. 監査詳細で配送待ちのSQLと対象テーブルを確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. 監査詳細で配送待ちのSQLと対象テーブルを確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "接続者が分かるだけでなく、もう一歩踏み込めた。 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "どのテーブルをどの条件で参照したか、実行SQLを根拠に説明できる。"
+        },
+        {
+          "type": "text",
+          "text": " 開発者はDBeaverで作業し、管理者はQueryPieで記録を探せた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "4002番を確認した担当者も探す"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "名前をDemo Approverに変え、15時48分31秒の記録を開くと、担当者名、Success、Web Editorと表示された。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/05.webp",
+        "alt": "画面5. 担当者の参照はDemo ApproverとWeb Editorの経路で記録された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. 担当者の参照はDemo ApproverとWeb Editorの経路で記録された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SQLにはordersとcustomer_contactsのJOIN、電話・メール列、WHERE o.order_id = 4002があり、探していた注文の参照だと確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/06.webp",
+        "alt": "画面6. 担当者のSQLで4002番の条件と対象テーブルを確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. 担当者のSQLで4002番の条件と対象テーブルを確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "注目したのはユーザーの区別だ。DB Userはどちらもcontrol_writerでも、QueryPieではDemo DeveloperとDemo Approverに分かれて残る。DBアカウントだけより作業者を把握しやすい。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "これで具体的に回答できた。担当者はWebで4002の連絡先を、開発者はDBeaverで配送待ち一覧と同注文の連絡先を参照した。各時刻とSQLを記録で確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "個人情報の保護はマスキングログで確認する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SQLが見つかったので、開発者の連絡先にマスキングが適用されたかも調べた。Databases → Policies → Data Maskingで既存ポリシーのLogsを開いた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "15時49分1秒の開発者参照がData Maskedで、phoneとemailは各1行だった。DBeaverの結果確認と同じ時間帯だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/07.webp",
+        "alt": "画面7. 開発者が4002を参照した時刻に、電話とメールの適用履歴がそれぞれ残った。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. 開発者が4002を参照した時刻に、電話とメールの適用履歴がそれぞれ残った。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Query Auditで誰が何を実行したかを、マスキングログで列の保護適用を確認した。ユーザーと時刻を照合すると、業務と保護結果を一緒に説明しやすかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "導入後の運用まで考える"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "アクセス制御の検討では遮断や承認に目が向きがちだ。実際に使うと、正常に行われた業務を後で調べられることも運用担当に役立つと感じた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "別途作業報告を集めて照合する必要はなかった。日付・接続を選び、ユーザー検索でSQLを確認した。DBeaverとWebの作業を同じ監査画面で見られた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "必要な人にDB利用を許可し、利用後は記録を根拠に作業内容を説明できること。"
+        },
+        {
+          "type": "text",
+          "text": " 今回はその利点が明確だった。権限やマスキングが監査記録とともに残り、導入後の運用も具体的に想像できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "authorName": "Greg",
+  "authorName": "Greg Yim",
   "authorRole": "Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000142/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000142/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Greg Yim",
+    "ko": "Greg Yim",
+    "ja": "Greg Yim"
+  },
+  "authorRoleByLocale": {
+    "en": "Software Engineer",
+    "ko": "소프트웨어 엔지니어",
+    "ja": "Software Engineer"
+  },
+  "authorIntroduction": {
+    "en": "",
+    "ko": "",
+    "ja": ""
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/greg.png"
 }

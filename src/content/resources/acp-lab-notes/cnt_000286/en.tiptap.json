@@ -1,0 +1,571 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "After verifying SQL blocking, I wondered whether operators could learn about unauthorized attempts without opening audit screens."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I used Alerts for a blocked read-only UPDATE and compared its delivered message with audits, connecting enforcement to operational awareness."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Connecting a Notification Destination"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I created an HTTP channel in General → Channels, pointing to a small local Mac receiver. The inbox shown below is a lab UI displaying what QueryPie actually sent."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Body Template used the default "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "{{message}}"
+        },
+        {
+          "type": "text",
+          "text": ", forwarding the message defined in Alerts through this channel."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/01.webp",
+        "alt": "Screen 1. Local HTTP receiver registered as a channel.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 1. Local HTTP receiver registered as a channel."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Alerting Only on Blocked SQL for This Database"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In Alerts, I selected type "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Prevented SQL Execution"
+        },
+        {
+          "type": "text",
+          "text": " and targeted only the existing lab connection "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "DB Privilege Account Lab"
+        },
+        {
+          "type": "text",
+          "text": " , focusing on unauthorized execution for this database."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Using template variables, I included user, connection, time, SQL type, and statement, giving recipients enough context to understand the event."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/02.webp",
+        "alt": "Screen 2. Prevented SQL Execution on a specific connection as the alert condition.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 2. Prevented SQL Execution on a specific connection as the alert condition."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Reads Succeed, Modifications Are Blocked"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The test user had Read-Only only. SELECT returned order 41001 READY, amount KRW 25,000."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/03.webp",
+        "alt": "Screen 3. Permitted SELECT succeeds.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 3. Permitted SELECT succeeds."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "An UPDATE setting EP47_BLOCKED on the same connection returned "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "No permission to execute UPDATE statement"
+        },
+        {
+          "type": "text",
+          "text": ", as QueryPie denied modification under read-only access."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/04.webp",
+        "alt": "Screen 4. UPDATE outside the granted privilege is blocked.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 4. UPDATE outside the granted privilege is blocked."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "A new read and source-data check both showed READY unchanged. Necessary reads continued, with no unauthorized change."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/05.webp",
+        "alt": "Screen 5. Original data remains after the block.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 5. Original data remains after the block."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "The Exact Blocked SQL Arrives as an Alert"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The inbox held one alert for the UPDATE between two normal reads. It contained Demo Developer, DB Privilege Account Lab, actual database account, and UPDATE text."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/06.webp",
+        "alt": "Screen 6. The real blocked event reaches the lab HTTP inbox.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 6. The real blocked event reaches the lab HTTP inbox."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Execution and receipt both showed 13:28:31. No separate test message was sent; this alert came from the actual SQL block."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "User and statement give much more actionable context than a generic error notification: who tried what and on which connection."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Checking Delivery and Audit Evidence"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Alert Logs showed receiver response ok and delivery status "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Success"
+        },
+        {
+          "type": "text",
+          "text": " at 13:28:31, confirming actual delivery rather than just configuration."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/07.webp",
+        "alt": "Screen 7. Delivery log retains receiver response and Success.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 7. Delivery log retains receiver response and Success."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Query Audit matched the same UPDATE, Demo Developer and Read-Only. Adjacent SELECTs were Success; UPDATE was Failure/Prevented."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/08.webp",
+        "alt": "Screen 8. Same-time audit confirms user and applied privilege.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 8. Same-time audit confirms user and applied privilege."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Details retained the identical statement and missing-UPDATE-permission error, letting me trace the received event directly into audits."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/09.webp",
+        "alt": "Screen 9. Blocked SQL and permission-denial reason.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 9. Blocked SQL and permission-denial reason."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The flow allowed reads, prevented changes, and notified the attempt. Operators can receive relevant incidents without continuously watching every audit record, combining access enforcement with less manual monitoring."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

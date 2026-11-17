@@ -1,0 +1,525 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "When delegating database checks externally, I first consider access scope. Checking status needs no modification privileges, and completed work provides no reason to retain access."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "A test user played the external operator, requested read access, obtained separate approval, checked one order, and lost access after revocation. I tested the whole sequence."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "1. Stating the Database and Task First"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The task was simply checking order 41001’s status and amount, using existing lab data and accounts rather than real customer records."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The operator’s DB Access Request selected only DB Privilege Account Lab, Read-Only, and a reason specifying status checks, no changes, and revocation afterward."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Access expiry was that day. The approver could inspect purpose, scope, and deadline as well as database name."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/external-maintenance-access/01.webp",
+        "alt": "Screen 1. One database, Read-Only, deadline, and reason in the request.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 1. One database, Read-Only, deadline, and reason in the request."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "2. Approval Becomes Usable Read Access"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Using the existing rule, Demo Approver reviewed the request and commented approval for order-status inspection."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Approved status retained separate requester/approver and processing times, providing a basis for later handovers or investigation."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/external-maintenance-access/02.webp",
+        "alt": "Screen 2. Reviewed request marked Approved.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 2. Reviewed request marked Approved."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The operator now saw Read-Only, Select, and expiry at 23:59:59. No duplicate administrator grant was needed."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/external-maintenance-access/03.webp",
+        "alt": "Screen 3. Read-only privileges and expiration reflected in the user view.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 3. Read-only privileges and expiration reflected in the user view."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "3. Reads Work, Changes Do Not"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Connect opened SQL Editor; order 41001 returned READY and KRW 25,000, satisfying the requested check."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/external-maintenance-access/04.webp",
+        "alt": "Screen 4. Approved access reads the order status and amount.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 4. Approved access reads the order status and amount."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "An UPDATE on the same order was denied for missing UPDATE permission. A source-data check confirmed unchanged status and amount."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "‘Please only inspect’ became an actual enforced scope without also granting write access."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/external-maintenance-access/05.webp",
+        "alt": "Screen 5. UPDATE beyond Read-Only is denied on the same connection.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 5. UPDATE beyond Read-Only is denied on the same connection."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "4. Revoking Access as Soon as Work Ends"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I revoked only this task’s granted access, leaving the user’s unrelated privileges intact."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The refreshed user list no longer showed the database. The already-open editor’s same SELECT also reported no query privilege for the connection."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I revoked immediately instead of waiting for scheduled expiry, useful when maintenance finishes early."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/external-maintenance-access/06.webp",
+        "alt": "Screen 6. Revocation blocks reads even in the open SQL editor.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 6. Revocation blocks reads even in the open SQL editor."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "5. Evidence from Request to Revocation"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Access Control Logs showed a grant at 13:41:48 and revocation at 13:44:24, distinguishing request-based grant from administrator revocation."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/external-maintenance-access/07.webp",
+        "alt": "Screen 7. Approved read grant and post-work revocation history.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 7. Approved read grant and post-work revocation history."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Query Audit showed successful reads and the blocked UPDATE, with database account, table, SQL, and reason. It traced actual activity, not just granted access."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/external-maintenance-access/08.webp",
+        "alt": "Screen 8. Successful read and denied UPDATE statement/reason in Query Audit.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 8. Successful read and denied UPDATE statement/reason in Query Audit."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "External maintenance became one flow: request purpose/scope, approve, perform permitted reads, revoke, and retain approver and SQL evidence."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "What appealed most was enabling work with clear boundaries: allow necessary checks, prevent unauthorized changes, and clean up finished access, verified in one inspection."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

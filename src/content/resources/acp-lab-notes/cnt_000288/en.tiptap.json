@@ -1,0 +1,578 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "After changing a value in a production database, saying ‘I changed it’ is often not enough. The reason for the change, who reviewed it, and which values actually changed all help establish what happened."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In earlier posts, I tried SQL approval, DML Snapshot, and audit log export separately. This time I combined them into a single order correction, following the same order from the change justification through approval, execution, before-and-after verification, and downloading the audit file."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "1. Prepare an order whose status needs correcting"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I created a new test order, 49001, with status PENDING and an amount of KRW 26,700. The scenario was that delivery had been confirmed but the order status had not been updated. I left the other existing test orders untouched."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I kept the operator’s direct connection permission at Read-Only. The plan was to check the current status in SQL Editor and obtain approval for the actual UPDATE through a separate SQL Request."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/01.webp",
+        "alt": "Screen 1. The newly created order 49001 had status PENDING before the change.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 1. The newly created order 49001 had status PENDING before the change."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "2. Submit the reason and SQL for approval together"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I titled the request ‘Correct order 49001 to delivered.’ In the reason, I specified that only the status of this order, whose delivery had been confirmed, would change; its amount and all other orders would remain unchanged."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The SQL reflected the same scope. Its WHERE clause would change the status to DELIVERED only when the order number was 49001 and the current status was PENDING. The approver could review both the description and the SQL that would actually run."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/02.webp",
+        "alt": "Screen 2. The conditions identified the order and its current status, and the same request recorded why the correction was needed.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 2. The conditions identified the order and its current status, and the same request recorded why the correction was needed."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I opened the request as the designated approver, Demo Approver, and checked its target and conditions. After leaving a comment confirming that the scope was limited to correcting one order without changing its amount or other orders, I approved it. The request changed to Approved."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/03.webp",
+        "alt": "Screen 3. A separate reviewer checked and approved the requested SQL.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 3. A separate reviewer checked and approved the requested SQL."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Back in the operator account’s execution list, I opened the approved request and clicked Execute. The result was ‘1 Rows updated.’ One order changed at 13:56:27. I also checked the source database: its status was now DELIVERED, while its amount and the other orders were unchanged."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/04.webp",
+        "alt": "Screen 4. The approved SQL updated one row, with the requester, approver, and executor shown alongside the result.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 4. The approved SQL updated one row, with the requester, approver, and executor shown alongside the result."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "What I found convenient was that I did not have to broaden the operator’s everyday connection privileges to allow changes. Direct access remained read-only, while the reviewed change SQL could run through the approval process."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "3. Find the original value immediately"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DML Snapshot was enabled for this connection. When I opened DML Snapshots in the admin audit screen, the UPDATE I had just run appeared as a new record. It showed 13:56:27, Orders Control Lab, and one changed row."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Clicking Before in the details showed order 49001 with status PENDING. Clicking After showed the same order with status DELIVERED. I could check both the SQL that ran and how it changed the status in one screen."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/05.webp",
+        "alt": "Screen 5. Before retained order 49001’s original status, PENDING.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 5. Before retained order 49001’s original status, PENDING."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/06.webp",
+        "alt": "Screen 6. After showed the same order’s updated status, DELIVERED.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 6. After showed the same order’s updated status, DELIVERED."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "If someone later asks what state this order was originally in, there is no need to rely solely on the operator’s memory. Being able to compare the actual status values, as in this exercise, felt particularly useful for operations work."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "4. Verify in the audit trail that the operation was approved"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I looked up the same operation in Query Audit. Its record number was 512 and the result was Success. The user, Demo Developer, the UPDATE operation, and the execution time matched the DML Snapshot."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In particular, Executed From showed SQL Request. The record distinguished this approved change from direct access, which still had Read-Only permission. It showed not only who executed the SQL but also the process used to execute it."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/07.webp",
+        "alt": "Screen 7. Query Audit recorded the successful execution and that it ran through SQL Request.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 7. Query Audit recorded the successful execution and that it ran through SQL Request."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "5. Export the records for the same operation"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Finally, I generated audit evidence in Audit Log Export. I selected Query Audit as the log type and CSV as the file format, set the date range to the day of the exercise, and filtered by user and database connection."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The preview returned two records: the SELECT used to inspect the order before the change and the approved UPDATE. The sequence of checking and correcting one order was recorded in execution-time order."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/08.webp",
+        "alt": "Screen 8. Filtering by the exercise date, user, and database isolated the two read and update records.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 8. Filtering by the exercise date, user, and database isolated the two read and update records."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Once the job changed to Completed, I downloaded and extracted the file. The CSV contained the user, original SQL, execution time, result, changed row count, and execution source."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The UPDATE row’s Workflow Request UUID also matched the ID of the request I originally submitted. Audit number 512, the 13:56:27 execution time, and the one-row update result all matched what I had seen on screen. This provided evidence linking the request and the actual execution to the same operation."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/09.webp",
+        "alt": "Screen 9. Audit file generation completed, and the downloaded CSV contained the same change record.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 9. Audit file generation completed, and the downloaded CSV contained the same change record."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Although I changed only one order status, the resulting records were quite detailed. The request retained the reason and approver, the execution result retained the time and row count, and DML Snapshot retained the original and updated states. The audit file also included an ID pointing to the same approval request."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "For someone evaluating the product, this continuity is welcome. When the approval process and actual work records are scattered, explaining a change requires reconciling the evidence each time. Here I could establish how one order changed within QueryPie and then save the required execution records to a file."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

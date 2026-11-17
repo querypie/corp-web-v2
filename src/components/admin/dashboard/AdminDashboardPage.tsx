@@ -275,7 +275,7 @@ function buildDashboardData(items: ManagedContentEntry[], locale: AdminLocale) {
     {
       label: t("Locale gaps"),
       value: String(missingLocaleCount),
-      description: t("게시되었지만 EN/KO/JA 중 일부 locale이 빠진 콘텐츠"),
+      description: t("게시되었지만 KO/JA/EN 중 일부 locale이 빠진 콘텐츠"),
     },
     {
       label: t("Gated content"),

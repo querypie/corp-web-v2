@@ -1,0 +1,779 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "注文確認者には参照だけ、状態変更者には必要な変更権限というようにDBアカウントを分けることがある。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "今回は分けたDBアカウントをQueryPieの権限へ接続した。 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Advanced Privilege"
+        },
+        {
+          "type": "text",
+          "text": "では同じ接続でも権限別アカウントを指定できる。実際に変わるかと監査を確認した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "参照用と作業用を用意する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "実習テーブル用に二つのアカウントを作った。 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ep41_reader"
+        },
+        {
+          "type": "text",
+          "text": "にはSELECTだけ、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ep41_operator"
+        },
+        {
+          "type": "text",
+          "text": "にはSELECT・UPDATEを付与した。41001はREADY、25000.00とした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者画面の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Databases → General → Configurations"
+        },
+        {
+          "type": "text",
+          "text": "でAdvanced Privilege Settingを有効にし、新規の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "DB Privilege Account Lab"
+        },
+        {
+          "type": "text",
+          "text": " 接続のPrivilege Settingを開いた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-account-mapping/01.webp",
+        "alt": "画面1. Advanced Privilege Settingで権限別設定を開始した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. Advanced Privilege Settingで権限別設定を開始した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Read-Onlyはep41_reader、Read/Writeはep41_operator"
+        },
+        {
+          "type": "text",
+          "text": "を指定し、両方のTest Connection成功を確認して保存した。一接続内で区別が明確になった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-account-mapping/02.webp",
+        "alt": "画面2. 二つのQueryPie権限に異なるDBアカウントを接続した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. 二つのQueryPie権限に異なるDBアカウントを接続した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "既存の用途別アカウントを引き継げる。管理者が対応を定め、利用者へ業務に合う権限を与える方式だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "参照権限では参照アカウントが使われる"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "まずRead-Onlyを与えた。利用者側も確認でき、DBパスワードを入力せずConnectで開けた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-account-mapping/03.webp",
+        "alt": "画面3. 利用者に接続とRead-Onlyが表示された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. 利用者に接続とRead-Onlyが表示された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "注文参照とともに "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "CURRENT_USER()"
+        },
+        {
+          "type": "text",
+          "text": "を確認した。MySQLの認証アカウントを示し、結果は "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ep41_reader@%"
+        },
+        {
+          "type": "text",
+          "text": "で、状態と金額も準備どおりだった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-account-mapping/04.webp",
+        "alt": "画面4. Read-Onlyの実DBアカウントはep41_readerだった。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. Read-Onlyの実DBアカウントはep41_readerだった。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "権限名だけでなく実アカウントまで見ると反映が明確だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "作業権限に変えて再接続するとアカウントが変わる"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "切断後、同じ利用者の権限を "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Read/Write"
+        },
+        {
+          "type": "text",
+          "text": "にした。再接続して同SQLを使うとアカウントは "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "ep41_operator@%"
+        },
+        {
+          "type": "text",
+          "text": "へ変わった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-account-mapping/05.webp",
+        "alt": "画面5. Read/Writeで新規接続すると作業用が使われた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. Read/Writeで新規接続すると作業用が使われた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "同じ接続でも付与権限でアカウントが変わり、両方のパスワードを配る必要がない点が便利だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "続いて41001の状態を "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "READYからCHECKEDへ変更"
+        },
+        {
+          "type": "text",
+          "text": "した。1 Rows updatedで、再参照はCHECKED、金額25000.00は不変だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-account-mapping/06.webp",
+        "alt": "画面6. 作業アカウントで1件変更し結果を確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. 作業アカウントで1件変更し結果を確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "利用者と実DBアカウントが一緒に残る"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者画面の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "DB Access History"
+        },
+        {
+          "type": "text",
+          "text": "にはDemo Developer、Read/Write、ep41_operatorがあり、以前の参照はRead-Only・ep41_readerだった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-account-mapping/07.webp",
+        "alt": "画面7. 接続履歴で人・QueryPie権限・DBアカウントを確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. 接続履歴で人・QueryPie権限・DBアカウントを確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Query Audit"
+        },
+        {
+          "type": "text",
+          "text": "ではUPDATE成功、人、時刻、Read/Write、Web Editorを確認した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-account-mapping/08.webp",
+        "alt": "画面8. UPDATE監査に人、権限、成功が残った。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面8. UPDATE監査に人、権限、成功が残った。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "下部にはDB User、テーブル、SQLもあり、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "誰がどの権限・DBアカウントで何のSQLを実行したか"
+        },
+        {
+          "type": "text",
+          "text": " を続けて確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-account-mapping/09.webp",
+        "alt": "画面9. 作業用アカウントと41001の変更SQLを同じ記録で確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面9. 作業用アカウントと41001の変更SQLを同じ記録で確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "従来のアカウント分離を権限管理へつなげる"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "会社のDB運用とQueryPie権限を自然につなげ、参照・作業の分離を保ちながら担当業務へ適用できる点がよかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "利用者は指定接続を使い、管理者は権限とアカウントをまとめる。実利用者と操作が監査へつながり、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "分離の理由が接続・作業履歴にも明確に表れた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie Community 11.6.7とMySQL 8.0.42で実習ユーザー・注文を使用した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "参考： "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/databases/dac-general-configurations",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Databases Configurations"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/databases/connection-management/db-connections",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "DB Connections"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

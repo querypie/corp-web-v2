@@ -57,6 +57,11 @@ describe("PreviewModal", () => {
     expect(screen.getByRole("heading")).toHaveTextContent("日本語タイトル");
   });
 
+  it("세 언어가 모두 있으면 KO, JA, EN 순서로 탭을 표시한다", () => {
+    render(<PreviewModal item={makeItem(["en", "ko", "ja"])} onClose={vi.fn()} />);
+    expect(screen.getAllByRole("button").map((button) => button.textContent)).toEqual(["KO", "JA", "EN", ""]);
+  });
+
   it("선택한 언어가 노출 대상에서 빠지면 남은 노출 언어로 전환한다", () => {
     const onClose = vi.fn();
     const { rerender } = render(

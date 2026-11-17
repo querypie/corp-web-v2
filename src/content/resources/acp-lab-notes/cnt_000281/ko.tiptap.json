@@ -1,0 +1,873 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "운영 DB 작업을 승인할 때 한 사람의 확인만으로 끝내기 어려운 경우가 있다. 개발 담당자가 SQL과 조회 조건을 먼저 살펴보고, 운영 담당자가 대상과 작업 목적을 확인한 뒤 최종 승인하는 식이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에는 그 순서를 QueryPie에 넣어봤다. "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "SQL Request에 승인 단계를 두 개 만들고, 서로 다른 담당자가 차례로 승인한 뒤 실행"
+        },
+        {
+          "type": "text",
+          "text": "했다. 실습에서는 주문 한 건의 상태와 금액을 확인하는 조회 SQL을 사용했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "개발 검토와 운영 승인을 두 단계로 나눴다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "관리자 화면의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "General → Workflow Management → Approval Rules"
+        },
+        {
+          "type": "text",
+          "text": "에서 새 규칙을 만들었다. 이름은 EP42 - Two-Step SQL Approval, 요청 유형은 SQL Request로 정했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "1차 승인자는 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Demo Approver"
+        },
+        {
+          "type": "text",
+          "text": "로 지정했다. 개발 담당자가 SQL을 검토하는 역할이다. Add Step을 눌러 두 번째 단계를 추가하고, 여기에 운영 담당자 역할의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Demo Auditor"
+        },
+        {
+          "type": "text",
+          "text": "를 넣었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/01.webp",
+        "alt": "화면 1. SQL Request 규칙에 1차 승인자를 지정하고 두 번째 단계를 추가했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 1. SQL Request 규칙에 1차 승인자를 지정하고 두 번째 단계를 추가했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "두 단계 모두 관리자가 담당자를 미리 정하는 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Select Assignee(s) / Group(s)"
+        },
+        {
+          "type": "text",
+          "text": "를 사용했다. 최종 실행자는 Demo Developer로 지정하고, Allow Self-Approval은 Off로 뒀다. 요청자가 승인자를 그때그때 고르는 대신 정해 둔 담당자에게 순서대로 검토를 맡길 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/02.webp",
+        "alt": "화면 2. 2차 승인자는 Demo Auditor, 실행 담당자는 Demo Developer로 지정했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 2. 2차 승인자는 Demo Auditor, 실행 담당자는 Demo Developer로 지정했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "요청을 올리기 전에 승인 순서가 보였다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Demo Developer로 SQL Request를 열고 방금 만든 규칙을 선택했다. 화면에 Demo Approver, Demo Auditor, Demo Developer가 승인과 실행 순서에 맞춰 표시됐다. 누가 먼저 확인하고 누가 마지막에 실행하는지 요청할 때부터 알 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "대상 연결은 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Two-Step Approval Lab"
+        },
+        {
+          "type": "text",
+          "text": ", SQL은 실습 주문번호 41001의 상태와 금액을 조회하는 내용으로 작성했다. 요청 사유에도 개발 검토 후 운영 승인을 받는 작업이며, 주문 한 건만 조회한다고 적었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/03.webp",
+        "alt": "화면 3. 요청 화면에 두 승인자와 최종 실행자가 순서대로 표시됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 3. 요청 화면에 두 승인자와 최종 실행자가 순서대로 표시됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SQL, 대상 DB, 요청 사유를 한 요청에 담으니 검토에 필요한 내용을 따로 전달할 일이 줄었다. 이번 요청의 제목은 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "“42편 주문 조회 — 개발 검토 후 운영 승인”"
+        },
+        {
+          "type": "text",
+          "text": "으로 정했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "첫 번째 승인만으로 실행 단계로 넘어가지는 않았다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "먼저 Demo Approver로 로그인해 받은 요청을 열었다. 주문번호 조건과 대상 테이블을 확인하고, 1차 검토 의견을 남겨 승인했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "요청자 화면으로 돌아가 보니 첫 승인자는 완료를 나타내는 초록색으로, 두 번째 승인자는 다음 처리 대상인 노란색으로 표시됐다. 실행 담당자는 아직 대기 상태였다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/04.webp",
+        "alt": "화면 4. 1차 승인 후에는 2차 담당자가 다음 승인자로 표시됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 4. 1차 승인 후에는 2차 담당자가 다음 승인자로 표시됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "목록에서도 차이가 분명했다. "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Approval Status는 In Progress, Execution Status는 Pending"
+        },
+        {
+          "type": "text",
+          "text": "이었다. 실행 담당자의 Executions → To Do 목록에는 아직 이번 요청이 없었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/05.webp",
+        "alt": "화면 5. 첫 승인 후에도 결재는 진행 중이고, 실행은 대기 상태로 남았다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 5. 첫 승인 후에도 결재는 진행 중이고, 실행은 대기 상태로 남았다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이 부분이 마음에 들었다. 승인자 이름을 두 명 적어 두는 데서 끝나는 게 아니라, 첫 검토를 마쳐도 다음 담당자의 승인이 있어야 실행 단계로 이어졌다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "두 번째 승인까지 끝나자 실행할 차례가 됐다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이번에는 Demo Auditor로 같은 요청을 열었다. 대상 연결과 조회 범위, 요청 사유를 확인하고 최종 승인 의견을 남겼다. 두 담당자가 같은 SQL 요청을 각자의 역할에서 검토하는 흐름이었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/06.webp",
+        "alt": "화면 6. 2차 담당자가 검토 의견을 남기고 최종 승인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 6. 2차 담당자가 검토 의견을 남기고 최종 승인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "최종 승인 후 Demo Developer의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Executions → To Do"
+        },
+        {
+          "type": "text",
+          "text": "에 요청이 나타났다. 상세 화면에서는 두 승인자가 모두 초록색으로 바뀌었고, 이번에는 실행 담당자가 노란색으로 표시됐다. 오른쪽 위의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Execute"
+        },
+        {
+          "type": "text",
+          "text": " 버튼도 사용할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/07.webp",
+        "alt": "화면 7. 두 단계 승인이 끝난 뒤 실행 담당자에게 Execute 버튼이 표시됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 7. 두 단계 승인이 끝난 뒤 실행 담당자에게 Execute 버튼이 표시됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Execute를 눌러 승인받은 SQL을 실행했다. 결과 탭에 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "1 Rows selected."
+        },
+        {
+          "type": "text",
+          "text": "가 표시됐고 요청은 Done으로 이동했다. 요청부터 승인, 실행까지 같은 화면에서 이어갈 수 있어서 현재 누구의 차례인지 따라가기 쉬웠다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/08.webp",
+        "alt": "화면 8. 두 승인 단계를 거친 SQL이 실행됐고, 한 행 조회 완료가 기록됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 8. 두 승인 단계를 거친 SQL이 실행됐고, 한 행 조회 완료가 기록됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "승인 두 번과 실제 실행이 각각 기록됐다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "마지막으로 관리자 화면의 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Workflow Logs"
+        },
+        {
+          "type": "text",
+          "text": "에서 이번 요청 제목을 검색했다. 요청, 1차 승인, 2차 승인, SQL 실행까지 네 건이 나왔다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "각 기록의 Remaining Steps도 함께 봤다. 요청 직후에는 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Approval 1"
+        },
+        {
+          "type": "text",
+          "text": ", 첫 승인 후에는 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Approval 2"
+        },
+        {
+          "type": "text",
+          "text": ", 최종 승인 후에는 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Execution"
+        },
+        {
+          "type": "text",
+          "text": ", 실행이 끝난 뒤에는 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Done"
+        },
+        {
+          "type": "text",
+          "text": "으로 남았다. 담당자 이름과 시각도 각각 확인할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/09.webp",
+        "alt": "화면 9. 요청·1차 승인·2차 승인·실행의 담당자와 다음 단계가 감사 기록에 남았다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 9. 요청·1차 승인·2차 승인·실행의 담당자와 다음 단계가 감사 기록에 남았다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Query Audit에서도 같은 SQL이 Demo Developer에 의해 SQL Request에서 실행됐고, 결과가 Success인 것을 확인했다. 결재 기록과 실제 DB 작업 기록을 이어서 살펴볼 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "직접 해보니 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "회사의 검토 순서를 실제 작업 절차로 옮길 수 있다는 점"
+        },
+        {
+          "type": "text",
+          "text": "이 좋았다. 개발 검토와 운영 승인을 나누고, 마지막 승인 뒤 실행 담당자에게 작업을 넘긴다. 각 단계가 어디까지 진행됐는지 보이고 처리 이력도 남으니, 운영 DB 작업을 여러 담당자가 함께 관리할 때 유용하겠다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "실습은 QueryPie Community 11.6.7과 MySQL 8.0.42에서 진행했다. 화면의 담당자와 주문 데이터는 실습용이다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "참고: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/general/workflow-management/approval-rules",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Approval Rules"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/workflow/requesting-sql",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "SQL Request 요청하기"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/audit/general-logs/workflow-logs",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Workflow Logs"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

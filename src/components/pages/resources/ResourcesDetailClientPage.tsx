@@ -8,12 +8,15 @@ import type { Locale } from "@/constants/i18n";
 import { useManagedContents } from "@/features/content/clientStore";
 import type { ContactPageCopy } from "@/copy/contact";
 import useHydrated from "@/hooks/useHydrated";
+import { getLabNote, getLabNoteWriterLabel, sortLabNotes } from "@/features/content/acpLabNotes";
 import { docsCategoryConfigs, getCategoryHref, getCategoryLabel } from "@/features/content/config";
 import {
   formatPublicDate,
   getAdjacentContentLabel,
   getContentDownloadPdfSrc,
   getContentThumbnailSrc,
+  getLocalizedAuthorName,
+  getLocalizedAuthorRole,
   getLocalizedContent,
   getPublicDetailHref,
   getResolvedContentLocale,
@@ -80,9 +83,10 @@ export default function DocsDetailClientPage({
       : localizedBodyHtml)
     : localizedBodyHtml;
 
-  const categoryItems = items.filter(
+  const sameCategoryItems = items.filter(
     (item) => item.categorySlug === currentItem.categorySlug,
   );
+  const categoryItems = currentItem.categorySlug === "acp-lab-notes" ? sortLabNotes(sameCategoryItems) : sameCategoryItems;
   const categoryIndex = categoryItems.findIndex((item) => item.id === resolvedSlug);
 
   const previousItem = categoryIndex > 0 ? categoryItems[categoryIndex - 1] : null;
@@ -120,6 +124,8 @@ export default function DocsDetailClientPage({
   return (
     <DocsDetailPage
       {...fallbackProps}
+      authorProfileImageSrc={currentItem.categorySlug === "white-papers" ? currentItem.authorProfileImageSrc : undefined}
+      labNote={getLabNote(currentItem)}
       bodyHtml={visibleBodyHtml}
       category={getCategoryLabel(docsCategoryConfigs, currentItem.categorySlug, locale)}
       contentOverlay={isGateActive ? (
@@ -160,10 +166,12 @@ export default function DocsDetailClientPage({
       hideHeroImage={currentItem.hideHeroImage}
       heroImageAlt={getLocalizedContent(currentItem.title, contentLocale)}
       heroImageSrc={currentItem.imageSrc}
+      introduction={currentItem.categorySlug === "acp-lab-notes" ? currentItem.labNoteIntroduction?.[locale] : currentItem.categorySlug === "white-papers" ? currentItem.authorIntroduction?.[locale] : undefined}
       locale={locale}
       title={getLocalizedContent(currentItem.title, contentLocale)}
       unlockCookieName={getContentUnlockCookieName(currentItem.id, section)}
-      writer={getWriterLabel(currentItem)}
+      writer={currentItem.categorySlug === "acp-lab-notes" ? getLabNoteWriterLabel(currentItem, locale) : currentItem.categorySlug === "white-papers" || currentItem.categorySlug === "blogs" ? getLocalizedAuthorName(currentItem, locale) : getWriterLabel(currentItem)}
+      writerRole={currentItem.categorySlug === "white-papers" || currentItem.categorySlug === "blogs" ? getLocalizedAuthorRole(currentItem, locale) : undefined}
     />
   );
 }

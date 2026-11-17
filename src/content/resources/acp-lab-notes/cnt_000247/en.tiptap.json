@@ -1,0 +1,816 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In Part 7, I masked customer phone numbers and emails. Developers saw masked contacts, while only staff needing original values received an exception."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Next, I imagined a follow-up question after a delivery inquiry: ‘Who queried order 4002?’ Where should an administrator look, and what should they search for?"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I checked QueryPie ACP audit logs. The developer used DBeaver to list pending orders, while customer-facing staff used the web SQL Editor for a specific order’s contacts. I examined "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "how work performed in different tools appears in the administrator view"
+        },
+        {
+          "type": "text",
+          "text": " in practice."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Starting with Everyday Order Queries"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I reused Orders Control Lab and fictional orders and contacts. Both users had read-only access in QueryPie ACP Community 11.6.7."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "As the developer, I queried order IDs and statuses in DBeaver with status = 'PENDING'. Orders 4001 and 4003 were returned."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/01.webp",
+        "alt": "Screen 1. The developer queries two pending orders in DBeaver.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 1. The developer queries two pending orders in DBeaver."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Demo Approver, acting as customer-facing staff, used the web SQL Editor. A JOIN between orders and contacts with WHERE o.order_id = 4002 returned one order. This account has the original-contact exception from Part 7."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The developer also queried order 4002’s contacts, which remained masked. This created three records: pending-orders lookup, staff contact lookup, and the developer’s masked contact lookup."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Finding Records by Date and Database Connection"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In Audit → Databases → Query Audit, I selected the day’s records and filtered Connection Name to Orders Control Lab."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The recent operations appeared with execution time, outcome, user name and email, connection, and privileges. Both users’ records were in one list, avoiding switching between their screens."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/02.webp",
+        "alt": "Screen 2. Query Audit filtered by date and lab connection, showing recent work by user.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 2. Query Audit filtered by date and lab connection, showing recent work by user."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I then searched Name for Demo Developer. Matching the DBeaver execution time located the pending-orders query among the developer’s records."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Reviewing DBeaver SQL in the Administrator View"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I opened the 15:48:39 record. It showed Demo Developer, Success, Read-Only, and Executed From: Agentless Proxy."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/03.webp",
+        "alt": "Screen 3. Details show the developer, outcome, read privileges, time, and QueryPie proxy route.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 3. Details show the developer, outcome, read privileges, time, and QueryPie proxy route."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Further down was the executed SQL against orders_control.orders, including WHERE status = 'PENDING' and DBeaver’s ApplicationName comment."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/04.webp",
+        "alt": "Screen 4. The audit details contain the pending-orders SQL and target table.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 4. The audit details contain the pending-orders SQL and target table."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "This went beyond simply knowing who connected. "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "The executed SQL explains which table was queried and under what conditions."
+        },
+        {
+          "type": "text",
+          "text": " The developer worked in familiar DBeaver; the administrator found the record in QueryPie."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Finding the Staff Member Who Checked Order 4002"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I changed the name filter to Demo Approver and opened the 15:48:31 record. It showed the staff account, Success, and Web Editor."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/05.webp",
+        "alt": "Screen 5. The staff query is attributed to Demo Approver and the Web Editor route.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 5. The staff query is attributed to Demo Approver and the Web Editor route."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The SQL included the JOIN of orders and customer_contacts, selected phone and email columns, and WHERE o.order_id = 4002. This confirmed it was the query for the order in question."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/06.webp",
+        "alt": "Screen 6. The staff member’s SQL identifies order 4002 and its source tables.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 6. The staff member’s SQL identifies order 4002 and its source tables."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "User attribution stood out. Both connections used DB User control_writer, but QueryPie recorded Demo Developer and Demo Approver separately. That makes the actual operator clearer than the database account alone."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I could now answer precisely: the staff member checked order 4002’s contacts in the web editor; the developer listed pending orders in DBeaver and then checked that order’s contacts too. The records provided each time and SQL statement."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Checking Masking in Its Own Log"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Having found the queries, I checked whether the developer’s contact lookup was masked. I opened the existing policy’s Logs tab under Databases → Policies → Data Masking."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The developer’s 15:49:01 query was Data Masked, with one row each for phone and email, matching the time of the masked result in DBeaver."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/database-audit-logs/07.webp",
+        "alt": "Screen 7. Phone and email masking recorded at the time the developer queried order 4002.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "Screen 7. Phone and email masking recorded at the time the developer queried order 4002."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Query Audit establishes who ran which SQL; masking logs confirm protection on the columns. Matching user and time makes it easier to explain both the work and its privacy controls."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "Thinking Beyond Adoption to Daily Operations"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "It is easy to focus first on blocking and approvals when evaluating access control. Hands-on use showed how valuable it is for operators to look up legitimate work afterward too."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "I did not need separate work reports to reconcile. I selected date and connection, searched the user, and read the SQL. DBeaver and web-editor activity were visible in the same audit view."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Grant database use to the people who need it, then explain their work with records afterward."
+        },
+        {
+          "type": "text",
+          "text": " That benefit became clear here. Seeing the earlier privileges and masking policies alongside audit evidence made post-adoption operations easier to picture."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

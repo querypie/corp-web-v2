@@ -36,6 +36,9 @@ export default async function ResourcesPage({ params, searchParams }: DocsPagePr
   const { category } = await searchParams;
 
   if (!isLocale(locale)) notFound();
+  if (category === "acp-lab-notes") {
+    permanentRedirect(getPublicListHref("resources", locale, "acp-lab-notes"));
+  }
 
   const legacyCategory = category ? legacyCategoryRedirects[category] : undefined;
   if (locale !== "ja" && legacyCategory) {

@@ -30,6 +30,8 @@ import {
   getDownloadPreviewProps,
   getManagedCategoryLabel,
   getNewsFormatLabel,
+  getLocalizedAuthorName,
+  getLocalizedAuthorRole,
   getWriterLabel,
   normalizeDateIso,
   type ManagedContentCategorySlug,
@@ -37,12 +39,14 @@ import {
   type ManagedContentSection,
 } from "@/features/content/data";
 import { cloneAsAuthoredContent } from "@/features/content/cloneToAuthored";
+import { getLabNoteWriterLabel } from "@/features/content/acpLabNotes";
 import { renderTiptapHtml } from "@/features/content/tiptapHtml";
 import {
   getAdminContentListDisplayLocale,
   getOrderedVisibleLocales,
 } from "./adminContentListLocale";
 import { useAdminLocale } from "@/components/layout/admin/AdminLocaleProvider";
+import { adminContentLocales } from "@/features/admin/preferences";
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -173,7 +177,7 @@ function matchesQuery(item: ManagedContentEntry, query: string) {
     return true;
   }
 
-  return (["en", "ko", "ja"] as const).some((locale) =>
+  return adminContentLocales.some((locale) =>
     item.title[locale].toLowerCase().includes(normalized) ||
     item.summary[locale].toLowerCase().includes(normalized),
   );
@@ -245,6 +249,7 @@ export function PreviewModal({
           ) : (
             <AdminContentPreview
               key={`${item.id}-${activeLocale}`}
+              authorProfileImageSrc={item.categorySlug === "white-papers" ? item.authorProfileImageSrc : undefined}
               bodyHtml={localizedBodyHtml}
               category={getManagedCategoryLabel(item.section, item.categorySlug, activeLocale)}
               contentType={item.contentType}
@@ -254,11 +259,13 @@ export function PreviewModal({
               heroImageAlt={localizedTitle}
               heroImageSrc={item.imageSrc}
               hideHeroImage={item.hideHeroImage}
+              introduction={item.categorySlug === "acp-lab-notes" ? item.labNoteIntroduction?.[activeLocale] : item.categorySlug === "white-papers" ? item.authorIntroduction?.[activeLocale] : undefined}
               section={item.section}
               summary={localizedSummary}
               title={localizedTitle}
               url={item.externalUrl || "#"}
-              writer={item.section === "news" ? getNewsFormatLabel(item, activeLocale) : getWriterLabel(item)}
+              writer={item.section === "news" ? getNewsFormatLabel(item, activeLocale) : item.categorySlug === "acp-lab-notes" ? getLabNoteWriterLabel(item, activeLocale) : item.categorySlug === "white-papers" || item.categorySlug === "blogs" ? getLocalizedAuthorName(item, activeLocale) : getWriterLabel(item)}
+              writerRole={item.categorySlug === "white-papers" || item.categorySlug === "blogs" ? getLocalizedAuthorRole(item, activeLocale) : undefined}
             />
           )}
         </div>
@@ -547,7 +554,7 @@ export default function AdminManagedContentListPage({
         : section === "resources"
           ? "Resources"
           : "News"
-      : getManagedCategoryLabel(section, categorySlug, "en");
+      : getManagedCategoryLabel(section, categorySlug, locale);
 
   const writeHref =
     getAdminCreateHref(section, categorySlug);
@@ -786,7 +793,7 @@ export default function AdminManagedContentListPage({
           ) : displayedItems.length > 0 ? (
             displayedItems.map((item, index) => (
               <ContentRow
-                activeLocale={getAdminContentListDisplayLocale(item)}
+                activeLocale={getAdminContentListDisplayLocale(item, locale)}
                 isReorderMode={isReorderMode}
                 isTogglePending={isStatusUpdating}
                 key={item.id}
@@ -857,7 +864,7 @@ export default function AdminManagedContentListPage({
 
       {previewItem ? (
         <PreviewModal
-          initialLocale={getAdminContentListDisplayLocale(previewItem)}
+          initialLocale={getAdminContentListDisplayLocale(previewItem, locale)}
           isLoading={isPreviewLoading}
           item={previewItem}
           onClose={() => {

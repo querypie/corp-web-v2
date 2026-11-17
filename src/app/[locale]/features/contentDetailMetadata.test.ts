@@ -3,10 +3,11 @@ import { beforeAll, describe, expect, it, vi } from "vitest";
 import { createLocalizedContent, type ManagedContentEntry } from "@/features/content/data";
 
 const mockReadContentItem = vi.fn();
+const mockReadContentState = vi.fn();
 
 vi.mock("@/features/content/contentState.server", () => ({
   readContentItem: mockReadContentItem,
-  readContentState: vi.fn(),
+  readContentState: mockReadContentState,
 }));
 
 vi.mock("next/navigation", () => ({
@@ -59,6 +60,27 @@ beforeAll(async () => {
 }, 30_000);
 
 describe("content detail metadata", () => {
+  it("블로그 작성자를 서버 초기 화면과 OG metadata에서 언어별로 표시한다", async () => {
+    const entry = makeEntry({
+      authorName: "QueryPie AI 기술 검증 팀",
+      authorNameByLocale: {
+        en: "QueryPie AI Technical Validation Team",
+        ko: "QueryPie AI 기술 검증 팀",
+        ja: "QueryPie AI 技術検証チーム",
+      },
+    });
+    const { default: ResourcesDetailRoute, generateMetadata } = await import("./resources/[slug]/page");
+    mockReadContentState.mockResolvedValueOnce([entry]);
+    mockReadContentItem.mockResolvedValueOnce(entry);
+
+    const page = await ResourcesDetailRoute({ params: Promise.resolve({ locale: "ja", slug: entry.id }) });
+    expect(page.props.fallbackProps.writer).toBe("QueryPie AI 技術検証チーム");
+
+    mockReadContentItem.mockResolvedValueOnce(entry);
+    const metadata = await generateMetadata({ params: Promise.resolve({ locale: "ja", slug: entry.id }) });
+    expect(metadata.openGraph).toMatchObject({ authors: ["QueryPie AI 技術検証チーム"] });
+  });
+
   it("번역이 없는 대체 언어 화면은 색인하지 않고 실제 번역만 연결한다", async () => {
     const { generateMetadata } = await import("./resources/[slug]/page");
     mockReadContentItem.mockResolvedValueOnce(makeEntry({ visibleLocales: ["en"] }));

@@ -1,5 +1,5 @@
 {
-  "authorName": "Terazawa",
+  "authorName": "Shinsuke Terazawa",
   "authorRole": "Marketing Consultant",
   "categorySlug": "white-papers",
   "contentType": "content",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000127/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000127/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Shinsuke Terazawa",
+    "ko": "테라자와 신스케",
+    "ja": "寺澤慎祐"
+  },
+  "authorRoleByLocale": {
+    "en": "Marketing Consultant",
+    "ko": "마케팅 컨설턴트",
+    "ja": "マーケティングコンサルタント"
+  },
+  "authorIntroduction": {
+    "en": "A longtime marketing professional in the IT industry, Shinsuke earned an MBA from the University of Wales. He works in marketing and organizational development consulting, leads the Business Listening Association, and runs the Art Thinking Management Academy. He helps leaders integrate logic and intuition to create emerging futures.",
+    "ko": "IT 업계에서 오랫동안 마케팅을 담당했으며 영국 웨일스대학교에서 MBA를 취득했습니다. 마케팅 및 인재·조직 개발 컨설턴트로 활동하고 비즈니스 경청 협회와 아트 씽킹 경영 아카데미를 이끌고 있습니다. 경영의 논리와 직관을 결합해 새로운 미래를 만드는 일을 돕습니다.",
+    "ja": "IT業界でマーケティングに長く従事し、英国ウェールズ大学MBA取得後、マーケティング／人材組織開発コンサル、ビジネス傾聴協会代表、アート思考経営アカデミー主宰として活動。経営における論理と直感を統合し、「出現する未来」を創造する支援を行っている。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/terazawa.jpg"
 }

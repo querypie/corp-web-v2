@@ -1,5 +1,5 @@
 {
-  "authorName": "Fabian",
+  "authorName": "Fabian Lee",
   "authorRole": "Software Engineer",
   "categorySlug": "white-papers",
   "contentType": "content",
@@ -57,5 +57,21 @@
       "htmlPath": "src/content/resources/white-papers/cnt_000145/ja.html",
       "jsonPath": "src/content/resources/white-papers/cnt_000145/ja.tiptap.json"
     }
-  }
+  },
+  "authorNameByLocale": {
+    "en": "Fabian Lee",
+    "ko": "Fabian Lee",
+    "ja": "Fabian Lee"
+  },
+  "authorRoleByLocale": {
+    "en": "Software Engineer",
+    "ko": "소프트웨어 엔지니어",
+    "ja": "Software Engineer"
+  },
+  "authorIntroduction": {
+    "en": "Fabian is a software engineer with nearly a decade of experience in search platforms, data quality pipelines, and services. He is passionate about analyzing and processing data to uncover insights aligned with user needs and service goals. His data-driven solutions improve user experience and support business success.",
+    "ko": "검색 플랫폼, 데이터 품질 파이프라인과 서비스 분야에서 약 10년의 경험을 쌓은 소프트웨어 엔지니어입니다. 사용자 요구와 서비스 목표에 맞는 인사이트를 얻기 위해 데이터를 분석·처리하며, 데이터 기반 솔루션으로 사용자 경험과 비즈니스 성과를 높입니다.",
+    "ja": "Fabianは検索プラットフォーム、品質データパイプライン、サービス分野でほぼ10年の経験を持つ熟練のソフトウェアエンジニアです。彼はユーザーのニーズとサービスの目標に一致する意味のあるインサイトを生成するためにデータを分析し処理することに情熱を注いでいます。Fabianはユーザー体験を向上させ、ビジネス成功に貢献するデータ駆動型ソリューションを提供することに優れています。"
+  },
+  "authorProfileImageSrc": "/assets/content/author-profiles/fabian.png"
 }

@@ -1,5 +1,6 @@
 {
-  "authorName": "",
+  "authorName": "QueryPie AI 편집부",
+  "authorNameByLocale": { "en": "QueryPie AI Editorial Team", "ko": "QueryPie AI 편집부", "ja": "QueryPie AI 編集部" },
   "authorRole": "",
   "categorySlug": "blogs",
   "contentType": "content",

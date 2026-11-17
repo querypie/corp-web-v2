@@ -1,0 +1,544 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "変更後の接続確認と利用者への案内も必要で、サーバーが増えるといつどのアカウントを変えたかの管理も大変だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Password Provisioningで変更後、利用者で接続してコマンドを実行した。更新と接続を同じ体系で扱えるのが便利だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "変更対象を決める"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "別Ubuntuと "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "rotateops"
+        },
+        {
+          "type": "text",
+          "text": " を用意した。ServersのConfigurationsで有効にすると、変更ジョブとアカウント管理を使えた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/01.webp",
+        "alt": "画面1. Password Provisioningを有効にして管理メニューを開いた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. Password Provisioningを有効にして管理メニューを開いた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "専用グループには今回の1台だけを入れ、アカウントを "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "QueryPie - Provisioning"
+        },
+        {
+          "type": "text",
+          "text": " として登録した。保存後の認証方式は "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Managed by Job"
+        },
+        {
+          "type": "text",
+          "text": "で、変更ジョブで管理するアカウントと明確に分かった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/02.webp",
+        "alt": "画面2. rotateopsを変更ジョブ管理として登録した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. rotateopsを変更ジョブ管理として登録した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "1台・1アカウントのジョブを作る"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Password Provisioningで "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "EP46 Rotate Test Account"
+        },
+        {
+          "type": "text",
+          "text": "を作り専用グループを指定した。Target Server 1、rotateopsで範囲を実行前に確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "変更実行者と接続者は別にし、隔離実習サーバーの管理者が変更、利用者はrotateopsを使った。周期は "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Manual"
+        },
+        {
+          "type": "text",
+          "text": "とした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/03.webp",
+        "alt": "画面3. 対象を確認し手動ジョブとして保存した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. 対象を確認し手動ジョブとして保存した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "アカウント単位で結果を見る"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Run JobはCompletedで、History詳細のrotateopsは "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Success"
+        },
+        {
+          "type": "text",
+          "text": "だった。サーバー側でも実変更を確認した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/04.webp",
+        "alt": "画面4. 対象の変更がSuccessで完了した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. 対象の変更がSuccessで完了した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Account Managementにはサーバー・アカウント・用途と "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Last Password Updated At"
+        },
+        {
+          "type": "text",
+          "text": "があり、今回は13:16:04だった。最後の更新を個別に確認でき、別集計より管理しやすそうだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/05.webp",
+        "alt": "画面5. 管理画面に最終変更時刻が残った。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. 管理画面に最終変更時刻が残った。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "新パスワードを入力せず接続する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "利用者の役割でrotateopsがActiveと表示され、Connectだけで新パスワードを探さず接続できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/06.webp",
+        "alt": "画面6. 許可利用者が管理対象rotateopsで接続した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. 許可利用者が管理対象rotateopsで接続した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "whoami・hostname・pwdはrotateops、acp-ep46-password-lab、/home/rotateopsだった。変更後も正常に作業できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/07.webp",
+        "alt": "画面7. 更新済み認証情報で接続し人とサーバーを確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. 更新済み認証情報で接続し人とサーバーを確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者が変更し利用者は付与済み権限で作業を続ける。新パスワードの個別配布を減らせる点がよかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "パスワード管理と接続履歴を併せて残す"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Server Access Historyに13:17:24のDemo Developer、EP46 Rotation Operator、rotateops、Successがあった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/password-provisioning/08.webp",
+        "alt": "画面8. 人・役割・実サーバーアカウントが監査に残った。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面8. 人・役割・実サーバーアカウントが監査に残った。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "変更はProvisioningとAccount Management、使った人はAccess Historyで確認できた。共通アカウントでもQueryPie利用者単位で追える。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "1件の変更と新接続で、更新業務・利用者権限・履歴をまとめて管理できると分かった。定期管理しながら接続手順を簡単に維持できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

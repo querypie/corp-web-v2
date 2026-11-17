@@ -55,7 +55,7 @@ export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = 
       { title: "Platform", items: getPlatformSubItems("en", options).map((item) => item.label) },
       { title: "Solutions", items: getSolutionsSubItems("en", options).map((item) => item.label) },
       { title: "Demo", items: getDemoSubItems("en").map((item) => item.label) },
-      { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "ACP Community Edition", "ACP Docs", "Try AIP Now", "AIP Docs"] },
+      { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "ACP Lab Notes", "VOC", "Events", "ACP Community Edition", "ACP Docs", "Try AIP Now", "AIP Docs"] },
       { title: "Company", items: ["About Us", "Certifications", trustCenterCopy.en.label, "News", "Contact Us"] },
       { title: "Plans", items: getPlansSubItems("en").map((item) => item.label) },
     ],
@@ -63,7 +63,7 @@ export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = 
       { title: "플랫폼", items: getPlatformSubItems("ko", options).map((item) => item.label) },
       { title: "솔루션", items: getSolutionsSubItems("ko", options).map((item) => item.label) },
       { title: "데모", items: getDemoSubItems("ko").map((item) => item.label) },
-      { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "ACP 커뮤니티 에디션", "ACP 문서", "AIP 시작하기", "AIP 문서"] },
+      { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "ACP 실습 노트", "고객의 목소리", "이벤트", "ACP 커뮤니티 에디션", "ACP 문서", "AIP 시작하기", "AIP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", trustCenterCopy.ko.label, "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: getPlansSubItems("ko").map((item) => item.label) },
     ],
@@ -71,14 +71,14 @@ export function getShellMenuCopy(locale: string, options: PlatformMenuOptions = 
       { title: "プラットフォーム", items: getPlatformSubItems("ja", options).map((item) => item.label) },
       { title: "ソリューション", items: getSolutionsSubItems("ja").map((item) => item.label) },
       { title: "デモ", items: ["AIP機能", "ACP機能"] },
-      { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
+      { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "ACP 実習ノート", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
       { title: "会社", items: ["会社概要", "認証", trustCenterCopy.ja.label, "ニュース", "お問い合わせ"] },
     ],
   }[locale] ?? [
     { title: "Platform", items: getPlatformSubItems("en", options).map((item) => item.label) },
     { title: "Solutions", items: getSolutionsSubItems("en", options).map((item) => item.label) },
     { title: "Demo", items: getDemoSubItems("en").map((item) => item.label) },
-    { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "VOC", "Events", "ACP Community Edition", "ACP Docs", "Try AIP Now", "AIP Docs"] },
+    { title: "Resource", items: ["Introduction Decks", "Glossary", "Manuals", "White Papers", "Blog", "ACP Lab Notes", "VOC", "Events", "ACP Community Edition", "ACP Docs", "Try AIP Now", "AIP Docs"] },
     { title: "Company", items: ["About Us", "Certifications", trustCenterCopy.en.label, "News", "Contact Us"] },
     { title: "Plans", items: getPlansSubItems("en").map((item) => item.label) },
   ];
@@ -196,6 +196,10 @@ export function getResourcesSubItems(locale: string): NavigationSubItem[] {
       href: getCategoryHref(docsCategoryConfigs, "blogs", resolvedLocale),
     },
     {
+      label: getCategoryLabel(docsCategoryConfigs, "acp-lab-notes", resolvedLocale),
+      href: getCategoryHref(docsCategoryConfigs, "acp-lab-notes", resolvedLocale),
+    },
+    {
       label: getCategoryLabel(docsCategoryConfigs, "voc", resolvedLocale),
       href: getCategoryHref(docsCategoryConfigs, "voc", resolvedLocale),
     },
@@ -254,6 +258,7 @@ export function getPrimaryNavHref(item: string, locale: string) {
 }
 
 export function getFooterHref(item: string, locale: string) {
+  if (["ACP 실습 노트", "ACP Lab Notes", "ACP 実習ノート"].includes(item)) return getCategoryHref(docsCategoryConfigs, "acp-lab-notes", locale as Locale);
   if (Object.values(trustCenterCopy).some(copy => copy.label === item)) {
     return trustCenterHref;
   }

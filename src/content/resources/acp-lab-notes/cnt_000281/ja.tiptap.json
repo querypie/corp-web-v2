@@ -1,0 +1,873 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "開発がSQLと条件を確認し、運用が対象と目的を見て最終承認するなど、一人では完結しない場合がある。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "今回はQueryPieでその順序を作り、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "別担当者によるSQL Request二段階承認の後に実行すること"
+        },
+        {
+          "type": "text",
+          "text": "を試した。SQLは注文1件の状態・金額参照だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "開発確認と運用承認を二段階にする"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "管理者の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "General → Workflow Management → Approval Rules"
+        },
+        {
+          "type": "text",
+          "text": "でEP42 - Two-Step SQL Approvalを作り、SQL Requestを指定した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "一次承認者は "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Demo Approver"
+        },
+        {
+          "type": "text",
+          "text": "として開発確認を担う。Add Stepで二次を作り運用担当の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Demo Auditor"
+        },
+        {
+          "type": "text",
+          "text": "を入れた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/01.webp",
+        "alt": "画面1. 一次担当を指定して二段階目を追加した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. 一次担当を指定して二段階目を追加した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "両段階とも事前指定の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Select Assignee(s) / Group(s)"
+        },
+        {
+          "type": "text",
+          "text": "を使い、実行者は開発者、自己承認Offとした。申請時に選ぶのでなく所定担当へ順に送れる。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/02.webp",
+        "alt": "画面2. 二次はDemo Auditor、実行はDemo Developerにした。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. 二次はDemo Auditor、実行はDemo Developerにした。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "提出前から順序が見える"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "規則を選ぶと三人が順に表示され、誰が先に確認し最後に実行するか申請時から分かった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "対象接続は "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Two-Step Approval Lab"
+        },
+        {
+          "type": "text",
+          "text": "で、41001のSELECTとし、理由にも開発確認後の運用承認と1件参照を記載した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/03.webp",
+        "alt": "画面3. 二人の承認者と最終実行者が順に表示された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. 二人の承認者と最終実行者が順に表示された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SQL・DB・理由を一つにまとめ、別送を減らせた。タイトルは "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "「第42回の注文参照 — 開発確認後に運用承認」"
+        },
+        {
+          "type": "text",
+          "text": "とした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "一次だけでは実行へ進まない"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Demo Approverが番号条件とテーブルを確認し、一次意見を残して承認した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "申請者側では一次が緑、次の二次が黄、実行者は待機だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/04.webp",
+        "alt": "画面4. 一次後は二次担当が次の承認者となった。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. 一次後は二次担当が次の承認者となった。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "一覧でも明確で、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Approval Status In Progress、Execution Status Pending"
+        },
+        {
+          "type": "text",
+          "text": "だった。実行者のExecutions → To Doにはまだなかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/05.webp",
+        "alt": "画面5. 一次後も承認中・実行待機のままだった。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. 一次後も承認中・実行待機のままだった。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "二人の名前を置くだけでなく、次の承認がなければ実行へ進まない点がよかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "二次まで完了して実行の順になる"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Demo Auditorが接続・範囲・理由を見て最終意見を残した。同じSQLをそれぞれの役割で確認する流れだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/06.webp",
+        "alt": "画面6. 二次担当が意見を残して最終承認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. 二次担当が意見を残して最終承認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "最終承認後、開発者の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Executions → To Do"
+        },
+        {
+          "type": "text",
+          "text": "へ表示された。承認者二人が緑、実行者が黄となり、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Execute"
+        },
+        {
+          "type": "text",
+          "text": " も利用可能だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/07.webp",
+        "alt": "画面7. 両承認後にExecuteが表示された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. 両承認後にExecuteが表示された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "承認SQLを実行すると、結果は "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "1 Rows selected."
+        },
+        {
+          "type": "text",
+          "text": "でDoneへ移った。同じ流れで誰の順番か追いやすかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/08.webp",
+        "alt": "画面8. 二段階後にSQLを実行し、1行取得と記録された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面8. 二段階後にSQLを実行し、1行取得と記録された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "承認二回と実行が個別に残る"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "最後に管理者の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Workflow Logs"
+        },
+        {
+          "type": "text",
+          "text": "でタイトルを探すと提出・一次・二次・実行の4件があった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Remaining Stepsは申請後の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Approval 1"
+        },
+        {
+          "type": "text",
+          "text": "から一次後の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Approval 2"
+        },
+        {
+          "type": "text",
+          "text": "、最終後の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Execution"
+        },
+        {
+          "type": "text",
+          "text": "、実行後の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Done"
+        },
+        {
+          "type": "text",
+          "text": "へ進み、各担当者と時刻も残った。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/multi-step-approval/09.webp",
+        "alt": "画面9. 提出・二回承認・実行の担当と次段階が記録された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面9. 提出・二回承認・実行の担当と次段階が記録された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Query Auditも開発者のSQL Request成功で、承認履歴と実DB操作をつなげて確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "よかったのは、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "会社の確認順序を実際の作業手順へ移せること"
+        },
+        {
+          "type": "text",
+          "text": "だ。開発・運用の確認後に実行へ渡し、進捗と履歴も残るので複数担当の管理に役立ちそうだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie Community 11.6.7とMySQL 8.0.42で実習担当者・注文を使った。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "参考： "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/general/workflow-management/approval-rules",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Approval Rules"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/workflow/requesting-sql",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "SQL Requestの申請"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/audit/general-logs/workflow-logs",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Workflow Logs"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

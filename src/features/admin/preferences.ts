@@ -2,6 +2,7 @@ export const ADMIN_LOCALE_COOKIE_KEY = "querypie-admin-locale";
 export const ADMIN_THEME_STORAGE_KEY = "querypie-admin-theme";
 
 export const adminLocales = ["ko", "ja"] as const;
+export const adminContentLocales = ["ko", "ja", "en"] as const;
 
 export type AdminLocale = (typeof adminLocales)[number];
 

@@ -100,6 +100,7 @@ describe("getResourcesSubItems", () => {
       { label: "Manuals", href: "/en/manuals" },
       { label: "White Papers", href: "/en/whitepapers" },
       { label: "Blog", href: "/en/blog" },
+      { label: "ACP Lab Notes", href: "/en/acp-lab-notes" },
       { label: "VOC", href: "/en/voc" },
       { label: "Events", href: "/en/events" },
     ]);
@@ -112,6 +113,7 @@ describe("getResourcesSubItems", () => {
       { label: "매뉴얼", href: "/ko/manuals" },
       { label: "화이트페이퍼", href: "/ko/whitepapers" },
       { label: "블로그", href: "/ko/blog" },
+      { label: "ACP 실습 노트", href: "/ko/acp-lab-notes" },
       { label: "고객의 목소리", href: "/ko/voc" },
       { label: "이벤트", href: "/ko/events" },
     ]);
@@ -142,7 +144,7 @@ describe("getShellMenuCopy", () => {
       { title: "플랫폼", items: ["접근 제어 플랫폼 (ACP)", "AI 플랫폼 (AIP)", "AI Gateway (AIG)"] },
       { title: "솔루션", items: ["모의 해킹 서비스", "FDE 서비스"] },
       { title: "데모", items: ["ACP 활용", "AIP 활용"] },
-      { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "고객의 목소리", "이벤트", "ACP 커뮤니티 에디션", "ACP 문서", "AIP 시작하기", "AIP 문서"] },
+      { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "ACP 실습 노트", "고객의 목소리", "이벤트", "ACP 커뮤니티 에디션", "ACP 문서", "AIP 시작하기", "AIP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "Trust Center", "뉴스", "문의하기"] },
       { title: "가격 · 플랜", items: ["ACP", "AIP"] },
     ]);
@@ -150,7 +152,7 @@ describe("getShellMenuCopy", () => {
       { title: "プラットフォーム", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "AI Gateway (AIG)"] },
       { title: "ソリューション", items: ["ペネトレーションテスト", "オンプレミスAI｜Local LLM", "専任エンジニア｜FDEサービス", "AS/400・COBOLモダナイゼーション", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"] },
       { title: "デモ", items: ["AIP機能", "ACP機能"] },
-      { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
+      { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "ACP 実習ノート", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
       { title: "会社", items: ["会社概要", "認証", "Trust Center", "ニュース", "お問い合わせ"] },
     ]);
   });

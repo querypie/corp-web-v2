@@ -1,0 +1,571 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "権限外SQLの遮断の次に、担当者が監査を開かなくても試行を知れるか気になった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "AlertsでRead-OnlyのUPDATE遮断を通知し監査と比較した。止めるだけでなく担当へ伝えるところまでつながった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "通知先をつなぐ"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "GeneralのChannelsでHTTPを作り、Macの簡単な受信先を登録した。下の受信画面は実送信内容を見せるための実習UIだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Body Templateは初期値の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "{{message}}"
+        },
+        {
+          "type": "text",
+          "text": "を使い、Alertsの文面を送る構成にした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/01.webp",
+        "alt": "画面1. ローカルHTTP受信先を登録した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. ローカルHTTP受信先を登録した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "今回DBの遮断SQLだけを通知する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Alertsの種別は "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Prevented SQL Execution"
+        },
+        {
+          "type": "text",
+          "text": "とし、対象は既存の "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "DB Privilege Account Lab"
+        },
+        {
+          "type": "text",
+          "text": " 一つに絞った。このDBの権限外操作に集中できる。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "変数で人・接続・時刻・SQL種別・原文を入れ、発生時に値を埋める。受信者が状況を把握できる情報を選んだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/02.webp",
+        "alt": "画面2. 特定接続のPrevented SQL Executionを条件にした。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. 特定接続のPrevented SQL Executionを条件にした。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "参照は成功し変更は止まる"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "テスト利用者はRead-Onlyのみ。41001はREADY、25,000ウォンと正常に返った。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/03.webp",
+        "alt": "画面3. 許可されたSELECTは成功した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. 許可されたSELECTは成功した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "同接続でEP47_BLOCKEDへUPDATEすると、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "No permission to execute UPDATE statement"
+        },
+        {
+          "type": "text",
+          "text": "と出て、参照権限による変更はQueryPieが遮断した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/04.webp",
+        "alt": "画面4. 権限外UPDATEは実行時に止まった。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. 権限外UPDATEは実行時に止まった。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "再参照も元データもREADYのままで、必要参照は続き未許可変更は反映されなかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/05.webp",
+        "alt": "画面5. 遮断後も元データを維持した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. 遮断後も元データを維持した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "その遮断SQLが通知で届く"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "受信は1件で、正常参照二回の間のUPDATEだった。利用者・接続・実DBアカウント・UPDATE原文が含まれた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/06.webp",
+        "alt": "画面6. 実遮断イベントが実習HTTP受信先へ届いた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. 実遮断イベントが実習HTTP受信先へ届いた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "実行も受信も13:28:31だった。テスト送信はせず、実際のSQL遮断による通知だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "単なるエラー通知より人とSQLがあるため、誰がどこで何を試したか素早く把握できる点が有用だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "送信結果と監査を確認する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Alerts詳細のLogsに応答ok、状態 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Success"
+        },
+        {
+          "type": "text",
+          "text": "と13:28:31があり、設定だけでなく実送信を確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/07.webp",
+        "alt": "画面7. 送信履歴に応答とSuccessが残った。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. 送信履歴に応答とSuccessが残った。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Query Auditも同時刻の開発者・Read-Onlyで、前後SELECTはSuccess、UPDATEはFailure・Preventedだった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/08.webp",
+        "alt": "画面8. 同時刻の監査で人と権限を確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面8. 同時刻の監査で人と権限を確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "詳細には通知と同じSQLとUPDATE権限不足が残り、受信した作業を監査でも追えた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/blocked-sql-alerts/09.webp",
+        "alt": "画面9. 遮断SQLと権限不足理由を確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面9. 遮断SQLと権限不足理由を確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "参照許可、変更遮断、試行通知までつながった。全監査を常時見ず必要事象を受け取れ、制御と運用確認の負担軽減を併せる機能と感じた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

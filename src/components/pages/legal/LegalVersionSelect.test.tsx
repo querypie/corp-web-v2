@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, act } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
+import { renderToString } from "react-dom/server";
 
 vi.mock("next/navigation", () => ({
   useRouter: vi.fn(() => ({ push: vi.fn() })),
@@ -16,9 +17,10 @@ const OPTIONS = [
 
 describe("LegalVersionSelect", () => {
   it("마운트 전에는 선택된 레이블을 텍스트로 표시한다 (SSR 폴백)", () => {
-    // mounted=false 상태에서의 SSR 폴백 렌더링
-    render(<LegalVersionSelect options={OPTIONS} value="v2" />);
-    expect(screen.getByText("v2 (2025-01-01)")).toBeInTheDocument();
+    const container = document.createElement("div");
+    container.innerHTML = renderToString(<LegalVersionSelect options={OPTIONS} value="v2" />);
+    expect(container.textContent).toBe("v2 (2025-01-01)");
+    expect(container.querySelector("select")).toBeNull();
   });
 
   it("마운트 후에는 select 요소를 렌더링한다", async () => {

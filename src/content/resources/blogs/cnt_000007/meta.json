@@ -1,5 +1,6 @@
 {
-  "authorName": "",
+  "authorName": "QueryPie AI 기술 검증 팀",
+  "authorNameByLocale": { "en": "QueryPie AI Technical Validation Team", "ko": "QueryPie AI 기술 검증 팀", "ja": "QueryPie AI 技術検証チーム" },
   "authorRole": "",
   "categorySlug": "blogs",
   "contentType": "content",

@@ -1,0 +1,743 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "장애가 나면 가장 먼저 로그부터 확인하게 된다. 그런데 로그를 보는 사람 모두에게 컨테이너 안에서 명령을 실행할 권한까지 필요한 것은 아니다. 원인을 살펴보는 일과 직접 조치하는 일을 나눠 맡기는 경우도 많다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "26편에서는 쿠버네티스 설정을 읽는 권한과 바꾸는 권한을 구분해 봤다. 이번에는 같은 Pod에서 로그 조회와 셸 접속을 따로 설정했다. QueryPie에서 로그는 계속 볼 수 있게 두면서, 컨테이너 안으로 들어가는 요청만 제한할 수 있는지 직접 확인해 봤다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "로그를 확인할 실습용 Pod를 준비했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "앞서 등록한 acp-kac-lab 클러스터를 그대로 사용했다. orders-lab 네임스페이스에 orders-diagnostics-demo라는 Pod를 하나 만들고, 가상 주문의 상태를 보여 주는 로그를 넣었다. 실제 주문이나 고객 정보가 들어 있는 서비스는 아니다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "QueryPie에는 Orders Lab Diagnostics Viewer라는 역할을 만들어 Demo Developer에게 부여했다. 개발자 계정으로 이 역할을 고른 뒤 Web Client에 접속하니, 준비한 Pod와 diagnostics 컨테이너가 정상 실행 중인 것을 확인할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-shell-access/01.webp",
+        "alt": "화면 1. 일반 사용자 계정으로 실습용 Pod의 상태와 컨테이너를 확인했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 1. 일반 사용자 계정으로 실습용 Pod의 상태와 컨테이너를 확인했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Pod 상세 화면에서 Logs를 누르자 로그가 바로 열렸다. 상태 확인 메시지와 함께 가상 주문 DEMO-2901의 재시도, 처리 완료 내용이 보였다. 셸을 열지 않고도 서비스에서 어떤 일이 있었는지 살펴볼 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-shell-access/02.webp",
+        "alt": "화면 2. Logs에서 가상 주문의 재시도와 완료 메시지를 읽었다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 2. Logs에서 가상 주문의 재시도와 완료 메시지를 읽었다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "같은 화면에서 셸 접속도 먼저 확인했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "권한을 나누기 전에 같은 Pod의 셸 접속이 정상 동작하는지도 확인했다. 처음에는 이번 실습용 역할에서 로그 조회와 셸 실행을 모두 허용해 두었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Shell을 누르니 컨테이너의 터미널이 열렸다. id로 실행 계정을 확인하고, 짧은 확인 문구를 출력했다. 화면에 EP29_QUERYPIE_EXEC_BASELINE_OK가 나타났다. 접속이 되는 상태를 확인했으니, 이제 실행 권한만 제한해 비교할 차례였다. 확인을 마친 셸은 exit로 종료했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-shell-access/03.webp",
+        "alt": "화면 3. 정책을 바꾸기 전에는 같은 Pod의 셸에서 명령이 정상 실행됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 3. 정책을 바꾸기 전에는 같은 Pod의 셸에서 명령이 정상 실행됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "로그 조회와 명령 실행을 따로 설정했다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "관리자 화면에서 이번 역할에 연결한 Orders Lab Pod Diagnostics 정책을 수정했다. Pod를 찾고 상세 정보를 읽는 권한은 유지하고, 로그를 가져오는 pods/log의 get 요청도 허용했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "컨테이너 안에서 명령을 실행하는 pods/exec는 Deny 항목에 넣었다. 대상은 orders-lab이며, get과 create 요청을 제한하도록 설정했다. 같은 Pod라도 로그를 읽는 작업과 명령을 실행하는 작업을 따로 정할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-shell-access/04.webp",
+        "alt": "화면 4. 로그 조회는 Allow에 남기고, 컨테이너 명령 실행은 Deny로 설정했다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 4. 로그 조회는 Allow에 남기고, 컨테이너 명령 실행은 Deny로 설정했다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "정책 편집기에서 오류가 없는 것을 확인하고 변경 사유를 적어 저장했다. 저장된 정책은 v2로 남았고, 진단 역할에도 새 버전이 연결돼 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "로그는 계속 보였고, 셸 접속은 제한됐다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "개발자 계정에서 웹 클라이언트를 새로 열고 같은 Pod에 접속했다. Logs를 누르자 앞서 보았던 메시지가 그대로 나왔다. 상태 확인과 주문 재시도 이력을 읽는 데는 문제가 없었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-shell-access/05.webp",
+        "alt": "화면 5. 정책을 바꾼 뒤 새로 접속해도 로그는 정상적으로 조회됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 5. 정책을 바꾼 뒤 새로 접속해도 로그는 정상적으로 조회됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "이어서 Shell을 눌렀다. 이번에는 셸 프롬프트가 열리지 않고 Socket connection closed가 표시됐다. 앞에서는 같은 화면에서 명령을 실행했지만, 실행 권한을 제한한 뒤에는 컨테이너 셸로 들어갈 수 없었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-shell-access/06.webp",
+        "alt": "화면 6. 로그 조회를 허용한 상태에서 셸 연결 요청은 제한됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 6. 로그 조회를 허용한 상태에서 셸 연결 요청은 제한됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "로그를 읽는 업무는 그대로 가능하면서 직접 작업할 권한은 따로 관리됐다. 장애 확인을 맡길 때 컨테이너 명령 실행 권한까지 함께 줄 필요가 없다는 점이 좋았다. 운영팀과 개발팀의 업무에 맞춰 어느 작업까지 허용할지 구체적으로 정할 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "허용한 조회와 제한한 요청이 기록으로 남았다"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "마지막으로 Request Audit에서 방금 실행한 요청을 열어 봤다. 셸 접속을 시도한 기록에는 pods/exec, create, DENY가 표시됐고, Message에는 Denied by policy to access the resource.가 남아 있었다. QueryPie 정책에 따라 요청이 제한된 것을 감사 기록에서도 확인했다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-shell-access/07.webp",
+        "alt": "화면 7. 셸 실행 요청의 대상과 사용자, 역할, 정책 거부 사유가 함께 남았다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 7. 셸 실행 요청의 대상과 사용자, 역할, 정책 거부 사유가 함께 남았다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "로그를 읽은 기록은 같은 사용자와 역할에서 pods/log, get, ALLOW로 표시됐다. 두 기록의 대상도 같은 orders-diagnostics-demo였다. 누가 어느 Pod에서 어떤 작업을 요청했고, 무엇이 허용되거나 제한됐는지 나란히 살펴볼 수 있었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/pod-shell-access/08.webp",
+        "alt": "화면 8. 같은 Pod의 로그 조회는 ALLOW로 기록됐다.",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "화면 8. 같은 Pod의 로그 조회는 ALLOW로 기록됐다."
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "로그만 확인하는 담당자에게 셸 권한까지 줄 필요는 없었다. 같은 Pod에서도 로그 조회와 명령 실행을 나누고, 허용하거나 제한한 요청을 사용자와 역할별로 확인할 수 있었다. 업무에 필요한 조회는 열어 두면서 직접 작업할 권한은 따로 관리할 수 있다는 점이 이번 실습에서 가장 마음에 들었다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "실습은 QueryPie Community 11.6.7의 Web Client(Beta)와 별도로 구성한 K3s 클러스터에서 진행했다. 화면에 나온 주문과 로그는 이번 실습을 위해 만든 가상 데이터다."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "참고: "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/user-manual/kubernetes-access-control/connecting-to-kubernetes-clusters-with-web-client",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Kubernetes Web Client"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/kubernetes/k8s-access-control/policies/kubernetes-policy-tips-guide",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Kubernetes 정책 설정 팁"
+        },
+        {
+          "type": "text",
+          "text": " · "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://docs.querypie.com/ko/administrator-manual/audit/kubernetes-logs/request-audit",
+                "target": "_blank",
+                "rel": "noopener noreferrer nofollow",
+                "class": null,
+                "title": null
+              }
+            }
+          ],
+          "text": "Request Audit"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,578 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "本番DBの値を変更したあと、「変更しました」という報告だけでは説明が終わらないことがある。なぜ変更したのか、誰が確認したのか、実際にどの値が変わったのかを併せて見ることで、作業の経緯が明確になる。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "これまでの記事では、SQL承認、DML Snapshot、監査ログのエクスポートをそれぞれ試した。今回は注文1件の訂正作業としてまとめて実施し、変更理由の記入から承認、実行、変更前後の値の確認、監査ファイルのダウンロードまで、同じ注文を追ってみた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "1. ステータスを訂正する注文を1件用意した"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "実習用に注文49001を新規作成した。現在のステータスはPENDING、金額は26,700ウォン。配達完了を確認したものの注文ステータスに反映されておらず、訂正が必要な状況を想定した。既存の別のテスト注文には手を加えていない。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "作業者アカウントの直接接続権限はRead-Onlyのままにした。SQL Editorでは変更前の状態を参照し、実際のUPDATEは別途SQL Requestで承認を受けることにした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/01.webp",
+        "alt": "画面1. 新しく用意した注文49001の変更前ステータスはPENDINGだった。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. 新しく用意した注文49001の変更前ステータスはPENDINGだった。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "2. 変更理由とSQLをまとめて承認してもらった"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "申請タイトルは「注文49001の配達完了への訂正」とした。理由欄には、配達完了を確認した注文1件のステータスだけを変更し、金額や他の注文は変更しないことを明記した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SQLにもその範囲を反映した。注文番号が49001で、現在のステータスがPENDINGの場合に限りDELIVEREDに変更するWHERE条件を指定した。承認者は作業説明と実際に実行するSQLを併せて確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/02.webp",
+        "alt": "画面2. 変更対象と現在のステータスを条件に指定し、同じ申請に訂正理由を記録した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. 変更対象と現在のステータスを条件に指定し、同じ申請に訂正理由を記録した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "指定承認者のDemo Approverで申請を開き、対象と条件を確認した。注文1件のみを訂正し、金額や他の注文を変更しない範囲であることを確認した旨のコメントを残して承認した。申請はApprovedになった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/03.webp",
+        "alt": "画面3. 別の担当者が申請されたSQLを確認し、承認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. 別の担当者が申請されたSQLを確認し、承認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "作業者アカウントの実行一覧に戻り、承認済み申請を開いてExecuteを押した。結果は「1 Rows updated」。13時56分27秒に注文1件が変更された。接続先DBでも対象注文のステータスがDELIVEREDになったことを確認でき、金額と他の注文はそのままだった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/04.webp",
+        "alt": "画面4. 申請者・承認者・実行者とともに、承認済みSQLで1行を変更した結果を確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. 申請者・承認者・実行者とともに、承認済みSQLで1行を変更した結果を確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "便利だと感じたのは、作業者が普段使う接続権限を変更可能な範囲まで広げずに済んだ点だ。直接参照する権限は維持しながら、レビュー済みの変更SQLを承認手続きに沿って実行できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "3. 変更前の値もすぐに確認できた"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "この接続ではDML Snapshotを有効にしていた。管理者の監査画面でDML Snapshotsを開くと、先ほど実行したUPDATEが新しい記録として表示された。実行時刻は13時56分27秒、対象はOrders Control Lab、変更行数は1だった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "詳細画面でBeforeを押すと、注文49001のstatusはPENDINGと表示された。続いてAfterを押すと、同じ注文のstatusがDELIVEREDになっていた。実行したSQLと、そのSQLによって状態がどう変わったかを同じ画面で確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/05.webp",
+        "alt": "画面5. Beforeには注文49001の変更前ステータスPENDINGが残っていた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. Beforeには注文49001の変更前ステータスPENDINGが残っていた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/06.webp",
+        "alt": "画面6. Afterでは同じ注文の変更後ステータスDELIVEREDを確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. Afterでは同じ注文の変更後ステータスDELIVEREDを確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "あとから「この注文は元々どの状態でしたか」と聞かれても、作業者の記憶だけに頼らずに済みそうだ。今回のように変更前後の値を直接比較できることは、運用担当者にとって実用的だと感じた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "4. 監査記録でも承認を経た作業であることを確認した"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Query Auditでも同じ作業を探した。記録番号は512、実行結果はSuccessだった。ユーザーのDemo Developer、UPDATEの実行、実行時刻がDML Snapshotと一致していた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "特に、Executed FromにはSQL Requestと表示されていた。作業者の直接接続権限はRead-Onlyのまま、今回の変更は承認申請を経て実行されたことを記録上で区別できた。誰が実行したかだけでなく、どの手続きを通じて実行したかも確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/07.webp",
+        "alt": "画面7. Query Auditに実行成功とSQL Request経由の実行が記録された。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. Query Auditに実行成功とSQL Request経由の実行が記録された。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "5. 同じ作業の記録をファイルに出力した"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "最後にAudit Log Exportで監査資料を作成した。ログ種別はQuery Audit、ファイル形式はCSVを選択した。期間を実習当日に設定し、ユーザーとDB接続で絞り込んだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "プレビューには2件が表示された。変更前の注文を確認したSELECTと、承認を受けて実行したUPDATEだ。注文1件を確認して訂正する流れが、実行時刻順に残っていた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/08.webp",
+        "alt": "画面8. 実習当日の日付・ユーザー・DBで絞り込み、参照と変更の記録2件を抽出した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面8. 実習当日の日付・ユーザー・DBで絞り込み、参照と変更の記録2件を抽出した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "処理がCompletedになったあと、ファイルをダウンロードして解凍した。実際のCSVには、ユーザー、SQL原文、実行時刻、結果、変更行数、実行経路が含まれていた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "UPDATE行のWorkflow Request UUIDも、最初に提出した申請IDと一致していた。画面で確認した監査番号512、13時56分27秒の実行時刻、1行の変更結果も一致した。申請と実際の実行を、同じ作業として照合できる資料になっていた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/order-change-audit/09.webp",
+        "alt": "画面9. 監査ファイルの作成が完了し、ダウンロードしたCSVでも同じ変更記録を確認できた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面9. 監査ファイルの作成が完了し、ダウンロードしたCSVでも同じ変更記録を確認できた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "注文ステータスを1つ変更しただけだが、残った記録は具体的だった。申請には変更理由と承認者、実行結果には処理時刻と件数、DML Snapshotには変更前後の状態が残った。監査ファイルにも、同じ承認申請を示すIDが含まれていた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "導入を検討する立場では、このつながりはありがたい。変更を承認する手続きと実際の作業記録が分散していると、説明のたびに資料を突き合わせる必要がある。今回はQueryPie内で注文1件の変更経緯を確認し、必要な実行記録をファイルとして保管するところまで進められた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}

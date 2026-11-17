@@ -1,0 +1,947 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "本番DBを参照していると、配送済みなのに状態が古い、誤った値を訂正したいなど、1、2件を修正する場面がある。簡単な変更でも、誰が何のために変えたかは明確に残したい。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "第5回ではDBアクセス権を申請して承認を受けた。今回はさらに、 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "実行するSQLを提出し、担当者の承認を受けてデータを変更すること"
+        },
+        {
+          "type": "text",
+          "text": "をQueryPie ACP Community EditionのSQL Requestで試した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "気になったのは、開発者の通常権限を広げずに対応できるかだ。実際には参照権限を維持したまま、承認済みSQLを実行して結果まで確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "注文1件の配送状態を変更する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "前回までのOrders Control Labを使い、配送済みなのにDBでは配送中のままという状況にした。実際の顧客注文ではなく実習データだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DBeaverで確認すると4002番はSHIPPED、金額32,000ウォンだった。変えるのは状態だけで、他の注文や金額は維持する。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-approval/01.webp",
+        "alt": "画面1. 変更前の一覧。4002番はSHIPPEDだった。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面1. 変更前の一覧。4002番はSHIPPEDだった。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "申請者をDemo Developer、承認者をDemo Approverに分け、SQL用の規則も作った。担当者の確認・承認後に開発者が実行する。自己承認は使わなかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "変更内容と理由をSQL申請に記載する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "開発者でWorkflowのSQL Requestを開き、Orders Control Labとorders_controlを指定した。タイトルは「注文4002の配送完了状態への訂正」とし、次のSQLを入力した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "codeBlock",
+      "attrs": {
+        "language": null
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "UPDATE orders_control.orders\nSET status = 'DELIVERED'\nWHERE order_id = 4002\n  AND status = 'SHIPPED';"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "WHEREには注文番号と現状態を指定し、4002番でまだSHIPPEDの注文だけを対象にした。理由にも配送完了の反映であり、変更予定は1件と記載した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-approval/02.webp",
+        "alt": "画面2. DB、SQL、作業理由、実行日を一つの申請にまとめた。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面2. DB、SQL、作業理由、実行日を一つの申請にまとめた。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "入力するうちに確認事項が整理された。どのDBで何をなぜ変更し、何件を見込むかがまとまる。実行希望日と有効期限はどちらも作業日に設定した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "提出後は申請者、承認者、実行者が順に表示され、次の担当が分かった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-approval/03.webp",
+        "alt": "画面3. 提出したSQL申請。申請・承認・実行の担当が区別されている。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面3. 提出したSQL申請。申請・承認・実行の担当が区別されている。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "承認者は実際のSQLを確認する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Demo ApproverでログインするとReceived RequestsのTo Doに届いていた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "開くとSQLと理由がそのまま表示された。注文番号4002と現状態の条件を確認し、「変更予定1件」とSQLを並べて検討できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-approval/04.webp",
+        "alt": "画面4. 承認者がDB、SQL、理由を確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面4. 承認者がDB、SQL、理由を確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "判断に必要な情報が承認画面に集まる点がよかった。SQLの再送依頼が減り、データを変える前の確認手順を製品内で運用できる。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Approveを押し、注文番号と現状態条件を確認して1件の配送状態訂正を承認する旨をコメントした。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-approval/05.webp",
+        "alt": "画面5. 確認した条件を承認コメントに残した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面5. 確認した条件を承認コメントに残した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "開発者が承認済み作業を実行する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "開発者に戻るとExecutionsのTo Doに表示され、詳細にExecuteがあった。承認は完了し、次は実行だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-approval/06.webp",
+        "alt": "画面6. 承認済み申請が開発者の実行待ち一覧へ移った。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面6. 承認済み申請が開発者の実行待ち一覧へ移った。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "承認と実行が別段階なのもよかった。確認後に指定実行者が続けられる。今回は申請した開発者を実行者に指定した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Executeを押し、自動コミットで反映される案内を確認して実行した。完了後のResultsにはUPDATEとともに "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "‘1 Rows updated.’"
+        },
+        {
+          "type": "text",
+          "text": "が表示された。申請時の予定件数と一致した。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-approval/07.webp",
+        "alt": "画面7. 詳細画面で実行SQLと変更1件を確認した。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面7. 詳細画面で実行SQLと変更1件を確認した。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "申請、承認、結果確認が一つの作業としてつながった。後で変更理由を調べる際も、理由、SQL、担当者、結果を一緒に確認できて便利だ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "DBeaverでも変更後の値を確認する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "DBeaverで元のSELECTを再実行すると4002番だけDELIVEREDになった。金額32,000ウォンと4001・4003番は変わっていなかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-approval/08.webp",
+        "alt": "画面8. 承認済みSQLの実行後、4002番だけDELIVEREDに変わった。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面8. 承認済みSQLの実行後、4002番だけDELIVEREDに変わった。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "UPDATEはQueryPieの承認済み申請から実行し、DBeaverは変更前後の参照に使った。慣れたツールで確認し、変更は所定の承認手順で行う組み合わせが合っていた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "作業後に開発者のDBアクセス権も再確認した。 "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Read-Only (User), Select"
+        },
+        {
+          "type": "text",
+          "text": "の表示はそのままだった。今回のために通常アクセスを書き込み権限へ引き上げてはいない。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": "/assets/content/acp-lab-notes/sql-approval/09.webp",
+        "alt": "画面9. 変更作業後も通常のDBアクセス権はRead-Onlyのまま。",
+        "title": null,
+        "width": "100%",
+        "height": null,
+        "caption": "画面9. 変更作業後も通常のDBアクセス権はRead-Onlyのまま。"
+      }
+    },
+    {
+      "type": "paragraph"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "text": "必要な修正を行い、通常権限は維持する"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "SQL Requestの利点は明確だった。開発者がSQLと理由を出し、承認者が内容を確認し、実行者が承認済み作業を処理する。それぞれの役割が画面で分かれていた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "一度限りの訂正のために通常権限を広げずに済む点が印象的だった。参照権限のまま1件を訂正でき、作業後に書き込み権限を回収する必要もなかった。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "運用では速さだけでなく根拠を残すことも重要だ。同じ申請で、変更予定、承認者・実行者、実際の件数まで確認できた。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "小さな状態変更だったが、業務を進めながら最小権限を維持する方法が具体的に見えた。本番DBの変更を一定の手順で管理したいチームに役立ちそうだ。"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "実習環境：QueryPie ACP Community 11.6.7 / MySQL 8.0.42 / DBeaver 26.2.4"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": " "
+        }
+      ]
+    }
+  ]
+}
