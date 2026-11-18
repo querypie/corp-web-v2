@@ -289,6 +289,10 @@ export default function ContactForm(props: ContactFormProps) {
         privacyText={copy.privacyText}
       />
 
+      {turnstileConfigured && copy.securityNotice ? (
+        <p className="m-0 type-body-sm leading-5 text-fg">{copy.securityNotice}</p>
+      ) : null}
+
       <TurnstileWidget key={turnstileAttempt} onToken={setTurnstileToken} />
 
       {errorMessage ? (

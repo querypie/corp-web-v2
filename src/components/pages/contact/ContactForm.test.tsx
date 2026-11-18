@@ -100,6 +100,19 @@ describe("ContactForm", () => {
     expect(JSON.parse(fetchMock.mock.calls[1][1]?.body as string).turnstileToken).toBe("second-token");
   });
 
+  it("Turnstile이 설정된 경우에만 보안 확인 안내를 표시한다", () => {
+    const notice = contactCopy.securityNotice as string;
+
+    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "test-site-key");
+    const { unmount } = render(<ContactForm {...contactCopy} locale="en" />);
+    expect(screen.getByText(notice)).toBeInTheDocument();
+    unmount();
+    vi.unstubAllEnvs();
+
+    render(<ContactForm {...contactCopy} locale="en" />);
+    expect(screen.queryByText(notice)).not.toBeInTheDocument();
+  });
+
   it.each(["en", "ko", "ja"] as const)("%s 폼 첫 번째에 Aru를 표시하며 일반 방문 시 선택하지 않는다", (locale) => {
     render(<ContactForm {...getContactPageCopy(locale)} locale={locale} />);
     const products = screen.getAllByRole("checkbox");
