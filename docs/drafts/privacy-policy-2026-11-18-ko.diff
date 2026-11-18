@@ -1,5 +1,5 @@
 diff --git a/src/content/legal/privacy-policy/ko/2026-10-31.md b/src/content/legal/privacy-policy/ko/2026-11-18.md
-index 88489307..190f8c7d 100644
+index 88489307..3c5886ab 100644
 --- a/src/content/legal/privacy-policy/ko/2026-10-31.md
 +++ b/src/content/legal/privacy-policy/ko/2026-11-18.md
 @@ -3 +3 @@
@@ -33,27 +33,14 @@ index 88489307..190f8c7d 100644
 @@ -517 +520 @@
 -      <td>이름(First Name)<br>성(Last Name)<br>회사이메일(Business Email)<br>휴대폰번호(Phone Number)<br>직급(Job Title)<br>회사명(Company Name)</td>
 +      <td>이름(First Name)<br>성(Last Name)<br>회사 이메일(Business Email)<br>회사명(Company Name)<br>부서·직책(Department / Title)<br>문의 종류<br>도입 예정 시기<br>관심 제품·서비스<br>문의 내용<br>(선택) 전화번호(Phone Number)</td>
-@@ -605 +608,18 @@
+@@ -605 +608,5 @@
 -주식회사 쿼리파이는 클라우드 서비스 제공자의 정보보호 및 개인정보보호 준수 현황을 면밀하게 검토한 이후에 클라우드 서비스를 이용하고 있으며, 클라우드 서비스 제공자는 회사의 고객 개인정보에 접근할 수 없습니다.
 +### Contact Us 보안 확인(Cloudflare Turnstile)
 +
-+문의 페이지를 불러오고 보안 확인을 수행하는 과정에서 다음 정보가 네트워크를 통해 Cloudflare로 전송되어 처리될 수 있습니다.
-+
-+| 항목 | 내용 |
-+| --- | --- |
-+| 이전받는 자 | Cloudflare, Inc. (개인정보 문의: dpo@cloudflare.com) |
-+| 이전 항목 | IP 주소, 브라우저 User-Agent, TLS 지문, 사이트 키 및 접속 출처 |
-+| 이전 국가 | 미국 및 유럽 (Cloudflare 안내 기준) |
-+| 시점 및 방법 | 문의 페이지 로드 및 보안 확인 시 네트워크를 통해 전송 |
-+| 목적 | 문의 폼의 자동화된 악성 요청 탐지·차단 및 보안 확인 |
-+| 보유 기간 | 처리 목적 달성 시까지. 계약이 종료되거나 목적이 달성되면 회사의 선택에 따라 삭제 또는 반환 |
-+
-+Cloudflare는 Turnstile이 문의 양식에 입력한 내용이나 페이지 입력값을 열람·저장·전송하지 않는다고 안내하고 있습니다. Cloudflare의 처리자·정보처리자 지위, 처리 신호, 이전 국가의 세부 목록과 삭제·반환 절차는 [Cloudflare Turnstile 개인정보 부속서](https://www.cloudflare.com/turnstile-privacy-policy/)와 [Cloudflare 표준 DPA](https://www.cloudflare.com/cloudflare-customer-dpa/)에서 확인할 수 있으며, 해당 내용은 Cloudflare에 의해 변경될 수 있습니다.
-+
-+이전을 거부하려면 [legal@querypie.com](mailto:legal@querypie.com)으로 요청할 수 있으며, Turnstile을 통한 보안 확인을 거부하면 문의 폼 제출이 제한됩니다.
++문의 페이지를 불러올 때 IP 주소, 브라우저 User-Agent, TLS 지문, 사이트 키 및 접속 출처가 Cloudflare, Inc.(개인정보 문의: dpo@cloudflare.com)에 미국 및 유럽으로 전송되어 문의 폼의 보안 확인에 사용됩니다. 해당 정보는 처리 목적 달성 시까지 보유하며, 계약 종료 또는 목적 달성 시 회사의 선택에 따라 삭제 또는 반환됩니다. 이전을 거부하려면 [legal@querypie.com](mailto:legal@querypie.com)으로 요청할 수 있으며, 거부 시 문의 폼 제출이 제한됩니다. Cloudflare의 처리 방식과 역할에 대한 상세 내용은 [Cloudflare Turnstile 개인정보 부속서](https://www.cloudflare.com/turnstile-privacy-policy/)와 [Cloudflare 표준 DPA](https://www.cloudflare.com/cloudflare-customer-dpa/)를 참고하시기 바랍니다.
 +
 +주식회사 쿼리파이는 클라우드 서비스 제공자의 정보보호 및 개인정보보호 준수 현황을 면밀하게 검토한 이후에 클라우드 서비스를 이용하고 있으며, 클라우드 서비스 제공자는 회사가 보관하는 고객 개인정보에 접근할 수 없습니다. 다만 Contact Us 보안 확인을 위해 Cloudflare가 처리하는 정보는 이 조의 'Contact Us 보안 확인(Cloudflare Turnstile)' 항목을 따릅니다.
-@@ -679 +699,2 @@
+@@ -679 +686,2 @@
 -- 이 개인정보처리방침은 2026년 10월 31일부터 적용됩니다.
 +- 이 개인정보처리방침은 2026년 11월 18일부터 적용됩니다.
 +- 방침을 변경하는 경우 시행 7일 전부터 홈페이지에 공지하며, 정보주체에게 불리한 변경은 30일 전에 공지합니다.

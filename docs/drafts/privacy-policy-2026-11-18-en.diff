@@ -1,5 +1,5 @@
 diff --git a/src/content/legal/privacy-policy/en/2026-10-31.md b/src/content/legal/privacy-policy/en/2026-11-18.md
-index 2c567ff0..e87fec1f 100644
+index 2c567ff0..7d821f7e 100644
 --- a/src/content/legal/privacy-policy/en/2026-10-31.md
 +++ b/src/content/legal/privacy-policy/en/2026-11-18.md
 @@ -3 +3 @@ CHEQUER Global, Inc. and our owned subsidiary, QueryPie, Inc.(hereinafter referr
@@ -33,27 +33,14 @@ index 2c567ff0..e87fec1f 100644
 @@ -530 +535 @@ The personal information of the information subject is managed using a cloud ser
 -      <td>First Name<br>Last Name<br>Business Email<br>Phone Number<br>Job Title<br>Company Name</td>
 +      <td>First Name<br>Last Name<br>Business Email<br>Company Name<br>Department / Title<br>Inquiry Type<br>Planned Implementation Date<br>Products or Services of Interest<br>Inquiry Message<br>(Optional) Phone Number</td>
-@@ -613 +618,18 @@ The personal information of the information subject is managed using a cloud ser
+@@ -613 +618,5 @@ The personal information of the information subject is managed using a cloud ser
 -The Company uses cloud services after carefully reviewing the information protection and personal information protection compliance status of the cloud service provider, and the cloud service provider does not have access to the Company's customer personal information.
 +### Contact Us Security Verification (Cloudflare Turnstile)
 +
-+When the inquiry page loads and security verification takes place, the following information may be transmitted over the network to and processed by Cloudflare.
-+
-+| Item | Details |
-+| --- | --- |
-+| Recipient | Cloudflare, Inc. (privacy contact: dpo@cloudflare.com) |
-+| Items transferred | IP address, browser User-Agent, TLS fingerprint, sitekey and associated origin |
-+| Countries of transfer | The United States and Europe (as stated by Cloudflare) |
-+| Time and method | Over the network when the inquiry page is loaded and security verification is performed |
-+| Purpose | Detection and blocking of automated malicious requests and security verification of the inquiry form |
-+| Retention period | Until the purpose of processing is achieved. Deleted or returned at the Company's choice when the agreement ends or the purpose is achieved |
-+
-+Cloudflare states that Turnstile does not access, store, or transmit form entries or other page inputs. Cloudflare's role as a processor or controller, the signals processed, the detailed list of countries, and the deletion and return procedure are described in the [Cloudflare Turnstile Privacy Addendum](https://www.cloudflare.com/turnstile-privacy-policy/) and [Cloudflare's standard DPA](https://www.cloudflare.com/cloudflare-customer-dpa/), and those details may be changed by Cloudflare.
-+
-+Requests to refuse the transfer may be made to [legal@querypie.com](mailto:legal@querypie.com). If you refuse the security verification performed through Turnstile, submission of the inquiry form will be restricted.
++When the inquiry page loads, the IP address, browser User-Agent, TLS fingerprint, sitekey and associated origin are transmitted to Cloudflare, Inc. (privacy contact: dpo@cloudflare.com) in the United States and Europe and used for security verification of the inquiry form. This information is retained until the purpose of processing is achieved and is deleted or returned at the Company's choice when the agreement ends or the purpose is achieved. Requests to refuse the transfer may be made to [legal@querypie.com](mailto:legal@querypie.com); if you refuse, submission of the inquiry form will be restricted. For details of Cloudflare's processing and role, see the [Cloudflare Turnstile Privacy Addendum](https://www.cloudflare.com/turnstile-privacy-policy/) and [Cloudflare's standard DPA](https://www.cloudflare.com/cloudflare-customer-dpa/).
 +
 +The Company uses cloud services after carefully reviewing the information protection and personal information protection compliance status of the cloud service provider, and the cloud service provider does not have access to the customer personal information stored by the Company. However, information processed by Cloudflare for Contact Us security verification is subject to the "Contact Us Security Verification (Cloudflare Turnstile)" section of this Article.
-@@ -689,2 +711,3 @@ If there is any addition, deletion or modification of the contents of the privac
+@@ -689,2 +698,3 @@ If there is any addition, deletion or modification of the contents of the privac
 -- Announcement date: **Oct 31, 2026**
 -- Effective date: **Oct 31, 2026**
 +- For amendments, the Company announces the amendment on the website at least 7 days before the effective date, and at least 30 days before the effective date for changes disadvantageous to information subjects.
