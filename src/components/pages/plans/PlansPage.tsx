@@ -149,61 +149,64 @@ function ComparisonTable({
   comparisonGroups: ComparisonGroup[];
   plans: PricingProduct["plans"];
 }) {
-  const gridTemplateColumns = `minmax(180px, 0.9fr) repeat(${plans.length}, minmax(220px, 1fr))`;
+  const cellPadding = "px-2 py-2.5 md:px-4 md:py-3";
+  const labelPadding = "pl-4 md:pl-5";
 
   return (
-    /* 하단 플랜 비교표 */
-    <div className="w-full">
-      <div className="overflow-x-auto">
-        <div className={cx("mx-auto", plans.length === 2 ? "min-w-[640px] max-w-[900px]" : "min-w-[760px]")}>
-          <div className="grid w-full items-center py-4" style={{ gridTemplateColumns }}>
-            <div />
+    <div className="w-full max-w-[900px] overflow-x-auto">
+      <table className="w-full min-w-[600px] table-fixed border-collapse type-body-md">
+        <colgroup>
+          <col className="w-[31%]" />
+          {plans.map((plan) => <col key={plan} />)}
+        </colgroup>
+        <thead>
+          <tr>
+            <td />
             {plans.map((plan) => (
-              <h2
+              <th
                 key={plan}
+                scope="col"
                 className={cx(
-                  "m-0 px-5 text-center type-h2 font-medium",
+                  "px-5 py-4 text-center type-h2 font-medium",
                   plan === "Enterprise" ? "text-brand" : "text-fg",
                 )}
               >
                 {plan}
-              </h2>
+              </th>
             ))}
-          </div>
-
-          <div className="flex flex-col gap-5">
-            {comparisonGroups.map((group) => (
-              <div key={group.title} className="flex flex-col gap-0">
-                <div className="rounded-button bg-primary px-5 py-1.5 type-body-sm text-bg">
-                  {group.title}
-                </div>
-
-                {group.rows.map((row, rowIndex) => (
-                  <div
-                    key={row.label}
-                    className={cx(
-                      "grid items-center py-4",
-                      rowIndex !== group.rows.length - 1 && "border-b border-border",
-                    )}
-                    style={{ gridTemplateColumns }}
-                  >
-                    <div className="px-5 type-body-md text-fg">{row.label}</div>
-
-                    {row.values.map((cell, index) => (
-                      <div
-                        key={`${row.label}-${plans[index]}`}
-                        className="px-5 text-center type-body-md"
-                      >
-                        {renderComparisonValue(cell)}
-                      </div>
-                    ))}
-                  </div>
+          </tr>
+        </thead>
+        {comparisonGroups.map((group, groupIndex) => (
+          <tbody key={group.title}>
+            <tr className="border-y border-border bg-bg-content">
+              <th
+                className={cx(labelPadding, "py-2 pr-2 text-left type-body-sm text-mute md:pr-4")}
+                colSpan={plans.length + 1}
+                scope="rowgroup"
+              >
+                {group.title}
+              </th>
+            </tr>
+            {group.rows.map((row, rowIndex) => (
+              <tr key={row.label} className={rowIndex < group.rows.length - 1 ? "border-b border-border" : undefined}>
+                <th scope="row" className={cx(cellPadding, labelPadding, "text-left font-normal text-fg")}>
+                  {row.label}
+                </th>
+                {row.values.map((cell, index) => (
+                  <td key={plans[index]} className={cx(cellPadding, "text-center tabular-nums")}>
+                    {renderComparisonValue(cell)}
+                  </td>
                 ))}
-              </div>
+              </tr>
             ))}
-          </div>
-        </div>
-      </div>
+            {groupIndex < comparisonGroups.length - 1 && (
+              <tr aria-hidden="true">
+                <td className="h-4 p-0 md:h-5" colSpan={plans.length + 1} />
+              </tr>
+            )}
+          </tbody>
+        ))}
+      </table>
     </div>
   );
 }

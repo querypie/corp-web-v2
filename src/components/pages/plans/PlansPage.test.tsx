@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 import PlansPage from "./PlansPage";
 
@@ -67,15 +67,14 @@ describe("PlansPage", () => {
     expect(screen.queryByText(/\$20(?:\/| per)/)).not.toBeInTheDocument();
   });
 
-  it("renders comparison group headlines with contrasting text on the primary background", () => {
+  it("exposes plan columns and grouped feature rows in the comparison table", () => {
     render(<PlansPage locale="en" productKey="aip" />);
 
-    expect(screen.getByText("General")).toHaveClass(
-      "bg-primary",
-      "py-1.5",
-      "type-body-sm",
-      "text-bg",
-    );
-    expect(screen.getByText("General")).not.toHaveClass("theme-dark");
+    const table = within(screen.getByRole("table"));
+    expect(table.getAllByRole("columnheader").map((header) => header.textContent)).toEqual(["Business", "Enterprise"]);
+
+    const general = table.getByText("General");
+    expect(general).toHaveAttribute("scope", "rowgroup");
+    expect(within(general.closest("tbody")!).getByRole("rowheader", { name: "Monthly Billing" })).toBeInTheDocument();
   });
 });
