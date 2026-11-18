@@ -2,7 +2,7 @@ import { useId } from "react";
 import { Activity, Cloud, Cpu, KeyRound, Network, Plug, Server, ShieldCheck, Users } from "lucide-react";
 import type { Locale } from "@/constants/i18n";
 import { aiGatewayArchitectureCopy } from "@/copy/aiGatewayLocalized";
-import AiGatewayLogo from "./AiGatewayLogo";
+import AiGatewayLogo from "@/components/sections/common/AiGatewayLogo";
 import styles from "./AiGatewayDiagram.module.css";
 
 const moduleIcons = [Network, Plug, ShieldCheck, Activity];

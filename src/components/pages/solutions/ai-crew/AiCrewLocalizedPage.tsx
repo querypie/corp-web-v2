@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import Badge from "@/components/ui/Badge";
 import ButtonGroup from "@/components/ui/ButtonGroup";
 import { getLocalePath, type Locale } from "@/constants/i18n";
@@ -8,11 +8,11 @@ import { getPublicDetailHref } from "@/features/content/data";
 import AiCrewBeforeAfter from "./AiCrewBeforeAfter";
 import AiCrewPlatformDiagram from "./AiCrewPlatformDiagram";
 import AiCrewUseCaseCard from "./AiCrewUseCaseCard";
-import AiCrewWhitepaperSection from "./AiCrewWhitepaperSection";
+import WhitepaperSection from "@/components/sections/common/WhitepaperSection";
 import { getAiCrewCopy } from "@/copy/aiCrew";
 import SolutionActionLink from "@/components/pages/shared/SolutionActionLink";
 import SolutionIcon from "@/components/pages/shared/SolutionIcon";
-import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
+import SectionHeading from "@/components/sections/common/SectionHeading";
 
 const introductionStepIcons = ["search", "folder", "spark", "check", "connect"] as const;
 
@@ -40,13 +40,13 @@ export default function AiCrewLocalizedPage({ locale }: { locale: Exclude<Locale
 
       <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
         <div className="mx-auto w-full max-w-[1200px] space-y-10">
-          <SolutionSectionHeading title={copy.beforeAfter.titleLines} description={copy.beforeAfter.description} />
+          <SectionHeading title={copy.beforeAfter.titleLines} description={copy.beforeAfter.description} />
           <AiCrewBeforeAfter {...copy.beforeAfter} />
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-[1200px] space-y-10">
-        <SolutionSectionHeading title={copy.introduction.title} description={copy.introduction.description} />
+        <SectionHeading title={copy.introduction.title} description={copy.introduction.description} />
         <ol className="grid gap-4 md:grid-cols-5">{copy.introduction.steps.map(([number, title, body], index) => <li className="relative rounded-box border border-border bg-bg p-6" key={number}><div className="flex items-center justify-between gap-3"><Badge variant="primary">Step {number}</Badge><span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-bg-content text-fg"><SolutionIcon name={introductionStepIcons[index] ?? "check"} /></span></div><h3 className="mb-3 mt-6 type-h3 text-fg">{title}</h3><p className="m-0 type-body-md text-mute">{body}</p></li>)}</ol>
         <ButtonGroup className="flex-wrap justify-center">
           <SolutionActionLink href={contactHref} variant="secondary">{copy.introduction.action}</SolutionActionLink>
@@ -55,11 +55,11 @@ export default function AiCrewLocalizedPage({ locale }: { locale: Exclude<Locale
       </section>
 
       <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
-        <div className="mx-auto w-full max-w-[1200px] space-y-6"><SolutionSectionHeading title={copy.platform.title} description={copy.platform.description} /><AiCrewPlatformDiagram coreBody={copy.platform.coreBody} items={copy.platform.items} /></div>
+        <div className="mx-auto w-full max-w-[1200px] space-y-6"><SectionHeading title={copy.platform.title} description={copy.platform.description} /><AiCrewPlatformDiagram coreBody={copy.platform.coreBody} items={copy.platform.items} /></div>
       </section>
 
       <section className="mx-auto w-full max-w-[1200px] space-y-10">
-        <SolutionSectionHeading title={copy.useCases.title} description={copy.useCases.description} />
+        <SectionHeading title={copy.useCases.title} description={copy.useCases.description} />
         <div className="grid grid-cols-1 gap-[30px] md:grid-cols-2 lg:grid-cols-3">
           {copy.useCases.items.map((item) => (
             <AiCrewUseCaseCard
@@ -76,7 +76,7 @@ export default function AiCrewLocalizedPage({ locale }: { locale: Exclude<Locale
       </section>
 
       <section className="mx-auto w-full max-w-[1200px] space-y-10">
-        <SolutionSectionHeading title={copy.voices.title} />
+        <SectionHeading title={copy.voices.title} />
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">{copy.voices.items.map(([initials, role, organization, quote]) => <figure className="m-0 rounded-box bg-bg-content p-6 text-left" key={initials}><blockquote className="m-0 whitespace-pre-line type-body-lg text-fg">“{quote}”</blockquote><figcaption className="mt-6 flex items-center gap-4"><span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-fg type-body-md text-bg">{initials}</span><div className="min-w-0"><p className="m-0 type-body-sm text-fg">{role}</p><p className="m-0 type-body-sm text-mute">{organization}</p></div></figcaption></figure>)}</div>
           <div className="grid gap-4 rounded-box bg-bg-content p-6 md:grid-cols-2">
@@ -86,7 +86,7 @@ export default function AiCrewLocalizedPage({ locale }: { locale: Exclude<Locale
         </div>
       </section>
 
-      <AiCrewWhitepaperSection {...copy.whitepaper} href={whitepaperHref} />
+      <WhitepaperSection {...copy.whitepaper} href={whitepaperHref} imageSrc="/resources/white-papers/thumbnail-25.webp" />
 
       <Cta actionHref={contactHref} actionLabel={copy.cta.action} compactHeading description={copy.cta.description} hideEyebrow locale={locale} secondaryActionHref={demoHref} secondaryActionLabel={copy.cta.secondaryAction} secondaryActionVariant="outline" title={copy.cta.title} />
     </div>

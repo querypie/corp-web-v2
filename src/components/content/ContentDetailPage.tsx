@@ -3,13 +3,13 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import type { Locale } from "@/constants/i18n";
 import ContentArticlePreview from "@/components/content/ContentArticlePreview";
-import DetailContentList from "@/components/sections/DetailContentList";
+import DetailContentList from "@/components/sections/common/DetailContentList";
 import ContentShareActions from "./ContentShareActions";
 import { getAcpLabNotesCopy } from "@/copy/acpLabNotes";
 import type { LabNote } from "@/features/content/acpLabNotes";
 import { getLockedPdfButtonLabel, getPdfWhitePaperButtonLabel } from "@/features/content/data";
 
-export type DocsDetailPageProps = {
+export type ContentDetailPageProps = {
   labNote?: LabNote;
   authorProfileImageSrc?: string;
   bodyHtml?: string;
@@ -53,7 +53,7 @@ function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
 }
 
-export default function DocsDetailPage({
+export default function ContentDetailPage({
   labNote,
   authorProfileImageSrc,
   bodyHtml = "",
@@ -81,7 +81,7 @@ export default function DocsDetailPage({
   unlockCookieName,
   writer,
   writerRole,
-}: DocsDetailPageProps) {
+}: ContentDetailPageProps) {
   const labCopy = getAcpLabNotesCopy(locale);
   return (
     <div className={`flex w-full justify-center ${pageXPaddingClassName} pb-10`}>

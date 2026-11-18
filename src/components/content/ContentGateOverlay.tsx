@@ -2,7 +2,7 @@
 
 import { startTransition } from "react";
 import { useRouter } from "next/navigation";
-import ContentLeadForm from "./ContentLeadForm";
+import ContentLeadForm from "@/components/forms/ContentLeadForm";
 import type { ContactPageCopy } from "@/copy/contact";
 import type { ManagedContentSection } from "@/features/content/data";
 

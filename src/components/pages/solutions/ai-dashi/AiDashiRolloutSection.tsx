@@ -1,5 +1,5 @@
 import Badge from "@/components/ui/Badge";
-import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
+import SectionHeading from "@/components/sections/common/SectionHeading";
 
 type RolloutStep = readonly [number: string, duration: string, title: string, body: string];
 
@@ -29,7 +29,7 @@ export default function AiDashiRolloutSection({ description, steps, title, title
           </p>
         </header>
       ) : (
-        <SolutionSectionHeading description={description} title={title} />
+        <SectionHeading description={description} title={title} />
       )}
       <ol className="grid gap-4 md:grid-cols-4">
         {steps.map(([number, duration, stepTitle, body]) => (

@@ -1,8 +1,8 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import YoutubePreviewPlayer from "@/components/content/YoutubePreviewPlayer";
 import ThreeCard from "./ThreeCard";
-import FeatureMediaList from "@/components/sections/FeatureMediaList";
+import FeatureMediaList from "@/components/sections/common/FeatureMediaList";
 import { getLocalePath, type Locale } from "@/constants/i18n";
 
 type Props = {

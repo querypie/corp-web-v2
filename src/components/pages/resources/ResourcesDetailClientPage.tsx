@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import DocsDetailPage, { type DocsDetailPageProps } from "./ResourcesDetailPage";
-import ContentGateOverlay from "./ContentGateOverlay";
-import ContentLeadForm from "./ContentLeadForm";
+import ContentDetailPage, { type ContentDetailPageProps } from "@/components/content/ContentDetailPage";
+import ContentGateOverlay from "@/components/content/ContentGateOverlay";
+import ContentLeadForm from "@/components/forms/ContentLeadForm";
 import type { Locale } from "@/constants/i18n";
 import { useManagedContents } from "@/features/content/clientStore";
 import type { ContactPageCopy } from "@/copy/contact";
@@ -32,7 +32,7 @@ import {
 
 type DocsDetailClientPageProps = {
   contactCopy: ContactPageCopy;
-  fallbackProps: DocsDetailPageProps;
+  fallbackProps: ContentDetailPageProps;
   initialContentUnlocked: boolean;
   initialItems: ManagedContentEntry[];
   locale: Locale;
@@ -65,11 +65,11 @@ export default function DocsDetailClientPage({
   }, [initialContentUnlocked, resolvedSlug]);
 
   if (!isHydrated) {
-    return <DocsDetailPage {...fallbackProps} />;
+    return <ContentDetailPage {...fallbackProps} />;
   }
 
   if (!currentItem) {
-    return <DocsDetailPage {...fallbackProps} />;
+    return <ContentDetailPage {...fallbackProps} />;
   }
 
   const isGateActive = isContentGatingEnabled(currentItem) && !isUnlocked;
@@ -122,7 +122,7 @@ export default function DocsDetailClientPage({
   const downloadHref = getContentDownloadPdfSrc(currentItem, locale);
 
   return (
-    <DocsDetailPage
+    <ContentDetailPage
       {...fallbackProps}
       authorProfileImageSrc={currentItem.categorySlug === "white-papers" ? currentItem.authorProfileImageSrc : undefined}
       labNote={getLabNote(currentItem)}

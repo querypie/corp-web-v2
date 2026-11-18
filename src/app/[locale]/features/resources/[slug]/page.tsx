@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { isLocale } from "@/constants/i18n";
 import ResourcesDetailClientPage from "@/components/pages/resources/ResourcesDetailClientPage";
-import ContentGateOverlay from "@/components/pages/resources/ContentGateOverlay";
-import type { DocsDetailPageProps } from "@/components/pages/resources/ResourcesDetailPage";
+import ContentGateOverlay from "@/components/content/ContentGateOverlay";
+import type { ContentDetailPageProps } from "@/components/content/ContentDetailPage";
 import { getContactPageCopy } from "@/copy/contact";
 import { getResourcesPageCopy } from "@/copy/contentPages";
 import { docsCategoryConfigs, getCategoryHref } from "@/features/content/config";
@@ -139,7 +139,7 @@ export default async function ResourcesDetailRoute({ params }: DocsDetailRoutePr
       ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
       : currentEntry.authorName,
     writerRole: currentEntry.categorySlug === "white-papers" || currentEntry.categorySlug === "blogs" ? getLocalizedAuthorRole(currentEntry, locale) : undefined,
-  } satisfies DocsDetailPageProps;
+  } satisfies ContentDetailPageProps;
 
   return (
     <ResourcesDetailClientPage

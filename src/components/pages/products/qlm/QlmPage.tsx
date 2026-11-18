@@ -1,23 +1,17 @@
-import { AppWindow, BrainCircuit, UserRound, Zap } from "lucide-react";
-import Cta from "@/components/sections/Cta";
-import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
+import { BrainCircuit, Zap } from "lucide-react";
+import Cta from "@/components/sections/common/Cta";
+import SectionHeading from "@/components/sections/common/SectionHeading";
 import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import type { Locale } from "@/constants/i18n";
 import { getContactHref } from "@/features/contact/prefill";
 import { qlmCopy } from "@/copy/qlmLocalized";
+import { qlmBenchmarkModels, qlmBenchmarkRows } from "@/copy/qlmBenchmarks";
 import cards from "@/components/pages/shared/FeatureCards.module.css";
 import styles from "./QlmPage.module.css";
 import QlmFeatureVisual from "./QlmFeatureVisual";
-import AiGatewayLogo from "../ai-gateway/AiGatewayLogo";
-import qev from "../qev/QevPage.module.css";
-
-const agentLogos = [
-  { label: "Aru", src: "/assets/icons/icon-aru.svg" },
-  { label: "Claude Code", src: "/assets/icons/llm-claude-color.svg" },
-  { label: "Codex", src: "/assets/icons/llm-gpt-color.svg" },
-  { label: "OpenClaw", src: "/assets/icons/agent-openclaw.svg" },
-  { label: "Hermes", src: "/assets/icons/agent-hermes.webp" },
-];
+import AiGatewayLogo from "@/components/sections/common/AiGatewayLogo";
+import AiAgentSource from "@/components/pages/shared/AiAgentSource";
+import DiagramConnector from "@/components/pages/shared/DiagramConnector";
 
 export default function QlmPage({ locale }: { locale: Locale }) {
   const copy = qlmCopy[locale];
@@ -25,12 +19,12 @@ export default function QlmPage({ locale }: { locale: Locale }) {
     <section className={pageContentWidthClassName}>
       <header className="grid items-start gap-6 md:grid-cols-2 md:gap-12">
         <h1 className="m-0 text-pretty type-h1 text-fg">{copy.hero.title}<br />{copy.hero.accent}</h1>
-        <p className="m-0 text-pretty type-body-lg leading-relaxed text-fg">{copy.hero.description}</p>
+        <p className="m-0 text-pretty type-body-lg text-fg">{copy.hero.description}</p>
       </header>
       <figure className={styles.routing} aria-label={copy.routing.title.replace("\n", " ")}>
         <div className={styles.flow}>
-          <div className={qev.input}><h3 className="type-h3">{copy.routing.input}</h3><ul className={qev.agentLogos}>{agentLogos.map(({ label, src }) => <li key={label} title={label}><img src={src} alt={label} width={28} height={28} /></li>)}<li title={copy.routing.application}><AppWindow role="img" aria-label={copy.routing.application} /></li><li title={copy.routing.user}><UserRound role="img" aria-label={copy.routing.user} /></li></ul></div>
-          <span className={qev.connector} aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" /></svg></span>
+          <AiAgentSource label={copy.routing.input} applicationLabel={copy.routing.application} userLabel={copy.routing.user} />
+          <DiagramConnector />
           <div className={styles.gateway}><AiGatewayLogo /><strong>{copy.routing.gateway}</strong><span>{copy.routing.decision}</span></div>
           <div className={styles.branches} aria-hidden="true">
             <svg className={styles.branchDesktop} viewBox="0 0 48 116" preserveAspectRatio="none" fill="none"><path className={styles.flowLine} d="M0 58 H14 Q24 58 24 48 V10 Q24 0 34 0 H42 M24 58 V106 Q24 116 34 116 H42" /><path className={styles.arrowhead} d="M38 -4 L48 0 L38 4 Z M38 112 L48 116 L38 120 Z" /></svg>
@@ -42,12 +36,12 @@ export default function QlmPage({ locale }: { locale: Locale }) {
             <span>{tasks}</span>
           </div>)}</div>
         </div>
-        <figcaption>{copy.routing.note}</figcaption>
+        <figcaption className="type-body-sm">{copy.routing.note}</figcaption>
       </figure>
     </section>
     <section className={cards.band}>
       <div className={`${pageContentWidthClassName} ${cards.section}`}>
-        <SolutionSectionHeading title={copy.features.title} description={copy.features.description} layout="split" />
+        <SectionHeading title={copy.features.title} description={copy.features.description} layout="split" relaxedDescription={false} />
         <div className={cards.featureGrid}>{copy.features.cards.map((card, index) => {
           return <article className={cards.feature} key={card.title}>
             <QlmFeatureVisual index={index} locale={locale} />
@@ -58,15 +52,17 @@ export default function QlmPage({ locale }: { locale: Locale }) {
       </div>
     </section>
     <section className={pageContentWidthClassName}>
-      <SolutionSectionHeading title={copy.performance.title} description={copy.performance.description} layout="split" />
-      <div className={styles.tableWrap}><table className={styles.table}>
+      <SectionHeading title={copy.performance.title} description={copy.performance.description} layout="split" relaxedDescription={false} />
+      <div className={styles.tableWrap}><table className={`${styles.table} type-body-md`}>
         <caption className="sr-only">{copy.performance.tableLabel}</caption>
-        <thead><tr>{copy.performance.headers.map(label => <th scope="col" key={label}>{label}</th>)}</tr></thead>
-        <tbody>{copy.performance.metrics.map(item => <tr key={item.benchmark}>
-          <th scope="row">{item.benchmark}</th><td>{item.title}</td><td>{item.metric}</td><td>{item.value}{item.metric === "Score" ? "" : "%"}</td>
+        <thead><tr><th scope="col">{copy.comparison.area}</th>{qlmBenchmarkModels.map(model => <th scope="col" className={model === "QLM" ? styles.qlmColumn : undefined} key={model}>{model}</th>)}</tr></thead>
+        <tbody>{qlmBenchmarkRows.map((item, rowIndex) => <tr key={item.benchmark}>
+          <th scope="row">{copy.comparison.areas[rowIndex]}</th>
+          {item.values.map((value, columnIndex) => <td className={qlmBenchmarkModels[columnIndex] === "QLM" ? styles.qlmColumn : undefined} key={qlmBenchmarkModels[columnIndex]}>
+            {value ?? "—"}
+          </td>)}
         </tr>)}</tbody>
       </table></div>
-      <p className={styles.notes}>{copy.performance.note}</p>
     </section>
     <Cta locale={locale} title={copy.cta.title} description={copy.cta.description} actionLabel={copy.cta.action} actionHref={getContactHref(locale)} compactHeading hideEyebrow secondaryActionLabel="" />
   </div>;

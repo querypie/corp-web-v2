@@ -1,13 +1,13 @@
 import { pageContentWidthClassName } from "@/constants/layout";
 import type { Locale } from "@/constants/i18n";
 import { aiGatewayCopy } from "@/copy/aiGatewayLocalized";
-import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
+import SectionHeading from "@/components/sections/common/SectionHeading";
 import AiGatewaySecurity from "./AiGatewaySecurity";
 import AiGatewayFeatureVisual, { type AiGatewayFeatureId } from "./AiGatewayFeatureVisual";
 import styles from "@/components/pages/shared/FeatureCards.module.css";
 
 function Heading({ title, description }: { title: string; description: string }) {
-  return <SolutionSectionHeading title={title} description={description} layout="split" />;
+  return <SectionHeading title={title} description={description} layout="split" relaxedDescription={false} />;
 }
 
 function Challenges({ locale }: { locale: Locale }) {

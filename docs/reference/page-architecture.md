@@ -10,7 +10,7 @@
 | 이전 주소 호환 | `src/features/routing/offeringRedirects.ts` |
 | 라우트·metadata·데이터 조회 | `src/app/[locale]/{고유 주소}/page.tsx` |
 | 제품·서비스 구현 | `components/pages/products`, `services`, `solutions` |
-| 공용 UI 구성 | `components/pages/shared` |
+| 공용 섹션 / 콘텐츠 UI / 작은 페이지 공통 요소 | `components/sections/common`, `components/content`, `components/pages/shared` |
 | 정적 문구 | `src/copy` |
 
 ## URL 규칙
@@ -27,11 +27,11 @@
 2. 라우트는 해당 제품·서비스 폴더의 구현을 연결한다. 다국어 페이지는 `locale`을 전달하며 언어별 문구는 copy 모듈에 둔다.
 3. 메뉴·CTA·metadata는 `getOfferingHref(locale, id)`를 사용한다.
 4. 주소 이전이 필요하면 기존 경로를 `legacyPaths`에 남긴다. 자동 생성되는 308 규칙은 locale 유무와 쿼리스트링을 유지한다.
-5. 사이트맵은 같은 목록과 지원 언어를 사용한다. 준비 중인 QLM·QEV와 외부 데모 진입 라우트는 `sitemap: false`로 제외한다.
+5. 사이트맵은 같은 목록과 지원 언어를 사용한다. 공개된 QLM·QEV는 포함하며, 외부 데모 진입 라우트 등 검색에서 제외할 경로만 `sitemap: false`로 설정한다.
 
 ## 내부 폴더
 
-`products/ai-gateway`, `services/penetration-testing`, `services/fde`처럼 페이지별 컴포넌트·스타일·테스트를 함께 둔다. 공용 제목·본문과 피처 카드 스타일은 `shared`에 두어 다른 제품의 전용 스타일에 의존하지 않게 한다.
+`products/ai-gateway`, `services/penetration-testing`, `services/fde`처럼 페이지별 컴포넌트·스타일·테스트를 함께 둔다. 공용 섹션 제목은 `sections/common/SectionHeading`, 피처 카드 스타일과 작은 공통 다이어그램 요소는 `pages/shared`에 두어 다른 제품의 전용 스타일에 의존하지 않게 한다. 상세 배치 기준은 [컴포넌트 구조](component-architecture.md)를 따른다.
 
 AI Crew·AI Dashi의 일본어 전용 본문과 영어·한국어 본문은 해당 솔루션 폴더 안에서 유지한다. 실제 시장별 내용 차이를 없애는 번역 통합은 하지 않는다. 일본어 홈의 `home/japan`은 별도 레이아웃을 위한 의도된 경계이므로 유지한다.
 

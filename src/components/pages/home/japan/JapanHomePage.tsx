@@ -1,5 +1,5 @@
 import type { HomePageProps } from "@/components/pages/home/HomePage";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import Clients from "../Clients";
 import Hero from "../Hero";

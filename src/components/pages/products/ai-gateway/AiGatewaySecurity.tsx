@@ -1,7 +1,7 @@
 import type { Locale } from "@/constants/i18n";
 import { pageContentWidthClassName } from "@/constants/layout";
 import { aiGatewaySecurityCopy } from "@/copy/aiGatewaySecurity";
-import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
+import SectionHeading from "@/components/sections/common/SectionHeading";
 import AiGatewayAcpDiagram from "./AiGatewayAcpDiagram";
 import contentStyles from "@/components/pages/shared/FeatureCards.module.css";
 import styles from "./AiGatewaySecurity.module.css";
@@ -10,11 +10,11 @@ export default function AiGatewaySecurity({ locale }: { locale: Locale }) {
   const { dlp, acp } = aiGatewaySecurityCopy[locale];
   return <>
     <section className={`${pageContentWidthClassName} ${contentStyles.section}`}>
-      <SolutionSectionHeading title={dlp.title} description={dlp.description} layout="split" />
+      <SectionHeading title={dlp.title} description={dlp.description} layout="split" relaxedDescription={false} />
       <div className={styles.dlpLayout}>
         <ol className={styles.points}>{dlp.points.map((point, index) => {
           return <li className={styles.point} key={point.title}>
-            <span className={styles.stepNumber} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+            <span className={`${styles.stepNumber} type-body-md`} aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
             <div><h3 className="m-0 type-h3 text-fg">{point.title}</h3><p className="mb-0 mt-3 type-body-md text-mute">{point.body}</p></div>
           </li>;
         })}</ol>
@@ -36,7 +36,7 @@ export default function AiGatewaySecurity({ locale }: { locale: Locale }) {
     </section>
     <section className={contentStyles.band}>
       <div className={`${pageContentWidthClassName} ${contentStyles.section}`}>
-        <SolutionSectionHeading title={acp.title} description={acp.description} layout="split" />
+        <SectionHeading title={acp.title} description={acp.description} layout="split" relaxedDescription={false} />
         <AiGatewayAcpDiagram locale={locale} />
       </div>
     </section>

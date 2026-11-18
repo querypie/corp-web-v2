@@ -25,6 +25,9 @@
 
 ## 디렉토리 개요
 
+컴포넌트의 배치와 재사용 기준은 [컴포넌트 구조](docs/reference/component-architecture.md)를 참고합니다.
+사용처와 큰 파일은 `npm run audit:components`로 점검할 수 있습니다.
+
 ```text
 src/
 ├── app/

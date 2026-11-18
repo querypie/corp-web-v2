@@ -1,7 +1,7 @@
 import { getOfferingHref } from "@/features/offerings/routes";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import { isLocale, type Locale } from "@/constants/i18n";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { withDynamicOgImage } from "@/features/seo/metadata";

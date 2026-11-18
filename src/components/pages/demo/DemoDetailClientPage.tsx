@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import DemoDetailPage from "./DemoDetailPage";
 import type { Locale } from "@/constants/i18n";
-import type { DocsDetailPageProps } from "../resources/ResourcesDetailPage";
-import ContentGateOverlay from "../resources/ContentGateOverlay";
-import ContentLeadForm from "../resources/ContentLeadForm";
+import type { ContentDetailPageProps } from "@/components/content/ContentDetailPage";
+import ContentGateOverlay from "@/components/content/ContentGateOverlay";
+import ContentLeadForm from "@/components/forms/ContentLeadForm";
 import { useManagedContents } from "@/features/content/clientStore";
 import type { ContactPageCopy } from "@/copy/contact";
 import useHydrated from "@/hooks/useHydrated";
@@ -30,7 +30,7 @@ import {
 
 type DemoDetailClientPageProps = {
   contactCopy: ContactPageCopy;
-  fallbackProps: DocsDetailPageProps;
+  fallbackProps: ContentDetailPageProps;
   initialContentUnlocked: boolean;
   initialItems: ManagedContentEntry[];
   locale: Locale;

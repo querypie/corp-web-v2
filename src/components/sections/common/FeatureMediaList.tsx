@@ -1,10 +1,8 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import TextButton from "@/components/ui/TextButton";
 import { featureItemGapClassName } from "@/constants/layout";
+import FeatureVideoPlayback from "./FeatureVideoPlayback";
 
-type FeatureItem = {
+export type FeatureItem = {
   action?: {
     href: string;
     isExternal?: boolean;
@@ -27,53 +25,8 @@ type FeatureItem = {
 
 type FeatureMediaListProps = {
   className?: string;
-  items?: FeatureItem[];
+  items: FeatureItem[];
 };
-
-const defaultItems: FeatureItem[] = [
-  {
-    body: [
-      "Turn conversations and customer feedback",
-      "into actionable issues that are routed,",
-      "labeled, and prioritized for the right team.",
-    ],
-    imageAlt: "AIP workspace preview",
-    imageSrc: "/assets/pages/home/features/feature-panel-a.png",
-    title: ["Make product", "operations self-driving"],
-  },
-  {
-    body: [
-      "Turn conversations and customer feedback",
-      "into actionable issues that are routed,",
-      "labeled, and prioritized for the right team.",
-    ],
-    imageAlt: "Model selector preview",
-    imageSrc: "/assets/pages/home/features/feature-panel-b.png",
-    reverse: true,
-    title: ["Make product", "operations self-driving"],
-  },
-  {
-    body: [
-      "Turn conversations and customer feedback",
-      "into actionable issues that are routed,",
-      "labeled, and prioritized for the right team.",
-    ],
-    imageAlt: "AIP workspace preview",
-    imageSrc: "/assets/pages/home/features/feature-panel-a.png",
-    title: ["Make product", "operations self-driving"],
-  },
-  {
-    body: [
-      "Turn conversations and customer feedback",
-      "into actionable issues that are routed,",
-      "labeled, and prioritized for the right team.",
-    ],
-    imageAlt: "Model selector preview",
-    imageSrc: "/assets/pages/home/features/feature-panel-b.png",
-    reverse: true,
-    title: ["Make product", "operations self-driving"],
-  },
-];
 
 function cx(...values: Array<string | false | null | undefined>) {
   return values.filter(Boolean).join(" ");
@@ -166,11 +119,9 @@ function FeatureMedia({
   imageAlt,
   imageClassName,
   imageSrc,
-  setVideoRef,
   videoSrc,
 }: Pick<FeatureItem, "imageAlt" | "imageClassName" | "imageSrc" | "videoSrc"> & {
   className?: string;
-  setVideoRef?: (video: HTMLVideoElement | null) => void;
 }) {
   if (!videoSrc && !imageSrc) return null;
   const isGif = imageSrc?.toLowerCase().endsWith(".gif") ?? false;
@@ -187,7 +138,6 @@ function FeatureMedia({
     >
       {videoSrc ? (
         <FeatureVideoPlayer
-          setVideoRef={setVideoRef}
           src={videoSrc}
           title={imageAlt}
         />
@@ -203,11 +153,9 @@ function FeatureMedia({
 }
 
 function FeatureVideoPlayer({
-  setVideoRef,
   src,
   title,
 }: {
-  setVideoRef?: (video: HTMLVideoElement | null) => void;
   src: string;
   title: string;
 }) {
@@ -221,7 +169,6 @@ function FeatureVideoPlayer({
       muted
       playsInline
       preload="metadata"
-      ref={setVideoRef}
       src={previewSrc}
     />
   );
@@ -229,69 +176,9 @@ function FeatureVideoPlayer({
 
 export default function FeatureMediaList({
   className,
-  items = defaultItems,
+  items,
 }: FeatureMediaListProps) {
-  const videoRefs = useRef(new Map<number, HTMLVideoElement>());
-
-  useEffect(() => {
-    let rafId = 0;
-
-    function updatePlayback() {
-      cancelAnimationFrame(rafId);
-      rafId = requestAnimationFrame(() => {
-        if (document.visibilityState !== "visible") {
-          videoRefs.current.forEach((video) => video.pause());
-          return;
-        }
-
-        const viewportCenter = window.innerHeight / 2;
-        const activationDistance = Math.min(window.innerHeight * 0.48, 420);
-        let activeIndex: number | null = null;
-        let closestDistance = Number.POSITIVE_INFINITY;
-
-        videoRefs.current.forEach((video, index) => {
-          const rect = video.getBoundingClientRect();
-          const isVisible = rect.bottom > 0 && rect.top < window.innerHeight;
-          if (!isVisible) return;
-
-          const videoCenter = rect.top + rect.height / 2;
-          const distance = Math.abs(videoCenter - viewportCenter);
-          if (distance > activationDistance) return;
-
-          if (distance < closestDistance) {
-            activeIndex = index;
-            closestDistance = distance;
-          }
-        });
-
-        videoRefs.current.forEach((video, index) => {
-          if (index === activeIndex) {
-            void video.play();
-            return;
-          }
-
-          video.pause();
-        });
-      });
-    }
-
-    updatePlayback();
-    window.addEventListener("scroll", updatePlayback, { passive: true });
-    window.addEventListener("resize", updatePlayback);
-    document.addEventListener("visibilitychange", updatePlayback);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      window.removeEventListener("scroll", updatePlayback);
-      window.removeEventListener("resize", updatePlayback);
-      document.removeEventListener("visibilitychange", updatePlayback);
-      videoRefs.current.forEach((video) => video.pause());
-    };
-  }, []);
-
-  return (
-    /* 텍스트/이미지 페어를 반복 렌더하는 기능 소개 섹션 */
-    <section className={cx("flex w-full justify-center", className)}>
+  const content = (
       <div className={`flex w-full max-w-[1200px] flex-col ${featureItemGapClassName}`}>
         {items.map((item, index) => {
           const shouldReverse = item.reverse ?? index % 2 === 1;
@@ -323,23 +210,15 @@ export default function FeatureMediaList({
                 imageAlt={item.imageAlt}
                 imageClassName={item.imageClassName}
                 imageSrc={item.imageSrc}
-                setVideoRef={
-                  item.videoSrc
-                    ? (video) => {
-                        if (video) {
-                          videoRefs.current.set(index, video);
-                          return;
-                        }
-                        videoRefs.current.delete(index);
-                      }
-                    : undefined
-                }
                 videoSrc={item.videoSrc}
               />
             </div>
           );
         })}
       </div>
-    </section>
   );
+  const sectionClassName = cx("flex w-full justify-center", className);
+  return items.some(item => item.videoSrc)
+    ? <FeatureVideoPlayback className={sectionClassName}>{content}</FeatureVideoPlayback>
+    : <section className={sectionClassName}>{content}</section>;
 }

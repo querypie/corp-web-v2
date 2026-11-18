@@ -1,7 +1,7 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import Hero from "@/components/pages/products/aip/Hero";
-import Cta from "@/components/sections/Cta";
-import FeatureMediaList from "@/components/sections/FeatureMediaList";
+import Cta from "@/components/sections/common/Cta";
+import FeatureMediaList from "@/components/sections/common/FeatureMediaList";
 import type { Locale } from "@/constants/i18n";
 
 type Props = {

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import Badge from "@/components/ui/Badge";
 import ButtonGroup from "@/components/ui/ButtonGroup";
 import { getContactHref } from "@/features/contact/prefill";
@@ -9,10 +9,10 @@ import { getPublicDetailHref } from "@/features/content/data";
 import AiCrewBeforeAfter from "./AiCrewBeforeAfter";
 import AiCrewPlatformDiagram from "./AiCrewPlatformDiagram";
 import AiCrewUseCaseCard from "./AiCrewUseCaseCard";
-import AiCrewWhitepaperSection from "./AiCrewWhitepaperSection";
+import WhitepaperSection from "@/components/sections/common/WhitepaperSection";
 import SolutionActionLink from "@/components/pages/shared/SolutionActionLink";
 import SolutionIcon from "@/components/pages/shared/SolutionIcon";
-import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
+import SectionHeading from "@/components/sections/common/SectionHeading";
 
 export const metadata = {
   title: "作業を減らし、成果を増やす。| AI Crew",
@@ -75,7 +75,7 @@ export default function AiCrewPage() {
 
       <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
         <div className="mx-auto w-full max-w-[1200px] space-y-10">
-          <SolutionSectionHeading title={["AIに下準備を任せ、", "人は判断と創造に集中する"]} description="判断前の業務はAIに任せ、人は本質的な仕事に集中します。" />
+          <SectionHeading title={["AIに下準備を任せ、", "人は判断と創造に集中する"]} description="判断前の業務はAIに任せ、人は本質的な仕事に集中します。" />
           <AiCrewBeforeAfter
             afterTitle="役割分担が整理され、本来の業務に集中"
             beforePoints={["情報が散らばり、調査と確認に時間がかかる", "下準備が多く、本来の判断に時間を使えない"]}
@@ -90,7 +90,7 @@ export default function AiCrewPage() {
       </section>
 
       <section className="mx-auto w-full max-w-[1200px] space-y-10">
-        <SolutionSectionHeading title="導入は5ステップ。任せやすい業務から小さく始める" description="課題整理、テスト導入、試作、本番展開、改善まで一気通貫で支援します。" />
+        <SectionHeading title="導入は5ステップ。任せやすい業務から小さく始める" description="課題整理、テスト導入、試作、本番展開、改善まで一気通貫で支援します。" />
         <ol className="grid gap-4 md:grid-cols-5">
           {introductionSteps.map(([number, title, body], index) => (
             <li className="relative rounded-box border border-border bg-bg p-6" key={number}><div className="flex items-center justify-between gap-3"><Badge variant="primary">Step {number}</Badge><span className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-[14px] bg-bg-content text-fg"><SolutionIcon name={introductionStepIcons[index] ?? "check"} /></span></div><h3 className="mb-3 mt-6 type-h3 text-fg">{title}</h3><p className="m-0 type-body-md text-mute">{body}</p></li>
@@ -104,13 +104,13 @@ export default function AiCrewPage() {
 
       <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
         <div className="mx-auto w-full max-w-[1200px] space-y-6">
-          <SolutionSectionHeading title="実務での安全なAI活用を支える、QueryPie AIP" description="自律したAIエージェントの実務性能とガバナンスを支える、エンタープライズAI基盤です。" />
+          <SectionHeading title="実務での安全なAI活用を支える、QueryPie AIP" description="自律したAIエージェントの実務性能とガバナンスを支える、エンタープライズAI基盤です。" />
           <AiCrewPlatformDiagram />
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-[1200px] space-y-10">
-        <SolutionSectionHeading title="まずは、最も負荷の高い業務から" description="改善インパクトの大きい業務を起点に、業務フローや運用ルールに合わせて設計します。まずは効果が見えやすい領域から小さく始められます。以下は、実際にご相談の多いユースケースです。" />
+        <SectionHeading title="まずは、最も負荷の高い業務から" description="改善インパクトの大きい業務を起点に、業務フローや運用ルールに合わせて設計します。まずは効果が見えやすい領域から小さく始められます。以下は、実際にご相談の多いユースケースです。" />
         <div className="grid grid-cols-1 gap-[30px] md:grid-cols-2 lg:grid-cols-3">
           {useCases.map((item) => (
             <AiCrewUseCaseCard
@@ -127,7 +127,7 @@ export default function AiCrewPage() {
       </section>
 
       <section className="mx-auto w-full max-w-[1200px] space-y-10">
-        <SolutionSectionHeading title="現場は仕事が進むスピードを、経営は投資対効果を実感" />
+        <SectionHeading title="現場は仕事が進むスピードを、経営は投資対効果を実感" />
         <div className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             {voices.map(([initials, role, organization, quote]) => (
@@ -144,12 +144,13 @@ export default function AiCrewPage() {
         </div>
       </section>
 
-      <AiCrewWhitepaperSection
+      <WhitepaperSection
         action="無料ダウンロード"
         badges={["経営層向け", "AIトランスフォーメーション", "日本市場"]}
         description="世界と日本のAI活用の差を踏まえ、AIを全社の生産性と成長へつなげる実践的なプロセスと変革指針を解説します。"
         href={whitepaperHref}
         imageAlt="AI Transformation ホワイトペーパー"
+        imageSrc="/resources/white-papers/thumbnail-25.webp"
         title="なぜ今、日本企業がAIトランスフォーメーションに取り組むべきなのか"
       />
 

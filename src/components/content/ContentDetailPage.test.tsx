@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import DocsDetailPage from "./ResourcesDetailPage";
+import ContentDetailPage from "./ContentDetailPage";
 
 const props = {
   bodyHtml: "<p>노트 본문 마지막 문장</p>",
@@ -21,7 +21,7 @@ const props = {
 
 describe("ACP 실습 노트 본문 하단 링크", () => {
   it("본문 뒤에 커뮤니티 에디션과 공식 문서 링크를 표시하고 전체 목차는 표시하지 않는다", () => {
-    render(<DocsDetailPage {...props} labNote={{ episode: 1, topics: [] }} />);
+    render(<ContentDetailPage {...props} labNote={{ episode: 1, topics: [] }} />);
 
     const body = screen.getByText("노트 본문 마지막 문장");
     const community = screen.getByRole("link", { name: "ACP 커뮤니티 에디션 시작하기" });
@@ -34,7 +34,7 @@ describe("ACP 실습 노트 본문 하단 링크", () => {
   });
 
   it("다른 리소스에는 노트 링크를 표시하지 않는다", () => {
-    render(<DocsDetailPage {...props} />);
+    render(<ContentDetailPage {...props} />);
     expect(screen.queryByRole("link", { name: "ACP 공식 문서" })).not.toBeInTheDocument();
   });
 });

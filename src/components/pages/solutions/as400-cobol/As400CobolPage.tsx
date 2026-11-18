@@ -12,7 +12,7 @@ import {
 } from "@/copy/as400Cobol";
 import SolutionActionLink from "@/components/pages/shared/SolutionActionLink";
 import SolutionIcon from "@/components/pages/shared/SolutionIcon";
-import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
+import SectionHeading from "@/components/sections/common/SectionHeading";
 
 const backgroundInsightIcons = ["layers", "connect", "brain"] as const;
 
@@ -81,7 +81,7 @@ function ContentSection({ section, shaded }: { section: As400CobolSection; shade
     <section className={shaded ? "-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]" : "w-full"} id={section.id}>
       <div className="mx-auto w-full max-w-[1200px] space-y-10">
         <div className="w-full space-y-4 text-center">
-          <SolutionSectionHeading title={section.title} />
+          <SectionHeading title={section.title} />
           <p className="m-0 w-full whitespace-pre-line text-pretty type-body-lg text-mute"><SourceText value={section.description} /></p>
         </div>
 
@@ -155,7 +155,7 @@ export default function As400CobolPage() {
       {copy.sections.map((section, index) => <ContentSection key={section.id} section={section} shaded={index % 2 === 0} />)}
 
       <section className="mx-auto flex w-full max-w-[1200px] flex-col items-center gap-6 pb-5 pt-10 text-center md:pb-10 md:pt-20">
-        <SolutionSectionHeading description={copy.contact.description} title={copy.contact.title} />
+        <SectionHeading description={copy.contact.description} title={copy.contact.title} />
         <Button arrow={false} href={contactHref} size="large" style="full" variant="secondary">{copy.contact.action}</Button>
       </section>
     </div>

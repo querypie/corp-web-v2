@@ -1,24 +1,18 @@
-import { BrainCircuit, UserRound, AppWindow, GitBranch, ShieldCheck, Cpu, SlidersHorizontal, Check, LockKeyhole, Zap, MessageSquare, Layers } from "lucide-react";
-import Cta from "@/components/sections/Cta";
+import { BrainCircuit, UserRound, GitBranch, ShieldCheck, Cpu, SlidersHorizontal, Check, LockKeyhole, Zap, MessageSquare, Layers } from "lucide-react";
+import Cta from "@/components/sections/common/Cta";
 import Button from "@/components/ui/Button";
-import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
+import SectionHeading from "@/components/sections/common/SectionHeading";
 import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import type { Locale } from "@/constants/i18n";
 import { getContactHref } from "@/features/contact/prefill";
 import { qevCopy } from "@/copy/qevLocalized";
 import styles from "./QevPage.module.css";
-import AiGatewayLogo from "../ai-gateway/AiGatewayLogo";
-
-const agentLogos = [
-  { label: "Aru", src: "/assets/icons/icon-aru.svg" },
-  { label: "Claude Code", src: "/assets/icons/llm-claude-color.svg" },
-  { label: "Codex", src: "/assets/icons/llm-gpt-color.svg" },
-  { label: "OpenClaw", src: "/assets/icons/agent-openclaw.svg" },
-  { label: "Hermes", src: "/assets/icons/agent-hermes.webp" },
-];
+import AiGatewayLogo from "@/components/sections/common/AiGatewayLogo";
+import AiAgentSource from "@/components/pages/shared/AiAgentSource";
+import DiagramConnector from "@/components/pages/shared/DiagramConnector";
 
 function ComparisonTable({ headers, rows }: { headers: string[]; rows: string[][] }) {
-  return <div className={styles.tableWrap}><table className={styles.table}><thead><tr>{headers.map(text => <th scope="col" key={text}>{text}</th>)}</tr></thead><tbody>{rows.map(row => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th scope="row" key={text}>{text}</th> : <td key={text}>{text}</td>)}</tr>)}</tbody></table></div>;
+  return <div className={styles.tableWrap}><table className={`${styles.table} type-body-md`}><thead><tr>{headers.map(text => <th scope="col" key={text}>{text}</th>)}</tr></thead><tbody>{rows.map(row => <tr key={row[0]}>{row.map((text, index) => index === 0 ? <th scope="row" key={text}>{text}</th> : <td key={text}>{text}</td>)}</tr>)}</tbody></table></div>;
 }
 
 function UseCaseDiagram({ kind, locale }: { kind: "dlp" | "router"; locale: Locale }) {
@@ -46,34 +40,34 @@ export default function QevPage({ locale }: { locale: Locale }) {
   const icons = [ShieldCheck, Cpu, SlidersHorizontal];
   return <div className={`${styles.page} flex w-full flex-col ${pageSectionGapClassName} ${pageXPaddingClassName}`}>
     <section className={pageContentWidthClassName}>
-      <header className="grid items-start gap-6 md:grid-cols-2 md:gap-12"><h1 className="m-0 text-pretty type-h1 text-fg">{copy.hero.title}<br />{copy.hero.accent}</h1><p className="m-0 type-body-lg leading-relaxed text-fg">{copy.hero.description}</p></header>
+      <header className="grid items-start gap-6 md:grid-cols-2 md:gap-12"><h1 className="m-0 text-pretty type-h1 text-fg">{copy.hero.title}<br />{copy.hero.accent}</h1><p className="m-0 type-body-lg text-fg">{copy.hero.description}</p></header>
       <figure className={styles.heroDiagram} aria-label={copy.flow.label}>
         <div className={styles.flow}>
-          <div className={styles.input}><h3 className="type-h3">{copy.flow.input}</h3><ul className={styles.agentLogos}>{agentLogos.map(({ label, src }) => <li key={label} title={label}><img src={src} alt={label} width={28} height={28} /></li>)}<li title={copy.flow.application}><AppWindow role="img" aria-label={copy.flow.application} /></li><li title={copy.flow.user}><UserRound role="img" aria-label={copy.flow.user} /></li></ul></div>
-          <span className={styles.connector} aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" /></svg></span>
+          <AiAgentSource label={copy.flow.input} applicationLabel={copy.flow.application} userLabel={copy.flow.user} />
+          <DiagramConnector />
           <div className={styles.core}><BrainCircuit aria-hidden="true" /><h2 className={`${styles.wordmark} type-h1`}><strong>QEV</strong></h2><span>{copy.flow.core}</span><div className={styles.decisions}>{copy.flow.decisions.map((text, i) => <div key={text}>{i === 0 ? <ShieldCheck aria-hidden="true" /> : <GitBranch aria-hidden="true" />}<span>{text}</span></div>)}</div></div>
-          <span className={styles.connector} aria-hidden="true"><svg viewBox="0 0 10 10"><path d="M0 0 L10 5 L0 10 Z" fill="currentColor" /></svg></span>
+          <DiagramConnector />
           <div className={styles.gateway}><AiGatewayLogo /><strong>AI Gateway</strong><span>{copy.flow.gateway}</span><div className={styles.outputs}><span>DLP</span><span>Auto Router</span></div></div>
-        </div><figcaption>{copy.flow.caption}</figcaption>
+        </div><figcaption className="type-body-sm">{copy.flow.caption}</figcaption>
       </figure>
     </section>
 
     <section className={styles.band}><div className={pageContentWidthClassName}>
       <h2 className="m-0 type-h1 text-fg">{copy.uses.title}</h2>
       <div className={styles.useGrid}>
-        <article className={styles.useCard}><h2 className={`${styles.useHeading} type-h2`}><ShieldCheck aria-hidden="true" />{copy.useCases.dlp.title}</h2><p>{copy.useCases.dlp.description}</p><UseCaseDiagram kind="dlp" locale={locale} /></article>
-        <article className={styles.useCard}><h2 className={`${styles.useHeading} type-h2`}><GitBranch aria-hidden="true" />{copy.useCases.router.title}</h2><p>{copy.useCases.router.description}</p><UseCaseDiagram kind="router" locale={locale} /></article>
+        <article className={styles.useCard}><h2 className={`${styles.useHeading} type-h2`}><ShieldCheck aria-hidden="true" />{copy.useCases.dlp.title}</h2><p className="type-body-md">{copy.useCases.dlp.description}</p><UseCaseDiagram kind="dlp" locale={locale} /></article>
+        <article className={styles.useCard}><h2 className={`${styles.useHeading} type-h2`}><GitBranch aria-hidden="true" />{copy.useCases.router.title}</h2><p className="type-body-md">{copy.useCases.router.description}</p><UseCaseDiagram kind="router" locale={locale} /></article>
       </div>
     </div></section>
 
-    <section className={pageContentWidthClassName}><SolutionSectionHeading title={copy.performance.title} description={copy.performance.description} layout="split" /><div className={styles.metrics}>{copy.performance.metrics.map(metric => <div key={metric.label}><p className={styles.metric}>{metric.value}<span>{metric.unit}</span></p><h3>{metric.label}</h3><p>{metric.detail}</p></div>)}</div><ComparisonTable headers={copy.performance.headers} rows={copy.performance.rows} /><p className={styles.note}>{copy.performance.note}</p></section>
+    <section className={pageContentWidthClassName}><SectionHeading title={copy.performance.title} description={copy.performance.description} layout="split" relaxedDescription={false} /><div className={styles.metrics}>{copy.performance.metrics.map(metric => <div key={metric.label}><p className={styles.metric}>{metric.value}<span>{metric.unit}</span></p><h3 className="type-h3">{metric.label}</h3><p className="type-body-sm">{metric.detail}</p></div>)}</div><ComparisonTable headers={copy.performance.headers} rows={copy.performance.rows} /><p className={`${styles.note} type-body-sm`}>{copy.performance.note}</p></section>
 
-    <section className={styles.band}><div className={pageContentWidthClassName}><SolutionSectionHeading title={copy.technology.title} description={copy.technology.description} layout="split" /><div className={styles.techGrid}>{copy.technology.items.map((item, i) => { const Icon = icons[i]; return <article key={item.title}><Icon aria-hidden="true" /><h3 className="type-h3">{item.title}</h3><p>{item.body}</p><div className={styles.tags}>{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div></article>; })}</div><p className={styles.note}>{copy.technology.note}</p></div></section>
+    <section className={styles.band}><div className={pageContentWidthClassName}><SectionHeading title={copy.technology.title} description={copy.technology.description} layout="split" relaxedDescription={false} /><div className={styles.techGrid}>{copy.technology.items.map((item, i) => { const Icon = icons[i]; return <article key={item.title}><Icon aria-hidden="true" /><h3 className="type-h3">{item.title}</h3><p className="type-body-md">{item.body}</p><div className={`${styles.tags} type-body-sm`}>{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div></article>; })}</div><p className={`${styles.note} type-body-sm`}>{copy.technology.note}</p></div></section>
     <section className={pageContentWidthClassName}>
       <header className="grid w-full items-start gap-4 text-left sm:gap-5 md:grid-cols-2 md:gap-7.5">
         <h2 className="m-0 min-w-0 text-pretty type-h1 text-fg">{copy.explore.title}</h2>
         <div className="min-w-0">
-          <p className="m-0 text-pretty type-body-lg leading-relaxed text-mute">{copy.explore.description}</p>
+          <p className="m-0 text-pretty type-body-lg text-mute">{copy.explore.description}</p>
           <div className="mt-6">
             <Button arrow href={copy.explore.demoHref} target="_blank" rel="noreferrer noopener" size="default" style="full" variant="primary">{copy.explore.demoLabel}</Button>
           </div>

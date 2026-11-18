@@ -31,8 +31,8 @@ describe("영어·한국어 AI 솔루션", () => {
       if (locale === "en") expect(container.textContent).not.toMatch(/[\u3040-\u30ff]/);
       if (id === "qlm") {
         expect(screen.getAllByRole("article")).toHaveLength(6);
-        expect(screen.getByRole("table").querySelectorAll("tbody tr")).toHaveLength(8);
-        expect(container.innerHTML).not.toMatch(/deepseek|v4\.1|sonnet/i);
+        expect(screen.getByRole("table").querySelectorAll("tbody tr")).toHaveLength(4);
+        expect(container.innerHTML).not.toMatch(/deepseek|v4\.1/i);
       } else {
         expect(screen.getByRole("link", { name: qevCopy[locale].explore.demoLabel })).toHaveAttribute("href", "https://qev.demo.querypie.com");
       }
@@ -64,15 +64,24 @@ describe("영어·한국어 AI 솔루션", () => {
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("QueryPie LLM");
     expect(screen.getAllByRole("article")).toHaveLength(6);
     expect(screen.getByRole("table", { name: "모델 벤치마크" })).toBeInTheDocument();
-    expect(screen.getByRole("rowheader", { name: "GPQA Diamond" })).toBeInTheDocument();
-    expect(screen.getByRole("cell", { name: "90.9%" })).toBeInTheDocument();
-    expect(screen.getByRole("rowheader", { name: "Terminal-Bench 4.0" })).toBeInTheDocument();
-    expect(screen.getByRole("rowheader", { name: "AutomationBench" })).toBeInTheDocument();
-    expect(screen.getByRole("cell", { name: "64.0" })).toBeInTheDocument();
-    expect(screen.getByText(/QLM 실측값이 아니며/)).toBeInTheDocument();
+    expect(screen.getByRole("rowheader", { name: "소프트웨어 개발" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "40–45%" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "65–70%" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "80–85%" })).toBeInTheDocument();
+    expect(screen.getByRole("table").querySelectorAll("tbody td")).toHaveLength(16);
+    expect(screen.queryByRole("cell", { name: "—" })).not.toBeInTheDocument();
+    expect(screen.getByRole("rowheader", { name: "긴 문서 추론" })).toBeInTheDocument();
+    expect(screen.getByRole("rowheader", { name: "실무 과제 수행 (Elo)" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "1,500–1,750" })).toBeInTheDocument();
+    expect(screen.getByRole("rowheader", { name: "업무 자동화" })).toBeInTheDocument();
+    expect(screen.getByRole("columnheader", { name: "GPT-6.1 Terra" })).toBeInTheDocument();
+    expect(screen.getByRole("columnheader", { name: "Claude Sonnet 5.5" })).toBeInTheDocument();
+    expect(screen.getByRole("columnheader", { name: "Gemini 4 Argon" })).toBeInTheDocument();
+    expect(screen.queryByText("기반 모델 공개값")).not.toBeInTheDocument();
+    expect(screen.getByRole("table").querySelector("[title], a")).toBeNull();
     expect(screen.queryByText(/공통 조건/)).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "도입 문의" })).toHaveAttribute("href", "/ko/contact-us?inquiry=ai-consulting");
-    expect(container.innerHTML).not.toMatch(/deepseek|v4\.1|sonnet|콘텐츠 준비 중/i);
+    expect(container.innerHTML).not.toMatch(/deepseek|v4\.1|콘텐츠 준비 중/i);
     expect(container.querySelector("header img")).toBeNull();
   });
 

@@ -4,7 +4,7 @@ import DlpSolutionContent, { type DlpCopy } from "./DlpSolutionContent";
 import DlpENSolutionContent from "./content.en";
 import DlpKOSolutionContent from "./content.ko";
 
-vi.mock("@/components/sections/Cta", () => ({
+vi.mock("@/components/sections/common/Cta", () => ({
   default: () => <div>CTA</div>,
 }));
 

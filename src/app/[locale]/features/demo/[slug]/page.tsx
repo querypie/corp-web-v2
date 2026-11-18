@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { isLocale } from "@/constants/i18n";
 import DemoDetailClientPage from "@/components/pages/demo/DemoDetailClientPage";
-import ContentGateOverlay from "@/components/pages/resources/ContentGateOverlay";
-import type { DocsDetailPageProps } from "@/components/pages/resources/ResourcesDetailPage";
+import ContentGateOverlay from "@/components/content/ContentGateOverlay";
+import type { ContentDetailPageProps } from "@/components/content/ContentDetailPage";
 import { getContactPageCopy } from "@/copy/contact";
 import { getDemoPageCopy } from "@/copy/contentPages";
 import { demoCategoryConfigs, getCategoryHref } from "@/features/content/config";
@@ -135,7 +135,7 @@ export default async function DemoDetailRoute({ params }: Props) {
     writer: currentEntry.authorRole
       ? `${currentEntry.authorName} / ${currentEntry.authorRole}`
       : currentEntry.authorName,
-  } satisfies DocsDetailPageProps;
+  } satisfies ContentDetailPageProps;
 
   return (
     <DemoDetailClientPage

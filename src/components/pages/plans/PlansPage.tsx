@@ -5,7 +5,7 @@ import { useMemo } from "react";
 import Button from "@/components/ui/Button";
 import { TabLink } from "@/components/ui/Tab";
 import TabGroup from "@/components/ui/TabGroup";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import { pricingProductsByLocale, type ComparisonGroup, type ComparisonValue, type PlanCard, type PlanFeature, type PricingProduct } from "@/copy/plans";
 import { getLocalePath, type Locale } from "@/constants/i18n";
 import { getPlansPageCopy } from "@/copy/contentPages";

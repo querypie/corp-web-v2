@@ -1,4 +1,5 @@
 export const qlmKoCopy = {
+  comparison: { area: "평가 영역", areas: ["업무 자동화", "실무 과제 수행 (Elo)", "긴 문서 추론", "소프트웨어 개발"] },
   visuals: { selection: "선정 · 최적화", infrastructure: "QueryPie GPU 인프라", boundary: "QueryPie 관리 환경", data: "기업 데이터", policy: "보안 정책 적용", request: "업무 내용을 요약해 줘", response: "응답 생성 중", tokens: ["요청 분석", "추론", "스트리밍"], workloads: [{ title: "일상 업무", model: "경량 모델" }, { title: "복합 업무", model: "QLM" }], tuning: "기업별 응답 설정", settings: ["업무 맥락", "전문 용어", "응답 기준"], customized: "기업별 최적화" },
   metadata: { title: "QueryPie LLM (QLM) | QueryPie AI", description: "QueryPie가 직접 선택하고 운영하는 기업용 LLM 서비스, QueryPie LLM (QLM). 자체 GPU 인프라와 업무별 모델 라우팅으로 성능, 데이터 보호, 비용 효율을 함께 설계합니다." },
   hero: { title: "기업의 AI를 위한", accent: "QueryPie LLM", description: "QLM은 QueryPie가 직접 선택하고 운영하는 LLM 서비스입니다. 검증된 오픈소스 기반 모델에 자체 GPU 인프라와 기업별 최적화를 더해, 복잡한 업무도 안심하고 맡길 수 있는 AI를 제공합니다." },
@@ -10,7 +11,7 @@ export const qlmKoCopy = {
     { title: "업무에 맞춘 비용 효율", body: "모든 요청에 고성능 모델을 사용할 필요는 없습니다. AI Gateway와 함께 작업 난이도에 맞는 모델을 선택해 품질과 비용을 함께 관리합니다.", labels: ["일상 업무", "복합 업무", "자원 배분"] },
     { title: "엔터프라이즈 전용 튜닝", body: "기업의 용어, 업무 맥락, 응답 기준에 맞춘 최적화를 지원합니다. 조직마다 다른 요구를 반영해 실제 업무에 활용할 수 있는 AI를 설계합니다.", labels: ["업무 맥락", "응답 기준", "최적화"] },
   ] },
-  performance: { title: "합리적인 비용, 뛰어난 성능", description: "QLM은 기업의 AI 운영 비용을 최적화하면서도 복잡한 업무에 필요한 성능을 제공합니다. 추론부터 코드 작업, 업무 자동화까지, 기반 모델의 공개 벤치마크로 그 역량을 확인하세요.", tableLabel: "모델 벤치마크", headers: ["벤치마크", "평가 영역", "측정 지표", "결과"], metrics: [
+  performance: { title: "합리적인 비용, 뛰어난 성능", description: "비용 효율과 업무 성능을 함께 고려하세요. 업무 자동화부터 긴 문서 추론, 소프트웨어 개발까지, 주요 AI 모델과 QLM의 업무별 성능을 나란히 비교해 보세요.", tableLabel: "모델 벤치마크", headers: ["벤치마크", "평가 영역", "측정 지표", "결과"], metrics: [
     { value: "90.9", title: "전문 지식과 추론", benchmark: "GPQA Diamond", metric: "Pass@1", detail: "과학 분야의 고난도 질문에 대한 추론 평가" },
     { value: "65.6", title: "수학 추론", benchmark: "MathArena Apex", metric: "Pass@1" },
     { value: "90.6", title: "터미널 기반 작업 수행", benchmark: "Terminal-Bench 2.1", metric: "Pass@1", detail: "터미널 환경에서 도구를 활용한 작업 평가" },

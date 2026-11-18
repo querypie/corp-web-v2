@@ -1,13 +1,14 @@
 .page h1, .page h2, .page h3 { word-break: keep-all; overflow-wrap: anywhere; }
 .tableWrap { margin-top: 32px; overflow-x: auto; }
-.table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; line-height: 1.5; }
-.table th, .table td { padding: 11px 16px; border-bottom: 1px solid var(--color-border); }
+.table { width: 100%; min-width: 720px; table-layout: fixed; border-collapse: collapse; text-align: left; }
+.table th, .table td { width: 18%; padding: 13px 16px; border-bottom: 1px solid var(--color-border); vertical-align: middle; }
+.table th:first-child { width: 28%; padding-left: 20px; }
 .table thead th { border-top: 1px solid var(--color-border); background: var(--color-bg-content); color: var(--color-mute); font-weight: 400; }
-.table tbody th { font-weight: 500; }
-.table td { color: var(--color-mute); }
-.table th:last-child, .table td:last-child { text-align: right; white-space: nowrap; }
-.table td:last-child { color: var(--color-fg); font-variant-numeric: tabular-nums; }
-.notes { margin: 16px 0 0; color: var(--color-mute); font-size: 12px; line-height: 1.8; }
+.table tbody th { font-weight: 400; color: var(--color-fg); }
+.table td, .table a { color: var(--color-mute); }
+.table td, .table thead th:not(:first-child) { text-align: center; font-variant-numeric: tabular-nums; }
+.table th.qlmColumn, .table td.qlmColumn { color: var(--color-fg); white-space: nowrap; }
+.table thead th.qlmColumn { color: var(--color-brand); }
 .routing { --flow-color: color-mix(in srgb, var(--color-brand) 65%, var(--color-border)); --slot-on: var(--color-brand); max-width: 900px; margin: 64px auto 0; padding-top: 12px; }
 .flow { display: grid; grid-template-columns: 1fr 48px 1.05fr 48px 1.15fr; align-items: center; }
 .gateway, .destinations > div { position: relative; min-width: 0; border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent); background: var(--color-bg); box-shadow: 0 2px 5px rgb(0 0 0 / .025), 0 12px 30px -15px rgb(0 0 0 / .09); }
@@ -54,10 +55,11 @@
 @keyframes slot-power-three { 0%, 10%, 50%, 100% { background: var(--color-border); } 15%, 45% { background: var(--slot-on); } }
 @keyframes slot-power-four { 0%, 15%, 50%, 100% { background: var(--color-border); } 20%, 45% { background: var(--slot-on); } }
 :global(:root[data-theme="dark"]) :is(.gateway, .destinations > div) { box-shadow: 0 3px 7px rgb(0 0 0 / .2), 0 14px 28px -10px rgb(0 0 0 / .45); }
-.routing figcaption { margin-top: 32px; color: var(--color-mute); font-size: 12px; line-height: 1.8; text-align: center; }
+.routing figcaption { margin-top: 32px; color: var(--color-mute); text-align: center; }
 @media (min-width: 768px) and (max-width: 1023px) { .flow { grid-template-columns: 1fr 28px 1fr 28px 1.1fr; } .destinations > div { padding-inline: 12px; gap: 8px; } }
 @media (max-width: 767px) {
-  .table th, .table td { padding: 10px 8px; font-size: 12px; }
+  .table th, .table td { padding: 10px 8px; }
+  .table th:first-child { padding-left: 16px; }
   .routing { max-width: 360px; margin-top: 40px; }
   .flow { grid-template-columns: 1fr; }
   .gateway { width: 100%; height: 190px; border-radius: 22px; }

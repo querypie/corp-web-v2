@@ -1,7 +1,7 @@
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import Clients from "./Clients";
-import FeatureMediaList from "@/components/sections/FeatureMediaList";
+import FeatureMediaList, { type FeatureItem } from "@/components/sections/common/FeatureMediaList";
 import Mcps from "./Mcps";
 import News from "./News";
 import Review from "./Review";
@@ -9,24 +9,6 @@ import Hero from "./Hero";
 import NoticePopover, { type NoticeItem } from "./NoticePopover";
 import ResourceList from "./ResourceList";
 import type { Locale } from "@/constants/i18n";
-
-type FeatureItem = {
-  action?: {
-    href: string;
-    isExternal?: boolean;
-    label: string;
-  };
-  body: string[];
-  desktopTitle?: string[];
-  iconSrc?: string;
-  iconSurface?: boolean;
-  imageAlt: string;
-  imageSrc?: string;
-  excludeFromSearchSnippet?: boolean;
-  reverse?: boolean;
-  title: string[];
-  videoSrc?: string;
-};
 
 type McpItem = {
   icon: React.ReactNode;

@@ -3,7 +3,7 @@ import { render, screen, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import JapanHomePage from "./JapanHomePage";
 
-vi.mock("@/components/sections/Cta", () => ({
+vi.mock("@/components/sections/common/Cta", () => ({
   default: () => <div data-testid="cta" />,
 }));
 vi.mock("../Clients", () => ({
