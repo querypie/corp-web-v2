@@ -20,6 +20,31 @@
 
 **확정 전 필수 확인:** 실제 수탁·계약 법인 및 적용 DPA, 국외 이전의 근거 및 거부 방법·효과, Cloudflare의 독립적 처리에 관한 법적 분류와 고지·동의 필요 여부. 국가와 보유 기간은 Cloudflare 공개 안내를 근거로 기재했으며, 신호별 세부 위치·고정 보유 일수는 비공개다. 토큰 유효기간 5분은 개인정보 보유 기간이 아니다.
 
+## 타 서비스 공개 방침 사례
+
+2026-11-18에 각 서비스의 공개 개인정보처리방침 본문을 직접 확인했다. Turnstile을 쓰면서도 방침에 따로 적지 않는 서비스가 대부분이었다.
+
+| 서비스 | Turnstile 사용 여부 | 방침 본문 표기 |
+| --- | --- | --- |
+| n8n (n8n.io/legal/privacy) | 사용. 개인정보 페이지 HTML에 sitekey와 `challenges.cloudflare.com/turnstile/v0/api.js`가 포함된다. | Turnstile·Cloudflare 관련 문구 없음 |
+| survival-scouter.com (국내) | 사용 | 위탁 표에 `Cloudflare Turnstile: 로봇 확인` 한 줄 |
+| Vercel, Supabase, PostHog, Sentry, Zapier, Airtable, Linear, Neon, Railway, Resend, Clerk, MongoDB, Hugging Face, Notion, Slack, Figma, Atlassian | 확인 범위에서 사용 근거를 찾지 못했거나 미확인 | Turnstile 언급 없음 |
+| Cloudflare | 제공자 | [Turnstile 개인정보 부속서](https://www.cloudflare.com/turnstile-privacy-policy/)에 처리 신호·역할·이전·보유 기준 공개 |
+
+해석:
+
+- 업계 관행은 "위탁 표 한 줄" 또는 "침묵"이다. 침묵은 국내법상 위탁(제26조)·국외 이전(제28조의8) 고지를 대신하지 못한다.
+- 따라서 QueryPie는 ① 제3조 위탁 표 1행, ② 제12조 국외 이전 상세 1개 항목, ③ 문의 폼 하단 안내 문구의 3개 지점만 유지하는 것이 적정하다.
+- 같은 내용을 제1·5·8·12조에 반복하면 문구가 어긋날 위험이 크다. 실제로 제12조 도입부의 "다른 업무는 위탁되지 않는다"는 문장과 Turnstile 위탁이 충돌한 사례가 있었다.
+
+## 정리 방향
+
+- 제12조: Turnstile 상세는 `Contact Us 보안 확인(Cloudflare Turnstile)` 항목 한 곳에만 두고, 제1항~제7항 뒤에 배치해 국외 이전 6개 고지 항목이 한 흐름에서 읽히게 한다.
+- 제8조: 항목 나열을 빼고 자동 처리 사실, 입력값 미열람, 제12조 안내만 남긴다.
+- 문구: 보유·반환은 "회사의 선택에 따라"(Cloudflare 표준 DPA §3.1(i)), 거부 효과는 "문의 폼 제출 제한", 국가는 Cloudflare가 공개한 범위(미국·유럽)로 표기하고 세부 국가는 DPA 부속서를 따른다.
+- 유지: Cloudflare의 처리자·자체 목적 정보처리자 역할 구분. 이 구분이 빠지면 Cloudflare 약관과 어긋난다.
+- 줄일 때 우선순위: 제8조 → 제1조 → 제5조. 제3조 위탁 표와 제12조 국외 이전 항목은 줄이지 않는다.
+
 변경 비교: [한국어 diff](./privacy-policy-2026-11-18-ko.diff), [영어 diff](./privacy-policy-2026-11-18-en.diff). 일본어는 영어 방침을 사용한다.
 
 ## 현행 방침과 폼의 차이

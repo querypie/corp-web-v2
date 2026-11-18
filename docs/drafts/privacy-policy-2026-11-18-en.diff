@@ -1,5 +1,5 @@
 diff --git a/src/content/legal/privacy-policy/en/2026-10-31.md b/src/content/legal/privacy-policy/en/2026-11-18.md
-index 2c567ff0..36426988 100644
+index 2c567ff0..a6dfad17 100644
 --- a/src/content/legal/privacy-policy/en/2026-10-31.md
 +++ b/src/content/legal/privacy-policy/en/2026-11-18.md
 @@ -3 +3 @@ CHEQUER Global, Inc. and our owned subsidiary, QueryPie, Inc.(hereinafter referr
@@ -22,35 +22,37 @@ index 2c567ff0..36426988 100644
 +  - Optional items: phone number and marketing communications consent. If the user consents, the Company provides news, event and product information.
 +
 @@ -408,0 +412,2 @@ The Company is taking the following measures to ensure the safety of personal in
-+The Company uses Cloudflare, Inc.'s Turnstile on the Contact Us page to perform security verification and prevent automated malicious requests. Cloudflare may process information including the IP address, browser and connection information (such as the User-Agent and TLS fingerprint), sitekey and associated origin. Cloudflare states that it processes this information to provide bot detection and blocking for the Company's website and to improve Turnstile's bot detection capabilities. For details, see the [Cloudflare Turnstile Privacy Addendum](https://www.cloudflare.com/turnstile-privacy-policy/).
++The Company uses Cloudflare, Inc.'s Turnstile on the Contact Us page to perform security verification and prevent automated malicious requests. In this process, information such as the IP address, browser and connection information (User-Agent, TLS fingerprint), sitekey and associated origin may be processed automatically. Turnstile does not access, store, or transmit form entries or other page inputs. For the specific items processed and the cross-border transfer, see Article 12 and the [Cloudflare Turnstile Privacy Addendum](https://www.cloudflare.com/turnstile-privacy-policy/).
 +
-@@ -500 +505,15 @@ A person whose rights or interests have been infringed upon due to a disposition
+@@ -500 +505 @@ A person whose rights or interests have been infringed upon due to a disposition
 -The personal information of the information subject is managed using a cloud service with a server based in the United States. However, no other tasks other than the storage of information for customer management are entrusted, and the company is responsible for preventing information leaks and managing access rights.
 +The personal information of the information subject is managed using a cloud service with a server based in the United States. However, no other tasks other than the storage of information for customer management and security verification of the Contact Us inquiry form are entrusted, and the company is responsible for preventing information leaks and managing access rights.
-+
-+When the inquiry page loads and security verification takes place, information such as the IP address, browser User-Agent, TLS fingerprint, sitekey and associated origin may be transmitted over the network to and processed by Cloudflare. Turnstile does not access, store, or transmit form entries or other page inputs.
-+
-+**Contact Us Security Verification (Cloudflare Turnstile)**
-+
-+- Recipient: Cloudflare, Inc. (privacy contact: dpo@cloudflare.com)
-+- Items transferred: IP address, browser User-Agent, TLS fingerprint, sitekey and associated origin
-+- Countries of transfer: United States and Europe (data center locations stated by Cloudflare)
-+- Time and method of transfer: over the network when the inquiry page is loaded and security verification is performed
-+- Purpose of transfer: detection and blocking of automated malicious requests and security verification of the inquiry form
-+- Retention period: the period necessary to fulfill the purposes of processing. The information is deleted or returned at the Company's request when the agreement between the Company and Cloudflare ends or the purpose of processing is achieved.
-+- Role of Cloudflare: a processor providing website security services on behalf of the Company, and a controller processing the information for its own purpose of improving Turnstile's bot detection capabilities.
-+
-+The method and effect of refusing the transfer are set out in paragraph 7 of this Article.
-@@ -523 +542 @@ The personal information of the information subject is managed using a cloud ser
+@@ -523 +528 @@ The personal information of the information subject is managed using a cloud ser
 -      <td class="group-cell" rowspan="11"><strong>Personal Information Items Transferred/Stored</strong></td>
 +      <td class="group-cell" rowspan="12"><strong>Personal Information Items Transferred/Stored</strong></td>
-@@ -531,0 +551,5 @@ The personal information of the information subject is managed using a cloud ser
+@@ -531,0 +537,5 @@ The personal information of the information subject is managed using a cloud ser
 +    <tr>
 +      <td>Contact Us security verification(Turnstile)</td>
 +      <td>IP address<br>Browser User-Agent<br>TLS fingerprint<br>Sitekey and associated origin</td>
 +      <td>Cloudflare</td>
 +    </tr>
-@@ -689,2 +713,2 @@ If there is any addition, deletion or modification of the contents of the privac
+@@ -613 +623,14 @@ The personal information of the information subject is managed using a cloud ser
+-The Company uses cloud services after carefully reviewing the information protection and personal information protection compliance status of the cloud service provider, and the cloud service provider does not have access to the Company's customer personal information.
++### Contact Us Security Verification (Cloudflare Turnstile)
++
++When the inquiry page loads and security verification takes place, the following information may be transmitted over the network to and processed by Cloudflare. Turnstile does not access, store, or transmit form entries or other page inputs.
++
++- Recipient: Cloudflare, Inc. (privacy contact: dpo@cloudflare.com)
++- Items transferred: IP address, browser User-Agent, TLS fingerprint, sitekey and associated origin
++- Countries of transfer: the United States and Europe. Cloudflare states that it processes visitor metadata in data centers in the United States and Europe, and the detailed list of countries follows the annexes to Cloudflare's standard DPA.
++- Time and method of transfer: over the network when the inquiry page is loaded and security verification is performed
++- Purpose of transfer: detection and blocking of automated malicious requests and security verification of the inquiry form
++- Retention period: the period necessary to fulfill the purposes of processing. The information is deleted or returned at the Company's choice when the agreement between the Company and Cloudflare ends or the purpose of processing is achieved.
++- Role of Cloudflare: a processor providing website security services on behalf of the Company. For processing to improve Turnstile's bot detection capabilities, Cloudflare acts as a controller processing the information for its own purposes, and Cloudflare's privacy policy applies.
++- Refusal of transfer: requests may be made to [legal@querypie.com](mailto:legal@querypie.com). If you refuse the security verification performed through Turnstile, submission of the inquiry form will be restricted.
++
++The Company uses cloud services after carefully reviewing the information protection and personal information protection compliance status of the cloud service provider, and the cloud service provider does not have access to the customer personal information stored by the Company. However, information processed by Cloudflare for Contact Us security verification is subject to the "Contact Us Security Verification (Cloudflare Turnstile)" section of this Article.
+@@ -689,2 +712,2 @@ If there is any addition, deletion or modification of the contents of the privac
 -- Announcement date: **Oct 31, 2026**
 -- Effective date: **Oct 31, 2026**
 +- Announcement date: **Nov 18, 2026**
