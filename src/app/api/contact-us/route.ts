@@ -5,6 +5,7 @@ import { after, NextResponse } from "next/server";
 import { sendDeskPieLead } from "@/features/deskpie/lead";
 import { getLeadFormSlackChannel } from "@/features/slack/lead-form-channel";
 import { buildLeadUtmFields } from "@/features/utm/attribution";
+import { verifyTurnstileToken } from "@/features/turnstile/verify.server";
 
 type ContactUsBody = {
   firstName?: string;
@@ -21,6 +22,7 @@ type ContactUsBody = {
   referrerURL?: string;
   referrerUrl?: string;
   utmAttribution?: string;
+  turnstileToken?: string;
 };
 
 function hasValidMXRecord(domain: string): Promise<boolean> {
@@ -77,13 +79,33 @@ export async function POST(request: Request) {
   const {
     firstName, lastName, email, company, departmentTitle,
     phoneNumber, inquiryType, plannedImplementationDate, referrerURL, referrerUrl,
-    products, message, marketingConsent, utmAttribution,
+    products, message, marketingConsent, utmAttribution, turnstileToken,
   } = body;
 
   // 2. 필수 필드 검증
   if (!firstName || !lastName || !email || !company || !departmentTitle) {
     return NextResponse.json(
       { success: false, errorCode: "missing_required_fields", errorMessage: "Required fields are missing." },
+      { status: 400 },
+    );
+  }
+
+  const hostCandidates = [
+    request.headers.get("x-forwarded-host")?.split(",")[0]?.trim(),
+    request.headers.get("host")?.split(",")[0]?.trim(),
+  ].filter((hostname): hostname is string => Boolean(hostname));
+  const turnstile = await verifyTurnstileToken(
+    turnstileToken,
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
+    hostCandidates,
+  );
+  if (!turnstile.ok) {
+    return NextResponse.json(
+      {
+        success: false,
+        errorCode: "turnstile_failed",
+        errorMessage: "Please complete the security verification and try again.",
+      },
       { status: 400 },
     );
   }
