@@ -39,7 +39,7 @@
 
 ## 정리 방향
 
-- 제12조: Turnstile 상세는 `Contact Us 보안 확인(Cloudflare Turnstile)` 항목 한 곳에만 두고, 제1항~제7항 뒤에 배치해 국외 이전 6개 고지 항목이 한 흐름에서 읽히게 한다.
+- 제12조: Turnstile 상세는 `Contact Us 보안 확인(Cloudflare Turnstile)` 항목 한 곳에만 두고, 제1항~제7항 뒤에 배치한다. 6개 고지 항목은 2열 표로 두고, 국가 세부 목록·삭제 절차·처리 신호 상세는 Cloudflare DPA와 Turnstile 부속서 링크로 넘긴다(Supabase 방침의 제공자별 링크 방식과 동일).
 - 제8조: 항목 나열을 빼고 자동 처리 사실, 입력값 미열람, 제12조 안내만 남긴다.
 - 문구: 보유·반환은 "회사의 선택에 따라"(Cloudflare 표준 DPA §3.1(i)), 거부 효과는 "문의 폼 제출 제한", 국가는 Cloudflare가 공개한 범위(미국·유럽)로 표기하고 세부 국가는 DPA 부속서를 따른다.
 - 유지: Cloudflare의 처리자·자체 목적 정보처리자 역할 구분. 이 구분이 빠지면 Cloudflare 약관과 어긋난다.
