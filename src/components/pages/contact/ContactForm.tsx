@@ -293,7 +293,11 @@ export default function ContactForm(props: ContactFormProps) {
         <p className="m-0 type-body-sm leading-5 text-fg">{copy.securityNotice}</p>
       ) : null}
 
-      <TurnstileWidget key={turnstileAttempt} onToken={setTurnstileToken} />
+      <TurnstileWidget
+        key={turnstileAttempt}
+        onToken={setTurnstileToken}
+        unavailableMessage={copy.securityUnavailable}
+      />
 
       {errorMessage ? (
         <p className="m-0 type-body-sm text-[var(--color-destructive)]">{errorMessage}</p>

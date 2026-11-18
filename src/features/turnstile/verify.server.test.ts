@@ -64,7 +64,7 @@ describe("verifyTurnstileToken", () => {
     } as Response);
 
     await expect(
-      verifyTurnstileToken("token", undefined, "stage.querypie.com:443"),
+      verifyTurnstileToken("token", undefined, ["stage.querypie.com:443"]),
     ).resolves.toEqual({ ok: true, configured: true });
   });
 
@@ -77,7 +77,7 @@ describe("verifyTurnstileToken", () => {
     } as Response);
 
     await expect(
-      verifyTurnstileToken("token", undefined, "stage.querypie.com"),
+      verifyTurnstileToken("token", undefined, ["stage.querypie.com"]),
     ).resolves.toEqual({ ok: false, reason: "failed" });
   });
 
@@ -90,8 +90,21 @@ describe("verifyTurnstileToken", () => {
     } as Response);
 
     await expect(
-      verifyTurnstileToken("token", undefined, "stage.querypie.com"),
+      verifyTurnstileToken("token", undefined, ["stage.querypie.com"]),
     ).resolves.toEqual({ ok: false, reason: "failed" });
+  });
+
+  it("후보 호스트 중 하나와 일치하면 통과한다", async () => {
+    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "site-key");
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "secret-key");
+    vi.spyOn(global, "fetch").mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: true, hostname: "www.querypie.com" }),
+    } as Response);
+
+    await expect(
+      verifyTurnstileToken("token", undefined, ["internal.vercel.app", "www.querypie.com"]),
+    ).resolves.toEqual({ ok: true, configured: true });
   });
 
   it("Cloudflare 요청 실패 시 거부한다", async () => {

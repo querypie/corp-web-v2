@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const RENDER_TIMEOUT_MS = 15_000;
 
@@ -21,9 +21,16 @@ declare global {
   }
 }
 
-export default function TurnstileWidget({ onToken }: { onToken: (token: string | undefined) => void }) {
+export default function TurnstileWidget({
+  onToken,
+  unavailableMessage,
+}: {
+  onToken: (token: string | undefined) => void;
+  unavailableMessage?: string;
+}) {
   const containerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | undefined>(undefined);
+  const [unavailable, setUnavailable] = useState(false);
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
   useEffect(() => {
@@ -49,6 +56,7 @@ export default function TurnstileWidget({ onToken }: { onToken: (token: string |
         if (Date.now() - startedAt >= RENDER_TIMEOUT_MS) {
           if (timer !== undefined) window.clearInterval(timer);
           timer = undefined;
+          setUnavailable(true);
           return;
         }
         renderWidget();
@@ -64,5 +72,12 @@ export default function TurnstileWidget({ onToken }: { onToken: (token: string |
   }, [onToken, siteKey]);
 
   if (!siteKey) return null;
-  return <div ref={containerRef} />;
+  return (
+    <div>
+      {unavailable && unavailableMessage ? (
+        <p className="m-0 mb-2 type-body-sm leading-5 text-fg">{unavailableMessage}</p>
+      ) : null}
+      <div ref={containerRef} />
+    </div>
+  );
 }

@@ -37,3 +37,5 @@ yarn-error.log*
 # 콘텐츠 다운로드 리드 런타임 데이터
 src/content/state/
 .vercel
+
+.agents/skills/local-*

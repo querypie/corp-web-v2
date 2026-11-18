@@ -90,11 +90,14 @@ export async function POST(request: Request) {
     );
   }
 
-  const forwardedHost = request.headers.get("x-forwarded-host")?.split(",")[0]?.trim();
+  const hostCandidates = [
+    request.headers.get("x-forwarded-host")?.split(",")[0]?.trim(),
+    request.headers.get("host")?.split(",")[0]?.trim(),
+  ].filter((hostname): hostname is string => Boolean(hostname));
   const turnstile = await verifyTurnstileToken(
     turnstileToken,
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
-    forwardedHost || request.headers.get("host")?.split(",")[0]?.trim(),
+    hostCandidates,
   );
   if (!turnstile.ok) {
     return NextResponse.json(

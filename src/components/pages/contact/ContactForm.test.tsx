@@ -69,6 +69,7 @@ describe("ContactForm", () => {
 
   afterEach(() => {
     pushMock.mockClear();
+    vi.useRealTimers();
     vi.unstubAllGlobals();
     vi.restoreAllMocks();
     vi.clearAllMocks();
@@ -111,6 +112,18 @@ describe("ContactForm", () => {
 
     render(<ContactForm {...contactCopy} locale="en" />);
     expect(screen.queryByText(notice)).not.toBeInTheDocument();
+  });
+
+  it("보안 확인 스크립트를 불러오지 못하면 안내를 표시한다", () => {
+    vi.useFakeTimers();
+    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "test-site-key");
+    render(<ContactForm {...contactCopy} locale="en" />);
+
+    act(() => {
+      vi.advanceTimersByTime(15_000);
+    });
+
+    expect(screen.getByText(contactCopy.securityUnavailable as string)).toBeInTheDocument();
   });
 
   it.each(["en", "ko", "ja"] as const)("%s 폼 첫 번째에 Aru를 표시하며 일반 방문 시 선택하지 않는다", (locale) => {

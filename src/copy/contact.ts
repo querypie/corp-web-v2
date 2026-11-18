@@ -55,6 +55,7 @@ export type ContactPageCopy = {
   messageField: ContactField;
   privacyText: string;
   securityNotice?: string;
+  securityUnavailable?: string;
   privacyTermsHref: string;
   privacyTermsLabel: string;
   privacyPolicyHref: string;
@@ -138,6 +139,8 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       privacyText: "QueryPie values your privacy. Please check out our",
       securityNotice:
         "Cloudflare Turnstile is used for security verification, and your IP address and browser connection information may be processed in the process.",
+      securityUnavailable:
+        "We could not load the security verification. Please refresh the page or check your browser's blocking settings.",
       privacyTermsLabel: "Terms",
       privacyTermsHref: getLocalePath("en", "/terms-of-service"),
       privacyPolicyLabel: "Privacy Policy",
@@ -214,6 +217,8 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       privacyText: "QueryPie는 고객의 개인정보를 중요하게 생각합니다. 자세한 내용은",
       securityNotice:
         "보안 확인을 위해 Cloudflare Turnstile이 사용되며, 이 과정에서 IP 주소와 브라우저·연결 정보가 처리될 수 있습니다.",
+      securityUnavailable:
+        "보안 확인을 불러오지 못했습니다. 페이지를 새로고침하거나 브라우저의 차단 설정을 확인해 주세요.",
       privacyTermsLabel: "이용약관",
       privacyTermsHref: getLocalePath("ko", "/terms-of-service"),
       privacyPolicyLabel: "개인정보처리방침",
@@ -292,6 +297,8 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       privacyText: "QueryPie はお客様のプライバシーを尊重します。詳しくは",
       securityNotice:
         "セキュリティ確認のため Cloudflare Turnstile を使用しており、その過程で IP アドレスやブラウザ・接続情報が処理される場合があります。",
+      securityUnavailable:
+        "セキュリティ確認を読み込めませんでした。ページを再読み込みするか、ブラウザのブロック設定をご確認ください。",
       privacyTermsLabel: "利用規約",
       privacyTermsHref: getLocalePath("ja", "/terms-of-service"),
       privacyPolicyLabel: "プライバシーポリシー",

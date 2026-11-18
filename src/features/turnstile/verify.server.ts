@@ -13,7 +13,7 @@ export type TurnstileVerification =
 export async function verifyTurnstileToken(
   token: string | undefined,
   remoteIp?: string,
-  expectedHostname?: string,
+  expectedHostnames?: string[],
 ): Promise<TurnstileVerification> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -42,9 +42,12 @@ export async function verifyTurnstileToken(
     const result = (await response.json()) as TurnstileResponse;
     if (!result.success) return { ok: false, reason: "failed" };
 
-    if (expectedHostname) {
-      const expected = normalizeHostname(expectedHostname);
-      if (!expected || normalizeHostname(result.hostname) !== expected) {
+    const allowedHostnames = new Set(
+      (expectedHostnames ?? []).map(normalizeHostname).filter((hostname): hostname is string => Boolean(hostname)),
+    );
+    if (allowedHostnames.size > 0) {
+      const hostname = normalizeHostname(result.hostname);
+      if (!hostname || !allowedHostnames.has(hostname)) {
         return { ok: false, reason: "failed" };
       }
     }
