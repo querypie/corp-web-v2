@@ -1,10 +1,10 @@
-diff --git a/src/content/legal/privacy-policy/en/2026-10-31.md b/src/content/legal/privacy-policy/en/2026-11-17.md
-index 2c567ff0..064a2ca2 100644
+diff --git a/src/content/legal/privacy-policy/en/2026-10-31.md b/src/content/legal/privacy-policy/en/2026-11-18.md
+index 2c567ff0..57d3ba0a 100644
 --- a/src/content/legal/privacy-policy/en/2026-10-31.md
-+++ b/src/content/legal/privacy-policy/en/2026-11-17.md
++++ b/src/content/legal/privacy-policy/en/2026-11-18.md
 @@ -3 +3 @@ CHEQUER Global, Inc. and our owned subsidiary, QueryPie, Inc.(hereinafter referr
 -- Effective from **Oct 31, 2026**
-+- Effective from **Nov 17, 2026**
++- Effective from **Nov 18, 2026**
 @@ -23 +23 @@ The personal information from registered users will be used for the following pu
 -      <td>- Personal information is processed to identify users and prevent misuse of services when accessing content on QueryPie's homepage.<br>- Personal information is processed for the purpose of receiving general inquiries for QueryPie, including corporate quotation requests and service inquiries.</td>
 +      <td>- Personal information is processed to identify users and prevent misuse of services when accessing content on QueryPie's homepage.<br>- Personal information is processed for the purpose of receiving general inquiries for QueryPie, including corporate quotation requests and service inquiries.<br>- Personal information is processed to detect and prevent automated malicious requests and misuse, and to perform security verification for the inquiry service.</td>
@@ -30,5 +30,5 @@ index 2c567ff0..064a2ca2 100644
 @@ -689,2 +696,2 @@ If there is any addition, deletion or modification of the contents of the privac
 -- Announcement date: **Oct 31, 2026**
 -- Effective date: **Oct 31, 2026**
-+- Announcement date: **Nov 17, 2026**
-+- Effective date: **Nov 17, 2026**
++- Announcement date: **Nov 18, 2026**
++- Effective date: **Nov 18, 2026**
