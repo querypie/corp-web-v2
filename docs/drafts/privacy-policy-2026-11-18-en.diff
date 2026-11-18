@@ -1,5 +1,5 @@
 diff --git a/src/content/legal/privacy-policy/en/2026-10-31.md b/src/content/legal/privacy-policy/en/2026-11-18.md
-index 2c567ff0..a3695e52 100644
+index 2c567ff0..e87fec1f 100644
 --- a/src/content/legal/privacy-policy/en/2026-10-31.md
 +++ b/src/content/legal/privacy-policy/en/2026-11-18.md
 @@ -3 +3 @@ CHEQUER Global, Inc. and our owned subsidiary, QueryPie, Inc.(hereinafter referr
@@ -8,45 +8,32 @@ index 2c567ff0..a3695e52 100644
 @@ -23 +23 @@ The personal information from registered users will be used for the following pu
 -      <td>- Personal information is processed to identify users and prevent misuse of services when accessing content on QueryPie's homepage.<br>- Personal information is processed for the purpose of receiving general inquiries for QueryPie, including corporate quotation requests and service inquiries.</td>
 +      <td>- Personal information is processed to identify users and prevent misuse of services when accessing content on QueryPie's homepage.<br>- Personal information is processed for the purpose of receiving general inquiries for QueryPie, including corporate quotation requests and service inquiries.<br>- Personal information is processed to detect and prevent automated malicious requests and misuse, and to perform security verification for the inquiry service.</td>
-@@ -80 +80,6 @@ In addition, the Company retains and uses personal information within the retent
+@@ -57,0 +58,2 @@ In addition, the Company retains and uses personal information within the retent
++The retention period of information processed for Contact Us security verification follows Article 12.
++
+@@ -80 +82 @@ In addition, the Company retains and uses personal information within the retent
 -      <td>First Name<br>Last Name<br>Business Email<br>Phone Number<br>Job Title<br>Company Name</td>
 +      <td>First Name<br>Last Name<br>Business Email<br>Company Name<br>Department / Title<br>Inquiry Type<br>Planned Implementation Date<br>Products or Services of Interest<br>Inquiry Message<br>(Optional) Phone Number</td>
-+    </tr>
-+    <tr>
-+      <td>Homepage(Contact Us security verification)</td>
-+      <td>Until the purpose of processing is achieved<br>Destroyed immediately upon request</td>
-+      <td>IP address<br>Browser User-Agent<br>TLS fingerprint<br>Sitekey and associated origin</td>
-@@ -125,0 +131 @@ Collected personal information is processed in accordance with the purpose of us
+@@ -125,0 +128 @@ Collected personal information is processed in accordance with the purpose of us
 +| Cloudflare, Inc. | Contact Us security verification and detection and blocking of automated malicious requests |
-@@ -174 +180 @@ Collected personal information is processed in accordance with the purpose of us
+@@ -174 +177 @@ Collected personal information is processed in accordance with the purpose of us
 -    - When users directly enter their personal information and provide consent for its collection through the Contact Us page on the website.
 +    - When users complete and submit the inquiry form on the Contact Us page.
-@@ -200,2 +206,2 @@ Collected personal information is processed in accordance with the purpose of us
+@@ -200,2 +203,2 @@ Collected personal information is processed in accordance with the purpose of us
 -      <td>First Name<br>Last Name<br>Business Email<br>Phone Number<br>Job Title<br>Company Name</td>
 -      <td>1) Contact Us</td>
 +      <td>First Name<br>Last Name<br>Business Email<br>Company Name<br>Department / Title<br>Inquiry Type<br>Planned Implementation Date<br>Products or Services of Interest<br>Inquiry Message</td>
 +      <td>1) Receiving and responding to inquiries and providing product and service information</td>
-@@ -205,0 +212,2 @@ Collected personal information is processed in accordance with the purpose of us
+@@ -205,0 +209,2 @@ Collected personal information is processed in accordance with the purpose of us
 +  - Optional items: phone number and marketing communications consent. If the user consents, the Company provides news, event and product information.
 +
-@@ -408,0 +417,2 @@ The Company is taking the following measures to ensure the safety of personal in
-+The Company uses Cloudflare, Inc.'s Turnstile on the Contact Us page to perform security verification and prevent automated malicious requests. In this process, information such as the IP address, browser and connection information (User-Agent, TLS fingerprint), sitekey and associated origin may be processed automatically. Turnstile does not access, store, or transmit form entries or other page inputs. For the specific items processed and the cross-border transfer, see Article 12 and the [Cloudflare Turnstile Privacy Addendum](https://www.cloudflare.com/turnstile-privacy-policy/).
-+
-@@ -500 +510 @@ A person whose rights or interests have been infringed upon due to a disposition
+@@ -500 +505 @@ A person whose rights or interests have been infringed upon due to a disposition
 -The personal information of the information subject is managed using a cloud service with a server based in the United States. However, no other tasks other than the storage of information for customer management are entrusted, and the company is responsible for preventing information leaks and managing access rights.
 +The personal information of the information subject is managed using a cloud service with a server based in the United States. However, no other tasks other than the storage of information for customer management and security verification of the Contact Us inquiry form are entrusted, and the company is responsible for preventing information leaks and managing access rights.
-@@ -523 +533 @@ The personal information of the information subject is managed using a cloud ser
--      <td class="group-cell" rowspan="11"><strong>Personal Information Items Transferred/Stored</strong></td>
-+      <td class="group-cell" rowspan="12"><strong>Personal Information Items Transferred/Stored</strong></td>
-@@ -530 +540,6 @@ The personal information of the information subject is managed using a cloud ser
+@@ -530 +535 @@ The personal information of the information subject is managed using a cloud ser
 -      <td>First Name<br>Last Name<br>Business Email<br>Phone Number<br>Job Title<br>Company Name</td>
 +      <td>First Name<br>Last Name<br>Business Email<br>Company Name<br>Department / Title<br>Inquiry Type<br>Planned Implementation Date<br>Products or Services of Interest<br>Inquiry Message<br>(Optional) Phone Number</td>
-+    </tr>
-+    <tr>
-+      <td>Contact Us security verification(Turnstile)</td>
-+      <td>IP address<br>Browser User-Agent<br>TLS fingerprint<br>Sitekey and associated origin</td>
-+      <td>Cloudflare</td>
-@@ -613 +628,18 @@ The personal information of the information subject is managed using a cloud ser
+@@ -613 +618,18 @@ The personal information of the information subject is managed using a cloud ser
 -The Company uses cloud services after carefully reviewing the information protection and personal information protection compliance status of the cloud service provider, and the cloud service provider does not have access to the Company's customer personal information.
 +### Contact Us Security Verification (Cloudflare Turnstile)
 +
@@ -66,7 +53,7 @@ index 2c567ff0..a3695e52 100644
 +Requests to refuse the transfer may be made to [legal@querypie.com](mailto:legal@querypie.com). If you refuse the security verification performed through Turnstile, submission of the inquiry form will be restricted.
 +
 +The Company uses cloud services after carefully reviewing the information protection and personal information protection compliance status of the cloud service provider, and the cloud service provider does not have access to the customer personal information stored by the Company. However, information processed by Cloudflare for Contact Us security verification is subject to the "Contact Us Security Verification (Cloudflare Turnstile)" section of this Article.
-@@ -689,2 +721,3 @@ If there is any addition, deletion or modification of the contents of the privac
+@@ -689,2 +711,3 @@ If there is any addition, deletion or modification of the contents of the privac
 -- Announcement date: **Oct 31, 2026**
 -- Effective date: **Oct 31, 2026**
 +- For amendments, the Company announces the amendment on the website at least 7 days before the effective date, and at least 30 days before the effective date for changes disadvantageous to information subjects.
