@@ -2,6 +2,7 @@ const TURNSTILE_VERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/sit
 
 type TurnstileResponse = {
   success?: boolean;
+  hostname?: string;
 };
 
 export type TurnstileVerification =
@@ -12,6 +13,7 @@ export type TurnstileVerification =
 export async function verifyTurnstileToken(
   token: string | undefined,
   remoteIp?: string,
+  expectedHostname?: string,
 ): Promise<TurnstileVerification> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
   const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
@@ -38,9 +40,29 @@ export async function verifyTurnstileToken(
     if (!response.ok) return { ok: false, reason: "failed" };
 
     const result = (await response.json()) as TurnstileResponse;
-    return result.success ? { ok: true, configured: true } : { ok: false, reason: "failed" };
+    if (!result.success) return { ok: false, reason: "failed" };
+
+    if (expectedHostname) {
+      const expected = normalizeHostname(expectedHostname);
+      if (!expected || normalizeHostname(result.hostname) !== expected) {
+        return { ok: false, reason: "failed" };
+      }
+    }
+
+    return { ok: true, configured: true };
   } catch (error) {
     console.error("[contact-us] turnstile: verification failed", error);
     return { ok: false, reason: "failed" };
   }
+}
+
+function normalizeHostname(value: string | undefined): string | undefined {
+  const hostname = value?.trim().toLowerCase();
+  if (!hostname) return undefined;
+
+  const withoutPort = hostname.startsWith("[")
+    ? hostname.replace(/^\[([^\]]+)\](?::\d+)?$/, "$1")
+    : hostname.replace(/:\d+$/, "");
+
+  return withoutPort.replace(/\.$/, "") || undefined;
 }

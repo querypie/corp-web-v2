@@ -55,6 +55,45 @@ describe("verifyTurnstileToken", () => {
     expect(fetchSpy).not.toHaveBeenCalled();
   });
 
+  it("Siteverify가 반환한 hostname이 요청 호스트와 같으면 통과한다", async () => {
+    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "site-key");
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "secret-key");
+    vi.spyOn(global, "fetch").mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: true, hostname: "Stage.QueryPie.com." }),
+    } as Response);
+
+    await expect(
+      verifyTurnstileToken("token", undefined, "stage.querypie.com:443"),
+    ).resolves.toEqual({ ok: true, configured: true });
+  });
+
+  it("Siteverify가 반환한 hostname이 요청 호스트와 다르면 거부한다", async () => {
+    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "site-key");
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "secret-key");
+    vi.spyOn(global, "fetch").mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: true, hostname: "attacker.example.com" }),
+    } as Response);
+
+    await expect(
+      verifyTurnstileToken("token", undefined, "stage.querypie.com"),
+    ).resolves.toEqual({ ok: false, reason: "failed" });
+  });
+
+  it("요청 호스트를 확인하는데 응답에 hostname이 없으면 거부한다", async () => {
+    vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "site-key");
+    vi.stubEnv("TURNSTILE_SECRET_KEY", "secret-key");
+    vi.spyOn(global, "fetch").mockResolvedValue({
+      ok: true,
+      json: async () => ({ success: true }),
+    } as Response);
+
+    await expect(
+      verifyTurnstileToken("token", undefined, "stage.querypie.com"),
+    ).resolves.toEqual({ ok: false, reason: "failed" });
+  });
+
   it("Cloudflare 요청 실패 시 거부한다", async () => {
     vi.stubEnv("NEXT_PUBLIC_TURNSTILE_SITE_KEY", "site-key");
     vi.stubEnv("TURNSTILE_SECRET_KEY", "secret-key");

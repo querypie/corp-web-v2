@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
+const RENDER_TIMEOUT_MS = 15_000;
+
 declare global {
   interface Window {
     turnstile?: {
@@ -29,6 +31,7 @@ export default function TurnstileWidget({ onToken }: { onToken: (token: string |
 
     let cancelled = false;
     let timer: number | undefined;
+    const startedAt = Date.now();
     const renderWidget = () => {
       if (cancelled || !containerRef.current || !window.turnstile || widgetIdRef.current) return;
       widgetIdRef.current = window.turnstile.render(containerRef.current, {
@@ -41,7 +44,16 @@ export default function TurnstileWidget({ onToken }: { onToken: (token: string |
     };
 
     renderWidget();
-    if (!widgetIdRef.current) timer = window.setInterval(renderWidget, 200);
+    if (!widgetIdRef.current) {
+      timer = window.setInterval(() => {
+        if (Date.now() - startedAt >= RENDER_TIMEOUT_MS) {
+          if (timer !== undefined) window.clearInterval(timer);
+          timer = undefined;
+          return;
+        }
+        renderWidget();
+      }, 200);
+    }
 
     return () => {
       cancelled = true;

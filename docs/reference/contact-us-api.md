@@ -126,6 +126,8 @@ DeskPie API는 기존 lead field name과 호환되는 payload를 받는다. Slac
 
 Cloudflare 계정 정보와 Turnstile 환경변수는 [1Password 항목](https://start.1password.com/open/i?a=W2QE5422ENEWNN6FOEG6XAW6VY&v=6pb3pjtcelwh4r7xjhvm23qcwa&i=h3hwo4craznlpablziv4myfstq&h=chequer.1password.com)을 참고한다. 실제 키 값은 저장소에 기록하지 않는다. Vercel의 Production과 Preview에는 해당 환경의 Site Key와 Secret Key를 함께 설정하고, 변경 후 새로 배포한다. Site Key는 빌드 시 클라이언트에 반영된다.
 
+Turnstile 검증은 Siteverify 응답의 `success`와 `hostname`을 함께 확인한다. `hostname`은 요청의 `x-forwarded-host`(없으면 `host`)와 비교하고, 포트·대소문자·trailing dot은 정규화한다. 응답에 `hostname`이 없거나 요청 호스트와 다르면 `turnstile_failed`로 거부한다. 위젯 스크립트가 로드되지 않으면 클라이언트는 15초 후 렌더링 재시도를 중단한다.
+
 Slack 알림 채널 선택은 Community License, 콘텐츠 게이팅 폼과 같은 resolver를 공유한다.
 
 ---

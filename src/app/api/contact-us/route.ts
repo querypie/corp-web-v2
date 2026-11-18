@@ -90,9 +90,11 @@ export async function POST(request: Request) {
     );
   }
 
+  const forwardedHost = request.headers.get("x-forwarded-host")?.split(",")[0]?.trim();
   const turnstile = await verifyTurnstileToken(
     turnstileToken,
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim(),
+    forwardedHost || request.headers.get("host")?.split(",")[0]?.trim(),
   );
   if (!turnstile.ok) {
     return NextResponse.json(
