@@ -52,5 +52,5 @@ export default function TurnstileWidget({ onToken }: { onToken: (token: string |
   }, [onToken, siteKey]);
 
   if (!siteKey) return null;
-  return <div aria-label="Security verification" ref={containerRef} />;
+  return <div ref={containerRef} />;
 }

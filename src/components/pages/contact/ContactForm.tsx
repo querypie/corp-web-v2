@@ -105,8 +105,11 @@ export default function ContactForm(props: ContactFormProps) {
   const turnstileConfigured = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
   const canSubmit = useMemo(
-    () => isRequiredSatisfied(copy, form) && status !== "submitting",
-    [copy, form, status],
+    () =>
+      isRequiredSatisfied(copy, form) &&
+      status !== "submitting" &&
+      (!turnstileConfigured || Boolean(turnstileToken)),
+    [copy, form, status, turnstileConfigured, turnstileToken],
   );
 
   const { beforeProductFields, afterProductFields } = useMemo(
