@@ -1,5 +1,5 @@
 diff --git a/src/content/legal/privacy-policy/ko/2026-10-31.md b/src/content/legal/privacy-policy/ko/2026-11-18.md
-index 88489307..00258878 100644
+index 88489307..c982ac20 100644
 --- a/src/content/legal/privacy-policy/ko/2026-10-31.md
 +++ b/src/content/legal/privacy-policy/ko/2026-11-18.md
 @@ -3 +3 @@
@@ -37,7 +37,7 @@ index 88489307..00258878 100644
 -주식회사 쿼리파이는 클라우드 서비스 제공자의 정보보호 및 개인정보보호 준수 현황을 면밀하게 검토한 이후에 클라우드 서비스를 이용하고 있으며, 클라우드 서비스 제공자는 회사의 고객 개인정보에 접근할 수 없습니다.
 +### Contact Us 보안 확인(Cloudflare Turnstile)
 +
-+문의 페이지를 불러올 때 IP 주소, 브라우저 User-Agent, TLS 지문, 사이트 키 및 접속 출처가 Cloudflare, Inc.(개인정보 문의: dpo@cloudflare.com)에 미국 및 유럽으로 전송되어 보안 확인에 사용되며, 처리 목적 달성 시까지 보유 후 회사의 선택에 따라 삭제 또는 반환됩니다. 이전을 거부하려면 [legal@querypie.com](mailto:legal@querypie.com)으로 요청할 수 있으며, 거부 시 문의 폼 제출이 제한됩니다. Cloudflare의 처리 방식과 역할은 [Cloudflare Turnstile 개인정보 부속서](https://www.cloudflare.com/turnstile-privacy-policy/)와 [Cloudflare 표준 DPA](https://www.cloudflare.com/cloudflare-customer-dpa/)를 참고하시기 바랍니다.
++문의 페이지를 불러올 때 IP 주소, 브라우저 User-Agent, TLS 지문, 사이트 키 및 접속 출처가 Cloudflare, Inc.(개인정보 문의: dpo@cloudflare.com)에 미국 및 유럽(Cloudflare 안내 기준)으로 전송되어 보안 확인에 사용되며, Cloudflare는 이 정보를 자사의 봇 탐지 기능 개선에도 이용합니다. 해당 정보는 처리 목적 달성 시까지 보유한 후 회사의 선택에 따라 삭제 또는 반환되며, 이전을 거부하려면 [legal@querypie.com](mailto:legal@querypie.com)으로 요청할 수 있고, 거부하면 문의 폼 제출이 제한됩니다. Cloudflare의 처리 방식과 역할은 [Cloudflare Turnstile 개인정보 부속서](https://www.cloudflare.com/turnstile-privacy-policy/)와 [Cloudflare 표준 DPA](https://www.cloudflare.com/cloudflare-customer-dpa/)를 참고하시기 바랍니다.
 +
 +주식회사 쿼리파이는 클라우드 서비스 제공자의 정보보호 및 개인정보보호 준수 현황을 면밀하게 검토한 이후에 클라우드 서비스를 이용하고 있으며, 클라우드 서비스 제공자는 회사가 보관하는 고객 개인정보에 접근할 수 없습니다. 다만 Contact Us 보안 확인을 위해 Cloudflare가 처리하는 정보는 이 조의 'Contact Us 보안 확인(Cloudflare Turnstile)' 항목을 따릅니다.
 @@ -679 +686,2 @@

@@ -45,6 +45,19 @@
 - 유지: Cloudflare의 처리자·자체 목적 정보처리자 역할 구분. 이 구분이 빠지면 Cloudflare 약관과 어긋난다.
 - 줄일 때 우선순위: 제8조 → 제1조 → 제5조. 제3조 위탁 표와 제12조 국외 이전 항목은 줄이지 않는다.
 
+## 확정한 사항
+
+2026-11-18 1차 자료로 확인해 검토를 종료한 항목이다.
+
+| 항목 | 확정 내용 | 근거 |
+| --- | --- | --- |
+| Cloudflare의 자체 목적 처리 | Cloudflare는 사이트 보호 목적에서는 처리자이고, **Turnstile 탐지 성능 개선 목적에서는 정보처리자**다. 이 처리에는 Cloudflare의 정당한 이익을 근거로 Cloudflare 개인정보처리방침이 적용된다. 따라서 제12조에 "Cloudflare는 이 정보를 자사의 봇 탐지 기능 개선에도 이용합니다"를 고지하고, 상세는 부속서 링크로 넘긴다. | Turnstile Privacy Addendum §4, §5 |
+| 표준 DPA 적용 | DPA는 Enterprise Subscription Agreement, **Self-Serve Subscription Agreement** 또는 기타 서면·전자 계약의 일부로 편입된다. Turnstile 무료/셀프서브 계정도 Self-Serve 약관을 따르므로 DPA가 자동 적용된다. 보유·삭제·반환 조항의 근거가 된다. | Cloudflare 표준 DPA 전문 도입부, §3.1(i) |
+| 이전 국가 | Cloudflare는 방문자 메타데이터를 **미국과 유럽** 데이터센터에서 처리한다고만 공개하며, Turnstile 신호별 국가 목록은 공개하지 않는다. 방침은 "미국 및 유럽(Cloudflare 안내 기준)"으로 표기하고 세부 내용은 DPA를 참조하도록 한다. | 한국 PIPA FAQ, GDPR FAQ, Turnstile Privacy Addendum §3 |
+| 쿠키 | Turnstile은 기본 위젯에서 쿠키를 발급하지 않는다. `cf_clearance`는 SPA pre-clearance를 켠 경우에만 발급되며, 이 사이트는 pre-clearance를 사용하지 않는다. 따라서 제8조에 Cloudflare 쿠키 항목을 두지 않는다. | Turnstile 문서 Pre-clearance support |
+
+남은 확인 사항은 계약 사실관계 하나다. QueryPie의 Cloudflare 계정이 Self-Serve 약관으로 개설되었는지 계정 관리자에게 확인하면 종료된다.
+
 변경 비교: [한국어 diff](./privacy-policy-2026-11-18-ko.diff), [영어 diff](./privacy-policy-2026-11-18-en.diff). 일본어는 영어 방침을 사용한다.
 
 ## 현행 방침과 폼의 차이
