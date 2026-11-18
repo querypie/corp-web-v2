@@ -2,9 +2,10 @@ type Props = {
   description?: string | readonly string[];
   title: string | readonly string[];
   layout?: "center" | "split";
+  relaxedDescription?: boolean;
 };
 
-export default function SolutionSectionHeading({ description, title, layout = "center" }: Props) {
+export default function SectionHeading({ description, title, layout = "center", relaxedDescription = true }: Props) {
   const descriptionLines = typeof description === "string" ? [description] : description;
   const titleText = typeof title === "string" ? title : title.join(" ");
 
@@ -12,7 +13,7 @@ export default function SolutionSectionHeading({ description, title, layout = "c
     return (
       <header className="grid w-full items-start gap-4 text-left sm:gap-5 md:grid-cols-2 md:gap-7.5">
         <h2 className="m-0 min-w-0 text-pretty type-h1 text-fg">{titleText}</h2>
-        {descriptionLines ? <p className="m-0 min-w-0 whitespace-pre-line text-pretty type-body-lg leading-relaxed text-mute">{descriptionLines.join("\n")}</p> : null}
+        {descriptionLines ? <p className={`m-0 min-w-0 whitespace-pre-line text-pretty type-body-lg text-mute${relaxedDescription ? " leading-relaxed" : ""}`}>{descriptionLines.join("\n")}</p> : null}
       </header>
     );
   }

@@ -4,6 +4,14 @@ import { getContactInitialProducts } from "./initialProducts";
 import { getContactHref, getContactInitialInquiry } from "./prefill";
 
 describe("contact prefill", () => {
+  it.each(["en", "ko", "ja"] as const)("%s 제품 지정 없이 AI 상담 유형만 선택한다", (locale) => {
+    const url = new URL(getContactHref(locale), "https://example.com");
+    const query = Object.fromEntries(url.searchParams);
+    expect(url.pathname).toBe(`/${locale}/contact-us`);
+    expect(url.searchParams.has("product")).toBe(false);
+    expect(getContactInitialInquiry(locale, query)).toBe(contactInquiryLabels["ai-consulting"][locale]);
+    expect(getContactInitialProducts(locale, query)).toEqual([]);
+  });
   it.each([
     ["en", "Penetration Testing Service", 9],
     ["ko", "모의 해킹 서비스", 9],

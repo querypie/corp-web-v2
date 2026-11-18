@@ -3,7 +3,7 @@
 import { pageXPaddingClassName } from "@/constants/layout";
 import type { ContactPageCopy } from "@/copy/contact";
 import type { ManagedContentSection } from "@/features/content/data";
-import ContentLeadForm from "./ContentLeadForm";
+import ContentLeadForm from "@/components/forms/ContentLeadForm";
 
 type ContentDownloadPageProps = {
   attachmentFileName: string;

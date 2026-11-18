@@ -124,6 +124,12 @@ export function getSolutionsSubItems(
       label: locale === "ko" ? penetrationTestingMenuLabels.ko : penetrationTestingMenuLabels.en,
       href: getOfferingHref(locale as Locale, "penetration-testing"),
     }, {
+      label: aiProductsCopy[locale as Locale].qev.menuLabel,
+      href: getOfferingHref(locale as Locale, "qev"),
+    }, {
+      label: aiProductsCopy[locale as Locale].qlm.menuLabel,
+      href: getOfferingHref(locale as Locale, "qlm"),
+    }, {
       label: locale === "ko" ? "FDE 서비스" : "FDE Services",
       href: getOfferingHref(locale as Locale, "fde-services"),
     }];
@@ -138,6 +144,8 @@ export function getSolutionsSubItems(
 
   return [
     { label: penetrationTestingMenuLabel, href: getOfferingHref(locale, "penetration-testing") },
+    { label: aiProductsCopy.ja.qev.menuLabel, href: getOfferingHref(locale, "qev") },
+    { label: aiProductsCopy.ja.qlm.menuLabel, href: getOfferingHref(locale, "qlm") },
     { label: localLlmMenuLabel, href: getOfferingHref(locale, "local-llm") },
     { label: "専任エンジニア｜FDEサービス", href: getOfferingHref(locale as Locale, "fde-services") },
     { label: as400CobolMenuLabel, href: getOfferingHref(locale, "as400-cobol") },
@@ -336,6 +344,12 @@ export function getFooterHref(item: string, locale: string) {
 
   if (item === aiProductsCopy[locale as Locale]["ai-gateway"].menuLabel) {
     return getOfferingHref(locale as Locale, "ai-gateway");
+  }
+
+  for (const id of ["qev", "qlm"] as const) {
+    if (item === aiProductsCopy[locale as Locale][id].menuLabel) {
+      return getOfferingHref(locale as Locale, id);
+    }
   }
 
   if (Object.values(penetrationTestingMenuLabels).includes(item)) {

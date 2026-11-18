@@ -8,6 +8,7 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "audit:public-assets": "node scripts/find-unused-public-assets.mjs",
+    "audit:components": "node scripts/audit-components.mjs",
     "test": "vitest",
     "test:run": "vitest run"
   },

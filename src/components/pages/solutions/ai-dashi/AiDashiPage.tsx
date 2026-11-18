@@ -1,16 +1,16 @@
 import Image from "next/image";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import Badge from "@/components/ui/Badge";
 import { getContactHref } from "@/features/contact/prefill";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { getPublicDetailHref } from "@/features/content/data";
-import AiCrewWhitepaperSection from "@/components/pages/solutions/ai-crew/AiCrewWhitepaperSection";
+import WhitepaperSection from "@/components/sections/common/WhitepaperSection";
 import AiDashiRolloutSection from "./AiDashiRolloutSection";
 import AiDashiValueHeadline from "./AiDashiValueHeadline";
 import ComparisonAvailabilityIcon from "@/components/pages/shared/ComparisonAvailabilityIcon";
 import SolutionActionLink from "@/components/pages/shared/SolutionActionLink";
 import SolutionIcon from "@/components/pages/shared/SolutionIcon";
-import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
+import SectionHeading from "@/components/sections/common/SectionHeading";
 
 export const metadata = {
   title: "自社サービスをAI搭載SaaSへ最短で進化させる | AI Dashi",
@@ -86,24 +86,24 @@ export default function AiDashiPage() {
       </section>
 
       <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
-        <div className="mx-auto w-full max-w-[1200px] space-y-10"><SolutionSectionHeading title="QueryPie AIPが提供する3つの価値" /><div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,680px)] lg:items-start lg:gap-10"><div className="flex flex-col gap-4">{values.map((item) => <article className="flex flex-col rounded-box bg-bg p-6" key={item.number}><div><Badge variant="secondary">{item.title}</Badge></div><h3 className="mb-4 mt-5 type-h3 text-fg"><AiDashiValueHeadline accent={item.headlineAccent} headline={item.headline} /></h3><p className="m-0 type-body-md text-mute">{item.body}</p></article>)}</div><div className="relative mx-auto aspect-[1.14/1] w-full max-w-[680px] overflow-hidden rounded-box"><Image alt="AI Dashiが提供する3つの価値" className="object-cover" fill sizes="(min-width: 1024px) 680px, (min-width: 640px) 600px, 100vw" src="/assets/pages/solutions/ai-dashi/value-diagram.webp" /></div></div></div>
+        <div className="mx-auto w-full max-w-[1200px] space-y-10"><SectionHeading title="QueryPie AIPが提供する3つの価値" /><div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,680px)] lg:items-start lg:gap-10"><div className="flex flex-col gap-4">{values.map((item) => <article className="flex flex-col rounded-box bg-bg p-6" key={item.number}><div><Badge variant="secondary">{item.title}</Badge></div><h3 className="mb-4 mt-5 type-h3 text-fg"><AiDashiValueHeadline accent={item.headlineAccent} headline={item.headline} /></h3><p className="m-0 type-body-md text-mute">{item.body}</p></article>)}</div><div className="relative mx-auto aspect-[1.14/1] w-full max-w-[680px] overflow-hidden rounded-box"><Image alt="AI Dashiが提供する3つの価値" className="object-cover" fill sizes="(min-width: 1024px) 680px, (min-width: 640px) 600px, 100vw" src="/assets/pages/solutions/ai-dashi/value-diagram.webp" /></div></div></div>
       </section>
 
       <section className="mx-auto w-full max-w-[1200px] space-y-10">
-        <SolutionSectionHeading title="ゼロからの自社AI化を阻む、3つの致命的リスク" description="LLMのAPIを叩くだけなら簡単ですが、それを「商用レベルのSaaS」として実装しようとすると、多くのプロジェクトが以下の壁に直面し頓挫します。" /><div className="grid gap-4 md:grid-cols-3">{risks.map((item) => <article className="rounded-box bg-[var(--color-inverse-bg)] p-6" key={item.title}><div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-box bg-[var(--color-inverse-fg)] text-[var(--color-inverse-bg)]"><SolutionIcon className="h-6 w-6" name={item.icon} /></div><h3 className="mb-4 mt-5 type-h3 text-[var(--color-inverse-fg)]">{item.title}</h3><p className="m-0 type-body-md text-[var(--color-inverse-muted)]">{item.body}</p></article>)}</div>
+        <SectionHeading title="ゼロからの自社AI化を阻む、3つの致命的リスク" description="LLMのAPIを叩くだけなら簡単ですが、それを「商用レベルのSaaS」として実装しようとすると、多くのプロジェクトが以下の壁に直面し頓挫します。" /><div className="grid gap-4 md:grid-cols-3">{risks.map((item) => <article className="rounded-box bg-[var(--color-inverse-bg)] p-6" key={item.title}><div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-box bg-[var(--color-inverse-fg)] text-[var(--color-inverse-bg)]"><SolutionIcon className="h-6 w-6" name={item.icon} /></div><h3 className="mb-4 mt-5 type-h3 text-[var(--color-inverse-fg)]">{item.title}</h3><p className="m-0 type-body-md text-[var(--color-inverse-muted)]">{item.body}</p></article>)}</div>
       </section>
 
       <section className="mx-auto w-full max-w-[1200px] space-y-10">
-        <SolutionSectionHeading title="LLMを繋ぐだけでは、エンタープライズ顧客には売れない" description="AI機能を実装できても、大企業が求める厳しいセキュリティ要件を満たさなければ、導入審査で弾かれます。QueryPie AIPは、これらの要件をあらかじめクリアしたAI基盤です。" />
+        <SectionHeading title="LLMを繋ぐだけでは、エンタープライズ顧客には売れない" description="AI機能を実装できても、大企業が求める厳しいセキュリティ要件を満たさなければ、導入審査で弾かれます。QueryPie AIPは、これらの要件をあらかじめクリアしたAI基盤です。" />
         <div className="grid gap-4 md:grid-cols-3">{securityItems.map((item) => <article className="rounded-box bg-bg-content p-6" key={item.title}><div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-box bg-bg text-fg"><SolutionIcon className="h-6 w-6" name={item.icon} /></div><h3 className="mb-4 mt-5 type-h3 text-fg">{item.title}</h3><p className="m-0 type-body-md text-mute">{item.body}</p></article>)}</div>
       </section>
 
       <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
-        <div className="mx-auto w-full max-w-[1100px] space-y-10"><SolutionSectionHeading title="QueryPie AIPと自社開発の比較" description={["競合他社がAI化を進める中、開発に半年以上かけていては市場機会を逃します。", "QueryPie AIPを活用すれば、最短1ヶ月で独自のAIサービスをリリースできます。"]} /><div className="overflow-x-auto overflow-y-hidden rounded-box border border-border bg-bg"><div className="min-w-[800px]"><div className="grid grid-cols-[0.8fr_1.4fr_1.4fr] border-b border-border bg-bg text-fg"><span className="px-5 py-4" /><span className="relative z-10 -mb-px flex flex-col items-center gap-1 border-x-[3px] border-t-[3px] border-brand px-5 py-4 text-center"><h3 className="m-0 flex items-center gap-2 type-h3"><Badge variant="brand">おすすめ</Badge>QueryPie AIP導入</h3><span className="type-body-sm text-mute">組み込みAI基盤</span></span><span className="flex flex-col items-center gap-1 px-5 py-4 text-center"><h3 className="m-0 type-h3">自社開発</h3><span className="type-body-sm text-mute">フルスクラッチ</span></span></div>{comparisonRows.map((row, index) => <div className="grid grid-cols-[0.8fr_1.4fr_1.4fr] border-b border-border last:border-b-0" key={row.label}><strong className="self-center px-5 py-4 type-body-lg text-fg">{row.label}</strong><div className={`relative z-10 -mb-px flex flex-col items-center border-x-[3px] border-brand px-5 py-4 text-center ${index === comparisonRows.length - 1 ? "border-b-[3px]" : ""}`}><ComparisonAvailabilityIcon available /><p className="mb-0 mt-3 type-body-lg text-fg">{row.aip[0]}</p><p className="mb-0 mt-1 type-body-sm text-mute">{row.aip[1]}</p></div><div className="flex flex-col items-center px-5 py-4 text-center"><ComparisonAvailabilityIcon available={false} /><p className="mb-0 mt-3 type-body-lg text-fg">{row.inHouse[0]}</p><p className="mb-0 mt-1 type-body-sm text-mute">{row.inHouse[1]}</p></div></div>)}</div></div><p className="m-0 text-center type-body-sm text-mute">※期間・費用は標準的な導入ケースの目安です。要件により変動します。</p></div>
+        <div className="mx-auto w-full max-w-[1100px] space-y-10"><SectionHeading title="QueryPie AIPと自社開発の比較" description={["競合他社がAI化を進める中、開発に半年以上かけていては市場機会を逃します。", "QueryPie AIPを活用すれば、最短1ヶ月で独自のAIサービスをリリースできます。"]} /><div className="overflow-x-auto overflow-y-hidden rounded-box border border-border bg-bg"><div className="min-w-[800px]"><div className="grid grid-cols-[0.8fr_1.4fr_1.4fr] border-b border-border bg-bg text-fg"><span className="px-5 py-4" /><span className="relative z-10 -mb-px flex flex-col items-center gap-1 border-x-[3px] border-t-[3px] border-brand px-5 py-4 text-center"><h3 className="m-0 flex items-center gap-2 type-h3"><Badge variant="brand">おすすめ</Badge>QueryPie AIP導入</h3><span className="type-body-sm text-mute">組み込みAI基盤</span></span><span className="flex flex-col items-center gap-1 px-5 py-4 text-center"><h3 className="m-0 type-h3">自社開発</h3><span className="type-body-sm text-mute">フルスクラッチ</span></span></div>{comparisonRows.map((row, index) => <div className="grid grid-cols-[0.8fr_1.4fr_1.4fr] border-b border-border last:border-b-0" key={row.label}><strong className="self-center px-5 py-4 type-body-lg text-fg">{row.label}</strong><div className={`relative z-10 -mb-px flex flex-col items-center border-x-[3px] border-brand px-5 py-4 text-center ${index === comparisonRows.length - 1 ? "border-b-[3px]" : ""}`}><ComparisonAvailabilityIcon available /><p className="mb-0 mt-3 type-body-lg text-fg">{row.aip[0]}</p><p className="mb-0 mt-1 type-body-sm text-mute">{row.aip[1]}</p></div><div className="flex flex-col items-center px-5 py-4 text-center"><ComparisonAvailabilityIcon available={false} /><p className="mb-0 mt-3 type-body-lg text-fg">{row.inHouse[0]}</p><p className="mb-0 mt-1 type-body-sm text-mute">{row.inHouse[1]}</p></div></div>)}</div></div><p className="m-0 text-center type-body-sm text-mute">※期間・費用は標準的な導入ケースの目安です。要件により変動します。</p></div>
       </section>
 
       <section className="mx-auto w-full max-w-[1200px] space-y-8 md:space-y-10">
-        <SolutionSectionHeading title="QueryPie AIの包括的サポート体制" description="単なるツール提供ではなく、自社ブランドのAIサービスをリリースし、安定運用するための要素をワンストップで提供します。" />
+        <SectionHeading title="QueryPie AIの包括的サポート体制" description="単なるツール提供ではなく、自社ブランドのAIサービスをリリースし、安定運用するための要素をワンストップで提供します。" />
         <div className="grid gap-4 md:gap-5 lg:grid-cols-3">{supportItems.map((item) => <article className="flex flex-col rounded-box bg-bg-content p-6 md:h-full md:min-h-[360px]" key={item.title}><div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-box bg-primary text-bg"><SolutionIcon className="h-6 w-6" name={item.icon} /></div><h3 className="mb-2 mt-5 type-h2 text-fg">{item.title}</h3><p className="m-0 type-body-md text-mute">{item.subtitle}</p><ul className="m-0 mt-5 flex list-none flex-col gap-2.5 p-0 md:mt-6 md:gap-3">{item.points.map((point) => <li className="flex items-start gap-1.5 type-body-md text-fg" key={point}><span className="inline-flex w-4 shrink-0 justify-center text-brand">✓</span><span>{point}</span></li>)}</ul></article>)}</div>
       </section>
 
@@ -118,7 +118,7 @@ export default function AiDashiPage() {
         titleEyebrow="最速で市場へ"
       />
 
-      <AiCrewWhitepaperSection
+      <WhitepaperSection
         action="無料でダウンロード"
         badges={["プロダクト責任者向け", "SaaS戦略", "組み込みAI"]}
         description="AIエージェントがSaaSビジネスに与える影響と、SaaS企業が取るべき戦略、AI Native企業への変革の視点をまとめました。"

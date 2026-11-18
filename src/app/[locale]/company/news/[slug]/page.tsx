@@ -2,7 +2,7 @@ import { notFound, redirect } from "next/navigation";
 import type { Metadata } from "next";
 import { isLocale } from "@/constants/i18n";
 import NewsDetailPage from "@/components/pages/news/NewsDetailPage";
-import type { DocsDetailPageProps } from "@/components/pages/resources/ResourcesDetailPage";
+import type { ContentDetailPageProps } from "@/components/content/ContentDetailPage";
 import {
   formatPublicDate,
   getAdjacentContentLabel,
@@ -103,7 +103,7 @@ export default async function NewsDetailRoute({ params }: Props) {
         shareUrl: await getRequestPublicUrl(detailHref),
         title: getLocalizedContent(currentEntry.title, contentLocale),
         writer: getNewsFormatLabel(currentEntry, locale),
-      } satisfies DocsDetailPageProps)}
+      } satisfies ContentDetailPageProps)}
     />
   );
 }

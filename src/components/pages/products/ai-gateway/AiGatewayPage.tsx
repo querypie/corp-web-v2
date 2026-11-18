@@ -1,4 +1,4 @@
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import type { Locale } from "@/constants/i18n";
 import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { aiProductsCopy, aiProductAction } from "@/copy/aiProducts";
@@ -14,7 +14,7 @@ export default function AiGatewayPage({ locale }: { locale: Locale }) {
     <section className={pageContentWidthClassName}>
       <header className="grid items-start gap-4 sm:gap-5 md:grid-cols-2 md:gap-7.5">
         <h1 className="m-0 text-pretty type-h1 text-fg">{copy.hero.title}<br />{copy.hero.accent}{copy.hero.accentAfter}</h1>
-        <div className="min-w-0 space-y-3 type-body-lg leading-relaxed text-fg">{copy.hero.description.map(text => <p className="m-0" key={text}>{text}</p>)}</div>
+        <div className="min-w-0 space-y-3 type-body-lg text-fg">{copy.hero.description.map(text => <p className="m-0" key={text}>{text}</p>)}</div>
       </header>
       <div className="mt-12 md:mt-16"><AiGatewayDiagram locale={locale} /></div>
     </section>

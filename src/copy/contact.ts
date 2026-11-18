@@ -118,6 +118,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       ],
       productFieldLabel: "Products/Services of Interest",
       productOptions: [
+        contactProductLabels.penetrationtest.en,
         aruProductLabels.en,
         "Meeting Notes & Live Translation AI - Lingo",
         "Knowledge-based Content Creation AI - NotePie",
@@ -125,7 +126,6 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "Access Control Platform QueryPie ACP",
         contactProductLabels.aig.en,
         "AI Expert Support (FDE) Service",
-        "Penetration Testing Service",
         "Partnership",
       ],
       messageField: {
@@ -196,6 +196,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       ],
       productFieldLabel: "관심 있는 제품・서비스",
       productOptions: [
+        contactProductLabels.penetrationtest.ko,
         aruProductLabels.ko,
         "회의기록 및 실시간번역 AI - Lingo",
         "지식 기반 콘텐츠 생성 AI - NotePie",
@@ -203,7 +204,6 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "액세스 제어 플랫폼 QueryPie ACP",
         contactProductLabels.aig.ko,
         "AI 전문가 지원 (FDE) 서비스",
-        "모의 해킹 서비스",
         "파트너십",
       ],
       messageField: {
@@ -274,6 +274,7 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
       ],
       productFieldLabel: "興味のある製品・サービス",
       productOptions: [
+        contactProductLabels.penetrationtest.ja,
         aruProductLabels.ja,
         "会議記録・リアルタイム翻訳AI - Lingo",
         "ナレッジベース コンテンツ生成AI - NotePie",
@@ -283,7 +284,6 @@ export function getContactPageCopy(locale: Locale): ContactPageCopy {
         "アクセス制御プラットフォーム QueryPie ACP",
         contactProductLabels.aig.ja,
         "AI専門家伴走 (FDE) サービス",
-        "ペネトレーションテストサービス",
         "パートナーシップ",
       ],
       messageField: {

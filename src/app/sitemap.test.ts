@@ -29,6 +29,10 @@ describe("sitemap route", () => {
     expect(urls).toContain("https://www.querypie.com/ko");
     expect(urls).toContain("https://www.querypie.com/ko/community-license");
     expect(urls).toContain("https://www.querypie.com/en/plans/aip");
+    expect(urls).toContain("https://www.querypie.com/en/qev");
+    expect(urls).toContain("https://www.querypie.com/en/qlm");
+    expect(urls).toContain("https://www.querypie.com/ko/qev");
+    expect(urls).toContain("https://www.querypie.com/ko/qlm");
     expect(urls).not.toContain("https://www.querypie.com/ja");
     expect(urls).not.toContain("https://www.querypie.com/ja/as400-cobol");
   });
@@ -43,6 +47,8 @@ describe("sitemap route", () => {
 
     expect(urls).toContain("https://stage-v2.querypie.ai/");
     expect(urls).toContain("https://stage-v2.querypie.ai/as400-cobol");
+    expect(urls).toContain("https://stage-v2.querypie.ai/qev");
+    expect(urls).toContain("https://stage-v2.querypie.ai/qlm");
     expect(urls).not.toContain("https://stage-v2.querypie.ai/plans/aip");
     expect(urls.every((url) => !new URL(url).pathname.startsWith("/ja"))).toBe(true);
   });

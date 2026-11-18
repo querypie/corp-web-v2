@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import { getContactHref } from "@/features/contact/prefill";
 import { pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { localLlmCopy as copy } from "@/copy/localLlm";
@@ -8,7 +8,7 @@ import LocalLlmComparison from "./LocalLlmComparison";
 import LocalLlmDevelopmentCards from "./LocalLlmDevelopmentCards";
 import LocalLlmPlatformDiagram from "./LocalLlmPlatformDiagram";
 import SolutionActionLink from "@/components/pages/shared/SolutionActionLink";
-import SolutionSectionHeading from "@/components/pages/shared/SolutionSectionHeading";
+import SectionHeading from "@/components/sections/common/SectionHeading";
 
 export default function LocalLlmPage() {
   const contactHref = getContactHref("ja", "fde");
@@ -34,25 +34,25 @@ export default function LocalLlmPage() {
 
       <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
         <div className="mx-auto w-full max-w-[1200px] space-y-10">
-          <SolutionSectionHeading {...copy.environment} />
+          <SectionHeading {...copy.environment} />
           <LocalLlmComparison />
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-[1200px] space-y-10">
-        <SolutionSectionHeading title={copy.development.title} description={copy.development.description} />
+        <SectionHeading title={copy.development.title} description={copy.development.description} />
         <LocalLlmDevelopmentCards />
       </section>
 
       <section className="-mx-5 bg-bg-deep px-5 py-[70px] md:-mx-10 md:px-10 md:py-[100px]">
         <div className="mx-auto w-full max-w-[1200px] space-y-10">
-          <SolutionSectionHeading title={copy.agents.title} description={copy.agents.description} />
+          <SectionHeading title={copy.agents.title} description={copy.agents.description} />
           <LocalLlmAgentFlow />
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-[1200px] space-y-10 [&_h2]:text-balance">
-        <SolutionSectionHeading title={copy.platform.title} description={copy.platform.description} />
+        <SectionHeading title={copy.platform.title} description={copy.platform.description} />
         <LocalLlmPlatformDiagram />
       </section>
 

@@ -3,7 +3,7 @@ import { Cpu, Database, Globe, Layers, Server, UserRound } from "lucide-react";
 import type { Locale } from "@/constants/i18n";
 import { aiGatewaySecurityCopy } from "@/copy/aiGatewaySecurity";
 import { aiGatewayArchitectureCopy } from "@/copy/aiGatewayLocalized";
-import AiGatewayLogo from "./AiGatewayLogo";
+import AiGatewayLogo from "@/components/sections/common/AiGatewayLogo";
 import styles from "./AiGatewayAcpDiagram.module.css";
 
 const resourceIcons = [Database, Server, Layers, Globe];

@@ -1,5 +1,6 @@
 import { offeringEntries } from "@/constants/offerings";
 import { getOfferingHref } from "@/features/offerings/routes";
+import { aiProductsCopy } from "@/copy/aiProducts";
 import { describe, expect, it, vi } from "vitest";
 
 import { generateMetadata as g8 } from "@/app/[locale]/ai-crew/page";
@@ -54,6 +55,27 @@ const routeModules = {
 } as const;
 
 describe("solutions route modules", () => {
+  it.each(["en", "ko", "ja"] as const)("%s QEV·QLM의 검색·공유 정보가 현재 제품명과 설명을 사용한다", async (locale) => {
+    for (const id of ["qev", "qlm"] as const) {
+      const copy = aiProductsCopy[locale][id];
+      const metadata = await routeModules[id].generateMetadata({ params: Promise.resolve({ locale }) });
+      const shareTitle = `${copy.menuLabel}`;
+      expect(metadata.title).toBe(`${shareTitle} | QueryPie AI`);
+      expect(metadata.description).toBe(copy.metadata.description);
+      expect(metadata.description).not.toMatch(/준비|preparing|準備|deepseek/i);
+      expect(metadata.openGraph).toMatchObject({ title: shareTitle, description: metadata.description });
+      expect(metadata.twitter).toMatchObject({ title: shareTitle, description: metadata.description });
+      const image = (metadata.openGraph?.images as Array<{ url: string; alt: string }>)[0];
+      expect(image.alt).toBe(shareTitle);
+      const imageUrl = new URL(image.url, "https://www.querypie.com");
+      expect(imageUrl.searchParams.get("title")).toBe(shareTitle);
+      expect(imageUrl.searchParams.get("description")).toBe(metadata.description);
+      expect(metadata.alternates?.languages).toMatchObject({
+        en: `https://www.querypie.com/en/${id}`,
+        ko: `https://www.querypie.com/ko/${id}`,
+      });
+    }
+  });
   it.each(["en", "ko", "ja"])("AI 솔루션과 모의 해킹 페이지는 %s 언어를 유지한다", async (locale) => {
     const props = { params: Promise.resolve({ locale }) };
     for (const id of ["ai-gateway", "penetration-testing", "qlm", "qev"] as const) {
@@ -61,6 +83,7 @@ describe("solutions route modules", () => {
       expect(element.props.locale).toBe(locale);
       const metadata = await routeModules[id].generateMetadata(props);
       expect(metadata.alternates?.canonical).toBe(`https://www.querypie.com/${locale}/${id}`);
+      if (id === "qev" || id === "qlm") expect(metadata.robots).not.toMatchObject({ index: false });
     }
   });
   it("AI 솔루션은 지원하지 않는 언어에 404를 반환한다", async () => {

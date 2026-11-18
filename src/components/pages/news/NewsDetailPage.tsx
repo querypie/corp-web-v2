@@ -1,5 +1,5 @@
-import DocsDetailPage, { type DocsDetailPageProps } from "../resources/ResourcesDetailPage";
+import ContentDetailPage, { type ContentDetailPageProps } from "@/components/content/ContentDetailPage";
 
-export default function NewsDetailPage(props: DocsDetailPageProps) {
-  return <DocsDetailPage parentLabel="" {...props} />;
+export default function NewsDetailPage(props: ContentDetailPageProps) {
+  return <ContentDetailPage parentLabel="" {...props} />;
 }

@@ -1,0 +1,10 @@
+.connector { position: relative; width: 100%; height: 1px; color: var(--flow-color); background: repeating-linear-gradient(90deg, currentColor 0 4px, transparent 4px 8px); background-size: 8px 1px; }
+.connector > svg { position: absolute; right: 0; top: -4.5px; width: 10px; height: 10px; }
+@media (prefers-reduced-motion: no-preference) { .connector { animation: flow-horizontal .8s linear infinite; } }
+@keyframes flow-horizontal { to { background-position: 8px 0; } }
+@keyframes flow-vertical { to { background-position: 0 8px; } }
+@media (max-width: 767px) {
+  .connector { justify-self: center; width: 1px; height: 36px; background: repeating-linear-gradient(180deg, currentColor 0 4px, transparent 4px 8px); background-size: 1px 8px; }
+  .connector > svg { top: auto; bottom: 0; right: -4.5px; transform: rotate(90deg); }
+  @media (prefers-reduced-motion: no-preference) { .connector { animation-name: flow-vertical; } }
+}

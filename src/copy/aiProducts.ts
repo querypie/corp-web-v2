@@ -1,4 +1,6 @@
 import type { Locale } from "@/constants/i18n";
+import { qevCopy } from "./qevLocalized";
+import { qlmCopy } from "./qlmLocalized";
 import { aiProductsJapaneseCopy, type AiProductCopy, type AiProductId } from "./aiProducts.ja";
 
 const en: Record<AiProductId, AiProductCopy> = {
@@ -10,7 +12,7 @@ const en: Record<AiProductId, AiProductCopy> = {
     cta: { title: "Start with AI Gateway", description: "Explore a deployment and operating model that fits your LLM and MCP usage, access policies, and cost management needs." },
   },
   qlm: {
-    menuLabel: "QueryPie LLM | QLM",
+    menuLabel: "QueryPie LLM (QLM)",
     metadata: { title: "QLM | Enterprise LLM service | QueryPie AI", description: "An open-source-based LLM service selected and operated by QueryPie. A consistent enterprise AI experience as foundation models evolve." },
     hero: { eyebrow: "QueryPie LLM", title: "Enterprise AI,", accent: "powered by QLM.", description: ["QLM is an LLM service built on open-source models selected by QueryPie and refined for enterprise quality and operations.", "Starting with DeepSeek-based models, QLM is designed to adopt the most suitable foundation models over time while maintaining a consistent service experience."], imageLabel: "QLM service: model selection, evaluation, and enterprise delivery" },
     sections: [
@@ -28,7 +30,7 @@ const en: Record<AiProductId, AiProductCopy> = {
     cta: { title: "Put QLM to work for your business", description: "Discuss how QLM can support your current LLM usage and business requirements." },
   },
   qev: {
-    menuLabel: "QueryPie Decision Model | QEV",
+    menuLabel: "QueryPie Decision Model (QEV)",
     metadata: { title: "QEV | AI for enterprise decisions | QueryPie AI", description: "QueryPie’s decision AI model identifies sensitive data with DLP and selects models with Auto Router to support secure AI operations." },
     hero: { eyebrow: "QueryPie Decision Model", title: "Before AI responds,", accent: "QEV decides.", description: ["QEV is QueryPie’s proprietary AI model that understands a request and makes decisions based on security policies and its purpose.", "Through DLP and Auto Router, it supports data protection and model routing in AI Gateway."], imageLabel: "QEV decision flow: request analysis, DLP, and model routing through AI Gateway" },
     sections: [
@@ -56,7 +58,7 @@ const ko: Record<AiProductId, AiProductCopy> = {
     cta: { title: "AI Gateway로 시작하세요", description: "LLM·MCP 활용 현황과 접근 제어, 비용 관리 과제에 맞춰 도입 구성과 운영 방법을 제안합니다." },
   },
   qlm: {
-    menuLabel: "QueryPie LLM | QLM",
+    menuLabel: "QueryPie LLM (QLM)",
     metadata: { title: "QLM | 기업을 위한 LLM 서비스 | QueryPie AI", description: "QueryPie가 선정하고 운영하는 오픈소스 기반 LLM 서비스. 기반 모델이 바뀌어도 일관된 기업 AI 경험을 제공합니다." },
     hero: { eyebrow: "QueryPie LLM", title: "기업의 LLM 활용,", accent: "QLM", accentAfter: "으로 최적화하세요.", description: ["QLM은 QueryPie가 오픈소스 모델을 선정하고, 기업 활용에 필요한 품질과 운영성을 높여 제공하는 LLM 서비스입니다.", "초기에는 DeepSeek 계열 모델을 활용하며, 앞으로 더 적합한 기반 모델로 유연하게 전환하면서도 QLM의 일관된 서비스 경험을 제공합니다."], imageLabel: "QLM 서비스 구성: 모델 선정, 평가, 기업 서비스 제공" },
     sections: [
@@ -74,7 +76,7 @@ const ko: Record<AiProductId, AiProductCopy> = {
     cta: { title: "QLM을 우리 업무에 적용해 보세요", description: "현재 LLM 활용 현황과 업무 요건에 맞춰 QLM 활용 방안을 안내합니다." },
   },
   qev: {
-    menuLabel: "QueryPie Decision Model | QEV",
+    menuLabel: "QueryPie Decision Model (QEV)",
     metadata: { title: "QEV | 기업 AI를 위한 의사결정 모델 | QueryPie AI", description: "QueryPie가 자체 개발한 의사결정 AI 모델. DLP로 민감정보를 판별하고 Auto Router로 적합한 모델을 선택합니다." },
     hero: { eyebrow: "QueryPie Decision Model", title: "AI가 답하기 전에,", accent: "QEV", accentAfter: "가 판단합니다.", description: ["QEV는 요청의 내용을 이해하고 보안 정책과 목적에 맞는 판단을 내리는 QueryPie 자체 AI 모델입니다.", "DLP와 Auto Router를 통해 AI Gateway의 안전한 데이터 보호와 모델 라우팅을 지원합니다."], imageLabel: "QEV 의사결정 흐름: 요청 분석, DLP 판별, AI Gateway 모델 라우팅" },
     sections: [
@@ -93,28 +95,27 @@ const ko: Record<AiProductId, AiProductCopy> = {
   },
 };
 
-const placeholderCopy = {
-  en: { description: "We’re preparing the details of this service.", visual: "Visual content coming soon", sections: ["Service overview", "Use cases"], cards: ["Content 01", "Content 02", "Content 03"], pending: "Content coming soon", cta: "CTA content coming soon" },
-  ko: { description: "서비스 소개 내용을 준비하고 있습니다.", visual: "비주얼 준비 중", sections: ["서비스 소개", "활용 사례"], cards: ["콘텐츠 01", "콘텐츠 02", "콘텐츠 03"], pending: "콘텐츠 준비 중", cta: "CTA 문구 준비 중" },
-  ja: { description: "サービスの紹介内容を準備しています。", visual: "ビジュアル準備中", sections: ["サービス紹介", "活用シーン"], cards: ["コンテンツ 01", "コンテンツ 02", "コンテンツ 03"], pending: "コンテンツ準備中", cta: "CTAコピー準備中" },
+const modelMenuLabels: Record<Locale, Record<"qlm" | "qev", string>> = {
+  en: { qev: "Decision AI Model (QEV)", qlm: "QueryPie LLM (QLM)" },
+  ko: { qev: "의사결정 AI 모델 (QEV)", qlm: "QueryPie LLM (QLM)" },
+  ja: { qev: "意思決定AIモデル (QEV)", qlm: "QueryPie LLM (QLM)" },
 };
 
-function modelPlaceholder(locale: Locale, id: "qlm" | "qev"): AiProductCopy {
-  const text = placeholderCopy[locale];
+function modelPageCopy(locale: Locale, id: "qlm" | "qev"): AiProductCopy {
+  const copy = id === "qlm" ? qlmCopy[locale] : qevCopy[locale];
   const name = id === "qlm" ? "QueryPie LLM" : "QueryPie Decision Model";
-  const label = id.toUpperCase();
   return {
-    menuLabel: `${name} | ${label}`,
-    metadata: { title: `${label} | ${name} | QueryPie AI`, description: text.description },
-    hero: { eyebrow: name, title: label, accent: name, description: [text.description], imageLabel: text.visual },
-    sections: text.sections.map(title => ({ title, description: [text.description], cards: text.cards.map(title => ({ title, body: text.pending })) })),
-    cta: { title: text.cta, description: text.pending },
+    menuLabel: modelMenuLabels[locale][id],
+    metadata: copy.metadata,
+    hero: { eyebrow: name, ...copy.hero, description: [copy.hero.description], imageLabel: "" },
+    sections: [],
+    cta: copy.cta,
   };
 }
 
 export const aiProductsCopy: Record<Locale, Record<AiProductId, AiProductCopy>> = {
-  en: { "ai-gateway": en["ai-gateway"], qlm: modelPlaceholder("en", "qlm"), qev: modelPlaceholder("en", "qev") },
-  ko: { "ai-gateway": ko["ai-gateway"], qlm: modelPlaceholder("ko", "qlm"), qev: modelPlaceholder("ko", "qev") },
-  ja: { "ai-gateway": aiProductsJapaneseCopy["ai-gateway"], qlm: modelPlaceholder("ja", "qlm"), qev: modelPlaceholder("ja", "qev") },
+  en: { "ai-gateway": en["ai-gateway"], qlm: modelPageCopy("en", "qlm"), qev: modelPageCopy("en", "qev") },
+  ko: { "ai-gateway": ko["ai-gateway"], qlm: modelPageCopy("ko", "qlm"), qev: modelPageCopy("ko", "qev") },
+  ja: { "ai-gateway": aiProductsJapaneseCopy["ai-gateway"], qlm: modelPageCopy("ja", "qlm"), qev: modelPageCopy("ja", "qev") },
 };
 export const aiProductAction = { en: "Talk to us", ko: "도입 문의", ja: "相談する" };

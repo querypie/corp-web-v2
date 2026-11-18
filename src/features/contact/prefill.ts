@@ -5,8 +5,9 @@ type SearchParams = Record<string, string | string[] | undefined>;
 type ContactProduct = keyof typeof contactProductLabels;
 type ContactInquiry = keyof typeof contactInquiryLabels;
 
-export function getContactHref(locale: Locale, product: ContactProduct, inquiry: ContactInquiry = "ai-consulting") {
-  const query = new URLSearchParams({ inquiry, product });
+export function getContactHref(locale: Locale, product?: ContactProduct, inquiry: ContactInquiry = "ai-consulting") {
+  const query = new URLSearchParams({ inquiry });
+  if (product) query.set("product", product);
   return `${getLocalePath(locale, "/contact-us")}?${query}`;
 }
 

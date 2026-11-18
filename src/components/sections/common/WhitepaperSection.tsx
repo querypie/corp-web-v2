@@ -8,17 +8,17 @@ type Props = {
   description: string;
   href: string;
   imageAlt: string;
-  imageSrc?: string;
+  imageSrc: string;
   title: string;
 };
 
-export default function AiCrewWhitepaperSection({
+export default function WhitepaperSection({
   action,
   badges,
   description,
   href,
   imageAlt,
-  imageSrc = "/resources/white-papers/thumbnail-25.webp",
+  imageSrc,
   title,
 }: Props) {
   return (

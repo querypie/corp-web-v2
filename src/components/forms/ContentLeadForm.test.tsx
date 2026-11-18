@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { getContactPageCopy } from "@/copy/contact";
-import ContentLeadForm from "./ContentLeadForm";
+import ContentLeadForm from "@/components/forms/ContentLeadForm";
 
 const contactCopy = getContactPageCopy("en");
 

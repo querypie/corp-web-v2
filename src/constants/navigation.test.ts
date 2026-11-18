@@ -35,7 +35,7 @@ describe("플랫폼과 일본 전용 솔루션", () => {
     expect(getPlatformSubItems(locale, { includeDlpPlatform: true }).map((item) => item.href))
       .not.toContain(`/${locale}/dlp`);
     expect(getSolutionsSubItems(locale).map((item) => item.href))
-      .toEqual([`/${locale}/penetration-testing`, `/${locale}/fde-services`]);
+      .toEqual([`/${locale}/penetration-testing`, `/${locale}/qev`, `/${locale}/qlm`, `/${locale}/fde-services`]);
   });
 
   it("일본어 Preview 메뉴와 푸터에서는 DLP 제품 소개를 숨긴다", () => {
@@ -48,9 +48,30 @@ describe("플랫폼과 일본 전용 솔루션", () => {
       .not.toContain("データ損失防止 (DLP)");
   });
 
-  it("일본어 솔루션은 모의 해킹을 첫 메뉴로 표시하고 QLM·QEV는 숨긴다", () => {
+  it("세 언어의 솔루션과 푸터에서 모의 해킹 다음에 QEV·QLM을 표시한다", () => {
+    for (const [locale, labels] of [
+      ["en", ["Decision AI Model (QEV)", "QueryPie LLM (QLM)"]],
+      ["ko", ["의사결정 AI 모델 (QEV)", "QueryPie LLM (QLM)"]],
+      ["ja", ["意思決定AIモデル (QEV)", "QueryPie LLM (QLM)"]],
+    ] as const) {
+      const items = getSolutionsSubItems(locale);
+      expect(items.slice(1, 3)).toEqual([
+        { label: labels[0], href: `/${locale}/qev` },
+        { label: labels[1], href: `/${locale}/qlm` },
+      ]);
+      const footerItems = getShellMenuCopy(locale).footerSections[1].items;
+      expect(footerItems.slice(1, 3)).toEqual(labels);
+      for (const item of items.slice(1, 3)) {
+        expect(getFooterHref(item.label, locale)).toBe(item.href);
+      }
+    }
+  });
+
+  it("일본어 솔루션은 모의 해킹을 첫 메뉴로 표시한다", () => {
     expect(getSolutionsSubItems("ja")).toEqual([
       { label: "ペネトレーションテスト", href: "/ja/penetration-testing" },
+      { label: "意思決定AIモデル (QEV)", href: "/ja/qev" },
+      { label: "QueryPie LLM (QLM)", href: "/ja/qlm" },
       { label: "オンプレミスAI｜Local LLM", href: "/ja/local-llm" },
       { label: "専任エンジニア｜FDEサービス", href: "/ja/fde-services" },
       { label: "AS/400・COBOLモダナイゼーション", href: "/ja/as400-cobol" },
@@ -142,7 +163,7 @@ describe("getShellMenuCopy", () => {
   it("푸터 메뉴를 locale별로 반환한다", () => {
     expect(getShellMenuCopy("ko").footerSections).toEqual([
       { title: "플랫폼", items: ["접근 제어 플랫폼 (ACP)", "AI 플랫폼 (AIP)", "AI Gateway (AIG)"] },
-      { title: "솔루션", items: ["모의 해킹 서비스", "FDE 서비스"] },
+      { title: "솔루션", items: ["모의 해킹 서비스", "의사결정 AI 모델 (QEV)", "QueryPie LLM (QLM)", "FDE 서비스"] },
       { title: "데모", items: ["ACP 활용", "AIP 활용"] },
       { title: "리소스", items: ["제품 소개", "용어집", "매뉴얼", "화이트페이퍼", "블로그", "ACP 실습 노트", "고객의 목소리", "이벤트", "ACP 커뮤니티 에디션", "ACP 문서", "AIP 시작하기", "AIP 문서"] },
       { title: "회사", items: ["회사 소개", "인증", "Trust Center", "뉴스", "문의하기"] },
@@ -150,7 +171,7 @@ describe("getShellMenuCopy", () => {
     ]);
     expect(getShellMenuCopy("ja").footerSections).toEqual([
       { title: "プラットフォーム", items: ["AIプラットフォーム (AIP)", "アクセス制御プラットフォーム (ACP)", "AI Gateway (AIG)"] },
-      { title: "ソリューション", items: ["ペネトレーションテスト", "オンプレミスAI｜Local LLM", "専任エンジニア｜FDEサービス", "AS/400・COBOLモダナイゼーション", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"] },
+      { title: "ソリューション", items: ["ペネトレーションテスト", "意思決定AIモデル (QEV)", "QueryPie LLM (QLM)", "オンプレミスAI｜Local LLM", "専任エンジニア｜FDEサービス", "AS/400・COBOLモダナイゼーション", "社内業務効率化｜AI Crew", "自社サービスAI化｜AI Dashi"] },
       { title: "デモ", items: ["AIP機能", "ACP機能"] },
       { title: "リソース", items: ["製品紹介", "用語集", "マニュアル", "ホワイトペーパー", "ブログ", "ACP 実習ノート", "お客様の声", "イベント", "AIPを始める", "AIP ドキュメント", "ACP コミュニティエディション", "ACP ドキュメント"] },
       { title: "会社", items: ["会社概要", "認証", "Trust Center", "ニュース", "お問い合わせ"] },

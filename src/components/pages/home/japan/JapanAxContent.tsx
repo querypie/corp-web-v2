@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { CertificationCard } from "@/components/pages/company/CertificationsPage";
+import CertificationCard from "@/components/sections/common/CertificationCard";
 import Button from "@/components/ui/Button";
 import ButtonGroup from "@/components/ui/ButtonGroup";
 import SolutionIcon from "@/components/pages/shared/SolutionIcon";

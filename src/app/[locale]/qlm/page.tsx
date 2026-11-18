@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const copy = aiProductsCopy[locale].qlm;
-  return withDynamicOgImage({ ...copy.metadata, robots: { index: false, follow: true }, alternates: { canonical: getOfferingHref(locale, "qlm") } }, { locale, ...copy.metadata });
+  return withDynamicOgImage({ ...copy.metadata, alternates: { canonical: getOfferingHref(locale, "qlm") } }, { locale, ...copy.metadata });
 }
 
 export default async function Page({ params }: PageProps) {

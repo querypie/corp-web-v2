@@ -1,7 +1,7 @@
 import type { Locale } from "@/constants/i18n";
 import Image from "next/image";
 import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import Badge from "@/components/ui/Badge";
 import Button from "@/components/ui/Button";
 import { getDlpDemoUrl } from "@/features/products/dlp/demo";

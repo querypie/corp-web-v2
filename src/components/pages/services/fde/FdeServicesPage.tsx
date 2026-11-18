@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Cta from "@/components/sections/Cta";
+import Cta from "@/components/sections/common/Cta";
 import type { Locale } from "@/constants/i18n";
 import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { fdeCopy } from "@/copy/fde";
