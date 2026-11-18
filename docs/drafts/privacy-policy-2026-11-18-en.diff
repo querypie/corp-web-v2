@@ -1,5 +1,5 @@
 diff --git a/src/content/legal/privacy-policy/en/2026-10-31.md b/src/content/legal/privacy-policy/en/2026-11-18.md
-index 2c567ff0..57d3ba0a 100644
+index 2c567ff0..a92ec8ae 100644
 --- a/src/content/legal/privacy-policy/en/2026-10-31.md
 +++ b/src/content/legal/privacy-policy/en/2026-11-18.md
 @@ -3 +3 @@ CHEQUER Global, Inc. and our owned subsidiary, QueryPie, Inc.(hereinafter referr
@@ -25,7 +25,7 @@ index 2c567ff0..57d3ba0a 100644
 +The Company uses Cloudflare, Inc.'s Turnstile on the Contact Us page to perform security verification and prevent automated malicious requests. Cloudflare may process information including the IP address, browser and connection information (such as the User-Agent and TLS fingerprint), sitekey and associated origin. Cloudflare states that it processes this information to provide bot detection and blocking for the Company's website and to improve Turnstile's bot detection capabilities. For details, see the [Cloudflare Turnstile Privacy Addendum](https://www.cloudflare.com/turnstile-privacy-policy/).
 +
 @@ -499,0 +505,2 @@ A person whose rights or interests have been infringed upon due to a disposition
-+The Company uses Cloudflare, Inc.'s Turnstile for Contact Us security verification. When the inquiry page loads and security verification takes place, information such as the IP address, browser User-Agent, TLS fingerprint, sitekey and associated origin may be transmitted over the network to and processed by Cloudflare. Cloudflare provides website protection to the Company and separately processes information to improve Turnstile's bot detection capabilities. Cloudflare's privacy contact is dpo@cloudflare.com. The information is processed for the period necessary for the purposes of processing and under the applicable agreement and law. Transfer destinations and specific retention periods will be provided after confirmation.
++The Company uses Cloudflare, Inc.'s Turnstile for Contact Us security verification. When the inquiry page loads and security verification takes place, information such as the IP address, browser User-Agent, TLS fingerprint, sitekey and associated origin may be transmitted over the network to and processed by Cloudflare. Cloudflare provides website protection to the Company and separately processes information to improve Turnstile's bot detection capabilities. Cloudflare's privacy contact is dpo@cloudflare.com. Cloudflare states that visitor-related metadata is processed in its data centers in the United States and Europe and retained for a limited period necessary for the purposes of processing. The specific retention period is determined by whether the purpose has been achieved and by retention obligations under applicable law.
 +
 @@ -689,2 +696,2 @@ If there is any addition, deletion or modification of the contents of the privac
 -- Announcement date: **Oct 31, 2026**

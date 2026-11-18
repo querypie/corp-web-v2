@@ -11,14 +11,14 @@
 | 제공자 및 역할 | Cloudflare, Inc.는 사이트 보호 목적의 처리자이며, Turnstile 탐지 성능 개선에 대해서는 독립적인 정보처리자로 설명한다. | [Turnstile 개인정보 부속서 §1, §4](https://www.cloudflare.com/turnstile-privacy-policy/) |
 | 정보 및 목적 | IP 주소, TLS 지문, User-Agent, 사이트 키와 접속 출처 등을 봇 탐지 및 차단과 탐지 성능 개선에 사용한다. | [Turnstile 개인정보 부속서 §3–4](https://www.cloudflare.com/turnstile-privacy-policy/) |
 | 이전 시점·방법 | 문의 페이지의 위젯이 Cloudflare에 연결되고, 제출 시 서버가 토큰과 선택적 IP 주소를 Siteverify로 전송한다. | [클라이언트 렌더링](https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/), [Siteverify](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/) |
-| 국가 | 일반 개인정보 방침은 주로 미국과 EEA 저장 및 다른 국가에서의 이전·접근 가능성을 설명한다. 이는 이 위젯의 실제 처리 국가 목록을 확정하지 않는다. | [Cloudflare 개인정보 방침 §7](https://www.cloudflare.com/privacypolicy/#7-international-information-transfers) |
-| 보유 | 일반 방침은 목적과 법적 의무에 필요한 기간을 기준으로 한다. 표준 DPA의 보유 기준은 계약 종료 또는 처리가 더 이상 필요하지 않은 시점 중 이른 시점이다. Turnstile 신호별 고정 보유 일수 및 실제 계약 적용 여부는 확인되지 않았다. | [개인정보 방침 §11](https://www.cloudflare.com/privacypolicy/#11-data-retention), [표준 DPA 부속서 1](https://www.cloudflare.com/cloudflare-customer-dpa/#annex-1) |
+| 국가 | Cloudflare는 고객을 대신해 처리하는 방문자 메타데이터를 미국과 유럽 데이터센터에서 처리한다고 안내한다. Turnstile 신호별 세부 처리 위치는 별도로 공개하지 않는다. | [한국 PIPA FAQ](https://www.cloudflare.com/trust-hub/south-korea-pipa/), [GDPR FAQ](https://www.cloudflare.com/trust-hub/gdpr/), [개인정보 방침 §7](https://www.cloudflare.com/privacypolicy/#7-international-information-transfers) |
+| 보유 | Cloudflare는 해당 메타데이터를 제한된 기간 처리한다고 설명하고, 방침과 한국 부속서는 목적 달성에 필요한 기간을 기준으로 한다고 기재한다. Turnstile 신호별 고정 보유 일수는 공개되지 않았다. | [한국 PIPA FAQ](https://www.cloudflare.com/trust-hub/south-korea-pipa/), [개인정보 방침 §11](https://www.cloudflare.com/privacypolicy/#11-data-retention), [한국 부속서 §3](https://www.cloudflare.com/privacypolicy/southkorea-addendum/) |
 
 제3조·제12조 추가 검토 문안:
 
 > 회사는 Contact Us 보안 확인 및 자동화된 악성 요청 방지를 위해 Cloudflare, Inc.의 Turnstile을 이용합니다. 문의 페이지를 불러오고 보안 확인을 수행하는 과정에서 IP 주소, 브라우저 User-Agent, TLS 지문, 사이트 키와 접속 출처 등의 정보가 네트워크를 통해 Cloudflare에 전송·처리될 수 있습니다. Cloudflare는 회사의 웹사이트 보호를 위한 서비스를 제공하며, 별도로 Turnstile의 봇 탐지 기능 개선을 위한 처리도 수행합니다. Cloudflare 개인정보 관련 연락처는 dpo@cloudflare.com입니다. 해당 정보는 처리 목적과 적용되는 계약 및 법령에 필요한 기간 동안 처리됩니다.
 
-**확정 전 필수 확인:** 실제 수탁·계약 법인 및 적용 DPA, 이 위젯의 이전 국가와 보유 기간, 국외 이전의 근거 및 거부 방법·효과, Cloudflare의 독립적 처리에 관한 법적 분류와 고지·동의 필요 여부. 일반 방침의 국가 목록이나 토큰 유효기간 5분을 Turnstile 개인정보의 실제 처리 국가·보유 기간으로 단정하지 않는다.
+**확정 전 필수 확인:** 실제 수탁·계약 법인 및 적용 DPA, 국외 이전의 근거 및 거부 방법·효과, Cloudflare의 독립적 처리에 관한 법적 분류와 고지·동의 필요 여부. 국가와 보유 기간은 Cloudflare 공개 안내를 근거로 기재했으며, 신호별 세부 위치·고정 보유 일수는 비공개다. 토큰 유효기간 5분은 개인정보 보유 기간이 아니다.
 
 변경 비교: [한국어 diff](./privacy-policy-2026-11-18-ko.diff), [영어 diff](./privacy-policy-2026-11-18-en.diff). 일본어는 영어 방침을 사용한다.
 
