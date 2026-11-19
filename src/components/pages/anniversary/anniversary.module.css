@@ -1,0 +1,333 @@
+.field {
+  position: relative;
+  isolation: isolate;
+}
+.starfield {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+}
+.driftingStarfield {
+  position: fixed;
+  inset: -16px;
+  width: calc(100% + 32px);
+  height: calc(100% + 32px);
+  z-index: -1;
+  pointer-events: none;
+  animation: starDrift 18s ease-in-out infinite alternate;
+}
+.twinklingStar {
+  animation: starTwinkle 8s ease-in-out infinite;
+}
+.mobileStar {
+  display: none;
+}
+.field[data-starfield-paused] :is(.driftingStarfield, .twinklingStar) {
+  animation-play-state: paused;
+}
+:is(.page:not([data-hero-visible]), .field[data-starfield-paused]) .heroLogo::after,
+:is(.page:not([data-hero-visible]), .field[data-starfield-paused]) .heroLogoFlare {
+  animation-play-state: paused;
+}
+@keyframes starDrift {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(13px, -15px);
+  }
+  100% {
+    transform: translate(-11px, 12px);
+  }
+}
+@keyframes starTwinkle {
+  0%,
+  100% {
+    fill-opacity: 0.72;
+  }
+  45% {
+    fill-opacity: 1;
+  }
+}
+.field > footer {
+  background-color: transparent;
+}
+.field > footer img {
+  filter: none;
+}
+.page {
+  --anniversary-gold: #e8c27d;
+  --gutter: max(5vw, calc((100vw - 1200px) / 2));
+  padding-top: 4rem;
+  overflow: clip;
+  word-break: keep-all;
+  color-scheme: dark;
+}
+:global(html):has(.page) {
+  scroll-behavior: smooth;
+}
+.page a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: max(540px, calc(100svh - 4rem));
+  scroll-margin-top: 4rem;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  row-gap: clamp(48px, 7svh, 72px);
+  padding-block: clamp(18px, 3svh, 32px);
+}
+.stage {
+  position: relative;
+  width: 100%;
+  height: clamp(250px, min(61svh, 60vw), 580px);
+}
+.sky {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+}
+.introCopy {
+  width: min(880px, calc(100% - 120px));
+  text-align: center;
+}
+.introCopy .desktopDescription {
+  line-height: 32px;
+}
+.heroLogoGroup {
+  --anniversary-gold-gradient: linear-gradient(
+    135deg,
+    #f5dca6 0%,
+    var(--anniversary-gold) 24%,
+    #d4a759 38%,
+    #f3d8a0 58%,
+    #dcb469 79%,
+    #edcc8b 100%
+  );
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: clamp(80px, 8.4vw, 120px);
+  margin-inline: auto;
+}
+@media (min-width: 768px) {
+  .heroLogoGroup { width: clamp(72px, 7.3vw, 102px); }
+}
+.heroLogo {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 205 / 145;
+  filter: drop-shadow(0 0 2px rgb(255 219 153 / 26%))
+    drop-shadow(0 0 5px rgb(237 164 83 / 14%));
+}
+.heroLogo::before,
+.heroLogo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  mask: url("/assets/brand/logos/querypie-10th.svg") center / contain no-repeat;
+}
+.heroLogo::before {
+  --gold-veil: color-mix(in srgb, var(--anniversary-gold) 42%, transparent);
+  background: linear-gradient(var(--gold-veil), var(--gold-veil)), var(--anniversary-gold-gradient);
+}
+.heroLogo::after {
+  background: linear-gradient(
+    135deg,
+    #fffdf4 0%,
+    #fff2cf 18%,
+    rgb(255 237 188 / 35%) 37%,
+    transparent 56%,
+    rgb(255 232 174 / 50%) 80%,
+    transparent 100%
+  );
+  opacity: 0.32;
+}
+.heroLogoFlare {
+  position: absolute;
+  z-index: 1;
+  inset-inline-start: 4%;
+  inset-block-start: 5%;
+  width: 33%;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  pointer-events: none;
+  background: radial-gradient(circle, #fffdf6 6%, #fff0c9 13%, rgb(255 202 117 / 36%) 25%, transparent 42%);
+  opacity: 0.65;
+}
+.heroLogoFlare::before {
+  content: "";
+  position: absolute;
+  inset: -32%;
+  background:
+    radial-gradient(ellipse 50% 2.4%, rgb(255 221 153 / 85%), transparent),
+    radial-gradient(ellipse 1.85% 43%, rgb(255 229 170 / 70%), transparent);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .heroLogo::after { animation: heroLogoTwinkle 5.8s ease-in-out infinite; }
+  .heroLogoFlare { animation: heroLogoFlarePulse 5.2s ease-in-out infinite; }
+  @keyframes heroLogoTwinkle {
+    0%, 100% { opacity: 0.20; }
+    32% { opacity: 0.62; }
+    58% { opacity: 0.24; }
+    77% { opacity: 0.42; }
+  }
+  @keyframes heroLogoFlarePulse {
+    0%, 100% { opacity: 0.46; transform: scale(0.88); }
+    26% { opacity: 0.96; transform: scale(1.08); }
+    51% { opacity: 0.58; transform: scale(0.94); }
+    71% { opacity: 0.73; transform: scale(1); }
+  }
+}
+.heroCaption {
+  display: flex;
+  justify-content: space-between;
+  color: var(--anniversary-gold);
+}
+.rail {
+  --rail-row-height: 26px;
+  --rail-dot-size: 5px;
+  position: fixed;
+  z-index: 5;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+  display: grid;
+  text-align: right;
+}
+.rail::before {
+  content: "";
+  position: absolute;
+  inset-block: calc(var(--rail-row-height) / 2);
+  inset-inline-end: calc((var(--rail-dot-size) - 1px) / 2);
+  width: 1px;
+  background-color: var(--color-border-strong);
+  pointer-events: none;
+}
+.rail a {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr var(--rail-dot-size);
+  align-items: center;
+  gap: 12px;
+  height: var(--rail-row-height);
+  padding-inline-start: 4px;
+}
+.rail a::after {
+  content: "";
+  width: var(--rail-dot-size);
+  height: var(--rail-dot-size);
+  border-radius: 50%;
+  background-color: currentColor;
+}
+.rail a[href^="#year-"] {
+  font-size: 11px;
+}
+.rail a[aria-current] {
+  color: var(--color-fg);
+}
+.rail a[aria-current]::after {
+  transform: scale(1.4);
+  box-shadow: 0 0 7px color-mix(in srgb, currentColor 55%, transparent);
+  animation: railMarkerTwinkle 1.8s ease-in-out infinite;
+}
+@keyframes railMarkerTwinkle {
+  0%, 100% {
+    opacity: 0.58;
+    box-shadow: 0 0 3px color-mix(in srgb, currentColor 35%, transparent);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 12px 2px color-mix(in srgb, currentColor 70%, transparent);
+  }
+}
+.archive {
+  margin: auto;
+  width: min(720px, calc(100% - 176px));
+  padding-block: clamp(64px, 8vw, 112px) clamp(112px, 12vw, 176px);
+}
+.entry + .entry { margin-top: clamp(96px, 10vw, 144px); }
+.yearDivider {
+  padding-block: clamp(72px, 9vw, 128px);
+  text-align: center;
+}
+.entryHeader h3 {
+  max-inline-size: 18em;
+  font-size: clamp(24px, 3vw, 36px);
+  line-height: 1.2;
+  font-weight: 600;
+  text-wrap: balance;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.productName { color: var(--anniversary-gold); }
+.entryBody { margin-top: clamp(16px, 2vw, 24px); }
+.entryCopy {
+  max-inline-size: 50ch;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.entryCopy > p { text-wrap: balance; }
+.page:lang(ja) :is(.introCopy, .entryHeader h3, .entryCopy) {
+  word-break: normal;
+  line-break: strict;
+}
+.entry[data-align="right"] { text-align: right; }
+.entry[data-align="right"] :is(.entryHeader h3, .entryCopy, .entryPhoto) {
+  margin-inline-start: auto;
+}
+.entryPhoto {
+  max-width: 340px;
+  margin-bottom: clamp(10px, 1.2vw, 14px);
+}
+.entryImage {
+  display: block; width: 100%; height: auto; border-radius: 8px;
+}
+@media (max-width: 767px) {
+  .mobileStar {
+    display: inline;
+  }
+  .rail {
+    display: none;
+  }
+  .archive {
+    width: min(520px, calc(100% - 48px));
+    padding-block-start: 64px;
+  }
+  .entry[data-align="right"] { text-align: left; }
+  .entry[data-align="right"] :is(.entryHeader h3, .entryCopy, .entryPhoto) { margin-inline-start: 0; }
+  .entryPhoto { max-width: none; }
+}
+@media (max-width: 759px) {
+  .page {
+    --gutter: 20px;
+  }
+  .hero {
+    min-height: max(530px, calc(100svh - 4rem));
+  }
+  .stage {
+    height: clamp(218px, 72vw, 340px);
+  }
+  .introCopy {
+    width: calc(100% - 2 * var(--gutter));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :global(html):has(.page) {
+    scroll-behavior: auto;
+  }
+  .driftingStarfield,
+  .twinklingStar,
+  .rail a[aria-current]::after {
+    animation: none;
+  }
+}

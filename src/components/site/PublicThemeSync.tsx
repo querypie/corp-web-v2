@@ -2,15 +2,15 @@
 
 import { useLayoutEffect } from "react";
 import { defaultLocale, isLocale } from "@/constants/i18n";
-import { getPublicTheme } from "@/features/theme/theme";
+import { getPublicTheme, type Theme } from "@/features/theme/theme";
 
 type PublicThemeSyncProps = {
   locale: string;
+  theme?: Theme;
 };
 
-export default function PublicThemeSync({ locale }: PublicThemeSyncProps) {
+export default function PublicThemeSync({ locale, theme = getPublicTheme(locale) }: PublicThemeSyncProps) {
   useLayoutEffect(() => {
-    const theme = getPublicTheme(locale);
     const root = document.documentElement;
 
     root.lang = isLocale(locale) ? locale : defaultLocale;
@@ -20,7 +20,7 @@ export default function PublicThemeSync({ locale }: PublicThemeSyncProps) {
       "content",
       theme === "dark" ? "#0F0F0F" : "#FFFFFF",
     );
-  }, [locale]);
+  }, [locale, theme]);
 
   return null;
 }
