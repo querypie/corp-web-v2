@@ -57,7 +57,11 @@ const nextConfig: NextConfig = {
   },
   async rewrites() {
     return {
-      beforeFiles: getSiteDomainRewrites(),
+      beforeFiles: [
+        ...getSiteDomainRewrites(),
+        // The anniversary has its own canvas and footer, outside the public site shell.
+        { source: "/:locale(en|ko|ja)/10th", destination: "/anniversary-exhibit/:locale" },
+      ],
       afterFiles: [],
       fallback: [],
     };

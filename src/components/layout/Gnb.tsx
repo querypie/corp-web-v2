@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
+import { GnbLanguageIcon, GnbLanguagePopover, gnbLanguageOptionClassName } from "./GnbLanguageMenu";
 import {
   getCompanySubItems,
   getDemoSubItems,
@@ -350,14 +351,7 @@ export default function Gnb({
                 onFocus={() => openDesktopPopover("locale")}
                 type="button"
               >
-                {localeIcon ?? (
-                  <img
-                    alt=""
-                    aria-hidden="true"
-                    className="theme-icon h-7 w-7 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
-                    src="/assets/ui/icons/global.svg"
-                  />
-                )}
+                {localeIcon ?? <GnbLanguageIcon className="h-7 w-7" />}
               </button>
 
               <div
@@ -369,11 +363,11 @@ export default function Gnb({
                 )}
                 onMouseEnter={() => openDesktopPopover("locale")}
               >
-                <div className="gnb-popover-surface relative overflow-hidden rounded-[8px] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+                <GnbLanguagePopover>
                   {localeSubItems.map((sub) => (
                     <a
                       key={sub.label}
-                      className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
+                      className={`pressable text-fg hover:text-mute ${gnbLanguageOptionClassName}`}
                       href={sub.href}
                       onClick={(event) => handleLocaleClick(event, sub.href, sub.locale)}
                       onPointerDown={handleDesktopPopoverItemPointerDown}
@@ -381,7 +375,7 @@ export default function Gnb({
                       {sub.label}
                     </a>
                   ))}
-                </div>
+                </GnbLanguagePopover>
               </div>
             </div>}
             {locale !== "ja" && <div className="relative z-50 lg:hidden" ref={mobileLocaleRef}>
@@ -392,14 +386,7 @@ export default function Gnb({
                 onClick={() => setMobileLocaleOpen((current) => !current)}
                 type="button"
               >
-                {localeIcon ?? (
-                  <img
-                    alt=""
-                    aria-hidden="true"
-                    className="theme-icon h-6 w-6 object-contain transition-[filter,opacity] duration-300 group-hover:opacity-50"
-                    src="/assets/ui/icons/global.svg"
-                  />
-                )}
+                {localeIcon ?? <GnbLanguageIcon className="h-6 w-6" />}
               </button>
 
               <div
@@ -408,18 +395,18 @@ export default function Gnb({
                   mobileLocaleOpen ? "pointer-events-auto opacity-100 translate-y-0" : "pointer-events-none opacity-0 -translate-y-1",
                 )}
               >
-                <div className="gnb-popover-surface relative overflow-hidden rounded-[8px] px-6 pb-[14px] pt-3 backdrop-blur-[18px]">
+                <GnbLanguagePopover>
                   {localeSubItems.map((sub) => (
                     <a
                       key={sub.label}
-                      className="pressable flex items-center whitespace-nowrap py-1 type-body-md text-fg hover:text-mute"
+                      className={`pressable text-fg hover:text-mute ${gnbLanguageOptionClassName}`}
                       href={sub.href}
                       onClick={(event) => handleLocaleClick(event, sub.href, sub.locale)}
                     >
                       {sub.label}
                     </a>
                   ))}
-                </div>
+                </GnbLanguagePopover>
               </div>
             </div>}
             <button

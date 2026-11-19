@@ -8,6 +8,7 @@ import ExternalLinkIcon from "@/components/ui/ExternalLinkIcon";
 
 type FooterProps = {
   addressLines?: string[];
+  variant?: "default" | "compact";
   className?: string;
   legalLinks?: string[];
   locale?: string;
@@ -21,19 +22,19 @@ function cx(...values: Array<string | false | null | undefined>) {
 const socialLinks = [
   {
     className: "h-7 w-7",
-    href: "/",
+    href: "https://www.linkedin.com/company/querypie-ai/",
     label: "LinkedIn",
     src: "/assets/brand/icons/linkedin.svg",
   },
   {
     className: "h-7 w-7",
-    href: "/",
+    href: "https://www.youtube.com/@querypie",
     label: "YouTube",
     src: "/assets/brand/icons/youtube.svg",
   },
   {
     className: "h-7 w-7",
-    href: "/",
+    href: "https://x.com/querypie",
     label: "X",
     src: "/assets/brand/icons/x.svg",
   },
@@ -51,6 +52,25 @@ const socialLinks = [
   },
 ] as const;
 
+function FooterSocialLinks({ compact = false }: { compact?: boolean }) {
+  return (
+    <div className={cx("flex shrink-0 items-center", compact ? "gap-4 sm:gap-5" : "gap-[14px]")}>
+      {socialLinks.map((link) => (
+        <a
+          key={link.label}
+          aria-label={link.label}
+          className="inline-flex h-7 w-7 items-center justify-center transition-opacity hover:opacity-50"
+          href={link.href}
+          rel="noreferrer noopener"
+          target="_blank"
+        >
+          <img alt="" aria-hidden="true" className={cx("theme-icon", compact ? "h-[22px] w-[22px]" : link.className)} src={link.src} />
+        </a>
+      ))}
+    </div>
+  );
+}
+
 export default function Footer({
   addressLines = [
     "© 2017-2026 QueryPie, Inc. All rights reserved.",
@@ -58,6 +78,7 @@ export default function Footer({
     "R&D : 주식회사 쿼리파이, 7F, 26, Magokjungang 1-ro, Gangseo-gu, Seoul 07807",
     "Japan : QueryPie AI合同会社, 〒105-6490 東京都港区虎ノ門1丁目17番1号 虎ノ門ヒルズビジネスタワー15階",
   ],
+  variant = "default",
   className,
   legalLinks = ["Cookie Preference", "Terms of Service", "Privacy Policy", "EULA"],
   locale = "en",
@@ -68,11 +89,17 @@ export default function Footer({
   return (
     <footer
       className={cx(
-        "relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10 md:bg-[image:var(--gradient-footer)]",
+        "relative flex w-full justify-center overflow-hidden bg-bg px-5 md:px-10",
+        variant === "default" && "md:bg-[image:var(--gradient-footer)]",
         className,
       )}
     >
-      {/* 실제 푸터 콘텐츠 래퍼 */}
+      {variant === "compact" ? (
+        <div className="flex w-full max-w-[1200px] flex-col items-start gap-3 border-t border-border pb-12 pt-6 md:flex-row md:items-center md:justify-between md:pb-15 md:pt-9">
+          <FooterSocialLinks compact />
+          <p className="m-0 text-left type-body-sm text-mute md:text-right md:type-body-md">{copyright}</p>
+        </div>
+      ) : (
       <div className="relative flex w-full max-w-[1200px] flex-col gap-[60px] border-t border-border py-[60px]">
         <div className="flex flex-col gap-10 md:gap-12">
           {/* 메뉴와 분리해 모든 언어에서 링크 열의 너비를 확보한다. */}
@@ -85,7 +112,7 @@ export default function Footer({
           </a>
 
           {/* 모바일 2열, 태블릿 3열, 데스크톱은 전체 메뉴를 한 줄로 배치한다. */}
-          <div className={cx(
+          {sections.length > 0 && <div className={cx(
             "grid grid-cols-2 items-start gap-x-6 gap-y-10 md:grid-cols-3 md:gap-x-8 md:gap-y-12 xl:gap-x-6",
             sections.length === 5
               ? "xl:grid-cols-[1.2fr_1.6fr_0.8fr_1.3fr_0.8fr]"
@@ -120,37 +147,17 @@ export default function Footer({
                 </div>
               </div>
             ))}
-          </div>
+          </div>}
         </div>
 
         {/* 하단 메타 영역: SNS / 법적 링크 / 주소 */}
         <div className="flex flex-col gap-6 pt-8">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               {/* SNS 링크 */}
-              <div className="flex flex-wrap items-center justify-between gap-5">
-                <div className="flex items-center gap-[14px]">
-                  {socialLinks.map((link) => (
-                    <a
-                      key={link.label}
-                      aria-label={link.label}
-                      className="inline-flex h-7 w-7 items-center justify-center opacity-100 transition-opacity hover:opacity-50"
-                      href={link.href}
-                      rel={link.href.startsWith("http") ? "noreferrer noopener" : undefined}
-                      target={link.href.startsWith("http") ? "_blank" : undefined}
-                    >
-                      <img
-                        alt=""
-                        aria-hidden="true"
-                        className={`theme-icon ${link.className}`}
-                        src={link.src}
-                      />
-                    </a>
-                  ))}
-                </div>
-              </div>
+              <FooterSocialLinks />
 
               {/* 법적 링크 */}
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-[10px] type-body-md leading-5 text-fg">
+            {legalLinks.length > 0 && <div className="flex flex-wrap items-center gap-x-5 gap-y-[10px] type-body-md leading-5 text-fg">
               {legalLinks.map((item) => (
                 <a
                   key={item}
@@ -164,22 +171,23 @@ export default function Footer({
                   {item}
                 </a>
               ))}
-            </div>
+            </div>}
           </div>
 
           {/* 회사 주소 및 카피라이트 */}
           <div className="flex flex-col gap-[10px] leading-5">
             <p className="m-0 type-body-md text-fg opacity-50">{copyright}</p>
-            <div className="type-body-sm text-fg opacity-50">
+            {officeLines.length > 0 && <div className="type-body-sm text-fg opacity-50">
               {officeLines.map((line) => (
                 <p key={line} className="m-0">
                   {line}
                 </p>
               ))}
-            </div>
+            </div>}
           </div>
         </div>
       </div>
+      )}
     </footer>
   );
 }
