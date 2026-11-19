@@ -34,7 +34,7 @@ export const anniversaryHighlightedNames = [
 
 export const anniversaryGnbCopy = {
   edition: "10th Anniversary",
-  languages: { en: "English", ko: "한국어", ja: "日本語" },
+  languages: { en: "English", ko: "한국어" },
 };
 
 export const anniversaryCopy = {
@@ -47,6 +47,7 @@ export const anniversaryCopy = {
     archive: "우리의 궤적",
     years: "연도별 탐색",
     top: "처음으로",
+    home: "쿼리파이 한국어 홈페이지 (새 탭)",
     language: "언어 선택",
     copyright: "© 2017-2026 QueryPie, Inc. All rights reserved.",
   },
@@ -59,6 +60,7 @@ export const anniversaryCopy = {
     archive: "Our journey",
     years: "Explore by year",
     top: "Back to the beginning",
+    home: "QueryPie English homepage (opens in a new tab)",
     language: "Select language",
     copyright: "© 2017-2026 QueryPie, Inc. All rights reserved.",
   },
@@ -71,7 +73,7 @@ export const anniversaryCopy = {
     archive: "私たちの歩み",
     years: "年別に見る",
     top: "最初に戻る",
-    language: "言語を選択",
+    home: "QueryPieの日本語ホームページ（新しいタブで開きます）",
     copyright: "© 2017-2026 QueryPie, Inc. All rights reserved.",
   },
 };

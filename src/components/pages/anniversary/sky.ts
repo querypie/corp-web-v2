@@ -8,6 +8,7 @@ const tones = [
   { color: "142,193,216", core: "231,246,250", cutoff: 1 },
 ];
 const pixelBudget = 2_400_000;
+const openingSeconds = 3.15;
 const formHoldSeconds = 2;
 const formTransitionSeconds = 3;
 const formCycleHalf = formHoldSeconds + formTransitionSeconds;
@@ -64,6 +65,7 @@ export function mountSky(canvas: HTMLCanvasElement) {
   if (!ctx) return;
   const rand = randomGenerator(10026),
     bell = () => rand() + rand() + rand() + rand() - 2;
+  const skyRand = randomGenerator(1906);
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const compactViewport = matchMedia("(max-width: 767px)");
   const sprites = tones.map((c) => glow(c)),
@@ -111,9 +113,15 @@ export function mountSky(canvas: HTMLCanvasElement) {
       tint = rand(),
       magnitude = rand();
     const tone = tones.findIndex(({ cutoff }) => tint < cutoff);
+    const bearing = skyRand() * tau;
+    const distance = 0.68 + skyRand() * 0.65;
     return {
       x,
       y,
+      skyX: Math.cos(bearing) * distance * 0.85,
+      skyY: Math.sin(bearing) * distance * 0.58,
+      gatherDelay: skyRand() * 0.32,
+      gatherDuration: 0.41 + skyRand() * 0.17 + (distance - 0.68) * 0.13,
       nx: n[0] * 1.24,
       ny: n[1] * 1.24,
       ex: Math.cos(a) * bend,
@@ -194,18 +202,24 @@ export function mountSky(canvas: HTMLCanvasElement) {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const stage = Math.floor(time / formCycleHalf) % 2,
-      t = Math.max(0, ((time % formCycleHalf) - formHoldSeconds) / formTransitionSeconds),
+    const elapsed = reduced.matches ? openingSeconds : time;
+    const opening = elapsed < openingSeconds;
+    const gather = elapsed / openingSeconds;
+    const cycle = Math.max(0, elapsed - openingSeconds);
+    const stage = Math.floor(cycle / formCycleHalf) % 2,
+      t = Math.max(0, ((cycle % formCycleHalf) - formHoldSeconds) / formTransitionSeconds),
       progress = stage ? 1 - t : t;
     const range = Math.max(37, scale * 0.19);
     for (const s of stars) {
+      const arrival = opening ? (gather - s.gatherDelay) / s.gatherDuration : 1;
+      if (arrival <= 0) continue;
       const u = Math.max(0, Math.min(1, (progress - s.delay) / 0.7)),
         m = u * u * (3 - 2 * u),
         arc = 4 * m * (1 - m),
         beat = s.phase + time * (0.46 + s.z * 0.49),
         tw = Math.sin(beat),
-        drift = 0.003 + s.z * 0.008,
-        x = cx + scale * (s.x + (s.nx - s.x) * m + s.ex * arc + drift * tw),
+        drift = 0.003 + s.z * 0.008;
+      let x = cx + scale * (s.x + (s.nx - s.x) * m + s.ex * arc + drift * tw),
         y =
           cy +
           scale *
@@ -213,6 +227,23 @@ export function mountSky(canvas: HTMLCanvasElement) {
               (s.ny - s.y) * m +
               s.ey * arc +
               drift * Math.cos(beat * 0.84 + s.phase));
+      let light = 1;
+      let size = s.size;
+      if (arrival < 1) {
+        // Each star settles on its own schedule while later stars are still arriving.
+        const blend = arrival ** 2 * (3 - 2 * arrival);
+        const outside = 1 - blend;
+        const bend = 6 * blend * outside * scale;
+        x += (cx + w * s.skyX - x) * outside + s.ex * bend;
+        y += (cy + h * s.skyY - y) * outside + s.ey * bend;
+        const reveal = Math.min(1, arrival * 2.4);
+        const edgeDistance = Math.min(x / w, 1 - x / w, y / h, 1 - y / h);
+        const edge = Math.max(0, Math.min(1, edgeDistance / 0.09));
+        // Keep incoming stars faint near the crop so the stage never reads as a rectangle.
+        light = reveal ** 2 * (3 - 2 * reveal) * (0.28 + 0.72 * blend)
+          * (edge + (1 - edge) * blend ** 3);
+        size *= 0.3 + 0.7 * blend;
+      }
       const dx = x - pointerX,
         dy = y - pointerY,
         d2 = dx * dx + dy * dy;
@@ -228,19 +259,19 @@ export function mountSky(canvas: HTMLCanvasElement) {
       s.oy += (ty - s.oy) * 0.14;
       const px = x + s.ox,
         py = y + s.oy;
-      ctx.globalAlpha = s.light * (0.89 + tw * 0.11);
+      ctx.globalAlpha = s.light * (0.89 + tw * 0.11) * light;
       if (s.image) {
         ctx.drawImage(
           s.image,
-          px - s.size / 2,
-          py - s.size / 2,
-          s.size,
-          s.size,
+          px - size / 2,
+          py - size / 2,
+          size,
+          size,
         );
       } else {
         ctx.fillStyle = s.color;
         ctx.beginPath();
-        ctx.arc(px, py, s.size, 0, tau);
+        ctx.arc(px, py, size, 0, tau);
         ctx.fill();
       }
     }
@@ -298,7 +329,7 @@ export function mountSky(canvas: HTMLCanvasElement) {
   canvas.addEventListener("pointerleave", leave);
   canvas.addEventListener("pointerup", leave);
   document.addEventListener("visibilitychange", schedule);
-  reduced.addEventListener("change", schedule);
+  reduced.addEventListener("change", resize);
   return () => {
     cancelAnimationFrame(frame);
     ro.disconnect();
@@ -308,6 +339,6 @@ export function mountSky(canvas: HTMLCanvasElement) {
     canvas.removeEventListener("pointerleave", leave);
     canvas.removeEventListener("pointerup", leave);
     document.removeEventListener("visibilitychange", schedule);
-    reduced.removeEventListener("change", schedule);
+    reduced.removeEventListener("change", resize);
   };
 }

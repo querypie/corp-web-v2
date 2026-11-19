@@ -8,16 +8,13 @@ import {
 } from "@/components/layout/GnbLanguageMenu";
 import type { Locale } from "@/constants/i18n";
 import { anniversaryCopy, anniversaryGnbCopy } from "@/copy/anniversary";
+import { getAnniversaryPath } from "@/features/anniversary/routing";
 
-type Props = {
-  locale: Locale;
-  languageOptions: readonly { locale: Locale; href: string }[];
-};
-
+const languageOptions = ["en", "ko"] as const;
 const desktopPopoverCloseDelay = 160;
 const isDesktopLayout = () => window.matchMedia("(min-width: 1024px)").matches;
 
-function LanguageSelector({ locale, languageOptions }: Props) {
+function LanguageSelector({ locale }: { locale: (typeof languageOptions)[number] }) {
   const [open, setOpen] = useState(false);
   const menu = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
@@ -92,10 +89,10 @@ function LanguageSelector({ locale, languageOptions }: Props) {
         }`}
       >
         <GnbLanguagePopover>
-          {languageOptions.map(({ locale: option, href }) => (
+          {languageOptions.map((option) => (
             <a
               key={option}
-              href={href}
+              href={getAnniversaryPath(option)}
               hrefLang={option}
               lang={option}
               aria-current={option === locale ? "page" : undefined}
@@ -111,27 +108,26 @@ function LanguageSelector({ locale, languageOptions }: Props) {
   );
 }
 
-export default function AnniversaryGnb({ locale, languageOptions }: Props) {
+export default function AnniversaryGnb({ locale, homeHref }: { locale: Locale; homeHref: string }) {
+  const copy = anniversaryCopy[locale];
   return (
     <header className="fixed inset-x-0 top-0 z-50 flex w-full items-center justify-center bg-bg pl-5 pr-4 md:px-10">
       <div className="flex h-16 w-full max-w-[1200px] items-center justify-between gap-6 text-fg">
-        <a
-          href="#intro"
-          className="inline-flex items-center gap-4"
-          aria-label={anniversaryCopy[locale].top}
-        >
-          <img
-            src="/assets/brand/logos/querypie-ai-logo.svg"
-            alt=""
-            className="theme-icon block h-5 w-[116px] shrink-0 transition-[filter,opacity] duration-300"
-            width="116"
-            height="20"
-          />
-          <span lang="en" className="whitespace-nowrap type-body-sm">
-            {anniversaryGnbCopy.edition}
-          </span>
-        </a>
-        <LanguageSelector locale={locale} languageOptions={languageOptions} />
+        <div className="inline-flex items-center gap-4">
+          <a href={homeHref} target="_blank" rel="noopener noreferrer" aria-label={copy.home}>
+            <img
+              src="/assets/brand/logos/querypie-ai-logo.svg"
+              alt=""
+              className="theme-icon block h-5 w-[116px] shrink-0 transition-[filter,opacity] duration-300"
+              width="116"
+              height="20"
+            />
+          </a>
+          <a href="#intro" aria-label={`${anniversaryGnbCopy.edition} — ${copy.top}`} className="whitespace-nowrap type-body-sm">
+            <span lang="en">{anniversaryGnbCopy.edition}</span>
+          </a>
+        </div>
+        {locale !== "ja" && <LanguageSelector locale={locale} />}
       </div>
     </header>
   );

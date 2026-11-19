@@ -8,8 +8,7 @@ import ArchiveStarfield from "@/components/pages/anniversary/ArchiveStarfield";
 import styles from "@/components/pages/anniversary/anniversary.module.css";
 import Footer from "@/components/layout/Footer";
 import PublicThemeSync from "@/components/site/PublicThemeSync";
-import { getAnniversaryLocaleHref, getAnniversaryPath } from "@/features/anniversary/routing";
-import { getRequestSiteOrigin } from "@/features/seo/requestUrl.server";
+import { getAnniversaryHomeHref, getAnniversaryPath } from "@/features/anniversary/routing";
 import { withDynamicOgImage } from "@/features/seo/metadata";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -33,15 +32,10 @@ export default async function Page({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const copy = anniversaryCopy[locale];
-  const { hostname } = await getRequestSiteOrigin();
-  const languageOptions = locales.map((language) => ({
-    locale: language,
-    href: getAnniversaryLocaleHref(hostname, language),
-  }));
   return (
     <div className="theme-dark bg-bg" data-locale={locale} lang={locale}>
       <PublicThemeSync locale={locale} theme="dark" />
-      <AnniversaryGnb locale={locale} languageOptions={languageOptions} />
+      <AnniversaryGnb locale={locale} homeHref={getAnniversaryHomeHref(locale)} />
       <div className={`${styles.field} theme-dark bg-bg`}>
         <ArchiveStarfield />
         <Anniversary
