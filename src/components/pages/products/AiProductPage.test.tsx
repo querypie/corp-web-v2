@@ -65,14 +65,14 @@ describe("영어·한국어 AI 솔루션", () => {
     expect(screen.getAllByRole("article")).toHaveLength(6);
     expect(screen.getByRole("table", { name: "모델 벤치마크" })).toBeInTheDocument();
     expect(screen.getByRole("rowheader", { name: "소프트웨어 개발" })).toBeInTheDocument();
-    expect(screen.getByRole("cell", { name: "40–45%" })).toBeInTheDocument();
-    expect(screen.getByRole("cell", { name: "65–70%" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "45.4%" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "75–80%" })).toBeInTheDocument();
     expect(screen.getByRole("cell", { name: "80–85%" })).toBeInTheDocument();
     expect(screen.getByRole("table").querySelectorAll("tbody td")).toHaveLength(16);
     expect(screen.queryByRole("cell", { name: "—" })).not.toBeInTheDocument();
     expect(screen.getByRole("rowheader", { name: "긴 문서 추론" })).toBeInTheDocument();
     expect(screen.getByRole("rowheader", { name: "실무 과제 수행 (Elo)" })).toBeInTheDocument();
-    expect(screen.getByRole("cell", { name: "1,500–1,750" })).toBeInTheDocument();
+    expect(screen.getByRole("cell", { name: "1,750–1,800" })).toBeInTheDocument();
     expect(screen.getByRole("rowheader", { name: "업무 자동화" })).toBeInTheDocument();
     expect(screen.getByRole("columnheader", { name: "GPT-6.1 Terra" })).toBeInTheDocument();
     expect(screen.getByRole("columnheader", { name: "Claude Sonnet 5.5" })).toBeInTheDocument();
