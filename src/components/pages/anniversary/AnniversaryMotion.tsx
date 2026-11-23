@@ -6,31 +6,22 @@ import styles from "./anniversary.module.css";
 
 export default function AnniversaryMotion({ id }: { id: string }) {
   useEffect(() => {
-    const host = document.getElementById(id);
-    const hero = host?.querySelector("#intro");
-    const canvas = hero?.querySelector("canvas");
-    if (!host || !hero || !canvas) return;
+    const canvas = document.getElementById(id)?.querySelector<HTMLCanvasElement>("#intro canvas");
+    if (!canvas) return;
     let dispose: (() => void) | undefined;
     let cancelled = false;
     const observer = new IntersectionObserver((entries) => {
-      for (const entry of entries) {
-        if (entry.target === hero) {
-          host.toggleAttribute("data-hero-visible", entry.isIntersecting);
-        } else if (entry.isIntersecting) {
-          observer.unobserve(canvas);
-          void import("./sky").then(({ mountSky }) => {
-            if (!cancelled) dispose = mountSky(canvas);
-          });
-        }
-      }
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      observer.unobserve(canvas);
+      void import("./sky").then(({ mountSky }) => {
+        if (!cancelled) dispose = mountSky(canvas);
+      });
     });
-    observer.observe(hero);
     observer.observe(canvas);
     return () => {
       cancelled = true;
       observer.disconnect();
       dispose?.();
-      host.removeAttribute("data-hero-visible");
     };
   }, [id]);
   useEffect(() => {
@@ -55,7 +46,12 @@ export default function AnniversaryMotion({ id }: { id: string }) {
       if (motion.matches || !wheel.matches || document.hidden) return;
       void import("lenis").then(({ default: Lenis }) => {
         if (current !== generation) return;
-        scroll = new Lenis({ eventsTarget: surface, smoothWheel: true, lerp: 0.1 });
+        scroll = new Lenis({
+          eventsTarget: surface,
+          smoothWheel: true,
+          duration: 0.34,
+          easing: (progress) => 1 - (1 - progress) ** 3,
+        });
         scroll.on("virtual-scroll", ({ event }) => {
           if (frame || event.type !== "wheel") return;
           // Prime the clock before the first wheel event after idle.
@@ -81,23 +77,20 @@ export default function AnniversaryMotion({ id }: { id: string }) {
     const host = document.getElementById(id);
     if (!host) return;
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
-    const layers = (
-      [
-        // Both tiles are fixed. Subtract the document scroll to preserve their relative speeds.
-        ["decade-dust", -0.16, 563],
-        ["decade-stars", -0.6, 719],
-      ] as const
-    ).map(([id, offset, period]) => ({
-      node: document.getElementById(id),
-      offset,
-      period,
-    }));
+    const touch = matchMedia("(pointer: coarse)");
+    const field = host.parentElement;
+    const layers = Array.from(
+      field?.querySelectorAll<HTMLElement>("[data-star-period][data-star-speed]") ?? [],
+      (node) => ({ node, speed: Number(node.dataset.starSpeed), period: Number(node.dataset.starPeriod) }),
+    );
     const sections = Array.from(
       host.querySelectorAll<HTMLElement>("[data-station]"),
     );
-    const links = new Map(Array.from(
-      host.querySelectorAll<HTMLAnchorElement>(`.${styles.rail} a`),
-      (link) => [link.hash.slice(1), link],
+    const stations = new Map(sections.map((section) => [section.id, section]));
+    const rail = host.querySelector(`.${styles.rail}`);
+    const buttons = new Map(Array.from(
+      rail?.querySelectorAll<HTMLButtonElement>("[data-station-target]") ?? [],
+      (button) => [button.dataset.stationTarget, button],
     ));
     let geometry = {
       marker: 0,
@@ -106,9 +99,11 @@ export default function AnniversaryMotion({ id }: { id: string }) {
       anchors: new Map<string, number>(),
     };
     let selected = "intro";
-    let previousStarScroll = -1;
+    let requestedStation = "";
+    let starScroll: number | undefined;
+    let lastStarFrame: number | undefined;
     let frame = 0;
-    const update = () => {
+    const update = (now: number) => {
       frame = 0;
       const y = Math.max(0, window.scrollY);
       let id = "intro";
@@ -116,27 +111,54 @@ export default function AnniversaryMotion({ id }: { id: string }) {
         if (geometry.starts[i] > y + geometry.marker) break;
         id = sections[i].id;
       }
-      const anchor = window.location.hash.slice(1);
-      const anchorY = geometry.anchors.get(anchor);
-      if (anchorY !== undefined && Math.abs(y - anchorY) <= 2) id = anchor;
+      const anchorY = geometry.anchors.get(requestedStation);
+      if (anchorY !== undefined && Math.abs(y - anchorY) <= 2) id = requestedStation;
       else if (y >= geometry.end - 2) id = sections[sections.length - 1].id;
       if (id !== selected) {
-        links.get(selected)?.removeAttribute("aria-current");
-        links.get(id)?.setAttribute("aria-current", "location");
+        buttons.get(selected)?.removeAttribute("aria-current");
+        buttons.get(id)?.setAttribute("aria-current", "location");
         selected = id;
       }
-      const starScroll = motion.matches ? 0 : y;
-      if (starScroll === previousStarScroll) return;
-      previousStarScroll = starScroll;
-      for (const { node, offset, period } of layers) {
-        node?.setAttribute(
-          "patternTransform",
-          `translate(0 ${(starScroll * offset) % period})`,
-        );
+      const target = motion.matches ? 0 : y;
+      let next = target;
+      if (touch.matches && !motion.matches && starScroll !== undefined && Math.abs(target - starScroll) > 0.12) {
+        // Blend between native touch scroll samples with the same timing at any refresh rate.
+        const elapsed = lastStarFrame === undefined ? 1000 / 60 : now - lastStarFrame;
+        next = target + (starScroll - target) * Math.exp(-elapsed / 34);
+        lastStarFrame = now;
+        frame = requestAnimationFrame(update);
+      } else {
+        lastStarFrame = undefined;
+      }
+      if (starScroll !== next) {
+        starScroll = next;
+        for (const { node, speed, period } of layers) {
+          // Wrap by a full tile so the next copy is already visible at the seam.
+          node.style.transform = `translate3d(0, ${-((next * speed) % period)}px, 0)`;
+        }
       }
     };
     const queue = () => {
       if (!frame) frame = requestAnimationFrame(update);
+    };
+    const onRailClick = (event: Event) => {
+      if (!(event.target instanceof Element)) return;
+      const button = event.target.closest<HTMLButtonElement>("[data-station-target]");
+      const station = button?.dataset.stationTarget;
+      if (!station) return;
+      requestedStation = station;
+      stations.get(station)?.scrollIntoView();
+      queue();
+    };
+    const followLegacyFragment = () => {
+      const id = window.location.hash.slice(1);
+      const station = stations.get(id);
+      if (!station) return;
+      requestedStation = id;
+      const { pathname, search } = window.location;
+      window.history.replaceState(window.history.state, "", pathname + search);
+      station.scrollIntoView({ behavior: "instant" });
+      queue();
     };
     const measure = () => {
       const y = window.scrollY;
@@ -159,14 +181,15 @@ export default function AnniversaryMotion({ id }: { id: string }) {
       queue();
     };
     const observer = new ResizeObserver(measure);
-    const field = host.parentElement;
     const syncVisibility = () =>
       field?.toggleAttribute("data-starfield-paused", document.hidden);
     if (field) observer.observe(field);
     sections.forEach((section) => observer.observe(section));
     measure();
+    followLegacyFragment();
+    rail?.addEventListener("click", onRailClick);
     window.addEventListener("scroll", queue, { passive: true });
-    window.addEventListener("hashchange", queue);
+    window.addEventListener("hashchange", followLegacyFragment);
     window.addEventListener("resize", measure);
     motion.addEventListener("change", queue);
     document.addEventListener("visibilitychange", syncVisibility);
@@ -174,8 +197,9 @@ export default function AnniversaryMotion({ id }: { id: string }) {
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
+      rail?.removeEventListener("click", onRailClick);
       window.removeEventListener("scroll", queue);
-      window.removeEventListener("hashchange", queue);
+      window.removeEventListener("hashchange", followLegacyFragment);
       window.removeEventListener("resize", measure);
       motion.removeEventListener("change", queue);
       document.removeEventListener("visibilitychange", syncVisibility);

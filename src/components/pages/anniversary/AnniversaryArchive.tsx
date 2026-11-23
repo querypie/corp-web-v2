@@ -2,6 +2,7 @@
 
 import { Fragment } from "react";
 import Image from "next/image";
+import ContentPreviewImage from "@/components/content/ContentPreviewImage";
 import { anniversaryHighlightedNames } from "@/copy/anniversary";
 import type { getAnniversaryHistory } from "@/copy/anniversaryHistory";
 import styles from "./anniversary.module.css";
@@ -31,7 +32,9 @@ export default function AnniversaryArchive({ entries, label }: {
         <Fragment key={year}>
           <div className={styles.yearDivider}>
             <h2 id={`year-${year}`} className="scroll-mt-20 font-mono type-body-md tabular-nums text-fg" data-station>
+              <span aria-hidden="true">{"- "}</span>
               <time dateTime={String(year)}>{year}</time>
+              <span aria-hidden="true">{" -"}</span>
             </h2>
           </div>
           {milestones.map((milestone) => (
@@ -44,15 +47,24 @@ export default function AnniversaryArchive({ entries, label }: {
               <div className={styles.entryBody}>
                 {milestone.photo && (
                   <figure className={styles.entryPhoto}>
-                    <Image
-                      className={styles.entryImage}
-                      src={milestone.photo.src}
-                      width={milestone.photo.width}
-                      height={milestone.photo.height}
-                      sizes="(max-width: 767px) min(520px, calc(100vw - 48px)), 340px"
-                      loading="lazy"
-                      alt={milestone.photo.alt}
-                    />
+                    {"width" in milestone.photo ? (
+                      <Image
+                        className={styles.entryImage}
+                        src={milestone.photo.src}
+                        width={milestone.photo.width}
+                        height={milestone.photo.height}
+                        sizes="(max-width: 767px) min(520px, calc(100vw - 88px)), 340px"
+                        loading="lazy"
+                        alt={milestone.photo.alt}
+                      />
+                    ) : (
+                      <ContentPreviewImage
+                        alt={milestone.photo.alt}
+                        containerClassName={`content-thumbnail-frame overflow-hidden ${styles.entryImage}`}
+                        src={milestone.photo.src}
+                        useThumbnailFallback
+                      />
+                    )}
                   </figure>
                 )}
                 <div className={styles.entryCopy}>
