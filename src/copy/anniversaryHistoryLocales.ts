@@ -4,8 +4,15 @@ type Story = readonly [title: string, description: string];
 type LocalizedStory = { en: Story; ja: Story };
 
 export const megazonePhotoAlt = {
+  ko: "체커 황인서 대표와 메가존클라우드 이주완 대표가 협약 체결 후 기념 촬영하는 모습",
   en: "CHEQUER CEO Brant Hwang and MegazoneCloud CEO Joo-wan Lee pose after signing the agreement",
   ja: "業務協約の締結後に記念撮影するCHEQUERのBrant Hwang代表とMegazoneCloudのイ・ジュワン代表",
+};
+
+export const softwareCeoPhotoAlt = {
+  ko: "황인서 대표를 포함한 2024년 소프트웨어 CEO 50인 선정자 네 명의 얼굴 사진",
+  en: "Portraits of four CEOs named to the Top 50 Software CEOs of 2024, including Brant Hwang",
+  ja: "Brant Hwangを含む、2024年のソフトウェアCEOトップ50に選ばれた4人の顔写真",
 };
 
 export const anniversaryHistoryLocales = {

@@ -123,9 +123,9 @@ export default function AnniversaryGnb({ locale, homeHref }: { locale: Locale; h
               height="20"
             />
           </a>
-          <a href="#intro" aria-label={`${anniversaryGnbCopy.edition} — ${copy.top}`} className="whitespace-nowrap type-body-sm">
+          <button type="button" onClick={() => document.getElementById("intro")?.scrollIntoView()} aria-label={`${anniversaryGnbCopy.edition} — ${copy.top}`} className="cursor-pointer whitespace-nowrap type-body-sm">
             <span lang="en">{anniversaryGnbCopy.edition}</span>
-          </a>
+          </button>
         </div>
         {locale !== "ja" && <LanguageSelector locale={locale} />}
       </div>

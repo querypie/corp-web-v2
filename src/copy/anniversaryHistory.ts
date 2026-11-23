@@ -1,6 +1,6 @@
 import type { Locale } from "@/constants/i18n";
 import { groupMilestones } from "@/features/anniversary/archive";
-import { anniversaryHistoryLocales, megazonePhotoAlt } from "./anniversaryHistoryLocales";
+import { anniversaryHistoryLocales, megazonePhotoAlt, softwareCeoPhotoAlt } from "./anniversaryHistoryLocales";
 
 const company = "https://www.querypie.com/ko/about-us";
 const news = "https://www.querypie.com/ko/news/";
@@ -11,10 +11,11 @@ const japanNews = "https://www.querypie.com/ja/news/";
 // Keep the date only as precise as the public record.
 function event<Title extends string>(date: string, category: string, title: Title, body: string,
   source: string, href?: string, options?: {
-    photo?: { src: string; alt: string; credit: string; width: number; height: number };
+    newsPhotoAlt?: Record<Locale, string>;
+    photo?: { src: string; alt: Record<Locale, string>; credit: string; width: number; height: number };
     plainTitleNames?: readonly string[];
   }) {
-  return { date, year: Number(date.slice(0, 4)), category, title, body, source, href, image: options?.photo?.src, ...options };
+  return { date, year: Number(date.slice(0, 4)), category, title, body, source, href, ...options };
 }
 
 const milestones = [
@@ -33,7 +34,7 @@ const milestones = [
       src: "/news/anniversary-megazone-agreement.webp",
       width: 600,
       height: 310,
-      alt: "체커 황인서 대표와 메가존클라우드 이주완 대표가 협약 체결 후 기념 촬영하는 모습",
+      alt: megazonePhotoAlt,
       credit: "사진 제공: 메가존클라우드",
     },
   }),
@@ -46,7 +47,9 @@ const milestones = [
   event("2024-08", "선정", "레알 마드리드 액셀러레이터 선정", "아시아 스타트업과 스포츠 산업의 기술 협력을 모색하는 Real Madrid Next Accelerator for Asia에 선정됐습니다.", "데이터넷", datanet + "195720"),
   event("2024-11", "선정", "글로벌 소프트웨어 기업 100곳에 이름을 올리다", "미국 매체 The Software Report가 발표한 ‘The Top 100 Software Companies of 2024’에 선정됐습니다.", "The Software Report · 선정 명단", "https://www.thesoftwarereport.com/the-top-100-software-companies-of-2024/"),
   event("2024-12", "제품 공개", "웹 애플리케이션 접근 제어 WAC 초기 버전 공개", "사내 웹 애플리케이션에 누가 접근할 수 있는지 관리하는 WAC의 초기 버전을 QueryPie 10.2.0에서 선보였습니다.", "QueryPie ACP · 공식 릴리스 노트", "https://docs.querypie.com/ko/release-notes/10.2.0-10.2.12"),
-  event("2025-01", "선정", "황인서 대표, 소프트웨어 CEO 50인 선정", "The Software Report가 선정한 2024년 소프트웨어 CEO 50인에 쿼리파이 창업자 황인서 대표가 이름을 올렸습니다.", "쿼리파이 · 선정 소식", news + "top-50-software-ceos-of-2024"),
+  event("2025-01", "선정", "황인서 대표, 소프트웨어 CEO 50인 선정", "The Software Report가 선정한 2024년 소프트웨어 CEO 50인에 쿼리파이 창업자 황인서 대표가 이름을 올렸습니다.", "쿼리파이 · 선정 소식", news + "top-50-software-ceos-of-2024", {
+    newsPhotoAlt: softwareCeoPhotoAlt,
+  }),
   event("2025-03", "시장 진출", "싱가포르 CyberBoost Catalyse 선정", "싱가포르 정부가 지원하는 사이버보안 기업 육성 프로그램에 선정돼 현지 시장과 만날 기회를 얻었습니다.", "아시아경제", "https://view.asiae.co.kr/article/2025033108392136156"),
   event("2025-07", "시장 진출", "조달청 디지털서비스몰 등록", "공공기관이 데이터베이스와 서버의 접근 권한과 작업 이력을 관리하는 QueryPie 보안 솔루션을 조달청 디지털서비스몰에서 도입할 수 있게 됐습니다.", "데이터넷 · 등록 소식", datanet + "203322"),
   event("2025-07", "제품 출시", "접근 제어 커뮤니티 버전 공개", "스타트업과 중소기업도 데이터베이스·서버·쿠버네티스·웹 애플리케이션의 접근 제어와 감사 기능을 경험할 수 있도록 무료 버전을 선보였습니다.", "데일리시큐", "https://www.dailysecu.com/news/articleView.html?idxno=168156"),
@@ -71,19 +74,41 @@ const milestones = [
 
 export type AnniversaryMilestoneTitle = (typeof milestones)[number]["title"];
 
-export function getAnniversaryHistory(locale: Locale) {
-  return groupMilestones(milestones.map(({ title, body, year, image, photo, plainTitleNames }) => {
+// These milestones cite other sources, but the same events are covered in company news.
+const matchingNewsIds: Partial<Record<AnniversaryMilestoneTitle, string>> = {
+  "Okta Integration Network 합류": "querypie-becomes-okta-integration-network-partner-in-korea",
+  "1,775만 달러 시드 투자 유치": "querypie-closes-usd-1775-million-in-oversubscribed-preferred-series-seed-round-co-led-by-atinum-investment-and-murex-partners",
+  "신용보증기금 혁신아이콘 선정": "data-governance-and-security-solutions-provider-querypie-partners-with-collaborative-documentation-tool-typed-to-enhance-productivity-and-streamline-collaboration-2",
+  "레알 마드리드 액셀러레이터 선정": "querypie-selected-for-real-madrid-next-accelerator-program",
+  "글로벌 소프트웨어 기업 100곳에 이름을 올리다": "쿼리파이-글로벌-탑-100-소프트웨어-기업-선정",
+  "싱가포르 CyberBoost Catalyse 선정": "쿼리파이-싱가포르-정부-지원-글로벌-사이버보안-프로그램-선정",
+  "접근 제어 커뮤니티 버전 공개": "쿼리파이-ai-기반-데이터-보안-솔루션-버전-공개1년간-무료-사용-가능",
+  "일본 HR 기업 Payroll과 보안 협력": "payroll-partners-with-querypie-on-ai-security-solutions",
+  "TerraSky, mitoco Buddy에 AIP 채택": "terrasky-and-querypie-ai-unveil-mitoco-buddy-for-work",
+  "민감정보를 판별하는 AI 모델 QEV 발표": "qev-decision-ai-dlp-press-release",
+};
+const companyNewsHref = /^https:\/\/www\.querypie\.com\/(?:en|ko|ja)\/news\/([^/?#]+)/;
+
+export type AnniversaryNewsThumbnail = { src: string; alt: string };
+
+export function getAnniversaryHistory(locale: Locale, newsThumbnails?: ReadonlyMap<string, AnniversaryNewsThumbnail>) {
+  return groupMilestones(milestones.map(({ title, body, year, href, photo, newsPhotoAlt, plainTitleNames }) => {
     const [localizedTitle, localizedBody] = locale === "ko"
       ? [title, body]
       : anniversaryHistoryLocales[title][locale];
+    const newsId = matchingNewsIds[title] ?? href?.match(companyNewsHref)?.[1];
+    const thumbnail = newsId ? newsThumbnails?.get(newsId) : undefined;
+    const localizedPhoto = thumbnail
+      ? { ...thumbnail, alt: newsPhotoAlt?.[locale] ?? thumbnail.alt }
+      : photo && { ...photo, alt: photo.alt[locale] };
 
     return {
       id: title,
       year,
-      image,
+      image: localizedPhoto?.src,
       title: localizedTitle,
       body: localizedBody,
-      photo: photo && { ...photo, alt: locale === "ko" ? photo.alt : megazonePhotoAlt[locale] },
+      photo: localizedPhoto,
       plainTitleNames,
     };
   }));

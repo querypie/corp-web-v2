@@ -66,8 +66,10 @@ export function mountSky(canvas: HTMLCanvasElement) {
   const rand = randomGenerator(10026),
     bell = () => rand() + rand() + rand() + rand() - 2;
   const skyRand = randomGenerator(1906);
+  const flightRand = randomGenerator(2026);
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const compactViewport = matchMedia("(max-width: 767px)");
+  const wideLayout = matchMedia("(min-width: 1024px)");
   const sprites = tones.map((c) => glow(c)),
     flares = tones.map((c) => glow(c, true));
   const dotColors = tones.map(({ color }) => `rgb(${color})`);
@@ -98,7 +100,7 @@ export function mountSky(canvas: HTMLCanvasElement) {
     } while (data[(y * 320 + x) * 4 + 3] < 128);
     return [(x - 160) / 320, (y - 160) / 320];
   }
-  const mobile = canvas.clientWidth < 760;
+  const mobile = compactViewport.matches;
   const stars = Array.from({ length: mobile ? 1800 : 3300 }, (_, i) => {
     let x, y;
     if (i % 5 < 3) {
@@ -120,8 +122,13 @@ export function mountSky(canvas: HTMLCanvasElement) {
       y,
       skyX: Math.cos(bearing) * distance * 0.85,
       skyY: Math.sin(bearing) * distance * 0.58,
-      gatherDelay: skyRand() * 0.32,
-      gatherDuration: 0.41 + skyRand() * 0.17 + (distance - 0.68) * 0.13,
+      gatherDelay: skyRand() * 0.29,
+      gatherDuration: 0.52 + skyRand() * 0.13 + (distance - 0.68) * 0.055,
+      approachEnd: 0.46 + flightRand() * 0.16,
+      landingDistance: 0.035 + flightRand() * 0.045,
+      flightCurve: (flightRand() - 0.5) * 0.38,
+      landingCurve: (flightRand() - 0.5) * 0.065,
+      landingBend: 0.12 + flightRand() * 0.13,
       nx: n[0] * 1.24,
       ny: n[1] * 1.24,
       ex: Math.cos(a) * bend,
@@ -188,9 +195,9 @@ export function mountSky(canvas: HTMLCanvasElement) {
     canvas.height = Math.floor(h * dpr);
     cx = w * 0.5;
     cy = h * 0.5;
-    scale = small
-      ? Math.min(w * 0.72, h * 0.88)
-      : Math.min(w * 0.4, h * 0.9, 540);
+    if (wideLayout.matches) scale = Math.min(w * 0.8, h * 0.93, 640);
+    else if (small) scale = Math.min(w * 0.72, h * 0.88);
+    else scale = Math.min(w * 0.4, h * 0.9, 540);
     const particleSizeFactor = compactViewport.matches ? 0.94 : 1;
     const haloScale = Math.min(1.2, 0.49 + scale / 700) * particleSizeFactor;
     const dotScale = (0.81 + scale / 1350) * 0.76 * particleSizeFactor;
@@ -230,13 +237,27 @@ export function mountSky(canvas: HTMLCanvasElement) {
       let light = 1;
       let size = s.size;
       if (arrival < 1) {
-        // Each star settles on its own schedule while later stars are still arriving.
-        const blend = arrival ** 2 * (3 - 2 * arrival);
-        const outside = 1 - blend;
-        const bend = 6 * blend * outside * scale;
-        x += (cx + w * s.skyX - x) * outside + s.ex * bend;
-        y += (cy + h * s.skyY - y) * outside + s.ey * bend;
-        const reveal = Math.min(1, arrival * 2.4);
+        const dx = cx + w * s.skyX - x;
+        const dy = cy + h * s.skyY - y;
+        let remaining: number;
+        let sideways: number;
+        if (arrival < s.approachEnd) {
+          // Cover most of the distance in one curved sweep, easing into the landing arc.
+          const travel = 1 - (1 - arrival / s.approachEnd) ** 2.6;
+          remaining = 1 - travel * (1 - s.landingDistance);
+          sideways = 4 * travel * (1 - travel) * s.flightCurve + travel ** 2 * s.landingCurve;
+        } else {
+          // Ease the final curve into place without passing the target.
+          const settle = (arrival - s.approachEnd) / (1 - s.approachEnd);
+          const eased = settle ** 2 * (3 - 2 * settle);
+          const tail = 1 - eased;
+          remaining = s.landingDistance * tail;
+          sideways = tail * (s.landingCurve + s.flightCurve * s.landingBend * eased);
+        }
+        x += dx * remaining - dy * sideways;
+        y += dy * remaining + dx * sideways;
+        const blend = 1 - remaining;
+        const reveal = Math.min(1, arrival * 4.2);
         const edgeDistance = Math.min(x / w, 1 - x / w, y / h, 1 - y / h);
         const edge = Math.max(0, Math.min(1, edgeDistance / 0.09));
         // Keep incoming stars faint near the crop so the stage never reads as a rectangle.

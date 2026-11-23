@@ -1,4 +1,5 @@
-export const anniversaryEdition = "anniversary";
+export const anniversaryEdition = "Anniversary";
+export const anniversaryMetaTitle = "QueryPie AI | 10th Anniversary";
 
 export const anniversaryHighlightedNames = [
   "QueryPie SQL Client",
@@ -39,40 +40,37 @@ export const anniversaryGnbCopy = {
 
 export const anniversaryCopy = {
   ko: {
-    title: "쿼리파이 10주년 · A decade in orbit",
     metaDescription: "데이터 접근 제어에서 기업용 AI까지, 제품과 고객의 이야기로 쿼리파이의 지난 10년을 돌아봅니다.",
     heroTitle: "쿼리파이 10주년",
-    description: "데이터를 더 쉽고 안전하게 다룰 수 없을까? 그 질문에서 시작했습니다.\n10년간 고객의 목소리를 들으며 함께 답을 찾아왔습니다.\n이제 사람과 AI가 안심하고 일할 미래를 준비합니다.",
-    mobileDescription: "데이터를 더 쉽고 안전하게 다룰 수 없을까?\n10년간 고객과 함께 답을 찾아왔습니다.\n이제 사람과 AI가 안심하고 일할 미래로.",
+    description: "데이터를 더 쉽고 안전하게 다룰 수 없을까?\n10년간 고객의 목소리를 들으며 함께 답을 찾아왔습니다.\n이제 사람과 AI가 안심하고 일할 미래를 준비합니다.",
     archive: "우리의 궤적",
     years: "연도별 탐색",
     top: "처음으로",
+    autoplay: { play: "자동 스크롤 재생", pause: "자동 스크롤 일시정지", replay: "처음부터 다시 재생" },
     home: "쿼리파이 한국어 홈페이지 (새 탭)",
     language: "언어 선택",
     copyright: "© 2017-2026 QueryPie, Inc. All rights reserved.",
   },
   en: {
-    title: "QueryPie’s 10th Anniversary · A Decade in Orbit",
     metaDescription: "From data access control to enterprise AI, explore the products, partnerships, and milestones that shaped QueryPie’s first 10 years.",
     heroTitle: "QueryPie’s 10th anniversary",
     description: "Could working with data be simpler and safer? That’s where we began.\nFor ten years, we’ve listened to our customers and found answers together.\nNow we’re building a future where people and AI can work with confidence.",
-    mobileDescription: "Could working with data be simpler and safer?\nFor ten years, we’ve found answers with our customers.\nNow we’re building a future for people and AI.",
     archive: "Our journey",
     years: "Explore by year",
     top: "Back to the beginning",
+    autoplay: { play: "Play auto-scroll", pause: "Pause auto-scroll", replay: "Replay from the beginning" },
     home: "QueryPie English homepage (opens in a new tab)",
     language: "Select language",
     copyright: "© 2017-2026 QueryPie, Inc. All rights reserved.",
   },
   ja: {
-    title: "QueryPie 10周年 · A Decade in Orbit",
     metaDescription: "データのアクセス制御から企業向けAIまで。製品やパートナーシップの節目を通して、QueryPieの10年を振り返ります。",
     heroTitle: "QueryPie 10周年",
     description: "データをもっと簡単に、安全に扱えないだろうか。その問いから始まりました。\nこの10年、お客様の声に耳を傾け、ともに答えを探してきました。\nこれからは、人とAIが安心して働ける未来をつくっていきます。",
-    mobileDescription: "データをもっと簡単に、安全に扱えないだろうか。\nこの10年、お客様とともに答えを探してきました。\nこれからは、人とAIが安心して働ける未来へ。",
     archive: "私たちの歩み",
     years: "年別に見る",
     top: "最初に戻る",
+    autoplay: { play: "自動スクロールを再生", pause: "自動スクロールを一時停止", replay: "最初から再生" },
     home: "QueryPieの日本語ホームページ（新しいタブで開きます）",
     copyright: "© 2017-2026 QueryPie, Inc. All rights reserved.",
   },
