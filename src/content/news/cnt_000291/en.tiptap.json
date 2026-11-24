@@ -1,0 +1,12 @@
+{
+  "type": "doc",
+  "content": [
+    { "type": "paragraph", "content": [{ "type": "text", "text": "On November 23, QueryPie announced that it had signed a consolidated purchase agreement with Kakao for QueryPie Access Control Platform (ACP). QueryPie will supply the platform and provide technical support for Kakao’s IT operations." }] },
+    { "type": "heading", "attrs": { "level": 2 }, "content": [{ "type": "text", "text": "Managing access across teams and systems" }] },
+    { "type": "paragraph", "content": [{ "type": "text", "text": "QueryPie ACP gives administrators one place to manage access policies for users and teams. Employees can request the permissions they need for a task, and administrators can approve requests, grant access, and review changes to permissions. Teams can follow a consistent access policy while keeping approval workflows that fit how they work." }] },
+    { "type": "paragraph", "content": [{ "type": "text", "text": "The platform connects to existing systems and workflows, so organizations can keep requests, approvals, and permission records together and automate routine administrative tasks. Administrators can also review connection logs and user activity in one place to trace what happened during an audit." }] },
+    { "type": "paragraph", "content": [{ "type": "text", "text": "QueryPie has been improving platform performance and making day-to-day administration easier for organizations that manage access across many systems. The company plans to expand system integrations and make approval workflows easier to adapt to different IT environments." }] },
+    { "type": "paragraph", "content": [{ "type": "text", "text": "QueryPie’s CTO said the company would provide a reliable platform and technical support to meet the operational needs of different enterprise environments." }] },
+    { "type": "paragraph", "content": [{ "type": "text", "text": "Source: MoneyToday, November 23, 2026." }] }
+  ]
+}
