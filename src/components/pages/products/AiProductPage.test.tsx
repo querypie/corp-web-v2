@@ -3,20 +3,16 @@ import { describe, expect, it } from "vitest";
 import AiProductPage from "./AiProductPage";
 import PenetrationTestingPage from "@/components/pages/services/penetration-testing/PenetrationTestingPage";
 import { aiProductsCopy, aiProductAction } from "@/copy/aiProducts";
-import { aiGatewayManualLabel } from "@/copy/aiGatewayLocalized";
 import { qevCopy } from "@/copy/qevLocalized";
 import { qlmCopy } from "@/copy/qlmLocalized";
 
 describe("영어·한국어 AI 솔루션", () => {
-  it.each(["en", "ko", "ja"] as const)("%s AIG 문의 CTA는 AI 상담과 AIG를 전달하며 현재 탭에서 열린다", (locale) => {
+  it.each(["en", "ko", "ja"] as const)("%s AIG CTA는 현재 탭에서 열리는 AIG 문의 링크만 제공한다", (locale) => {
     render(<AiProductPage id="ai-gateway" locale={locale} />);
     const link = screen.getByRole("link", { name: aiProductAction[locale] });
     expect(link).toHaveAttribute("href", `/${locale}/contact-us?inquiry=ai-consulting&product=aig`);
     expect(link).not.toHaveAttribute("target");
-    const manual = screen.getByRole("link", { name: aiGatewayManualLabel[locale] });
-    expect(manual).toHaveAttribute("href", `https://ai-gateway.dev.querypie.io/manual/${locale === "en" ? "" : `${locale}/`}`);
-    expect(manual).toHaveAttribute("target", "_blank");
-    expect(screen.getAllByRole("link")).toEqual([link, manual]);
+    expect(screen.getAllByRole("link")).toEqual([link]);
   });
 
   it.each(["en", "ko", "ja"] as const)("%s QEV·QLM은 번역된 본문·다이어그램·문의 경로를 제공한다", (locale) => {
@@ -47,7 +43,6 @@ describe("영어·한국어 AI 솔루션", () => {
       expect(screen.getAllByRole("figure").length).toBeGreaterThan(0);
       expect(container.textContent).not.toMatch(/[\u3040-\u30ff]/);
       for (const link of screen.queryAllByRole("link")) {
-        if (id === "ai-gateway" && link.textContent === aiGatewayManualLabel[locale]) continue;
         if (id === "qev" && ["https://qev.demo.querypie.com", "https://huggingface.co/querypieai"].includes(link.getAttribute("href") ?? "")) continue;
         expect(link).toHaveAttribute("href", id === "ai-gateway" ? `/${locale}/contact-us?inquiry=ai-consulting&product=aig` : `/${locale}/contact-us?inquiry=ai-consulting`);
       }

@@ -2,9 +2,7 @@ import Cta from "@/components/sections/common/Cta";
 import type { Locale } from "@/constants/i18n";
 import { pageContentWidthClassName, pageSectionGapClassName, pageXPaddingClassName } from "@/constants/layout";
 import { aiProductsCopy, aiProductAction } from "@/copy/aiProducts";
-import { aiGatewayManualLabel } from "@/copy/aiGatewayLocalized";
 import { getContactHref } from "@/features/contact/prefill";
-import { getAiGatewayManualHref } from "@/features/offerings/routes";
 import AiGatewayDiagram from "./AiGatewayDiagram";
 import AiGatewayContent from "./AiGatewayContent";
 
@@ -19,6 +17,6 @@ export default function AiGatewayPage({ locale }: { locale: Locale }) {
       <div className="mt-12 md:mt-16"><AiGatewayDiagram locale={locale} /></div>
     </section>
     <AiGatewayContent locale={locale} />
-    <Cta actionHref={getContactHref(locale, "aig")} actionLabel={aiProductAction[locale]} compactHeading description={copy.cta.description} hideEyebrow locale={locale} preserveActionOrder secondaryActionLabel={aiGatewayManualLabel[locale]} secondaryActionHref={getAiGatewayManualHref(locale)} title={copy.cta.title} />
+    <Cta actionHref={getContactHref(locale, "aig")} actionLabel={aiProductAction[locale]} compactHeading description={copy.cta.description} hideEyebrow locale={locale} secondaryActionLabel="" title={copy.cta.title} />
   </div>;
 }
