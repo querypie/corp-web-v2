@@ -106,9 +106,6 @@
   width: 16px;
   height: 16px;
 }
-.page .autoplayButton:hover {
-  background-color: var(--color-secondary-hover);
-}
 .page .autoplayButton:focus-visible {
   outline: 2px solid var(--color-fg);
   outline-offset: 3px;
@@ -178,6 +175,23 @@
 .introLines > span {
   display: block;
 }
+.introCopy .introLines:is(:lang(en), :lang(ja)) {
+  display: grid;
+  row-gap: 6px;
+  margin-inline: auto;
+  line-height: 1.6;
+  text-wrap: balance;
+}
+.introLines:lang(en) {
+  --intro-measure: 40ch;
+  max-inline-size: var(--intro-measure);
+}
+.introLines:lang(ja) {
+  --intro-measure: 24em;
+  max-inline-size: var(--intro-measure);
+  word-break: normal;
+  line-break: strict;
+}
 @media (prefers-reduced-motion: no-preference) {
   .heroLogoGroup,
   .introLines > span {
@@ -218,6 +232,10 @@
     grid-area: 1 / 1;
     width: 100%;
     text-align: start;
+  }
+  .introCopy .introLines:is(:lang(en), :lang(ja)) {
+    max-inline-size: min(var(--intro-measure), calc(100% - 24px));
+    margin-inline-start: 0;
   }
   .heroLogoGroup {
     margin-inline: 0;
@@ -293,18 +311,39 @@
   opacity: 1;
   animation-play-state: running;
 }
-.rail button:is([aria-current], :hover, :focus-visible)::after {
+.rail button:is([aria-current], :focus-visible)::after {
   opacity: 1;
 }
 .rail button[aria-current]::after {
   transform: scale(1.3);
+}
+@media (hover: hover) and (pointer: fine) {
+  .page .autoplayButton:hover {
+    background-color: var(--color-secondary-hover);
+  }
+  .rail button:hover {
+    color: var(--color-fg);
+  }
+  .rail button:hover::after {
+    opacity: 1;
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  .page .autoplayButton:hover {
+    background-color: var(--color-bg-content);
+  }
+  .page .autoplayButton,
+  .rail button {
+    touch-action: manipulation;
+    transition: transform var(--motion-press-duration) var(--motion-press-ease);
+  }
 }
 @keyframes railMarkerTwinkle {
   from { transform: scale(0.78); }
   to { transform: scale(1.35); }
 }
 .archive {
-  --archive-gap: clamp(72px, 9vw, 128px);
+  --archive-gap: clamp(52px, 6.5vw, 96px);
   display: flex;
   flex-direction: column;
   gap: var(--archive-gap);
@@ -314,6 +353,28 @@
 }
 .yearDivider {
   text-align: center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .archive > [data-reveal="pending"]:not(:focus-within) {
+    opacity: 0;
+  }
+  .yearDivider[data-reveal="entered"] time {
+    display: inline-block;
+  }
+  .yearDivider[data-reveal="entered"] time,
+  .entry[data-reveal="entered"] {
+    animation: archiveReveal 850ms cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
+  }
+  @keyframes archiveReveal {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }
 .entryHeader h3 {
   max-inline-size: 18em;
@@ -345,7 +406,9 @@
   margin-bottom: clamp(10px, 1.2vw, 14px);
 }
 .entryImage {
-  display: block; width: 100%; height: auto; border-radius: 8px;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 @media (max-width: 767px) {
   .page .autoplayButton {

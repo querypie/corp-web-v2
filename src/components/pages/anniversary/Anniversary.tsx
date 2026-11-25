@@ -59,11 +59,11 @@ export default function Anniversary({ copy, entries }: Props) {
         </div>
       </section>
       <nav className={styles.rail} aria-label={copy.years}>
-        <button type="button" className="type-mono hover:text-fg focus-visible:text-fg" data-station-target="intro" lang="en" aria-current="location">
+        <button type="button" className="type-mono focus-visible:text-fg" data-station-target="intro" lang="en" aria-current="location">
           intro
         </button>
         {entries.map(({ year }) => (
-          <button type="button" className="type-mono hover:text-fg focus-visible:text-fg" key={year} data-station-target={`year-${year}`}>
+          <button type="button" className="type-mono focus-visible:text-fg" key={year} data-station-target={`year-${year}`}>
             {year}
           </button>
         ))}

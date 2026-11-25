@@ -32,9 +32,7 @@ export default function AnniversaryArchive({ entries, label }: {
         <Fragment key={year}>
           <div className={styles.yearDivider}>
             <h2 id={`year-${year}`} className="scroll-mt-20 font-mono type-body-md tabular-nums text-fg" data-station>
-              <span aria-hidden="true">{"- "}</span>
               <time dateTime={String(year)}>{year}</time>
-              <span aria-hidden="true">{" -"}</span>
             </h2>
           </div>
           {milestones.map((milestone) => (

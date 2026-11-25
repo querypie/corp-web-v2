@@ -207,5 +207,32 @@ export default function AnniversaryMotion({ id }: { id: string }) {
     };
   }, [id]);
 
+  useEffect(() => {
+    const archive = document.getElementById(id)?.querySelector(`.${styles.archive}`);
+    if (!archive || typeof IntersectionObserver === "undefined") return;
+
+    const pending = Array.from(archive.children).filter((element) => {
+      const { top, bottom } = element.getBoundingClientRect();
+      return bottom <= 0 || top >= window.innerHeight;
+    });
+    // Give each item room to appear inside the viewport, even at autoplay's slow pace.
+    const observer = new IntersectionObserver((entries) => {
+      for (const { isIntersecting, target } of entries) {
+        if (!isIntersecting) continue;
+        target.setAttribute("data-reveal", "entered");
+        observer.unobserve(target);
+      }
+    }, { rootMargin: "0px 0px -104px" });
+
+    for (const element of pending) {
+      element.setAttribute("data-reveal", "pending");
+      observer.observe(element);
+    }
+    return () => {
+      observer.disconnect();
+      for (const element of pending) element.removeAttribute("data-reveal");
+    };
+  }, [id]);
+
   return null;
 }
