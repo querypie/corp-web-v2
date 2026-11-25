@@ -1,4 +1,5 @@
-import { ArrowRight, BrainCircuit, Check, Cpu, FileText, GitBranch, Layers, LockKeyhole, MessageSquare, ShieldCheck, SlidersHorizontal, Zap } from "lucide-react";
+import { ArrowRight, BrainCircuit, Check, Cpu, FileText, Layers, LockKeyhole, MessageSquare, ShieldCheck, SlidersHorizontal, Zap } from "lucide-react";
+import AiGatewayLogo from "@/components/sections/common/AiGatewayLogo";
 import { qlmCopy } from "@/copy/qlmLocalized";
 import type { Locale } from "@/constants/i18n";
 import shared from "@/components/pages/shared/FeatureVisual.module.css";
@@ -33,7 +34,7 @@ function Response({ text }: VisualProps) {
 }
 
 function Allocation({ text }: VisualProps) {
-  return <div className={styles.allocation}><div className={styles.router}><GitBranch /><span>AI Gateway</span></div><svg className={styles.allocationWires} viewBox="0 0 30 112" fill="none"><path d="M0 56 H9 Q15 56 15 50 V18 Q15 12 21 12 H30 M15 56 V94 Q15 100 21 100 H30" /></svg><div className={styles.workloads}>{text.workloads.map((item, index) => <div key={item.title} className={styles.workload}><div className={styles.workloadTitle}>{index === 0 ? <Zap /> : <BrainCircuit />}<span>{item.title}</span></div><div className={styles.resource}><span>{item.model}</span><div>{[0, 1, 2, 3].map(i => <i className={i < (index === 0 ? 1 : 3) ? styles.used : ""} key={i} />)}</div></div></div>)}</div></div>;
+  return <div className={styles.allocation}><div className={styles.router}><AiGatewayLogo size={24} /><span>AI Gateway</span></div><svg className={styles.allocationWires} viewBox="0 0 30 112" fill="none"><path d="M0 56 H9 Q15 56 15 50 V18 Q15 12 21 12 H30 M15 56 V94 Q15 100 21 100 H30" /></svg><div className={styles.workloads}>{text.workloads.map((item, index) => <div key={item.title} className={styles.workload}><div className={styles.workloadTitle}>{index === 0 ? <Zap /> : <BrainCircuit />}<span>{item.title}</span></div><div className={styles.resource}><span>{item.model}</span><div>{[0, 1, 2, 3].map(i => <i className={i < (index === 0 ? 1 : 3) ? styles.used : ""} key={i} />)}</div></div></div>)}</div></div>;
 }
 
 function Tuning({ text }: VisualProps) {

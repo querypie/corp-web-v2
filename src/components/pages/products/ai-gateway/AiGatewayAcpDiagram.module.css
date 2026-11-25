@@ -1,17 +1,15 @@
 .diagram { width: 100%; max-width: 940px; margin: 0 auto; color: var(--color-fg); }
 .flow { display: grid; grid-template-columns: 12% 5.5% 21% 8.5% 21% 9% 23%; grid-template-rows: 100px 16px 200px; align-items: center; padding: 8px 0 24px; }
 .node, .models, .resources > div, .user { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent); background: var(--color-bg); box-shadow: 0 2px 5px rgb(0 0 0 / .025), 0 12px 30px -15px rgb(0 0 0 / .09); }
-.node { height: 144px; border-radius: 26px; gap: 12px; padding: 16px 10px; }
+.node { height: 144px; border-radius: 26px; gap: 6px; padding: 16px 10px; }
 .node h3 { margin: 0; text-align: center; white-space: nowrap; }
-.node img { width: 36px; height: 36px; object-fit: contain; }
 :global(:root[data-theme="dark"]) :is(.acp, .models, .resources > div, .user) {
   box-shadow: 0 3px 7px rgb(0 0 0 / .2), 0 14px 28px -10px rgb(0 0 0 / .45);
 }
 .gateway { grid-column: 3; grid-row: 3; border: 1px solid color-mix(in srgb, var(--color-brand) 32%, var(--color-border)); background: var(--color-bg); box-shadow: 0 2px 5px rgb(0 0 0 / .025), 0 12px 30px -15px rgb(0 0 0 / .09), 0 0 56px 12px color-mix(in srgb, var(--color-brand) 22%, transparent); }
 :global(:root[data-theme="dark"]) .gateway { box-shadow: 0 3px 7px rgb(0 0 0 / .2), 0 14px 28px -10px rgb(0 0 0 / .45), 0 0 56px 12px color-mix(in srgb, var(--color-brand) 22%, transparent); }
-.gatewayLogo { width: 28px; height: 28px; color: var(--color-fg); }
 .acp { grid-column: 5; grid-row: 3; }
-.acp > img { width: calc(36px * 40 / 46); height: 36px; }
+.acp > img { width: calc(28px * 40 / 46); height: 28px; object-fit: contain; }
 .models { grid-column: 3; grid-row: 1; height: 100%; border-radius: 22px; gap: 16px; padding: 16px 12px; }
 .models h3 { margin: 0; font-size: 14px; line-height: 1.5; font-weight: 500; }
 .models ul { display: flex; justify-content: center; gap: 12px; margin: 0; padding: 0; list-style: none; }

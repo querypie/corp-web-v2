@@ -28,7 +28,7 @@ export default function AiGatewayAcpDiagram({ locale }: { locale: Locale }) {
       </div>
       <div className={styles.modelLine} aria-hidden="true" />
       <div className={`${styles.node} ${styles.gateway}`}>
-        <AiGatewayLogo className={styles.gatewayLogo} />
+        <AiGatewayLogo />
         <h3 className="type-h3">AI Gateway</h3>
       </div>
       <div className={styles.mcp}>

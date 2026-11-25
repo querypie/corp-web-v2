@@ -53,7 +53,7 @@ export default function AiGatewayDiagram({ locale = "ja" }: { locale?: Locale })
       <Connections mobile />
       <section className={styles.gateway}>
         <div className={styles.gatewayHeading}>
-          <AiGatewayLogo className={styles.gatewayLogo} />
+          <AiGatewayLogo className={styles.gatewayLogo} size={24} />
           <h2 className="type-h2">AI Gateway</h2>
         </div>
         <p className={styles.gatewayKey}><KeyRound aria-hidden="true" />{copy.key}</p>
