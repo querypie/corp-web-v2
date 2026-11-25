@@ -8,10 +8,9 @@
 .flow { display: grid; grid-template-columns: 1fr 64px 1.2fr 64px 1fr; align-items: center; }
 .gateway, .core { position: relative; display: flex; min-width: 0; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent); border-radius: 26px; background: var(--color-bg); box-shadow: 0 2px 5px rgb(0 0 0 / .025), 0 12px 30px -15px rgb(0 0 0 / .09); }
 :global(:root[data-theme="dark"]) .gateway, :global(:root[data-theme="dark"]) .core { box-shadow: 0 3px 7px rgb(0 0 0 / .2), 0 14px 28px -10px rgb(0 0 0 / .45); }
-.gateway { gap: 14px; padding: 20px 18px; height: 210px; }
+.gateway { gap: 6px; padding: 20px 18px; height: 210px; }
 .gateway { border-color: color-mix(in srgb, var(--color-brand) 32%, var(--color-border)); }
-.gateway > svg { width: 32px; height: 32px; stroke-width: 1.5; margin-bottom: 6px; }
-.gateway > svg { width: 28px; height: 28px; margin-bottom: -6px; }
+.gateway > :is(span, .outputs) { margin-top: 8px; }
 .gateway > span, .core > span { color: var(--color-mute); font-size: 13px; line-height: 1.7; }
 .core { padding: 28px 16px 20px; border-radius: 36px; }
 .core::after { content: ""; position: absolute; inset: -1px; border: 1px solid color-mix(in srgb, var(--color-brand) 32%, var(--color-border)); border-radius: inherit; box-shadow: 0 0 56px 12px color-mix(in srgb, var(--color-brand) 22%, transparent); pointer-events: none; }

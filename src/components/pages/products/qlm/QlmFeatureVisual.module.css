@@ -51,7 +51,6 @@
 .tokens span { padding: 3px 7px; font-size: 9px; border-radius: 4px; color: var(--color-brand); background: color-mix(in srgb, var(--color-brand) 8%, transparent); }
 .allocation { display: flex; align-items: center; width: 100%; max-width: 290px; }
 .router { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 18px 9px; border-radius: 13px; font-size: 9px; white-space: nowrap; }
-.router svg { color: var(--color-brand); }
 .allocation .allocationWires { width: 26px; height: 112px; flex: 0 0 26px; }
 .workloads { display: grid; gap: 14px; flex: 1; min-width: 0; }
 .workload { padding: 11px 10px; border-radius: 12px; }
