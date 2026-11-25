@@ -37,17 +37,19 @@ describe("10주년 연혁", () => {
     expect(groupMilestones([])).toEqual([]);
   });
 
-  it("사진이 없는 기록이 사이에 있어도 사진 배치는 번갈아 나온다", () => {
-    const archive = groupMilestones([
-      { year: 2022, image: "/first.jpg" },
-      { year: 2022 },
-      { year: 2025, image: "/second.jpg" },
-    ]);
-
-    const photoPlacements = archive
+  it("연도 사이에서도 사진 유무와 관계없이 전체 기록이 교차 정렬된다", () => {
+    const first = { year: 2022, id: "first", image: "/first.jpg" };
+    const middle = { year: 2025, id: "middle" };
+    const last = { year: 2025, id: "last", image: "/last.jpg" };
+    const placements = (entries: Array<typeof first | typeof middle>) => groupMilestones(entries)
       .flatMap(({ milestones }) => milestones)
-      .filter((entry) => entry.image)
-      .map((entry) => entry.align);
-    expect(photoPlacements).toEqual(["right", "left"]);
+      .map(({ id, align }) => [id, align]);
+
+    expect(placements([first, middle, last])).toEqual([
+      ["first", "left"], ["middle", "right"], ["last", "left"],
+    ]);
+    expect(placements([first, last])).toEqual([
+      ["first", "left"], ["last", "right"],
+    ]);
   });
 });
