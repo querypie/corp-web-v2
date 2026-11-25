@@ -54,7 +54,7 @@ export const anniversaryCopy = {
   en: {
     metaDescription: "From data access control to enterprise AI, explore the products, partnerships, and milestones that shaped QueryPie’s first 10 years.",
     heroTitle: "QueryPie’s 10th anniversary",
-    description: "Could working with data be simpler and safer? That’s where we began.\nFor ten years, we’ve listened to our customers and found answers together.\nNow we’re building a future where people and AI can work with confidence.",
+    description: "How can we make data easier and safer to use?\nFor ten years, we’ve worked with customers to find answers.\nNow we’re building a future where people and AI can work with confidence.",
     archive: "Our journey",
     years: "Explore by year",
     top: "Back to the beginning",
@@ -66,7 +66,7 @@ export const anniversaryCopy = {
   ja: {
     metaDescription: "データのアクセス制御から企業向けAIまで。製品やパートナーシップの節目を通して、QueryPieの10年を振り返ります。",
     heroTitle: "QueryPie 10周年",
-    description: "データをもっと簡単に、安全に扱えないだろうか。その問いから始まりました。\nこの10年、お客様の声に耳を傾け、ともに答えを探してきました。\nこれからは、人とAIが安心して働ける未来をつくっていきます。",
+    description: "データをもっと簡単に、安全に扱うには？\nお客様とともに答えを探した10年。\n次は、人とAIが安心して働ける未来へ。",
     archive: "私たちの歩み",
     years: "年別に見る",
     top: "最初に戻る",
