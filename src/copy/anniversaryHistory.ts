@@ -105,7 +105,6 @@ export function getAnniversaryHistory(locale: Locale, newsThumbnails?: ReadonlyM
     return {
       id: title,
       year,
-      image: localizedPhoto?.src,
       title: localizedTitle,
       body: localizedBody,
       photo: localizedPhoto,
